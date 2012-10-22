@@ -1,0 +1,8 @@
+*~
+*.pyc
+bin
+dist/
+include/
+lib/
+local/
+rando.egg-info/
