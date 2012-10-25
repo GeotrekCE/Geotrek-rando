@@ -1,16 +1,26 @@
-"""
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
+import shutil
+import os
 
-Replace this with more appropriate tests for your application.
-"""
+from django.test import SimpleTestCase
 
-from django.test import TestCase
+from .management.commands.sync_trekking import mkdir_p
 
 
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        self.assertEqual(1 + 1, 2)
+class MkdirTest(SimpleTestCase):
+
+    path = 'toto/tata/titi'
+
+    def test_create_new(self):
+
+        mkdir_p(self.path)
+        self.assertTrue(os.path.isdir(self.path))
+
+    def test_create_existing(self):
+
+        path = 'toto/tata/titi'
+        mkdir_p(path)
+        self.assertTrue(os.path.isdir(self.path))
+
+    def test_remove(self):
+
+        shutil.rmtree(self.path.split('/', 1)[0])

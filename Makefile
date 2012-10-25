@@ -4,3 +4,6 @@ install:
 
 sync:
 	./manage.py sync_trekking
+
+test:
+	./manage.py test
