@@ -11,5 +11,6 @@ setup(
     url='http://makina-corpus.com',
     install_requires = [
         'django',
+        'requests',
     ],
 )

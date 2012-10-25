@@ -6,3 +6,4 @@ include/
 lib/
 local/
 rando.egg-info/
+rando/input_files/

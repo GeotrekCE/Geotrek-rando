@@ -1,5 +1,12 @@
 # Django settings for rando project.
 
+import os
+
+PROJECT_PATH = os.path.dirname(__file__)
+
+CAMINAE_SERVER = 'ecrins:8000'
+INPUT_DATA_ROOT = os.path.join(PROJECT_PATH, 'input_files')
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -119,6 +126,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'rando.trekking',
 )
 
 # A sample logging configuration. The only tangible logging
