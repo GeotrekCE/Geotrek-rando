@@ -1,0 +1,17 @@
+{% extends 'trekking/base.html' %}
+
+{% load leaflet_tags %}
+
+{% block content %}
+
+<script>
+    function mapInit(map, bounds) {
+        var center = new L.LatLng(44.0, 7.15);
+        map.setView(center, 10);
+        new L.GeoJSON({{ geojson|safe }}).addTo(map);
+    }
+</script>
+
+{% leaflet_map 'map' %}
+
+{% endblock content %}

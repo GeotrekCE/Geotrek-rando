@@ -12,5 +12,6 @@ setup(
     install_requires = [
         'django',
         'requests',
+        'django-leaflet',
     ],
 )
