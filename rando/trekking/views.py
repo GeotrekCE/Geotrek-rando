@@ -12,6 +12,11 @@ class HomeView(TemplateView):
 
         context = super(HomeView, self).get_context_data(**kwargs)
         path = join(settings.INPUT_DATA_ROOT, 'api/trek/trek.geojson')
-        with open(path) as f:
+        try:
+            f = open(path, 'r')
+        except:
+            context['geojson'] = None
+        else:
             context['geojson'] = f.read()
+            f.close()
         return context

@@ -7,7 +7,7 @@ import json
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.http import http_date, parse_http_date_safe
 from django.conf import settings
-
+from django.template.defaultfilters import slugify
 
 def mkdir_p(path):
     """
@@ -23,36 +23,63 @@ def mkdir_p(path):
             raise
 
 
-def pull_if_modified(command, url):
-    """
-    Pull a file served by a Caminae server.
+class InputFile(object):
 
-    Set 'if-modified-since' HTTP request header to reduce bandwidth.
-    """
+    def __init__(self, command, url):
 
-    absolute_url = 'http://' + join(settings.CAMINAE_SERVER, url)
-    path = join(settings.INPUT_DATA_ROOT, url)
+        self.command = command
+        self.url = url
+        self.absolute_url = 'http://' + join(settings.CAMINAE_SERVER, url)
+        self.path = join(settings.INPUT_DATA_ROOT, url)
 
-    try:
-        mtime = getmtime(path)
-        headers = {'if-modified-since': http_date(mtime)}
-    except OSError:
-        headers = {}
+    def pull_if_modified(self):
+        """
+        Pull a file served by a Caminae server.
 
-    command.stdout.write('Sync %s ... ' % absolute_url)
-    r = requests.get(absolute_url, headers=headers)
-    command.stdout.write(str(r.status_code) + '\n')
+        Set 'if-modified-since' HTTP request header to reduce bandwidth.
+        """
 
-    if r.status_code != requests.codes.ok:
-        return
+        try:
+            mtime = getmtime(self.path)
+            headers = {'if-modified-since': http_date(mtime)}
+        except OSError:
+            headers = {}
 
-    mkdir_p(dirname(path))
-    with open(path, 'wb') as f:
-        f.write(r.content)
+        self.command.stdout.write('Sync %s ... ' % self.absolute_url)
+        self.reply = requests.get(self.absolute_url, headers=headers)
+        self.command.stdout.write(str(self.reply.status_code) + '\n')
 
-    last_modified = parse_http_date_safe(r.headers.get('last-modified'))
-    if last_modified:
-        utime(path, (last_modified, last_modified))
+        if self.reply.status_code != requests.codes.ok:
+            return
+
+        mkdir_p(dirname(self.path))
+        with open(self.path, 'wb') as f:
+            f.write(self.content())
+
+        last_modified = parse_http_date_safe(self.reply.headers.get('last-modified'))
+        if last_modified:
+            utime(self.path, (last_modified, last_modified))
+
+    def content(self):
+
+        return self.content
+
+
+class GeoJsonInputFile(InputFile):
+
+    def __init__(self, command):
+
+        return super(GeoJsonInputFile, self).__init__(command, 'api/trek/trek.geojson')
+
+
+    def content(self):
+
+        content = self.reply.json['features']
+
+        for feature in content:
+            feature['properties']['slug'] = slugify(feature['properties']['name'])
+
+        return json.dumps(content)
 
 
 class Command(BaseCommand):
@@ -61,4 +88,5 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        pull_if_modified(self, 'api/trek/trek.geojson')
+        input_file = GeoJsonInputFile(self)
+        input_file.pull_if_modified()

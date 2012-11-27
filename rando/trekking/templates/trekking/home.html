@@ -6,9 +6,12 @@
 
 <script>
     function mapInit(map, bounds) {
-        var center = new L.LatLng(44.0, 7.15);
+        var center = new L.LatLng(44.6, 6.4);
         map.setView(center, 10);
-        new L.GeoJSON({{ geojson|safe }}).addTo(map);
+{% if geojson %}
+        geojsonLayer = new L.GeoJSON({{ geojson|safe }});
+        geojsonLayer.addTo(map);
+{% endif %}
     }
 </script>
 
