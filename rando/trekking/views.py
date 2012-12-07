@@ -1,7 +1,11 @@
-from os.path import join
+import logging
 
 from django.views.generic import TemplateView
-from django.conf import settings
+
+
+from .models import Trek, District
+
+logger = logging.getLogger(__name__)
 
 
 class HomeView(TemplateView):
@@ -9,14 +13,8 @@ class HomeView(TemplateView):
     template_name = 'trekking/home.html'
 
     def get_context_data(self, **kwargs):
-
         context = super(HomeView, self).get_context_data(**kwargs)
-        path = join(settings.INPUT_DATA_ROOT, 'api/trek/trek.geojson')
-        try:
-            f = open(path, 'r')
-        except:
-            context['geojson'] = None
-        else:
-            context['geojson'] = f.read()
-            f.close()
+        context['treks'] = Trek.objects.all()
+        context['treksjson'] = Trek.objects.content
+        context['districts'] = District.objects.all()
         return context

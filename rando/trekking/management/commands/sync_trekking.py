@@ -3,20 +3,24 @@ from os import makedirs, utime
 import errno
 import requests
 import json
+import logging
 
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.http import http_date, parse_http_date_safe
 from django.conf import settings
 from django.template.defaultfilters import slugify
 
+
+logger = logging.getLogger(__name__)
+
+
 def mkdir_p(path):
     """
     Create recursively a directory like mkdir -p would do.
     """
-
     try:
         makedirs(path)
-    except OSError as e:
+    except OSError, e:
         if e.errno == errno.EEXIST:
             pass
         else:
@@ -26,7 +30,6 @@ def mkdir_p(path):
 class InputFile(object):
 
     def __init__(self, command, url):
-
         self.command = command
         self.url = url
         self.absolute_url = 'http://' + join(settings.CAMINAE_SERVER, url)
@@ -38,13 +41,11 @@ class InputFile(object):
 
         Set 'if-modified-since' HTTP request header to reduce bandwidth.
         """
-
         try:
             mtime = getmtime(self.path)
             headers = {'if-modified-since': http_date(mtime)}
         except OSError:
             headers = {}
-
         self.command.stdout.write('Sync %s ... ' % self.absolute_url)
         self.reply = requests.get(self.absolute_url, headers=headers)
         self.command.stdout.write(str(self.reply.status_code) + '\n')
@@ -61,24 +62,18 @@ class InputFile(object):
             utime(self.path, (last_modified, last_modified))
 
     def content(self):
-
-        return self.content
+        return self.reply.content
 
 
 class GeoJsonInputFile(InputFile):
 
     def __init__(self, command):
-
         return super(GeoJsonInputFile, self).__init__(command, 'api/trek/trek.geojson')
 
-
     def content(self):
-
         content = self.reply.json['features']
-
         for feature in content:
             feature['properties']['slug'] = slugify(feature['properties']['name'])
-
         return json.dumps(content)
 
 
@@ -87,6 +82,9 @@ class Command(BaseCommand):
     help = 'Synchronize data from a Caminae server'
 
     def handle(self, *args, **options):
-
-        input_file = GeoJsonInputFile(self)
-        input_file.pull_if_modified()
+        remotefiles = [
+            GeoJsonInputFile(self),
+            InputFile(self, 'api/district/district.geojson')
+        ]
+        for remotefile in remotefiles:
+            remotefile.pull_if_modified()

@@ -4,9 +4,6 @@ import os
 
 PROJECT_PATH = os.path.dirname(__file__)
 
-CAMINAE_SERVER = 'ecrins:8000'
-INPUT_DATA_ROOT = os.path.join(PROJECT_PATH, 'input_files')
-
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -52,7 +49,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.join(PROJECT_PATH, '..', 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -143,15 +140,37 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+        },
     },
     'loggers': {
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': ['console', 'mail_admins'],
             'level': 'ERROR',
             'propagate': True,
+        },
+        'django': {
+            'handlers': ['console', 'mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'rando': {
+            'handlers': ['console', 'mail_admins'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        '': {
+            'handlers': ['console', 'mail_admins'],
+            'level': 'DEBUG',
+            'propagate': False,
         },
     }
 }
 
 TEST_RUNNER = 'rando.testing.DatabaselessTestRunner'
+
+CAMINAE_SERVER = 'geobi.makina-corpus.net/ecrins-sentiers'
+INPUT_DATA_ROOT = os.path.join(MEDIA_ROOT, 'input')

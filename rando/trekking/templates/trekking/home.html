@@ -4,17 +4,24 @@
 
 {% block content %}
 
-<script>
+<script type="text/javascript">
     function mapInit(map, bounds) {
         var center = new L.LatLng(44.6, 6.4);
         map.setView(center, 10);
-{% if geojson %}
-        geojsonLayer = new L.GeoJSON({{ geojson|safe }});
-        geojsonLayer.addTo(map);
+{% if treksjson %}
+        var treksLayer = new L.GeoJSON({{ treksjson|safe }});
+        treksLayer.addTo(map);
 {% endif %}
     }
 </script>
 
 {% leaflet_map 'map' %}
+
+<ul>
+{% for trek in treks %}
+	<li><a data-id="{{ trek.properties.pk }}" href="{{ trek.properties.slug }}">{{ trek.properties.name }}</a></li>
+{% endfor %}
+</ul>
+
 
 {% endblock content %}
