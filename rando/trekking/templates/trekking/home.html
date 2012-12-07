@@ -6,8 +6,10 @@
 
 <script type="text/javascript">
     function mapInit(map, bounds) {
-        var center = new L.LatLng(44.6, 6.4);
-        map.setView(center, 10);
+        map.fitBounds([
+            [{{ settings.map.extent.1 }}, {{ settings.map.extent.0 }}],
+            [{{ settings.map.extent.3 }}, {{ settings.map.extent.2 }}]
+        ]);
 {% if treksjson %}
         var treksLayer = new L.GeoJSON({{ treksjson|safe }});
         treksLayer.addTo(map);
@@ -19,7 +21,14 @@
 
 <ul>
 {% for trek in treks %}
-	<li><a data-id="{{ trek.properties.pk }}" href="{{ trek.properties.slug }}">{{ trek.properties.name }}</a></li>
+    <li><a data-id="{{ trek.properties.pk }}" href="{% url trekking:detail trek.properties.slug %}">{{ trek.properties.name }}</a></li>
+{% endfor %}
+</ul>
+
+
+<ul>
+{% for lang, name in settings.languages.available.items %}
+    <li><a href="{{ lang }}">{{ name }}</a></li>
 {% endfor %}
 </ul>
 

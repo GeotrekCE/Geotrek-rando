@@ -65,15 +65,16 @@ class InputFile(object):
         return self.reply.content
 
 
-class GeoJsonInputFile(InputFile):
+class TrekInputFile(InputFile):
 
     def __init__(self, command):
-        return super(GeoJsonInputFile, self).__init__(command, 'api/trek/trek.geojson')
+        return super(TrekInputFile, self).__init__(command, 'api/trek/trek.geojson')
 
     def content(self):
         content = self.reply.json['features']
         for feature in content:
-            feature['properties']['slug'] = slugify(feature['properties']['name'])
+            feature['properties']['slug'] = '%s-%s' % (feature['properties']['pk'],
+                                                       slugify(feature['properties']['name']))
         return json.dumps(content)
 
 
@@ -83,8 +84,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         remotefiles = [
-            GeoJsonInputFile(self),
-            InputFile(self, 'api/district/district.geojson')
+            TrekInputFile(self),
+            InputFile(self, 'api/district/district.geojson'),
+            InputFile(self, 'api/settings.json')
         ]
         for remotefile in remotefiles:
             remotefile.pull_if_modified()

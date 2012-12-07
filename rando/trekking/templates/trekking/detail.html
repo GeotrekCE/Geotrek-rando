@@ -1,0 +1,28 @@
+{% extends 'trekking/base.html' %}
+
+
+{% load leaflet_tags %}
+
+{% block content %}
+
+<script type="text/javascript">
+    function mapInit(map, bounds) {
+        var trekGeoJSON = {
+          "type": "GeometryCollection",
+          "geometries": [
+            { "type": "LineString",
+              "coordinates": {{ object.geometry.coordinates|safe }}
+            }
+          ]
+        };
+        var trekLayer = new L.GeoJSON(trekGeoJSON);
+        trekLayer.addTo(map);
+        map.fitBounds(trekLayer.getBounds());
+    }
+</script>
+
+<h1>{{ object.properties.name }}</h1>
+{% leaflet_map 'map' %}
+
+{% endblock content %}
+

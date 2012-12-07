@@ -26,6 +26,7 @@ class JSONManager(object):
             f.close()
         except:
             logger.error("Could not read '%s'" % fullpath)
+            self.content = '{}'
 
     def all(self):
         return json.loads(self.content)
@@ -37,6 +38,12 @@ class JSONModel(object):
     @classproperty
     def objects(cls):
         return JSONManager(cls.filepath)
+
+    _default_manager = objects
+
+
+class Settings(JSONModel):
+    filepath = 'api/settings.json'
 
 
 class Trek(JSONModel):
