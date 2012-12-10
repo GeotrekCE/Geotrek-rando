@@ -34,7 +34,5 @@ class TrekView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(DetailView, self).get_context_data(**kwargs)
         context['settings'] = Settings.objects.all()
-        print self.get_object().pois.content
-        print type(self.get_object().pois)
         context['poisjson'] = self.get_object().pois.content
         return context
