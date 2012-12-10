@@ -18,11 +18,20 @@
         var trekLayer = new L.GeoJSON(trekGeoJSON);
         trekLayer.addTo(map);
         map.fitBounds(trekLayer.getBounds());
+
+        var poisLayer = new L.GeoJSON({{ poisjson|safe }});
+        poisLayer.addTo(map);
     }
 </script>
 
 <h1>{{ object.properties.name }}</h1>
 {% leaflet_map 'map'  fitextent=False %}
+
+<h2>POIs</h2>
+{% for poi in object.pois.all %}
+<li>{{ poi.properties.name }} ({{ poi.properties.serializable_type.label }}) <img src="data:{{ poi.properties.serializable_type.pictogram }}"><p>{{ poi.properties.description|safe }}</p>
+</li>
+{% endfor %}
 
 {% endblock content %}
 

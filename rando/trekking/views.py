@@ -26,12 +26,15 @@ class TrekView(DetailView):
 
     def get_object(self):
         slug = self.kwargs.get(self.slug_url_kwarg, None)
-        for o in Trek.objects.all():
-            if o['properties']['slug'] == slug:
-                return o
+        for trek in Trek.objects.all():
+            if trek.properties.slug == slug:
+                return trek
         raise Http404
 
     def get_context_data(self, **kwargs):
         context = super(DetailView, self).get_context_data(**kwargs)
         context['settings'] = Settings.objects.all()
+        print self.get_object().pois.content
+        print type(self.get_object().pois)
+        context['poisjson'] = self.get_object().pois.content
         return context

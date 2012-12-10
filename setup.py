@@ -13,5 +13,6 @@ setup(
         'django',
         'requests',
         'django-leaflet',
+        'easydict'
     ],
 )

@@ -1,9 +1,14 @@
-install:
+install: bin/python
+
+bin/python:
 	virtualenv .
-	bin/python setup.py install
+	bin/python setup.py develop
 
-sync:
-	./manage.py sync_trekking
+sync: bin/python
+	bin/python ./manage.py sync_trekking
 
-test:
-	./manage.py test
+serve: bin/python
+	bin/python ./manage.py runserver 8888
+
+test: bin/python
+	bin/python ./manage.py test
