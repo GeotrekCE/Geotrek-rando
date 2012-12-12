@@ -35,11 +35,12 @@ def mkdir_p(path):
 
 class InputFile(object):
 
-    def __init__(self, command, url):
+    def __init__(self, command, url, language=None):
         self.command = command
         self.url = url
         self.absolute_url = 'http://' + join(settings.CAMINAE_SERVER, url)
-        self.path = join(settings.INPUT_DATA_ROOT, url)
+        self.language = language or settings.LANGUAGE_CODE
+        self.path = join(settings.INPUT_DATA_ROOT, self.language, url)
 
     def pull_if_modified(self):
         """
@@ -47,15 +48,19 @@ class InputFile(object):
 
         Set 'if-modified-since' HTTP request header to reduce bandwidth.
         """
+        headers = {}
+        if self.language:
+            headers.update({'Accept-language' : self.language})
         try:
             mtime = getmtime(self.path)
-            headers = {'if-modified-since': http_date(mtime)}
+            headers.update({'if-modified-since': http_date(mtime)})
             # If local file is empty, force retrieval
             assert getsize(self.path) > MIN_BYTE_SYZE
         except (OSError, AssertionError):
-            headers = {}
+            pass
         self.command.stdout.write('Sync %s ... ' % self.absolute_url)
         self.reply = requests.get(self.absolute_url, headers=headers)
+        self.command.stdout.write(str(self.reply.status_code))
 
         if self.reply.status_code in (304,):
             self.command.stdout.write(": Up-to-date\n")
@@ -81,8 +86,8 @@ class InputFile(object):
 
 class TrekInputFile(InputFile):
 
-    def __init__(self, command):
-        return super(TrekInputFile, self).__init__(command, 'api/trek/trek.geojson')
+    def __init__(self, command, **kwargs):
+        return super(TrekInputFile, self).__init__(command, 'api/trek/trek.geojson', **kwargs)
 
     def content(self):
         content = self.reply.json
@@ -97,18 +102,22 @@ class Command(BaseCommand):
     help = 'Synchronize data from a Caminae server'
 
     def handle(self, *args, **options):
-        remotefiles = [
-            TrekInputFile(self),
-            InputFile(self, 'api/district/district.geojson'),
-            InputFile(self, 'api/settings.json')
-        ]
         try:
-            for remotefile in remotefiles:
-                remotefile.pull_if_modified()
+            InputFile(self, 'api/district/district.geojson').pull_if_modified()
+            InputFile(self, 'api/settings.json').pull_if_modified()
+            settings = models.Settings.objects.all()
+            languages = settings.languages.available.keys()
+            logger.info("Languages: %s" % languages)
+            for language in languages:
+                TrekInputFile(self, language=language).pull_if_modified()
 
-            for trek in models.Trek.objects.all():
-                pk = trek.pk
-                trekpois = InputFile(self, 'api/trek/%s/pois.geojson' % pk)
-                trekpois.pull_if_modified()
+                for trek in models.Trek.objects.all():
+                    pk = trek.pk
+                    trekpois = InputFile(self, 'api/trek/%s/pois.geojson' % pk, language=language)
+                    trekpois.pull_if_modified()
+                    #TODO: altimetric profile
+                    #TODO: attached files / pictures
+                    #TODO: PDF both layouts
+                    #TODO: GPX + KML
         except IOError, e:
             logger.fatal(e)

@@ -20,16 +20,28 @@ class classproperty(object):
 
 
 class JSONManager(object):
-    def __init__(self, klass, filepath):
+    def __init__(self, klass, filepath=None, language=None):
         self.klass = klass
-        fullpath = join(settings.INPUT_DATA_ROOT, filepath)
+        self.filepath = filepath
+        self.language = language or settings.LANGUAGE_CODE
+
+    def filter(self, **kwargs):
+        self.__dict__.update(**kwargs)
+        return self
+
+    @property
+    def content(self):
+        self.filepath = self.filepath.format(**self.__dict__)
+        fullpath = join(settings.INPUT_DATA_ROOT, 
+                        self.language, self.filepath)
         try:
-            f = open(fullpath, 'r')
-            self.content = f.read()
-            f.close()
+            logger.debug("Read content from %s" % fullpath)
+            with open(fullpath, 'r') as f:
+                content = f.read()
+            return content
         except:
             logger.error("Could not read '%s'" % fullpath)
-            self.content = '{}'
+        return '{}'
 
     def all(self):
         """
@@ -41,9 +53,9 @@ class JSONManager(object):
         objects = json.loads(self.content)
         features = objects.get('features', objects)
         if isinstance(features, (list, tuple)):
-            return [self.klass(**edict(o)) for o in features]
+            return [self.klass(objects=self, **edict(o)) for o in features]
         if isinstance(features, dict):
-            return self.klass(**edict(features))
+            return self.klass(objects=self, **edict(features))
         return features
 
 
@@ -67,15 +79,17 @@ class JSONModel(object):
 class Settings(JSONModel):
     filepath = 'api/settings.json'
 
+class POIs(JSONModel):
+    filepath = 'api/trek/{trek__pk}/pois.geojson'
+
 
 class Trek(JSONModel):
     filepath = 'api/trek/trek.geojson'
 
     @property
     def pois(self):
-        class POIs(JSONModel):
-            filepath = 'api/trek/%s/pois.geojson' % self.pk
-        return POIs.objects
+        return POIs.objects.filter(trek__pk=self.pk,
+                                   language=self.objects.language)
 
 
 class District(JSONModel):
