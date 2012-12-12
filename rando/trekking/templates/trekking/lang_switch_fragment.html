@@ -1,12 +1,10 @@
-{% load localeurl_tags %}
-
 <div id="lang-switch">
     <ul>
     {% for lang, name in settings.languages.available.items %}
         {% if lang == request.LANGUAGE_CODE %}
             <li>{{ name }}</li>
         {% else %}
-            <li><a href="{{ request.path|chlocale:lang }}">{{ name }}</a></li>
+            <li><a href="/{{ lang }}">{{ name }}</a></li>
         {% endif %}
     {% endfor %}
     </ul>
