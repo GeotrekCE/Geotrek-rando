@@ -1,0 +1,86 @@
+{% load i18n leaflet_tags %}
+
+<script type="text/javascript">
+    function mapInit(map, bounds) {
+        var trekGeoJSON = {
+          "type": "GeometryCollection",
+          "geometries": [
+            { "type": "LineString",
+              "coordinates": {{ object.geometry.coordinates|safe }}
+            }
+          ]
+        };
+        var trekLayer = new L.GeoJSON(trekGeoJSON);
+        trekLayer.addTo(map);
+        map.fitBounds(trekLayer.getBounds()).zoomOut();
+
+        var poisLayer = new L.GeoJSON({{ poisjson|safe }});
+        poisLayer.addTo(map);
+
+        var parkingLocation = {{ object.properties.serializable_parking_location }};
+        L.marker([parkingLocation[1], parkingLocation[0]]).addTo(map);
+    }
+</script>
+
+<h1>{{ object.properties.name }}</h1>
+
+<h3>{{ object.properties.departure }} -> {{ object.properties.arrival }}</h3>
+
+<p>{% trans "Difficulty" %} : {{ object.properties.serializable_difficulty.label }}</p>
+<p>{% trans "Transborder" %} : {{ object.properties.is_transborder }}</p>
+<p>{% trans "Park centered" %} : {{ object.properties.is_park_centered }}</p>
+<p>{% trans "Ascent" %} : {{ object.properties.ascent }}</p>
+<p>{% trans "Descent" %} : {{ object.properties.descent }}</p>
+<p>{% trans "Duration" %} : {{ object.properties.duration }}</p>
+<p>{% trans "Min elevation" %} : {{ object.properties.min_elevation }}</p>
+<p>{% trans "Max elevation" %} : {{ object.properties.max_elevation }}</p>
+
+
+<h3>{% trans "Teaser" %}</h3>
+<p>{{ object.properties.description_teaser|safe }}</p>
+
+<h3>{% trans "Description" %}</h3>
+<p>{{ object.properties.description|safe }}</p>
+
+<h3>{% trans "Ambiance" %}</h3>
+<p>{{ object.properties.ambiance|safe }}</p>
+
+<h3>{% trans "Advice" %}</h3>
+<p>{{ object.properties.advice|safe }}</p>
+
+<h3>{% trans "Valleys" %}</h3>
+{% for district in object.properties.serializable_districts %}
+<li>{{ district.name }}</li>
+{% endfor %}
+
+<h3>{% trans "Usages" %}</h3>
+{% for usage in object.properties.serializable_usages %}
+<li>{{ usage.label }}</li>
+{% endfor %}
+
+<h3>{% trans "Themes" %}</h3>
+{% for theme in object.properties.serializable_themes %}
+<li>{{ theme.label }}</li>
+{% endfor %}
+
+<h3>{% trans "Web links" %}</h3>
+{% for weblink in object.properties.serializable_weblinks %}
+<li><a href="{{ weblink.url }}">{{ weblink.name }}</a></li>
+{% endfor %}
+
+<h3>{% trans "Public transport" %}</h3>
+<p>{{ object.properties.public_transport|safe }}</p>
+
+<h3>{% trans "Disabled infrastructure" %}</h3>
+<p>{{ object.properties.disabled_infrastructure|safe }}</p>
+
+<h3>{% trans "Advised parking" %}</h3>
+<p>{{ object.properties.advised_parking|safe }}</p>
+
+<h2>POIs</h2>
+{% for poi in object.pois.all %}
+<li>{{ poi.properties.name }} ({{ poi.properties.serializable_type.label }}) <img src="data:{{ poi.properties.serializable_type.pictogram }}"><p>{{ poi.properties.description|safe }}</p>
+</li>
+{% endfor %}
+
+{% leaflet_map 'map'  fitextent=False %}

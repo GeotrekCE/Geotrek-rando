@@ -2,6 +2,7 @@ import logging
 
 from django.http import Http404
 from django.views.generic import TemplateView, DetailView
+from djpjax import PJAXResponseMixin
 
 from .models import Trek, District
 
@@ -9,9 +10,10 @@ from .models import Trek, District
 logger = logging.getLogger(__name__)
 
 
-class HomeView(TemplateView):
+class HomeView(PJAXResponseMixin, TemplateView):
 
     template_name = 'trekking/home.html'
+    pjax_template_name = "trekking/home-panel.html"
 
     def get_context_data(self, **kwargs):
         lang = self.request.LANGUAGE_CODE
@@ -22,8 +24,10 @@ class HomeView(TemplateView):
         return context
 
 
-class TrekView(DetailView):
+class TrekView(PJAXResponseMixin, DetailView):
+
     template_name = 'trekking/detail.html'
+    pjax_template_name = "trekking/detail-panel.html"
 
     def get_object(self):
         slug = self.kwargs.get(self.slug_url_kwarg, None)

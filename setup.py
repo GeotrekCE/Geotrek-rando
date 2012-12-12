@@ -13,7 +13,8 @@ setup(
         'django == 1.4.2',
         'requests == 0.14.2',
         'django-leaflet == 0.4.1',
-        'django-localeurl == 1.5'
+        'django-localeurl == 1.5',
+        'django-pjax == 1.2',
         'easydict == 1.4'
     ],
 )

@@ -1,0 +1,22 @@
+{% load leaflet_tags %}
+
+<script type="text/javascript">
+    function mapInit(map, bounds) {
+        map.fitBounds([
+            [{{ settings.map.extent.1 }}, {{ settings.map.extent.0 }}],
+            [{{ settings.map.extent.3 }}, {{ settings.map.extent.2 }}]
+        ]);
+{% if treksjson %}
+        var treksLayer = new L.GeoJSON({{ treksjson|safe }});
+        treksLayer.addTo(map);
+{% endif %}
+    }
+</script>
+
+<ul>
+{% for trek in treks %}
+    <li><a class="pjax" data-id="{{ trek.properties.pk }}" href="{% url trekking:detail trek.properties.slug %}">{{ trek.properties.name }}</a></li>
+{% endfor %}
+</ul>
+
+{% leaflet_map 'map' %}

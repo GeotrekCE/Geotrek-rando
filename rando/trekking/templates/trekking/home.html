@@ -1,30 +1,16 @@
 {% extends 'trekking/base.html' %}
 
-{% load leaflet_tags %}
+{% load i18n leaflet_tags %}
 
 {% block content %}
 
+<a href="{% url trekking:home %}" class="pjax">{% trans "Home" %}</a>
 {% include "trekking/lang_switch_fragment.html" %}
 
-<script type="text/javascript">
-    function mapInit(map, bounds) {
-        map.fitBounds([
-            [{{ settings.map.extent.1 }}, {{ settings.map.extent.0 }}],
-            [{{ settings.map.extent.3 }}, {{ settings.map.extent.2 }}]
-        ]);
-{% if treksjson %}
-        var treksLayer = new L.GeoJSON({{ treksjson|safe }});
-        treksLayer.addTo(map);
-{% endif %}
-    }
-</script>
-
-{% leaflet_map 'map' %}
-
-<ul>
-{% for trek in treks %}
-    <li><a data-id="{{ trek.properties.pk }}" href="{% url trekking:detail trek.properties.slug %}">{{ trek.properties.name }}</a></li>
-{% endfor %}
-</ul>
+<div id="panel">
+    {% block panel %}
+    {% include "trekking/home-panel.html" %}
+    {% endblock panel %}
+</div>
 
 {% endblock content %}
