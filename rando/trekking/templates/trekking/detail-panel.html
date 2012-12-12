@@ -19,6 +19,26 @@
 
         var parkingLocation = {{ object.properties.serializable_parking_location }};
         L.marker([parkingLocation[1], parkingLocation[0]]).addTo(map);
+
+        //Load altimetric graph
+        altimetricInit();
+    }
+
+    function altimetricInit() {
+        /* 
+         * Load altimetric profile from JSON
+         */
+        $.getJSON("{% url trekking:fileserve object.altimetric_url %}", function(data) {
+            $('#profilealtitude').sparkline(data.profile, {tooltipSuffix: ' m', width: 300, height: 100});
+            $('#profilealtitude').bind('sparklineRegionChange', function(ev) {
+                var sparkline = ev.sparklines[0],
+                    region = sparkline.getCurrentRegionFields();
+                    value = region.y;
+                $('#mouseoverprofil').text(Math.round(region.x) +" m");
+            }).bind('mouseleave', function() {
+                $('#mouseoverprofil').text('');
+            });
+        });
     }
 </script>
 
@@ -87,3 +107,10 @@
 {% endfor %}
 
 {% leaflet_map 'map'  fitextent=False %}
+
+<div id="altitudegraph">
+    <h4>{% trans "Altitude profile" %}</h4>
+    <p class="axislabel">{% trans "Altitude (m)" %}</p>
+    <span id="profilealtitude"></span> <span class="axislabel" style="position:relative; top:85px">{% trans "Distance (m)" %}</span>
+    <p id="mouseoverprofil" class="axislabel" >&nbsp;</p>
+</div>
