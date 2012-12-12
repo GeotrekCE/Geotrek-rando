@@ -102,6 +102,11 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
+    'rando.trekking.context_processors.settings'
+)
+
 ROOT_URLCONF = 'rando.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.

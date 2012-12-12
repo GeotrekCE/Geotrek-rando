@@ -4,6 +4,8 @@
 
 {% block content %}
 
+{% include "trekking/lang_switch_fragment.html" %}
+
 <script type="text/javascript">
     function mapInit(map, bounds) {
         map.fitBounds([
@@ -24,13 +26,5 @@
     <li><a data-id="{{ trek.properties.pk }}" href="{% url trekking:detail trek.properties.slug %}">{{ trek.properties.name }}</a></li>
 {% endfor %}
 </ul>
-
-
-<ul>
-{% for lang, name in settings.languages.available.items %}
-    <li><a href="{{ lang }}">{{ name }}</a></li>
-{% endfor %}
-</ul>
-
 
 {% endblock content %}

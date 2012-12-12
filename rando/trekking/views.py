@@ -3,7 +3,7 @@ import logging
 from django.http import Http404
 from django.views.generic import TemplateView, DetailView
 
-from .models import Trek, District, Settings
+from .models import Trek, District
 
 
 logger = logging.getLogger(__name__)
@@ -19,7 +19,6 @@ class HomeView(TemplateView):
         context['treks'] = Trek.objects.filter(language=lang).all()
         context['treksjson'] = Trek.objects.filter(language=lang).content
         context['districts'] = District.objects.all()
-        context['settings'] = Settings.objects.all()
         return context
 
 
@@ -37,6 +36,5 @@ class TrekView(DetailView):
     def get_context_data(self, **kwargs):
         lang = self.request.LANGUAGE_CODE
         context = super(DetailView, self).get_context_data(**kwargs)
-        context['settings'] = Settings.objects.all()
         context['poisjson'] = self.get_object().pois.filter(language=lang).content
         return context
