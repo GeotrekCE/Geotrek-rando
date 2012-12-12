@@ -71,6 +71,11 @@ class JSONModel(object):
 class Settings(JSONModel):
     filepath = 'api/settings.json'
 
+
+class District(JSONModel):
+    filepath = 'api/district/district.geojson'
+
+
 class POIs(JSONModel):
     filepath = 'api/trek/{trek__pk}/pois.geojson'
 
@@ -83,6 +88,14 @@ class Trek(JSONModel):
         return POIs.objects.filter(trek__pk=self.pk,
                                    language=self.objects.language)
 
+    @property
+    def altimetric_url(self):
+        return 'api/trek/{trek__pk}/profile.json'.format(trek__pk=self.pk)
 
-class District(JSONModel):
-    filepath = 'api/district/district.geojson'
+    @property
+    def gpx_url(self):
+        return 'api/trek/trek-{trek__pk}.gpx'.format(trek__pk=self.pk)
+
+    @property
+    def kml_url(self):
+        return 'api/trek/trek-{trek__pk}.kml'.format(trek__pk=self.pk)

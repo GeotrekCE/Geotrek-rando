@@ -87,7 +87,7 @@ class InputFile(object):
 class TrekInputFile(InputFile):
 
     def __init__(self, command, **kwargs):
-        return super(TrekInputFile, self).__init__(command, 'api/trek/trek.geojson', **kwargs)
+        return super(TrekInputFile, self).__init__(command, models.Trek.filepath, **kwargs)
 
     def content(self):
         content = self.reply.json
@@ -103,8 +103,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         try:
-            InputFile(self, 'api/district/district.geojson').pull_if_modified()
-            InputFile(self, 'api/settings.json').pull_if_modified()
+            InputFile(self, models.District.filepath).pull_if_modified()
+            InputFile(self, models.Settings.filepath).pull_if_modified()
             settings = models.Settings.objects.all()
             languages = settings.languages.available.keys()
             logger.info("Languages: %s" % languages)
@@ -113,9 +113,14 @@ class Command(BaseCommand):
 
                 for trek in models.Trek.objects.all():
                     pk = trek.pk
-                    trekpois = InputFile(self, 'api/trek/%s/pois.geojson' % pk, language=language)
-                    trekpois.pull_if_modified()
-                    #TODO: altimetric profile
+                    f = InputFile(self, models.POIs.filepath.format(trek__pk=pk),
+                                  language=language)
+                    f.pull_if_modified()
+
+                    InputFile(self, trek.altimetric_url, language=language).pull_if_modified()
+                    InputFile(self, trek.gpx_url, language=language).pull_if_modified()
+                    InputFile(self, trek.kml_url, language=language).pull_if_modified()
+
                     #TODO: attached files / pictures
                     #TODO: PDF both layouts
                     #TODO: GPX + KML

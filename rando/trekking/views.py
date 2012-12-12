@@ -1,7 +1,10 @@
+import os
 import logging
 
 from django.http import Http404
+from django.conf import settings
 from django.views.generic import TemplateView, DetailView
+from django.views.static import serve as static_serve
 from djpjax import PJAXResponseMixin
 
 from .models import Trek, District
@@ -42,3 +45,12 @@ class TrekView(PJAXResponseMixin, DetailView):
         context = super(DetailView, self).get_context_data(**kwargs)
         context['poisjson'] = self.get_object().pois.filter(language=lang).content
         return context
+
+
+def fileserve(request, path):
+    """
+    Rewrite URLs to use current language as folder root prefix.
+    TODO: Could be done with ``mod_rewrite`` at deployment.
+    """
+    path = os.path.join(request.LANGUAGE_CODE, path)
+    return static_serve(request, path, document_root=settings.INPUT_DATA_ROOT)

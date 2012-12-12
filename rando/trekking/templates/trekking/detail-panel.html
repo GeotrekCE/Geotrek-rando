@@ -24,6 +24,9 @@
 
 <h1>{{ object.properties.name }}</h1>
 
+<a href="{% url trekking:fileserve object.gpx_url %}">{% trans "GPX" %}</a>
+<a href="{% url trekking:fileserve object.kml_url %}">{% trans "KML" %}</a>
+
 <h3>{{ object.properties.departure }} -> {{ object.properties.arrival }}</h3>
 
 <p>{% trans "Difficulty" %} : {{ object.properties.serializable_difficulty.label }}</p>
