@@ -1,17 +1,17 @@
 {% load leaflet_tags %}
 
 <script type="text/javascript">
-    function mapInit(map, bounds) {
+    function mainmapInit(map, bounds) {
         map.fitBounds([
             [{{ settings.map.extent.1 }}, {{ settings.map.extent.0 }}],
             [{{ settings.map.extent.3 }}, {{ settings.map.extent.2 }}]
         ]);
-{% if treksjson %}
         var treksLayer = new L.GeoJSON({{ treksjson|safe }});
         treksLayer.addTo(map);
-{% endif %}
     }
 </script>
+
+{% include "trekking/navigation_fragment.html" %}
 
 <ul>
 {% for trek in treks %}
@@ -19,4 +19,6 @@
 {% endfor %}
 </ul>
 
-{% leaflet_map 'map' %}
+{% leaflet_map 'mainmap' fitextent=False creatediv=False %}
+
+<div id="mainmap-tag" style="display: none"></div>

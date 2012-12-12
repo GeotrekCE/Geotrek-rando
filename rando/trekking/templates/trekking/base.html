@@ -11,16 +11,34 @@
     {% endblock extrahead %}
 </head>
 <body>
-    {% block content %}
-    {% endblock content %}
+    <div id="mainmap"></div>
+    <div id="content">
+        {% block content %}
+        {% endblock content %}
+    </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.0.0/jquery.sparkline.min.js"></script>
     <script src="{% static "js/jquery.pjax.js" %}"></script>
     <script type="text/javascript">
         $(document).ready(function (e) {
-            $('#panel').pjax('a.pjax');
+            $('#content').pjax('a.pjax');
         });
-        if (typeof(loadmapmap) != 'undefined') $(document).on('pjax:end', loadmapmap);
+        $(document).on('pjax:end', function (e) {
+            // Try a custom lazy load
+            var mainmapContainer = L.DomUtil.get('mainmap');
+            if (loadmapmainmap) {
+                if (!mainmapContainer._leaflet) loadmapmainmap();
+            }
+            var detailmapContainer = L.DomUtil.get('detailmap');
+            if (detailmapContainer && loadmapdetailmap) {
+                if (!detailmapContainer._leaflet) loadmapdetailmap();
+            }
+            
+            if ($("#mainmap-tag").length > 0)
+                $("#mainmap").show();
+            else
+                $("#mainmap").hide();
+        });
     </script>
 </body>
 </html>

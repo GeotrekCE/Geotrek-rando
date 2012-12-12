@@ -1,7 +1,7 @@
 {% load i18n leaflet_tags %}
 
 <script type="text/javascript">
-    function mapInit(map, bounds) {
+    function detailmapInit(map, bounds) {
         var trekGeoJSON = {
           "type": "GeometryCollection",
           "geometries": [
@@ -41,6 +41,8 @@
         });
     }
 </script>
+
+{% include "trekking/navigation_fragment.html" %}
 
 <h1>{{ object.properties.name }}</h1>
 
@@ -106,7 +108,7 @@
 </li>
 {% endfor %}
 
-{% leaflet_map 'map'  fitextent=False %}
+{% leaflet_map 'detailmap' fitextent=False %}
 
 <div id="altitudegraph">
     <h4>{% trans "Altitude profile" %}</h4>
