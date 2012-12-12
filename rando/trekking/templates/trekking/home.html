@@ -1,11 +1,20 @@
 {% extends 'trekking/base.html' %}
 
-{% load i18n leaflet_tags %}
+{% load i18n leaflet_tags flatpages %}
 
 {% block content %}
 
 <a href="{% url trekking:home %}" class="pjax">{% trans "Home" %}</a>
 {% include "trekking/lang_switch_fragment.html" %}
+
+
+{% get_flatpages as flatpages %}
+<ul>
+    {% for page in flatpages %}
+        <li><a class="pjax" href="{% url flatpages:page page.slug %}">{{ page.title }}</a></li>
+    {% endfor %}
+</ul>
+
 
 <div id="panel">
     {% block panel %}

@@ -2,21 +2,13 @@ import logging
 import json
 from os.path import join
 
-
 from easydict import EasyDict as edict
 from django.conf import settings
 
+from rando import classproperty
+
 
 logger = logging.getLogger(__name__)
-
-
-
-class classproperty(object):
-    def __init__(self, getter):
-        self.getter = getter
- 
-    def __get__(self, instance, owner):
-        return self.getter(owner)
 
 
 class JSONManager(object):

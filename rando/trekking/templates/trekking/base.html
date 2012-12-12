@@ -3,7 +3,7 @@
 <html>
 <head>
     {% block head %}
-    <title>{% block title %}Ecrins{% endblock title %}</title>
+    <title>{% block title %}{{ settings.title }}{% endblock title %}</title>
     {% leaflet_js %}
     {% leaflet_css %}
     {% endblock head %}
@@ -19,7 +19,7 @@
         $(document).ready(function (e) {
             $('#panel').pjax('a.pjax');
         });
-        if (loadmapmap) $(document).on('pjax:end', loadmapmap);
+        if (typeof(loadmapmap) != 'undefined') $(document).on('pjax:end', loadmapmap);
     </script>
 </body>
 </html>

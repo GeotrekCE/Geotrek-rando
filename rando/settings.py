@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     'leaflet',
     'localeurl',
     'rando.trekking',
+    'rando.flatpages',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -182,3 +183,4 @@ TEST_RUNNER = 'rando.testing.DatabaselessTestRunner'
 
 CAMINAE_SERVER = 'localhost:8000'
 INPUT_DATA_ROOT = os.path.join(MEDIA_ROOT, 'input')
+FLATPAGES_ROOT = os.path.join(MEDIA_ROOT, 'pages')
