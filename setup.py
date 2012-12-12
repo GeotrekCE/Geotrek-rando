@@ -10,9 +10,10 @@ setup(
     author_email='geobi@makina-corpus.com',
     url='http://makina-corpus.com',
     install_requires = [
-        'django',
-        'requests',
-        'django-leaflet',
-        'easydict'
+        'django == 1.4.2',
+        'requests == 0.14.2',
+        'django-leaflet == 0.4.1',
+        'django-localeurl == 1.5'
+        'easydict == 1.4'
     ],
 )
