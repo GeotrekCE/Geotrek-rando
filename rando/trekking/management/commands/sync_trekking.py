@@ -91,9 +91,13 @@ class TrekInputFile(InputFile):
 
     def content(self):
         content = self.reply.json
+        features = []
         for feature in content['features']:
             feature['properties']['slug'] = '%s-%s' % (feature['properties']['pk'],
                                                        slugify(feature['properties']['name']))
+            if feature['properties'].get('published'):
+                features.append(feature)
+        content['features'] = features
         return json.dumps(content)
 
 
@@ -123,6 +127,5 @@ class Command(BaseCommand):
 
                     #TODO: attached files / pictures
                     #TODO: PDF both layouts
-                    #TODO: GPX + KML
         except IOError, e:
             logger.fatal(e)
