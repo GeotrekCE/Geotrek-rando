@@ -21,6 +21,7 @@ function sidebar_h() {
     return h;
 }
 
+
 function filtre()
 {
 	
@@ -80,45 +81,21 @@ function fix_content()
 				});
 }
 
-function tabbar()
-{
-	$('#tab-backpack').click(function() {
-		$('#tab1').css('display','none');
-		$('#tab2').css('display','block');
-		$('#tab-backpack').addClass('active');
-		$('#tab-results').removeClass('active');
-		$('#tab2').jScrollPane();
-	});
-	$('#tab-results').click(function() {
-		$('#tab2').css('display','none');
-		$('#tab1').css('display','block');
-		$('#tab-results').addClass('active');
-		$('#tab-backpack').removeClass('active');
-		$('#tab1').jScrollPane();
-	});
-}
-function hover()
-{
-$(".side-bar .result").hover(
-  function () {
-    $(this).css('background','#e7e9a0');
-  }, 
-  function () {
-    $(this).css('background','none');
-  
-});
-}
-function hover_route()
-{
-$(".leaflet-clickable").hover(
-  function () {
-    $(this).attr('stroke','#cedc00');
-  }, 
-  function () {
-    $(this).attr('stroke','#0033ff');
-  
-});
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function musee_open_close()
 {
@@ -168,6 +145,7 @@ function refuge_open_close()
 		}
 });
 }
+
 function  slider_feature()
 {
 	$( "#stage" ).slider({

@@ -196,11 +196,11 @@
         <ul class="nav nav-tabs">
           <li id="tab-results" class="active">
             <div class="nb_res"> 7 </div>
-            <a href="#">Résultats</a>
+            <a href="#results-pane">Résultats</a>
           </li>
           <li id="tab-backpack">
             <div class="nb_sac"> 7 </div>
-            <a href="#">Sac a dos</a>
+            <a href="#backpack-pane">Sac a dos</a>
           </li>
           <li id="tab-showhidepanel">
             <a href="#" data-toggle="tab" class="show_hide">.</a>
@@ -298,11 +298,15 @@
               });
           });
 
+          $('#result-bag a').click(function (e) {
+              e.preventDefault();
+              $(this).tab('show');
+          })
+
+          layout();
+
           filtre();
           fix_content();
-          layout();
-          tabbar();
-          hover();
           slider_feature();
           store.ChangeStateTheme();
           store.loadSlider();

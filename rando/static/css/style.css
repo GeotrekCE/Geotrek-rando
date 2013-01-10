@@ -257,6 +257,11 @@ a.accordion-toggle:hover  {
   box-shadow: 0 0 2px 1px #888;
 }
 
+.side-bar .result:hover {
+  background: #e7e9a0;
+}
+
+
 .navbar-inner h3
 {
   width:20%;
