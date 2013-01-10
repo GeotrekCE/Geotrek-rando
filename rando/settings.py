@@ -131,6 +131,10 @@ INSTALLED_APPS = (
     'rando.flatpages',
 )
 
+LEAFLET_CONFIG = {
+    "TILES_URL": 'http://{s}.tiles.mapbox.com/v3/examples.map-4l7djmvo/{z}/{x}/{y}.png'
+}
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
