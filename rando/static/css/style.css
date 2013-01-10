@@ -161,6 +161,18 @@ a.accordion-toggle:hover  {
   height: auto;
 }
 
+#tab-results, #tab-backpack {
+  width: 47.5%;
+}
+
+#tab-showhidepanel {
+  width: 5.5%;
+}
+
+
+.footer {
+  background-color:#f0f2ed;
+}
 
 /*
  * Application style
@@ -580,7 +592,7 @@ a.accordion-toggle:hover  {
 {
   width:100%;
 }
-.side-bar .nav-tabs > #tab11.active a
+.side-bar .nav-tabs > #tab-results.active a
 {
   background:url(../img/loupe-on.png) no-repeat 30px 5px;
   background-color: #F6F7F1;
@@ -588,7 +600,7 @@ a.accordion-toggle:hover  {
   font-size: 11pt;
     font-weight: bold;
 }
-.side-bar .nav-tabs > #tab11 a
+.side-bar .nav-tabs > #tab-results a
 {
   background:url(../img/loupe-off.png) no-repeat 30px 5px;
   border-color: #80747C;
@@ -598,7 +610,7 @@ a.accordion-toggle:hover  {
 }
 
 
-.side-bar .nav-tabs > #tab12.active a
+.side-bar .nav-tabs > #tab-backpack.active a
 {
   background:url(../img/sac-on.png) no-repeat 10% 5px;
   background-color: #F6F7F1;
@@ -606,7 +618,7 @@ a.accordion-toggle:hover  {
   font-weight:bold;
   
 }
-.side-bar .nav-tabs > #tab12 a
+.side-bar .nav-tabs > #tab-backpack a
 {
   background:url(../img/sac-off.png) no-repeat 10% 5px;
   border-color:#80747c;
@@ -615,7 +627,7 @@ a.accordion-toggle:hover  {
     font-size: 11pt;
 }
 
-.side-bar .nav-tabs > #tab13 a
+.side-bar .nav-tabs > #tab-showhidepanel a
 {
   background:url(../img/triangleresultat.png) no-repeat 50% 1px;
   padding-left:0;
@@ -1253,12 +1265,12 @@ color:#625b50;
   color:#999095;
 }
 
-.side-bar-fiche .nav-tabs > #tab11.active a
+.side-bar-fiche .nav-tabs > #tab-results.active a
 {
   background:url(../img/loupe-on.png) no-repeat 30px 5px;
   background-color: #F6F7F1;
 }
-.side-bar-fiche .nav-tabs > #tab11 a
+.side-bar-fiche .nav-tabs > #tab-results a
 {
   background:url(../img/loupe-off.png) no-repeat 30px 5px;
   color:#9E959A;
@@ -1266,19 +1278,19 @@ color:#625b50;
 }
 
 
-.side-bar-fiche .nav-tabs > #tab12.active a
+.side-bar-fiche .nav-tabs > #tab-backpack.active a
 {
   background:url(../img/sac-on.png) no-repeat 30px 5px;
   background-color: #F6F7F1;
 }
-.side-bar-fiche .nav-tabs > #tab12 a
+.side-bar-fiche .nav-tabs > #tab-backpack a
 {
   background:url(../img/sac-off.png) no-repeat 10% 5px;
   
   color: #9E959A;
 }
 
-.side-bar-fiche .nav-tabs > #tab13 a
+.side-bar-fiche .nav-tabs > #tab-showhidepanel a
 {
   background:url(../img/triangleresultat.png) no-repeat 50% 1px;
 }

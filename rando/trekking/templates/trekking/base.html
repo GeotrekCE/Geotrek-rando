@@ -62,7 +62,7 @@
 
           <div class="stage">
             <label>Difficulté</label>
-            <img src="{% static "img/slider-stage.png" %}" width="174" height="23" style="max-width:none">
+            <img src="{% static "img/slider-stage.png" %}">
             <div id="stage" data-filter="stage"></div>
             <div class="slider-value first">Facile</div>
             <div class="slider-value">Confirmé</div>
@@ -70,7 +70,7 @@
           </div>
           <div class="time">
             <label>Durée</label>
-            <img src="{% static "img/slider-time.png" %}" width="274" height="23" style="max-width:none">
+            <img src="{% static "img/slider-time.png" %}">
             <div id="time" data-filter="time"></div>
             <div class="slider-value first">Courte</div>
             <div class="slider-value">1/2</div>
@@ -80,7 +80,7 @@
           </div>
           <div class="den">
             <label>Dénivelé</label>
-            <img src="{% static "img/slider-den.png" %}" width="274" height="23" style="max-width:none">
+            <img src="{% static "img/slider-den.png" %}">
             <div id="den" data-filter="den"></div>
             <div class="slider-value first">&lt; 200 m</div>
             <div class="slider-value">200-700 m</div>
@@ -112,8 +112,7 @@
             </div>
             <div class="theme-icon">
               <button class="btn filter-theme" id="patr" data-filter="theme" data-toggle="button"></button>
-              <p>Patrimoines<br>
-                culturels</p>
+              <p>Patrimoine</p>
             </div>
             <div class="theme-icon">
               <button class="btn filter-theme" id="lacs" data-filter="theme" data-toggle="button"></button>
@@ -180,6 +179,7 @@
   <div class="container" id="container-content">
     <div class="slidingDiv" style="display: none"></div>
     <div class="side-bar" id="side-bar">
+
       <div class="search1">
         <div class="span4">
           <div class="control-group">
@@ -192,18 +192,17 @@
         </div>
       </div>
 
-
-      <div class="tabbable"> 
+      <div id="result-bag" class="tabbable"> 
         <ul class="nav nav-tabs">
-          <li style="width: 47.5%;" class="active" id="tab11">
+          <li id="tab-results" class="active">
             <div class="nb_res"> 7 </div>
             <a href="#">Résultats</a>
           </li>
-          <li style="width: 47.5%;" id="tab12">
+          <li id="tab-backpack">
             <div class="nb_sac"> 7 </div>
             <a href="#">Sac a dos</a>
           </li>
-          <li style="width: 5%;" id="tab13">
+          <li id="tab-showhidepanel">
             <a href="#" data-toggle="tab" class="show_hide">.</a>
           </li>
         </ul>
@@ -228,7 +227,7 @@
   </div>
   <!-- container -->
 
-  <footer class="footer" style="background-color:#f0f2ed;">
+  <footer class="footer">
     <div class="row-footer"> <a href="#">
       <div class="part1"></div>
       </a> <a href="#">
