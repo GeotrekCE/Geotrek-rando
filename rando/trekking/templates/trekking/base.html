@@ -4,8 +4,21 @@
 <head>
     {% block head %}
     <title>{% block title %}{{ settings.title }}{% endblock title %}</title>
-    {% leaflet_js %}
     {% leaflet_css %}
+
+    <!-- fav and touch icons -->
+    <link rel="shortcut icon" href="{% static "ico/favicon.ico" %}">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="{% static "js/html5.js" %}"pt>
+    <![endif]-->
+    <link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
+    <link href="{% static "css/bootstrap-responsive.css" %}" rel="stylesheet">
+    <link type="text/css" href="{% static "js/jscrollpane/jquery.jscrollpane.css" %}" rel="stylesheet" media="all" />
+    <link rel="stylesheet" href="{% static "css/jquery-ui.css" %}" />
+    <link rel="stylesheet" href="{% static "css/style.css" %}" />
+
     {% endblock head %}
     {% block extrahead %}
     {% endblock extrahead %}
@@ -16,9 +29,21 @@
         {% block content %}
         {% endblock content %}
     </div>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.0.0/jquery.sparkline.min.js"></script>
+
+    <script src="{% static "js/jquery.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jquery-ui.js" %}"></script>
+    <script src="{% static "js/jquery.sparkline.min.js" %}"></script>
+    <script src="{% static "js/jscrollpane/jquery.jscrollpane.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "js/jscrollpane/jquery.mousewheel.js" %}"></script>
     <script src="{% static "js/jquery.pjax.js" %}"></script>
+    {% leaflet_js %}
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+
+    <script src="{% static "js/application/ui.js" %}"></script>
+    <script src="{% static "js/application/filter.js" %}"></script>
+    <script src="{% static "js/application/map.js" %}"></script> 
+
+
     <script type="text/javascript">
         $(document).ready(function (e) {
             $('#content').pjax('a.pjax');

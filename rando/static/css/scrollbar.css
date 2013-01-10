@@ -1,0 +1,64 @@
+/* outermost element for the scroller (stays still) */
+#scrollwrap {
+    position:relative;
+    overflow:hidden;
+    width: 700px;
+    height:150px;
+    border:1px solid #000;
+    margin-bottom:15px;
+    -moz-box-shadow:0 0 20px #666;
+    -webkit-box-shadow:0 0 20px #666;
+}
+
+/* the element that moves forward/backward */
+#scroll {
+    position:relative;
+    width:20000em;
+    padding:20px 100px;
+    font:bold 90px  sans-serif;
+    height:150px;
+    background:url(/media/img/rangeinput/pattern.png);
+    color:#fff;
+    text-shadow:5px 1px 1px #000;
+    left:-100px;
+}
+
+.slider {
+    /*position:relative;*/
+   position:absolute;
+   margin-top:50px;
+    cursor:pointer;
+    height:23px;
+   /* border:2px solid #00118E;*/
+    width:251px;
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    background:url(../img/vide-curseur.png) no-repeat;
+}
+
+.progress {
+    background:#f67d00;
+    height:3px;
+    position:absolute;
+    width:0;
+    margin-top:9px;
+}
+
+.handle {
+    /*border:1px solid #cfcfcf;*/
+    /*background-color:#fff;*/
+    background:url(../img/Curseur.png) no-repeat 38px 3px;
+    height:20px;
+    width:80px;
+    position:absolute;
+    top:-12px;
+    display:block;
+    cursor:move;
+    -moz-border-radius:14px;
+    -webkit-border-radius:14px;
+}
+
+.handle:active {
+    background:blue;
+}
+
