@@ -169,6 +169,9 @@ a.accordion-toggle:hover  {
   width: 5.5%;
 }
 
+.slidingDiv1 {
+  display: block;
+}
 
 .footer {
   background-color:#f0f2ed;

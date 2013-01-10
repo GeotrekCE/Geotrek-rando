@@ -6,7 +6,7 @@
             [{{ settings.map.extent.1 }}, {{ settings.map.extent.0 }}],
             [{{ settings.map.extent.3 }}, {{ settings.map.extent.2 }}]
         ]);
-        var treksLayer = new L.GeoJSON({{ treksjson|safe }});
+        var treksLayer = new L.GeoJSON(treks);
         treksLayer.addTo(map);
     }
 </script>

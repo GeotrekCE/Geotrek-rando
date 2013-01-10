@@ -1,30 +1,25 @@
 //--------- Fix side-bar height -------------//
 
-		
-function sidebar_h()
-{
-	var sidebar_h = 0;
-	var others_h = 0;
-	sidebar_h = $(window).height() -$('.navbar-fixed-top').height() - 76;
-	$('#container-content').css("height",sidebar_h+"px");
-	$('.side-bar').css("height",sidebar_h+"px");
-	if ($.browser.webkit) {
-   		others_h = $('.side-bar').height() - $('.nav-tabs').height()-60;
-  	}else
-	{
-		others_h = $('.side-bar').height() - $('.nav-tabs').height()-20;
-	}
-	return (others_h);
-}
-//----------Fix tabbable height ------------//
-function tabbable()
-{
-	$('#tab1').css("height",sidebar_h()+"px");
-	$('#tab2').css("height",sidebar_h()+"px");
-	map.invalidateSize();
-	
-}
+function layout() {
+    var tabheight = sidebar_h()+"px";
+    $('.tab-pane, #container-content, .side-bar').css("height", tabheight);
 
+    // Refresh map view
+    if (window.maps) {
+        $.each(window.maps, function (i, map) {
+            map.invalidateSize();
+        });
+    }
+};
+
+function sidebar_h() {
+    var h = $(window).height() - $('#top-panel').height()
+                               - $('#bottom-panel').height();
+    if ($.browser.webkit) {
+        h -= 40;  // why ??
+    }
+    return h;
+}
 
 function filtre()
 {
@@ -39,7 +34,7 @@ function filtre()
 					$(".show_hide_filter").hide();
 					$(".hide_show_filter").show();
 					$(".side-bar").css("top","242px");
-				    tabbable();
+				    layout();
 					});
 	$('.hide_show_filter').click(function() {
 					$('.slidingDiv1-bar').animate({
@@ -51,7 +46,7 @@ function filtre()
 					$(".show_hide_filter").show();
 					$(".hide_show_filter").hide();
 					$(".side-bar").css("top","161px");
-					tabbable();	
+					layout();	
 				});
 } 
 function fix_content()

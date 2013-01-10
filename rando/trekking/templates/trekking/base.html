@@ -24,7 +24,7 @@
     {% endblock extrahead %}
 </head>
 <body>
-  <div class="navbar navbar-fixed-top">
+  <div id="top-panel" class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -227,7 +227,7 @@
   </div>
   <!-- container -->
 
-  <footer class="footer">
+  <footer id="bottom-panel" class="footer">
     <div class="row-footer"> <a href="#">
       <div class="part1"></div>
       </a> <a href="#">
@@ -271,9 +271,49 @@
 
 
   <script type="text/javascript">
+
+      /*
+       * A bunch of globals \o/
+       */
+      var store = null,
+          treks = {{ treksjson|safe }};
+
       $(document).ready(function (e) {
+          /* 
+           * At page load
+           */
           $('#content').pjax('a.pjax');
+
+          store = new storage();
+
+          $(store).on("filterchange",function(e) {
+              $.each(treks, function (i, trek) {
+                var trekid = trek.properties.pk;
+                if (store.match(trek)) {
+                  $('#trek-'+trekid).show();
+                }
+                else {
+                  $('#trek-'+trekid).hide();
+                }
+              });
+          });
+
+          filtre();
+          fix_content();
+          layout();
+          tabbar();
+          hover();
+          slider_feature();
+          store.ChangeStateTheme();
+          store.loadSlider();
+          $('.tab-pane').jScrollPane();
+
       });
+
+      $(window).on('resize', function() {
+          layout();
+      });
+
       $(document).on('pjax:end', function (e) {
           // Try a custom lazy load
           var mainmapContainer = L.DomUtil.get('mainmap');
@@ -291,5 +331,6 @@
               $("#mainmap").hide();
       });
   </script>
+
 </body>
 </html>
