@@ -40,7 +40,6 @@
   /*position: fixed;*/
   right: 0;
   left: 0;
-  z-index: 1030;
   margin-bottom: 0;
 }
 
@@ -203,20 +202,6 @@ a.accordion-toggle:hover  {
     width:100%;
 }
 
-
-.lang
-{
-  width:100px;
-  float:right;
-  margin-top:8px;
-  height: 13px;
-  border: none;
-}
-
-.lang .navbar .btn
-{
-  padding-top:0;
-}
 
 #map .leaflet-popup-content-wrapper 
 {
@@ -624,11 +609,21 @@ color:#625b50;
 
 
 
+/* Top right elements */
 
+#lang-switch {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  height: 13px;
+  border: none;
 
+  z-index: 1031; /* boostrap has this... */
+}
 
-
-
+#lang-switch ul {
+  list-style-type: none;
+}
 
 
 
@@ -1322,7 +1317,7 @@ p.bus
     border: 1px solid #80747C;
     border-radius: 3px 3px 3px 3px;
     color: #63C1DB;
-    padding: 3px 25px 3px 30px;
+    padding: 3px 10px 3px 25px;
 }
 .info-result #icon-add-sac
 {
@@ -1456,15 +1451,6 @@ p.bus
 
 
 
-.lang #it
-{
-  background:url(../ico/flag_it.png) no-repeat;
-
-}
-.lang #en
-{
-  background:url(../ico/flag_en.png) no-repeat;
-}
 
 #cols
 {

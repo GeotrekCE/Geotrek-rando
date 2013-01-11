@@ -1,10 +1,11 @@
+{% load static %}
 <div id="lang-switch">
     <ul>
     {% for lang, name in settings.languages.available.items %}
         {% if lang == request.LANGUAGE_CODE %}
-            <li>{{ name }}</li>
+            <li class="active"><img src="{% get_static_prefix %}ico/flag_{{ lang }}.png" alt="{{ lang }}"></li>
         {% else %}
-            <li><a class="pjax" href="/{{ lang }}">{{ name }}</a></li>
+            <li><a href="/{{ lang }}"><img src="{% get_static_prefix %}ico/flag_{{ lang }}.png" alt="{{ lang }}"></a></li>
         {% endif %}
     {% endfor %}
     </ul>
