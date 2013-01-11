@@ -44,70 +44,6 @@
 }
 
 
-.navbar .nav {
-  position: relative;
-  left: 0;
-  display: block;
-  float: right;
-  margin-bottom: 18px;
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-top: 0px;
-}
-
-
-.navbar .nav > li > a {
-  padding: 0px 10px 0px;
-  color: #000;
-  text-shadow: 0 0 white, 0 0 white, 0 0 white, 0 2px white;
-  font-weight:bold;
-  font-size:1.1em;
-}
-
-
-.navbar .btn {
-  padding: 8px 10px 4px;
-}
-
-.navbar .nav .active > a,
-.navbar .nav .active > a:hover {
-  line-height: 17px;
-  text-shadow: -1px 0 black, 1px 2px black, 2px 3px black, 0 -1px black;
-  /*background-color: #222222;*/
-}
-
-.accordion-body {
-  max-height:120px;
-  overflow:auto;
-}
-
-.accordion-heading .accordion-toggle {
-  padding: 8px 40px;
-}
-
-
-.accordion-toggle {
-  color: #999095;
-  text-decoration:none;
-  
-}
-a.accordion-toggle:hover  {
-  cursor: pointer;
-  color: #999095;
-  text-decoration:none;
-  
-}
-
-.accordion-inner {
-  color: #80757D;
-}
-
-/* Jquery UI override */
-.ui-widget-content , .ui-widget-overlay, .ui-widget-shadow {
-  background: none;
-}
-
-
 
 
 /* Imported from DOM elements */
@@ -605,7 +541,60 @@ color:#625b50;
 
 
 
+/* Layout */
 
+
+#content {
+  width:100%;
+  height:100%;
+  position:relative;
+  top:-17px;
+}
+
+#mainmap {
+  height: 100%;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    #content {
+        top:0;
+    }
+}
+
+
+
+
+
+/* Top navigation */
+
+#flatpages {
+  position: fixed;
+  top: 10px;
+  right: 150px;
+  z-index: 1031;
+}
+
+#flatpages ul {
+  list-style-type: none;
+}
+
+#flatpages ul  li {
+  display: inline-block;
+}
+
+#flatpages ul li > a {
+  padding: 0px 10px 0px;
+  color: #000;
+  text-shadow: 0 0 white, 0 0 white, 0 0 white, 0 2px white;
+  font-weight: bold;
+  font-size: 1.1em;
+  text-decoration: none;
+}
+
+#flatpages ul li > a:hover {
+  color: white;
+  text-shadow: 0 0 white, 0 0 white, 0 0 white, 0 2px black;
+}
 
 
 
@@ -630,22 +619,8 @@ color:#625b50;
 
 
 
-#content {
-  width:100%;
-  height:100%;
-  position:relative;
-  top:-17px;
-}
 
-#mainmap {
-  height: 100%;
-}
 
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-    #content {
-        top:0;
-    }
-}
 
 
 
@@ -893,6 +868,40 @@ color:#625b50;
 
 
 
+
+
+
+
+.accordion-body {
+  max-height:120px;
+  overflow:auto;
+}
+
+.accordion-heading .accordion-toggle {
+  padding: 8px 40px;
+}
+
+
+.accordion-toggle {
+  color: #999095;
+  text-decoration:none;
+  
+}
+a.accordion-toggle:hover  {
+  cursor: pointer;
+  color: #999095;
+  text-decoration:none;
+  
+}
+
+.accordion-inner {
+  color: #80757D;
+}
+
+/* Jquery UI override */
+.ui-widget-content , .ui-widget-overlay, .ui-widget-shadow {
+  background: none;
+}
 
 
 
@@ -1260,7 +1269,9 @@ color:#625b50;
 {
   margin-top:30px;
 }
-
+.navbar .btn {
+  padding: 8px 10px 4px;
+}
 .nav-tabs .active a
 {
   border-bottom:none;

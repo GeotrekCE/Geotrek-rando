@@ -5,8 +5,10 @@
 {% include "trekking/lang_switch_fragment.html" %}
 
 {% get_flatpages as flatpages %}
-<ul>
+<div id="flatpages">
+    <ul>
     {% for page in flatpages %}
         <li><a class="pjax" href="{% url flatpages:page page.slug %}">{{ page.title }}</a></li>
     {% endfor %}
-</ul>
+    </ul>
+</div>
