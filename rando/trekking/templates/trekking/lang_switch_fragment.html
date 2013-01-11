@@ -3,9 +3,9 @@
     <ul>
     {% for lang, name in settings.languages.available.items %}
         {% if lang == request.LANGUAGE_CODE %}
-            <li class="active"><img src="{% get_static_prefix %}ico/flag_{{ lang }}.png" alt="{{ lang }}"></li>
+            <li class="active"><img src="{% get_static_prefix %}ico/flags/{{ lang }}.png" alt="{{ lang }}"></li>
         {% else %}
-            <li><a href="/{{ lang }}"><img src="{% get_static_prefix %}ico/flag_{{ lang }}.png" alt="{{ lang }}"></a></li>
+            <li><a href="/{{ lang }}"><img src="{% get_static_prefix %}ico/flags/{{ lang }}.png" alt="{{ lang }}"></a></li>
         {% endif %}
     {% endfor %}
     </ul>
