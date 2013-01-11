@@ -132,7 +132,8 @@ INSTALLED_APPS = (
 )
 
 LEAFLET_CONFIG = {
-    "TILES_URL": 'http://{s}.tiles.mapbox.com/v3/examples.map-4l7djmvo/{z}/{x}/{y}.png'
+    "TILES_URL": 'http://{s}.tiles.mapbox.com/v3/examples.map-4l7djmvo/{z}/{x}/{y}.png',
+    "SCALE": False
 }
 
 # A sample logging configuration. The only tangible logging

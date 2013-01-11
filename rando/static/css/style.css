@@ -471,20 +471,16 @@ a.accordion-toggle:hover  {
 
 #show-side-bar {
   width:25px;
-  height:25px;
+  height:36px;
   top: 0px;
   left: 0px;
   position: absolute;
   background:url(../img/triangleresultatdroite.png) no-repeat 1px -3px;
   background-color:#f2f3ed;
   border-bottom: 1px solid;
-  border-bottom-right-radius: 0;
-  border-right: 1px solid;
-  border-top-right-radius: 0;
-  margin-top:1px;
+  border-right: 1px solid;  
   z-index: 100;
   cursor:pointer;
-  
 }
 
 .side-bar .slider
