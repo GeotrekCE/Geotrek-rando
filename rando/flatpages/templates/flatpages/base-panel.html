@@ -1,3 +1,7 @@
 {% include "trekking/navigation_fragment.html" %}
 
-{{ object.content|safe }}
+{% include "trekking/fake_searchtabs_fragment.html" %}
+
+<div class="flatpage-content">
+    {{ object.content|safe }}
+</div>

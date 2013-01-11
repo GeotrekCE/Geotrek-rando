@@ -2,39 +2,6 @@
 
 {% load i18n static leaflet_tags %}
 
-{% block tab-content %}
-    <div class="tab-content">
-      <div class="tab-pane active" id="results-pane">
-          <div id="trek-89" class="result">
-          <div class="illust"> <img src="{% static "img/trek.jpg" %}" width="130" height="120" /> </div>
-          <div class="info-result"> <a href="fiche.html">
-            <h4>La Berrard - Le Casset</h4>
-            </a>
-            <p>Vallée de la Valouise</p>
-            <p>6h- Dénivelé 500m</p>
-            <p>Sportif</p>
-            <div class="theme-tools"> <a class="btn" id="icon-cols"></a> <a class="btn" id="icon-cols"></a> </div>
-            <div class="search-tools"> <a class="btn" id="icon-add-sac"><img src="{% static "img/add-bag.png" %}"></a> <a class="btn" id="search-rando"><img src="{% static "img/search.png" %}"></a> </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tab-pane" id="backpack-pane">
-        <div class="result">
-          <div class="illust"> <img src="{% static "img/trek.jpg" %}" width="130" height="120" /> </div>
-          <div class="info-result"> <a href="fiche.html">
-            <h4>Sac a dos - Le Casset</h4>
-            </a>
-            <p>Vallée de la Valouise</p>
-            <p>6h- Dénivelé 500m</p>
-            <p>Sportif</p>
-            <div class="search-tools"> <a class="btn" id="icon-add-sac"><img src="{% static "img/add-bag.png" %}"></a> <a class="btn" id="search-rando"><img src="{% static "img/search.png" %}"></a> </div>
-          </div>
-        </div>
-      </div>
-    </div>
-{% endblock tab-content %}
-
 {% block content %}
     {% include "trekking/home-panel.html" %}
 {% endblock content %}

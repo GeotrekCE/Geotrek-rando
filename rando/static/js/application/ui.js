@@ -1,17 +1,55 @@
-//--------- Fix side-bar height -------------//
-function init_ui() {
+function page_load() {
+    $('#result-backpack-content .tab-pane').jScrollPane();
+
+    $('#result-backpack-tabs .nav-tabs a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    });
+
+    if ($("#mainmap-tag").length > 0) {
+        console.log('Home map...');
+        $("#mainmap").show();  // We are on home with map
+    }
+    else {
+        console.log('Elsewhere...');
+        $("#mainmap").hide();  // We are elsewhere
+    }
+
     layout();
+}
+
+
+function init_ui() {
+    $('#content').pjax('a.pjax');
+
     toggle_sidebar();
     toggle_filters();
+    sliders();
+
+    window.store = new storage();
+    window.store.ChangeStateTheme();
+    window.store.loadSlider();
+
+    $(store).on("filterchange",function(e) {
+        $.each(window.treks, function (i, trek) {
+          var trekid = trek.properties.pk;
+          if (window.store.match(trek)) {
+            $('#trek-'+trekid).show();
+          }
+          else {
+            $('#trek-'+trekid).hide();
+          }
+        });
+    });
 
     $(window).on('resize', function() {
       layout();
     });
-
 }
+
 function layout() {
     var tabheight = sidebar_h()+"px";
-    $('#container-content').css('top', $('#top-panel').height());
+    $('#container-content, .side-bar').css('top', $('#top-panel').height()+'px');
     $('#container-content, .side-bar').css("height", tabheight);
 
     // Refresh map view
@@ -69,34 +107,44 @@ function toggle_filters() {
     });
 }
 
-function filtre()
-{
-	
-	$('.show_hide_filter').click(function() {
-					$('.slidingDiv1-bar').animate({
-						width : 'toggle'
-					});
-					$(".slidingDiv1").show();
-					$(".header-2").css("height", "161px");
-					$(".filter").css("height","94%");
-					$(".show_hide_filter").hide();
-					$(".hide_show_filter").show();
-					$(".side-bar").css("top","242px");
-				    layout();
-					});
-	$('.hide_show_filter').click(function() {
-					$('.slidingDiv1-bar').animate({
-						width : 'toggle'
-					});
-					$(".slidingDiv1").hide();
-					$(".header-2").css("height", "80px");
-					$(".filter").css("height","88%");
-					$(".show_hide_filter").show();
-					$(".hide_show_filter").hide();
-					$(".side-bar").css("top","161px");
-					layout();	
-				});
-}
+
+
+function  sliders() {
+    var saveSlider = function (event, ui) {
+        window.store.SaveSlider(ui.values[0],
+                                ui.values[1],
+                                $(this).data("filter"));
+    };
+
+    $( "#stage" ).slider({
+        range: true,
+        step: 1, 
+        min: 1,
+        max: 3,
+        values: [ 1, 3 ],
+        slide: saveSlider,
+    });
+
+    $( "#time" ).slider({
+        range: true,
+        step: 5, 
+        min: 0,
+        max: 20,
+        values: [ 0, 10 ],
+        slide: saveSlider,
+    });
+
+    $( "#den" ).slider({
+        range: true,
+        step: 1.35, 
+        min: 0,
+        max: 4,
+        values: [ 1, 1 ],
+        slide: saveSlider,
+    });
+};
+
+
 
 
 
@@ -161,46 +209,3 @@ function refuge_open_close()
 		}
 });
 }
-
-function  slider_feature()
-{
-	$( "#stage" ).slider({
-              range: true,
-              step: 1, 
-              min: 1,
-              max: 3,
-              values: [ 1, 3 ],
-              slide: function( event, ui ) {
-				  var store = new storage();
-					  store.SaveSlider(ui.values[0],ui.values[1],$(this).data("filter"));
-              }
-          });
-		   
-      
-      
-     
-       $( "#time" ).slider({
-              range: true,
-              step: 5, 
-              min: 0,
-              max: 20,
-              values: [ 0, 10 ],
-              slide: function( event, ui ) {
-				  var store = new storage();
-					  store.SaveSlider(ui.values[0],ui.values[1],$(this).data("filter"));
-              }
-          });
-          
-       $( "#den" ).slider({
-              range: true,
-              step: 1.35, 
-              min: 0,
-              max: 4,
-              values: [ 0, 1 ],
-              slide: function( event, ui ) {
-				  var store = new storage();
-					  store.SaveSlider(ui.values[0],ui.values[1],$(this).data("filter"));
-              }
-          });
-          
-};

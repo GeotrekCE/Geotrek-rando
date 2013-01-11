@@ -11,7 +11,6 @@
 }
 
 
-
 [class^="icon-"],
 [class*=" icon-"] {
   background-image: url("../img/glyphicons-halflings-white.png");
@@ -22,9 +21,6 @@
 }
 
 
-.tab-content {
-  overflow-x: auto;
-}
 
 .navbar-inner {
   min-height: 40px;
@@ -94,10 +90,6 @@
    position: fixed;
 }
 
-.tab-content .tab-pane {
-  height: auto;
-}
-
 #tab-results, #tab-backpack {
   width: 47.5%;
 }
@@ -109,6 +101,7 @@
 .footer {
   background-color:#f0f2ed;
 }
+
 
 /*
  * Application style
@@ -176,10 +169,6 @@
   box-shadow: 0 0 2px 1px #888;
 }
 
-.side-bar .result:hover {
-  background: #e7e9a0;
-}
-
 
 .navbar-inner h3
 {
@@ -224,28 +213,13 @@
   float:left;
   background:#E9EAE5;
   width:100%;
-  border-bottom: 1px solid #80747C;
-    border-top: 1px solid #80747C;
 }
 .search1 .span4
 {
   width:100%;
   margin-left:0
 }
-.side-bar .search1 .add-on
-{
-  float:right;
-  border-radius:0;
-  margin-right: 10px;
-  background:#7f747c;
-}
-#side-bar-fiche .search1 .add-on
-{
-  float:right;
-  border-radius:0;
-  margin-right: 10px;
-  background:#7f747c;
-}
+
 .search1 .control-group
 {
   margin-top:5px;
@@ -256,7 +230,7 @@
   width:88%;
 }
 
-#result-bag ul.nav {
+#result-backpack-tabs ul.nav {
   margin-bottom: 5px;
 }
 
@@ -304,9 +278,8 @@
   background:#F6F7F1;
   min-width: 408px;
   max-width:500px;
-  position:absolute;
+  position: fixed;
   z-index:900;
-  
 }
 .side-bar .nav
 {
@@ -393,13 +366,12 @@
 #show-side-bar {
   width:25px;
   height:36px;
-  top: 0px;
+  top: 40px;
   left: 0px;
   position: absolute;
-  background:url(../img/triangleresultatdroite.png) no-repeat 1px -3px;
+  background:url(../img/triangleresultatdroite.png) no-repeat 1px 3px;
   background-color:#f2f3ed;
-  border-bottom: 1px solid;
-  border-right: 1px solid;  
+  border: 2px solid #80747C;
   z-index: 100;
   cursor:pointer;
 }
@@ -443,6 +415,28 @@ color:#625b50;
 {
   margin:0;
   color:#968d7f;
+}
+
+
+
+.side-bar .search1 .add-on
+{
+  float:right;
+  border-radius:0;
+  margin-right: 10px;
+  background:#7f747c;
+}
+#side-bar-fiche .search1 .add-on
+{
+  float:right;
+  border-radius:0;
+  margin-right: 10px;
+  background:#7f747c;
+}
+
+
+.side-bar .result:hover {
+  background: #e7e9a0;
 }
 
 .show-hide-filters {

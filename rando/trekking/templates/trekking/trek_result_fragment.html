@@ -1,0 +1,19 @@
+{% load static %}
+<div id="trek-{{ trek.properties.pk }}" class="result">
+  <div class="illust"> <img src="{% static "img/trek.jpg" %}" width="130" height="120" /> </div>
+  <div class="info-result">
+    <a class="pjax" data-id="{{ trek.properties.pk }}" href="{% url trekking:detail trek.properties.slug %}">
+        <h4>{{ trek.properties.name }}</h4>
+    </a>
+    <p>Vallée de la Valouise</p>
+    <p>6h- Dénivelé 500m</p>
+    <p>Sportif</p>
+    <div class="theme-tools">
+        <a class="btn" id="icon-cols"></a> <a class="btn" id="icon-cols"></a>
+    </div>
+    <div class="search-tools">
+        <a class="btn" id="icon-add-sac"><img src="{% static "img/add-bag.png" %}"></a>
+        <a class="btn" id="search-rando"><img src="{% static "img/search.png" %}"></a>
+    </div>
+  </div>
+</div>

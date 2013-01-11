@@ -17,12 +17,59 @@
 
 {% include "trekking/navigation_fragment.html" %}
 
-<ul>
-{% for trek in treks %}
-    <li><a class="pjax" data-id="{{ trek.properties.pk }}" href="{% url trekking:detail trek.properties.slug %}">{{ trek.properties.name }}</a></li>
-{% endfor %}
-</ul>
+
+
+
+<div id="show-side-bar" style="display: none"></div>
+<div class="side-bar" id="side-bar">
+
+  <div id="text-search" class="search1">
+    <div class="span4">
+      <div class="control-group">
+        <div class="controls">
+          <div class="input-prepend"> <span class="add-on"> <i class="icon-search"></i> </span>
+            <input type="search" class="span3" placeholder="Nom,Vallées,..." name="search" id="search"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="result-backpack-tabs" class="tabbable"> 
+    <ul class="nav nav-tabs">
+      <li id="tab-results" class="active">
+        <div class="nb_res"> 7 </div>
+        <a href="#results-pane">Résultats</a>
+      </li>
+      <li id="tab-backpack">
+        <div class="nb_sac"> 7 </div>
+        <a href="#backpack-pane">Sac a dos</a>
+      </li>
+      <li id="tab-showhidepanel">
+        <a id="hide-side-bar" href="#" data-toggle="tab">.</a>
+      </li>
+    </ul>
+
+    <div id="result-backpack-content" class="tab-content">
+      <div class="tab-pane active" id="results-pane">
+        {% for trek in treks %}
+            {% include "trekking/trek_result_fragment.html" %}
+        {% endfor %}
+      </div>
+
+      <div class="tab-pane" id="backpack-pane">
+        {% for trek in treks %}
+            {% include "trekking/trek_result_fragment.html" %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- sidebar -->
+
+
 
 {% leaflet_map 'mainmap' fitextent=False creatediv=False %}
 
-<div id="mainmap-tag" style="display: none"></div>
+<div id="mainmap-tag" style="display: none"><!-- custom tag to detect loaded page--></div>
