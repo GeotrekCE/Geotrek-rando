@@ -54,12 +54,12 @@
 
 
       <div id="search-bar">
-        <div class="filter">
-          <a href="#" class="show_hide_filter"></a> 
-          <a href="#" class="hide_show_filter" style="display: none"></a>
+        <a id="show-filters" href="#" class="show-hide-filters"></a> 
+        <a id="hide-filters" href="#" class="show-hide-filters" style="display: none"></a>
 
-          <p class="title">Filtres</p>
+        <p class="title">Filtres</p>
 
+        <div id="basic-filters">
           <div class="stage">
             <label>Difficulté</label>
             <img src="{% static "img/slider-stage.png" %}">
@@ -119,55 +119,51 @@
               <p>Lacs</p>
             </div>
           </div>
+        </div>
 
-
-          <div class="slidingDiv1">
-            <div class="usage">
-              <label>Usage</label>
-              <div class="usage-icon">
-                <button class="btn filter-usage" id="velo" data-filter="usage" data-toggle="button"></button>
-                <p>vélo</p>
-              </div>
-              <div class="usage-icon">
-                <button class="btn filter-usage" id="vtt" data-filter="usage" data-toggle="button"></button>
-                <p>VTT</p>
-              </div>
-              <div class="usage-icon">
-                <button class="btn filter-usage" id="cheval" data-filter="usage" data-toggle="button"></button>
-                <p>cheval avec<br>
-                  accompagnateur</p>
-              </div>
+        <div id="advanced-filters" style="display: none">
+          <div class="filter-bloc usage">
+            <label>Usage</label>
+            <div class="usage-icon">
+              <button class="btn filter-usage" id="velo" data-filter="usage" data-toggle="button"></button>
+              <p>vélo</p>
             </div>
-            <div class="vallee">
-              <div class="btn-group" data-toggle="buttons-checkbox">
-                <label>Vallée</label>
-                <button class="btn" id="Brianconnais" data-filter="valle"> Le Briançoannais </button>
-                <button class="btn" id="Champsaur" data-filter="valle"> Le Champseur </button>
-                <button class="btn" id="Embrunais" data-filter="valle"> L'Embrunais </button>
-                <button class="btn" id="Oisans" data-filter="valle"> L'Oisan vertical </button>
-                <button class="btn" id="Valbonnais" data-filter="valle"> Le Valbonnais </button>
-                <button class="btn" id="vallouise"data-filter="valle"> La Vallouise </button>
-                <button class="btn" id="Valgaudemar" data-filter="valle"> Le Valgaudemar </button>
-              </div>
+            <div class="usage-icon">
+              <button class="btn filter-usage" id="vtt" data-filter="usage" data-toggle="button"></button>
+              <p>VTT</p>
             </div>
-            <!-- Vallée -->
-            <div class="access">
-              <label>Accessibilité</label>
-              <div class="btn-group" data-toggle="buttons-checkbox">
-                <button class="btn" id="f" data-filter="access"> Fauteuil roulant </button>
-                <button class="btn" id="p" data-filter="access"> Pousette </button>
-              </div>
-            </div>
-            <div class="boucle">
-              <label>Boucle</label>
-              <label class="checkbox">
-                <input type="checkbox" data-filter="boucle" id="boucle">
-              </label>
+            <div class="usage-icon">
+              <button class="btn filter-usage" id="cheval" data-filter="usage" data-toggle="button"></button>
+              <p>Cheval</p>
             </div>
           </div>
-
+          <div class="filter-bloc vallee">
+            <label>Vallée</label>
+            <div class="btn-group" data-toggle="buttons-checkbox">
+              <button class="btn" id="Brianconnais" data-filter="valle"> Le Briançoannais </button>
+              <button class="btn" id="Champsaur" data-filter="valle"> Le Champseur </button>
+              <button class="btn" id="Embrunais" data-filter="valle"> L'Embrunais </button>
+              <button class="btn" id="Oisans" data-filter="valle"> L'Oisan vertical </button>
+              <button class="btn" id="Valbonnais" data-filter="valle"> Le Valbonnais </button>
+              <button class="btn" id="vallouise"data-filter="valle"> La Vallouise </button>
+              <button class="btn" id="Valgaudemar" data-filter="valle"> Le Valgaudemar </button>
+            </div>
+          </div>
+          <div class="filter-bloc access">
+            <label>Accessibilité</label>
+            <div class="btn-group" data-toggle="buttons-checkbox">
+              <button class="btn" id="f" data-filter="access"> Fauteuil roulant </button>
+              <button class="btn" id="p" data-filter="access"> Pousette </button>
+            </div>
+          </div>
+          <div class="filter-bloc boucle">
+            <label>Boucle</label>
+            <label class="checkbox">
+              <input type="checkbox" data-filter="boucle" id="boucle">
+            </label>
+          </div>
         </div>
-        <!-- filter -->
+        <!--  advanced-filters-->
 
       </div>
       <!--  search-bar-->
@@ -177,7 +173,7 @@
   <!-- navbar-->
 
   <div class="container" id="container-content">
-    <div class="slidingDiv" style="display: none"></div>
+    <div id="show-side-bar" style="display: none"></div>
     <div class="side-bar" id="side-bar">
 
       <div class="search1">
@@ -203,7 +199,7 @@
             <a href="#backpack-pane">Sac a dos</a>
           </li>
           <li id="tab-showhidepanel">
-            <a href="#" data-toggle="tab" class="show_hide">.</a>
+            <a id="hide-side-bar" href="#" data-toggle="tab">.</a>
           </li>
         </ul>
 
@@ -303,19 +299,15 @@
               $(this).tab('show');
           })
 
-          layout();
+          init_ui();
 
           filtre();
-          fix_content();
+          toggle_sidebar();
           slider_feature();
           store.ChangeStateTheme();
           store.loadSlider();
           $('.tab-pane').jScrollPane();
 
-      });
-
-      $(window).on('resize', function() {
-          layout();
       });
 
       $(document).on('pjax:end', function (e) {
