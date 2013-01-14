@@ -178,22 +178,344 @@
   padding: 3px 10px 3px 25px;
 }
 
+/****************************************************************************
+ * 
+ * Filters
+ * 
+ */
+
+
+.slider-value {
+  font-weight: bold;
+  float:left; font-size: 7pt;
+  text-align: center;
+}
+
+.slider-value.first {
+  text-align: left; 
+}
+
+.slider-value.last {
+  text-align: right; 
+}
+
+.stage .slider-value {
+  width: 33%;
+}
+
+.time .slider-value {
+  width: 20%;
+}
+
+.den .slider-value {
+  width: 25%;
+}
+
+
+.stage
+{
+  width:157px;
+  float:left;
+  margin-left:25px;
+}
+.time
+{
+  width:251px;
+  float:left;
+  margin-left:50px;
+}
+.den
+{
+  width:251px;
+  float:left;
+  margin-left:50px;
+}
+
+
+.stage .slider
+{
+  width: 161px;
+  /*background:url(../img/bgdifficulteNEW.png);*/
+  background-size:161px 100%;
+  height:23px;
+  border:none;
+  margin-top:0;
+}
+/* Slider Dual Stage*/
+.stage #stage .ui-slider-range
+{
+  height:4px;
+  background:#F77E00;
+  opacity:0.6;
+  top:10px;
+}
+.stage #stage
+{
+  width: 161px;
+  /*background:url(../img/bgdifficulteNEW.png);*/
+  background-size:161px 100%;
+  height:0;
+  border:none;
+  top:-25px;
+  left:6px;
+}
+.stage #stage .ui-slider-handle
+{
+  background:url("../img/Curseur.png") repeat-x scroll 0 0 transparent;
+  top:4px;
+  border:none;
+  outline:none;
+}
+/* Slider Dual Time */
+.time #time .ui-slider-range
+{
+  height:4px;
+  background:#F77E00;
+  opacity:0.6;
+  top:10px;
+}
+.time #time
+{
+  width: 254px;
+  height:0;
+  border:none;
+  top:-25px;
+  left:6px;
+}
+.time #time .ui-slider-handle
+{
+  background:url("../img/Curseur.png") repeat-x scroll 0 0 transparent;
+  top:4px;
+  border:none;
+  outline:none;
+}
+
+.time .slider
+{
+  background:url(../img/bgduree.png);
+  width:253px;
+  background-size:253px 100%;
+  height:23px;
+  border:none;
+  margin-top:0;
+}
+/* Slider Dual Den*/
+.den #den .ui-slider-range
+{
+  height:4px;
+  background:#F77E00;
+  opacity:0.6;
+  top:10px;
+}
+.den #den
+{
+  width: 254px;
+  height:0;
+  border:none;
+  top:-25px;
+  left:6px;
+}
+.den #den .ui-slider-handle
+{
+  background:url("../img/Curseur.png") repeat-x scroll 0 0 transparent;
+  top:4px;
+  border:none;
+  outline:none;
+}
+
+.den .slider
+{
+  background:url(../img/bgdenivele.png);
+  width:279px;
+  height:23px;
+  border:none;
+  background-size: 279px 100%;
+  margin-top:0;
+
+}
 
 
 
 
+.filter-theme {
+  width:32px;
+  height: 22px;
+  margin-top:0;
+  border: none;
+  outline:0;
+  -moz-box-shadow: none;
+          box-shadow: none;
+      margin-bottom:0;
+}
+
+.filter-theme.active {
+  border: none;
+  -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none;
+          outline:0;
+
+  /* TODO use sprites */
+}
+
+.filter-usage {
+  width:32px;
+  height: 23px;
+  border: none;
+  outline:0;
+  -moz-box-shadow: none;
+          box-shadow: none;
+}
+
+.filter-usage.active {
+  width:32px;
+  height: 23px;
+  border: none;
+  outline:0;
+  -moz-box-shadow: none;
+          box-shadow: none;
+}
+
+.show-hide-filters {
+  border: solid 1px #a09f94;
+  outline:0;
+  float:left;
+  -moz-box-shadow: 0 0 5px #888;
+  -webkit-box-shadow: 0 0 5px#888;
+  box-shadow: 0 0 5px #888;
+  display: inline-block;
+    line-height: 18px;
+    margin: 20px 5px 6px;
+    padding: 21px 15px 4px;
+  position: relative;
+    z-index: 300;
+}
+
+#show-filters { 
+  background: url(../img/flechedown.png) 50% 50% no-repeat;
+}
+
+#hide-filters {
+  background: url(../img/fleche-up.png) 50% 50% no-repeat;
+}
 
 
+#advanced-filters {
+  clear:both;
+}
+
+#advanced-filters .filter-bloc {
+  height: 80px;
+  float: left;
+}
+
+#advanced-filters .filter-bloc .btn.bullet {
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  padding-left: 12px;
+  border: none;
+  box-shadow: none;
+  background:url(../img/rond-vide.png) no-repeat 0 50%;
+  font-size:9px;
+  color:#7f737c;
+}
+
+#advanced-filters .filter-bloc .btn.bullet.active,
+ #advanced-filters .filter-bloc .btn.bullet:hover {
+  background:url(../img/rond-plein.png) no-repeat 0 50%;
+}
+
+.boucle .checkbox input
+{
+  float:none;
+  margin-left:0;
+}
 
 
+.vallee
+{
+  width:350px;
+  margin-left:40px;
+}
+
+#advanced-filters .vallee .btn-group button
+{
+  width:33% !important;
+}
+
+.usage
+{
+  margin-left:110px;
+}
+.usage label
+{
+  margin-left:20px
+}
+.usage div
+{
+  margin-left:5px;
+}
+.theme
+{
+  width:auto;
+  float:left;
+  margin-left:50px;
+}
+.theme .filter label 
+{
+  margin-bottom:0;
+}
 
 
+.theme-icon
+{
+  width:auto;
+  float:left;
+}
+.theme-icon p
+{
+  font-size: 9px;
+    margin: 0;
+  font-weight:bold;
+    padding: 0;
+    text-align: center;
+  line-height:1;
+}
+.usage-icon
+{
+  width:52px;
+  float:left;
+  text-align:center;
+}
+.usage-icon p
+{
+  font-size: 9px;
+    margin: 0;
+  font-weight:bold;
+    padding: 0;
+    text-align: center;
+  line-height:1;
+}
+
+.access
+{
+  width:100px;
+  margin-left:20px;
+}
+
+.boucle {
+    margin-left: 20px;
+    width: 80px;
+}
 
 
-
-
-
-
+/****************************************************************************
+ * 
+ * Śidebar
+ * 
+ */
 
 .side-bar
 {
@@ -367,298 +689,8 @@ color:#625b50;
 
 
 
-.show-hide-filters {
-  border: solid 1px #a09f94;
-  outline:0;
-  float:left;
-  -moz-box-shadow: 0 0 5px #888;
-  -webkit-box-shadow: 0 0 5px#888;
-  box-shadow: 0 0 5px #888;
-  display: inline-block;
-    line-height: 18px;
-    margin: 20px 5px 6px;
-    padding: 21px 15px 4px;
-  position: relative;
-    z-index: 300;
-}
-
-#show-filters { 
-  background: url(../img/flechedown.png) 50% 50% no-repeat;
-}
-
-#hide-filters {
-  background: url(../img/fleche-up.png) 50% 50% no-repeat;
-}
 
 
-#advanced-filters {
-  clear:both;
-}
-
-#advanced-filters .filter-bloc {
-  height: 80px;
-  float: left;
-}
-
-#advanced-filters .filter-bloc .btn.bullet {
-  text-align: left;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  padding-left: 12px;
-  border: none;
-  box-shadow: none;
-  background:url(../img/rond-vide.png) no-repeat 0 50%;
-  font-size:9px;
-  color:#7f737c;
-}
-
-#advanced-filters .filter-bloc .btn.bullet.active,
- #advanced-filters .filter-bloc .btn.bullet:hover {
-  background:url(../img/rond-plein.png) no-repeat 0 50%;
-}
-
-.boucle .checkbox input
-{
-  float:none;
-  margin-left:0;
-}
-
-
-.vallee
-{
-  width:350px;
-  margin-left:40px;
-}
-
-#advanced-filters .vallee .btn-group button
-{
-  width:33% !important;
-}
-
-.usage
-{
-  margin-left:110px;
-}
-.usage label
-{
-  margin-left:20px
-}
-.usage div
-{
-  margin-left:5px;
-}
-
-.access
-{
-  width:100px;
-  margin-left:20px;
-}
-
-.boucle {
-    margin-left: 20px;
-    width: 80px;
-}
-
-
-.slider-value {
-  font-weight: bold;
-  float:left; font-size: 7pt;
-  text-align: center;
-}
-
-.slider-value.first {
-  text-align: left; 
-}
-
-.slider-value.last {
-  text-align: right; 
-}
-
-.stage .slider-value {
-  width: 33%;
-}
-
-.time .slider-value {
-  width: 20%;
-}
-
-.den .slider-value {
-  width: 25%;
-}
-
-
-.stage
-{
-  width:157px;
-  float:left;
-  margin-left:25px;
-}
-.time
-{
-  width:251px;
-  float:left;
-  margin-left:50px;
-}
-.den
-{
-  width:251px;
-  float:left;
-  margin-left:50px;
-}
-.theme
-{
-  width:auto;
-  float:left;
-  margin-left:50px;
-}
-.theme .filter label 
-{
-  margin-bottom:0;
-}
-
-
-.stage .slider
-{
-  width: 161px;
-  /*background:url(../img/bgdifficulteNEW.png);*/
-  background-size:161px 100%;
-  height:23px;
-  border:none;
-  margin-top:0;
-}
-/* Slider Dual Stage*/
-.stage #stage .ui-slider-range
-{
-  height:4px;
-  background:#F77E00;
-  opacity:0.6;
-  top:10px;
-}
-.stage #stage
-{
-  width: 161px;
-  /*background:url(../img/bgdifficulteNEW.png);*/
-  background-size:161px 100%;
-  height:0;
-  border:none;
-  top:-25px;
-  left:6px;
-}
-.stage #stage .ui-slider-handle
-{
-  background:url("../img/Curseur.png") repeat-x scroll 0 0 transparent;
-  top:4px;
-  border:none;
-  outline:none;
-}
-/* Slider Dual Time */
-.time #time .ui-slider-range
-{
-  height:4px;
-  background:#F77E00;
-  opacity:0.6;
-  top:10px;
-}
-.time #time
-{
-  width: 254px;
-  height:0;
-  border:none;
-  top:-25px;
-  left:6px;
-}
-.time #time .ui-slider-handle
-{
-  background:url("../img/Curseur.png") repeat-x scroll 0 0 transparent;
-  top:4px;
-  border:none;
-  outline:none;
-}
-
-.time .slider
-{
-  background:url(../img/bgduree.png);
-  width:253px;
-  background-size:253px 100%;
-  height:23px;
-  border:none;
-  margin-top:0;
-}
-/* Slider Dual Den*/
-.den #den .ui-slider-range
-{
-  height:4px;
-  background:#F77E00;
-  opacity:0.6;
-  top:10px;
-}
-.den #den
-{
-  width: 254px;
-  height:0;
-  border:none;
-  top:-25px;
-  left:6px;
-}
-.den #den .ui-slider-handle
-{
-  background:url("../img/Curseur.png") repeat-x scroll 0 0 transparent;
-  top:4px;
-  border:none;
-  outline:none;
-}
-
-.den .slider
-{
-  background:url(../img/bgdenivele.png);
-  width:279px;
-  height:23px;
-  border:none;
-  background-size: 279px 100%;
-  margin-top:0;
-
-}
-
-
-.filter-theme {
-  width:32px;
-  height: 22px;
-  margin-top:0;
-  border: none;
-  outline:0;
-  -moz-box-shadow: none;
-          box-shadow: none;
-      margin-bottom:0;
-}
-
-.filter-theme.active {
-  border: none;
-  -webkit-box-shadow: none;
-     -moz-box-shadow: none;
-          box-shadow: none;
-          outline:0;
-
-  /* TODO use sprites */
-}
-
-.filter-usage {
-  width:32px;
-  height: 23px;
-  border: none;
-  outline:0;
-  -moz-box-shadow: none;
-          box-shadow: none;
-}
-
-.filter-usage.active {
-  width:32px;
-  height: 23px;
-  border: none;
-  outline:0;
-  -moz-box-shadow: none;
-          box-shadow: none;
-}
 
 .search
 {
@@ -794,14 +826,11 @@ color:#625b50;
 
 
 
-
-
-
-
-
-
-
-
+/****************************************************************************
+ * 
+ * Maps
+ * 
+ */
 
 #map .leaflet-popup-content-wrapper 
 {
@@ -830,57 +859,37 @@ color:#625b50;
   background-position: 50px 0;
 }
 
+.popup-content
+{
+  background: #eeeeee;
+  width: 280px;
+   -moz-box-shadow: 0 0 3px 3px #888;
+  -webkit-box-shadow: 0 0 3px 3px#888;
+  box-shadow: 0 0 3px 3px #888;
+}
+.popup-content p
+{
+  margin : 0;
+  padding:10px;
+}
+.popup-content h3
+{
+  padding:3px 10px 0px 10px;
+}
 
-
+.popup-footer
+{
+  background:url(../img/pointeur.png) no-repeat center;
+  width:100%;
+  height:16px;
+  margin-top:-1px;
+}
 
 #map-rando
 {
   margin-left:30px;
   margin-bottom:30px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /****************************************************************************
@@ -1088,136 +1097,11 @@ a.accordion-toggle:hover  {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.popup-content
-{
-  background: #eeeeee;
-  width: 280px;
-   -moz-box-shadow: 0 0 3px 3px #888;
-  -webkit-box-shadow: 0 0 3px 3px#888;
-  box-shadow: 0 0 3px 3px #888;
-}
-.popup-content p
-{
-  margin : 0;
-  padding:10px;
-}
-.popup-content h3
-{
-  padding:3px 10px 0px 10px;
-}
-
-.popup-footer
-{
-  background:url(../img/pointeur.png) no-repeat center;
-  width:100%;
-  height:16px;
-  margin-top:-1px;
-}
-.theme-icon
-{
-  width:auto;
-  float:left;
-}
-.theme-icon p
-{
-  font-size: 9px;
-    margin: 0;
-  font-weight:bold;
-    padding: 0;
-    text-align: center;
-  line-height:1;
-}
-.usage-icon
-{
-  width:52px;
-  float:left;
-  text-align:center;
-}
-.usage-icon p
-{
-  font-size: 9px;
-    margin: 0;
-  font-weight:bold;
-    padding: 0;
-    text-align: center;
-  line-height:1;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/****************************************************************************
+ * 
+ * A enlever
+ * 
+ */
 #cols
 {
   background:url(../img/picto-theme/col-off.png);
