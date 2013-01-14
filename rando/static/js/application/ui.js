@@ -1,7 +1,6 @@
 function init_ui() {
     $('#content').pjax('a.pjax');
 
-    toggle_sidebar();
     toggle_filters();
     sliders();
 
@@ -62,6 +61,7 @@ function view_home () {
     $('#container-content, #side-bar').css('top', $('#top-panel').height()+'px');
     $('#container-content, #side-bar').css("height", sidebar_h()+"px");
     $("#mainmap").show();  // We are on home with map
+    toggle_sidebar();
 }
 
 function view_detail() {
@@ -73,6 +73,7 @@ function view_detail() {
 
     $('#container-content').css('position', 'static');
     $('#container-content').attr('style', '');
+    $('#hide-side-bar').unbind('click');
 
     $('#pois-accordion .accordion-toggle').click(function (e) {
         if ($(this).hasClass('open')) {

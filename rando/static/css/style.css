@@ -968,6 +968,10 @@ p.teaser {
   border-bottom: solid 2px #877E82;
 }
 
+#fake-result-backpack-tabs a.disabled {
+  opacity: 0.5;
+  cursor: default;
+}
 
 #toolbox .btn {
   display: inline-block;
