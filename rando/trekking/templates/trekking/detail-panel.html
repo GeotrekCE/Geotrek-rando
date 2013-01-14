@@ -1,7 +1,38 @@
 {% load static i18n leaflet_tags %}
 
 <script type="text/javascript">
+    var poisMarkers = {};
+
     function detailmapInit(map, bounds) {
+
+        var poisMarkers = function(featureData, latlng) {
+            var img = '<img src="data:<data64>" title="<title>">';
+            img = img.replace('<data64>', featureData.properties.serializable_type.pictogram);
+            img = img.replace('<title>', featureData.properties.serializable_type.label);
+            
+            var poicon = new L.DivIcon({className: 'poi-marker-icon',
+                                        iconAnchor: [12, 12],
+                                        html: img}),
+                marker = L.marker(latlng, {icon: poicon});
+            marker.on('mouseover', function (e) {
+                $('#poi-item-' + featureData.properties.pk).click();
+            });
+            window.poisMarkers[featureData.properties.pk] = marker;
+            return marker;
+        };
+
+        $('#pois-accordion').on('open', function (e, accordion) {
+            var id = $(accordion).data('id'),
+                marker = window.poisMarkers[id];
+            $(marker._icon).animate({"margin-top": "-=20px"}, "fast",
+                                    function(){
+                                        $(this).animate({"margin-top": "+=20px"}, "fast");
+                                    });
+        });
+
+
+
+        // Trek
         var trekGeoJSON = {
           "type": "GeometryCollection",
           "geometries": [
@@ -10,11 +41,26 @@
             }
           ]
         };
-        var trekLayer = new L.GeoJSON(trekGeoJSON);
+        var trekLayer = new L.GeoJSON(trekGeoJSON, {
+            style: {color: 'orange', opacity: 1.0, clickable: false},
+        });
         trekLayer.addTo(map);
+        // Show start and end
+        var originlonlat = [{{ object.geometry.coordinates|first|join:"," }}],
+            destinationlonlat = [{{ object.geometry.coordinates|last|join:"," }}];
+        L.marker(L.latLng(originlonlat[1], originlonlat[0]),
+                 {clickable: false,
+                  icon: new L.Icon.Default({iconUrl: '{% static "img/marker-source.png" %}'})}).addTo(map);
+        L.marker(L.latLng(destinationlonlat[1], destinationlonlat[0]),
+                 {clickable: false,
+                  icon: new L.Icon.Default({iconUrl: '{% static "img/marker-target.png" %}'})}).addTo(map);
+
+
         map.fitBounds(trekLayer.getBounds()).zoomOut();
 
-        var poisLayer = new L.GeoJSON({{ poisjson|safe }});
+        var poisLayer = new L.GeoJSON({{ poisjson|safe }}, {
+            pointToLayer: poisMarkers
+        });
         poisLayer.addTo(map);
 
         var parkingIcon = L.icon({

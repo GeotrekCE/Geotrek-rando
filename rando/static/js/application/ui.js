@@ -68,15 +68,21 @@ function view_detail() {
     $("#mainmap").hide();  // We are elsewhere
     $('body').css('overflow', 'default');
     $('.footer').css('position', 'relative');
-    $('.detail-content').css('margin-top', $('#top-panel').height()+'px');
+    $('.flatpage-content, .detail-content').css('margin-top', $('#top-panel').height()+'px');
+    $('.flatpage-content, .detail-content').css('min-height', sidebar_h()+"px");
+
     $('#container-content').css('position', 'static');
     $('#container-content').attr('style', '');
 
-    $('.accordion-toggle').click(function (e) {
-        if ($(this).hasClass('open'))
-          $(this).removeClass('open')
-        else
-          $(this).addClass('open')
+    $('#pois-accordion .accordion-toggle').click(function (e) {
+        if ($(this).hasClass('open')) {
+          $(this).removeClass('open');
+          $('#pois-accordion').trigger('close', [this]);
+        }
+        else {
+          $(this).addClass('open');
+          $('#pois-accordion').trigger('open', [this])
+        }
     });
 }
 
