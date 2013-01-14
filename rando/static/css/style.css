@@ -577,17 +577,17 @@ color:#625b50;
 }
 
 #flatpages ul li > a {
+  color: white;
+  text-shadow: 0 0 white, 0 0 white, 0 0 white, 0 2px black;
   padding: 0px 10px 0px;
-  color: #000;
-  text-shadow: 0 0 white, 0 0 white, 0 0 white, 0 2px white;
   font-weight: bold;
   font-size: 1.1em;
   text-decoration: none;
 }
 
 #flatpages ul li > a:hover {
-  color: white;
-  text-shadow: 0 0 white, 0 0 white, 0 0 white, 0 2px black;
+  color: #000;
+  text-shadow: 0 0 white, 0 0 white, 0 0 white, 0 2px white;
 }
 
 
@@ -608,7 +608,9 @@ color:#625b50;
   list-style-type: none;
 }
 
-
+#lang-switch li.active {
+  opacity: 0.2;
+}
 
 
 

@@ -1,0 +1,159 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-01-14 10:14+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: templates/trekking/base.html:41
+msgid "Share"
+msgstr "Condividi"
+
+#: templates/trekking/base.html:48
+msgid "Filters"
+msgstr "Filtri"
+
+#: templates/trekking/base.html:52 templates/trekking/detail-panel.html:58
+msgid "Difficulty"
+msgstr "Difficoltà"
+
+#: templates/trekking/base.html:60 templates/trekking/detail-panel.html:63
+msgid "Duration"
+msgstr "Durata"
+
+#: templates/trekking/base.html:70
+msgid "Climb"
+msgstr ""
+
+#: templates/trekking/base.html:80
+msgid "Thematic"
+msgstr ""
+
+#: templates/trekking/base.html:114
+msgid "Usage"
+msgstr "Utilizzo"
+
+#: templates/trekking/base.html:129
+msgid "Valley"
+msgstr ""
+
+#: templates/trekking/base.html:141
+msgid "Accessibility"
+msgstr ""
+
+#: templates/trekking/base.html:148
+msgid "Loop"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:53
+msgid "GPX"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:54
+msgid "KML"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:59
+msgid "Transborder"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:60
+msgid "Park centered"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:61
+msgid "Ascent"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:62
+msgid "Descent"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:64
+msgid "Min elevation"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:65
+msgid "Max elevation"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:68
+msgid "Teaser"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:71
+msgid "Description"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:74
+msgid "Ambiance"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:77
+msgid "Advice"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:80
+msgid "Valleys"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:85
+msgid "Usages"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:90
+msgid "Themes"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:95
+msgid "Web links"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:100
+msgid "Public transport"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:103
+msgid "Disabled infrastructure"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:106
+msgid "Advised parking"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:118
+msgid "Altitude profile"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:119
+msgid "Altitude (m)"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:120
+msgid "Distance (m)"
+msgstr ""
+
+#: templates/trekking/home-panel.html:42
+msgid "Results"
+msgstr "Risultati"
+
+#: templates/trekking/home-panel.html:46
+msgid "Backpack"
+msgstr "Zaino"
+
+#: templates/trekking/navigation_fragment.html:9
+msgid "Home"
+msgstr "Casa"

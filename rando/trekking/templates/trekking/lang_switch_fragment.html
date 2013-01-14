@@ -1,11 +1,18 @@
-{% load static %}
+{% load static localeurl_tags %}
 <div id="lang-switch">
     <ul>
     {% for lang, name in settings.languages.available.items %}
         {% if lang == request.LANGUAGE_CODE %}
             <li class="active"><img src="{% get_static_prefix %}ico/flags/{{ lang }}.png" alt="{{ lang }}"></li>
         {% else %}
-            <li><a class="pjax" href="/{{ lang }}"><img src="{% get_static_prefix %}ico/flags/{{ lang }}.png" alt="{{ lang }}"></a></li>
+            <li>
+              {% if object %}
+                <a href="{% locale_url lang trekking:redirect pk=object.properties.pk %}">
+              {% else %}
+                <a href="/{{ lang }}">
+              {% endif %}
+              <img src="{% get_static_prefix %}ico/flags/{{ lang }}.png" alt="{{ lang }}"></a>
+            </li>
         {% endif %}
     {% endfor %}
     </ul>

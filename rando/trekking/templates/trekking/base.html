@@ -1,4 +1,4 @@
-{% load static leaflet_tags %}
+{% load i18n static leaflet_tags %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,18 +38,18 @@
       </div>
       <!--/.container -->
 
-      <a class="btn" id="global-share" href="">Partager</a> </div>
+      <a class="btn" id="global-share" href="">{% trans "Share" %}</a> </div>
 
 
       <div id="search-bar">
         <a id="show-filters" href="#" class="show-hide-filters"></a> 
         <a id="hide-filters" href="#" class="show-hide-filters" style="display: none"></a>
 
-        <p class="title">Filtres</p>
+        <p class="title">{% trans "Filters" %}</p>
 
         <div id="basic-filters">
           <div class="stage">
-            <label>Difficulté</label>
+            <label>{% trans "Difficulty" %}</label>
             <img src="{% static "img/slider-stage.png" %}">
             <div id="stage" data-filter="stage"></div>
             <div class="slider-value first">Facile</div>
@@ -57,7 +57,7 @@
             <div class="slider-value last">Sportif</div>
           </div>
           <div class="time">
-            <label>Durée</label>
+            <label>{% trans "Duration" %}</label>
             <img src="{% static "img/slider-time.png" %}">
             <div id="time" data-filter="time"></div>
             <div class="slider-value first">Courte</div>
@@ -67,7 +67,7 @@
             <div class="slider-value last">&gt;2 jours</div>
           </div>
           <div class="den">
-            <label>Dénivelé</label>
+            <label>{% trans "Climb" %}</label>
             <img src="{% static "img/slider-den.png" %}">
             <div id="den" data-filter="den"></div>
             <div class="slider-value first">&lt; 200 m</div>
@@ -77,7 +77,7 @@
           </div>
 
           <div class="theme">
-            <label>Thème</label>
+            <label>{% trans "Thematic" %}</label>
             <div class="theme-icon">
               <button class="btn filter-theme" id="cols" data-filter="theme" data-toggle="button"></button>
               <p>Cols</p>
@@ -111,7 +111,7 @@
 
         <div id="advanced-filters" style="display: none">
           <div class="filter-bloc usage">
-            <label>Usage</label>
+            <label>{% trans "Usage" %}</label>
             <div class="usage-icon">
               <button class="btn filter-usage" id="velo" data-filter="usage" data-toggle="button"></button>
               <p>vélo</p>
@@ -126,7 +126,7 @@
             </div>
           </div>
           <div class="filter-bloc vallee">
-            <label>Vallée</label>
+            <label>{% trans "Valley" %}</label>
             <div class="btn-group" data-toggle="buttons-checkbox">
               <button class="bullet btn" id="Brianconnais" data-filter="valle"> Le Briançoannais </button>
               <button class="bullet btn" id="Champsaur" data-filter="valle"> Le Champseur </button>
@@ -138,14 +138,14 @@
             </div>
           </div>
           <div class="filter-bloc access">
-            <label>Accessibilité</label>
+            <label>{% trans "Accessibility" %}</label>
             <div class="btn-group" data-toggle="buttons-checkbox">
               <button class="bullet btn" id="f" data-filter="access"> Fauteuil roulant </button>
               <button class="bullet btn" id="p" data-filter="access"> Poussette </button>
             </div>
           </div>
           <div class="filter-bloc boucle">
-            <label>Boucle</label>
+            <label>{% trans "Loop" %}</label>
             <label class="checkbox">
               <input type="checkbox" data-filter="boucle" id="boucle">
             </label>

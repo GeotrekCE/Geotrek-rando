@@ -5,6 +5,7 @@ from django.http import Http404
 from django.conf import settings
 from django.views.generic import TemplateView, DetailView
 from django.views.static import serve as static_serve
+from django.shortcuts import redirect
 from djpjax import PJAXResponseMixin
 
 from .models import Trek, District
@@ -45,6 +46,14 @@ class TrekView(PJAXResponseMixin, DetailView):
         context = super(DetailView, self).get_context_data(**kwargs)
         context['poisjson'] = self.get_object().pois.filter(language=lang).content
         return context
+
+
+def trek_redirect(request, pk):
+    lang = request.LANGUAGE_CODE
+    treks = Trek.objects.filter(language=lang, pk=int(pk)).all()
+    if len(treks) < 1:
+        raise Http404
+    return redirect('trekking:detail', slug=treks[0].properties.slug)
 
 
 def fileserve(request, path):
