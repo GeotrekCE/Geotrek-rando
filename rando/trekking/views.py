@@ -23,7 +23,6 @@ class HomeView(PJAXResponseMixin, TemplateView):
         lang = self.request.LANGUAGE_CODE
         context = super(HomeView, self).get_context_data(**kwargs)
         context['treks'] = Trek.objects.filter(language=lang).all()
-        context['treksjson'] = Trek.objects.filter(language=lang).content
         context['districts'] = District.objects.all()
         return context
 
@@ -43,8 +42,10 @@ class TrekView(PJAXResponseMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         lang = self.request.LANGUAGE_CODE
+        obj = self.get_object()
         context = super(DetailView, self).get_context_data(**kwargs)
-        context['poisjson'] = self.get_object().pois.filter(language=lang).content
+        context['trek'] = obj
+        context['poisjson'] = obj.pois.filter(language=lang).content
         return context
 
 

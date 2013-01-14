@@ -6,17 +6,57 @@ function page_load() {
         $(this).tab('show');
     });
 
+    layout();
+}
+
+function layout() {
     if ($("#mainmap-tag").length > 0) {
-        console.log('Home map...');
-        $("#mainmap").show();  // We are on home with map
+        console.log('Map view...');
+        view_home ();
     }
     else {
         console.log('Elsewhere...');
-        $("#mainmap").hide();  // We are elsewhere
+        view_detail();
     }
-
-    layout();
+    invalidate_maps();
 }
+
+function invalidate_maps() {
+  // Refresh map view
+    if (window.maps) {
+        $.each(window.maps, function (i, map) {
+            map.invalidateSize();
+        });
+    }
+}
+
+function view_home () {
+    $('body').css('overflow', 'hidden');
+    $('.footer').css('position', 'absolute');
+    $('#container-content').css('position', 'fixed');
+    $('#container-content, #side-bar').css('top', $('#top-panel').height()+'px');
+    $('#container-content, #side-bar').css("height", sidebar_h()+"px");
+    $("#mainmap").show();  // We are on home with map
+}
+
+function view_detail() {
+    $("#mainmap").hide();  // We are elsewhere
+    $('body').css('overflow', 'default');
+    $('.footer').css('position', 'relative');
+    $('.detail-content').css('margin-top', $('#top-panel').height()+'px');
+    $('#container-content').css('position', 'static');
+    $('#container-content').attr('style', '');
+
+    $('.accordion-toggle').click(function (e) {
+        if ($(this).hasClass('open'))
+          $(this).removeClass('open')
+        else
+          $(this).addClass('open')
+    });
+}
+
+
+
 
 
 function init_ui() {
@@ -47,18 +87,6 @@ function init_ui() {
     });
 }
 
-function layout() {
-    var tabheight = sidebar_h()+"px";
-    $('#container-content, .side-bar').css('top', $('#top-panel').height()+'px');
-    $('#container-content, .side-bar').css("height", tabheight);
-
-    // Refresh map view
-    if (window.maps) {
-        $.each(window.maps, function (i, map) {
-            map.invalidateSize();
-        });
-    }
-};
 
 function sidebar_h() {
     var h = $(window).height() - $('#top-panel').height()
@@ -143,69 +171,3 @@ function  sliders() {
         slide: saveSlider,
     });
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function musee_open_close()
-{
-	$("#musee").click(function() {
-		if ($(this).attr('id') == 'musee')
-		{
-  		$(this).attr('id', 'musee-open');
-		}else
-		{
-			$(this).attr('id', 'musee');
-		}
-});
-}
-function lac_open_close()
-{
-	$("#lac").click(function() {
-		if ($(this).attr('id') == 'lac')
-		{
-  		$(this).attr('id', 'lac-open');
-		}else
-		{
-			$(this).attr('id', 'lac');
-		}
-});
-}
-function panorama_open_close()
-{
-	$("#panorama").click(function() {
-		if ($(this).attr('id') == 'panorama')
-		{
-  		$(this).attr('id', 'panorama-open');
-		}else
-		{
-			$(this).attr('id', 'panorama');
-		}
-});
-}
-function refuge_open_close()
-{
-	$("#refuge").click(function() {
-		if ($(this).attr('id') == 'refuge')
-		{
-  		$(this).attr('id', 'refuge-open');
-		}else
-		{
-			$(this).attr('id', 'refuge');
-		}
-});
-}

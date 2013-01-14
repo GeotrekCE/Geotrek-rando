@@ -6,7 +6,7 @@
             <li class="active"><img src="{% get_static_prefix %}ico/flags/{{ lang }}.png" alt="{{ lang }}"></li>
         {% else %}
             <li>
-              {% if object %}
+              {% if trek %}
                 <a href="{% locale_url lang trekking:redirect pk=object.properties.pk %}">
               {% else %}
                 <a href="/{{ lang }}">

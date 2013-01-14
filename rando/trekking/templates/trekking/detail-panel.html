@@ -1,4 +1,4 @@
-{% load i18n leaflet_tags %}
+{% load static i18n leaflet_tags %}
 
 <script type="text/javascript">
     function detailmapInit(map, bounds) {
@@ -44,81 +44,105 @@
 
 {% include "trekking/navigation_fragment.html" %}
 
-{% include "trekking/fake_searchtabs_fragment.html" %}
-
 <div class="detail-content">
+  <div class="row" id="detail-content-top">
+    {% include "trekking/fake_searchtabs_fragment.html" %}
 
-    <h1>{{ object.properties.name }}</h1>
+    <div class="offset4 span4">
+      <h2>{{ object.properties.name }}</h2>
+    </div>
+    <div class="span4">
+      <div id="toolbox">
+        <a class="btn" id="share" href=""><img src="{% static "img/partager.png" %}">{% trans "Share" %}</a>
+        <a class="btn" id="print" href="">{% trans "Print" %}<img src="{% static "img/imprimante.png" %}"></a>
+        <a class="btn" id="add-sac" href="">{% trans "Add to backpack" %}<img src="{% static "img/sacplus.png" %}"></a>
+      </div>
+    </div>
+  </div>
 
-    <a href="{% url trekking:fileserve object.gpx_url %}">{% trans "GPX" %}</a>
-    <a href="{% url trekking:fileserve object.kml_url %}">{% trans "KML" %}</a>
+  <div class="row">
+    <div class="span4">
+      <h3>{% trans "Teaser" %}</h3>
+      <p>{{ object.properties.description_teaser|safe }}</p>
+      <h3>{% trans "Description" %}</h3>
+      <p>{{ object.properties.description|safe }}</p>
+      <h3>{% trans "Ambiance" %}</h3>
+      <p>{{ object.properties.ambiance|safe }}</p>
+    </div>
 
-    <h3>{{ object.properties.departure }} -> {{ object.properties.arrival }}</h3>
+    <div class="span2">
+      <h3>{{ object.properties.departure }} -> {{ object.properties.arrival }}</h3>
 
-    <p>{% trans "Difficulty" %} : {{ object.properties.serializable_difficulty.label }}</p>
-    <p>{% trans "Transborder" %} : {{ object.properties.is_transborder }}</p>
-    <p>{% trans "Park centered" %} : {{ object.properties.is_park_centered }}</p>
-    <p>{% trans "Ascent" %} : {{ object.properties.ascent }}</p>
-    <p>{% trans "Descent" %} : {{ object.properties.descent }}</p>
-    <p>{% trans "Duration" %} : {{ object.properties.duration }}</p>
-    <p>{% trans "Min elevation" %} : {{ object.properties.min_elevation }}</p>
-    <p>{% trans "Max elevation" %} : {{ object.properties.max_elevation }}</p>
+      <p>{% trans "Difficulty" %} : {{ object.properties.serializable_difficulty.label }}</p>
+      <p>{% trans "Park centered" %} : {{ object.properties.is_park_centered }}</p>
+      <p>{% trans "Ascent" %} : {{ object.properties.ascent }}</p>
+      <p>{% trans "Descent" %} : {{ object.properties.descent }}</p>
+      <p>{% trans "Duration" %} : {{ object.properties.duration }}</p>
+      <p>{% trans "Min elevation" %} : {{ object.properties.min_elevation }}</p>
+      <p>{% trans "Max elevation" %} : {{ object.properties.max_elevation }}</p>
 
+      <h3>{% trans "Advice" %}</h3>
+      <p>{{ object.properties.advice|safe }}</p>
 
-    <h3>{% trans "Teaser" %}</h3>
-    <p>{{ object.properties.description_teaser|safe }}</p>
+      <h3>{% trans "Valleys" %}</h3>
+      {% for district in object.properties.serializable_districts %}
+      <li>{{ district.name }}</li>
+      {% endfor %}
 
-    <h3>{% trans "Description" %}</h3>
-    <p>{{ object.properties.description|safe }}</p>
+      <h3>{% trans "Usages" %}</h3>
+      {% for usage in object.properties.serializable_usages %}
+      <li>{{ usage.label }}</li>
+      {% endfor %}
 
-    <h3>{% trans "Ambiance" %}</h3>
-    <p>{{ object.properties.ambiance|safe }}</p>
+      <h3>{% trans "Themes" %}</h3>
+      {% for theme in object.properties.serializable_themes %}
+      <li>{{ theme.label }}</li>
+      {% endfor %}
 
-    <h3>{% trans "Advice" %}</h3>
-    <p>{{ object.properties.advice|safe }}</p>
+      <h3>{% trans "Web links" %}</h3>
+      {% for weblink in object.properties.serializable_weblinks %}
+      <li><a href="{{ weblink.url }}">{{ weblink.name }}</a></li>
+      {% endfor %}
 
-    <h3>{% trans "Valleys" %}</h3>
-    {% for district in object.properties.serializable_districts %}
-    <li>{{ district.name }}</li>
-    {% endfor %}
+      <h3>{% trans "Public transport" %}</h3>
+      <p>{{ object.properties.public_transport|safe }}</p>
 
-    <h3>{% trans "Usages" %}</h3>
-    {% for usage in object.properties.serializable_usages %}
-    <li>{{ usage.label }}</li>
-    {% endfor %}
+      <h3>{% trans "Disabled infrastructure" %}</h3>
+      <p>{{ object.properties.disabled_infrastructure|safe }}</p>
 
-    <h3>{% trans "Themes" %}</h3>
-    {% for theme in object.properties.serializable_themes %}
-    <li>{{ theme.label }}</li>
-    {% endfor %}
+      <h3>{% trans "Advised parking" %}</h3>
+      <p>{{ object.properties.advised_parking|safe }}</p>
+    </div>
 
-    <h3>{% trans "Web links" %}</h3>
-    {% for weblink in object.properties.serializable_weblinks %}
-    <li><a href="{{ weblink.url }}">{{ weblink.name }}</a></li>
-    {% endfor %}
+    <div class="span3">
+      {% leaflet_map 'detailmap' fitextent=False %}
 
-    <h3>{% trans "Public transport" %}</h3>
-    <p>{{ object.properties.public_transport|safe }}</p>
+      <div id="altitudegraph">
+          <h4>{% trans "Altitude profile" %}</h4>
+          <p class="axislabel">{% trans "Altitude (m)" %}</p>
+          <span id="profilealtitude"></span> <span class="axislabel" style="position:relative; top:85px">{% trans "Distance (m)" %}</span>
+          <p id="mouseoverprofil" class="axislabel" >&nbsp;</p>
+      </div>
+    </div>
 
-    <h3>{% trans "Disabled infrastructure" %}</h3>
-    <p>{{ object.properties.disabled_infrastructure|safe }}</p>
+    <div class="span3">
+      <div class="accordion" id="pois-accordion">
+        {% for poi in object.pois.all %}
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle acc-open" id="poi-item-{{ poi.properties.pk}}" data-toggle="collapse" data-parent="#pois-accordion" data-id="{{ poi.properties.pk }}" href="#collapseOne">
+              <img src="data:{{ poi.properties.serializable_type.pictogram }}" title="{{ poi.properties.serializable_type.label }}">{{ poi.properties.name }}</a>
+          </div>
+          <div id="collapseOne" class="accordion-body collapse" style="height: 0px; ">
+            <div class="accordion-inner"><p>{{ poi.properties.description|safe }}</p></div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      
 
-    <h3>{% trans "Advised parking" %}</h3>
-    <p>{{ object.properties.advised_parking|safe }}</p>
-
-    <h2>POIs</h2>
-    {% for poi in object.pois.all %}
-    <li>{{ poi.properties.name }} ({{ poi.properties.serializable_type.label }}) <img src="data:{{ poi.properties.serializable_type.pictogram }}"><p>{{ poi.properties.description|safe }}</p>
-    </li>
-    {% endfor %}
-
-    {% leaflet_map 'detailmap' fitextent=False %}
-
-    <div id="altitudegraph">
-        <h4>{% trans "Altitude profile" %}</h4>
-        <p class="axislabel">{% trans "Altitude (m)" %}</p>
-        <span id="profilealtitude"></span> <span class="axislabel" style="position:relative; top:85px">{% trans "Distance (m)" %}</span>
-        <p id="mouseoverprofil" class="axislabel" >&nbsp;</p>
+      <a href="{% url trekking:fileserve object.gpx_url %}">{% trans "GPX" %}</a>
+      <a href="{% url trekking:fileserve object.kml_url %}">{% trans "KML" %}</a>
     </div>
 
 </div>
