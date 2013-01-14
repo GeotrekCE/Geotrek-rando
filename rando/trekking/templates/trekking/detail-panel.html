@@ -17,8 +17,13 @@
         var poisLayer = new L.GeoJSON({{ poisjson|safe }});
         poisLayer.addTo(map);
 
+        var parkingIcon = L.icon({
+            iconUrl: '{% static "img/parking.png" %}',
+            iconSize: [24, 24],
+            iconAnchor: [0, 0],
+        });
         var parkingLocation = {{ object.properties.serializable_parking_location }};
-        L.marker([parkingLocation[1], parkingLocation[0]]).addTo(map);
+        L.marker([parkingLocation[1], parkingLocation[0]], {clickable: false, icon: parkingIcon}).addTo(map);
 
         //Load altimetric graph
         altimetricInit();
@@ -62,56 +67,47 @@
 
   <div class="row">
     <div class="span4">
-      <h3>{% trans "Teaser" %}</h3>
-      <p>{{ object.properties.description_teaser|safe }}</p>
-      <h3>{% trans "Description" %}</h3>
-      <p>{{ object.properties.description|safe }}</p>
-      <h3>{% trans "Ambiance" %}</h3>
-      <p>{{ object.properties.ambiance|safe }}</p>
+      <p class="teaser">{{ object.properties.description_teaser|default:"No teaser"|safe }}</p>
+      <p>{{ object.properties.description|default:"No description"|safe }}</p>
+      <p class="image"><img src="{% get_static_prefix %}/img/montagnes.jpg" class="img-polaroid"></p>
+      <p>{{ object.properties.ambiance|default:"No ambiance"|safe }}</p>
     </div>
 
     <div class="span2">
-      <h3>{{ object.properties.departure }} -> {{ object.properties.arrival }}</h3>
+      <div id="trek-identity">
+        <h4 id="departure-arrival">{{ object.properties.departure }} &rarr; {{ object.properties.arrival }}</h4>
+        
+        <p>{% trans "Valleys" %} : <span class="value">{% for district in object.properties.serializable_districts %}{{ district.name }}, {% endfor %}</span></p>
+        <p>{% trans "Difficulty" %} : <span class="value">{{ object.properties.serializable_difficulty.label }}</span></p>
+        <p>{% trans "Park centered" %} : <span class="value">{{ object.properties.is_park_centered }}</span></p>
+        <p>{% trans "Ascent" %} : <span class="value">{{ object.properties.ascent }}</span></p>
+        <p>{% trans "Descent" %} : <span class="value">{{ object.properties.descent }}</span></p>
+        <p>{% trans "Duration" %} : <span class="value">{{ object.properties.duration }}</span></p>
+        <p>{% trans "Min elevation" %} : <span class="value">{{ object.properties.min_elevation }}</span></p>
+        <p>{% trans "Max elevation" %} : <span class="value">{{ object.properties.max_elevation }}</span></p>
 
-      <p>{% trans "Difficulty" %} : {{ object.properties.serializable_difficulty.label }}</p>
-      <p>{% trans "Park centered" %} : {{ object.properties.is_park_centered }}</p>
-      <p>{% trans "Ascent" %} : {{ object.properties.ascent }}</p>
-      <p>{% trans "Descent" %} : {{ object.properties.descent }}</p>
-      <p>{% trans "Duration" %} : {{ object.properties.duration }}</p>
-      <p>{% trans "Min elevation" %} : {{ object.properties.min_elevation }}</p>
-      <p>{% trans "Max elevation" %} : {{ object.properties.max_elevation }}</p>
-
-      <h3>{% trans "Advice" %}</h3>
-      <p>{{ object.properties.advice|safe }}</p>
-
-      <h3>{% trans "Valleys" %}</h3>
-      {% for district in object.properties.serializable_districts %}
-      <li>{{ district.name }}</li>
-      {% endfor %}
-
-      <h3>{% trans "Usages" %}</h3>
-      {% for usage in object.properties.serializable_usages %}
-      <li>{{ usage.label }}</li>
-      {% endfor %}
-
-      <h3>{% trans "Themes" %}</h3>
-      {% for theme in object.properties.serializable_themes %}
-      <li>{{ theme.label }}</li>
-      {% endfor %}
-
-      <h3>{% trans "Web links" %}</h3>
-      {% for weblink in object.properties.serializable_weblinks %}
-      <li><a href="{{ weblink.url }}">{{ weblink.name }}</a></li>
-      {% endfor %}
-
-      <h3>{% trans "Public transport" %}</h3>
-      <p>{{ object.properties.public_transport|safe }}</p>
-
-      <h3>{% trans "Disabled infrastructure" %}</h3>
-      <p>{{ object.properties.disabled_infrastructure|safe }}</p>
-
-      <h3>{% trans "Advised parking" %}</h3>
-      <p>{{ object.properties.advised_parking|safe }}</p>
+        <h3>{% trans "Usages" %}</h3>
+        {% for usage in object.properties.serializable_usages %}
+        <li>{{ usage.label }}</li>
+        {% endfor %}
+        <h3>{% trans "Themes" %}</h3>
+        {% for theme in object.properties.serializable_themes %}
+        <li>{{ theme.label }}</li>
+        {% endfor %}
+      </div>
+      <div id="trek-advice">
+        <h3>{% trans "Advice" %}</h3>
+        {% if object.properties.advice %}<p>{{ object.properties.advice|safe }}</p>{% endif %}
+        {% if object.properties.public_transport %}<p>{{ object.properties.public_transport|safe }}</p>{% endif %}
+        {% if object.properties.disabled_infrastructure %}<p>{{ object.properties.disabled_infrastructure|safe }}</p>{% endif %}
+        {% if object.properties.advised_parking %}<p>{{ object.properties.advised_parking|safe }}</p>{% endif %}
+      </div>
+      <div id="trek-links">
+        <h3>{% trans "See also" %}</h3>
+        {% for weblink in object.properties.serializable_weblinks %}
+        <li><img src="{% get_static_prefix %}img/refuge.png"><a target="_blank" href="{{ weblink.url }}">{{ weblink.name }}</a></li>
+        {% endfor %}
+      </div>
     </div>
 
     <div class="span3">
@@ -141,8 +137,8 @@
       </div>
       
 
-      <a href="{% url trekking:fileserve object.gpx_url %}">{% trans "GPX" %}</a>
-      <a href="{% url trekking:fileserve object.kml_url %}">{% trans "KML" %}</a>
+      <p class="download"><a href="{% url trekking:fileserve object.gpx_url %}">{% trans "Download GPX" %}</a></p>
+      <p class="download"><a href="{% url trekking:fileserve object.kml_url %}">{% trans "Download for Google Earth" %}</a></p>
     </div>
 
 </div>

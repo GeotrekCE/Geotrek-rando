@@ -893,6 +893,13 @@ color:#625b50;
 
 .detail-content {
     background-color:#f6f7f0;
+    padding-bottom: 15px;
+    color: #80757d;
+}
+
+
+.detail-content h2, .detail-content h3, .detail-content h4 {
+  color: #494146;
 }
 
 #detail-content-top h2, #detail-content-top #toolbox {
@@ -902,11 +909,42 @@ color:#625b50;
 
 
 #detail-content-top h2 {
-  color: #494146;
   font-size: 22px;
   line-height: 36px;
   font-family:Arial, Helvetica, sans-serif;
 }
+
+.detail-content h3 {
+  font-size: 14px;
+  text-decoration: underline;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+p.teaser {
+  line-height:1.1;
+  font-size: 18px;
+  margin-left: 30px;
+  font-family: inherit;
+  font-weight: bold;
+  color: inherit;
+  text-rendering: optimizelegibility;
+}
+
+.detail-content p.image {
+  text-align: center;
+}
+
+#trek-identity p {
+  margin-bottom:0;
+  color:#80747c;
+}
+
+#trek-identity span.value {
+  color:#F77E00;
+  font-style: italic;
+}
+
 
 
 /*
@@ -1008,90 +1046,34 @@ a.accordion-toggle:hover  {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-.desc-fiche h3
-{
-  margin-top: 20px;
-  color:#80757d;
-  margin-left:30px;
-  line-height:1.1;
-}
-.desc-fiche p
-{
-  margin-left:30px;
-  color:#80757d;
-  margin-top:20px;
-}
-
-.fiche-info h4
-{
-  margin-left:30px;
-  margin-bottom:20px;
-  text-decoration:underline;
-  margin-top:30px;
-}
-.fiche-info h5
-{
-  margin-left:30px;
-  margin-bottom:10px;
-  
-}
-.fiche-info p
-{
-  margin-left:30px;
-  margin-bottom:0;
-  color:#80747c;
-}
-.fiche-info i
-{
-  color:#F77E00;
-}
-
-
-
-
-.download
-{
+.download {
   background:url("../img/download.png") no-repeat;
   padding-left:20px;
 }
-.download a
-{
+.download a {
   color:#63c1db;
 }
-.topoguide a, .refuge a, .bus a
-{
+
+#trek-links img {
+  padding-right: 5px;
+}
+
+#trek-links li {
+  list-style-type: none;
+}
+
+#trek-links a {
   color:#63c1db;
-  padding-left:20px;
-  
 }
-p.topoguide
-{
-  background:url(../img/typo.png) no-repeat;
-  margin-bottom:5px;
-}
-p.refuge
-{
-  background:url(../img/refuge.png) no-repeat;
-  margin-bottom:5px;
-}
-p.bus
-{
-  background:url(../img/bus.png) no-repeat -3px -1px;
-  margin-bottom:5px;
-  height:22px;
-}
+
+
+
+
+
+
+
+
+
 
 .popup-content
 {
@@ -1304,8 +1286,13 @@ p.bus
 
 
 
-
-
+.row-footer {
+  
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
 
 .part1
 {
