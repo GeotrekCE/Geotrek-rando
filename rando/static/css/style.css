@@ -578,7 +578,7 @@
 
 .side-bar .nav-tabs > #tab-results.active a
 {
-  background:url(../img/loupe-on.png) no-repeat 30px 5px;
+  background:url(../img/loupe-on.png) no-repeat 20px 50%;
   background-color: #F6F7F1;
   border-bottom:none;
   font-size: 11pt;
@@ -586,7 +586,7 @@
 }
 .side-bar .nav-tabs > #tab-results a
 {
-  background:url(../img/loupe-off.png) no-repeat 30px 5px;
+  background:url(../img/loupe-off.png) no-repeat 20px 50%;
   border-color: #80747C;
   color: #80747C;
     font-family: arial;
@@ -596,7 +596,7 @@
 
 .side-bar .nav-tabs > #tab-backpack.active a
 {
-  background:url(../img/sac-on.png) no-repeat 10% 5px;
+  background:url(../img/sac-on.png) no-repeat 20px 50%;
   background-color: #F6F7F1;
   border-bottom:none;
   font-weight:bold;
@@ -604,7 +604,7 @@
 }
 .side-bar .nav-tabs > #tab-backpack a
 {
-  background:url(../img/sac-off.png) no-repeat 10% 5px;
+  background:url(../img/sac-off.png) no-repeat 20px 50%;
   border-color:#80747c;
   color: #80747C;
     font-family: arial;
@@ -748,25 +748,9 @@ color:#625b50;
   margin-bottom: 5px;
 }
 
-.nb_sac
-{
-  position:absolute;
-  width:15px;
-  margin-left:10%;
-  margin-top:9px;
-  color: #80747C;
-    font-weight: bold;
+#result-backpack-tabs span.badge {
+  margin-right: 2px;
 }
-.nb_res
-{
-  position:absolute;
-  width:15px;
-  left:10%;
-  margin-top:9px;
-  color:#fe8a10;
-  font-weight:bold;
-}
-
 
 
 #search-bar label

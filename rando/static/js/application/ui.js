@@ -26,13 +26,6 @@ function init_ui() {
 }
 
 function page_load() {
-    $('#result-backpack-content .tab-pane').jScrollPane();
-
-    $('#result-backpack-tabs .nav-tabs a').click(function (e) {
-        e.preventDefault();
-        $(this).tab('show');
-    });
-
     layout();
 }
 
@@ -61,6 +54,15 @@ function view_home () {
     $('#container-content, #side-bar').css('top', $('#top-panel').height()+'px');
     $('#container-content, #side-bar').css("height", sidebar_h()+"px");
     $("#mainmap").show();  // We are on home with map
+
+    $('#result-backpack-content .tab-pane').jScrollPane();
+
+    $('#result-backpack-tabs .nav-tabs a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+        $(this).parents('ul.nav-tabs').find('span.badge-warning').removeClass('badge-warning');
+        $(this).find('span.badge').addClass('badge-warning');
+    });
     toggle_sidebar();
 }
 
