@@ -79,31 +79,31 @@
           <div class="theme">
             <label>{% trans "Thematic" %}</label>
             <div class="theme-icon">
-              <button class="btn filter-theme" id="cols" data-filter="theme" data-toggle="button"></button>
+              <button class="btn filter-theme" id="cols" data-id="1" data-filter="theme"></button>
               <p>Cols</p>
             </div>
             <div class="theme-icon">
-              <button class="btn filter-theme" id="sommet" data-filter="theme" data-toggle="button"></button>
+              <button class="btn filter-theme" id="sommet" data-id="2" data-filter="theme"></button>
               <p>Sommets</p>
             </div>
             <div class="theme-icon">
-              <button class="btn filter-theme" id="refug" data-filter="theme" data-toggle="button"></button>
+              <button class="btn filter-theme" id="refug" data-id="3" data-filter="theme"></button>
               <p>Refuges</p>
             </div>
             <div class="theme-icon">
-              <button class="btn filter-theme" id="flore" data-filter="theme" data-toggle="button"></button>
+              <button class="btn filter-theme" id="flore" data-id="4" data-filter="theme"></button>
               <p>Flaure</p>
             </div>
             <div class="theme-icon">
-              <button class="btn filter-theme" id="faune" data-filter="theme" data-toggle="button"></button>
+              <button class="btn filter-theme" id="faune" data-id="5" data-filter="theme"></button>
               <p>Faune</p>
             </div>
             <div class="theme-icon">
-              <button class="btn filter-theme" id="patr" data-filter="theme" data-toggle="button"></button>
+              <button class="btn filter-theme" id="patr" data-id="6" data-filter="theme"></button>
               <p>Patrimoine</p>
             </div>
             <div class="theme-icon">
-              <button class="btn filter-theme" id="lacs" data-filter="theme" data-toggle="button"></button>
+              <button class="btn filter-theme" id="lacs" data-id="7" data-filter="theme"></button>
               <p>Lacs</p>
             </div>
           </div>
@@ -113,15 +113,15 @@
           <div class="filter-bloc usage">
             <label>{% trans "Usage" %}</label>
             <div class="usage-icon">
-              <button class="btn filter-usage" id="velo" data-filter="usage" data-toggle="button"></button>
+              <button class="btn filter-usage" id="velo" data-id="1" data-filter="usage"></button>
               <p>vélo</p>
             </div>
             <div class="usage-icon">
-              <button class="btn filter-usage" id="vtt" data-filter="usage" data-toggle="button"></button>
+              <button class="btn filter-usage" id="vtt" data-id="2" data-filter="usage"></button>
               <p>VTT</p>
             </div>
             <div class="usage-icon">
-              <button class="btn filter-usage" id="cheval" data-filter="usage" data-toggle="button"></button>
+              <button class="btn filter-usage" id="cheval" data-id="3" data-filter="usage"></button>
               <p>Cheval</p>
             </div>
           </div>
@@ -220,7 +220,7 @@
       /*
        * A bunch of globals \o/
        */
-      var store = null,
+      var trekFilter = null,
           treks = {{ treksjson|safe }};
 
       $(document).ready(function (e) {

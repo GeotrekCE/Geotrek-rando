@@ -743,6 +743,9 @@ color:#625b50;
 {
   width:88%;
 }
+#search.active {
+  background-color: white;
+}
 
 #result-backpack-tabs ul.nav {
   margin-bottom: 5px;

@@ -1,258 +1,222 @@
 // JavaScript Document
-function storage()
+function TrekFilter()
 {
-	
-	var self = this;
-	var retrievedObject = localStorage.getItem('storeObject');
-	var retrievedObjectSlider = localStorage.getItem('storeSlider');
-	if((!retrievedObject)||(!retrievedObjectSlider))
-	{
-		this.state = {"theme":{"cols":"0","sommet":"0","refug":"0","flore":"0","faune":"0","patr":"0","lacs":"0"},
-					  "usage":{"velo":"0","vtt":"0","cheval":"0"},
-					  "valle":{"Brianconnais":"0","Champsaur":"0","Embrunais":"0","Oisans":"0","Valbonnais":"0","vallouise":"0","Valgaudemar":"0"},
-					  "access":{"f":"0","p":"0"},
-					  "trans":{"trans":"0"},"boucle":{"boucle":"0"}
-					  };
-		this.sliderState = {"stage":{"min":"0","max":"0"},
-							"time":{"min":"0","max":"0"},
-							"den":{"min":"0","max":"0"}
-					  };
-		localStorage.setItem('storeObject', JSON.stringify(self.state));
-		localStorage.setItem('storeSlider',JSON.stringify(self.sliderState));
-	}
-	else 
-	{
-		this.state = JSON.parse(retrievedObject);
-		this.sliderState = JSON.parse(retrievedObjectSlider);
-	}
+    
+    var self = this;
+
+    this.initEvents = function () {
+        $(".theme .btn, .vallee .btn, .access .btn, .usage .btn").on('click', self.filterChanged);
+        $(".boucle input").on('click', self.filterChanged);
+        $('#search').on("keyup", self.filterChanged);
+    }
+
+    this.save = function ()
+    {
+        localStorage.setItem('filterState', JSON.stringify(self.state));
+        $(self).trigger("filterchange");
+    }
+
+    this.load = function () {
+        var retrievedObject = localStorage.getItem('filterState');
+        self.state = retrievedObject ? JSON.parse(retrievedObject) : {};
+        if (!('sliders' in self.state)) {
+           self.state['sliders'] = {};
+        }
+        for (category in self.state) {
+            for (filter in self.state[category]) {
+                var value = self.state[category][filter],
+                    elem = $('#' + filter);
+
+                if (elem.is('input')) {
+                    elem.attr('checked', !!value);
+                }
+                else if (elem.hasClass('ui-slider')) {
+                    elem.slider('values', 0, value.min);
+                    elem.slider('values', 0, value.max);
+                }
+                else {
+                    if (value)
+                        elem.addClass('active');
+                    else
+                        elem.removeClass('active');
+                }
+            }
+        }
+    }
+
+    this.filterChanged = function (e) {
+        var category =$(e.target).data("filter");
+        if (!(category in self.state)) {
+            self.state[category] = {};
+        }
+        var dataid = $(e.target).data("id");
+
+        if ($(e.target).is("input[type='checkbox']")) {
+            self.state[category][dataid] = $(e.target)[0].checked;
+        }
+        else if ($(e.target).attr("id") == 'search') {
+            self.state[category] = $(e.target).val();
+        }
+        else {
+            $(e.target).toggleClass('active');
+            self.state[category][dataid] = $(e.target).hasClass("active");
+        }
+        self.save();
+    }
+
+    this.sliderChanged = function(minVal, maxVal, name, slider)
+    {
+        if (!(name in self.state['sliders'])) {
+            self.state['sliders'][name] = {};
+        }
+        self.state['sliders'][name]['min'] = minVal;
+        self.state['sliders'][name]['max'] = maxVal;
+        self.save();
+    }
 
 
-	this.ChangeStateTheme = function ()
-		{
-			$(".theme .btn, .vallee .btn, .access .btn, .usage .btn").on('click',self.save);
-			$(".trans input, .boucle input").on('click',self.save);
-			$('#search').on("change", self.save);
-			self.loadFilter();
-		}	
-	
-/***************** Function To save Slider state*********************/
-	this.SaveSlider = function(minVal,maxVal,e)
-	{
-		self.sliderState[e]["min"] = minVal;
-		self.sliderState[e]["max"] = maxVal;
-		localStorage.setItem('storeSlider', JSON.stringify(self.sliderState));
-	}
-/*****************Function To save Filter***************************/
-	this.save = function ()
-	{
-		var filtre =$(this).data("filter");
-		var Elem = $(this).attr("id");
-		if( $(this)[0].nodeName.toLowerCase() === 'input' ) 
-		{
-			if( $(this)[0].checked)
-			{
-				self.state[filtre][Elem] = "1";
-			}else
-			{
-				self.state[filtre][Elem] = "0";
-			}
-		}else
-		{
-		
-			if ($(this).hasClass("active"))
-			{
-				self.state[filtre][Elem] = "0";
-			}else{
-				self.state[filtre][Elem] = "1";
-			}
-		}
-		localStorage.setItem('storeObject', JSON.stringify(self.state));
-		$(self).trigger("filterchange");
-	}
-/****************Function To load Filter*************************/
-	this.loadFilter = function()
-	{
-		var retrievedObject = localStorage.getItem('storeObject');
-		var myObject = JSON.parse(retrievedObject);	
-		for(key in myObject){
-			for (i in myObject[key])
-			{
-				if (myObject[key][i]== 1)
-				{
-					
-					if($('#'+i).is("input"))
-					{
-						$('#'+i).attr('checked', true);
 
-					}
-					$('#'+i).addClass('active');
-					
-				}
-			}
-		}
-	}
-/****************Function To load Slider*****************************/	
-	this.loadSlider = function()
-	{
-		var retrievedObjectSlider = localStorage.getItem('storeSlider');
-		var myObjectSlider = JSON.parse(retrievedObjectSlider);
-		$( "#stage" ).slider( "values", 0, myObjectSlider.stage.min);
-		$( "#stage" ).slider( "values", 1, myObjectSlider.stage.max);
-		for(keySlider in myObjectSlider){
-			$( "#"+keySlider ).slider( "values", 0, myObjectSlider[keySlider]["min"]);
-			$( "#"+keySlider ).slider( "values", 1, myObjectSlider[keySlider]["max"]);
-		}
-	}
-	
-	
-/********************* Match Stage ***********************************/
-	this.matchStage = function (trek)
-	{
-		var minStage = this.sliderState.stage.min;
-		var maxStage = this.sliderState.stage.max;
-		
-		var trekDifficulty = trek.properties.serializable_difficulty.id;
-		if  (!trekDifficulty) return true;
-		return trekDifficulty >= minStage && trekDifficulty <= maxStage;
-	}
-/*********************** Match Theme *********************************/	
-	this.matchTheme = function (trek)
-	{	
-		var themeArray = [];
-		
-		for (i in this.state.theme)
-		{
-			if (this.state.theme[i] == "1")
-			{
-				themeArray.push(i);
-				//console.log(themeArray);
-			}
-		}
-		for (key in trek.properties.serializable_themes)
-				{
-					if($.inArray (trek.properties.serializable_themes[key].label,themeArray) != -1)
-						{
-							return true;
-						}
-				}
-	}
-/**************** Function Match Usage ***************************/
-	this.matchUsage = function (trek)
-	{
-		var usageArray = [];
-		for (i in this.state.usage)
-		{
-			if (this.state.usage[i] == "1")
-			{
-				usageArray.push(i);
-			}
-		}
-		if (usageArray.length == 0)
-			return true;
-		
-		for (key in trek.properties.serializable_usages)
-				{
-					if($.inArray (trek.properties.serializable_usages[key].label,usageArray) != -1)
-						{
-							return true;
-						}
-				}
-				
-		return false;
-	}
-/**************** Function Match Valle ***************************/
-	this.matchDistrict = function (trek)
-	{
-		var valleArray = [];
-		
-		for (i in this.state.valle)
-		{
-			if (this.state.valle[i] == "1")
-			{
-				valleArray.push(i);
-			}
-		}
-		for (key in trek.properties.serializable_districts)
-				{
-					if($.inArray (trek.properties.serializable_districts[key].name,valleArray) != -1)
-						{
-							return true;
-						}
-				}
-	}
+    this.matchStage = function (trek) {
+        var minStage = this.state.sliders.stage.min;
+        var maxStage = this.state.sliders.stage.max;
+        
+        var trekDifficulty = trek.properties.serializable_difficulty.id;
+        if  (!trekDifficulty) return true;
+        return trekDifficulty >= minStage && trekDifficulty <= maxStage;
+    }
+
+    this.matchDuration = function (trek) {
+        var minDuration = this.state.sliders.time.min;
+        var maxDuration = this.state.sliders.time.max;
+        var matching = {
+            1:12,
+            2:24,
+            3:48,
+        };
+        var trekDuration = trek.properties.duration;
+        if (minDuration == 0) {
+            if (maxDuration == 4) {
+                return true;
+            }
+            if (maxDuration == 0) {
+                return trekDuration <= 12;
+            } 
+            return trekDuration <= matching[maxDuration];
+        }
+
+        if (minDuration == 4) {
+            return trekDuration >= 48;
+        } 
+        if (maxDuration == 4) {
+            return trekDuration >= matching[minDuration];
+        }
+        return trekDuration >= matching[minDuration] && trekDuration <= matching[maxDuration];
+    }
+
+    this.matchClimb = function (trek) {
+        var minClimb = this.state.sliders.den.min;
+        var maxClimb = this.state.sliders.den.max;
+
+        var matching = {
+            1:200,
+            2:700,
+        };
+        var trekClimb = trek.properties.duration;
+        if (minClimb == 0) {
+            if (maxClimb == 3) {
+                return true;
+            }
+            if (maxClimb == 0) {
+                return trekClimb <= 200;
+            } 
+            return trekClimb <= matching[maxClimb];
+        }
+
+        if (minClimb == 3) {
+            return trekClimb >= 1000;
+        } 
+        if (maxClimb == 3) {
+            return trekClimb >= matching[minClimb];
+        }
+        return trekClimb >= matching[minClimb] && trekClimb <= matching[maxClimb];
+    }
+
+    this._matchList = function (trek, category, property) {
+        // All deselected, means always match !
+        if ($('.' + category + ' .active').length == 0)
+            return true;
+
+        var list = [];
+        for (filter in this.state[category]) {
+            if (this.state[category][filter] === true) {
+                list.push(filter);
+            }
+        }
+        // If at least, one is among selected, then it matches !
+        for (var i=0; i<trek.properties[property].length; i++) {
+            var item = trek.properties[property][i];
+            if ($.inArray(''+item.id, list) != -1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 /**************** Function Match Boucle ***************************/
-	this.matchLoop = function (trek)
-	{
-		return (trek.properties.is_loop == (this.state.boucle  == "1"));
-	}
+    this.matchLoop = function (trek)
+    {
+        return true; /// return (trek.properties.is_loop == (this.state.boucle  == "1"));
+    }
 
-/**************** Function Match Duration ***************************/
-	this.matchDuration = function (trek)
-	{
-		var minDuration = this.sliderState.time.min;
-		var maxDuration = this.sliderState.time.max;
-		var matching = {
-			5:12,
-			10:24,
-			15:48,
-			};
-		var trekDuration = trek.properties.duration;
-		if (minDuration == 0)
-		{
-			if (maxDuration== 20)
-			{	
-				return true;
-			}
-			if (maxDuration== 0)
-			{
-				return trekDuration <= 12;
-			} 
-			return trekDuration <= matching[maxDuration];
-		}
-			
-			if (minDuration== 20)
-			{
-				return trekDuration >= 48;  
-			} 
-			if (maxDuration== 20)
-			{
-				return trekDuration >= matching[minDuration];
-			}
-			return trekDuration >= matching[minDuration] && trekDuration <= matching[maxDuration];
-		
-		
-	}
-	
 /************************Funcction Search ************************/
-	this.search = function (trek) {
-		var searched = $('#search').val();
-			for (i in trek.properties.serializable_districts)
-			{
-				if (trek.properties.serializable_districts[i].name.toUpperCase().indexOf(searched.toUpperCase())!= -1)
-				return true;
-			}
-			if ((trek.properties.name.toUpperCase().indexOf(searched.toUpperCase())!= -1) || 
-			   (trek.properties.departure.toUpperCase().indexOf(searched.toUpperCase())!= -1) ||
-			   (trek.properties.arrival.toUpperCase().indexOf(searched.toUpperCase())!= -1)) {
-				return true;
-			}
-			return false;
-		}
+    this.search = function (trek) {
+        var searched = this.state.search;
+        if (!searched) return true;
 
-/****************Function to Match filters **************************/
-	
-	this.match = function(trek)
-	{
-		if (this.matchStage(trek) && 
-			this.matchTheme(trek) &&
-			this.matchDuration(trek) &&
-			this.matchUsage(trek) &&
-			this.matchLoop(trek)&&
-			this.matchDistrict(trek) &&
-			this.search(trek)
-			)
-		 	return true;
-		return false;
-		
-	}
+        var simplematch = function (property) {
+            var needle = property.replace(/^\s+|\s+$/g, '');
+            return needle.toUpperCase().indexOf(searched.toUpperCase()) != -1;
+        }
+        
+        var props = ['name', 'departure', 'arrival', 'ambiance', 
+                       'description_teaser', 'description', 'access', 'advice'];
+        for (var i=0; i<props.length; i++) {
+            var prop = props[i];
+            if ((prop in trek.properties) && simplematch(trek.properties[prop]))
+                return true;
+        }
+
+        // District
+        for (var i=0; i<trek.properties.serializable_districts.length; i++) {
+            var district = trek.properties.serializable_districts[i];
+            if (simplematch(district.name))
+                return true;
+        }
+
+        /*
+         TODO :
+            NOM POIs
+            COMMENTAIRE des POIs
+            COMMUNE
+        */
+        return false;
+    }
+
+
+    this.match = function(trek) {
+        if (this.matchStage(trek) && 
+            this.matchDuration(trek) &&
+            this.matchClimb(trek) &&
+            this._matchList(trek, 'theme', 'serializable_themes') &&
+            this._matchList(trek, 'usage', 'serializable_usages') &&
+            this._matchList(trek, 'valle', 'serializable_districts') &&
+            this.matchLoop(trek) &&
+            this.search(trek)
+            )
+             return true;
+        return false;
+    }
+
+    this.load();
+    this.initEvents();
 };

@@ -1,6 +1,7 @@
 # Django settings for rando project.
-
 import os
+from django.core.exceptions import ImproperlyConfigured
+
 
 PROJECT_PATH = os.path.dirname(__file__)
 
@@ -189,3 +190,11 @@ TEST_RUNNER = 'rando.testing.DatabaselessTestRunner'
 CAMINAE_SERVER = 'localhost:8000'
 INPUT_DATA_ROOT = os.path.join(MEDIA_ROOT, 'input')
 FLATPAGES_ROOT = os.path.join(MEDIA_ROOT, 'pages')
+
+try:
+    from settings_local import *
+except ImportError:
+    try:
+        from settings_production import *
+    except ImportError:
+        raise ImproperlyConfigured("Missing local or production settings.")

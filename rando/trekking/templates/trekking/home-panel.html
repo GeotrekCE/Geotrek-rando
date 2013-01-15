@@ -28,7 +28,7 @@
       <div class="control-group">
         <div class="controls">
           <div class="input-prepend"> <span class="add-on"> <i class="icon-search"></i> </span>
-            <input type="search" class="span3" placeholder="{% trans "Name, Valley, ..."%}" name="search" id="search"/>
+            <input type="search" class="span3" placeholder="{% trans "Name, Valley, ..."%}" data-filter="search" id="search"/>
           </div>
         </div>
       </div>
@@ -39,7 +39,7 @@
     <ul class="nav nav-tabs">
       <li id="tab-results" class="active">
         <a href="#results-pane">
-            <span class="badge badge-warning">7</span> {% trans "Results" %}</a>
+            <span class="badge badge-warning">{{ treks|length }}</span> {% trans "Results" %}</a>
       </li>
       <li id="tab-backpack">
         <a href="#backpack-pane">

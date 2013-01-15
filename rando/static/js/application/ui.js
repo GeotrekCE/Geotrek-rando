@@ -4,24 +4,27 @@ function init_ui() {
     toggle_filters();
     sliders();
 
-    window.store = new storage();
-    window.store.ChangeStateTheme();
-    window.store.loadSlider();
+    window.trekFilter = new TrekFilter();
 
-    $(store).on("filterchange",function(e) {
-        $.each(window.treks, function (i, trek) {
-          var trekid = trek.properties.pk;
-          if (window.store.match(trek)) {
-            $('#trek-'+trekid).show();
-          }
-          else {
-            $('#trek-'+trekid).hide();
-          }
-        });
+    $(window.trekFilter).on("filterchange", function(e) {
+        var nb = 0;
+        for(var i=0; i<treks.features.length; i++) {
+            var trek = treks.features[i],
+                trekid = trek.properties.pk;
+            if (window.trekFilter.match(trek)) {
+                $('#trek-'+trekid).show();
+                nb++;
+            }
+            else {
+                $('#trek-'+trekid).hide();
+            }
+        }
+        // Refresh label with number of results
+        $('#tab-results span.badge').html(nb);
     });
 
     $(window).on('resize', function() {
-      layout();
+        layout();
     });
 }
 
@@ -140,9 +143,10 @@ function toggle_filters() {
 
 function  sliders() {
     var saveSlider = function (event, ui) {
-        window.store.SaveSlider(ui.values[0],
-                                ui.values[1],
-                                $(this).data("filter"));
+        window.trekFilter.sliderChanged(ui.values[0],
+                                        ui.values[1],
+                                        $(this).data("filter"),
+                                        $(this));
     };
 
     $( "#stage" ).slider({
@@ -156,19 +160,19 @@ function  sliders() {
 
     $( "#time" ).slider({
         range: true,
-        step: 5, 
+        step: 1, 
         min: 0,
-        max: 20,
-        values: [ 0, 10 ],
+        max: 4,
+        values: [ 0, 4 ],
         slide: saveSlider,
     });
 
     $( "#den" ).slider({
         range: true,
-        step: 1.35, 
+        step: 1, 
         min: 0,
-        max: 4,
-        values: [ 1, 1 ],
+        max: 3,
+        values: [ 0, 3 ],
         slide: saveSlider,
     });
 };
