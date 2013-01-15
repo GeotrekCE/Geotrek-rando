@@ -43,7 +43,7 @@
       </li>
       <li id="tab-backpack">
         <a href="#backpack-pane">
-            <span class="badge">4</span>{% trans "Backpack" %}</a>
+            <span class="badge">0</span>{% trans "Backpack" %}</a>
       </li>
       <li id="tab-showhidepanel">
         <a id="hide-side-bar" href="#" data-toggle="tab">.</a>
@@ -53,13 +53,13 @@
     <div id="result-backpack-content" class="tab-content">
       <div class="tab-pane active" id="results-pane">
         {% for trek in treks %}
-            {% include "trekking/trek_result_fragment.html" %}
+            {% include "trekking/trek_result_fragment.html" with show="True" %}
         {% endfor %}
       </div>
 
       <div class="tab-pane" id="backpack-pane">
         {% for trek in treks %}
-            {% include "trekking/trek_result_fragment.html" %}
+            {% include "trekking/trek_result_fragment.html" with show="False" %}
         {% endfor %}
       </div>
     </div>

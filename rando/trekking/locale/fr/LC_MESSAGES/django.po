@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-14 10:14+0100\n"
+"POT-Creation-Date: 2013-01-15 10:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: templates/trekking/base.html:41
+#: templates/trekking/base.html:41 templates/trekking/detail-panel.html:107
 msgid "Share"
 msgstr "Partager"
 
@@ -26,11 +26,11 @@ msgstr "Partager"
 msgid "Filters"
 msgstr "Filtres"
 
-#: templates/trekking/base.html:52 templates/trekking/detail-panel.html:58
+#: templates/trekking/base.html:52 templates/trekking/detail-panel.html:132
 msgid "Difficulty"
 msgstr "Difficulté"
 
-#: templates/trekking/base.html:60 templates/trekking/detail-panel.html:63
+#: templates/trekking/base.html:60 templates/trekking/detail-panel.html:135
 msgid "Duration"
 msgstr "Durée"
 
@@ -58,92 +58,81 @@ msgstr "Accessibilité"
 msgid "Loop"
 msgstr "Boucle"
 
-#: templates/trekking/detail-panel.html:53
-msgid "GPX"
+#: templates/trekking/detail-panel.html:108
+msgid "Print"
 msgstr ""
 
-#: templates/trekking/detail-panel.html:54
-msgid "KML"
-msgstr ""
+#: templates/trekking/detail-panel.html:109
+#, fuzzy
+msgid "Add to backpack"
+msgstr "Sac à dos"
 
-#: templates/trekking/detail-panel.html:59
-msgid "Transborder"
-msgstr ""
+#: templates/trekking/detail-panel.html:126
+msgid "This trek is within park center"
+msgstr "Cet itinéraire est au coeur du parc"
 
-#: templates/trekking/detail-panel.html:60
-msgid "Park centered"
-msgstr ""
+#: templates/trekking/detail-panel.html:126
+msgid "please read access rules."
+msgstr "veuillez consulter la réglémentation."
 
-#: templates/trekking/detail-panel.html:61
-msgid "Ascent"
-msgstr ""
-
-#: templates/trekking/detail-panel.html:62
-msgid "Descent"
-msgstr ""
-
-#: templates/trekking/detail-panel.html:64
-msgid "Min elevation"
-msgstr ""
-
-#: templates/trekking/detail-panel.html:65
-msgid "Max elevation"
-msgstr ""
-
-#: templates/trekking/detail-panel.html:68
-msgid "Teaser"
-msgstr ""
-
-#: templates/trekking/detail-panel.html:71
-msgid "Description"
-msgstr ""
-
-#: templates/trekking/detail-panel.html:74
-msgid "Ambiance"
-msgstr ""
-
-#: templates/trekking/detail-panel.html:77
-msgid "Advice"
-msgstr ""
-
-#: templates/trekking/detail-panel.html:80
+#: templates/trekking/detail-panel.html:131
 msgid "Valleys"
 msgstr "Valleys"
 
-#: templates/trekking/detail-panel.html:85
+#: templates/trekking/detail-panel.html:133
+msgid "Ascent"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:134
+msgid "Descent"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:136
+msgid "Min elevation"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:137
+msgid "Max elevation"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:139
 msgid "Usages"
 msgstr "Usages"
 
-#: templates/trekking/detail-panel.html:90
+#: templates/trekking/detail-panel.html:143
 msgid "Themes"
 msgstr ""
 
-#: templates/trekking/detail-panel.html:95
-msgid "Web links"
+#: templates/trekking/detail-panel.html:149
+msgid "Advice"
 msgstr ""
 
-#: templates/trekking/detail-panel.html:100
-msgid "Public transport"
+#: templates/trekking/detail-panel.html:156
+msgid "See also"
 msgstr ""
 
-#: templates/trekking/detail-panel.html:103
-msgid "Disabled infrastructure"
-msgstr ""
-
-#: templates/trekking/detail-panel.html:106
-msgid "Advised parking"
-msgstr ""
-
-#: templates/trekking/detail-panel.html:118
+#: templates/trekking/detail-panel.html:167
 msgid "Altitude profile"
 msgstr ""
 
-#: templates/trekking/detail-panel.html:119
+#: templates/trekking/detail-panel.html:168
 msgid "Altitude (m)"
 msgstr ""
 
-#: templates/trekking/detail-panel.html:120
+#: templates/trekking/detail-panel.html:169
 msgid "Distance (m)"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:190
+msgid "Download GPX"
+msgstr ""
+
+#: templates/trekking/detail-panel.html:191
+msgid "Download for Google Earth"
+msgstr ""
+
+#: templates/trekking/home-panel.html:31
+msgid "Name, Valley, ..."
 msgstr ""
 
 #: templates/trekking/home-panel.html:42

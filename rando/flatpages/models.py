@@ -30,17 +30,26 @@ class FlatPageManager(object):
         dirlist = []
         if os.path.exists(path):
             dirlist = os.listdir(path)
+        i = 0
         for fname in dirlist:
             fullpath = os.path.join(path, fname)
             with open(fullpath, 'r') as f:
                 content = f.read()
-            title = os.path.splitext(fname)[0]
-            title = re.sub(r"^\d+", '', title)
-            yield self.klass(title, content)
+            basename = os.path.splitext(fname)[0]
+            m = re.search(r'^(\d+)-(.+)', basename)
+            if m:
+                title = m.group(0)
+                pk = m.group(1)
+            else:
+                title = basename
+                pk = i
+            i += 1
+            yield self.klass(pk, title, content)
 
 
 class FlatPage(object):
-    def __init__(self, title, content):
+    def __init__(self, pk, title, content):
+        self.pk = pk
         self.title = title
         self.content = content
 

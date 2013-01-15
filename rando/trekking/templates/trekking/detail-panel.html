@@ -121,16 +121,20 @@
 
     <div class="span2">
       <div id="trek-identity">
+        {% if object.properties.is_park_centered %}
+          <div class="alert alert-info">
+            <p>{% trans "This trek is within park center" %}, <a class="pjax" href="{% url flatpages:redirect "1" %}">{% trans "please read access rules." %}</a></p>
+          </div>
+        {% endif %}
         <h4 id="departure-arrival">{{ object.properties.departure }} &rarr; {{ object.properties.arrival }}</h4>
         
         <p>{% trans "Valleys" %} : <span class="value">{% for district in object.properties.serializable_districts %}{{ district.name }}, {% endfor %}</span></p>
         <p>{% trans "Difficulty" %} : <span class="value">{{ object.properties.serializable_difficulty.label }}</span></p>
-        <p>{% trans "Park centered" %} : <span class="value">{{ object.properties.is_park_centered }}</span></p>
-        <p>{% trans "Ascent" %} : <span class="value">{{ object.properties.ascent }}</span></p>
-        <p>{% trans "Descent" %} : <span class="value">{{ object.properties.descent }}</span></p>
-        <p>{% trans "Duration" %} : <span class="value">{{ object.properties.duration }}</span></p>
-        <p>{% trans "Min elevation" %} : <span class="value">{{ object.properties.min_elevation }}</span></p>
-        <p>{% trans "Max elevation" %} : <span class="value">{{ object.properties.max_elevation }}</span></p>
+        <p>{% trans "Ascent" %} : <span class="value">{{ object.properties.ascent }}m</span></p>
+        <p>{% trans "Descent" %} : <span class="value">{{ object.properties.descent }}m</span></p>
+        <p>{% trans "Duration" %} : <span class="value">{{ object.properties.duration }}H</span></p>
+        <p>{% trans "Min elevation" %} : <span class="value">{{ object.properties.min_elevation }}m</span></p>
+        <p>{% trans "Max elevation" %} : <span class="value">{{ object.properties.max_elevation }}m</span></p>
 
         <h3>{% trans "Usages" %}</h3>
         {% for usage in object.properties.serializable_usages %}

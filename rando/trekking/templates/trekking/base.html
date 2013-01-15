@@ -232,11 +232,11 @@
           page_load();
           // Try a custom lazy load
           var mainmapContainer = L.DomUtil.get('mainmap');
-          if (mainmapContainer && loadmapmainmap) {
+          if (mainmapContainer && typeof(loadmapmainmap) == "function") {
               if (!mainmapContainer._leaflet) loadmapmainmap();
           }
           var detailmapContainer = L.DomUtil.get('detailmap');
-          if (detailmapContainer && loadmapdetailmap) {
+          if (detailmapContainer && typeof(loadmapdetailmap) == "function") {
               if (!detailmapContainer._leaflet) loadmapdetailmap();
           }
       });
