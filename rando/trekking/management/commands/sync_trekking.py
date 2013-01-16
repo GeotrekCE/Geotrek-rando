@@ -102,8 +102,9 @@ class TrekInputFile(InputFile):
 
             # Remove serializable_ in properties names
             for key in properties.keys():
-                properties[key.replace('serializable_')] = properties[key]
-                properties.pop(key)
+                if 'serializable_' in key:
+                    properties[key.replace('serializable_', '')] = properties[key]
+                    properties.pop(key)
 
             # Detail properties
             detailpath = models.Trek.detailpath.format(pk=pk)
@@ -123,7 +124,7 @@ class TrekInputFile(InputFile):
                                    'type': poiprop['serializable_type']['label']}
                                   for poiprop in poisprops]
 
-            properties['slug'] = '%s-%s' % (properties['pk'],
+            properties['slug'] = '%s-%s' % (pk,
                                             slugify(properties['name']))
             if properties.get('published'):
                 feature['properties'] = properties

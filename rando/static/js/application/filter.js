@@ -5,9 +5,9 @@ function TrekFilter()
     var self = this;
 
     this.initEvents = function () {
-        $(".theme .btn, .vallee .btn, .access .btn, .usage .btn").on('click', self.filterChanged);
-        $(".boucle input").on('click', self.filterChanged);
-        $('#search').on("keyup", self.filterChanged);
+        $(".theme .btn, .vallee .btn, .access .btn, .usage .btn").unbind('click').on('click', self.filterChanged);
+        $(".boucle input").unbind('click').on('click', self.filterChanged);
+        $('#search').unbind('keyup').on("keyup", self.filterChanged);
     }
 
     this.save = function ()
@@ -25,14 +25,14 @@ function TrekFilter()
         for (category in self.state) {
             for (filter in self.state[category]) {
                 var value = self.state[category][filter],
-                    elem = $('#' + filter);
+                    elem = $("[data-id='" + filter + "']");
 
                 if (elem.is('input')) {
                     elem.attr('checked', !!value);
                 }
                 else if (elem.hasClass('ui-slider')) {
                     elem.slider('values', 0, value.min);
-                    elem.slider('values', 0, value.max);
+                    elem.slider('values', 1, value.max);
                 }
                 else {
                     if (value)
@@ -42,6 +42,7 @@ function TrekFilter()
                 }
             }
         }
+        this.initEvents();
     }
 
     this.filterChanged = function (e) {
@@ -75,8 +76,8 @@ function TrekFilter()
     }
 
 
-
     this.matchStage = function (trek) {
+        if (!this.state.sliders.stage) return true;
         var minStage = this.state.sliders.stage.min;
         var maxStage = this.state.sliders.stage.max;
         
@@ -86,6 +87,7 @@ function TrekFilter()
     }
 
     this.matchDuration = function (trek) {
+        if (!this.state.sliders.time) return true;
         var minDuration = this.state.sliders.time.min;
         var maxDuration = this.state.sliders.time.max;
         var matching = {
@@ -114,6 +116,7 @@ function TrekFilter()
     }
 
     this.matchClimb = function (trek) {
+        if (!this.state.sliders.den) return true;
         var minClimb = this.state.sliders.den.min;
         var maxClimb = this.state.sliders.den.max;
 
@@ -236,7 +239,4 @@ function TrekFilter()
              return true;
         return false;
     }
-
-    this.load();
-    this.initEvents();
 };

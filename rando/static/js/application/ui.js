@@ -23,6 +23,8 @@ function init_ui() {
         $('#tab-results span.badge').html(nb);
     });
 
+    window.trekFilter.load();
+
     $(window).on('resize', function() {
         layout();
     });
