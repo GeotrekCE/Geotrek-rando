@@ -58,6 +58,8 @@ function view_home () {
     $('#container-content').css('position', 'fixed');
     $('#container-content, #side-bar').css('top', $('#top-panel').height()+'px');
     $('#container-content, #side-bar').css("height", sidebar_h()+"px");
+    $('#show-side-bar').css("top", ($('#text-search').height()-sidebar_h())+"px");
+
     $("#mainmap").show();  // We are on home with map
 
     $('#result-backpack-content .tab-pane').jScrollPane();
@@ -116,7 +118,7 @@ function toggle_sidebar() {
         $('.side-bar').animate({
             left:'0'
         });
-        $("show-side-bar").hide(100);
+        $("#show-side-bar").hide(100);
         // Result tab as active
         $("#tab-results a").click();
     });

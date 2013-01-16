@@ -630,7 +630,7 @@
   background:url(../img/triangleresultatdroite.png) no-repeat 1px 3px;
   background-color:#f2f3ed;
   border: 2px solid #80747C;
-  z-index: 100;
+  z-index: 1100;
   cursor:pointer;
 }
 
