@@ -675,13 +675,6 @@ color:#625b50;
 
 
 
-.side-bar .search1 .add-on
-{
-  float:right;
-  border-radius:0;
-  margin-right: 10px;
-  background:#7f747c;
-}
 
 .side-bar .result:hover {
   background: #e7e9a0;
@@ -709,14 +702,17 @@ color:#625b50;
 {
   margin-top : 20px;
 }
-.search .span4 .add-on
+
+.side-bar .search1 .add-on
 {
   border:none;
-  background:none;
   position:relative;
-  z-index: 500;
-  margin-right:-30px;
+  float:right;
+  border-radius:0;
+  margin-right: 5px;
+  background: #7f747c;
 }
+
 .search input.span3
 {
   width:180px;
@@ -741,7 +737,8 @@ color:#625b50;
 }
 .search1 #search
 {
-  width:88%;
+  width: 87%;
+  margin-left: 5px;
 }
 #search.active {
   background-color: white;

@@ -82,6 +82,7 @@ class POIs(JSONModel):
 
 class Trek(JSONModel):
     filepath = 'api/trek/trek.geojson'
+    detailpath = 'api/trek/trek-{pk}.json'
 
     @property
     def pois(self):

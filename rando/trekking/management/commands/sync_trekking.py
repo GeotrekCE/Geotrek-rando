@@ -43,6 +43,9 @@ class InputFile(object):
         self.path = join(settings.INPUT_DATA_ROOT, self.language, url)
 
     def pull_if_modified(self):
+        self.pull(ifmodified=True)
+
+    def pull(self, ifmodified=False):
         """
         Pull a file served by a Caminae server.
 
@@ -51,13 +54,14 @@ class InputFile(object):
         headers = {}
         if self.language:
             headers.update({'Accept-language' : self.language})
-        try:
-            mtime = getmtime(self.path)
-            headers.update({'if-modified-since': http_date(mtime)})
-            # If local file is empty, force retrieval
-            assert getsize(self.path) > MIN_BYTE_SYZE
-        except (OSError, AssertionError):
-            pass
+        if ifmodified:
+            try:
+                mtime = getmtime(self.path)
+                headers.update({'if-modified-since': http_date(mtime)})
+                # If local file is empty, force retrieval
+                assert getsize(self.path) > MIN_BYTE_SYZE
+            except (OSError, AssertionError):
+                pass
         self.command.stdout.write('Sync %s ... ' % self.absolute_url)
         self.reply = requests.get(self.absolute_url, headers=headers)
         self.command.stdout.write(str(self.reply.status_code))
@@ -87,15 +91,42 @@ class InputFile(object):
 class TrekInputFile(InputFile):
 
     def __init__(self, command, **kwargs):
-        return super(TrekInputFile, self).__init__(command, models.Trek.filepath, **kwargs)
+        super(TrekInputFile, self).__init__(command, models.Trek.filepath, **kwargs)
 
     def content(self):
         content = self.reply.json
         features = []
         for feature in content['features']:
-            feature['properties']['slug'] = '%s-%s' % (feature['properties']['pk'],
-                                                       slugify(feature['properties']['name']))
-            if feature['properties'].get('published'):
+            properties = feature['properties']
+            pk = properties['pk']
+
+            # Remove serializable_ in properties names
+            for key in properties.keys():
+                properties[key.replace('serializable_')] = properties[key]
+                properties.pop(key)
+
+            # Detail properties
+            detailpath = models.Trek.detailpath.format(pk=pk)
+            detailfile = InputFile(self.command, detailpath)
+            detailfile.pull_if_modified()
+            detail = json.loads(detailfile.content())
+            properties.update(detail)
+
+            # Add POIs information, useful for textual search
+            f = InputFile(self.command, models.POIs.filepath.format(trek__pk=pk),
+                          language=self.language)
+            f.pull_if_modified()
+            poiscontent = json.loads(f.content())
+            poisprops = [poi['properties'] for poi in poiscontent['features']]
+            properties['pois'] = [{'name': poiprop['name'],
+                                   'description': poiprop['description'],
+                                   'type': poiprop['serializable_type']['label']}
+                                  for poiprop in poisprops]
+
+            properties['slug'] = '%s-%s' % (properties['pk'],
+                                            slugify(properties['name']))
+            if properties.get('published'):
+                feature['properties'] = properties
                 features.append(feature)
         content['features'] = features
         return json.dumps(content)
@@ -113,14 +144,9 @@ class Command(BaseCommand):
             languages = settings.languages.available.keys()
             logger.info("Languages: %s" % languages)
             for language in languages:
-                TrekInputFile(self, language=language).pull_if_modified()
+                TrekInputFile(self, language=language).pull()
 
                 for trek in models.Trek.objects.all():
-                    pk = trek.pk
-                    f = InputFile(self, models.POIs.filepath.format(trek__pk=pk),
-                                  language=language)
-                    f.pull_if_modified()
-
                     InputFile(self, trek.altimetric_url, language=language).pull_if_modified()
                     InputFile(self, trek.gpx_url, language=language).pull_if_modified()
                     InputFile(self, trek.kml_url, language=language).pull_if_modified()

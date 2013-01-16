@@ -7,8 +7,8 @@
 
         var poisMarkers = function(featureData, latlng) {
             var img = '<img src="data:<data64>" title="<title>">';
-            img = img.replace('<data64>', featureData.properties.serializable_type.pictogram);
-            img = img.replace('<title>', featureData.properties.serializable_type.label);
+            img = img.replace('<data64>', featureData.properties.type.pictogram);
+            img = img.replace('<title>', featureData.properties.type.label);
             
             var poicon = new L.DivIcon({className: 'poi-marker-icon',
                                         iconAnchor: [12, 12],
@@ -68,7 +68,7 @@
             iconSize: [24, 24],
             iconAnchor: [0, 0],
         });
-        var parkingLocation = {{ object.properties.serializable_parking_location }};
+        var parkingLocation = {{ object.properties.parking_location }};
         L.marker([parkingLocation[1], parkingLocation[0]], {clickable: false, icon: parkingIcon}).addTo(map);
 
         //Load altimetric graph
@@ -128,8 +128,8 @@
         {% endif %}
         <h4 id="departure-arrival">{{ object.properties.departure }} &rarr; {{ object.properties.arrival }}</h4>
         
-        <p>{% trans "Valleys" %} : <span class="value">{% for district in object.properties.serializable_districts %}{{ district.name }}, {% endfor %}</span></p>
-        <p>{% trans "Difficulty" %} : <span class="value">{{ object.properties.serializable_difficulty.label }}</span></p>
+        <p>{% trans "Valleys" %} : <span class="value">{% for district in object.properties.districts %}{{ district.name }}, {% endfor %}</span></p>
+        <p>{% trans "Difficulty" %} : <span class="value">{{ object.properties.difficulty.label }}</span></p>
         <p>{% trans "Ascent" %} : <span class="value">{{ object.properties.ascent }}m</span></p>
         <p>{% trans "Descent" %} : <span class="value">{{ object.properties.descent }}m</span></p>
         <p>{% trans "Duration" %} : <span class="value">{{ object.properties.duration }}H</span></p>
@@ -137,11 +137,11 @@
         <p>{% trans "Max elevation" %} : <span class="value">{{ object.properties.max_elevation }}m</span></p>
 
         <h3>{% trans "Usages" %}</h3>
-        {% for usage in object.properties.serializable_usages %}
+        {% for usage in object.properties.usages %}
         <li>{{ usage.label }}</li>
         {% endfor %}
         <h3>{% trans "Themes" %}</h3>
-        {% for theme in object.properties.serializable_themes %}
+        {% for theme in object.properties.themes %}
         <li>{{ theme.label }}</li>
         {% endfor %}
       </div>
@@ -154,7 +154,7 @@
       </div>
       <div id="trek-links">
         <h3>{% trans "See also" %}</h3>
-        {% for weblink in object.properties.serializable_weblinks %}
+        {% for weblink in object.properties.weblinks %}
         <li><img src="{% get_static_prefix %}img/refuge.png"><a target="_blank" href="{{ weblink.url }}">{{ weblink.name }}</a></li>
         {% endfor %}
       </div>
@@ -177,7 +177,7 @@
         <div class="accordion-group">
           <div class="accordion-heading">
             <a class="accordion-toggle acc-open" id="poi-item-{{ poi.properties.pk}}" data-toggle="collapse" data-parent="#pois-accordion" data-id="{{ poi.properties.pk }}" href="#collapseOne">
-              <img src="data:{{ poi.properties.serializable_type.pictogram }}" title="{{ poi.properties.serializable_type.label }}">{{ poi.properties.name }}</a>
+              <img src="data:{{ poi.properties.type.pictogram }}" title="{{ poi.properties.type.label }}">{{ poi.properties.name }}</a>
           </div>
           <div id="collapseOne" class="accordion-body collapse" style="height: 0px; ">
             <div class="accordion-inner"><p>{{ poi.properties.description|safe }}</p></div>

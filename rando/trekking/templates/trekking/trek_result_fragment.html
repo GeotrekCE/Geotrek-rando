@@ -5,9 +5,9 @@
     <a class="pjax" data-id="{{ trek.properties.pk }}" href="{% url trekking:detail trek.properties.slug %}">
         <h4>{{ trek.properties.name }}</h4>
     </a>
-    <p>{% for district in trek.properties.serializable_districts %}{{ district.name }}, {% endfor %}</p>
+    <p>{% for district in trek.properties.districts %}{{ district.name }}, {% endfor %}</p>
     <p>{{ trek.properties.duration }}H - {% trans "Climb" %} {{ trek.properties.ascent }}m</p>
-    <p>{{ trek.properties.serializable_difficulty.label }}</p>
+    <p>{{ trek.properties.difficulty.label }}</p>
     <div class="theme-tools">
         <a class="btn" id="icon-cols"></a> <a class="btn" id="icon-cols"></a>
     </div>

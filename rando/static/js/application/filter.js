@@ -80,7 +80,7 @@ function TrekFilter()
         var minStage = this.state.sliders.stage.min;
         var maxStage = this.state.sliders.stage.max;
         
-        var trekDifficulty = trek.properties.serializable_difficulty.id;
+        var trekDifficulty = trek.properties.difficulty.id;
         if  (!trekDifficulty) return true;
         return trekDifficulty >= minStage && trekDifficulty <= maxStage;
     }
@@ -173,13 +173,26 @@ function TrekFilter()
         var searched = this.state.search;
         if (!searched) return true;
 
+        var htmldecode = function (value) { 
+          return $('<div/>').html(value).text(); 
+        }
+
         var simplematch = function (property) {
-            var needle = property.replace(/^\s+|\s+$/g, '');
-            return needle.toUpperCase().indexOf(searched.toUpperCase()) != -1;
+            /*
+            Split searched string on space, and if at least
+            one bit matches, returns true;
+            */
+            var bits = searched.toUpperCase().split(' ');
+            for (var i=0; i<bits.length; i++) {
+                var needle = $.trim(bits[i]);
+                if (htmldecode(property).toUpperCase().indexOf(needle) != -1)
+                    return true;
+            }
+            return false;
         }
         
         var props = ['name', 'departure', 'arrival', 'ambiance', 
-                       'description_teaser', 'description', 'access', 'advice'];
+                     'description_teaser', 'description', 'access', 'advice'];
         for (var i=0; i<props.length; i++) {
             var prop = props[i];
             if ((prop in trek.properties) && simplematch(trek.properties[prop]))
@@ -187,18 +200,25 @@ function TrekFilter()
         }
 
         // District
-        for (var i=0; i<trek.properties.serializable_districts.length; i++) {
-            var district = trek.properties.serializable_districts[i];
+        for (var i=0; i<trek.properties.districts.length; i++) {
+            var district = trek.properties.districts[i];
             if (simplematch(district.name))
                 return true;
         }
-
-        /*
-         TODO :
-            NOM POIs
-            COMMENTAIRE des POIs
-            COMMUNE
-        */
+        // Cities
+        for (var i=0; i<trek.properties.cities.length; i++) {
+            var city = trek.properties.cities[i];
+            if (simplematch(city.code) || simplematch(city.name))
+                return true;
+        }
+        // POIs
+        for (var i=0; i<trek.properties.pois.length; i++) {
+            var poi = trek.properties.pois[i];
+            if (simplematch(poi.name) ||
+                simplematch(poi.description) ||
+                simplematch(poi.type))
+                return true;
+        }
         return false;
     }
 
@@ -207,9 +227,9 @@ function TrekFilter()
         if (this.matchStage(trek) && 
             this.matchDuration(trek) &&
             this.matchClimb(trek) &&
-            this._matchList(trek, 'theme', 'serializable_themes') &&
-            this._matchList(trek, 'usage', 'serializable_usages') &&
-            this._matchList(trek, 'valle', 'serializable_districts') &&
+            this._matchList(trek, 'theme', 'themes') &&
+            this._matchList(trek, 'usage', 'usages') &&
+            this._matchList(trek, 'valle', 'districts') &&
             this.matchLoop(trek) &&
             this.search(trek)
             )
