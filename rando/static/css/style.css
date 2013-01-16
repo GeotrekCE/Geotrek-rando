@@ -675,7 +675,7 @@ color:#625b50;
 
 
 
-.side-bar .result:hover {
+.side-bar .result:hover, .side-bar .result.active {
   background: #e7e9a0;
 }
 
@@ -781,11 +781,11 @@ color:#625b50;
   margin-left: 5px;
 }
 
-.info-result #icon-add-sac
+.info-result .icon-add-sac
 {
   padding:3px 3px 3px 3px;
 }
-.info-result #search-rando
+.info-result .search-rando
 {
   padding:3px 3px 3px 3px;
   

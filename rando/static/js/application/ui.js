@@ -6,21 +6,19 @@ function init_ui() {
 
     window.trekFilter = new TrekFilter();
 
-    $(window.trekFilter).on("filterchange", function(e) {
-        var nb = 0;
+    $(window.trekFilter).on("filterchange", function(e, visible) {
         for(var i=0; i<treks.features.length; i++) {
             var trek = treks.features[i],
                 trekid = trek.properties.pk;
-            if (window.trekFilter.match(trek)) {
+            if ($.inArray(trekid, visible) != -1) {
                 $('#trek-'+trekid).show();
-                nb++;
             }
             else {
                 $('#trek-'+trekid).hide();
             }
         }
         // Refresh label with number of results
-        $('#tab-results span.badge').html(nb);
+        $('#tab-results span.badge').html(visible.length);
     });
 
     window.trekFilter.load();

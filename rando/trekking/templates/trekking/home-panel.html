@@ -10,8 +10,57 @@
         // Move controls to the right
         map.zoomControl.setPosition('topright');
         map.addControl(new L.Control.Scale({imperial: false, position: 'bottomright'}));
-        var treksLayer = new L.GeoJSON(treks);
+
+        var style = {'color': '#F89406', 'weight': 5, 'opacity': 0.8},
+            treksLayer = new TrekLayer(treks, {highlight: true, style: style});
+        treksLayer.registerStyle('normal', 10, style)
+                  .registerStyle('highlight', 30, {'color': 'yellow', 'weight': 8, 'opacity': 1});
         treksLayer.addTo(map);
+
+        // Filter map on filter
+        $(window.trekFilter).on("filterchange", function(e, visible) {
+            treksLayer.updateFromPks(visible);
+        });
+
+        // Go to detail page on double-click
+        treksLayer.on('dblclick', function (e) {
+            $('#trek-'+ e.layer.properties.pk +'.result a.pjax').click();
+        });
+
+        // Highlight map on hover in sidebar results
+        $('.side-bar .result').hover (function () {
+            treksLayer.highlight($(this).data('id'), true);
+          },
+          function () {
+            treksLayer.highlight($(this).data('id'), false);
+          }
+        );
+
+        // Zoom trek button
+        $('.search-rando').on('click', function (e) {
+          var layer = treksLayer.getLayer($(this).data('pk'));
+          if (layer) {
+            map.fitBounds(layer.getBounds());
+          }
+        });
+
+        // Vice versa, highlight result
+        treksLayer.on('mouseover', function (e) {
+          $('#trek-'+ e.layer.properties.pk +'.result').addClass('active');
+        });
+        treksLayer.on('mouseout', function (e) {
+          $('#trek-'+ e.layer.properties.pk +'.result').removeClass('active');
+        });
+
+        // Filter list by map bounds
+        map.on('moveend', function (e) {
+          var visible = treksLayer.search(map.getBounds());
+          var pks = [];
+          for(var i=0; i<visible.length; i++) {
+              pks.push(visible[i].properties.pk);
+          }
+          window.trekFilter.setVisible(pks);
+        });
     }
 </script>
 

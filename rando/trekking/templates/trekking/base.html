@@ -103,7 +103,7 @@
             <label>{% trans "Valley" %}</label>
             <div class="btn-group" data-toggle="buttons-checkbox">
               {% for district in districts %}
-               <button class="bullet btn" id="{{ district.id }}" data-filter="valle">{{ district.name }}</button>
+               <button class="bullet btn" data-id="{{ district.id }}" id="district-{{ district.id }}" data-filter="valle">{{ district.name }}</button>
               {% endfor %}
             </div>
           </div>
@@ -112,7 +112,7 @@
             <label>{% trans "City" %}</label>
             <div class="btn-group" data-toggle="buttons-checkbox">
               {% for city in cities %}
-               <button class="bullet btn" id="{{ city.code }}" data-filter="city">{{ city.name }}</button>
+               <button class="bullet btn" data-id="{{ district.id }}" id="city-{{ city.code }}" data-filter="city">{{ city.name }}</button>
               {% endfor %}
             </div>
           </div>
@@ -190,6 +190,8 @@
   <script src="{% static "js/jquery.pjax.js" %}"></script>
   {% leaflet_js %}
   <script src="{% static "js/bootstrap.min.js" %}"></script>
+  <script src="{% static "js/leaflet-objectslayer.js" %}"></script>
+  <script src="{% static "js/rtree.js" %}"></script>
 
   <script src="{% static "js/application/ui.js" %}"></script>
   <script src="{% static "js/application/filter.js" %}"></script>

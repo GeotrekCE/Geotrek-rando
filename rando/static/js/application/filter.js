@@ -13,7 +13,17 @@ function TrekFilter()
     this.save = function ()
     {
         localStorage.setItem('filterState', JSON.stringify(self.state));
-        $(self).trigger("filterchange");
+
+        self.matching = [];
+        for(var i=0; i<window.treks.features.length; i++) {
+            var trek = window.treks.features[i],
+                trekid = trek.properties.pk;
+            if (self.match(trek) &&
+                $.inArray(trekid, self.visible) != -1) {
+                self.matching.push(trek.id);
+            }
+        }
+        $(self).trigger("filterchange", [self.matching]);
     }
 
     this.load = function () {
@@ -46,6 +56,11 @@ function TrekFilter()
         this.initEvents();
     }
 
+    this.setVisible = function (pks) {
+        self.visible = pks;
+        self.save();
+    }
+
     this.filterChanged = function (e) {
         var category =$(e.target).data("filter");
         if (!(category in self.state)) {
@@ -76,6 +91,19 @@ function TrekFilter()
         self.save();
     }
 
+    this.match = function(trek) {
+        if (this.matchStage(trek) && 
+            this.matchDuration(trek) &&
+            this.matchClimb(trek) &&
+            this._matchList(trek, 'theme', 'themes') &&
+            this._matchList(trek, 'usage', 'usages') &&
+            this._matchList(trek, 'valle', 'districts') &&
+            //this.matchLoop(trek) &&
+            this.search(trek)
+            )
+             return true;
+        return false;
+    }
 
     this.matchStage = function (trek) {
         if (!this.state.sliders.stage) return true;
@@ -226,18 +254,4 @@ function TrekFilter()
         return false;
     }
 
-
-    this.match = function(trek) {
-        if (this.matchStage(trek) && 
-            this.matchDuration(trek) &&
-            this.matchClimb(trek) &&
-            this._matchList(trek, 'theme', 'themes') &&
-            this._matchList(trek, 'usage', 'usages') &&
-            this._matchList(trek, 'valle', 'districts') &&
-            this.matchLoop(trek) &&
-            this.search(trek)
-            )
-             return true;
-        return false;
-    }
 };
