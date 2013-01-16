@@ -1,6 +1,6 @@
 {% load i18n static %}
 <div id="trek-{{ trek.properties.pk }}" class="result" {% if show = "False" %}style="display:none"{% endif %}>
-  <div class="illust"> <img src="{% static "img/trek.jpg" %}" width="130" height="120" /> </div>
+  <div class="illust"> <img src="{% static "img/trek.jpg" %}" width="110" height="110" /> </div>
   <div class="info-result">
     <a class="pjax" data-id="{{ trek.properties.pk }}" href="{% url trekking:detail trek.properties.slug %}">
         <h4>{{ trek.properties.name }}</h4>
@@ -9,7 +9,11 @@
     <p>{{ trek.properties.duration }}H - {% trans "Climb" %} {{ trek.properties.ascent }}m</p>
     <p>{{ trek.properties.difficulty.label }}</p>
     <div class="theme-tools">
-        <a class="btn" id="icon-cols"></a> <a class="btn" id="icon-cols"></a>
+      {% for theme in trek.properties.themes %}
+        <div class="theme-picto">
+            <img src="data:{{ theme.pictogram }}" title="{{ theme.label }}" alt="{{ theme.label }}">
+        </div>
+      {% endfor %}
     </div>
     <div class="search-tools">
         <a class="btn" id="icon-add-sac" data-pk="{{ trek.properties.pk }}"><img src="{% static "img/add-bag.png" %}"></a>

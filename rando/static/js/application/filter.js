@@ -5,7 +5,7 @@ function TrekFilter()
     var self = this;
 
     this.initEvents = function () {
-        $(".theme .btn, .vallee .btn, .access .btn, .usage .btn").unbind('click').on('click', self.filterChanged);
+        $(".theme .theme-icon, .vallee .btn, .access .btn, .usage .btn").unbind('click').on('click', self.filterChanged);
         $(".boucle input").unbind('click').on('click', self.filterChanged);
         $('#search').unbind('keyup').on("keyup", self.filterChanged);
     }
@@ -22,6 +22,7 @@ function TrekFilter()
         if (!('sliders' in self.state)) {
            self.state['sliders'] = {};
         }
+        $('#search').val(self.state.search || '');
         for (category in self.state) {
             for (filter in self.state[category]) {
                 var value = self.state[category][filter],

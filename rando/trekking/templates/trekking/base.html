@@ -78,65 +78,49 @@
 
           <div class="theme">
             <label>{% trans "Thematic" %}</label>
+            {% for theme in themes %}
             <div class="theme-icon">
-              <button class="btn filter-theme" id="cols" data-id="1" data-filter="theme"></button>
-              <p>Cols</p>
+              <div class="filter-theme" id="theme-{{ theme.id }}" data-id="{{ theme.id }}" data-filter="theme"
+                style="background-image: url(data:{{ theme.pictogram }})">
+              </div>
+              <p>{{ theme.label }}</p>
             </div>
-            <div class="theme-icon">
-              <button class="btn filter-theme" id="sommet" data-id="2" data-filter="theme"></button>
-              <p>Sommets</p>
-            </div>
-            <div class="theme-icon">
-              <button class="btn filter-theme" id="refug" data-id="3" data-filter="theme"></button>
-              <p>Refuges</p>
-            </div>
-            <div class="theme-icon">
-              <button class="btn filter-theme" id="flore" data-id="4" data-filter="theme"></button>
-              <p>Flaure</p>
-            </div>
-            <div class="theme-icon">
-              <button class="btn filter-theme" id="faune" data-id="5" data-filter="theme"></button>
-              <p>Faune</p>
-            </div>
-            <div class="theme-icon">
-              <button class="btn filter-theme" id="patr" data-id="6" data-filter="theme"></button>
-              <p>Patrimoine</p>
-            </div>
-            <div class="theme-icon">
-              <button class="btn filter-theme" id="lacs" data-id="7" data-filter="theme"></button>
-              <p>Lacs</p>
-            </div>
+            {% endfor %}
           </div>
         </div>
 
         <div id="advanced-filters" style="display: none">
           <div class="filter-bloc usage">
             <label>{% trans "Usage" %}</label>
+
+            {% for usage in usages %}
             <div class="usage-icon">
-              <button class="btn filter-usage" id="velo" data-id="1" data-filter="usage"></button>
-              <p>vélo</p>
+              <div class="filter-usage" id="usage-{{ usage.id }}" data-id="{{ usage.id }}" data-filter="usage"
+                   style="background-image: url(data:{{ usage.pictogram }})">
+              </div>
+              <p>{{ usage.label }}</p>
             </div>
-            <div class="usage-icon">
-              <button class="btn filter-usage" id="vtt" data-id="2" data-filter="usage"></button>
-              <p>VTT</p>
-            </div>
-            <div class="usage-icon">
-              <button class="btn filter-usage" id="cheval" data-id="3" data-filter="usage"></button>
-              <p>Cheval</p>
-            </div>
+            {% endfor %}
           </div>
+
           <div class="filter-bloc vallee">
             <label>{% trans "Valley" %}</label>
             <div class="btn-group" data-toggle="buttons-checkbox">
-              <button class="bullet btn" id="Brianconnais" data-filter="valle"> Le Briançoannais </button>
-              <button class="bullet btn" id="Champsaur" data-filter="valle"> Le Champseur </button>
-              <button class="bullet btn" id="Embrunais" data-filter="valle"> L'Embrunais </button>
-              <button class="bullet btn" id="Oisans" data-filter="valle"> L'Oisan vertical </button>
-              <button class="bullet btn" id="Valbonnais" data-filter="valle"> Le Valbonnais </button>
-              <button class="bullet btn" id="vallouise"data-filter="valle"> La Vallouise </button>
-              <button class="bullet btn" id="Valgaudemar" data-filter="valle"> Le Valgaudemar </button>
+              {% for district in districts %}
+               <button class="bullet btn" id="{{ district.id }}" data-filter="valle">{{ district.name }}</button>
+              {% endfor %}
             </div>
           </div>
+
+          <div class="filter-bloc cities">
+            <label>{% trans "City" %}</label>
+            <div class="btn-group" data-toggle="buttons-checkbox">
+              {% for city in cities %}
+               <button class="bullet btn" id="{{ city.code }}" data-filter="city">{{ city.name }}</button>
+              {% endfor %}
+            </div>
+          </div>
+
           <div class="filter-bloc access">
             <label>{% trans "Accessibility" %}</label>
             <div class="btn-group" data-toggle="buttons-checkbox">
@@ -144,6 +128,7 @@
               <button class="bullet btn" id="p" data-filter="access"> Poussette </button>
             </div>
           </div>
+
           <div class="filter-bloc boucle">
             <label>{% trans "Loop" %}</label>
             <label class="checkbox">

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-15 10:38+0100\n"
+"POT-Creation-Date: 2013-01-16 15:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,6 +35,7 @@ msgid "Duration"
 msgstr "Durée"
 
 #: templates/trekking/base.html:70
+#: templates/trekking/trek_result_fragment.html:9
 msgid "Climb"
 msgstr "Dénivelé"
 
@@ -42,30 +43,33 @@ msgstr "Dénivelé"
 msgid "Thematic"
 msgstr "Thème"
 
-#: templates/trekking/base.html:114
+#: templates/trekking/base.html:94
 msgid "Usage"
 msgstr "Usage"
 
-#: templates/trekking/base.html:129
+#: templates/trekking/base.html:107
 msgid "Valley"
 msgstr "Vallée"
 
-#: templates/trekking/base.html:141
+#: templates/trekking/base.html:116
+msgid "City"
+msgstr "Commune"
+
+#: templates/trekking/base.html:125
 msgid "Accessibility"
 msgstr "Accessibilité"
 
-#: templates/trekking/base.html:148
+#: templates/trekking/base.html:133
 msgid "Loop"
 msgstr "Boucle"
 
 #: templates/trekking/detail-panel.html:108
 msgid "Print"
-msgstr ""
+msgstr "Imprimer"
 
 #: templates/trekking/detail-panel.html:109
-#, fuzzy
 msgid "Add to backpack"
-msgstr "Sac à dos"
+msgstr "Ajouter au sac à dos"
 
 #: templates/trekking/detail-panel.html:126
 msgid "This trek is within park center"
@@ -77,23 +81,23 @@ msgstr "veuillez consulter la réglémentation."
 
 #: templates/trekking/detail-panel.html:131
 msgid "Valleys"
-msgstr "Valleys"
+msgstr "Vallées"
 
 #: templates/trekking/detail-panel.html:133
 msgid "Ascent"
-msgstr ""
+msgstr "Dénivelé positif"
 
 #: templates/trekking/detail-panel.html:134
 msgid "Descent"
-msgstr ""
+msgstr "Dénivelé négatif"
 
 #: templates/trekking/detail-panel.html:136
 msgid "Min elevation"
-msgstr ""
+msgstr "Altitude min"
 
 #: templates/trekking/detail-panel.html:137
 msgid "Max elevation"
-msgstr ""
+msgstr "Altitude max"
 
 #: templates/trekking/detail-panel.html:139
 msgid "Usages"
@@ -101,39 +105,39 @@ msgstr "Usages"
 
 #: templates/trekking/detail-panel.html:143
 msgid "Themes"
-msgstr ""
+msgstr "Thèmes"
 
 #: templates/trekking/detail-panel.html:149
 msgid "Advice"
-msgstr ""
+msgstr "Recommandation"
 
 #: templates/trekking/detail-panel.html:156
 msgid "See also"
-msgstr ""
+msgstr "Plus d'informations"
 
 #: templates/trekking/detail-panel.html:167
 msgid "Altitude profile"
-msgstr ""
+msgstr "Profil altimétrique"
 
 #: templates/trekking/detail-panel.html:168
 msgid "Altitude (m)"
-msgstr ""
+msgstr "Altitude (m)"
 
 #: templates/trekking/detail-panel.html:169
 msgid "Distance (m)"
-msgstr ""
+msgstr "Distance (m)"
 
 #: templates/trekking/detail-panel.html:190
 msgid "Download GPX"
-msgstr ""
+msgstr "Télécharger GPX"
 
 #: templates/trekking/detail-panel.html:191
 msgid "Download for Google Earth"
-msgstr ""
+msgstr "Télécharger pour Google Earth"
 
 #: templates/trekking/home-panel.html:31
 msgid "Name, Valley, ..."
-msgstr ""
+msgstr "Nom, vallée, ..."
 
 #: templates/trekking/home-panel.html:42
 msgid "Results"

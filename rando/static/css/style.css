@@ -114,6 +114,14 @@
   bottom:0;
 }
 
+.row-footer {
+  
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+
 
 
 
@@ -346,6 +354,10 @@
   -moz-box-shadow: none;
           box-shadow: none;
       margin-bottom:0;
+  background-position-x: -20px;
+  background-position-y: 50%;
+  background-color: transparent;
+  background-repeat: no-repeat;
 }
 
 .filter-theme.active {
@@ -354,8 +366,10 @@
      -moz-box-shadow: none;
           box-shadow: none;
           outline:0;
-
-  /* TODO use sprites */
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position-x: 5px;
+  background-position-y: 50%;
 }
 
 .filter-usage {
@@ -640,19 +654,16 @@
 
 .side-bar .result
 {
-  width:97%;
-  height:132px;
+  height: 120px;
   border-top:solid 1px #dbdcd7;
   border-bottom:solid 1px #dbdcd7;
   cursor: pointer;
 }
 .side-bar .result .illust
 {
-  width:130px;
-  height:120px;
   background:#80757d;
-  margin-top:1%;
-  margin-left:4%;
+  margin-top: 5px;
+  margin-left: 5px;
   float:left;
 }
 .side-bar .result .info-result
@@ -800,12 +811,19 @@ color:#625b50;
 {
   float:left;
 }
-.info-result #icon-cols
-{
-  padding:13px 7px 12px 20px;
-  background:url(../img/picto-theme/col-on.png) no-repeat -3px 3px;
-  border:none;
-  box-shadow:none;
+
+.theme-tools .theme-picto {
+  float:left;
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+}
+
+.theme-tools .theme-picto img {
+  float:left;
+  max-width: none;
+  width: 48px;
+  height: 24px;
 }
 
 
@@ -1090,17 +1108,6 @@ a.accordion-toggle:hover  {
  * A enlever
  * 
  */
-#cols
-{
-  background:url(../img/picto-theme/col-off.png);
-  
-     
-}
-#cols.active
-{
-  background: url(../img/picto-theme/col-on.png);
-
-}
 #sommet
 {
   background:url(../img/picto-theme/sommet-off.png);
@@ -1189,14 +1196,6 @@ a.accordion-toggle:hover  {
 
 
 
-
-.row-footer {
-  
-    height: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%;
-}
 
 .part1
 {
