@@ -56,7 +56,6 @@ function TrekFilter()
     }
 
     this.setVisible = function (pks) {
-        console.log("Visible treks: " + pks.join());
         self.visible = pks;
         self.save();
     }

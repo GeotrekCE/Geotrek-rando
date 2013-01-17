@@ -804,63 +804,39 @@ color:#625b50;
  * 
  */
 
-#map .leaflet-popup-content-wrapper 
+#mainmap .leaflet-popup-content-wrapper 
 {
-  background:#f6f7f0;
-  width:280px;
-  border-radius:0;
+  background: #f6f7f0;
+  border-radius: 0;
 }
 
-#map .leaflet-popup-content img
+#mainmap .leaflet-popup-content img
 {
   max-width:100% !important;
 }
-#map .leaflet-popup-content a
+#mainmap .leaflet-popup-content 
 {
   text-align: center;
+}
+#mainmap .leaflet-popup-content a {
   color: #5db9d6;
-  text-decoration:underline;
+  text-decoration: underline;
 }
-#map .leaflet-popup-tip
+#mainmap .leaflet-popup-tip
 {
-  background:#f6f7f0;
+  background: #f6f7f0;
 }
-#map .popupdetail
-{
+#mainmap .popupdetail a {
+  padding-left: 30px;
   background: url(../img/loupe.png) no-repeat;
-  background-position: 50px 0;
 }
 
-.popup-content
-{
-  background: #eeeeee;
-  width: 280px;
-   -moz-box-shadow: 0 0 3px 3px #888;
-  -webkit-box-shadow: 0 0 3px 3px#888;
-  box-shadow: 0 0 3px 3px #888;
-}
-.popup-content p
-{
-  margin : 0;
-  padding:10px;
-}
-.popup-content h3
-{
-  padding:3px 10px 0px 10px;
-}
-
-.popup-footer
+#mainmap .popup-footer
 {
   background:url(../img/pointeur.png) no-repeat center;
   width:100%;
   height:16px;
   margin-top:-1px;
-}
-
-#map-rando
-{
-  margin-left:30px;
-  margin-bottom:30px;
 }
 
 
@@ -1071,95 +1047,6 @@ a.accordion-toggle:hover  {
   -moz-border-radius: 4px;
   border-radius: 4px;
 }
-
-
-/****************************************************************************
- * 
- * A enlever
- * 
- */
-#sommet
-{
-  background:url(../img/picto-theme/sommet-off.png);
-
-}
-#sommet.active
-{
-  background: url(../img/picto-theme/sommet-on.png);
-}
-#refug
-{
-  background:url(../img/picto-theme/refuge-off.png);
-}
-#refug.active
-{
-  background: url(../img/picto-theme/refuge-on.png);
-}
-#flore
-{
-  background:url(../img/picto-theme/flore-off.png);
-}
-#flore.active
-{
-  background: url(../img/picto-theme/flore-on.png);
-}
-#faune
-{
-  background:url(../img/picto-theme/faune-off.png);
-}
-#faune.active
-{
-  background: url(../img/picto-theme/faune-on.png);
-}
-#patr
-{
-  background:url(../img/picto-theme/patrimoine-off.png);
-
-}
-#patr.active
-{
-  background: url(../img/picto-theme/patrimoine-on.png);
-
-}
-#lacs
-{
-  background:url(../img/picto-theme/lac-off.png);
-
-}
-#lacs.active
-{
-  background: url(../img/picto-theme/lac-on.png);
-
-}
-
-#velo
-{
-  background:url(../img/picto-usage/velo-off.png);
-  
-}
-#vtt
-{
-  background:url(../img/picto-usage/vtt-off.png);
-}
-#cheval
-{
-  background:url(../img/picto-usage/Cheval-off.png);
-}
-
-#velo.active
-{
-  background:url(../img/picto-usage/velo-on.png);
-}
-#vtt.active
-{
-  background:url(../img/picto-usage/VTT-on.png);
-}
-#cheval.active
-{
-  background:url(../img/picto-usage/Cheval-on.png);
-}
-
-
 
 
 

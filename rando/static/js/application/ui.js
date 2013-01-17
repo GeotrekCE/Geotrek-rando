@@ -68,6 +68,7 @@ function view_home () {
         $(this).parents('ul.nav-tabs').find('span.badge-warning').removeClass('badge-warning');
         $(this).find('span.badge').addClass('badge-warning');
     });
+
     toggle_sidebar();
 }
 

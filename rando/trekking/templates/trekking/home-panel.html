@@ -17,9 +17,25 @@
                   .registerStyle('highlight', 30, {'color': 'yellow', 'weight': 8, 'opacity': 1});
         treksLayer.addTo(map);
 
+
         // Filter map on filter
         $(window.trekFilter).on("filterchange", function(e, visible) {
             treksLayer.updateFromPks(visible);
+        });
+
+        // Filter list by map bounds
+        map.on('moveend', function (e) {
+          var getpk = function (l) {
+            return l.properties.pk;
+          };
+          if (!$(map._container).is(':visible')) {
+              // If map is hidden, consider all visible :)
+              window.trekFilter.setVisible($.map(treks.features, getpk));
+          }
+          else {
+              var visible = treksLayer.search(map.getBounds());
+              window.trekFilter.setVisible($.map(visible, getpk));
+          }
         });
 
         // Popup on click on trek 
@@ -91,16 +107,6 @@
         });
         treksLayer.on('mouseout', function (e) {
           $('#trek-'+ e.layer.properties.pk +'.result').removeClass('active');
-        });
-
-        // Filter list by map bounds
-        map.on('moveend', function (e) {
-          var visible = treksLayer.search(map.getBounds());
-          var pks = [];
-          for(var i=0; i<visible.length; i++) {
-              pks.push(visible[i].properties.pk);
-          }
-          window.trekFilter.setVisible(pks);
         });
     }
 </script>
