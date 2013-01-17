@@ -101,7 +101,7 @@
 
           <div class="filter-bloc vallee">
             <label>{% trans "Valley" %}</label>
-            <div class="btn-group" data-toggle="buttons-checkbox">
+            <div class="btn-group">
               {% for district in districts %}
                <button class="bullet btn" data-id="{{ district.id }}" id="district-{{ district.id }}" data-filter="valle">{{ district.name }}</button>
               {% endfor %}
@@ -110,7 +110,7 @@
 
           <div class="filter-bloc cities">
             <label>{% trans "City" %}</label>
-            <div class="btn-group" data-toggle="buttons-checkbox">
+            <div class="btn-group">
               {% for city in cities %}
                <button class="bullet btn" data-id="{{ district.id }}" id="city-{{ city.code }}" data-filter="city">{{ city.name }}</button>
               {% endfor %}

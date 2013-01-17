@@ -1,4 +1,4 @@
-{% load i18n leaflet_tags %}
+{% load i18n static leaflet_tags %}
 
 <script type="text/javascript">
     function mainmapInit(map, bounds) {
@@ -22,19 +22,60 @@
             treksLayer.updateFromPks(visible);
         });
 
+        // Popup on click on trek 
+        var popup = null;
+        treksLayer.on('click', function (e) {
+            var layer = e.layer;
+            if (popup) {
+                popup._close();
+            }
+            var html = '<h3>%NAME%</h3>' + 
+                       '<p>%DESCRIPTION%</p>' + 
+                       '<img src="{% static "img/trek.jpg" %}" width="110" height="110" />'+ 
+                       '<p class="popupdetail"><a href="#">{% trans "More info..." %}</a></p>';
+            html = html.replace('%NAME%', layer.properties.name);
+            html = html.replace('%DESCRIPTION%', layer.properties.description || "{% trans "No description..." %}");
+            popup = L.popup().setLatLng(e.latlng)
+                 .setContent(html)
+                 .openOn(map);
+            // Make sure clic on details will open as pjax
+            $('.popupdetail a', popup._container).click(function () {
+                $('#trek-'+ e.layer.properties.pk +'.result a.pjax').click();
+            });
+            
+        });
+
         // Go to detail page on double-click
         treksLayer.on('dblclick', function (e) {
             $('#trek-'+ e.layer.properties.pk +'.result a.pjax').click();
         });
+        $('.side-bar .result').on('dblclick', function (e) {
+            $('#trek-'+ $(this).data('id') +'.result a.pjax').click();
+        });
+
 
         // Highlight map on hover in sidebar results
-        $('.side-bar .result').hover (function () {
+        $('.side-bar .result').hover(function () {
             treksLayer.highlight($(this).data('id'), true);
           },
           function () {
             treksLayer.highlight($(this).data('id'), false);
           }
         );
+        // Click on side-bar
+        $('.side-bar .result').on('click', function (e) {
+            var trekOnMap = treksLayer.getLayer($(this).data('id'));
+            if (trekOnMap) {
+                var coords = trekOnMap.getLatLngs(),
+                    middlepoint = coords[coords.length/2];
+                trekOnMap.fire('click', {
+                  latlng: middlepoint,
+                });
+            }
+            else {
+              console.warn("Trek not on map: " + $(this).data('id'));
+            }
+        });
 
         // Zoom trek button
         $('.search-rando').on('click', function (e) {

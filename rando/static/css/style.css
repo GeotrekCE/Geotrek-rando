@@ -333,7 +333,7 @@
 
 
 
-.filter-theme {
+.filter-theme, .filter-usage {
   width:32px;
   height: 22px;
   margin-top:0;
@@ -348,7 +348,7 @@
   background-repeat: no-repeat;
 }
 
-.filter-theme.active {
+.filter-theme.active, .filter-usage.active {
   border: none;
   -webkit-box-shadow: none;
      -moz-box-shadow: none;
@@ -358,24 +358,6 @@
   background-repeat: no-repeat;
   background-position-x: 5px;
   background-position-y: 50%;
-}
-
-.filter-usage {
-  width:32px;
-  height: 23px;
-  border: none;
-  outline:0;
-  -moz-box-shadow: none;
-          box-shadow: none;
-}
-
-.filter-usage.active {
-  width:32px;
-  height: 23px;
-  border: none;
-  outline:0;
-  -moz-box-shadow: none;
-          box-shadow: none;
 }
 
 .show-hide-filters {
@@ -415,6 +397,7 @@
   text-align: left;
   margin: 0;
   padding: 0;
+  min-width: 100px;
   width: 100%;
   padding-left: 12px;
   border: none;
@@ -438,7 +421,7 @@
 
 .vallee
 {
-  width:350px;
+  max-width:350px;
   margin-left:40px;
 }
 
@@ -487,7 +470,6 @@
 }
 .usage-icon
 {
-  width:52px;
   float:left;
   text-align:center;
 }

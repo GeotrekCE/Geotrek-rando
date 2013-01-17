@@ -5,7 +5,7 @@ function TrekFilter()
     var self = this;
 
     this.initEvents = function () {
-        $(".theme .theme-icon, .vallee .btn, .access .btn, .usage .btn").unbind('click').on('click', self.filterChanged);
+        $(".theme .theme-icon, .vallee .btn, .cities .btn, .access .btn, .usage .usage-icon").unbind('click').on('click', self.filterChanged);
         $(".boucle input").unbind('click').on('click', self.filterChanged);
         $('#search').unbind('keyup').on("keyup", self.filterChanged);
     }
@@ -18,9 +18,8 @@ function TrekFilter()
         for(var i=0; i<window.treks.features.length; i++) {
             var trek = window.treks.features[i],
                 trekid = trek.properties.pk;
-            if (self.match(trek) &&
-                $.inArray(trekid, self.visible) != -1) {
-                self.matching.push(trek.id);
+            if (self.match(trek)) {
+                self.matching.push(trekid);
             }
         }
         $(self).trigger("filterchange", [self.matching]);
@@ -57,12 +56,14 @@ function TrekFilter()
     }
 
     this.setVisible = function (pks) {
+        console.log("Visible treks: " + pks.join());
         self.visible = pks;
         self.save();
     }
 
     this.filterChanged = function (e) {
         var category =$(e.target).data("filter");
+        console.log('Filter changed: ' + category);
         if (!(category in self.state)) {
             self.state[category] = {};
         }
@@ -98,9 +99,10 @@ function TrekFilter()
             this._matchList(trek, 'theme', 'themes') &&
             this._matchList(trek, 'usage', 'usages') &&
             this._matchList(trek, 'valle', 'districts') &&
+            this._matchList(trek, 'city', 'cities') &&
             //this.matchLoop(trek) &&
-            this.search(trek)
-            )
+            this.search(trek) && 
+            $.inArray(trek.properties.pk, self.visible) != -1)
              return true;
         return false;
     }
@@ -174,24 +176,33 @@ function TrekFilter()
     }
 
     this._matchList = function (trek, category, property) {
-        // All deselected, means always match !
-        if ($('.' + category + ' .active').length == 0)
-            return true;
-
         var list = [];
         for (filter in this.state[category]) {
             if (this.state[category][filter] === true) {
                 list.push(filter);
             }
         }
+        // All deselected, means always match !
+        if (list.length == 0) {
+            return true;
+        }
+
+        var match = false;
         // If at least, one is among selected, then it matches !
         for (var i=0; i<trek.properties[property].length; i++) {
-            var item = trek.properties[property][i];
-            if ($.inArray(''+item.id, list) != -1) {
-                return true;
+            var item = trek.properties[property][i],
+                id = item.id || item.pk || item.code; 
+            if ($.inArray(''+id, list) != -1) {
+                match = true;
+                break;
             }
         }
-        return false;
+        if (!match) {
+            console.log("Match " + category + ": " + 
+                        JSON.stringify(trek.properties[property]) + ' != ' +
+                        list.join());
+        }
+        return match;
     }
 
 /**************** Function Match Boucle ***************************/
