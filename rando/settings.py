@@ -1,6 +1,5 @@
 # Django settings for rando project.
 import os
-from django.core.exceptions import ImproperlyConfigured
 
 
 PROJECT_PATH = os.path.dirname(__file__)
@@ -197,4 +196,4 @@ except ImportError:
     try:
         from settings_production import *
     except ImportError:
-        raise ImproperlyConfigured("Missing local or production settings.")
+        pass
