@@ -1,5 +1,7 @@
-from .models import Trek, Settings
 from easydict import EasyDict as edict
+
+from rando import __version__
+from .models import Trek, Settings
 
 
 def settings(request):
@@ -25,6 +27,7 @@ def settings(request):
     allcities = sorted(allcities.values(), key=lambda o: o.name)
 
     return {
+        'VERSION': __version__,
         'settings' : Settings.objects.all(),
          # We want the treks list to be initialized from everywhere
         'treksjson' : Trek.objects.filter(language=lang).content,
