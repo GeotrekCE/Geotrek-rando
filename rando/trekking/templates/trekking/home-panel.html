@@ -11,12 +11,11 @@
         map.zoomControl.setPosition('topright');
         map.addControl(new L.Control.Scale({imperial: false, position: 'bottomright'}));
 
-        var style = {'color': '#F89406', 'weight': 5, 'opacity': 0.8},
-            treksLayer = new TrekLayer(treks, {highlight: true, style: style});
+        var style = {'color': '#F89406', 'weight': 5, 'opacity': 0.8};
+        window.treksLayer = new TrekLayer(treks, {highlight: true, style: style});
         treksLayer.registerStyle('normal', 10, style)
                   .registerStyle('highlight', 30, {'color': 'yellow', 'weight': 8, 'opacity': 1});
         treksLayer.addTo(map);
-
 
         // Filter map on filter
         $(window.trekFilter).on("filterchange", function(e, visible) {
@@ -36,6 +35,11 @@
               var visible = treksLayer.search(map.getBounds());
               window.trekFilter.setVisible($.map(visible, getpk));
           }
+        });
+
+        // Go to detail page on double-click
+        treksLayer.on('dblclick', function (e) {
+            $('#trek-'+ e.layer.properties.pk +'.result a.pjax').click();
         });
 
         // Popup on click on trek 
@@ -61,47 +65,7 @@
             
         });
 
-        // Go to detail page on double-click
-        treksLayer.on('dblclick', function (e) {
-            $('#trek-'+ e.layer.properties.pk +'.result a.pjax').click();
-        });
-        $('.side-bar .result').on('dblclick', function (e) {
-            $('#trek-'+ $(this).data('id') +'.result a.pjax').click();
-        });
-
-
-        // Highlight map on hover in sidebar results
-        $('.side-bar .result').hover(function () {
-            treksLayer.highlight($(this).data('id'), true);
-          },
-          function () {
-            treksLayer.highlight($(this).data('id'), false);
-          }
-        );
-        // Click on side-bar
-        $('.side-bar .result').on('click', function (e) {
-            var trekOnMap = treksLayer.getLayer($(this).data('id'));
-            if (trekOnMap) {
-                var coords = trekOnMap.getLatLngs(),
-                    middlepoint = coords[coords.length/2];
-                trekOnMap.fire('click', {
-                  latlng: middlepoint,
-                });
-            }
-            else {
-              console.warn("Trek not on map: " + $(this).data('id'));
-            }
-        });
-
-        // Zoom trek button
-        $('.search-rando').on('click', function (e) {
-          var layer = treksLayer.getLayer($(this).data('pk'));
-          if (layer) {
-            map.fitBounds(layer.getBounds());
-          }
-        });
-
-        // Vice versa, highlight result
+        // Highlight result on mouseover
         treksLayer.on('mouseover', function (e) {
           $('#trek-'+ e.layer.properties.pk +'.result').addClass('active');
         });
@@ -149,13 +113,13 @@
     <div id="result-backpack-content" class="tab-content">
       <div class="tab-pane active" id="results-pane">
         {% for trek in treks %}
-            {% include "trekking/trek_result_fragment.html" with show="True" %}
+            {% include "trekking/trek_result_fragment.html" with show="True" backpack="False" %}
         {% endfor %}
       </div>
 
       <div class="tab-pane" id="backpack-pane">
         {% for trek in treks %}
-            {% include "trekking/trek_result_fragment.html" with show="False" %}
+            {% include "trekking/trek_result_fragment.html" with show="False" backpack="True" %}
         {% endfor %}
       </div>
     </div>

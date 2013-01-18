@@ -3,6 +3,8 @@ function TrekFilter()
 {
     
     var self = this;
+    self.matching = [];
+    self.visible = null;
 
     this.initEvents = function () {
         $(".theme .theme-icon, .vallee .btn, .cities .btn, .access .btn, .usage .usage-icon").unbind('click').on('click', self.filterChanged);
@@ -34,25 +36,33 @@ function TrekFilter()
         $('#search').val(self.state.search || '');
         for (category in self.state) {
             for (filter in self.state[category]) {
+                if (filter == 'undefined' || filter == '')
+                    continue;
                 var value = self.state[category][filter],
-                    elem = $("[data-id='" + filter + "']");
+                    elem = $("[data-filter='" + category + "'][data-id='" + filter + "']");
 
                 if (elem.is('input')) {
                     elem.attr('checked', !!value);
                 }
-                else if (elem.hasClass('ui-slider')) {
-                    elem.slider('values', 0, value.min);
-                    elem.slider('values', 1, value.max);
+                else if ($('#' + filter).hasClass('ui-slider')) {
+                    $('#' + filter).slider('values', 0, value.min);
+                    $('#' + filter).slider('values', 1, value.max);
                 }
                 else {
-                    if (value)
-                        elem.addClass('active');
-                    else
-                        elem.removeClass('active');
+                    if (elem.length == 0) {
+                        console.warn('Unknown ' + filter);
+                    }
+                    else {
+                        if (value)
+                            elem.addClass('active');
+                        else
+                            elem.removeClass('active');
+                    }
                 }
             }
         }
-        this.initEvents();
+        self.save();
+        self.initEvents();
     }
 
     this.setVisible = function (pks) {
@@ -101,7 +111,7 @@ function TrekFilter()
             this._matchList(trek, 'city', 'cities') &&
             //this.matchLoop(trek) &&
             this.search(trek) && 
-            $.inArray(trek.properties.pk, self.visible) != -1)
+            (self.visible == null || $.inArray(trek.properties.pk, self.visible) != -1))
              return true;
         return false;
     }
@@ -178,7 +188,7 @@ function TrekFilter()
         var list = [];
         for (filter in this.state[category]) {
             if (this.state[category][filter] === true) {
-                list.push(filter);
+                list.push(''+filter);
             }
         }
         // All deselected, means always match !

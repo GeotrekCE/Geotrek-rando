@@ -763,19 +763,22 @@ color:#625b50;
   margin-left: 5px;
 }
 
-.info-result .icon-add-sac
+.info-result .add-sac
 {
-  padding:3px 3px 3px 3px;
+  padding: 3px;
 }
 .info-result .search-rando
 {
-  padding:3px 3px 3px 3px;
-  
-  
+  padding: 3px;
 }
 .search-tools
 {
   float:right;
+}
+.search-tools .btn {
+  height: 22px;
+  width: 22px;
+  background-image: none;
 }
 .theme-tools
 {

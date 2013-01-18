@@ -1,3 +1,37 @@
+function refresh_results(visible) {
+    var visible = visible;
+    for(var i=0; i<treks.features.length; i++) {
+        var trek = treks.features[i],
+            trekid = trek.properties.pk;
+        if ($.inArray(trekid, visible) != -1) {
+            $('#trek-'+trekid).show();
+        }
+        else {
+            $('#trek-'+trekid).hide();
+        }
+    }
+    // Refresh label with number of results
+    $('#tab-results span.badge').html(visible.length);
+}
+
+function refresh_backpack() {
+    for(var i=0; i<treks.features.length; i++) {
+        var trek = treks.features[i],
+            trekid = trek.properties.pk;
+        if (window.backPack.contains(trekid)) {
+            $('#backpack-trek-'+trekid).show();
+            $('#trek-' + trekid + ' .btn.add-sac').addClass('active');
+            $(".detail-content .btn[data-pk='"+ trekid + "']").addClass('active');
+        }
+        else {
+            $('#backpack-trek-'+trekid).hide();
+            $('#trek-' + trekid + ' .btn.add-sac').removeClass('active');
+            $(".detail-content .btn[data-pk='"+ trekid + "']").removeClass('active');
+        }
+    }
+    $('#tab-backpack span.badge').html(window.backPack.length());
+}
+
 function init_ui() {
     $('#content').pjax('a.pjax');
 
@@ -5,23 +39,12 @@ function init_ui() {
     sliders();
 
     window.trekFilter = new TrekFilter();
+    window.backPack = new BackPack();
 
     $(window.trekFilter).on("filterchange", function(e, visible) {
-        for(var i=0; i<treks.features.length; i++) {
-            var trek = treks.features[i],
-                trekid = trek.properties.pk;
-            if ($.inArray(trekid, visible) != -1) {
-                $('#trek-'+trekid).show();
-            }
-            else {
-                $('#trek-'+trekid).hide();
-            }
-        }
-        // Refresh label with number of results
-        $('#tab-results span.badge').html(visible.length);
+        refresh_results(visible);
     });
-
-    window.trekFilter.load();
+    $('body').on("backpack-change", refresh_backpack);
 
     $(window).on('resize', function() {
         layout();
@@ -30,6 +53,21 @@ function init_ui() {
 
 function page_load() {
     layout();
+
+    // Refresh tab results
+    window.trekFilter.load();
+    refresh_backpack();
+
+    // Add trek to backpack
+    $('.add-sac').on('click', function (e) {
+        var trekid = $(this).data('pk');
+        if (window.backPack.contains(trekid)) {
+            window.backPack.remove(trekid);
+        }
+        else {
+            window.backPack.save(trekid);
+        }
+    });
 }
 
 function layout() {
@@ -60,7 +98,7 @@ function view_home () {
 
     $("#mainmap").show();  // We are on home with map
 
-    $('#result-backpack-content .tab-pane').jScrollPane();
+    //$('#result-backpack-content .tab-pane').jScrollPane();
 
     $('#result-backpack-tabs .nav-tabs a').click(function (e) {
         e.preventDefault();
@@ -70,6 +108,41 @@ function view_home () {
     });
 
     toggle_sidebar();
+
+    // Zoom trek button
+    $('.search-rando').on('click', function (e) {
+      var trekOnMap = window.treksLayer.getLayer($(this).data('pk'));
+      if (trekOnMap) {
+        window.maps[0].fitBounds(trekOnMap.getBounds());
+      }
+    });
+
+    $('.side-bar .result').on('dblclick', function (e) {
+        $('#trek-'+ $(this).data('id') +'.result a.pjax').click();
+    });
+
+    // Highlight map on hover in sidebar results
+    $('.side-bar .result').hover(function () {
+        window.treksLayer.highlight($(this).data('id'), true);
+      },
+      function () {
+        window.treksLayer.highlight($(this).data('id'), false);
+      }
+    );
+    // Click on side-bar
+    $('.side-bar .result').on('click', function (e) {
+        var trekOnMap = window.treksLayer.getLayer($(this).data('id'));
+        if (trekOnMap) {
+            var coords = trekOnMap.getLatLngs(),
+                middlepoint = coords[coords.length/2];
+            trekOnMap.fire('click', {
+              latlng: middlepoint,
+            });
+        }
+        else {
+          console.warn("Trek not on map: " + $(this).data('id'));
+        }
+    });
 }
 
 function view_detail() {

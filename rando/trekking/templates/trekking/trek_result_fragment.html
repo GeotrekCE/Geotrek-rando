@@ -1,5 +1,5 @@
 {% load i18n static %}
-<div id="trek-{{ trek.properties.pk }}" data-id="{{ trek.properties.pk }}" class="result" {% if show = "False" %}style="display:none"{% endif %}>
+<div id="{% if backpack = "True" %}backpack-{% endif %}trek-{{ trek.properties.pk }}" data-id="{{ trek.properties.pk }}" class="result" {% if show = "False" %}style="display:none"{% endif %}>
   <div class="illust"> <img src="{% static "img/trek.jpg" %}" width="110" height="110" /> </div>
   <div class="info-result">
     <a class="pjax" href="{% url trekking:detail trek.properties.slug %}">
@@ -16,7 +16,13 @@
       {% endfor %}
     </div>
     <div class="search-tools">
-        <a class="btn" id="icon-add-sac" data-pk="{{ trek.properties.pk }}"><img src="{% static "img/add-bag.png" %}"></a>
+        <a class="btn add-sac" data-pk="{{ trek.properties.pk }}">
+            {% if backpack = "True" %}
+                <img src="{% static "img/remove-bag.png" %}">
+            {% else %}
+                <img src="{% static "img/add-bag.png" %}">
+            {% endif %}
+        </a>
         <a class="btn search-rando" data-pk="{{ trek.properties.pk }}"><img src="{% static "img/search.png" %}"></a>
     </div>
   </div>

@@ -112,7 +112,7 @@
             <label>{% trans "City" %}</label>
             <div class="btn-group">
               {% for city in cities %}
-               <button class="bullet btn" data-id="{{ district.id }}" id="city-{{ city.code }}" data-filter="city">{{ city.name }}</button>
+               <button class="bullet btn" data-id="{{ city.code|floatformat }}" id="city-{{ city.code }}" data-filter="city">{{ city.name }}</button>
               {% endfor %}
             </div>
           </div>
@@ -195,6 +195,7 @@
 
   <script src="{% static "js/application/ui.js" %}"></script>
   <script src="{% static "js/application/filter.js" %}"></script>
+  <script src="{% static "js/application/backpack.js" %}"></script> 
   <script src="{% static "js/application/map.js" %}"></script> 
 
 
@@ -204,6 +205,8 @@
        * A bunch of globals \o/
        */
       var trekFilter = null,
+          backPack = null,
+          treksLayer = null,
           treks = {{ treksjson|safe }};
 
       $(document).ready(function (e) {
