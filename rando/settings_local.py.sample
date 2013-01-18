@@ -1,2 +1,13 @@
-
 #CAMINAE_SERVER = 'geobi.makina-corpus.net/ecrins-sentiers'
+
+#
+# In development
+#...................
+#
+# CACHES = {
+#    'default': {
+#        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+#        'LOCATION': 'unique-snowflake'
+#    }
+#}
+

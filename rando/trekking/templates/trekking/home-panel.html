@@ -52,7 +52,7 @@
             var html = '<h3>%NAME%</h3>' + 
                        '<p>%DESCRIPTION%</p>' + 
                        '<img src="{% static "img/trek.jpg" %}" width="110" height="110" />'+ 
-                       '<p class="popupdetail"><a href="#">{% trans "More info..." %}</a></p>';
+                       '<p class="popupdetail"><a href="#"<a href="#">{% trans "More info..." %}</a></p>';
             html = html.replace('%NAME%', layer.properties.name);
             html = html.replace('%DESCRIPTION%', layer.properties.description || "{% trans "No description..." %}");
             popup = L.popup().setLatLng(e.latlng)
