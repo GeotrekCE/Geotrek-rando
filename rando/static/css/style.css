@@ -622,6 +622,14 @@
 }
 
 
+p.tab-content-empty {
+  font-size: 18px;
+  text-align: center;
+  width: 100%;
+  margin-top: 20px;
+  color: #80747C;
+}
+
 .side-bar .result
 {
   height: 120px;
@@ -653,8 +661,6 @@ color:#625b50;
   margin:0;
   color:#968d7f;
 }
-
-
 
 
 .side-bar .result:hover, .side-bar .result.active {

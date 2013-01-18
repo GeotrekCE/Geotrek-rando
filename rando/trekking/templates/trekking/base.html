@@ -48,28 +48,28 @@
             <label>{% trans "Difficulty" %}</label>
             <img src="{% static "img/slider-stage.png" %}">
             <div id="stage" data-filter="stage"></div>
-            <div class="slider-value first">Facile</div>
-            <div class="slider-value">Confirmé</div>
-            <div class="slider-value last">Sportif</div>
+            <div class="slider-value first">{% trans "Easy" %}</div>
+            <div class="slider-value">{% trans "Medium" %}</div>
+            <div class="slider-value last">{% trans "Hard" %}</div>
           </div>
           <div class="time">
             <label>{% trans "Duration" %}</label>
             <img src="{% static "img/slider-time.png" %}">
             <div id="time" data-filter="time"></div>
-            <div class="slider-value first">Courte</div>
+            <div class="slider-value first">{% trans "Short" %}</div>
             <div class="slider-value">1/2</div>
-            <div class="slider-value">journée</div>
-            <div class="slider-value">2 jours</div>
-            <div class="slider-value last">&gt;2 jours</div>
+            <div class="slider-value">{% trans "day" %}</div>
+            <div class="slider-value">{% trans "2 days" %}</div>
+            <div class="slider-value last">&gt;{% trans "2 days" %}</div>
           </div>
           <div class="den">
             <label>{% trans "Climb" %}</label>
             <img src="{% static "img/slider-den.png" %}">
             <div id="den" data-filter="den"></div>
-            <div class="slider-value first">&lt; 200 m</div>
-            <div class="slider-value">200-700 m</div>
-            <div class="slider-value">700-1000 m</div>
-            <div class="slider-value last">&gt;1000 m</div>
+            <div class="slider-value first">&lt; 200m</div>
+            <div class="slider-value">200-700m</div>
+            <div class="slider-value">700-1000m</div>
+            <div class="slider-value last">&gt;1000m</div>
           </div>
 
           <div class="theme">

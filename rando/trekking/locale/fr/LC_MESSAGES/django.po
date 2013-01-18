@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-16 15:28+0100\n"
+"POT-Creation-Date: 2013-01-18 12:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,48 +18,72 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: templates/trekking/base.html:41 templates/trekking/detail-panel.html:107
+#: templates/trekking/base.html:37 templates/trekking/detail-panel.html:107
 msgid "Share"
 msgstr "Partager"
 
-#: templates/trekking/base.html:48
+#: templates/trekking/base.html:44
 msgid "Filters"
 msgstr "Filtres"
 
-#: templates/trekking/base.html:52 templates/trekking/detail-panel.html:132
+#: templates/trekking/base.html:48 templates/trekking/detail-panel.html:132
 msgid "Difficulty"
 msgstr "Difficulté"
 
-#: templates/trekking/base.html:60 templates/trekking/detail-panel.html:135
+#: templates/trekking/base.html:51
+msgid "Easy"
+msgstr "Facile"
+
+#: templates/trekking/base.html:52
+msgid "Medium"
+msgstr "Confirmé"
+
+#: templates/trekking/base.html:53
+msgid "Hard"
+msgstr "Sportif"
+
+#: templates/trekking/base.html:56 templates/trekking/detail-panel.html:135
 msgid "Duration"
 msgstr "Durée"
 
-#: templates/trekking/base.html:70
+#: templates/trekking/base.html:59
+msgid "Short"
+msgstr "Court"
+
+#: templates/trekking/base.html:61
+msgid "day"
+msgstr "journée"
+
+#: templates/trekking/base.html:62 templates/trekking/base.html.py:63
+msgid "2 days"
+msgstr "2 jours"
+
+#: templates/trekking/base.html:66
 #: templates/trekking/trek_result_fragment.html:9
 msgid "Climb"
 msgstr "Dénivelé"
 
-#: templates/trekking/base.html:80
+#: templates/trekking/base.html:76
 msgid "Thematic"
 msgstr "Thème"
 
-#: templates/trekking/base.html:94
+#: templates/trekking/base.html:90
 msgid "Usage"
 msgstr "Usage"
 
-#: templates/trekking/base.html:107
+#: templates/trekking/base.html:103
 msgid "Valley"
 msgstr "Vallée"
 
-#: templates/trekking/base.html:116
+#: templates/trekking/base.html:112
 msgid "City"
 msgstr "Commune"
 
-#: templates/trekking/base.html:125
+#: templates/trekking/base.html:121
 msgid "Accessibility"
 msgstr "Accessibilité"
 
-#: templates/trekking/base.html:133
+#: templates/trekking/base.html:129
 msgid "Loop"
 msgstr "Boucle"
 
@@ -135,17 +159,33 @@ msgstr "Télécharger GPX"
 msgid "Download for Google Earth"
 msgstr "Télécharger pour Google Earth"
 
-#: templates/trekking/home-panel.html:31
+#: templates/trekking/home-panel.html:55
+msgid "More info..."
+msgstr "+ de détails..."
+
+#: templates/trekking/home-panel.html:57
+msgid "No description..."
+msgstr "Pas de description..."
+
+#: templates/trekking/home-panel.html:91
 msgid "Name, Valley, ..."
 msgstr "Nom, vallée, ..."
 
-#: templates/trekking/home-panel.html:42
+#: templates/trekking/home-panel.html:102
 msgid "Results"
 msgstr "Résultats"
 
-#: templates/trekking/home-panel.html:46
+#: templates/trekking/home-panel.html:106
 msgid "Backpack"
 msgstr "Sac à dos"
+
+#: templates/trekking/home-panel.html:115
+msgid "No result"
+msgstr "Aucun résultat"
+
+#: templates/trekking/home-panel.html:122
+msgid "Empty"
+msgstr "Vide"
 
 #: templates/trekking/navigation_fragment.html:9
 msgid "Home"

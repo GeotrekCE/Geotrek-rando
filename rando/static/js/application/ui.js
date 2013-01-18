@@ -4,12 +4,16 @@ function refresh_results(visible) {
         var trek = treks.features[i],
             trekid = trek.properties.pk;
         if ($.inArray(trekid, visible) != -1) {
-            $('#trek-'+trekid).show();
+            $('#trek-'+trekid).show(200);
         }
         else {
-            $('#trek-'+trekid).hide();
+            $('#trek-'+trekid).hide(200);
         }
     }
+    if (visible.length > 0)
+        $('#noresult').hide(200);
+    else
+        $('#noresult').show(200); 
     // Refresh label with number of results
     $('#tab-results span.badge').html(visible.length);
 }
@@ -19,16 +23,20 @@ function refresh_backpack() {
         var trek = treks.features[i],
             trekid = trek.properties.pk;
         if (window.backPack.contains(trekid)) {
-            $('#backpack-trek-'+trekid).show();
+            $('#backpack-trek-'+trekid).show(200);
             $('#trek-' + trekid + ' .btn.add-sac').addClass('active');
             $(".detail-content .btn[data-pk='"+ trekid + "']").addClass('active');
         }
         else {
-            $('#backpack-trek-'+trekid).hide();
+            $('#backpack-trek-'+trekid).hide(200);
             $('#trek-' + trekid + ' .btn.add-sac').removeClass('active');
             $(".detail-content .btn[data-pk='"+ trekid + "']").removeClass('active');
         }
     }
+    if (window.backPack.length() > 0)
+        $('#backpackempty').hide(200);
+    else
+        $('#backpackempty').show(200);
     $('#tab-backpack span.badge').html(window.backPack.length());
 }
 
