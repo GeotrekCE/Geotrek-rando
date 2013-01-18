@@ -1,0 +1,17 @@
+Alias /static/ /PATH_TO_SOURCE/media/static/
+
+<Directory /PATH_TO_SOURCE/media/static>
+  Order deny,allow
+  Allow from all
+</Directory>
+
+WSGIScriptAlias / /PATH_TO_SOURCE/rando/wsgi.py
+WSGIPythonPath /PATH_TO_SOURCE/rando/lib/python2.7/site-packages
+<Directory /PATH_TO_SOURCE/rando/>
+    <Files wsgi.py>
+        Order deny,allow
+        Allow from all
+    </Files>
+</Directory>
+
+
