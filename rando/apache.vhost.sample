@@ -1,4 +1,4 @@
-Alias /static/ /PATH_TO_SOURCE/media/static/
+Alias /static/ /PATH_TO_SOURCE/static/
 
 <Directory /PATH_TO_SOURCE/media/static>
   Order deny,allow
@@ -6,7 +6,7 @@ Alias /static/ /PATH_TO_SOURCE/media/static/
 </Directory>
 
 WSGIScriptAlias / /PATH_TO_SOURCE/rando/wsgi.py
-WSGIPythonPath /PATH_TO_SOURCE/rando/lib/python2.7/site-packages
+WSGIPythonPath /PATH_TO_SOURCE/:/PATH_TO_SOURCE/lib/python2.7/site-packages
 <Directory /PATH_TO_SOURCE/rando/>
     <Files wsgi.py>
         Order deny,allow
