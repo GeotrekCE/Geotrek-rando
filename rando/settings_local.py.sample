@@ -3,7 +3,8 @@
 #
 # In development
 #...................
-#
+# DEBUG = True
+# TEMPLATE_DEBUG = DEBUG
 # CACHES = {
 #    'default': {
 #        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',

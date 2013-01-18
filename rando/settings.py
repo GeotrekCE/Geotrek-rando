@@ -4,11 +4,11 @@ import os
 
 PROJECT_PATH = os.path.dirname(__file__)
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Mathieu Leplatre', 'mathieu.leplatre@makin-corpus.com'),
 )
 
 MANAGERS = ADMINS
