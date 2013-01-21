@@ -185,6 +185,19 @@
  * 
  */
 
+.ui-slider .ui-slider-range {
+  height:4px;
+  background:#F77E00;
+  opacity:0.6;
+  top:10px;
+}
+
+.ui-slider .ui-slider-handle {
+  background:url("../img/Curseur.png") repeat-x scroll 0 0 transparent;
+  top:4px;
+  border:none;
+  outline:none;
+}
 
 .slider-value {
   font-weight: bold;
@@ -200,18 +213,6 @@
   text-align: right; 
 }
 
-.stage .slider-value {
-  width: 33%;
-}
-
-.time .slider-value {
-  width: 20%;
-}
-
-.den .slider-value {
-  width: 25%;
-}
-
 
 .stage
 {
@@ -219,6 +220,7 @@
   float:left;
   margin-left:25px;
 }
+
 .time
 {
   width:251px;
@@ -232,108 +234,66 @@
   margin-left:50px;
 }
 
+.stage .slider-value {
+  width: 33%;
+}
 
-.stage .slider
-{
-  width: 161px;
-  /*background:url(../img/bgdifficulteNEW.png);*/
-  background-size:161px 100%;
+.time .slider-value {
+  width: 20%;
+}
+
+.den .slider-value {
+  width: 25%;
+}
+
+.slider {
   height:23px;
   border:none;
   margin-top:0;
 }
-/* Slider Dual Stage*/
-.stage #stage .ui-slider-range
-{
-  height:4px;
-  background:#F77E00;
-  opacity:0.6;
-  top:10px;
-}
-.stage #stage
+.stage .slider
 {
   width: 161px;
-  /*background:url(../img/bgdifficulteNEW.png);*/
-  background-size:161px 100%;
-  height:0;
-  border:none;
-  top:-25px;
-  left:6px;
-}
-.stage #stage .ui-slider-handle
-{
-  background:url("../img/Curseur.png") repeat-x scroll 0 0 transparent;
-  top:4px;
-  border:none;
-  outline:none;
-}
-/* Slider Dual Time */
-.time #time .ui-slider-range
-{
-  height:4px;
-  background:#F77E00;
-  opacity:0.6;
-  top:10px;
-}
-.time #time
-{
-  width: 254px;
-  height:0;
-  border:none;
-  top:-25px;
-  left:6px;
-}
-.time #time .ui-slider-handle
-{
-  background:url("../img/Curseur.png") repeat-x scroll 0 0 transparent;
-  top:4px;
-  border:none;
-  outline:none;
 }
 
 .time .slider
 {
-  background:url(../img/bgduree.png);
-  width:253px;
-  background-size:253px 100%;
-  height:23px;
-  border:none;
-  margin-top:0;
-}
-/* Slider Dual Den*/
-.den #den .ui-slider-range
-{
-  height:4px;
-  background:#F77E00;
-  opacity:0.6;
-  top:10px;
-}
-.den #den
-{
-  width: 254px;
-  height:0;
-  border:none;
-  top:-25px;
-  left:6px;
-}
-.den #den .ui-slider-handle
-{
-  background:url("../img/Curseur.png") repeat-x scroll 0 0 transparent;
-  top:4px;
-  border:none;
-  outline:none;
+  width: 253px;
 }
 
 .den .slider
 {
-  background:url(../img/bgdenivele.png);
-  width:279px;
-  height:23px;
-  border:none;
-  background-size: 279px 100%;
-  margin-top:0;
+  width: 279px;
+}
+
+.stage #stage,
+.time #time, 
+.den #den {
+  border: none;
+  left:6px;
+  height: 23px;
+}
+
+.stage #stage
+{
+  background:url(../img/slider-stage.png);
+  width: 157px;
 
 }
+
+.time #time
+{
+  background:url(../img/slider-time.png);
+  width: 254px;
+}
+
+.den #den
+{
+  background:url(../img/slider-den.png);
+  width: 250px;
+}
+
+
 
 
 
