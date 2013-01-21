@@ -49,14 +49,18 @@
         <div id="basic-filters">
           <div class="stage">
             <label>{% trans "Difficulty" %}</label>
-            <div id="stage" data-filter="stage"></div>
+            <div class="slider-wrap">
+              <div id="stage" data-filter="stage"></div>
+            </div>
             <div class="slider-value first">{% trans "Easy" %}</div>
             <div class="slider-value">{% trans "Medium" %}</div>
             <div class="slider-value last">{% trans "Hard" %}</div>
           </div>
           <div class="time">
             <label>{% trans "Duration" %}</label>
-            <div id="time" data-filter="time"></div>
+            <div class="slider-wrap">
+              <div id="time" data-filter="time"></div>
+            </div>
             <div class="slider-value first">{% trans "Short" %}</div>
             <div class="slider-value">1/2</div>
             <div class="slider-value">{% trans "day" %}</div>
@@ -65,7 +69,9 @@
           </div>
           <div class="den">
             <label>{% trans "Climb" %}</label>
-            <div id="den" data-filter="den"></div>
+            <div class="slider-wrap">
+              <div id="den" data-filter="den"></div>
+            </div>
             <div class="slider-value first">&lt; 200m</div>
             <div class="slider-value">200-700m</div>
             <div class="slider-value">700-1000m</div>
