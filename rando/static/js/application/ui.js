@@ -100,7 +100,7 @@ function view_home () {
     $('body').css('overflow', 'hidden');
     $('.footer').css('position', 'absolute');
     $('#container-content').css('position', 'fixed');
-    $('#container-content, #side-bar').css('top', $('#top-panel').height()+'px');
+    $('#container-content, #side-bar').css('top', toppanel_h()+'px');
     $('#container-content, #side-bar').css("height", sidebar_h()+"px");
     $('#show-side-bar').css("top", ($('#text-search').height()-sidebar_h())+"px");
 
@@ -157,7 +157,7 @@ function view_detail() {
     $("#mainmap").hide();  // We are elsewhere
     $('body').css('overflow', 'default');
     $('.footer').css('position', 'relative');
-    $('.flatpage-content, .detail-content').css('margin-top', $('#top-panel').height()+'px');
+    $('.flatpage-content, .detail-content').css('margin-top', toppanel_h()+'px');
     $('.flatpage-content, .detail-content').css('min-height', sidebar_h()+"px");
 
     $('#container-content').css('position', 'static');
@@ -176,13 +176,18 @@ function view_detail() {
     });
 }
 
-function sidebar_h() {
-    var h = $(window).height() - $('#top-panel').height()
-                               - $('#bottom-panel').height();
-    if ($.browser.webkit) {
+function toppanel_h() {
+    var h = $('#top-panel').height(),
+        expanded = $('#advanced-filters').is(':visible');
+    if (expanded) {
         h -= 10;  // why ??
     }
     return h;
+}
+
+function sidebar_h() {
+    return $(window).height() - toppanel_h()
+                              - $('#bottom-panel').height();
 }
 
 function toggle_sidebar() {
