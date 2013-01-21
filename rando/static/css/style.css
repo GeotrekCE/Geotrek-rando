@@ -586,6 +586,7 @@ p.tab-content-empty {
 
 .side-bar .result
 {
+  clear: both;
   height: 120px;
   border-top:solid 1px #dbdcd7;
   border-bottom:solid 1px #dbdcd7;
