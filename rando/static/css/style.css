@@ -88,11 +88,6 @@
 #container-content {
    margin-top: 1px;
    width:100%;
-   /* Those two are set in Javascript
-      but putting them here avoids
-      flickering at page startup */
-   position: fixed;
-   top: 155px;
 }
 
 .footer
@@ -334,11 +329,11 @@
 }
 
 #show-filters { 
-  background: url(../img/flechedown.png) 50% 50% no-repeat;
+  background: url(../img/filter-open.png) 50% 50% no-repeat;
 }
 
 #hide-filters {
-  background: url(../img/fleche-up.png) 50% 50% no-repeat;
+  background: url(../img/filter-close.png) 50% 50% no-repeat;
 }
 
 
@@ -556,7 +551,7 @@
 
 .side-bar .nav-tabs > #tab-showhidepanel a
 {
-  background:url(../img/triangleresultat.png) no-repeat 50% 1px;
+  background:url(../img/sidebar-close.png) no-repeat 50% 1px;
   padding-left:0;
   padding-right:0;
   border: 1px solid #80747C;
@@ -568,7 +563,7 @@
   top: 40px;
   left: 0px;
   position: absolute;
-  background:url(../img/triangleresultatdroite.png) no-repeat 1px 3px;
+  background:url(../img/sidebar-open.png) no-repeat 1px 3px;
   background-color:#f2f3ed;
   border: 2px solid #80747C;
   z-index: 1100;
@@ -711,12 +706,23 @@ color:#625b50;
 
 
 #search-bar {
-  height:75px;
+  height: 65px;
   width:100%;
-  background-color:#f6f7f1;
+
   -moz-box-shadow: 0 0 5px 5px #888;
   -webkit-box-shadow: 0 0 5px 5px#888;
   box-shadow: 0 0 2px 1px #888;
+
+  /* http://www.colorzilla.com/gradient-editor/ */
+  background: rgb(255,255,255); /* Old browsers */
+  background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(229,229,229,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(229,229,229,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+
 }
 
 
@@ -796,12 +802,14 @@ color:#625b50;
 }
 #mainmap .popupdetail a {
   padding-left: 30px;
-  background: url(../img/loupe.png) no-repeat;
+  background: url(../img/search.png) no-repeat;
+  display: inline-block;
+  min-height: 20px;
 }
 
 #mainmap .popup-footer
 {
-  background:url(../img/pointeur.png) no-repeat center;
+  background:url(../img/popup-footer.png) no-repeat center;
   width:100%;
   height:16px;
   margin-top:-1px;
@@ -952,7 +960,7 @@ p.teaser {
 .accordion-toggle {
   color: #999095;
   text-decoration: none;
-  background: url(../img/flech-acc-open.png);
+  background: url(../img/accordion-open.png);
   background-repeat: no-repeat;
   background-position: 95% 50%;
 }
@@ -960,7 +968,7 @@ p.teaser {
 .accordion-toggle.open {
   color: #999095;
   text-decoration:none;
-  background: url(../img/flech-acc-close.png);
+  background: url(../img/accordion-close.png);
   background-repeat: no-repeat;
   background-position: 95% 50%;
 }
