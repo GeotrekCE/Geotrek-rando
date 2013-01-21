@@ -164,7 +164,7 @@ function TrekFilter()
             1:200,
             2:700,
         };
-        var trekClimb = trek.properties.duration;
+        var trekClimb = trek.properties.ascent;
         if (minClimb == 0) {
             if (maxClimb == 3) {
                 return true;
