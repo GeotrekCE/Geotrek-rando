@@ -131,10 +131,10 @@ function view_home () {
 
     // Highlight map on hover in sidebar results
     $('.side-bar .result').hover(function () {
-        window.treksLayer.highlight($(this).data('id'), true);
+        window.treksLayer && window.treksLayer.highlight($(this).data('id'), true);
       },
       function () {
-        window.treksLayer.highlight($(this).data('id'), false);
+        window.treksLayer && window.treksLayer.highlight($(this).data('id'), false);
       }
     );
     // Click on side-bar
@@ -142,7 +142,7 @@ function view_home () {
         var trekOnMap = window.treksLayer.getLayer($(this).data('id'));
         if (trekOnMap) {
             var coords = trekOnMap.getLatLngs(),
-                middlepoint = coords[coords.length/2];
+                middlepoint = coords[Math.round(coords.length/2)];
             trekOnMap.fire('click', {
               latlng: middlepoint,
             });
