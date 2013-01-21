@@ -56,8 +56,18 @@ Edit it and replace ``/PATH_TO_SOURCE/`` by the correct absolute path.
 
 Activate it and restart apache :
 
+::
+
     sudo a2ensite rando
-    sudo /etc/init.d/apache2 restart
+    sudo /etc/init.d/apa
+
+
+Give Apache permissions :
+
+::
+
+    sudo chgrp -R www-data media/
+    sudo chmod -R g+rw media/
 
 
 ============
