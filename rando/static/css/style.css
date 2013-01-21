@@ -88,6 +88,11 @@
 #container-content {
    margin-top: 1px;
    width:100%;
+   /* Those two are set in Javascript
+      but putting them here avoids
+      flickering at page startup */
+   position: fixed;
+   top: 155px;
 }
 
 .footer
@@ -419,13 +424,14 @@
 }
 
 
-.vallee
+.vallee, .cities
 {
-  max-width:350px;
+  max-width: 350px;
   margin-left:40px;
 }
 
-#advanced-filters .vallee .btn-group button
+#advanced-filters .vallee .btn-group button,
+#advanced-filters .cities .btn-group button
 {
   width:33% !important;
 }
