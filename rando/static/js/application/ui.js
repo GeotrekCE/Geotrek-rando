@@ -121,7 +121,7 @@ function view_home () {
     $('.search-rando').on('click', function (e) {
       var trekOnMap = window.treksLayer.getLayer($(this).data('pk'));
       if (trekOnMap) {
-        window.maps[0].fitBounds(trekOnMap.getBounds());
+        window.maps[0].fitBounds(fakeBounds(trekOnMap.getBounds()));
       }
     });
 

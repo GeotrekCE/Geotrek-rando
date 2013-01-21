@@ -2,10 +2,11 @@
 
 <script type="text/javascript">
     function mainmapInit(map, bounds) {
-        map.fitBounds([
-            [{{ settings.map.extent.1 }}, {{ settings.map.extent.0 }}],
-            [{{ settings.map.extent.3 }}, {{ settings.map.extent.2 }}]
-        ]);
+        map.fitBounds(fakeBounds(L.latLngBounds([
+                                      [{{ settings.map.extent.1 }}, {{ settings.map.extent.0 }}],
+                                      [{{ settings.map.extent.3 }}, {{ settings.map.extent.2 }}]
+                                  ]), true)
+        );
 
         // Move controls to the right
         map.zoomControl.setPosition('topright');
