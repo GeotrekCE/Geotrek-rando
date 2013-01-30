@@ -97,7 +97,7 @@ msgstr "Ajouter au sac à dos"
 
 #: templates/trekking/detail-panel.html:126
 msgid "This trek is within park center"
-msgstr "Cet itinéraire est au coeur du parc"
+msgstr "Cet itinéraire est dans le coeur du parc national"
 
 #: templates/trekking/detail-panel.html:126
 msgid "please read access rules."
