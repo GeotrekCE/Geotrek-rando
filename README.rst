@@ -14,7 +14,7 @@ Installation on Debian / Ubuntu
 
 Once the OS is installed (basic installation, with OpenSSH server), with the following packages :
 
-    sudo apt-get install -y python-virtualenv libapache2-mod-wsgi python-dev build-essentials
+    sudo apt-get install -y python-virtualenv libapache2-mod-wsgi python-dev build-essential unzip
 
 
 Copy and extract the source archive, and run install :
@@ -29,7 +29,6 @@ Prepare deployment :
 ::
 
     make deploy
-
 
 
 Configuration
@@ -59,24 +58,32 @@ Activate it and restart apache :
 ::
 
     sudo a2ensite rando
-    sudo /etc/init.d/apa
+    sudo /etc/init.d/apache restart
 
 
-Give Apache permissions :
+Give Apache permissions in application folder :
 
 ::
 
     sudo chgrp -R www-data media/
     sudo chmod -R g+rw media/
 
+And synchronize at least once !
+
+
+===============
+SYNCHRONIZATION
+===============
+
+::
+
+    make sync
 
 ============
 STATIC PAGES
 ============
 
-===============
-SYNCHRONIZATION
-===============
+(doc todo)
 
 =======
 AUTHORS
