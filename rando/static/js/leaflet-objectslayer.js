@@ -127,10 +127,13 @@ L.ObjectsLayer = L.GeoJSON.extend({
         else if (typeof layer.getLatLngs == 'function') {
             bounds = layer.getBounds();
         }
-        else {
+        else if (typeof layer.getLatLng == 'function') {
             bounds = new L.LatLngBounds(layer.getLatLng(), layer.getLatLng());
         }
-        this.rtree.insert(this._rtbounds(bounds), layer);
+        if (bounds.getSouthWest() && bounds.getNorthEast())
+            this.rtree.insert(this._rtbounds(bounds), layer);
+        else
+            console.error("No bounds found for layer " + pk);
     },
 
     onRemove: function (map) {
@@ -169,7 +172,10 @@ L.ObjectsLayer = L.GeoJSON.extend({
         }
     },
 
-    load: function (url) {
+    load: function (url, force) {
+        if (!!force && url.indexOf("?") != -1) {
+            url += '?_u=' + (new Date().getTime());
+        }
         var jsonLoad = function (data) {
             var features = jQuery.grep(data.features, function(obj, i) {
                 return obj.geometry != null;
@@ -361,7 +367,7 @@ L.Util.Cameleon = (function() {
 
         return {
             'registerStyle': function(name, priority, style) {
-                if (true || ! (name in available_styles))
+                if (! (name in available_styles))
                     available_styles[name] = {'name': name, 'priority': priority, 'style': style};
                 else
                     console.warn('Style ' + name + ' already registered.');
