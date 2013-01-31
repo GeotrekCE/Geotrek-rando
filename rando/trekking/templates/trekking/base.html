@@ -19,6 +19,7 @@
     <link href="{% static "css/bootstrap-responsive.css" %}" rel="stylesheet">
     <link type="text/css" href="{% static "js/jscrollpane/jquery.jscrollpane.css" %}" rel="stylesheet" media="all" />
     <link rel="stylesheet" href="{% static "css/jquery-ui.css" %}" />
+    <link rel="stylesheet" href="{% static "css/chosen.css" %}" />
     <link rel="stylesheet" href="{% static "css/style.css" %}" />
     {% endcompress %}
 
@@ -107,11 +108,11 @@
 
           <div class="filter-bloc vallee">
             <label>{% trans "Valley" %}</label>
-            <div class="btn-group">
-              {% for district in districts %}
-               <button class="bullet btn" data-id="{{ district.id }}" id="district-{{ district.id }}" data-filter="valle">{{ district.name }}</button>
-              {% endfor %}
-            </div>
+            <select id="district" data-filter="district" tabindex="2" multiple="" data-placeholder="{% trans "Choose a valley" %}">
+            {% for district in districts %}
+              <option value="{{ district.id }}">{{ district.name }}</option>
+            {% endfor %}
+            </select>
           </div>
 
           <div class="filter-bloc cities">
@@ -194,6 +195,7 @@
   <script src="{% static "js/bootstrap.min.js" %}"></script>
   <script src="{% static "js/leaflet-objectslayer.js" %}"></script>
   <script src="{% static "js/rtree.js" %}"></script>
+  <script src="{% static "js/chosen.jquery.min.js" %}"></script>
 
   <script src="{% static "js/application/ui.js" %}"></script>
   <script src="{% static "js/application/filter.js" %}"></script>

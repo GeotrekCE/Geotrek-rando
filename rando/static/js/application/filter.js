@@ -7,7 +7,8 @@ function TrekFilter()
     self.visible = null;
 
     this.initEvents = function () {
-        $(".theme .theme-icon, .vallee .btn, .cities .btn, .usage .usage-icon").unbind('click').on('click', self.filterChanged);
+        $(".theme .theme-icon, .cities .btn, .usage .usage-icon").unbind('click').on('click', self.filterChanged);
+        $("select#district").chosen().change(self.filterChanged);
         $(".boucle input").unbind('click').on('click', self.filterChanged);
         $('#search').unbind('keyup').on("keyup", self.filterChanged);
     }
@@ -81,6 +82,13 @@ function TrekFilter()
         if ($(e.target).is("input[type='checkbox']")) {
             self.state[category][dataid] = $(e.target)[0].checked;
         }
+        else if ($(e.target).is("select")) {
+            var values = $(e.target).val();
+            self.state[category] = {};
+            for (v in values) {
+                self.state[category][values[v]] = true;
+            }
+        }
         else if ($(e.target).attr("id") == 'search') {
             self.state[category] = $(e.target).val();
         }
@@ -107,7 +115,7 @@ function TrekFilter()
             this.matchClimb(trek) &&
             this._matchList(trek, 'theme', 'themes') &&
             this._matchList(trek, 'usage', 'usages') &&
-            this._matchList(trek, 'valle', 'districts') &&
+            this._matchList(trek, 'district', 'districts') &&
             this._matchList(trek, 'city', 'cities') &&
             //this.matchLoop(trek) &&
             this.search(trek) && 

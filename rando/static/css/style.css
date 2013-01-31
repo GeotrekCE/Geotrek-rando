@@ -18,6 +18,22 @@
   background: none;
 }
 
+/*
+ * Chosen override
+ */
+.chzn-container-active .chzn-choices {
+  border: 1px solid #AAA;
+}
+.chzn-container .chzn-results .highlighted {
+  background-color: #919191;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#919191', endColorstr='#747474', GradientType=0 );  
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(20%, #919191), color-stop(90%, #747474));
+  background-image: -webkit-linear-gradient(top, #919191 20%, #747474 90%);
+  background-image: -moz-linear-gradient(top, #919191 20%, #747474 90%);
+  background-image: -o-linear-gradient(top, #919191 20%, #747474 90%);
+  background-image: linear-gradient(#919191 20%, #747474 90%);
+  color: #fff;
+}
 
 
 /* Layout */
