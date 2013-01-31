@@ -141,6 +141,13 @@ function view_home () {
     $('.side-bar .result').on('click', function (e) {
         var trekOnMap = window.treksLayer.getLayer($(this).data('id'));
         if (trekOnMap) {
+            // If multi - take first one
+            if (trekOnMap instanceof L.MultiPolyline) {
+                for (i in trekOnMap._layers) {
+                    trekOnMap = trekOnMap._layers[i];
+                    break;
+                }
+            }
             var coords = trekOnMap.getLatLngs(),
                 middlepoint = coords[Math.round(coords.length/2)];
             trekOnMap.fire('click', {
