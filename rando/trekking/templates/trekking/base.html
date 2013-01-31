@@ -117,11 +117,11 @@
 
           <div class="filter-bloc cities">
             <label>{% trans "City" %}</label>
-            <div class="btn-group">
-              {% for city in cities %}
-               <button class="bullet btn" data-id="{{ city.code|floatformat }}" id="city-{{ city.code }}" data-filter="city">{{ city.name }}</button>
-              {% endfor %}
-            </div>
+            <select id="city" data-filter="city" tabindex="2" multiple="" data-placeholder="{% trans "Choose a city" %}">
+            {% for city in cities %}
+              <option value="{{ city.code|safe }}">{{ city.name }}</option>
+            {% endfor %}
+            </select>
           </div>
 
           <div class="filter-bloc boucle">

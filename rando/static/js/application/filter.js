@@ -8,7 +8,7 @@ function TrekFilter()
 
     this.initEvents = function () {
         $(".theme .theme-icon, .cities .btn, .usage .usage-icon").unbind('click').on('click', self.filterChanged);
-        $("select#district").chosen().change(self.filterChanged);
+        $("select#district, select#city").chosen().change(self.filterChanged);
         $(".boucle input").unbind('click').on('click', self.filterChanged);
         $('#search').unbind('keyup').on("keyup", self.filterChanged);
     }

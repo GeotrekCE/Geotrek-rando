@@ -45,7 +45,6 @@ function init_ui() {
 
     toggle_filters();
     sliders();
-    $('select#district').chosen();
 
     window.trekFilter = new TrekFilter();
     window.backPack = new BackPack();
