@@ -4,7 +4,7 @@
 <head>
     <!-- VERSION : {{ VERSION }} -->
     {% block head %}
-    <title>{% block title %}{{ settings.title }}{% endblock title %}</title>
+    <title>{% block title %}{{ TITLE }}{% endblock title %}</title>
 
     <!-- fav and touch icons -->
     <link rel="shortcut icon" href="{% static "ico/favicon.ico" %}">
@@ -31,7 +31,7 @@
     <div class="navbar-inner">
       <div class="container">
         <div class="nav-collapse">
-          <a href="{% url trekking:home %}"><h3>{{ settings.title|default:"Trekking" }}</h3></a>
+          <a href="{% url trekking:home %}"><h3>{{ TITLE }}</h3></a>
         </div>
         <!--/.nav-collapse --> 
       </div>

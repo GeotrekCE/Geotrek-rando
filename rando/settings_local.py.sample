@@ -1,4 +1,16 @@
-#CAMINAE_SERVER = 'geobi.makina-corpus.net/ecrins-sentiers'
+#!/usr/bin/env python
+# -*- coding: utf8 -*- 
+
+#--------------------------------------
+# Edit configuration 
+#
+
+CAMINAE_SERVER = 'geobi.makina-corpus.net/ecrins-sentiers'
+
+TITLE = {
+    'en': "Trekking",
+    'fr': "Portail rando",
+}
 
 #
 # In development

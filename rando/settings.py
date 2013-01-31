@@ -1,4 +1,5 @@
-# Django settings for rando project.
+#!/usr/bin/env python
+# -*- coding: utf8 -*- 
 import os
 
 
@@ -202,6 +203,11 @@ TEST_RUNNER = 'rando.testing.DatabaselessTestRunner'
 CAMINAE_SERVER = 'localhost:8000'
 INPUT_DATA_ROOT = os.path.join(MEDIA_ROOT, 'input')
 FLATPAGES_ROOT = os.path.join(MEDIA_ROOT, 'pages')
+
+TITLE = {
+    'en': "Trekking",
+    'fr': "Portail rando",
+}
 
 try:
     from settings_local import *
