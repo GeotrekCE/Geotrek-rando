@@ -7,7 +7,7 @@ function TrekFilter()
     self.visible = null;
 
     this.initEvents = function () {
-        $(".theme .theme-icon, .vallee .btn, .cities .btn, .access .btn, .usage .usage-icon").unbind('click').on('click', self.filterChanged);
+        $(".theme .theme-icon, .vallee .btn, .cities .btn, .usage .usage-icon").unbind('click').on('click', self.filterChanged);
         $(".boucle input").unbind('click').on('click', self.filterChanged);
         $('#search').unbind('keyup').on("keyup", self.filterChanged);
     }
