@@ -79,6 +79,15 @@ SYNCHRONIZATION
 
     make sync
 
+
+Default trek thumbnail
+----------------------
+
+If the trek has no pictures attached. A default thumbnail is used. Put it in ``media/default-thumbnail.jpg``, otherwise ``media/static/img/default-thumbnail.jpg`` will be used.
+
+On the detail page, by default, ``media/static/img/default-preview.jpg`` will be used.
+
+
 ============
 STATIC PAGES
 ============

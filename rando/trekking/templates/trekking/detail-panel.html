@@ -132,6 +132,10 @@
               <p>{{ picture.legend }}</p>
             </div>
           </div>
+          {% empty%}
+          <div class="item active">
+            <img src="{% static "img/default-preview.jpg" %}"/>
+          </div>
           {% endfor %}
         </div>
         <a class="carousel-control left" href="#trek-pictures" data-slide="prev">&lsaquo;</a>
