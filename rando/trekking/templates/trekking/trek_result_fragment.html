@@ -12,9 +12,7 @@
     <p>{{ trek.properties.difficulty.label }}</p>
     <div class="theme-tools">
       {% for theme in trek.properties.themes %}
-        <div class="theme-picto">
-            <img src="{% url trekking:fileserve theme.pictogram %}" title="{{ theme.label }}" alt="{{ theme.label }}">
-        </div>
+        {{ theme|pictogram }}
       {% endfor %}
     </div>
     <div class="search-tools">

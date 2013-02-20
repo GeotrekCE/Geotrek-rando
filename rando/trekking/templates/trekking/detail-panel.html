@@ -1,4 +1,4 @@
-{% load static i18n leaflet_tags %}
+{% load static i18n leaflet_tags trekking %}
 
 <script type="text/javascript">
     var poisMarkers = {};
@@ -160,11 +160,11 @@
 
         <h3>{% trans "Usages" %}</h3>
         {% for usage in object.properties.usages %}
-        <li>{{ usage.label }}</li>
+        <li>{{ usage|pictogram:"True" }} {{ usage.label }}</li>
         {% endfor %}
         <h3>{% trans "Themes" %}</h3>
         {% for theme in object.properties.themes %}
-        <li>{{ theme.label }}</li>
+        <li>{{ theme|pictogram:"True" }} {{ theme.label }}</li>
         {% endfor %}
       </div>
       <div id="trek-advice">

@@ -3,7 +3,7 @@ import os
 from django import template
 from django.conf import settings
 from django.core.urlresolvers import reverse
-
+from django.utils.safestring import mark_safe
 
 register = template.Library()
 
@@ -16,3 +16,12 @@ def thumbnail(trek):
     if os.path.exists(default):
         return os.path.join(settings.MEDIA_URL, 'default-thumbnail.jpg')
     return os.path.join(settings.STATIC_URL, 'img', 'default-thumbnail.jpg')
+
+
+@register.filter(is_safe=True)
+def pictogram(value, big=False):
+    url = reverse('trekking:fileserve', args=(value.pictogram,))
+    label = value.label
+    klass = 'big' if big else ''
+    markup = '<div class="pictogram %(klass)s"><img src="%(url)s" title="%(label)s" alt="%(label)s"></div>'
+    return mark_safe(markup % locals())

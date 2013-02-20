@@ -691,17 +691,26 @@ color:#625b50;
   float:left;
 }
 
-.theme-tools .theme-picto {
-  float:left;
+.pictogram {
   width: 32px;
   height: 32px;
   overflow: hidden;
+  display: inline-block;
 }
 
-.theme-tools .theme-picto img {
-  float:left;
+.pictogram img {
   max-width: none;
   height: 32px;
+}
+
+.pictogram.big {
+  width: 64px;
+  height: 64px;
+}
+
+.pictogram.big img {
+  max-width: none;
+  height: 64px;
 }
 
 

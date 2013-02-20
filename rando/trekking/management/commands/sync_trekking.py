@@ -154,6 +154,8 @@ class Command(BaseCommand):
                         InputFile(self, theme.pictogram).pull_if_modified()
                     for usage in trek.properties.usages:
                         InputFile(self, usage.pictogram).pull_if_modified()
+                    for weblink in trek.properties.web_links:
+                        InputFile(self, weblink.category.pictogram).pull_if_modified()
                     for poi in trek.pois.all():
                         InputFile(self, poi.properties.serializable_type.pictogram).pull_if_modified()
 
