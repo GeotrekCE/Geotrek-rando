@@ -91,6 +91,21 @@ class InputFile(object):
         return self.reply.content
 
 
+class POIsInputFile(InputFile):
+
+    def content(self):
+        content = self.reply.json
+        features = []
+        for feature in content['features']:
+            properties = feature['properties']
+            poitype = properties.pop('serializable_type')
+            properties['type'] = poitype
+            feature['properties'] = properties
+            features.append(feature)
+        content['features'] = features
+        return json.dumps(content)
+
+
 class TrekInputFile(InputFile):
 
     def __init__(self, command, **kwargs):
@@ -115,14 +130,14 @@ class TrekInputFile(InputFile):
             properties.update(detail)
 
             # Add POIs information, useful for textual search
-            f = InputFile(self.command, models.POIs.filepath.format(trek__pk=pk),
-                          language=self.language)
+            f = POIsInputFile(self.command, models.POIs.filepath.format(trek__pk=pk),
+                              language=self.language)
             f.pull_if_modified()
             poiscontent = json.loads(f.content())
             poisprops = [poi['properties'] for poi in poiscontent['features']]
             properties['pois'] = [{'name': poiprop['name'],
                                    'description': poiprop['description'],
-                                   'type': poiprop['serializable_type']['label']}
+                                   'type': poiprop['type']['label']}
                                   for poiprop in poisprops]
             feature['properties'] = properties
             features.append(feature)
@@ -157,7 +172,7 @@ class Command(BaseCommand):
                     for weblink in trek.properties.web_links:
                         InputFile(self, weblink.category.pictogram).pull_if_modified()
                     for poi in trek.pois.all():
-                        InputFile(self, poi.properties.serializable_type.pictogram).pull_if_modified()
+                        InputFile(self, poi.properties.type.pictogram).pull_if_modified()
 
                     InputFile(self, trek.altimetric_url, language=language).pull_if_modified()
                     InputFile(self, trek.gpx_url, language=language).pull_if_modified()

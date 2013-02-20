@@ -6,16 +6,10 @@
     function detailmapInit(map, bounds) {
 
         var poisMarkers = function(featureData, latlng) {
-            var img = '<img src="<src>" title="<title>">';
-            if (!featureData.properties.type) {
-              console.log("POI has no type.");
-              img = img.replace('<src>', '{% static "img/picto.png" %}');
-              img = img.replace('<title>', "{% trans "POI" %}");
-            }
-            else {
-              img = img.replace('<src>', 'data:'+featureData.properties.type.pictogram);
-              img = img.replace('<title>', featureData.properties.type.label);
-            }
+            var img = '<img src="%SRC%" title="%TITLE%">';
+            // TODO: trekking:fileserver
+            img = img.replace('%SRC%', '/fr/files/' + featureData.properties.type.pictogram);
+            img = img.replace('%TITLE%', featureData.properties.type.label);
             
             var poicon = new L.DivIcon({className: 'poi-marker-icon',
                                         iconAnchor: [12, 12],
@@ -218,7 +212,7 @@
         <div class="accordion-group">
           <div class="accordion-heading">
             <a class="accordion-toggle acc-open" id="poi-item-{{ poi.properties.pk}}" data-toggle="collapse" data-parent="#pois-accordion" data-id="{{ poi.properties.pk }}" href="#collapseOne">
-              <img src="{% if poi.properties.type %}data:{{ poi.properties.type.pictogram }}{% else %}{% static "img/picto.png" %}{% endif %}" title="{{ poi.properties.type.label }}">{{ poi.properties.name }}</a>
+              <img src="{% url trekking:fileserve poi.properties.type.pictogram %}" title="{{ poi.properties.type.label }}">{{ poi.properties.name }}</a>
           </div>
           <div id="collapseOne" class="accordion-body collapse" style="height: 0px; ">
             <div class="accordion-inner"><p>{{ poi.properties.description|safe }}</p></div>
