@@ -1,6 +1,8 @@
-{% load i18n static %}
+{% load i18n static trekking %}
 <div id="{% if backpack = "True" %}backpack-{% endif %}trek-{{ trek.properties.pk }}" data-id="{{ trek.properties.pk }}" class="result" {% if show = "False" %}style="display:none"{% endif %}>
-  <div class="illust"> <img src="{% static "img/trek.jpg" %}" width="110" height="110" /> </div>
+  <div class="illust">
+    <img src="{{ trek|thumbnail }}" width="110" height="110" />
+  </div>
   <div class="info-result">
     <a class="pjax" href="{% url trekking:detail trek.properties.slug %}">
         <h4>{{ trek.properties.name }}</h4>

@@ -122,7 +122,22 @@
     <div class="span4">
       <p class="teaser">{{ object.properties.description_teaser|default:"No teaser"|safe }}</p>
       <p>{{ object.properties.description|default:"No description"|safe }}</p>
-      <p class="image"><img src="{% get_static_prefix %}/img/montagnes.jpg" class="img-polaroid"></p>
+
+      <div id="trek-pictures" class="carousel slide">
+        <div class="carousel-inner">
+          {% for picture in object.properties.pictures %}
+          <div class="item {% if forloop.first %} active{% endif %}">
+            <img src="{% url trekking:fileserve picture.url %}" alt="{{ picture.title }}" />
+            <div class="carousel-caption">
+              <p>{{ picture.legend }}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <a class="carousel-control left" href="#trek-pictures" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#trek-pictures" data-slide="next">&rsaquo;</a>
+      </div><!-- /.carousel -->
+
       <p>{{ object.properties.ambiance|default:"No ambiance"|safe }}</p>
     </div>
 

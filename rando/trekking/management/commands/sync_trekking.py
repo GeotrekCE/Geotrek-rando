@@ -145,6 +145,10 @@ class Command(BaseCommand):
                 TrekInputFile(self, language=language).pull()
 
                 for trek in models.Trek.objects.all():
+                    if trek.properties.thumbnail:
+                        InputFile(self, trek.properties.thumbnail).pull_if_modified()
+                    for picture in trek.properties.pictures:
+                        InputFile(self, picture.url).pull_if_modified()
 
                     for theme in trek.properties.themes:
                         InputFile(self, theme.pictogram).pull_if_modified()
@@ -156,9 +160,7 @@ class Command(BaseCommand):
                     InputFile(self, trek.altimetric_url, language=language).pull_if_modified()
                     InputFile(self, trek.gpx_url, language=language).pull_if_modified()
                     InputFile(self, trek.kml_url, language=language).pull_if_modified()
-
-
-                    #TODO: attached files / pictures
                     #TODO: PDF both layouts
+
         except IOError, e:
             logger.fatal(e)
