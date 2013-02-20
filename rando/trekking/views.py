@@ -8,7 +8,7 @@ from django.views.static import serve as static_serve
 from django.shortcuts import redirect
 from djpjax import PJAXResponseMixin
 
-from .models import Trek, District
+from .models import Trek
 
 
 logger = logging.getLogger(__name__)
@@ -23,7 +23,6 @@ class HomeView(PJAXResponseMixin, TemplateView):
         lang = self.request.LANGUAGE_CODE
         context = super(HomeView, self).get_context_data(**kwargs)
         context['treks'] = Trek.objects.filter(language=lang).all()
-        context['districts'] = District.objects.all()
         return context
 
 

@@ -137,7 +137,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         try:
-            InputFile(self, models.District.filepath).pull_if_modified()
             InputFile(self, models.Settings.filepath).pull_if_modified()
             app_settings = models.Settings.objects.all()
             languages = app_settings.languages.available.keys()

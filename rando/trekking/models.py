@@ -72,10 +72,6 @@ class Settings(JSONModel):
     filepath = 'api/settings.json'
 
 
-class District(JSONModel):
-    filepath = 'api/district/district.geojson'
-
-
 class POIs(JSONModel):
     filepath = 'api/trek/{trek__pk}/pois.geojson'
 
