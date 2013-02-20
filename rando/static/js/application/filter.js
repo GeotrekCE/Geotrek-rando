@@ -129,9 +129,9 @@ function TrekFilter()
         var minStage = this.state.sliders.stage.min;
         var maxStage = this.state.sliders.stage.max;
         
-        var trekDifficulty = trek.properties.difficulty.id;
+        var trekDifficulty = trek.properties.difficulty;
         if  (!trekDifficulty) return true;
-        return trekDifficulty >= minStage && trekDifficulty <= maxStage;
+        return trekDifficulty.id >= minStage && trekDifficulty.id <= maxStage;
     }
 
     this.matchDuration = function (trek) {
