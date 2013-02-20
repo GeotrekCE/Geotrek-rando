@@ -302,17 +302,15 @@
 
 
 
-.filter-theme, .filter-usage {
+.filter-theme {
   width:32px;
-  height: 22px;
+  height:32px;
   margin-top:0;
   border: none;
   outline:0;
   -moz-box-shadow: none;
           box-shadow: none;
       margin-bottom:0;
-  background-position-x: -20px;
-  background-position-y: 50%;
   background-color: transparent;
   background-repeat: no-repeat;
 }
@@ -325,8 +323,7 @@
           outline:0;
   background-color: transparent;
   background-repeat: no-repeat;
-  background-position-x: 5px;
-  background-position-y: 50%;
+  background-position-x: -32px;
 }
 
 .show-hide-filters {
@@ -769,16 +766,15 @@ color:#625b50;
 
 .theme-tools .theme-picto {
   float:left;
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   overflow: hidden;
 }
 
 .theme-tools .theme-picto img {
   float:left;
   max-width: none;
-  width: 48px;
-  height: 24px;
+  height: 32px;
 }
 
 
