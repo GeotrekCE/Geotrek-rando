@@ -7,9 +7,8 @@ function TrekFilter()
     self.visible = null;
 
     this.initEvents = function () {
-        $(".theme .theme-icon, .cities .btn, .usage .usage-icon").unbind('click').on('click', self.filterChanged);
-        $("select#district, select#city").chosen().change(self.filterChanged);
-        $(".boucle input").unbind('click').on('click', self.filterChanged);
+        $(".theme .theme-icon").unbind('click').on('click', self.filterChanged);
+        $("select#usage, select#district, select#city, select#route").chosen().change(self.filterChanged);
         $('#search').unbind('keyup').on("keyup", self.filterChanged);
     }
 
@@ -117,7 +116,7 @@ function TrekFilter()
             this._matchList(trek, 'usage', 'usages') &&
             this._matchList(trek, 'district', 'districts') &&
             this._matchList(trek, 'city', 'cities') &&
-            //this.matchLoop(trek) &&
+            this.matchRoute(trek) &&
             this.search(trek) && 
             (self.visible == null || $.inArray(trek.properties.pk, self.visible) != -1))
              return true;
@@ -192,6 +191,17 @@ function TrekFilter()
         return trekClimb >= matching[minClimb] && trekClimb <= matching[maxClimb];
     }
 
+    this.matchRoute = function (trek) {
+        if (!trek.properties.route || !this.state.route)
+            return true;
+        var routes = [];
+        for (r in this.state.route)
+            routes.push(r);
+        if (routes.length == 0)
+            return true;
+        return $.inArray(trek.properties.route, routes) != -1;
+    }
+
     this._matchList = function (trek, category, property) {
         var list = [];
         for (filter in this.state[category]) {
@@ -224,13 +234,6 @@ function TrekFilter()
         return match;
     }
 
-/**************** Function Match Boucle ***************************/
-    this.matchLoop = function (trek)
-    {
-        return true; /// return (trek.properties.is_loop == (this.state.boucle  == "1"));
-    }
-
-/************************Funcction Search ************************/
     this.search = function (trek) {
         var searched = this.state.search;
         if (!searched) return true;

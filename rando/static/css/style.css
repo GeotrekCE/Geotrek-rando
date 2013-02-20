@@ -326,6 +326,28 @@
   background-position-x: -32px;
 }
 
+.theme
+{
+  width:auto;
+  float:left;
+  margin-left:50px;
+}
+
+.theme-icon
+{
+  width:auto;
+  float:left;
+}
+.theme-icon p
+{
+  font-size: 9px;
+    margin: 0;
+  font-weight:bold;
+    padding: 0;
+    text-align: center;
+  line-height:1;
+}
+
 .show-hide-filters {
   border: solid 1px #a09f94;
   outline:0;
@@ -352,108 +374,13 @@
 
 #advanced-filters {
   clear:both;
+  padding: 5px;
 }
 
 #advanced-filters .filter-bloc {
-  height: 80px;
-  float: left;
+  display: inline-block;
 }
 
-#advanced-filters .filter-bloc .btn.bullet {
-  text-align: left;
-  margin: 0;
-  padding: 0;
-  min-width: 100px;
-  width: 100%;
-  padding-left: 12px;
-  border: none;
-  box-shadow: none;
-  background:url(../img/rond-vide.png) no-repeat 0 50%;
-  font-size:9px;
-  color:#7f737c;
-}
-
-#advanced-filters .filter-bloc .btn.bullet.active,
- #advanced-filters .filter-bloc .btn.bullet:hover {
-  background:url(../img/rond-plein.png) no-repeat 0 50%;
-}
-
-.boucle .checkbox input
-{
-  float:none;
-  margin-left:0;
-}
-
-
-.vallee, .cities
-{
-  max-width: 350px;
-  margin-left:40px;
-}
-
-#advanced-filters .vallee .btn-group button,
-#advanced-filters .cities .btn-group button
-{
-  width:33% !important;
-}
-
-.usage
-{
-  margin-left:110px;
-}
-.usage label
-{
-  margin-left:20px
-}
-.usage div
-{
-  margin-left:5px;
-}
-.theme
-{
-  width:auto;
-  float:left;
-  margin-left:50px;
-}
-.theme .filter label 
-{
-  margin-bottom:0;
-}
-
-
-.theme-icon
-{
-  width:auto;
-  float:left;
-}
-.theme-icon p
-{
-  font-size: 9px;
-    margin: 0;
-  font-weight:bold;
-    padding: 0;
-    text-align: center;
-  line-height:1;
-}
-.usage-icon
-{
-  float:left;
-  text-align:center;
-}
-.usage-icon p
-{
-  font-size: 9px;
-    margin: 0;
-  font-weight:bold;
-    padding: 0;
-    text-align: center;
-  line-height:1;
-}
-
-.boucle {
-    margin-left: 20px;
-    width: 80px;
-}
 
 
 /****************************************************************************

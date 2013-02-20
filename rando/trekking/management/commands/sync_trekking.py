@@ -152,7 +152,6 @@ class Command(BaseCommand):
                     for usage in trek.properties.usages:
                         InputFile(self, usage.pictogram).pull_if_modified()
                     for poi in trek.pois.all():
-                        print poi.properties
                         InputFile(self, poi.properties.serializable_type.pictogram).pull_if_modified()
 
                     InputFile(self, trek.altimetric_url, language=language).pull_if_modified()

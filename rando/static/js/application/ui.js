@@ -230,7 +230,7 @@ function toggle_filters() {
         $("#hide-filters").show();
         $("#show-filters").hide();
         $("#advanced-filters").show();
-        $("#search-bar").height(searchdefaultheight * 2);
+        $("#search-bar").height(searchdefaultheight+40);
         layout();
     });
 }

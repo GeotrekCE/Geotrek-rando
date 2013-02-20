@@ -14,6 +14,7 @@ def settings(request):
     allusages = {}
     alldistricts = {}
     allcities = {}
+    allroutes = {}
     for trek in Trek.objects.filter(language=lang).all():
         for district in trek.properties.districts:
             alldistricts[district.id] = district
@@ -23,10 +24,15 @@ def settings(request):
             allusages[usage.id] = usage
         for theme in trek.properties.themes:
             allthemes[theme.id] = theme
+        route = trek.properties.route
+        if route:
+            allroutes[route.id] = route
+
     allthemes = sorted(allthemes.values(), key=lambda o: o.label)
     allusages = sorted(allusages.values(), key=lambda o: o.label)
     alldistricts = sorted(alldistricts.values(), key=lambda o: o.name)
     allcities = sorted(allcities.values(), key=lambda o: o.name)
+    allroutes = sorted(allroutes.values(), key=lambda o: o.label)
 
     return {
         'VERSION': __version__,
@@ -39,4 +45,5 @@ def settings(request):
         'usages': allusages,
         'districts': alldistricts,
         'cities': allcities,
+        'routes': allroutes,
     }
