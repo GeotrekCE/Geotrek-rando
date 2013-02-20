@@ -19,9 +19,8 @@ def thumbnail(trek):
 
 
 @register.filter(is_safe=True)
-def pictogram(value, big=False):
+def pictogram(value, klass=""):
     url = reverse('trekking:fileserve', args=(value.pictogram,))
     label = value.label
-    klass = 'big' if big else ''
     markup = '<div class="pictogram %(klass)s"><img src="%(url)s" title="%(label)s" alt="%(label)s"></div>'
     return mark_safe(markup % locals())

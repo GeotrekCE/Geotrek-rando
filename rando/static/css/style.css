@@ -709,10 +709,17 @@ color:#625b50;
 }
 
 .pictogram.big img {
-  max-width: none;
   height: 64px;
 }
 
+.pictogram.small {
+  width: 16px;
+  height: 16px;
+}
+
+.pictogram.small img {
+  height: 16px;
+}
 
 
 /****************************************************************************

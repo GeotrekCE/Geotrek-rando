@@ -164,11 +164,11 @@
 
         <h3>{% trans "Usages" %}</h3>
         {% for usage in object.properties.usages %}
-        <li>{{ usage|pictogram:"True" }} {{ usage.label }}</li>
+        <li>{{ usage|pictogram:"big" }} {{ usage.label }}</li>
         {% endfor %}
         <h3>{% trans "Themes" %}</h3>
         {% for theme in object.properties.themes %}
-        <li>{{ theme|pictogram:"True" }} {{ theme.label }}</li>
+        <li>{{ theme|pictogram:"big" }} {{ theme.label }}</li>
         {% endfor %}
       </div>
       <div id="trek-advice">
@@ -178,11 +178,26 @@
         {% if object.properties.disabled_infrastructure %}<p>{{ object.properties.disabled_infrastructure|safe }}</p>{% endif %}
         {% if object.properties.advised_parking %}<p>{{ object.properties.advised_parking|safe }}</p>{% endif %}
       </div>
+
       <div id="trek-links">
         <h3>{% trans "See also" %}</h3>
-        {% for weblink in object.properties.weblinks %}
-        <li><img src="{% get_static_prefix %}img/refuge.png"><a target="_blank" href="{{ weblink.url }}">{{ weblink.name }}</a></li>
+
+        {% regroup object.properties.web_links by category as weblinks %}
+
+        <ul>
+        {% for weblink in weblinks %}
+            <li>{{ weblink.grouper|pictogram:"small" }} {{ weblink.grouper.label }}
+            {% for item in weblink.list %}
+              {% if forloop.first and forloop.count > 0 %}<ul>{% endif %}
+              {% if forloop.count > 0 %}<li>{% endif %}
+              <a target="_blank" href="{{ item.url }}">{{ item.name }}</a>
+              {% if forloop.count > 0 %}</li>{% endif %}
+              {% if forloop.last and forloop.count > 0 %}</ul>{% endif %}
+            {% endfor %}
+            </li>
         {% endfor %}
+        </ul>
+
       </div>
     </div>
 
