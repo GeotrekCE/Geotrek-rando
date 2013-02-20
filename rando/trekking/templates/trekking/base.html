@@ -84,7 +84,7 @@
             {% for theme in themes %}
             <div class="theme-icon">
               <div class="filter-theme" id="theme-{{ theme.id }}" data-id="{{ theme.id }}" data-filter="theme"
-                style="background-image: url(data:{{ theme.pictogram }})">
+                style="background-size: 64px 32px;background-image: url({% url trekking:fileserve theme.pictogram %})">
               </div>
               <p>{{ theme.label }}</p>
             </div>
@@ -93,22 +93,19 @@
         </div>
 
         <div id="advanced-filters" style="display: none">
+
           <div class="filter-bloc usage">
             <label>{% trans "Usage" %}</label>
-
+            <select id="usage" data-filter="usage" tabindex="2" multiple="" data-placeholder="{% trans "Usages" %}">
             {% for usage in usages %}
-            <div class="usage-icon">
-              <div class="filter-usage" id="usage-{{ usage.id }}" data-id="{{ usage.id }}" data-filter="usage"
-                   style="background-image: url(data:{{ usage.pictogram }})">
-              </div>
-              <p>{{ usage.label }}</p>
-            </div>
+              <option value="{{ usage.id }}">{{ usage.label }}</option>
             {% endfor %}
+            </select>
           </div>
 
           <div class="filter-bloc vallee">
             <label>{% trans "Valley" %}</label>
-            <select id="district" data-filter="district" tabindex="2" multiple="" data-placeholder="{% trans "Choose a valley" %}">
+            <select id="district" data-filter="district" tabindex="2" multiple="" data-placeholder="{% trans "Valleys" %}">
             {% for district in districts %}
               <option value="{{ district.id }}">{{ district.name }}</option>
             {% endfor %}
@@ -117,7 +114,7 @@
 
           <div class="filter-bloc cities">
             <label>{% trans "City" %}</label>
-            <select id="city" data-filter="city" tabindex="2" multiple="" data-placeholder="{% trans "Choose a city" %}">
+            <select id="city" data-filter="city" tabindex="2" multiple="" data-placeholder="{% trans "Cities" %}">
             {% for city in cities %}
               <option value="{{ city.code|safe }}">{{ city.name }}</option>
             {% endfor %}

@@ -11,7 +11,7 @@
     <div class="theme-tools">
       {% for theme in trek.properties.themes %}
         <div class="theme-picto">
-            <img src="data:{{ theme.pictogram }}" title="{{ theme.label }}" alt="{{ theme.label }}">
+            <img src="{% url trekking:fileserve theme.pictogram %}" title="{{ theme.label }}" alt="{{ theme.label }}">
         </div>
       {% endfor %}
     </div>

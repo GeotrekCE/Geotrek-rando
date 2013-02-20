@@ -1,11 +1,10 @@
-import sys
 from os.path import join, getmtime, dirname, getsize
 from os import makedirs, utime
 import errno
 import json
 import logging
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.utils.http import http_date, parse_http_date_safe
 from django.conf import settings
 
@@ -38,10 +37,10 @@ class InputFile(object):
 
     def __init__(self, command, url, language=None):
         self.command = command
-        self.url = url
-        self.absolute_url = 'http://' + join(settings.CAMINAE_SERVER, url)
+        self.url = url[1:] if url.startswith('/') else url
+        self.absolute_url = 'http://' + join(settings.CAMINAE_SERVER, self.url)
         self.language = language or settings.LANGUAGE_CODE
-        self.path = join(settings.INPUT_DATA_ROOT, self.language, url)
+        self.path = join(settings.INPUT_DATA_ROOT, self.language, self.url)
         self.reply = None
 
     def pull_if_modified(self):
@@ -55,6 +54,7 @@ class InputFile(object):
         """
         headers = {}
         if self.language:
+            cprint(self.language, 'cyan', end=' ', file=self.command.stdout)
             headers.update({'Accept-language' : self.language})
         if ifmodified:
             try:
@@ -64,7 +64,7 @@ class InputFile(object):
                 assert getsize(self.path) > MIN_BYTE_SYZE
             except (OSError, AssertionError):
                 pass
-        cprint('* /%s ...' % self.url, 'white', attrs=['bold'], end=' ', file=self.command.stdout)
+        cprint('/%s ...' % self.url, 'white', attrs=['bold'], end=' ', file=self.command.stdout)
         self.reply = requests.get(self.absolute_url, headers=headers)
 
         if self.reply.status_code in (304,):
@@ -103,7 +103,7 @@ class TrekInputFile(InputFile):
             properties = feature['properties']
 
             # Ignore treks that are not published
-            if properties.get('published'):
+            if not properties.get('published', False):
                 continue
 
             pk = properties['pk']
@@ -139,16 +139,26 @@ class Command(BaseCommand):
         try:
             InputFile(self, models.District.filepath).pull_if_modified()
             InputFile(self, models.Settings.filepath).pull_if_modified()
-            settings = models.Settings.objects.all()
-            languages = settings.languages.available.keys()
+            app_settings = models.Settings.objects.all()
+            languages = app_settings.languages.available.keys()
             logger.info("Languages: %s" % languages)
             for language in languages:
                 TrekInputFile(self, language=language).pull()
 
                 for trek in models.Trek.objects.all():
+
+                    for theme in trek.properties.themes:
+                        InputFile(self, theme.pictogram).pull_if_modified()
+                    for usage in trek.properties.usages:
+                        InputFile(self, usage.pictogram).pull_if_modified()
+                    for poi in trek.pois.all():
+                        print poi.properties
+                        InputFile(self, poi.properties.serializable_type.pictogram).pull_if_modified()
+
                     InputFile(self, trek.altimetric_url, language=language).pull_if_modified()
                     InputFile(self, trek.gpx_url, language=language).pull_if_modified()
                     InputFile(self, trek.kml_url, language=language).pull_if_modified()
+
 
                     #TODO: attached files / pictures
                     #TODO: PDF both layouts
