@@ -1,15 +1,16 @@
+import sys
 from os.path import join, getmtime, dirname, getsize
 from os import makedirs, utime
 import errno
-import requests
 import json
 import logging
 
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.http import http_date, parse_http_date_safe
 from django.conf import settings
-from django.template.defaultfilters import slugify
 
+import requests
+from termcolor import cprint
 
 from rando.trekking import models
 
@@ -41,6 +42,7 @@ class InputFile(object):
         self.absolute_url = 'http://' + join(settings.CAMINAE_SERVER, url)
         self.language = language or settings.LANGUAGE_CODE
         self.path = join(settings.INPUT_DATA_ROOT, self.language, url)
+        self.reply = None
 
     def pull_if_modified(self):
         self.pull(ifmodified=True)
@@ -62,23 +64,24 @@ class InputFile(object):
                 assert getsize(self.path) > MIN_BYTE_SYZE
             except (OSError, AssertionError):
                 pass
-        self.command.stdout.write('Sync %s ... ' % self.absolute_url)
+        cprint('* /%s ...' % self.url, 'white', attrs=['bold'], end=' ', file=self.command.stdout)
         self.reply = requests.get(self.absolute_url, headers=headers)
-        self.command.stdout.write(str(self.reply.status_code))
 
         if self.reply.status_code in (304,):
-            self.command.stdout.write(": Up-to-date\n")
+            cprint("%s (Up-to-date)\n" % self.reply.status_code, 'green', attrs=['bold'], file=self.command.stdout)
             return
-
-        if self.reply.status_code != requests.codes.ok:
+        elif self.reply.status_code != requests.codes.ok:
+            cprint("%s (Failed)" % self.reply.status_code, 'red', attrs=['bold'], file=self.command.stderr)
             raise IOError("Failed to retrieve %s (code: %s)" % (self.absolute_url, 
                                                                 self.reply.status_code))
+        else:
+            cprint("%s (Download)" % self.reply.status_code, 'yellow', file=self.command.stdout)
 
         mkdir_p(dirname(self.path))
         with open(self.path, 'wb') as f:
             f.write(self.content())
             f.write("\n")
-        self.command.stdout.write(": %s\n" % self.path)
+        self.command.stdout.write("  %s\n" % self.path.replace(settings.INPUT_DATA_ROOT, ''))
 
         last_modified = parse_http_date_safe(self.reply.headers.get('last-modified'))
         if last_modified:
@@ -98,15 +101,13 @@ class TrekInputFile(InputFile):
         features = []
         for feature in content['features']:
             properties = feature['properties']
+
+            # Ignore treks that are not published
+            if properties.get('published'):
+                continue
+
             pk = properties['pk']
-
-            # Remove serializable_ in properties names
-            for key in properties.keys():
-                if 'serializable_' in key:
-                    properties[key.replace('serializable_', '')] = properties[key]
-                    properties.pop(key)
-
-            # Detail properties
+            # Fill with detail properties
             detailpath = models.Trek.detailpath.format(pk=pk)
             detailfile = InputFile(self.command, detailpath)
             detailfile.pull_if_modified()
@@ -123,12 +124,9 @@ class TrekInputFile(InputFile):
                                    'description': poiprop['description'],
                                    'type': poiprop['serializable_type']['label']}
                                   for poiprop in poisprops]
+            feature['properties'] = properties
+            features.append(feature)
 
-            properties['slug'] = '%s-%s' % (pk,
-                                            slugify(properties['name']))
-            if properties.get('published'):
-                feature['properties'] = properties
-                features.append(feature)
         content['features'] = features
         return json.dumps(content)
 
