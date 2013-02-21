@@ -160,7 +160,7 @@ function view_home () {
               latlng: middlepoint,
             });
             // Track event
-            _gaq.push(['_trackEvent', 'Results', 'Click', trekOnMap.properties.name]);
+            _gaq.push(['_trackEvent', 'Results', 'Click', trekOnMap.properties && trekOnMap.properties.name]);
         }
         else {
           console.warn("Trek not on map: " + $(this).data('id'));
