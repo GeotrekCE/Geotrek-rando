@@ -137,6 +137,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'ganalytics',
     'leaflet',
     'localeurl',
     'compressor',
@@ -209,6 +210,9 @@ TITLE = {
     'en': "Trekking",
     'fr': "Portail rando",
 }
+
+GANALYTICS_TRACKING_CODE = 'UA-XXXXXXXX-XX'
+
 
 try:
     from settings_local import *

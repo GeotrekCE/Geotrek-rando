@@ -20,6 +20,7 @@ setup(
         'django-localeurl == 1.5',
         'django-pjax == 1.2',
         'easydict == 1.4',
-        'django_compressor == 1.2'
+        'django_compressor == 1.2',
+        'django-ganalytics == 0.2',
     ],
 )

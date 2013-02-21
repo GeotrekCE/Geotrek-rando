@@ -12,6 +12,9 @@ TITLE = {
     'fr': "Portail rando",
 }
 
+GANALYTICS_TRACKING_CODE = 'UA-XXXXXXXX-XX'
+
+
 #
 # In development
 #...................

@@ -1,4 +1,4 @@
-{% load i18n static leaflet_tags compress trekking %}
+{% load i18n static leaflet_tags compress trekking ganalytics %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -193,6 +193,7 @@
   <script src="{% static "js/application/map.js" %}"></script> 
   {% endcompress %}
 
+  {% ganalytics %}
 
   <script type="text/javascript">
 
