@@ -108,8 +108,21 @@ class POIsInputFile(InputFile):
 
 class TrekInputFile(InputFile):
 
+    def content(self):
+        # Remove unpublished treks from related
+        content = self.reply.json
+        content['relationships'] = [r for r in content['relationships'] if r['published']]
+        # For presentation purposes
+        content['relationships_departure'] = [r for r in content['relationships'] if r['has_common_departure']]
+        content['relationships_edge'] = [r for r in content['relationships'] if r['has_common_edge']]
+        content['relationships_circuit'] = [r for r in content['relationships'] if r['is_circuit_step']]
+        return json.dumps(content)
+
+
+class TrekListInputFile(InputFile):
+
     def __init__(self, command, **kwargs):
-        super(TrekInputFile, self).__init__(command, models.Trek.filepath, **kwargs)
+        super(TrekListInputFile, self).__init__(command, models.Trek.filepath, **kwargs)
 
     def content(self):
         content = self.reply.json
@@ -124,12 +137,12 @@ class TrekInputFile(InputFile):
             pk = properties['pk']
             # Fill with detail properties
             detailpath = models.Trek.detailpath.format(pk=pk)
-            detailfile = InputFile(self.command, detailpath)
+            detailfile = TrekInputFile(self.command, detailpath)
             detailfile.pull_if_modified()
             detail = json.loads(detailfile.content())
             properties.update(detail)
 
-            # Add POIs information, useful for textual search
+            # Add POIs information in list, useful for textual search
             f = POIsInputFile(self.command, models.POIs.filepath.format(trek__pk=pk),
                               language=self.language)
             f.pull_if_modified()
@@ -155,9 +168,9 @@ class Command(BaseCommand):
             InputFile(self, models.Settings.filepath).pull_if_modified()
             app_settings = models.Settings.objects.all()
             languages = app_settings.languages.available.keys()
-            logger.info("Languages: %s" % languages)
+            logger.debug("Languages: %s" % languages)
             for language in languages:
-                TrekInputFile(self, language=language).pull()
+                TrekListInputFile(self, language=language).pull()
 
                 for trek in models.Trek.objects.all():
                     if trek.properties.thumbnail:
