@@ -54,7 +54,7 @@ class InputFile(object):
         """
         headers = {}
         if self.language:
-            cprint(self.language, 'cyan', end=' ', file=self.command.stdout)
+            cprint('/' + self.language, 'cyan', end='', file=self.command.stdout)
             headers.update({'Accept-language' : self.language})
         if ifmodified:
             try:
@@ -81,7 +81,7 @@ class InputFile(object):
         with open(self.path, 'wb') as f:
             f.write(self.content())
             f.write("\n")
-        self.command.stdout.write("  %s\n" % self.path.replace(settings.INPUT_DATA_ROOT, ''))
+        logger.debug("  %s\n" % self.path.replace(settings.INPUT_DATA_ROOT, ''))
 
         last_modified = parse_http_date_safe(self.reply.headers.get('last-modified'))
         if last_modified:
