@@ -1,3 +1,5 @@
+import logging
+
 from django.conf import settings as settings_
 from easydict import EasyDict as edict
 
@@ -5,8 +7,20 @@ from rando import __version__
 from .models import Trek, Settings
 
 
+logger = logging.getLogger(__name__)
+
+
 def settings(request):
     lang = request.LANGUAGE_CODE
+
+    app_settings = Settings.objects.all()
+    if not hasattr(app_settings, 'map'):
+        app_settings = dict(map=dict(extent=[-180, -90, 180, 90]))
+
+    alltreks = Trek.objects.filter(language=lang).all()
+    if not isinstance(alltreks, list):
+        alltreks = []
+
 
 
     # Build list of distinct attributes
@@ -15,7 +29,7 @@ def settings(request):
     alldistricts = {}
     allcities = {}
     allroutes = {}
-    for trek in Trek.objects.filter(language=lang).all():
+    for trek in alltreks:
         for district in trek.properties.districts:
             alldistricts[district.id] = district
         for city in trek.properties.cities:
@@ -37,9 +51,9 @@ def settings(request):
     return {
         'VERSION': __version__,
         'TITLE': settings_.TITLE.get(lang, 'Trekking'),
-        'settings' : Settings.objects.all(),
+        'settings' : app_settings,
          # We want the treks list to be initialized from everywhere
-        'treksjson' : Trek.objects.filter(language=lang).content,
+        'treksjson' : Trek.objects.filter(language=lang).content if alltreks else '{features: []}',
         # We need those to initialize filters
         'themes': allthemes,
         'usages': allusages,

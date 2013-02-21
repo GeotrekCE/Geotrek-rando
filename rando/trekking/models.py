@@ -31,7 +31,7 @@ class JSONManager(object):
             with open(fullpath, 'r') as f:
                 content = f.read()
             return content
-        except:
+        except IOError:
             logger.error("Could not read '%s'" % fullpath)
         return '{}'
 
