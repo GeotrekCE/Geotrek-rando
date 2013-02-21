@@ -34,12 +34,11 @@ Prepare deployment :
 Configuration
 --------------  
 
-Copy ``settings_local.py.sample`` to ``settings_local.py` and set settings like :
+Copy ``settings_local.py.sample`` to ``settings_local.py` and edit it to override settings.
 
-::
+:note:
 
-    CAMINAE_SERVER = 'geobi.makina-corpus.net/ecrins-sentiers'
-
+    Do not change ``MEDIA_URL`` or expect problems.
 
 Apache vhost
 ------------
@@ -65,34 +64,111 @@ Give Apache permissions in application folder :
 
 ::
 
-    sudo chgrp -R www-data media/
-    sudo chmod -R g+rw media/
+    sudo chgrp -R www-data var/
+    sudo chmod -R g+rw var/
 
-And synchronize at least once !
+And *synchronize* at least once !
 
 
 ===============
 SYNCHRONIZATION
 ===============
 
+Setup the Caminae server you want to synchronize, using the ``CAMINAE_SERVER`` setting.
+
 ::
 
     make sync
 
 
+=============
+CUSTOMIZATION
+=============
+
+All customizations in this paragraph happen in the ``var/input/media/`` folder.
+
+
+Basic FTP access configuration
+==============================
+
+You can setup a FTP access to this *media* folder. 
+
+::
+
+    sudo apt-get install vsftpd
+
+
+Create a user *editor* whose ``$HOME`` will be the *media* folder.
+
+::
+
+    sudo adduser --home `pwd`/var/input/media/ editor
+
+Done !
+
+
+Static files
+============
+
+All files available in this *media* folder will be available at the ``/media`` URL.
+
+Static pages
+============
+
+All static pages will be loaded from a ``pages`` folder.
+
+Create a subfolder for each language (``fr/``, ``en/``, ``it/`` ...).
+
+Create ``*.html`` files in these folders. The name of the file becomes the title of the page.
+
+If you want to customize the alphabetical order, you can use prefixes with numbers (for example,
+ ``pages/fr/01-Réglementation.html``.)
+
+
+CSS style
+=========
+
+A ``style.css`` is loaded in the page, and allows to override every part of the website.
+
+Header
+======
+
+Upload your file and add a custom section in the custom CSS :
+
+::
+
+    .navbar-inner {
+        background: url(/media/yourfile.jpg) no-repeat;
+    }
+
+Footer
+======
+
+A ``footer.html`` is loaded and injected into the page.
+
+
 Default trek thumbnail
-----------------------
+======================
 
-If the trek has no pictures attached. A default thumbnail is used. Put it in ``media/default-thumbnail.jpg``, otherwise ``media/static/img/default-thumbnail.jpg`` will be used.
+If a trek has no pictures attached, a default thumbnail is used.
 
-On the detail page, by default, ``media/static/img/default-preview.jpg`` will be used.
+A ``default-thumbnail.jpg`` is loaded from the *media* folder.
+
+If missing ``var/static/img/default-thumbnail.jpg`` will be used.
+
+:note:
+
+    For preview, on the detail page, by default, ``var/static/img/default-preview.jpg`` will be used.
 
 
-============
-STATIC PAGES
-============
+===============
+TROUBLESHOOTING
+===============
 
-(doc todo)
+Uploaded files are not served by Apache
+=======================================
+
+Make sure Apache has read access to all files uploaded and created in the *media* folder.
 
 =======
 AUTHORS
