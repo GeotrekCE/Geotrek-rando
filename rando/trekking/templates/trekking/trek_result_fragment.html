@@ -1,5 +1,5 @@
 {% load i18n static trekking %}
-<div id="{% if backpack = "True" %}backpack-{% endif %}trek-{{ trek.properties.pk }}" data-id="{{ trek.properties.pk }}" class="result" {% if show = "False" %}style="display:none"{% endif %}>
+<div id="{% if backpack = "True" %}backpack-{% endif %}trek-{{ trek.properties.pk }}" data-id="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}" class="result" {% if show = "False" %}style="display:none"{% endif %}>
   <div class="illust">
     <img src="{{ trek|thumbnail }}" width="110" height="110" />
   </div>

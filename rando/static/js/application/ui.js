@@ -68,12 +68,16 @@ function page_load() {
 
     // Add trek to backpack
     $('.add-sac').on('click', function (e) {
-        var trekid = $(this).data('pk');
+        var trekid = $(this).data('pk')
+          , trekname = $(this).data('name');
         if (window.backPack.contains(trekid)) {
             window.backPack.remove(trekid);
+            // Track event
+            _gaq.push(['_trackEvent', 'Backpack', 'Remove', trekname]);
         }
         else {
             window.backPack.save(trekid);
+            _gaq.push(['_trackEvent', 'Backpack', 'Add', trekname]);
         }
     });
 }
@@ -106,8 +110,6 @@ function view_home () {
 
     $("#mainmap").show();  // We are on home with map
 
-    //$('#result-backpack-content .tab-pane').jScrollPane();
-
     $('#result-backpack-tabs .nav-tabs a').click(function (e) {
         e.preventDefault();
         $(this).tab('show');
@@ -122,11 +124,15 @@ function view_home () {
       var trekOnMap = window.treksLayer.getLayer($(this).data('pk'));
       if (trekOnMap) {
         window.maps[0].fitBounds(fakeBounds(trekOnMap.getBounds()));
+        // Track event
+        _gaq.push(['_trackEvent', 'Results', 'Zoom', trekOnMap.properties.name]);
       }
     });
 
     $('.side-bar .result').on('dblclick', function (e) {
         $('#trek-'+ $(this).data('id') +'.result a.pjax').click();
+        // Track event
+        _gaq.push(['_trackEvent', 'Results', 'Doubleclick', $(this).data('name')]);
     });
 
     // Highlight map on hover in sidebar results
@@ -153,6 +159,8 @@ function view_home () {
             trekOnMap.fire('click', {
               latlng: middlepoint,
             });
+            // Track event
+            _gaq.push(['_trackEvent', 'Results', 'Click', trekOnMap.properties.name]);
         }
         else {
           console.warn("Trek not on map: " + $(this).data('id'));

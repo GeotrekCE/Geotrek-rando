@@ -40,6 +40,9 @@
 
         // Go to detail page on double-click
         treksLayer.on('dblclick', function (e) {
+            // Track event
+            _gaq.push(['_trackEvent', 'Map', 'Doubleclick', e.layer.properties.name]);
+            // Simulate click on link
             $('#trek-'+ e.layer.properties.pk +'.result a.pjax').click();
         });
 
@@ -63,6 +66,9 @@
                  .openOn(map);
             // Make sure clic on details will open as pjax
             $('.popupdetail a', popup._container).click(function () {
+                // Track event
+                _gaq.push(['_trackEvent', 'Map', 'Popup', e.layer.properties.name]);
+                // Navigate to details
                 $('#trek-'+ e.layer.properties.pk +'.result a.pjax').click();
             });
             
