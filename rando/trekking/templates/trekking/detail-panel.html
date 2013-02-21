@@ -14,7 +14,7 @@
                                         iconAnchor: [12, 12],
                                         html: img}),
                 marker = L.marker(latlng, {icon: poicon});
-            marker.on('mouseover', function (e) {
+            marker.on('click', function (e) {
                 $('#poi-item-' + featureData.properties.pk).click();
             });
             window.poisMarkers[featureData.properties.pk] = marker;
@@ -29,8 +29,6 @@
                                         $(this).animate({"margin-top": "+=20px"}, "fast");
                                     });
         });
-
-
 
         // Trek
         var trekGeoJSON = {
@@ -55,7 +53,6 @@
                  {clickable: false,
                   icon: new L.Icon.Default({iconUrl: '{% static "img/marker-target.png" %}'})}).addTo(map);
 
-
         map.fitBounds(trekLayer.getBounds()).zoomOut();
 
         var poisLayer = new L.GeoJSON({{ poisjson|safe }}, {
@@ -69,7 +66,10 @@
             iconAnchor: [0, 0],
         });
         var parkingLocation = {{ object.properties.parking_location }};
-        L.marker([parkingLocation[1], parkingLocation[0]], {clickable: false, icon: parkingIcon}).addTo(map);
+        L.marker([parkingLocation[1], parkingLocation[0]],
+                 {icon: parkingIcon})
+         .bindPopup("{{ object.properties.advised_parking }}" || "{% trans "Recommended parking" %}")
+         .addTo(map);
 
         //Load altimetric graph
         altimetricInit();
@@ -179,7 +179,6 @@
         {% if object.properties.advice %}<p>{{ object.properties.advice|safe }}</p>{% endif %}
         {% if object.properties.public_transport %}<p>{{ object.properties.public_transport|safe }}</p>{% endif %}
         {% if object.properties.disabled_infrastructure %}<p>{{ object.properties.disabled_infrastructure|safe }}</p>{% endif %}
-        {% if object.properties.advised_parking %}<p>{{ object.properties.advised_parking|safe }}</p>{% endif %}
       </div>
 
       <div id="trek-links">
