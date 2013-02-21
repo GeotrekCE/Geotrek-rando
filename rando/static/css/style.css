@@ -379,6 +379,7 @@
 
 #advanced-filters .filter-bloc {
   display: inline-block;
+  vertical-align: top;
 }
 
 

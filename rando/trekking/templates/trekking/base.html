@@ -91,33 +91,33 @@
         <div id="advanced-filters" style="display: none">
 
           <div class="filter-bloc usage">
-            <select id="usage" data-filter="usage" tabindex="2" multiple="" data-placeholder="{% trans "Usages" %}">
+            <select id="usage" tabindex="2" multiple="" data-filter="usage" data-placeholder="{% trans "Usages" %}">
             {% for usage in usages %}
-              <option value="{{ usage.id }}">{{ usage.label }}</option>
+              <option data-filter="usage" data-id="{{ usage.id }}" value="{{ usage.id }}">{{ usage.label }}</option>
             {% endfor %}
             </select>
           </div>
 
           <div class="filter-bloc vallee">
-            <select id="district" data-filter="district" tabindex="2" multiple="" data-placeholder="{% trans "Valleys" %}">
+            <select id="district" tabindex="2" multiple="" data-filter="district" data-placeholder="{% trans "Valleys" %}">
             {% for district in districts %}
-              <option value="{{ district.id }}">{{ district.name }}</option>
+              <option data-filter="district" data-id="{{ district.id }}" value="{{ district.id }}">{{ district.name }}</option>
             {% endfor %}
             </select>
           </div>
 
           <div class="filter-bloc cities">
-            <select id="city" data-filter="city" tabindex="2" multiple="" data-placeholder="{% trans "Cities" %}">
+            <select id="city" tabindex="2" multiple="" data-filter="city" data-placeholder="{% trans "Cities" %}">
             {% for city in cities %}
-              <option value="{{ city.code|safe }}">{{ city.name }}</option>
+              <option data-filter="city" data-id="{{ city.code }}" value="{{ city.code|safe }}">{{ city.name }}</option>
             {% endfor %}
             </select>
           </div>
 
           <div class="filter-bloc route">
-            <select id="route" data-filter="route" tabindex="2" multiple="" data-placeholder="{% trans "Route" %}">
+            <select id="route" tabindex="2" multiple="" data-filter="route"  data-placeholder="{% trans "Route" %}">
             {% for route in routes %}
-              <option value="{{ route.id|safe }}">{{ route.label }}</option>
+              <option data-filter="route" data-id="{{ route.id }}" value="{{ route.id|safe }}">{{ route.label }}</option>
             {% endfor %}
             </select>
           </div>

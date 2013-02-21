@@ -44,6 +44,10 @@ function TrekFilter()
                 if (elem.is('input')) {
                     elem.attr('checked', !!value);
                 }
+                if (elem.is('option')) {
+                    if (!!value) elem.attr('selected', 'selected');
+                    else elem.removeAttr('selected');
+                }
                 else if ($('#' + filter).hasClass('ui-slider')) {
                     $('#' + filter).slider('values', 0, value.min);
                     $('#' + filter).slider('values', 1, value.max);
