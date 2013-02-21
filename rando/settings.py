@@ -188,12 +188,12 @@ LOGGING = {
         },
         'rando': {
             'handlers': ['console', 'mail_admins'],
-            'level': 'DEBUG',
+            'level': 'WARNING',
             'propagate': False,
         },
         '': {
             'handlers': ['console', 'mail_admins'],
-            'level': 'DEBUG',
+            'level': 'ERROR',
             'propagate': False,
         },
     }

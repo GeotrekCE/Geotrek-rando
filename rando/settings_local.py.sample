@@ -17,6 +17,9 @@ TITLE = {
 #...................
 # DEBUG = True
 # TEMPLATE_DEBUG = DEBUG
+# LOGGING['loggers']['rando']['level'] = 'DEBUG'
+# LOGGING['loggers']['']['level'] = 'DEBUG'
+#
 # CACHES = {
 #    'default': {
 #        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
