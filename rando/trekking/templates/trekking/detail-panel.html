@@ -147,7 +147,11 @@
           </div>
         {% endif %}
         <h4 id="departure-arrival">{{ object.properties.departure }} &rarr; {{ object.properties.arrival }}</h4>
-        
+
+        {% if object.properties.route %}
+        <p>{% trans "Route" %} : <span class="value">{{ object.properties.route.label }}</span></p>
+        {% endif %}
+
         <p>{% trans "Valleys" %} : <span class="value">{% for district in object.properties.districts %}{{ district.name }}, {% endfor %}</span></p>
         <p>{% trans "Difficulty" %} : <span class="value">{{ object.properties.difficulty.label }}</span></p>
         <p>{% trans "Ascent" %} : <span class="value">{{ object.properties.ascent }}m</span></p>
@@ -158,11 +162,17 @@
 
         <h3>{% trans "Usages" %}</h3>
         {% for usage in object.properties.usages %}
-        <li>{{ usage|pictogram:"big" }} {{ usage.label }}</li>
+          <li>{{ usage|pictogram:"big" }} {{ usage.label }}</li>
         {% endfor %}
+
         <h3>{% trans "Themes" %}</h3>
         {% for theme in object.properties.themes %}
-        <li>{{ theme|pictogram:"big" }} {{ theme.label }}</li>
+          <li>{{ theme|pictogram:"big" }} {{ theme.label }}</li>
+        {% endfor %}
+
+        <h3>{% trans "Networks" %}</h3>
+        {% for network in object.properties.networks %}
+          <li>{{ network.name }}</li>
         {% endfor %}
       </div>
       <div id="trek-advice">
@@ -182,16 +192,42 @@
         {% for weblink in weblinks %}
             <li>{{ weblink.grouper|pictogram:"small" }} {{ weblink.grouper.label }}
             {% for item in weblink.list %}
-              {% if forloop.first and forloop.count > 0 %}<ul>{% endif %}
-              {% if forloop.count > 0 %}<li>{% endif %}
+              {% if forloop.first and weblink.list.count > 1 %}<ul>{% endif %}
+              {% if weblink.list.count > 1 %}<li>{% endif %}
               <a target="_blank" href="{{ item.url }}">{{ item.name }}</a>
-              {% if forloop.count > 0 %}</li>{% endif %}
-              {% if forloop.last and forloop.count > 0 %}</ul>{% endif %}
+              {% if weblink.list.count > 1 %}</li>{% endif %}
+              {% if forloop.last and weblink.list.count > 1 %}</ul>{% endif %}
             {% endfor %}
             </li>
         {% endfor %}
         </ul>
 
+        {% for relationship in object.properties.relationships_departure %}
+          {% if forloop.first %}
+            <h4>{% trans "Sharing departure" %}</h4>
+            <ul>
+          {% endif %}
+          <li><a href="{% url trekking:detail pk=relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+          {% if forloop.last %}</ul>{% endif %}
+        {% endfor %}
+
+        {% for relationship in object.properties.relationships_edge %}
+          {% if forloop.first %}
+            <h4>{% trans "Sharing paths" %}</h4>
+            <ul>
+          {% endif %}
+          <li><a href="{% url trekking:detail relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+          {% if forloop.last %}</ul>{% endif %}
+        {% endfor %}
+
+        {% for relationship in object.properties.relationships_circuit %}
+          {% if forloop.first %}
+            <h4>{% trans "Sharing circuit" %}</h4>
+            <ul>
+          {% endif %}
+          <li><a href="{% url trekking:detail relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+          {% if forloop.last %}</ul>{% endif %}
+        {% endfor %}
       </div>
     </div>
 
