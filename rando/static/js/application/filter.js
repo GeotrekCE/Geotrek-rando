@@ -7,7 +7,7 @@ function TrekFilter()
     self.visible = null;
 
     this.initEvents = function () {
-        $(".theme .theme-icon").unbind('click').on('click', self.filterChanged);
+        $(".theme .filter").unbind('click').on('click', self.filterChanged);
         $("select#usage, select#district, select#city, select#route").chosen().change(self.filterChanged);
         $('#search').unbind('keyup').on("keyup", self.filterChanged);
     }
@@ -75,29 +75,30 @@ function TrekFilter()
     }
 
     this.filterChanged = function (e) {
-        var category =$(e.target).data("filter");
+        var elem = $(elem).data("filter") ? $(e.target) : $(e.target).parents('.filter')
+          , category = $(elem).data("filter");
         console.log('Filter changed: ' + category);
         if (!(category in self.state)) {
             self.state[category] = {};
         }
-        var dataid = $(e.target).data("id");
+        var dataid = $(elem).data("id");
 
-        if ($(e.target).is("input[type='checkbox']")) {
+        if ($(elem).is("input[type='checkbox']")) {
             self.state[category][dataid] = $(e.target)[0].checked;
         }
-        else if ($(e.target).is("select")) {
+        else if ($(elem).is("select")) {
             var values = $(e.target).val();
             self.state[category] = {};
             for (v in values) {
                 self.state[category][values[v]] = true;
             }
         }
-        else if ($(e.target).attr("id") == 'search') {
+        else if ($(elem).attr("id") == 'search') {
             self.state[category] = $(e.target).val();
         }
         else {
-            $(e.target).toggleClass('active');
-            self.state[category][dataid] = $(e.target).hasClass("active");
+            elem.toggleClass('active');
+            self.state[category][dataid] = elem.hasClass("active");
         }
         self.save();
     }

@@ -1,4 +1,4 @@
-{% load i18n static leaflet_tags compress %}
+{% load i18n static leaflet_tags compress trekking %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,11 +78,9 @@
           <div class="theme">
             <label>{% trans "Thematic" %}</label>
             {% for theme in themes %}
-            <div class="theme-icon">
-              <div class="filter-theme" id="theme-{{ theme.id }}" data-id="{{ theme.id }}" data-filter="theme"
-                style="background-size: 64px 32px;background-image: url({% url trekking:fileserve theme.pictogram %})">
-              </div>
-              <p>{{ theme.label }}</p>
+              <div class="filter" data-filter="theme" data-id="{{ theme.id }}" id="theme-{{ theme.id }}">
+                {{ theme|pictogram }}
+                <p>{{ theme.label }}</p>
             </div>
             {% endfor %}
           </div>
