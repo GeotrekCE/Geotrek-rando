@@ -50,8 +50,8 @@ USE_TZ = True
 
 
 INPUT_DATA_ROOT = os.path.join(PROJECT_PATH, '..', 'var', 'input')
-FLATPAGES_ROOT = os.path.join(PROJECT_PATH, '..', 'var', 'pages')
 MEDIA_ROOT = os.path.join(INPUT_DATA_ROOT, 'media')
+FLATPAGES_ROOT = os.path.join(MEDIA_ROOT,'pages')
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(PROJECT_PATH, '..', 'var', 'static')
 STATIC_URL = '/static/'
@@ -106,7 +106,8 @@ MIDDLEWARE_CLASSES = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
-    'rando.trekking.context_processors.settings'
+    'django.core.context_processors.media',
+    'rando.trekking.context_processors.settings',
 )
 
 ROOT_URLCONF = 'rando.urls'

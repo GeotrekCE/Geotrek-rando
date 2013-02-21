@@ -1,10 +1,23 @@
 import os
+import logging
 
 from django import template
 from django.conf import settings
 from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext_lazy as _
 
+logger = logging.getLogger(__name__)
 register = template.Library()
+
+
+@register.simple_tag
+def fileinclude(filename):
+    try:
+        path = os.path.join(settings.MEDIA_ROOT, filename)
+        return open(path, 'r').read()
+    except IOError as e:
+        logger.error(e)
+    return _('Empty')
 
 
 @register.filter

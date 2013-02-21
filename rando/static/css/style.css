@@ -7,7 +7,6 @@
   margin-right: 0px;
 }
 
-
 [class^="icon-"],
 [class*=" icon-"] {
   background-image: url("../img/glyphicons-halflings-white.png");
@@ -55,7 +54,6 @@
         top:0;
     }
 }
-
 
 .nav-tabs {
   border-bottom: none;
@@ -954,106 +952,4 @@ a.accordion-toggle:hover  {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
-}
-
-
-
-
-
-
-
-.part1
-{
-  width:100px;
-  height:100%;
-  float:left;
-  
-  background:url(../img/footer-partenaire.jpg) no-repeat -40px 0;
-}
-.part2
-{
-  width:100px;
-  height:100%;
-  float:left;
-  background:url(../img/footer-partenaire.jpg) no-repeat -130px 0;
-  
-}
-.part3
-{
-  width:100px;
-  height:100%;
-  float:left;
-  background:url(../img/footer-partenaire.jpg) no-repeat -230px 0;
-  
-}
-.part4
-{
-  width:100px;
-  height:100%;
-  float:left;
-  background:url(../img/footer-partenaire.jpg) no-repeat -324px 0;
-  
-}
-.part5
-{
-  width:100px;
-  height:100%;
-  float:left;
-  background:url(../img/footer-partenaire.jpg) no-repeat -410px 0;
-  
-}
-.part6
-{
-  width:100px;
-  height:100%;
-  float:left;
-  background:url(../img/footer-partenaire.jpg) no-repeat -500px 0;
-  
-}
-.part7
-{
-  width:100px;
-  height:100%;
-  float:left;
-  background:url(../img/footer-partenaire.jpg) no-repeat -40px 0;
-  
-}
-.part8
-{
-  width:100px;
-  height:100%;
-  float:left;
-  background:url(../img/footer-partenaire.jpg) no-repeat -130px 0;
-  
-}
-.part9
-{
-  width:100px;
-  height:100%;
-  float:left;
-  background:url(../img/footer-partenaire.jpg) no-repeat -230px 0;
-  
-}
-.part10
-{
-  width:100px;
-  height:100%;
-  float:left;
-  background:url(../img/footer-partenaire.jpg) no-repeat -324px 0;
-  
-}
-.part11
-{
-  width:100px;
-  height:100%;
-  float:left;
-  background:url(../img/footer-partenaire.jpg) no-repeat -410px 0;
-}
-.part12
-{
-  width:100px;
-  height:100%;
-  float: left;
-  background:url(../img/footer-partenaire.jpg) no-repeat -500px 0;
-  
 }

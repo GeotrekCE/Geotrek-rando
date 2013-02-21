@@ -12,9 +12,9 @@ serve: bin/python
 
 deploy: bin/python
 	mkdir -p var/input
-	mkdir var/input/media
 	mkdir var/static
-	mkdir var/pages
+	mkdir var/input/media
+	mkdir var/input/media/pages
 	bin/python ./manage.py collectstatic
 
 test: bin/python

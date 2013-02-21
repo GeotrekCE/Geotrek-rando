@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{% static "css/jquery-ui.css" %}" />
     <link rel="stylesheet" href="{% static "css/chosen.css" %}" />
     <link rel="stylesheet" href="{% static "css/style.css" %}" />
+    <link rel="stylesheet" href="{{ MEDIA_URL }}style.css" />
     {% endcompress %}
     {% endblock head %}
 
@@ -31,9 +32,7 @@
         <div class="nav-collapse">
           <a href="{% url trekking:home %}"><h3>{{ TITLE }}</h3></a>
         </div>
-        <!--/.nav-collapse --> 
       </div>
-      <!--/.container -->
 
       <a class="btn" id="global-share" href="#">{% trans "Share" %}</a> </div>
 
@@ -143,32 +142,7 @@
   <!-- container -->
 
   <footer id="bottom-panel" class="footer">
-    <div class="row-footer"> <a href="#">
-      <div class="part1"></div>
-      </a> <a href="#">
-      <div class="part2"></div>
-      </a> <a href="#">
-      <div class="part3"></div>
-      </a> <a href="#">
-      <div class="part4"></div>
-      </a> <a href="#">
-      <div class="part5"></div>
-      </a> <a href="#">
-      <div class="part6"></div>
-      </a> <a href="#">
-      <div class="part7"></div>
-      </a> <a href="#">
-      <div class="part8"></div>
-      </a> <a href="#">
-      <div class="part9"></div>
-      </a> <a href="#">
-      <div class="part10"></div>
-      </a> <a href="#">
-      <div class="part11"></div>
-      </a> <a href="#">
-      <div class="part12"></div>
-      </a>
-    </div>
+    {% fileinclude "footer.html" %}
   </footer>
 
   {% compress js %}
