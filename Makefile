@@ -11,9 +11,10 @@ serve: bin/python
 	bin/python ./manage.py runserver 8888
 
 deploy: bin/python
-	mkdir -p media/input
-	mkdir -p media/static
-	mkdir -p media/pages
+	mkdir -p var/input
+	mkdir var/input/media
+	mkdir var/static
+	mkdir var/pages
 	bin/python ./manage.py collectstatic
 
 test: bin/python

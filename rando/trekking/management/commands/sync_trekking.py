@@ -39,7 +39,7 @@ class InputFile(object):
         self.command = command
         self.url = url[1:] if url.startswith('/') else url
         self.absolute_url = 'http://' + join(settings.CAMINAE_SERVER, self.url)
-        self.language = language or settings.LANGUAGE_CODE
+        self.language = language or ''
         self.path = join(settings.INPUT_DATA_ROOT, self.language, self.url)
         self.reply = None
 
@@ -65,10 +65,11 @@ class InputFile(object):
             except (OSError, AssertionError):
                 pass
         cprint('/%s ...' % self.url, 'white', attrs=['bold'], end=' ', file=self.command.stdout)
+        self.command.stdout.flush()
         self.reply = requests.get(self.absolute_url, headers=headers)
 
         if self.reply.status_code in (304,):
-            cprint("%s (Up-to-date)\n" % self.reply.status_code, 'green', attrs=['bold'], file=self.command.stdout)
+            cprint("%s (Up-to-date)" % self.reply.status_code, 'green', attrs=['bold'], file=self.command.stdout)
             return
         elif self.reply.status_code != requests.codes.ok:
             cprint("%s (Failed)" % self.reply.status_code, 'red', attrs=['bold'], file=self.command.stderr)
@@ -88,6 +89,8 @@ class InputFile(object):
             utime(self.path, (last_modified, last_modified))
 
     def content(self):
+        if not self.reply.content:
+            return open(self.path, 'rb').read()
         return self.reply.content
 
 
@@ -95,6 +98,9 @@ class POIsInputFile(InputFile):
 
     def content(self):
         content = self.reply.json
+        if content is None:
+            return super(POIsInputFile, self).content()
+
         features = []
         for feature in content['features']:
             properties = feature['properties']
@@ -109,8 +115,11 @@ class POIsInputFile(InputFile):
 class TrekInputFile(InputFile):
 
     def content(self):
-        # Remove unpublished treks from related
         content = self.reply.json
+        if content is None:
+            return super(TrekInputFile, self).content()
+
+        # Remove unpublished treks from related
         content['relationships'] = [r for r in content['relationships'] if r['published']]
         # For presentation purposes
         content['relationships_departure'] = [r for r in content['relationships'] if r['has_common_departure']]
@@ -126,6 +135,9 @@ class TrekListInputFile(InputFile):
 
     def content(self):
         content = self.reply.json
+        if content is None:
+            return super(TrekListInputFile, self).content()
+
         features = []
         for feature in content['features']:
             properties = feature['properties']
@@ -137,7 +149,7 @@ class TrekListInputFile(InputFile):
             pk = properties['pk']
             # Fill with detail properties
             detailpath = models.Trek.detailpath.format(pk=pk)
-            detailfile = TrekInputFile(self.command, detailpath)
+            detailfile = TrekInputFile(self.command, detailpath, language=self.language)
             detailfile.pull_if_modified()
             detail = json.loads(detailfile.content())
             properties.update(detail)
@@ -172,25 +184,29 @@ class Command(BaseCommand):
             for language in languages:
                 TrekListInputFile(self, language=language).pull()
 
-                for trek in models.Trek.objects.all():
-                    if trek.properties.thumbnail:
-                        InputFile(self, trek.properties.thumbnail).pull_if_modified()
-                    for picture in trek.properties.pictures:
-                        InputFile(self, picture.url).pull_if_modified()
-
-                    for theme in trek.properties.themes:
-                        InputFile(self, theme.pictogram).pull_if_modified()
-                    for usage in trek.properties.usages:
-                        InputFile(self, usage.pictogram).pull_if_modified()
-                    for weblink in trek.properties.web_links:
-                        InputFile(self, weblink.category.pictogram).pull_if_modified()
-                    for poi in trek.pois.all():
-                        InputFile(self, poi.properties.type.pictogram).pull_if_modified()
-
+                for trek in models.Trek.objects.filter(language=language).all():
                     InputFile(self, trek.altimetric_url, language=language).pull_if_modified()
                     InputFile(self, trek.gpx_url, language=language).pull_if_modified()
                     InputFile(self, trek.kml_url, language=language).pull_if_modified()
                     #TODO: PDF both layouts
 
+            # Fetch media only once, since they do not depend on language
+            for trek in models.Trek.objects.filter(language=settings.LANGUAGE_CODE).all():
+                if trek.properties.thumbnail:
+                    InputFile(self, trek.properties.thumbnail).pull_if_modified()
+                for picture in trek.properties.pictures:
+                    InputFile(self, picture.url).pull_if_modified()
+
+                for theme in trek.properties.themes:
+                    InputFile(self, theme.pictogram).pull_if_modified()
+                for usage in trek.properties.usages:
+                    InputFile(self, usage.pictogram).pull_if_modified()
+                for weblink in trek.properties.web_links:
+                    InputFile(self, weblink.category.pictogram).pull_if_modified()
+                for poi in trek.pois.all():
+                    InputFile(self, poi.properties.type.pictogram).pull_if_modified()
+
         except IOError, e:
             logger.fatal(e)
+
+        cprint("Done", 'green', attrs=['bold'], file=self.stdout)

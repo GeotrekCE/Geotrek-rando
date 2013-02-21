@@ -15,7 +15,7 @@ class JSONManager(object):
     def __init__(self, klass, filepath=None, language=None):
         self.klass = klass
         self.filepath = filepath
-        self.language = language or settings.LANGUAGE_CODE
+        self.language = language
 
     def filter(self, **kwargs):
         self.__dict__.update(**kwargs)
@@ -25,7 +25,7 @@ class JSONManager(object):
     def content(self):
         self.filepath = self.filepath.format(**self.__dict__)
         fullpath = join(settings.INPUT_DATA_ROOT, 
-                        self.language, self.filepath)
+                        self.language or '', self.filepath)
         try:
             logger.debug("Read content from %s" % fullpath)
             with open(fullpath, 'r') as f:

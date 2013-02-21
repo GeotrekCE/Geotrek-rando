@@ -1,6 +1,13 @@
-Alias /static/ /PATH_TO_SOURCE/static/
+Alias /static/ /PATH_TO_SOURCE/media/static/
 
 <Directory /PATH_TO_SOURCE/media/static>
+  Order deny,allow
+  Allow from all
+</Directory>
+
+Alias /media/ /PATH_TO_SOURCE/media/input/media/
+
+<Directory /PATH_TO_SOURCE/media/input/media>
   Order deny,allow
   Allow from all
 </Directory>

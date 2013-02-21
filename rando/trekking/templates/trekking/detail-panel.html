@@ -7,8 +7,7 @@
 
         var poisMarkers = function(featureData, latlng) {
             var img = '<img src="%SRC%" title="%TITLE%">';
-            // TODO: trekking:fileserver
-            img = img.replace('%SRC%', '/fr/files/' + featureData.properties.type.pictogram);
+            img = img.replace('%SRC%', featureData.properties.type.pictogram);
             img = img.replace('%TITLE%', featureData.properties.type.label);
             
             var poicon = new L.DivIcon({className: 'poi-marker-icon',
@@ -121,7 +120,7 @@
         <div class="carousel-inner">
           {% for picture in object.properties.pictures %}
           <div class="item {% if forloop.first %} active{% endif %}">
-            <img src="{% url trekking:fileserve picture.url %}" alt="{{ picture.title }}" />
+            <img src="{{ picture.url }}" alt="{{ picture.title }}" />
             <div class="carousel-caption">
               <p>{{ picture.legend }}</p>
             </div>
@@ -248,7 +247,9 @@
         <div class="accordion-group">
           <div class="accordion-heading">
             <a class="accordion-toggle acc-open" id="poi-item-{{ poi.properties.pk}}" data-toggle="collapse" data-parent="#pois-accordion" data-id="{{ poi.properties.pk }}" href="#collapseOne">
-              <img src="{% url trekking:fileserve poi.properties.type.pictogram %}" title="{{ poi.properties.type.label }}">{{ poi.properties.name }}</a>
+              {{ poi.properties.type|pictogram:"small" }}
+              {{ poi.properties.name }}
+            </a>
           </div>
           <div id="collapseOne" class="accordion-body collapse" style="height: 0px; ">
             <div class="accordion-inner"><p>{{ poi.properties.description|safe }}</p></div>
