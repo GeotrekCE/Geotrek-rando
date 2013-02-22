@@ -155,10 +155,10 @@ function TrekFilter()
     }
 
     this.matchStage = function (trek) {
-        if (!this.state.sliders) return true;
-        if (!this.state.sliders.stage) return true;
-        var minStage = this.state.sliders.stage.min;
-        var maxStage = this.state.sliders.stage.max;
+        if (!self.state.sliders) return true;
+        if (!self.state.sliders.stage) return true;
+        var minStage = self.state.sliders.stage.min;
+        var maxStage = self.state.sliders.stage.max;
         
         var trekDifficulty = trek.properties.difficulty;
         if  (!trekDifficulty) return true;
@@ -166,10 +166,10 @@ function TrekFilter()
     }
 
     this.matchDuration = function (trek) {
-        if (!this.state.sliders) return true;
-        if (!this.state.sliders.time) return true;
-        var minDuration = this.state.sliders.time.min;
-        var maxDuration = this.state.sliders.time.max;
+        if (!self.state.sliders) return true;
+        if (!self.state.sliders.time) return true;
+        var minDuration = self.state.sliders.time.min;
+        var maxDuration = self.state.sliders.time.max;
         var matching = {
             1:12,
             2:24,
@@ -196,10 +196,10 @@ function TrekFilter()
     }
 
     this.matchClimb = function (trek) {
-        if (!this.state.sliders) return true;
-        if (!this.state.sliders.den) return true;
-        var minClimb = this.state.sliders.den.min;
-        var maxClimb = this.state.sliders.den.max;
+        if (!self.state.sliders) return true;
+        if (!self.state.sliders.den) return true;
+        var minClimb = self.state.sliders.den.min;
+        var maxClimb = self.state.sliders.den.max;
 
         var matching = {
             1:200,
@@ -226,10 +226,10 @@ function TrekFilter()
     }
 
     this.matchRoute = function (trek) {
-        if (!trek.properties.route || !this.state.route)
+        if (!trek.properties.route || !self.state.route)
             return true;
         var routes = [];
-        for (r in this.state.route)
+        for (r in self.state.route)
             routes.push(r);
         if (routes.length == 0)
             return true;
@@ -238,8 +238,8 @@ function TrekFilter()
 
     this._matchList = function (trek, category, property) {
         var list = [];
-        for (filter in this.state[category]) {
-            if (this.state[category][filter] === true) {
+        for (filter in self.state[category]) {
+            if (self.state[category][filter] === true) {
                 list.push(''+filter);
             }
         }
@@ -269,7 +269,7 @@ function TrekFilter()
     }
 
     this.search = function (trek) {
-        var searched = this.state.search;
+        var searched = self.state.search;
         if (!searched) return true;
 
         var htmldecode = function (value) { 
