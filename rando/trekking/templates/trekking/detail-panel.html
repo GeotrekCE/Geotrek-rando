@@ -62,7 +62,7 @@
         <p>{% trans "Difficulty" %} : <span class="value">{{ object.properties.difficulty.label }}</span></p>
         <p>{% trans "Ascent" %} : <span class="value">{{ object.properties.ascent }}m</span></p>
         <p>{% trans "Descent" %} : <span class="value">{{ object.properties.descent }}m</span></p>
-        <p>{% trans "Duration" %} : <span class="value">{{ object.properties.duration }}H</span></p>
+        <p>{% trans "Duration" %} : <span class="value">{{ object.properties.duration|default:0 }}H</span></p>
         <p>{% trans "Min elevation" %} : <span class="value">{{ object.properties.min_elevation }}m</span></p>
         <p>{% trans "Max elevation" %} : <span class="value">{{ object.properties.max_elevation }}m</span></p>
 
@@ -236,11 +236,13 @@
             iconSize: [24, 24],
             iconAnchor: [0, 0],
         });
-        var parkingLocation = {{ object.properties.parking_location }};
-        L.marker([parkingLocation[1], parkingLocation[0]],
-                 {icon: parkingIcon})
-         .bindPopup("{{ object.properties.advised_parking }}" || "{% trans "Recommended parking" %}")
-         .addTo(map);
+        var parkingLocation = {{ object.properties.parking_location|default:"null" }};
+        if (parkingLocation) {
+          L.marker([parkingLocation[1], parkingLocation[0]],
+                   {icon: parkingIcon})
+           .bindPopup("{{ object.properties.advised_parking }}" || "{% trans "Recommended parking" %}")
+           .addTo(map);
+        }
 
         //Load altimetric graph
         altimetricInit();
