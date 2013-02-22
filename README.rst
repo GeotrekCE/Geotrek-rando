@@ -80,6 +80,12 @@ Setup the Caminae server you want to synchronize, using the ``CAMINAE_SERVER`` s
 
     make sync
 
+You can schedule synchronization in a crontab (e.g. every hour) :
+
+::
+
+    0 * * * *  cd /path/to/application && /usr/bin/make sync
+
 
 =============
 CUSTOMIZATION
