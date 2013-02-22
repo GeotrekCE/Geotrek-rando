@@ -112,7 +112,7 @@
             <h4>{% trans "Sharing departure" %}</h4>
             <ul>
           {% endif %}
-          <li><a href="{% url trekking:detail pk=relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+          <li><a href="{% url trekking:detail relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
           {% if forloop.last %}</ul>{% endif %}
         {% endfor %}
 
