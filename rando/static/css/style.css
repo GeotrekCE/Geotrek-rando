@@ -414,10 +414,6 @@ body {
 }
 
 
-#side-bar .tabbable {
-  height: 100%;
-}
-
 
 /*
  * Fake tabs 
@@ -577,6 +573,14 @@ p.tab-content-empty {
 }
 #search.active {
   background-color: white;
+}
+
+#result-backpack-content {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 3%;
+  top: 75px;
 }
 
 #result-backpack-tabs ul.nav {
