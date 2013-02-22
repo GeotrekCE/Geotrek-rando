@@ -15,7 +15,7 @@ deploy: bin/python
 	mkdir -p var/static
 	mkdir -p var/input/media
 	mkdir -p var/input/media/pages
-	touch -p var/input/media/style.css
+	touch var/input/media/style.css
 	bin/python ./manage.py collectstatic
 
 test: bin/python
