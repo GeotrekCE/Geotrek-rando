@@ -1,3 +1,4 @@
+import re
 from os.path import join, getmtime, dirname, getsize
 from os import makedirs, utime
 import errno
@@ -31,6 +32,16 @@ def mkdir_p(path):
             pass
         else:
             raise
+
+# Make sure pictograms start with MEDIA_URL
+def reroot(item, attr=None):
+    if isinstance(item, list):
+        return [reroot(i, attr) for i in item]
+    if attr is not None:
+        item[attr] = reroot(item[attr])
+        return item
+    return re.sub('(.*)%s' % settings.MEDIA_URL, settings.MEDIA_URL, item or '')
+
 
 
 class InputFile(object):
@@ -105,6 +116,7 @@ class POIsInputFile(InputFile):
         for feature in content['features']:
             properties = feature['properties']
             poitype = properties.pop('serializable_type')
+            poitype = reroot(poitype, attr='pictogram')
             properties['type'] = poitype
             feature['properties'] = properties
             features.append(feature)
@@ -118,6 +130,16 @@ class TrekInputFile(InputFile):
         content = self.reply.json
         if content is None:
             return super(TrekInputFile, self).content()
+
+        content['thumbnail'] = reroot(content['thumbnail'])
+        content['pictures'] = reroot(content['pictures'], attr='url')
+        content['themes'] = reroot(content['themes'], attr='pictogram')
+        content['usages'] = reroot(content['usages'], attr='pictogram')
+        wl = []
+        for w in content['web_links']:
+            w['category'] = reroot(w['category'], attr='pictogram')
+            wl.append(w)
+        content['web_links'] = wl
 
         # Remove unpublished treks from related
         content['relationships'] = [r for r in content['relationships'] if r['published']]
@@ -193,25 +215,19 @@ class Command(BaseCommand):
             # Fetch media only once, since they do not depend on language
             for trek in models.Trek.objects.filter(language=settings.LANGUAGE_CODE).all():
                 if trek.properties.thumbnail:
-                    url = trek.properties.thumbnail.replace(app_settings.server, '')
-                    InputFile(self, url).pull_if_modified()
+                    InputFile(self, trek.properties.thumbnail).pull_if_modified()
                 for picture in trek.properties.pictures:
-                    url = picture.url.replace(app_settings.server, '')
-                    InputFile(self, url).pull_if_modified()
+                    InputFile(self, picture.url).pull_if_modified()
 
                 for theme in trek.properties.themes:
-                    url = theme.pictogram.replace(app_settings.server, '')
-                    InputFile(self, url).pull_if_modified()
+                    InputFile(self, theme.pictogram).pull_if_modified()
                 for usage in trek.properties.usages:
-                    url = usage.pictogram.replace(app_settings.server, '')
-                    InputFile(self, url).pull_if_modified()
+                    InputFile(self, usage.pictogram).pull_if_modified()
                 for weblink in trek.properties.web_links:
                     if weblink.category:
-                        url = weblink.category.pictogram.replace(app_settings.server, '')
-                        InputFile(self, url).pull_if_modified()
+                        InputFile(self, weblink.category.pictogram).pull_if_modified()
                 for poi in trek.pois.all():
-                    url = poi.properties.type.pictogram.replace(app_settings.server, '')
-                    InputFile(self, url).pull_if_modified()
+                    InputFile(self, poi.properties.type.pictogram).pull_if_modified()
 
         except IOError, e:
             logger.fatal(e)

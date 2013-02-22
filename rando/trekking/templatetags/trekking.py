@@ -1,5 +1,4 @@
 import os
-import re
 import logging
 
 from django import template
@@ -24,10 +23,8 @@ def fileinclude(filename):
 @register.filter
 def thumbnail(trek):
     if trek.properties.thumbnail:
-        url = trek.properties.thumbnail
-        assert settings.MEDIA_URL in url, '%s does not contain %s' % (url, settings.MEDIA_URL)
-        url = re.sub('^(.*)%s' % settings.MEDIA_URL, settings.MEDIA_URL, url)
-        return url
+        assert trek.properties.thumbnail.startswith(settings.MEDIA_URL)
+        return trek.properties.thumbnail
     # Default, provided at deployment
     default = os.path.join(settings.MEDIA_ROOT, 'default-thumbnail.jpg')
     if os.path.exists(default):
@@ -38,11 +35,10 @@ def thumbnail(trek):
 
 @register.filter(is_safe=True)
 def pictogram(value, klass=""):
-    if value is None:
+    if value is None or not value.pictogram:
         return ''
+    assert value.pictogram.startswith(settings.MEDIA_URL), '%s does not start with %s' % (value.pictogram, settings.MEDIA_URL)
     url = value.pictogram
-    assert settings.MEDIA_URL in url, '%s does not contain %s' % (url, settings.MEDIA_URL)
-    url = re.sub('^(.*)%s' % settings.MEDIA_URL, settings.MEDIA_URL, url)
     label = value.label
     markup = '<div class="pictogram %(klass)s"><img src="%(url)s" title="%(label)s" alt="%(label)s"></div>'
     return mark_safe(markup % locals())
