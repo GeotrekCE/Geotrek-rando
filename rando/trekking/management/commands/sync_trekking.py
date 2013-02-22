@@ -193,18 +193,25 @@ class Command(BaseCommand):
             # Fetch media only once, since they do not depend on language
             for trek in models.Trek.objects.filter(language=settings.LANGUAGE_CODE).all():
                 if trek.properties.thumbnail:
-                    InputFile(self, trek.properties.thumbnail).pull_if_modified()
+                    url = trek.properties.thumbnail.replace(app_settings.server, '')
+                    InputFile(self, url).pull_if_modified()
                 for picture in trek.properties.pictures:
-                    InputFile(self, picture.url).pull_if_modified()
+                    url = picture.url.replace(app_settings.server, '')
+                    InputFile(self, url).pull_if_modified()
 
                 for theme in trek.properties.themes:
-                    InputFile(self, theme.pictogram).pull_if_modified()
+                    url = theme.pictogram.replace(app_settings.server, '')
+                    InputFile(self, url).pull_if_modified()
                 for usage in trek.properties.usages:
-                    InputFile(self, usage.pictogram).pull_if_modified()
+                    url = usage.pictogram.replace(app_settings.server, '')
+                    InputFile(self, url).pull_if_modified()
                 for weblink in trek.properties.web_links:
-                    InputFile(self, weblink.category.pictogram).pull_if_modified()
+                    if weblink.category:
+                        url = weblink.category.pictogram.replace(app_settings.server, '')
+                        InputFile(self, url).pull_if_modified()
                 for poi in trek.pois.all():
-                    InputFile(self, poi.properties.type.pictogram).pull_if_modified()
+                    url = poi.properties.type.pictogram.replace(app_settings.server, '')
+                    InputFile(self, url).pull_if_modified()
 
         except IOError, e:
             logger.fatal(e)
