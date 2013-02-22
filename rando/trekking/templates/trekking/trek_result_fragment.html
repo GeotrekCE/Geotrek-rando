@@ -8,11 +8,13 @@
         <h4>{{ trek.properties.name }}</h4>
     </a>
     <p>{% for district in trek.properties.districts %}{{ district.name }}, {% endfor %}</p>
-    <p>{{ trek.properties.duration }}H - {% trans "Climb" %} {{ trek.properties.ascent }}m</p>
-    <p>{{ trek.properties.difficulty.label }}</p>
+    <p>{{ trek.properties.duration|default:0 }}H - {% trans "Climb" %} {{ trek.properties.ascent }}m</p>
+    <p>{{ trek.properties.difficulty.label|default:"&nbsp;" }}</p>
     <div class="theme-tools">
       {% for theme in trek.properties.themes %}
         {{ theme|pictogram }}
+      {% empty %}
+        <p>&nbsp;</p>
       {% endfor %}
     </div>
     <div class="search-tools">

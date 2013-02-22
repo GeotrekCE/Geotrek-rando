@@ -1,118 +1,25 @@
 {% load static i18n leaflet_tags trekking %}
 
-<script type="text/javascript">
-    var poisMarkers = {};
-
-    function detailmapInit(map, bounds) {
-
-        var poisMarkers = function(featureData, latlng) {
-            var img = '<img src="%SRC%" title="%TITLE%">';
-            img = img.replace('%SRC%', featureData.properties.type.pictogram);
-            img = img.replace('%TITLE%', featureData.properties.type.label);
-            
-            var poicon = new L.DivIcon({className: 'poi-marker-icon',
-                                        iconAnchor: [12, 12],
-                                        html: img}),
-                marker = L.marker(latlng, {icon: poicon});
-            marker.on('click', function (e) {
-                $('#poi-item-' + featureData.properties.pk).click();
-            });
-            window.poisMarkers[featureData.properties.pk] = marker;
-            return marker;
-        };
-
-        $('#pois-accordion').on('open', function (e, accordion) {
-            var id = $(accordion).data('id'),
-                marker = window.poisMarkers[id];
-            $(marker._icon).animate({"margin-top": "-=20px"}, "fast",
-                                    function(){
-                                        $(this).animate({"margin-top": "+=20px"}, "fast");
-                                    });
-        });
-
-        // Trek
-        var trekGeoJSON = {
-          "type": "GeometryCollection",
-          "geometries": [
-            { "type": "LineString",
-              "coordinates": {{ object.geometry.coordinates|safe }}
-            }
-          ]
-        };
-        var trekLayer = new L.GeoJSON(trekGeoJSON, {
-            style: {color: 'orange', opacity: 1.0, clickable: false},
-        });
-        trekLayer.addTo(map);
-        // Show start and end
-        var originlonlat = [{{ object.geometry.coordinates|first|join:"," }}],
-            destinationlonlat = [{{ object.geometry.coordinates|last|join:"," }}];
-        L.marker(L.latLng(originlonlat[1], originlonlat[0]),
-                 {clickable: false,
-                  icon: new L.Icon.Default({iconUrl: '{% static "img/marker-source.png" %}'})}).addTo(map);
-        L.marker(L.latLng(destinationlonlat[1], destinationlonlat[0]),
-                 {clickable: false,
-                  icon: new L.Icon.Default({iconUrl: '{% static "img/marker-target.png" %}'})}).addTo(map);
-
-        map.fitBounds(trekLayer.getBounds()).zoomOut();
-
-        var poisLayer = new L.GeoJSON({{ poisjson|safe }}, {
-            pointToLayer: poisMarkers
-        });
-        poisLayer.addTo(map);
-
-        var parkingIcon = L.icon({
-            iconUrl: '{% static "img/parking.png" %}',
-            iconSize: [24, 24],
-            iconAnchor: [0, 0],
-        });
-        var parkingLocation = {{ object.properties.parking_location }};
-        L.marker([parkingLocation[1], parkingLocation[0]],
-                 {icon: parkingIcon})
-         .bindPopup("{{ object.properties.advised_parking }}" || "{% trans "Recommended parking" %}")
-         .addTo(map);
-
-        //Load altimetric graph
-        altimetricInit();
-    }
-
-    function altimetricInit() {
-        /* 
-         * Load altimetric profile from JSON
-         */
-        $.getJSON("{% url trekking:fileserve object.altimetric_url %}", function(data) {
-            $('#profilealtitude').sparkline(data.profile, {tooltipSuffix: ' m', width: 300, height: 100});
-            $('#profilealtitude').bind('sparklineRegionChange', function(ev) {
-                var sparkline = ev.sparklines[0],
-                    region = sparkline.getCurrentRegionFields();
-                    value = region.y;
-                $('#mouseoverprofil').text(Math.round(region.x) +" m");
-            }).bind('mouseleave', function() {
-                $('#mouseoverprofil').text('');
-            });
-        });
-    }
-</script>
-
 {% include "trekking/navigation_fragment.html" %}
 
 <div class="detail-content">
-  <div class="row" id="detail-content-top">
+  <div class="row-fluid" id="detail-content-top">
     {% include "trekking/fake_searchtabs_fragment.html" %}
 
-    <div class="offset4 span4">
+    <div class="span4">
       <h2>{{ object.properties.name }}</h2>
     </div>
     <div class="span4">
       <div id="toolbox">
-        <a class="btn" id="share" href=""><img src="{% static "img/partager.png" %}">{% trans "Share" %}</a>
-        <a class="btn" id="print" href="">{% trans "Print" %}<img src="{% static "img/imprimante.png" %}"></a>
-        <a class="btn add-sac" href="#" data-pk="{{ trek.properties.pk }}">{% trans "Add to backpack" %}<img src="{% static "img/sacplus.png" %}"></a>
+        <a class="btn" id="share" href=""><img src="{% static "img/partager.png" %}"> {% trans "Share" %}</a>
+        <a class="btn" id="print" href=""><img src="{% static "img/imprimante.png" %}"> {% trans "Print" %}</a>
+        <a class="btn add-sac" href="#" data-pk="{{ trek.properties.pk }}"><img src="{% static "img/sacplus.png" %}"> {% trans "Add to backpack" %}</a>
       </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="span4">
+  <div id="detail-container-content" class="row-fluid">
+    <div class="span3">
       <p class="teaser">{{ object.properties.description_teaser|default:"No teaser"|safe }}</p>
       <p>{{ object.properties.description|default:"No description"|safe }}</p>
 
@@ -229,7 +136,7 @@
       </div>
     </div>
 
-    <div class="span3">
+    <div class="span4">
       {% leaflet_map 'detailmap' fitextent=False %}
 
       <div id="altitudegraph">
@@ -240,13 +147,13 @@
       </div>
     </div>
 
-    <div class="span3">
+    <div class="span2">
       <div class="accordion" id="pois-accordion">
         {% for poi in object.pois.all %}
         <div class="accordion-group">
           <div class="accordion-heading">
             <a class="accordion-toggle acc-open" id="poi-item-{{ poi.properties.pk}}" data-toggle="collapse" data-parent="#pois-accordion" data-id="{{ poi.properties.pk }}" href="#collapseOne">
-              {{ poi.properties.type|pictogram:"small" }}
+              {{ poi.properties.type|pictogram }}
               {{ poi.properties.name }}
             </a>
           </div>
@@ -261,5 +168,98 @@
       <p class="download"><a href="{% url trekking:fileserve object.gpx_url %}">{% trans "Download GPX" %}</a></p>
       <p class="download"><a href="{% url trekking:fileserve object.kml_url %}">{% trans "Download for Google Earth" %}</a></p>
     </div>
-
 </div>
+
+
+<script type="text/javascript">
+    var poisMarkers = {};
+
+    function detailmapInit(map, bounds) {
+
+        var poisMarkers = function(featureData, latlng) {
+            var img = '<img src="%SRC%" title="%TITLE%">';
+            img = img.replace('%SRC%', featureData.properties.type.pictogram);
+            img = img.replace('%TITLE%', featureData.properties.type.label);
+            
+            var poicon = new L.DivIcon({className: 'poi-marker-icon',
+                                        iconAnchor: [12, 12],
+                                        html: img}),
+                marker = L.marker(latlng, {icon: poicon});
+            marker.on('click', function (e) {
+                $('#poi-item-' + featureData.properties.pk).click();
+            });
+            window.poisMarkers[featureData.properties.pk] = marker;
+            return marker;
+        };
+
+        $('#pois-accordion').on('open', function (e, accordion) {
+            var id = $(accordion).data('id'),
+                marker = window.poisMarkers[id];
+            $(marker._icon).animate({"margin-top": "-=20px"}, "fast",
+                                    function(){
+                                        $(this).animate({"margin-top": "+=20px"}, "fast");
+                                    });
+        });
+
+        // Trek
+        var trekGeoJSON = {
+          "type": "GeometryCollection",
+          "geometries": [
+            { "type": "LineString",
+              "coordinates": {{ object.geometry.coordinates|safe }}
+            }
+          ]
+        };
+        var trekLayer = new L.GeoJSON(trekGeoJSON, {
+            style: {color: 'orange', opacity: 1.0, clickable: false},
+        });
+        trekLayer.addTo(map);
+        // Show start and end
+        var originlonlat = [{{ object.geometry.coordinates|first|join:"," }}],
+            destinationlonlat = [{{ object.geometry.coordinates|last|join:"," }}];
+        L.marker(L.latLng(originlonlat[1], originlonlat[0]),
+                 {clickable: false,
+                  icon: new L.Icon.Default({iconUrl: '{% static "img/marker-source.png" %}'})}).addTo(map);
+        L.marker(L.latLng(destinationlonlat[1], destinationlonlat[0]),
+                 {clickable: false,
+                  icon: new L.Icon.Default({iconUrl: '{% static "img/marker-target.png" %}'})}).addTo(map);
+
+        map.fitBounds(trekLayer.getBounds()).zoomOut();
+
+        var poisLayer = new L.GeoJSON({{ poisjson|safe }}, {
+            pointToLayer: poisMarkers
+        });
+        poisLayer.addTo(map);
+
+        var parkingIcon = L.icon({
+            iconUrl: '{% static "img/parking.png" %}',
+            iconSize: [24, 24],
+            iconAnchor: [0, 0],
+        });
+        var parkingLocation = {{ object.properties.parking_location }};
+        L.marker([parkingLocation[1], parkingLocation[0]],
+                 {icon: parkingIcon})
+         .bindPopup("{{ object.properties.advised_parking }}" || "{% trans "Recommended parking" %}")
+         .addTo(map);
+
+        //Load altimetric graph
+        altimetricInit();
+    }
+
+    function altimetricInit() {
+        /* 
+         * Load altimetric profile from JSON
+         */
+        $.getJSON("{% url trekking:fileserve object.altimetric_url %}", function(data) {
+            $('#profilealtitude').sparkline(data.profile, {tooltipSuffix: ' m', width: 300, height: 100});
+            $('#profilealtitude').bind('sparklineRegionChange', function(ev) {
+                var sparkline = ev.sparklines[0],
+                    region = sparkline.getCurrentRegionFields();
+                    value = region.y;
+                $('#mouseoverprofil').text(Math.round(region.x) +" m");
+            }).bind('mouseleave', function() {
+                $('#mouseoverprofil').text('');
+            });
+        });
+    }
+</script>

@@ -1,4 +1,150 @@
-{% load i18n static leaflet_tags %}
+{% load i18n static leaflet_tags trekking %}
+
+{% include "trekking/navigation_fragment.html" %}
+
+<div id="search-bar">
+  <p class="title">{% trans "Filters" %}</p>
+
+  <div id="basic-filters">
+    <div class="stage">
+      <label>{% trans "Difficulty" %}</label>
+      <div class="slider-wrap">
+        <div id="stage" data-filter="stage"></div>
+      </div>
+      <div class="slider-value first">{% trans "Easy" %}</div>
+      <div class="slider-value">{% trans "Medium" %}</div>
+      <div class="slider-value last">{% trans "Hard" %}</div>
+    </div>
+    <div class="time">
+      <label>{% trans "Duration" %}</label>
+      <div class="slider-wrap">
+        <div id="time" data-filter="time"></div>
+      </div>
+      <div class="slider-value first">{% trans "Short" %}</div>
+      <div class="slider-value">1/2</div>
+      <div class="slider-value">{% trans "day" %}</div>
+      <div class="slider-value">{% trans "2 days" %}</div>
+      <div class="slider-value last">&gt;{% trans "2 days" %}</div>
+    </div>
+    <div class="den">
+      <label>{% trans "Climb" %}</label>
+      <div class="slider-wrap">
+        <div id="den" data-filter="den"></div>
+      </div>
+      <div class="slider-value first">&lt; 200m</div>
+      <div class="slider-value">200-700m</div>
+      <div class="slider-value">700-1000m</div>
+      <div class="slider-value last">&gt;1000m</div>
+    </div>
+
+    <div class="theme">
+      <label>{% trans "Thematic" %}</label>
+      {% for theme in themes %}
+        <div class="filter" data-filter="theme" data-id="{{ theme.id }}" id="theme-{{ theme.id }}">
+          {{ theme|pictogram }}
+          <p>{{ theme.label }}</p>
+      </div>
+      {% endfor %}
+    </div>
+
+    <a id="show-filters" href="#" class="show-hide-filters"></a> 
+    <a id="hide-filters" href="#" class="show-hide-filters" style="display: none"></a>
+
+  </div>
+
+  <div id="advanced-filters" style="display: none">
+
+    <div class="filter-bloc usage">
+      <select id="usage" tabindex="2" multiple="" data-filter="usage" data-placeholder="{% trans "Usages" %}">
+      {% for usage in usages %}
+        <option data-filter="usage" data-id="{{ usage.id }}" value="{{ usage.id }}">{{ usage.label }}</option>
+      {% endfor %}
+      </select>
+    </div>
+
+    <div class="filter-bloc vallee">
+      <select id="district" tabindex="2" multiple="" data-filter="district" data-placeholder="{% trans "Valleys" %}">
+      {% for district in districts %}
+        <option data-filter="district" data-id="{{ district.id }}" value="{{ district.id }}">{{ district.name }}</option>
+      {% endfor %}
+      </select>
+    </div>
+
+    <div class="filter-bloc cities">
+      <select id="city" tabindex="2" multiple="" data-filter="city" data-placeholder="{% trans "Cities" %}">
+      {% for city in cities %}
+        <option data-filter="city" data-id="{{ city.code }}" value="{{ city.code|safe }}">{{ city.name }}</option>
+      {% endfor %}
+      </select>
+    </div>
+
+    <div class="filter-bloc route">
+      <select id="route" tabindex="2" multiple="" data-filter="route"  data-placeholder="{% trans "Route" %}">
+      {% for route in routes %}
+        <option data-filter="route" data-id="{{ route.id }}" value="{{ route.id|safe }}">{{ route.label }}</option>
+      {% endfor %}
+      </select>
+    </div>
+
+  </div>
+  <!--  advanced-filters-->
+
+</div>
+<!--  search-bar-->
+
+<div class="row-fluid">
+<div class="search-tabs side-bar span4" id="side-bar">
+
+  <div id="toggle-side-bar"></div>
+
+  <div id="text-search" class="search1">
+    <div class="span4">
+      <div class="control-group">
+        <div class="controls">
+          <div class="input-prepend"> <span class="add-on"> <i class="icon-search"></i> </span>
+            <input type="search" class="span3" placeholder="{% trans "Name, Valley, ..."%}" data-filter="search" id="search"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="result-backpack-tabs" class="tabbable"> 
+    <ul class="nav nav-tabs">
+      <li id="tab-results" class="active">
+        <a href="#results-pane">
+            <span class="badge badge-warning">{{ treks|length }}</span> {% trans "Results" %}</a>
+      </li>
+      <li id="tab-backpack">
+        <a href="#backpack-pane">
+            <span class="badge">0</span>{% trans "Backpack" %}</a>
+      </li>
+    </ul>
+
+    <div id="result-backpack-content" class="tab-content">
+      <div class="tab-pane active" id="results-pane">
+        <p id="noresult" style="display:none" class="tab-content-empty">{% trans "No result" %}</p>
+        {% for trek in treks %}
+            {% include "trekking/trek_result_fragment.html" with show="True" backpack="False" %}
+        {% endfor %}
+      </div>
+
+      <div class="tab-pane" id="backpack-pane">
+        <p id="backpackempty" style="display:none" class="tab-content-empty">{% trans "Empty" %}</p>
+        {% for trek in treks %}
+            {% include "trekking/trek_result_fragment.html" with show="False" backpack="True" %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+<!-- sidebar -->
+
+{% leaflet_map 'mainmap' fitextent=False creatediv=False %}
+
+<div id="mainmap-tag" style="display: none"><!-- custom tag to detect loaded page--></div>
 
 <script type="text/javascript">
     function mainmapInit(map, bounds) {
@@ -83,64 +229,3 @@
         });
     }
 </script>
-
-{% include "trekking/navigation_fragment.html" %}
-
-
-
-
-<div id="show-side-bar" style="display: none"></div>
-<div class="side-bar" id="side-bar">
-
-  <div id="text-search" class="search1">
-    <div class="span4">
-      <div class="control-group">
-        <div class="controls">
-          <div class="input-prepend"> <span class="add-on"> <i class="icon-search"></i> </span>
-            <input type="search" class="span3" placeholder="{% trans "Name, Valley, ..."%}" data-filter="search" id="search"/>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="result-backpack-tabs" class="tabbable"> 
-    <ul class="nav nav-tabs">
-      <li id="tab-results" class="active">
-        <a href="#results-pane">
-            <span class="badge badge-warning">{{ treks|length }}</span> {% trans "Results" %}</a>
-      </li>
-      <li id="tab-backpack">
-        <a href="#backpack-pane">
-            <span class="badge">0</span>{% trans "Backpack" %}</a>
-      </li>
-      <li id="tab-showhidepanel">
-        <a id="hide-side-bar" href="#" data-toggle="tab">.</a>
-      </li>
-    </ul>
-
-    <div id="result-backpack-content" class="tab-content">
-      <div class="tab-pane active" id="results-pane">
-        <p id="noresult" style="display:none" class="tab-content-empty">{% trans "No result" %}</p>
-        {% for trek in treks %}
-            {% include "trekking/trek_result_fragment.html" with show="True" backpack="False" %}
-        {% endfor %}
-      </div>
-
-      <div class="tab-pane" id="backpack-pane">
-        <p id="backpackempty" style="display:none" class="tab-content-empty">{% trans "Empty" %}</p>
-        {% for trek in treks %}
-            {% include "trekking/trek_result_fragment.html" with show="False" backpack="True" %}
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-
-</div>
-<!-- sidebar -->
-
-
-
-{% leaflet_map 'mainmap' fitextent=False creatediv=False %}
-
-<div id="mainmap-tag" style="display: none"><!-- custom tag to detect loaded page--></div>

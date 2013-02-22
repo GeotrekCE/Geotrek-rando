@@ -26,7 +26,7 @@
     {% endblock extrahead %}
 </head>
 <body>
-  <div id="top-panel" class="navbar navbar-fixed-top">
+  <div id="header" class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
         <div class="nav-collapse">
@@ -34,96 +34,8 @@
         </div>
       </div>
 
-      <a class="btn" id="global-share" href="#">{% trans "Share" %}</a> </div>
+      <a class="btn" id="global-share" href="#"><img src="{% static "img/share.png" %}"/> {% trans "Share" %}</a>
 
-      <div id="search-bar">
-        <a id="show-filters" href="#" class="show-hide-filters"></a> 
-        <a id="hide-filters" href="#" class="show-hide-filters" style="display: none"></a>
-
-        <p class="title">{% trans "Filters" %}</p>
-
-        <div id="basic-filters">
-          <div class="stage">
-            <label>{% trans "Difficulty" %}</label>
-            <div class="slider-wrap">
-              <div id="stage" data-filter="stage"></div>
-            </div>
-            <div class="slider-value first">{% trans "Easy" %}</div>
-            <div class="slider-value">{% trans "Medium" %}</div>
-            <div class="slider-value last">{% trans "Hard" %}</div>
-          </div>
-          <div class="time">
-            <label>{% trans "Duration" %}</label>
-            <div class="slider-wrap">
-              <div id="time" data-filter="time"></div>
-            </div>
-            <div class="slider-value first">{% trans "Short" %}</div>
-            <div class="slider-value">1/2</div>
-            <div class="slider-value">{% trans "day" %}</div>
-            <div class="slider-value">{% trans "2 days" %}</div>
-            <div class="slider-value last">&gt;{% trans "2 days" %}</div>
-          </div>
-          <div class="den">
-            <label>{% trans "Climb" %}</label>
-            <div class="slider-wrap">
-              <div id="den" data-filter="den"></div>
-            </div>
-            <div class="slider-value first">&lt; 200m</div>
-            <div class="slider-value">200-700m</div>
-            <div class="slider-value">700-1000m</div>
-            <div class="slider-value last">&gt;1000m</div>
-          </div>
-
-          <div class="theme">
-            <label>{% trans "Thematic" %}</label>
-            {% for theme in themes %}
-              <div class="filter" data-filter="theme" data-id="{{ theme.id }}" id="theme-{{ theme.id }}">
-                {{ theme|pictogram }}
-                <p>{{ theme.label }}</p>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-
-        <div id="advanced-filters" style="display: none">
-
-          <div class="filter-bloc usage">
-            <select id="usage" tabindex="2" multiple="" data-filter="usage" data-placeholder="{% trans "Usages" %}">
-            {% for usage in usages %}
-              <option data-filter="usage" data-id="{{ usage.id }}" value="{{ usage.id }}">{{ usage.label }}</option>
-            {% endfor %}
-            </select>
-          </div>
-
-          <div class="filter-bloc vallee">
-            <select id="district" tabindex="2" multiple="" data-filter="district" data-placeholder="{% trans "Valleys" %}">
-            {% for district in districts %}
-              <option data-filter="district" data-id="{{ district.id }}" value="{{ district.id }}">{{ district.name }}</option>
-            {% endfor %}
-            </select>
-          </div>
-
-          <div class="filter-bloc cities">
-            <select id="city" tabindex="2" multiple="" data-filter="city" data-placeholder="{% trans "Cities" %}">
-            {% for city in cities %}
-              <option data-filter="city" data-id="{{ city.code }}" value="{{ city.code|safe }}">{{ city.name }}</option>
-            {% endfor %}
-            </select>
-          </div>
-
-          <div class="filter-bloc route">
-            <select id="route" tabindex="2" multiple="" data-filter="route"  data-placeholder="{% trans "Route" %}">
-            {% for route in routes %}
-              <option data-filter="route" data-id="{{ route.id }}" value="{{ route.id|safe }}">{{ route.label }}</option>
-            {% endfor %}
-            </select>
-          </div>
-
-        </div>
-        <!--  advanced-filters-->
-
-      </div>
-      <!--  search-bar-->
     </div>
     <!--  navbar-inner-->
   </div>
@@ -141,7 +53,7 @@
   </div>
   <!-- container -->
 
-  <footer id="bottom-panel" class="footer">
+  <footer id="footer" class="footer">
     {% fileinclude "footer.html" %}
   </footer>
 

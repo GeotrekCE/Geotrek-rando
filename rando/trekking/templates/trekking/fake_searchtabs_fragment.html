@@ -1,17 +1,15 @@
-<div id="fake-result-backpack-tabs" class="side-bar" > 
+{% load i18n %}
+<div id="fake-search-tabs" class="search-tabs span4" > 
   <ul class="nav nav-tabs">
     <li id="tab-results">
       <div class="nb_res"></div>
       <a class="pjax" href="{% url trekking:home %}#results-pane">
-      <span class="badge"></span> Résultats</a>
+      <span class="badge"></span> {% trans "Back to list" %}</a>
     </li>
     <li id="tab-backpack">
       <div class="nb_sac"></div>
       <a class="pjax" href="{% url trekking:home %}#backpack-pane">
-        <span class="badge"></span> Sac a dos</a>
-    </li>
-    <li id="tab-showhidepanel">
-        <a class="disabled" id="hide-side-bar" href="#" data-toggle="tab">.</a>
+        <span class="badge"></span> {% trans "Backpack" %}</a>
     </li>
   </ul>
 </div>
