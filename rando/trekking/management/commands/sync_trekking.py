@@ -150,14 +150,14 @@ class TrekListInputFile(InputFile):
             # Fill with detail properties
             detailpath = models.Trek.detailpath.format(pk=pk)
             detailfile = TrekInputFile(self.command, detailpath, language=self.language)
-            detailfile.pull_if_modified()
+            detailfile.pull()
             detail = json.loads(detailfile.content())
             properties.update(detail)
 
             # Add POIs information in list, useful for textual search
             f = POIsInputFile(self.command, models.POIs.filepath.format(trek__pk=pk),
                               language=self.language)
-            f.pull_if_modified()
+            f.pull()
             poiscontent = json.loads(f.content())
             poisprops = [poi['properties'] for poi in poiscontent['features']]
             properties['pois'] = [{'name': poiprop['name'],
