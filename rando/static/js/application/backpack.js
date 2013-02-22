@@ -4,11 +4,11 @@
 function BackPack()
 {
 	var self = this;
-	var retrievedObject = localStorage.getItem('testObject');
+	var retrievedObject = localStorage.getItem('backPack');
 	if(!retrievedObject)
 	{
 	    self.backPack = [];
-	    localStorage.setItem('testObject', JSON.stringify(self.backPack));
+	    localStorage.setItem('backPack', JSON.stringify(self.backPack));
 	}else
 	{
 		self.backPack = JSON.parse(retrievedObject);
@@ -19,9 +19,9 @@ function BackPack()
 		if (!self.contains(trekid))
 		{
 			self.backPack.push(trekid);
-			localStorage.setItem('testObject', JSON.stringify(self.backPack));
+			localStorage.setItem('backPack', JSON.stringify(self.backPack));
 		}
-		// Rha! Why this does not work ???
+		// Rha! Why this does not work ??? Trigger on body...
 		$(self).trigger("backpack-change");
 		$('body').trigger("backpack-change");
 	}
@@ -35,7 +35,7 @@ function BackPack()
 		// Rha! Why this does not work ???
 		$(self).trigger("backpack-change");
 		$('body').trigger("backpack-change");
-  		localStorage.setItem('testObject', JSON.stringify(self.backPack));
+  		localStorage.setItem('backPack', JSON.stringify(self.backPack));
 	}
 /********************** Check if contains function ********************/
 	this.contains = function(trekid)
