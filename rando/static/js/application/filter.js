@@ -12,8 +12,25 @@ function TrekFilter()
         $('#search').unbind('keyup').on("keyup", self.filterChanged);
     }
 
+    this.clear = function () {
+        localStorage.removeItem('filterState');
+        $(".theme .filter.active").removeClass('active');
+        self.load();
+    }
+
     this.save = function ()
     {
+        for (k in self.state)
+            if ($.isEmptyObject(self.state[k]))
+                delete self.state[k];
+
+        if ($.isEmptyObject(self.state)) {
+            $('#search-bar p.title, #clear-filters').removeClass('active');
+        }
+        else {
+            $('#search-bar p.title, #clear-filters').addClass('active');
+        }
+
         localStorage.setItem('filterState', JSON.stringify(self.state));
 
         self.matching = [];
@@ -29,10 +46,15 @@ function TrekFilter()
 
     this.load = function () {
         var retrievedObject = localStorage.getItem('filterState');
-        self.state = retrievedObject ? JSON.parse(retrievedObject) : {};
+        try {
+            self.state = JSON.parse(retrievedObject);
+        }
+        catch (err) {}
+        if (!self.state) self.state = {};
         if (!('sliders' in self.state)) {
            self.state['sliders'] = {};
         }
+
         $('#search').val(self.state.search || '');
         for (category in self.state) {
             for (filter in self.state[category]) {
@@ -75,7 +97,7 @@ function TrekFilter()
     }
 
     this.filterChanged = function (e) {
-        var elem = $(elem).data("filter") ? $(e.target) : $(e.target).parents('.filter')
+        var elem = $(e.target).data("filter") ? $(e.target) : $(e.target).parents('.filter')
           , category = $(elem).data("filter");
         console.log('Filter changed: ' + category);
         if (!(category in self.state)) {
@@ -98,13 +120,17 @@ function TrekFilter()
         }
         else {
             elem.toggleClass('active');
-            self.state[category][dataid] = elem.hasClass("active");
+            if (elem.hasClass("active"))
+                self.state[category][dataid] = true;
+            else
+                delete self.state[category][dataid];
         }
         self.save();
     }
 
     this.sliderChanged = function(minVal, maxVal, name, slider)
     {
+        if (!self.state['sliders']) self.state['sliders'] = {};
         if (!(name in self.state['sliders'])) {
             self.state['sliders'][name] = {};
         }
@@ -129,6 +155,7 @@ function TrekFilter()
     }
 
     this.matchStage = function (trek) {
+        if (!this.state.sliders) return true;
         if (!this.state.sliders.stage) return true;
         var minStage = this.state.sliders.stage.min;
         var maxStage = this.state.sliders.stage.max;
@@ -139,6 +166,7 @@ function TrekFilter()
     }
 
     this.matchDuration = function (trek) {
+        if (!this.state.sliders) return true;
         if (!this.state.sliders.time) return true;
         var minDuration = this.state.sliders.time.min;
         var maxDuration = this.state.sliders.time.max;
@@ -168,6 +196,7 @@ function TrekFilter()
     }
 
     this.matchClimb = function (trek) {
+        if (!this.state.sliders) return true;
         if (!this.state.sliders.den) return true;
         var minClimb = this.state.sliders.den.min;
         var maxClimb = this.state.sliders.den.max;

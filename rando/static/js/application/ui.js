@@ -43,12 +43,7 @@ function refresh_backpack() {
 function init_ui() {
     $('#content').pjax('a.pjax');
 
-    window.trekFilter = new TrekFilter();
     window.backPack = new BackPack();
-
-    $(window.trekFilter).on("filterchange", function(e, visible) {
-        refresh_results(visible);
-    });
     $('body').on("backpack-change", refresh_backpack);
 
     $(window).on('resize', function() {
@@ -85,6 +80,15 @@ function invalidate_maps() {
 function view_home () {
     toggle_filters();
     sliders();
+
+    window.trekFilter = new TrekFilter();
+    $(window.trekFilter).on("filterchange", function(e, visible) {
+        refresh_results(visible);
+    });
+    $('#clear-filters').off('click').on('click', function () {
+        window.trekFilter.clear();
+    });
+
 
     $("#mainmap").show();  // We are on home with map
 
