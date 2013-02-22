@@ -43,6 +43,7 @@ function refresh_backpack() {
 function init_ui() {
     $('#content').pjax('a.pjax');
 
+    window.trekFilter = new TrekFilter();
     window.backPack = new BackPack();
     $('body').on("backpack-change", refresh_backpack);
 
@@ -81,7 +82,6 @@ function view_home () {
     toggle_filters();
     sliders();
 
-    window.trekFilter = new TrekFilter();
     $(window.trekFilter).on("filterchange", function(e, visible) {
         refresh_results(visible);
     });
