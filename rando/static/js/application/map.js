@@ -1,7 +1,46 @@
+var TREK_LAYER_OPTIONS = TREK_LAYER_OPTIONS || {
+    style: {'color': '#F89406', 'weight': 5, 'opacity': 0.8},
+    hoverstyle: {'color': '#F89406', 'weight': 5, 'opacity': 1.0},
+    outlinestyle: {'color': 'yellow', 'weight': 10, 'opacity': 0.8},
+};
+
+
 var TrekLayer = L.ObjectsLayer.extend({
 
-    initialize: function (geojson, options) {
+    initialize: function (geojson) {
+        var options = $.extend({
+                highlight: true,
+            },
+            TREK_LAYER_OPTIONS
+        );
         L.ObjectsLayer.prototype.initialize.call(this, geojson, options);
+
+        this._hover = null;
+    },
+
+    highlight: function (pk, on) {
+        var on = on === undefined ? true : on,
+            layer = this.getLayer(pk);
+        if (!layer) return;
+        if (on) {
+            if (layer instanceof L.Polyline) {
+                this._hover = new L.Polyline(layer.getLatLngs());
+            }
+            else if (layer instanceof L.MultiPolyline) {
+                var coords = [];
+                layer.eachLayer(function (l) { coords.push(l.getLatLngs()); });
+                this._hover = new L.MultiPolyline(coords);
+            }
+            this._hover.setStyle(TREK_LAYER_OPTIONS.outlinestyle);
+            this._hover.addTo(this._map); 
+            // Pop on top
+            layer.setStyle(TREK_LAYER_OPTIONS.hoverstyle);
+            this._map.removeLayer(layer).addLayer(layer);
+        }
+        else {
+            if (this._hover) this._map.removeLayer(this._hover);
+            layer.setStyle(TREK_LAYER_OPTIONS.style);
+        }
     },
 });
 

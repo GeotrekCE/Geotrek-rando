@@ -151,11 +151,7 @@
 
 <script type="text/javascript">
     function mainmapInit(map, bounds) {
-        var style = {'color': '#F89406', 'weight': 5, 'opacity': 0.8};
-        window.treksLayer = new TrekLayer(treks, {highlight: true, style: style});
-        treksLayer.registerStyle('normal', 10, style)
-                  .registerStyle('highlight', 30, {'color': 'yellow', 'weight': 8, 'opacity': 1});
-        treksLayer.addTo(map);
+        window.treksLayer = new TrekLayer(treks).addTo(map);
 
         if (!map.restoreView()) {
             map.fitFakeBounds(treksLayer.getBounds());
