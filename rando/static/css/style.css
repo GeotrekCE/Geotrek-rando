@@ -491,6 +491,10 @@ p.tab-content-empty {
   color: #80747C;
 }
 
+#side-bar .result.outbounds {
+  opacity: 0.2;
+}
+
 #side-bar .result:hover, .side-bar .result.active {
   background-color: #F8D19A;
 }

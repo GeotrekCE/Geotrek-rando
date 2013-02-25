@@ -174,17 +174,19 @@
 
         // Filter list by map bounds
         map.on('moveend', function (e) {
-          var getpk = function (l) {
-            return l.properties.pk;
-          };
+          $('#side-bar .result').removeClass('outbounds');
           if (!$(map._container).is(':visible')) {
-              // If map is hidden, consider all visible :)
-              window.trekFilter.setVisible($.map(treks.features, getpk));
+            // If map is hidden, consider all visible :)
+            return;
           }
-          else {
-              var visible = treksLayer.search(map.getBounds());
-              window.trekFilter.setVisible($.map(visible, getpk));
-          }
+          var visible = treksLayer.search(map.getBounds())
+            , visiblepks = $.map(visible, function (l) { return l.properties.pk});
+          $.each(treks.features, function (i, l) {
+              var pk = l.properties.pk;
+              if ($.inArray(pk, visiblepks) == -1) {
+                $("#side-bar .result[data-id='" + pk + "']").addClass('outbounds');
+              }
+          });
         });
 
         // Go to detail page on double-click

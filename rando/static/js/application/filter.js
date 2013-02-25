@@ -4,7 +4,6 @@ function TrekFilter()
     
     var self = this;
     self.matching = [];
-    self.visible = null;
 
     this.initEvents = function () {
         $(".theme .filter").unbind('click').on('click', self.filterChanged);
@@ -91,11 +90,6 @@ function TrekFilter()
         self.initEvents();
     }
 
-    this.setVisible = function (pks) {
-        self.visible = pks;
-        self.save();
-    }
-
     this.filterChanged = function (e) {
         var elem = $(e.target).data("filter") ? $(e.target) : $(e.target).parents('.filter')
           , category = $(elem).data("filter");
@@ -148,8 +142,7 @@ function TrekFilter()
             this._matchList(trek, 'district', 'districts') &&
             this._matchList(trek, 'city', 'cities') &&
             this.matchRoute(trek) &&
-            this.search(trek) && 
-            (self.visible == null || $.inArray(trek.properties.pk, self.visible) != -1))
+            this.search(trek))
              return true;
         return false;
     }
