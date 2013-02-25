@@ -202,14 +202,7 @@
         });
 
         // Trek
-        var trekGeoJSON = {
-          "type": "GeometryCollection",
-          "geometries": [
-            { "type": "LineString",
-              "coordinates": {{ object.geometry.coordinates|safe }}
-            }
-          ]
-        };
+        var trekGeoJSON = {{ trek.geojson|safe }};
         var trekLayer = new L.GeoJSON(trekGeoJSON, {
             style: {color: 'orange', opacity: 1.0, clickable: false},
         });

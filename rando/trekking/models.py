@@ -96,3 +96,14 @@ class Trek(JSONModel):
     @property
     def kml_url(self):
         return 'api/trek/trek-{trek__pk}.kml'.format(trek__pk=self.pk)
+
+    @property
+    def geojson(self):
+        return json.dumps({
+          "type": "GeometryCollection",
+          "geometries": [
+            { "type": self.geometry.type,
+              "coordinates": self.geometry.coordinates
+            }
+          ]
+        })
