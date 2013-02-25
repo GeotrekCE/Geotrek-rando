@@ -151,21 +151,19 @@
 
 <script type="text/javascript">
     function mainmapInit(map, bounds) {
-        map.fitBounds(fakeBounds(L.latLngBounds([
-                                      [{{ settings.map.extent.1 }}, {{ settings.map.extent.0 }}],
-                                      [{{ settings.map.extent.3 }}, {{ settings.map.extent.2 }}]
-                                  ]), true)
-        );
-
-        // Move controls to the right
-        map.zoomControl.setPosition('topright');
-        map.addControl(new L.Control.Scale({imperial: false, position: 'bottomright'}));
-
         var style = {'color': '#F89406', 'weight': 5, 'opacity': 0.8};
         window.treksLayer = new TrekLayer(treks, {highlight: true, style: style});
         treksLayer.registerStyle('normal', 10, style)
                   .registerStyle('highlight', 30, {'color': 'yellow', 'weight': 8, 'opacity': 1});
         treksLayer.addTo(map);
+
+        if (!map.restoreView()) {
+            map.fitFakeBounds(treksLayer.getBounds());
+        }
+
+        // Move controls to the right
+        map.zoomControl.setPosition('topright');
+        map.addControl(new L.Control.Scale({imperial: false, position: 'bottomright'}));
 
         // Filter map on filter
         $(window.trekFilter).on("filterchange", function(e, visible) {
@@ -179,7 +177,7 @@
             // If map is hidden, consider all visible :)
             return;
           }
-          var visible = treksLayer.search(map.getBounds())
+          var visible = treksLayer.search(map.getFakeBounds())
             , visiblepks = $.map(visible, function (l) { return l.properties.pk});
           $.each(treks.features, function (i, l) {
               var pk = l.properties.pk;

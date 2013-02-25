@@ -1,21 +1,21 @@
-function refresh_results(visible) {
-    var visible = visible;
+function refresh_results(matching) {
+    var matching = matching;
     for(var i=0; i<treks.features.length; i++) {
         var trek = treks.features[i],
             trekid = trek.properties.pk;
-        if ($.inArray(trekid, visible) != -1) {
+        if ($.inArray(trekid, matching) != -1) {
             $('#trek-'+trekid).show(200);
         }
         else {
             $('#trek-'+trekid).hide(200);
         }
     }
-    if (visible.length > 0)
+    if (matching.length > 0)
         $('#noresult').hide(200);
     else
         $('#noresult').show(200); 
     // Refresh label with number of results
-    $('#tab-results span.badge').html(visible.length);
+    $('#tab-results span.badge').html(matching.length);
 }
 
 function refresh_backpack() {
@@ -125,7 +125,7 @@ function view_home () {
     $('.search-rando').on('click', function (e) {
       var trekOnMap = window.treksLayer.getLayer($(this).data('pk'));
       if (trekOnMap) {
-        window.maps[0].fitBounds(fakeBounds(trekOnMap.getBounds()));
+        window.maps[0].fitFakeBounds(trekOnMap.getBounds());
         // Track event
         _gaq.push(['_trackEvent', 'Results', 'Zoom', trekOnMap.properties.name]);
       }
@@ -186,14 +186,13 @@ function view_detail() {
 }
 
 function toggle_sidebar() {
-    $('#toggle-side-bar').off('click');
-    $('#toggle-side-bar').click(function() {
+    $('#toggle-side-bar').off('click').on('click', function() {
         if (!$(this).hasClass('closed')) {
             var width_sidebar = $('.side-bar').width() - $(this).width();
-            $('.side-bar').animate({left : -width_sidebar+'px'}, 500);
+            $('#side-bar').addClass('closed').animate({left : -width_sidebar+'px'}, 500);
         }
         else {
-            $('.side-bar').animate({left:'0'}, 200);
+            $('#side-bar').removeClass('closed').animate({left:'0'}, 200);
         }
         $(this).toggleClass('closed');
     });
