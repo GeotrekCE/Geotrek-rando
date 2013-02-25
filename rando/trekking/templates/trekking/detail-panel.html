@@ -208,8 +208,9 @@
         });
         trekLayer.addTo(map);
         // Show start and end
-        var originlonlat = [{{ object.geometry.coordinates|first|join:"," }}],
-            destinationlonlat = [{{ object.geometry.coordinates|last|join:"," }}];
+
+        var originlonlat = {{trek.startcoords|safe }}
+          , destinationlonlat = {{trek.endcoords|safe }};
         L.marker(L.latLng(originlonlat[1], originlonlat[0]),
                  {clickable: false,
                   icon: new L.Icon.Default({iconUrl: '{% static "img/marker-source.png" %}'})}).addTo(map);
