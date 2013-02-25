@@ -46,12 +46,7 @@
     </div>
 
     <div class="span2">
-      <div id="trek-identity">
-        {% if object.properties.is_park_centered %}
-          <div class="alert alert-info">
-            <p>{% trans "This trek is within park center" %}, <a class="pjax" href="{% url flatpages:redirect "1" %}">{% trans "please read access rules." %}</a></p>
-          </div>
-        {% endif %}
+      <div id="trek-identity" class="well">
         <h4 id="departure-arrival">{{ object.properties.departure }} &rarr; {{ object.properties.arrival }}</h4>
 
         {% if object.properties.route %}
@@ -65,24 +60,30 @@
         <p>{% trans "Duration" %} : <span class="value">{{ object.properties.duration|default:0 }}H</span></p>
         <p>{% trans "Min elevation" %} : <span class="value">{{ object.properties.min_elevation }}m</span></p>
         <p>{% trans "Max elevation" %} : <span class="value">{{ object.properties.max_elevation }}m</span></p>
-
-        <h3>{% trans "Usages" %}</h3>
-        {% for usage in object.properties.usages %}
-          <li>{{ usage|pictogram:"big" }} {{ usage.label }}</li>
-        {% endfor %}
-
-        <h3>{% trans "Themes" %}</h3>
-        {% for theme in object.properties.themes %}
-          <li>{{ theme|pictogram:"big" }} {{ theme.label }}</li>
-        {% endfor %}
-
-        <h3>{% trans "Networks" %}</h3>
-        {% for network in object.properties.networks %}
-          <li>{{ network.name }}</li>
-        {% endfor %}
       </div>
+
+      {% for usage in object.properties.usages %}
+        {% if forloop.first %}<div id="usages"><h3>{% trans "Usages" %}</h3><ul>{% endif %}
+        <li>{{ usage|pictogram:"big" }} {{ usage.label }}</li>
+        {% if forloop.last %}</ul></div>{% endif %}
+      {% endfor %}
+
+      {% for theme in object.properties.themes %}
+        {% if forloop.first %}<div id="themes"><h3>{% trans "Themes" %}</h3><ul>{% endif %}
+        <li>{{ theme|pictogram:"big" }} {{ theme.label }}</li>
+        {% if forloop.last %}</ul></div>{% endif %}
+      {% endfor %}
+
+      {% for network in object.properties.networks %}
+        {% if forloop.first %}<div id="networks"><h3>{% trans "Networks" %}</h3><ul>{% endif %}
+        <li>{{ network.name }}</li>
+        {% if forloop.last %}</ul></div>{% endif %}
+      {% endfor %}
+      
       <div id="trek-advice">
-        <h3>{% trans "Advice" %}</h3>
+        {% if object.properties.advice or object.properties.public_transport or object.properties.disabled_infrastructure %}
+          <h3>{% trans "Advice" %}</h3>
+        {% endif %}
         {% if object.properties.advice %}<p>{{ object.properties.advice|safe }}</p>{% endif %}
         {% if object.properties.public_transport %}<p>{{ object.properties.public_transport|safe }}</p>{% endif %}
         {% if object.properties.disabled_infrastructure %}<p>{{ object.properties.disabled_infrastructure|safe }}</p>{% endif %}
@@ -136,7 +137,13 @@
       </div>
     </div>
 
-    <div class="span4">
+    <div class="span{% if object.pois.all %}4{% else %}7{% endif %}">
+      {% if object.properties.is_park_centered %}
+        <div class="alert alert-info">
+            <p><strong>{% trans "This trek is within park center" %}</strong>, <a class="pjax" href="{% url flatpages:redirect "1" %}">{% trans "please read access rules." %}</a></p>
+        </div>
+      {% endif %}
+
       {% leaflet_map 'detailmap' fitextent=False %}
 
       <div id="altitudegraph">
@@ -145,9 +152,12 @@
           <span id="profilealtitude"></span> <span class="axislabel">{% trans "Distance (m)" %}</span>
           <p id="mouseoverprofil" class="axislabel" >&nbsp;</p>
       </div>
+
+      <p class="download"><a href="{% url trekking:fileserve object.gpx_url %}">{% trans "Download GPX" %}</a></p>
+      <p class="download"><a href="{% url trekking:fileserve object.kml_url %}">{% trans "Download for Google Earth" %}</a></p>
     </div>
 
-    <div class="span2">
+    <div class="{% if object.pois.all %}span3{% endif %}">
       <div class="accordion" id="pois-accordion">
         {% for poi in object.pois.all %}
         <div class="accordion-group">
@@ -163,10 +173,6 @@
         </div>
         {% endfor %}
       </div>
-      
-
-      <p class="download"><a href="{% url trekking:fileserve object.gpx_url %}">{% trans "Download GPX" %}</a></p>
-      <p class="download"><a href="{% url trekking:fileserve object.kml_url %}">{% trans "Download for Google Earth" %}</a></p>
     </div>
 </div>
 

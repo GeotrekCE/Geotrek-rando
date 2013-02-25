@@ -111,10 +111,10 @@ class Trek(JSONModel):
     def startcoords(self):
         if self.geometry.type.lower().startswith('multi'):
             return self.geometry.coordinates[0][:1][0]
-        return self.geometry.coordinates[:0]
+        return self.geometry.coordinates[:1][0]
 
     def endcoords(self):
         if self.geometry.type.lower().startswith('multi'):
-            return self.geometry.coordinates[-1][:-1][0]
-        return self.geometry.coordinates[:-1]
+            return self.geometry.coordinates[-1][:-1][-1]
+        return self.geometry.coordinates[:-1][-1]
 

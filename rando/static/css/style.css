@@ -771,9 +771,8 @@ p.tab-content-empty {
 
 
 #detail-content-top h2, .flatpage-content h2 {
-  font-size: 22px;
-  line-height: 36px;
-  font-family:Arial, Helvetica, sans-serif;
+  font-size: 3em;
+  color: #666666;
 }
 
 .detail-content h3 {
@@ -797,6 +796,10 @@ p.teaser {
   text-align: center;
 }
 
+#trek-identity {
+  background-color: white;
+}
+
 #trek-identity p {
   margin-bottom:0;
   color:#80747c;
@@ -805,6 +808,11 @@ p.teaser {
 #trek-identity span.value {
   color:#F77E00;
   font-style: italic;
+}
+
+#themes li, #usages li, #networks li {
+  list-style-type: none;
+  display: inline-block;
 }
 
 
@@ -824,8 +832,7 @@ p.teaser {
 }
 
 .accordion-heading .accordion-toggle {
-  padding: 4px 4px;
-  min-height: 24px;
+  padding: 0px 2px;
 }
 
 
