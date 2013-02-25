@@ -261,6 +261,10 @@ body {
   outline:none;
 }
 
+.filter, .ui-slider, .ui-slider-handle {
+  cursor: pointer;
+}
+
 .slider-wrap {
   padding-left: 3px;
   margin-top: 5px;
