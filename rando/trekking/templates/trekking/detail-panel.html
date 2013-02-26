@@ -24,7 +24,7 @@
 
   <div id="detail-container-content" class="row-fluid">
     <div class="span3">
-      <p class="teaser">{{ object.properties.description_teaser|default:"No teaser"|safe }}</p>
+      <p class="teaser">{{ object.properties.description_teaser|default:"No teaser"|safe|striptags }}</p>
       <p>{{ object.properties.description|default:"No description"|safe }}</p>
 
       <div id="trek-pictures" class="carousel slide">
