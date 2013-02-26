@@ -87,6 +87,13 @@ You can schedule synchronization in a crontab (e.g. every hour) :
     0 * * * *  cd /path/to/application && /usr/bin/make sync
 
 
+You can also notify Google that your sitemap changed, using this : 
+
+::
+
+    make ping_google
+
+
 =============
 CUSTOMIZATION
 =============

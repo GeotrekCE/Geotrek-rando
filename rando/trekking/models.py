@@ -1,9 +1,11 @@
+import os
+import datetime
 import logging
 import json
-from os.path import join
 
 from easydict import EasyDict as edict
 from django.conf import settings
+from django.db import models
 
 from rando import classproperty
 
@@ -22,17 +24,20 @@ class JSONManager(object):
         return self
 
     @property
-    def content(self):
+    def fullpath(self):
         self.filepath = self.filepath.format(**self.__dict__)
-        fullpath = join(settings.INPUT_DATA_ROOT, 
-                        self.language or '', self.filepath)
+        return os.path.join(settings.INPUT_DATA_ROOT, 
+                            self.language or '', self.filepath)
+
+    @property
+    def content(self):
         try:
-            logger.debug("Read content from %s" % fullpath)
-            with open(fullpath, 'r') as f:
+            logger.debug("Read content from %s" % self.fullpath)
+            with open(self.fullpath, 'r') as f:
                 content = f.read()
             return content
         except IOError:
-            logger.error("Could not read '%s'" % fullpath)
+            logger.error("Could not read '%s'" % self.fullpath)
         return '{}'
 
     def all(self):
@@ -79,6 +84,15 @@ class POIs(JSONModel):
 class Trek(JSONModel):
     filepath = 'api/trek/trek.geojson'
     detailpath = 'api/trek/trek-{pk}.json'
+
+    @property
+    def last_modified(self):
+        t = os.path.getmtime(self.objects.fullpath)
+        return datetime.datetime.fromtimestamp(t)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('trekking:redirect', (self.pk,))
 
     @property
     def title(self):

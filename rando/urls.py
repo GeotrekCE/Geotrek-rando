@@ -1,8 +1,44 @@
 from django.conf import settings
 from django.conf.urls import patterns, include, url
 
+from localeurl.sitemaps import LocaleurlSitemap
+
+from rando.flatpages.models import FlatPage
+from rando.trekking.models import Trek
+
+
+class FlatPageSitemap(LocaleurlSitemap):
+    changefreq = 'monthly'
+
+    def items(self):
+        return list(FlatPage.objects.filter(language=self.language).all())
+
+    def lastmod(self, page):
+        return page.last_modified
+
+
+class TrekSitemap(LocaleurlSitemap):
+    changefreq = 'weekly'
+
+    def items(self):
+        try:
+            return list(Trek.objects.filter(language=self.language).all())
+        except TypeError:
+            return []
+
+    def lastmod(self, trek):
+        return trek.last_modified
+
+
+sitemaps = {}
+for language in settings.LANGUAGES:
+    lang = language[0]
+    sitemaps['pages-' + lang] = FlatPageSitemap(lang)
+    sitemaps['treks-' + lang] = TrekSitemap(lang)
+
 
 urlpatterns = patterns('',
+    url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
     url(r'', include('rando.trekking.urls', namespace='trekking', app_name='trekking')),
     url(r'pages/', include('rando.flatpages.urls', namespace='flatpages', app_name='flatpages')),
 )

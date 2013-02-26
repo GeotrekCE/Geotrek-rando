@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 from .views import HomeView, TrekView, trek_redirect, fileserve
 from django.views.decorators.cache import cache_page
 

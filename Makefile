@@ -23,3 +23,6 @@ test: bin/python
 
 clean:
 	rm -rf bin/ lib/ build/ dist/ *.egg-info/ include/ local/
+
+ping_google:
+	bin/python ./manage.py ping_google
