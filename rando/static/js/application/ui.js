@@ -122,16 +122,18 @@ function view_home () {
     toggle_sidebar();
 
     // Zoom trek button
-    $('.search-rando').on('click', function (e) {
-      var trekOnMap = window.treksLayer.getLayer($(this).data('pk'));
-      if (trekOnMap) {
-        window.maps[0].fitFakeBounds(trekOnMap.getBounds());
-        // Track event
-        _gaq.push(['_trackEvent', 'Results', 'Zoom', trekOnMap.properties.name]);
-      }
+    $('.search-rando').off('click').on('click', function (e) {
+        e.preventDefault();
+        var trekOnMap = window.treksLayer.getLayer($(this).data('pk'));
+        if (trekOnMap) {
+            window.maps[0].fitFakeBounds(trekOnMap.getBounds());
+            // Track event
+            _gaq.push(['_trackEvent', 'Results', 'Zoom', trekOnMap.properties.name]);
+        }
     });
 
     $('#side-bar .result').on('dblclick', function (e) {
+        e.preventDefault();
         $('#trek-'+ $(this).data('id') +'.result a.pjax').click();
         // Track event
         _gaq.push(['_trackEvent', 'Results', 'Doubleclick', $(this).data('name')]);
@@ -147,6 +149,12 @@ function view_home () {
     );
     // Click on side-bar
     $('#side-bar .result').on('click', function (e) {
+        e.preventDefault();
+
+        // Do not fire click if clicked on search tools
+        if ($(e.target).parents('.search-tools').length > 0)
+            return;
+
         var trekOnMap = window.treksLayer.getLayer($(this).data('id'));
         if (trekOnMap) {
             // If multi - take first one
