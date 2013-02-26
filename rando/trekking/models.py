@@ -6,6 +6,7 @@ import json
 from easydict import EasyDict as edict
 from django.conf import settings
 from django.db import models
+from django.utils.translation import get_language, ugettext_lazy as _
 
 from rando import classproperty
 
@@ -96,7 +97,10 @@ class Trek(JSONModel):
 
     @property
     def title(self):
-        return self.properties.name
+        keywords = _(u"From %s to %s") % (self.properties.departure, self.properties.arrival)
+        return u"%s - %s - %s" % (settings.TITLE[get_language()],
+                                  self.properties.name,
+                                  keywords)
 
     @property
     def pois(self):

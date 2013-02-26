@@ -1,4 +1,6 @@
-{% extends 'trekking/home.html' %}
+{% extends 'trekking/base.html' %}
+
+{% block title %}{{ object.title }}{% endblock title %}
 
 {% block content %}
     {% include "trekking/detail-panel.html" %}
