@@ -26,6 +26,7 @@ class HomeView(PJAXResponseMixin, TemplateView):
             logger.error("No trek found.")
             alltreks = []
         context = super(HomeView, self).get_context_data(**kwargs)
+        context['pjax'] = self.request.META.get('HTTP_X_PJAX', False)
         context['treks'] = alltreks
         return context
 
@@ -47,6 +48,8 @@ class TrekView(PJAXResponseMixin, DetailView):
         lang = self.request.LANGUAGE_CODE
         obj = self.get_object()
         context = super(TrekView, self).get_context_data(**kwargs)
+        context['pjax'] = self.request.META.get('HTTP_X_PJAX', False)
+        print self.request.META.get('HTTP_X_PJAX', False)
         context['trek'] = obj
         context['poisjson'] = obj.pois.filter(language=lang).content
         return context

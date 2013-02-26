@@ -81,6 +81,10 @@ class Trek(JSONModel):
     detailpath = 'api/trek/trek-{pk}.json'
 
     @property
+    def title(self):
+        return self.properties.name
+
+    @property
     def pois(self):
         return POIs.objects.filter(trek__pk=self.pk,
                                    language=self.objects.language)

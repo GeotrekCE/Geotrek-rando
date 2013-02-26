@@ -2,6 +2,10 @@
 
 {% include "trekking/navigation_fragment.html" %}
 
+{% if pjax %}
+  <title>{{ TITLE }}</title>
+{% endif %}
+
 <div id="search-bar">
   <p class="title">{% trans "Filters" %}</p>
 

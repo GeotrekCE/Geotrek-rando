@@ -2,6 +2,10 @@
 
 {% include "trekking/navigation_fragment.html" %}
 
+{% if pjax %}
+  <title>{{ object.title }} - {{ TITLE }}</title>
+{% endif %}
+
 <div class="detail-content">
   <div class="row-fluid" id="detail-content-top">
     {% include "trekking/fake_searchtabs_fragment.html" %}
