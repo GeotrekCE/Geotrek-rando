@@ -62,6 +62,11 @@ function TrekFilter()
                 var value = self.state[category][filter],
                     elem = $("[data-filter='" + category + "'][data-id='" + filter + "']");
 
+                if (elem.length == 0) {
+                    console.warn('Unknown elem: ' + elem.selector);
+                    delete self.state[category][filter];
+                }
+
                 if (elem.is('input')) {
                     elem.attr('checked', !!value);
                 }
@@ -74,15 +79,10 @@ function TrekFilter()
                     $('#' + filter).slider('values', 1, value.max);
                 }
                 else {
-                    if (elem.length == 0) {
-                        console.warn('Unknown ' + filter);
-                    }
-                    else {
-                        if (value)
-                            elem.addClass('active');
-                        else
-                            elem.removeClass('active');
-                    }
+                    if (value === true)
+                        elem.addClass('active');
+                    else
+                        elem.removeClass('active');
                 }
             }
         }
