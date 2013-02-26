@@ -83,8 +83,12 @@ function invalidate_maps() {
 }
 
 function view_home () {
-    toggle_filters();
     sliders();
+
+    $('#toggle-filters').click(function() {
+        $(this).toggleClass('closed');
+        $("#advanced-filters").toggle();
+    });
 
     $('#clear-filters').off('click').on('click', function () {
         window.trekFilter.clear();
@@ -205,26 +209,6 @@ function toggle_sidebar() {
         $(this).toggleClass('closed');
     });
 }
-
-function toggle_filters() {
-    var searchdefaultheight = $("#search-bar").height();
-    $('#hide-filters').click(function() {
-        $("#hide-filters").hide();
-        $("#show-filters").show();
-        $("#advanced-filters").hide();
-        //$("#search-bar").height(searchdefaultheight);
-        layout();
-    });
-
-    $('#show-filters').click(function() {
-        $("#hide-filters").show();
-        $("#show-filters").hide();
-        $("#advanced-filters").show();
-        //$("#search-bar").height(searchdefaultheight+40);
-        layout();
-    });
-}
-
 
 
 function  sliders() {

@@ -355,23 +355,23 @@ body {
   z-index: 300;
 }
 
+#filters-actions > a.active {
+  opacity: 1.0;
+  background-color: orange;
+  box-shadow: 0 0 5px #ffff00;
+}
+
 #clear-filters { 
   background: url(../img/filter-clear.png) 50% 50% no-repeat;
   background-size: 16px 16px;
   opacity: 0.5;
 }
 
-#clear-filters.active {
-  opacity: 1.0;
-  background-color: orange;
-  box-shadow: 0 0 5px #ffff00;
-}
-
-#show-filters { 
+#toggle-filters.closed { 
   background: url(../img/filter-open.png) 50% 50% no-repeat;
 }
 
-#hide-filters {
+#toggle-filters {
   background: url(../img/filter-close.png) 50% 50% no-repeat;
 }
 
@@ -716,6 +716,10 @@ p.tab-content-empty {
  * Maps
  * 
  */
+
+#mainmap .leaflet-popup-content p {
+  margin: 10px 0;
+}
 
 #mainmap .leaflet-popup-content-wrapper 
 {
