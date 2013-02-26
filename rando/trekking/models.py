@@ -97,7 +97,10 @@ class Trek(JSONModel):
 
     @property
     def title(self):
-        keywords = _(u"From %s to %s") % (self.properties.departure, self.properties.arrival)
+        keywords = _(u"From %(departure)s to %(arrival)s") % {
+            'departure': self.properties.departure,
+            'arrival': self.properties.arrival
+        }
         return u"%s - %s - %s" % (settings.TITLE[get_language()],
                                   self.properties.name,
                                   keywords)

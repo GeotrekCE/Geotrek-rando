@@ -62,6 +62,21 @@ function page_load() {
     // Refresh tab results
     window.trekFilter.load();
     refresh_backpack();
+
+    // Add trek to backpack
+    $('.add-sac').on('click', function (e) {
+        var trekid = $(this).data('pk')
+          , trekname = $(this).data('name');
+        if (window.backPack.contains(trekid)) {
+            window.backPack.remove(trekid);
+            // Track event
+            _gaq.push(['_trackEvent', 'Backpack', 'Remove', trekname]);
+        }
+        else {
+            window.backPack.save(trekid);
+            _gaq.push(['_trackEvent', 'Backpack', 'Add', trekname]);
+        }
+    });
 }
 
 function layout() {
@@ -103,21 +118,6 @@ function view_home () {
     if (window.location.hash) {
         $('#tab-' + window.location.hash.slice(1) + ' a').click();
     }
-
-    // Add trek to backpack
-    $('.add-sac').on('click', function (e) {
-        var trekid = $(this).data('pk')
-          , trekname = $(this).data('name');
-        if (window.backPack.contains(trekid)) {
-            window.backPack.remove(trekid);
-            // Track event
-            _gaq.push(['_trackEvent', 'Backpack', 'Remove', trekname]);
-        }
-        else {
-            window.backPack.save(trekid);
-            _gaq.push(['_trackEvent', 'Backpack', 'Add', trekname]);
-        }
-    });
 
     toggle_sidebar();
 
