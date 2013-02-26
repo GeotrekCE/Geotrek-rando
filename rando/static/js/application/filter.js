@@ -73,7 +73,7 @@ function TrekFilter()
                         delete self.state[category][filter];
                 }
                 else {
-                    if (elem.length == 0) {
+                    if (elem.length == 0 && $('#basic-filters').length > 0) {
                         console.warn('Unknown elem: ' + elem.selector);
                         delete self.state[category][filter];
                     }
