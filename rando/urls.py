@@ -1,7 +1,9 @@
 from django.conf import settings
 from django.conf.urls import patterns, include, url
+from django.contrib.sitemaps import Sitemap
 
 from localeurl.sitemaps import LocaleurlSitemap
+from localeurl.templatetags.localeurl_tags import chlocale
 
 from rando.flatpages.models import FlatPage
 from rando.trekking.models import Trek
@@ -30,11 +32,18 @@ class TrekSitemap(LocaleurlSitemap):
         return trek.last_modified
 
 
+class GeoSitemap(TrekSitemap):
+    def location(self, trek):
+        return chlocale('/' + trek.kml_url, self.language)
+
+
 sitemaps = {}
 for language in settings.LANGUAGES:
     lang = language[0]
     sitemaps['pages-' + lang] = FlatPageSitemap(lang)
     sitemaps['treks-' + lang] = TrekSitemap(lang)
+    sitemaps['geo-' + lang] = GeoSitemap(lang)
+
 
 
 urlpatterns = patterns('',
