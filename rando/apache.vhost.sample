@@ -1,3 +1,14 @@
+<IfModule mod_deflate.c>
+     AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css application/x-javascript application/javascript application/json
+</IfModule>
+
+<IfModule mod_expires.c>
+    <FilesMatch "\.(jpe?g|png|gif|js|css)$">
+        ExpiresActive On
+        ExpiresDefault "access plus 1 hour"
+    </FilesMatch>
+</IfModule>
+
 Alias /static/ /PATH_TO_SOURCE/var/static/
 
 <Directory /PATH_TO_SOURCE/var/static>
