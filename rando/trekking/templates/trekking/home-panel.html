@@ -125,14 +125,14 @@
     </ul>
 
     <div id="result-backpack-content" class="tab-content">
-      <div class="tab-pane active" id="results-pane">
+      <div class="tab-pane active" id="results">
         <p id="noresult" style="display:none" class="tab-content-empty">{% trans "No result" %}</p>
         {% for trek in treks %}
             {% include "trekking/trek_result_fragment.html" with show="True" backpack="False" %}
         {% endfor %}
       </div>
 
-      <div class="tab-pane" id="backpack-pane">
+      <div class="tab-pane" id="backpack">
         <p id="backpackempty" style="display:none" class="tab-content-empty">{% trans "Empty" %}</p>
         {% for trek in treks %}
             {% include "trekking/trek_result_fragment.html" with show="False" backpack="True" %}
