@@ -11,6 +11,7 @@ serve: bin/python
 	bin/python ./manage.py runserver 8888
 
 deploy: bin/python
+	bin/python setup.py install
 	mkdir -p var/input
 	mkdir -p var/static
 	mkdir -p var/input/media

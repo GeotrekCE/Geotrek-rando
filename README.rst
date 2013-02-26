@@ -21,13 +21,13 @@ Copy and extract the source archive, and run install :
 
 ::
 
-    cd /path_to_webapi/faune/
     make install
 
 Prepare deployment :
 
 ::
 
+    cd /path/to/application
     make deploy
 
 
@@ -63,7 +63,7 @@ Activate it and restart apache :
 ::
 
     sudo a2ensite rando
-    sudo /etc/init.d/apache restart
+    sudo /etc/init.d/apache2 restart
 
 
 Give Apache permissions in application folder :
@@ -90,10 +90,14 @@ You can schedule synchronization in a crontab (e.g. every hour) :
 
 ::
 
+    crontab -e
+
+    # Add the following line
+
     0 * * * *  cd /path/to/application && /usr/bin/make sync
 
 
-You can also notify Google that your sitemap changed, using this : 
+Regularly (once a week), you can also notify Google that your sitemap changed, using this : 
 
 ::
 
@@ -117,11 +121,11 @@ You can setup a FTP access to this *media* folder.
     sudo apt-get install vsftpd
 
 
-Create a user *editor* whose ``$HOME`` will be the *media* folder.
+Create a user *editor* whose ``$HOME`` will be the *media* folder (**replace full path**).
 
 ::
 
-    sudo adduser --home `pwd`/var/input/media/ editor
+    sudo adduser --home /path/to/application/var/input/media/ editor
 
 Done !
 
@@ -142,6 +146,8 @@ Create ``*.html`` files in these folders. The name of the file becomes the title
 
 If you want to customize the alphabetical order, you can use prefixes with numbers (for example,
  ``pages/fr/01-Réglementation.html``.)
+
+If you want the same page if various language, make sure it has the same prefix number (for example, ``pages/fr/03-Accompagnateurs.html``, ``pages/en/03-Guides.html``, ``pages/es/03-Guias.html``, ...).
 
 
 CSS style
