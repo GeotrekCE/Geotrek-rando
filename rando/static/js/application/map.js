@@ -22,6 +22,7 @@ var TrekLayer = L.ObjectsLayer.extend({
         var on = on === undefined ? true : on,
             layer = this.getLayer(pk);
         if (!layer) return;
+        if (!this._map) return;
         if (on) {
             if (layer instanceof L.Polyline) {
                 this._hover = new L.Polyline(layer.getLatLngs());
@@ -50,6 +51,9 @@ var FakeBoundsMapMixin = {
         /* Depending on sidebar open/close, we correct the bounds of the map
         If init, we increase, else we reduce.
         */
+        if (!this._loaded)
+            return bounds;
+
         var mapBounds = this.getBounds(),
             from =  arguments.length == 0,
             bounds = from ? mapBounds : bounds;
