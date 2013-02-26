@@ -81,8 +81,11 @@ function TrekFilter()
                 else {
                     if (value === true)
                         elem.addClass('active');
-                    else
+                    else {
+                        // Remove false values
+                        delete self.state[category][filter];
                         elem.removeClass('active');
+                    }
                 }
             }
         }
