@@ -7,13 +7,14 @@ function TrekFilter()
 
     this.initEvents = function () {
         $(".theme .filter").unbind('click').on('click', self.filterChanged);
-        $("select#usage, select#district, select#city, select#route").chosen().change(self.filterChanged);
+        $(".chosen-select").chosen().change(self.filterChanged);
         $('#search').unbind('keyup').on("keyup", self.filterChanged);
     }
 
     this.clear = function () {
         localStorage.removeItem('filterState');
         $(".theme .filter.active").removeClass('active');
+        $(".chosen-select").val('').trigger("liszt:updated");
         self.load();
     }
 
@@ -51,7 +52,7 @@ function TrekFilter()
         catch (err) {}
         if (!self.state) self.state = {};
         if (!('sliders' in self.state)) {
-           self.state['sliders'] = {};
+           self.state['sliders'] = {'time':{}, 'stage':{}, 'den':{}};
         }
 
         $('#search').val(self.state.search || '');
@@ -62,29 +63,36 @@ function TrekFilter()
                 var value = self.state[category][filter],
                     elem = $("[data-filter='" + category + "'][data-id='" + filter + "']");
 
-                if (elem.length == 0) {
-                    console.warn('Unknown elem: ' + elem.selector);
-                    delete self.state[category][filter];
-                }
-
-                if (elem.is('input')) {
-                    elem.attr('checked', !!value);
-                }
-                if (elem.is('option')) {
-                    if (!!value) elem.attr('selected', 'selected');
-                    else elem.removeAttr('selected');
-                }
-                else if ($('#' + filter).hasClass('ui-slider')) {
+                if ($('#' + filter).hasClass('ui-slider')) {
+                    var slider = $('#' + filter).data('slider');
+                    if (!value.min) value.min = slider.options.min;
+                    if (!value.max) value.max = slider.options.max;
                     $('#' + filter).slider('values', 0, value.min);
                     $('#' + filter).slider('values', 1, value.max);
+                    if (value.min == slider.options.min && value.max == slider.options.max)
+                        delete self.state[category][filter];
                 }
                 else {
-                    if (value === true)
-                        elem.addClass('active');
-                    else {
-                        // Remove false values
+                    if (elem.length == 0) {
+                        console.warn('Unknown elem: ' + elem.selector);
                         delete self.state[category][filter];
-                        elem.removeClass('active');
+                    }
+
+                    if (elem.is('input')) {
+                        elem.attr('checked', !!value);
+                    }
+                    else if (elem.is('option')) {
+                        if (!!value) elem.attr('selected', 'selected');
+                        else elem.removeAttr('selected');
+                    }
+                    else {
+                        if (value === true)
+                            elem.addClass('active');
+                        else {
+                            // Remove false values
+                            delete self.state[category][filter];
+                            elem.removeClass('active');
+                        }
                     }
                 }
             }
@@ -96,16 +104,12 @@ function TrekFilter()
     this.filterChanged = function (e) {
         var elem = $(e.target).data("filter") ? $(e.target) : $(e.target).parents('.filter')
           , category = $(elem).data("filter");
-        console.log('Filter changed: ' + category);
         if (!(category in self.state)) {
             self.state[category] = {};
         }
         var dataid = $(elem).data("id");
 
-        if ($(elem).is("input[type='checkbox']")) {
-            self.state[category][dataid] = $(e.target)[0].checked;
-        }
-        else if ($(elem).is("select")) {
+        if ($(elem).is("select")) {
             var values = $(e.target).val();
             self.state[category] = {};
             for (v in values) {
