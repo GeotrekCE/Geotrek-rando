@@ -208,7 +208,7 @@
             html = html.replace('%NAME%', layer.properties.name);
             // This is tricky : use img url of trek in result list :)
             html = html.replace('%THUMBNAIL%', $('#trek-'+ e.layer.properties.pk +'.result img').attr('src'));
-            html = html.replace('%DESCRIPTION%', layer.properties.description || "{% trans "No description..." %}");
+            html = html.replace('%DESCRIPTION%', layer.properties.description_teaser || "{% trans "No description..." %}");
 
             if (popup) {
                 popup._close();
