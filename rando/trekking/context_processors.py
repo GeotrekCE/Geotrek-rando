@@ -50,7 +50,8 @@ def settings(request):
 
     return {
         'VERSION': __version__,
-        'TITLE': settings_.TITLE.get(lang, 'Trekking'),
+        'TITLE': settings_.TITLE.get(lang, settings_.TITLE.get('en')),
+        'DESCRIPTION': settings_.DESCRIPTION.get(lang, settings_.TITLE.get('en')),
         'settings' : app_settings,
          # We want the treks list to be initialized from everywhere
         'treksjson' : Trek.objects.filter(language=lang).content if alltreks else '{features: []}',

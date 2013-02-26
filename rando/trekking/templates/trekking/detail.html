@@ -2,6 +2,8 @@
 
 {% block title %}{{ object.title }}{% endblock title %}
 
+{% block description %}{{ object.properties.description_teaser|safe|striptags }}{% endblock description %}
+
 {% block content %}
     {% include "trekking/detail-panel.html" %}
 {% endblock content %}

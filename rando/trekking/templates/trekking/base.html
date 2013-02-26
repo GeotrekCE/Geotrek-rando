@@ -5,7 +5,7 @@
     <!-- VERSION : {{ VERSION }} -->
     {% block head %}
     <title>{% block title %}{{ TITLE }}{% endblock title %}</title>
-    <meta name="description" content="{% block description %}{% if object %}{{ object.properties.description_teaser }}{% else %}{{ DESCRIPTION }}{% endif %}{% endblock description %}" >
+    <meta name="description" content="{% block description %}{{ DESCRIPTION }}{% endblock description %}" >
     <link rel="shortcut icon" href="{% static "ico/favicon.ico" %}">
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>

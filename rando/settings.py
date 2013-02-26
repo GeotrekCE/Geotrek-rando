@@ -201,6 +201,11 @@ TITLE = {
     'fr': "Portail rando",
 }
 
+DESCRIPTION = {
+    'en': "Catalog of treks",
+    'fr': "Offre rando",
+}
+
 GANALYTICS_TRACKING_CODE = 'UA-XXXXXXXX-XX'
 
 

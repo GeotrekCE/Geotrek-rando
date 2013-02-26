@@ -36,6 +36,12 @@ Configuration
 
 Copy ``settings_local.py.sample`` to ``settings_local.py` and edit it to override settings.
 
+Most important settings : 
+
+* **CAMINAE_SERVER**
+* **TITLE** (in every supported language, fallback to English)
+* **DESCRIPTION** (in every supported language, fallback to English)
+
 :note:
 
     Do not change ``MEDIA_URL`` or expect problems.
