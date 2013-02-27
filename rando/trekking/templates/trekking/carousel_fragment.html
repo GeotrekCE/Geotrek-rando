@@ -1,0 +1,21 @@
+{% load static i18n %}
+<div id="{{ prefix }}-pictures" class="carousel slide">
+  <div class="carousel-inner">
+    {% for picture in pictures %}
+    <div class="item {% if forloop.first %} active{% endif %}">
+      <img src="{{ picture.url }}" alt="{{ picture.title }}" />
+      <div class="carousel-caption">
+        <p>{{ picture.legend }}</p>
+      </div>
+    </div>
+    {% empty%}
+    <div class="item active">
+      <img src="{% static "img/default-preview.jpg" %}"/>
+    </div>
+    {% endfor %}
+  </div>
+  {% if pictures|length > 1 %}
+      <a class="carousel-control left" href="#{{ prefix }}-pictures" data-slide="prev">&lsaquo;</a>
+      <a class="carousel-control right" href="#{{ prefix }}-pictures" data-slide="next">&rsaquo;</a>
+  {% endif %}
+</div><!-- /.carousel -->

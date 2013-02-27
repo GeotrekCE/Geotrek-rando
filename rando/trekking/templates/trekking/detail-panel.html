@@ -27,24 +27,7 @@
       <p class="teaser">{{ object.properties.description_teaser|default:"No teaser"|safe|striptags }}</p>
       <p>{{ object.properties.description|default:"No description"|safe }}</p>
 
-      <div id="trek-pictures" class="carousel slide">
-        <div class="carousel-inner">
-          {% for picture in object.properties.pictures %}
-          <div class="item {% if forloop.first %} active{% endif %}">
-            <img src="{{ picture.url }}" alt="{{ picture.title }}" />
-            <div class="carousel-caption">
-              <p>{{ picture.legend }}</p>
-            </div>
-          </div>
-          {% empty%}
-          <div class="item active">
-            <img src="{% static "img/default-preview.jpg" %}"/>
-          </div>
-          {% endfor %}
-        </div>
-        <a class="carousel-control left" href="#trek-pictures" data-slide="prev">&lsaquo;</a>
-        <a class="carousel-control right" href="#trek-pictures" data-slide="next">&rsaquo;</a>
-      </div><!-- /.carousel -->
+      {% include "trekking/carousel_fragment.html" with prefix="trek" pictures=object.properties.pictures %}
 
       <p>{{ object.properties.ambiance|default:"No ambiance"|safe }}</p>
     </div>
@@ -175,7 +158,10 @@
             </a>
           </div>
           <div id="collapse-poi-{{  poi.properties.pk }}" class="accordion-body collapse" style="height: 0px; ">
-            <div class="accordion-inner"><p>{{ poi.properties.description|safe }}</p></div>
+            <div class="accordion-inner">
+              <p>{{ poi.properties.description|safe }}</p>
+              {% include "trekking/carousel_fragment.html" with prefix=poi.properties.pk pictures=poi.properties.pictures %}
+            </div>
           </div>
         </div>
         {% endfor %}
@@ -198,6 +184,8 @@
                                         iconAnchor: [12, 12],
                                         html: img}),
                 marker = L.marker(latlng, {icon: poicon});
+            window.poisMarkers[featureData.properties.pk] = marker;
+
             marker.on('click', function (e) {
                 var $item = $('#poi-item-' + featureData.properties.pk);
                 $item.click();
@@ -207,7 +195,10 @@
                     scrollTop: top + toTop
                 }, 1000);
             });
-            window.poisMarkers[featureData.properties.pk] = marker;
+
+            if (featureData.properties.thumbnail) {
+               marker.bindPopup('<img src="%SRC%" width="110" height="110">'.replace('%SRC%', featureData.properties.thumbnail, {autoPan: false}));
+            }
             return marker;
         };
 

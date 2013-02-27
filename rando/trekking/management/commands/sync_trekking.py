@@ -118,6 +118,8 @@ class POIsInputFile(InputFile):
             poitype = properties.pop('serializable_type')
             poitype = reroot(poitype, attr='pictogram')
             properties['type'] = poitype
+            properties['thumbnail'] = properties.pop('serializable_thumbnail')
+            properties['pictures'] = properties.pop('serializable_pictures')
             feature['properties'] = properties
             features.append(feature)
         content['features'] = features
@@ -227,6 +229,10 @@ class Command(BaseCommand):
                     if weblink.category:
                         InputFile(self, weblink.category.pictogram).pull_if_modified()
                 for poi in trek.pois.all():
+                    if poi.properties.thumbnail:
+                        InputFile(self, poi.properties.thumbnail).pull_if_modified()
+                    for picture in poi.properties.pictures:
+                        InputFile(self, picture.url).pull_if_modified()
                     InputFile(self, poi.properties.type.pictogram).pull_if_modified()
 
         except IOError, e:
