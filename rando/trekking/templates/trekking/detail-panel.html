@@ -92,6 +92,27 @@
         {% if object.properties.public_transport %}<p>{{ object.properties.public_transport|safe }}</p>{% endif %}
         {% if object.properties.disabled_infrastructure %}<p>{{ object.properties.disabled_infrastructure|safe }}</p>{% endif %}
       </div>
+    </div>
+
+    <div class="span{% if object.pois.all %}4{% else %}7{% endif %}">
+      {% if object.properties.is_park_centered %}
+        <div class="alert alert-info">
+            <p><strong>{% trans "This trek is within park center" %}</strong>, <a class="pjax" href="{% url flatpages:redirect "1" %}">{% trans "please read access rules." %}</a></p>
+        </div>
+      {% endif %}
+
+      {% leaflet_map 'detailmap' fitextent=False %}
+
+      <div id="altitudegraph">
+          <h4>{% trans "Altitude profile" %}</h4>
+          <p class="axislabel">{% trans "Altitude (m)" %}</p>
+          <span id="profilealtitude"></span> <span class="axislabel">{% trans "Distance (m)" %}</span>
+          <p id="mouseoverprofil" class="axislabel" >&nbsp;</p>
+      </div>
+
+      <p class="download"><a href="{% url trekking:fileserve object.gpx_url %}">{% trans "Download GPX" %}</a></p>
+      <p class="download"><a href="{% url trekking:fileserve object.kml_url %}">{% trans "Download for Google Earth" %}</a></p>
+
 
       <div id="trek-links">
         <h3>{% trans "See also" %}</h3>
@@ -111,7 +132,8 @@
             </li>
         {% endfor %}
         </ul>
-
+      </div>
+      <div id="trek-related">
         {% for relationship in object.properties.relationships_departure %}
           {% if forloop.first %}
             <h4>{% trans "Sharing departure" %}</h4>
@@ -139,26 +161,7 @@
           {% if forloop.last %}</ul>{% endif %}
         {% endfor %}
       </div>
-    </div>
 
-    <div class="span{% if object.pois.all %}4{% else %}7{% endif %}">
-      {% if object.properties.is_park_centered %}
-        <div class="alert alert-info">
-            <p><strong>{% trans "This trek is within park center" %}</strong>, <a class="pjax" href="{% url flatpages:redirect "1" %}">{% trans "please read access rules." %}</a></p>
-        </div>
-      {% endif %}
-
-      {% leaflet_map 'detailmap' fitextent=False %}
-
-      <div id="altitudegraph">
-          <h4>{% trans "Altitude profile" %}</h4>
-          <p class="axislabel">{% trans "Altitude (m)" %}</p>
-          <span id="profilealtitude"></span> <span class="axislabel">{% trans "Distance (m)" %}</span>
-          <p id="mouseoverprofil" class="axislabel" >&nbsp;</p>
-      </div>
-
-      <p class="download"><a href="{% url trekking:fileserve object.gpx_url %}">{% trans "Download GPX" %}</a></p>
-      <p class="download"><a href="{% url trekking:fileserve object.kml_url %}">{% trans "Download for Google Earth" %}</a></p>
     </div>
 
     <div class="{% if object.pois.all %}span3{% endif %}">
@@ -228,7 +231,7 @@
                  {clickable: false,
                   icon: new L.Icon.Default({iconUrl: '{% static "img/marker-target.png" %}'})}).addTo(map);
 
-        map.fitBounds(trekLayer.getBounds()).zoomOut();
+        map.fitBounds(trekLayer.getBounds());
 
         var poisLayer = new L.GeoJSON({{ poisjson|safe }}, {
             pointToLayer: poisMarkers

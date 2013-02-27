@@ -4,5 +4,7 @@
     <div class="row-fluid">
         {% include "trekking/fake_searchtabs_fragment.html" %}
     </div>
-    {{ object.content|safe }}
+    <div id="flatpage-container-content">
+        {{ object.content|safe }}
+    </div>
 </div>

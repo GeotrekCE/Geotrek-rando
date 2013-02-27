@@ -98,7 +98,13 @@ body {
 }
 
 #detail-container-content {
-  margin-top: 70px;
+  margin-top: 6.5em;
+}
+
+#detail-container-content, #flatpage-container-content {
+  padding-left: 1%;
+  padding-right: 1%;
+  width: 98%;
 }
 
 
@@ -761,7 +767,7 @@ p.tab-content-empty {
 
 /****************************************************************************
  * 
- * Detail page
+ * Detail and Flatpage
  * 
  */
 
@@ -776,15 +782,29 @@ p.tab-content-empty {
   color: #494146;
 }
 
+.detail-content a, .flatpage-content a {
+  color:#63c1db;
+}
+
+/****************************************************************************
+ * 
+ * Detail page
+ * 
+ */
+
 #detail-content-top h2, #detail-content-top #toolbox {
   margin-top: 15px;
   margin-bottom: 15px;
 }
 
+#detail-content-top h2:first-letter, .flatpage-content h2:first-letter {
+  font-size: 2em;
+}
 
 #detail-content-top h2, .flatpage-content h2 {
-  font-size: 3em;
+  font-size: 2em;
   color: #666666;
+  text-transform:uppercase;
 }
 
 .detail-content h3 {
@@ -794,10 +814,15 @@ p.tab-content-empty {
   margin-top: 20px;
 }
 
+.detail-content p {
+  text-align:justify;
+}
+
 p.teaser {
   line-height:1.1;
   font-size: 18px;
-  margin-left: 30px;
+  margin-left: 15px;
+  margin-right: 15px;
   font-family: inherit;
   font-weight: bold;
   color: inherit;
@@ -810,6 +835,8 @@ p.teaser {
 
 #trek-identity {
   background-color: white;
+  
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.3);
 }
 
 #trek-identity p {
@@ -827,7 +854,23 @@ p.teaser {
   display: inline-block;
 }
 
+#detailmap {
+  min-height: 400px;
+}
 
+#detailmap a, #toolbox a {
+  color: black;
+}
+
+.alert-info a {
+  font-weight: bold;
+  color: #3a87ad;
+  text-decoration: underline;
+}
+
+.alert-info p {
+  margin: 0;
+}
 
 /*
  * POIs list
@@ -864,7 +907,7 @@ p.teaser {
   background-position: 95% 50%;
 }
 
-a.accordion-toggle:hover  {
+a.accordion-toggle  {
   cursor: pointer;
   color: #999095;
   text-decoration:none;
@@ -880,9 +923,6 @@ a.accordion-toggle:hover  {
   background:url("../img/download.png") no-repeat;
   padding-left:20px;
 }
-.download a {
-  color:#63c1db;
-}
 
 #trek-links img {
   padding-right: 5px;
@@ -891,11 +931,6 @@ a.accordion-toggle:hover  {
 #trek-links li {
   list-style-type: none;
 }
-
-#trek-links a {
-  color:#63c1db;
-}
-
 
 /* POIS markers */
 .poi-marker-icon img {
