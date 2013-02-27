@@ -5,6 +5,15 @@ var TREK_LAYER_OPTIONS = TREK_LAYER_OPTIONS || {
 };
 
 
+function invalidate_maps() {
+    if (window.maps) {
+        $.each(window.maps, function (i, map) {
+            map.invalidateSize();
+        });
+    }
+}
+
+
 var TrekLayer = L.ObjectsLayer.extend({
 
     initialize: function (geojson) {

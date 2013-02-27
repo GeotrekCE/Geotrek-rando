@@ -43,6 +43,8 @@ function refresh_backpack() {
 function init_ui() {
     $('#content').pjax('a.pjax');
 
+    init_share();
+
     window.trekFilter = new TrekFilter();
     $(window.trekFilter).off('filterchange').on("filterchange", function(e, visible) {
         refresh_results(visible);
@@ -52,12 +54,17 @@ function init_ui() {
     $('body').on("backpack-change", refresh_backpack);
 
     $(window).on('resize', function() {
-        layout();
+        invalidate_maps();
     });
 }
 
 function page_load() {
-    layout();
+    if ($("#mainmap-tag").length > 0) {
+        view_home ();
+    }
+    else {
+        view_detail();
+    }
 
     // Refresh tab results
     window.trekFilter.load();
@@ -77,24 +84,6 @@ function page_load() {
             _gaq.push(['_trackEvent', 'Backpack', 'Add', trekname]);
         }
     });
-}
-
-function layout() {
-    if ($("#mainmap-tag").length > 0) {
-        view_home ();
-    }
-    else {
-        view_detail();
-    }
-    invalidate_maps();
-}
-
-function invalidate_maps() {
-    if (window.maps) {
-        $.each(window.maps, function (i, map) {
-            map.invalidateSize();
-        });
-    }
 }
 
 function view_home () {
@@ -123,7 +112,16 @@ function view_home () {
         $('#tab-' + window.location.hash.slice(1) + ' a').click();
     }
 
-    toggle_sidebar();
+    $('#toggle-side-bar').off('click').on('click', function() {
+        if (!$(this).hasClass('closed')) {
+            var width_sidebar = $('.side-bar').width() - $(this).width();
+            $('#side-bar').addClass('closed').animate({left : -width_sidebar+'px'}, 500);
+        }
+        else {
+            $('#side-bar').removeClass('closed').animate({left:'0'}, 200);
+        }
+        $(this).toggleClass('closed');
+    });
 
     // Zoom trek button
     $('.search-rando').off('click').on('click', function (e) {
@@ -197,21 +195,8 @@ function view_detail() {
     });
 }
 
-function toggle_sidebar() {
-    $('#toggle-side-bar').off('click').on('click', function() {
-        if (!$(this).hasClass('closed')) {
-            var width_sidebar = $('.side-bar').width() - $(this).width();
-            $('#side-bar').addClass('closed').animate({left : -width_sidebar+'px'}, 500);
-        }
-        else {
-            $('#side-bar').removeClass('closed').animate({left:'0'}, 200);
-        }
-        $(this).toggleClass('closed');
-    });
-}
 
-
-function  sliders() {
+function sliders() {
     var saveSlider = function (event, ui) {
         window.trekFilter.sliderChanged(ui.values[0],
                                         ui.values[1],
@@ -246,3 +231,46 @@ function  sliders() {
         slide: saveSlider,
     });
 };
+
+function init_share() {
+    var $share = $('#global-share')
+      , $panel = $('#social-panel')
+      , markup = $panel.html()
+      , shown = false;
+    $panel.remove();
+
+    $share.popover({
+        html: true,
+        placement: 'left',
+        trigger: 'manual',
+        title: '',
+        content: markup,
+    });
+
+    $share.on('click', function () {
+        var $this = $(this)
+        $this.toggleClass('active');
+        var popover = $this.data('popover');
+
+        if (shown) {
+            popover.hide();
+            shown = false;
+            return;
+        }
+
+        shown = true;
+        popover.show();
+        // Prevent to go outside screen
+        if (popover.tip().position().top < 0) {
+            popover.tip().css('top', '0px');
+        }
+        var lang = $("meta[name='language']").attr('content');
+        lang = lang + '_' + lang.toUpperCase();
+        Socialite.setup({
+            facebook: {lang: lang},
+            twitter: {lang: lang},
+            googleplus: {lang: lang}
+        });
+        Socialite.load(popover.tip());
+    });
+}

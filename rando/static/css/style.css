@@ -12,6 +12,10 @@
   background-image: url("../img/glyphicons-halflings-white.png");
 }
 
+.popover {
+  z-index: 3000; /* Above map, above everything ! */
+}
+
 /* Jquery UI override */
 .ui-widget-content , .ui-widget-overlay, .ui-widget-shadow {
   background: none;
@@ -140,12 +144,6 @@ body {
 
 /* Top navigation */
 
-#global-share {
-  position: fixed;
-  top: 0px;
-  right: 30px;
-}
-
 #flatpages {
   position: fixed;
   top: 10px;
@@ -178,6 +176,43 @@ body {
 
 
 /* Top right elements */
+
+#global-share {
+  position: fixed;
+  top: 0px;
+  right: 30px;
+}
+
+.popover-content {
+  padding: 5px;
+}
+
+.popover-inner {
+  width: 200px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.popover-inner h3 {
+  display: none;
+}
+
+ul.social-buttons {
+  margin-left: 0px;
+}
+
+ul.social-buttons li {
+  display: inline-block;
+  vertical-align: bottom;
+  max-width: 65px;
+}
+
+.popover.left .arrow {
+  top: 20px;
+  border-left: 5px solid rgba(255, 255, 255, 0.8);
+}
+
+
 
 #lang-switch {
   position: fixed;
