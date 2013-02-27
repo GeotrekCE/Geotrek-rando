@@ -239,6 +239,10 @@ function init_share() {
       , shown = false;
     $panel.remove();
 
+    var previous = $share.data('popover');
+    if (previous) {
+        $share.removeData('popover');
+    }
     $share.popover({
         html: true,
         placement: 'left',
