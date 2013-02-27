@@ -62,4 +62,6 @@ def settings(request):
         'districts': alldistricts,
         'cities': allcities,
         'routes': allroutes,
+        # We need this to put <title> in DOM
+        'pjax': request.META.get('HTTP_X_PJAX', False)
     }
