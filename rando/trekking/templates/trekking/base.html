@@ -40,15 +40,6 @@
       <a class="btn" id="global-share" href="#" title="{% trans "Share" %}">
         <img src="{% static "img/share.png" %}"/> {% trans "Share" %}
       </a>
-
-      <div id="social-panel" style="display: none;">
-        <ul class="social-buttons cf">
-        <li><a href="//twitter.com/share" class="socialite twitter-share" data-text="{{ TITLE }}" data-url="{{ request.build_absolute_uri }}" data-count="vertical" rel="nofollow" target="_blank"><span class="vhidden">{% trans "Twitter" %}</span></a></li>
-        <li><a href="//plus.google.com/share?url={{ request.build_absolute_uri|iriencode }}" class="socialite googleplus-one" data-size="tall" data-href="{{ request.build_absolute_uri }}" rel="nofollow" target="_blank"><span class="vhidden">{% trans "Google+" %}</span></a></li>
-        <li><a href="//www.facebook.com/sharer.php?u={{ request.build_absolute_uri|iriencode }}&t={{ TITLE }}" class="socialite facebook-like" data-href="{{ request.build_absolute_uri }}" data-send="false" data-layout="box_count" data-width="60" data-show-faces="false" rel="nofollow" target="_blank"><span class="vhidden">{% trans "Facebook" %}</span></a></li>
-        </ul>
-      </div>
-
     </div>
     <!--  navbar-inner-->
   </div>
@@ -107,6 +98,10 @@
       $(document).ready(function (e) {
           init_ui();
           page_load();
+      });
+
+      $(document).on('pjax:start', function (e) {
+          $("#global-share.active").click();
       });
 
       $(document).on('pjax:end', function (e) {

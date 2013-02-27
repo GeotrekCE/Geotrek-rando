@@ -43,8 +43,6 @@ function refresh_backpack() {
 function init_ui() {
     $('#content').pjax('a.pjax');
 
-    init_share();
-
     window.trekFilter = new TrekFilter();
     $(window.trekFilter).off('filterchange').on("filterchange", function(e, visible) {
         refresh_results(visible);
@@ -65,6 +63,8 @@ function page_load() {
     else {
         view_detail();
     }
+
+    init_share();
 
     // Refresh tab results
     window.trekFilter.load();
@@ -247,7 +247,7 @@ function init_share() {
         content: markup,
     });
 
-    $share.on('click', function () {
+    $share.off('click').on('click', function () {
         var $this = $(this)
         $this.toggleClass('active');
         var popover = $this.data('popover');
