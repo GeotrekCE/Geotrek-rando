@@ -99,11 +99,16 @@ var RestoreViewMixin = {
     restoreView: function () {
         if (!this.__initRestore) {
             this.on('moveend', function (e) {
-              var bounds = this.getBounds();
-              localStorage.setItem('mapView', JSON.stringify([
+              var bounds = this.getBounds()
+                , view = [
                       [bounds.getSouthWest().lat, bounds.getSouthWest().lng],
                       [bounds.getNorthEast().lat, bounds.getNorthEast().lng]
-                ])
+              ];
+              if (!bounds.isValid() || view[1][0] - view[0][0] < 0.001 || view[1][1] - view[0][1] < 0.001) {
+                  console.warn("Invalid view: " + view);
+                  return;
+              }
+              localStorage.setItem('mapView', JSON.stringify()
               );
             }, this);
             this.__initRestore = true;
