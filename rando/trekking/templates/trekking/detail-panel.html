@@ -199,7 +199,13 @@
                                         html: img}),
                 marker = L.marker(latlng, {icon: poicon});
             marker.on('click', function (e) {
-                $('#poi-item-' + featureData.properties.pk).click();
+                var $item = $('#poi-item-' + featureData.properties.pk);
+                $item.click();
+                var top = $('#pois-accordion').scrollTop(),
+                    toTop = $item.position().top;
+                $('#pois-accordion').animate({
+                    scrollTop: top + toTop
+                }, 1000);
             });
             window.poisMarkers[featureData.properties.pk] = marker;
             return marker;
@@ -214,14 +220,15 @@
                                     });
         });
 
+
         // Trek
         var trekGeoJSON = {{ trek.geojson|safe }};
         var trekLayer = new L.GeoJSON(trekGeoJSON, {
             style: {color: 'orange', opacity: 1.0, clickable: false},
         });
         trekLayer.addTo(map);
-        // Show start and end
 
+        // Show start and end
         var originlonlat = {{trek.startcoords|safe }}
           , destinationlonlat = {{trek.endcoords|safe }};
         L.marker(L.latLng(originlonlat[1], originlonlat[0]),
@@ -233,10 +240,27 @@
 
         map.fitBounds(trekLayer.getBounds());
 
-        var poisLayer = new L.GeoJSON({{ poisjson|safe }}, {
-            pointToLayer: poisMarkers
-        });
+
+        // POIs Layer
+        var poisData = {{ poisjson|safe }}
+          , poisLayer = new L.MarkerClusterGroup({
+              showCoverageOnHover: false,
+              disableClusteringAtZoom: 15,
+              maxClusterRadius: 30,
+              iconCreateFunction: function(cluster) {
+                  return new L.DivIcon({className: 'poi-marker-icon cluster',
+                                        iconSize: [20, 20],
+                                        iconAnchor: [12, 12],
+                                        html: '<b>' + cluster.getChildCount() + '</b>'});
+              }
+          });
+        for (var i=0; i < poisData.features.length; i++) {
+            var featureData = poisData.features[i];
+            poisLayer.addLayer(poisMarkers(featureData,
+                                           L.GeoJSON.coordsToLatLng(featureData.geometry.coordinates)));
+        }
         poisLayer.addTo(map);
+
 
         var parkingIcon = L.icon({
             iconUrl: '{% static "img/parking.png" %}',

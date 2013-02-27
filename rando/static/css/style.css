@@ -858,6 +858,11 @@ p.teaser {
   min-height: 400px;
 }
 
+#pois-accordion {
+  max-height: 400px;
+  overflow: auto;
+}
+
 #detailmap a, #toolbox a {
   color: black;
 }
@@ -875,16 +880,19 @@ p.teaser {
 /*
  * POIs list
  */
-
-
-.accordion-body {
-  max-height:120px;
-  overflow:auto;
-}
-
 .accordion-heading, .accordion-inner {
   background-color: white;
 }
+
+a.accordion-toggle.open {
+  font-weight: bold;
+  color: #666666;
+}
+
+.accordion-body.in .accordion-inner {
+  color: #666666;
+}
+
 
 .accordion-heading .accordion-toggle {
   padding: 0px 2px;
@@ -933,10 +941,13 @@ a.accordion-toggle  {
 }
 
 /* POIS markers */
-.poi-marker-icon img {
-  max-width: 24px;
-  max-height: 24px;
+
+.poi-marker-icon img, .poi-marker-icon.cluster {
+  width: 24px;
+  height: 24px;
   padding: 1px;
+  color: black;
+  text-align: center;
   background-color: rgba(255, 140, 0, 0.7);
   border: 1px solid  #80757d;
   -webkit-border-radius: 4px;
