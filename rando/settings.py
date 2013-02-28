@@ -141,7 +141,8 @@ COMPRESS_PARSER = 'compressor.parser.HtmlParser'
 
 LEAFLET_CONFIG = {
     "TILES_URL": 'http://{s}.tiles.mapbox.com/v3/examples.map-4l7djmvo/{z}/{x}/{y}.png',
-    "SCALE": False
+    "SCALE": False,
+    "MINIMAP": True,
 }
 
 # A sample logging configuration. The only tangible logging
