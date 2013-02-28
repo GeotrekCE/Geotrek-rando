@@ -189,6 +189,7 @@
     var poisMarkers = {};
 
     function detailmapInit(map, bounds) {
+        map.attributionControl.setPrefix('');
 
         var poisMarkers = function(featureData, latlng) {
             var img = '<img src="%SRC%" title="%TITLE%">';

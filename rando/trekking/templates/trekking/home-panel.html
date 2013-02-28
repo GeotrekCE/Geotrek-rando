@@ -155,6 +155,8 @@
 
 <script type="text/javascript">
     function mainmapInit(map, bounds) {
+        map.attributionControl.setPrefix('');
+
         window.treksLayer = new TrekLayer(treks).addTo(map);
 
         if (!map.restoreView()) {
