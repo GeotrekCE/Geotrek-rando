@@ -301,6 +301,7 @@ ul.social-buttons li {
   top:4px;
   border:none;
   outline:none;
+  cursor: pointer;
 }
 
 .filter, .ui-slider, .ui-slider-handle {
