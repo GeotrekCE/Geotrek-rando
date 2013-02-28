@@ -118,8 +118,8 @@ class POIsInputFile(InputFile):
             poitype = properties.pop('serializable_type')
             poitype = reroot(poitype, attr='pictogram')
             properties['type'] = poitype
-            properties['thumbnail'] = properties.pop('serializable_thumbnail')
-            properties['pictures'] = properties.pop('serializable_pictures')
+            properties['thumbnail'] = reroot(properties.pop('serializable_thumbnail'))
+            properties['pictures'] = reroot(properties.pop('serializable_pictures'), attr='url')
             feature['properties'] = properties
             features.append(feature)
         content['features'] = features
