@@ -99,6 +99,10 @@ var RestoreViewMixin = {
     restoreView: function () {
         if (!this.__initRestore) {
             this.on('moveend', function (e) {
+
+              if (!this._loaded)
+                 return;  // Never access map bounds if view is not set.
+
               var bounds = this.getBounds()
                 , view = [
                       [bounds.getSouthWest().lat, bounds.getSouthWest().lng],
@@ -108,7 +112,7 @@ var RestoreViewMixin = {
                   console.warn("Invalid view: " + view);
                   return;
               }
-              localStorage.setItem('mapView', JSON.stringify()
+              localStorage.setItem('mapView', JSON.stringify(view)
               );
             }, this);
             this.__initRestore = true;
