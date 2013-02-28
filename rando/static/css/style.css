@@ -373,6 +373,9 @@ ul.social-buttons li {
 .theme .filter.active img {
   margin-left: -32px;
 }
+.theme .filter img:hover {
+  margin-left: -32px;
+}
 
 .theme .filter.active p {
   color: orange;
