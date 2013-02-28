@@ -831,6 +831,7 @@ p.tab-content-empty {
 #detail-content-top h2, #detail-content-top #toolbox {
   margin-top: 15px;
   margin-bottom: 15px;
+  margin-right: 15px;
 }
 
 #detail-content-top h2:first-letter, .flatpage-content h2:first-letter {
