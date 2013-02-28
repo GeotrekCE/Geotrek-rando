@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-26 17:58+0100\n"
+"POT-Creation-Date: 2013-02-28 12:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "From %(departure)s to %(arrival)s"
 msgstr "De %(departure)s à %(arrival)s"
 
-#: templates/trekking/base.html:38 templates/trekking/detail-panel.html:18
+#: templates/trekking/base.html:40 templates/trekking/base.html.py:41
 msgid "Share"
 msgstr "Partager"
 
@@ -35,104 +35,108 @@ msgstr "Imprimer"
 msgid "In backpack"
 msgstr "Sac à dos"
 
-#: templates/trekking/detail-panel.html:57
+#: templates/trekking/detail-panel.html:40
 #: templates/trekking/home-panel.html:89
 msgid "Route"
 msgstr "Parcours"
 
-#: templates/trekking/detail-panel.html:60
+#: templates/trekking/detail-panel.html:43
 #: templates/trekking/home-panel.html:73
 msgid "Valleys"
 msgstr "Vallées"
 
-#: templates/trekking/detail-panel.html:61
-#: templates/trekking/home-panel.html:14
+#: templates/trekking/detail-panel.html:44
+#: templates/trekking/home-panel.html:15
 msgid "Difficulty"
 msgstr "Difficulté"
 
-#: templates/trekking/detail-panel.html:62
+#: templates/trekking/detail-panel.html:45
 msgid "Ascent"
 msgstr "Dénivelé positif"
 
-#: templates/trekking/detail-panel.html:63
+#: templates/trekking/detail-panel.html:46
 msgid "Descent"
 msgstr "Dénivelé négatif"
 
-#: templates/trekking/detail-panel.html:64
-#: templates/trekking/home-panel.html:23
+#: templates/trekking/detail-panel.html:47
+#: templates/trekking/home-panel.html:24
 msgid "Duration"
 msgstr "Durée"
 
-#: templates/trekking/detail-panel.html:65
+#: templates/trekking/detail-panel.html:48
 msgid "Min elevation"
 msgstr "Altitude min"
 
-#: templates/trekking/detail-panel.html:66
+#: templates/trekking/detail-panel.html:49
 msgid "Max elevation"
 msgstr "Altitude max"
 
-#: templates/trekking/detail-panel.html:70
+#: templates/trekking/detail-panel.html:53
 #: templates/trekking/home-panel.html:65
 msgid "Usages"
 msgstr "Usages"
 
-#: templates/trekking/detail-panel.html:76
+#: templates/trekking/detail-panel.html:59
 msgid "Themes"
 msgstr "Thèmes"
 
-#: templates/trekking/detail-panel.html:82
+#: templates/trekking/detail-panel.html:65
 msgid "Networks"
 msgstr "Réseaux"
 
-#: templates/trekking/detail-panel.html:89
+#: templates/trekking/detail-panel.html:72
 msgid "Advice"
 msgstr "Recommandation"
 
-#: templates/trekking/detail-panel.html:97
-msgid "See also"
-msgstr "Plus d'informations"
-
-#: templates/trekking/detail-panel.html:117
-msgid "Sharing departure"
-msgstr "Au départ"
-
-#: templates/trekking/detail-panel.html:126
-msgid "Sharing paths"
-msgstr "Sur le chemin"
-
-#: templates/trekking/detail-panel.html:135
-msgid "Sharing circuit"
-msgstr "Dans le circuit"
-
-#: templates/trekking/detail-panel.html:147
+#: templates/trekking/detail-panel.html:83
 msgid "This trek is within park center"
 msgstr "Cet itinéraire est dans le coeur du parc national"
 
-#: templates/trekking/detail-panel.html:147
+#: templates/trekking/detail-panel.html:83
 msgid "please read access rules."
 msgstr "veuillez consulter la réglémentation."
 
-#: templates/trekking/detail-panel.html:154
+#: templates/trekking/detail-panel.html:93
 msgid "Altitude profile"
 msgstr "Profil altimétrique"
 
-#: templates/trekking/detail-panel.html:155
+#: templates/trekking/detail-panel.html:94
 msgid "Altitude (m)"
 msgstr "Altitude (m)"
 
-#: templates/trekking/detail-panel.html:156
+#: templates/trekking/detail-panel.html:95
 msgid "Distance (m)"
 msgstr "Distance (m)"
 
-#: templates/trekking/detail-panel.html:160
+#: templates/trekking/detail-panel.html:99
 msgid "Download GPX"
 msgstr "Télécharger GPX"
 
-#: templates/trekking/detail-panel.html:161
+#: templates/trekking/detail-panel.html:100
 msgid "Download for Google Earth"
 msgstr "Télécharger pour Google Earth"
 
-#: templates/trekking/detail-panel.html:247
+#: templates/trekking/detail-panel.html:106
+msgid "See also"
+msgstr "Plus d'informations"
+
+#: templates/trekking/detail-panel.html:129
+msgid "Related treks"
+msgstr "Itinéraires liés"
+
+#: templates/trekking/detail-panel.html:132
+msgid "Sharing departure"
+msgstr "Au départ"
+
+#: templates/trekking/detail-panel.html:141
+msgid "Sharing paths"
+msgstr "Sur le chemin"
+
+#: templates/trekking/detail-panel.html:150
+msgid "Sharing circuit"
+msgstr "Dans le circuit"
+
+#: templates/trekking/detail-panel.html:279
 msgid "Recommended parking"
 msgstr "Stationnement recommandé"
 
@@ -145,40 +149,40 @@ msgstr "Retour à la liste"
 msgid "Backpack"
 msgstr "Sac à dos"
 
-#: templates/trekking/home-panel.html:10
+#: templates/trekking/home-panel.html:11
 msgid "Filters"
 msgstr "Filtres"
 
-#: templates/trekking/home-panel.html:18
+#: templates/trekking/home-panel.html:19
 msgid "Easy"
 msgstr "Facile"
 
-#: templates/trekking/home-panel.html:19
+#: templates/trekking/home-panel.html:20
 msgid "Medium"
 msgstr "Confirmé"
 
-#: templates/trekking/home-panel.html:20
+#: templates/trekking/home-panel.html:21
 msgid "Hard"
 msgstr "Sportif"
 
-#: templates/trekking/home-panel.html:27
+#: templates/trekking/home-panel.html:28
 msgid "Short"
 msgstr "Court"
 
-#: templates/trekking/home-panel.html:29
+#: templates/trekking/home-panel.html:30
 msgid "day"
 msgstr "journée"
 
-#: templates/trekking/home-panel.html:30 templates/trekking/home-panel.html:31
+#: templates/trekking/home-panel.html:31 templates/trekking/home-panel.html:32
 msgid "2 days"
 msgstr "2 jours"
 
-#: templates/trekking/home-panel.html:34
+#: templates/trekking/home-panel.html:35
 #: templates/trekking/trek_result_fragment.html:11
 msgid "Climb"
 msgstr "Dénivelé"
 
-#: templates/trekking/home-panel.html:45
+#: templates/trekking/home-panel.html:46
 msgid "Thematic"
 msgstr "Thème"
 
@@ -213,6 +217,18 @@ msgstr "Pas de description..."
 #: templates/trekking/navigation_fragment.html:9
 msgid "Home"
 msgstr "Accueil"
+
+#: templates/trekking/share_fragment.html:4
+msgid "Twitter"
+msgstr ""
+
+#: templates/trekking/share_fragment.html:5
+msgid "Google+"
+msgstr ""
+
+#: templates/trekking/share_fragment.html:6
+msgid "Facebook"
+msgstr ""
 
 #~ msgid "Add to backpack"
 #~ msgstr "Ajouter au sac à dos"
