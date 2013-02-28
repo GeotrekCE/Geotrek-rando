@@ -221,6 +221,8 @@
         });
         trekLayer.addTo(map);
 
+        var wholeBounds = trekLayer.getBounds();
+
         // Show start and end
         var originlonlat = {{trek.startcoords|safe }}
           , destinationlonlat = {{trek.endcoords|safe }};
@@ -230,9 +232,6 @@
         L.marker(L.latLng(destinationlonlat[1], destinationlonlat[0]),
                  {clickable: false,
                   icon: new L.Icon.Default({iconUrl: '{% static "img/marker-target.png" %}'})}).addTo(map);
-
-        map.fitBounds(trekLayer.getBounds());
-
 
         // POIs Layer
         var poisData = {{ poisjson|safe }}
@@ -248,12 +247,13 @@
               }
           });
         for (var i=0; i < poisData.features.length; i++) {
-            var featureData = poisData.features[i];
-            poisLayer.addLayer(poisMarkers(featureData,
-                                           L.GeoJSON.coordsToLatLng(featureData.geometry.coordinates)));
+            var featureData = poisData.features[i]
+              , marker = poisMarkers(featureData,
+                                     L.GeoJSON.coordsToLatLng(featureData.geometry.coordinates));
+            wholeBounds.extend(marker.getLatLng());
+            poisLayer.addLayer(marker);
         }
         poisLayer.addTo(map);
-
 
         var parkingIcon = L.icon({
             iconUrl: '{% static "img/parking.png" %}',
@@ -262,11 +262,14 @@
         });
         var parkingLocation = {{ object.properties.parking_location|default:"null" }};
         if (parkingLocation) {
-          L.marker([parkingLocation[1], parkingLocation[0]],
-                   {icon: parkingIcon})
+          var pos = L.latLng([parkingLocation[1], parkingLocation[0]]);
+          L.marker(pos, {icon: parkingIcon})
            .bindPopup("{{ object.properties.advised_parking }}" || "{% trans "Recommended parking" %}")
            .addTo(map);
+          wholeBounds.extend(pos);
         }
+
+        map.fitBounds(wholeBounds);
 
         //Load altimetric graph
         altimetricInit();
