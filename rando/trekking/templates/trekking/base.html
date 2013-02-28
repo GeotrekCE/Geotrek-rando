@@ -83,7 +83,9 @@
   <script src="{% static "js/application/map.js" %}"></script> 
   {% endcompress %}
 
-  {% ganalytics %}
+  {% if not donottrack %}
+    {% ganalytics %}
+  {% endif %}
 
   <script type="text/javascript">
 
