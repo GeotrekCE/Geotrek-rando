@@ -86,65 +86,77 @@
 
       {% leaflet_map 'detailmap' fitextent=False %}
 
-      <div id="altitudegraph">
-          <h4>{% trans "Altitude profile" %}</h4>
-          <p class="axislabel">{% trans "Altitude (m)" %}</p>
-          <span id="profilealtitude"></span> <span class="axislabel">{% trans "Distance (m)" %}</span>
-          <p id="mouseoverprofil" class="axislabel" >&nbsp;</p>
-      </div>
+      <div class="row-fluid">
 
-      <p class="download"><a href="{% url trekking:fileserve object.gpx_url %}">{% trans "Download GPX" %}</a></p>
-      <p class="download"><a href="{% url trekking:fileserve object.kml_url %}">{% trans "Download for Google Earth" %}</a></p>
+        <div class="flex">
+          <div id="altitudegraph">
+            <h4>{% trans "Altitude profile" %}</h4>
+            <p class="axislabel">{% trans "Altitude (m)" %}</p>
+            <span id="profilealtitude"></span> <span class="axislabel">{% trans "Distance (m)" %}</span>
+            <p id="mouseoverprofil" class="axislabel" >&nbsp;</p>
+          </div>
 
+          <p class="download"><a href="{% url trekking:fileserve object.gpx_url %}">{% trans "Download GPX" %}</a></p>
+          <p class="download"><a href="{% url trekking:fileserve object.kml_url %}">{% trans "Download for Google Earth" %}</a></p>
+        </div>
 
-      <div id="trek-links">
-        <h3>{% trans "See also" %}</h3>
+        {% if object.properties.web_links|length > 0 %}
+        <div class="flex">
+          <div id="trek-links">
+            <h4>{% trans "See also" %}</h4>
 
-        {% regroup object.properties.web_links by category as weblinks %}
+            {% regroup object.properties.web_links by category as weblinks %}
 
-        <ul>
-        {% for weblink in weblinks %}
-            <li>{{ weblink.grouper|pictogram:"small" }} {{ weblink.grouper.label }}
-            {% for item in weblink.list %}
-              {% if forloop.first and weblink.list.count > 1 %}<ul>{% endif %}
-              {% if weblink.list.count > 1 %}<li>{% endif %}
-              <a target="_blank" href="{{ item.url }}">{{ item.name }}</a>
-              {% if weblink.list.count > 1 %}</li>{% endif %}
-              {% if forloop.last and weblink.list.count > 1 %}</ul>{% endif %}
+            <ul>
+            {% for weblink in weblinks %}
+                <li>{{ weblink.grouper|pictogram:"small" }} {{ weblink.grouper.label }}
+                {% for item in weblink.list %}
+                  {% if forloop.first and weblink.list.count > 1 %}<ul>{% endif %}
+                  {% if weblink.list.count > 1 %}<li>{% endif %}
+                  <a target="_blank" href="{{ item.url }}">{{ item.name }}</a>
+                  {% if weblink.list.count > 1 %}</li>{% endif %}
+                  {% if forloop.last and weblink.list.count > 1 %}</ul>{% endif %}
+                {% endfor %}
+                </li>
             {% endfor %}
-            </li>
-        {% endfor %}
-        </ul>
+            </ul>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if object.properties.relationships_departure|length > 0 or object.properties.relationships_edge|length > 0 or object.properties.relationships_circuit|length > 0 %}
+        <div id="trek-related" class="flex">
+          <h4>{% trans "Related treks" %}</h4>
+          {% for relationship in object.properties.relationships_departure %}
+            {% if forloop.first %}
+              <h5>{% trans "Sharing departure" %}</h5>
+              <ul>
+            {% endif %}
+            <li><a href="{% url trekking:detail relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+            {% if forloop.last %}</ul>{% endif %}
+          {% endfor %}
+
+          {% for relationship in object.properties.relationships_edge %}
+            {% if forloop.first %}
+              <h5>{% trans "Sharing paths" %}</h5>
+              <ul>
+            {% endif %}
+            <li><a href="{% url trekking:detail relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+            {% if forloop.last %}</ul>{% endif %}
+          {% endfor %}
+
+          {% for relationship in object.properties.relationships_circuit %}
+            {% if forloop.first %}
+              <h5>{% trans "Sharing circuit" %}</h5>
+              <ul>
+            {% endif %}
+            <li><a href="{% url trekking:detail relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+            {% if forloop.last %}</ul>{% endif %}
+          {% endfor %}
+        </div>
+        {% endif %}
+
       </div>
-      <div id="trek-related">
-        {% for relationship in object.properties.relationships_departure %}
-          {% if forloop.first %}
-            <h4>{% trans "Sharing departure" %}</h4>
-            <ul>
-          {% endif %}
-          <li><a href="{% url trekking:detail relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
-          {% if forloop.last %}</ul>{% endif %}
-        {% endfor %}
-
-        {% for relationship in object.properties.relationships_edge %}
-          {% if forloop.first %}
-            <h4>{% trans "Sharing paths" %}</h4>
-            <ul>
-          {% endif %}
-          <li><a href="{% url trekking:detail relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
-          {% if forloop.last %}</ul>{% endif %}
-        {% endfor %}
-
-        {% for relationship in object.properties.relationships_circuit %}
-          {% if forloop.first %}
-            <h4>{% trans "Sharing circuit" %}</h4>
-            <ul>
-          {% endif %}
-          <li><a href="{% url trekking:detail relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
-          {% if forloop.last %}</ul>{% endif %}
-        {% endfor %}
-      </div>
-
     </div>
 
     <div class="{% if object.pois.all %}span3{% endif %}">
@@ -280,7 +292,7 @@
          * Load altimetric profile from JSON
          */
         $.getJSON("{% url trekking:fileserve object.altimetric_url %}", function(data) {
-            $('#profilealtitude').sparkline(data.profile, {tooltipSuffix: ' m', width: 300, height: 100});
+            $('#profilealtitude').sparkline(data.profile, {tooltipSuffix: ' m', width: '100%', height: 100});
             $('#profilealtitude').bind('sparklineRegionChange', function(ev) {
                 var sparkline = ev.sparklines[0],
                     region = sparkline.getCurrentRegionFields();

@@ -851,6 +851,13 @@ p.tab-content-empty {
   margin-top: 20px;
 }
 
+.detail-content h4 {
+  background-color: #999095;
+  text-align: center;
+  color: white;
+  width: 100%;
+}
+
 .detail-content p {
   text-align:justify;
 }

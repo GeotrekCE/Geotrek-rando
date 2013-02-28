@@ -64,6 +64,16 @@ function page_load() {
         view_detail();
     }
 
+    // Flex divs :)
+    $('.row-fluid').each(function () {
+        var $flex = $(this).find('.flex');
+        if ($flex.length == 0) return;
+        var span = Math.round(12 / $flex.length);
+        $flex.each(function (i, v) {
+            $(v).addClass('span'+span);
+        });
+    }); 
+
     init_share();
 
     // Refresh tab results
