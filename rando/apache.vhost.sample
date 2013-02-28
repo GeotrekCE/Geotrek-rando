@@ -23,6 +23,10 @@ Alias /media/ /PATH_TO_SOURCE/var/input/media/
   Allow from all
 </Directory>
 
+AddType application/gpx+xml .gpx
+AddType application/vnd.google-earth.kml+xml .kml
+AddType application/vnd.google-earth.kmz .kmz
+
 WSGIScriptAlias / /PATH_TO_SOURCE/rando/wsgi.py
 WSGIPythonPath /PATH_TO_SOURCE/:/PATH_TO_SOURCE/lib/python2.7/site-packages
 <Directory /PATH_TO_SOURCE/rando/>
