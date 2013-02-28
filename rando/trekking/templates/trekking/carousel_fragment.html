@@ -9,9 +9,11 @@
       </div>
     </div>
     {% empty%}
-    <div class="item active">
-      <img src="{% static "img/default-preview.jpg" %}"/>
-    </div>
+    {% if default == "True" %}
+      <div class="item active">
+        <img src="{% static "img/default-preview.jpg" %}"/>
+      </div>
+    {% endif %}
     {% endfor %}
   </div>
   {% if pictures|length > 1 %}

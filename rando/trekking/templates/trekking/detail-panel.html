@@ -27,7 +27,7 @@
       <p class="teaser">{{ object.properties.description_teaser|default:"No teaser"|safe|striptags }}</p>
       <p>{{ object.properties.description|default:"No description"|safe }}</p>
 
-      {% include "trekking/carousel_fragment.html" with prefix="trek" pictures=object.properties.pictures %}
+      {% include "trekking/carousel_fragment.html" with prefix="trek" pictures=object.properties.pictures default="True" %}
 
       <p>{{ object.properties.ambiance|default:"No ambiance"|safe }}</p>
     </div>
@@ -155,12 +155,15 @@
             <a class="accordion-toggle acc-open" id="poi-item-{{ poi.properties.pk}}" data-toggle="collapse" data-parent="#pois-accordion" data-id="{{ poi.properties.pk }}" href="#collapse-poi-{{  poi.properties.pk }}">
               {{ poi.properties.type|pictogram }}
               {{ poi.properties.name }}
+              {% if poi.properties.pictures|length > 0 %}
+                <span class="pictures-info pull-right"><i class="icon-camera icon-gray"></i>&times;{{ poi.properties.pictures|length }}</span>
+              {% endif %}
             </a>
           </div>
           <div id="collapse-poi-{{  poi.properties.pk }}" class="accordion-body collapse" style="height: 0px; ">
             <div class="accordion-inner">
               <p>{{ poi.properties.description|safe }}</p>
-              {% include "trekking/carousel_fragment.html" with prefix=poi.properties.pk pictures=poi.properties.pictures %}
+              {% include "trekking/carousel_fragment.html" with prefix=poi.properties.pk pictures=poi.properties.pictures default="False" %}
             </div>
           </div>
         </div>

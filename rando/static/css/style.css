@@ -7,9 +7,9 @@
   margin-right: 0px;
 }
 
-[class^="icon-"],
-[class*=" icon-"] {
-  background-image: url("../img/glyphicons-halflings-white.png");
+[class^="icon-gray"],
+[class*=" icon-gray"] {
+  background-image: url("../img/glyphicons-halflings-gray.png");
 }
 
 .popover {
@@ -898,6 +898,11 @@ p.teaser {
 #pois-accordion {
   max-height: 400px;
   overflow: auto;
+}
+
+#pois-accordion .pictures-info {
+  margin-right: 35px;
+  margin-top: 7px;
 }
 
 #detailmap a, #toolbox a {
