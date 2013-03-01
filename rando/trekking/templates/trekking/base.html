@@ -81,8 +81,8 @@
   <script src="{% static "js/application/filter.js" %}"></script>
   <script src="{% static "js/application/backpack.js" %}"></script> 
   <script src="{% static "js/application/map.js" %}"></script> 
-  <script type="text/javascript" src="{% url django.views.i18n.javascript_catalog %}"></script>
   {% endcompress %}
+  <script type="text/javascript" src="{% url jsi18n %}"></script>
 
   {% if not donottrack %}
     {% ganalytics %}

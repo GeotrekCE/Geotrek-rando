@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.contrib.sitemaps import Sitemap
+from django.views.decorators.cache import cache_page
+from django.views.i18n import javascript_catalog
 
 from localeurl.sitemaps import LocaleurlSitemap
 from localeurl.templatetags.localeurl_tags import chlocale
@@ -50,7 +52,7 @@ urlpatterns = patterns('',
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
     url(r'', include('rando.trekking.urls', namespace='trekking', app_name='trekking')),
     url(r'pages/', include('rando.flatpages.urls', namespace='flatpages', app_name='flatpages')),
-    url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog', {'packages':('rando.trekking',)}),
+    url(r'^jsi18n/$', cache_page(javascript_catalog), {'packages':('rando.trekking',)}, name='jsi18n'),
 )
 
 

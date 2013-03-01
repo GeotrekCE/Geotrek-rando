@@ -146,7 +146,9 @@ var FakeBoundsMapMixin = {
 
     fitFakeBounds: function (bounds) {
         this.fitBounds(bounds);
-        this.fitBounds(this.__fakeBounds(bounds));
+        this.whenReady(function () {
+            this.fitBounds(this.__fakeBounds(bounds));
+        }, this);
     },
 
     getFakeBounds: function () {
@@ -162,21 +164,15 @@ var RestoreViewMixin = {
     restoreView: function () {
         if (!this.__initRestore) {
             this.on('moveend', function (e) {
-
               if (!this._loaded)
                  return;  // Never access map bounds if view is not set.
 
-              var bounds = this.getBounds()
-                , view = [
-                      [bounds.getSouthWest().lat, bounds.getSouthWest().lng],
-                      [bounds.getNorthEast().lat, bounds.getNorthEast().lng]
-              ];
-              if (!bounds.isValid() || view[1][0] - view[0][0] < 0.001 || view[1][1] - view[0][1] < 0.001) {
-                  console.warn("Invalid view: " + view);
-                  return;
-              }
-              localStorage.setItem('mapView', JSON.stringify(view)
-              );
+              var view = {
+                lat: this.getCenter().lat,
+                lng: this.getCenter().lng,
+                zoom: this.getZoom()
+              };
+              localStorage.setItem('mapView', JSON.stringify(view));
             }, this);
             this.__initRestore = true;
         }
@@ -187,10 +183,12 @@ var RestoreViewMixin = {
         }
         try {
             view = JSON.parse(retrievedObject);
-            this.fitBounds(view);
+            this.setView(L.latLng(view.lat, view.lng), view.zoom, true);
             return true;
         }
-        catch (err) {}
+        catch (err) {
+            console.error(err);
+        }
     },
 };
 
