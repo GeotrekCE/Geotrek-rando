@@ -20,10 +20,11 @@ deploy: bin/python
 	bin/python ./manage.py collectstatic
 
 test: bin/python
-	bin/python ./manage.py test
+	bin/python ./manage.py test trekking flatpages
 
 clean:
 	rm -rf bin/ lib/ build/ dist/ *.egg-info/ include/ local/
 
 ping_google:
 	bin/python ./manage.py ping_google
+
