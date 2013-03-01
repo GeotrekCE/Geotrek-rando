@@ -100,6 +100,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'rando.middleware.DoNotTrackMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -107,7 +108,10 @@ MIDDLEWARE_CLASSES = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.core.context_processors.media',
-    'rando.trekking.context_processors.settings',
+    'rando.context_processors.settings',
+    'rando.context_processors.pjax',
+    'rando.context_processors.donottrack',
+    'rando.trekking.context_processors.main',
 )
 
 ROOT_URLCONF = 'rando.urls'
