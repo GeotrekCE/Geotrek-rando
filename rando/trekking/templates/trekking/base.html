@@ -81,6 +81,7 @@
   <script src="{% static "js/application/filter.js" %}"></script>
   <script src="{% static "js/application/backpack.js" %}"></script> 
   <script src="{% static "js/application/map.js" %}"></script> 
+  <script type="text/javascript" src="{% url django.views.i18n.javascript_catalog %}"></script>
   {% endcompress %}
 
   {% if not donottrack %}
@@ -95,7 +96,13 @@
       var trekFilter = null,
           backPack = null,
           treksLayer = null,
-          treks = {{ treksjson|safe }};
+          poisMarkers = poisMarkers || {},
+          trek = trek || null,
+          trekLayer = trekLayer || null,
+          pois = pois || null,
+          altimetric_url = altimetric_url || null,
+          treks = {{ treksjson|safe }},
+          IMG_URL = "{% static "img" %}";
 
       $(document).ready(function (e) {
           init_ui();
@@ -103,20 +110,19 @@
       });
 
       $(document).on('pjax:start', function (e) {
-          $("#global-share.active").click();
+          page_leave();
       });
 
       $(document).on('pjax:end', function (e) {
-          page_load();
-          // Try a custom lazy load
           var mainmapContainer = L.DomUtil.get('mainmap');
           if (mainmapContainer && typeof(loadmapmainmap) == "function") {
-              if (!mainmapContainer._leaflet) loadmapmainmap();
+            if (!mainmapContainer._leaflet) loadmapmainmap();
           }
           var detailmapContainer = L.DomUtil.get('detailmap');
           if (detailmapContainer && typeof(loadmapdetailmap) == "function") {
-              if (!detailmapContainer._leaflet) loadmapdetailmap();
+            if (!detailmapContainer._leaflet) loadmapdetailmap();
           }
+          page_load();
       });
   </script>
 

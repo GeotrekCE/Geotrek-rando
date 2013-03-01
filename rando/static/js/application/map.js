@@ -55,6 +55,69 @@ var TrekLayer = L.ObjectsLayer.extend({
 });
 
 
+var POILayer = L.MarkerClusterGroup.extend({
+
+    initialize: function (poisData) {
+        L.MarkerClusterGroup.prototype.initialize.call(this, {
+          showCoverageOnHover: false,
+          disableClusteringAtZoom: 15,
+          maxClusterRadius: 24,
+          iconCreateFunction: function(cluster) {
+              return new L.DivIcon({className: 'poi-marker-icon cluster',
+                                    iconSize: [20, 20],
+                                    iconAnchor: [12, 12],
+                                    html: '<b>' + cluster.getChildCount() + '</b>'});
+          }
+        });
+
+        for (var i=0; i < poisData.features.length; i++) {
+            var featureData = poisData.features[i]
+              , marker = this.poisMarker(featureData,
+                                         L.GeoJSON.coordsToLatLng(featureData.geometry.coordinates));
+            this.addLayer(marker);
+        }
+    },
+
+    poisMarker: function(featureData, latlng) {
+        var img = L.Util.template('<img src="{SRC}" title="{TITLE}">', {
+            SRC: featureData.properties.type.pictogram,
+            TITLE: featureData.properties.type.label,
+        });
+
+        var poicon = new L.DivIcon({className: 'poi-marker-icon',
+                                    iconAnchor: [12, 12],
+                                    html: img}),
+            marker = L.marker(latlng, {icon: poicon});
+        marker.properties = featureData.properties;
+
+        /*
+         * Open Accordion on marker click.
+         * TODO: does not work correctly.
+         */
+        marker.on('click', function (e) {
+            var $item = $('#poi-item-' + featureData.properties.pk);
+            $item.click();
+            var top = $('#pois-accordion').scrollTop(),
+                toTop = $item.position().top;
+            $('#pois-accordion').animate({
+                scrollTop: top + toTop
+            }, 1000);
+        });
+
+        /* If POI has a thumbnail, show popup on click */
+        if (featureData.properties.thumbnail) {
+            marker.bindPopup(
+                L.Util.template('<img src="{SRC}" width="110" height="110">', {
+                    SRC: featureData.properties.thumbnail
+                }),
+                {autoPan: false});
+        }
+        return marker;
+    }
+});
+
+
+
 var FakeBoundsMapMixin = {
     __fakeBounds: function (bounds) {
         /* Depending on sidebar open/close, we correct the bounds of the map
@@ -132,3 +195,190 @@ var RestoreViewMixin = {
 };
 
 L.Map.include(RestoreViewMixin);
+
+
+/**
+ * Map initialization functions.
+ * Callbacks of Django Leaflet.
+ */
+function mainmapInit(map, bounds) {
+    map.attributionControl.setPrefix('');
+
+    window.treksLayer = new TrekLayer(window.treks).addTo(map);
+
+    if (!map.restoreView()) {
+        map.fitFakeBounds(treksLayer.getBounds());
+    }
+
+    // Move controls to the right
+    map.zoomControl.setPosition('topright');
+    map.addControl(new L.Control.Scale({imperial: false, position: 'bottomright'}));
+
+    // Filter map on filter
+    $(window.trekFilter).on("filterchange", function(e, visible) {
+        treksLayer.updateFromPks(visible);
+    });
+
+    // Filter list by map bounds
+    map.on('moveend', function (e) {
+      if (!map._loaded) return;  // Bounds should be set.
+
+      $('#side-bar .result').removeClass('outbounds');
+      if (!$(map._container).is(':visible')) {
+        // If map is hidden, consider all visible :)
+        return;
+      }
+      var visible = treksLayer.search(map.getFakeBounds())
+        , visiblepks = $.map(visible, function (l) { return l.properties.pk});
+      $.each(treks.features, function (i, l) {
+          var pk = l.properties.pk;
+          if ($.inArray(pk, visiblepks) == -1) {
+            $("#side-bar .result[data-id='" + pk + "']").addClass('outbounds');
+          }
+      });
+    });
+
+    // Go to detail page on double-click
+    treksLayer.on('dblclick', function (e) {
+        // Track event
+        _gaq.push(['_trackEvent', 'Map', 'Doubleclick', e.layer.properties.name]);
+        // Simulate click on link
+        $('#trek-'+ e.layer.properties.pk +'.result a.pjax').click();
+    });
+
+    // Popup on click on trek 
+    var popup = null;
+    treksLayer.on('click', function (e) {
+        var layer = e.layer;
+        var html = '<h3>{NAME}</h3>' + 
+                   '<p>{DESCRIPTION}</p>' + 
+                   '<img src="{THUMBNAIL}"/>'+ 
+                   '<p class="popupdetail"><a href="#"<a href="#">{MORE}</a></p>';
+        html = L.Util.template(html, {
+            NAME: layer.properties.name,
+            DESCRIPTION: layer.properties.description_teaser,
+            // This is tricky : use img url of trek in result list :)
+            THUMBNAIL: $('#trek-'+ e.layer.properties.pk +'.result img').attr('src'),
+            MORE: gettext("More info..."),
+        });
+
+        if (popup) {
+            popup._close();
+
+            // Click on already opened popup : close only.
+            if (popup.pk == layer.properties.pk) {
+                popup = null;
+                return;
+            }
+        }
+
+        popup = L.popup({autoPan: false}).setLatLng(e.latlng)
+             .setContent(html)
+             .openOn(map);
+        popup.pk = layer.properties.pk;
+        // Make sure clic on details will open as pjax
+        $('.popupdetail a', popup._container).click(function () {
+            // Track event
+            _gaq.push(['_trackEvent', 'Map', 'Popup', e.layer.properties.name]);
+            // Navigate to details
+            $('#trek-'+ e.layer.properties.pk +'.result a.pjax').click();
+        });
+        
+    });
+
+    // Highlight result on mouseover
+    treksLayer.on('mouseover', function (e) {
+      $('#trek-'+ e.layer.properties.pk +'.result').addClass('active');
+    });
+    treksLayer.on('mouseout', function (e) {
+      $('#trek-'+ e.layer.properties.pk +'.result').removeClass('active');
+    });
+}
+
+
+function detailmapInit(map, bounds) {
+    map.attributionControl.setPrefix('');
+
+    $('#pois-accordion').on('open', function (e, accordion) {
+        var id = $(accordion).data('id'),
+            marker = window.poisMarkers[id];
+        $(marker._icon).animate({"margin-top": "-=20px"}, "fast",
+                                function(){
+                                    $(this).animate({"margin-top": "+=20px"}, "fast");
+                                });
+    });
+
+    // Trek
+    var highlight = new L.GeoJSON(window.trek.geometry, {style: L.extend(TREK_LAYER_OPTIONS.outlinestyle, {clickable: false})})
+                         .addTo(map);
+    window.trekLayer = new L.GeoJSON(window.trek.geometry, {style: L.extend(TREK_LAYER_OPTIONS.hoverstyle, {clickable: false})})
+                            .addTo(map);
+
+    var wholeBounds = trekLayer.getBounds();
+
+    // Show start and end
+    trekLayer.eachLayer(function (layer) {
+        if (layer instanceof L.MultiPolyline)
+            return;
+        L.marker(layer.getLatLngs()[0],
+                 {clickable: false,
+                  icon: new L.Icon({
+                                iconUrl: IMG_URL + '/marker-source.png',
+                                iconSize: [64, 64],
+                                iconAnchor: [32, 64],
+                    }),
+                 }).addTo(map);
+        L.marker(layer.getLatLngs().slice(-1)[0],
+                 {clickable: false,
+                  icon: new L.Icon({
+                                iconUrl: IMG_URL + '/marker-target.png',
+                                iconSize: [64, 64],
+                                iconAnchor: [32, 64],
+                 })}).addTo(map);
+    });
+
+    // POIs Layer
+    var poisLayer = new POILayer(pois);
+    poisLayer.eachLayer(function (marker) {
+        wholeBounds.extend(marker.getLatLng());
+        window.poisMarkers[marker.properties.pk] = marker;
+    });
+    poisLayer.addTo(map);
+
+    var parkingIcon = L.icon({
+        iconUrl: IMG_URL + '/parking.png',
+        iconSize: [24, 24],
+        iconAnchor: [0, 0],
+    });
+    var parkingLocation = trek.properties.parking_location;
+    if (parkingLocation) {
+      var pos = L.latLng([parkingLocation[1], parkingLocation[0]]);
+      L.marker(pos, {icon: parkingIcon})
+       .bindPopup(trek.properties.advised_parking || gettext("Recommended parking"))
+       .addTo(map);
+      wholeBounds.extend(pos);
+    }
+
+    map.fitBounds(wholeBounds);
+
+    //Load altimetric graph
+    altimetricInit();
+}
+
+
+function altimetricInit() {
+    /* 
+     * Load altimetric profile from JSON
+     */
+    $.getJSON(altimetric_url, function(data) {
+        $('#profilealtitude').sparkline(data.profile, {tooltipSuffix: ' m', width: '100%', height: 100});
+        $('#profilealtitude').bind('sparklineRegionChange', function(ev) {
+            var sparkline = ev.sparklines[0],
+                region = sparkline.getCurrentRegionFields();
+                value = region.y;
+            $('#mouseoverprofil').text(Math.round(region.x) +" m");
+        }).bind('mouseleave', function() {
+            $('#mouseoverprofil').text('');
+        });
+    });
+}

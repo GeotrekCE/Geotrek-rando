@@ -125,12 +125,11 @@ class Trek(JSONModel):
     @property
     def geojson(self):
         return json.dumps({
-          "type": "GeometryCollection",
-          "geometries": [
-            { "type": self.geometry.type,
+          "type": "Feature",
+          "geometry": { "type": self.geometry.type,
               "coordinates": self.geometry.coordinates
-            }
-          ]
+           },
+           "properties": self.properties,
         })
 
     def startcoords(self):

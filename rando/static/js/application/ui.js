@@ -56,6 +56,10 @@ function init_ui() {
     });
 }
 
+function page_leave() {
+    $("#global-share.active").click();
+}
+
 function page_load() {
     if ($("#mainmap-tag").length > 0) {
         view_home ();

@@ -50,6 +50,7 @@ urlpatterns = patterns('',
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
     url(r'', include('rando.trekking.urls', namespace='trekking', app_name='trekking')),
     url(r'pages/', include('rando.flatpages.urls', namespace='flatpages', app_name='flatpages')),
+    url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog', {'packages':('rando.trekking',)}),
 )
 
 
