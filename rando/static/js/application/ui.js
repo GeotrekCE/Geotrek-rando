@@ -1,47 +1,5 @@
-function refresh_results(matching) {
-    var matching = matching;
-    for(var i=0; i<treks.features.length; i++) {
-        var trek = treks.features[i],
-            trekid = trek.properties.pk;
-        if ($.inArray(trekid, matching) != -1) {
-            $('#trek-'+trekid).show(200);
-        }
-        else {
-            $('#trek-'+trekid).hide(200);
-        }
-    }
-    if (matching.length > 0)
-        $('#noresult').hide(200);
-    else
-        $('#noresult').show(200); 
-    // Refresh label with number of results
-    $('#tab-results span.badge').html(matching.length);
-}
-
-function refresh_backpack() {
-    for(var i=0; i<treks.features.length; i++) {
-        var trek = treks.features[i],
-            trekid = trek.properties.pk;
-        if (window.backPack.contains(trekid)) {
-            $('#backpack-trek-'+trekid).show(200);
-            $('#trek-' + trekid + ' .btn.add-sac').addClass('active');
-            $(".detail-content .btn[data-pk='"+ trekid + "']").addClass('active');
-        }
-        else {
-            $('#backpack-trek-'+trekid).hide(200);
-            $('#trek-' + trekid + ' .btn.add-sac').removeClass('active');
-            $(".detail-content .btn[data-pk='"+ trekid + "']").removeClass('active');
-        }
-    }
-    if (window.backPack.length() > 0)
-        $('#backpackempty').hide(200);
-    else
-        $('#backpackempty').show(200);
-    $('#tab-backpack span.badge').html(window.backPack.length());
-}
-
 function init_ui() {
-    $('#content').pjax('a.pjax');
+    $(document).pjax('a.pjax', '#content');
 
     window.trekFilter = new TrekFilter();
     $(window.trekFilter).off('filterchange').on("filterchange", function(e, visible) {
@@ -56,18 +14,14 @@ function init_ui() {
     });
 }
 
-function page_leave() {
-    $("#global-share.active").click();
-
-    // Deselect all treks on page leave
-    treksLayer.eachLayer(function (l) {
-        treksLayer.highlight(l.properties.pk, false);
-    });
-}
-
 function page_load() {
+    $('body').on('click', 'a.utils', function(e){
+        console.log('lol');
+        e.preventDefault();
+    });
+
     if ($("#mainmap-tag").length > 0) {
-        view_home ();
+        view_home();
     }
     else {
         view_detail();
@@ -105,7 +59,7 @@ function page_load() {
     });
 }
 
-function view_home () {
+function view_home() {
     sliders();
 
     $('#toggle-filters').click(function() {
@@ -196,6 +150,57 @@ function view_home () {
         else {
           console.warn("Trek not on map: " + $(this).data('id'));
         }
+    });
+}
+
+function refresh_results(matching) {
+    var matching = matching;
+    for(var i=0; i<treks.features.length; i++) {
+        var trek = treks.features[i],
+            trekid = trek.properties.pk;
+        if ($.inArray(trekid, matching) != -1) {
+            $('#trek-'+trekid).show(200);
+        }
+        else {
+            $('#trek-'+trekid).hide(200);
+        }
+    }
+    if (matching.length > 0)
+        $('#noresult').hide(200);
+    else
+        $('#noresult').show(200); 
+    // Refresh label with number of results
+    $('#tab-results span.badge').html(matching.length);
+}
+
+function refresh_backpack() {
+    for(var i=0; i<treks.features.length; i++) {
+        var trek = treks.features[i],
+            trekid = trek.properties.pk;
+        if (window.backPack.contains(trekid)) {
+            $('#backpack-trek-'+trekid).show(200);
+            $('#trek-' + trekid + ' .btn.add-sac').addClass('active');
+            $(".detail-content .btn[data-pk='"+ trekid + "']").addClass('active');
+        }
+        else {
+            $('#backpack-trek-'+trekid).hide(200);
+            $('#trek-' + trekid + ' .btn.add-sac').removeClass('active');
+            $(".detail-content .btn[data-pk='"+ trekid + "']").removeClass('active');
+        }
+    }
+    if (window.backPack.length() > 0)
+        $('#backpackempty').hide(200);
+    else
+        $('#backpackempty').show(200);
+    $('#tab-backpack span.badge').html(window.backPack.length());
+}
+
+function page_leave() {
+    $("#global-share.active").click();
+
+    // Deselect all treks on page leave
+    treksLayer.eachLayer(function (l) {
+        treksLayer.highlight(l.properties.pk, false);
     });
 }
 
