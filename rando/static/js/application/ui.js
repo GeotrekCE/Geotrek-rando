@@ -58,6 +58,11 @@ function init_ui() {
 
 function page_leave() {
     $("#global-share.active").click();
+
+    // Deselect all treks on page leave
+    treksLayer.eachLayer(function (l) {
+        treksLayer.highlight(l.properties.pk, false);
+    });
 }
 
 function page_load() {
