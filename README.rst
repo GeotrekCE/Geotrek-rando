@@ -46,6 +46,11 @@ Most important settings :
 
     Do not change ``MEDIA_URL`` or expect problems.
 
+
+If you run the application on a preproduction, it is wise to set ``PREPROD = True``, in order
+to disable Robots indexing.
+
+
 Apache vhost
 ------------
 

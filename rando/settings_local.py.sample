@@ -21,6 +21,13 @@ GANALYTICS_TRACKING_CODE = 'UA-XXXXXXXX-XX'
 
 
 #
+# In preprod
+#..................
+#
+# PREPROD = True
+#
+
+#
 # In development
 #...................
 # DEBUG = True

@@ -16,6 +16,7 @@ def settings(request):
         app_settings = dict(map=dict(extent=[-180, -90, 180, 90]))
     lang = request.LANGUAGE_CODE
     return {
+        'PREPROD': settings_.PREPROD,
         'VERSION': __version__,
         'TITLE': settings_.TITLE.get(lang, settings_.TITLE.get('en')),
         'DESCRIPTION': settings_.DESCRIPTION.get(lang, settings_.TITLE.get('en')),

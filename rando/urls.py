@@ -63,3 +63,11 @@ if settings.DEBUG:
             'document_root': settings.MEDIA_ROOT,
             }),
     )
+
+
+if settings.PREPROD:
+    # Prevents Robots indexing
+    from django.http import HttpResponse
+    urlpatterns += patterns('',
+        url(r'^robots\.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: /", mimetype="text/plain")),
+    )

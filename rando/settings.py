@@ -7,6 +7,7 @@ PROJECT_PATH = os.path.dirname(__file__)
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
+PREPROD = False
 
 ADMINS = (
     ('Mathieu Leplatre', 'mathieu.leplatre@makin-corpus.com'),
