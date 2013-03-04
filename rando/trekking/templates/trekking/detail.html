@@ -4,6 +4,17 @@
 
 {% block description %}{{ object.properties.description_teaser|safe|striptags }}{% endblock description %}
 
+
+{% block extrahead %}
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="{{ URL }}">
+    <meta name="twitter:title" content="{{ object.title }}">
+    <meta name="twitter:description" content="{{ object.properties.description_teaser|striptags }}">
+    <meta name="twitter:image" content="{{ thumbnail }}">
+{% endblock extrahead %}
+
+
 {% block content %}
     {% include "trekking/detail-panel.html" %}
 {% endblock content %}

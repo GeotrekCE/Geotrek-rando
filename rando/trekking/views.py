@@ -48,6 +48,7 @@ class TrekView(PJAXResponseMixin, DetailView):
         obj = self.get_object()
         context = super(TrekView, self).get_context_data(**kwargs)
         context['trek'] = obj
+        context['thumbnail'] = self.request.build_absolute_uri(obj.properties.thumbnail)
         context['poisjson'] = obj.pois.filter(language=lang).content
         return context
 
