@@ -205,7 +205,8 @@ function mainmapInit(map, bounds) {
     window.treksLayer = new TrekLayer(window.treks).addTo(map);
 
     if (!map.restoreView()) {
-        map.fitFakeBounds(treksLayer.getBounds());
+        var layerBounds = treksLayer.getBounds();
+        map.fitFakeBounds(layerBounds.isValid() ? layerBounds : bounds);
     }
 
     // Move controls to the right

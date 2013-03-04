@@ -6,6 +6,7 @@ bin/python:
 
 sync: bin/python
 	bin/python ./manage.py sync_trekking
+	touch var/input/media/style.css
 
 serve: bin/python
 	bin/python ./manage.py runserver 8888
