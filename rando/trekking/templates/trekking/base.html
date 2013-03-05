@@ -44,6 +44,8 @@
         <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
         -->
 
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:700' rel='stylesheet' type='text/css'>
+
         {% compress css %}
         {% leaflet_css %}
         <!-- <link rel="stylesheet" href="{% static "css/normalize.css" %}"> -->
@@ -66,17 +68,18 @@
     </head>
     <body>
         <header>
-            <div class="navbar-inner">
-              <div class="container">
-                <div class="nav-collapse">
-                  <a href="{% url trekking:home %}"><h3>{{ TITLE }}</h3></a>
-                </div>
-              </div>
+            <!-- <div class="navbar-inner"> -->
+              <!-- <div class="container">
+                <div class="nav-collapse"> -->
+                <a href="{% url trekking:home %}"><h3>{{ TITLE }}</h3></a>
+                <!-- </div> -->
+              <!-- </div> -->
 
-              <a class="btn utils" id="global-share" href="#" title="{% trans "Share" %}">
-                <img src="{% static "img/share.png" %}"/> {% trans "Share" %}
-              </a>
-            </div>
+                <a class="btn utils" id="global-share" href="#" title="{% trans "Share" %}">
+                    <i class="icon"></i>{% trans "Share" %}
+                <!-- <img src="{% static "img/share.png" %}"/> {% trans "Share" %} -->
+                </a>
+            <!-- </div> -->
             <!--  navbar-inner-->
         </header>
         <!-- navbar-->

@@ -36,10 +36,10 @@ function TrekFilter()
         }
 
         if ($.isEmptyObject(self.state)) {
-            $('#search-bar p.title, #clear-filters').removeClass('active');
+            $('#clear-filters').removeClass('active');
         }
         else {
-            $('#search-bar p.title, #clear-filters').addClass('active');
+            $('#clear-filters').addClass('active');
         }
 
         localStorage.setItem('filterState', JSON.stringify(self.state));

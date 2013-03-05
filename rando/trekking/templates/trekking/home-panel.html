@@ -53,8 +53,8 @@
     </div>
 
     <div id="filters-actions">
-      <a class="utils" id="clear-filters" href="#"></a> 
-      <a class="utils" id="toggle-filters" href="#" class="closed show-hide-filters"></a> 
+      <a class="btn utils" id="clear-filters" href="#"></a> 
+      <a class="btn utils" id="toggle-filters" href="#" class="closed show-hide-filters"></a> 
     </div>
 
   </div>
@@ -107,8 +107,9 @@
     <div class="span4">
       <div class="control-group">
         <div class="controls">
-          <div class="input-prepend"> <span class="add-on"> <i class="icon-search icon-white"></i> </span>
+          <div class="input-append">
             <input type="search" class="span3" placeholder="{% trans "Name, Valley, ..."%}" data-filter="search" id="search"/>
+            <span class="add-on"> <i class="icon-search icon-white"></i> </span>
           </div>
         </div>
       </div>
@@ -123,7 +124,7 @@
       </li>
       <li id="tab-backpack">
         <a href="#backpack">
-            <span class="badge">0</span>{% trans "Backpack" %}</a>
+            <span class="badge">0</span> {% trans "Backpack" %}</a>
       </li>
     </ul>
 
