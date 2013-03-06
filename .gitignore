@@ -1,3 +1,5 @@
+*.sublime*
+.Python
 *~
 *.pyc
 bin
@@ -7,4 +9,4 @@ lib/
 local/
 var/
 rando.egg-info/
-rando/input_files/
+rando/var/
