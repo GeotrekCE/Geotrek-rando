@@ -930,6 +930,29 @@ p.teaser {
   margin: 0;
 }
 
+#toolbox a.print,
+#toolbox a.backpack {
+  position: relative;
+  padding-left: 30px;
+}
+
+#toolbox a.btn i {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: inline-block;
+  height: 25px;
+  width: 30px;
+}
+
+i.print {
+  background-image: url("../img/imprimante.png");
+}
+
+i.backpack {
+  background-image: url("../img/sacplus.png");
+}
+
 /*
  * POIs list
  */

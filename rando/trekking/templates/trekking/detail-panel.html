@@ -15,9 +15,18 @@
       <h2>{{ object.properties.name }}</h2>
     </div>
     <div class="span4">
-      <div id="toolbox" class="pull-right">
-        <a class="btn" id="print" href=""><img src="{% static "img/imprimante.png" %}"> {% trans "Print" %}</a>
-        <a class="btn add-sac" href="#" data-pk="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}"><img src="{% static "img/sacplus.png" %}"> {% trans "In backpack" %}</a>
+      <div id="toolbox" class="btn-toolbar pull-right">
+        <a class="btn backpack add-sac" href="#" data-pk="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}"><i class="backpack"></i>{% trans "In backpack" %}</a>
+
+        <div class="btn-group" id="btn-print">
+            <a class="btn print" href="{% url trekking:fileserve object.properties.printable %}"><i class="print"></i> {% trans "Print" %}</a>
+            <button class="btn dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="{% url trekking:fileserve object.properties.printable_poi %}">{% trans "Print with POIs" %}</a></li>
+            </ul>
+        </div>
       </div>
     </div>
   </div>
