@@ -34,18 +34,13 @@ Prepare deployment :
 Configuration
 --------------  
 
-Copy ``settings_local.py.sample`` to ``settings_local.py` and edit it to override settings.
+Copy ``rando/settings_local.py.sample`` to ``rando/settings_local.py` and edit it to override settings.
 
 Most important settings : 
 
 * **CAMINAE_SERVER**
 * **TITLE** (in every supported language, fallback to English)
 * **DESCRIPTION** (in every supported language, fallback to English)
-
-:note:
-
-    Do not change ``MEDIA_URL`` or expect problems.
-
 
 If you run the application on a preproduction, it is wise to set ``PREPROD = True``, in order
 to disable Robots indexing.
