@@ -96,8 +96,8 @@
             <p id="mouseoverprofil" class="axislabel" >&nbsp;</p>
           </div>
 
-          <p class="download"><a href="{% url trekking:fileserve object.gpx_url %}">{% trans "Download GPX" %}</a></p>
-          <p class="download"><a href="{% url trekking:fileserve object.kml_url %}">{% trans "Download for Google Earth" %}</a></p>
+          <p class="download"><a href="{% url trekking:fileserve object.properties.gpx %}">{% trans "Download GPX" %}</a></p>
+          <p class="download"><a href="{% url trekking:fileserve object.properties.kml %}">{% trans "Download for Google Earth" %}</a></p>
         </div>
 
         {% if object.properties.web_links|length > 0 %}
@@ -187,7 +187,7 @@
 <script type="text/javascript">
     window.trek = {{ trek.geojson|safe }};
     window.pois = {{ poisjson|safe }};
-    window.altimetric_url = "{% url trekking:fileserve object.altimetric_url %}";
+    window.altimetric_url = "{% url trekking:fileserve object.properties.altimetric_profile %}";
 </script>
 
 {% leaflet_map 'detailmap' fitextent=False creatediv=False %}

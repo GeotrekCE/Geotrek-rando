@@ -49,7 +49,10 @@ class InputFile(object):
     def __init__(self, command, url, language=None):
         self.command = command
         self.url = url[1:] if url.startswith('/') else url
-        self.absolute_url = 'http://' + join(settings.CAMINAE_SERVER, self.url)
+        server = settings.CAMINAE_SERVER
+        if 'http' not in settings.CAMINAE_SERVER:
+            server = 'http://' + settings.CAMINAE_SERVER
+        self.absolute_url = join(server, self.url)
         self.language = language or ''
         self.path = join(settings.INPUT_DATA_ROOT, self.language, self.url)
         self.reply = None
@@ -200,6 +203,8 @@ class Command(BaseCommand):
     help = 'Synchronize data from a Caminae server'
 
     def handle(self, *args, **options):
+        cprint('Caminae server: %s' % settings.CAMINAE_SERVER, 'blue', file=self.stdout)
+
         try:
             InputFile(self, models.Settings.filepath).pull_if_modified()
             app_settings = models.Settings.objects.all()
@@ -209,10 +214,11 @@ class Command(BaseCommand):
                 TrekListInputFile(self, language=language).pull()
 
                 for trek in models.Trek.objects.filter(language=language).all():
-                    InputFile(self, trek.altimetric_url, language=language).pull_if_modified()
-                    InputFile(self, trek.gpx_url, language=language).pull_if_modified()
-                    InputFile(self, trek.kml_url, language=language).pull_if_modified()
-                    #TODO: PDF both layouts
+                    InputFile(self, trek.properties.altimetric_profile, language=language).pull_if_modified()
+                    InputFile(self, trek.properties.gpx, language=language).pull_if_modified()
+                    InputFile(self, trek.properties.kml, language=language).pull_if_modified()
+                    InputFile(self, trek.properties.printable, language=language).pull_if_modified()
+                    InputFile(self, trek.properties.printable_poi, language=language).pull_if_modified()
 
             # Fetch media only once, since they do not depend on language
             for trek in models.Trek.objects.filter(language=settings.LANGUAGE_CODE).all():
