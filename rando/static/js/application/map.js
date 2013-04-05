@@ -71,8 +71,8 @@ var POILayer = L.MarkerClusterGroup.extend({
         });
 
         for (var i=0; i < poisData.features.length; i++) {
-            var featureData = poisData.features[i]
-              , marker = this.poisMarker(featureData,
+            var featureData = poisData.features[i],
+                marker = this.poisMarker(featureData,
                                          L.GeoJSON.coordsToLatLng(featureData.geometry.coordinates));
             this.addLayer(marker);
         }
@@ -81,7 +81,7 @@ var POILayer = L.MarkerClusterGroup.extend({
     poisMarker: function(featureData, latlng) {
         var img = L.Util.template('<img src="{SRC}" title="{TITLE}">', {
             SRC: featureData.properties.type.pictogram,
-            TITLE: featureData.properties.type.label,
+            TITLE: featureData.properties.type.label
         });
 
         var poicon = new L.DivIcon({className: 'poi-marker-icon',
@@ -90,25 +90,11 @@ var POILayer = L.MarkerClusterGroup.extend({
             marker = L.marker(latlng, {icon: poicon});
         marker.properties = featureData.properties;
 
-        /*
-         * Open Accordion on marker click.
-         * TODO: does not work correctly.
-         */
-        marker.on('click', function (e) {
-            var $item = $('#poi-item-' + featureData.properties.pk);
-            $item.click();
-            var top = $('#pois-accordion').scrollTop(),
-                toTop = $item.position().top;
-            $('#pois-accordion').animate({
-                scrollTop: top + toTop
-            }, 1000);
-        });
-
         /* If POI has a thumbnail, show popup on click */
-        if (featureData.properties.thumbnail) {
+        if (marker.properties.thumbnail) {
             marker.bindPopup(
                 L.Util.template('<img src="{SRC}" width="110" height="110">', {
-                    SRC: featureData.properties.thumbnail
+                    SRC: marker.properties.thumbnail
                 }),
                 {autoPan: false});
         }
@@ -341,6 +327,20 @@ function detailmapInit(map, bounds) {
     poisLayer.eachLayer(function (marker) {
         wholeBounds.extend(marker.getLatLng());
         window.poisMarkers[marker.properties.pk] = marker;
+        /*
+         * Open Accordion on marker click.
+         * TODO: does not work correctly.
+         */
+        marker.on('click', function (e) {
+            var $item = $('#poi-item-' + marker.properties.pk);
+            $item.click();
+            var top = $('#pois-accordion').scrollTop(),
+                toTop = $item.position().top;
+            $('#pois-accordion').animate({
+                scrollTop: top + toTop
+            }, 1000);
+        });
+
     });
     poisLayer.addTo(map);
 
