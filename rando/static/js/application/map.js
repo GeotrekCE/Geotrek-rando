@@ -370,7 +370,12 @@ function altimetricInit() {
      * Load altimetric profile from JSON
      */
     $.getJSON(altimetric_url, function(data) {
-        $('#profilealtitude').sparkline(data.profile, {tooltipSuffix: ' m', width: '100%', height: 100});
+        $('#profilealtitude').sparkline(data.profile, {
+            tooltipSuffix: ' m',
+            numberDigitGroupSep: '',
+            width: '100%',
+            height: 100
+        });
         $('#profilealtitude').bind('sparklineRegionChange', function(ev) {
             var sparkline = ev.sparklines[0],
                 region = sparkline.getCurrentRegionFields();
