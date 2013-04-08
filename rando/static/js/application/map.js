@@ -288,6 +288,9 @@ function mainmapInit(map, bounds) {
 
 function detailmapInit(map, bounds) {
     map.attributionControl.setPrefix('');
+    map.whenReady(function () {
+        map.minimapcontrol._minimize();
+    });
 
     $('#pois-accordion').on('open', function (e, accordion) {
         var id = $(accordion).data('id'),
