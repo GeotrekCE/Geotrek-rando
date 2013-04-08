@@ -150,6 +150,11 @@ If you want to customize the alphabetical order, you can use prefixes with numbe
 If you want the same page if various language, make sure it has the same prefix number (for example, ``pages/fr/03-Accompagnateurs.html``, ``pages/en/03-Guides.html``, ``pages/es/03-Guias.html``, ...).
 
 
+:notes:
+
+    If a trek is in the park center, a link to the *Park Policy* (*Réglementations*) will be shown in the page. Therefore, your policy page **must have** a prefix ``01-``.
+
+
 CSS style
 =========
 
