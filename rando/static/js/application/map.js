@@ -199,6 +199,11 @@ function mainmapInit(map, bounds) {
     map.zoomControl.setPosition('topright');
     map.addControl(new L.Control.Scale({imperial: false, position: 'bottomright'}));
 
+    // Add reset view control
+    map.whenReady(function () {
+        new L.Control.ResetView(treksLayer.getBounds(), {position: 'topright'}).addTo(map);
+    });
+
     // Filter map on filter
     $(window.trekFilter).on("filterchange", function(e, visible) {
         treksLayer.updateFromPks(visible);
@@ -359,6 +364,11 @@ function detailmapInit(map, bounds) {
     }
 
     map.fitBounds(wholeBounds);
+
+    // Add reset view control
+    map.whenReady(function () {
+        new L.Control.ResetView(wholeBounds).addTo(map);
+    });
 
     //Load altimetric graph
     altimetricInit();
