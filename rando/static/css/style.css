@@ -763,6 +763,10 @@ p.tab-content-empty {
  * 
  */
 
+.leaflet-control-zoom-fullscreen {
+  background-image: url(../img/icon-fullscreen.png);
+}
+
 #mainmap .leaflet-popup-content p {
   margin: 10px 0;
 }

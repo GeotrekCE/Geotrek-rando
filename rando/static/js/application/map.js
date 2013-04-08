@@ -197,6 +197,11 @@ function mainmapInit(map, bounds) {
 
     // Move controls to the right
     map.zoomControl.setPosition('topright');
+    L.control.fullscreen({
+        position: 'topright',
+        title: gettext('Fullscreen')
+    }).addTo(map);
+
     map.addControl(new L.Control.Scale({imperial: false, position: 'bottomright'}));
 
     // Add reset view control
@@ -288,6 +293,10 @@ function mainmapInit(map, bounds) {
 
 function detailmapInit(map, bounds) {
     map.attributionControl.setPrefix('');
+    L.control.fullscreen({
+        position: 'topright',
+        title: gettext('Fullscreen')
+    }).addTo(map);
     map.whenReady(function () {
         map.minimapcontrol._minimize();
     });
@@ -370,7 +379,7 @@ function detailmapInit(map, bounds) {
 
     // Add reset view control
     map.whenReady(function () {
-        new L.Control.ResetView(wholeBounds).addTo(map);
+        new L.Control.ResetView(wholeBounds, {position: 'topright'}).addTo(map);
     });
 
     //Load altimetric graph
