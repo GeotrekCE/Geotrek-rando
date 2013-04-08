@@ -238,7 +238,7 @@ function mainmapInit(map, bounds) {
         var html = '<h3>{NAME}</h3>' + 
                    '<p>{DESCRIPTION}</p>' + 
                    '<img src="{THUMBNAIL}"/>'+ 
-                   '<p class="popupdetail"><a href="#"<a href="#">{MORE}</a></p>';
+                   '<p class="popupdetail"><a href="#">{MORE}</a></p>';
         html = L.Util.template(html, {
             NAME: layer.properties.name,
             DESCRIPTION: layer.properties.description_teaser,
