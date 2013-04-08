@@ -176,6 +176,25 @@ Footer
 
 A ``footer.html`` is loaded and injected into the page.
 
+Map elements
+============
+
+The tile layer can be configured from ``settings.py``.
+
+The map elements colors can be set from the ``footer.html`` page, using a ``<script>`` block :
+
+::
+
+    <script type="text/javascript">
+        var TREK_LAYER_OPTIONS = {
+            style: {'color': '#F89406', 'weight': 5, 'opacity': 0.8},
+            hoverstyle: {'color': '#F89406', 'weight': 5, 'opacity': 1.0},
+            outlinestyle: {'color': 'yellow', 'weight': 10, 'opacity': 0.8},
+        };
+    </script>
+
+``style`` is the base color; ``hoverstyle`` is for mouse over; ``outlinestyle`` is for outline effect. See `Leaflet documentation on paths <http://leafletjs.com>`_ for more details.
+
 
 Default trek thumbnail
 ======================
