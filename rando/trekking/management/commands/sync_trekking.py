@@ -1,4 +1,6 @@
 import re
+import shutil
+import os
 from os.path import join, getmtime, dirname, getsize
 from os import makedirs, utime
 import errno
@@ -43,6 +45,17 @@ def reroot(item, attr=None):
     return re.sub('(.*)%s' % settings.MEDIA_URL, settings.MEDIA_URL, item or '')
 
 
+def recursive_copy(root_src_dir, root_dst_dir):
+    """Recursively copy a folder into another"""
+    for src_dir, dirs, files in os.walk(root_src_dir):
+        dst_dir = src_dir.replace(root_src_dir, root_dst_dir)
+        if not os.path.exists(dst_dir):
+            os.makedirs(dst_dir)
+        for file_ in files:
+            src_file = os.path.join(src_dir, file_)
+            dst_file = os.path.join(dst_dir, file_)
+            shutil.copy2(src_file, dst_file)  # preserve stats
+
 
 class InputFile(object):
 
@@ -55,6 +68,9 @@ class InputFile(object):
         self.absolute_url = join(server, self.url)
         self.language = language or ''
         self.path = join(settings.INPUT_DATA_ROOT, self.language, self.url)
+        # All files are downloaded in a separate folder.
+        # And copied to INPUT_DATA_ROOT if whole sync is successful.
+        self.path_tmp = join(settings.INPUT_TMP_ROOT, self.language, self.url)
         self.reply = None
 
     def pull_if_modified(self):
@@ -92,15 +108,15 @@ class InputFile(object):
         else:
             cprint("%s (Download)" % self.reply.status_code, 'yellow', file=self.command.stdout)
 
-        mkdir_p(dirname(self.path))
-        with open(self.path, 'wb') as f:
+        mkdir_p(dirname(self.path_tmp))
+        with open(self.path_tmp, 'wb') as f:
             f.write(self.content())
             f.write("\n")
         logger.debug("  %s\n" % self.path.replace(settings.INPUT_DATA_ROOT, ''))
 
         last_modified = parse_http_date_safe(self.reply.headers.get('last-modified'))
         if last_modified:
-            utime(self.path, (last_modified, last_modified))
+            utime(self.path_tmp, (last_modified, last_modified))
 
     def content(self):
         if not self.reply.content:
@@ -171,6 +187,7 @@ class TrekListInputFile(InputFile):
 
             # Ignore treks that are not published
             if not properties.get('published', False):
+                logger.debug('Trek %s is not published.' % properties.get('pk', -1))
                 continue
 
             pk = properties['pk']
@@ -241,7 +258,17 @@ class Command(BaseCommand):
                         InputFile(self, picture.url).pull_if_modified()
                     InputFile(self, poi.properties.type.pictogram).pull_if_modified()
 
+            # Move downloaded tmp data to INPUT_DATA_ROOT
+            recursive_copy(settings.INPUT_TMP_ROOT, settings.INPUT_DATA_ROOT)
+
+            # Done !
+            cprint("Done.", 'green', attrs=['bold'], file=self.stdout)
+
         except IOError, e:
             logger.fatal(e)
+            cprint("Failed!", 'red', attrs=['bold'], file=self.stdout)
 
-        cprint("Done", 'green', attrs=['bold'], file=self.stdout)
+        finally:
+            # Clean-up temp files
+            if os.path.exists(settings.INPUT_TMP_ROOT):
+                shutil.rmtree(settings.INPUT_TMP_ROOT)
