@@ -79,18 +79,15 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+/* Mixins */
 /*
 * Bootstrap override
 */
-/*.container {
- margin-left: 0px;
- margin-right: 0px;
-}*/
+/* Variables */
 i.icon {
   display: inline-block;
   width: 14px;
   height: 14px;
-  margin-top: 1px;
   line-height: 14px;
   vertical-align: text-top;
   background-position: 14px 14px;
@@ -151,7 +148,7 @@ body {
   height: 50px;
   bottom: 0;
   -moz-box-shadow: 0 0 5px 5px #888;
-  -webkit-box-shadow: 0 0 5px 5px#888;
+  -webkit-box-shadow: 0 0 5px 5px #888888;
   box-shadow: 0 0 2px 1px #888;
   overflow: hidden;
   background-color: #f0f2ed;
@@ -176,7 +173,8 @@ ul.row-footer {
   width: 100%;
   height: 100%;
   position: absolute;
-  top: 0; }
+  top: 0;
+  overflow: auto; }
 
 #mainmap {
   width: 100%;
@@ -200,15 +198,7 @@ ul.row-footer {
   /* above map */ }
 
 #detail-content-top {
-  position: fixed;
-  z-index: 2000;
-  /* above detail map */
-  top: 80px;
-  /* header */
   background-color: #f6f7f0; }
-
-#detail-container-content {
-  margin-top: 6.5em; }
 
 #detail-container-content, #flatpage-container-content {
   padding-left: 1%;
@@ -281,7 +271,8 @@ header h3 {
   color: black;
   padding-left: 5px;
   top: 10px;
-  right: 32px; }
+  right: 10px;
+  line-height: 17px; }
   #global-share i {
     width: 19px;
     height: 15px;
@@ -313,20 +304,29 @@ ul.social-buttons li {
   top: 20px;
   border-left: 5px solid rgba(255, 255, 255, 0.8); }
 
-#lang-switch {
-  position: fixed;
-  top: 8px;
-  right: 8px;
-  height: 13px;
-  border: none;
-  z-index: 1031;
-  /* boostrap has this... */ }
-
-#lang-switch ul {
-  list-style-type: none; }
-
-#lang-switch li.active {
-  opacity: 0.2; }
+#footer .wrapper {
+  float: left;
+  width: 95%; }
+#footer .lang {
+  float: right;
+  width: 5%;
+  margin-top: 15px; }
+  #footer .lang a.utils {
+    color: #232222; }
+    #footer .lang a.utils:hover {
+      text-decoration: underline; }
+    #footer .lang a.utils:after {
+      content: " ";
+      display: inline-block;
+      width: 8px;
+      height: 6px;
+      background: url("../img/sprites.png") no-repeat 0px 0px;
+      margin-left: 3px; }
+  #footer .lang ul {
+    display: none;
+    margin: 0; }
+    #footer .lang ul img {
+      vertical-align: top; }
 
 /****************************************************************************
 * 
@@ -447,7 +447,6 @@ ul.social-buttons li {
   margin-top: 12px;
   margin-right: 14px; }
   #filters-actions a {
-    border: solid 1px #a09f94;
     outline: 0;
     display: inline-block;
     line-height: 18px;
@@ -539,7 +538,9 @@ ul.social-buttons li {
 
 #side-bar .nav-tabs > li.active > a,
 #side-bar .nav-tabs > li > a:hover {
-  background-color: white;
+  background-color: white; }
+
+#side-bar .nav-tabs > li.active > a {
   border-bottom: solid 1px white; }
 
 #side-bar .nav-tabs > #tab-results a,
@@ -569,12 +570,13 @@ p.tab-content-empty {
   opacity: 0.2; }
 
 #side-bar .result:hover, .side-bar .result.active {
-  background-color: #F8D19A; }
+  background-color: #e9eae5; }
 
 #side-bar .result {
   clear: both;
   border-bottom: solid 1px #dbdcd7;
-  cursor: pointer; }
+  cursor: pointer;
+  position: relative; }
 
 #side-bar .result .illust {
   margin-top: 5px;
@@ -619,24 +621,58 @@ p.tab-content-empty {
   width: 180px;
   padding-left: 20px; }
 
-.search1 {
+#text-search {
+  height: 38px;
   float: left;
-  width: 100%; }
-
-.search1 .span4 {
-  width: 100%;
-  margin-left: 0; }
-
-.search1 .control-group {
-  margin-top: 5px;
-  margin-bottom: 5px; }
-
-.search1 #search {
-  width: 89%;
-  margin-left: 5px; }
-
-#search.active {
-  background-color: white; }
+  width: 97%; }
+  #text-search .span4 {
+    width: 100%;
+    margin-left: 0; }
+  #text-search .control-group {
+    margin-top: 5px;
+    margin-bottom: 5px; }
+  #text-search .navbar-search {
+    width: 100%;
+    margin-top: 5px;
+    padding-left: 5px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; }
+    #text-search .navbar-search .search-query {
+      height: 28px;
+      width: 100%;
+      background: white;
+      margin-bottom: 0;
+      border-color: #E9EAE5;
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      border-radius: 0;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+      -webkit-transition: all 300ms;
+      -moz-transition: all 300ms;
+      -ms-transition: all 300ms;
+      -o-transition: all 300ms;
+      transition: all 300ms; }
+      #text-search .navbar-search .search-query.active {
+        background-color: white; }
+      #text-search .navbar-search .search-query:focus, #text-search .navbar-search .search-query.focused {
+        padding: 4px 9px;
+        color: #333333;
+        text-shadow: 0 1px 0 #ffffff;
+        background-color: #ffffff;
+        border: 1px solid #f89406;
+        outline: 0;
+        -webkit-box-shadow: 0 0 3px #f89406;
+        -moz-box-shadow: 0 0 3px #f89406;
+        box-shadow: 0 0 3px #f89406; }
+    #text-search .navbar-search .icon-search {
+      position: absolute;
+      right: 8px;
+      top: 7px;
+      pointer-events: none; }
 
 #result-backpack-content {
   position: absolute;
@@ -914,7 +950,7 @@ a.accordion-toggle {
   color: black;
   text-align: center;
   background-color: rgba(255, 140, 0, 0.7);
-  border: 1px solid  #80757d;
+  border: 1px solid #80757d;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
@@ -935,14 +971,22 @@ a.accordion-toggle {
     height: 115px; }
 
   #side-bar {
-    top: 115px; }
+    top: 115px;
+    width: 330px; }
+    #side-bar .illust img {
+      width: 95px;
+      height: auto; }
+    #side-bar .result .info-result {
+      min-height: 100px; }
+    #side-bar .search-tools {
+      bottom: 5px; }
 
   #global-share {
     padding-left: 6px;
     font-size: 0px;
     width: 15px;
     height: 22px;
-    right: 10px; }
+    right: 8px; }
     #global-share i {
       margin-right: 0px;
       margin-top: -5px; }

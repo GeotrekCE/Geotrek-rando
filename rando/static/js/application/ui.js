@@ -1,3 +1,32 @@
+(function($,sr){
+
+  // debouncing function from John Hann
+  // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
+    var debounce = function (func, threshold, execAsap) {
+        var timeout;
+
+        return function debounced () {
+            var obj = this, args = arguments;
+            function delayed () {
+                if (!execAsap)
+                  func.apply(obj, args);
+                timeout = null;
+            };
+
+            if (timeout)
+                clearTimeout(timeout);
+            else if (execAsap)
+                func.apply(obj, args);
+
+            timeout = setTimeout(delayed, threshold || 100);
+        };
+    }
+  // smartresize 
+  jQuery.fn[sr] = function(fn){  return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
+
+})(jQuery,'smartresize');
+
+
 function init_ui() {
     $(document).pjax('a.pjax', '#content');
 
@@ -9,9 +38,10 @@ function init_ui() {
     window.backPack = new BackPack();
     $('body').on("backpack-change", refresh_backpack);
 
-    $(window).on('resize', function() {
-        invalidate_maps();
-    });
+    console.log('smart command not found');
+    // $(window).smart(function() {
+    //     invalidate_maps();
+    // });
 }
 
 function page_load() {
@@ -55,6 +85,11 @@ function page_load() {
             window.backPack.save(trekid);
             _gaq.push(['_trackEvent', 'Backpack', 'Add', trekname]);
         }
+    });
+
+    // Lang button
+    $('#lang-switch a.utils').on('click', function(){
+        $(this).siblings('ul').toggle();
     });
 }
 
@@ -260,13 +295,15 @@ function init_share() {
       , $panel = $('#social-panel')
       , markup = $panel.html()
       , shown = false;
-    $panel.remove();
+      // , init = false;
+    // $panel.remove();
 
     var previous = $share.data('popover');
     if (previous) {
         $share.removeData('popover');
     }
     $share.popover({
+        animation: false,
         html: true,
         placement: 'left',
         trigger: 'manual',
@@ -278,6 +315,13 @@ function init_share() {
         var $this = $(this)
         $this.toggleClass('active');
         var popover = $this.data('popover');
+
+        // if(init){
+        //     popover.toggle();
+        //     return;
+        // }
+
+        // init = true;
 
         if (shown) {
             popover.hide();

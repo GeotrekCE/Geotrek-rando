@@ -1,5 +1,6 @@
 {% load static localeurl_tags %}
 <div id="lang-switch" class="hidden-tablet hidden-phone">
+  <a href="#" class="utils">Langue</a>
     <ul>
     {% for lang, name in settings.languages.available.items %}
         {% if lang == request.LANGUAGE_CODE %}
