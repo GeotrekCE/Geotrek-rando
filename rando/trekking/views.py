@@ -50,6 +50,11 @@ class TrekView(PJAXResponseMixin, DetailView):
         context['trek'] = obj
         context['thumbnail'] = self.request.build_absolute_uri(obj.properties.thumbnail)
         context['poisjson'] = obj.pois.filter(language=lang).content
+        # Merge pictures of trek and POIs
+        all_pictures = obj.properties.pictures
+        for poi in obj.pois.all():
+            all_pictures.extend(poi.properties.pictures)
+        context['all_pictures'] = all_pictures
         return context
 
 

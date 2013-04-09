@@ -127,7 +127,8 @@
         <script src="{% static "js/application/ui.js" %}"></script>
         <script src="{% static "js/application/filter.js" %}"></script>
         <script src="{% static "js/application/backpack.js" %}"></script> 
-        <script src="{% static "js/application/map.js" %}"></script> 
+        <script src="{% static "js/application/map.js" %}"></script>
+        <script src="{% static "js/Control.FullScreen.js" %}"></script>
         {% endcompress %}
         <script type="text/javascript" src="{% url jsi18n %}"></script>
 
@@ -149,6 +150,9 @@
                 altimetric_url = altimetric_url || null,
                 treks = {{ treksjson|safe }},
                 IMG_URL = "{% static "img" %}";
+
+            // Default Google Analytics in case Do-Not-Track is set
+            window._gaq = window._gaq || [];
 
             $(document).ready(function (e) {
                 init_ui();

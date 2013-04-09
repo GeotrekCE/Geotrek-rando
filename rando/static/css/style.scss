@@ -1116,6 +1116,10 @@ p.tab-content-empty {
  margin-top:-1px;
 }
 
+.leaflet-control-zoom-fullscreen {
+  background-image: url(../img/icon-fullscreen.png);
+}
+
 
 /****************************************************************************
 * 
@@ -1304,6 +1308,30 @@ a.accordion-toggle  {
 #trek-links li {
  list-style-type: none;
 }
+
+#toolbox a.print,
+#toolbox a.backpack {
+  position: relative;
+  padding-left: 30px;
+}
+
+#toolbox a.btn i {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: inline-block;
+  height: 25px;
+  width: 30px;
+}
+
+i.print {
+  background-image: url("../img/imprimante.png");
+}
+
+i.backpack {
+  background-image: url("../img/sacplus.png");
+}
+
 
 /* POIS markers */
 

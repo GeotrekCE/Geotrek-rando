@@ -5,7 +5,7 @@
     <div class="item {% if forloop.first %} active{% endif %}">
       <img src="{{ picture.url }}" alt="{{ picture.title }}" />
       <div class="carousel-caption">
-        <p>{{ picture.legend }}</p>
+        <p>{{ picture.legend }} {% if picture.author %}({{ picture.author }}){% endif %}</p>
       </div>
     </div>
     {% empty%}

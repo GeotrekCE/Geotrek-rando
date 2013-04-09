@@ -111,18 +111,6 @@ class Trek(JSONModel):
                                    language=self.objects.language)
 
     @property
-    def altimetric_url(self):
-        return 'api/trek/{trek__pk}/profile.json'.format(trek__pk=self.pk)
-
-    @property
-    def gpx_url(self):
-        return 'api/trek/trek-{trek__pk}.gpx'.format(trek__pk=self.pk)
-
-    @property
-    def kml_url(self):
-        return 'api/trek/trek-{trek__pk}.kml'.format(trek__pk=self.pk)
-
-    @property
     def geojson(self):
         return json.dumps({
           "type": "Feature",

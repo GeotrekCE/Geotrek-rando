@@ -34,18 +34,13 @@ Prepare deployment :
 Configuration
 --------------  
 
-Copy ``settings_local.py.sample`` to ``settings_local.py` and edit it to override settings.
+Copy ``rando/settings_local.py.sample`` to ``rando/settings_local.py` and edit it to override settings.
 
 Most important settings : 
 
 * **CAMINAE_SERVER**
 * **TITLE** (in every supported language, fallback to English)
 * **DESCRIPTION** (in every supported language, fallback to English)
-
-:note:
-
-    Do not change ``MEDIA_URL`` or expect problems.
-
 
 If you run the application on a preproduction, it is wise to set ``PREPROD = True``, in order
 to disable Robots indexing.
@@ -155,6 +150,11 @@ If you want to customize the alphabetical order, you can use prefixes with numbe
 If you want the same page if various language, make sure it has the same prefix number (for example, ``pages/fr/03-Accompagnateurs.html``, ``pages/en/03-Guides.html``, ``pages/es/03-Guias.html``, ...).
 
 
+:notes:
+
+    If a trek is in the park center, a link to the *Park Policy* (*Réglementations*) will be shown in the page. Therefore, your policy page **must have** a prefix ``01-``.
+
+
 CSS style
 =========
 
@@ -175,6 +175,25 @@ Footer
 ======
 
 A ``footer.html`` is loaded and injected into the page.
+
+Map elements
+============
+
+The tile layer can be configured from ``settings.py``.
+
+The map elements colors can be set from the ``footer.html`` page, using a ``<script>`` block :
+
+::
+
+    <script type="text/javascript">
+        var TREK_LAYER_OPTIONS = {
+            style: {'color': '#F89406', 'weight': 5, 'opacity': 0.8},
+            hoverstyle: {'color': '#F89406', 'weight': 5, 'opacity': 1.0},
+            outlinestyle: {'color': 'yellow', 'weight': 10, 'opacity': 0.8},
+        };
+    </script>
+
+``style`` is the base color; ``hoverstyle`` is for mouse over; ``outlinestyle`` is for outline effect. See `Leaflet documentation on paths <http://leafletjs.com>`_ for more details.
 
 
 Default trek thumbnail

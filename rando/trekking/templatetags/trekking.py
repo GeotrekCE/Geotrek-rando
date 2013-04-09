@@ -21,6 +21,11 @@ def fileinclude(filename):
 
 
 @register.filter
+def kilo(value):
+    return value / 1000.0
+
+
+@register.filter
 def thumbnail(trek):
     if trek.properties.thumbnail:
         assert trek.properties.thumbnail.startswith(settings.MEDIA_URL)

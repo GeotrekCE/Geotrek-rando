@@ -15,9 +15,18 @@
       <h2>{{ object.properties.name }}</h2>
     </div>
     <div class="span4">
-      <div id="toolbox" class="pull-right">
-        <a class="utils btn" id="print" href=""><img src="{% static "img/imprimante.png" %}"> {% trans "Print" %}</a>
-        <a class="utils btn add-sac" href="" data-pk="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}"><img src="{% static "img/sacplus.png" %}"> {% trans "In backpack" %}</a>
+      <div id="toolbox" class="btn-toolbar pull-right">
+        <a class="btn backpack add-sac" href="#" data-pk="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}"><i class="backpack"></i>{% trans "In backpack" %}</a>
+
+        <div class="btn-group" id="btn-print">
+            <a class="btn print" href="{% url trekking:fileserve object.properties.printable %}"><i class="print"></i> {% trans "Print" %}</a>
+            <button class="btn dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="{% url trekking:fileserve object.properties.printable_poi %}">{% trans "Print with POIs" %}</a></li>
+            </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -27,7 +36,7 @@
       <p class="teaser">{{ object.properties.description_teaser|default:"No teaser"|safe|striptags }}</p>
       <p>{{ object.properties.description|default:"No description"|safe }}</p>
 
-      {% include "trekking/carousel_fragment.html" with prefix="trek" pictures=object.properties.pictures default="True" %}
+      {% include "trekking/carousel_fragment.html" with prefix="trek" pictures=all_pictures default="True" %}
 
       <p>{{ object.properties.ambiance|default:"No ambiance"|safe }}</p>
     </div>
@@ -39,7 +48,7 @@
         {% if object.properties.route %}
         <p>{% trans "Route" %} : <span class="value">{{ object.properties.route.label }}</span></p>
         {% endif %}
-
+        <p>{% trans "Length" %} : <span class="value">{{ object.properties.length|kilo|floatformat }}km</span></p>
         <p>{% trans "Valleys" %} : <span class="value">{% for district in object.properties.districts %}{{ district.name }}, {% endfor %}</span></p>
         <p>{% trans "Difficulty" %} : <span class="value">{{ object.properties.difficulty.label }}</span></p>
         <p>{% trans "Ascent" %} : <span class="value">{{ object.properties.ascent }}m</span></p>
@@ -96,8 +105,8 @@
             <p id="mouseoverprofil" class="axislabel" >&nbsp;</p>
           </div>
 
-          <p class="download"><a href="{% url trekking:fileserve object.gpx_url %}">{% trans "Download GPX" %}</a></p>
-          <p class="download"><a href="{% url trekking:fileserve object.kml_url %}">{% trans "Download for Google Earth" %}</a></p>
+          <p class="download"><a href="{% url trekking:fileserve object.properties.gpx %}">{% trans "Download GPX" %}</a></p>
+          <p class="download"><a href="{% url trekking:fileserve object.properties.kml %}">{% trans "Download for Google Earth" %}</a></p>
         </div>
 
         {% if object.properties.web_links|length > 0 %}
@@ -188,7 +197,7 @@
 <script type="text/javascript">
     window.trek = {{ trek.geojson|safe }};
     window.pois = {{ poisjson|safe }};
-    window.altimetric_url = "{% url trekking:fileserve object.altimetric_url %}";
+    window.altimetric_url = "{% url trekking:fileserve object.properties.altimetric_profile %}";
 </script>
 
 {% leaflet_map 'detailmap' fitextent=False creatediv=False %}

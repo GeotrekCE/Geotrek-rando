@@ -71,8 +71,8 @@ var POILayer = L.MarkerClusterGroup.extend({
         });
 
         for (var i=0; i < poisData.features.length; i++) {
-            var featureData = poisData.features[i]
-              , marker = this.poisMarker(featureData,
+            var featureData = poisData.features[i],
+                marker = this.poisMarker(featureData,
                                          L.GeoJSON.coordsToLatLng(featureData.geometry.coordinates));
             this.addLayer(marker);
         }
@@ -81,7 +81,7 @@ var POILayer = L.MarkerClusterGroup.extend({
     poisMarker: function(featureData, latlng) {
         var img = L.Util.template('<img src="{SRC}" title="{TITLE}">', {
             SRC: featureData.properties.type.pictogram,
-            TITLE: featureData.properties.type.label,
+            TITLE: featureData.properties.type.label
         });
 
         var poicon = new L.DivIcon({className: 'poi-marker-icon',
@@ -90,25 +90,11 @@ var POILayer = L.MarkerClusterGroup.extend({
             marker = L.marker(latlng, {icon: poicon});
         marker.properties = featureData.properties;
 
-        /*
-         * Open Accordion on marker click.
-         * TODO: does not work correctly.
-         */
-        marker.on('click', function (e) {
-            var $item = $('#poi-item-' + featureData.properties.pk);
-            $item.click();
-            var top = $('#pois-accordion').scrollTop(),
-                toTop = $item.position().top;
-            $('#pois-accordion').animate({
-                scrollTop: top + toTop
-            }, 1000);
-        });
-
         /* If POI has a thumbnail, show popup on click */
-        if (featureData.properties.thumbnail) {
+        if (marker.properties.thumbnail) {
             marker.bindPopup(
                 L.Util.template('<img src="{SRC}" width="110" height="110">', {
-                    SRC: featureData.properties.thumbnail
+                    SRC: marker.properties.thumbnail
                 }),
                 {autoPan: false});
         }
@@ -211,7 +197,17 @@ function mainmapInit(map, bounds) {
 
     // Move controls to the right
     map.zoomControl.setPosition('topright');
+    L.control.fullscreen({
+        position: 'topright',
+        title: gettext('Fullscreen')
+    }).addTo(map);
+
     map.addControl(new L.Control.Scale({imperial: false, position: 'bottomright'}));
+
+    // Add reset view control
+    map.whenReady(function () {
+        new L.Control.ResetView(treksLayer.getBounds(), {position: 'topright'}).addTo(map);
+    });
 
     // Filter map on filter
     $(window.trekFilter).on("filterchange", function(e, visible) {
@@ -252,7 +248,7 @@ function mainmapInit(map, bounds) {
         var html = '<h3>{NAME}</h3>' + 
                    '<p>{DESCRIPTION}</p>' + 
                    '<img src="{THUMBNAIL}"/>'+ 
-                   '<p class="popupdetail"><a href="#"<a href="#">{MORE}</a></p>';
+                   '<p class="popupdetail"><a href="#">{MORE}</a></p>';
         html = L.Util.template(html, {
             NAME: layer.properties.name,
             DESCRIPTION: layer.properties.description_teaser,
@@ -297,6 +293,13 @@ function mainmapInit(map, bounds) {
 
 function detailmapInit(map, bounds) {
     map.attributionControl.setPrefix('');
+    L.control.fullscreen({
+        position: 'topright',
+        title: gettext('Fullscreen')
+    }).addTo(map);
+    map.whenReady(function () {
+        map.minimapcontrol._minimize();
+    });
 
     $('#pois-accordion').on('open', function (e, accordion) {
         var id = $(accordion).data('id'),
@@ -341,6 +344,20 @@ function detailmapInit(map, bounds) {
     poisLayer.eachLayer(function (marker) {
         wholeBounds.extend(marker.getLatLng());
         window.poisMarkers[marker.properties.pk] = marker;
+        /*
+         * Open Accordion on marker click.
+         * TODO: does not work correctly.
+         */
+        marker.on('click', function (e) {
+            var $item = $('#poi-item-' + marker.properties.pk);
+            $item.click();
+            var top = $('#pois-accordion').scrollTop(),
+                toTop = $item.position().top;
+            $('#pois-accordion').animate({
+                scrollTop: top + toTop
+            }, 1000);
+        });
+
     });
     poisLayer.addTo(map);
 
@@ -360,6 +377,11 @@ function detailmapInit(map, bounds) {
 
     map.fitBounds(wholeBounds);
 
+    // Add reset view control
+    map.whenReady(function () {
+        new L.Control.ResetView(wholeBounds, {position: 'topright'}).addTo(map);
+    });
+
     //Load altimetric graph
     altimetricInit();
 }
@@ -370,7 +392,12 @@ function altimetricInit() {
      * Load altimetric profile from JSON
      */
     $.getJSON(altimetric_url, function(data) {
-        $('#profilealtitude').sparkline(data.profile, {tooltipSuffix: ' m', width: '100%', height: 100});
+        $('#profilealtitude').sparkline(data.profile, {
+            tooltipSuffix: ' m',
+            numberDigitGroupSep: '',
+            width: '100%',
+            height: 100
+        });
         $('#profilealtitude').bind('sparklineRegionChange', function(ev) {
             var sparkline = ev.sparklines[0],
                 region = sparkline.getCurrentRegionFields();
