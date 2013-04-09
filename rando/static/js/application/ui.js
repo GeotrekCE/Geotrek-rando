@@ -76,6 +76,7 @@ function view_home() {
     });
 
     $("#mainmap").show();  // We are on home with map
+    invalidate_maps();
 
     $('#result-backpack-tabs .nav-tabs a').click(function (e) {
         e.preventDefault();
@@ -203,7 +204,7 @@ function page_leave() {
     $("#global-share.active").click();
 
     // Deselect all treks on page leave
-    treksLayer.eachLayer(function (l) {
+    treksLayer && treksLayer.eachLayer(function (l) {
         treksLayer.highlight(l.properties.pk, false);
     });
 }
