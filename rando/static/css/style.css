@@ -8,26 +8,12 @@
 /* ==========================================================================
    Base styles: opinionated defaults
    ========================================================================== */
-*,
-*:after,
-*:before {
-  -webkit-font-smoothing: antialiased;
-  -moz-font-smoothing: antialiased;
-  -o-font-smoothing: antialiased;
-  font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
 html,
 button,
 input,
 select,
 textarea {
   color: #222;
-}
-body {
-  /*font-size: 1em;*/
-
-  line-height: 1.4;
 }
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
@@ -77,28 +63,31 @@ textarea {
    Author's custom styles
    ========================================================================== */
 /* Mixins */
-.transition($transition) {
-  -webkit-transition: $transition;
-  -moz-transition: $transition;
-  -ms-transition: $transition;
-  -o-transition: $transition;
-  transition: $transition;
-}
 /* Variables */
 /* Global */
 body,
 html {
   width: 100%;
   height: 100%;
+  line-height: 1.4em;
+  background-color: #f6f7f0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Open sans', Arial;
 }
 a {
-  color: #00e;
+  color: #625b50;
   -webkit-transition: color 100ms;
   transition: color 100ms;
   -moz-transition: color 100ms;
 }
 a:visited {
-  color: #551a8b;
+  color: #625b50;
 }
 a:hover {
   color: #06e;
@@ -168,15 +157,29 @@ i.icon {
   color: #fff;
 }
 /* Layout */
-body {
-  background-color: #f6f7f0;
+header {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 20px;
+  background: url(../img/headermercantour.jpg) no-repeat;
+  background-size: 100% auto;
+  height: 80px;
+  border-bottom: 10px solid white;
+  width: 100%;
 }
-#header {
-  /*height: 80px;*/
-
+header h3 {
+  color: #c0392b;
+  font-size: 27px;
+  font-family: 'Open sans', Arial;
+  position: absolute;
+  left: 140px;
+  top: 23px;
 }
 #container-content {
   position: absolute;
+  z-index: 0;
   width: 100%;
   top: 80px;
   bottom: 50px;
@@ -187,6 +190,7 @@ body {
 }
 #footer {
   position: absolute;
+  z-index: 1;
   width: 100%;
   height: 50px;
   bottom: 0;
@@ -196,9 +200,6 @@ body {
   overflow: hidden;
   background-color: #f0f2ed;
   color: #fff;
-  z-index: 8;
-  /* above leaflet control */
-
 }
 #footer li {
   display: inline;
@@ -223,9 +224,10 @@ ul.row-footer a {
   overflow: auto;
 }
 #mainmap {
-  width: 100%;
-  height: 100%;
   position: absolute;
+  top: 65px;
+  bottom: 0;
+  width: 100%;
 }
 #side-bar {
   position: absolute;
@@ -237,40 +239,12 @@ ul.row-footer a {
   /* above map */
 
 }
-#detail-content-top {
-  background-color: #f6f7f0;
-}
 #detail-container-content,
 #flatpage-container-content {
   padding-left: 1%;
   padding-right: 1%;
   width: 98%;
 }
-header {
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  padding: 20px;
-  background: url(../img/headermercantour.jpg) no-repeat;
-  background-size: 100% auto;
-  height: 80px;
-  border-bottom: 10px solid white;
-  width: 100%;
-}
-header h3 {
-  color: #c0392b;
-  font-size: 27px;
-  font-family: 'Open sans', Arial;
-  position: absolute;
-  left: 140px;
-  top: 23px;
-}
-/*.navbar-fixed-top,
-.navbar-fixed-bottom {
- right: 0;
- left: 0;
- margin-bottom: 0;
-}*/
 /* Top navigation */
 #flatpages {
   position: fixed;
@@ -352,14 +326,14 @@ ul.social-buttons li {
   width: 95%;
 }
 #lang-switch {
-  position: absolute;
-  right: 10px;
+  position: fixed;
+  right: 6px;
   width: 5%;
-  z-index: 1001;
-  bottom: -20px;
+  top: 40px;
+  z-index: 1;
 }
 #lang-switch a.utils {
-  color: $black;
+  color: black;
 }
 #lang-switch a.utils:hover {
   text-decoration: underline;
@@ -378,6 +352,11 @@ ul.social-buttons li {
 }
 #lang-switch ul img {
   vertical-align: top;
+}
+#lang-switch ul li {
+  list-style: none;
+  float: left;
+  margin-left: 3px;
 }
 #lang-switch ul li.active {
   opacity: 0.2;
@@ -582,9 +561,10 @@ ul.social-buttons li {
 */
 #side-bar .nav-tabs > li > a,
 #fake-search-tabs .nav-tabs > li > a {
-  box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
   border-radius: 0;
   text-align: center;
   font-weight: bold;
@@ -701,9 +681,10 @@ p.tab-content-empty {
   width: 100%;
   margin-top: 5px;
   padding-left: 5px;
-  box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
 }
 #text-search .navbar-search .search-query {
   height: 28px;
@@ -711,15 +692,20 @@ p.tab-content-empty {
   background: white;
   margin-bottom: 0;
   border-color: #E9EAE5;
-  box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
   border-radius: 0;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
+  -webkit-transition: all 300ms;
+  -moz-transition: all 300ms;
+  -ms-transition: all 300ms;
+  -o-transition: all 300ms;
+  transition: all 300ms;
 }
-@include transition(all 300ms);
 #text-search .navbar-search .search-query.active {
   background-color: white;
 }
@@ -764,10 +750,10 @@ p.tab-content-empty {
   width: 100%;
   height: 65px;
   top: 0;
-  z-index: 9999;
-  box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
   color: #9e969a;
   padding: 5px 5px 5px 35px;
   background: #f8f8f8;
@@ -896,10 +882,16 @@ p.tab-content-empty {
 * Detail page
 * 
 */
-#detail-content-top h2,
-#detail-content-top #toolbox {
-  margin-top: 15px;
+#detail-content-top {
   margin-bottom: 15px;
+}
+#detail-content-top h2 {
+  margin-top: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#detail-content-top #toolbox {
   margin-right: 15px;
 }
 #detail-content-top h2:first-letter,
@@ -928,10 +920,8 @@ p.tab-content-empty {
   text-align: justify;
 }
 p.teaser {
-  line-height: 1.1;
+  line-height: 1.1em;
   font-size: 18px;
-  margin-left: 15px;
-  margin-right: 15px;
   font-family: inherit;
   font-weight: bold;
   color: inherit;
@@ -1034,6 +1024,7 @@ a.accordion-toggle {
 #toolbox a.backpack {
   position: relative;
   padding-left: 30px;
+  vertical-align: top;
 }
 #toolbox a.btn i {
   position: absolute;
