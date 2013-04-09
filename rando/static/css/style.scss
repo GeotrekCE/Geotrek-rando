@@ -423,58 +423,45 @@ ul.social-buttons li {
     float: left;
     width: 95%;
   }
+}
 
-  // Lang switcher
-  .lang {
-    float: right;
-    width: 5%;
-    margin-top: 15px;
+// Lang switcher
+#lang-switch {
+  position: fixed;
+  bottom: 10px;
+  width: 5%;
+  z-index: 1031; // useless ?
 
-    a.utils {
-      color: $black;
+  a.utils {
+    color: $black;
 
-      &:hover {
-        text-decoration: underline;
-      }
-
-      &:after {
-        content: " ";
-        display: inline-block;
-        width: 8px;
-        height: 6px;
-        background: url("../img/sprites.png") no-repeat 0px 0px;
-        margin-left: 3px;
-      }
+    &:hover {
+      text-decoration: underline;
     }
 
-    ul {
-      display: none;
-      margin: 0;
+    &:after {
+      content: " ";
+      display: inline-block;
+      width: 8px;
+      height: 6px;
+      background: url("../img/sprites.png") no-repeat 0px 0px;
+      margin-left: 3px;
+    }
+  }
 
-      img {
-        vertical-align: top;
-      }
+  ul {
+    display: none;
+    margin: 0;
+
+    img {
+      vertical-align: top;
+    }
+
+    li.active {
+      opacity: 0.2;
     }
   }
 }
-
-// #lang-switch {
-//  position: fixed;
-//  top: 8px;
-//  right: 8px;
-//  height: 13px;
-//  border: none;
-//  z-index: 1031;
-// }
-
-// #lang-switch ul {
-//  list-style-type: none;
-// }
-
-// #lang-switch li.active {
-//  opacity: 0.2;
-// }
-
 
 /****************************************************************************
 * 
