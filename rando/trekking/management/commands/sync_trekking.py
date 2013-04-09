@@ -6,6 +6,7 @@ from os import makedirs, utime
 import errno
 import json
 import logging
+from urlparse import urlparse
 
 from django.core.management.base import BaseCommand
 from django.utils.http import http_date, parse_http_date_safe
@@ -61,10 +62,15 @@ class InputFile(object):
 
     def __init__(self, command, url, language=None):
         self.command = command
-        self.url = url[1:] if url.startswith('/') else url
         server = settings.CAMINAE_SERVER
         if 'http' not in settings.CAMINAE_SERVER:
             server = 'http://' + settings.CAMINAE_SERVER
+        parts = urlparse(server)
+        rooturl = parts.path
+        if len(rooturl) > 1:
+            url = url.replace(rooturl, '')
+        self.url = url[1:] if url.startswith('/') else url
+
         self.absolute_url = join(server, self.url)
         self.language = language or ''
         self.path = join(settings.INPUT_DATA_ROOT, self.language, self.url)
