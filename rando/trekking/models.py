@@ -15,10 +15,11 @@ logger = logging.getLogger(__name__)
 
 
 class JSONManager(object):
-    def __init__(self, klass, filepath=None, language=None):
+    def __init__(self, klass, filepath=None, language=None, use_tmp=False):
         self.klass = klass
         self.filepath = filepath
         self.language = language
+        self.use_tmp = use_tmp
 
     def filter(self, **kwargs):
         self.__dict__.update(**kwargs)
@@ -27,8 +28,8 @@ class JSONManager(object):
     @property
     def fullpath(self):
         self.filepath = self.filepath.format(**self.__dict__)
-        return os.path.join(settings.INPUT_DATA_ROOT, 
-                            self.language or '', self.filepath)
+        base_path = settings.INPUT_DATA_ROOT if not self.use_tmp else settings.INPUT_TMP_ROOT
+        return os.path.join(base_path, self.language or '', self.filepath)
 
     @property
     def content(self):
@@ -70,6 +71,10 @@ class JSONModel(object):
     @classproperty
     def objects(cls):
         return JSONManager(cls, cls.filepath)
+
+    @classproperty
+    def tmp_objects(cls):
+        return JSONManager(cls, cls.filepath, use_tmp=True)
 
     _default_manager = objects
 

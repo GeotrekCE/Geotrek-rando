@@ -230,7 +230,7 @@ class Command(BaseCommand):
             for language in languages:
                 TrekListInputFile(self, language=language).pull()
 
-                for trek in models.Trek.objects.filter(language=language).all():
+                for trek in models.Trek.tmp_objects.filter(language=language).all():
                     InputFile(self, trek.properties.altimetric_profile, language=language).pull_if_modified()
                     InputFile(self, trek.properties.gpx, language=language).pull_if_modified()
                     InputFile(self, trek.properties.kml, language=language).pull_if_modified()
@@ -238,7 +238,7 @@ class Command(BaseCommand):
                     InputFile(self, trek.properties.printable_poi, language=language).pull_if_modified()
 
             # Fetch media only once, since they do not depend on language
-            for trek in models.Trek.objects.filter(language=settings.LANGUAGE_CODE).all():
+            for trek in models.Trek.tmp_objects.filter(language=settings.LANGUAGE_CODE).all():
                 if trek.properties.thumbnail:
                     InputFile(self, trek.properties.thumbnail).pull_if_modified()
                 for picture in trek.properties.pictures:
@@ -251,7 +251,8 @@ class Command(BaseCommand):
                 for weblink in trek.properties.web_links:
                     if weblink.category:
                         InputFile(self, weblink.category.pictogram).pull_if_modified()
-                for poi in trek.pois.all():
+                for poi in models.POIs.tmp_objects.filter(trek__pk=trek.pk,
+                                                          language=settings.LANGUAGE_CODE).all():
                     if poi.properties.thumbnail:
                         InputFile(self, poi.properties.thumbnail).pull_if_modified()
                     for picture in poi.properties.pictures:
