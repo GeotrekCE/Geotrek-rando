@@ -382,30 +382,4 @@ function detailmapInit(map, bounds) {
     map.whenReady(function () {
         new L.Control.ResetView(wholeBounds, {position: 'topright'}).addTo(map);
     });
-
-    //Load altimetric graph
-    altimetricInit();
-}
-
-
-function altimetricInit() {
-    /* 
-     * Load altimetric profile from JSON
-     */
-    $.getJSON(altimetric_url, function(data) {
-        $('#profilealtitude').sparkline(data.profile, {
-            tooltipSuffix: ' m',
-            numberDigitGroupSep: '',
-            width: '100%',
-            height: 100
-        });
-        $('#profilealtitude').bind('sparklineRegionChange', function(ev) {
-            var sparkline = ev.sparklines[0],
-                region = sparkline.getCurrentRegionFields();
-                value = region.y;
-            $('#mouseoverprofil').text(Math.round(region.x) +" m");
-        }).bind('mouseleave', function() {
-            $('#mouseoverprofil').text('');
-        });
-    });
 }
