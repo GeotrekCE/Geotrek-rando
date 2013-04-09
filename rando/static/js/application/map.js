@@ -376,6 +376,7 @@ function detailmapInit(map, bounds) {
     }
 
     map.fitBounds(wholeBounds);
+    map.zoomOut();
 
     // Add reset view control
     map.whenReady(function () {
