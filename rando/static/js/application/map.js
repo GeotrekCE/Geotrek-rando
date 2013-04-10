@@ -1,7 +1,7 @@
 var TREK_LAYER_OPTIONS = TREK_LAYER_OPTIONS || {
     style: {'color': '#F89406', 'weight': 5, 'opacity': 0.8},
     hoverstyle: {'color': '#F89406', 'weight': 5, 'opacity': 1.0},
-    outlinestyle: {'color': 'yellow', 'weight': 10, 'opacity': 0.8},
+    outlinestyle: {'color': 'yellow', 'weight': 10, 'opacity': 0.8}
 };
 
 
@@ -18,7 +18,7 @@ var TrekLayer = L.ObjectsLayer.extend({
 
     initialize: function (geojson) {
         var options = $.extend({
-                highlight: true,
+                highlight: true
             },
             TREK_LAYER_OPTIONS
         );
@@ -28,8 +28,8 @@ var TrekLayer = L.ObjectsLayer.extend({
     },
 
     highlight: function (pk, on) {
-        var on = on === undefined ? true : on,
-            layer = this.getLayer(pk);
+        var layer = this.getLayer(pk);
+        on = on === undefined ? true : on;
         if (!layer) return;
         if (!this._map) return;
         if (on) {
@@ -42,7 +42,7 @@ var TrekLayer = L.ObjectsLayer.extend({
                 this._hover = new L.MultiPolyline(coords);
             }
             this._hover.setStyle(TREK_LAYER_OPTIONS.outlinestyle);
-            this._hover.addTo(this._map); 
+            this._hover.addTo(this._map);
             // Pop on top
             layer.setStyle(TREK_LAYER_OPTIONS.hoverstyle);
             this._map.removeLayer(layer).addLayer(layer);
@@ -51,7 +51,7 @@ var TrekLayer = L.ObjectsLayer.extend({
             if (this._hover) this._map.removeLayer(this._hover);
             layer.setStyle(TREK_LAYER_OPTIONS.style);
         }
-    },
+    }
 });
 
 
@@ -113,8 +113,8 @@ var FakeBoundsMapMixin = {
             return bounds;
 
         var mapBounds = this.getBounds(),
-            from =  arguments.length == 0,
-            bounds = from ? mapBounds : bounds;
+            from = arguments.length === 0;
+        bounds = from ? mapBounds : bounds;
 
         var closed = $('#side-bar').hasClass('closed');
         if (closed) {
@@ -139,7 +139,7 @@ var FakeBoundsMapMixin = {
 
     getFakeBounds: function () {
         return this.__fakeBounds();
-    },
+    }
 };
 
 L.Map.include(FakeBoundsMapMixin);
@@ -175,7 +175,7 @@ var RestoreViewMixin = {
         catch (err) {
             console.error(err);
         }
-    },
+    }
 };
 
 L.Map.include(RestoreViewMixin);
@@ -223,8 +223,8 @@ function mainmapInit(map, bounds) {
         // If map is hidden, consider all visible :)
         return;
       }
-      var visible = treksLayer.search(map.getFakeBounds())
-        , visiblepks = $.map(visible, function (l) { return l.properties.pk});
+      var visible = treksLayer.search(map.getFakeBounds()),
+          visiblepks = $.map(visible, function (l) { return l.properties.pk; });
       $.each(treks.features, function (i, l) {
           var pk = l.properties.pk;
           if ($.inArray(pk, visiblepks) == -1) {
@@ -245,16 +245,16 @@ function mainmapInit(map, bounds) {
     var popup = null;
     treksLayer.on('click', function (e) {
         var layer = e.layer;
-        var html = '<h3>{NAME}</h3>' + 
-                   '<p>{DESCRIPTION}</p>' + 
-                   '<img src="{THUMBNAIL}"/>'+ 
+        var html = '<h3>{NAME}</h3>' +
+                   '<p>{DESCRIPTION}</p>' +
+                   '<img src="{THUMBNAIL}"/>'+
                    '<p class="popupdetail"><a href="#">{MORE}</a></p>';
         html = L.Util.template(html, {
             NAME: layer.properties.name,
             DESCRIPTION: layer.properties.description_teaser,
             // This is tricky : use img url of trek in result list :)
             THUMBNAIL: $('#trek-'+ e.layer.properties.pk +'.result img').attr('src'),
-            MORE: gettext("More info..."),
+            MORE: gettext("More info...")
         });
 
         if (popup) {
@@ -278,7 +278,6 @@ function mainmapInit(map, bounds) {
             // Navigate to details
             $('#trek-'+ e.layer.properties.pk +'.result a.pjax').click();
         });
-        
     });
 
     // Highlight result on mouseover
@@ -327,15 +326,15 @@ function detailmapInit(map, bounds) {
                   icon: new L.Icon({
                                 iconUrl: IMG_URL + '/marker-source.png',
                                 iconSize: [64, 64],
-                                iconAnchor: [32, 64],
-                    }),
+                                iconAnchor: [32, 64]
+                    })
                  }).addTo(map);
         L.marker(layer.getLatLngs().slice(-1)[0],
                  {clickable: false,
                   icon: new L.Icon({
                                 iconUrl: IMG_URL + '/marker-target.png',
                                 iconSize: [64, 64],
-                                iconAnchor: [32, 64],
+                                iconAnchor: [32, 64]
                  })}).addTo(map);
     });
 
@@ -364,15 +363,15 @@ function detailmapInit(map, bounds) {
     var parkingIcon = L.icon({
         iconUrl: IMG_URL + '/parking.png',
         iconSize: [24, 24],
-        iconAnchor: [0, 0],
+        iconAnchor: [0, 0]
     });
     var parkingLocation = trek.properties.parking_location;
     if (parkingLocation) {
-      var pos = L.latLng([parkingLocation[1], parkingLocation[0]]);
-      L.marker(pos, {icon: parkingIcon})
-       .bindPopup(trek.properties.advised_parking || gettext("Recommended parking"))
-       .addTo(map);
-      wholeBounds.extend(pos);
+        var pos = L.latLng([parkingLocation[1], parkingLocation[0]]);
+        L.marker(pos, {icon: parkingIcon})
+         .bindPopup(trek.properties.advised_parking || gettext("Recommended parking"))
+         .addTo(map);
+        wholeBounds.extend(pos);
     }
 
     map.fitBounds(wholeBounds);
