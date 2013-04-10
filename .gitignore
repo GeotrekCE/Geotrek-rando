@@ -1,5 +1,5 @@
 *.sublime*
-.Python
+/.Python
 *~
 *.pyc
 bin
