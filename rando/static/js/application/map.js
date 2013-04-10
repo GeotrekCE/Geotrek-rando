@@ -1,8 +1,9 @@
-var TREK_LAYER_OPTIONS = TREK_LAYER_OPTIONS || {
+var TREK_LAYER_OPTIONS = L.Util.extend({
     style: {'color': '#F89406', 'weight': 5, 'opacity': 0.8},
     hoverstyle: {'color': '#F89406', 'weight': 5, 'opacity': 1.0},
-    outlinestyle: {'color': 'yellow', 'weight': 10, 'opacity': 0.8}
-};
+    outlinestyle: {'color': 'yellow', 'weight': 10, 'opacity': 0.8},
+    arrowstyle: {'fill': '#E97000', 'font-weight': 'bold'}
+}, TREK_LAYER_OPTIONS || {});
 
 
 function invalidate_maps() {
@@ -285,6 +286,12 @@ function detailmapInit(map, bounds) {
     trekLayer.eachLayer(function (layer) {
         if (layer instanceof L.MultiPolyline)
             return;
+
+        map.whenReady(function () {
+            var textPath = L.polyline(layer.getLatLngs(), {weight: 0}).addTo(map);
+            textPath.setText('>     ', {repeat:true, offset:8, attributes: TREK_LAYER_OPTIONS.arrowstyle});
+        });
+
         L.marker(layer.getLatLngs()[0],
                  {clickable: false,
                   icon: new L.Icon({
