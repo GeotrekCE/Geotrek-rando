@@ -32,7 +32,6 @@ var PolylineTextPath = {
 
         text = text.replace(/ /g, '\u00A0');  // Non breakable spaces
         var id = 'pathdef-' + L.Util.stamp(this);
-        console.log(this);
         var svg = this._map._pathRoot;
         this._path.setAttribute('id', id);
 
