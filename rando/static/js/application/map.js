@@ -261,6 +261,8 @@ function detailmapInit(map, bounds) {
         position: 'topright',
         title: gettext('Fullscreen')
     }).addTo(map);
+
+    // Minimize minimap by default
     map.whenReady(function () {
         map.minimapcontrol._minimize();
     });
@@ -351,5 +353,22 @@ function detailmapInit(map, bounds) {
     // Add reset view control
     map.whenReady(function () {
         new L.Control.ResetView(wholeBounds, {position: 'topright'}).addTo(map);
+
+        // Enable wheel zoom on clic (~ focus)
+        map.scrollWheelZoom.disable();
+        map.on('click', function () {
+            map.scrollWheelZoom.enable();
+        });
+
+        // Enable drag only after zoom change
+        map.dragging.disable();
+        $(map._container).css('cursor','pointer');
+        setTimeout(function () {
+            map.on('zoomend', function () {
+                $(map._container).css('cursor','-moz-grab');
+                $(map._container).css('cursor','-webkit-grab');
+                map.dragging.enable();
+            });
+        }, 500);
     });
 }
