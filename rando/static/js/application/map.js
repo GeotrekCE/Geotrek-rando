@@ -145,42 +145,6 @@ var FakeBoundsMapMixin = {
 L.Map.include(FakeBoundsMapMixin);
 
 
-
-var RestoreViewMixin = {
-    restoreView: function () {
-        if (!this.__initRestore) {
-            this.on('moveend', function (e) {
-              if (!this._loaded)
-                 return;  // Never access map bounds if view is not set.
-
-              var view = {
-                lat: this.getCenter().lat,
-                lng: this.getCenter().lng,
-                zoom: this.getZoom()
-              };
-              localStorage.setItem('mapView', JSON.stringify(view));
-            }, this);
-            this.__initRestore = true;
-        }
-
-        var retrievedObject = localStorage.getItem('mapView');
-        if (!retrievedObject) {
-            return false;
-        }
-        try {
-            view = JSON.parse(retrievedObject);
-            this.setView(L.latLng(view.lat, view.lng), view.zoom, true);
-            return true;
-        }
-        catch (err) {
-            console.error(err);
-        }
-    }
-};
-
-L.Map.include(RestoreViewMixin);
-
-
 /**
  * Map initialization functions.
  * Callbacks of Django Leaflet.
