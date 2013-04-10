@@ -331,11 +331,9 @@ ul.social-buttons li {
   width: 95%;
 }
 #lang-switch {
-  position: fixed;
-  right: 6px;
+  float: right;
+  margin-top: 10px;
   width: 5%;
-  top: 40px;
-  z-index: 1;
 }
 #lang-switch a.utils {
   color: black;

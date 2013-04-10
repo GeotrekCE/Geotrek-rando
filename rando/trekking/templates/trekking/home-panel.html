@@ -1,6 +1,6 @@
 {% load i18n static leaflet_tags trekking %}
 
-{% include "trekking/navigation_fragment.html" %}
+{% include "trekking/navigation_fragment.html" with title="HOME" %}
 {% include "trekking/share_fragment.html" with title=TITLE %}
 
 {% if pjax %}

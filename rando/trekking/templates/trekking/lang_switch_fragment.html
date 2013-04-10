@@ -1,5 +1,5 @@
 {% load i18n static localeurl_tags %}
-<div id="lang-switch" class="hidden-tablet hidden-phone">
+<div id="lang-switch" class="hidden-tablet hidden-phone reattach" data-destination="footer">
   <a href="#" class="utils">{% trans "Lang" %}</a>
     <ul>
     {% for lang, name in settings.languages.available.items %}

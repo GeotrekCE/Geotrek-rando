@@ -19,6 +19,18 @@ function page_load() {
         e.preventDefault();
     });
 
+    // Reattach elements coming from PJAX
+    $('.reattach').each(function () {
+        var $elem = $(this),
+            destination = $elem.data('destination'),
+            id = $elem.attr('id');
+        if (id === undefined) {
+            console.warn('No id attribute in div.reattach, expect duplicates upon navigation.');
+        }
+        $(destination).find('#'+id).remove();
+        $elem.removeClass('reattach').detach().appendTo(destination);
+    });
+
     if ($("#mainmap-tag").length > 0) {
         view_home();
     }
