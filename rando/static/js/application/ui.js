@@ -29,12 +29,12 @@ function page_load() {
     // Flex divs :)
     $('.row-fluid').each(function () {
         var $flex = $(this).find('.flex');
-        if ($flex.length == 0) return;
+        if ($flex.length === 0) return;
         var span = Math.round(12 / $flex.length);
         $flex.each(function (i, v) {
             $(v).addClass('span'+span);
         });
-    }); 
+    });
 
     init_share();
 
@@ -44,8 +44,8 @@ function page_load() {
 
     // Add trek to backpack
     $('.add-sac').on('click', function (e) {
-        var trekid = $(this).data('pk')
-          , trekname = $(this).data('name');
+        var trekid = $(this).data('pk'),
+            trekname = $(this).data('name');
         if (window.backPack.contains(trekid)) {
             window.backPack.remove(trekid);
             // Track event
@@ -121,10 +121,10 @@ function view_home() {
 
     // Highlight map on hover in sidebar results
     $('#side-bar .result').hover(function () {
-        window.treksLayer && window.treksLayer.highlight($(this).data('id'), true);
+        if (window.treksLayer) window.treksLayer.highlight($(this).data('id'), true);
       },
       function () {
-        window.treksLayer && window.treksLayer.highlight($(this).data('id'), false);
+        if (window.treksLayer) window.treksLayer.highlight($(this).data('id'), false);
       }
     );
     // Click on side-bar
@@ -139,7 +139,7 @@ function view_home() {
         if (trekOnMap) {
             // If multi - take first one
             if (trekOnMap instanceof L.MultiPolyline) {
-                for (i in trekOnMap._layers) {
+                for (var i in trekOnMap._layers) {
                     trekOnMap = trekOnMap._layers[i];
                     break;
                 }
@@ -147,7 +147,7 @@ function view_home() {
             var coords = trekOnMap.getLatLngs(),
                 middlepoint = coords[Math.round(coords.length/2)];
             trekOnMap.fire('click', {
-              latlng: middlepoint,
+              latlng: middlepoint
             });
             // Track event
             _gaq.push(['_trackEvent', 'Results', 'Click', trekOnMap.properties && trekOnMap.properties.name]);
@@ -159,7 +159,6 @@ function view_home() {
 }
 
 function refresh_results(matching) {
-    var matching = matching;
     for(var i=0; i<treks.features.length; i++) {
         var trek = treks.features[i],
             trekid = trek.properties.pk;
@@ -173,7 +172,7 @@ function refresh_results(matching) {
     if (matching.length > 0)
         $('#noresult').hide(200);
     else
-        $('#noresult').show(200); 
+        $('#noresult').show(200);
     // Refresh label with number of results
     $('#tab-results span.badge').html(matching.length);
 }
@@ -204,9 +203,10 @@ function page_leave() {
     $("#global-share.active").click();
 
     // Deselect all treks on page leave
-    treksLayer && treksLayer.eachLayer(function (l) {
-        treksLayer.highlight(l.properties.pk, false);
-    });
+    if (treksLayer)
+        treksLayer.eachLayer(function (l) {
+            treksLayer.highlight(l.properties.pk, false);
+        });
 }
 
 function view_detail() {
@@ -219,7 +219,7 @@ function view_detail() {
         }
         else {
           $(this).addClass('open');
-          $('#pois-accordion').trigger('open', [this])
+          $('#pois-accordion').trigger('open', [this]);
         }
     });
 
@@ -259,37 +259,37 @@ function sliders() {
 
     $( "#stage" ).slider({
         range: true,
-        step: 1, 
+        step: 1,
         min: 1,
         max: 3,
         values: [ 1, 3 ],
-        slide: saveSlider,
+        slide: saveSlider
     });
 
     $( "#time" ).slider({
         range: true,
-        step: 1, 
+        step: 1,
         min: 0,
         max: 4,
         values: [ 0, 4 ],
-        slide: saveSlider,
+        slide: saveSlider
     });
 
     $( "#den" ).slider({
         range: true,
-        step: 1, 
+        step: 1,
         min: 0,
         max: 3,
         values: [ 0, 3 ],
-        slide: saveSlider,
+        slide: saveSlider
     });
-};
+}
 
 function init_share() {
-    var $share = $('#global-share')
-      , $panel = $('#social-panel')
-      , markup = $panel.html()
-      , shown = false;
+    var $share = $('#global-share'),
+        $panel = $('#social-panel'),
+        markup = $panel.html(),
+        shown = false;
       // , init = false;
     // $panel.remove();
 
@@ -303,11 +303,11 @@ function init_share() {
         placement: 'left',
         trigger: 'manual',
         title: '',
-        content: markup,
+        content: markup
     });
 
     $share.off('click').on('click', function () {
-        var $this = $(this)
+        var $this = $(this);
         $this.toggleClass('active');
         var popover = $this.data('popover');
 
