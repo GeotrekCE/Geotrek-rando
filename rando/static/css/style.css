@@ -229,6 +229,15 @@ ul.row-footer a {
   bottom: 0;
   width: 100%;
 }
+#mainmap:-webkit-full-screen {
+  top: 0;
+}
+#mainmap:-moz-full-screen {
+  top: 0;
+}
+#mainmap:full-screen {
+  top: 0;
+}
 #side-bar {
   position: absolute;
   top: 65px;
@@ -953,6 +962,24 @@ p.teaser {
 }
 #detailmap {
   min-height: 400px;
+}
+#detailmap:-webkit-full-screen {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+#detailmap:-moz-full-screen {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+#detailmap:full-screen {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 #pois-accordion {
   max-height: 400px;

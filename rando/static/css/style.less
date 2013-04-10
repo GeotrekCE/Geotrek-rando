@@ -287,6 +287,10 @@ ul.row-footer {
   top: 65px;
   bottom: 0;
   width: 100%;
+
+   &:-webkit-full-screen { top: 0; }
+   &:-moz-full-screen { top: 0; }
+   &:full-screen { top: 0; }
 }
 
 #side-bar {
@@ -1088,6 +1092,10 @@ p.tab-content-empty {
  margin-top:-1px;
 }
 
+.no-fullscreen .leaflet-control-zoom-fullscreen {
+  display: none;
+}
+
 .leaflet-control-zoom-fullscreen {
   background-image: url(../img/icon-fullscreen.png);
 }
@@ -1198,7 +1206,11 @@ p.teaser {
 }
 
 #detailmap {
- min-height: 400px;
+  min-height: 400px;
+
+  &:-webkit-full-screen { top: 0; left: 0; width: 100%; height: 100%; }
+  &:-moz-full-screen { top: 0; left: 0; width: 100%; height: 100%; }
+  &:full-screen { top: 0; left: 0; width: 100%; height: 100%; }
 }
 
 #pois-accordion {
