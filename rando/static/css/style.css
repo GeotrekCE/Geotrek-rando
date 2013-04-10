@@ -259,26 +259,31 @@ ul.row-footer a {
   display: inline-block;
 }
 #flatpages ul li > a {
-  -webkit-transition: background 100ms;
-  transition: background 100ms;
-  -moz-transition: background 100ms;
+  -webkit-transition: background 300ms;
+  -moz-transition: background 300ms;
+  -ms-transition: background 300ms;
+  -o-transition: background 300ms;
+  transition: background 300ms;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background: rgba(248, 148, 6, 0.6);
+  border-radius: 3px;
   padding: 0px 10px 0px;
-  font-size: 1.1em;
   text-decoration: none;
   display: block;
   height: 24px;
   padding-top: 6px;
-  font-weight: bold;
-  background: rgba(248, 148, 6, 0.7);
-  border-radius: 3px;
   color: white;
+  font-size: 1.1em;
+  font-weight: bold;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
 }
 #flatpages ul li > a:hover {
-  background: #e67e22;
+  background-color: #f89406;
+}
+#flatpages ul li > a.active {
+  background-color: #f89406;
 }
 /* Top right elements */
 #global-share {
