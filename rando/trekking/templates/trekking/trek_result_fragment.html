@@ -20,12 +20,14 @@
     <div class="search-tools">
         <a class="btn add-sac" data-pk="{{ trek.properties.pk }}">
             {% if backpack = "True" %}
-                <img src="{% static "img/bag-remove.png" %}">
+                <img src="{% static "img/bag-remove.png" %}" data-toggle="tooltip" title="{% trans "Remove from backpack" %}">
             {% else %}
-                <img src="{% static "img/bag-add.png" %}">
+                <img src="{% static "img/bag-add.png" %}" data-toggle="tooltip" title="{% trans "Add to backpack" %}">
             {% endif %}
         </a>
-        <a class="btn search-rando" data-pk="{{ trek.properties.pk }}"><img src="{% static "img/search.png" %}"></a>
+        <a class="btn search-rando" data-pk="{{ trek.properties.pk }}">
+          <img src="{% static "img/search.png" %}" data-toggle="tooltip" title="{% trans "Zoom to trek" %}">
+        </a>
     </div>
   </div>
 </div>

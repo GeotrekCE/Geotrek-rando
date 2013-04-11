@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-08 16:07+0200\n"
+"POT-Creation-Date: 2013-04-11 17:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: models.py:100
+#: models.py:105
 #, python-format
 msgid "From %(departure)s to %(arrival)s"
 msgstr "De %(departure)s à %(arrival)s"
 
-#: templates/trekking/base.html:45 templates/trekking/base.html.py:46
+#: templates/trekking/base.html:78 templates/trekking/base.html.py:79
+#: templates/trekking/base.html:80
 msgid "Share"
 msgstr "Partager"
 
@@ -40,7 +41,7 @@ msgid "Print with POIs"
 msgstr "Imprimer avec POIs"
 
 #: templates/trekking/detail-panel.html:49
-#: templates/trekking/home-panel.html:89
+#: templates/trekking/home-panel.html:88
 msgid "Route"
 msgstr "Parcours"
 
@@ -49,12 +50,12 @@ msgid "Length"
 msgstr "Longueur"
 
 #: templates/trekking/detail-panel.html:52
-#: templates/trekking/home-panel.html:73
+#: templates/trekking/home-panel.html:72
 msgid "Valleys"
 msgstr "Vallées"
 
 #: templates/trekking/detail-panel.html:53
-#: templates/trekking/home-panel.html:15
+#: templates/trekking/home-panel.html:14
 msgid "Difficulty"
 msgstr "Difficulté"
 
@@ -67,7 +68,7 @@ msgid "Descent"
 msgstr "Dénivelé négatif"
 
 #: templates/trekking/detail-panel.html:56
-#: templates/trekking/home-panel.html:24
+#: templates/trekking/home-panel.html:23
 msgid "Duration"
 msgstr "Durée"
 
@@ -80,7 +81,7 @@ msgid "Max elevation"
 msgstr "Altitude max"
 
 #: templates/trekking/detail-panel.html:62
-#: templates/trekking/home-panel.html:65
+#: templates/trekking/home-panel.html:64
 msgid "Usages"
 msgstr "Usages"
 
@@ -149,68 +150,76 @@ msgid "Back to list"
 msgstr "Retour à la liste"
 
 #: templates/trekking/fake_searchtabs_fragment.html:12
-#: templates/trekking/home-panel.html:127
+#: templates/trekking/home-panel.html:121
 msgid "Backpack"
 msgstr "Sac à dos"
 
-#: templates/trekking/home-panel.html:11
-msgid "Filters"
-msgstr "Filtres"
-
-#: templates/trekking/home-panel.html:19
+#: templates/trekking/home-panel.html:18
 msgid "Easy"
 msgstr "Facile"
 
-#: templates/trekking/home-panel.html:20
+#: templates/trekking/home-panel.html:19
 msgid "Medium"
 msgstr "Confirmé"
 
-#: templates/trekking/home-panel.html:21
+#: templates/trekking/home-panel.html:20
 msgid "Hard"
 msgstr "Sportif"
 
-#: templates/trekking/home-panel.html:28
+#: templates/trekking/home-panel.html:27
 msgid "Short"
 msgstr "Court"
 
-#: templates/trekking/home-panel.html:30
+#: templates/trekking/home-panel.html:29
 msgid "day"
 msgstr "journée"
 
-#: templates/trekking/home-panel.html:31 templates/trekking/home-panel.html:32
+#: templates/trekking/home-panel.html:30 templates/trekking/home-panel.html:31
 msgid "2 days"
 msgstr "2 jours"
 
-#: templates/trekking/home-panel.html:35
+#: templates/trekking/home-panel.html:34
 #: templates/trekking/trek_result_fragment.html:11
 msgid "Climb"
 msgstr "Dénivelé"
 
-#: templates/trekking/home-panel.html:46
+#: templates/trekking/home-panel.html:45
 msgid "Thematic"
 msgstr "Thème"
 
-#: templates/trekking/home-panel.html:81
+#: templates/trekking/home-panel.html:55
+msgid "Reset filters"
+msgstr "Réinitialiser les filtres"
+
+#: templates/trekking/home-panel.html:56
+msgid "Advanced filters"
+msgstr "Filtres avancés"
+
+#: templates/trekking/home-panel.html:80
 msgid "Cities"
 msgstr "Communes"
 
-#: templates/trekking/home-panel.html:112
+#: templates/trekking/home-panel.html:108
 msgid "Name, Valley, ..."
 msgstr "Nom, vallée, ..."
 
-#: templates/trekking/home-panel.html:123
+#: templates/trekking/home-panel.html:117
 msgid "Results"
 msgstr "Résultats"
 
-#: templates/trekking/home-panel.html:133
+#: templates/trekking/home-panel.html:127
 msgid "No result"
 msgstr "Aucun résultat"
 
-#: templates/trekking/home-panel.html:140 templatetags/trekking.py:20
+#: templates/trekking/home-panel.html:134 templatetags/trekking.py:20
 msgid "Empty"
 msgstr "Vide"
 
-#: templates/trekking/navigation_fragment.html:9
+#: templates/trekking/lang_switch_fragment.html:3
+msgid "Lang"
+msgstr "Langue"
+
+#: templates/trekking/navigation_fragment.html:6
 msgid "Home"
 msgstr "Accueil"
 
@@ -229,3 +238,15 @@ msgstr ""
 #: templates/trekking/share_fragment.html:9
 msgid "Facebook"
 msgstr ""
+
+#: templates/trekking/trek_result_fragment.html:23
+msgid "Remove from backpack"
+msgstr "Retirer du sac à dos"
+
+#: templates/trekking/trek_result_fragment.html:25
+msgid "Add to backpack"
+msgstr "Ajouter au sac à dos"
+
+#: templates/trekking/trek_result_fragment.html:29
+msgid "Zoom to trek"
+msgstr "Zoomer sur l'itinéraire"

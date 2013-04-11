@@ -796,20 +796,21 @@ p.tab-content-empty {
   color: #f89406;
   text-shadow: 0px 0px 2px #ffff00;
 }
-.info-result .add-sac {
-  padding: 3px;
-}
-.info-result .search-rando {
-  padding: 3px;
-}
 .search-tools {
   position: absolute;
-  right: 5%;
+  right: 7px;
+  bottom: 7px;
 }
 .search-tools .btn {
   height: 22px;
   width: 22px;
   background-image: none;
+}
+.search-tools .btn.add-sac {
+  padding: 8px;
+}
+.search-tools .btn.search-rando {
+  padding: 8px;
 }
 .theme-tools {
   float: left;
