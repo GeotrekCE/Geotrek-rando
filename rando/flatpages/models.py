@@ -31,7 +31,7 @@ class FlatPageManager(object):
         path = os.path.join(self.basepath, self.language)
         dirlist = []
         if os.path.exists(path):
-            dirlist = os.listdir(path)
+            dirlist = os.listdir(unicode(path))  # Give a path in unicode: you get list of unicode filenames
         i = 0
         for fname in dirlist:
             fullpath = os.path.join(path, fname)
