@@ -239,7 +239,7 @@ function mainmapInit(map, bounds) {
              .openOn(map);
         popup.pk = layer.properties.pk;
         // Make sure clic on details will open as pjax
-        $('.popupdetail a', popup._container).click(function () {
+        $("a[href='#']", popup._container).click(function () {
             // Track event
             _gaq.push(['_trackEvent', 'Map', 'Popup', e.layer.properties.name]);
             // Navigate to details
