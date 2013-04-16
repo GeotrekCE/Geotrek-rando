@@ -584,16 +584,29 @@ ul.social-buttons li {
   float:left;
   margin-left: 25px;
 
+  label {
+    line-height: 10px;
+  }
+
   .filter {
     display: inline-block;
     text-align: center;
+    vertical-align: top;
+    width: 53px;
+    max-width: 53px;
 
     p {
       margin: 0;
       padding: 0;
       font-size: 7pt;
-      line-height: 1;
+      line-height: 7pt;
       text-align: center;
+
+      -ms-word-break: hyphenate;
+      word-break: hyphenate;
+      -webkit-hyphens: auto;
+         -moz-hyphens: auto;
+              hyphens: auto;
     }
   }
 }
@@ -1005,33 +1018,35 @@ p.tab-content-empty {
 }
 
 .pictogram {
- width: 25px;
- height: 25px;
- overflow: hidden;
- display: inline-block;
-}
+  width: 25px;
+  height: 25px;
+  overflow: hidden;
+  display: inline-block;
 
-.pictogram img {
- max-width: none;
- height: 25px;
-}
+  img {
+    max-width: none;
+    height: 25px;
+  }
 
-.pictogram.big {
- width: 64px;
- height: 64px;
-}
 
-.pictogram.big img {
- height: 64px;
-}
+  &.big {
+    width: 64px;
+    height: 64px;
 
-.pictogram.small {
- width: 16px;
- height: 16px;
-}
+    img {
+      height: 64px;
+    }
+  }
 
-.pictogram.small img {
- height: 16px;
+
+  &.small {
+    width: 16px;
+    height: 16px;
+
+    img {
+      height: 16px;
+    }
+  }
 }
 
 

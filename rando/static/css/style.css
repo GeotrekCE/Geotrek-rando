@@ -473,16 +473,27 @@ ul.social-buttons li {
   float: left;
   margin-left: 25px;
 }
+.theme label {
+  line-height: 10px;
+}
 .theme .filter {
   display: inline-block;
   text-align: center;
+  vertical-align: top;
+  width: 53px;
+  max-width: 53px;
 }
 .theme .filter p {
   margin: 0;
   padding: 0;
   font-size: 7pt;
-  line-height: 1;
+  line-height: 7pt;
   text-align: center;
+  -ms-word-break: hyphenate;
+  word-break: hyphenate;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
 }
 .theme .filter.active img {
   margin-left: -25px;
