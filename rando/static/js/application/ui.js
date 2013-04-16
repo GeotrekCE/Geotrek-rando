@@ -95,6 +95,7 @@ function view_home() {
 
     $('#toggle-filters').click(function() {
         $(this).toggleClass('active');
+        $(this).toggleClass('closed');
         $("#advanced-filters").toggle();
     });
 

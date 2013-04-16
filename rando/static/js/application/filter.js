@@ -24,6 +24,7 @@ function TrekFilter()
             if ($.isEmptyObject(self.state[k]))
                 delete self.state[k];
 
+        /* If any advanced filter is set, then show them ! */
         if ($(".chzn-container .search-choice").length > 0 ||
             $(".chosen-select option:selected").length > 0) {
             $('#toggle-filters').addClass('active');
