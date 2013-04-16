@@ -6,9 +6,33 @@
 var PolylineTextPath = {
 
     __updatePath: L.Polyline.prototype._updatePath,
+    __bringToFront: L.Polyline.prototype.bringToFront,
+    __onAdd: L.Polyline.prototype.onAdd,
+    __onRemove: L.Polyline.prototype.onRemove,
+
+    onAdd: function (map) {
+        this.__onAdd.call(this, map);
+        this._textRedraw();
+    },
+
+    onRemove: function (map) {
+        map = map || this._map;
+        if (map && this._textNode)
+            map._pathRoot.removeChild(this._textNode);
+        this.__onRemove.call(this, map);
+    },
+
+    bringToFront: function () {
+        this.__bringToFront.call(this);
+        this._textRedraw();
+    },
 
     _updatePath: function () {
         this.__updatePath.call(this);
+        this._textRedraw();
+    },
+
+    _textRedraw: function () {
         var text = this._text,
             options = this._textOptions;
         if (text) {
