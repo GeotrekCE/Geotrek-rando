@@ -211,9 +211,11 @@ function mainmapInit(map, bounds) {
     treksLayer.on('click', function (e) {
         var layer = e.layer;
         var html = '<h3>{NAME}</h3>' +
-                   '<p>{DESCRIPTION}</p>' +
-                   '<img src="{THUMBNAIL}"/>'+
-                   '<p class="popupdetail"><a href="#">{MORE}</a></p>';
+                   '<div class="clearfix">' +
+                   '  <a href="#"><img src="{THUMBNAIL}"/></a>'+
+                   '  <div class="description">{DESCRIPTION}</div>' +
+                   '  <p class="popupdetail"><a href="#">{MORE}</a></p>' +
+                   '</div>';
         html = L.Util.template(html, {
             NAME: layer.properties.name,
             DESCRIPTION: layer.properties.description_teaser,
