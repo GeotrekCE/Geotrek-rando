@@ -66,9 +66,10 @@ class InputFile(object):
         if 'http' not in settings.CAMINAE_SERVER:
             server = 'http://' + settings.CAMINAE_SERVER
         parts = urlparse(server)
-        rooturl = parts.path
-        if len(rooturl) > 1:
-            url = url.replace(rooturl, '')
+        self.rooturl = parts.path
+        if len(self.rooturl) <= 1:
+            self.rooturl = ''
+        url = url.replace(self.rooturl, '')
         self.url = url[1:] if url.startswith('/') else url
 
         self.absolute_url = join(server, self.url)
@@ -203,6 +204,10 @@ class TrekListInputFile(InputFile):
             detailfile.pull()
             detail = json.loads(detailfile.content())
             properties.update(detail)
+
+            # Remove rooturl from relative URLs
+            for k in ['altimetric_profile', 'gpx', 'kml', 'map_image_url', 'printable', 'printable_poi']:
+                properties[k] = properties[k].replace(self.rooturl, '') if properties[k] else properties[k]
 
             # Add POIs information in list, useful for textual search
             f = POIsInputFile(self.command, models.POIs.filepath.format(trek__pk=pk),

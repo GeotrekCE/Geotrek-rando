@@ -951,7 +951,8 @@ p.tab-content-empty {
   text-align: right;
 }
 #toolbox a.print,
-#toolbox a.backpack {
+#toolbox a.backpack,
+#toolbox a.download {
   position: relative;
   padding-left: 30px;
   vertical-align: top;
@@ -964,6 +965,14 @@ p.tab-content-empty {
   height: 25px;
   width: 30px;
 }
+#toolbox a.btn i.gpx {
+  background-image: url("../img/gpx.png");
+  width: 25px;
+}
+#toolbox a.btn i.kml {
+  background-image: url("../img/kml.png");
+  width: 25px;
+}
 #toolbox i.print {
   background-image: url("../img/imprimante.png");
 }
@@ -971,6 +980,7 @@ p.tab-content-empty {
   background-image: url("../img/sacplus.png");
 }
 #toolbox a.backpack,
+#toolbox a.download,
 #toolbox #btn-print {
   margin-top: 5px;
 }
@@ -1074,6 +1084,17 @@ p.teaser {
 .alert-info p {
   margin: 0;
 }
+#altitudegraph .axislabel {
+  color: blue;
+  font-size: 10px;
+}
+#altitudegraph p {
+  margin: 0px;
+}
+#altitudegraph #mouseoverprofil {
+  display: inline-block;
+  color: #4d4d4d;
+}
 #trek-pictures:hover .carousel-control {
   opacity: 0.5;
 }
@@ -1156,10 +1177,6 @@ a.accordion-toggle {
 }
 .accordion-inner {
   color: #80757D;
-}
-.download {
-  background: url("../img/download.png") no-repeat;
-  padding-left: 20px;
 }
 #trek-links img {
   padding-right: 5px;

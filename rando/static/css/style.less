@@ -1167,7 +1167,8 @@ p.tab-content-empty {
   text-align: right;
 
   a.print,
-  a.backpack {
+  a.backpack,
+  a.download {
     position: relative;
     padding-left: 30px;
     vertical-align: top;
@@ -1180,6 +1181,16 @@ p.tab-content-empty {
     display: inline-block;
     height: 25px;
     width: 30px;
+
+    &.gpx {
+      background-image: url("../img/gpx.png");
+      width: 25px;
+    }
+
+    &.kml {
+      background-image: url("../img/kml.png");
+      width: 25px;
+    }
   }
 
   i.print {
@@ -1191,6 +1202,7 @@ p.tab-content-empty {
   }
 
   a.backpack,
+  a.download,
   #btn-print {
     margin-top: 5px;
   }
@@ -1414,12 +1426,6 @@ a.accordion-toggle  {
 }
 
 
-
-.download {
- background:url("../img/download.png") no-repeat;
- padding-left:20px;
-}
-
 #trek-links img {
  padding-right: 5px;
 }
@@ -1442,9 +1448,6 @@ a.accordion-toggle  {
   .border-radius(4px);
   .box-shadow(0px 0px 7px 2px rgba(255, 255, 0, 1.0));
 }
-
-
-
 
 
 
