@@ -272,8 +272,14 @@ function detailmapInit(map, bounds) {
     $('#pois-accordion').on('open', function (e, accordion) {
         var id = $(accordion).data('id'),
             marker = window.poisMarkers[id];
+
+        // Prevent double-jump
+        if (marker._animating === true)
+            return;
+        marker._animating = true;
         $(marker._icon).animate({"margin-top": "-=20px"}, "fast",
                                 function(){
+                                    marker._animating = false;
                                     $(this).animate({"margin-top": "+=20px"}, "fast");
                                 });
     });
