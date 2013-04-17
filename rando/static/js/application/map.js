@@ -269,8 +269,8 @@ function detailmapInit(map, bounds) {
         map.minimapcontrol._minimize();
     });
 
-    $('#pois-accordion').on('open', function (e, accordion) {
-        var id = $(accordion).data('id'),
+    $('#pois-accordion').on('show', function (e) {
+        var id = $(e.target).data('id'),
             marker = window.poisMarkers[id];
 
         // Prevent double-jump
@@ -292,8 +292,8 @@ function detailmapInit(map, bounds) {
                                 });
     });
 
-    $('#pois-accordion').on('close', function (e, accordion) {
-        var id = $(accordion).data('id'),
+    $('#pois-accordion').on('hidden', function (e) {
+        var id = $(e.target).data('id'),
             marker = window.poisMarkers[id];
         if (marker._clusterized) {
             marker._map.removeLayer(marker);

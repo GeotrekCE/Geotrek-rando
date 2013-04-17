@@ -240,15 +240,6 @@ function page_leave() {
 function view_detail() {
     $("#mainmap").hide();  // We are elsewhere
 
-    $('#pois-accordion .accordion-toggle').click(function (e) {
-        if ($(this).hasClass('open')) {
-          $('#pois-accordion').trigger('close', [this]);
-        }
-        else {
-          $('#pois-accordion').trigger('open', [this]);
-        }
-    });
-
     $('#pois-accordion').on('show', function (e) {
         var id = $(e.target).data('id');
         $(".accordion-toggle[data-id='"+ id +"']", this).addClass('open');
