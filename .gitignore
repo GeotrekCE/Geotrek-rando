@@ -8,5 +8,6 @@ include/
 lib/
 local/
 var/
+rando/settings_local.py
 rando.egg-info/
 rando/var/
