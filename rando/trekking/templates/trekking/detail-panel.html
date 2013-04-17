@@ -186,7 +186,7 @@
               {% endif %}
             </a>
           </div>
-          <div id="collapse-poi-{{  poi.properties.pk }}" class="accordion-body collapse" style="height: 0px; ">
+          <div id="collapse-poi-{{  poi.properties.pk }}" class="accordion-body collapse" style="height: 0px; " data-id="{{ poi.properties.pk }}">
             <div class="accordion-inner">
               <p>{{ poi.properties.description|safe }}</p>
               {% include "trekking/carousel_fragment.html" with prefix=poi.properties.pk pictures=poi.properties.pictures default="False" %}

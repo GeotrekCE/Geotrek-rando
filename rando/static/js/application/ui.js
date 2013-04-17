@@ -242,13 +242,20 @@ function view_detail() {
 
     $('#pois-accordion .accordion-toggle').click(function (e) {
         if ($(this).hasClass('open')) {
-          $(this).removeClass('open');
           $('#pois-accordion').trigger('close', [this]);
         }
         else {
-          $(this).addClass('open');
           $('#pois-accordion').trigger('open', [this]);
         }
+    });
+
+    $('#pois-accordion').on('show', function (e) {
+        var id = $(e.target).data('id');
+        $(".accordion-toggle[data-id='"+ id +"']", this).addClass('open');
+    });
+    $('#pois-accordion').on('hidden', function (e) {
+        var id = $(e.target).data('id');
+        $(".accordion-toggle[data-id='"+ id +"']", this).removeClass('open');
     });
 
     //Load altimetric graph
