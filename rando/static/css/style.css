@@ -957,6 +957,16 @@ p.tab-content-empty {
   padding-left: 30px;
   vertical-align: top;
 }
+#toolbox a.print.gpx,
+#toolbox a.backpack.gpx,
+#toolbox a.download.gpx {
+  padding-left: 25px;
+}
+#toolbox a.print.kml,
+#toolbox a.backpack.kml,
+#toolbox a.download.kml {
+  padding-left: 25px;
+}
 #toolbox a.btn i {
   position: absolute;
   top: 0px;
