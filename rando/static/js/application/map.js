@@ -276,13 +276,31 @@ function detailmapInit(map, bounds) {
         // Prevent double-jump
         if (marker._animating === true)
             return;
+
+        // Add clusterized marker explicitly, will be removed on accordion close.
+        marker._clusterized = (marker._map === undefined);
+        if (marker._clusterized) {
+            map.addLayer(marker);
+        }
+        // Jump!
         marker._animating = true;
+        $(marker._icon).css('z-index', 3000);
         $(marker._icon).animate({"margin-top": "-=20px"}, "fast",
                                 function(){
                                     marker._animating = false;
                                     $(this).animate({"margin-top": "+=20px"}, "fast");
                                 });
     });
+
+    $('#pois-accordion').on('close', function (e, accordion) {
+        var id = $(accordion).data('id'),
+            marker = window.poisMarkers[id];
+        if (marker._clusterized) {
+            marker._map.removeLayer(marker);
+            marker._map = undefined;
+        }
+    });
+
 
     // Trek
     var highlight = new L.GeoJSON(window.trek.geometry, {style: L.extend(TREK_LAYER_OPTIONS.outlinestyle, {clickable: false})})
