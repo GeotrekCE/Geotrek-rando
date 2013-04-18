@@ -1097,6 +1097,7 @@ p.teaser {
   padding-left: 10px;
   padding-right: 10px;
   padding-top: 10px;
+  font-size: 14px;
 }
 .meta {
   margin-top: 15px;
@@ -1222,21 +1223,24 @@ a.accordion-toggle {
   list-style-type: none;
 }
 /* POIS markers */
-.poi-marker-icon img,
-.poi-marker-icon.cluster {
+.poi-marker-icon.cluster,
+.poi-marker-icon img {
   width: 24px;
   height: 24px;
   padding: 1px;
   color: black;
   text-align: center;
   background-color: rgba(255, 140, 0, 0.7);
-  border: 1px solid  #80757d;
+  border: 1px solid #232222;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
   -webkit-box-shadow: 0px 0px 7px 2px #ffff00;
   -moz-box-shadow: 0px 0px 7px 2px #ffff00;
   box-shadow: 0px 0px 7px 2px #ffff00;
+}
+.poi-marker-icon.highlight img {
+  background-color: #ffff00;
 }
 /* ==========================================================================
    Media queries

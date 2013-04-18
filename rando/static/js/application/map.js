@@ -277,6 +277,8 @@ function detailmapInit(map, bounds) {
         if (marker._animating === true)
             return;
 
+        map.panTo(marker.getLatLng());
+
         // Add clusterized marker explicitly, will be removed on accordion close.
         marker._clusterized = (marker._map === undefined);
         if (marker._clusterized) {
@@ -284,6 +286,8 @@ function detailmapInit(map, bounds) {
         }
         // Jump!
         marker._animating = true;
+        $(marker._icon).addClass('highlight');
+        marker.openPopup();
         $(marker._icon).css('z-index', 3000);
         $(marker._icon).animate({"margin-top": "-=20px"}, "fast",
                                 function(){
@@ -295,7 +299,10 @@ function detailmapInit(map, bounds) {
     $('#pois-accordion').on('hidden', function (e) {
         var id = $(e.target).data('id'),
             marker = window.poisMarkers[id];
-        if (marker._clusterized) {
+        $(marker._icon).removeClass('highlight');
+        marker.closePopup();
+        // Restore clusterized markers (if still on map, i.e. zoom not changed)
+        if (marker._clusterized && marker._map) {
             marker._map.removeLayer(marker);
             marker._map = undefined;
         }
@@ -381,21 +388,29 @@ function detailmapInit(map, bounds) {
     map.whenReady(function () {
         new L.Control.ResetView(wholeBounds, {position: 'topright'}).addTo(map);
 
-        // Enable wheel zoom on clic (~ focus)
+
         map.scrollWheelZoom.disable();
-        map.on('click', function () {
+        var enableWheel = function () {
             map.scrollWheelZoom.enable();
             $('.helpclic').hide();
-        });
+        };
 
-        // Enable drag only after zoom change
         map.dragging.disable();
         $(map._container).css('cursor','pointer');
+        var enablePan = function () {
+            $(map._container).css('cursor','-moz-grab');
+            $(map._container).css('cursor','-webkit-grab');
+            map.dragging.enable();
+        };
+
+        // Enable wheel zoom on clic (~ focus)
+        map.on('click', enableWheel);
+
+        // Enable drag only after zoom change
         setTimeout(function () {
             map.on('zoomend', function () {
-                $(map._container).css('cursor','-moz-grab');
-                $(map._container).css('cursor','-webkit-grab');
-                map.dragging.enable();
+                enablePan();
+                enableWheel();
             });
         }, 500);
     });
