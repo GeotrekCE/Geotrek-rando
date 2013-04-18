@@ -61,6 +61,7 @@
   <div id="advanced-filters" style="display: none">
 
     <div class="filter-bloc usage">
+      <label for="usage" class="hidden">{% trans "Usages" %}</label>
       <select id="usage" class="chosen-select" tabindex="2" multiple="" data-filter="usage" data-placeholder="{% trans "Usages" %}">
       {% for usage in usages %}
         <option data-filter="usage" data-id="{{ usage.id }}" value="{{ usage.id }}">{{ usage.label }}</option>
@@ -69,6 +70,7 @@
     </div>
 
     <div class="filter-bloc vallee">
+      <label for="usage" class="hidden">{% trans "Valleys" %}</label>
       <select id="district" class="chosen-select" tabindex="2" multiple="" data-filter="district" data-placeholder="{% trans "Valleys" %}">
       {% for district in districts %}
         <option data-filter="district" data-id="{{ district.id }}" value="{{ district.id }}">{{ district.name }}</option>
@@ -77,6 +79,7 @@
     </div>
 
     <div class="filter-bloc cities">
+      <label for="usage" class="hidden">{% trans "Cities" %}</label>
       <select id="city" class="chosen-select" tabindex="2" multiple="" data-filter="city" data-placeholder="{% trans "Cities" %}">
       {% for city in cities %}
         <option data-filter="city" data-id="{{ city.code }}" value="{{ city.code|safe }}">{{ city.name }}</option>
@@ -85,6 +88,7 @@
     </div>
 
     <div class="filter-bloc route">
+      <label for="usage" class="hidden">{% trans "Route" %}</label>
       <select id="route" class="chosen-select" tabindex="2" multiple="" data-filter="route"  data-placeholder="{% trans "Route" %}">
       {% for route in routes %}
         <option data-filter="route" data-id="{{ route.id }}" value="{{ route.id|safe }}">{{ route.label }}</option>
@@ -105,6 +109,7 @@
   <div id="text-search" class="search1">
     <div class="span4">
       <form class="navbar-search pull-left">
+        <label for="search" class="hidden">{% trans "Search" %}</label>
         <input type="text" class="search-query" placeholder="{% trans "Name, Valley, ..."%}" data-filter="search" id="search"/><i class="icon-search icon-gray"></i>
       </form>
     </div>
