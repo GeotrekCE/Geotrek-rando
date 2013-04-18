@@ -344,6 +344,7 @@ ul.social-buttons li {
 #footer .wrapper {
   float: left;
   width: 95%;
+  height: 100%;
 }
 #lang-switch {
   float: right;
