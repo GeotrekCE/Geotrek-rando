@@ -18,7 +18,7 @@ deploy: bin/python
 	mkdir -p var/input/media
 	mkdir -p var/input/media/pages
 	touch var/input/media/style.css
-	bin/python ./manage.py collectstatic
+	bin/python ./manage.py collectstatic --clear --noinput
 
 test: bin/python
 	bin/python ./manage.py test trekking flatpages
