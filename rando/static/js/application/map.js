@@ -346,6 +346,7 @@ function detailmapInit(map, bounds) {
          * Open Accordion on marker click.
          * TODO: does not work correctly.
          */
+        marker.off('click');  // Disable auto-control of popup
         marker.on('click', function (e) {
             var $item = $('#poi-item-' + marker.properties.pk);
             $item.click();
@@ -384,6 +385,7 @@ function detailmapInit(map, bounds) {
         map.scrollWheelZoom.disable();
         map.on('click', function () {
             map.scrollWheelZoom.enable();
+            $('.helpclic').hide();
         });
 
         // Enable drag only after zoom change
