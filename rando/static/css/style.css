@@ -811,17 +811,32 @@ p.tab-content-empty {
   position: absolute;
   right: 7px;
   bottom: 7px;
+  min-width: 86px;
 }
 .search-tools .btn {
+  background-image: none;
   height: 22px;
   width: 22px;
-  background-image: none;
+  margin-left: 5px;
+  display: inline-block;
 }
-.search-tools .btn.add-sac {
-  padding: 8px;
+.search-tools .btn.backpack,
+.search-tools .btn.search {
+  padding: 6px;
 }
-.search-tools .btn.search-rando {
-  padding: 8px;
+.search-tools .btn i {
+  display: block;
+  width: 22px;
+  height: 20px;
+}
+.search-tools .btn i.add {
+  background-image: url("../img/bag-add.png");
+}
+.search-tools .btn i.remove {
+  background-image: url("../img/bag-remove.png");
+}
+.search-tools .btn i.search {
+  background-image: url("../img/search.png");
 }
 .theme-tools {
   float: left;

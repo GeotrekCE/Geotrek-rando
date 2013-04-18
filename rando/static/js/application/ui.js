@@ -70,7 +70,7 @@ function page_load() {
     refresh_backpack();
 
     // Add trek to backpack
-    $('.add-sac').on('click', function (e) {
+    $('.btn.backpack').on('click', function (e) {
         var trekid = $(this).data('pk'),
             trekname = $(this).data('name');
         if (window.backPack.contains(trekid)) {
@@ -130,7 +130,7 @@ function view_home() {
     });
 
     // Zoom trek button
-    $('.search-rando').off('click').on('click', function (e) {
+    $('#side-bar .btn.search').off('click').on('click', function (e) {
         e.preventDefault();
         var trekOnMap = window.treksLayer.getLayer($(this).data('pk'));
         if (trekOnMap) {
@@ -211,12 +211,12 @@ function refresh_backpack() {
             trekid = trek.properties.pk;
         if (window.backPack.contains(trekid)) {
             $('#backpack-trek-'+trekid).show(200);
-            $('#trek-' + trekid + ' .btn.add-sac').addClass('active');
+            $('#trek-' + trekid + ' .btn.backpack').addClass('active');
             $(".detail-content .btn[data-pk='"+ trekid + "']").addClass('active');
         }
         else {
             $('#backpack-trek-'+trekid).hide(200);
-            $('#trek-' + trekid + ' .btn.add-sac').removeClass('active');
+            $('#trek-' + trekid + ' .btn.backpack').removeClass('active');
             $(".detail-content .btn[data-pk='"+ trekid + "']").removeClass('active');
         }
     }

@@ -16,7 +16,7 @@
     </div>
     <div class="span3">
       <div id="toolbox" class="btn-toolbar pull-right">
-        <a class="btn backpack add-sac" href="#" data-pk="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}"><i class="backpack"></i> {% trans "In backpack" %}</a>
+        <a class="btn backpack" href="#" data-pk="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}"><i class="backpack"></i> {% trans "In backpack" %}</a>
 
         <div class="btn-group" id="btn-print">
             <a class="btn print" href="{% url trekking:fileserve object.properties.printable %}"><i class="print"></i> {% trans "Print" %}</a>

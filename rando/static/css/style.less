@@ -996,18 +996,28 @@ p.tab-content-empty {
   position: absolute;
   right: 7px;
   bottom: 7px;
+  min-width: 86px;
 
     .btn {
+      background-image: none;
       height: 22px;
       width: 22px;
-      background-image: none;
+      margin-left: 5px;
+      display: inline-block;
 
-      &.add-sac {
-        padding: 8px;
+      &.backpack,
+      &.search {
+        padding: 6px;
       }
 
-      &.search-rando {
-        padding: 8px;
+      i {
+        display: block;
+        width: 22px;
+        height: 20px;
+
+        &.add { background-image: url("../img/bag-add.png"); }
+        &.remove { background-image: url("../img/bag-remove.png"); }
+        &.search { background-image: url("../img/search.png"); }
       }
     }
 }

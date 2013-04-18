@@ -1,7 +1,7 @@
 {% load i18n static trekking %}
 <div id="{% if backpack = "True" %}backpack-{% endif %}trek-{{ trek.properties.pk }}" data-id="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}" class="result" {% if show = "False" %}style="display:none"{% endif %}>
   <div class="illust">
-    <img src="{{ trek|thumbnail }}" width="110" height="110" />
+    <img alt="{% trans "Preview of" %} {{ trek.properties.name }}" src="{{ trek|thumbnail }}" width="110" height="110" />
   </div>
   <div class="info-result">
     <a class="pjax" href="{% url trekking:detail trek.properties.slug %}">
@@ -18,15 +18,18 @@
       {% endfor %}
     </div>
     <div class="search-tools">
-        <a class="btn add-sac" data-pk="{{ trek.properties.pk }}">
+        <a class="btn backpack " data-pk="{{ trek.properties.pk }}" data-toggle="tooltip" title="{% trans "Remove from backpack" %}">
             {% if backpack = "True" %}
-                <img src="{% static "img/bag-remove.png" %}" data-toggle="tooltip" title="{% trans "Remove from backpack" %}">
+                <span class="hidden">{% trans "Remove from backpack" %}</span>
+                <i class="backpack remove"></i>
             {% else %}
-                <img src="{% static "img/bag-add.png" %}" data-toggle="tooltip" title="{% trans "Add to backpack" %}">
+                <span class="hidden">{% trans "Add to backpack" %}</span>
+                <i class="backpack add"></i>
             {% endif %}
         </a>
-        <a class="btn search-rando" data-pk="{{ trek.properties.pk }}">
-          <img src="{% static "img/search.png" %}" data-toggle="tooltip" title="{% trans "Zoom to trek" %}">
+        <a class="btn search" data-pk="{{ trek.properties.pk }}" data-toggle="tooltip" title="{% trans "Zoom to trek" %}">
+          <span class="hidden">{% trans "Remove from backpack" %}</span>
+          <i class="search"></i>
         </a>
     </div>
   </div>
