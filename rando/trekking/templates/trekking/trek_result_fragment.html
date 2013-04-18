@@ -5,7 +5,7 @@
   </div>
   <div class="info-result">
     <a class="pjax" href="{% url trekking:detail trek.properties.slug %}">
-        <h4>{{ trek.properties.name }}</h4>
+        <h3>{{ trek.properties.name }}</h3>
     </a>
     <p>{% for district in trek.properties.districts %}{{ district.name }}, {% endfor %}</p>
     <p>{{ trek.properties.duration|default:0 }}H - {% trans "Climb" %} {{ trek.properties.ascent }}m</p>

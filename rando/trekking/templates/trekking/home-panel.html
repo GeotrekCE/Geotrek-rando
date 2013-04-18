@@ -8,6 +8,7 @@
 {% endif %}
 
 <div id="search-bar">
+  <h2 class="hidden">{% trans "Filters" %}</h2>
 
   <div id="basic-filters">
     <div class="stage">
@@ -42,7 +43,7 @@
     </div>
 
     <div class="theme">
-      <label>{% trans "Thematic" %}</label>
+      <label for="theme">{% trans "Thematic" %}</label>
       {% for theme in themes %}
         <div class="filter" data-filter="theme" data-id="{{ theme.id }}" id="theme-{{ theme.id }}">
           {{ theme|pictogram }}
@@ -129,6 +130,7 @@
 
     <div id="result-backpack-content" class="tab-content">
       <div class="tab-pane active" id="results">
+        <h2 class="hidden">{% trans "Results" %}</h2>
         <p id="noresult" style="display:none" class="tab-content-empty">{% trans "No result" %}</p>
         {% for trek in treks %}
             {% include "trekking/trek_result_fragment.html" with show="True" backpack="False" %}
@@ -136,6 +138,7 @@
       </div>
 
       <div class="tab-pane" id="backpack">
+        <h2 class="hidden">{% trans "Backpack" %}</h2>
         <p id="backpackempty" style="display:none" class="tab-content-empty">{% trans "Empty" %}</p>
         {% for trek in treks %}
             {% include "trekking/trek_result_fragment.html" with show="False" backpack="True" %}

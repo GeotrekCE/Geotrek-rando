@@ -12,6 +12,7 @@
               {% else %}
                 <a href="/{{ lang }}">
               {% endif %}
+              <span class="hidden">{{ lang }}</span>
               <img src="{% get_static_prefix %}ico/flags/{{ lang }}.png" alt="{{ lang }}"></a>
             </li>
         {% endif %}
