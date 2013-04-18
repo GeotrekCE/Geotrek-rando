@@ -176,7 +176,7 @@ header {
   -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
 }
-header h3 {
+header h1 {
   color: #c0392b;
   font-size: 27px;
   font-family: 'Open sans', Arial;
