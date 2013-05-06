@@ -206,7 +206,7 @@ class TrekListInputFile(InputFile):
             properties.update(detail)
 
             # Remove rooturl from relative URLs
-            for k in ['altimetric_profile', 'gpx', 'kml', 'map_image_url', 'printable', 'printable_poi']:
+            for k in ['altimetric_profile', 'gpx', 'kml', 'map_image_url', 'printable']:
                 properties[k] = properties[k].replace(self.rooturl, '') if properties[k] else properties[k]
 
             # Add POIs information in list, useful for textual search
@@ -247,7 +247,6 @@ class Command(BaseCommand):
                     InputFile(self, trek.properties.kml, language=language).pull_if_modified()
                     InputFile(self, trek.properties.map_image_url, language=language).pull_if_modified()
                     InputFile(self, trek.properties.printable, language=language).pull_if_modified()
-                    InputFile(self, trek.properties.printable_poi, language=language).pull_if_modified()
 
             # Fetch media only once, since they do not depend on language
             for trek in models.Trek.tmp_objects.filter(language=settings.LANGUAGE_CODE).all():

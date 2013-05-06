@@ -18,16 +18,9 @@
       <div id="toolbox" class="btn-toolbar pull-right">
         <a class="btn backpack" href="#" data-pk="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}"><i class="backpack"></i> {% trans "In backpack" %}</a>
 
-        <div class="btn-group" id="btn-print">
-            <a class="btn print" href="{% url trekking:fileserve object.properties.printable %}"><i class="print"></i> {% trans "Print" %}</a>
-            <button class="btn dropdown-toggle" data-toggle="dropdown">
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-              <li><a href="{% url trekking:fileserve object.properties.printable_poi %}">{% trans "Print with POIs" %}</a></li>
-            </ul>
-        </div>
-
+        <a class="btn download print" title="{% trans "Print" %}" href="{% url trekking:fileserve object.properties.printable %}">
+          <i class="print"></i> {% trans "Print" %}
+        </a>
         <a class="btn download gpx" title="{% trans "Download GPX" %}" href="{% url trekking:fileserve object.properties.gpx %}">
           <i class="gpx"></i> {% trans "GPX" %}
         </a>
