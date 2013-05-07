@@ -349,8 +349,8 @@ ul.social-buttons li {
 }
 #lang-switch {
   float: right;
-  margin-top: 10px;
-  width: 5%;
+  margin-top: 16px;
+  width: 70px;
 }
 #lang-switch a.utils {
   color: black;
@@ -873,6 +873,9 @@ p.tab-content-empty {
 * Maps
 * 
 */
+#mainmap {
+  z-index: 890;
+}
 #mainmap .leaflet-popup-content-wrapper {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -1246,12 +1249,8 @@ a.accordion-toggle {
 /* ==========================================================================
    Media queries
    ========================================================================== */
-/* Large desktop */
-@media (min-width: 1200px) {
-  
-}
 /* Portrait tablet to landscape and desktop */
-@media (min-width: 768px) and (max-width: 979px) {
+@media (max-width: 979px) {
   header h3 {
     font-size: 20px;
     left: 11px;
@@ -1291,20 +1290,38 @@ a.accordion-toggle {
   .leaflet-control-minimap {
     display: none;
   }
+  #footer .wrapper {
+    width: 100%;
+  }
 }
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
   body {
     padding: 0;
   }
-  .leaflet-control-minimap {
+  #container-content {
+    bottom: 0;
+  }
+  .leaflet-control-minimap,
+  #footer {
     display: none;
+  }
+  #footer .wrapper {
+    width: 100%;
   }
 }
 /* Landscape phones and down */
 @media (max-width: 480px) {
-  .leaflet-control-minimap {
+  #search-bar {
     display: none;
+  }
+  #side-bar {
+    top: 0;
+    width: 100%;
+    border-right: none;
+  }
+  #mainmap {
+    top: 0;
   }
 }
 /* ==========================================================================
