@@ -274,10 +274,7 @@ ul.row-footer a {
 #flatpages ul li {
   display: inline-block;
 }
-#flatpages ul li.active {
-  background-color: #f89406;
-}
-#flatpages ul li > a {
+#flatpages ul li a {
   -webkit-transition: background 100ms;
   -moz-transition: background 100ms;
   -ms-transition: background 100ms;
@@ -299,6 +296,10 @@ ul.row-footer a {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
+}
+#flatpages ul li a:hover,
+#flatpages ul li a.active {
+  background-color: #f89406;
 }
 /* Top right elements */
 #global-share {

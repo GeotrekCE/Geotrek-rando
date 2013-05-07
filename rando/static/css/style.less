@@ -338,29 +338,28 @@ ul.row-footer {
     li {
       display: inline-block;
 
-      &.active {
-        background-color: @orange;
+      a {
+        .transition(background 100ms);
+        padding: 0px 10px 0px;
+        font-size: 1.1em;
+        text-decoration: none;
+        display: block;
+        height: 24px;
+        padding-top: 6px;
+        font-weight: bold;
+        background: rgba(248, 148, 6, 0.7);
+        .border-radius(3px);
+        color: white;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        .box-shadow(none);
+
+        &:hover,
+        &.active {
+          background-color: @orange;
+        }
       }
     }
   }
-}
-
-#flatpages ul li > a {
-  .transition(background 100ms);
-  // text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
-  padding: 0px 10px 0px;
-  font-size: 1.1em;
-  text-decoration: none;
-  display: block;
-  // background: white;
-  height: 24px;
-  padding-top: 6px;
-  font-weight: bold;
-  background: rgba(248, 148, 6, 0.7);
-  .border-radius(3px);
-  color: white;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  .box-shadow(none);
 }
 
 
