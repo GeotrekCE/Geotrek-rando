@@ -30,6 +30,8 @@ function init_ui() {
 }
 
 function page_load() {
+    MBP.deviceDetect();
+
     $('body').on('click', 'a.utils', function(e){
         e.preventDefault();
     });
@@ -88,6 +90,9 @@ function page_load() {
     $('#lang-switch a.utils').on('click', function(){
         $(this).siblings('ul').toggle();
     });
+
+    // Hide address bar
+    MBP.hideUrlBarOnLoad();
 }
 
 function view_home() {
