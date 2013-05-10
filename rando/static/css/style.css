@@ -344,7 +344,7 @@ ul.social-buttons li {
 }
 #footer .wrapper {
   float: left;
-  width: 95%;
+  width: 92%;
   height: 100%;
 }
 #lang-switch {
@@ -667,6 +667,8 @@ p.tab-content-empty {
 #side-bar .result .info-result h3 {
   font-size: 14px;
   color: #625b50;
+  line-height: 13px;
+  margin-bottom: 4px;
 }
 #side-bar .result .info-result p {
   margin: 0;
@@ -698,7 +700,6 @@ p.tab-content-empty {
   padding-left: 20px;
 }
 #text-search {
-  height: 38px;
   float: left;
   width: 97%;
 }
@@ -713,6 +714,7 @@ p.tab-content-empty {
 #text-search .navbar-search {
   width: 100%;
   margin-top: 5px;
+  margin-bottom: 5px;
   padding-left: 5px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -781,7 +783,7 @@ p.tab-content-empty {
   width: 100%;
   height: 65px;
   top: 0;
-  z-index: 1;
+  z-index: 895;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -1306,12 +1308,31 @@ a.accordion-toggle {
   #footer {
     display: none;
   }
-  #footer .wrapper {
-    width: 100%;
-  }
 }
 /* Landscape phones and down */
 @media (max-width: 480px) {
+  #container-content {
+    top: 0;
+  }
+  .touch .leaflet-control-container {
+    display: none;
+  }
+  header {
+    width: 45px;
+    height: 45px;
+    background: url(../img/ecrins-logo.png) no-repeat center center;
+    -webkit-background-size: auto;
+    -moz-background-size: auto;
+    -o-background-size: auto;
+    background-size: auto;
+    border: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+  header h1 {
+    display: none;
+  }
   #search-bar {
     display: none;
   }
@@ -1320,8 +1341,43 @@ a.accordion-toggle {
     width: 100%;
     border-right: none;
   }
+  #text-search,
+  #result-backpack-tabs {
+    width: 100%;
+  }
+  #result-backpack-tabs {
+    margin-top: 45px;
+  }
+  #result-backpack-content {
+    right: 0;
+    top: 83px;
+    -webkit-overflow-scrolling: touch;
+  }
+  #text-search {
+    position: absolute;
+    left: 45px;
+    right: 45px;
+    width: auto;
+  }
+  #text-search .navbar-search {
+    padding-left: 0;
+  }
+  #text-search .navbar-search .search-query {
+    height: 35px;
+  }
+  #text-search .navbar-search .icon-search {
+    right: 13px;
+    top: 11px;
+  }
+  #toggle-side-bar {
+    display: none;
+  }
   #mainmap {
     top: 0;
+  }
+  #global-share,
+  #flatpages {
+    display: none;
   }
 }
 /* ==========================================================================
