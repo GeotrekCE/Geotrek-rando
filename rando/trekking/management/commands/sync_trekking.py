@@ -235,7 +235,7 @@ class Command(BaseCommand):
 
         try:
             InputFile(self, models.Settings.filepath).pull_if_modified()
-            app_settings = models.Settings.objects.all()
+            app_settings = models.Settings.tmp_objects.all()
             languages = app_settings.languages.available.keys()
             logger.debug("Languages: %s" % languages)
             for language in languages:
