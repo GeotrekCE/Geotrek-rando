@@ -36,6 +36,7 @@ def mkdir_p(path):
         else:
             raise
 
+
 # Make sure pictograms start with MEDIA_URL
 def reroot(item, attr=None):
     if isinstance(item, list):
@@ -92,7 +93,7 @@ class InputFile(object):
         headers = {}
         if self.language:
             cprint('/' + self.language, 'cyan', end='', file=self.command.stdout)
-            headers.update({'Accept-language' : self.language})
+            headers.update({'Accept-language': self.language})
         if ifmodified:
             try:
                 mtime = getmtime(self.path)
@@ -110,7 +111,7 @@ class InputFile(object):
             return
         elif self.reply.status_code != requests.codes.ok:
             cprint("%s (Failed)" % self.reply.status_code, 'red', attrs=['bold'], file=self.command.stderr)
-            raise IOError("Failed to retrieve %s (code: %s)" % (self.absolute_url, 
+            raise IOError("Failed to retrieve %s (code: %s)" % (self.absolute_url,
                                                                 self.reply.status_code))
         else:
             cprint("%s (Download)" % self.reply.status_code, 'yellow', file=self.command.stdout)
