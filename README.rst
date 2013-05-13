@@ -21,13 +21,13 @@ Copy and extract the source archive, and run install :
 
 ::
 
+    cd /path/to/application
     make install
 
 Prepare deployment :
 
 ::
 
-    cd /path/to/application
     make deploy
 
 
@@ -36,7 +36,9 @@ Configuration
 
 Copy ``rando/settings_local.py.sample`` to ``rando/settings_local.py` and edit it to override settings.
 
-Most important settings : 
+Be careful to save the file with UTF-8 encoding, especially if you use accents and special characters.
+
+Most important settings :
 
 * **CAMINAE_SERVER**
 * **TITLE** (in every supported language, fallback to English)
@@ -56,7 +58,11 @@ Copy the virtual host example :
     sudo cp rando/apache.vhost.sample /etc/apache2/sites-available/rando
 
 
-Edit it and replace ``/PATH_TO_SOURCE/`` by the correct absolute path.
+Edit it and replace ``/PATH_TO_SOURCE/`` by the correct absolute path (i.e where is this README file)
+
+::
+
+    sudo nano /etc/apache2/sites-available/rando
 
 Activate it and restart apache :
 
@@ -218,6 +224,19 @@ Uploaded files are not served by Apache
 =======================================
 
 Make sure Apache has read access to all files uploaded and created in the *media* folder.
+
+
+Synchronization failed with 404
+===============================
+
+::
+
+    /fr/image/trek-903939.png ... 404 (Failed)
+    Failed to retrieve http://x.x.x.x/image/trek-903939.png (code: 404)
+    Failed!
+
+Try to access this URL manually and check the logs on the remote server.
+
 
 =======
 AUTHORS
