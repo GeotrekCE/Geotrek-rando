@@ -34,6 +34,17 @@ function init_ui() {
             MBP.hideUrlBar();
         }
 
+        // Check if youre on mobile or not
+        if(Modernizr.mq('only all and (max-width: 480px)')) {
+            mobile = true;
+            
+            if(firstLoadMobile) {
+                init_mobile();
+            }
+        } else {
+            mobile = false;
+        }
+
         invalidate_maps();
     });
 
@@ -102,6 +113,8 @@ function page_load() {
 
     // iOS mobile hide address bar
     MBP.hideUrlBarOnLoad();
+
+    firstLoad = false;
 }
 
 function view_home() {
@@ -379,4 +392,16 @@ function init_share() {
         });
         Socialite.load(popover.tip());
     });
+}
+
+function init_mobile() {
+    $('#search').on('focus', function() {
+        $('#result-backpack-tabs').show();
+    });
+
+    $('#search').on('blur', function() {
+        $('#result-backpack-tabs').hide();
+    });
+
+    firstLoadMobile = false;
 }

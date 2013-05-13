@@ -562,9 +562,12 @@ ul.social-buttons li {
 #side-bar {
   border-right: solid 2px #877e82;
   background-color: #F6F7F1;
+  min-height: 45px;
 }
 #side-bar .nav-tabs {
   width: 100%;
+  margin: 0;
+  border-bottom: none;
 }
 #tab-results,
 #tab-backpack {
@@ -668,10 +671,10 @@ p.tab-content-empty {
   border-bottom: solid 1px #dbdcd7;
   cursor: pointer;
   position: relative;
+  padding: 5px;
+  height: 110px;
 }
 #side-bar .result .illust {
-  margin-top: 5px;
-  margin-left: 5px;
   float: left;
 }
 #side-bar .result .info-result {
@@ -834,14 +837,13 @@ p.tab-content-empty {
   position: absolute;
   right: 7px;
   bottom: 7px;
-  min-width: 86px;
 }
 .search-tools .btn {
   background-image: none;
   height: 22px;
   width: 22px;
   margin-left: 5px;
-  display: inline-block;
+  float: left;
 }
 .search-tools .btn.backpack,
 .search-tools .btn.search {
@@ -1284,8 +1286,8 @@ a.accordion-toggle {
     width: 330px;
   }
   #side-bar .illust img {
-    width: 95px;
-    height: auto;
+    width: auto;
+    height: 100%;
   }
   #side-bar .result .info-result {
     min-height: 100px;
@@ -1359,10 +1361,42 @@ a.accordion-toggle {
   #side-bar {
     top: 0;
     bottom: auto;
-    height: 46px;
+    height: auto;
     width: 100%;
     border-right: none;
     background-color: rgba(246, 247, 241, 0.9);
+  }
+  #side-bar .illust {
+    display: none;
+  }
+  #side-bar #tab-results {
+    display: none;
+  }
+  #side-bar .result {
+    height: 25px;
+    overflow: hidden;
+  }
+  #side-bar .result .info-result {
+    min-height: auto;
+    margin: 0;
+    white-space: nowrap;
+  }
+  #side-bar .result .info-result a {
+    vertical-align: middle;
+  }
+  #side-bar .result .info-result h3 {
+    display: inline-block;
+  }
+  #side-bar .result .info-result p {
+    display: inline;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+  #tab-backpack {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
   }
   #text-search,
   #result-backpack-tabs {
@@ -1373,9 +1407,21 @@ a.accordion-toggle {
     display: none;
   }
   #result-backpack-content {
+    height: 157px;
     right: 0;
-    top: 82px;
+    top: 45px;
     -webkit-overflow-scrolling: touch;
+  }
+  .ascent {
+    display: none;
+  }
+  .search-tools {
+    display: none;
+  }
+  .theme-tools {
+    float: none;
+    display: inline-block;
+    min-height: 25px;
   }
   #text-search {
     position: absolute;

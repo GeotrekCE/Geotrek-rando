@@ -149,7 +149,10 @@
                 pois = pois || null,
                 altimetric_url = altimetric_url || null,
                 treks = {{ treksjson|safe }},
-                IMG_URL = "{% static "img" %}";
+                IMG_URL = "{% static "img" %}",
+                mobile = false,
+                firstLoad = true,
+                firstLoadMobile = true;
 
             // Default Google Analytics in case Do-Not-Track is set
             window._gaq = window._gaq || [];
