@@ -14,6 +14,8 @@ Modernizr.addTest('fullscreen', function(){
 
 
 function init_ui() {
+    MBP.deviceDetect();
+
     $(document).pjax('a.pjax', '#content');
 
     window.trekFilter = new TrekFilter();
@@ -25,13 +27,20 @@ function init_ui() {
     $('body').on("backpack-change", refresh_backpack);
 
     $(window).smartresize(function() {
-         invalidate_maps();
+        // iOS mobile hide address bar for fullscreen trick
+        if(MBP.device == "mobile" && MBP.platform == "ios") {
+            var iOSAddressBarSize = 60; // Absolutely not future optimized, but only working solution atm
+            $('html').height($(window).height()+iOSAddressBarSize+'px');
+            MBP.hideUrlBar();
+        }
+
+        invalidate_maps();
     });
+
+    $(window).resize();
 }
 
 function page_load() {
-    MBP.deviceDetect();
-
     $('body').on('click', 'a.utils', function(e){
         e.preventDefault();
     });
@@ -91,7 +100,7 @@ function page_load() {
         $(this).siblings('ul').toggle();
     });
 
-    // Hide address bar
+    // iOS mobile hide address bar
     MBP.hideUrlBarOnLoad();
 }
 

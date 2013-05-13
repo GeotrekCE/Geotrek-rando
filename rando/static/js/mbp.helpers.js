@@ -325,6 +325,10 @@
 
         $('html').addClass(device+' '+browser+' '+platform);
 
+        MBP.device      = device;
+        MBP.platform    = platform;
+        MBP.browser     = browser;
+
         return device;
     };
 
