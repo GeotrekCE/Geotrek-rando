@@ -52,7 +52,7 @@ function init_ui() {
 }
 
 function page_load() {
-    $('body').on('click', 'a.utils', function(e){
+    $('body').on('click', 'a.utils', function (e){
         e.preventDefault();
     });
 
@@ -107,7 +107,7 @@ function page_load() {
     });
 
     // Lang button
-    $('#lang-switch a.utils').on('click', function(){
+    $('#lang-switch a.utils').on('click', function () {
         $(this).siblings('ul').toggle();
     });
 
@@ -133,7 +133,7 @@ function view_home() {
     $("#mainmap").show();  // We are on home with map
     invalidate_maps();
 
-    $('#result-backpack-tabs .nav-tabs a').click(function (e) {
+    $('#result-backpack-tabs .nav-tabs a').on('click', function (e) {
         e.preventDefault();
         $(this).tab('show');
         $(this).parents('ul.nav-tabs').find('span.badge-warning').removeClass('badge-warning');
@@ -145,7 +145,7 @@ function view_home() {
         $('#tab-' + window.location.hash.slice(1) + ' a').click();
     }
 
-    $('#toggle-side-bar').off('click').on('click', function() {
+    $('#toggle-side-bar').off('click').on('click', function () {
         if (!$(this).hasClass('closed')) {
             var width_sidebar = $('.side-bar').width() - $(this).width();
             $('#side-bar').addClass('closed').animate({left : -width_sidebar+'px'}, 700, 'easeInOutExpo');
@@ -175,42 +175,46 @@ function view_home() {
     });
 
     // Highlight map on hover in sidebar results
-    $('#side-bar .result').hover(function () {
+    $('#side-bar .result').hover(function() {
         if (window.treksLayer) window.treksLayer.highlight($(this).data('id'), true);
-      },
-      function () {
+    },
+    function() {
         if (window.treksLayer) window.treksLayer.highlight($(this).data('id'), false);
-      }
-    );
-    // Click on side-bar
-    $('#side-bar .result').on('click', function (e) {
-        e.preventDefault();
-
-        // Do not fire click if clicked on search tools
-        if ($(e.target).parents('.search-tools').length > 0)
-            return;
-
-        var trekOnMap = window.treksLayer.getLayer($(this).data('id'));
-        if (trekOnMap) {
-            // If multi - take first one
-            if (trekOnMap instanceof L.MultiPolyline) {
-                for (var i in trekOnMap._layers) {
-                    trekOnMap = trekOnMap._layers[i];
-                    break;
-                }
-            }
-            var coords = trekOnMap.getLatLngs(),
-                middlepoint = coords[Math.round(coords.length/2)];
-            trekOnMap.fire('click', {
-              latlng: middlepoint
-            });
-            // Track event
-            _gaq.push(['_trackEvent', 'Results', 'Click', trekOnMap.properties && trekOnMap.properties.name]);
-        }
-        else {
-          console.warn("Trek not on map: " + $(this).data('id'));
-        }
     });
+
+    // Click on side-bar
+    $('#side-bar .result').on('click', showTooltip);
+}
+
+
+
+function showTooltip (e) {
+    e.preventDefault();
+    
+    // Do not fire click if clicked on search tools
+    if ($(e.target).parents('.search-tools').length > 0)
+        return;
+
+    var trekOnMap = window.treksLayer.getLayer($(this).data('id'));
+    if (trekOnMap) {
+        // If multi - take first one
+        if (trekOnMap instanceof L.MultiPolyline) {
+            for (var i in trekOnMap._layers) {
+                trekOnMap = trekOnMap._layers[i];
+                break;
+            }
+        }
+        var coords = trekOnMap.getLatLngs(),
+            middlepoint = coords[Math.round(coords.length/2)];
+        trekOnMap.fire('click', {
+          latlng: middlepoint
+        });
+        // Track event
+        _gaq.push(['_trackEvent', 'Results', 'Click', trekOnMap.properties && trekOnMap.properties.name]);
+    }
+    else {
+      console.warn("Trek not on map: " + $(this).data('id'));
+    }
 }
 
 function refresh_results(matching) {
@@ -395,13 +399,43 @@ function init_share() {
 }
 
 function init_mobile() {
-    $('#search').on('focus', function() {
-        $('#result-backpack-tabs').show();
+    $('#search').on('focus', function () {
+        $('#result-backpack-content').show();
+        $('#tab-results a').click();
     });
 
-    $('#search').on('blur', function() {
-        $('#result-backpack-tabs').hide();
+    $('#side-bar .result').on('click', 'a.pjax', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        $(this).parents('.result').click();
     });
+
+    $('#side-bar .result').off('dblclick mouseenter mouseleave');
+    
+    $('#side-bar .result').on('mouseup', function (e) {
+        $('#search').blur();
+        $('#result-backpack-content').hide();
+    });
+    
+    // iOS specific code
+    if(MBP.device == "mobile" && MBP.platform == "ios") {
+        // Avoid address bar to show when clicking on a link on iOS. Twitter/Facebook technique: replace href by a simple hash
+        // Only problem is "open in a new tab" is no more supported
+        $('a.pjax').each(function() {
+            var href = $(this).attr('href');
+            $(this).attr('href', '');
+            $(this).data('href', href);
+        });
+
+        $('a.pjax').off('click');
+
+        $(document).on('mouseup', 'a.pjax', function (e){
+            e.preventDefault();
+
+            $.pjax.click(e, {container: '#content', url:$(this).data('href')});
+        });
+    }
 
     firstLoadMobile = false;
 }

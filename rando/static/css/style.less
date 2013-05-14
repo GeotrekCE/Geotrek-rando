@@ -74,7 +74,9 @@ textarea {
 }
 
 
-
+a, input, button {
+    -ms-touch-action: none !important;
+}
 
 
 
@@ -715,6 +717,7 @@ ul.social-buttons li {
  width: 100%;
  margin: 0;
  border-bottom: none;
+ -webkit-touch-callout: none;
 }
 
 #tab-results, #tab-backpack {
@@ -1544,6 +1547,11 @@ a.accordion-toggle  {
     top: 27px;
   }
 
+  #content {
+    height: auto;
+    min-height: 100%;
+  }
+
   #search-bar {
     height: 115px;
   }
@@ -1667,6 +1675,7 @@ a.accordion-toggle  {
 
         a {
           vertical-align: middle;
+          -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         }
 
         h3 {
@@ -1682,11 +1691,37 @@ a.accordion-toggle  {
     }
   }
 
+  #side-bar .nav-tabs > li > a i {
+    margin-left: 0;
+    border: none;
+    position: static;
+  }
+
+  #side-bar .nav-tabs > li > a {
+    background-color: transparent;
+    border: none;
+    width: 45px;
+    height: 45px;
+    padding: 9px;
+  }
+
+  #side-bar .nav-tabs > li.active > a {
+    background-color: transparent;
+    border: none;
+  }
+
   #tab-backpack {
     position: absolute;
     top: 0;
     right: 0;
-    width: 40px;
+    width: 45px;
+    height: 45px;
+    overflow: hidden;
+
+    .badge,
+    .text {
+      display: none;
+    }
   }
 
   #text-search,
@@ -1696,13 +1731,13 @@ a.accordion-toggle  {
 
   #result-backpack-tabs {
     margin-top: 45px;
-    display: none;
   }
 
   #result-backpack-content {
     height: 157px;
     right: 0;
     top: 45px;
+    display: none;
     -webkit-overflow-scrolling: touch;
   }
 

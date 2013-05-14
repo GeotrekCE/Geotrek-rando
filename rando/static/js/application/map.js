@@ -212,15 +212,16 @@ function mainmapInit(map, bounds) {
         var layer = e.layer;
         var html = '<h3>{NAME}</h3>' +
                    '<div class="clearfix">' +
-                   '  <a href="#"><img src="{THUMBNAIL}"/></a>'+
+                   '  <a href="{LINK}" class="pjax"><img src="{THUMBNAIL}"/></a>'+
                    '  <div class="description">{DESCRIPTION}</div>' +
-                   '  <p class="popupdetail"><a href="#">{MORE}</a></p>' +
+                   '  <p class="popupdetail"><a href="{LINK}" class="pjax">{MORE}</a></p>' +
                    '</div>';
         html = L.Util.template(html, {
             NAME: layer.properties.name,
             DESCRIPTION: layer.properties.description_teaser,
             // This is tricky : use img url of trek in result list :)
             THUMBNAIL: $('#trek-'+ e.layer.properties.pk +'.result img').attr('src'),
+            LINK: $('#trek-'+ e.layer.properties.pk +'.result a.pjax').attr('href'),
             MORE: gettext("More info...")
         });
 
@@ -238,13 +239,27 @@ function mainmapInit(map, bounds) {
              .setContent(html)
              .openOn(map);
         popup.pk = layer.properties.pk;
-        // Make sure clic on details will open as pjax
-        $("a[href='#']", popup._container).click(function () {
+
+        // Make sure clic on details will open as pjax (cause added after initial loading?)
+        $("a.pjax", popup._container).click(function (event) {
+            $.pjax.click(event, {container: '#content'});
+            
             // Track event
             _gaq.push(['_trackEvent', 'Map', 'Popup', e.layer.properties.name]);
-            // Navigate to details
-            $('#trek-'+ e.layer.properties.pk +'.result a.pjax').click();
         });
+
+        // iOS specific code
+        if(MBP.device == "mobile" && MBP.platform == "ios") {
+            // Avoid address bar to show when clicking on a link on iOS. Twitter/Facebook technique: replace href by a simple hash
+            // Only problem is "open in a new tab" is no more supported
+
+            $("a.pjax").off('click');
+            $("a.pjax", popup._container).click(function (event) {
+                event.preventDefault();
+            });
+            
+            $("a.pjax", popup._container).data('href', $('#trek-'+ e.layer.properties.pk +'.result a.pjax').data('href'));
+        }
     });
 
     // Highlight result on mouseover
