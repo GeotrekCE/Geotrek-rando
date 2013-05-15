@@ -235,7 +235,21 @@ function mainmapInit(map, bounds) {
             }
         }
 
-        popup = L.popup({autoPan: false}).setLatLng(e.latlng)
+        var popupSettings = {};
+
+        if(mobile) {
+            popupSettings = {
+                autoPan: true,
+                closeButton: false,
+                maxWidth: 250
+            }
+        } else {
+            popupSettings = {
+                autoPan: false
+            };
+        }
+
+        popup = L.popup(popupSettings).setLatLng(e.latlng)
              .setContent(html)
              .openOn(map);
         popup.pk = layer.properties.pk;
@@ -249,7 +263,7 @@ function mainmapInit(map, bounds) {
         });
 
         // iOS specific code
-        if(MBP.device == "mobile" && MBP.platform == "ios") {
+        if(mobile && MBP.platform == "ios") {
             // Avoid address bar to show when clicking on a link on iOS. Twitter/Facebook technique: replace href by a simple hash
             // Only problem is "open in a new tab" is no more supported
 

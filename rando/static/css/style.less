@@ -1623,12 +1623,6 @@ a.accordion-toggle  {
     top: 0;
   }
 
-  .touch {
-    .leaflet-control-container {
-      display: none;
-    }
-  }
-
   header {
     width: 45px;
     height: 45px;
@@ -1638,16 +1632,9 @@ a.accordion-toggle  {
     border: none;
     .box-shadow(none);
     -webkit-touch-callout: none;
-
-    h1 {
-      display: none;
-    }
   }
 
-  #search-bar {
-    display: none;
-  }
-
+  /* Side bar search */
   #side-bar {
     top: 0;
     bottom: auto;
@@ -1655,14 +1642,6 @@ a.accordion-toggle  {
     width: 100%;
     border-right: none;
     background-color: rgba(246, 247, 241, 0.9);
-
-    .illust {
-      display: none;
-    }
-
-    #tab-results {
-      display: none;
-    }
 
     .result {
       height: 25px;
@@ -1717,11 +1696,6 @@ a.accordion-toggle  {
     width: 45px;
     height: 45px;
     overflow: hidden;
-
-    .badge,
-    .text {
-      display: none;
-    }
   }
 
   #text-search,
@@ -1739,14 +1713,6 @@ a.accordion-toggle  {
     top: 45px;
     display: none;
     -webkit-overflow-scrolling: touch;
-  }
-
-  .ascent {
-    display: none;
-  }
-
-  .search-tools {
-    display: none;
   }
 
   .theme-tools {
@@ -1775,16 +1741,24 @@ a.accordion-toggle  {
     } 
   }
 
-  #toggle-side-bar {
-    display: none;
-  }
-
   #mainmap {
     top: 0;
   }
 
+  /* Hidden elements */
   #global-share,
-  #flatpages {
+  #flatpages,
+  .search-tools,
+  #search-bar,
+  .ascent,
+  #mainmap .leaflet-popup-content-wrapper .leaflet-popup-content img,
+  #toggle-side-bar,
+  #tab-backpack .badge,
+  #tab-backpack .text,
+  #tab-results,
+  #side-bar .illust,
+  .touch .leaflet-control-container,
+  header h1 {
     display: none;
   }
 }

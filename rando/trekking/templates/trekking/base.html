@@ -160,6 +160,8 @@
             $(document).ready(function (e) {
                 init_ui();
                 page_load();
+
+                firstLoad = false;
             });
 
             $(document).on('pjax:start', function (e) {

@@ -18,6 +18,10 @@ function init_ui() {
 
     $(document).pjax('a.pjax', '#content');
 
+    $('body').on('click', 'a.utils', function (e){
+        e.preventDefault();
+    });
+
     window.trekFilter = new TrekFilter();
     $(window.trekFilter).off('filterchange').on("filterchange", function(e, visible) {
         refresh_results(visible);
@@ -27,19 +31,15 @@ function init_ui() {
     $('body').on("backpack-change", refresh_backpack);
 
     $(window).smartresize(function() {
-        // iOS mobile hide address bar for fullscreen trick
-        if(MBP.device == "mobile" && MBP.platform == "ios") {
-            var iOSAddressBarSize = 60; // Absolutely not future optimized, but only working solution atm
-            $('html').height($(window).height()+iOSAddressBarSize+'px');
-            MBP.hideUrlBar();
-        }
-
         // Check if youre on mobile or not
         if(Modernizr.mq('only all and (max-width: 480px)')) {
             mobile = true;
-            
-            if(firstLoadMobile) {
-                init_mobile();
+
+            // iOS mobile hide address bar for fullscreen trick
+            if(MBP.platform == "ios") {
+                var iOSAddressBarSize = 60; // Absolutely not future optimized, but only working solution atm
+                $('html').height($(window).height()+iOSAddressBarSize+'px');
+                MBP.hideUrlBar();
             }
         } else {
             mobile = false;
@@ -48,14 +48,22 @@ function init_ui() {
         invalidate_maps();
     });
 
-    $(window).resize();
+    if(Modernizr.mq('only all and (max-width: 480px)')) {
+        mobile = true;
+        
+        // iOS mobile hide address bar for fullscreen trick
+        if(MBP.platform == "ios") {
+            var iOSAddressBarSize = 60; // Absolutely not future optimized, but only working solution atm
+            $('html').height($(window).height()+iOSAddressBarSize+'px');
+            MBP.hideUrlBar();
+        }
+    }
+
+    // iOS mobile hide address bar
+    MBP.hideUrlBarOnLoad();
 }
 
 function page_load() {
-    $('body').on('click', 'a.utils', function (e){
-        e.preventDefault();
-    });
-
     // Reattach elements coming from PJAX
     $('.reattach').each(function () {
         var $elem = $(this),
@@ -110,11 +118,6 @@ function page_load() {
     $('#lang-switch a.utils').on('click', function () {
         $(this).siblings('ul').toggle();
     });
-
-    // iOS mobile hide address bar
-    MBP.hideUrlBarOnLoad();
-
-    firstLoad = false;
 }
 
 function view_home() {
@@ -184,6 +187,11 @@ function view_home() {
 
     // Click on side-bar
     $('#side-bar .result').on('click', showTooltip);
+
+    
+    if(mobile && firstLoad) {
+        init_mobile();
+    }
 }
 
 
@@ -399,23 +407,32 @@ function init_share() {
 }
 
 function init_mobile() {
-    $('#search').on('focus', function () {
+    $(document).on('focus', '#search', function () {
         $('#result-backpack-content').show();
         $('#tab-results a').click();
+        console.log('focus');
     });
 
-    $('#side-bar .result').on('click', 'a.pjax', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        $(this).parents('.result').click();
+    var resultTaped = false;
+    
+    $('#search').on('blur', function (e) {
+        // Prevent result list hiding on blur
+        if(resultTaped) {
+            $(this).focus();
+            resultTaped = false;
+        } else {
+            $('#result-backpack-content').hide();
+        }
     });
 
     $('#side-bar .result').off('dblclick mouseenter mouseleave');
     
+    $('#side-bar .result').on('mousedown', function (e) {
+        resultTaped = true;
+    });
+
     $('#side-bar .result').on('mouseup', function (e) {
         $('#search').blur();
-        $('#result-backpack-content').hide();
     });
     
     // iOS specific code
@@ -436,6 +453,20 @@ function init_mobile() {
             $.pjax.click(e, {container: '#content', url:$(this).data('href')});
         });
     }
+
+    $('#side-bar .result').on({
+        mouseup: function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            $('#search').blur();
+            $(this).parents('.result').click();
+        },
+        click: function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    }, 'a.pjax');
 
     firstLoadMobile = false;
 }
