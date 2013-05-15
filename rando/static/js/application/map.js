@@ -241,7 +241,8 @@ function mainmapInit(map, bounds) {
             popupSettings = {
                 autoPan: true,
                 closeButton: false,
-                maxWidth: 250
+                maxWidth: 250,
+                autoPanPadding: new L.Point(5, 50)
             }
         } else {
             popupSettings = {
@@ -262,17 +263,11 @@ function mainmapInit(map, bounds) {
             _gaq.push(['_trackEvent', 'Map', 'Popup', e.layer.properties.name]);
         });
 
-        // iOS specific code
-        if(mobile && MBP.platform == "ios") {
-            // Avoid address bar to show when clicking on a link on iOS. Twitter/Facebook technique: replace href by a simple hash
-            // Only problem is "open in a new tab" is no more supported
 
-            $("a.pjax").off('click');
-            $("a.pjax", popup._container).click(function (event) {
-                event.preventDefault();
+        if(mobile) {
+            $(popup._container).on('mouseup', function (event) {
+                $.pjax({container: '#content', url:$("a.pjax", popup._container).attr('href')});
             });
-            
-            $("a.pjax", popup._container).data('href', $('#trek-'+ e.layer.properties.pk +'.result a.pjax').data('href'));
         }
     });
 

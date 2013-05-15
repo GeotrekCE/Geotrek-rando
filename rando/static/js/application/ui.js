@@ -36,11 +36,13 @@ function init_ui() {
             mobile = true;
 
             // iOS mobile hide address bar for fullscreen trick
-            if(MBP.platform == "ios") {
-                var iOSAddressBarSize = 60; // Absolutely not future optimized, but only working solution atm
-                $('html').height($(window).height()+iOSAddressBarSize+'px');
-                MBP.hideUrlBar();
-            }
+            // if(MBP.platform == "ios") {
+            //     var iOSAddressBarSize = 60; // Absolutely not future optimized, but only working solution atm
+            //     $('html').height($(window).height()+iOSAddressBarSize+'px');
+            // }
+
+            MBP.hideUrlBar();
+            console.log('resize');
         } else {
             mobile = false;
         }
@@ -55,7 +57,6 @@ function init_ui() {
         if(MBP.platform == "ios") {
             var iOSAddressBarSize = 60; // Absolutely not future optimized, but only working solution atm
             $('html').height($(window).height()+iOSAddressBarSize+'px');
-            MBP.hideUrlBar();
         }
     }
 
@@ -189,7 +190,7 @@ function view_home() {
     $('#side-bar .result').on('click', showTooltip);
 
     
-    if(mobile && firstLoad) {
+    if(mobile) {
         init_mobile();
     }
 }
@@ -407,7 +408,7 @@ function init_share() {
 }
 
 function init_mobile() {
-    $(document).on('focus', '#search', function () {
+    $('#search').on('focus', function () {
         $('#result-backpack-content').show();
         $('#tab-results a').click();
         console.log('focus');
@@ -439,19 +440,22 @@ function init_mobile() {
     if(MBP.device == "mobile" && MBP.platform == "ios") {
         // Avoid address bar to show when clicking on a link on iOS. Twitter/Facebook technique: replace href by a simple hash
         // Only problem is "open in a new tab" is no more supported
-        $('a.pjax').each(function() {
-            var href = $(this).attr('href');
-            $(this).attr('href', '');
-            $(this).data('href', href);
-        });
+        // $('a.pjax').each(function() {
+        //     var href = $(this).attr('href');
+        //     $(this).removeAttr('href');
+        //     $(this).data('href', href);
+        //     console.log($(this).data('href'));
 
-        $('a.pjax').off('click');
+        // });
 
-        $(document).on('mouseup', 'a.pjax', function (e){
-            e.preventDefault();
-
-            $.pjax.click(e, {container: '#content', url:$(this).data('href')});
-        });
+        // $('a.pjax').off('click');
+        // $(document).off('mouseup.pjax', 'a.pjax');
+        
+        // $(document).on('mouseup.pjax', 'a.pjax', function (e) {
+        //     e.preventDefault();
+        //     console.log('ici');
+        //     $.pjax.click(e, {container: '#content', url:$(this).data('href')});
+        // });
     }
 
     $('#side-bar .result').on({

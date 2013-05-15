@@ -373,7 +373,9 @@ ul.row-footer {
   }
 }
 
-
+#mobile-header-detail {
+  display: none;
+}
 
 
 /* Top right elements */
@@ -1634,6 +1636,31 @@ a.accordion-toggle  {
     -webkit-touch-callout: none;
   }
 
+  #mobile-header-detail {
+    display: block;
+    width: 100%;
+    background: orangered;
+    // position: fixed;
+    z-index: 9999;
+
+    a {
+      color: white;
+
+      i {
+        float: left;
+        margin-top: 10px;
+        margin-left: 9px;
+      }
+    }
+
+    h1 {
+      font-size: 15px;
+      padding-left: 30px;
+      font-weight: 300;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+  }
+
   /* Side bar search */
   #side-bar {
     top: 0;
@@ -1745,20 +1772,26 @@ a.accordion-toggle  {
     top: 0;
   }
 
+  /* Details page */
+  #detail-content-top h2 {
+    white-space: normal;
+  }
+
   /* Hidden elements */
   #global-share,
   #flatpages,
   .search-tools,
   #search-bar,
   .ascent,
-  #mainmap .leaflet-popup-content-wrapper .leaflet-popup-content img,
+  #mainmap .leaflet-popup-content-wrapper .leaflet-popup-content a.pjax,
   #toggle-side-bar,
   #tab-backpack .badge,
   #tab-backpack .text,
   #tab-results,
   #side-bar .illust,
   .touch .leaflet-control-container,
-  header h1 {
+  header,
+  #fake-search-tabs {
     display: none;
   }
 }

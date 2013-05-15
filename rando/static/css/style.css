@@ -307,6 +307,9 @@ ul.row-footer a {
 #flatpages ul li a.active {
   background-color: #f89406;
 }
+#mobile-header-detail {
+  display: none;
+}
 /* Top right elements */
 #global-share {
   position: absolute;
@@ -1359,6 +1362,26 @@ a.accordion-toggle {
     box-shadow: none;
     -webkit-touch-callout: none;
   }
+  #mobile-header-detail {
+    display: block;
+    width: 100%;
+    background: orangered;
+    z-index: 9999;
+  }
+  #mobile-header-detail a {
+    color: white;
+  }
+  #mobile-header-detail a i {
+    float: left;
+    margin-top: 10px;
+    margin-left: 9px;
+  }
+  #mobile-header-detail h1 {
+    font-size: 15px;
+    padding-left: 30px;
+    font-weight: 300;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
   /* Side bar search */
   #side-bar {
     top: 0;
@@ -1451,20 +1474,25 @@ a.accordion-toggle {
   #mainmap {
     top: 0;
   }
+  /* Details page */
+  #detail-content-top h2 {
+    white-space: normal;
+  }
   /* Hidden elements */
   #global-share,
   #flatpages,
   .search-tools,
   #search-bar,
   .ascent,
-  #mainmap .leaflet-popup-content-wrapper .leaflet-popup-content img,
+  #mainmap .leaflet-popup-content-wrapper .leaflet-popup-content a.pjax,
   #toggle-side-bar,
   #tab-backpack .badge,
   #tab-backpack .text,
   #tab-results,
   #side-bar .illust,
   .touch .leaflet-control-container,
-  header h1 {
+  header,
+  #fake-search-tabs {
     display: none;
   }
 }
