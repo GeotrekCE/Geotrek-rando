@@ -77,11 +77,7 @@ msgstr "Difficulté"
 
 #: templates/trekking/detail-panel.html:62
 msgid "Ascent"
-msgstr "Dénivelé positif"
-
-#: templates/trekking/detail-panel.html:63
-msgid "Descent"
-msgstr "Dénivelé négatif"
+msgstr "Dénivelé"
 
 #: templates/trekking/detail-panel.html:64
 #: templates/trekking/home-panel.html:24
