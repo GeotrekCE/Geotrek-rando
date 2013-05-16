@@ -33,7 +33,7 @@ function init_ui() {
     $(window).smartresize(function() {
         // Check if youre on mobile or not
         if(Modernizr.mq('only all and (max-width: 480px)')) {
-            mobile = true;
+            MOBILE = true;
 
             // iOS mobile hide address bar for fullscreen trick
             // if(MBP.platform == "ios") {
@@ -44,14 +44,14 @@ function init_ui() {
             MBP.hideUrlBar();
             console.log('resize');
         } else {
-            mobile = false;
+            MOBILE = false;
         }
 
         invalidate_maps();
     });
 
     if(Modernizr.mq('only all and (max-width: 480px)')) {
-        mobile = true;
+        MOBILE = true;
         
         // iOS mobile hide address bar for fullscreen trick
         if(MBP.platform == "ios") {
@@ -190,7 +190,7 @@ function view_home() {
     $('#side-bar .result').on('click', showTooltip);
 
     
-    if(mobile) {
+    if(MOBILE) {
         init_mobile();
     }
 }

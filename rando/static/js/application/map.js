@@ -237,7 +237,7 @@ function mainmapInit(map, bounds) {
 
         var popupSettings = {};
 
-        if(mobile) {
+        if(MOBILE) {
             popupSettings = {
                 autoPan: true,
                 closeButton: false,
@@ -264,7 +264,7 @@ function mainmapInit(map, bounds) {
         });
 
 
-        if(mobile) {
+        if(MOBILE) {
             $(popup._container).on('mouseup', function (event) {
                 $.pjax({container: '#content', url:$("a.pjax", popup._container).attr('href')});
             });
