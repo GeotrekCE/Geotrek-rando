@@ -46,7 +46,7 @@
 
     <div class="span2">
       <div id="trek-identity" class="well">
-        <h4 id="departure-arrival">{{ object.properties.departure }} &rarr; {{ object.properties.arrival }}</h4>
+        <h4 id="departure-arrival">{{ object.properties.departure }}{% if object.properties.arrival %} &rarr; {{ object.properties.arrival }}{% endif %}</h4>
 
         {% if object.properties.route %}
         <p>{% trans "Route" %} : <span class="value">{{ object.properties.route.label }}</span></p>
