@@ -213,6 +213,8 @@ DESCRIPTION = {
     'fr': "Offre rando",
 }
 
+PRINT_ENABLED = True
+
 GANALYTICS_TRACKING_CODE = 'UA-XXXXXXXX-XX'
 
 

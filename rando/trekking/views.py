@@ -55,6 +55,8 @@ class TrekView(PJAXResponseMixin, DetailView):
         for poi in obj.pois.all():
             all_pictures.extend(poi.properties.pictures)
         context['all_pictures'] = all_pictures
+
+        context['PRINT_ENABLED'] = settings.PRINT_ENABLED
         return context
 
 

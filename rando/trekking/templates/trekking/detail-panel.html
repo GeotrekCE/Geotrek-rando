@@ -18,9 +18,11 @@
       <div id="toolbox" class="btn-toolbar pull-right">
         <a class="btn backpack" href="#" data-pk="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}"><i class="backpack"></i> {% trans "Favorite" %}</a>
 
+        {% if PRINT_ENABLED %}
         <a class="btn download print" title="{% trans "Print" %}" href="{% url trekking:fileserve object.properties.printable %}">
           <i class="print"></i> {% trans "Print" %}
         </a>
+        {% endif %}
         <a class="btn download gpx" title="{% trans "Download GPX" %}" href="{% url trekking:fileserve object.properties.gpx %}">
           <i class="gpx"></i> {% trans "GPX" %}
         </a>
