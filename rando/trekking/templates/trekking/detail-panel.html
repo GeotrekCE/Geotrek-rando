@@ -39,7 +39,9 @@
       <p class="teaser">{{ object.properties.description_teaser|default:"No teaser"|safe|striptags }}</p>
       <p>{{ object.properties.description|default:"No description"|safe }}</p>
 
-      {% include "trekking/carousel_fragment.html" with prefix="trek" pictures=all_pictures default="True" %}
+      <div id="trek-carousel">
+        {% include "trekking/carousel_fragment.html" with prefix="trek" pictures=all_pictures default="True" %}
+      </div>
 
       <p>{{ object.properties.ambiance|default:"No ambiance"|safe }}</p>
     </div>

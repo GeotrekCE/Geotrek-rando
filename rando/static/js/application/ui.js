@@ -289,6 +289,9 @@ function view_detail() {
         $(".accordion-toggle[data-id='"+ id +"']", this).removeClass('open');
     });
 
+    // Cycle Trek carousel automatically on start
+    $('#trek-carousel .carousel').carousel('cycle');
+
     //Load altimetric graph
     altimetricInit();
 }
