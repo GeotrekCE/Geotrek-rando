@@ -259,14 +259,14 @@ function mainmapInit(map, bounds) {
         // Make sure clic on details will open as pjax (cause added after initial loading?)
         $("a.pjax", popup._container).click(function (event) {
             $.pjax.click(event, {container: '#content'});
-            
+
             // Track event
             _gaq.push(['_trackEvent', 'Map', 'Popup', e.layer.properties.name]);
         });
 
 
         if(mobile) {
-            $(popup._container).on('mouseup', function (event) {
+            $(popup._container).on('touchend', function (event) {
                 $.pjax({container: '#content', url:$("a.pjax", popup._container).attr('href')});
             });
         }

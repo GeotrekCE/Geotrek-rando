@@ -415,17 +415,19 @@ function init_share() {
 function init_mobile() {
     $('#search').on('focus', function () {
         $('#result-backpack-content').show();
-        $('#tab-results a').click();
-        console.log('focus');
+        $('#results').show();
+        $('#backpack').removeClass('active');
+        $('#tab-backpack').removeClass('active');
     });
 
-    $('#tab-backpack a').on('click', function () {
-        console.log('backpack');
-        if($(this).parent().hasClass('active')) {
-            $('#result-backpack-content').hide();
-        } else {
-            $('#result-backpack-content').show();
-        }
+    $('#tab-backpack a').off('click');
+    $('#tab-backpack a').on('click', function (e) {
+        e.preventDefault();
+
+        $('#results').toggle();
+        $('#result-backpack-content').toggle();
+        $('#backpack').toggleClass('active');
+        $(this).parent().toggleClass('active');
     });
 
     var resultTaped = false;
@@ -442,25 +444,22 @@ function init_mobile() {
 
     $('#side-bar .result').off('dblclick mouseenter mouseleave');
 
-    $('#side-bar #results .result').on('mousedown', function (e) {
+    $('#results .result').on('mousedown', function (e) {
         resultTaped = true;
-        console.log('resulTaped');
     });
 
-    $('#side-bar .result').on('mouseup', function (e) {
+    $('#results .result').on('mouseup', function (e) {
         $('#search').blur();
     });
 
     // iOS specific code
     if(MBP.device == "mobile" && MBP.platform == "ios") {
         // Avoid address bar to show when clicking on a link on iOS. Twitter/Facebook technique: replace href by a simple hash
-        Only problem is "open in a new tab" is no more supported
+        //Only problem is "open in a new tab" is no more supported
         $('a.pjax').each(function() {
             var href = $(this).attr('href');
             $(this).removeAttr('href');
             $(this).data('href', href);
-            console.log($(this).data('href'));
-
         });
 
         $('a.pjax').off('click');
@@ -468,7 +467,6 @@ function init_mobile() {
 
         $(document).on('mouseup.pjax', 'a.pjax', function (e) {
             e.preventDefault();
-            console.log('ici');
             $.pjax.click(e, {container: '#content', url:$(this).data('href')});
         });
     }
