@@ -37,13 +37,18 @@
   <div id="detail-container-content" class="row-fluid">
     <div class="span3">
       <p class="teaser">{{ object.properties.description_teaser|default:"No teaser"|safe|striptags }}</p>
-      <p>{{ object.properties.description|default:"No description"|safe }}</p>
+      <p>{{ object.properties.ambiance|default:"No ambiance"|safe }}</p>
 
       <div id="trek-carousel">
         {% include "trekking/carousel_fragment.html" with prefix="trek" pictures=all_pictures default="True" %}
       </div>
 
-      <p>{{ object.properties.ambiance|default:"No ambiance"|safe }}</p>
+      <p>{{ object.properties.description|default:"No description"|safe }}</p>
+
+      <h3>{% trans "Disabled-friendly infrastructures" %}</h3>
+      {% if object.properties.disabled_infrastructure %}<p>{{ object.properties.disabled_infrastructure|safe }}</p>{% endif %}
+
+      {% if object.properties.public_transport %}<p>{{ object.properties.public_transport|safe }}</p>{% endif %}
     </div>
 
     <div class="span2">
@@ -83,8 +88,6 @@
           <h3>{% trans "Advice" %}</h3>
         {% endif %}
         {% if object.properties.advice %}<p>{{ object.properties.advice|safe }}</p>{% endif %}
-        {% if object.properties.public_transport %}<p>{{ object.properties.public_transport|safe }}</p>{% endif %}
-        {% if object.properties.disabled_infrastructure %}<p>{{ object.properties.disabled_infrastructure|safe }}</p>{% endif %}
       </div>
     </div>
 
