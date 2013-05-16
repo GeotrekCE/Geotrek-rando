@@ -951,6 +951,9 @@ p.tab-content-empty {
 #mainmap .leaflet-popup-tip {
   background: #f6f7f0;
 }
+.leaflet-popup-content {
+  margin: 14px 16px;
+}
 #mainmap .popup-footer {
   background: url(../img/popup-footer.png) no-repeat center;
   width: 100%;
@@ -1298,8 +1301,8 @@ a.accordion-toggle {
     top: 27px;
   }
   #content {
-    height: auto;
-    min-height: 100%;
+    height: 100%;
+    overflow: hidden;
   }
   #search-bar {
     height: 115px;
@@ -1371,26 +1374,6 @@ a.accordion-toggle {
     -moz-box-shadow: none;
     box-shadow: none;
     -webkit-touch-callout: none;
-  }
-  #mobile-header-detail {
-    display: block;
-    width: 100%;
-    background: orangered;
-    z-index: 9999;
-  }
-  #mobile-header-detail a {
-    color: white;
-  }
-  #mobile-header-detail a i {
-    float: left;
-    margin-top: 10px;
-    margin-left: 9px;
-  }
-  #mobile-header-detail h1 {
-    font-size: 15px;
-    padding-left: 30px;
-    font-weight: 300;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
   /* Side bar search */
   #side-bar {
@@ -1485,8 +1468,59 @@ a.accordion-toggle {
     top: 0;
   }
   /* Details page */
+  #mobile-header-detail {
+    display: block;
+    width: 100%;
+    background: orangered;
+    z-index: 9999;
+  }
+  #mobile-header-detail a {
+    color: white;
+  }
+  #mobile-header-detail a i {
+    float: left;
+    margin-top: 15px;
+    margin-left: 9px;
+  }
+  #mobile-header-detail h1 {
+    font-size: 15px;
+    padding-left: 30px;
+    font-weight: 300;
+    line-height: 45px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  .detail-content {
+    position: absolute;
+    overflow: auto;
+    top: 45px;
+    bottom: 0;
+    -webkit-overflow-scrolling: touch;
+  }
   #detail-content-top h2 {
     white-space: normal;
+    font-size: 1.5em;
+    padding-left: 1%;
+    padding-right: 1%;
+    margin-bottom: 10px;
+  }
+  #detail-content-top h2:first-letter {
+    font-size: 1em;
+  }
+  #toolbox a.backpack,
+  #toolbox a.download {
+    padding-right: 5px;
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+  #toolbox .print {
+    display: none;
+  }
+  #toolbox {
+    margin-right: 0;
+  }
+  #toolbox.pull-right {
+    text-align: left;
+    float: none;
   }
   /* Hidden elements */
   #global-share,

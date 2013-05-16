@@ -36,23 +36,24 @@ function init_ui() {
             mobile = true;
 
             // iOS mobile hide address bar for fullscreen trick
-            // if(MBP.platform == "ios") {
-            //     var iOSAddressBarSize = 60; // Absolutely not future optimized, but only working solution atm
-            //     $('html').height($(window).height()+iOSAddressBarSize+'px');
-            // }
+            if(MBP.platform == "ios") {
+                var iOSAddressBarSize = 60; // Absolutely not future optimized, but only working solution atm
+                $('html').height($(window).height()+iOSAddressBarSize+'px');
 
-            MBP.hideUrlBar();
-            console.log('resize');
+                MBP.hideUrlBar();
+            }
+
         } else {
             mobile = false;
         }
 
         invalidate_maps();
+        console.log('resize');
     });
 
     if(Modernizr.mq('only all and (max-width: 480px)')) {
         mobile = true;
-        
+
         // iOS mobile hide address bar for fullscreen trick
         if(MBP.platform == "ios") {
             var iOSAddressBarSize = 60; // Absolutely not future optimized, but only working solution atm
@@ -61,7 +62,7 @@ function init_ui() {
     }
 
     // iOS mobile hide address bar
-    MBP.hideUrlBarOnLoad();
+    if(MBP.platform == "ios") { MBP.hideUrlBarOnLoad(); }
 }
 
 function page_load() {
@@ -189,7 +190,7 @@ function view_home() {
     // Click on side-bar
     $('#side-bar .result').on('click', showTooltip);
 
-    
+
     if(mobile) {
         init_mobile();
     }
@@ -199,7 +200,7 @@ function view_home() {
 
 function showTooltip (e) {
     e.preventDefault();
-    
+
     // Do not fire click if clicked on search tools
     if ($(e.target).parents('.search-tools').length > 0)
         return;
@@ -291,6 +292,10 @@ function view_detail() {
 
     //Load altimetric graph
     altimetricInit();
+
+    if (mobile) {
+        view_detail_mobile();
+    }
 }
 
 function altimetricInit() {
@@ -414,8 +419,17 @@ function init_mobile() {
         console.log('focus');
     });
 
+    $('#tab-backpack a').on('click', function () {
+        console.log('backpack');
+        if($(this).parent().hasClass('active')) {
+            $('#result-backpack-content').hide();
+        } else {
+            $('#result-backpack-content').show();
+        }
+    });
+
     var resultTaped = false;
-    
+
     $('#search').on('blur', function (e) {
         // Prevent result list hiding on blur
         if(resultTaped) {
@@ -474,4 +488,11 @@ function init_mobile() {
     }, 'a.pjax');
 
     firstLoadMobile = false;
+}
+
+function view_detail_mobile () {
+    $('#mobile-header-detail').on('click', 'a', function(e){
+        e.preventDefault();
+        window.history.back();
+    });
 }
