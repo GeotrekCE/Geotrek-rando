@@ -1369,15 +1369,26 @@ p.teaser {
  color: black;
 }
 
-.alert-info a {
- font-weight: bold;
- color: #3a87ad;
- text-decoration: underline;
+#park-center-warning {
+  
+  background-image: url(../img/pn-logo.png);
+  background-repeat: no-repeat;
+  background-position-x: 5px;
+  background-position-y: 50%;
+  padding-left: 45px;
+
+  &.alert-info a {
+   font-weight: bold;
+   color: #3a87ad;
+   text-decoration: underline;
+  }
+
+  &.alert-info p {
+   margin: 0;
+  }
 }
 
-.alert-info p {
- margin: 0;
-}
+
 
 #altitudegraph {
   .axislabel {
@@ -1632,7 +1643,7 @@ a.accordion-toggle  {
     width: 45px;
     height: 45px;
     padding: 0;
-    background: url(../img/ecrins-logo.png) no-repeat center center;
+    background: url(../img/pn-logo.png) no-repeat center center;
     .background-size(auto);
     border: none;
     .box-shadow(none);

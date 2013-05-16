@@ -687,16 +687,19 @@ p.tab-content-empty {
   float: left;
 }
 #side-bar .result .info-result {
-  margin-top: 5px;
   margin-left: 5px;
   min-height: 115px;
+  max-width: 245px;
   display: inline-block;
 }
 #side-bar .result .info-result h3 {
   font-size: 14px;
   color: #625b50;
-  line-height: 13px;
+  line-height: 18px;
   margin-bottom: 4px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 #side-bar .result .info-result p {
   margin: 0;
@@ -1149,12 +1152,19 @@ p.teaser {
 #toolbox a {
   color: black;
 }
-.alert-info a {
+#park-center-warning {
+  background-image: url(../img/pn-logo.png);
+  background-repeat: no-repeat;
+  background-position-x: 5px;
+  background-position-y: 50%;
+  padding-left: 45px;
+}
+#park-center-warning.alert-info a {
   font-weight: bold;
   color: #3a87ad;
   text-decoration: underline;
 }
-.alert-info p {
+#park-center-warning.alert-info p {
   margin: 0;
 }
 #altitudegraph .axislabel {
@@ -1351,7 +1361,7 @@ a.accordion-toggle {
     width: 45px;
     height: 45px;
     padding: 0;
-    background: url(../img/ecrins-logo.png) no-repeat center center;
+    background: url(../img/pn-logo.png) no-repeat center center;
     -webkit-background-size: auto;
     -moz-background-size: auto;
     -o-background-size: auto;

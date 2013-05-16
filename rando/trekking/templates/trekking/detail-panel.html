@@ -90,7 +90,7 @@
 
     <div class="span{% if object.pois.all %}4{% else %}7{% endif %}">
       {% if object.properties.is_park_centered %}
-        <div class="alert alert-info">
+        <div id="park-center-warning" class="alert alert-info">
             <p><strong>{% trans "This trek is within park center" %}</strong>, <a class="pjax" href="{% url flatpages:redirect "1" %}">{% trans "please read access rules." %}</a></p>
         </div>
       {% endif %}
