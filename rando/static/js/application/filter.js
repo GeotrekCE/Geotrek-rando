@@ -54,7 +54,7 @@ function TrekFilter()
             }
         }
         $(self).trigger("filterchange", [self.matching]);
-    }
+    };
 
     this.load = function () {
         var retrievedObject = localStorage.getItem('filterState');
@@ -68,9 +68,9 @@ function TrekFilter()
         }
 
         $('#search').val(self.state.search || '');
-        for (category in self.state) {
-            for (filter in self.state[category]) {
-                if (filter == 'undefined' || filter == '')
+        for (var category in self.state) {
+            for (var filter in self.state[category]) {
+                if (filter == 'undefined' || filter === '')
                     continue;
                 var value = self.state[category][filter],
                     elem = $("[data-filter='" + category + "'][data-id='" + filter + "']");
