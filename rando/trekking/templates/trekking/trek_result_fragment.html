@@ -18,17 +18,17 @@
       {% endfor %}
     </div>
     <div class="search-tools">
-        <a class="btn backpack " data-pk="{{ trek.properties.pk }}" data-toggle="tooltip" title="{% trans "Remove from backpack" %}">
+        <a class="btn backpack " data-pk="{{ trek.properties.pk }}" data-toggle="tooltip" title="{% trans "Remove from favorites" %}">
             {% if backpack = "True" %}
-                <span class="hidden">{% trans "Remove from backpack" %}</span>
+                <span class="hidden">{% trans "Remove from favorites" %}</span>
                 <i class="backpack remove"></i>
             {% else %}
-                <span class="hidden">{% trans "Add to backpack" %}</span>
+                <span class="hidden">{% trans "Add to favorites" %}</span>
                 <i class="backpack add"></i>
             {% endif %}
         </a>
         <a class="btn search" data-pk="{{ trek.properties.pk }}" data-toggle="tooltip" title="{% trans "Zoom to trek" %}">
-          <span class="hidden">{% trans "Remove from backpack" %}</span>
+          <span class="hidden">{% trans "Zoom to trek" %}</span>
           <i class="search"></i>
         </a>
     </div>

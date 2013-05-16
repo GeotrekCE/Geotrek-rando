@@ -124,7 +124,7 @@
       </li>
       <li id="tab-backpack">
         <a href="#backpack">
-            <i class="icon"></i><span class="badge">0</span> <span class="text">{% trans "Backpack" %}</span></a>
+            <i class="icon"></i><span class="badge">0</span> <span class="text">{% trans "Favorites" %}</span></a>
       </li>
     </ul>
 
@@ -138,7 +138,7 @@
       </div>
 
       <div class="tab-pane" id="backpack">
-        <h2 class="hidden">{% trans "Backpack" %}</h2>
+        <h2 class="hidden">{% trans "Favorites" %}</h2>
         <p id="backpackempty" style="display:none" class="tab-content-empty">{% trans "Empty" %}</p>
         {% for trek in treks %}
             {% include "trekking/trek_result_fragment.html" with show="False" backpack="True" %}
