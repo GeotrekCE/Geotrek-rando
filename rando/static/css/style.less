@@ -1391,13 +1391,21 @@ p.teaser {
 
 
 #altitudegraph {
-  .axislabel {
-    color: blue;
-    font-size: 10px;
-  }
+  color: @orange;
+  font-size: 10px;
 
   p {
     margin: 0px;
+  }
+
+  .axislabel {
+    display:inline-block;
+  }
+
+  #altitude-details {
+    margin-left: 20px;
+    display:inline-block;
+    font-weight: bold;
   }
 
   #mouseoverprofil {

@@ -102,12 +102,12 @@
       <div id="altitudegraph">
         <h4>{% trans "Altitude profile" %}</h4>
         <p class="axislabel">{% trans "Altitude (m)" %}</p>
+         <p id="altitude-details">
+          <span class="min">{% trans "Min" %} : <span class="value">{{ object.properties.min_elevation }}m</span></span> - 
+          <span class="max">{% trans "Max" %} : <span class="value">{{ object.properties.max_elevation }}m</span></span>
+        </p>
         <span id="profilealtitude"></span> <span class="axislabel">{% trans "Distance (m)" %}</span>
         <p id="mouseoverprofil" class="axislabel" >&nbsp;</p>
-        <p id="altitude-details">
-          <span class="min">{% trans "Min elevation" %} : {{ object.properties.min_elevation }}m</span> - 
-          <span class="max">{% trans "Max elevation" %} : {{ object.properties.max_elevation }}m</span>
-        </p>
       </div>
 
       <div class="row-fluid meta">

@@ -202,6 +202,24 @@ The map elements colors can be set from the ``footer.html`` page, using a ``<scr
 ``style`` is the base color; ``hoverstyle`` is for mouse over; ``outlinestyle`` is for outline effect. See `Leaflet documentation on paths <http://leafletjs.com>`_ for more details.
 
 
+Altimetric profile colors
+=========================
+
+In the ``footer.html`` block :
+
+::
+
+    <script type="text/javascript">
+        var ALTIMETRIC_PROFILE_OPTIONS = {
+            fillColor: '#FFD1A1',
+            lineColor: '#F77E00',
+            lineWidth: 3,
+        };
+    </script>
+
+See `Jquery sparkline <http://omnipotent.net/jquery.sparkline>`_ options.
+
+
 Default trek thumbnail
 ======================
 

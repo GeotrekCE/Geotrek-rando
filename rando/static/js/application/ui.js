@@ -1,3 +1,10 @@
+var ALTIMETRIC_PROFILE_OPTIONS = L.Util.extend({
+    fillColor: '#FFD1A1',
+    lineColor: '#F77E00',
+    lineWidth: 3,
+}, ALTIMETRIC_PROFILE_OPTIONS || {});
+
+
 Modernizr.addTest('fullscreen', function(){
      var ancelFullScreen = 'ancelFullScreen'; //make string minifiable
 
@@ -189,7 +196,6 @@ function view_home() {
     // Click on side-bar
     $('#side-bar .result').on('click', showTooltip);
 
-    
     if(MOBILE) {
         init_mobile();
     }
@@ -199,7 +205,7 @@ function view_home() {
 
 function showTooltip (e) {
     e.preventDefault();
-    
+
     // Do not fire click if clicked on search tools
     if ($(e.target).parents('.search-tools').length > 0)
         return;
@@ -301,12 +307,12 @@ function altimetricInit() {
      * Load altimetric profile from JSON
      */
     $.getJSON(altimetric_url, function(data) {
-        $('#profilealtitude').sparkline(data.profile, {
+        $('#profilealtitude').sparkline(data.profile, L.Util.extend({
             tooltipSuffix: ' m',
             numberDigitGroupSep: '',
             width: '100%',
             height: 100
-        });
+        }, ALTIMETRIC_PROFILE_OPTIONS));
         $('#profilealtitude').bind('sparklineRegionChange', function(ev) {
             var sparkline = ev.sparklines[0],
                 region = sparkline.getCurrentRegionFields();

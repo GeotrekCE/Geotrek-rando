@@ -1167,12 +1167,20 @@ p.teaser {
 #park-center-warning.alert-info p {
   margin: 0;
 }
-#altitudegraph .axislabel {
-  color: blue;
+#altitudegraph {
+  color: #f89406;
   font-size: 10px;
 }
 #altitudegraph p {
   margin: 0px;
+}
+#altitudegraph .axislabel {
+  display: inline-block;
+}
+#altitudegraph #altitude-details {
+  margin-left: 20px;
+  display: inline-block;
+  font-weight: bold;
 }
 #altitudegraph #mouseoverprofil {
   display: inline-block;
