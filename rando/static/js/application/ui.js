@@ -446,28 +446,6 @@ function init_mobile() {
     $('#side-bar .result').on('mouseup', function (e) {
         $('#search').blur();
     });
-    
-    // iOS specific code
-    if(MBP.device == "mobile" && MBP.platform == "ios") {
-        // Avoid address bar to show when clicking on a link on iOS. Twitter/Facebook technique: replace href by a simple hash
-        // Only problem is "open in a new tab" is no more supported
-        // $('a.pjax').each(function() {
-        //     var href = $(this).attr('href');
-        //     $(this).removeAttr('href');
-        //     $(this).data('href', href);
-        //     console.log($(this).data('href'));
-
-        // });
-
-        // $('a.pjax').off('click');
-        // $(document).off('mouseup.pjax', 'a.pjax');
-        
-        // $(document).on('mouseup.pjax', 'a.pjax', function (e) {
-        //     e.preventDefault();
-        //     console.log('ici');
-        //     $.pjax.click(e, {container: '#content', url:$(this).data('href')});
-        // });
-    }
 
     $('#side-bar .result').on({
         mouseup: function (e) {
