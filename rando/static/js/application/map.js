@@ -215,7 +215,8 @@ function mainmapInit(map, bounds) {
                    '  <a href="{LINK}" class="pjax"><img src="{THUMBNAIL}"/></a>'+
                    '  <div class="description">{DESCRIPTION}</div>' +
                    '  <p class="popupdetail"><a href="{LINK}" class="pjax">{MORE}</a></p>' +
-                   '</div>';
+                   '</div>' +
+                   '<i class="icon-chevron-right icon"></i>';
         html = L.Util.template(html, {
             NAME: layer.properties.name,
             DESCRIPTION: layer.properties.description_teaser,

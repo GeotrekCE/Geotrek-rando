@@ -187,7 +187,6 @@ i.icon {
   height: 14px;
   line-height: 14px;
   vertical-align: text-top;
-  background-position: 14px 14px;
   background-repeat: no-repeat;
 }
 
@@ -1766,6 +1765,24 @@ a.accordion-toggle  {
     top: 0;
   }
 
+  /* Leaflet popup */
+  .leaflet-popup-content {
+    > div {
+      margin-right: 20px;
+    }
+
+    h3 {
+      text-align: left;
+    }
+
+    i {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      margin-top: -16px;
+    }
+  }
+
   /* Details page */
   #mobile-header-detail {
     display: block;
@@ -1831,6 +1848,7 @@ a.accordion-toggle  {
     text-align: left;
     float: none;
   }
+
 
   /* Hidden elements */
   #global-share,

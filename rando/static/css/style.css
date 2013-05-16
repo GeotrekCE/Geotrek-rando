@@ -123,7 +123,6 @@ i.icon {
   height: 14px;
   line-height: 14px;
   vertical-align: text-top;
-  background-position: 14px 14px;
   background-repeat: no-repeat;
 }
 .container-fluid {
@@ -1466,6 +1465,19 @@ a.accordion-toggle {
   }
   #mainmap {
     top: 0;
+  }
+  /* Leaflet popup */
+  .leaflet-popup-content > div {
+    margin-right: 20px;
+  }
+  .leaflet-popup-content h3 {
+    text-align: left;
+  }
+  .leaflet-popup-content i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -16px;
   }
   /* Details page */
   #mobile-header-detail {
