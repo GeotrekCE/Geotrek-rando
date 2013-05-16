@@ -45,10 +45,20 @@
 
       <p>{{ object.properties.description|default:"No description"|safe }}</p>
 
-      <h3>{% trans "Disabled-friendly infrastructures" %}</h3>
-      {% if object.properties.disabled_infrastructure %}<p>{{ object.properties.disabled_infrastructure|safe }}</p>{% endif %}
+      {% if object.properties.disabled_infrastructure %}
+      <div id="trek-disabled">
+        <h3> {% trans "Disabled-friendly infrastructures" %}</h3>
+        <p>{{ object.properties.disabled_infrastructure|safe }}</p>
+      </div>
+      {% endif %}
 
-      {% if object.properties.public_transport %}<p>{{ object.properties.public_transport|safe }}</p>{% endif %}
+      {% if object.properties.access %}
+      <div id="trek-access" class="alert alert-info">
+        <h3>{% trans "Access" %}</h3>
+        <p>{{ object.properties.access|safe }}</p>
+      </div>
+      {% endif %}
+
     </div>
 
     <div class="span2">
@@ -82,13 +92,21 @@
         <li>{{ network.name }}</li>
         {% if forloop.last %}</ul></div>{% endif %}
       {% endfor %}
-      
-      <div id="trek-advice">
-        {% if object.properties.advice or object.properties.public_transport or object.properties.disabled_infrastructure %}
+
+      {% if object.properties.public_transport %}
+        <div id="trek-transport">
+          <h3>{% trans "Transport" %}</h3>
+          <p>{{ object.properties.public_transport|safe }}</p>
+        </div>
+      {% endif %}
+
+      {% if object.properties.advice %}
+        <div id="trek-advice" class="alert alert-error">
           <h3>{% trans "Advice" %}</h3>
-        {% endif %}
-        {% if object.properties.advice %}<p>{{ object.properties.advice|safe }}</p>{% endif %}
+          <p>{{ object.properties.advice|safe }}</p>
       </div>
+      {% endif %}
+
     </div>
 
     <div class="span{% if object.pois.all %}4{% else %}7{% endif %}">
