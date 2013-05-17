@@ -228,6 +228,7 @@
     window.trek = {{ trek.geojson|safe }};
     window.pois = {{ poisjson|safe }};
     window.altimetric_url = "{% url trekking:fileserve object.properties.altimetric_profile %}";
+    window.view3d_url = "{% url trekking:view3d "empty" %}";
 </script>
 
 {% leaflet_map 'detailmap' fitextent=False creatediv=False %}
