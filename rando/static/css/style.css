@@ -689,7 +689,7 @@ p.tab-content-empty {
 #side-bar .result .info-result {
   margin-left: 5px;
   min-height: 115px;
-  max-width: 245px;
+  max-width: 235px;
   display: inline-block;
 }
 #side-bar .result .info-result h3 {
@@ -1267,6 +1267,7 @@ a.carousel-control.left {
   color: white;
   opacity: 1.0;
   font-size: 30px;
+  margin-bottom: 5px;
 }
 #popup-view3d .modal-body {
   max-height: none;
