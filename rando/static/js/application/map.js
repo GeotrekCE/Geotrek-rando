@@ -266,7 +266,7 @@ function mainmapInit(map, bounds) {
 
 
         if(mobile) {
-            $(popup._container).on('touchend', function (event) {
+            $(popup._container).on('mouseup', function (event) {
                 $.pjax({container: '#content', url:$("a.pjax", popup._container).attr('href')});
             });
         }
