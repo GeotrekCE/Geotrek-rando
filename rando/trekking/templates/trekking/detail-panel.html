@@ -7,8 +7,8 @@
   <title>{{ object.title }}</title>
 {% endif %}
 
-<div id="mobile-header-detail"> 
-  <a href="{% url trekking:home %}#results"><i class="icon-chevron-left icon-white"></i><h1>{{ object.properties.name }}</h1></a>
+<div id="mobile-header-detail">
+  <a class="pjax" href="{% url trekking:home %}"><i class="icon-chevron-left icon-white"></i><h1>{{ object.properties.name }}</h1></a>
 </div>
 
 <div class="detail-content">

@@ -96,6 +96,14 @@ a, input, button {
           transition: @transition;
 }
 
+.translate3d(@x, @y, @z) {
+  -webkit-transform: translate3d(@x, @y, @z);
+     -moz-transform: translate3d(@x, @y, @z);
+      -ms-transform: translate3d(@x, @y, @z);
+       -o-transform: translate3d(@x, @y, @z);
+          transform: translate3d(@x, @y, @z);
+}
+
 // Box sizing
 .box-sizing(@boxmodel) {
   -webkit-box-sizing: @boxmodel;
@@ -254,6 +262,10 @@ header {
     left: 140px;
     top: 23px;
   }
+}
+
+#toggle-header-mobile {
+  display: none;
 }
 
 #container-content {
@@ -1643,16 +1655,92 @@ a.accordion-toggle  {
     top: 0;
   }
 
+  /* Miscs pages */
+
   header {
-    width: 45px;
-    height: 45px;
+    width: 80%;
     padding: 0;
-    background: url(../img/pn-logo.png) no-repeat center center;
+    position: absolute;
+    top: 47px;
+    bottom: 0;
+    height: auto;
+    background: none;
     .background-size(auto);
+    background-color: rgba(255, 255, 255, 0.8);
     border: none;
     .box-shadow(none);
     -webkit-touch-callout: none;
+    .box-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+    .transition(all 500ms);
+    .translate3d(-105%, 0, 0);
+
+    &.open {
+      .translate3d(0, 0, 0);
+    }
+
+    h1 {
+      display: none;
+    }
   }
+
+  .no-csstransforms3d header {
+    display: none;
+
+    &.open {
+      display: block;
+    }
+  }
+
+  #flatpages {
+    position: static;
+    display: none;
+
+    ul {
+      margin: 0;
+
+      li {
+        display: block;
+        border-bottom: 1px solid #CCC;
+
+        a {
+          color: #333;
+          background: none;
+          .box-shadow(none);
+          border: none;
+          font-weight: normal;
+          text-shadow: none;
+          text-align: left;
+          height: 30px;
+          padding-top: 10px;
+
+          &:hover {
+            background-color: transparent;
+          }
+
+          &:active {
+            background-color: white; 
+          }
+        }
+      }
+    }
+  }
+
+  #toggle-header-mobile {
+    display: block;
+    width: 45px;
+    height: 45px;
+    float: left;
+    background:url(../img/pn-logo.png) no-repeat 11px center;
+    .background-size(63% auto);
+    -webkit-touch-callout: none;
+
+    i {
+      margin-top: 15px;
+      margin-left: -4px;
+      opacity: 0.8;
+    }
+  }
+
 
   /* Side bar search */
   #side-bar {
@@ -1661,7 +1749,9 @@ a.accordion-toggle  {
     height: auto;
     width: 100%;
     border-right: none;
-    background-color: rgba(246, 247, 241, 0.9);
+    background-color: rgba(255, 255, 255, 0.8);
+    border-bottom: 2px solid #CCC;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
 
     .result {
       height: 25px;
@@ -1721,10 +1811,6 @@ a.accordion-toggle  {
   #text-search,
   #result-backpack-tabs {
    width: 100%;
-  }
-
-  #result-backpack-tabs {
-    margin-top: 45px;
   }
 
   #result-backpack-content {
@@ -1790,9 +1876,11 @@ a.accordion-toggle  {
     background: orangered;
     // position: fixed;
     z-index: 9999;
+    border-bottom: 2px solid #992c04;
 
     a {
       color: white;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
       i {
         float: left;
@@ -1808,12 +1896,16 @@ a.accordion-toggle  {
       line-height: 45px;
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
+
+    &:active {
+      opacity: 0.8;
+    }
   }
 
   .detail-content {
     position: absolute;
     overflow: auto;
-    top: 45px;
+    top: 47px;
     bottom: 0;
     -webkit-overflow-scrolling: touch;
   }
@@ -1849,10 +1941,17 @@ a.accordion-toggle  {
     float: none;
   }
 
+  .no-touch .leaflet-top {
+    top: 44px;
+  }
+
+  .no-touch .leaflet-bottom {
+    bottom: 40px;
+  }
+
 
   /* Hidden elements */
   #global-share,
-  #flatpages,
   .search-tools,
   #search-bar,
   .ascent,
@@ -1863,7 +1962,6 @@ a.accordion-toggle  {
   #tab-results,
   #side-bar .illust,
   .touch .leaflet-control-container,
-  header,
   #fake-search-tabs {
     display: none;
   }

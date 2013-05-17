@@ -1,6 +1,5 @@
 {% load i18n static leaflet_tags trekking %}
 
-{% include "trekking/navigation_fragment.html" with title="HOME" %}
 {% include "trekking/share_fragment.html" with title=TITLE %}
 
 {% if pjax %}
@@ -105,6 +104,7 @@
 
 <div class="search-tabs side-bar" id="side-bar">
 
+  <div id="toggle-header-mobile"><i class="icon-list"></i></div>
   <div id="toggle-side-bar"></div>
 
   <div id="text-search" class="search1">
@@ -149,6 +149,8 @@
 
 </div>
 <!-- sidebar -->
+
+{% include "trekking/navigation_fragment.html" with title="HOME" %}
 
 {% leaflet_map 'mainmap' fitextent=False creatediv=False %}
 

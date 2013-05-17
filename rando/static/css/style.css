@@ -189,6 +189,9 @@ header h1 {
   left: 140px;
   top: 23px;
 }
+#toggle-header-mobile {
+  display: none;
+}
 #container-content {
   position: absolute;
   z-index: 0;
@@ -1359,20 +1362,101 @@ a.accordion-toggle {
   #container-content {
     top: 0;
   }
+  /* Miscs pages */
   header {
-    width: 45px;
-    height: 45px;
+    width: 80%;
     padding: 0;
-    background: url(../img/pn-logo.png) no-repeat center center;
+    position: absolute;
+    top: 47px;
+    bottom: 0;
+    height: auto;
+    background: none;
     -webkit-background-size: auto;
     -moz-background-size: auto;
     -o-background-size: auto;
     background-size: auto;
+    background-color: rgba(255, 255, 255, 0.8);
     border: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
     -webkit-touch-callout: none;
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    -webkit-transition: all 500ms;
+    -moz-transition: all 500ms;
+    -ms-transition: all 500ms;
+    -o-transition: all 500ms;
+    transition: all 500ms;
+    -webkit-transform: translate3d(-105%, 0, 0);
+    -moz-transform: translate3d(-105%, 0, 0);
+    -ms-transform: translate3d(-105%, 0, 0);
+    -o-transform: translate3d(-105%, 0, 0);
+    transform: translate3d(-105%, 0, 0);
+  }
+  header.open {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  header h1 {
+    display: none;
+  }
+  .no-csstransforms3d header {
+    display: none;
+  }
+  .no-csstransforms3d header.open {
+    display: block;
+  }
+  #flatpages {
+    position: static;
+    display: none;
+  }
+  #flatpages ul {
+    margin: 0;
+  }
+  #flatpages ul li {
+    display: block;
+    border-bottom: 1px solid #CCC;
+  }
+  #flatpages ul li a {
+    color: #333;
+    background: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border: none;
+    font-weight: normal;
+    text-shadow: none;
+    text-align: left;
+    height: 30px;
+    padding-top: 10px;
+  }
+  #flatpages ul li a:hover {
+    background-color: transparent;
+  }
+  #flatpages ul li a:active {
+    background-color: white;
+  }
+  #toggle-header-mobile {
+    display: block;
+    width: 45px;
+    height: 45px;
+    float: left;
+    background: url(../img/pn-logo.png) no-repeat 11px center;
+    -webkit-background-size: 63% auto;
+    -moz-background-size: 63% auto;
+    -o-background-size: 63% auto;
+    background-size: 63% auto;
+    -webkit-touch-callout: none;
+  }
+  #toggle-header-mobile i {
+    margin-top: 15px;
+    margin-left: -4px;
+    opacity: 0.8;
   }
   /* Side bar search */
   #side-bar {
@@ -1381,7 +1465,9 @@ a.accordion-toggle {
     height: auto;
     width: 100%;
     border-right: none;
-    background-color: rgba(246, 247, 241, 0.9);
+    background-color: rgba(255, 255, 255, 0.8);
+    border-bottom: 2px solid #CCC;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
   }
   #side-bar .result {
     height: 25px;
@@ -1431,9 +1517,6 @@ a.accordion-toggle {
   #text-search,
   #result-backpack-tabs {
     width: 100%;
-  }
-  #result-backpack-tabs {
-    margin-top: 45px;
   }
   #result-backpack-content {
     height: 157px;
@@ -1485,9 +1568,11 @@ a.accordion-toggle {
     width: 100%;
     background: orangered;
     z-index: 9999;
+    border-bottom: 2px solid #992c04;
   }
   #mobile-header-detail a {
     color: white;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
   #mobile-header-detail a i {
     float: left;
@@ -1501,10 +1586,13 @@ a.accordion-toggle {
     line-height: 45px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
+  #mobile-header-detail:active {
+    opacity: 0.8;
+  }
   .detail-content {
     position: absolute;
     overflow: auto;
-    top: 45px;
+    top: 47px;
     bottom: 0;
     -webkit-overflow-scrolling: touch;
   }
@@ -1534,9 +1622,14 @@ a.accordion-toggle {
     text-align: left;
     float: none;
   }
+  .no-touch .leaflet-top {
+    top: 44px;
+  }
+  .no-touch .leaflet-bottom {
+    bottom: 40px;
+  }
   /* Hidden elements */
   #global-share,
-  #flatpages,
   .search-tools,
   #search-bar,
   .ascent,
@@ -1547,7 +1640,6 @@ a.accordion-toggle {
   #tab-results,
   #side-bar .illust,
   .touch .leaflet-control-container,
-  header,
   #fake-search-tabs {
     display: none;
   }

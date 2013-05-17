@@ -413,6 +413,31 @@ function init_share() {
 }
 
 function init_mobile() {
+    $('#flatpages').show();
+
+    $('#toggle-header-mobile').on('click', function (e) {
+        e.stopPropagation();
+
+        // $('header').toggleClass('open');
+        // $(this).toggleClass('active');
+
+        if($('header').hasClass('open')) {
+            $('header').removeClass('open');
+            $(this).removeClass('active');
+            $(document).off('click.menu');
+        } else {
+            $('header').addClass('open');
+            $(this).addClass('active');
+
+            $(document).one('click.menu', function (e) {
+                if ($('header').has(e.target).length === 0){
+                    $('header').removeClass('open');
+                    $('#toggle-header-mobile').removeClass('active');
+                }
+            });
+        }
+    });
+
     $('#search').on('focus', function () {
         $('#result-backpack-content').show();
         $('#results').show();
@@ -452,25 +477,6 @@ function init_mobile() {
         $('#search').blur();
     });
 
-    // iOS specific code
-    if(MBP.device == "mobile" && MBP.platform == "ios") {
-        // Avoid address bar to show when clicking on a link on iOS. Twitter/Facebook technique: replace href by a simple hash
-        //Only problem is "open in a new tab" is no more supported
-        $('a.pjax').each(function() {
-            var href = $(this).attr('href');
-            $(this).removeAttr('href');
-            $(this).data('href', href);
-        });
-
-        $('a.pjax').off('click');
-        $(document).off('mouseup.pjax', 'a.pjax');
-
-        $(document).on('mouseup.pjax', 'a.pjax', function (e) {
-            e.preventDefault();
-            $.pjax.click(e, {container: '#content', url:$(this).data('href')});
-        });
-    }
-
     $('#side-bar .result').on({
         mouseup: function (e) {
             e.preventDefault();
@@ -489,8 +495,4 @@ function init_mobile() {
 }
 
 function view_detail_mobile () {
-    $('#mobile-header-detail').on('click', 'a', function(e){
-        e.preventDefault();
-        window.history.back();
-    });
 }
