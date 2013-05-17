@@ -956,6 +956,9 @@ p.tab-content-empty {
 .leaflet-popup-content {
   margin: 14px 16px;
 }
+.leaflet-popup-content i {
+  display: none;
+}
 #mainmap .popup-footer {
   background: url(../img/popup-footer.png) no-repeat center;
   width: 100%;
@@ -1619,6 +1622,7 @@ a.accordion-toggle {
     text-align: left;
   }
   .leaflet-popup-content i {
+    display: block;
     position: absolute;
     right: 10px;
     top: 50%;

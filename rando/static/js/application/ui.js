@@ -59,7 +59,7 @@ function init_ui() {
     });
 
     if(Modernizr.mq('only all and (max-width: 480px)')) {
-        mobile = true;
+        MOBILE = true;
         
         // iOS mobile hide address bar for fullscreen trick
         if(MBP.platform == "ios") {
