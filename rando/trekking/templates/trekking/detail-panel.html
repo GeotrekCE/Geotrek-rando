@@ -18,6 +18,12 @@
       <div id="toolbox" class="btn-toolbar pull-right">
         <a class="btn backpack" href="#" data-pk="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}"><i class="backpack"></i> {% trans "Favorite" %}</a>
 
+        {% if VIEW3D_ENABLED %}
+        <a class="btn download view3d" title="{% trans "3D View" %}">
+          <i class="view3d"></i> {% trans "3D" %}
+        </a>
+        {% endif %}
+
         {% if PRINT_ENABLED %}
         <a class="btn download print" title="{% trans "Print" %}" href="{% url trekking:fileserve object.properties.printable %}">
           <i class="print"></i> {% trans "Print" %}

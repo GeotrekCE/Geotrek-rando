@@ -302,6 +302,20 @@ function view_detail() {
 
     //Load altimetric graph
     altimetricInit();
+
+    // View 3d
+    $("a.view3d").click(function () {
+        $('<iframe />', {
+            name: 'frame1',
+            id: 'frame1',
+            frameBorder: 0,
+            src: 'http://www.blackl.com'
+        }).appendTo('#popup-view3d .modal-body');
+        $("#popup-view3d").modal('show');
+        $('#popup-view3d').on('hidden', function () {
+            $(this).find('iframe').remove();
+        });
+    });
 }
 
 function altimetricInit() {

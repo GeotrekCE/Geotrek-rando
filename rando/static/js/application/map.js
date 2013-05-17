@@ -182,7 +182,7 @@ function mainmapInit(map, bounds) {
 
     // Filter list by map bounds
     map.on('moveend', function (e) {
-      if (!map._loaded || mobile) return;  // Bounds should be set.
+      if (!map._loaded || MOBILE) return;  // Bounds should be set.
 
       $('#side-bar .result').removeClass('outbounds');
       if (!$(map._container).is(':visible')) {

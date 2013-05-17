@@ -57,6 +57,7 @@ class TrekView(PJAXResponseMixin, DetailView):
         context['all_pictures'] = all_pictures
 
         context['PRINT_ENABLED'] = settings.PRINT_ENABLED
+        context['VIEW3D_ENABLED'] = settings.VIEW3D_ENABLED
         return context
 
 
