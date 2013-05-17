@@ -319,9 +319,12 @@ function altimetricInit() {
             var sparkline = ev.sparklines[0],
                 region = sparkline.getCurrentRegionFields();
                 value = region.y;
-            $('#mouseoverprofil').text(Math.round(region.x) +" m");
+            $('#mouseoverprofil').text(Math.round(region.x) +"m");
+            // Trigger global event
+            $('#profilealtitude').trigger('hover:distance', region.x);
         }).bind('mouseleave', function() {
             $('#mouseoverprofil').text('');
+            $('#profilealtitude').trigger('hover:distance', null);
         });
     });
 }

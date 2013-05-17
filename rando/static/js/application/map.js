@@ -2,7 +2,8 @@ var TREK_LAYER_OPTIONS = L.Util.extend({
     style: {'color': '#F89406', 'weight': 5, 'opacity': 0.8},
     hoverstyle: {'color': '#F89406', 'weight': 5, 'opacity': 1.0},
     outlinestyle: {'color': 'yellow', 'weight': 10, 'opacity': 0.8},
-    arrowstyle: {'fill': '#E97000', 'font-weight': 'bold'}
+    arrowstyle: {'fill': '#E97000', 'font-weight': 'bold'},
+    positionstyle: {'fillOpacity': 1.0, 'opacity': 1.0, 'fillColor': 'white', 'color': 'black', 'width': 3}
 }, TREK_LAYER_OPTIONS || {});
 
 
@@ -408,10 +409,28 @@ function detailmapInit(map, bounds) {
     map.fitBounds(wholeBounds);
     map.zoomOut();
 
+    var marker = null;
+    $('#profilealtitude').on('hover:distance', function (event, meters) {
+        if (marker) {
+            map.removeLayer(marker);
+            marker = null;
+        }
+        if (meters === null)
+            return;
+        trekLayer.eachLayer(function (layer) {
+            if (layer instanceof L.MultiPolyline)
+                return;
+            var latLng = latLngAtDistance(layer, meters);
+            if (latLng) {
+                marker = L.circleMarker(latLng, TREK_LAYER_OPTIONS.positionstyle).setRadius(5).addTo(map);
+            }
+        });
+    });
+
+
     // Add reset view control
     map.whenReady(function () {
         new L.Control.ResetView(wholeBounds, {position: 'topright'}).addTo(map);
-
 
         map.scrollWheelZoom.disable();
         var enableWheel = function () {
@@ -438,4 +457,38 @@ function detailmapInit(map, bounds) {
             });
         }, 500);
     });
+}
+
+if (typeof(Number.prototype.toRad) === "undefined") {
+  Number.prototype.toRad = function() {
+    return this * Math.PI / 180;
+  }
+}
+
+function distanceMeters(p1, p2) {
+  var R = 6371000,
+      dLat = (p2.lat - p1.lat).toRad(),
+      dLon = (p2.lng - p1.lng).toRad();
+  var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.cos(p2.lat.toRad()) * Math.cos(p2.lat.toRad()) *
+          Math.sin(dLon/2) * Math.sin(dLon/2);
+  var c = 2 * Math.atan2(Math.sqrt(a) , Math.sqrt(1-a));
+  var d = R * c;
+  return d;
+}
+
+function latLngAtDistance(polyline, distance) {
+  // Initialization of variables
+  var points = polyline.getLatLngs(),
+      distance_cum = 0.0;
+  //iterate line points
+  for (var i=1; i<points.length; i++) {
+    var p1 = points[i-1],
+        p2 = points[i];
+    distance_cum = distance_cum + distanceMeters(p1, p2); //calcul distance
+    if (distance_cum >= distance) {
+        return L.latLng(p2.lat, p2.lng);
+    }
+  }
+  return null;
 }

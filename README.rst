@@ -196,6 +196,7 @@ The map elements colors can be set from the ``footer.html`` page, using a ``<scr
             style: {'color': '#F89406', 'weight': 5, 'opacity': 0.8},
             hoverstyle: {'color': '#F89406', 'weight': 5, 'opacity': 1.0},
             outlinestyle: {'color': 'yellow', 'weight': 10, 'opacity': 0.8},
+            positionstyle: {'fillOpacity': 1.0, 'opacity': 1.0, 'fillColor': 'white', 'color': 'black', 'width': 3}
         };
     </script>
 
