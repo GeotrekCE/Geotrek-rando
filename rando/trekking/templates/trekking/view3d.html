@@ -1,4 +1,4 @@
-{% load l10n static %}
+{% load l10n static compress %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,6 +20,7 @@
 
 <div id="message"></div>
 
+{% compress js %}
 <script src="{% static "js/3d/Three.js" %}"></script>
 <script src="{% static "js/3d/Detector.js" %}"></script>
 <script src="{% static "js/3d/Stats.js" %}"></script>
@@ -27,6 +28,7 @@
 <script src="{% static "js/3d/THREEx.KeyboardState.js" %}"></script>
 <script src="{% static "js/3d/THREEx.FullScreen.js" %}"></script>
 <script src="{% static "js/3d/THREEx.WindowResize.js" %}"></script>
+{% endcompress %}
 
 <script>
     var coords3d = [
