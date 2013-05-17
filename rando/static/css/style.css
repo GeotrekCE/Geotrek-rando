@@ -1029,6 +1029,7 @@ p.tab-content-empty {
   display: inline-block;
   height: 25px;
   width: 30px;
+  background-repeat: no-repeat;
 }
 #toolbox a.btn i.gpx {
   background-image: url("../img/gpx.png");
@@ -1038,10 +1039,10 @@ p.tab-content-empty {
   background-image: url("../img/kml.png");
   width: 25px;
 }
-#toolbox i.print {
+#toolbox a.btn i.print {
   background-image: url("../img/imprimante.png");
 }
-#toolbox i.backpack {
+#toolbox a.btn i.backpack {
   background-image: url("../img/sacplus.png");
 }
 #toolbox a.backpack,
