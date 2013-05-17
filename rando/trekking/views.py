@@ -30,10 +30,7 @@ class HomeView(PJAXResponseMixin, TemplateView):
         return context
 
 
-class TrekView(PJAXResponseMixin, DetailView):
-
-    template_name = 'trekking/detail.html'
-    pjax_template_name = "trekking/detail-panel.html"
+class BaseTrekView(DetailView):
 
     def get_object(self):
         slug = self.kwargs.get(self.slug_url_kwarg, None)
@@ -42,6 +39,12 @@ class TrekView(PJAXResponseMixin, DetailView):
             if trek.properties.slug == slug:
                 return trek
         raise Http404
+
+
+class TrekView(PJAXResponseMixin, BaseTrekView):
+
+    template_name = 'trekking/detail.html'
+    pjax_template_name = "trekking/detail-panel.html"
 
     def get_context_data(self, **kwargs):
         lang = self.request.LANGUAGE_CODE
@@ -58,6 +61,16 @@ class TrekView(PJAXResponseMixin, DetailView):
 
         context['PRINT_ENABLED'] = settings.PRINT_ENABLED
         context['VIEW3D_ENABLED'] = settings.VIEW3D_ENABLED
+        return context
+
+
+class TrekView3D(BaseTrekView):
+    template_name = 'trekking/view3d.html'
+
+    def get_context_data(self, **kwargs):
+        trek = self.get_object()
+        context = super(TrekView3D, self).get_context_data(**kwargs)
+        context['coords3d'] = trek.coords3d()
         return context
 
 
