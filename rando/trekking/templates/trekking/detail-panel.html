@@ -100,13 +100,6 @@
         </div>
       {% endif %}
 
-      {% if object.properties.advice %}
-        <div id="trek-advice" class="alert alert-error">
-          <h3>{% trans "Advice" %}</h3>
-          <p>{{ object.properties.advice|safe }}</p>
-      </div>
-      {% endif %}
-
     </div>
 
     <div class="span{% if object.pois.all %}4{% else %}7{% endif %}">
@@ -188,8 +181,15 @@
           {% endfor %}
         </div>
         {% endif %}
-
       </div>
+
+     {% if object.properties.advice %}
+        <div id="trek-advice" class="alert alert-error">
+          <h3>{% trans "Advice" %}</h3>
+          <p>{{ object.properties.advice|safe }}</p>
+        </div>
+      {% endif %}
+
     </div>
 
     <div class="{% if object.pois.all %}span3{% endif %}">
