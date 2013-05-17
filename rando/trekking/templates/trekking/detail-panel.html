@@ -78,7 +78,7 @@
         <p>{% trans "Valleys" %} : <span class="value">{% for district in object.properties.districts %}{{ district.name }}, {% endfor %}</span></p>
         <p>{% trans "Difficulty" %} : <span class="value">{{ object.properties.difficulty.label }}</span></p>
         <p>{% trans "Ascent" %} : <span class="value">{{ object.properties.ascent }}m</span></p>
-        <p>{% trans "Duration" %} : <span class="value">{{ object.properties.duration|default:0 }}H</span></p>
+        <p>{% trans "Duration" %} : <span class="value">{{ object.properties.duration|duration }}</span></p>
       </div>
 
       {% for theme in object.properties.themes %}
