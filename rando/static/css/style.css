@@ -123,7 +123,6 @@ i.icon {
   height: 14px;
   line-height: 14px;
   vertical-align: text-top;
-  background-position: 14px 14px;
   background-repeat: no-repeat;
 }
 .container-fluid {
@@ -189,6 +188,9 @@ header h1 {
   position: absolute;
   left: 140px;
   top: 23px;
+}
+#toggle-header-mobile {
+  display: none;
 }
 #container-content {
   position: absolute;
@@ -951,6 +953,9 @@ p.tab-content-empty {
 #mainmap .leaflet-popup-tip {
   background: #f6f7f0;
 }
+.leaflet-popup-content {
+  margin: 14px 16px;
+}
 #mainmap .popup-footer {
   background: url(../img/popup-footer.png) no-repeat center;
   width: 100%;
@@ -1360,8 +1365,8 @@ a.accordion-toggle {
     top: 27px;
   }
   #content {
-    height: auto;
-    min-height: 100%;
+    height: 100%;
+    overflow: hidden;
   }
   #search-bar {
     height: 115px;
@@ -1419,40 +1424,101 @@ a.accordion-toggle {
   #container-content {
     top: 0;
   }
+  /* Miscs pages */
   header {
-    width: 45px;
-    height: 45px;
+    width: 80%;
     padding: 0;
-    background: url(../img/pn-logo.png) no-repeat center center;
+    position: absolute;
+    top: 47px;
+    bottom: 0;
+    height: auto;
+    background: none;
     -webkit-background-size: auto;
     -moz-background-size: auto;
     -o-background-size: auto;
     background-size: auto;
+    background-color: rgba(255, 255, 255, 0.8);
     border: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
     -webkit-touch-callout: none;
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    -webkit-transition: all 500ms;
+    -moz-transition: all 500ms;
+    -ms-transition: all 500ms;
+    -o-transition: all 500ms;
+    transition: all 500ms;
+    -webkit-transform: translate3d(-105%, 0, 0);
+    -moz-transform: translate3d(-105%, 0, 0);
+    -ms-transform: translate3d(-105%, 0, 0);
+    -o-transform: translate3d(-105%, 0, 0);
+    transform: translate3d(-105%, 0, 0);
   }
-  #mobile-header-detail {
+  header.open {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  header h1 {
+    display: none;
+  }
+  .no-csstransforms3d header {
+    display: none;
+  }
+  .no-csstransforms3d header.open {
     display: block;
-    width: 100%;
-    background: orangered;
-    z-index: 9999;
   }
-  #mobile-header-detail a {
-    color: white;
+  #flatpages {
+    position: static;
+    display: none;
   }
-  #mobile-header-detail a i {
+  #flatpages ul {
+    margin: 0;
+  }
+  #flatpages ul li {
+    display: block;
+    border-bottom: 1px solid #CCC;
+  }
+  #flatpages ul li a {
+    color: #333;
+    background: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border: none;
+    font-weight: normal;
+    text-shadow: none;
+    text-align: left;
+    height: 30px;
+    padding-top: 10px;
+  }
+  #flatpages ul li a:hover {
+    background-color: transparent;
+  }
+  #flatpages ul li a:active {
+    background-color: white;
+  }
+  #toggle-header-mobile {
+    display: block;
+    width: 45px;
+    height: 45px;
     float: left;
-    margin-top: 10px;
-    margin-left: 9px;
+    background: url(../img/pn-logo.png) no-repeat 11px center;
+    -webkit-background-size: 63% auto;
+    -moz-background-size: 63% auto;
+    -o-background-size: 63% auto;
+    background-size: 63% auto;
+    -webkit-touch-callout: none;
   }
-  #mobile-header-detail h1 {
-    font-size: 15px;
-    padding-left: 30px;
-    font-weight: 300;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  #toggle-header-mobile i {
+    margin-top: 15px;
+    margin-left: -4px;
+    opacity: 0.8;
   }
   /* Side bar search */
   #side-bar {
@@ -1461,7 +1527,9 @@ a.accordion-toggle {
     height: auto;
     width: 100%;
     border-right: none;
-    background-color: rgba(246, 247, 241, 0.9);
+    background-color: rgba(255, 255, 255, 0.8);
+    border-bottom: 2px solid #CCC;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
   }
   #side-bar .result {
     height: 25px;
@@ -1512,9 +1580,6 @@ a.accordion-toggle {
   #result-backpack-tabs {
     width: 100%;
   }
-  #result-backpack-tabs {
-    margin-top: 45px;
-  }
   #result-backpack-content {
     height: 157px;
     right: 0;
@@ -1546,13 +1611,87 @@ a.accordion-toggle {
   #mainmap {
     top: 0;
   }
+  /* Leaflet popup */
+  .leaflet-popup-content > div {
+    margin-right: 20px;
+  }
+  .leaflet-popup-content h3 {
+    text-align: left;
+  }
+  .leaflet-popup-content i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -16px;
+  }
   /* Details page */
+  #mobile-header-detail {
+    display: block;
+    width: 100%;
+    background: orangered;
+    z-index: 9999;
+    border-bottom: 2px solid #992c04;
+  }
+  #mobile-header-detail a {
+    color: white;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+  #mobile-header-detail a i {
+    float: left;
+    margin-top: 15px;
+    margin-left: 9px;
+  }
+  #mobile-header-detail h1 {
+    font-size: 15px;
+    padding-left: 30px;
+    font-weight: 300;
+    line-height: 45px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  #mobile-header-detail:active {
+    opacity: 0.8;
+  }
+  .detail-content {
+    position: absolute;
+    overflow: auto;
+    top: 47px;
+    bottom: 0;
+    -webkit-overflow-scrolling: touch;
+  }
   #detail-content-top h2 {
     white-space: normal;
+    font-size: 1.5em;
+    padding-left: 1%;
+    padding-right: 1%;
+    margin-bottom: 10px;
+  }
+  #detail-content-top h2:first-letter {
+    font-size: 1em;
+  }
+  #toolbox a.backpack,
+  #toolbox a.download {
+    padding-right: 5px;
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+  #toolbox .print {
+    display: none;
+  }
+  #toolbox {
+    margin-right: 0;
+  }
+  #toolbox.pull-right {
+    text-align: left;
+    float: none;
+  }
+  .no-touch .leaflet-top {
+    top: 44px;
+  }
+  .no-touch .leaflet-bottom {
+    bottom: 40px;
   }
   /* Hidden elements */
   #global-share,
-  #flatpages,
   .search-tools,
   #search-bar,
   .ascent,
@@ -1563,7 +1702,6 @@ a.accordion-toggle {
   #tab-results,
   #side-bar .illust,
   .touch .leaflet-control-container,
-  header,
   #fake-search-tabs {
     display: none;
   }

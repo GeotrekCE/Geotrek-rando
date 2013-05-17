@@ -43,22 +43,23 @@ function init_ui() {
             MOBILE = true;
 
             // iOS mobile hide address bar for fullscreen trick
-            // if(MBP.platform == "ios") {
-            //     var iOSAddressBarSize = 60; // Absolutely not future optimized, but only working solution atm
-            //     $('html').height($(window).height()+iOSAddressBarSize+'px');
-            // }
+            if(MBP.platform == "ios") {
+                var iOSAddressBarSize = 60; // Absolutely not future optimized, but only working solution atm
+                $('html').height($(window).height()+iOSAddressBarSize+'px');
 
-            MBP.hideUrlBar();
-            console.log('resize');
+                MBP.hideUrlBar();
+            }
+
         } else {
             MOBILE = false;
         }
 
         invalidate_maps();
+        console.log('resize');
     });
 
     if(Modernizr.mq('only all and (max-width: 480px)')) {
-        MOBILE = true;
+        mobile = true;
         
         // iOS mobile hide address bar for fullscreen trick
         if(MBP.platform == "ios") {
@@ -68,7 +69,7 @@ function init_ui() {
     }
 
     // iOS mobile hide address bar
-    MBP.hideUrlBarOnLoad();
+    if(MBP.platform == "ios") { MBP.hideUrlBarOnLoad(); }
 }
 
 function page_load() {
@@ -438,14 +439,50 @@ function init_share() {
 }
 
 function init_mobile() {
+    $('#flatpages').show();
+
+    $('#toggle-header-mobile').on('click', function (e) {
+        e.stopPropagation();
+
+        // $('header').toggleClass('open');
+        // $(this).toggleClass('active');
+
+        if($('header').hasClass('open')) {
+            $('header').removeClass('open');
+            $(this).removeClass('active');
+            $(document).off('click.menu');
+        } else {
+            $('header').addClass('open');
+            $(this).addClass('active');
+
+            $(document).one('click.menu', function (e) {
+                if ($('header').has(e.target).length === 0){
+                    $('header').removeClass('open');
+                    $('#toggle-header-mobile').removeClass('active');
+                }
+            });
+        }
+    });
+
     $('#search').on('focus', function () {
         $('#result-backpack-content').show();
-        $('#tab-results a').click();
-        console.log('focus');
+        $('#results').show();
+        $('#backpack').removeClass('active');
+        $('#tab-backpack').removeClass('active');
+    });
+
+    $('#tab-backpack a').off('click');
+    $('#tab-backpack a').on('click', function (e) {
+        e.preventDefault();
+
+        $('#results').toggle();
+        $('#result-backpack-content').toggle();
+        $('#backpack').toggleClass('active');
+        $(this).parent().toggleClass('active');
     });
 
     var resultTaped = false;
-    
+
     $('#search').on('blur', function (e) {
         // Prevent result list hiding on blur
         if(resultTaped) {
@@ -457,12 +494,12 @@ function init_mobile() {
     });
 
     $('#side-bar .result').off('dblclick mouseenter mouseleave');
-    
-    $('#side-bar .result').on('mousedown', function (e) {
+
+    $('#results .result').on('mousedown', function (e) {
         resultTaped = true;
     });
 
-    $('#side-bar .result').on('mouseup', function (e) {
+    $('#results .result').on('mouseup', function (e) {
         $('#search').blur();
     });
 

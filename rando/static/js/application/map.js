@@ -216,7 +216,8 @@ function mainmapInit(map, bounds) {
                    '  <a href="{LINK}" class="pjax"><img src="{THUMBNAIL}"/></a>'+
                    '  <div class="description">{DESCRIPTION}</div>' +
                    '  <p class="popupdetail"><a href="{LINK}" class="pjax">{MORE}</a></p>' +
-                   '</div>';
+                   '</div>' +
+                   '<i class="icon-chevron-right icon"></i>';
         html = L.Util.template(html, {
             NAME: layer.properties.name,
             DESCRIPTION: layer.properties.description_teaser,
@@ -259,7 +260,7 @@ function mainmapInit(map, bounds) {
         // Make sure clic on details will open as pjax (cause added after initial loading?)
         $("a.pjax", popup._container).click(function (event) {
             $.pjax.click(event, {container: '#content'});
-            
+
             // Track event
             _gaq.push(['_trackEvent', 'Map', 'Popup', e.layer.properties.name]);
         });
