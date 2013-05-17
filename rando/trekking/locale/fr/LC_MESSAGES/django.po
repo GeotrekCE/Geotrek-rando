@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-17 12:01+0200\n"
+"POT-Creation-Date: 2013-05-17 13:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,8 +23,8 @@ msgstr ""
 msgid "From %(departure)s to %(arrival)s"
 msgstr "De %(departure)s à %(arrival)s"
 
-#: templates/trekking/base.html:79 templates/trekking/base.html.py:80
-#: templates/trekking/base.html:81
+#: templates/trekking/base.html:82 templates/trekking/base.html.py:83
+#: templates/trekking/base.html:84
 msgid "Share"
 msgstr "Partager"
 
@@ -283,20 +283,27 @@ msgstr "Ajouter aux favoris"
 msgid "Zoom to trek"
 msgstr "Zoomer sur l'itinéraire"
 
-#: templatetags/trekking.py:36
+#: templatetags/trekking.py:35
+#, python-format
+msgid "More than %s days"
+msgstr "Plus de %s jours"
+
+#: templatetags/trekking.py:37
+#, python-format
 msgid "%s days"
 msgstr "%s jours"
 
-#: templatetags/trekking.py:38
+#: templatetags/trekking.py:39
+#, python-format
 msgid "%s day"
 msgstr "%s jour"
 
-#: templatetags/trekking.py:40
+#: templatetags/trekking.py:41
 #, python-format
 msgid "%(hour)sH%(min)s"
 msgstr "%(hour)sH%(min)s"
 
-#: templatetags/trekking.py:41
+#: templatetags/trekking.py:43
 #, python-format
 msgid "%s min."
 msgstr "%s min"
