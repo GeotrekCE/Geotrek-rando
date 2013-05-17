@@ -141,7 +141,8 @@
 
             <ul>
             {% for weblink in weblinks %}
-                <li>{{ weblink.grouper|pictogram:"small" }} {{ weblink.grouper.label }}
+                <h5><img src="{{ weblink.grouper.pictogram }}"> {{ weblink.grouper.label }}</h5>
+                <li>
                 {% for item in weblink.list %}
                   {% if forloop.first and weblink.list.count > 1 %}<ul>{% endif %}
                   {% if weblink.list.count > 1 %}<li>{% endif %}

@@ -1159,10 +1159,6 @@ p.teaser {
 .meta {
   margin-top: 15px;
 }
-#pois-accordion {
-  max-height: 400px;
-  overflow: auto;
-}
 #pois-accordion .pictures-info {
   margin-right: 35px;
   margin-top: 7px;
@@ -1291,8 +1287,14 @@ a.accordion-toggle {
 #trek-links img {
   padding-right: 5px;
 }
+#trek-links h5 {
+  vertical-align: bottom;
+}
 #trek-links li {
   list-style-type: none;
+}
+#trek-links li ul {
+  margin-left: 0px;
 }
 /* POIS markers */
 .poi-marker-icon.cluster,
