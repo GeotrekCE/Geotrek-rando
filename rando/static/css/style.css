@@ -1124,6 +1124,10 @@ p.teaser {
   list-style-type: none;
   display: inline-block;
 }
+#themes .pictogram,
+#usages .pictogram {
+  opacity: 0.5;
+}
 #detailmap {
   min-height: 400px;
 }
