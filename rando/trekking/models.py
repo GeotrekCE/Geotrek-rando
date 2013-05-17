@@ -2,6 +2,7 @@ import os
 import datetime
 import logging
 import json
+from operator import itemgetter
 
 from easydict import EasyDict as edict
 from django.conf import settings
@@ -125,6 +126,16 @@ class Trek(JSONModel):
            "properties": self.properties,
         })
 
+    @property
+    def altimetricprofile(self):
+        source = os.path.join(settings.INPUT_DATA_ROOT, self.objects.language, self.properties.altimetric_profile[1:])
+        try:
+            jsonsource = open(source, 'r').read()
+            jsonparsed = json.loads(jsonsource)
+            return jsonparsed['profile']
+        except IOError, KeyError:
+            return []
+
     def startcoords(self):
         if self.geometry.type.lower().startswith('multi'):
             return self.geometry.coordinates[0][:1][0]
@@ -135,3 +146,11 @@ class Trek(JSONModel):
             return self.geometry.coordinates[-1][:-1][-1]
         return self.geometry.coordinates[:-1][-1]
 
+    def coords3d(self):
+        coords2d = self.geometry.coordinates
+        xs = map(itemgetter(0), coords2d)
+        ys = map(itemgetter(1), coords2d)
+        altitudes = map(itemgetter(1), self.altimetricprofile)
+        coords3d = zip(xs, ys, altitudes)
+        coords3d = map(list, coords3d)
+        return coords3d
