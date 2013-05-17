@@ -357,8 +357,8 @@ function sliders() {
         range: true,
         step: 1,
         min: 1,
-        max: 3,
-        values: [ 1, 3 ],
+        max: 4,
+        values: [ 1, 4 ],
         slide: saveSlider
     });
 

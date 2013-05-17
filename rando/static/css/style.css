@@ -419,7 +419,7 @@ ul.social-buttons li {
   margin-left: 25px;
 }
 .stage .slider-value {
-  width: 33%;
+  width: 25%;
 }
 .time .slider-value {
   width: 20%;
@@ -455,7 +455,7 @@ ul.social-buttons li {
 }
 .stage .slider-wrap {
   background: url(../img/slider-stage.png) no-repeat;
-  width: 157px;
+  width: 197px;
 }
 .time .slider-wrap {
   background: url(../img/slider-time.png) no-repeat;
@@ -471,7 +471,7 @@ ul.social-buttons li {
   height: 19px;
 }
 .stage .ui-slider {
-  max-width: 138px;
+  max-width: 179px;
 }
 .time .ui-slider {
   max-width: 230px;
