@@ -955,6 +955,7 @@ p.tab-content-empty {
       background: white;
       margin-bottom: 0;
       border-color: #E9EAE5;
+      line-height: 15px;
       .box-sizing(border-box);
       .border-radius(0);
       .box-shadow(none);
@@ -979,11 +980,31 @@ p.tab-content-empty {
       }
     }
 
-    .icon-search {
+    div {
       position: absolute;
-      right: 8px;
-      top: 7px;
+      right: 0;
+      top: 0;
+      width: 35px;
+      height: 100%;
       pointer-events: none;
+      -webkit-touch-callout: none;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+      i {
+        position: absolute;
+        right: 11px;
+        top: 50%;
+        margin-top: -6px;
+        -webkit-touch-callout: none;
+      }
+
+      &.reset {
+        pointer-events: auto;
+
+        i {
+          background-position: -312px 0;
+        } 
+      }
     }
   }
 }
@@ -1756,7 +1777,7 @@ a.accordion-toggle  {
     .box-shadow(none);
     -webkit-touch-callout: none;
     .box-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
-    .transition(all 500ms);
+    .transition(all 300ms);
     .translate3d(-105%, 0, 0);
 
     &.open {
@@ -1818,11 +1839,23 @@ a.accordion-toggle  {
     background:url(../img/pn-logo.png) no-repeat 11px center;
     .background-size(63% auto);
     -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    &.active {
+      i {
+        margin-left: -8px;
+      }
+    }
+
+    &:active {
+      background-color: white;
+    }
 
     i {
       margin-top: 15px;
       margin-left: -4px;
       opacity: 0.8;
+      .transition(all 300ms);
     }
   }
 
@@ -1837,10 +1870,12 @@ a.accordion-toggle  {
     background-color: rgba(255, 255, 255, 0.8);
     border-bottom: 2px solid #CCC;
     border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    -webkit-touch-callout: none;
 
     .result {
-      height: 25px;
+      height: 23px;
       overflow: hidden;
+      padding: 7px;
 
       .info-result {
         min-height: auto;
@@ -1877,11 +1912,23 @@ a.accordion-toggle  {
     width: 45px;
     height: 45px;
     padding: 9px;
+
+    &:hover {
+      background-color: transparent;
+    }
+
+    &:active {
+      background-color: white;
+    }
   }
 
   #side-bar .nav-tabs > li.active > a {
     background-color: transparent;
     border: none;
+
+    &:active {
+      background-color: white;
+    }
   }
 
   #tab-backpack {
@@ -1899,9 +1946,9 @@ a.accordion-toggle  {
   }
 
   #result-backpack-content {
-    height: 157px;
+    height: 153px;
     right: 0;
-    top: 45px;
+    top: 47px;
     display: none;
     -webkit-overflow-scrolling: touch;
   }
@@ -1925,11 +1972,13 @@ a.accordion-toggle  {
         height: 35px;
       }
 
-      .icon-search {
+      i {
         right: 13px;
         top: 11px;
       }
-    } 
+    }
+
+    
   }
 
   #mainmap {

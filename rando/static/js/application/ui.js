@@ -469,6 +469,9 @@ function init_mobile() {
         $('#results').show();
         $('#backpack').removeClass('active');
         $('#tab-backpack').removeClass('active');
+        $('#text-search .navbar-search div').addClass('reset').one('click', function (e) {
+            $('#search').blur();
+        });
     });
 
     $('#tab-backpack a').off('click');
@@ -490,6 +493,7 @@ function init_mobile() {
             resultTaped = false;
         } else {
             $('#result-backpack-content').hide();
+            $('#text-search .navbar-search div').removeClass('reset').off('click');
         }
     });
 
