@@ -97,12 +97,6 @@
         {% if forloop.last %}</ul></div>{% endif %}
       {% endfor %}
 
-      {% for network in object.properties.networks %}
-        {% if forloop.first %}<div id="networks"><h3>{% trans "Networks" %}</h3><ul>{% endif %}
-        <li>{{ network.name }}</li>
-        {% if forloop.last %}</ul></div>{% endif %}
-      {% endfor %}
-
       {% if object.properties.public_transport %}
         <div id="trek-transport">
           <h3>{% trans "Transport" %}</h3>
