@@ -520,6 +520,4 @@ function init_mobile() {
             e.stopPropagation();
         }
     }, 'a.pjax');
-
-    firstLoadMobile = false;
 }

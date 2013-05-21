@@ -150,9 +150,7 @@
                 altimetric_url = altimetric_url || null,
                 treks = {{ treksjson|safe }},
                 IMG_URL = "{% static "img" %}",
-                MOBILE = false,  // Will be set in ui.js
-                firstLoad = true,
-                firstLoadMobile = true;
+                MOBILE = false;  // Will be set in ui.js
 
             // Default Google Analytics in case Do-Not-Track is set
             window._gaq = window._gaq || [];
