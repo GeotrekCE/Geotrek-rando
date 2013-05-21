@@ -439,26 +439,31 @@ function init_share() {
 }
 
 function init_mobile() {
-    $('#flatpages').show();
+    var $menuButton = $('#toggle-header-mobile'),
+        $menuBg     = $('.background-menu-mobile'),
+        $menu       = $('header')
 
-    $('#toggle-header-mobile').on('click', function (e) {
+    // Pages menu toggle
+    $menuButton.on('click', function (e) {
         e.stopPropagation();
 
-        // $('header').toggleClass('open');
-        // $(this).toggleClass('active');
-
-        if($('header').hasClass('open')) {
-            $('header').removeClass('open');
+        // if menu open
+        if($menu.hasClass('open')) {
+            $menu.removeClass('open');
             $(this).removeClass('active');
+            $menuBg.removeClass('active');
             $(document).off('click.menu');
         } else {
-            $('header').addClass('open');
+            $menu.addClass('open');
             $(this).addClass('active');
+            $menuBg.addClass('active');
 
+            // any touch outside, close the menu
             $(document).one('click.menu', function (e) {
-                if ($('header').has(e.target).length === 0){
-                    $('header').removeClass('open');
-                    $('#toggle-header-mobile').removeClass('active');
+                if ($menu.has(e.target).length === 0 && e.target != $menu[0]){
+                    $menu.removeClass('open');
+                    $menuButton.removeClass('active');
+                    $menuBg.removeClass('active');
                 }
             });
         }
@@ -469,13 +474,15 @@ function init_mobile() {
         $('#results').show();
         $('#backpack').removeClass('active');
         $('#tab-backpack').removeClass('active');
+
+        // Reset button when searching (trigger closing of mobile keyboard)
         $('#text-search .navbar-search div').addClass('reset').one('click', function (e) {
             $('#search').blur();
         });
     });
 
-    $('#tab-backpack a').off('click');
-    $('#tab-backpack a').on('click', function (e) {
+    // Show backpack tab
+    $('#tab-backpack a').off('click').on('click', function (e) {
         e.preventDefault();
 
         $('#results').toggle();
@@ -497,6 +504,7 @@ function init_mobile() {
         }
     });
 
+    // Remove desktop specific events
     $('#side-bar .result').off('dblclick mouseenter mouseleave');
 
     $('#results .result').on('mousedown', function (e) {
@@ -507,6 +515,7 @@ function init_mobile() {
         $('#search').blur();
     });
 
+    // Prevent following <a> link tag if clicked on results
     $('#side-bar .result').on({
         mouseup: function (e) {
             e.preventDefault();

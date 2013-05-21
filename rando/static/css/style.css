@@ -1079,8 +1079,7 @@ p.tab-content-empty {
 #toolbox #btn-print {
   margin-top: 5px;
 }
-html.no-webgl #toolbox a.view3d,
-html.mobile #toolbox a.view3d {
+html.no-webgl #toolbox a.view3d {
   display: none;
 }
 #detail-content-top h2:first-letter,
@@ -1494,9 +1493,14 @@ a.accordion-toggle {
   .no-csstransforms3d header.open {
     display: block;
   }
+  header #flatpages {
+    display: block;
+  }
+  #content #flatpages {
+    display: none;
+  }
   #flatpages {
     position: static;
-    display: none;
   }
   #flatpages ul {
     margin: 0;
@@ -1552,6 +1556,22 @@ a.accordion-toggle {
     -ms-transition: all 300ms;
     -o-transition: all 300ms;
     transition: all 300ms;
+  }
+  .background-menu-mobile {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 900;
+    pointer-events: none;
+    background-color: rgba(0, 0, 0, 0);
+    -webkit-transition: all 300ms;
+    -moz-transition: all 300ms;
+    -ms-transition: all 300ms;
+    -o-transition: all 300ms;
+    transition: all 300ms;
+  }
+  .background-menu-mobile.active {
+    background-color: rgba(0, 0, 0, 0.6);
   }
   /* Side bar search */
   #side-bar {
@@ -1696,6 +1716,9 @@ a.accordion-toggle {
   #mobile-header-detail:active {
     opacity: 0.8;
   }
+  #toolbox a.view3d {
+    display: none;
+  }
   .detail-content {
     position: absolute;
     overflow: auto;
@@ -1724,6 +1747,7 @@ a.accordion-toggle {
   }
   #toolbox {
     margin-right: 0;
+    margin-left: 1%;
   }
   #toolbox.pull-right {
     text-align: left;
