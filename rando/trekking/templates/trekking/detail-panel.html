@@ -78,7 +78,7 @@
         {% if object.properties.route %}
         <p>{% trans "Route" %} : <span class="value">{{ object.properties.route.label }}</span></p>
         {% endif %}
-        <p>{% trans "Length" %} : <span class="value">{{ object.properties.length|kilo|floatformat }}km</span></p>
+        <p>{% trans "Total Length" %} : <span class="value">{{ object.properties.length|kilo|floatformat }}km</span></p>
         <p>{% trans "Valleys" %} : <span class="value">{% for district in object.properties.districts %}{{ district.name }}, {% endfor %}</span></p>
         <p>{% trans "Difficulty" %} : <span class="value">{{ object.properties.difficulty.label }}</span></p>
         <p>{% trans "Ascent" %} : <span class="value">{{ object.properties.ascent }}m</span></p>

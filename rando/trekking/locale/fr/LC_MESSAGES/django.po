@@ -75,8 +75,8 @@ msgid "Route"
 msgstr "Parcours"
 
 #: templates/trekking/detail-panel.html:77
-msgid "Length"
-msgstr "Longueur"
+msgid "Total Length"
+msgstr "Longueur totale"
 
 #: templates/trekking/detail-panel.html:78
 #: templates/trekking/home-panel.html:74 templates/trekking/home-panel.html:75
