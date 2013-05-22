@@ -5,7 +5,7 @@
 # Edit configuration 
 #
 
-CAMINAE_SERVER = 'geobi.makina-corpus.net/ecrins-sentiers'
+CAMINAE_SERVER = 'geobi.makina-corpus.net/geotrek'
 
 TITLE = {
     'en': "Trekking",
@@ -20,6 +20,8 @@ DESCRIPTION = {
 GANALYTICS_TRACKING_CODE = 'UA-XXXXXXXX-XX'
 
 PRINT_ENABLED = True
+
+LEAFLET_CONFIG['TILES_URL'] = 'http://{s}.tiles.mapbox.com/v3/examples.map-4l7djmvo/{z}/{x}/{y}.png'
 
 #
 # In preprod
