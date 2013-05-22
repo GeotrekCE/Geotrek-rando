@@ -434,8 +434,7 @@ function init_share() {
 
 function init_mobile() {
     var $menuButton = $('#toggle-header-mobile'),
-        $menuBg     = $('.background-menu-mobile'),
-        $menu       = $('header')
+        $menu       = $('header');
 
     // Pages menu toggle
     $menuButton.on('click', function (e) {
@@ -445,19 +444,16 @@ function init_mobile() {
         if($menu.hasClass('open')) {
             $menu.removeClass('open');
             $(this).removeClass('active');
-            $menuBg.removeClass('active');
             $(document).off('click.menu');
         } else {
             $menu.addClass('open');
             $(this).addClass('active');
-            $menuBg.addClass('active');
 
             // any touch outside, close the menu
             $(document).one('click.menu', function (e) {
                 if ($menu.has(e.target).length === 0 && e.target != $menu[0]){
                     $menu.removeClass('open');
                     $menuButton.removeClass('active');
-                    $menuBg.removeClass('active');
                 }
             });
         }
