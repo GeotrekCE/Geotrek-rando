@@ -147,7 +147,7 @@ function view_home() {
     });
 
     // Show active tab
-    if (window.location.hash) {
+    if (/results|backpack/.test(window.location.hash)) {
         $('#tab-' + window.location.hash.slice(1) + ' a').click();
     }
 
