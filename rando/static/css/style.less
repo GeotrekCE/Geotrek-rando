@@ -522,6 +522,10 @@ ul.social-buttons li {
   }
 }
 
+#content #lang-switch {
+  display: none;
+}
+
 /****************************************************************************
 * 
 * Filters
@@ -689,7 +693,7 @@ ul.social-buttons li {
     line-height: 18px;
     position: relative;
     z-index: 300;
-    width: 10px;
+    width: 6px;
     height: 20px;
     background-color: #f89406;
   }
@@ -895,6 +899,7 @@ p.tab-content-empty {
   color:#625b50;
   line-height: 18px;
   margin-bottom: 4px;
+  margin-top: 0px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -905,9 +910,6 @@ p.tab-content-empty {
  margin:0;
  color:#968d7f;
 }
-
-
-
 
 .search
 {
@@ -972,7 +974,7 @@ p.tab-content-empty {
       background: white;
       margin-bottom: 0;
       border-color: #E9EAE5;
-      line-height: 15px;
+      line-height: 17px;
       padding: 4px 9px;
       .box-sizing(border-box);
       .border-radius(0);
@@ -1139,6 +1141,14 @@ p.tab-content-empty {
     }
   }
 
+  &.medium {
+    width: 32px;
+    height: 32px;
+
+    img {
+      height: 32px;
+    }
+  }
 
   &.small {
     width: 16px;
@@ -1273,6 +1283,21 @@ p.tab-content-empty {
   }
 }
 
+#fake-search-tabs {
+  ul {
+    margin-bottom: 0;
+  }
+}
+
+#themes, #usages {
+  float: left;
+  margin-top: 10px;
+
+  ul {
+    margin: 0;
+  }
+}
+
 #toolbox {
   margin-right: 15px;
   margin-bottom: 0;
@@ -1349,6 +1374,31 @@ html.no-webgl #toolbox a.view3d {
  text-transform:uppercase;
 }
 
+#detail-content-title {
+  width: 98%;
+  padding: 10px 1%;
+  background-color: #EEE;
+  border-top: 1px solid #DDD;
+  border-bottom: 1px solid #DDD;
+  margin-bottom: 18px;
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 7px;
+  }
+
+  h3 {
+    background: none;
+    font-weight: normal;
+    font-size: 14px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0;
+    margin-left: 2px;
+    text-decoration: none;
+    line-height: 20px;
+  }
+}
+
 .detail-content h3 {
  font-size: 14px;
  text-decoration: underline;
@@ -1408,18 +1458,19 @@ p.teaser {
 }
 
 #trek-identity {
-  background-color: white;
-  .box-shadow(0px 0px 15px 0px rgba(0, 0, 0, 0.3));
-}
+  div.infos {
+    float: left;
+    margin: 0 50px;
+  }
 
-#trek-identity p {
- margin-bottom:0;
- color:#80747c;
-}
+  p {
+    margin-bottom: 0;
+    color: #80747c;
+  }
 
-#trek-identity span.value {
-  color:#F77E00;
-  font-style: italic;
+  span.value {
+    color: #F77E00;
+  }
 }
 
 #themes li, #usages li, #networks li {
@@ -1457,7 +1508,6 @@ p.teaser {
 
 #pois-accordion .pictures-info {
  margin-right: 35px;
- margin-top: 7px;
 }
 
 #detailmap a, #toolbox a {
@@ -1537,6 +1587,11 @@ p.teaser {
 
   .carousel-caption {
     background: rgba(0, 0, 0, 0.7);
+    padding: 7px;
+
+    p {
+      margin: 0;
+    }
   }
 }
 
@@ -1594,12 +1649,7 @@ a.carousel-control {
 /*
 * POIs list
 */
-.accordion-heading, .accordion-inner {
- background-color: white;
-}
-
 a.accordion-toggle.open {
- font-weight: bold;
  color: #666666;
 }
 
@@ -1609,7 +1659,13 @@ a.accordion-toggle.open {
 
 
 .accordion-heading .accordion-toggle {
- padding: 0px 2px;
+  padding: 1px 2px;
+  line-height: 25px;
+
+  .pictogram {
+    vertical-align: top;
+    line-height: 15px;
+  }
 }
 
 
@@ -1618,7 +1674,18 @@ a.accordion-toggle.open {
  text-decoration: none;
  background: url(../img/accordion-open.png);
  background-repeat: no-repeat;
- background-position: 95% 50%;
+ background-position: 98% 50%;
+}
+
+.accordion-group {
+  border: none;
+  border-top: 1px solid #EEE;
+  .border-radius(none);
+  margin-bottom: 0;
+
+  &:first-child {
+    border: none;
+  }
 }
 
 .accordion-toggle.open {
@@ -1626,7 +1693,7 @@ a.accordion-toggle.open {
  text-decoration:none;
  background: url(../img/accordion-close.png);
  background-repeat: no-repeat;
- background-position: 95% 50%;
+ background-position: 98% 50%;
 }
 
 a.accordion-toggle  {
@@ -1649,11 +1716,15 @@ a.accordion-toggle  {
     vertical-align: bottom;
   }
 
-  li {
-   list-style-type: none;
+  > ul {
+    margin-left: 0px;
 
-    ul {
-      margin-left: 0px;
+    > li {
+      list-style: none;
+
+      li {
+        list-style-type: disc;
+      }
     }
   }
 }
@@ -2051,6 +2122,7 @@ a.accordion-toggle  {
     h1 {
       font-size: 15px;
       padding-left: 30px;
+      margin: 0;
       font-weight: 300;
       line-height: 45px;
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -2073,15 +2145,26 @@ a.accordion-toggle  {
     -webkit-overflow-scrolling: touch;
   }
 
-  #detail-content-top h2 {
-    white-space: normal;
-    font-size: 1.5em;
-    padding-left: 1%;
-    padding-right: 1%;
-    margin-bottom: 10px;
+  #detail-content-top {
+    margin-top: 75px;
+  }
 
-    &:first-letter {
-      font-size: 1em;
+  #detail-content-title {
+    h2 {
+      white-space: normal;
+      font-size: 1.5em;
+      margin-bottom: 0;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      margin-left: 0;
+    }
+
+    .title {
+      position: absolute;
+      top: 12px;
+      width: auto;
     }
   }
 

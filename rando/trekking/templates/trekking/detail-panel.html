@@ -15,10 +15,7 @@
   <div class="row-fluid" id="detail-content-top">
     {% include "trekking/fake_searchtabs_fragment.html" %}
 
-    <div class="span5">
-      <h2>{{ object.properties.name }}</h2>
-    </div>
-    <div class="span3">
+    <div class="span4 offset4">
       <div id="toolbox" class="btn-toolbar pull-right">
         <a class="btn backpack" href="#" data-pk="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}"><i class="backpack"></i> {% trans "Favorite" %}</a>
 
@@ -44,8 +41,51 @@
     </div>
   </div>
 
+  <div class="row-fluid" id="detail-content-title">
+    <div class="span5 title">
+      <h2>{{ object.properties.name }}</h2>
+      <h3 id="departure-arrival">{{ object.properties.departure }}{% if object.properties.arrival %} &rarr; {{ object.properties.arrival }}{% endif %}</h3>
+    </div>
+    <div class="span7">
+      <div class="row-fluid" id="trek-identity">
+        <div class="span3">
+          {% if object.properties.route %}
+          <p>{% trans "Route" %} : <span class="value">{{ object.properties.route.label }}</span></p>
+          {% endif %}
+          <p>{% trans "Total Length" %} : <span class="value">{{ object.properties.length|kilo|floatformat }}km</span></p>
+          <p>{% trans "Valleys" %} : <span class="value">{% for district in object.properties.districts %}{{ district.name }}, {% endfor %}</span></p>
+        </div>
+        <div class="span3">
+          <p>{% trans "Difficulty" %} : <span class="value">{{ object.properties.difficulty.label }}</span></p>
+          <p>{% trans "Ascent" %} : <span class="value">{{ object.properties.ascent }}m</span></p>
+          <p>{% trans "Duration" %} : <span class="value">{{ object.properties.duration|duration }}</span></p>
+        </div>
+
+        {% for theme in object.properties.themes %}
+          {% if forloop.first %}<div id="themes"><ul>{% endif %}
+          <li>{{ theme|pictogram:"medium" }}</li>
+          {% if forloop.last %}</ul></div>{% endif %}
+        {% endfor %}
+
+        {% for usage in object.properties.usages %}
+          {% if forloop.first %}<div id="usages"><ul>{% endif %}
+          <li>{{ usage|pictogram:"medium" }}</li>
+          {% if forloop.last %}</ul></div>{% endif %}
+        {% endfor %}
+      </div>
+
+      {% if object.properties.public_transport %}
+        <div id="trek-transport">
+          <h3>{% trans "Transport" %}</h3>
+          <p>{{ object.properties.public_transport|safe }}</p>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+
   <div id="detail-container-content" class="row-fluid">
-    <div class="span3">
+    <div class="span4">
       <p class="teaser">{{ object.properties.description_teaser|default:"No teaser"|safe|striptags }}</p>
       <p>{{ object.properties.ambiance|default:"No ambiance"|safe }}</p>
 
@@ -67,41 +107,6 @@
         <h3>{% trans "Access" %}</h3>
         <p>{{ object.properties.access|safe }}</p>
       </div>
-      {% endif %}
-
-    </div>
-
-    <div class="span2">
-      <div id="trek-identity" class="well">
-        <h4 id="departure-arrival">{{ object.properties.departure }}{% if object.properties.arrival %} &rarr; {{ object.properties.arrival }}{% endif %}</h4>
-
-        {% if object.properties.route %}
-        <p>{% trans "Route" %} : <span class="value">{{ object.properties.route.label }}</span></p>
-        {% endif %}
-        <p>{% trans "Total Length" %} : <span class="value">{{ object.properties.length|kilo|floatformat }}km</span></p>
-        <p>{% trans "Valleys" %} : <span class="value">{% for district in object.properties.districts %}{{ district.name }}, {% endfor %}</span></p>
-        <p>{% trans "Difficulty" %} : <span class="value">{{ object.properties.difficulty.label }}</span></p>
-        <p>{% trans "Ascent" %} : <span class="value">{{ object.properties.ascent }}m</span></p>
-        <p>{% trans "Duration" %} : <span class="value">{{ object.properties.duration|duration }}</span></p>
-      </div>
-
-      {% for theme in object.properties.themes %}
-        {% if forloop.first %}<div id="themes"><ul>{% endif %}
-        <li>{{ theme|pictogram:"big" }}</li>
-        {% if forloop.last %}</ul></div>{% endif %}
-      {% endfor %}
-
-      {% for usage in object.properties.usages %}
-        {% if forloop.first %}<div id="usages"><ul>{% endif %}
-        <li>{{ usage|pictogram:"big" }}</li>
-        {% if forloop.last %}</ul></div>{% endif %}
-      {% endfor %}
-
-      {% if object.properties.public_transport %}
-        <div id="trek-transport">
-          <h3>{% trans "Transport" %}</h3>
-          <p>{{ object.properties.public_transport|safe }}</p>
-        </div>
       {% endif %}
 
     </div>
@@ -196,7 +201,7 @@
 
     </div>
 
-    <div class="{% if object.pois.all %}span3{% endif %}">
+    <div class="{% if object.pois.all %}span4{% endif %}">
       <div class="accordion" id="pois-accordion">
         {% for poi in object.pois.all %}
         <div class="accordion-group">
