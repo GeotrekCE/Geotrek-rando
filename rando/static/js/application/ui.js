@@ -132,12 +132,6 @@ function page_load() {
 function view_home() {
     sliders();
 
-    $('#toggle-filters').click(function() {
-        $(this).toggleClass('active');
-        $(this).toggleClass('closed');
-        $("#advanced-filters").toggle();
-    });
-
     $('#clear-filters').off('click').on('click', function () {
         window.trekFilter.clear();
     });

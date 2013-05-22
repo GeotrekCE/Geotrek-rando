@@ -544,14 +544,6 @@ ul.social-buttons li {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-#toggle-filters {
-  background: url(../img/filter-settings.png) 50% 50% no-repeat;
-  background-size: 16px 16px;
-}
-#toggle-filters.active,
-#toggle-filters:active {
-  background-color: #e67e22;
-}
 #advanced-filters {
   clear: both;
   padding: 5px 5px 0px 5px;
