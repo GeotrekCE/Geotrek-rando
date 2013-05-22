@@ -146,11 +146,21 @@ body, html {
   height: 100%;
   position: relative;
   line-height: 1.4em;
+  font-size: 13px;
   background-color: white;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Open sans', Arial;
+  line-height: 27px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 14px;
 }
 
 a {
@@ -215,6 +225,16 @@ i.icon {
   text-shadow: none;
 }
 
+.btn {
+  font-size: 13px;
+  line-height: 19px;
+  padding: 4px 10px;
+}
+
+.alert {
+  padding-right: 14px;
+}
+
 /* Jquery UI override */
 .ui-widget-content , .ui-widget-overlay, .ui-widget-shadow {
  background: none;
@@ -260,7 +280,7 @@ header {
     font-family: 'Open sans', Arial;
     position: absolute;
     left: 140px;
-    top: 23px;
+    top: 17px;
   }
 }
 
@@ -284,7 +304,7 @@ header {
   width: 100%;
   height: 50px;
   bottom: 0;
-  .box-shadow(0 0 2px rgba(0, 0, 0, 0.1));
+  .box-shadow(0 0 2px rgba(0, 0, 0, 0.5));
   overflow: hidden;
   background-color: #f0f2ed;
   color: #fff;
@@ -374,6 +394,8 @@ ul.row-footer {
         color: white;
         text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
         .box-shadow(none);
+        border-bottom-color: rgba(0, 0, 0, 0.3);
+        line-height: 18px;
 
         &:hover,
         &.active {
@@ -398,6 +420,7 @@ ul.row-footer {
   top: 10px;
   right: 10px;
   line-height: 17px;
+  font-size: 13px;
 
   i {
     width: 19px;
@@ -410,10 +433,9 @@ ul.row-footer {
 
 .popover-content {
  padding: 5px;
-
- .facebook-like {
-  width: 71px;
- }
+ padding-bottom: 0;
+ min-width: 183px;
+ min-height: 67px;
 }
 
 .popover-inner {
@@ -428,6 +450,7 @@ ul.row-footer {
 
 ul.social-buttons {
  margin-left: 0px;
+ margin-bottom: 0px;
 }
 
 ul.social-buttons li {
@@ -437,8 +460,8 @@ ul.social-buttons li {
 }
 
 .popover.left .arrow {
- top: 20px;
- border-left: 5px solid rgba(255, 255, 255, 0.8);
+ top: 23px;
+ border-left-color: #f7f7f7;
 }
 
 
@@ -944,6 +967,7 @@ p.tab-content-empty {
       margin-bottom: 0;
       border-color: #E9EAE5;
       line-height: 15px;
+      padding: 4px 9px;
       .box-sizing(border-box);
       .border-radius(0);
       .box-shadow(none);
@@ -958,7 +982,6 @@ p.tab-content-empty {
 
       &:focus,
       &.focused {
-        padding: 4px 9px;
         color: #333333;
         text-shadow: 0 1px 0 #ffffff;
         background-color: #ffffff;
@@ -1034,6 +1057,8 @@ p.tab-content-empty {
     font-weight: bold;
     margin-top: 1px;
     margin-bottom: 0px;
+    font-size: 13px;
+    line-height: 18px;
   }
 }
 
@@ -1265,7 +1290,7 @@ p.tab-content-empty {
 
   a.btn i {
     position: absolute;
-    top: 0px;
+    top: 1px;
     left: 0px;
     display: inline-block;
     height: 25px;
