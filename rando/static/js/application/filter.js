@@ -1,7 +1,6 @@
 // JavaScript Document
 function TrekFilter()
 {
-    
     var self = this;
     self.matching = [];
 
@@ -9,18 +8,18 @@ function TrekFilter()
         $(".theme .filter").unbind('click').on('click', self.filterChanged);
         $(".chosen-select").chosen().change(self.filterChanged);
         $('#search').unbind('keyup').on("keyup", self.filterChanged);
-    }
+    };
 
     this.clear = function () {
         localStorage.removeItem('filterState');
         $(".theme .filter.active").removeClass('active');
         $(".chosen-select").val('').trigger("liszt:updated");
         self.load();
-    }
+    };
 
     this.save = function ()
     {
-        for (k in self.state)
+        for (var k in self.state)
             if ($.isEmptyObject(self.state[k]))
                 delete self.state[k];
 
@@ -73,7 +72,7 @@ function TrekFilter()
                         delete self.state[category][filter];
                 }
                 else {
-                    if (elem.length == 0 && $('#basic-filters').length > 0) {
+                    if (elem.length === 0 && $('#basic-filters').length > 0) {
                         console.warn('Unknown elem: ' + elem.selector);
                         delete self.state[category][filter];
                     }
@@ -99,11 +98,11 @@ function TrekFilter()
         }
         self.save();
         self.initEvents();
-    }
+    };
 
     this.filterChanged = function (e) {
-        var elem = $(e.target).data("filter") ? $(e.target) : $(e.target).parents('.filter')
-          , category = $(elem).data("filter");
+        var elem = $(e.target).data("filter") ? $(e.target) : $(e.target).parents('.filter'),
+            category = $(elem).data("filter");
         if (!(category in self.state)) {
             self.state[category] = {};
         }
@@ -112,7 +111,7 @@ function TrekFilter()
         if ($(elem).is("select")) {
             var values = $(e.target).val();
             self.state[category] = {};
-            for (v in values) {
+            for (var v in values) {
                 self.state[category][values[v]] = true;
             }
         }
@@ -127,7 +126,7 @@ function TrekFilter()
                 delete self.state[category][dataid];
         }
         self.save();
-    }
+    };
 
     this.sliderChanged = function(minVal, maxVal, name, slider)
     {
@@ -138,10 +137,10 @@ function TrekFilter()
         self.state['sliders'][name]['min'] = minVal;
         self.state['sliders'][name]['max'] = maxVal;
         self.save();
-    }
+    };
 
     this.match = function(trek) {
-        if (this.matchStage(trek) && 
+        if (this.matchStage(trek) &&
             this.matchDuration(trek) &&
             this.matchClimb(trek) &&
             this._matchList(trek, 'theme', 'themes') &&
@@ -152,18 +151,18 @@ function TrekFilter()
             this.search(trek))
              return true;
         return false;
-    }
+    };
 
     this.matchStage = function (trek) {
         if (!self.state.sliders) return true;
         if (!self.state.sliders.stage) return true;
         var minStage = self.state.sliders.stage.min;
         var maxStage = self.state.sliders.stage.max;
-        
+
         var trekDifficulty = trek.properties.difficulty;
         if  (!trekDifficulty) return true;
         return trekDifficulty.id >= minStage && trekDifficulty.id <= maxStage;
-    }
+    };
 
     this.matchDuration = function (trek) {
         if (!self.state.sliders) return true;
@@ -173,27 +172,27 @@ function TrekFilter()
         var matching = {
             1:12,
             2:24,
-            3:48,
+            3:48
         };
         var trekDuration = trek.properties.duration;
-        if (minDuration == 0) {
+        if (minDuration === 0) {
             if (maxDuration == 4) {
                 return true;
             }
-            if (maxDuration == 0) {
+            if (maxDuration === 0) {
                 return trekDuration <= 12;
-            } 
+            }
             return trekDuration <= matching[maxDuration];
         }
 
         if (minDuration == 4) {
             return trekDuration >= 48;
-        } 
+        }
         if (maxDuration == 4) {
             return trekDuration >= matching[minDuration];
         }
         return trekDuration >= matching[minDuration] && trekDuration <= matching[maxDuration];
-    }
+    };
 
     this.matchClimb = function (trek) {
         if (!self.state.sliders) return true;
@@ -203,48 +202,48 @@ function TrekFilter()
 
         var matching = {
             1:200,
-            2:700,
+            2:700
         };
         var trekClimb = trek.properties.ascent;
-        if (minClimb == 0) {
+        if (minClimb === 0) {
             if (maxClimb == 3) {
                 return true;
             }
-            if (maxClimb == 0) {
+            if (maxClimb === 0) {
                 return trekClimb <= 200;
-            } 
+            }
             return trekClimb <= matching[maxClimb];
         }
 
         if (minClimb == 3) {
             return trekClimb >= 1000;
-        } 
+        }
         if (maxClimb == 3) {
             return trekClimb >= matching[minClimb];
         }
         return trekClimb >= matching[minClimb] && trekClimb <= matching[maxClimb];
-    }
+    };
 
     this.matchRoute = function (trek) {
         if (!trek.properties.route || !self.state.route)
             return true;
         var routes = [];
-        for (r in self.state.route)
+        for (var r in self.state.route)
             routes.push(r);
-        if (routes.length == 0)
+        if (routes.length === 0)
             return true;
         return $.inArray(trek.properties.route, routes) != -1;
-    }
+    };
 
     this._matchList = function (trek, category, property) {
         var list = [];
-        for (filter in self.state[category]) {
+        for (var filter in self.state[category]) {
             if (self.state[category][filter] === true) {
                 list.push(''+filter);
             }
         }
         // All deselected, means always match !
-        if (list.length == 0) {
+        if (list.length === 0) {
             return true;
         }
 
@@ -252,7 +251,7 @@ function TrekFilter()
         // If at least, one is among selected, then it matches !
         for (var i=0; i<trek.properties[property].length; i++) {
             var item = trek.properties[property][i],
-                id = item.id || item.pk || item.code; 
+                id = item.id || item.pk || item.code;
             if ($.inArray(''+id, list) != -1) {
                 match = true;
                 break;
@@ -266,15 +265,15 @@ function TrekFilter()
             */
         }
         return match;
-    }
+    };
 
     this.search = function (trek) {
         var searched = self.state.search;
         if (!searched) return true;
 
-        var htmldecode = function (value) { 
-          return $('<div/>').html(value).text(); 
-        }
+        var htmldecode = function (value) {
+          return $('<div/>').html(value).text();
+        };
 
         var simplematch = function (property) {
             /*
@@ -288,9 +287,9 @@ function TrekFilter()
                     return true;
             }
             return false;
-        }
-        
-        var props = ['name', 'departure', 'arrival', 'ambiance', 
+        };
+
+        var props = ['name', 'departure', 'arrival', 'ambiance',
                      'description_teaser', 'description', 'access', 'advice'];
         for (var i=0; i<props.length; i++) {
             var prop = props[i];
@@ -319,6 +318,5 @@ function TrekFilter()
                 return true;
         }
         return false;
-    }
-
+    };
 };
