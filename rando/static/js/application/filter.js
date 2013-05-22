@@ -12,9 +12,19 @@ function TrekFilter()
 
     this.clear = function () {
         localStorage.removeItem('filterState');
+        window.location.hash = '';
         $(".theme .filter.active").removeClass('active');
         $(".chosen-select").val('').trigger("liszt:updated");
         self.load();
+    };
+
+    this.__saveState = function () {
+        var serialized = $.isEmptyObject(self.state) ? '' : JSON.stringify(self.state);
+        localStorage.setItem('filterState', serialized);
+
+        // Refresh URL hash, so that users can copy and paste URLs with filters
+        var compressed = LZString.compress(serialized);
+        window.location.hash = serialized.length > 0 ? stringToHex(compressed) : '';
     };
 
     this.save = function ()
@@ -30,8 +40,6 @@ function TrekFilter()
             $('#clear-filters').addClass('active');
         }
 
-        localStorage.setItem('filterState', JSON.stringify(self.state));
-
         self.matching = [];
         for(var i=0; i<window.treks.features.length; i++) {
             var trek = window.treks.features[i],
@@ -40,15 +48,38 @@ function TrekFilter()
                 self.matching.push(trekid);
             }
         }
+
+        this.__saveState();
         $(self).trigger("filterchange", [self.matching]);
     };
 
-    this.load = function () {
-        var retrievedObject = localStorage.getItem('filterState');
+    this.__loadState = function () {
+        var hash = window.location.hash.slice(1),
+            storage = localStorage.getItem('filterState'),
+            state = null;
+
+        // First try to load from hash
         try {
-            self.state = JSON.parse(retrievedObject);
+            if (hash.length > 0) {
+                var hexhash = hexToString(hash);
+                state = JSON.parse(LZString.decompress(hexhash));
+            }
         }
         catch (err) {}
+
+        // If no filter in hash, look into localStorage
+        if (state === null) {
+            try {
+                state = JSON.parse(storage);
+            }
+            catch (err) {}
+        }
+        return state;
+    };
+
+    this.load = function () {
+        self.state = this.__loadState();
+
         if (!self.state) self.state = {};
         if (!('sliders' in self.state)) {
            self.state['sliders'] = {'time':{}, 'stage':{}, 'den':{}};
@@ -319,4 +350,38 @@ function TrekFilter()
         }
         return false;
     };
+
+
+    /**
+     * Helper functions for string <--> hexadecimal
+     */
+    function d2h(d) {
+        return d.toString(16);
+    }
+    function h2d (h) {
+        return parseInt(h, 16);
+    }
+    function stringToHex (tmp) {
+        var str = '',
+            i = 0,
+            tmp_len = tmp.length,
+            c;
+        for (; i < tmp_len; i += 1) {
+            c = tmp.charCodeAt(i);
+            str += d2h(c) + '-';
+        }
+        return str;
+    }
+    function hexToString (tmp) {
+        var arr = tmp.split('-'),
+            str = '',
+            i = 0,
+            arr_len = arr.length,
+            c;
+        for (; i < arr_len; i += 1) {
+            c = String.fromCharCode( h2d( arr[i] ) );
+            str += c;
+        }
+        return str;
+    }
 };

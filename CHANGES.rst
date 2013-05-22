@@ -2,6 +2,14 @@
 CHANGELOG
 =========
 
+
+1.14 (unreleased)
+-----------------
+
+* Filters can now be set from URL hash
+* Advanced filters are now always visible
+
+
 1.13 (2013-05-17)
 -----------------
 
