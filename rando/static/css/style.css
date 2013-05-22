@@ -556,6 +556,9 @@ ul.social-buttons li {
   vertical-align: top;
   background-color: rgba(255, 255, 255, 0.5);
 }
+#advanced-filters select {
+  width: 110px;
+}
 /****************************************************************************
 * 
 * Śidebar
