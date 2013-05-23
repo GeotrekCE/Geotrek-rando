@@ -431,31 +431,15 @@ ul.social-buttons li {
 .slider-value.last {
   text-align: right;
 }
-.stage {
-  float: left;
-  margin-left: 10px;
-}
-.time {
-  float: left;
-  margin-left: 25px;
-}
-.den {
-  float: left;
-  margin-left: 25px;
-}
-.stage .slider-value {
-  width: 25%;
-}
-.time .slider-value {
-  width: 20%;
-}
-.den .slider-value {
-  width: 25%;
-}
 .slider {
   height: 23px;
   border: none;
   margin-top: 0px;
+}
+.ui-slider {
+  border: none;
+  left: 6px;
+  height: 19px;
 }
 .ui-slider .ui-slider-range {
   height: 4px;
@@ -478,28 +462,44 @@ ul.social-buttons li {
 .slider-wrap {
   padding-left: 3px;
 }
+.stage {
+  float: left;
+  margin-left: 10px;
+}
+.stage .slider-value {
+  width: 25%;
+}
 .stage .slider-wrap {
   background: url(../img/slider-stage.png) no-repeat;
   width: 197px;
+}
+.stage .ui-slider {
+  max-width: 179px;
+}
+.time {
+  float: left;
+  margin-left: 25px;
+}
+.time .slider-value {
+  width: 20%;
 }
 .time .slider-wrap {
   background: url(../img/slider-time.png) no-repeat;
   width: 254px;
 }
+.time .ui-slider {
+  max-width: 230px;
+}
+.den {
+  float: left;
+  margin-left: 25px;
+}
+.den .slider-value {
+  width: 25%;
+}
 .den .slider-wrap {
   background: url(../img/slider-den.png) no-repeat;
   width: 250px;
-}
-.ui-slider {
-  border: none;
-  left: 6px;
-  height: 19px;
-}
-.stage .ui-slider {
-  max-width: 179px;
-}
-.time .ui-slider {
-  max-width: 230px;
 }
 .den .ui-slider {
   max-width: 230px;
