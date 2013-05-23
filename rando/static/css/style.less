@@ -645,10 +645,6 @@ ul.social-buttons li {
   float:left;
   margin-left: 25px;
 
-  label {
-    line-height: 10px;
-  }
-
   .filter {
     display: inline-block;
     text-align: center;
@@ -1859,7 +1855,7 @@ a.accordion-toggle  {
     width: 80%;
     padding: 0;
     position: absolute;
-    top: 47px;
+    top: 48px;
     bottom: 0;
     height: auto;
     background: none;
@@ -1915,8 +1911,12 @@ a.accordion-toggle  {
           font-weight: normal;
           text-shadow: none;
           text-align: left;
-          height: 30px;
-          padding-top: 10px;
+          height: 40px;
+          padding-top: 20px;
+          padding-left: 15px;
+          font-size: 1.7em;
+          font-family: sans-serif-light, "Helvetica Neue", Helvetica, Arial, sans-serif;
+          font-weight: 100;
 
           &:hover {
             background-color: transparent;
@@ -1935,13 +1935,11 @@ a.accordion-toggle  {
     width: 45px;
     height: 45px;
     float: left;
-    background:url(../img/pn-logo.png) no-repeat 11px center;
-    .background-size(63% auto);
     .remove-callout();
 
     &.active {
-      i {
-        margin-left: -8px;
+      i.icon-list {
+        .translate3d(-6px, 0, 0);
       }
     }
 
@@ -1950,10 +1948,27 @@ a.accordion-toggle  {
     }
 
     i {
-      margin-top: 15px;
-      margin-left: -4px;
-      opacity: 0.8;
+      vertical-align: top;
+    }
+
+    i.icon-list {
+      margin-top: 16px;
       .transition(all 300ms);
+      background: url(../img/sprites.png) -178px top;
+      .background-size(94px auto);
+      height: 15px;
+      width: 9px;
+      .translate3d(0, 0, 0);
+      margin-right: 1px;
+    }
+
+    i.logo {
+      background: url(../img/sprites.png) -149px top;
+      .background-size(94px auto);
+      height: 27px;
+      width: 28px;
+      display: inline-block;
+      margin-top: 9px;
     }
   }
 
@@ -1963,6 +1978,7 @@ a.accordion-toggle  {
     top: 0;
     bottom: auto;
     height: auto;
+    min-height: 46px;
     width: 100%;
     border-right: none;
     background-color: rgba(255, 255, 255, 0.8);
@@ -2067,7 +2083,7 @@ a.accordion-toggle  {
       padding-left: 0;
 
       .search-query {
-        height: 35px;
+        height: 36px;
       }
 
       i {
@@ -2127,7 +2143,7 @@ a.accordion-toggle  {
       padding-left: 30px;
       margin: 0;
       font-weight: 300;
-      line-height: 45px;
+      line-height: 46px;
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
 
@@ -2143,9 +2159,10 @@ a.accordion-toggle  {
   .detail-content {
     position: absolute;
     overflow: auto;
-    top: 47px;
+    top: 48px;
     bottom: 0;
     -webkit-overflow-scrolling: touch;
+    z-index: 0;
   }
 
   #detail-content-top {
@@ -2218,7 +2235,9 @@ a.accordion-toggle  {
 }
 
 
-
+@media (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
+  
+}
 
 
 
