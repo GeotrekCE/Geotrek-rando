@@ -6,7 +6,7 @@ function TrekFilter()
     self.matching = [];
 
     this.initEvents = function () {
-        $(".theme .filter").unbind('click').on('click', self.filterChanged);
+        $(".theme .filter").unbind('click').on('click', self.filterChanged).tooltip();
         $(".chosen-select").chosen().change(self.filterChanged);
         $('#search').unbind('keyup').on("keyup", self.filterChanged);
     }
