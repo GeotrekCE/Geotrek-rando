@@ -305,9 +305,9 @@
     MBP.deviceDetect = function() {
         var ismobile    = (/iphone|ipod|android|blackberry|opera mini|opera mobi|skyfire|maemo|windows phone|palm|iemobile|symbian|symbianos|fennec/i.test(navigator.userAgent.toLowerCase()));
         var istablet    = (/ipad|android 3|sch-i800|playbook|tablet|kindle|gt-p1000|sgh-t849|shw-m180s|a510|a511|a100|dell streak|silk/i.test(navigator.userAgent.toLowerCase()));
-        var ischrome    = (/chrome/i.test(navigator.userAgent.toLowerCase()));
-        var isandroid   = (/android/i.test(navigator.userAgent.toLowerCase()));
-        var isios       = (/iphone|ipod|ipad/i.test(navigator.userAgent.toLowerCase()));
+        var ischrome    = (/chrome/i.test(MBP.ua.toLowerCase()));
+        var isandroid   = (/android/i.test(MBP.ua.toLowerCase()));
+        var isios       = (/iphone|ipod|ipad/i.test(MBP.ua.toLowerCase()));
 
         var device      = "",
             browser     = "",
@@ -331,5 +331,7 @@
 
         return device;
     };
+
+    MBP.deviceDetect();
 
 })(document);

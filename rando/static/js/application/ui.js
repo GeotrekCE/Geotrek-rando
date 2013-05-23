@@ -21,8 +21,6 @@ Modernizr.addTest('fullscreen', function(){
 
 
 function init_ui() {
-    MBP.deviceDetect();
-
     $(document).pjax('a.pjax', '#content');
 
     $('body').on('click', 'a.utils', function (e){
@@ -39,7 +37,7 @@ function init_ui() {
 
     $(window).smartresize(function() {
         // Check if youre on mobile or not
-        if(Modernizr.mq('only all and (max-width: 480px)')) {
+        if(Modernizr.mq('only all and (max-width: 979px)')) {
             MOBILE = true;
 
             // iOS mobile hide address bar for fullscreen trick
@@ -58,7 +56,7 @@ function init_ui() {
         console.log('resize');
     });
 
-    if(Modernizr.mq('only all and (max-width: 480px)')) {
+    if(Modernizr.mq('only all and (max-width: 979px)')) {
         MOBILE = true;
         
         // iOS mobile hide address bar for fullscreen trick
