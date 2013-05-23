@@ -109,6 +109,13 @@
       </div>
       {% endif %}
 
+     {% if object.properties.information_desk %}
+        <div id="trek-information-desk">
+          <h3>{% trans "Information Desk" %}</h3>
+          <p>{{ object.properties.information_desk|safe }}</p>
+        </div>
+      {% endif %}
+
     </div>
 
     <div class="span{% if object.pois.all %}4{% else %}7{% endif %}">

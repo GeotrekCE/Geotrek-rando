@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-17 13:07+0200\n"
+"POT-Creation-Date: 2013-05-23 16:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,136 +28,136 @@ msgstr "De %(departure)s à %(arrival)s"
 msgid "Share"
 msgstr "Partager"
 
-#: templates/trekking/detail-panel.html:19
+#: templates/trekking/detail-panel.html:20
 msgid "Favorite"
 msgstr "Favori"
 
-#: templates/trekking/detail-panel.html:22
+#: templates/trekking/detail-panel.html:23
 msgid "3D View"
 msgstr "Vue 3D"
 
-#: templates/trekking/detail-panel.html:23
+#: templates/trekking/detail-panel.html:24
 msgid "3D"
 msgstr ""
 
-#: templates/trekking/detail-panel.html:28
 #: templates/trekking/detail-panel.html:29
+#: templates/trekking/detail-panel.html:30
 msgid "Print"
 msgstr "Imprimer"
 
-#: templates/trekking/detail-panel.html:32
+#: templates/trekking/detail-panel.html:33
 msgid "Download GPX"
 msgstr "Télécharger GPX"
 
-#: templates/trekking/detail-panel.html:33
+#: templates/trekking/detail-panel.html:34
 msgid "GPX"
 msgstr ""
 
-#: templates/trekking/detail-panel.html:35
+#: templates/trekking/detail-panel.html:36
 msgid "Download for Google Earth"
 msgstr "Télécharger pour Google Earth"
 
-#: templates/trekking/detail-panel.html:36
+#: templates/trekking/detail-panel.html:37
 msgid "KML"
 msgstr ""
 
-#: templates/trekking/detail-panel.html:56
-msgid "Disabled-friendly infrastructures"
-msgstr "Aménagements pour handicapés"
-
-#: templates/trekking/detail-panel.html:63
-msgid "Access"
-msgstr "Accès"
-
-#: templates/trekking/detail-panel.html:75
-#: templates/trekking/home-panel.html:92 templates/trekking/home-panel.html:93
+#: templates/trekking/detail-panel.html:53
+#: templates/trekking/home-panel.html:91 templates/trekking/home-panel.html:92
 msgid "Route"
 msgstr "Parcours"
 
-#: templates/trekking/detail-panel.html:77
+#: templates/trekking/detail-panel.html:55
 msgid "Total Length"
 msgstr "Longueur totale"
 
-#: templates/trekking/detail-panel.html:78
-#: templates/trekking/home-panel.html:74 templates/trekking/home-panel.html:75
+#: templates/trekking/detail-panel.html:56
+#: templates/trekking/home-panel.html:73 templates/trekking/home-panel.html:74
 msgid "Valleys"
 msgstr "Vallées"
 
-#: templates/trekking/detail-panel.html:79
-#: templates/trekking/home-panel.html:15
+#: templates/trekking/detail-panel.html:59
+#: templates/trekking/home-panel.html:14
 msgid "Difficulty"
 msgstr "Difficulté"
 
-#: templates/trekking/detail-panel.html:80
+#: templates/trekking/detail-panel.html:60
 msgid "Ascent"
 msgstr "Dénivelé"
 
-#: templates/trekking/detail-panel.html:81
+#: templates/trekking/detail-panel.html:61
 #: templates/trekking/home-panel.html:24
 msgid "Duration"
 msgstr "Durée"
 
-#: templates/trekking/detail-panel.html:97
-msgid "Networks"
-msgstr "Réseaux"
-
-#: templates/trekking/detail-panel.html:104
+#: templates/trekking/detail-panel.html:79
 msgid "Transport"
 msgstr ""
 
+#: templates/trekking/detail-panel.html:100
+msgid "Disabled-friendly infrastructures"
+msgstr "Aménagements pour handicapés"
+
+#: templates/trekking/detail-panel.html:107
+msgid "Access"
+msgstr "Accès"
+
 #: templates/trekking/detail-panel.html:114
+msgid "Information Desk"
+msgstr "Lieu de renseignement"
+
+#: templates/trekking/detail-panel.html:124
 msgid "This trek is within park center"
 msgstr "Cet itinéraire est dans le coeur du parc national"
 
-#: templates/trekking/detail-panel.html:114
+#: templates/trekking/detail-panel.html:124
 msgid "please read access rules."
 msgstr "veuillez consulter la réglémentation."
 
-#: templates/trekking/detail-panel.html:119
+#: templates/trekking/detail-panel.html:129
 msgid "Clic for map interaction"
 msgstr "Cliquer pour intéragir"
 
-#: templates/trekking/detail-panel.html:123
+#: templates/trekking/detail-panel.html:133
 msgid "Altitude profile"
 msgstr "Profil altimétrique"
 
-#: templates/trekking/detail-panel.html:124
+#: templates/trekking/detail-panel.html:134
 msgid "Altitude (m)"
 msgstr "Altitude (m)"
 
-#: templates/trekking/detail-panel.html:126
+#: templates/trekking/detail-panel.html:136
 msgid "Min"
 msgstr ""
 
-#: templates/trekking/detail-panel.html:127
+#: templates/trekking/detail-panel.html:137
 msgid "Max"
 msgstr ""
 
-#: templates/trekking/detail-panel.html:129
+#: templates/trekking/detail-panel.html:139
 msgid "Distance (m)"
 msgstr "Distance (m)"
 
-#: templates/trekking/detail-panel.html:137
+#: templates/trekking/detail-panel.html:147
 msgid "See also"
 msgstr "Plus d'informations"
 
-#: templates/trekking/detail-panel.html:161
+#: templates/trekking/detail-panel.html:171
 msgid "Related treks"
 msgstr "Itinéraires liés"
 
-#: templates/trekking/detail-panel.html:164
+#: templates/trekking/detail-panel.html:174
 msgid "Sharing departure"
 msgstr "Au départ"
 
-#: templates/trekking/detail-panel.html:173
+#: templates/trekking/detail-panel.html:183
 msgid "Sharing paths"
 msgstr "Sur le chemin"
 
-#: templates/trekking/detail-panel.html:182
+#: templates/trekking/detail-panel.html:192
 msgid "Sharing circuit"
 msgstr "Dans le circuit"
 
-#: templates/trekking/detail-panel.html:194
+#: templates/trekking/detail-panel.html:204
 msgid "Advice"
 msgstr "Recommandation"
 
@@ -166,26 +166,30 @@ msgid "Back to list"
 msgstr "Retour à la liste"
 
 #: templates/trekking/fake_searchtabs_fragment.html:12
-#: templates/trekking/home-panel.html:127
-#: templates/trekking/home-panel.html:141
+#: templates/trekking/home-panel.html:128
+#: templates/trekking/home-panel.html:142
 msgid "Favorites"
 msgstr "Favoris"
 
-#: templates/trekking/home-panel.html:11
+#: templates/trekking/home-panel.html:10
 msgid "Filters"
 msgstr "Filtres"
 
-#: templates/trekking/home-panel.html:19
+#: templates/trekking/home-panel.html:18
 msgid "Easy"
 msgstr "Facile"
 
-#: templates/trekking/home-panel.html:20
+#: templates/trekking/home-panel.html:19
 msgid "Medium"
 msgstr "Confirmé"
 
-#: templates/trekking/home-panel.html:21
+#: templates/trekking/home-panel.html:20
 msgid "Hard"
 msgstr "Sportif"
+
+#: templates/trekking/home-panel.html:21
+msgid "Expert"
+msgstr ""
 
 #: templates/trekking/home-panel.html:28
 msgid "Short"
@@ -208,19 +212,15 @@ msgstr "Dénivelé"
 msgid "Thematic"
 msgstr "Thème"
 
-#: templates/trekking/home-panel.html:56 templates/trekking/home-panel.html:57
+#: templates/trekking/home-panel.html:56
 msgid "Reset filters"
 msgstr "Réinitialiser les filtres"
 
-#: templates/trekking/home-panel.html:57
-msgid "Advanced filters"
-msgstr "Filtres avancés"
-
-#: templates/trekking/home-panel.html:65 templates/trekking/home-panel.html:66
+#: templates/trekking/home-panel.html:64 templates/trekking/home-panel.html:65
 msgid "Usages"
 msgstr "Usages"
 
-#: templates/trekking/home-panel.html:83 templates/trekking/home-panel.html:84
+#: templates/trekking/home-panel.html:82 templates/trekking/home-panel.html:83
 msgid "Cities"
 msgstr "Communes"
 
@@ -232,16 +232,16 @@ msgstr "Rechercher"
 msgid "Name, Valley, ..."
 msgstr "Nom, vallée, ..."
 
-#: templates/trekking/home-panel.html:123
-#: templates/trekking/home-panel.html:133
+#: templates/trekking/home-panel.html:124
+#: templates/trekking/home-panel.html:134
 msgid "Results"
 msgstr "Résultats"
 
-#: templates/trekking/home-panel.html:134
+#: templates/trekking/home-panel.html:135
 msgid "No result"
 msgstr "Aucun résultat"
 
-#: templates/trekking/home-panel.html:142 templatetags/trekking.py:21
+#: templates/trekking/home-panel.html:143 templatetags/trekking.py:21
 msgid "Empty"
 msgstr "Vide"
 
@@ -307,6 +307,12 @@ msgstr "%(hour)sH%(min)s"
 #, python-format
 msgid "%s min."
 msgstr "%s min"
+
+#~ msgid "Networks"
+#~ msgstr "Réseaux"
+
+#~ msgid "Advanced filters"
+#~ msgstr "Filtres avancés"
 
 #~ msgid "Themes"
 #~ msgstr "Thèmes"
