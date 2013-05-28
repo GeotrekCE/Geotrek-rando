@@ -73,14 +73,6 @@
           {% if forloop.last %}</ul></div>{% endif %}
         {% endfor %}
       </div>
-
-      {% if object.properties.public_transport %}
-        <div id="trek-transport">
-          <h3>{% trans "Transport" %}</h3>
-          <p>{{ object.properties.public_transport|safe }}</p>
-        </div>
-      {% endif %}
-
     </div>
   </div>
 
@@ -198,6 +190,13 @@
         </div>
         {% endif %}
       </div>
+
+      {% if object.properties.public_transport %}
+        <div id="trek-transport">
+          <h3>{% trans "Transport" %}</h3>
+          <p>{{ object.properties.public_transport|safe }}</p>
+        </div>
+      {% endif %}
 
      {% if object.properties.advice %}
         <div id="trek-advice" class="alert alert-error">
