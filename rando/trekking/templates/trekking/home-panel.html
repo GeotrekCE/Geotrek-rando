@@ -1,7 +1,5 @@
 {% load i18n static leaflet_tags trekking %}
 
-<div class="background-menu-mobile"></div>
-
 {% include "trekking/share_fragment.html" with title=TITLE %}
 
 {% if pjax %}
@@ -54,13 +52,12 @@
     </div>
 
     <div id="filters-actions">
-      <a class="btn utils" id="clear-filters" href="#" data-toggle="tooltip" title="{% trans "Reset filters" %}"><span class="hidden">{% trans "Reset filters" %}</span></a> 
-      <a class="btn utils closed show-hide-filters" id="toggle-filters" href="#" data-toggle="tooltip"  title="{% trans "Advanced filters" %}"><span class="hidden">{% trans "Reset filters" %}</span></a> 
+      <a class="btn utils" id="clear-filters" href="#" data-toggle="tooltip" title="{% trans "Reset filters" %}"><span class="hidden">{% trans "Reset filters" %}</span></a>
     </div>
 
   </div>
 
-  <div id="advanced-filters" style="display: none">
+  <div id="advanced-filters">
 
     <div class="filter-bloc usage">
       <label for="usage" class="hidden">{% trans "Usages" %}</label>

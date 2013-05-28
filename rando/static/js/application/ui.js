@@ -130,12 +130,6 @@ function page_load() {
 function view_home() {
     sliders();
 
-    $('#toggle-filters').click(function() {
-        $(this).toggleClass('active');
-        $(this).toggleClass('closed');
-        $("#advanced-filters").toggle();
-    });
-
     $('#clear-filters').off('click').on('click', function () {
         window.trekFilter.clear();
     });
@@ -151,7 +145,7 @@ function view_home() {
     });
 
     // Show active tab
-    if (window.location.hash) {
+    if (/results|backpack/.test(window.location.hash)) {
         $('#tab-' + window.location.hash.slice(1) + ' a').click();
     }
 
@@ -438,8 +432,7 @@ function init_share() {
 
 function init_mobile() {
     var $menuButton = $('#toggle-header-mobile'),
-        $menuBg     = $('.background-menu-mobile'),
-        $menu       = $('header')
+        $menu       = $('header');
 
     // Pages menu toggle
     $menuButton.on('click', function (e) {
@@ -449,19 +442,16 @@ function init_mobile() {
         if($menu.hasClass('open')) {
             $menu.removeClass('open');
             $(this).removeClass('active');
-            $menuBg.removeClass('active');
             $(document).off('click.menu');
         } else {
             $menu.addClass('open');
             $(this).addClass('active');
-            $menuBg.addClass('active');
 
             // any touch outside, close the menu
             $(document).one('click.menu', function (e) {
                 if ($menu.has(e.target).length === 0 && e.target != $menu[0]){
                     $menu.removeClass('open');
                     $menuButton.removeClass('active');
-                    $menuBg.removeClass('active');
                 }
             });
         }
