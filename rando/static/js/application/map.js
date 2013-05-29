@@ -432,6 +432,7 @@ function detailmapInit(map, bounds) {
     // Add reset view control
     map.whenReady(function () {
         new L.Control.ResetView(wholeBounds, {position: 'topright'}).addTo(map);
+        map.addControl(new L.Control.Scale({imperial: false, position: 'bottomright'}));
 
         map.scrollWheelZoom.disable();
         var enableWheel = function () {
