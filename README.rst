@@ -185,6 +185,19 @@ Footer
 
 A ``footer.html`` is loaded and injected into the page.
 
+To hide the footer, add in ``style.css``:
+
+::
+
+    footer {
+        display: none;
+    }
+
+    #container-content {
+        bottom: 0px;
+    }
+
+
 Map elements
 ============
 
