@@ -8,6 +8,16 @@ CHANGELOG
 
 * Filters can now be set from URL hash
 * Advanced filters are now always visible
+* Rename "Length" to "Total length"
+* Remove networks from detail page
+* Added reset button for search with mobile
+* Added help for custom map tiles
+* Stripped down JQueryUI to sliders only
+* Added information desk field (Geotrek 0.18)
+* Tooltips on themes filters
+* Fixed transport bloc position in detail page
+* 3 columns layout of detail page
+* Add label "On the way" for POIs column
 
 
 1.13 (2013-05-17)
