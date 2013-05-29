@@ -208,6 +208,9 @@
     </div>
 
     <div class="{% if object.pois.all %}span4{% endif %}">
+
+      <h5>{% trans "On the way..." %}</h5>
+
       <div class="accordion" id="pois-accordion">
         {% for poi in object.pois.all %}
         <div class="accordion-group">
