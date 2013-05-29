@@ -45,7 +45,7 @@ Most important settings :
 * **DESCRIPTION** (in every supported language, fallback to English)
 
 If you run the application on a preproduction, it is wise to set ``PREPROD = True``, in order
-to disable Robots indexing.
+to disable Robots (Google) indexing.
 
 
 Apache vhost
@@ -63,6 +63,9 @@ Edit it and replace ``/PATH_TO_SOURCE/`` by the correct absolute path (i.e where
 ::
 
     sudo nano /etc/apache2/sites-available/rando
+
+Be careful, the sample Apache configuration assumes that you have python in version 2.7 (Default in Ubuntu 12.04+ and Debian wheezy).
+If you run python 2.6 (Debian squeeze), make sure the line ``WSGIPythonPath`` points to the folder ``lib/python2.6/site-packages``.
 
 Activate it and restart apache :
 
