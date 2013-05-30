@@ -3,7 +3,7 @@ CHANGELOG
 =========
 
 
-1.14 (unreleased)
+1.14 (2013-05-30)
 -----------------
 
 * Filters can now be set from URL hash
@@ -18,6 +18,7 @@ CHANGELOG
 * Fixed transport bloc position in detail page
 * 3 columns layout of detail page
 * Add label "On the way" for POIs column
+* Update italian translation
 
 
 1.13 (2013-05-17)
