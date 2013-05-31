@@ -23,6 +23,8 @@ Modernizr.addTest('fullscreen', function(){
 function init_ui() {
     $(document).pjax('a.pjax', '#content');
 
+    FastClick.attach(document.body);
+
     $('body').on('click', 'a.utils', function (e){
         e.preventDefault();
     });
