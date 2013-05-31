@@ -762,8 +762,8 @@ p.tab-content-empty {
 }
 #text-search .navbar-search {
   width: 100%;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 4px;
+  margin-bottom: 4px;
   padding-left: 5px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -778,7 +778,7 @@ p.tab-content-empty {
   margin-bottom: 0;
   border-color: #E9EAE5;
   line-height: 17px;
-  padding: 4px 9px;
+  padding: 4px 10px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -1140,6 +1140,9 @@ html.no-webgl #toolbox a.view3d {
 #detail-content-title h2 {
   margin-top: 0;
   margin-bottom: 7px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 #detail-content-title h3 {
   background: none;
@@ -1608,7 +1611,7 @@ a.accordion-toggle {
   #toggle-header-mobile {
     display: block;
     width: 45px;
-    height: 45px;
+    height: 46px;
     float: left;
     -webkit-touch-callout: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -1725,8 +1728,8 @@ a.accordion-toggle {
     position: absolute;
     top: 0;
     right: 0;
-    width: 45px;
-    height: 45px;
+    width: 44px;
+    height: 46px;
     overflow: hidden;
   }
   #text-search,
@@ -1734,11 +1737,19 @@ a.accordion-toggle {
     width: 100%;
   }
   #result-backpack-content {
-    height: 153px;
+    max-height: 154px;
+    height: auto;
     right: 0;
-    top: 47px;
+    bottom: auto;
+    top: 48px;
+    display: block;
+    border-right: none;
+    padding-top: 0;
+    overflow: hidden;
+  }
+  #results,
+  #backpack {
     display: none;
-    -webkit-overflow-scrolling: touch;
   }
   .theme-tools {
     float: none;
@@ -1747,15 +1758,15 @@ a.accordion-toggle {
   }
   #text-search {
     position: absolute;
-    left: 45px;
-    right: 45px;
+    left: 44px;
+    right: 44px;
     width: auto;
   }
   #text-search .navbar-search {
     padding-left: 0;
   }
   #text-search .navbar-search .search-query {
-    height: 36px;
+    height: 38px;
   }
   #text-search .navbar-search i {
     right: 13px;
@@ -1821,7 +1832,6 @@ a.accordion-toggle {
     margin-top: 75px;
   }
   #detail-content-title h2 {
-    white-space: normal;
     font-size: 1.5em;
     margin-bottom: 0;
     text-transform: uppercase;

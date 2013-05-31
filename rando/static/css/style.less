@@ -961,8 +961,8 @@ p.tab-content-empty {
 
   .navbar-search {
     width: 100%;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 4px;
+    margin-bottom: 4px;
     padding-left: 5px;
     .box-sizing(border-box);
 
@@ -974,7 +974,7 @@ p.tab-content-empty {
       margin-bottom: 0;
       border-color: #E9EAE5;
       line-height: 17px;
-      padding: 4px 9px;
+      padding: 4px 10px;
       .box-sizing(border-box);
       .border-radius(0);
       .box-shadow(none);
@@ -1384,6 +1384,9 @@ html.no-webgl #toolbox a.view3d {
   h2 {
     margin-top: 0;
     margin-bottom: 7px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   h3 {
@@ -1933,7 +1936,7 @@ a.accordion-toggle  {
   #toggle-header-mobile {
     display: block;
     width: 45px;
-    height: 45px;
+    height: 46px;
     float: left;
     .remove-callout();
 
@@ -2049,8 +2052,8 @@ a.accordion-toggle  {
     position: absolute;
     top: 0;
     right: 0;
-    width: 45px;
-    height: 45px;
+    width: 44px;
+    height: 46px;
     overflow: hidden;
   }
 
@@ -2060,11 +2063,19 @@ a.accordion-toggle  {
   }
 
   #result-backpack-content {
-    height: 153px;
+    max-height: 154px;
+    height: auto;
     right: 0;
-    top: 47px;
+    bottom: auto;
+    top: 48px;
+    display: block;
+    border-right: none;
+    padding-top: 0;
+    overflow: hidden;
+  }
+
+  #results, #backpack {
     display: none;
-    -webkit-overflow-scrolling: touch;
   }
 
   .theme-tools {
@@ -2075,15 +2086,15 @@ a.accordion-toggle  {
 
   #text-search {
     position: absolute;
-    left: 45px;
-    right: 45px;
+    left: 44px;
+    right: 44px;
     width: auto;
 
     .navbar-search {
       padding-left: 0;
 
       .search-query {
-        height: 36px;
+        height: 38px;
       }
 
       i {
@@ -2171,7 +2182,6 @@ a.accordion-toggle  {
 
   #detail-content-title {
     h2 {
-      white-space: normal;
       font-size: 1.5em;
       margin-bottom: 0;
       text-transform: uppercase;
