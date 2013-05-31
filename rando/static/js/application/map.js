@@ -267,7 +267,7 @@ function mainmapInit(map, bounds) {
 
 
         if(MOBILE) {
-            $(popup._container).on('mouseup', function (event) {
+            $(".leaflet-popup-content-wrapper").on('click', function (event) {
                 $.pjax({container: '#content', url:$("a.pjax", popup._container).attr('href')});
             });
         }
