@@ -438,8 +438,6 @@ function init_mobile() {
 
     // Pages menu toggle
     $menuButton.on('click', function (e) {
-        e.stopPropagation();
-
         // if menu open
         if($menu.hasClass('open')) {
             $menu.removeClass('open');
@@ -450,24 +448,33 @@ function init_mobile() {
             $(this).addClass('active');
 
             // any touch outside, close the menu
-            $(document).one('click.menu', function (e) {
-                if ($menu.has(e.target).length === 0 && e.target != $menu[0]){
+            $(document).on('click.menu', function (e) {
+                if ($menu.has(e.target).length === 0 && e.target != $menu[0] && $menuButton.has(e.target).length === 0 && e.target != $menuButton[0]){
                     $menu.removeClass('open');
                     $menuButton.removeClass('active');
+                    $(document).off('click.menu');
                 }
             });
         }
     });
 
-    $('#search').on('focus', function () {
-        $('#result-backpack-content').show();
-        $('#results').show();
-        $('#backpack').removeClass('active');
-        $('#tab-backpack').removeClass('active');
+    // Remove desktop specific events
+    $('#side-bar .result').off('dblclick mouseenter mouseleave');
+
+    // Show search tab
+    $('#search').on('focus', function (e) {
 
         // Reset button when searching (trigger closing of mobile keyboard)
         $('#text-search .navbar-search div').addClass('reset').one('click', function (e) {
             $('#search').blur();
+        });
+
+        $('#results').show();
+        $(document).on('click.results', function (e) {
+            if ($('#search').has(e.target).length === 0 && e.target != $('#search')[0]) {
+                $('#results').hide();
+                $(document).off('click.results');
+            }
         });
     });
 
@@ -475,10 +482,20 @@ function init_mobile() {
     $('#tab-backpack a').off('click').on('click', function (e) {
         e.preventDefault();
 
-        $('#results').toggle();
-        $('#result-backpack-content').toggle();
-        $('#backpack').toggleClass('active');
+        if ($(this).parent().hasClass('active')) {
+            $(document).off('click.backpack');
+        } else {
+            $(document).on('click.backpack', function (e) {
+                if ($('#tab-backpack').has(e.target).length === 0 && e.target != $('#tab-backpack')[0]){
+                    $('#backpack').hide();
+                    $('#tab-backpack').removeClass('active');
+                    $(document).off('click.backpack');
+                }
+            });
+        }
+
         $(this).parent().toggleClass('active');
+        $('#backpack').toggle();
     });
 
     var resultTaped = false;
@@ -489,34 +506,28 @@ function init_mobile() {
             $(this).focus();
             resultTaped = false;
         } else {
-            $('#result-backpack-content').hide();
             $('#text-search .navbar-search div').removeClass('reset').off('click');
+            $('#results').hide();
+            $(document).off('click.results');
         }
     });
 
-    // Remove desktop specific events
-    $('#side-bar .result').off('dblclick mouseenter mouseleave');
-
-    $('#results .result').on('mousedown', function (e) {
+    $('#side-bar .result').on('mousedown', function (e) {
         resultTaped = true;
     });
 
-    $('#results .result').on('mouseup', function (e) {
+    $('#side-bar .result').on('mouseup', function (e) {
         $('#search').blur();
     });
 
     // Prevent following <a> link tag if clicked on results
     $('#side-bar .result').on({
-        mouseup: function (e) {
+        click: function (e) {
             e.preventDefault();
             e.stopPropagation();
 
             $('#search').blur();
             $(this).parents('.result').click();
-        },
-        click: function (e) {
-            e.preventDefault();
-            e.stopPropagation();
         }
     }, 'a.pjax');
 }
