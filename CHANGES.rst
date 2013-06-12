@@ -2,6 +2,10 @@
 CHANGELOG
 =========
 
+1.15 (2013-06-12)
+-----------------
+
+* Show information desk properly in detail page
 
 1.14 (2013-05-30)
 -----------------

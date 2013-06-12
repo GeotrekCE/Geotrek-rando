@@ -104,7 +104,8 @@
      {% if object.properties.information_desk %}
         <div id="trek-information-desk">
           <h3>{% trans "Information Desk" %}</h3>
-          <p>{{ object.properties.information_desk|safe }}</p>
+          <p class="title">{{ object.properties.information_desk.title }}</p>
+          <p>{{ object.properties.information_desk.description|safe }}</p>
         </div>
       {% endif %}
 
