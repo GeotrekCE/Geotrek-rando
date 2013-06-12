@@ -6,6 +6,8 @@ CHANGELOG
 -----------------
 
 * Show information desk properly in detail page
+* Fix blur lines in Android (positions multiple of 2)
+* Better touch experience, remove click delay (fastclick)
 
 1.14 (2013-05-30)
 -----------------
