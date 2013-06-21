@@ -149,6 +149,9 @@ L.Map.include(FakeBoundsMapMixin);
 
 L.Map.include({
     switchLayer: function (name) {
+        // Requires layerscontrol
+        if (!this.layerscontrol) return;
+
         var layers = this.layerscontrol._layers,
             selected = null;
         for (var id in layers) {
