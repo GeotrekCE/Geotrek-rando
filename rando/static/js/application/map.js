@@ -174,6 +174,7 @@ L.Map.include({
  * Callbacks of Django Leaflet.
  */
 function mainmapInit(map, bounds) {
+    $(window).trigger('map:init', [map, 'main']);
     map.attributionControl.setPrefix('');
 
     window.treksLayer = new TrekLayer(window.treks).addTo(map);
@@ -196,8 +197,8 @@ function mainmapInit(map, bounds) {
     map.whenReady(function () {
         map.switchLayer('main');
         map.removeControl(map.layerscontrol);
-
         new L.Control.ResetView(treksLayer.getBounds(), {position: 'topright'}).addTo(map);
+        $(window).trigger('map:ready', [map, 'main']);
     });
 
     // Filter map on filter
@@ -309,6 +310,7 @@ function mainmapInit(map, bounds) {
 
 
 function detailmapInit(map, bounds) {
+    $(window).trigger('map:init', [map, 'detail']);
     map.attributionControl.setPrefix('');
     L.control.fullscreen({
         position: 'topright',
@@ -456,7 +458,6 @@ function detailmapInit(map, bounds) {
 
     // Add reset view control
     map.whenReady(function () {
-
         map.switchLayer('detail');
         map.removeControl(map.layerscontrol);
 
@@ -487,6 +488,8 @@ function detailmapInit(map, bounds) {
                 enableWheel();
             });
         }, 500);
+
+        $(window).trigger('map:ready', [map, 'detail']);
     });
 }
 

@@ -7,6 +7,7 @@ CHANGELOG
 
 * Add ability to have different layers on home and detail
 * Fix typos in README
+* Add ability to add extra layers on maps (like park boundaries etc.)
 
 1.15 (2013-06-12)
 -----------------

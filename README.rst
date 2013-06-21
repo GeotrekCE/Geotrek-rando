@@ -220,6 +220,42 @@ The map elements colors can be set from the ``footer.html`` page, using a ``<scr
 ``style`` is the base color; ``hoverstyle`` is for mouse over; ``outlinestyle`` is for outline effect. See `Leaflet documentation on paths <http://leafletjs.com>`_ for more details.
 
 
+Extra background layers
+-----------------------
+
+For example, you may want to add a layer with the boundaries of the park, or infrastructures, equipments...
+
+Using Tilemill, you can create a layer with transparency, from a local ShapeFile, PostGIS query, KML etc. You can export the layer as a MBTiles file.
+
+You can host the resulting MBTiles yourself (`with Apache <http://blog.mathieu-leplatre.info/serve-your-map-layers-with-a-usual-web-hosting-service.html>`_),
+or on dedicated services like `MapBox <http://mapbox.com>`_.
+
+The tiles of this layer can then be added to the maps, using this snippet (for example) of code, placed in the ``footer.html`` page. See Leaflet API documentation if any problem.
+
+::
+
+    <script type="text/javascript">
+        (function() {
+              // Extra tile layer
+              var boundaries = null;
+              // Add it on all maps at initialization
+              $(window).on('map:ready', function (e, map) {
+                    boundaries = boundaries || L.tileLayer('http://geobi.makina-corpus.net/livembtiles/coeur-ecrins/{z}/{x}/{y}.png')
+                    if (!map.hasLayer(boundaries)) {
+                          map.addLayer(boundaries);
+                          boundaries.bringToFront();
+                    }
+              });
+        })();
+    </script>
+
+:note:
+
+    The same technique could be applied using a local vectorial GeoJSON layer. Caution with the weight of the page, 
+    and performance with mobile users.
+
+
+
 Altimetric profile colors
 =========================
 
