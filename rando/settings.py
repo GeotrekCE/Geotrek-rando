@@ -10,7 +10,7 @@ TEMPLATE_DEBUG = DEBUG
 PREPROD = False
 
 ADMINS = (
-    ('Mathieu Leplatre', 'mathieu.leplatre@makin-corpus.com'),
+    ('Makina Corpus', 'geobi@makina-corpus.com'),
 )
 
 MANAGERS = ADMINS
@@ -146,7 +146,7 @@ INSTALLED_APPS = (
 COMPRESS_PARSER = 'compressor.parser.HtmlParser'
 
 LEAFLET_CONFIG = {
-    "TILES_URL": 'http://{s}.tiles.mapbox.com/v3/examples.map-4l7djmvo/{z}/{x}/{y}.png',
+    "TILES_URL": 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     "SCALE": False,
     "MINIMAP": True,
 }

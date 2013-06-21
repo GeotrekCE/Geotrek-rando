@@ -201,11 +201,7 @@ To hide the footer, add in ``style.css``:
 Map elements
 ============
 
-The tile layer can be configured from ``settings.py``. For example, in order to use IGN WMTS tiles :
-
-::
-
-    LEAFLET_CONFIG['TILES_URL'] = 'http://gpp3-wxs.ign.fr/tiles/<YOUR KEY>/geoportail/wmts?LAYER=GEOGRAPHICALGRIDSYSTEMS.MAPS&EXCEPTIONS=text/xml&FORMAT=image/jpeg&SERVICE=WMTS&VERSION=1.0.0&REQUEST=GetTile&STYLE=normal&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}'
+The background layers can be configured from ``settings_local.py``. See sample.
 
 
 The map elements colors can be set from the ``footer.html`` page, using a ``<script>`` block :

@@ -20,8 +20,22 @@ DESCRIPTION = {
 GANALYTICS_TRACKING_CODE = 'UA-XXXXXXXX-XX'
 
 PRINT_ENABLED = True
+VIEW3D_ENABLED = True
 
-LEAFLET_CONFIG['TILES_URL'] = 'http://{s}.tiles.mapbox.com/v3/examples.map-4l7djmvo/{z}/{x}/{y}.png'
+
+#
+# Layers customizations
+#......................
+#
+# LEAFLET_CONFIG = {
+#     "TILES_URL": [
+#         ('main', 'http://{s}.tiles.mapbox.com/v3/examples.map-4l7djmvo/{z}/{x}/{y}.png'),
+#         ('detail', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
+#     ],
+#     "SCALE": False,
+#     "MINIMAP": True,
+# }
+
 
 #
 # In preprod

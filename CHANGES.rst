@@ -2,6 +2,12 @@
 CHANGELOG
 =========
 
+1.16 (2013-06-21)
+-----------------
+
+* Add ability to have different layers on home and detail
+* Fix typos in README
+
 1.15 (2013-06-12)
 -----------------
 

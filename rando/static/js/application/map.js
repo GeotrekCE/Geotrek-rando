@@ -147,6 +147,28 @@ var FakeBoundsMapMixin = {
 L.Map.include(FakeBoundsMapMixin);
 
 
+L.Map.include({
+    switchLayer: function (name) {
+        var layers = this.layerscontrol._layers,
+            selected = null;
+        for (var id in layers) {
+            var l = layers[id];
+            if (l.name == name) {
+                selected = l.layer;
+                this.addLayer(l.layer);
+            }
+            else {
+                if (this.hasLayer(l.layer))
+                    this.removeLayer(l.layer);
+            }
+        }
+        if (selected === null) throw "unknown layer " + name;
+        this.fire('baselayerchange', {layer: selected});
+    }
+});
+
+
+
 /**
  * Map initialization functions.
  * Callbacks of Django Leaflet.
@@ -172,6 +194,9 @@ function mainmapInit(map, bounds) {
 
     // Add reset view control
     map.whenReady(function () {
+        map.switchLayer('main');
+        map.removeControl(map.layerscontrol);
+
         new L.Control.ResetView(treksLayer.getBounds(), {position: 'topright'}).addTo(map);
     });
 
@@ -431,6 +456,10 @@ function detailmapInit(map, bounds) {
 
     // Add reset view control
     map.whenReady(function () {
+
+        map.switchLayer('detail');
+        map.removeControl(map.layerscontrol);
+
         new L.Control.ResetView(wholeBounds, {position: 'topright'}).addTo(map);
         map.addControl(new L.Control.Scale({imperial: false, position: 'bottomright'}));
 
