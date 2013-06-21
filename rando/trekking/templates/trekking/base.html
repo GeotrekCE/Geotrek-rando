@@ -168,12 +168,10 @@
             });
 
             $(document).on('pjax:start', function (e) {
-                console.log('pjax start');
                 page_leave();
             });
 
             $(document).on('pjax:end', function (e) {
-                console.log('pjax end');
                 var mainmapContainer = L.DomUtil.get('mainmap');
                 if (mainmapContainer && typeof(loadmapmainmap) == "function") {
                 if (!mainmapContainer._leaflet) loadmapmainmap();
