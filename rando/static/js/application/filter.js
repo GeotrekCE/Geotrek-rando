@@ -201,9 +201,10 @@ function TrekFilter()
         var minDuration = self.state.sliders.time.min;
         var maxDuration = self.state.sliders.time.max;
         var matching = {
-            1:12,
-            2:24,
-            3:48
+            1:4,
+            2:12,
+            3:24,
+            4:48
         };
         var trekDuration = trek.properties.duration;
         if (minDuration === 0) {
@@ -211,7 +212,7 @@ function TrekFilter()
                 return true;
             }
             if (maxDuration === 0) {
-                return trekDuration <= 12;
+                return trekDuration <= 2;
             }
             return trekDuration <= matching[maxDuration];
         }
