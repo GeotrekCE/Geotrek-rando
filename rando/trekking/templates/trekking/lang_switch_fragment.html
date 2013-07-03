@@ -1,21 +1,20 @@
 {% load i18n static localeurl_tags %}
-<div id="lang-switch" class="hidden-tablet hidden-phone reattach" data-destination="footer">
-  <a href="#" class="utils">{% trans "Lang" %}</a>
-    <ul>
+<div id="lang-switch" class="hidden-tablet hidden-phone reattach" data-destination="header">
+  <ul>
     {% for lang, name in settings.languages.available.items %}
-        {% if lang == request.LANGUAGE_CODE %}
-            <li class="active"><img src="{% get_static_prefix %}ico/flags/{{ lang }}.png" alt="{{ lang }}"></li>
-        {% else %}
-            <li>
-              {% if trek %}
-                <a href="{% locale_url lang trekking:redirect pk=object.properties.pk %}">
-              {% else %}
-                <a href="/{{ lang }}">
-              {% endif %}
-              <span class="hidden">{{ lang }}</span>
-              <img src="{% get_static_prefix %}ico/flags/{{ lang }}.png" alt="{{ lang }}"></a>
-            </li>
-        {% endif %}
+          {% if lang == request.LANGUAGE_CODE %}
+          <li class="active">
+          {% else %}
+          <li>
+          {% endif %}
+            {% if trek %}
+              <a href="{% locale_url lang trekking:redirect pk=object.properties.pk %}">
+            {% else %}
+              <a href="/{{ lang }}">
+            {% endif %}
+            <span class="hidden">{{ lang }}</span>
+            <img src="{% get_static_prefix %}ico/flags/{{ lang }}.png" alt="{{ lang }}"></a>
+          </li>
     {% endfor %}
     </ul>
 </div>
