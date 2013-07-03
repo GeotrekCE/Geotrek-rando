@@ -313,6 +313,9 @@ function view_detail() {
             $(this).find('iframe').remove();
         });
     });
+    
+    // Theme/Usage tooltips
+    $('#usages li, #themes li').tooltip();
 }
 
 function altimetricInit() {
