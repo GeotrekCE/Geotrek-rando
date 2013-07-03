@@ -423,7 +423,7 @@ ul.row-footer {
   position: absolute;
   color: black;
   padding-left: 5px;
-  top: 10px;
+  top: 26px;
   right: 10px;
   line-height: 17px;
   font-size: 13px;
@@ -473,20 +473,25 @@ ul.social-buttons li {
 
 #footer {
   .wrapper {
-    float: left;
-    width: 92%;
+    width: 100%;
     height: 100%;
   }
 }
 
 // Lang switcher
 #lang-switch {
-  float: right;
-  margin-top: 16px;
-  width: 70px;
+  position: absolute;
+  top: 5px;
+  right: 9px;
+  text-align: right;
 
   a.utils {
     color: black;
+
+    img {
+      display: inline-block;
+      margin-bottom: 2px;
+    }
 
     &:hover {
       text-decoration: underline;
@@ -503,7 +508,6 @@ ul.social-buttons li {
   }
 
   ul {
-    display: none;
     margin: 0;
 
     img {
@@ -513,7 +517,7 @@ ul.social-buttons li {
     li {
       list-style: none;
       float: left;
-      margin-left: 3px;
+      margin-right: 3px;
 
       &.active {
         opacity: 0.2;
@@ -1290,10 +1294,12 @@ p.tab-content-empty {
 
 #themes, #usages {
   float: left;
-  margin-top: 10px;
+  margin-right: 10px;
+  color: #80747c;
 
   ul {
     margin: 0;
+    text-align: center;
   }
 }
 
@@ -1382,8 +1388,9 @@ html.no-webgl #toolbox a.view3d {
   margin-bottom: 18px;
 
   h2 {
-    margin-top: 0;
-    margin-bottom: 7px;
+    margin-top: -9px;
+    margin-bottom: 0;
+    line-height: 1.4em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1468,6 +1475,7 @@ p.teaser {
   p {
     margin-bottom: 0;
     color: #80747c;
+    text-align: left;
   }
 
   span.value {
