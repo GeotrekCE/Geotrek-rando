@@ -522,15 +522,4 @@ function init_mobile() {
     $('#side-bar .result').on('mouseup', function (e) {
         $('#search').blur();
     });
-
-    // Prevent following <a> link tag if clicked on results
-    $('#side-bar .result').on({
-        click: function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            $('#search').blur();
-            $(this).parents('.result').click();
-        }
-    }, 'a.pjax');
 }

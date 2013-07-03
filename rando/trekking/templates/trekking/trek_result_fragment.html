@@ -4,9 +4,8 @@
     <img alt="{% trans "Preview of" %} {{ trek.properties.name }}" src="{{ trek|thumbnail }}" width="110" height="110" />
   </div>
   <div class="info-result">
-    <a class="pjax" href="{% url trekking:detail trek.properties.slug %}">
-        <h3>{{ trek.properties.name }}</h3>
-    </a>
+    <a class="pjax hidden" href="{% url trekking:detail trek.properties.slug %}"></a>
+    <h3>{{ trek.properties.name }}</h3>
     <p>{% for district in trek.properties.districts %}{{ district.name }}, {% endfor %}</p>
     <p>{{ trek.properties.duration|duration }} <span class="ascent">- {% trans "Climb" %} {{ trek.properties.ascent }}m</span></p>
     <p>{{ trek.properties.difficulty.label|default:"&nbsp;" }}</p>
