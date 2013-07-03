@@ -55,7 +55,6 @@ function init_ui() {
         }
 
         invalidate_maps();
-        console.log('resize');
     });
 
     if(Modernizr.mq('only all and (max-width: 979px)')) {
