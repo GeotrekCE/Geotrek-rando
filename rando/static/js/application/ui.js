@@ -252,12 +252,12 @@ function refresh_backpack() {
             trekid = trek.properties.pk;
         if (window.backPack.contains(trekid)) {
             $('#backpack-trek-'+trekid).show(200);
-            $('#trek-' + trekid + ' .btn.backpack').addClass('active');
+            $('#trek-' + trekid + ' .btn.backpack').addClass('active').attr('title', gettext('Remove from favorites')).find('i').removeClass('add').addClass('remove');
             $(".detail-content .btn[data-pk='"+ trekid + "']").addClass('active');
         }
         else {
             $('#backpack-trek-'+trekid).hide(200);
-            $('#trek-' + trekid + ' .btn.backpack').removeClass('active');
+            $('#trek-' + trekid + ' .btn.backpack').removeClass('active').attr('title', gettext('Add to favorites')).find('i').removeClass('remove').addClass('add');
             $(".detail-content .btn[data-pk='"+ trekid + "']").removeClass('active');
         }
     }

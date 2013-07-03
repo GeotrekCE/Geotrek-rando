@@ -20,7 +20,16 @@ msgstr ""
 
 #: templates/trekking/home-panel.html:207
 msgid "More info..."
-msgstr "+ de détails..."
+msgstr "+ de détails…"
 
 msgid "Recommended parking"
 msgstr "Stationnement recommandé"
+
+#: templates/trekking/trek_result_fragment.html:21
+#: templates/trekking/trek_result_fragment.html:23
+msgid "Remove from favorites"
+msgstr "Retirer des favoris"
+
+#: templates/trekking/trek_result_fragment.html:26
+msgid "Add to favorites"
+msgstr "Ajouter aux favoris"
