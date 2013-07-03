@@ -62,17 +62,18 @@
           <p>{% trans "Duration" %} : <span class="value">{{ object.properties.duration|duration }}</span></p>
         </div>
 
+        {% for usage in object.properties.usages %}
+          {% if forloop.first %}<div id="usages">Usages<ul>{% endif %}
+          <li data-original-title="{{ usage.label }}">{{ usage|pictogram:"medium" }}</li>
+          {% if forloop.last %}</ul></div>{% endif %}
+        {% endfor %}
+        
         {% for theme in object.properties.themes %}
-          {% if forloop.first %}<div id="themes"><ul>{% endif %}
-          <li>{{ theme|pictogram:"medium" }}</li>
+          {% if forloop.first %}<div id="themes">Thèmes<ul>{% endif %}
+          <li data-original-title="{{ theme.label }}">{{ theme|pictogram:"medium" }}</li>
           {% if forloop.last %}</ul></div>{% endif %}
         {% endfor %}
 
-        {% for usage in object.properties.usages %}
-          {% if forloop.first %}<div id="usages"><ul>{% endif %}
-          <li>{{ usage|pictogram:"medium" }}</li>
-          {% if forloop.last %}</ul></div>{% endif %}
-        {% endfor %}
       </div>
     </div>
   </div>
