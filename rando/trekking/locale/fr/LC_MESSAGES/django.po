@@ -61,7 +61,14 @@ msgstr "Télécharger pour Google Earth"
 msgid "KML"
 msgstr ""
 
+#: templates/trekking/detail-panel.html:47
+msgid "Departure"
+msgstr "Départ"
+
 #: templates/trekking/detail-panel.html:53
+msgid "Arrival"
+msgstr "Arrivée"
+
 #: templates/trekking/home-panel.html:90 templates/trekking/home-panel.html:91
 msgid "Route"
 msgstr "Parcours"

@@ -44,7 +44,7 @@
   <div class="row-fluid" id="detail-content-title">
     <div class="span5 title">
       <h2>{{ object.properties.name }}</h2>
-      <h3 id="departure-arrival">{{ object.properties.departure }}{% if object.properties.arrival %} &rarr; {{ object.properties.arrival }}{% endif %}</h3>
+      <h3 id="departure-arrival">{% trans "Departure" %} : {{ object.properties.departure }}{% if object.properties.arrival %} &rarr; {% trans "Arrival" %} : {{ object.properties.arrival }}{% endif %}</h3>
     </div>
     <div class="span7">
       <div class="row-fluid" id="trek-identity">
