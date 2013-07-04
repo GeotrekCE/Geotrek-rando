@@ -8,14 +8,14 @@
 {% endif %}
 
 <div id="mobile-header-detail">
-  <a class="pjax" href="{% url trekking:home %}"><i class="icon-chevron-left icon-white"></i><h1>{{ object.properties.name }}</h1></a>
+  <a class="pjax" href="{% url trekking:home %}"><i class="icon-chevron-left icon-white"></i><h1>{% trans "Back to list" %}</h1></a>
 </div>
 
 <div class="detail-content">
   <div class="row-fluid" id="detail-content-top">
     {% include "trekking/fake_searchtabs_fragment.html" %}
 
-    <div class="span4 offset4">
+    <div class="span4 pull-right">
       <div id="toolbox" class="btn-toolbar pull-right">
         <a class="btn backpack" href="#" data-pk="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}"><i class="backpack"></i> {% trans "Favorites" %}</a>
 

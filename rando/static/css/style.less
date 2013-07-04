@@ -807,7 +807,6 @@ ul.social-buttons li {
   height: 38px;
   background-color: #e9eae5;
   border: solid 1px #dbdcd7;
-  border-bottom-width: 2px;
   border-left: none;
   line-height: 19px;
   vertical-align: bottom;
@@ -1294,6 +1293,8 @@ p.tab-content-empty {
 }
 
 #fake-search-tabs {
+  min-width: 300px;
+
   ul {
     margin-bottom: 0;
   }
@@ -1319,6 +1320,7 @@ p.tab-content-empty {
   margin-bottom: 0;
   margin-top: 0;
   text-align: right;
+  min-width: 290px;
 
   a.print,
   a.backpack,
@@ -1712,7 +1714,7 @@ a.accordion-toggle.open {
 .accordion-group {
   border: none;
   border-top: 1px solid #EEE;
-  .border-radius(none);
+  .border-radius(0);
   margin-bottom: 0;
 
   &:first-child {
@@ -2253,6 +2255,10 @@ a.accordion-toggle  {
 
   .no-touch .leaflet-bottom {
     bottom: 40px;
+  }
+
+  #usages {
+    margin-left: 0;
   }
 
 
