@@ -49,17 +49,17 @@
     <div class="span7">
       <div class="row-fluid" id="trek-identity">
         <div class="span3">
-          {% if object.properties.route %}
-          <p>{% trans "Route" %} : <span class="value">{{ object.properties.route.label }}</span></p>
-          {% endif %}
-          <p>{% trans "Total Length" %} : <span class="value">{{ object.properties.length|kilo|floatformat }}km</span></p>
-          <p>{% trans "Valleys" %} : <span class="value">{% for district in object.properties.districts %}
-            {{ district.name }}{% if object.properties.districts|length > 1 %},{% endif %} {% endfor %}</span></p>
-        </div>
-        <div class="span3">
+          <p>{% trans "Duration" %} : <span class="value">{{ object.properties.duration|duration }}</span></p>
           <p>{% trans "Difficulty" %} : <span class="value">{{ object.properties.difficulty.label }}</span></p>
           <p>{% trans "Ascent" %} : <span class="value">{{ object.properties.ascent }}m</span></p>
-          <p>{% trans "Duration" %} : <span class="value">{{ object.properties.duration|duration }}</span></p>
+        </div>
+        <div class="span3">
+          {% if object.properties.route %}
+          <p>{% trans "Total Length" %} : <span class="value">{{ object.properties.length|kilo|floatformat }}km</span></p>
+          <p>{% trans "Route" %} : <span class="value">{{ object.properties.route.label }}</span></p>
+          {% endif %}
+          <p>{% trans "Valleys" %} : <span class="value">{% for district in object.properties.districts %}
+            {{ district.name }}{% if object.properties.districts|length > 1 %},{% endif %} {% endfor %}</span></p>
         </div>
 
         {% for usage in object.properties.usages %}
