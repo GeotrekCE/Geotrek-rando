@@ -91,15 +91,7 @@ var POILayer = L.MarkerClusterGroup.extend({
                                     html: img}),
             marker = L.marker(latlng, {icon: poicon});
         marker.properties = featureData.properties;
-
-        /* If POI has a thumbnail, show popup on click */
-        if (marker.properties.thumbnail) {
-            marker.bindPopup(
-                L.Util.template('<img src="{SRC}" width="110" height="110">', {
-                    SRC: marker.properties.thumbnail
-                }),
-                {autoPan: false});
-        }
+        
         return marker;
     }
 });
