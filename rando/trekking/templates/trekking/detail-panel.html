@@ -51,11 +51,11 @@
         <div class="span3">
           <p>{% trans "Duration" %} : <span class="value">{{ object.properties.duration|duration }}</span></p>
           <p>{% trans "Difficulty" %} : <span class="value">{{ object.properties.difficulty.label }}</span></p>
-          <p>{% trans "Ascent" %} : <span class="value">{{ object.properties.ascent }}m</span></p>
+          <p>{% trans "Ascent" %} : <span class="value">{{ object.properties.ascent }} m</span></p>
         </div>
         <div class="span3">
           {% if object.properties.route %}
-          <p>{% trans "Total Length" %} : <span class="value">{{ object.properties.length|kilo|floatformat }}km</span></p>
+          <p>{% trans "Total Length" %} : <span class="value">{{ object.properties.length|kilo|floatformat }} km</span></p>
           <p>{% trans "Route" %} : <span class="value">{{ object.properties.route.label }}</span></p>
           {% endif %}
           <p>{% trans "Valleys" %} : <span class="value">{% for district in object.properties.districts %}
@@ -128,8 +128,8 @@
         <h4>{% trans "Altitude profile" %}</h4>
         <p class="axislabel">{% trans "Altitude (m)" %}</p>
          <p id="altitude-details">
-          <span class="min">{% trans "Min" %} : <span class="value">{{ object.properties.min_elevation }}m</span></span> - 
-          <span class="max">{% trans "Max" %} : <span class="value">{{ object.properties.max_elevation }}m</span></span>
+          <span class="min">{% trans "Min" %} : <span class="value">{{ object.properties.min_elevation }} m</span></span> - 
+          <span class="max">{% trans "Max" %} : <span class="value">{{ object.properties.max_elevation }} m</span></span>
         </p>
         <span id="profilealtitude"></span> <span class="axislabel">{% trans "Distance (m)" %}</span>
         <p id="mouseoverprofil" class="axislabel" >&nbsp;</p>
