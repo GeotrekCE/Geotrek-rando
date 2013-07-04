@@ -370,8 +370,7 @@ ul.social-buttons li {
   vertical-align: top;
 }
 .popover.left .arrow {
-  top: 23px;
-  border-left-color: #f7f7f7;
+  top: 39px;
 }
 #footer .wrapper {
   width: 100%;
@@ -705,12 +704,16 @@ p.tab-content-empty {
 }
 #side-bar .result .illust {
   float: left;
+  width: 32%;
 }
 #side-bar .result .info-result {
-  margin-left: 5px;
+  padding-left: 5px;
   min-height: 115px;
-  max-width: 235px;
+  max-width: 68%;
   display: inline-block;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 #side-bar .result .info-result h3 {
   font-size: 14px;
@@ -1059,13 +1062,16 @@ p.tab-content-empty {
 #themes,
 #usages {
   float: left;
-  margin-right: 10px;
   color: #80747c;
 }
 #themes ul,
 #usages ul {
   margin: 0;
   text-align: center;
+}
+#usages {
+  margin-left: 30px;
+  margin-right: 20px;
 }
 #toolbox {
   margin-right: 15px;
@@ -1476,7 +1482,6 @@ a.accordion-toggle {
   }
   #content {
     height: 100%;
-    overflow: hidden;
   }
   #search-bar {
     height: 115px;
