@@ -7,7 +7,7 @@
     <a class="pjax hidden" href="{% url trekking:detail trek.properties.slug %}"></a>
     <h3>{{ trek.properties.name }}</h3>
     <p>{% for district in trek.properties.districts %}{{ district.name }}, {% endfor %}</p>
-    <p>{{ trek.properties.duration|duration }} <span class="ascent">- {% trans "Climb" %} {{ trek.properties.ascent }}m</span></p>
+    <p>{{ trek.properties.duration|duration }} <span class="ascent">- {% trans "Climb" %} {{ trek.properties.ascent }} m</span></p>
     <p>{{ trek.properties.difficulty.label|default:"&nbsp;" }}</p>
     <div class="theme-tools">
       {% for theme in trek.properties.themes %}
