@@ -197,7 +197,7 @@ function TrekFilter()
             3:4,
             4:2
         };
-        
+
         if  (!trekDifficulty) return true;
         return matching[trekDifficulty.id] >= minStage && matching[trekDifficulty.id] <= maxStage;
     };
@@ -240,8 +240,8 @@ function TrekFilter()
         var maxClimb = self.state.sliders.den.max;
 
         var matching = {
-            1:200,
-            2:700
+            1:600,
+            2:1000
         };
         var trekClimb = trek.properties.ascent;
         if (minClimb === 0) {
@@ -249,13 +249,13 @@ function TrekFilter()
                 return true;
             }
             if (maxClimb === 0) {
-                return trekClimb <= 200;
+                return trekClimb <= 300;
             }
             return trekClimb <= matching[maxClimb];
         }
 
         if (minClimb == 3) {
-            return trekClimb >= 1000;
+            return trekClimb >= 1400;
         }
         if (maxClimb == 3) {
             return trekClimb >= matching[minClimb];
