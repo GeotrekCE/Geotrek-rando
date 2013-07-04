@@ -227,6 +227,10 @@ msgstr "Thème"
 msgid "Reset filters"
 msgstr "Réinitialiser les filtres"
 
+#: templates/trekking/home-panel.html:55
+msgid "Reset"
+msgstr "Réinitialiser"
+
 #: templates/trekking/home-panel.html:63 templates/trekking/home-panel.html:64
 msgid "Usages"
 msgstr "Usages"
