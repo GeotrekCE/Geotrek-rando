@@ -91,7 +91,7 @@ var POILayer = L.MarkerClusterGroup.extend({
                                     html: img}),
             marker = L.marker(latlng, {icon: poicon});
         marker.properties = featureData.properties;
-        
+
         return marker;
     }
 });
@@ -269,7 +269,7 @@ function mainmapInit(map, bounds) {
             }
         } else {
             popupSettings = {
-                autoPan: false
+                autoPan: true
             };
         }
 
