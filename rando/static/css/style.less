@@ -1923,6 +1923,8 @@ a.accordion-toggle  {
     .box-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
     .transition(all 300ms);
     .translate3d(-105%, 0, 0);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
 
     &.open {
       .translate3d(0, 0, 0);
@@ -1978,7 +1980,7 @@ a.accordion-toggle  {
             background-color: transparent;
           }
 
-          &:active {
+          &:active, &.active {
             background-color: white; 
           }
         }
@@ -2247,7 +2249,7 @@ a.accordion-toggle  {
     .title {
       position: absolute;
       top: 12px;
-      width: auto;
+      width: 99%;
     }
   }
 
@@ -2296,7 +2298,8 @@ a.accordion-toggle  {
   #tab-results,
   #side-bar .illust,
   .touch .leaflet-control-container,
-  #fake-search-tabs {
+  #fake-search-tabs,
+  #detailmap {
     display: none;
   }
 }

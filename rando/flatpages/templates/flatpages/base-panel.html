@@ -1,8 +1,13 @@
+{% load static i18n leaflet_tags trekking %}
 {% include "trekking/navigation_fragment.html" with title=object.title %}
 
 {% if pjax %}
   <title>{{ TITLE }} - {{ object.title }}</title>
 {% endif %}
+
+<div id="mobile-header-detail">
+  <a class="pjax" href="{% url trekking:home %}"><i class="icon-chevron-left icon-white"></i><h1>{% trans "Back to list" %}</h1></a>
+</div>
 
 <div class="flatpage-content">
     <div class="row-fluid">

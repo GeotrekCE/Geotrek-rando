@@ -1594,6 +1594,8 @@ a.accordion-toggle {
     -ms-transform: translate3d(-105%, 0, 0);
     -o-transform: translate3d(-105%, 0, 0);
     transform: translate3d(-105%, 0, 0);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
   }
   header.open {
     -webkit-transform: translate3d(0, 0, 0);
@@ -1647,7 +1649,8 @@ a.accordion-toggle {
   #flatpages ul li a:hover {
     background-color: transparent;
   }
-  #flatpages ul li a:active {
+  #flatpages ul li a:active,
+  #flatpages ul li a.active {
     background-color: white;
   }
   #toggle-header-mobile {
@@ -1884,7 +1887,7 @@ a.accordion-toggle {
   #detail-content-title .title {
     position: absolute;
     top: 12px;
-    width: auto;
+    width: 99%;
   }
   #toolbox a.backpack,
   #toolbox a.download {
@@ -1924,7 +1927,8 @@ a.accordion-toggle {
   #tab-results,
   #side-bar .illust,
   .touch .leaflet-control-container,
-  #fake-search-tabs {
+  #fake-search-tabs,
+  #detailmap {
     display: none;
   }
 }

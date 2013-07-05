@@ -461,6 +461,11 @@ function init_mobile() {
         }
     });
 
+    $('#flatpages a.pjax').on('click', function (e) {
+        $menu.removeClass('open');
+        $menuButton.removeClass('active');
+    });
+
     // Remove desktop specific events
     $('#side-bar .result').off('dblclick mouseenter mouseleave');
 
