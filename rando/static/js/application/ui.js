@@ -315,6 +315,7 @@ function view_detail() {
     
     // Theme/Usage tooltips
     $('#usages li, #themes li').tooltip();
+    $('a.print.disabled').tooltip({placement: 'left'});
 }
 
 function altimetricInit() {

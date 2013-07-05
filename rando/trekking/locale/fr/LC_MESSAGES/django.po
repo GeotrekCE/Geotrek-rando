@@ -41,6 +41,10 @@ msgid "3D"
 msgstr ""
 
 #: templates/trekking/detail-panel.html:29
+msgid "Soon!"
+msgstr "À venir"
+
+#: templates/trekking/detail-panel.html:29
 #: templates/trekking/detail-panel.html:30
 msgid "Print"
 msgstr "Imprimer"

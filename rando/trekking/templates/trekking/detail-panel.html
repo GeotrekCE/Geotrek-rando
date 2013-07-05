@@ -26,7 +26,11 @@
         {% endif %}
 
         {% if PRINT_ENABLED %}
-        <a class="btn download print" title="{% trans "Print" %}" href="{% url trekking:fileserve object.properties.printable %}">
+        <a class="btn download print" title="{% trans "Print" %}" href="{% url trekking:fileserve object.properties.printable %}" target="_blank">
+          <i class="print"></i> {% trans "Print" %}
+        </a>
+        {% else %}
+        <a class="btn download print disabled" title="{% trans "Print" %}" href="" data-original-title"{% trans "Soon" %}">
           <i class="print"></i> {% trans "Print" %}
         </a>
         {% endif %}
