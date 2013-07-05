@@ -430,7 +430,6 @@ function detailmapInit(map, bounds) {
     }
 
     map.fitBounds(wholeBounds);
-    map.zoomOut();
 
     var marker = null;
     $('#profilealtitude').on('hover:distance', function (event, meters) {
