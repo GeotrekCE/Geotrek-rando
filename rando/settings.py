@@ -147,6 +147,7 @@ COMPRESS_PARSER = 'compressor.parser.HtmlParser'
 
 LEAFLET_CONFIG = {
     "TILES_URL": 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    "ATTRIBUTIONS": '',
     "SCALE": False,
     "MINIMAP": True,
 }
