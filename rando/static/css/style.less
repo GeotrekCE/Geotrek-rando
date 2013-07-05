@@ -584,11 +584,14 @@ ul.social-buttons li {
   padding-left: 3px;
 }
 
+#basic-filters > .span {
+  margin-right: 25px;
+  margin-left: 0;
+}
 
 .stage
 {
   float:left;
-  margin-left: 10px;
 
   .slider-value {
     width: 25%;
@@ -607,7 +610,6 @@ ul.social-buttons li {
 .time
 {
   float:left;
-  margin-left: 25px;
 
   .slider-value {
     width: 20%;
@@ -626,7 +628,6 @@ ul.social-buttons li {
 .den
 {
   float:left;
-  margin-left: 25px;
 
   .slider-value {
     width: 25%;
@@ -646,7 +647,6 @@ ul.social-buttons li {
 .theme {
   width:auto;
   float:left;
-  margin-left: 25px;
 
   .filter {
     display: inline-block;
@@ -720,11 +720,11 @@ ul.social-buttons li {
 }
 
 #advanced-filters {
-  clear: both;
   padding: 5px 5px 0px 5px;
   float: right;
   background-color: rgba(255, 255, 255, 0.5);
   margin-right: 34px;
+  margin-top: 6px;
 
   .filter-bloc {
     display: inline-block;
@@ -883,7 +883,6 @@ p.tab-content-empty {
  cursor: pointer;
  position: relative;
  padding: 5px;
- height: 110px;
 }
 
 #side-bar .result .illust
@@ -1182,7 +1181,6 @@ p.tab-content-empty {
 
 #mainmap .leaflet-popup-content-wrapper {
   .border-radius(0);
-  background: #f6f7f0;
   min-width: 250px;
 
   .leaflet-popup-content {
@@ -1190,6 +1188,10 @@ p.tab-content-empty {
 
     .description {
       text-align: justify;
+
+      p:first-child {
+        margin-top: 0;
+      }
     }
 
     p {
@@ -1798,7 +1800,28 @@ a.accordion-toggle  {
 /* ==========================================================================
    Media queries
    ========================================================================== */
- 
+
+/* 13 inch devices */
+@media (max-width: 1200px) {
+  #search-bar {
+    height: 115px;
+  }
+
+  #side-bar {
+    top: 115px;
+  }
+
+  #advanced-filters {
+    float: left;
+    margin-right: 0;
+  }
+
+  #mainmap {
+    top: 115px;
+  }
+}
+
+
 /* Portrait tablet to landscape and desktop */
 @media (max-width: 979px) {
   header h3 {
@@ -1812,16 +1835,14 @@ a.accordion-toggle  {
     // min-height: 100%;
   }
 
-  #search-bar {
-    height: 115px;
+  #basic-filters > .span {
+    margin-right: 13px;
   }
 
   #side-bar {
-    top: 115px;
     width: 330px;
 
     .illust img {
-      width: auto;
       height: 100%;
     }
 
@@ -2086,6 +2107,7 @@ a.accordion-toggle  {
     width: 44px;
     height: 46px;
     overflow: hidden;
+    -webkit-overflow-scrolling: touch;
   }
 
   #text-search,
@@ -2102,7 +2124,6 @@ a.accordion-toggle  {
     display: block;
     border-right: none;
     padding-top: 0;
-    overflow: hidden;
   }
 
   #results, #backpack {
