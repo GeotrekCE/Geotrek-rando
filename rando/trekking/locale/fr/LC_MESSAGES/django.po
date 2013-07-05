@@ -106,7 +106,7 @@ msgstr "Accès"
 
 #: templates/trekking/detail-panel.html:106
 msgid "Information Desk"
-msgstr "Lieu de renseignement"
+msgstr "Information"
 
 #: templates/trekking/detail-panel.html:116
 msgid "This trek is within park center"
