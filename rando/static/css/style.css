@@ -1093,6 +1093,7 @@ p.tab-content-empty {
   position: relative;
   padding-left: 30px;
   vertical-align: top;
+  margin-left: 5px;
 }
 #toolbox a.print.gpx,
 #toolbox a.backpack.gpx,
