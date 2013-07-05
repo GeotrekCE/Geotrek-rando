@@ -32,6 +32,10 @@ VIEW3D_ENABLED = True
 #         ('main', 'http://{s}.tiles.mapbox.com/v3/examples.map-4l7djmvo/{z}/{x}/{y}.png'),
 #         ('detail', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
 #     ],
+#     "ATTRIBUTIONS": [
+#         ('main', ''),
+#         ('detail', '')
+#     ],
 #     "SCALE": False,
 #     "MINIMAP": True,
 # }

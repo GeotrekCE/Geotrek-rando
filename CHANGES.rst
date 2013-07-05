@@ -2,6 +2,11 @@
 CHANGELOG
 =========
 
+1.17 (2013-07-5)
+-----------------
+
+* Add ability to have copyrights on map tiles
+
 1.16 (2013-06-21)
 -----------------
 
