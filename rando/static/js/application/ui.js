@@ -323,12 +323,21 @@ function altimetricInit() {
      * Load altimetric profile from JSON
      */
     $.getJSON(altimetric_url, function(data) {
-        $('#profilealtitude').sparkline(data.profile, L.Util.extend({
-            tooltipSuffix: ' m',
-            numberDigitGroupSep: '',
-            width: '100%',
-            height: 100
-        }, ALTIMETRIC_PROFILE_OPTIONS));
+        function updateSparkline() {
+            $('#profilealtitude').sparkline(data.profile, L.Util.extend({
+                tooltipSuffix: ' m',
+                numberDigitGroupSep: '',
+                width: '100%',
+                height: 100
+            }, ALTIMETRIC_PROFILE_OPTIONS));
+        }
+
+        updateSparkline();
+        
+        $(window).smartresize(function() {
+            updateSparkline();
+        });
+
         $('#profilealtitude').bind('sparklineRegionChange', function(ev) {
             var sparkline = ev.sparklines[0],
                 region = sparkline.getCurrentRegionFields();
@@ -340,6 +349,7 @@ function altimetricInit() {
             $('#mouseoverprofil').text('');
             $('#profilealtitude').trigger('hover:distance', null);
         });
+
     });
 }
 
