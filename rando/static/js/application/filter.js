@@ -319,13 +319,9 @@ function TrekFilter()
             Split searched string on space, and if at least
             one bit matches, returns true;
             */
-            var bits = searched.toUpperCase().split(' ');
-            for (var i=0; i<bits.length; i++) {
-                var needle = $.trim(bits[i]);
-                if (htmldecode(property).toUpperCase().indexOf(needle) != -1)
-                    return true;
-            }
-            return false;
+            var bits = searched.toUpperCase();
+
+            return htmldecode(property).toUpperCase().indexOf(bits) != -1 ? true : false;
         };
 
         var props = ['name', 'departure', 'arrival', 'ambiance',
