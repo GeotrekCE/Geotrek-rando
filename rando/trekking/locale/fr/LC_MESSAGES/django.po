@@ -118,7 +118,7 @@ msgstr "Cet itinéraire est dans le coeur du parc national"
 
 #: templates/trekking/detail-panel.html:116
 msgid "please read access rules."
-msgstr "veuillez consulter la réglémentation."
+msgstr "veuillez consulter la réglementation."
 
 #: templates/trekking/detail-panel.html:121
 msgid "Clic for map interaction"
