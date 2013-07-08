@@ -169,6 +169,9 @@ i.icon {
 .chzn-container-active .chzn-choices {
   border: 1px solid #AAA;
 }
+.chzn-container .chzn-results {
+  max-height: 190px;
+}
 .chzn-container .chzn-results .highlighted {
   background-color: #919191;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#919191', endColorstr='#747474', GradientType=0);
@@ -278,6 +281,7 @@ ul.row-footer a {
   z-index: 900;
   /* above map */
 
+  min-width: 389px;
 }
 #detail-container-content,
 #flatpage-container-content {
@@ -710,7 +714,7 @@ p.tab-content-empty {
 }
 #side-bar .result .info-result {
   padding-left: 5px;
-  min-height: 115px;
+  min-height: 110px;
   max-width: 68%;
   display: inline-block;
   box-sizing: border-box;
@@ -1325,10 +1329,10 @@ p.teaser {
   display: inline-block;
   color: #4d4d4d;
 }
-#trek-pictures:hover .carousel-control {
+.carousel.slide:hover .carousel-control {
   opacity: 0.5;
 }
-#trek-pictures:hover .carousel-control:hover {
+.carousel.slide:hover .carousel-control:hover {
   opacity: 0.9;
 }
 .carousel .item {
@@ -1513,6 +1517,7 @@ a.accordion-toggle {
   }
   #side-bar {
     width: 330px;
+    min-width: auto;
   }
   #side-bar .illust img {
     height: 100%;
@@ -1564,13 +1569,13 @@ a.accordion-toggle {
   }
   /* Miscs pages */
   header {
-    width: 80%;
+    width: 80% !important;
     padding: 0;
-    position: absolute;
-    top: 48px;
-    bottom: 0;
-    height: auto;
-    background: none;
+    position: absolute !important;
+    top: 48px !important;
+    bottom: 0 !important;
+    height: auto !important;
+    background: none !important;
     -webkit-background-size: auto;
     -moz-background-size: auto;
     -o-background-size: auto;
@@ -1594,7 +1599,7 @@ a.accordion-toggle {
     -ms-transform: translate3d(-105%, 0, 0);
     -o-transform: translate3d(-105%, 0, 0);
     transform: translate3d(-105%, 0, 0);
-    overflow: auto;
+    overflow: auto !important;
     -webkit-overflow-scrolling: touch;
   }
   header.open {
@@ -1630,16 +1635,16 @@ a.accordion-toggle {
     border-bottom: 1px solid #CCC;
   }
   #flatpages ul li a {
-    color: #333;
-    background: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
+    color: #333 !important;
+    background: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
     border: none;
-    font-weight: normal;
-    text-shadow: none;
-    text-align: left;
-    height: 40px;
+    font-weight: normal !important;
+    text-shadow: none !important;
+    text-align: left !important;
+    height: 40px !important;
     padding-top: 20px;
     padding-left: 15px;
     font-size: 1.7em;

@@ -39,7 +39,7 @@ function init_ui() {
 
     $(window).smartresize(function() {
         // Check if youre on mobile or not
-        if(Modernizr.mq('only all and (max-width: 979px)')) {
+        if(Modernizr.mq('only all and (max-width: 767px)')) {
             MOBILE = true;
 
             // iOS mobile hide address bar for fullscreen trick
@@ -57,7 +57,7 @@ function init_ui() {
         invalidate_maps();
     });
 
-    if(Modernizr.mq('only all and (max-width: 979px)')) {
+    if(Modernizr.mq('only all and (max-width: 767px)')) {
         MOBILE = true;
         
         // iOS mobile hide address bar for fullscreen trick

@@ -254,6 +254,10 @@ i.icon {
  border: 1px solid #AAA;
 }
 
+.chzn-container .chzn-results {
+  max-height: 190px;
+}
+
 .chzn-container .chzn-results .highlighted {
  background-color: #919191;
  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#919191', endColorstr='#747474', GradientType=0 );  
@@ -360,6 +364,7 @@ ul.row-footer {
   top: 65px;  /* header + search-bar */
   bottom: 0;
   z-index: 900; /* above map */
+  min-width: 389px;
 }
 
 #detail-container-content {
@@ -894,7 +899,7 @@ p.tab-content-empty {
 #side-bar .result .info-result
 {
  padding-left: 5px;
- min-height: 115px;
+ min-height: 110px;
  max-width: 68%;
  display: inline-block;
  box-sizing: border-box;
@@ -1597,7 +1602,7 @@ p.teaser {
 }
 
 
-#trek-pictures {
+.carousel.slide {
   &:hover {
     .carousel-control {
       opacity: 0.5;
@@ -1842,6 +1847,7 @@ a.accordion-toggle  {
 
   #side-bar {
     width: 330px;
+    min-width: auto;
 
     .illust img {
       height: 100%;
@@ -1908,13 +1914,13 @@ a.accordion-toggle  {
   /* Miscs pages */
 
   header {
-    width: 80%;
+    width: 80% !important;
     padding: 0;
-    position: absolute;
-    top: 48px;
-    bottom: 0;
-    height: auto;
-    background: none;
+    position: absolute !important;
+    top: 48px !important;
+    bottom: 0 !important;
+    height: auto !important;
+    background: none !important;
     .background-size(auto);
     background-color: rgba(255, 255, 255, 0.9);
     border: none;
@@ -1923,7 +1929,7 @@ a.accordion-toggle  {
     .box-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
     .transition(all 300ms);
     .translate3d(-105%, 0, 0);
-    overflow: auto;
+    overflow: auto !important;
     -webkit-overflow-scrolling: touch;
 
     &.open {
@@ -1962,14 +1968,14 @@ a.accordion-toggle  {
         border-bottom: 1px solid #CCC;
 
         a {
-          color: #333;
-          background: none;
-          .box-shadow(none);
+          color: #333 !important;
+          background: none !important;
+          .box-shadow(none) !important;
           border: none;
-          font-weight: normal;
-          text-shadow: none;
-          text-align: left;
-          height: 40px;
+          font-weight: normal !important;
+          text-shadow: none !important;
+          text-align: left !important;
+          height: 40px !important;
           padding-top: 20px;
           padding-left: 15px;
           font-size: 1.7em;
