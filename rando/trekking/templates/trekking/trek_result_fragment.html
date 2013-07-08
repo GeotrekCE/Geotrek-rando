@@ -11,7 +11,7 @@
     <p>{{ trek.properties.difficulty.label|default:"&nbsp;" }}</p>
     <div class="theme-tools">
       {% for theme in trek.properties.themes %}
-        {{ theme|pictogram }}
+        <div class="pictogram"><img src="{{ theme.pictogram }}" alt="{{ theme.label }}" title="{{ theme.label }}"></div>
       {% empty %}
         <p>&nbsp;</p>
       {% endfor %}
