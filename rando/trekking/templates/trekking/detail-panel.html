@@ -219,7 +219,7 @@
       <h5>{% trans "On the way..." %}</h5>
 
       <div class="accordion" id="pois-accordion">
-        {% for poi in object.pois.all %}
+        {% for poi in pois %}
         <div class="accordion-group">
           <div class="accordion-heading">
             <a class="accordion-toggle acc-open" id="poi-item-{{ poi.properties.pk}}" data-toggle="collapse" data-parent="#pois-accordion" data-id="{{ poi.properties.pk }}" href="#collapse-poi-{{  poi.properties.pk }}">
