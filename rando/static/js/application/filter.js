@@ -12,7 +12,7 @@ function TrekFilter()
 
     this.clear = function () {
         localStorage.removeItem('filterState');
-        window.location.hash = '';
+        window.location.replace('#');
         $(".theme .filter.active").removeClass('active');
         $(".chosen-select").val('').trigger("liszt:updated");
         self.load();
@@ -24,7 +24,7 @@ function TrekFilter()
 
         // Refresh URL hash, so that users can copy and paste URLs with filters
         var compressed = LZString.compress(serialized);
-        window.location.hash = serialized.length > 0 ? stringToHex(compressed) : '';
+        window.location.replace('#' + (serialized.length > 0 ? stringToHex(compressed) : ''));
     };
 
     this.save = function ()
