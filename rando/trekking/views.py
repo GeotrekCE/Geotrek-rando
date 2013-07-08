@@ -49,6 +49,9 @@ class TrekView(PJAXResponseMixin, BaseTrekView):
     def get_poi_type(self, poi):
         return poi.properties.type
 
+    def get_poi_label(self, poi):
+        return poi.properties.name
+
     def get_context_data(self, **kwargs):
         lang = self.request.LANGUAGE_CODE
         obj = self.get_object()
@@ -65,7 +68,8 @@ class TrekView(PJAXResponseMixin, BaseTrekView):
             all_pictures.extend(poi.properties.pictures)
         context['all_pictures'] = all_pictures
         
-        context['pois'] = sorted(pois, key=self.get_poi_type)
+        pois_sorted_by_label = sorted(pois, key=self.get_poi_label)
+        context['pois'] = sorted(pois_sorted_by_label, key=self.get_poi_type)
 
         context['PRINT_ENABLED'] = settings.PRINT_ENABLED
         context['VIEW3D_ENABLED'] = settings.VIEW3D_ENABLED
