@@ -5,7 +5,7 @@ function TrekFilter()
     self.matching = [];
 
     this.initEvents = function () {
-        $(".theme .filter").unbind('click').on('click', self.filterChanged).tooltip();
+        $(".theme .filter").unbind('click').on('click', self.filterChanged);
         $(".chosen-select").chosen().change(self.filterChanged);
         $('#search').unbind('keyup').on("keyup", self.filterChanged);
     };
@@ -79,7 +79,7 @@ function TrekFilter()
 
     this.load = function () {
         self.state = this.__loadState();
-
+        
         if (!self.state) self.state = {};
         if (!('sliders' in self.state)) {
            self.state['sliders'] = {'time':{}, 'stage':{}, 'den':{}};
@@ -127,7 +127,6 @@ function TrekFilter()
                 }
             }
         }
-        self.save();
         self.initEvents();
     };
 
