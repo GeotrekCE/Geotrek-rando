@@ -971,7 +971,7 @@ p.tab-content-empty {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
-  min-width: 250px;
+  min-width: 270px;
 }
 #mainmap .leaflet-popup-content-wrapper .leaflet-popup-content {
   text-align: center;
@@ -993,15 +993,20 @@ p.tab-content-empty {
   position: absolute;
   bottom: 30px;
   right: 15px;
+  background: url("../img/search.png") no-repeat top left;
+  padding-left: 25px;
+}
+#mainmap .leaflet-popup-content-wrapper .leaflet-popup-content p.popupdetail a:hover {
+  text-decoration: none;
 }
 #mainmap .leaflet-popup-content-wrapper .leaflet-popup-content img {
   max-width: 100% !important;
   float: left;
   margin-right: 10px;
-  opacity: 0.7;
+  opacity: 1.0;
 }
 #mainmap .leaflet-popup-content-wrapper .leaflet-popup-content img:hover {
-  opacity: 1.0;
+  opacity: 0.7;
 }
 #mainmap .leaflet-popup-content-wrapper .leaflet-popup-content a {
   color: #5db9d6;
