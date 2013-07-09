@@ -161,20 +161,9 @@ function view_home() {
         $(this).toggleClass('closed');
     });
 
-    // Zoom trek button
-    $('#side-bar .btn.search').off('click').on('click', function (e) {
-        e.preventDefault();
-        var trekOnMap = window.treksLayer.getLayer($(this).data('pk'));
-        if (trekOnMap) {
-            window.maps[0].fitFakeBounds(trekOnMap.getBounds());
-            // Track event
-            _gaq.push(['_trackEvent', 'Results', 'Zoom', trekOnMap.properties.name]);
-        }
-    });
-
     $('#side-bar .result').on('dblclick', function (e) {
         e.preventDefault();
-        $('#trek-'+ $(this).data('id') +'.result a.pjax').click();
+        $('#trek-'+ $(this).data('id') +'.result a.pjax.hidden').click();
         // Track event
         _gaq.push(['_trackEvent', 'Results', 'Doubleclick', $(this).data('name')]);
     });
