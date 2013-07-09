@@ -11,7 +11,7 @@
     <p>{{ trek.properties.difficulty.label|default:"&nbsp;" }}</p>
     <div class="theme-tools">
       {% for theme in trek.properties.themes %}
-        <div class="pictogram"><img src="{{ theme.pictogram }}" alt="{{ theme.label }}" title="{{ theme.label }}"></div>
+        {{ theme|pictogram }}
       {% empty %}
         <p>&nbsp;</p>
       {% endfor %}
@@ -20,14 +20,14 @@
         {% if backpack = "True" %}
         <a class="btn backpack" data-pk="{{ trek.properties.pk }}" data-toggle="tooltip" title="{% trans "Remove from favorites" %}">
           <span class="hidden">{% trans "Remove from favorites" %}</span>
-          <i class="backpack"></i>
+          <i class="backpack remove"></i>
         {% else %}
         <a class="btn backpack" data-pk="{{ trek.properties.pk }}" data-toggle="tooltip" title="{% trans "Add to favorites" %}">
           <span class="hidden">{% trans "Add to favorites" %}</span>
           <i class="backpack"></i>
         {% endif %}
         </a>
-        <a class="btn search" data-pk="{{ trek.properties.pk }}" data-toggle="tooltip" title="{% trans "Zoom to trek" %}">
+        <a class="btn search pjax" data-pk="{{ trek.properties.pk }}" title="{% trans "Zoom to trek" %}" href="{% url trekking:detail trek.properties.slug %}">
           <span class="hidden">{% trans "Zoom to trek" %}</span>
           <i class="search"></i>
         </a>

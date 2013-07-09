@@ -190,6 +190,9 @@ function view_home() {
     // Click on side-bar
     $('#side-bar .result').on('click', showTooltip);
 
+    // Tooltips on theme/usages
+    $('.pictogram').tooltip();
+
     if(MOBILE) {
         init_mobile();
     }

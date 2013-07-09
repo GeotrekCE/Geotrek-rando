@@ -63,5 +63,5 @@ def pictogram(value, klass=""):
     assert value.pictogram.startswith(settings.MEDIA_URL), '%s does not start with %s' % (value.pictogram, settings.MEDIA_URL)
     url = value.pictogram
     label = value.label
-    markup = '<div class="pictogram %(klass)s"><img src="%(url)s" alt="%(label)s"></div>'
+    markup = '<div class="pictogram %(klass)s" data-original-title="%(label)s"><img src="%(url)s" alt="%(label)s"></div>'
     return mark_safe(markup % locals())

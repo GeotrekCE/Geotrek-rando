@@ -45,7 +45,7 @@
     <div class="theme span">
       <label for="theme">{% trans "Thematic" %}</label>
       {% for theme in themes %}
-        <div class="filter" data-filter="theme" data-id="{{ theme.id }}" data-original-title="{{ theme.label }}" id="theme-{{ theme.id }}">
+        <div class="filter" data-filter="theme" data-id="{{ theme.id }}" id="theme-{{ theme.id }}">
           {{ theme|pictogram }}
       </div>
       {% endfor %}
