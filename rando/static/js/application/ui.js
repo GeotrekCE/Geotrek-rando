@@ -221,7 +221,6 @@ function showTooltip (e) {
 }
 
 function refresh_results(matching) {
-    console.log('refresh');
     for(var i=0; i<treks.features.length; i++) {
         var trek = treks.features[i],
             trekid = trek.properties.pk;
@@ -273,7 +272,6 @@ function page_leave() {
 }
 
 function view_detail() {
-    console.log('viewDetail');
     $("#mainmap").hide();  // We are elsewhere
 
     $('#tab-results span.badge').html(window.trekFilter.getResultsCount());
@@ -312,7 +310,7 @@ function view_detail() {
     });
     
     // Theme/Usage tooltips
-    $('#usages li, #themes li').tooltip();
+    $('#usages div, #themes div').tooltip();
     $('a.print.disabled').tooltip({placement: 'left'});
 }
 
