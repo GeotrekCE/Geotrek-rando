@@ -110,7 +110,7 @@ Regularly (once a week), you can also notify Google that your sitemap changed, u
 
 ::
 
-    make ping_google
+    make ping_google url=http://rando.server.com
 
 
 =============
