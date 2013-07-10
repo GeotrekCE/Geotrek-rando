@@ -19,12 +19,20 @@ function TrekFilter()
     };
 
     this.__saveState = function () {
-        var serialized = $.isEmptyObject(self.state) ? '' : JSON.stringify(self.state);
-        localStorage.setItem('filterState', serialized);
+        var serialized = null;
 
-        // Refresh URL hash, so that users can copy and paste URLs with filters
-        var compressed = LZString.compress(serialized);
-        window.location.replace('#' + (serialized.length > 0 ? stringToHex(compressed) : ''));
+        if ($.isEmptyObject(self.state)) {
+            return;
+        } else {
+            serialized = JSON.stringify(self.state);
+
+            localStorage.setItem('filterState', serialized);
+            localStorage.setItem('resultsCount', self.matching.length);
+
+            // Refresh URL hash, so that users can copy and paste URLs with filters
+            var compressed = LZString.compress(serialized);
+            window.location.replace('#' + (serialized.length > 0 ? stringToHex(compressed) : ''));
+        }
     };
 
     this.save = function ()
@@ -57,7 +65,6 @@ function TrekFilter()
         var hash = window.location.hash.slice(1),
             storage = localStorage.getItem('filterState'),
             state = null;
-
         // First try to load from hash
         try {
             if (hash.length > 0) {
@@ -79,7 +86,7 @@ function TrekFilter()
 
     this.load = function () {
         self.state = this.__loadState();
-        
+
         if (!self.state) self.state = {};
         if (!('sliders' in self.state)) {
            self.state['sliders'] = {'time':{}, 'stage':{}, 'den':{}};
@@ -127,8 +134,13 @@ function TrekFilter()
                 }
             }
         }
+        self.save();
         self.initEvents();
     };
+
+    this.getResultsCount = function () {
+        return localStorage.getItem('resultsCount');
+    }
 
     this.filterChanged = function (e) {
         var elem = $(e.target).data("filter") ? $(e.target) : $(e.target).parents('.filter'),
