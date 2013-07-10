@@ -30,12 +30,13 @@ function init_ui() {
     });
 
     window.trekFilter = new TrekFilter();
-    $(window.trekFilter).off('filterchange').on("filterchange", function(e, visible) {
-        refresh_results(visible);
-    });
 
     window.backPack = new BackPack();
     $('body').on("backpack-change", refresh_backpack);
+
+    $(window.trekFilter).on("filterchange", function(e, visible) {
+        refresh_results(visible);
+    });
 
     $(window).smartresize(function() {
         // Check if youre on mobile or not
@@ -104,7 +105,6 @@ function page_load() {
     init_share();
 
     // Refresh tab results
-    window.trekFilter.load();
     refresh_backpack();
 
     // Add trek to backpack
@@ -130,6 +130,8 @@ function page_load() {
 
 function view_home() {
     sliders();
+    
+    window.trekFilter.load();
 
     $('#clear-filters').off('click').on('click', function () {
         window.trekFilter.clear();
@@ -219,6 +221,7 @@ function showTooltip (e) {
 }
 
 function refresh_results(matching) {
+    console.log('refresh');
     for(var i=0; i<treks.features.length; i++) {
         var trek = treks.features[i],
             trekid = trek.properties.pk;
@@ -270,7 +273,10 @@ function page_leave() {
 }
 
 function view_detail() {
+    console.log('viewDetail');
     $("#mainmap").hide();  // We are elsewhere
+
+    $('#tab-results span.badge').html(window.trekFilter.getResultsCount());
 
     $('#pois-accordion').on('show', function (e) {
         var id = $(e.target).data('id');
