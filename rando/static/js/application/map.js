@@ -461,27 +461,15 @@ function detailmapInit(map, bounds) {
         map.scrollWheelZoom.disable();
         var enableWheel = function () {
             map.scrollWheelZoom.enable();
+            $(map._container).css('cursor','-moz-grab');
+            $(map._container).css('cursor','-webkit-grab');
             $('.helpclic').hide();
         };
 
-        map.dragging.disable();
         $(map._container).css('cursor','pointer');
-        var enablePan = function () {
-            $(map._container).css('cursor','-moz-grab');
-            $(map._container).css('cursor','-webkit-grab');
-            map.dragging.enable();
-        };
-
+        
         // Enable wheel zoom on clic (~ focus)
         map.on('click', enableWheel);
-
-        // Enable drag only after zoom change
-        setTimeout(function () {
-            map.on('zoomend', function () {
-                enablePan();
-                enableWheel();
-            });
-        }, 500);
 
         $(window).trigger('map:ready', [map, 'detail']);
     });
