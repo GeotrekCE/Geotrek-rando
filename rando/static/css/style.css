@@ -1522,7 +1522,7 @@ a.accordion-toggle {
   }
   #side-bar {
     width: 330px;
-    min-width: auto;
+    min-width: 0;
   }
   #side-bar .illust img {
     height: 100%;
@@ -1580,7 +1580,8 @@ a.accordion-toggle {
     top: 48px !important;
     bottom: 0 !important;
     height: auto !important;
-    background: none !important;
+    background: none;
+    background-image: none !important;
     -webkit-background-size: auto;
     -moz-background-size: auto;
     -o-background-size: auto;
@@ -1630,7 +1631,7 @@ a.accordion-toggle {
     display: none;
   }
   #flatpages {
-    position: static;
+    position: static!important;
   }
   #flatpages ul {
     margin: 0;
@@ -1736,9 +1737,11 @@ a.accordion-toggle {
     height: 23px;
     overflow: hidden;
     padding: 7px;
+    padding-top: 8px;
+    padding-bottom: 6px;
   }
   #side-bar .result .info-result {
-    min-height: auto;
+    min-height: 0;
     margin: 0;
     white-space: nowrap;
   }
@@ -1747,12 +1750,11 @@ a.accordion-toggle {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
   #side-bar .result .info-result h3 {
-    display: inline-block;
+    display: inline;
   }
   #side-bar .result .info-result p {
     display: inline;
     margin-right: 5px;
-    vertical-align: middle;
   }
   #side-bar .nav-tabs > li > a i {
     margin-left: 0;
@@ -1801,6 +1803,7 @@ a.accordion-toggle {
     display: block;
     border-right: none;
     padding-top: 0;
+    -webkit-overflow-scrolling: touch;
   }
   #results,
   #backpack {
@@ -1810,6 +1813,8 @@ a.accordion-toggle {
     float: none;
     display: inline-block;
     min-height: 25px;
+    vertical-align: top;
+    margin-top: -4px;
   }
   #text-search {
     position: absolute;
@@ -1875,7 +1880,8 @@ a.accordion-toggle {
   #toolbox a.view3d {
     display: none;
   }
-  .detail-content {
+  .detail-content,
+  .flatpage-content {
     position: absolute;
     overflow: auto;
     top: 48px;
@@ -1924,6 +1930,15 @@ a.accordion-toggle {
   }
   #usages {
     margin-left: 0;
+  }
+  .carousel.slide .carousel-control {
+    opacity: 0.5;
+  }
+  .carousel.slide:hover .carousel-control {
+    opacity: 0.5;
+  }
+  .carousel.slide:hover .carousel-control:hover {
+    opacity: 0.9;
   }
   /* Hidden elements */
   #global-share,
