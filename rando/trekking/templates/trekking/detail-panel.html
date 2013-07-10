@@ -68,13 +68,13 @@
 
         {% for usage in object.properties.usages %}
           {% if forloop.first %}<div id="usages">Usages<ul>{% endif %}
-          <li data-original-title="{{ usage.label }}">{{ usage|pictogram:"medium" }}</li>
+          <li>{{ usage|pictogram:"medium" }}</li>
           {% if forloop.last %}</ul></div>{% endif %}
         {% endfor %}
         
         {% for theme in object.properties.themes %}
           {% if forloop.first %}<div id="themes">Thèmes<ul>{% endif %}
-          <li data-original-title="{{ theme.label }}">{{ theme|pictogram:"medium" }}</li>
+          <li>{{ theme|pictogram:"medium" }}</li>
           {% if forloop.last %}</ul></div>{% endif %}
         {% endfor %}
 
