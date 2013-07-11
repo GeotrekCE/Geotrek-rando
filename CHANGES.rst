@@ -6,6 +6,7 @@ CHANGELOG
 -----------------
 
 * Fix ping_google command, add url=http://rando.server.com parameter (fixes #754)
+* Fix flat pages naming and numbering (fixes #759)
 
 1.17 (2013-07-5)
 -----------------

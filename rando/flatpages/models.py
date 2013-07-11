@@ -14,6 +14,7 @@ class FlatPageManager(object):
         self.klass = klass
         self.basepath = settings.FLATPAGES_ROOT
         self.language = settings.LANGUAGE_CODE
+        self.pk = None
 
     def filter(self, **kwargs):
         self.__dict__.update(**kwargs)
@@ -40,13 +41,15 @@ class FlatPageManager(object):
             basename = os.path.splitext(fname)[0]
             m = re.search(r'^(\d+)-(.+)', basename)
             if m:
-                title = m.group(0)
-                pk = m.group(1)
+                pk = int(m.group(1))
+                title = m.group(2)
             else:
                 title = basename
                 pk = i
             i += 1
-            yield self.klass(pk, title, content, fullpath)
+            # Filter by pk (see redirect view
+            if self.pk is None or int(self.pk) == pk:
+                yield self.klass(pk, title, content, fullpath)
 
 
 class FlatPage(object):
