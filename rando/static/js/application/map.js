@@ -396,7 +396,7 @@ function detailmapInit(map, bounds) {
     var poisLayer = new POILayer(pois);
     poisLayer.eachLayer(function (marker) {
         wholeBounds.extend(marker.getLatLng());
-        window.poisMarkers[marker.properties.pk] = marker;
+        window.poisMarkers[marker.id] = marker;
         /*
          * Open Accordion on marker click.
          * TODO: does not work correctly.
