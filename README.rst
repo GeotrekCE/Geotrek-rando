@@ -47,6 +47,8 @@ Most important settings :
 If you run the application on a preproduction, it is wise to set ``PREPROD = True``, in order
 to disable Robots (Google) indexing.
 
+Note that Apache has to be restart to apply changes in settings.
+
 
 Apache vhost
 ------------
