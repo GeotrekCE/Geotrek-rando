@@ -2,13 +2,48 @@
 CHANGELOG
 =========
 
-1.18 (unreleased)
+1.22 (unreleased)
 -----------------
 
 * Fix ping_google command, add url=http://rando.server.com parameter (fixes #754)
 * Fix flat pages naming and numbering (fixes #759)
+* Add spanish translation
+* Remove hack for difficulty level.
 
-1.17 (2013-07-5)
+:notes:
+
+	After upgrading to this release, make sure your difficulty levels
+	are well ordered in Geotrek DB, or use the last version (0.20) to
+	edit *ids* in Geotrek Adminsite.
+
+1.21 (2013-07-11)
+-----------------
+
+* Fix ping google command
+
+1.20 (2013-07-10)
+-----------------
+
+* Fix count of results after filtering
+* Drag enabled on detail map
+* Mobile CSS fixes
+
+1.19 (2013-07-09)
+-----------------
+
+* Fix goggles behaviour
+* Add tooltips everywhere
+* Fix navigation bug
+
+1.18 (2013-07-08)
+-----------------
+
+* Fix translations
+* POIs sorted by type and alphabetic order
+* Fix search bug with spaces
+* Various CSS fixes
+
+1.17 (2013-07-05)
 -----------------
 
 * Add ability to have copyrights on map tiles
