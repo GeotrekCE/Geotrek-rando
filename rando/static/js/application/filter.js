@@ -140,7 +140,7 @@ function TrekFilter()
 
     this.getResultsCount = function () {
         return localStorage.getItem('resultsCount');
-    }
+    };
 
     this.filterChanged = function (e) {
         var elem = $(e.target).data("filter") ? $(e.target) : $(e.target).parents('.filter'),
@@ -202,15 +202,12 @@ function TrekFilter()
         var maxStage = self.state.sliders.stage.max;
 
         var trekDifficulty = trek.properties.difficulty;
-        var matching = {
-            1:1,
-            2:3,
-            3:4,
-            4:2
-        };
-
         if  (!trekDifficulty) return true;
-        return matching[trekDifficulty.id] >= minStage && matching[trekDifficulty.id] <= maxStage;
+        /**
+         * Difficulty ids are used to order levels.
+         * See Geotrek Adminsite for DifficultyLevel edition.
+         */
+        return trekDifficulty.id >= minStage && trekDifficulty.id <= maxStage;
     };
 
     this.matchDuration = function (trek) {
