@@ -10,6 +10,7 @@ CHANGELOG
 * Add spanish translation
 * Remove hack for difficulty level.
 * Hide column "on the way" if no POI (fixes #761)
+* Set detail pictures width to 100% of column (fixes #36)
 
 :notes:
 
