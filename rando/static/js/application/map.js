@@ -191,7 +191,7 @@ function mainmapInit(map, bounds) {
     // Add reset view control
     map.whenReady(function () {
         map.switchLayer('main');
-        map.removeControl(map.layerscontrol);
+        if (map.layerscontrol) map.removeControl(map.layerscontrol);
         new L.Control.ResetView(treksLayer.getBounds(), {position: 'topright'}).addTo(map);
         $(window).trigger('map:ready', [map, 'main']);
     });
@@ -453,7 +453,7 @@ function detailmapInit(map, bounds) {
     // Add reset view control
     map.whenReady(function () {
         map.switchLayer('detail');
-        map.removeControl(map.layerscontrol);
+        if (map.layerscontrol) map.removeControl(map.layerscontrol);
 
         new L.Control.ResetView(wholeBounds, {position: 'topright'}).addTo(map);
         map.addControl(new L.Control.Scale({imperial: false, position: 'bottomright'}));
