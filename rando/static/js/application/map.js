@@ -475,21 +475,17 @@ function detailmapInit(map, bounds) {
     });
 }
 
-if (typeof(Number.prototype.toRad) === "undefined") {
-  Number.prototype.toRad = function() {
-    return this * Math.PI / 180;
-  }
-}
-
 function distanceMeters(p1, p2) {
   var R = 6371000,
-      dLat = (p2.lat - p1.lat).toRad(),
-      dLon = (p2.lng - p1.lng).toRad();
+      dLat = toRad(p2.lat - p1.lat),
+      dLon = toRad(p2.lng - p1.lng);
   var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-          Math.cos(p2.lat.toRad()) * Math.cos(p2.lat.toRad()) *
+          Math.cos(toRad(p2.lat)) * Math.cos(toRad(p2.lat)) *
           Math.sin(dLon/2) * Math.sin(dLon/2);
   var c = 2 * Math.atan2(Math.sqrt(a) , Math.sqrt(1-a));
   var d = R * c;
+
+  function toRad(n) { return n * Math.PI / 180; }
   return d;
 }
 
