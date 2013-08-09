@@ -163,8 +163,6 @@
             $(document).ready(function (e) {
                 init_ui();
                 page_load();
-
-                firstLoad = false;
             });
 
             $(document).on('pjax:start', function (e) {
@@ -172,13 +170,16 @@
             });
 
             $(document).on('pjax:end', function (e) {
+                // Django-leaflet initialize maps on window.onload.
+                // With this piece of code we initialize maps on pjax:end too,
+                // only if they were not setup yet.
                 var mainmapContainer = L.DomUtil.get('mainmap');
-                if (mainmapContainer && typeof(loadmapmainmap) == "function") {
-                if (!mainmapContainer._leaflet) loadmapmainmap();
+                if (mainmapContainer && !mainmapContainer._leaflet) {
+                    if (typeof(loadmapmainmap) == "function") loadmapmainmap();
                 }
                 var detailmapContainer = L.DomUtil.get('detailmap');
-                if (detailmapContainer && typeof(loadmapdetailmap) == "function") {
-                if (!detailmapContainer._leaflet) loadmapdetailmap();
+                if (detailmapContainer && !detailmapContainer._leaflet) {
+                    if (typeof(loadmapdetailmap) == "function") loadmapdetailmap();
                 }
                 page_load();
             });
