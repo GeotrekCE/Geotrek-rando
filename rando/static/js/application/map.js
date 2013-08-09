@@ -311,7 +311,7 @@ function detailmapInit(map, bounds) {
     }).addTo(map);
 
     // Minimize minimap by default
-    map.whenReady(function () {
+    map.on('viewreset', function () {
         map.minimapcontrol._minimize();
     });
 
