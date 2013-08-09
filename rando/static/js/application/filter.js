@@ -21,13 +21,14 @@ function TrekFilter()
     this.__saveState = function () {
         var serialized = null;
 
+        localStorage.setItem('resultsCount', self.matching.length);
+
         if ($.isEmptyObject(self.state)) {
             return;
         } else {
             serialized = JSON.stringify(self.state);
 
             localStorage.setItem('filterState', serialized);
-            localStorage.setItem('resultsCount', self.matching.length);
 
             // Refresh URL hash, so that users can copy and paste URLs with filters
             var compressed = LZString.compress(serialized);
