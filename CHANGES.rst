@@ -12,6 +12,7 @@ CHANGELOG
 * Hide column "on the way" if no POI (fixes #761)
 * Set detail pictures width to 100% of column (fixes #36)
 * Document ``arrowstyle`` for direction arrow styling (fixes #27)
+* Removing trailing comma in search results too (fixes #5)
 
 :notes:
 
