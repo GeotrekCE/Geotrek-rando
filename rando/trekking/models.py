@@ -107,7 +107,9 @@ class Trek(JSONModel):
             'departure': self.properties.departure,
             'arrival': self.properties.arrival
         }
-        return u"%s - %s - %s" % (settings.TITLE[get_language()],
+        title = settings.TITLE.get(get_language(),
+                                   settings.TITLE.get(settings.LANGUAGE_CODE, ''))
+        return u"%s - %s - %s" % (title,
                                   self.properties.name,
                                   keywords)
 

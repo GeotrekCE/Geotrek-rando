@@ -182,7 +182,10 @@ function view_home() {
     });
 
     // Click on side-bar
-    $('#side-bar .result').on('click', showTooltip);
+    $('#side-bar .result').on('click', function (e) {
+        e.preventDefault();
+        simulate_map_click($(this).data('id'), e.target);
+    });
 
     // Tooltips on theme/usages
     $('.pictogram').tooltip();
@@ -194,14 +197,13 @@ function view_home() {
 
 
 
-function showTooltip (e) {
-    e.preventDefault();
-
+function simulate_map_click(trek_id, target) {
     // Do not fire click if clicked on search tools
-    if ($(e.target).parents('.search-tools').length > 0)
+    if ($(target).parents('.search-tools').length > 0)
         return;
 
-    var trekOnMap = window.treksLayer.getLayer($(this).data('id'));
+    // Grab a reference on layer with same id
+    var trekOnMap = window.treksLayer && window.treksLayer.getLayer(trek_id);
     if (trekOnMap) {
         // If multi - take first one
         if (trekOnMap instanceof L.MultiPolyline) {
@@ -219,7 +221,7 @@ function showTooltip (e) {
         _gaq.push(['_trackEvent', 'Results', 'Click', trekOnMap.properties && trekOnMap.properties.name]);
     }
     else {
-      console.warn("Trek not on map: " + $(this).data('id'));
+      console.warn("Trek not on map: " + trek_id);
     }
 }
 
