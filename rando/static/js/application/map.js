@@ -169,7 +169,6 @@ L.Map.include({
  * Callbacks of Django Leaflet.
  */
 function mainmapInit(map, bounds) {
-    $(window).trigger('map:init', [map, 'main']);
     map.attributionControl.setPrefix('');
 
     window.treksLayer = new TrekLayer(window.treks).addTo(map);
@@ -305,7 +304,6 @@ function mainmapInit(map, bounds) {
 
 
 function detailmapInit(map, bounds) {
-    $(window).trigger('map:init', [map, 'detail']);
     map.attributionControl.setPrefix('');
     L.control.fullscreen({
         position: 'topright',
