@@ -41,10 +41,12 @@ L.ObjectsLayer = L.GeoJSON.extend({
 
         this.layer_events = {
             'highlight_mouseover': function(e) {
-                self.highlight(e.layer.properties.pk);
+                if (e.layer.properties)
+                    self.highlight(e.layer.properties.pk);
             },
             'highlight_mouseout': function(e) {
-                self.highlight(e.layer.properties.pk, false);
+                if (e.layer.properties)
+                    self.highlight(e.layer.properties.pk, false);
             },
             'detail_dblclick': function(e) {
                 window.location = self.options.objectUrl(e.layer.properties, e.layer);
