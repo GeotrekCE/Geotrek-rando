@@ -279,7 +279,7 @@ function TrekFilter()
             routes.push(r);
         if (routes.length === 0)
             return true;
-        return $.inArray(trek.properties.route, routes) != -1;
+        return $.inArray('' + trek.properties.route.id, routes) != -1;
     };
 
     this._matchList = function (trek, category, property) {
