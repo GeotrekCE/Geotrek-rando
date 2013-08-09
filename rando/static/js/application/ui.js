@@ -294,7 +294,9 @@ function view_detail() {
     }
 
     //Load altimetric graph
-    altimetricInit();
+    if ($('#profilealtitude').length > 0) {
+        altimetricInit();
+    }
 
     // View 3d
     $("a.view3d").click(function () {
