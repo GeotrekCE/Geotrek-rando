@@ -140,6 +140,7 @@ function view_home() {
     $("#mainmap").show();  // We are on home with map
     invalidate_maps();
 
+    // Results tabs panels behaviour
     $('#result-backpack-tabs .nav-tabs a').on('click', function (e) {
         e.preventDefault();
         $(this).tab('show');
@@ -225,10 +226,10 @@ function refresh_results(matching) {
         var trek = treks.features[i],
             trekid = trek.properties.pk;
         if ($.inArray(trekid, matching) != -1) {
-            $('#trek-'+trekid).show(200);
+            $('#results #trek-'+trekid).show(200);
         }
         else {
-            $('#trek-'+trekid).hide(200);
+            $('#results #trek-'+trekid).hide(200);
         }
     }
     if (matching.length > 0)
@@ -258,10 +259,12 @@ function refresh_backpack() {
         $('#backpackempty').hide(200);
     else
         $('#backpackempty').show(200);
+    // Refresh label with number of items
     $('#tab-backpack span.badge').html(window.backPack.length());
 }
 
 function page_leave() {
+    // Close share panel (if open)
     $("#global-share.active").click();
 
     // Deselect all treks on page leave
