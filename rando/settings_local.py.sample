@@ -28,16 +28,13 @@ VIEW3D_ENABLED = True
 #......................
 #
 # LEAFLET_CONFIG = {
-#     "TILES_URL": [
-#         ('main', 'http://{s}.tiles.mapbox.com/v3/examples.map-4l7djmvo/{z}/{x}/{y}.png'),
-#         ('detail', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
-#     ],
-#     "ATTRIBUTIONS": [
-#         ('main', ''),
-#         ('detail', '')
+#     "TILES": [
+#         ('main', 'http://{s}.tiles.mapbox.com/v3/examples.map-4l7djmvo/{z}/{x}/{y}.png', '(c) MapBox'),
+#         ('detail', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', '(c) OSM')
 #     ],
 #     "SCALE": False,
 #     "MINIMAP": True,
+#     "NO_GLOBALS": False
 # }
 
 
@@ -60,4 +57,3 @@ VIEW3D_ENABLED = True
 #        'LOCATION': 'unique-snowflake'
 #    }
 #}
-

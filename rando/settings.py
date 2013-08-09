@@ -146,10 +146,13 @@ INSTALLED_APPS = (
 COMPRESS_PARSER = 'compressor.parser.HtmlParser'
 
 LEAFLET_CONFIG = {
-    "TILES_URL": 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    "ATTRIBUTIONS": '',
+    "TILES": [
+        ('main', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', '(c) OSM'),
+        ('detail', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', '(c) OSM')
+    ],
     "SCALE": False,
     "MINIMAP": True,
+    "NO_GLOBALS": False
 }
 
 # A sample logging configuration. The only tangible logging
