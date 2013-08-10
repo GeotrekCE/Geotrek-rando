@@ -3,10 +3,12 @@ import logging
 
 from django.http import Http404
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.views.generic import TemplateView, DetailView
 from django.views.static import serve as static_serve
 from django.shortcuts import redirect
 from djpjax import PJAXResponseMixin
+from localeurl.utils import locale_url
 
 from .models import Trek
 
@@ -67,7 +69,7 @@ class TrekView(PJAXResponseMixin, BaseTrekView):
         for poi in pois:
             all_pictures.extend(poi.properties.pictures)
         context['all_pictures'] = all_pictures
-        
+
         pois_sorted_by_label = sorted(pois, key=self.get_poi_label)
         context['pois'] = sorted(pois_sorted_by_label, key=self.get_poi_type)
 
@@ -88,10 +90,14 @@ class TrekView3D(BaseTrekView):
 
 def trek_redirect(request, pk):
     lang = request.LANGUAGE_CODE
-    treks = Trek.objects.filter(language=lang, pk=int(pk)).all()
-    if len(treks) < 1:
-        raise Http404
-    return redirect('trekking:detail', slug=treks[0].properties.slug)
+    treks = Trek.objects.filter(language=lang).all()
+    for trek in treks:
+        if trek.pk == int(pk):
+            fullurl = reverse('trekking:detail', kwargs={'slug': trek.properties.slug})
+            if not fullurl.startswith('/%s' % lang):
+                fullurl = locale_url(fullurl, locale=lang)
+            return redirect(fullurl)
+    raise Http404
 
 
 def fileserve(request, path):

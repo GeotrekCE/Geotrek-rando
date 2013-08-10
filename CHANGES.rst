@@ -24,9 +24,11 @@ CHANGELOG
 
 :notes:
 
-	After upgrading to this release, make sure your difficulty levels
-	are well ordered in Geotrek DB, or use the last version (0.20) to
-	edit *ids* in Geotrek Adminsite.
+    After upgrading to this release, make sure your difficulty levels
+    are well ordered in Geotrek DB, or use the last version (0.20) to
+    edit *ids* in Geotrek Adminsite.
+
+* Fix trek detail language redirections (fixes #9)
 
 1.21 (2013-07-11)
 -----------------
