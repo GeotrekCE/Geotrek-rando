@@ -11,6 +11,7 @@ CHANGELOG
 * Remove hack for difficulty level.
 * Hide column "on the way" if no POI (fixes #761)
 * Set detail pictures width to 100% of column (fixes #36)
+* Fixes links in search results, use explicit language prefix (fixes #43)
 
 :notes:
     Be careful with image aspect ratios ! 100% width means that portrait
@@ -29,6 +30,7 @@ CHANGELOG
     edit *ids* in Geotrek Adminsite.
 
 * Fix trek detail language redirections (fixes #9)
+* 
 
 1.21 (2013-07-11)
 -----------------
