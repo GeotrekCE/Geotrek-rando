@@ -28,26 +28,40 @@ class FlatPageManager(object):
         except IndexError:
             raise Exception("%s does not exist" % (kwargs))
 
+    @staticmethod
+    def parse_filename(filename, default_pk):
+        """
+        >>> FlatPageManager.parse_filename('001-title.html', 2)
+        1, 'title'
+        >>> FlatPageManager.parse_filename('title.html', 2)
+        2, 'title'
+        >>> FlatPageManager.parse_filename('001.html', 2)
+        2, '001'
+        """
+        basename = os.path.splitext(filename)[0]
+        m = re.search(r'^(\d+)-(.+)', basename)
+        if m:
+            pk = int(m.group(1))
+            title = m.group(2)
+        else:
+            pk = default_pk
+            title = basename
+        return (pk, title)
+
     def all(self):
         path = os.path.join(self.basepath, self.language)
         dirlist = []
         if os.path.exists(path):
-            dirlist = os.listdir(unicode(path))  # Give a path in unicode: you get list of unicode filenames
-        i = 0
-        for fname in dirlist:
-            fullpath = os.path.join(path, fname)
+            dirlist = os.listdir(path)
+        for i, filename in enumerate(dirlist):
+            if isinstance(filename, str):
+                filename = filename.decode('utf-8')
+            # Extract pk and title from filename
+            pk, title = self.parse_filename(filename, i)
+            fullpath = os.path.join(path, filename)
             with open(fullpath, 'r') as f:
                 content = f.read()
-            basename = os.path.splitext(fname)[0]
-            m = re.search(r'^(\d+)-(.+)', basename)
-            if m:
-                pk = int(m.group(1))
-                title = m.group(2)
-            else:
-                title = basename
-                pk = i
-            i += 1
-            # Filter by pk (see redirect view
+            # Filter by pk (see redirect view)
             if self.pk is None or int(self.pk) == pk:
                 yield self.klass(pk, title, content, fullpath)
 
