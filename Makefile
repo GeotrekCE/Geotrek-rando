@@ -4,7 +4,7 @@ bin/python:
 	virtualenv .
 	bin/python setup.py develop
 	# Until django-leaflet 0.7 is released on pypi
-	bin/pip install --upgrade --no-deps -e "git+https://github.com/makinacorpus/django-leaflet.git@814c1d2#egg=django-leaflet"
+	bin/pip install --upgrade --no-deps -e "git+https://github.com/makinacorpus/django-leaflet.git@feb7165#egg=django-leaflet"
 
 sync: bin/python
 	bin/python ./manage.py sync_trekking
