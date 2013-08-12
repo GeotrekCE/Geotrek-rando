@@ -53,7 +53,6 @@ USE_TZ = True
 INPUT_DATA_ROOT = os.path.join(PROJECT_PATH, '..', 'var', 'input')
 INPUT_TMP_ROOT = os.path.join(PROJECT_PATH, '..', 'var', 'tmp')
 MEDIA_ROOT = os.path.join(INPUT_DATA_ROOT, 'media')
-FLATPAGES_ROOT = os.path.join(MEDIA_ROOT,'pages')
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(PROJECT_PATH, '..', 'var', 'static')
 STATIC_URL = '/static/'
@@ -144,6 +143,9 @@ INSTALLED_APPS = (
 )
 
 COMPRESS_PARSER = 'compressor.parser.HtmlParser'
+
+FLATPAGES_ROOT = os.path.join(MEDIA_ROOT,'pages')
+FLATPAGES_TITLES = {}
 
 LEAFLET_CONFIG = {
     "TILES": [

@@ -166,6 +166,25 @@ If you want the same page if various language, make sure it has the same prefix 
     If a trek is in the park center, a link to the *Park Policy* (*Réglementations*) will be shown in the page. Therefore, your policy page **must have** a prefix ``01-``.
 
 
+
+If you want to use special characters in pages titles, use the ``FLATPAGES_TITLES`` setting.
+For example, if you have the following files ::
+
+    pages/fr/001-reglement.html
+    pages/fr/002-a-votre-ecoute.html
+    pages/de/001-Reglen.html
+    pages/de/002-fuer-sie.html
+
+You can set titles using this setting ::
+
+    FLATPAGES_TITLES = {
+        'reglement': u'Réglement',
+        'a-votre-ecoute': u'À vôtre écoute',
+        'fuer-sie': u'Für Sie'
+    }
+
+
+
 CSS style
 =========
 

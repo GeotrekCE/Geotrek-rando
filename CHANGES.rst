@@ -22,12 +22,13 @@ CHANGELOG
 * Removing trailing comma in search results too (fixes #5)
 * Fix route filter (fixes #10)
 * Fix display of number of results while navigating (fixes #6)
+* Add ability to have accents in flat pages titles, see README (fixes #15)
 
 :notes:
 
     After upgrading to this release, make sure your difficulty levels
-    are well ordered in Geotrek DB, or use the last version (0.20) to
-    edit *ids* in Geotrek Adminsite.
+    are ordered by *id* column in Geotrek DB, or use the last version (0.20) to
+    be able to edit *ids* in Geotrek Adminsite.
 
 * Fix trek detail language redirections (fixes #9)
 * 

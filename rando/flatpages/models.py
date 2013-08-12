@@ -46,6 +46,8 @@ class FlatPageManager(object):
         else:
             pk = default_pk
             title = basename
+        # Use title overidden in settings, if present.
+        title = settings.FLATPAGES_TITLES.get(title, title)
         return (pk, title)
 
     def all(self):
