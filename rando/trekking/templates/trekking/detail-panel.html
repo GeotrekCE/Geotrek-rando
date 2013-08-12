@@ -253,4 +253,4 @@
     window.view3d_url = "{% locale_url request.LANGUAGE_CODE trekking:view3d "empty" %}";
 </script>
 
-{% leaflet_map 'detailmap' fitextent=False creatediv=False %}
+{% leaflet_map 'detailmap' fitextent=False creatediv=False loadevent="rando:foo" %}{# Such loadevent will prevent automatic map initialization #}
