@@ -250,8 +250,8 @@ class Command(BaseCommand):
                     InputFile(self, trek.properties.altimetric_profile, language=language).pull_if_modified()
                     InputFile(self, trek.properties.gpx, language=language).pull_if_modified()
                     InputFile(self, trek.properties.kml, language=language).pull_if_modified()
+                    InputFile(self, trek.properties.map_image_url, language=language).pull_if_modified()
                     if settings.PRINT_ENABLED:
-                        InputFile(self, trek.properties.map_image_url, language=language).pull_if_modified()
                         InputFile(self, trek.properties.printable, language=language).pull_if_modified()
 
             # Fetch media only once, since they do not depend on language
