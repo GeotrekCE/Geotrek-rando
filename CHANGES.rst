@@ -46,6 +46,8 @@ CHANGELOG
     
     Compare yours with example bloc in ``settings_local.py.sample``.
 
+* Fixes popup opens after second clic only (fixes #1)
+
 
 1.21 (2013-07-11)
 -----------------

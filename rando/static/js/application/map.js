@@ -300,6 +300,12 @@ function mainmapInit(map, bounds) {
             });
         }
     });
+    // If popup is closed on map click (since closeOnClick is default option)
+    // then clean popup reference to have clear state for next trek click
+    map.on('layerremove', function (e) {
+        if (e.layer === popup)
+            popup = null;
+    });
 }
 
 
