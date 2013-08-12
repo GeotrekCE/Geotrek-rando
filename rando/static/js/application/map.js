@@ -201,25 +201,33 @@ function mainmapInit(map, bounds) {
         $(window).trigger('map:ready', [map, 'main']);
     });
 
-    // Filter map on filter
-    $(window.trekFilter).on("filterchange", function(e, visible) {
-        treksLayer.updateFromPks(visible);
+    // Highlight result on mouseover
+    treksLayer.on('mouseover', function (e) {
+      $('#trek-'+ e.layer.properties.pk +'.result').addClass('active');
+    });
+    treksLayer.on('mouseout', function (e) {
+      $('#trek-'+ e.layer.properties.pk +'.result').removeClass('active');
+    });
+
+    // Filter map layers on filter change
+    $(window.trekFilter).on("filterchange", function(e, matched) {
+        treksLayer.updateFromPks(matched);
     });
 
     // Filter list by map bounds
     map.on('moveend', function (e) {
-      if (!map._loaded || MOBILE) return;  // Bounds should be set.
+        if (!map._loaded || MOBILE) return;  // Bounds should be set.
 
-      $('#side-bar .result').removeClass('outbounds');
-      if (!$(map._container).is(':visible')) {
-        // If map is hidden, consider all visible :)
-        return;
-      }
-      var visible = treksLayer.search(map.getFakeBounds());
-      $(visible).each(visible, function (i, l) {
-          var pk = l.properties.pk;
-          $("#side-bar .result[data-id='" + pk + "']").addClass('outbounds');
-      });
+        $('#side-bar .result').removeClass('outbounds');
+        if (!$(map._container).is(':visible')) {
+            // If map is hidden (viewing detail page), consider all visible :)
+            return;
+        }
+        var inBounds = treksLayer.search(map.getFakeBounds());
+        for (var i=0, n=inBounds.length; i<n; i++) {
+            var pk = inBounds[i].properties.pk;
+            $("#side-bar .result[data-id='" + pk + "']").addClass('outbounds');
+        }
     });
 
     // Go to detail page on double-click
@@ -260,24 +268,21 @@ function mainmapInit(map, bounds) {
             }
         }
 
-        var popupSettings = {};
+        var popupSettings = {
+            autoPan: true,
+        };
 
         if(MOBILE) {
-            popupSettings = {
-                autoPan: true,
+            popupSettings = L.Util.extend(popupSettings, {
                 closeButton: false,
                 maxWidth: 250,
                 autoPanPadding: new L.Point(5, 50)
-            }
-        } else {
-            popupSettings = {
-                autoPan: true
-            };
+            });
         }
 
         popup = L.popup(popupSettings).setLatLng(e.latlng)
-             .setContent(html)
-             .openOn(map);
+                 .setContent(html)
+                 .openOn(map);
         popup.pk = layer.properties.pk;
 
         // Make sure clic on details will open as pjax (cause added after initial loading?)
@@ -288,20 +293,12 @@ function mainmapInit(map, bounds) {
             _gaq.push(['_trackEvent', 'Map', 'Popup', e.layer.properties.name]);
         });
 
-
+        // If MOBILE, then click on whole popup panel opens details
         if(MOBILE) {
             $(".leaflet-popup-content-wrapper").on('click', function (event) {
                 $.pjax({container: '#content', url:$("a.pjax", popup._container).attr('href')});
             });
         }
-    });
-
-    // Highlight result on mouseover
-    treksLayer.on('mouseover', function (e) {
-      $('#trek-'+ e.layer.properties.pk +'.result').addClass('active');
-    });
-    treksLayer.on('mouseout', function (e) {
-      $('#trek-'+ e.layer.properties.pk +'.result').removeClass('active');
     });
 }
 
