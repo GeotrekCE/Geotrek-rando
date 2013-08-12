@@ -170,17 +170,14 @@
             });
 
             $(document).on('pjax:end', function (e) {
-                // Django-leaflet initialize maps on window.onload.
-                // With this piece of code we initialize maps on pjax:end too,
-                // only if they were not setup yet.
+                // Django-leaflet initialize mainmap on window.load.
+                // With this piece of code we initialize maps on pjax:end too.
+                // (useful when landing on other page than home)
                 var mainmapContainer = L.DomUtil.get('mainmap');
-                if (mainmapContainer && !mainmapContainer._leaflet) {
-                    if (typeof(loadmapmainmap) == "function") loadmapmainmap();
+                if (mainmapContainer && typeof(loadmapmainmap) == "function") {
+                    loadmapmainmap();
                 }
-                var detailmapContainer = L.DomUtil.get('detailmap');
-                if (detailmapContainer && !detailmapContainer._leaflet) {
-                    if (typeof(loadmapdetailmap) == "function") loadmapdetailmap();
-                }
+
                 page_load();
             });
         </script>
