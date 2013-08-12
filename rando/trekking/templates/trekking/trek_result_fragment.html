@@ -6,7 +6,7 @@
   <div class="info-result">
     <a class="pjax hidden" href="{% locale_url request.LANGUAGE_CODE trekking:detail trek.properties.slug %}"></a>
     <h3>{{ trek.properties.name }}</h3>
-    <p>{% for district in trek.properties.districts %}{{ district.name }}{% if trek.properties.districts|length > 1 %},{% endif %} {% endfor %}</p>
+    <p>{% for district in trek.properties.districts %}{{ district.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
     <p>{{ trek.properties.duration|duration }} <span class="ascent">- {% trans "Climb" %} {{ trek.properties.ascent }} m</span></p>
     <p>{{ trek.properties.difficulty.label|default:"&nbsp;" }}</p>
     <div class="theme-tools">

@@ -63,7 +63,7 @@
           <p>{% trans "Route" %} : <span class="value">{{ object.properties.route.label }}</span></p>
           {% endif %}
           <p>{% trans "Valleys" %} : <span class="value">{% for district in object.properties.districts %}
-            {{ district.name }}{% if object.properties.districts|length > 1 %},{% endif %} {% endfor %}</span></p>
+            {{ district.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</span></p>
         </div>
 
         {% for usage in object.properties.usages %}
