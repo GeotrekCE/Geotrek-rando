@@ -133,6 +133,12 @@ var FakeBoundsMapMixin = {
 
     getFakeBounds: function () {
         return this.__fakeBounds();
+    },
+
+    fakePanTo: function (latlng) {
+        var bounds = new L.LatLngBounds([latlng, latlng]),
+            fakeBounds = this.__fakeBounds(bounds);
+        this.panTo(fakeBounds.getCenter());
     }
 };
 

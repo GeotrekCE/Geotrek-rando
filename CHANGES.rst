@@ -23,6 +23,7 @@ CHANGELOG
 * Fix route filter (fixes #10)
 * Fix display of number of results while navigating (fixes #6)
 * Add ability to have accents in flat pages titles, see README (fixes #15)
+* Fix centering on trek when it's below search results (fixes #8)
 
 :notes:
 

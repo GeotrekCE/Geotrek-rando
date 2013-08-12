@@ -217,6 +217,9 @@ function simulate_map_click(trek_id, target) {
         trekOnMap.fire('click', {
           latlng: middlepoint
         });
+        // Move the map if trek is below search results
+        var map = trekOnMap._map;
+        map.fakePanTo(middlepoint);
         // Track event
         _gaq.push(['_trackEvent', 'Results', 'Click', trekOnMap.properties && trekOnMap.properties.name]);
     }
