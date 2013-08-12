@@ -47,6 +47,7 @@ CHANGELOG
     Compare yours with example bloc in ``settings_local.py.sample``.
 
 * Fixes popup opens after second clic only (fixes #1)
+* Show map screenshot in detail page for mobile (fixes #12)
 
 
 1.21 (2013-07-11)
