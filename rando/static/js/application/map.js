@@ -224,9 +224,10 @@ function mainmapInit(map, bounds) {
             return;
         }
         var inBounds = treksLayer.search(map.getFakeBounds());
+        $('#side-bar .result').addClass('outbounds');
         for (var i=0, n=inBounds.length; i<n; i++) {
             var pk = inBounds[i].properties.pk;
-            $("#side-bar .result[data-id='" + pk + "']").addClass('outbounds');
+            $("#side-bar .result[data-id='" + pk + "']").removeClass('outbounds');
         }
     });
 

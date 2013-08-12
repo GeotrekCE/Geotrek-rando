@@ -1,4 +1,4 @@
-*Caminae public portal*
+*Geotrek public portal*
 
 =====
 SETUP
@@ -40,7 +40,7 @@ Be careful to save the file with UTF-8 encoding, especially if you use accents a
 
 Most important settings :
 
-* **CAMINAE_SERVER**
+* **GEOTREK_SERVER**
 * **TITLE** (in every supported language, fallback to English)
 * **DESCRIPTION** (in every supported language, fallback to English)
 
@@ -91,7 +91,7 @@ And *synchronize* at least once !
 SYNCHRONIZATION
 ===============
 
-Setup the Caminae server you want to synchronize, using the ``CAMINAE_SERVER`` setting.
+Setup the Geotrek server you want to synchronize, using the ``GEOTREK_SERVER`` setting.
 
 ::
 

@@ -284,6 +284,14 @@ function page_leave() {
 function view_detail() {
     $("#mainmap").hide();  // We are elsewhere
 
+    if (!MOBILE) {
+        loadmapdetailmap();
+    }
+    else {
+        $('#detailmap #staticmap').removeClass('hidden');
+        $('#detailmap .helpclic').hide();
+    }
+
     $('#tab-results span.badge').html(window.trekFilter.getResultsCount());
 
     $('#pois-accordion').on('show', function (e) {

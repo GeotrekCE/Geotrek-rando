@@ -5,7 +5,7 @@
 # Edit configuration 
 #
 
-CAMINAE_SERVER = 'geobi.makina-corpus.net/geotrek'
+GEOTREK_SERVER = 'geobi.makina-corpus.net/geotrek'
 
 TITLE = {
     'en': "Trekking",

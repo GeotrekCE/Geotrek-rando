@@ -132,6 +132,7 @@
       {% endif %}
 
       <div id="detailmap">
+        <img id="staticmap" class="hidden" src="{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.map_image_url %}"/>
         <div class="helpclic"><p>{% trans "Clic for map interaction" %}</p></div>
       </div>
 
@@ -253,4 +254,4 @@
     window.view3d_url = "{% locale_url request.LANGUAGE_CODE trekking:view3d "empty" %}";
 </script>
 
-{% leaflet_map 'detailmap' fitextent=False creatediv=False %}
+{% leaflet_map 'detailmap' fitextent=False creatediv=False loadevent="rando:foo" %}{# Such loadevent will prevent automatic map initialization #}
