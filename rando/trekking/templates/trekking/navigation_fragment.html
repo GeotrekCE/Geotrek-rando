@@ -1,10 +1,10 @@
-{% load i18n flatpages %}
+{% load i18n flatpages localeurl_tags %}
 
 {% get_flatpages as flatpages %}
 <div id="flatpages" class="reattach" data-destination="header">
     <ul>
     {% for page in flatpages %}
-        <li><a class="btn pjax {% if title == page.title %}active{% endif %}" href="{% url flatpages:page page.slug %}">{{ page.title }}</a></li>
+        <li><a class="btn pjax {% if title == page.title %}active{% endif %}" href="{% locale_url request.LANGUAGE_CODE flatpages:page page.slug %}">{{ page.title }}</a></li>
     {% endfor %}
     </ul>
 </div>

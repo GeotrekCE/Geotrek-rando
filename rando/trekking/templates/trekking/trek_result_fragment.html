@@ -27,7 +27,7 @@
           <i class="backpack"></i>
         {% endif %}
         </a>
-        <a class="btn search pjax" data-pk="{{ trek.properties.pk }}" title="{% trans "Zoom to trek" %}" href="{% url trekking:detail trek.properties.slug %}">
+        <a class="btn search pjax" data-pk="{{ trek.properties.pk }}" title="{% trans "Zoom to trek" %}" href="{% locale_url request.LANGUAGE_CODE trekking:detail trek.properties.slug %}">
           <span class="hidden">{% trans "Zoom to trek" %}</span>
           <i class="search"></i>
         </a>

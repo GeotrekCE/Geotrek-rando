@@ -1,4 +1,4 @@
-{% load static i18n leaflet_tags trekking %}
+{% load static i18n leaflet_tags trekking localeurl_tags %}
 {% include "trekking/navigation_fragment.html" with title=object.title %}
 
 {% if pjax %}
@@ -6,7 +6,7 @@
 {% endif %}
 
 <div id="mobile-header-detail">
-  <a class="pjax" href="{% url trekking:home %}"><i class="icon-chevron-left icon-white"></i><h1>{% trans "Back to list" %}</h1></a>
+  <a class="pjax" href="{% locale_url request.LANGUAGE_CODE trekking:home %}"><i class="icon-chevron-left icon-white"></i><h1>{% trans "Back to list" %}</h1></a>
 </div>
 
 <div class="flatpage-content">

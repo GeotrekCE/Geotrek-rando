@@ -1,4 +1,4 @@
-{% load static i18n leaflet_tags trekking %}
+{% load static i18n leaflet_tags trekking localeurl_tags %}
 
 {% include "trekking/navigation_fragment.html" %}
 {% include "trekking/share_fragment.html" with title=object.title %}
@@ -8,7 +8,7 @@
 {% endif %}
 
 <div id="mobile-header-detail">
-  <a class="pjax" href="{% url trekking:home %}"><i class="icon-chevron-left icon-white"></i><h1>{% trans "Back to list" %}</h1></a>
+  <a class="pjax" href="{% locale_url request.LANGUAGE_CODE trekking:home %}"><i class="icon-chevron-left icon-white"></i><h1>{% trans "Back to list" %}</h1></a>
 </div>
 
 <div class="detail-content">
@@ -26,7 +26,7 @@
         {% endif %}
 
         {% if PRINT_ENABLED %}
-        <a class="btn download print" title="{% trans "Print" %}" href="{% url trekking:fileserve object.properties.printable %}" target="_blank">
+        <a class="btn download print" title="{% trans "Print" %}" href="{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.printable %}" target="_blank">
           <i class="print"></i> {% trans "Print" %}
         </a>
         {% else %}
@@ -34,10 +34,10 @@
           <i class="print"></i> {% trans "Print" %}
         </a>
         {% endif %}
-        <a class="btn download gpx" title="{% trans "Download GPX" %}" href="{% url trekking:fileserve object.properties.gpx %}">
+        <a class="btn download gpx" title="{% trans "Download GPX" %}" href="{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.gpx %}">
           <i class="gpx"></i> {% trans "GPX" %}
         </a>
-        <a class="btn download kml" title="{% trans "Download for Google Earth" %}" href="{% url trekking:fileserve object.properties.kml %}">
+        <a class="btn download kml" title="{% trans "Download for Google Earth" %}" href="{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.kml %}">
           <i class="kml"></i> {% trans "KML" %}
         </a>
 
@@ -127,7 +127,7 @@
     <div class="span{% if pois %}4{% else %}8{% endif %}">
       {% if object.properties.is_park_centered %}
         <div id="park-center-warning" class="alert alert-info">
-            <p><strong>{% trans "This trek is within park center" %}</strong>, <a class="pjax" href="{% url flatpages:redirect "1" %}">{% trans "please read access rules." %}</a></p>
+            <p><strong>{% trans "This trek is within park center" %}</strong>, <a class="pjax" href="{% locale_url request.LANGUAGE_CODE flatpages:redirect "1" %}">{% trans "please read access rules." %}</a></p>
         </div>
       {% endif %}
 
@@ -180,7 +180,7 @@
               <h5>{% trans "Sharing departure" %}</h5>
               <ul>
             {% endif %}
-            <li><a href="{% url trekking:detail relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+            <li><a href="{% locale_url request.LANGUAGE_CODE trekking:detail relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
             {% if forloop.last %}</ul>{% endif %}
           {% endfor %}
 
@@ -189,7 +189,7 @@
               <h5>{% trans "Sharing paths" %}</h5>
               <ul>
             {% endif %}
-            <li><a href="{% url trekking:detail relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+            <li><a href="{% locale_url request.LANGUAGE_CODE trekking:detail relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
             {% if forloop.last %}</ul>{% endif %}
           {% endfor %}
 
@@ -198,7 +198,7 @@
               <h5>{% trans "Sharing circuit" %}</h5>
               <ul>
             {% endif %}
-            <li><a href="{% url trekking:detail relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+            <li><a href="{% locale_url request.LANGUAGE_CODE trekking:detail relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
             {% if forloop.last %}</ul>{% endif %}
           {% endfor %}
         </div>
@@ -249,8 +249,8 @@
 <script type="text/javascript">
     window.trek = {{ trek.geojson|safe }};
     window.pois = {{ poisjson|safe }};
-    window.altimetric_url = "{% url trekking:fileserve object.properties.altimetric_profile %}";
-    window.view3d_url = "{% url trekking:view3d "empty" %}";
+    window.altimetric_url = "{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.altimetric_profile %}";
+    window.view3d_url = "{% locale_url request.LANGUAGE_CODE trekking:view3d "empty" %}";
 </script>
 
 {% leaflet_map 'detailmap' fitextent=False creatediv=False %}
