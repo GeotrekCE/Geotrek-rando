@@ -215,13 +215,10 @@ function mainmapInit(map, bounds) {
         // If map is hidden, consider all visible :)
         return;
       }
-      var visible = treksLayer.search(map.getFakeBounds()),
-          visiblepks = $.map(visible, function (l) { return l.properties.pk; });
-      $.each(window.treks.features, function (i, l) {
+      var visible = treksLayer.search(map.getFakeBounds());
+      $(visible).each(visible, function (i, l) {
           var pk = l.properties.pk;
-          if ($.inArray(pk, visiblepks) == -1) {
-            $("#side-bar .result[data-id='" + pk + "']").addClass('outbounds');
-          }
+          $("#side-bar .result[data-id='" + pk + "']").addClass('outbounds');
       });
     });
 
