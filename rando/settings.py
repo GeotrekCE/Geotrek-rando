@@ -207,7 +207,7 @@ LOGGING = {
 
 TEST_RUNNER = 'rando.testing.DatabaselessTestRunner'
 
-CAMINAE_SERVER = 'localhost:8000'
+GEOTREK_SERVER = 'localhost:8000'
 
 TITLE = {
     'en': "Trekking",

@@ -63,9 +63,9 @@ class InputFile(object):
 
     def __init__(self, command, url, language=None):
         self.command = command
-        server = settings.CAMINAE_SERVER
-        if 'http' not in settings.CAMINAE_SERVER:
-            server = 'http://' + settings.CAMINAE_SERVER
+        server = settings.GEOTREK_SERVER
+        if 'http' not in settings.GEOTREK_SERVER:
+            server = 'http://' + settings.GEOTREK_SERVER
         parts = urlparse(server)
         self.rooturl = parts.path
         if len(self.rooturl) <= 1:
@@ -229,10 +229,14 @@ class TrekListInputFile(InputFile):
 
 class Command(BaseCommand):
 
-    help = 'Synchronize data from a Caminae server'
+    help = 'Synchronize data from a Geotrek server'
 
     def handle(self, *args, **options):
-        cprint('Caminae server: %s' % settings.CAMINAE_SERVER, 'blue', file=self.stdout)
+        # Backport former server option
+        if hasattr(settings, 'CAMINAE_SERVER'):
+            setattr(settings, 'GEOTREK_SERVER', settings.CAMINAE_SERVER)
+
+        cprint('Geotrek server: %s' % settings.GEOTREK_SERVER, 'blue', file=self.stdout)
 
         try:
             InputFile(self, models.Settings.filepath).pull_if_modified()
