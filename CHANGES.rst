@@ -32,7 +32,20 @@ CHANGELOG
     be able to edit *ids* in Geotrek Adminsite.
 
 * Fix trek detail language redirections (fixes #9)
-* 
+* Upgraded to Leaflet 0.6.4
+* Upgraded to django-leaflet 0.7
+
+:notes:
+
+    In order to upgrade, run ``make clean`` before ``make deploy``.
+
+    Attributions settings have changed. Attribution string is now the third
+    item in layer definition (ex: ('detail', 'http://...', '(c) OSM')).
+    
+    Add a line with ``NO_GLOBALS: False,`` in ``LEAFLET_CONFIG``.
+    
+    Compare yours with example bloc in ``settings_local.py.sample``.
+
 
 1.21 (2013-07-11)
 -----------------

@@ -3,6 +3,8 @@ install: bin/python
 bin/python:
 	virtualenv .
 	bin/python setup.py develop
+	# Until django-leaflet 0.7 is released on pypi
+	bin/pip install --upgrade --no-deps -e "git+https://github.com/makinacorpus/django-leaflet.git@dccac8f4#egg=django-leaflet"
 
 sync: bin/python
 	bin/python ./manage.py sync_trekking
@@ -24,7 +26,7 @@ test: bin/python
 	bin/python ./manage.py test trekking flatpages
 
 clean:
-	rm -rf bin/ lib/ build/ dist/ *.egg-info/ include/ local/
+	rm -rf src/ bin/ lib/ build/ dist/ *.egg-info/ include/ local/
 
 ping_google:
 	bin/python ./manage.py ping_google $(url)/sitemap.xml

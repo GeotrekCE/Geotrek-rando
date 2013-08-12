@@ -16,7 +16,7 @@ setup(
         'Django == 1.4.2',
         'requests == 0.14.2',
         'termcolor == 1.1.0',
-        'django-leaflet == 0.5.1',
+        'django-leaflet',
         'django-localeurl == 1.5',
         'django-pjax == 1.2',
         'easydict == 1.4',
