@@ -380,10 +380,13 @@ function detailmapInit(map, bounds) {
         if (layer instanceof L.MultiPolyline)
             return;
 
-        map.whenReady(function () {
-            var textPath = L.polyline(layer.getLatLngs(), {weight: 0}).addTo(map);
-            textPath.setText('>     ', {repeat:true, offset: TREK_LAYER_OPTIONS.outlinestyle.weight * 0.75, attributes: TREK_LAYER_OPTIONS.arrowstyle});
-        });
+        // Do not try to draw path orientation if no SVG support
+        if (!$('html').hasClass('no-svg')) {
+            map.whenReady(function () {
+                var textPath = L.polyline(layer.getLatLngs(), {weight: 0}).addTo(map);
+                textPath.setText('>     ', {repeat:true, offset: TREK_LAYER_OPTIONS.outlinestyle.weight * 0.75, attributes: TREK_LAYER_OPTIONS.arrowstyle});
+            });
+        }
 
         L.marker(layer.getLatLngs()[0],
                  {clickable: false,
