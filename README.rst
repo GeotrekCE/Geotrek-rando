@@ -32,9 +32,9 @@ Prepare deployment :
 
 
 Configuration
---------------  
+-------------
 
-Copy ``rando/settings_local.py.sample`` to ``rando/settings_local.py` and edit it to override settings.
+Copy ``rando/settings_local.py.sample`` to ``rando/settings_local.py`` and edit it to override settings.
 
 Be careful to save the file with UTF-8 encoding, especially if you use accents and special characters.
 
@@ -123,7 +123,7 @@ All customizations in this paragraph happen in the ``var/input/media/`` folder.
 
 
 Basic FTP access configuration
-==============================
+------------------------------
 
 You can setup a FTP access to this *media* folder. 
 
@@ -142,12 +142,13 @@ Done !
 
 
 Static files
-============
+------------
 
 All files available in this *media* folder will be available at the ``/media`` URL.
 
+
 Static pages
-============
+------------
 
 All static pages will be loaded from a ``pages`` folder.
 
@@ -184,14 +185,14 @@ You can set titles using this setting ::
     }
 
 
-
 CSS style
-=========
+---------
 
 A ``style.css`` is loaded in the page, and allows to override every part of the website.
 
+
 Header
-======
+------
 
 Upload your file and add a custom section in the custom CSS :
 
@@ -201,8 +202,9 @@ Upload your file and add a custom section in the custom CSS :
         background: url(/media/yourfile.jpg) no-repeat;
     }
 
+
 Footer
-======
+------
 
 A ``footer.html`` is loaded and injected into the page.
 
@@ -220,7 +222,7 @@ To hide the footer, add in ``style.css``:
 
 
 Map elements
-============
+------------
 
 The background layers can be configured from ``settings_local.py``. See sample.
 
@@ -282,7 +284,7 @@ The tiles of this layer can then be added to the maps, using this snippet (for e
 
 
 Altimetric profile colors
-=========================
+-------------------------
 
 In the ``footer.html`` block :
 
@@ -300,7 +302,7 @@ See `Jquery sparkline <http://omnipotent.net/jquery.sparkline>`_ options.
 
 
 Default trek thumbnail
-======================
+----------------------
 
 If a trek has no pictures attached, a default thumbnail is used.
 
@@ -318,13 +320,13 @@ TROUBLESHOOTING
 ===============
 
 Uploaded files are not served by Apache
-=======================================
+---------------------------------------
 
 Make sure Apache has read access to all files uploaded and created in the *media* folder.
 
 
 Synchronization failed with 404
-===============================
+-------------------------------
 
 ::
 
