@@ -2,7 +2,7 @@
 CHANGELOG
 =========
 
-1.22 (unreleased)
+1.22 (2013-08-13)
 -----------------
 
 * Fix ping_google command, add url=http://rando.server.com parameter (fixes #754)
