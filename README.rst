@@ -341,6 +341,7 @@ Try to access this URL manually and check the logs on the remote server.
 AUTHORS
 =======
 
+    * Adrien Denat
     * Yahya Mzoughi
     * Gaël Utard
     * Mathieu Leplatre
@@ -355,4 +356,4 @@ AUTHORS
 LICENSE
 =======
 
-    * (c) Makina Corpus
+    (c) Makina Corpus
