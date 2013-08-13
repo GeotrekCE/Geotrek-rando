@@ -164,7 +164,11 @@ If you want the same page if various language, make sure it has the same prefix 
 
 :notes:
 
-    If a trek is in the park center, a link to the *Park Policy* (*Réglementations*) will be shown in the page. Therefore, your policy page **must have** a prefix ``01-``.
+    If a trek is in the park center, a link to the *Park Policy* (*Réglementations*) will
+    be shown in the page.
+    The policy page **must have** a prefix id (because of language switching).
+    You can control the id (default is *1*) by changing the setting ``FLATPAGES_POLICY_PAGE``
+    to the number of your choice. (e.g. ``FLATPAGES_POLICY_PAGE = 3``).
 
 
 

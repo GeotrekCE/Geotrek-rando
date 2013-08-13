@@ -1,7 +1,6 @@
 import logging
 
 from django.conf import settings as settings_
-from easydict import EasyDict as edict
 
 from rando import __version__
 from rando.trekking.models import Settings
@@ -21,6 +20,7 @@ def settings(request):
         'TITLE': settings_.TITLE.get(lang, settings_.TITLE.get('en')),
         'DESCRIPTION': settings_.DESCRIPTION.get(lang, settings_.TITLE.get('en')),
         'URL': request.build_absolute_uri(request.path),
+        'FLATPAGES_POLICY_PAGE': settings_.FLATPAGES_POLICY_PAGE,
         'settings' : app_settings,
     }
 

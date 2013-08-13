@@ -22,6 +22,11 @@ GANALYTICS_TRACKING_CODE = 'UA-XXXXXXXX-XX'
 PRINT_ENABLED = True
 VIEW3D_ENABLED = True
 
+#
+# Flat pages customizations
+#
+# FLATPAGES_POLICY_PAGE = 3
+#
 
 #
 # Layers customizations

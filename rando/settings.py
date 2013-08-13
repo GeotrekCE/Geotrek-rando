@@ -146,6 +146,7 @@ COMPRESS_PARSER = 'compressor.parser.HtmlParser'
 
 FLATPAGES_ROOT = os.path.join(MEDIA_ROOT,'pages')
 FLATPAGES_TITLES = {}
+FLATPAGES_POLICY_PAGE = 1
 
 LEAFLET_CONFIG = {
     "TILES": [
