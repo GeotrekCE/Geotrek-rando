@@ -166,13 +166,6 @@ function view_home() {
         $(this).toggleClass('closed');
     });
 
-    $('#side-bar .result').on('dblclick', function (e) {
-        e.preventDefault();
-        $('#trek-'+ $(this).data('id') +'.result a.pjax.hidden').click();
-        // Track event
-        _gaq.push(['_trackEvent', 'Results', 'Doubleclick', $(this).data('name')]);
-    });
-
     // Highlight map on hover in sidebar results
     $('#side-bar .result').hover(function() {
         if (window.treksLayer) window.treksLayer.highlight($(this).data('id'), true);
@@ -181,10 +174,22 @@ function view_home() {
         if (window.treksLayer) window.treksLayer.highlight($(this).data('id'), false);
     });
 
+    $('#side-bar .result').on('dblclick', function (e) {
+        e.preventDefault();
+        // Simulate click on search
+        $('a.search', this).click();
+        // Track event
+        _gaq.push(['_trackEvent', 'Results', 'Doubleclick', $(this).data('name')]);
+    });
+
     // Click on side-bar
     $('#side-bar .result').on('click', function (e) {
-        e.preventDefault();
-        simulate_map_click($(this).data('id'), e.target);
+        // Do not fire click if clicked on search tools
+        if ($(e.target).parents('.search-tools').length == 0) {
+            e.preventDefault();
+            simulate_map_click($(this).data('id'));
+        }
+        // else, normal click on search tools buttons
     });
 
     // Tooltips on theme/usages
@@ -197,11 +202,7 @@ function view_home() {
 
 
 
-function simulate_map_click(trek_id, target) {
-    // Do not fire click if clicked on search tools
-    if ($(target).parents('.search-tools').length > 0)
-        return;
-
+function simulate_map_click(trek_id) {
     // Grab a reference on layer with same id
     var trekOnMap = window.treksLayer && window.treksLayer.getLayer(trek_id);
     if (trekOnMap) {
