@@ -243,6 +243,13 @@ function mainmapInit(map, bounds) {
     var popup = null;
     treksLayer.on('click', function (e) {
         var layer = e.layer;
+
+        // Safety check. Should never happen.
+        if (!layer.properties || !layer.properties.pk) {
+            console.warn('Trek layer has no properties. ' + L.Util.stamp(layer));
+            return;
+        }
+
         var html = '<h3>{NAME}</h3>' +
                    '<div class="clearfix">' +
                    '  <a href="{LINK}" class="pjax"><img src="{THUMBNAIL}"/></a>'+
@@ -260,13 +267,11 @@ function mainmapInit(map, bounds) {
         });
 
         if (popup) {
-            popup._close();
-
             // Click on already opened popup : close only.
-            if (popup.pk == layer.properties.pk) {
-                popup = null;
+            var same = (popup.pk == layer.properties.pk);
+            popup._close();
+            if (same)
                 return;
-            }
         }
 
         var popupSettings = {
