@@ -172,14 +172,6 @@
             });
 
             $(document).on('pjax:end', function (e) {
-                // Django-leaflet initialize mainmap on window.load.
-                // With this piece of code we initialize maps on pjax:end too.
-                // (useful when landing on other page than home)
-                var mainmapContainer = L.DomUtil.get('mainmap');
-                if (mainmapContainer && typeof(loadmapmainmap) == "function") {
-                    loadmapmainmap();
-                }
-
                 page_load();
             });
         </script>

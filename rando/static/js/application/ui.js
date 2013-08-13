@@ -73,6 +73,14 @@ function init_ui() {
 }
 
 function page_load() {
+    /* We want to initialize home map, when we land on home page
+     * or when we visit home page through pjax after landing on other page...
+     */
+    var mainmapContainer = L.DomUtil.get('mainmap');
+    if (mainmapContainer && typeof(loadmapmainmap) == "function") {
+        loadmapmainmap();
+    }
+
     // Reattach elements coming from PJAX
     $('.reattach').each(function () {
         var $elem = $(this),

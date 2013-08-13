@@ -48,6 +48,7 @@ CHANGELOG
 
 * Fixes popup opens after second clic only (fixes #1)
 * Show map screenshot in detail page for mobile (fixes #12)
+* Fixes map loading on IE8 (fixes #16)
 
 
 1.21 (2013-07-11)
