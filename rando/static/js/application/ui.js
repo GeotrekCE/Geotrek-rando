@@ -185,7 +185,7 @@ function view_home() {
     // Click on side-bar
     $('#side-bar .result').on('click', function (e) {
         // Do not fire click if clicked on search tools
-        if ($(e.target).parents('.search-tools').length == 0) {
+        if ($(e.target).parents('.search-tools').length === 0) {
             e.preventDefault();
             simulate_map_click($(this).data('id'));
         }

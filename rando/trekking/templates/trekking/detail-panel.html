@@ -248,10 +248,11 @@
 </div><!-- detail-content -->
 
 <script type="text/javascript">
-    window.trek = {{ trek.geojson|safe }};
-    window.pois = {{ poisjson|safe }};
-    window.altimetric_url = "{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.altimetric_profile %}";
-    window.view3d_url = "{% locale_url request.LANGUAGE_CODE trekking:view3d "empty" %}";
+    if (window.jQuery && jQuery.support.pjax) {
+        window.trek = {{ trek.geojson|safe }};
+        window.pois = {{ poisjson|safe }};
+        window.altimetric_url = "{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.altimetric_profile %}";
+    }
 </script>
 
 {% leaflet_map 'detailmap' fitextent=False creatediv=False loadevent="rando:foo" %}{# Such loadevent will prevent automatic map initialization #}
