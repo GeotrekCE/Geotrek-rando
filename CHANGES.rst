@@ -50,6 +50,7 @@ CHANGELOG
 * Show map screenshot in detail page for mobile (fixes #12)
 * Fixes map loading on IE8 (fixes #16)
 * Fix popups on IE9 (fixes #19)
+* Fix treks hovering on home page for IE (fixes #18)
 
 
 1.21 (2013-07-11)

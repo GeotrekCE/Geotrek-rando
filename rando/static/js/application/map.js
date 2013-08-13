@@ -44,10 +44,14 @@ var TrekLayer = L.ObjectsLayer.extend({
                 this._hover = new L.MultiPolyline(coords);
             }
             this._hover.setStyle(TREK_LAYER_OPTIONS.outlinestyle);
-            this._hover.addTo(this._map);
+            this._hover.addTo(this._map).bringToBack();
             // Pop on top
             layer.setStyle(TREK_LAYER_OPTIONS.hoverstyle);
-            this._map.removeLayer(layer).addLayer(layer);
+            // See https://groups.google.com/forum/#!topic/d3-js/OqD9_puVTfg
+            // and http://leafletjs.com/examples/choropleth.html
+            if (!L.Browser.ie && !L.Browser.opera) {
+                layer.bringToFront();
+            }
         }
         else {
             if (this._hover) this._map.removeLayer(this._hover);
