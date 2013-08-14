@@ -6,6 +6,8 @@ CHANGELOG
 -----------------
 
 * Add setting for page number of park policy page (fixes #14)
+* Add retro-compatibility for Geotrek 0.20 altimetric profiles (fixes #11)
+
 
 1.22 (2013-08-13)
 -----------------

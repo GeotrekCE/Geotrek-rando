@@ -94,6 +94,7 @@ def trek_redirect(request, pk):
     for trek in treks:
         if trek.pk == int(pk):
             fullurl = reverse('trekking:detail', kwargs={'slug': trek.properties.slug})
+            # In case, reverse() does not prefix locale, force it.
             if not fullurl.startswith('/%s' % lang):
                 fullurl = locale_url(fullurl, locale=lang)
             return redirect(fullurl)

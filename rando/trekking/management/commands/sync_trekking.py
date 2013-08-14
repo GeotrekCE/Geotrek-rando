@@ -240,8 +240,8 @@ class Command(BaseCommand):
 
         try:
             InputFile(self, models.Settings.filepath).pull_if_modified()
-            app_settings = models.Settings.tmp_objects.all()
-            languages = app_settings.languages.available.keys()
+            server_settings = models.Settings.tmp_objects.all()
+            languages = server_settings.languages.available.keys()
             logger.debug("Languages: %s" % languages)
             for language in languages:
                 TrekListInputFile(self, language=language).pull()
