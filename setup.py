@@ -13,7 +13,7 @@ setup(
     author_email='geobi@makina-corpus.com',
     url='http://makina-corpus.com',
     install_requires = [
-        'Django == 1.4.2',
+        'Django == 1.4.6',
         'requests == 0.14.2',
         'termcolor == 1.1.0',
         'django-leaflet',
