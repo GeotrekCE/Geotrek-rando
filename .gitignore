@@ -8,6 +8,7 @@ dist/
 include/
 lib/
 local/
+build/
 var/
 rando/settings_local.py
 rando.egg-info/
