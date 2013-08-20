@@ -341,6 +341,25 @@ Synchronization failed with 404
 Try to access this URL manually and check the logs on the remote server.
 
 
+=========
+RATIONALE
+=========
+
+This application has no database, no ORM. It basically reads files on disk,
+and serves views. The rest happens on client-side in Javascript.
+
+Why Django ?
+------------
+
+We chose Django only because we thought that this application may evolve and
+require Django's ecosystem to be enriched.
+
+Currently, we only have two Django applications as serious dependencies :
+
+* Django-localeurl is great and provides great shortcuts.
+* Django-leaflet helps a lot but is not a key stone.
+
+
 =======
 AUTHORS
 =======
