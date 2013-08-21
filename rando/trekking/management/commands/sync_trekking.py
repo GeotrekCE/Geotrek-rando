@@ -1,5 +1,6 @@
 import re
 import shutil
+import sys
 import os
 from os.path import join, getmtime, dirname, getsize
 from os import makedirs, utime
@@ -22,6 +23,14 @@ logger = logging.getLogger(__name__)
 
 
 MIN_BYTE_SYZE = 10
+
+
+# Backport former server option
+if hasattr(settings, 'CAMINAE_SERVER'):
+    setattr(settings, 'GEOTREK_SERVER', settings.CAMINAE_SERVER)
+
+if 'http' not in settings.GEOTREK_SERVER:
+    setattr(settings, 'GEOTREK_SERVER', 'http://' + settings.GEOTREK_SERVER)
 
 
 def mkdir_p(path):
@@ -61,11 +70,11 @@ def recursive_copy(root_src_dir, root_dst_dir):
 
 class InputFile(object):
 
-    def __init__(self, command, url, language=None):
-        self.command = command
+    def __init__(self, url, language=None, stdout=None, stderr=None):
+        self.stdout = stdout or sys.stdout
+        self.stderr = stderr or sys.stderr
+
         server = settings.GEOTREK_SERVER
-        if 'http' not in settings.GEOTREK_SERVER:
-            server = 'http://' + settings.GEOTREK_SERVER
         parts = urlparse(server)
         self.rooturl = parts.path
         if len(self.rooturl) <= 1:
@@ -92,7 +101,7 @@ class InputFile(object):
         """
         headers = {}
         if self.language:
-            cprint('/' + self.language, 'cyan', end='', file=self.command.stdout)
+            cprint('/' + self.language, 'cyan', end='', file=self.stdout)
             headers.update({'Accept-language': self.language})
         if ifmodified:
             try:
@@ -102,19 +111,19 @@ class InputFile(object):
                 assert getsize(self.path) > MIN_BYTE_SYZE
             except (OSError, AssertionError):
                 pass
-        cprint('/%s ...' % self.url, 'white', attrs=['bold'], end=' ', file=self.command.stdout)
-        self.command.stdout.flush()
+        cprint('/%s ...' % self.url, 'white', attrs=['bold'], end=' ', file=self.stdout)
+        self.stdout.flush()
         self.reply = requests.get(self.absolute_url, headers=headers)
 
         if self.reply.status_code in (304,):
-            cprint("%s (Up-to-date)" % self.reply.status_code, 'green', attrs=['bold'], file=self.command.stdout)
+            cprint("%s (Up-to-date)" % self.reply.status_code, 'green', attrs=['bold'], file=self.stdout)
             return
         elif self.reply.status_code != requests.codes.ok:
-            cprint("%s (Failed)" % self.reply.status_code, 'red', attrs=['bold'], file=self.command.stderr)
+            cprint("%s (Failed)" % self.reply.status_code, 'red', attrs=['bold'], file=self.stderr)
             raise IOError("Failed to retrieve %s (code: %s)" % (self.absolute_url,
                                                                 self.reply.status_code))
         else:
-            cprint("%s (Download)" % self.reply.status_code, 'yellow', file=self.command.stdout)
+            cprint("%s (Download)" % self.reply.status_code, 'yellow', file=self.stdout)
 
         mkdir_p(dirname(self.path_tmp))
         with open(self.path_tmp, 'wb') as f:
@@ -181,8 +190,9 @@ class TrekInputFile(InputFile):
 
 class TrekListInputFile(InputFile):
 
-    def __init__(self, command, **kwargs):
-        super(TrekListInputFile, self).__init__(command, models.Trek.filepath, **kwargs)
+    def __init__(self, **kwargs):
+        super(TrekListInputFile, self).__init__(models.Trek.filepath, **kwargs)
+        self.initkwargs = kwargs
 
     def content(self):
         content = self.reply.json
@@ -201,7 +211,7 @@ class TrekListInputFile(InputFile):
             pk = properties['pk']
             # Fill with detail properties
             detailpath = models.Trek.detailpath.format(pk=pk)
-            detailfile = TrekInputFile(self.command, detailpath, language=self.language)
+            detailfile = TrekInputFile(detailpath, **self.initkwargs)
             detailfile.pull()
             detail = json.loads(detailfile.content())
             properties.update(detail)
@@ -211,8 +221,7 @@ class TrekListInputFile(InputFile):
                 properties[k] = properties[k].replace(self.rooturl, '') if properties[k] else properties[k]
 
             # Add POIs information in list, useful for textual search
-            f = POIsInputFile(self.command, models.POIs.filepath.format(trek__pk=pk),
-                              language=self.language)
+            f = POIsInputFile(models.POIs.filepath.format(trek__pk=pk), **self.initkwargs)
             f.pull()
             poiscontent = json.loads(f.content())
             poisprops = [poi['properties'] for poi in poiscontent['features']]
@@ -227,54 +236,55 @@ class TrekListInputFile(InputFile):
         return json.dumps(content)
 
 
-class Command(BaseCommand):
+class SyncSession(object):
+    def __init__(self, command):
+        self.stdout = command.stdout
+        self.stderr = command.stderr
 
-    help = 'Synchronize data from a Geotrek server'
-
-    def handle(self, *args, **options):
-        # Backport former server option
-        if hasattr(settings, 'CAMINAE_SERVER'):
-            setattr(settings, 'GEOTREK_SERVER', settings.CAMINAE_SERVER)
-
+    def sync(self):
         cprint('Geotrek server: %s' % settings.GEOTREK_SERVER, 'blue', file=self.stdout)
 
+        inputkw = dict(stdout=self.stdout, stderr=self.stderr)
+
         try:
-            InputFile(self, models.Settings.filepath).pull_if_modified()
+            InputFile(models.Settings.filepath, **inputkw).pull_if_modified()
             server_settings = models.Settings.tmp_objects.all()
             languages = server_settings.languages.available.keys()
             logger.debug("Languages: %s" % languages)
             for language in languages:
-                TrekListInputFile(self, language=language).pull()
+                inputkwlang = dict(language=language, **inputkw)
+
+                TrekListInputFile(**inputkwlang).pull()
 
                 for trek in models.Trek.tmp_objects.filter(language=language).all():
-                    InputFile(self, trek.properties.altimetric_profile, language=language).pull_if_modified()
-                    InputFile(self, trek.properties.gpx, language=language).pull_if_modified()
-                    InputFile(self, trek.properties.kml, language=language).pull_if_modified()
-                    InputFile(self, trek.properties.map_image_url, language=language).pull_if_modified()
+                    InputFile(trek.properties.altimetric_profile, **inputkwlang).pull_if_modified()
+                    InputFile(trek.properties.gpx, **inputkwlang).pull_if_modified()
+                    InputFile(trek.properties.kml, **inputkwlang).pull_if_modified()
+                    InputFile(trek.properties.map_image_url, **inputkwlang).pull_if_modified()
                     if settings.PRINT_ENABLED:
-                        InputFile(self, trek.properties.printable, language=language).pull_if_modified()
+                        InputFile(trek.properties.printable, **inputkwlang).pull_if_modified()
 
             # Fetch media only once, since they do not depend on language
             for trek in models.Trek.tmp_objects.filter(language=settings.LANGUAGE_CODE).all():
                 if trek.properties.thumbnail:
-                    InputFile(self, trek.properties.thumbnail).pull_if_modified()
+                    InputFile(trek.properties.thumbnail, **inputkw).pull_if_modified()
                 for picture in trek.properties.pictures:
-                    InputFile(self, picture.url).pull_if_modified()
+                    InputFile(picture.url, **inputkw).pull_if_modified()
 
                 for theme in trek.properties.themes:
-                    InputFile(self, theme.pictogram).pull_if_modified()
+                    InputFile(theme.pictogram, **inputkw).pull_if_modified()
                 for usage in trek.properties.usages:
-                    InputFile(self, usage.pictogram).pull_if_modified()
+                    InputFile(usage.pictogram, **inputkw).pull_if_modified()
                 for weblink in trek.properties.web_links:
                     if weblink.category:
-                        InputFile(self, weblink.category.pictogram).pull_if_modified()
+                        InputFile(weblink.category.pictogram, **inputkw).pull_if_modified()
                 for poi in models.POIs.tmp_objects.filter(trek__pk=trek.pk,
                                                           language=settings.LANGUAGE_CODE).all():
                     if poi.properties.thumbnail:
-                        InputFile(self, poi.properties.thumbnail).pull_if_modified()
+                        InputFile(poi.properties.thumbnail, **inputkw).pull_if_modified()
                     for picture in poi.properties.pictures:
-                        InputFile(self, picture.url).pull_if_modified()
-                    InputFile(self, poi.properties.type.pictogram).pull_if_modified()
+                        InputFile(picture.url, **inputkw).pull_if_modified()
+                    InputFile(poi.properties.type.pictogram, **inputkw).pull_if_modified()
 
             # Move downloaded tmp data to INPUT_DATA_ROOT
             recursive_copy(settings.INPUT_TMP_ROOT, settings.INPUT_DATA_ROOT)
@@ -290,3 +300,12 @@ class Command(BaseCommand):
             # Clean-up temp files
             if os.path.exists(settings.INPUT_TMP_ROOT):
                 shutil.rmtree(settings.INPUT_TMP_ROOT)
+
+
+class Command(BaseCommand):
+
+    help = 'Synchronize data from a Geotrek server'
+
+    def handle(self, *args, **options):
+        syncsession = SyncSession(self)
+        syncsession.sync()

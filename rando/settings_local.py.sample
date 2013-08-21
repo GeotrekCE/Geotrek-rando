@@ -6,6 +6,8 @@
 #
 
 GEOTREK_SERVER = 'geobi.makina-corpus.net/geotrek'
+GEOTREK_USER = 'apiuser'
+GEOTREK_PASSWORD = 'secret_password'
 
 TITLE = {
     'en': "Trekking",
