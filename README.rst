@@ -41,6 +41,8 @@ Be careful to save the file with UTF-8 encoding, especially if you use accents a
 Most important settings :
 
 * **GEOTREK_SERVER**
+* **GEOTREK_USER**
+* **GEOTREK_PASSWORD**
 * **TITLE** (in every supported language, fallback to English)
 * **DESCRIPTION** (in every supported language, fallback to English)
 
@@ -48,6 +50,9 @@ If you run the application on a preproduction, it is wise to set ``PREPROD = Tru
 to disable Robots (Google) indexing.
 
 Note that Apache has to be restart to apply changes in settings.
+
+It is also wise to change the permissions of this file, in order to protect sensitive information
+such as Geotrek password.
 
 
 Apache vhost

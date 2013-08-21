@@ -209,6 +209,7 @@ LOGGING = {
 TEST_RUNNER = 'rando.testing.DatabaselessTestRunner'
 
 GEOTREK_SERVER = 'localhost:8000'
+GEOTREK_LOGIN_URL = 'login/'
 GEOTREK_USER = 'admin'
 GEOTREK_PASSWORD = 'admin'
 

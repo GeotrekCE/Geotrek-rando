@@ -32,6 +32,9 @@ if hasattr(settings, 'CAMINAE_SERVER'):
 if 'http' not in settings.GEOTREK_SERVER:
     setattr(settings, 'GEOTREK_SERVER', 'http://' + settings.GEOTREK_SERVER)
 
+if settings.GEOTREK_SERVER.endswith('/'):
+    setattr(settings, 'GEOTREK_SERVER', settings.GEOTREK_SERVER[:-1])
+
 
 def mkdir_p(path):
     """
@@ -70,7 +73,8 @@ def recursive_copy(root_src_dir, root_dst_dir):
 
 class InputFile(object):
 
-    def __init__(self, url, language=None, stdout=None, stderr=None):
+    def __init__(self, url, language=None, session=None, stdout=None, stderr=None):
+        self.session = session or requests  # self.session.get() will work
         self.stdout = stdout or sys.stdout
         self.stderr = stderr or sys.stderr
 
@@ -113,7 +117,7 @@ class InputFile(object):
                 pass
         cprint('/%s ...' % self.url, 'white', attrs=['bold'], end=' ', file=self.stdout)
         self.stdout.flush()
-        self.reply = requests.get(self.absolute_url, headers=headers)
+        self.reply = self.session.get(self.absolute_url, headers=headers)
 
         if self.reply.status_code in (304,):
             cprint("%s (Up-to-date)" % self.reply.status_code, 'green', attrs=['bold'], file=self.stdout)
@@ -240,13 +244,30 @@ class SyncSession(object):
     def __init__(self, command):
         self.stdout = command.stdout
         self.stderr = command.stderr
+        self.session = None
+
+    def login(self):
+        cprint('Geotrek server login: %s' % settings.GEOTREK_SERVER, 'blue', file=self.stdout)
+        login_url = join(settings.GEOTREK_SERVER, settings.GEOTREK_LOGIN_URL)
+        response = self.session.get(login_url)
+        csrftoken = response.cookies.get('csrftoken', '')
+        response = self.session.post(login_url,
+                                     {'username': settings.GEOTREK_USER,
+                                      'password': settings.GEOTREK_PASSWORD,
+                                      'csrfmiddlewaretoken': csrftoken},
+                                     allow_redirects=False)
+        assert response.status_code == 302, "Failed to login on API with current settings"
 
     def sync(self):
-        cprint('Geotrek server: %s' % settings.GEOTREK_SERVER, 'blue', file=self.stdout)
+        self.session = requests.Session()
 
-        inputkw = dict(stdout=self.stdout, stderr=self.stderr)
+        inputkw = dict(session=self.session,
+                       stdout=self.stdout,
+                       stderr=self.stderr)
 
         try:
+            self.login()
+
             InputFile(models.Settings.filepath, **inputkw).pull_if_modified()
             server_settings = models.Settings.tmp_objects.all()
             languages = server_settings.languages.available.keys()
@@ -292,7 +313,7 @@ class SyncSession(object):
             # Done !
             cprint("Done.", 'green', attrs=['bold'], file=self.stdout)
 
-        except IOError, e:
+        except (AssertionError, IOError) as e:
             logger.fatal(e)
             cprint("Failed!", 'red', attrs=['bold'], file=self.stdout)
 

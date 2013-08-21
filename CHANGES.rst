@@ -7,7 +7,7 @@ CHANGELOG
 
 **Breaking changes**
 
-* Synchronization now requires authentication
+* Synchronization now requires authentication (prepare for future)
 
 :notes:
     Add ``GEOTREK_USER`` and ``GEOTREK_PASSWORD`` to your settings.
