@@ -24,6 +24,7 @@ CHANGELOG
 * Use explicit callback argument to prevent deprecation warnings (fixes #50)
 * Add console to IE polyfill (fixes #47)
 * Fix ResetView apparence (fixes #48)
+* Upgrade MarkerCluster for Leaflet 0.6 (fixes #49)
 
 1.22 (2013-08-13)
 -----------------
