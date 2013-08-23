@@ -21,6 +21,7 @@ CHANGELOG
 **BUG fixes**
 
 * Fix (again) pages ordering (fixes #759)
+* Use explicit callback argument to prevent deprecation warnings (fixes #50)
 
 
 1.22 (2013-08-13)

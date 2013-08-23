@@ -255,4 +255,4 @@
     }
 </script>
 
-{% leaflet_map 'detailmap' fitextent=False creatediv=False loadevent="rando:foo" %}{# Such loadevent will prevent automatic map initialization #}
+{% leaflet_map 'detailmap' fitextent=False creatediv=False callback="detailmapInit" loadevent="rando:foo" %}{# Such loadevent will prevent automatic map initialization #}
