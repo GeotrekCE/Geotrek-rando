@@ -16,14 +16,14 @@ CHANGELOG
 
 * Add setting for page number of park policy page (fixes #14)
 * Add retro-compatibility for Geotrek 0.20 altimetric profiles (fixes #11)
-* Use django-leaflet 0.7.0 public version
+* Use django-leaflet 0.7.3 public version
 
 **BUG fixes**
 
 * Fix (again) pages ordering (fixes #759)
 * Use explicit callback argument to prevent deprecation warnings (fixes #50)
-* Add console to IE polyfill
-
+* Add console to IE polyfill (fixes #47)
+* Fix ResetView apparence (fixes #48)
 
 1.22 (2013-08-13)
 -----------------
