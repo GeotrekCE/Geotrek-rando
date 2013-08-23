@@ -22,6 +22,7 @@ CHANGELOG
 
 * Fix (again) pages ordering (fixes #759)
 * Use explicit callback argument to prevent deprecation warnings (fixes #50)
+* Add console to IE polyfill
 
 
 1.22 (2013-08-13)

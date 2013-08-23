@@ -19,4 +19,18 @@
         };
     }
 
+    if (win.console === undefined) {
+        win.console = {};
+        win.console.log = function () {};
+        win.console.warn = function(msg) {
+            win.alert(msg);
+        };
+        win.console.error = function(msg) {
+            win.alert(msg);
+        };
+        win.console.assert = function(cond, msg) {
+            if (!cond) console.error(msg);
+        };
+    }
+
 })(window, document);
