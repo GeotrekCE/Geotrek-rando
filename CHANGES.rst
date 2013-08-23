@@ -18,6 +18,10 @@ CHANGELOG
 * Add retro-compatibility for Geotrek 0.20 altimetric profiles (fixes #11)
 * Use django-leaflet 0.7.0 public version
 
+**BUG fixes**
+
+* Fix (again) pages ordering (fixes #759)
+
 
 1.22 (2013-08-13)
 -----------------

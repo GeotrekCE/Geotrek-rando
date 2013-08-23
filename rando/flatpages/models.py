@@ -55,7 +55,7 @@ class FlatPageManager(object):
         dirlist = []
         if os.path.exists(path):
             dirlist = os.listdir(path)
-        for i, filename in enumerate(dirlist):
+        for i, filename in enumerate(sorted(dirlist)):
             if isinstance(filename, str):
                 filename = filename.decode('utf-8')
             # Extract pk and title from filename
