@@ -2,6 +2,13 @@
 CHANGELOG
 =========
 
+1.24 (unreleased)
+-----------------
+
+**BUG fixes**
+
+* Fix trek detail button wraps (fixes #21)
+
 1.23 (2013-08-23)
 -----------------
 
