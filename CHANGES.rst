@@ -8,6 +8,7 @@ CHANGELOG
 **BUG fixes**
 
 * Fix trek detail button wraps (fixes #21)
+* Fix apparence of POIs with long names (fixes #20)
 
 1.23 (2013-08-23)
 -----------------

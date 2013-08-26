@@ -226,7 +226,7 @@
           <div class="accordion-heading">
             <a class="accordion-toggle acc-open" id="poi-item-{{ poi.properties.pk}}" data-toggle="collapse" data-parent="#pois-accordion" data-id="{{ poi.properties.pk }}" href="#collapse-poi-{{  poi.properties.pk }}">
               {{ poi.properties.type|pictogram }}
-              {{ poi.properties.name }}
+              <span class="name">{{ poi.properties.name }}</span>
               {% if poi.properties.pictures|length > 0 %}
                 <span class="pictures-info pull-right"><i class="icon-camera icon-gray"></i>&times;{{ poi.properties.pictures|length }}</span>
               {% endif %}
