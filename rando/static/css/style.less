@@ -592,6 +592,7 @@ ul.social-buttons li {
 #basic-filters > .span {
   margin-right: 25px;
   margin-left: 0;
+  min-height: 56px;
 }
 
 .stage
@@ -726,10 +727,25 @@ ul.social-buttons li {
 
 #advanced-filters {
   padding: 5px 5px 0px 5px;
-  float: right;
+  float: left;
   background-color: rgba(255, 255, 255, 0.5);
-  margin-right: 34px;
   margin-top: 6px;
+
+  @media (max-width: 1540px) {
+    float: right;
+    margin-right: 40px;
+  }
+
+  @media (max-width: 920px) {
+    margin-right: 0;
+    position: absolute;
+    right: 47px;
+    top: 108px;
+  }
+
+  @media (max-width: 840px) {
+    right: 0;
+  }
 
   .filter-bloc {
     display: inline-block;
@@ -742,6 +758,12 @@ ul.social-buttons li {
   }
 }
 
+.leaflet-top {
+  @media (max-width: 840px) {
+    bottom: 50px;
+    top: auto;
+  }
+}
 
 
 /****************************************************************************
@@ -1065,7 +1087,7 @@ p.tab-content-empty {
   width: 100%;
   height: 65px;
   top: 0;
-  z-index: 895;
+  z-index: 901;
 
  .box-sizing(border-box);
   color: #9e969a;
@@ -1826,18 +1848,13 @@ a.accordion-toggle  {
    ========================================================================== */
 
 /* 13 inch devices */
-@media (max-width: 1200px) {
+@media (max-width: 1044px) {
   #search-bar {
     height: 115px;
   }
 
   #side-bar {
     top: 115px;
-  }
-
-  #advanced-filters {
-    float: left;
-    margin-right: 0;
   }
 
   #mainmap {
