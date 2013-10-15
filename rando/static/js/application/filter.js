@@ -307,7 +307,7 @@ function TrekFilter()
         }
         if (!match) {
             /*
-            console.log("Match " + category + ": " + 
+            console.log("Match " + category + ": " +
                         JSON.stringify(trek.properties[property]) + ' != ' +
                         list.join());
             */

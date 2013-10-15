@@ -248,7 +248,7 @@ function mainmapInit(map, bounds) {
         $('#trek-'+ e.layer.properties.pk +'.result a.pjax').click();
     });
 
-    // Popup on click on trek 
+    // Popup on click on trek
     var popup = null;
     treksLayer.on('click', function (e) {
         var layer = e.layer;
@@ -489,7 +489,7 @@ function detailmapInit(map, bounds) {
         };
 
         $(map._container).css('cursor','pointer');
-        
+
         // Enable wheel zoom on clic (~ focus)
         map.on('click', enableWheel);
 

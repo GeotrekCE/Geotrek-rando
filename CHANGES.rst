@@ -81,9 +81,9 @@ CHANGELOG
 
     Attributions settings have changed. Attribution string is now the third
     item in layer definition (ex: ('detail', 'http://...', '(c) OSM')).
-    
+
     Add a line with ``NO_GLOBALS: False,`` in ``LEAFLET_CONFIG``.
-    
+
     Compare yours with example bloc in ``settings_local.py.sample``.
 
 * Fixes popup opens after second clic only (fixes #1)
