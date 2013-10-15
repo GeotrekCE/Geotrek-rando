@@ -2,6 +2,13 @@
 CHANGELOG
 =========
 
+1.25 (unreleased)
+-----------------
+
+**BUG fixes**
+
+* Fix trek layer not filtered if state passed through URL (fixes #53)
+
 1.24 (2013-08-27)
 -----------------
 

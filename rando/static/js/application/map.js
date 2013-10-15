@@ -217,6 +217,11 @@ function mainmapInit(map, bounds) {
     $(window.trekFilter).on("filterchange", function(e, matched) {
         treksLayer.updateFromPks(matched);
     });
+    // In case filters state were loaded through URL, it's too late to
+    // listen for filterchange event.
+    if (window.trekFilter.matching.length > 0) {
+        treksLayer.updateFromPks(window.trekFilter.matching);
+    }
 
     // Filter list by map bounds
     map.on('moveend', function (e) {
