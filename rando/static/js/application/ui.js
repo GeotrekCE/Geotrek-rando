@@ -60,7 +60,7 @@ function init_ui() {
 
     if(Modernizr.mq('only all and (max-width: 767px)')) {
         MOBILE = true;
-        
+
         // iOS mobile hide address bar for fullscreen trick
         if(MBP.platform == "ios") {
             var iOSAddressBarSize = 60; // Absolutely not future optimized, but only working solution atm
@@ -337,14 +337,14 @@ function view_detail() {
             $(this).find('iframe').remove();
         });
     });
-    
+
     // Theme/Usage tooltips
     $('#usages div, #themes div').tooltip();
     $('a.print.disabled').tooltip({placement: 'left'});
 }
 
 function altimetricInit() {
-    /* 
+    /*
      * Load altimetric profile from JSON
      */
     $.getJSON(altimetric_url, function(data) {
@@ -358,7 +358,7 @@ function altimetricInit() {
         }
 
         updateSparkline();
-        
+
         $(window).smartresize(function() {
             updateSparkline();
         });
