@@ -308,6 +308,7 @@ class SyncSession(object):
                     InputFile(poi.properties.type.pictogram, **inputkw).pull_if_modified()
 
             # Move downloaded tmp data to INPUT_DATA_ROOT
+            cprint("Copy from temporary %s to production %s" % (settings.INPUT_TMP_ROOT, settings.INPUT_DATA_ROOT), file=self.stdout)
             recursive_copy(settings.INPUT_TMP_ROOT, settings.INPUT_DATA_ROOT)
 
             # Done !
