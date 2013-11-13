@@ -12,6 +12,8 @@ CHANGELOG
 * Advanced filters reordered (route) (fixes #33)
 * Add tooltip on POI categories icons (fixes #26)
 * POI list are not sorted by category/alphabetic, API order (progression) is kept (fixes #56)
+* Add departure city in results list (fixes #57)
+* Increase result thumbnail size to match height (ref #57)
 
 1.24 (2013-08-27)
 -----------------
