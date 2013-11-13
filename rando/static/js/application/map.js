@@ -336,7 +336,7 @@ function detailmapInit(map, bounds) {
         map.minimapcontrol._minimize();
     });
 
-    $('#pois-accordion').on('show', function (e) {
+    $('#pois-accordion .accordion-body').on('show', function (e) {
         var id = $(e.target).data('id'),
             marker = window.poisMarkers[id];
 
@@ -363,9 +363,10 @@ function detailmapInit(map, bounds) {
                                 });
     });
 
-    $('#pois-accordion').on('hidden', function (e) {
+    $('#pois-accordion .accordion-body').on('hidden', function (e) {
         var id = $(e.target).data('id'),
             marker = window.poisMarkers[id];
+
         $(marker._icon).removeClass('highlight');
         marker.closePopup();
         // Restore clusterized markers (if still on map, i.e. zoom not changed)

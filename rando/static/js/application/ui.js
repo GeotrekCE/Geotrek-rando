@@ -200,7 +200,7 @@ function view_home() {
         // else, normal click on search tools buttons
     });
 
-    // Tooltips on theme/usages
+    // Tooltips on theme/usages and pictogram list
     $('.pictogram').tooltip();
 
     if(MOBILE) {
@@ -338,9 +338,10 @@ function view_detail() {
         });
     });
 
-    // Theme/Usage tooltips
+    // Tooltips
     $('#usages div, #themes div').tooltip();
     $('a.print.disabled').tooltip({placement: 'left'});
+    $('#pois-accordion .pictogram').tooltip();
 }
 
 function altimetricInit() {

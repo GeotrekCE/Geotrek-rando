@@ -10,6 +10,7 @@ CHANGELOG
 * Fix trek layer not filtered if state passed through URL (fixes #53)
 * Duration pretty format is now taken from API
 * Advanced filters reordered (route) (fixes #33)
+* Add tooltip on POI categories icons (fixes #26)
 
 1.24 (2013-08-27)
 -----------------
