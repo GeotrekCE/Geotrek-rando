@@ -67,6 +67,15 @@
         </select>
       </div>
 
+      <div class="filter-bloc route">
+        <label for="route" class="hidden">{% trans "Route" %}</label>
+        <select id="route" class="chosen-select" tabindex="2" multiple="" data-filter="route"  data-placeholder="{% trans "Route" %}">
+        {% for route in routes %}
+          <option data-filter="route" data-id="{{ route.id }}" value="{{ route.id|safe }}">{{ route.label }}</option>
+        {% endfor %}
+        </select>
+      </div>
+
       <div class="filter-bloc vallee">
         <label for="district" class="hidden">{% trans "Valleys" %}</label>
         <select id="district" class="chosen-select" tabindex="2" multiple="" data-filter="district" data-placeholder="{% trans "Valleys" %}">
@@ -81,15 +90,6 @@
         <select id="city" class="chosen-select" tabindex="2" multiple="" data-filter="city" data-placeholder="{% trans "Cities" %}">
         {% for city in cities %}
           <option data-filter="city" data-id="{{ city.code }}" value="{{ city.code|safe }}">{{ city.name }}</option>
-        {% endfor %}
-        </select>
-      </div>
-
-      <div class="filter-bloc route">
-        <label for="route" class="hidden">{% trans "Route" %}</label>
-        <select id="route" class="chosen-select" tabindex="2" multiple="" data-filter="route"  data-placeholder="{% trans "Route" %}">
-        {% for route in routes %}
-          <option data-filter="route" data-id="{{ route.id }}" value="{{ route.id|safe }}">{{ route.label }}</option>
         {% endfor %}
         </select>
       </div>
