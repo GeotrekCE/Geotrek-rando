@@ -8,6 +8,7 @@ CHANGELOG
 **BUG fixes**
 
 * Fix trek layer not filtered if state passed through URL (fixes #53)
+* Duration pretty format is now taken from API
 
 1.24 (2013-08-27)
 -----------------
