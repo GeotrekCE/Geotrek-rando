@@ -1,4 +1,4 @@
-{% load i18n static trekking localeurl_tags %}
+{% load i18n static trekking_tags localeurl_tags %}
 <div id="{% if backpack = "True" %}backpack-{% endif %}trek-{{ trek.properties.pk }}" data-id="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}" class="result" {% if show = "False" %}style="display:none"{% endif %}>
   <div class="illust">
     <img alt="{% trans "Preview of" %} {{ trek.properties.name }}" src="{{ trek|thumbnail }}" width="110" height="110" />
