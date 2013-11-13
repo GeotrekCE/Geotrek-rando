@@ -11,6 +11,7 @@ CHANGELOG
 * Duration pretty format is now taken from API
 * Advanced filters reordered (route) (fixes #33)
 * Add tooltip on POI categories icons (fixes #26)
+* POI list are not sorted by category/alphabetic, API order (progression) is kept (fixes #56)
 
 1.24 (2013-08-27)
 -----------------

@@ -48,12 +48,6 @@ class TrekView(PJAXResponseMixin, BaseTrekView):
     template_name = 'trekking/detail.html'
     pjax_template_name = "trekking/detail-panel.html"
 
-    def get_poi_type(self, poi):
-        return poi.properties.type
-
-    def get_poi_label(self, poi):
-        return poi.properties.name
-
     def get_context_data(self, **kwargs):
         lang = self.request.LANGUAGE_CODE
         obj = self.get_object()
@@ -63,15 +57,13 @@ class TrekView(PJAXResponseMixin, BaseTrekView):
         context['poisjson'] = obj.pois.filter(language=lang).content
 
         pois = obj.pois.all()
+        context['pois'] = pois
 
         # Merge pictures of trek and POIs
         all_pictures = obj.properties.pictures
         for poi in pois:
             all_pictures.extend(poi.properties.pictures)
         context['all_pictures'] = all_pictures
-
-        pois_sorted_by_label = sorted(pois, key=self.get_poi_label)
-        context['pois'] = sorted(pois_sorted_by_label, key=self.get_poi_type)
 
         context['PRINT_ENABLED'] = settings.PRINT_ENABLED
         context['VIEW3D_ENABLED'] = settings.VIEW3D_ENABLED

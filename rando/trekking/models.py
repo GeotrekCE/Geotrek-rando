@@ -47,7 +47,7 @@ class JSONManager(object):
         """
         Instanciate objects on the fly
         We use edict() in order to recursively transform dicts into attributes.
-        (ex.: object['properties']['districts'][0]['pk'] becomes 
+        (ex.: object['properties']['districts'][0]['pk'] becomes
               object.properties.districts[0].pk)
         """
         objects = json.loads(self.content)
