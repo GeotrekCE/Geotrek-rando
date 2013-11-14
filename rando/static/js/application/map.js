@@ -441,13 +441,14 @@ function detailmapInit(map, bounds) {
     var parkingIcon = L.icon({
         iconUrl: IMG_URL + '/parking.png',
         iconSize: [24, 24],
-        iconAnchor: [0, 0]
+        iconAnchor: [0, 0],
+        labelAnchor: [20, 12]
     });
     var parkingLocation = trek.properties.parking_location;
     if (parkingLocation) {
         var pos = L.latLng([parkingLocation[1], parkingLocation[0]]);
         L.marker(pos, {icon: parkingIcon})
-         .bindPopup(trek.properties.advised_parking || gettext("Recommended parking"))
+         .bindLabel(trek.properties.advised_parking || gettext("Recommended parking"), {className: 'parking'})
          .addTo(map);
         wholeBounds.extend(pos);
     }
