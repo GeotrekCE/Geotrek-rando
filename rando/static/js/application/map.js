@@ -398,21 +398,35 @@ function detailmapInit(map, bounds) {
             });
         }
 
+        var departureLabel = gettext("Departure"),
+            arrivalLabel = gettext("Arrival");
+
+        if (!/^\s*$/.test(window.trek.properties.departure)) {
+            departureLabel += (": " + window.trek.properties.departure);
+        }
+        if (!/^\s*$/.test(window.trek.properties.arrival)) {
+            arrivalLabel += (": " + window.trek.properties.arrival);
+        }
+
         L.marker(layer.getLatLngs()[0],
-                 {clickable: false,
-                  icon: new L.Icon({
+                 {icon: new L.Icon({
                                 iconUrl: IMG_URL + '/marker-source.png',
                                 iconSize: [64, 64],
-                                iconAnchor: [32, 64]
+                                iconAnchor: [32, 64],
+                                labelAnchor: [20, -50]
                     })
-                 }).addTo(map);
+                 })
+          .bindLabel(departureLabel, {className: 'departure'})
+          .addTo(map);
         L.marker(layer.getLatLngs().slice(-1)[0],
-                 {clickable: false,
-                  icon: new L.Icon({
+                 {icon: new L.Icon({
                                 iconUrl: IMG_URL + '/marker-target.png',
                                 iconSize: [64, 64],
-                                iconAnchor: [32, 64]
-                 })}).addTo(map);
+                                iconAnchor: [32, 64],
+                                labelAnchor: [-3, -50]
+                 })})
+          .bindLabel(arrivalLabel, {className: 'arrival'})
+          .addTo(map);
     });
 
     // POIs Layer

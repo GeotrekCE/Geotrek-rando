@@ -1504,6 +1504,15 @@ a.accordion-toggle .name {
 #trek-links > ul > li li {
   list-style-type: disc;
 }
+.leaflet-label.departure {
+  background: rgba(165, 228, 100, 0.5);
+}
+.leaflet-label.arrival {
+  background: rgba(255, 56, 56, 0.5);
+}
+.leaflet-label.parking {
+  background: rgba(70, 70, 255, 0.2);
+}
 /* POIS markers */
 .poi-marker-icon.cluster,
 .poi-marker-icon img {

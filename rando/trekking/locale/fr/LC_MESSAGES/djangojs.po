@@ -33,3 +33,9 @@ msgstr "Retirer des favoris"
 #: templates/trekking/trek_result_fragment.html:26
 msgid "Add to favorites"
 msgstr "Ajouter aux favoris"
+
+msgid "Departure"
+msgstr "Départ"
+
+msgid "Arrival"
+msgstr "Arrivée"

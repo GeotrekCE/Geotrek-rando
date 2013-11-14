@@ -15,6 +15,7 @@ CHANGELOG
 * Add departure city in results list (fixes #57)
 * Increase result thumbnail size to match height (ref #57)
 * Switch parking popup to label (ref #55)
+* Add tooltips on start and end markers (ref #25)
 
 1.24 (2013-08-27)
 -----------------
