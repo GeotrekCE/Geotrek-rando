@@ -422,9 +422,9 @@ ul.social-buttons li {
   display: none;
 }
 /****************************************************************************
-* 
+*
 * Filters
-* 
+*
 */
 .slider-value {
   float: left;
@@ -615,9 +615,9 @@ ul.social-buttons li {
   }
 }
 /****************************************************************************
-* 
+*
 * Śidebar
-* 
+*
 */
 #side-bar {
   border-right: solid 2px #877e82;
@@ -652,7 +652,7 @@ ul.social-buttons li {
   background-image: url(../img/sidebar-open.png);
 }
 /*
-* Fake tabs 
+* Fake tabs
 */
 #side-bar .nav-tabs > li > a,
 #fake-search-tabs .nav-tabs > li > a {
@@ -985,9 +985,9 @@ p.tab-content-empty {
   height: 16px;
 }
 /****************************************************************************
-* 
+*
 * Maps
-* 
+*
 */
 #mainmap {
   z-index: 890;
@@ -1059,9 +1059,9 @@ p.tab-content-empty {
   background-image: url(../img/icon-fullscreen.png);
 }
 /****************************************************************************
-* 
+*
 * Detail and Flatpage
-* 
+*
 */
 .detail-content,
 .flatpage-content {
@@ -1081,9 +1081,9 @@ p.tab-content-empty {
   color: #63c1db;
 }
 /****************************************************************************
-* 
+*
 * Detail page
-* 
+*
 */
 #detail-content-top {
   margin-bottom: 15px;
