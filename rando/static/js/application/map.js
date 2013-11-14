@@ -92,8 +92,19 @@ var POILayer = L.MarkerClusterGroup.extend({
 
         var poicon = new L.DivIcon({className: 'poi-marker-icon',
                                     iconAnchor: [12, 12],
+                                    labelAnchor: [12, 2],
                                     html: img}),
             marker = L.marker(latlng, {icon: poicon});
+
+        // Label
+        var category = featureData.properties.type.label,
+            name = featureData.properties.name,
+            poiLabel = category + ': ' + name;
+        if (name.indexOf(category) === 0) {  // startswith
+            poiLabel = name;
+        }
+        marker.bindLabel(poiLabel, {className: 'poi'});
+
         marker.properties = featureData.properties;
 
         return marker;
