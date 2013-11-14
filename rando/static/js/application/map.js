@@ -224,7 +224,14 @@ function mainmapInit(map, bounds) {
       $('#trek-'+ e.layer.properties.pk +'.result').removeClass('active');
     });
 
-    // Filter map layers on filter change
+    //
+    // Filter
+    //
+    // Reset view on filter reset
+    $(window.trekFilter).on('reset', function (){
+        map.fitFakeBounds(treksLayer.getBounds());
+    });
+    // Filter layers
     $(window.trekFilter).on("filterchange", function(e, matched) {
         treksLayer.updateFromPks(matched);
     });

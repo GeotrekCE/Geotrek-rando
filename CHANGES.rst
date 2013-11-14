@@ -8,6 +8,10 @@ CHANGELOG
 **BUG fixes**
 
 * Fix trek layer not filtered if state passed through URL (fixes #53)
+* Reset map extent on filter reset (fixes #29)
+
+**New features**
+
 * Duration pretty format is now taken from API
 * Advanced filters reordered (route) (fixes #33)
 * Add tooltip on POI categories icons (fixes #26)

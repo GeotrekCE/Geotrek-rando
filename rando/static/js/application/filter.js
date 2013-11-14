@@ -16,6 +16,7 @@ function TrekFilter()
         $(".theme .filter.active").removeClass('active');
         $(".chosen-select").val('').trigger("liszt:updated");
         self.load();
+        $(self).trigger("reset");
     };
 
     this.__saveState = function () {
