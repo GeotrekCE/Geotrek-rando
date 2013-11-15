@@ -400,8 +400,8 @@ function sliders() {
         range: true,
         step: 1,
         min: 0,
-        max: 4,
-        values: [ 0, 4 ],
+        max: 2,
+        values: [ 0, 2 ],
         slide: saveSlider
     });
 

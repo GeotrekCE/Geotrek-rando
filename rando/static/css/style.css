@@ -490,14 +490,14 @@ ul.social-buttons li {
   float: left;
 }
 .time .slider-value {
-  width: 20%;
+  width: 33%;
 }
 .time .slider-wrap {
   background: url(../img/slider-time.png) no-repeat;
-  width: 254px;
+  width: 170px;
 }
 .time .ui-slider {
-  max-width: 230px;
+  max-width: 153px;
 }
 .den {
   float: left;

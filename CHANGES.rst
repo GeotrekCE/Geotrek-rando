@@ -21,6 +21,7 @@ CHANGELOG
 * Switch parking popup to label (fixes #55)
 * Add tooltips on start and end markers (fixes #25)
 * Add POI label on detail map (fixes #30)
+* Rework duration filter (fixes #34)
 
 1.24 (2013-08-27)
 -----------------

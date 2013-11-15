@@ -217,30 +217,29 @@ function TrekFilter()
         if (!self.state.sliders.time) return true;
         var minDuration = self.state.sliders.time.min;
         var maxDuration = self.state.sliders.time.max;
-        var matching = {
-            1:4,
-            2:12,
-            3:24,
-            4:48
-        };
+
+        var DAY_MIN = 4,
+            DAY_MAX = 10;
+
         var trekDuration = trek.properties.duration;
+
         if (minDuration === 0) {
-            if (maxDuration == 4) {
+            if (maxDuration == 2) {
                 return true;
             }
             if (maxDuration === 0) {
-                return trekDuration <= 2;
+                return trekDuration <= DAY_MIN;
             }
-            return trekDuration <= matching[maxDuration];
+            return trekDuration <= DAY_MAX;
         }
 
-        if (minDuration == 4) {
-            return trekDuration >= 48;
+        if (minDuration == 2) {
+            return trekDuration >= 10;
         }
-        if (maxDuration == 4) {
-            return trekDuration >= matching[minDuration];
+        if (maxDuration == 2) {
+            return trekDuration >= DAY_MIN;
         }
-        return trekDuration >= matching[minDuration] && trekDuration <= matching[maxDuration];
+        return trekDuration >= DAY_MIN && trekDuration <= DAY_MAX;
     };
 
     this.matchClimb = function (trek) {

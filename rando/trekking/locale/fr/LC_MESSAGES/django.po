@@ -207,12 +207,12 @@ msgid "Very easy"
 msgstr "Très facile"
 
 #: templates/trekking/home-panel.html:28
-msgid "Short"
-msgstr "Court"
+msgid "1/2 day"
+msgstr "1/2 journée"
 
 #: templates/trekking/home-panel.html:30
-msgid "day"
-msgstr "journée"
+msgid "Day"
+msgstr "Journée"
 
 #: templates/trekking/home-panel.html:31 templates/trekking/home-panel.html:32
 msgid "2 days"
