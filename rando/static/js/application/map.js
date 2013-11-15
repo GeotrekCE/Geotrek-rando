@@ -45,6 +45,7 @@ var TrekLayer = L.ObjectsLayer.extend({
         on = on === undefined ? true : on;
         if (!layer) return;
         if (!this._map) return;
+        if (!this._map.hasLayer(layer)) return;
         if (on) {
             if (layer instanceof L.Polyline) {
                 this._hover = new L.Polyline(layer.getLatLngs());
@@ -97,9 +98,13 @@ var TrekLayer = L.ObjectsLayer.extend({
         this.eachLayer(function (l) {
             if (!(l instanceof L.Polyline))
                 return;  // Safety check.
+
             var departure = l.getLatLngs()[0],
                 name = l.properties.name;
 
+            l.iconified = iconified;
+
+            // Remove trek departure, either clustered or departure flag
             if (l.marker) {
                 if (this._trekCluster.hasLayer(l.marker))
                     this._trekCluster.removeLayer(l.marker);
@@ -107,16 +112,20 @@ var TrekLayer = L.ObjectsLayer.extend({
                     this._map.removeLayer(l.marker);
             }
             l.marker = this._getTrekMarker(departure, name, iconified);
+            l.marker.properties = l.properties;
 
             if (iconified) {
-                this._map.removeLayer(l);
                 // Clean-up possible highlight
                 if (this._hover) this._map.removeLayer(this._hover);
+                // Remove line
+                this._map.removeLayer(l);
+                // Iconified : add to cluster
                 this._trekCluster.addLayer(l.marker);
             }
             else {
                 if (!this._map.hasLayer(l))
                     this._map.addLayer(l);
+                // Not iconified : add departure flag to map
                 this._map.addLayer(l.marker);
             }
         }, this);
@@ -135,14 +144,17 @@ var TrekLayer = L.ObjectsLayer.extend({
         }
         else {
             icon = new L.Icon({
-                            iconUrl: IMG_URL + '/marker-source.png',
-                            iconSize: [64, 64],
-                            iconAnchor: [32, 64],
-                            labelAnchor: [20, -50]
-                        });
+                iconUrl: IMG_URL + '/marker-source.png',
+                iconSize: [64, 64],
+                iconAnchor: [32, 64],
+                labelAnchor: [20, -50]
+            });
         }
         marker.setIcon(icon);
         marker.bindLabel(name, {className: labelClassName});
+        marker.on('click mouseover mouseout', function (e) {
+            this.fire(e.type, L.Util.extend({layer: marker}, e));
+        }, this);
         return marker;
     },
 

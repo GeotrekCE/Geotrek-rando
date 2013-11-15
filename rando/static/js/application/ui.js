@@ -222,13 +222,15 @@ function simulate_map_click(trek_id) {
             }
         }
         var coords = trekOnMap.getLatLngs(),
-            middlepoint = coords[Math.round(coords.length/2)];
+            departure = coords[0],
+            middlepoint = coords[Math.round(coords.length/2)],
+            clickpoint = trekOnMap.iconified ? departure : middlepoint;
         trekOnMap.fire('click', {
-          latlng: middlepoint
+          latlng: clickpoint
         });
         // Move the map if trek is below search results
         var map = trekOnMap._map;
-        map.fakePanTo(middlepoint);
+        map.fakePanTo(clickpoint);
         // Track event
         _gaq.push(['_trackEvent', 'Results', 'Click', trekOnMap.properties && trekOnMap.properties.name]);
     }
