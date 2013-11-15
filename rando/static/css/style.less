@@ -138,6 +138,14 @@ a, input, button {
   -webkit-user-select: none;
 }
 
+.square-centered (@size) {
+    width: @size !important;
+    height: @size !important;
+    margin-left: -(@size / 2) !important;
+    margin-top: -(@size / 2) !important;
+}
+
+
 /* Variables */
 @white : #ffffff;
 @black : #232222;
@@ -1288,6 +1296,60 @@ p.tab-content-empty {
 
 .leaflet-control-zoom-fullscreen {
   background-image: url(../img/icon-fullscreen.png);
+}
+
+#mainmap {
+  .leaflet-marker-icon {
+
+    &.trek-cluster, &.trek-icon {
+      border-radius: 999px;
+      border-style: solid;
+
+      background-color: @orange;
+      background-image: url(../img/trek-icon.svg);
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      opacity: 0.8 !important;
+    }
+
+    &.trek-icon {
+      .square-centered(32px);
+      background-size: 28px;
+
+      border-width: 3px;
+      border-color: @yellow;
+    }
+
+    &.trek-cluster {
+      .square-centered(36px);
+      background-size: 32px;
+
+      border-width: 2px;
+      border-color: red;
+
+      .count {
+        border-radius: 5px;
+
+        background-color: red;
+        color: white;
+        text-align: center;
+        font-weight: bold;
+        font-size: 12px;
+        min-width: 20px;
+        min-height: 20px;
+
+        display: block;
+        position: absolute;
+        bottom: -2px;
+        right: -2px;
+
+      }
+    }
+  }
+}
+
+.leaflet-label.trek {
+  background: rgba(255, 225, 75, 0.5);
 }
 
 
