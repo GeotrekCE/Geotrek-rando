@@ -89,18 +89,23 @@ var TrekLayer = L.ObjectsLayer.extend({
             if (state) {
                 this._map.removeLayer(l);
                 var departure = l.getLatLngs()[0];
-                l.marker = this._getTrekMarker(departure)
+                l.marker = this._getTrekMarker(departure, l.properties.name)
                                .addTo(this._map);
             }
             else {
-                if (l.marker) this._map.removeLayer(l.marker);
+                if (l.marker) {
+                    this._map.removeLayer(l.marker);
+                    l.marker = null;
+                }
                 this._map.addLayer(l);
             }
         }, this);
     },
 
-    _getTrekMarker: function (latlng) {
-        return L.marker(latlng);
+    _getTrekMarker: function (latlng, name) {
+        var marker = L.marker(latlng);
+        if (name) marker.bindLabel(name);
+        return marker;
     }
 });
 
