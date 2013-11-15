@@ -5,6 +5,10 @@ var TREK_LAYER_OPTIONS = L.Util.extend({
     arrowstyle: {'fill': '#E97000', 'font-weight': 'bold'},
     positionstyle: {'fillOpacity': 1.0, 'opacity': 1.0, 'fillColor': 'white', 'color': 'black', 'width': 3},
     iconifyZoom: 12,
+    clusterOptions: {
+        showCoverageOnHover: false,
+        maxClusterRadius: 36,
+    }
 }, TREK_LAYER_OPTIONS || {});
 
 
@@ -27,8 +31,13 @@ var TrekLayer = L.ObjectsLayer.extend({
         );
         L.ObjectsLayer.prototype.initialize.call(this, geojson, options);
 
+        var clusterOptions = L.Util.extend(TREK_LAYER_OPTIONS.clusterOptions, {
+            iconCreateFunction: this._getTrekClusterIcon.bind(this)
+        });
+        this._trekCluster = new L.MarkerClusterGroup(clusterOptions);
+
         this._hover = null;
-        this._iconified = false;
+        this._iconified = null;
     },
 
     highlight: function (pk, on) {
@@ -64,20 +73,25 @@ var TrekLayer = L.ObjectsLayer.extend({
     onAdd: function (map) {
         L.ObjectsLayer.prototype.onAdd.apply(this, arguments);
         map.on('zoomend', this._iconifyTreks, this);
+        map.whenReady(function () {
+            this._iconifyTreks();
+        }, this);
+        this._trekCluster.addTo(map);
     },
 
     onRemove: function () {
-        L.ObjectsLayer.prototype.onRemove.apply(this, arguments);
+        this._map.removeLayer(this._trekCluster);
         map.off('zoomend', this._iconifyTreks, this);
+        L.ObjectsLayer.prototype.onRemove.apply(this, arguments);
     },
 
     _iconifyTreks: function (e) {
         var zoom = this._map.getZoom(),
-            state = zoom < TREK_LAYER_OPTIONS.iconifyZoom;
-        // Don't do anything if state did not change.
-        if (this._iconified === state)
+            iconified = zoom < TREK_LAYER_OPTIONS.iconifyZoom;
+        // Don't do anything if iconified did not change.
+        if (this._iconified === iconified)
             return;
-        this._iconified = state;
+        this._iconified = iconified;
 
         // Replace polyline by markers, and vice-versa
         this.eachLayer(function (l) {
@@ -86,18 +100,24 @@ var TrekLayer = L.ObjectsLayer.extend({
             var departure = l.getLatLngs()[0],
                 name = l.properties.name;
 
-            if (l.marker)
-                this._map.removeLayer(l.marker);
-            l.marker = this._getTrekMarker(departure, name, state)
-                           .addTo(this._map);
-            if (state) {
+            if (l.marker) {
+                if (this._trekCluster.hasLayer(l.marker))
+                    this._trekCluster.removeLayer(l.marker);
+                if (this._map.hasLayer(l.marker))
+                    this._map.removeLayer(l.marker);
+            }
+            l.marker = this._getTrekMarker(departure, name, iconified);
+
+            if (iconified) {
                 this._map.removeLayer(l);
                 // Clean-up possible highlight
                 if (this._hover) this._map.removeLayer(this._hover);
+                this._trekCluster.addLayer(l.marker);
             }
             else {
                 if (!this._map.hasLayer(l))
                     this._map.addLayer(l);
+                this._map.addLayer(l.marker);
             }
         }, this);
     },
@@ -124,6 +144,13 @@ var TrekLayer = L.ObjectsLayer.extend({
         marker.setIcon(icon);
         marker.bindLabel(name, {className: labelClassName});
         return marker;
+    },
+
+    _getTrekClusterIcon: function (cluster) {
+        return new L.DivIcon({className: 'trek-cluster',
+                              iconSize: [20, 20],
+                              iconAnchor: [12, 12],
+                              html: '<span class="count">' + cluster.getChildCount() + '</span>'});
     }
 });
 
@@ -302,7 +329,7 @@ function mainmapInit(map, bounds) {
     $(window.trekFilter).on("filterchange", function(e, matched) {
         treksLayer.updateFromPks(matched);
     });
-    // In case filters state were loaded through URL, it's too late to
+    // In case filters iconified were loaded through URL, it's too late to
     // listen for filterchange event.
     if (window.trekFilter.matching.length > 0) {
         treksLayer.updateFromPks(window.trekFilter.matching);
@@ -401,7 +428,7 @@ function mainmapInit(map, bounds) {
         }
     });
     // If popup is closed on map click (since closeOnClick is default option)
-    // then clean popup reference to have clear state for next trek click
+    // then clean popup reference to have clear iconified for next trek click
     map.on('layerremove', function (e) {
         if (e.layer === popup)
             popup = null;

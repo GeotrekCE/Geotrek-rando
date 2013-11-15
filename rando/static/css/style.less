@@ -1300,21 +1300,48 @@ p.tab-content-empty {
 
 #mainmap {
   .leaflet-marker-icon {
-      &.trek-icon {
-        .square-centered(36px);
 
-        border-width: 2px;
-        border-style: solid;
-        border-color: @yellow;
-        opacity: 0.8 !important;
+    &.trek-cluster, &.trek-icon {
+      .square-centered(36px);
 
-        background-color: @orange;
-        border-radius: 999px;
-        background-image: url(../img/trek-icon.svg);
-        background-size: 30px;
-        background-repeat: no-repeat;
-        background-position: 50% 50%;
+      border-radius: 999px;
+      border-style: solid;
+
+      background-color: @orange;
+      background-image: url(../img/trek-icon.svg);
+      background-size: 30px;
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+    }
+
+    &.trek-icon {
+      border-width: 3px;
+      border-color: @yellow;
+      opacity: 0.8 !important;
+    }
+
+    &.trek-cluster {
+      border-width: 2px;
+      border-color: red;
+
+      .count {
+        border-radius: 5px;
+
+        background-color: red;
+        color: white;
+        text-align: center;
+        font-weight: bold;
+        font-size: 12px;
+        min-width: 20px;
+        min-height: 20px;
+
+        display: block;
+        position: absolute;
+        bottom: -2px;
+        right: -2px;
+
       }
+    }
   }
 }
 
