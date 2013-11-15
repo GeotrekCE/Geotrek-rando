@@ -23,6 +23,13 @@ CHANGELOG
 * Add tooltips on start and end markers (fixes #25)
 * Add POI label on detail map (fixes #30)
 * Rework duration filter (fixes #34)
+* If zoom is lower than ``TREK_LAYER_OPTIONS.iconifyZoom`` (default: 12), show treks as icons (ref #32)
+* Treks are now clustered. Colors and apparence can be customized using CSS (``leaflet-marker-icon.trek-cluster``
+  and ``leaflet-marker-icon.trek-icon``). *Leaflet.MarkerCluster* options can be set
+  through ``TREK_LAYER_OPTIONS.clusterOptions`` (ref #32)
+* Show flag on trek departure (ref #32)
+* Show label on trek departure (ref #32)
+
 
 1.24 (2013-08-27)
 -----------------

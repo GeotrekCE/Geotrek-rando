@@ -1062,27 +1062,31 @@ p.tab-content-empty {
 }
 #mainmap .leaflet-marker-icon.trek-cluster,
 #mainmap .leaflet-marker-icon.trek-icon {
-  width: 36px !important;
-  height: 36px !important;
-  margin-left: -18px !important;
-  margin-top: -18px !important;
   border-radius: 999px;
   border-style: solid;
   background-color: #f89406;
   background-image: url(../img/trek-icon.svg);
-  background-size: 30px;
   background-repeat: no-repeat;
   background-position: 50% 50%;
+  opacity: 0.8 !important;
 }
 #mainmap .leaflet-marker-icon.trek-icon {
+  width: 32px !important;
+  height: 32px !important;
+  margin-left: -16px !important;
+  margin-top: -16px !important;
+  background-size: 28px;
   border-width: 3px;
   border-color: #ffff00;
-  opacity: 0.5 !important;
 }
 #mainmap .leaflet-marker-icon.trek-cluster {
+  width: 36px !important;
+  height: 36px !important;
+  margin-left: -18px !important;
+  margin-top: -18px !important;
+  background-size: 32px;
   border-width: 2px;
   border-color: red;
-  opacity: 0.8 !important;
 }
 #mainmap .leaflet-marker-icon.trek-cluster .count {
   border-radius: 5px;

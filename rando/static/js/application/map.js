@@ -139,7 +139,7 @@ var TrekLayer = L.ObjectsLayer.extend({
         if (iconified) {
             icon = new L.DivIcon({
                 className: 'trek-icon',
-                labelAnchor: [18, 0]
+                labelAnchor: [15, 0]
             });
         }
         else {

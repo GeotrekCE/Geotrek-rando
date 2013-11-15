@@ -1302,28 +1302,30 @@ p.tab-content-empty {
   .leaflet-marker-icon {
 
     &.trek-cluster, &.trek-icon {
-      .square-centered(36px);
-
       border-radius: 999px;
       border-style: solid;
 
       background-color: @orange;
       background-image: url(../img/trek-icon.svg);
-      background-size: 30px;
       background-repeat: no-repeat;
       background-position: 50% 50%;
+      opacity: 0.8 !important;
     }
 
     &.trek-icon {
+      .square-centered(32px);
+      background-size: 28px;
+
       border-width: 3px;
       border-color: @yellow;
-      opacity: 0.5 !important;
     }
 
     &.trek-cluster {
+      .square-centered(36px);
+      background-size: 32px;
+
       border-width: 2px;
       border-color: red;
-      opacity: 0.8 !important;
 
       .count {
         border-radius: 5px;
