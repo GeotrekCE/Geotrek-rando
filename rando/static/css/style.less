@@ -87,50 +87,8 @@ a, input, button {
 
 /* Mixins */
 
-// Transitions
-.transition(@transition) {
-  -webkit-transition: @transition;
-     -moz-transition: @transition;
-      -ms-transition: @transition;
-       -o-transition: @transition;
-          transition: @transition;
-}
-
-.translate3d(@x, @y, @z) {
-  -webkit-transform: translate3d(@x, @y, @z);
-     -moz-transform: translate3d(@x, @y, @z);
-      -ms-transform: translate3d(@x, @y, @z);
-       -o-transform: translate3d(@x, @y, @z);
-          transform: translate3d(@x, @y, @z);
-}
-
-// Box sizing
-.box-sizing(@boxmodel) {
-  -webkit-box-sizing: @boxmodel;
-     -moz-box-sizing: @boxmodel;
-      -ms-box-sizing: @boxmodel;
-          box-sizing: @boxmodel;
-}
-
-.border-radius(@radius: 2px) {
-  -webkit-border-radius: @radius;
-  -moz-border-radius: @radius;
-  border-radius: @radius;
-}
-
-.box-shadow(@shadow) {
-  -webkit-box-shadow: @shadow;
-  -moz-box-shadow: @shadow;
-  box-shadow: @shadow;
-}
-
-// Background sizing
-.background-size(@size){
-  -webkit-background-size: @size;
-     -moz-background-size: @size;
-       -o-background-size: @size;
-          background-size: @size;
-}
+// Mixins for LESS http://lesshat.com/
+@import "vendor/lesshat.less";
 
 .remove-callout(){
   -webkit-touch-callout: none;
