@@ -430,6 +430,8 @@ ul.social-buttons li {
   float: left;
   font-size: 7pt;
   text-align: center;
+  max-height: 20px;
+  overflow: hidden;
 }
 .slider-value.first {
   text-align: left;
