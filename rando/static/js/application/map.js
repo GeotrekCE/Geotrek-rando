@@ -79,32 +79,46 @@ var TrekLayer = L.ObjectsLayer.extend({
             return;
         this._iconified = state;
 
-        // Clean-up possible highlight
-        if (this._hover) this._map.removeLayer(this._hover);
-
         // Replace polyline by markers, and vice-versa
         this.eachLayer(function (l) {
             if (!(l instanceof L.Polyline))
                 return;  // Safety check.
+            var departure = l.getLatLngs()[0],
+                name = l.properties.name;
+
+            if (l.marker)
+                this._map.removeLayer(l.marker);
+            l.marker = this._getTrekMarker(departure, name, state)
+                           .addTo(this._map);
             if (state) {
                 this._map.removeLayer(l);
-                var departure = l.getLatLngs()[0];
-                l.marker = this._getTrekMarker(departure, l.properties.name)
-                               .addTo(this._map);
+                // Clean-up possible highlight
+                if (this._hover) this._map.removeLayer(this._hover);
             }
             else {
-                if (l.marker) {
-                    this._map.removeLayer(l.marker);
-                    l.marker = null;
-                }
-                this._map.addLayer(l);
+                if (!this._map.hasLayer(l))
+                    this._map.addLayer(l);
             }
         }, this);
     },
 
-    _getTrekMarker: function (latlng, name) {
-        var marker = L.marker(latlng);
-        if (name) marker.bindLabel(name);
+    _getTrekMarker: function (latlng, name, iconified) {
+        var marker = L.marker(latlng),
+            icon = new L.Icon.Default();
+
+        if (iconified) {
+            marker.bindLabel(name);
+        }
+        else {
+            icon = new L.Icon({
+                            iconUrl: IMG_URL + '/marker-source.png',
+                            iconSize: [64, 64],
+                            iconAnchor: [32, 64],
+                            labelAnchor: [20, -50]
+                        });
+            marker.bindLabel(name, {className: 'departure'});
+        }
+        marker.setIcon(icon);
         return marker;
     }
 });
