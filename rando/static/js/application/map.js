@@ -3,7 +3,8 @@ var TREK_LAYER_OPTIONS = L.Util.extend({
     hoverstyle: {'color': '#F89406', 'weight': 5, 'opacity': 1.0},
     outlinestyle: {'color': 'yellow', 'weight': 10, 'opacity': 0.8},
     arrowstyle: {'fill': '#E97000', 'font-weight': 'bold'},
-    positionstyle: {'fillOpacity': 1.0, 'opacity': 1.0, 'fillColor': 'white', 'color': 'black', 'width': 3}
+    positionstyle: {'fillOpacity': 1.0, 'opacity': 1.0, 'fillColor': 'white', 'color': 'black', 'width': 3},
+    iconifyZoom: 12,
 }, TREK_LAYER_OPTIONS || {});
 
 
@@ -27,6 +28,7 @@ var TrekLayer = L.ObjectsLayer.extend({
         L.ObjectsLayer.prototype.initialize.call(this, geojson, options);
 
         this._hover = null;
+        this._iconified = false;
     },
 
     highlight: function (pk, on) {
@@ -57,6 +59,48 @@ var TrekLayer = L.ObjectsLayer.extend({
             if (this._hover) this._map.removeLayer(this._hover);
             layer.setStyle(TREK_LAYER_OPTIONS.style);
         }
+    },
+
+    onAdd: function (map) {
+        L.ObjectsLayer.prototype.onAdd.apply(this, arguments);
+        map.on('zoomend', this._iconifyTreks, this);
+    },
+
+    onRemove: function () {
+        L.ObjectsLayer.prototype.onRemove.apply(this, arguments);
+        map.off('zoomend', this._iconifyTreks, this);
+    },
+
+    _iconifyTreks: function (e) {
+        var zoom = this._map.getZoom(),
+            state = zoom < TREK_LAYER_OPTIONS.iconifyZoom;
+        // Don't do anything if state did not change.
+        if (this._iconified === state)
+            return;
+        this._iconified = state;
+
+        // Clean-up possible highlight
+        if (this._hover) this._map.removeLayer(this._hover);
+
+        // Replace polyline by markers, and vice-versa
+        this.eachLayer(function (l) {
+            if (!(l instanceof L.Polyline))
+                return;  // Safety check.
+            if (state) {
+                this._map.removeLayer(l);
+                var departure = l.getLatLngs()[0];
+                l.marker = this._getTrekMarker(departure)
+                               .addTo(this._map);
+            }
+            else {
+                if (l.marker) this._map.removeLayer(l.marker);
+                this._map.addLayer(l);
+            }
+        }, this);
+    },
+
+    _getTrekMarker: function (latlng) {
+        return L.marker(latlng);
     }
 });
 
