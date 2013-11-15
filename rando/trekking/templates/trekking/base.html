@@ -35,7 +35,7 @@
         <meta name="msapplication-TileImage" content="{% static "img/touch/icon-144.png" %}">
         <meta name="msapplication-TileColor" content="#222222">
 
-        <!--[if IE]><script src="{% static "js/application/ie-polyfill.js" %}"></script><![endif]-->
+        <!--[if IE]><script src="{% static "js/ie-polyfill.js" %}"></script><![endif]-->
 
         <!-- For iOS web apps. Delete if not needed. https://github.com/h5bp/mobile-boilerplate/issues/94 -->
         <!--
@@ -65,7 +65,7 @@
 
         <link rel="stylesheet" href="{{ MEDIA_URL }}style.css" />
 
-        <script src="{% static "js/modernizr-2.6.2.min.js" %}"></script>
+        <script src="{% static "js/vendor/modernizr-2.6.2.min.js" %}"></script>
         {% endblock head %}
 
         {% block extrahead %}
@@ -102,7 +102,7 @@
 
         <!-- Load JQuery from CDN, with local fallback -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-        <script type="text/javascript">window.jQuery || document.write('<script src="{% static "js/jquery-1.9.0.min.js" %}"><\/script>')</script>
+        <script type="text/javascript">window.jQuery || document.write('<script src="{% static "js/vendor/jquery-1.9.0.min.js" %}"><\/script>')</script>
 
         {# footer here to allow admin JS injection #}
         <footer id="footer" class="footer">
@@ -112,32 +112,32 @@
         </footer>
 
         {% compress js %}
-        <script src="{% static "js/jquery-ui.js" %}"></script>
-        <script src="{% static "js/jquery.ui.touch-punch.min.js" %}"></script>
-        <script src="{% static "js/jquery.sparkline.min.js" %}"></script>
-        <script src="{% static "js/jquery.pjax.js" %}"></script>
-        <script src="{% static "js/jquery.smartresize.js" %}"></script>
+        <script src="{% static "js/vendor/jquery-ui.js" %}"></script>
+        <script src="{% static "js/vendor/jquery.ui.touch-punch.min.js" %}"></script>
+        <script src="{% static "js/vendor/jquery.sparkline.min.js" %}"></script>
+        <script src="{% static "js/vendor/jquery.pjax.js" %}"></script>
+        <script src="{% static "js/vendor/jquery.smartresize.js" %}"></script>
         {% leaflet_js %}
         <script type="text/javascript">L.Icon.Default.imagePath = '{% static "leaflet/images" %}';</script>
-        <script src="{% static "js/leaflet.markercluster.js" %}"></script>
-        <script src="{% static "js/bootstrap.min.js" %}"></script>
-        <script src="{% static "js/leaflet-objectslayer.js" %}"></script>
-        <script src="{% static "js/leaflet.restoreview.js" %}"></script>
-        <script src="{% static "js/leaflet.textpath.js" %}"></script>
-        <script src="{% static "js/leaflet.label.js" %}"></script>
-        <script src="{% static "js/rtree.js" %}"></script>
-        <script src="{% static "js/chosen.jquery.min.js" %}"></script>
-        <script src="{% static "js/socialite.js" %}"></script>
-        <script src="{% static "js/Control.FullScreen.js" %}"></script>
-        <script src="{% static "js/lz-string.js" %}"></script>
-        <script src="{% static "js/fastclick.js" %}"></script>
+        <script src="{% static "js/vendor/leaflet.markercluster.js" %}"></script>
+        <script src="{% static "js/vendor/bootstrap.min.js" %}"></script>
+        <script src="{% static "js/vendor/leaflet-objectslayer.js" %}"></script>
+        <script src="{% static "js/vendor/leaflet.restoreview.js" %}"></script>
+        <script src="{% static "js/vendor/leaflet.textpath.js" %}"></script>
+        <script src="{% static "js/vendor/leaflet.label.js" %}"></script>
+        <script src="{% static "js/vendor/rtree.js" %}"></script>
+        <script src="{% static "js/vendor/chosen.jquery.min.js" %}"></script>
+        <script src="{% static "js/vendor/socialite.js" %}"></script>
+        <script src="{% static "js/vendor/Control.FullScreen.js" %}"></script>
+        <script src="{% static "js/vendor/lz-string.js" %}"></script>
+        <script src="{% static "js/vendor/fastclick.js" %}"></script>
 
-        <script src="{% static "js/application/easing.js" %}"></script>
-        <script src="{% static "js/application/mbp.helpers.js" %}"></script>
-        <script src="{% static "js/application/ui.js" %}"></script>
-        <script src="{% static "js/application/filter.js" %}"></script>
-        <script src="{% static "js/application/backpack.js" %}"></script>
-        <script src="{% static "js/application/map.js" %}"></script>
+        <script src="{% static "js/vendor/jquery.easing-custom.js" %}"></script>
+        <script src="{% static "js/vendor/mbp.helpers.js" %}"></script>
+        <script src="{% static "js/ui.js" %}"></script>
+        <script src="{% static "js/filter.js" %}"></script>
+        <script src="{% static "js/backpack.js" %}"></script>
+        <script src="{% static "js/map.js" %}"></script>
         {% endcompress %}
         <script type="text/javascript" src="{% locale_url request.LANGUAGE_CODE jsi18n %}"></script>
 
