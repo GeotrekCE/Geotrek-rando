@@ -1060,6 +1060,25 @@ p.tab-content-empty {
 .leaflet-control-zoom-fullscreen {
   background-image: url(../img/icon-fullscreen.png);
 }
+#mainmap .leaflet-marker-icon.trek-icon {
+  width: 36px !important;
+  height: 36px !important;
+  margin-left: -18px !important;
+  margin-top: -18px !important;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #ffff00;
+  opacity: 0.8 !important;
+  background-color: #f89406;
+  border-radius: 999px;
+  background-image: url(../img/trek-icon.svg);
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+.leaflet-label.trek {
+  background: rgba(255, 225, 75, 0.5);
+}
 /****************************************************************************
 *
 * Detail and Flatpage

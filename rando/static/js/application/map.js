@@ -104,10 +104,14 @@ var TrekLayer = L.ObjectsLayer.extend({
 
     _getTrekMarker: function (latlng, name, iconified) {
         var marker = L.marker(latlng),
-            icon = new L.Icon.Default();
+            icon = null,
+            labelClassName = iconified ? 'trek' : 'departure';
 
         if (iconified) {
-            marker.bindLabel(name);
+            icon = new L.DivIcon({
+                className: 'trek-icon',
+                labelAnchor: [18, 0]
+            });
         }
         else {
             icon = new L.Icon({
@@ -116,9 +120,9 @@ var TrekLayer = L.ObjectsLayer.extend({
                             iconAnchor: [32, 64],
                             labelAnchor: [20, -50]
                         });
-            marker.bindLabel(name, {className: 'departure'});
         }
         marker.setIcon(icon);
+        marker.bindLabel(name, {className: labelClassName});
         return marker;
     }
 });
