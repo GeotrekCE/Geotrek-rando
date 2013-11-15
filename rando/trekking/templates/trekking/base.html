@@ -54,12 +54,12 @@
         {% compress css %}
         {% leaflet_css %}
         <!-- <link rel="stylesheet" href="{% static "css/normalize.css" %}"> -->
-        <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
-        <link rel="stylesheet" href="{% static "css/bootstrap-responsive.css" %}">
-        <link rel="stylesheet" href="{% static "css/jquery-ui.css" %}">
-        <link rel="stylesheet" href="{% static "css/chosen.css" %}">
-        <link rel="stylesheet" href="{% static "css/MarkerCluster.css" %}">
-        <link rel="stylesheet" href="{% static "css/leaflet.label.css" %}">
+        <link rel="stylesheet" href="{% static "css/vendor/bootstrap.css" %}">
+        <link rel="stylesheet" href="{% static "css/vendor/bootstrap-responsive.css" %}">
+        <link rel="stylesheet" href="{% static "css/vendor/jquery-ui.css" %}">
+        <link rel="stylesheet" href="{% static "css/vendor/chosen.css" %}">
+        <link rel="stylesheet" href="{% static "css/vendor/MarkerCluster.css" %}">
+        <link rel="stylesheet" href="{% static "css/vendor/leaflet.label.css" %}">
         <link rel="stylesheet" href="{% static "css/style.css" %}">
         {% endcompress %}
 
@@ -104,6 +104,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script type="text/javascript">window.jQuery || document.write('<script src="{% static "js/jquery-1.9.0.min.js" %}"><\/script>')</script>
 
+        {# footer here to allow admin JS injection #}
         <footer id="footer" class="footer">
             <div class="wrapper">
                 {% fileinclude "footer.html" %}
@@ -178,10 +179,17 @@
             });
         </script>
 
-        <div id="popup-view3d" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="popup-view3d" aria-hidden="true">
-          <div class="modal-body">
+        <div id="popup-home" class="popup-home modal fade" tabindex="-1" role="dialog" aria-labelledby="popup-view3d" aria-hidden="true">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          </div>
+            <div class="modal-body">
+                {% fileinclude "popup_home.html" %}
+            </div>
+        </div>
+
+        <div id="popup-view3d" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="popup-view3d" aria-hidden="true">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
         </div>
 
     </body>
