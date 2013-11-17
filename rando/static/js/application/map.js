@@ -45,8 +45,12 @@ var TrekLayer = L.ObjectsLayer.extend({
         on = on === undefined ? true : on;
         if (!layer) return;
         if (!this._map) return;
-        if (!this._map.hasLayer(layer)) return;
         if (on) {
+            if (layer.iconified) {
+                L.DomUtil.addClass(layer.marker._icon, 'highlight');
+                return;
+            }
+
             if (layer instanceof L.Polyline) {
                 this._hover = new L.Polyline(layer.getLatLngs());
             }
@@ -66,8 +70,13 @@ var TrekLayer = L.ObjectsLayer.extend({
             }
         }
         else {
-            if (this._hover) this._map.removeLayer(this._hover);
-            layer.setStyle(TREK_LAYER_OPTIONS.style);
+            if (layer.iconified) {
+                L.DomUtil.removeClass(layer.marker._icon, 'highlight');
+            }
+            else {
+                if (this._hover) this._map.removeLayer(this._hover);
+                layer.setStyle(TREK_LAYER_OPTIONS.style);
+            }
         }
     },
 

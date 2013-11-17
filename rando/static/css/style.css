@@ -1076,8 +1076,13 @@ p.tab-content-empty {
   margin-left: -16px !important;
   margin-top: -16px !important;
   background-size: 28px;
-  border-width: 3px;
+  border-width: 2px;
   border-color: #ffff00;
+}
+#mainmap .leaflet-marker-icon.trek-icon.highlight {
+  border-width: 4px;
+  margin-left: -18px !important;
+  margin-top: -18px !important;
 }
 #mainmap .leaflet-marker-icon.trek-cluster {
   width: 36px !important;
