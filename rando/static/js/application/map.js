@@ -45,8 +45,12 @@ var TrekLayer = L.ObjectsLayer.extend({
         on = on === undefined ? true : on;
         if (!layer) return;
         if (!this._map) return;
-        if (!this._map.hasLayer(layer)) return;
         if (on) {
+            if (layer.iconified) {
+                L.DomUtil.addClass(layer.marker._icon, 'highlight');
+                return;
+            }
+
             if (layer instanceof L.Polyline) {
                 this._hover = new L.Polyline(layer.getLatLngs());
             }
@@ -66,8 +70,13 @@ var TrekLayer = L.ObjectsLayer.extend({
             }
         }
         else {
-            if (this._hover) this._map.removeLayer(this._hover);
-            layer.setStyle(TREK_LAYER_OPTIONS.style);
+            if (layer.iconified) {
+                L.DomUtil.removeClass(layer.marker._icon, 'highlight');
+            }
+            else {
+                if (this._hover) this._map.removeLayer(this._hover);
+                layer.setStyle(TREK_LAYER_OPTIONS.style);
+            }
         }
     },
 
@@ -86,6 +95,25 @@ var TrekLayer = L.ObjectsLayer.extend({
         L.ObjectsLayer.prototype.onRemove.apply(this, arguments);
     },
 
+    addLayer: function (layer) {
+        if (layer.iconified) {
+            this._trekCluster.addLayer(layer.marker);
+            return;
+        }
+        else if (layer.marker && this._map) {
+            this._map.addLayer(layer.marker);
+        }
+        return L.ObjectsLayer.prototype.addLayer.call(this, layer);
+    },
+
+    removeLayer: function (layer) {
+        if (layer.marker && this._map) {
+            this._trekCluster.removeLayer(layer.marker);
+            this._map.removeLayer(layer.marker);
+        }
+        return L.ObjectsLayer.prototype.removeLayer.call(this, layer);
+    },
+
     _iconifyTreks: function (e) {
         var zoom = this._map.getZoom(),
             iconified = zoom < TREK_LAYER_OPTIONS.iconifyZoom;
@@ -95,24 +123,29 @@ var TrekLayer = L.ObjectsLayer.extend({
         this._iconified = iconified;
 
         // Replace polyline by markers, and vice-versa
-        this.eachLayer(function (l) {
+        for (var k in this._objects) {
+            var l = this._objects[k];
+            l.iconified = iconified;
+
             if (!(l instanceof L.Polyline))
                 return;  // Safety check.
 
             var departure = l.getLatLngs()[0],
                 name = l.properties.name;
 
-            l.iconified = iconified;
-
             // Remove trek departure, either clustered or departure flag
             if (l.marker) {
-                if (this._trekCluster.hasLayer(l.marker))
-                    this._trekCluster.removeLayer(l.marker);
-                if (this._map.hasLayer(l.marker))
-                    this._map.removeLayer(l.marker);
+                this._trekCluster.removeLayer(l.marker);
+                this._map.removeLayer(l.marker);
             }
             l.marker = this._getTrekMarker(departure, name, iconified);
-            l.marker.properties = l.properties;
+            l.marker.trek = l;
+            l.marker.on('click mouseover mouseout', function (e) {
+                this.fire(e.type, L.Util.extend({layer: e.target.trek}, e));
+            }, this);
+
+            if (this._current_objects[k] === undefined)
+                continue;
 
             if (iconified) {
                 // Clean-up possible highlight
@@ -128,7 +161,7 @@ var TrekLayer = L.ObjectsLayer.extend({
                 // Not iconified : add departure flag to map
                 this._map.addLayer(l.marker);
             }
-        }, this);
+        }
     },
 
     _getTrekMarker: function (latlng, name, iconified) {
@@ -152,9 +185,6 @@ var TrekLayer = L.ObjectsLayer.extend({
         }
         marker.setIcon(icon);
         marker.bindLabel(name, {className: labelClassName});
-        marker.on('click mouseover mouseout', function (e) {
-            this.fire(e.type, L.Util.extend({layer: marker}, e));
-        }, this);
         return marker;
     },
 

@@ -1316,8 +1316,14 @@ p.tab-content-empty {
       .square-centered(32px);
       background-size: 28px;
 
-      border-width: 3px;
+      border-width: 2px;
       border-color: @yellow;
+
+        &.highlight {
+          border-width: 4px;
+          margin-left: -18px !important;
+          margin-top: -18px !important;
+        }
     }
 
     &.trek-cluster {
