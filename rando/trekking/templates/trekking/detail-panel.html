@@ -27,7 +27,7 @@
 
         {% if PRINT_ENABLED %}
         <a class="btn download print" title="{% trans "Print" %}" href="{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.printable %}" target="_blank">
-          <i class="print"></i> {% trans "Print" %}
+          <i class="print"></i> <span class="hidden-phone">{% trans "Print" %}</span><span class="visible-phone">PDF</span>
         </a>
         {% else %}
         <a class="btn download print disabled" title="{% trans "Soon!" %}" >
