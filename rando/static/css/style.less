@@ -367,29 +367,27 @@ ul.row-footer {
 
     li {
       display: inline-block;
+    }
+  }
 
-      a {
-        .transition(background 100ms);
-        padding: 0px 10px 0px;
-        font-size: 1.1em;
-        text-decoration: none;
-        display: block;
-        height: 24px;
-        padding-top: 6px;
-        font-weight: bold;
-        background: rgba(248, 148, 6, 0.7);
-        .border-radius(3px);
-        color: white;
-        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-        .box-shadow(none);
-        border-bottom-color: rgba(0, 0, 0, 0.3);
-        line-height: 18px;
+  .btn {
+    .transition(background 100ms);
+    padding: 6px 10px;
+    font-size: 1.1em;
+    text-decoration: none;
+    display: block;
+    font-weight: bold;
+    background: rgba(248, 148, 6, 0.7);
+    .border-radius(3px);
+    color: white;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    .box-shadow(none);
+    border-bottom-color: rgba(0, 0, 0, 0.3);
+    line-height: 18px;
 
-        &:hover,
-        &.active {
-          background-color: @orange;
-        }
-      }
+    &:hover,
+    &.active {
+      background-color: @orange;
     }
   }
 }

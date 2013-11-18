@@ -394,17 +394,15 @@ ul.row-footer a {
 #flatpages ul li {
   display: inline-block;
 }
-#flatpages ul li a {
+#flatpages .btn {
   -webkit-transition: background 100ms;
   -moz-transition: background 100ms;
   -o-transition: background 100ms;
   transition: background 100ms;
-  padding: 0px 10px 0px;
+  padding: 6px 10px;
   font-size: 1.1em;
   text-decoration: none;
   display: block;
-  height: 24px;
-  padding-top: 6px;
   font-weight: bold;
   background: rgba(248, 148, 6, 0.7);
   -webkit-border-radius: 3px;
@@ -421,8 +419,8 @@ ul.row-footer a {
   border-bottom-color: rgba(0, 0, 0, 0.3);
   line-height: 18px;
 }
-#flatpages ul li a:hover,
-#flatpages ul li a.active {
+#flatpages .btn:hover,
+#flatpages .btn.active {
   background-color: #f89406;
 }
 #mobile-header-detail {
