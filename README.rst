@@ -337,6 +337,10 @@ In ``settings_local.py``, enable with :
 Content is taken from a file named ``popup_home.html``, in the ``media/``
 folder, along with ``footer.html``.
 
+If you wish to have a different one for each language, add a ``popup_home.html``
+file in every language folder of ``media/pages/``.
+
+
 ===============
 TROUBLESHOOTING
 ===============
