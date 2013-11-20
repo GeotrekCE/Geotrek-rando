@@ -137,6 +137,9 @@
         <script src="{% static "js/filter.js" %}"></script>
         <script src="{% static "js/backpack.js" %}"></script>
         <script src="{% static "js/map.js" %}"></script>
+        {% if POPUP_HOME_ENABLED %}
+        <script src="{% static "js/popup.js" %}"></script>
+        {% endif %}
         {% endcompress %}
         <script type="text/javascript" src="{% locale_url request.LANGUAGE_CODE jsi18n %}"></script>
 
