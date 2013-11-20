@@ -185,7 +185,16 @@
         <div id="popup-home" class="popup-home modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="popup-view3d" aria-hidden="true">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <div class="modal-body">
-                {% fileinclude POPUP_FILENAME request.LANGUAGE_CODE %}
+                <ul id="popup-lang-switch">
+                  {% for lang, name in settings.languages.available.items %}
+                    <li class="{% if lang == request.LANGUAGE_CODE %}active{% endif %}"><a href="/{{ lang }}"><span class="hidden">{{ lang }}</span>
+                        <img src="{% get_static_prefix %}ico/flags/{{ lang }}.png" alt="{{ lang }}"></a>
+                    </li>
+                  {% endfor %}
+                </ul>
+                <div id="popup-body">
+                    {% fileinclude POPUP_FILENAME request.LANGUAGE_CODE %}
+                <div>
             </div>
         </div>
         {% endif %}
