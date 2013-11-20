@@ -3,6 +3,7 @@
 {% get_flatpages as flatpages %}
 <div id="flatpages" class="reattach" data-destination="header">
     <ul>
+    	<li><a class="btn" data-toggle="modal" data-target="#popup-home" href="#popup-home">Home</a></li>
     {% for page in flatpages %}
         <li><a class="btn pjax {% if title == page.title %}active{% endif %}" href="{% locale_url request.LANGUAGE_CODE flatpages:page page.slug %}">{{ page.title }}</a></li>
     {% endfor %}

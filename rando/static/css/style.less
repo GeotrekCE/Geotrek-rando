@@ -87,50 +87,8 @@ a, input, button {
 
 /* Mixins */
 
-// Transitions
-.transition(@transition) {
-  -webkit-transition: @transition;
-     -moz-transition: @transition;
-      -ms-transition: @transition;
-       -o-transition: @transition;
-          transition: @transition;
-}
-
-.translate3d(@x, @y, @z) {
-  -webkit-transform: translate3d(@x, @y, @z);
-     -moz-transform: translate3d(@x, @y, @z);
-      -ms-transform: translate3d(@x, @y, @z);
-       -o-transform: translate3d(@x, @y, @z);
-          transform: translate3d(@x, @y, @z);
-}
-
-// Box sizing
-.box-sizing(@boxmodel) {
-  -webkit-box-sizing: @boxmodel;
-     -moz-box-sizing: @boxmodel;
-      -ms-box-sizing: @boxmodel;
-          box-sizing: @boxmodel;
-}
-
-.border-radius(@radius: 2px) {
-  -webkit-border-radius: @radius;
-  -moz-border-radius: @radius;
-  border-radius: @radius;
-}
-
-.box-shadow(@shadow) {
-  -webkit-box-shadow: @shadow;
-  -moz-box-shadow: @shadow;
-  box-shadow: @shadow;
-}
-
-// Background sizing
-.background-size(@size){
-  -webkit-background-size: @size;
-     -moz-background-size: @size;
-       -o-background-size: @size;
-          background-size: @size;
-}
+// Mixins for LESS http://lesshat.com/
+@import "vendor/lesshat.less";
 
 .remove-callout(){
   -webkit-touch-callout: none;
@@ -152,6 +110,15 @@ a, input, button {
 @blackLighter : #4d4d4d;
 @orange : rgb(248, 148, 6);
 @yellow : #ffff00;
+
+/* Landscape phone to portrait tablet */
+@screen-sm : 767px;
+
+/* Portrait tablet to landscape and desktop */
+@screen-md : 979px;
+
+/* 13 inch devices */
+@screen-lg : 1044px;
 
 
 /* Global */
@@ -277,6 +244,8 @@ i.icon {
  color: #fff;
 }
 
+/* Objects import */
+@import "objects/popup.less";
 
 /* Layout */
 
@@ -398,29 +367,27 @@ ul.row-footer {
 
     li {
       display: inline-block;
+    }
+  }
 
-      a {
-        .transition(background 100ms);
-        padding: 0px 10px 0px;
-        font-size: 1.1em;
-        text-decoration: none;
-        display: block;
-        height: 24px;
-        padding-top: 6px;
-        font-weight: bold;
-        background: rgba(248, 148, 6, 0.7);
-        .border-radius(3px);
-        color: white;
-        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-        .box-shadow(none);
-        border-bottom-color: rgba(0, 0, 0, 0.3);
-        line-height: 18px;
+  .btn {
+    .transition(background 100ms);
+    padding: 6px 10px;
+    font-size: 1.1em;
+    text-decoration: none;
+    display: block;
+    font-weight: bold;
+    background: rgba(248, 148, 6, 0.7);
+    .border-radius(3px);
+    color: white;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    .box-shadow(none);
+    border-bottom-color: rgba(0, 0, 0, 0.3);
+    line-height: 18px;
 
-        &:hover,
-        &.active {
-          background-color: @orange;
-        }
-      }
+    &:hover,
+    &.active {
+      background-color: @orange;
     }
   }
 }
@@ -1935,8 +1902,7 @@ a.accordion-toggle  {
    Media queries
    ========================================================================== */
 
-/* 13 inch devices */
-@media (max-width: 1044px) {
+@media (max-width: @screen-lg) {
   #search-bar {
     height: 115px;
   }
@@ -1950,9 +1916,7 @@ a.accordion-toggle  {
   }
 }
 
-
-/* Portrait tablet to landscape and desktop */
-@media (max-width: 979px) {
+@media (max-width: @screen-md) {
   header h3 {
     font-size: 20px;
     left: 11px;
@@ -2011,8 +1975,8 @@ a.accordion-toggle  {
   }
 }
 
-/* Landscape phone to portrait tablet */
-@media (max-width: 767px) {
+/* Landscape phones and down */
+@media (max-width: @screen-sm) {
   body {
     padding: 0;
   }
@@ -2025,10 +1989,6 @@ a.accordion-toggle  {
   #footer {
     display: none;
   }
-}
-
-/* Landscape phones and down */
-@media (max-width: 767px) {
 
   #container-content {
     top: 0;
@@ -2401,10 +2361,6 @@ a.accordion-toggle  {
     margin-bottom: 5px;
   }
 
-  #toolbox .print {
-    display: none;
-  }
-
   #toolbox {
     margin-right: 0;
     margin-left: 1%;
@@ -2456,7 +2412,8 @@ a.accordion-toggle  {
   #tab-results,
   #side-bar .illust,
   .touch .leaflet-control-container,
-  #fake-search-tabs {
+  #fake-search-tabs,
+  #detailmap {
     display: none;
   }
 }

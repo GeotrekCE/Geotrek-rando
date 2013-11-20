@@ -21,6 +21,8 @@ Modernizr.addTest('fullscreen', function(){
 
 
 function init_ui() {
+    var showModal = true;
+
     $(document).pjax('a.pjax', '#content');
 
     FastClick.attach(document.body);
@@ -70,6 +72,10 @@ function init_ui() {
 
     // iOS mobile hide address bar
     if(MBP.platform == "ios") { MBP.hideUrlBarOnLoad(); }
+
+    if (showModal && MOBILE == false) {
+        $('#popup-home').modal();
+    };
 }
 
 function page_load() {
