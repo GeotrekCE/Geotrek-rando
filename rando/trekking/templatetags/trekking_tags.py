@@ -1,6 +1,5 @@
 import os
 import logging
-from datetime import datetime, timedelta
 
 from django import template
 from django.conf import settings

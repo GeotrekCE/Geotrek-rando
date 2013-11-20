@@ -223,6 +223,9 @@ DESCRIPTION = {
     'fr': "Offre rando",
 }
 
+FOOTER_FILENAME = 'footer.html'
+POPUP_FILENAME = 'popup_home.html'
+POPUP_HOME_ENABLED = False
 PRINT_ENABLED = False
 VIEW3D_ENABLED = True
 

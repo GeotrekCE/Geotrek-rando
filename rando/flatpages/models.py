@@ -50,11 +50,20 @@ class FlatPageManager(object):
         title = settings.FLATPAGES_TITLES.get(title, title)
         return (pk, title)
 
+    @staticmethod
+    def _filter_reserved_names(dirlist):
+        reserved = [settings.POPUP_FILENAME,
+                    settings.FOOTER_FILENAME]
+        return [f for f in dirlist if f not in reserved]
+
     def all(self):
         path = os.path.join(self.basepath, self.language)
         dirlist = []
         if os.path.exists(path):
             dirlist = os.listdir(path)
+
+        dirlist = self._filter_reserved_names(dirlist)
+
         for i, filename in enumerate(sorted(dirlist)):
             if isinstance(filename, str):
                 filename = filename.decode('utf-8')

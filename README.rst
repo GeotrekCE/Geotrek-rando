@@ -324,6 +324,19 @@ If missing ``var/static/img/default-thumbnail.jpg`` will be used.
     For preview, on the detail page, by default, ``var/static/img/default-preview.jpg`` will be used.
 
 
+Home popup
+----------
+
+In ``settings_local.py``, enable with :
+
+::
+
+    POPUP_HOME_ENABLED = True
+
+
+Content is taken from a file named ``popup_home.html``, in the ``media/``
+folder, along with ``footer.html``.
+
 ===============
 TROUBLESHOOTING
 ===============
