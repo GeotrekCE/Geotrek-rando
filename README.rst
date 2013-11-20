@@ -113,7 +113,7 @@ You can schedule synchronization in a crontab (e.g. every hour) :
     0 * * * *  cd /path/to/application && /usr/bin/make sync
 
 
-Regularly (once a week), you can also notify Google that your sitemap changed, using this : 
+Regularly (once a week), you can also notify Google that your sitemap changed, using this :
 
 ::
 
@@ -130,7 +130,7 @@ All customizations in this paragraph happen in the ``var/input/media/`` folder.
 Basic FTP access configuration
 ------------------------------
 
-You can setup a FTP access to this *media* folder. 
+You can setup a FTP access to this *media* folder.
 
 ::
 
@@ -250,7 +250,7 @@ The map elements colors can be set from the ``footer.html`` page, using a ``<scr
         };
     </script>
 
-``style`` is the base color; ``hoverstyle`` is for mouse over; ``outlinestyle`` is for outline effect. 
+``style`` is the base color; ``hoverstyle`` is for mouse over; ``outlinestyle`` is for outline effect.
 ``arrowstyle`` controls the color and weight of direction arrows.
 
 See `Leaflet documentation on paths <http://leafletjs.com>`_ for more details.
@@ -287,7 +287,7 @@ The tiles of this layer can then be added to the maps, using this snippet (for e
 
 :note:
 
-    The same technique could be applied using a local vectorial GeoJSON layer. Caution with the weight of the page, 
+    The same technique could be applied using a local vectorial GeoJSON layer. Caution with the weight of the page,
     and performance with mobile users.
 
 
