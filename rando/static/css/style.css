@@ -480,9 +480,15 @@ ul.social-buttons li {
 }
 #lang-switch {
   position: absolute;
+  text-align: right;
+}
+header #lang-switch {
   top: 5px;
   right: 9px;
-  text-align: right;
+}
+#popup-home #lang-switch {
+  top: 14px;
+  right: 30px;
 }
 #lang-switch a.utils {
   color: black;
