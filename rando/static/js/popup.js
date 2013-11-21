@@ -46,8 +46,7 @@ $(document).ready(function (e) {
             $this.removeAttr('data-trek');
             $this.find('img.preview').attr('src', trek.properties.pictures[0].url)
                                      .attr('alt', trek.properties.pictures[0].legend);
-            $this.find('a.profile').attr('href', '/' + trek.properties.slug)
-                                   .addClass('pjax');
+            $this.find('a.profile').attr('href', '/' + trek.properties.slug);
         });
 
         function randomTrek() {

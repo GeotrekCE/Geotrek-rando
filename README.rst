@@ -215,7 +215,10 @@ Upload your file and add a custom section in the custom CSS :
 Footer
 ------
 
-A ``footer.html`` is loaded and injected into the page.
+Content is taken from a file named ``footer.html``, in the ``media/`` folder.
+
+If you wish to have a different one for each language, add a ``footer.html``
+file in every language folder of ``media/pages/``.
 
 To hide the footer, add in ``style.css``:
 
@@ -228,6 +231,8 @@ To hide the footer, add in ``style.css``:
     #container-content {
         bottom: 0px;
     }
+
+This file can be used to inject extra Javascript code, using a ``<script>`` tag.
 
 
 Map elements
@@ -339,6 +344,32 @@ folder, along with ``footer.html``.
 
 If you wish to have a different one for each language, add a ``popup_home.html``
 file in every language folder of ``media/pages/``.
+
+An example of HTML content can be found here : https://gist.github.com/leplatrem/7583071
+
+:note:
+
+    In order to prevent page reload for internal links, add the class ``pjax``
+    to the links (e.g. ``<a href="/" class="pjax">Link</a>``).
+
+    In order to open home page (main map) on saved search links when popup is shown
+    from another page, prefix all links with ``/`` (e.g. ``href="/#3782-20ce-360-9602-60a6"``).
+
+Main behaviour of home popup :
+
+* Shown on first visit only (tracked using *LocalStorage*)
+* Shown when landing on home only (no permalink, saved-search or trek detail)
+
+In order to add a trek section, add a ``data-trek`` attribute with ``random``
+value or trek *id* for specific trek. Markup example :
+
+::
+    <div class="span4" data-trek="random">
+        <a class="pjax profile">
+            <img class="preview">
+            <span class="caption">Highlight</span>
+        </a>
+    </div>
 
 
 ===============

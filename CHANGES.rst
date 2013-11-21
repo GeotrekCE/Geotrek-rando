@@ -29,6 +29,8 @@ CHANGELOG
   through ``TREK_LAYER_OPTIONS.clusterOptions`` (ref #32)
 * Show flag on trek departure (ref #32)
 * Show label on trek departure (ref #32)
+* Footer content can now be translated using a file per language (see README)
+* A popup can now be shown when landing on home (see README, fixes #31)
 
 
 1.24 (2013-08-27)
