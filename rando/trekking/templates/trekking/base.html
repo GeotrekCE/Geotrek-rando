@@ -76,7 +76,7 @@
             <!-- <div class="navbar-inner"> -->
               <!-- <div class="container">
                 <div class="nav-collapse"> -->
-                <a href="{% locale_url request.LANGUAGE_CODE trekking:home %}"><h1>{{ TITLE }}</h1></a>
+                <a href="{% locale_url request.LANGUAGE_CODE trekking:home %}#results"><h1>{{ TITLE }}</h1></a>
                 <!-- </div> -->
               <!-- </div> -->
 
@@ -187,7 +187,7 @@
             <div class="modal-body">
                 <ul id="popup-lang-switch">
                   {% for lang, name in settings.languages.available.items %}
-                    <li class="{% if lang == request.LANGUAGE_CODE %}active{% endif %}"><a href="/{{ lang }}"><span class="hidden">{{ lang }}</span>
+                    <li class="{% if lang == request.LANGUAGE_CODE %}active{% endif %}"><a href="{% locale_url lang trekking:home %}"><span class="hidden">{{ lang }}</span>
                         <img src="{% get_static_prefix %}ico/flags/{{ lang }}.png" alt="{{ lang }}"></a>
                     </li>
                   {% endfor %}
