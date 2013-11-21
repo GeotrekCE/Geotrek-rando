@@ -6,7 +6,10 @@ $(document).ready(function (e) {
     }
 
     function showModal() {
-        return localStorage.getItem('popup-shown') !== "yes";
+        var alreadyShown = localStorage.getItem('popup-shown') === "yes",
+            landingHome = /^\/[a-zA-Z_]{2,5}\/$/.test(window.location.pathname),
+            noFilter = !window.location.hash;
+        return !alreadyShown && landingHome && noFilter;
     }
 
     function onPopupClose() {
