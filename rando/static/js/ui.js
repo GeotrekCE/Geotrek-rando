@@ -210,7 +210,7 @@ function view_home() {
     });
 
     // Tooltips on theme/usages and pictogram list
-    $('.pictogram').tooltip();
+    $('.pictogram').tooltip({container:'body'});
 
     if(MOBILE) {
         init_mobile();
