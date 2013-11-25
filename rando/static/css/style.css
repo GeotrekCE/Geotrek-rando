@@ -68,6 +68,7 @@ button {
    Author's custom styles
    ========================================================================== */
 /* Mixins */
+/* Variables for custom themes */
 /* Variables */
 /* Landscape phone to portrait tablet */
 /* Portrait tablet to landscape and desktop */
@@ -339,10 +340,13 @@ header h1 {
   width: 100%;
   top: 80px;
   bottom: 50px;
+<<<<<<< HEAD
   /*margin-top: 80px; */
 
   /*margin-bottom: 60px;*/
 
+=======
+>>>>>>> Refactoring css stylesheet
 }
 #footer {
   position: absolute;
@@ -462,7 +466,7 @@ header #flatpages {
 }
 #flatpages .btn:hover,
 #flatpages .btn.active {
-  background-color: #f89406;
+  background-color: rgba(248, 148, 6, 0.9);
 }
 #mobile-header-detail {
   display: none;
@@ -680,11 +684,11 @@ header #lang-switch {
 .theme .filter.active img {
   margin-left: -25px;
 }
-.theme .filter img:hover {
-  margin-left: -25px;
-}
 .theme .filter.active p {
   color: orange;
+}
+.theme .filter img:hover {
+  margin-left: -25px;
 }
 #filters-actions {
   float: right;
@@ -1459,7 +1463,7 @@ p.teaser {
   text-align: left;
 }
 #trek-identity span.value {
-  color: #F77E00;
+  color: #f89406;
 }
 #trek-information-desk p {
   margin-left: 10px;
