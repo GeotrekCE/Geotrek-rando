@@ -149,6 +149,9 @@ function view_home() {
     // (After sliders initialization)
     window.trekFilter.load();
 
+    // Advance filters ready, show them
+    $('#advanced-filters').show();
+
     $('#clear-filters').off('click').on('click', function () {
         window.trekFilter.clear();
     });
