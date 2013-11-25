@@ -41,12 +41,17 @@ $(document).ready(function (e) {
             }
 
             var trek = getTrek(trekId);
-            if (!trek) return;
+            if (!trek)
+                return;
 
             $this.removeAttr('data-trek');
-            $this.find('img.preview').attr('src', trek.properties.pictures[0].url)
-                                     .attr('alt', trek.properties.pictures[0].legend);
-            $this.find('a.profile').attr('href', '/' + trek.properties.slug);
+            var preview = trek.properties.pictures[0];
+            if (preview) {
+                $this.find('img:first').attr('src', preview.url)
+                                       .attr('alt', preview.legend);
+                $this.find('a.profile').attr('href', '/' + trek.properties.slug);
+            }
+
         });
 
         function randomTrek() {
