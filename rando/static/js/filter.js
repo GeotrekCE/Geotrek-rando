@@ -86,9 +86,9 @@ function TrekFilter()
 
         state = state || {};
         state.sliders = state.sliders || {};
-        state.sliders.time = state.sliders.time || {};
-        state.sliders.stage = state.sliders.stage || {};
-        state.sliders.den = state.sliders.den || {};
+        state.sliders.time = state.sliders.duration || {};
+        state.sliders.stage = state.difficulty.stage || {};
+        state.sliders.den = state.altitude.den || {};
 
         return state;
     };
@@ -187,7 +187,7 @@ function TrekFilter()
     };
 
     this.match = function(trek) {
-        if (this.matchStage(trek) &&
+        if (this.matchDifficulty(trek) &&
             this.matchDuration(trek) &&
             this.matchClimb(trek) &&
             this._matchList(trek, 'theme', 'themes') &&
@@ -200,11 +200,11 @@ function TrekFilter()
         return false;
     };
 
-    this.matchStage = function (trek) {
+    this.matchDifficulty = function (trek) {
         if (!self.state.sliders) return true;
-        if (!self.state.sliders.stage) return true;
-        var minStage = self.state.sliders.stage.min;
-        var maxStage = self.state.sliders.stage.max;
+        if (!self.state.sliders.difficulty) return true;
+        var minDifficulty = self.state.sliders.difficulty.min;
+        var maxDifficulty = self.state.sliders.difficulty.max;
 
         var trekDifficulty = trek.properties.difficulty;
         if  (!trekDifficulty) return true;
@@ -212,14 +212,14 @@ function TrekFilter()
          * Difficulty ids are used to order levels.
          * See Geotrek Adminsite for DifficultyLevel edition.
          */
-        return trekDifficulty.id >= minStage && trekDifficulty.id <= maxStage;
+        return trekDifficulty.id >= minDifficulty && trekDifficulty.id <= maxDifficulty;
     };
 
     this.matchDuration = function (trek) {
         if (!self.state.sliders) return true;
-        if (!self.state.sliders.time) return true;
-        var minDuration = self.state.sliders.time.min;
-        var maxDuration = self.state.sliders.time.max;
+        if (!self.state.sliders.duration) return true;
+        var minDuration = self.state.sliders.duration.min;
+        var maxDuration = self.state.sliders.duration.max;
 
         var DAY_MIN = 4,
             DAY_MAX = 10;
@@ -247,9 +247,9 @@ function TrekFilter()
 
     this.matchClimb = function (trek) {
         if (!self.state.sliders) return true;
-        if (!self.state.sliders.den) return true;
-        var minClimb = self.state.sliders.den.min;
-        var maxClimb = self.state.sliders.den.max;
+        if (!self.state.sliders.altitude) return true;
+        var minClimb = self.state.sliders.altitude.min;
+        var maxClimb = self.state.sliders.altitude.max;
 
         var matching = {
             1:600,

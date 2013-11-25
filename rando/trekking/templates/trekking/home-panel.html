@@ -6,33 +6,33 @@
   <title>{{ TITLE }}</title>
 {% endif %}
 
-<div id="search-bar">
+<div id="filters-bar">
   <h2 class="hidden">{% trans "Filters" %}</h2>
 
   <div id="basic-filters">
-    <div class="stage span">
-      <label for="stage">{% trans "Difficulty" %}</label>
+    <div class="difficulty span">
+      <label for="difficulty">{% trans "Difficulty" %}</label>
       <div class="slider-wrap">
-        <div id="stage" data-filter="stage"></div>
+        <div id="difficulty" data-filter="difficulty"></div>
       </div>
       <div class="slider-value first">{% trans "Very easy" %}</div>
       <div class="slider-value">{% trans "Easy" %}</div>
       <div class="slider-value">{% trans "Medium" %}</div>
       <div class="slider-value last">{% trans "Hard" %}</div>
     </div>
-    <div class="time span">
-      <label for="time">{% trans "Duration" %}</label>
+    <div class="duration span">
+      <label for="duration">{% trans "Duration" %}</label>
       <div class="slider-wrap">
-        <div id="time" data-filter="time"></div>
+        <div id="duration" data-filter="duration"></div>
       </div>
       <div class="slider-value first">{% trans "1/2 day" %}</div>
       <div class="slider-value">{% trans "Day" %}</div>
       <div class="slider-value last">&gt; {% trans "2 days" %}</div>
     </div>
-    <div class="den span">
-      <label for="den">{% trans "Climb" %}</label>
+    <div class="altitude span">
+      <label for="altitude">{% trans "Climb" %}</label>
       <div class="slider-wrap">
-        <div id="den" data-filter="den"></div>
+        <div id="altitude" data-filter="altitude"></div>
       </div>
       <div class="slider-value first">&lt; 300m</div>
       <div class="slider-value">600m</div>
