@@ -145,7 +145,6 @@ i.icon {
 .popover {
   z-index: 9999;
   /* Above map, above everything ! */
-
 }
 .label,
 .badge {
@@ -187,17 +186,37 @@ i.icon {
 /* Objects import */
 .popup-home {
   width: 80%;
-  height: 86%;
-  margin-left: -40%;
   overflow: hidden;
+  top: 5%;
+  bottom: 5%;
+  left: 10%;
+  right: 10%;
+  margin-left: 0;
 }
 @media (max-width: 767px) {
   .popup-home {
-    display: none;
+    display: none!important;
   }
 }
-.popup-home.modal.fade.in {
-  top: 7%;
+@media (min-width: 950px) {
+  .popup-home {
+    width: 900px;
+    height: 500px;
+    margin-left: -450px;
+    margin-top: -250px;
+    left: 50%;
+    right: auto;
+  }
+}
+.popup-home.modal.fade.in,
+.popup-home.modal.fade {
+  top: 5%;
+}
+@media (min-width: 950px) {
+  .popup-home.modal.fade.in,
+  .popup-home.modal.fade {
+    top: 50%;
+  }
 }
 @media (max-width: 767px) {
   .popup-home {
@@ -219,14 +238,20 @@ i.icon {
 .popup-home .span4 {
   position: relative;
   overflow: hidden;
-}
-@media (min-width: 1200px) {
-  .popup-home .span4 {
-    margin-top: 2.564102564102564%;
-  }
+  height: 100%;
 }
 .popup-home section {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 100%;
   padding: 15px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.popup-home section > .row-fluid {
+  margin-top: 15px;
+  height: 30%;
 }
 .popup-home .header {
   overflow: hidden;
@@ -241,6 +266,8 @@ i.icon {
 }
 .popup-home .profile {
   display: block;
+  height: 100%;
+  width: 100%;
 }
 .popup-home .profile img {
   display: block;
@@ -316,9 +343,7 @@ header h1 {
   top: 80px;
   bottom: 50px;
   /*margin-top: 80px; */
-
   /*margin-bottom: 60px;*/
-
 }
 #footer {
   position: absolute;
@@ -374,11 +399,9 @@ ul.row-footer a {
   position: absolute;
   top: 65px;
   /* header + search-bar */
-
   bottom: 0;
   z-index: 900;
   /* above map */
-
   min-width: 389px;
 }
 #detail-container-content,
@@ -686,6 +709,7 @@ header #lang-switch {
   float: left;
   background-color: rgba(255, 255, 255, 0.5);
   margin-top: 6px;
+  display: none;
 }
 @media (max-width: 1540px) {
   #advanced-filters {
@@ -1845,9 +1869,9 @@ a.accordion-toggle .name {
   #flatpages ul li a {
     color: #333 !important;
     background: none !important;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
     border: none;
     font-weight: normal !important;
     text-shadow: none !important;
@@ -2159,9 +2183,6 @@ a.accordion-toggle .name {
   #detailmap {
     display: none;
   }
-}
-@media (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
-  
 }
 /* ==========================================================================
    Helper classes

@@ -1,15 +1,32 @@
 .popup-home {
 	width: 80%;
-	height: 86%;
-	margin-left: -40%;
 	overflow: hidden;
+	top: 5%;
+	bottom: 5%;
+	left: 10%;
+	right: 10%;
+	margin-left: 0;
 
 	@media (max-width: @screen-sm) {
-		display: none;
+		display: none!important;
 	}
 
-	&.modal.fade.in {
-		top: 7%;
+	@media (min-width: 950px) {
+		width: 900px;
+		height: 500px;
+		margin-left: -450px;
+		margin-top: -250px;
+		left: 50%;
+		right: auto;
+	}
+
+	&.modal.fade.in,
+	&.modal.fade {
+		top: 5%;
+
+		@media (min-width: 950px) {
+			top: 50%;
+		}
 	}
 
 	@media (max-width: @screen-sm) {
@@ -33,14 +50,20 @@
 	.span4 {
 		position: relative;
 		overflow: hidden;
-
-		@media (min-width: 1200px) {
-			margin-top: 2.564102564102564%;
-		}
+		height: 100%;
 	}
 
 	section {
+		.box-sizing(border-box);
+		height: 100%;
 		padding: 15px;
+		max-width: 1200px;
+		margin: 0 auto;
+
+		> .row-fluid {
+			margin-top: 15px;
+			height: 30%;
+		}
 	}
 
 	.header {
@@ -59,6 +82,8 @@
 
 	.profile {
 		display: block;
+		height: 100%;
+		width: 100%;
 
 		img {
 			display: block;
@@ -87,5 +112,11 @@
 
 	.links {
 		margin-top: 15px;
+	}
+}
+
+.modal-backdrop {
+	@media (max-width: @screen-sm) {
+		display: none!important;
 	}
 }
