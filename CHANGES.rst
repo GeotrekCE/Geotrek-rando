@@ -10,6 +10,7 @@ CHANGELOG
 * Fix trek layer not filtered if state passed through URL (fixes #53)
 * Reset map extent on filter reset (fixes #29)
 * Crop difficulty labels that wrap if too long (fixes #58)
+* Hide advanced filters, then show them in JS (fixes #61)
 
 **New features**
 
