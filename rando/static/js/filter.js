@@ -83,18 +83,21 @@ function TrekFilter()
             }
             catch (err) {}
         }
+
+        state = state || {};
+        state.sliders = state.sliders || {};
+        state.sliders.time = state.sliders.time || {};
+        state.sliders.stage = state.sliders.stage || {};
+        state.sliders.den = state.sliders.den || {};
+
         return state;
     };
 
     this.load = function () {
         self.state = this.__loadState();
 
-        if (!self.state) self.state = {};
-        if (!('sliders' in self.state)) {
-           self.state['sliders'] = {'time':{}, 'stage':{}, 'den':{}};
-        }
-
         $('#search').val(self.state.search || '');
+
         for (var category in self.state) {
             for (var filter in self.state[category]) {
                 if (filter == 'undefined' || filter === '')

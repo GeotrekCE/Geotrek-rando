@@ -76,7 +76,7 @@
             <!-- <div class="navbar-inner"> -->
               <!-- <div class="container">
                 <div class="nav-collapse"> -->
-                <a href="{% locale_url request.LANGUAGE_CODE trekking:home %}"><h1>{{ TITLE }}</h1></a>
+                <a href="{% locale_url request.LANGUAGE_CODE trekking:home %}#results"><h1>{{ TITLE }}</h1></a>
                 <!-- </div> -->
               <!-- </div> -->
 
@@ -106,7 +106,7 @@
         {# footer here to allow admin JS injection #}
         <footer id="footer" class="footer">
             <div class="wrapper">
-                {% fileinclude "footer.html" %}
+                {% fileinclude FOOTER_FILENAME request.LANGUAGE_CODE %}
             </div>
         </footer>
 
@@ -137,6 +137,9 @@
         <script src="{% static "js/filter.js" %}"></script>
         <script src="{% static "js/backpack.js" %}"></script>
         <script src="{% static "js/map.js" %}"></script>
+        {% if POPUP_HOME_ENABLED %}
+        <script src="{% static "js/popup.js" %}"></script>
+        {% endif %}
         {% endcompress %}
         <script type="text/javascript" src="{% locale_url request.LANGUAGE_CODE jsi18n %}"></script>
 
@@ -178,12 +181,25 @@
             });
         </script>
 
-        <div id="popup-home" class="popup-home modal fade in" tabindex="-1" role="dialog" aria-labelledby="popup-view3d" aria-hidden="true">
+        {% if POPUP_HOME_ENABLED %}
+        <div id="popup-home" class="popup-home modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="popup-view3d" aria-hidden="true">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <div class="modal-body">
-                {% fileinclude "popup_home.html" %}
+              <div id="lang-switch">
+                <ul>
+                  {% for lang, name in settings.languages.available.items %}
+                    <li class="{% if lang == request.LANGUAGE_CODE %}active{% endif %}"><a href="{% locale_url lang trekking:home %}"><span class="hidden">{{ lang }}</span>
+                        <img src="{% get_static_prefix %}ico/flags/{{ lang }}.png" alt="{{ lang }}"></a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+              <div id="popup-body">
+                {% fileinclude POPUP_FILENAME request.LANGUAGE_CODE %}
+              </div>
             </div>
         </div>
+        {% endif %}
 
         <div id="popup-view3d" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="popup-view3d" aria-hidden="true">
             <div class="modal-body">

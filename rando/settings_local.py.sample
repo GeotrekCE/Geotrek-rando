@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# -*- coding: utf8 -*- 
+# -*- coding: utf8 -*-
 
 #--------------------------------------
-# Edit configuration 
+# Edit configuration
 #
 
 GEOTREK_SERVER = 'geobi.makina-corpus.net/geotrek'
@@ -21,6 +21,7 @@ DESCRIPTION = {
 
 GANALYTICS_TRACKING_CODE = 'UA-XXXXXXXX-XX'
 
+POPUP_HOME_ENABLED = False
 PRINT_ENABLED = True
 VIEW3D_ENABLED = True
 

@@ -29,6 +29,13 @@ CHANGELOG
   through ``TREK_LAYER_OPTIONS.clusterOptions`` (ref #32)
 * Show flag on trek departure (ref #32)
 * Show label on trek departure (ref #32)
+* Footer content can now be translated using a file per language (see README)
+* A popup can now be shown when landing on home (see README, fixes #31)
+* Mobile : show print button to download pdf (fixes #28)
+* Hide advanced filters, then show them in JS (ref #61)
+* Filters tooltips now appended on body element (fixes #60)
+* Filters label now have a fixed height (fixes #62)
+* Add home popup (see README, fixes #31)
 
 
 1.24 (2013-08-27)

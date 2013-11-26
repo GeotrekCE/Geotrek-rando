@@ -1,6 +1,5 @@
 import os
 import logging
-from datetime import datetime, timedelta
 
 from django import template
 from django.conf import settings
@@ -12,12 +11,16 @@ register = template.Library()
 
 
 @register.simple_tag
-def fileinclude(filename):
+def fileinclude(filename, language):
     try:
-        path = os.path.join(settings.MEDIA_ROOT, filename)
+        path = os.path.join(settings.MEDIA_ROOT, 'pages', language, filename)
         return open(path, 'r').read()
     except IOError as e:
-        logger.error(e)
+        try:
+            path = os.path.join(settings.MEDIA_ROOT, filename)
+            return open(path, 'r').read()
+        except IOError as e:
+            logger.error(e)
     return _('Empty')
 
 

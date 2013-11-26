@@ -145,6 +145,7 @@ i.icon {
 .popover {
   z-index: 9999;
   /* Above map, above everything ! */
+
 }
 .label,
 .badge {
@@ -243,6 +244,7 @@ i.icon {
 }
 .popup-home .profile img {
   display: block;
+  width: 100%;
   -webkit-transition: all 400ms;
   -moz-transition: all 400ms;
   -o-transition: all 400ms;
@@ -314,7 +316,9 @@ header h1 {
   top: 80px;
   bottom: 50px;
   /*margin-top: 80px; */
+
   /*margin-bottom: 60px;*/
+
 }
 #footer {
   position: absolute;
@@ -370,9 +374,11 @@ ul.row-footer a {
   position: absolute;
   top: 65px;
   /* header + search-bar */
+
   bottom: 0;
   z-index: 900;
   /* above map */
+
   min-width: 389px;
 }
 #detail-container-content,
@@ -474,9 +480,15 @@ ul.social-buttons li {
 }
 #lang-switch {
   position: absolute;
+  text-align: right;
+}
+header #lang-switch {
   top: 5px;
   right: 9px;
-  text-align: right;
+}
+#popup-home #lang-switch {
+  top: 14px;
+  right: 30px;
 }
 #lang-switch a.utils {
   color: black;
@@ -1835,9 +1847,9 @@ a.accordion-toggle .name {
   #flatpages ul li a {
     color: #333 !important;
     background: none !important;
-    -webkit-box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    box-shadow: none !important;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
     border: none;
     font-weight: normal !important;
     text-shadow: none !important;
@@ -2149,6 +2161,9 @@ a.accordion-toggle .name {
   #detailmap {
     display: none;
   }
+}
+@media (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
+  
 }
 /* ==========================================================================
    Helper classes

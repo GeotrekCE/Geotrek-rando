@@ -10,7 +10,7 @@
             {% if trek %}
               <a href="{% locale_url lang trekking:redirect pk=object.properties.pk %}">
             {% else %}
-              <a href="/{{ lang }}">
+              <a href="{% locale_url lang trekking:home %}">
             {% endif %}
             <span class="hidden">{{ lang }}</span>
             <img src="{% get_static_prefix %}ico/flags/{{ lang }}.png" alt="{{ lang }}"></a>

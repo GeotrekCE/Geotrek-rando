@@ -45,9 +45,11 @@ var TrekLayer = L.ObjectsLayer.extend({
         on = on === undefined ? true : on;
         if (!layer) return;
         if (!this._map) return;
+        var isNotClustered = layer.marker._icon;
         if (on) {
             if (layer.iconified) {
-                L.DomUtil.addClass(layer.marker._icon, 'highlight');
+                if (isNotClustered)
+                    L.DomUtil.addClass(layer.marker._icon, 'highlight');
                 return;
             }
 
@@ -71,7 +73,8 @@ var TrekLayer = L.ObjectsLayer.extend({
         }
         else {
             if (layer.iconified) {
-                L.DomUtil.removeClass(layer.marker._icon, 'highlight');
+                if (isNotClustered)
+                    L.DomUtil.removeClass(layer.marker._icon, 'highlight');
             }
             else {
                 if (this._hover) this._map.removeLayer(this._hover);
