@@ -238,7 +238,7 @@ var POILayer = L.MarkerClusterGroup.extend({
         // Label
         var category = featureData.properties.type.label,
             name = featureData.properties.name,
-            poiLabel = category + ': ' + name;
+            poiLabel = category + '&nbsp;: ' + name;
         if (name.indexOf(category) === 0) {  // startswith
             poiLabel = name;
         }
