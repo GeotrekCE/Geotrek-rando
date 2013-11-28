@@ -559,10 +559,10 @@ function detailmapInit(map, bounds) {
             arrivalLabel = gettext("Arrival");
 
         if (!/^\s*$/.test(window.trek.properties.departure)) {
-            departureLabel += (": " + window.trek.properties.departure);
+            departureLabel += ("&nbsp;: " + window.trek.properties.departure);
         }
         if (!/^\s*$/.test(window.trek.properties.arrival)) {
-            arrivalLabel += (": " + window.trek.properties.arrival);
+            arrivalLabel += ("&nbsp;: " + window.trek.properties.arrival);
         }
 
         L.marker(layer.getLatLngs()[0],
