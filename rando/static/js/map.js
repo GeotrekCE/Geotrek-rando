@@ -442,6 +442,7 @@ function mainmapInit(map, bounds) {
 
         var popupSettings = {
             autoPan: true,
+            offset: layer.iconified ? new L.Point(2, -10) : new L.Point(2, 0) // different offset depending on iconified state
         };
 
         if(MOBILE) {
