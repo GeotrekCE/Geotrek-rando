@@ -43,15 +43,6 @@ function init_ui() {
         // Check if youre on mobile or not
         if(Modernizr.mq('only all and (max-width: 767px)')) {
             MOBILE = true;
-
-            // iOS mobile hide address bar for fullscreen trick
-            if(MBP.platform == "ios") {
-                var iOSAddressBarSize = 60; // Absolutely not future optimized, but only working solution atm
-                $('html').height($(window).height()+iOSAddressBarSize+'px');
-
-                MBP.hideUrlBar();
-            }
-
         } else {
             MOBILE = false;
         }
@@ -61,16 +52,7 @@ function init_ui() {
 
     if(Modernizr.mq('only all and (max-width: 767px)')) {
         MOBILE = true;
-
-        // iOS mobile hide address bar for fullscreen trick
-        if(MBP.platform == "ios") {
-            var iOSAddressBarSize = 60; // Absolutely not future optimized, but only working solution atm
-            $('html').height($(window).height()+iOSAddressBarSize+'px');
-        }
     }
-
-    // iOS mobile hide address bar
-    if(MBP.platform == "ios") { MBP.hideUrlBarOnLoad(); }
 }
 
 function page_load() {
