@@ -240,6 +240,9 @@ msgid "Usages"
 msgstr "Usages"
 
 #: templates/trekking/home-panel.html:87 templates/trekking/home-panel.html:88
+msgid "City"
+msgstr "Commune"
+
 msgid "Cities"
 msgstr "Communes"
 
