@@ -233,7 +233,7 @@ var POILayer = L.MarkerClusterGroup.extend({
                                     iconAnchor: [12, 12],
                                     labelAnchor: [12, 2],
                                     html: img}),
-            marker = L.marker(latlng, {icon: poicon});
+            marker = L.marker(latlng, {icon: poicon, riseOnHover: true});
 
         // Label
         var category = featureData.properties.type.label,
@@ -571,7 +571,8 @@ function detailmapInit(map, bounds) {
                                 iconSize: [64, 64],
                                 iconAnchor: [32, 64],
                                 labelAnchor: [-3, -50]
-                 })})
+                 }),
+                 riseOnHover: true})
           .bindLabel(arrivalLabel, {className: 'arrival'})
           .addTo(map);
         L.marker(layer.getLatLngs()[0],
@@ -580,8 +581,8 @@ function detailmapInit(map, bounds) {
                                 iconSize: [64, 64],
                                 iconAnchor: [32, 64],
                                 labelAnchor: [20, -50]
-                    })
-                 })
+                    }),
+                  riseOnHover: true})
           .bindLabel(departureLabel, {className: 'departure'})
           .addTo(map);
     });
@@ -618,7 +619,7 @@ function detailmapInit(map, bounds) {
     var parkingLocation = trek.properties.parking_location;
     if (parkingLocation) {
         var pos = L.latLng([parkingLocation[1], parkingLocation[0]]);
-        L.marker(pos, {icon: parkingIcon})
+        L.marker(pos, {icon: parkingIcon, riseOnHover: true})
          .bindLabel(trek.properties.advised_parking || gettext("Recommended parking"), {className: 'parking'})
          .addTo(map);
         wholeBounds.extend(pos);
