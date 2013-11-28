@@ -323,6 +323,7 @@ ul.row-footer {
   position:absolute;
   top: 0;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 #mainmap {
@@ -357,7 +358,8 @@ ul.row-footer {
 /* Top navigation */
 
 #flatpages {
-  position: fixed;
+  position: absolute;
+  display: none;
   top: 24px;
   right: 150px;
   z-index: 1031;
@@ -368,6 +370,10 @@ ul.row-footer {
     li {
       display: inline-block;
     }
+  }
+
+  header & {
+    display: block;
   }
 
   .btn {

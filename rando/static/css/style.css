@@ -308,6 +308,11 @@ i.icon {
 .popup-home .links {
   margin-top: 15px;
 }
+@media (max-width: 767px) {
+  .modal-backdrop {
+    display: none!important;
+  }
+}
 /* Layout */
 header {
   position: absolute;
@@ -379,6 +384,7 @@ ul.row-footer a {
   position: absolute;
   top: 0;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 #mainmap {
   position: absolute;
@@ -412,7 +418,8 @@ ul.row-footer a {
 }
 /* Top navigation */
 #flatpages {
-  position: fixed;
+  position: absolute;
+  display: none;
   top: 24px;
   right: 150px;
   z-index: 1031;
@@ -422,6 +429,9 @@ ul.row-footer a {
 }
 #flatpages ul li {
   display: inline-block;
+}
+header #flatpages {
+  display: block;
 }
 #flatpages .btn {
   -webkit-transition: background 100ms;
@@ -1172,9 +1182,6 @@ p.tab-content-empty {
   color: #5db9d6;
   text-decoration: underline;
 }
-#mainmap .leaflet-popup-tip {
-  background: #f6f7f0;
-}
 .leaflet-popup-content {
   margin: 14px 16px;
 }
@@ -1867,7 +1874,7 @@ a.accordion-toggle .name {
     display: block;
     border-bottom: 1px solid #CCC;
   }
-  #flatpages ul li a {
+  #flatpages ul li .btn {
     color: #333 !important;
     background: none !important;
     -webkit-box-shadow: none !important;
@@ -1884,12 +1891,15 @@ a.accordion-toggle .name {
     font-family: sans-serif-light, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 100;
   }
-  #flatpages ul li a:hover {
+  #flatpages ul li .btn:hover {
     background-color: transparent;
   }
-  #flatpages ul li a:active,
-  #flatpages ul li a.active {
+  #flatpages ul li .btn:active,
+  #flatpages ul li .btn.active {
     background-color: white;
+  }
+  #flatpages ul li.home {
+    display: none;
   }
   #toggle-header-mobile {
     display: block;
@@ -2075,6 +2085,9 @@ a.accordion-toggle .name {
     right: 10px;
     top: 50%;
     margin-top: -16px;
+  }
+  .leaflet-label {
+    display: none;
   }
   /* Details page */
   #mobile-header-detail {
