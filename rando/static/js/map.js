@@ -565,6 +565,15 @@ function detailmapInit(map, bounds) {
             arrivalLabel += ("&nbsp;: " + window.trek.properties.arrival);
         }
 
+        L.marker(layer.getLatLngs().slice(-1)[0],
+                 {icon: new L.Icon({
+                                iconUrl: IMG_URL + '/marker-target.png',
+                                iconSize: [64, 64],
+                                iconAnchor: [32, 64],
+                                labelAnchor: [-3, -50]
+                 })})
+          .bindLabel(arrivalLabel, {className: 'arrival'})
+          .addTo(map);
         L.marker(layer.getLatLngs()[0],
                  {icon: new L.Icon({
                                 iconUrl: IMG_URL + '/marker-source.png',
@@ -574,15 +583,6 @@ function detailmapInit(map, bounds) {
                     })
                  })
           .bindLabel(departureLabel, {className: 'departure'})
-          .addTo(map);
-        L.marker(layer.getLatLngs().slice(-1)[0],
-                 {icon: new L.Icon({
-                                iconUrl: IMG_URL + '/marker-target.png',
-                                iconSize: [64, 64],
-                                iconAnchor: [32, 64],
-                                labelAnchor: [-3, -50]
-                 })})
-          .bindLabel(arrivalLabel, {className: 'arrival'})
           .addTo(map);
     });
 
