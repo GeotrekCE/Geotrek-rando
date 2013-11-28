@@ -4,7 +4,7 @@
 <div id="flatpages" class="reattach" data-destination="header">
     <ul>
         {% if POPUP_HOME_ENABLED %}
-        <li><a class="btn" data-toggle="modal" data-target="#popup-home" href="{% locale_url request.LANGUAGE_CODE trekking:home %}" title="{% trans "Home" %}">
+        <li class="home"><a class="btn" data-toggle="modal" data-target="#popup-home" href="{% locale_url request.LANGUAGE_CODE trekking:home %}" title="{% trans "Home" %}">
             <i class="icon-home icon-white"></i>
             </a>
         </li>
