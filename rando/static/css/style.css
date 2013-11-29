@@ -386,6 +386,10 @@ ul.row-footer a {
   text-decoration: none;
 }
 #content {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
