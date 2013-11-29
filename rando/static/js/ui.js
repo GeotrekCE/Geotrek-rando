@@ -144,6 +144,10 @@ function view_home() {
     if (/results|backpack/.test(window.location.hash)) {
         $('#tab-' + window.location.hash.slice(1) + ' a').click();
     }
+    // Focus search field
+    if (/search/.test(window.location.hash)) {
+        $('input#search').focus();
+    }
 
     $('#toggle-side-bar').off('click').on('click', function () {
         if (!$(this).hasClass('closed')) {
