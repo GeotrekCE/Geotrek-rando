@@ -3,7 +3,8 @@ $(document).ready(function (e) {
     var $modal = $('#popup-home').modal({show: false});
 
     // Links not leaving page
-    $("#popup-home #popup-body a:not([href^='http'])").click(function () {
+    $("#popup-home #popup-body a:not([href^='http'])").click(function (e) {
+        e.preventDefault();
         $modal.modal('hide');
         setTimeout(function () {
             window.trekFilter.load();
@@ -13,6 +14,8 @@ $(document).ready(function (e) {
     $("#popup-home #popup-body a[href^='http']").click(rememberMe);
     // Popup close
     $modal.on('hidden', rememberMe);
+    // Search link
+    $("#popup-home #popup-body a[href^='#search']").click(function () { $('#search').focus() });
 
     enhanceTrekPreviews();
 
