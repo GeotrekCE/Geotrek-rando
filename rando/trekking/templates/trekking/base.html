@@ -161,7 +161,7 @@
                 view3d_url = "{% locale_url request.LANGUAGE_CODE trekking:view3d "empty" %}",
                 treks = {{ treksjson|safe }},
                 IMG_URL = "{% static "img" %}",
-                MOBILE = true;  // Will be set in ui.js
+                MOBILE = Modernizr.mq('only all and (max-width: 767px)') ? true : false;
 
             // Default Google Analytics in case Do-Not-Track is set
             window._gaq = window._gaq || [];

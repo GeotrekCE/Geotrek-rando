@@ -49,10 +49,6 @@ function init_ui() {
 
         invalidate_maps();
     });
-
-    if(Modernizr.mq('only all and (max-width: 767px)')) {
-        MOBILE = true;
-    }
 }
 
 function page_load() {
