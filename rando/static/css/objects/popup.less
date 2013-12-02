@@ -1,11 +1,10 @@
 .popup-home {
-	width: 80%;
 	overflow: hidden;
-	top: 5%;
-	bottom: 5%;
-	left: 10%;
-	right: 10%;
-	margin-left: 0;
+	height: 576px;
+	width: 726px;
+	margin-left: -363px;
+	margin-top: -288px;
+	left: 50%;
 
 	@media (max-width: @screen-sm) {
 		display: none!important;
@@ -22,16 +21,7 @@
 
 	&.modal.fade.in,
 	&.modal.fade {
-		top: 5%;
-
-		@media (min-width: 950px) {
-			top: 50%;
-		}
-	}
-
-	@media (max-width: @screen-sm) {
-		width: 100%;
-		margin-left: 0;
+		top: 50%;
 	}
 
 	.modal-body {

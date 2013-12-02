@@ -317,11 +317,10 @@ ul.row-footer {
   }
 }
 
-#content {
-  width:100%;
-  height: 100%;
+.detail-content {
   position:absolute;
   top: 0;
+  bottom: 0;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -1066,6 +1065,7 @@ p.tab-content-empty {
  border-right: 1px solid #dbdcd7;
  padding-top: 1px;
  background-color: white;
+ -webkit-overflow-scrolling: touch;
 }
 
 #result-backpack-tabs ul.nav {
@@ -2420,6 +2420,10 @@ a.accordion-toggle  {
     }
   }
 
+  #detailmap {
+    min-height: 0;
+  }
+
 
   /* Hidden elements */
   #global-share,
@@ -2433,8 +2437,7 @@ a.accordion-toggle  {
   #tab-results,
   #side-bar .illust,
   .touch .leaflet-control-container,
-  #fake-search-tabs,
-  #detailmap {
+  #fake-search-tabs {
     display: none;
   }
 }
