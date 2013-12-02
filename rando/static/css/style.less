@@ -536,17 +536,40 @@ ul.social-buttons li {
 *
 */
 .slider-value {
-  float:left; font-size: 7pt;
+  display: inline-block;
+  font-size: 7pt;
   text-align: center;
   max-height: 20px;
-  overflow: hidden;
+  position: relative;
+
+  &:before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 8px;
+    background: rgb(243, 242, 242);
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    z-index: 1;
+    pointer-events: none;
+  }
 
   &.first {
-   text-align: left;
+    margin-left: -15%;
+    text-align: right;
+    
+    &:before {
+      display: none;
+    }
   }
 
   &.last {
-   text-align: right;
+    text-align: left;
+
+    &:before {
+      display: none;
+    }
   }
 }
 
@@ -594,6 +617,7 @@ ul.social-buttons li {
   margin-right: 25px;
   margin-left: 0;
   min-height: 56px;
+  white-space: nowrap;
 }
 
 .stage
@@ -601,7 +625,7 @@ ul.social-buttons li {
   float:left;
 
   .slider-value {
-    width: 25%;
+    width: 30%;
   }
 
   .slider-wrap {
@@ -618,7 +642,7 @@ ul.social-buttons li {
   float:left;
 
   .slider-value {
-    width: 33%;
+    width: 42%;
   }
 
   .slider-wrap {
@@ -635,7 +659,7 @@ ul.social-buttons li {
   float:left;
 
   .slider-value {
-    width: 25%;
+    width: 31%;
   }
 
   .slider-wrap {
