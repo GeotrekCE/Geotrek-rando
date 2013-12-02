@@ -359,8 +359,9 @@ Main behaviour of home popup :
 
 * Shown on first visit only (tracked using *LocalStorage*)
 * Shown when landing on home only (no permalink, saved-search or trek detail)
+* Not shown on mobile (since filters are not shown either)
 
-In order to add a trek section, add a ``data-trek`` attribute with ``random``
+In order to add a *random* trek section, add a ``data-trek`` attribute with ``random``
 value or trek *id* for specific trek. Markup example :
 
 ::
@@ -371,6 +372,8 @@ value or trek *id* for specific trek. Markup example :
         </a>
     </div>
 
+Illustration images are better viewed if they have the same aspect ratio
+as trek illustrations.
 
 ===============
 TROUBLESHOOTING
