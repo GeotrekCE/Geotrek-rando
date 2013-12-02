@@ -11,6 +11,7 @@ CHANGELOG
 * Reset map extent on filter reset (fixes #29)
 * Crop difficulty labels that wrap if too long (fixes #58)
 * Hide advanced filters, then show them in JS (fixes #61)
+* Fix a z-index bug on iOS Safari
 
 **New features**
 
@@ -37,7 +38,8 @@ CHANGELOG
 * Filters tooltips now appended on body element (fixes #60)
 * Filters label now have a fixed height (fixes #62)
 * Add home popup (see README, fixes #31)
-
+* Enable smooth scroll on mobile
+* Show static map image in detail page on mobile
 
 1.24 (2013-08-27)
 -----------------
