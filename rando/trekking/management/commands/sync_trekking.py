@@ -207,13 +207,18 @@ class TrekListInputFile(InputFile):
         features = []
         for feature in content['features']:
             properties = feature['properties']
+            pk = properties.get('pk', -1)
 
             # Ignore treks that are not published
             if not properties.get('published', False):
-                logger.debug('Trek %s is not published.' % properties.get('pk', -1))
+                logger.debug('Trek %s is not published.' % pk)
                 continue
 
-            pk = properties['pk']
+            # Ignore treks that are not linestring
+            if feature['geometry']['type'].lower() != 'linestring':
+                logger.debug('Trek %s is not linestring.' % pk)
+                continue
+
             # Fill with detail properties
             detailpath = models.Trek.detailpath.format(pk=pk)
             detailfile = TrekInputFile(detailpath, **self.initkwargs)

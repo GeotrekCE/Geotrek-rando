@@ -9,6 +9,7 @@ CHANGELOG
 **BUG fixes**
 
 * Fix regression about gray icons theme missing
+* Prevent massive SVG elements by filtering multilinestring treks (fixes #71)
 
 **Internal changes**
 

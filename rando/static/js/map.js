@@ -24,11 +24,9 @@ function invalidate_maps() {
 var TrekLayer = L.ObjectsLayer.extend({
 
     initialize: function (geojson) {
-        var options = $.extend({
-                highlight: true
-            },
-            TREK_LAYER_OPTIONS
-        );
+        var options = L.Util.extend(TREK_LAYER_OPTIONS, {
+            highlight: true
+        });
         L.ObjectsLayer.prototype.initialize.call(this, geojson, options);
 
         var clusterOptions = L.Util.extend(TREK_LAYER_OPTIONS.clusterOptions, {
@@ -45,7 +43,7 @@ var TrekLayer = L.ObjectsLayer.extend({
         on = on === undefined ? true : on;
         if (!layer) return;
         if (!this._map) return;
-        var isNotClustered = layer.marker._icon;
+        var isNotClustered = layer.marker && layer.marker._icon;
         if (on) {
             if (layer.iconified) {
                 if (isNotClustered)
@@ -53,16 +51,11 @@ var TrekLayer = L.ObjectsLayer.extend({
                 return;
             }
 
-            if (layer instanceof L.Polyline) {
-                this._hover = new L.Polyline(layer.getLatLngs());
-            }
-            else if (layer instanceof L.MultiPolyline) {
-                var coords = [];
-                layer.eachLayer(function (l) { coords.push(l.getLatLngs()); });
-                this._hover = new L.MultiPolyline(coords);
-            }
-            this._hover.setStyle(TREK_LAYER_OPTIONS.outlinestyle);
-            this._hover.addTo(this._map).bringToBack();
+            this._hover = new L.Polyline(layer.getLatLngs(), {
+                style: TREK_LAYER_OPTIONS.outlinestyle
+            })
+            .addTo(this._map).bringToBack();
+
             // Pop on top
             layer.setStyle(TREK_LAYER_OPTIONS.hoverstyle);
             // See https://groups.google.com/forum/#!topic/d3-js/OqD9_puVTfg
@@ -130,9 +123,6 @@ var TrekLayer = L.ObjectsLayer.extend({
             var l = this._objects[k];
             l.iconified = iconified;
 
-            if (!(l instanceof L.Polyline))
-                return;  // Safety check.
-
             var departure = l.getLatLngs()[0],
                 name = l.properties.name;
 
@@ -143,12 +133,11 @@ var TrekLayer = L.ObjectsLayer.extend({
             }
             l.marker = this._getTrekMarker(departure, name, iconified);
             l.marker.trek = l;
-            l.marker.on('click mouseover mouseout', function (e) {
-                this.fire(e.type, L.Util.extend({layer: e.target.trek}, e));
-            }, this);
+            l.marker.on('click mouseover mouseout', propagate_mouse_event, this);
 
-            if (this._current_objects[k] === undefined)
-                continue;
+            if (this._current_objects[k] === undefined) {
+                continue;  // Skip currently filtered
+            }
 
             if (iconified) {
                 // Clean-up possible highlight
@@ -164,6 +153,11 @@ var TrekLayer = L.ObjectsLayer.extend({
                 // Not iconified : add departure flag to map
                 this._map.addLayer(l.marker);
             }
+        }
+
+
+        function propagate_mouse_event(e) {
+            this.fire(e.type, L.Util.extend({layer: e.target.trek}, e));
         }
     },
 
