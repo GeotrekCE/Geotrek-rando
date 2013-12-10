@@ -51,10 +51,9 @@ var TrekLayer = L.ObjectsLayer.extend({
                 return;
             }
 
-            this._hover = new L.Polyline(layer.getLatLngs(), {
-                style: TREK_LAYER_OPTIONS.outlinestyle
-            })
-            .addTo(this._map).bringToBack();
+            this._hover = new L.Polyline(layer.getLatLngs());
+            this._hover.setStyle(TREK_LAYER_OPTIONS.outlinestyle);
+            this._hover.addTo(this._map).bringToBack();
 
             // Pop on top
             layer.setStyle(TREK_LAYER_OPTIONS.hoverstyle);
