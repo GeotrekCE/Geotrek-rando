@@ -6,6 +6,10 @@ CHANGELOG
 1.26 (unreleased)
 -----------------
 
+**BUG fixes**
+
+* Fix regression about gray icons theme missing
+
 **Internal changes**
 
 * Specify user-agent header for Geotrek API calls
