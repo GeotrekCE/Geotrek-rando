@@ -2,6 +2,15 @@
 CHANGELOG
 =========
 
+
+1.26 (unreleased)
+-----------------
+
+**Internal changes**
+
+* Specify user-agent header for Geotrek API calls
+
+
 1.25 (2013-12-02)
 -----------------
 

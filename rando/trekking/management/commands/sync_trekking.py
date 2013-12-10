@@ -16,6 +16,7 @@ from django.conf import settings
 import requests
 from termcolor import cprint
 
+from rando import __version__
 from rando.trekking import models
 
 
@@ -103,7 +104,7 @@ class InputFile(object):
 
         Set 'if-modified-since' HTTP request header to reduce bandwidth.
         """
-        headers = {}
+        headers = {'User-Agent': 'geotrek-rando/%s' % __version__}
         if self.language:
             cprint('/' + self.language, 'cyan', end='', file=self.stdout)
             headers.update({'Accept-language': self.language})
