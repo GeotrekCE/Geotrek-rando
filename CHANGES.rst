@@ -13,6 +13,7 @@ CHANGELOG
 
 **Internal changes**
 
+* Upgraded to Leaflet 0.7.1 (fixes #72)
 * Specify user-agent header for Geotrek API calls
 
 
