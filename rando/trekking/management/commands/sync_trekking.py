@@ -145,6 +145,16 @@ class InputFile(object):
             return open(self.path, 'rb').read()
         return self.reply.content
 
+    def serialize_json(self, data):
+        backup_encoder = json.encoder.c_make_encoder
+        backup_repr = json.encoder.FLOAT_REPR
+        json.encoder.c_make_encoder = None
+        json.encoder.FLOAT_REPR = lambda o: format(o, '.%sf' % settings.COORDS_FORMAT_PRECISION)
+        serialized = json.dumps(data)
+        json.encoder.FLOAT_REPR = backup_repr
+        json.encoder.c_make_encoder = backup_encoder
+        return serialized
+
 
 class POIsInputFile(InputFile):
 
@@ -164,7 +174,7 @@ class POIsInputFile(InputFile):
             feature['properties'] = properties
             features.append(feature)
         content['features'] = features
-        return json.dumps(content)
+        return self.serialize_json(content)
 
 
 class TrekInputFile(InputFile):
@@ -190,7 +200,7 @@ class TrekInputFile(InputFile):
         content['relationships_departure'] = [r for r in content['relationships'] if r['has_common_departure']]
         content['relationships_edge'] = [r for r in content['relationships'] if r['has_common_edge']]
         content['relationships_circuit'] = [r for r in content['relationships'] if r['is_circuit_step']]
-        return json.dumps(content)
+        return self.serialize_json(content)
 
 
 class TrekListInputFile(InputFile):
@@ -244,7 +254,7 @@ class TrekListInputFile(InputFile):
             features.append(feature)
 
         content['features'] = features
-        return json.dumps(content)
+        return self.serialize_json(content)
 
 
 class SyncSession(object):

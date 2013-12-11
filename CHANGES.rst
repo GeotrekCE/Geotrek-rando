@@ -15,6 +15,7 @@ CHANGELOG
 
 * Upgraded to Leaflet 0.7.1 (fixes #72)
 * Specify user-agent header for Geotrek API calls
+* Reduced page size by reducing float precision (ref #72, #38)
 
 
 1.25 (2013-12-02)
