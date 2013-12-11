@@ -216,7 +216,8 @@ class TrekListInputFile(InputFile):
 
             # Ignore treks that are not linestring
             if feature['geometry']['type'].lower() != 'linestring':
-                logger.debug('Trek %s is not linestring.' % pk)
+                msg = 'Trek %s was ignored (not linestring).' % pk
+                cprint(msg, 'red', attrs=['bold'], file=self.stderr)
                 continue
 
             # Fill with detail properties
