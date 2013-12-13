@@ -1,5 +1,11 @@
 **Geotrek rando**, public portal of *Geotrek*.
 
+Demo instances :
+
+* `Development <http://rando.makina-corpus.net>`_
+* `Parc National des Écrins <http://rando.ecrins-parcnational.fr>`_
+* `Parc National du Mercantour - Parco delle Alpi Marittime <http://rando.mercantour.eu>`_
+
 
 =====
 SETUP
