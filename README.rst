@@ -366,6 +366,7 @@ In order to add a *random* trek section, add a ``data-trek`` attribute with ``ra
 value or trek *id* for specific trek. Markup example :
 
 ::
+
     <div class="span4" data-trek="random">
         <a class="pjax profile">
             <img class="preview">
