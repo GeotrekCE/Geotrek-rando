@@ -357,6 +357,11 @@ header h1 {
   background-color: #f0f2ed;
   color: #fff;
 }
+#footer .wrapper {
+  background: url(../img/makina.png) no-repeat;
+  background-position-x: 50%;
+  background-position-y: 5px;
+}
 #footer li {
   display: inline;
   height: 100%;
