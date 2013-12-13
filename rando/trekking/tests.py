@@ -1,8 +1,13 @@
 import shutil
 import os
 
-from django.test import SimpleTestCase
+from mock import patch
 
+from django.test import SimpleTestCase
+from django.conf import settings
+
+
+from .templatetags.trekking_tags import overridable
 from .management.commands.sync_trekking import mkdir_p
 
 
@@ -24,3 +29,17 @@ class MkdirTest(SimpleTestCase):
     def test_remove(self):
 
         shutil.rmtree(self.path.split('/', 1)[0])
+
+
+class OverridableStaticTest(SimpleTestCase):
+    def test_return_static_if_missing(self):
+        original = "img/favicon.png"
+        overridden = overridable(original)
+        self.assertEqual(overridden, "%s%s" % (settings.STATIC_URL, original))
+
+    def test_return_(self):
+        original = "img/favicon.png"
+        with patch.object(os.path, 'exists') as mock_method:
+            mock_method.return_value = True
+            overridden = overridable(original)
+        self.assertEqual(overridden, "%s%s" % (settings.MEDIA_URL, original))
