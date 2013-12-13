@@ -1519,8 +1519,9 @@ p.teaser {
   color: black;
 }
 #park-center-warning {
-  background-image: url(../img/pn-logo.png);
+  background-image: url(../img/park-center.svg);
   background-repeat: no-repeat;
+  background-size: 32px;
   background-position-x: 5px;
   background-position-y: 50%;
   padding-left: 45px;
