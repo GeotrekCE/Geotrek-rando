@@ -3,6 +3,15 @@ CHANGELOG
 =========
 
 
+
+1.27 (unreleased)
+-----------------
+
+**Breaking changes**
+
+* All national park branding has been replaced by generic Geotrek material.
+  See *Customization* paragraph about images.
+
 1.26 (2013-12-11)
 -----------------
 

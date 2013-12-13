@@ -316,18 +316,15 @@ In the ``footer.html`` block :
 See `Jquery sparkline <http://omnipotent.net/jquery.sparkline>`_ options.
 
 
-Default trek thumbnail
-----------------------
+Images
+------
 
-If a trek has no pictures attached, a default thumbnail is used.
+The following images, if placed in the *media* folder, will be used instead
+of the generic material :
 
-A ``default-thumbnail.jpg`` is loaded from the *media* folder.
-
-If missing ``var/static/img/default-thumbnail.jpg`` will be used.
-
-:note:
-
-    For preview, on the detail page, by default, ``var/static/img/default-preview.jpg`` will be used.
+* ``favicon.png``
+* ``img/default-thumbnail.jpg`` (*if trek has no pictures attached*)
+* ``img/default-preview.jpg``
 
 
 Home popup
