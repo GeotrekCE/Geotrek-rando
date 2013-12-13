@@ -3,9 +3,12 @@ CHANGELOG
 =========
 
 
-
 1.27 (unreleased)
 -----------------
+
+**BUG fixes**
+
+* Fix sync failure for old python versions
 
 **Breaking changes**
 

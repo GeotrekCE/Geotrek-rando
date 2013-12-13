@@ -146,7 +146,7 @@ class InputFile(object):
         return self.reply.content
 
     def serialize_json(self, data):
-        backup_encoder = json.encoder.c_make_encoder
+        backup_encoder = getattr(json.encoder, 'c_make_encoder', None)
         backup_repr = json.encoder.FLOAT_REPR
         json.encoder.c_make_encoder = None
         json.encoder.FLOAT_REPR = lambda o: format(o, '.%sf' % settings.COORDS_FORMAT_PRECISION)
