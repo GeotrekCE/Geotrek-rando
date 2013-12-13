@@ -71,21 +71,12 @@
     </head>
     <body>
         <header>
-            <!-- <div class="navbar-inner"> -->
-              <!-- <div class="container">
-                <div class="nav-collapse"> -->
                 <a href="{% locale_url request.LANGUAGE_CODE trekking:home %}#results"><h1>{{ TITLE }}</h1></a>
-                <!-- </div> -->
-              <!-- </div> -->
 
                 <a class="btn utils" id="global-share" href="#" title="{% trans "Share" %}">
                     <i class="icon"></i>{% trans "Share" %}
-                <!-- <img src="{% static "img/share.png" %}"/> {% trans "Share" %} -->
                 </a>
-            <!-- </div> -->
-            <!--  navbar-inner-->
         </header>
-        <!-- navbar-->
 
         <div class="container-fluid" id="container-content">
             <div id="content">
