@@ -1,4 +1,5 @@
-*Geotrek public portal*
+**Geotrek rando**, public portal of *Geotrek*.
+
 
 =====
 SETUP
@@ -431,6 +432,8 @@ AUTHORS
     * Yahya Mzoughi
     * Gaël Utard
     * Mathieu Leplatre
+    * Anaïs Peyrucq
+    * Satya Azemar
 
 |makinacom|_
 
@@ -442,4 +445,21 @@ AUTHORS
 LICENSE
 =======
 
-    (c) Makina Corpus
+    * OpenSource - BSD
+    * Copyright (c) Parc National des Écrins - Parc National du Mercantour - Parco delle Alpi Marittime - Makina Corpus
+
+
+.. image:: http://depot.makina-corpus.org/public/geotrek/logo-pne.png
+    :target: http://www.ecrins-parcnational.fr
+
+
+.. image:: http://depot.makina-corpus.org/public/geotrek/logo-pnm.png
+    :target: http://www.mercantour.eu
+
+
+.. image:: http://depot.makina-corpus.org/public/geotrek/logo-pnam.png
+    :target: http://www.parcoalpimarittime.it
+
+
+.. image:: http://depot.makina-corpus.org/public/logo.gif
+    :target: http://www.makina-corpus.com
