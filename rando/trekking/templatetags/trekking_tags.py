@@ -3,6 +3,7 @@ import logging
 
 from django import template
 from django.conf import settings
+from django.templatetags.static import static
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
@@ -34,12 +35,7 @@ def thumbnail(trek):
     if trek.properties.thumbnail:
         assert trek.properties.thumbnail.startswith(settings.MEDIA_URL)
         return trek.properties.thumbnail
-    # Default, provided at deployment
-    default = os.path.join(settings.MEDIA_ROOT, 'default-thumbnail.jpg')
-    if os.path.exists(default):
-        return os.path.join(settings.MEDIA_URL, 'default-thumbnail.jpg')
-    # Default thumbnail
-    return os.path.join(settings.STATIC_URL, 'img', 'default-thumbnail.jpg')
+    return overridable("img/default-thumbnail.jpg")
 
 
 @register.filter(is_safe=True)
@@ -51,3 +47,11 @@ def pictogram(value, klass=""):
     label = value.label
     markup = '<div class="pictogram %(klass)s" data-original-title="%(label)s"><img src="%(url)s" alt="%(label)s"></div>'
     return mark_safe(markup % locals())
+
+
+@register.simple_tag
+def overridable(value):
+    overriden = os.path.join(settings.MEDIA_ROOT, value)
+    if os.path.exists(overriden):
+        return os.path.join(settings.MEDIA_URL, value)
+    return static(value)

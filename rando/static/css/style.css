@@ -314,9 +314,6 @@ header {
   height: 80px;
   width: 100%;
   z-index: 1;
-  padding: 20px;
-  background: url(../img/headermercantour.jpg) no-repeat;
-  background-size: 100% auto;
   border-bottom: 10px solid white;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -326,12 +323,12 @@ header {
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
 }
 header h1 {
-  color: #c0392b;
-  font-size: 27px;
-  font-family: 'Open sans', Arial;
-  position: absolute;
-  left: 140px;
-  top: 17px;
+  color: #f89406;
+  background: url(../img/geotrek-64.png) no-repeat;
+  background-position-y: 50%;
+  margin-left: 10px;
+  padding-left: 70px;
+  line-height: 70px;
 }
 #toggle-header-mobile {
   display: none;
@@ -359,6 +356,11 @@ header h1 {
   overflow: hidden;
   background-color: #f0f2ed;
   color: #fff;
+}
+#footer .wrapper {
+  background: url(../img/makina.png) no-repeat;
+  background-position-x: 50%;
+  background-position-y: 5px;
 }
 #footer li {
   display: inline;
@@ -1517,8 +1519,9 @@ p.teaser {
   color: black;
 }
 #park-center-warning {
-  background-image: url(../img/pn-logo.png);
+  background-image: url(../img/park-center.svg);
   background-repeat: no-repeat;
+  background-size: 32px;
   background-position-x: 5px;
   background-position-y: 50%;
   padding-left: 45px;

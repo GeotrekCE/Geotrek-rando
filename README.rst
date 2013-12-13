@@ -1,4 +1,5 @@
-*Geotrek public portal*
+**Geotrek rando**, public portal of *Geotrek*.
+
 
 =====
 SETUP
@@ -365,6 +366,7 @@ In order to add a *random* trek section, add a ``data-trek`` attribute with ``ra
 value or trek *id* for specific trek. Markup example :
 
 ::
+
     <div class="span4" data-trek="random">
         <a class="pjax profile">
             <img class="preview">
@@ -417,6 +419,13 @@ Currently, we only have two Django applications as serious dependencies :
 
 
 =======
+CREDITS
+=======
+
+* *Ecology* by Diego Naive from the Noun Project
+* *Mont Valier, Couserans*, Wikimedia by Valier
+
+=======
 AUTHORS
 =======
 
@@ -424,6 +433,8 @@ AUTHORS
     * Yahya Mzoughi
     * Gaël Utard
     * Mathieu Leplatre
+    * Anaïs Peyrucq
+    * Satya Azemar
 
 |makinacom|_
 
@@ -435,4 +446,21 @@ AUTHORS
 LICENSE
 =======
 
-    (c) Makina Corpus
+    * OpenSource - BSD
+    * Copyright (c) Parc National des Écrins - Parc National du Mercantour - Parco delle Alpi Marittime - Makina Corpus
+
+
+.. image:: http://depot.makina-corpus.org/public/geotrek/logo-pne.png
+    :target: http://www.ecrins-parcnational.fr
+
+
+.. image:: http://depot.makina-corpus.org/public/geotrek/logo-pnm.png
+    :target: http://www.mercantour.eu
+
+
+.. image:: http://depot.makina-corpus.org/public/geotrek/logo-pnam.png
+    :target: http://www.parcoalpimarittime.it
+
+
+.. image:: http://depot.makina-corpus.org/public/logo.gif
+    :target: http://www.makina-corpus.com

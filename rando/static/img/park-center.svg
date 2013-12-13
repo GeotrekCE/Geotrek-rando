@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   x="0px"
+   y="0px"
+   width="100px"
+   height="100px"
+   viewBox="0 0 100 100"
+   enable-background="new 0 0 100 100"
+   xml:space="preserve"
+   id="svg2"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="park-center.svg"><metadata
+   id="metadata18"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+   id="defs16" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1918"
+   inkscape:window-height="1059"
+   id="namedview14"
+   showgrid="false"
+   inkscape:zoom="4.72"
+   inkscape:cx="12.382294"
+   inkscape:cy="41.802175"
+   inkscape:window-x="0"
+   inkscape:window-y="19"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="svg2" />
+<g
+   id="Captions">
+</g>
+<g
+   id="Your_Icon"
+   style="fill:#3a87ad;fill-opacity:1">
+	<path
+   d="M83.532,77.884l-16.675-1.575c6.47-4.862,11.082-11.282,13.757-19.168c3.033-8.942,0.438-18.516-6.606-24.388   c-5.927-4.943-13.466-5.865-19.671-2.413c-1.096,0.609-1.489,1.994-0.88,3.09c0.611,1.098,1.993,1.495,3.091,0.88   c4.524-2.518,10.099-1.777,14.551,1.933c4.243,3.539,8.156,10.753,5.213,19.439c-2.999,8.842-8.533,15.362-16.807,19.931   l-17.654-1.669c-1.394-0.13-2.199-1.165-2.48-1.604c-0.485-0.758-0.533-1.821-0.362-2.596c0.528-1.902,2.568-2.24,4.159-2.552   l0.116-0.021l18.803-1.878c0.015-0.003,0.029-0.006,0.044-0.009c2.201-0.431,3.761-2.403,3.669-4.647   c-0.093-2.258-1.833-4.107-4.083-4.335c0,0-25.969-5.854-35.027-6.786c-2.681-0.275-5.391-0.151-8.053,0.37   c-6.167,1.207-10.08,4.124-10.506,4.453c-0.623,0.481-1.11,1.114-1.415,1.841L0.661,70.613c-0.913,2.175-0.009,4.688,2.082,5.783   l30.03,15.74c0.811,0.424,1.734,0.592,2.644,0.485l48.221-5.699c0.113-0.015,0.229-0.032,0.341-0.053   c2.136-0.421,3.696-2.308,3.67-4.515C87.622,80.03,85.843,78.102,83.532,77.884z"
+   id="path6"
+   style="fill:#3a87ad;fill-opacity:1" />
+	<path
+   d="M88.817,30.471c-3.338,2.258-5.699,5.411-7.011,8.913c3.742,0.087,7.545-0.932,10.884-3.19   c3.333-2.256,5.694-5.411,7.004-8.916C95.954,27.192,92.149,28.211,88.817,30.471z"
+   id="path8"
+   style="fill:#3a87ad;fill-opacity:1" />
+	<path
+   d="M86.522,22.535c1.005-5.34,0.227-10.603-1.89-15.188c-3.637,3.505-6.276,8.118-7.275,13.461   C76.35,26.152,77.13,31.413,79.238,36C82.878,32.492,85.515,27.88,86.522,22.535z"
+   id="path10"
+   style="fill:#3a87ad;fill-opacity:1" />
+	<path
+   d="M67.675,47.192c2.459,1.598,5.247,2.285,7.969,2.169c-1.006-2.535-2.771-4.795-5.232-6.395   c-2.464-1.595-5.247-2.281-7.971-2.163C63.445,43.335,65.207,45.599,67.675,47.192z"
+   id="path12"
+   style="fill:#3a87ad;fill-opacity:1" />
+</g>
+</svg>
