@@ -417,6 +417,13 @@ Currently, we only have two Django applications as serious dependencies :
 
 
 =======
+CREDITS
+=======
+
+* *Ecology* by Diego Naive from the Noun Project
+* *Mont Valier, Couserans*, Wikimedia by Valier
+
+=======
 AUTHORS
 =======
 

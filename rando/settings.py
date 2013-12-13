@@ -150,8 +150,8 @@ FLATPAGES_POLICY_PAGE = 1
 
 LEAFLET_CONFIG = {
     "TILES": [
-        ('main', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', '(c) OSM'),
-        ('detail', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', '(c) OSM')
+        ('main', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', '&copy; OpenStreetMap contributors'),
+        ('detail', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', '&copy; OpenStreetMap contributors')
     ],
     "SCALE": False,
     "MINIMAP": True,
