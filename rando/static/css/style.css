@@ -377,12 +377,14 @@ ul.row-footer a {
   font-size: 0px;
   text-decoration: none;
 }
-.detail-content {
+.detail-content,
+.flatpage-content {
   position: absolute;
   top: 0;
   bottom: 0;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
+  width: 100%;
 }
 #mainmap {
   position: absolute;

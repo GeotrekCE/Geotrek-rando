@@ -9,6 +9,7 @@ CHANGELOG
 **BUG fixes**
 
 * Fix sync failure for old python versions
+* Fix some pages layout bugs (fixes #75)
 
 **Breaking changes**
 
