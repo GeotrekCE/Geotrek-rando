@@ -109,6 +109,7 @@ a, input, button {
 @black : #232222;
 @blackLighter : #4d4d4d;
 @orange : rgb(248, 148, 6);
+@mainColor: #f89406;
 @yellow : #ffff00;
 
 /* Landscape phone to portrait tablet */
@@ -535,17 +536,40 @@ ul.social-buttons li {
 *
 */
 .slider-value {
-  float:left; font-size: 7pt;
+  display: inline-block;
+  font-size: 7pt;
   text-align: center;
   max-height: 20px;
-  overflow: hidden;
+  position: relative;
+
+  &:before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 8px;
+    background: rgb(243, 242, 242);
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    z-index: 1;
+    pointer-events: none;
+  }
 
   &.first {
-   text-align: left;
+    margin-left: -15%;
+    text-align: right;
+    
+    &:before {
+      display: none;
+    }
   }
 
   &.last {
-   text-align: right;
+    text-align: left;
+
+    &:before {
+      display: none;
+    }
   }
 }
 
@@ -558,39 +582,42 @@ ul.social-buttons li {
 
 .ui-slider {
   border: none;
-  left:6px;
-  height: 19px;
+  left: 6px;
+  height: 8px;
+  background: #E4E2E2;
 
   .ui-slider-range {
-    height:4px;
-    background:#F77E00;
-    opacity:0.6;
-    top: 9px;
+    background: @mainColor;
+    top: 0;
   }
 
   .ui-slider-handle {
-     background:url("../img/slider-handle.png") repeat-x scroll 0 0 transparent;
-     top:4px;
-     border:none;
-     outline:none;
-     cursor: pointer;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    .box-shadow(0px 0px 0px 3px rgba(0,0,0,0.3));
+    background: white;
+    width: 8px;
+    height: 8px;
+    top: 0;
+    margin-left: -5px;
   }
 }
 
+.slider-wrap {
+  margin-top: 3px;
+  height: 19px;
+}
 
 .filter, .ui-slider, .ui-slider-handle {
   cursor: pointer;
-}
-
-.slider-wrap {
-  padding-left: 3px;
-  height: 19px;
 }
 
 #basic-filters > .span {
   margin-right: 25px;
   margin-left: 0;
   min-height: 56px;
+  white-space: nowrap;
 }
 
 .stage
@@ -598,16 +625,15 @@ ul.social-buttons li {
   float:left;
 
   .slider-value {
-    width: 25%;
+    width: 30%;
   }
 
   .slider-wrap {
-    background:url(../img/slider-stage.png) no-repeat;
     width: 197px;
   }
 
   .ui-slider {
-    max-width: 179px;
+    max-width: 180px;
   }
 }
 
@@ -616,12 +642,11 @@ ul.social-buttons li {
   float:left;
 
   .slider-value {
-    width: 33%;
+    width: 42%;
   }
 
   .slider-wrap {
-    background:url(../img/slider-time.png) no-repeat;
-    width: 170px;
+    width: 160px;
   }
 
   .ui-slider {
@@ -634,12 +659,12 @@ ul.social-buttons li {
   float:left;
 
   .slider-value {
-    width: 25%;
+    width: 31%;
   }
 
   .slider-wrap {
-    background:url(../img/slider-den.png) no-repeat;
-    width: 250px;
+    width: 240px;
+    .border-radius(10px);
   }
 
   .ui-slider {
@@ -701,7 +726,7 @@ ul.social-buttons li {
     z-index: 300;
     width: 6px;
     height: 20px;
-    background-color: #f89406;
+    background-color: @mainColor;
   }
 
   span {
@@ -715,10 +740,10 @@ ul.social-buttons li {
  background-size: 16px 16px;
  opacity: 0.4;
  // display: none;
- // background-color: #f89406;
+ // background-color: @mainColor;
   &.active {
     opacity: 1;
-    background-color: #f89406;
+    background-color: @mainColor;
     .box-shadow(none);
   }
 }
@@ -1027,9 +1052,9 @@ p.tab-content-empty {
         color: #333333;
         text-shadow: 0 1px 0 #ffffff;
         background-color: #ffffff;
-        border: 1px solid #f89406;
+        border: 1px solid @mainColor;
         outline: 0;
-        .box-shadow(0 0 3px #f89406);
+        .box-shadow(0 0 3px @mainColor);
       }
     }
 
@@ -1117,7 +1142,7 @@ p.tab-content-empty {
 }
 
 #search-bar p.title.active {
- color: #f89406;
+ color: @mainColor;
  text-shadow: 0px 0px 2px #ffff00;
 }
 
