@@ -1589,6 +1589,7 @@ p.teaser {
   top: 0px;
   bottom: 0px;
   width: 50%;
+  outline: none;
 }
 .carousel .carousel-control-zone.left {
   left: 0px;
