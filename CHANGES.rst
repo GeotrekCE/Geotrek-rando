@@ -10,6 +10,7 @@ CHANGELOG
 
 * Fix sync failure for old python versions
 * Fix some pages layout bugs (fixes #75)
+* Half of carousel is now active for prev and next (fixes #80)
 
 **Breaking changes**
 
