@@ -1588,14 +1588,14 @@ p.teaser {
   position: absolute;
   top: 0px;
   bottom: 0px;
-  width: 50%;
+  width: 20%;
   outline: none;
 }
 .carousel .carousel-control-zone.left {
   left: 0px;
 }
 .carousel .carousel-control-zone.right {
-  left: 50%;
+  left: 80%;
 }
 .carousel .carousel-control {
   width: 30px;
