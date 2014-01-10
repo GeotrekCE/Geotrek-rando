@@ -16,6 +16,10 @@ CHANGELOG
 * All national park branding has been replaced by generic Geotrek material.
   See *Customization* paragraph about images.
 
+**New features**
+
+* Add icon for information desk (fixes #4)
+
 1.26 (2013-12-11)
 -----------------
 
