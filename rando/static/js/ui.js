@@ -375,7 +375,7 @@ function sliders() {
                                         $(this));
     };
 
-    $( "#stage" ).slider({
+    $( "#difficulty" ).slider({
         range: true,
         step: 1,
         min: 1,
@@ -384,7 +384,7 @@ function sliders() {
         slide: saveSlider
     });
 
-    $( "#time" ).slider({
+    $( "#duration" ).slider({
         range: true,
         step: 1,
         min: 0,
@@ -393,7 +393,7 @@ function sliders() {
         slide: saveSlider
     });
 
-    $( "#den" ).slider({
+    $( "#altitude" ).slider({
         range: true,
         step: 1,
         min: 0,
