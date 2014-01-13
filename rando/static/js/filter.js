@@ -86,9 +86,9 @@ function TrekFilter()
 
         state = state || {};
         state.sliders = state.sliders || {};
-        state.sliders.time = state.sliders.duration || {};
-        state.sliders.stage = state.difficulty.stage || {};
-        state.sliders.den = state.altitude.den || {};
+        state.sliders.duration = state.sliders.duration || {};
+        state.sliders.difficulty = state.sliders.difficulty || {};
+        state.sliders.altitude = state.sliders.altitude || {};
 
         return state;
     };
