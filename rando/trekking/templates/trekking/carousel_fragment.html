@@ -17,7 +17,11 @@
     {% endfor %}
   </div>
   {% if pictures|length > 1 %}
-      <a class="utils carousel-control left" href="#{{ prefix }}-pictures" data-slide="prev">&lsaquo;</a>
-      <a class="utils carousel-control right" href="#{{ prefix }}-pictures" data-slide="next">&rsaquo;</a>
+      <a class="carousel-control-zone left" href="#{{ prefix }}-pictures" data-slide="prev">
+        <span class="utils carousel-control left">&lsaquo;<span>
+      </a>
+      <a class="carousel-control-zone right" href="#{{ prefix }}-pictures" data-slide="next">
+        <span class="utils carousel-control right">&rsaquo;<span>
+      </a>
   {% endif %}
 </div><!-- /.carousel -->
