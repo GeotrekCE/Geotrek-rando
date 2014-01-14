@@ -1,9 +1,10 @@
 $(window).on("view:detail", function(e) {
-    console.log("View 3d Button");
-    // View 3d
+
+    var view3d_url = $("#popup-view3d").data('url');
+
     $("a.view3d").click(function () {
         var slug = window.trek.properties.slug,
-            url = window.view3d_url.replace('empty', slug);
+            url = view3d_url.replace('empty', slug);
         $('<iframe />', {
             name: 'frame1',
             id: 'frame1',

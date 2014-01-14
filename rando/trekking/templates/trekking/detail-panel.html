@@ -136,7 +136,7 @@
         <div class="helpclic"><p>{% trans "Clic for map interaction" %}</p></div>
       </div>
 
-      <div id="altitudegraph">
+      <div id="altitudegraph" data-url="{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.altimetric_profile %}">
         <h4>{% trans "Altitude profile" %}</h4>
         <p class="axislabel">{% trans "Altitude (m)" %}</p>
          <p id="altitude-details">
@@ -251,7 +251,6 @@
     if (window.jQuery && jQuery.support.pjax) {
         window.trek = {{ trek.geojson|safe }};
         window.pois = {{ poisjson|safe }};
-        window.altimetric_url = "{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.altimetric_profile %}";
     }
 </script>
 

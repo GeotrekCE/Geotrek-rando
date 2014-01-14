@@ -39,6 +39,8 @@ function init_ui() {
         refresh_results(visible);
     });
 
+    window.MOBILE = !!Modernizr.mq('only all and (max-width: 767px)');
+
     $(window).smartresize(function() {
         // Check if youre on mobile or not
         if(Modernizr.mq('only all and (max-width: 767px)')) {
@@ -308,8 +310,9 @@ function view_detail() {
     }
 
     //Load altimetric graph
-    if ($('#profilealtitude').length > 0) {
-        altimetricInit();
+    if ($('#altitudegraph').length > 0) {
+        var jsonurl = $('#altitudegraph').data('url');
+        altimetricInit(jsonurl);
     }
 
     // Tooltips
@@ -318,11 +321,11 @@ function view_detail() {
     $('#pois-accordion .pictogram').tooltip();
 }
 
-function altimetricInit() {
+function altimetricInit(jsonurl) {
     /*
      * Load altimetric profile from JSON
      */
-    $.getJSON(altimetric_url, function(data) {
+    $.getJSON(jsonurl, function(data) {
         function updateSparkline() {
             $('#profilealtitude').sparkline(data.profile, L.Util.extend({
                 tooltipSuffix: ' m',
