@@ -20,8 +20,28 @@ Modernizr.addTest('fullscreen', function(){
 });
 
 
-function init_ui() {
+// Default Google Analytics in case Do-Not-Track is set
+window._gaq = window._gaq || [];
 
+$(document).ready(function (e) {
+    window.MOBILE = !!Modernizr.mq('only all and (max-width: 767px)');
+    window.trekFilter = new TrekFilter();
+    window.backPack = new BackPack();
+
+    init_ui();
+    page_load();
+});
+
+$(document).on('pjax:start', function (e) {
+    page_leave();
+});
+
+$(document).on('pjax:end', function (e) {
+    page_load();
+});
+
+
+function init_ui() {
     $(document).pjax('a.pjax', '#content');
 
     FastClick.attach(document.body);
@@ -30,16 +50,11 @@ function init_ui() {
         e.preventDefault();
     });
 
-    window.trekFilter = new TrekFilter();
-
-    window.backPack = new BackPack();
     $('body').on("backpack-change", refresh_backpack);
 
     $(window.trekFilter).on("filterchange", function(e, visible) {
         refresh_results(visible);
     });
-
-    window.MOBILE = !!Modernizr.mq('only all and (max-width: 767px)');
 
     $(window).smartresize(function() {
         // Check if youre on mobile or not
