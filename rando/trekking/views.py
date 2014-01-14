@@ -70,16 +70,6 @@ class TrekView(PJAXResponseMixin, BaseTrekView):
         return context
 
 
-class TrekView3D(BaseTrekView):
-    template_name = 'trekking/view3d.html'
-
-    def get_context_data(self, **kwargs):
-        trek = self.get_object()
-        context = super(TrekView3D, self).get_context_data(**kwargs)
-        context['coords3d'] = trek.coords3d()
-        return context
-
-
 def trek_redirect(request, pk):
     lang = request.LANGUAGE_CODE
     treks = Trek.objects.filter(language=lang).all()

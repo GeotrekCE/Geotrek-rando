@@ -2,7 +2,6 @@ import os
 import datetime
 import logging
 import json
-from operator import itemgetter
 
 from easydict import EasyDict as edict
 from django.conf import settings
@@ -135,35 +134,5 @@ class Trek(JSONModel):
             jsonsource = open(source, 'r').read()
             jsonparsed = json.loads(jsonsource)
             return jsonparsed['profile']
-        except IOError, KeyError:
+        except (IOError, KeyError):
             return []
-
-    def startcoords(self):
-        if self.geometry.type.lower().startswith('multi'):
-            return self.geometry.coordinates[0][:1][0]
-        return self.geometry.coordinates[:1][0]
-
-    def endcoords(self):
-        if self.geometry.type.lower().startswith('multi'):
-            return self.geometry.coordinates[-1][:-1][-1]
-        return self.geometry.coordinates[:-1][-1]
-
-    def coords3d(self):
-        """Returns list of lists [x, y, h] to be plotted in WebGL.
-        """
-        server_settings = Settings.objects.all()
-        if server_settings.version < '0.20':
-            # Retro-compatibility
-            # Zip together lat/lngs and elevation
-            coords2d = self.geometry.coordinates
-            xs = map(itemgetter(0), coords2d)
-            ys = map(itemgetter(1), coords2d)
-            altitudes = map(itemgetter(1), self.altimetricprofile)
-            coords3d = zip(xs, ys, altitudes)
-            coords3d = map(list, coords3d)
-            return coords3d
-        # From Geotrek version 0.20, lat/lngs come along
-        # altimetric profile (since they don't match geometry vertices anymore)
-        # (distance, elevation, (lng, lat))
-        coords3d = [[i[2][0], i[2][1], i[1]] for i in self.altimetricprofile]
-        return coords3d
