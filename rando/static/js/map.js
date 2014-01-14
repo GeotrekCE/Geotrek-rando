@@ -324,7 +324,7 @@ L.Map.include({
 function mainmapInit(map, bounds) {
     map.attributionControl.setPrefix('');
 
-    window.treksLayer = new TrekLayer(window.treks).addTo(map);
+    var treksLayer = new TrekLayer(window.treks).addTo(map);
 
     if (!map.restoreView()) {
         var layerBounds = treksLayer.getBounds();
@@ -354,6 +354,16 @@ function mainmapInit(map, bounds) {
     });
     treksLayer.on('mouseout', function (e) {
       $('#trek-'+ e.layer.properties.pk +'.result').removeClass('active');
+    });
+
+    $(window).on('view:leave', function (e) {
+        // Deselect all treks on page leave
+        treksLayer.eachLayer(function (l) {
+            treksLayer.highlight(l.properties.pk, false);
+        });
+    });
+    $(window).on('trek:highlight', function (e, trek_id, state) {
+        treksLayer.highlight(trek_id, state);
     });
 
     //
@@ -472,7 +482,28 @@ function mainmapInit(map, bounds) {
         if (e.layer === popup)
             popup = null;
     });
+
+    $(window).on('trek:showpopup', function (e, trek_id) {
+        // Grab a reference on layer with same id
+        var trekOnMap = treksLayer.getLayer(trek_id);
+        if (trekOnMap) {
+            var coords = trekOnMap.getLatLngs(),
+                departure = coords[0],
+                middlepoint = coords[Math.round(coords.length/2)],
+                clickpoint = trekOnMap.iconified ? departure : middlepoint;
+            trekOnMap.fire('click', {
+              latlng: clickpoint
+            });
+            // Move the map if trek is below search results
+            var map = trekOnMap._map;
+            map.fakePanTo(clickpoint);
+        }
+        else {
+          console.warn("Trek not on map: " + trek_id);
+        }
+    });
 }
+
 
 
 function detailmapInit(map, bounds) {

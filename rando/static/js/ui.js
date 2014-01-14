@@ -166,10 +166,10 @@ function view_home() {
 
     // Highlight map on hover in sidebar results
     $('#side-bar .result').hover(function() {
-        if (window.treksLayer) window.treksLayer.highlight($(this).data('id'), true);
+        $(window).trigger('trek:highlight', [$(this).data('id'), true]);
     },
     function() {
-        if (window.treksLayer) window.treksLayer.highlight($(this).data('id'), false);
+        $(window).trigger('trek:highlight', [$(this).data('id'), false]);
     });
 
     $('#side-bar .result').on('dblclick', function (e) {
@@ -185,7 +185,9 @@ function view_home() {
         // Do not fire click if clicked on search tools
         if ($(e.target).parents('.search-tools').length === 0) {
             e.preventDefault();
-            simulate_map_click($(this).data('id'));
+            $(window).trigger('trek:showpopup', [$(this).data('id')]);
+            // Track event
+            _gaq.push(['_trackEvent', 'Results', 'Click', $(this).data('name')]);
         }
         // else, normal click on search tools buttons
     });
@@ -198,36 +200,6 @@ function view_home() {
     }
 }
 
-
-
-function simulate_map_click(trek_id) {
-    // Grab a reference on layer with same id
-    var trekOnMap = window.treksLayer && window.treksLayer.getLayer(trek_id);
-    if (trekOnMap) {
-        // If multi - take first one
-        if (trekOnMap instanceof L.MultiPolyline) {
-            for (var i in trekOnMap._layers) {
-                trekOnMap = trekOnMap._layers[i];
-                break;
-            }
-        }
-        var coords = trekOnMap.getLatLngs(),
-            departure = coords[0],
-            middlepoint = coords[Math.round(coords.length/2)],
-            clickpoint = trekOnMap.iconified ? departure : middlepoint;
-        trekOnMap.fire('click', {
-          latlng: clickpoint
-        });
-        // Move the map if trek is below search results
-        var map = trekOnMap._map;
-        map.fakePanTo(clickpoint);
-        // Track event
-        _gaq.push(['_trackEvent', 'Results', 'Click', trekOnMap.properties && trekOnMap.properties.name]);
-    }
-    else {
-      console.warn("Trek not on map: " + trek_id);
-    }
-}
 
 function refresh_results(matching) {
     for(var i=0; i<window.treks.features.length; i++) {
@@ -274,12 +246,7 @@ function refresh_backpack() {
 function page_leave() {
     // Close share panel (if open)
     $("#global-share.active").click();
-
-    // Deselect all treks on page leave
-    if (treksLayer)
-        treksLayer.eachLayer(function (l) {
-            treksLayer.highlight(l.properties.pk, false);
-        });
+    $(window).trigger('view:leave');
 }
 
 function view_detail() {
