@@ -74,9 +74,11 @@ function page_load() {
 
     if ($("#mainmap-tag").length > 0) {
         view_home();
+        $(window).trigger('view:home');
     }
     else {
         view_detail();
+        $(window).trigger('view:detail');
     }
 
     // Flex divs :)
@@ -309,22 +311,6 @@ function view_detail() {
     if ($('#profilealtitude').length > 0) {
         altimetricInit();
     }
-
-    // View 3d
-    $("a.view3d").click(function () {
-        var slug = window.trek.properties.slug,
-            url = window.view3d_url.replace('empty', slug);
-        $('<iframe />', {
-            name: 'frame1',
-            id: 'frame1',
-            frameBorder: 0,
-            src: url
-        }).appendTo('#popup-view3d .modal-body');
-        $("#popup-view3d").modal('show');
-        $('#popup-view3d').on('hidden', function () {
-            $(this).find('iframe').remove();
-        });
-    });
 
     // Tooltips
     $('#usages div, #themes div').tooltip();

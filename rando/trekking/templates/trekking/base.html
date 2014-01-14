@@ -128,6 +128,9 @@
         {% if POPUP_HOME_ENABLED %}
         <script src="{% static "js/popup.js" %}"></script>
         {% endif %}
+        {% if VIEW3D_ENABLED %}
+        <script src="{% static "view3d/main.js" %}"></script>
+        {% endif %}
         {% endcompress %}
         <script type="text/javascript" src="{% locale_url request.LANGUAGE_CODE jsi18n %}"></script>
 
@@ -147,7 +150,7 @@
                 trekLayer = window.trekLayer || null,
                 pois = {% if poisjson %}{{ poisjson|safe }}{% else %}null{% endif %},
                 altimetric_url = {% if trek %}"{% locale_url request.LANGUAGE_CODE trekking:fileserve trek.properties.altimetric_profile %}"{% else %}null{% endif %},
-                view3d_url = "{% locale_url request.LANGUAGE_CODE trekking:view3d "empty" %}",
+                view3d_url = "{% locale_url request.LANGUAGE_CODE view3d:view3d "empty" %}",
                 treks = {{ treksjson|safe }},
                 IMG_URL = "{% static "img" %}",
                 MOBILE = Modernizr.mq('only all and (max-width: 767px)') ? true : false;

@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <style>
-        body 
+        body
         {
             font-family: Monospace;
             font-weight: bold;
@@ -21,13 +21,13 @@
 <div id="message"></div>
 
 {% compress js %}
-<script src="{% static "js/3d/Three.js" %}"></script>
-<script src="{% static "js/3d/Detector.js" %}"></script>
-<script src="{% static "js/3d/Stats.js" %}"></script>
-<script src="{% static "js/3d/TrackballControls.js" %}"></script>
-<script src="{% static "js/3d/THREEx.KeyboardState.js" %}"></script>
-<script src="{% static "js/3d/THREEx.FullScreen.js" %}"></script>
-<script src="{% static "js/3d/THREEx.WindowResize.js" %}"></script>
+<script src="{% static "view3d/vendor/Three.js" %}"></script>
+<script src="{% static "view3d/vendor/Detector.js" %}"></script>
+<script src="{% static "view3d/vendor/Stats.js" %}"></script>
+<script src="{% static "view3d/vendor/TrackballControls.js" %}"></script>
+<script src="{% static "view3d/vendor/THREEx.KeyboardState.js" %}"></script>
+<script src="{% static "view3d/vendor/THREEx.FullScreen.js" %}"></script>
+<script src="{% static "view3d/vendor/THREEx.WindowResize.js" %}"></script>
 {% endcompress %}
 
 <script>
@@ -140,7 +140,7 @@ function Trek () {
         // Arrival
         var arrival = makeMarker(this._smoothCoords[this._smoothCoords.length-1].clone(), 0xff0000)
         scene.add(arrival);
-        
+
         function makeMarker(position, color) {
             var markerGeometry = new THREE.CylinderGeometry( 3, 0, 8, 50, 0, false);
             var markerMaterial = new THREE.MeshLambertMaterial( { color: color } );
@@ -156,7 +156,7 @@ function Trek () {
 
 
 function Hiker ( trek ) {
-    
+
     this.addTo = function ( scene ) {
         var cubeGeometry = new THREE.CubeGeometry( 2, 5, 2 );
         var cubeMaterial = new THREE.MeshLambertMaterial( { color: 0xffffff } );
@@ -198,7 +198,7 @@ function init() {
     if ( Detector.webgl )
         renderer = new THREE.WebGLRenderer( {antialias:true} );
     else
-        renderer = new THREE.CanvasRenderer(); 
+        renderer = new THREE.CanvasRenderer();
     renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
     container = document.createElement( 'div' );
     document.body.appendChild( container );
@@ -223,7 +223,7 @@ function init() {
     scene.add(light);
     // FLOOR
     var floorTexture = new THREE.ImageUtils.loadTexture( 'images/checkerboard.jpg' );
-    floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping; 
+    floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
     floorTexture.repeat.set( 10, 10 );
     var floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture, side: THREE.DoubleSide } );
     var floorGeometry = new THREE.PlaneGeometry(1000, 1000, 10, 10);
@@ -231,7 +231,7 @@ function init() {
     floor.position.y = -0.5;
     floor.rotation.x = Math.PI / 2;
     scene.add(floor);
-    
+
     // SKYBOX/FOG
     var skyBoxGeometry = new THREE.CubeGeometry( SCENE_WIDTH, SCENE_WIDTH, SCENE_WIDTH );
     var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: 0x9999ff, side: THREE.BackSide } );
