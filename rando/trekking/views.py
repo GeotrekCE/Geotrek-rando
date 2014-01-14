@@ -1,5 +1,4 @@
 import os
-import logging
 
 from django.http import Http404
 from django.conf import settings
@@ -10,10 +9,8 @@ from django.shortcuts import redirect
 from djpjax import PJAXResponseMixin
 from localeurl.utils import locale_url
 
+from rando import logger
 from .models import Trek
-
-
-logger = logging.getLogger(__name__)
 
 
 class HomeView(PJAXResponseMixin, TemplateView):

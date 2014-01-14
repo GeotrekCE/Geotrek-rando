@@ -1,14 +1,9 @@
-import logging
-
 from django.http import Http404
 from django.views.generic import DetailView
 from django.shortcuts import redirect
 from djpjax import PJAXResponseMixin
 
 from .models import FlatPage
-
-
-logger = logging.getLogger(__name__)
 
 
 class PageView(PJAXResponseMixin, DetailView):
