@@ -180,7 +180,7 @@
                 <ul>
                   {% for lang, name in settings.languages.available.items %}
                     <li class="{% if lang == request.LANGUAGE_CODE %}active{% endif %}"><a href="{% locale_url lang trekking:home %}"><span class="hidden">{{ lang }}</span>
-                        <img src="{% get_static_prefix %}ico/flags/{{ lang }}.png" alt="{{ lang }}"></a>
+                        <img src="{% get_static_prefix %}img/flags/{{ lang }}.png" alt="{{ lang }}"></a>
                     </li>
                   {% endfor %}
                 </ul>
