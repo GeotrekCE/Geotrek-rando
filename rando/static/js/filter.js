@@ -5,6 +5,7 @@ function TrekFilter()
     self.matching = [];
 
     this.initEvents = function () {
+        $(window).unbind('filters:reload').on('filters:reload', self.load);
         $(".theme .filter").unbind('click').on('click', self.filterChanged);
         $(".chosen-select").chosen().change(self.filterChanged);
         $('#search').unbind('keyup').on("keyup", self.filterChanged);

@@ -6,9 +6,13 @@ $(document).ready(function (e) {
     $("#popup-home #popup-body a:not([href^='http'])").click(function () {
         $modal.modal('hide');
         setTimeout(function () {
-            window.trekFilter.load();
+            // Since a link can be a hash containing filters, and since
+            // we don't watch the hash location, we reload the filters
+            // after a click on such a link.
+            $(window).trigger('filters:reload');
         }, 0);
     });
+
     // External links
     $("#popup-home #popup-body a[href^='http']").click(rememberMe);
     // Popup close
@@ -32,6 +36,26 @@ $(document).ready(function (e) {
     }
 
     function enhanceTrekPreviews () {
+        /*
+         * Within the popup, there is a way to show an existing trek,
+         * using the ``data-trek`` attribute.
+         * It can take :
+         *  - a trek id
+         *  - a trek slug
+         *  - 'random'
+         * Its preview will be shown, and it will link to the detail page.
+         */
+        var treksList = [];
+        $('#results .result').each(function () {
+            var $trek = $(this);
+            treksList.push({
+                preview: $trek.data('main-image'),
+                slug: $trek.data('slug'),
+                name: $trek.data('name'),
+                id: $trek.data('id')
+            });
+        });
+
         $('#popup-home [data-trek]').each(function () {
             var $this = $(this);
             var trekId = $this.data('trek');
@@ -40,33 +64,22 @@ $(document).ready(function (e) {
                 trekId = randomTrek();
             }
 
-            var trek = getTrek(trekId);
-            if (!trek)
-                return;
+            var trek = jQuery.grep(treksList, function(t) {
+                return t.id === trekId || t.slug == trekId;
+            })[0];
 
-            $this.removeAttr('data-trek');
-            var preview = trek.properties.pictures[0];
-            if (preview) {
-                $this.find('img:first').attr('src', preview.url)
-                                       .attr('alt', preview.legend);
-                $this.find('a.profile').attr('href', '/' + trek.properties.slug);
+            if (trek) {
+                $this.removeAttr('data-trek');
+                $this.find('img:first').attr('src', trek.preview)
+                                       .attr('alt', trek.name);
+                $this.find('a.profile').attr('href', '/' + trek.slug);
             }
-
         });
 
         function randomTrek() {
-            var i = Math.floor(Math.random() * window.treksGeoJson.features.length),
-                trek = window.treksGeoJson.features[i];
+            var i = Math.floor(Math.random() * treksList.length),
+                trek = treksList[i];
             return trek.id;
-        }
-
-        function getTrek(trekid) {
-            for (var i=0, n=window.treksGeoJson.features.length; i<n; i++) {
-                var trek = window.treksGeoJson.features[i];
-                if (trek.id === trekid || trek.properties.slug == trekid)
-                    return trek;
-            }
-            return null;
         }
     }
 });

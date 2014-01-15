@@ -132,3 +132,11 @@ class Trek(JSONModel):
             return jsonparsed['profile']
         except (IOError, KeyError):
             return []
+
+    @property
+    def main_image(self):
+        try:
+            first = self.properties.pictures[0]
+            return first['url']
+        except IndexError:
+            return None
