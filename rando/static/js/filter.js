@@ -1,4 +1,3 @@
-// JavaScript Document
 function TrekFilter()
 {
     var self = this;

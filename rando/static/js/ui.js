@@ -1,10 +1,3 @@
-var ALTIMETRIC_PROFILE_OPTIONS = L.Util.extend({
-    fillColor: '#FFD1A1',
-    lineColor: '#F77E00',
-    lineWidth: 3,
-}, ALTIMETRIC_PROFILE_OPTIONS || {});
-
-
 Modernizr.addTest('fullscreen', function(){
      var ancelFullScreen = 'ancelFullScreen'; //make string minifiable
 
@@ -17,27 +10,6 @@ Modernizr.addTest('fullscreen', function(){
             return true;
      }
      return !!document[['c',ancelFullScreen].join('')] || false;
-});
-
-
-// Default Google Analytics in case Do-Not-Track is set
-window._gaq = window._gaq || [];
-
-$(document).ready(function (e) {
-    window.MOBILE = !!Modernizr.mq('only all and (max-width: 767px)');
-    window.trekFilter = new TrekFilter();
-    window.backPack = new BackPack();
-
-    init_ui();
-    page_load();
-});
-
-$(document).on('pjax:start', function (e) {
-    page_leave();
-});
-
-$(document).on('pjax:end', function (e) {
-    page_load();
 });
 
 
@@ -135,7 +107,7 @@ function page_load() {
 }
 
 function view_home() {
-    sliders();
+    init_sliders();
 
     // Load filters (will refresh backpack results)
     // (After sliders initialization)
@@ -264,12 +236,6 @@ function refresh_backpack() {
     $('#tab-backpack span.badge').html(window.backPack.length());
 }
 
-function page_leave() {
-    // Close share panel (if open)
-    $("#global-share.active").click();
-    $(window).trigger('view:leave');
-}
-
 function view_detail() {
     $("#mainmap").hide();  // We are elsewhere
 
@@ -344,7 +310,7 @@ function altimetricInit(jsonurl) {
     });
 }
 
-function sliders() {
+function init_sliders() {
     var saveSlider = function (event, ui) {
         window.trekFilter.sliderChanged(ui.values[0],
                                         ui.values[1],
@@ -385,8 +351,11 @@ function init_share() {
         $panel = $('#social-panel'),
         markup = $panel.html(),
         shown = false;
-      // , init = false;
-    // $panel.remove();
+
+    $(window).on('view:leave', function (e) {
+        // Close share panel (if open)
+        $("#global-share.active").click();
+    });
 
     var previous = $share.data('popover');
     if (previous) {
