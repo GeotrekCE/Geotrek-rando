@@ -217,8 +217,8 @@ function view_home() {
 
 
 function refresh_results(matching) {
-    for(var i=0; i<window.treks.features.length; i++) {
-        var trek = window.treks.features[i],
+    for(var i=0; i<window.treksGeoJson.features.length; i++) {
+        var trek = window.treksGeoJson.features[i],
             trekid = trek.properties.pk;
         if ($.inArray(trekid, matching) != -1) {
             $('#results #trek-'+trekid).show(200);
@@ -236,8 +236,8 @@ function refresh_results(matching) {
 }
 
 function refresh_backpack() {
-    for(var i=0; i<window.treks.features.length; i++) {
-        var trek = window.treks.features[i],
+    for(var i=0; i<window.treksGeoJson.features.length; i++) {
+        var trek = window.treksGeoJson.features[i],
             trekid = trek.properties.pk;
         if (window.backPack.contains(trekid)) {
             $('#backpack-trek-'+trekid).show(200);
