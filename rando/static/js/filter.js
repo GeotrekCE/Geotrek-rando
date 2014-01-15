@@ -2,7 +2,24 @@
 function TrekFilter()
 {
     var self = this;
+    self.treksList = [];
     self.matching = [];
+
+    $('#results .result').each(function () {
+        var $trek = $(this);
+        self.treksList.push({
+            fulltext: $trek.data('fulltext'),
+            themes: $trek.data('themes'),
+            usages: $trek.data('usages'),
+            districts: $trek.data('districts'),
+            cities: $trek.data('cities'),
+            route: $trek.data('route'),
+            difficulty: $trek.data('difficulty'),
+            duration: $trek.data('duration'),
+            ascent: $trek.data('ascent'),
+            id: $trek.data('id')
+        });
+    });
 
     this.initEvents = function () {
         $(window).unbind('filters:reload').on('filters:reload', self.load);
@@ -52,9 +69,9 @@ function TrekFilter()
         }
 
         self.matching = [];
-        for(var i=0; i<window.treksGeoJson.features.length; i++) {
-            var trek = window.treksGeoJson.features[i],
-                trekid = trek.properties.pk;
+        for(var i=0; i<self.treksList.length; i++) {
+            var trek = self.treksList[i],
+                trekid = trek.id;
             if (self.match(trek)) {
                 self.matching.push(trekid);
             }
@@ -190,12 +207,12 @@ function TrekFilter()
     this.match = function(trek) {
         if (this.matchDifficulty(trek) &&
             this.matchDuration(trek) &&
-            this.matchClimb(trek) &&
+            this.matchAltitude(trek) &&
             this._matchList(trek, 'theme', 'themes') &&
             this._matchList(trek, 'usage', 'usages') &&
             this._matchList(trek, 'district', 'districts') &&
             this._matchList(trek, 'city', 'cities') &&
-            this.matchRoute(trek) &&
+            this._matchList(trek, 'route', 'route') &&
             this.search(trek))
              return true;
         return false;
@@ -207,13 +224,13 @@ function TrekFilter()
         var minDifficulty = self.state.sliders.difficulty.min;
         var maxDifficulty = self.state.sliders.difficulty.max;
 
-        var trekDifficulty = trek.properties.difficulty;
+        var trekDifficulty = trek.difficulty;
         if  (!trekDifficulty) return true;
         /**
          * Difficulty ids are used to order levels.
          * See Geotrek Adminsite for DifficultyLevel edition.
          */
-        return trekDifficulty.id >= minDifficulty && trekDifficulty.id <= maxDifficulty;
+        return trekDifficulty >= minDifficulty && trekDifficulty <= maxDifficulty;
     };
 
     this.matchDuration = function (trek) {
@@ -225,7 +242,7 @@ function TrekFilter()
         var DAY_MIN = 4,
             DAY_MAX = 10;
 
-        var trekDuration = trek.properties.duration;
+        var trekDuration = trek.duration;
 
         if (minDuration === 0) {
             if (maxDuration == 2) {
@@ -246,7 +263,7 @@ function TrekFilter()
         return trekDuration >= DAY_MIN && trekDuration <= DAY_MAX;
     };
 
-    this.matchClimb = function (trek) {
+    this.matchAltitude = function (trek) {
         if (!self.state.sliders) return true;
         if (!self.state.sliders.altitude) return true;
         var minClimb = self.state.sliders.altitude.min;
@@ -256,7 +273,7 @@ function TrekFilter()
             1:600,
             2:1000
         };
-        var trekClimb = trek.properties.ascent;
+        var trekClimb = trek.ascent;
         if (minClimb === 0) {
             if (maxClimb == 3) {
                 return true;
@@ -276,18 +293,12 @@ function TrekFilter()
         return trekClimb >= matching[minClimb] && trekClimb <= matching[maxClimb];
     };
 
-    this.matchRoute = function (trek) {
-        if (!trek.properties.route || !self.state.route)
-            return true;
-        var routes = [];
-        for (var r in self.state.route)
-            routes.push(r);
-        if (routes.length === 0)
-            return true;
-        return $.inArray('' + trek.properties.route.id, routes) != -1;
-    };
-
     this._matchList = function (trek, category, property) {
+        // If trek has nothing defined about this property, it matches !
+        if (!trek[property]) {
+            return true;
+        }
+        // List of selected values
         var list = [];
         for (var filter in self.state[category]) {
             if (self.state[category][filter] === true) {
@@ -298,74 +309,24 @@ function TrekFilter()
         if (list.length === 0) {
             return true;
         }
-
-        var match = false;
         // If at least, one is among selected, then it matches !
-        for (var i=0; i<trek.properties[property].length; i++) {
-            var item = trek.properties[property][i],
-                id = item.id || item.pk || item.code;
-            if ($.inArray(''+id, list) != -1) {
-                match = true;
-                break;
+        values = (''+trek[property]).split(',');
+        for (var i=0; i<values.length; i++) {
+            var item = values[i];
+            if ($.inArray(item, list) != -1) {
+                return true;
             }
         }
-        if (!match) {
-            /*
-            console.log("Match " + category + ": " +
-                        JSON.stringify(trek.properties[property]) + ' != ' +
-                        list.join());
-            */
-        }
-        return match;
+        return false;
     };
 
     this.search = function (trek) {
         var searched = self.state.search;
         if (!searched) return true;
 
-        var htmldecode = function (value) {
-          return $('<div/>').html(value).text();
-        };
-
-        var simplematch = function (property) {
-            /*
-            Split searched string on space, and if at least
-            one bit matches, returns true;
-            */
-            var bits = searched.toUpperCase();
-
-            return htmldecode(property).toUpperCase().indexOf(bits) != -1 ? true : false;
-        };
-
-        var props = ['name', 'departure', 'arrival', 'ambiance',
-                     'description_teaser', 'description', 'access', 'advice'];
-        for (var i=0; i<props.length; i++) {
-            var prop = props[i];
-            if ((prop in trek.properties) && simplematch(trek.properties[prop]))
-                return true;
-        }
-
-        // District
-        for (var i=0; i<trek.properties.districts.length; i++) {
-            var district = trek.properties.districts[i];
-            if (simplematch(district.name))
-                return true;
-        }
-        // Cities
-        for (var i=0; i<trek.properties.cities.length; i++) {
-            var city = trek.properties.cities[i];
-            if (simplematch(city.code) || simplematch(city.name))
-                return true;
-        }
-        // POIs
-        for (var i=0; i<trek.properties.pois.length; i++) {
-            var poi = trek.properties.pois[i];
-            if (simplematch(poi.name) ||
-                simplematch(poi.description) ||
-                simplematch(poi.type))
-                return true;
-        }
-        return false;
+        var needle = searched.toLowerCase(),
+            haystack = trek.fulltext;
+        return (new RegExp(needle)).test(haystack);
     };
 
 

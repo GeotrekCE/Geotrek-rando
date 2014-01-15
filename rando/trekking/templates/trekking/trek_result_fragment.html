@@ -1,5 +1,21 @@
-{% load i18n static trekking_tags localeurl_tags %}
-<div id="{% if backpack = "True" %}backpack-{% endif %}trek-{{ trek.properties.pk }}" data-id="{{ trek.properties.pk }}" data-slug="{{ trek.properties.slug }}" data-name="{{ trek.properties.name }}" data-main-image="{{ trek.main_image }}" class="result" {% if show = "False" %}style="display:none"{% endif %}>
+{% load l10n i18n static trekking_tags localeurl_tags %}
+<div id="{% if backpack = "True" %}backpack-{% endif %}trek-{{ trek.properties.pk }}"
+     data-id="{{ trek.properties.pk }}"
+     data-slug="{{ trek.properties.slug }}"
+     data-name="{{ trek.properties.name }}"
+     {% if backpack != "True" %}
+       data-main-image="{{ trek.main_image }}"
+       data-fulltext="{{ trek.fulltext }}"
+       data-themes="{{ trek.properties.themes|listid }}"
+       data-usages="{{ trek.properties.usages|listid }}"
+       data-districts="{{ trek.properties.districts|listid }}"
+       data-cities="{{ trek.properties.cities|listid:"code" }}"
+       data-route="{{ trek.properties.route.id }}"
+       data-difficulty="{{ trek.properties.difficulty.id }}"
+       data-duration="{{ trek.properties.duration|unlocalize }}"
+       data-ascent="{{ trek.properties.ascent }}"
+     {% endif %}
+     class="result" {% if show = "False" %}style="display:none"{% endif %}>
   <div class="illust">
     <img alt="{% trans "Preview of" %} {{ trek.properties.name }}" src="{{ trek|thumbnail }}" width="120" height="120" />
   </div>
