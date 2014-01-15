@@ -143,9 +143,7 @@
             * A bunch of globals \o/
             */
             var trek = {% if trek %}{{ trek.geojson|safe }}{% else %}null{% endif %},
-                pois = {% if poisjson %}{{ poisjson|safe }}{% else %}null{% endif %},
                 treks = {{ treksjson|safe }},
-
                 IMG_URL = "{% static "img" %}";
         </script>
 

@@ -615,27 +615,30 @@ function detailmapInit(map, bounds) {
     });
 
     // POIs Layer
-    var poisLayer = new POILayer(pois);
-    poisLayer.eachLayer(function (marker) {
-        wholeBounds.extend(marker.getLatLng());
-        poisMarkersById[marker.properties.pk] = marker;
-        /*
-         * Open Accordion on marker click.
-         * TODO: does not work correctly.
-         */
-        marker.off('click');  // Disable auto-control of popup
-        marker.on('click', function (e) {
-            var $item = $('#poi-item-' + marker.properties.pk);
-            $item.click();
-            var top = $('#pois-accordion').scrollTop(),
-                toTop = $item.position().top;
-            $('#pois-accordion').animate({
-                scrollTop: top + toTop
-            }, 1000);
-        });
+    var poiUrl = $(map._container).data('poi-url');
+    $.getJSON(poiUrl, function (data) {
+        var poisLayer = new POILayer(data);
+        poisLayer.eachLayer(function (marker) {
+            wholeBounds.extend(marker.getLatLng());
+            poisMarkersById[marker.properties.pk] = marker;
+            /*
+             * Open Accordion on marker click.
+             * TODO: does not work correctly.
+             */
+            marker.off('click');  // Disable auto-control of popup
+            marker.on('click', function (e) {
+                var $item = $('#poi-item-' + marker.properties.pk);
+                $item.click();
+                var top = $('#pois-accordion').scrollTop(),
+                    toTop = $item.position().top;
+                $('#pois-accordion').animate({
+                    scrollTop: top + toTop
+                }, 1000);
+            });
 
+        });
+        poisLayer.addTo(map);
     });
-    poisLayer.addTo(map);
 
     var parkingIcon = L.icon({
         iconUrl: IMG_URL + '/parking.png',

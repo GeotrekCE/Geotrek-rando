@@ -46,12 +46,10 @@ class TrekView(PJAXResponseMixin, BaseTrekView):
     pjax_template_name = "trekking/detail-panel.html"
 
     def get_context_data(self, **kwargs):
-        lang = self.request.LANGUAGE_CODE
         obj = self.get_object()
         context = super(TrekView, self).get_context_data(**kwargs)
         context['trek'] = obj
         context['thumbnail'] = self.request.build_absolute_uri(obj.properties.thumbnail)
-        context['poisjson'] = obj.pois.filter(language=lang).content
 
         pois = obj.pois.all()
         context['pois'] = pois
