@@ -217,16 +217,16 @@ function view_home() {
 
 
 function refresh_results(matching) {
-    for(var i=0; i<window.treksGeoJson.features.length; i++) {
-        var trek = window.treksGeoJson.features[i],
-            trekid = trek.properties.pk;
-        if ($.inArray(trekid, matching) != -1) {
-            $('#results #trek-'+trekid).show(200);
+    $('#results .result').each(function () {
+        var $trek = $(this),
+            trekId = $trek.data('id');
+        if ($.inArray(trekId, matching) != -1) {
+            $trek.show(200);
         }
         else {
-            $('#results #trek-'+trekid).hide(200);
+            $trek.hide(200);
         }
-    }
+    });
     if (matching.length > 0)
         $('#noresult').hide(200);
     else
@@ -236,20 +236,26 @@ function refresh_results(matching) {
 }
 
 function refresh_backpack() {
-    for(var i=0; i<window.treksGeoJson.features.length; i++) {
-        var trek = window.treksGeoJson.features[i],
-            trekid = trek.properties.pk;
-        if (window.backPack.contains(trekid)) {
-            $('#backpack-trek-'+trekid).show(200);
-            $('#results #trek-' + trekid + ' .btn.backpack').addClass('active').attr('title', gettext('Remove from favorites')).find('i').removeClass('add').addClass('remove');
-            $(".detail-content .btn[data-pk='"+ trekid + "']").addClass('active');
+    $('#backpack .result').each(function () {
+        var $trek = $(this),
+            trekId = $trek.data('id');
+        if (window.backPack.contains(trekId)) {
+            $trek.show(200);
+            $trek.find('.btn.backpack').addClass('active')
+                                       .attr('title', gettext('Remove from favorites'))
+                 .find('i').removeClass('add').addClass('remove');
+            // In detail page
+            $(".detail-content .btn[data-pk='"+ trekId + "']").addClass('active');
         }
         else {
-            $('#backpack-trek-'+trekid).hide(200);
-            $('#results #trek-' + trekid + ' .btn.backpack').removeClass('active').attr('title', gettext('Add to favorites')).find('i').removeClass('remove').addClass('add');
-            $(".detail-content .btn[data-pk='"+ trekid + "']").removeClass('active');
+            $trek.hide(200);
+            $trek.find('.btn.backpack').removeClass('active')
+                                      .attr('title', gettext('Add to favorites'))
+                 .find('i').removeClass('remove').addClass('add');
+            // In detail page
+            $(".detail-content .btn[data-pk='"+ trekId + "']").removeClass('active');
         }
-    }
+    });
     if (window.backPack.length() > 0)
         $('#backpackempty').hide(200);
     else
