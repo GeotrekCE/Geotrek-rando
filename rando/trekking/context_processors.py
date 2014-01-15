@@ -36,9 +36,7 @@ def main(request):
     allroutes = sorted(allroutes.values(), key=lambda o: o.label)
 
     return {
-         # We want the treks list to be initialized from everywhere
-        'treksjson' : Trek.objects.filter(language=lang).content if alltreks else '{features: []}',
-        # We need those to initialize filters
+        'treks_url': Trek.filepath,
         'themes': allthemes,
         'usages': allusages,
         'districts': alldistricts,

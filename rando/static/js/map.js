@@ -324,7 +324,8 @@ L.Map.include({
 function mainmapInit(map, bounds) {
     map.attributionControl.setPrefix('');
 
-    var treksLayer = new TrekLayer(window.treksGeoJson).addTo(map);
+    var treks_url = $(map._container).data('treks-url');
+    var treksLayer = new TrekLayer(treks_url).addTo(map);
 
     if (!map.restoreView()) {
         var layerBounds = treksLayer.getBounds();
