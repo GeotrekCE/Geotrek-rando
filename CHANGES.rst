@@ -11,6 +11,7 @@ CHANGELOG
 * Fix sync failure for old python versions
 * Fix some pages layout bugs (fixes #75)
 * Half of carousel is now active for prev and next (fixes #80)
+* Fix flags images in popup
 
 **Breaking changes**
 
@@ -20,6 +21,8 @@ CHANGELOG
 **New features**
 
 * Add icon for information desk (fixes #4)
+* Range filters are now fully designed using CSS (fixes #63)
+
 
 1.26 (2013-12-11)
 -----------------
