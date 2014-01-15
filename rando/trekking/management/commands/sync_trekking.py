@@ -6,7 +6,6 @@ from os.path import join, getmtime, dirname, getsize
 from os import makedirs, utime
 import errno
 import json
-import logging
 from urlparse import urlparse
 
 from django.core.management.base import BaseCommand
@@ -16,11 +15,8 @@ from django.conf import settings
 import requests
 from termcolor import cprint
 
-from rando import __version__
+from rando import __version__, logger
 from rando.trekking import models
-
-
-logger = logging.getLogger(__name__)
 
 
 MIN_BYTE_SYZE = 10

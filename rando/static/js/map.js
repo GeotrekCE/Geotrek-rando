@@ -324,7 +324,7 @@ L.Map.include({
 function mainmapInit(map, bounds) {
     map.attributionControl.setPrefix('');
 
-    window.treksLayer = new TrekLayer(window.treks).addTo(map);
+    var treksLayer = new TrekLayer(window.treksGeoJson).addTo(map);
 
     if (!map.restoreView()) {
         var layerBounds = treksLayer.getBounds();
@@ -354,6 +354,16 @@ function mainmapInit(map, bounds) {
     });
     treksLayer.on('mouseout', function (e) {
       $('#trek-'+ e.layer.properties.pk +'.result').removeClass('active');
+    });
+
+    $(window).on('view:leave', function (e) {
+        // Deselect all treks on page leave
+        treksLayer.eachLayer(function (l) {
+            treksLayer.highlight(l.properties.pk, false);
+        });
+    });
+    $(window).on('trek:highlight', function (e, trek_id, state) {
+        treksLayer.highlight(trek_id, state);
     });
 
     //
@@ -472,10 +482,33 @@ function mainmapInit(map, bounds) {
         if (e.layer === popup)
             popup = null;
     });
+
+    $(window).on('trek:showpopup', function (e, trek_id) {
+        // Grab a reference on layer with same id
+        var trekOnMap = treksLayer.getLayer(trek_id);
+        if (trekOnMap) {
+            var coords = trekOnMap.getLatLngs(),
+                departure = coords[0],
+                middlepoint = coords[Math.round(coords.length/2)],
+                clickpoint = trekOnMap.iconified ? departure : middlepoint;
+            trekOnMap.fire('click', {
+              latlng: clickpoint
+            });
+            // Move the map if trek is below search results
+            var map = trekOnMap._map;
+            map.fakePanTo(clickpoint);
+        }
+        else {
+          console.warn("Trek not on map: " + trek_id);
+        }
+    });
 }
 
 
+
 function detailmapInit(map, bounds) {
+    var poisMarkersById = {};
+
     map.attributionControl.setPrefix('');
     L.control.fullscreen({
         position: 'topright',
@@ -489,7 +522,7 @@ function detailmapInit(map, bounds) {
 
     $('#pois-accordion .accordion-body').on('show', function (e) {
         var id = $(e.target).data('id'),
-            marker = window.poisMarkers[id];
+            marker = poisMarkersById[id];
 
         // Prevent double-jump
         if (marker._animating === true)
@@ -516,7 +549,7 @@ function detailmapInit(map, bounds) {
 
     $('#pois-accordion .accordion-body').on('hidden', function (e) {
         var id = $(e.target).data('id'),
-            marker = window.poisMarkers[id];
+            marker = poisMarkersById[id];
 
         $(marker._icon).removeClass('highlight');
         marker.closePopup();
@@ -527,11 +560,12 @@ function detailmapInit(map, bounds) {
         }
     });
 
+    var trekGeoJson = JSON.parse(document.getElementById('trek-geojson').innerHTML);
 
     // Trek
-    var highlight = new L.GeoJSON(window.trek.geometry, {style: L.extend(TREK_LAYER_OPTIONS.outlinestyle, {clickable: false})})
+    var highlight = new L.GeoJSON(trekGeoJson.geometry, {style: L.extend(TREK_LAYER_OPTIONS.outlinestyle, {clickable: false})})
                          .addTo(map);
-    window.trekLayer = new L.GeoJSON(window.trek.geometry, {style: L.extend(TREK_LAYER_OPTIONS.hoverstyle, {clickable: false})})
+    var trekLayer = new L.GeoJSON(trekGeoJson.geometry, {style: L.extend(TREK_LAYER_OPTIONS.hoverstyle, {clickable: false})})
                             .addTo(map);
 
     var wholeBounds = trekLayer.getBounds();
@@ -552,11 +586,11 @@ function detailmapInit(map, bounds) {
         var departureLabel = gettext("Departure"),
             arrivalLabel = gettext("Arrival");
 
-        if (!/^\s*$/.test(window.trek.properties.departure)) {
-            departureLabel += ("&nbsp;: " + window.trek.properties.departure);
+        if (!/^\s*$/.test(trekGeoJson.properties.departure)) {
+            departureLabel += ("&nbsp;: " + trekGeoJson.properties.departure);
         }
-        if (!/^\s*$/.test(window.trek.properties.arrival)) {
-            arrivalLabel += ("&nbsp;: " + window.trek.properties.arrival);
+        if (!/^\s*$/.test(trekGeoJson.properties.arrival)) {
+            arrivalLabel += ("&nbsp;: " + trekGeoJson.properties.arrival);
         }
 
         L.marker(layer.getLatLngs().slice(-1)[0],
@@ -582,27 +616,30 @@ function detailmapInit(map, bounds) {
     });
 
     // POIs Layer
-    var poisLayer = new POILayer(pois);
-    poisLayer.eachLayer(function (marker) {
-        wholeBounds.extend(marker.getLatLng());
-        window.poisMarkers[marker.properties.pk] = marker;
-        /*
-         * Open Accordion on marker click.
-         * TODO: does not work correctly.
-         */
-        marker.off('click');  // Disable auto-control of popup
-        marker.on('click', function (e) {
-            var $item = $('#poi-item-' + marker.properties.pk);
-            $item.click();
-            var top = $('#pois-accordion').scrollTop(),
-                toTop = $item.position().top;
-            $('#pois-accordion').animate({
-                scrollTop: top + toTop
-            }, 1000);
-        });
+    var poiUrl = $(map._container).data('poi-url');
+    $.getJSON(poiUrl, function (data) {
+        var poisLayer = new POILayer(data);
+        poisLayer.eachLayer(function (marker) {
+            wholeBounds.extend(marker.getLatLng());
+            poisMarkersById[marker.properties.pk] = marker;
+            /*
+             * Open Accordion on marker click.
+             * TODO: does not work correctly.
+             */
+            marker.off('click');  // Disable auto-control of popup
+            marker.on('click', function (e) {
+                var $item = $('#poi-item-' + marker.properties.pk);
+                $item.click();
+                var top = $('#pois-accordion').scrollTop(),
+                    toTop = $item.position().top;
+                $('#pois-accordion').animate({
+                    scrollTop: top + toTop
+                }, 1000);
+            });
 
+        });
+        poisLayer.addTo(map);
     });
-    poisLayer.addTo(map);
 
     var parkingIcon = L.icon({
         iconUrl: IMG_URL + '/parking.png',
@@ -610,11 +647,11 @@ function detailmapInit(map, bounds) {
         iconAnchor: [0, 0],
         labelAnchor: [20, 12]
     });
-    var parkingLocation = trek.properties.parking_location;
+    var parkingLocation = trekGeoJson.properties.parking_location;
     if (parkingLocation) {
         var pos = L.latLng([parkingLocation[1], parkingLocation[0]]);
         L.marker(pos, {icon: parkingIcon, riseOnHover: true})
-         .bindLabel(trek.properties.advised_parking || gettext("Recommended parking"), {className: 'parking'})
+         .bindLabel(trekGeoJson.properties.advised_parking || gettext("Recommended parking"), {className: 'parking'})
          .addTo(map);
         wholeBounds.extend(pos);
     }

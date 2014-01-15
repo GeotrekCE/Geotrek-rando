@@ -1,9 +1,4 @@
-import logging
-
 from .models import Trek
-
-
-logger = logging.getLogger(__name__)
 
 
 def main(request):

@@ -51,8 +51,8 @@ function TrekFilter()
         }
 
         self.matching = [];
-        for(var i=0; i<window.treks.features.length; i++) {
-            var trek = window.treks.features[i],
+        for(var i=0; i<window.treksGeoJson.features.length; i++) {
+            var trek = window.treksGeoJson.features[i],
                 trekid = trek.properties.pk;
             if (self.match(trek)) {
                 self.matching.push(trekid);

@@ -1,6 +1,5 @@
 import os
 import datetime
-import logging
 import json
 
 from easydict import EasyDict as edict
@@ -8,10 +7,7 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import get_language, ugettext_lazy as _
 
-from rando import classproperty
-
-
-logger = logging.getLogger(__name__)
+from rando import classproperty, logger
 
 
 class JSONManager(object):

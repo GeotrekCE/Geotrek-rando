@@ -142,34 +142,8 @@
             /*
             * A bunch of globals \o/
             */
-            var trekFilter = null,
-                backPack = null,
-                treksLayer = null,
-                poisMarkers = poisMarkers || {},
-                trek = {% if trek %}{{ trek.geojson|safe }}{% else %}null{% endif %},
-                trekLayer = window.trekLayer || null,
-                pois = {% if poisjson %}{{ poisjson|safe }}{% else %}null{% endif %},
-                altimetric_url = {% if trek %}"{% locale_url request.LANGUAGE_CODE trekking:fileserve trek.properties.altimetric_profile %}"{% else %}null{% endif %},
-                view3d_url = "{% locale_url request.LANGUAGE_CODE view3d:view3d "empty" %}",
-                treks = {{ treksjson|safe }},
-                IMG_URL = "{% static "img" %}",
-                MOBILE = Modernizr.mq('only all and (max-width: 767px)') ? true : false;
-
-            // Default Google Analytics in case Do-Not-Track is set
-            window._gaq = window._gaq || [];
-
-            $(document).ready(function (e) {
-                init_ui();
-                page_load();
-            });
-
-            $(document).on('pjax:start', function (e) {
-                page_leave();
-            });
-
-            $(document).on('pjax:end', function (e) {
-                page_load();
-            });
+            var treksGeoJson = {{ treksjson|safe }},
+                IMG_URL = "{% static "img" %}";
         </script>
 
         {% if POPUP_HOME_ENABLED %}
@@ -192,7 +166,7 @@
         </div>
         {% endif %}
 
-        <div id="popup-view3d" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="popup-view3d" aria-hidden="true">
+        <div id="popup-view3d" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="popup-view3d" aria-hidden="true" data-url="{% locale_url request.LANGUAGE_CODE view3d:view3d "empty" %}">
             <div class="modal-body">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>

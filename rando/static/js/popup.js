@@ -55,14 +55,14 @@ $(document).ready(function (e) {
         });
 
         function randomTrek() {
-            var i = Math.floor(Math.random() * window.treks.features.length),
-                trek = window.treks.features[i];
+            var i = Math.floor(Math.random() * window.treksGeoJson.features.length),
+                trek = window.treksGeoJson.features[i];
             return trek.id;
         }
 
         function getTrek(trekid) {
-            for (var i=0, n=window.treks.features.length; i<n; i++) {
-                var trek = window.treks.features[i];
+            for (var i=0, n=window.treksGeoJson.features.length; i<n; i++) {
+                var trek = window.treksGeoJson.features[i];
                 if (trek.id === trekid || trek.properties.slug == trekid)
                     return trek;
             }

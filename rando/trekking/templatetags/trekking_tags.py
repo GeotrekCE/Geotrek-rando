@@ -1,5 +1,4 @@
 import os
-import logging
 
 from django import template
 from django.conf import settings
@@ -7,7 +6,9 @@ from django.templatetags.static import static
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
-logger = logging.getLogger(__name__)
+from rando import logger
+
+
 register = template.Library()
 
 

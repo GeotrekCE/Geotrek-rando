@@ -1,12 +1,7 @@
-import logging
-
 from django.conf import settings as settings_
 
 from rando import __version__
 from rando.trekking.models import Settings
-
-
-logger = logging.getLogger(__name__)
 
 
 def settings(request):

@@ -20,8 +20,28 @@ Modernizr.addTest('fullscreen', function(){
 });
 
 
-function init_ui() {
+// Default Google Analytics in case Do-Not-Track is set
+window._gaq = window._gaq || [];
 
+$(document).ready(function (e) {
+    window.MOBILE = !!Modernizr.mq('only all and (max-width: 767px)');
+    window.trekFilter = new TrekFilter();
+    window.backPack = new BackPack();
+
+    init_ui();
+    page_load();
+});
+
+$(document).on('pjax:start', function (e) {
+    page_leave();
+});
+
+$(document).on('pjax:end', function (e) {
+    page_load();
+});
+
+
+function init_ui() {
     $(document).pjax('a.pjax', '#content');
 
     FastClick.attach(document.body);
@@ -30,9 +50,6 @@ function init_ui() {
         e.preventDefault();
     });
 
-    window.trekFilter = new TrekFilter();
-
-    window.backPack = new BackPack();
     $('body').on("backpack-change", refresh_backpack);
 
     $(window.trekFilter).on("filterchange", function(e, visible) {
@@ -164,10 +181,10 @@ function view_home() {
 
     // Highlight map on hover in sidebar results
     $('#side-bar .result').hover(function() {
-        if (window.treksLayer) window.treksLayer.highlight($(this).data('id'), true);
+        $(window).trigger('trek:highlight', [$(this).data('id'), true]);
     },
     function() {
-        if (window.treksLayer) window.treksLayer.highlight($(this).data('id'), false);
+        $(window).trigger('trek:highlight', [$(this).data('id'), false]);
     });
 
     $('#side-bar .result').on('dblclick', function (e) {
@@ -183,7 +200,9 @@ function view_home() {
         // Do not fire click if clicked on search tools
         if ($(e.target).parents('.search-tools').length === 0) {
             e.preventDefault();
-            simulate_map_click($(this).data('id'));
+            $(window).trigger('trek:showpopup', [$(this).data('id')]);
+            // Track event
+            _gaq.push(['_trackEvent', 'Results', 'Click', $(this).data('name')]);
         }
         // else, normal click on search tools buttons
     });
@@ -197,39 +216,9 @@ function view_home() {
 }
 
 
-
-function simulate_map_click(trek_id) {
-    // Grab a reference on layer with same id
-    var trekOnMap = window.treksLayer && window.treksLayer.getLayer(trek_id);
-    if (trekOnMap) {
-        // If multi - take first one
-        if (trekOnMap instanceof L.MultiPolyline) {
-            for (var i in trekOnMap._layers) {
-                trekOnMap = trekOnMap._layers[i];
-                break;
-            }
-        }
-        var coords = trekOnMap.getLatLngs(),
-            departure = coords[0],
-            middlepoint = coords[Math.round(coords.length/2)],
-            clickpoint = trekOnMap.iconified ? departure : middlepoint;
-        trekOnMap.fire('click', {
-          latlng: clickpoint
-        });
-        // Move the map if trek is below search results
-        var map = trekOnMap._map;
-        map.fakePanTo(clickpoint);
-        // Track event
-        _gaq.push(['_trackEvent', 'Results', 'Click', trekOnMap.properties && trekOnMap.properties.name]);
-    }
-    else {
-      console.warn("Trek not on map: " + trek_id);
-    }
-}
-
 function refresh_results(matching) {
-    for(var i=0; i<window.treks.features.length; i++) {
-        var trek = window.treks.features[i],
+    for(var i=0; i<window.treksGeoJson.features.length; i++) {
+        var trek = window.treksGeoJson.features[i],
             trekid = trek.properties.pk;
         if ($.inArray(trekid, matching) != -1) {
             $('#results #trek-'+trekid).show(200);
@@ -247,8 +236,8 @@ function refresh_results(matching) {
 }
 
 function refresh_backpack() {
-    for(var i=0; i<window.treks.features.length; i++) {
-        var trek = window.treks.features[i],
+    for(var i=0; i<window.treksGeoJson.features.length; i++) {
+        var trek = window.treksGeoJson.features[i],
             trekid = trek.properties.pk;
         if (window.backPack.contains(trekid)) {
             $('#backpack-trek-'+trekid).show(200);
@@ -272,12 +261,7 @@ function refresh_backpack() {
 function page_leave() {
     // Close share panel (if open)
     $("#global-share.active").click();
-
-    // Deselect all treks on page leave
-    if (treksLayer)
-        treksLayer.eachLayer(function (l) {
-            treksLayer.highlight(l.properties.pk, false);
-        });
+    $(window).trigger('view:leave');
 }
 
 function view_detail() {
@@ -308,8 +292,9 @@ function view_detail() {
     }
 
     //Load altimetric graph
-    if ($('#profilealtitude').length > 0) {
-        altimetricInit();
+    if ($('#altitudegraph').length > 0) {
+        var jsonurl = $('#altitudegraph').data('url');
+        altimetricInit(jsonurl);
     }
 
     // Tooltips
@@ -318,11 +303,11 @@ function view_detail() {
     $('#pois-accordion .pictogram').tooltip();
 }
 
-function altimetricInit() {
+function altimetricInit(jsonurl) {
     /*
      * Load altimetric profile from JSON
      */
-    $.getJSON(altimetric_url, function(data) {
+    $.getJSON(jsonurl, function(data) {
         function updateSparkline() {
             $('#profilealtitude').sparkline(data.profile, L.Util.extend({
                 tooltipSuffix: ' m',
