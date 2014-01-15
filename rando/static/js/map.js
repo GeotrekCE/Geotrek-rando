@@ -507,6 +507,8 @@ function mainmapInit(map, bounds) {
 
 
 function detailmapInit(map, bounds) {
+    var poisMarkersById = {};
+
     map.attributionControl.setPrefix('');
     L.control.fullscreen({
         position: 'topright',
@@ -520,7 +522,7 @@ function detailmapInit(map, bounds) {
 
     $('#pois-accordion .accordion-body').on('show', function (e) {
         var id = $(e.target).data('id'),
-            marker = window.poisMarkers[id];
+            marker = poisMarkersById[id];
 
         // Prevent double-jump
         if (marker._animating === true)
@@ -547,7 +549,7 @@ function detailmapInit(map, bounds) {
 
     $('#pois-accordion .accordion-body').on('hidden', function (e) {
         var id = $(e.target).data('id'),
-            marker = window.poisMarkers[id];
+            marker = poisMarkersById[id];
 
         $(marker._icon).removeClass('highlight');
         marker.closePopup();
@@ -562,7 +564,7 @@ function detailmapInit(map, bounds) {
     // Trek
     var highlight = new L.GeoJSON(window.trek.geometry, {style: L.extend(TREK_LAYER_OPTIONS.outlinestyle, {clickable: false})})
                          .addTo(map);
-    window.trekLayer = new L.GeoJSON(window.trek.geometry, {style: L.extend(TREK_LAYER_OPTIONS.hoverstyle, {clickable: false})})
+    var trekLayer = new L.GeoJSON(window.trek.geometry, {style: L.extend(TREK_LAYER_OPTIONS.hoverstyle, {clickable: false})})
                             .addTo(map);
 
     var wholeBounds = trekLayer.getBounds();
@@ -616,7 +618,7 @@ function detailmapInit(map, bounds) {
     var poisLayer = new POILayer(pois);
     poisLayer.eachLayer(function (marker) {
         wholeBounds.extend(marker.getLatLng());
-        window.poisMarkers[marker.properties.pk] = marker;
+        poisMarkersById[marker.properties.pk] = marker;
         /*
          * Open Accordion on marker click.
          * TODO: does not work correctly.

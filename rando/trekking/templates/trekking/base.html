@@ -142,9 +142,7 @@
             /*
             * A bunch of globals \o/
             */
-            var poisMarkers = poisMarkers || {},
-                trek = {% if trek %}{{ trek.geojson|safe }}{% else %}null{% endif %},
-                trekLayer = window.trekLayer || null,
+            var trek = {% if trek %}{{ trek.geojson|safe }}{% else %}null{% endif %},
                 pois = {% if poisjson %}{{ poisjson|safe }}{% else %}null{% endif %},
                 treks = {{ treksjson|safe }},
 
