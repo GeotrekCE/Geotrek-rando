@@ -560,11 +560,12 @@ function detailmapInit(map, bounds) {
         }
     });
 
+    var trekGeoJson = JSON.parse(document.getElementById('trek-geojson').innerHTML);
 
     // Trek
-    var highlight = new L.GeoJSON(window.trekGeoJson.geometry, {style: L.extend(TREK_LAYER_OPTIONS.outlinestyle, {clickable: false})})
+    var highlight = new L.GeoJSON(trekGeoJson.geometry, {style: L.extend(TREK_LAYER_OPTIONS.outlinestyle, {clickable: false})})
                          .addTo(map);
-    var trekLayer = new L.GeoJSON(window.trekGeoJson.geometry, {style: L.extend(TREK_LAYER_OPTIONS.hoverstyle, {clickable: false})})
+    var trekLayer = new L.GeoJSON(trekGeoJson.geometry, {style: L.extend(TREK_LAYER_OPTIONS.hoverstyle, {clickable: false})})
                             .addTo(map);
 
     var wholeBounds = trekLayer.getBounds();
@@ -585,11 +586,11 @@ function detailmapInit(map, bounds) {
         var departureLabel = gettext("Departure"),
             arrivalLabel = gettext("Arrival");
 
-        if (!/^\s*$/.test(window.trekGeoJson.properties.departure)) {
-            departureLabel += ("&nbsp;: " + window.trekGeoJson.properties.departure);
+        if (!/^\s*$/.test(trekGeoJson.properties.departure)) {
+            departureLabel += ("&nbsp;: " + trekGeoJson.properties.departure);
         }
-        if (!/^\s*$/.test(window.trekGeoJson.properties.arrival)) {
-            arrivalLabel += ("&nbsp;: " + window.trekGeoJson.properties.arrival);
+        if (!/^\s*$/.test(trekGeoJson.properties.arrival)) {
+            arrivalLabel += ("&nbsp;: " + trekGeoJson.properties.arrival);
         }
 
         L.marker(layer.getLatLngs().slice(-1)[0],
@@ -646,11 +647,11 @@ function detailmapInit(map, bounds) {
         iconAnchor: [0, 0],
         labelAnchor: [20, 12]
     });
-    var parkingLocation = window.trekGeoJson.properties.parking_location;
+    var parkingLocation = trekGeoJson.properties.parking_location;
     if (parkingLocation) {
         var pos = L.latLng([parkingLocation[1], parkingLocation[0]]);
         L.marker(pos, {icon: parkingIcon, riseOnHover: true})
-         .bindLabel(window.trekGeoJson.properties.advised_parking || gettext("Recommended parking"), {className: 'parking'})
+         .bindLabel(trekGeoJson.properties.advised_parking || gettext("Recommended parking"), {className: 'parking'})
          .addTo(map);
         wholeBounds.extend(pos);
     }

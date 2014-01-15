@@ -7,6 +7,13 @@
   <title>{{ object.title }}</title>
 {% endif %}
 
+
+<script type="application/json" id="trek-geojson">
+    {# http://stackoverflow.com/questions/9320427/best-practice-for-embedding-arbitrary-json-in-the-dom #}
+    {{ trek.geojson|safe }}
+</script>
+
+
 <div id="mobile-header-detail">
   <a class="pjax" href="{% locale_url request.LANGUAGE_CODE trekking:home %}"><i class="icon-chevron-left icon-white"></i><h1>{% trans "Back to list" %}</h1></a>
 </div>
@@ -246,11 +253,5 @@
 
   </div><!-- detail-container-content -->
 </div><!-- detail-content -->
-
-<script type="text/javascript">
-    if (window.jQuery && jQuery.support.pjax) {
-        window.trekGeoJson = {{ trek.geojson|safe }};
-    }
-</script>
 
 {% leaflet_map 'detailmap' fitextent=False creatediv=False callback="detailmapInit" loadevent="rando:foo" %}{# Such loadevent will prevent automatic map initialization #}
