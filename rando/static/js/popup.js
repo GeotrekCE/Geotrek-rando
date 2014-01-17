@@ -79,7 +79,7 @@ $(document).ready(function (e) {
         function randomTrek() {
             var i = Math.floor(Math.random() * treksList.length),
                 trek = treksList[i];
-            return trek.id;
+            return trek ? trek.id : null;
         }
     }
 });

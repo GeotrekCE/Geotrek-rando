@@ -21,28 +21,77 @@ function invalidate_maps() {
 }
 
 
-var TrekLayer = L.ObjectsLayer.extend({
+var TrekLayer = L.GeoJSON.AJAX.extend({
+    includes: L.LayerIndexMixin,
 
-    initialize: function (geojson) {
-        var options = L.Util.extend(TREK_LAYER_OPTIONS, {
-            highlight: true
-        });
-        L.ObjectsLayer.prototype.initialize.call(this, geojson, options);
+    initialize: function (url) {
+        var options = L.Util.extend(TREK_LAYER_OPTIONS, {});
+        L.GeoJSON.AJAX.prototype.initialize.call(this, url, options);
+
+        this.on('mouseover mouseout', function (e) {
+            this.highlight(e.layer, e.type == 'mouseover');
+        }, this);
 
         var clusterOptions = L.Util.extend(TREK_LAYER_OPTIONS.clusterOptions, {
             iconCreateFunction: this._getTrekClusterIcon.bind(this)
         });
         this._trekCluster = new L.MarkerClusterGroup(clusterOptions);
 
+        this._allTreks = [];
+        this._filtered = {};
         this._hover = null;
         this._iconified = null;
+
+        this.on('data:loaded', function (e) {
+            var allLayers = this.getLayers();
+            for (var i=0; i<allLayers.length; i++) {
+                var layer = allLayers[i];
+                this._allTreks.push(layer);
+                this.indexLayer(layer);
+            }
+        }, this);
     },
 
-    highlight: function (pk, on) {
-        var layer = this.getLayer(pk);
-        on = on === undefined ? true : on;
+    showOnly: function (treksIds) {
+        for (var i=0; i<this._allTreks.length; i++) {
+            var layer = this._allTreks[i],
+                trekId = layer.feature.id,
+                isFiltered = !!this._filtered[trekId];
+            if (treksIds.indexOf(trekId) > -1) {
+                // Should be added, if not already
+                if (isFiltered) {
+                    this.addLayer(layer);
+                    delete this._filtered[trekId];
+                }
+            }
+            else {
+                // Should be filtered, if not already
+                if (!isFiltered) {
+                    this._filtered[trekId] = layer;
+                    this.removeLayer(layer);
+                }
+            }
+        }
+    },
+
+    getLayer: function (trekId) {
+        for(var i=0; i<this._allTreks.length; i++) {
+            var layer = this._allTreks[i],
+                id = layer.feature.id || layer.feature.properties.pk;
+            if (id == trekId)
+                return layer;
+        }
+        return null;
+    },
+
+    highlight: function (layer, on) {
+        if (/string|number/.test(typeof(layer))) {
+            layer = this.getLayer(layer);
+        }
         if (!layer) return;
         if (!this._map) return;
+
+        on = on === undefined ? true : on;
         var isNotClustered = layer.marker && layer.marker._icon;
         if (on) {
             if (layer.iconified) {
@@ -76,18 +125,22 @@ var TrekLayer = L.ObjectsLayer.extend({
     },
 
     onAdd: function (map) {
-        L.ObjectsLayer.prototype.onAdd.apply(this, arguments);
-        map.on('zoomend', this._iconifyTreks, this);
-        map.whenReady(function () {
+        /* When layer is added on map.
+         */
+        L.GeoJSON.AJAX.prototype.onAdd.apply(this, arguments);
+        this.on('data:loaded', function () {
+            map.on('zoomend', this._iconifyTreks, this);
             this._iconifyTreks();
         }, this);
         this._trekCluster.addTo(map);
     },
 
     onRemove: function () {
+        /* When layer is removed from the map.
+         */
         this._map.removeLayer(this._trekCluster);
         map.off('zoomend', this._iconifyTreks, this);
-        L.ObjectsLayer.prototype.onRemove.apply(this, arguments);
+        L.GeoJSON.AJAX.prototype.onRemove.apply(this, arguments);
     },
 
     addLayer: function (layer) {
@@ -98,7 +151,7 @@ var TrekLayer = L.ObjectsLayer.extend({
         else if (layer.marker && this._map) {
             this._map.addLayer(layer.marker);
         }
-        return L.ObjectsLayer.prototype.addLayer.call(this, layer);
+        return L.GeoJSON.AJAX.prototype.addLayer.call(this, layer);
     },
 
     removeLayer: function (layer) {
@@ -106,7 +159,7 @@ var TrekLayer = L.ObjectsLayer.extend({
             this._trekCluster.removeLayer(layer.marker);
             this._map.removeLayer(layer.marker);
         }
-        return L.ObjectsLayer.prototype.removeLayer.call(this, layer);
+        return L.GeoJSON.AJAX.prototype.removeLayer.call(this, layer);
     },
 
     _iconifyTreks: function (e) {
@@ -118,12 +171,14 @@ var TrekLayer = L.ObjectsLayer.extend({
         this._iconified = iconified;
 
         // Replace polyline by markers, and vice-versa
-        for (var k in this._objects) {
-            var l = this._objects[k];
+        for (var i=0; i<this._allTreks.length; i++) {
+            var l = this._allTreks[i];
             l.iconified = iconified;
 
+            var trekId = l.feature.id;
+
             var departure = l.getLatLngs()[0],
-                name = l.properties.name;
+                name = l.feature.properties.name;
 
             // Remove trek departure, either clustered or departure flag
             if (l.marker) {
@@ -134,7 +189,7 @@ var TrekLayer = L.ObjectsLayer.extend({
             l.marker.trek = l;
             l.marker.on('click mouseover mouseout', propagate_mouse_event, this);
 
-            if (this._current_objects[k] === undefined) {
+            if (this._filtered[trekId] !== undefined) {
                 continue;  // Skip currently filtered
             }
 
@@ -321,15 +376,17 @@ L.Map.include({
  * Map initialization functions.
  * Callbacks of Django Leaflet.
  */
-function mainmapInit(map, bounds) {
+function mainmapInit(map, djoptions) {
     map.attributionControl.setPrefix('');
 
     var treks_url = $(map._container).data('treks-url');
-    var treksLayer = new TrekLayer(treks_url).addTo(map);
+    var treksLayer = (new TrekLayer(treks_url)).addTo(map);
 
     if (!map.restoreView()) {
-        var layerBounds = treksLayer.getBounds();
-        map.fitFakeBounds(layerBounds.isValid() ? layerBounds : bounds);
+        treksLayer.on('data:loaded', function () {
+            map.fitFakeBounds(treksLayer.getBounds());
+        });
+        map.fitWorld();
     }
 
     // Move controls to the right
@@ -351,16 +408,16 @@ function mainmapInit(map, bounds) {
 
     // Highlight result on mouseover
     treksLayer.on('mouseover', function (e) {
-      $('#trek-'+ e.layer.properties.pk +'.result').addClass('active');
+      $('#trek-'+ e.layer.feature.properties.pk +'.result').addClass('active');
     });
     treksLayer.on('mouseout', function (e) {
-      $('#trek-'+ e.layer.properties.pk +'.result').removeClass('active');
+      $('#trek-'+ e.layer.feature.properties.pk +'.result').removeClass('active');
     });
 
     $(window).on('view:leave', function (e) {
         // Deselect all treks on page leave
         treksLayer.eachLayer(function (l) {
-            treksLayer.highlight(l.properties.pk, false);
+            treksLayer.highlight(l.feature.properties.pk, false);
         });
     });
     $(window).on('trek:highlight', function (e, trek_id, state) {
@@ -376,13 +433,13 @@ function mainmapInit(map, bounds) {
     });
     // Filter layers
     $(window.trekFilter).on("filterchange", function(e, matched) {
-        treksLayer.updateFromPks(matched);
+        treksLayer.showOnly(matched);
     });
-    // In case filters iconified were loaded through URL, it's too late to
-    // listen for filterchange event.
-    if (window.trekFilter.matching.length > 0) {
-        treksLayer.updateFromPks(window.trekFilter.matching);
-    }
+    treksLayer.on('data:loaded', function () {
+        if (window.trekFilter.matching.length > 0) {
+            treksLayer.showOnly(window.trekFilter.matching);
+        }
+    });
 
     // Filter list by map bounds
     map.on('moveend', function (e) {
@@ -396,7 +453,7 @@ function mainmapInit(map, bounds) {
         var inBounds = treksLayer.search(map.getFakeBounds());
         $('#side-bar .result').addClass('outbounds');
         for (var i=0, n=inBounds.length; i<n; i++) {
-            var pk = inBounds[i].properties.pk;
+            var pk = inBounds[i].feature.properties.pk;
             $("#side-bar .result[data-id='" + pk + "']").removeClass('outbounds');
         }
     });
@@ -404,9 +461,9 @@ function mainmapInit(map, bounds) {
     // Go to detail page on double-click
     treksLayer.on('dblclick', function (e) {
         // Track event
-        _gaq.push(['_trackEvent', 'Map', 'Doubleclick', e.layer.properties.name]);
+        _gaq.push(['_trackEvent', 'Map', 'Doubleclick', e.layer.feature.properties.name]);
         // Simulate click on link
-        $('#trek-'+ e.layer.properties.pk +'.result a.pjax').click();
+        $('#trek-'+ e.layer.feature.properties.pk +'.result a.pjax').click();
     });
 
     // Popup on click on trek
@@ -415,10 +472,12 @@ function mainmapInit(map, bounds) {
         var layer = e.layer;
 
         // Safety check. Should never happen.
-        if (!layer.properties || !layer.properties.pk) {
+        if (!layer.feature.properties || !layer.feature.id) {
             console.warn('Trek layer has no properties. ' + L.Util.stamp(layer));
             return;
         }
+
+        var properties = layer.feature.properties;
 
         var html = '<h3>{NAME}</h3>' +
                    '<div class="clearfix">' +
@@ -428,17 +487,17 @@ function mainmapInit(map, bounds) {
                    '</div>' +
                    '<i class="icon-chevron-right icon"></i>';
         html = L.Util.template(html, {
-            NAME: layer.properties.name,
-            DESCRIPTION: layer.properties.description_teaser,
+            NAME: properties.name,
+            DESCRIPTION: properties.description_teaser,
             // This is tricky : use img url of trek in result list :)
-            THUMBNAIL: $('#trek-'+ e.layer.properties.pk +'.result img').attr('src'),
-            LINK: $('#trek-'+ e.layer.properties.pk +'.result a.pjax').attr('href'),
+            THUMBNAIL: $('#trek-'+ properties.pk +'.result img').attr('src'),
+            LINK: $('#trek-'+ properties.pk +'.result a.pjax').attr('href'),
             MORE: gettext("More info...")
         });
 
         if (popup) {
             // Click on already opened popup : close only.
-            var same = (popup.pk == layer.properties.pk);
+            var same = (popup.pk == properties.pk);
             popup._close();
             if (same)
                 return;
@@ -460,14 +519,14 @@ function mainmapInit(map, bounds) {
         popup = L.popup(popupSettings).setLatLng(e.latlng)
                  .setContent(html)
                  .openOn(map);
-        popup.pk = layer.properties.pk;
+        popup.pk = properties.pk;
 
         // Make sure clic on details will open as pjax (cause added after initial loading?)
         $("a.pjax", popup._container).click(function (event) {
             $.pjax.click(event, {container: '#content'});
 
             // Track event
-            _gaq.push(['_trackEvent', 'Map', 'Popup', e.layer.properties.name]);
+            _gaq.push(['_trackEvent', 'Map', 'Popup', properties.name]);
         });
 
         // If MOBILE, then click on whole popup panel opens details
