@@ -87,15 +87,6 @@ function page_load() {
 }
 
 function view_home() {
-    // Show active tab
-    if (/results|backpack/.test(window.location.hash)) {
-        $('#tab-' + window.location.hash.slice(1) + ' a').click();
-    }
-    // Focus search field
-    if (/search/.test(window.location.hash)) {
-        $('input#search').focus();
-    }
-
     initSliders();
 
     // Load filters (will refresh backpack results)
@@ -126,7 +117,14 @@ function view_home() {
         $(this).parents('ul.nav-tabs').find('span.badge-warning').removeClass('badge-warning');
         $(this).find('span.badge').addClass('badge-warning');
     });
-
+    // Show active tab
+    if (/results|backpack/.test(window.location.hash)) {
+        $('#tab-' + window.location.hash.slice(1) + ' a').click();
+    }
+    // Focus search field
+    if (/search/.test(window.location.hash)) {
+        $('input#search').focus();
+    }
 
     $('#toggle-side-bar').off('click').on('click', function () {
         if (!$(this).hasClass('closed')) {
