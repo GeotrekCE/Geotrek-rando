@@ -354,6 +354,7 @@ An example of HTML content can be found here : https://gist.github.com/leplatrem
 
     In order to open home page (main map) on saved search links when popup is shown
     from another page, prefix all links with ``/`` (e.g. ``href="/#3782-20ce-360-9602-60a6"``).
+    And make sure to put ``pjax`` class on the ``<a>`` tag!
 
 Main behaviour of home popup :
 
