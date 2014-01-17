@@ -84,7 +84,9 @@
                 {% endblock content %}
             </div>
 
-            <div id="mainmap" data-treks-url="{% locale_url request.LANGUAGE_CODE trekking:fileserve treks_url %}"></div>
+            <div id="mainmap"
+                 data-treks-url="{% locale_url request.LANGUAGE_CODE trekking:fileserve treks_url %}"
+                 data-treks-extent="{{ map_extent }}"></div>
         </div>
         <!-- container -->
 

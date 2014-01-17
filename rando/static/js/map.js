@@ -379,14 +379,16 @@ L.Map.include({
 function mainmapInit(map, djoptions) {
     map.attributionControl.setPrefix('');
 
-    var treks_url = $(map._container).data('treks-url');
+    var treks_url = $(map._container).data('treks-url'),
+        treks_extent = $(map._container).data('treks-extent');
     var treksLayer = (new TrekLayer(treks_url)).addTo(map);
 
+    var treksBounds = L.latLngBounds([treks_extent[3],
+                                      treks_extent[0]],
+                                     [treks_extent[1],
+                                      treks_extent[2]]);
     if (!map.restoreView()) {
-        treksLayer.on('data:loaded', function () {
-            map.fitFakeBounds(treksLayer.getBounds());
-        });
-        map.fitWorld();
+        map.fitFakeBounds(treksBounds);
     }
 
     // Move controls to the right
@@ -429,7 +431,7 @@ function mainmapInit(map, djoptions) {
     //
     // Reset view on filter reset
     $(window.trekFilter).on('reset', function (){
-        map.fitFakeBounds(treksLayer.getBounds());
+        map.fitFakeBounds(treksBounds);
     });
     // Filter layers
     $(window.trekFilter).on("filterchange", function(e, matched) {
