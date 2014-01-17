@@ -284,15 +284,11 @@ The tiles of this layer can then be added to the maps, using this snippet (for e
 
     <script type="text/javascript">
         (function() {
-              // Extra tile layer
-              var boundaries = null;
               // Add it on all maps at initialization
               $(window).on('map:ready', function (e, map) {
-                    boundaries = boundaries || L.tileLayer('http://geobi.makina-corpus.net/livembtiles/coeur-ecrins/{z}/{x}/{y}.png')
-                    if (!map.hasLayer(boundaries)) {
-                          map.addLayer(boundaries);
-                          boundaries.bringToFront();
-                    }
+                    L.tileLayer('http://livembtiles.makina-corpus.net/makina/coeur-ecrins/{z}/{x}/{y}.png')
+                     .addTo(map)
+                     .bringToFront();
               });
         })();
     </script>

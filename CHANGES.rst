@@ -13,6 +13,7 @@ CHANGELOG
 * Half of carousel is now active for prev and next (fixes #80)
 * Fix flags images in popup
 * Hide filters on page load, until Chosen is loaded (ref #61)
+* Fix snippet to add extra layers in README (fixes #23, #51)
 
 **Breaking changes**
 
