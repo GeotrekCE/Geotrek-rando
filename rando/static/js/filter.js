@@ -4,24 +4,8 @@ function TrekFilter()
     self.treksList = [];
     self.matching = [];
 
-    $('#results .result').each(function () {
-        var $trek = $(this);
-        self.treksList.push({
-            fulltext: $trek.data('fulltext'),
-            themes: $trek.data('themes'),
-            usages: $trek.data('usages'),
-            districts: $trek.data('districts'),
-            cities: $trek.data('cities'),
-            route: $trek.data('route'),
-            difficulty: $trek.data('difficulty'),
-            duration: $trek.data('duration'),
-            ascent: $trek.data('ascent'),
-            id: $trek.data('id')
-        });
-    });
-
     this.initEvents = function () {
-        $(window).unbind('filters:reload').on('filters:reload', self.load);
+        $(window).unbind('filters:reload').on('filters:reload', function () {self.load();});
         $(".theme .filter").unbind('click').on('click', self.filterChanged);
         $(".chosen-select").chosen().change(self.filterChanged);
         $('#search').unbind('keyup').on("keyup", self.filterChanged);
@@ -110,7 +94,9 @@ function TrekFilter()
         return state;
     };
 
-    this.load = function () {
+    this.load = function (treksList) {
+        self.treksList = treksList || self.treksList;
+
         self.state = this.__loadState();
 
         $('#search').val(self.state.search || '');

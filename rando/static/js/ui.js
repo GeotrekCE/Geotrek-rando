@@ -100,7 +100,17 @@ function view_home() {
 
     // Load filters (will refresh backpack results)
     // (After sliders initialization)
-    window.trekFilter.load();
+    var treksList = [];
+    $('#results .result').each(function () {
+        var $trek = $(this),
+            trek = [];
+        $.each(['fulltext', 'themes', 'usages', 'districts', 'cities',
+                'route', 'difficulty', 'duration', 'ascent', 'id'], function (i, k) {
+            trek[k] = $trek.data(k);
+        });
+        treksList.push(trek);
+    });
+    window.trekFilter.load(treksList);
 
     $('#clear-filters').off('click').on('click', function () {
         window.trekFilter.clear();
