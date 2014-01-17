@@ -164,7 +164,12 @@ class Trek(JSONModel):
             fields.append(poi.description)
             fields.append(poi.type)
 
-        fulltext = strip_tags(u''.join(fields))
+        words = []
+        for field in fields:
+            words.extend(re.findall(r"[\w&;']+", field))
+        words = [w for w in set(words) if len(w) > 3]
+
+        fulltext = strip_tags(u''.join(words))
         html_parser = HTMLParser.HTMLParser()
         fulltext = html_parser.unescape(fulltext)
         fulltext = re.sub(r'\W*\b\w{1,3}\b', '', fulltext)

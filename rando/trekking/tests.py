@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import shutil
 import os
+import re
 
 from mock import patch
 from easydict import EasyDict as edict
@@ -56,12 +57,12 @@ class TrekFulltextTest(SimpleTestCase):
             'name': 'its name',
             'departure': 'd&eacute;part',
             'arrival': 'made in a z small world',
-            'ambiance': "it's like, you know. VERY good.",
+            'ambiance': "it's like like like, you know. VERY good.",
             'advice': """do not take
             this way""",
-            'cities': [edict({'name': 'triffouilli', 'code': '123'})],
+            'cities': [edict({'name': 'triffouilli', 'code': '12345'})],
             'districts': [edict({'name': 'secteur'})],
-            'pois': [edict({'name': 'poi', 'description': 'desc', 'type': 'fleur'})],
+            'pois': [edict({'name': 'jonquille', 'description': 'desc', 'type': 'fleur'})],
         })
         self.fulltext = self.trek.fulltext
 
@@ -74,13 +75,13 @@ class TrekFulltextTest(SimpleTestCase):
 
     def test_fulltext_contains_cities(self):
         self.assertTrue('triffouilli' in self.fulltext)
-        self.assertTrue('123' in self.fulltext)
+        self.assertTrue('12345' in self.fulltext)
 
     def test_fulltext_contains_districts(self):
         self.assertTrue('secteur' in self.fulltext)
 
     def test_fulltext_contains_pois(self):
-        self.assertTrue('poi' in self.fulltext)
+        self.assertTrue('jonquille' in self.fulltext)
         self.assertTrue('desc' in self.fulltext)
         self.assertTrue('fleur' in self.fulltext)
 
@@ -94,3 +95,7 @@ class TrekFulltextTest(SimpleTestCase):
         self.assertFalse('in' in self.fulltext)
         self.assertFalse('you' in self.fulltext)
         self.assertFalse('z' in self.fulltext)
+
+    def test_duplicate_words_are_removed(self):
+        count = len(list(re.finditer('like', self.fulltext)))
+        self.assertEqual(count, 1)
