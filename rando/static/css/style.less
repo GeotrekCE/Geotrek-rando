@@ -331,6 +331,7 @@ ul.row-footer {
 
     li {
       display: inline-block;
+      vertical-align: top;
     }
   }
 
@@ -356,6 +357,15 @@ ul.row-footer {
     &:hover,
     &.active {
       background-color: fadeout(@mainColor, 10%);
+    }
+  }
+
+  .icon-home {
+    padding: 5px 7px 6px 7px;
+
+    &:before {
+      font-size: 18px;
+      vertical-align: middle;
     }
   }
 }

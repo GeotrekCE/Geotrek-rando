@@ -689,6 +689,7 @@ ul.row-footer a {
 }
 #flatpages ul li {
   display: inline-block;
+  vertical-align: top;
 }
 header #flatpages {
   display: block;
@@ -721,6 +722,13 @@ header #flatpages {
 #flatpages .btn:hover,
 #flatpages .btn.active {
   background-color: rgba(248, 148, 6, 0.9);
+}
+#flatpages .icon-home {
+  padding: 5px 7px 6px 7px;
+}
+#flatpages .icon-home:before {
+  font-size: 18px;
+  vertical-align: middle;
 }
 #mobile-header-detail {
   display: none;
