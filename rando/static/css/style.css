@@ -444,6 +444,7 @@ i.icon {
 }
 #advanced-filters select {
   width: 110px;
+  display: none;
 }
 .popup-home {
   overflow: hidden;
