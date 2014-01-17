@@ -742,13 +742,12 @@ header #flatpages {
   right: 10px;
   line-height: 17px;
   font-size: 13px;
+  padding-left: 25px;
 }
-#global-share i {
-  width: 19px;
-  height: 15px;
-  background: url(../img/share.png);
-  background-size: 100%;
-  margin-right: 3px;
+#global-share:before {
+  position: absolute;
+  left: 4px;
+  font-size: 17px;
 }
 .popover-content {
   padding: 5px;
