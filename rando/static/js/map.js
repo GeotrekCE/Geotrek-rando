@@ -1,26 +1,3 @@
-var TREK_LAYER_OPTIONS = L.Util.extend({
-    style: {'color': '#F89406', 'weight': 5, 'opacity': 0.8},
-    hoverstyle: {'color': '#F89406', 'weight': 5, 'opacity': 1.0},
-    outlinestyle: {'color': 'yellow', 'weight': 10, 'opacity': 0.8},
-    arrowstyle: {'fill': '#E97000', 'font-weight': 'bold'},
-    positionstyle: {'fillOpacity': 1.0, 'opacity': 1.0, 'fillColor': 'white', 'color': 'black', 'width': 3},
-    iconifyZoom: 12,
-    clusterOptions: {
-        showCoverageOnHover: false,
-        maxClusterRadius: 36,
-    }
-}, TREK_LAYER_OPTIONS || {});
-
-
-function invalidate_maps() {
-    if (window.maps) {
-        $.each(window.maps, function (i, map) {
-            map.invalidateSize();
-        });
-    }
-}
-
-
 var TrekLayer = L.GeoJSON.AJAX.extend({
     includes: L.LayerIndexMixin,
 
@@ -263,6 +240,12 @@ var POILayer = L.MarkerClusterGroup.extend({
           }
         });
 
+        if (poisData) {
+            this.addData(poisData);
+        }
+    },
+
+    addData: function (poisData) {
         for (var i=0; i < poisData.features.length; i++) {
             var featureData = poisData.features[i],
                 marker = this.poisMarker(featureData,
@@ -582,55 +565,59 @@ function detailmapInit(map, bounds) {
         map.minimapcontrol._minimize();
     });
 
-    $('#pois-accordion .accordion-body').on('show', function (e) {
-        var id = $(e.target).data('id'),
-            marker = poisMarkersById[id];
-
-        // Prevent double-jump
-        if (marker._animating === true)
-            return;
-
-        map.panTo(marker.getLatLng());
-
-        // Add clusterized marker explicitly, will be removed on accordion close.
-        marker._clusterized = (marker._map === undefined);
-        if (marker._clusterized) {
-            map.addLayer(marker);
-        }
-        // Jump!
-        marker._animating = true;
-        $(marker._icon).addClass('highlight');
-        marker.openPopup();
-        $(marker._icon).css('z-index', 3000);
-        $(marker._icon).animate({"margin-top": "-=20px"}, "fast",
-                                function(){
-                                    marker._animating = false;
-                                    $(this).animate({"margin-top": "+=20px"}, "fast");
-                                });
-    });
-
-    $('#pois-accordion .accordion-body').on('hidden', function (e) {
-        var id = $(e.target).data('id'),
-            marker = poisMarkersById[id];
-
-        $(marker._icon).removeClass('highlight');
-        marker.closePopup();
-        // Restore clusterized markers (if still on map, i.e. zoom not changed)
-        if (marker._clusterized && marker._map) {
-            marker._map.removeLayer(marker);
-            marker._map = undefined;
-        }
-    });
-
     var trekGeoJson = JSON.parse(document.getElementById('trek-geojson').innerHTML);
+    var poiUrl = $(map._container).data('poi-url');
 
+    var trekLayer = initDetailTrekMap(map, trekGeoJson);
+    var parking = initDetailParking(map, trekGeoJson);
+    initDetailAltimetricProfile(map, trekLayer);
+
+    var wholeBounds = trekLayer.getBounds();
+    if (parking) {
+        wholeBounds.extend(parking.getLatLng());
+    }
+    map.fitBounds(wholeBounds);
+
+    var poisLayer = initDetailPoisLayer(map, poiUrl);
+    poisLayer.on('data:loaded', function () {
+        wholeBounds.extend(poisLayer.getBounds());
+        map.fitBounds(wholeBounds);
+    });
+
+    map.whenReady(function () {
+        map.switchLayer('detail');
+        if (map.layerscontrol) map.removeControl(map.layerscontrol);
+
+        new L.Control.ResetView(getWholeBounds, {position: 'topright'}).addTo(map);
+        map.addControl(new L.Control.Scale({imperial: false, position: 'bottomright'}));
+
+        map.scrollWheelZoom.disable();
+        var enableWheel = function () {
+            map.scrollWheelZoom.enable();
+            $(map._container).css('cursor','-moz-grab');
+            $(map._container).css('cursor','-webkit-grab');
+            $('.helpclic').hide();
+        };
+
+        $(map._container).css('cursor','pointer');
+
+        // Enable wheel zoom on clic (~ focus)
+        map.on('click', enableWheel);
+
+        $(window).trigger('map:ready', [map, 'detail']);
+    });
+
+    function getWholeBounds() {
+        return wholeBounds;
+    }
+}
+
+function initDetailTrekMap(map, trekGeoJson) {
     // Trek
     var highlight = new L.GeoJSON(trekGeoJson.geometry, {style: L.extend(TREK_LAYER_OPTIONS.outlinestyle, {clickable: false})})
                          .addTo(map);
     var trekLayer = new L.GeoJSON(trekGeoJson.geometry, {style: L.extend(TREK_LAYER_OPTIONS.hoverstyle, {clickable: false})})
                             .addTo(map);
-
-    var wholeBounds = trekLayer.getBounds();
 
     // Show start and end
     trekLayer.eachLayer(function (layer) {
@@ -677,49 +664,10 @@ function detailmapInit(map, bounds) {
           .addTo(map);
     });
 
-    // POIs Layer
-    var poiUrl = $(map._container).data('poi-url');
-    $.getJSON(poiUrl, function (data) {
-        var poisLayer = new POILayer(data);
-        poisLayer.eachLayer(function (marker) {
-            wholeBounds.extend(marker.getLatLng());
-            poisMarkersById[marker.properties.pk] = marker;
-            /*
-             * Open Accordion on marker click.
-             * TODO: does not work correctly.
-             */
-            marker.off('click');  // Disable auto-control of popup
-            marker.on('click', function (e) {
-                var $item = $('#poi-item-' + marker.properties.pk);
-                $item.click();
-                var top = $('#pois-accordion').scrollTop(),
-                    toTop = $item.position().top;
-                $('#pois-accordion').animate({
-                    scrollTop: top + toTop
-                }, 1000);
-            });
+    return trekLayer;
+}
 
-        });
-        poisLayer.addTo(map);
-    });
-
-    var parkingIcon = L.icon({
-        iconUrl: IMG_URL + '/parking.png',
-        iconSize: [24, 24],
-        iconAnchor: [0, 0],
-        labelAnchor: [20, 12]
-    });
-    var parkingLocation = trekGeoJson.properties.parking_location;
-    if (parkingLocation) {
-        var pos = L.latLng([parkingLocation[1], parkingLocation[0]]);
-        L.marker(pos, {icon: parkingIcon, riseOnHover: true})
-         .bindLabel(trekGeoJson.properties.advised_parking || gettext("Recommended parking"), {className: 'parking'})
-         .addTo(map);
-        wholeBounds.extend(pos);
-    }
-
-    map.fitBounds(wholeBounds);
-
+function initDetailAltimetricProfile(map, trekLayer) {
     var marker = null;
     $('#profilealtitude').on('hover:distance', function (event, meters) {
         if (marker) {
@@ -738,58 +686,132 @@ function detailmapInit(map, bounds) {
         });
     });
 
-
-    // Add reset view control
-    map.whenReady(function () {
-        map.switchLayer('detail');
-        if (map.layerscontrol) map.removeControl(map.layerscontrol);
-
-        new L.Control.ResetView(wholeBounds, {position: 'topright'}).addTo(map);
-        map.addControl(new L.Control.Scale({imperial: false, position: 'bottomright'}));
-
-        map.scrollWheelZoom.disable();
-        var enableWheel = function () {
-            map.scrollWheelZoom.enable();
-            $(map._container).css('cursor','-moz-grab');
-            $(map._container).css('cursor','-webkit-grab');
-            $('.helpclic').hide();
-        };
-
-        $(map._container).css('cursor','pointer');
-
-        // Enable wheel zoom on clic (~ focus)
-        map.on('click', enableWheel);
-
-        $(window).trigger('map:ready', [map, 'detail']);
-    });
-}
-
-function distanceMeters(p1, p2) {
-  var R = 6371000,
-      dLat = toRad(p2.lat - p1.lat),
-      dLon = toRad(p2.lng - p1.lng);
-  var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-          Math.cos(toRad(p2.lat)) * Math.cos(toRad(p2.lat)) *
-          Math.sin(dLon/2) * Math.sin(dLon/2);
-  var c = 2 * Math.atan2(Math.sqrt(a) , Math.sqrt(1-a));
-  var d = R * c;
-
-  function toRad(n) { return n * Math.PI / 180; }
-  return d;
-}
-
-function latLngAtDistance(polyline, distance) {
-  // Initialization of variables
-  var points = polyline.getLatLngs(),
-      distance_cum = 0.0;
-  //iterate line points
-  for (var i=1; i<points.length; i++) {
-    var p1 = points[i-1],
-        p2 = points[i];
-    distance_cum = distance_cum + distanceMeters(p1, p2); //calcul distance
-    if (distance_cum >= distance) {
-        return L.latLng(p2.lat, p2.lng);
+    function distanceMeters(p1, p2) {
+        var R = 6371000,
+            dLat = toRad(p2.lat - p1.lat),
+            dLon = toRad(p2.lng - p1.lng);
+        var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(toRad(p2.lat)) * Math.cos(toRad(p2.lat)) *
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+        var c = 2 * Math.atan2(Math.sqrt(a) , Math.sqrt(1-a));
+        var d = R * c;
+        function toRad(n) { return n * Math.PI / 180; }
+        return d;
     }
-  }
-  return null;
+
+    function latLngAtDistance(polyline, distance) {
+        // Initialization of variables
+        var points = polyline.getLatLngs(),
+            distance_cum = 0.0;
+        //iterate line points
+        for (var i=1; i<points.length; i++) {
+          var p1 = points[i-1],
+              p2 = points[i];
+          distance_cum = distance_cum + distanceMeters(p1, p2); //calcul distance
+          if (distance_cum >= distance) {
+              return L.latLng(p2.lat, p2.lng);
+          }
+        }
+        return null;
+    }
+}
+
+function initDetailParking(map, trekGeoJson) {
+    var parkingIcon = L.icon({
+        iconUrl: IMG_URL + '/parking.png',
+        iconSize: [24, 24],
+        iconAnchor: [0, 0],
+        labelAnchor: [20, 12]
+    });
+    var parkingLocation = trekGeoJson.properties.parking_location;
+    if (parkingLocation) {
+        var pos = L.latLng([parkingLocation[1], parkingLocation[0]]);
+        return L.marker(pos, {icon: parkingIcon, riseOnHover: true})
+                .bindLabel(trekGeoJson.properties.advised_parking || gettext("Recommended parking"), {className: 'parking'})
+                .addTo(map);
+    }
+    return null;
+}
+
+function initDetailPoisLayer(map, poiUrl) {
+    // We don't use L.GeoJSON.AJAX because POILayer already inherits
+    // from MarkerCluster.
+    var poisLayer = new POILayer();
+    $.getJSON(poiUrl, function (data) {
+        poisLayer.addData(data);
+        initDetailAccordionPois(map, poisLayer);
+    });
+    return poisLayer.addTo(map);
+}
+
+
+function initDetailAccordionPois(map, poisLayer) {
+    var poisMarkersById = {};
+
+    $('#pois-accordion').on('show', function (e) {
+        var id = $(e.target).data('id');
+        $(".accordion-toggle[data-id='"+ id +"']", this).addClass('open');
+    });
+    $('#pois-accordion').on('hidden', function (e) {
+        var id = $(e.target).data('id');
+        $(".accordion-toggle[data-id='"+ id +"']", this).removeClass('open');
+    });
+
+    poisLayer.eachLayer(function (marker) {
+        poisMarkersById[marker.properties.pk] = marker;
+        /*
+         * Open Accordion on marker click.
+         * TODO: does not work correctly.
+         */
+        marker.off('click');  // Disable auto-control of popup
+        marker.on('click', function (e) {
+            var $item = $('#poi-item-' + marker.properties.pk);
+            $item.click();
+            var top = $('#pois-accordion').scrollTop(),
+                toTop = $item.position().top;
+            $('#pois-accordion').animate({
+                scrollTop: top + toTop
+            }, 1000);
+        });
+    });
+
+    $('#pois-accordion .accordion-body').on('show', function (e) {
+        var id = $(e.target).data('id'),
+            marker = poisMarkersById[id];
+
+        // Prevent double-jump
+        if (marker._animating === true)
+            return;
+
+        map.panTo(marker.getLatLng());
+
+        // Add clusterized marker explicitly, will be removed on accordion close.
+        marker._clusterized = (marker._map === undefined);
+        if (marker._clusterized) {
+            map.addLayer(marker);
+        }
+        // Jump!
+        marker._animating = true;
+        $(marker._icon).addClass('highlight');
+        marker.openPopup();
+        $(marker._icon).css('z-index', 3000);
+        $(marker._icon).animate({"margin-top": "-=20px"}, "fast",
+                                function(){
+                                    marker._animating = false;
+                                    $(this).animate({"margin-top": "+=20px"}, "fast");
+                                });
+    });
+
+    $('#pois-accordion .accordion-body').on('hidden', function (e) {
+        var id = $(e.target).data('id'),
+            marker = poisMarkersById[id];
+
+        $(marker._icon).removeClass('highlight');
+        marker.closePopup();
+        // Restore clusterized markers (if still on map, i.e. zoom not changed)
+        if (marker._clusterized && marker._map) {
+            marker._map.removeLayer(marker);
+            marker._map = undefined;
+        }
+    });
 }

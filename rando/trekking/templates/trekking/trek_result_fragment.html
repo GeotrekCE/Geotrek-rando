@@ -39,7 +39,7 @@
           <span class="hidden">{% trans "Remove from favorites" %}</span>
           <i class="backpack remove"></i>
         {% else %}
-        <a class="btn backpack" data-pk="{{ trek.properties.pk }}" data-toggle="tooltip" title="{% trans "Add to favorites" %}">
+        <a class="btn backpack" data-id="{{ trek.properties.pk }}" data-toggle="tooltip" title="{% trans "Add to favorites" %}">
           <span class="hidden">{% trans "Add to favorites" %}</span>
           <i class="backpack"></i>
         {% endif %}

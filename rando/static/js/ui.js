@@ -13,6 +13,13 @@ Modernizr.addTest('fullscreen', function(){
 });
 
 
+function invalidate_maps() {
+    for (var i=0; i<window.maps.length; i++) {
+        window.maps[i].invalidateSize();
+    }
+}
+
+
 function init_ui() {
     $(document).pjax('a.pjax', '#content');
 
@@ -22,22 +29,11 @@ function init_ui() {
         e.preventDefault();
     });
 
-    $('body').on("backpack-change", refresh_backpack);
-
     $(window.trekFilter).on("filterchange", function(e, visible) {
         refresh_results(visible);
     });
 
-    $(window).smartresize(function() {
-        // Check if youre on mobile or not
-        if(Modernizr.mq('only all and (max-width: 767px)')) {
-            MOBILE = true;
-        } else {
-            MOBILE = false;
-        }
-
-        invalidate_maps();
-    });
+    $(window).smartresize(invalidate_maps);
 }
 
 function page_load() {
@@ -82,23 +78,7 @@ function page_load() {
 
     init_share();
 
-    // Refresh tab results
-    refresh_backpack();
-
-    // Add trek to backpack
-    $('.btn.backpack').on('click', function (e) {
-        var trekid = $(this).data('pk'),
-            trekname = $(this).data('name');
-        if (window.backPack.contains(trekid)) {
-            window.backPack.remove(trekid);
-            // Track event
-            _gaq.push(['_trackEvent', 'Backpack', 'Remove', trekname]);
-        }
-        else {
-            window.backPack.save(trekid);
-            _gaq.push(['_trackEvent', 'Backpack', 'Add', trekname]);
-        }
-    });
+    initBackpack();
 
     // Lang button
     $('#lang-switch a.utils').on('click', function () {
@@ -107,7 +87,16 @@ function page_load() {
 }
 
 function view_home() {
-    init_sliders();
+    // Show active tab
+    if (/results|backpack/.test(window.location.hash)) {
+        $('#tab-' + window.location.hash.slice(1) + ' a').click();
+    }
+    // Focus search field
+    if (/search/.test(window.location.hash)) {
+        $('input#search').focus();
+    }
+
+    initSliders();
 
     // Load filters (will refresh backpack results)
     // (After sliders initialization)
@@ -131,14 +120,6 @@ function view_home() {
         $(this).find('span.badge').addClass('badge-warning');
     });
 
-    // Show active tab
-    if (/results|backpack/.test(window.location.hash)) {
-        $('#tab-' + window.location.hash.slice(1) + ' a').click();
-    }
-    // Focus search field
-    if (/search/.test(window.location.hash)) {
-        $('input#search').focus();
-    }
 
     $('#toggle-side-bar').off('click').on('click', function () {
         if (!$(this).hasClass('closed')) {
@@ -207,31 +188,71 @@ function refresh_results(matching) {
     $('#tab-results span.badge').html(matching.length);
 }
 
+
+function initBackpack() {
+    $(window).on("backpack:change", refresh_backpack);
+
+    // Refresh tab results
+    refresh_backpack();
+
+    var $detailBackpack = $(".detail-content .btn.backpack"),
+        trekId = $detailBackpack.data('id');
+    if (window.backPack.contains(trekId))
+        $detailBackpack.addClass('active');
+    else
+        $detailBackpack.removeClass('active');
+
+    // Add trek to backpack
+    $('.btn.backpack').on('click', function (e) {
+        var trekid = $(this).data('id'),
+            trekname = $(this).data('name');
+        if (window.backPack.contains(trekid)) {
+            window.backPack.remove(trekid);
+            $(this).removeClass('active');
+            // Track event
+            _gaq.push(['_trackEvent', 'Backpack', 'Remove', trekname]);
+        }
+        else {
+            window.backPack.save(trekid);
+            $(this).addClass('active');
+            _gaq.push(['_trackEvent', 'Backpack', 'Add', trekname]);
+        }
+    });
+}
+
+
 function refresh_backpack() {
     $('#backpack .result').each(function () {
         var $trek = $(this),
             trekId = $trek.data('id');
         if (window.backPack.contains(trekId)) {
             $trek.show(200);
-            $trek.find('.btn.backpack').addClass('active')
-                                       .attr('title', gettext('Remove from favorites'))
-                 .find('i').removeClass('add').addClass('remove');
-            // In detail page
-            $(".detail-content .btn[data-pk='"+ trekId + "']").addClass('active');
         }
         else {
             $trek.hide(200);
+        }
+    });
+
+    $('#results .result, #backpack .result').each(function () {
+        var $trek = $(this),
+            trekId = $trek.data('id');
+        if (window.backPack.contains(trekId)) {
+            $trek.find('.btn.backpack').addClass('active')
+                                       .attr('title', gettext('Remove from favorites'))
+                 .find('i').removeClass('add').addClass('remove');
+        }
+        else {
             $trek.find('.btn.backpack').removeClass('active')
                                       .attr('title', gettext('Add to favorites'))
                  .find('i').removeClass('remove').addClass('add');
-            // In detail page
-            $(".detail-content .btn[data-pk='"+ trekId + "']").removeClass('active');
         }
     });
+
     if (window.backPack.length() > 0)
         $('#backpackempty').hide(200);
     else
         $('#backpackempty').show(200);
+
     // Refresh label with number of items
     $('#tab-backpack span.badge').html(window.backPack.length());
 }
@@ -248,15 +269,6 @@ function view_detail() {
     }
 
     $('#tab-results span.badge').html(window.trekFilter.getResultsCount());
-
-    $('#pois-accordion').on('show', function (e) {
-        var id = $(e.target).data('id');
-        $(".accordion-toggle[data-id='"+ id +"']", this).addClass('open');
-    });
-    $('#pois-accordion').on('hidden', function (e) {
-        var id = $(e.target).data('id');
-        $(".accordion-toggle[data-id='"+ id +"']", this).removeClass('open');
-    });
 
     // Cycle Trek carousel automatically on start
     if (!MOBILE) {
@@ -310,7 +322,7 @@ function altimetricInit(jsonurl) {
     });
 }
 
-function init_sliders() {
+function initSliders() {
     var saveSlider = function (event, ui) {
         window.trekFilter.sliderChanged(ui.values[0],
                                         ui.values[1],
