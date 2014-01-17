@@ -261,12 +261,12 @@
   a {
     outline: 0;
     display: inline-block;
-    line-height: 18px;
     position: relative;
     z-index: 300;
-    width: 6px;
-    height: 20px;
-    background-color: @mainColor;
+    line-height: 0.7em;
+    background: @mainColor;
+    text-shadow: none;
+    width: 20px;
   }
 
   span {
@@ -276,14 +276,19 @@
 }
 
 #clear-filters {
-  background: url(../img/filter-clear.png) 50% 50% no-repeat;
-  background-size: 16px 16px;
   opacity: 0.4;
+  padding: 4px;
 
   &.active {
     opacity: 1;
     background-color: @mainColor;
     .box-shadow(none);
+  }
+
+  &:before {
+    color: white;
+    font-size: 20px;
+    line-height: 0.9em;
   }
 }
 

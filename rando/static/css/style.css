@@ -1,3 +1,4 @@
+@import "icon-font.css";
 /*
  * HTML5 Boilerplate
  *
@@ -146,7 +147,6 @@ i.icon {
 .popover {
   z-index: 9999;
   /* Above map, above everything ! */
-
 }
 .label,
 .badge {
@@ -389,21 +389,20 @@ i.icon {
 #filters-actions a {
   outline: 0;
   display: inline-block;
-  line-height: 18px;
   position: relative;
   z-index: 300;
-  width: 6px;
-  height: 20px;
-  background-color: #f89406;
+  line-height: 0.7em;
+  background: #f89406;
+  text-shadow: none;
+  width: 20px;
 }
 #filters-actions span {
   color: #9e969a;
   font-weight: bold;
 }
 #clear-filters {
-  background: url(../img/filter-clear.png) 50% 50% no-repeat;
-  background-size: 16px 16px;
   opacity: 0.4;
+  padding: 4px;
 }
 #clear-filters.active {
   opacity: 1;
@@ -411,6 +410,11 @@ i.icon {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
+}
+#clear-filters:before {
+  color: white;
+  font-size: 20px;
+  line-height: 0.9em;
 }
 #advanced-filters {
   padding: 5px 5px 0px 5px;
@@ -661,11 +665,9 @@ ul.row-footer a {
   position: absolute;
   top: 65px;
   /* header + search-bar */
-
   bottom: 0;
   z-index: 900;
   /* above map */
-
   min-width: 389px;
 }
 #detail-container-content,
@@ -1923,9 +1925,9 @@ a.accordion-toggle .name {
   #flatpages ul li .btn {
     color: #333 !important;
     background: none !important;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
     border: none;
     font-weight: normal !important;
     text-shadow: none !important;
@@ -2245,9 +2247,6 @@ a.accordion-toggle .name {
   #fake-search-tabs {
     display: none;
   }
-}
-@media (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
-  
 }
 /* ==========================================================================
    Helper classes
