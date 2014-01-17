@@ -1,0 +1,130 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "geotrek-rando";
+  src:url("../fonts/geotrek-rando.eot");
+  src:url("../fonts/geotrek-rando.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/geotrek-rando.woff") format("woff"),
+    url("../fonts/geotrek-rando.ttf") format("truetype"),
+    url("../fonts/geotrek-rando.svg#geotrek-rando") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "geotrek-rando" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "geotrek-rando" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-fontawesome-webfont:before {
+  content: "a";
+}
+.icon-fontawesome-webfont-1:before {
+  content: "b";
+}
+.icon-fontawesome-webfont-2:before {
+  content: "c";
+}
+.icon-fontawesome-webfont-3:before {
+  content: "d";
+}
+.icon-arrows-out:before {
+  content: "e";
+}
+.icon-left-open-mini:before {
+  content: "f";
+}
+.icon-right-open-mini:before {
+  content: "g";
+}
+.icon-share:before {
+  content: "h";
+}
+.icon-fontawesome-webfont-4:before {
+  content: "i";
+}
+.icon-fontawesome-webfont-5:before {
+  content: "j";
+}
+.icon-fontawesome-webfont-6:before {
+  content: "k";
+}
+.icon-home:before {
+  content: "l";
+}
+.icon-elusive-icons:before {
+  content: "m";
+}
+.icon-elusive-icons-1:before {
+  content: "n";
+}
+.icon-elusive-icons-2:before {
+  content: "o";
+}
+.icon-info:before {
+  content: "p";
+}
+.icon-map:before {
+  content: "q";
+}
+.icon-fontawesome-webfont-7:before {
+  content: "r";
+}
+.icon-fontawesome-webfont-8:before {
+  content: "s";
+}
+.icon-fontawesome-webfont-9:before {
+  content: "t";
+}
+.icon-fontawesome-webfont-10:before {
+  content: "u";
+}
+.icon-fontawesome-webfont-11:before {
+  content: "v";
+}
+.icon-fontawesome-webfont-12:before {
+  content: "w";
+}
+.icon-fontawesome-webfont-13:before {
+  content: "x";
+}
+.icon-fontawesome-webfont-14:before {
+  content: "y";
+}
+.icon-bus-24:before {
+  content: "z";
+}
+.icon-fontawesome-webfont-15:before {
+  content: "A";
+}
+.icon-fontawesome-webfont-17:before {
+  content: "C";
+}
+.icon-fontawesome-webfont-16:before {
+  content: "B";
+}
+.icon-icon-2551:before {
+  content: "E";
+}
