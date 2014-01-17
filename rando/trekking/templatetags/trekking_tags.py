@@ -39,6 +39,13 @@ def thumbnail(trek):
     return overridable("img/default-thumbnail.jpg")
 
 
+@register.filter
+def listid(objects, key='id'):
+    print objects
+    ids = [str(obj[key]) for obj in objects]
+    return ','.join(ids)
+
+
 @register.filter(is_safe=True)
 def pictogram(value, klass=""):
     if value is None or not value.pictogram:

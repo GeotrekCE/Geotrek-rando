@@ -1,10 +1,3 @@
-var ALTIMETRIC_PROFILE_OPTIONS = L.Util.extend({
-    fillColor: '#FFD1A1',
-    lineColor: '#F77E00',
-    lineWidth: 3,
-}, ALTIMETRIC_PROFILE_OPTIONS || {});
-
-
 Modernizr.addTest('fullscreen', function(){
      var ancelFullScreen = 'ancelFullScreen'; //make string minifiable
 
@@ -20,25 +13,11 @@ Modernizr.addTest('fullscreen', function(){
 });
 
 
-// Default Google Analytics in case Do-Not-Track is set
-window._gaq = window._gaq || [];
-
-$(document).ready(function (e) {
-    window.MOBILE = !!Modernizr.mq('only all and (max-width: 767px)');
-    window.trekFilter = new TrekFilter();
-    window.backPack = new BackPack();
-
-    init_ui();
-    page_load();
-});
-
-$(document).on('pjax:start', function (e) {
-    page_leave();
-});
-
-$(document).on('pjax:end', function (e) {
-    page_load();
-});
+function invalidate_maps() {
+    for (var i=0; i<window.maps.length; i++) {
+        window.maps[i].invalidateSize();
+    }
+}
 
 
 function init_ui() {
@@ -50,22 +29,11 @@ function init_ui() {
         e.preventDefault();
     });
 
-    $('body').on("backpack-change", refresh_backpack);
-
     $(window.trekFilter).on("filterchange", function(e, visible) {
         refresh_results(visible);
     });
 
-    $(window).smartresize(function() {
-        // Check if youre on mobile or not
-        if(Modernizr.mq('only all and (max-width: 767px)')) {
-            MOBILE = true;
-        } else {
-            MOBILE = false;
-        }
-
-        invalidate_maps();
-    });
+    $(window).smartresize(invalidate_maps);
 }
 
 function page_load() {
@@ -110,23 +78,7 @@ function page_load() {
 
     init_share();
 
-    // Refresh tab results
-    refresh_backpack();
-
-    // Add trek to backpack
-    $('.btn.backpack').on('click', function (e) {
-        var trekid = $(this).data('pk'),
-            trekname = $(this).data('name');
-        if (window.backPack.contains(trekid)) {
-            window.backPack.remove(trekid);
-            // Track event
-            _gaq.push(['_trackEvent', 'Backpack', 'Remove', trekname]);
-        }
-        else {
-            window.backPack.save(trekid);
-            _gaq.push(['_trackEvent', 'Backpack', 'Add', trekname]);
-        }
-    });
+    initBackpack();
 
     // Lang button
     $('#lang-switch a.utils').on('click', function () {
@@ -135,14 +87,30 @@ function page_load() {
 }
 
 function view_home() {
-    sliders();
+    // Show active tab
+    if (/results|backpack/.test(window.location.hash)) {
+        $('#tab-' + window.location.hash.slice(1) + ' a').click();
+    }
+    // Focus search field
+    if (/search/.test(window.location.hash)) {
+        $('input#search').focus();
+    }
+
+    initSliders();
 
     // Load filters (will refresh backpack results)
     // (After sliders initialization)
-    window.trekFilter.load();
-
-    // Advance filters ready, show them
-    $('#advanced-filters').show();
+    var treksList = [];
+    $('#results .result').each(function () {
+        var $trek = $(this),
+            trek = [];
+        $.each(['fulltext', 'themes', 'usages', 'districts', 'cities',
+                'route', 'difficulty', 'duration', 'ascent', 'id'], function (i, k) {
+            trek[k] = $trek.data(k);
+        });
+        treksList.push(trek);
+    });
+    window.trekFilter.load(treksList);
 
     $('#clear-filters').off('click').on('click', function () {
         window.trekFilter.clear();
@@ -159,14 +127,6 @@ function view_home() {
         $(this).find('span.badge').addClass('badge-warning');
     });
 
-    // Show active tab
-    if (/results|backpack/.test(window.location.hash)) {
-        $('#tab-' + window.location.hash.slice(1) + ' a').click();
-    }
-    // Focus search field
-    if (/search/.test(window.location.hash)) {
-        $('input#search').focus();
-    }
 
     $('#toggle-side-bar').off('click').on('click', function () {
         if (!$(this).hasClass('closed')) {
@@ -217,16 +177,16 @@ function view_home() {
 
 
 function refresh_results(matching) {
-    for(var i=0; i<window.treksGeoJson.features.length; i++) {
-        var trek = window.treksGeoJson.features[i],
-            trekid = trek.properties.pk;
-        if ($.inArray(trekid, matching) != -1) {
-            $('#results #trek-'+trekid).show(200);
+    $('#results .result').each(function () {
+        var $trek = $(this),
+            trekId = $trek.data('id');
+        if ($.inArray(trekId, matching) != -1) {
+            $trek.show(200);
         }
         else {
-            $('#results #trek-'+trekid).hide(200);
+            $trek.hide(200);
         }
-    }
+    });
     if (matching.length > 0)
         $('#noresult').hide(200);
     else
@@ -235,33 +195,73 @@ function refresh_results(matching) {
     $('#tab-results span.badge').html(matching.length);
 }
 
-function refresh_backpack() {
-    for(var i=0; i<window.treksGeoJson.features.length; i++) {
-        var trek = window.treksGeoJson.features[i],
-            trekid = trek.properties.pk;
+
+function initBackpack() {
+    $(window).on("backpack:change", refresh_backpack);
+
+    // Refresh tab results
+    refresh_backpack();
+
+    var $detailBackpack = $(".detail-content .btn.backpack"),
+        trekId = $detailBackpack.data('id');
+    if (window.backPack.contains(trekId))
+        $detailBackpack.addClass('active');
+    else
+        $detailBackpack.removeClass('active');
+
+    // Add trek to backpack
+    $('.btn.backpack').on('click', function (e) {
+        var trekid = $(this).data('id'),
+            trekname = $(this).data('name');
         if (window.backPack.contains(trekid)) {
-            $('#backpack-trek-'+trekid).show(200);
-            $('#results #trek-' + trekid + ' .btn.backpack').addClass('active').attr('title', gettext('Remove from favorites')).find('i').removeClass('add').addClass('remove');
-            $(".detail-content .btn[data-pk='"+ trekid + "']").addClass('active');
+            window.backPack.remove(trekid);
+            $(this).removeClass('active');
+            // Track event
+            _gaq.push(['_trackEvent', 'Backpack', 'Remove', trekname]);
         }
         else {
-            $('#backpack-trek-'+trekid).hide(200);
-            $('#results #trek-' + trekid + ' .btn.backpack').removeClass('active').attr('title', gettext('Add to favorites')).find('i').removeClass('remove').addClass('add');
-            $(".detail-content .btn[data-pk='"+ trekid + "']").removeClass('active');
+            window.backPack.save(trekid);
+            $(this).addClass('active');
+            _gaq.push(['_trackEvent', 'Backpack', 'Add', trekname]);
         }
-    }
+    });
+}
+
+
+function refresh_backpack() {
+    $('#backpack .result').each(function () {
+        var $trek = $(this),
+            trekId = $trek.data('id');
+        if (window.backPack.contains(trekId)) {
+            $trek.show(200);
+        }
+        else {
+            $trek.hide(200);
+        }
+    });
+
+    $('#results .result, #backpack .result').each(function () {
+        var $trek = $(this),
+            trekId = $trek.data('id');
+        if (window.backPack.contains(trekId)) {
+            $trek.find('.btn.backpack').addClass('active')
+                                       .attr('title', gettext('Remove from favorites'))
+                 .find('i').removeClass('add').addClass('remove');
+        }
+        else {
+            $trek.find('.btn.backpack').removeClass('active')
+                                      .attr('title', gettext('Add to favorites'))
+                 .find('i').removeClass('remove').addClass('add');
+        }
+    });
+
     if (window.backPack.length() > 0)
         $('#backpackempty').hide(200);
     else
         $('#backpackempty').show(200);
+
     // Refresh label with number of items
     $('#tab-backpack span.badge').html(window.backPack.length());
-}
-
-function page_leave() {
-    // Close share panel (if open)
-    $("#global-share.active").click();
-    $(window).trigger('view:leave');
 }
 
 function view_detail() {
@@ -276,15 +276,6 @@ function view_detail() {
     }
 
     $('#tab-results span.badge').html(window.trekFilter.getResultsCount());
-
-    $('#pois-accordion').on('show', function (e) {
-        var id = $(e.target).data('id');
-        $(".accordion-toggle[data-id='"+ id +"']", this).addClass('open');
-    });
-    $('#pois-accordion').on('hidden', function (e) {
-        var id = $(e.target).data('id');
-        $(".accordion-toggle[data-id='"+ id +"']", this).removeClass('open');
-    });
 
     // Cycle Trek carousel automatically on start
     if (!MOBILE) {
@@ -338,7 +329,7 @@ function altimetricInit(jsonurl) {
     });
 }
 
-function sliders() {
+function initSliders() {
     var saveSlider = function (event, ui) {
         window.trekFilter.sliderChanged(ui.values[0],
                                         ui.values[1],
@@ -379,8 +370,11 @@ function init_share() {
         $panel = $('#social-panel'),
         markup = $panel.html(),
         shown = false;
-      // , init = false;
-    // $panel.remove();
+
+    $(window).on('view:leave', function (e) {
+        // Close share panel (if open)
+        $("#global-share.active").click();
+    });
 
     var previous = $share.data('popover');
     if (previous) {

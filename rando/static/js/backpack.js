@@ -21,9 +21,7 @@ function BackPack()
 			self.backPack.push(trekid);
 			localStorage.setItem('backPack', JSON.stringify(self.backPack));
 		}
-		// Rha! Why this does not work ??? Trigger on body...
-		$(self).trigger("backpack-change");
-		$('body').trigger("backpack-change");
+		$(window).trigger("backpack:change");
 	}
 /*************************** Remove function *************************/
 	this.remove = function(trekid)
@@ -32,9 +30,7 @@ function BackPack()
 			var pos = self.backPack.indexOf(trekid);
 			self.backPack.splice(pos, 1);
 		}
-		// Rha! Why this does not work ???
-		$(self).trigger("backpack-change");
-		$('body').trigger("backpack-change");
+		$(window).trigger("backpack:change");
   		localStorage.setItem('backPack', JSON.stringify(self.backPack));
 	}
 /********************** Check if contains function ********************/

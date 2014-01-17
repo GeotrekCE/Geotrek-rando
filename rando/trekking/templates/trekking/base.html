@@ -84,7 +84,9 @@
                 {% endblock content %}
             </div>
 
-            <div id="mainmap"></div>
+            <div id="mainmap"
+                 data-treks-url="{% locale_url request.LANGUAGE_CODE trekking:fileserve treks_url %}"
+                 data-treks-extent="{{ map_extent }}"></div>
         </div>
         <!-- container -->
 
@@ -106,10 +108,12 @@
         <script src="{% static "js/vendor/jquery.pjax.js" %}"></script>
         <script src="{% static "js/vendor/jquery.smartresize.js" %}"></script>
         {% leaflet_js %}
-        <script type="text/javascript">L.Icon.Default.imagePath = '{% static "leaflet/images" %}';</script>
+        <script type="text/javascript">
+            window.IMG_URL = "{% static "img" %}"
+            L.Icon.Default.imagePath = '{% static "leaflet/images" %}';
+        </script>
         <script src="{% static "js/vendor/leaflet.markercluster.js" %}"></script>
         <script src="{% static "js/vendor/bootstrap.min.js" %}"></script>
-        <script src="{% static "js/vendor/leaflet-objectslayer.js" %}"></script>
         <script src="{% static "js/vendor/leaflet.restoreview.js" %}"></script>
         <script src="{% static "js/vendor/leaflet.textpath.js" %}"></script>
         <script src="{% static "js/vendor/leaflet.label.js" %}"></script>
@@ -119,6 +123,10 @@
         <script src="{% static "js/vendor/Control.FullScreen.js" %}"></script>
         <script src="{% static "js/vendor/lz-string.js" %}"></script>
         <script src="{% static "js/vendor/fastclick.js" %}"></script>
+        <script src="{% static "js/vendor/spin.js" %}"></script>
+        <script src="{% static "js/vendor/leaflet.spin.js" %}"></script>
+        <script src="{% static "js/vendor/leaflet.ajax.js" %}"></script>
+        <script src="{% static "js/vendor/leaflet.layerindex.js" %}"></script>
 
         <script src="{% static "js/vendor/jquery.easing-custom.js" %}"></script>
         <script src="{% static "js/ui.js" %}"></script>
@@ -132,19 +140,12 @@
         <script src="{% static "view3d/main.js" %}"></script>
         {% endif %}
         {% endcompress %}
-        <script type="text/javascript" src="{% locale_url request.LANGUAGE_CODE jsi18n %}"></script>
+        <script src="{% locale_url request.LANGUAGE_CODE jsi18n %}"></script>
+        <script src="{% static "js/main.js" %}"></script>
 
         {% if not donottrack %}
         {% ganalytics %}
         {% endif %}
-
-        <script type="text/javascript">
-            /*
-            * A bunch of globals \o/
-            */
-            var treksGeoJson = {{ treksjson|safe }},
-                IMG_URL = "{% static "img" %}";
-        </script>
 
         {% if POPUP_HOME_ENABLED %}
         <div id="popup-home" class="popup-home modal hide fade" tabindex="-1" role="dialog" aria-labelledby="popup-view3d" aria-hidden="true">

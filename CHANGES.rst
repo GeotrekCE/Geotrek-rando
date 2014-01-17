@@ -12,6 +12,7 @@ CHANGELOG
 * Fix some pages layout bugs (fixes #75)
 * Half of carousel is now active for prev and next (fixes #80)
 * Fix flags images in popup
+* Hide filters on page load, until Chosen is loaded (ref #61)
 
 **Breaking changes**
 
@@ -22,6 +23,7 @@ CHANGELOG
 
 * Add icon for information desk (fixes #4)
 * Range filters are now fully designed using CSS (fixes #63)
+* Treks are now loaded asynchronously on home page (fixes #52)
 
 
 1.26 (2013-12-11)
