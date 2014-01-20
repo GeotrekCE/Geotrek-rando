@@ -107,7 +107,7 @@ a, input, button {
 /* Variables for custom themes */
 @import "variables-default.less";
 
-@import "icon-font.css";
+@import "icon-font.less";
 
 /* Global */
 body, html {
@@ -811,6 +811,16 @@ width: 32%;
       margin-left: -75px;
     }
   }
+
+  .icon-icon-2551 {
+    &:before {
+      position: absolute;
+      left: 50%;
+      top: 5px;
+      font-size: 24px;
+      margin-left: -75px;
+    }
+  }
 }
 
 .search-tools {
@@ -973,7 +983,11 @@ width: 32%;
 }
 
 .leaflet-control-zoom-fullscreen {
-  background-image: url(../img/icon-fullscreen.png);
+  .icon();
+
+  &:before {
+    content: "e";
+  }
 }
 
 #mainmap {
