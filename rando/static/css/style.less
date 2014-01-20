@@ -1342,7 +1342,14 @@ p.teaser {
 }
 
 #pois-accordion .pictures-info {
-  margin-right: 35px;
+  margin-right: 10px;
+
+  &:before {
+    margin-right: 2px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
 }
 
 #detailmap a, #toolbox a {
@@ -1521,9 +1528,11 @@ a.accordion-toggle.open {
 .accordion-toggle {
   color: #999095;
   text-decoration: none;
-  background: url(../img/accordion-open.png);
-  background-repeat: no-repeat;
-  background-position: 98% 50%;
+
+  &:before {
+    float: right;
+    font-size: 22px;
+}
 }
 
 .accordion-group {
@@ -1540,9 +1549,10 @@ a.accordion-toggle.open {
 .accordion-toggle.open {
   color: #999095;
   text-decoration:none;
-  background: url(../img/accordion-close.png);
-  background-repeat: no-repeat;
-  background-position: 98% 50%;
+
+  &:before {
+    content: "t";
+  }
 }
 
 a.accordion-toggle  {
