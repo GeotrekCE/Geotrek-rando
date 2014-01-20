@@ -116,17 +116,11 @@ button {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon-fontawesome-webfont:before {
+.icon-search:before {
   content: "a";
 }
 .icon-fontawesome-webfont-1:before {
   content: "b";
-}
-.icon-fontawesome-webfont-2:before {
-  content: "c";
-}
-.icon-fontawesome-webfont-3:before {
-  content: "d";
 }
 .icon-arrows-out:before {
   content: "e";
@@ -140,20 +134,17 @@ button {
 .icon-share:before {
   content: "h";
 }
-.icon-fontawesome-webfont-4:before {
+.icon-print:before {
   content: "i";
 }
-.icon-fontawesome-webfont-5:before {
+.icon-gpx:before {
   content: "j";
 }
-.icon-fontawesome-webfont-6:before {
+.icon-kml:before {
   content: "k";
 }
 .icon-home:before {
   content: "l";
-}
-.icon-elusive-icons:before {
-  content: "m";
 }
 .icon-elusive-icons-1:before {
   content: "n";
@@ -166,12 +157,6 @@ button {
 }
 .icon-map:before {
   content: "q";
-}
-.icon-fontawesome-webfont-7:before {
-  content: "r";
-}
-.icon-fontawesome-webfont-8:before {
-  content: "s";
 }
 .icon-fontawesome-webfont-9:before {
   content: "t";
@@ -188,23 +173,26 @@ button {
 .icon-fontawesome-webfont-13:before {
   content: "x";
 }
-.icon-fontawesome-webfont-14:before {
-  content: "y";
-}
-.icon-bus-24:before {
+.icon-bus:before {
   content: "z";
 }
-.icon-fontawesome-webfont-15:before {
+.icon-departure:before {
   content: "A";
 }
-.icon-fontawesome-webfont-17:before {
+.icon-arrival:before {
   content: "C";
 }
-.icon-fontawesome-webfont-16:before {
+.icon-camera:before {
   content: "B";
 }
-.icon-icon-2551:before {
+.icon-backpack:before {
   content: "E";
+}
+.icon-help-circled:before {
+  content: "y";
+}
+.icon-arrow-right-alt1:before {
+  content: "H";
 }
 /* Global */
 body,
@@ -699,6 +687,15 @@ i.icon {
 .popup-home .links {
   margin-top: 15px;
 }
+.popup-home .links a:before {
+  font-size: 17px;
+  position: relative;
+  top: 4px;
+  margin-right: 2px;
+}
+.popup-home .links .icon-arrow-right-alt1:before {
+  font-size: 16px;
+}
 @media (max-width: 767px) {
   .modal-backdrop {
     display: none!important;
@@ -989,16 +986,22 @@ header #lang-switch {
   float: left;
 }
 #toggle-side-bar {
+  position: relative;
   height: 100%;
   float: right;
   width: 3%;
   cursor: pointer;
-  background-image: url(../img/sidebar-close.png);
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
 }
-#toggle-side-bar.closed {
-  background-image: url(../img/sidebar-open.png);
+#toggle-side-bar:before {
+  position: absolute;
+  top: 50%;
+  font-size: 26px;
+  left: -7px;
+  pointer-events: none;
+  margin-top: -13px;
+}
+#toggle-side-bar.closed:before {
+  content: "g";
 }
 /*
 * Fake tabs
@@ -1236,14 +1239,14 @@ p.tab-content-empty {
 #result-backpack-tabs span.badge {
   margin-right: 2px;
 }
-#result-backpack-tabs .icon-fontawesome-webfont:before {
+#result-backpack-tabs .icon-search:before {
   position: absolute;
   left: 50%;
   top: 6px;
   font-size: 22px;
   margin-left: -75px;
 }
-#result-backpack-tabs .icon-icon-2551:before {
+#result-backpack-tabs .icon-backpack:before {
   position: absolute;
   left: 50%;
   top: 5px;
@@ -1508,6 +1511,11 @@ p.tab-content-empty {
   text-align: right;
   min-width: 290px;
 }
+#toolbox a:before {
+  font-size: 20px;
+  position: absolute;
+  left: 5px;
+}
 #toolbox a.print,
 #toolbox a.backpack,
 #toolbox a.download {
@@ -1516,14 +1524,8 @@ p.tab-content-empty {
   vertical-align: top;
   margin-left: 5px;
 }
-#toolbox a.print.gpx,
-#toolbox a.backpack.gpx,
-#toolbox a.download.gpx {
-  padding-left: 25px;
-}
-#toolbox a.print.kml,
-#toolbox a.backpack.kml,
-#toolbox a.download.kml {
+#toolbox a.gpx,
+#toolbox a.kml {
   padding-left: 25px;
 }
 #toolbox a.btn i {
@@ -1535,19 +1537,8 @@ p.tab-content-empty {
   width: 30px;
   background-repeat: no-repeat;
 }
-#toolbox a.btn i.gpx {
-  background-image: url("../img/gpx.png");
-  width: 25px;
-}
-#toolbox a.btn i.kml {
-  background-image: url("../img/kml.png");
-  width: 25px;
-}
 #toolbox a.btn i.view3d {
   background-image: url("../img/view3d.png");
-}
-#toolbox a.btn i.print {
-  background-image: url("../img/imprimante.png");
 }
 #toolbox a.btn i.backpack {
   background-image: url("../img/sacplus.png");
@@ -1712,7 +1703,13 @@ p.teaser {
   margin-top: 15px;
 }
 #pois-accordion .pictures-info {
-  margin-right: 35px;
+  margin-right: 10px;
+}
+#pois-accordion .pictures-info:before {
+  margin-right: 2px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
 }
 #detailmap a,
 #toolbox a {
@@ -1855,9 +1852,10 @@ a.accordion-toggle.open {
 .accordion-toggle {
   color: #999095;
   text-decoration: none;
-  background: url(../img/accordion-open.png);
-  background-repeat: no-repeat;
-  background-position: 98% 50%;
+}
+.accordion-toggle:before {
+  float: right;
+  font-size: 22px;
 }
 .accordion-group {
   border: none;
@@ -1876,9 +1874,9 @@ a.accordion-toggle.open {
 .accordion-toggle.open {
   color: #999095;
   text-decoration: none;
-  background: url(../img/accordion-close.png);
-  background-repeat: no-repeat;
-  background-position: 98% 50%;
+}
+.accordion-toggle.open:before {
+  content: "t";
 }
 a.accordion-toggle {
   cursor: pointer;
@@ -1985,15 +1983,11 @@ a.accordion-toggle .name {
     bottom: 5px;
   }
   #global-share {
-    padding-left: 6px;
+    padding: 6px;
     font-size: 0px;
     width: 15px;
-    height: 22px;
     right: 8px;
-  }
-  #global-share i {
-    margin-right: 0px;
-    margin-top: -5px;
+    margin-top: -2px;
   }
   #flatpages {
     right: 70px;
@@ -2114,15 +2108,34 @@ a.accordion-toggle .name {
     display: none;
   }
   #toggle-header-mobile {
+    background: none;
+    border: none;
+    outline: none;
     display: block;
     width: 45px;
     height: 46px;
     float: left;
+    color: #5E5C5C;
     -webkit-touch-callout: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-user-select: none;
   }
-  #toggle-header-mobile.active i.icon-list {
+  #toggle-header-mobile:before {
+    position: absolute;
+    font-size: 35px;
+    left: -20px;
+    top: 6px;
+    -webkit-transition: all 300ms;
+    -moz-transition: all 300ms;
+    -o-transition: all 300ms;
+    transition: all 300ms;
+    -webkit-transform: translate3d(0px, 0px, 0px);
+    -moz-transform: translate3d(0px, 0px, 0px);
+    -o-transform: translate3d(0px, 0px, 0px);
+    -ms-transform: translate3d(0px, 0px, 0px);
+    transform: translate3d(0px, 0px, 0px);
+  }
+  #toggle-header-mobile.active:before {
     -webkit-transform: translate3d(-6px, 0px, 0px);
     -moz-transform: translate3d(-6px, 0px, 0px);
     -o-transform: translate3d(-6px, 0px, 0px);
@@ -2134,25 +2147,6 @@ a.accordion-toggle .name {
   }
   #toggle-header-mobile i {
     vertical-align: top;
-  }
-  #toggle-header-mobile i.icon-list {
-    margin-top: 16px;
-    -webkit-transition: all 300ms;
-    -moz-transition: all 300ms;
-    -o-transition: all 300ms;
-    transition: all 300ms;
-    background: url(../img/sprites.png) -178px top;
-    -webkit-background-size: 94px auto;
-    -moz-background-size: 94px auto;
-    background-size: 94px auto;
-    height: 15px;
-    width: 9px;
-    -webkit-transform: translate3d(0px, 0px, 0px);
-    -moz-transform: translate3d(0px, 0px, 0px);
-    -o-transform: translate3d(0px, 0px, 0px);
-    -ms-transform: translate3d(0px, 0px, 0px);
-    transform: translate3d(0px, 0px, 0px);
-    margin-right: 1px;
   }
   #toggle-header-mobile i.logo {
     background: url(../img/sprites.png) -149px top;
@@ -2205,7 +2199,7 @@ a.accordion-toggle .name {
     display: inline;
     margin-right: 5px;
   }
-  #side-bar .nav-tabs > li > a i {
+  #side-bar .nav-tabs > li > a:before {
     margin-left: 0;
     border: none;
     position: static;
@@ -2215,7 +2209,7 @@ a.accordion-toggle .name {
     border: none;
     width: 45px;
     height: 45px;
-    padding: 9px;
+    padding: 10px;
   }
   #side-bar .nav-tabs > li > a:hover {
     background-color: transparent;
@@ -2314,11 +2308,6 @@ a.accordion-toggle .name {
     color: white;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
-  #mobile-header-detail a i {
-    float: left;
-    margin-top: 15px;
-    margin-left: 9px;
-  }
   #mobile-header-detail h1 {
     font-size: 15px;
     padding-left: 30px;
@@ -2326,6 +2315,12 @@ a.accordion-toggle .name {
     font-weight: 300;
     line-height: 46px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  #mobile-header-detail h1:before {
+    font-size: 30px;
+    position: absolute;
+    left: 0px;
+    top: 9px;
   }
   #mobile-header-detail:active {
     opacity: 0.8;
