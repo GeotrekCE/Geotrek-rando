@@ -33,19 +33,19 @@
         {% endif %}
 
         {% if PRINT_ENABLED %}
-        <a class="btn download print" title="{% trans "Print" %}" href="{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.printable %}" target="_blank">
-          <i class="print"></i> <span class="hidden-phone">{% trans "Print" %}</span><span class="visible-phone">PDF</span>
+        <a class="btn download print icon-print" title="{% trans "Print" %}" href="{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.printable %}" target="_blank">
+          <span class="hidden-phone">{% trans "Print" %}</span><span class="visible-phone">PDF</span>
         </a>
         {% else %}
         <a class="btn download print disabled" title="{% trans "Soon!" %}" >
-          <i class="print"></i> {% trans "Print" %}
+          {% trans "Print" %}
         </a>
         {% endif %}
-        <a class="btn download gpx" title="{% trans "Download GPX" %}" href="{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.gpx %}">
-          <i class="gpx"></i> {% trans "GPX" %}
+        <a class="btn download gpx icon-gpx" title="{% trans "Download GPX" %}" href="{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.gpx %}">
+          {% trans "GPX" %}
         </a>
-        <a class="btn download kml" title="{% trans "Download for Google Earth" %}" href="{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.kml %}">
-          <i class="kml"></i> {% trans "KML" %}
+        <a class="btn download kml icon-kml" title="{% trans "Download for Google Earth" %}" href="{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.kml %}">
+          {% trans "KML" %}
         </a>
 
       </div>
@@ -235,7 +235,7 @@
               {{ poi.properties.type|pictogram }}
               <span class="name">{{ poi.properties.name }}</span>
               {% if poi.properties.pictures|length > 0 %}
-                <span class="pictures-info pull-right"><i class="icon-camera icon-gray"></i>&times;{{ poi.properties.pictures|length }}</span>
+                <span class="pictures-info pull-right icon-camera">&times;{{ poi.properties.pictures|length }}</span>
               {% endif %}
             </a>
           </div>

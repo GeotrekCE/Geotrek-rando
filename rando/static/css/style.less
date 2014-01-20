@@ -1115,6 +1115,14 @@ width: 32%;
   text-align: right;
   min-width: 290px;
 
+  a {
+    &:before {
+      font-size: 20px;
+      position: absolute;
+      left: 5px;
+    }
+  }
+
   a.print,
   a.backpack,
   a.download {
@@ -1122,13 +1130,11 @@ width: 32%;
     padding-left: 30px;
     vertical-align: top;
     margin-left: 5px;
+  }
 
-    &.gpx {
-      padding-left: 25px;
-    }
-    &.kml {
-      padding-left: 25px;
-    }
+  a.gpx,
+  a.kml {
+    padding-left: 25px;
   }
 
   a.btn i {
@@ -1141,22 +1147,8 @@ width: 32%;
 
     background-repeat: no-repeat;
 
-    &.gpx {
-      background-image: url("../img/gpx.png");
-      width: 25px;
-    }
-
-    &.kml {
-      background-image: url("../img/kml.png");
-      width: 25px;
-    }
-
     &.view3d {
       background-image: url("../img/view3d.png");
-    }
-
-    &.print {
-      background-image: url("../img/imprimante.png");
     }
 
     &.backpack {
