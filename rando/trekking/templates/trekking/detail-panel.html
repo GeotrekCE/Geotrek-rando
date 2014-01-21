@@ -24,7 +24,7 @@
 
     <div class="span7 pull-right">
       <div id="toolbox" class="btn-toolbar pull-right">
-        <a class="btn backpack" href="#" data-pk="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}"><i class="backpack"></i> {% trans "Favorites" %}</a>
+        <a class="btn backpack icon-backpack-add" href="#" data-pk="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}"> {% trans "Favorites" %}</a>
 
         {% if VIEW3D_ENABLED %}
         <a class="btn download view3d" title="{% trans "3D View" %}">
