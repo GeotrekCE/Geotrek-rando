@@ -105,12 +105,13 @@ class TrekFulltextTest(SimpleTestCase):
 class NavigationTest(CasperTestCase):
 
     def setUp(self):
-        self.flatpage = os.path.join(settings.FLATPAGES_ROOT, 'fr', 'flatpage.html')
+        basepath = os.path.join(settings.FLATPAGES_ROOT, 'fr')
+        os.makedirs(basepath)
+        self.flatpage = os.path.join(basepath, 'flatpage.html')
         open(self.flatpage, 'w').write('<h1>test</h1>')
 
     def tearDown(self):
         os.remove(self.flatpage)
-
 
     def _get_tests_file(self, name):
         return os.path.join(settings.PROJECT_PATH, 'trekking', 'tests', name)
