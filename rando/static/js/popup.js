@@ -24,10 +24,15 @@ $(document).ready(function (e) {
         $modal.modal('show');
     }
 
+    // Click on home shows popup
+    $('header a.home.popup').click(function () {
+        $modal.modal('show');
+    });
+
     function showModal() {
         var alreadyShown = localStorage.getItem('popup-shown') === "yes",
             landingHome = /^\/[a-zA-Z_]{2,5}\/$/.test(window.location.pathname),
-            noFilter = !window.location.hash;
+            noFilter = (window.location.hash === "");
         return !alreadyShown && landingHome && noFilter;
     }
 

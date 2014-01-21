@@ -71,11 +71,12 @@
     </head>
     <body>
         <header>
-                <a href="{% locale_url request.LANGUAGE_CODE trekking:home %}#results"><h1>{{ TITLE }}</h1></a>
-
-                <a class="btn utils" id="global-share" href="#" title="{% trans "Share" %}">
-                    <i class="icon"></i>{% trans "Share" %}
-                </a>
+            <a class="home pjax {% if POPUP_HOME_ENABLED %}popup{% endif %}" href="{% locale_url request.LANGUAGE_CODE trekking:home %}#results">
+               <h1>{{ TITLE }}</h1>
+            </a>
+            <a class="btn utils" id="global-share" href="#" title="{% trans "Share" %}">
+                <i class="icon"></i>{% trans "Share" %}
+            </a>
         </header>
 
         <div class="container-fluid" id="container-content">
