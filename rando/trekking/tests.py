@@ -37,12 +37,12 @@ class MkdirTest(SimpleTestCase):
 
 class OverridableStaticTest(SimpleTestCase):
     def test_return_static_if_missing(self):
-        original = "img/favicon.png"
+        original = "img/decoration.png"
         overridden = overridable(original)
         self.assertEqual(overridden, "%s%s" % (settings.STATIC_URL, original))
 
     def test_return_(self):
-        original = "img/favicon.png"
+        original = "img/decoration.png"
         with patch.object(os.path, 'exists') as mock_method:
             mock_method.return_value = True
             overridden = overridable(original)

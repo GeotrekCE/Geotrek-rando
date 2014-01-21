@@ -41,7 +41,6 @@ def thumbnail(trek):
 
 @register.filter
 def listid(objects, key='id'):
-    print objects
     ids = [str(obj[key]) for obj in objects]
     return ','.join(ids)
 

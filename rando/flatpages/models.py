@@ -32,11 +32,11 @@ class FlatPageManager(object):
     def parse_filename(filename, default_pk):
         """
         >>> FlatPageManager.parse_filename('001-title.html', 2)
-        1, 'title'
+        (1, 'title')
         >>> FlatPageManager.parse_filename('title.html', 2)
-        2, 'title'
+        (2, 'title')
         >>> FlatPageManager.parse_filename('001.html', 2)
-        2, '001'
+        (2, '001')
         """
         basename = os.path.splitext(filename)[0]
         m = re.search(r'^(\d+)-(.+)', basename)
