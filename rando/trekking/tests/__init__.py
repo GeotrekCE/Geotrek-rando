@@ -5,14 +5,15 @@ import re
 
 from mock import patch
 from easydict import EasyDict as edict
+from casper.tests import CasperTestCase
 
 from django.test import SimpleTestCase
 from django.conf import settings
 
 
-from .templatetags.trekking_tags import overridable
-from .management.commands.sync_trekking import mkdir_p
-from .models import Trek
+from rando.trekking.templatetags.trekking_tags import overridable
+from rando.trekking.management.commands.sync_trekking import mkdir_p
+from rando.trekking.models import Trek
 
 
 class MkdirTest(SimpleTestCase):
@@ -99,3 +100,12 @@ class TrekFulltextTest(SimpleTestCase):
     def test_duplicate_words_are_removed(self):
         count = len(list(re.finditer('like', self.fulltext)))
         self.assertEqual(count, 1)
+
+
+class NavigationTest(CasperTestCase):
+    def _get_tests_file(self, name):
+        return os.path.join(settings.PROJECT_PATH, 'trekking', 'tests', name)
+
+    def test_popup(self):
+        with self.settings(POPUP_HOME_ENABLED=True):
+            self.assertTrue(self.casper(self._get_tests_file('test_popup.js')))
