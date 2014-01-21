@@ -1,4 +1,4 @@
-**Geotrek rando**, public portal of *Geotrek*.
+**Geotrek rando**, public portal of *Geotrek* (http://geotrek.fr).
 
 .. image :: https://api.travis-ci.org/makinacorpus/Geotrek-rando.png?branch=master
     :alt: Build Status
