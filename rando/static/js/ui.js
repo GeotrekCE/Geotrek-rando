@@ -468,7 +468,7 @@ function init_mobile() {
     $('#search').on('focus', function (e) {
 
         // Reset button when searching (trigger closing of mobile keyboard)
-        $('#text-search .navbar-search div').addClass('reset').one('click', function (e) {
+        $('#text-search .navbar-search div').removeClass('icon-search').addClass('icon-fontawesome-webfont-1').one('click', function (e) {
             $('#search').blur();
         });
 
@@ -509,7 +509,7 @@ function init_mobile() {
             $(this).focus();
             resultTaped = false;
         } else {
-            $('#text-search .navbar-search div').removeClass('reset').off('click');
+            $('#text-search .navbar-search div').removeClass('icon-fontawesome-webfont-1').addClass('icon-search').off('click');
             $('#results').hide();
             $(document).off('click.results');
         }
