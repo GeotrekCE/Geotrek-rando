@@ -2,6 +2,11 @@ casper.options.waitTimeout = 1000;
 casper.options.viewportSize = {width: 1280, height: 768};
 casper.userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.97 Safari/537.11");
 
+casper.options.timeout = 60000;
+casper.options.onTimeout = function() {
+    casper.die("Timed out after 60 seconds.", 1);
+};
+
 
 casper.test.begin('Welcome popup is only shown the first time', function(test) {
 
@@ -61,7 +66,6 @@ casper.test.begin('Welcome popup is only shown the first time', function(test) {
                                  'Popup opens on button click.');
         casper.test.assertUrlMatch(/fr\/#results$/, 'And home page is shown.');
     });
-
 
 
     casper.then(clearLocalStorage);  // For next sessions
