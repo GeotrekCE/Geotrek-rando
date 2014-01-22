@@ -244,9 +244,6 @@ a {
   -o-transition: color 100ms;
   transition: color 100ms;
 }
-a:visited {
-  color: #625b50;
-}
 a:hover {
   color: #2986a4;
   text-decoration: none;
@@ -725,7 +722,7 @@ header {
 }
 header h1 {
   color: #f89406;
-  background: url(../img/geotrek-64.png) no-repeat;
+  background: url(../img/icon-64.png) no-repeat;
   background-position-y: 50%;
   margin-left: 10px;
   padding-left: 70px;
@@ -2121,18 +2118,10 @@ a.accordion-toggle .name {
   #toggle-header-mobile:active {
     background-color: white;
   }
-  #toggle-header-mobile i {
-    vertical-align: top;
-  }
-  #toggle-header-mobile i.logo {
-    background: url(../img/sprites.png) -149px top;
-    -webkit-background-size: 94px auto;
-    -moz-background-size: 94px auto;
-    background-size: 94px auto;
-    height: 27px;
-    width: 28px;
-    display: inline-block;
-    margin-top: 9px;
+  #toggle-header-mobile .logo {
+    margin-top: 3px;
+    width: 35px;
+    margin-left: 2px;
   }
   #content {
     overflow: visible;
