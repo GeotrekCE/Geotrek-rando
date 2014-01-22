@@ -10,7 +10,7 @@ casper.options.onTimeout = function() {
 
 casper.test.begin('Welcome popup is only shown the first time', function(test) {
 
-    var home_url = 'http://localhost:8081/fr/';
+    var home_url = casper.cli.options['url-base'] + '/fr/';
 
 
     /*
@@ -32,8 +32,10 @@ casper.test.begin('Welcome popup is only shown the first time', function(test) {
                                  'Popup is now closed.');
     });
 
-    casper.log('Come back on home');
-    casper.open(home_url);
+    casper.then(function () {
+        casper.log('Come back on home');
+        casper.open(home_url);
+    });
 
     casper.waitUntilVisible('#popup-home', undefined, function () {
         casper.test.assertExists("#popup-home[aria-hidden='true']",
@@ -51,9 +53,11 @@ casper.test.begin('Welcome popup is only shown the first time', function(test) {
     /*
      * Landing on other page than home
      */
+    casper.then(function () {
+        casper.log('Open detail page');
+        casper.open(home_url + 'pages/flatpage');
+    });
 
-    casper.log('Open detail page');
-    casper.open(home_url + 'pages/flatpage');
     casper.waitUntilVisible('#popup-home', undefined, function () {
         casper.test.assertExists("#popup-home[aria-hidden='true']",
                                  'Popup is not shown if landing on other page.');
