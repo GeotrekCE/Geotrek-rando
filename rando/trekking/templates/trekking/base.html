@@ -51,8 +51,8 @@
 
         {% compress css %}
         {% leaflet_css %}
-        <link rel="stylesheet" href="{% static "css/vendor/bootstrap/css/bootstrap.css" %}">
-        <link rel="stylesheet" href="{% static "css/vendor/bootstrap/css/bootstrap-responsive.css" %}">
+        <link rel="stylesheet" href="{% static "css/custom-bootstrap.css" %}">
+        <link rel="stylesheet" href="{% static "css/vendor/bootstrap/less/responsive.css" %}">
         <link rel="stylesheet" href="{% static "css/vendor/jquery-ui.css" %}">
         <link rel="stylesheet" href="{% static "css/vendor/chosen.css" %}">
         <link rel="stylesheet" href="{% static "css/vendor/MarkerCluster.css" %}">
@@ -74,8 +74,8 @@
             <a class="home pjax {% if POPUP_HOME_ENABLED %}popup{% endif %}" href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}#results">
                <h1>{{ TITLE }}</h1>
             </a>
-            <a class="btn utils" id="global-share" href="#" title="{% trans "Share" %}">
-                <i class="icon"></i>{% trans "Share" %}
+            <a class="btn utils icon-share" id="global-share" href="#" title="{% trans "Share" %}">
+                {% trans "Share" %}
             </a>
         </header>
 

@@ -51,7 +51,7 @@
 
     <div id="filters-actions" class="span">
       <span>{% trans "Reset" %}</span><br/>
-      <a class="btn utils" id="clear-filters" href="#" data-toggle="tooltip" title="{% trans "Reset filters" %}"></a>
+      <a class="btn utils icon-fontawesome-webfont-1" id="clear-filters" href="#" data-toggle="tooltip" title="{% trans "Reset filters" %}"></a>
     </div>
 
     <div id="advanced-filters">
@@ -101,17 +101,17 @@
 
 <div class="search-tabs side-bar" id="side-bar">
 
-  <div id="toggle-header-mobile">
-    <i class="icon-list"></i><i class="logo"></i>
-  </div>
-  <div id="toggle-side-bar"></div>
+  <button id="toggle-header-mobile" class="icon-elusive-icons-1">
+    <img class="logo" src="" />
+  </button>
+  <div id="toggle-side-bar" class="icon-left-open-mini"></div>
 
   <div id="text-search" class="search1">
     <div class="span4">
       <form class="navbar-search pull-left">
         <label for="search" class="hidden">{% trans "Search" %}</label>
         <input type="text" class="search-query" placeholder="{% trans "Name, Valley, ..."%}" data-filter="search" id="search"/>
-        <div><i class="icon-search icon-gray"></i></div>
+        <div class="icon-search"></div>
       </form>
     </div>
   </div>
@@ -119,12 +119,12 @@
   <div id="result-backpack-tabs" class="tabbable">
     <ul class="nav nav-tabs">
       <li id="tab-results" class="active">
-        <a href="#results">
-            <i class="icon"></i><span class="badge badge-warning">{{ treks|length }}</span> {% trans "Results" %}</a>
+        <a href="#results" class="icon-search">
+          <span class="badge badge-warning">{{ treks|length }}</span> {% trans "Results" %}</a>
       </li>
       <li id="tab-backpack">
-        <a href="#backpack">
-            <i class="icon"></i><span class="badge">0</span> <span class="text">{% trans "Favorites" %}</span></a>
+        <a href="#backpack" class="icon-backpack">
+          <span class="badge">0</span> <span class="text">{% trans "Favorites" %}</span></a>
       </li>
     </ul>
 

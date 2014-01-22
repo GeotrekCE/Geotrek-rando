@@ -349,7 +349,7 @@ folder, along with ``footer.html``.
 If you wish to have a different one for each language, add a ``popup_home.html``
 file in every language folder of ``media/pages/``.
 
-An example of HTML content can be found here : https://gist.github.com/leplatrem/7583071
+An example of HTML content can be found here : https://gist.github.com/Grsmto/8536822
 
 :note:
 

@@ -107,6 +107,7 @@ a, input, button {
 /* Variables for custom themes */
 @import "variables-default.less";
 
+@import "icon-font.less";
 
 /* Global */
 body, html {
@@ -330,6 +331,7 @@ ul.row-footer {
 
     li {
       display: inline-block;
+      vertical-align: top;
     }
   }
 
@@ -357,6 +359,15 @@ ul.row-footer {
       background-color: fadeout(@mainColor, 10%);
     }
   }
+
+  .icon-home {
+    padding: 5px 7px 6px 7px;
+
+    &:before {
+      font-size: 18px;
+      vertical-align: middle;
+    }
+  }
 }
 
 #mobile-header-detail {
@@ -374,13 +385,12 @@ ul.row-footer {
   right: 10px;
   line-height: 17px;
   font-size: 13px;
+  padding-left: 25px;
 
-  i {
-    width: 19px;
-    height: 15px;
-    background: url(../img/share.png);
-    background-size: 100%;
-    margin-right: 3px;
+  &:before {
+    position: absolute;
+    left: 4px;
+    font-size: 17px;
   }
 }
 
@@ -438,28 +448,6 @@ ul.social-buttons li {
   }
 
   text-align: right;
-
-  a.utils {
-    color: black;
-
-    img {
-      display: inline-block;
-      margin-bottom: 2px;
-    }
-
-    &:hover {
-      text-decoration: underline;
-    }
-
-    &:after {
-      content: " ";
-      display: inline-block;
-      width: 8px;
-      height: 6px;
-      background: url("../img/sprites.png") no-repeat 0px 0px;
-      margin-left: 3px;
-    }
-  }
 
   ul {
     margin: 0;
@@ -521,17 +509,24 @@ ul.social-buttons li {
 }
 
 #toggle-side-bar {
+  position: relative;
   height: 100%;
   float: right;
   width: 3%;
   cursor: pointer;
-  background-image: url(../img/sidebar-close.png);
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
+
+  &:before {
+    position: absolute;
+    top: 50%;
+    font-size: 26px;
+    left: -7px;
+    pointer-events: none;
+    margin-top: -13px;
+  }
 }
 
-#toggle-side-bar.closed {
-  background-image: url(../img/sidebar-open.png);
+#toggle-side-bar.closed:before {
+  content: "g";
 }
 
 
@@ -561,16 +556,6 @@ ul.social-buttons li {
   vertical-align: bottom;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-touch-callout: none;
-
-  i {
-    position: absolute;
-    background-image: url(../img/sprites.png);
-    width: 25px;
-    height: 26px;
-    left: 50%;
-    top: 5px;
-    margin-left: -74px;
-  }
 }
 
 #side-bar .nav-tabs > li.active > a,
@@ -752,15 +737,18 @@ width: 32%;
       top: 0;
       width: 35px;
       height: 100%;
-      pointer-events: none;
       -webkit-touch-callout: none;
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
-      i {
+      @media (min-width: @screen-sm) {
+        pointer-events: none;
+      }
+
+      &:before {
         position: absolute;
         right: 11px;
         top: 50%;
-        margin-top: -6px;
+        margin-top: -7px;
         -webkit-touch-callout: none;
       }
 
@@ -787,8 +775,30 @@ width: 32%;
   -webkit-overflow-scrolling: touch;
 }
 
-#result-backpack-tabs span.badge {
-  margin-right: 2px;
+#result-backpack-tabs {
+  span.badge {
+    margin-right: 2px;
+  }
+
+  .icon-search {
+    &:before {
+      position: absolute;
+      left: 50%;
+      top: 6px;
+      font-size: 22px;
+      margin-left: -75px;
+    }
+  }
+
+  .icon-backpack {
+    &:before {
+      position: absolute;
+      left: 50%;
+      top: 5px;
+      font-size: 24px;
+      margin-left: -75px;
+    }
+  }
 }
 
 .search-tools {
@@ -808,14 +818,8 @@ width: 32%;
         padding: 6px;
       }
 
-      i {
-        display: block;
-        width: 22px;
-        height: 20px;
-
-        &.add { background-image: url("../img/bag-add.png"); }
-        &.remove { background-image: url("../img/bag-remove.png"); }
-        &.search { background-image: url("../img/search.png"); }
+      &:before {
+        font-size: 20px;
       }
     }
 }
@@ -951,7 +955,11 @@ width: 32%;
 }
 
 .leaflet-control-zoom-fullscreen {
-  background-image: url(../img/icon-fullscreen.png);
+  .icon();
+
+  &:before {
+    content: "e";
+  }
 }
 
 #mainmap {
@@ -1079,6 +1087,14 @@ width: 32%;
   text-align: right;
   min-width: 290px;
 
+  a {
+    &:before {
+      font-size: 20px;
+      position: absolute;
+      left: 5px;
+    }
+  }
+
   a.print,
   a.backpack,
   a.download {
@@ -1086,13 +1102,11 @@ width: 32%;
     padding-left: 30px;
     vertical-align: top;
     margin-left: 5px;
+  }
 
-    &.gpx {
-      padding-left: 25px;
-    }
-    &.kml {
-      padding-left: 25px;
-    }
+  a.gpx,
+  a.kml {
+    padding-left: 25px;
   }
 
   a.btn i {
@@ -1105,22 +1119,8 @@ width: 32%;
 
     background-repeat: no-repeat;
 
-    &.gpx {
-      background-image: url("../img/gpx.png");
-      width: 25px;
-    }
-
-    &.kml {
-      background-image: url("../img/kml.png");
-      width: 25px;
-    }
-
     &.view3d {
       background-image: url("../img/view3d.png");
-    }
-
-    &.print {
-      background-image: url("../img/imprimante.png");
     }
 
     &.backpack {
@@ -1307,7 +1307,14 @@ p.teaser {
 }
 
 #pois-accordion .pictures-info {
-  margin-right: 35px;
+  margin-right: 10px;
+
+  &:before {
+    margin-right: 2px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
 }
 
 #detailmap a, #toolbox a {
@@ -1486,9 +1493,11 @@ a.accordion-toggle.open {
 .accordion-toggle {
   color: #999095;
   text-decoration: none;
-  background: url(../img/accordion-open.png);
-  background-repeat: no-repeat;
-  background-position: 98% 50%;
+
+  &:before {
+    float: right;
+    font-size: 22px;
+}
 }
 
 .accordion-group {
@@ -1505,9 +1514,10 @@ a.accordion-toggle.open {
 .accordion-toggle.open {
   color: #999095;
   text-decoration:none;
-  background: url(../img/accordion-close.png);
-  background-repeat: no-repeat;
-  background-position: 98% 50%;
+
+  &:before {
+    content: "t";
+  }
 }
 
 a.accordion-toggle  {
@@ -1651,16 +1661,11 @@ a.accordion-toggle  {
   }
 
   #global-share {
-    padding-left: 6px;
+    padding: 6px;
     font-size: 0px;
     width: 15px;
-    height: 22px;
     right: 8px;
-
-    i {
-      margin-right: 0px;
-      margin-top: -5px;
-    }
+    margin-top: -2px;
   }
 
   #flatpages {
@@ -1784,14 +1789,28 @@ a.accordion-toggle  {
   }
 
   #toggle-header-mobile {
+    background: none;
+    border: none;
+    outline: none;
     display: block;
     width: 45px;
     height: 46px;
+    padding: 0;
     float: left;
+    color: #5E5C5C;
     .remove-callout();
 
+    &:before {
+      position: absolute;
+      font-size: 28px;
+      left: -17px;
+      top: 10px;
+      .transition(all 300ms);
+      .translate3d(0, 0, 0);
+    }
+
     &.active {
-      i.icon-list {
+      &:before {
         .translate3d(-6px, 0, 0);
       }
     }
@@ -1802,17 +1821,6 @@ a.accordion-toggle  {
 
     i {
       vertical-align: top;
-    }
-
-    i.icon-list {
-      margin-top: 16px;
-      .transition(all 300ms);
-      background: url(../img/sprites.png) -178px top;
-      .background-size(94px auto);
-      height: 15px;
-      width: 9px;
-      .translate3d(0, 0, 0);
-      margin-right: 1px;
     }
 
     i.logo {
@@ -1872,7 +1880,7 @@ a.accordion-toggle  {
     }
   }
 
-  #side-bar .nav-tabs > li > a i {
+  #side-bar .nav-tabs > li > a:before {
     margin-left: 0;
     border: none;
     position: static;
@@ -1883,7 +1891,7 @@ a.accordion-toggle  {
     border: none;
     width: 45px;
     height: 45px;
-    padding: 9px;
+    padding: 10px;
 
     &:hover {
       background-color: transparent;
@@ -2003,12 +2011,6 @@ a.accordion-toggle  {
     a {
       color: white;
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-
-      i {
-        float: left;
-        margin-top: 15px;
-        margin-left: 9px;
-      }
     }
 
     h1 {
@@ -2018,6 +2020,13 @@ a.accordion-toggle  {
       font-weight: 300;
       line-height: 46px;
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+      &:before {
+        font-size: 30px;
+        position: absolute;
+        left: 0px;
+        top: 9px;
+      }
     }
 
     &:active {

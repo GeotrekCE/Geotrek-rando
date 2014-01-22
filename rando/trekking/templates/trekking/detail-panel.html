@@ -24,28 +24,30 @@
 
     <div class="span7 pull-right">
       <div id="toolbox" class="btn-toolbar pull-right">
-        <a class="btn backpack" href="#" data-id="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}"><i class="backpack"></i> {% trans "Favorites" %}</a>
+        <a class="btn backpack icon-backpack-add" href="#" data-id="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}">
+          {% trans "Favorites" %}
+        </a>
 
         {% if VIEW3D_ENABLED %}
-        <a class="btn download view3d" title="{% trans "3D View" %}">
-          <i class="view3d"></i> {% trans "3D" %}
+        <a class="btn download icon-view3d" title="{% trans "3D View" %}">
+          {% trans "3D" %}
         </a>
         {% endif %}
 
         {% if PRINT_ENABLED %}
-        <a class="btn download print" title="{% trans "Print" %}" href="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" object.properties.printable %}" target="_blank">
-          <i class="print"></i> <span class="hidden-phone">{% trans "Print" %}</span><span class="visible-phone">PDF</span>
+        <a class="btn download print icon-print" title="{% trans "Print" %}" href="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" object.properties.printable %}" target="_blank">
+          <span class="hidden-phone">{% trans "Print" %}</span><span class="visible-phone">{% trans "PDF" %}</span>
         </a>
         {% else %}
         <a class="btn download print disabled" title="{% trans "Soon!" %}" >
-          <i class="print"></i> {% trans "Print" %}
+          {% trans "Print" %}
         </a>
         {% endif %}
-        <a class="btn download gpx" title="{% trans "Download GPX" %}" href="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" object.properties.gpx %}">
-          <i class="gpx"></i> {% trans "GPX" %}
+        <a class="btn download gpx icon-gpx" title="{% trans "Download GPX" %}" href="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" object.properties.gpx %}">
+          {% trans "GPX" %}
         </a>
-        <a class="btn download kml" title="{% trans "Download for Google Earth" %}" href="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" object.properties.kml %}">
-          <i class="kml"></i> {% trans "KML" %}
+        <a class="btn download kml icon-kml" title="{% trans "Download for Google Earth" %}" href="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" object.properties.kml %}">
+          {% trans "KML" %}
         </a>
 
       </div>
@@ -231,11 +233,11 @@
         {% for poi in pois %}
         <div class="accordion-group">
           <div class="accordion-heading">
-            <a class="accordion-toggle acc-open" id="poi-item-{{ poi.properties.pk}}" data-toggle="collapse" data-parent="#pois-accordion" data-id="{{ poi.properties.pk }}" href="#collapse-poi-{{  poi.properties.pk }}">
+            <a class="accordion-toggle acc-open icon-fontawesome-webfont-12" id="poi-item-{{ poi.properties.pk}}" data-toggle="collapse" data-parent="#pois-accordion" data-id="{{ poi.properties.pk }}" href="#collapse-poi-{{  poi.properties.pk }}">
               {{ poi.properties.type|pictogram }}
               <span class="name">{{ poi.properties.name }}</span>
               {% if poi.properties.pictures|length > 0 %}
-                <span class="pictures-info pull-right"><i class="icon-camera icon-gray"></i>&times;{{ poi.properties.pictures|length }}</span>
+                <span class="pictures-info pull-right icon-camera">&times;{{ poi.properties.pictures|length }}</span>
               {% endif %}
             </a>
           </div>

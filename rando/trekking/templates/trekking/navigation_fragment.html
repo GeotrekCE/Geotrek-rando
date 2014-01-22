@@ -3,10 +3,7 @@
 {% get_flatpages as flatpages %}
 <div id="flatpages" class="reattach" data-destination="header">
     <ul>
-        <li class="home"><a class="btn pjax" href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}" title="{% trans "Home" %}">
-            <i class="icon-home icon-white"></i>
-            </a>
-        </li>
+        <li class="home"><a class="btn pjax icon-home" href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}" title="{% trans "Home" %}"></a></li>
     {% for page in flatpages %}
         <li><a class="btn pjax {% if title == page.title %}active{% endif %}" href="{% locale_url request.LANGUAGE_CODE "flatpages:page" page.slug %}">{{ page.title }}</a></li>
     {% endfor %}
