@@ -106,7 +106,10 @@ class NavigationTest(CasperTestCase):
 
     def setUp(self):
         basepath = os.path.join(settings.FLATPAGES_ROOT, 'fr')
-        os.makedirs(basepath)
+        try:
+            os.makedirs(basepath)
+        except OSError:
+            pass
         self.flatpage = os.path.join(basepath, 'flatpage.html')
         open(self.flatpage, 'w').write('<h1>test</h1>')
 
