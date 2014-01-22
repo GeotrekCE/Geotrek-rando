@@ -10,6 +10,7 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 TEST = 'test' in sys.argv
 PREPROD = False
+ALLOWED_HOSTS = ('*',)
 
 ADMINS = (
     ('Makina Corpus', 'geobi@makina-corpus.com'),
