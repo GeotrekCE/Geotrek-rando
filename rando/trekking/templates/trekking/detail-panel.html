@@ -29,7 +29,7 @@
         </a>
 
         {% if VIEW3D_ENABLED %}
-        <a class="btn download icon-view3d" title="{% trans "3D View" %}">
+        <a class="btn download view3d icon-view3d" data-slug="{{ trek.properties.slug }}" title="{% trans "3D View" %}">
           {% trans "3D" %}
         </a>
         {% endif %}

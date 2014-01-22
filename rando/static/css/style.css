@@ -161,7 +161,7 @@ button {
 .icon-fontawesome-webfont-9:before {
   content: "t";
 }
-.icon-fontawesome-webfont-10:before {
+.icon-warning:before {
   content: "u";
 }
 .icon-fontawesome-webfont-11:before {
@@ -202,6 +202,15 @@ button {
 }
 .icon-binocular:before {
   content: "r";
+}
+.icon-view3d:before {
+  content: "s";
+}
+.icon-information-desk:before {
+  content: "D";
+}
+.icon-park-center:before {
+  content: "E";
 }
 /* Global */
 body,
@@ -258,20 +267,8 @@ a:hover {
 /*
 * Bootstrap override
 */
-i.icon {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  line-height: 14px;
-  vertical-align: text-top;
-  background-repeat: no-repeat;
-}
 .container-fluid {
   padding: 0;
-}
-[class^="icon-gray"],
-[class*=" icon-gray"] {
-  background-image: url("vendor/bootstrap/img/glyphicons-halflings-gray.png");
 }
 .popover {
   z-index: 9999;
