@@ -68,6 +68,33 @@ button {
    Author's custom styles
    ========================================================================== */
 /* Mixins */
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.clearfix:after {
+  clear: both;
+}
+.hide-text {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+.input-block-level {
+  display: block;
+  width: 100%;
+  min-height: 30px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 /* Variables for custom themes */
 /* Variables */
 /* Landscape phone to portrait tablet */
@@ -164,7 +191,7 @@ button {
 .icon-warning:before {
   content: "u";
 }
-.icon-fontawesome-webfont-11:before {
+.icon-access:before {
   content: "v";
 }
 .icon-fontawesome-webfont-12:before {
@@ -243,6 +270,10 @@ a {
   -moz-transition: color 100ms;
   -o-transition: color 100ms;
   transition: color 100ms;
+  text-decoration: underline;
+}
+a.btn {
+  text-decoration: none;
 }
 a:hover {
   color: #2986a4;
@@ -463,12 +494,12 @@ a:hover {
 }
 .altitude .slider-wrap {
   width: 240px;
-  -webkit-border-radius: 10px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 10px;
   -moz-background-clip: padding;
-  border-radius: 10px;
   background-clip: padding-box;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }
 .altitude .ui-slider {
   max-width: 230px;
@@ -669,8 +700,8 @@ a:hover {
 .popup-home .profile:hover img {
   -webkit-transform: scale(1.3);
   -moz-transform: scale(1.3);
-  -o-transform: scale(1.3);
   -ms-transform: scale(1.3);
+  -o-transform: scale(1.3);
   transform: scale(1.3);
 }
 .popup-home .caption {
@@ -719,6 +750,9 @@ header {
   -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
 }
 header h1 {
   color: #f89406;
@@ -727,6 +761,9 @@ header h1 {
   margin-left: 10px;
   padding-left: 70px;
   line-height: 70px;
+}
+header a {
+  text-decoration: none;
 }
 #toggle-header-mobile {
   display: none;
@@ -747,6 +784,9 @@ header h1 {
   -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
   overflow: hidden;
   background-color: #f0f2ed;
   color: #fff;
@@ -841,12 +881,12 @@ header #flatpages {
   display: block;
   font-weight: bold;
   background: rgba(248, 148, 6, 0.7);
-  -webkit-border-radius: 3px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 3px;
   -moz-background-clip: padding;
-  border-radius: 3px;
   background-clip: padding-box;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
   color: white;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: none;
@@ -951,9 +991,12 @@ header #lang-switch {
 }
 /****************************************************************************
 *
-* Śidebar
+* Sidebar
 *
 */
+.nav-tabs > li > a {
+  text-decoration: none;
+}
 #side-bar {
   border-right: solid 2px #877e82;
   background-color: #F6F7F1;
@@ -1007,6 +1050,9 @@ header #lang-switch {
   -moz-background-clip: padding;
   border-radius: 0px;
   background-clip: padding-box;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
   text-align: center;
   font-weight: bold;
   color: #80747C;
@@ -1157,6 +1203,9 @@ p.tab-content-empty {
   -moz-background-clip: padding;
   border-radius: 0px;
   background-clip: padding-box;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -1180,6 +1229,9 @@ p.tab-content-empty {
   -webkit-box-shadow: 0px 0px 3px #f89406;
   -moz-box-shadow: 0px 0px 3px #f89406;
   box-shadow: 0px 0px 3px #f89406;
+  -webkit-box-shadow: 0 0 3px #f89406;
+  -moz-box-shadow: 0 0 3px #f89406;
+  box-shadow: 0 0 3px #f89406;
 }
 #text-search .navbar-search div {
   position: absolute;
@@ -1304,6 +1356,9 @@ p.tab-content-empty {
   -moz-background-clip: padding;
   border-radius: 0px;
   background-clip: padding-box;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
   min-width: 270px;
 }
 #mainmap .leaflet-popup-content-wrapper .leaflet-popup-content {
@@ -1326,11 +1381,6 @@ p.tab-content-empty {
   position: absolute;
   bottom: 30px;
   right: 15px;
-  background: url("../img/search.png") no-repeat top left;
-  padding-left: 25px;
-}
-#mainmap .leaflet-popup-content-wrapper .leaflet-popup-content p.popupdetail a:hover {
-  text-decoration: none;
 }
 #mainmap .leaflet-popup-content-wrapper .leaflet-popup-content img {
   max-width: 100% !important;
@@ -1340,10 +1390,6 @@ p.tab-content-empty {
 }
 #mainmap .leaflet-popup-content-wrapper .leaflet-popup-content img:hover {
   opacity: 0.7;
-}
-#mainmap .leaflet-popup-content-wrapper .leaflet-popup-content a {
-  color: #5db9d6;
-  text-decoration: underline;
 }
 .leaflet-popup-content {
   margin: 14px 16px;
@@ -1556,12 +1602,10 @@ html.no-webgl #toolbox a.view3d {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
   margin-left: 2px;
-  text-decoration: none;
   line-height: 20px;
 }
 .detail-content h3 {
   font-size: 14px;
-  text-decoration: underline;
   margin-bottom: 10px;
   margin-top: 20px;
 }
@@ -1612,22 +1656,6 @@ p.teaser {
 #trek-information-desk p.title {
   margin-bottom: 0px;
   font-weight: bold;
-}
-#trek-information-desk h3 {
-  background-image: url(../img/information-desk.svg);
-  background-repeat: no-repeat;
-  padding-left: 35px;
-  width: 30px;
-}
-#trek-advice h3 {
-  background-image: url(../img/warning.png);
-  background-repeat: no-repeat;
-  padding-left: 35px;
-}
-#trek-access h3 {
-  background-image: url(../img/road.png);
-  background-repeat: no-repeat;
-  padding-left: 35px;
 }
 #themes li,
 #usages li,
@@ -1688,19 +1716,12 @@ p.teaser {
   color: black;
 }
 #park-center-warning {
-  background-image: url(../img/park-center.svg);
-  background-repeat: no-repeat;
-  background-size: 32px;
-  background-position-x: 5px;
-  background-position-y: 50%;
-  padding-left: 45px;
-}
-#park-center-warning.alert-info a {
   font-weight: bold;
-  color: #3a87ad;
-  text-decoration: underline;
 }
-#park-center-warning.alert-info p {
+#park-center-warning a {
+  color: #3a87ad;
+}
+#park-center-warning p {
   margin: 0;
 }
 #altitudegraph {
@@ -1838,6 +1859,9 @@ a.accordion-toggle.open {
   -moz-background-clip: padding;
   border-radius: 0px;
   background-clip: padding-box;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
   margin-bottom: 0;
 }
 .accordion-group:first-child {
@@ -1866,7 +1890,7 @@ a.accordion-toggle .name {
   left: 30px;
 }
 .accordion-inner {
-  color: #80757D;
+  color: #999095;
 }
 #trek-links img {
   padding-right: 5px;
@@ -1905,12 +1929,12 @@ a.accordion-toggle .name {
   text-align: center;
   background-color: rgba(255, 140, 0, 0.7);
   border: 1px solid #232222;
-  -webkit-border-radius: 4px;
   -webkit-background-clip: padding-box;
-  -moz-border-radius: 4px;
   -moz-background-clip: padding;
-  border-radius: 4px;
   background-clip: padding-box;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
   -webkit-box-shadow: 0px 0px 7px 2px #ffff00;
   -moz-box-shadow: 0px 0px 7px 2px #ffff00;
   box-shadow: 0px 0px 7px 2px #ffff00;
@@ -1998,6 +2022,7 @@ a.accordion-toggle .name {
     background-image: none !important;
     -webkit-background-size: auto;
     -moz-background-size: auto;
+    -o-background-size: auto;
     background-size: auto;
     background-color: rgba(255, 255, 255, 0.9);
     border: none;
@@ -2008,6 +2033,9 @@ a.accordion-toggle .name {
     -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
     -moz-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
     -webkit-transition: all 300ms;
     -moz-transition: all 300ms;
     -o-transition: all 300ms;
@@ -2017,6 +2045,10 @@ a.accordion-toggle .name {
     -o-transform: translate3d(-105%, 0px, 0px);
     -ms-transform: translate3d(-105%, 0px, 0px);
     transform: translate3d(-105%, 0px, 0px);
+    -webkit-transform: translate3d(-105%, 0, 0);
+    -moz-transform: translate3d(-105%, 0, 0);
+    -o-transform: translate3d(-105%, 0, 0);
+    transform: translate3d(-105%, 0, 0);
     overflow: auto !important;
     -webkit-overflow-scrolling: touch;
   }
@@ -2026,6 +2058,10 @@ a.accordion-toggle .name {
     -o-transform: translate3d(0px, 0px, 0px);
     -ms-transform: translate3d(0px, 0px, 0px);
     transform: translate3d(0px, 0px, 0px);
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
   header h1 {
     display: none;
@@ -2058,6 +2094,9 @@ a.accordion-toggle .name {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
     border: none;
     font-weight: normal !important;
     text-shadow: none !important;
@@ -2107,6 +2146,10 @@ a.accordion-toggle .name {
     -o-transform: translate3d(0px, 0px, 0px);
     -ms-transform: translate3d(0px, 0px, 0px);
     transform: translate3d(0px, 0px, 0px);
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
   #toggle-header-mobile.active:before {
     -webkit-transform: translate3d(-6px, 0px, 0px);
@@ -2114,6 +2157,10 @@ a.accordion-toggle .name {
     -o-transform: translate3d(-6px, 0px, 0px);
     -ms-transform: translate3d(-6px, 0px, 0px);
     transform: translate3d(-6px, 0px, 0px);
+    -webkit-transform: translate3d(-6px, 0, 0);
+    -moz-transform: translate3d(-6px, 0, 0);
+    -o-transform: translate3d(-6px, 0, 0);
+    transform: translate3d(-6px, 0, 0);
   }
   #toggle-header-mobile:active {
     background-color: white;
