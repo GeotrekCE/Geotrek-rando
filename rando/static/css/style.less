@@ -910,6 +910,14 @@ width: 32%;
       position: absolute;
       bottom: 30px;
       right: 15px;
+
+      &:before {
+        position: absolute;
+        font-size: 18px;
+        top: 0;
+        left: -20px;
+        text-decoration: none;
+      }
     }
 
     img {
@@ -1200,6 +1208,27 @@ html.no-webgl #toolbox a.view3d {
   &.alert-info h3 {
     color: @infoText;
   }
+
+  .icon-access:before {
+    position: relative;
+    font-size: 23px;
+    top: 6px;
+    margin-right: 5px;
+  }
+
+  .icon-warning:before {
+    position: relative;
+    font-size: 23px;
+    top: 6px;
+    margin-right: 5px;
+  }
+}
+
+.icon-information-desk:before {
+  position: relative;
+  font-size: 23px;
+  top: 6px;
+  margin-right: 5px;
 }
 
 p.teaser {
@@ -1300,6 +1329,19 @@ p.teaser {
 
   p {
     margin: 0;
+  }
+
+  .icon-park-center {
+    position: relative;
+
+    &:before {
+      position: relative;
+      font-size: 27px;
+      top: 4px;
+      margin-right: 10px;
+      display: block;
+      float: left;
+    }
   }
 }
 
