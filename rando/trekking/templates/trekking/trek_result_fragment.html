@@ -35,14 +35,14 @@
     </div>
     <div class="search-tools">
         {% if backpack = "True" %}
-        <a class="btn backpack icon-backpack-remove" data-pk="{{ trek.properties.pk }}" data-toggle="tooltip" title="{% trans "Remove from favorites" %}">
+        <a class="btn backpack icon-backpack-remove" data-id="{{ trek.properties.pk }}" data-toggle="tooltip" title="{% trans "Remove from favorites" %}">
           <span class="hidden">{% trans "Remove from favorites" %}</span>
         {% else %}
         <a class="btn backpack icon-backpack-add" data-id="{{ trek.properties.pk }}" data-toggle="tooltip" title="{% trans "Add to favorites" %}">
           <span class="hidden">{% trans "Add to favorites" %}</span>
         {% endif %}
         </a>
-        <a class="btn search pjax icon-binocular" data-pk="{{ trek.properties.pk }}" title="{% trans "Zoom to trek" %}" href="{% locale_url request.LANGUAGE_CODE "trekking:detail" trek.properties.slug %}">
+        <a class="btn search pjax icon-binocular" data-id="{{ trek.properties.pk }}" title="{% trans "Zoom to trek" %}" href="{% locale_url request.LANGUAGE_CODE "trekking:detail" trek.properties.slug %}">
           <span class="hidden">{% trans "Zoom to trek" %}</span>
         </a>
     </div>

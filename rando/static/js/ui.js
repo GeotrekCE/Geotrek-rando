@@ -244,12 +244,14 @@ function refresh_backpack() {
         if (window.backPack.contains(trekId)) {
             $trek.find('.btn.backpack').addClass('active')
                                        .attr('title', gettext('Remove from favorites'))
-                 .removeClass('icon-backpack-add').addClass('icon-backpack-remove');
+                                       .removeClass('icon-backpack-add')
+                                       .addClass('icon-backpack-remove');
         }
         else {
             $trek.find('.btn.backpack').removeClass('active')
-                                      .attr('title', gettext('Add to favorites'))
-                 .removeClass('icon-backpack-remove').addClass('icon-backpack-add');
+                                       .attr('title', gettext('Add to favorites'))
+                                       .removeClass('icon-backpack-remove')
+                                       .addClass('icon-backpack-add');
         }
     });
 
