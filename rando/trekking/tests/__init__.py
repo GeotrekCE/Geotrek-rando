@@ -13,7 +13,7 @@ from django.conf import settings
 
 from rando.trekking.templatetags.trekking_tags import overridable
 from rando.trekking.management.commands.sync_trekking import mkdir_p
-from rando.trekking.models import Trek
+from rando.trekking.models import Trek, JSONManager
 
 
 class MkdirTest(SimpleTestCase):
@@ -48,6 +48,14 @@ class OverridableStaticTest(SimpleTestCase):
             mock_method.return_value = True
             overridden = overridable(original)
         self.assertEqual(overridden, "%s%s" % (settings.MEDIA_URL, original))
+
+
+class JSONManagerTest(SimpleTestCase):
+    def test_manager_returns_empty_list_if_file_empty(self):
+        mgr = JSONManager()
+        with patch('rando.trekking.models.JSONManager') as mock_content:
+            mock_content.content.return_value = '[]'
+            self.assertEqual([], mgr.all())
 
 
 class TrekFulltextTest(SimpleTestCase):

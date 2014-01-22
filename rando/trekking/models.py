@@ -14,7 +14,7 @@ from rando import classproperty, logger
 
 
 class JSONManager(object):
-    def __init__(self, klass, filepath=None, language=None, use_tmp=False):
+    def __init__(self, klass=object, filepath='', language=None, use_tmp=False):
         self.klass = klass
         self.filepath = filepath
         self.language = language
@@ -39,7 +39,7 @@ class JSONManager(object):
             return content
         except IOError:
             logger.error("Could not read '%s'" % self.fullpath)
-        return '{}'
+        return '[]'
 
     def all(self):
         """
@@ -48,17 +48,25 @@ class JSONManager(object):
         (ex.: object['properties']['districts'][0]['pk'] becomes
               object.properties.districts[0].pk)
         """
-        objects = json.loads(self.content)
-        features = objects.get('features', objects)
-        if isinstance(features, (list, tuple)):
-            return [self.klass(objects=self, **edict(o)) for o in features]
-        if isinstance(features, dict):
-            return self.klass(objects=self, **edict(features))
-        return features
+        objects = self._read_content()
+        if isinstance(objects, (list, tuple)):
+            return [self.klass(objects=self, **edict(o)) for o in objects]
+        assert isinstance(objects, dict)
+        return self.klass(objects=self, **edict(objects))
+
+    def _read_content(self):
+        return json.loads(self.content)
+
+
+class GeoJSONManager(JSONManager):
+    def _read_content(self):
+        geojson = super(GeoJSONManager, self)._read_content()
+        return geojson.get('features', []) if len(geojson) > 0 else []
 
 
 class JSONModel(object):
     filepath = None
+    manager_class = JSONManager
 
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)
@@ -69,7 +77,7 @@ class JSONModel(object):
 
     @classproperty
     def objects(cls):
-        return JSONManager(cls, cls.filepath)
+        return cls.manager_class(cls, cls.filepath)
 
     @classproperty
     def tmp_objects(cls):
@@ -78,15 +86,19 @@ class JSONModel(object):
     _default_manager = objects
 
 
+class GeoJSONModel(JSONModel):
+    manager_class = GeoJSONManager
+
+
 class Settings(JSONModel):
     filepath = 'api/settings.json'
 
 
-class POIs(JSONModel):
+class POIs(GeoJSONModel):
     filepath = 'api/trek/{trek__pk}/pois.geojson'
 
 
-class Trek(JSONModel):
+class Trek(GeoJSONModel):
     filepath = 'api/trek/trek.geojson'
     detailpath = 'api/trek/trek-{pk}.json'
 
