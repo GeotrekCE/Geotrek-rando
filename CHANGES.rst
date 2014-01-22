@@ -21,6 +21,7 @@ CHANGELOG
   See *Customization* paragraph about images.
 * Search popup is not shown outside homepage anymore. A click on main page title
   brings it, and the home button in navigation does not.
+* No longer compatible with Django 1.4.
 
 **New features**
 

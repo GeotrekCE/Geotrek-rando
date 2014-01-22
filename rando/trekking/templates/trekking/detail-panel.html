@@ -15,7 +15,7 @@
 
 
 <div id="mobile-header-detail">
-  <a class="pjax" href="{% locale_url request.LANGUAGE_CODE trekking:home %}"><i class="icon-chevron-left icon-white"></i><h1>{% trans "Back to list" %}</h1></a>
+  <a class="pjax" href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}"><i class="icon-chevron-left icon-white"></i><h1>{% trans "Back to list" %}</h1></a>
 </div>
 
 <div class="detail-content">
@@ -33,7 +33,7 @@
         {% endif %}
 
         {% if PRINT_ENABLED %}
-        <a class="btn download print" title="{% trans "Print" %}" href="{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.printable %}" target="_blank">
+        <a class="btn download print" title="{% trans "Print" %}" href="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" object.properties.printable %}" target="_blank">
           <i class="print"></i> <span class="hidden-phone">{% trans "Print" %}</span><span class="visible-phone">PDF</span>
         </a>
         {% else %}
@@ -41,10 +41,10 @@
           <i class="print"></i> {% trans "Print" %}
         </a>
         {% endif %}
-        <a class="btn download gpx" title="{% trans "Download GPX" %}" href="{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.gpx %}">
+        <a class="btn download gpx" title="{% trans "Download GPX" %}" href="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" object.properties.gpx %}">
           <i class="gpx"></i> {% trans "GPX" %}
         </a>
-        <a class="btn download kml" title="{% trans "Download for Google Earth" %}" href="{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.kml %}">
+        <a class="btn download kml" title="{% trans "Download for Google Earth" %}" href="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" object.properties.kml %}">
           <i class="kml"></i> {% trans "KML" %}
         </a>
 
@@ -134,16 +134,16 @@
     <div class="span{% if pois %}4{% else %}8{% endif %}">
       {% if object.properties.is_park_centered %}
         <div id="park-center-warning" class="alert alert-info">
-            <p><strong>{% trans "This trek is within park center" %}</strong>, <a class="pjax" href="{% locale_url request.LANGUAGE_CODE flatpages:redirect FLATPAGES_POLICY_PAGE %}">{% trans "please read access rules." %}</a></p>
+            <p><strong>{% trans "This trek is within park center" %}</strong>, <a class="pjax" href="{% locale_url request.LANGUAGE_CODE "flatpages:redirect" FLATPAGES_POLICY_PAGE %}">{% trans "please read access rules." %}</a></p>
         </div>
       {% endif %}
 
-      <div id="detailmap" data-poi-url="{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.poi_layer %}">
-        <img id="staticmap" class="hidden" src="{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.map_image_url %}"/>
+      <div id="detailmap" data-poi-url="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" object.properties.poi_layer %}">
+        <img id="staticmap" class="hidden" src="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" object.properties.map_image_url %}"/>
         <div class="helpclic"><p>{% trans "Clic for map interaction" %}</p></div>
       </div>
 
-      <div id="altitudegraph" data-url="{% locale_url request.LANGUAGE_CODE trekking:fileserve object.properties.altimetric_profile %}">
+      <div id="altitudegraph" data-url="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" object.properties.altimetric_profile %}">
         <h4>{% trans "Altitude profile" %}</h4>
         <p class="axislabel">{% trans "Altitude (m)" %}</p>
          <p id="altitude-details">
@@ -188,7 +188,7 @@
               <h5>{% trans "Sharing departure" %}</h5>
               <ul>
             {% endif %}
-            <li><a href="{% locale_url request.LANGUAGE_CODE trekking:detail relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+            <li><a href="{% locale_url request.LANGUAGE_CODE "trekking:detail" relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
             {% if forloop.last %}</ul>{% endif %}
           {% endfor %}
 
@@ -197,7 +197,7 @@
               <h5>{% trans "Sharing paths" %}</h5>
               <ul>
             {% endif %}
-            <li><a href="{% locale_url request.LANGUAGE_CODE trekking:detail relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+            <li><a href="{% locale_url request.LANGUAGE_CODE "trekking:detail" relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
             {% if forloop.last %}</ul>{% endif %}
           {% endfor %}
 
@@ -206,7 +206,7 @@
               <h5>{% trans "Sharing circuit" %}</h5>
               <ul>
             {% endif %}
-            <li><a href="{% locale_url request.LANGUAGE_CODE trekking:detail relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+            <li><a href="{% locale_url request.LANGUAGE_CODE "trekking:detail" relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
             {% if forloop.last %}</ul>{% endif %}
           {% endfor %}
         </div>

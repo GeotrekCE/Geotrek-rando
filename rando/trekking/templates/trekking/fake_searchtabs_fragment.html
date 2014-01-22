@@ -1,14 +1,14 @@
 {% load i18n localeurl_tags %}
-<div id="fake-search-tabs" class="search-tabs span4" > 
+<div id="fake-search-tabs" class="search-tabs span4" >
   <ul class="nav nav-tabs">
     <li id="tab-results">
       <div class="nb_res"></div>
-      <a class="pjax" href="{% locale_url request.LANGUAGE_CODE trekking:home %}#results">
+      <a class="pjax" href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}#results">
       <span class="badge"></span> {% trans "Back to list" %}</a>
     </li>
     <li id="tab-backpack">
       <div class="nb_sac"></div>
-      <a class="pjax" href="{% locale_url request.LANGUAGE_CODE trekking:home %}#backpack">
+      <a class="pjax" href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}#backpack">
         <span class="badge"></span> {% trans "Favorites" %}</a>
     </li>
   </ul>
