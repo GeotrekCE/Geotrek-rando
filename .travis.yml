@@ -10,6 +10,7 @@ env:
   - DJANGO_VERSION=1.6
 
 before_install:
+  - "export PHANTOMJS_EXECUTABLE='phantomjs --local-to-remote-url-access=yes --ignore-ssl-errors=yes'"
   - "git clone git://github.com/n1k0/casperjs.git"
   - "sudo ln -s `pwd`/casperjs/bin/casperjs /usr/local/bin"
 
