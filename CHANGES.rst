@@ -28,6 +28,7 @@ CHANGELOG
 * Add icon for information desk (fixes #4)
 * Range filters are now fully designed using CSS (fixes #63)
 * Treks are now loaded asynchronously on home page (fixes #52)
+* Most icons have been switched to vectorial font (fixes #78)
 
 
 1.26 (2013-12-11)
