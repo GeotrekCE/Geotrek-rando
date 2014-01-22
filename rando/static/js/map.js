@@ -540,8 +540,9 @@ function mainmapInit(map, djoptions) {
               latlng: clickpoint
             });
             // Move the map if trek is below search results
-            var map = trekOnMap._map;
-            map.fakePanTo(clickpoint);
+            var isNotClustered = trekOnMap.marker && trekOnMap.marker._icon;
+            if (isNotClustered)
+                map.fakePanTo(clickpoint);
         }
         else {
           console.warn("Trek not on map: " + trek_id);
