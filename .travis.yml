@@ -1,0 +1,23 @@
+language: python
+
+python:
+  - 2.6
+  - 2.7
+
+env:
+  - DJANGO_VERSION=1.5.5
+  - DJANGO_VERSION=1.6
+
+before_install:
+  - "export PHANTOMJS_EXECUTABLE='phantomjs --local-to-remote-url-access=yes --ignore-ssl-errors=yes'"
+  - "git clone git://github.com/n1k0/casperjs.git"
+  - "sudo ln -s `pwd`/casperjs/bin/casperjs /usr/local/bin"
+
+install:
+  - deactivate
+  - make install
+  - bin/pip install -I -q Django==$DJANGO_VERSION --use-mirrors
+  - bin/pip install -r dev-requirements.pip
+
+script:
+  - make test

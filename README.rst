@@ -1,4 +1,8 @@
-**Geotrek rando**, public portal of *Geotrek*.
+**Geotrek rando**, public portal of *Geotrek* (http://geotrek.fr).
+
+.. image :: https://api.travis-ci.org/makinacorpus/Geotrek-rando.png?branch=master
+    :alt: Build Status
+    :target: https://travis-ci.org/makinacorpus/Geotrek-rando
 
 Demo instances :
 
@@ -397,6 +401,22 @@ Synchronization failed with 404
     Failed!
 
 Try to access this URL manually and check the logs on the remote server.
+
+
+===========
+DEVELOPMENT
+===========
+
+::
+
+    make install
+    pip install -r dev-requirements.pip
+
+* `Install CasperJS <http://docs.casperjs.org/en/latest/installation.html>`_
+
+::
+
+    make test
 
 
 =========

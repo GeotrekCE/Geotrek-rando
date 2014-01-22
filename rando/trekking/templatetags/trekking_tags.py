@@ -17,12 +17,12 @@ def fileinclude(filename, language):
     try:
         path = os.path.join(settings.MEDIA_ROOT, 'pages', language, filename)
         return open(path, 'r').read()
-    except IOError as e:
+    except IOError:
         try:
             path = os.path.join(settings.MEDIA_ROOT, filename)
             return open(path, 'r').read()
-        except IOError as e:
-            logger.error(e)
+        except IOError:
+            logger.warn("Included file '%s' was not found on disk." % filename)
     return _('Empty')
 
 

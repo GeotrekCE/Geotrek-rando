@@ -1,12 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 import os
+import sys
 
 
 PROJECT_PATH = os.path.dirname(__file__)
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
+TEST = 'test' in sys.argv
 PREPROD = False
 
 ADMINS = (
@@ -17,8 +19,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'never_used.db',                # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -142,6 +144,10 @@ INSTALLED_APPS = (
     'rando.view3d',
     'rando.flatpages',
 )
+
+if TEST:
+    INSTALLED_APPS += ('casper',)
+
 
 COMPRESS_PARSER = 'compressor.parser.HtmlParser'
 

@@ -20,7 +20,7 @@
     <img alt="{% trans "Preview of" %} {{ trek.properties.name }}" src="{{ trek|thumbnail }}" width="120" height="120" />
   </div>
   <div class="info-result">
-    <a class="pjax hidden" href="{% locale_url request.LANGUAGE_CODE trekking:detail trek.properties.slug %}"></a>
+    <a class="pjax hidden" href="{% locale_url request.LANGUAGE_CODE "trekking:detail" trek.properties.slug %}"></a>
     <h3>{{ trek.properties.name }}</h3>
     <p>{% for district in trek.properties.districts %}{{ district.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
     <p>{% trans "City" %}&nbsp;: {{ trek.properties.cities.0.name }}</p>
@@ -44,7 +44,7 @@
           <i class="backpack"></i>
         {% endif %}
         </a>
-        <a class="btn search pjax" data-pk="{{ trek.properties.pk }}" title="{% trans "Zoom to trek" %}" href="{% locale_url request.LANGUAGE_CODE trekking:detail trek.properties.slug %}">
+        <a class="btn search pjax" data-pk="{{ trek.properties.pk }}" title="{% trans "Zoom to trek" %}" href="{% locale_url request.LANGUAGE_CODE "trekking:detail" trek.properties.slug %}">
           <span class="hidden">{% trans "Zoom to trek" %}</span>
           <i class="search"></i>
         </a>
