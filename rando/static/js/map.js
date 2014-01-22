@@ -465,12 +465,11 @@ function mainmapInit(map, djoptions) {
         var properties = layer.feature.properties;
 
         var html = '<h3>{NAME}</h3>' +
-                   '<div class="clearfix">' +
+                   '<div class="clearfix icon-right-open-mini">' +
                    '  <a href="{LINK}" class="pjax"><img src="{THUMBNAIL}"/></a>'+
                    '  <div class="description">{DESCRIPTION}</div>' +
                    '  <p class="popupdetail"><a href="{LINK}" class="pjax">{MORE}</a></p>' +
-                   '</div>' +
-                   '<i class="icon-chevron-right icon"></i>';
+                   '</div>';
         html = L.Util.template(html, {
             NAME: properties.name,
             DESCRIPTION: properties.description_teaser,

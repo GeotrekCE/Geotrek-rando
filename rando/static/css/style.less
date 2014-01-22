@@ -919,7 +919,7 @@ width: 32%;
 .leaflet-popup-content {
   margin: 14px 16px;
 
-  i {
+  .icon-right-open-mini:before {
     display: none;
   }
 }
@@ -1955,6 +1955,15 @@ a.accordion-toggle  {
   .leaflet-popup-content {
     > div {
       margin-right: 20px;
+    }
+
+    .icon-right-open-mini:before {
+      display: block;
+      position: absolute;
+      right: 4px;
+      top: 50%;
+      font-size: 26px;
+      margin-top: -23px;
     }
 
     h3 {
