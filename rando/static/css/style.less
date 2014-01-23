@@ -203,6 +203,7 @@ a {
 @import "objects/popup.less";
 @import "objects/share.less";
 @import "objects/result.less";
+@import "objects/maps.less";
 
 /* Layout */
 
@@ -286,17 +287,6 @@ ul.row-footer {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   width: 100%;
-}
-
-#mainmap {
-  position: absolute;
-  top: 65px;
-  bottom: 0;
-  width: 100%;
-
-    &:-webkit-full-screen { top: 0; }
-    &:-moz-full-screen { top: 0; }
-    &:full-screen { top: 0; }
 }
 
 #side-bar {
@@ -418,12 +408,6 @@ ul.row-footer {
   display: none;
 }
 
-.leaflet-top {
-  @media (max-width: 840px) {
-    bottom: 50px;
-    top: auto;
-  }
-}
 
 
 /****************************************************************************
@@ -748,156 +732,6 @@ p.tab-content-empty {
 
 /****************************************************************************
 *
-* Maps
-*
-*/
-
-#mainmap {
-  z-index: 890;
-}
-
-#mainmap .leaflet-popup-content-wrapper {
-  .border-radius(0);
-  min-width: 270px;
-
-  .leaflet-popup-content {
-    text-align: center;
-
-    .description {
-      text-align: justify;
-
-      p:first-child {
-        margin-top: 0;
-      }
-    }
-
-    p {
-      margin: 10px 0;
-
-      &:last-child {
-        margin-bottom: 15px;
-      }
-    }
-
-    p.popupdetail a {
-      font-size: 14px;
-      position: absolute;
-      bottom: 30px;
-      right: 15px;
-
-      &:before {
-        position: absolute;
-        font-size: 18px;
-        top: 0;
-        left: -20px;
-        text-decoration: none;
-      }
-    }
-
-    img {
-      max-width:100% !important;
-      float: left;
-      margin-right: 10px;
-      opacity: 1.0;
-
-      &:hover {
-        opacity: 0.7;
-      }
-    }
-  }
-}
-
-.leaflet-popup-content {
-  margin: 14px 16px;
-
-  .icon-right-open-mini:before {
-    display: none;
-  }
-}
-
-#mainmap .popup-footer
-{
-  background:url(../img/popup-footer.png) no-repeat center;
-  width:100%;
-  height:16px;
-  margin-top:-1px;
-}
-
-.no-fullscreen .leaflet-control-zoom-fullscreen {
-  display: none;
-}
-
-.leaflet-control-zoom-fullscreen {
-  .icon();
-
-  &:before {
-    content: "e";
-  }
-}
-
-#mainmap {
-  .leaflet-marker-icon {
-
-    &.trek-cluster, &.trek-icon {
-      border-radius: 999px;
-      border-style: solid;
-
-      background-color: @orange;
-      background-image: url(../img/trek-icon.svg);
-      background-repeat: no-repeat;
-      background-position: 50% 50%;
-      opacity: 0.8 !important;
-    }
-
-    &.trek-icon {
-      .square-centered(32px);
-      background-size: 28px;
-
-      border-width: 2px;
-      border-color: @yellow;
-
-        &.highlight {
-          border-width: 4px;
-          margin-left: -18px !important;
-          margin-top: -18px !important;
-        }
-    }
-
-    &.trek-cluster {
-      .square-centered(36px);
-      background-size: 32px;
-
-      border-width: 2px;
-      border-color: red;
-
-      .count {
-        border-radius: 5px;
-
-        background-color: red;
-        color: white;
-        text-align: center;
-        font-weight: bold;
-        font-size: 12px;
-        min-width: 20px;
-        min-height: 20px;
-
-        display: block;
-        position: absolute;
-        bottom: -2px;
-        right: -2px;
-
-      }
-    }
-  }
-}
-
-.leaflet-label.trek {
-  background: rgba(255, 225, 75, 0.5);
-}
-
-
-/****************************************************************************
-*
 * Detail and Flatpage
 *
 */
@@ -1155,25 +989,6 @@ p.teaser {
   opacity: 0.5;
 }
 
-#detailmap {
-  min-height: 400px;
-
-  &:-webkit-full-screen { top: 0; left: 0; width: 100%; height: 100%; }
-  &:-moz-full-screen { top: 0; left: 0; width: 100%; height: 100%; }
-  &:full-screen { top: 0; left: 0; width: 100%; height: 100%; }
-
-  .helpclic {
-    color: @white;
-    z-index: 5;
-    bottom: 0px;
-    position: absolute;
-    background-color: rgba(0,0,0,0.5);
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
-    font-size: 14px;
-  }
-}
 
 .meta {
   margin-top: 15px;
@@ -1190,9 +1005,6 @@ p.teaser {
   }
 }
 
-#detailmap a, #toolbox a {
-  color: black;
-}
 
 #park-center-warning {
   font-weight: bold;
@@ -1442,53 +1254,6 @@ a.accordion-toggle  {
   }
 }
 
-.leaflet-label.departure {
-  background: rgba(165, 228, 100, 0.5);
-}
-
-.leaflet-label.arrival {
-  background: rgba(255, 56, 56, 0.5);
-}
-
-.leaflet-label.parking {
-  background: rgba(70, 70, 255, 0.2);
-}
-
-.leaflet-label.poi {
-  background: rgba(255, 200, 0, 0.2);
-}
-
-
-
-/* POIS markers */
-
-
-.poi-marker-icon {
-
-   &.cluster,
-   img {
-    width: 24px;
-    height: 24px;
-    padding: 1px;
-    color: black;
-    text-align: center;
-    background-color: rgba(255, 140, 0, 0.7);
-    border: 1px solid  @black;
-    .border-radius(4px);
-    .box-shadow(0px 0px 7px 2px rgba(255, 255, 0, 1.0));
-  }
-
-  &.highlight img {
-    background-color: @yellow;
-  }
-}
-
-
-
-
-
-
-
 
 
 
@@ -1502,10 +1267,6 @@ a.accordion-toggle  {
   }
 
   #side-bar {
-    top: 115px;
-  }
-
-  #mainmap {
     top: 115px;
   }
 }
@@ -1530,10 +1291,6 @@ a.accordion-toggle  {
     right: 70px;
   }
 
-  .leaflet-control-minimap {
-    display: none;
-  }
-
   #footer .wrapper {
     width: 100%;
   }
@@ -1549,7 +1306,6 @@ a.accordion-toggle  {
     bottom: 0;
   }
 
-  .leaflet-control-minimap,
   #footer {
     display: none;
   }
@@ -1784,43 +1540,6 @@ a.accordion-toggle  {
       }
     }
 
-
-  }
-
-  #mainmap {
-    top: 0;
-  }
-
-  /* Leaflet popup */
-  .leaflet-popup-content {
-    > div {
-      margin-right: 20px;
-    }
-
-    .icon-right-open-mini:before {
-      display: block;
-      position: absolute;
-      right: 4px;
-      top: 50%;
-      font-size: 26px;
-      margin-top: -23px;
-    }
-
-    h3 {
-      text-align: left;
-    }
-
-    i {
-      display: block;
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      margin-top: -16px;
-    }
-  }
-
-  .leaflet-label {
-    display: none;
   }
 
   /* Details page */
@@ -1942,22 +1661,15 @@ a.accordion-toggle  {
     }
   }
 
-  #detailmap {
-    min-height: 0;
-  }
-
 
   /* Hidden elements */
   .search-tools,
   #filters-bar,
-  .ascent,
-  #mainmap .leaflet-popup-content-wrapper .leaflet-popup-content a.pjax,
   #toggle-side-bar,
   #tab-backpack .badge,
   #tab-backpack .text,
   #tab-results,
   #side-bar .illust,
-  .touch .leaflet-control-container,
   #fake-search-tabs {
     display: none;
   }
