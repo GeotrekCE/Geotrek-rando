@@ -514,31 +514,6 @@ ul.row-footer {
   border-bottom: solid 1px white;
 }
 
-
-#side-bar .nav-tabs > #tab-results a i,
-#fake-search-tabs .nav-tabs > #tab-results a i
-{
- background-position: -60px 0;
-}
-
-#side-bar .nav-tabs > #tab-results.active a i,
-#fake-search-tabs .nav-tabs > #tab-results.active a i
-{
- background-position: -86px 0;
-}
-
-#side-bar .nav-tabs > #tab-backpack a i,
-#fake-search-tabs .nav-tabs > #tab-backpack a i
-{
- background-position: -10px 0;
-}
-
-#side-bar .nav-tabs > #tab-backpack.active a i,
-#fake-search-tabs .nav-tabs > #tab-backpack.active a i
-{
- background-position: -35px 0;
-}
-
 #result-backpack-content {
   position: absolute;
   bottom: 0px;
@@ -691,10 +666,6 @@ p.tab-content-empty {
 
       &.reset {
         pointer-events: auto;
-
-        i {
-          background-position: -312px 0;
-        }
       }
     }
   }
@@ -749,13 +720,7 @@ p.tab-content-empty {
 
 
 .detail-content, .flatpage-content {
-   padding-bottom: 15px;
-   color: @blackLighter;
-}
-
-.flatpage-content h2, .flatpage-content h3, .flatpage-content h4,
-.detail-content h2, .detail-content h3, .detail-content h4, {
- color: #494146;
+  padding-bottom: 15px;
 }
 
 /****************************************************************************
@@ -825,25 +790,6 @@ p.tab-content-empty {
   a.gpx,
   a.kml {
     padding-left: 25px;
-  }
-
-  a.btn i {
-    position: absolute;
-    top: 1px;
-    left: 0px;
-    display: inline-block;
-    height: 25px;
-    width: 30px;
-
-    background-repeat: no-repeat;
-
-    &.view3d {
-      background-image: url("../img/view3d.png");
-    }
-
-    &.backpack {
-      background-image: url("../img/sacplus.png");
-    }
   }
 
   a.backpack,
@@ -1505,11 +1451,6 @@ a.accordion-toggle  {
 
       .search-query {
         height: 38px;
-      }
-
-      i {
-        right: 13px;
-        top: 11px;
       }
     }
 
