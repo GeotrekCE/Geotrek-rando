@@ -1,1 +1,251 @@
-{"crs": {"type": "link", "properties": {"href": "http://spatialreference.org/ref/epsg/4326/", "type": "proj4"}}, "type": "FeatureCollection", "features": [{"geometry": {"type": "LineString", "coordinates": [[1.51472, 42.73934], [1.51495, 42.73949], [1.51510, 42.73955], [1.51531, 42.73957], [1.51568, 42.73956], [1.51614, 42.73950], [1.51639, 42.73947], [1.51667, 42.73946], [1.51676, 42.73946], [1.51682, 42.73944], [1.51682, 42.73940], [1.51664, 42.73930], [1.51648, 42.73917], [1.51636, 42.73904], [1.51632, 42.73895], [1.51631, 42.73886], [1.51636, 42.73879], [1.51642, 42.73874], [1.51648, 42.73872], [1.51653, 42.73875], [1.51655, 42.73880], [1.51663, 42.73887], [1.51673, 42.73893], [1.51696, 42.73899], [1.51736, 42.73908], [1.51745, 42.73909], [1.51751, 42.73909], [1.51753, 42.73904], [1.51750, 42.73899], [1.51726, 42.73880], [1.51722, 42.73871], [1.51722, 42.73861], [1.51726, 42.73850], [1.51738, 42.73835], [1.51753, 42.73817], [1.51763, 42.73807], [1.51771, 42.73802], [1.51777, 42.73802], [1.51781, 42.73803], [1.51783, 42.73808], [1.51781, 42.73813], [1.51773, 42.73824], [1.51770, 42.73833], [1.51770, 42.73841], [1.51774, 42.73849], [1.51785, 42.73855], [1.51806, 42.73863], [1.51822, 42.73868], [1.51833, 42.73868], [1.51837, 42.73865], [1.51839, 42.73861], [1.51837, 42.73857], [1.51829, 42.73850], [1.51820, 42.73843], [1.51814, 42.73836], [1.51814, 42.73830], [1.51817, 42.73823], [1.51829, 42.73815], [1.51883, 42.73790], [1.51920, 42.73778], [1.51941, 42.73767], [1.51954, 42.73756], [1.51966, 42.73745], [1.51974, 42.73732], [1.51977, 42.73722], [1.51972, 42.73703], [1.51953, 42.73670], [1.51949, 42.73655], [1.51947, 42.73635], [1.51927, 42.73594], [1.51925, 42.73582], [1.51927, 42.73564], [1.51933, 42.73550], [1.51942, 42.73543], [1.51957, 42.73535], [1.51973, 42.73520], [1.51975, 42.73512], [1.51971, 42.73502], [1.51959, 42.73486], [1.51947, 42.73481], [1.51931, 42.73477], [1.51907, 42.73477], [1.51887, 42.73485], [1.51867, 42.73478], [1.51856, 42.73463], [1.51866, 42.73454], [1.51861, 42.73437], [1.51860, 42.73427], [1.51853, 42.73417], [1.51820, 42.73396], [1.51799, 42.73393], [1.51785, 42.73388], [1.51766, 42.73374], [1.51754, 42.73371], [1.51738, 42.73376], [1.51727, 42.73375], [1.51716, 42.73372], [1.51700, 42.73371], [1.51669, 42.73384], [1.51662, 42.73385], [1.51651, 42.73391], [1.51635, 42.73393], [1.51627, 42.73397], [1.51619, 42.73398], [1.51615, 42.73395], [1.51608, 42.73396], [1.51595, 42.73392], [1.51594, 42.73388], [1.51604, 42.73377], [1.51605, 42.73372], [1.51614, 42.73370], [1.51614, 42.73357], [1.51620, 42.73341], [1.51633, 42.73319], [1.51651, 42.73297], [1.51653, 42.73288], [1.51665, 42.73274], [1.51695, 42.73247], [1.51720, 42.73225], [1.51736, 42.73220], [1.51746, 42.73208], [1.51770, 42.73186], [1.51783, 42.73178], [1.51788, 42.73178], [1.51797, 42.73172], [1.51798, 42.73167], [1.51802, 42.73167], [1.51828, 42.73156], [1.51863, 42.73136], [1.51894, 42.73123], [1.51909, 42.73114], [1.51917, 42.73114], [1.51933, 42.73103], [1.51948, 42.73089], [1.51962, 42.73088], [1.51989, 42.73077], [1.52000, 42.73076], [1.52006, 42.73071], [1.52023, 42.73075], [1.52038, 42.73072], [1.52049, 42.73066], [1.52060, 42.73065], [1.52069, 42.73058], [1.52085, 42.73049], [1.52090, 42.73043], [1.52111, 42.73030], [1.52125, 42.73015], [1.52127, 42.73005], [1.52153, 42.72988], [1.52162, 42.72992], [1.52167, 42.72984], [1.52183, 42.72989], [1.52189, 42.72980], [1.52203, 42.72983], [1.52212, 42.72984], [1.52227, 42.72974], [1.52239, 42.72971], [1.52252, 42.72958], [1.52263, 42.72953], [1.52265, 42.72943], [1.52270, 42.72937], [1.52271, 42.72928], [1.52282, 42.72906], [1.52294, 42.72892], [1.52300, 42.72880], [1.52308, 42.72873], [1.52324, 42.72865], [1.52342, 42.72861], [1.52355, 42.72854], [1.52359, 42.72847], [1.52368, 42.72842], [1.52364, 42.72834], [1.52366, 42.72827], [1.52363, 42.72822], [1.52371, 42.72817], [1.52377, 42.72800], [1.52406, 42.72796], [1.52453, 42.72804], [1.52487, 42.72796], [1.52511, 42.72795], [1.52524, 42.72789], [1.52523, 42.72784], [1.52507, 42.72769], [1.52502, 42.72761], [1.52482, 42.72752], [1.52481, 42.72747], [1.52481, 42.72722], [1.52496, 42.72718], [1.52494, 42.72703], [1.52479, 42.72683], [1.52446, 42.72630], [1.52407, 42.72568], [1.52392, 42.72505], [1.52363, 42.72462], [1.52294, 42.72400], [1.52281, 42.72382], [1.52245, 42.72362], [1.52229, 42.72340], [1.52202, 42.72318], [1.52195, 42.72316], [1.52162, 42.72282], [1.52139, 42.72283], [1.52135, 42.72261], [1.52114, 42.72241], [1.52079, 42.72222], [1.52058, 42.72202], [1.52046, 42.72190], [1.52027, 42.72184], [1.52000, 42.72151], [1.51995, 42.72130], [1.51983, 42.72115], [1.51952, 42.72093], [1.51960, 42.72081], [1.51950, 42.72074], [1.51942, 42.72076], [1.51935, 42.72062], [1.51924, 42.72074], [1.51914, 42.72068], [1.51908, 42.72060], [1.51895, 42.72061], [1.51890, 42.72058], [1.51883, 42.72057], [1.51876, 42.72048], [1.51863, 42.72044], [1.51835, 42.72028], [1.51827, 42.72017], [1.51816, 42.72010], [1.51795, 42.71993], [1.51783, 42.71986], [1.51772, 42.71972], [1.51764, 42.71966], [1.51754, 42.71962], [1.51743, 42.71959], [1.51714, 42.71961], [1.51685, 42.71958], [1.51678, 42.71955]]}, "type": "Feature", "properties": {"slope": 0.25223, "usages": [], "description_teaser": "", "duration_pretty": "5H", "altimetric_profile": "/api/trek/2851/profile.json", "ambiance": "", "is_park_centered": false, "poi_layer": "/geotrek/api/trek/2851/pois.geojson", "themes": [], "web_links": [], "duration": 5.00000, "ascent": 986, "relationships_edge": [], "relationships": [], "descent": -19, "pictures": [], "parking_location": null, "kml": "/api/trek/trek-2851.kml", "relationships_circuit": [], "networks": [], "access": "", "gpx": "/api/trek/trek-2851.gpx", "pk": 2851, "thumbnail": "", "arrival": "", "description": "", "printable": "/api/trek/trek-2851.pdf", "advice": "", "pois": [], "disabled_infrastructure": "", "difficulty": {"id": 2, "label": "Confirm\u00e9"}, "information_desk": null, "advised_parking": "", "cities": [{"code": "09135", "name": "Goulier"}, {"code": "09162", "name": "Lercoul"}], "slug": "pic-du-sarrrasi-et-pic-dendron", "min_elevation": 1492, "name": "Pic du Sarrrasi et Pic d'Endron", "route": {"id": 2, "label": "Aller-retour"}, "departure": "", "map_image_url": "/image/trek-2851.png", "districts": [], "length": 4022.99786, "max_elevation": 2459, "public_transport": "", "published": true, "model": "trekking.trek", "relationships_departure": []}, "id": 2851}, {"geometry": {"type": "LineString", "coordinates": [[1.41168, 42.80642], [1.41178, 42.80717], [1.41209, 42.80820], [1.41259, 42.80903], [1.41315, 42.80977], [1.41362, 42.80995], [1.41389, 42.81031], [1.41374, 42.81108], [1.41376, 42.81148], [1.41365, 42.81227], [1.41376, 42.81301], [1.41440, 42.81445], [1.41569, 42.81526], [1.41618, 42.81604], [1.41602, 42.81661], [1.41539, 42.81711], [1.41488, 42.81804], [1.41566, 42.81890], [1.41673, 42.82021], [1.41757, 42.82072], [1.41818, 42.82147], [1.41888, 42.82226], [1.41944, 42.82338], [1.42051, 42.82455], [1.42280, 42.82529], [1.42453, 42.82599], [1.42727, 42.82691], [1.42909, 42.82771], [1.43146, 42.82889], [1.43196, 42.82899], [1.43226, 42.82893], [1.43272, 42.82899], [1.43338, 42.82909], [1.43376, 42.82926], [1.43404, 42.82932], [1.43440, 42.82952], [1.43480, 42.82963], [1.43512, 42.82967], [1.43534, 42.82958], [1.43563, 42.82954], [1.43592, 42.82963], [1.43633, 42.82971], [1.43680, 42.82968], [1.43707, 42.82966], [1.43736, 42.82965], [1.43767, 42.82972], [1.43803, 42.82982], [1.43863, 42.83001], [1.43907, 42.83008], [1.43931, 42.83018], [1.43953, 42.83028], [1.43976, 42.83036], [1.44002, 42.83045], [1.43976, 42.83036], [1.43953, 42.83028], [1.43931, 42.83018], [1.43907, 42.83008], [1.43863, 42.83001], [1.43803, 42.82982], [1.43767, 42.82972], [1.43736, 42.82965], [1.43707, 42.82966], [1.43680, 42.82968], [1.43633, 42.82971], [1.43592, 42.82963], [1.43563, 42.82954], [1.43534, 42.82958], [1.43512, 42.82967], [1.43480, 42.82963], [1.43440, 42.82952], [1.43404, 42.82932], [1.43396, 42.82917], [1.43403, 42.82895], [1.43424, 42.82880], [1.43435, 42.82855], [1.43444, 42.82818], [1.43453, 42.82802], [1.43476, 42.82786], [1.43485, 42.82773], [1.43487, 42.82742], [1.43492, 42.82708], [1.43509, 42.82685], [1.43549, 42.82669], [1.43581, 42.82618], [1.43600, 42.82578], [1.43603, 42.82557], [1.43594, 42.82539], [1.43577, 42.82510], [1.43563, 42.82484], [1.43470, 42.82417], [1.43397, 42.82342], [1.43348, 42.82313], [1.43342, 42.82260], [1.43342, 42.82205], [1.43397, 42.82164], [1.43499, 42.82097], [1.43580, 42.82010], [1.43656, 42.81964], [1.43682, 42.81938], [1.43761, 42.81915], [1.43807, 42.81908], [1.43807, 42.81881], [1.43814, 42.81845], [1.43816, 42.81801], [1.43825, 42.81772], [1.43827, 42.81735], [1.43807, 42.81673], [1.43789, 42.81585], [1.43782, 42.81502], [1.43777, 42.81445], [1.43782, 42.81393], [1.43793, 42.81356], [1.43818, 42.81343], [1.43786, 42.81311], [1.43720, 42.81263], [1.43668, 42.81231], [1.43628, 42.81213], [1.43607, 42.81223], [1.43563, 42.81205], [1.43514, 42.81237], [1.43436, 42.81240], [1.43429, 42.81234], [1.43435, 42.81212], [1.43431, 42.81208], [1.43409, 42.81206], [1.43377, 42.81178], [1.43358, 42.81167], [1.43335, 42.81164], [1.43327, 42.81165], [1.43319, 42.81169], [1.43305, 42.81159], [1.43268, 42.81152], [1.43218, 42.81126], [1.43128, 42.81103], [1.43107, 42.81104], [1.43100, 42.81099], [1.43056, 42.81096], [1.43043, 42.81097], [1.43018, 42.81090], [1.42992, 42.81078], [1.42937, 42.81070], [1.42873, 42.81056], [1.42831, 42.81039], [1.42808, 42.81022], [1.42793, 42.81010], [1.42785, 42.80990], [1.42791, 42.80969], [1.42801, 42.80934], [1.42811, 42.80910], [1.42819, 42.80887], [1.42822, 42.80847], [1.42824, 42.80826], [1.42816, 42.80792], [1.42798, 42.80776], [1.42757, 42.80763], [1.42671, 42.80765], [1.42599, 42.80780], [1.42517, 42.80795], [1.42507, 42.80796], [1.42499, 42.80795], [1.42488, 42.80797], [1.42479, 42.80801], [1.42473, 42.80807], [1.42470, 42.80810], [1.42463, 42.80807], [1.42459, 42.80793], [1.42455, 42.80790], [1.42441, 42.80790], [1.42414, 42.80773], [1.42401, 42.80759], [1.42369, 42.80742], [1.42326, 42.80722], [1.42283, 42.80712], [1.42250, 42.80711], [1.42224, 42.80706], [1.42198, 42.80701], [1.42188, 42.80698], [1.42180, 42.80692], [1.42159, 42.80680], [1.42141, 42.80667], [1.42109, 42.80657], [1.42091, 42.80656], [1.42077, 42.80655], [1.42069, 42.80656], [1.42065, 42.80641]]}, "type": "Feature", "properties": {"slope": 0.08900, "usages": [{"label": "P\u00e9destre", "id": 4, "pictogram": "/media/upload/usage-foot.png"}], "description_teaser": "<p>Un tr&egrave;s joli point de vue, en retrait de la cha&icirc;ne des Pyr&eacute;nn&eacute;es.</p>", "duration_pretty": "5H", "altimetric_profile": "/api/trek/2/profile.json", "ambiance": "<p>Le nom de ce pic est issu de la l&eacute;gende selon laquelle les trois seigneurs des vall&eacute;es de Massat, Vicdessos et Rabat-les-Trois-Seigneurs, se rencontraient sur la dalle plate en son sommet afin de d&eacute;battre des droits des diff&eacute;rentes vall&eacute;es qu'ils administraient3.</p>\r\n<p></p>\r\n<p>&Agrave; partir du xviie si&egrave;cle, de grandes caravanes d'&acirc;nes et de mulets transportaient le charbon de bois entre les for&ecirc;ts du Couserans et les forges &agrave; la catalane de la vall&eacute;e de Rabat via le col de la Pourtanelle sur l'&eacute;paulement nord du pic4.</p>\r\n<p></p>\r\n<p>Au xixe si&egrave;cle, des porteurs de glace venaient y chercher leur butin sur le flanc nord du pic au glacier d'Ambans pour le transporter ensuite vers Toulouse. Ce glacier a totalement disparu au d&eacute;but du xxie si&egrave;cle.</p>\r\n<p></p>\r\n<p></p>\r\n<p>Source Wikipedia</p>\r\n<p><a></a></p>", "is_park_centered": false, "poi_layer": "/geotrek/api/trek/2/pois.geojson", "themes": [{"label": "Lac et glacier", "id": 8, "pictogram": "/media/upload/theme-lake@2x.png"}, {"label": "Point de vue", "id": 4, "pictogram": "/media/upload/theme-panorama@2x.png"}], "web_links": [], "duration": 5.00000, "ascent": 768, "relationships_edge": [], "relationships": [], "descent": -857, "pictures": [{"url": "/media/paperclip/trekking_trek/2/le-pic-des-trois-seigneurs-vu-depuis-letang-de-lers.JPG.500x500_q85.jpg", "title": "Le Pic des Trois Seigneurs vu depuis l'\u00e9tang de Lers.", "legend": "Le Pic des Trois Seigneurs vu depuis l'\u00e9tang de Lers. CC-BY-SA", "author": "Anthospace"}], "parking_location": [1.41282, 42.80633], "kml": "/api/trek/trek-2.kml", "relationships_circuit": [], "networks": [], "access": "", "gpx": "/api/trek/trek-2.gpx", "pk": 2, "thumbnail": "/media/paperclip/trekking_trek/2/le-pic-des-trois-seigneurs-vu-depuis-letang-de-lers.JPG.120x120_q85_crop.jpg", "arrival": "", "description": "", "printable": "/api/trek/trek-2.pdf", "advice": "<p>Attention en cas d'orage. Fortement d&eacute;conseill&eacute; par mauvais temps!</p>", "pois": [{"type": "Sommet", "name": "Pic des Trois Seigneurs", "description": "<p>Le pic des Trois Seigneurs est situ&eacute; au point de rencontre des trois vall&eacute;es de la&nbsp;<a>Courbi&egrave;re</a>, du&nbsp;<a>Vicdessos</a>&nbsp;et de l'<a>Arac</a>&nbsp;(<a>Couserans</a>).</p>\r\n<p>Modeste sommet bien individualis&eacute;, il offre n&eacute;anmoins un panorama exceptionnel sur les montagnes ari&eacute;geoises.</p>"}, {"type": "Lac", "name": "\u00c9tang d'Arbu", "description": "<p>Ce lac tr&egrave;s accessible est un site pris&eacute; par les p&ecirc;cheurs. On y observe&nbsp;<a>truites fario</a>, saumons des fontaines,&nbsp;<a>ombles chevaliers</a>,&nbsp;<a>cristivomers</a>&nbsp;et&nbsp;<a>vairons</a>.</p>"}], "disabled_infrastructure": "", "difficulty": {"id": 2, "label": "Confirm\u00e9"}, "information_desk": null, "advised_parking": "Avant le Port de Lers", "cities": [{"code": "09231", "name": "Le Port"}, {"code": "09302", "name": "Suc-et-Sentenac"}], "slug": "boucle-du-pic-des-trois-seigneurs", "min_elevation": 1387, "name": "Boucle du Pic des Trois Seigneurs", "route": {"id": 1, "label": "Boucle"}, "departure": "Port de Lers", "map_image_url": "/image/trek-2.png", "districts": [], "length": 8843.55047, "max_elevation": 2153, "public_transport": "", "published": true, "model": "trekking.trek", "relationships_departure": []}, "id": 2}, {"geometry": {"type": "LineString", "coordinates": [[1.34210, 42.78978], [1.34238, 42.78959], [1.34289, 42.78931], [1.34327, 42.78920], [1.34362, 42.78918], [1.34390, 42.78914], [1.34419, 42.78907], [1.34437, 42.78900], [1.34493, 42.78879], [1.34532, 42.78845], [1.34571, 42.78818], [1.34595, 42.78793], [1.34635, 42.78758], [1.34718, 42.78734], [1.34742, 42.78703], [1.34796, 42.78667], [1.34812, 42.78649], [1.34808, 42.78628], [1.34816, 42.78602], [1.34846, 42.78583], [1.34855, 42.78554], [1.34868, 42.78535], [1.34942, 42.78496], [1.34989, 42.78443], [1.35047, 42.78406], [1.35149, 42.78391], [1.35200, 42.78373], [1.35242, 42.78227], [1.35264, 42.78202], [1.35247, 42.78145], [1.35233, 42.78118], [1.35208, 42.78107], [1.35212, 42.78047], [1.35220, 42.78023], [1.35216, 42.77992], [1.35227, 42.77960], [1.35228, 42.77930], [1.35254, 42.77894], [1.35258, 42.77872], [1.35268, 42.77862], [1.35269, 42.77847], [1.35286, 42.77837], [1.35292, 42.77828], [1.35290, 42.77809], [1.35281, 42.77801], [1.35282, 42.77784], [1.35195, 42.77745], [1.35187, 42.77723], [1.35185, 42.77672], [1.35161, 42.77668], [1.35126, 42.77673], [1.35105, 42.77666], [1.35074, 42.77646], [1.35060, 42.77649], [1.35051, 42.77635], [1.34977, 42.77617], [1.35055, 42.77545], [1.35160, 42.77421], [1.35209, 42.77337], [1.35284, 42.77261], [1.35322, 42.77211], [1.35306, 42.77130], [1.35334, 42.77093], [1.35342, 42.77074], [1.35350, 42.77066], [1.35363, 42.77059], [1.35385, 42.77050], [1.35509, 42.76975], [1.35533, 42.76968], [1.35560, 42.76947], [1.35561, 42.76891], [1.35571, 42.76882], [1.35612, 42.76922], [1.35615, 42.76896], [1.35611, 42.76877], [1.35616, 42.76828], [1.35622, 42.76792], [1.35660, 42.76738], [1.35672, 42.76728], [1.35707, 42.76786], [1.35731, 42.76759], [1.35757, 42.76757], [1.35787, 42.76732], [1.35812, 42.76710], [1.35826, 42.76696], [1.35825, 42.76664], [1.35822, 42.76636], [1.35846, 42.76625], [1.35907, 42.76597], [1.35932, 42.76595], [1.35964, 42.76585], [1.35983, 42.76566], [1.36075, 42.76536], [1.36109, 42.76508], [1.36128, 42.76506], [1.36196, 42.76447], [1.36172, 42.76420], [1.36200, 42.76410], [1.36208, 42.76382], [1.36217, 42.76357], [1.36208, 42.76338], [1.36220, 42.76322], [1.36291, 42.76341], [1.36314, 42.76344], [1.36336, 42.76377], [1.36348, 42.76336], [1.36373, 42.76352], [1.36385, 42.76335], [1.36394, 42.76332], [1.36370, 42.76305], [1.36342, 42.76299], [1.36341, 42.76278], [1.36283, 42.76208], [1.36309, 42.76202], [1.36393, 42.76224], [1.36406, 42.76213], [1.36420, 42.76226], [1.36422, 42.76219], [1.36435, 42.76221], [1.36437, 42.76213], [1.36455, 42.76217], [1.36462, 42.76208], [1.36473, 42.76213], [1.36512, 42.76213], [1.36520, 42.76198], [1.36556, 42.76228], [1.36572, 42.76208], [1.36558, 42.76184], [1.36515, 42.76149], [1.36376, 42.76123], [1.36312, 42.76103], [1.36294, 42.76078], [1.36288, 42.76054], [1.36288, 42.76054], [1.36288, 42.76054], [1.36294, 42.76078], [1.36312, 42.76103], [1.36376, 42.76123], [1.36515, 42.76149], [1.36558, 42.76184], [1.36572, 42.76208], [1.36556, 42.76228], [1.36520, 42.76198], [1.36512, 42.76213], [1.36473, 42.76213], [1.36462, 42.76208], [1.36455, 42.76217], [1.36437, 42.76213], [1.36435, 42.76221], [1.36422, 42.76219], [1.36420, 42.76226], [1.36406, 42.76213], [1.36393, 42.76224], [1.36309, 42.76202], [1.36283, 42.76208], [1.36341, 42.76278], [1.36342, 42.76299], [1.36370, 42.76305], [1.36394, 42.76332], [1.36385, 42.76335], [1.36373, 42.76352], [1.36348, 42.76336], [1.36336, 42.76377], [1.36314, 42.76344], [1.36291, 42.76341], [1.36220, 42.76322], [1.36208, 42.76338], [1.36217, 42.76357], [1.36208, 42.76382], [1.36200, 42.76410], [1.36172, 42.76420], [1.36196, 42.76447], [1.36128, 42.76506], [1.36109, 42.76508], [1.36075, 42.76536], [1.35983, 42.76566], [1.35964, 42.76585], [1.35932, 42.76595], [1.35907, 42.76597], [1.35846, 42.76625], [1.35822, 42.76636], [1.35825, 42.76664], [1.35826, 42.76696], [1.35812, 42.76710], [1.35787, 42.76732], [1.35757, 42.76757], [1.35731, 42.76759], [1.35707, 42.76786], [1.35672, 42.76728], [1.35660, 42.76738], [1.35622, 42.76792], [1.35616, 42.76828], [1.35611, 42.76877], [1.35615, 42.76896], [1.35612, 42.76922], [1.35571, 42.76882], [1.35561, 42.76891], [1.35560, 42.76947], [1.35533, 42.76968], [1.35509, 42.76975], [1.35385, 42.77050], [1.35363, 42.77059], [1.35350, 42.77066], [1.35342, 42.77074], [1.35334, 42.77093], [1.35306, 42.77130], [1.35322, 42.77211], [1.35284, 42.77261], [1.35209, 42.77337], [1.35160, 42.77421], [1.35055, 42.77545], [1.34977, 42.77617], [1.34958, 42.77636], [1.34896, 42.77699], [1.34829, 42.77767], [1.34810, 42.77818], [1.34800, 42.77883], [1.34791, 42.77931], [1.34792, 42.77962], [1.34810, 42.77996], [1.34820, 42.78032], [1.34830, 42.78056], [1.34825, 42.78078], [1.34836, 42.78140], [1.34861, 42.78204], [1.34903, 42.78236], [1.34940, 42.78259], [1.34952, 42.78280], [1.34930, 42.78310], [1.34863, 42.78339], [1.34800, 42.78356], [1.34734, 42.78389], [1.34673, 42.78406], [1.34587, 42.78439], [1.34492, 42.78474], [1.34441, 42.78466], [1.34389, 42.78460], [1.34321, 42.78492], [1.34276, 42.78515], [1.34226, 42.78536], [1.34175, 42.78536], [1.34125, 42.78542], [1.34072, 42.78580], [1.34036, 42.78600], [1.34016, 42.78628], [1.34003, 42.78650], [1.33969, 42.78685], [1.33910, 42.78713], [1.33873, 42.78729], [1.33840, 42.78742], [1.33832, 42.78745]]}, "type": "Feature", "properties": {"slope": 0.07371, "usages": [], "description_teaser": "", "duration_pretty": "4H", "altimetric_profile": "/api/trek/2849/profile.json", "ambiance": "", "is_park_centered": false, "poi_layer": "/geotrek/api/trek/2849/pois.geojson", "themes": [], "web_links": [], "duration": 4.00000, "ascent": 809, "relationships_edge": [], "relationships": [], "descent": -794, "pictures": [{"url": "/media/paperclip/trekking_trek/2849/cascade-dars-2.jpg.500x500_q85.jpg", "title": "Cascade d'Ars #2", "legend": "Cascade d'Ars #2 - CC-BY-SA", "author": "Gr\u00e9gory Tonon"}], "parking_location": null, "kml": "/api/trek/trek-2849.kml", "relationships_circuit": [], "networks": [], "access": "<p>Depuis le village d'Aulus-les-Bains</p>", "gpx": "/api/trek/trek-2849.gpx", "pk": 2849, "thumbnail": "/media/paperclip/trekking_trek/2849/cascade-dars-2.jpg.120x120_q85_crop.jpg", "arrival": "", "description": "", "printable": "/api/trek/trek-2849.pdf", "advice": "", "pois": [], "disabled_infrastructure": "", "difficulty": {"id": 1, "label": "Facile"}, "information_desk": null, "advised_parking": "", "cities": [{"code": "09029", "name": "Aulus-les-Bains"}], "slug": "decouverte-de-la-cascade-dars", "min_elevation": 764, "name": "D\u00e9couverte de la Cascade d'Ars", "route": {"id": 2, "label": "Aller-retour"}, "departure": "Aulus-les-Bains", "map_image_url": "/image/trek-2849.png", "districts": [], "length": 10216.81540, "max_elevation": 1502, "public_transport": "", "published": true, "model": "trekking.trek", "relationships_departure": []}, "id": 2849}]}
+{
+    "crs": {
+        "type": "link",
+        "properties": {
+            "href": "http://spatialreference.org/ref/epsg/4326/",
+            "type": "proj4"
+        }
+    },
+    "type": "FeatureCollection",
+    "features": [{
+        "geometry": {
+            "type": "LineString",
+            "coordinates": [
+                [1.51472, 42.73934],
+                [1.51678, 42.71955]
+            ]
+        },
+        "type": "Feature",
+        "properties": {
+            "slope": 0.25223,
+            "usages": [],
+            "description_teaser": "",
+            "duration_pretty": "5H",
+            "altimetric_profile": "/api/trek/2851/profile.json",
+            "ambiance": "",
+            "is_park_centered": false,
+            "poi_layer": "/geotrek/api/trek/2851/pois.geojson",
+            "themes": [],
+            "web_links": [],
+            "duration": 12,
+            "ascent": 986,
+            "relationships_edge": [],
+            "relationships": [],
+            "descent": -19,
+            "pictures": [],
+            "parking_location": null,
+            "kml": "/api/trek/trek-2851.kml",
+            "relationships_circuit": [],
+            "networks": [],
+            "access": "",
+            "gpx": "/api/trek/trek-2851.gpx",
+            "pk": 2851,
+            "thumbnail": "",
+            "arrival": "",
+            "description": "",
+            "printable": "/api/trek/trek-2851.pdf",
+            "advice": "",
+            "pois": [],
+            "disabled_infrastructure": "",
+            "difficulty": {
+                "id": 2,
+                "label": "Confirm\u00e9"
+            },
+            "information_desk": null,
+            "advised_parking": "",
+            "cities": [{
+                "code": "09135",
+                "name": "Goulier"
+            }, {
+                "code": "09162",
+                "name": "Lercoul"
+            }],
+            "slug": "pic-du-sarrrasi-et-pic-dendron",
+            "min_elevation": 1492,
+            "name": "Pic du Sarrrasi et Pic d'Endron",
+            "route": {
+                "id": 2,
+                "label": "Aller-retour"
+            },
+            "departure": "",
+            "map_image_url": "/image/trek-2851.png",
+            "districts": [],
+            "length": 4022.99786,
+            "max_elevation": 2459,
+            "public_transport": "",
+            "published": true,
+            "model": "trekking.trek",
+            "relationships_departure": []
+        },
+        "id": 2851
+    }, {
+        "geometry": {
+            "type": "LineString",
+            "coordinates": [
+                [1.41168, 42.80642],
+                [1.42065, 42.80641]
+            ]
+        },
+        "type": "Feature",
+        "properties": {
+            "slope": 0.08900,
+            "usages": [{
+                "label": "P\u00e9destre",
+                "id": 4,
+                "pictogram": "/media/upload/usage-foot.png"
+            }],
+            "description_teaser": "<p>Un tr&egrave;s joli point de vue, en retrait de la cha&icirc;ne des Pyr&eacute;nn&eacute;es.</p>",
+            "duration_pretty": "5H",
+            "altimetric_profile": "/api/trek/2/profile.json",
+            "ambiance": "<p>Le nom de ce pic est issu de la l&eacute;gende selon laquelle les trois seigneurs des vall&eacute;es de Massat, Vicdessos et Rabat-les-Trois-Seigneurs, se rencontraient sur la dalle plate en son sommet afin de d&eacute;battre des droits des diff&eacute;rentes vall&eacute;es qu'ils administraient3.</p>\r\n<p></p>\r\n<p>&Agrave; partir du xviie si&egrave;cle, de grandes caravanes d'&acirc;nes et de mulets transportaient le charbon de bois entre les for&ecirc;ts du Couserans et les forges &agrave; la catalane de la vall&eacute;e de Rabat via le col de la Pourtanelle sur l'&eacute;paulement nord du pic4.</p>\r\n<p></p>\r\n<p>Au xixe si&egrave;cle, des porteurs de glace venaient y chercher leur butin sur le flanc nord du pic au glacier d'Ambans pour le transporter ensuite vers Toulouse. Ce glacier a totalement disparu au d&eacute;but du xxie si&egrave;cle.</p>\r\n<p></p>\r\n<p></p>\r\n<p>Source Wikipedia</p>\r\n<p><a></a></p>",
+            "is_park_centered": false,
+            "poi_layer": "/geotrek/api/trek/2/pois.geojson",
+            "themes": [{
+                "label": "Lac et glacier",
+                "id": 8,
+                "pictogram": "/media/upload/theme-lake@2x.png"
+            }, {
+                "label": "Point de vue",
+                "id": 4,
+                "pictogram": "/media/upload/theme-panorama@2x.png"
+            }],
+            "web_links": [],
+            "duration": 6.0,
+            "ascent": 768,
+            "relationships_edge": [],
+            "relationships": [],
+            "descent": -857,
+            "pictures": [{
+                "url": "/media/paperclip/trekking_trek/2/le-pic-des-trois-seigneurs-vu-depuis-letang-de-lers.JPG.500x500_q85.jpg",
+                "title": "Le Pic des Trois Seigneurs vu depuis l'\u00e9tang de Lers.",
+                "legend": "Le Pic des Trois Seigneurs vu depuis l'\u00e9tang de Lers. CC-BY-SA",
+                "author": "Anthospace"
+            }],
+            "parking_location": [1.41282, 42.80633],
+            "kml": "/api/trek/trek-2.kml",
+            "relationships_circuit": [],
+            "networks": [],
+            "access": "",
+            "gpx": "/api/trek/trek-2.gpx",
+            "pk": 2,
+            "thumbnail": "/media/paperclip/trekking_trek/2/le-pic-des-trois-seigneurs-vu-depuis-letang-de-lers.JPG.120x120_q85_crop.jpg",
+            "arrival": "",
+            "description": "",
+            "printable": "/api/trek/trek-2.pdf",
+            "advice": "<p>Attention en cas d'orage. Fortement d&eacute;conseill&eacute; par mauvais temps!</p>",
+            "pois": [{
+                "type": "Sommet",
+                "name": "Pic des Trois Seigneurs",
+                "description": "<p>Le pic des Trois Seigneurs est situ&eacute; au point de rencontre des trois vall&eacute;es de la&nbsp;<a>Courbi&egrave;re</a>, du&nbsp;<a>Vicdessos</a>&nbsp;et de l'<a>Arac</a>&nbsp;(<a>Couserans</a>).</p>\r\n<p>Modeste sommet bien individualis&eacute;, il offre n&eacute;anmoins un panorama exceptionnel sur les montagnes ari&eacute;geoises.</p>"
+            }, {
+                "type": "Lac",
+                "name": "\u00c9tang d'Arbu",
+                "description": "<p>Ce lac tr&egrave;s accessible est un site pris&eacute; par les p&ecirc;cheurs. On y observe&nbsp;<a>truites fario</a>, saumons des fontaines,&nbsp;<a>ombles chevaliers</a>,&nbsp;<a>cristivomers</a>&nbsp;et&nbsp;<a>vairons</a>.</p>"
+            }],
+            "disabled_infrastructure": "",
+            "difficulty": {
+                "id": 2,
+                "label": "Confirm\u00e9"
+            },
+            "information_desk": null,
+            "advised_parking": "Avant le Port de Lers",
+            "cities": [{
+                "code": "09231",
+                "name": "Le Port"
+            }, {
+                "code": "09302",
+                "name": "Suc-et-Sentenac"
+            }],
+            "slug": "boucle-du-pic-des-trois-seigneurs",
+            "min_elevation": 1387,
+            "name": "Boucle du Pic des Trois Seigneurs",
+            "route": {
+                "id": 1,
+                "label": "Boucle"
+            },
+            "departure": "Port de Lers",
+            "map_image_url": "/image/trek-2.png",
+            "districts": [],
+            "length": 8843.55047,
+            "max_elevation": 2153,
+            "public_transport": "",
+            "published": true,
+            "model": "trekking.trek",
+            "relationships_departure": []
+        },
+        "id": 2
+    }, {
+        "geometry": {
+            "type": "LineString",
+            "coordinates": [
+                [1.34210, 42.78978],
+                [1.33832, 42.78745]
+            ]
+        },
+        "type": "Feature",
+        "properties": {
+            "slope": 0.07371,
+            "usages": [],
+            "description_teaser": "",
+            "duration_pretty": "4H",
+            "altimetric_profile": "/api/trek/2849/profile.json",
+            "ambiance": "",
+            "is_park_centered": false,
+            "poi_layer": "/geotrek/api/trek/2849/pois.geojson",
+            "themes": [],
+            "web_links": [],
+            "duration": 3.5,
+            "ascent": 809,
+            "relationships_edge": [],
+            "relationships": [],
+            "descent": -794,
+            "pictures": [{
+                "url": "/media/paperclip/trekking_trek/2849/cascade-dars-2.jpg.500x500_q85.jpg",
+                "title": "Cascade d'Ars #2",
+                "legend": "Cascade d'Ars #2 - CC-BY-SA",
+                "author": "Gr\u00e9gory Tonon"
+            }],
+            "parking_location": null,
+            "kml": "/api/trek/trek-2849.kml",
+            "relationships_circuit": [],
+            "networks": [],
+            "access": "<p>Depuis le village d'Aulus-les-Bains</p>",
+            "gpx": "/api/trek/trek-2849.gpx",
+            "pk": 2849,
+            "thumbnail": "/media/paperclip/trekking_trek/2849/cascade-dars-2.jpg.120x120_q85_crop.jpg",
+            "arrival": "",
+            "description": "",
+            "printable": "/api/trek/trek-2849.pdf",
+            "advice": "",
+            "pois": [],
+            "disabled_infrastructure": "",
+            "difficulty": {
+                "id": 1,
+                "label": "Facile"
+            },
+            "information_desk": null,
+            "advised_parking": "",
+            "cities": [{
+                "code": "09029",
+                "name": "Aulus-les-Bains"
+            }],
+            "slug": "decouverte-de-la-cascade-dars",
+            "min_elevation": 764,
+            "name": "D\u00e9couverte de la Cascade d'Ars",
+            "route": {
+                "id": 2,
+                "label": "Aller-retour"
+            },
+            "departure": "Aulus-les-Bains",
+            "map_image_url": "/image/trek-2849.png",
+            "districts": [],
+            "length": 10216.81540,
+            "max_elevation": 1502,
+            "public_transport": "",
+            "published": true,
+            "model": "trekking.trek",
+            "relationships_departure": []
+        },
+        "id": 2849
+    }]
+}
