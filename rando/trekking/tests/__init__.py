@@ -111,22 +111,11 @@ class TrekFulltextTest(SimpleTestCase):
 
 
 class NavigationTest(CasperTestCase):
-
-    def setUp(self):
-        basepath = os.path.join(settings.FLATPAGES_ROOT, 'fr')
-        try:
-            os.makedirs(basepath)
-        except OSError:
-            pass
-        self.flatpage = os.path.join(basepath, 'flatpage.html')
-        open(self.flatpage, 'w').write('<h1>test</h1>')
-
-    def tearDown(self):
-        os.remove(self.flatpage)
-
     def _get_tests_file(self, name):
         return os.path.join(settings.PROJECT_PATH, 'trekking', 'tests', name)
 
     def test_popup(self):
-        with self.settings(POPUP_HOME_ENABLED=True):
+        test_data = os.path.join(os.path.dirname(__file__), 'data')
+        with self.settings(INPUT_DATA_ROOT=test_data,
+                           MEDIA_ROOT=os.path.join(test_data, 'media')):
             self.assertTrue(self.casper(self._get_tests_file('test_popup.js')))
