@@ -410,13 +410,20 @@ DEVELOPMENT
 ::
 
     make install
-    pip install -r dev-requirements.pip
+    ./bin/pip install -r dev-requirements.pip
 
 * `Install CasperJS <http://docs.casperjs.org/en/latest/installation.html>`_
 
 ::
 
     make test
+
+Start development instance :
+
+::
+
+    make sync
+    make serve
 
 
 =========

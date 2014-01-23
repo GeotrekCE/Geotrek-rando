@@ -22,6 +22,9 @@ CHANGELOG
 * Search popup is not shown outside homepage anymore. A click on main page title
   brings it, and the home button in navigation does not.
 * No longer compatible with Django 1.4.
+* Settings have been refactored to respect Django conventions.
+  Local settings shall be moved to ``rando/settings`` folder, renamed to ``prod.py``,
+  and this line added at the top : ``from .base import *`` (*see sample*).
 
 **New features**
 

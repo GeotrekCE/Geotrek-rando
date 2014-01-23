@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
 
+from .base import *
+
+
 #--------------------------------------
 # Edit configuration
 #
 
-GEOTREK_SERVER = 'geobi.makina-corpus.net/geotrek'
+GEOTREK_SERVER = 'geotrekserver.com'
 GEOTREK_USER = 'apiuser'
 GEOTREK_PASSWORD = 'secret_password'
 
@@ -52,16 +55,3 @@ VIEW3D_ENABLED = True
 #
 # PREPROD = True
 #
-
-#
-# In development
-#...................
-# DEBUG = True
-# TEMPLATE_DEBUG = DEBUG
-#
-# CACHES = {
-#    'default': {
-#        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-#        'LOCATION': 'unique-snowflake'
-#    }
-#}

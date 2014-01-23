@@ -4,7 +4,7 @@ import os
 import sys
 
 
-PROJECT_PATH = os.path.dirname(__file__)
+PROJECT_PATH = os.path.dirname(os.path.dirname(__file__))
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
