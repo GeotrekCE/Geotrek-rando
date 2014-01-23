@@ -4,6 +4,42 @@ function TrekFilter()
     self.treksList = [];
     self.matching = [];
 
+    this.setup = function () {
+        $("#difficulty").slider({
+            range: true,
+            step: 1,
+            min: 1,
+            max: 4,
+            values: [ 1, 4 ],
+            slide: saveSlider
+        });
+
+        $("#duration").slider({
+            range: true,
+            step: 1,
+            min: 0,
+            max: 2,
+            values: [ 0, 2 ],
+            slide: saveSlider
+        });
+
+        $("#altitude").slider({
+            range: true,
+            step: 1,
+            min: 0,
+            max: 3,
+            values: [ 0, 3 ],
+            slide: saveSlider
+        });
+
+        function saveSlider(event, ui) {
+            self.sliderChanged(ui.values[0],
+                               ui.values[1],
+                               $(this).data("filter"),
+                               $(this));
+        }
+    };
+
     this.initEvents = function () {
         $(window).unbind('filters:reload').on('filters:reload', function () {self.load();});
         $(".theme .filter").unbind('click').on('click', self.filterChanged);

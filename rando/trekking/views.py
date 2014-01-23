@@ -5,6 +5,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.views.generic import TemplateView, DetailView
 from django.views.static import serve as static_serve
+from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import redirect
 from djpjax import PJAXResponseMixin
 from localeurl.utils import locale_url
@@ -26,6 +27,28 @@ class HomeView(PJAXResponseMixin, TemplateView):
 
         context = super(HomeView, self).get_context_data(**kwargs)
         self._add_choices_values(alltreks, context)
+
+        difficulty_levels = [
+            {'label': _('Very easy'), 'value': 1},
+            {'label': _('Easy'), 'value': 2},
+            {'label': _('Medium'), 'value': 3},
+            {'label': _('Hard'), 'value': 4}
+        ]
+        duration_levels = [
+            {'label': _('1/2 day'), 'value': 0},
+            {'label': _('Day'), 'value': 4},
+            {'label': u'> %s' % _('2 days'), 'value': 10},
+        ]
+        altitude_levels = [
+            {'label': '< 300m', 'value': 0},
+            {'label': '600m', 'value': 300},
+            {'label': '1000m', 'value': 600},
+            {'label': '> 1400m', 'value': 1000},
+        ]
+        context['difficulty_levels'] = difficulty_levels
+        context['duration_levels'] = duration_levels
+        context['altitude_levels'] = altitude_levels
+
         return context
 
     def _add_choices_values(self, alltreks, context):
@@ -60,7 +83,7 @@ class HomeView(PJAXResponseMixin, TemplateView):
             'usages': allusages,
             'districts': alldistricts,
             'cities': allcities,
-            'routes': allroutes
+            'routes': allroutes,
         })
 
 

@@ -1,37 +1,50 @@
-{% load i18n %}
+{% load i18n trekking_tags %}
 <div id="filters-bar">
   <h2 class="hidden">{% trans "Filters" %}</h2>
 
   <div id="basic-filters">
+
     <div class="difficulty span">
       <label for="difficulty">{% trans "Difficulty" %}</label>
       <div class="slider-wrap">
         <div id="difficulty" data-filter="difficulty"></div>
       </div>
-      <div class="slider-value first">{% trans "Very easy" %}</div>
-      <div class="slider-value">{% trans "Easy" %}</div>
-      <div class="slider-value">{% trans "Medium" %}</div>
-      <div class="slider-value last">{% trans "Hard" %}</div>
+
+      {% for difficulty in difficulty_levels %}
+        <div data-value="{{ difficulty.value }}"
+             class="slider-value {% if forloop.first%}first{% endif %} {% if forloop.last%}last{% endif %}">
+             {{ difficulty.label }}
+        </div>
+      {% endfor %}
     </div>
+
     <div class="duration span">
       <label for="duration">{% trans "Duration" %}</label>
       <div class="slider-wrap">
         <div id="duration" data-filter="duration"></div>
       </div>
-      <div class="slider-value first">{% trans "1/2 day" %}</div>
-      <div class="slider-value">{% trans "Day" %}</div>
-      <div class="slider-value last">&gt; {% trans "2 days" %}</div>
+
+      {% for duration in duration_levels %}
+        <div data-value="{{ duration.value }}"
+             class="slider-value {% if forloop.first%}first{% endif %} {% if forloop.last%}last{% endif %}">
+             {{ duration.label }}
+        </div>
+      {% endfor %}
     </div>
+
     <div class="altitude span">
       <label for="altitude">{% trans "Climb" %}</label>
       <div class="slider-wrap">
         <div id="altitude" data-filter="altitude"></div>
       </div>
-      <div class="slider-value first">&lt; 300m</div>
-      <div class="slider-value">600m</div>
-      <div class="slider-value">1000m</div>
-      <div class="slider-value last">&gt;1400m</div>
+      {% for altitude in altitude_levels %}
+        <div data-value="{{ altitude.value }}"
+             class="slider-value {% if forloop.first%}first{% endif %} {% if forloop.last%}last{% endif %}">
+             {{ altitude.label }}
+        </div>
+      {% endfor %}
     </div>
+
 
     <div class="theme span">
       <label for="theme">{% trans "Thematic" %}</label>
@@ -42,10 +55,12 @@
       {% endfor %}
     </div>
 
+
     <div id="filters-actions" class="span">
       <span>{% trans "Reset" %}</span><br/>
       <a class="btn utils icon-fontawesome-webfont-1" id="clear-filters" href="#" data-toggle="tooltip" title="{% trans "Reset filters" %}"></a>
     </div>
+
 
     <div id="advanced-filters">
 
