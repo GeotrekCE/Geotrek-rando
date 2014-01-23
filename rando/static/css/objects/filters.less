@@ -37,16 +37,19 @@
 #filters-bar {
   position: absolute;
   width: 100%;
-  height: 65px;
+  height: 115px;
   top: 0;
   z-index: 901;
-
  .box-sizing(border-box);
   color: #9e969a;
   padding: 5px 5px 5px 15px;
   background: #f8f8f8;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
+
+  @media (min-width: @screen-lg) {
+    height: 65px;
+  }
 
   label {
     font-weight: bold;

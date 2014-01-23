@@ -122,6 +122,7 @@ body, html {
   line-height: 1.4em;
   font-size: 13px;
   background-color: white;
+  padding: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -243,6 +244,10 @@ header {
   bottom: 50px;
 }
 
+#content {
+  height: 100%;
+}
+
 #footer {
   position: absolute;
   z-index: 1;
@@ -289,14 +294,6 @@ ul.row-footer {
   width: 100%;
 }
 
-#side-bar {
-  position: absolute;
-  top: 65px;  /* header + search-bar */
-  bottom: 0;
-  z-index: 900; /* above map */
-  min-width: 389px;
-}
-
 #detail-container-content,
 #flatpage-container-content {
   padding-left: 1%;
@@ -311,8 +308,12 @@ ul.row-footer {
   position: absolute;
   display: none;
   top: 24px;
-  right: 150px;
+  right: 70px;
   z-index: 1031;
+
+  @media (min-width: @screen-lg) {
+    right: 150px;
+  }
 
   ul {
     list-style-type: none;
@@ -423,16 +424,26 @@ ul.row-footer {
 
 
 #side-bar {
+  position: absolute;
+  top: 115px; /* header + search-bar */
+  bottom: 0;
+  z-index: 900; /* above map */
+  width: 330px;
   border-right: solid 2px #877e82;
   background-color: #F6F7F1;
   min-height: 45px;
-}
 
-#side-bar .nav-tabs {
-  width: 100%;
-  margin: 0;
-  border-bottom: none;
-  -webkit-touch-callout: none;
+  @media (min-width: @screen-lg) {
+    top: 65px;
+    min-width: 389px;
+  }
+
+  .nav-tabs {
+    width: 100%;
+    margin: 0;
+    border-bottom: none;
+    -webkit-touch-callout: none;
+  }
 }
 
 #tab-results, #tab-backpack {
@@ -1258,49 +1269,11 @@ a.accordion-toggle  {
 
 
 /* ==========================================================================
-   Media queries
+   Mobile version media querie
    ========================================================================== */
-
-@media (max-width: @screen-lg) {
-  #filters-bar {
-    height: 115px;
-  }
-
-  #side-bar {
-    top: 115px;
-  }
-}
-
-@media (max-width: @screen-md) {
-  header h3 {
-    font-size: 20px;
-    left: 11px;
-    top: 27px;
-  }
-
-  #content {
-    height: 100%;
-  }
-
-  #side-bar {
-    width: 330px;
-    min-width: 0;
-  }
-
-  #flatpages {
-    right: 70px;
-  }
-
-  #footer .wrapper {
-    width: 100%;
-  }
-}
 
 /* Landscape phones and down */
 @media (max-width: @screen-sm) {
-  body {
-    padding: 0;
-  }
 
   #container-content {
     bottom: 0;
