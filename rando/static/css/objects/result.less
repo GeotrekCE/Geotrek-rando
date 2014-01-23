@@ -1,0 +1,139 @@
+#side-bar .result.outbounds {
+  opacity: 0.2;
+}
+
+#side-bar .result:hover, .side-bar .result.active {
+  background-color: #e9eae5;
+}
+
+#side-bar .result {
+  clear: both;
+  border-bottom: solid 1px #dbdcd7;
+  cursor: pointer;
+  position: relative;
+  padding: 5px;
+}
+
+#side-bar .result .illust {
+float: left;
+width: 32%;
+}
+
+#side-bar .result .info-result {
+  padding-left: 5px;
+  min-height: 110px;
+  max-width: 68%;
+  display: inline-block;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+#side-bar .result .info-result h3 {
+  font-size: 14px;
+  color:#625b50;
+  line-height: 18px;
+  margin-bottom: 4px;
+  margin-top: 0px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+#side-bar .result .info-result p {
+  margin:0;
+  color:#968d7f;
+}
+
+.search-tools {
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
+
+    .btn {
+      background-image: none;
+      height: 22px;
+      width: 22px;
+      margin-left: 5px;
+      float: left;
+
+      &.backpack,
+      &.search {
+        padding: 6px;
+      }
+
+      &:before {
+        font-size: 20px;
+      }
+    }
+}
+
+.theme-tools
+{
+ float:left;
+}
+
+
+@media (max-width: @screen-md) {
+  #side-bar .result {
+
+    .illust img {
+      height: 100%;
+    }
+
+    .info-result {
+      min-height: 100px;
+    }
+
+    .search-tools {
+      bottom: 5px;
+    }
+  }
+}
+
+
+/* Landscape phones and down */
+@media (max-width: @screen-sm) {
+  #side-bar .result {
+
+    height: 23px;
+    overflow: hidden;
+    padding: 7px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+
+    .info-result {
+      min-height: 0;
+      margin: 0;
+      white-space: nowrap;
+
+      a {
+        vertical-align: middle;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+
+      h3 {
+        display: inline;
+      }
+
+      p {
+        display: inline;
+        margin-right: 5px;
+      }
+    }
+
+    .theme-tools {
+      float: none;
+      display: inline-block;
+      min-height: 25px;
+      vertical-align: top;
+      margin-top: -4px;
+    }
+
+    .ascent, .search-tools {
+      display: none;
+    }
+  }
+}
+
+
