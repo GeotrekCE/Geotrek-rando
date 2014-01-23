@@ -10,6 +10,6 @@ lib/
 local/
 build/
 var/
-rando/settings_local.py
+rando/settings/prod.py
 rando.egg-info/
 rando/var/
