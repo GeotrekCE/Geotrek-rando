@@ -8,12 +8,15 @@ from easydict import EasyDict as edict
 from casper.tests import CasperTestCase
 
 from django.test import SimpleTestCase
+from django.test.utils import override_settings
 from django.conf import settings
-
 
 from rando.trekking.templatetags.trekking_tags import overridable
 from rando.trekking.management.commands.sync_trekking import mkdir_p
 from rando.trekking.models import Trek, JSONManager
+
+
+TESTS_DATA_PATH = os.path.join(os.path.dirname(__file__), 'data')
 
 
 class MkdirTest(SimpleTestCase):
@@ -110,12 +113,14 @@ class TrekFulltextTest(SimpleTestCase):
         self.assertEqual(count, 1)
 
 
+@override_settings(INPUT_DATA_ROOT=TESTS_DATA_PATH,
+                   MEDIA_ROOT=os.path.join(TESTS_DATA_PATH, 'media'))
 class NavigationTest(CasperTestCase):
     def _get_tests_file(self, name):
         return os.path.join(settings.PROJECT_PATH, 'trekking', 'tests', name)
 
     def test_popup(self):
-        test_data = os.path.join(os.path.dirname(__file__), 'data')
-        with self.settings(INPUT_DATA_ROOT=test_data,
-                           MEDIA_ROOT=os.path.join(test_data, 'media')):
-            self.assertTrue(self.casper(self._get_tests_file('test_popup.js')))
+        self.assertTrue(self.casper(self._get_tests_file('test_popup.js')))
+
+    def test_backpack(self):
+        self.assertTrue(self.casper(self._get_tests_file('test_backpack.js')))
