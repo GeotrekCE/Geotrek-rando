@@ -1,5 +1,5 @@
 {% load static i18n leaflet_tags trekking_tags localeurl_tags %}
-{% include "trekking/navigation_fragment.html" with title=object.title %}
+{% include "trekking/_navigation.html" with title=object.title %}
 
 {% if pjax %}
   <title>{{ TITLE }} - {{ object.title }}</title>
@@ -11,7 +11,7 @@
 
 <div class="flatpage-content">
     <div class="row-fluid">
-        {% include "trekking/fake_searchtabs_fragment.html" %}
+        {% include "trekking/_fake_searchtabs.html" %}
     </div>
     <div id="flatpage-container-content">
         {{ object.content|safe }}

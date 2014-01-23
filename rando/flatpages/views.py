@@ -9,7 +9,7 @@ from .models import FlatPage
 class PageView(PJAXResponseMixin, DetailView):
 
     template_name = "flatpages/base.html"
-    pjax_template_name = "flatpages/base-panel.html"
+    pjax_template_name = "flatpages/_base_panel.html"
 
     def get_object(self):
         slug = self.kwargs.get(self.slug_url_kwarg, None)

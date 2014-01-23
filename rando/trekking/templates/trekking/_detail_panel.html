@@ -1,7 +1,7 @@
 {% load static i18n leaflet_tags trekking_tags localeurl_tags %}
 
-{% include "trekking/navigation_fragment.html" %}
-{% include "trekking/share_fragment.html" with title=object.title %}
+{% include "trekking/_navigation.html" %}
+{% include "trekking/_share.html" with title=object.title %}
 
 {% if pjax %}
   <title>{{ object.title }}</title>
@@ -20,7 +20,7 @@
 
 <div class="detail-content">
   <div class="row-fluid" id="detail-content-top">
-    {% include "trekking/fake_searchtabs_fragment.html" %}
+    {% include "trekking/_fake_searchtabs.html" %}
 
     <div class="span7 pull-right">
       <div id="toolbox" class="btn-toolbar pull-right">
@@ -97,7 +97,7 @@
       <p>{{ object.properties.ambiance|default:"No ambiance"|safe }}</p>
 
       <div id="trek-carousel">
-        {% include "trekking/carousel_fragment.html" with prefix="trek" pictures=all_pictures default="True" %}
+        {% include "trekking/_carousel.html" with prefix="trek" pictures=all_pictures default="True" %}
       </div>
 
       <p>{{ object.properties.description|default:"No description"|safe }}</p>
@@ -244,7 +244,7 @@
           <div id="collapse-poi-{{  poi.properties.pk }}" class="accordion-body collapse" style="height: 0px; " data-id="{{ poi.properties.pk }}">
             <div class="accordion-inner">
               <p>{{ poi.properties.description|safe }}</p>
-              {% include "trekking/carousel_fragment.html" with prefix=poi.properties.pk pictures=poi.properties.pictures default="False" %}
+              {% include "trekking/_carousel.html" with prefix=poi.properties.pk pictures=poi.properties.pictures default="False" %}
             </div>
           </div>
         </div>

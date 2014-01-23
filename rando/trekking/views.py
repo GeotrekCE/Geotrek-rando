@@ -16,7 +16,7 @@ from .models import Trek
 class HomeView(PJAXResponseMixin, TemplateView):
 
     template_name = 'trekking/home.html'
-    pjax_template_name = "trekking/home-panel.html"
+    pjax_template_name = "trekking/_home_panel.html"
 
     def get_context_data(self, **kwargs):
         lang = self.request.LANGUAGE_CODE
@@ -78,7 +78,7 @@ class BaseTrekView(DetailView):
 class TrekView(PJAXResponseMixin, BaseTrekView):
 
     template_name = 'trekking/detail.html'
-    pjax_template_name = "trekking/detail-panel.html"
+    pjax_template_name = "trekking/_detail_panel.html"
 
     def get_context_data(self, **kwargs):
         obj = self.get_object()

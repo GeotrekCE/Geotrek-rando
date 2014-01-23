@@ -1,6 +1,6 @@
 {% load i18n static leaflet_tags trekking_tags %}
 
-{% include "trekking/share_fragment.html" with title=TITLE %}
+{% include "trekking/_share.html" with title=TITLE %}
 
 {% if pjax %}
   <title>{{ TITLE }}</title>
@@ -132,7 +132,7 @@
         <h2 class="hidden">{% trans "Results" %}</h2>
         <p id="noresult" style="display:none" class="tab-content-empty">{% trans "No result" %}</p>
         {% for trek in treks %}
-            {% include "trekking/trek_result_fragment.html" with show="True" backpack="False" %}
+            {% include "trekking/_trek_result.html" with show="True" backpack="False" %}
         {% endfor %}
       </div>
 
@@ -140,7 +140,7 @@
         <h2 class="hidden">{% trans "Favorites" %}</h2>
         <p id="backpackempty" style="display:none" class="tab-content-empty">{% trans "Empty" %}</p>
         {% for trek in treks %}
-            {% include "trekking/trek_result_fragment.html" with show="False" backpack="True" %}
+            {% include "trekking/_trek_result.html" with show="False" backpack="True" %}
         {% endfor %}
       </div>
     </div>
@@ -149,7 +149,7 @@
 </div>
 <!-- sidebar -->
 
-{% include "trekking/navigation_fragment.html" with title="HOME" %}
+{% include "trekking/_navigation.html" with title="HOME" %}
 
 {% leaflet_map 'mainmap' fitextent=False creatediv=False callback="mainmapInit" loadevent="rando:foo" %}{# Such loadevent will prevent automatic map initialization #}
 
