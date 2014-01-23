@@ -104,28 +104,28 @@
 
       {% if object.properties.disabled_infrastructure %}
       <div id="trek-disabled">
-        <h3> {% trans "Disabled-friendly infrastructures" %}</h3>
+        <h3 class="icon-disabled-infrastructure">{% trans "Disabled-friendly infrastructures" %}</h3>
         <p>{{ object.properties.disabled_infrastructure|safe }}</p>
       </div>
       {% endif %}
 
       {% if object.properties.public_transport %}
       <div id="trek-transport">
-        <h3>{% trans "Transport" %}</h3>
+        <h3 class="icon-transport">{% trans "Transport" %}</h3>
         <p>{{ object.properties.public_transport|safe }}</p>
       </div>
       {% endif %}
 
       {% if object.properties.access %}
       <div id="trek-access" class="alert alert-info">
-        <h3>{% trans "Access" %}</h3>
+        <h3 class="icon-access">{% trans "Access" %}</h3>
         <p>{{ object.properties.access|safe }}</p>
       </div>
       {% endif %}
 
      {% if object.properties.information_desk %}
         <div id="trek-information-desk">
-          <h3>{% trans "Information Desk" %}</h3>
+          <h3 class="icon-information-desk">{% trans "Information Desk" %}</h3>
           <p class="title">{{ object.properties.information_desk.name }}</p>
           <p>{{ object.properties.information_desk.description|safe }}</p>
         </div>
@@ -136,7 +136,7 @@
     <div class="span{% if pois %}4{% else %}8{% endif %}">
       {% if object.properties.is_park_centered %}
         <div id="park-center-warning" class="alert alert-info">
-            <p><strong>{% trans "This trek is within park center" %}</strong>, <a class="pjax" href="{% locale_url request.LANGUAGE_CODE "flatpages:redirect" FLATPAGES_POLICY_PAGE %}">{% trans "please read access rules." %}</a></p>
+            <p class="icon-park-center">{% trans "This trek is within park center" %}, <a class="pjax" href="{% locale_url request.LANGUAGE_CODE "flatpages:redirect" FLATPAGES_POLICY_PAGE %}">{% trans "please read access rules." %}</a></p>
         </div>
       {% endif %}
 
@@ -217,7 +217,7 @@
 
      {% if object.properties.advice %}
         <div id="trek-advice" class="alert alert-error">
-          <h3>{% trans "Advice" %}</h3>
+          <h3 class="icon-warning">{% trans "Advice" %}</h3>
           <p>{{ object.properties.advice|safe }}</p>
         </div>
       {% endif %}

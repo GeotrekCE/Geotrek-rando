@@ -90,6 +90,11 @@ a, input, button {
 // Mixins for LESS http://lesshat.com/
 @import "vendor/lesshat.less";
 
+// Bootstrap variables and mixins
+@import "vendor/bootstrap/less/variables.less";
+@import "vendor/bootstrap/less/mixins.less";
+
+
 // Custom mixins
 .remove-callout(){
   -webkit-touch-callout: none;
@@ -135,11 +140,16 @@ h4 {
 a {
   color: @linkColor;
   .transition(color 100ms);
-}
+  text-decoration: underline;
 
-a:hover {
-  color: darken(@linkColor, 20%);
-  text-decoration: none;
+  &.btn {
+    text-decoration: none;
+  }
+
+  &:hover {
+    color: darken(@linkColor, 20%);
+    text-decoration: none;
+  }
 }
 
 ::-webkit-scrollbar{
@@ -211,6 +221,10 @@ header {
     margin-left: 10px;
     padding-left: 70px;
     line-height: 70px;
+  }
+
+  a {
+    text-decoration: none;
   }
 }
 
@@ -464,9 +478,15 @@ ul.social-buttons li {
 
 /****************************************************************************
 *
-* Śidebar
+* Sidebar
 *
 */
+
+
+.nav-tabs > li > a {
+  text-decoration: none;
+}
+
 
 #side-bar {
   border-right: solid 2px #877e82;
@@ -890,10 +910,12 @@ width: 32%;
       position: absolute;
       bottom: 30px;
       right: 15px;
-      background: url("../img/search.png") no-repeat top left;
-      padding-left: 25px;
 
-      &:hover {
+      &:before {
+        position: absolute;
+        font-size: 18px;
+        top: 0;
+        left: -20px;
         text-decoration: none;
       }
     }
@@ -907,11 +929,6 @@ width: 32%;
       &:hover {
         opacity: 0.7;
       }
-    }
-
-    a {
-      color: #5db9d6;
-      text-decoration: underline;
     }
   }
 }
@@ -1156,7 +1173,6 @@ html.no-webgl #toolbox a.view3d {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 0;
     margin-left: 2px;
-    text-decoration: none;
     line-height: 20px;
   }
 }
@@ -1164,13 +1180,12 @@ html.no-webgl #toolbox a.view3d {
 .detail-content {
   h3 {
     font-size: 14px;
-    text-decoration: underline;
     margin-bottom: 10px;
     margin-top: 20px;
   }
 
   h4 {
-    background-color: #999095;
+    background-color: @headerBackground;
     text-align: center;
     color: white;
     width: 100%;
@@ -1187,12 +1202,33 @@ html.no-webgl #toolbox a.view3d {
   }
 
   &.alert-error h3 {
-    color: #b94a48;  // bootstrap default color
+    color: @errorText;
   }
 
   &.alert-info h3 {
-    color: #3a87ad;  // bootstrap default color
+    color: @infoText;
   }
+
+  .icon-access:before {
+    position: relative;
+    font-size: 23px;
+    top: 6px;
+    margin-right: 5px;
+  }
+
+  .icon-warning:before {
+    position: relative;
+    font-size: 23px;
+    top: 6px;
+    margin-right: 5px;
+  }
+}
+
+.icon-information-desk:before {
+  position: relative;
+  font-size: 23px;
+  top: 6px;
+  margin-right: 5px;
 }
 
 p.teaser {
@@ -1234,25 +1270,6 @@ p.teaser {
       font-weight: bold;
     }
   }
-
-  h3 {
-    background-image: url(../img/information-desk.svg);
-    background-repeat: no-repeat;
-    padding-left: 35px;
-    width: 30px;
-  }
-}
-
-#trek-advice h3 {
-  background-image: url(../img/warning.png);
-  background-repeat: no-repeat;
-  padding-left: 35px;
-}
-
-#trek-access h3 {
-  background-image: url(../img/road.png);
-  background-repeat: no-repeat;
-  padding-left: 35px;
 }
 
 #themes li, #usages li, #networks li {
@@ -1304,22 +1321,27 @@ p.teaser {
 }
 
 #park-center-warning {
+  font-weight: bold;
 
-  background-image: url(../img/park-center.svg);
-  background-repeat: no-repeat;
-  background-size: 32px;
-  background-position-x: 5px;
-  background-position-y: 50%;
-  padding-left: 45px;
-
-  &.alert-info a {
-    font-weight: bold;
-    color: #3a87ad;
-    text-decoration: underline;
+  a {
+    color: @infoText;
   }
 
-  &.alert-info p {
+  p {
     margin: 0;
+  }
+
+  .icon-park-center {
+    position: relative;
+
+    &:before {
+      position: relative;
+      font-size: 27px;
+      top: 4px;
+      margin-right: 10px;
+      display: block;
+      float: left;
+    }
   }
 }
 
@@ -1473,7 +1495,7 @@ a.accordion-toggle.open {
 
 
 .accordion-toggle {
-  color: #999095;
+  color: @detailAccordion;
   text-decoration: none;
 
   &:before {
@@ -1494,7 +1516,7 @@ a.accordion-toggle.open {
 }
 
 .accordion-toggle.open {
-  color: #999095;
+  color: @detailAccordion;
   text-decoration:none;
 
   &:before {
@@ -1504,7 +1526,7 @@ a.accordion-toggle.open {
 
 a.accordion-toggle  {
   cursor: pointer;
-  color: #999095;
+  color: @detailAccordion;
   text-decoration:none;
   position: relative;
 
@@ -1520,7 +1542,7 @@ a.accordion-toggle  {
 }
 
 .accordion-inner {
-  color: #80757D;
+  color: @detailAccordion;
 }
 
 

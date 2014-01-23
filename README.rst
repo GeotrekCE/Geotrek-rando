@@ -450,6 +450,7 @@ CREDITS
 =======
 
 * *Ecology* by Diego Naive from the Noun Project
+* *3D Glasses* by Fabio Grande from The Noun Project
 * *Mont Valier, Couserans*, Wikimedia by Valier
 
 =======

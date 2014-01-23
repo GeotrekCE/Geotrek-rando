@@ -468,7 +468,7 @@ function mainmapInit(map, djoptions) {
                    '<div class="clearfix icon-right-open-mini">' +
                    '  <a href="{LINK}" class="pjax"><img src="{THUMBNAIL}"/></a>'+
                    '  <div class="description">{DESCRIPTION}</div>' +
-                   '  <p class="popupdetail"><a href="{LINK}" class="pjax">{MORE}</a></p>' +
+                   '  <p class="popupdetail"><a href="{LINK}" class="icon-binocular pjax">{MORE}</a></p>' +
                    '</div>';
         html = L.Util.template(html, {
             NAME: properties.name,
