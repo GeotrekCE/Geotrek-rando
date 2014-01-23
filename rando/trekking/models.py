@@ -81,7 +81,7 @@ class JSONModel(object):
 
     @classproperty
     def tmp_objects(cls):
-        return JSONManager(cls, cls.filepath, use_tmp=True)
+        return cls.manager_class(cls, cls.filepath, use_tmp=True)
 
     _default_manager = objects
 
