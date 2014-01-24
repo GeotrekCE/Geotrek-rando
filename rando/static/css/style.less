@@ -750,7 +750,7 @@ p.tab-content-empty {
 
 #themes, #usages {
   float: left;
-  color: #80747c;
+  color: @gray;
 
   ul {
     margin: 0;
@@ -917,7 +917,7 @@ p.teaser {
 
   p {
     margin-bottom: 0;
-    color: #80747c;
+    color: @gray;
     text-align: left;
   }
 
@@ -1117,15 +1117,6 @@ p.teaser {
 /*
 * POIs list
 */
-a.accordion-toggle.open {
-  color: #666666;
-}
-
-.accordion-body.in .accordion-inner {
-  color: #666666;
-}
-
-
 .accordion-heading .accordion-toggle {
   padding: 1px 2px;
   line-height: 25px;
@@ -1134,17 +1125,6 @@ a.accordion-toggle.open {
     vertical-align: top;
     line-height: 15px;
   }
-}
-
-
-.accordion-toggle {
-  color: @detailAccordion;
-  text-decoration: none;
-
-  &:before {
-    float: right;
-    font-size: 22px;
-}
 }
 
 .accordion-group {
@@ -1158,20 +1138,25 @@ a.accordion-toggle.open {
   }
 }
 
-.accordion-toggle.open {
-  color: @detailAccordion;
-  text-decoration:none;
-
-  &:before {
-    content: "t";
-  }
-}
-
-a.accordion-toggle  {
+.accordion-toggle  {
   cursor: pointer;
-  color: @detailAccordion;
+  color: @gray;
   text-decoration:none;
   position: relative;
+
+  &:before {
+    float: right;
+    font-size: 22px;
+  }
+
+  &.open {
+    color: @textColor;
+    text-decoration:none;
+
+    &:before {
+      content: "t";
+    }
+  }
 
   .name {
     white-space: nowrap;
@@ -1183,11 +1168,6 @@ a.accordion-toggle  {
     left: 30px;
   }
 }
-
-.accordion-inner {
-  color: @detailAccordion;
-}
-
 
 #trek-links {
   img {
