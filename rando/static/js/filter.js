@@ -146,8 +146,8 @@ function TrekFilter()
 
                 if ($('#' + filter).hasClass('ui-slider')) {
                     var slider = $('#' + filter).data('slider');
-                    if (!value.min) value.min = slider.options.min;
-                    if (!value.max) value.max = slider.options.max;
+                    if (value.min === undefined) value.min = slider.options.min;
+                    if (value.max === undefined) value.max = slider.options.max;
                     $('#' + filter).slider('values', 0, value.min);
                     $('#' + filter).slider('values', 1, value.max);
                     if (value.min == slider.options.min && value.max == slider.options.max)

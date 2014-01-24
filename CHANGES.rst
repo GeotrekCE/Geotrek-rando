@@ -14,6 +14,7 @@ CHANGELOG
 * Fix flags images in popup
 * Hide filters on page load, until Chosen is loaded (ref #61)
 * Fix snippet to add extra layers in README (fixes #23, #51)
+* Fix filters not being restored if both sliders are on minimum value
 
 **Breaking changes**
 

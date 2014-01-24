@@ -19,6 +19,8 @@ module.exports = (function() {
     }
 
     function done(test) {
+        casper.wait(1000);
+
         casper.then(clearLocalStorage);  // For next sessions
 
         casper.run(function () {
