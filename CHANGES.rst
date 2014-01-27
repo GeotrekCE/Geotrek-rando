@@ -33,6 +33,8 @@ CHANGELOG
 * Range filters are now fully designed using CSS (fixes #63)
 * Treks are now loaded asynchronously on home page (fixes #52)
 * Most icons have been switched to vectorial font (fixes #78)
+* Ascent sliders values can now be controlled via setting `FILTER_ASCENT_VALUES`.
+* Difficulty sliders values are now obtained via treks attributes.
 
 
 1.26 (2013-12-11)

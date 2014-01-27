@@ -17,11 +17,15 @@ casper.test.begin('Treks can be filtered by difficulty', function(test) {
     });
 
     casper.then(function () {
-        utils.assertFilterResults(test, 'difficulty', 1, 1, [2, 2851]);
+        utils.assertFilterResults(test, 'difficulty', 1, 1, [2]);
     });
 
     casper.then(function () {
-        utils.assertFilterResults(test, 'difficulty', 0, 3, [2849, 2, 2851]);
+        utils.assertFilterResults(test, 'difficulty', 2, 2, [2851]);
+    });
+
+    casper.then(function () {
+        utils.assertFilterResults(test, 'difficulty', 0, 2, [2849, 2, 2851]);
     });
 
     utils.done(test);

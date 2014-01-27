@@ -28,23 +28,31 @@ class HomeView(PJAXResponseMixin, TemplateView):
         context = super(HomeView, self).get_context_data(**kwargs)
         self._add_choices_values(alltreks, context)
 
-        difficulty_levels = [
-            {'label': _('Very easy'), 'value': 1},
-            {'label': _('Easy'), 'value': 2},
-            {'label': _('Medium'), 'value': 3},
-            {'label': _('Hard'), 'value': 4}
-        ]
         duration_levels = [
             {'label': _('1/2 day'), 'value': 4},
             {'label': _('Day'), 'value': 10},
             {'label': u'> %s' % _('2 days'), 'value': 10.1},
         ]
-        altitude_levels = [
-            {'label': '< 300m', 'value': 300},
-            {'label': '600m', 'value': 600},
-            {'label': '1000m', 'value': 1000},
-            {'label': '> 1400m', 'value': 1400},
-        ]
+
+        altitude_levels = []
+        for i, ascent in enumerate(settings.FILTER_ASCENT_VALUES):
+            if i == 0:
+                label = _('< %sm') % ascent
+            elif i == len(settings.FILTER_ASCENT_VALUES) -1:
+                label = _('> %sm') % ascent
+            else:
+                label = _('%sm') % ascent
+            altitude_levels.append({'label': label, 'value': ascent})
+
+        all_difficulties = {}
+        for trek in alltreks:
+            did = trek.properties.difficulty.id
+            dlabel = trek.properties.difficulty.label
+            all_difficulties[did] = {'label': dlabel, 'value': did}
+
+        difficulty_levels = sorted(all_difficulties.values(),
+                                   key=lambda d: d['value'])
+
         context['difficulty_levels'] = difficulty_levels
         context['duration_levels'] = duration_levels
         context['altitude_levels'] = altitude_levels
