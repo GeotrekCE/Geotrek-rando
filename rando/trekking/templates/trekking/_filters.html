@@ -1,4 +1,4 @@
-{% load i18n trekking_tags %}
+{% load i18n l10n trekking_tags %}
 <div id="filters-bar">
   <h2 class="hidden">{% trans "Filters" %}</h2>
 
@@ -25,7 +25,7 @@
       </div>
 
       {% for duration in duration_levels %}
-        <div data-value="{{ duration.value }}"
+        <div data-value="{{ duration.value|unlocalize }}"
              class="slider-value {% if forloop.first%}first{% endif %} {% if forloop.last%}last{% endif %}">
              {{ duration.label }}
         </div>
@@ -38,7 +38,7 @@
         <div id="altitude" data-filter="altitude"></div>
       </div>
       {% for altitude in altitude_levels %}
-        <div data-value="{{ altitude.value }}"
+        <div data-value="{{ altitude.value|unlocalize }}"
              class="slider-value {% if forloop.first%}first{% endif %} {% if forloop.last%}last{% endif %}">
              {{ altitude.label }}
         </div>
