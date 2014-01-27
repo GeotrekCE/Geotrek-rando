@@ -51,6 +51,7 @@ module.exports = (function() {
 
     return {
         clearLocalStorage: clearLocalStorage,
+        setSliderFilter: setSliderFilter,
         assertFilterResults: assertFilterResults,
         setUp: setUp,
         done: done,

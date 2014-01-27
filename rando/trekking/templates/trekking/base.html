@@ -102,6 +102,7 @@
             </div>
         </footer>
 
+        <script src="{% locale_url request.LANGUAGE_CODE "jsi18n" %}"></script>
         {% compress js %}
         <script src="{% static "js/vendor/jquery-ui.js" %}"></script>
         <script src="{% static "js/vendor/jquery.ui.touch-punch.min.js" %}"></script>
@@ -134,15 +135,17 @@
         <script src="{% static "js/filter.js" %}"></script>
         <script src="{% static "js/backpack.js" %}"></script>
         <script src="{% static "js/map.js" %}"></script>
+        {% if FILTERS_HASH_ENABLED %}
+        <script src="{% static "js/filter-hash.js" %}"></script>
+        {% endif %}
         {% if POPUP_HOME_ENABLED %}
         <script src="{% static "js/popup.js" %}"></script>
         {% endif %}
         {% if VIEW3D_ENABLED %}
         <script src="{% static "view3d/main.js" %}"></script>
         {% endif %}
-        {% endcompress %}
-        <script src="{% locale_url request.LANGUAGE_CODE "jsi18n" %}"></script>
         <script src="{% static "js/main.js" %}"></script>
+        {% endcompress %}
 
         {% if not donottrack %}
         {% ganalytics %}

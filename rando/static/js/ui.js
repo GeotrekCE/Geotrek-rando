@@ -29,7 +29,7 @@ function init_ui() {
         e.preventDefault();
     });
 
-    $(window.trekFilter).on("filterchange", function(e, visible) {
+    $(window).on("filters:changed", function(e, visible) {
         refresh_results(visible);
     });
 

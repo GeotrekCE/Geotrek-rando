@@ -417,7 +417,7 @@ function mainmapInit(map, djoptions) {
         map.fitFakeBounds(treksBounds);
     });
     // Filter layers
-    $(window.trekFilter).on("filterchange", function(e, matched) {
+    $(window).on("filters:changed", function(e, matched) {
         treksLayer.showOnly(matched);
     });
     treksLayer.on('data:loaded', function () {

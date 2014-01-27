@@ -135,3 +135,6 @@ class NavigationTest(CasperTestCase):
 
     def test_filters_altitude(self):
         self.assertTrue(self.casper(self._get_tests_file('test_filters_altitude.js')))
+
+    def test_filters_hash(self):
+        self.assertTrue(self.casper(self._get_tests_file('test_filters_hash.js')))

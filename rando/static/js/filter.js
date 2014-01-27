@@ -42,13 +42,10 @@ function TrekFilter()
                 self.save();
             }
             else {
-                if (self.state['sliders'] === undefined)
-                    self.state['sliders'] = {};
-                if (self.state['sliders'][name] === undefined)
-                    self.state['sliders'][name] = {};
-
-                self.state['sliders'][name]['min'] = minVal;
-                self.state['sliders'][name]['max'] = maxVal;
+                self.state.sliders = self.state.sliders || {};
+                self.state.sliders[name] = self.state.sliders[name] || {};
+                self.state.sliders[name]['min'] = minVal;
+                self.state.sliders[name]['max'] = maxVal;
                 self.save();
             }
         }
@@ -68,24 +65,6 @@ function TrekFilter()
         $(".chosen-select").val('').trigger("liszt:updated");
         self.load();
         $(self).trigger("reset");
-    };
-
-    this.__saveState = function () {
-        var serialized = null;
-
-        localStorage.setItem('resultsCount', self.matching.length);
-
-        if ($.isEmptyObject(self.state)) {
-            return;
-        } else {
-            serialized = JSON.stringify(self.state);
-
-            localStorage.setItem('filterState', serialized);
-
-            // Refresh URL hash, so that users can copy and paste URLs with filters
-            var compressed = LZString.compress(serialized);
-            window.location.replace('#' + (serialized.length > 0 ? stringToHex(compressed) : ''));
-        }
     };
 
     this.save = function ()
@@ -110,30 +89,19 @@ function TrekFilter()
             }
         }
 
-        this.__saveState();
-        $(self).trigger("filterchange", [self.matching]);
+        localStorage.setItem('resultsCount', self.matching.length);
+        var serialized = JSON.stringify(self.state);
+        localStorage.setItem('filterState', serialized);
+
+        $(window).trigger("filters:changed", [self.matching]);
     };
 
     this.__loadState = function () {
-        var hash = window.location.hash.slice(1),
-            storage = localStorage.getItem('filterState'),
-            state = null;
-        // First try to load from hash
+        var state = null;
         try {
-            if (hash.length > 0) {
-                var hexhash = hexToString(hash);
-                state = JSON.parse(LZString.decompress(hexhash));
-            }
+           state = JSON.parse(localStorage.getItem('filterState'));
         }
         catch (err) {}
-
-        // If no filter in hash, look into localStorage
-        if (state === null) {
-            try {
-                state = JSON.parse(storage);
-            }
-            catch (err) {}
-        }
 
         state = state || {};
         state.sliders = state.sliders || {};
@@ -322,38 +290,4 @@ function TrekFilter()
             haystack = trek.fulltext;
         return (new RegExp(needle)).test(haystack);
     };
-
-
-    /**
-     * Helper functions for string <--> hexadecimal
-     */
-    function d2h(d) {
-        return d.toString(16);
-    }
-    function h2d (h) {
-        return parseInt(h, 16);
-    }
-    function stringToHex (tmp) {
-        var str = '',
-            i = 0,
-            tmp_len = tmp.length,
-            c;
-        for (; i < tmp_len; i += 1) {
-            c = tmp.charCodeAt(i);
-            str += d2h(c) + '-';
-        }
-        return str;
-    }
-    function hexToString (tmp) {
-        var arr = tmp.split('-'),
-            str = '',
-            i = 0,
-            arr_len = arr.length,
-            c;
-        for (; i < arr_len; i += 1) {
-            c = String.fromCharCode( h2d( arr[i] ) );
-            str += c;
-        }
-        return str;
-    }
-};
+}

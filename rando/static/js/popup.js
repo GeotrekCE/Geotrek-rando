@@ -5,12 +5,6 @@ $(document).ready(function (e) {
     // Links not leaving page
     $("#popup-home #popup-body a:not([href^='http'])").click(function () {
         $modal.modal('hide');
-        setTimeout(function () {
-            // Since a link can be a hash containing filters, and since
-            // we don't watch the hash location, we reload the filters
-            // after a click on such a link.
-            $(window).trigger('filters:reload');
-        }, 0);
     });
 
     // External links
