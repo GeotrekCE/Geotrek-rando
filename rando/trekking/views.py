@@ -35,15 +35,15 @@ class HomeView(PJAXResponseMixin, TemplateView):
             {'label': _('Hard'), 'value': 4}
         ]
         duration_levels = [
-            {'label': _('1/2 day'), 'value': 0},
-            {'label': _('Day'), 'value': 4},
+            {'label': _('1/2 day'), 'value': 4},
+            {'label': _('Day'), 'value': 10},
             {'label': u'> %s' % _('2 days'), 'value': 10},
         ]
         altitude_levels = [
-            {'label': '< 300m', 'value': 0},
-            {'label': '600m', 'value': 300},
-            {'label': '1000m', 'value': 600},
-            {'label': '> 1400m', 'value': 1000},
+            {'label': '< 300m', 'value': 300},
+            {'label': '600m', 'value': 600},
+            {'label': '1000m', 'value': 1000},
+            {'label': '> 1400m', 'value': 1400},
         ]
         context['difficulty_levels'] = difficulty_levels
         context['duration_levels'] = duration_levels

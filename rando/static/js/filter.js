@@ -3,34 +3,35 @@ function TrekFilter()
     var self = this;
     self.treksList = [];
     self.matching = [];
+    self._values = {};
 
     this.setup = function () {
-        $("#difficulty").slider({
-            range: true,
-            step: 1,
-            min: 1,
-            max: 4,
-            values: [ 1, 4 ],
-            slide: saveSlider
-        });
 
-        $("#duration").slider({
-            range: true,
-            step: 1,
-            min: 0,
-            max: 2,
-            values: [ 0, 2 ],
-            slide: saveSlider
-        });
+        initSliderFromDOM('difficulty');
+        initSliderFromDOM('duration');
+        initSliderFromDOM('altitude');
 
-        $("#altitude").slider({
-            range: true,
-            step: 1,
-            min: 0,
-            max: 3,
-            values: [ 0, 3 ],
-            slide: saveSlider
-        });
+        function initSliderFromDOM (name) {
+            var $slider = $('#' + name);
+
+            var values = $('.' + name + ' .slider-value').map(function () {
+                return $(this).data('value');
+            });
+            self._values[name] = values;
+
+            console.log(self._values);
+
+            var min = 0,
+                max = values.length-1;
+            $slider.slider({
+                range: true,
+                step: 1,
+                min: min,
+                max: max,
+                values: [min, max],
+                slide: saveSlider
+            });
+        }
 
         function saveSlider(event, ui) {
             self.sliderChanged(ui.values[0],

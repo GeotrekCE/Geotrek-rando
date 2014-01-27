@@ -116,6 +116,8 @@ class TrekFulltextTest(SimpleTestCase):
 @override_settings(INPUT_DATA_ROOT=TESTS_DATA_PATH,
                    MEDIA_ROOT=os.path.join(TESTS_DATA_PATH, 'media'))
 class NavigationTest(CasperTestCase):
+    no_colors = False
+
     def _get_tests_file(self, name):
         return os.path.join(settings.PROJECT_PATH, 'trekking', 'tests', name)
 
