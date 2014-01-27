@@ -10,6 +10,10 @@ casper.test.begin('Filters location hash', function(test) {
         filter_ascent_600m = '#3782-20ce-360-9602-60a6-273-805-ca02-1840-2e52-c15d-e554-16c-a00e-d501-1801-a118-f400-f2a0-5f56-8000-';
 
     casper.start(home_url, function () {
+        utils.clearLocalStorage();
+    });
+
+    casper.thenOpen(home_url, function () {
         test.assertSelectorHasText('#tab-results span.badge', 3,
                                    'Test catalog has 3 treks');
     });
