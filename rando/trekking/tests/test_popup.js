@@ -54,7 +54,11 @@ casper.test.begin('Welcome popup is only shown the first time', function(test) {
 
     casper.waitForSelector("#popup-home[aria-hidden='true']", function () {
         test.pass('Popup is not shown if landing on other page.');
-        casper.click('header a.home');
+        casper.click('header a.home'); // Brings to home
+    });
+
+    casper.waitForSelector('header li.home a', function () {
+        casper.click('header li.home a');
     });
 
     casper.waitUntilVisible('#popup-home', function () {

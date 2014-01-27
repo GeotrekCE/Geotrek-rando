@@ -71,7 +71,7 @@
     </head>
     <body>
         <header>
-            <a class="home pjax {% if POPUP_HOME_ENABLED %}popup{% endif %}" href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}#results">
+            <a class="home pjax {% if POPUP_HOME_ENABLED %}popup{% endif %}" href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}#">
                <h1>{{ TITLE }}</h1>
             </a>
             <a class="btn utils icon-share" id="global-share" href="#" title="{% trans "Share" %}">

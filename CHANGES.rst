@@ -20,8 +20,8 @@ CHANGELOG
 
 * All national park branding has been replaced by generic Geotrek material.
   See *Customization* paragraph about images.
-* Search popup is not shown outside homepage anymore. A click on main page title
-  brings it, and the home button in navigation does not.
+* Search popup is not shown outside homepage anymore. Click on *header* or
+  *home* button from homepage brings it.
 * No longer compatible with Django 1.4.
 * Settings have been refactored to respect Django conventions.
   Local settings shall be moved to ``rando/settings`` folder, renamed to ``prod.py``,
