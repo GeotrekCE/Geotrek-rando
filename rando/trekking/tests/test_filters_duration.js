@@ -13,37 +13,29 @@ casper.test.begin('Treks can be filtered by duration', function(test) {
     });
 
     casper.then(function () {
-        checkResults(0, 0, [2849]);
+        utils.assertFilterResults(test, 'duration', 0, 0, [2849]);
     });
 
     casper.then(function () {
-        checkResults(1, 1, [2]);
+        utils.assertFilterResults(test, 'duration', 1, 1, [2]);
     });
 
     casper.then(function () {
-        checkResults(2, 2, [2851]);
+        utils.assertFilterResults(test, 'duration', 2, 2, [2851]);
     });
 
     casper.then(function () {
-        checkResults(0, 2, [2849, 2, 2851]);
+        utils.assertFilterResults(test, 'duration', 0, 2, [2849, 2, 2851]);
     });
 
     casper.then(function () {
-        checkResults(0, 1, [2849, 2]);
+        utils.assertFilterResults(test, 'duration', 0, 1, [2849, 2]);
     });
 
     casper.then(function () {
-        checkResults(1, 2, [2, 2851]);
+        utils.assertFilterResults(test, 'duration', 1, 2, [2, 2851]);
     });
 
     utils.done(test);
-
-
-    function checkResults(min, max, expected) {
-        test.comment('Set duration to slots ' + min + ' - ' + max);
-        utils.setSliderFilter('duration', min, max);
-        test.assertSelectorHasText('#tab-results span.badge', expected.length,
-                                   expected.length + ' result(s).');
-    }
 
 });

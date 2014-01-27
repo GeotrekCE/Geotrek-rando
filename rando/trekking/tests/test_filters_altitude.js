@@ -3,7 +3,7 @@ var utils = require('./test_utils.js');
 utils.setUp();
 
 
-casper.test.begin('Treks can be filtered by difficulty', function(test) {
+casper.test.begin('Treks can be filtered by altitude', function(test) {
 
     var home_url = casper.cli.options['url-base'] + '/fr/';
 
@@ -13,11 +13,15 @@ casper.test.begin('Treks can be filtered by difficulty', function(test) {
     });
 
     casper.then(function () {
-        utils.assertFilterResults(test, 'difficulty', 1, 1, [2849]);
+        utils.assertFilterResults(test, 'altitude', 0, 0, [2851]);
     });
 
     casper.then(function () {
-        utils.assertFilterResults(test, 'difficulty', 1, 4, [2849, 2, 2851]);
+        utils.assertFilterResults(test, 'altitude', 1, 2, [2]);
+    });
+
+    casper.then(function () {
+        utils.assertFilterResults(test, 'altitude', 2, 3, [2849]);
     });
 
     utils.done(test);

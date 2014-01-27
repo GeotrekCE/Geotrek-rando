@@ -179,10 +179,10 @@ function refresh_results(matching) {
         var $trek = $(this),
             trekId = $trek.data('id');
         if ($.inArray(trekId, matching) != -1) {
-            $trek.show(200);
+            $trek.removeClass('filtered').show(200);
         }
         else {
-            $trek.hide(200);
+            $trek.addClass('filtered').hide(200);
         }
     });
     if (matching.length > 0)
