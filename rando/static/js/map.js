@@ -748,15 +748,6 @@ function initDetailPoisLayer(map, poiUrl) {
 function initDetailAccordionPois(map, poisLayer) {
     var poisMarkersById = {};
 
-    $('#pois-accordion').on('show', function (e) {
-        var id = $(e.target).data('id');
-        $(".accordion-toggle[data-id='"+ id +"']", this).addClass('open');
-    });
-    $('#pois-accordion').on('hidden', function (e) {
-        var id = $(e.target).data('id');
-        $(".accordion-toggle[data-id='"+ id +"']", this).removeClass('open');
-    });
-
     poisLayer.eachLayer(function (marker) {
         poisMarkersById[marker.properties.pk] = marker;
         /*

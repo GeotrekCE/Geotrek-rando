@@ -1140,21 +1140,28 @@ p.teaser {
 
 .accordion-toggle  {
   cursor: pointer;
-  color: @gray;
-  text-decoration:none;
   position: relative;
+  color: @textColor;
+  text-decoration:none;
+
+  &:before {
+    content: "t";
+  }
 
   &:before {
     float: right;
     font-size: 22px;
   }
 
-  &.open {
-    color: @textColor;
-    text-decoration:none;
+  &.collapsed {
+    color: @gray;
+
+    &:hover {
+      color: darken(@linkColor, 20%);
+    }
 
     &:before {
-      content: "t";
+      content: "w";
     }
   }
 

@@ -233,7 +233,7 @@
         {% for poi in pois %}
         <div class="accordion-group">
           <div class="accordion-heading">
-            <a class="accordion-toggle acc-open icon-fontawesome-webfont-12" id="poi-item-{{ poi.properties.pk}}" data-toggle="collapse" data-parent="#pois-accordion" data-id="{{ poi.properties.pk }}" href="#collapse-poi-{{  poi.properties.pk }}">
+            <a class="accordion-toggle acc-open icon- collapsed" id="poi-item-{{ poi.properties.pk}}" data-toggle="collapse" data-parent="#pois-accordion" data-id="{{ poi.properties.pk }}" href="#collapse-poi-{{  poi.properties.pk }}">
               {{ poi.properties.type|pictogram }}
               <span class="name">{{ poi.properties.name }}</span>
               {% if poi.properties.pictures|length > 0 %}

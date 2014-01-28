@@ -292,6 +292,11 @@ function view_detail() {
     $('#usages div, #themes div').tooltip();
     $('a.print.disabled').tooltip({placement: 'left'});
     $('#pois-accordion .pictogram').tooltip();
+
+    $('#pois-accordion').on('hidden', function (e) {
+        var id = $(e.target).data('id');
+        $(".accordion-toggle[data-id='"+ id +"']", this).addClass('collapsed');
+    });
 }
 
 function altimetricInit(jsonurl) {
