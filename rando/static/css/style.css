@@ -838,6 +838,13 @@ ul.social-buttons li {
   margin: 0;
   color: #968d7f;
 }
+#backpack {
+  overflow: hidden;
+  min-height: 30px;
+}
+#backpack .tab-content-empty {
+  margin: 15px 0;
+}
 .search-tools {
   position: absolute;
   right: 7px;
@@ -2264,6 +2271,7 @@ p.teaser {
   #result-backpack-content {
     max-height: 154px;
     height: auto;
+    overflow: hidden;
     right: 0;
     bottom: auto;
     top: 48px;
