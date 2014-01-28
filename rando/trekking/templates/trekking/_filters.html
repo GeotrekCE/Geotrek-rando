@@ -4,6 +4,7 @@
 
   <div id="basic-filters">
 
+    {% if difficulty_levels %}
     <div class="difficulty span slider">
       <label for="difficulty">{% trans "Difficulty" %}</label>
       <div class="slider-wrap">
@@ -17,6 +18,7 @@
         </div>
       {% endfor %}
     </div>
+    {% endif %}
 
     <div class="duration span slider">
       <label for="duration">{% trans "Duration" %}</label>
@@ -46,6 +48,7 @@
     </div>
 
 
+    {% if themes %}
     <div class="theme span">
       <label for="theme">{% trans "Thematic" %}</label>
       {% for theme in themes %}
@@ -54,6 +57,7 @@
       </div>
       {% endfor %}
     </div>
+    {% endif %}
 
 
     <div id="filters-actions" class="span">
