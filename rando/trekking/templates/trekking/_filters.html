@@ -1,10 +1,10 @@
 {% load i18n l10n trekking_tags %}
-<div id="filters-bar">
+<div id="filters-bar" class="filters-bar">
   <h2 class="hidden">{% trans "Filters" %}</h2>
 
   <div id="basic-filters">
 
-    <div class="difficulty span">
+    <div class="difficulty span slider">
       <label for="difficulty">{% trans "Difficulty" %}</label>
       <div class="slider-wrap">
         <div id="difficulty" data-filter="difficulty"></div>
@@ -18,7 +18,7 @@
       {% endfor %}
     </div>
 
-    <div class="duration span">
+    <div class="duration span slider">
       <label for="duration">{% trans "Duration" %}</label>
       <div class="slider-wrap">
         <div id="duration" data-filter="duration"></div>
@@ -32,7 +32,7 @@
       {% endfor %}
     </div>
 
-    <div class="altitude span">
+    <div class="altitude span slider">
       <label for="altitude">{% trans "Climb" %}</label>
       <div class="slider-wrap">
         <div id="altitude" data-filter="altitude"></div>
