@@ -1,0 +1,251 @@
+{
+    "crs": {
+        "type": "link",
+        "properties": {
+            "href": "http://spatialreference.org/ref/epsg/4326/",
+            "type": "proj4"
+        }
+    },
+    "type": "FeatureCollection",
+    "features": [{
+        "geometry": {
+            "type": "LineString",
+            "coordinates": [
+                [1.51472, 42.73934],
+                [1.51678, 42.71955]
+            ]
+        },
+        "type": "Feature",
+        "properties": {
+            "slope": 0.25223,
+            "usages": [],
+            "description_teaser": "",
+            "duration_pretty": "5H",
+            "altimetric_profile": "/api/trek/2851/profile.json",
+            "ambiance": "",
+            "is_park_centered": false,
+            "poi_layer": "/geotrek/api/trek/2851/pois.geojson",
+            "themes": [],
+            "web_links": [],
+            "duration": 12,
+            "ascent": 290,
+            "relationships_edge": [],
+            "relationships": [],
+            "descent": -19,
+            "pictures": [],
+            "parking_location": null,
+            "kml": "/api/trek/trek-2851.kml",
+            "relationships_circuit": [],
+            "networks": [],
+            "access": "",
+            "gpx": "/api/trek/trek-2851.gpx",
+            "pk": 2851,
+            "thumbnail": "",
+            "arrival": "",
+            "description": "",
+            "printable": "/api/trek/trek-2851.pdf",
+            "advice": "",
+            "pois": [],
+            "disabled_infrastructure": "",
+            "difficulty": {
+                "id": 3,
+                "label": "Sportif"
+            },
+            "information_desk": null,
+            "advised_parking": "",
+            "cities": [{
+                "code": "09135",
+                "name": "Goulier"
+            }, {
+                "code": "09162",
+                "name": "Lercoul"
+            }],
+            "slug": "pic-du-sarrrasi-et-pic-dendron",
+            "min_elevation": 1492,
+            "name": "Pic du Sarrrasi et Pic d'Endron",
+            "route": {
+                "id": 2,
+                "label": "Aller-retour"
+            },
+            "departure": "",
+            "map_image_url": "/image/trek-2851.png",
+            "districts": [],
+            "length": 4022.99786,
+            "max_elevation": 2459,
+            "public_transport": "",
+            "published": true,
+            "model": "trekking.trek",
+            "relationships_departure": []
+        },
+        "id": 2851
+    }, {
+        "geometry": {
+            "type": "LineString",
+            "coordinates": [
+                [1.41168, 42.80642],
+                [1.42065, 42.80641]
+            ]
+        },
+        "type": "Feature",
+        "properties": {
+            "slope": 0.08900,
+            "usages": [{
+                "label": "P\u00e9destre",
+                "id": 4,
+                "pictogram": "/media/upload/usage-foot.png"
+            }],
+            "description_teaser": "<p>Un tr&egrave;s joli point de vue, en retrait de la cha&icirc;ne des Pyr&eacute;nn&eacute;es.</p>",
+            "duration_pretty": "5H",
+            "altimetric_profile": "/api/trek/2/profile.json",
+            "ambiance": "<p>Le nom de ce pic est issu de la l&eacute;gende selon laquelle les trois seigneurs des vall&eacute;es de Massat, Vicdessos et Rabat-les-Trois-Seigneurs, se rencontraient sur la dalle plate en son sommet afin de d&eacute;battre des droits des diff&eacute;rentes vall&eacute;es qu'ils administraient3.</p>\r\n<p></p>\r\n<p>&Agrave; partir du xviie si&egrave;cle, de grandes caravanes d'&acirc;nes et de mulets transportaient le charbon de bois entre les for&ecirc;ts du Couserans et les forges &agrave; la catalane de la vall&eacute;e de Rabat via le col de la Pourtanelle sur l'&eacute;paulement nord du pic4.</p>\r\n<p></p>\r\n<p>Au xixe si&egrave;cle, des porteurs de glace venaient y chercher leur butin sur le flanc nord du pic au glacier d'Ambans pour le transporter ensuite vers Toulouse. Ce glacier a totalement disparu au d&eacute;but du xxie si&egrave;cle.</p>\r\n<p></p>\r\n<p></p>\r\n<p>Source Wikipedia</p>\r\n<p><a></a></p>",
+            "is_park_centered": false,
+            "poi_layer": "/geotrek/api/trek/2/pois.geojson",
+            "themes": [{
+                "label": "Lac et glacier",
+                "id": 8,
+                "pictogram": "/media/upload/theme-lake@2x.png"
+            }, {
+                "label": "Point de vue",
+                "id": 4,
+                "pictogram": "/media/upload/theme-panorama@2x.png"
+            }],
+            "web_links": [],
+            "duration": 6.0,
+            "ascent": 768,
+            "relationships_edge": [],
+            "relationships": [],
+            "descent": -857,
+            "pictures": [{
+                "url": "/media/paperclip/trekking_trek/2/le-pic-des-trois-seigneurs-vu-depuis-letang-de-lers.JPG.500x500_q85.jpg",
+                "title": "Le Pic des Trois Seigneurs vu depuis l'\u00e9tang de Lers.",
+                "legend": "Le Pic des Trois Seigneurs vu depuis l'\u00e9tang de Lers. CC-BY-SA",
+                "author": "Anthospace"
+            }],
+            "parking_location": [1.41282, 42.80633],
+            "kml": "/api/trek/trek-2.kml",
+            "relationships_circuit": [],
+            "networks": [],
+            "access": "",
+            "gpx": "/api/trek/trek-2.gpx",
+            "pk": 2,
+            "thumbnail": "/media/paperclip/trekking_trek/2/le-pic-des-trois-seigneurs-vu-depuis-letang-de-lers.JPG.120x120_q85_crop.jpg",
+            "arrival": "",
+            "description": "",
+            "printable": "/api/trek/trek-2.pdf",
+            "advice": "<p>Attention en cas d'orage. Fortement d&eacute;conseill&eacute; par mauvais temps!</p>",
+            "pois": [{
+                "type": "Sommet",
+                "name": "Pic des Trois Seigneurs",
+                "description": "<p>Le pic des Trois Seigneurs est situ&eacute; au point de rencontre des trois vall&eacute;es de la&nbsp;<a>Courbi&egrave;re</a>, du&nbsp;<a>Vicdessos</a>&nbsp;et de l'<a>Arac</a>&nbsp;(<a>Couserans</a>).</p>\r\n<p>Modeste sommet bien individualis&eacute;, il offre n&eacute;anmoins un panorama exceptionnel sur les montagnes ari&eacute;geoises.</p>"
+            }, {
+                "type": "Lac",
+                "name": "\u00c9tang d'Arbu",
+                "description": "<p>Ce lac tr&egrave;s accessible est un site pris&eacute; par les p&ecirc;cheurs. On y observe&nbsp;<a>truites fario</a>, saumons des fontaines,&nbsp;<a>ombles chevaliers</a>,&nbsp;<a>cristivomers</a>&nbsp;et&nbsp;<a>vairons</a>.</p>"
+            }],
+            "disabled_infrastructure": "",
+            "difficulty": {
+                "id": 2,
+                "label": "Confirm\u00e9"
+            },
+            "information_desk": null,
+            "advised_parking": "Avant le Port de Lers",
+            "cities": [{
+                "code": "09231",
+                "name": "Le Port"
+            }, {
+                "code": "09302",
+                "name": "Suc-et-Sentenac"
+            }],
+            "slug": "boucle-du-pic-des-trois-seigneurs",
+            "min_elevation": 1387,
+            "name": "Boucle du Pic des Trois Seigneurs",
+            "route": {
+                "id": 1,
+                "label": "Boucle"
+            },
+            "departure": "Port de Lers",
+            "map_image_url": "/image/trek-2.png",
+            "districts": [],
+            "length": 8843.55047,
+            "max_elevation": 2153,
+            "public_transport": "",
+            "published": true,
+            "model": "trekking.trek",
+            "relationships_departure": []
+        },
+        "id": 2
+    }, {
+        "geometry": {
+            "type": "LineString",
+            "coordinates": [
+                [1.34210, 42.78978],
+                [1.33832, 42.78745]
+            ]
+        },
+        "type": "Feature",
+        "properties": {
+            "slope": 0.07371,
+            "usages": [],
+            "description_teaser": "",
+            "duration_pretty": "4H",
+            "altimetric_profile": "/api/trek/2849/profile.json",
+            "ambiance": "",
+            "is_park_centered": false,
+            "poi_layer": "/geotrek/api/trek/2849/pois.geojson",
+            "themes": [],
+            "web_links": [],
+            "duration": 3.5,
+            "ascent": 1100,
+            "relationships_edge": [],
+            "relationships": [],
+            "descent": -794,
+            "pictures": [{
+                "url": "/media/paperclip/trekking_trek/2849/cascade-dars-2.jpg.500x500_q85.jpg",
+                "title": "Cascade d'Ars #2",
+                "legend": "Cascade d'Ars #2 - CC-BY-SA",
+                "author": "Gr\u00e9gory Tonon"
+            }],
+            "parking_location": null,
+            "kml": "/api/trek/trek-2849.kml",
+            "relationships_circuit": [],
+            "networks": [],
+            "access": "<p>Depuis le village d'Aulus-les-Bains</p>",
+            "gpx": "/api/trek/trek-2849.gpx",
+            "pk": 2849,
+            "thumbnail": "/media/paperclip/trekking_trek/2849/cascade-dars-2.jpg.120x120_q85_crop.jpg",
+            "arrival": "",
+            "description": "",
+            "printable": "/api/trek/trek-2849.pdf",
+            "advice": "",
+            "pois": [],
+            "disabled_infrastructure": "",
+            "difficulty": {
+                "id": 1,
+                "label": "Facile"
+            },
+            "information_desk": null,
+            "advised_parking": "",
+            "cities": [{
+                "code": "09029",
+                "name": "Aulus-les-Bains"
+            }],
+            "slug": "decouverte-de-la-cascade-dars",
+            "min_elevation": 764,
+            "name": "D\u00e9couverte de la Cascade d'Ars",
+            "route": {
+                "id": 2,
+                "label": "Aller-retour"
+            },
+            "departure": "Aulus-les-Bains",
+            "map_image_url": "/image/trek-2849.png",
+            "districts": [],
+            "length": 10216.81540,
+            "max_elevation": 1502,
+            "public_transport": "",
+            "published": true,
+            "model": "trekking.trek",
+            "relationships_departure": []
+        },
+        "id": 2849
+    }]
+}

@@ -14,13 +14,14 @@ CHANGELOG
 * Fix flags images in popup
 * Hide filters on page load, until Chosen is loaded (ref #61)
 * Fix snippet to add extra layers in README (fixes #23, #51)
+* Fix filters not being restored if both sliders are on minimum value
 
 **Breaking changes**
 
 * All national park branding has been replaced by generic Geotrek material.
   See *Customization* paragraph about images.
-* Search popup is not shown outside homepage anymore. A click on main page title
-  brings it, and the home button in navigation does not.
+* Search popup is not shown outside homepage anymore. Click on *header* or
+  *home* button from homepage brings it.
 * No longer compatible with Django 1.4.
 * Settings have been refactored to respect Django conventions.
   Local settings shall be moved to ``rando/settings`` folder, renamed to ``prod.py``,
@@ -32,6 +33,8 @@ CHANGELOG
 * Range filters are now fully designed using CSS (fixes #63)
 * Treks are now loaded asynchronously on home page (fixes #52)
 * Most icons have been switched to vectorial font (fixes #78)
+* Ascent sliders values can now be controlled via setting `FILTER_ASCENT_VALUES`.
+* Difficulty sliders values are now obtained via treks attributes.
 
 
 1.26 (2013-12-11)

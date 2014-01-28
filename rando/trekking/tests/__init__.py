@@ -8,12 +8,15 @@ from easydict import EasyDict as edict
 from casper.tests import CasperTestCase
 
 from django.test import SimpleTestCase
+from django.test.utils import override_settings
 from django.conf import settings
-
 
 from rando.trekking.templatetags.trekking_tags import overridable
 from rando.trekking.management.commands.sync_trekking import mkdir_p
 from rando.trekking.models import Trek, JSONManager
+
+
+TESTS_DATA_PATH = os.path.join(os.path.dirname(__file__), 'data')
 
 
 class MkdirTest(SimpleTestCase):
@@ -110,23 +113,28 @@ class TrekFulltextTest(SimpleTestCase):
         self.assertEqual(count, 1)
 
 
+@override_settings(INPUT_DATA_ROOT=TESTS_DATA_PATH,
+                   MEDIA_ROOT=os.path.join(TESTS_DATA_PATH, 'media'))
 class NavigationTest(CasperTestCase):
-
-    def setUp(self):
-        basepath = os.path.join(settings.FLATPAGES_ROOT, 'fr')
-        try:
-            os.makedirs(basepath)
-        except OSError:
-            pass
-        self.flatpage = os.path.join(basepath, 'flatpage.html')
-        open(self.flatpage, 'w').write('<h1>test</h1>')
-
-    def tearDown(self):
-        os.remove(self.flatpage)
+    no_colors = False
 
     def _get_tests_file(self, name):
         return os.path.join(settings.PROJECT_PATH, 'trekking', 'tests', name)
 
     def test_popup(self):
-        with self.settings(POPUP_HOME_ENABLED=True):
-            self.assertTrue(self.casper(self._get_tests_file('test_popup.js')))
+        self.assertTrue(self.casper(self._get_tests_file('test_popup.js')))
+
+    def test_backpack(self):
+        self.assertTrue(self.casper(self._get_tests_file('test_backpack.js')))
+
+    def test_filters_difficulty(self):
+        self.assertTrue(self.casper(self._get_tests_file('test_filters_difficulty.js')))
+
+    def test_filters_duration(self):
+        self.assertTrue(self.casper(self._get_tests_file('test_filters_duration.js')))
+
+    def test_filters_altitude(self):
+        self.assertTrue(self.casper(self._get_tests_file('test_filters_altitude.js')))
+
+    def test_filters_hash(self):
+        self.assertTrue(self.casper(self._get_tests_file('test_filters_hash.js')))

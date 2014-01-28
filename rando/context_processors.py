@@ -16,6 +16,7 @@ def settings(request):
         'DESCRIPTION': settings_.DESCRIPTION.get(lang, settings_.TITLE.get('en')),
         'URL': request.build_absolute_uri(request.path),
         'FLATPAGES_POLICY_PAGE': settings_.FLATPAGES_POLICY_PAGE,
+        'FILTERS_HASH_ENABLED': settings_.FILTERS_HASH_ENABLED,
         'POPUP_HOME_ENABLED': settings_.POPUP_HOME_ENABLED,
         'POPUP_FILENAME': settings_.POPUP_FILENAME,
         'FOOTER_FILENAME': settings_.FOOTER_FILENAME,

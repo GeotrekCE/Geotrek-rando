@@ -29,7 +29,7 @@ function init_ui() {
         e.preventDefault();
     });
 
-    $(window.trekFilter).on("filterchange", function(e, visible) {
+    $(window).on("filters:changed", function(e, visible) {
         refresh_results(visible);
     });
 
@@ -87,7 +87,7 @@ function page_load() {
 }
 
 function view_home() {
-    initSliders();
+    window.trekFilter.setup();
 
     // Load filters (will refresh backpack results)
     // (After sliders initialization)
@@ -179,10 +179,10 @@ function refresh_results(matching) {
         var $trek = $(this),
             trekId = $trek.data('id');
         if ($.inArray(trekId, matching) != -1) {
-            $trek.show(200);
+            $trek.removeClass('filtered').show(200);
         }
         else {
-            $trek.hide(200);
+            $trek.addClass('filtered').hide(200);
         }
     });
     if (matching.length > 0)
@@ -331,42 +331,6 @@ function altimetricInit(jsonurl) {
             $('#profilealtitude').trigger('hover:distance', null);
         });
 
-    });
-}
-
-function initSliders() {
-    var saveSlider = function (event, ui) {
-        window.trekFilter.sliderChanged(ui.values[0],
-                                        ui.values[1],
-                                        $(this).data("filter"),
-                                        $(this));
-    };
-
-    $( "#difficulty" ).slider({
-        range: true,
-        step: 1,
-        min: 1,
-        max: 4,
-        values: [ 1, 4 ],
-        slide: saveSlider
-    });
-
-    $( "#duration" ).slider({
-        range: true,
-        step: 1,
-        min: 0,
-        max: 2,
-        values: [ 0, 2 ],
-        slide: saveSlider
-    });
-
-    $( "#altitude" ).slider({
-        range: true,
-        step: 1,
-        min: 0,
-        max: 3,
-        values: [ 0, 3 ],
-        slide: saveSlider
     });
 }
 

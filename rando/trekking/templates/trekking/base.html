@@ -71,7 +71,7 @@
     </head>
     <body>
         <header>
-            <a class="home pjax {% if POPUP_HOME_ENABLED %}popup{% endif %}" href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}#results">
+            <a class="home pjax {% if POPUP_HOME_ENABLED %}popup{% endif %}" href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}#">
                <h1>{{ TITLE }}</h1>
             </a>
             <a class="btn utils icon-share" id="global-share" href="#" title="{% trans "Share" %}">
@@ -102,6 +102,7 @@
             </div>
         </footer>
 
+        <script src="{% locale_url request.LANGUAGE_CODE "jsi18n" %}"></script>
         {% compress js %}
         <script src="{% static "js/vendor/jquery-ui.js" %}"></script>
         <script src="{% static "js/vendor/jquery.ui.touch-punch.min.js" %}"></script>
@@ -134,45 +135,32 @@
         <script src="{% static "js/filter.js" %}"></script>
         <script src="{% static "js/backpack.js" %}"></script>
         <script src="{% static "js/map.js" %}"></script>
+        {% if FILTERS_HASH_ENABLED %}
+        <script src="{% static "js/filter-hash.js" %}"></script>
+        {% endif %}
         {% if POPUP_HOME_ENABLED %}
         <script src="{% static "js/popup.js" %}"></script>
         {% endif %}
         {% if VIEW3D_ENABLED %}
         <script src="{% static "view3d/main.js" %}"></script>
         {% endif %}
-        {% endcompress %}
-        <script src="{% locale_url request.LANGUAGE_CODE "jsi18n" %}"></script>
         <script src="{% static "js/main.js" %}"></script>
+        {% endcompress %}
 
         {% if not donottrack %}
         {% ganalytics %}
         {% endif %}
 
         {% if POPUP_HOME_ENABLED %}
-        <div id="popup-home" class="popup-home modal hide fade" tabindex="-1" role="dialog" aria-labelledby="popup-view3d" aria-hidden="true">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <div class="modal-body">
-              <div id="lang-switch">
-                <ul>
-                  {% for lang, name in settings.languages.available.items %}
-                    <li class="{% if lang == request.LANGUAGE_CODE %}active{% endif %}"><a href="{% locale_url lang "trekking:home" %}"><span class="hidden">{{ lang }}</span>
-                        <img src="{% get_static_prefix %}img/flags/{{ lang }}.png" alt="{{ lang }}"></a>
-                    </li>
-                  {% endfor %}
-                </ul>
-              </div>
-              <section id="popup-body">
-                {% fileinclude POPUP_FILENAME request.LANGUAGE_CODE %}
-              </section>
-            </div>
-        </div>
+            {% include "trekking/_popup_home.html" %}
         {% endif %}
 
-        <div id="popup-view3d" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="popup-view3d" aria-hidden="true" data-url="{% locale_url request.LANGUAGE_CODE "view3d:view3d" "empty" %}">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        {% if VIEW3D_ENABLED %}
+            <div id="popup-view3d" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="popup-view3d" aria-hidden="true" data-url="{% locale_url request.LANGUAGE_CODE "view3d:view3d" "empty" %}">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
             </div>
-        </div>
-
+        {% endif %}
     </body>
 </html>
