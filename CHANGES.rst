@@ -14,6 +14,8 @@ CHANGELOG
 * Fix flags images in popup
 * Hide filters on page load, until Chosen is loaded (ref #61)
 * Fix snippet to add extra layers in README (fixes #23, #51)
+* Fix a bug on POIs accordion toggling
+* Fix a bug on mobile backpack not showing when empty
 
 **Breaking changes**
 
