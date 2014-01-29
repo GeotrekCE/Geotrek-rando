@@ -240,11 +240,3 @@ VIEW3D_ENABLED = True
 GANALYTICS_TRACKING_CODE = 'UA-XXXXXXXX-XX'
 
 COORDS_FORMAT_PRECISION = 5
-
-try:
-    from settings_local import *
-except ImportError:
-    try:
-        from settings_production import *
-    except ImportError:
-        pass
