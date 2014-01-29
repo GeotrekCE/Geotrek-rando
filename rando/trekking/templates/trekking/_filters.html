@@ -1,0 +1,111 @@
+{% load i18n l10n trekking_tags %}
+<div id="filters-bar" class="filters-bar">
+  <h2 class="hidden">{% trans "Filters" %}</h2>
+
+  <div id="basic-filters">
+
+    {% if difficulty_levels %}
+    <div class="difficulty span slider">
+      <label for="difficulty">{% trans "Difficulty" %}</label>
+      <div class="slider-wrap">
+        <div id="difficulty" data-filter="difficulty"></div>
+      </div>
+
+      {% for difficulty in difficulty_levels %}
+        <div data-value="{{ difficulty.value }}"
+             class="slider-value {% if forloop.first%}first{% endif %} {% if forloop.last%}last{% endif %}">
+             {{ difficulty.label }}
+        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="duration span slider">
+      <label for="duration">{% trans "Duration" %}</label>
+      <div class="slider-wrap">
+        <div id="duration" data-filter="duration"></div>
+      </div>
+
+      {% for duration in duration_levels %}
+        <div data-value="{{ duration.value|unlocalize }}"
+             class="slider-value {% if forloop.first%}first{% endif %} {% if forloop.last%}last{% endif %}">
+             {{ duration.label }}
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="altitude span slider">
+      <label for="altitude">{% trans "Climb" %}</label>
+      <div class="slider-wrap">
+        <div id="altitude" data-filter="altitude"></div>
+      </div>
+      {% for altitude in altitude_levels %}
+        <div data-value="{{ altitude.value|unlocalize }}"
+             class="slider-value {% if forloop.first%}first{% endif %} {% if forloop.last%}last{% endif %}">
+             {{ altitude.label }}
+        </div>
+      {% endfor %}
+    </div>
+
+
+    {% if themes %}
+    <div class="theme span">
+      <label for="theme">{% trans "Thematic" %}</label>
+      {% for theme in themes %}
+        <div class="filter" data-filter="theme" data-id="{{ theme.id }}" id="theme-{{ theme.id }}">
+          {{ theme|pictogram }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+
+    <div id="filters-actions" class="span">
+      <span>{% trans "Reset" %}</span><br/>
+      <a class="btn utils icon-fontawesome-webfont-1" id="clear-filters" href="#" data-toggle="tooltip" title="{% trans "Reset filters" %}"></a>
+    </div>
+
+
+    <div id="advanced-filters">
+
+      <div class="filter-bloc usage">
+        <label for="usage" class="hidden">{% trans "Usages" %}</label>
+        <select id="usage" class="chosen-select" tabindex="2" multiple="" data-filter="usage" data-placeholder="{% trans "Usages" %}">
+        {% for usage in usages %}
+          <option data-filter="usage" data-id="{{ usage.id }}" value="{{ usage.id }}">{{ usage.label }}</option>
+        {% endfor %}
+        </select>
+      </div>
+
+      <div class="filter-bloc route">
+        <label for="route" class="hidden">{% trans "Route" %}</label>
+        <select id="route" class="chosen-select" tabindex="2" multiple="" data-filter="route"  data-placeholder="{% trans "Route" %}">
+        {% for route in routes %}
+          <option data-filter="route" data-id="{{ route.id }}" value="{{ route.id|safe }}">{{ route.label }}</option>
+        {% endfor %}
+        </select>
+      </div>
+
+      <div class="filter-bloc vallee">
+        <label for="district" class="hidden">{% trans "Valleys" %}</label>
+        <select id="district" class="chosen-select" tabindex="2" multiple="" data-filter="district" data-placeholder="{% trans "Valleys" %}">
+        {% for district in districts %}
+          <option data-filter="district" data-id="{{ district.id }}" value="{{ district.id }}">{{ district.name }}</option>
+        {% endfor %}
+        </select>
+      </div>
+
+      <div class="filter-bloc cities">
+        <label for="city" class="hidden">{% trans "Cities" %}</label>
+        <select id="city" class="chosen-select" tabindex="2" multiple="" data-filter="city" data-placeholder="{% trans "Cities" %}">
+        {% for city in cities %}
+          <option data-filter="city" data-id="{{ city.code }}" value="{{ city.code|safe }}">{{ city.name }}</option>
+        {% endfor %}
+        </select>
+      </div>
+
+    </div>
+    <!--  advanced-filters-->
+  </div>
+
+</div>

@@ -156,6 +156,9 @@ FLATPAGES_ROOT = os.path.join(MEDIA_ROOT,'pages')
 FLATPAGES_TITLES = {}
 FLATPAGES_POLICY_PAGE = 1
 
+FILTERS_HASH_ENABLED = True
+FILTER_ASCENT_VALUES = (300, 600, 1000, 1400)
+
 LEAFLET_CONFIG = {
     "TILES": [
         ('main', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', '&copy; OpenStreetMap contributors'),

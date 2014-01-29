@@ -34,7 +34,7 @@
 * Filters
 */
 
-#filters-bar {
+.filters-bar {
   position: absolute;
   width: 100%;
   height: 115px;
@@ -42,7 +42,8 @@
   z-index: 901;
  .box-sizing(border-box);
   color: #9e969a;
-  padding: 5px 5px 5px 15px;
+  padding: 5px;
+  padding-left: 10px;
   background: #f8f8f8;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
@@ -72,58 +73,69 @@
     .active {
       color: @mainColor;
       text-shadow: 0px 0px 2px #ffff00;
-	}
-  }
-}
-
-.slider-value {
-  display: inline-block;
-  font-size: 7pt;
-  text-align: center;
-  max-height: 20px;
-  position: relative;
-
-  &.first {
-    margin-left: -15%;
-    text-align: right;
-
-    &:before {
-      display: none;
     }
   }
 
-  &.last {
-    text-align: left;
+  .span {
+    margin-right: 20px;
+    margin-left: 0;
+    min-height: 56px;
+    white-space: nowrap;
 
-    &:before {
-      display: none;
+    @media (max-width: @screen-md) {
+      margin-right: 13px;
     }
   }
 
-  &:before {
-    content: "";
-    display: block;
-    width: 1px;
-    height: 8px;
-    background: #f3f2f2;
-    position: absolute;
-    top: -9px;
-    left: 50%;
-    z-index: 1;
-    pointer-events: none;
+  .theme {
+    margin-right: 0;
+  }
+
+  .slider {
+    margin-left: -15px;
+
+    label {
+      margin-left: 15px;
+    }
+  }
+
+  #filters-actions {
+    float:right;
+    margin-right: 4px;
+    text-align: center;
+
+    a {
+      outline: 0;
+      display: inline-block;
+      position: relative;
+      z-index: 300;
+      line-height: 0.7em;
+      background: @mainColor;
+      text-shadow: none;
+      width: 20px;
+    }
+
+    span {
+      color: #9e969a;
+      font-weight: bold;
+    }
   }
 }
 
+// Sliders
+@sliderWidth : 60px;
 
-.slider {
-  height:23px;
-  border:none;
-  margin-top:0px;
+.filter, .ui-slider, .ui-slider-handle {
+  cursor: pointer;
+}
+
+.slider-wrap {
+  margin: 3px @sliderWidth/3 0 @sliderWidth/3;
+  height: 8px;
 }
 
 .ui-slider {
   border: none;
-  left: 6px;
   height: 8px;
   background: #E4E2E2;
 
@@ -141,76 +153,49 @@
     width: 8px;
     height: 8px;
     top: 0;
-    margin-left: -5px;
+    margin-left: -4px;
   }
 }
 
-.slider-wrap {
-  margin-top: 3px;
-  height: 8px;
-}
+.slider-value {
+  display: inline-block;
+  font-size: 7pt;
+  text-align: center;
+  max-height: 20px;
+  position: relative;
+  width: @sliderWidth;
 
-.filter, .ui-slider, .ui-slider-handle {
-  cursor: pointer;
-}
+  &.first {
+    margin-left: @sliderWidth/3 - 5;
+    width: @sliderWidth - @sliderWidth/3;
+    text-align: left;
 
-#basic-filters > .span {
-  margin-right: 25px;
-  margin-left: 0;
-  min-height: 56px;
-  white-space: nowrap;
-
-  @media (max-width: @screen-md) {
-    margin-right: 13px;
-  }
-}
-
-.difficulty {
-  float:left;
-
-  .slider-value {
-    width: 30%;
+    &:before {
+      display: none;
+    }
   }
 
-  .slider-wrap {
-    width: 197px;
+  &.last {
+    margin-right: @sliderWidth/3 - 5;
+    width: @sliderWidth - @sliderWidth/3;
+    text-align: right;
+
+    &:before {
+      display: none;
+    }
   }
 
-  .ui-slider {
-    max-width: 180px;
-  }
-}
-
-.duration {
-  float:left;
-
-  .slider-value {
-    width: 42%;
-  }
-
-  .slider-wrap {
-    width: 160px;
-  }
-
-  .ui-slider {
-    max-width: 153px;
-  }
-}
-
-.altitude {
-  float:left;
-
-  .slider-value {
-    width: 31%;
-  }
-
-  .slider-wrap {
-    width: 240px;
-    .border-radius(10px);
-  }
-
-  .ui-slider {
-    max-width: 230px;
+  &:before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 8px;
+    background: #f3f2f2;
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    z-index: 1;
+    pointer-events: none;
   }
 }
 
@@ -253,28 +238,6 @@
     img:hover {
       margin-left: -25px;
     }
-  }
-}
-
-#filters-actions {
-  float:right;
-  margin-right: 4px;
-  text-align: center;
-
-  a {
-    outline: 0;
-    display: inline-block;
-    position: relative;
-    z-index: 300;
-    line-height: 0.7em;
-    background: @mainColor;
-    text-shadow: none;
-    width: 20px;
-  }
-
-  span {
-    color: #9e969a;
-    font-weight: bold;
   }
 }
 

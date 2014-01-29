@@ -3,6 +3,53 @@ function TrekFilter()
     var self = this;
     self.treksList = [];
     self.matching = [];
+    self._values = {};
+
+    this.setup = function () {
+
+        initSliderFromDOM('difficulty');
+        initSliderFromDOM('duration');
+        initSliderFromDOM('altitude');
+
+        function initSliderFromDOM (name) {
+            var values = $('.' + name + ' .slider-value').map(function () {
+                return $(this).data('value');
+            });
+            self._values[name] = values;
+
+            var min = 0,
+                max = values.length-1;
+
+            $('#' + name).slider({
+                range: true,
+                step: 1,
+                min: min,
+                max: max,
+                values: [min, max],
+                slide: saveSlider
+            });
+        }
+
+        function saveSlider(event, ui) {
+            var minVal = ui.values[0],
+                maxVal = ui.values[1],
+                name = $(this).data("filter");
+
+            if (minVal == $(this).slider('option', 'min') &&
+                maxVal == $(this).slider('option', 'max')) {
+                // Covers the whole range : equivalent to no filter.
+                delete self.state['sliders'][name];
+                self.save();
+            }
+            else {
+                self.state.sliders = self.state.sliders || {};
+                self.state.sliders[name] = self.state.sliders[name] || {};
+                self.state.sliders[name]['min'] = minVal;
+                self.state.sliders[name]['max'] = maxVal;
+                self.save();
+            }
+        }
+    };
 
     this.initEvents = function () {
         $(window).unbind('filters:reload').on('filters:reload', function () {self.load();});
@@ -18,24 +65,6 @@ function TrekFilter()
         $(".chosen-select").val('').trigger("liszt:updated");
         self.load();
         $(self).trigger("reset");
-    };
-
-    this.__saveState = function () {
-        var serialized = null;
-
-        localStorage.setItem('resultsCount', self.matching.length);
-
-        if ($.isEmptyObject(self.state)) {
-            return;
-        } else {
-            serialized = JSON.stringify(self.state);
-
-            localStorage.setItem('filterState', serialized);
-
-            // Refresh URL hash, so that users can copy and paste URLs with filters
-            var compressed = LZString.compress(serialized);
-            window.location.replace('#' + (serialized.length > 0 ? stringToHex(compressed) : ''));
-        }
     };
 
     this.save = function ()
@@ -60,30 +89,19 @@ function TrekFilter()
             }
         }
 
-        this.__saveState();
-        $(self).trigger("filterchange", [self.matching]);
+        localStorage.setItem('resultsCount', self.matching.length);
+        var serialized = JSON.stringify(self.state);
+        localStorage.setItem('filterState', serialized);
+
+        $(window).trigger("filters:changed", [self.matching]);
     };
 
     this.__loadState = function () {
-        var hash = window.location.hash.slice(1),
-            storage = localStorage.getItem('filterState'),
-            state = null;
-        // First try to load from hash
+        var state = null;
         try {
-            if (hash.length > 0) {
-                var hexhash = hexToString(hash);
-                state = JSON.parse(LZString.decompress(hexhash));
-            }
+           state = JSON.parse(localStorage.getItem('filterState'));
         }
         catch (err) {}
-
-        // If no filter in hash, look into localStorage
-        if (state === null) {
-            try {
-                state = JSON.parse(storage);
-            }
-            catch (err) {}
-        }
 
         state = state || {};
         state.sliders = state.sliders || {};
@@ -110,8 +128,8 @@ function TrekFilter()
 
                 if ($('#' + filter).hasClass('ui-slider')) {
                     var slider = $('#' + filter).data('slider');
-                    if (!value.min) value.min = slider.options.min;
-                    if (!value.max) value.max = slider.options.max;
+                    if (value.min === undefined) value.min = slider.options.min;
+                    if (value.max === undefined) value.max = slider.options.max;
                     $('#' + filter).slider('values', 0, value.min);
                     $('#' + filter).slider('values', 1, value.max);
                     if (value.min == slider.options.min && value.max == slider.options.max)
@@ -178,21 +196,10 @@ function TrekFilter()
         self.save();
     };
 
-    this.sliderChanged = function(minVal, maxVal, name, slider)
-    {
-        if (!self.state['sliders']) self.state['sliders'] = {};
-        if (!(name in self.state['sliders'])) {
-            self.state['sliders'][name] = {};
-        }
-        self.state['sliders'][name]['min'] = minVal;
-        self.state['sliders'][name]['max'] = maxVal;
-        self.save();
-    };
-
     this.match = function(trek) {
-        if (this.matchDifficulty(trek) &&
-            this.matchDuration(trek) &&
-            this.matchAltitude(trek) &&
+        if (this._matchSlider(trek, 'duration', 'duration') &&
+            this._matchSlider(trek, 'difficulty', 'difficulty') &&
+            this._matchSlider(trek, 'altitude', 'ascent') &&
             this._matchList(trek, 'theme', 'themes') &&
             this._matchList(trek, 'usage', 'usages') &&
             this._matchList(trek, 'district', 'districts') &&
@@ -203,79 +210,49 @@ function TrekFilter()
         return false;
     };
 
-    this.matchDifficulty = function (trek) {
-        if (!self.state.sliders) return true;
-        if (!self.state.sliders.difficulty) return true;
-        var minDifficulty = self.state.sliders.difficulty.min;
-        var maxDifficulty = self.state.sliders.difficulty.max;
+    this._matchSlider = function (trek, category, property) {
+        var value = trek[property];
 
-        var trekDifficulty = trek.difficulty;
-        if  (!trekDifficulty) return true;
-        /**
-         * Difficulty ids are used to order levels.
-         * See Geotrek Adminsite for DifficultyLevel edition.
-         */
-        return trekDifficulty >= minDifficulty && trekDifficulty <= maxDifficulty;
-    };
-
-    this.matchDuration = function (trek) {
-        if (!self.state.sliders) return true;
-        if (!self.state.sliders.duration) return true;
-        var minDuration = self.state.sliders.duration.min;
-        var maxDuration = self.state.sliders.duration.max;
-
-        var DAY_MIN = 4,
-            DAY_MAX = 10;
-
-        var trekDuration = trek.duration;
-
-        if (minDuration === 0) {
-            if (maxDuration == 2) {
-                return true;
-            }
-            if (maxDuration === 0) {
-                return trekDuration <= DAY_MIN;
-            }
-            return trekDuration <= DAY_MAX;
+        // Trek considered as matching if filter not set or if
+        // property is empty.
+        if (value === undefined ||
+            self.state['sliders'] === undefined ||
+            self.state['sliders'][category] === undefined) {
+            return true;
         }
 
-        if (minDuration == 2) {
-            return trekDuration >= 10;
-        }
-        if (maxDuration == 2) {
-            return trekDuration >= DAY_MIN;
-        }
-        return trekDuration >= DAY_MIN && trekDuration <= DAY_MAX;
-    };
+        var rangeValues = self._values[category],
+            rangeMin = 0,
+            rangeMax = rangeValues.length-1,
+            min = self.state.sliders[category].min,
+            max = self.state.sliders[category].max;
 
-    this.matchAltitude = function (trek) {
-        if (!self.state.sliders) return true;
-        if (!self.state.sliders.altitude) return true;
-        var minClimb = self.state.sliders.altitude.min;
-        var maxClimb = self.state.sliders.altitude.max;
-
-        var matching = {
-            1:600,
-            2:1000
-        };
-        var trekClimb = trek.ascent;
-        if (minClimb === 0) {
-            if (maxClimb == 3) {
-                return true;
-            }
-            if (maxClimb === 0) {
-                return trekClimb <= 300;
-            }
-            return trekClimb <= matching[maxClimb];
+        if (max === rangeMin) {
+            // Both on minimum value
+            return value <= rangeValues[rangeMin];
+        }
+        if (min === rangeMax) {
+            // Both on maximum values
+            return value >= rangeValues[rangeMax];
         }
 
-        if (minClimb == 3) {
-            return trekClimb >= 1400;
+        var minVal = rangeValues[min - 1],
+            maxVal = rangeValues[max + 1];
+
+        if (category == 'altitude' && min != max) {
+            minVal = rangeValues[min];
+            maxVal = rangeValues[max];
         }
-        if (maxClimb == 3) {
-            return trekClimb >= matching[minClimb];
+
+        if (min === rangeMin) {
+            // Filter by max only
+            return value < maxVal;
         }
-        return trekClimb >= matching[minClimb] && trekClimb <= matching[maxClimb];
+        if (max === rangeMax) {
+            // Filter by min only
+            return value > minVal;
+        }
+        return value > minVal && value < maxVal;
     };
 
     this._matchList = function (trek, category, property) {
@@ -313,38 +290,4 @@ function TrekFilter()
             haystack = trek.fulltext;
         return (new RegExp(needle)).test(haystack);
     };
-
-
-    /**
-     * Helper functions for string <--> hexadecimal
-     */
-    function d2h(d) {
-        return d.toString(16);
-    }
-    function h2d (h) {
-        return parseInt(h, 16);
-    }
-    function stringToHex (tmp) {
-        var str = '',
-            i = 0,
-            tmp_len = tmp.length,
-            c;
-        for (; i < tmp_len; i += 1) {
-            c = tmp.charCodeAt(i);
-            str += d2h(c) + '-';
-        }
-        return str;
-    }
-    function hexToString (tmp) {
-        var arr = tmp.split('-'),
-            str = '',
-            i = 0,
-            arr_len = arr.length,
-            c;
-        for (; i < arr_len; i += 1) {
-            c = String.fromCharCode( h2d( arr[i] ) );
-            str += c;
-        }
-        return str;
-    }
-};
+}

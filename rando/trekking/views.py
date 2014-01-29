@@ -5,6 +5,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.views.generic import TemplateView, DetailView
 from django.views.static import serve as static_serve
+from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import redirect
 from djpjax import PJAXResponseMixin
 from localeurl.utils import locale_url
@@ -26,6 +27,36 @@ class HomeView(PJAXResponseMixin, TemplateView):
 
         context = super(HomeView, self).get_context_data(**kwargs)
         self._add_choices_values(alltreks, context)
+
+        duration_levels = [
+            {'label': '1/2', 'value': 4},
+            {'label': _('1 day'), 'value': 10},
+            {'label': u'> 2', 'value': 10.1},
+        ]
+
+        altitude_levels = []
+        for i, ascent in enumerate(settings.FILTER_ASCENT_VALUES):
+            if i == 0:
+                label = _('< %sm') % ascent
+            elif i == len(settings.FILTER_ASCENT_VALUES) -1:
+                label = _('> %sm') % ascent
+            else:
+                label = _('%sm') % ascent
+            altitude_levels.append({'label': label, 'value': ascent})
+
+        all_difficulties = {}
+        for trek in alltreks:
+            did = trek.properties.difficulty.id
+            dlabel = trek.properties.difficulty.label
+            all_difficulties[did] = {'label': dlabel, 'value': did}
+
+        difficulty_levels = sorted(all_difficulties.values(),
+                                   key=lambda d: d['value'])
+
+        context['difficulty_levels'] = difficulty_levels
+        context['duration_levels'] = duration_levels
+        context['altitude_levels'] = altitude_levels
+
         return context
 
     def _add_choices_values(self, alltreks, context):
@@ -60,7 +91,7 @@ class HomeView(PJAXResponseMixin, TemplateView):
             'usages': allusages,
             'districts': alldistricts,
             'cities': allcities,
-            'routes': allroutes
+            'routes': allroutes,
         })
 
 

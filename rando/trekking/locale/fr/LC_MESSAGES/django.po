@@ -23,10 +23,24 @@ msgstr ""
 msgid "From %(departure)s to %(arrival)s"
 msgstr "De %(departure)s à %(arrival)s"
 
-#: templates/trekking/base.html:83 templates/trekking/base.html.py:84
-#: templates/trekking/base.html:85
-msgid "Share"
-msgstr "Partager"
+#: views.py:33
+msgid "1 day"
+msgstr "1 jour"
+
+#: views.py:40
+#, python-format
+msgid "< %sm"
+msgstr ""
+
+#: views.py:42
+#, python-format
+msgid "> %sm"
+msgstr ""
+
+#: views.py:44
+#, fuzzy, python-format
+msgid "%sm"
+msgstr "%s min"
 
 #: templates/trekking/detail-panel.html:11
 #: templates/trekking/fake_searchtabs_fragment.html:7
@@ -190,36 +204,7 @@ msgstr "Sur le chemin…"
 msgid "Filters"
 msgstr "Filtres"
 
-#: templates/trekking/home-panel.html:18
-msgid "Very easy"
-msgstr "Très facile"
-
-#: templates/trekking/home-panel.html:19
-msgid "Easy"
-msgstr "Facile"
-
-#: templates/trekking/home-panel.html:20
-msgid "Medium"
-msgstr "Moyen"
-
-#: templates/trekking/home-panel.html:21
-msgid "Hard"
-msgstr "Difficile"
-
-#: templates/trekking/home-panel.html:28
-msgid "1/2 day"
-msgstr "1/2 journée"
-
-#: templates/trekking/home-panel.html:29
-msgid "Day"
-msgstr "Journée"
-
-#: templates/trekking/home-panel.html:30
-msgid "2 days"
-msgstr "2 jours"
-
-#: templates/trekking/home-panel.html:33
-#: templates/trekking/trek_result_fragment.html:11
+#: templates/trekking/_filters.html:38 templates/trekking/_trek_result.html:27
 msgid "Climb"
 msgstr "Dénivelé"
 
@@ -291,8 +276,12 @@ msgstr ""
 msgid "Preview of"
 msgstr "Aperçu de"
 
-#: templates/trekking/trek_result_fragment.html:22
-#: templates/trekking/trek_result_fragment.html:23
+#: templates/trekking/_trek_result.html:26
+msgid "City"
+msgstr "Commune"
+
+#: templates/trekking/_trek_result.html:38
+#: templates/trekking/_trek_result.html:39
 msgid "Remove from favorites"
 msgstr "Retirer des favoris"
 
@@ -305,6 +294,25 @@ msgstr "Ajouter aux favoris"
 #: templates/trekking/trek_result_fragment.html:32
 msgid "Zoom to trek"
 msgstr "Zoomer sur l'itinéraire"
+
+#: templates/trekking/base.html:77 templates/trekking/base.html.py:78
+msgid "Share"
+msgstr "Partager"
+
+#~ msgid "Very easy"
+#~ msgstr "Très facile"
+
+#~ msgid "Easy"
+#~ msgstr "Facile"
+
+#~ msgid "Medium"
+#~ msgstr "Moyen"
+
+#~ msgid "Hard"
+#~ msgstr "Difficile"
+
+#~ msgid "1/2"
+#~ msgstr "1/2"
 
 #~ msgid "Favorite"
 #~ msgstr "Favori"
@@ -323,9 +331,6 @@ msgstr "Zoomer sur l'itinéraire"
 
 #~ msgid "%(hour)sH%(min)s"
 #~ msgstr "%(hour)sH%(min)s"
-
-#~ msgid "%s min."
-#~ msgstr "%s min"
 
 #~ msgid "Networks"
 #~ msgstr "Réseaux"
