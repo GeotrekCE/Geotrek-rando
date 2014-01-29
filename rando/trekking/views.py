@@ -29,9 +29,9 @@ class HomeView(PJAXResponseMixin, TemplateView):
         self._add_choices_values(alltreks, context)
 
         duration_levels = [
-            {'label': _('1/2 day'), 'value': 4},
-            {'label': _('Day'), 'value': 10},
-            {'label': u'> %s' % _('2 days'), 'value': 10.1},
+            {'label': '1/2', 'value': 4},
+            {'label': _('1 day'), 'value': 10},
+            {'label': u'> 2', 'value': 10.1},
         ]
 
         altitude_levels = []

@@ -6,9 +6,10 @@ activate_script = os.path.join(os.path.dirname(__file__), 'bin/activate_this.py'
 execfile(activate_script, {'__file__': activate_script})
 
 if __name__ == "__main__":
-    if 'test' in sys.argv:
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "rando.settings.dev")
-    elif 'runserver' in sys.argv:
+    ran_by_dev = ('test', 'runserver', 'makemessages', 'compilemessages')
+    is_dev = any([(a in ran_by_dev) for a in sys.argv])
+
+    if is_dev:
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "rando.settings.dev")
     else:
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "rando.settings.prod")
