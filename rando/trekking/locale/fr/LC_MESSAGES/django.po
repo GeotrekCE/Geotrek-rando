@@ -276,10 +276,6 @@ msgstr ""
 msgid "Preview of"
 msgstr "Aperçu de"
 
-#: templates/trekking/_trek_result.html:26
-msgid "City"
-msgstr "Commune"
-
 #: templates/trekking/_trek_result.html:38
 #: templates/trekking/_trek_result.html:39
 msgid "Remove from favorites"
