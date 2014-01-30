@@ -3,12 +3,12 @@
 }
 
 #side-bar .result:hover, .side-bar .result.active {
-  background-color: #e9eae5;
+  background-color: @backgroundColor;
 }
 
 #side-bar .result {
   clear: both;
-  border-bottom: solid 1px #dbdcd7;
+  border-bottom: solid 1px @backgroundDarker;
   cursor: pointer;
   position: relative;
   padding: 5px;
@@ -31,7 +31,7 @@ width: 32%;
 
 #side-bar .result .info-result h3 {
   font-size: 14px;
-  color:#625b50;
+  color: @blackLighter;
   line-height: 18px;
   margin-bottom: 4px;
   margin-top: 0px;
@@ -42,7 +42,7 @@ width: 32%;
 
 #side-bar .result .info-result p {
   margin:0;
-  color:#968d7f;
+  color: @darkGray;
 }
 
 #backpack {
@@ -118,7 +118,7 @@ width: 32%;
 
       a {
         vertical-align: middle;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-tap-highlight-color: fade(@black, 0%);
       }
 
       h3 {

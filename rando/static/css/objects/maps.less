@@ -1,22 +1,21 @@
 .leaflet-label.trek {
-  background: rgba(255, 225, 75, 0.5);
+  background: @trekLabelBackground;
 }
 .leaflet-label.departure {
-  background: rgba(165, 228, 100, 0.5);
+  background: @trekLabelDeparture;
 }
 
 .leaflet-label.arrival {
-  background: rgba(255, 56, 56, 0.5);
+  background: @trekLabelArrival;
 }
 
 .leaflet-label.parking {
-  background: rgba(70, 70, 255, 0.2);
+  background: @trekLabelParking;
 }
 
 .leaflet-label.poi {
-  background: rgba(255, 200, 0, 0.2);
+  background: @trekLabelPOI;
 }
-
 
 /****************************************************************************
 *
@@ -124,7 +123,7 @@
 
   .description {
     text-align: justify;
-    
+
     p:first-child {
       margin-top: 0;
     }
@@ -132,7 +131,7 @@
 
   p {
     margin: 10px 0;
-    
+
     &:last-child {
       margin-bottom: 15px;
     }
@@ -178,7 +177,7 @@
     z-index: 5;
     bottom: 0px;
     position: absolute;
-    background-color: rgba(0,0,0,0.5);
+    background-color: fade(@black, 50%);
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 10px;
@@ -201,10 +200,10 @@
     padding: 1px;
     color: black;
     text-align: center;
-    background-color: rgba(255, 140, 0, 0.7);
+    background-color: fade(@mainColor, 70%);
     border: 1px solid  @black;
     .border-radius(4px);
-    .box-shadow(0px 0px 7px 2px rgba(255, 255, 0, 1.0));
+    .box-shadow(0px 0px 7px 2px @yellow);
   }
 
   &.highlight img {

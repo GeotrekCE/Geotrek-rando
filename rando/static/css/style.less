@@ -15,7 +15,7 @@ button,
 input,
 select,
 textarea {
-  color: #222;
+  color: @blackLighter;
 }
 
 /*
@@ -25,12 +25,12 @@ textarea {
  */
 
 ::-moz-selection {
-  background: #b3d4fc;
+  background: @highlightBackground;
   text-shadow: none;
 }
 
 ::selection {
-  background: #b3d4fc;
+  background: @highlightBackground;
   text-shadow: none;
 }
 
@@ -42,7 +42,7 @@ hr {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid @backgroundDarker;
   margin: 1em 0;
   padding: 0;
 }
@@ -98,7 +98,7 @@ a, input, button {
 // Custom mixins
 .remove-callout(){
   -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: fade(@black, 0%);;
   -webkit-user-select: none;
 }
 
@@ -126,7 +126,7 @@ body, html {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Open sans', Arial;
+  font-family: @fontFamilyTitle;
   line-height: 27px;
 }
 
@@ -158,14 +158,14 @@ a {
 }
 
 ::-webkit-scrollbar-track-piece{
-  background-color: #eee;
+  background-color: @backgroundColor;
   -webkit-border-radius:0;
   -webkit-border-bottom-right-radius:0;
   -webkit-border-bottom-left-radius:0;
 }
 
 ::-webkit-scrollbar-thumb:vertical{
-  background-color:#999;
+  background-color: @darkGray;
   -webkit-border-radius:8px
 }
 
@@ -216,7 +216,7 @@ header {
 
   border-bottom: 10px solid white;
   .box-sizing(border-box);
-  .box-shadow(0 0 2px rgba(0, 0, 0, 0.1));
+  .box-shadow(0 0 2px fade(@black, 10%));
 
   h1 {
     color: @orange;
@@ -254,10 +254,10 @@ header {
   width: 100%;
   height: 50px;
   bottom: 0;
-  .box-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+  .box-shadow(0 0 2px fade(@black, 50%));
   overflow: hidden;
-  background-color: #f0f2ed;
-  color: #fff;
+  background-color: @footerBackground;
+  color: @footerText;
 
   .wrapper {
     background: url(../img/makina.png) no-repeat;
@@ -338,9 +338,9 @@ ul.row-footer {
     background: fadeout(@mainColor, 30%);
     .border-radius(3px);
     color: white;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 1px 1px  fade(@black, 20%);
     .box-shadow(none);
-    border-bottom-color: rgba(0, 0, 0, 0.3);
+    border-bottom-color:  fade(@black, 30%);
     line-height: 18px;
 
     &:hover,
@@ -429,8 +429,8 @@ ul.row-footer {
   bottom: 0;
   z-index: 900; /* above map */
   width: 330px;
-  border-right: solid 2px #877e82;
-  background-color: #F6F7F1;
+  border-right: solid 2px @darkGray;
+  background-color: @backgroundColor;
   min-height: 45px;
 
   @media (min-width: @screen-lg) {
@@ -491,17 +491,17 @@ ul.row-footer {
   .border-radius(0);
   text-align: center;
   font-weight: bold;
-  color: #80747C;
+  color: @darkGray;
   background-repeat: no-repeat;
   background-position: 20px 50%;
   margin: 0px;
   height: 38px;
-  background-color: #e9eae5;
-  border: solid 1px #dbdcd7;
+  background-color: @backgroundColor;
+  border: solid 1px @backgroundDarker;
   border-left: none;
   line-height: 19px;
   vertical-align: bottom;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: fade(@black, 0%);
   -webkit-touch-callout: none;
 }
 
@@ -520,7 +520,7 @@ ul.row-footer {
   left: 0px;
   right: 3%;
   top: 75px;
-  border-right: 1px solid #dbdcd7;
+  border-right: 1px solid @backgroundDarker;
   padding-top: 1px;
   background-color: white;
   -webkit-overflow-scrolling: touch;
@@ -557,7 +557,7 @@ p.tab-content-empty {
   text-align: center;
   width: 100%;
   margin-top: 20px;
-  color: #80747C;
+  color: @darkGray;
 }
 
 .search {
@@ -569,7 +569,7 @@ p.tab-content-empty {
 .search label {
   text-align:center;
   font-weight: bold;
-  color:#000;
+  color: @blackLighter;
   margin-top:15px;
 }
 
@@ -581,8 +581,8 @@ p.tab-content-empty {
   border:none;
   position:relative;
   margin-left: -5px;
-  background: #7f747c;
-  border: 1px solid #7f747c;
+  background: @darkGray;
+  border: 1px solid @darkGray;
 }
 
 .search input.span3 {
@@ -617,7 +617,7 @@ p.tab-content-empty {
       width: 100%;
       background: white;
       margin-bottom: 0;
-      border-color: #E9EAE5;
+      border-color: @backgroundColor;
       line-height: 17px;
       padding: 4px 10px;
       .box-sizing(border-box);
@@ -625,18 +625,18 @@ p.tab-content-empty {
       .box-shadow(none);
       .transition(all 300ms);
       -webkit-appearance: none;
-      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      -webkit-tap-highlight-color: fade(@black, 0%);
 
 
       &.active {
-        background-color: white;
+        background-color: @white;
       }
 
       &:focus,
       &.focused {
-        color: #333333;
-        text-shadow: 0 1px 0 #ffffff;
-        background-color: #ffffff;
+        color: @blackLighter;
+        text-shadow: 0 1px 0 @white;
+        background-color: @white;
         border: 1px solid @mainColor;
         outline: 0;
         .box-shadow(0 0 3px @mainColor);
@@ -650,7 +650,7 @@ p.tab-content-empty {
       width: 35px;
       height: 100%;
       -webkit-touch-callout: none;
-      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      -webkit-tap-highlight-color: fade(@black, 0%);
 
       @media (min-width: @screen-sm) {
         pointer-events: none;
@@ -817,9 +817,9 @@ html.no-webgl #toolbox a.view3d {
 #detail-content-title {
   width: 98%;
   padding: 10px 1%;
-  background-color: #EEE;
-  border-top: 1px solid #DDD;
-  border-bottom: 1px solid #DDD;
+  background-color: @backgroundColor;
+  border-top: 1px solid @backgroundDarker;
+  border-bottom: 1px solid @backgroundDarker;
   margin-bottom: 18px;
 
   h2 {
@@ -835,7 +835,7 @@ html.no-webgl #toolbox a.view3d {
     background: none;
     font-weight: normal;
     font-size: 14px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: @fontFamily;
     margin: 0;
     margin-left: 2px;
     line-height: 20px;
@@ -1039,7 +1039,7 @@ p.teaser {
   }
 
   .carousel-caption {
-    background: rgba(0, 0, 0, 0.7);
+    background: fade(@black, 70%);
     padding: 7px;
 
     p {
@@ -1070,7 +1070,7 @@ p.teaser {
     color: white;
     border: none;
     font-size: 40px;
-    font-family: Arial;
+    font-family: @fontFamilyCaption;
     .transition(all 300ms);
 
     &.right {
@@ -1129,7 +1129,7 @@ p.teaser {
 
 .accordion-group {
   border: none;
-  border-top: 1px solid #EEE;
+  border-top: 1px solid @backgroundColor;
   .border-radius(0);
   margin-bottom: 0;
 
@@ -1232,11 +1232,11 @@ p.teaser {
     background: none;
     background-image: none !important;
     .background-size(auto);
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: fade(@white, 90%);
     border: none;
     .box-shadow(none);
     -webkit-touch-callout: none;
-    .box-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+    .box-shadow(0 2px 4px fade(@black, 60%));
     .transition(all 300ms);
     .translate3d(-105%, 0, 0);
     overflow: auto !important;
@@ -1275,7 +1275,7 @@ p.teaser {
 
       li {
         display: block;
-        border-bottom: 1px solid #CCC;
+        border-bottom: 1px solid @backgroundDarker;
 
         .btn {
           color: @grayDark !important;
@@ -1289,7 +1289,7 @@ p.teaser {
           padding-top: 20px;
           padding-left: 15px;
           font-size: 1.7em;
-          font-family: sans-serif-light, "Helvetica Neue", Helvetica, Arial, sans-serif;
+          font-family: @fontFamilyNavigation;
           font-weight: 100;
 
           &:hover {
@@ -1297,7 +1297,7 @@ p.teaser {
           }
 
           &:active, &.active {
-            background-color: white;
+            background-color: @white;
           }
         }
 
@@ -1359,9 +1359,9 @@ p.teaser {
     min-height: 46px;
     width: 100%;
     border-right: none;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-bottom: 2px solid #CCC;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    background-color: fade(@white, 80%);
+    border-bottom: 2px solid @backgroundDarker;
+    border-bottom: 2px solid fade(@black, 20%);
     .remove-callout();
   }
 
@@ -1448,14 +1448,14 @@ p.teaser {
   #mobile-header-detail {
     display: block;
     width: 100%;
-    background: orangered;
+    background: @mobileHeaderBackground;
     position: fixed;
     z-index: 9999;
-    border-bottom: 2px solid #992c04;
+    border-bottom: 2px solid @mobileHeaderBorder;
 
     a {
       color: white;
-      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      -webkit-tap-highlight-color: fade(@black, 0%);
     }
 
     h1 {
@@ -1464,7 +1464,7 @@ p.teaser {
       margin: 0;
       font-weight: 300;
       line-height: 46px;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: @fontFamily;
 
       &:before {
         font-size: 30px;
@@ -1595,7 +1595,7 @@ p.teaser {
 }
 
 .pressed {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: fade(@black, 70%);
 }
 
 /* A hack for HTML5 contenteditable attribute on mobile */
