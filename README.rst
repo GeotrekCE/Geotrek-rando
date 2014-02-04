@@ -418,6 +418,13 @@ DEVELOPMENT
 
     make test
 
+Use development settings :
+
+::
+
+    export DJANGO_SETTINGS_MODULE=rando.settings.dev
+
+
 Start development instance :
 
 ::

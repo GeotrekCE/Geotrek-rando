@@ -8,7 +8,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 
 install_requires = [
     'Django >=1.5,<1.7',
-    'requests < 2.3',
+    'requests >=2.2,<2.3',
     'termcolor == 1.1.0',
     'django-leaflet == 0.9.0',
     'django-localeurl == 2.0.1',

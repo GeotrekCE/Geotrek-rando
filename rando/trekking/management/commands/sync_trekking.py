@@ -155,7 +155,7 @@ class InputFile(object):
 class POIsInputFile(InputFile):
 
     def content(self):
-        content = self.reply.json
+        content = self.reply.json()
         if content is None:
             return super(POIsInputFile, self).content()
 
@@ -176,7 +176,7 @@ class POIsInputFile(InputFile):
 class TrekInputFile(InputFile):
 
     def content(self):
-        content = self.reply.json
+        content = self.reply.json()
         if content is None:
             return super(TrekInputFile, self).content()
 
@@ -206,7 +206,7 @@ class TrekListInputFile(InputFile):
         self.initkwargs = kwargs
 
     def content(self):
-        content = self.reply.json
+        content = self.reply.json()
         if content is None:
             return super(TrekListInputFile, self).content()
 
