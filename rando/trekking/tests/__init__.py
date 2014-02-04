@@ -12,7 +12,8 @@ from django.test.utils import override_settings
 from django.conf import settings
 
 from rando.trekking.templatetags.trekking_tags import overridable
-from rando.trekking.management.commands.sync_trekking import mkdir_p
+from rando.trekking.management.commands.sync_trekking import (mkdir_p,
+    reroot)
 from rando.trekking.models import Trek, JSONManager
 
 
@@ -37,6 +38,34 @@ class MkdirTest(SimpleTestCase):
     def test_remove(self):
 
         shutil.rmtree(self.path.split('/', 1)[0])
+
+
+class RerootTest(SimpleTestCase):
+    def test_reroot_of_simple_value(self):
+        rerooted = reroot('/geotrek/media/api/poi.geojson')
+        self.assertEqual(rerooted, '/media/api/poi.geojson')
+
+    def test_reroot_of_a_list(self):
+        rerooted = reroot(['/geotrek/media/api/poi.geojson',
+                           '/geotrek/media/api/layer.geojson'])
+        self.assertEqual(rerooted, ['/media/api/poi.geojson',
+                                    '/media/api/layer.geojson'])
+
+    def test_reroot_of_a_dict_entry(self):
+        obj = dict(url='/geotrek/media/api/poi.geojson')
+        obj = reroot(obj, attr='url')
+        self.assertEqual(obj['url'], '/media/api/poi.geojson')
+
+    def test_reroot_of_a_dict_entry_of_a_list(self):
+        objs = [dict(path='/geotrek/media/api/poi.geojson'),
+                dict(path='/geotrek/media/api/layer.geojson')]
+        objs = reroot(objs, attr='path')
+        self.assertEqual(objs, [{'path': '/media/api/poi.geojson'},
+                                {'path': '/media/api/layer.geojson'}])
+
+    def test_reroot_does_not_alter_if_not_starting_with_media(self):
+        notrerooted = reroot('/geotrek/api/poi.geojson')
+        self.assertEqual(notrerooted, '/geotrek/api/poi.geojson')
 
 
 class OverridableStaticTest(SimpleTestCase):

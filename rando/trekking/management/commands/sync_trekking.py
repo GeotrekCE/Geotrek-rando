@@ -46,8 +46,12 @@ def mkdir_p(path):
             raise
 
 
-# Make sure pictograms start with MEDIA_URL
 def reroot(item, attr=None):
+    """
+    In case the Geotrek admin serves the application on a subfolder (e.g. /geotrek),
+    all pictogram and related URLs with start with a prefix.
+    This makes sure everything is re-rooted with `MEDIA_URL`.
+    """
     if isinstance(item, list):
         return [reroot(i, attr) for i in item]
     if attr is not None:
@@ -234,7 +238,7 @@ class TrekListInputFile(InputFile):
             properties.update(detail)
 
             # Remove rooturl from relative URLs
-            for k in ['altimetric_profile', 'gpx', 'kml', 'map_image_url', 'printable']:
+            for k in ['altimetric_profile', 'gpx', 'kml', 'map_image_url', 'printable', 'poi_layer']:
                 properties[k] = properties[k].replace(self.rooturl, '') if properties[k] else properties[k]
 
             # Add POIs information in list, useful for textual search
