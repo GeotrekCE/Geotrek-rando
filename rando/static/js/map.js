@@ -18,8 +18,10 @@ var TrekLayer = L.GeoJSON.AJAX.extend({
         this._filtered = {};
         this._hover = null;
         this._iconified = null;
+        this._fullBounds = null;
 
         this.on('data:loaded', function (e) {
+            this._fullBounds = this.getBounds();
             var allLayers = this.getLayers();
             for (var i=0; i<allLayers.length; i++) {
                 var layer = allLayers[i];
@@ -49,6 +51,12 @@ var TrekLayer = L.GeoJSON.AJAX.extend({
                 }
             }
         }
+    },
+
+    getFullBounds: function () {
+        // Returns the full bounds of all treks, ignoring the current state
+        // of the layers (clustered, iconified, etc.)
+        return this._fullBounds;
     },
 
     getLayer: function (trekId) {
@@ -387,7 +395,7 @@ function mainmapInit(map, djoptions) {
     map.whenReady(function () {
         map.switchLayer('main');
         if (map.layerscontrol) map.removeControl(map.layerscontrol);
-        new L.Control.ResetView(treksLayer.getBounds(), {position: 'topright'}).addTo(map);
+        new L.Control.ResetView(treksLayer.getFullBounds.bind(treksLayer), {position: 'topright'}).addTo(map);
         $(window).trigger('map:ready', [map, 'main']);
     });
 
@@ -424,6 +432,7 @@ function mainmapInit(map, djoptions) {
         if (window.trekFilter.matching.length > 0) {
             treksLayer.showOnly(window.trekFilter.matching);
         }
+        map.fitBounds(treksLayer.getFullBounds());
     });
 
     // Filter list by map bounds
