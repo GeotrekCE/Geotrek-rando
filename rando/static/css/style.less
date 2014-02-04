@@ -95,6 +95,51 @@ a, input, button {
 @import "vendor/bootstrap/less/mixins.less";
 
 
+// Variables from defaults
+@backgroundDarker: darken(@backgroundColor, 10%);
+@backgroundLighter: lighten(@backgroundColor, 5%);
+
+@footerText: @white;
+@footerBackground: @backgroundColor;
+
+@headerBackground: @darkGray;
+
+@filtersBackground: @backgroundLighter;
+@filtersBorder: @backgroundDarker;
+@filtersText: @darkGray;
+@themesText: @gray;
+
+@slidersBackground: @backgroundDarker;
+@slidersValueBackground: @backgroundColor;
+
+@sidebarText: @darkGray;
+@sidebarBackground: fade(@backgroundLighter, 80%);
+@resultBorder: @backgroundDarker;
+@sidebarBorder: fade(@black, 20%);
+@sidebarTitle: @blackLighter;
+@sidebarHighlightBackground: @backgroundColor;
+
+@searchTextBackground: @white;
+@searchTextColor: @blackLighter;
+@searchTextBorder: @backgroundColor;
+
+@sidebarTabBackground: @backgroundColor;
+@sidebarTabBorder: @backgroundDarker;
+@sidebarTabText: darkGray;
+
+@captionBackground: fade(@black, 50%);
+@carouselBackground: fade(@black, 70%);
+
+@detailContentBackground: @backgroundColor;
+@detailContentBorder:  @backgroundDarker;
+@detailContentTitle: @blackLighter;
+
+@identityText: @gray;
+@altitudeProfileColor: @blackLighter;
+
+
+
+
 // Custom mixins
 .remove-callout(){
   -webkit-touch-callout: none;
@@ -219,7 +264,7 @@ header {
   .box-shadow(0 0 2px fade(@black, 10%));
 
   h1 {
-    color: @orange;
+    color: @mainColor;
     background: url(../img/icon-64.png) no-repeat;
     background-position-y: 50%;
     margin-left: 10px;
@@ -422,16 +467,19 @@ ul.row-footer {
   text-decoration: none;
 }
 
-
 #side-bar {
   position: absolute;
   top: 115px; /* header + search-bar */
   bottom: 0;
   z-index: 900; /* above map */
   width: 330px;
-  border-right: solid 2px @darkGray;
-  background-color: @backgroundColor;
+  border-right: solid 2px @sidebarBorder;
+  background-color: @sidebarBackground;
   min-height: 45px;
+
+  .badge-warning {
+    background-color: @mainColor;
+  }
 
   @media (min-width: @screen-lg) {
     top: 65px;
@@ -491,13 +539,13 @@ ul.row-footer {
   .border-radius(0);
   text-align: center;
   font-weight: bold;
-  color: @darkGray;
+  color: @sidebarTabText;
   background-repeat: no-repeat;
   background-position: 20px 50%;
   margin: 0px;
   height: 38px;
-  background-color: @backgroundColor;
-  border: solid 1px @backgroundDarker;
+  background-color: @sidebarTabBackground;
+  border: solid 1px @sidebarTabBorder;
   border-left: none;
   line-height: 19px;
   vertical-align: bottom;
@@ -520,7 +568,7 @@ ul.row-footer {
   left: 0px;
   right: 3%;
   top: 75px;
-  border-right: 1px solid @backgroundDarker;
+  border-right: 1px solid @sidebarBorder;
   padding-top: 1px;
   background-color: white;
   -webkit-overflow-scrolling: touch;
@@ -557,7 +605,7 @@ p.tab-content-empty {
   text-align: center;
   width: 100%;
   margin-top: 20px;
-  color: @darkGray;
+  color: @sidebarText;
 }
 
 .search {
@@ -569,20 +617,12 @@ p.tab-content-empty {
 .search label {
   text-align:center;
   font-weight: bold;
-  color: @blackLighter;
+  color: @searchTextColor;
   margin-top:15px;
 }
 
 .search .span4 {
   margin-top : 20px;
-}
-
-#side-bar .search1 .add-on {
-  border:none;
-  position:relative;
-  margin-left: -5px;
-  background: @darkGray;
-  border: 1px solid @darkGray;
 }
 
 .search input.span3 {
@@ -617,7 +657,7 @@ p.tab-content-empty {
       width: 100%;
       background: white;
       margin-bottom: 0;
-      border-color: @backgroundColor;
+      border-color: @searchTextBorder;
       line-height: 17px;
       padding: 4px 10px;
       .box-sizing(border-box);
@@ -629,14 +669,14 @@ p.tab-content-empty {
 
 
       &.active {
-        background-color: @white;
+        background-color: @searchTextBackground;
       }
 
       &:focus,
       &.focused {
-        color: @blackLighter;
-        text-shadow: 0 1px 0 @white;
-        background-color: @white;
+        color: @searchTextColor;
+        text-shadow: 0 1px 0 @searchTextBackground;
+        background-color: @searchTextBackground;
         border: 1px solid @mainColor;
         outline: 0;
         .box-shadow(0 0 3px @mainColor);
@@ -750,7 +790,7 @@ p.tab-content-empty {
 
 #themes, #usages {
   float: left;
-  color: @gray;
+  color: @themesText;
 
   ul {
     margin: 0;
@@ -810,16 +850,16 @@ html.no-webgl #toolbox a.view3d {
 
 #detail-content-top h2, .flatpage-content h2 {
  font-size: 2em;
- color: @blackLighter;
+ color: @detailContentTitle;
  text-transform:uppercase;
 }
 
 #detail-content-title {
   width: 98%;
   padding: 10px 1%;
-  background-color: @backgroundColor;
-  border-top: 1px solid @backgroundDarker;
-  border-bottom: 1px solid @backgroundDarker;
+  background-color: @detailContentBackground;
+  border-top: 1px solid @detailContentBorder;
+  border-bottom: 1px solid @detailContentBorder;
   margin-bottom: 18px;
 
   h2 {
@@ -917,7 +957,7 @@ p.teaser {
 
   p {
     margin-bottom: 0;
-    color: @gray;
+    color: @identityText;
     text-align: left;
   }
 
@@ -991,7 +1031,7 @@ p.teaser {
 
 
 #altitudegraph {
-  color: @orange;
+  color: @mainColor;
   font-size: 10px;
 
   p {
@@ -1010,7 +1050,7 @@ p.teaser {
 
   #mouseoverprofil {
     display: inline-block;
-    color: @blackLighter;
+    color: @altitudeProfileColor;
   }
 }
 
@@ -1039,7 +1079,7 @@ p.teaser {
   }
 
   .carousel-caption {
-    background: fade(@black, 70%);
+    background: @carouselBackground;
     padding: 7px;
 
     p {
@@ -1359,9 +1399,8 @@ p.teaser {
     min-height: 46px;
     width: 100%;
     border-right: none;
-    background-color: fade(@white, 80%);
-    border-bottom: 2px solid @backgroundDarker;
-    border-bottom: 2px solid fade(@black, 20%);
+    background-color: @sidebarBackground;
+    border-bottom: 2px solid @sidebarBorder;
     .remove-callout();
   }
 

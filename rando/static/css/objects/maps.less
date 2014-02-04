@@ -59,7 +59,7 @@
       border-radius: 999px;
       border-style: solid;
 
-      background-color: @orange;
+      background-color: @mainColor;
       background-image: url(../img/trek-icon.svg);
       background-repeat: no-repeat;
       background-position: 50% 50%;
@@ -71,7 +71,7 @@
       background-size: 28px;
 
       border-width: 2px;
-      border-color: @yellow;
+      border-color: @highlightColor;
 
         &.highlight {
           border-width: 4px;
@@ -203,11 +203,11 @@
     background-color: fade(@mainColor, 70%);
     border: 1px solid  @black;
     .border-radius(4px);
-    .box-shadow(0px 0px 7px 2px @yellow);
+    .box-shadow(0px 0px 7px 2px @highlightColor);
   }
 
   &.highlight img {
-    background-color: @yellow;
+    background-color: @highlightColor;
   }
 }
 

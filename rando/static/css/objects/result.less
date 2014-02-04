@@ -3,20 +3,20 @@
 }
 
 #side-bar .result:hover, .side-bar .result.active {
-  background-color: @backgroundColor;
+  background-color: @sidebarHighlightBackground;
 }
 
 #side-bar .result {
   clear: both;
-  border-bottom: solid 1px @backgroundDarker;
+  border-bottom: solid 1px @resultBorder;
   cursor: pointer;
   position: relative;
   padding: 5px;
 }
 
 #side-bar .result .illust {
-float: left;
-width: 32%;
+  float: left;
+  width: 32%;
 }
 
 #side-bar .result .info-result {
@@ -31,7 +31,7 @@ width: 32%;
 
 #side-bar .result .info-result h3 {
   font-size: 14px;
-  color: @blackLighter;
+  color: @sidebarTitle;
   line-height: 18px;
   margin-bottom: 4px;
   margin-top: 0px;
@@ -42,7 +42,7 @@ width: 32%;
 
 #side-bar .result .info-result p {
   margin:0;
-  color: @darkGray;
+  color: @sidebarText;
 }
 
 #backpack {
