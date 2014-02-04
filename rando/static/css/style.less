@@ -1,3 +1,86 @@
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+/* Mixins */
+
+// Mixins for LESS http://lesshat.com/
+@import "vendor/lesshat.less";
+
+// Bootstrap variables and mixins
+@import "vendor/bootstrap/less/variables.less";
+@import "vendor/bootstrap/less/mixins.less";
+
+// Custom mixins
+.remove-callout(){
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: fade(@black, 0%);;
+  -webkit-user-select: none;
+}
+
+.square-centered (@size) {
+    width: @size !important;
+    height: @size !important;
+    margin-left: -(@size / 2) !important;
+    margin-top: -(@size / 2) !important;
+}
+
+
+
+/* Variables for custom themes */
+@import "variables-default.less";
+
+@import "icon-font.less";
+
+
+// Variables from defaults
+@linkColor : @mainColor;
+@highlightBackground: lighten(@mainColor, 30%);
+
+@textColorDarker: darken(@textColor, 20%);
+@backgroundDarker: darken(@backgroundColor, 10%);
+@backgroundLighter: lighten(@backgroundColor, 5%);
+
+@footerText: @white;
+@footerBackground: @backgroundColor;
+
+@filtersBackground: @backgroundLighter;
+@filtersBorder: @backgroundDarker;
+@filtersText: @textColor;
+@themesText: @textColor;
+
+@slidersBackground: @backgroundDarker;
+@slidersValueBackground: @backgroundColor;
+
+@sidebarText: @textColor;
+@sidebarBackground: fade(@backgroundLighter, 80%);
+@resultBorder: @backgroundDarker;
+@sidebarBorder: fade(@black, 20%);
+@sidebarTitle: @textColorDarker;
+@sidebarHighlightBackground: @backgroundColor;
+
+@searchTextBackground: @white;
+@searchTextColor: @blackLighter;
+@searchTextBorder: @backgroundColor;
+
+@sidebarTabBackground: @backgroundColor;
+@sidebarTabBorder: @backgroundDarker;
+@sidebarTabText: @textColor;
+
+@captionBackground: fade(@black, 50%);
+@carouselBackground: fade(@black, 70%);
+
+@detailContentBackground: @backgroundColor;
+@detailContentBorder:  @backgroundDarker;
+@detailContentTitle: @blackLighter;
+@detailHeaderBackground: @darkGray;
+
+@identityText: @textColor;
+@altitudeProfileColor: @blackLighter;
+@accordionText: @textColor;
+@accordionTextHover: @linkColor;
+
+
 /*
  * HTML5 Boilerplate
  *
@@ -15,7 +98,7 @@ button,
 input,
 select,
 textarea {
-  color: @blackLighter;
+  color: @textColorDarker;
 }
 
 /*
@@ -81,84 +164,6 @@ a, input, button {
 
 
 
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
-
-/* Mixins */
-
-// Mixins for LESS http://lesshat.com/
-@import "vendor/lesshat.less";
-
-// Bootstrap variables and mixins
-@import "vendor/bootstrap/less/variables.less";
-@import "vendor/bootstrap/less/mixins.less";
-
-
-// Variables from defaults
-@backgroundDarker: darken(@backgroundColor, 10%);
-@backgroundLighter: lighten(@backgroundColor, 5%);
-
-@footerText: @white;
-@footerBackground: @backgroundColor;
-
-@headerBackground: @darkGray;
-
-@filtersBackground: @backgroundLighter;
-@filtersBorder: @backgroundDarker;
-@filtersText: @darkGray;
-@themesText: @gray;
-
-@slidersBackground: @backgroundDarker;
-@slidersValueBackground: @backgroundColor;
-
-@sidebarText: @darkGray;
-@sidebarBackground: fade(@backgroundLighter, 80%);
-@resultBorder: @backgroundDarker;
-@sidebarBorder: fade(@black, 20%);
-@sidebarTitle: @blackLighter;
-@sidebarHighlightBackground: @backgroundColor;
-
-@searchTextBackground: @white;
-@searchTextColor: @blackLighter;
-@searchTextBorder: @backgroundColor;
-
-@sidebarTabBackground: @backgroundColor;
-@sidebarTabBorder: @backgroundDarker;
-@sidebarTabText: darkGray;
-
-@captionBackground: fade(@black, 50%);
-@carouselBackground: fade(@black, 70%);
-
-@detailContentBackground: @backgroundColor;
-@detailContentBorder:  @backgroundDarker;
-@detailContentTitle: @blackLighter;
-
-@identityText: @gray;
-@altitudeProfileColor: @blackLighter;
-
-
-
-
-// Custom mixins
-.remove-callout(){
-  -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: fade(@black, 0%);;
-  -webkit-user-select: none;
-}
-
-.square-centered (@size) {
-    width: @size !important;
-    height: @size !important;
-    margin-left: -(@size / 2) !important;
-    margin-top: -(@size / 2) !important;
-}
-
-/* Variables for custom themes */
-@import "variables-default.less";
-
-@import "icon-font.less";
-
 /* Global */
 body, html {
   width: 100%;
@@ -166,7 +171,8 @@ body, html {
   position: relative;
   line-height: 1.4em;
   font-size: 13px;
-  background-color: white;
+  background-color: @backgroundLighter;
+  color: @textColorDarker;
   padding: 0;
 }
 
@@ -190,6 +196,7 @@ a {
 
   &.btn {
     text-decoration: none;
+    color: @textColorDarker;
   }
 
   &:hover {
@@ -210,7 +217,7 @@ a {
 }
 
 ::-webkit-scrollbar-thumb:vertical{
-  background-color: @darkGray;
+  background-color: @backgroundDarker;
   -webkit-border-radius:8px
 }
 
@@ -890,7 +897,7 @@ html.no-webgl #toolbox a.view3d {
   }
 
   h4 {
-    background-color: @headerBackground;
+    background-color: @detailHeaderBackground;
     text-align: center;
     color: white;
     width: 100%;
@@ -1181,7 +1188,7 @@ p.teaser {
 .accordion-toggle  {
   cursor: pointer;
   position: relative;
-  color: @textColor;
+  color: @accordionText;
   text-decoration:none;
 
   &:before {
@@ -1194,10 +1201,10 @@ p.teaser {
   }
 
   &.collapsed {
-    color: @gray;
+    color: @accordionText;
 
     &:hover {
-      color: darken(@linkColor, 20%);
+      color: @accordionTextHover;
     }
 
     &:before {

@@ -1,69 +1,3 @@
-/*
- * HTML5 Boilerplate
- *
- * What follows is the result of much research on cross-browser styling.
- * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
- * Kroc Camen, and the H5BP dev community and team.
- */
-/* ==========================================================================
-   Base styles: opinionated defaults
-   ========================================================================== */
-html,
-button,
-input,
-select,
-textarea {
-  color: #4d4d4d;
-}
-/*
- * Remove text-shadow in selection highlight: h5bp.com/i
- * These selection rule sets have to be separate.
- * Customize the background color to match your design.
- */
-::-moz-selection {
-  background: #b3d4fc;
-  text-shadow: none;
-}
-::selection {
-  background: #b3d4fc;
-  text-shadow: none;
-}
-/*
- * A better looking default horizontal rule
- */
-hr {
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid #d7ddcf;
-  margin: 1em 0;
-  padding: 0;
-}
-/*
- * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
- */
-img {
-  vertical-align: middle;
-}
-/*
- * Remove default fieldset styles.
- */
-fieldset {
-  border: 0;
-  margin: 0;
-  padding: 0;
-}
-/*
- * Allow only vertical resizing of textareas.
- */
-textarea {
-  resize: vertical;
-}
-a,
-input,
-button {
-  -ms-touch-action: none !important;
-}
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
@@ -239,6 +173,72 @@ button {
 .icon-park-center:before {
   content: "E";
 }
+/*
+ * HTML5 Boilerplate
+ *
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+html,
+button,
+input,
+select,
+textarea {
+  color: #534d51;
+}
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+::-moz-selection {
+  background: #fdd49a;
+  text-shadow: none;
+}
+::selection {
+  background: #fdd49a;
+  text-shadow: none;
+}
+/*
+ * A better looking default horizontal rule
+ */
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #d7ddcf;
+  margin: 1em 0;
+  padding: 0;
+}
+/*
+ * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
+ */
+img {
+  vertical-align: middle;
+}
+/*
+ * Remove default fieldset styles.
+ */
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+/*
+ * Allow only vertical resizing of textareas.
+ */
+textarea {
+  resize: vertical;
+}
+a,
+input,
+button {
+  -ms-touch-action: none !important;
+}
 /* Global */
 body,
 html {
@@ -247,7 +247,8 @@ html {
   position: relative;
   line-height: 1.4em;
   font-size: 13px;
-  background-color: white;
+  background-color: #fcfdfc;
+  color: #534d51;
   padding: 0;
 }
 h1,
@@ -266,7 +267,7 @@ h4 {
   font-size: 14px;
 }
 a {
-  color: #5db9d6;
+  color: #f89406;
   -webkit-transition: color 100ms;
   -moz-transition: color 100ms;
   -o-transition: color 100ms;
@@ -275,9 +276,10 @@ a {
 }
 a.btn {
   text-decoration: none;
+  color: #534d51;
 }
 a:hover {
-  color: #2986a4;
+  color: #945904;
   text-decoration: none;
 }
 ::-webkit-scrollbar {
@@ -290,7 +292,7 @@ a:hover {
   -webkit-border-bottom-left-radius: 0;
 }
 ::-webkit-scrollbar-thumb:vertical {
-  background-color: #999095;
+  background-color: #d7ddcf;
   -webkit-border-radius: 8px;
 }
 /*
@@ -329,7 +331,7 @@ a:hover {
 * Chosen override
 */
 .chzn-container-active .chzn-choices {
-  border: 1px solid #999095;
+  border: 1px solid #877f84;
 }
 .chzn-container .chzn-results {
   max-height: 190px;
@@ -356,7 +358,7 @@ a:hover {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  color: #999095;
+  color: #877f84;
   padding: 5px;
   padding-left: 10px;
   background: #fcfdfc;
@@ -425,7 +427,7 @@ a:hover {
   width: 20px;
 }
 .filters-bar #filters-actions span {
-  color: #999095;
+  color: #877f84;
   font-weight: bold;
 }
 .filter,
@@ -710,7 +712,6 @@ a:hover {
 }
 #global-share {
   position: absolute;
-  color: black;
   padding-left: 5px;
   top: 26px;
   right: 10px;
@@ -791,7 +792,7 @@ ul.social-buttons li {
 }
 #side-bar .result .info-result h3 {
   font-size: 14px;
-  color: #4d4d4d;
+  color: #534d51;
   line-height: 18px;
   margin-bottom: 4px;
   margin-top: 0px;
@@ -801,7 +802,7 @@ ul.social-buttons li {
 }
 #side-bar .result .info-result p {
   margin: 0;
-  color: #999095;
+  color: #877f84;
 }
 #backpack {
   overflow: hidden;
@@ -1022,6 +1023,7 @@ ul.social-buttons li {
   position: absolute;
   bottom: 30px;
   right: 15px;
+  color: #f89406;
 }
 .leaflet-popup-content p.popupdetail a:before {
   position: absolute;
@@ -1409,7 +1411,7 @@ header #lang-switch {
   border-radius: 0;
   text-align: center;
   font-weight: bold;
-  color: darkGray;
+  color: #877f84;
   background-repeat: no-repeat;
   background-position: 20px 50%;
   margin: 0px;
@@ -1462,7 +1464,7 @@ p.tab-content-empty {
   text-align: center;
   width: 100%;
   margin-top: 20px;
-  color: #999095;
+  color: #877f84;
 }
 .search {
   width: 30%;
@@ -1638,7 +1640,7 @@ p.tab-content-empty {
 #themes,
 #usages {
   float: left;
-  color: #555555;
+  color: #877f84;
 }
 #themes ul,
 #usages ul {
@@ -1722,7 +1724,7 @@ html.no-webgl #toolbox a.view3d {
   margin-top: 20px;
 }
 .detail-content h4 {
-  background-color: #999095;
+  background-color: #877f84;
   text-align: center;
   color: white;
   width: 100%;
@@ -1774,7 +1776,7 @@ p.teaser {
 }
 #trek-identity p {
   margin-bottom: 0;
-  color: #555555;
+  color: #877f84;
   text-align: left;
 }
 #trek-identity span.value {
@@ -1961,7 +1963,7 @@ p.teaser {
 .accordion-toggle {
   cursor: pointer;
   position: relative;
-  color: #333333;
+  color: #877f84;
   text-decoration: none;
 }
 .accordion-toggle:before {
@@ -1972,10 +1974,10 @@ p.teaser {
   font-size: 22px;
 }
 .accordion-toggle.collapsed {
-  color: #555555;
+  color: #877f84;
 }
 .accordion-toggle.collapsed:hover {
-  color: #2986a4;
+  color: #f89406;
 }
 .accordion-toggle.collapsed:before {
   content: "w";
