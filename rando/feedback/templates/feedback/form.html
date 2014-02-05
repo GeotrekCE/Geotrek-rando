@@ -1,0 +1,8 @@
+
+{% load i18n localeurl_tags %}
+
+<form id="feedback-form" method="POST" action='{% locale_url request.LANGUAGE_CODE "feedback:feedback_view" %}'>
+    {{ form.as_p }}
+    <button class="cancel">{% trans "Cancel" %}</button>
+    <button type="submit">{% trans "Send" %}</button>
+</form>
