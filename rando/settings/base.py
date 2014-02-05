@@ -144,6 +144,7 @@ INSTALLED_APPS = (
     'rando.trekking',
     'rando.view3d',
     'rando.flatpages',
+    'rando.feedback',
 )
 
 if TEST:
@@ -243,3 +244,6 @@ VIEW3D_ENABLED = True
 GANALYTICS_TRACKING_CODE = 'UA-XXXXXXXX-XX'
 
 COORDS_FORMAT_PRECISION = 5
+
+# Enabling feedback form on trek detail page
+FEEDBACK_FORM_ENABLED = True

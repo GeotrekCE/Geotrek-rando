@@ -128,6 +128,8 @@ class TrekView(PJAXResponseMixin, BaseTrekView):
 
         context['PRINT_ENABLED'] = settings.PRINT_ENABLED
         context['VIEW3D_ENABLED'] = settings.VIEW3D_ENABLED
+        context['FEEDBACK_FORM_ENABLED'] = settings.FEEDBACK_FORM_ENABLED
+
         return context
 
 
