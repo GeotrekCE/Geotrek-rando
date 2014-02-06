@@ -135,6 +135,10 @@
         <script src="{% static "js/filter.js" %}"></script>
         <script src="{% static "js/backpack.js" %}"></script>
         <script src="{% static "js/map.js" %}"></script>
+
+        {% if FEEDBACK_FORM_ENABLED %}
+        <script src="{% static "feedback/form.popup.js" %}"></script>
+        {% endif %}
         {% if FILTERS_HASH_ENABLED %}
         <script src="{% static "js/filter-hash.js" %}"></script>
         {% endif %}
@@ -162,5 +166,14 @@
                 </div>
             </div>
         {% endif %}
+
+        {% if FEEDBACK_FORM_ENABLED %}
+        <div id="popup-feedback" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="popup-feedback" aria-hidden="true" data-url="{% locale_url request.LANGUAGE_CODE "feedback:feedback_view" %}">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+        </div>
+        {% endif %}
+
     </body>
 </html>
