@@ -1,0 +1,6 @@
+{% load i18n %}
+{% blocktrans %}{{name}} has sent a feedback on category {{category}}.{% endblocktrans %}
+{% if user_comment %}
+{% blocktrans %}Comment : {{user_comment}}{% endblocktrans %}
+{% endif %}
+
