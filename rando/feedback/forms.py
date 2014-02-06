@@ -16,4 +16,5 @@ class FeedBackForm(forms.Form):
     email = forms.EmailField(max_length=200)
     category = forms.ChoiceField(categories)
 
-    comment = forms.CharField(required=False, widget=Textarea())
+    comment = forms.CharField(required=False,
+                              widget=Textarea(attrs={'rows': 2}))

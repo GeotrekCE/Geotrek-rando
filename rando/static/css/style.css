@@ -1686,6 +1686,7 @@ p.tab-content-empty {
 }
 #toolbox a.backpack,
 #toolbox a.download,
+#toolbox a.feedback,
 #toolbox #btn-print {
   margin-top: 5px;
 }
