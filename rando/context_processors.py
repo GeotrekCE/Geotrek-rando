@@ -20,13 +20,14 @@ def settings(request):
         'POPUP_HOME_ENABLED': settings_.POPUP_HOME_ENABLED,
         'POPUP_FILENAME': settings_.POPUP_FILENAME,
         'FOOTER_FILENAME': settings_.FOOTER_FILENAME,
-        'settings' : app_settings,
+        'FEEDBACK_FORM_ENABLED': settings_.FEEDBACK_FORM_ENABLED,
+        'settings': app_settings,
     }
 
 
 def pjax(request):
     return {
-         # We need this to put <title> in DOM
+        # We need this to put <title> in DOM
         'pjax': request.META.get('HTTP_X_PJAX', False),
     }
 

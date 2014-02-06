@@ -302,7 +302,6 @@ a:hover {
 .popover {
   z-index: 9999;
   /* Above map, above everything ! */
-
 }
 .label,
 .badge {
@@ -707,6 +706,15 @@ a:hover {
 @media (max-width: 767px) {
   .modal-backdrop {
     display: none!important;
+  }
+}
+@media (min-width: 950px) {
+  #popup-feedback {
+    width: 900px;
+    height: 500px;
+    margin-left: -450px;
+    left: 50%;
+    right: auto;
   }
 }
 #global-share {
@@ -1338,11 +1346,9 @@ header #lang-switch {
   position: absolute;
   top: 115px;
   /* header + search-bar */
-
   bottom: 0;
   z-index: 900;
   /* above map */
-
   width: 330px;
   border-right: solid 2px #877e82;
   background-color: #F6F7F1;
@@ -2104,9 +2110,6 @@ p.teaser {
   #flatpages ul li .btn {
     color: #333333 !important;
     background: none !important;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
     box-shadow: none !important;
@@ -2371,9 +2374,6 @@ p.teaser {
   #fake-search-tabs {
     display: none;
   }
-}
-@media (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
-  
 }
 /* ==========================================================================
    Helper classes

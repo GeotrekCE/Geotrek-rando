@@ -26,9 +26,9 @@
       <div id="toolbox" class="btn-toolbar pull-right">
 
         {% if FEEDBACK_FORM_ENABLED %}
-          <a class="btn feedback" href="{% locale_url request.LANGUAGE_CODE "feedback:feedback_view" %}" title="{% trans "Feedback" %}">
+          <a class="btn feedback" href="#" title="{% trans "Feedback" %}">
           {% trans "Feedback" %}
-        </a>
+          </a>
         {% endif %}
 
         <a class="btn backpack icon-backpack-add" href="#" data-id="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}">
