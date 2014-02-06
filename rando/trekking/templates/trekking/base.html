@@ -137,6 +137,7 @@
         <script src="{% static "js/map.js" %}"></script>
 
         {% if FEEDBACK_FORM_ENABLED %}
+        <script src="{% static "feedback/ajaxcsrf.js" %}"></script>
         <script src="{% static "feedback/form.popup.js" %}"></script>
         {% endif %}
         {% if FILTERS_HASH_ENABLED %}
