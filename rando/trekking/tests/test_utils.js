@@ -9,6 +9,14 @@ module.exports = (function() {
         casper.options.onTimeout = function() {
             casper.die('Timed out after 60 seconds.', 1);
         };
+
+        casper.on('page.error', function(msg, trace) {
+            this.echo("Error: " + msg, "ERROR");
+            for(var i=0; i<trace.length; i++) {
+                var step = trace[i];
+                this.echo('   ' + step.file + ' (line ' + step.line + ')', "ERROR");
+            }
+        });
     }
 
     function clearLocalStorage () {
