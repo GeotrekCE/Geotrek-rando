@@ -346,5 +346,7 @@ class Command(BaseCommand):
     help = 'Synchronize data from a Geotrek server'
 
     def handle(self, *args, **options):
+        self.stdout.ending = None
+        self.stderr.ending = None
         syncsession = SyncSession(self)
         syncsession.sync()
