@@ -11,7 +11,7 @@
 */
 
 .chzn-container-active .chzn-choices {
-  border: 1px solid #AAA;
+  border: 1px solid @darkGray;
 }
 
 .chzn-container .chzn-results {
@@ -41,12 +41,12 @@
   top: 0;
   z-index: 901;
  .box-sizing(border-box);
-  color: #9e969a;
+  color: @filtersText;
   padding: 5px;
   padding-left: 10px;
-  background: #f8f8f8;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  background: @filtersBackground;
+  border-top: 1px solid @filtersBorder;
+  border-bottom: 1px solid @filtersBorder;
 
   @media (min-width: @screen-lg) {
     height: 65px;
@@ -72,7 +72,7 @@
 
     .active {
       color: @mainColor;
-      text-shadow: 0px 0px 2px #ffff00;
+      text-shadow: 0px 0px 2px @highlightColor;
     }
   }
 
@@ -116,7 +116,7 @@
     }
 
     span {
-      color: #9e969a;
+      color: @filtersText;
       font-weight: bold;
     }
   }
@@ -137,7 +137,7 @@
 .ui-slider {
   border: none;
   height: 8px;
-  background: #E4E2E2;
+  background: @slidersBackground;
 
   .ui-slider-range {
     background: @mainColor;
@@ -148,7 +148,7 @@
     border: none;
     outline: none;
     cursor: pointer;
-    .box-shadow(0px 0px 0px 3px rgba(0,0,0,0.3));
+    .box-shadow(0px 0px 0px 3px fade(@black, 50%));
     background: white;
     width: 8px;
     height: 8px;
@@ -190,7 +190,7 @@
     display: block;
     width: 1px;
     height: 8px;
-    background: #f3f2f2;
+    background: @slidersValueBackground;
     position: absolute;
     top: -9px;
     left: 50%;
@@ -261,7 +261,7 @@
 #advanced-filters {
   padding: 5px 5px 0px 5px;
   float: left;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: fade(@white, 50%);
   margin-top: 6px;
 
   @media (max-width: 1540px) {
@@ -283,7 +283,7 @@
   .filter-bloc {
     display: inline-block;
     vertical-align: top;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: fade(@white, 50%);
   }
 
   select {
