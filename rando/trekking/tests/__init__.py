@@ -167,3 +167,6 @@ class NavigationTest(CasperTestCase):
 
     def test_filters_hash(self):
         self.assertTrue(self.casper(self._get_tests_file('test_filters_hash.js')))
+
+    def test_view3d(self):
+        self.assertTrue(self.casper(self._get_tests_file('test_view3d.js')))
