@@ -147,6 +147,17 @@ class TrekFulltextTest(SimpleTestCase):
 class NavigationTest(CasperTestCase):
     no_colors = False
 
+    def setUp(self):
+        # Make sure there is no persistent localstorage
+        try:
+            phantom_localstorage = os.path.join(os.path.expanduser('~'),
+                                                '.qws', 'share', 'data',
+                                                'Ofi Labs', 'PhantomJS',
+                                                'http_localhost_8081.localstorage')
+            os.remove(phantom_localstorage)
+        except OSError:
+            pass
+
     def _get_tests_file(self, name):
         return os.path.join(settings.PROJECT_PATH, 'trekking', 'tests', name)
 
