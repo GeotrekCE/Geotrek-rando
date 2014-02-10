@@ -18,3 +18,6 @@ class FeedBackForm(forms.Form):
 
     comment = forms.CharField(required=False,
                               widget=Textarea(attrs={'rows': 2}))
+
+    latitude = forms.FloatField(required=False)
+    longitude = forms.FloatField(required=False)

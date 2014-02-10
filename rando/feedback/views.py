@@ -37,6 +37,8 @@ class FeedBackView(FormView):
                 email=form.cleaned_data['email'],
                 category=dict(form.fields['category'].choices)[category_val],
                 user_comment=form.cleaned_data['comment'],
+                latitude=form.cleaned_data['latitude'],
+                longitude=form.cleaned_data['longitude'],
             )
 
             # Send mail to administrator
