@@ -22,7 +22,7 @@ deploy: bin/python
 	bin/python ./manage.py collectstatic --clear --noinput
 
 test: bin/python
-	bin/python ./manage.py test trekking flatpages
+	bin/python ./manage.py test trekking flatpages view3d
 
 clean:
 	rm -rf src/ bin/ lib/ build/ dist/ *.egg-info/ include/ local/
