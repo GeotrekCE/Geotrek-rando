@@ -28,22 +28,22 @@ class FeedBackView(FormView):
 
     def form_valid(self, form):
 
+        category_val = form.cleaned_data['category']
+        data = dict(
+            name=form.cleaned_data['name'],
+            email=form.cleaned_data['email'],
+            category=dict(form.fields['category'].choices)[category_val],
+            user_comment=form.cleaned_data['comment'],
+            latitude=form.cleaned_data['latitude'],
+            longitude=form.cleaned_data['longitude'],
+        )
+
+        # Send mail to administrator
+        self._send_mail(**data)
+
         if not self.request.is_ajax():
             return super(FeedBackView, self).form_valid(form)
         else:
-            category_val = form.cleaned_data['category']
-            data = dict(
-                name=form.cleaned_data['name'],
-                email=form.cleaned_data['email'],
-                category=dict(form.fields['category'].choices)[category_val],
-                user_comment=form.cleaned_data['comment'],
-                latitude=form.cleaned_data['latitude'],
-                longitude=form.cleaned_data['longitude'],
-            )
-
-            # Send mail to administrator
-            self._send_mail(**data)
-
             response = {'status': 'OK'}
             return HttpResponse(json.dumps(response),
                                 content_type='application/json')
