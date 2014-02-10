@@ -1,17 +1,29 @@
+# -*- coding: utf8 -*-
 
+import json
+
+from django.core import mail
 from django.test import TestCase
 
 
-class FeedBackFormValidationTests(TestCase):
+class FeedBackBaseTests(TestCase):
 
     def setUp(self):
 
         self.feedback_url = '/fr/feedback/'
 
+    def ajax_post(self, url, data, **kwargs):
+
+        kwargs['HTTP_X_REQUESTED_WITH'] = "XMLHttpRequest"
+
+        return self.client.post(url, data, **kwargs)
+
+
+class FeedBackFormValidationTests(FeedBackBaseTests):
+
     def test_form_url(self):
 
         response = self.client.get(self.feedback_url)
-
         self.assertContains(response, 'name')
         self.assertContains(response, 'email')
         self.assertContains(response, 'category')
@@ -23,17 +35,52 @@ class FeedBackFormValidationTests(TestCase):
 
         form_data_nok = {'name': 'Patrick'}
 
-        response = self.client.post(self.feedback_url, form_data_nok,
-                                    HTTP_X_REQUESTED_WITH="XMLHttpRequest")
-        self.assertContains(response, 'status')
-        self.assertContains(response, 'NOK')
-        self.assertContains(response, 'data')
+        response = self.ajax_post(self.feedback_url, form_data_nok)
+
+        result = json.loads(response.content)
+        self.assertEquals(result['status'], 'NOK')
+        self.assertIn('data', result.keys())
 
     def test_ajax_post_valid(self):
 
-        form_data_ok = {'name': 'Patrick', 'email': 'pat@makina.com'}
+        form_data_ok = {'name': 'Patrick',
+                        'email': 'pat@makina.com',
+                        'category': u'SR'}
 
-        response = self.client.post(self.feedback_url, form_data_ok,
-                                    HTTP_X_REQUESTED_WITH="XMLHttpRequest")
-        self.assertContains(response, 'status')
-        self.assertContains(response, 'OK')
+        response = self.ajax_post(self.feedback_url, form_data_ok)
+
+        result = json.loads(response.content)
+        self.assertEquals(result['status'], 'OK')
+
+
+class FeedBackEmailSendingTests(FeedBackBaseTests):
+
+    def test_sending_email(self):
+
+        form_data_ok = {
+            'name': u'Patrick',
+            'email': u'pat@makina.com',
+            'category': u'SR',
+            'comment': u'This is a comment',
+            'latitude': 1.13,
+            'longitude': 2.26
+        }
+
+        # Sending feedback demand, which send a mail if form is OK
+        response = self.ajax_post(self.feedback_url, form_data_ok)
+
+        result = json.loads(response.content)
+        self.assertEqual(result['status'], 'OK')
+
+        # Checking that a mail has been sent
+        self.assertEquals(len(mail.outbox), 1)
+        sent_mail = mail.outbox[0]
+
+        self.assertEquals(sent_mail.subject, u'Feedback from pat@makina.com')
+
+        self.assertIn(u"Patrick has sent a feedback on category Senior.",
+                      sent_mail.body)
+        self.assertIn(u"Comment : This is a comment",
+                      sent_mail.body)
+        self.assertIn(u"Lat : 1,13 / Lon : 2,26",
+                      sent_mail.body)
