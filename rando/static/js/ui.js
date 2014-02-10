@@ -268,7 +268,10 @@ function view_detail() {
     $("#mainmap").hide();  // We are elsewhere
 
     if (!MOBILE) {
-        loadmapdetailmap();
+        if (typeof(loadmapdetailmap) == "function") {
+            // Detail map is not present on flatpages
+            loadmapdetailmap();
+        }
     }
     else {
         $('#detailmap #staticmap').removeClass('hidden');
