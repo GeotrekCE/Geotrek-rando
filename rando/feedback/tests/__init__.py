@@ -1,6 +1,7 @@
 # -*- coding: utf8 -*-
 
 import json
+import os
 
 from django.core import mail
 from django.test import TestCase
@@ -12,11 +13,19 @@ class FeedBackBaseTests(TestCase):
 
         self.feedback_url = '/fr/feedback/'
 
+        # This env variable must be used for form validation
+        # We just have to put "recaptcha_response_field" field to 'PASSED'
+        # to validate feedback form
+        os.environ['RECAPTCHA_TESTING'] = 'True'
+
     def ajax_post(self, url, data, **kwargs):
 
         kwargs['HTTP_X_REQUESTED_WITH'] = "XMLHttpRequest"
 
         return self.client.post(url, data, **kwargs)
+
+    def tearDown(self):
+        os.environ.pop('RECAPTCHA_TESTING', None)
 
 
 class FeedBackFormValidationTests(FeedBackBaseTests):
@@ -41,11 +50,29 @@ class FeedBackFormValidationTests(FeedBackBaseTests):
         self.assertEquals(result['status'], 'NOK')
         self.assertIn('data', result.keys())
 
+    def test_ajax_post_recaptcha_not_valid(self):
+
+        form_data_nok = {
+            'name': 'Patrick',
+            'email': 'pat@makina.com',
+            'category': u'SR',
+        }
+
+        response = self.ajax_post(self.feedback_url, form_data_nok)
+
+        result = json.loads(response.content)
+        self.assertEquals(result['status'], 'NOK')
+
     def test_ajax_post_valid(self):
 
-        form_data_ok = {'name': 'Patrick',
-                        'email': 'pat@makina.com',
-                        'category': u'SR'}
+        form_data_ok = {
+            'name': 'Patrick',
+            'email': 'pat@makina.com',
+            'category': u'SR',
+            # This value 'PASSED' is a django-recaptcha default value
+            # only usable in TEST env to validate form
+            'recaptcha_response_field': 'PASSED',
+        }
 
         response = self.ajax_post(self.feedback_url, form_data_ok)
 
@@ -63,7 +90,10 @@ class FeedBackEmailSendingTests(FeedBackBaseTests):
             'category': u'SR',
             'comment': u'This is a comment',
             'latitude': 1.13,
-            'longitude': 2.26
+            'longitude': 2.26,
+            # This value 'PASSED' is a django-recaptcha default value
+            # only usable in TEST env to validate form
+            'recaptcha_response_field': 'PASSED',
         }
 
         # Sending feedback demand, which send a mail if form is OK
