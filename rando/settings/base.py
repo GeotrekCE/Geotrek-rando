@@ -145,6 +145,7 @@ INSTALLED_APPS = (
     'rando.view3d',
     'rando.flatpages',
     'rando.feedback',
+    'captcha',
 )
 
 if TEST:
@@ -245,5 +246,21 @@ GANALYTICS_TRACKING_CODE = 'UA-XXXXXXXX-XX'
 
 COORDS_FORMAT_PRECISION = 5
 
+###
+# FEEDBACK APP CONFIG PART
+
 # Enabling feedback form on trek detail page
 FEEDBACK_FORM_ENABLED = True
+
+# RECAPTCHA settings to use google captcha service in feedback form
+RECAPTCHA_PUBLIC_KEY = '6Ldrbu4SAAAAALJ0NMX0LBK-UAE8u5wJT5zrb5Uo'
+RECAPTCHA_PRIVATE_KEY = '6Ldrbu4SAAAAAPbt5g3Vw2BA_LGL1-BZwaBSsnfz'
+RECAPTCHA_USE_SSL = False
+CAPTCHA_AJAX = True
+
+# TEMP EMAIL CONFIG
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# END FEEDBACK APP CONFIG PART
+###
+
