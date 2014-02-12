@@ -1,5 +1,7 @@
 # -*- coding: utf8 -*-
 
+from captcha.fields import ReCaptchaField
+
 from django import forms
 from django.forms.widgets import Textarea
 
@@ -21,3 +23,5 @@ class FeedBackForm(forms.Form):
 
     latitude = forms.FloatField(required=False)
     longitude = forms.FloatField(required=False)
+
+    captcha = ReCaptchaField()
