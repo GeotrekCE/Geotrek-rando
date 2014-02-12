@@ -1,7 +1,7 @@
 window.ALTIMETRIC_PROFILE_OPTIONS = L.Util.extend({
     fillColor: '#FFD1A1',
     lineColor: '#F77E00',
-    lineWidth: 3,
+    lineWidth: 3
 }, window.ALTIMETRIC_PROFILE_OPTIONS || {});
 
 window.TREK_LAYER_OPTIONS = L.Util.extend({

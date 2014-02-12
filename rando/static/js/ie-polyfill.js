@@ -19,6 +19,7 @@
         };
     }
 
+
     if (!Array.prototype.some) {
       Array.prototype.some = function(fun /*, thisArg */) {
         'use strict';
