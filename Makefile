@@ -3,6 +3,7 @@ install: bin/python
 bin/python:
 	virtualenv .
 	bin/python setup.py develop
+	bin/python pip install -r requirements.pip
 
 sync: bin/python
 	bin/python ./manage.py sync_trekking

@@ -1,1 +1,1 @@
--e git://github.com/zalew/django-recaptcha.git@a870781adfd9ca381eaf408445ff5a7091e57ebf#egg=captcha
+-e git://github.com/Natsu-/django-recaptcha.git@ajax_form_options_html_fix#egg=django-recaptcha
