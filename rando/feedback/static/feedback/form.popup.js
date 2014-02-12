@@ -1,34 +1,3 @@
-// using jQuery
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie != '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-var csrftoken = getCookie('csrftoken');
-
-function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}
-
-$.ajaxSetup({
-    crossDomain: false, // obviates need for sameOrigin test
-    beforeSend: function(xhr, settings) {
-        if (!csrfSafeMethod(settings.type)) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        }
-    }
-});
 
 $(window).on("view:detail", function (e) {
 
@@ -52,21 +21,17 @@ $(window).on("view:detail", function (e) {
 
         event.preventDefault();
 
-        var nameValue = $('#feedback-form [name="name"]').val();
-        var emailValue = $('#feedback-form [name="email"]').val();
-        var categoryValue = $('#feedback-form [name="category"]').val();
-        var commentValue = $('#feedback-form [name="comment"]').val();
-
-        var postValues = {'name': nameValue,
-                          'email': emailValue,
-                          'category': categoryValue,
-                          'comment': commentValue}
+        // Getting each form standard input/select/... values
+        var postValues = $('#feedback-form').serialize();
 
         $.post(feedbackUrl, postValues, function(data) {
             if (data['status'] == 'NOK') {
+                // If form is not valid, we display form with according errors
                 $('#popup-feedback .modal-body form').replaceWith(data['data']);
             }
             else {
+                // Form is valid, we close the popup
+                // FIXME: find a way to tell user that email has been correctly sent ?
                 $("#popup-feedback").modal('hide');
             }
         });
