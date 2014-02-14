@@ -16,6 +16,7 @@ install_requires = [
     'easydict == 1.4',
     'django_compressor == 1.3',
     'django-ganalytics == 0.2',
+    'django-recaptcha == 0.0.9',
 ]
 
 
