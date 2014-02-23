@@ -3,8 +3,58 @@
 
 <form id="feedback-form" method="POST" action='{% locale_url request.LANGUAGE_CODE "feedback:feedback_view" %}'>
     {% csrf_token %}
-    {{ form.as_p }}
 
-    <button class="btn" data-dismiss="modal">{% trans "Cancel" %}</button>
-    <button type="submit" class="btn btn-primary">{% trans "Send" %}</button>
+    {{ form.non_field_errors}}
+    <div class="container-fluid">
+
+        <div class="row-fluid">
+
+            <div class="left-side span7">
+
+                <div id="map">
+                </div>
+
+                <div class="map-fields">
+                    <label for="id_{{ form.latitude.label}}">{{ form.latitude.label }}</label>
+                    {{ form.latitude }}
+                    {{ form.latitude.errors }}
+
+                    <label for="id_{{ form.longitude.label}}">{{ form.longitude.label }}</label>
+                    {{ form.longitude }}
+                    {{ form.longitude.errors }}
+                </div>
+            </div>
+            <div class="right-side span5">
+
+                <label for="id_{{ form.name.label}}">{{ form.name.label }}</label>
+                {{ form.name }}
+                {{ form.name.errors }}
+
+                <label for="id_{{ form.email.label}}">{{ form.email.label }}</label>
+                {{ form.email }}
+                {{ form.email.errors }}              
+
+                <label for="id_{{ form.category.label}}">{{ form.category.label }}</label>
+                {{ form.category }}
+                {{ form.category.errors }}
+
+                <label for="id_{{ form.comment.label}}">{{ form.comment.label }}</label>
+                {{ form.comment }}
+                {{ form.comment.errors }}
+
+                {% comment %}<label for="id_{{ form.comment.label}}">{{ form.comment.label }}</label>
+                {{ form.captcha }}
+                {{ form.captcha.errors }} {% endcomment %}
+
+                <div class="actions">
+                    <button class="btn" data-dismiss="modal">{% trans "Cancel" %}</button>
+                    <button type="submit" class="btn btn-primary">{% trans "Send" %}</button>
+                <div>        
+
+            </div>
+
+        </div>
+    </div>
+
+
 </form>
