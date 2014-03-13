@@ -42,9 +42,9 @@
                 {{ form.comment }}
                 {{ form.comment.errors }}
 
-                {% comment %}<label for="id_{{ form.comment.label}}">{{ form.comment.label }}</label>
+                <label for="id_{{ form.captcha.label}}">{{ form.captcha.label }}</label>
                 {{ form.captcha }}
-                {{ form.captcha.errors }} {% endcomment %}
+                {{ form.captcha.errors }}
 
                 <div class="actions">
                     <button class="btn" data-dismiss="modal">{% trans "Cancel" %}</button>
