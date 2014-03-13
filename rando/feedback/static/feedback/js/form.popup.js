@@ -3,15 +3,18 @@ $(window).on("view:detail", function (e) {
 
     var feedbackUrl = $("#popup-feedback").data('url');
 
-    $('.feedback').on('click', function(event) {
+    $('a.feedback').on('click', function(event) {
 
         event.preventDefault();
+
+        var slug = $(this).data('slug'),
+            url = feedbackUrl.replace('empty', slug);
 
         $('#popup-feedback').on('hidden', function () {
             $(this).find('form').remove();
         });
 
-        $.get(feedbackUrl, function(data) {
+        $.get(url, function(data) {
             $('#popup-feedback .modal-body').append(data);
             $("#popup-feedback").modal('show');
         });
