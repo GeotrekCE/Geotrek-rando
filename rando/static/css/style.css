@@ -1048,28 +1048,33 @@ ul.social-buttons li {
 .leaflet-popup-content img:hover {
   opacity: 0.7;
 }
-#detailmap {
+#detailmap,
+#feedbackmap {
   min-height: 400px;
 }
-#detailmap:-webkit-full-screen {
+#detailmap:-webkit-full-screen,
+#feedbackmap:-webkit-full-screen {
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
-#detailmap:-moz-full-screen {
+#detailmap:-moz-full-screen,
+#feedbackmap:-moz-full-screen {
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
-#detailmap:full-screen {
+#detailmap:full-screen,
+#feedbackmap:full-screen {
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
-#detailmap .helpclic {
+#detailmap .helpclic,
+#feedbackmap .helpclic {
   color: #ffffff;
   z-index: 5;
   bottom: 0px;
