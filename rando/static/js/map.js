@@ -620,40 +620,6 @@ function detailmapInit(map, bounds) {
     }
 }
 
-function initializeMarkerIfLatLon(layerGroup) {
-
-    var lat = $('#feedback-form [name="latitude"]').val();
-    var lng = $('#feedback-form [name="longitude"]').val();
-
-    if (lat && lng) {
-        new_marker = L.marker([lat, lng]).addTo(layerGroup);
-    }
-}
-
-function feedbackmapInit(map, bounds) {
-
-    var layerGroup = L.layerGroup().addTo(map);
-
-    // If lat/lng form inputs have values, initializing map with according markup
-    initializeMarkerIfLatLon(layerGroup);
-
-    map.on('click', function(e) {
-
-        // Cleaning layer group to display only one marker
-        layerGroup.clearLayers();
-
-        var lat = e.latlng.lat;
-        var lng = e.latlng.lng;
-
-        new_marker = L.marker([lat, lng]).addTo(layerGroup);
-
-        // Updating form lat/long fields according to marker position
-        $('#feedback-form [name="latitude"]').val(lat);
-        $('#feedback-form [name="longitude"]').val(lng);
-    });
-
-    detailmapInit(map, bounds);
-}
 
 function initDetailTrekMap(map, trekGeoJson) {
     // Trek
