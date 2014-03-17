@@ -1,7 +1,7 @@
 
 {% load i18n localeurl_tags leaflet_tags %}
 
-<form id="feedback-form" method="POST" action='{% locale_url request.LANGUAGE_CODE "feedback:feedback_view" "empty" %}'>
+<form id="feedback-form" method="POST" action='{% locale_url request.LANGUAGE_CODE "feedback:feedback_view" %}'>
     
     {% csrf_token %}
 
@@ -12,12 +12,10 @@
 
             <div class="left-side span7">
 
-                <div id="feedbackmap" data-poi-url="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" trek.properties.poi_layer %}">
-                <img id="staticmap" class="hidden" src="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" trek.properties.map_image_url %}"/>
+                <div id="feedbackmap">
                 <div class="helpclic"><p>{% trans "Clic for map interaction" %}</p></div>
                 </div>
-                {% leaflet_map 'feedbackmap' fitextent=False creatediv=False callback="detailmapInit" loadevent="rando:foo" %}
-                {# Such loadevent will prevent automatic map initialization #}
+                {% leaflet_map 'feedbackmap' fitextent=False creatediv=False callback="detailmapInit" %}
 
                 <div class="map-fields">
                     <label for="id_{{ form.latitude.label}}">{{ form.latitude.label }}</label>
@@ -60,10 +58,4 @@
 
         </div>
     </div>
-
-
 </form>
-
-<script>
-    loadmapfeedbackmap();
-</script>

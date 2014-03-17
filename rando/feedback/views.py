@@ -3,49 +3,14 @@
 import json
 
 from django.core.mail import send_mail
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView
 from .forms import FeedBackForm
-from rando.trekking.views import TrekView
-from rando.trekking.models import Trek
 
 
-class LeafletView(TrekView):
-    template_name = 'feedback/leaflet_geotrek.html'
-
-
-class TrekContextMixin(object):
-
-    def get_object(self):
-        slug = self.kwargs.get('slug', None)
-        lang = self.request.LANGUAGE_CODE
-        for trek in Trek.objects.filter(language=lang).all():
-            if trek.properties.slug == slug:
-                return trek
-        raise Http404
-
-    def get_context_data(self, **kwargs):
-        obj = self.get_object()
-        context = super(TrekContextMixin, self).get_context_data(**kwargs)
-        context['trek'] = obj
-        context['thumbnail'] = self.request.build_absolute_uri(
-            obj.properties.thumbnail)
-
-        pois = obj.pois.all()
-        context['pois'] = pois
-
-        # Merge pictures of trek and POIs
-        all_pictures = obj.properties.pictures
-        for poi in pois:
-            all_pictures.extend(poi.properties.pictures)
-        context['all_pictures'] = all_pictures
-
-        return context
-
-
-class FeedBackView(TrekContextMixin, FormView):
+class FeedBackView(FormView):
 
     template_name = 'feedback/form.html'
     mail_template_name = 'feedback/mail_template.html'
