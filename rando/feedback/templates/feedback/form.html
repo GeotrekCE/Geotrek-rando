@@ -13,9 +13,9 @@
             <div class="left-side span7">
 
                 <div id="feedbackmap">
-                <div class="helpclic"><p>{% trans "Clic for map interaction" %}</p></div>
+                <div class="helpclic"><p>{% trans "You can click to mark a place" %}</p></div>
                 </div>
-                {% leaflet_map 'feedbackmap' fitextent=False creatediv=False callback="detailmapInit" %}
+                {% leaflet_map 'feedbackmap' fitextent=False creatediv=False callback="feedbackmapInit" %}
 
                 <div class="map-fields">
                     <label for="id_{{ form.latitude.label}}">{{ form.latitude.label }}</label>
