@@ -1,30 +1,4 @@
 
-$(window).on('map:init', function(e) {
-
-    var detail = e.originalEvent ?
-                 e.originalEvent.detail : e.detail;
-    var map = detail.map;
-
-    var layerGroup = L.layerGroup().addTo(map);
-
-    map.on('click', function(e) {
-
-        // Cleaning layer group to display only one marker
-        layerGroup.clearLayers();
-
-        var lat = e.latlng.lat;
-        var lng = e.latlng.lng;
-
-        new_marker = L.marker([lat, lng], {
-            draggable: true}).addTo(layerGroup);
-
-        // Updating form lat/long fields according to marker position
-        $('#feedback-form [name="latitude"]').val(lat);
-        $('#feedback-form [name="longitude"]').val(lng);
-    });
-});
-
-
 $(window).on("view:detail", function (e) {
 
     var feedbackUrl = $("#popup-feedback").data('url');
@@ -41,6 +15,7 @@ $(window).on("view:detail", function (e) {
             $('#popup-feedback .modal-body').append(data);
             var $popup = $("#popup-feedback");
             $popup.on('shown', function () {
+                // Loading manually feedback map when popup is visible
                 loadmapfeedbackmap();
             });
             $popup.modal('show');
@@ -58,6 +33,9 @@ $(window).on("view:detail", function (e) {
             if (data['status'] == 'NOK') {
                 // If form is not valid, we display form with according errors
                 $('#popup-feedback .modal-body form').replaceWith(data['data']);
+
+                // Reloading manually feedback map, needed by newly replaced markup
+                loadmapfeedbackmap();
             }
             else {
                 // Form is valid, we close the popup
