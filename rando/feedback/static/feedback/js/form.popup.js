@@ -7,16 +7,17 @@ $(window).on("view:detail", function (e) {
 
         event.preventDefault();
 
-        var slug = $(this).data('slug'),
-            url = feedbackUrl.replace('empty', slug);
-
         $('#popup-feedback').on('hidden', function () {
             $(this).find('form').remove();
         });
 
-        $.get(url, function(data) {
+        $.get(feedbackUrl, function(data) {
             $('#popup-feedback .modal-body').append(data);
-            $("#popup-feedback").modal('show');
+            var $popup = $("#popup-feedback");
+            $popup.on('shown', function () {
+                loadmapfeedbackmap();
+            });
+            $popup.modal('show');
         });
     });
 
