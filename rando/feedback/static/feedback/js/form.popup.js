@@ -1,4 +1,30 @@
 
+$(window).on('map:init', function(e) {
+
+    var detail = e.originalEvent ?
+                 e.originalEvent.detail : e.detail;
+    var map = detail.map;
+
+    var layerGroup = L.layerGroup().addTo(map);
+
+    map.on('click', function(e) {
+
+        // Cleaning layer group to display only one marker
+        layerGroup.clearLayers();
+
+        var lat = e.latlng.lat;
+        var lng = e.latlng.lng;
+
+        new_marker = L.marker([lat, lng], {
+            draggable: true}).addTo(layerGroup);
+
+        // Updating form lat/long fields according to marker position
+        $('#feedback-form [name="latitude"]').val(lat);
+        $('#feedback-form [name="longitude"]').val(lng);
+    });
+});
+
+
 $(window).on("view:detail", function (e) {
 
     var feedbackUrl = $("#popup-feedback").data('url');
