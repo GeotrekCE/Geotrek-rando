@@ -1,4 +1,57 @@
 
+
+function initializeMarkerIfLatLon(layerGroup) {
+
+    var lat = $('#feedback-form [name="latitude"]').val();
+    var lng = $('#feedback-form [name="longitude"]').val();
+
+    if (lat && lng) {
+        new_marker = L.marker([lat, lng]).addTo(layerGroup);
+    }
+}
+
+function listenLatLngFields(layerGroup) {
+
+    $('#feedback-form [name="latitude"], #feedback-form [name="longitude"]').on('focusout', function() {
+        layerGroup.clearLayers();
+        initializeMarkerIfLatLon(layerGroup);
+    });
+
+}
+
+function feedbackmapInit(map, bounds) {
+
+    var layerGroup = L.layerGroup().addTo(map);
+
+    // If lat/lng form inputs have values, initializing map with according markup
+    initializeMarkerIfLatLon(layerGroup);
+
+    // Updating marker position (on 'focusout' event) if user edits input fields
+    listenLatLngFields(layerGroup);
+
+    map.on('click', function(e) {
+
+        // Cleaning layer group to display only one marker
+        layerGroup.clearLayers();
+
+        var lat = e.latlng.lat;
+        var lng = e.latlng.lng;
+
+        new_marker = L.marker([lat, lng]).addTo(layerGroup);
+        new_marker.on('click', function() {
+            layerGroup.removeLayer(this);
+            $('#feedback-form [name="latitude"]').val('');
+            $('#feedback-form [name="longitude"]').val('');
+        });
+
+        // Updating form lat/long fields according to marker position
+        $('#feedback-form [name="latitude"]').val(lat);
+        $('#feedback-form [name="longitude"]').val(lng);
+    });
+
+    detailmapInit(map, bounds);
+}
+
 $(window).on("view:detail", function (e) {
 
     var feedbackUrl = $("#popup-feedback").data('url');
