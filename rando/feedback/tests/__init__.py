@@ -2,6 +2,7 @@
 import json
 import os
 
+from django.conf import settings
 from django.core import mail
 from django.test import TestCase
 
@@ -10,7 +11,9 @@ class FeedBackBaseTests(TestCase):
 
     def setUp(self):
 
-        self.feedback_url = '/fr/feedback/'
+        self.feedback_url = '/en/feedback/'
+
+        self.first_category = settings.FEEDBACK_FORM_CATEGORIES['en'][0]
 
         # This env variable must be used for form validation
         # We just have to put "recaptcha_response_field" field to 'PASSED'
@@ -67,7 +70,8 @@ class FeedBackFormValidationTests(FeedBackBaseTests):
         form_data_ok = {
             'name': 'Patrick',
             'email': 'pat@makina.com',
-            'category': u'SR',
+            'category': self.first_category[0],
+            'comment': u'This is a comment',
             # This value 'PASSED' is a django-recaptcha default value
             # only usable in TEST env to validate form
             'recaptcha_response_field': 'PASSED',
@@ -86,7 +90,7 @@ class FeedBackEmailSendingTests(FeedBackBaseTests):
         form_data_ok = {
             'name': u'Patrick',
             'email': u'pat@makina.com',
-            'category': u'SR',
+            'category': self.first_category[0],
             'comment': u'This is a comment',
             'latitude': 1.13,
             'longitude': 2.26,
@@ -107,9 +111,12 @@ class FeedBackEmailSendingTests(FeedBackBaseTests):
 
         self.assertEquals(sent_mail.subject, u'Feedback from pat@makina.com')
 
-        self.assertIn(u"Patrick has sent a feedback on category Senior.",
-                      sent_mail.body)
+        settings.FEEDBACK_FORM_CATEGORIES['en'][0][0]
+
+        txt = u"Patrick has sent a feedback on category "
+        txt += self.first_category[1]
+        self.assertIn(txt, sent_mail.body)
         self.assertIn(u"Comment : This is a comment",
                       sent_mail.body)
-        self.assertIn(u"Lat : 1,13 / Lon : 2,26",
+        self.assertIn(u"Lat : 1.13 / Lon : 2.26",
                       sent_mail.body)
