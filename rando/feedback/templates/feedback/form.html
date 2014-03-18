@@ -10,7 +10,7 @@
 
         <div class="row-fluid">
 
-            <div class="left-side span7">
+            <div class="left-side span6">
 
                 <div id="feedbackmap">
                 <div class="helpclic"><p>{% trans "You can click to mark a place" %}</p></div>
@@ -18,41 +18,76 @@
                 {% leaflet_map 'feedbackmap' fitextent=False creatediv=False callback="feedbackmapInit" %}
 
                 <div class="map-fields">
-                    <label for="id_{{ form.latitude.label}}">{{ form.latitude.label }}</label>
-                    {{ form.latitude }}
-                    {{ form.latitude.errors }}
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <label for="id_{{ form.latitude.label}}">{{ form.latitude.label }}</label>
+                            {{ form.latitude }}
+                            {{ form.latitude.errors }}
+                        </div>
 
-                    <label for="id_{{ form.longitude.label}}">{{ form.longitude.label }}</label>
-                    {{ form.longitude }}
-                    {{ form.longitude.errors }}
+                        <div class="span6">
+                            <label for="id_{{ form.longitude.label}}">{{ form.longitude.label }}</label>
+                            {{ form.longitude }}
+                            {{ form.longitude.errors }}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="right-side span5">
+            <div class="right-side span6">
 
-                <label for="id_{{ form.name.label}}">{{ form.name.label }}</label>
-                {{ form.name }}
-                {{ form.name.errors }}
+                <div>
+                    <h5>{% trans "You can contact our team to tell us any problem on this trek." %}</h5>
+                </div>
 
-                <label for="id_{{ form.email.label}}">{{ form.email.label }}</label>
-                {{ form.email }}
-                {{ form.email.errors }}              
+                <div class="field-wrapper row-fluid">
+                    <div class="span3">
+                        <label for="id_{{ form.name.label}}" class="mandatory">{{ form.name.label }}</label>
+                    </div>
+                    <div class="span9">
+                    {{ form.name }}
+                    </div>
+                    {{ form.name.errors }}
+                </div>
 
-                <label for="id_{{ form.category.label}}">{{ form.category.label }}</label>
-                {{ form.category }}
-                {{ form.category.errors }}
+                <div class="field-wrapper row-fluid">
+                    <div class="span3">
+                        <label for="id_{{ form.email.label}}" class="mandatory">{{ form.email.label }}</label>
+                    </div>
+                    <div class="span9">
+                        {{ form.email }}
+                    </div>
+                    {{ form.email.errors }}
+                </div>
 
-                <label for="id_{{ form.comment.label}}">{{ form.comment.label }}</label>
-                {{ form.comment }}
-                {{ form.comment.errors }}
+                <div class="field-wrapper row-fluid">
+                    <div class="span3">
+                        <label for="id_{{ form.category.label}}" class="mandatory">{{ form.category.label }}</label>
+                    </div>
+                    <div class="span9">
+                        {{ form.category }}
+                    </div>
+                    {{ form.category.errors }}
+                </div>
 
-                <label for="id_{{ form.captcha.label}}">{{ form.captcha.label }}</label>
-                {{ form.captcha }}
-                {{ form.captcha.errors }}
+                <div class="field-wrapper row-fluid">
+                    <div class="span3">
+                        <label for="id_{{ form.comment.label}}" class="mandatory">{{ form.comment.label }}</label>
+                    </div>
+                    <div class="span9">
+                        {{ form.comment }}
+                    </div>
+                    {{ form.comment.errors }}
+                </div>
 
-                <div class="actions">
-                    <button class="btn" data-dismiss="modal">{% trans "Cancel" %}</button>
-                    <button type="submit" class="btn btn-primary">{% trans "Send" %}</button>
-                <div>        
+                <div class="field-wrapper row-fluid">
+                    <div class="span3">
+                        <label for="id_{{ form.captcha.label}}" class="mandatory">{{ form.captcha.label }}</label>
+                    </div>
+                    <div class="span9">
+                        {{ form.captcha }}
+                    </div>
+                    {{ form.captcha.errors }}
+                </div>
 
             </div>
 
