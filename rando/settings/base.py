@@ -259,11 +259,24 @@ FEEDBACK_FORM_ENABLED = True
 # RECAPTCHA settings to use google captcha service in feedback form
 RECAPTCHA_PUBLIC_KEY = '6Ldrbu4SAAAAALJ0NMX0LBK-UAE8u5wJT5zrb5Uo'
 RECAPTCHA_PRIVATE_KEY = '6Ldrbu4SAAAAAPbt5g3Vw2BA_LGL1-BZwaBSsnfz'
+
 RECAPTCHA_USE_SSL = False
 CAPTCHA_AJAX = True
 
-# TEMP EMAIL CONFIG
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL CONFIG
+
+# Temporary email config, for testing purpose only
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# Real email settings
+SERVER_EMAIL = 'admin@yourdomainname'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+
+# Auth on email sending, if any
+# EMAIL_HOST_USER = johndoe
+# EMAIL_HOST_PASSWORD = johndoepwd
 
 FEEDBACK_FORM_CATEGORIES = {
     'en': (('obs', u'Obstacle'),
