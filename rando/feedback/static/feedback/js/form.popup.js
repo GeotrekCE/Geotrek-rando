@@ -12,7 +12,7 @@ function initializeMarkerIfLatLon(layerGroup) {
 
 function listenLatLngFields(layerGroup) {
 
-    $('#feedback-form [name="latitude"], #feedback-form [name="longitude"]').on('focusout', function() {
+    $('#feedback-form [name="latitude"], #feedback-form [name="longitude"]').on('change', function() {
         layerGroup.clearLayers();
         initializeMarkerIfLatLon(layerGroup);
     });
