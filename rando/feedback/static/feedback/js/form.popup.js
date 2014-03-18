@@ -19,6 +19,7 @@ function listenLatLngFields(layerGroup) {
 
 }
 
+
 function feedbackmapInit(map, bounds) {
 
     var layerGroup = L.layerGroup().addTo(map);
@@ -47,6 +48,11 @@ function feedbackmapInit(map, bounds) {
         // Updating form lat/long fields according to marker position
         $('#feedback-form [name="latitude"]').val(lat);
         $('#feedback-form [name="longitude"]').val(lng);
+
+    });
+
+    map.on('load', function(e) {
+        $('#feedbackmap').addClass('ready');
     });
 
     detailmapInit(map, bounds);
