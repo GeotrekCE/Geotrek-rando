@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-18 11:42+0100\n"
+"POT-Creation-Date: 2014-03-18 12:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,7 +54,8 @@ msgid "Captcha"
 msgstr ""
 
 #: views.py:20
-msgid "Feedback from {email}"
+#, fuzzy
+msgid "Feedback from {name}"
 msgstr "Signalement d'un problème par {email}"
 
 #: templates/feedback/form.html:16
@@ -68,9 +69,9 @@ msgstr ""
 "signaler un problème avec cet itinéraire."
 
 #: templates/feedback/mail_template.html:3
-#, python-format
-msgid "%(name)s has sent a feedback on category %(category)s."
-msgstr "%(name)s a signalé un problème dans la catégorie %(category)s."
+#, fuzzy, python-format
+msgid "%(name)s (%(email)s) has sent a feedback on category %(category)s."
+msgstr "%(name)s (%(email)s) a signalé un problème dans la catégorie %(category)s."
 
 #: templates/feedback/mail_template.html:4
 #, python-format
@@ -81,4 +82,4 @@ msgstr "Son commentaire est le suivant : %(user_comment)s"
 #, python-format
 msgid "Lat : %(latitude)s / Lon : %(longitude)s"
 msgstr ""
-"Son positionnement a été précisé :  (Lat %(latitude)s / Lon %(longitude)s)"
+"Son positionnement a été précisé : (Lat %(latitude)s / Lon %(longitude)s)"
