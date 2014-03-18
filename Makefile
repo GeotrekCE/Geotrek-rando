@@ -9,7 +9,7 @@ sync: bin/python
 	touch var/input/media/style.css
 
 serve: bin/python
-	bin/python ./manage.py runserver 8888
+	bin/python ./manage.py runserver 0.0.0.0:8888
 
 deploy: bin/python
 	bin/python setup.py install
@@ -29,3 +29,12 @@ clean:
 ping_google:
 	bin/python ./manage.py ping_google $(url)/sitemap.xml
 
+generate-msg:
+	(cd rando/trekking && ../../manage.py makemessages -a)
+	(cd rando/feedback && ../../manage.py makemessages -a)
+
+compile-msg:
+	(cd rando/trekking && ../../manage.py compilemessages)
+	(cd rando/feedback && ../../manage.py compilemessages)
+
+msg: generate-msg compile-msg
