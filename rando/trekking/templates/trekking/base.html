@@ -171,9 +171,16 @@
 
         {% if FEEDBACK_FORM_ENABLED %}
         <div id="popup-feedback" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="popup-feedback" aria-hidden="true" data-url="{% locale_url request.LANGUAGE_CODE "feedback:feedback_view" %}">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Feedback</h4>
             </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+                <button class="btn btn-primary" type="submit">{% trans "Send" %}</button>
+          </div>
         </div>
         {% endif %}
 
