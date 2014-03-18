@@ -2,9 +2,26 @@
 import json
 import os
 
+from casper.tests import CasperTestCase
+
 from django.conf import settings
 from django.core import mail
 from django.test import TestCase
+from django.test.utils import override_settings
+
+TESTS_DATA_PATH = os.path.join(os.path.dirname(__file__), 'data')
+
+
+@override_settings(INPUT_DATA_ROOT=TESTS_DATA_PATH,
+                   MEDIA_ROOT=os.path.join(TESTS_DATA_PATH, 'media'),
+                   POPUP_HOME_ENABLED=False)
+class FeedBackPickPlaceTests(CasperTestCase):
+
+    def _get_tests_file(self, name):
+        return os.path.join(settings.PROJECT_PATH, 'feedback', 'tests', name)
+
+    def test_popup(self):
+        self.assertTrue(self.casper(self._get_tests_file('test_pickplace.js')))
 
 
 class FeedBackBaseTests(TestCase):
