@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
+
 import os
 import sys
 
@@ -265,14 +266,14 @@ CAPTCHA_AJAX = True
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 FEEDBACK_FORM_CATEGORIES = {
-    'en': (('obs', 'Obstacle'),
-           ('sign', 'Sign'),
-           ('markers', 'Markers'),
-           ('other', 'Other')),
-    'fr': (('obs', 'Obstacle'),
-           ('sign', 'Signalétique'),
-           ('markers', 'Marquage'),
-           ('other', 'Autre')),
+    'en': (('obs', u'Obstacle'),
+           ('sign', u'Sign'),
+           ('markers', u'Markers'),
+           ('other', u'Other')),
+    'fr': (('obs', u'Obstacle'),
+           ('sign', u'Signalétique'),
+           ('markers', u'Marquage'),
+           ('other', u'Autre')),
 }
 # END FEEDBACK APP CONFIG PART
 ###

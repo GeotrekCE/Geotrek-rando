@@ -1,0 +1,84 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-03-18 11:42+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: forms.py:18
+msgid "Name"
+msgstr "Nom"
+
+#: forms.py:19
+msgid "Email"
+msgstr "Courriel"
+
+#: forms.py:20
+msgid "Category"
+msgstr "Catégorie"
+
+#: forms.py:24
+msgid "Description of your problem"
+msgstr ""
+"Nous vous invitons à préciser les informations qui nous permettrons de "
+"comprendre la nature du problème et sa localisation (balisage, signalétique, "
+"effondrement, végétation non entretenue, conflit,...)"
+
+#: forms.py:25
+msgid "Description"
+msgstr "Description"
+
+#: forms.py:27
+msgid "Lat"
+msgstr ""
+
+#: forms.py:28
+msgid "Lng"
+msgstr ""
+
+#: forms.py:30
+msgid "Captcha"
+msgstr ""
+
+#: views.py:20
+msgid "Feedback from {email}"
+msgstr "Signalement d'un problème par {email}"
+
+#: templates/feedback/form.html:16
+msgid "You can click to mark a place"
+msgstr "Cliquer pour définir l'emplacement"
+
+#: templates/feedback/form.html:39
+msgid "You can contact our team to tell us any problem on this trek."
+msgstr ""
+"Grâce à ce formulaire, il vous est possible de contacter nos équipes pour "
+"signaler un problème avec cet itinéraire."
+
+#: templates/feedback/mail_template.html:3
+#, python-format
+msgid "%(name)s has sent a feedback on category %(category)s."
+msgstr "%(name)s a signalé un problème dans la catégorie %(category)s."
+
+#: templates/feedback/mail_template.html:4
+#, python-format
+msgid "Comment : %(user_comment)s"
+msgstr "Son commentaire est le suivant : %(user_comment)s"
+
+#: templates/feedback/mail_template.html:5
+#, python-format
+msgid "Lat : %(latitude)s / Lon : %(longitude)s"
+msgstr ""
+"Son positionnement a été précisé :  (Lat %(latitude)s / Lon %(longitude)s)"

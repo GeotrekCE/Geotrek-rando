@@ -1,4 +1,3 @@
-# -*- coding: utf8 -*-
 
 from captcha.fields import ReCaptchaField
 
