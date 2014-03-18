@@ -1,7 +1,7 @@
 
 import json
 
-from django.core.mail import send_mail
+from django.core.mail import mail_managers
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
@@ -17,13 +17,11 @@ class FeedBackView(FormView):
 
     def _send_mail(self, **kwargs):
 
-        subject = _(u'Feedback from {email}').format(email=kwargs['email'])
+        subject = _(u'Feedback from {name}').format(name=kwargs['name'])
         message = render_to_string(
             self.mail_template_name, kwargs)
 
-        from_mail = 'from@example.com'
-        to_mail = ['to@example.com']
-        send_mail(subject, message, from_mail, to_mail, fail_silently=False)
+        mail_managers(subject, message, fail_silently=False)
 
     def form_valid(self, form):
 
