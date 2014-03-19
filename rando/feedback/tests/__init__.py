@@ -61,7 +61,7 @@ class FeedBackFormValidationTests(FeedBackBaseTests):
 
     def test_ajax_post_not_valid(self):
 
-        form_data_nok = {'name': 'Patrick'}
+        form_data_nok = {'name': 'John Doe'}
 
         response = self.ajax_post(self.feedback_url, form_data_nok)
 
@@ -72,8 +72,8 @@ class FeedBackFormValidationTests(FeedBackBaseTests):
     def test_ajax_post_recaptcha_not_valid(self):
 
         form_data_nok = {
-            'name': 'Patrick',
-            'email': 'pat@makina.com',
+            'name': 'John Doe',
+            'email': 'john.doe@nowhere.com',
             'category': u'SR',
         }
 
@@ -85,8 +85,8 @@ class FeedBackFormValidationTests(FeedBackBaseTests):
     def test_ajax_post_valid(self):
 
         form_data_ok = {
-            'name': 'Patrick',
-            'email': 'pat@makina.com',
+            'name': 'John Doe',
+            'email': 'john.doe@nowhere.com',
             'category': self.first_category[0],
             'comment': u'This is a comment',
             # This value 'PASSED' is a django-recaptcha default value
@@ -105,8 +105,8 @@ class FeedBackEmailSendingTests(FeedBackBaseTests):
     def test_sending_email(self):
 
         form_data_ok = {
-            'name': u'Patrick',
-            'email': u'pat@makina.com',
+            'name': u'John Doe',
+            'email': u'john.doe@nowhere.com',
             'category': self.first_category[0],
             'comment': u'This is a comment',
             'latitude': 1.13,
@@ -126,11 +126,13 @@ class FeedBackEmailSendingTests(FeedBackBaseTests):
         self.assertEquals(len(mail.outbox), 1)
         sent_mail = mail.outbox[0]
 
-        self.assertEquals(sent_mail.subject, u'Feedback from pat@makina.com')
+        self.assertEquals(sent_mail.subject,
+                          u'[Django] Feedback from John Doe')
 
         settings.FEEDBACK_FORM_CATEGORIES['en'][0][0]
 
-        txt = u"Patrick has sent a feedback on category "
+        txt = (u"John Doe (john.doe@nowhere.com) has sent a feedback "
+               "on category ")
         txt += self.first_category[1]
         self.assertIn(txt, sent_mail.body)
         self.assertIn(u"Comment : This is a comment",

@@ -1,5 +1,4 @@
 
-
 function initializeMarkerIfLatLon(layerGroup) {
 
     var lat = $('#feedback-form [name="latitude"]').val();
@@ -19,8 +18,7 @@ function listenLatLngFields(layerGroup) {
 
 }
 
-
-function feedbackmapInit(map, bounds) {
+function feedbackmapMarkerInit(map, bounds) {
 
     var layerGroup = L.layerGroup().addTo(map);
 
@@ -49,14 +47,48 @@ function feedbackmapInit(map, bounds) {
         $('#feedback-form [name="latitude"]').val(lat);
         $('#feedback-form [name="longitude"]').val(lng);
 
+        $('.helpclic').hide();
     });
-
-    map.on('load', function(e) {
-        $('#feedbackmap').addClass('ready');
-    });
-
-    detailmapInit(map, bounds);
 }
+
+
+function feedbackmapInit(map, bounds) {
+
+    // Minimize minimap by default
+    map.on('viewreset', function () {
+        map.minimapcontrol._minimize();
+    });
+
+    var trekGeoJson = JSON.parse(document.getElementById('trek-geojson').innerHTML);
+    var trekLayer = initDetailTrekMap(map, trekGeoJson);
+    var wholeBounds = trekLayer.getBounds();
+    map.fitBounds(wholeBounds);
+
+    map.whenReady(function () {
+
+        if (map.layerscontrol) map.removeControl(map.layerscontrol);
+
+        new L.Control.ResetView(getWholeBounds, {position: 'topright'}).addTo(map);
+        map.addControl(new L.Control.Scale({imperial: false, position: 'bottomright'}));
+
+        $(map._container).css('cursor','pointer');
+
+        // Doing some init on marker management
+        feedbackmapMarkerInit(map, bounds);
+
+        $(window).trigger('map:ready', [map, 'detail']);
+
+        // Adding class on map DOM when ready
+        // Useful for integration tests (CasperJS or others...)
+        $('#feedbackmap').addClass('ready');
+
+    });
+
+    function getWholeBounds() {
+        return wholeBounds;
+    }
+}
+
 
 $(window).on("view:detail", function (e) {
 
