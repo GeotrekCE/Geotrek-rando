@@ -8,14 +8,12 @@ casper.test.begin('We can mark a place on feedback form', function(test) {
 
     casper.start(home_url, function () {
         // On DOM ready.
-        casper.capture('test.png');
         test.assertExists('#results #trek-2851 a.btn.search',
                           'Trek detail is present.');
         casper.click('#results #trek-2851 a.btn.search');
     });
 
     casper.waitForSelector('.detail-content', function() {
-        casper.capture('detail.png');
         test.assertExists('.detail-content a.btn.feedback',
                           'we can add a feedback for this trek');
         casper.click('.detail-content a.btn.feedback');
@@ -33,7 +31,6 @@ casper.test.begin('We can mark a place on feedback form', function(test) {
         test.assertExists('#feedback-form [name="email"]', 'There is an email field');
         test.assertExists('#feedback-form [name="category"]', 'There is a category field');
         test.assertExists('#feedback-form [name="comment"]', 'There is a comment field');
-        //test.assertExists('#feedback-form [name="recaptcha_response_field"]', 'There is a captcha field');
     });
 
     // Waiting leaflet map loading
