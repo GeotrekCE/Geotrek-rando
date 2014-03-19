@@ -173,6 +173,12 @@
 .icon-park-center:before {
   content: "E";
 }
+.icon-backpack-add:before {
+  content: "d";
+}
+.icon-feedback:before {
+  content: "F";
+}
 /*
  * HTML5 Boilerplate
  *
@@ -1707,7 +1713,8 @@ p.tab-content-empty {
 }
 #toolbox a.print,
 #toolbox a.backpack,
-#toolbox a.download {
+#toolbox a.download,
+#toolbox a.feedback {
   position: relative;
   padding-left: 30px;
   vertical-align: top;
