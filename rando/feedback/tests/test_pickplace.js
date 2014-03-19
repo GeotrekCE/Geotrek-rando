@@ -36,7 +36,7 @@ casper.test.begin('We can mark a place on feedback form', function(test) {
     // Waiting leaflet map loading
     casper.waitForSelector('#feedbackmap.ready', function() {
         
-        // This is a little trick : to distinguish default map marker than dynamic clicked one
+        // This is a little trick : to distinguish default map marker from dynamic clicked one
         // we add a class on map loaded ones...
         casper.evaluate(function() {
             $('#feedbackmap .leaflet-marker-icon').addClass('default-loaded-marker');
@@ -52,9 +52,25 @@ casper.test.begin('We can mark a place on feedback form', function(test) {
         var latitude = this.getFormValues('#feedback-form').latitude;
         var longitude = this.getFormValues('#feedback-form').longitude;
         
-        // Checking delta between 2 lat/lng positions
+        // Checking that lat/lng fields have been updated
         this.test.assertEquals(latitude != '', true);
         this.test.assertEquals(longitude != '', true);
+    });
+
+    // Testing that click on marker...
+    casper.then(function() {
+        casper.click('#feedbackmap .leaflet-marker-icon:not(.default-loaded-marker)');
+    });
+
+    // ... remove this marker...
+    casper.waitWhileVisible('#feedbackmap .leaflet-marker-icon:not(.default-loaded-marker)', function() {
+
+        // ... and reset lat/lng fields !
+        var latitude = this.getFormValues('#feedback-form').latitude;
+        var longitude = this.getFormValues('#feedback-form').longitude;
+
+        this.test.assertEquals(latitude, '');
+        this.test.assertEquals(longitude, '');
     });
 
     utils.done(test);
