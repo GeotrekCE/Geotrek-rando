@@ -18,10 +18,11 @@ deploy: bin/python
 	mkdir -p var/input/media
 	mkdir -p var/input/media/pages
 	touch var/input/media/style.css
+	cp -n rando/settings/prod.py.sample rando/settings/prod.py
 	bin/python ./manage.py collectstatic --clear --noinput
 
 test: bin/python
-	bin/python ./manage.py test trekking flatpages
+	bin/python ./manage.py test trekking flatpages view3d
 
 clean:
 	rm -rf src/ bin/ lib/ build/ dist/ *.egg-info/ include/ local/

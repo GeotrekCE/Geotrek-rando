@@ -1,3 +1,4 @@
+from django.conf import settings
 from .models import Trek, Settings
 
 
@@ -10,5 +11,9 @@ def main(request):
 
     return {
         'treks_url': Trek.filepath,
-        'map_extent': extent
+        'map_extent': extent,
+
+        'PRINT_ENABLED': settings.PRINT_ENABLED,
+        'VIEW3D_ENABLED': settings.VIEW3D_ENABLED,
+        'FEEDBACK_FORM_ENABLED': settings.FEEDBACK_FORM_ENABLED,
     }
