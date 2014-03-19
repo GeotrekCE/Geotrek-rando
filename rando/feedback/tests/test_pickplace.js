@@ -1,6 +1,7 @@
-var utils = require('./test_utils.js');
 
-utils.setUp();
+// Needed to have visible popups
+casper.options.viewportSize = {width: 1280, height: 768};
+
 
 casper.test.begin('We can mark a place on feedback form', function(test) {
 
@@ -73,5 +74,7 @@ casper.test.begin('We can mark a place on feedback form', function(test) {
         this.test.assertEquals(longitude, '');
     });
 
-    utils.done(test);
+    casper.run(function () {
+        test.done();
+    });
 });
