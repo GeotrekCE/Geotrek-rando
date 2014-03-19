@@ -9,11 +9,9 @@ from django.utils.translation import get_language, ugettext_lazy as _
 
 class FeedBackForm(forms.Form):
 
-    categories = (
-        ('SO', 'Sophomore'),
-        ('JR', 'Junior'),
-        ('SR', 'Senior'),
-    )
+    # Categories will be initialized in __init__ method
+    # to be dynamically language-dependant
+    categories = ()
 
     name = forms.CharField(max_length=200, label=_('Name'))
     email = forms.EmailField(max_length=200, label=_('Email'))
