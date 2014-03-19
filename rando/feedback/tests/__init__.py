@@ -6,6 +6,7 @@ from casper.tests import CasperTestCase
 
 from django.conf import settings
 from django.core import mail
+from django.core.mail.backends.base import BaseEmailBackend
 from django.test import TestCase
 from django.test.utils import override_settings
 
@@ -66,7 +67,7 @@ class FeedBackFormValidationTests(FeedBackBaseTests):
         response = self.ajax_post(self.feedback_url, form_data_nok)
 
         result = json.loads(response.content)
-        self.assertEquals(result['status'], 'NOK')
+        self.assertEquals(result['status'], 'FORM_INVALID')
         self.assertIn('data', result.keys())
 
     def test_ajax_post_recaptcha_not_valid(self):
@@ -80,7 +81,7 @@ class FeedBackFormValidationTests(FeedBackBaseTests):
         response = self.ajax_post(self.feedback_url, form_data_nok)
 
         result = json.loads(response.content)
-        self.assertEquals(result['status'], 'NOK')
+        self.assertEquals(result['status'], 'FORM_INVALID')
 
     def test_ajax_post_valid(self):
 
@@ -97,7 +98,14 @@ class FeedBackFormValidationTests(FeedBackBaseTests):
         response = self.ajax_post(self.feedback_url, form_data_ok)
 
         result = json.loads(response.content)
-        self.assertEquals(result['status'], 'OK')
+        self.assertEquals(result['status'], 'EMAIL_SENDING_OK')
+
+
+# This Email Backend is used to test error management when sending email
+class FakeEmailBackend(BaseEmailBackend):
+
+    def send_messages(self, email_messages):
+        raise
 
 
 class FeedBackEmailSendingTests(FeedBackBaseTests):
@@ -120,7 +128,7 @@ class FeedBackEmailSendingTests(FeedBackBaseTests):
         response = self.ajax_post(self.feedback_url, form_data_ok)
 
         result = json.loads(response.content)
-        self.assertEqual(result['status'], 'OK')
+        self.assertEqual(result['status'], 'EMAIL_SENDING_OK')
 
         # Checking that a mail has been sent
         self.assertEquals(len(mail.outbox), 1)
@@ -139,3 +147,21 @@ class FeedBackEmailSendingTests(FeedBackBaseTests):
                       sent_mail.body)
         self.assertIn(u"Lat : 1.13 / Lon : 2.26",
                       sent_mail.body)
+
+    @override_settings(EMAIL_BACKEND='rando.feedback.tests.FakeEmailBackend')
+    def test_problem_when_sending_email(self):
+
+        form_data_ok = {
+            'name': 'John Doe',
+            'email': 'john.doe@nowhere.com',
+            'category': self.first_category[0],
+            'comment': u'This is a comment',
+            # This value 'PASSED' is a django-recaptcha default value
+            # only usable in TEST env to validate form
+            'recaptcha_response_field': 'PASSED',
+        }
+
+        response = self.ajax_post(self.feedback_url, form_data_ok)
+
+        result = json.loads(response.content)
+        self.assertEquals(result['status'], 'EMAIL_SENDING_FAILED')

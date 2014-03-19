@@ -121,18 +121,37 @@ $(window).on("view:detail", function (e) {
         var postValues = $('#feedback-form').serialize();
 
         $.post(feedbackUrl, postValues, function(data) {
-            if (data['status'] == 'NOK') {
-                // If form is not valid, we display form with according errors
-                $('#popup-feedback .modal-body form').replaceWith(data['data']);
+            var status = data['status'];
 
-                // Reloading manually feedback map, needed by newly replaced markup
-                loadmapfeedbackmap();
+            switch(status) {
+
+                case 'FORM_INVALID':
+                    // If form is not valid, we display form with according errors
+                    $('#popup-feedback .modal-body form').replaceWith(data['data']);
+                    // Reloading manually feedback map, needed by newly replaced markup
+                    loadmapfeedbackmap();
+                    break;
+
+                case 'EMAIL_SENDING_OK':
+                    // Form is valid, email is sent, we close the popup and display "OK" popup
+                    $("#popup-feedback").modal('hide');
+                    $("#popup-feedback-ok").modal('show');
+                    break;
+
+                case 'EMAIL_SENDING_FAILED':
+                    // Form is valid, but email has not been sent (due to server error),
+                    // we close the popup and display "NOK" popup
+                    $("#popup-feedback").modal('hide');
+                    $("#popup-feedback-nok").modal('show');
+                    break;
+
+                default:
+                    // Else, we just close the popup
+                    $("#popup-feedback").modal('hide');
             }
-            else {
-                // Form is valid, we close the popup
-                // FIXME: find a way to tell user that email has been correctly sent ?
-                $("#popup-feedback").modal('hide');
-            }
+        }).fail(function() {
+            $("#popup-feedback").modal('hide');
+            $("#popup-feedback-nok").modal('show');
         });
     });
 

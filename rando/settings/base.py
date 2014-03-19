@@ -266,8 +266,8 @@ CAPTCHA_AJAX = True
 # EMAIL CONFIG
 
 # Temporary email config, for testing purpose only
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Real email settings
 SERVER_EMAIL = 'admin@yourdomainname'
