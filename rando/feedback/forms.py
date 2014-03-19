@@ -28,7 +28,6 @@ class FeedBackForm(forms.Form):
     captcha = ReCaptchaField(label=_(u'Captcha'))
 
     def __init__(self, *args, **kwargs):
-
         super(FeedBackForm, self).__init__(*args, **kwargs)
 
         categories = settings.FEEDBACK_FORM_CATEGORIES.get(

@@ -71,7 +71,7 @@ Feedback app configuration
 Configure recaptcha :
 
 * Go to http://www.google.com/recaptcha, create an account, follow the instructions to get public/private key for your domain name,
-* Add correct values on setting parameters **RECAPTCHA_PUBLIC_KEY** and **RECAPTCHA_PRIVATE_KEY**.
+* Add respective values on setting parameters **RECAPTCHA_PUBLIC_KEY** and **RECAPTCHA_PRIVATE_KEY**.
 
 Configure email settings (mails are sent to managers when users submit a feedback) :
 

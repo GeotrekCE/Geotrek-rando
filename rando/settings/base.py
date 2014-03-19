@@ -143,11 +143,11 @@ INSTALLED_APPS = (
     'leaflet',
     'localeurl',
     'compressor',
+    'captcha',
     'rando.trekking',
     'rando.view3d',
     'rando.flatpages',
     'rando.feedback',
-    'captcha',
 )
 
 if TEST:
@@ -254,39 +254,16 @@ COORDS_FORMAT_PRECISION = 5
 # FEEDBACK APP CONFIG PART
 
 # Enabling feedback form on trek detail page
-FEEDBACK_FORM_ENABLED = True
+FEEDBACK_FORM_ENABLED = False
 
 # RECAPTCHA settings to use google captcha service in feedback form
-RECAPTCHA_PUBLIC_KEY = '6Ldrbu4SAAAAALJ0NMX0LBK-UAE8u5wJT5zrb5Uo'
-RECAPTCHA_PRIVATE_KEY = '6Ldrbu4SAAAAAPbt5g3Vw2BA_LGL1-BZwaBSsnfz'
+RECAPTCHA_PUBLIC_KEY = ''
+RECAPTCHA_PRIVATE_KEY = ''
 
 RECAPTCHA_USE_SSL = False
 CAPTCHA_AJAX = True
 
-# EMAIL CONFIG
+FEEDBACK_FORM_CATEGORIES = {}
 
-# Temporary email config, for testing purpose only
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-# Real email settings
-SERVER_EMAIL = 'admin@yourdomainname'
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 25
-
-# Auth on email sending, if any
-# EMAIL_HOST_USER = johndoe
-# EMAIL_HOST_PASSWORD = johndoepwd
-
-FEEDBACK_FORM_CATEGORIES = {
-    'en': (('obs', u'Obstacle'),
-           ('sign', u'Sign'),
-           ('markers', u'Markers'),
-           ('other', u'Other')),
-    'fr': (('obs', u'Obstacle'),
-           ('sign', u'Signalétique'),
-           ('markers', u'Marquage'),
-           ('other', u'Autre')),
-}
 # END FEEDBACK APP CONFIG PART
 ###

@@ -28,7 +28,6 @@ class FeedBackPickPlaceTests(CasperTestCase):
 class FeedBackBaseTests(TestCase):
 
     def setUp(self):
-
         self.feedback_url = '/en/feedback/'
 
         self.first_category = settings.FEEDBACK_FORM_CATEGORIES['en'][0]
@@ -39,7 +38,6 @@ class FeedBackBaseTests(TestCase):
         os.environ['RECAPTCHA_TESTING'] = 'True'
 
     def ajax_post(self, url, data, **kwargs):
-
         kwargs['HTTP_X_REQUESTED_WITH'] = "XMLHttpRequest"
 
         return self.client.post(url, data, **kwargs)
@@ -51,7 +49,6 @@ class FeedBackBaseTests(TestCase):
 class FeedBackFormValidationTests(FeedBackBaseTests):
 
     def test_form_url(self):
-
         response = self.client.get(self.feedback_url)
         self.assertContains(response, 'name')
         self.assertContains(response, 'email')
@@ -61,7 +58,6 @@ class FeedBackFormValidationTests(FeedBackBaseTests):
         self.assertContains(response, 'longitude')
 
     def test_ajax_post_not_valid(self):
-
         form_data_nok = {'name': 'John Doe'}
 
         response = self.ajax_post(self.feedback_url, form_data_nok)
@@ -71,7 +67,6 @@ class FeedBackFormValidationTests(FeedBackBaseTests):
         self.assertIn('data', result.keys())
 
     def test_ajax_post_recaptcha_not_valid(self):
-
         form_data_nok = {
             'name': 'John Doe',
             'email': 'john.doe@nowhere.com',
@@ -84,7 +79,6 @@ class FeedBackFormValidationTests(FeedBackBaseTests):
         self.assertEquals(result['status'], 'FORM_INVALID')
 
     def test_ajax_post_valid(self):
-
         form_data_ok = {
             'name': 'John Doe',
             'email': 'john.doe@nowhere.com',
@@ -111,7 +105,6 @@ class FakeEmailBackend(BaseEmailBackend):
 class FeedBackEmailSendingTests(FeedBackBaseTests):
 
     def test_sending_email(self):
-
         form_data_ok = {
             'name': u'John Doe',
             'email': u'john.doe@nowhere.com',
@@ -150,7 +143,6 @@ class FeedBackEmailSendingTests(FeedBackBaseTests):
 
     @override_settings(EMAIL_BACKEND='rando.feedback.tests.FakeEmailBackend')
     def test_problem_when_sending_email(self):
-
         form_data_ok = {
             'name': 'John Doe',
             'email': 'john.doe@nowhere.com',
