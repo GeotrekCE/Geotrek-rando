@@ -17,7 +17,7 @@ from rando.trekking.management.commands.sync_trekking import (mkdir_p,
 from rando.trekking.models import Trek, JSONManager
 
 
-TESTS_DATA_PATH = os.path.join(os.path.dirname(__file__), 'data')
+TESTS_DATA_PATH = os.path.join(settings.PROJECT_PATH, 'tests', 'data')
 
 
 class MkdirTest(SimpleTestCase):

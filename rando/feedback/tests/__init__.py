@@ -9,7 +9,7 @@ from django.core import mail
 from django.test import TestCase
 from django.test.utils import override_settings
 
-TESTS_DATA_PATH = os.path.join(os.path.dirname(__file__), 'data')
+TESTS_DATA_PATH = os.path.join(settings.PROJECT_PATH, 'tests', 'data')
 
 
 @override_settings(INPUT_DATA_ROOT=TESTS_DATA_PATH,
