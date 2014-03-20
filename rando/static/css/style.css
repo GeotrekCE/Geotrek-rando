@@ -940,6 +940,9 @@ ul.social-buttons li {
 #mainmap:full-screen {
   top: 0;
 }
+#mainmap .leaflet-label {
+  z-index: 1000 !important;
+}
 #mainmap .leaflet-marker-icon.trek-cluster,
 #mainmap .leaflet-marker-icon.trek-icon {
   border-radius: 999px;
