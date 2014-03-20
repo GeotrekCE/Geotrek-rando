@@ -24,6 +24,7 @@ $(document).ready(function (e) {
             if (/^\/[a-zA-Z_]{2,5}\/$/.test(window.location.pathname)) {
                 $modal.modal('show');
                 e.preventDefault();
+                return false;
             }
         });
     });
