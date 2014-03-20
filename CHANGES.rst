@@ -17,6 +17,7 @@ CHANGELOG
 * Fix filters not being restored if both sliders are on minimum value
 * Fix a bug on POIs accordion toggling
 * Fix a bug on mobile backpack not showing when empty
+* Remove double-slash in PDF export URL (fixes #113)
 
 **Breaking changes**
 

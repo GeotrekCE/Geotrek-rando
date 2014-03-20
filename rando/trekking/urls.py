@@ -9,5 +9,5 @@ urlpatterns = patterns('',
     url(r'^(?P<slug>[-\w]+)$', cache_page(settings.CACHE_DURATION)(TrekView.as_view()), name="detail"),
     url(r'^to/(?P<pk>\d+)$', trek_redirect, name="redirect"),
 
-    url(r'^files/(?P<path>.*)$', fileserve, name="fileserve")
+    url(r'^files(?P<path>.*)$', fileserve, name="fileserve")
 )
