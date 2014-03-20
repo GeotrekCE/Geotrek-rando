@@ -335,7 +335,10 @@ Images
 The following images, if placed in the *media* folder, will be used instead
 of the generic material :
 
-* ``favicon.png``
+* ``img/favicon.png``
+* ``img/icon-57.png``
+* ``img/icon-72.png``
+* ``img/icon-144.png``
 * ``img/default-thumbnail.jpg`` (*if trek has no pictures attached*)
 * ``img/default-preview.jpg``
 

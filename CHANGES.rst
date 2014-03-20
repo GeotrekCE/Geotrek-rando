@@ -37,8 +37,14 @@ CHANGELOG
 * Most icons have been switched to vectorial font (fixes #78)
 * Ascent sliders values can now be controlled via setting `FILTER_ASCENT_VALUES`.
 * Difficulty sliders values are now obtained via treks attributes.
-* Send a mail to admin on synchronization error, if Django mail settings 
+* Send a mail to admin on synchronization error, if Django mail settings
   are configured (fixes #98)
+
+
+**Known problems**
+
+* Layout problems with Internet Explorer 8 (ref #109)
+* Display problems under Windows Phone 8
 
 
 1.26 (2013-12-11)
