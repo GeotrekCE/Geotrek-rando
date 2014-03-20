@@ -339,6 +339,16 @@ of the generic material :
 * ``img/default-thumbnail.jpg`` (*if trek has no pictures attached*)
 * ``img/default-preview.jpg``
 
+In order to replace an icon (ex. buttons, park center, ...), just add a file
+in the *media* folder, and override the respective CSS class in your custom
+*style.css*.
+
+::
+
+    #park-center-warning {
+        background-image: url(/media/pn-logo.png);
+    }
+
 
 Home popup
 ----------
