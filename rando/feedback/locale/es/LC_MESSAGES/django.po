@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-18 11:42+0100\n"
+"POT-Creation-Date: 2014-03-20 22:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,40 +17,69 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: forms.py:18
+#: forms.py:16
 msgid "Name"
 msgstr ""
 
-#: forms.py:19
+#: forms.py:17
 msgid "Email"
 msgstr ""
 
-#: forms.py:20
+#: forms.py:18
 msgid "Category"
 msgstr ""
 
-#: forms.py:24
+#: forms.py:22
 msgid "Description of your problem"
 msgstr ""
 
-#: forms.py:25
+#: forms.py:23
 msgid "Description"
 msgstr ""
 
-#: forms.py:27
+#: forms.py:25
 msgid "Lat"
 msgstr ""
 
-#: forms.py:28
+#: forms.py:26
 msgid "Lng"
 msgstr ""
 
-#: forms.py:30
+#: forms.py:28
 msgid "Captcha"
 msgstr ""
 
-#: views.py:20
-msgid "Feedback from {email}"
+#: views.py:21
+msgid "Feedback from {name}"
+msgstr ""
+
+#: templates/feedback/_popup_feedback.html:5
+#: templates/feedback/_popup_feedback.html:17
+#: templates/feedback/_popup_feedback.html:29
+msgid "Feedback"
+msgstr ""
+
+#: templates/feedback/_popup_feedback.html:10
+msgid "Cancel"
+msgstr ""
+
+#: templates/feedback/_popup_feedback.html:11
+msgid "Send"
+msgstr ""
+
+#: templates/feedback/_popup_feedback.html:20
+msgid "An email has been sent to site admins. Thanks for your message !"
+msgstr ""
+
+#: templates/feedback/_popup_feedback.html:23
+#: templates/feedback/_popup_feedback.html:35
+msgid "OK"
+msgstr ""
+
+#: templates/feedback/_popup_feedback.html:32
+msgid ""
+"An error occurred when sending message. This error has been reported to site "
+"admin. Please try later."
 msgstr ""
 
 #: templates/feedback/form.html:16
@@ -61,17 +90,17 @@ msgstr ""
 msgid "You can contact our team to tell us any problem on this trek."
 msgstr ""
 
-#: templates/feedback/mail_template.html:3
+#: templates/feedback/mail_template.html:2
 #, python-format
-msgid "%(name)s has sent a feedback on category %(category)s."
+msgid "%(name)s (%(email)s) has sent a feedback on category %(category)s."
 msgstr ""
 
-#: templates/feedback/mail_template.html:4
+#: templates/feedback/mail_template.html:3
 #, python-format
 msgid "Comment : %(user_comment)s"
 msgstr ""
 
-#: templates/feedback/mail_template.html:5
+#: templates/feedback/mail_template.html:4
 #, python-format
 msgid "Lat : %(latitude)s / Lon : %(longitude)s"
 msgstr ""
