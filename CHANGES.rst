@@ -2,6 +2,12 @@
 CHANGELOG
 =========
 
+1.28dev (unreleased)
+--------------------
+
+* Nothing changed yet.
+
+
 1.27 (2014-03-20)
 -----------------
 
