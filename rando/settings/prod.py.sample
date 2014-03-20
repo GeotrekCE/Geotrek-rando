@@ -29,6 +29,12 @@ PRINT_ENABLED = True
 VIEW3D_ENABLED = True
 
 #
+# Filters customization
+#
+# FILTER_ASCENT_VALUES = (300, 600, 1000)
+#
+
+#
 # Flat pages customizations
 #
 # FLATPAGES_POLICY_PAGE = 3

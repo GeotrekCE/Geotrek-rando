@@ -246,6 +246,13 @@ To hide the footer, add in ``style.css``:
 This file can be used to inject extra Javascript code, using a ``<script>`` tag.
 
 
+Trek filters
+------------
+
+Ascent filter step values can be controlled with `FILTER_ASCENT_VALUES`, which
+shall be a list of integer values expressed in meters.
+
+
 Map elements
 ------------
 
