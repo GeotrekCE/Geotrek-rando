@@ -46,11 +46,11 @@ for language in settings.LANGUAGES:
     sitemaps['geo-' + lang] = GeoSitemap(lang)
 
 
-
 urlpatterns = patterns('',
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
     url(r'', include('rando.trekking.urls', namespace='trekking', app_name='trekking')),
     url(r'', include('rando.view3d.urls', namespace='view3d', app_name='view3d')),
+    url(r'', include('rando.feedback.urls', namespace='feedback', app_name='feedback')),
     url(r'pages/', include('rando.flatpages.urls', namespace='flatpages', app_name='flatpages')),
     url(r'^jsi18n/$', cache_page(settings.CACHE_DURATION)(javascript_catalog), {'packages':('rando.trekking',)}, name='jsi18n'),
 )

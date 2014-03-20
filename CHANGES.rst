@@ -5,7 +5,9 @@ CHANGELOG
 1.28dev (unreleased)
 --------------------
 
-* Nothing changed yet.
+**New features**
+
+* Feedback form from trek detail page
 
 
 1.27 (2014-03-20)

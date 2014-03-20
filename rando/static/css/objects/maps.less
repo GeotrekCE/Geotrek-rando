@@ -169,9 +169,7 @@
 }
 
 
-#detailmap {
-  min-height: 400px;
-
+#detailmap, #feedbackmap {
   &:-webkit-full-screen { top: 0; left: 0; width: 100%; height: 100%; }
   &:-moz-full-screen { top: 0; left: 0; width: 100%; height: 100%; }
   &:full-screen { top: 0; left: 0; width: 100%; height: 100%; }
@@ -189,8 +187,13 @@
   }
 }
 
+#detailmap {
+  min-height: 400px;
+}
 
-
+#feedbackmap {
+  min-height: 360px;
+}
 
 /* POIS markers */
 

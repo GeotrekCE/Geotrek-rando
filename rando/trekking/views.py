@@ -125,6 +125,7 @@ class TrekView(PJAXResponseMixin, BaseTrekView):
         for poi in pois:
             all_pictures.extend(poi.properties.pictures)
         context['all_pictures'] = all_pictures
+
         return context
 
 

@@ -559,7 +559,6 @@ function mainmapInit(map, djoptions) {
 }
 
 
-
 function detailmapInit(map, bounds) {
     var poisMarkersById = {};
 
@@ -620,6 +619,7 @@ function detailmapInit(map, bounds) {
         return wholeBounds;
     }
 }
+
 
 function initDetailTrekMap(map, trekGeoJson) {
     // Trek

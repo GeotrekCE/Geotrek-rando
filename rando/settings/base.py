@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
+
 import os
 import sys
 
@@ -20,12 +21,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'never_used.db',                # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'never_used.db',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
@@ -74,8 +75,8 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
-# other finders..
+    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    # other finders..
     'compressor.finders.CompressorFinder',
 )
 
@@ -86,10 +87,10 @@ SECRET_KEY = '5w&amp;uq=z1w*axjm6z)&amp;)uq3^mg#q2=!@t_f^@_w)9o0+p*c4h+0'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    # 'django.template.loaders.eggs.Loader',
 )
 
-CACHE_DURATION = 60 * 60 * 1 # 1 Hour
+CACHE_DURATION = 60 * 60 * 1  # 1 Hour
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
@@ -124,7 +125,8 @@ ROOT_URLCONF = 'rando.urls'
 WSGI_APPLICATION = 'rando.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Put strings here, like "/home/html/django_templates" or
+    # "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(PROJECT_PATH, 'templates')
@@ -141,9 +143,11 @@ INSTALLED_APPS = (
     'leaflet',
     'localeurl',
     'compressor',
+    'captcha',
     'rando.trekking',
     'rando.view3d',
     'rando.flatpages',
+    'rando.feedback',
 )
 
 if TEST:
@@ -152,7 +156,7 @@ if TEST:
 
 COMPRESS_PARSER = 'compressor.parser.HtmlParser'
 
-FLATPAGES_ROOT = os.path.join(MEDIA_ROOT,'pages')
+FLATPAGES_ROOT = os.path.join(MEDIA_ROOT, 'pages')
 FLATPAGES_TITLES = {}
 FLATPAGES_POLICY_PAGE = 1
 
@@ -161,8 +165,10 @@ FILTER_ASCENT_VALUES = (300, 600, 1000, 1400)
 
 LEAFLET_CONFIG = {
     "TILES": [
-        ('main', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', '&copy; OpenStreetMap contributors'),
-        ('detail', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', '&copy; OpenStreetMap contributors')
+        ('main', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+         '&copy; OpenStreetMap contributors'),
+        ('detail', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+         '&copy; OpenStreetMap contributors')
     ],
     "SCALE": False,
     "MINIMAP": True,
@@ -188,9 +194,9 @@ LOGGING = {
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
         },
-        'console':{
-            'level':'DEBUG',
-            'class':'logging.StreamHandler',
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
         },
     },
     'loggers': {
@@ -243,3 +249,21 @@ VIEW3D_ENABLED = True
 GANALYTICS_TRACKING_CODE = 'UA-XXXXXXXX-XX'
 
 COORDS_FORMAT_PRECISION = 5
+
+###
+# FEEDBACK APP CONFIG PART
+
+# Enabling feedback form on trek detail page
+FEEDBACK_FORM_ENABLED = False
+
+# RECAPTCHA settings to use google captcha service in feedback form
+RECAPTCHA_PUBLIC_KEY = ''
+RECAPTCHA_PRIVATE_KEY = ''
+
+RECAPTCHA_USE_SSL = False
+CAPTCHA_AJAX = True
+
+FEEDBACK_FORM_CATEGORIES = {}
+
+# END FEEDBACK APP CONFIG PART
+###
