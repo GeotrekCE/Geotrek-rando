@@ -53,6 +53,8 @@ function feedbackmapMarkerInit(map, bounds) {
 
 
 function feedbackmapInit(map, bounds) {
+    // Hide Leaflet prefix
+    map.attributionControl.setPrefix('');
 
     // Minimize minimap by default
     map.on('viewreset', function () {
