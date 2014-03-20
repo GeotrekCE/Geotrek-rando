@@ -173,6 +173,9 @@
 .icon-park-center:before {
   content: "E";
 }
+.icon-feedback:before {
+  content: "F";
+}
 /*
  * HTML5 Boilerplate
  *
@@ -710,6 +713,44 @@ a:hover {
     display: none!important;
   }
 }
+@media (min-width: 950px) {
+  #popup-feedback {
+    width: 900px;
+    height: 500px;
+    margin-left: -450px;
+    left: 50%;
+    right: auto;
+  }
+}
+#popup-feedback h5 {
+  line-height: 20px;
+}
+#popup-feedback input {
+  margin-bottom: 6px;
+}
+#popup-feedback textarea {
+  width: 95%;
+}
+#popup-feedback .modal-header h4 {
+  margin: 0;
+}
+#popup-feedback .map-fields {
+  margin-top: 5px;
+}
+#popup-feedback .map-fields input {
+  width: 160px;
+  margin-bottom: 0;
+}
+#popup-feedback .map-fields label {
+  display: inline-block;
+}
+#popup-feedback label.mandatory:after {
+  content: "*";
+  color: red;
+}
+ul.errorlist {
+  color: red;
+}
 #global-share {
   position: absolute;
   padding-left: 5px;
@@ -1044,28 +1085,29 @@ ul.social-buttons li {
 .leaflet-popup-content img:hover {
   opacity: 0.7;
 }
-#detailmap {
-  min-height: 400px;
-}
-#detailmap:-webkit-full-screen {
+#detailmap:-webkit-full-screen,
+#feedbackmap:-webkit-full-screen {
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
-#detailmap:-moz-full-screen {
+#detailmap:-moz-full-screen,
+#feedbackmap:-moz-full-screen {
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
-#detailmap:full-screen {
+#detailmap:full-screen,
+#feedbackmap:full-screen {
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
-#detailmap .helpclic {
+#detailmap .helpclic,
+#feedbackmap .helpclic {
   color: #ffffff;
   z-index: 5;
   bottom: 0px;
@@ -1075,6 +1117,12 @@ ul.social-buttons li {
   padding-right: 10px;
   padding-top: 10px;
   font-size: 14px;
+}
+#detailmap {
+  min-height: 400px;
+}
+#feedbackmap {
+  min-height: 360px;
 }
 /* POIS markers */
 .poi-marker-icon.cluster,
@@ -1142,6 +1190,9 @@ ul.social-buttons li {
   .leaflet-label {
     display: none;
   }
+}
+#feedback-form {
+  margin-bottom: 0px;
 }
 /* Layout */
 header {
@@ -1668,7 +1719,8 @@ p.tab-content-empty {
 }
 #toolbox a.print,
 #toolbox a.backpack,
-#toolbox a.download {
+#toolbox a.download,
+#toolbox a.feedback {
   position: relative;
   padding-left: 30px;
   vertical-align: top;
@@ -1680,6 +1732,7 @@ p.tab-content-empty {
 }
 #toolbox a.backpack,
 #toolbox a.download,
+#toolbox a.feedback,
 #toolbox #btn-print {
   margin-top: 5px;
 }
