@@ -45,7 +45,7 @@ Prepare deployment :
 Configuration
 -------------
 
-Copy ``rando/settings_local.py.sample`` to ``rando/settings_local.py`` and edit it to override settings.
+Copy ``rando/settings/prod.py.sample`` to ``rando/settings/prod.py`` and edit it to override settings.
 
 Be careful to save the file with UTF-8 encoding, especially if you use accents and special characters.
 
