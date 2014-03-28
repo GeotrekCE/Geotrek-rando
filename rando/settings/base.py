@@ -149,6 +149,7 @@ INSTALLED_APPS = (
     'rando.view3d',
     'rando.flatpages',
     'rando.feedback',
+    'rando.tourism',
 )
 
 COMPRESS_PARSER = 'compressor.parser.HtmlParser'
