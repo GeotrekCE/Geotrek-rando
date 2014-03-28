@@ -153,6 +153,9 @@
         {% if VIEW3D_ENABLED %}
         <script src="{% static "view3d/main.js" %}"></script>
         {% endif %}
+        {% if TOURISM_ENABLED %}
+        <script src="{% static "tourism/main.js" %}"></script>
+        {% endif %}
         <script src="{% static "js/main.js" %}"></script>
         {% endcompress %}
 

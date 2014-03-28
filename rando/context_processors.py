@@ -18,6 +18,7 @@ def settings(request):
         'FLATPAGES_POLICY_PAGE': settings_.FLATPAGES_POLICY_PAGE,
         'FILTERS_HASH_ENABLED': settings_.FILTERS_HASH_ENABLED,
         'POPUP_HOME_ENABLED': settings_.POPUP_HOME_ENABLED,
+        'TOURISM_ENABLED': settings_.TOURISM_ENABLED,
         'POPUP_FILENAME': settings_.POPUP_FILENAME,
         'FOOTER_FILENAME': settings_.FOOTER_FILENAME,
         'FEEDBACK_FORM_ENABLED': settings_.FEEDBACK_FORM_ENABLED,
