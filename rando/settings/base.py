@@ -151,10 +151,6 @@ INSTALLED_APPS = (
     'rando.feedback',
 )
 
-if TEST:
-    INSTALLED_APPS += ('casper',)
-
-
 COMPRESS_PARSER = 'compressor.parser.HtmlParser'
 
 FLATPAGES_ROOT = os.path.join(MEDIA_ROOT, 'pages')
@@ -223,6 +219,11 @@ LOGGING = {
         },
     }
 }
+
+
+if TEST:
+    INSTALLED_APPS += ('casper',)
+    LOGGING['handlers']['mail_admins']['class'] = 'logging.NullHandler'
 
 TEST_RUNNER = 'rando.testing.DatabaselessTestRunner'
 

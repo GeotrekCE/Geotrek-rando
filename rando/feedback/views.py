@@ -40,7 +40,7 @@ class FeedBackView(FormView):
             self._send_mail(**data)
         except Exception as e:
             logger.error('Error when sending email')
-            logger.error(e)
+            logger.exception(e)
             response = {'status': 'EMAIL_SENDING_FAILED'}
             return HttpResponse(json.dumps(response),
                                 content_type='application/json')

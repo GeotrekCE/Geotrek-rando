@@ -1,9 +1,8 @@
-var utils = require("./test_utils.js");
+// Needed to have visible popups
+casper.options.viewportSize = {width: 1280, height: 768};
 
-utils.setUp();
 
-
-casper.test.begin("Filters location hash", function(test) {
+casper.test.begin("3D view popup", function(test) {
 
     var home_url = casper.cli.options['url-base'] + "/fr/decouverte-de-la-cascade-dars";
 
@@ -18,6 +17,7 @@ casper.test.begin("Filters location hash", function(test) {
         test.pass("The iframe shows up.");
     });
 
-    utils.done(test);
-
+    casper.run(function () {
+        test.done();
+    });
 });

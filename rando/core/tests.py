@@ -1,5 +1,6 @@
 import shutil
 import os
+import sys
 
 from mock import patch
 
@@ -89,4 +90,5 @@ class NavigationTest(CasperTestCase):
             pass
 
     def _get_tests_file(self, name):
-        return os.path.join(settings.PROJECT_PATH, 'trekking', 'tests', name)
+        here = os.path.dirname(sys.modules[self.__class__.__module__].__file__)
+        return os.path.join(here, name)

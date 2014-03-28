@@ -23,7 +23,6 @@ CACHES = {
     }
 }
 
-# Temporary email config, for testing purpose only
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 RECAPTCHA_PUBLIC_KEY = '6Ldrbu4SAAAAALJ0NMX0LBK-UAE8u5wJT5zrb5Uo'
