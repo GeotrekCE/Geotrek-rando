@@ -144,6 +144,7 @@ INSTALLED_APPS = (
     'localeurl',
     'compressor',
     'captcha',
+    'rando.core',
     'rando.trekking',
     'rando.view3d',
     'rando.flatpages',

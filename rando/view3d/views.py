@@ -1,6 +1,6 @@
 from operator import itemgetter
 
-from rando.trekking.models import Settings
+from rando.core.models import Settings
 from rando.trekking.views import BaseTrekView
 
 
