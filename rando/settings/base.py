@@ -144,15 +144,12 @@ INSTALLED_APPS = (
     'localeurl',
     'compressor',
     'captcha',
+    'rando.core',
     'rando.trekking',
     'rando.view3d',
     'rando.flatpages',
     'rando.feedback',
 )
-
-if TEST:
-    INSTALLED_APPS += ('casper',)
-
 
 COMPRESS_PARSER = 'compressor.parser.HtmlParser'
 
@@ -222,6 +219,11 @@ LOGGING = {
         },
     }
 }
+
+
+if TEST:
+    INSTALLED_APPS += ('casper',)
+    LOGGING['handlers']['mail_admins']['class'] = 'logging.NullHandler'
 
 TEST_RUNNER = 'rando.testing.DatabaselessTestRunner'
 

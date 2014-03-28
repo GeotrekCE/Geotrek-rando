@@ -1,8 +1,5 @@
-
 import json
 import os
-
-from casper.tests import CasperTestCase
 
 from django.conf import settings
 from django.core import mail
@@ -10,16 +7,11 @@ from django.core.mail.backends.base import BaseEmailBackend
 from django.test import TestCase
 from django.test.utils import override_settings
 
-TESTS_DATA_PATH = os.path.join(settings.PROJECT_PATH, 'tests', 'data')
+from rando.core.tests import NavigationTest
 
 
-@override_settings(INPUT_DATA_ROOT=TESTS_DATA_PATH,
-                   MEDIA_ROOT=os.path.join(TESTS_DATA_PATH, 'media'),
-                   POPUP_HOME_ENABLED=False)
-class FeedBackPickPlaceTests(CasperTestCase):
-
-    def _get_tests_file(self, name):
-        return os.path.join(settings.PROJECT_PATH, 'feedback', 'tests', name)
+@override_settings(POPUP_HOME_ENABLED=False)
+class FeedBackPickPlaceTests(NavigationTest):
 
     def test_popup(self):
         self.assertTrue(self.casper(self._get_tests_file('test_pickplace.js')))
@@ -99,7 +91,7 @@ class FeedBackFormValidationTests(FeedBackBaseTests):
 class FakeEmailBackend(BaseEmailBackend):
 
     def send_messages(self, email_messages):
-        raise
+        raise Exception('Fake problem')
 
 
 class FeedBackEmailSendingTests(FeedBackBaseTests):

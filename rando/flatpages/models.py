@@ -6,7 +6,7 @@ from django.conf import settings
 from django.db import models
 from django.template.defaultfilters import slugify
 
-from rando import classproperty
+from rando.core import classproperty
 
 
 class FlatPageManager(object):

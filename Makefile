@@ -5,7 +5,7 @@ bin/python:
 	bin/python setup.py develop
 
 sync: bin/python
-	bin/python ./manage.py sync_trekking
+	bin/python ./manage.py sync_content
 	touch var/input/media/style.css
 
 serve: bin/python
@@ -22,7 +22,7 @@ deploy: bin/python
 	bin/python ./manage.py collectstatic --clear --noinput
 
 test: bin/python
-	bin/python ./manage.py test trekking flatpages view3d
+	bin/python ./manage.py test core feedback trekking flatpages view3d
 
 clean:
 	rm -rf src/ bin/ lib/ build/ dist/ *.egg-info/ include/ local/

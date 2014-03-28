@@ -1,7 +1,7 @@
 from django.conf import settings as settings_
 
 from rando import __version__
-from rando.trekking.models import Settings
+from rando.core.models import Settings
 
 
 def settings(request):

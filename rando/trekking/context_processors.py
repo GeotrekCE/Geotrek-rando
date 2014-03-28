@@ -1,5 +1,7 @@
 from django.conf import settings
-from .models import Trek, Settings
+
+from rando.core.models import Settings
+from rando.trekking.models import Trek
 
 
 def main(request):
