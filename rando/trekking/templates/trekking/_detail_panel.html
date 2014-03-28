@@ -78,8 +78,10 @@
           <p>{% trans "Total Length" %} : <span class="value">{{ object.properties.length|kilo|floatformat }} km</span></p>
           <p>{% trans "Route" %} : <span class="value">{{ object.properties.route.label }}</span></p>
           {% endif %}
+          {% if object.properties.districts %}
           <p>{% trans "Valleys" %} : <span class="value">{% for district in object.properties.districts %}
             {{ district.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</span></p>
+          {% endif %}
         </div>
 
         {% for usage in object.properties.usages %}
@@ -100,14 +102,14 @@
 
   <div id="detail-container-content" class="row-fluid">
     <div class="span4">
-      <p class="teaser">{{ object.properties.description_teaser|default:"No teaser"|safe|striptags }}</p>
-      <p>{{ object.properties.ambiance|default:"No ambiance"|safe }}</p>
+      {% if object.properties.description_teaser %}<p class="teaser">{{ object.properties.description_teaser|safe|striptags }}</p>{% endif %}
+      {% if object.properties.ambiance %}<p>{{ object.properties.ambiance|safe }}</p>{% endif %}
 
       <div id="trek-carousel">
         {% include "trekking/_carousel.html" with prefix="trek" pictures=all_pictures default="True" %}
       </div>
 
-      <p>{{ object.properties.description|default:"No description"|safe }}</p>
+      {% if object.properties.description %}<p>{{ object.properties.description|safe }}</p>{% endif %}
 
       {% if object.properties.disabled_infrastructure %}
       <div id="trek-disabled">

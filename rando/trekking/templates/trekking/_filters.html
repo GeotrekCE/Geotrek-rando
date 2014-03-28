@@ -68,6 +68,7 @@
 
     <div id="advanced-filters">
 
+      {% if usages %}
       <div class="filter-bloc usage">
         <label for="usage" class="hidden">{% trans "Usages" %}</label>
         <select id="usage" class="chosen-select" tabindex="2" multiple="" data-filter="usage" data-placeholder="{% trans "Usages" %}">
@@ -76,7 +77,9 @@
         {% endfor %}
         </select>
       </div>
+      {% endif %}
 
+      {% if routes %}
       <div class="filter-bloc route">
         <label for="route" class="hidden">{% trans "Route" %}</label>
         <select id="route" class="chosen-select" tabindex="2" multiple="" data-filter="route"  data-placeholder="{% trans "Route" %}">
@@ -85,7 +88,9 @@
         {% endfor %}
         </select>
       </div>
+      {% endif %}
 
+      {% if districts %}
       <div class="filter-bloc vallee">
         <label for="district" class="hidden">{% trans "Valleys" %}</label>
         <select id="district" class="chosen-select" tabindex="2" multiple="" data-filter="district" data-placeholder="{% trans "Valleys" %}">
@@ -94,7 +99,9 @@
         {% endfor %}
         </select>
       </div>
+      {% endif %}
 
+      {% if cities %}
       <div class="filter-bloc cities">
         <label for="city" class="hidden">{% trans "Cities" %}</label>
         <select id="city" class="chosen-select" tabindex="2" multiple="" data-filter="city" data-placeholder="{% trans "Cities" %}">
@@ -103,6 +110,7 @@
         {% endfor %}
         </select>
       </div>
+      {% endif %}
 
     </div>
     <!--  advanced-filters-->
