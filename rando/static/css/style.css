@@ -713,44 +713,6 @@ a:hover {
     display: none!important;
   }
 }
-@media (min-width: 950px) {
-  #popup-feedback {
-    width: 900px;
-    height: 500px;
-    margin-left: -450px;
-    left: 50%;
-    right: auto;
-  }
-}
-#popup-feedback h5 {
-  line-height: 20px;
-}
-#popup-feedback input {
-  margin-bottom: 6px;
-}
-#popup-feedback textarea {
-  width: 95%;
-}
-#popup-feedback .modal-header h4 {
-  margin: 0;
-}
-#popup-feedback .map-fields {
-  margin-top: 5px;
-}
-#popup-feedback .map-fields input {
-  width: 160px;
-  margin-bottom: 0;
-}
-#popup-feedback .map-fields label {
-  display: inline-block;
-}
-#popup-feedback label.mandatory:after {
-  content: "*";
-  color: red;
-}
-ul.errorlist {
-  color: red;
-}
 #global-share {
   position: absolute;
   padding-left: 5px;
@@ -1191,8 +1153,69 @@ ul.social-buttons li {
     display: none;
   }
 }
-#feedback-form {
+@media (min-width: 950px) {
+  #popup-feedback {
+    width: 900px;
+    height: 500px;
+    margin-left: -450px;
+    left: 50%;
+    right: auto;
+  }
+}
+#popup-feedback h5 {
+  line-height: 20px;
+}
+#popup-feedback input {
+  margin-bottom: 6px;
+}
+#popup-feedback textarea {
+  width: 95%;
+}
+#popup-feedback .modal-header h4 {
+  margin: 0;
+}
+#popup-feedback #feedback-form {
   margin-bottom: 0px;
+}
+#popup-feedback .map-fields {
+  margin-top: 5px;
+}
+#popup-feedback .map-fields input {
+  width: 160px;
+  margin-bottom: 0;
+}
+#popup-feedback .map-fields label {
+  display: inline-block;
+}
+#popup-feedback label.mandatory:after {
+  content: "*";
+  color: red;
+}
+ul.errorlist {
+  color: red;
+}
+.leaflet-left .leaflet-control.tourism-layer-switcher {
+  margin-left: 400px;
+  -webkit-transition: margin-left 300ms linear;
+}
+.leaflet-container.fullwidth .leaflet-left .leaflet-control.tourism-layer-switcher {
+  margin-left: 30px;
+}
+.leaflet-control.tourism-layer-switcher .toggle-layer {
+  background-color: #f89406;
+  max-height: 30px;
+  max-width: 30px;
+  display: inline-block;
+  padding: 5px;
+  margin-right: 5px;
+  opacity: 0.7;
+}
+.leaflet-control.tourism-layer-switcher .toggle-layer.active {
+  opacity: 1.0;
+  border: solid 2px #ffffff;
+}
+.leaflet-control.tourism-layer-switcher .toggle-layer img {
+  height: 20px;
 }
 /* Layout */
 header {

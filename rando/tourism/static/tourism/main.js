@@ -4,7 +4,7 @@
     L.Control.TourismLayers = L.Control.extend({
         includes: L.Mixin.Events,
         options: {
-            position: 'topleft',
+            position: 'bottomleft',
         },
 
         initialize: function (definitions) {
@@ -14,15 +14,40 @@
 
         onAdd: function(map) {
             this.map = map;
-            this._container = L.DomUtil.create('div');
+            this._container = L.DomUtil.create('div', 'tourism-layer-switcher');
 
             for (var i=0, n=this.definitions.length; i<n; i++) {
-                var def = this.definitions[i];
-                var layer = new L.GeoJSON.AJAX('files' + def.geojson_url);
-                this.layers.push(layer);
-                layer.addTo(map);
+                this._addTourismLayer(this.definitions[i]);
             }
             return this._container;
+        },
+
+        _addTourismLayer: function (definition) {
+            var layer = new L.GeoJSON.AJAX('files' + definition.geojson_url);
+
+            var className = 'toggle-layer ' + definition.id;
+
+            var button = L.DomUtil.create('a', className, this._container);
+            button.setAttribute('title', definition.title);
+            button.innerHTML = L.Util.template('<img alt="{title}" src="{pictogram_url}"/>',
+                                               definition);
+
+            L.DomEvent.disableClickPropagation(button);
+            L.DomEvent.on(button, 'click', function (e) {
+                this.toggleLayer(button, layer);
+            }, this);
+            this.layers.push(layer);
+        },
+
+        toggleLayer: function (button, layer) {
+            if (this.map.hasLayer(layer)) {
+                L.DomUtil.removeClass(button, 'active');
+                this.map.removeLayer(layer);
+            }
+            else {
+                L.DomUtil.addClass(button, 'active');
+                this.map.addLayer(layer);
+            }
         }
     });
 
@@ -33,6 +58,8 @@
         $.getJSON('/fr/files/api/datasource/datasources.json', function (data) {
             var control = map.tourismLayers = new L.Control.TourismLayers(data);
             control.addTo(map);
+
+            $('a', control._container).tooltip();
         });
     });
 })(window);

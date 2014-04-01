@@ -1,0 +1,31 @@
+.leaflet-control.tourism-layer-switcher {
+
+  .leaflet-left & {
+    margin-left: 400px;
+    -webkit-transition: margin-left 300ms linear;
+
+    .leaflet-container.fullwidth & {
+      margin-left: 30px;
+    }
+  }
+
+  .toggle-layer {
+    background-color: @mainColor;
+    max-height: 30px;
+    max-width: 30px;
+    display: inline-block;
+    padding: 5px;
+    margin-right: 5px;
+
+    opacity: 0.7;
+
+    &.active {
+      opacity: 1.0;
+      border: solid 2px @white;
+    }
+
+    img {
+      height: 20px;
+    }
+  }
+}
