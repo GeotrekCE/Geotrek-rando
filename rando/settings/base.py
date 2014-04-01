@@ -224,6 +224,7 @@ LOGGING = {
 
 if TEST:
     INSTALLED_APPS += ('casper',)
+    LOGGING['handlers']['console']['class'] = 'logging.NullHandler'
     LOGGING['handlers']['mail_admins']['class'] = 'logging.NullHandler'
 
 TEST_RUNNER = 'rando.testing.DatabaselessTestRunner'
