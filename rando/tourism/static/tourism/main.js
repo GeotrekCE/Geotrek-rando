@@ -28,7 +28,7 @@
 
 
     $(window).on('map:init', function (e) {
-        var data = e.originalEvent.detail,
+        var data = e.detail || e.originalEvent.detail,
             map = data.map;
         $.getJSON('/fr/files/api/datasource/datasources.json', function (data) {
             var control = map.tourismLayers = new L.Control.TourismLayers(data);
