@@ -154,7 +154,7 @@
         <script src="{% static "view3d/main.js" %}"></script>
         {% endif %}
         {% if TOURISM_ENABLED %}
-        <script src="{% static "tourism/main.js" %}"></script>
+        <script src="{% static "tourism/main.js" %}" id="tourism" data-datasources-url="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" datasources_url %}"></script>
         {% endif %}
         <script src="{% static "js/main.js" %}"></script>
         {% endcompress %}

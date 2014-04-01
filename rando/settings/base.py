@@ -117,6 +117,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'rando.context_processors.pjax',
     'rando.context_processors.donottrack',
     'rando.trekking.context_processors.main',
+    'rando.tourism.context_processors.main',
 )
 
 ROOT_URLCONF = 'rando.urls'

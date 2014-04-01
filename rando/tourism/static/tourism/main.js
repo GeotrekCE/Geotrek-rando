@@ -51,11 +51,12 @@
         }
     });
 
+    var datasources_url = $('script#tourism').data('datasources-url');
 
     $(window).on('map:init', function (e) {
         var data = e.detail || e.originalEvent.detail,
             map = data.map;
-        $.getJSON('/fr/files/api/datasource/datasources.json', function (data) {
+        $.getJSON(datasources_url, function (data) {
             var control = map.tourismLayers = new L.Control.TourismLayers(data);
             control.addTo(map);
 
