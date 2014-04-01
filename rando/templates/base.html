@@ -139,6 +139,7 @@
         <script src="{% static "js/filter.js" %}"></script>
         <script src="{% static "js/backpack.js" %}"></script>
         <script src="{% static "js/map.js" %}"></script>
+        {% endcompress %}
 
         {% if FEEDBACK_FORM_ENABLED %}
         <script src="{% static "feedback/js/ajaxcsrf.js" %}"></script>
@@ -154,10 +155,10 @@
         <script src="{% static "view3d/main.js" %}"></script>
         {% endif %}
         {% if TOURISM_ENABLED %}
-        <script src="{% static "tourism/main.js" %}" id="tourism" data-datasources-url="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" datasources_url %}"></script>
+        <script src="{% static "tourism/main.js" %}" id="tourism" data-datasources-url="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" datasources_url %}" data-base-url="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" "" %}"></script>
         {% endif %}
         <script src="{% static "js/main.js" %}"></script>
-        {% endcompress %}
+
 
         {% if not donottrack %}
         {% ganalytics %}

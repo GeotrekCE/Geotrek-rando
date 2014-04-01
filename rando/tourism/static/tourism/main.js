@@ -7,7 +7,8 @@
             position: 'bottomleft',
         },
 
-        initialize: function (definitions) {
+        initialize: function (base_url, definitions) {
+            this.base_url = base_url;
             this.definitions = definitions;
             this.layers = [];
         },
@@ -23,7 +24,9 @@
         },
 
         _addTourismLayer: function (definition) {
-            var layer = new L.GeoJSON.AJAX('files' + definition.geojson_url);
+            var layer = new L.GeoJSON.AJAX(this.base_url + definition.geojson_url, {
+                pointToLayer: this._buildMarker.bind(this)
+            });
 
             var className = 'toggle-layer ' + definition.id;
 
@@ -48,16 +51,26 @@
                 L.DomUtil.addClass(button, 'active');
                 this.map.addLayer(layer);
             }
+        },
+
+        _buildMarker: function (feature, latlng) {
+            var html = L.Util.template('<div class="tourism"></div>');
+            var icon = L.divIcon({className: 'tourism',
+                                  html: html});
+            var marker = L.marker(latlng, {icon: icon});
+            return marker;
         }
     });
 
-    var datasources_url = $('script#tourism').data('datasources-url');
+    var $script_tag = $('script#tourism'),
+        datasources_url = $script_tag.data('datasources-url'),
+        base_url = $script_tag.data('base-url');
 
     $(window).on('map:init', function (e) {
         var data = e.detail || e.originalEvent.detail,
             map = data.map;
         $.getJSON(datasources_url, function (data) {
-            var control = map.tourismLayers = new L.Control.TourismLayers(data);
+            var control = map.tourismLayers = new L.Control.TourismLayers(base_url, data);
             control.addTo(map);
 
             $('a', control._container).tooltip();
