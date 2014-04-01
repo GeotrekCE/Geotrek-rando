@@ -1208,7 +1208,7 @@ ul.errorlist {
   display: inline-block;
   padding: 5px;
   margin-right: 5px;
-  opacity: 0.7;
+  opacity: 0.5;
 }
 .leaflet-control.tourism-layer-switcher .toggle-layer.active {
   opacity: 1.0;
@@ -1216,6 +1216,13 @@ ul.errorlist {
 }
 .leaflet-control.tourism-layer-switcher .toggle-layer img {
   height: 20px;
+}
+.leaflet-marker-icon.tourism {
+  background-color: #f89406;
+  padding: 2px;
+}
+.leaflet-marker-icon.tourism img {
+  width: 100%;
 }
 /* Layout */
 header {

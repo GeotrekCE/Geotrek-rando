@@ -11,7 +11,6 @@ casper.test.begin('Tourism Layers', function(test) {
     });
 
     casper.then(function() {
-    casper.capture('/tmp/capture.png');
         test.pass('Tourism layer switcher is present');
 
         test.assertNotExists('.leaflet-marker-icon.tourism',
@@ -26,6 +25,13 @@ casper.test.begin('Tourism Layers', function(test) {
 
         test.assertExists('.leaflet-marker-icon.tourism',
                           'Markers are shown on click.');
+
+        casper.click('.leaflet-marker-icon.tourism');
+        casper.waitForSelector('.leaflet-popup');
+    });
+
+    casper.then(function () {
+        test.pass('Popup is shown on marker click');
     });
 
     casper.run(function () {

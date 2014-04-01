@@ -25,7 +25,9 @@
 
         _addTourismLayer: function (definition) {
             var layer = new L.GeoJSON.AJAX(this.base_url + definition.geojson_url, {
-                pointToLayer: this._buildMarker.bind(this)
+                pointToLayer: (function (feature, latlng) {
+                    return this._buildMarker(definition, feature, latlng);
+                }).bind(this),
             });
 
             var className = 'toggle-layer ' + definition.id;
@@ -53,14 +55,29 @@
             }
         },
 
-        _buildMarker: function (feature, latlng) {
-            var html = L.Util.template('<div class="tourism"></div>');
+        _buildMarker: function (definition, feature, latlng) {
+            var html = L.Util.template('<img src="{pictogram_url}"></div>', definition);
             var icon = L.divIcon({className: 'tourism',
-                                  html: html});
+                                  html: html,
+                                  iconSize: [16, 16]});
             var marker = L.marker(latlng, {icon: icon});
+
+            marker.on('click', function (e) {
+                var props = L.Util.extend({title:'', description:'', website: ''},
+                                          feature.properties);
+                var content = L.Util.template("<h3>{title}</h3>" +
+                                              "<p>{description}</p>" +
+                                              "<p>{website}</p>", props);
+
+                marker.bindPopup(content)
+                      .openPopup();
+            });
+
             return marker;
         }
     });
+
+
 
     var $script_tag = $('script#tourism'),
         datasources_url = $script_tag.data('datasources-url'),
