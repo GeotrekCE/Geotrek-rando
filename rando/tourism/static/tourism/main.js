@@ -59,7 +59,14 @@
             var html = L.Util.template('<img src="{pictogram_url}"></div>', definition);
             var icon = L.divIcon({className: 'tourism',
                                   html: html,
-                                  iconSize: [16, 16]});
+                                  iconSize: [16, 16],
+                                  shadowUrl: IMG_URL + '/../tourism/marker-shadow.png',
+                                  shadowSize: [25, 17],
+                                  shadowAnchor: [1, 3]});
+            icon.createShadow = function (oldIcon) {
+                return this._createIcon('shadow', oldIcon);
+            };
+
             var marker = L.marker(latlng, {icon: icon});
 
             marker.on('click', function (e) {

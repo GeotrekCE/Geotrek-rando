@@ -1202,7 +1202,7 @@ ul.errorlist {
   margin-left: 30px;
 }
 .leaflet-control.tourism-layer-switcher .toggle-layer {
-  background-color: #f89406;
+  background-color: #877f84;
   max-height: 30px;
   max-width: 30px;
   display: inline-block;
@@ -1211,14 +1211,21 @@ ul.errorlist {
   opacity: 0.5;
 }
 .leaflet-control.tourism-layer-switcher .toggle-layer.active {
+  margin-left: -1px;
+  margin-bottom: -1px;
+  margin-right: 4px;
+  background-color: #f89406;
   opacity: 1.0;
-  border: solid 2px #ffffff;
+  outline: solid 2px #ffffff;
+  border: solid 1px #c67605;
 }
 .leaflet-control.tourism-layer-switcher .toggle-layer img {
   height: 20px;
 }
 .leaflet-marker-icon.tourism {
   background-color: #f89406;
+  border: solid 1px #c67605;
+  outline: solid 1px #ffffff;
   padding: 2px;
 }
 .leaflet-marker-icon.tourism img {

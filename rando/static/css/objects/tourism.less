@@ -10,7 +10,7 @@
   }
 
   .toggle-layer {
-    background-color: @mainColor;
+    background-color: @darkGray;
     max-height: 30px;
     max-width: 30px;
     display: inline-block;
@@ -20,8 +20,13 @@
     opacity: 0.5;
 
     &.active {
+      margin-left: -1px;
+      margin-bottom: -1px;
+      margin-right: 4px;
+      background-color: @mainColor;
       opacity: 1.0;
-      border: solid 2px @white;
+      outline: solid 2px @white;
+      border: solid 1px darken(@mainColor, 10%);
     }
 
     img {
@@ -32,6 +37,9 @@
 
 .leaflet-marker-icon.tourism {
   background-color: @mainColor;
+  border: solid 1px darken(@mainColor, 10%);
+  outline: solid 1px @white;
+
   padding: 2px;
 
   img {
