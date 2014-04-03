@@ -89,8 +89,8 @@ class TrekListInputFile(InputFile):
             properties.update(detail)
 
             # Remove rooturl from relative URLs
-            for k in ['altimetric_profile', 'gpx', 'kml', 'map_image_url', 'printable', 'poi_layer']:
-                properties[k] = properties[k].replace(self.rooturl, '') if properties[k] else properties[k]
+            for k in ['altimetric_profile', 'elevation_area_url', 'gpx', 'kml', 'map_image_url', 'printable', 'poi_layer']:
+                properties[k] = properties[k].replace(self.rooturl, '') if properties.get(k) else properties.get(k)
 
             # Add POIs information in list, useful for textual search
             f = POIsInputFile(models.POIs.filepath.format(trek__pk=pk), **self.initkwargs)
@@ -120,15 +120,18 @@ def sync_content_trekking(sender, **kwargs):
         TrekListInputFile(**inputkwlang).pull()
 
         for trek in models.Trek.tmp_objects.filter(language=language).all():
-            InputFile(trek.properties.altimetric_profile, **inputkwlang).pull_if_modified()
             InputFile(trek.properties.gpx, **inputkwlang).pull_if_modified()
             InputFile(trek.properties.kml, **inputkwlang).pull_if_modified()
-            InputFile(trek.properties.map_image_url, **inputkwlang).pull_if_modified()
             if settings.PRINT_ENABLED:
                 InputFile(trek.properties.printable, **inputkwlang).pull_if_modified()
 
     # Fetch media only once, since they do not depend on language
     for trek in models.Trek.tmp_objects.filter(language=settings.LANGUAGE_CODE).all():
+        InputFile(trek.properties.map_image_url, **input_kwargs).pull_if_modified()
+        InputFile(trek.properties.altimetric_profile, **input_kwargs).pull_if_modified()
+        if trek.properties.elevation_area_url:  # Retro-compatibility
+            InputFile(trek.properties.elevation_area_url, **input_kwargs).pull_if_modified()
+
         if trek.properties.thumbnail:
             InputFile(trek.properties.thumbnail, **input_kwargs).pull_if_modified()
         for picture in trek.properties.pictures:
