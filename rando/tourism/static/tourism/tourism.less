@@ -1,0 +1,71 @@
+.leaflet-control.tourism-layer-switcher {
+
+  #mainmap .leaflet-left & {
+    margin-left: 400px;
+    -webkit-transition: margin-left 300ms linear;
+
+    .leaflet-container.fullwidth & {
+      margin-left: 30px;
+    }
+  }
+
+  #detailmap & {
+    display: none;
+  }
+  #detailmap.enabled & {
+      display: block;
+  }
+
+  .toggle-layer {
+    background-color: @darkGray;
+    max-height: 30px;
+    max-width: 30px;
+    display: inline-block;
+    padding: 5px;
+    margin-right: 5px;
+
+    opacity: 0.5;
+
+    &.active {
+      margin-left: -1px;
+      margin-bottom: -1px;
+      margin-right: 4px;
+      background-color: @mainColor;
+      opacity: 1.0;
+      outline: solid 2px @white;
+      border: solid 1px darken(@mainColor, 10%);
+    }
+
+    img {
+      height: 20px;
+    }
+  }
+}
+
+.leaflet-marker-icon.tourism {
+  background-color: @mainColor;
+  border: solid 1px darken(@mainColor, 10%);
+  outline: solid 1px @white;
+
+  padding: 1px;
+
+  img {
+    width: 100%;
+    margin-top: -7px;
+  }
+}
+
+.leaflet-popup-content .tourism {
+  width: 450px !important;
+
+  a.phone {
+    display: block;
+    margin-left: 5px;
+
+    &:after {
+      content: "";
+      clear: both;
+      display: block;
+    }
+  }
+}

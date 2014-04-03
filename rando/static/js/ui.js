@@ -127,14 +127,20 @@ function view_home() {
     }
 
     $('#toggle-side-bar').off('click').on('click', function () {
-        if (!$(this).hasClass('closed')) {
-            var width_sidebar = $('.side-bar').width() - $(this).width();
-            $('#side-bar').addClass('closed').animate({left : -width_sidebar+'px'}, 700, 'easeInOutExpo');
+        var animDuration = 700,
+            $toggleControl = $(this);
+        if (!$toggleControl.hasClass('closed')) {
+            var width_sidebar = $('.side-bar').width() - $toggleControl.width();
+            $('#side-bar').animate({left : -width_sidebar+'px'}, animDuration, 'easeInOutExpo');
         }
         else {
-            $('#side-bar').removeClass('closed').animate({left:'0'}, 700, 'easeInOutExpo');
+            $('#side-bar').animate({left:'0'}, animDuration, 'easeInOutExpo');
         }
-        $(this).toggleClass('closed');
+        setTimeout(function onSideBarToggled() {
+            $toggleControl.toggleClass('closed');
+            $('#side-bar').toggleClass('closed');
+            $('#mainmap').toggleClass('fullwidth');
+        }, animDuration/2);
     });
 
     // Highlight map on hover in sidebar results

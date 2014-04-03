@@ -412,6 +412,18 @@ value or trek *id* for specific trek. Markup example :
 Illustration images are better viewed if they have the same aspect ratio
 as trek illustrations.
 
+
+TIS Layers
+----------
+
+Additional tourism layers can be added and shown as markers on maps.
+
+* Set ``TOURISM_ENABLED = True`` in settings.
+* In Geotrek admin (>0.23), set up some datasources layers, with `public`
+  among targets.
+* Synchronize
+
+
 ===============
 TROUBLESHOOTING
 ===============

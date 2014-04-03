@@ -117,6 +117,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'rando.context_processors.pjax',
     'rando.context_processors.donottrack',
     'rando.trekking.context_processors.main',
+    'rando.tourism.context_processors.main',
 )
 
 ROOT_URLCONF = 'rando.urls'
@@ -149,6 +150,7 @@ INSTALLED_APPS = (
     'rando.view3d',
     'rando.flatpages',
     'rando.feedback',
+    'rando.tourism',
 )
 
 COMPRESS_PARSER = 'compressor.parser.HtmlParser'
@@ -223,6 +225,7 @@ LOGGING = {
 
 if TEST:
     INSTALLED_APPS += ('casper',)
+    LOGGING['handlers']['console']['class'] = 'logging.NullHandler'
     LOGGING['handlers']['mail_admins']['class'] = 'logging.NullHandler'
 
 TEST_RUNNER = 'rando.testing.DatabaselessTestRunner'
@@ -247,6 +250,7 @@ POPUP_FILENAME = 'popup_home.html'
 POPUP_HOME_ENABLED = False
 PRINT_ENABLED = False
 VIEW3D_ENABLED = True
+TOURISM_ENABLED = True
 
 GANALYTICS_TRACKING_CODE = 'UA-XXXXXXXX-XX'
 

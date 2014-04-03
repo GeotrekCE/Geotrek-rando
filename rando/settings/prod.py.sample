@@ -77,6 +77,11 @@ EMAIL_PORT = 25
 #     "NO_GLOBALS": False
 # }
 
+#
+# Tourism Layers
+#...............
+#
+# TOURISM_ENABLED = True
 
 #
 # In preprod

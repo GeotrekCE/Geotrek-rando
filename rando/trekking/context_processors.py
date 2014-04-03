@@ -14,8 +14,7 @@ def main(request):
     return {
         'treks_url': Trek.filepath,
         'map_extent': extent,
-
+        'FLATPAGES_POLICY_PAGE': settings.FLATPAGES_POLICY_PAGE,
         'PRINT_ENABLED': settings.PRINT_ENABLED,
         'VIEW3D_ENABLED': settings.VIEW3D_ENABLED,
-        'FEEDBACK_FORM_ENABLED': settings.FEEDBACK_FORM_ENABLED,
     }
