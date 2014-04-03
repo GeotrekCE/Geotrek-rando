@@ -11,11 +11,11 @@
              */
             position: 'bottomleft',
 
-            iconSize: [16, 16],
+            iconSize: [12, 12],
             popupSize: [450, 300],
             shadowUrl: window.IMG_URL + '/../tourism/marker-shadow.png',
             shadowSize: [25, 17],
-            shadowAnchor: [1, 3]
+            shadowAnchor: [6, 6]
         },
 
         initialize: function (base_url, definitions) {

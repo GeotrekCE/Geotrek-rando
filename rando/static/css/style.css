@@ -1232,10 +1232,11 @@ ul.errorlist {
   background-color: #f89406;
   border: solid 1px #c67605;
   outline: solid 1px #ffffff;
-  padding: 2px;
+  padding: 1px;
 }
 .leaflet-marker-icon.tourism img {
   width: 100%;
+  margin-top: -7px;
 }
 .leaflet-popup-content .tourism {
   width: 450px !important;
