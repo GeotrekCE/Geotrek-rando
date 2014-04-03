@@ -4,7 +4,18 @@
     L.Control.TourismLayers = L.Control.extend({
         includes: L.Mixin.Events,
         options: {
+            /* Override at class level
+                   L.Control.TourismLayers.prototype.options = {}
+               or at instance level using
+                   map.tourismLayers.setOptions(..);
+             */
             position: 'bottomleft',
+
+            iconSize: [16, 16],
+            popupSize: [450, 300],
+            shadowUrl: window.IMG_URL + '/../tourism/marker-shadow.png',
+            shadowSize: [25, 17],
+            shadowAnchor: [1, 3]
         },
 
         initialize: function (base_url, definitions) {
@@ -59,31 +70,56 @@
             var html = L.Util.template('<img src="{pictogram_url}"></div>', definition);
             var icon = L.divIcon({className: 'tourism',
                                   html: html,
-                                  iconSize: [16, 16],
-                                  shadowUrl: IMG_URL + '/../tourism/marker-shadow.png',
-                                  shadowSize: [25, 17],
-                                  shadowAnchor: [1, 3]});
+                                  iconSize: this.options.iconSize,
+                                  shadowUrl: this.options.shadowUrl,
+                                  shadowSize: this.options.shadowSize,
+                                  shadowAnchor: this.options.shadowAnchor});
             icon.createShadow = function (oldIcon) {
                 return this._createIcon('shadow', oldIcon);
             };
 
             var marker = L.marker(latlng, {icon: icon});
-
             marker.on('click', function (e) {
-                var props = L.Util.extend({title:'', description:'', website: ''},
-                                          feature.properties);
-                var content = L.Util.template("<h3>{title}</h3>" +
-                                              "<p>{description}</p>" +
-                                              "<p>{website}</p>", props);
-
-                marker.bindPopup(content)
-                      .openPopup();
-            });
+                this._buildMarkerPopup(marker);
+                marker.openPopup();
+            }, this);
 
             return marker;
+        },
+
+        _buildMarkerPopup: function (marker) {
+            if (marker._popup)
+                return;
+
+            var defaults = {title: '', description: '',
+                            website: '', phone: ''},
+                props = L.Util.extend(defaults,
+                                      marker.feature.properties);
+
+            props.picture_url = props.pictures.length > 0 ?
+                                props.pictures[0].url : '';
+            props.website = props.website === '' ? '' :
+                            /https?/.test(props.website) ? props.website :
+                            'http://' + props.website;
+
+            var content = L.Util.template('<div class="tourism">' +
+                                            '<h3>{title}</h3>' +
+                                            '<img class="preview" src="{picture_url}" width="200">' +
+                                            '<p class="description">{description}</p>' +
+                                            '<a href="{website}" target="_blank">{website}</a>' +
+                                            '<a href="tel:{phone}" class="phone">{phone}</a>' +
+                                          '</div>', props);
+            var popup = L.popup({
+                            maxWidth: this.options.popupSize[0],
+                            minWidth: this.options.popupSize[0],
+                            maxHeight: this.options.popupSize[1]
+                          })
+                         .setLatLng(marker.getLatLng())
+                         .setContent(content);
+            marker.bindPopup(popup);
+            return popup;
         }
     });
-
 
 
     var $script_tag = $('script#tourism'),
