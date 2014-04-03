@@ -1231,6 +1231,18 @@ ul.errorlist {
 .leaflet-marker-icon.tourism img {
   width: 100%;
 }
+.leaflet-popup-content .tourism {
+  width: 450px !important;
+}
+.leaflet-popup-content .tourism a.phone {
+  display: block;
+  margin-left: 5px;
+}
+.leaflet-popup-content .tourism a.phone:after {
+  content: "";
+  clear: both;
+  display: block;
+}
 /* Layout */
 header {
   position: absolute;
