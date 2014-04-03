@@ -128,7 +128,13 @@
 
     $(window).on('map:init', function (e) {
         var data = e.detail || e.originalEvent.detail,
-            map = data.map;
+            map = data.map,
+            containerId = map._container.id;
+
+        // Show tourism layers everywhere except on feedback form
+        if (containerId === 'feedbackmap')
+            return;
+
         $.getJSON(datasources_url, function (data) {
             var control = map.tourismLayers = new L.Control.TourismLayers(base_url, data);
             control.addTo(map);
