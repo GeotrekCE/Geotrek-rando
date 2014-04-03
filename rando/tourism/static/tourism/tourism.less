@@ -1,12 +1,19 @@
 .leaflet-control.tourism-layer-switcher {
 
-  .leaflet-left & {
+  #mainmap .leaflet-left & {
     margin-left: 400px;
     -webkit-transition: margin-left 300ms linear;
 
     .leaflet-container.fullwidth & {
       margin-left: 30px;
     }
+  }
+
+  #detailmap & {
+    display: none;
+  }
+  #detailmap.enabled & {
+      display: block;
   }
 
   .toggle-layer {

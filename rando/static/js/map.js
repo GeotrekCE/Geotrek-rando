@@ -604,6 +604,7 @@ function detailmapInit(map, bounds) {
             map.scrollWheelZoom.enable();
             $(map._container).css('cursor','-moz-grab');
             $(map._container).css('cursor','-webkit-grab');
+            $(map._container).addClass('enabled');
             $('.helpclic').hide();
         };
 

@@ -1194,12 +1194,18 @@ ul.social-buttons li {
 ul.errorlist {
   color: red;
 }
-.leaflet-left .leaflet-control.tourism-layer-switcher {
+#mainmap .leaflet-left .leaflet-control.tourism-layer-switcher {
   margin-left: 400px;
   -webkit-transition: margin-left 300ms linear;
 }
-.leaflet-container.fullwidth .leaflet-left .leaflet-control.tourism-layer-switcher {
+.leaflet-container.fullwidth #mainmap .leaflet-left .leaflet-control.tourism-layer-switcher {
   margin-left: 30px;
+}
+#detailmap .leaflet-control.tourism-layer-switcher {
+  display: none;
+}
+#detailmap.enabled .leaflet-control.tourism-layer-switcher {
+  display: block;
 }
 .leaflet-control.tourism-layer-switcher .toggle-layer {
   background-color: #877f84;
