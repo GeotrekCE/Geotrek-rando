@@ -99,7 +99,7 @@
                 props = L.Util.extend(defaults,
                                       marker.feature.properties);
 
-            props.picture_url = props.pictures.length > 0 ?
+            props.picture_url = props.pictures && props.pictures.length > 0 ?
                                 props.pictures[0].url : '';
             props.website = props.website === '' ? '' :
                             /https?/.test(props.website) ? props.website :

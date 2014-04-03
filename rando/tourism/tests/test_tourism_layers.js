@@ -1,5 +1,7 @@
-// Needed to have visible popups
-casper.options.viewportSize = {width: 1280, height: 768};
+var utils = require('../../trekking/tests/test_utils.js');
+
+utils.setUp();
+
 
 casper.test.begin('Tourism Layers', function(test) {
 
@@ -7,11 +9,12 @@ casper.test.begin('Tourism Layers', function(test) {
 
     casper.start(home_url, function () {
          casper.waitForSelector('.tourism-layer-switcher');
-
     });
 
     casper.then(function() {
         test.pass('Tourism layer switcher is present');
+        test.assertNotExists('.toggle-layer.active',
+                             'No layer switcher is active by default.');
 
         test.assertNotExists('.leaflet-marker-icon.tourism',
                              'Markers are not shown by default.');
@@ -34,7 +37,5 @@ casper.test.begin('Tourism Layers', function(test) {
         test.pass('Popup is shown on marker click');
     });
 
-    casper.run(function () {
-        test.done();
-    });
+    utils.done(test);
 });
