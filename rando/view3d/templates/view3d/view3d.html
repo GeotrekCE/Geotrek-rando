@@ -5,7 +5,60 @@
     <title>{% trans "3D View" %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <style>
+        html, body, canvas {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+        }
+        #infos {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            height: auto;
+            width : 300px;
+            background-color: rgba(255,255,255, 0.8);
+            padding : 5px;
+        }
+        #infos span {
+            float: left;
+            width: 100%;
+        }
+    </style>
+
+    <script src="{% static "js/vendor/jquery-1.9.0.min.js" %}"></script>
+
+    <!-- Babylon.js -->
+    <script src="{% static "view3d/vendor/babylon.1.10.0.js" %}"></script>
+    <script src="{% static "view3d/vendor/babylon.arcRotateCamera.js" %}"></script>
+
+    <!-- TweenLite -->
+    <script src="{% static "view3d/vendor/EasePack.min.js" %}"></script>
+    <script src="{% static "view3d/vendor/TweenLite.min.js" %}"></script>
+    <script src="{% static "view3d/vendor/TimelineLite.min.js" %}"></script>
+
+    <!-- Rando -->
+    <script src="{% static "view3d/Rando.Utils.js" %}"></script>
+    <script src="{% static "view3d/Rando.Builds.js" %}"></script>
+    <script src="{% static "view3d/index.js" %}"></script>
 </head>
-<body>
+<body data-trek-id="{{ trek.id }}"
+      data-dem-url="{% url "trekking:fileserve" object.properties.elevation_area_url %}"
+      data-profile-url="{% url "trekking:fileserve" object.properties.altimetric_profile %}">
+    <div id="rootDiv">
+        <canvas id="canvas_renderer"></canvas>
+    </div>
+    <div id="infos" >
+        <span><b>{% trans "Arrows" %}</b>: {% trans "Move around" %}</span>
+        <span><b>{% trans "Space" %}</b> : {% trans "Play/Pause overview" %}</span>
+        <span><b>{% trans "Enter" %}</b> : {% trans "Reset" %}</span>
+    </div>
+ </body>
 </body>
 </html>
