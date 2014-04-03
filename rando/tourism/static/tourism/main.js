@@ -40,6 +40,8 @@
                     return this._buildMarker(definition, feature, latlng);
                 }).bind(this),
             });
+            // Custom layer id for localStorage
+            layer.key = 'tourism-layer-' + definition.id;
 
             var className = 'toggle-layer ' + definition.id;
 
@@ -53,17 +55,18 @@
                 this.toggleLayer(button, layer);
             }, this);
             this.layers.push(layer);
+
+            // Restore state from localStorage
+            if (window.localStorage.getItem(layer.key) !== null) {
+                this.toggleLayer(button, layer);
+            }
         },
 
         toggleLayer: function (button, layer) {
-            if (this.map.hasLayer(layer)) {
-                L.DomUtil.removeClass(button, 'active');
-                this.map.removeLayer(layer);
-            }
-            else {
-                L.DomUtil.addClass(button, 'active');
-                this.map.addLayer(layer);
-            }
+            var onMap = this.map.hasLayer(layer);
+            L.DomUtil[onMap ? 'removeClass' : 'addClass'](button, 'active');
+            this.map[onMap ? 'removeLayer' : 'addLayer'](layer);
+            window.localStorage[onMap ? 'removeItem' : 'setItem'](layer.key, 'shown');
         },
 
         _buildMarker: function (definition, feature, latlng) {
