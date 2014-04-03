@@ -38,14 +38,15 @@ casper.test.begin('Tourism Layers', function(test) {
 
         test.comment('Open detail page');
         casper.click("a.btn.search");
-        casper.waitForSelector('#detailmap');
+        casper.waitForSelector('#detailmap .toggle-layer');
     });
 
     casper.then(function () {
-        test.assertNotVisible('#detailmap .toggle-layer',
-                              'Layer switcher is not shown by default');
-        test.assertExists('#detailmap .leaflet-marker-icon.tourism',
-                          'Markers state is restored.');
+        casper.waitForSelector('#detailmap .leaflet-marker-icon.tourism');
+    });
+
+    casper.then(function () {
+        test.pass('Markers state is restored.');
     });
 
     utils.done(test);
