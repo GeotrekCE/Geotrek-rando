@@ -139,10 +139,15 @@
             return;
 
         $.getJSON(datasources_url, function (data) {
-            var control = map.tourismLayers = new L.Control.TourismLayers(base_url, data);
+            var definitions = data.filter(function public_datasources(def) {
+                return (!def.targets || def.targets.indexOf('public') > -1);
+            });
+            var control = map.tourismLayers = new L.Control.TourismLayers(base_url,
+                                                                          definitions);
             control.addTo(map);
 
             $('a', control._container).tooltip();
         });
     });
+
 })(window);
