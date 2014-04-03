@@ -35,6 +35,17 @@ casper.test.begin('Tourism Layers', function(test) {
 
     casper.then(function () {
         test.pass('Popup is shown on marker click');
+
+        test.comment('Open detail page');
+        casper.click("a.btn.search");
+        casper.waitForSelector('#detailmap');
+    });
+
+    casper.then(function () {
+        test.assertNotVisible('#detailmap .toggle-layer',
+                              'Layer switcher is not shown by default');
+        test.assertExists('#detailmap .leaflet-marker-icon.tourism',
+                          'Markers state is restored.');
     });
 
     utils.done(test);
