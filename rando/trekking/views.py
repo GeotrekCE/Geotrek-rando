@@ -148,5 +148,6 @@ def fileserve(request, path):
     TODO: Could be done with ``mod_rewrite`` at deployment.
     """
     path = path[1:] if path.startswith('/') else path
-    path = os.path.join(request.LANGUAGE_CODE, path)
+    if not os.path.exists(os.path.join(settings.INPUT_DATA_ROOT, path)):
+        path = os.path.join(request.LANGUAGE_CODE, path)
     return static_serve(request, path, document_root=settings.INPUT_DATA_ROOT)
