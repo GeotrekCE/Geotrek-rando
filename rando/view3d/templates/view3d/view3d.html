@@ -30,6 +30,12 @@
             float: left;
             width: 100%;
         }
+        .not-supported {
+            width: 100%;
+            text-align: center;
+            color: gray;
+            font-size: 3em;
+        }
     </style>
 
     <script src="{% static "js/vendor/jquery-1.9.0.min.js" %}"></script>
@@ -46,11 +52,15 @@
     <!-- Rando -->
     <script src="{% static "view3d/Rando.Utils.js" %}"></script>
     <script src="{% static "view3d/Rando.Builds.js" %}"></script>
+    <script src="{% static "view3d/Rando.Settings.js" %}"></script>
     <script src="{% static "view3d/index.js" %}"></script>
 </head>
 <body data-dem-url="{% url "trekking:fileserve" object.properties.elevation_area_url %}"
       data-profile-url="{% url "trekking:fileserve" object.properties.altimetric_profile %}">
     <div id="rootDiv">
+        <div class="not-supported">
+            {% trans "Browser not supported (WebGL)" %}
+        </div>
         <canvas id="canvas_renderer"></canvas>
     </div>
     <div id="infos" >
