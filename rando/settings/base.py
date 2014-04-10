@@ -151,6 +151,7 @@ INSTALLED_APPS = (
     'rando.flatpages',
     'rando.feedback',
     'rando.tourism',
+    'rando.mobile',
 )
 
 COMPRESS_PARSER = 'compressor.parser.HtmlParser'
@@ -211,7 +212,12 @@ LOGGING = {
         },
         'rando': {
             'handlers': ['console', 'mail_admins'],
-            'level': 'WARNING',
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'landez': {
+            'handlers': ['console'],
+            'level': 'INFO',
             'propagate': False,
         },
         '': {
