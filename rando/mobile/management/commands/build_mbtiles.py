@@ -76,7 +76,7 @@ class Command(BaseCommand):
         for trek in Trek.objects.filter(language=settings.LANGUAGE_CODE).all():
             self._build_trek_mbtiles(trek, builder_args)
 
-        logger.done('Done.')
+        logger.info('Done.')
 
     def _build_global_mbtiles(self, builder_args):
         """
