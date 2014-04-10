@@ -54,7 +54,9 @@ class Command(BaseCommand):
     help = "Build MBTiles files for each trek"
 
     def execute(self, *args, **options):
-        self.site_url = args[0]
+
+        self.site_url = args[0] if len(args) > 0 else ''
+
         self.output_folder = os.path.join(settings.INPUT_DATA_ROOT, 'tiles')
         if not os.path.exists(self.output_folder):
             os.makedirs(self.output_folder)
@@ -65,21 +67,22 @@ class Command(BaseCommand):
                 tiles_url = tiles_layer[1]
         logger.info("Tiles URL is %s" % tiles_url)
 
-        builder_args = {
+        self.builder_args = {
             'tiles_url': tiles_url,
             'tile_format': format_from_url(tiles_url),
             'tiles_headers': {"Referer": self.site_url}
         }
 
-        self._build_global_mbtiles(builder_args)
+        self._build_global_mbtiles()
 
         for trek in Trek.objects.filter(language=settings.LANGUAGE_CODE).all():
-            self._build_trek_mbtiles(trek, builder_args)
+            self._build_trek_mbtiles(trek)
 
         logger.info('Done.')
 
-    def _build_global_mbtiles(self, builder_args):
-        """
+    def _build_global_mbtiles(self):
+        """ Creates a MBTiles on the global extent.
+        Builds a temporary file and overwrites the existing one on success.
         """
         server_settings = Settings.objects.all()
         global_extent = server_settings.map.extent
@@ -88,7 +91,8 @@ class Command(BaseCommand):
         global_file = os.path.join(self.output_folder, 'global.mbtiles')
         tmp_gobal_file = global_file + '.tmp'
 
-        mbtiles = MBTilesBuilder(filepath=tmp_gobal_file, **builder_args)
+        logger.info("Build global MBTiles...")
+        mbtiles = MBTilesBuilder(filepath=tmp_gobal_file, **self.builder_args)
         mbtiles.add_coverage(bbox=global_extent,
                              zoomlevels=mobile_settings.MBTILES_GLOBAL_ZOOMS)
         mbtiles.run()
@@ -97,15 +101,16 @@ class Command(BaseCommand):
         os.rename(tmp_gobal_file, global_file)
         logger.info('%s done.' % global_file)
 
-    def _build_trek_mbtiles(self, trek, builder_args):
+    def _build_trek_mbtiles(self, trek):
+        """ Creates a MBTiles for the specified Trek object.
+        Builds a temporary file and overwrites the existing one on success.
         """
-        """
-        logger.info("Build MBTiles for trek '%s'" % trek.properties.name)
+        logger.info("Build MBTiles for trek '%s'..." % trek.properties.name)
         trek_file = os.path.join(self.output_folder, 'trek-%s.mbtiles' % trek.id)
         tmp_trek_file = trek_file + '.tmp'
 
         coords = trek.geometry.coordinates
-        build_mbtiles_along_coords(tmp_trek_file, coords, builder_args)
+        build_mbtiles_along_coords(tmp_trek_file, coords, self.builder_args)
 
         remove_file(trek_file)
         os.rename(tmp_trek_file, trek_file)
