@@ -151,6 +151,7 @@ INSTALLED_APPS = (
     'rando.flatpages',
     'rando.feedback',
     'rando.tourism',
+    'rando.mobile',
 )
 
 COMPRESS_PARSER = 'compressor.parser.HtmlParser'
@@ -166,7 +167,7 @@ LEAFLET_CONFIG = {
     "TILES": [
         ('main', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
          '&copy; OpenStreetMap contributors'),
-        ('detail', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        ('detail',  "http://gpp3-wxs.ign.fr/olsx56o0hvd8ci4y6lw9bo6t/geoportail/wmts?LAYER=GEOGRAPHICALGRIDSYSTEMS.MAPS&EXCEPTIONS=text/xml&FORMAT=image/jpeg&SERVICE=WMTS&VERSION=1.0.0&REQUEST=GetTile&STYLE=normal&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}",
          '&copy; OpenStreetMap contributors')
     ],
     "SCALE": False,
@@ -211,7 +212,12 @@ LOGGING = {
         },
         'rando': {
             'handlers': ['console', 'mail_admins'],
-            'level': 'WARNING',
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'landez': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
             'propagate': False,
         },
         '': {
