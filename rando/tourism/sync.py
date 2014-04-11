@@ -1,9 +1,14 @@
+from django.conf import settings
+
 from rando.core.management.commands.sync_content import InputFile
 from rando.tourism.models import DataSource
 from rando import logger
 
 
 def sync_content_tourism(sender, **kwargs):
+    if not settings.TOURISM_ENABLED:
+        return
+
     server_settings = kwargs['server_settings']
     inputkw = kwargs['input_kwargs']
 

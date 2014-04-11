@@ -129,8 +129,6 @@ def sync_content_trekking(sender, **kwargs):
     for trek in models.Trek.tmp_objects.filter(language=settings.LANGUAGE_CODE).all():
         InputFile(trek.properties.map_image_url, **input_kwargs).pull_if_modified()
         InputFile(trek.properties.altimetric_profile, **input_kwargs).pull_if_modified()
-        if trek.properties.elevation_area_url:  # Retro-compatibility
-            InputFile(trek.properties.elevation_area_url, **input_kwargs).pull_if_modified()
 
         if trek.properties.thumbnail:
             InputFile(trek.properties.thumbnail, **input_kwargs).pull_if_modified()
