@@ -86,7 +86,7 @@
             </div>
 
             <div id="mainmap"
-                 data-treks-url="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" treks_url %}"
+                 data-treks-url="{% locale_url request.LANGUAGE_CODE "core:fileserve" treks_url %}"
                  data-treks-extent="{{ map_extent }}"></div>
         </div>
         <!-- container -->
@@ -155,7 +155,7 @@
         <script src="{% static "view3d/main.js" %}"></script>
         {% endif %}
         {% if TOURISM_ENABLED %}
-        <script src="{% static "tourism/main.js" %}" id="tourism" data-datasources-url="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" datasources_url %}" data-base-url="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" "" %}"></script>
+        <script src="{% static "tourism/main.js" %}" id="tourism" data-datasources-url="{% locale_url request.LANGUAGE_CODE "core:fileserve" datasources_url %}" data-base-url="{% locale_url request.LANGUAGE_CODE "core:fileserve" "" %}"></script>
         {% endif %}
         <script src="{% static "js/main.js" %}"></script>
 
