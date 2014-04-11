@@ -35,13 +35,15 @@ function init_ui() {
 }
 
 function page_load() {
-    /* We want to initialize home map, when we land on home page
-     * or when we visit home page through pjax after landing on other page...
-     */
-    var mainmapContainer = L.DomUtil.get('mainmap');
-    if (mainmapContainer && typeof(loadmapmainmap) == "function") {
-        loadmapmainmap();
-    }
+    // Flex divs :)
+    $('.row-fluid').each(function () {
+        var $flex = $(this).find('.flex');
+        if ($flex.length === 0) return;
+        var span = Math.round(12 / $flex.length);
+        $flex.each(function (i, v) {
+            $(v).addClass('span'+span);
+        });
+    });
 
     // Reattach elements coming from PJAX
     $('.reattach').each(function () {
@@ -55,26 +57,8 @@ function page_load() {
         $elem.removeClass('reattach').detach().appendTo(destination);
     });
 
-    if ($("#mainmap-tag").length > 0) {
-        $(window).trigger('view:home');
 
-        if(MOBILE) {
-            init_mobile();
-        }
-    }
-    else {
-        $(window).trigger('view:detail');
-    }
 
-    // Flex divs :)
-    $('.row-fluid').each(function () {
-        var $flex = $(this).find('.flex');
-        if ($flex.length === 0) return;
-        var span = Math.round(12 / $flex.length);
-        $flex.each(function (i, v) {
-            $(v).addClass('span'+span);
-        });
-    });
 
     // Lang button
     $('#lang-switch a.utils').on('click', function () {
@@ -82,6 +66,29 @@ function page_load() {
     });
 
     init_share();
+
+
+
+
+    /* We want to initialize home map, when we land on home page
+     * or when we visit home page through pjax after landing on other page...
+     */
+    var mainmapContainer = L.DomUtil.get('mainmap');
+    if (mainmapContainer && typeof(loadmapmainmap) == "function") {
+        loadmapmainmap();
+    }
+
+    if ($("#mainmap-tag").length > 0) {
+        $(window).trigger('view:home');
+
+        if(MOBILE) {
+            $(window).trigger('view:mobile');
+            init_mobile_navigation();
+        }
+    }
+    else {
+        $(window).trigger('view:detail');
+    }
 }
 
 
@@ -144,7 +151,7 @@ function init_share() {
     });
 }
 
-function init_mobile() {
+function init_mobile_navigation() {
     var $menuButton = $('#toggle-header-mobile'),
         $menu       = $('header');
 
@@ -170,70 +177,8 @@ function init_mobile() {
         }
     });
 
-    $('#flatpages a.pjax').on('click', function (e) {
+    $('#navigationbar a.pjax').on('click', function (e) {
         $menu.removeClass('open');
         $menuButton.removeClass('active');
-    });
-
-    // Remove desktop specific events
-    $('#side-bar .result').off('dblclick mouseenter mouseleave');
-
-    // Show search tab
-    $('#search').on('focus', function (e) {
-
-        // Reset button when searching (trigger closing of mobile keyboard)
-        $('#text-search .navbar-search div').removeClass('icon-search').addClass('icon-fontawesome-webfont-1').one('click', function (e) {
-            $('#search').blur();
-        });
-
-        $('#results').show();
-        $(document).on('click.results', function (e) {
-            if ($('#search').has(e.target).length === 0 && e.target != $('#search')[0]) {
-                $('#results').hide();
-                $(document).off('click.results');
-            }
-        });
-    });
-
-    // Show backpack tab
-    $('#tab-backpack a').off('click').on('click', function (e) {
-        e.preventDefault();
-
-        if ($(this).parent().hasClass('active')) {
-            $(document).off('click.backpack');
-        } else {
-            $(document).on('click.backpack', function (e) {
-                if ($('#tab-backpack').has(e.target).length === 0 && e.target != $('#tab-backpack')[0]){
-                    $('#backpack').hide();
-                    $('#tab-backpack').removeClass('active');
-                    $(document).off('click.backpack');
-                }
-            });
-        }
-
-        $(this).parent().toggleClass('active');
-        $('#backpack').toggle();
-    });
-
-    var resultTaped = false;
-
-    $('#search').on('blur', function (e) {
-        // Prevent result list hiding on blur
-        if(resultTaped) {
-            $(this).focus();
-            resultTaped = false;
-        } else {
-            $('#text-search .navbar-search div').removeClass('icon-fontawesome-webfont-1').addClass('icon-search').off('click');
-            $('#results').hide();
-            $(document).off('click.results');
-        }
-    });
-
-    $('#side-bar .result').on('mousedown', function (e) {
-        resultTaped = true;
-    });
-
-    $('#side-bar .result').on('mouseup', function (e) {
-        $('#search').blur();
     });
 }

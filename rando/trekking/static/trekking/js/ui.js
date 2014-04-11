@@ -1,5 +1,6 @@
 (function () {
 
+$(window).on('view:mobile', init_mobile);
 $(window).on('view:home', view_home);
 $(window).on('view:detail', view_detail);
 $(window).on("filters:changed", function(e, visible) {
@@ -260,4 +261,71 @@ function altimetricInit(jsonurl) {
 
     });
 }
+
+
+function init_mobile() {
+    // Remove desktop specific events
+    $('#side-bar .result').off('dblclick mouseenter mouseleave');
+
+    // Show search tab
+    $('#search').on('focus', function (e) {
+
+        // Reset button when searching (trigger closing of mobile keyboard)
+        $('#text-search .navbar-search div').removeClass('icon-search').addClass('icon-fontawesome-webfont-1').one('click', function (e) {
+            $('#search').blur();
+        });
+
+        $('#results').show();
+        $(document).on('click.results', function (e) {
+            if ($('#search').has(e.target).length === 0 && e.target != $('#search')[0]) {
+                $('#results').hide();
+                $(document).off('click.results');
+            }
+        });
+    });
+
+    // Show backpack tab
+    $('#tab-backpack a').off('click').on('click', function (e) {
+        e.preventDefault();
+
+        if ($(this).parent().hasClass('active')) {
+            $(document).off('click.backpack');
+        } else {
+            $(document).on('click.backpack', function (e) {
+                if ($('#tab-backpack').has(e.target).length === 0 && e.target != $('#tab-backpack')[0]){
+                    $('#backpack').hide();
+                    $('#tab-backpack').removeClass('active');
+                    $(document).off('click.backpack');
+                }
+            });
+        }
+
+        $(this).parent().toggleClass('active');
+        $('#backpack').toggle();
+    });
+
+    var resultTaped = false;
+
+    $('#search').on('blur', function (e) {
+        // Prevent result list hiding on blur
+        if(resultTaped) {
+            $(this).focus();
+            resultTaped = false;
+        } else {
+            $('#text-search .navbar-search div').removeClass('icon-fontawesome-webfont-1').addClass('icon-search').off('click');
+            $('#results').hide();
+            $(document).off('click.results');
+        }
+    });
+
+    $('#side-bar .result').on('mousedown', function (e) {
+        resultTaped = true;
+    });
+
+    $('#side-bar .result').on('mouseup', function (e) {
+        $('#search').blur();
+    });
+}
+
+
 })();

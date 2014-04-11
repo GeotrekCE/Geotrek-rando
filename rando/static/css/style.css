@@ -623,7 +623,7 @@ header a {
     display: none!important;
   }
 }
-#flatpages {
+#navigationbar {
   position: absolute;
   display: none;
   top: 24px;
@@ -631,21 +631,21 @@ header a {
   z-index: 1031;
 }
 @media (min-width: 979px) {
-  #flatpages {
+  #navigationbar {
     right: 150px;
   }
 }
-#flatpages ul {
+#navigationbar ul {
   list-style-type: none;
 }
-#flatpages ul li {
+#navigationbar ul li {
   display: inline-block;
   vertical-align: top;
 }
-header #flatpages {
+header #navigationbar {
   display: block;
 }
-#flatpages .btn {
+#navigationbar .btn {
   -webkit-transition: background 100ms;
   -moz-transition: background 100ms;
   -o-transition: background 100ms;
@@ -670,14 +670,14 @@ header #flatpages {
   border-bottom-color: rgba(35, 34, 34, 0.3);
   line-height: 18px;
 }
-#flatpages .btn:hover,
-#flatpages .btn.active {
+#navigationbar .btn:hover,
+#navigationbar .btn.active {
   background-color: rgba(248, 148, 6, 0.9);
 }
-#flatpages .icon-home {
+#navigationbar .icon-home {
   padding: 5px 7px 6px 7px;
 }
-#flatpages .icon-home:before {
+#navigationbar .icon-home:before {
   font-size: 18px;
   vertical-align: middle;
 }
@@ -2280,23 +2280,23 @@ ul.errorlist {
   .no-csstransforms3d header.open {
     display: block;
   }
-  header #flatpages {
+  header #navigationbar {
     display: block;
   }
-  #pjax-content #flatpages {
+  #pjax-content #navigationbar {
     display: none;
   }
-  #flatpages {
+  #navigationbar {
     position: static!important;
   }
-  #flatpages ul {
+  #navigationbar ul {
     margin: 0;
   }
-  #flatpages ul li {
+  #navigationbar ul li {
     display: block;
     border-bottom: 1px solid #d7ddcf;
   }
-  #flatpages ul li .btn {
+  #navigationbar ul li .btn {
     color: #333333 !important;
     background: none !important;
     -webkit-box-shadow: none !important;
@@ -2313,14 +2313,14 @@ ul.errorlist {
     font-family: sans-serif-light, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 100;
   }
-  #flatpages ul li .btn:hover {
+  #navigationbar ul li .btn:hover {
     background-color: transparent;
   }
-  #flatpages ul li .btn:active,
-  #flatpages ul li .btn.active {
+  #navigationbar ul li .btn:active,
+  #navigationbar ul li .btn.active {
     background-color: #ffffff;
   }
-  #flatpages ul li.home {
+  #navigationbar ul li.home {
     display: none;
   }
   #toggle-header-mobile {
