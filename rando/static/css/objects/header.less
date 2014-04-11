@@ -1,0 +1,23 @@
+header {
+  position: absolute;
+  height: @headerHeight;
+  width: 100%;
+  z-index: 1;
+
+  border-bottom: 10px solid white;
+  .box-sizing(border-box);
+  .box-shadow(0 0 2px fade(@black, 10%));
+
+  h1 {
+    color: @mainColor;
+    background: url(../img/icon-64.png) no-repeat;
+    background-position-y: 50%;
+    margin-left: 10px;
+    padding-left: 70px;
+    line-height: 70px;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}

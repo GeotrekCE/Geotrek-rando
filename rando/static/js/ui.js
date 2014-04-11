@@ -21,7 +21,7 @@ function invalidate_maps() {
 
 
 function init_ui() {
-    $(document).pjax('a.pjax', '#content');
+    $(document).pjax('a.pjax', '#pjax-content');
 
     FastClick.attach(document.body);
 

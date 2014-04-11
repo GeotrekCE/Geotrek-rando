@@ -1,0 +1,449 @@
+
+/****************************************************************************
+*
+* Detail page
+*
+*/
+
+.detail-content {
+  padding-bottom: 15px;
+}
+
+#detail-content-top {
+  margin-bottom: 15px;
+
+  h2 {
+    margin-top: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+#themes, #usages {
+  float: left;
+  color: @themesText;
+
+  ul {
+    margin: 0;
+    text-align: center;
+  }
+}
+
+#usages {
+  margin-left: 30px;
+  margin-right: 20px;
+}
+
+#toolbox {
+  margin-right: 15px;
+  margin-bottom: 0;
+  margin-top: 0;
+  text-align: right;
+  min-width: 290px;
+
+  a {
+    &:before {
+      font-size: 20px;
+      position: absolute;
+      left: 5px;
+    }
+  }
+
+  a.print,
+  a.backpack,
+  a.download,
+  a.feedback {
+    position: relative;
+    padding-left: 30px;
+    vertical-align: top;
+    margin-left: 5px;
+  }
+
+  a.gpx,
+  a.kml {
+    padding-left: 25px;
+  }
+
+  a.backpack,
+  a.download,
+  a.feedback,
+  #btn-print {
+    margin-top: 5px;
+  }
+}
+
+html.no-webgl #toolbox a.view3d {
+  display: none;
+}
+
+
+#detail-content-top h2:first-letter, .flatpage-content h2:first-letter {
+ font-size: 2em;
+}
+
+#detail-content-top h2, .flatpage-content h2 {
+ font-size: 2em;
+ color: @detailContentTitle;
+ text-transform:uppercase;
+}
+
+#detail-content-title {
+  width: 98%;
+  padding: 10px 1%;
+  background-color: @detailContentBackground;
+  border-top: 1px solid @detailContentBorder;
+  border-bottom: 1px solid @detailContentBorder;
+  margin-bottom: 18px;
+
+  h2 {
+    margin-top: -9px;
+    margin-bottom: 0;
+    line-height: 1.4em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  h3 {
+    background: none;
+    font-weight: normal;
+    font-size: 14px;
+    font-family: @fontFamily;
+    margin: 0;
+    margin-left: 2px;
+    line-height: 20px;
+  }
+}
+
+.detail-content {
+  h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+
+  h4 {
+    background-color: @detailHeaderBackground;
+    text-align: center;
+    color: white;
+    width: 100%;
+  }
+
+  p {
+    text-align:justify;
+  }
+}
+
+.alert {
+  h3 {
+    margin: 0px;
+  }
+
+  &.alert-error h3 {
+    color: @errorText;
+  }
+
+  &.alert-info h3 {
+    color: @infoText;
+  }
+
+  .icon-access:before {
+    position: relative;
+    font-size: 23px;
+    top: 6px;
+    margin-right: 5px;
+  }
+
+  .icon-warning:before {
+    position: relative;
+    font-size: 23px;
+    top: 6px;
+    margin-right: 5px;
+  }
+}
+
+.icon-information-desk:before {
+  position: relative;
+  font-size: 23px;
+  top: 6px;
+  margin-right: 5px;
+}
+
+p.teaser {
+  line-height:1.1em;
+  font-size: 18px;
+  font-family: inherit;
+  font-weight: bold;
+  color: inherit;
+  text-rendering: optimizelegibility;
+}
+
+.detail-content p.image {
+ text-align: center;
+}
+
+#trek-identity {
+  div.infos {
+    float: left;
+    margin: 0 50px;
+  }
+
+  p {
+    margin-bottom: 0;
+    color: @identityText;
+    text-align: left;
+  }
+
+  span.value {
+    color: @mainColor;
+  }
+}
+
+#trek-information-desk {
+  p {
+    margin-left: 10px;
+
+    &.title {
+      margin-bottom: 0px;
+      font-weight: bold;
+    }
+  }
+}
+
+#themes li, #usages li, #networks li {
+  list-style-type: none;
+  display: inline-block;
+}
+
+#themes .pictogram, #usages .pictogram {
+  opacity: 0.5;
+}
+
+
+.row-fluid.meta {
+  margin-top: 15px;
+}
+
+#pois-accordion .pictures-info {
+  margin-right: 10px;
+
+  &:before {
+    margin-right: 2px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
+}
+
+
+#park-center-warning {
+  font-weight: bold;
+
+  a {
+    color: @infoText;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .icon-park-center {
+    position: relative;
+
+    &:before {
+      position: relative;
+      font-size: 27px;
+      top: 4px;
+      margin-right: 10px;
+      display: block;
+      float: left;
+    }
+  }
+}
+
+
+
+#altitudegraph {
+  color: @mainColor;
+  font-size: 10px;
+
+  p {
+    margin: 0px;
+  }
+
+  .axislabel {
+    display:inline-block;
+  }
+
+  #altitude-details {
+    margin-left: 20px;
+    display:inline-block;
+    font-weight: bold;
+  }
+
+  #mouseoverprofil {
+    display: inline-block;
+    color: @altitudeProfileColor;
+  }
+}
+
+.carousel {
+  .item {
+    overflow: hidden;
+
+    > img {
+      margin: 0 auto;
+      width: 100%;
+    }
+  }
+
+  p {
+    margin: 0 0 6px;
+  }
+
+  &.slide:hover {
+    .carousel-control {
+      opacity: 0.5;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+
+  .carousel-caption {
+    background: @carouselBackground;
+    padding: 7px;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .carousel-control-zone {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    width: 20%;
+    outline: none;
+
+    &.left {
+      left: 0px;
+    }
+
+    &.right {
+      left: 80%;
+    }
+  }
+
+  .carousel-control {
+    width: 30px;
+    height: 32px;
+    line-height: 26px;
+    color: white;
+    border: none;
+    font-size: 40px;
+    font-family: @fontFamilyCaption;
+    .transition(all 300ms);
+
+    &.right {
+      right: 10px;
+      padding-left: 2px;
+      opacity: 0;
+    }
+
+    &.left {
+      left: 10px;
+      padding-left: 0;
+      padding-right: 2px;
+      width: 30px;
+      opacity: 0;
+    }
+  }
+}
+
+
+/*
+* POIs list
+*/
+.accordion-heading .accordion-toggle {
+  padding: 1px 2px;
+  line-height: 25px;
+
+  .pictogram {
+    vertical-align: top;
+    line-height: 15px;
+  }
+}
+
+.accordion-group {
+  border: none;
+  border-top: 1px solid @backgroundColor;
+  .border-radius(0);
+  margin-bottom: 0;
+
+  &:first-child {
+    border: none;
+  }
+}
+
+.accordion-toggle  {
+  cursor: pointer;
+  position: relative;
+  color: @accordionText;
+  text-decoration:none;
+
+  &:before {
+    content: "t";
+  }
+
+  &:before {
+    float: right;
+    font-size: 22px;
+  }
+
+  &.collapsed {
+    color: @accordionText;
+
+    &:hover {
+      color: @accordionTextHover;
+    }
+
+    &:before {
+      content: "w";
+    }
+  }
+
+  .name {
+    white-space: nowrap;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    position: absolute;
+    right: 65px;
+    left: 30px;
+  }
+}
+
+#trek-links {
+  img {
+    padding-right: 5px;
+  }
+
+  h5 {
+    vertical-align: bottom;
+  }
+
+  > ul {
+    margin-left: 0px;
+
+    > li {
+      list-style: none;
+
+      li {
+        list-style-type: disc;
+      }
+    }
+  }
+}

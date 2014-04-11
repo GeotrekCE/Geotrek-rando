@@ -9,11 +9,11 @@
   <a class="pjax" href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}"><i class="icon-chevron-left icon-white"></i><h1>{% trans "Back to list" %}</h1></a>
 </div>
 
-<div class="flatpage-content">
+<div class="page-content">
     <div class="row-fluid">
         {% include "trekking/_fake_searchtabs.html" %}
     </div>
-    <div id="flatpage-container-content">
+    <div class="container-content">
         {{ object.content|safe }}
     </div>
 </div>

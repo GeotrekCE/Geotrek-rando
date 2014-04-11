@@ -1,0 +1,264 @@
+
+
+/****************************************************************************
+*
+* Sidebar
+*
+*/
+
+
+.nav-tabs > li > a {
+  text-decoration: none;
+}
+
+#side-bar {
+  position: absolute;
+  top: 115px; /* header + search-bar */
+  bottom: 0;
+  z-index: 900; /* above map */
+  width: 330px;
+  border-right: solid 2px @sidebarBorder;
+  background-color: @sidebarBackground;
+  min-height: 45px;
+
+  .badge-warning {
+    background-color: @mainColor;
+  }
+
+  @media (min-width: @screen-lg) {
+    top: 65px;
+    min-width: 389px;
+  }
+
+  .nav-tabs {
+    width: 100%;
+    margin: 0;
+    border-bottom: none;
+    -webkit-touch-callout: none;
+  }
+}
+
+#tab-results, #tab-backpack {
+  width: 50%;
+}
+
+#text-search, #result-backpack-tabs {
+  width: 97%;
+  float: left;
+}
+
+#toggle-side-bar {
+  position: relative;
+  height: 100%;
+  float: right;
+  width: 3%;
+  cursor: pointer;
+
+  &:before {
+    position: absolute;
+    top: 50%;
+    font-size: 26px;
+    left: -7px;
+    pointer-events: none;
+    margin-top: -13px;
+  }
+}
+
+#toggle-side-bar.closed:before {
+  content: "g";
+}
+
+
+
+/*
+* Fake tabs
+*/
+
+
+#fake-search-tabs {
+  min-width: 300px;
+
+  ul {
+    margin-bottom: 0;
+  }
+}
+
+#side-bar .nav-tabs > li > a,
+#fake-search-tabs .nav-tabs > li > a
+{
+  position: relative;
+  .box-sizing(border-box);
+  .border-radius(0);
+  text-align: center;
+  font-weight: bold;
+  color: @sidebarTabText;
+  background-repeat: no-repeat;
+  background-position: 20px 50%;
+  margin: 0px;
+  height: 38px;
+  background-color: @sidebarTabBackground;
+  border: solid 1px @sidebarTabBorder;
+  border-left: none;
+  line-height: 19px;
+  vertical-align: bottom;
+  -webkit-tap-highlight-color: fade(@black, 0%);
+  -webkit-touch-callout: none;
+}
+
+#side-bar .nav-tabs > li.active > a,
+#side-bar .nav-tabs > li > a:hover {
+  background-color: white;
+}
+
+#side-bar .nav-tabs > li.active > a {
+  border-bottom: solid 1px white;
+}
+
+#result-backpack-content {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 3%;
+  top: 75px;
+  border-right: 1px solid @sidebarBorder;
+  padding-top: 1px;
+  background-color: white;
+  -webkit-overflow-scrolling: touch;
+}
+
+#result-backpack-tabs {
+  span.badge {
+    margin-right: 2px;
+  }
+
+  .icon-search {
+    &:before {
+      position: absolute;
+      left: 50%;
+      top: 6px;
+      font-size: 22px;
+      margin-left: -75px;
+    }
+  }
+
+  .icon-backpack {
+    &:before {
+      position: absolute;
+      left: 50%;
+      top: 5px;
+      font-size: 24px;
+      margin-left: -75px;
+    }
+  }
+}
+
+p.tab-content-empty {
+  font-size: 18px;
+  text-align: center;
+  width: 100%;
+  margin-top: 20px;
+  color: @sidebarText;
+}
+
+.search {
+  width:30%;
+  height:100%;
+  float:left;
+}
+
+.search label {
+  text-align:center;
+  font-weight: bold;
+  color: @searchTextColor;
+  margin-top:15px;
+}
+
+.search .span4 {
+  margin-top : 20px;
+}
+
+.search input.span3 {
+  width:180px;
+  padding-left:20px;
+}
+
+#text-search {
+  float:left;
+  width:97%;
+
+  .span4 {
+    width:100%;
+    margin-left:0;
+  }
+
+  .control-group {
+    margin-top:5px;
+    margin-bottom:5px;
+  }
+
+  .navbar-search {
+    width: 100%;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding-left: 5px;
+    .box-sizing(border-box);
+
+    .search-query {
+      color: gray;
+      height: 28px;
+      width: 100%;
+      background: white;
+      margin-bottom: 0;
+      border-color: @searchTextBorder;
+      line-height: 17px;
+      padding: 4px 10px;
+      .box-sizing(border-box);
+      .border-radius(0);
+      .box-shadow(none);
+      .transition(all 300ms);
+      -webkit-appearance: none;
+      -webkit-tap-highlight-color: fade(@black, 0%);
+
+
+      &.active {
+        background-color: @searchTextBackground;
+      }
+
+      &:focus,
+      &.focused {
+        color: @searchTextColor;
+        text-shadow: 0 1px 0 @searchTextBackground;
+        background-color: @searchTextBackground;
+        border: 1px solid @mainColor;
+        outline: 0;
+        .box-shadow(0 0 3px @mainColor);
+      }
+    }
+
+    div {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 35px;
+      height: 100%;
+      -webkit-touch-callout: none;
+      -webkit-tap-highlight-color: fade(@black, 0%);
+
+      @media (min-width: @screen-sm) {
+        pointer-events: none;
+      }
+
+      &:before {
+        position: absolute;
+        right: 11px;
+        top: 50%;
+        margin-top: -7px;
+        -webkit-touch-callout: none;
+      }
+
+      &.reset {
+        pointer-events: auto;
+      }
+    }
+  }
+}

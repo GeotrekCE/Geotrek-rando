@@ -18,7 +18,7 @@
   <a class="pjax" href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}"><h1 class="icon-left-open-mini">{% trans "Back to list" %}</h1></a>
 </div>
 
-<div class="detail-content">
+<div class="detail-content page-content">
   <div class="row-fluid" id="detail-content-top">
     {% include "trekking/_fake_searchtabs.html" %}
 
@@ -100,7 +100,7 @@
     </div>
   </div>
 
-  <div id="detail-container-content" class="row-fluid">
+  <div class="row-fluid container-content">
     <div class="span4">
       {% if object.properties.description_teaser %}<p class="teaser">{{ object.properties.description_teaser|safe|striptags }}</p>{% endif %}
       {% if object.properties.ambiance %}<p>{{ object.properties.ambiance|safe }}</p>{% endif %}
@@ -262,7 +262,7 @@
     </div>
     {% endif %}
 
-  </div><!-- detail-container-content -->
+  </div><!-- container-content -->
 </div><!-- detail-content -->
 
 {% leaflet_map 'detailmap' fitextent=False creatediv=False callback="detailmapInit" loadevent="rando:foo" %}{# Such loadevent will prevent automatic map initialization #}
