@@ -17,19 +17,6 @@
             top: 0;
             bottom: 0;
         }
-        #infos {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            height: auto;
-            width : 300px;
-            background-color: rgba(255,255,255, 0.8);
-            padding : 5px;
-        }
-        #infos span {
-            float: left;
-            width: 100%;
-        }
         .not-supported {
             width: 100%;
             text-align: center;
@@ -62,11 +49,6 @@
             {% trans "Browser not supported (WebGL)" %}
         </div>
         <canvas id="canvas_renderer"></canvas>
-    </div>
-    <div id="infos" >
-        <span><b>{% trans "Arrows" %}</b>: {% trans "Move around" %}</span>
-        <span><b>{% trans "Space" %}</b> : {% trans "Play/Pause overview" %}</span>
-        <span><b>{% trans "Enter" %}</b> : {% trans "Reset" %}</span>
     </div>
  </body>
 </body>
