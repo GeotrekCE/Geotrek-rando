@@ -1,7 +1,7 @@
-{% load static i18n leaflet_tags trekking_tags localeurl_tags %}
+{% load static i18n leaflet_tags rando_tags localeurl_tags %}
 
-{% include "trekking/_navigation.html" %}
-{% include "trekking/_share.html" with title=object.title %}
+{% include "_navigation.html" %}
+{% include "_share.html" with title=object.title %}
 
 {% if pjax %}
   <title>{{ object.title }}</title>

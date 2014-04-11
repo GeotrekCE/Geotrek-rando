@@ -1,5 +1,5 @@
-{% load static i18n leaflet_tags trekking_tags localeurl_tags %}
-{% include "trekking/_navigation.html" with title=object.title %}
+{% load static i18n leaflet_tags rando_tags localeurl_tags %}
+{% include "_navigation.html" with title=object.title %}
 
 {% if pjax %}
   <title>{{ TITLE }} - {{ object.title }}</title>
@@ -9,7 +9,7 @@
   <a class="pjax" href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}"><i class="icon-chevron-left icon-white"></i><h1>{% trans "Back to list" %}</h1></a>
 </div>
 
-<div class="page-content">
+<div class="flatpage-content page-content">
     <div class="row-fluid">
         {% include "trekking/_fake_searchtabs.html" %}
     </div>

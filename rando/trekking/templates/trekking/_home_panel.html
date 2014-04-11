@@ -1,6 +1,6 @@
-{% load i18n static leaflet_tags trekking_tags %}
+{% load i18n static leaflet_tags rando_tags %}
 
-{% include "trekking/_share.html" with title=TITLE %}
+{% include "_share.html" with title=TITLE %}
 
 {% if pjax %}
   <title>{{ TITLE }}</title>
@@ -62,7 +62,7 @@
 </div>
 <!-- sidebar -->
 
-{% include "trekking/_navigation.html" with title="HOME" %}
+{% include "_navigation.html" with title="HOME" %}
 
 {% leaflet_map 'mainmap' fitextent=False creatediv=False callback="mainmapInit" loadevent="rando:foo" %}{# Such loadevent will prevent automatic map initialization #}
 

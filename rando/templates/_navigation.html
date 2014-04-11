@@ -1,4 +1,4 @@
-{% load i18n flatpages localeurl_tags %}
+{% load i18n flatpages_tags localeurl_tags %}
 
 {% get_flatpages as flatpages %}
 <div id="flatpages" class="reattach" data-destination="header">
@@ -10,4 +10,4 @@
     </ul>
 </div>
 <!-- static pages -->
-{% include "trekking/_lang_switch.html" %}
+{% include "_lang_switch.html" %}
