@@ -2185,13 +2185,11 @@ ul.errorlist {
 .container-content {
   position: absolute;
   z-index: 0;
-}
-.container-content #pjax-content {
   top: 80px;
   bottom: 50px;
-  padding-left: 1%;
-  padding-right: 1%;
-  width: 98%;
+  width: 100%;
+}
+.container-content #pjax-content {
   height: 100%;
 }
 .container-content #pjax-content .page-content {
@@ -2202,6 +2200,11 @@ ul.errorlist {
   -webkit-overflow-scrolling: touch;
   width: 100%;
   padding-bottom: 15px;
+}
+.container-content #pjax-content .page-content .page-inner-content {
+  padding-left: 1%;
+  padding-right: 1%;
+  width: 98%;
 }
 /* ==========================================================================
    Mobile version media querie
