@@ -2,279 +2,54 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>{% trans "3D View" %}</title>
+    <title>{{ object.properties.name }} - {% trans "3D View" %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <style>
-        body
-        {
-            font-family: Monospace;
-            font-weight: bold;
-            background-color: #ccccff;
-            margin: 0px;
-            overflow: hidden;
+        html, body, canvas {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+        }
+        .not-supported {
+            width: 100%;
+            text-align: center;
+            color: gray;
+            font-size: 3em;
         }
     </style>
+
+    <script src="{% static "js/vendor/jquery-1.9.0.min.js" %}"></script>
+
+    <!-- Babylon.js -->
+    <script src="{% static "view3d/vendor/babylon.1.10.0.js" %}"></script>
+    <script src="{% static "view3d/vendor/babylon.arcRotateCamera.js" %}"></script>
+
+    <!-- TweenLite -->
+    <script src="{% static "view3d/vendor/EasePack.min.js" %}"></script>
+    <script src="{% static "view3d/vendor/TweenLite.min.js" %}"></script>
+    <script src="{% static "view3d/vendor/TimelineLite.min.js" %}"></script>
+
+    <!-- Rando -->
+    <script src="{% static "view3d/Rando.Utils.js" %}"></script>
+    <script src="{% static "view3d/Rando.Builds.js" %}"></script>
+    <script src="{% static "view3d/Rando.Settings.js" %}"></script>
+    <script src="{% static "view3d/index.js" %}"></script>
 </head>
-<body>
-
-<div id="message"></div>
-
-{% compress js %}
-<script src="{% static "js/vendor/modernizr-2.6.2.min.js" %}"></script>
-<script src="{% static "view3d/vendor/Three.js" %}"></script>
-<script src="{% static "view3d/vendor/Detector.js" %}"></script>
-<script src="{% static "view3d/vendor/Stats.js" %}"></script>
-<script src="{% static "view3d/vendor/TrackballControls.js" %}"></script>
-<script src="{% static "view3d/vendor/THREEx.KeyboardState.js" %}"></script>
-<script src="{% static "view3d/vendor/THREEx.FullScreen.js" %}"></script>
-<script src="{% static "view3d/vendor/THREEx.WindowResize.js" %}"></script>
-{% endcompress %}
-
-<script>
-    var coords3d = [
-    {% for coord in coords3d %}
-        {{ coord|unlocalize }},
-    {% endfor %}
-    ];
-</script>
-
-<script>
-/*
-    Three.js "tutorials by example"
-    Author: Lee Stemkoski
-    Date: March 2013 (three.js v56)
- */
-
-// MAIN
-
-
-// standard global variables
-var container, scene, camera, light, renderer, controls, stats;
-var keyboard = new THREEx.KeyboardState();
-var clock = new THREE.Clock();
-
-var trek,
-    character,
-    startTime = new Date().getTime();
-
-
-function Trek () {
-    var trekMaterial = new THREE.LineBasicMaterial({
-        color: 0xFFAA00,
-        linewidth: 5
-    });
-    var heightMaterial = new THREE.LineBasicMaterial({
-        color: 0xbbbbbb
-    });
-
-    // Internals
-    this._bounds = [[Infinity,0],[Infinity,0],[Infinity,0]];
-    this._size = null;
-    this.height = 0;
-
-    // Load from array of GeoJSON coords
-    this.load = function (coords, width) {
-        // Compute bounds in original units
-        for(var i=0, n = coords.length; i < n; i++) {
-            var c = coords[i];
-            for (var d=0; d<3; d++) {
-                if (c[d] < this._bounds[d][0]) this._bounds[d][0] = c[d];
-                if (c[d] > this._bounds[d][1]) this._bounds[d][1] = c[d];
-            }
-        }
-        this._size = [this._bounds[0][1] - this._bounds[0][0],
-                      this._bounds[1][1] - this._bounds[1][0],
-                      this._bounds[2][1] - this._bounds[2][0]];
-
-        this.height = 10 + this._size[2] / 10;
-
-        // Translate to origin and scale to scene width
-        function vector(latlngz) {
-            return new THREE.Vector3((latlngz[1] - this._bounds[1][0] - this._size[1]/2) * width,
-                                      10 + (latlngz[2] - this._bounds[2][0]) * width / 111000,  // 1deg=111km
-                                      (latlngz[0] - this._bounds[0][0] - this._size[0]/2) * width);
-        };
-
-        var points = [];
-        for(var i=0, n = coords.length; i < n; i++) {
-            points.push(vector.call(this, coords[i]));
-        }
-        var spline = new THREE.SplineCurve3(points);
-        this._smoothCoords = spline.getPoints(coords.length * 3);
-
-        return this;
-    };
-
-    this.points = function () {
-        return this._smoothCoords;
-    };
-
-    this.addTo = function ( scene ) {
-        var trekGeometry = new THREE.Geometry(),
-            groundGeometry = new THREE.Geometry();
-
-        for(var i=0, n = this._smoothCoords.length; i < n; i++) {
-            var ground = this._smoothCoords[i].clone();
-            ground.y = 0;
-
-            trekGeometry.vertices.push(this._smoothCoords[i]);
-            groundGeometry.vertices.push(ground);
-
-            if (i % 5 == 0) {
-                var lineHeight = new THREE.Geometry();
-                lineHeight.vertices.push(ground);
-                lineHeight.vertices.push(this._smoothCoords[i]);
-                var verticalLine = new THREE.Line(lineHeight, heightMaterial);
-                scene.add(verticalLine);
-            }
-        }
-        var line = new THREE.Line(trekGeometry, trekMaterial);
-        scene.add(line);
-        var groundLine = new THREE.Line(groundGeometry, heightMaterial);
-        scene.add(groundLine);
-
-        // Markers
-        // Departure
-        var departure = makeMarker(this._smoothCoords[0].clone(), 0x00ff00)
-        scene.add(departure);
-        // Arrival
-        var arrival = makeMarker(this._smoothCoords[this._smoothCoords.length-1].clone(), 0xff0000)
-        scene.add(arrival);
-
-        function makeMarker(position, color) {
-            var markerGeometry = new THREE.CylinderGeometry( 3, 0, 8, 50, 0, false);
-            var markerMaterial = new THREE.MeshLambertMaterial( { color: color } );
-            var marker = new THREE.Mesh( markerGeometry, markerMaterial );
-            position.y += 4;
-            marker.position = position;
-            return marker;
-        }
-    }
-
-    return this;
-};
-
-
-function Hiker ( trek ) {
-
-    this.addTo = function ( scene ) {
-        var cubeGeometry = new THREE.CubeGeometry( 2, 5, 2 );
-        var cubeMaterial = new THREE.MeshLambertMaterial( { color: 0xffffff } );
-        character = new THREE.Mesh( cubeGeometry, cubeMaterial );
-        character.position = coords3d[0];
-        scene.add(character);
-    };
-
-    this.update = function () {
-        var elapsed = (new Date().getTime() - startTime);
-        var points = trek.points(),
-            positionIndex = Math.floor(elapsed * 0.005) % points.length,
-            position = points[positionIndex].clone();
-        position.y += 2.5;
-        character.position = position;
-    }
-
-    return this;
-};
-
-
-
-init();
-animate();
-
-// FUNCTIONS
-function init() {
-    // SCENE
-    scene = new THREE.Scene();
-    var SCENE_WIDTH = 10000;
-
-    // CAMERA
-    var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
-    var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = SCENE_WIDTH * 2;
-    camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
-    scene.add(camera);
-
-    // RENDERER
-    if ( Detector.webgl )
-        renderer = new THREE.WebGLRenderer( {antialias:true} );
-    else
-        renderer = new THREE.CanvasRenderer();
-    renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-    container = document.createElement( 'div' );
-    document.body.appendChild( container );
-    container.appendChild( renderer.domElement );
-    // EVENTS
-    THREEx.WindowResize(renderer, camera);
-    THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
-    // CONTROLS
-    controls = new THREE.TrackballControls( camera );
-    controls.noRotate = true;
-    controls.noPan = true;
-    // STATS
-    stats = new Stats();
-    stats.domElement.style.position = 'absolute';
-    stats.domElement.style.bottom = '0px';
-    stats.domElement.style.zIndex = 100;
-    container.appendChild( stats.domElement );
-    // LIGHT
-    light = new THREE.PointLight(0xffffff);
-    light.position.set(0,300,0);
-    light.position = camera.position;
-    scene.add(light);
-    // FLOOR
-    var floorTexture = new THREE.ImageUtils.loadTexture( 'images/checkerboard.jpg' );
-    floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
-    floorTexture.repeat.set( 10, 10 );
-    var floorMaterial = new THREE.MeshBasicMaterial( { map: floorTexture, side: THREE.DoubleSide } );
-    var floorGeometry = new THREE.PlaneGeometry(1000, 1000, 10, 10);
-    var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-    floor.position.y = -0.5;
-    floor.rotation.x = Math.PI / 2;
-    scene.add(floor);
-
-    // SKYBOX/FOG
-    var skyBoxGeometry = new THREE.CubeGeometry( SCENE_WIDTH, SCENE_WIDTH, SCENE_WIDTH );
-    var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: 0x9999ff, side: THREE.BackSide } );
-    var skyBox = new THREE.Mesh( skyBoxGeometry, skyBoxMaterial );
-    skyBox.flipSided = true; // render faces from inside of the cube, instead of from outside (default).
-    scene.add(skyBox);
-    scene.fog = new THREE.FogExp2( 0x9999ff, 0.002185 );
-
-
-
-    trek = new Trek();
-    trek.load(coords3d, SCENE_WIDTH);
-    trek.addTo(scene);
-
-    camera.position.set(0, trek.height, 0);
-    camera.lookAt(0, trek.height, 0);
-
-    hiker = new Hiker(trek);
-    hiker.addTo(scene);
-}
-
-function animate() {
-    requestAnimationFrame( animate );
-    render();
-    update();
-}
-
-function update() {
-    var timer = (new Date().getTime()) * 0.0001;
-    camera.position.x = Math.floor(Math.cos( timer ) * 200);
-    camera.position.z = Math.floor(Math.sin( timer ) * 200);
-
-    hiker.update();
-    controls.update();
-    stats.update();
-}
-
-function render() {
-    renderer.render( scene, camera );
-}
-
-</script>
-
+<body data-dem-url="{% url "trekking:fileserve" object.properties.elevation_area_url %}"
+      data-profile-url="{% url "trekking:fileserve" object.properties.altimetric_profile %}">
+    <div id="rootDiv">
+        <div class="not-supported">
+            {% trans "Browser not supported (WebGL)" %}
+        </div>
+        <canvas id="canvas_renderer"></canvas>
+    </div>
+ </body>
 </body>
 </html>
