@@ -16,9 +16,17 @@ $(window).on("view:detail", function(e) {
             src: url
         }).appendTo($modalBody);
 
+        var $iframe = $popup.find('iframe');
+
         $popup.modal('show');
+
         $popup.on('hidden', function () {
-            $popup.find('iframe').remove();
+            $iframe.remove();
+        });
+
+        $(window).on('keyup', function (e) {
+            var frameDocument = $iframe.get(0).contentWindow.document;
+            $(frameDocument).trigger(e);
         });
 
         $popup.find('a.toggle-fullscreen').click(function () {
@@ -28,7 +36,6 @@ $(window).on("view:detail", function(e) {
             $modalBody.toggleClass('is-fullscreen');
 
             if ($fullscreenBtn.hasClass('active')) {
-
                 var elem = $modalBody[0];
                 if (elem.requestFullscreen) {
                   elem.requestFullscreen();
@@ -41,7 +48,6 @@ $(window).on("view:detail", function(e) {
                 }
             }
             else {
-
                 if (document.exitFullscreen) {
                   document.exitFullscreen();
                 } else if (document.msExitFullscreen) {
@@ -52,7 +58,6 @@ $(window).on("view:detail", function(e) {
                   document.webkitExitFullscreen();
                 }
             }
-
         });
     });
 });
