@@ -156,10 +156,11 @@
         {% endif %}
         <script src="{% static "view3d/main.js" %}"></script>
         {% endif %}
+        {% endcompress %}
+
         {% if TOURISM_ENABLED %}
         <script src="{% static "tourism/main.js" %}" id="tourism" data-datasources-url="{% locale_url request.LANGUAGE_CODE "core:fileserve" datasources_url %}" data-base-url="{% locale_url request.LANGUAGE_CODE "core:fileserve" "" %}"></script>
         {% endif %}
-        {% endcompress %}
 
         {% if not donottrack %}
         {% ganalytics %}
