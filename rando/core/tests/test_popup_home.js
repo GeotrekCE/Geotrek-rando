@@ -30,7 +30,6 @@ casper.test.begin('Welcome popup is only shown the first time', function(test) {
     });
 
     casper.thenOpen(home_url, function () {
-        casper.capture('/tmp/second-visit.png');
         casper.waitForSelector("#popup-home[aria-hidden='true']");
     });
 

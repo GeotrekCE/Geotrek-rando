@@ -18,18 +18,6 @@ $(document).ready(function (e) {
         $modal.modal('show');
     }
 
-    $(window).on('view:home view:detail', function () {
-        // Popup is shown only on homepage
-        $('header a.home.popup, header li.home a').click(function (e) {
-            if (/^\/[a-zA-Z_]{2,5}\/$/.test(window.location.pathname)) {
-                $modal.modal('show');
-                e.preventDefault();
-                return false;
-            }
-        });
-    });
-
-
     function showModal() {
         var alreadyShown = localStorage.getItem('popup-shown') === "yes",
             landingHome = /^\/[a-zA-Z_]{2,5}\/$/.test(window.location.pathname),
@@ -88,4 +76,16 @@ $(document).ready(function (e) {
             return trek ? trek.id : null;
         }
     }
+});
+
+$(window).on('view:home view:detail', function (e) {
+    // Popup is shown only on homepage
+    $('header a.home.popup, header li.home a').click(function (e) {
+        var home_url = /^\/[a-zA-Z_]{2,5}\/$/;
+        if (home_url.test(window.location.pathname)) {
+            $('#popup-home').modal('show');
+            e.preventDefault();
+            return false;
+        }
+    });
 });
