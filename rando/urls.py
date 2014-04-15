@@ -48,6 +48,7 @@ for language in settings.LANGUAGES:
 
 urlpatterns = patterns('',
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
+    url(r'', include('rando.core.urls', namespace='core', app_name='core')),
     url(r'', include('rando.trekking.urls', namespace='trekking', app_name='trekking')),
     url(r'', include('rando.view3d.urls', namespace='view3d', app_name='view3d')),
     url(r'', include('rando.feedback.urls', namespace='feedback', app_name='feedback')),

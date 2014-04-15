@@ -167,7 +167,7 @@ LEAFLET_CONFIG = {
     "TILES": [
         ('main', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
          '&copy; OpenStreetMap contributors'),
-        ('detail',  "http://gpp3-wxs.ign.fr/olsx56o0hvd8ci4y6lw9bo6t/geoportail/wmts?LAYER=GEOGRAPHICALGRIDSYSTEMS.MAPS&EXCEPTIONS=text/xml&FORMAT=image/jpeg&SERVICE=WMTS&VERSION=1.0.0&REQUEST=GetTile&STYLE=normal&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}",
+        ('detail', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
          '&copy; OpenStreetMap contributors')
     ],
     "SCALE": False,
@@ -217,7 +217,7 @@ LOGGING = {
         },
         'landez': {
             'handlers': ['console'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'propagate': False,
         },
         '': {

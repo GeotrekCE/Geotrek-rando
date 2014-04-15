@@ -1,0 +1,54 @@
+#navigationbar {
+  position: absolute;
+  display: none;
+  top: 24px;
+  right: 70px;
+  z-index: 1031;
+
+  @media (min-width: @screen-md) {
+    right: 150px;
+  }
+
+  ul {
+    list-style-type: none;
+
+    li {
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+
+  header & {
+    display: block;
+  }
+
+  .btn {
+    .transition(background 100ms);
+    padding: 6px 10px;
+    font-size: 1.1em;
+    text-decoration: none;
+    display: block;
+    font-weight: bold;
+    background: fadeout(@mainColor, 30%);
+    .border-radius(3px);
+    color: white;
+    text-shadow: 0 1px 1px  fade(@black, 20%);
+    .box-shadow(none);
+    border-bottom-color:  fade(@black, 30%);
+    line-height: 18px;
+
+    &:hover,
+    &.active {
+      background-color: fadeout(@mainColor, 10%);
+    }
+  }
+
+  .icon-home {
+    padding: 5px 7px 6px 7px;
+
+    &:before {
+      font-size: 18px;
+      vertical-align: middle;
+    }
+  }
+}

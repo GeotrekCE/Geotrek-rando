@@ -1,4 +1,5 @@
-var utils = require('./test_utils.js');
+var utils = require('../../core/tests/test_utils.js');
+var trekking_utils = require('./test_trekking_utils.js');
 
 utils.setUp();
 
@@ -13,27 +14,27 @@ casper.test.begin('Treks can be filtered by duration', function(test) {
     });
 
     casper.then(function () {
-        utils.assertFilterResults(test, 'duration', 0, 0, [2849]);
+        trekking_utils.assertFilterResults(test, 'duration', 0, 0, [2849]);
     });
 
     casper.then(function () {
-        utils.assertFilterResults(test, 'duration', 1, 1, [2]);
+        trekking_utils.assertFilterResults(test, 'duration', 1, 1, [2]);
     });
 
     casper.then(function () {
-        utils.assertFilterResults(test, 'duration', 2, 2, [2851]);
+        trekking_utils.assertFilterResults(test, 'duration', 2, 2, [2851]);
     });
 
     casper.then(function () {
-        utils.assertFilterResults(test, 'duration', 0, 2, [2849, 2, 2851]);
+        trekking_utils.assertFilterResults(test, 'duration', 0, 2, [2849, 2, 2851]);
     });
 
     casper.then(function () {
-        utils.assertFilterResults(test, 'duration', 0, 1, [2849, 2]);
+        trekking_utils.assertFilterResults(test, 'duration', 0, 1, [2849, 2]);
     });
 
     casper.then(function () {
-        utils.assertFilterResults(test, 'duration', 1, 2, [2, 2851]);
+        trekking_utils.assertFilterResults(test, 'duration', 1, 2, [2, 2851]);
     });
 
     utils.done(test);

@@ -1,4 +1,5 @@
-var utils = require('./test_utils.js');
+var utils = require('../../core/tests/test_utils.js');
+var trekking_utils = require('./test_trekking_utils.js');
 
 utils.setUp();
 
@@ -13,15 +14,15 @@ casper.test.begin('Treks can be filtered by altitude', function(test) {
     });
 
     casper.then(function () {
-        utils.assertFilterResults(test, 'altitude', 0, 0, [2851]);
+        trekking_utils.assertFilterResults(test, 'altitude', 0, 0, [2851]);
     });
 
     casper.then(function () {
-        utils.assertFilterResults(test, 'altitude', 1, 2, [2]);
+        trekking_utils.assertFilterResults(test, 'altitude', 1, 2, [2]);
     });
 
     casper.then(function () {
-        utils.assertFilterResults(test, 'altitude', 2, 3, [2849]);
+        trekking_utils.assertFilterResults(test, 'altitude', 2, 3, [2849]);
     });
 
     utils.done(test);

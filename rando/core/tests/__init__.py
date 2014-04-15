@@ -10,11 +10,12 @@ from django.test import SimpleTestCase
 from django.test.utils import override_settings
 from django.conf import settings
 
+from rando.core.templatetags.rando_tags import overridable
 from rando.core.management.commands.sync_content import (mkdir_p, reroot)
 from rando.core.models import JSONManager
 
 
-TESTS_DATA_PATH = os.path.join(settings.PROJECT_PATH, 'tests', 'data')
+TESTS_DATA_PATH = os.path.join(settings.PROJECT_PATH, 'core', 'tests', 'data')
 
 
 class MkdirTest(SimpleTestCase):
@@ -92,3 +93,22 @@ class NavigationTest(CasperTestCase):
     def _get_tests_file(self, name):
         here = os.path.dirname(sys.modules[self.__class__.__module__].__file__)
         return os.path.join(here, name)
+
+
+class RandoNavigationTest(NavigationTest):
+    def test_popup_home(self):
+        self.assertTrue(self.casper(self._get_tests_file('test_popup_home.js')))
+
+
+class OverridableStaticTest(SimpleTestCase):
+    def test_return_static_if_missing(self):
+        original = "img/decoration.png"
+        overridden = overridable(original)
+        self.assertEqual(overridden, "%s%s" % (settings.STATIC_URL, original))
+
+    def test_return_(self):
+        original = "img/decoration.png"
+        with patch.object(os.path, 'exists') as mock_method:
+            mock_method.return_value = True
+            overridden = overridable(original)
+        self.assertEqual(overridden, "%s%s" % (settings.MEDIA_URL, original))

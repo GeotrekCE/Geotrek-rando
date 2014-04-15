@@ -1,4 +1,4 @@
-{% load i18n static leaflet_tags compress trekking_tags ganalytics localeurl_tags %}
+{% load i18n static leaflet_tags compress rando_tags ganalytics localeurl_tags %}
 <!DOCTYPE html>
 <!--[if IEMobile 7 ]>    <html class="no-js iem7" lang="{{ request.LANGUAGE_CODE }}"> <![endif]-->
 <!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js" lang="{{ request.LANGUAGE_CODE }}"> <!--<![endif]-->
@@ -79,14 +79,14 @@
             </a>
         </header>
 
-        <div class="container-fluid" id="container-content">
-            <div id="content">
+        <div class="container-fluid container-content">
+            <div id="pjax-content">
                 {% block content %}
                 {% endblock content %}
             </div>
 
             <div id="mainmap"
-                 data-treks-url="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" treks_url %}"
+                 data-treks-url="{% locale_url request.LANGUAGE_CODE "core:fileserve" treks_url %}"
                  data-treks-extent="{{ map_extent }}"></div>
         </div>
         <!-- container -->
@@ -133,39 +133,41 @@
         <script src="{% static "js/vendor/leaflet.spin.js" %}"></script>
         <script src="{% static "js/vendor/leaflet.ajax.js" %}"></script>
         <script src="{% static "js/vendor/leaflet.layerindex.js" %}"></script>
-
         <script src="{% static "js/vendor/jquery.easing-custom.js" %}"></script>
+
         <script src="{% static "js/ui.js" %}"></script>
-        <script src="{% static "js/filter.js" %}"></script>
-        <script src="{% static "js/backpack.js" %}"></script>
-        <script src="{% static "js/map.js" %}"></script>
-        {% endcompress %}
+        <script src="{% static "js/main.js" %}"></script>
+        {% if POPUP_HOME_ENABLED %}
+        <script src="{% static "js/popup-home.js" %}"></script>
+        {% endif %}
+        {% if VIEW3D_ENABLED %}
+
+        <script src="{% static "trekking/js/ui.js" %}"></script>
+        <script src="{% static "trekking/js/filter.js" %}"></script>
+        <script src="{% static "trekking/js/backpack.js" %}"></script>
+        <script src="{% static "trekking/js/map.js" %}"></script>
+        {% if FILTERS_HASH_ENABLED %}
+        <script src="{% static "trekking/js/filter-hash.js" %}"></script>
+        {% endif %}
 
         {% if FEEDBACK_FORM_ENABLED %}
         <script src="{% static "feedback/js/ajaxcsrf.js" %}"></script>
         <script src="{% static "feedback/js/form.popup.js" %}"></script>
         {% endif %}
-        {% if FILTERS_HASH_ENABLED %}
-        <script src="{% static "js/filter-hash.js" %}"></script>
-        {% endif %}
-        {% if POPUP_HOME_ENABLED %}
-        <script src="{% static "js/popup.js" %}"></script>
-        {% endif %}
-        {% if VIEW3D_ENABLED %}
         <script src="{% static "view3d/main.js" %}"></script>
         {% endif %}
-        {% if TOURISM_ENABLED %}
-        <script src="{% static "tourism/main.js" %}" id="tourism" data-datasources-url="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" datasources_url %}" data-base-url="{% locale_url request.LANGUAGE_CODE "trekking:fileserve" "" %}"></script>
-        {% endif %}
-        <script src="{% static "js/main.js" %}"></script>
+        {% endcompress %}
 
+        {% if TOURISM_ENABLED %}
+        <script src="{% static "tourism/main.js" %}" id="tourism" data-datasources-url="{% locale_url request.LANGUAGE_CODE "core:fileserve" datasources_url %}" data-base-url="{% locale_url request.LANGUAGE_CODE "core:fileserve" "" %}"></script>
+        {% endif %}
 
         {% if not donottrack %}
         {% ganalytics %}
         {% endif %}
 
         {% if POPUP_HOME_ENABLED %}
-            {% include "trekking/_popup_home.html" %}
+            {% include "_popup_home.html" %}
         {% endif %}
 
         {% if VIEW3D_ENABLED %}

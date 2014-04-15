@@ -42,8 +42,8 @@
     <script src="{% static "view3d/Rando.Settings.js" %}"></script>
     <script src="{% static "view3d/index.js" %}"></script>
 </head>
-<body data-dem-url="{% url "trekking:fileserve" object.properties.elevation_area_url %}"
-      data-profile-url="{% url "trekking:fileserve" object.properties.altimetric_profile %}">
+<body data-dem-url="{% url "core:fileserve" object.properties.elevation_area_url %}"
+      data-profile-url="{% url "core:fileserve" object.properties.altimetric_profile %}">
     <div id="rootDiv">
         <div class="not-supported">
             {% trans "Browser not supported (WebGL)" %}

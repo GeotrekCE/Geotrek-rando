@@ -10,7 +10,8 @@ from django.test.utils import override_settings
 from rando.core.tests import NavigationTest
 
 
-@override_settings(POPUP_HOME_ENABLED=False)
+@override_settings(POPUP_HOME_ENABLED=False,
+                   FEEDBACK_FORM_ENABLED=True)
 class FeedBackPickPlaceTests(NavigationTest):
 
     def test_popup(self):

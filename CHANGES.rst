@@ -8,6 +8,21 @@ CHANGELOG
 **New features**
 
 * Feedback form from trek detail page
+* Show external datasources (available in Geotrek 0.23+). Useful to show
+  locations from Tourism Information Systems.
+* New 3D visualization, using Babylon.js (requires Geotrek 0.23+).
+* Hide empty block in detail pages if trek fields are not all filled.
+
+**Internal features**
+
+* Added a command to build a MBTiles file for each trek (one necessary step
+  for Geotrek mobile)
+* Major refactor of synchronization command, now implemented by module
+
+:notes:
+
+    This version requires at least Geotrek 0.23, unless you set
+    ``TOURISM_ENABLED`` and ``VIEW3D_ENABLED`` to ``False``.
 
 
 1.27 (2014-03-20)

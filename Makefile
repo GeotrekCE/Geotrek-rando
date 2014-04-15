@@ -19,7 +19,7 @@ deploy: bin/python
 	mkdir -p var/input/media/pages
 	touch var/input/media/style.css
 	cp -n rando/settings/prod.py.sample rando/settings/prod.py
-	bin/python ./manage.py collectstatic --clear --noinput
+	bin/python ./manage.py collectstatic --clear --noinput --ignore="*.less"
 
 test: bin/python
 	bin/python ./manage.py test core feedback tourism trekking flatpages view3d

@@ -250,7 +250,7 @@ To hide the footer, add in ``style.css``:
         display: none;
     }
 
-    #container-content {
+    .container-content {
         bottom: 0px;
     }
 

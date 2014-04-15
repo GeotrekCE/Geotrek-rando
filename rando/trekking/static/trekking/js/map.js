@@ -516,7 +516,7 @@ function mainmapInit(map, djoptions) {
 
         // Make sure clic on details will open as pjax (cause added after initial loading?)
         $("a.pjax", popup._container).click(function (event) {
-            $.pjax.click(event, {container: '#content'});
+            $.pjax.click(event, {container: '#pjax-content'});
 
             // Track event
             _gaq.push(['_trackEvent', 'Map', 'Popup', properties.name]);
@@ -525,7 +525,7 @@ function mainmapInit(map, djoptions) {
         // If MOBILE, then click on whole popup panel opens details
         if(MOBILE) {
             $(".leaflet-popup-content-wrapper").on('click', function (event) {
-                $.pjax({container: '#content', url:$("a.pjax", popup._container).attr('href')});
+                $.pjax({container: '#pjax-content', url:$("a.pjax", popup._container).attr('href')});
             });
         }
     });
