@@ -18,6 +18,7 @@ CHANGELOG
 * Added a command to build a MBTiles file for each trek (one necessary step
   for Geotrek mobile)
 * Major refactor of synchronization command, now implemented by module
+* Major refactor of LESS and JavaScript code, now splitted by module
 
 :notes:
 
