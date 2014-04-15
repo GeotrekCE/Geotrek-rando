@@ -1,11 +1,12 @@
-var utils = require('./test_utils.js');
+var utils = require('../../core/tests/test_utils.js');
+
 
 utils.setUp();
 
 
 casper.test.begin('Welcome popup is only shown the first time', function(test) {
 
-    var home_url = casper.cli.options['url-base'] + '/fr/';
+    var home_url = casper.cli.options['url-base'] + "/fr/";
 
     /*
      * Landing on home
@@ -25,14 +26,15 @@ casper.test.begin('Welcome popup is only shown the first time', function(test) {
     casper.waitWhileVisible('#popup-home', function () {
         test.assertExists("#popup-home[aria-hidden='true']",
                           'Popup is now closed.');
+        test.info('Come back on home');
+    });
+
+    casper.thenOpen(home_url, function () {
+        casper.capture('/tmp/second-visit.png');
+        casper.waitForSelector("#popup-home[aria-hidden='true']");
     });
 
     casper.then(function () {
-        test.info('Come back on home');
-        casper.open(home_url);
-    });
-
-    casper.waitForSelector("#popup-home[aria-hidden='true']", function () {
         test.pass('Popup is not shown on second visit.');
         casper.click('header a.home.popup');
     });

@@ -1,4 +1,4 @@
-var utils = require('../../trekking/tests/test_utils.js');
+var utils = require('../../core/tests/test_utils.js');
 
 utils.setUp();
 
@@ -8,6 +8,7 @@ casper.test.begin('Tourism Layers', function(test) {
     var home_url = casper.cli.options['url-base'] + '/fr/';
 
     casper.start(home_url, function () {
+        utils.clearLocalStorage();
          casper.waitForSelector('.tourism-layer-switcher');
     });
 

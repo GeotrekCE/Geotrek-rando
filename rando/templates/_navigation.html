@@ -1,6 +1,6 @@
 {% load i18n flatpages_tags localeurl_tags %}
 
-<div id="flatpages" class="reattach" data-destination="header">
+<div id="navigationbar" class="reattach" data-destination="header">
     <ul>
         <li class="home"><a class="btn pjax icon-home" href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}" title="{% trans "Home" %}"></a></li>
     {% get_flatpages as flatpages %}

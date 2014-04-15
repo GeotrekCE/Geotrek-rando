@@ -15,7 +15,7 @@ from rando.core.management.commands.sync_content import (mkdir_p, reroot)
 from rando.core.models import JSONManager
 
 
-TESTS_DATA_PATH = os.path.join(settings.PROJECT_PATH, 'tests', 'data')
+TESTS_DATA_PATH = os.path.join(settings.PROJECT_PATH, 'core', 'tests', 'data')
 
 
 class MkdirTest(SimpleTestCase):
@@ -93,6 +93,11 @@ class NavigationTest(CasperTestCase):
     def _get_tests_file(self, name):
         here = os.path.dirname(sys.modules[self.__class__.__module__].__file__)
         return os.path.join(here, name)
+
+
+class RandoNavigationTest(NavigationTest):
+    def test_popup_home(self):
+        self.assertTrue(self.casper(self._get_tests_file('test_popup_home.js')))
 
 
 class OverridableStaticTest(SimpleTestCase):

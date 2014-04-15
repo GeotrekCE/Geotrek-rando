@@ -1,4 +1,4 @@
-var utils = require('./test_utils.js');
+var utils = require('../../core/tests/test_utils.js');
 
 utils.setUp();
 

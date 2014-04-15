@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
-import os
 import re
 
-from mock import patch
 from easydict import EasyDict as edict
 from django.test import SimpleTestCase
-from django.conf import settings
 
 from rando.core.tests import NavigationTest
 from rando.trekking.models import Trek
@@ -64,8 +61,6 @@ class TrekFulltextTest(SimpleTestCase):
 
 
 class TrekkingNavigationTest(NavigationTest):
-    def test_popup(self):
-        self.assertTrue(self.casper(self._get_tests_file('test_popup.js')))
 
     def test_backpack(self):
         self.assertTrue(self.casper(self._get_tests_file('test_backpack.js')))

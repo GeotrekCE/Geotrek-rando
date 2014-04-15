@@ -1,4 +1,5 @@
-var utils = require('./test_utils.js');
+var utils = require('../../core/tests/test_utils.js');
+var trekking_utils = require('./test_trekking_utils.js');
 
 utils.setUp();
 
@@ -27,7 +28,7 @@ casper.test.begin('Filters location hash', function(test) {
     casper.then(function () {
         test.assertUrlMatch(filter_ascent_600m,
                             'Location hash is maintained after page load');
-        utils.setSliderFilter('difficulty', 0, 0);
+        trekking_utils.setSliderFilter('difficulty', 0, 0);
         test.assertUrlMatch(/#3782-20ce-360-9602-60a6-273-805-ca19-4066-9a81-8c0a-e100-2e02-7aaa-b6-5007-6a80-c00-d081-4086-7b-d02f-b740-$/,
                             'Location hash is refreshed on filter change');
     });
