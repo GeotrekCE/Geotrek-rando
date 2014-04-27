@@ -6,7 +6,7 @@ from mock import patch
 
 from casper.tests import CasperTestCase
 
-from django.test import SimpleTestCase
+from django.test import TestCase, SimpleTestCase
 from django.test.utils import override_settings
 from django.conf import settings
 
@@ -72,6 +72,15 @@ class JSONManagerTest(SimpleTestCase):
         with patch('rando.core.models.JSONManager') as mock_content:
             mock_content.content.return_value = '[]'
             self.assertEqual([], mgr.all())
+
+
+
+@override_settings(INPUT_DATA_ROOT=TESTS_DATA_PATH)
+class CoreViewsTest(TestCase):
+    def test_fileserve_serves_geojson_as_json(self):
+        response = self.client.get('/fr/files/api/trek/trek.geojson')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'application/json')
 
 
 @override_settings(INPUT_DATA_ROOT=TESTS_DATA_PATH,

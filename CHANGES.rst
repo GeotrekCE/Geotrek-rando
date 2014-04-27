@@ -5,6 +5,10 @@ CHANGELOG
 1.28dev (unreleased)
 --------------------
 
+**BUG fixes**
+
+* Fix GeoJSON being served as application/octet-stream (fixes #137)
+
 **New features**
 
 * Feedback form from trek detail page
