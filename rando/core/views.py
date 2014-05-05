@@ -13,6 +13,12 @@ def fileserve(request, path):
 
     if '.geojson' not in mimetypes.types_map:
         mimetypes.add_type('application/json', '.geojson')
+    if '.gpx' not in mimetypes.types_map:
+        mimetypes.add_type('application/gpx+xml', '.gpx')
+    if '.kml' not in mimetypes.types_map:
+        mimetypes.add_type('application/vnd.google-earth.kml+xml', '.kml')
+    if '.kmz' not in mimetypes.types_map:
+        mimetypes.add_type('application/vnd.google-earth.kmz', '.kmz')
 
     path = path[1:] if path.startswith('/') else path
     if not os.path.exists(os.path.join(settings.INPUT_DATA_ROOT, path)):

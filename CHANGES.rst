@@ -8,6 +8,7 @@ CHANGELOG
 **BUG fixes**
 
 * Fix GeoJSON being served as application/octet-stream (fixes #137)
+* Fix GeoJSON not being gzipped : divide initialization time by four (fixes #136)
 
 **New features**
 

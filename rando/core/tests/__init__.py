@@ -82,6 +82,17 @@ class CoreViewsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response['Content-Type'], 'application/json')
 
+    def test_fileserve_serves_gpx_as_xml(self):
+        response = self.client.get('/fr/files/api/trek/trek-2.kml')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'],
+                         'application/vnd.google-earth.kml+xml')
+
+    def test_fileserve_serves_kml_as_googleearth(self):
+        response = self.client.get('/fr/files/api/trek/trek-2.gpx')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'application/gpx+xml')
+
 
 @override_settings(INPUT_DATA_ROOT=TESTS_DATA_PATH,
                    MEDIA_ROOT=os.path.join(TESTS_DATA_PATH, 'media'))
