@@ -174,7 +174,7 @@ msgstr ""
 msgid "Reset filters"
 msgstr "Reimposta i fitri"
 
-msgid "Cities"
+msgid "Municipalities"
 msgstr "Comuni"
 
 msgid "Search"
@@ -195,8 +195,8 @@ msgstr "Vuoto"
 msgid "Preview of"
 msgstr "Anteprima di"
 
-msgid "City"
-msgstr ""
+msgid "Municipality"
+msgstr "Comune"
 
 msgid "Remove from favorites"
 msgstr "Elimina dai preferiti"

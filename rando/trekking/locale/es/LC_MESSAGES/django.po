@@ -174,8 +174,8 @@ msgstr ""
 msgid "Reset filters"
 msgstr "Resetear filtros"
 
-msgid "Cities"
-msgstr "Pueblos, aglomeraciones"
+msgid "Municipalities"
+msgstr "Municipios"
 
 msgid "Search"
 msgstr "Buscar"
@@ -195,8 +195,8 @@ msgstr "Vacio"
 msgid "Preview of"
 msgstr "Vista provisional de"
 
-msgid "City"
-msgstr ""
+msgid "Municipality"
+msgstr "Municipio"
 
 msgid "Remove from favorites"
 msgstr "Borrar de mis favoritos"

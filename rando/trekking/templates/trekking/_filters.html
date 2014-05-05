@@ -103,8 +103,8 @@
 
       {% if cities %}
       <div class="filter-bloc cities">
-        <label for="city" class="hidden">{% trans "Cities" %}</label>
-        <select id="city" class="chosen-select" tabindex="2" multiple="" data-filter="city" data-placeholder="{% trans "Cities" %}">
+        <label for="city" class="hidden">{% trans "Municipalities" %}</label>
+        <select id="city" class="chosen-select" tabindex="2" multiple="" data-filter="city" data-placeholder="{% trans "Municipalities" %}">
         {% for city in cities %}
           <option data-filter="city" data-id="{{ city.code }}" value="{{ city.code|safe }}">{{ city.name }}</option>
         {% endfor %}

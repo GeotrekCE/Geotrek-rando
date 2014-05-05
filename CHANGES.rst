@@ -10,6 +10,8 @@ CHANGELOG
 * Fix GeoJSON being served as application/octet-stream (fixes #137)
 * Fix GeoJSON not being gzipped : divide initialization time by four (fixes #136)
 * Fix translations of Uses and Thematic (fixes #138)
+* Fix translations of municipalities (fixes #107)
+  (reference http://en.wikipedia.org/wiki/Municipality)
 
 **New features**
 

@@ -23,7 +23,7 @@
     <a class="pjax hidden" href="{% locale_url request.LANGUAGE_CODE "trekking:detail" trek.properties.slug %}"></a>
     <h3>{{ trek.properties.name }}</h3>
     <p>{% for district in trek.properties.districts %}{{ district.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-    <p>{% trans "City" %}&nbsp;: {{ trek.properties.cities.0.name }}</p>
+    <p>{% trans "Municipality" %}&nbsp;: {{ trek.properties.cities.0.name }}</p>
     <p>{{ trek.properties.duration_pretty }} <span class="ascent">- {% trans "Climb" %} {{ trek.properties.ascent }} m</span></p>
     <p>{{ trek.properties.difficulty.label|default:"&nbsp;" }}</p>
     <div class="theme-tools">

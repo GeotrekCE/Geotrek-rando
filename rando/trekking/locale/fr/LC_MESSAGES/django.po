@@ -172,7 +172,7 @@ msgstr "Réinitialiser"
 msgid "Reset filters"
 msgstr "Réinitialiser les filtres"
 
-msgid "Cities"
+msgid "Municipalities"
 msgstr "Communes"
 
 msgid "Search"
@@ -193,7 +193,7 @@ msgstr "Vide"
 msgid "Preview of"
 msgstr "Aperçu de"
 
-msgid "City"
+msgid "Municipality"
 msgstr "Commune"
 
 msgid "Remove from favorites"
