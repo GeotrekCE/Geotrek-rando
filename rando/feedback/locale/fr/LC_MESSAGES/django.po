@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-20 22:41+0100\n"
+"POT-Creation-Date: 2014-05-05 11:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,69 +18,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: forms.py:16
 msgid "Name"
 msgstr "Nom"
 
-#: forms.py:17
 msgid "Email"
 msgstr "Courriel"
 
-#: forms.py:18
 msgid "Category"
 msgstr "Catégorie"
 
-#: forms.py:22
 msgid "Description of your problem"
 msgstr ""
 "Nous vous invitons à préciser les informations qui nous permettrons de "
 "comprendre la nature du problème et sa localisation (balisage, signalétique, "
 "effondrement, végétation non entretenue, conflit,...)"
 
-#: forms.py:23
 msgid "Description"
 msgstr "Description"
 
-#: forms.py:25
 msgid "Lat"
 msgstr ""
 
-#: forms.py:26
 msgid "Lng"
 msgstr ""
 
-#: forms.py:28
 msgid "Captcha"
 msgstr "Antispam"
 
-#: views.py:21
 msgid "Feedback from {name}"
 msgstr "Signalement de {name}"
 
-#: templates/feedback/_popup_feedback.html:5
-#: templates/feedback/_popup_feedback.html:17
-#: templates/feedback/_popup_feedback.html:29
 msgid "Feedback"
 msgstr "Signalement"
 
-#: templates/feedback/_popup_feedback.html:10
 msgid "Cancel"
 msgstr "Annuler"
 
-#: templates/feedback/_popup_feedback.html:11
 msgid "Send"
 msgstr "Envoyer"
 
-#: templates/feedback/_popup_feedback.html:20
 msgid "An email has been sent to site admins. Thanks for your message !"
 msgstr "Un email a été envoyé aux responsables. Merci pour votre message !"
 
-#: templates/feedback/_popup_feedback.html:23
-#: templates/feedback/_popup_feedback.html:35
 msgid "OK"
 msgstr ""
 
-#: templates/feedback/_popup_feedback.html:32
 msgid ""
 "An error occurred when sending message. This error has been reported to site "
 "admin. Please try later."
@@ -88,27 +70,23 @@ msgstr ""
 "Une erreur est apparue à l'envoi du message. Cette erreur a été reportée à "
 "l'administrateur. Veuillez réessayer plus tard."
 
-#: templates/feedback/form.html:16
 msgid "You can click to mark a place"
 msgstr "Cliquer pour définir l'emplacement"
 
-#: templates/feedback/form.html:39
 msgid "You can contact our team to tell us any problem on this trek."
 msgstr ""
 "Grâce à ce formulaire, il vous est possible de contacter nos équipes pour "
 "signaler un problème avec cet itinéraire."
 
-#: templates/feedback/mail_template.html:2
+#, python-format
 msgid "%(name)s (%(email)s) has sent a feedback on category %(category)s."
 msgstr ""
 "%(name)s (%(email)s) a signalé un problème dans la catégorie %(category)s."
 
-#: templates/feedback/mail_template.html:3
 #, python-format
 msgid "Comment : %(user_comment)s"
 msgstr "Son commentaire est le suivant : %(user_comment)s"
 
-#: templates/feedback/mail_template.html:4
 #, python-format
 msgid "Lat : %(latitude)s / Lon : %(longitude)s"
 msgstr ""

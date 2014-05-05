@@ -1,3 +1,5 @@
+SHELL = /bin/bash
+
 install: bin/python
 
 bin/python:
@@ -30,12 +32,8 @@ clean:
 ping_google:
 	bin/python ./manage.py ping_google $(url)/sitemap.xml
 
-generate-msg:
-	(cd rando/trekking && ../../manage.py makemessages -a)
-	(cd rando/feedback && ../../manage.py makemessages -a)
+all_makemessages:
+	for dir in `find rando/ -type d -name locale`; do pushd `dirname $$dir` > /dev/null; ../../manage.py makemessages --no-location --all; popd > /dev/null; done
 
-compile-msg:
-	(cd rando/trekking && ../../manage.py compilemessages)
-	(cd rando/feedback && ../../manage.py compilemessages)
-
-msg: generate-msg compile-msg
+all_compilemessages:
+	for dir in `find rando/ -type d -name locale`; do pushd `dirname $$dir` > /dev/null; ../../manage.py compilemessages; popd > /dev/null; done

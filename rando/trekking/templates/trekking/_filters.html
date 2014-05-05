@@ -70,8 +70,8 @@
 
       {% if usages %}
       <div class="filter-bloc usage">
-        <label for="usage" class="hidden">{% trans "Usages" %}</label>
-        <select id="usage" class="chosen-select" tabindex="2" multiple="" data-filter="usage" data-placeholder="{% trans "Usages" %}">
+        <label for="usage" class="hidden">{% trans "Uses" %}</label>
+        <select id="usage" class="chosen-select" tabindex="2" multiple="" data-filter="usage" data-placeholder="{% trans "Uses" %}">
         {% for usage in usages %}
           <option data-filter="usage" data-id="{{ usage.id }}" value="{{ usage.id }}">{{ usage.label }}</option>
         {% endfor %}
