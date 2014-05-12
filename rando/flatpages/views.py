@@ -1,8 +1,8 @@
 from django.http import Http404
 from django.views.generic import DetailView
-from django.shortcuts import redirect
 from djpjax import PJAXResponseMixin
 
+from rando.core.utils import locale_redirect
 from .models import FlatPage
 
 
@@ -24,5 +24,5 @@ def page_redirect(request, pk):
     lang = request.LANGUAGE_CODE
     pages = [p for p in FlatPage.objects.filter(language=lang, pk=pk).all()]
     if len(pages) > 0:
-        return redirect("flatpages:page", pages[0].slug())
+        return locale_redirect("flatpages:page", pages[0].slug(), locale=lang)
     raise Http404

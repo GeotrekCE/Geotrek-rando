@@ -12,6 +12,7 @@ CHANGELOG
 * Fix translations of Uses and Thematic (fixes #138)
 * Fix translations of municipalities (fixes #107)
   (reference http://en.wikipedia.org/wiki/Municipality)
+* Fix redirection to park core rules (fixes #140)
 
 **New features**
 
