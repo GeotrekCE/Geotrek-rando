@@ -1,13 +1,11 @@
 from django.http import Http404
 from django.conf import settings
-from django.core.urlresolvers import reverse
 from django.views.generic import TemplateView, DetailView
 from django.utils.translation import ugettext_lazy as _
-from django.shortcuts import redirect
 from djpjax import PJAXResponseMixin
-from localeurl.utils import locale_url
 
 from rando import logger
+from rando.core.utils import locale_redirect
 from .models import Trek
 
 
@@ -131,9 +129,7 @@ def trek_redirect(request, pk):
     treks = Trek.objects.filter(language=lang).all()
     for trek in treks:
         if trek.pk == int(pk):
-            fullurl = reverse('trekking:detail', kwargs={'slug': trek.properties.slug})
-            # In case, reverse() does not prefix locale, force it.
-            if not fullurl.startswith('/%s' % lang):
-                fullurl = locale_url(fullurl, locale=lang)
-            return redirect(fullurl)
+            return locale_redirect('trekking:detail',
+                                   kwargs={'slug': trek.properties.slug},
+                                   locale=lang)
     raise Http404

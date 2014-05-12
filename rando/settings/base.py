@@ -229,6 +229,10 @@ LOGGING = {
 }
 
 
+LOCALEURL_USE_ACCEPT_LANGUAGE = True
+LOCALE_REDIRECT_PERMANENT = False
+
+
 if TEST:
     INSTALLED_APPS += ('casper',)
     LOGGING['handlers']['console']['class'] = 'logging.NullHandler'

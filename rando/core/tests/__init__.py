@@ -13,6 +13,7 @@ from django.conf import settings
 from rando.core.templatetags.rando_tags import overridable
 from rando.core.management.commands.sync_content import (mkdir_p, reroot)
 from rando.core.models import JSONManager
+from rando.core.utils import locale_redirect
 
 
 TESTS_DATA_PATH = os.path.join(settings.PROJECT_PATH, 'core', 'tests', 'data')
@@ -73,6 +74,13 @@ class JSONManagerTest(SimpleTestCase):
             mock_content.content.return_value = '[]'
             self.assertEqual([], mgr.all())
 
+
+class UtilsTest(SimpleTestCase):
+    def test_redirect_with_locale(self):
+        response = locale_redirect('core:fileserve',
+                                   kwargs={'path': '/file.pdf'},
+                                   locale='it')
+        self.assertEqual(response['location'], '/it/files/file.pdf')
 
 
 @override_settings(INPUT_DATA_ROOT=TESTS_DATA_PATH)
