@@ -267,7 +267,7 @@ shall be a list of integer values expressed in meters.
 Map elements
 ------------
 
-The background layers can be configured from ``settings_local.py``. See sample.
+The background layers can be configured from ``settings/prod.py``. See sample.
 
 
 The map elements colors can be set from the ``footer.html`` page, using a ``<script>`` block :
@@ -367,7 +367,7 @@ in the *media* folder, and override the respective CSS class in your custom
 Home popup
 ----------
 
-In ``settings_local.py``, enable with :
+In ``settings/prod.py``, enable with :
 
 ::
 
