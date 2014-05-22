@@ -65,6 +65,7 @@ Note that Apache has to be restart to apply changes in settings.
 It is also wise to change the permissions of this file, in order to protect sensitive information
 such as Geotrek password.
 
+
 Feedback app configuration
 --------------------------
 
@@ -73,9 +74,6 @@ Configure recaptcha :
 * Go to http://www.google.com/recaptcha, create an account, follow the instructions to get public/private key for your domain name,
 * Add respective values on setting parameters **RECAPTCHA_PUBLIC_KEY** and **RECAPTCHA_PRIVATE_KEY**.
 
-Configure email settings (mails are sent to managers when users submit a feedback) :
-
-* Add correct values on setting parameters **EMAIL_HOST**, **EMAIL_PORT** and **SERVER_EMAIL**. **EMAIL_HOST** and **EMAIL_PORT** match with smtp server you want to use to send emails. **SERVER_EMAIL** will be the "From" email field for each email sent to managers when users submit a feedback.
 
 Apache vhost
 ------------

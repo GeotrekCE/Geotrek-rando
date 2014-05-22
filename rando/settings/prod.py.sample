@@ -45,12 +45,6 @@ FEEDBACK_FORM_CATEGORIES = {
            ('other', u'Autre')),
 }
 
-# Email settings
-# See https://docs.djangoproject.com/en/dev/topics/email/ for more informations
-SERVER_EMAIL = 'admin@yourdomainname'
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 25
-
 #
 # Filters customization
 #
