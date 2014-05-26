@@ -19,7 +19,8 @@ CHANGELOG
 * Feedback form from trek detail page
 * Show external datasources (available in Geotrek 0.23+). Useful to show
   locations from Tourism Information Systems.
-* New 3D visualization, using Babylon.js (requires Geotrek 0.23+).
+* Change 3D visualization engine, now using Babylon.js (requires Geotrek 0.23+).
+* Show the whole area in 3D view (no texture yet).
 * Hide empty block in detail pages if trek fields are not all filled.
 
 **Internal features**
