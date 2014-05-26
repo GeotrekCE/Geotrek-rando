@@ -1,3 +1,4 @@
+from rando import logger
 from rando.core.helpers import GeotrekClient
 
 
@@ -17,4 +18,8 @@ def send_report(**data):
 
     client = GeotrekClient()
     client.login()
-    client.post('/feedback/report/add/', data=record)
+    reply = client.post('/report/add/', data=record, allow_redirects=False)
+    if reply.status_code != 302:
+        logger.error("Error at creating feedback report")
+        logger.error(reply.content)
+        raise Exception("Could not send record")

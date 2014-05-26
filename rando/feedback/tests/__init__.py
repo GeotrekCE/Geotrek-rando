@@ -110,29 +110,38 @@ class SendReportTestCase(TestCase):
             'longitude': '1.25'
         }
 
-    @mock.patch('rando.feedback.helpers.GeotrekClient.login')
-    def test_a_login_is_performed_on_geotrek(self, client_login):
+    @mock.patch('rando.feedback.helpers.GeotrekClient.post')
+    def test_a_login_is_performed_on_geotrek(self, client_post):
+        client_post.return_value = mock.MagicMock(status_code=302)
         send_report(**self.report)
-        self.assertTrue(client_login.assert_called)
+        self.assertTrue(client_post.login.assert_called)
 
     @mock.patch('rando.feedback.helpers.GeotrekClient.post')
     def test_a_post_is_performed_on_geotrek(self, client_post):
+        client_post.return_value = mock.MagicMock(status_code=302)
         send_report(**self.report)
         self.assertTrue(client_post.assert_called)
 
     @mock.patch('rando.feedback.helpers.GeotrekClient.post')
     def test_a_post_is_performed_on_url_on_geotrek(self, client_post):
+        client_post.return_value = mock.MagicMock(status_code=302)
         send_report(**self.report)
-        call1 = client_post.call_args_list[0]
-        self.assertEquals(call1[0][0], '/feedback/report/add/')
+        call2 = client_post.call_args_list[1]
+        self.assertEquals(call2[0][0], '/report/add/')
 
     @mock.patch('rando.feedback.helpers.GeotrekClient.post')
     def test_posted_data_is_prepared_for_geotrek(self, client_post):
+        client_post.return_value = mock.MagicMock(status_code=302)
         send_report(**self.report)
-        call1 = client_post.call_args_list[0]
-        posted_data = call1[1]['data']
+        call2 = client_post.call_args_list[1]
+        posted_data = call2[1]['data']
         expected_data = dict(**self.report)
         expected_data['geom'] = '{"type": "Point", "coordinates":[%s, %s]}' % (
             expected_data.pop('longitude'),
             expected_data.pop('latitude'))
         self.assertEquals(posted_data, expected_data)
+
+    @mock.patch('rando.feedback.helpers.GeotrekClient.post')
+    def test_send_report_raises_if_invalid_geotrek(self, client_post):
+        client_post.return_value = mock.MagicMock(status_code=200)
+        self.assertRaises(Exception, send_report, **self.report)
