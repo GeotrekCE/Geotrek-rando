@@ -163,6 +163,8 @@ FLATPAGES_POLICY_PAGE = 1
 FILTERS_HASH_ENABLED = True
 FILTER_ASCENT_VALUES = (300, 600, 1000, 1400)
 
+MIN_BYTE_SYZE = 10
+
 LEAFLET_CONFIG = {
     "TILES": [
         ('main', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -236,7 +238,6 @@ LOCALE_REDIRECT_PERMANENT = False
 if TEST:
     INSTALLED_APPS += ('casper',)
     LOGGING['handlers']['console']['class'] = 'logging.NullHandler'
-    LOGGING['handlers']['mail_admins']['class'] = 'logging.NullHandler'
 
 TEST_RUNNER = 'rando.testing.DatabaselessTestRunner'
 
@@ -278,8 +279,6 @@ RECAPTCHA_PRIVATE_KEY = ''
 
 RECAPTCHA_USE_SSL = False
 CAPTCHA_AJAX = True
-
-FEEDBACK_FORM_CATEGORIES = {}
 
 # END FEEDBACK APP CONFIG PART
 ###

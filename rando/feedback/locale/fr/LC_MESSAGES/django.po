@@ -78,16 +78,3 @@ msgstr ""
 "Grâce à ce formulaire, il vous est possible de contacter nos équipes pour "
 "signaler un problème avec cet itinéraire."
 
-#, python-format
-msgid "%(name)s (%(email)s) has sent a feedback on category %(category)s."
-msgstr ""
-"%(name)s (%(email)s) a signalé un problème dans la catégorie %(category)s."
-
-#, python-format
-msgid "Comment : %(user_comment)s"
-msgstr "Son commentaire est le suivant : %(user_comment)s"
-
-#, python-format
-msgid "Lat : %(latitude)s / Lon : %(longitude)s"
-msgstr ""
-"Son positionnement a été précisé : (Lat %(latitude)s / Lon %(longitude)s)"

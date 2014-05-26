@@ -134,14 +134,14 @@ $(window).on("view:detail", function (e) {
                     loadmapfeedbackmap();
                     break;
 
-                case 'EMAIL_SENDING_OK':
-                    // Form is valid, email is sent, we close the popup and display "OK" popup
+                case 'REPORT_OK':
+                    // Form is valid, report is sent, we close the popup and display "OK" popup
                     $("#popup-feedback").modal('hide');
                     $("#popup-feedback-ok").modal('show');
                     break;
 
-                case 'EMAIL_SENDING_FAILED':
-                    // Form is valid, but email has not been sent (due to server error),
+                case 'REPORT_FAILED':
+                    // Form is valid, but report has not been sent (due to server error),
                     // we close the popup and display "NOK" popup
                     $("#popup-feedback").modal('hide');
                     $("#popup-feedback-nok").modal('show');
