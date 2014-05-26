@@ -1,9 +1,7 @@
 import mock
 import json
 import os
-from collections import defaultdict
 
-from django.conf import settings
 from django.test import TestCase
 from django.test.utils import override_settings
 
