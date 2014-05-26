@@ -7,7 +7,23 @@ from rando import logger
 from rando.trekking import models
 
 
-class POIsInputFile(InputFile):
+class JsonInputFile(InputFile):
+
+    def serialize_json(self, data):
+        """
+        Serializes JSON with less precision.
+        """
+        backup_encoder = getattr(json.encoder, 'c_make_encoder', None)
+        backup_repr = json.encoder.FLOAT_REPR
+        json.encoder.c_make_encoder = None
+        json.encoder.FLOAT_REPR = lambda o: format(o, '.%sf' % settings.COORDS_FORMAT_PRECISION)
+        serialized = json.dumps(data)
+        json.encoder.FLOAT_REPR = backup_repr
+        json.encoder.c_make_encoder = backup_encoder
+        return serialized
+
+
+class POIsInputFile(JsonInputFile):
 
     def content(self):
         content = self.reply.json()
@@ -37,7 +53,7 @@ class POIsInputFile(InputFile):
         return self.serialize_json(content)
 
 
-class TrekInputFile(InputFile):
+class TrekInputFile(JsonInputFile):
 
     def content(self):
         content = self.reply.json()
@@ -63,7 +79,7 @@ class TrekInputFile(InputFile):
         return self.serialize_json(content)
 
 
-class TrekListInputFile(InputFile):
+class TrekListInputFile(JsonInputFile):
 
     def __init__(self, **kwargs):
         super(TrekListInputFile, self).__init__(models.Trek.filepath, **kwargs)
@@ -99,7 +115,7 @@ class TrekListInputFile(InputFile):
 
             # Remove rooturl from relative URLs
             for k in ['altimetric_profile', 'elevation_area_url', 'gpx', 'kml', 'map_image_url', 'printable', 'poi_layer']:
-                properties[k] = properties[k].replace(self.rooturl, '') if properties.get(k) else properties.get(k)
+                properties[k] = properties[k].replace(self.client.rooturl, '') if properties.get(k) else properties.get(k)
 
             # Add POIs information in list, useful for textual search
             f = POIsInputFile(models.POIs.filepath.format(trek__pk=pk), **self.initkwargs)

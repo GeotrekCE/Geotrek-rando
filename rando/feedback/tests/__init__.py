@@ -7,6 +7,7 @@ from django.test import TestCase
 from django.test.utils import override_settings
 
 from rando.core.tests import NavigationTest
+from rando.feedback.helpers import send_report
 
 
 @override_settings(POPUP_HOME_ENABLED=False,
@@ -98,4 +99,7 @@ class FeedBackFormValidationTests(FeedBackBaseTests):
 
 
 class SendReportTestCase(TestCase):
-    pass
+    @mock.patch('rando.feedback.helpers.requests.get')
+    def test_a_login_is_performed_on_geotrek(self, requests_get):
+        send_report({})
+        requests_get.assert_called_with(settings.GEOTREK_SERVER)
