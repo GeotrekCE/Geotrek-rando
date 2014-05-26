@@ -1,6 +1,7 @@
 import mock
 import json
 import os
+from collections import defaultdict
 
 from django.conf import settings
 from django.test import TestCase
@@ -99,7 +100,39 @@ class FeedBackFormValidationTests(FeedBackBaseTests):
 
 
 class SendReportTestCase(TestCase):
-    @mock.patch('rando.feedback.helpers.requests.get')
-    def test_a_login_is_performed_on_geotrek(self, requests_get):
-        send_report({})
-        requests_get.assert_called_with(settings.GEOTREK_SERVER)
+    def setUp(self):
+        self.report = {
+            'name': 'Wam',
+            'email': 'wam@way.com',
+            'category': '',
+            'comment': '',
+            'latitude': '1.14',
+            'longitude': '1.25'
+        }
+
+    @mock.patch('rando.feedback.helpers.GeotrekClient.login')
+    def test_a_login_is_performed_on_geotrek(self, client_login):
+        send_report(**self.report)
+        self.assertTrue(client_login.assert_called)
+
+    @mock.patch('rando.feedback.helpers.GeotrekClient.post')
+    def test_a_post_is_performed_on_geotrek(self, client_post):
+        send_report(**self.report)
+        self.assertTrue(client_post.assert_called)
+
+    @mock.patch('rando.feedback.helpers.GeotrekClient.post')
+    def test_a_post_is_performed_on_url_on_geotrek(self, client_post):
+        send_report(**self.report)
+        call1 = client_post.call_args_list[0]
+        self.assertEquals(call1[0][0], '/feedback/report/add/')
+
+    @mock.patch('rando.feedback.helpers.GeotrekClient.post')
+    def test_posted_data_is_prepared_for_geotrek(self, client_post):
+        send_report(**self.report)
+        call1 = client_post.call_args_list[0]
+        posted_data = call1[1]['data']
+        expected_data = dict(**self.report)
+        expected_data['geom'] = '{"type": "Point", "coordinates":[%s, %s]}' % (
+            expected_data.pop('longitude'),
+            expected_data.pop('latitude'))
+        self.assertEquals(posted_data, expected_data)

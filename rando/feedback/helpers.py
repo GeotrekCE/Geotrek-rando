@@ -1,10 +1,20 @@
+from rando.core.helpers import GeotrekClient
+
+
 def send_report(**data):
-    data = dict(
+    record = dict(
         name=data['name'],
         email=data['email'],
         category=data['category'],
-        user_comment=data['comment'],
-        latitude=data['latitude'],
-        longitude=data['longitude'],
+        comment=data['comment'],
+        geom=''
     )
-    print data
+
+    if data['latitude'] and data['longitude']:
+        record['geom'] = '{"type": "Point", "coordinates":[%s, %s]}' % (
+            data.pop('longitude'),
+            data.pop('latitude'))
+
+    client = GeotrekClient()
+    client.login()
+    client.post('/feedback/report/add/', data=record)

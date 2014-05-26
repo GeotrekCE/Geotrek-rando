@@ -53,3 +53,6 @@ class GeotrekClient(object):
         kwargs['headers'] = headers
 
         return self.session.get(url, **kwargs)
+
+    def post(self, url, **kwargs):
+        pass
