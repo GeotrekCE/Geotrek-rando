@@ -23,9 +23,6 @@ class FeedBackBaseTests(TestCase):
 
     def setUp(self):
         self.feedback_url = '/en/feedback/'
-
-        self.first_category = settings.FEEDBACK_FORM_CATEGORIES['en'][0]
-
         # This env variable must be used for form validation
         # We just have to put "recaptcha_response_field" field to 'PASSED'
         # to validate feedback form
@@ -47,7 +44,7 @@ class FeedBackFormValidationTests(FeedBackBaseTests):
         self.form_data_ok = {
             'name': 'John Doe',
             'email': 'john.doe@nowhere.com',
-            'category': self.first_category[0],
+            'category': '1',
             'comment': u'This is a comment',
             # This value 'PASSED' is a django-recaptcha default value
             # only usable in TEST env to validate form
