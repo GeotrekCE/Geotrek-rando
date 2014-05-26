@@ -2,7 +2,7 @@
 CHANGELOG
 =========
 
-1.28dev (unreleased)
+1.28dev (2014-05-26)
 --------------------
 
 **BUG fixes**
