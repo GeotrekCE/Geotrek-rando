@@ -17,11 +17,20 @@ class POIsInputFile(InputFile):
         features = []
         for feature in content['features']:
             properties = feature['properties']
-            poitype = properties.pop('serializable_type')
-            poitype = reroot(poitype, attr='pictogram')
-            properties['type'] = poitype
-            properties['thumbnail'] = reroot(properties.pop('serializable_thumbnail'))
-            properties['pictures'] = reroot(properties.pop('serializable_pictures'), attr='url')
+
+            # Geotrek < 0.23
+            if 'serializable_type' in properties:
+                poitype_value = properties.pop('serializable_type')
+                thumbnail_values = properties.pop('serializable_thumbnail')
+                pictures_values = properties.pop('serializable_pictures')
+            else:
+                poitype_value = properties.pop('type')
+                thumbnail_values = properties.pop('thumbnail')
+                pictures_values = properties.pop('pictures')
+
+            properties['type'] = reroot(poitype_value, attr='pictogram')
+            properties['thumbnail'] = reroot(thumbnail_values)
+            properties['pictures'] = reroot(pictures_values, attr='url')
             feature['properties'] = properties
             features.append(feature)
         content['features'] = features

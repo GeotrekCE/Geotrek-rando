@@ -28,6 +28,7 @@ CHANGELOG
   for Geotrek mobile)
 * Major refactor of synchronization command, now implemented by module
 * Major refactor of LESS and JavaScript code, now splitted by module
+* Fix POI properties names compatible with 0.23
 
 :notes:
 
