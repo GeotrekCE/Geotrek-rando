@@ -5,7 +5,9 @@ CHANGELOG
 1.29dev (unreleased)
 --------------------
 
-* Nothing changed yet.
+**BUG fixes**
+
+* Fix translation of municipality
 
 
 1.28 (2014-05-26)
