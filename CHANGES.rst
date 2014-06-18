@@ -13,6 +13,7 @@ CHANGELOG
 
 * Empty frontend cache on sync to prevent differences between cached pages
   (ex: trek list) and AJAX data (ex: GeoJSON layer)
+* Added setting to allow datasource download errors (fixes #144)
 
 
 1.28 (2014-05-26)
