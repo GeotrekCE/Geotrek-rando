@@ -10,6 +10,7 @@ from django.core.management.base import BaseCommand
 from django.utils.http import http_date, parse_http_date_safe
 from django.conf import settings
 from django.core.mail import mail_admins
+from django.core.cache import cache
 
 import requests
 from termcolor import cprint
@@ -155,6 +156,9 @@ class SyncSession(object):
             # Move downloaded tmp data to INPUT_DATA_ROOT
             cprint("Copy from temporary %s to production %s" % (settings.INPUT_TMP_ROOT, settings.INPUT_DATA_ROOT), file=self.stdout)
             recursive_copy(settings.INPUT_TMP_ROOT, settings.INPUT_DATA_ROOT)
+
+            cprint("Empty frontend cache")
+            cache.clear()
 
             # Done !
             cprint("Done.", 'green', attrs=['bold'], file=self.stdout)

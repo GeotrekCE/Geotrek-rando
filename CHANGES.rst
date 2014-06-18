@@ -9,6 +9,11 @@ CHANGELOG
 
 * Fix translation of municipality
 
+**Internal features**
+
+* Empty frontend cache on sync to prevent differences between cached pages
+  (ex: trek list) and AJAX data (ex: GeoJSON layer)
+
 
 1.28 (2014-05-26)
 -----------------
