@@ -14,7 +14,15 @@ CHANGELOG
 * Empty frontend cache on sync to prevent differences between cached pages
   (ex: trek list) and AJAX data (ex: GeoJSON layer)
 * Added setting to allow datasource download errors (fixes #144)
+* Update Apache configuration sample to enable CORS for *Geotrek-mobile*
 
+**Documentation**
+
+* Add setup instructions for *Geotrek-mobile*
+
+:notes:
+
+    Do not forget to update your Apache configuration file
 
 1.28 (2014-05-26)
 -----------------
