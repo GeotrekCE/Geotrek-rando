@@ -339,6 +339,21 @@ L.Map.include(FakeBoundsMapMixin);
 
 
 L.Map.include({
+
+    isShowingLayer: function (name) {
+        // Requires layerscontrol
+        if (!this.layerscontrol) return;
+
+        var layers = this.layerscontrol._layers;
+        for (var id in layers) {
+            var l = layers[id];
+            if (l.name == name && this.hasLayer(l.layer)) {
+                return true;
+            }
+        }
+        return false;
+    },
+
     switchLayer: function (name) {
         // Requires layerscontrol
         if (!this.layerscontrol) return;
@@ -372,7 +387,6 @@ L.LatLngBounds.prototype.padTop = function (bufferRatio) {
 
 };
 
-
 /**
  * Map initialization functions.
  * Callbacks of Django Leaflet.
@@ -381,7 +395,8 @@ function mainmapInit(map, djoptions) {
     map.attributionControl.setPrefix('');
 
     var treks_url = $(map._container).data('treks-url'),
-        treks_extent = $(map._container).data('treks-extent');
+        treks_extent = $(map._container).data('treks-extent'),
+        tiles_global_maxzoom = $(map._container).data('tiles-global-maxzoom');
     var treksLayer = (new TrekLayer(treks_url)).addTo(map);
 
     var treksBounds = L.latLngBounds([treks_extent[3],
@@ -401,9 +416,19 @@ function mainmapInit(map, djoptions) {
 
     map.addControl(new L.Control.Scale({imperial: false, position: 'bottomright'}));
 
+    map.on('zoomend', function (e) {
+        if (e.target.getZoom() > 12) {
+            if (!map.isShowingLayer('detail'))
+                setTimeout(function () { map.switchLayer('detail') }, 100);
+        }
+        else {
+            if (!map.isShowingLayer('main'))
+                setTimeout(function () { map.switchLayer('main') }, 100);
+        }
+    })
+
     // Add reset view control
     map.whenReady(function () {
-        map.switchLayer('main');
         if (map.layerscontrol) map.removeControl(map.layerscontrol);
         new L.Control.ResetView(treksLayer.getFullBounds.bind(treksLayer), {position: 'topright'}).addTo(map);
         $(window).trigger('map:ready', [map, 'main']);

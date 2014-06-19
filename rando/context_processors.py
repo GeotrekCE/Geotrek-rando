@@ -17,6 +17,8 @@ def settings(request):
         'URL': request.build_absolute_uri(request.path),
         'settings': app_settings,
 
+        'TILES_GLOBAL_MAXZOOM': settings_.TILES_GLOBAL_MAXZOOM,
+
         'FOOTER_FILENAME': settings_.FOOTER_FILENAME,
 
         'POPUP_FILENAME': settings_.POPUP_FILENAME,
@@ -28,7 +30,6 @@ def settings(request):
         'FEEDBACK_FORM_ENABLED': settings_.FEEDBACK_FORM_ENABLED,
 
         'TOURISM_ENABLED': settings_.TOURISM_ENABLED,
-
     }
 
 
