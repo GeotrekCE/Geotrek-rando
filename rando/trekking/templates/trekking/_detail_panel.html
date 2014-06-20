@@ -144,7 +144,7 @@
       {% endif %}
     </div><!-- left column -->
 
-    <div class="span{% if pois %}4{% else %}8{% endif %}">
+    <div class="span8">
       {% if object.properties.is_park_centered %}
         <div id="park-center-warning" class="alert alert-info">
             <p class="icon-park-center">{% trans "This trek is within park center" %}, <a class="pjax" href="{% locale_url request.LANGUAGE_CODE "flatpages:redirect" FLATPAGES_POLICY_PAGE %}">{% trans "please read access rules." %}</a></p>
@@ -158,87 +158,97 @@
         <div class="helpclic"><p>{% trans "Clic for map interaction" %}</p></div>
       </div>
 
-      <div id="altitudegraph" data-url="{% url "core:fileserve" object.properties.altimetric_profile %}">
-        <h4>{% trans "Altitude profile" %}</h4>
-        <p class="axislabel">{% trans "Altitude (m)" %}</p>
-         <p id="altitude-details">
-          <span class="min">{% trans "Min" %} : <span class="value">{{ object.properties.min_elevation }} m</span></span> -
-          <span class="max">{% trans "Max" %} : <span class="value">{{ object.properties.max_elevation }} m</span></span>
-        </p>
-        <span id="profilealtitude"></span> <span class="axislabel">{% trans "Distance (m)" %}</span>
-        <p id="mouseoverprofil" class="axislabel" >&nbsp;</p>
-      </div>
 
-      <div class="row-fluid meta">
-        {% if object.properties.web_links|length > 0 %}
-        <div class="flex">
-          <div id="trek-links">
-            <h4>{% trans "See also" %}</h4>
+    <div class="row-fluid meta">
 
-            {% regroup object.properties.web_links by category as weblinks %}
+      <div class="span6">
+        <div id="altitudegraph" data-url="{% url "core:fileserve" object.properties.altimetric_profile %}">
+          <h4>{% trans "Altitude profile" %}</h4>
+          <p class="axislabel">{% trans "Altitude (m)" %}</p>
+           <p id="altitude-details">
+            <span class="min">{% trans "Min" %} : <span class="value">{{ object.properties.min_elevation }} m</span></span> -
+            <span class="max">{% trans "Max" %} : <span class="value">{{ object.properties.max_elevation }} m</span></span>
+          </p>
+          <span id="profilealtitude"></span> <span class="axislabel">{% trans "Distance (m)" %}</span>
+          <p id="mouseoverprofil" class="axislabel" >&nbsp;</p>
+        </div>
 
-            <ul>
-            {% for weblink in weblinks %}
-                <h5><img src="{{ weblink.grouper.pictogram }}"> {{ weblink.grouper.label }}</h5>
-                <li>
-                {% for item in weblink.list %}
-                  {% if forloop.first and weblink.list.count > 1 %}<ul>{% endif %}
-                  {% if weblink.list.count > 1 %}<li>{% endif %}
-                  <a target="_blank" href="{{ item.url }}">{{ item.name }}</a>
-                  {% if weblink.list.count > 1 %}</li>{% endif %}
-                  {% if forloop.last and weblink.list.count > 1 %}</ul>{% endif %}
-                {% endfor %}
-                </li>
-            {% endfor %}
-            </ul>
+        {% if object.properties.advice %}
+          <div id="trek-advice" class="alert alert-error">
+            <h3 class="icon-warning">{% trans "Advice" %}</h3>
+            <p>{{ object.properties.advice|safe }}</p>
           </div>
-        </div>
-        {% endif %}
-
-        {% if object.properties.relationships_departure|length > 0 or object.properties.relationships_edge|length > 0 or object.properties.relationships_circuit|length > 0 %}
-        <div id="trek-related" class="flex">
-          <h4>{% trans "Related treks" %}</h4>
-          {% for relationship in object.properties.relationships_departure %}
-            {% if forloop.first %}
-              <h5>{% trans "Sharing departure" %}</h5>
-              <ul>
-            {% endif %}
-            <li><a href="{% locale_url request.LANGUAGE_CODE "trekking:detail" relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
-            {% if forloop.last %}</ul>{% endif %}
-          {% endfor %}
-
-          {% for relationship in object.properties.relationships_edge %}
-            {% if forloop.first %}
-              <h5>{% trans "Sharing paths" %}</h5>
-              <ul>
-            {% endif %}
-            <li><a href="{% locale_url request.LANGUAGE_CODE "trekking:detail" relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
-            {% if forloop.last %}</ul>{% endif %}
-          {% endfor %}
-
-          {% for relationship in object.properties.relationships_circuit %}
-            {% if forloop.first %}
-              <h5>{% trans "Sharing circuit" %}</h5>
-              <ul>
-            {% endif %}
-            <li><a href="{% locale_url request.LANGUAGE_CODE "trekking:detail" relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
-            {% if forloop.last %}</ul>{% endif %}
-          {% endfor %}
-        </div>
         {% endif %}
       </div>
 
-     {% if object.properties.advice %}
-        <div id="trek-advice" class="alert alert-error">
-          <h3 class="icon-warning">{% trans "Advice" %}</h3>
-          <p>{{ object.properties.advice|safe }}</p>
-        </div>
-      {% endif %}
+      <div class="span6">
+        <div class="row-fluid">
 
+          {% if object.properties.web_links|length > 0 %}
+          <div class="flex">
+            <div id="trek-links">
+              <h4>{% trans "See also" %}</h4>
+
+              {% regroup object.properties.web_links by category as weblinks %}
+
+              <ul>
+              {% for weblink in weblinks %}
+                  <h5><img src="{{ weblink.grouper.pictogram }}"> {{ weblink.grouper.label }}</h5>
+                  <li>
+                  {% for item in weblink.list %}
+                    {% if forloop.first and weblink.list.count > 1 %}<ul>{% endif %}
+                    {% if weblink.list.count > 1 %}<li>{% endif %}
+                    <a target="_blank" href="{{ item.url }}">{{ item.name }}</a>
+                    {% if weblink.list.count > 1 %}</li>{% endif %}
+                    {% if forloop.last and weblink.list.count > 1 %}</ul>{% endif %}
+                  {% endfor %}
+                  </li>
+              {% endfor %}
+              </ul>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if trek_has_related %}
+          <div id="trek-related" class="flex">
+            <h4>{% trans "Related treks" %}</h4>
+            {% for relationship in object.properties.relationships_departure %}
+              {% if forloop.first %}
+                <h5>{% trans "Sharing departure" %}</h5>
+                <ul>
+              {% endif %}
+              <li><a href="{% locale_url request.LANGUAGE_CODE "trekking:detail" relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+              {% if forloop.last %}</ul>{% endif %}
+            {% endfor %}
+
+            {% for relationship in object.properties.relationships_edge %}
+              {% if forloop.first %}
+                <h5>{% trans "Sharing paths" %}</h5>
+                <ul>
+              {% endif %}
+              <li><a href="{% locale_url request.LANGUAGE_CODE "trekking:detail" relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+              {% if forloop.last %}</ul>{% endif %}
+            {% endfor %}
+
+            {% for relationship in object.properties.relationships_circuit %}
+              {% if forloop.first %}
+                <h5>{% trans "Sharing circuit" %}</h5>
+                <ul>
+              {% endif %}
+              <li><a href="{% locale_url request.LANGUAGE_CODE "trekking:detail" relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+              {% if forloop.last %}</ul>{% endif %}
+            {% endfor %}
+          </div>
+          {% endif %}
+
+        </div>
+      </div>
     </div>
 
+
+
     {% if pois %}
-    <div class="span4 pois-list">
+    <div id="pois-sidebar" class="pois-list">
 
       <h5>{% trans "On the way..." %}</h5>
 

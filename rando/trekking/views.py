@@ -112,6 +112,10 @@ class TrekView(PJAXResponseMixin, BaseTrekView):
         context['trek'] = obj
         context['thumbnail'] = self.request.build_absolute_uri(obj.properties.thumbnail)
 
+        context['trek_has_related'] = (len(obj.properties.relationships_departure) > 0 or
+                                       len(obj.properties.relationships_edge) > 0 or
+                                       len(obj.properties.relationships_circuit))
+
         pois = obj.pois.all()
         context['pois'] = pois
 
