@@ -361,6 +361,16 @@ L.Map.include({
     }
 });
 
+L.LatLngBounds.prototype.padTop = function (bufferRatio) {
+    var sw = this._southWest,
+        ne = this._northEast,
+        heightBuffer = Math.abs(sw.lat - ne.lat) * bufferRatio;
+
+    return new L.LatLngBounds(
+            new L.LatLng(sw.lat, sw.lng),
+            new L.LatLng(ne.lat + heightBuffer, ne.lng));
+
+};
 
 
 /**
@@ -578,7 +588,7 @@ function detailmapInit(map, bounds) {
     var parking = initDetailParking(map, trekGeoJson);
     initDetailAltimetricProfile(map, trekLayer);
 
-    var wholeBounds = trekLayer.getBounds();
+    var wholeBounds = trekLayer.getBounds().padTop(0.12);
     if (parking) {
         wholeBounds.extend(parking.getLatLng());
     }
