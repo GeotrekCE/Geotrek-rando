@@ -399,6 +399,9 @@ function mainmapInit(map, djoptions) {
         $(window).trigger('map:ready', [map, 'main']);
     });
 
+    // Reduce minimap offset
+    map.minimapcontrol.options.zoomLevelOffset = -3;
+
     // Highlight result on mouseover
     treksLayer.on('mouseover', function (e) {
       $('#trek-'+ e.layer.feature.properties.pk +'.result').addClass('active');

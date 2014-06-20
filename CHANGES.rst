@@ -8,6 +8,7 @@ CHANGELOG
 **BUG fixes**
 
 * Fix translation of municipality
+* Reduced minimap offset (fixes #122)
 
 **Internal features**
 
