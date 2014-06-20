@@ -387,6 +387,65 @@ L.LatLngBounds.prototype.padTop = function (bufferRatio) {
 
 };
 
+L.Control.SwitchBackgroundLayers = L.Control.extend({
+    options: {
+        position: 'bottomleft',
+    },
+
+    onAdd: function(map) {
+        this.map = map;
+        this._container = L.DomUtil.create('div', 'background-layer-switcher');
+
+        var className = 'toggle-layer satellite';
+
+        this.button = L.DomUtil.create('a', className, this._container);
+        this.button.setAttribute('title', gettext('Show satellite'));
+        $(this.button).tooltip({placement: 'right'});
+
+        L.DomEvent.disableClickPropagation(this.button);
+        L.DomEvent.on(this.button, 'click', function (e) {
+            this.toggleLayer();
+        }, this);
+
+        return this._container;
+    },
+
+    toggleLayer: function () {
+        if (this.map.isShowingLayer('main') || this.map.isShowingLayer('detail')) {
+            this.map.switchLayer('satellite');
+
+            L.DomUtil.removeClass(this.button, 'satellite');
+            L.DomUtil.addClass(this.button, 'main');
+            this.button.setAttribute('title', gettext('Show plan'));
+        }
+        else {
+            this.map.switchLayer(this.map.getZoom() > 12 ?
+                                 'detail' : 'main');
+
+            L.DomUtil.removeClass(this.button, 'main');
+            L.DomUtil.addClass(this.button, 'satellite');
+            this.button.setAttribute('title', gettext('Show satellite'));
+        }
+
+        $(this.button).tooltip('destroy');
+        $(this.button).tooltip({placement: 'right'});
+    }
+
+});
+
+$(window).on('map:init', function (e) {
+    var data = e.detail || e.originalEvent.detail,
+        map = data.map,
+        containerId = map._container.id;
+
+    // Show tourism layers everywhere except on feedback form
+    if (containerId === 'feedbackmap')
+        return;
+
+    var control = map.tourismLayers = new L.Control.SwitchBackgroundLayers();
+    control.addTo(map);
+});
+
 /**
  * Map initialization functions.
  * Callbacks of Django Leaflet.
@@ -417,15 +476,18 @@ function mainmapInit(map, djoptions) {
     map.addControl(new L.Control.Scale({imperial: false, position: 'bottomright'}));
 
     map.on('zoomend', function (e) {
+        if (map.isShowingLayer('satellite'))
+            return;
+
         if (e.target.getZoom() > 12) {
             if (!map.isShowingLayer('detail'))
-                setTimeout(function () { map.switchLayer('detail') }, 100);
+                setTimeout(function () { map.switchLayer('detail'); }, 100);
         }
         else {
             if (!map.isShowingLayer('main'))
-                setTimeout(function () { map.switchLayer('main') }, 100);
+                setTimeout(function () { map.switchLayer('main'); }, 100);
         }
-    })
+    });
 
     // Add reset view control
     map.whenReady(function () {

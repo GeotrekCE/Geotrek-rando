@@ -5,6 +5,11 @@ CHANGELOG
 1.29dev (unreleased)
 --------------------
 
+**Upgrade notes**
+
+* Add a ``satellite`` layer URL in your settings, just like the two others.
+  See sample for example.
+
 **BUG fixes**
 
 * Fix translation of municipality
@@ -25,6 +30,10 @@ CHANGELOG
 * Added transport icon and grouped block with access (ref #90)
 * Renamed "Information" to "Lieux de renseignement" (ref #90)
 * Added icon to disabled infrastructures and merged with access (ref #90)
+
+**New features**
+
+* Add layer switcher to show satellite background (fixes #123)
 
 **Internal features**
 

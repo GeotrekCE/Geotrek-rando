@@ -42,6 +42,40 @@
   }
 }
 
+.leaflet-control.background-layer-switcher {
+
+  #mainmap .leaflet-left & {
+    margin-left: 400px;
+    -webkit-transition: margin-left 300ms linear;
+
+    .leaflet-container.fullwidth & {
+      margin-left: 30px;
+    }
+  }
+
+  #detailmap & {
+    display: none;
+  }
+  #detailmap.enabled & {
+      display: block;
+  }
+
+  a {
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+
+    background-size: 100%;
+
+    &.main {
+      background-image: url(../img/switcher-main.png);
+    }
+    &.satellite {
+      background-image: url(../img/switcher-satellite.jpg);
+    }
+  }
+}
+
 #mainmap {
   z-index: 890;
   position: absolute;
