@@ -17,7 +17,7 @@ def settings(request):
         'URL': request.build_absolute_uri(request.path),
         'settings': app_settings,
 
-        'TILES_GLOBAL_MAXZOOM': settings_.TILES_GLOBAL_MAXZOOM,
+        'TILES_MAIN_MAXZOOM': settings_.TILES_MAIN_MAXZOOM,
 
         'FOOTER_FILENAME': settings_.FOOTER_FILENAME,
 

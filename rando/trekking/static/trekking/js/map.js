@@ -394,6 +394,23 @@ L.Control.SwitchBackgroundLayers = L.Control.extend({
 
     onAdd: function(map) {
         this.map = map;
+
+        this.tiles_main_maxzoom = $(map._container).data('tiles-main-maxzoom');
+        if (this.tiles_main_maxzoom > 0) {
+            map.on('zoomend', function (e) {
+                if (map.isShowingLayer('satellite'))
+                    return;
+                if (e.target.getZoom() > this.tiles_main_maxzoom) {
+                    if (!map.isShowingLayer('detail'))
+                        setTimeout(function () { map.switchLayer('detail'); }, 100);
+                }
+                else {
+                    if (!map.isShowingLayer('main'))
+                        setTimeout(function () { map.switchLayer('main'); }, 100);
+                }
+            }, this);
+        }
+
         this._container = L.DomUtil.create('div', 'background-layer-switcher');
 
         var className = 'toggle-layer satellite';
@@ -419,7 +436,7 @@ L.Control.SwitchBackgroundLayers = L.Control.extend({
             this.button.setAttribute('title', gettext('Show plan'));
         }
         else {
-            this.map.switchLayer(this.map.getZoom() > 12 ?
+            this.map.switchLayer(this.map.getZoom() > this.tiles_main_maxzoom ?
                                  'detail' : 'main');
 
             L.DomUtil.removeClass(this.button, 'main');
@@ -454,8 +471,8 @@ function mainmapInit(map, djoptions) {
     map.attributionControl.setPrefix('');
 
     var treks_url = $(map._container).data('treks-url'),
-        treks_extent = $(map._container).data('treks-extent'),
-        tiles_global_maxzoom = $(map._container).data('tiles-global-maxzoom');
+        treks_extent = $(map._container).data('treks-extent');
+
     var treksLayer = (new TrekLayer(treks_url)).addTo(map);
 
     var treksBounds = L.latLngBounds([treks_extent[3],
@@ -474,20 +491,6 @@ function mainmapInit(map, djoptions) {
     }).addTo(map);
 
     map.addControl(new L.Control.Scale({imperial: false, position: 'bottomright'}));
-
-    map.on('zoomend', function (e) {
-        if (map.isShowingLayer('satellite'))
-            return;
-
-        if (e.target.getZoom() > 12) {
-            if (!map.isShowingLayer('detail'))
-                setTimeout(function () { map.switchLayer('detail'); }, 100);
-        }
-        else {
-            if (!map.isShowingLayer('main'))
-                setTimeout(function () { map.switchLayer('main'); }, 100);
-        }
-    });
 
     // Add reset view control
     map.whenReady(function () {

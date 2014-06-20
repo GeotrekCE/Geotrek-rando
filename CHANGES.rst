@@ -34,6 +34,8 @@ CHANGELOG
 **New features**
 
 * Add layer switcher to show satellite background (fixes #123)
+* Show detail background when zooming on main map. Disable by setting
+  ``TILES_MAIN_MAXZOOM`` to -1.
 
 **Internal features**
 

@@ -156,8 +156,6 @@ INSTALLED_APPS = (
 
 COMPRESS_PARSER = 'compressor.parser.HtmlParser'
 
-TILES_GLOBAL_MAXZOOM = 12
-
 FLATPAGES_ROOT = os.path.join(MEDIA_ROOT, 'pages')
 FLATPAGES_TITLES = {}
 FLATPAGES_POLICY_PAGE = 1
@@ -180,6 +178,8 @@ LEAFLET_CONFIG = {
     "MINIMAP": True,
     "NO_GLOBALS": False
 }
+
+TILES_MAIN_MAXZOOM = 10
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
