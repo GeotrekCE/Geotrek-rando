@@ -571,11 +571,6 @@ function detailmapInit(map, bounds) {
         title: gettext('Fullscreen')
     }).addTo(map);
 
-    // Minimize minimap by default
-    map.on('viewreset', function () {
-        map.minimapcontrol._minimize();
-    });
-
     var trekGeoJson = JSON.parse(document.getElementById('trek-geojson').innerHTML);
     var poiUrl = $(map._container).data('poi-url');
 
@@ -598,6 +593,9 @@ function detailmapInit(map, bounds) {
     map.whenReady(function () {
         map.switchLayer('detail');
         if (map.layerscontrol) map.removeControl(map.layerscontrol);
+
+        // Minimize minimap by default
+        map.minimapcontrol._minimize();
 
         new L.Control.ResetView(getWholeBounds, {position: 'topright'}).addTo(map);
         map.addControl(new L.Control.Scale({imperial: false, position: 'bottomright'}));

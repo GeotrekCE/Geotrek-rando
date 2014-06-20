@@ -9,6 +9,7 @@ CHANGELOG
 
 * Fix translation of municipality
 * Reduced minimap offset (fixes #122)
+* Fixed minimap error when map loading too fast
 
 **Internal features**
 
