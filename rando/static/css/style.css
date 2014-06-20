@@ -1796,12 +1796,6 @@ html.no-webgl #toolbox a.view3d {
   top: 6px;
   margin-right: 5px;
 }
-.icon-information-desk:before {
-  position: relative;
-  font-size: 23px;
-  top: 6px;
-  margin-right: 5px;
-}
 p.teaser {
   line-height: 1.1em;
   font-size: 18px;
@@ -1825,12 +1819,45 @@ p.teaser {
 #trek-identity span.value {
   color: #f89406;
 }
-#trek-information-desk p {
-  margin-left: 10px;
+.icon-information-desk:before {
+  position: relative;
+  font-size: 23px;
+  top: 6px;
+  margin-right: 5px;
 }
-#trek-information-desk p.title {
+#trek-information-desk p,
+.leaflet-popup.information-desk p {
+  margin-left: 7px;
+  margin-bottom: 0px;
+}
+#trek-information-desk p.title,
+.leaflet-popup.information-desk p.title {
   margin-bottom: 0px;
   font-weight: bold;
+}
+#trek-information-desk p.latlng,
+.leaflet-popup.information-desk p.latlng {
+  font-size: 0.8em;
+}
+#trek-information-desk .photo,
+.leaflet-popup.information-desk .photo {
+  text-align: right;
+}
+#trek-information-desk .information-desk,
+.leaflet-popup.information-desk .information-desk {
+  border-left: #f0f2ed solid 7px;
+  border-bottom: #f0f2ed solid 1px;
+}
+.leaflet-popup.information-desk p {
+  margin-top: 0px;
+  margin-left: 0px;
+}
+.leaflet-popup.information-desk .information-desk {
+  border-left: none;
+  border-bottom: none;
+}
+.leaflet-popup.information-desk img {
+  display: none;
 }
 #themes li,
 #usages li,

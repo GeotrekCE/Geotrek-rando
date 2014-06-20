@@ -9,6 +9,10 @@ CHANGELOG
 
 * Fix translation of municipality
 
+**New features**
+
+* Show information desks on trek detail maps (*requires Geotrek 0.24+*)
+
 **Internal features**
 
 * Empty frontend cache on sync to prevent differences between cached pages
