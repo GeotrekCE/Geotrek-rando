@@ -920,8 +920,18 @@ function initDetailPoisLayer(map, poiUrl) {
     var poisLayer = new POILayer();
     $.getJSON(poiUrl, function (data) {
         poisLayer.addData(data);
+
+
+        var poiSidebar = L.control.sidebar('pois-sidebar', {
+            closeButton: false,
+            position: 'right'
+        });
+        setTimeout(function () {
+            map.addControl(poiSidebar);
+            poiSidebar.show();
+        }, 500);
         initDetailAccordionPois(map, poisLayer);
-    });
+});
     return poisLayer.addTo(map);
 }
 

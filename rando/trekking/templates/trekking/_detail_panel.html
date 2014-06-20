@@ -244,39 +244,36 @@
         </div>
       </div>
     </div>
-
-
-
-    {% if pois %}
-    <div id="pois-sidebar" class="pois-list">
-
-      <h5>{% trans "On the way..." %}</h5>
-
-      <div class="accordion" id="pois-accordion">
-        {% for poi in pois %}
-        <div class="accordion-group">
-          <div class="accordion-heading">
-            <a class="accordion-toggle acc-open icon- collapsed" id="poi-item-{{ poi.properties.pk}}" data-toggle="collapse" data-parent="#pois-accordion" data-id="{{ poi.properties.pk }}" href="#collapse-poi-{{  poi.properties.pk }}">
-              {{ poi.properties.type|pictogram }}
-              <span class="name">{{ poi.properties.name }}</span>
-              {% if poi.properties.pictures|length > 0 %}
-                <span class="pictures-info pull-right icon-camera">&times;{{ poi.properties.pictures|length }}</span>
-              {% endif %}
-            </a>
-          </div>
-          <div id="collapse-poi-{{  poi.properties.pk }}" class="accordion-body collapse" style="height: 0px; " data-id="{{ poi.properties.pk }}">
-            <div class="accordion-inner">
-              <p>{{ poi.properties.description|safe }}</p>
-              {% include "trekking/_carousel.html" with prefix=poi.properties.pk pictures=poi.properties.pictures default="False" %}
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-
   </div><!-- container-content -->
 </div><!-- detail-content -->
 
 {% leaflet_map 'detailmap' fitextent=False creatediv=False callback="detailmapInit" loadevent="rando:foo" %}{# Such loadevent will prevent automatic map initialization #}
+
+<div style="display: none">
+  <div id="pois-sidebar" class="pois-list">
+
+    <h5>{% trans "On the way..." %}</h5>
+
+    <div class="accordion" id="pois-accordion">
+      {% for poi in pois %}
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <a class="accordion-toggle acc-open icon- collapsed" id="poi-item-{{ poi.properties.pk}}" data-toggle="collapse" data-parent="#pois-accordion" data-id="{{ poi.properties.pk }}" href="#collapse-poi-{{  poi.properties.pk }}">
+            {{ poi.properties.type|pictogram }}
+            <span class="name">{{ poi.properties.name }}</span>
+            {% if poi.properties.pictures|length > 0 %}
+              <span class="pictures-info pull-right icon-camera">&times;{{ poi.properties.pictures|length }}</span>
+            {% endif %}
+          </a>
+        </div>
+        <div id="collapse-poi-{{  poi.properties.pk }}" class="accordion-body collapse" style="height: 0px; " data-id="{{ poi.properties.pk }}">
+          <div class="accordion-inner">
+            <p>{{ poi.properties.description|safe }}</p>
+            {% include "trekking/_carousel.html" with prefix=poi.properties.pk pictures=poi.properties.pictures default="False" %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
