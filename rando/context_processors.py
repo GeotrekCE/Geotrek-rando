@@ -21,6 +21,8 @@ def settings(request):
 
         'POPUP_FILENAME': settings_.POPUP_FILENAME,
         'POPUP_HOME_ENABLED': settings_.POPUP_HOME_ENABLED,
+        'POPUP_HOME_FORCED': settings_.POPUP_HOME_FORCED,
+
         'FILTERS_HASH_ENABLED': settings_.FILTERS_HASH_ENABLED,
 
         'FEEDBACK_FORM_ENABLED': settings_.FEEDBACK_FORM_ENABLED,

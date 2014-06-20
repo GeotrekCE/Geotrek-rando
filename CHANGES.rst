@@ -16,6 +16,10 @@ CHANGELOG
 
 * Show information desks on trek detail maps (*requires Geotrek 0.24+*)
 
+**New features**
+
+* Added settings ``POPUP_HOME_FORCED`` to force popup display on home (default: False)
+
 **Internal features**
 
 * Empty frontend cache on sync to prevent differences between cached pages

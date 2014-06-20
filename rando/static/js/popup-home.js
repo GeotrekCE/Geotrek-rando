@@ -2,6 +2,9 @@ $(document).ready(function (e) {
 
     var $modal = $('#popup-home').modal({show: false});
 
+    // Always show on landing ?
+    var FORCED = $modal.hasClass('forced');
+
     // Links not leaving page
     $("#popup-home #popup-body a:not([href^='http'])").click(function () {
         $modal.modal('hide');
@@ -14,7 +17,7 @@ $(document).ready(function (e) {
 
     enhanceTrekPreviews();
 
-    if (showModal() && MOBILE === false) {
+    if ((FORCED || showModal()) && MOBILE === false) {
         $modal.modal('show');
     }
 
