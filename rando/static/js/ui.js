@@ -37,7 +37,7 @@ function init_ui() {
 function page_load() {
     // Flex divs :)
     $('.row-fluid').each(function () {
-        var $flex = $(this).find('.flex');
+        var $flex = $(this).find('> .flex');
         if ($flex.length === 0) return;
         var span = Math.round(12 / $flex.length);
         $flex.each(function (i, v) {
