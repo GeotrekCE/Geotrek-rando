@@ -57,7 +57,7 @@ function feedbackmapInit(map, bounds) {
     map.attributionControl.setPrefix('');
 
     // Minimize minimap by default
-    map.on('viewreset', function () {
+    map.whenReady(function () {
         map.minimapcontrol._minimize();
     });
 
