@@ -237,14 +237,26 @@ var POILayer = L.MarkerClusterGroup.extend({
 
     initialize: function (poisData) {
         L.MarkerClusterGroup.prototype.initialize.call(this, {
-          showCoverageOnHover: false,
-          disableClusteringAtZoom: 15,
-          maxClusterRadius: 24,
-          iconCreateFunction: function(cluster) {
-              return new L.DivIcon({className: 'poi-marker-icon cluster',
-                                    iconSize: [20, 20],
-                                    iconAnchor: [12, 12],
-                                    html: '<b>' + cluster.getChildCount() + '</b>'});
+            showCoverageOnHover: false,
+            disableClusteringAtZoom: 15,
+            maxClusterRadius: 24,
+            iconCreateFunction: function(cluster) {
+                var icons = {ICON1: '&nbsp;', ICON2: '&nbsp;',
+                             ICON3: '&nbsp;', ICON4: '&nbsp;'};
+                var tableTmpl = '' +
+                '<div class="pois-cluster-row"><div class="pois-cluster-cell">{ICON0}</div><div class="pois-cluster-cell">{ICON2}</div></div>' +
+                '<div class="pois-cluster-row"><div class="pois-cluster-cell">{ICON3}</div><div class="pois-cluster-cell">{ICON1}</div></div>' +
+                '';
+                var children = cluster.getAllChildMarkers();
+                for (var i=0; i<Math.min(children.length, 4); i++) {
+                    var c = children[i];
+                    icons['ICON'+i] = '<img src="' + c.properties.type.pictogram + '"/>';
+                }
+                var iconsTable = L.Util.template(tableTmpl, icons);
+                return new L.DivIcon({className: 'poi-marker-icon cluster',
+                                      iconSize: [30, 30],
+                                      iconAnchor: [15, 15],
+                                      html: iconsTable});
           }
         });
 

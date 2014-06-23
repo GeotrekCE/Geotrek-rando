@@ -37,6 +37,7 @@ CHANGELOG
 * Add layer switcher to hide POIs in trek detail map (fixes #125)
 * Show detail background when zooming on main map. Disable by setting
   ``TILES_MAIN_MAXZOOM`` to -1.
+* Improved POIs clusters by showing thumbnails of pictograms (ref #124)
 
 **Internal features**
 
