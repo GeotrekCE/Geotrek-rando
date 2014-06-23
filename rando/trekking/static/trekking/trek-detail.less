@@ -144,16 +144,24 @@ html.no-webgl #toolbox a.view3d {
     color: @infoText;
   }
 
-  .icon-access:before, .icon-transport:before {
+  .icon-disabled-infrastructure:before,
+  .icon-access:before,
+  .icon-transport:before {
     position: relative;
-    top: 6px;
     margin-right: 5px;
+    top: 6px;
   }
+
   .icon-access:before {
     font-size: 23px;
   }
 
   .icon-transport:before {
+    font-size: 28px;
+  }
+
+  .icon-disabled-infrastructure:before {
+    margin-right: 0px;
     font-size: 28px;
   }
 

@@ -109,17 +109,17 @@
         {% include "trekking/_carousel.html" with prefix="trek" pictures=all_pictures default="True" %}
       </div>
 
-      {% if object.properties.description %}<p>{{ object.properties.description|safe }}</p>{% endif %}
-
-      {% if object.properties.disabled_infrastructure %}
-      <div id="trek-disabled">
-        <h3 class="icon-disabled-infrastructure">{% trans "Disabled-friendly infrastructures" %}</h3>
-        <p>{{ object.properties.disabled_infrastructure|safe }}</p>
-      </div>
+      {% if object.properties.description %}
+      <p>{{ object.properties.description|safe }}</p>
       {% endif %}
 
-      {% if object.properties.access or object.properties.public_transport %}
+      {% if object.properties.access or object.properties.public_transport or object.properties.disabled_infrastructure %}
       <div id="trek-access" class="alert alert-info">
+
+        {% if object.properties.disabled_infrastructure %}
+        <h3 class="icon-disabled-infrastructure">{% trans "Disabled-friendly infrastructures" %}</h3>
+        <p>{{ object.properties.disabled_infrastructure|safe }}</p>
+        {% endif %}
 
         {% if object.properties.public_transport %}
         <h3 class="icon-transport">{% trans "Transport" %}</h3>
