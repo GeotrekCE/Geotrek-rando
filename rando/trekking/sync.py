@@ -1,6 +1,7 @@
 import json
 
 from django.conf import settings
+from django.template.loader import render_to_string
 
 from rando.core.management.commands.sync_content import InputFile, reroot, cprint
 from rando import logger
@@ -79,6 +80,25 @@ class TrekInputFile(JsonInputFile):
         return self.serialize_json(content)
 
 
+class InformationDeskInputFile(JsonInputFile):
+
+    def content(self):
+        content = self.reply.json()
+        if content is None:
+            return super(InformationDeskInputFile, self).content()
+
+        features = []
+        for feature in content['features']:
+            properties = feature['properties']
+            properties['photo_url'] = reroot(properties['photo_url'])
+            properties['html'] = render_to_string('trekking/_information_desk.html',
+                                                  {'desk': properties})
+            feature['properties'] = properties
+            features.append(feature)
+        content['features'] = features
+        return self.serialize_json(content)
+
+
 class TrekListInputFile(JsonInputFile):
 
     def __init__(self, **kwargs):
@@ -114,8 +134,16 @@ class TrekListInputFile(JsonInputFile):
             properties.update(detail)
 
             # Remove rooturl from relative URLs
-            for k in ['altimetric_profile', 'elevation_area_url', 'gpx', 'kml', 'map_image_url', 'printable', 'poi_layer']:
+            relative_props = ['altimetric_profile', 'elevation_area_url', 'gpx', 'kml',
+                'map_image_url', 'printable', 'poi_layer', 'information_desk_layer']
+            for k in relative_props:
                 properties[k] = properties[k].replace(self.client.rooturl, '') if properties.get(k) else properties.get(k)
+
+            # Reroot information desks photos
+            if 'information_desks' in properties:
+                properties['information_desks'] = reroot(properties['information_desks'], attr='photo_url')
+            else:
+                properties['information_desks'] = [properties['information_desk']]
 
             # Add POIs information in list, useful for textual search
             f = POIsInputFile(models.POIs.filepath.format(trek__pk=pk), **self.initkwargs)
@@ -147,6 +175,11 @@ def sync_content_trekking(sender, **kwargs):
         for trek in models.Trek.tmp_objects.filter(language=language).all():
             InputFile(trek.properties.gpx, **inputkwlang).pull_if_modified()
             InputFile(trek.properties.kml, **inputkwlang).pull_if_modified()
+
+            if trek.properties.information_desk_layer:
+                # Only available in Geotrek 0.24
+                InformationDeskInputFile(trek.properties.information_desk_layer, **inputkwlang).pull_if_modified()
+
             if settings.PRINT_ENABLED:
                 InputFile(trek.properties.printable, **inputkwlang).pull_if_modified()
 
@@ -174,3 +207,8 @@ def sync_content_trekking(sender, **kwargs):
             for picture in poi.properties.pictures:
                 InputFile(picture.url, **input_kwargs).pull_if_modified()
             InputFile(poi.properties.type.pictogram, **input_kwargs).pull_if_modified()
+
+        if 'information_desks' in trek.properties:
+            for desk in trek.properties.information_desks:
+                if desk.photo_url:
+                    InputFile(desk.photo_url, **input_kwargs).pull_if_modified()

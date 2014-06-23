@@ -583,6 +583,7 @@ function detailmapInit(map, bounds) {
 
     var trekGeoJson = JSON.parse(document.getElementById('trek-geojson').innerHTML);
     var poiUrl = $(map._container).data('poi-url');
+    var informationDeskUrl = $(map._container).data('information-desk-url');
 
     var trekLayer = initDetailTrekMap(map, trekGeoJson);
     var parking = initDetailParking(map, trekGeoJson);
@@ -597,6 +598,12 @@ function detailmapInit(map, bounds) {
     var poisLayer = initDetailPoisLayer(map, poiUrl);
     poisLayer.on('data:loaded', function () {
         wholeBounds.extend(poisLayer.getBounds());
+        map.fitBounds(wholeBounds);
+    });
+
+    var informationDesksLayer = initDetailInformationDesksLayer(map, informationDeskUrl);
+    informationDesksLayer.on('data:loaded', function () {
+        wholeBounds.extend(informationDesksLayer.getBounds());
         map.fitBounds(wholeBounds);
     });
 
@@ -763,6 +770,26 @@ function initDetailPoisLayer(map, poiUrl) {
         initDetailAccordionPois(map, poisLayer);
     });
     return poisLayer.addTo(map);
+}
+
+function initDetailInformationDesksLayer(map, layerUrl) {
+    var deskIcon = L.icon({
+        iconUrl: IMG_URL + '/information.svg',
+        iconSize: [20, 20],
+        iconAnchor: [10, 10]
+    });
+    var layer = L.geoJson.ajax(layerUrl, {
+        pointToLayer: function (feature, latlng) {
+            var popup = L.popup({
+                className: 'information-desk'
+            })
+            .setContent(feature.properties.html);
+            return L.marker(latlng, {icon: deskIcon})
+                    .bindPopup(popup);
+        }
+    });
+    layer.addTo(map);
+    return layer;
 }
 
 

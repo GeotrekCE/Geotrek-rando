@@ -159,13 +159,6 @@ html.no-webgl #toolbox a.view3d {
   }
 }
 
-.icon-information-desk:before {
-  position: relative;
-  font-size: 23px;
-  top: 6px;
-  margin-right: 5px;
-}
-
 p.teaser {
   line-height:1.1em;
   font-size: 18px;
@@ -196,14 +189,51 @@ p.teaser {
   }
 }
 
-#trek-information-desk {
+
+.icon-information-desk:before {
+  position: relative;
+  font-size: 23px;
+  top: 6px;
+  margin-right: 5px;
+}
+
+#trek-information-desk, .leaflet-popup.information-desk {
   p {
-    margin-left: 10px;
+    margin-left: 7px;
+    margin-bottom: 0px;
 
     &.title {
       margin-bottom: 0px;
       font-weight: bold;
     }
+
+    &.latlng {
+      font-size: 0.8em;
+    }
+
+  }
+
+  .photo {
+    text-align: right;
+  }
+
+  .information-desk {
+    border-left: @backgroundColor solid 7px;
+    border-bottom: @backgroundColor solid 1px;
+  }
+}
+
+.leaflet-popup.information-desk {
+  p {
+    margin-top: 0px;
+    margin-left: 0px;
+  }
+  .information-desk {
+    border-left: none;
+    border-bottom: none;
+  }
+  img {
+    display: none;
   }
 }
 

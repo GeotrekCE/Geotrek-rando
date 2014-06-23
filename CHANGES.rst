@@ -12,6 +12,10 @@ CHANGELOG
 * Fixed minimap error when map loading too fast
 * Make sure the start flag is entirely visible
 
+**New features**
+
+* Show information desks on trek detail maps (*requires Geotrek 0.24+*)
+
 **Internal features**
 
 * Empty frontend cache on sync to prevent differences between cached pages
