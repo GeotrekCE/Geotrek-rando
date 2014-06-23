@@ -118,17 +118,19 @@
       </div>
       {% endif %}
 
-      {% if object.properties.public_transport %}
-      <div id="trek-transport">
+      {% if object.properties.access or object.properties.public_transport %}
+      <div id="trek-access" class="alert alert-info">
+
+        {% if object.properties.public_transport %}
         <h3 class="icon-transport">{% trans "Transport" %}</h3>
         <p>{{ object.properties.public_transport|safe }}</p>
-      </div>
-      {% endif %}
+        {% endif %}
 
-      {% if object.properties.access %}
-      <div id="trek-access" class="alert alert-info">
+        {% if object.properties.access %}
         <h3 class="icon-access">{% trans "Access" %}</h3>
         <p>{{ object.properties.access|safe }}</p>
+        {% endif %}
+
       </div>
       {% endif %}
 

@@ -16,6 +16,11 @@ CHANGELOG
 
 * Show information desks on trek detail maps (*requires Geotrek 0.24+*)
 
+**Minor features**
+
+* Added transport icon and grouped block with access (ref #90)
+* Renamed "Information" to "Lieux de renseignement" (ref #90)
+
 **Internal features**
 
 * Empty frontend cache on sync to prevent differences between cached pages

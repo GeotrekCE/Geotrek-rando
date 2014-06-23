@@ -176,6 +176,9 @@
 .icon-feedback:before {
   content: "F";
 }
+.icon-transport:before {
+  content: "G";
+}
 /*
  * HTML5 Boilerplate
  *
@@ -1784,11 +1787,17 @@ html.no-webgl #toolbox a.view3d {
 .alert.alert-info h3 {
   color: #3a87ad;
 }
-.alert .icon-access:before {
+.alert .icon-access:before,
+.alert .icon-transport:before {
   position: relative;
-  font-size: 23px;
   top: 6px;
   margin-right: 5px;
+}
+.alert .icon-access:before {
+  font-size: 23px;
+}
+.alert .icon-transport:before {
+  font-size: 28px;
 }
 .alert .icon-warning:before {
   position: relative;
