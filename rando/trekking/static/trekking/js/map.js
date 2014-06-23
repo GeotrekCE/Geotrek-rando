@@ -450,6 +450,53 @@ L.Control.SwitchBackgroundLayers = L.Control.extend({
 
 });
 
+
+L.Control.TogglePOILayer = L.Control.extend({
+    options: {
+        position: 'bottomleft',
+    },
+
+    initialize: function (layer, options) {
+        this.layer = layer;
+        L.Control.prototype.initialize.call(this, options);
+    },
+
+    onAdd: function(map) {
+        this.map = map;
+
+        this._container = L.DomUtil.create('div', 'tourism-layer-switcher');
+        var className = 'toggle-layer pois active';
+
+        this.button = L.DomUtil.create('a', className, this._container);
+        this.button.setAttribute('title', gettext('Points of interest'));
+        $(this.button).tooltip({placement: 'right'});
+
+        L.DomEvent.disableClickPropagation(this.button);
+        L.DomEvent.on(this.button, 'click', function (e) {
+            this.toggleLayer();
+        }, this);
+
+        return this._container;
+    },
+
+    toggleLayer: function () {
+        if (this.layer) {
+            if (this.map.hasLayer(this.layer)) {
+                $(window).trigger('pois:hidden');
+                L.DomUtil.removeClass(this.button, 'active');
+                this.map.removeLayer(this.layer);
+            }
+            else {
+                $(window).trigger('pois:shown');
+                L.DomUtil.addClass(this.button, 'active');
+                this.map.addLayer(this.layer);
+            }
+        }
+    }
+
+});
+
+
 $(window).on('map:init', function (e) {
     var data = e.detail || e.originalEvent.detail,
         map = data.map,
@@ -696,6 +743,9 @@ function detailmapInit(map, bounds) {
         wholeBounds.extend(informationDesksLayer.getBounds());
         map.fitBounds(wholeBounds);
     });
+
+    var poisLayerSwitcher = new L.Control.TogglePOILayer(poisLayer);
+    poisLayerSwitcher.addTo(map);
 
     map.whenReady(function () {
         map.switchLayer('detail');

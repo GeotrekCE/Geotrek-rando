@@ -837,6 +837,23 @@ header #lang-switch {
 .leaflet-control.background-layer-switcher a.satellite {
   background-image: url(../img/switcher-satellite.jpg);
 }
+.leaflet-control.tourism-layer-switcher a.pois {
+  height: 20px;
+  width: 20px;
+  display: inline-block;
+  background-size: 100%;
+  background-image: url(../img/switcher-pois.svg);
+  background-repeat: no-repeat;
+  background-size: 25px;
+  background-position: 50% 50%;
+}
+.pois-list h5 {
+  background-image: url(../img/switcher-pois.svg);
+  background-repeat: no-repeat;
+  background-size: 1em;
+  padding-left: 1.2em;
+  background-position: 0% 50%;
+}
 #mainmap {
   z-index: 890;
   position: absolute;
