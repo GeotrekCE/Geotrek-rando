@@ -69,15 +69,24 @@
     <div class="span7">
       <div class="row-fluid" id="trek-identity">
         <div class="span3">
-          <p>{% trans "Duration" %} : <span class="value">{{ object.properties.duration_pretty }}</span></p>
-          <p>{% trans "Difficulty" %} : <span class="value">{{ object.properties.difficulty.label }}</span></p>
-          <p>{% trans "Ascent" %} : <span class="value">{{ object.properties.ascent }} m</span></p>
+          <div class="duration">
+            <span>{{ object.properties.duration_pretty }}</span>
+            <div class="pictogram medium">
+              <img src="{% static "img/duration.svg" %}" alt="{% trans "Duration" %}"/>
+            </div>
+          </div>
+          <div class="difficulty">
+            <span>{{ trek.properties.difficulty.label }}</span>
+            {{ trek.properties.difficulty|pictogram:"medium" }}
+          </div>
+          <div class="route">
+            <span>{{ trek.properties.route.label }}</span>
+            {{ trek.properties.route|pictogram:"medium" }}
+          </div>
         </div>
         <div class="span3">
-          {% if object.properties.route %}
+          <p>{% trans "Ascent" %} : <span class="value">{{ object.properties.ascent }} m</span></p>
           <p>{% trans "Total Length" %} : <span class="value">{{ object.properties.length|kilo|floatformat }} km</span></p>
-          <p>{% trans "Route" %} : <span class="value">{{ object.properties.route.label }}</span></p>
-          {% endif %}
           {% if object.properties.districts %}
           <p>{% trans "Valleys" %} : <span class="value">{% for district in object.properties.districts %}
             {{ district.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</span></p>
@@ -91,7 +100,7 @@
         {% endfor %}
 
         {% for theme in object.properties.themes %}
-          {% if forloop.first %}<div id="themes">{% trans "Thematic" %}<ul>{% endif %}
+          {% if forloop.first %}<div id="themes">{% trans "Thematics" %}<ul>{% endif %}
           <li>{{ theme|pictogram:"medium" }}</li>
           {% if forloop.last %}</ul></div>{% endif %}
         {% endfor %}
@@ -170,11 +179,11 @@
       </div>
 
       <div class="row-fluid meta">
-        {% if object.properties.web_links|length > 0 %}
+        {% if object.properties.web_links|length > 0 or object.properties.networks|length > 0 %}
         <div class="flex">
-          <div id="trek-links">
-            <h4>{% trans "See also" %}</h4>
+          <h4>{% trans "See also" %}</h4>
 
+          <div id="trek-links">
             {% regroup object.properties.web_links by category as weblinks %}
 
             <ul>
@@ -192,6 +201,15 @@
             {% endfor %}
             </ul>
           </div>
+
+          {% if object.properties.networks %}
+          <div class="trek-networks">
+              <h5>Balisage</h5>
+              {% for network in object.properties.networks %}
+                <li><img src="{{ network.pictogram }}" alt="Balisage {{ network.name }}"/> {{ network.name }}</li>
+              {% endfor %}
+          </div>
+          {% endif %}
         </div>
         {% endif %}
 

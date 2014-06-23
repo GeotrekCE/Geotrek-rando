@@ -1890,6 +1890,18 @@ p.teaser {
 #trek-identity span.value {
   color: #f89406;
 }
+#trek-identity .difficulty,
+#trek-identity .route,
+#trek-identity .duration {
+  display: inline-block;
+  text-align: center;
+  margin-right: 10px;
+}
+#trek-identity .difficulty span,
+#trek-identity .route span,
+#trek-identity .duration span {
+  display: block;
+}
 .icon-information-desk:before {
   position: relative;
   font-size: 28px;
@@ -1934,6 +1946,9 @@ p.teaser {
 #themes .pictogram,
 #usages .pictogram {
   opacity: 0.5;
+}
+.trek-networks img {
+  height: 1.5em;
 }
 .row-fluid.meta {
   margin-top: 15px;

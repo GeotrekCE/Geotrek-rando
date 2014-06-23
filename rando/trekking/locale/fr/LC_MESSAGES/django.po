@@ -100,8 +100,8 @@ msgstr "Vallées"
 msgid "Uses"
 msgstr "Usages"
 
-msgid "Thematic"
-msgstr "Thème"
+msgid "Thematics"
+msgstr "Thèmatiques"
 
 msgid "Disabled-friendly infrastructures"
 msgstr "Aménagements pour handicapés"
