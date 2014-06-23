@@ -132,13 +132,15 @@
       </div>
       {% endif %}
 
-      <div id="trek-information-desk">
-          <h3 class="icon-information-desk">{% trans "Information Desk" %}</h3>
+      {% if object.properties.information_desks %}
+      <div id="trek-information-desk" class="alert alert-blank">
+          <h3 class="icon-information-desk">{% trans "Information desks" %}</h3>
           {% for desk in object.properties.information_desks %}
             {% include "trekking/_information_desk.html" %}
           {% endfor %}
       </div>
-    </div>
+      {% endif %}
+    </div><!-- left column -->
 
     <div class="span{% if pois %}4{% else %}8{% endif %}">
       {% if object.properties.is_park_centered %}

@@ -112,8 +112,8 @@ msgstr ""
 msgid "Access"
 msgstr "Accès"
 
-msgid "Information Desk"
-msgstr "Information"
+msgid "Information desks"
+msgstr "Lieux de renseignement"
 
 msgid "This trek is within park center"
 msgstr "Cet itinéraire est dans le coeur du parc national"

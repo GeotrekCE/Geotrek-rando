@@ -1669,6 +1669,14 @@ p.tab-content-empty {
 * Detail page
 *
 */
+.alert-blank {
+  color: #f89406;
+  background-color: transparent;
+  border: 1px solid #f89406;
+}
+.alert-blank > div {
+  color: #877f84;
+}
 #detail-content-top {
   margin-bottom: 15px;
 }
@@ -1821,13 +1829,12 @@ p.teaser {
 }
 .icon-information-desk:before {
   position: relative;
-  font-size: 23px;
+  font-size: 28px;
   top: 6px;
   margin-right: 5px;
 }
 #trek-information-desk p,
 .leaflet-popup.information-desk p {
-  margin-left: 7px;
   margin-bottom: 0px;
 }
 #trek-information-desk p.title,
@@ -1843,18 +1850,14 @@ p.teaser {
 .leaflet-popup.information-desk .photo {
   text-align: right;
 }
-#trek-information-desk .information-desk,
-.leaflet-popup.information-desk .information-desk {
-  border-left: #f0f2ed solid 7px;
-  border-bottom: #f0f2ed solid 1px;
+#trek-information-desk .information-desk {
+  border-bottom: #f89406 solid 1px;
+}
+#trek-information-desk .information-desk:last-of-type {
+  border-bottom: none;
 }
 .leaflet-popup.information-desk p {
   margin-top: 0px;
-  margin-left: 0px;
-}
-.leaflet-popup.information-desk .information-desk {
-  border-left: none;
-  border-bottom: none;
 }
 .leaflet-popup.information-desk img {
   display: none;
