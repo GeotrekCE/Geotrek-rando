@@ -1605,6 +1605,11 @@ p.tab-content-empty {
   margin-top: 20px;
   color: #877f84;
 }
+p.tab-content-empty a.change-lang {
+  display: block;
+  font-size: 0.7em;
+  margin-top: 5px;
+}
 .search {
   width: 30%;
   height: 100%;

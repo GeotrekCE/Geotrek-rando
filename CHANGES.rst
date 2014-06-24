@@ -27,6 +27,8 @@ CHANGELOG
   ``TILES_MAIN_MAXZOOM`` to -1.
 * Improved POIs clusters by showing thumbnails of pictograms (ref #124)
 * Replaced yellow hallow by flat outline in POIs (ref #124)
+* Since treks can now be published by lang, adjust navigation when a trek
+  is not available in another language (fixes #148)
 
 **Minor features**
 

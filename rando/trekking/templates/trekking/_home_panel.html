@@ -1,4 +1,4 @@
-{% load i18n static leaflet_tags rando_tags %}
+{% load i18n static leaflet_tags rando_tags localeurl_tags %}
 
 {% include "_share.html" with title=TITLE %}
 
@@ -43,7 +43,12 @@
     <div id="result-backpack-content" class="tab-content">
       <div class="tab-pane active" id="results">
         <h2 class="hidden">{% trans "Results" %}</h2>
-        <p id="noresult" style="display:none" class="tab-content-empty">{% trans "No result" %}</p>
+        <p id="noresult" style="display:none" class="tab-content-empty">
+          {% trans "No result" %}
+          {% if request.LANGUAGE_CODE != settings.languages.default %}
+          <a href="{% locale_url settings.languages.default "trekking:home" %}" class="change-lang">{% trans "Change language" %}</a>
+          {% endif %}
+        </p>
         {% for trek in treks %}
             {% include "trekking/_trek_result.html" with show="True" backpack="False" %}
         {% endfor %}
