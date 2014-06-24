@@ -127,6 +127,9 @@ class RandoNavigationTest(NavigationTest):
     def test_popup_home(self):
         self.assertTrue(self.casper(self._get_tests_file('test_popup_home.js')))
 
+    @override_settings(POPUP_HOME_FORCED=True)
+    def test_popup_home_forced(self):
+        self.assertTrue(self.casper(self._get_tests_file('test_popup_home_forced.js')))
 
 class OverridableStaticTest(SimpleTestCase):
     def test_return_static_if_missing(self):
