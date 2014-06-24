@@ -237,14 +237,26 @@ var POILayer = L.MarkerClusterGroup.extend({
 
     initialize: function (poisData) {
         L.MarkerClusterGroup.prototype.initialize.call(this, {
-          showCoverageOnHover: false,
-          disableClusteringAtZoom: 15,
-          maxClusterRadius: 24,
-          iconCreateFunction: function(cluster) {
-              return new L.DivIcon({className: 'poi-marker-icon cluster',
-                                    iconSize: [20, 20],
-                                    iconAnchor: [12, 12],
-                                    html: '<b>' + cluster.getChildCount() + '</b>'});
+            showCoverageOnHover: false,
+            disableClusteringAtZoom: 15,
+            maxClusterRadius: 24,
+            iconCreateFunction: function(cluster) {
+                var icons = {ICON1: '&nbsp;', ICON2: '&nbsp;',
+                             ICON3: '&nbsp;', ICON4: '&nbsp;'};
+                var tableTmpl = '' +
+                '<div class="pois-cluster-row"><div class="pois-cluster-cell">{ICON0}</div><div class="pois-cluster-cell">{ICON1}</div></div>' +
+                '<div class="pois-cluster-row"><div class="pois-cluster-cell">{ICON2}</div><div class="pois-cluster-cell">{ICON3}</div></div>' +
+                '';
+                var children = cluster.getAllChildMarkers();
+                for (var i=0; i<Math.min(children.length, 4); i++) {
+                    var c = children[i];
+                    icons['ICON'+i] = '<img src="' + c.properties.type.pictogram + '"/>';
+                }
+                var iconsTable = L.Util.template(tableTmpl, icons);
+                return new L.DivIcon({className: 'poi-marker-icon cluster',
+                                      iconSize: [30, 30],
+                                      iconAnchor: [15, 15],
+                                      html: iconsTable});
           }
         });
 
@@ -269,6 +281,7 @@ var POILayer = L.MarkerClusterGroup.extend({
         });
 
         var poicon = new L.DivIcon({className: 'poi-marker-icon',
+                                    iconSize: [24, 24],
                                     iconAnchor: [12, 12],
                                     labelAnchor: [12, 2],
                                     html: img}),
@@ -449,6 +462,53 @@ L.Control.SwitchBackgroundLayers = L.Control.extend({
     }
 
 });
+
+
+L.Control.TogglePOILayer = L.Control.extend({
+    options: {
+        position: 'bottomleft',
+    },
+
+    initialize: function (layer, options) {
+        this.layer = layer;
+        L.Control.prototype.initialize.call(this, options);
+    },
+
+    onAdd: function(map) {
+        this.map = map;
+
+        this._container = L.DomUtil.create('div', 'tourism-layer-switcher');
+        var className = 'toggle-layer pois active';
+
+        this.button = L.DomUtil.create('a', className, this._container);
+        this.button.setAttribute('title', gettext('Points of interest'));
+        $(this.button).tooltip({placement: 'right'});
+
+        L.DomEvent.disableClickPropagation(this.button);
+        L.DomEvent.on(this.button, 'click', function (e) {
+            this.toggleLayer();
+        }, this);
+
+        return this._container;
+    },
+
+    toggleLayer: function () {
+        if (this.layer) {
+            if (this.map.hasLayer(this.layer)) {
+                $(window).trigger('pois:hidden');
+                L.DomUtil.removeClass(this.button, 'active');
+                this.map.removeLayer(this.layer);
+            }
+            else {
+                $(window).trigger('pois:shown');
+                L.DomUtil.addClass(this.button, 'active');
+                this.map.addLayer(this.layer);
+            }
+        }
+    }
+
+});
+
 
 $(window).on('map:init', function (e) {
     var data = e.detail || e.originalEvent.detail,
@@ -697,6 +757,9 @@ function detailmapInit(map, bounds) {
         map.fitBounds(wholeBounds);
     });
 
+    var poisLayerSwitcher = new L.Control.TogglePOILayer(poisLayer);
+    poisLayerSwitcher.addTo(map);
+
     map.whenReady(function () {
         map.switchLayer('detail');
         if (map.layerscontrol) map.removeControl(map.layerscontrol);
@@ -907,11 +970,6 @@ function initDetailAccordionPois(map, poisLayer) {
     $('#pois-accordion .accordion-body').on('show', function (e) {
         var id = $(e.target).data('id'),
             marker = poisMarkersById[id];
-
-        // Prevent double-jump
-        if (marker._animating === true)
-            return;
-
         map.panTo(marker.getLatLng());
 
         // Add clusterized marker explicitly, will be removed on accordion close.
@@ -919,16 +977,9 @@ function initDetailAccordionPois(map, poisLayer) {
         if (marker._clusterized) {
             map.addLayer(marker);
         }
-        // Jump!
-        marker._animating = true;
         $(marker._icon).addClass('highlight');
         marker.openPopup();
         $(marker._icon).css('z-index', 3000);
-        $(marker._icon).animate({"margin-top": "-=20px"}, "fast",
-                                function(){
-                                    marker._animating = false;
-                                    $(this).animate({"margin-top": "+=20px"}, "fast");
-                                });
     });
 
     $('#pois-accordion .accordion-body').on('hidden', function (e) {

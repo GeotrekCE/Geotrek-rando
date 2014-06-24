@@ -179,7 +179,7 @@ LEAFLET_CONFIG = {
     "NO_GLOBALS": False
 }
 
-TILES_MAIN_MAXZOOM = 10
+TILES_MAIN_MAXZOOM = 12
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

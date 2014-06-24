@@ -816,7 +816,7 @@ header #lang-switch {
   margin-left: 400px;
   -webkit-transition: margin-left 300ms linear;
 }
-.leaflet-container.fullwidth #mainmap .leaflet-left .leaflet-control.background-layer-switcher {
+#mainmap.leaflet-container.fullwidth .leaflet-control.background-layer-switcher {
   margin-left: 30px;
 }
 #detailmap .leaflet-control.background-layer-switcher {
@@ -830,12 +830,30 @@ header #lang-switch {
   width: 30px;
   display: inline-block;
   background-size: 100%;
+  outline: solid 1px white;
 }
 .leaflet-control.background-layer-switcher a.main {
   background-image: url(../img/switcher-main.png);
 }
 .leaflet-control.background-layer-switcher a.satellite {
   background-image: url(../img/switcher-satellite.jpg);
+}
+.leaflet-control.tourism-layer-switcher a.pois {
+  height: 20px;
+  width: 20px;
+  display: inline-block;
+  background-size: 100%;
+  background-image: url(../img/switcher-pois.svg);
+  background-repeat: no-repeat;
+  background-size: 25px;
+  background-position: 50% 50%;
+}
+.pois-list h5 {
+  background-image: url(../img/switcher-pois.svg);
+  background-repeat: no-repeat;
+  background-size: 1em;
+  padding-left: 1.2em;
+  background-position: 0% 50%;
 }
 #mainmap {
   z-index: 890;
@@ -997,27 +1015,30 @@ header #lang-switch {
   min-height: 360px;
 }
 /* POIS markers */
-.poi-marker-icon.cluster,
-.poi-marker-icon img {
+.poi-marker-icon > img {
   width: 24px;
   height: 24px;
-  padding: 1px;
   color: black;
   text-align: center;
-  background-color: rgba(248, 148, 6, 0.7);
-  border: 1px solid #232222;
-  -webkit-background-clip: padding-box;
-  -moz-background-clip: padding;
-  background-clip: padding-box;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  -webkit-box-shadow: 0px 0px 7px 2px #ffff00;
-  -moz-box-shadow: 0px 0px 7px 2px #ffff00;
-  box-shadow: 0px 0px 7px 2px #ffff00;
 }
-.poi-marker-icon.highlight img {
-  background-color: #ffff00;
+.poi-marker-icon.cluster {
+  display: block;
+}
+.poi-marker-icon.cluster .pois-cluster-row {
+  display: table-row;
+}
+.poi-marker-icon.cluster .pois-cluster-row .pois-cluster-cell {
+  width: 15px;
+  height: 15px;
+  display: table-cell;
+  line-height: 15px;
+}
+.poi-marker-icon.cluster .pois-cluster-row .pois-cluster-cell img {
+  width: 15px;
+  height: 15px;
+}
+.poi-marker-icon.highlight {
+  outline: solid 2px #ffff00;
 }
 @media (max-width: 1044px) {
   #mainmap {
@@ -2145,7 +2166,7 @@ ul.errorlist {
   margin-left: 400px;
   -webkit-transition: margin-left 300ms linear;
 }
-.leaflet-container.fullwidth #mainmap .leaflet-left .leaflet-control.tourism-layer-switcher {
+#mainmap.leaflet-container.fullwidth .leaflet-control.tourism-layer-switcher {
   margin-left: 30px;
 }
 #detailmap .leaflet-control.tourism-layer-switcher {
