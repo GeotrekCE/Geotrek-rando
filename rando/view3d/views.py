@@ -1,8 +1,17 @@
+from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
+
 from rando.trekking.views import BaseTrekView
 
 
 class TrekView3D(BaseTrekView):
     template_name = 'view3d/view3d.html'
 
-    def tiles_url(self):
-        return "https://a.tiles.mapbox.com/v3/makina-corpus.i3p1001l/{z}/{x}/{y}.png"
+    def tiles(self):
+        for tiles_layer in settings.LEAFLET_CONFIG['TILES']:
+            if tiles_layer[0] == 'satellite':
+                return {
+                    'url': tiles_layer[1],
+                    'attributions': tiles_layer[2]
+                }
+        raise ImproperlyConfigured("No layer 'satellite' found in settings  ")
