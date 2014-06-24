@@ -9,12 +9,13 @@ casper.test.begin('Tourism Layers', function(test) {
 
     casper.start(home_url, function () {
         utils.clearLocalStorage();
-        casper.waitForSelector('.tourism-layer-switcher', function(){}, function (){casper.capture('/tmp/capture-tourism.png');});
+        casper.waitForSelector('.simple-layer-switcher.tourism', function(){}, function (){casper.capture('/tmp/capture-tourism.png');});
     });
 
     casper.then(function() {
         test.pass('Tourism layer switcher is present');
-        test.assertElementCount('.toggle-layer', 2,
+        casper.capture('/tmp/step1.png');
+        test.assertElementCount('.simple-layer-switcher.tourism .toggle-layer', 2,
                                 'One layer switcher by datasource.');
         test.assertNotExists('.toggle-layer.active',
                              'No layer switcher is active by default.');
@@ -47,6 +48,7 @@ casper.test.begin('Tourism Layers', function(test) {
     });
 
     casper.then(function () {
+        test.pass('Tourism markers are still shown on map');
         casper.waitForSelector('#detailmap .leaflet-marker-icon.tourism');
     });
 

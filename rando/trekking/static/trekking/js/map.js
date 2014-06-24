@@ -477,7 +477,7 @@ L.Control.TogglePOILayer = L.Control.extend({
     onAdd: function(map) {
         this.map = map;
 
-        this._container = L.DomUtil.create('div', 'tourism-layer-switcher');
+        this._container = L.DomUtil.create('div', 'simple-layer-switcher pois');
         var className = 'toggle-layer pois active';
 
         this.button = L.DomUtil.create('a', className, this._container);

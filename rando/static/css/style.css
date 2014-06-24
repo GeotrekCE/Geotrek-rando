@@ -838,7 +838,7 @@ header #lang-switch {
 .leaflet-control.background-layer-switcher a.satellite {
   background-image: url(../img/switcher-satellite.jpg);
 }
-.leaflet-control.tourism-layer-switcher a.pois {
+.leaflet-control.simple-layer-switcher a.pois {
   height: 20px;
   width: 20px;
   display: inline-block;
@@ -2167,20 +2167,20 @@ p.teaser {
 ul.errorlist {
   color: red;
 }
-#mainmap .leaflet-left .leaflet-control.tourism-layer-switcher {
+#mainmap .leaflet-left .leaflet-control.simple-layer-switcher {
   margin-left: 400px;
   -webkit-transition: margin-left 300ms linear;
 }
-#mainmap.leaflet-container.fullwidth .leaflet-control.tourism-layer-switcher {
+#mainmap.leaflet-container.fullwidth .leaflet-control.simple-layer-switcher {
   margin-left: 30px;
 }
-#detailmap .leaflet-control.tourism-layer-switcher {
+#detailmap .leaflet-control.simple-layer-switcher {
   display: none;
 }
-#detailmap.enabled .leaflet-control.tourism-layer-switcher {
+#detailmap.enabled .leaflet-control.simple-layer-switcher {
   display: block;
 }
-.leaflet-control.tourism-layer-switcher .toggle-layer {
+.leaflet-control.simple-layer-switcher .toggle-layer {
   background-color: #877f84;
   max-height: 30px;
   max-width: 30px;
@@ -2189,7 +2189,7 @@ ul.errorlist {
   display: block;
   opacity: 0.5;
 }
-.leaflet-control.tourism-layer-switcher .toggle-layer.active {
+.leaflet-control.simple-layer-switcher .toggle-layer.active {
   margin-left: -1px;
   margin-bottom: -1px;
   margin-top: 4px;
@@ -2198,7 +2198,7 @@ ul.errorlist {
   outline: solid 2px #ffffff;
   border: solid 1px #c67605;
 }
-.leaflet-control.tourism-layer-switcher .toggle-layer img {
+.leaflet-control.simple-layer-switcher .toggle-layer img {
   height: 20px;
   width: 20px;
 }
