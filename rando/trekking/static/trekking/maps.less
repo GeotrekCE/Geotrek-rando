@@ -47,11 +47,12 @@
   #mainmap .leaflet-left & {
     margin-left: 400px;
     -webkit-transition: margin-left 300ms linear;
-
-    .leaflet-container.fullwidth & {
-      margin-left: 30px;
-    }
   }
+
+  #mainmap.leaflet-container.fullwidth & {
+      margin-left: 30px;
+  }
+
 
   #detailmap & {
     display: none;
@@ -66,6 +67,7 @@
     display: inline-block;
 
     background-size: 100%;
+    outline: solid 1px white;
 
     &.main {
       background-image: url(../img/switcher-main.png);

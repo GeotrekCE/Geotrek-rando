@@ -816,7 +816,7 @@ header #lang-switch {
   margin-left: 400px;
   -webkit-transition: margin-left 300ms linear;
 }
-.leaflet-container.fullwidth #mainmap .leaflet-left .leaflet-control.background-layer-switcher {
+#mainmap.leaflet-container.fullwidth .leaflet-control.background-layer-switcher {
   margin-left: 30px;
 }
 #detailmap .leaflet-control.background-layer-switcher {
@@ -830,6 +830,7 @@ header #lang-switch {
   width: 30px;
   display: inline-block;
   background-size: 100%;
+  outline: solid 1px white;
 }
 .leaflet-control.background-layer-switcher a.main {
   background-image: url(../img/switcher-main.png);
@@ -2165,7 +2166,7 @@ ul.errorlist {
   margin-left: 400px;
   -webkit-transition: margin-left 300ms linear;
 }
-.leaflet-container.fullwidth #mainmap .leaflet-left .leaflet-control.tourism-layer-switcher {
+#mainmap.leaflet-container.fullwidth .leaflet-control.tourism-layer-switcher {
   margin-left: 30px;
 }
 #detailmap .leaflet-control.tourism-layer-switcher {
