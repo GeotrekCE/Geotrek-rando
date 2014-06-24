@@ -1014,24 +1014,9 @@ header #lang-switch {
   min-height: 360px;
 }
 /* POIS markers */
-.poi-marker-icon > img,
-.poi-marker-icon.cluster {
-  background-color: rgba(248, 148, 6, 0.7);
-  border: 1px solid #232222;
-  -webkit-background-clip: padding-box;
-  -moz-background-clip: padding;
-  background-clip: padding-box;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  -webkit-box-shadow: 0px 0px 7px 2px #ffff00;
-  -moz-box-shadow: 0px 0px 7px 2px #ffff00;
-  box-shadow: 0px 0px 7px 2px #ffff00;
-}
 .poi-marker-icon > img {
   width: 24px;
   height: 24px;
-  padding: 1px;
   color: black;
   text-align: center;
 }
@@ -1051,8 +1036,8 @@ header #lang-switch {
   width: 15px;
   height: 15px;
 }
-.poi-marker-icon.highlight img {
-  background-color: #ffff00;
+.poi-marker-icon.highlight {
+  outline: solid 2px #ffff00;
 }
 @media (max-width: 1044px) {
   #mainmap {

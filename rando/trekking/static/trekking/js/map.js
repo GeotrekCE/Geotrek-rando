@@ -244,8 +244,8 @@ var POILayer = L.MarkerClusterGroup.extend({
                 var icons = {ICON1: '&nbsp;', ICON2: '&nbsp;',
                              ICON3: '&nbsp;', ICON4: '&nbsp;'};
                 var tableTmpl = '' +
-                '<div class="pois-cluster-row"><div class="pois-cluster-cell">{ICON0}</div><div class="pois-cluster-cell">{ICON2}</div></div>' +
-                '<div class="pois-cluster-row"><div class="pois-cluster-cell">{ICON3}</div><div class="pois-cluster-cell">{ICON1}</div></div>' +
+                '<div class="pois-cluster-row"><div class="pois-cluster-cell">{ICON0}</div><div class="pois-cluster-cell">{ICON1}</div></div>' +
+                '<div class="pois-cluster-row"><div class="pois-cluster-cell">{ICON2}</div><div class="pois-cluster-cell">{ICON3}</div></div>' +
                 '';
                 var children = cluster.getAllChildMarkers();
                 for (var i=0; i<Math.min(children.length, 4); i++) {
@@ -281,6 +281,7 @@ var POILayer = L.MarkerClusterGroup.extend({
         });
 
         var poicon = new L.DivIcon({className: 'poi-marker-icon',
+                                    iconSize: [24, 24],
                                     iconAnchor: [12, 12],
                                     labelAnchor: [12, 2],
                                     html: img}),

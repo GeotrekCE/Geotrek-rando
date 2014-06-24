@@ -20,24 +20,19 @@ CHANGELOG
 **New features**
 
 * Show information desks on trek detail maps (*requires Geotrek 0.24+*)
-
-**New features**
-
 * Added settings ``POPUP_HOME_FORCED`` to force popup display on home (default: False)
+* Add layer switcher to show satellite background (fixes #123)
+* Add layer switcher to hide POIs in trek detail map (fixes #125)
+* Show detail background when zooming on main map. Disable by setting
+  ``TILES_MAIN_MAXZOOM`` to -1.
+* Improved POIs clusters by showing thumbnails of pictograms (ref #124)
+* Replaced yellow hallow by flat outline in POIs
 
 **Minor features**
 
 * Added transport icon and grouped block with access (ref #90)
 * Renamed "Information" to "Lieux de renseignement" (ref #90)
 * Added icon to disabled infrastructures and merged with access (ref #90)
-
-**New features**
-
-* Add layer switcher to show satellite background (fixes #123)
-* Add layer switcher to hide POIs in trek detail map (fixes #125)
-* Show detail background when zooming on main map. Disable by setting
-  ``TILES_MAIN_MAXZOOM`` to -1.
-* Improved POIs clusters by showing thumbnails of pictograms (ref #124)
 
 **Internal features**
 

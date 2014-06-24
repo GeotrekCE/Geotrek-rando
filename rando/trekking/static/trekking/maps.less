@@ -254,18 +254,9 @@
 
 
 .poi-marker-icon {
-
-  & > img, &.cluster {
-    background-color: fade(@mainColor, 70%);
-    border: 1px solid  @black;
-    .border-radius(4px);
-    .box-shadow(0px 0px 7px 2px @highlightColor);
-  }
-
   & > img {
     width: 24px;
     height: 24px;
-    padding: 1px;
     color: black;
     text-align: center;
   }
@@ -290,8 +281,8 @@
     }
   }
 
-  &.highlight img {
-    background-color: @highlightColor;
+  &.highlight {
+    outline: solid 2px @highlightColor;
   }
 }
 
