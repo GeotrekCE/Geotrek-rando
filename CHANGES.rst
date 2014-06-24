@@ -5,6 +5,10 @@ CHANGELOG
 1.29 (2014-06-24)
 -----------------
 
+**Breaking changes**
+
+* Requires Geotrek 0.24, for difficulty, route and networks icons
+
 **Upgrade notes**
 
 * Add a ``satellite`` layer URL in your settings, just like the two others.
