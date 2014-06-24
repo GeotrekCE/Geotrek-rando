@@ -5,17 +5,16 @@
         <div class="trek-info">
             {{ trek.properties.name }}
         </div>
-        <div class="controls" >
+        <div class="controls">
             <div><a href="#" class="btn toggle-fullscreen">{% trans "Fullscreen" %}</a></div>
-            <div>
+            <div style="display: none">
+                <!-- keyup events do not work inside iframe TODO -->
                 <span class="label">←</span>
                 <span class="label">&nbsp;↑&nbsp;</span>
                 <span class="label">&nbsp;↓&nbsp;</span>
                 <span class="label">→</span>
                 {% trans "Move around" %}
             </div>
-            <div><span class="label">{% trans "Enter" %}</span> {% trans "Go to departure" %}</div>
-            <div><span class="label">{% trans "Space" %}</span> {% trans "Play/Pause navigation" %}</div>
         </div>
     </div>
 </div>
