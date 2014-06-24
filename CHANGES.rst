@@ -2,6 +2,13 @@
 CHANGELOG
 =========
 
+1.30dev (unreleased)
+--------------------
+
+**BUG fixes**
+
+* Fix display even if no data is synced (first run)
+
 1.29 (2014-06-24)
 -----------------
 
