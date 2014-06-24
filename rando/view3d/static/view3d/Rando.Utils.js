@@ -747,13 +747,18 @@ RANDO.Utils.scaleArray2 = function (array2, scale) {
 
 /****    GETTERS     ************************/
 /**tested
- * getUrlFromCoordinates(): get the url of a tile texture 
+ * getUrlFromCoordinates(): get the url of a tile texture
  *      z : level of zoom
  *      x : x coordinates of tile
  *      y : y coordinates of tile
- * 
+ *
  */
 RANDO.Utils.replaceUrlCoordinates = function (url, z, x, y) {
+    var subdomains = RANDO.SETTINGS.TILE_TEX_URL_SUBDOMAINS,
+        index = Math.abs(x + y) % subdomains.length,
+        subdomain = subdomains[index];
+
+    url = url.replace("{s}", subdomain);
     url = url.replace("{z}", z);
     url = url.replace("{x}", x);
     url = url.replace("{y}", y);

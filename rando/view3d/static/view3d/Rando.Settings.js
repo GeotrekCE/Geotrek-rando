@@ -10,6 +10,7 @@ RANDO.SETTINGS.PROFILE_URL; // Url of the trek's profile json
 RANDO.SETTINGS.TILE_TEX_URL; // Url of a tile texture
 RANDO.SETTINGS.SIDE_TEX_URL; // Url of the side texture
 RANDO.SETTINGS.FAKE_TEX_URL; // Url of the fake texture
+RANDO.SETTINGS.TILE_TEX_URL_SUBDOMAINS = ['a', 'b', 'c'];
 ////////////////////////////////////////////////////////////////////////////////
 
 
