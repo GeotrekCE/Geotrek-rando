@@ -339,6 +339,21 @@ L.Map.include(FakeBoundsMapMixin);
 
 
 L.Map.include({
+
+    isShowingLayer: function (name) {
+        // Requires layerscontrol
+        if (!this.layerscontrol) return;
+
+        var layers = this.layerscontrol._layers;
+        for (var id in layers) {
+            var l = layers[id];
+            if (l.name == name && this.hasLayer(l.layer)) {
+                return true;
+            }
+        }
+        return false;
+    },
+
     switchLayer: function (name) {
         // Requires layerscontrol
         if (!this.layerscontrol) return;
@@ -372,6 +387,81 @@ L.LatLngBounds.prototype.padTop = function (bufferRatio) {
 
 };
 
+L.Control.SwitchBackgroundLayers = L.Control.extend({
+    options: {
+        position: 'bottomleft',
+    },
+
+    onAdd: function(map) {
+        this.map = map;
+
+        this.tiles_main_maxzoom = $(map._container).data('tiles-main-maxzoom');
+        if (this.tiles_main_maxzoom > 0) {
+            map.on('zoomend', function (e) {
+                if (map.isShowingLayer('satellite'))
+                    return;
+                if (e.target.getZoom() > this.tiles_main_maxzoom) {
+                    if (!map.isShowingLayer('detail'))
+                        setTimeout(function () { map.switchLayer('detail'); }, 100);
+                }
+                else {
+                    if (!map.isShowingLayer('main'))
+                        setTimeout(function () { map.switchLayer('main'); }, 100);
+                }
+            }, this);
+        }
+
+        this._container = L.DomUtil.create('div', 'background-layer-switcher');
+
+        var className = 'toggle-layer satellite';
+
+        this.button = L.DomUtil.create('a', className, this._container);
+        this.button.setAttribute('title', gettext('Show satellite'));
+        $(this.button).tooltip({placement: 'right'});
+
+        L.DomEvent.disableClickPropagation(this.button);
+        L.DomEvent.on(this.button, 'click', function (e) {
+            this.toggleLayer();
+        }, this);
+
+        return this._container;
+    },
+
+    toggleLayer: function () {
+        if (this.map.isShowingLayer('main') || this.map.isShowingLayer('detail')) {
+            this.map.switchLayer('satellite');
+
+            L.DomUtil.removeClass(this.button, 'satellite');
+            L.DomUtil.addClass(this.button, 'main');
+            this.button.setAttribute('title', gettext('Show plan'));
+        }
+        else {
+            this.map.switchLayer(this.map.getZoom() > this.tiles_main_maxzoom ?
+                                 'detail' : 'main');
+
+            L.DomUtil.removeClass(this.button, 'main');
+            L.DomUtil.addClass(this.button, 'satellite');
+            this.button.setAttribute('title', gettext('Show satellite'));
+        }
+
+        $(this.button).tooltip('destroy');
+        $(this.button).tooltip({placement: 'right'});
+    }
+
+});
+
+$(window).on('map:init', function (e) {
+    var data = e.detail || e.originalEvent.detail,
+        map = data.map,
+        containerId = map._container.id;
+
+    // Show tourism layers everywhere except on feedback form
+    if (containerId === 'feedbackmap')
+        return;
+
+    var control = map.tourismLayers = new L.Control.SwitchBackgroundLayers();
+    control.addTo(map);
+});
 
 /**
  * Map initialization functions.
@@ -382,6 +472,7 @@ function mainmapInit(map, djoptions) {
 
     var treks_url = $(map._container).data('treks-url'),
         treks_extent = $(map._container).data('treks-extent');
+
     var treksLayer = (new TrekLayer(treks_url)).addTo(map);
 
     var treksBounds = L.latLngBounds([treks_extent[3],
@@ -403,7 +494,6 @@ function mainmapInit(map, djoptions) {
 
     // Add reset view control
     map.whenReady(function () {
-        map.switchLayer('main');
         if (map.layerscontrol) map.removeControl(map.layerscontrol);
         new L.Control.ResetView(treksLayer.getFullBounds.bind(treksLayer), {position: 'topright'}).addTo(map);
         $(window).trigger('map:ready', [map, 'main']);

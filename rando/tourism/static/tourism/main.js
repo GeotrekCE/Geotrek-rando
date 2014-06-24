@@ -146,7 +146,7 @@
                                                                           definitions);
             control.addTo(map);
 
-            $('a', control._container).tooltip();
+            $('a', control._container).tooltip({placement: 'right'});
         }).error(function () {
             throw new Error("Could not obtain external datasources " + datasources_url);
         });

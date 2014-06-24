@@ -52,14 +52,14 @@ RECAPTCHA_PRIVATE_KEY = '6Ldrbu4SAAAAAPbt5g3Vw2BA_LGL1-BZwaBSsnfz'
 #
 # LEAFLET_CONFIG = {
 #     "TILES": [
-#         ('main', 'http://{s}.tiles.mapbox.com/v3/examples.map-4l7djmvo/{z}/{x}/{y}.png', '(c) MapBox'),
-#         ('detail', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', '(c) OSM')
+#         ('main', 'http://{s}.tiles.mapbox.com/v3/examples.map-4l7djmvo/{z}/{x}/{y}.png', '&copy; MapBox'),
+#         ('detail', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', '&copy; OSM')
+#         ('satellite', 'http://{s}.tiles.mapbox.com/v3/examples.map-4l7dfffjmvo/{z}/{x}/{y}.jpg', '&copy; Satellite')
 #     ],
 #     "SCALE": False,
 #     "MINIMAP": True,
 #     "NO_GLOBALS": False
 # }
-
 #
 # Tourism Layers
 #...............

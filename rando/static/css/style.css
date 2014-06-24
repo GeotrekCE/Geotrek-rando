@@ -812,6 +812,31 @@ header #lang-switch {
 .leaflet-control-zoom-fullscreen:before {
   content: "e";
 }
+#mainmap .leaflet-left .leaflet-control.background-layer-switcher {
+  margin-left: 400px;
+  -webkit-transition: margin-left 300ms linear;
+}
+.leaflet-container.fullwidth #mainmap .leaflet-left .leaflet-control.background-layer-switcher {
+  margin-left: 30px;
+}
+#detailmap .leaflet-control.background-layer-switcher {
+  display: none;
+}
+#detailmap.enabled .leaflet-control.background-layer-switcher {
+  display: block;
+}
+.leaflet-control.background-layer-switcher a {
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  background-size: 100%;
+}
+.leaflet-control.background-layer-switcher a.main {
+  background-image: url(../img/switcher-main.png);
+}
+.leaflet-control.background-layer-switcher a.satellite {
+  background-image: url(../img/switcher-satellite.jpg);
+}
 #mainmap {
   z-index: 890;
   position: absolute;
@@ -2133,15 +2158,15 @@ ul.errorlist {
   background-color: #877f84;
   max-height: 30px;
   max-width: 30px;
-  display: inline-block;
   padding: 5px;
-  margin-right: 5px;
+  margin-top: 5px;
+  display: block;
   opacity: 0.5;
 }
 .leaflet-control.tourism-layer-switcher .toggle-layer.active {
   margin-left: -1px;
   margin-bottom: -1px;
-  margin-right: 4px;
+  margin-top: 4px;
   background-color: #f89406;
   opacity: 1.0;
   outline: solid 2px #ffffff;
@@ -2149,6 +2174,7 @@ ul.errorlist {
 }
 .leaflet-control.tourism-layer-switcher .toggle-layer img {
   height: 20px;
+  width: 20px;
 }
 .leaflet-marker-icon.tourism {
   background-color: #f89406;
@@ -2158,6 +2184,7 @@ ul.errorlist {
 }
 .leaflet-marker-icon.tourism img {
   width: 100%;
+  height: 100%;
   margin-top: -7px;
 }
 .leaflet-popup-content .tourism {
