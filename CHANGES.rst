@@ -20,6 +20,12 @@ CHANGELOG
 
 * Added settings ``POPUP_HOME_FORCED`` to force popup display on home (default: False)
 
+**Minor features**
+
+* Added transport icon and grouped block with access (ref #90)
+* Renamed "Information" to "Lieux de renseignement" (ref #90)
+* Added icon to disabled infrastructures and merged with access (ref #90)
+
 **Internal features**
 
 * Empty frontend cache on sync to prevent differences between cached pages

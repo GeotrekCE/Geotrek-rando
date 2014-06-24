@@ -109,36 +109,40 @@
         {% include "trekking/_carousel.html" with prefix="trek" pictures=all_pictures default="True" %}
       </div>
 
-      {% if object.properties.description %}<p>{{ object.properties.description|safe }}</p>{% endif %}
+      {% if object.properties.description %}
+      <p>{{ object.properties.description|safe }}</p>
+      {% endif %}
 
-      {% if object.properties.disabled_infrastructure %}
-      <div id="trek-disabled">
+      {% if object.properties.access or object.properties.public_transport or object.properties.disabled_infrastructure %}
+      <div id="trek-access" class="alert alert-info">
+
+        {% if object.properties.disabled_infrastructure %}
         <h3 class="icon-disabled-infrastructure">{% trans "Disabled-friendly infrastructures" %}</h3>
         <p>{{ object.properties.disabled_infrastructure|safe }}</p>
-      </div>
-      {% endif %}
+        {% endif %}
 
-      {% if object.properties.public_transport %}
-      <div id="trek-transport">
+        {% if object.properties.public_transport %}
         <h3 class="icon-transport">{% trans "Transport" %}</h3>
         <p>{{ object.properties.public_transport|safe }}</p>
-      </div>
-      {% endif %}
+        {% endif %}
 
-      {% if object.properties.access %}
-      <div id="trek-access" class="alert alert-info">
+        {% if object.properties.access %}
         <h3 class="icon-access">{% trans "Access" %}</h3>
         <p>{{ object.properties.access|safe }}</p>
+        {% endif %}
+
       </div>
       {% endif %}
 
-      <div id="trek-information-desk">
-          <h3 class="icon-information-desk">{% trans "Information Desk" %}</h3>
+      {% if object.properties.information_desks %}
+      <div id="trek-information-desk" class="alert alert-blank">
+          <h3 class="icon-information-desk">{% trans "Information desks" %}</h3>
           {% for desk in object.properties.information_desks %}
             {% include "trekking/_information_desk.html" %}
           {% endfor %}
       </div>
-    </div>
+      {% endif %}
+    </div><!-- left column -->
 
     <div class="span{% if pois %}4{% else %}8{% endif %}">
       {% if object.properties.is_park_centered %}
