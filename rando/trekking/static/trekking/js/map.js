@@ -970,11 +970,6 @@ function initDetailAccordionPois(map, poisLayer) {
     $('#pois-accordion .accordion-body').on('show', function (e) {
         var id = $(e.target).data('id'),
             marker = poisMarkersById[id];
-
-        // Prevent double-jump
-        if (marker._animating === true)
-            return;
-
         map.panTo(marker.getLatLng());
 
         // Add clusterized marker explicitly, will be removed on accordion close.
@@ -982,16 +977,9 @@ function initDetailAccordionPois(map, poisLayer) {
         if (marker._clusterized) {
             map.addLayer(marker);
         }
-        // Jump!
-        marker._animating = true;
         $(marker._icon).addClass('highlight');
         marker.openPopup();
         $(marker._icon).css('z-index', 3000);
-        $(marker._icon).animate({"margin-top": "-=20px"}, "fast",
-                                function(){
-                                    marker._animating = false;
-                                    $(this).animate({"margin-top": "+=20px"}, "fast");
-                                });
     });
 
     $('#pois-accordion .accordion-body').on('hidden', function (e) {

@@ -26,13 +26,14 @@ CHANGELOG
 * Show detail background when zooming on main map. Disable by setting
   ``TILES_MAIN_MAXZOOM`` to -1.
 * Improved POIs clusters by showing thumbnails of pictograms (ref #124)
-* Replaced yellow hallow by flat outline in POIs
+* Replaced yellow hallow by flat outline in POIs (ref #124)
 
 **Minor features**
 
 * Added transport icon and grouped block with access (ref #90)
 * Renamed "Information" to "Lieux de renseignement" (ref #90)
 * Added icon to disabled infrastructures and merged with access (ref #90)
+* Removed marker jump in trek detail page (ref #124)
 
 **Internal features**
 
