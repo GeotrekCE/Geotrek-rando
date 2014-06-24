@@ -23,6 +23,8 @@ casper.test.begin('Tourism Layers', function(test) {
                              'Markers are not shown by default.');
 
         casper.click('.toggle-layer:first-child');
+
+        casper.waitForSelector('.leaflet-marker-icon.tourism');
     });
 
     casper.then(function () {
