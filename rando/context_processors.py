@@ -17,16 +17,19 @@ def settings(request):
         'URL': request.build_absolute_uri(request.path),
         'settings': app_settings,
 
+        'TILES_MAIN_MAXZOOM': settings_.TILES_MAIN_MAXZOOM,
+
         'FOOTER_FILENAME': settings_.FOOTER_FILENAME,
 
         'POPUP_FILENAME': settings_.POPUP_FILENAME,
         'POPUP_HOME_ENABLED': settings_.POPUP_HOME_ENABLED,
+        'POPUP_HOME_FORCED': settings_.POPUP_HOME_FORCED,
+
         'FILTERS_HASH_ENABLED': settings_.FILTERS_HASH_ENABLED,
 
         'FEEDBACK_FORM_ENABLED': settings_.FEEDBACK_FORM_ENABLED,
 
         'TOURISM_ENABLED': settings_.TOURISM_ENABLED,
-
     }
 
 

@@ -12,6 +12,12 @@
             padding: 0;
             margin: 0;
         }
+        body {
+            background-color: #00161F;
+            background-image: url('{% static "view3d/img/background.jpg" %}');
+            background-size: 100% 100%;
+            background-repeat: repeat-x;
+        }
         canvas {
             position: absolute;
             top: 0;
@@ -20,15 +26,28 @@
         .not-supported {
             width: 100%;
             text-align: center;
-            color: gray;
+            color: white;
             font-size: 3em;
+        }
+        .attributions {
+            background-color: rgba(255, 255, 255, 0.2);
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            height: auto;
+            width: auto;
+            border-radius: 0.35em;
+            color: white;
+            font-size: 0.8em;
+            font-family: ​​"Helvetica Neue", Helvetica, Arial, sans-serif;
         }
     </style>
 
     <script src="{% static "js/vendor/jquery-1.9.0.min.js" %}"></script>
+    <script src="{% static "view3d/vendor/underscore.js" %}"></script>
 
     <!-- Babylon.js -->
-    <script src="{% static "view3d/vendor/babylon.1.10.0.js" %}"></script>
+    <script src="{% static "view3d/vendor/babylon.1.11.js" %}"></script>
     <script src="{% static "view3d/vendor/babylon.arcRotateCamera.js" %}"></script>
 
     <!-- TweenLite -->
@@ -38,17 +57,30 @@
 
     <!-- Rando -->
     <script src="{% static "view3d/Rando.Utils.js" %}"></script>
-    <script src="{% static "view3d/Rando.Builds.js" %}"></script>
     <script src="{% static "view3d/Rando.Settings.js" %}"></script>
     <script src="{% static "view3d/Rando.Scene.js" %}"></script>
     <script src="{% static "view3d/Rando.Events.js" %}"></script>
+    <script src="{% static "view3d/Rando.Dem.js" %}"></script>
+    <script src="{% static "view3d/Rando.Poi.js" %}"></script>
+    <script src="{% static "view3d/Rando.Trek.js" %}"></script>
+    <script src="{% static "view3d/Rando.TileContainer.js" %}"></script>
+    <script src="{% static "view3d/Rando.CameraContainer.js" %}"></script>
+    <script src="{% static "view3d/Rando.BirdCamera.js" %}"></script>
+    <script src="{% static "view3d/Rando.ExamineCamera.js" %}"></script>
+    <script src="{% static "view3d/Rando.HikerCamera.js" %}"></script>
     <script src="{% static "view3d/index.js" %}"></script>
 </head>
 <body data-dem-url="{% url "core:fileserve" object.properties.elevation_area_url %}"
-      data-profile-url="{% url "core:fileserve" object.properties.altimetric_profile %}">
+      data-profile-url="{% url "core:fileserve" object.properties.altimetric_profile %}"
+      data-poi-url="{% url "core:fileserve" object.properties.poi_layer %}"
+      data-static-url="{% static "view3d/" %}"
+      data-tiles-url="{{ view.tiles.url }}">
     <div id="rootDiv">
         <div class="not-supported">
             {% trans "Browser not supported (WebGL)" %}
+        </div>
+        <div class="attributions">
+            {{ view.tiles.attributions|safe }}
         </div>
         <canvas id="canvas_renderer"></canvas>
     </div>

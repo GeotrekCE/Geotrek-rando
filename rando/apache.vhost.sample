@@ -23,6 +23,8 @@ Alias /media/ /PATH_TO_SOURCE/var/input/media/
   Allow from all
 </Directory>
 
+Header set Access-Control-Allow-Origin "*"
+
 AddType application/json .geojson
 AddType application/gpx+xml .gpx
 AddType application/vnd.google-earth.kml+xml .kml

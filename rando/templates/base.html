@@ -87,7 +87,8 @@
 
             <div id="mainmap"
                  data-treks-url="{% locale_url request.LANGUAGE_CODE "core:fileserve" treks_url %}"
-                 data-treks-extent="{{ map_extent }}"></div>
+                 data-treks-extent="{{ map_extent }}"
+                 data-tiles-main-maxzoom="{{ TILES_MAIN_MAXZOOM }}"></div>
         </div>
         <!-- container -->
 

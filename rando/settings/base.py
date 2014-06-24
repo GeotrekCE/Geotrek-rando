@@ -169,13 +169,17 @@ LEAFLET_CONFIG = {
     "TILES": [
         ('main', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
          '&copy; OpenStreetMap contributors'),
-        ('detail', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-         '&copy; OpenStreetMap contributors')
+        ('detail', 'http://{s}.livembtiles.makina-corpus.net/makina/OSMTopo/{z}/{x}/{y}.png',
+         '&copy; OpenStreetMap contributors'),
+        ('satellite', 'https://{s}.tiles.mapbox.com/v3/makina-corpus.i3p1001l/{z}/{x}/{y}.png',
+         '&copy; MapBox Satellite'),
     ],
     "SCALE": False,
     "MINIMAP": True,
     "NO_GLOBALS": False
 }
+
+TILES_MAIN_MAXZOOM = 12
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -259,9 +263,12 @@ DESCRIPTION = {
 FOOTER_FILENAME = 'footer.html'
 POPUP_FILENAME = 'popup_home.html'
 POPUP_HOME_ENABLED = False
+POPUP_HOME_FORCED = False
+
 PRINT_ENABLED = False
 VIEW3D_ENABLED = True
 TOURISM_ENABLED = True
+TOURISM_DATASOURCE_FAULT_TOLERANT = True
 
 GANALYTICS_TRACKING_CODE = 'UA-XXXXXXXX-XX'
 

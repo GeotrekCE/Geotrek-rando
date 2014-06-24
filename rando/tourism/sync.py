@@ -6,6 +6,7 @@ from rando import logger
 
 
 def sync_content_tourism(sender, **kwargs):
+
     if not settings.TOURISM_ENABLED:
         return
 
@@ -19,7 +20,12 @@ def sync_content_tourism(sender, **kwargs):
         InputFile(DataSource.filepath, **inputkwlang).pull_if_modified()
 
         for datasource in DataSource.tmp_objects.filter(language=language).all():
-            InputFile(datasource.geojson_url, **inputkwlang).pull_if_modified()
+            try:
+                InputFile(datasource.geojson_url, **inputkwlang).pull_if_modified()
+            except IOError:
+                logger.error("Could not retrieve datasource %s" % datasource.geojson_url)
+                if not settings.TOURISM_DATASOURCE_FAULT_TOLERANT:
+                    raise
 
         for datasource in DataSource.tmp_objects.filter(language=language).all():
             InputFile(datasource.pictogram_url, **inputkw).pull_if_modified()

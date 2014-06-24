@@ -176,6 +176,12 @@
 .icon-feedback:before {
   content: "F";
 }
+.icon-transport:before {
+  content: "G";
+}
+.icon-disabled-infrastructure:before {
+  content: "I";
+}
 /*
  * HTML5 Boilerplate
  *
@@ -806,6 +812,49 @@ header #lang-switch {
 .leaflet-control-zoom-fullscreen:before {
   content: "e";
 }
+#mainmap .leaflet-left .leaflet-control.background-layer-switcher {
+  margin-left: 400px;
+  -webkit-transition: margin-left 300ms linear;
+}
+#mainmap.leaflet-container.fullwidth .leaflet-control.background-layer-switcher {
+  margin-left: 30px;
+}
+#detailmap .leaflet-control.background-layer-switcher {
+  display: none;
+}
+#detailmap.enabled .leaflet-control.background-layer-switcher {
+  display: block;
+}
+.leaflet-control.background-layer-switcher a {
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  background-size: 100%;
+  outline: solid 1px white;
+}
+.leaflet-control.background-layer-switcher a.main {
+  background-image: url(../img/switcher-main.png);
+}
+.leaflet-control.background-layer-switcher a.satellite {
+  background-image: url(../img/switcher-satellite.jpg);
+}
+.leaflet-control.tourism-layer-switcher a.pois {
+  height: 20px;
+  width: 20px;
+  display: inline-block;
+  background-size: 100%;
+  background-image: url(../img/switcher-pois.svg);
+  background-repeat: no-repeat;
+  background-size: 25px;
+  background-position: 50% 50%;
+}
+.pois-list h5 {
+  background-image: url(../img/switcher-pois.svg);
+  background-repeat: no-repeat;
+  background-size: 1em;
+  padding-left: 1.2em;
+  background-position: 0% 50%;
+}
 #mainmap {
   z-index: 890;
   position: absolute;
@@ -966,27 +1015,30 @@ header #lang-switch {
   min-height: 360px;
 }
 /* POIS markers */
-.poi-marker-icon.cluster,
-.poi-marker-icon img {
+.poi-marker-icon > img {
   width: 24px;
   height: 24px;
-  padding: 1px;
   color: black;
   text-align: center;
-  background-color: rgba(248, 148, 6, 0.7);
-  border: 1px solid #232222;
-  -webkit-background-clip: padding-box;
-  -moz-background-clip: padding;
-  background-clip: padding-box;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  -webkit-box-shadow: 0px 0px 7px 2px #ffff00;
-  -moz-box-shadow: 0px 0px 7px 2px #ffff00;
-  box-shadow: 0px 0px 7px 2px #ffff00;
 }
-.poi-marker-icon.highlight img {
-  background-color: #ffff00;
+.poi-marker-icon.cluster {
+  display: block;
+}
+.poi-marker-icon.cluster .pois-cluster-row {
+  display: table-row;
+}
+.poi-marker-icon.cluster .pois-cluster-row .pois-cluster-cell {
+  width: 15px;
+  height: 15px;
+  display: table-cell;
+  line-height: 15px;
+}
+.poi-marker-icon.cluster .pois-cluster-row .pois-cluster-cell img {
+  width: 15px;
+  height: 15px;
+}
+.poi-marker-icon.highlight {
+  outline: solid 2px #ffff00;
 }
 @media (max-width: 1044px) {
   #mainmap {
@@ -1553,6 +1605,11 @@ p.tab-content-empty {
   margin-top: 20px;
   color: #877f84;
 }
+p.tab-content-empty a.change-lang {
+  display: block;
+  font-size: 0.7em;
+  margin-top: 5px;
+}
 .search {
   width: 30%;
   height: 100%;
@@ -1669,6 +1726,14 @@ p.tab-content-empty {
 * Detail page
 *
 */
+.alert-blank {
+  color: #f89406;
+  background-color: transparent;
+  border: 1px solid #f89406;
+}
+.alert-blank > div {
+  color: #877f84;
+}
 #detail-content-top {
   margin-bottom: 15px;
 }
@@ -1784,19 +1849,24 @@ html.no-webgl #toolbox a.view3d {
 .alert.alert-info h3 {
   color: #3a87ad;
 }
-.alert .icon-access:before {
+.alert .icon-disabled-infrastructure:before,
+.alert .icon-access:before,
+.alert .icon-transport:before {
   position: relative;
-  font-size: 23px;
-  top: 6px;
   margin-right: 5px;
+  top: 6px;
+}
+.alert .icon-access:before {
+  font-size: 23px;
+}
+.alert .icon-transport:before {
+  font-size: 28px;
+}
+.alert .icon-disabled-infrastructure:before {
+  margin-right: 0px;
+  font-size: 28px;
 }
 .alert .icon-warning:before {
-  position: relative;
-  font-size: 23px;
-  top: 6px;
-  margin-right: 5px;
-}
-.icon-information-desk:before {
   position: relative;
   font-size: 23px;
   top: 6px;
@@ -1825,12 +1895,40 @@ p.teaser {
 #trek-identity span.value {
   color: #f89406;
 }
-#trek-information-desk p {
-  margin-left: 10px;
+.icon-information-desk:before {
+  position: relative;
+  font-size: 28px;
+  top: 6px;
+  margin-right: 5px;
 }
-#trek-information-desk p.title {
+#trek-information-desk p,
+.leaflet-popup.information-desk p {
+  margin-bottom: 0px;
+}
+#trek-information-desk p.title,
+.leaflet-popup.information-desk p.title {
   margin-bottom: 0px;
   font-weight: bold;
+}
+#trek-information-desk p.latlng,
+.leaflet-popup.information-desk p.latlng {
+  font-size: 0.8em;
+}
+#trek-information-desk .photo,
+.leaflet-popup.information-desk .photo {
+  text-align: right;
+}
+#trek-information-desk .information-desk {
+  border-bottom: #f89406 solid 1px;
+}
+#trek-information-desk .information-desk:last-of-type {
+  border-bottom: none;
+}
+.leaflet-popup.information-desk p {
+  margin-top: 0px;
+}
+.leaflet-popup.information-desk img {
+  display: none;
 }
 #themes li,
 #usages li,
@@ -2073,7 +2171,7 @@ ul.errorlist {
   margin-left: 400px;
   -webkit-transition: margin-left 300ms linear;
 }
-.leaflet-container.fullwidth #mainmap .leaflet-left .leaflet-control.tourism-layer-switcher {
+#mainmap.leaflet-container.fullwidth .leaflet-control.tourism-layer-switcher {
   margin-left: 30px;
 }
 #detailmap .leaflet-control.tourism-layer-switcher {
@@ -2086,15 +2184,15 @@ ul.errorlist {
   background-color: #877f84;
   max-height: 30px;
   max-width: 30px;
-  display: inline-block;
   padding: 5px;
-  margin-right: 5px;
+  margin-top: 5px;
+  display: block;
   opacity: 0.5;
 }
 .leaflet-control.tourism-layer-switcher .toggle-layer.active {
   margin-left: -1px;
   margin-bottom: -1px;
-  margin-right: 4px;
+  margin-top: 4px;
   background-color: #f89406;
   opacity: 1.0;
   outline: solid 2px #ffffff;
@@ -2102,6 +2200,7 @@ ul.errorlist {
 }
 .leaflet-control.tourism-layer-switcher .toggle-layer img {
   height: 20px;
+  width: 20px;
 }
 .leaflet-marker-icon.tourism {
   background-color: #f89406;
@@ -2111,6 +2210,7 @@ ul.errorlist {
 }
 .leaflet-marker-icon.tourism img {
   width: 100%;
+  height: 100%;
   margin-top: -7px;
 }
 .leaflet-popup-content .tourism {

@@ -1,7 +1,10 @@
-RANDO = RANDO || {};
+var RANDO = RANDO || {};
+
 RANDO.Events = {};
-
-
+/*
+ * Bind and Unbind events 
+ * 
+ ***************************/
 // DOM Level 2 Event model
 if (document.addEventListener) {
     RANDO.Events.addEvent = function (elem, type, fn) {
@@ -25,5 +28,8 @@ else if (document.attachEvent) {
         elem.removeEventListener("on" + type, fn);
     };
 }
+
+
+
 
 

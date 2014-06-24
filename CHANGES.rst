@@ -2,6 +2,58 @@
 CHANGELOG
 =========
 
+1.29dev (unreleased)
+--------------------
+
+**Upgrade notes**
+
+* Add a ``satellite`` layer URL in your settings, just like the two others.
+  See sample for example.
+
+**BUG fixes**
+
+* Fix translation of municipality
+* Reduced minimap offset (fixes #122)
+* Fixed minimap error when map loading too fast
+* Make sure the start flag is entirely visible
+
+**New features**
+
+* Show information desks on trek detail maps (*requires Geotrek 0.24+*)
+* Added settings ``POPUP_HOME_FORCED`` to force popup display on home (default: False)
+* Add layer switcher to show satellite background (fixes #123)
+* Add layer switcher to hide POIs in trek detail map (fixes #125)
+* Show detail background when zooming on main map. Disable by setting
+  ``TILES_MAIN_MAXZOOM`` to -1.
+* Improved POIs clusters by showing thumbnails of pictograms (ref #124)
+* Replaced yellow hallow by flat outline in POIs (ref #124)
+* Since treks can now be published by lang, adjust navigation when a trek
+  is not available in another language (fixes #148)
+* Added satellite tiles to 3D view
+* Added POIs markers on 3D view
+
+**Minor features**
+
+* Added transport icon and grouped block with access (ref #90)
+* Renamed "Information" to "Lieux de renseignement" (ref #90)
+* Added icon to disabled infrastructures and merged with access (ref #90)
+* Removed marker jump in trek detail page (ref #124)
+
+**Internal features**
+
+* Empty frontend cache on sync to prevent differences between cached pages
+  (ex: trek list) and AJAX data (ex: GeoJSON layer)
+* Added setting to allow datasource download errors (fixes #144)
+* Update Apache configuration sample to enable CORS for *Geotrek-mobile*
+
+**Documentation**
+
+* Add setup instructions for *Geotrek-mobile*
+
+:notes:
+
+    Do not forget to update your Apache configuration file
+
 1.28 (2014-05-26)
 -----------------
 

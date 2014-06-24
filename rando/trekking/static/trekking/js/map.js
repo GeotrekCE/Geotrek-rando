@@ -237,14 +237,26 @@ var POILayer = L.MarkerClusterGroup.extend({
 
     initialize: function (poisData) {
         L.MarkerClusterGroup.prototype.initialize.call(this, {
-          showCoverageOnHover: false,
-          disableClusteringAtZoom: 15,
-          maxClusterRadius: 24,
-          iconCreateFunction: function(cluster) {
-              return new L.DivIcon({className: 'poi-marker-icon cluster',
-                                    iconSize: [20, 20],
-                                    iconAnchor: [12, 12],
-                                    html: '<b>' + cluster.getChildCount() + '</b>'});
+            showCoverageOnHover: false,
+            disableClusteringAtZoom: 15,
+            maxClusterRadius: 24,
+            iconCreateFunction: function(cluster) {
+                var icons = {ICON1: '&nbsp;', ICON2: '&nbsp;',
+                             ICON3: '&nbsp;', ICON4: '&nbsp;'};
+                var tableTmpl = '' +
+                '<div class="pois-cluster-row"><div class="pois-cluster-cell">{ICON0}</div><div class="pois-cluster-cell">{ICON1}</div></div>' +
+                '<div class="pois-cluster-row"><div class="pois-cluster-cell">{ICON2}</div><div class="pois-cluster-cell">{ICON3}</div></div>' +
+                '';
+                var children = cluster.getAllChildMarkers();
+                for (var i=0; i<Math.min(children.length, 4); i++) {
+                    var c = children[i];
+                    icons['ICON'+i] = '<img src="' + c.properties.type.pictogram + '"/>';
+                }
+                var iconsTable = L.Util.template(tableTmpl, icons);
+                return new L.DivIcon({className: 'poi-marker-icon cluster',
+                                      iconSize: [30, 30],
+                                      iconAnchor: [15, 15],
+                                      html: iconsTable});
           }
         });
 
@@ -269,6 +281,7 @@ var POILayer = L.MarkerClusterGroup.extend({
         });
 
         var poicon = new L.DivIcon({className: 'poi-marker-icon',
+                                    iconSize: [24, 24],
                                     iconAnchor: [12, 12],
                                     labelAnchor: [12, 2],
                                     html: img}),
@@ -339,6 +352,21 @@ L.Map.include(FakeBoundsMapMixin);
 
 
 L.Map.include({
+
+    isShowingLayer: function (name) {
+        // Requires layerscontrol
+        if (!this.layerscontrol) return;
+
+        var layers = this.layerscontrol._layers;
+        for (var id in layers) {
+            var l = layers[id];
+            if (l.name == name && this.hasLayer(l.layer)) {
+                return true;
+            }
+        }
+        return false;
+    },
+
     switchLayer: function (name) {
         // Requires layerscontrol
         if (!this.layerscontrol) return;
@@ -361,7 +389,139 @@ L.Map.include({
     }
 });
 
+L.LatLngBounds.prototype.padTop = function (bufferRatio) {
+    var sw = this._southWest,
+        ne = this._northEast,
+        heightBuffer = Math.abs(sw.lat - ne.lat) * bufferRatio;
 
+    return new L.LatLngBounds(
+            new L.LatLng(sw.lat, sw.lng),
+            new L.LatLng(ne.lat + heightBuffer, ne.lng));
+
+};
+
+L.Control.SwitchBackgroundLayers = L.Control.extend({
+    options: {
+        position: 'bottomleft',
+    },
+
+    onAdd: function(map) {
+        this.map = map;
+
+        this.tiles_main_maxzoom = $(map._container).data('tiles-main-maxzoom');
+        if (this.tiles_main_maxzoom > 0) {
+            map.on('zoomend', function (e) {
+                if (map.isShowingLayer('satellite'))
+                    return;
+                if (e.target.getZoom() > this.tiles_main_maxzoom) {
+                    if (!map.isShowingLayer('detail'))
+                        setTimeout(function () { map.switchLayer('detail'); }, 100);
+                }
+                else {
+                    if (!map.isShowingLayer('main'))
+                        setTimeout(function () { map.switchLayer('main'); }, 100);
+                }
+            }, this);
+        }
+
+        this._container = L.DomUtil.create('div', 'background-layer-switcher');
+
+        var className = 'toggle-layer satellite';
+
+        this.button = L.DomUtil.create('a', className, this._container);
+        this.button.setAttribute('title', gettext('Show satellite'));
+        $(this.button).tooltip({placement: 'right'});
+
+        L.DomEvent.disableClickPropagation(this.button);
+        L.DomEvent.on(this.button, 'click', function (e) {
+            this.toggleLayer();
+        }, this);
+
+        return this._container;
+    },
+
+    toggleLayer: function () {
+        if (this.map.isShowingLayer('main') || this.map.isShowingLayer('detail')) {
+            this.map.switchLayer('satellite');
+
+            L.DomUtil.removeClass(this.button, 'satellite');
+            L.DomUtil.addClass(this.button, 'main');
+            this.button.setAttribute('title', gettext('Show plan'));
+        }
+        else {
+            this.map.switchLayer(this.map.getZoom() > this.tiles_main_maxzoom ?
+                                 'detail' : 'main');
+
+            L.DomUtil.removeClass(this.button, 'main');
+            L.DomUtil.addClass(this.button, 'satellite');
+            this.button.setAttribute('title', gettext('Show satellite'));
+        }
+
+        $(this.button).tooltip('destroy');
+        $(this.button).tooltip({placement: 'right'});
+    }
+
+});
+
+
+L.Control.TogglePOILayer = L.Control.extend({
+    options: {
+        position: 'bottomleft',
+    },
+
+    initialize: function (layer, options) {
+        this.layer = layer;
+        L.Control.prototype.initialize.call(this, options);
+    },
+
+    onAdd: function(map) {
+        this.map = map;
+
+        this._container = L.DomUtil.create('div', 'tourism-layer-switcher');
+        var className = 'toggle-layer pois active';
+
+        this.button = L.DomUtil.create('a', className, this._container);
+        this.button.setAttribute('title', gettext('Points of interest'));
+        $(this.button).tooltip({placement: 'right'});
+
+        L.DomEvent.disableClickPropagation(this.button);
+        L.DomEvent.on(this.button, 'click', function (e) {
+            this.toggleLayer();
+        }, this);
+
+        return this._container;
+    },
+
+    toggleLayer: function () {
+        if (this.layer) {
+            if (this.map.hasLayer(this.layer)) {
+                $(window).trigger('pois:hidden');
+                L.DomUtil.removeClass(this.button, 'active');
+                this.map.removeLayer(this.layer);
+            }
+            else {
+                $(window).trigger('pois:shown');
+                L.DomUtil.addClass(this.button, 'active');
+                this.map.addLayer(this.layer);
+            }
+        }
+    }
+
+});
+
+
+$(window).on('map:init', function (e) {
+    var data = e.detail || e.originalEvent.detail,
+        map = data.map,
+        containerId = map._container.id;
+
+    // Show tourism layers everywhere except on feedback form
+    if (containerId === 'feedbackmap')
+        return;
+
+    var control = map.tourismLayers = new L.Control.SwitchBackgroundLayers();
+    control.addTo(map);
+});
 
 /**
  * Map initialization functions.
@@ -372,6 +532,7 @@ function mainmapInit(map, djoptions) {
 
     var treks_url = $(map._container).data('treks-url'),
         treks_extent = $(map._container).data('treks-extent');
+
     var treksLayer = (new TrekLayer(treks_url)).addTo(map);
 
     var treksBounds = L.latLngBounds([treks_extent[3],
@@ -393,11 +554,13 @@ function mainmapInit(map, djoptions) {
 
     // Add reset view control
     map.whenReady(function () {
-        map.switchLayer('main');
         if (map.layerscontrol) map.removeControl(map.layerscontrol);
         new L.Control.ResetView(treksLayer.getFullBounds.bind(treksLayer), {position: 'topright'}).addTo(map);
         $(window).trigger('map:ready', [map, 'main']);
     });
+
+    // Reduce minimap offset
+    map.minimapcontrol.options.zoomLevelOffset = -3;
 
     // Highlight result on mouseover
     treksLayer.on('mouseover', function (e) {
@@ -568,19 +731,15 @@ function detailmapInit(map, bounds) {
         title: gettext('Fullscreen')
     }).addTo(map);
 
-    // Minimize minimap by default
-    map.on('viewreset', function () {
-        map.minimapcontrol._minimize();
-    });
-
     var trekGeoJson = JSON.parse(document.getElementById('trek-geojson').innerHTML);
     var poiUrl = $(map._container).data('poi-url');
+    var informationDeskUrl = $(map._container).data('information-desk-url');
 
     var trekLayer = initDetailTrekMap(map, trekGeoJson);
     var parking = initDetailParking(map, trekGeoJson);
     initDetailAltimetricProfile(map, trekLayer);
 
-    var wholeBounds = trekLayer.getBounds();
+    var wholeBounds = trekLayer.getBounds().padTop(0.12);
     if (parking) {
         wholeBounds.extend(parking.getLatLng());
     }
@@ -592,9 +751,21 @@ function detailmapInit(map, bounds) {
         map.fitBounds(wholeBounds);
     });
 
+    var informationDesksLayer = initDetailInformationDesksLayer(map, informationDeskUrl);
+    informationDesksLayer.on('data:loaded', function () {
+        wholeBounds.extend(informationDesksLayer.getBounds());
+        map.fitBounds(wholeBounds);
+    });
+
+    var poisLayerSwitcher = new L.Control.TogglePOILayer(poisLayer);
+    poisLayerSwitcher.addTo(map);
+
     map.whenReady(function () {
         map.switchLayer('detail');
         if (map.layerscontrol) map.removeControl(map.layerscontrol);
+
+        // Minimize minimap by default
+        map.minimapcontrol._minimize();
 
         new L.Control.ResetView(getWholeBounds, {position: 'topright'}).addTo(map);
         map.addControl(new L.Control.Scale({imperial: false, position: 'bottomright'}));
@@ -754,6 +925,26 @@ function initDetailPoisLayer(map, poiUrl) {
     return poisLayer.addTo(map);
 }
 
+function initDetailInformationDesksLayer(map, layerUrl) {
+    var deskIcon = L.icon({
+        iconUrl: IMG_URL + '/information.svg',
+        iconSize: [20, 20],
+        iconAnchor: [10, 10]
+    });
+    var layer = L.geoJson.ajax(layerUrl, {
+        pointToLayer: function (feature, latlng) {
+            var popup = L.popup({
+                className: 'information-desk'
+            })
+            .setContent(feature.properties.html);
+            return L.marker(latlng, {icon: deskIcon})
+                    .bindPopup(popup);
+        }
+    });
+    layer.addTo(map);
+    return layer;
+}
+
 
 function initDetailAccordionPois(map, poisLayer) {
     var poisMarkersById = {};
@@ -779,11 +970,6 @@ function initDetailAccordionPois(map, poisLayer) {
     $('#pois-accordion .accordion-body').on('show', function (e) {
         var id = $(e.target).data('id'),
             marker = poisMarkersById[id];
-
-        // Prevent double-jump
-        if (marker._animating === true)
-            return;
-
         map.panTo(marker.getLatLng());
 
         // Add clusterized marker explicitly, will be removed on accordion close.
@@ -791,16 +977,9 @@ function initDetailAccordionPois(map, poisLayer) {
         if (marker._clusterized) {
             map.addLayer(marker);
         }
-        // Jump!
-        marker._animating = true;
         $(marker._icon).addClass('highlight');
         marker.openPopup();
         $(marker._icon).css('z-index', 3000);
-        $(marker._icon).animate({"margin-top": "-=20px"}, "fast",
-                                function(){
-                                    marker._animating = false;
-                                    $(this).animate({"margin-top": "+=20px"}, "fast");
-                                });
     });
 
     $('#pois-accordion .accordion-body').on('hidden', function (e) {
