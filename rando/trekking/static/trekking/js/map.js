@@ -1030,10 +1030,12 @@ function initPOIsList(map) {
             map.addControl(poiSidebar);
             poiSidebar.show();
 
-            $('#pois-sidebar .pictogram').tooltip({placement: 'right'});
+            var $sidebar = $('#pois-sidebar');
+
+            $sidebar.find('.pictogram').tooltip({placement: 'right'});
 
             // Hilight marker when list hovered
-            $('#pois-sidebar .poi').hoverIntent(
+            $sidebar.find('.poi').hoverIntent(
                 function enter() {
                     $(this).addClass('active');
                     $(window).trigger('poilist:mouseover', [$(this).data('pk')]);
@@ -1046,13 +1048,13 @@ function initPOIsList(map) {
 
             // Scroll to detail when marker hovered
             $(window).on('poimap:mouseover', function (e, pk) {
-                var $item = $('#pois-sidebar .poi[data-pk=' + pk + ']');
+                var $item = $sidebar.find('.poi[data-pk=' + pk + ']');
                 var scrollTo = $item.parent().scrollTop() +
                                $item.offset().top -
                                $item.parent().offset().top +
-                               15; // top margin
+                               30; // padding + margin
 
-                $('#pois-sidebar').animate({
+                $sidebar.animate({
                     scrollTop: scrollTo
                 }, {
                     duration: 1000,
@@ -1064,7 +1066,7 @@ function initPOIsList(map) {
             });
 
             // Prevent scrolling page when bottom reached
-            $('#pois-sidebar').bind( 'mousewheel DOMMouseScroll', function ( e ) {
+            $sidebar.bind( 'mousewheel DOMMouseScroll', function ( e ) {
                 var e0 = e.originalEvent,
                     delta = e0.wheelDelta || -e0.detail;
 
