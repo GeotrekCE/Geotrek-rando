@@ -1766,8 +1766,16 @@ p.tab-content-empty a.change-lang {
   background-position: 0% 50%;
 }
 #pois-sidebar .pois-list .poi {
-  margin-top: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
+  margin-top: 15px;
+  border-bottom: solid 1px #877f84;
+}
+#pois-sidebar .pois-list .poi:first-of-type {
+  margin-top: 5px;
+}
+#pois-sidebar .pois-list .poi:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0px;
 }
 #pois-sidebar .pois-list .poi.active {
   color: #f89406;

@@ -51,8 +51,18 @@
 
     .poi {
 
-      margin-top: 10px;
-      padding-bottom: 10px;
+      padding-bottom: 15px;
+      margin-top: 15px;
+      border-bottom: solid 1px @darkGray;
+
+      &:first-of-type {
+        margin-top: 5px;
+      }
+
+      &:last-of-type {
+        border-bottom: none;
+        padding-bottom: 0px;
+      }
 
       &.active {
         color: @mainColor;
