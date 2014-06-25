@@ -8,6 +8,7 @@ CHANGELOG
 **BUG fixes**
 
 * Fix display even if no data is synced (first run)
+* Fix display bug when 3D is disabled
 
 1.29 (2014-06-24)
 -----------------
