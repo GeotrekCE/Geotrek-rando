@@ -348,9 +348,15 @@ var FakeBoundsMapMixin = {
     },
 
     panToOffset: function (latlng, offset, options) {
-        var x = this.latLngToContainerPoint(latlng).x - offset[0]
-        var y = this.latLngToContainerPoint(latlng).y - offset[1]
-        var point = this.containerPointToLatLng([x, y])
+        var x = this.latLngToContainerPoint(latlng).x - offset[0];
+        var y = this.latLngToContainerPoint(latlng).y - offset[1];
+        var point = this.containerPointToLatLng([x, y]);
+
+        var current = this.latLngToContainerPoint(this.getCenter());
+
+        if (L.point(x, y).distanceTo(current) < options.minimumDistance)
+            return;
+
         return this.setView(point, this._zoom, { pan: options })
     }
 };
@@ -756,7 +762,6 @@ function detailmapInit(map, bounds) {
     var poisLayer = initDetailPoisLayer(map, poiUrl);
     poisLayer.on('data:loaded', function () {
         wholeBounds.extend(poisLayer.getBounds());
-        map.fitBounds(wholeBounds);
     });
 
     initPOIsList(map);
@@ -959,7 +964,7 @@ function initDetailPoisLayer(map, poiUrl) {
             var pk = marker.properties.pk;
             poisMarkersById[pk] = marker;
 
-            marker.on('mouseover', function (e) {
+            marker.on('mouseintent', function (e) {
                 $(window).trigger('poimap:mouseover', [pk]);
             });
         });
@@ -967,33 +972,31 @@ function initDetailPoisLayer(map, poiUrl) {
 
     $(window).on('poilist:mouseover', function (e, pk) {
         var marker = poisMarkersById[pk];
-
-        // Add clusterized marker explicitly, will be removed on accordion close.
-        marker._clusterized = (marker._map === undefined);
-        if (marker._clusterized) {
-            map.addLayer(marker);
+        var visibleOne = poisLayer.getVisibleParent(marker);
+        if (visibleOne) {
+            marker = visibleOne;
         }
         $(marker._icon).addClass('highlight');
-        marker.openPopup();
         $(marker._icon).css('z-index', 3000);
+
+        marker.showLabel();
 
         var sidepanelw = $('#pois-sidebar').width();
         map.panToOffset(marker.getLatLng(), [-sidepanelw/2, 0], {
             animate: true,
             duration: 0.8,
-            easeLinearity: 0.1,
+            minimumDistance: 150
         });
     });
 
     $(window).on('poilist:mouseout', function (e, pk) {
         var marker = poisMarkersById[pk];
-        $(marker._icon).removeClass('highlight');
-        marker.closePopup();
-        // Restore clusterized markers (if still on map, i.e. zoom not changed)
-        if (marker._clusterized && marker._map) {
-            marker._map.removeLayer(marker);
-            marker._map = undefined;
+        var visibleOne = poisLayer.getVisibleParent(marker);
+        if (visibleOne) {
+            marker = visibleOne;
         }
+        marker.hideLabel();
+        $(marker._icon).removeClass('highlight');
     });
     return poisLayer.addTo(map);
 }
@@ -1009,26 +1012,37 @@ function initPOIsList(map) {
             map.addControl(poiSidebar);
             poiSidebar.show();
 
-            var over = false;
-            $('#pois-sidebar .poi').mouseover(function() {
-                if (over) return;
-                over = true;
-                $(this).addClass('active');
-                $(window).trigger('poilist:mouseover', [$(this).data('pk')]);
-            });
+            $('#pois-sidebar .pictogram').tooltip({placement: 'right'});
 
-            $('#pois-sidebar .poi').mouseout(function() {
-                over = false;
-                $(this).removeClass('active');
-                $(window).trigger('poilist:mouseout', [$(this).data('pk')]);
+            $('#pois-sidebar .poi').hoverIntent(
+                function enter() {
+                    $(this).addClass('active');
+                    $(window).trigger('poilist:mouseover', [$(this).data('pk')]);
+                },
+                function leave() {
+                    $(this).removeClass('active');
+                    $(window).trigger('poilist:mouseout', [$(this).data('pk')]);
+                }
+            );
+
+            $(window).on('poimap:mouseover', function (e, pk) {
+                var $item = $('#pois-sidebar .poi[data-pk=' + pk + ']');
+                var scrollTo = $item.parent().scrollTop() +
+                               $item.offset().top -
+                               $item.parent().offset().top -
+                               10; // top margin
+
+                $('#pois-sidebar').animate({
+                    scrollTop: scrollTo
+                }, {
+                    duration: 1000,
+                    specialEasing: {
+                        width: 'linear',
+                        height: 'easeOutBounce'
+                    }
+                });
             });
         });
 
-
-        $(window).on('poimap:mouseover', function (e, pk) {
-            var $item = $('#pois-sidebar .poi[data-pk=' + pk + ']');
-            console.log($item, $item.position().top;)
-
-        });
     }
 }
