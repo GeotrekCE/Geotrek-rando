@@ -1032,6 +1032,7 @@ function initPOIsList(map) {
 
             $('#pois-sidebar .pictogram').tooltip({placement: 'right'});
 
+            // Hilight marker when list hovered
             $('#pois-sidebar .poi').hoverIntent(
                 function enter() {
                     $(this).addClass('active');
@@ -1043,6 +1044,7 @@ function initPOIsList(map) {
                 }
             );
 
+            // Scroll to detail when marker hovered
             $(window).on('poimap:mouseover', function (e, pk) {
                 var $item = $('#pois-sidebar .poi[data-pk=' + pk + ']');
                 var scrollTo = $item.parent().scrollTop() +
@@ -1060,6 +1062,16 @@ function initPOIsList(map) {
                     }
                 });
             });
+
+            // Prevent scrolling page when bottom reached
+            $('#pois-sidebar').bind( 'mousewheel DOMMouseScroll', function ( e ) {
+                var e0 = e.originalEvent,
+                    delta = e0.wheelDelta || -e0.detail;
+
+                this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+                e.preventDefault();
+            });
+
         });
 
     }
