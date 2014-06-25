@@ -978,7 +978,11 @@ function initDetailPoisLayer(map, poiUrl) {
         $(marker._icon).css('z-index', 3000);
 
         var sidepanelw = $('#pois-sidebar').width();
-        map.panToOffset(marker.getLatLng(), [-sidepanelw/2, 0]);
+        map.panToOffset(marker.getLatLng(), [-sidepanelw/2, 0], {
+            animate: true,
+            duration: 0.8,
+            easeLinearity: 0.1,
+        });
     });
 
     $(window).on('poilist:mouseout', function (e, pk) {
@@ -1005,12 +1009,16 @@ function initPOIsList(map) {
             map.addControl(poiSidebar);
             poiSidebar.show();
 
+            var over = false;
             $('#pois-sidebar .poi').mouseover(function() {
+                if (over) return;
+                over = true;
                 $(this).addClass('active');
                 $(window).trigger('poilist:mouseover', [$(this).data('pk')]);
             });
 
             $('#pois-sidebar .poi').mouseout(function() {
+                over = false;
                 $(this).removeClass('active');
                 $(window).trigger('poilist:mouseout', [$(this).data('pk')]);
             });
