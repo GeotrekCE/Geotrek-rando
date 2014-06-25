@@ -1,0 +1,80 @@
+.leaflet-sidebar & {
+  width: 300px;
+}
+
+.leaflet-sidebar.right.visible ~ .leaflet-right {
+  right: 300px;
+}
+
+
+#pois-sidebar {
+
+  padding: 8px;
+  background-color: fade(@white, 80%);
+
+  h5 {
+
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 0.9em;
+    line-height: 0.9em;
+
+    background-image: url(../img/switcher-pois.svg);
+    background-repeat: no-repeat;
+    background-size: 1em;
+    padding-left: 1.2em;
+    background-position: 0% 50%;
+  }
+
+  .pois-list {
+
+
+    .poi {
+
+      margin-top: 10px;
+      padding-bottom: 10px;
+
+      &.active {
+        color: @mainColor;
+      }
+
+      .title {
+
+        .pictures-info {
+          &:before {
+            margin-right: 2px;
+            vertical-align: middle;
+            position: relative;
+            top: -1px;
+          }
+        }
+
+        .name {
+          font-size: 1.2em;
+          font-weight: bold;
+          white-space: nowrap;
+          display: inline-block;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          position: absolute;
+          right: 65px;
+          left: 40px;
+        }
+      }
+
+      .carousel {
+        margin-bottom: 0px;
+      }
+
+      .carousel-caption {
+        font-size: 0.8em;
+
+        p {
+          line-height: 1em;
+        }
+      }
+    }
+
+
+  }
+}

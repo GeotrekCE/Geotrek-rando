@@ -345,13 +345,20 @@ var FakeBoundsMapMixin = {
         var bounds = new L.LatLngBounds([latlng, latlng]),
             fakeBounds = this.__fakeBounds(bounds);
         this.panTo(fakeBounds.getCenter());
+    },
+
+    panToOffset: function (latlng, offset, options) {
+        var x = this.latLngToContainerPoint(latlng).x - offset[0]
+        var y = this.latLngToContainerPoint(latlng).y - offset[1]
+        var point = this.containerPointToLatLng([x, y])
+        return this.setView(point, this._zoom, { pan: options })
     }
 };
 
 L.Map.include(FakeBoundsMapMixin);
 
 
-L.Map.include({
+var LayerSwitcherMixin = {
 
     isShowingLayer: function (name) {
         // Requires layerscontrol
@@ -387,7 +394,10 @@ L.Map.include({
         if (selected === null) throw "unknown layer " + name;
         this.fire('baselayerchange', {layer: selected});
     }
-});
+};
+
+L.Map.include(LayerSwitcherMixin);
+
 
 L.LatLngBounds.prototype.padTop = function (bufferRatio) {
     var sw = this._southWest,
@@ -723,8 +733,6 @@ function mainmapInit(map, djoptions) {
 
 
 function detailmapInit(map, bounds) {
-    var poisMarkersById = {};
-
     map.attributionControl.setPrefix('');
     L.control.fullscreen({
         position: 'topright',
@@ -751,10 +759,11 @@ function detailmapInit(map, bounds) {
         map.fitBounds(wholeBounds);
     });
 
+    initPOIsList(map);
+
     var informationDesksLayer = initDetailInformationDesksLayer(map, informationDeskUrl);
     informationDesksLayer.on('data:loaded', function () {
         wholeBounds.extend(informationDesksLayer.getBounds());
-        map.fitBounds(wholeBounds);
     });
 
     var poisLayerSwitcher = new L.Control.TogglePOILayer(poisLayer);
@@ -914,26 +923,6 @@ function initDetailParking(map, trekGeoJson) {
     return null;
 }
 
-function initDetailPoisLayer(map, poiUrl) {
-    // We don't use L.GeoJSON.AJAX because POILayer already inherits
-    // from MarkerCluster.
-    var poisLayer = new POILayer();
-    $.getJSON(poiUrl, function (data) {
-        poisLayer.addData(data);
-
-
-        var poiSidebar = L.control.sidebar('pois-sidebar', {
-            closeButton: false,
-            position: 'right'
-        });
-        setTimeout(function () {
-            map.addControl(poiSidebar);
-            poiSidebar.show();
-        }, 500);
-        initDetailAccordionPois(map, poisLayer);
-});
-    return poisLayer.addTo(map);
-}
 
 function initDetailInformationDesksLayer(map, layerUrl) {
     var deskIcon = L.icon({
@@ -956,31 +945,28 @@ function initDetailInformationDesksLayer(map, layerUrl) {
 }
 
 
-function initDetailAccordionPois(map, poisLayer) {
+function initDetailPoisLayer(map, poiUrl) {
+    // We don't use L.GeoJSON.AJAX because POILayer already inherits
+    // from MarkerCluster.
+    var poisLayer = new POILayer();
     var poisMarkersById = {};
 
-    poisLayer.eachLayer(function (marker) {
-        poisMarkersById[marker.properties.pk] = marker;
-        /*
-         * Open Accordion on marker click.
-         * TODO: does not work correctly.
-         */
-        marker.off('click');  // Disable auto-control of popup
-        marker.on('click', function (e) {
-            var $item = $('#poi-item-' + marker.properties.pk);
-            $item.click();
-            var top = $('#pois-accordion').scrollTop(),
-                toTop = $item.position().top;
-            $('#pois-accordion').animate({
-                scrollTop: top + toTop
-            }, 1000);
+    $.getJSON(poiUrl, function (data) {
+        poisLayer.addData(data);
+        poisLayer.fire('data:loaded');
+
+        poisLayer.eachLayer(function (marker) {
+            var pk = marker.properties.pk;
+            poisMarkersById[pk] = marker;
+
+            marker.on('mouseover', function (e) {
+                $(window).trigger('poimap:mouseover', [pk]);
+            });
         });
     });
 
-    $('#pois-accordion .accordion-body').on('show', function (e) {
-        var id = $(e.target).data('id'),
-            marker = poisMarkersById[id];
-        map.panTo(marker.getLatLng());
+    $(window).on('poilist:mouseover', function (e, pk) {
+        var marker = poisMarkersById[pk];
 
         // Add clusterized marker explicitly, will be removed on accordion close.
         marker._clusterized = (marker._map === undefined);
@@ -990,12 +976,13 @@ function initDetailAccordionPois(map, poisLayer) {
         $(marker._icon).addClass('highlight');
         marker.openPopup();
         $(marker._icon).css('z-index', 3000);
+
+        var sidepanelw = $('#pois-sidebar').width();
+        map.panToOffset(marker.getLatLng(), [-sidepanelw/2, 0]);
     });
 
-    $('#pois-accordion .accordion-body').on('hidden', function (e) {
-        var id = $(e.target).data('id'),
-            marker = poisMarkersById[id];
-
+    $(window).on('poilist:mouseout', function (e, pk) {
+        var marker = poisMarkersById[pk];
         $(marker._icon).removeClass('highlight');
         marker.closePopup();
         // Restore clusterized markers (if still on map, i.e. zoom not changed)
@@ -1004,4 +991,36 @@ function initDetailAccordionPois(map, poisLayer) {
             marker._map = undefined;
         }
     });
+    return poisLayer.addTo(map);
+}
+
+function initPOIsList(map) {
+    if (L.DomUtil.get('pois-sidebar')) {
+        var poiSidebar = L.control.sidebar('pois-sidebar', {
+            closeButton: false,
+            position: 'right'
+        });
+
+        $(window).on('map:ready', function () {
+            map.addControl(poiSidebar);
+            poiSidebar.show();
+
+            $('#pois-sidebar .poi').mouseover(function() {
+                $(this).addClass('active');
+                $(window).trigger('poilist:mouseover', [$(this).data('pk')]);
+            });
+
+            $('#pois-sidebar .poi').mouseout(function() {
+                $(this).removeClass('active');
+                $(window).trigger('poilist:mouseout', [$(this).data('pk')]);
+            });
+        });
+
+
+        $(window).on('poimap:mouseover', function (e, pk) {
+            var $item = $('#pois-sidebar .poi[data-pk=' + pk + ']');
+            console.log($item, $item.position().top;)
+
+        });
+    }
 }
