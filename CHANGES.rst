@@ -11,6 +11,7 @@ CHANGELOG
 * Fix display bug when 3D is disabled
 * Fix missing translations
 * Fix undefined maps when landing on mobile detail page
+* Fixed home apparence on 1024 screens
 
 1.29 (2014-06-24)
 -----------------

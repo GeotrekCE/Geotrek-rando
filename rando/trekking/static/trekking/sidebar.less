@@ -13,10 +13,10 @@
 
 #side-bar {
   position: absolute;
-  top: 115px; /* header + search-bar */
+  top: @filtersbar-height-lg;
   bottom: 0;
   z-index: 900; /* above map */
-  width: 330px;
+  width: @sidebar-width-sm;
   border-right: solid 2px @sidebarBorder;
   background-color: @sidebarBackground;
   min-height: 45px;
@@ -25,9 +25,12 @@
     background-color: @mainColor;
   }
 
+  @media (max-width: @screen-sm) {
+    top: @filtersbar-height-sm;
+  }
+
   @media (min-width: @screen-lg) {
-    top: 65px;
-    min-width: 389px;
+    min-width: @sidebar-width-lg;
   }
 
   .nav-tabs {
