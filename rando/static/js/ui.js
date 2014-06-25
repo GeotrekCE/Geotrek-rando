@@ -14,6 +14,9 @@ Modernizr.addTest('fullscreen', function(){
 
 
 function invalidate_maps() {
+    if (!window.maps)  // Safety check (landing detail mobile)
+        return;
+
     for (var i=0; i<window.maps.length; i++) {
         window.maps[i].invalidateSize();
     }
