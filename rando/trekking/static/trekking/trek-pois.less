@@ -6,7 +6,6 @@
   right: 300px;
 }
 
-
 #pois-sidebar {
 
   padding: 8px;
@@ -39,16 +38,6 @@
       }
 
       .title {
-
-        .pictures-info {
-          &:before {
-            margin-right: 2px;
-            vertical-align: middle;
-            position: relative;
-            top: -1px;
-          }
-        }
-
         .name {
           font-size: 1.2em;
           font-weight: bold;
@@ -57,24 +46,34 @@
           text-overflow: ellipsis;
           overflow: hidden;
           position: absolute;
-          right: 65px;
           left: 40px;
+          right: 5px;
         }
       }
 
-      .carousel {
+      .picture {
         margin-bottom: 0px;
-      }
+        position: relative;
 
-      .carousel-caption {
-        font-size: 0.8em;
+        img {
+          margin: 0 auto;
+          width: 100%;
+        }
 
-        p {
-          line-height: 1em;
+        .carousel-caption {
+          padding: 7px;
+          font-size: 0.8em;
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+
+          p {
+            line-height: 1em;
+          }
         }
       }
     }
-
 
   }
 }

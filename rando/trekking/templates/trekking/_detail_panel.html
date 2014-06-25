@@ -261,13 +261,17 @@
           <div class="title">
             {{ poi.properties.type|pictogram }}
             <span class="name">{{ poi.properties.name }}</span>
-            {% if poi.properties.pictures|length > 0 %}
-              <span class="pictures-info pull-right icon-camera">&times;{{ poi.properties.pictures|length }}</span>
-            {% endif %}
           </div>
           <div class="content">
             <p>{{ poi.properties.description|safe }}</p>
-            {% include "trekking/_carousel.html" with prefix=poi.properties.pk pictures=poi.properties.pictures default="False" %}
+            {% if poi.properties.pictures|length > 0 %}
+            <div class="picture">
+              <img src="{{ poi.properties.pictures.0.url }}" alt="{{ poi.properties.pictures.0.title }}" />
+              <div class="carousel-caption">
+                <p>{{ poi.properties.pictures.0.legend }} {% if poi.properties.pictures.0.author %}({{ poi.properties.pictures.0.author }}){% endif %}</p>
+              </div>
+            </div>
+            {% endif %}
           </div>
         </div>
       {% endfor %}

@@ -240,6 +240,7 @@ var POILayer = L.MarkerClusterGroup.extend({
             showCoverageOnHover: false,
             disableClusteringAtZoom: 15,
             maxClusterRadius: 24,
+
             iconCreateFunction: function(cluster) {
                 var icons = {ICON1: '&nbsp;', ICON2: '&nbsp;',
                              ICON3: '&nbsp;', ICON4: '&nbsp;'};
@@ -279,7 +280,6 @@ var POILayer = L.MarkerClusterGroup.extend({
             SRC: featureData.properties.type.pictogram,
             TITLE: featureData.properties.type.label
         });
-
         var poicon = new L.DivIcon({className: 'poi-marker-icon',
                                     iconSize: [24, 24],
                                     iconAnchor: [12, 12],
@@ -970,16 +970,28 @@ function initDetailPoisLayer(map, poiUrl) {
         });
     });
 
-    $(window).on('poilist:mouseover', function (e, pk) {
+    function getMarker(pk) {
         var marker = poisMarkersById[pk];
+        if (!marker) {
+            console.warn('POI ' + pk + ' unknown');
+            return null;
+        }
         var visibleOne = poisLayer.getVisibleParent(marker);
         if (visibleOne) {
-            marker = visibleOne;
+            return visibleOne;
+        }
+        return marker;
+    }
+
+    $(window).on('poilist:mouseover', function (e, pk) {
+        var marker = getMarker(pk);
+        if (!marker) return;
+
+        if (typeof marker.showLabel == 'function') {
+            marker.showLabel();
         }
         $(marker._icon).addClass('highlight');
         $(marker._icon).css('z-index', 3000);
-
-        marker.showLabel();
 
         var sidepanelw = $('#pois-sidebar').width();
         map.panToOffset(marker.getLatLng(), [-sidepanelw/2, 0], {
@@ -990,12 +1002,11 @@ function initDetailPoisLayer(map, poiUrl) {
     });
 
     $(window).on('poilist:mouseout', function (e, pk) {
-        var marker = poisMarkersById[pk];
-        var visibleOne = poisLayer.getVisibleParent(marker);
-        if (visibleOne) {
-            marker = visibleOne;
+        var marker = getMarker(pk);
+        if (!marker) return;
+        if (typeof marker.hideLabel == 'function') {
+            marker.hideLabel();
         }
-        marker.hideLabel();
         $(marker._icon).removeClass('highlight');
     });
     return poisLayer.addTo(map);
@@ -1006,6 +1017,13 @@ function initPOIsList(map) {
         var poiSidebar = L.control.sidebar('pois-sidebar', {
             closeButton: false,
             position: 'right'
+        });
+
+        $(window).on('pois:shown', function () {
+            poiSidebar.show();
+        });
+        $(window).on('pois:hidden', function () {
+            poiSidebar.hide();
         });
 
         $(window).on('map:ready', function () {
@@ -1029,8 +1047,8 @@ function initPOIsList(map) {
                 var $item = $('#pois-sidebar .poi[data-pk=' + pk + ']');
                 var scrollTo = $item.parent().scrollTop() +
                                $item.offset().top -
-                               $item.parent().offset().top -
-                               10; // top margin
+                               $item.parent().offset().top +
+                               15; // top margin
 
                 $('#pois-sidebar').animate({
                     scrollTop: scrollTo

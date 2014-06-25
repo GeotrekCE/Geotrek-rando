@@ -1729,12 +1729,6 @@ p.tab-content-empty a.change-lang {
 #pois-sidebar .pois-list .poi.active {
   color: #f89406;
 }
-#pois-sidebar .pois-list .poi .title .pictures-info:before {
-  margin-right: 2px;
-  vertical-align: middle;
-  position: relative;
-  top: -1px;
-}
 #pois-sidebar .pois-list .poi .title .name {
   font-size: 1.2em;
   font-weight: bold;
@@ -1743,16 +1737,26 @@ p.tab-content-empty a.change-lang {
   text-overflow: ellipsis;
   overflow: hidden;
   position: absolute;
-  right: 65px;
   left: 40px;
+  right: 5px;
 }
-#pois-sidebar .pois-list .poi .carousel {
+#pois-sidebar .pois-list .poi .picture {
   margin-bottom: 0px;
+  position: relative;
 }
-#pois-sidebar .pois-list .poi .carousel-caption {
+#pois-sidebar .pois-list .poi .picture img {
+  margin: 0 auto;
+  width: 100%;
+}
+#pois-sidebar .pois-list .poi .picture .carousel-caption {
+  padding: 7px;
   font-size: 0.8em;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
-#pois-sidebar .pois-list .poi .carousel-caption p {
+#pois-sidebar .pois-list .poi .picture .carousel-caption p {
   line-height: 1em;
 }
 /****************************************************************************
@@ -1992,7 +1996,7 @@ p.teaser {
 #park-center-warning .icon-park-center:before {
   position: relative;
   font-size: 27px;
-  top: 4px;
+  top: -5px;
   margin-right: 10px;
   display: block;
   float: left;
