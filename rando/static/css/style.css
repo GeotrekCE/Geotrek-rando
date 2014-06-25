@@ -1703,10 +1703,40 @@ p.tab-content-empty a.change-lang {
   pointer-events: auto;
 }
 .leaflet-sidebar  {
-  width: 300px;
+  width: 400px;
+}
+@media (max-width: 1280px) {
+  .leaflet-sidebar  {
+    width: 300px;
+  }
+}
+@media (max-width: 1044px) {
+  .leaflet-sidebar  {
+    width: 250px;
+  }
+}
+@media (max-width: 979px) {
+  .leaflet-sidebar  {
+    display: none;
+  }
 }
 .leaflet-sidebar.right.visible ~ .leaflet-right {
-  right: 300px;
+  right: 400px;
+}
+@media (max-width: 1280px) {
+  .leaflet-sidebar.right.visible ~ .leaflet-right {
+    right: 300px;
+  }
+}
+@media (max-width: 1044px) {
+  .leaflet-sidebar.right.visible ~ .leaflet-right {
+    right: 250px;
+  }
+}
+@media (max-width: 979px) {
+  .leaflet-sidebar.right.visible ~ .leaflet-right {
+    right: 0;
+  }
 }
 #pois-sidebar {
   padding: 8px;

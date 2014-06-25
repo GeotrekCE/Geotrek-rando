@@ -1,9 +1,28 @@
 .leaflet-sidebar & {
-  width: 300px;
+
+  width: 400px;
+  @media(max-width: @screen-xl) {
+    width: 300px;
+  }
+  @media(max-width: @screen-lg) {
+    width: 250px;
+  }
+  @media(max-width: @screen-md) {
+    display: none;
+  }
 }
 
 .leaflet-sidebar.right.visible ~ .leaflet-right {
-  right: 300px;
+  right: 400px;
+  @media(max-width: @screen-xl) {
+    right: 300px;
+  }
+  @media(max-width: @screen-lg) {
+    right: 250px;
+  }
+  @media(max-width: @screen-md) {
+    right: 0;
+  }
 }
 
 #pois-sidebar {
