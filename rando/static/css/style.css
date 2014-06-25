@@ -462,8 +462,8 @@ header a {
 }
 #footer {
   position: absolute;
-  z-index: 901;
-  /* above sidebar */
+  z-index: 1001;
+  /* above controls */
   width: 100%;
   height: 50px;
   bottom: 0;
@@ -833,6 +833,22 @@ header #lang-switch {
   background-repeat: no-repeat;
   background-size: 25px;
 }
+#detailmap {
+  min-height: 400px;
+}
+@media (min-height: 800px) {
+  #detailmap {
+    min-height: 450px;
+  }
+}
+@media (min-height: 1000px) {
+  #detailmap {
+    min-height: 600px;
+  }
+}
+#feedbackmap {
+  min-height: 360px;
+}
 #mainmap {
   z-index: 890;
   position: absolute;
@@ -985,12 +1001,6 @@ header #lang-switch {
   padding-right: 10px;
   padding-top: 10px;
   font-size: 14px;
-}
-#detailmap {
-  min-height: 400px;
-}
-#feedbackmap {
-  min-height: 360px;
 }
 /* POIS markers */
 .poi-marker-icon > img {
@@ -1703,6 +1713,8 @@ p.tab-content-empty a.change-lang {
   pointer-events: auto;
 }
 .leaflet-sidebar  {
+  z-index: 901;
+  /* above map */
   width: 400px;
 }
 @media (max-width: 1280px) {
