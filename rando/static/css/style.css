@@ -832,13 +832,6 @@ header #lang-switch {
   background-repeat: no-repeat;
   background-size: 25px;
 }
-.pois-list h5 {
-  background-image: url(../img/switcher-pois.svg);
-  background-repeat: no-repeat;
-  background-size: 1em;
-  padding-left: 1.2em;
-  background-position: 0% 50%;
-}
 #mainmap {
   z-index: 890;
   position: absolute;
@@ -1708,6 +1701,60 @@ p.tab-content-empty a.change-lang {
 #text-search .navbar-search div.reset {
   pointer-events: auto;
 }
+.leaflet-sidebar  {
+  width: 300px;
+}
+.leaflet-sidebar.right.visible ~ .leaflet-right {
+  right: 300px;
+}
+#pois-sidebar {
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+#pois-sidebar h5 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 0.9em;
+  line-height: 0.9em;
+  background-image: url(../img/switcher-pois.svg);
+  background-repeat: no-repeat;
+  background-size: 1em;
+  padding-left: 1.2em;
+  background-position: 0% 50%;
+}
+#pois-sidebar .pois-list .poi {
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+#pois-sidebar .pois-list .poi.active {
+  color: #f89406;
+}
+#pois-sidebar .pois-list .poi .title .pictures-info:before {
+  margin-right: 2px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+#pois-sidebar .pois-list .poi .title .name {
+  font-size: 1.2em;
+  font-weight: bold;
+  white-space: nowrap;
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  position: absolute;
+  right: 65px;
+  left: 40px;
+}
+#pois-sidebar .pois-list .poi .carousel {
+  margin-bottom: 0px;
+}
+#pois-sidebar .pois-list .poi .carousel-caption {
+  font-size: 0.8em;
+}
+#pois-sidebar .pois-list .poi .carousel-caption p {
+  line-height: 1em;
+}
 /****************************************************************************
 *
 * Detail page
@@ -1930,15 +1977,6 @@ p.teaser {
 .row-fluid.meta {
   margin-top: 15px;
 }
-#pois-accordion .pictures-info {
-  margin-right: 10px;
-}
-#pois-accordion .pictures-info:before {
-  margin-right: 2px;
-  vertical-align: middle;
-  position: relative;
-  top: -1px;
-}
 #park-center-warning {
   font-weight: bold;
 }
@@ -2038,65 +2076,6 @@ p.teaser {
   padding-right: 2px;
   width: 30px;
   opacity: 0;
-}
-/*
-* POIs list
-*/
-.accordion-heading .accordion-toggle {
-  padding: 1px 2px;
-  line-height: 25px;
-}
-.accordion-heading .accordion-toggle .pictogram {
-  vertical-align: top;
-  line-height: 15px;
-}
-.accordion-group {
-  border: none;
-  border-top: 1px solid #f0f2ed;
-  -webkit-border-radius: 0px;
-  -webkit-background-clip: padding-box;
-  -moz-border-radius: 0px;
-  -moz-background-clip: padding;
-  border-radius: 0px;
-  background-clip: padding-box;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0;
-  margin-bottom: 0;
-}
-.accordion-group:first-child {
-  border: none;
-}
-.accordion-toggle {
-  cursor: pointer;
-  position: relative;
-  color: #877f84;
-  text-decoration: none;
-}
-.accordion-toggle:before {
-  content: "t";
-}
-.accordion-toggle:before {
-  float: right;
-  font-size: 22px;
-}
-.accordion-toggle.collapsed {
-  color: #877f84;
-}
-.accordion-toggle.collapsed:hover {
-  color: #f89406;
-}
-.accordion-toggle.collapsed:before {
-  content: "w";
-}
-.accordion-toggle .name {
-  white-space: nowrap;
-  display: inline-block;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  position: absolute;
-  right: 65px;
-  left: 30px;
 }
 #trek-links img {
   padding-right: 5px;
