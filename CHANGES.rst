@@ -12,6 +12,7 @@ CHANGELOG
 * Fix missing translations
 * Fix undefined maps when landing on mobile detail page
 * Fixed home apparence on 1024 screens
+* Fixed position of layer switcher on small screens
 
 1.29 (2014-06-24)
 -----------------

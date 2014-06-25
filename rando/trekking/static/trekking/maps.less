@@ -42,31 +42,13 @@
   }
 }
 
-.leaflet-control.background-layer-switcher {
-
-  #mainmap .leaflet-left & {
-    margin-left: 400px;
-    -webkit-transition: margin-left 300ms linear;
-  }
-
-  #mainmap.leaflet-container.fullwidth & {
-      margin-left: 30px;
-  }
-
-
-  #detailmap & {
-    display: none;
-  }
-  #detailmap.enabled & {
-      display: block;
-  }
-
-  a {
-    height: 30px;
+.leaflet-control.simple-layer-switcher {
+  a.background {
+    opacity: 1.0;
     width: 30px;
-    display: inline-block;
-
-    background-size: 100%;
+    height: 30px;
+    padding: 0;
+    margin-top: 0;
     outline: solid 1px white;
 
     &.main {
@@ -80,14 +62,10 @@
 
 .leaflet-control.simple-layer-switcher {
   a.pois {
-    height: 20px;
-    width: 20px;
     display: inline-block;
-    background-size: 100%;
     background-image: url(../img/switcher-pois.svg);
     background-repeat: no-repeat;
     background-size: 25px;
-    background-position: 50% 50%;
   }
 }
 

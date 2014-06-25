@@ -424,9 +424,9 @@ L.Control.SwitchBackgroundLayers = L.Control.extend({
             }, this);
         }
 
-        this._container = L.DomUtil.create('div', 'background-layer-switcher');
+        this._container = L.DomUtil.create('div', 'simple-layer-switcher');
 
-        var className = 'toggle-layer satellite';
+        var className = 'toggle-layer background satellite';
 
         this.button = L.DomUtil.create('a', className, this._container);
         this.button.setAttribute('title', gettext('Show satellite'));
