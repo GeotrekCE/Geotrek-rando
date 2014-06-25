@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-05 11:23+0200\n"
+"POT-Creation-Date: 2014-06-25 18:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,9 +45,6 @@ msgstr ""
 msgid "Captcha"
 msgstr "Antispam"
 
-msgid "Feedback from {name}"
-msgstr "Signalement de {name}"
-
 msgid "Feedback"
 msgstr "Signalement"
 
@@ -77,4 +74,3 @@ msgid "You can contact our team to tell us any problem on this trek."
 msgstr ""
 "Grâce à ce formulaire, il vous est possible de contacter nos équipes pour "
 "signaler un problème avec cet itinéraire."
-

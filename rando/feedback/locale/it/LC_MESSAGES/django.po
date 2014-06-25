@@ -42,9 +42,6 @@ msgstr ""
 msgid "Captcha"
 msgstr ""
 
-msgid "Feedback from {name}"
-msgstr ""
-
 msgid "Feedback"
 msgstr ""
 
@@ -69,16 +66,4 @@ msgid "You can click to mark a place"
 msgstr ""
 
 msgid "You can contact our team to tell us any problem on this trek."
-msgstr ""
-
-#, python-format
-msgid "%(name)s (%(email)s) has sent a feedback on category %(category)s."
-msgstr ""
-
-#, python-format
-msgid "Comment : %(user_comment)s"
-msgstr ""
-
-#, python-format
-msgid "Lat : %(latitude)s / Lon : %(longitude)s"
 msgstr ""
