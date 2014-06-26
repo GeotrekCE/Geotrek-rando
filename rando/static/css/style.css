@@ -2249,9 +2249,8 @@ ul.errorlist {
 }
 #popup-view3d .modal-body .controls {
   position: absolute;
-  top: 10px;
+  top: 0px;
   right: 40px;
-  background-color: rgba(255, 255, 255, 0.8);
   padding: 5px;
 }
 #popup-view3d .modal-body .controls a.toggle-fullscreen {

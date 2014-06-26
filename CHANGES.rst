@@ -13,6 +13,12 @@ CHANGELOG
 * Fix undefined maps when landing on mobile detail page
 * Fixed home apparence on 1024 screens
 * Fixed position of layer switcher on small screens
+* Fixed apparence of fullscreen button on 3D views
+
+**Minor changes**
+
+* Added Makina Corpus logo in 3D view
+
 
 1.29 (2014-06-24)
 -----------------
