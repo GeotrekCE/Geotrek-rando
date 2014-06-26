@@ -13,6 +13,7 @@ CHANGELOG
   - Removed pictures carousels from list
   - Removed indicator for number of photos by POI
   - Removed POI marker popup
+* Now show POI pictures in a lightbox
 
 
 **Minor changes**

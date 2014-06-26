@@ -267,7 +267,11 @@
             {% if poi.properties.pictures|length > 0 %}
             <div class="picture">
               <img src="{{ poi.properties.pictures.0.url }}" alt="{{ poi.properties.pictures.0.title }}" />
+
               <div class="carousel-caption">
+                {% if poi.properties.pictures|length > 1 %}
+                  <span class="pictures-info pull-right icon-camera">&times;{{ poi.properties.pictures|length }}</span>
+                {% endif %}
                 <p>{{ poi.properties.pictures.0.legend }} {% if poi.properties.pictures.0.author %}({{ poi.properties.pictures.0.author }}){% endif %}</p>
               </div>
             </div>
@@ -279,4 +283,15 @@
 
   </div>
 </div>
+
+<div class="reattach" data-destination="body">
+{% for poi in pois %}
+  <div id="popup-poi-carousel-{{ poi.properties.pk }}" class="popup poi modal hide fade" role="dialog" aria-labelledby="poi-carousel" aria-hidden="true">
+      <div class="modal-body">
+      {% include "trekking/_carousel.html" with prefix=poi.properties.pk pictures=poi.properties.pictures default="False" %}
+    </div>
+  </div>
+{% endfor %}
+</div>
+
 {% endif %}

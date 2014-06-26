@@ -27,6 +27,27 @@
   }
 }
 
+
+.popup.poi {
+  background-color: black;
+  width: auto;
+
+  .modal-body {
+    padding: 5px;
+    overflow-y: auto;
+    max-height: none;
+
+    .carousel {
+      margin-bottom: 0px;
+
+      .carousel-control {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+
 #pois-sidebar {
 
   padding: 8px;
@@ -48,9 +69,7 @@
 
   .pois-list {
 
-
     .poi {
-
       padding-bottom: 15px;
       margin-top: 15px;
       border-bottom: solid 1px @darkGray;
@@ -82,9 +101,14 @@
         }
       }
 
+      .pictures-info {
+        color: white;
+      }
+
       .picture {
         margin-bottom: 0px;
         position: relative;
+        cursor: pointer;
 
         img {
           margin: 0 auto;

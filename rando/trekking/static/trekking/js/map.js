@@ -1074,6 +1074,16 @@ function initPOIsList(map) {
                 e.preventDefault();
             });
 
+            // Show carousel on click
+            $sidebar.find('.poi .picture').click(function () {
+                var pk = $(this).closest('.poi').data('pk');
+                var $popup = $("#popup-poi-carousel-" + pk);
+                $popup.on('shown', function () {
+                    $popup.carousel();
+                });
+                $popup.modal('show');
+            });
+
         });
 
     }

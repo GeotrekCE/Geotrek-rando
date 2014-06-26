@@ -1750,6 +1750,21 @@ p.tab-content-empty a.change-lang {
     right: 0;
   }
 }
+.popup.poi {
+  background-color: black;
+  width: auto;
+}
+.popup.poi .modal-body {
+  padding: 5px;
+  overflow-y: auto;
+  max-height: none;
+}
+.popup.poi .modal-body .carousel {
+  margin-bottom: 0px;
+}
+.popup.poi .modal-body .carousel .carousel-control {
+  opacity: 0.5;
+}
 #pois-sidebar {
   padding: 8px;
   background-color: rgba(255, 255, 255, 0.8);
@@ -1791,9 +1806,13 @@ p.tab-content-empty a.change-lang {
   left: 40px;
   right: 5px;
 }
+#pois-sidebar .pois-list .poi .pictures-info {
+  color: white;
+}
 #pois-sidebar .pois-list .poi .picture {
   margin-bottom: 0px;
   position: relative;
+  cursor: pointer;
 }
 #pois-sidebar .pois-list .poi .picture img {
   margin: 0 auto;
@@ -2118,18 +2137,17 @@ p.teaser {
   -moz-transition: all 300ms;
   -o-transition: all 300ms;
   transition: all 300ms;
+  opacity: 0;
 }
 .carousel .carousel-control.right {
   right: 10px;
   padding-left: 2px;
-  opacity: 0;
 }
 .carousel .carousel-control.left {
   left: 10px;
   padding-left: 0;
   padding-right: 2px;
   width: 30px;
-  opacity: 0;
 }
 #trek-links img {
   padding-right: 5px;
