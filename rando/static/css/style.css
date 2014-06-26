@@ -1780,6 +1780,12 @@ p.tab-content-empty a.change-lang {
   padding-left: 1.2em;
   background-position: 0% 50%;
 }
+#pois-sidebar::-webkit-scrollbar-track-piece {
+  background-color: #e4e7de;
+}
+#pois-sidebar::-webkit-scrollbar-thumb:vertical {
+  background-color: #b2bda3;
+}
 #pois-sidebar .pois-list .poi {
   padding-bottom: 15px;
   margin-top: 15px;
@@ -1788,9 +1794,15 @@ p.tab-content-empty a.change-lang {
 #pois-sidebar .pois-list .poi:first-of-type {
   margin-top: 5px;
 }
+#pois-sidebar .pois-list .poi:first-of-type .jump.up {
+  display: none;
+}
 #pois-sidebar .pois-list .poi:last-of-type {
   border-bottom: none;
   padding-bottom: 0px;
+}
+#pois-sidebar .pois-list .poi:last-of-type .jump.down {
+  display: none;
 }
 #pois-sidebar .pois-list .poi.active {
   color: #f89406;
@@ -1804,7 +1816,21 @@ p.tab-content-empty a.change-lang {
   overflow: hidden;
   position: absolute;
   left: 40px;
-  right: 5px;
+  right: 26px;
+}
+#pois-sidebar .pois-list .poi .title .jump {
+  position: absolute;
+  font-size: 1.2em;
+  font-weight: bold;
+  min-width: 16px;
+  text-decoration: none;
+  color: inherit;
+}
+#pois-sidebar .pois-list .poi .title .jump.up {
+  right: 16px;
+}
+#pois-sidebar .pois-list .poi .title .jump.down {
+  right: 2px;
 }
 #pois-sidebar .pois-list .poi .pictures-info {
   color: white;

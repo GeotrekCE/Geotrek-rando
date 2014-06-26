@@ -67,6 +67,14 @@
     background-position: 0% 50%;
   }
 
+  &::-webkit-scrollbar-track-piece {
+    background-color: darken(@backgroundColor, 5%);
+  }
+  &::-webkit-scrollbar-thumb:vertical {
+    background-color: darken(@backgroundDarker, 15%);
+  }
+
+
   .pois-list {
 
     .poi {
@@ -76,11 +84,19 @@
 
       &:first-of-type {
         margin-top: 5px;
+
+        .jump.up {
+          display: none;
+        }
       }
 
       &:last-of-type {
         border-bottom: none;
         padding-bottom: 0px;
+
+        .jump.down {
+          display: none;
+        }
       }
 
       &.active {
@@ -97,7 +113,25 @@
           overflow: hidden;
           position: absolute;
           left: 40px;
-          right: 5px;
+          right: 26px;
+        }
+
+        .jump {
+          position: absolute;
+          font-size: 1.2em;
+          font-weight: bold;
+          min-width: 16px;
+
+          text-decoration: none;
+          color: inherit;
+
+          &.up {
+            right: 16px;
+          }
+
+          &.down {
+            right: 2px;
+          }
         }
       }
 

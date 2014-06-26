@@ -1048,6 +1048,18 @@ function initPOIsList(map) {
                 }
             );
 
+            $sidebar.find('.jump').click(function (e) {
+                var up = $(this).hasClass('up'),
+                    $poi = $(this).closest('.poi'),
+                    pk = $poi.data('pk');
+                var $jump = $poi.next('.poi');
+                if (up) {
+                    $jump = $poi.prev('.poi');
+                }
+                $(window).trigger('poimap:mouseover', [$jump.data('pk')]);
+                e.preventDefault();
+            });
+
             // Scroll to detail when marker hovered
             $(window).on('poimap:mouseover', function (e, pk) {
                 var $item = $sidebar.find('.poi[data-pk=' + pk + ']');
