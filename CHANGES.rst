@@ -21,6 +21,7 @@ CHANGELOG
 * Trek detail map does not fit information desks bounds by default
 * Trek detail map does not fit POIs bounds by default
 * Increased detail map height on big screens
+* Added settings to control most icons sizes
 
 **BUG fixes**
 

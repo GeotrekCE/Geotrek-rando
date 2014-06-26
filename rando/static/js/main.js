@@ -11,11 +11,51 @@ window.TREK_LAYER_OPTIONS = L.Util.extend({
     arrowstyle: {'fill': '#E97000', 'font-weight': 'bold'},
     positionstyle: {'fillOpacity': 1.0, 'opacity': 1.0, 'fillColor': 'white', 'color': 'black', 'width': 3},
     iconifyZoom: 12,
+    icons: {
+        cluster: {
+            size: 20
+        }
+    },
     clusterOptions: {
         showCoverageOnHover: false,
         maxClusterRadius: 36,
     }
 }, window.TREK_LAYER_OPTIONS || {});
+
+window.DETAIL_MAP_OPTIONS = L.Util.extend({
+    icons: {
+        poi: {
+            size: 18
+        },
+        cluster: {
+            size: 30
+        },
+        parking: {
+            size: 18
+        },
+        information: {
+            size: 20
+        }
+    }
+}, window.DETAIL_MAP_OPTIONS || {});
+
+window.DETAIL_POI_OPTIONS = L.Util.extend({
+    pan: {
+        animate: true,
+        duration: 0.8,
+        minimumDistance: 150
+    },
+    listMarginTop: 30,
+    scroll: {
+        duration: 1000,
+        specialEasing: {
+            width: 'linear',
+            height: 'easeOutBounce'
+        }
+    }
+}, window.DETAIL_POI_OPTIONS || {});
+
+
 
 window.MOBILE = false;
 

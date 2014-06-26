@@ -225,9 +225,10 @@ var TrekLayer = L.GeoJSON.AJAX.extend({
     },
 
     _getTrekClusterIcon: function (cluster) {
+        var size = TREK_LAYER_OPTIONS.icons.cluster.size;
         return new L.DivIcon({className: 'trek-cluster',
-                              iconSize: [20, 20],
-                              iconAnchor: [12, 12],
+                              iconSize: [size, size],
+                              iconAnchor: [size/2 + 2, size/2 + 2],
                               html: '<span class="count">' + cluster.getChildCount() + '</span>'});
     }
 });
@@ -253,10 +254,11 @@ var POILayer = L.MarkerClusterGroup.extend({
                     var c = children[i];
                     icons['ICON'+i] = '<img src="' + c.properties.type.pictogram + '"/>';
                 }
+                var size = DETAIL_MAP_OPTIONS.icons.cluster.size;
                 var iconsTable = L.Util.template(tableTmpl, icons);
                 return new L.DivIcon({className: 'poi-marker-icon cluster',
-                                      iconSize: [30, 30],
-                                      iconAnchor: [15, 15],
+                                      iconSize: [size, size],
+                                      iconAnchor: [size/2, size/2],
                                       html: iconsTable});
           }
         });
@@ -280,10 +282,11 @@ var POILayer = L.MarkerClusterGroup.extend({
             SRC: featureData.properties.type.pictogram,
             TITLE: featureData.properties.type.label
         });
+        var size = DETAIL_MAP_OPTIONS.icons.poi.size;
         var poicon = new L.DivIcon({className: 'poi-marker-icon',
-                                    iconSize: [24, 24],
-                                    iconAnchor: [12, 12],
-                                    labelAnchor: [12, 2],
+                                    iconSize: [size, size],
+                                    iconAnchor: [size/2, size/2],
+                                    labelAnchor: [size/2, 2],
                                     html: img}),
             marker = L.marker(latlng, {icon: poicon, riseOnHover: true});
 
@@ -912,11 +915,12 @@ function initDetailAltimetricProfile(map, trekLayer) {
 }
 
 function initDetailParking(map, trekGeoJson) {
+    var size = DETAIL_MAP_OPTIONS.icons.parking.size;
     var parkingIcon = L.icon({
         iconUrl: IMG_URL + '/parking.png',
-        iconSize: [24, 24],
+        iconSize: [size, size],
         iconAnchor: [0, 0],
-        labelAnchor: [20, 12]
+        labelAnchor: [size-4, size/2]
     });
     var parkingLocation = trekGeoJson.properties.parking_location;
     if (parkingLocation) {
@@ -930,10 +934,11 @@ function initDetailParking(map, trekGeoJson) {
 
 
 function initDetailInformationDesksLayer(map, layerUrl) {
+    var size = DETAIL_MAP_OPTIONS.icons.information.size;
     var deskIcon = L.icon({
         iconUrl: IMG_URL + '/information.svg',
-        iconSize: [20, 20],
-        iconAnchor: [10, 10]
+        iconSize: [size, size],
+        iconAnchor: [size/2, size/2]
     });
     var layer = L.geoJson.ajax(layerUrl, {
         pointToLayer: function (feature, latlng) {
@@ -994,11 +999,8 @@ function initDetailPoisLayer(map, poiUrl) {
         $(marker._icon).css('z-index', 3000);
 
         var sidepanelw = $('#pois-sidebar').width();
-        map.panToOffset(marker.getLatLng(), [-sidepanelw/2, 0], {
-            animate: true,
-            duration: 0.8,
-            minimumDistance: 150
-        });
+        map.panToOffset(marker.getLatLng(), [-sidepanelw/2, 0],
+                        DETAIL_POI_OPTIONS.pan);
     });
 
     $(window).on('poilist:mouseout', function (e, pk) {
@@ -1052,17 +1054,9 @@ function initPOIsList(map) {
                 var scrollTo = $item.parent().scrollTop() +
                                $item.offset().top -
                                $item.parent().offset().top +
-                               30; // padding + margin
+                               DETAIL_POI_OPTIONS.listMarginTop;  // padding + margin
 
-                $sidebar.animate({
-                    scrollTop: scrollTo
-                }, {
-                    duration: 1000,
-                    specialEasing: {
-                        width: 'linear',
-                        height: 'easeOutBounce'
-                    }
-                });
+                $sidebar.animate({ scrollTop: scrollTo }, DETAIL_POI_OPTIONS.scroll);
             });
 
             // Prevent scrolling page when bottom reached
