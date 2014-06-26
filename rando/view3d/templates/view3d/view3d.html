@@ -29,6 +29,14 @@
             color: white;
             font-size: 3em;
         }
+        .branding {
+            background: url({% static "img/makina.png" %}) no-repeat;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            height: 40px;
+            min-width: 120px;
+        }
         .attributions {
             background-color: rgba(255, 255, 255, 0.2);
             position: absolute;
@@ -36,6 +44,7 @@
             bottom: 10px;
             height: auto;
             width: auto;
+            padding: 3px;
             border-radius: 0.35em;
             color: white;
             font-size: 0.8em;
@@ -79,6 +88,7 @@
         <div class="not-supported">
             {% trans "Browser not supported (WebGL)" %}
         </div>
+        <div class="branding"></div>
         <div class="attributions">
             {{ view.tiles.attributions|safe }}
         </div>

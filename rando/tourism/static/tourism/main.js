@@ -26,7 +26,7 @@
 
         onAdd: function(map) {
             this.map = map;
-            this._container = L.DomUtil.create('div', 'tourism-layer-switcher');
+            this._container = L.DomUtil.create('div', 'simple-layer-switcher tourism');
 
             for (var i=0, n=this.definitions.length; i<n; i++) {
                 this._addTourismLayer(this.definitions[i]);

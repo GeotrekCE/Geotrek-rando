@@ -6,8 +6,10 @@ from rando.core.models import Settings
 
 def settings(request):
     app_settings = Settings.objects.all()
-    if not hasattr(app_settings, 'map'):
-        app_settings = dict(map=dict(extent=[-180, -90, 180, 90]))
+    if not hasattr(app_settings, 'map') or not hasattr(app_settings, 'languages'):
+        app_settings = dict(map=dict(extent=[-180, -90, 180, 90]),
+                            languages=dict(default='fr'))
+
     lang = request.LANGUAGE_CODE
     return {
         'PREPROD': settings_.PREPROD,

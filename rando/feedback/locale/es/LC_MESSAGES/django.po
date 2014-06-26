@@ -18,19 +18,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 msgid "Email"
 msgstr ""
 
 msgid "Category"
-msgstr ""
+msgstr "Categoría"
 
 msgid "Description of your problem"
-msgstr ""
+msgstr "Descripción del problema"
 
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
 msgid "Lat"
 msgstr ""
@@ -41,20 +41,17 @@ msgstr ""
 msgid "Captcha"
 msgstr ""
 
-msgid "Feedback from {name}"
-msgstr ""
-
 msgid "Feedback"
-msgstr ""
+msgstr "Comentario"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 msgid "Send"
-msgstr ""
+msgstr "Enviar"
 
 msgid "An email has been sent to site admins. Thanks for your message !"
-msgstr ""
+msgstr "Un email fue enviado a los administradores. Gracias por su mensage !"
 
 msgid "OK"
 msgstr ""
@@ -65,19 +62,12 @@ msgid ""
 msgstr ""
 
 msgid "You can click to mark a place"
-msgstr ""
+msgstr "Puede hacer clic para marcar el sitio"
 
 msgid "You can contact our team to tell us any problem on this trek."
 msgstr ""
+"Puede contactar nuestro equipo para comentar cualquier problema con este "
+"itinerario"
 
-#, python-format
-msgid "%(name)s (%(email)s) has sent a feedback on category %(category)s."
-msgstr ""
-
-#, python-format
-msgid "Comment : %(user_comment)s"
-msgstr ""
-
-#, python-format
-msgid "Lat : %(latitude)s / Lon : %(longitude)s"
-msgstr ""
+#~ msgid "Feedback from {name}"
+#~ msgstr "Comentario de {name}"

@@ -37,7 +37,7 @@
 .filters-bar {
   position: absolute;
   width: 100%;
-  height: 115px;
+  height: @filtersbar-height-lg;
   top: 0;
   z-index: 901;
  .box-sizing(border-box);
@@ -48,8 +48,8 @@
   border-top: 1px solid @filtersBorder;
   border-bottom: 1px solid @filtersBorder;
 
-  @media (min-width: @screen-lg) {
-    height: 65px;
+  @media (max-width: @screen-sm) {
+    height: @filtersbar-height-sm;
   }
 
   label {
@@ -269,7 +269,7 @@
     margin-right: 40px;
   }
 
-  @media (max-width: 920px) {
+  @media (max-width: @screen-sm) {
     margin-right: 0;
     position: absolute;
     right: 47px;

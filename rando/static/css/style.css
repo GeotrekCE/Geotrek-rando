@@ -812,41 +812,25 @@ header #lang-switch {
 .leaflet-control-zoom-fullscreen:before {
   content: "e";
 }
-#mainmap .leaflet-left .leaflet-control.background-layer-switcher {
-  margin-left: 400px;
-  -webkit-transition: margin-left 300ms linear;
-}
-#mainmap.leaflet-container.fullwidth .leaflet-control.background-layer-switcher {
-  margin-left: 30px;
-}
-#detailmap .leaflet-control.background-layer-switcher {
-  display: none;
-}
-#detailmap.enabled .leaflet-control.background-layer-switcher {
-  display: block;
-}
-.leaflet-control.background-layer-switcher a {
-  height: 30px;
+.leaflet-control.simple-layer-switcher a.background {
+  opacity: 1.0;
   width: 30px;
-  display: inline-block;
-  background-size: 100%;
+  height: 30px;
+  padding: 0;
+  margin-top: 0;
   outline: solid 1px white;
 }
-.leaflet-control.background-layer-switcher a.main {
+.leaflet-control.simple-layer-switcher a.background.main {
   background-image: url(../img/switcher-main.png);
 }
-.leaflet-control.background-layer-switcher a.satellite {
+.leaflet-control.simple-layer-switcher a.background.satellite {
   background-image: url(../img/switcher-satellite.jpg);
 }
-.leaflet-control.tourism-layer-switcher a.pois {
-  height: 20px;
-  width: 20px;
+.leaflet-control.simple-layer-switcher a.pois {
   display: inline-block;
-  background-size: 100%;
   background-image: url(../img/switcher-pois.svg);
   background-repeat: no-repeat;
   background-size: 25px;
-  background-position: 50% 50%;
 }
 .pois-list h5 {
   background-image: url(../img/switcher-pois.svg);
@@ -1040,7 +1024,7 @@ header #lang-switch {
 .poi-marker-icon.highlight {
   outline: solid 2px #ffff00;
 }
-@media (max-width: 1044px) {
+@media (max-width: 767px) {
   #mainmap {
     top: 115px;
   }
@@ -1235,7 +1219,7 @@ header #lang-switch {
 .filters-bar {
   position: absolute;
   width: 100%;
-  height: 115px;
+  height: 65px;
   top: 0;
   z-index: 901;
   -webkit-box-sizing: border-box;
@@ -1248,9 +1232,9 @@ header #lang-switch {
   border-top: 1px solid #d7ddcf;
   border-bottom: 1px solid #d7ddcf;
 }
-@media (min-width: 1044px) {
+@media (max-width: 767px) {
   .filters-bar {
-    height: 65px;
+    height: 115px;
   }
 }
 .filters-bar label {
@@ -1440,7 +1424,7 @@ header #lang-switch {
     margin-right: 40px;
   }
 }
-@media (max-width: 920px) {
+@media (max-width: 767px) {
   #advanced-filters {
     margin-right: 0;
     position: absolute;
@@ -1472,8 +1456,7 @@ header #lang-switch {
 }
 #side-bar {
   position: absolute;
-  top: 115px;
-  /* header + search-bar */
+  top: 65px;
   bottom: 0;
   z-index: 900;
   /* above map */
@@ -1485,9 +1468,13 @@ header #lang-switch {
 #side-bar .badge-warning {
   background-color: #f89406;
 }
+@media (max-width: 767px) {
+  #side-bar {
+    top: 115px;
+  }
+}
 @media (min-width: 1044px) {
   #side-bar {
-    top: 65px;
     min-width: 389px;
   }
 }
@@ -2167,29 +2154,36 @@ p.teaser {
 ul.errorlist {
   color: red;
 }
-#mainmap .leaflet-left .leaflet-control.tourism-layer-switcher {
-  margin-left: 400px;
+#mainmap .leaflet-left .leaflet-control.simple-layer-switcher {
+  margin-left: 340px;
   -webkit-transition: margin-left 300ms linear;
 }
-#mainmap.leaflet-container.fullwidth .leaflet-control.tourism-layer-switcher {
+@media (min-width: 1044px) {
+  #mainmap .leaflet-left .leaflet-control.simple-layer-switcher {
+    margin-left: 399px;
+  }
+}
+#mainmap.leaflet-container.fullwidth .leaflet-control.simple-layer-switcher {
   margin-left: 30px;
 }
-#detailmap .leaflet-control.tourism-layer-switcher {
+#detailmap .leaflet-control.simple-layer-switcher {
   display: none;
 }
-#detailmap.enabled .leaflet-control.tourism-layer-switcher {
+#detailmap.enabled .leaflet-control.simple-layer-switcher {
   display: block;
 }
-.leaflet-control.tourism-layer-switcher .toggle-layer {
+.leaflet-control.simple-layer-switcher .toggle-layer {
   background-color: #877f84;
-  max-height: 30px;
-  max-width: 30px;
+  height: 20px;
+  width: 20px;
   padding: 5px;
   margin-top: 5px;
   display: block;
   opacity: 0.5;
+  background-size: 100%;
+  background-position: 50% 50%;
 }
-.leaflet-control.tourism-layer-switcher .toggle-layer.active {
+.leaflet-control.simple-layer-switcher .toggle-layer.active {
   margin-left: -1px;
   margin-bottom: -1px;
   margin-top: 4px;
@@ -2198,7 +2192,7 @@ ul.errorlist {
   outline: solid 2px #ffffff;
   border: solid 1px #c67605;
 }
-.leaflet-control.tourism-layer-switcher .toggle-layer img {
+.leaflet-control.simple-layer-switcher .toggle-layer img {
   height: 20px;
   width: 20px;
 }
@@ -2255,9 +2249,8 @@ ul.errorlist {
 }
 #popup-view3d .modal-body .controls {
   position: absolute;
-  top: 10px;
+  top: 0px;
   right: 40px;
-  background-color: rgba(255, 255, 255, 0.8);
   padding: 5px;
 }
 #popup-view3d .modal-body .controls a.toggle-fullscreen {
@@ -2652,7 +2645,7 @@ ul.errorlist {
   }
   /* Hidden elements */
   .search-tools,
-  #filters-bar,
+  .filters-bar,
   #toggle-side-bar,
   #tab-backpack .badge,
   #tab-backpack .text,

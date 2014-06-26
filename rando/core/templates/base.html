@@ -141,8 +141,6 @@
         {% if POPUP_HOME_ENABLED %}
         <script src="{% static "js/popup-home.js" %}"></script>
         {% endif %}
-        {% if VIEW3D_ENABLED %}
-
         <script src="{% static "trekking/js/ui.js" %}"></script>
         <script src="{% static "trekking/js/filter.js" %}"></script>
         <script src="{% static "trekking/js/backpack.js" %}"></script>
@@ -155,6 +153,8 @@
         <script src="{% static "feedback/js/ajaxcsrf.js" %}"></script>
         <script src="{% static "feedback/js/form.popup.js" %}"></script>
         {% endif %}
+
+        {% if VIEW3D_ENABLED %}
         <script src="{% static "view3d/main.js" %}"></script>
         {% endif %}
         {% endcompress %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-05 11:23+0200\n"
+"POT-Creation-Date: 2014-06-25 19:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Page not found"
+msgstr "Pagina non trovata"
+
+msgid "Internal error"
+msgstr "Errore interno"
+
+msgid "Home"
+msgstr ""
+
+msgid "Do-Not-Track is set."
+msgstr ""
+
+msgid "Twitter"
+msgstr ""
+
+msgid "Google+"
+msgstr ""
+
+msgid "Facebook"
+msgstr ""
+
+msgid "Share"
+msgstr "Spartire"
 
 msgid "Empty"
 msgstr "Vacuo"
