@@ -5,6 +5,24 @@ CHANGELOG
 1.30dev (unreleased)
 --------------------
 
+**New features**
+
+* Complete rework of POIs list and map interaction (fixes #124)
+  - Removed POI list accordions
+  - Removed POI jump and uncluster on hover in list
+  - Removed pictures carousels from list
+  - Removed indicator for number of photos by POI
+  - Removed POI marker popup
+* Now show POI pictures in a lightbox
+
+
+**Minor changes**
+
+* Trek detail map does not fit information desks bounds by default
+* Trek detail map does not fit POIs bounds by default
+* Increased detail map height on big screens
+* Added settings to control most icons sizes
+
 **BUG fixes**
 
 * Fix display even if no data is synced (first run)

@@ -205,18 +205,18 @@ a {
   }
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 8px;
 }
 
-::-webkit-scrollbar-track-piece{
+::-webkit-scrollbar-track-piece {
   background-color: @backgroundColor;
   -webkit-border-radius:0;
   -webkit-border-bottom-right-radius:0;
   -webkit-border-bottom-left-radius:0;
 }
 
-::-webkit-scrollbar-thumb:vertical{
+::-webkit-scrollbar-thumb:vertical {
   background-color: @backgroundDarker;
   -webkit-border-radius:8px
 }
@@ -280,7 +280,7 @@ a {
   position: absolute;
   z-index: 0;
   top: @headerHeight;
-  bottom: @footerHeight;
+  bottom: 0px;
   width: 100%;
 
   #pjax-content {
@@ -293,7 +293,7 @@ a {
       overflow: auto;
       -webkit-overflow-scrolling: touch;
       width: 100%;
-      padding-bottom: 15px;
+      padding-bottom: @footerHeight;
 
       .page-inner-content {
         padding-left: 1%;

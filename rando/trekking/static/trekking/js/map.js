@@ -225,9 +225,10 @@ var TrekLayer = L.GeoJSON.AJAX.extend({
     },
 
     _getTrekClusterIcon: function (cluster) {
+        var size = TREK_LAYER_OPTIONS.icons.cluster.size;
         return new L.DivIcon({className: 'trek-cluster',
-                              iconSize: [20, 20],
-                              iconAnchor: [12, 12],
+                              iconSize: [size, size],
+                              iconAnchor: [size/2 + 2, size/2 + 2],
                               html: '<span class="count">' + cluster.getChildCount() + '</span>'});
     }
 });
@@ -240,6 +241,7 @@ var POILayer = L.MarkerClusterGroup.extend({
             showCoverageOnHover: false,
             disableClusteringAtZoom: 15,
             maxClusterRadius: 24,
+
             iconCreateFunction: function(cluster) {
                 var icons = {ICON1: '&nbsp;', ICON2: '&nbsp;',
                              ICON3: '&nbsp;', ICON4: '&nbsp;'};
@@ -252,10 +254,11 @@ var POILayer = L.MarkerClusterGroup.extend({
                     var c = children[i];
                     icons['ICON'+i] = '<img src="' + c.properties.type.pictogram + '"/>';
                 }
+                var size = DETAIL_MAP_OPTIONS.icons.cluster.size;
                 var iconsTable = L.Util.template(tableTmpl, icons);
                 return new L.DivIcon({className: 'poi-marker-icon cluster',
-                                      iconSize: [30, 30],
-                                      iconAnchor: [15, 15],
+                                      iconSize: [size, size],
+                                      iconAnchor: [size/2, size/2],
                                       html: iconsTable});
           }
         });
@@ -279,11 +282,11 @@ var POILayer = L.MarkerClusterGroup.extend({
             SRC: featureData.properties.type.pictogram,
             TITLE: featureData.properties.type.label
         });
-
+        var size = DETAIL_MAP_OPTIONS.icons.poi.size;
         var poicon = new L.DivIcon({className: 'poi-marker-icon',
-                                    iconSize: [24, 24],
-                                    iconAnchor: [12, 12],
-                                    labelAnchor: [12, 2],
+                                    iconSize: [size, size],
+                                    iconAnchor: [size/2, size/2],
+                                    labelAnchor: [size/2, 2],
                                     html: img}),
             marker = L.marker(latlng, {icon: poicon, riseOnHover: true});
 
@@ -345,13 +348,26 @@ var FakeBoundsMapMixin = {
         var bounds = new L.LatLngBounds([latlng, latlng]),
             fakeBounds = this.__fakeBounds(bounds);
         this.panTo(fakeBounds.getCenter());
+    },
+
+    panToOffset: function (latlng, offset, options) {
+        var x = this.latLngToContainerPoint(latlng).x - offset[0];
+        var y = this.latLngToContainerPoint(latlng).y - offset[1];
+        var point = this.containerPointToLatLng([x, y]);
+
+        var current = this.latLngToContainerPoint(this.getCenter());
+
+        if (L.point(x, y).distanceTo(current) < options.minimumDistance)
+            return;
+
+        return this.setView(point, this._zoom, { pan: options })
     }
 };
 
 L.Map.include(FakeBoundsMapMixin);
 
 
-L.Map.include({
+var LayerSwitcherMixin = {
 
     isShowingLayer: function (name) {
         // Requires layerscontrol
@@ -387,7 +403,10 @@ L.Map.include({
         if (selected === null) throw "unknown layer " + name;
         this.fire('baselayerchange', {layer: selected});
     }
-});
+};
+
+L.Map.include(LayerSwitcherMixin);
+
 
 L.LatLngBounds.prototype.padTop = function (bufferRatio) {
     var sw = this._southWest,
@@ -723,8 +742,6 @@ function mainmapInit(map, djoptions) {
 
 
 function detailmapInit(map, bounds) {
-    var poisMarkersById = {};
-
     map.attributionControl.setPrefix('');
     L.control.fullscreen({
         position: 'topright',
@@ -748,13 +765,13 @@ function detailmapInit(map, bounds) {
     var poisLayer = initDetailPoisLayer(map, poiUrl);
     poisLayer.on('data:loaded', function () {
         wholeBounds.extend(poisLayer.getBounds());
-        map.fitBounds(wholeBounds);
     });
+
+    initPOIsList(map);
 
     var informationDesksLayer = initDetailInformationDesksLayer(map, informationDeskUrl);
     informationDesksLayer.on('data:loaded', function () {
         wholeBounds.extend(informationDesksLayer.getBounds());
-        map.fitBounds(wholeBounds);
     });
 
     var poisLayerSwitcher = new L.Control.TogglePOILayer(poisLayer);
@@ -898,11 +915,12 @@ function initDetailAltimetricProfile(map, trekLayer) {
 }
 
 function initDetailParking(map, trekGeoJson) {
+    var size = DETAIL_MAP_OPTIONS.icons.parking.size;
     var parkingIcon = L.icon({
         iconUrl: IMG_URL + '/parking.png',
-        iconSize: [24, 24],
+        iconSize: [size, size],
         iconAnchor: [0, 0],
-        labelAnchor: [20, 12]
+        labelAnchor: [size-4, size/2]
     });
     var parkingLocation = trekGeoJson.properties.parking_location;
     if (parkingLocation) {
@@ -914,22 +932,13 @@ function initDetailParking(map, trekGeoJson) {
     return null;
 }
 
-function initDetailPoisLayer(map, poiUrl) {
-    // We don't use L.GeoJSON.AJAX because POILayer already inherits
-    // from MarkerCluster.
-    var poisLayer = new POILayer();
-    $.getJSON(poiUrl, function (data) {
-        poisLayer.addData(data);
-        initDetailAccordionPois(map, poisLayer);
-    });
-    return poisLayer.addTo(map);
-}
 
 function initDetailInformationDesksLayer(map, layerUrl) {
+    var size = DETAIL_MAP_OPTIONS.icons.information.size;
     var deskIcon = L.icon({
         iconUrl: IMG_URL + '/information.svg',
-        iconSize: [20, 20],
-        iconAnchor: [10, 10]
+        iconSize: [size, size],
+        iconAnchor: [size/2, size/2]
     });
     var layer = L.geoJson.ajax(layerUrl, {
         pointToLayer: function (feature, latlng) {
@@ -946,52 +955,142 @@ function initDetailInformationDesksLayer(map, layerUrl) {
 }
 
 
-function initDetailAccordionPois(map, poisLayer) {
+function initDetailPoisLayer(map, poiUrl) {
+    // We don't use L.GeoJSON.AJAX because POILayer already inherits
+    // from MarkerCluster.
+    var poisLayer = new POILayer();
     var poisMarkersById = {};
 
-    poisLayer.eachLayer(function (marker) {
-        poisMarkersById[marker.properties.pk] = marker;
-        /*
-         * Open Accordion on marker click.
-         * TODO: does not work correctly.
-         */
-        marker.off('click');  // Disable auto-control of popup
-        marker.on('click', function (e) {
-            var $item = $('#poi-item-' + marker.properties.pk);
-            $item.click();
-            var top = $('#pois-accordion').scrollTop(),
-                toTop = $item.position().top;
-            $('#pois-accordion').animate({
-                scrollTop: top + toTop
-            }, 1000);
+    $.getJSON(poiUrl, function (data) {
+        poisLayer.addData(data);
+        poisLayer.fire('data:loaded');
+
+        poisLayer.eachLayer(function (marker) {
+            var pk = marker.properties.pk;
+            poisMarkersById[pk] = marker;
+
+            marker.on('mouseintent', function (e) {
+                $(window).trigger('poimap:mouseover', [pk]);
+            });
         });
     });
 
-    $('#pois-accordion .accordion-body').on('show', function (e) {
-        var id = $(e.target).data('id'),
-            marker = poisMarkersById[id];
-        map.panTo(marker.getLatLng());
+    function getMarker(pk) {
+        var marker = poisMarkersById[pk];
+        if (!marker) {
+            console.warn('POI ' + pk + ' unknown');
+            return null;
+        }
+        var visibleOne = poisLayer.getVisibleParent(marker);
+        if (visibleOne) {
+            return visibleOne;
+        }
+        return marker;
+    }
 
-        // Add clusterized marker explicitly, will be removed on accordion close.
-        marker._clusterized = (marker._map === undefined);
-        if (marker._clusterized) {
-            map.addLayer(marker);
+    $(window).on('poilist:mouseover', function (e, pk) {
+        var marker = getMarker(pk);
+        if (!marker) return;
+
+        if (typeof marker.showLabel == 'function') {
+            marker.showLabel();
         }
         $(marker._icon).addClass('highlight');
-        marker.openPopup();
         $(marker._icon).css('z-index', 3000);
+
+        var sidepanelw = $('#pois-sidebar').width();
+        map.panToOffset(marker.getLatLng(), [-sidepanelw/2, 0],
+                        DETAIL_POI_OPTIONS.pan);
     });
 
-    $('#pois-accordion .accordion-body').on('hidden', function (e) {
-        var id = $(e.target).data('id'),
-            marker = poisMarkersById[id];
-
-        $(marker._icon).removeClass('highlight');
-        marker.closePopup();
-        // Restore clusterized markers (if still on map, i.e. zoom not changed)
-        if (marker._clusterized && marker._map) {
-            marker._map.removeLayer(marker);
-            marker._map = undefined;
+    $(window).on('poilist:mouseout', function (e, pk) {
+        var marker = getMarker(pk);
+        if (!marker) return;
+        if (typeof marker.hideLabel == 'function') {
+            marker.hideLabel();
         }
+        $(marker._icon).removeClass('highlight');
     });
+    return poisLayer.addTo(map);
+}
+
+function initPOIsList(map) {
+    if (L.DomUtil.get('pois-sidebar')) {
+        var poiSidebar = L.control.sidebar('pois-sidebar', {
+            closeButton: false,
+            position: 'right'
+        });
+
+        $(window).on('pois:shown', function () {
+            poiSidebar.show();
+        });
+        $(window).on('pois:hidden', function () {
+            poiSidebar.hide();
+        });
+
+        $(window).on('map:ready', function () {
+            map.addControl(poiSidebar);
+            poiSidebar.show();
+
+            var $sidebar = $('#pois-sidebar');
+
+            $sidebar.find('.pictogram').tooltip({placement: 'right'});
+
+            // Hilight marker when list hovered
+            $sidebar.find('.poi').hoverIntent(
+                function enter() {
+                    $(this).addClass('active');
+                    $(window).trigger('poilist:mouseover', [$(this).data('pk')]);
+                },
+                function leave() {
+                    $(this).removeClass('active');
+                    $(window).trigger('poilist:mouseout', [$(this).data('pk')]);
+                }
+            );
+
+            $sidebar.find('.jump').click(function (e) {
+                var up = $(this).hasClass('up'),
+                    $poi = $(this).closest('.poi'),
+                    pk = $poi.data('pk');
+                var $jump = $poi.next('.poi');
+                if (up) {
+                    $jump = $poi.prev('.poi');
+                }
+                $(window).trigger('poimap:mouseover', [$jump.data('pk')]);
+                e.preventDefault();
+            });
+
+            // Scroll to detail when marker hovered
+            $(window).on('poimap:mouseover', function (e, pk) {
+                var $item = $sidebar.find('.poi[data-pk=' + pk + ']');
+                var scrollTo = $item.parent().scrollTop() +
+                               $item.offset().top -
+                               $item.parent().offset().top +
+                               DETAIL_POI_OPTIONS.listMarginTop;  // padding + margin
+
+                $sidebar.animate({ scrollTop: scrollTo }, DETAIL_POI_OPTIONS.scroll);
+            });
+
+            // Prevent scrolling page when bottom reached
+            $sidebar.bind( 'mousewheel DOMMouseScroll', function ( e ) {
+                var e0 = e.originalEvent,
+                    delta = e0.wheelDelta || -e0.detail;
+
+                this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+                e.preventDefault();
+            });
+
+            // Show carousel on click
+            $sidebar.find('.poi .picture').click(function () {
+                var pk = $(this).closest('.poi').data('pk');
+                var $popup = $("#popup-poi-carousel-" + pk);
+                $popup.on('shown', function () {
+                    $popup.carousel();
+                });
+                $popup.modal('show');
+            });
+
+        });
+
+    }
 }

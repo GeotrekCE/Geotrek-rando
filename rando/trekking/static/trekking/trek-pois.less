@@ -1,0 +1,167 @@
+.leaflet-sidebar & {
+
+  z-index: 901; /* above map */
+
+  width: 400px;
+  @media(max-width: @screen-xl) {
+    width: 300px;
+  }
+  @media(max-width: @screen-lg) {
+    width: 250px;
+  }
+  @media(max-width: @screen-md) {
+    display: none;
+  }
+}
+
+.leaflet-sidebar.right.visible ~ .leaflet-right {
+  right: 400px;
+  @media(max-width: @screen-xl) {
+    right: 300px;
+  }
+  @media(max-width: @screen-lg) {
+    right: 250px;
+  }
+  @media(max-width: @screen-md) {
+    right: 0;
+  }
+}
+
+
+.popup.poi {
+  background-color: black;
+  width: auto;
+
+  .modal-body {
+    padding: 5px;
+    overflow-y: auto;
+    max-height: none;
+
+    .carousel {
+      margin-bottom: 0px;
+
+      .carousel-control {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+
+#pois-sidebar {
+
+  padding: 8px;
+  background-color: fade(@white, 80%);
+
+  h5 {
+
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 1.4em;
+    line-height: 1.4em;
+
+    background-image: url(../img/switcher-pois.svg);
+    background-repeat: no-repeat;
+    background-size: 1em;
+    padding-left: 1.2em;
+    background-position: 0% 50%;
+  }
+
+  &::-webkit-scrollbar-track-piece {
+    background-color: darken(@backgroundColor, 5%);
+  }
+  &::-webkit-scrollbar-thumb:vertical {
+    background-color: darken(@backgroundDarker, 15%);
+  }
+
+
+  .pois-list {
+
+    .poi {
+      padding-bottom: 15px;
+      margin-top: 15px;
+      border-bottom: solid 1px @darkGray;
+
+      &:first-of-type {
+        margin-top: 5px;
+
+        .jump.up {
+          display: none;
+        }
+      }
+
+      &:last-of-type {
+        border-bottom: none;
+        padding-bottom: 0px;
+
+        .jump.down {
+          display: none;
+        }
+      }
+
+      &.active {
+        color: @mainColor;
+      }
+
+      .title {
+        .name {
+          font-size: 1.2em;
+          font-weight: bold;
+          white-space: nowrap;
+          display: inline-block;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          position: absolute;
+          left: 40px;
+          right: 26px;
+        }
+
+        .jump {
+          position: absolute;
+          font-size: 1.2em;
+          font-weight: bold;
+          min-width: 16px;
+
+          text-decoration: none;
+          color: inherit;
+
+          &.up {
+            right: 16px;
+          }
+
+          &.down {
+            right: 2px;
+          }
+        }
+      }
+
+      .pictures-info {
+        color: white;
+      }
+
+      .picture {
+        margin-bottom: 0px;
+        position: relative;
+        cursor: pointer;
+
+        img {
+          margin: 0 auto;
+          width: 100%;
+        }
+
+        .carousel-caption {
+          padding: 7px;
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+
+          p {
+            line-height: 1em;
+          }
+        }
+      }
+    }
+
+  }
+}

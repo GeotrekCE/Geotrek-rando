@@ -275,17 +275,6 @@ p.teaser {
   margin-top: 15px;
 }
 
-#pois-accordion .pictures-info {
-  margin-right: 10px;
-
-  &:before {
-    margin-right: 2px;
-    vertical-align: middle;
-    position: relative;
-    top: -1px;
-  }
-}
-
 
 #park-center-warning {
   font-weight: bold;
@@ -304,7 +293,7 @@ p.teaser {
     &:before {
       position: relative;
       font-size: 27px;
-      top: 4px;
+      top: -5px;
       margin-right: 10px;
       display: block;
       float: left;
@@ -396,11 +385,11 @@ p.teaser {
     font-size: 40px;
     font-family: @fontFamilyCaption;
     .transition(all 300ms);
+    opacity: 0;
 
     &.right {
       right: 10px;
       padding-left: 2px;
-      opacity: 0;
     }
 
     &.left {
@@ -408,71 +397,7 @@ p.teaser {
       padding-left: 0;
       padding-right: 2px;
       width: 30px;
-      opacity: 0;
     }
-  }
-}
-
-
-/*
-* POIs list
-*/
-.accordion-heading .accordion-toggle {
-  padding: 1px 2px;
-  line-height: 25px;
-
-  .pictogram {
-    vertical-align: top;
-    line-height: 15px;
-  }
-}
-
-.accordion-group {
-  border: none;
-  border-top: 1px solid @backgroundColor;
-  .border-radius(0);
-  margin-bottom: 0;
-
-  &:first-child {
-    border: none;
-  }
-}
-
-.accordion-toggle  {
-  cursor: pointer;
-  position: relative;
-  color: @accordionText;
-  text-decoration:none;
-
-  &:before {
-    content: "t";
-  }
-
-  &:before {
-    float: right;
-    font-size: 22px;
-  }
-
-  &.collapsed {
-    color: @accordionText;
-
-    &:hover {
-      color: @accordionTextHover;
-    }
-
-    &:before {
-      content: "w";
-    }
-  }
-
-  .name {
-    white-space: nowrap;
-    display: inline-block;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    position: absolute;
-    right: 65px;
-    left: 30px;
   }
 }
 
