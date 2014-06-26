@@ -1004,8 +1004,8 @@ header #lang-switch {
 }
 /* POIS markers */
 .poi-marker-icon > img {
-  width: 24px;
-  height: 24px;
+  width: 100%;
+  height: 100%;
   color: black;
   text-align: center;
 }
@@ -1016,14 +1016,12 @@ header #lang-switch {
   display: table-row;
 }
 .poi-marker-icon.cluster .pois-cluster-row .pois-cluster-cell {
-  width: 15px;
-  height: 15px;
+  width: 50%;
   display: table-cell;
-  line-height: 15px;
+  line-height: 50%;
 }
 .poi-marker-icon.cluster .pois-cluster-row .pois-cluster-cell img {
-  width: 15px;
-  height: 15px;
+  width: 100%;
 }
 .poi-marker-icon.highlight {
   outline: solid 2px #ffff00;

@@ -25,7 +25,7 @@ window.TREK_LAYER_OPTIONS = L.Util.extend({
 window.DETAIL_MAP_OPTIONS = L.Util.extend({
     icons: {
         poi: {
-            size: 18
+            size: 24
         },
         cluster: {
             size: 30
