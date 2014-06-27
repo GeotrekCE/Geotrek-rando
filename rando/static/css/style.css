@@ -2354,7 +2354,7 @@ ul.errorlist {
   position: absolute;
   z-index: 0;
   top: 80px;
-  bottom: 0px;
+  bottom: 50px;
   width: 100%;
 }
 .container-content #pjax-content {
@@ -2367,7 +2367,7 @@ ul.errorlist {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   width: 100%;
-  padding-bottom: 50px;
+  padding-bottom: 15px;
 }
 .container-content #pjax-content .page-content .page-inner-content {
   padding-left: 1%;
