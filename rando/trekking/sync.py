@@ -65,6 +65,11 @@ class TrekInputFile(JsonInputFile):
         content['pictures'] = reroot(content['pictures'], attr='url')
         content['themes'] = reroot(content['themes'], attr='pictogram')
         content['usages'] = reroot(content['usages'], attr='pictogram')
+
+        content['difficulty'] = reroot(content['difficulty'], attr='pictogram')
+        content['route'] = reroot(content['route'], attr='pictogram')
+        content['networks'] = reroot(content['networks'], attr='pictogram')
+
         wl = []
         for w in content['web_links']:
             w['category'] = reroot(w['category'], attr='pictogram')
@@ -197,6 +202,15 @@ def sync_content_trekking(sender, **kwargs):
             InputFile(theme.pictogram, **input_kwargs).pull_if_modified()
         for usage in trek.properties.usages:
             InputFile(usage.pictogram, **input_kwargs).pull_if_modified()
+        for network in trek.properties.networks:
+            if network.pictogram:
+                InputFile(network.pictogram, **input_kwargs).pull_if_modified()
+
+        if trek.properties.difficulty and trek.properties.difficulty.pictogram:
+            InputFile(trek.properties.difficulty.pictogram, **input_kwargs).pull_if_modified()
+        if trek.properties.route and trek.properties.route.pictogram:
+            InputFile(trek.properties.route.pictogram, **input_kwargs).pull_if_modified()
+
         for weblink in trek.properties.web_links:
             if weblink.category:
                 InputFile(weblink.category.pictogram, **input_kwargs).pull_if_modified()
