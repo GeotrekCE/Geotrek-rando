@@ -213,11 +213,11 @@
         <div class="span6">
           <div class="row-fluid">
 
-            {% if object.properties.web_links|length > 0 %}
+            {% if object.properties.web_links|length > 0 or object.properties.networks|length > 0 %}
             <div class="flex">
-              <div id="trek-links">
-                <h4>{% trans "See also" %}</h4>
+              <h4>{% trans "See also" %}</h4>
 
+              <div id="trek-links">
                 {% regroup object.properties.web_links by category as weblinks %}
 
                 <ul>
@@ -235,6 +235,16 @@
                 {% endfor %}
                 </ul>
               </div>
+
+              {% if object.properties.networks %}
+              <div class="trek-networks">
+                  <h5>{% trans "Marks" %}</h5>
+                  {% for network in object.properties.networks %}
+                    <li><img src="{{ network.pictogram }}" alt="{% trans "Marks" %} {{ network.name }}"/> {{ network.name }}</li>
+                  {% endfor %}
+              </div>
+              {% endif %}
+
             </div>
             {% endif %}
 

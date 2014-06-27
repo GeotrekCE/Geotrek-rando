@@ -2083,6 +2083,9 @@ p.teaser {
 #usages .pictogram {
   opacity: 0.5;
 }
+.trek-networks img {
+  height: 1.5em;
+}
 .row-fluid.meta {
   margin-top: 15px;
 }
