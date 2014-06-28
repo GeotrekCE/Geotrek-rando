@@ -68,21 +68,50 @@
     </div>
     <div class="span7">
       <div class="row-fluid" id="trek-identity">
-        <div class="span3">
-          <p>{% trans "Duration" %} : <span class="value">{{ object.properties.duration_pretty }}</span></p>
-          <p>{% trans "Difficulty" %} : <span class="value">{{ object.properties.difficulty.label }}</span></p>
-          <p>{% trans "Ascent" %} : <span class="value">{{ object.properties.ascent }} m</span></p>
-        </div>
-        <div class="span3">
-          {% if object.properties.route %}
-          <p>{% trans "Total Length" %} : <span class="value">{{ object.properties.length|kilo|floatformat }} km</span></p>
-          <p>{% trans "Route" %} : <span class="value">{{ object.properties.route.label }}</span></p>
-          {% endif %}
-          {% if object.properties.districts %}
-          <p>{% trans "Valleys" %} : <span class="value">{% for district in object.properties.districts %}
-            {{ district.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</span></p>
-          {% endif %}
-        </div>
+
+        {% if object.properties.difficulty and object.properties.difficulty.pictogram %}
+          <div class="span3">
+            <div class="duration">
+              <span>{{ object.properties.duration_pretty }}</span>
+              <div class="pictogram medium">
+                <img src="{% static "img/duration.svg" %}" alt="{% trans "Duration" %}"/>
+              </div>
+            </div>
+            {% if object.properties.difficulty %}
+            <div class="difficulty">
+              <span>{{ trek.properties.difficulty.label }}</span>
+              {{ trek.properties.difficulty|pictogram:"medium" }}
+            </div>
+            {% endif %}
+            {% if object.properties.route %}
+            <div class="route">
+              <span>{{ trek.properties.route.label }}</span>
+              {{ trek.properties.route|pictogram:"medium" }}
+            </div>
+            {% endif %}
+          </div>
+          <div class="span3">
+            <p>{% trans "Total Length" %} : <span class="value">{{ object.properties.length|kilo|floatformat }} km</span></p>
+            <p>{% trans "Ascent" %} : <span class="value">{{ object.properties.ascent }} m</span></p>
+          </div>
+        {% else %}
+          {# Retrocompatibilty with Geotrek 0.23 #}
+          <div class="span3">
+            <p>{% trans "Duration" %} : <span class="value">{{ object.properties.duration_pretty }}</span></p>
+            <p>{% trans "Difficulty" %} : <span class="value">{{ object.properties.difficulty.label }}</span></p>
+            <p>{% trans "Ascent" %} : <span class="value">{{ object.properties.ascent }} m</span></p>
+          </div>
+          <div class="span3">
+            <p>{% trans "Total Length" %} : <span class="value">{{ object.properties.length|kilo|floatformat }} km</span></p>
+            {% if object.properties.route %}
+            <p>{% trans "Route" %} : <span class="value">{{ object.properties.route.label }}</span></p>
+            {% endif %}
+            {% if object.properties.districts %}
+            <p>{% trans "Valleys" %} : <span class="value">{% for district in object.properties.districts %}
+              {{ district.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</span></p>
+            {% endif %}
+          </div>
+        {% endif %}
 
         {% for usage in object.properties.usages %}
           {% if forloop.first %}<div id="usages">{% trans "Uses" %}<ul>{% endif %}
@@ -184,11 +213,11 @@
         <div class="span6">
           <div class="row-fluid">
 
-            {% if object.properties.web_links|length > 0 %}
+            {% if object.properties.web_links|length > 0 or object.properties.networks|length > 0 %}
             <div class="flex">
-              <div id="trek-links">
-                <h4>{% trans "See also" %}</h4>
+              <h4>{% trans "See also" %}</h4>
 
+              <div id="trek-links">
                 {% regroup object.properties.web_links by category as weblinks %}
 
                 <ul>
@@ -206,6 +235,16 @@
                 {% endfor %}
                 </ul>
               </div>
+
+              {% if object.properties.networks %}
+              <div class="trek-networks">
+                  <h5>{% trans "Marks" %}</h5>
+                  {% for network in object.properties.networks %}
+                    <li><img src="{{ network.pictogram }}" alt="{% trans "Marks" %} {{ network.name }}"/> {{ network.name }}</li>
+                  {% endfor %}
+              </div>
+              {% endif %}
+
             </div>
             {% endif %}
 
