@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-25 18:57+0200\n"
+"POT-Creation-Date: 2014-06-28 12:30+0200\n"
 "PO-Revision-Date: 2013-05-30 10:57+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,26 +84,26 @@ msgstr ""
 msgid "Duration"
 msgstr "Durata"
 
-msgid "Difficulty"
-msgstr "Difficoltà"
-
-msgid "Ascent"
-msgstr "Dislivello"
-
 msgid "Total Length"
 msgstr "Lunghezza totale"
 
-msgid "Route"
-msgstr "Percorso"
-
-msgid "Valleys"
-msgstr "Valli"
+msgid "Ascent"
+msgstr "Dislivello"
 
 msgid "Uses"
 msgstr "Utilizzo"
 
 msgid "Thematic"
 msgstr "Tema"
+
+msgid "Difficulty"
+msgstr "Difficoltà"
+
+msgid "Route"
+msgstr "Percorso"
+
+msgid "Valleys"
+msgstr "Valli"
 
 msgid "Disabled-friendly infrastructures"
 msgstr "Infrastrutture per disabili"
@@ -141,8 +141,14 @@ msgstr ""
 msgid "Distance (m)"
 msgstr "Distanza (m)"
 
+msgid "Advice"
+msgstr "Consigli"
+
 msgid "See also"
 msgstr "Ulteriori informazioni"
+
+msgid "Markings"
+msgstr "Marcature"
 
 msgid "Related treks"
 msgstr "Itinerari collegati"
@@ -155,9 +161,6 @@ msgstr "Percorsi condivisi"
 
 msgid "Sharing circuit"
 msgstr "Circuito condiviso"
-
-msgid "Advice"
-msgstr "Consigli"
 
 msgid "On the way..."
 msgstr "Sul percorso..."

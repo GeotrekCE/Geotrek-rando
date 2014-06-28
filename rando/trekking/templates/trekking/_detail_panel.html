@@ -256,10 +256,12 @@
 
               {% if object.properties.networks %}
               <div class="trek-networks">
-                  <h5>{% trans "Marks" %}</h5>
+                  <h5>{% trans "Markings" %}</h5>
+                  <ul>
                   {% for network in object.properties.networks %}
                     <li><img src="{{ network.pictogram }}" alt="{% trans "Marks" %} {{ network.name }}"/> {{ network.name }}</li>
                   {% endfor %}
+                  </ul>
               </div>
               {% endif %}
 
