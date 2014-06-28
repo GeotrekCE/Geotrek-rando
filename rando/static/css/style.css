@@ -1875,12 +1875,15 @@ p.tab-content-empty a.change-lang {
   white-space: nowrap;
 }
 #themes,
-#usages {
-  float: left;
+#usages,
+.topology-info {
+  display: inline-block;
   color: #877f84;
+  vertical-align: top;
 }
 #themes ul,
-#usages ul {
+#usages ul,
+.topology-info ul {
   margin: 0;
   text-align: center;
 }
