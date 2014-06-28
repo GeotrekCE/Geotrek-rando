@@ -6,16 +6,21 @@ CHANGELOG
 1.30a (2014-06-28)
 ------------------
 
+**Alpha status**
+
+* Not extensively tested with Geotrek<=0.23
+* Responsive design not extensively tested (long names etc.)
+
 **New features**
 
+* Now show pictograms of difficulty, route and duration when available
+* Now show trek markings ("balisage") from trek networks
 * Complete rework of POIs list and map interaction (fixes #124)
   - Removed POI list accordions
   - Removed POI jump and uncluster on hover in list
-  - Removed pictures carousels from list
-  - Removed indicator for number of photos by POI
+  - Removed pictures carousels from POI list
   - Removed POI marker popup
-* Now show POI pictures in a lightbox
-* Now show pictograms of difficulty, route and duration when available
+  - Now show POI pictures in a lightbox
 
 **Minor changes**
 
