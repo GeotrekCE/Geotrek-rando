@@ -5,6 +5,7 @@ import os
 from os.path import join, getmtime, dirname, getsize
 from os import makedirs, utime
 import errno
+import urllib2
 
 from django.core.management.base import BaseCommand
 from django.utils.http import http_date, parse_http_date_safe
@@ -71,10 +72,11 @@ class InputFile(object):
         self.stdout = stdout or sys.stdout
         self.stderr = stderr or sys.stderr
 
-        self.path = join(settings.INPUT_DATA_ROOT, self.language, self.url)
+        unquoted = urllib2.unquote(self.url)
+        self.path = join(settings.INPUT_DATA_ROOT, self.language, unquoted)
         # All files are downloaded in a separate folder.
         # And copied to INPUT_DATA_ROOT if whole sync is successful.
-        self.path_tmp = join(settings.INPUT_TMP_ROOT, self.language, self.url)
+        self.path_tmp = join(settings.INPUT_TMP_ROOT, self.language, unquoted)
         self.reply = None
 
     def pull_if_modified(self):

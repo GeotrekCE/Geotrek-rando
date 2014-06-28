@@ -2,6 +2,14 @@
 CHANGELOG
 =========
 
+1.29.2 (2014-06-28)
+-------------------
+
+**BUG fixes**
+
+* Fix synchronization when pictogram names have special characters (url encoded)
+
+
 1.29.1 (2014-06-26)
 -------------------
 
