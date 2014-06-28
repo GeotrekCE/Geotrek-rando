@@ -2,8 +2,9 @@
 CHANGELOG
 =========
 
-1.30dev (unreleased)
---------------------
+
+1.30a (2014-06-28)
+------------------
 
 **New features**
 
@@ -14,7 +15,7 @@ CHANGELOG
   - Removed indicator for number of photos by POI
   - Removed POI marker popup
 * Now show POI pictures in a lightbox
-
+* Now show pictograms of difficulty, route and duration when available
 
 **Minor changes**
 
@@ -22,6 +23,10 @@ CHANGELOG
 * Trek detail map does not fit POIs bounds by default
 * Increased detail map height on big screens
 * Added settings to control most icons sizes
+
+
+1.29.1 (2014-06-26)
+-------------------
 
 **BUG fixes**
 
