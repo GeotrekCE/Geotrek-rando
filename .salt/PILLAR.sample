@@ -20,7 +20,7 @@ makina-projects.projectname:
           unzip: 'true'
     PROJECT: rando
     domain: "{PROJECT}.mydomain.tld"
-    LANGUAGE_CODE: fr-fr
+    LANGUAGE_CODE: fr
     DJANGO_SETTINGS_MODULE: "{PROJECT}.settings.prod"
     WSGI: "{PROJECT}.wsgi:application"
     nginx_upstreams: salt://makina-projects/{name}/files/nginx.upstreams.conf
