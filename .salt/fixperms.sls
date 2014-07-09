@@ -1,46 +1,48 @@
 
-
-
-
-
-geotrek_services-restricted-perms:
+{% set cfg = opts['ms_project'] %}
+{# export macro to callees #}
+{% set ugs = salt['mc_usergroup.settings']() %}
+{% set locs = salt['mc_locations.settings']() %}
+{% set cfg = opts['ms_project'] %}
+{{cfg.name}}-restricted-perms:
   file.managed:
-    - name: /srv/projects/geotrek_services/global-reset-perms.sh
+    - name: {{cfg.project_dir}}/global-reset-perms.sh
     - mode: 750
-    - user: geotrek_services-user
-    - group: editor
+    - user: {% if not cfg.no_user%}{{cfg.user}}{% else -%}root{% endif %}
+    - group: {{cfg.group}}
     - contents: |
             #!/usr/bin/env bash
-            if [ -e "/srv/projects/geotrek_services/pillar" ];then
-            "/srv/salt/makina-states/_scripts/reset-perms.py" "${@}" \
+            if [ -e "{{cfg.pillar_root}}" ];then
+            "{{locs.resetperms}}" "${@}" \
               --dmode '0770' --fmode '0770' \
-              --user root --group "editor" \
+              --user root --group "{{ugs.group}}" \
               --users root \
-              --groups "editor" \
-              --paths "/srv/projects/geotrek_services/pillar";
+              --groups "{{ugs.group}}" \
+              --paths "{{cfg.pillar_root}}";
             fi
-            if [ -e "/srv/projects/geotrek_services/project" ];then
-              "/srv/salt/makina-states/_scripts/reset-perms.py" "${@}" \
+            if [ -e "{{cfg.project_root}}" ];then
+              "{{locs.resetperms}}" "${@}" \
               --dmode '0770' --fmode '0770'  \
-              --paths "/srv/projects/geotrek_services/project" \
-              --paths "/srv/projects/geotrek_services/data" \
+              --paths "{{cfg.project_root}}" \
+              --paths "{{cfg.data_root}}" \
               --users www-data \
-              --users geotrek_services-user \
-              --groups editor \
-              --user geotrek_services-user \
-              --group editor;
-              "/srv/salt/makina-states/_scripts/reset-perms.py" "${@}" \
+              --users {% if not cfg.no_user%}{{cfg.user}}{% else -%}root{% endif %} \
+              --groups {{cfg.group}} \
+              --user {% if not cfg.no_user%}{{cfg.user}}{% else -%}root{% endif %} \
+              --group {{cfg.group}};
+              "{{locs.resetperms}}" "${@}" \
               --no-recursive -o\
               --dmode '0555' --fmode '0644'  \
-              --paths "/srv/projects/geotrek_services/project" \
-              --paths "/srv/projects/geotrek_services" \
-              --paths "/srv/projects/geotrek_services"/.. \
-              --paths "/srv/projects/geotrek_services"/../.. \
+              --paths "{{cfg.project_root}}" \
+              --paths "{{cfg.project_dir}}" \
+              --paths "{{cfg.project_dir}}"/.. \
+              --paths "{{cfg.project_dir}}"/../.. \
               --users www-data ;
             fi
   cmd.run:
-    - name: /srv/projects/geotrek_services/global-reset-perms.sh
-    - cwd: /srv/projects/geotrek_services/project
+    - name: {{cfg.project_dir}}/global-reset-perms.sh
+    - cwd: {{cfg.project_root}}
     - user: root
     - watch:
-      - file: geotrek_services-restricted-perms
+      - file: {{cfg.name}}-restricted-perms
+
