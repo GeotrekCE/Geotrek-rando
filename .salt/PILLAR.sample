@@ -52,6 +52,8 @@ makina-projects.projectname:
     ftpusers:
       - editor:
           pass: "secret"
+    sync_periodicity: 0 * * * * 
+    sync_mail: root
     LEAFLET_CONFIG:
       TILES:
         - ['main', 'http://{s}.tiles.mapbox.com/v3/examples.map-4l7djmvo/{z}/{x}/{y}.png', '&copy; MapBox']

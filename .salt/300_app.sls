@@ -74,3 +74,36 @@ make_sync-{{cfg.name}}:
     - user: {{cfg.user}}
     - watch:
       - cmd: static-{{cfg.name}}
+
+{% if data.sync_periodicity %}
+scron-make-sync:
+  file.managed:
+    - watch:
+      - cmd: static-{{cfg.name}}
+    - name: {{cfg.data_root}}/sync.sh 
+    - mode: 750
+    - contents: |
+                #!/usr/bin/env bash
+                LOG="{{cfg.data_root}}/sync.log"
+                lock="${0}.lock"
+                if [ -e "${lock}" ];then
+                  echo "Locked ${0}";exit 1
+                fi
+                touch "${lock}"
+                salt-call --out-file="${LOG}" --retcode-passthrough -lall --local mc_project.run_task {{cfg.name}} task_sync 1>/dev/null 2>/dev/null
+                ret="${?}"
+                rm -f "${lock}"
+                if [ "x${ret}" != "x0" ];then
+                  cat "${LOG}"
+                fi
+                exit "${ret}"
+cron-make-sync:
+  file.managed:
+    - watch:
+      - cmd: static-{{cfg.name}}
+    - name: /etc/cron.d/randosync
+    - mode: 750
+    - contents: |
+                MAILTO={{data.sync_mail}}
+                {{data.sync_periodicity}} root {{cfg.data_root}}/sync.sh
+{% endif %}
