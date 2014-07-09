@@ -47,6 +47,11 @@ makina-projects.projectname:
     FLATPAGES_POLICY_PAGE: '3'
     PREPROD: False
     TOURISM_ENABLED: True
+    ftp_ip: null
+    ftp_port_range: '50000 50100'
+    ftpusers:
+      - editor:
+          pass: "secret"
     LEAFLET_CONFIG:
       TILES:
         - ['main', 'http://{s}.tiles.mapbox.com/v3/examples.map-4l7djmvo/{z}/{x}/{y}.png', '&copy; MapBox']
