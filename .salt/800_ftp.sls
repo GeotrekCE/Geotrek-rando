@@ -1,6 +1,3 @@
-{% import "makina-states/services/monitoring/circus/macros.jinja" as circus with context %}
-{% import "makina-states/services/http/nginx/init.sls" as nginx %}
-
 {% set cfg = opts.ms_project %}
 {% set data = cfg.data %}
 {% set scfg = salt['mc_utils.json_dump'](cfg) %}
