@@ -210,5 +210,5 @@ def sync_content_trekking(sender, **kwargs):
 
         if 'information_desks' in trek.properties:
             for desk in trek.properties.information_desks:
-                if desk.photo_url:
+                if desk and desk.get('photo_url', ''):
                     InputFile(desk.photo_url, **input_kwargs).pull_if_modified()

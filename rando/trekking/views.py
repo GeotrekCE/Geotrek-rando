@@ -41,6 +41,8 @@ class HomeView(PJAXResponseMixin, TemplateView):
 
         all_difficulties = {}
         for trek in alltreks:
+            if not trek.properties.difficulty:
+                continue
             did = trek.properties.difficulty.id
             dlabel = trek.properties.difficulty.label
             all_difficulties[did] = {'label': dlabel, 'value': did}
