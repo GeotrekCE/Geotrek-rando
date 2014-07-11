@@ -31,6 +31,7 @@ include:
 {{ circus.circusAddWatcher(cfg.name, **circus_data) }}
 
 {{ nginx.virtualhost(domain=data.domain, doc_root=cfg.data_root+'/static',
+                     server_aliases=data.server_aliases,
                      vh_top_source=data.nginx_upstreams,
                      vh_content_source=data.nginx_vhost,
                      cfg=cfg)}}

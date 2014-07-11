@@ -29,6 +29,7 @@ makina-projects.projectname:
       - foo:
           password: fadmin
           mail: "root@{domain}"
+    server_aliases: []
     host: localhost
     port: 8180
     workers: 5
