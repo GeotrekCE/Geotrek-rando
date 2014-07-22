@@ -1908,6 +1908,14 @@ p.teaser {
 #trek-information-desk .information-desk {
   border-bottom: #f89406 solid 1px;
 }
+#trek-information-desk .information-desk .description {
+  margin-bottom: 0.8em;
+}
+#trek-information-desk .information-desk img {
+  float: right;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
 #trek-information-desk .information-desk:last-of-type {
   border-bottom: none;
 }
@@ -2246,6 +2254,7 @@ ul.errorlist {
 }
 #popup-view3d .modal-body .trek-info {
   font-size: 2em;
+  float: left;
 }
 #popup-view3d .modal-body .controls {
   position: absolute;

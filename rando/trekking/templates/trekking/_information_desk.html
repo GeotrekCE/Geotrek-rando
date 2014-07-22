@@ -1,8 +1,10 @@
 {% load l10n i18n %}
-<div class="row-fluid meta information-desk">
-  <div class="flex">
+<div class="information-desk">
     <p class="title">{{ desk.name }}</p>
-    <p>{{ desk.description|safe }}</p>
+    {% if desk.photo_url %}
+      <img src="{{ desk.photo_url }}"/>
+    {% endif %}
+    <p class="description">{{ desk.description|safe }}</p>
 
     {% if desk.street or desk.postal_code or desk.municipality %}<p class="address">{% endif %}
     {% if desk.street %}{{ desk.street }}{% endif %}
@@ -12,7 +14,7 @@
 
     {% if desk.website or desk.phone or desk.email %}<p class="contactweb">{% endif %}
     {% if desk.website %}<a target="_blank" href="{{ desk.website }}">{% trans "Website" %}</a>{% endif %}
-    {% if desk.email %}- {{ desk.email }}{% endif %}
+    {% if desk.email %}- <a target="_blank" href="mailto:{{ desk.email }}">{% trans "Email" %}</a>{% endif %}
     {% if desk.phone %}- {{ desk.phone }}{% endif %}
     {% if desk.website or desk.phone or desk.email %}</p>{% endif %}
 
@@ -21,10 +23,4 @@
       {% trans "Lat" %}: {{ desk.latitude|unlocalize }}, {% trans "Lng" %}: {{ desk.longitude|unlocalize }}
     </p>
     {% endif %}
-  </div>
-  {% if desk.photo_url %}
-  <div class="flex photo">
-    <img src="{{ desk.photo_url }}"/>
-  </div>
-  {% endif %}
 </div>
