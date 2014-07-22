@@ -20,6 +20,8 @@ CHANGELOG
   - Removed pictures carousels from POI list
   - Removed POI marker popup
   - Now show POI pictures in a lightbox
+* Duration filters labels and values can now be customized via the ``FILTER_DURATION_VALUES``
+  setting
 
 **Minor changes**
 

@@ -267,6 +267,9 @@ Trek filters
 Ascent filter step values can be controlled with `FILTER_ASCENT_VALUES`, which
 shall be a list of integer values expressed in meters.
 
+Duration filters labels and values can be controlled with ``FILTER_DURATION_VALUES``,
+which shall be a list of tuples ``('label', value)``, with values expressed in hours.
+
 
 Map elements
 ------------

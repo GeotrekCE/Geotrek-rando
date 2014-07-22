@@ -39,6 +39,8 @@ RECAPTCHA_PRIVATE_KEY = '6Ldrbu4SAAAAAPbt5g3Vw2BA_LGL1-BZwaBSsnfz'
 #
 # FILTER_ASCENT_VALUES = (300, 600, 1000)
 #
+# FILTER_DURATION_VALUES = [('< 2H', 2), ('2-4H', 4), ('> 4H', 4.01)]
+#
 
 #
 # Flat pages customizations
