@@ -84,6 +84,9 @@
       data-poi-url="{% url "core:fileserve" object.properties.poi_layer %}"
       data-static-url="{% static "view3d/" %}"
       data-tiles-url="{{ view.tiles.url }}">
+    <div class="trek-info">
+        {{ object.properties.name }}
+    </div>
     <div id="rootDiv">
         <div class="not-supported">
             {% trans "Browser not supported (WebGL)" %}

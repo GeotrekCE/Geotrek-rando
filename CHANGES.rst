@@ -9,6 +9,8 @@ CHANGELOG
 * Fix redirection of policy page (fixes #172)
 * Fix translation of meters in ascent filter (fixes #171)
 * Fix favorites navigation from detail and static pages (fixes #175)
+* Fix trek title in 3D popup (fixes #177)
+
 
 1.29.2 (2014-06-28)
 -------------------
