@@ -13,3 +13,12 @@ var/
 rando/settings/prod.py
 rando.egg-info/
 rando/var/
+.buildout/
+.installed.cfg
+.mr.developer.cfg
+aaa/
+/develop-eggs/
+kgs.cfg
+makina-states.geotrek_rando-deploy.log
+salt.cfg
+/var

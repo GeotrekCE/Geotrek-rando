@@ -1,0 +1,70 @@
+#
+# This file contains default values which are used
+# by the salt states deploying your project.
+# you may copy them to your relevant PILLAR file
+# before editing them.
+# If you need to add variables, this is where to begin.
+# Please keep defaults in there, but real passwords
+# must be putted inside pillar
+#
+# replace project_name in your pillar by
+# the current projectname
+# you can also merge parts of this file
+# with the relevant pillar
+makina-projects.projectname:
+  data:
+    buildout:
+      settings:
+        buildout:
+          newest: 'false'
+          unzip: 'true'
+    PROJECT: rando
+    domain: "{PROJECT}.mydomain.tld"
+    LANGUAGE_CODE: fr
+    DJANGO_SETTINGS_MODULE: "{PROJECT}.settings.prod"
+    WSGI: "{PROJECT}.wsgi:application"
+    nginx_upstreams: salt://makina-projects/{name}/files/nginx.upstreams.conf
+    nginx_vhost: salt://makina-projects/{name}/files/nginx.content.conf
+    admins:
+      - foo:
+          password: fadmin
+          mail: "root@{domain}"
+    server_aliases: []
+    host: localhost
+    port: 8180
+    workers: 5
+    DEBUG: False
+    GEOTREK_SERVER: 'geotrekserver.com'
+    GEOTREK_USER: 'apiuser'
+    GEOTREK_PASSWORD: 'secret_password'
+    GANALYTICS_TRACKING_CODE: 'UA-XXXXXXXX-XX'
+    POPUP_HOME_ENABLED: False
+    PRINT_ENABLED: True
+    VIEW3D_ENABLED: True
+    FEEDBACK_FORM_ENABLED: True
+    RECAPTCHA_PUBLIC_KEY: '6Ldrbu4SAAAAALJ0NMX0LBK-UAE8u5wJT5zrb5Uo'
+    RECAPTCHA_PRIVATE_KEY: '6Ldrbu4SAAAAAPbt5g3Vw2BA_LGL1-BZwaBSsnfz'
+    FILTER_ASCENT_VALUES: '(300, 600, 1000)'
+    FLATPAGES_POLICY_PAGE: '3'
+    PREPROD: False
+    TOURISM_ENABLED: True
+    ftp_ip: null
+    ftp_port_range: '50000 50100'
+    ftpusers:
+      - editor:
+          pass: "secret"
+    sync_periodicity: 0 * * * * 
+    sync_mail: root
+    LEAFLET_CONFIG:
+      TILES:
+        - ['main', 'http://{s}.tiles.mapbox.com/v3/examples.map-4l7djmvo/{z}/{x}/{y}.png', '&copy; MapBox']
+        - ['detail', 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', '&copy; OSM']
+        - ['satellite', 'http://{s}.tiles.mapbox.com/v3/examples.map-4l7dfffjmvo/{z}/{x}/{y}.jpg', '&copy; Satellite']
+      SCALE: False
+      MINIMAP: True
+      NO_GLOBALS: False
+  env_defaults:
+    dev:
+      DEBUG: True
+
+# vim:set ft=yaml:

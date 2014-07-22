@@ -2,7 +2,6 @@
 CHANGELOG
 =========
 
-
 1.30a (2014-06-28)
 ------------------
 
@@ -28,6 +27,14 @@ CHANGELOG
 * Trek detail map does not fit POIs bounds by default
 * Increased detail map height on big screens
 * Added settings to control most icons sizes
+
+
+1.29.2 (2014-06-28)
+-------------------
+
+**BUG fixes**
+
+* Fix synchronization when pictogram names have special characters (url encoded)
 
 
 1.29.1 (2014-06-26)
