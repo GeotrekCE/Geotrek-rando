@@ -144,6 +144,9 @@ msgstr "Distanza (m)"
 msgid "See also"
 msgstr "Ulteriori informazioni"
 
+msgid "Marks"
+msgstr "Marcature"
+
 msgid "Related treks"
 msgstr "Itinerari collegati"
 

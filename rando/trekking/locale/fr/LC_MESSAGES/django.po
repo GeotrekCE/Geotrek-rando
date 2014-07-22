@@ -35,13 +35,13 @@ msgstr ""
 
 #, python-format
 msgid "%sm"
-msgstr "%s min"
+msgstr ""
 
 msgid "Back to list"
 msgstr "Retour à la liste"
 
 msgid "Feedback"
-msgstr ""
+msgstr "Signalement"
 
 msgid "Favorites"
 msgstr "Favoris"
@@ -141,6 +141,9 @@ msgstr "Distance (m)"
 
 msgid "See also"
 msgstr "Plus d'informations"
+
+msgid "Markings"
+msgstr "Balisage"
 
 msgid "Related treks"
 msgstr "Itinéraires liés"

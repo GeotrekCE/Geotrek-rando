@@ -1,13 +1,13 @@
 =========
 CHANGELOG
 =========
-
 1.29.3 (unreleased)
 -------------------
 
 **BUG fixes**
 
 * Fix redirection of policy page (fixes #172)
+* Fix translation of meters in ascent filter (fixes #171)
 
 
 1.29.2 (2014-06-28)

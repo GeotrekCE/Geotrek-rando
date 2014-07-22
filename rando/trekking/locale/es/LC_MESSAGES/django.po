@@ -34,9 +34,8 @@ msgstr ""
 msgid "> %sm"
 msgstr ""
 
-#, fuzzy, python-format
 msgid "%sm"
-msgstr "%s min."
+msgstr ""
 
 msgid "Back to list"
 msgstr "Volver a la lista"
@@ -143,6 +142,9 @@ msgstr "Distancia (m)"
 
 msgid "See also"
 msgstr "Mas información"
+
+msgid "Marks"
+msgstr "Marcas"
 
 msgid "Related treks"
 msgstr "Itinéraires asociados"
