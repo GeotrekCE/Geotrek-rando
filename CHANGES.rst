@@ -2,6 +2,14 @@
 CHANGELOG
 =========
 
+1.29.3 (unreleased)
+-------------------
+
+**BUG fixes**
+
+* Fix redirection of policy page (fixes #172)
+
+
 1.29.2 (2014-06-28)
 -------------------
 
