@@ -23,11 +23,9 @@ class HomeView(PJAXResponseMixin, TemplateView):
         context = super(HomeView, self).get_context_data(**kwargs)
         self._add_choices_values(alltreks, context)
 
-        duration_levels = [
-            {'label': '1/2', 'value': 4},
-            {'label': _('1 day'), 'value': 10},
-            {'label': u'> 2', 'value': 10.1},
-        ]
+        duration_levels = []
+        for (label, duration) in settings.FILTER_DURATION_VALUES:
+            duration_levels.append({'label': _(label), 'value': duration})
 
         altitude_levels = []
         for i, ascent in enumerate(settings.FILTER_ASCENT_VALUES):
