@@ -6,6 +6,7 @@ CHANGELOG
 -------------------
 
 * Improved layout of information desks, added mailto link (fixes #166)
+* Fix apparence of tourism popups when property is null (fixes #145)
 
 
 1.29.3 (2014-07-22)
