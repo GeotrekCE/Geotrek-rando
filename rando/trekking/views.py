@@ -18,7 +18,7 @@ class HomeView(PJAXResponseMixin, TemplateView):
         lang = self.request.LANGUAGE_CODE
         alltreks = Trek.objects.filter(language=lang).all()
         if len(alltreks) == 0:
-            logger.error("No trek found.")
+            logger.warn("No trek found for lang %s." % lang)
 
         context = super(HomeView, self).get_context_data(**kwargs)
         self._add_choices_values(alltreks, context)
