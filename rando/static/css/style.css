@@ -2041,6 +2041,14 @@ p.teaser {
 #trek-identity .duration span {
   display: block;
 }
+.leaflet-marker-icon.point-reference {
+  background-color: red;
+  border-radius: 50px;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+}
 .icon-information-desk:before {
   position: relative;
   font-size: 28px;

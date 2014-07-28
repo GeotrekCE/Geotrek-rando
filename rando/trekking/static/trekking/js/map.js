@@ -754,6 +754,7 @@ function detailmapInit(map, bounds) {
 
     var trekLayer = initDetailTrekMap(map, trekGeoJson);
     var parking = initDetailParking(map, trekGeoJson);
+    initDetailPointsReference(map, trekGeoJson);
     initDetailAltimetricProfile(map, trekLayer);
 
     var wholeBounds = trekLayer.getBounds().padTop(0.12);
@@ -952,6 +953,30 @@ function initDetailInformationDesksLayer(map, layerUrl) {
     });
     layer.addTo(map);
     return layer;
+}
+
+
+function initDetailPointsReference(map, trekGeoJson) {
+    var pointsReference = trekGeoJson.properties.points_reference;
+    if (pointsReference) {
+        L.geoJson(pointsReference, {
+            pointToLayer: (function () {
+                var counter = 1;
+                return function (featureData, latlng) {
+                    var size = DETAIL_MAP_OPTIONS.icons.pointsReference.size;
+                    var icon = L.divIcon({html: counter++,
+                                          iconSize: [size, size],
+                                          iconAnchor: [size/2, size/2],
+                                          className: 'point-reference'});
+                    return L.marker(latlng, {
+                        clickable: false,
+                        icon: icon
+                    }).addTo(map);
+                };
+            })()
+        }).addTo(map);
+    }
+    return null;
 }
 
 

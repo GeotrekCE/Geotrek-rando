@@ -14,6 +14,7 @@ CHANGELOG
 
 * Now show pictograms of difficulty, route and duration when available
 * Now show trek markings ("balisage") from trek networks
+* Now show points of reference for treks (fixes #180)
 * Complete rework of POIs list and map interaction (fixes #124)
   - Removed POI list accordions
   - Removed POI jump and uncluster on hover in list

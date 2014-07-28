@@ -33,6 +33,9 @@ window.DETAIL_MAP_OPTIONS = L.Util.extend({
         parking: {
             size: 18
         },
+        pointsReference: {
+            size: 16
+        },
         information: {
             size: 20
         }
