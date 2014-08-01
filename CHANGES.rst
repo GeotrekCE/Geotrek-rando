@@ -10,6 +10,10 @@ CHANGELOG
 * Not extensively tested with Geotrek<=0.23
 * Responsive design not extensively tested (long names etc.)
 
+**Breaking changes**
+
+* ``TILES_MAIN_MAXZOOM`` setting was renamed to ``SWITCH_DETAIL_ZOOM`` (fixes #176)
+
 **New features**
 
 * Now show pictograms of difficulty, route and duration when available

@@ -427,12 +427,12 @@ L.Control.SwitchBackgroundLayers = L.Control.extend({
     onAdd: function(map) {
         this.map = map;
 
-        this.tiles_main_maxzoom = $(map._container).data('tiles-main-maxzoom');
-        if (this.tiles_main_maxzoom > 0) {
+        this.switch_detail_zoom = $(map._container).data('switch-detail-zoom');
+        if (this.switch_detail_zoom > 0) {
             map.on('zoomend', function (e) {
                 if (map.isShowingLayer('satellite'))
                     return;
-                if (e.target.getZoom() > this.tiles_main_maxzoom) {
+                if (e.target.getZoom() > this.switch_detail_zoom) {
                     if (!map.isShowingLayer('detail'))
                         setTimeout(function () { map.switchLayer('detail'); }, 100);
                 }
@@ -468,7 +468,7 @@ L.Control.SwitchBackgroundLayers = L.Control.extend({
             this.button.setAttribute('title', gettext('Show plan'));
         }
         else {
-            this.map.switchLayer(this.map.getZoom() > this.tiles_main_maxzoom ?
+            this.map.switchLayer(this.map.getZoom() > this.switch_detail_zoom ?
                                  'detail' : 'main');
 
             L.DomUtil.removeClass(this.button, 'main');
