@@ -43,6 +43,8 @@ CHANGELOG
 * Trek detail map does not fit POIs bounds by default
 * Increased detail map height on big screens
 * Added settings to control most icons sizes
+* Tooltips for layer switcher do not wrap anymore
+
 
 1.29.4 (2014-08-01)
 -------------------

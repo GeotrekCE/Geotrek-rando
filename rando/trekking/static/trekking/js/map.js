@@ -449,7 +449,8 @@ L.Control.SwitchBackgroundLayers = L.Control.extend({
 
         this.button = L.DomUtil.create('a', className, this._container);
         this.button.setAttribute('title', gettext('Show satellite'));
-        $(this.button).tooltip({placement: 'right'});
+        $(this.button).tooltip({placement: 'right',
+                                container: map._container});
 
         L.DomEvent.disableClickPropagation(this.button);
         L.DomEvent.on(this.button, 'click', function (e) {
@@ -477,7 +478,8 @@ L.Control.SwitchBackgroundLayers = L.Control.extend({
         }
 
         $(this.button).tooltip('destroy');
-        $(this.button).tooltip({placement: 'right'});
+        $(this.button).tooltip({placement: 'right',
+                                container: this.map._container});
     }
 
 });
