@@ -220,13 +220,8 @@ function view_detail() {
 
     // Tooltips
     $('#usages div, #themes div').tooltip();
+    $('#trek-identity .info').tooltip();
     $('a.print.disabled').tooltip({placement: 'left'});
-    $('#pois-accordion .pictogram').tooltip();
-
-    $('#pois-accordion').on('hidden', function (e) {
-        var id = $(e.target).data('id');
-        $(".accordion-toggle[data-id='"+ id +"']", this).addClass('collapsed');
-    });
 }
 
 function altimetricInit(jsonurl) {

@@ -28,20 +28,6 @@
   }
 }
 
-#themes, #usages {
-  float: left;
-  color: @themesText;
-
-  ul {
-    margin: 0;
-    text-align: center;
-  }
-}
-
-#usages {
-  margin-left: 30px;
-  margin-right: 20px;
-}
 
 #toolbox {
   margin-right: 15px;
@@ -199,11 +185,6 @@ p.teaser {
 }
 
 #trek-identity {
-  div.infos {
-    float: left;
-    margin: 0 50px;
-  }
-
   p {
     margin-bottom: 0;
     color: @identityText;
@@ -211,10 +192,44 @@ p.teaser {
   }
 
   span.value {
+    /* Geotrek 0.23 layout */
     color: @mainColor;
+  }
+
+
+  .info {
+    display: inline-block;
+    text-align: center;
+    margin-right: 10px;
+    & span {
+      display: block;
+    }
+  }
+
+  #themes, #usages {
+    color: @themesText;
+    vertical-align: top;
+    ul {
+      margin: 0;
+      text-align: center;
+    }
+  }
+
+  #usages {
+    margin-left: 30px;
+    margin-right: 20px;
   }
 }
 
+
+.leaflet-marker-icon.point-reference {
+    background-color: red;
+    border-radius: 50px;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+}
 
 .icon-information-desk:before {
   position: relative;
@@ -280,20 +295,14 @@ p.teaser {
   opacity: 0.5;
 }
 
+.trek-networks {
+  img {
+    height: 1.5em;
+  }
+}
 
 .row-fluid.meta {
   margin-top: 15px;
-}
-
-#pois-accordion .pictures-info {
-  margin-right: 10px;
-
-  &:before {
-    margin-right: 2px;
-    vertical-align: middle;
-    position: relative;
-    top: -1px;
-  }
 }
 
 
@@ -314,7 +323,7 @@ p.teaser {
     &:before {
       position: relative;
       font-size: 27px;
-      top: 4px;
+      top: -5px;
       margin-right: 10px;
       display: block;
       float: left;
@@ -406,11 +415,11 @@ p.teaser {
     font-size: 40px;
     font-family: @fontFamilyCaption;
     .transition(all 300ms);
+    opacity: 0;
 
     &.right {
       right: 10px;
       padding-left: 2px;
-      opacity: 0;
     }
 
     &.left {
@@ -418,71 +427,7 @@ p.teaser {
       padding-left: 0;
       padding-right: 2px;
       width: 30px;
-      opacity: 0;
     }
-  }
-}
-
-
-/*
-* POIs list
-*/
-.accordion-heading .accordion-toggle {
-  padding: 1px 2px;
-  line-height: 25px;
-
-  .pictogram {
-    vertical-align: top;
-    line-height: 15px;
-  }
-}
-
-.accordion-group {
-  border: none;
-  border-top: 1px solid @backgroundColor;
-  .border-radius(0);
-  margin-bottom: 0;
-
-  &:first-child {
-    border: none;
-  }
-}
-
-.accordion-toggle  {
-  cursor: pointer;
-  position: relative;
-  color: @accordionText;
-  text-decoration:none;
-
-  &:before {
-    content: "t";
-  }
-
-  &:before {
-    float: right;
-    font-size: 22px;
-  }
-
-  &.collapsed {
-    color: @accordionText;
-
-    &:hover {
-      color: @accordionTextHover;
-    }
-
-    &:before {
-      content: "w";
-    }
-  }
-
-  .name {
-    white-space: nowrap;
-    display: inline-block;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    position: absolute;
-    right: 65px;
-    left: 30px;
   }
 }
 

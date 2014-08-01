@@ -44,7 +44,9 @@ def reroot(item, attr=None):
     if isinstance(item, list):
         return [reroot(i, attr) for i in item]
     if attr is not None:
-        item[attr] = reroot(item[attr])
+        value = item.get(attr)
+        if value is not None:
+            item[attr] = reroot(value)
         return item
     return re.sub('(.*)%s' % settings.MEDIA_URL, settings.MEDIA_URL, item or '')
 

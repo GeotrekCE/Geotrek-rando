@@ -57,6 +57,7 @@
         <link rel="stylesheet" href="{% static "css/vendor/chosen.css" %}">
         <link rel="stylesheet" href="{% static "css/vendor/MarkerCluster.css" %}">
         <link rel="stylesheet" href="{% static "css/vendor/leaflet.label.css" %}">
+        <link rel="stylesheet" href="{% static "css/vendor/L.Control.Sidebar.css" %}">
         <link rel="stylesheet" href="{% static "css/style.css" %}">
         {% endcompress %}
 
@@ -88,7 +89,7 @@
             <div id="mainmap"
                  data-treks-url="{% locale_url request.LANGUAGE_CODE "core:fileserve" treks_url %}"
                  data-treks-extent="{{ map_extent }}"
-                 data-tiles-main-maxzoom="{{ TILES_MAIN_MAXZOOM }}"></div>
+                 data-switch-detail-zoom="{{ SWITCH_DETAIL_ZOOM }}"></div>
         </div>
         <!-- container -->
 
@@ -114,6 +115,7 @@
         <script src="{% static "js/vendor/jquery.sparkline.min.js" %}"></script>
         <script src="{% static "js/vendor/jquery.pjax.js" %}"></script>
         <script src="{% static "js/vendor/jquery.smartresize.js" %}"></script>
+        <script src="{% static "js/vendor/jquery.hoverIntent.js" %}"></script>
         {% leaflet_js %}
         <script type="text/javascript">
             window.IMG_URL = "{% static "img" %}"
@@ -134,6 +136,8 @@
         <script src="{% static "js/vendor/leaflet.spin.js" %}"></script>
         <script src="{% static "js/vendor/leaflet.ajax.js" %}"></script>
         <script src="{% static "js/vendor/leaflet.layerindex.js" %}"></script>
+        <script src="{% static "js/vendor/leaflet.overintent.js" %}"></script>
+        <script src="{% static "js/vendor/L.Control.Sidebar.js" %}"></script>
         <script src="{% static "js/vendor/jquery.easing-custom.js" %}"></script>
 
         <script src="{% static "js/ui.js" %}"></script>

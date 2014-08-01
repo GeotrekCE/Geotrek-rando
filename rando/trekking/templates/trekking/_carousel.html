@@ -11,7 +11,7 @@
     {% empty%}
     {% if default == "True" %}
       <div class="item active">
-        <img src="{% overridable "img/default-preview.jpg" %}"/>
+        <img src="{% overridable "img/default-preview.jpg" %}" alt="{% trans "Preview" %}"/>
       </div>
     {% endif %}
     {% endfor %}

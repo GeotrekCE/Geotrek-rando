@@ -130,7 +130,7 @@ TEMPLATE_DIRS = (
     # "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(PROJECT_PATH, 'templates')
+    os.path.join(PROJECT_PATH, 'templates'),
 )
 
 INSTALLED_APPS = (
@@ -162,6 +162,7 @@ FLATPAGES_POLICY_PAGE = 1
 
 FILTERS_HASH_ENABLED = True
 FILTER_ASCENT_VALUES = (300, 600, 1000, 1400)
+FILTER_DURATION_VALUES = [('1/2', 4), ('1 day', 10), ('> 2', 10.01)]
 
 MIN_BYTE_SYZE = 10
 
@@ -179,7 +180,7 @@ LEAFLET_CONFIG = {
     "NO_GLOBALS": False
 }
 
-TILES_MAIN_MAXZOOM = 12
+SWITCH_DETAIL_ZOOM = 12
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

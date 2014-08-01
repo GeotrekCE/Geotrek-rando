@@ -18,16 +18,14 @@ class HomeView(PJAXResponseMixin, TemplateView):
         lang = self.request.LANGUAGE_CODE
         alltreks = Trek.objects.filter(language=lang).all()
         if len(alltreks) == 0:
-            logger.error("No trek found.")
+            logger.warn("No trek found for lang %s." % lang)
 
         context = super(HomeView, self).get_context_data(**kwargs)
         self._add_choices_values(alltreks, context)
 
-        duration_levels = [
-            {'label': '1/2', 'value': 4},
-            {'label': _('1 day'), 'value': 10},
-            {'label': u'> 2', 'value': 10.1},
-        ]
+        duration_levels = []
+        for (label, duration) in settings.FILTER_DURATION_VALUES:
+            duration_levels.append({'label': _(label), 'value': duration})
 
         altitude_levels = []
         for i, ascent in enumerate(settings.FILTER_ASCENT_VALUES):
@@ -113,6 +111,10 @@ class TrekView(PJAXResponseMixin, BaseTrekView):
         context = super(TrekView, self).get_context_data(**kwargs)
         context['trek'] = obj
         context['thumbnail'] = self.request.build_absolute_uri(obj.properties.thumbnail)
+
+        context['trek_has_related'] = (len(obj.properties.relationships_departure) > 0 or
+                                       len(obj.properties.relationships_edge) > 0 or
+                                       len(obj.properties.relationships_circuit))
 
         pois = obj.pois.all()
         context['pois'] = pois

@@ -267,6 +267,9 @@ Trek filters
 Ascent filter step values can be controlled with `FILTER_ASCENT_VALUES`, which
 shall be a list of integer values expressed in meters.
 
+Duration filters labels and values can be controlled with ``FILTER_DURATION_VALUES``,
+which shall be a list of tuples ``('label', value)``, with values expressed in hours.
+
 
 Map elements
 ------------
@@ -508,6 +511,8 @@ CREDITS
 * *Binoculars* by Creatorid'immagine from the Noun Project
 * *Mont Valier, Couserans*, Wikimedia by Valier
 * *Bus-Stop* by Pierre-Luc Auclair from The Noun Project
+* *Distance* by Tommy Lau from The Noun Project
+* *Ascend* by Michael Kussmaul from The Noun Project
 
 =======
 AUTHORS

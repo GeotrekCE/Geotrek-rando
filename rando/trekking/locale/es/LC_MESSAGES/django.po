@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-25 18:57+0200\n"
+"POT-Creation-Date: 2014-06-28 12:30+0200\n"
 "PO-Revision-Date: 2013-06-16 19:06+0100\n"
 "Last-Translator: Pedro Ramos Artiles <pedro.ramosartiles@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,26 +83,26 @@ msgstr ""
 msgid "Duration"
 msgstr "Duración"
 
-msgid "Difficulty"
-msgstr "Dificultad"
-
-msgid "Ascent"
-msgstr "Desnivel"
-
 msgid "Total Length"
 msgstr "Longitud total"
 
-msgid "Route"
-msgstr "Recorrido"
-
-msgid "Valleys"
-msgstr "Valles"
+msgid "Ascent"
+msgstr "Desnivel"
 
 msgid "Uses"
 msgstr "Usos"
 
 msgid "Thematic"
 msgstr "Temática"
+
+msgid "Difficulty"
+msgstr "Dificultad"
+
+msgid "Route"
+msgstr "Recorrido"
+
+msgid "Valleys"
+msgstr "Valles"
 
 msgid "Disabled-friendly infrastructures"
 msgstr "Equipos para minusválidos"
@@ -140,10 +140,16 @@ msgstr "Max"
 msgid "Distance (m)"
 msgstr "Distancia (m)"
 
+msgid "Advice"
+msgstr "Recomendación"
+
 msgid "See also"
 msgstr "Mas información"
 
 msgid "Marks"
+msgstr "Marcas"
+
+msgid "Markings"
 msgstr "Marcas"
 
 msgid "Related treks"
@@ -157,9 +163,6 @@ msgstr "En el tramo"
 
 msgid "Sharing circuit"
 msgstr "En el recorrido"
-
-msgid "Advice"
-msgstr "Recomendación"
 
 msgid "On the way..."
 msgstr "En el camino..."

@@ -2,6 +2,50 @@
 CHANGELOG
 =========
 
+1.30a (2014-06-28)
+------------------
+
+**Alpha status**
+
+* Not extensively tested with Geotrek<=0.23
+* Responsive design not extensively tested (long names etc.)
+
+**Breaking changes**
+
+* ``TILES_MAIN_MAXZOOM`` setting was renamed to ``SWITCH_DETAIL_ZOOM`` (fixes #176)
+
+:notes:
+
+    In order to limit the zoom level on maps, use this configuration :
+    ::
+        LEAFLET_CONFIG['MAX_ZOOM'] = 17
+
+**New features**
+
+* Now show pictograms of difficulty, route and duration when available
+* Now show trek markings ("balisage") from trek networks
+* Now show points of reference for treks (fixes #180)
+* Complete rework of POIs list and map interaction (fixes #124)
+  - Removed POI list accordions
+  - Removed POI jump and uncluster on hover in list
+  - Removed pictures carousels from POI list
+  - Removed POI marker popup
+  - Now show POI pictures in a lightbox
+* Changed apparence of trek identity detail panel, now with icons
+* Duration filters labels and values can now be customized via the ``FILTER_DURATION_VALUES``
+  setting
+* Show satellite layer in feedback form (fixes #170)
+
+**Minor changes**
+
+* Map help texts now show up on top
+* Trek detail map does not fit information desks bounds by default
+* Trek detail map does not fit POIs bounds by default
+* Increased detail map height on big screens
+* Added settings to control most icons sizes
+* Tooltips for layer switcher do not wrap anymore
+
+
 1.29.4 (2014-08-01)
 -------------------
 
@@ -12,6 +56,7 @@ CHANGELOG
 * Fix top position of static pages in responsive mode (ref #181)
 
 **Thanks Felix Merzeau**, for the first external contributions !
+
 
 1.29.3 (2014-07-22)
 -------------------
