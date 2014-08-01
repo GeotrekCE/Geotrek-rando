@@ -994,7 +994,6 @@ header #lang-switch {
 #feedbackmap .helpclic {
   color: #ffffff;
   z-index: 5;
-  bottom: 0px;
   position: absolute;
   background-color: rgba(35, 34, 34, 0.5);
   padding-left: 10px;
@@ -2249,6 +2248,9 @@ p.teaser {
 #popup-feedback label.mandatory:after {
   content: "*";
   color: red;
+}
+#popup-feedback .helpclic {
+  padding-left: 45px;
 }
 ul.errorlist {
   color: red;
