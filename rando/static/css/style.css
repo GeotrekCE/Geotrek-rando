@@ -2171,6 +2171,11 @@ ul.errorlist {
     margin-left: 399px;
   }
 }
+@media (max-width: 767px) {
+  #mainmap .leaflet-left .leaflet-control.simple-layer-switcher {
+    margin-left: 5px;
+  }
+}
 #mainmap.leaflet-container.fullwidth .leaflet-control.simple-layer-switcher {
   margin-left: 30px;
 }

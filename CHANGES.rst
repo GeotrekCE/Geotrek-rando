@@ -8,6 +8,8 @@ CHANGELOG
 * Improved layout of information desks, added mailto link (fixes #166)
 * Fix apparence of tourism popups when property is null (fixes #145)
 * Remove feedback button in responsive mode (fixes #174)
+* Fix position of layer switchers in responsive mode (ref #181).
+  **Thanks Felix Merzeau**, for this first external contribution !
 
 
 1.29.3 (2014-07-22)
