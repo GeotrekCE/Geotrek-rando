@@ -2,7 +2,7 @@
 CHANGELOG
 =========
 
-1.29.4 (unreleased)
+1.29.4 (2014-08-01)
 -------------------
 
 * Improved layout of information desks, added mailto link (fixes #166)
