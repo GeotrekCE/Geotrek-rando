@@ -34,9 +34,11 @@ CHANGELOG
 * Changed apparence of trek identity detail panel, now with icons
 * Duration filters labels and values can now be customized via the ``FILTER_DURATION_VALUES``
   setting
+* Show satellite layer in feedback form (fixes #170)
 
 **Minor changes**
 
+* Map help texts now show up on top
 * Trek detail map does not fit information desks bounds by default
 * Trek detail map does not fit POIs bounds by default
 * Increased detail map height on big screens
