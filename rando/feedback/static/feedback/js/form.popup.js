@@ -100,8 +100,10 @@ $(window).on("view:detail", function (e) {
 
         event.preventDefault();
 
-        $('#popup-feedback').on('hidden', function () {
-            $(this).find('form').remove();
+        $('#popup-feedback').on('hidden', function (e) {
+            if (e.target.id === "popup-feedback") {  // popup close (not tooltip)
+                $(this).find('form').remove();
+            }
         });
 
         $.get(feedbackUrl, function(data) {

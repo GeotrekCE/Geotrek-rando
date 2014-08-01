@@ -449,7 +449,8 @@ L.Control.SwitchBackgroundLayers = L.Control.extend({
 
         this.button = L.DomUtil.create('a', className, this._container);
         this.button.setAttribute('title', gettext('Show satellite'));
-        $(this.button).tooltip({placement: 'right'});
+        $(this.button).tooltip({placement: 'right',
+                                container: map._container});
 
         L.DomEvent.disableClickPropagation(this.button);
         L.DomEvent.on(this.button, 'click', function (e) {
@@ -477,7 +478,8 @@ L.Control.SwitchBackgroundLayers = L.Control.extend({
         }
 
         $(this.button).tooltip('destroy');
-        $(this.button).tooltip({placement: 'right'});
+        $(this.button).tooltip({placement: 'right',
+                                container: this.map._container});
     }
 
 });
@@ -531,14 +533,8 @@ L.Control.TogglePOILayer = L.Control.extend({
 
 $(window).on('map:init', function (e) {
     var data = e.detail || e.originalEvent.detail,
-        map = data.map,
-        containerId = map._container.id;
-
-    // Show tourism layers everywhere except on feedback form
-    if (containerId === 'feedbackmap')
-        return;
-
-    var control = map.tourismLayers = new L.Control.SwitchBackgroundLayers();
+        map = data.map;
+    var control = new L.Control.SwitchBackgroundLayers();
     control.addTo(map);
 });
 
