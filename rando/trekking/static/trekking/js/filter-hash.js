@@ -40,9 +40,11 @@ $(document).ready(function() {
 
         // Refresh URL hash, so that users can copy and paste URLs with filters
         var compressed = LZString.compress(serialized);
-        watch = false;
-        window.location.replace('#' + (serialized.length > 0 ? stringToHex(compressed) : ''));
-        watch = true;
+        if (!/backpack/.test(window.location.hash)) {
+            watch = false;
+            window.location.replace('#' + (serialized.length > 0 ? stringToHex(compressed) : ''));
+            watch = true;
+        }
     }
 
     /**

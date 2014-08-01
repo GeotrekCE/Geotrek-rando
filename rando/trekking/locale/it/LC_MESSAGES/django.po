@@ -150,6 +150,10 @@ msgstr "Ulteriori informazioni"
 msgid "Markings"
 msgstr "Marcature"
 
+msgid "Marks"
+msgstr "Marcature"
+
+
 msgid "Related treks"
 msgstr "Itinerari collegati"
 

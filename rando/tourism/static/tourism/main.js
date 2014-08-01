@@ -94,10 +94,13 @@
             if (marker._popup)
                 return;
 
-            var defaults = {title: '', description: '',
-                            website: '', phone: ''},
-                props = L.Util.extend(defaults,
-                                      marker.feature.properties);
+            var props = marker.feature.properties;
+
+            // Set default values to empty strings
+            var expected = ['title', 'description', 'website', 'phone'];
+            for (var i=0, n = expected.length; i < n; i++ ) {
+                props[expected[i]] = props[expected[i]] || '';
+            }
 
             props.picture_url = props.pictures && props.pictures.length > 0 ?
                                 props.pictures[0].url : '';

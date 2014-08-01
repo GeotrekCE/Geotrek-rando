@@ -14,7 +14,9 @@ $(window).on("view:detail", function(e) {
             id: 'frame1',
             frameBorder: 0,
             src: url
-        }).appendTo($modalBody);
+        })
+        .load(iframeLoaded)
+        .appendTo($modalBody);
 
         var $iframe = $popup.find('iframe');
 
@@ -59,5 +61,12 @@ $(window).on("view:detail", function(e) {
                 }
             }
         });
+
+        function iframeLoaded() {
+            // Move trek title from iframe to popup container
+            $modalBody.find('.trek-info').remove();
+            var $infos = $($iframe.get(0).contentWindow.document).find('.trek-info').remove();
+            $infos.prependTo($modalBody);
+        }
     });
 });

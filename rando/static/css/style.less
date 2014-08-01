@@ -330,7 +330,7 @@ a {
     width: 80% !important;
     padding: 0;
     position: absolute !important;
-    top: 48px !important;
+    top: @mobileHeaderHeight !important;
     bottom: 0 !important;
     height: auto !important;
     background: none;
@@ -367,8 +367,16 @@ a {
     display: block;
   }
 
-  #pjax-content  #navigationbar {
-    display: none;
+  .container-content {
+    #pjax-content {
+      #navigationbar {
+        display: none;
+      }
+
+      .page-content {
+        top: @mobileHeaderHeight;
+      }
+    }
   }
 
   #navigationbar {
@@ -520,7 +528,7 @@ a {
     overflow: hidden;
     right: 0;
     bottom: auto;
-    top: 48px;
+    top: @mobileHeaderHeight;
     display: block;
     border-right: none;
     padding-top: 0;
@@ -585,11 +593,14 @@ a {
   #toolbox a.view3d {
     display: none;
   }
+  #toolbox a.feedback {
+    display: none;
+  }
 
   .page-content {
     position: absolute;
     overflow: auto;
-    top: 48px;
+    top: @mobileHeaderHeight;
     bottom: 0;
     -webkit-overflow-scrolling: touch;
     z-index: 0;

@@ -2065,6 +2065,14 @@ p.teaser {
 #trek-information-desk .information-desk {
   border-bottom: #f89406 solid 1px;
 }
+#trek-information-desk .information-desk .description {
+  margin-bottom: 0.8em;
+}
+#trek-information-desk .information-desk img {
+  float: right;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
 #trek-information-desk .information-desk:last-of-type {
   border-bottom: none;
 }
@@ -2254,6 +2262,11 @@ ul.errorlist {
     margin-left: 399px;
   }
 }
+@media (max-width: 767px) {
+  #mainmap .leaflet-left .leaflet-control.simple-layer-switcher {
+    margin-left: 5px;
+  }
+}
 #mainmap.leaflet-container.fullwidth .leaflet-control.simple-layer-switcher {
   margin-left: 30px;
 }
@@ -2337,6 +2350,7 @@ ul.errorlist {
 }
 #popup-view3d .modal-body .trek-info {
   font-size: 2em;
+  float: left;
 }
 #popup-view3d .modal-body .controls {
   position: absolute;
@@ -2467,8 +2481,11 @@ ul.errorlist {
   header #navigationbar {
     display: block;
   }
-  #pjax-content #navigationbar {
+  .container-content #pjax-content #navigationbar {
     display: none;
+  }
+  .container-content #pjax-content .page-content {
+    top: 48px;
   }
   #navigationbar {
     position: static!important;
@@ -2673,6 +2690,9 @@ ul.errorlist {
     opacity: 0.8;
   }
   #toolbox a.view3d {
+    display: none;
+  }
+  #toolbox a.feedback {
     display: none;
   }
   .page-content {

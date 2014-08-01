@@ -32,6 +32,28 @@ CHANGELOG
 * Increased detail map height on big screens
 * Added settings to control most icons sizes
 
+1.29.4 (2014-08-01)
+-------------------
+
+* Improved layout of information desks, added mailto link (fixes #166)
+* Fix apparence of tourism popups when property is null (fixes #145)
+* Remove feedback button in responsive mode (fixes #174)
+* Fix position of layer switchers in responsive mode (ref #181).
+* Fix top position of static pages in responsive mode (ref #181)
+
+**Thanks Felix Merzeau**, for the first external contributions !
+
+
+1.29.3 (2014-07-22)
+-------------------
+
+**BUG fixes**
+
+* Fix redirection of policy page (fixes #172)
+* Fix translation of meters in ascent filter (fixes #171)
+* Fix favorites navigation from detail and static pages (fixes #175)
+* Fix trek title in 3D popup (fixes #177)
+
 
 1.29.2 (2014-06-28)
 -------------------

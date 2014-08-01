@@ -2,9 +2,6 @@
 <div id="popup-view3d" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="popup-view3d" aria-hidden="true" data-url="{% locale_url request.LANGUAGE_CODE "view3d:view3d" "empty" %}">
     <div class="view3d modal-body">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <div class="trek-info">
-            {{ trek.properties.name }}
-        </div>
         <div class="controls">
             <div><a href="#" class="btn toggle-fullscreen">{% trans "Fullscreen" %}</a></div>
             <div style="display: none">

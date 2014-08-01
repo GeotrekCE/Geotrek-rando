@@ -34,9 +34,8 @@ msgstr ""
 msgid "> %sm"
 msgstr ""
 
-#, fuzzy, python-format
 msgid "%sm"
-msgstr "%s min."
+msgstr ""
 
 msgid "Back to list"
 msgstr "Volver a la lista"
@@ -146,6 +145,9 @@ msgstr "Recomendación"
 
 msgid "See also"
 msgstr "Mas información"
+
+msgid "Marks"
+msgstr "Marcas"
 
 msgid "Markings"
 msgstr "Marcas"

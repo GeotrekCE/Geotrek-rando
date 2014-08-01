@@ -40,7 +40,9 @@ function view_home() {
         $(this).parents('ul.nav-tabs').find('span.badge-warning').removeClass('badge-warning');
         $(this).find('span.badge').addClass('badge-warning');
     });
+
     // Show active tab
+    // (see filter-hash.js)
     if (/results|backpack/.test(window.location.hash)) {
         $('#tab-' + window.location.hash.slice(1) + ' a').click();
     }
