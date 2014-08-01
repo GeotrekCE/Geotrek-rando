@@ -1874,23 +1874,6 @@ p.tab-content-empty a.change-lang {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-#themes,
-#usages,
-.topology-info {
-  display: inline-block;
-  color: #877f84;
-  vertical-align: top;
-}
-#themes ul,
-#usages ul,
-.topology-info ul {
-  margin: 0;
-  text-align: center;
-}
-#usages {
-  margin-left: 30px;
-  margin-right: 20px;
-}
 #toolbox {
   margin-right: 15px;
   margin-bottom: 0;
@@ -2017,29 +2000,36 @@ p.teaser {
 .detail-content p.image {
   text-align: center;
 }
-#trek-identity div.infos {
-  float: left;
-  margin: 0 50px;
-}
 #trek-identity p {
   margin-bottom: 0;
   color: #877f84;
   text-align: left;
 }
 #trek-identity span.value {
+  /* Geotrek 0.23 layout */
   color: #f89406;
 }
-#trek-identity .difficulty,
-#trek-identity .route,
-#trek-identity .duration {
+#trek-identity .info {
   display: inline-block;
   text-align: center;
   margin-right: 10px;
 }
-#trek-identity .difficulty span,
-#trek-identity .route span,
-#trek-identity .duration span {
+#trek-identity .info span {
   display: block;
+}
+#trek-identity #themes,
+#trek-identity #usages {
+  color: #877f84;
+  vertical-align: top;
+}
+#trek-identity #themes ul,
+#trek-identity #usages ul {
+  margin: 0;
+  text-align: center;
+}
+#trek-identity #usages {
+  margin-left: 30px;
+  margin-right: 20px;
 }
 .leaflet-marker-icon.point-reference {
   background-color: red;

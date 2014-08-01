@@ -72,38 +72,45 @@
         {# New in Geotrek 0.24 #}
 
           <div id="trek-identity">
-            <div class="duration">
+            <div class="info duration" title="{% trans "Duration" %}">
               <span>{{ object.properties.duration_pretty }}</span>
               <div class="pictogram medium">
                 <img src="{% static "img/duration.svg" %}" alt="{% trans "Duration" %}"/>
               </div>
             </div>
             {% if object.properties.difficulty %}
-            <div class="difficulty">
+            <div class="info difficulty" title="{% trans "Difficulty" %}">
               <span>{{ trek.properties.difficulty.label }}</span>
               {{ trek.properties.difficulty|pictogram:"medium" }}
             </div>
             {% endif %}
             {% if object.properties.route %}
-            <div class="route">
+            <div class="info route" title="{% trans "Route" %}">
               <span>{{ trek.properties.route.label }}</span>
               {{ trek.properties.route|pictogram:"medium" }}
             </div>
             {% endif %}
-
-            <div class="topology-info">
-              <p>{% trans "Total Length" %} : <span class="value">{{ object.properties.length|kilo|floatformat }} km</span></p>
-              <p>{% trans "Ascent" %} : <span class="value">{{ object.properties.ascent }} m</span></p>
+            <div class="info distance" title="{% trans "Total Length" %}">
+              <span>{{ object.properties.length|kilo|floatformat }}&#x202f;km</span>
+              <div class="pictogram medium">
+                <img src="{% static "img/distance.svg" %}" alt="{% trans "Total Length" %}"/>
+              </div>
+            </div>
+            <div class="info ascent" title="{% trans "Ascent" %}">
+              <span>{{ object.properties.ascent }}&#x202f;m</span>
+              <div class="pictogram medium">
+                <img src="{% static "img/ascent.svg" %}" alt="{% trans "Ascent" %}"/>
+              </div>
             </div>
 
             {% for usage in object.properties.usages %}
-              {% if forloop.first %}<div id="usages">{% trans "Uses" %}<ul>{% endif %}
+              {% if forloop.first %}<div class="info" id="usages">{% trans "Uses" %}<ul>{% endif %}
               <li>{{ usage|pictogram:"medium" }}</li>
               {% if forloop.last %}</ul></div>{% endif %}
             {% endfor %}
 
             {% for theme in object.properties.themes %}
-              {% if forloop.first %}<div id="themes">{% trans "Thematic" %}<ul>{% endif %}
+              {% if forloop.first %}<div class="info" id="themes">{% trans "Thematic" %}<ul>{% endif %}
               <li>{{ theme|pictogram:"medium" }}</li>
               {% if forloop.last %}</ul></div>{% endif %}
             {% endfor %}

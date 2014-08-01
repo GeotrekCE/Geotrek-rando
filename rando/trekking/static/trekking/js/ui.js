@@ -218,6 +218,7 @@ function view_detail() {
 
     // Tooltips
     $('#usages div, #themes div').tooltip();
+    $('#trek-identity .info').tooltip();
     $('a.print.disabled').tooltip({placement: 'left'});
 }
 

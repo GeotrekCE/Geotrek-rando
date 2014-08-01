@@ -511,6 +511,8 @@ CREDITS
 * *Binoculars* by Creatorid'immagine from the Noun Project
 * *Mont Valier, Couserans*, Wikimedia by Valier
 * *Bus-Stop* by Pierre-Luc Auclair from The Noun Project
+* *Distance* by Tommy Lau from The Noun Project
+* *Ascend* by Michael Kussmaul from The Noun Project
 
 =======
 AUTHORS

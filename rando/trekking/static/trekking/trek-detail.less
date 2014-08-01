@@ -28,21 +28,6 @@
   }
 }
 
-#themes, #usages, .topology-info {
-  display: inline-block;
-  color: @themesText;
-  vertical-align: top;
-
-  ul {
-    margin: 0;
-    text-align: center;
-  }
-}
-
-#usages {
-  margin-left: 30px;
-  margin-right: 20px;
-}
 
 #toolbox {
   margin-right: 15px;
@@ -200,11 +185,6 @@ p.teaser {
 }
 
 #trek-identity {
-  div.infos {
-    float: left;
-    margin: 0 50px;
-  }
-
   p {
     margin-bottom: 0;
     color: @identityText;
@@ -212,11 +192,12 @@ p.teaser {
   }
 
   span.value {
+    /* Geotrek 0.23 layout */
     color: @mainColor;
   }
 
 
-  .difficulty, .route, .duration {
+  .info {
     display: inline-block;
     text-align: center;
     margin-right: 10px;
@@ -225,8 +206,20 @@ p.teaser {
     }
   }
 
-}
+  #themes, #usages {
+    color: @themesText;
+    vertical-align: top;
+    ul {
+      margin: 0;
+      text-align: center;
+    }
+  }
 
+  #usages {
+    margin-left: 30px;
+    margin-right: 20px;
+  }
+}
 
 
 .leaflet-marker-icon.point-reference {
