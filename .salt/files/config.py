@@ -55,4 +55,8 @@ LEAFLET_CONFIG = {{data.LEAFLET_CONFIG}}
 
 # In preprod
 {{renderbool('PREPROD')}}
+
+# Static pages titles
+FLATPAGES_TITLES = {{data.FLATPAGES_TITLES}}
+
 # vim:set et sts=4 ts=4 tw=80:
