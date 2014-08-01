@@ -2390,8 +2390,11 @@ ul.errorlist {
   header #navigationbar {
     display: block;
   }
-  #pjax-content #navigationbar {
+  .container-content #pjax-content #navigationbar {
     display: none;
+  }
+  .container-content #pjax-content .page-content {
+    top: 48px;
   }
   #navigationbar {
     position: static!important;
