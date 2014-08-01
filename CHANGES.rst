@@ -14,6 +14,12 @@ CHANGELOG
 
 * ``TILES_MAIN_MAXZOOM`` setting was renamed to ``SWITCH_DETAIL_ZOOM`` (fixes #176)
 
+:notes:
+
+    In order to limit the zoom level on maps, use this configuration :
+    ::
+        LEAFLET_CONFIG['MAX_ZOOM'] = 17
+
 **New features**
 
 * Now show pictograms of difficulty, route and duration when available
