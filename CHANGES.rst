@@ -2,13 +2,8 @@
 CHANGELOG
 =========
 
-1.30a (2014-06-28)
-------------------
-
-**Alpha status**
-
-* Not extensively tested with Geotrek<=0.23
-* Responsive design not extensively tested (long names etc.)
+1.30 (2014-08-01)
+-----------------
 
 **Breaking changes**
 
