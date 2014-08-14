@@ -40,6 +40,11 @@ class Trek(GeoJSONModel):
                                   keywords)
 
     @property
+    def attachments(self):
+        return AttachmentFile.objects.filter(trek__pk=self.pk,
+                                             language=self.objects.language)
+
+    @property
     def pois(self):
         return POIs.objects.filter(trek__pk=self.pk,
                                    language=self.objects.language)
