@@ -74,6 +74,7 @@
     <script src="{% static "view3d/Rando.Trek.js" %}"></script>
     <script src="{% static "view3d/Rando.TileContainer.js" %}"></script>
     <script src="{% static "view3d/Rando.CameraContainer.js" %}"></script>
+    <script src="{% static "view3d/Rando.CameraComputer.js" %}"></script>
     <script src="{% static "view3d/Rando.BirdCamera.js" %}"></script>
     <script src="{% static "view3d/Rando.ExamineCamera.js" %}"></script>
     <script src="{% static "view3d/Rando.HikerCamera.js" %}"></script>
@@ -83,6 +84,7 @@
       data-profile-url="{% url "core:fileserve" object.properties.altimetric_profile %}"
       data-poi-url="{% url "core:fileserve" object.properties.poi_layer %}"
       data-static-url="{% static "view3d/" %}"
+      data-tiles-number-limit="{{ view.TILES_NUMBER_LIMIT }}"
       data-tiles-url="{{ view.tiles.url }}">
     <div class="trek-info">
         {{ object.properties.name }}
