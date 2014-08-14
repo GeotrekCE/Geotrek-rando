@@ -156,6 +156,8 @@ INSTALLED_APPS = (
 
 COMPRESS_PARSER = 'compressor.parser.HtmlParser'
 
+MIN_BYTE_SYZE = 10
+
 FLATPAGES_ROOT = os.path.join(MEDIA_ROOT, 'pages')
 FLATPAGES_TITLES = {}
 FLATPAGES_POLICY_PAGE = 1
@@ -164,7 +166,8 @@ FILTERS_HASH_ENABLED = True
 FILTER_ASCENT_VALUES = (300, 600, 1000, 1400)
 FILTER_DURATION_VALUES = [('1/2', 4), ('1 day', 10), ('> 2', 10.01)]
 
-MIN_BYTE_SYZE = 10
+FILELIST_ENABLED = True
+FILELIST_MIMETYPES = ['audio', 'video', 'application/pdf']
 
 LEAFLET_CONFIG = {
     "TILES": [
