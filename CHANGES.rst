@@ -2,7 +2,7 @@
 CHANGELOG
 =========
 
-1.30.1 (unreleased)
+1.30.1 (2014-08-14)
 -------------------
 
 * Fix crash in synchronization when link has no category
