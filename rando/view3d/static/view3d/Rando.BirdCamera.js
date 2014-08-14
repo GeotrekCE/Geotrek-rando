@@ -1,17 +1,17 @@
 /*******************************************************************************
  * Rando.BirdCamera.js
- * 
- * BirdCamera class : 
+ *
+ * BirdCamera class :
  *  It is a camera which look like the FreeCamera of BabylonJS.
  *      https://github.com/BabylonJS/Babylon.js/wiki/05-Cameras.
- * 
- *  The differences are : 
- *      - permites to translate it of world's X and Z axis instead of 
- *  locale's one. 
- *      - there is a wheel zoom. 
- * 
+ *
+ *  The differences are :
+ *      - permites to translate it of world's X and Z axis instead of
+ *  locale's one.
+ *      - there is a wheel zoom.
+ *
  *  It gives the impression of flying. That's why it is called BirdCamera
- *  
+ *
  * @author: Célian GARCIA
  ******************************************************************************/
 
@@ -53,8 +53,6 @@ var RANDO = RANDO || {};
         this._lookAtTemp = BABYLON.Matrix.Zero();
         this._tempMatrix = BABYLON.Matrix.Zero();
         this._positionAfterZoom = BABYLON.Vector3.Zero();
-
-        RANDO.BirdCamera.prototype._initCache.call(this);
     };
 
     RANDO.BirdCamera.prototype = Object.create(BABYLON.Camera.prototype);
@@ -82,6 +80,8 @@ var RANDO = RANDO || {};
 
     // Cache
     RANDO.BirdCamera.prototype._initCache = function () {
+        BABYLON.Camera.prototype._initCache.call(this);
+
         this._cache.lockedTarget = new BABYLON.Vector3(Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE);
         this._cache.rotation = new BABYLON.Vector3(Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE);
     };
@@ -160,15 +160,15 @@ var RANDO = RANDO || {};
     };
 
     // Controls
-    RANDO.BirdCamera.prototype.attachControl = function (canvas, noPreventDefault) {
+    RANDO.BirdCamera.prototype.attachControl = function (element, noPreventDefault) {
         var previousPosition;
         var that = this;
         var engine = this._scene.getEngine();
 
-        if (this._attachedCanvas) {
+        if (this._attachedElement) {
             return;
         }
-        this._attachedCanvas = canvas;
+        this._attachedElement = element;
 
         if (this._onMouseDown === undefined) {
             this._onMouseDown = function (evt) {
@@ -288,46 +288,62 @@ var RANDO = RANDO || {};
             };
         }
 
-        canvas.addEventListener("mousedown", this._onMouseDown, false);
-        canvas.addEventListener("mouseup", this._onMouseUp, false);
-        canvas.addEventListener("mouseout", this._onMouseOut, false);
-        canvas.addEventListener("mousemove", this._onMouseMove, false);
-        window.addEventListener('mousewheel', this._onWheel, false);
-        window.addEventListener('DOMMouseScroll', this._onWheel);
-        window.addEventListener("keydown", this._onKeyDown, false);
-        window.addEventListener("keyup", this._onKeyUp, false);
-        window.addEventListener("blur", this._onLostFocus, false);
+        element.addEventListener("mousedown", this._onMouseDown, false);
+        element.addEventListener("mouseup", this._onMouseUp, false);
+        element.addEventListener("mouseout", this._onMouseOut, false);
+        element.addEventListener("mousemove", this._onMouseMove, false);
+        element.addEventListener("mousemove", this._onMouseMove, false);
+        element.addEventListener('mousewheel', this._onWheel, false);
+        element.addEventListener('DOMMouseScroll', this._onWheel, false);
+
+        BABYLON.Tools.RegisterTopRootEvents([
+            { name: "keydown", handler: this._onKeyDown },
+            { name: "keyup", handler: this._onKeyUp },
+            { name: "blur", handler: this._onLostFocus }
+        ]);
     };
 
-    RANDO.BirdCamera.prototype.detachControl = function (canvas) {
-        if (this._attachedCanvas != canvas) {
+    RANDO.BirdCamera.prototype.detachControl = function (element) {
+        if (this._attachedElement != element) {
             return;
         }
 
-        canvas.removeEventListener("mousedown", this._onMouseDown);
-        canvas.removeEventListener("mouseup", this._onMouseUp);
-        canvas.removeEventListener("mouseout", this._onMouseOut);
-        canvas.removeEventListener("mousemove", this._onMouseMove);
-        window.removeEventListener('mousewheel', this._onWheel);
-        window.removeEventListener('DOMMouseScroll', this._onWheel);
-        window.removeEventListener("keydown", this._onKeyDown);
-        window.removeEventListener("keyup", this._onKeyUp);
-        window.removeEventListener("blur", this._onLostFocus);
+        element.removeEventListener("mousedown", this._onMouseDown);
+        element.removeEventListener("mouseup", this._onMouseUp);
+        element.removeEventListener("mouseout", this._onMouseOut);
+        element.removeEventListener("mousemove", this._onMouseMove);
+        element.removeEventListener("mousemove", this._onMouseMove);
+        element.removeEventListener('mousewheel', this._onWheel);
+        element.removeEventListener('DOMMouseScroll', this._onWheel);
 
-        this._attachedCanvas = null;
+        BABYLON.Tools.UnregisterTopRootEvents([
+            { name: "keydown", handler: this._onKeyDown },
+            { name: "keyup", handler: this._onKeyUp },
+            { name: "blur", handler: this._onLostFocus }
+        ]);
+
+        this._attachedElement = null;
         if (this._reset) {
             this._reset();
         }
     };
 
     RANDO.BirdCamera.prototype._collideWithWorld = function (velocity) {
-        this.position.subtractFromFloatsToRef(0, this.ellipsoid.y, 0, this._oldPosition);
+        var globalPosition;
+
+        if (this.parent) {
+            globalPosition = BABYLON.Vector3.TransformCoordinates(this.position, this.parent.getWorldMatrix());
+        } else {
+            globalPosition = this.position;
+        }
+
+        globalPosition.subtractFromFloatsToRef(0, this.ellipsoid.y, 0, this._oldPosition);
         this._collider.radius = this.ellipsoid;
 
-        this._scene._getNewPosition(this._oldPosition, velocity, this._collider, 3, this._newPosition);
+        this.getScene()._getNewPosition(this._oldPosition, velocity, this._collider, 3, this._newPosition);
         this._newPosition.subtractToRef(this._oldPosition, this._diffPosition);
 
-        if (this._diffPosition.length() > BABYLON.Engine.collisionsEpsilon) {
+        if (this._diffPosition.length() > BABYLON.Engine.CollisionsEpsilon) {
             this.position.addInPlace(this._diffPosition);
             if (this.onCollide) {
                 this.onCollide(this._collider.collidedMesh);
@@ -358,8 +374,8 @@ var RANDO = RANDO || {};
 
             this._cameraTransformMatrix = BABYLON.Matrix.RotationY(this.rotation.y);
             BABYLON.Vector3.TransformNormalToRef(
-                this._localDirection, 
-                this._cameraTransformMatrix, 
+                this._localDirection,
+                this._cameraTransformMatrix,
                 this._transformedDirection
             );
             this.moveDirection.addInPlace(this._transformedDirection);
@@ -466,7 +482,7 @@ var RANDO = RANDO || {};
         }
     };
 
-    
+
     RANDO.BirdCamera.prototype.getTarget = function () {
         return this._currentTarget;
     };
