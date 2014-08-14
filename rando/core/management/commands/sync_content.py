@@ -65,7 +65,7 @@ def recursive_copy(root_src_dir, root_dst_dir):
 
 class InputFile(object):
 
-    def __init__(self, url, language=None, client=None, stdout=None, stderr=None):
+    def __init__(self, url, store=None, language=None, client=None, stdout=None, stderr=None):
         url = url[1:] if url.startswith('/') else url
         self.url = url
 
@@ -75,6 +75,12 @@ class InputFile(object):
         self.stderr = stderr or sys.stderr
 
         unquoted = urllib2.unquote(self.url)
+
+        # Allow to store at a different place
+        # (e.g. url is ``/object/18/file/`` and local is ``/path-18.json``)
+        if store is not None:
+            unquoted = store
+
         self.path = join(settings.INPUT_DATA_ROOT, self.language, unquoted)
         # All files are downloaded in a separate folder.
         # And copied to INPUT_DATA_ROOT if whole sync is successful.
