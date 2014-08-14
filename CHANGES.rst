@@ -2,6 +2,15 @@
 CHANGELOG
 =========
 
+1.31 (unreleased)
+-----------------
+
+**New features**
+
+* All attachments of treks can now be shown in detail page (fixes #131).
+  By default, only audio, video and PDFs are shown, see settings ``FILELIST_ENABLED``
+  and ``FILELIST_MIMETYPES``.
+
 1.30 (2014-08-01)
 -----------------
 

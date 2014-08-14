@@ -8,11 +8,15 @@ from django.db import models
 from django.utils.translation import get_language, ugettext_lazy as _
 from django.utils.html import strip_tags
 
-from rando.core.models import GeoJSONModel
+from rando.core.models import JSONModel, GeoJSONModel
 
 
 class POIs(GeoJSONModel):
     filepath = 'api/trek/{trek__pk}/pois.geojson'
+
+
+class AttachmentFile(JSONModel):
+    filepath = 'api/trek/{trek__pk}/attachments.json'
 
 
 class Trek(GeoJSONModel):
@@ -34,6 +38,11 @@ class Trek(GeoJSONModel):
         return u"%s - %s - %s" % (title,
                                   self.properties.name,
                                   keywords)
+
+    @property
+    def attachments(self):
+        return AttachmentFile.objects.filter(trek__pk=self.pk,
+                                             language=self.objects.language)
 
     @property
     def pois(self):

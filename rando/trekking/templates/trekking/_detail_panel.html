@@ -243,9 +243,8 @@
               <h4>{% trans "See also" %}</h4>
 
               <div id="trek-links">
-                {% regroup object.properties.web_links by category as weblinks %}
-
                 <ul>
+                {% regroup object.properties.web_links by category as weblinks %}
                 {% for weblink in weblinks %}
                     <h5><img src="{{ weblink.grouper.pictogram }}"> {{ weblink.grouper.label }}</h5>
                     <li>
@@ -258,6 +257,20 @@
                     {% endfor %}
                     </li>
                 {% endfor %}
+
+                {% if object.attachments.all|length > 0 %}
+                  <h5>{% trans "Downloads" %}</h5>
+                  <li>
+                  {% regroup object.attachments.all by attachment.mimetype as attachments %}
+                  {% for attachment in attachments %}
+                    <ul>
+                    {% for attachment in attachment.list %}
+                      <li><a target="_blank" href="{{ attachment.url }}">{{ attachment.legend }}</a></li>
+                    {% endfor %}
+                    </ul>
+                  {% endfor %}
+                  </li>
+                {% endif %}
                 </ul>
               </div>
 

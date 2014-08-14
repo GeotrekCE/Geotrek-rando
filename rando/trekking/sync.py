@@ -104,6 +104,34 @@ class InformationDeskInputFile(JsonInputFile):
         return self.serialize_json(content)
 
 
+class AttachmentInputFile(JsonInputFile):
+    def __init__(self, *args, **kwargs):
+        super(AttachmentInputFile, self).__init__(*args, **kwargs)
+
+    def content(self):
+        content = self.reply.json()
+        if content is None:
+            return super(AttachmentInputFile, self).content()
+
+        # Filter attachments, mainly by mimetype
+        filtered = []
+        for attachment in content:
+            # Images come through pictures list already
+            if attachment['is_image']:
+                continue
+            attachment['url'] = reroot(attachment['url'])
+
+            # Mimetype check (either by first part or complete)
+            main, category = attachment['mimetype']
+            mimetype = '%s/%s' % (main, category)
+            allowed = settings.FILELIST_MIMETYPES
+
+            if main in allowed or mimetype in allowed:
+                filtered.append(attachment)
+
+        return self.serialize_json(filtered)
+
+
 class TrekListInputFile(JsonInputFile):
 
     def __init__(self, **kwargs):
@@ -150,6 +178,14 @@ class TrekListInputFile(JsonInputFile):
             else:
                 properties['information_desks'] = [properties['information_desk']]
 
+            # Download attachments list file
+            url = reroot(properties['filelist_url'])
+            destination = models.AttachmentFile.filepath.format(trek__pk=pk)
+            # Store destination as new official url (e.g. for Geotrek mobile)
+            properties['filelist_url'] = destination
+            f = AttachmentInputFile(url, store=destination, **self.initkwargs)
+            f.pull()
+
             # Add POIs information in list, useful for textual search
             f = POIsInputFile(models.POIs.filepath.format(trek__pk=pk), **self.initkwargs)
             f.pull()
@@ -172,12 +208,12 @@ def sync_content_trekking(sender, **kwargs):
 
     languages = server_settings.languages.available.keys()
     logger.debug("Languages: %s" % languages)
-    for language in languages:
+    for language in languages[:1]:
         inputkwlang = dict(language=language, **input_kwargs)
 
         TrekListInputFile(**inputkwlang).pull()
 
-        for trek in models.Trek.tmp_objects.filter(language=language).all():
+        for trek in models.Trek.tmp_objects.filter(language=language).all()[:1]:
             InputFile(trek.properties.gpx, **inputkwlang).pull_if_modified()
             InputFile(trek.properties.kml, **inputkwlang).pull_if_modified()
 
@@ -226,3 +262,11 @@ def sync_content_trekking(sender, **kwargs):
             for desk in trek.properties.information_desks:
                 if desk and desk.get('photo_url', ''):
                     InputFile(desk.photo_url, **input_kwargs).pull_if_modified()
+
+        #
+        # Fetch attachments
+        if settings.FILELIST_ENABLED:
+            attachments = models.AttachmentFile.tmp_objects.filter(trek__pk=trek.properties.pk,
+                                                                   language=settings.LANGUAGE_CODE)
+            for attachment in attachments.all():
+                InputFile(attachment.url, **input_kwargs).pull_if_modified()
