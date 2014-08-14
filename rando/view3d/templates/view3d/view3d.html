@@ -5,58 +5,13 @@
     <title>{{ object.properties.name }} - {% trans "3D View" %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <style>
-        html, body, canvas {
-            width: 100%;
-            height: 100%;
-            padding: 0;
-            margin: 0;
-        }
-        body {
-            background-color: #00161F;
-            background-image: url('{% static "view3d/img/background.jpg" %}');
-            background-size: 100% 100%;
-            background-repeat: repeat-x;
-        }
-        canvas {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-        }
-        .not-supported {
-            width: 100%;
-            text-align: center;
-            color: white;
-            font-size: 3em;
-        }
-        .branding {
-            background: url({% static "img/makina.png" %}) no-repeat;
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            height: 40px;
-            min-width: 120px;
-        }
-        .attributions {
-            background-color: rgba(255, 255, 255, 0.2);
-            position: absolute;
-            right: 10px;
-            bottom: 10px;
-            height: auto;
-            width: auto;
-            padding: 3px;
-            border-radius: 0.35em;
-            color: white;
-            font-size: 0.8em;
-            font-family: ​​"Helvetica Neue", Helvetica, Arial, sans-serif;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{% static "view3d/main.css" %}" />
 
     <script src="{% static "js/vendor/jquery-1.9.0.min.js" %}"></script>
     <script src="{% static "view3d/vendor/underscore.js" %}"></script>
 
     <!-- Babylon.js -->
-    <script src="{% static "view3d/vendor/babylon.1.11.js" %}"></script>
+    <script src="{% static "view3d/vendor/babylon.1.12.js" %}"></script>
     <script src="{% static "view3d/vendor/babylon.arcRotateCamera.js" %}"></script>
 
     <!-- TweenLite -->
@@ -78,7 +33,6 @@
     <script src="{% static "view3d/Rando.BirdCamera.js" %}"></script>
     <script src="{% static "view3d/Rando.ExamineCamera.js" %}"></script>
     <script src="{% static "view3d/Rando.HikerCamera.js" %}"></script>
-    <script src="{% static "view3d/index.js" %}"></script>
 </head>
 <body data-dem-url="{% url "core:fileserve" object.properties.elevation_area_url %}"
       data-profile-url="{% url "core:fileserve" object.properties.altimetric_profile %}"
@@ -97,8 +51,71 @@
         <div class="attributions">
             {{ view.tiles.attributions|safe }}
         </div>
+
+
+        <div class="controls controls--examine" >
+            <h3>Mode Examine</h3>
+            <span class="controls-description">On peut examiner le terrain en le tournant dans tous les sens.</span>
+            <span> Zoom : <b>Molette souris</b></span>
+            <span> Inclinaison/Rotation : <b>Clic Gauche</b></span>
+            <span> Se déplacer : <img src="{% static "view3d/img/arrows.png" %}"/></span>
+        </div>
+
+        <div class="controls controls--bird" >
+            <h3>Mode Oiseau</h3>
+            <span class="controls-description">On peut survoler le terrain tel un oiseau, tourner la tête, monter, descendre et se déplacer !</span>
+            <span> Zoom : <b>Molette souris</b></span>
+            <span> Tourner regard : <b>Clic Gauche</b></span>
+            <span> Se déplacer : <img src="{% static "view3d/img/arrows.png" %}"/></span>
+        </div>
+
+        <div class="controls controls--hiker" >
+            <h3>Mode Randonneur</h3>
+            <span class="controls-description">Ici on est dans la peau d'un randonneur, on suit sans effort l'avancement de l'itinéraire, en profitant de la vue.</span>
+            <span> Tourner regard : <b>Clic Gauche</b></span>
+            <span> Play/Pause : <b>Espace</b></span>
+            <span> Stop : <b>Entrée</b></span>
+        </div>
+
+        <ul class="camera_switcher">
+            <li class="camera camera--examine camera--disabled" data-camera-id="examine">
+                <span class="camera-icon">
+                    <img src="{% static "view3d/img/camera-examine.svg" %}"></img>
+                </span>
+                <span class="camera-title"> Exam</span>
+            </li>
+            <li class="camera camera--bird camera--disabled" data-camera-id="bird">
+                <span class="camera-icon">
+                    <img src="{% static "view3d/img/camera-bird.svg" %}"></img>
+                </span>
+                <span class="camera-title"> Oiseau</span>
+            </li>
+            <li class="camera camera--hiker camera--disabled" data-camera-id="hiker">
+                <span class="camera-icon">
+                    <img src="{% static "view3d/img/camera-hiker.svg" %}"></img>
+                </span>
+                <span class="camera-title"> Rando</span>
+            </li>
+        </ul>
+
+
         <canvas id="canvas_renderer"></canvas>
+
+
+        <div class="poi_side">
+            <img class="close_btn" src="img/arrow.png"></img>
+            <h2></h2>
+            <span class="description"></span>
+        </div>
+
+        <div class="poi poi--clicked">
+        </div>
+
+        <div class="poi poi--hover">
+        </div>
     </div>
+
+    <script src="{% static "view3d/index.js" %}"></script>
  </body>
 </body>
 </html>

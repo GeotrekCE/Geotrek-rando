@@ -53,11 +53,7 @@ RANDO.SETTINGS.PICTO_SIZE = 100;
 RANDO.SETTINGS.PICTO_PREFIX = "";
 
 RANDO.SETTINGS.NO_DESCRIPTION_MESSAGE = "<p>Pas de description liée à ce point d'intérêt.</p>";
-RANDO.SETTINGS.CAMERA_MESSAGES = {
-    'bird' : "On peut survoler le terrain tel un oiseau, tourner la tête, monter, descendre et se déplacer !",
-    'examine' : "On peut examiner le terrain en le tournant dans tous les sens.",
-    'hiker' : "Ici on est dans la peau d'un randonneur, on suit sans effort l'avancement de l'itinéraire, en profitant de la vue."
-};
+
 
 ////////////////////////////////////////////////////////////////////////////////
 

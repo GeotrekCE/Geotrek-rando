@@ -513,6 +513,9 @@ CREDITS
 * *Bus-Stop* by Pierre-Luc Auclair from The Noun Project
 * *Distance* by Tommy Lau from The Noun Project
 * *Ascend* by Michael Kussmaul from The Noun Project
+* *Hiking* by Johana from The Noun Project
+* *Eagle* by Steve Laing from The Noun Project
+* *Eye-In-The-Sky* by Cédric Villain from The Noun Project
 
 =======
 AUTHORS

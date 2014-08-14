@@ -56,7 +56,6 @@ var RANDO = RANDO || {};
         this._buildBirdCamera ();
         this._buildExamineCamera ();
         this._buildHikerCamera ();
-        this._initInterface();
         this._cameraSwitcher ();
     };
 
@@ -175,7 +174,7 @@ var RANDO = RANDO || {};
             this._positionBeforeSwitch  = this._scene.activeCamera.position.clone();
             this._targetBeforeSwitch    = this._scene.activeCamera.target.clone();
             this._rotationBeforeSwitch  = null;
-        } 
+        }
         else if (oldID == "bird" || oldID == "hiker") {
             this._positionBeforeSwitch  = this._scene.activeCamera.position.clone();
             this._rotationBeforeSwitch  = this._scene.activeCamera.rotation.clone();
@@ -190,39 +189,30 @@ var RANDO = RANDO || {};
     };
 
     RANDO.CameraContainer.prototype._cameraSwitcher = function () {
-        var idArray = RANDO.CameraIDs;
-        var that = this;
-
         if (!this._switchEnabled) {
             return;
         }
-        else {
-             $(".camera_switcher").css("display", "block");
-        }
-
-        for (var it in idArray) {
+        // Enable all
+        for (var it in RANDO.CameraIDs) {
             // The hiker camera must not be active until his path has not been set
-            if (idArray[it] != "hiker") {
-                this.enableCamera(idArray[it]);
+            if (RANDO.CameraIDs[it] != "hiker") {
+                this.enableCamera(RANDO.CameraIDs[it]);
             }
-
-            // Click event
-            $(".camera--" + idArray[it]).click({id : idArray[it]}, function (e) {
-
-                if($(this).hasClass('camera--disabled')) {
-                    return;
-                }
-                else {
-                    that.setActiveCamera (e.data.id);
-                }
-            });
         }
+
+        // Click event
+        var that = this;
+        $(".camera_switcher .camera").click(function (e) {
+            if($(this).hasClass('camera--disabled'))
+                return;  // disabled.
+            var id = $(this).data('camera-id');
+            that.setActiveCamera (id);
+        });
     };
 
     RANDO.CameraContainer.prototype.enableCamera = function (id) {
         $(".camera--" + id ).removeClass("camera--disabled");
         $(".camera--" + id ).addClass("camera--enabled");
-        $(".camera--" + id + " img").attr("src", "img/"+ id +"_camera.png");
     };
 
     RANDO.CameraContainer.prototype._resetByDefault = function () {
@@ -262,15 +252,5 @@ var RANDO = RANDO || {};
         this._computer.computeInitialTargetToRef (this.initialTarget);
 
         this._computer.computeLimitsToRef (this.limits);
-    };
-
-    RANDO.CameraContainer.prototype._initInterface = function () {
-        for (var it in this.cameras) {
-            var id = this.cameras[it].id;
-            $(".controls--" + id + " .controls-description")
-                .text(RANDO.SETTINGS.CAMERA_MESSAGES[id]);
-            $(".camera--"   + id + " .camera-description")
-                .text(RANDO.SETTINGS.CAMERA_MESSAGES[id]);
-        }
     };
 })();
