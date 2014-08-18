@@ -18,6 +18,8 @@
     <script src="{% static "view3d/vendor/EasePack.min.js" %}"></script>
     <script src="{% static "view3d/vendor/TweenLite.min.js" %}"></script>
     <script src="{% static "view3d/vendor/TimelineLite.min.js" %}"></script>
+    <script src="{% static "view3d/vendor/BezierPlugin.min.js" %}"></script>
+    <script src="{% static "view3d/vendor/DirectionalRotationPlugin.min.js" %}"></script>
 
     <!-- Rando -->
     <script src="{% static "view3d/Rando.Utils.js" %}"></script>
@@ -75,26 +77,27 @@
             <span> Tourner regard : <b>Clic Gauche</b></span>
             <span> Play/Pause : <b>Espace</b></span>
             <span> Stop : <b>Entrée</b></span>
+            <span> Avancer/Reculer : <img src="{% static "view3d/img/up-down.png" %}"/></span>
         </div>
 
         <ul class="camera_switcher">
             <li class="camera camera--examine camera--disabled" data-camera-id="examine">
+                <span class="camera-title">Exam</span>
                 <span class="camera-icon">
                     <img src="{% static "view3d/img/camera-examine.svg" %}"></img>
                 </span>
-                <span class="camera-title"> Exam</span>
             </li>
             <li class="camera camera--bird camera--disabled" data-camera-id="bird">
+                <span class="camera-title">Oiseau</span>
                 <span class="camera-icon">
                     <img src="{% static "view3d/img/camera-bird.svg" %}"></img>
                 </span>
-                <span class="camera-title"> Oiseau</span>
             </li>
             <li class="camera camera--hiker camera--disabled" data-camera-id="hiker">
+                <span class="camera-title">Rando</span>
                 <span class="camera-icon">
                     <img src="{% static "view3d/img/camera-hiker.svg" %}"></img>
                 </span>
-                <span class="camera-title"> Rando</span>
             </li>
         </ul>
 

@@ -396,6 +396,7 @@ var RANDO = RANDO || {};
                 break;
                 case "forward" :
                     this._timeline.play();
+                break;
             }
 
             this._oldState = this._state;

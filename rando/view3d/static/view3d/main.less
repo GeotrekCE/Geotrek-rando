@@ -4,7 +4,6 @@
 @switcher_bottom : auto;
 @switcher_left : auto;
 @switcher_right : 0px;
-@lines-to-show : 3;
 @description_width: 200px;
 
 html, body, canvas {
@@ -101,33 +100,27 @@ canvas {
     bottom: @switcher_bottom;
     left: @switcher_left;
     right: @switcher_right;
-    width: @item_size;
-    height: auto;
     padding:2px;
     margin: 0px;
 
     .camera {
-        text-align:center;
         border-bottom: solid 1px rgba(255, 255, 255, 0.2);
         list-style-type: none;
-        width: @item_size;
-        height: @item_size;
-        float:left;
 
         padding: 0px;
         margin: 0px;
         cursor : pointer;
+        text-align : center;
 
         .camera-title {
-            position: absolute;
+            font-size: 12px;
+            color: white;
         }
 
         .camera-icon {
             display: block;
-            text-align : center;
             img {
-                width: 100%;
-                height: 100%;
+                height: @item_size;
             }
         };
     };
@@ -140,25 +133,19 @@ canvas {
             .camera-icon {
                 opacity: 1;
             }
-            .camera-title {
-                display: block;
-            }
         }
     }
 
-    .camera-title {
-        display: none;
-        font-size: 12px;
-    };
-
     .camera--selected {
         cursor: auto;
+
+        border-left: 2px solid white;
 
         .camera-icon {
             opacity: 1;
         }
         .camera-title {
-            display: block;
+            font-weight: bold;
         }
     }
 
@@ -171,7 +158,11 @@ canvas {
 }
 
 .controls {
+    z-index: 1;
+
     background-color: @bg_color;
+    color: white;
+
     border-radius: 0 0 0.35em 0.35em;
     position: absolute;
     top: 0px;
@@ -182,7 +173,7 @@ canvas {
     display: none;
     float:right;
 
-    span{
+    span {
         float: left;
         width: 100%;
         margin: 5px;
