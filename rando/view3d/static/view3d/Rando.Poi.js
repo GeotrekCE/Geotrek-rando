@@ -13,7 +13,7 @@ var RANDO = RANDO || {};
 
     /* Constructor */
     RANDO.Poi = function (id, data, offsets, scene) {
-        this._id            = id
+        this._id            = id;
         this._position      = {
             'x' : data.coordinates.x + offsets.x,
             'y' : 0,
@@ -212,8 +212,6 @@ var RANDO = RANDO || {};
         $('.poi_side h2').html(this._name );
         $('.poi_side .description').html(this._description);
         $('.poi_side').css('display', 'block');
-
-        $('.interface').css('width', '80%');
     };
 
     /**
@@ -225,8 +223,6 @@ var RANDO = RANDO || {};
         $('.poi--hover').css('left', evt.clientX - 20 + 'px');
         $('.poi--hover').css('top',  evt.clientY - 40 + 'px');
         $('.poi--hover').css('display', 'block');
-
-        $('#canvas_renderer')[0].style.cursor = 'pointer';
     };
 
     /** Static
@@ -263,7 +259,6 @@ var RANDO = RANDO || {};
             var pickedMesh = pickResult.pickedMesh;
 
             $('.poi--hover').css('display', 'none');
-            $('#canvas_renderer')[0].style.cursor = 'default';
 
             // if mouse is over a pictogram, we display informations of POI
             if (pickResult.hit && pickedMesh.name == "POI - Panel"
@@ -275,13 +270,6 @@ var RANDO = RANDO || {};
         // Close button events of the POI side
         $(".close_btn").on('click', function () {
             $(".poi_side").css('display', 'none');
-            $('.interface').css('width', '100%');
-        });
-        $(".close_btn").mouseover( function () {
-           this.style.cursor = 'pointer';
-        });
-        $(".close_btn").mouseout( function () {
-            this.style.cursor = 'default';
         });
     };
 

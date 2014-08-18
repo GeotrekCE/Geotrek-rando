@@ -31,7 +31,7 @@ canvas {
     font-size: 3em;
 }
 .branding {
-    background: url('img/makina.png') no-repeat;
+    background: url('../img/makina.png') no-repeat;
     position: absolute;
     bottom: 10px;
     left: 10px;
@@ -52,14 +52,31 @@ canvas {
     font-family: ​​Helvetica, Arial;
 }
 
+.poi {
+    z-index: 1;
+
+    color: white;
+    background-color : @bg_color;
+    position : absolute;
+    width: auto;
+    height: auto;
+    padding: 2px;
+    border-radius: 0.35em;
+    text-align: center;
+    display : none;
+}
+
 .poi_side {
+    z-index: 1;
+
     display: none;
     border-radius: 0.35em;
+    color: white;
     background-color: rgba(20, 20, 20, 0.5);
     position: absolute;
     top: 0px;
-    right: 0px;
-    float: right;
+    left: 0px;
+    float: left;
     width: 20%;
     height: 100%;
 
@@ -68,20 +85,20 @@ canvas {
         margin : 20px;
     }
 
-    .description {
-        width : 100%;
-    }
-
     h2 {
         text-align: center;
         margin : 20px;
     }
 
     .close_btn {
-        position:absolute;
+        position: absolute;
+        right: 0px;
         margin: 10px;
-        width : 20px;
-        height: 20px;
+
+        img {
+            width : 20px;
+            height: 20px;
+        }
     }
 
     .close_btn:hover {

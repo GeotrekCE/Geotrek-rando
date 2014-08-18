@@ -56,66 +56,61 @@
 
 
         <div class="controls controls--examine" >
-            <h3>Mode Examine</h3>
-            <span class="controls-description">On peut examiner le terrain en le tournant dans tous les sens.</span>
-            <span> Zoom : <b>Molette souris</b></span>
-            <span> Inclinaison/Rotation : <b>Clic Gauche</b></span>
-            <span> Se déplacer : <img src="{% static "view3d/img/arrows.png" %}"/></span>
+            <h3>{% trans "Mode sky" %}</h3>
+            <span class="controls-description">{% trans "Move the terrain using the mouse." %}</span>
+            <span> {% trans "Zoom" %} : <b>{% trans "Mouse wheel" %}</b></span>
+            <span> {% trans "Rotation" %} : <b>{% trans "Left click" %}</b></span>
+            <span> {% trans "Move" %} : <img src="{% static "view3d/img/arrows.png" %}"/></span>
         </div>
 
         <div class="controls controls--bird" >
-            <h3>Mode Oiseau</h3>
-            <span class="controls-description">On peut survoler le terrain tel un oiseau, tourner la tête, monter, descendre et se déplacer !</span>
-            <span> Zoom : <b>Molette souris</b></span>
-            <span> Tourner regard : <b>Clic Gauche</b></span>
-            <span> Se déplacer : <img src="{% static "view3d/img/arrows.png" %}"/></span>
+            <h3>{% trans "Mode bird" %}</h3>
+            <span class="controls-description">{% trans "Fly like a bird, moving his head." %}</span>
+            <span> {% trans "Zoom" %} : <b>{% trans "Mouse wheel" %}</b></span>
+            <span> {% trans "Rotation" %} : <b>{% trans "Left click" %}</b></span>
+            <span> {% trans "Move" %} : <img src="{% static "view3d/img/arrows.png" %}"/></span>
         </div>
 
         <div class="controls controls--hiker" >
-            <h3>Mode Randonneur</h3>
-            <span class="controls-description">Ici on est dans la peau d'un randonneur, on suit sans effort l'avancement de l'itinéraire, en profitant de la vue.</span>
-            <span> Tourner regard : <b>Clic Gauche</b></span>
-            <span> Play/Pause : <b>Espace</b></span>
-            <span> Stop : <b>Entrée</b></span>
-            <span> Avancer/Reculer : <img src="{% static "view3d/img/up-down.png" %}"/></span>
+            <h3>{% trans "Mode bird" %}</h3>
+            <span class="controls-description">{% trans "Hike on a trek, in a submersive view." %}.</span>
+            <span> {% trans "Move head" %} : <b>{% trans "Left click" %}</b></span>
+            <span> {% trans "Play/Pause" %} : <b>{% trans "Space" %}</b></span>
+            <span> {% trans "Restart" %} : <b>{% trans "Enter" %}</b></span>
+            <span> {% trans "Forward/Backward" %} : <img src="{% static "view3d/img/up-down.png" %}"/></span>
         </div>
 
         <ul class="camera_switcher">
             <li class="camera camera--examine camera--disabled" data-camera-id="examine">
-                <span class="camera-title">Exam</span>
+                <span class="camera-title">{% trans "Sky" %}</span>
                 <span class="camera-icon">
-                    <img src="{% static "view3d/img/camera-examine.svg" %}"></img>
+                    <img src="{% static "view3d/img/camera-examine.svg" %}"/>
                 </span>
             </li>
             <li class="camera camera--bird camera--disabled" data-camera-id="bird">
-                <span class="camera-title">Oiseau</span>
+                <span class="camera-title">{% trans "Bird" %}</span>
                 <span class="camera-icon">
-                    <img src="{% static "view3d/img/camera-bird.svg" %}"></img>
+                    <img src="{% static "view3d/img/camera-bird.svg" %}"/>
                 </span>
             </li>
             <li class="camera camera--hiker camera--disabled" data-camera-id="hiker">
-                <span class="camera-title">Rando</span>
+                <span class="camera-title">{% trans "Hiker" %}</span>
                 <span class="camera-icon">
-                    <img src="{% static "view3d/img/camera-hiker.svg" %}"></img>
+                    <img src="{% static "view3d/img/camera-hiker.svg" %}"/>
                 </span>
             </li>
         </ul>
 
-
-        <canvas id="canvas_renderer"></canvas>
-
+        <div class="poi poi--clicked"></div>
+        <div class="poi poi--hover"></div>
 
         <div class="poi_side">
-            <img class="close_btn" src="img/arrow.png"></img>
+            <a class="close_btn" href="#"><img src="{% static "view3d/img/collapse.png" %}"/></a>
             <h2></h2>
             <span class="description"></span>
         </div>
 
-        <div class="poi poi--clicked">
-        </div>
-
-        <div class="poi poi--hover">
-        </div>
+        <canvas id="canvas_renderer"></canvas>
     </div>
 
     <script src="{% static "view3d/index.js" %}"></script>
