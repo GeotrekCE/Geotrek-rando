@@ -72,7 +72,8 @@ class TrekInputFile(JsonInputFile):
 
         wl = []
         for w in content['web_links']:
-            w['category'] = reroot(w['category'], attr='pictogram')
+            if w.get('category'):  # Safety for uncategorized links
+                w['category'] = reroot(w['category'], attr='pictogram')
             wl.append(w)
         content['web_links'] = wl
 

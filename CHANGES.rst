@@ -26,6 +26,12 @@ CHANGELOG
   tiles to be used in the 3D view (default: 200)
 
 
+1.30.1 (2014-08-14)
+-------------------
+
+* Fix crash in synchronization when link has no category
+
+
 1.30 (2014-08-01)
 -----------------
 
