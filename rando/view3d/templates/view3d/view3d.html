@@ -5,64 +5,21 @@
     <title>{{ object.properties.name }} - {% trans "3D View" %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <style>
-        html, body, canvas {
-            width: 100%;
-            height: 100%;
-            padding: 0;
-            margin: 0;
-        }
-        body {
-            background-color: #00161F;
-            background-image: url('{% static "view3d/img/background.jpg" %}');
-            background-size: 100% 100%;
-            background-repeat: repeat-x;
-        }
-        canvas {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-        }
-        .not-supported {
-            width: 100%;
-            text-align: center;
-            color: white;
-            font-size: 3em;
-        }
-        .branding {
-            background: url({% static "img/makina.png" %}) no-repeat;
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            height: 40px;
-            min-width: 120px;
-        }
-        .attributions {
-            background-color: rgba(255, 255, 255, 0.2);
-            position: absolute;
-            right: 10px;
-            bottom: 10px;
-            height: auto;
-            width: auto;
-            padding: 3px;
-            border-radius: 0.35em;
-            color: white;
-            font-size: 0.8em;
-            font-family: ​​"Helvetica Neue", Helvetica, Arial, sans-serif;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="{% static "view3d/main.css" %}" />
 
     <script src="{% static "js/vendor/jquery-1.9.0.min.js" %}"></script>
     <script src="{% static "view3d/vendor/underscore.js" %}"></script>
 
     <!-- Babylon.js -->
-    <script src="{% static "view3d/vendor/babylon.1.11.js" %}"></script>
+    <script src="{% static "view3d/vendor/babylon.1.12.js" %}"></script>
     <script src="{% static "view3d/vendor/babylon.arcRotateCamera.js" %}"></script>
 
     <!-- TweenLite -->
     <script src="{% static "view3d/vendor/EasePack.min.js" %}"></script>
     <script src="{% static "view3d/vendor/TweenLite.min.js" %}"></script>
     <script src="{% static "view3d/vendor/TimelineLite.min.js" %}"></script>
+    <script src="{% static "view3d/vendor/BezierPlugin.min.js" %}"></script>
+    <script src="{% static "view3d/vendor/DirectionalRotationPlugin.min.js" %}"></script>
 
     <!-- Rando -->
     <script src="{% static "view3d/Rando.Utils.js" %}"></script>
@@ -74,15 +31,16 @@
     <script src="{% static "view3d/Rando.Trek.js" %}"></script>
     <script src="{% static "view3d/Rando.TileContainer.js" %}"></script>
     <script src="{% static "view3d/Rando.CameraContainer.js" %}"></script>
+    <script src="{% static "view3d/Rando.CameraComputer.js" %}"></script>
     <script src="{% static "view3d/Rando.BirdCamera.js" %}"></script>
     <script src="{% static "view3d/Rando.ExamineCamera.js" %}"></script>
     <script src="{% static "view3d/Rando.HikerCamera.js" %}"></script>
-    <script src="{% static "view3d/index.js" %}"></script>
 </head>
 <body data-dem-url="{% url "core:fileserve" object.properties.elevation_area_url %}"
       data-profile-url="{% url "core:fileserve" object.properties.altimetric_profile %}"
       data-poi-url="{% url "core:fileserve" object.properties.poi_layer %}"
       data-static-url="{% static "view3d/" %}"
+      data-tiles-number-limit="{{ view.TILES_NUMBER_LIMIT }}"
       data-tiles-url="{{ view.tiles.url }}">
     <div class="trek-info">
         {{ object.properties.name }}
@@ -95,8 +53,67 @@
         <div class="attributions">
             {{ view.tiles.attributions|safe }}
         </div>
+
+
+        <div class="controls controls--examine" >
+            <h3>{% trans "Mode sky" %}</h3>
+            <span class="controls-description">{% trans "Move the terrain using the mouse." %}</span>
+            <span> {% trans "Zoom" %} : <b>{% trans "Mouse wheel" %}</b></span>
+            <span> {% trans "Rotation" %} : <b>{% trans "Left click" %}</b></span>
+            <span> {% trans "Move" %} : <img src="{% static "view3d/img/arrows.png" %}"/></span>
+        </div>
+
+        <div class="controls controls--bird" >
+            <h3>{% trans "Mode bird" %}</h3>
+            <span class="controls-description">{% trans "Fly like a bird, moving his head." %}</span>
+            <span> {% trans "Zoom" %} : <b>{% trans "Mouse wheel" %}</b></span>
+            <span> {% trans "Rotation" %} : <b>{% trans "Left click" %}</b></span>
+            <span> {% trans "Move" %} : <img src="{% static "view3d/img/arrows.png" %}"/></span>
+        </div>
+
+        <div class="controls controls--hiker" >
+            <h3>{% trans "Mode bird" %}</h3>
+            <span class="controls-description">{% trans "Hike on a trek, in a submersive view." %}.</span>
+            <span> {% trans "Move head" %} : <b>{% trans "Left click" %}</b></span>
+            <span> {% trans "Play/Pause" %} : <b>{% trans "Space" %}</b></span>
+            <span> {% trans "Restart" %} : <b>{% trans "Enter" %}</b></span>
+            <span> {% trans "Forward/Backward" %} : <img src="{% static "view3d/img/up-down.png" %}"/></span>
+        </div>
+
+        <ul class="camera_switcher">
+            <li class="camera camera--examine camera--disabled" data-camera-id="examine">
+                <span class="camera-title">{% trans "Sky" %}</span>
+                <span class="camera-icon">
+                    <img src="{% static "view3d/img/camera-examine.svg" %}"/>
+                </span>
+            </li>
+            <li class="camera camera--bird camera--disabled" data-camera-id="bird">
+                <span class="camera-title">{% trans "Bird" %}</span>
+                <span class="camera-icon">
+                    <img src="{% static "view3d/img/camera-bird.svg" %}"/>
+                </span>
+            </li>
+            <li class="camera camera--hiker camera--disabled" data-camera-id="hiker">
+                <span class="camera-title">{% trans "Hiker" %}</span>
+                <span class="camera-icon">
+                    <img src="{% static "view3d/img/camera-hiker.svg" %}"/>
+                </span>
+            </li>
+        </ul>
+
+        <div class="poi poi--clicked"></div>
+        <div class="poi poi--hover"></div>
+
+        <div class="poi_side">
+            <a class="close_btn" href="#"><img src="{% static "view3d/img/collapse.png" %}"/></a>
+            <h2></h2>
+            <span class="description"></span>
+        </div>
+
         <canvas id="canvas_renderer"></canvas>
     </div>
+
+    <script src="{% static "view3d/index.js" %}"></script>
  </body>
 </body>
 </html>

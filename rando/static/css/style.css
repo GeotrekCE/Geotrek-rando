@@ -2375,6 +2375,115 @@ ul.errorlist {
   width: 100%;
   height: 100%;
 }
+.poi_side {
+  display: none;
+  border-radius: 0.35em;
+  background-color: rgba(20, 20, 20, 0.5);
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  float: right;
+  width: 20%;
+  height: 100%;
+}
+.poi_side p {
+  text-align: justify;
+  margin: 20px;
+}
+.poi_side .description {
+  width: 100%;
+}
+.poi_side h2 {
+  text-align: center;
+  margin: 20px;
+}
+.poi_side .close_btn {
+  position: absolute;
+  margin: 10px;
+  width: 20px;
+  height: 20px;
+}
+.poi_side .close_btn:hover {
+  pointer-events: pointer;
+}
+.camera_switcher {
+  display: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 0.35em 0 0 0.35em;
+  position: absolute;
+  top: 300px;
+  bottom: auto;
+  left: auto;
+  right: 0px;
+  width: 50px;
+  height: auto;
+  padding: 2px;
+  margin: 0px;
+}
+.camera_switcher .camera {
+  text-align: center;
+  border-bottom: solid 1px rgba(255, 255, 255, 0.2);
+  list-style-type: none;
+  width: 50px;
+  height: 50px;
+  float: left;
+  padding: 0px;
+  margin: 0px;
+  cursor: pointer;
+}
+.camera_switcher .camera .camera-icon {
+  display: block;
+  text-align: center;
+}
+.camera_switcher .camera .camera-icon img {
+  width: 100%;
+  height: 100%;
+}
+.camera_switcher .camera:last-child {
+  border-bottom: none;
+}
+.camera_switcher .camera--enabled:hover .camera-icon img {
+  width: auto;
+  height: auto;
+}
+.camera_switcher .camera--enabled:hover .camera-title {
+  display: block;
+}
+.camera_switcher .camera--enabled:hover .camera-description {
+  display: block;
+  display: -webkit-box;
+}
+.camera_switcher .camera--selected {
+  cursor: auto;
+}
+.camera_switcher .camera--selected .camera-icon img {
+  width: auto;
+  height: auto;
+}
+.camera_switcher .camera--selected .camera-title {
+  display: block;
+}
+.camera_switcher .camera--disabled {
+  cursor: default;
+}
+.camera_switcher .camera-title {
+  display: none;
+  font-size: 12px;
+}
+.camera_switcher .camera-description {
+  text-align: left;
+  font-size: 14px;
+  display: none;
+  width: 200px;
+  height: 50px;
+  position: absolute;
+  margin-left: -230px;
+  margin-top: -50px;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 /* Layout */
 #toggle-header-mobile {
   display: none;

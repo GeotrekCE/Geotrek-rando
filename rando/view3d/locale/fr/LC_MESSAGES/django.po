@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-05 11:23+0200\n"
+"POT-Creation-Date: 2014-08-18 14:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,23 +21,65 @@ msgstr ""
 msgid "Fullscreen"
 msgstr "Plein écran"
 
-msgid "Move around"
-msgstr "Se déplacer"
-
-msgid "Enter"
-msgstr "Entrée"
-
-msgid "Go to departure"
-msgstr "Aller au départ"
-
-msgid "Space"
-msgstr "Espace"
-
-msgid "Play/Pause navigation"
-msgstr "Lecture/pause navigation"
-
 msgid "3D View"
 msgstr "Vue 3D"
 
 msgid "Browser not supported (WebGL)"
 msgstr "Navigateur non supporté (WebGL)"
+
+msgid "Mode sky"
+msgstr "Mode ciel"
+
+msgid "Move the terrain using the mouse."
+msgstr "Bouger le sol avec la souris."
+
+msgid "Zoom"
+msgstr ""
+
+msgid "Mouse wheel"
+msgstr "Molette"
+
+msgid "Rotation"
+msgstr ""
+
+msgid "Left click"
+msgstr "Clic gauche"
+
+msgid "Move"
+msgstr "Déplacer"
+
+msgid "Mode bird"
+msgstr "Mode oiseau"
+
+msgid "Fly like a bird, moving his head."
+msgstr "Voler comme un oiseau, en bougeant sa tête."
+
+msgid "Hike on a trek, in a submersive view."
+msgstr "Randonner sur l'itinéraire, en vue submersive."
+
+msgid "Move head"
+msgstr "Bouger la tête"
+
+msgid "Play/Pause"
+msgstr "Lecture/pause"
+
+msgid "Space"
+msgstr "Espace"
+
+msgid "Restart"
+msgstr "Recommencer"
+
+msgid "Enter"
+msgstr "Entrée"
+
+msgid "Forward/Backward"
+msgstr "Avancer/Reculer"
+
+msgid "Sky"
+msgstr "Ciel"
+
+msgid "Bird"
+msgstr "Oiseau"
+
+msgid "Hiker"
+msgstr "Rando"

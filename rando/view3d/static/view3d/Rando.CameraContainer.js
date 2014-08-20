@@ -1,26 +1,32 @@
 /*******************************************************************************
  * Rando.CameraContainer.js
- * 
- * CameraContainer class : 
+ *
+ * CameraContainer class :
  *  A container which will contains all cameras of the scene
- * 
+ *
  * @author: Célian GARCIA
  ******************************************************************************/
 
 var RANDO = RANDO || {};
 
-(function () {  "use strict" 
-    
+(function () {  "use strict"
+
     /* Constructor */
     RANDO.CameraContainer = function (canvas, scene, params) {
         this._canvas    = canvas;
         this._scene     = scene;
         this._switchEnabled     = params.switchEnabled || false;
-        this._demCenter         = _.clone(params.demCenter) || BABYLON.Vector3.Zero();
-        this._demExtent         = _.clone(params.demExtent) || BABYLON.Vector3.Zero();
-        this._offsets           = params.offsets || BABYLON.Vector3.Zero();
 
-        this.cameras    = {};
+        this._computer = new RANDO.CameraComputer (
+            params.demCenter,
+            params.demExtent,
+            params.demAltitudes,
+            params.offsets || BABYLON.Vector3.Zero(),
+            scene,
+            6
+        );
+
+        this.cameras = {};
 
         this._animationPath = null;
         this._controlsAttached  = false;
@@ -29,18 +35,20 @@ var RANDO = RANDO || {};
 
         this.initialPosition    = BABYLON.Vector3.Zero();
         this.initialTarget      = BABYLON.Vector3.Zero();
-        this.lowerXLimit        = null;
-        this.lowerZLimit        = null;
-        this.upperXLimit        = null;
-        this.upperZLimit        = null;
-        this.lowerRadiusLimit   = null;
-        this.upperRadiusLimit   = null;
+        this.limits             = {
+            'lowerX'        : null,
+            'upperX'        : null,
+            'lowerZ'        : null,
+            'upperZ'        : null,
+            'lowerRadius'   : null,
+            'upperRadius'   : null
+        };
 
         this.init();
     };
 
     // Static Array defining possibles cameras IDs
-    RANDO.CameraIDs = ["examine_camera", "bird_camera", "hiker_camera"];
+    RANDO.CameraIDs = ["examine", "bird", "hiker"];
 
     /* Methods */
     RANDO.CameraContainer.prototype.init = function () {
@@ -48,7 +56,6 @@ var RANDO = RANDO || {};
         this._buildBirdCamera ();
         this._buildExamineCamera ();
         this._buildHikerCamera ();
-        this._initInterface();
         this._cameraSwitcher ();
     };
 
@@ -61,7 +68,7 @@ var RANDO = RANDO || {};
             this.initialTarget,
             this._scene
         );
-        examine_camera.id = "examine_camera";
+        examine_camera.id = "examine";
         examine_camera.keysUp     = [90, 38]; // Touche Z and up
         examine_camera.keysDown   = [83, 40]; // Touche S and down
         examine_camera.keysLeft   = [81, 37]; // Touche Q and left
@@ -70,17 +77,16 @@ var RANDO = RANDO || {};
         examine_camera.wheelPrecision = 0.2;
         examine_camera.checkCollisions = true;
         examine_camera.ellipsoid.y = RANDO.SETTINGS.COLLISIONS_OFFSET;
-        examine_camera.maxZ = 10000;
+        examine_camera.maxZ = 50000;
         examine_camera.speed = RANDO.SETTINGS.CAM_SPEED_F ;
-        
-        examine_camera.lowerXLimit = this.lowerXLimit;
-        examine_camera.lowerZLimit = this.lowerZLimit;
-        examine_camera.upperXLimit = this.upperXLimit;
-        examine_camera.upperZLimit = this.upperZLimit;
-        examine_camera.upperRadiusLimit    = this.upperRadiusLimit;
+
+        examine_camera.lowerXLimit = this.limits.lowerX;
+        examine_camera.lowerZLimit = this.limits.lowerZ;
+        examine_camera.upperXLimit = this.limits.upperX;
+        examine_camera.upperZLimit = this.limits.upperZ;
         examine_camera.upperBetaLimit = Math.PI/2;
 
-        this.cameras.examine_camera = examine_camera;
+        this.cameras.examine = examine_camera;
     };
 
     /**
@@ -88,11 +94,11 @@ var RANDO = RANDO || {};
      */
     RANDO.CameraContainer.prototype._buildBirdCamera = function () {
         var bird_camera = new RANDO.BirdCamera(
-            "Bird Camera", 
+            "Bird Camera",
             BABYLON.Vector3.Zero(),
             this._scene
         );
-        bird_camera.id = "bird_camera";
+        bird_camera.id = "bird";
         bird_camera.keysUp     = [90, 38]; // Touche Z and up
         bird_camera.keysDown   = [83, 40]; // Touche S and down
         bird_camera.keysLeft   = [81, 37]; // Touche Q and left
@@ -100,10 +106,10 @@ var RANDO = RANDO || {};
 
         bird_camera.checkCollisions = true;
         bird_camera.ellipsoid.y = RANDO.SETTINGS.COLLISIONS_OFFSET;
-        bird_camera.maxZ = 10000;
+        bird_camera.maxZ = 50000;
         bird_camera.speed = RANDO.SETTINGS.CAM_SPEED_F ;
 
-        this.cameras.bird_camera = bird_camera;
+        this.cameras.bird = bird_camera;
     };
 
     /**
@@ -111,31 +117,31 @@ var RANDO = RANDO || {};
      */
     RANDO.CameraContainer.prototype._buildHikerCamera = function () {
         var hiker_camera = new RANDO.HikerCamera(
-            "Hiker Camera", 
+            "Hiker Camera",
             BABYLON.Vector3.Zero(),
             this._scene
         );
-        hiker_camera.id = "hiker_camera";
+        hiker_camera.id = "hiker";
 
         hiker_camera.checkCollisions = true;
-        hiker_camera.maxZ = 10000;
+        hiker_camera.maxZ = 50000;
 
         hiker_camera.returnSpeed = RANDO.SETTINGS.HCAM_RETURN_SPEED;
         hiker_camera.followSpeed = RANDO.SETTINGS.HCAM_FOLLOW_SPEED;
-        
 
-        this.cameras.hiker_camera = hiker_camera;
+
+        this.cameras.hiker = hiker_camera;
     };
 
     /**
      * RANDO.CameraContainer.setActiveCamera() : set the active camera of the scene
      *      - newID: ID of the camera we want to set as active
-     * 
+     *
      * NB : newID should be in the static array RANDO.cameraIDs
      */
     RANDO.CameraContainer.prototype.setActiveCamera = function (newID) {
         if (RANDO.CameraIDs.indexOf(newID) == -1) {
-            console.error("RANDO.CameraContainer.setActiveCamera () : " + newID + 
+            console.error("RANDO.CameraContainer.setActiveCamera () : " + newID +
                             " is not an available camera's ID");
             return;
         }
@@ -156,72 +162,79 @@ var RANDO = RANDO || {};
         this._scene.setActiveCameraByID (newID);
         this._resetByDefault();
 
-        // Interface changings
+        // Interface changes
         $(".controls--" + oldID).css("display", "none");
-        $("#" + oldID).removeClass("camera--selected");
+        $(".camera--"   + oldID).removeClass("camera--selected");
         $(".controls--" + newID).css("display", "block");
-        $("#" + newID).addClass("camera--selected");
+        $(".camera--"   + newID).addClass("camera--selected");
     };
 
     RANDO.CameraContainer.prototype._recordInfoBeforeSwitch = function (oldID) {
-        if (oldID == "examine_camera") {
-
+        if (oldID == "examine") {
             this._positionBeforeSwitch  = this._scene.activeCamera.position.clone();
             this._targetBeforeSwitch    = this._scene.activeCamera.target.clone();
             this._rotationBeforeSwitch  = null;
-        } else if (oldID == "bird_camera" || oldID == "hiker_camera") {
-
+        }
+        else if (oldID == "bird" || oldID == "hiker") {
             this._positionBeforeSwitch  = this._scene.activeCamera.position.clone();
             this._rotationBeforeSwitch  = this._scene.activeCamera.rotation.clone();
             this._targetBeforeSwitch    = null;
         }
     };
-    
+
     RANDO.CameraContainer.prototype.setAnimationPath = function (vertices) {
         this._animationPath = vertices;
-
-        var hiker_camera = this.cameras.hiker_camera;
-        hiker_camera.setPath(vertices);
+        this.cameras.hiker.setPath(vertices);
+        this.enableCamera ("hiker");
     };
 
     RANDO.CameraContainer.prototype._cameraSwitcher = function () {
-        var idArray = RANDO.CameraIDs;
-        var that = this;
-
         if (!this._switchEnabled) {
             return;
         }
-        else {
-             $(".camera_switcher").css("display", "block");
+        // Enable all
+        for (var it in RANDO.CameraIDs) {
+            // The hiker camera must not be active until his path has not been set
+            if (RANDO.CameraIDs[it] != "hiker") {
+                this.enableCamera(RANDO.CameraIDs[it]);
+            }
         }
 
-        for (var it in idArray) {
-            $("#" + idArray[it]).on("click", function () {
-                that.setActiveCamera (this.id);
-            });
-        }
+        // Click event
+        var that = this;
+        $(".camera_switcher .camera").click(function (e) {
+            if($(this).hasClass('camera--disabled'))
+                return;  // disabled.
+            var id = $(this).data('camera-id');
+            that.setActiveCamera (id);
+        });
+    };
+
+    RANDO.CameraContainer.prototype.enableCamera = function (id) {
+        $(".camera--" + id ).removeClass("camera--disabled");
+        $(".camera--" + id ).addClass("camera--enabled");
     };
 
     RANDO.CameraContainer.prototype._resetByDefault = function () {
         var activeCam = this._scene.activeCamera;
 
         // Examine Camera
-        if (activeCam.id == "examine_camera") {
+        if (activeCam.id == "examine") {
             activeCam.setPosition(this.initialPosition.clone());
             activeCam.target = this.initialTarget.clone();
         }
 
         // Bird Camera
-        else if (activeCam.id == "bird_camera") {
+        else if (activeCam.id == "bird") {
             activeCam.position = this.initialPosition.clone();
             activeCam.setTarget(this.initialTarget.clone());
         }
 
         // Hiker Camera
-        else if (activeCam.id == "hiker_camera" ) {
+        else if (activeCam.id == "hiker" ) {
             if (this._positionBeforeSwitch) {
                 activeCam.position = this._positionBeforeSwitch;
-            } 
+            }
             if (this._rotationBeforeSwitch) {
                 activeCam.rotation = this._rotationBeforeSwitch;
             }
@@ -234,35 +247,10 @@ var RANDO = RANDO || {};
     };
 
     RANDO.CameraContainer.prototype._computeInitialParameters = function () {
-        this._demCenter.x += this._offsets.x;
-        this._demCenter.z += this._offsets.z;
+        this._computer.computeInitialPositionToRef (this.initialPosition);
 
-        this.initialPosition.x = this._demCenter.x + 3000;
-        this.initialPosition.y = this._demCenter.y + 1000;
-        this.initialPosition.z = this._demCenter.z + 3000;
+        this._computer.computeInitialTargetToRef (this.initialTarget);
 
-        this.initialTarget.x = this._demCenter.x;
-        this.initialTarget.y = this._demExtent.y.min;
-        this.initialTarget.z = this._demCenter.z;
-
-        this.lowerXLimit = this._demExtent.x.min + this._offsets.x;
-        this.upperXLimit = this._demExtent.x.max + this._offsets.x;
-        this.lowerZLimit = this._demExtent.z.min + this._offsets.z;
-        this.upperZLimit = this._demExtent.z.max + this._offsets.z;
-        
-        this.lowerRadiusLimit = RANDO.SETTINGS.MIN_THICKNESS + this._demCenter.y;
-        this.upperRadiusLimit = 8000;
+        this._computer.computeLimitsToRef (this.limits);
     };
-
-    RANDO.CameraContainer.prototype._initInterface = function () {
-        
-        for (var it in this.cameras) {
-            var id = this.cameras[it].id;
-            $(".controls--" + id + " .description")
-                .text(RANDO.SETTINGS.CAMERA_MESSAGES[id]);
-            $("#" + id + " .description")
-                .text(RANDO.SETTINGS.CAMERA_MESSAGES[id]);
-        }
-    };
-
 })();

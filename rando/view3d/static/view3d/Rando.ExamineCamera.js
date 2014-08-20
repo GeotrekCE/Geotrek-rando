@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Rando.ExamineCamera.js
- * 
- * ExamineCamera class : 
+ *
+ * ExamineCamera class :
  *  It is a camera which look like the ArcRotateCamera of BabylonJS.
  *      https://github.com/BabylonJS/Babylon.js/wiki/05-Cameras.
- * 
+ *
  *  But we can also translate it over world axis X and Z.
- * 
+ *
  * @author: Célian GARCIA
  ******************************************************************************/
 
@@ -53,8 +53,6 @@ var RANDO = RANDO || {};
         this._oldPosition = BABYLON.Vector3.Zero();
         this._diffPosition = BABYLON.Vector3.Zero();
         this._newPosition = BABYLON.Vector3.Zero();
-
-        RANDO.ExamineCamera.prototype._initCache.call(this);
     };
 
     RANDO.ExamineCamera.prototype = Object.create(BABYLON.Camera.prototype);
@@ -82,6 +80,8 @@ var RANDO = RANDO || {};
 
     // Cache
     RANDO.ExamineCamera.prototype._initCache = function () {
+        BABYLON.Camera.prototype._initCache.call(this);
+
         this._cache.target = new BABYLON.Vector3(Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE);
         this._cache.alpha = undefined;
         this._cache.beta = undefined;
@@ -113,15 +113,15 @@ var RANDO = RANDO || {};
         return this.speed * ((BABYLON.Tools.GetDeltaTime() / (BABYLON.Tools.GetFps() * 10.0)));
     };
 
-    RANDO.ExamineCamera.prototype.attachControl = function (canvas, noPreventDefault) {
+    RANDO.ExamineCamera.prototype.attachControl = function (element, noPreventDefault) {
         var previousPosition;
         var that = this;
         var pointerId;
 
-        if (this._attachedCanvas) {
+        if (this._attachedElement) {
             return;
         }
-        this._attachedCanvas = canvas;
+        this._attachedElement = element;
 
         var engine = this._scene.getEngine();
 
@@ -291,40 +291,46 @@ var RANDO = RANDO || {};
             };
         }
 
-        canvas.addEventListener(eventPrefix + "down", this._onPointerDown, false);
-        canvas.addEventListener(eventPrefix + "up", this._onPointerUp, false);
-        canvas.addEventListener(eventPrefix + "out", this._onPointerUp, false);
-        canvas.addEventListener(eventPrefix + "move", this._onPointerMove, false);
-        canvas.addEventListener("mousemove", this._onMouseMove, false);
-        canvas.addEventListener("MSPointerDown", this._onGestureStart, false);
-        canvas.addEventListener("MSGestureChange", this._onGesture, false);
-        window.addEventListener("keydown", this._onKeyDown, false);
-        window.addEventListener("keyup", this._onKeyUp, false);
-        window.addEventListener('mousewheel', this._wheel, false);
-        window.addEventListener('DOMMouseScroll', this._wheel, false);
-        window.addEventListener("blur", this._onLostFocus, false);
+        element.addEventListener(eventPrefix + "down", this._onPointerDown, false);
+        element.addEventListener(eventPrefix + "up", this._onPointerUp, false);
+        element.addEventListener(eventPrefix + "out", this._onPointerUp, false);
+        element.addEventListener(eventPrefix + "move", this._onPointerMove, false);
+        element.addEventListener("mousemove", this._onMouseMove, false);
+        element.addEventListener("MSPointerDown", this._onGestureStart, false);
+        element.addEventListener("MSGestureChange", this._onGesture, false);
+        element.addEventListener('mousewheel', this._wheel, false);
+        element.addEventListener('DOMMouseScroll', this._wheel, false);
+
+        BABYLON.Tools.RegisterTopRootEvents([
+            { name: "keydown", handler: this._onKeyDown },
+            { name: "keyup", handler: this._onKeyUp },
+            { name: "blur", handler: this._onLostFocus }
+        ]);
     };
 
-    RANDO.ExamineCamera.prototype.detachControl = function (canvas) {
-        if (this._attachedCanvas != canvas) {
+    RANDO.ExamineCamera.prototype.detachControl = function (element) {
+        if (this._attachedElement != element) {
             return;
         }
 
-        canvas.removeEventListener(eventPrefix + "down", this._onPointerDown);
-        canvas.removeEventListener(eventPrefix + "up", this._onPointerUp);
-        canvas.removeEventListener(eventPrefix + "out", this._onPointerUp);
-        canvas.removeEventListener(eventPrefix + "move", this._onPointerMove);
-        canvas.removeEventListener("mousemove", this._onMouseMove);
-        canvas.removeEventListener("MSPointerDown", this._onGestureStart);
-        canvas.removeEventListener("MSGestureChange", this._onGesture);
-        window.removeEventListener("keydown", this._onKeyDown);
-        window.removeEventListener("keyup", this._onKeyUp);
-        window.removeEventListener('mousewheel', this._wheel);
-        window.removeEventListener('DOMMouseScroll', this._wheel);
-        window.removeEventListener("blur", this._onLostFocus);
+        element.removeEventListener(eventPrefix + "down", this._onPointerDown);
+        element.removeEventListener(eventPrefix + "up", this._onPointerUp);
+        element.removeEventListener(eventPrefix + "out", this._onPointerUp);
+        element.removeEventListener(eventPrefix + "move", this._onPointerMove);
+        element.removeEventListener("mousemove", this._onMouseMove);
+        element.removeEventListener("MSPointerDown", this._onGestureStart);
+        element.removeEventListener("MSGestureChange", this._onGesture);
+        element.removeEventListener('mousewheel', this._wheel);
+        element.removeEventListener('DOMMouseScroll', this._wheel);
+
+        BABYLON.Tools.UnregisterTopRootEvents([
+            { name: "keydown", handler: this._onKeyDown },
+            { name: "keyup", handler: this._onKeyUp },
+            { name: "blur", handler: this._onLostFocus }
+        ]);
 
         this._MSGestureHandler = null;
-        this._attachedCanvas = null;
+        this._attachedElement = null;
 
         if (this._reset) {
             this._reset();
@@ -332,15 +338,26 @@ var RANDO = RANDO || {};
     };
 
     RANDO.ExamineCamera.prototype._collideWithWorld = function (velocity) {
-        this.position.subtractFromFloatsToRef(0, this.ellipsoid.y, 0, this._oldPosition);
+        var globalPosition;
+
+        if (this.parent) {
+            globalPosition = BABYLON.Vector3.TransformCoordinates(this.position, this.parent.getWorldMatrix());
+        } else {
+            globalPosition = this.position;
+        }
+
+        globalPosition.subtractFromFloatsToRef(0, this.ellipsoid.y, 0, this._oldPosition);
         this._collider.radius = this.ellipsoid;
 
-        this._scene._getNewPosition(this._oldPosition, velocity, this._collider, 3, this._newPosition);
+        this.getScene()._getNewPosition(this._oldPosition, velocity, this._collider, 3, this._newPosition);
         this._newPosition.subtractToRef(this._oldPosition, this._diffPosition);
 
-        if (this._diffPosition.length() > BABYLON.Engine.collisionsEpsilon) {
+        if (this._diffPosition.length() > BABYLON.Engine.CollisionsEpsilon) {
             this.position.addInPlace(this._diffPosition);
             this.setPosition(this.position);
+            if (this.onCollide) {
+                this.onCollide(this._collider.collidedMesh);
+            }
         }
     };
 
@@ -368,16 +385,16 @@ var RANDO = RANDO || {};
             this.getViewMatrix().invertToRef(this._cameraTransformMatrix);
 
             BABYLON.Vector3.TransformNormalToRef(
-                this._localDirection, 
+                this._localDirection,
                 this._cameraTransformMatrix,
                 this._transformedDirection
             );
 
-            if (this.keysUp.indexOf(keyCode)   !== -1 || 
+            if (this.keysUp.indexOf(keyCode)   !== -1 ||
                 this.keysDown.indexOf(keyCode)  !== -1 ) {
                 this.cameraDirection.addInPlace(
                     BABYLON.Vector3.TransformNormal(
-                        this._transformedDirection, 
+                        this._transformedDirection,
                         BABYLON.Matrix.RotationY(-Math.PI/2)
                     )
                 );
@@ -397,8 +414,8 @@ var RANDO = RANDO || {};
         );
 
         var needToRotateOrZoom = (
-            this.inertialAlphaOffset != 0 ||
-            this.inertialBetaOffset  != 0 ||
+            this.inertialAlphaOffset  != 0 ||
+            this.inertialBetaOffset   != 0 ||
             this.inertialRadiusOffset != 0
         );
 
@@ -471,7 +488,7 @@ var RANDO = RANDO || {};
                     .subtract(this.position)
                     .add(this.cameraDirection)
                 );
-            } 
+            }
             else {
                 this.position.addInPlace(
                     RANDO.ExamineCamera.sphericToCartesian(
@@ -483,6 +500,7 @@ var RANDO = RANDO || {};
                     .subtract(this.position)
                     .add(this.cameraDirection)
                 );
+                this.setPosition (this.position);
             }
         }
         else if (needToRotateOrZoom) {
@@ -506,6 +524,7 @@ var RANDO = RANDO || {};
                     )
                     .subtract(this.position)
                 );
+                this.setPosition (this.position);
             }
         }
         else if (needToMoveTarget) {
@@ -513,31 +532,32 @@ var RANDO = RANDO || {};
                 this._collideWithWorld(this.cameraDirection);
             } else {
                 this.position.addInPlace(this.cameraDirection);
+                this.setPosition (this.position);
             }
         }
 
         // Inertia
         if (needToMoveTarget) {
-            if (Math.abs(this.cameraDirection.x) < BABYLON.Engine.epsilon)
+            if (Math.abs(this.cameraDirection.x) < BABYLON.Engine.Epsilon)
                 this.cameraDirection.x = 0;
 
-            if (Math.abs(this.cameraDirection.y) < BABYLON.Engine.epsilon)
+            if (Math.abs(this.cameraDirection.y) < BABYLON.Engine.Epsilon)
                 this.cameraDirection.y = 0;
 
-            if (Math.abs(this.cameraDirection.z) < BABYLON.Engine.epsilon)
+            if (Math.abs(this.cameraDirection.z) < BABYLON.Engine.Epsilon)
                 this.cameraDirection.z = 0;
 
             this.cameraDirection.scaleInPlace(this.inertia);
         }
 
         if (needToRotateOrZoom) {
-            if (Math.abs(this.inertialAlphaOffset) < BABYLON.Engine.epsilon)
+            if (Math.abs(this.inertialAlphaOffset) < BABYLON.Engine.Epsilon)
                 this.inertialAlphaOffset = 0;
 
-            if (Math.abs(this.inertialBetaOffset) < BABYLON.Engine.epsilon)
+            if (Math.abs(this.inertialBetaOffset) < BABYLON.Engine.Epsilon)
                 this.inertialBetaOffset = 0;
 
-            if (Math.abs(this.inertialRadiusOffset) < BABYLON.Engine.epsilon)
+            if (Math.abs(this.inertialRadiusOffset) < BABYLON.Engine.Epsilon)
                 this.inertialRadiusOffset = 0;
 
             this.inertialAlphaOffset    *= this.inertia;

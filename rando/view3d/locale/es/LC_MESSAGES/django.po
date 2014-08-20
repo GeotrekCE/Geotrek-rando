@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-05 11:23+0200\n"
+"POT-Creation-Date: 2014-08-18 14:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,23 +21,65 @@ msgstr ""
 msgid "Fullscreen"
 msgstr ""
 
-msgid "Move around"
+msgid "3D View"
 msgstr ""
 
-msgid "Enter"
+msgid "Browser not supported (WebGL)"
 msgstr ""
 
-msgid "Go to departure"
+msgid "Mode sky"
+msgstr ""
+
+msgid "Move the terrain using the mouse."
+msgstr ""
+
+msgid "Zoom"
+msgstr ""
+
+msgid "Mouse wheel"
+msgstr ""
+
+msgid "Rotation"
+msgstr ""
+
+msgid "Left click"
+msgstr ""
+
+msgid "Move"
+msgstr ""
+
+msgid "Mode bird"
+msgstr ""
+
+msgid "Fly like a bird, moving his head."
+msgstr ""
+
+msgid "Hike on a trek, in a submersive view."
+msgstr ""
+
+msgid "Move head"
+msgstr ""
+
+msgid "Play/Pause"
 msgstr ""
 
 msgid "Space"
 msgstr ""
 
-msgid "Play/Pause navigation"
+msgid "Restart"
 msgstr ""
 
-msgid "3D View"
+msgid "Enter"
 msgstr ""
 
-msgid "Browser not supported (WebGL)"
+msgid "Forward/Backward"
+msgstr ""
+
+msgid "Sky"
+msgstr ""
+
+msgid "Bird"
+msgstr ""
+
+msgid "Hiker"
 msgstr ""

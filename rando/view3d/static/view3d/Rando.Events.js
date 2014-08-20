@@ -2,8 +2,8 @@ var RANDO = RANDO || {};
 
 RANDO.Events = {};
 /*
- * Bind and Unbind events 
- * 
+ * Bind and Unbind events
+ *
  ***************************/
 // DOM Level 2 Event model
 if (document.addEventListener) {

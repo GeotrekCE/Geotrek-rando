@@ -13,13 +13,14 @@ window.onload = function onload() {
 
         RANDO.SETTINGS.TREK_COLOR = new BABYLON.Color3(0.9,0.5,0);  // orange
         RANDO.SETTINGS.TREK_WIDTH = 12;
-        RANDO.SETTINGS.CAM_SPEED_F  = 100;
+        RANDO.SETTINGS.CAM_SPEED_F  = 50;
+        RANDO.SETTINGS.TILE_NUMBER_LIMIT = $('body').data('tiles-number-limit');
 
         RANDO.START_TIME = Date.now();
 
         var canvas = document.getElementById('canvas_renderer');
-        var cameraID = "examine_camera";
-        var scene = new RANDO.Scene(canvas, cameraID, "1.2" );
+        var cameraID = "examine";
+        var scene = new RANDO.Scene(canvas, cameraID);
         scene.init();
     }
 };

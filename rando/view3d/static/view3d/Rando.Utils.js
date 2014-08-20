@@ -1,4 +1,4 @@
-// Rando.Utils.js 
+// Rando.Utils.js
 // Rando utilities
 
 var RANDO = RANDO || {};
@@ -7,33 +7,33 @@ RANDO.Utils = {};
 
 /****    BABYLON extents     ************************/
 /**
- *  createGroundFromExtent(): Create a ground from an extent of 4 points 
+ *  createGroundFromExtent(): Create a ground from an extent of 4 points
  *      - name : Name of the new Ground
  *      - A : northwest vertex
  *      - B : northeast vertex
  *      - C : southeast vertex
  *      - D : southwest vertex
- *      - w_subdivisions : Number of Width's subdivisions in the new Ground 
+ *      - w_subdivisions : Number of Width's subdivisions in the new Ground
  *      - h_subdivisions : Number of Height's subdivisions in the new Ground
- *      - scene : Scene which contains the new Ground 
- *      - updatable : 
- * 
+ *      - scene : Scene which contains the new Ground
+ *      - updatable :
+ *
  ****************************************************************/
 RANDO.Utils.createGroundFromExtent = function (name, A, B, C, D, w_subdivisions, h_subdivisions, scene, updatable) {
-    var ground = new BABYLON.Mesh(name, scene);
+    var ground = new BABYLON.GroundMesh(name, scene);
 
     var indices = [];
     var positions = [];
     var normals = [];
     var uvs = [];
     var row, col;
-    
+
     var grid = RANDO.Utils.createFlatGrid(A, B, C, D, w_subdivisions+ 1, h_subdivisions+ 1);
     for (row = 0; row <= h_subdivisions; row++) {
         for (col = 0; col <= w_subdivisions; col++) {
             var position = grid[row][col];
             var normal = new BABYLON.Vector3(0, 1.0, 0);
-            
+
             positions.push(position.x, 0, position.y);
             normals.push(normal.x, normal.y, normal.z);
             uvs.push(col / w_subdivisions, 1.0 - row / h_subdivisions);
@@ -51,10 +51,10 @@ RANDO.Utils.createGroundFromExtent = function (name, A, B, C, D, w_subdivisions,
             indices.push(col + row * (w_subdivisions + 1));
         }
     }
-    
-    ground.setVerticesData(positions, BABYLON.VertexBuffer.PositionKind, updatable);
-    ground.setVerticesData(normals, BABYLON.VertexBuffer.NormalKind, updatable);
-    ground.setVerticesData(uvs, BABYLON.VertexBuffer.UVKind, updatable);
+
+    ground.setVerticesData(BABYLON.VertexBuffer.PositionKind, positions, updatable);
+    ground.setVerticesData(BABYLON.VertexBuffer.NormalKind, normals, updatable);
+    ground.setVerticesData(BABYLON.VertexBuffer.UVKind, uvs, updatable);
     ground.setIndices(indices);
 
     return ground;
@@ -64,28 +64,28 @@ RANDO.Utils.createGroundFromExtent = function (name, A, B, C, D, w_subdivisions,
  *  createGroundFromGrid(): Create a ground from a grid of 2D points
  *      - name : Name of the new Ground
  *      - grid : grid of 2d points (each point contains a x and a y)
- *      - scene : Scene which contains the new Ground 
- *      - updatable : 
- * 
+ *      - scene : Scene which contains the new Ground
+ *      - updatable :
+ *
  ****************************************************************/
 RANDO.Utils.createGroundFromGrid = function (name, grid, scene, updatable) {
-    var ground = new BABYLON.Mesh(name, scene);
+    var ground = new BABYLON.GroundMesh(name, scene);
 
     var indices = [];
     var positions = [];
     var normals = [];
     var uvs = [];
     var row, col;
-    
+
     var h_subdivisions = grid.length-1;
     var w_subdivisions = grid[0].length-1;
-    
+
     for (row = 0; row <= h_subdivisions; row++) {
         w_subdivisions = grid[row].length-1;
         for (col = 0; col <= w_subdivisions; col++) {
             var position = grid[h_subdivisions - row][col];
             var normal = new BABYLON.Vector3(0, 1.0, 0);
-            
+
             positions.push(position.x, position.y, position.z);
             normals.push(normal.x, normal.y, normal.z);
             uvs.push(col / w_subdivisions, 1.0 - row / h_subdivisions);
@@ -104,10 +104,10 @@ RANDO.Utils.createGroundFromGrid = function (name, grid, scene, updatable) {
             indices.push(col + row * (w_subdivisions + 1));
         }
     }
-    
-    ground.setVerticesData(positions, BABYLON.VertexBuffer.PositionKind, updatable);
-    ground.setVerticesData(normals, BABYLON.VertexBuffer.NormalKind, updatable);
-    ground.setVerticesData(uvs, BABYLON.VertexBuffer.UVKind, updatable);
+
+    ground.setVerticesData(BABYLON.VertexBuffer.PositionKind, positions, updatable);
+    ground.setVerticesData(BABYLON.VertexBuffer.NormalKind, normals, updatable);
+    ground.setVerticesData(BABYLON.VertexBuffer.UVKind, uvs, updatable);
     ground.setIndices(indices);
 
     return ground;
@@ -116,31 +116,31 @@ RANDO.Utils.createGroundFromGrid = function (name, grid, scene, updatable) {
 /**
  *  createGroundFromVertices(): Create a ground from an array of vertices
  *      - name : Name of the new Ground
- *      - vertices : Array of vertices in BABYLON.VertexBuffer.PositionKind format 
- *      - w_subdivisions : Number of Width's subdivisions in the new Ground 
+ *      - vertices : Array of vertices in BABYLON.VertexBuffer.PositionKind format
+ *      - w_subdivisions : Number of Width's subdivisions in the new Ground
  *      - h_subdivisions : Number of Height's subdivisions in the new Ground
- *      - scene : Scene which contains the new Ground 
- *      - updatable : 
- * 
+ *      - scene : Scene which contains the new Ground
+ *      - updatable :
+ *
  ****************************************************************/
 RANDO.Utils.createGroundFromVertices = function( name, vertices, w_subdivisions, h_subdivisions, scene, updatable) {
     console.assert(vertices.length%3 == 0);
     console.assert((vertices.length/3) == w_subdivisions*h_subdivisions,
     (vertices.length/3) + "!=" + w_subdivisions + "*" + h_subdivisions);
-    
-    var ground = new BABYLON.Mesh(name, scene);
+
+    var ground = BABYLON.GroundMesh(name, scene);
 
     var indices = [];
     var positions = [];
     var normals = [];
     var uvs = [];
     var row, col;
-    
+
     var i = 0;
     for (row = 0; row <= h_subdivisions; row++) {
         for (col = 0; col <= w_subdivisions; col++) {
             var normal = new BABYLON.Vector3(0, 1.0, 0);
-            
+
             positions.push(vertices[i], vertices[i+1], vertices[i+2]);
             normals.push(normal.x, normal.y, normal.z);
             uvs.push(col / w_subdivisions, 1.0 - row / h_subdivisions);
@@ -159,10 +159,10 @@ RANDO.Utils.createGroundFromVertices = function( name, vertices, w_subdivisions,
             indices.push(col + row * (w_subdivisions + 1));
         }
     }
-    
-    ground.setVerticesData(positions, BABYLON.VertexBuffer.PositionKind, updatable);
-    ground.setVerticesData(normals, BABYLON.VertexBuffer.NormalKind, updatable);
-    ground.setVerticesData(uvs, BABYLON.VertexBuffer.UVKind, updatable);
+
+    ground.setVerticesData(BABYLON.VertexBuffer.PositionKind, positions, updatable);
+    ground.setVerticesData(BABYLON.VertexBuffer.NormalKind, normals, updatable);
+    ground.setVerticesData(BABYLON.VertexBuffer.UVKind, uvs, updatable);
     ground.setIndices(indices);
 
     return ground;
@@ -174,33 +174,33 @@ RANDO.Utils.createGroundFromVertices = function( name, vertices, w_subdivisions,
  *      - line : Array of points [{x: ,y: ,z: }, ...]
  *      - base : Altitude of the base line
  *      - scene : Scene which contains the new side
- *      - updatable : 
- * 
+ *      - updatable :
+ *
  */
 RANDO.Utils.createSideFromLine = function (name, line, base, scene, updatable) {
-    var side = new BABYLON.Mesh(name, scene);
+    var side = new BABYLON.GroundMesh(name, scene);
 
     var indices = [];
     var positions = [];
     var normals = [];
     var uvs = [];
     var row, col;
-    
+
     var h_subdivisions = 1
     var w_subdivisions = line.length-1;
-    
+
     // Positions, normals, and uvs
     for (row = 0; row <= h_subdivisions; row++) {
         for (col = 0; col <= w_subdivisions; col++) {
             var position = line[col];
             var normal = new BABYLON.Vector3(0, 1.0, 0);
-            
+
             if (row == 0) {
                 positions.push(position.x, position.y, position.z);
             } else {
                 positions.push(position.x, base, position.z);
             }
-            
+
             normals.push(normal.x, normal.y, normal.z);
             uvs.push(col / w_subdivisions, 1.0 - row/1);
         }
@@ -218,10 +218,10 @@ RANDO.Utils.createSideFromLine = function (name, line, base, scene, updatable) {
             indices.push(col + row * (w_subdivisions + 1));
         }
     }
-    
-    side.setVerticesData(positions, BABYLON.VertexBuffer.PositionKind, updatable);
-    side.setVerticesData(normals, BABYLON.VertexBuffer.NormalKind, updatable);
-    side.setVerticesData(uvs, BABYLON.VertexBuffer.UVKind, updatable);
+
+    side.setVerticesData(BABYLON.VertexBuffer.PositionKind, positions, updatable);
+    side.setVerticesData(BABYLON.VertexBuffer.NormalKind, normals, updatable);
+    side.setVerticesData(BABYLON.VertexBuffer.UVKind, uvs, updatable);
     side.setIndices(indices);
 
     return side;
@@ -230,10 +230,10 @@ RANDO.Utils.createSideFromLine = function (name, line, base, scene, updatable) {
 /**
  *  placeCylinder()
  *      - cylinder (BABYLON.Mesh): BABYLON Cylinder object
- *      - A (BABYLON.Vector3):     First Point 
+ *      - A (BABYLON.Vector3):     First Point
  *      - B (BABYLON.Vector3):     Second Point
- * 
- * Place the cylinder between both points  
+ *
+ * Place the cylinder between both points
  ****************************************************************/
 RANDO.Utils.placeCylinder = function (cylinder, A, B) {
     // Initial position at the center of the AB vector
@@ -245,26 +245,25 @@ RANDO.Utils.placeCylinder = function (cylinder, A, B) {
 
     // Adjust scale of cylinder
     var new_height = BABYLON.Vector3.Distance(A, B);
-    var scale_y  = (cylinder.scaling.y * new_height) / cylinder.height;
-    cylinder.scaling.y = scale_y;
-    
+    cylinder.scaling.y = new_height;
+
     // First rotation
     var angle1 = RANDO.Utils.angleFromAxis(A, B, BABYLON.Axis.X);
     cylinder.rotate(
-        BABYLON.Axis.X, 
+        BABYLON.Axis.X,
         angle1,
         BABYLON.Space.LOCAL
     );
-    
+
     // Second rotation
     var H = new BABYLON.Vector3(A.x,B.y,B.z);
     var angle2 = RANDO.Utils.angleFromPoints(A, B, H);
     cylinder.rotate(
-        BABYLON.Axis.Z, 
-        angle2, 
+        BABYLON.Axis.Z,
+        angle2,
         BABYLON.Space.LOCAL
     );
-    
+
     return cylinder;
 };
 
@@ -280,10 +279,10 @@ RANDO.Utils.computeMeshNormals = function (mesh) {
 
 /**
  * setMeshUvs() : set the mesh uvs taking from the object uv taken in parameter
- *      mesh: babylon mesh 
+ *      mesh: babylon mesh
  *      uvs: object js containing uvs values
- * 
- * NB: format of uv object parameter : 
+ *
+ * NB: format of uv object parameter :
  *      uv = {
  *          u: [],
  *          v: []
@@ -299,19 +298,19 @@ RANDO.Utils.setMeshUvs = function (mesh, uv) {
     }
 
     console.assert(
-        mesh.getVerticesData(BABYLON.VertexBuffer.UVKind).length == uv_array.length, 
+        mesh.getVerticesData(BABYLON.VertexBuffer.UVKind).length == uv_array.length,
         "setMeshUvs() : uvs in parameter are not well sized"
     );
 
-    mesh.setVerticesData(uv_array, BABYLON.VertexBuffer.UVKind);
+    mesh.setVerticesData(BABYLON.VertexBuffer.UVKind, uv_array);
 };
 
 /**
- * RANDO.Utils.mergeMeshes() : Merge a mesh array in only one mesh. It permites 
+ * RANDO.Utils.mergeMeshes() : Merge a mesh array in only one mesh. It permites
  * to increase performance.
  *      - newMesh : future merged Mesh
- *      - arrayObj : array of Meshes to merge 
- * 
+ *      - arrayObj : array of Meshes to merge
+ *
  * Function directly inspired from David Catuhe's one in the github wiki of BabylonJS
  * https://github.com/BabylonJS/Babylon.js/wiki/How-to-merge-meshes
  */
@@ -394,26 +393,26 @@ RANDO.Utils.mergeMeshes = function (newMesh, arrayObj) {
         arrayObj[i].dispose(false);
     }
 
-    newMesh.setVerticesData(savedPosition, BABYLON.VertexBuffer.PositionKind, false);
-    newMesh.setVerticesData(savedNormal, BABYLON.VertexBuffer.NormalKind, false);
+    newMesh.setVerticesData(BABYLON.VertexBuffer.PositionKind, savedPosition, false);
+    newMesh.setVerticesData(BABYLON.VertexBuffer.NormalKind, savedNormal, false);
     if (arrayUv.length > 0)
-        newMesh.setVerticesData(arrayUv, BABYLON.VertexBuffer.UVKind, false);
+        newMesh.setVerticesData(BABYLON.VertexBuffer.UVKind, arrayUv, false);
     if (arrayUv2.length > 0)
-        newMesh.setVerticesData(arrayUv, BABYLON.VertexBuffer.UV2Kind, false);
+        newMesh.setVerticesData(BABYLON.VertexBuffer.UV2Kind, arrayUv2, false);
     if (arrayColor.length > 0)
-        newMesh.setVerticesData(arrayUv, BABYLON.VertexBuffer.ColorKind, false);
+        newMesh.setVerticesData(BABYLON.VertexBuffer.ColorKind, arrayColor, false);
     if (arrayMatricesIndices.length > 0)
-        newMesh.setVerticesData(arrayUv, BABYLON.VertexBuffer.MatricesIndicesKind, false);
+        newMesh.setVerticesData(BABYLON.VertexBuffer.MatricesIndicesKind, arrayMatricesIndices, false);
     if (arrayMatricesWeights.length > 0)
-        newMesh.setVerticesData(arrayUv, BABYLON.VertexBuffer.MatricesWeightsKind, false);
+        newMesh.setVerticesData(BABYLON.VertexBuffer.MatricesWeightsKind, arrayMatricesWeights, false);
 
     newMesh.setIndices(arrayIndice);
 };
 
 /**
  * RANDO.Utils.getSize () : get the size of a mesh
- *      - mesh : mesh 
- * 
+ *      - mesh : mesh
+ *
  * return an object containing the width, height and deep of the mesh
  */
 RANDO.Utils.getSize = function (mesh) {
@@ -422,27 +421,41 @@ RANDO.Utils.getSize = function (mesh) {
     return {
         'width'  : (minmax.max.x - minmax.min.x) ,
         'height' : (minmax.max.y - minmax.min.y) ,
-        'deep'   : (minmax.max.z - minmax.min.z)  
+        'deep'   : (minmax.max.z - minmax.min.z)
     };
 }
 
+/**
+ * RANDO.Utils.isInExtent() :
+ *  return true if the given coordinates are in the given extent
+ */
 RANDO.Utils.isInExtent = function (coordinates, extent) {
-    if (coordinates.x > extent.x.min
-     && coordinates.x < extent.x.max
-     && coordinates.z > extent.z.min
-     && coordinates.z < extent.z.max ) {
-        return true;
-    }
-    return false;
+    return (
+        coordinates.x >= extent.x.min &&
+        coordinates.x <= extent.x.max &&
+        coordinates.z >= extent.z.min &&
+        coordinates.z <= extent.z.max
+     )? true: false;
 };
 
+/**
+ * RANDO.Utils.getNumberOfTiles() : return the number of tiles according a zoom level and
+ * a meters extent.
+ */
+RANDO.Utils.getNumberOfTiles = function (zoom, extent) {
+    var xTileMin = RANDO.Utils.meters2num (extent.x.min, extent.z.min, zoom).xtile;
+    var xTileMax = RANDO.Utils.meters2num (extent.x.max, extent.z.max, zoom).xtile;
+    var yTileMin = RANDO.Utils.meters2num (extent.x.min, extent.z.min, zoom).ytile;
+    var yTileMax = RANDO.Utils.meters2num (extent.x.max, extent.z.max, zoom).ytile;
+    return (xTileMax - xTileMin + 1) * (yTileMin - yTileMax + 1);
+};
 
 /****    GEOMETRY     ************************/
 /**tested
- * middle(): 
+ * middle():
  *      A: first point
  *      B: second point
- * 
+ *
  * return the middle of the segment form by A and B
  */
 RANDO.Utils.middle = function (A, B) {
@@ -454,44 +467,44 @@ RANDO.Utils.middle = function (A, B) {
 };
 
 /**tested
- * subdivide() :  interpolate a segment between 2 points A and B 
+ * subdivide() :  interpolate a segment between 2 points A and B
  *      - n : number of points expected in result
- *      - A : first point 
+ *      - A : first point
  *      - B : second point
- * 
- * return an array of point 
- * 
- * NB : points are in the format : { x : .. , y : .. } 
- * 
- * 
+ *
+ * return an array of point
+ *
+ * NB : points are in the format : { x : .. , y : .. }
+ *
+ *
  * example :
- * 
+ *
  *         * B                   * B
  *        /                     /
  *       /      n = 4          * M2
  *      /      ---->          /
  *     /                     * M1
  *    /                     /
- * A *                    A* 
- * 
+ * A *                    A*
+ *
  *          result : [A, M1, M2, B]
- * 
+ *
  */
 RANDO.Utils.subdivide = function (n, A, B) {
-    
+
     if (n<=0) return null;
-    
+
     if (n==1) return A;
 
     if (n==2) return [A,B];
-    
+
     if (n>=3) {
         var dx = (B.x-A.x)/(n-1);
         var dy = (B.y-A.y)/(n-1);
-        
+
         var x = A.x;
         var y = A.y;
-        
+
         var res = [];
         res.push(A);
         for (var i=0; i<n-2; i++){
@@ -499,12 +512,12 @@ RANDO.Utils.subdivide = function (n, A, B) {
             y += dy;
             res.push({
                 'x' : x,
-                'y' : y 
+                'y' : y
             });
         }
         res.push(B);
         return res;
-    } 
+    }
 }
 
 /**tested
@@ -513,16 +526,16 @@ RANDO.Utils.subdivide = function (n, A, B) {
  *      - A, B, C, D :  vertices of quadrilatere to subdivide
  *      - n_verti :     number of points in vertical size
  *      - n_horiz :     number of points in horizontal size
- * 
- * 
+ *
+ *
  * NB : * n_verti and n_horiz cannot be invert
- *      * the order of input points is also important, it determines 
- * the order of output points : 
+ *      * the order of input points is also important, it determines
+ * the order of output points :
  *  [A, ...., B,    -> first line
  *   ..........,
  *   D, ...., C]    -> last line
- * 
- * 
+ *
+ *
  * Example of quadrilatere :
  * D *------------------* C
  *   |                   \
@@ -532,7 +545,7 @@ RANDO.Utils.subdivide = function (n, A, B) {
  *   |                       \
  *   |                        \
  * A *-------------------------* B
- * 
+ *
  */
 RANDO.Utils.createFlatGrid = function (A, B, C, D, n_horiz, n_verti) {
     if(n_verti<=0) return null;
@@ -542,14 +555,14 @@ RANDO.Utils.createFlatGrid = function (A, B, C, D, n_horiz, n_verti) {
     var west_side = RANDO.Utils.subdivide(n_verti, A, D);
     var east_side = RANDO.Utils.subdivide(n_verti, B, C);
     var grid = [];
-    console.assert(west_side.length == east_side.length, 
+    console.assert(west_side.length == east_side.length,
         "createGrid : west_side.length != east_side.length \n" +
-        west_side.length + 
-        " != " + 
-        east_side.length 
+        west_side.length +
+        " != " +
+        east_side.length
     );
-    
-    
+
+
     for (var j=0; j < n_verti; j++){
         // subidivide lines
         var line = RANDO.Utils.subdivide(n_horiz, west_side[j], east_side[j]);
@@ -560,7 +573,7 @@ RANDO.Utils.createFlatGrid = function (A, B, C, D, n_horiz, n_verti) {
 
 /**
  *
- * 
+ *
  */
 RANDO.Utils.createElevationGrid = function (xmin, xmax, ymin, ymax, altitudes) {
     var A = {
@@ -586,8 +599,8 @@ RANDO.Utils.createElevationGrid = function (xmin, xmax, ymin, ymax, altitudes) {
         altitudes[0].length,
         altitudes.length
     );
-    
-    // Gives altitudes to the grid 
+
+    // Gives altitudes to the grid
     for (row in altitudes){
         for (col in altitudes[row]){
             grid[row][col].z = grid[row][col].y;
@@ -598,27 +611,27 @@ RANDO.Utils.createElevationGrid = function (xmin, xmax, ymin, ymax, altitudes) {
 };
 
 /**tested
- * angleFromAxis(): get an angle for a rotation 
- *      - A     (BABYLON.Vector3) : First point 
+ * angleFromAxis(): get an angle for a rotation
+ *      - A     (BABYLON.Vector3) : First point
  *      - B     (BABYLON.Vector3) : Second point
  *      - axis  (BABYLON.Vector3) : Axis of rotation
- * 
- * 
- * Example with a rotation around y axis 
- * 
+ *
+ *
+ * Example with a rotation around y axis
+ *
  *                     _ z
- *       .->           | 
+ *       .->           |
  *      /              |     * B
- *                     |    / 
+ *                     |    /
  *                     |   /
  *                     |  /
  *                     | /
  *                     |/               x
  *       --------------*--------------->
- *                     |A 
- *                     | 
+ *                     |A
+ *                     |
  *
- * NB : It uses global axis only 
+ * NB : It uses global axis only
  *  (1, 0, 0), (0, 1, 0), or (0, 0, 1)
  *
  */
@@ -646,7 +659,7 @@ RANDO.Utils.angleFromAxis = function (A, B, axis) {
                 Math.pow(B.z-A.z, 2)+
                 Math.pow(B.x-A.x, 2)
             );
-            
+
             angle = Math.acos(AH/AB);
             //if (angle > Math.PI/2)
                 //angle = -((Math.PI/2)-angle)
@@ -671,38 +684,38 @@ RANDO.Utils.angleFromAxis = function (A, B, axis) {
 }
 
 /**
- * angleFromPoints() : get an angle from 3 points for a rotation around an axis 
- *  orthogonal of the plan formed by the 3 points 
+ * angleFromPoints() : get an angle from 3 points for a rotation around an axis
+ *  orthogonal of the plan formed by the 3 points
  *      - A (BABYLON.Vector3) : First point
  *      - B (BABYLON.Vector3) : Second point
- *      - H (BABYLON.Vector3) : Orthogonal projection of B over the axis 
- * 
- * 
- * Example with a rotation around z axis 
- * 
+ *      - H (BABYLON.Vector3) : Orthogonal projection of B over the axis
+ *
+ *
+ * Example with a rotation around z axis
+ *
  *                     _ x
- *       .->           | 
+ *       .->           |
  *      /            H *     * B
- *                     |    / 
+ *                     |    /
  *                     |   /
  *                     |  /
  *                     | /
  *                     |/               y
  *       --------------*--------------->
- *                     |A 
- *                     | 
+ *                     |A
+ *                     |
  *
  * NB : It is used when we don't have especially classical global axis. For example
  * after a first rotation.
- * 
+ *
  */
 RANDO.Utils.angleFromPoints = function (A, B, H) {
     var AH = BABYLON.Vector3.Distance(A, H);
     var AB = BABYLON.Vector3.Distance(A, B);
     var angle = Math.acos(AH/AB);
-    
-    // Check the sign 
-    if (H.x < B.x) 
+
+    // Check the sign
+    if (H.x < B.x)
         return -angle;
     return angle;
 };
@@ -729,7 +742,7 @@ RANDO.Utils.roundRect = function (context, x, y, w, h, radius) {
  *  scaleArray2() : multiply all values of 2-dimensions array by a scale value
  *      - array2 : original array
  *      - scale : scale value
- * 
+ *
  * return a new array which contains all values of array2 multiplied
  */
 RANDO.Utils.scaleArray2 = function (array2, scale) {
@@ -766,87 +779,14 @@ RANDO.Utils.replaceUrlCoordinates = function (url, z, x, y) {
     return url;
 }
 
-/**
- * getFrameFromTiles() : get borders of the DEM from the list of DEM tiles 
- *      - tiles: tiles of the DEM
- */
-RANDO.Utils.getFrameFromTiles = function (tiles) {
-    var frame = {};
-    frame.east  = [];
-    frame.west  = [];
-    frame.north = [];
-    frame.south = [];
-
-    var extent = RANDO.Utils.getTileExtent(tiles);
-
-    for (it in tiles) {
-        var tile = tiles[it];
-        if ( tile.coordinates.x == extent.x.max ) {
-            var last_col = tile.grid[0].length -1;
-            for (row in tile.grid) {
-                frame.east.push(tile.grid[row][last_col]);
-            }
-        }
-        if ( tile.coordinates.x == extent.x.min ) {
-            var first_col = 0;
-            for (row in tile.grid) {
-                frame.west.push(tile.grid[row][first_col]);
-            }
-        }
-        if ( tile.coordinates.y == extent.y.min ) {
-            var last_row = tile.grid.length-1;
-            for (col in tile.grid[last_row]){
-                frame.south.push(tile.grid[last_row][col]);
-            }
-        }
-        if ( tile.coordinates.y == extent.y.max ) {
-            var first_row = 0;
-            for (col in tile.grid[first_row]){
-                frame.north.push(tile.grid[first_row][col]);
-            }
-        }
-    }
-
-    return frame;
-};
-
-/**tested
- * getTileExtent() : get tile extent from the list of DEM tiles
- *      - tiles: tiles of the DEM
- */
-RANDO.Utils.getTileExtent = function (tiles) {
-    var tileExtent = {};
-    tileExtent.x = {};
-    tileExtent.y = {};
-    
-    // X extent
-    tileExtent.x.min = _.min(tiles, function (tile) { 
-        return tile.coordinates.x; 
-    }).coordinates.x;
-    
-    tileExtent.x.max = _.max(tiles, function (tile) { 
-        return tile.coordinates.x; 
-    }).coordinates.x;
-
-    // Y extent
-    tileExtent.y.min = _.min(tiles, function (tile) { 
-        return tile.coordinates.y; 
-    }).coordinates.y;
-    tileExtent.y.max = _.max(tiles, function (tile) { 
-        return tile.coordinates.y; 
-    }).coordinates.y;
-    
-    return tileExtent;
-};
-
 
 /****    CONVERSIONS     ************************/
 /**tested
  * toMeters() : convert a point in latitude/longitude to x/y meters coordinates
- *      - latlng : point in lat/lng 
- * 
- * return a point in meters 
- * 
+ *      - latlng : point in lat/lng
+ *
+ * return a point in meters
+ *
  * { lat : .. , lng : .. }  ---> { x : .. , y : .. }
  */
 RANDO.Utils.toMeters = function (latlng) {
@@ -864,17 +804,17 @@ RANDO.Utils.toMeters = function (latlng) {
 };
 
 /**tested
- * toLatlng() : convert a point in x/y meters coordinates to latitude/longitude 
+ * toLatlng() : convert a point in x/y meters coordinates to latitude/longitude
  *      - point : point in x/y meters coordinates
- * 
- * return a point in lat/long 
- * 
- * { x : .. , y : .. }  --->  { lat : .. , lng : .. }  
+ *
+ * return a point in lat/long
+ *
+ * { x : .. , y : .. }  --->  { lat : .. , lng : .. }
  */
 RANDO.Utils.toLatlng = function (point) {
-    
+
     var R = 6378137;
-    
+
     var d = 180 / Math.PI;
 
     return {
@@ -907,7 +847,7 @@ RANDO.Utils.getMetersExtent = function (extent) {
 };
 
 /**
- * meters2num(): get the tile number of the tile containing a point 
+ * meters2num(): get the tile number of the tile containing a point
  *  in a certain level of zoom
  *      - x: x coordinate of point (in meters)
  *      - y: y coordinate of point (in meters)
@@ -922,7 +862,7 @@ RANDO.Utils.meters2num = function (x, y, zoom) {
 };
 
 /**
- * deg2num(): get the tile number of the tile containing a point 
+ * deg2num(): get the tile number of the tile containing a point
  *  in a certain level of zoom
  *      - lat_deg: latitude  coordinate of point (in degrees)
  *      - lng_deg: longitude coordinate of point (in degrees)
@@ -934,13 +874,13 @@ RANDO.Utils.deg2num = function (lat_deg, lng_deg, zoom) {
     var xtile = Math.floor((lng_deg + 180.0) / 360.0 * n);
     var ytile = Math.floor((1.0 - Math.log(Math.tan(lat_rad) + (1 / Math.cos(lat_rad))) / Math.PI) / 2.0 * n);
     return {
-        "xtile": xtile, 
+        "xtile": xtile,
         "ytile": ytile
     };
 };
 
 /**
- * rad2num(): get the tile number of the tile containing a point 
+ * rad2num(): get the tile number of the tile containing a point
  *  in a certain level of zoom
  *      - lat_rad: latitude  coordinate of point (in radians)
  *      - lng_rad: longitude coordinate of point (in radians)
@@ -953,7 +893,7 @@ RANDO.Utils.rad2num = function (lat_rad, lng_rad, zoom) {
     var xtile = Math.floor((lng_deg + 180.0) / 360.0 * n);
     var ytile = Math.floor((1.0 - Math.log(Math.tan(lat_rad) + (1 / Math.cos(lat_rad))) / Math.PI) / 2.0 * n);
     return {
-        "xtile": xtile, 
+        "xtile": xtile,
         "ytile": ytile
     };
 };
@@ -961,9 +901,9 @@ RANDO.Utils.rad2num = function (lat_rad, lng_rad, zoom) {
 
 /****    TRANSLATIONS     ************************/
 /**
- * drapePoint() : drape a point over the ground 
+ * drapePoint() : drape a point over the ground
  *      - point: point to drape
- *      - dem: ground 
+ *      - dem: ground
  */
 RANDO.Utils.drapePoint = function (point, dem, offset) {
     if (typeof(offset) === "undefined") {
@@ -978,3 +918,4 @@ RANDO.Utils.drapePoint = function (point, dem, offset) {
         }
     }
 }
+

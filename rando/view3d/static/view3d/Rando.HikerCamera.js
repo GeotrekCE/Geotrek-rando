@@ -1,27 +1,27 @@
 /*******************************************************************************
  * Rando.HikerCamera.js
- * 
- * HikerCamera class : 
+ *
+ * HikerCamera class :
  *  It is a camera which look like the FreeCamera of BabylonJS.
  *      https://github.com/BabylonJS/Babylon.js/wiki/05-Cameras.
- * 
- *  The major differences is than all moves have been replaced by some 
+ *
+ *  The major differences is than all moves have been replaced by some
  *  animation controls. In effect this camera was done to follow a path.
- * 
- *  After instantiate the camera, set the commands and set the path with 
- *  setPath() function, we can play, pause, stop, rewind and move forward the 
+ *
+ *  After instantiate the camera, set the commands and set the path with
+ *  setPath() function, we can play, pause, stop, rewind and move forward the
  *  camera along this path as we want.
- * 
- * 
- *  Beware ! this camera will need to have imported these libraries : 
+ *
+ *
+ *  Beware ! this camera will need to have imported these libraries :
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/easing/EasePack.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineLite.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/BezierPlugin.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/DirectionalRotationPlugin.min.js"></script>
- 
- *  
+
+ *
  * @author: Célian GARCIA
  ******************************************************************************/
 
@@ -60,8 +60,6 @@ var RANDO = RANDO || {};
         this._lenghtOfBezier = 0;
         this._positionTween = null;
         this._rotationTween = null;
-
-        RANDO.HikerCamera.prototype._initCache.call(this);
     };
 
     RANDO.HikerCamera.prototype = Object.create(BABYLON.Camera.prototype);
@@ -90,6 +88,8 @@ var RANDO = RANDO || {};
 
     // Cache
     RANDO.HikerCamera.prototype._initCache = function () {
+        BABYLON.Camera.prototype._initCache.call(this);
+
         this._cache.lockedTarget = new BABYLON.Vector3(Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE);
         this._cache.rotation = new BABYLON.Vector3(Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE);
     };
@@ -158,15 +158,15 @@ var RANDO = RANDO || {};
         }
     };
     // Controls
-    RANDO.HikerCamera.prototype.attachControl = function (canvas, noPreventDefault) {
+    RANDO.HikerCamera.prototype.attachControl = function (element, noPreventDefault) {
         var previousPosition;
         var that = this;
         var engine = this._scene.getEngine();
 
-        if (this._attachedCanvas) {
+        if (this._attachedElement) {
             return;
         }
-        this._attachedCanvas = canvas;
+        this._attachedElement = element;
 
         if (this._onMouseDown === undefined) {
             this._onMouseDown = function (evt) {
@@ -223,24 +223,6 @@ var RANDO = RANDO || {};
                 }
             };
 
-            this._onWheel = function (event) {
-                var delta = 0;
-                if (event.wheelDelta) {
-                    delta = event.wheelDelta / (that.wheelPrecision * 40);
-                } else if (event.detail) {
-                    delta = -event.detail / that.wheelPrecision;
-                }
-
-                if (delta)
-                    that.inertialRadiusOffset += delta;
-
-                if (event.preventDefault) {
-                    if (!noPreventDefault) {
-                        event.preventDefault();
-                    }
-                }
-            };
-
             this._onKeyDown = function (evt) {
                 var state = that._state;
                 var oldState = state;
@@ -283,7 +265,7 @@ var RANDO = RANDO || {};
                     else if (that.keysRewind.indexOf(keyCode) !== -1) {
                         if (state == "rewind" && that._timeline._time == 0) {
                             state = "stop";
-                        } 
+                        }
                         else if (state == "rewind" && that._timeline._time != 0) {
                             state = "pause";
                         }
@@ -312,7 +294,7 @@ var RANDO = RANDO || {};
                 }
                 that._oldState = null;
                 that._state = "stop";
-                
+
                 if (that._position_transition) {
                     that._position_transition.kill();
                 }
@@ -322,33 +304,35 @@ var RANDO = RANDO || {};
             };
         }
 
-        canvas.addEventListener("mousedown", this._onMouseDown, false);
-        canvas.addEventListener("mouseup", this._onMouseUp, false);
-        canvas.addEventListener("mouseout", this._onMouseOut, false);
-        canvas.addEventListener("mousemove", this._onMouseMove, false);
-        window.addEventListener('mousewheel', this._onWheel, false);
-        window.addEventListener('DOMMouseScroll', this._onWheel);
-        window.addEventListener("keydown", this._onKeyDown, false);
-        window.addEventListener("keyup", this._onKeyUp, false);
-        window.addEventListener("blur", this._onLostFocus, false);
+        element.addEventListener("mousedown", this._onMouseDown, false);
+        element.addEventListener("mouseup", this._onMouseUp, false);
+        element.addEventListener("mouseout", this._onMouseOut, false);
+        element.addEventListener("mousemove", this._onMouseMove, false);
+
+        BABYLON.Tools.RegisterTopRootEvents([
+            { name: "keydown", handler: this._onKeyDown },
+            { name: "keyup", handler: this._onKeyUp },
+            { name: "blur", handler: this._onLostFocus }
+        ]);
     };
 
-    RANDO.HikerCamera.prototype.detachControl = function (canvas) {
-        if (this._attachedCanvas != canvas) {
+    RANDO.HikerCamera.prototype.detachControl = function (element) {
+        if (this._attachedElement != element) {
             return;
         }
 
-        canvas.removeEventListener("mousedown", this._onMouseDown);
-        canvas.removeEventListener("mouseup", this._onMouseUp);
-        canvas.removeEventListener("mouseout", this._onMouseOut);
-        canvas.removeEventListener("mousemove", this._onMouseMove);
-        window.removeEventListener('mousewheel', this._onWheel);
-        window.removeEventListener('DOMMouseScroll', this._onWheel);
-        window.removeEventListener("keydown", this._onKeyDown);
-        window.removeEventListener("keyup", this._onKeyUp);
-        window.removeEventListener("blur", this._onLostFocus);
+        element.removeEventListener("mousedown", this._onMouseDown);
+        element.removeEventListener("mouseup", this._onMouseUp);
+        element.removeEventListener("mouseout", this._onMouseOut);
+        element.removeEventListener("mousemove", this._onMouseMove);
 
-        this._attachedCanvas = null;
+        BABYLON.Tools.UnregisterTopRootEvents([
+            { name: "keydown", handler: this._onKeyDown },
+            { name: "keyup", handler: this._onKeyUp },
+            { name: "blur", handler: this._onLostFocus }
+        ]);
+
+        this._attachedElement = null;
         if (this._reset) {
             this._reset();
         }
@@ -357,7 +341,7 @@ var RANDO = RANDO || {};
     RANDO.HikerCamera.prototype._update = function () {
 
         var needToRotate = (
-            Math.abs(this.cameraRotation.x) > 0 || 
+            Math.abs(this.cameraRotation.x) > 0 ||
             Math.abs(this.cameraRotation.y) > 0
         );
         var stateHaveChanged = (this._oldState != this._state);
@@ -386,13 +370,13 @@ var RANDO = RANDO || {};
             this.cameraRotation.scaleInPlace(this.inertia);
         }
 
-        // State 
+        // State
         if (stateHaveChanged) {
             console.log(this._oldState + " to " + this._state);
             var newState = this._state;
 
             switch (newState) {
-                case "stop" : 
+                case "stop" :
                     this._isMoving = true;
                     this._timeline.pause();
                     var that = this;
@@ -412,6 +396,7 @@ var RANDO = RANDO || {};
                 break;
                 case "forward" :
                     this._timeline.play();
+                break;
             }
 
             this._oldState = this._state;
@@ -486,7 +471,7 @@ var RANDO = RANDO || {};
             that._onCompleteTimeline();
         }});
 
-        // Initials parameters of animation 
+        // Initials parameters of animation
         var quantity = this._lengthOfBezier;
         var duration = this._lengthOfBezier / this.followSpeed;
         var position = {
@@ -501,7 +486,7 @@ var RANDO = RANDO || {};
 
         // Load the Bezier curve on timeline
         for (i = 0; i < quantity-d; i++) {
-            tween.time(i); // Jumps to the appropriate time in the tween, causing 
+            tween.time(i); // Jumps to the appropriate time in the tween, causing
                             // position variable to be updated accordingly.
             var currentPosition = _.clone(position);
             tween.time(i+d);
@@ -510,12 +495,12 @@ var RANDO = RANDO || {};
 
             this._timeline.add([
                 TweenLite.to(this.position, (duration / quantity), {
-                    x: currentPosition.x, 
-                    y: currentPosition.y + RANDO.SETTINGS.CAM_OFFSET, 
-                    z: currentPosition.z, 
-                    ease: "Linear.easeNone" 
+                    x: currentPosition.x,
+                    y: currentPosition.y + RANDO.SETTINGS.CAM_OFFSET,
+                    z: currentPosition.z,
+                    ease: "Linear.easeNone"
                 }),
-                TweenLite.to(this.rotation, (duration / quantity), { 
+                TweenLite.to(this.rotation, (duration / quantity), {
                     directionalRotation :{ y: (rotation_y +"_short"), useRadians:true} ,
                     ease: "Linear.easeNone"
                 })
@@ -525,10 +510,10 @@ var RANDO = RANDO || {};
             tween.time(i++);
             this._timeline.add(
                 TweenLite.to(this.position, (duration / quantity), {
-                    x: position.x, 
-                    y: position.y + RANDO.SETTINGS.CAM_OFFSET, 
-                    z: position.z, 
-                    ease: "Linear.easeNone" 
+                    x: position.x,
+                    y: position.y + RANDO.SETTINGS.CAM_OFFSET,
+                    z: position.z,
+                    ease: "Linear.easeNone"
                 })
             );
         }
@@ -552,8 +537,8 @@ var RANDO = RANDO || {};
         var duration = distance / speed;
 
         // Translation
-        this._positionTween = TweenLite.to(this.position, duration, { 
-            x: futurePosition.x, 
+        this._positionTween = TweenLite.to(this.position, duration, {
+            x: futurePosition.x,
             y: futurePosition.y + RANDO.SETTINGS.CAM_OFFSET,
             z: futurePosition.z,
             ease: 'ease-in',
@@ -563,10 +548,13 @@ var RANDO = RANDO || {};
         });
 
         // Rotation
-        this._rotationTween = TweenLite.to(this.rotation, duration, { 
-            x: 0,
-            y: y_rotation, 
-            z: 0,
+        this._rotationTween = TweenLite.to(this.rotation, duration, {
+            directionalRotation : {
+                x: "0_short",
+                y: (y_rotation + "_short"),
+                z: "0_short",
+                useRadians : true
+            },
             ease: 'ease-in'
         });
     };
