@@ -17,6 +17,7 @@ CHANGELOG
 **BUG fixes**
 
 * Fix crash in synchronization when trek has no difficulty
+* Fix POI list interaction after AJAX navigation (fixes #188)
 
 **Minor changes**
 

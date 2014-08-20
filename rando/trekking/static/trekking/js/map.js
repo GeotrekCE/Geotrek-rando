@@ -997,7 +997,7 @@ function initDetailPoisLayer(map, poiUrl) {
     });
 
     function getMarker(pk) {
-        var marker = poisMarkersById[pk];
+        var marker = poisMarkersById[pk+''];
         if (!marker) {
             console.warn('POI ' + pk + ' unknown');
             return null;
@@ -1009,7 +1009,7 @@ function initDetailPoisLayer(map, poiUrl) {
         return marker;
     }
 
-    $(window).on('poilist:mouseover', function (e, pk) {
+    $(window).off('poilist:mouseover').on('poilist:mouseover', function (e, pk) {
         var marker = getMarker(pk);
         if (!marker) return;
 
@@ -1024,7 +1024,7 @@ function initDetailPoisLayer(map, poiUrl) {
                         DETAIL_POI_OPTIONS.pan);
     });
 
-    $(window).on('poilist:mouseout', function (e, pk) {
+    $(window).off('poilist:mouseout').on('poilist:mouseout', function (e, pk) {
         var marker = getMarker(pk);
         if (!marker) return;
         if (typeof marker.hideLabel == 'function') {
@@ -1042,14 +1042,14 @@ function initPOIsList(map) {
             position: 'right'
         });
 
-        $(window).on('pois:shown', function () {
+        $(window).off('pois:shown').on('pois:shown', function () {
             poiSidebar.show();
         });
-        $(window).on('pois:hidden', function () {
+        $(window).off('pois:hidden').on('pois:hidden', function () {
             poiSidebar.hide();
         });
 
-        $(window).on('map:ready', function () {
+        $(window).off('map:ready').on('map:ready', function () {
             map.addControl(poiSidebar);
             poiSidebar.show();
 
@@ -1082,7 +1082,7 @@ function initPOIsList(map) {
             });
 
             // Scroll to detail when marker hovered
-            $(window).on('poimap:mouseover', function (e, pk) {
+            $(window).off('poimap:mouseover').on('poimap:mouseover', function (e, pk) {
                 var $item = $sidebar.find('.poi[data-pk=' + pk + ']');
                 var scrollTo = $item.parent().scrollTop() +
                                $item.offset().top -
@@ -1093,7 +1093,7 @@ function initPOIsList(map) {
             });
 
             // Prevent scrolling page when bottom reached
-            $sidebar.bind( 'mousewheel DOMMouseScroll', function ( e ) {
+            $sidebar.bind('mousewheel DOMMouseScroll', function ( e ) {
                 var e0 = e.originalEvent,
                     delta = e0.wheelDelta || -e0.detail;
 
