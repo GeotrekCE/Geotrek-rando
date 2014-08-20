@@ -11,6 +11,11 @@ CHANGELOG
   By default, only audio, video and PDFs are shown, see settings ``FILELIST_ENABLED``
   and ``FILELIST_MIMETYPES``.
 
+**BUG fixes**
+
+* Fix crash in synchronization when trek has no difficulty
+
+
 1.30 (2014-08-01)
 -----------------
 

@@ -41,6 +41,8 @@ def reroot(item, attr=None):
     all pictogram and related URLs with start with a prefix.
     This makes sure everything is re-rooted with `MEDIA_URL`.
     """
+    if item is None:
+        return None
     if isinstance(item, list):
         return [reroot(i, attr) for i in item]
     if attr is not None:
