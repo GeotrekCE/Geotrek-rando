@@ -2316,11 +2316,11 @@ ul.errorlist {
 .leaflet-popup-content .tourism {
   width: 450px !important;
 }
-.leaflet-popup-content .tourism a.phone {
+.leaflet-popup-content .tourism .phone {
   display: block;
   margin-left: 5px;
 }
-.leaflet-popup-content .tourism a.phone:after {
+.leaflet-popup-content .tourism .phone:after {
   content: "";
   clear: both;
   display: block;

@@ -107,13 +107,15 @@
             props.website = props.website === '' ? '' :
                             /https?/.test(props.website) ? props.website :
                             'http://' + props.website;
+            props['website_label'] = gettext('Website');
+            props['phone_label'] = gettext('Contact');
 
             var content = L.Util.template('<div class="tourism">' +
                                             '<h3>{title}</h3>' +
                                             '<img class="preview" src="{picture_url}" width="200">' +
                                             '<p class="description">{description}</p>' +
-                                            '<a href="{website}" target="_blank">{website}</a>' +
-                                            '<a href="tel:{phone}" class="phone">{phone}</a>' +
+                                            '<a class="website" href="{website}" target="_blank">{website_label}</a>' +
+                                            '<span class="phone">{phone_label}: <a href="tel:{phone}">{phone}</a></span>' +
                                           '</div>', props);
             var popup = L.popup({
                             maxWidth: this.options.popupSize[0],

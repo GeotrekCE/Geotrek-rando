@@ -15,6 +15,10 @@ CHANGELOG
 
 * Fix crash in synchronization when trek has no difficulty
 
+**Minor changes**
+
+* Added labels to tourism popups phone and website
+
 
 1.30 (2014-08-01)
 -----------------
