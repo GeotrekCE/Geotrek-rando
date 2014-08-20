@@ -295,3 +295,6 @@ CAPTCHA_AJAX = True
 
 # END FEEDBACK APP CONFIG PART
 ###
+
+DISQUS_ENABLED = False
+DISQUS_SHORTNAME = 'register on disqus.com'

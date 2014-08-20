@@ -10,6 +10,9 @@ CHANGELOG
 * All attachments of treks can now be shown in detail page (fixes #131).
   By default, only audio, video and PDFs are shown, see settings ``FILELIST_ENABLED``
   and ``FILELIST_MIMETYPES``.
+* Ability to choose different cameras, and view POIs details in 3D view (by Célian Garcia)
+* Disqus comments integration on treks detail pages (fixes #133).
+  See dedicated section in README.
 
 **BUG fixes**
 
@@ -18,6 +21,8 @@ CHANGELOG
 **Minor changes**
 
 * Added labels to tourism popups phone and website
+* Added setting ``VIEW3D_TILES_NUMBER_LIMIT`` to control the maximum number of
+  tiles to be used in the 3D view (default: 200)
 
 
 1.30 (2014-08-01)
