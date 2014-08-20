@@ -2,7 +2,7 @@
 CHANGELOG
 =========
 
-1.31 (unreleased)
+1.31 (2014-08-20)
 -----------------
 
 **New features**
