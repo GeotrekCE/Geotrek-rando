@@ -222,6 +222,20 @@ function view_detail() {
     $('#usages div, #themes div').tooltip();
     $('#trek-identity .info').tooltip();
     $('a.print.disabled').tooltip({placement: 'left'});
+
+    // Load Disqus thread (if enabled)
+    if (window.DISQUS) {
+        var $container = $('#disqus_thread');
+        DISQUS.reset({
+          reload: true,
+          config: function () {
+            this.page.identifier = $container.data('disqus-identifier');
+            this.page.title = $container.data('disqus-title');
+            this.page.url = $container.data('disqus-url');
+            this.language = $container.data('disqus-language');
+          }
+        });
+    }
 }
 
 function altimetricInit(jsonurl) {

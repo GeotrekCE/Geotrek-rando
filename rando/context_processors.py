@@ -32,6 +32,9 @@ def settings(request):
         'FEEDBACK_FORM_ENABLED': settings_.FEEDBACK_FORM_ENABLED,
 
         'TOURISM_ENABLED': settings_.TOURISM_ENABLED,
+
+        'DISQUS_ENABLED': settings_.DISQUS_ENABLED,
+        'DISQUS_SHORTNAME': settings_.DISQUS_SHORTNAME
     }
 
 

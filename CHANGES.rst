@@ -11,6 +11,8 @@ CHANGELOG
   By default, only audio, video and PDFs are shown, see settings ``FILELIST_ENABLED``
   and ``FILELIST_MIMETYPES``.
 * Ability to choose different cameras, and view POIs details in 3D view (by Célian Garcia)
+* Disqus comments integration on treks detail pages (fixes #133).
+  See dedicated section in README.
 
 **BUG fixes**
 

@@ -46,5 +46,10 @@
           <span class="hidden">{% trans "Zoom to trek" %}</span>
         </a>
     </div>
+    {% if DISQUS_ENABLED %}
+    <div class="comments-count">
+       <a href="{% locale_url request.LANGUAGE_CODE "trekking:detail" trek.properties.slug %}#disqus_thread" data-disqus-identifier="trek-{{ trek.properties.pk }}"></a>
+    </div>
+    {% endif %}
   </div>
 </div>

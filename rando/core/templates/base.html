@@ -182,5 +182,10 @@
         {% if FEEDBACK_FORM_ENABLED %}
             {% include "feedback/_popup_feedback.html" %}
         {% endif %}
+
+        {% if DISQUS_ENABLED %}
+            <script src="//{{ DISQUS_SHORTNAME }}.disqus.com/embed.js"></script>
+            <script src="//{{ DISQUS_SHORTNAME }}.disqus.com/count.js"></script>
+        {% endif %}
     </body>
 </html>

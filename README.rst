@@ -66,15 +66,6 @@ It is also wise to change the permissions of this file, in order to protect sens
 such as Geotrek password.
 
 
-Feedback app configuration
---------------------------
-
-Configure recaptcha :
-
-* Go to http://www.google.com/recaptcha, create an account, follow the instructions to get public/private key for your domain name,
-* Add respective values on setting parameters **RECAPTCHA_PUBLIC_KEY** and **RECAPTCHA_PRIVATE_KEY**.
-
-
 Apache vhost
 ------------
 
@@ -261,6 +252,16 @@ To hide the footer, add in ``style.css``:
 This file can be used to inject extra Javascript code, using a ``<script>`` tag.
 
 
+Feedback form
+-------------
+
+The feedback form is protected with the reCaptcha Antispam system.
+
+* Go to http://www.google.com/recaptcha and create an account
+* Follow the instructions to get public/private key for your domain name
+* Add respective values in settings ``RECAPTCHA_PUBLIC_KEY`` and ``RECAPTCHA_PRIVATE_KEY``.
+
+
 Trek filters
 ------------
 
@@ -429,6 +430,18 @@ Additional tourism layers can be added and shown as markers on maps.
 * In Geotrek admin (>0.23), set up some datasources layers, with `public`
   among targets.
 * Synchronize
+
+
+Disqus comments on detail pages
+-------------------------------
+
+It is possible to enable comment threads in detail pages, using Disqus.
+
+* Set ``DISQUS_ENABLED`` to True
+* Go to http://disqus.com, and create an account
+* Obtain a shortname for the domain name (*New Website*)
+* Specify ``DISQUS_SHORTNAME`` in settings.
+* Configure the apparence and default language from Disqus parameters webpage.
 
 
 ===============
