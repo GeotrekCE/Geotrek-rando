@@ -47,6 +47,8 @@ makina-projects.projectname:
     DISQUS_ENABLED: False
     DISQUS_SHORTNAME: 'yoursite-id'
     FILTER_ASCENT_VALUES: '(300, 600, 1000)'
+    FLATPAGES_TILES:
+       - '': ''
     FLATPAGES_POLICY_PAGE: '3'
     PREPROD: False
     TOURISM_ENABLED: True
@@ -55,7 +57,7 @@ makina-projects.projectname:
     ftpusers:
       - editor:
           pass: "secret"
-    sync_periodicity: 0 * * * * 
+    sync_periodicity: 0 * * * *
     sync_mail: root
     LEAFLET_CONFIG:
       TILES:
