@@ -107,3 +107,42 @@ cron-make-sync:
                 MAILTO={{data.sync_mail}}
                 {{data.sync_periodicity}} root {{cfg.data_root}}/sync.sh
 {% endif %}
+
+
+
+{% if data.build_mbtiles_periodicity %}
+#
+# TODO : this is an exact copy of the above scron-make-sync
+# but for the building mbtiles command
+#
+scron-build-mbtiles:
+  file.managed:
+    - watch:
+      - cmd: static-{{cfg.name}}
+    - name: {{cfg.data_root}}/build_mbtiles.sh
+    - mode: 750
+    - contents: |
+                #!/usr/bin/env bash
+                LOG="{{cfg.data_root}}/build_mbtiles.log"
+                lock="${0}.lock"
+                if [ -e "${lock}" ];then
+                  echo "Locked ${0}";exit 1
+                fi
+                touch "${lock}"
+                salt-call --out-file="${LOG}" --retcode-passthrough -lall --local mc_project.run_task {{cfg.name}} task_mbtiles 1>/dev/null 2>/dev/null
+                ret="${?}"
+                rm -f "${lock}"
+                if [ "x${ret}" != "x0" ];then
+                  cat "${LOG}"
+                fi
+                exit "${ret}"
+cron-build-mbtiles:
+  file.managed:
+    - watch:
+      - cmd: static-{{cfg.name}}
+    - name: /etc/cron.d/randobuildmbtiles
+    - mode: 750
+    - contents: |
+                MAILTO={{data.build_mbtiles_mail}}
+                {{data.build_mbtiles_periodicity}} root {{cfg.data_root}}/build_mbtiles.sh
+{% endif %}

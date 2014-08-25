@@ -1,0 +1,61 @@
+<script type="text/javascript">
+       var ALTIMETRIC_PROFILE_OPTIONS = {
+                  fillColor: '#7de043',
+                  lineColor: '#4e902b',
+                  lineWidth: 3,
+       };
+       var TREK_LAYER_OPTIONS = {
+                  style: {'color': '#FF3300', 'weight': 5, 'opacity': 0.5},
+                  hoverstyle: {'color': '#ff3300', 'weight': 5, 'opacity': 0.4},
+                  outlinestyle: {'color': '#ff9980', 'weight': 10, 'opacity': 0.4},
+                  positionstyle: {'fillOpacity': 1.0, 'opacity': 1.0, 'fillColor': 'white', 'color': 'black', 'width': 3},
+                  arrowstyle: {'fill': 'black', 'font-weight': 'normal'}
+       };  
+</script>
+
+<style>
+                .row-footer {
+                        text-align: center;
+                        /*margin-left: auto;
+                        margin-right: auto;
+                        margin-top: 5px;
+                        width: 600px;   #981D97*/
+                        color: #9E969A;
+                        font-size: 11px;
+                        padding-top:2px;
+                }
+        </style>
+        <div class="row-fluid">
+                <div class="row-footer">
+                        <div class="span3">
+                                <img src="/media/img/footer/Logo_Parc.jpg" title = "Rando Grands Causses"/>
+                                <a href="http://geotrek.fr" target="_blank"><img src="/media/img/footer/logoGeotrek.png" title = "Powered by Geotrek"/></a>
+                        </div>
+                
+                        <div class="span6">
+                                Ce site Internet est cofinancé par l’Union européenne. L'Europe s'engage en Midi-Pyrénées avec le Fond européen de développement régional.<br/>
+                                <a href="#" class="creditview" >Conception et crédits</a> -
+                                <a target="_blank" href="http://www.parc-grands-causses.fr/mentions-legales">Mentions légales</a> - 
+                                <a target="_blank" href="http://www.parc-grands-causses.fr/comment-venir">Venir dans le Parc</a> - 
+                                <a target="_blank" href="http://www.parc-grands-causses.fr/contact">Contacts</a> - 
+                                <a target="_blank" href="http://www.parc-grands-causses.fr/">Site du Parc national</a></p>
+                        </div>
+                        <div class="span3">     
+                                &nbsp;
+                                <a href="http://europa.eu/index_fr.htm" target="_blank"><img src="/media/img/footer/logo_europe.jpg" alt="Union Européenne" title="Union Européenne"/></a>
+                                &nbsp;
+                                <a href="http://www.europe-en-midipyrenees.eu/" target="_blank"><img src="/media/img/footer/Logo_FEDER_Midi-Pyrenees_ss_bord.png" alt="FEDER Midi-Pyrénées" title="FEDER Midi-Pyrénées"/></a>
+                                &nbsp;
+                                <a href="http://www.midipyrenees.fr/" target="_blank"><img src="/media/img/footer/logo_region_MP.jpg" alt="Midi-Pyrénées" title="Midi-Pyrénées"/></a>
+                        </div>
+                        <!-- <p>Application développée par Makina Corpus avec <a href="http://geotrek.fr" target="_blank">Geotrek</a>.</p>-->
+                </div>
+        </div>
+        <script type="text/javascript">
+                $("a.creditview").click(function(){
+                        $('#popup-view3d .modal-body').append('<div id="creditparc"><h3>Conception et crédits :</h3><p>Copyright © 2014 Parc des Grands Causses. Tous droits réservés. </p><p>Application développée par <a href="http://www.makina-corpus.com" target="_blank">Makina Corpus</a> avec <a href="http://www.geotrek.fr" target="_blank">Geotrek.fr</a>.</p></div>');
+                        $("#popup-view3d").modal('show');
+                        $('#popup-view3d').on('hidden',function(){$(this).find('#creditparc').remove();});
+                });
+        
+        </script>
