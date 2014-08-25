@@ -10,7 +10,7 @@ include:
 user-{{cfg.name}}-{{user}}:
   user.present:
     - name: {{user}}
-    - home: {{cfg.data_root}}/input
+    - home: {{cfg.data_root}}/input/media
     - groups: [{{cfg.group}}]
     - password: {{salt['mc_utils.unix_crypt'](data.pass)}}
     - shell: /bin/ftponly
