@@ -33,6 +33,19 @@ makina-projects.projectname:
     host: localhost
     port: 8180
     workers: 5
+    ftp_ip: null
+    ftp_port_range: '50000 50100'
+    ftpusers:
+      - editor:
+          pass: "secret"
+    sync_periodicity: 0 * * * *
+    sync_mail: root
+    build_mbtiles_periodicity: 30 1 * * *
+    build_mbtiles_mail: root
+    media_files_source: salt://makina-projects/{name}/files/media/demo
+#
+# Django Settings
+#
     DEBUG: False
     GEOTREK_SERVER: 'geotrekserver.com'
     GEOTREK_USER: 'apiuser'
@@ -52,15 +65,6 @@ makina-projects.projectname:
     FLATPAGES_POLICY_PAGE: '3'
     PREPROD: False
     TOURISM_ENABLED: True
-    ftp_ip: null
-    ftp_port_range: '50000 50100'
-    ftpusers:
-      - editor:
-          pass: "secret"
-    sync_periodicity: 0 * * * *
-    sync_mail: root
-    build_mbtiles_periodicity: 30 1 * * *
-    build_mbtiles_mail: root
     LEAFLET_CONFIG:
       TILES:
         - ['main', 'http://{s}.tiles.mapbox.com/v3/examples.map-4l7djmvo/{z}/{x}/{y}.png', '&copy; MapBox']
