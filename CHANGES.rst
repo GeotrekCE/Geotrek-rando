@@ -2,6 +2,13 @@
 CHANGELOG
 =========
 
+1.31.1 (unreleased)
+-------------------
+
+**BUG fixes**
+
+* Fix display of Disqus comments in results list and loading in detail page
+
 1.31 (2014-08-20)
 -----------------
 

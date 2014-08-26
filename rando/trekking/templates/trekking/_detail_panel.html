@@ -327,13 +327,13 @@
       </div>
 
       {% if DISQUS_ENABLED %}
-         <div id="disqus_thread"
-              data-disqus-shortname="{{ DISQUS_SHORTNAME }}"
-              data-disqus-identifier="trek-{{ object.properties.pk }}"
-              data-disqus-url="{% locale_url request.LANGUAGE_CODE "trekking:redirect" pk=object.properties.pk %}"
-              data-disqus-title="{{ object.title }}"
-              data-disqus-language="{{ request.LANGUAGE_CODE }}">
-          </div>
+        <div id="disqus_thread"
+             data-disqus-shortname="{{ DISQUS_SHORTNAME }}"
+             data-disqus-identifier="trek-{{ object.properties.pk }}"
+             data-disqus-url="{{ request.build_absolute_uri|slice:":-1" }}{% url "trekking:detail" trek.properties.slug %}"
+             data-disqus-title="{{ object.title }}"
+             data-disqus-language="{{ request.LANGUAGE_CODE }}">
+        </div>
       {% endif %}
 
     </div><!-- right column -->

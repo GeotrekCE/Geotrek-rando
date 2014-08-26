@@ -184,6 +184,7 @@
         {% endif %}
 
         {% if DISQUS_ENABLED %}
+            <script type="text/javascript">var disqus_shortname = '{{ DISQUS_SHORTNAME }}';</script>
             <script src="//{{ DISQUS_SHORTNAME }}.disqus.com/embed.js"></script>
             <script src="//{{ DISQUS_SHORTNAME }}.disqus.com/count.js"></script>
         {% endif %}

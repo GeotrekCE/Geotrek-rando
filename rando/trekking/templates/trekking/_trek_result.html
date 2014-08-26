@@ -48,7 +48,7 @@
     </div>
     {% if DISQUS_ENABLED %}
     <div class="comments-count">
-       <a href="{% locale_url request.LANGUAGE_CODE "trekking:detail" trek.properties.slug %}#disqus_thread" data-disqus-identifier="trek-{{ trek.properties.pk }}"></a>
+       <a href="{{ request.build_absolute_uri|slice:":-1" }}{% url "trekking:detail" trek.properties.slug %}#disqus_thread" data-disqus-identifier="trek-{{ trek.properties.pk }}"></a>
     </div>
     {% endif %}
   </div>
