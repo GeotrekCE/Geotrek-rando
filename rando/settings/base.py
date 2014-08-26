@@ -264,6 +264,20 @@ DESCRIPTION = {
     'fr': "Offre rando",
 }
 
+PARK_CENTER_WARNING = {
+    'en': 'This trek is within park center',
+    'fr': 'Cet itinéraire est dans le coeur du parc national',
+    'it': 'Questo itinerario si snoda nella parte centrale del Parco Nazionale',
+    'es': 'Este itinerario atraviesa la zona central del Parque Nacional',
+}
+
+PARK_CENTER_LINK = {
+    'en': 'please read access rules.',
+    'fr': 'veuillez consulter la réglementation.',
+    'it': 'siete inviatati a leggere le regole di accesso.',
+    'es': 'consulte la reglamentación, por favor.',
+}
+
 FOOTER_FILENAME = 'footer.html'
 POPUP_FILENAME = 'popup_home.html'
 POPUP_HOME_ENABLED = False

@@ -2,6 +2,14 @@
 CHANGELOG
 =========
 
+1.32.0 (unreleased)
+-------------------
+
+**New features**
+
+* Add settings to control warning content about trek being in park center (fixes #194)
+
+
 1.31.2 (2014-08-27)
 -------------------
 

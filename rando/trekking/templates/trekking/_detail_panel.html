@@ -199,9 +199,9 @@
     </div><!-- left column -->
 
     <div class="span8">
-      {% if object.properties.is_park_centered %}
+      {% if True %}
         <div id="park-center-warning" class="alert alert-info">
-            <p class="icon-park-center">{% trans "This trek is within park center" %}, <a class="pjax" href="{% locale_url request.LANGUAGE_CODE "flatpages:redirect" FLATPAGES_POLICY_PAGE %}">{% trans "please read access rules." %}</a></p>
+            <p class="icon-park-center">{{ park_center_warning }}, <a class="pjax" href="{% locale_url request.LANGUAGE_CODE "flatpages:redirect" FLATPAGES_POLICY_PAGE %}">{{ park_center_link }}</a></p>
         </div>
       {% endif %}
 

@@ -115,12 +115,6 @@ msgstr "Accès"
 msgid "Information desks"
 msgstr "Lieux de renseignement"
 
-msgid "This trek is within park center"
-msgstr "Cet itinéraire est dans le coeur du parc national"
-
-msgid "please read access rules."
-msgstr "veuillez consulter la réglementation."
-
 msgid "Clic for map interaction"
 msgstr "Cliquer pour intéragir"
 

@@ -125,6 +125,11 @@ class TrekView(PJAXResponseMixin, BaseTrekView):
             all_pictures.extend(poi.properties.pictures)
         context['all_pictures'] = all_pictures
 
+        context['park_center_warning'] = settings.PARK_CENTER_WARNING.get(self.request.LANGUAGE_CODE,
+                                                                          settings.PARK_CENTER_WARNING.get(settings.LANGUAGE_CODE, ''))
+        context['park_center_link'] = settings.PARK_CENTER_LINK.get(self.request.LANGUAGE_CODE,
+                                                                    settings.PARK_CENTER_LINK.get(settings.LANGUAGE_CODE, ''))
+
         return context
 
 

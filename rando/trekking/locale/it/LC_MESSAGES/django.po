@@ -117,12 +117,6 @@ msgstr "Accesso"
 msgid "Information desks"
 msgstr "Ufficio Informazioni"
 
-msgid "This trek is within park center"
-msgstr "Questo itinerario si snoda nella parte centrale del Parco Nazionale"
-
-msgid "please read access rules."
-msgstr "siete inviatati a leggere le regole di accesso"
-
 msgid "Clic for map interaction"
 msgstr "Cliccare per interagire con la mappa"
 
