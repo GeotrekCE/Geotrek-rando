@@ -214,7 +214,7 @@ def sync_content_trekking(sender, **kwargs):
 
         TrekListInputFile(**inputkwlang).pull()
 
-        for trek in models.Trek.tmp_objects.filter(language=language).all()[:1]:
+        for trek in models.Trek.tmp_objects.filter(language=language).all():
             InputFile(trek.properties.gpx, **inputkwlang).pull_if_modified()
             InputFile(trek.properties.kml, **inputkwlang).pull_if_modified()
 

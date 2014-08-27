@@ -2,6 +2,13 @@
 CHANGELOG
 =========
 
+1.31.2 (2014-08-27)
+-------------------
+
+**BUG fixes**
+
+* Fix trek synchronization, only the first one of the last was synced.
+
 1.31.1 (2014-08-26)
 -------------------
 
