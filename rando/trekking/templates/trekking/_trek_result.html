@@ -1,21 +1,19 @@
 {% load l10n i18n static rando_tags localeurl_tags %}
-<div id="{% if backpack = "True" %}backpack-{% endif %}trek-{{ trek.properties.pk }}"
+<div id="trek-{{ trek.properties.pk }}"
      data-id="{{ trek.properties.pk }}"
      data-slug="{{ trek.properties.slug }}"
      data-name="{{ trek.properties.name }}"
-     {% if backpack != "True" %}
-       data-main-image="{{ trek.main_image }}"
-       data-fulltext="{{ trek.fulltext }}"
-       data-themes="{{ trek.properties.themes|listid }}"
-       data-usages="{{ trek.properties.usages|listid }}"
-       data-districts="{{ trek.properties.districts|listid }}"
-       data-cities="{{ trek.properties.cities|listid:"code" }}"
-       data-route="{{ trek.properties.route.id }}"
-       data-difficulty="{{ trek.properties.difficulty.id }}"
-       data-duration="{{ trek.properties.duration|unlocalize }}"
-       data-ascent="{{ trek.properties.ascent }}"
-     {% endif %}
-     class="result" {% if show = "False" %}style="display:none"{% endif %}>
+     data-main-image="{{ trek.main_image }}"
+     data-fulltext="{{ trek.fulltext }}"
+     data-themes="{{ trek.properties.themes|listid }}"
+     data-usages="{{ trek.properties.usages|listid }}"
+     data-districts="{{ trek.properties.districts|listid }}"
+     data-cities="{{ trek.properties.cities|listid:"code" }}"
+     data-route="{{ trek.properties.route.id }}"
+     data-difficulty="{{ trek.properties.difficulty.id }}"
+     data-duration="{{ trek.properties.duration|unlocalize }}"
+     data-ascent="{{ trek.properties.ascent }}"
+     class="result">
   <div class="illust">
     <img alt="{% trans "Preview of" %} {{ trek.properties.name }}" src="{{ trek|thumbnail }}" width="120" height="120" />
   </div>
@@ -34,13 +32,8 @@
       {% endfor %}
     </div>
     <div class="search-tools">
-        {% if backpack = "True" %}
-        <a class="btn backpack icon-backpack-remove" data-id="{{ trek.properties.pk }}" data-toggle="tooltip" title="{% trans "Remove from favorites" %}">
-          <span class="hidden">{% trans "Remove from favorites" %}</span>
-        {% else %}
         <a class="btn backpack icon-backpack-add" data-id="{{ trek.properties.pk }}" data-toggle="tooltip" title="{% trans "Add to favorites" %}">
           <span class="hidden">{% trans "Add to favorites" %}</span>
-        {% endif %}
         </a>
         <a class="btn search pjax icon-binocular" data-id="{{ trek.properties.pk }}" title="{% trans "Zoom to trek" %}" href="{% locale_url request.LANGUAGE_CODE "trekking:detail" trek.properties.slug %}">
           <span class="hidden">{% trans "Zoom to trek" %}</span>

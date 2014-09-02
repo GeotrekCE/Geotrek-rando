@@ -32,19 +32,6 @@ function view_home() {
     $("#mainmap").show();  // We are on home with map
     invalidate_maps();
 
-    // Results tabs panels behaviour
-    $('#result-backpack-tabs .nav-tabs a').on('click', function (e) {
-        e.preventDefault();
-        $(this).tab('show');
-        $(this).parents('ul.nav-tabs').find('span.badge-warning').removeClass('badge-warning');
-        $(this).find('span.badge').addClass('badge-warning');
-    });
-
-    // Show active tab
-    // (see filter-hash.js)
-    if (/results|backpack/.test(window.location.hash)) {
-        $('#tab-' + window.location.hash.slice(1) + ' a').click();
-    }
     // Focus search field
     if (/search/.test(window.location.hash)) {
         $('input#search').focus();

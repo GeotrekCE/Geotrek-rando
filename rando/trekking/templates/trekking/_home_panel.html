@@ -34,10 +34,6 @@
         <a href="#results" class="icon-search">
           <span class="badge badge-warning">{{ treks|length }}</span> {% trans "Results" %}</a>
       </li>
-      <li id="tab-backpack">
-        <a href="#backpack" class="icon-backpack">
-          <span class="badge">0</span> <span class="text">{% trans "Favorites" %}</span></a>
-      </li>
     </ul>
 
     <div id="result-backpack-content" class="tab-content">
@@ -50,15 +46,7 @@
           {% endif %}
         </p>
         {% for trek in treks %}
-            {% include "trekking/_trek_result.html" with show="True" backpack="False" %}
-        {% endfor %}
-      </div>
-
-      <div class="tab-pane" id="backpack">
-        <h2 class="hidden">{% trans "Favorites" %}</h2>
-        <p id="backpackempty" style="display:none" class="tab-content-empty">{% trans "Empty" %}</p>
-        {% for trek in treks %}
-            {% include "trekking/_trek_result.html" with show="False" backpack="True" %}
+            {% include "trekking/_trek_result.html" %}
         {% endfor %}
       </div>
     </div>
