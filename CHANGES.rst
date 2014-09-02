@@ -7,6 +7,7 @@ CHANGELOG
 --------------------
 
 * Add setting ``BACKPACK_ENABLED`` to enable/disable favorites (fixes #54)
+* Geotrek 0.24
 
 
 1.32.1 (2014-09-03)

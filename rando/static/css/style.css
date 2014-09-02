@@ -770,6 +770,14 @@ header #lang-switch {
 #content #lang-switch {
   display: none;
 }
+.flatpage-content h2 {
+  font-size: 2em;
+  color: #4d4d4d;
+  text-transform: uppercase;
+}
+.flatpage-content h2:first-letter {
+  font-size: 2em;
+}
 .leaflet-label.trek {
   background: rgba(255, 225, 75, 0.5);
 }
@@ -1856,91 +1864,8 @@ p.tab-content-empty a.change-lang {
 * Detail page
 *
 */
-.alert-blank {
-  color: #f89406;
-  background-color: transparent;
-  border: 1px solid #f89406;
-}
-.alert-blank > div {
-  color: #877f84;
-}
-#detail-content-top {
-  margin-bottom: 15px;
-}
-#detail-content-top h2 {
+.detail-content .row-fluid.meta {
   margin-top: 15px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-#toolbox {
-  margin-right: 15px;
-  margin-bottom: 0;
-  margin-top: 0;
-  text-align: right;
-  min-width: 290px;
-}
-#toolbox a:before {
-  font-size: 20px;
-  position: absolute;
-  left: 5px;
-}
-#toolbox a.print,
-#toolbox a.backpack,
-#toolbox a.download,
-#toolbox a.feedback {
-  position: relative;
-  padding-left: 30px;
-  vertical-align: top;
-  margin-left: 5px;
-}
-#toolbox a.gpx,
-#toolbox a.kml {
-  padding-left: 25px;
-}
-#toolbox a.backpack,
-#toolbox a.download,
-#toolbox a.feedback,
-#toolbox #btn-print {
-  margin-top: 5px;
-}
-html.no-webgl #toolbox a.view3d {
-  display: none;
-}
-#detail-content-top h2:first-letter,
-.flatpage-content h2:first-letter {
-  font-size: 2em;
-}
-#detail-content-top h2,
-.flatpage-content h2 {
-  font-size: 2em;
-  color: #4d4d4d;
-  text-transform: uppercase;
-}
-#detail-content-title {
-  width: 98%;
-  padding: 10px 1%;
-  background-color: #f0f2ed;
-  border-top: 1px solid #d7ddcf;
-  border-bottom: 1px solid #d7ddcf;
-  margin-bottom: 18px;
-}
-#detail-content-title h2 {
-  margin-top: -9px;
-  margin-bottom: 0;
-  line-height: 1.4em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-#detail-content-title h3 {
-  background: none;
-  font-weight: normal;
-  font-size: 14px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin: 0;
-  margin-left: 2px;
-  line-height: 20px;
 }
 .detail-content h3 {
   font-size: 14px;
@@ -1955,6 +1880,109 @@ html.no-webgl #toolbox a.view3d {
 }
 .detail-content p {
   text-align: justify;
+}
+.detail-content p.teaser {
+  line-height: 1.1em;
+  font-size: 18px;
+  font-family: inherit;
+  font-weight: bold;
+  color: inherit;
+  text-rendering: optimizelegibility;
+}
+.detail-content p.image {
+  text-align: center;
+}
+.detail-content #detail-content-title {
+  width: 98%;
+  padding: 10px 1%;
+  background-color: #f0f2ed;
+  border-top: 1px solid #d7ddcf;
+  border-bottom: 1px solid #d7ddcf;
+  margin-bottom: 18px;
+}
+.detail-content #detail-content-title .title {
+  display: inline-block;
+  margin-right: 5px;
+}
+.detail-content #detail-content-title #trek-identity {
+  display: inline-block;
+}
+.detail-content #detail-content-title #trek-identity p {
+  margin-bottom: 0;
+  color: #877f84;
+  text-align: left;
+}
+.detail-content #detail-content-title #trek-identity .info {
+  display: inline-block;
+  text-align: center;
+  margin-right: 10px;
+}
+.detail-content #detail-content-title #trek-identity .info span {
+  display: block;
+}
+.detail-content #detail-content-title #trek-identity #themes,
+.detail-content #detail-content-title #trek-identity #usages {
+  color: #877f84;
+  vertical-align: top;
+}
+.detail-content #detail-content-title #trek-identity #themes ul,
+.detail-content #detail-content-title #trek-identity #usages ul {
+  margin: 0;
+  text-align: center;
+}
+.detail-content #detail-content-title #trek-identity #usages {
+  margin-left: 30px;
+  margin-right: 20px;
+}
+.detail-content #detail-content-title #trek-identity #themes li,
+.detail-content #detail-content-title #trek-identity #usages li,
+.detail-content #detail-content-title #trek-identity #networks li {
+  list-style-type: none;
+  display: inline-block;
+}
+.detail-content #detail-content-title #trek-identity #themes .pictogram,
+.detail-content #detail-content-title #trek-identity #usages .pictogram {
+  opacity: 0.5;
+}
+.detail-content #detail-content-title #toolbox {
+  float: right;
+  text-align: right;
+  max-width: 300px;
+}
+.detail-content #detail-content-title #toolbox a:before {
+  font-size: 20px;
+  position: absolute;
+  left: 5px;
+}
+.detail-content #detail-content-title #toolbox a.print,
+.detail-content #detail-content-title #toolbox a.backpack,
+.detail-content #detail-content-title #toolbox a.download,
+.detail-content #detail-content-title #toolbox a.feedback {
+  position: relative;
+  padding-left: 30px;
+  vertical-align: top;
+  margin-left: 5px;
+}
+.detail-content #detail-content-title #toolbox a.gpx,
+.detail-content #detail-content-title #toolbox a.kml {
+  padding-left: 25px;
+}
+.detail-content #detail-content-title #toolbox a.backpack,
+.detail-content #detail-content-title #toolbox a.download,
+.detail-content #detail-content-title #toolbox a.feedback,
+.detail-content #detail-content-title #toolbox #btn-print {
+  margin-top: 5px;
+}
+.detail-content #detail-content-title html.no-webgl #toolbox a.view3d {
+  display: none;
+}
+.alert-blank {
+  color: #f89406;
+  background-color: transparent;
+  border: 1px solid #f89406;
+}
+.alert-blank > div {
+  color: #877f84;
 }
 .alert h3 {
   margin: 0px;
@@ -1987,48 +2015,6 @@ html.no-webgl #toolbox a.view3d {
   font-size: 23px;
   top: 6px;
   margin-right: 5px;
-}
-p.teaser {
-  line-height: 1.1em;
-  font-size: 18px;
-  font-family: inherit;
-  font-weight: bold;
-  color: inherit;
-  text-rendering: optimizelegibility;
-}
-.detail-content p.image {
-  text-align: center;
-}
-#trek-identity p {
-  margin-bottom: 0;
-  color: #877f84;
-  text-align: left;
-}
-#trek-identity span.value {
-  /* Geotrek 0.23 layout */
-  color: #f89406;
-}
-#trek-identity .info {
-  display: inline-block;
-  text-align: center;
-  margin-right: 10px;
-}
-#trek-identity .info span {
-  display: block;
-}
-#trek-identity #themes,
-#trek-identity #usages {
-  color: #877f84;
-  vertical-align: top;
-}
-#trek-identity #themes ul,
-#trek-identity #usages ul {
-  margin: 0;
-  text-align: center;
-}
-#trek-identity #usages {
-  margin-left: 30px;
-  margin-right: 20px;
 }
 .leaflet-marker-icon.point-reference {
   background-color: red;
@@ -2081,21 +2067,8 @@ p.teaser {
 .leaflet-popup.information-desk img {
   display: none;
 }
-#themes li,
-#usages li,
-#networks li {
-  list-style-type: none;
-  display: inline-block;
-}
-#themes .pictogram,
-#usages .pictogram {
-  opacity: 0.5;
-}
 .trek-networks img {
   height: 1.5em;
-}
-.row-fluid.meta {
-  margin-top: 15px;
 }
 #park-center-warning {
   font-weight: bold;
