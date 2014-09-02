@@ -1522,17 +1522,7 @@ header #lang-switch {
 #toggle-side-bar.closed:before {
   content: "g";
 }
-/*
-* Fake tabs
-*/
-#fake-search-tabs {
-  min-width: 300px;
-}
-#fake-search-tabs ul {
-  margin-bottom: 0;
-}
-#side-bar .nav-tabs > li > a,
-#fake-search-tabs .nav-tabs > li > a {
+#side-bar .nav-tabs > li > a {
   position: relative;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -2773,8 +2763,7 @@ ul.errorlist {
   #tab-backpack .badge,
   #tab-backpack .text,
   #tab-results,
-  #side-bar .illust,
-  #fake-search-tabs {
+  #side-bar .illust {
     display: none;
   }
 }
