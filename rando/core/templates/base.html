@@ -75,6 +75,11 @@
             <a class="home pjax {% if POPUP_HOME_ENABLED %}popup{% endif %}" href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}#">
                <h1>{{ TITLE }}</h1>
             </a>
+            {% if BACKPACK_ENABLED %}
+            <a class="btn icon-backpack" id="global-backpack" href="#" title="{% trans "Favorites" %}">
+                <span class="count label">0</span> {% trans "Favorites" %}
+            </a>
+            {% endif %}
             <a class="btn utils icon-share" id="global-share" href="#" title="{% trans "Share" %}">
                 {% trans "Share" %}
             </a>
@@ -148,7 +153,6 @@
         <script src="{% static "trekking/js/ui.js" %}"></script>
         <script src="{% static "trekking/js/filter.js" %}"></script>
         {% if BACKPACK_ENABLED %}
-        <script src="{% static "backpack/js/backpack.js" %}"></script>
         <script src="{% static "backpack/js/main.js" %}"></script>
         {% endif %}
         <script src="{% static "trekking/js/map.js" %}"></script>

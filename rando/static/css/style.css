@@ -770,6 +770,12 @@ header #lang-switch {
 #content #lang-switch {
   display: none;
 }
+.backpack-items-list {
+  min-width: 300px;
+}
+.popover {
+  max-width: none;
+}
 .flatpage-content h2 {
   font-size: 2em;
   color: #4d4d4d;

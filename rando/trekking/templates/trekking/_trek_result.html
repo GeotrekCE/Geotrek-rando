@@ -1,6 +1,7 @@
 {% load l10n i18n static rando_tags localeurl_tags %}
 <div id="trek-{{ trek.properties.pk }}"
      data-id="{{ trek.properties.pk }}"
+     data-url="{% locale_url request.LANGUAGE_CODE "trekking:detail" trek.properties.slug %}"
      data-slug="{{ trek.properties.slug }}"
      data-name="{{ trek.properties.name }}"
      data-main-image="{{ trek.main_image }}"
@@ -12,6 +13,7 @@
      data-route="{{ trek.properties.route.id }}"
      data-difficulty="{{ trek.properties.difficulty.id }}"
      data-duration="{{ trek.properties.duration|unlocalize }}"
+     data-duration-pretty="{{ trek.properties.duration_pretty }}"
      data-ascent="{{ trek.properties.ascent }}"
      class="result">
   <div class="illust">
@@ -32,9 +34,11 @@
       {% endfor %}
     </div>
     <div class="search-tools">
+        {% if BACKPACK_ENABLED %}
         <a class="btn backpack icon-backpack-add" data-id="{{ trek.properties.pk }}" data-toggle="tooltip" title="{% trans "Add to favorites" %}">
           <span class="hidden">{% trans "Add to favorites" %}</span>
         </a>
+        {% endif %}
         <a class="btn search pjax icon-binocular" data-id="{{ trek.properties.pk }}" title="{% trans "Zoom to trek" %}" href="{% locale_url request.LANGUAGE_CODE "trekking:detail" trek.properties.slug %}">
           <span class="hidden">{% trans "Zoom to trek" %}</span>
         </a>
