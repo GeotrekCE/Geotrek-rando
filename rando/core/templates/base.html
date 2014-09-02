@@ -147,7 +147,10 @@
         {% endif %}
         <script src="{% static "trekking/js/ui.js" %}"></script>
         <script src="{% static "trekking/js/filter.js" %}"></script>
-        <script src="{% static "trekking/js/backpack.js" %}"></script>
+        {% if BACKPACK_ENABLED %}
+        <script src="{% static "backpack/js/backpack.js" %}"></script>
+        <script src="{% static "backpack/js/main.js" %}"></script>
+        {% endif %}
         <script src="{% static "trekking/js/map.js" %}"></script>
         {% if FILTERS_HASH_ENABLED %}
         <script src="{% static "trekking/js/filter-hash.js" %}"></script>

@@ -2,6 +2,13 @@
 CHANGELOG
 =========
 
+
+1.33dev (unreleased)
+--------------------
+
+* Add setting ``BACKPACK_ENABLED`` to enable/disable favorites (fixes #54)
+
+
 1.32.1 (2014-09-03)
 -------------------
 
