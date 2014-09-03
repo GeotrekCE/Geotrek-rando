@@ -78,7 +78,7 @@ class FlatPageManager(object):
 
 
 class FlatPage(object):
-    def __init__(self, pk, title, content, fullpath):
+    def __init__(self, pk=None, title=None, content=None, fullpath=None):
         self.pk = pk
         self.title = title
         self.content = content
@@ -88,6 +88,10 @@ class FlatPage(object):
     def last_modified(self):
         t = os.path.getmtime(self.fullpath)
         return datetime.datetime.fromtimestamp(t)
+
+    @property
+    def target(self):
+        return settings.FLATPAGES_TARGETS.get(self.title, 'all')
 
     def slug(self):
         return slugify(self.title)
