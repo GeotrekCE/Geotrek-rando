@@ -211,6 +211,17 @@ You can set titles using this setting ::
     }
 
 
+You can hide the static pages from the navigation bar, but setting a specific target.
+They be will reachable at ``/page/<slug>`` but won't be listed in the navigation.
+By default only ``all`` and ``rando`` are shown in the navigation bar. In *Geotrek-mobile*, only
+targets ``all`` and ``mobile`` will be taken into account.
+
+    FLATPAGES_TARGETS = {
+        'avertissements': 'mobile',
+        'credits': 'hidden'
+    }
+
+
 CSS style
 ---------
 

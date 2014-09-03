@@ -8,7 +8,14 @@ CHANGELOG
 **New features**
 
 * Add settings to control warning content about trek being in park center (fixes #194)
+* Hide some static pages from the navigation bar, using the ``FLATPAGES_TARGETS``
+  setting. Only targets ``all`` and ``rando`` are listed.
+  This is useful for *Geotrek-mobile* pages, to avoid specific pages like
+  *Credits* to be linked from footer and hidden from navigation.
 
+**Internal changes**
+
+* Added a view to get the static pages list as JSON
 
 1.31.2 (2014-08-27)
 -------------------

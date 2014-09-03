@@ -13,6 +13,7 @@ class FlatpageNode(template.Node):
     def render(self, context):
         lang = context['request'].LANGUAGE_CODE
         flatpages = FlatPage.objects.filter(language=lang).all()
+        flatpages = [fp for fp in flatpages if fp.target in ('all', 'rando')]
         context[self.context_name] = flatpages
         return ''
 

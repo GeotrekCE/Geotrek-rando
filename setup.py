@@ -17,7 +17,8 @@ install_requires = [
     'django_compressor == 1.3',
     'django-ganalytics == 0.2',
     'django-recaptcha == 0.0.9',
-    'landez == 2.1.1'
+    'landez == 2.1.1',
+    'BeautifulSoup == 3.2.1'
 ]
 
 
