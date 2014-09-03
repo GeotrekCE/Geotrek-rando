@@ -34,6 +34,7 @@ class FlatPagesJSONTest(TestCase):
         self.assertEqual(self.first['slug'], 'fake-page')
         self.assertEqual(self.first['target'], 'all')
         self.assertIsNotNone(self.first.get('last_modified'))
+        self.assertIsNotNone(self.first.get('media'))
         self.assertEqual(self.first['url'], '/fr/pages/fake-page')
 
 

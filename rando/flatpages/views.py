@@ -48,6 +48,7 @@ def pages_json(request):
             'last_modified': page.last_modified.isoformat(),
             'target': page.target,
             'content': page.content,
+            'media': page.parse_media(),
             'url': reverse('flatpages:page', kwargs={'slug': page.slug()})
         }
         results.append(result)
