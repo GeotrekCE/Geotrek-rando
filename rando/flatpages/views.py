@@ -45,6 +45,7 @@ def pages_json(request):
         result = {
             'title': page.title,
             'slug': page.slug(),
+            'last_modified': page.last_modified.isoformat(),
             'target': page.target,
             'content': page.content,
             'url': reverse('flatpages:page', kwargs={'slug': page.slug()})
