@@ -1,5 +1,5 @@
 # -*- coding: utf8 -*-
-
+import mock
 import json
 import os
 
@@ -8,6 +8,8 @@ from django.test.utils import override_settings
 
 from rando.core.tests import TESTS_DATA_PATH
 from rando.flatpages.models import FlatPage
+from rando.flatpages.templatetags.flatpages_tags import get_flatpages
+
 
 TESTS_PAGES_PATH = os.path.join(TESTS_DATA_PATH, 'media', 'pages')
 
@@ -33,6 +35,17 @@ class FlatPagesJSONTest(TestCase):
         self.assertEqual(self.first['target'], 'all')
         self.assertIsNotNone(self.first.get('last_modified'))
         self.assertEqual(self.first['url'], '/fr/pages/fake-page')
+
+
+class TemplateTagTest(TestCase):
+    @override_settings(FLATPAGES_TARGETS={'a-title': 'mobile'})
+    @mock.patch('rando.flatpages.models.FlatPageManager.all')
+    def test_targets_all_and_rando_are_shown_navigation(self, list_mock):
+        list_mock.return_value = [FlatPage(title='a-title'),
+                                  FlatPage(title='another-title')]
+        response = self.client.get('/fr/')
+        self.assertNotContains(response, 'a-title')
+        self.assertContains(response, 'another-title')
 
 
 class FlatPagesTest(TestCase):
