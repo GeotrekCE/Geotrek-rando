@@ -44,9 +44,9 @@ def pages_json(request):
     for page in FlatPage.objects.filter(language=lang).all():
         result = {
             'title': page.title,
-            'slug': page.slug,
+            'slug': page.slug(),
             'content': page.content,
-            'url': reverse('flatpages:page', {'slug': page.slug})
+            'url': reverse('flatpages:page', kwargs={'slug': page.slug()})
         }
         results.append(result)
 
