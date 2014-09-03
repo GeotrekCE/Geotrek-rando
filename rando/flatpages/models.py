@@ -1,7 +1,9 @@
 import os
 import datetime
 import re
+import mimetypes
 
+from BeautifulSoup import BeautifulSoup
 from django.conf import settings
 from django.db import models
 from django.template.defaultfilters import slugify
@@ -92,6 +94,28 @@ class FlatPage(object):
     @property
     def target(self):
         return settings.FLATPAGES_TARGETS.get(self.title, 'all')
+
+    def parse_media(self):
+        soup = BeautifulSoup(self.content or '')
+        images = soup.findAll('img')
+        results = []
+        for image in images:
+            url = image.get('src')
+            if url is None:
+                continue
+
+            mt = mimetypes.guess_type(url, strict=True)[0]
+            if mt is None:
+                mt = 'application/octet-stream'
+
+            results.append({
+                'url': url,
+                'title': image.get('title', ''),
+                'alt': image.get('alt', ''),
+                'mimetype': mt.split('/'),
+            })
+
+        return results
 
     def slug(self):
         return slugify(self.title)
