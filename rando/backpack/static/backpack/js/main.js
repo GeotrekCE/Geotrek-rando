@@ -13,7 +13,7 @@
         $button.popover({
             animation: false,
             html: true,
-            placement: 'right',
+            placement: 'left',
             trigger: 'manual',
             title: '',
             content: ''

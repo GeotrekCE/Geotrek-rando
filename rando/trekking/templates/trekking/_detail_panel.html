@@ -23,7 +23,7 @@
   <div id="detail-content-title">
 
     <div class="title">
-      <h2><a href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}" class="pjax icon-left-open-mini"></a> {{ object.properties.name }}</h2>
+      <h2><a href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}" class="back-list pjax icon-left-open-mini" title="{% trans "Back to list" %}"></a> {{ object.properties.name }}</h2>
       <h3 id="departure-arrival">{% trans "Departure" %} : {{ object.properties.departure }}{% if object.properties.arrival %} &rarr; {% trans "Arrival" %} : {{ object.properties.arrival }}{% endif %}</h3>
     </div>
 

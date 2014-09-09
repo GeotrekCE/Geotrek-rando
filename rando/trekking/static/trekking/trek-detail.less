@@ -52,7 +52,22 @@
 
     .title {
       display: inline-block;
+
+      @media(max-width: @screen-sm) {
+        display: none;
+      }
+
       margin-right: 5px;
+      padding-left: 20px;
+
+      .back-list {
+        text-decoration: none;
+
+        &:before {
+          position: absolute;
+          left: 3px;
+        }
+      }
     }
 
     #trek-identity {

@@ -75,14 +75,19 @@
             <a class="home pjax {% if POPUP_HOME_ENABLED %}popup{% endif %}" href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}#">
                <h1>{{ TITLE }}</h1>
             </a>
-            {% if BACKPACK_ENABLED %}
-            <a class="btn icon-backpack" id="global-backpack" href="#" title="{% trans "Favorites" %}">
-                <span class="count label">0</span> {% trans "Favorites" %}
-            </a>
-            {% endif %}
-            <a class="btn utils icon-share" id="global-share" href="#" title="{% trans "Share" %}">
-                {% trans "Share" %}
-            </a>
+
+            <div class="navigation">
+                <div class="global-toolbar">
+                    {% if BACKPACK_ENABLED %}
+                    <a class="btn icon-backpack" id="global-backpack" href="#" title="{% trans "Favorites" %}">
+                        <span class="count label">0</span> {% trans "Favorites" %}
+                    </a>
+                    {% endif %}
+                    <a class="btn utils icon-share" id="global-share" href="#" title="{% trans "Share" %}">
+                        {% trans "Share" %}
+                    </a>
+                </div>
+            </div>
         </header>
 
         <div class="container-fluid container-content">

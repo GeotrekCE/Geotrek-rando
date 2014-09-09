@@ -631,10 +631,8 @@ header a {
   }
 }
 #navigationbar {
-  position: absolute;
   display: none;
-  top: 24px;
-  right: 70px;
+  float: right;
   z-index: 1031;
 }
 @media (min-width: 979px) {
@@ -643,6 +641,7 @@ header a {
   }
 }
 #navigationbar ul {
+  margin: 0px;
   list-style-type: none;
 }
 #navigationbar ul li {
@@ -688,19 +687,17 @@ header #navigationbar {
   font-size: 18px;
   vertical-align: middle;
 }
-#global-share {
-  position: absolute;
-  padding-left: 5px;
-  top: 26px;
-  right: 10px;
+.navigation {
+  float: right;
+  margin-top: -60px;
+  margin-right: 10px;
+}
+.navigation .global-toolbar {
+  float: right;
+  margin-top: 2px;
   line-height: 17px;
   font-size: 13px;
   padding-left: 25px;
-}
-#global-share:before {
-  position: absolute;
-  left: 4px;
-  font-size: 17px;
 }
 .popover-content {
   padding: 5px;
@@ -1909,6 +1906,19 @@ p.tab-content-empty a.change-lang {
 .detail-content #detail-content-title .title {
   display: inline-block;
   margin-right: 5px;
+  padding-left: 20px;
+}
+@media (max-width: 767px) {
+  .detail-content #detail-content-title .title {
+    display: none;
+  }
+}
+.detail-content #detail-content-title .title .back-list {
+  text-decoration: none;
+}
+.detail-content #detail-content-title .title .back-list:before {
+  position: absolute;
+  left: 3px;
 }
 .detail-content #detail-content-title #trek-identity {
   display: inline-block;
@@ -2697,11 +2707,6 @@ ul.errorlist {
   }
   #detail-content-title h3 {
     margin-left: 0;
-  }
-  #detail-content-title .title {
-    position: absolute;
-    top: 12px;
-    width: 99%;
   }
   #toolbox a.backpack,
   #toolbox a.download {
