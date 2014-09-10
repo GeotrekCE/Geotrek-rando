@@ -9,29 +9,27 @@ casper.test.begin('Treks can be added and removed from backpack', function(test)
 
     casper.start(home_url, function () {
         // On DOM ready.
-        test.assertExists('#tab-backpack',
-                          'Backpack tab is present.');
+        test.assertExists('#global-backpack',
+                          'Backpack button is present.');
         test.assertElementCount('#results .result', 3,
                                 'Test catalog has 3 treks');
+        test.assertSelectorHasText('#global-backpack .count', 0,
+                                   'Backpack is empty');
 
         test.info('Add trek to backpack');
-        casper.click('#results #trek-2851 a.btn.backpack');
+        casper.click('#trek-2851 a.btn.backpack');
     });
 
-    casper.waitForSelectorTextChange('#tab-backpack span.badge', function () {
+    casper.waitForSelectorTextChange('#global-backpack .count', function () {
+        casper.capture('/tmp/image.png');
         // Once added
-        test.assertSelectorHasText('#tab-backpack span.badge', 1,
+        test.assertSelectorHasText('#global-backpack .count', 1,
                                    'Trek was added to backpack');
 
         test.assertExists('#results #trek-2851 a.btn.backpack.active',
                           'Result backpack button is toggled.');
         test.assertExists('#results #trek-2851 a.btn.backpack.icon-backpack-remove',
                           'Result backpack button has remove icon.');
-
-        test.assertExists('#backpack #backpack-trek-2851 a.btn.backpack.active',
-                          'Backpack button is toggled.');
-        test.assertExists('#backpack #backpack-trek-2851 a.btn.backpack.icon-backpack-remove',
-                          'Backpack button has remove icon.');
     });
 
     casper.then(function () {
@@ -39,8 +37,8 @@ casper.test.begin('Treks can be added and removed from backpack', function(test)
         casper.open(home_url);
     });
 
-    casper.waitForSelectorTextChange('#tab-backpack span.badge', function () {
-        test.assertSelectorHasText('#tab-backpack span.badge', 1,
+    casper.waitForSelectorTextChange('#global-backpack .count', function () {
+        test.assertSelectorHasText('#global-backpack .count', 1,
                                    'Trek is still in backpack');
 
         test.info('Go to detail');
@@ -52,9 +50,9 @@ casper.test.begin('Treks can be added and removed from backpack', function(test)
         casper.click('#toolbox a.btn.backpack.active');
     });
 
-    casper.waitForSelectorTextChange('#tab-backpack span.badge', function () {
+    casper.waitForSelectorTextChange('#global-backpack .count', function () {
         // Once removed
-        test.assertSelectorHasText('#tab-backpack span.badge', 0,
+        test.assertSelectorHasText('#global-backpack .count', 0,
                                    'Trek was removed from backpack');
 
         test.info('Add it from detail');

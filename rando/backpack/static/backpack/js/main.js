@@ -148,7 +148,7 @@
                 duration: $result.data('duration-pretty')
             });
         }
-        if (i == 0) {
+        if (i === 0) {
             return '<p id="noresult">' + gettext('Empty') + '</p>';
         }
 
@@ -165,7 +165,7 @@
     BackPack.prototype = {
         load: function() {
             try {
-                this._items = JSON.parse(localStorage.getItem('backPack'));
+                this._items = JSON.parse(localStorage.getItem('backPack')) || [];
             }
             catch (e) {
                 this._items = [];
