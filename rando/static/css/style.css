@@ -768,7 +768,14 @@ header #lang-switch {
   display: none;
 }
 .backpack-items-list {
-  min-width: 300px;
+  width: 300px;
+}
+.backpack-items-list li {
+  vertical-align: top;
+}
+.backpack-items-list li a {
+  max-width: 240px;
+  display: inline-block;
 }
 .popover {
   max-width: none;

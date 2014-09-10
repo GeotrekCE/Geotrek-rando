@@ -149,7 +149,7 @@
             });
         }
         if (i === 0) {
-            return '<p id="noresult">' + gettext('Empty') + '</p>';
+            html += '<p id="noresult">' + gettext('Empty') + '</p>';
         }
 
         html += '</div>';
