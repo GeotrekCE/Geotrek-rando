@@ -1906,19 +1906,22 @@ p.tab-content-empty a.change-lang {
 .detail-content #detail-content-title .title {
   display: inline-block;
   margin-right: 5px;
-  padding-left: 20px;
 }
 @media (max-width: 767px) {
   .detail-content #detail-content-title .title {
     display: none;
   }
 }
-.detail-content #detail-content-title .title .back-list {
+.detail-content #detail-content-title .title h2 {
+  vertical-align: top;
+}
+.detail-content #detail-content-title .title h2 .back-list {
   text-decoration: none;
 }
-.detail-content #detail-content-title .title .back-list:before {
-  position: absolute;
-  left: 3px;
+.detail-content #detail-content-title .title h2 .back-list:before {
+  background-color: #f89406;
+  color: white;
+  border-radius: 999px;
 }
 .detail-content #detail-content-title #trek-identity {
   display: inline-block;
