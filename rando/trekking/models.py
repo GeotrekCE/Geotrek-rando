@@ -11,7 +11,7 @@ from django.utils.html import strip_tags
 from rando.core.models import JSONModel, GeoJSONModel
 
 
-class POIs(GeoJSONModel):
+class TrekPOIs(GeoJSONModel):
     filepath = 'api/trek/{trek__pk}/pois.geojson'
 
 
@@ -21,7 +21,8 @@ class AttachmentFile(JSONModel):
 
 class Trek(GeoJSONModel):
     filepath = 'api/trek/trek.geojson'
-    detailpath = 'api/trek/trek-{pk}.json'
+    detailsource = 'api/treks/{pk}/'
+    detailpath = 'api/treks/trek-{pk}.json'
 
     @models.permalink
     def get_absolute_url(self):
@@ -46,8 +47,8 @@ class Trek(GeoJSONModel):
 
     @property
     def pois(self):
-        return POIs.objects.filter(trek__pk=self.pk,
-                                   language=self.objects.language)
+        return TrekPOIs.objects.filter(trek__pk=self.pk,
+                                       language=self.objects.language)
 
     @property
     def altimetricprofile(self):

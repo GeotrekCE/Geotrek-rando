@@ -35,21 +35,17 @@ class POIsInputFile(JsonInputFile):
         for feature in content['features']:
             properties = feature['properties']
 
-            # Geotrek < 0.23
-            if 'serializable_type' in properties:
-                poitype_value = properties.pop('serializable_type')
-                thumbnail_values = properties.pop('serializable_thumbnail')
-                pictures_values = properties.pop('serializable_pictures')
-            else:
-                poitype_value = properties.pop('type')
-                thumbnail_values = properties.pop('thumbnail')
-                pictures_values = properties.pop('pictures')
+            poitype_value = properties.pop('type')
+            thumbnail_values = properties.pop('thumbnail')
+            pictures_values = properties.pop('pictures')
 
             properties['type'] = reroot(poitype_value, attr='pictogram')
             properties['thumbnail'] = reroot(thumbnail_values)
             properties['pictures'] = reroot(pictures_values, attr='url')
+
             feature['properties'] = properties
             features.append(feature)
+
         content['features'] = features
         return self.serialize_json(content)
 
@@ -161,8 +157,9 @@ class TrekListInputFile(JsonInputFile):
                 continue
 
             # Fill with detail properties
+            detailsource = models.Trek.detailsource.format(pk=pk)
             detailpath = models.Trek.detailpath.format(pk=pk)
-            detailfile = TrekInputFile(detailpath, **self.initkwargs)
+            detailfile = TrekInputFile(url=detailsource, store=detailpath, **self.initkwargs)
             detailfile.pull()
             detail = json.loads(detailfile.content())
             properties.update(detail)
@@ -188,7 +185,7 @@ class TrekListInputFile(JsonInputFile):
             f.pull()
 
             # Add POIs information in list, useful for textual search
-            f = POIsInputFile(models.POIs.filepath.format(trek__pk=pk), **self.initkwargs)
+            f = POIsInputFile(models.TrekPOIs.filepath.format(trek__pk=pk), **self.initkwargs)
             f.pull()
             poiscontent = json.loads(f.content())
             poisprops = [poi['properties'] for poi in poiscontent['features']]
@@ -251,8 +248,8 @@ def sync_content_trekking(sender, **kwargs):
         for weblink in trek.properties.web_links:
             if weblink.category:
                 InputFile(weblink.category.pictogram, **input_kwargs).pull_if_modified()
-        for poi in models.POIs.tmp_objects.filter(trek__pk=trek.pk,
-                                                  language=settings.LANGUAGE_CODE).all():
+        for poi in models.TrekPOIs.tmp_objects.filter(trek__pk=trek.pk,
+                                                      language=settings.LANGUAGE_CODE).all():
             if poi.properties.thumbnail:
                 InputFile(poi.properties.thumbnail, **input_kwargs).pull_if_modified()
             for picture in poi.properties.pictures:
