@@ -45,6 +45,9 @@
           <a href="{% locale_url settings.languages.default "trekking:trek_home" %}" class="change-lang">{% trans "Change language" %}</a>
           {% endif %}
         </p>
+        {% for poi in pois %}
+            {% include "trekking/_trek_result.html" with trek=poi %}
+        {% endfor %}
         {% for trek in treks %}
             {% include "trekking/_trek_result.html" %}
         {% endfor %}

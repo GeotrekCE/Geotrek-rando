@@ -6,7 +6,7 @@ from djpjax import PJAXResponseMixin
 
 from rando import logger
 from rando.core.utils import locale_redirect
-from .models import Trek
+from .models import Trek, POI
 
 
 class TrekHome(PJAXResponseMixin, TemplateView):
@@ -16,11 +16,18 @@ class TrekHome(PJAXResponseMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         lang = self.request.LANGUAGE_CODE
+
         alltreks = Trek.objects.filter(language=lang).all()
         if len(alltreks) == 0:
             logger.warn("No trek found for lang %s." % lang)
+        allpois = POI.objects.filter(language=lang).all()
+        if len(allpois) == 0:
+            logger.warn("No POI found for lang %s." % lang)
 
         context = super(TrekHome, self).get_context_data(**kwargs)
+        context['treks'] = alltreks
+        context['pois'] = allpois
+
         self._add_choices_values(alltreks, context)
 
         duration_levels = []
@@ -81,7 +88,6 @@ class TrekHome(PJAXResponseMixin, TemplateView):
         allroutes = sorted(allroutes.values(), key=lambda o: o.label)
 
         context.update({
-            'treks': alltreks,
             'themes': allthemes,
             'usages': allusages,
             'districts': alldistricts,

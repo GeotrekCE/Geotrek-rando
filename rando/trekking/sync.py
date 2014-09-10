@@ -175,7 +175,7 @@ class TrekListInputFile(JsonInputFile):
 
             # Download attachments list file
             url = reroot(properties['filelist_url'])
-            destination = models.AttachmentFile.filepath.format(trek__pk=pk)
+            destination = models.AttachmentFile.filepath.format(objectname='trek', object__pk=pk)
             # Store destination as new official url (e.g. for Geotrek mobile)
             properties['filelist_url'] = destination
             f = AttachmentInputFile(url, store=destination, **self.initkwargs)
@@ -215,6 +215,9 @@ def sync_content_trekking(sender, **kwargs):
 
             if settings.PRINT_ENABLED:
                 InputFile(trek.printable, **inputkwlang).pull_if_modified()
+
+        JsonInputFile(url=models.POI.filesource, store=models.POI.filepath, **inputkwlang).pull()
+
 
     # Fetch media only once, since they do not depend on language
     for trek in models.Trek.tmp_objects.filter(language=settings.LANGUAGE_CODE).all():
@@ -257,7 +260,8 @@ def sync_content_trekking(sender, **kwargs):
         #
         # Fetch attachments
         if settings.FILELIST_ENABLED:
-            attachments = models.AttachmentFile.tmp_objects.filter(trek__pk=trek.pk,
+            attachments = models.AttachmentFile.tmp_objects.filter(objectname='trek',
+                                                                   object__pk=trek.pk,
                                                                    language=settings.LANGUAGE_CODE)
             for attachment in attachments.all():
                 InputFile(attachment.url, **input_kwargs).pull_if_modified()

@@ -11,12 +11,37 @@ from django.utils.html import strip_tags
 from rando.core.models import JSONModel, GeoJSONModel
 
 
+class AttachmentFile(JSONModel):
+    filepath = 'api/{objectname}/{object__pk}/attachments.json'
+
+
+class BaseModel(object):
+    @property
+    def attachments(self):
+        return AttachmentFile.objects.filter(objectname=self.__class__.__name__.lower(),
+                                             object__pk=self.pk,
+                                             language=self.objects.language)
+
+    @property
+    def main_image(self):
+        try:
+            first = self.properties.pictures[0]
+            return first['url']
+        except IndexError:
+            return None
+
+
+class POI(JSONModel):
+    filesource = 'api/pois/'
+    filepath = 'api/poi/pois.json'
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('trekking:poi_redirect', (self.pk,))
+
+
 class TrekPOIs(GeoJSONModel):
     filepath = 'api/trek/{trek__pk}/pois.geojson'
-
-
-class AttachmentFile(JSONModel):
-    filepath = 'api/trek/{trek__pk}/attachments.json'
 
 
 class Trek(GeoJSONModel):
@@ -41,11 +66,6 @@ class Trek(GeoJSONModel):
                                   keywords)
 
     @property
-    def attachments(self):
-        return AttachmentFile.objects.filter(trek__pk=self.pk,
-                                             language=self.objects.language)
-
-    @property
     def pois(self):
         return TrekPOIs.objects.filter(trek__pk=self.pk,
                                        language=self.objects.language)
@@ -59,14 +79,6 @@ class Trek(GeoJSONModel):
             return jsonparsed['profile']
         except (IOError, KeyError):
             return []
-
-    @property
-    def main_image(self):
-        try:
-            first = self.properties.pictures[0]
-            return first['url']
-        except IndexError:
-            return None
 
     @property
     def fulltext(self):
