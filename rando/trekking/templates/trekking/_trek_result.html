@@ -1,7 +1,7 @@
 {% load l10n i18n static rando_tags localeurl_tags %}
 <div id="trek-{{ trek.pk }}"
      data-id="{{ trek.pk }}"
-     data-url="{% locale_url request.LANGUAGE_CODE "trekking:detail" trek.slug %}"
+     data-url="{% locale_url request.LANGUAGE_CODE "trekking:trek_detail" trek.slug %}"
      data-slug="{{ trek.slug }}"
      data-name="{{ trek.name }}"
      data-main-image="{{ trek.main_image }}"
@@ -20,7 +20,7 @@
     <img alt="{% trans "Preview of" %} {{ trek.name }}" src="{{ trek|thumbnail }}" width="120" height="120" />
   </div>
   <div class="info-result">
-    <a class="pjax hidden" href="{% locale_url request.LANGUAGE_CODE "trekking:detail" trek.slug %}"></a>
+    <a class="pjax hidden" href="{% locale_url request.LANGUAGE_CODE "trekking:trek_detail" trek.slug %}"></a>
     <h3>{{ trek.name }}</h3>
     <p>{% for district in trek.districts %}{{ district.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
     <p>{% trans "Municipality" %}&nbsp;: {{ trek.cities.0.name }}</p>
@@ -39,13 +39,13 @@
           <span class="hidden">{% trans "Add to favorites" %}</span>
         </a>
         {% endif %}
-        <a class="btn search pjax icon-binocular" data-id="{{ trek.pk }}" title="{% trans "Zoom to trek" %}" href="{% locale_url request.LANGUAGE_CODE "trekking:detail" trek.slug %}">
+        <a class="btn search pjax icon-binocular" data-id="{{ trek.pk }}" title="{% trans "Zoom to trek" %}" href="{% locale_url request.LANGUAGE_CODE "trekking:trek_detail" trek.slug %}">
           <span class="hidden">{% trans "Zoom to trek" %}</span>
         </a>
     </div>
     {% if DISQUS_ENABLED %}
     <div class="comments-count">
-       <a href="{{ request.build_absolute_uri|slice:":-1" }}{% url "trekking:detail" trek.slug %}#disqus_thread" data-disqus-identifier="trek-{{ trek.pk }}"></a>
+       <a href="{{ request.build_absolute_uri|slice:":-1" }}{% url "trekking:trek_detail" trek.slug %}#disqus_thread" data-disqus-identifier="trek-{{ trek.pk }}"></a>
     </div>
     {% endif %}
   </div>

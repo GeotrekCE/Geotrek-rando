@@ -15,7 +15,7 @@
 
 
 <div id="mobile-header-detail">
-  <a class="pjax" href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}"><h1 class="icon-left-open-mini">{% trans "Back to list" %}</h1></a>
+  <a class="pjax" href="{% locale_url request.LANGUAGE_CODE "trekking:trek_home" %}"><h1 class="icon-left-open-mini">{% trans "Back to list" %}</h1></a>
 </div>
 
 <div class="detail-content page-content">
@@ -23,7 +23,7 @@
   <div id="detail-content-title">
 
     <div class="title">
-      <h2><a href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}" class="back-list pjax icon-left-open-mini" title="{% trans "Back to list" %}"></a> {{ trek.name }}</h2>
+      <h2><a href="{% locale_url request.LANGUAGE_CODE "trekking:trek_home" %}" class="back-list pjax icon-left-open-mini" title="{% trans "Back to list" %}"></a> {{ trek.name }}</h2>
       <h3 id="departure-arrival">{% trans "Departure" %} : {{ trek.departure }}{% if trek.arrival %} &rarr; {% trans "Arrival" %} : {{ trek.arrival }}{% endif %}</h3>
     </div>
 
@@ -254,7 +254,7 @@
                   <h5>{% trans "Sharing departure" %}</h5>
                   <ul>
                 {% endif %}
-                <li><a href="{% locale_url request.LANGUAGE_CODE "trekking:detail" relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+                <li><a href="{% locale_url request.LANGUAGE_CODE "trekking:trek_detail" relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
                 {% if forloop.last %}</ul>{% endif %}
               {% endfor %}
 
@@ -263,7 +263,7 @@
                   <h5>{% trans "Sharing paths" %}</h5>
                   <ul>
                 {% endif %}
-                <li><a href="{% locale_url request.LANGUAGE_CODE "trekking:detail" relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+                <li><a href="{% locale_url request.LANGUAGE_CODE "trekking:trek_detail" relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
                 {% if forloop.last %}</ul>{% endif %}
               {% endfor %}
 
@@ -272,7 +272,7 @@
                   <h5>{% trans "Sharing circuit" %}</h5>
                   <ul>
                 {% endif %}
-                <li><a href="{% locale_url request.LANGUAGE_CODE "trekking:detail" relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+                <li><a href="{% locale_url request.LANGUAGE_CODE "trekking:trek_detail" relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
                 {% if forloop.last %}</ul>{% endif %}
               {% endfor %}
             </div>
@@ -286,7 +286,7 @@
         <div id="disqus_thread"
              data-disqus-shortname="{{ DISQUS_SHORTNAME }}"
              data-disqus-identifier="trek-{{ trek.pk }}"
-             data-disqus-url="{{ request.build_absolute_uri|slice:":-1" }}{% url "trekking:detail" trek.slug %}"
+             data-disqus-url="{{ request.build_absolute_uri|slice:":-1" }}{% url "trekking:trek_detail" trek.slug %}"
              data-disqus-title="{{ object.title }}"
              data-disqus-language="{{ request.LANGUAGE_CODE }}">
         </div>

@@ -9,7 +9,7 @@ from rando.core.utils import locale_redirect
 from .models import Trek
 
 
-class HomeView(PJAXResponseMixin, TemplateView):
+class TrekHome(PJAXResponseMixin, TemplateView):
 
     template_name = 'trekking/home.html'
     pjax_template_name = "trekking/_home_panel.html"
@@ -20,7 +20,7 @@ class HomeView(PJAXResponseMixin, TemplateView):
         if len(alltreks) == 0:
             logger.warn("No trek found for lang %s." % lang)
 
-        context = super(HomeView, self).get_context_data(**kwargs)
+        context = super(TrekHome, self).get_context_data(**kwargs)
         self._add_choices_values(alltreks, context)
 
         duration_levels = []
@@ -106,13 +106,13 @@ class BaseTrekView(DetailView):
         raise Http404
 
 
-class TrekView(PJAXResponseMixin, BaseTrekView):
+class TrekDetail(PJAXResponseMixin, BaseTrekView):
 
     template_name = 'trekking/detail.html'
     pjax_template_name = "trekking/_detail_panel.html"
 
     def get_context_data(self, **kwargs):
-        context = super(TrekView, self).get_context_data(**kwargs)
+        context = super(TrekDetail, self).get_context_data(**kwargs)
         obj = context['trek']
 
         context['thumbnail'] = self.request.build_absolute_uri(obj.properties.thumbnail)
@@ -143,7 +143,7 @@ def trek_redirect(request, pk):
     treks = Trek.objects.filter(language=lang).all()
     for trek in treks:
         if trek.pk == int(pk):
-            return locale_redirect('trekking:detail',
+            return locale_redirect('trekking:trek_detail',
                                    kwargs={'slug': trek.slug},
                                    locale=lang)
     raise Http404

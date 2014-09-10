@@ -42,7 +42,7 @@
         <p id="noresult" style="display:none" class="tab-content-empty">
           {% trans "No result" %}
           {% if request.LANGUAGE_CODE != settings.languages.default %}
-          <a href="{% locale_url settings.languages.default "trekking:home" %}" class="change-lang">{% trans "Change language" %}</a>
+          <a href="{% locale_url settings.languages.default "trekking:trek_home" %}" class="change-lang">{% trans "Change language" %}</a>
           {% endif %}
         </p>
         {% for trek in treks %}

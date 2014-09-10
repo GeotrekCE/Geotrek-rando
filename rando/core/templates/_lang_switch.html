@@ -9,7 +9,7 @@
             {% else %}
             <li>
             {% endif %}
-            <a href="{% locale_url lang.lang "trekking:redirect" pk=trek.pk %}">
+            <a href="{% locale_url lang.lang "trekking:trek_redirect" pk=trek.pk %}">
               <span class="hidden">{{ lang.language }}</span>
               <img src="{% get_static_prefix %}img/flags/{{ lang.lang }}.png" alt="{{ lang.language }}">
             </a>
@@ -23,7 +23,7 @@
           {% else %}
           <li>
           {% endif %}
-          <a href="{% locale_url lang "trekking:home" %}">
+          <a href="{% locale_url lang "trekking:trek_home" %}">
             <span class="hidden">{{ lang }}</span>
             <img src="{% get_static_prefix %}img/flags/{{ lang }}.png" alt="{{ lang }}">
           </a>

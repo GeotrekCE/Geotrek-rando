@@ -26,7 +26,7 @@ class Trek(GeoJSONModel):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('trekking:redirect', (self.pk,))
+        return ('trekking:trek_redirect', (self.pk,))
 
     @property
     def title(self):
