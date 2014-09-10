@@ -4,7 +4,7 @@
 from .base import *
 
 
-GEOTREK_SERVER = 'geobi.makina-corpus.net/geotrek'
+GEOTREK_SERVER = 'prod-geotrek-fr.makina-corpus.net'
 GEOTREK_USER = 'admin'
 GEOTREK_PASSWORD = 'admin'
 
