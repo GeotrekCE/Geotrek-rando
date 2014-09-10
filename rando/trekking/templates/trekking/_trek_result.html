@@ -26,7 +26,7 @@
     <p>{% trans "Municipality" %}&nbsp;: {{ trek.cities.0.name }}</p>
     <p>{{ trek.duration_pretty }} <span class="ascent">- {% trans "Climb" %} {{ trek.ascent }} m</span></p>
     <p>{{ trek.difficulty.label|default:"&nbsp;" }}</p>
-    <div class="theme-tools">
+    <div class="trek-themes">
       {% for theme in trek.themes %}
         {{ theme|pictogram }}
       {% empty %}

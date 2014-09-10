@@ -116,7 +116,7 @@
       {% if trek.ambiance %}<p>{{ trek.ambiance|safe }}</p>{% endif %}
 
       <div id="trek-carousel">
-        {% include "trekking/_carousel.html" with prefix="trek" pictures=all_pictures default="True" %}
+        {% include "_carousel.html" with prefix="trek" pictures=all_pictures default="True" %}
       </div>
 
       {% if trek.description %}
@@ -339,7 +339,7 @@
 {% for poi in pois %}
   <div id="popup-poi-carousel-{{ poi.properties.pk }}" class="popup poi modal hide fade" role="dialog" aria-labelledby="poi-carousel" aria-hidden="true">
       <div class="modal-body">
-      {% include "trekking/_carousel.html" with prefix=poi.properties.pk pictures=poi.properties.pictures default="False" %}
+      {% include "_carousel.html" with prefix=poi.properties.pk pictures=poi.properties.pictures default="False" %}
     </div>
   </div>
 {% endfor %}

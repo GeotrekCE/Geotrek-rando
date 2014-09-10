@@ -160,9 +160,10 @@
         {% if BACKPACK_ENABLED %}
         <script src="{% static "backpack/js/main.js" %}"></script>
         {% endif %}
+        <script src="{% static "js/map.js" %}"></script>
         <script src="{% static "trekking/js/map.js" %}"></script>
         {% if FILTERS_HASH_ENABLED %}
-        <script src="{% static "trekking/js/filter-hash.js" %}"></script>
+        <script src="{% static "js/filter-hash.js" %}"></script>
         {% endif %}
 
         {% if FEEDBACK_FORM_ENABLED %}
