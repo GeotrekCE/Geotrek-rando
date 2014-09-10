@@ -258,9 +258,11 @@ a {
 
 @import "objects/popup-home.less";
 @import "objects/navigation.less";
-@import "objects/share.less";
+@import "objects/global-tools.less";
 @import "objects/lang-switch.less";
 
+@import "../../backpack/static/backpack/backpack.less";
+@import "../../flatpages/static/flatpages/flatpages.less";
 @import "../../trekking/static/trekking/trekking.less";
 @import "../../feedback/static/feedback/feedback.less";
 @import "../../tourism/static/tourism/tourism.less";
@@ -624,12 +626,6 @@ a {
     h3 {
       margin-left: 0;
     }
-
-    .title {
-      position: absolute;
-      top: 12px;
-      width: 99%;
-    }
   }
 
   #toolbox a.backpack, #toolbox a.download {
@@ -684,8 +680,7 @@ a {
   #tab-backpack .badge,
   #tab-backpack .text,
   #tab-results,
-  #side-bar .illust,
-  #fake-search-tabs {
+  #side-bar .illust {
     display: none;
   }
 }

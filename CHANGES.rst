@@ -2,6 +2,21 @@
 CHANGELOG
 =========
 
+
+1.33dev (unreleased)
+--------------------
+
+**Breaking changes**
+
+* Will require at least Geotrek 0.24
+
+**New features**
+
+* Changed apparence and position of favorites
+* Removed tabs in results, detail and static pages
+* Add setting ``BACKPACK_ENABLED`` to enable/disable favorites (fixes #54)
+
+
 1.32.1 (2014-09-03)
 -------------------
 

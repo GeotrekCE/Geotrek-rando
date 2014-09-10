@@ -631,10 +631,8 @@ header a {
   }
 }
 #navigationbar {
-  position: absolute;
   display: none;
-  top: 24px;
-  right: 70px;
+  float: right;
   z-index: 1031;
 }
 @media (min-width: 979px) {
@@ -643,6 +641,7 @@ header a {
   }
 }
 #navigationbar ul {
+  margin: 0px;
   list-style-type: none;
 }
 #navigationbar ul li {
@@ -688,19 +687,17 @@ header #navigationbar {
   font-size: 18px;
   vertical-align: middle;
 }
-#global-share {
-  position: absolute;
-  padding-left: 5px;
-  top: 26px;
-  right: 10px;
+.navigation {
+  float: right;
+  margin-top: -60px;
+  margin-right: 10px;
+}
+.navigation .global-toolbar {
+  float: right;
+  margin-top: 2px;
   line-height: 17px;
   font-size: 13px;
   padding-left: 25px;
-}
-#global-share:before {
-  position: absolute;
-  left: 4px;
-  font-size: 17px;
 }
 .popover-content {
   padding: 5px;
@@ -769,6 +766,27 @@ header #lang-switch {
 }
 #content #lang-switch {
   display: none;
+}
+.backpack-items-list {
+  width: 300px;
+}
+.backpack-items-list li {
+  vertical-align: top;
+}
+.backpack-items-list li a {
+  max-width: 240px;
+  display: inline-block;
+}
+.popover {
+  max-width: none;
+}
+.flatpage-content h2 {
+  font-size: 2em;
+  color: #4d4d4d;
+  text-transform: uppercase;
+}
+.flatpage-content h2:first-letter {
+  font-size: 2em;
 }
 .leaflet-label.trek {
   background: rgba(255, 225, 75, 0.5);
@@ -1522,17 +1540,7 @@ header #lang-switch {
 #toggle-side-bar.closed:before {
   content: "g";
 }
-/*
-* Fake tabs
-*/
-#fake-search-tabs {
-  min-width: 300px;
-}
-#fake-search-tabs ul {
-  margin-bottom: 0;
-}
-#side-bar .nav-tabs > li > a,
-#fake-search-tabs .nav-tabs > li > a {
+#side-bar .nav-tabs > li > a {
   position: relative;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1866,91 +1874,8 @@ p.tab-content-empty a.change-lang {
 * Detail page
 *
 */
-.alert-blank {
-  color: #f89406;
-  background-color: transparent;
-  border: 1px solid #f89406;
-}
-.alert-blank > div {
-  color: #877f84;
-}
-#detail-content-top {
-  margin-bottom: 15px;
-}
-#detail-content-top h2 {
+.detail-content .row-fluid.meta {
   margin-top: 15px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-#toolbox {
-  margin-right: 15px;
-  margin-bottom: 0;
-  margin-top: 0;
-  text-align: right;
-  min-width: 290px;
-}
-#toolbox a:before {
-  font-size: 20px;
-  position: absolute;
-  left: 5px;
-}
-#toolbox a.print,
-#toolbox a.backpack,
-#toolbox a.download,
-#toolbox a.feedback {
-  position: relative;
-  padding-left: 30px;
-  vertical-align: top;
-  margin-left: 5px;
-}
-#toolbox a.gpx,
-#toolbox a.kml {
-  padding-left: 25px;
-}
-#toolbox a.backpack,
-#toolbox a.download,
-#toolbox a.feedback,
-#toolbox #btn-print {
-  margin-top: 5px;
-}
-html.no-webgl #toolbox a.view3d {
-  display: none;
-}
-#detail-content-top h2:first-letter,
-.flatpage-content h2:first-letter {
-  font-size: 2em;
-}
-#detail-content-top h2,
-.flatpage-content h2 {
-  font-size: 2em;
-  color: #4d4d4d;
-  text-transform: uppercase;
-}
-#detail-content-title {
-  width: 98%;
-  padding: 10px 1%;
-  background-color: #f0f2ed;
-  border-top: 1px solid #d7ddcf;
-  border-bottom: 1px solid #d7ddcf;
-  margin-bottom: 18px;
-}
-#detail-content-title h2 {
-  margin-top: -9px;
-  margin-bottom: 0;
-  line-height: 1.4em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-#detail-content-title h3 {
-  background: none;
-  font-weight: normal;
-  font-size: 14px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin: 0;
-  margin-left: 2px;
-  line-height: 20px;
 }
 .detail-content h3 {
   font-size: 14px;
@@ -1965,6 +1890,125 @@ html.no-webgl #toolbox a.view3d {
 }
 .detail-content p {
   text-align: justify;
+}
+.detail-content p.teaser {
+  line-height: 1.1em;
+  font-size: 18px;
+  font-family: inherit;
+  font-weight: bold;
+  color: inherit;
+  text-rendering: optimizelegibility;
+}
+.detail-content p.image {
+  text-align: center;
+}
+.detail-content #detail-content-title {
+  width: 98%;
+  padding: 10px 1%;
+  background-color: #f0f2ed;
+  border-top: 1px solid #d7ddcf;
+  border-bottom: 1px solid #d7ddcf;
+  margin-bottom: 18px;
+}
+.detail-content #detail-content-title .title {
+  display: inline-block;
+  margin-right: 5px;
+}
+@media (max-width: 767px) {
+  .detail-content #detail-content-title .title {
+    display: none;
+  }
+}
+.detail-content #detail-content-title .title h2 {
+  vertical-align: top;
+}
+.detail-content #detail-content-title .title h2 .back-list {
+  text-decoration: none;
+}
+.detail-content #detail-content-title .title h2 .back-list:before {
+  background-color: #f89406;
+  color: white;
+  border-radius: 999px;
+}
+.detail-content #detail-content-title #trek-identity {
+  display: inline-block;
+}
+.detail-content #detail-content-title #trek-identity p {
+  margin-bottom: 0;
+  color: #877f84;
+  text-align: left;
+}
+.detail-content #detail-content-title #trek-identity .info {
+  display: inline-block;
+  text-align: center;
+  margin-right: 10px;
+}
+.detail-content #detail-content-title #trek-identity .info span {
+  display: block;
+}
+.detail-content #detail-content-title #trek-identity #themes,
+.detail-content #detail-content-title #trek-identity #usages {
+  color: #877f84;
+  vertical-align: top;
+}
+.detail-content #detail-content-title #trek-identity #themes ul,
+.detail-content #detail-content-title #trek-identity #usages ul {
+  margin: 0;
+  text-align: center;
+}
+.detail-content #detail-content-title #trek-identity #usages {
+  margin-left: 30px;
+  margin-right: 20px;
+}
+.detail-content #detail-content-title #trek-identity #themes li,
+.detail-content #detail-content-title #trek-identity #usages li,
+.detail-content #detail-content-title #trek-identity #networks li {
+  list-style-type: none;
+  display: inline-block;
+}
+.detail-content #detail-content-title #trek-identity #themes .pictogram,
+.detail-content #detail-content-title #trek-identity #usages .pictogram {
+  opacity: 0.5;
+}
+.detail-content #detail-content-title #toolbox {
+  float: right;
+  text-align: right;
+  max-width: 300px;
+}
+.detail-content #detail-content-title #toolbox a:before {
+  font-size: 20px;
+  position: absolute;
+  left: 5px;
+}
+.detail-content #detail-content-title #toolbox a.print,
+.detail-content #detail-content-title #toolbox a.backpack,
+.detail-content #detail-content-title #toolbox a.download,
+.detail-content #detail-content-title #toolbox a.feedback {
+  position: relative;
+  padding-left: 30px;
+  vertical-align: top;
+  margin-left: 5px;
+}
+.detail-content #detail-content-title #toolbox a.gpx,
+.detail-content #detail-content-title #toolbox a.kml {
+  padding-left: 25px;
+}
+.detail-content #detail-content-title #toolbox a.backpack,
+.detail-content #detail-content-title #toolbox a.download,
+.detail-content #detail-content-title #toolbox a.feedback,
+.detail-content #detail-content-title #toolbox #btn-print {
+  margin-top: 5px;
+}
+.detail-content #detail-content-title html.no-webgl #toolbox a.view3d {
+  display: none;
+}
+.alert-blank {
+  color: #f89406;
+  background-color: transparent;
+  border: 1px solid #f89406;
+}
+.alert-blank > div {
+  color: #877f84;
 }
 .alert h3 {
   margin: 0px;
@@ -1997,48 +2041,6 @@ html.no-webgl #toolbox a.view3d {
   font-size: 23px;
   top: 6px;
   margin-right: 5px;
-}
-p.teaser {
-  line-height: 1.1em;
-  font-size: 18px;
-  font-family: inherit;
-  font-weight: bold;
-  color: inherit;
-  text-rendering: optimizelegibility;
-}
-.detail-content p.image {
-  text-align: center;
-}
-#trek-identity p {
-  margin-bottom: 0;
-  color: #877f84;
-  text-align: left;
-}
-#trek-identity span.value {
-  /* Geotrek 0.23 layout */
-  color: #f89406;
-}
-#trek-identity .info {
-  display: inline-block;
-  text-align: center;
-  margin-right: 10px;
-}
-#trek-identity .info span {
-  display: block;
-}
-#trek-identity #themes,
-#trek-identity #usages {
-  color: #877f84;
-  vertical-align: top;
-}
-#trek-identity #themes ul,
-#trek-identity #usages ul {
-  margin: 0;
-  text-align: center;
-}
-#trek-identity #usages {
-  margin-left: 30px;
-  margin-right: 20px;
 }
 .leaflet-marker-icon.point-reference {
   background-color: red;
@@ -2091,21 +2093,8 @@ p.teaser {
 .leaflet-popup.information-desk img {
   display: none;
 }
-#themes li,
-#usages li,
-#networks li {
-  list-style-type: none;
-  display: inline-block;
-}
-#themes .pictogram,
-#usages .pictogram {
-  opacity: 0.5;
-}
 .trek-networks img {
   height: 1.5em;
-}
-.row-fluid.meta {
-  margin-top: 15px;
 }
 #park-center-warning {
   font-weight: bold;
@@ -2729,11 +2718,6 @@ ul.errorlist {
   #detail-content-title h3 {
     margin-left: 0;
   }
-  #detail-content-title .title {
-    position: absolute;
-    top: 12px;
-    width: 99%;
-  }
   #toolbox a.backpack,
   #toolbox a.download {
     padding-right: 5px;
@@ -2773,8 +2757,7 @@ ul.errorlist {
   #tab-backpack .badge,
   #tab-backpack .text,
   #tab-results,
-  #side-bar .illust,
-  #fake-search-tabs {
+  #side-bar .illust {
     display: none;
   }
 }

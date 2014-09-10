@@ -28,6 +28,7 @@ def settings(request):
         'POPUP_HOME_FORCED': settings_.POPUP_HOME_FORCED,
 
         'FILTERS_HASH_ENABLED': settings_.FILTERS_HASH_ENABLED,
+        'BACKPACK_ENABLED': settings_.BACKPACK_ENABLED,
 
         'FEEDBACK_FORM_ENABLED': settings_.FEEDBACK_FORM_ENABLED,
 

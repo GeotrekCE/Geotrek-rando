@@ -19,139 +19,95 @@
 </div>
 
 <div class="detail-content page-content">
-  <div class="row-fluid" id="detail-content-top">
-    {% include "trekking/_fake_searchtabs.html" %}
 
-    <div class="span7 pull-right">
-      <div id="toolbox" class="btn-toolbar pull-right">
+  <div id="detail-content-title">
 
-        {% if FEEDBACK_FORM_ENABLED %}
-          <a class="btn feedback icon-feedback" href="#" data-slug="{{ trek.properties.slug }}" title="{% trans "Feedback" %}">
-          {% trans "Feedback" %}
-          </a>
-        {% endif %}
-
-        <a class="btn backpack icon-backpack-add" href="#" data-id="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}">
-          {% trans "Favorites" %}
-        </a>
-
-        {% if VIEW3D_ENABLED %}
-        <a class="btn download view3d icon-view3d" data-slug="{{ trek.properties.slug }}" title="{% trans "3D View" %}">
-          {% trans "3D" %}
-        </a>
-        {% endif %}
-
-        {% if PRINT_ENABLED %}
-        <a class="btn download print icon-print" title="{% trans "Print" %}" href="{% locale_url request.LANGUAGE_CODE "core:fileserve" object.properties.printable %}" target="_blank">
-          <span class="hidden-phone">{% trans "Print" %}</span><span class="visible-phone">{% trans "PDF" %}</span>
-        </a>
-        {% else %}
-        <a class="btn download print disabled" title="{% trans "Soon!" %}" >
-          {% trans "Print" %}
-        </a>
-        {% endif %}
-        <a class="btn download gpx icon-gpx" title="{% trans "Download GPX" %}" href="{% locale_url request.LANGUAGE_CODE "core:fileserve" object.properties.gpx %}">
-          {% trans "GPX" %}
-        </a>
-        <a class="btn download kml icon-kml" title="{% trans "Download for Google Earth" %}" href="{% locale_url request.LANGUAGE_CODE "core:fileserve" object.properties.kml %}">
-          {% trans "KML" %}
-        </a>
-
-      </div>
-    </div>
-  </div>
-
-  <div class="row-fluid" id="detail-content-title">
-    <div class="span6 title">
-      <h2>{{ object.properties.name }}</h2>
+    <div class="title">
+      <h2><a href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}" class="back-list pjax icon-left-open-mini" title="{% trans "Back to list" %}"></a> {{ object.properties.name }}</h2>
       <h3 id="departure-arrival">{% trans "Departure" %} : {{ object.properties.departure }}{% if object.properties.arrival %} &rarr; {% trans "Arrival" %} : {{ object.properties.arrival }}{% endif %}</h3>
     </div>
-    <div class="span6">
-
-        {% if object.properties.difficulty and object.properties.difficulty.pictogram %}
-        {# New in Geotrek 0.24 #}
-
-          <div id="trek-identity">
-            <div class="info duration" title="{% trans "Duration" %}">
-              <span>{{ object.properties.duration_pretty }}</span>
-              <div class="pictogram medium">
-                <img src="{% static "img/duration.svg" %}" alt="{% trans "Duration" %}"/>
-              </div>
-            </div>
-            {% if object.properties.difficulty %}
-            <div class="info difficulty" title="{% trans "Difficulty" %}">
-              <span>{{ trek.properties.difficulty.label }}</span>
-              {{ trek.properties.difficulty|pictogram:"medium" }}
-            </div>
-            {% endif %}
-            {% if object.properties.route %}
-            <div class="info route" title="{% trans "Route" %}">
-              <span>{{ trek.properties.route.label }}</span>
-              {{ trek.properties.route|pictogram:"medium" }}
-            </div>
-            {% endif %}
-            <div class="info distance" title="{% trans "Total Length" %}">
-              <span>{{ object.properties.length|kilo|floatformat }}&#x202f;km</span>
-              <div class="pictogram medium">
-                <img src="{% static "img/distance.svg" %}" alt="{% trans "Total Length" %}"/>
-              </div>
-            </div>
-            <div class="info ascent" title="{% trans "Ascent" %}">
-              <span>{{ object.properties.ascent }}&#x202f;m</span>
-              <div class="pictogram medium">
-                <img src="{% static "img/ascent.svg" %}" alt="{% trans "Ascent" %}"/>
-              </div>
-            </div>
-
-            {% for usage in object.properties.usages %}
-              {% if forloop.first %}<div class="info" id="usages">{% trans "Uses" %}<ul>{% endif %}
-              <li>{{ usage|pictogram:"medium" }}</li>
-              {% if forloop.last %}</ul></div>{% endif %}
-            {% endfor %}
-
-            {% for theme in object.properties.themes %}
-              {% if forloop.first %}<div class="info" id="themes">{% trans "Thematic" %}<ul>{% endif %}
-              <li>{{ theme|pictogram:"medium" }}</li>
-              {% if forloop.last %}</ul></div>{% endif %}
-            {% endfor %}
-          </div>
 
 
-        {% else %}
-        {# Retrocompatibilty with Geotrek 0.23 #}
-
-          <div class="row-fluid" id="trek-identity">
-            <div class="span3">
-              <p>{% trans "Duration" %} : <span class="value">{{ object.properties.duration_pretty }}</span></p>
-              <p>{% trans "Difficulty" %} : <span class="value">{{ object.properties.difficulty.label }}</span></p>
-              <p>{% trans "Ascent" %} : <span class="value">{{ object.properties.ascent }} m</span></p>
-            </div>
-            <div class="span3">
-              <p>{% trans "Total Length" %} : <span class="value">{{ object.properties.length|kilo|floatformat }} km</span></p>
-              {% if object.properties.route %}
-              <p>{% trans "Route" %} : <span class="value">{{ object.properties.route.label }}</span></p>
-              {% endif %}
-              {% if object.properties.districts %}
-              <p>{% trans "Valleys" %} : <span class="value">{% for district in object.properties.districts %}
-                {{ district.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</span></p>
-              {% endif %}
-            </div>
-
-            {% for usage in object.properties.usages %}
-              {% if forloop.first %}<div id="usages">{% trans "Uses" %}<ul>{% endif %}
-              <li>{{ usage|pictogram:"medium" }}</li>
-              {% if forloop.last %}</ul></div>{% endif %}
-            {% endfor %}
-
-            {% for theme in object.properties.themes %}
-              {% if forloop.first %}<div id="themes">{% trans "Thematic" %}<ul>{% endif %}
-              <li>{{ theme|pictogram:"medium" }}</li>
-              {% if forloop.last %}</ul></div>{% endif %}
-            {% endfor %}
+    <div id="trek-identity">
+      <div class="info duration" title="{% trans "Duration" %}">
+        <span>{{ object.properties.duration_pretty }}</span>
+        <div class="pictogram medium">
+          <img src="{% static "img/duration.svg" %}" alt="{% trans "Duration" %}"/>
         </div>
-
+      </div>
+      {% if object.properties.difficulty %}
+      <div class="info difficulty" title="{% trans "Difficulty" %}">
+        <span>{{ trek.properties.difficulty.label }}</span>
+        {{ trek.properties.difficulty|pictogram:"medium" }}
+      </div>
       {% endif %}
+      {% if object.properties.route %}
+      <div class="info route" title="{% trans "Route" %}">
+        <span>{{ trek.properties.route.label }}</span>
+        {{ trek.properties.route|pictogram:"medium" }}
+      </div>
+      {% endif %}
+      <div class="info distance" title="{% trans "Total Length" %}">
+        <span>{{ object.properties.length|kilo|floatformat }}&#x202f;km</span>
+        <div class="pictogram medium">
+          <img src="{% static "img/distance.svg" %}" alt="{% trans "Total Length" %}"/>
+        </div>
+      </div>
+      <div class="info ascent" title="{% trans "Ascent" %}">
+        <span>{{ object.properties.ascent }}&#x202f;m</span>
+        <div class="pictogram medium">
+          <img src="{% static "img/ascent.svg" %}" alt="{% trans "Ascent" %}"/>
+        </div>
+      </div>
+
+      {% for usage in object.properties.usages %}
+        {% if forloop.first %}<div class="info" id="usages">{% trans "Uses" %}<ul>{% endif %}
+        <li>{{ usage|pictogram:"medium" }}</li>
+        {% if forloop.last %}</ul></div>{% endif %}
+      {% endfor %}
+
+      {% for theme in object.properties.themes %}
+        {% if forloop.first %}<div class="info" id="themes">{% trans "Thematic" %}<ul>{% endif %}
+        <li>{{ theme|pictogram:"medium" }}</li>
+        {% if forloop.last %}</ul></div>{% endif %}
+      {% endfor %}
     </div>
+
+
+    <div id="toolbox">
+      {% if FEEDBACK_FORM_ENABLED %}
+      <a class="btn feedback icon-feedback" href="#" data-slug="{{ trek.properties.slug }}" title="{% trans "Feedback" %}">
+      {% trans "Feedback" %}
+      </a>
+      {% endif %}
+
+      <a class="btn backpack icon-backpack-add" href="#" data-id="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}">
+        {% trans "Favorites" %}
+      </a>
+
+      {% if VIEW3D_ENABLED %}
+      <a class="btn download view3d icon-view3d" data-slug="{{ trek.properties.slug }}" title="{% trans "3D View" %}">
+        {% trans "3D" %}
+      </a>
+      {% endif %}
+
+      {% if PRINT_ENABLED %}
+      <a class="btn download print icon-print" title="{% trans "Print" %}" href="{% locale_url request.LANGUAGE_CODE "core:fileserve" object.properties.printable %}" target="_blank">
+        <span class="hidden-phone">{% trans "Print" %}</span><span class="visible-phone">{% trans "PDF" %}</span>
+      </a>
+      {% else %}
+      <a class="btn download print disabled" title="{% trans "Soon!" %}" >
+        {% trans "Print" %}
+      </a>
+      {% endif %}
+      <a class="btn download gpx icon-gpx" title="{% trans "Download GPX" %}" href="{% locale_url request.LANGUAGE_CODE "core:fileserve" object.properties.gpx %}">
+        {% trans "GPX" %}
+      </a>
+      <a class="btn download kml icon-kml" title="{% trans "Download for Google Earth" %}" href="{% locale_url request.LANGUAGE_CODE "core:fileserve" object.properties.kml %}">
+        {% trans "KML" %}
+      </a>
+    </div>
+
   </div>
 
   <div class="row-fluid page-inner-content">
