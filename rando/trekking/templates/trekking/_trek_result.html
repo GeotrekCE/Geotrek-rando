@@ -1,33 +1,33 @@
 {% load l10n i18n static rando_tags localeurl_tags %}
-<div id="trek-{{ trek.properties.pk }}"
-     data-id="{{ trek.properties.pk }}"
-     data-url="{% locale_url request.LANGUAGE_CODE "trekking:detail" trek.properties.slug %}"
-     data-slug="{{ trek.properties.slug }}"
-     data-name="{{ trek.properties.name }}"
+<div id="trek-{{ trek.pk }}"
+     data-id="{{ trek.pk }}"
+     data-url="{% locale_url request.LANGUAGE_CODE "trekking:detail" trek.slug %}"
+     data-slug="{{ trek.slug }}"
+     data-name="{{ trek.name }}"
      data-main-image="{{ trek.main_image }}"
      data-fulltext="{{ trek.fulltext }}"
-     data-themes="{{ trek.properties.themes|listid }}"
-     data-usages="{{ trek.properties.usages|listid }}"
-     data-districts="{{ trek.properties.districts|listid }}"
-     data-cities="{{ trek.properties.cities|listid:"code" }}"
-     data-route="{{ trek.properties.route.id }}"
-     data-difficulty="{{ trek.properties.difficulty.id }}"
-     data-duration="{{ trek.properties.duration|unlocalize }}"
-     data-duration-pretty="{{ trek.properties.duration_pretty }}"
-     data-ascent="{{ trek.properties.ascent }}"
+     data-themes="{{ trek.themes|listid }}"
+     data-usages="{{ trek.usages|listid }}"
+     data-districts="{{ trek.districts|listid }}"
+     data-cities="{{ trek.cities|listid:"code" }}"
+     data-route="{{ trek.route.id }}"
+     data-difficulty="{{ trek.difficulty.id }}"
+     data-duration="{{ trek.duration|unlocalize }}"
+     data-duration-pretty="{{ trek.duration_pretty }}"
+     data-ascent="{{ trek.ascent }}"
      class="result">
   <div class="illust">
-    <img alt="{% trans "Preview of" %} {{ trek.properties.name }}" src="{{ trek|thumbnail }}" width="120" height="120" />
+    <img alt="{% trans "Preview of" %} {{ trek.name }}" src="{{ trek|thumbnail }}" width="120" height="120" />
   </div>
   <div class="info-result">
-    <a class="pjax hidden" href="{% locale_url request.LANGUAGE_CODE "trekking:detail" trek.properties.slug %}"></a>
-    <h3>{{ trek.properties.name }}</h3>
-    <p>{% for district in trek.properties.districts %}{{ district.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-    <p>{% trans "Municipality" %}&nbsp;: {{ trek.properties.cities.0.name }}</p>
-    <p>{{ trek.properties.duration_pretty }} <span class="ascent">- {% trans "Climb" %} {{ trek.properties.ascent }} m</span></p>
-    <p>{{ trek.properties.difficulty.label|default:"&nbsp;" }}</p>
+    <a class="pjax hidden" href="{% locale_url request.LANGUAGE_CODE "trekking:detail" trek.slug %}"></a>
+    <h3>{{ trek.name }}</h3>
+    <p>{% for district in trek.districts %}{{ district.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    <p>{% trans "Municipality" %}&nbsp;: {{ trek.cities.0.name }}</p>
+    <p>{{ trek.duration_pretty }} <span class="ascent">- {% trans "Climb" %} {{ trek.ascent }} m</span></p>
+    <p>{{ trek.difficulty.label|default:"&nbsp;" }}</p>
     <div class="theme-tools">
-      {% for theme in trek.properties.themes %}
+      {% for theme in trek.themes %}
         {{ theme|pictogram }}
       {% empty %}
         <p>&nbsp;</p>
@@ -35,17 +35,17 @@
     </div>
     <div class="search-tools">
         {% if BACKPACK_ENABLED %}
-        <a class="btn backpack icon-backpack-add" data-id="{{ trek.properties.pk }}" data-toggle="tooltip" title="{% trans "Add to favorites" %}">
+        <a class="btn backpack icon-backpack-add" data-id="{{ trek.pk }}" data-toggle="tooltip" title="{% trans "Add to favorites" %}">
           <span class="hidden">{% trans "Add to favorites" %}</span>
         </a>
         {% endif %}
-        <a class="btn search pjax icon-binocular" data-id="{{ trek.properties.pk }}" title="{% trans "Zoom to trek" %}" href="{% locale_url request.LANGUAGE_CODE "trekking:detail" trek.properties.slug %}">
+        <a class="btn search pjax icon-binocular" data-id="{{ trek.pk }}" title="{% trans "Zoom to trek" %}" href="{% locale_url request.LANGUAGE_CODE "trekking:detail" trek.slug %}">
           <span class="hidden">{% trans "Zoom to trek" %}</span>
         </a>
     </div>
     {% if DISQUS_ENABLED %}
     <div class="comments-count">
-       <a href="{{ request.build_absolute_uri|slice:":-1" }}{% url "trekking:detail" trek.properties.slug %}#disqus_thread" data-disqus-identifier="trek-{{ trek.properties.pk }}"></a>
+       <a href="{{ request.build_absolute_uri|slice:":-1" }}{% url "trekking:detail" trek.slug %}#disqus_thread" data-disqus-identifier="trek-{{ trek.pk }}"></a>
     </div>
     {% endif %}
   </div>

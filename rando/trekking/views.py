@@ -39,10 +39,10 @@ class HomeView(PJAXResponseMixin, TemplateView):
 
         all_difficulties = {}
         for trek in alltreks:
-            if not trek.properties.difficulty:
+            if not trek.difficulty:
                 continue
-            did = trek.properties.difficulty.id
-            dlabel = trek.properties.difficulty.label
+            did = trek.difficulty.id
+            dlabel = trek.difficulty.label
             all_difficulties[did] = {'label': dlabel, 'value': did}
 
         difficulty_levels = sorted(all_difficulties.values(),
@@ -62,15 +62,15 @@ class HomeView(PJAXResponseMixin, TemplateView):
         allcities = {}
         allroutes = {}
         for trek in alltreks:
-            for district in trek.properties.districts:
+            for district in trek.districts:
                 alldistricts[district.id] = district
-            for city in trek.properties.cities:
+            for city in trek.cities:
                 allcities[city.code] = city
-            for usage in trek.properties.usages:
+            for usage in trek.usages:
                 allusages[usage.id] = usage
-            for theme in trek.properties.themes:
+            for theme in trek.themes:
                 allthemes[theme.id] = theme
-            route = trek.properties.route
+            route = trek.route
             if route:
                 allroutes[route.id] = route
 
@@ -92,11 +92,16 @@ class HomeView(PJAXResponseMixin, TemplateView):
 
 class BaseTrekView(DetailView):
 
+    def get_context_data(self, **kwargs):
+        context = super(BaseTrekView, self).get_context_data(**kwargs)
+        context['trek'] = self.get_object()
+        return context
+
     def get_object(self):
         slug = self.kwargs.get(self.slug_url_kwarg, None)
         lang = self.request.LANGUAGE_CODE
         for trek in Trek.objects.filter(language=lang).all():
-            if trek.properties.slug == slug:
+            if trek.slug == slug:
                 return trek
         raise Http404
 
@@ -107,9 +112,9 @@ class TrekView(PJAXResponseMixin, BaseTrekView):
     pjax_template_name = "trekking/_detail_panel.html"
 
     def get_context_data(self, **kwargs):
-        obj = self.get_object()
         context = super(TrekView, self).get_context_data(**kwargs)
-        context['trek'] = obj
+        obj = context['trek']
+
         context['thumbnail'] = self.request.build_absolute_uri(obj.properties.thumbnail)
 
         context['trek_has_related'] = (len(obj.properties.relationships_departure) > 0 or
@@ -139,6 +144,6 @@ def trek_redirect(request, pk):
     for trek in treks:
         if trek.pk == int(pk):
             return locale_redirect('trekking:detail',
-                                   kwargs={'slug': trek.properties.slug},
+                                   kwargs={'slug': trek.slug},
                                    locale=lang)
     raise Http404

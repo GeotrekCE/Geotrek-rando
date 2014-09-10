@@ -171,10 +171,7 @@ class TrekListInputFile(JsonInputFile):
                 properties[k] = properties[k].replace(self.client.rooturl, '') if properties.get(k) else properties.get(k)
 
             # Reroot information desks photos
-            if 'information_desks' in properties:
-                properties['information_desks'] = reroot(properties['information_desks'], attr='photo_url')
-            else:
-                properties['information_desks'] = [properties['information_desk']]
+            properties['information_desks'] = reroot(properties['information_desks'], attr='photo_url')
 
             # Download attachments list file
             url = reroot(properties['filelist_url'])
@@ -212,40 +209,37 @@ def sync_content_trekking(sender, **kwargs):
         TrekListInputFile(**inputkwlang).pull()
 
         for trek in models.Trek.tmp_objects.filter(language=language).all():
-            InputFile(trek.properties.gpx, **inputkwlang).pull_if_modified()
-            InputFile(trek.properties.kml, **inputkwlang).pull_if_modified()
-
-            if trek.properties.information_desk_layer:
-                # Only available in Geotrek 0.24
-                InformationDeskInputFile(trek.properties.information_desk_layer, **inputkwlang).pull_if_modified()
+            InputFile(trek.gpx, **inputkwlang).pull_if_modified()
+            InputFile(trek.kml, **inputkwlang).pull_if_modified()
+            InformationDeskInputFile(trek.information_desk_layer, **inputkwlang).pull_if_modified()
 
             if settings.PRINT_ENABLED:
-                InputFile(trek.properties.printable, **inputkwlang).pull_if_modified()
+                InputFile(trek.printable, **inputkwlang).pull_if_modified()
 
     # Fetch media only once, since they do not depend on language
     for trek in models.Trek.tmp_objects.filter(language=settings.LANGUAGE_CODE).all():
-        InputFile(trek.properties.map_image_url, **input_kwargs).pull_if_modified()
-        InputFile(trek.properties.altimetric_profile, **input_kwargs).pull_if_modified()
+        InputFile(trek.map_image_url, **input_kwargs).pull_if_modified()
+        InputFile(trek.altimetric_profile, **input_kwargs).pull_if_modified()
 
-        if trek.properties.thumbnail:
-            InputFile(trek.properties.thumbnail, **input_kwargs).pull_if_modified()
-        for picture in trek.properties.pictures:
+        if trek.thumbnail:
+            InputFile(trek.thumbnail, **input_kwargs).pull_if_modified()
+        for picture in trek.pictures:
             InputFile(picture.url, **input_kwargs).pull_if_modified()
 
-        for theme in trek.properties.themes:
+        for theme in trek.themes:
             InputFile(theme.pictogram, **input_kwargs).pull_if_modified()
-        for usage in trek.properties.usages:
+        for usage in trek.usages:
             InputFile(usage.pictogram, **input_kwargs).pull_if_modified()
-        for network in trek.properties.networks:
+        for network in trek.networks:
             if network.pictogram:
                 InputFile(network.pictogram, **input_kwargs).pull_if_modified()
 
-        if trek.properties.difficulty and trek.properties.difficulty.pictogram:
-            InputFile(trek.properties.difficulty.pictogram, **input_kwargs).pull_if_modified()
-        if trek.properties.route and trek.properties.route.pictogram:
-            InputFile(trek.properties.route.pictogram, **input_kwargs).pull_if_modified()
+        if trek.difficulty and trek.difficulty.pictogram:
+            InputFile(trek.difficulty.pictogram, **input_kwargs).pull_if_modified()
+        if trek.route and trek.route.pictogram:
+            InputFile(trek.route.pictogram, **input_kwargs).pull_if_modified()
 
-        for weblink in trek.properties.web_links:
+        for weblink in trek.web_links:
             if weblink.category:
                 InputFile(weblink.category.pictogram, **input_kwargs).pull_if_modified()
         for poi in models.TrekPOIs.tmp_objects.filter(trek__pk=trek.pk,
@@ -256,15 +250,14 @@ def sync_content_trekking(sender, **kwargs):
                 InputFile(picture.url, **input_kwargs).pull_if_modified()
             InputFile(poi.properties.type.pictogram, **input_kwargs).pull_if_modified()
 
-        if 'information_desks' in trek.properties:
-            for desk in trek.properties.information_desks:
-                if desk and desk.get('photo_url', ''):
-                    InputFile(desk.photo_url, **input_kwargs).pull_if_modified()
+        for desk in trek.information_desks:
+            if desk and desk.get('photo_url', ''):
+                InputFile(desk.photo_url, **input_kwargs).pull_if_modified()
 
         #
         # Fetch attachments
         if settings.FILELIST_ENABLED:
-            attachments = models.AttachmentFile.tmp_objects.filter(trek__pk=trek.properties.pk,
+            attachments = models.AttachmentFile.tmp_objects.filter(trek__pk=trek.pk,
                                                                    language=settings.LANGUAGE_CODE)
             for attachment in attachments.all():
                 InputFile(attachment.url, **input_kwargs).pull_if_modified()

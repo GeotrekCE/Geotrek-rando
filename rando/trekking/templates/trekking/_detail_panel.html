@@ -23,50 +23,50 @@
   <div id="detail-content-title">
 
     <div class="title">
-      <h2><a href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}" class="back-list pjax icon-left-open-mini" title="{% trans "Back to list" %}"></a> {{ object.properties.name }}</h2>
-      <h3 id="departure-arrival">{% trans "Departure" %} : {{ object.properties.departure }}{% if object.properties.arrival %} &rarr; {% trans "Arrival" %} : {{ object.properties.arrival }}{% endif %}</h3>
+      <h2><a href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}" class="back-list pjax icon-left-open-mini" title="{% trans "Back to list" %}"></a> {{ trek.name }}</h2>
+      <h3 id="departure-arrival">{% trans "Departure" %} : {{ trek.departure }}{% if trek.arrival %} &rarr; {% trans "Arrival" %} : {{ trek.arrival }}{% endif %}</h3>
     </div>
 
 
     <div id="trek-identity">
       <div class="info duration" title="{% trans "Duration" %}">
-        <span>{{ object.properties.duration_pretty }}</span>
+        <span>{{ trek.duration_pretty }}</span>
         <div class="pictogram medium">
           <img src="{% static "img/duration.svg" %}" alt="{% trans "Duration" %}"/>
         </div>
       </div>
-      {% if object.properties.difficulty %}
+      {% if trek.difficulty %}
       <div class="info difficulty" title="{% trans "Difficulty" %}">
-        <span>{{ trek.properties.difficulty.label }}</span>
-        {{ trek.properties.difficulty|pictogram:"medium" }}
+        <span>{{ trek.difficulty.label }}</span>
+        {{ trek.difficulty|pictogram:"medium" }}
       </div>
       {% endif %}
-      {% if object.properties.route %}
+      {% if trek.route %}
       <div class="info route" title="{% trans "Route" %}">
-        <span>{{ trek.properties.route.label }}</span>
-        {{ trek.properties.route|pictogram:"medium" }}
+        <span>{{ trek.route.label }}</span>
+        {{ trek.route|pictogram:"medium" }}
       </div>
       {% endif %}
       <div class="info distance" title="{% trans "Total Length" %}">
-        <span>{{ object.properties.length|kilo|floatformat }}&#x202f;km</span>
+        <span>{{ trek.length|kilo|floatformat }}&#x202f;km</span>
         <div class="pictogram medium">
           <img src="{% static "img/distance.svg" %}" alt="{% trans "Total Length" %}"/>
         </div>
       </div>
       <div class="info ascent" title="{% trans "Ascent" %}">
-        <span>{{ object.properties.ascent }}&#x202f;m</span>
+        <span>{{ trek.ascent }}&#x202f;m</span>
         <div class="pictogram medium">
           <img src="{% static "img/ascent.svg" %}" alt="{% trans "Ascent" %}"/>
         </div>
       </div>
 
-      {% for usage in object.properties.usages %}
+      {% for usage in trek.usages %}
         {% if forloop.first %}<div class="info" id="usages">{% trans "Uses" %}<ul>{% endif %}
         <li>{{ usage|pictogram:"medium" }}</li>
         {% if forloop.last %}</ul></div>{% endif %}
       {% endfor %}
 
-      {% for theme in object.properties.themes %}
+      {% for theme in trek.themes %}
         {% if forloop.first %}<div class="info" id="themes">{% trans "Thematic" %}<ul>{% endif %}
         <li>{{ theme|pictogram:"medium" }}</li>
         {% if forloop.last %}</ul></div>{% endif %}
@@ -76,23 +76,23 @@
 
     <div id="toolbox">
       {% if FEEDBACK_FORM_ENABLED %}
-      <a class="btn feedback icon-feedback" href="#" data-slug="{{ trek.properties.slug }}" title="{% trans "Feedback" %}">
+      <a class="btn feedback icon-feedback" href="#" data-slug="{{ trek.slug }}" title="{% trans "Feedback" %}">
       {% trans "Feedback" %}
       </a>
       {% endif %}
 
-      <a class="btn backpack icon-backpack-add" href="#" data-id="{{ trek.properties.pk }}" data-name="{{ trek.properties.name }}">
+      <a class="btn backpack icon-backpack-add" href="#" data-id="{{ trek.pk }}" data-name="{{ trek.name }}">
         {% trans "Favorites" %}
       </a>
 
       {% if VIEW3D_ENABLED %}
-      <a class="btn download view3d icon-view3d" data-slug="{{ trek.properties.slug }}" title="{% trans "3D View" %}">
+      <a class="btn download view3d icon-view3d" data-slug="{{ trek.slug }}" title="{% trans "3D View" %}">
         {% trans "3D" %}
       </a>
       {% endif %}
 
       {% if PRINT_ENABLED %}
-      <a class="btn download print icon-print" title="{% trans "Print" %}" href="{% locale_url request.LANGUAGE_CODE "core:fileserve" object.properties.printable %}" target="_blank">
+      <a class="btn download print icon-print" title="{% trans "Print" %}" href="{% locale_url request.LANGUAGE_CODE "core:fileserve" trek.printable %}" target="_blank">
         <span class="hidden-phone">{% trans "Print" %}</span><span class="visible-phone">{% trans "PDF" %}</span>
       </a>
       {% else %}
@@ -100,10 +100,10 @@
         {% trans "Print" %}
       </a>
       {% endif %}
-      <a class="btn download gpx icon-gpx" title="{% trans "Download GPX" %}" href="{% locale_url request.LANGUAGE_CODE "core:fileserve" object.properties.gpx %}">
+      <a class="btn download gpx icon-gpx" title="{% trans "Download GPX" %}" href="{% locale_url request.LANGUAGE_CODE "core:fileserve" trek.gpx %}">
         {% trans "GPX" %}
       </a>
-      <a class="btn download kml icon-kml" title="{% trans "Download for Google Earth" %}" href="{% locale_url request.LANGUAGE_CODE "core:fileserve" object.properties.kml %}">
+      <a class="btn download kml icon-kml" title="{% trans "Download for Google Earth" %}" href="{% locale_url request.LANGUAGE_CODE "core:fileserve" trek.kml %}">
         {% trans "KML" %}
       </a>
     </div>
@@ -112,42 +112,42 @@
 
   <div class="row-fluid page-inner-content">
     <div class="span4">
-      {% if object.properties.description_teaser %}<p class="teaser">{{ object.properties.description_teaser|safe|striptags }}</p>{% endif %}
-      {% if object.properties.ambiance %}<p>{{ object.properties.ambiance|safe }}</p>{% endif %}
+      {% if trek.description_teaser %}<p class="teaser">{{ trek.description_teaser|safe|striptags }}</p>{% endif %}
+      {% if trek.ambiance %}<p>{{ trek.ambiance|safe }}</p>{% endif %}
 
       <div id="trek-carousel">
         {% include "trekking/_carousel.html" with prefix="trek" pictures=all_pictures default="True" %}
       </div>
 
-      {% if object.properties.description %}
-      <p>{{ object.properties.description|safe }}</p>
+      {% if trek.description %}
+      <p>{{ trek.description|safe }}</p>
       {% endif %}
 
-      {% if object.properties.access or object.properties.public_transport or object.properties.disabled_infrastructure %}
+      {% if trek.access or trek.public_transport or trek.disabled_infrastructure %}
       <div id="trek-access" class="alert alert-info">
 
-        {% if object.properties.disabled_infrastructure %}
+        {% if trek.disabled_infrastructure %}
         <h3 class="icon-disabled-infrastructure">{% trans "Disabled-friendly infrastructures" %}</h3>
-        <p>{{ object.properties.disabled_infrastructure|safe }}</p>
+        <p>{{ trek.disabled_infrastructure|safe }}</p>
         {% endif %}
 
-        {% if object.properties.public_transport %}
+        {% if trek.public_transport %}
         <h3 class="icon-transport">{% trans "Transport" %}</h3>
-        <p>{{ object.properties.public_transport|safe }}</p>
+        <p>{{ trek.public_transport|safe }}</p>
         {% endif %}
 
-        {% if object.properties.access %}
+        {% if trek.access %}
         <h3 class="icon-access">{% trans "Access" %}</h3>
-        <p>{{ object.properties.access|safe }}</p>
+        <p>{{ trek.access|safe }}</p>
         {% endif %}
 
       </div>
       {% endif %}
 
-      {% if object.properties.information_desks %}
+      {% if trek.information_desks %}
       <div id="trek-information-desk" class="alert alert-blank">
           <h3 class="icon-information-desk">{% trans "Information desks" %}</h3>
-          {% for desk in object.properties.information_desks %}
+          {% for desk in trek.information_desks %}
             {% include "trekking/_information_desk.html" %}
           {% endfor %}
       </div>
@@ -161,10 +161,10 @@
         </div>
       {% endif %}
 
-      <div id="detailmap" data-poi-url="{% locale_url request.LANGUAGE_CODE "core:fileserve" object.properties.poi_layer %}"
+      <div id="detailmap" data-poi-url="{% locale_url request.LANGUAGE_CODE "core:fileserve" trek.poi_layer %}"
                           data-switch-detail-zoom="{{ SWITCH_DETAIL_ZOOM }}"
-                          {% if object.properties.information_desk_layer %}data-information-desk-url="{% locale_url request.LANGUAGE_CODE "core:fileserve" object.properties.information_desk_layer %}"{% endif %}>
-        <img id="staticmap" class="hidden" src="{% url "core:fileserve" object.properties.map_image_url %}" alt="{% trans "Detail map static" %}"/>
+                          {% if trek.information_desk_layer %}data-information-desk-url="{% locale_url request.LANGUAGE_CODE "core:fileserve" trek.information_desk_layer %}"{% endif %}>
+        <img id="staticmap" class="hidden" src="{% url "core:fileserve" trek.map_image_url %}" alt="{% trans "Detail map static" %}"/>
         <div class="helpclic"><p>{% trans "Clic for map interaction" %}</p></div>
       </div>
 
@@ -172,21 +172,21 @@
       <div class="row-fluid meta">
 
         <div class="span6">
-          <div id="altitudegraph" data-url="{% url "core:fileserve" object.properties.altimetric_profile %}">
+          <div id="altitudegraph" data-url="{% url "core:fileserve" trek.altimetric_profile %}">
             <h4>{% trans "Altitude profile" %}</h4>
             <p class="axislabel">{% trans "Altitude (m)" %}</p>
              <p id="altitude-details">
-              <span class="min">{% trans "Min" %} : <span class="value">{{ object.properties.min_elevation }} m</span></span> -
-              <span class="max">{% trans "Max" %} : <span class="value">{{ object.properties.max_elevation }} m</span></span>
+              <span class="min">{% trans "Min" %} : <span class="value">{{ trek.min_elevation }} m</span></span> -
+              <span class="max">{% trans "Max" %} : <span class="value">{{ trek.max_elevation }} m</span></span>
             </p>
             <span id="profilealtitude"></span> <span class="axislabel">{% trans "Distance (m)" %}</span>
             <p id="mouseoverprofil" class="axislabel" >&nbsp;</p>
           </div>
 
-          {% if object.properties.advice %}
+          {% if trek.advice %}
             <div id="trek-advice" class="alert alert-error">
               <h3 class="icon-warning">{% trans "Advice" %}</h3>
-              <p>{{ object.properties.advice|safe }}</p>
+              <p>{{ trek.advice|safe }}</p>
             </div>
           {% endif %}
         </div>
@@ -194,13 +194,13 @@
         <div class="span6">
           <div class="row-fluid">
 
-            {% if object.properties.web_links|length > 0 or object.properties.networks|length > 0 %}
+            {% if trek.web_links|length > 0 or trek.networks|length > 0 %}
             <div class="flex">
               <h4>{% trans "See also" %}</h4>
 
               <div id="trek-links">
                 <ul>
-                {% regroup object.properties.web_links by category as weblinks %}
+                {% regroup trek.web_links by category as weblinks %}
                 {% for weblink in weblinks %}
                     {% if weblink.grouper.label %}
                     <h5><img src="{{ weblink.grouper.pictogram }}"> {{ weblink.grouper.label }}</h5>
@@ -232,11 +232,11 @@
                 </ul>
               </div>
 
-              {% if object.properties.networks %}
+              {% if trek.networks %}
               <div class="trek-networks">
                   <h5>{% trans "Markings" %}</h5>
                   <ul>
-                  {% for network in object.properties.networks %}
+                  {% for network in trek.networks %}
                     <li><img src="{{ network.pictogram }}" alt="{% trans "Marks" %} {{ network.name }}"/> {{ network.name }}</li>
                   {% endfor %}
                   </ul>
@@ -249,7 +249,7 @@
             {% if trek_has_related %}
             <div id="trek-related" class="flex">
               <h4>{% trans "Related treks" %}</h4>
-              {% for relationship in object.properties.relationships_departure %}
+              {% for relationship in trek.relationships_departure %}
                 {% if forloop.first %}
                   <h5>{% trans "Sharing departure" %}</h5>
                   <ul>
@@ -258,7 +258,7 @@
                 {% if forloop.last %}</ul>{% endif %}
               {% endfor %}
 
-              {% for relationship in object.properties.relationships_edge %}
+              {% for relationship in trek.relationships_edge %}
                 {% if forloop.first %}
                   <h5>{% trans "Sharing paths" %}</h5>
                   <ul>
@@ -267,7 +267,7 @@
                 {% if forloop.last %}</ul>{% endif %}
               {% endfor %}
 
-              {% for relationship in object.properties.relationships_circuit %}
+              {% for relationship in trek.relationships_circuit %}
                 {% if forloop.first %}
                   <h5>{% trans "Sharing circuit" %}</h5>
                   <ul>
@@ -285,8 +285,8 @@
       {% if DISQUS_ENABLED %}
         <div id="disqus_thread"
              data-disqus-shortname="{{ DISQUS_SHORTNAME }}"
-             data-disqus-identifier="trek-{{ object.properties.pk }}"
-             data-disqus-url="{{ request.build_absolute_uri|slice:":-1" }}{% url "trekking:detail" trek.properties.slug %}"
+             data-disqus-identifier="trek-{{ trek.pk }}"
+             data-disqus-url="{{ request.build_absolute_uri|slice:":-1" }}{% url "trekking:detail" trek.slug %}"
              data-disqus-title="{{ object.title }}"
              data-disqus-language="{{ request.LANGUAGE_CODE }}">
         </div>
@@ -335,7 +335,7 @@
   </div>
 </div>
 
-<div id="pois-carousels-{{ trek.properties.pk }}" class="reattach" data-destination="body">
+<div id="pois-carousels-{{ trek.pk }}" class="reattach" data-destination="body">
 {% for poi in pois %}
   <div id="popup-poi-carousel-{{ poi.properties.pk }}" class="popup poi modal hide fade" role="dialog" aria-labelledby="poi-carousel" aria-hidden="true">
       <div class="modal-body">

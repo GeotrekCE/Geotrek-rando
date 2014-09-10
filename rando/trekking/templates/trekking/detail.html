@@ -2,7 +2,7 @@
 
 {% block title %}{{ object.title }}{% endblock title %}
 
-{% block description %}{{ object.properties.description_teaser|safe|striptags }}{% endblock description %}
+{% block description %}{{ trek.description_teaser|safe|striptags }}{% endblock description %}
 
 
 {% block extrahead %}
@@ -10,7 +10,7 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:url" content="{{ URL }}">
     <meta name="twitter:title" content="{{ object.title }}">
-    <meta name="twitter:description" content="{{ object.properties.description_teaser|striptags }}">
+    <meta name="twitter:description" content="{{ trek.description_teaser|striptags }}">
     <meta name="twitter:image" content="{{ thumbnail }}">
 {% endblock extrahead %}
 

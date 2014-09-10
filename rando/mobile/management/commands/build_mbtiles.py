@@ -105,7 +105,7 @@ class Command(BaseCommand):
         """ Creates a MBTiles for the specified Trek object.
         Builds a temporary file and overwrites the existing one on success.
         """
-        logger.info("Build MBTiles for trek '%s'..." % trek.properties.name)
+        logger.info("Build MBTiles for trek '%s'..." % trek.name)
         trek_file = os.path.join(self.output_folder, 'trek-%s.mbtiles' % trek.id)
         tmp_trek_file = trek_file + '.tmp'
 

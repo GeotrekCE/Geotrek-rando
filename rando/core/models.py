@@ -72,10 +72,6 @@ class JSONModel(object):
         t = os.path.getmtime(self.objects.fullpath)
         return datetime.datetime.fromtimestamp(t)
 
-    @property
-    def pk(self):
-        return self.properties.pk
-
     @classproperty
     def objects(cls):
         return cls.manager_class(cls, cls.filepath)
@@ -89,6 +85,11 @@ class JSONModel(object):
 
 class GeoJSONModel(JSONModel):
     manager_class = GeoJSONManager
+
+    def __getattr__(self, name):
+        if name in self.properties:
+            return self.properties[name]
+        return super(JSONModel, self).__getattr__(name)
 
     @property
     def geojson(self):
