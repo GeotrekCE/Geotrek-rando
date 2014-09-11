@@ -100,9 +100,6 @@ msgstr "Difficulté"
 msgid "Route"
 msgstr "Parcours"
 
-msgid "Valleys"
-msgstr "Vallées"
-
 msgid "Disabled-friendly infrastructures"
 msgstr "Aménagements pour handicapés"
 

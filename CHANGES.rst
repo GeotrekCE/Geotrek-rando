@@ -2,10 +2,12 @@
 CHANGELOG
 =========
 
-1.32.1 (unreleased)
+1.32.2 (unreleased)
 -------------------
 
 * Changed french translation from "Photos satellite" to "Photos aérienne"
+* Added the ability to customize the districts label (used to be *Valleys*).
+  Default value is now *Districts*.
 
 1.32.1 (2014-09-03)
 -------------------
