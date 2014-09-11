@@ -32,8 +32,7 @@ class BaseModel(object):
 
 
 class POI(JSONModel):
-    filesource = 'api/pois/'
-    filepath = 'api/poi/pois.json'
+    filepath = 'api/poi/poi.geojson'
 
     @models.permalink
     def get_absolute_url(self):
@@ -46,8 +45,6 @@ class TrekPOIs(GeoJSONModel):
 
 class Trek(GeoJSONModel):
     filepath = 'api/trek/trek.geojson'
-    detailsource = 'api/treks/{pk}/'
-    detailpath = 'api/treks/trek-{pk}.json'
 
     @models.permalink
     def get_absolute_url(self):
