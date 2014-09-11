@@ -2,6 +2,11 @@
 CHANGELOG
 =========
 
+1.32.1 (unreleased)
+-------------------
+
+* Changed french translation from "Photos satellite" to "Photos aérienne"
+
 1.32.1 (2014-09-03)
 -------------------
 
