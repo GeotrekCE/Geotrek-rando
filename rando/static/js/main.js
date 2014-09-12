@@ -1,3 +1,53 @@
+(function (window) {
+"use strict";
+
+
+var RandoApp = Backbone.Router.extend({
+    initialize: function(){
+        Backbone.history.start({
+            pushState: true,
+            root: "/"
+        });
+    },
+
+    routes: {
+        ':lang/': 'home',
+        ':lang/*slug': 'detail',
+    },
+
+    home: function (lang) {
+        console.log('home', lang);
+    },
+
+    detail: function (lang, slug) {
+        console.log('detail', lang, slug);
+    },
+});
+
+
+//
+// Bind PJAX events to Backbone router
+//
+$(window).bind("pjax:success", function refreshRouter(e){
+    var url = window.location.pathname;
+    window.app.navigate(url, {trigger: true});
+});
+
+
+window.app = new RandoApp();
+
+})(window);
+
+
+
+
+
+
+
+
+
+
+
 window.ALTIMETRIC_PROFILE_OPTIONS = L.Util.extend({
     fillColor: '#FFD1A1',
     lineColor: '#F77E00',
