@@ -1,6 +1,6 @@
 from django.conf import settings
 
-from rando.core.management.commands.sync_content import InputFile
+from rando.core.sync import InputFile
 from rando.tourism.models import DataSource
 from rando import logger
 
@@ -27,5 +27,5 @@ def sync_content_tourism(sender, **kwargs):
                 if not settings.TOURISM_DATASOURCE_FAULT_TOLERANT:
                     raise
 
-        for datasource in DataSource.tmp_objects.filter(language=language).all():
-            InputFile(datasource.pictogram_url, **inputkw).pull_if_modified()
+    for datasource in DataSource.tmp_objects.filter(language=language).all():
+        InputFile(datasource.pictogram_url, **inputkw).pull_if_modified()

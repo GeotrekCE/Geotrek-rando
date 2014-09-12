@@ -1,7 +1,7 @@
 from django.conf import settings
 
 from rando.trekking.models import Trek
-from rando.core.management.commands.sync_content import InputFile
+from rando.core.sync import InputFile
 
 
 def sync_content_view3d(sender, **kwargs):

@@ -1944,44 +1944,44 @@ header #lang-switch {
   color: white;
   border-radius: 999px;
 }
-.detail-content #detail-content-title #trek-identity {
+.detail-content #detail-content-title #object-identity {
   display: inline-block;
 }
-.detail-content #detail-content-title #trek-identity p {
+.detail-content #detail-content-title #object-identity p {
   margin-bottom: 0;
   color: #877f84;
   text-align: left;
 }
-.detail-content #detail-content-title #trek-identity .info {
+.detail-content #detail-content-title #object-identity .info {
   display: inline-block;
   text-align: center;
   margin-right: 10px;
 }
-.detail-content #detail-content-title #trek-identity .info span {
+.detail-content #detail-content-title #object-identity .info span {
   display: block;
 }
-.detail-content #detail-content-title #trek-identity #themes,
-.detail-content #detail-content-title #trek-identity #usages {
+.detail-content #detail-content-title #object-identity #themes,
+.detail-content #detail-content-title #object-identity #usages {
   color: #877f84;
   vertical-align: top;
 }
-.detail-content #detail-content-title #trek-identity #themes ul,
-.detail-content #detail-content-title #trek-identity #usages ul {
+.detail-content #detail-content-title #object-identity #themes ul,
+.detail-content #detail-content-title #object-identity #usages ul {
   margin: 0;
   text-align: center;
 }
-.detail-content #detail-content-title #trek-identity #usages {
+.detail-content #detail-content-title #object-identity #usages {
   margin-left: 30px;
   margin-right: 20px;
 }
-.detail-content #detail-content-title #trek-identity #themes li,
-.detail-content #detail-content-title #trek-identity #usages li,
-.detail-content #detail-content-title #trek-identity #networks li {
+.detail-content #detail-content-title #object-identity #themes li,
+.detail-content #detail-content-title #object-identity #usages li,
+.detail-content #detail-content-title #object-identity #networks li {
   list-style-type: none;
   display: inline-block;
 }
-.detail-content #detail-content-title #trek-identity #themes .pictogram,
-.detail-content #detail-content-title #trek-identity #usages .pictogram {
+.detail-content #detail-content-title #object-identity #themes .pictogram,
+.detail-content #detail-content-title #object-identity #usages .pictogram {
   opacity: 0.5;
 }
 .detail-content #detail-content-title #toolbox {

@@ -61,7 +61,7 @@ function feedbackmapInit(map, bounds) {
         map.minimapcontrol._minimize();
     });
 
-    var trekGeoJson = JSON.parse(document.getElementById('trek-geojson').innerHTML);
+    var trekGeoJson = JSON.parse(document.getElementById('object-geojson').innerHTML);
     var trekLayer = initDetailTrekMap(map, trekGeoJson);
     var wholeBounds = trekLayer.getBounds();
     map.fitBounds(wholeBounds);

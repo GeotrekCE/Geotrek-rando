@@ -1,15 +1,14 @@
 import json
 
 from django.http import Http404, HttpResponse
-from django.views.generic import DetailView
 from django.core.urlresolvers import reverse
-from djpjax import PJAXResponseMixin
 
+from rando.core.views import BaseView
 from rando.core.utils import locale_redirect
 from .models import FlatPage
 
 
-class PageView(PJAXResponseMixin, DetailView):
+class PageView(BaseView):
 
     template_name = "flatpages/base.html"
     pjax_template_name = "flatpages/_base_panel.html"

@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from djpjax import PJAXResponseMixin
 
 from rando import logger
+from rando.core.views import BaseView
 from rando.core.utils import locale_redirect
 from .models import Trek, POI
 
@@ -96,51 +97,29 @@ class TrekHome(PJAXResponseMixin, TemplateView):
         })
 
 
-class BaseTrekView(DetailView):
+class BaseTrekView(BaseView):
 
-    def get_context_data(self, **kwargs):
-        context = super(BaseTrekView, self).get_context_data(**kwargs)
-        context['trek'] = self.get_object()
-        return context
-
-    def get_object(self):
-        slug = self.kwargs.get(self.slug_url_kwarg, None)
-        lang = self.request.LANGUAGE_CODE
-        for trek in Trek.objects.filter(language=lang).all():
-            if trek.slug == slug:
-                return trek
-        raise Http404
+    model = Trek
 
 
-class TrekDetail(PJAXResponseMixin, BaseTrekView):
+class TrekDetail(BaseTrekView):
 
-    template_name = 'trekking/detail.html'
     pjax_template_name = "trekking/_detail_panel.html"
 
     def get_context_data(self, **kwargs):
         context = super(TrekDetail, self).get_context_data(**kwargs)
         obj = context['trek']
 
-        context['thumbnail'] = self.request.build_absolute_uri(obj.properties.thumbnail)
-
         context['trek_has_related'] = (len(obj.properties.relationships_departure) > 0 or
                                        len(obj.properties.relationships_edge) > 0 or
                                        len(obj.properties.relationships_circuit))
 
-        pois = obj.pois.all()
-        context['pois'] = pois
-
-        # Merge pictures of trek and POIs
-        all_pictures = obj.properties.pictures
-        for poi in pois:
-            all_pictures.extend(poi.properties.pictures)
-        context['all_pictures'] = all_pictures
+        context['pois'] = obj.pois.all()
 
         context['park_center_warning'] = settings.PARK_CENTER_WARNING.get(self.request.LANGUAGE_CODE,
                                                                           settings.PARK_CENTER_WARNING.get(settings.LANGUAGE_CODE, ''))
         context['park_center_link'] = settings.PARK_CENTER_LINK.get(self.request.LANGUAGE_CODE,
                                                                     settings.PARK_CENTER_LINK.get(settings.LANGUAGE_CODE, ''))
-
         return context
 
 

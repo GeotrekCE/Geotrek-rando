@@ -558,7 +558,7 @@ function detailmapInit(map, bounds) {
         title: gettext('Fullscreen')
     }).addTo(map);
 
-    var trekGeoJson = JSON.parse(document.getElementById('trek-geojson').innerHTML);
+    var trekGeoJson = JSON.parse(document.getElementById('object-geojson').innerHTML);
     var poiUrl = $(map._container).data('poi-url');
     var informationDeskUrl = $(map._container).data('information-desk-url');
 

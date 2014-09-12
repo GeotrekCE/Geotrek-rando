@@ -1,0 +1,78 @@
+{% load static i18n leaflet_tags rando_tags localeurl_tags %}
+
+{% include "_navigation.html" %}
+{% include "_share.html" with title=object.title %}
+
+{% if pjax %}
+  <title>{{ object.title }}</title>
+{% endif %}
+
+
+<script type="application/json" id="object-geojson">
+    {# http://stackoverflow.com/questions/9320427/best-practice-for-embedding-arbitrary-json-in-the-dom #}
+    {{ object.geojson|safe }}
+</script>
+
+
+<div id="mobile-header-detail">
+  <a class="pjax" href="{% locale_url request.LANGUAGE_CODE "trekking:trek_home" %}"><h1 class="icon-left-open-mini">{% trans "Back to list" %}</h1></a>
+</div>
+
+<div class="detail-content page-content">
+
+  <div id="detail-content-title">
+
+    <div class="title">
+      {% block title %}
+      <h2><a href="{% locale_url request.LANGUAGE_CODE "trekking:trek_home" %}" class="back-list pjax icon-left-open-mini" title="{% trans "Back to list" %}"></a> {{ object.name }}</h2>
+      {% endblock title %}
+    </div>
+
+    <div id="object-identity">
+      {% block identity %}
+      {% endblock identity %}
+    </div>
+
+
+    <div id="toolbox">
+      {% block toolbox %}
+
+      {% if FEEDBACK_FORM_ENABLED %}
+      <a class="btn feedback icon-feedback" href="#" data-slug="{{ object.slug }}" title="{% trans "Feedback" %}">
+      {% trans "Feedback" %}
+      </a>
+      {% endif %}
+
+
+      {% if BACKPACK_ENABLED %}
+      <a class="btn backpack icon-backpack-add" href="#" data-id="{{ object.pk }}" data-name="{{ object.name }}">
+        {% trans "Favorites" %}
+      </a>
+      {% endif %}
+
+
+      {% if PRINT_ENABLED %}
+      <a class="btn download print icon-print" title="{% trans "Print" %}" href="{% locale_url request.LANGUAGE_CODE "core:fileserve" object.printable %}" target="_blank">
+        <span class="hidden-phone">{% trans "Print" %}</span><span class="visible-phone">{% trans "PDF" %}</span>
+      </a>
+      {% else %}
+      <a class="btn download print disabled" title="{% trans "Soon!" %}" >
+        {% trans "Print" %}
+      </a>
+      {% endif %}
+
+      {% endblock toolbox %}
+    </div>
+
+  </div>
+
+  <div class="row-fluid page-inner-content">
+    {% block maincontent %}
+    {% endblock maincontent %}
+  </div>
+</div><!-- detail-content -->
+
+{% leaflet_map 'detailmap' fitextent=False creatediv=False callback="detailmapInit" loadevent="rando:foo" %}{# Such loadevent will prevent automatic map initialization #}
+
+{% block extracontent %}
+{% endblock extracontent %}
