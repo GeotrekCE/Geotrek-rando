@@ -10,19 +10,17 @@ from rando.trekking import models
 
 class JSONCollection(JsonInputFile):
     def content(self):
+        content = super(JSONCollection, self).content()
         records = []
-        for record in self.fetch_list():
+        for record in self.fetch_list(content):
             if self.filter_record(record):
                 logger.debug('%s filtered.' % self.url)
                 continue
             records.append(self.handle_record(record))
         return self.serialize_json(records)
 
-    def fetch_list(self):
-        content = self.reply.json()
-        if content is None:
-            return super(JSONCollection, self).content()
-        return content
+    def fetch_list(self, content):
+        return json.loads(content)
 
     def filter_record(self, record):
         return False
@@ -42,12 +40,13 @@ class JSONCollection(JsonInputFile):
 
 
 class GeoJSONCollection(JSONCollection):
-    def fetch_list(self):
-        content = super(GeoJSONCollection, self).fetch_list()
-        return content['features']
+    def fetch_list(self, content):
+        json = super(GeoJSONCollection, self).fetch_list(content)
+        return json['features']
 
     def serialize_json(self, content):
-        original = self.reply.json()
+        original = JsonInputFile.content(self)
+        original = JSONCollection.fetch_list(self, original)
         original['features'] = content
         return super(GeoJSONCollection, self).serialize_json(original)
 
@@ -55,6 +54,31 @@ class GeoJSONCollection(JSONCollection):
 class PublishedCollection(GeoJSONCollection):
 
     objectname = None
+    full = False
+
+    def fetch_list(self, content):
+        features = super(PublishedCollection, self).fetch_list(content)
+
+        # Mode light : do not complete GeoJSON properties
+        if not self.full:
+            return features
+
+        # Fill this GeoJSON with detail properties
+        source = 'api/{objectname}s/'.format(objectname=self.objectname)
+        path = 'api/{objectname}s/{objectname}s.json'.format(objectname=self.objectname)
+        jsonfile = self.download_resource(url=source, store=path, klass=JsonInputFile, language=self.language)
+
+        records = json.loads(jsonfile.content())
+        records_by_id = {}
+        for record in records:
+            records_by_id[record['id']] = record
+
+        for feature in features:
+            properties = feature['properties']
+            details = records_by_id[feature['id']]
+            properties.update(details)
+
+        return features
 
     def filter_record(self, record):
         is_published = record['properties'].get('published', False)
@@ -67,13 +91,6 @@ class PublishedCollection(GeoJSONCollection):
 
         properties['thumbnail'] = reroot(properties.get('thumbnail'))
         properties['pictures'] = reroot(properties.get('pictures'), attr='url')
-
-        # Fill with detail properties
-        detailsource = 'api/{objectname}s/{pk}/'.format(objectname=self.objectname, pk=pk)
-        detailpath = 'api/{objectname}s/{objectname}-{pk}.json'.format(objectname=self.objectname, pk=pk)
-        detailfile = self.download_resource(url=detailsource, store=detailpath, klass=JsonInputFile, language=self.language)
-        detail = json.loads(detailfile.content())
-        properties.update(detail)
 
         if settings.PRINT_ENABLED and properties.get('printable'):
             self.download_resource(properties['printable'], language=self.language)
@@ -142,6 +159,7 @@ class AttachmentInputFile(JSONCollection):
 class POIListInputFile(PublishedCollection):
 
     objectname = 'poi'
+    full = False
 
     def handle_record(self, record):
         record = super(POIListInputFile, self).handle_record(record)
@@ -158,6 +176,7 @@ class POIListInputFile(PublishedCollection):
 class TrekListInputFile(PublishedCollection):
 
     objectname = 'trek'
+    full = True
 
     def filter_record(self, record):
         filtered = super(TrekListInputFile, self).filter_record(record)
@@ -204,10 +223,9 @@ class TrekListInputFile(PublishedCollection):
         properties['relationships_edge'] = [r for r in properties['relationships'] if r['has_common_edge']]
         properties['relationships_circuit'] = [r for r in properties['relationships'] if r['is_circuit_step']]
 
-
         # Add POIs information in list, useful for textual search
         trek_pois = models.TrekPOIs.filepath.format(trek__pk=pk)
-        f = self.download_resource(trek_pois, klass=POIListInputFile, language=self.language).pull()
+        f = self.download_resource(trek_pois, klass=POIListInputFile, language=self.language)
         poiscontent = json.loads(f.content())
         poisprops = [poi['properties'] for poi in poiscontent['features']]
         properties['pois'] = [{'name': poiprop['name'],
@@ -241,7 +259,7 @@ class TrekListInputFile(PublishedCollection):
 
         for weblink in properties['web_links']:
             if weblink['category']:
-                self.download_resource(properties['category']['pictogram'])
+                self.download_resource(weblink['category']['pictogram'])
 
         return record
 
@@ -252,8 +270,10 @@ def sync_content_trekking(sender, **kwargs):
 
     languages = server_settings.languages.available.keys()
     logger.debug("Languages: %s" % languages)
-    for language in languages[:1]:
+    for language in languages:
         inputkwlang = dict(language=language, **input_kwargs)
 
         TrekListInputFile(url=models.Trek.filepath, **inputkwlang).pull()
-        POIListInputFile(url=models.POI.filepath, **inputkwlang).pull()
+        f = POIListInputFile(url=models.POI.filepath, **inputkwlang)
+        f.full = True
+        f.pull()
