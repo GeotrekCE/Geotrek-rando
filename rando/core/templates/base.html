@@ -120,17 +120,19 @@
 
         <script src="{% locale_url request.LANGUAGE_CODE "jsi18n" %}"></script>
         {% compress js %}
+
+        {% leaflet_js %}
+        <script type="text/javascript">
+            window.IMG_URL = "{% static "img" %}"
+            L.Icon.Default.imagePath = '{% static "leaflet/images" %}';
+        </script>
+
         <script src="{% static "js/vendor/jquery-ui.js" %}"></script>
         <script src="{% static "js/vendor/jquery.ui.touch-punch.min.js" %}"></script>
         <script src="{% static "js/vendor/jquery.sparkline.min.js" %}"></script>
         <script src="{% static "js/vendor/jquery.pjax.js" %}"></script>
         <script src="{% static "js/vendor/jquery.smartresize.js" %}"></script>
         <script src="{% static "js/vendor/jquery.hoverIntent.js" %}"></script>
-        {% leaflet_js %}
-        <script type="text/javascript">
-            window.IMG_URL = "{% static "img" %}"
-            L.Icon.Default.imagePath = '{% static "leaflet/images" %}';
-        </script>
         <script src="{% static "js/vendor/leaflet.markercluster.js" %}"></script>
         <script src="{% static "js/vendor/bootstrap.min.js" %}"></script>
         <script src="{% static "js/vendor/leaflet.restoreview.js" %}"></script>
@@ -150,23 +152,32 @@
         <script src="{% static "js/vendor/L.Control.Sidebar.js" %}"></script>
         <script src="{% static "js/vendor/jquery.easing-custom.js" %}"></script>
 
-        <script src="{% static "js/vendor/underscore.js" %}"></script>
-        <script src="{% static "js/vendor/backbone.js" %}"></script>
 
-        <script src="{% static "js/ui.js" %}"></script>
-        <script src="{% static "js/main.js" %}"></script>
-        {% if POPUP_HOME_ENABLED %}
-        <script src="{% static "js/popup-home.js" %}"></script>
-        {% endif %}
-        <script src="{% static "trekking/js/ui.js" %}"></script>
-        <script src="{% static "trekking/js/filter.js" %}"></script>
         {% if BACKPACK_ENABLED %}
         <script src="{% static "backpack/js/main.js" %}"></script>
         {% endif %}
-        <script src="{% static "js/map.js" %}"></script>
-        <script src="{% static "trekking/js/map.js" %}"></script>
+
         {% if FILTERS_HASH_ENABLED %}
         <script src="{% static "js/filter-hash.js" %}"></script>
+        {% endif %}
+
+        <script src="{% static "js/map.js" %}"></script>
+        <script src="{% static "trekking/js/map.js" %}"></script>
+        <script src="{% static "trekking/js/ui.js" %}"></script>
+        <script src="{% static "trekking/js/filter.js" %}"></script>
+
+        <script src="{% static "js/vendor/underscore.js" %}"></script>
+        <script src="{% static "js/vendor/backbone.js" %}"></script>
+
+        <script src="{% static "js/settings.js" %}"></script>
+        <script src="{% static "js/views.js" %}"></script>
+        <script src="{% static "js/mobile.js" %}"></script>
+        <script src="{% static "js/utils.js" %}"></script>
+        <script src="{% static "js/main.js" %}"></script>
+
+
+        {% if POPUP_HOME_ENABLED %}
+        <script src="{% static "js/popup-home.js" %}"></script>
         {% endif %}
 
         {% if FEEDBACK_FORM_ENABLED %}
@@ -177,7 +188,9 @@
         {% if VIEW3D_ENABLED %}
         <script src="{% static "view3d/main.js" %}"></script>
         {% endif %}
+
         {% endcompress %}
+
 
         {% if TOURISM_ENABLED %}
         <script src="{% static "tourism/main.js" %}" id="tourism" data-datasources-url="{% locale_url request.LANGUAGE_CODE "core:fileserve" datasources_url %}" data-base-url="{% locale_url request.LANGUAGE_CODE "core:fileserve" "" %}"></script>

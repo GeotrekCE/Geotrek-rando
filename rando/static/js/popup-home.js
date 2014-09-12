@@ -17,7 +17,7 @@ $(document).ready(function (e) {
 
     enhanceTrekPreviews();
 
-    if ((FORCED || showModal()) && MOBILE === false) {
+    if ((FORCED || showModal()) && Rando.MOBILE === false) {
         $modal.modal('show');
     }
 

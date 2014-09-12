@@ -428,7 +428,7 @@ function mainmapInit(map, djoptions) {
 
     // Filter list by map bounds
     map.on('moveend', function (e) {
-        if (!map._loaded || MOBILE) return;  // Bounds should be set.
+        if (!map._loaded || Rando.MOBILE) return;  // Bounds should be set.
 
         $('#side-bar .result').removeClass('outbounds');
         if (!$(map._container).is(':visible')) {
@@ -492,7 +492,7 @@ function mainmapInit(map, djoptions) {
             offset: layer.iconified ? new L.Point(2, -10) : new L.Point(2, 0) // different offset depending on iconified state
         };
 
-        if(MOBILE) {
+        if(Rando.MOBILE) {
             popupSettings = L.Util.extend(popupSettings, {
                 closeButton: false,
                 maxWidth: 250,
@@ -514,7 +514,7 @@ function mainmapInit(map, djoptions) {
         });
 
         // If MOBILE, then click on whole popup panel opens details
-        if(MOBILE) {
+        if(Rando.MOBILE) {
             $(".leaflet-popup-content-wrapper").on('click', function (event) {
                 $.pjax({container: '#pjax-content', url:$("a.pjax", popup._container).attr('href')});
             });

@@ -50,5 +50,3 @@
 {% include "_navigation.html" with title="HOME" %}
 
 {% leaflet_map 'mainmap' fitextent=False creatediv=False callback="mainmapInit" loadevent="rando:foo" %}{# Such loadevent will prevent automatic map initialization #}
-
-<div id="mainmap-tag" style="display: none"><!-- custom tag to detect loaded page--></div>

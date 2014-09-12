@@ -30,7 +30,7 @@ function view_home() {
     });
 
     $("#mainmap").show();  // We are on home with map
-    invalidate_maps();
+    Rando.utils.invalidateMaps();
 
     // Focus search field
     if (/search/.test(window.location.hash)) {
@@ -110,7 +110,7 @@ function refresh_results(matching) {
 function view_detail() {
     $("#mainmap").hide();  // We are elsewhere
 
-    if (!MOBILE) {
+    if (!Rando.MOBILE) {
         if (typeof(loadmapdetailmap) == "function") {
             // Detail map is not present on flatpages
             loadmapdetailmap();
@@ -124,7 +124,7 @@ function view_detail() {
     $('#results .number .badge').html(window.trekFilter.getResultsCount());
 
     // Cycle Trek carousel automatically on start
-    if (!MOBILE) {
+    if (!Rando.MOBILE) {
         $('#trek-carousel .carousel').carousel('cycle');
     }
 
