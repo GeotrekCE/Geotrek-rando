@@ -5,7 +5,7 @@
       <div id="lang-switch">
         <ul>
           {% for lang, name in settings.languages.available.items %}
-            <li class="{% if lang == request.LANGUAGE_CODE %}active{% endif %}"><a href="{% locale_url lang "trekking:trek_home" %}"><span class="hidden">{{ lang }}</span>
+            <li class="{% if lang == request.LANGUAGE_CODE %}active{% endif %}"><a href="{% locale_url lang "core:home" %}"><span class="hidden">{{ lang }}</span>
                 <img src="{% get_static_prefix %}img/flags/{{ lang }}.png" alt="{{ lang }}"></a>
             </li>
           {% endfor %}

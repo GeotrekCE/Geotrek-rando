@@ -15,7 +15,7 @@
 
 
 <div id="mobile-header-detail">
-  <a class="pjax" href="{% locale_url request.LANGUAGE_CODE "trekking:trek_home" %}"><h1 class="icon-left-open-mini">{% trans "Back to list" %}</h1></a>
+  <a class="pjax" href="{% locale_url request.LANGUAGE_CODE "core:home" %}"><h1 class="icon-left-open-mini">{% trans "Back to list" %}</h1></a>
 </div>
 
 <div class="detail-content page-content">
@@ -24,7 +24,7 @@
 
     <div class="title">
       {% block title %}
-      <h2><a href="{% locale_url request.LANGUAGE_CODE "trekking:trek_home" %}" class="back-list pjax icon-left-open-mini" title="{% trans "Back to list" %}"></a> {{ object.name }}</h2>
+      <h2><a href="{% locale_url request.LANGUAGE_CODE "core:home" %}" class="back-list pjax icon-left-open-mini" title="{% trans "Back to list" %}"></a> {{ object.name }}</h2>
       {% endblock title %}
     </div>
 

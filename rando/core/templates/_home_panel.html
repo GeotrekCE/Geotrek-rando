@@ -1,4 +1,4 @@
-{% load i18n static leaflet_tags rando_tags localeurl_tags %}
+{% load i18n static leaflet_tags rando_tags localeurl_tags trekking_tags %}
 
 {% include "_share.html" with title=TITLE %}
 
@@ -6,7 +6,7 @@
   <title>{{ TITLE }}</title>
 {% endif %}
 
-{% include "trekking/_filters.html" %}
+{% trekking_filters %}
 
 <!--  search-bar-->
 
@@ -42,7 +42,7 @@
         <p id="noresult" style="display:none" class="tab-content-empty">
           {% trans "No result" %}
           {% if request.LANGUAGE_CODE != settings.languages.default %}
-          <a href="{% locale_url settings.languages.default "trekking:trek_home" %}" class="change-lang">{% trans "Change language" %}</a>
+          <a href="{% locale_url settings.languages.default "core:home" %}" class="change-lang">{% trans "Change language" %}</a>
           {% endif %}
         </p>
         {% for poi in pois %}
