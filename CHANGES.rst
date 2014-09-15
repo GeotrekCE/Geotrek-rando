@@ -5,6 +5,9 @@ CHANGELOG
 1.32.2 (unreleased)
 -------------------
 
+**BUG fixes**
+
+* Fix trek synchronization, only the first language was synced.
 * Changed french translation from "Photos satellite" to "Photos aérienne"
 * Added the ability to customize the districts label (used to be *Valleys*).
   Default value is now *Districts*.

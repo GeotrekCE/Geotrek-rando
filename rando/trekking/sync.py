@@ -209,7 +209,7 @@ def sync_content_trekking(sender, **kwargs):
 
     languages = server_settings.languages.available.keys()
     logger.debug("Languages: %s" % languages)
-    for language in languages[:1]:
+    for language in languages:
         inputkwlang = dict(language=language, **input_kwargs)
 
         TrekListInputFile(**inputkwlang).pull()
