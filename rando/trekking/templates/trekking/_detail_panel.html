@@ -216,6 +216,11 @@
       <div class="row-fluid meta">
 
         <div class="span6">
+          <div id="poi-list">
+          {% if pois %}
+            {% include "trekking/_poi_list.html" %}
+          {% endif %}
+          </div>
           <div id="altitudegraph" data-url="{% url "core:fileserve" object.properties.altimetric_profile %}">
             <h4>{% trans "Altitude profile" %}</h4>
             <p class="axislabel">{% trans "Altitude (m)" %}</p>
@@ -341,52 +346,3 @@
 </div><!-- detail-content -->
 
 {% leaflet_map 'detailmap' fitextent=False creatediv=False callback="detailmapInit" loadevent="rando:foo" %}{# Such loadevent will prevent automatic map initialization #}
-
-{% if pois %}
-<div style="display: none">
-  <div id="pois-sidebar">
-
-    <h5>{% trans "On the way..." %}</h5>
-
-    <div class="pois-list">
-      {% for poi in pois %}
-        <div class="poi" data-pk="{{ poi.properties.pk }}">
-          <div class="title">
-            {{ poi.properties.type|pictogram }}
-            <span class="name">{{ poi.properties.name }}</span>
-            <a class="jump up" href="#">&#x21e1;</a>
-            <a class="jump down" href="#">&#x21e3;</a>
-          </div>
-          <div class="content">
-            <p>{{ poi.properties.description|safe }}</p>
-            {% if poi.properties.pictures|length > 0 %}
-            <div class="picture">
-              <img src="{{ poi.properties.pictures.0.url }}" alt="{{ poi.properties.pictures.0.title }}" />
-
-              <div class="carousel-caption">
-                {% if poi.properties.pictures|length > 1 %}
-                  <span class="pictures-info pull-right icon-camera">&times;{{ poi.properties.pictures|length }}</span>
-                {% endif %}
-                <p>{{ poi.properties.pictures.0.legend }} {% if poi.properties.pictures.0.author %}({{ poi.properties.pictures.0.author }}){% endif %}</p>
-              </div>
-            </div>
-            {% endif %}
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-
-  </div>
-</div>
-
-<div id="pois-carousels-{{ trek.properties.pk }}" class="reattach" data-destination="body">
-{% for poi in pois %}
-  <div id="popup-poi-carousel-{{ poi.properties.pk }}" class="popup poi modal hide fade" role="dialog" aria-labelledby="poi-carousel" aria-hidden="true">
-      <div class="modal-body">
-      {% include "trekking/_carousel.html" with prefix=poi.properties.pk pictures=poi.properties.pictures default="False" %}
-    </div>
-  </div>
-{% endfor %}
-</div>
-
-{% endif %}

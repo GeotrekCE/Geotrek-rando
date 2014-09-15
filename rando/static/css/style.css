@@ -1736,6 +1736,11 @@ p.tab-content-empty a.change-lang {
 }
 @media (max-width: 979px) {
   .leaflet-sidebar  {
+    width: 200px;
+  }
+}
+@media (max-width: 767px) {
+  .leaflet-sidebar  {
     display: none;
   }
 }

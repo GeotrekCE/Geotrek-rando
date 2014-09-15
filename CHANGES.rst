@@ -7,7 +7,8 @@ CHANGELOG
 
 **BUG fixes**
 
-* Fix trek synchronization, only the first language was synced.
+* Fix trek synchronization, only the first language was synced (fixes #205).
+* Fix POI list not being display in responsive version (width <900px) (fixes #206)
 * Changed french translation from "Photos satellite" to "Photos aérienne"
 * Added the ability to customize the districts label (used to be *Valleys*).
   Default value is now *Districts*.
