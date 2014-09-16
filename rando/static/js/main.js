@@ -8,7 +8,9 @@ var App = Backbone.Router.extend({
 
         window.trekFilter = new TrekFilter();
 
+        this._current = null;
         this.homeView = new Rando.HomeView();
+        this.homeViewMobile = new Rando.HomeViewMobile();
         this.detailView = new Rando.DetailView();
 
         $(window).trigger('view:ui');
@@ -21,7 +23,22 @@ var App = Backbone.Router.extend({
 
         $(document).on('pjax:start', function (e) {
             $(window).trigger('view:leave');
-        });
+            this._current.remove();
+        }.bind(this));
+
+
+        FastClick.attach(document.body);
+
+        Rando.MOBILE = false;
+        function refreshMobile() {
+            Rando.MOBILE = !!Modernizr.mq('only all and (max-width: 767px)');
+        }
+        refreshMobile();
+        $(window).smartresize(refreshMobile);
+        $(window).smartresize(Rando.utils.invalidateMaps);
+
+        $(document).pjax('a.pjax', '#pjax-content');
+
 
         Backbone.history.start({
             pushState: true,
@@ -37,15 +54,17 @@ var App = Backbone.Router.extend({
     home: function (lang) {
         console.log('home', lang);
 
-        this.homeView.render();
+        this._current = Rando.MOBILE ? this.homeViewMobile : this.homeView;
+        this._current.render();
 
-        $(window).trigger(Rando.MOBILE ? 'view:mobile' : 'view:home');
+        $(window).trigger('view:home');
     },
 
     detail: function (lang, slug) {
         console.log('detail', lang, slug);
 
-        this.detailView.render();
+        this._current = this.detailView;
+        this._current.render();
 
         $(window).trigger('view:detail');
     },

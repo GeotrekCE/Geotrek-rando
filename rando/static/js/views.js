@@ -9,20 +9,9 @@
 Rando.BaseView = Backbone.View.extend({
 
     initialize: function () {
-        //
-        // When application starts (only once)
-        //
-        FastClick.attach(document.body);
+        Backbone.View.prototype.initialize.call(this);
 
-        Rando.MOBILE = false;
-        function refreshMobile() {
-            Rando.MOBILE = !!Modernizr.mq('only all and (max-width: 767px)');
-        }
-        refreshMobile();
-        $(window).smartresize(refreshMobile);
-        $(window).smartresize(Rando.utils.invalidateMaps);
-
-        $(document).pjax('a.pjax', '#pjax-content');
+        this._shareWidget = new Rando.ShareWidget();
     },
 
     render: function () {
@@ -75,11 +64,16 @@ Rando.BaseView = Backbone.View.extend({
             loadmapmainmap();
         }
 
-        (new Rando.ShareWidget()).render();
+        this._shareWidget.render();
 
         return this;
-
     },
+
+    remove: function () {
+        Backbone.View.prototype.remove.call(this);
+        this._shareWidget.remove();
+        return this;
+    }
 });
 
 
@@ -89,11 +83,6 @@ Rando.ShareWidget = Backbone.View.extend({
             $panel = $('#social-panel'),
             markup = $panel.html(),
             shown = false;
-
-        $(window).on('view:leave', function (e) {
-            // Close share panel (if open)
-            $("#global-share.active").click();
-        });
 
         var previous = $share.data('popover');
         if (previous) {
@@ -134,11 +123,298 @@ Rando.ShareWidget = Backbone.View.extend({
             });
             Socialite.load(popover.tip());
         });
+    },
+
+    remove: function () {
+        Backbone.View.prototype.remove.call(this);
+        // Close share panel (if open)
+        $("#global-share.active").click();
+        return this;
     }
 });
 
 
-Rando.HomeView = Rando.BaseView.extend({});
+Rando.HomeView = Rando.BaseView.extend({
+    render: function () {
+        Rando.BaseView.prototype.render.call(this);
+
+        this._initFilters();
+
+        $("#mainmap").show();  // We are on home with map
+        Rando.utils.invalidateMaps();
+
+        // Focus search field
+        if (/search/.test(window.location.hash)) {
+            $('input#search').focus();
+        }
+
+        $('#toggle-side-bar').off('click').on('click', function () {
+            var animDuration = 700,
+                $toggleControl = $(this);
+            if (!$toggleControl.hasClass('closed')) {
+                var width_sidebar = $('.side-bar').width() - $toggleControl.width();
+                $('#side-bar').animate({left : -width_sidebar+'px'}, animDuration, 'easeInOutExpo');
+            }
+            else {
+                $('#side-bar').animate({left:'0'}, animDuration, 'easeInOutExpo');
+            }
+            setTimeout(function onSideBarToggled() {
+                $toggleControl.toggleClass('closed');
+                $('#side-bar').toggleClass('closed');
+                $('#mainmap').toggleClass('fullwidth');
+            }, animDuration/2);
+        });
+
+        // Highlight map on hover in sidebar results
+        $('#side-bar .result').hover(function() {
+            $(window).trigger('trek:highlight', [$(this).data('id'), true]);
+        },
+        function() {
+            $(window).trigger('trek:highlight', [$(this).data('id'), false]);
+        });
+
+        $('#side-bar .result').on('dblclick', function (e) {
+            e.preventDefault();
+            // Simulate click on search
+            $('a.search', this).click();
+            // Track event
+            _gaq.push(['_trackEvent', 'Results', 'Doubleclick', $(this).data('name')]);
+        });
+
+        // Click on side-bar
+        $('#side-bar .result').on('click', function (e) {
+            // Do not fire click if clicked on search tools
+            if ($(e.target).parents('.search-tools').length === 0) {
+                e.preventDefault();
+                $(window).trigger('trek:showpopup', [$(this).data('id')]);
+                // Track event
+                _gaq.push(['_trackEvent', 'Results', 'Click', $(this).data('name')]);
+            }
+            // else, normal click on search tools buttons
+        });
+
+        // Tooltips on theme/usages and pictogram list
+        $('.pictogram').tooltip({container:'body'});
+
+        return this;
+    },
 
 
-Rando.DetailView = Rando.BaseView.extend({});
+    _initFilters: function () {
+        window.trekFilter.setup();
+
+        // Load filters (will refresh backpack results)
+        // (After sliders initialization)
+        var treksList = [];
+        $('#results .result').each(function () {
+            var $trek = $(this),
+                trek = [];
+            $.each(['fulltext', 'themes', 'usages', 'districts', 'cities',
+                    'route', 'difficulty', 'duration', 'ascent', 'id'], function (i, k) {
+                trek[k] = $trek.data(k);
+            });
+            treksList.push(trek);
+        });
+        window.trekFilter.load(treksList);
+
+        $('#clear-filters').off('click').on('click', function () {
+            window.trekFilter.clear();
+        });
+
+        $(window).on("filters:changed", function(e, visible) {
+            this._refreshResults(visible);
+        }.bind(this));
+    },
+
+
+    _refreshResults: function(matching) {
+        $('#results .result').each(function () {
+            var $trek = $(this),
+                trekId = $trek.data('id');
+            if ($.inArray(trekId, matching) != -1) {
+                $trek.removeClass('filtered').show(200);
+            }
+            else {
+                $trek.addClass('filtered').hide(200);
+            }
+        });
+        if (matching.length > 0)
+            $('#noresult').hide(200);
+        else
+            $('#noresult').show(200);
+        // Refresh label with number of results
+        $('#tab-results span.badge').html(matching.length);
+    }
+});
+
+
+Rando.HomeViewMobile = Rando.BaseView.extend({
+    render: function () {
+        Rando.BaseView.prototype.render.call(this);
+
+        var $menuButton = $('#toggle-header-mobile'),
+                $menu       = $('header');
+
+        // Pages menu toggle
+        $menuButton.on('click', function (e) {
+            // if menu open
+            if($menu.hasClass('open')) {
+                $menu.removeClass('open');
+                $(this).removeClass('active');
+                $(document).off('click.menu');
+            } else {
+                $menu.addClass('open');
+                $(this).addClass('active');
+
+                // any touch outside, close the menu
+                $(document).on('click.menu', function (e) {
+                    if ($menu.has(e.target).length === 0 && e.target != $menu[0] && $menuButton.has(e.target).length === 0 && e.target != $menuButton[0]){
+                        $menu.removeClass('open');
+                        $menuButton.removeClass('active');
+                        $(document).off('click.menu');
+                    }
+                });
+            }
+        });
+
+        $('#navigationbar a.pjax').on('click', function (e) {
+            $menu.removeClass('open');
+            $menuButton.removeClass('active');
+        });
+
+        // Remove desktop specific events
+        $('#side-bar .result').off('dblclick mouseenter mouseleave');
+
+        // Show search tab
+        $('#search').on('focus', function (e) {
+
+            // Reset button when searching (trigger closing of mobile keyboard)
+            $('#text-search .navbar-search div').removeClass('icon-search').addClass('icon-fontawesome-webfont-1').one('click', function (e) {
+                $('#search').blur();
+            });
+
+            $('#results').show();
+            $(document).on('click.results', function (e) {
+                if ($('#search').has(e.target).length === 0 && e.target != $('#search')[0]) {
+                    $('#results').hide();
+                    $(document).off('click.results');
+                }
+            });
+        });
+
+        var resultTaped = false;
+
+        $('#search').on('blur', function (e) {
+            // Prevent result list hiding on blur
+            if(resultTaped) {
+                $(this).focus();
+                resultTaped = false;
+            } else {
+                $('#text-search .navbar-search div').removeClass('icon-fontawesome-webfont-1').addClass('icon-search').off('click');
+                $('#results').hide();
+                $(document).off('click.results');
+            }
+        });
+
+        $('#side-bar .result').on('mousedown', function (e) {
+            resultTaped = true;
+        });
+
+        $('#side-bar .result').on('mouseup', function (e) {
+            $('#search').blur();
+        });
+        return this;
+    }
+});
+
+
+Rando.DetailView = Rando.BaseView.extend({
+
+    render: function () {
+        Rando.BaseView.prototype.render.call(this);
+
+        $("#mainmap").hide();  // We are elsewhere
+
+        if (!Rando.MOBILE) {
+            if (typeof(loadmapdetailmap) == "function") {
+                // Detail map is not present on flatpages
+                loadmapdetailmap();
+            }
+        }
+        else {
+            $('#detailmap #staticmap').removeClass('hidden');
+            $('#detailmap .helpclic').hide();
+        }
+
+        $('#tab-results span.badge').html(window.trekFilter.getResultsCount());
+
+        // Cycle Trek carousel automatically on start
+        if (!Rando.MOBILE) {
+            $('#trek-carousel .carousel').carousel('cycle');
+        }
+
+        //Load altimetric graph
+        if ($('#altitudegraph').length > 0) {
+            var jsonurl = $('#altitudegraph').data('url');
+            this._altimetricInit(jsonurl);
+        }
+
+        // Tooltips
+        $('#usages div, #themes div').tooltip();
+        $('#object-identity .info').tooltip();
+        $('a.print.disabled').tooltip({placement: 'left'});
+
+        // Load Disqus thread (if enabled)
+        if (window.DISQUS) {
+            var $container = $('#disqus_thread');
+            DISQUS.reset({
+              reload: true,
+              config: function () {
+                this.page.identifier = $container.data('disqus-identifier');
+                this.page.title = $container.data('disqus-title');
+                this.page.url = $container.data('disqus-url');
+                this.language = $container.data('disqus-language');
+              }
+            });
+        }
+
+        return this;
+    },
+
+
+    _altimetricInit: function(jsonurl) {
+        /*
+         * Load altimetric profile from JSON
+         */
+        $.getJSON(jsonurl, function(data) {
+            function updateSparkline() {
+                $('#profilealtitude').sparkline(data.profile, L.Util.extend({
+                    tooltipSuffix: ' m',
+                    numberDigitGroupSep: '',
+                    width: '100%',
+                    height: 100
+                }, ALTIMETRIC_PROFILE_OPTIONS));
+            }
+
+            updateSparkline();
+
+            $(window).smartresize(function() {
+                updateSparkline();
+            });
+
+            $('#profilealtitude').bind('sparklineRegionChange', function(ev) {
+                var sparkline = ev.sparklines[0],
+                    region = sparkline.getCurrentRegionFields();
+                    value = region.y;
+                $('#mouseoverprofil').text(Math.round(region.x) +"m");
+                // Trigger global event
+                $('#profilealtitude').trigger('hover:distance', region.x);
+            }).bind('mouseleave', function() {
+                $('#mouseoverprofil').text('');
+                $('#profilealtitude').trigger('hover:distance', null);
+            });
+
+        });
+    }
+
+});
