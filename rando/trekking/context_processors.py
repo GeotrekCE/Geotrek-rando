@@ -12,7 +12,7 @@ def main(request):
         extent = [0,0,0,0]
 
     return {
-        'treks_url': Trek.filepath,
+        'treks_url': '/' + Trek.filepath,
         'map_extent': extent,
         'DISTRICT_LABEL': settings.DISTRICT_LABEL.get(request.LANGUAGE_CODE,
                                                       settings.DISTRICT_LABEL.get(settings.LANGUAGE_CODE, '')),

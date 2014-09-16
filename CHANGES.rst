@@ -9,6 +9,7 @@ CHANGELOG
 **BUG fixes**
 
 * Fix translation of Downloads in trek detail page
+* Fix missing slash in URL of treks GeoJSON
 
 
 1.32.2 (2014-09-15)
