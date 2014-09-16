@@ -599,7 +599,7 @@ function mainmapInit(map, djoptions) {
     // Filter
     //
     // Reset view on filter reset
-    $(window.trekFilter).on('reset', function (){
+    $(window).on('filters:clear', function (){
         map.fitFakeBounds(treksBounds);
     });
     // Filter layers

@@ -52,6 +52,7 @@ function TrekFilter()
     };
 
     this.initEvents = function () {
+        $(window).unbind('filters:clear').on('filters:clear', function () {self.clear();});
         $(window).unbind('filters:reload').on('filters:reload', function () {self.load();});
         $(".theme .filter").unbind('click').on('click', self.filterChanged);
         $(".chosen-select").chosen().change(self.filterChanged);
