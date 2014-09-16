@@ -64,6 +64,9 @@ msgstr "À venir"
 msgid "Download GPX"
 msgstr "Télécharger GPX"
 
+msgid "Downloads"
+msgstr "Téléchargements"
+
 msgid "GPX"
 msgstr ""
 

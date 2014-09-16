@@ -2,6 +2,15 @@
 CHANGELOG
 =========
 
+
+1.32.3 (unreleased)
+-------------------
+
+**BUG fixes**
+
+* Fix translation of Downloads in trek detail page
+
+
 1.32.2 (2014-09-15)
 -------------------
 

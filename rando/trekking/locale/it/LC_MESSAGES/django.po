@@ -65,6 +65,9 @@ msgstr ""
 msgid "Download GPX"
 msgstr "Scarica GPX"
 
+msgid "Downloads"
+msgstr "Scarica"
+
 msgid "GPX"
 msgstr ""
 
