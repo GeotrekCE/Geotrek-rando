@@ -201,24 +201,8 @@ Rando.HomeView = Rando.BaseView.extend({
 
 
     _initFilters: function () {
-        window.trekFilter.setup();
-
-        // Load filters (will refresh backpack results)
-        // (After sliders initialization)
-        var treksList = [];
-        $('#results .result').each(function () {
-            var $trek = $(this),
-                trek = [];
-            $.each(['fulltext', 'themes', 'usages', 'districts', 'cities',
-                    'route', 'difficulty', 'duration', 'ascent', 'id'], function (i, k) {
-                trek[k] = $trek.data(k);
-            });
-            treksList.push(trek);
-        });
-        window.trekFilter.load(treksList);
-
         $('#clear-filters').off('click').on('click', function () {
-            window.trekFilter.clear();
+            $(window).trigger("filters:clear");
         });
 
         $(window).on("filters:changed", function(e, visible) {
@@ -346,7 +330,7 @@ Rando.DetailView = Rando.BaseView.extend({
             $('#detailmap .helpclic').hide();
         }
 
-        $('#tab-results span.badge').html(window.trekFilter.getResultsCount());
+        $('#tab-results span.badge').html(Rando.app.trekCollection.length);
 
         // Cycle Trek carousel automatically on start
         if (!Rando.MOBILE) {

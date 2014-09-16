@@ -420,9 +420,7 @@ function mainmapInit(map, djoptions) {
         treksLayer.showOnly(matched);
     });
     treksLayer.on('data:loaded', function () {
-        if (window.trekFilter.matching.length > 0) {
-            treksLayer.showOnly(window.trekFilter.matching);
-        }
+        treksLayer.showOnly(Rando.app.trekCollection);
         map.fitFakeBounds(treksLayer.getFullBounds());
     });
 

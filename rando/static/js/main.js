@@ -6,12 +6,28 @@ var App = Backbone.Router.extend({
 
     initialize: function () {
 
-        window.trekFilter = new TrekFilter();
-
         this._current = null;
-        this.homeView = new Rando.HomeView();
-        this.homeViewMobile = new Rando.HomeViewMobile();
-        this.detailView = new Rando.DetailView();
+        this.homeView = new Rando.views.HomeView({ app: this });
+        this.homeViewMobile = new Rando.views.HomeViewMobile({ app: this });
+        this.detailView = new Rando.views.DetailView({ app: this });
+
+        this.trekCollection = new Rando.models.TrekCollection();
+
+        var trekFilter = new TrekFilter();
+        trekFilter.setup();
+        this.trekCollection.on('sync', function () {
+            trekFilter.load(this.trekCollection.models);
+        }, this);
+
+        this.trekLayer = new TrekLayer();
+        this.trekCollection.on('sync', function () {
+            this.trekLayer.addData(this.trekCollection.geojson);
+            this.trekLayer.fire('data:loaded');
+        }, this);
+
+        $(window).on('map:init', function (jqEvent) {
+            this._current.setMap(jqEvent.originalEvent.detail.map);
+        }.bind(this));
 
         $(window).trigger('view:ui');
 
@@ -40,6 +56,10 @@ var App = Backbone.Router.extend({
         $(document).pjax('a.pjax', '#pjax-content');
 
 
+        // Fetch collections
+        this.trekCollection.fetch();
+
+        // Start watching URL
         Backbone.history.start({
             pushState: true,
             root: "/"
