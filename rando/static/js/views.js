@@ -140,7 +140,7 @@ Rando.views.ShareWidget = Backbone.View.extend({
 
 Rando.views.HomeView = Rando.views.BaseView.extend({
 
-    setMap: function (map) {
+    setupMap: function (map) {
         mainmapSetup(map, this.app);
     },
 
@@ -243,7 +243,7 @@ Rando.views.HomeView = Rando.views.BaseView.extend({
 
 Rando.views.HomeViewMobile = Rando.views.BaseView.extend({
 
-    setMap: function (map) {
+    setupMap: function (map) {
         mainmapSetup(map, this.app);
     },
 
@@ -328,7 +328,7 @@ Rando.views.HomeViewMobile = Rando.views.BaseView.extend({
 
 Rando.views.DetailView = Rando.views.BaseView.extend({
 
-    setMap: function (map) {
+    setupMap: function (map) {
         detailmapSetup(map, this.app);
     },
 
@@ -348,7 +348,7 @@ Rando.views.DetailView = Rando.views.BaseView.extend({
             $('#detailmap .helpclic').hide();
         }
 
-        $('#tab-results span.badge').html(Rando.app.trekCollection.length);
+        $('#tab-results span.badge').html(this.app.trekCollection.length);
 
         // Cycle Trek carousel automatically on start
         if (!Rando.MOBILE) {

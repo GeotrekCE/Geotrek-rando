@@ -26,7 +26,7 @@ var App = Backbone.Router.extend({
         }, this);
 
         $(window).on('map:init', function (jqEvent) {
-            this._current.setMap(jqEvent.originalEvent.detail.map);
+            this._current.setupMap(jqEvent.originalEvent.detail.map);
         }.bind(this));
 
         $(window).trigger('view:ui');
@@ -97,6 +97,6 @@ window._gaq = window._gaq || [];
 //
 // Start !
 //
-Rando.app = new App();
+(new App());
 
 })(window);
