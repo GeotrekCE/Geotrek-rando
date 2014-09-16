@@ -10,6 +10,7 @@ CHANGELOG
 
 * Fix translation of Downloads in trek detail page
 * Fix missing slash in URL of treks GeoJSON
+* Fix related treks links to navigate in AJAX
 
 
 1.32.2 (2014-09-15)
