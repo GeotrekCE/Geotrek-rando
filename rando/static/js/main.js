@@ -97,6 +97,6 @@ window._gaq = window._gaq || [];
 //
 // Start !
 //
-(new App());
+Rando.app = new App();
 
 })(window);

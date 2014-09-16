@@ -1,9 +1,9 @@
-var TrekLayer = L.GeoJSON.AJAX.extend({
+var TrekLayer = L.GeoJSON.extend({
     includes: L.LayerIndexMixin,
 
-    initialize: function (url) {
-        var options = L.Util.extend(TREK_LAYER_OPTIONS, {});
-        L.GeoJSON.AJAX.prototype.initialize.call(this, url, options);
+    initialize: function (options) {
+        options = L.Util.extend(TREK_LAYER_OPTIONS, options || {});
+        L.GeoJSON.prototype.initialize.call(this, null, options);
 
         this.on('mouseover mouseout', function (e) {
             this.highlight(e.layer, e.type == 'mouseover');
@@ -112,7 +112,7 @@ var TrekLayer = L.GeoJSON.AJAX.extend({
     onAdd: function (map) {
         /* When layer is added on map.
          */
-        L.GeoJSON.AJAX.prototype.onAdd.apply(this, arguments);
+        L.GeoJSON.prototype.onAdd.apply(this, arguments);
         this.on('data:loaded', function () {
             map.on('zoomend', this._iconifyTreks, this);
             this._iconifyTreks();
@@ -125,7 +125,7 @@ var TrekLayer = L.GeoJSON.AJAX.extend({
          */
         this._map.removeLayer(this._trekCluster);
         map.off('zoomend', this._iconifyTreks, this);
-        L.GeoJSON.AJAX.prototype.onRemove.apply(this, arguments);
+        L.GeoJSON.prototype.onRemove.apply(this, arguments);
     },
 
     addLayer: function (layer) {
@@ -136,7 +136,7 @@ var TrekLayer = L.GeoJSON.AJAX.extend({
         else if (layer.marker && this._map) {
             this._map.addLayer(layer.marker);
         }
-        return L.GeoJSON.AJAX.prototype.addLayer.call(this, layer);
+        return L.GeoJSON.prototype.addLayer.call(this, layer);
     },
 
     removeLayer: function (layer) {
@@ -144,7 +144,7 @@ var TrekLayer = L.GeoJSON.AJAX.extend({
             this._trekCluster.removeLayer(layer.marker);
             this._map.removeLayer(layer.marker);
         }
-        return L.GeoJSON.AJAX.prototype.removeLayer.call(this, layer);
+        return L.GeoJSON.prototype.removeLayer.call(this, layer);
     },
 
     _iconifyTreks: function (e) {
@@ -355,13 +355,12 @@ L.Control.TogglePOILayer = L.Control.extend({
  * Map initialization functions.
  * Callbacks of Django Leaflet.
  */
-function mainmapInit(map, djoptions) {
+function mainmapSetup(map, app) {
     map.attributionControl.setPrefix('');
 
-    var treks_url = $(map._container).data('treks-url'),
-        treks_extent = $(map._container).data('treks-extent');
+    var treks_extent = $(map._container).data('treks-extent');
 
-    var treksLayer = (new TrekLayer(treks_url)).addTo(map);
+    var treksLayer = app.trekLayer.addTo(map);
 
     var treksBounds = L.latLngBounds([treks_extent[3],
                                       treks_extent[0]],
@@ -548,7 +547,7 @@ function mainmapInit(map, djoptions) {
 }
 
 
-function detailmapInit(map, bounds) {
+function detailmapSetup(map) {
     map.attributionControl.setPrefix('');
     L.control.fullscreen({
         position: 'topright',

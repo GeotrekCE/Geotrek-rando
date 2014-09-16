@@ -97,7 +97,6 @@
             </div>
 
             <div id="mainmap"
-                 data-treks-url="{% locale_url request.LANGUAGE_CODE "core:fileserve" treks_url %}"
                  data-treks-extent="{{ map_extent }}"
                  data-switch-detail-zoom="{{ SWITCH_DETAIL_ZOOM }}"></div>
         </div>
@@ -169,6 +168,8 @@
         <script src="{% static "js/vendor/backbone.js" %}"></script>
 
         <script src="{% static "js/settings.js" %}"></script>
+        <script src="{% static "js/models.js" %}"
+                data-treks-url="{% locale_url request.LANGUAGE_CODE "core:fileserve" treks_url %}"></script>
         <script src="{% static "js/views.js" %}"></script>
         <script src="{% static "js/utils.js" %}"></script>
         <script src="{% static "js/main.js" %}"></script>

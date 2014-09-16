@@ -6,12 +6,16 @@
  * conventions or good practices.
  *
  */
-Rando.BaseView = Backbone.View.extend({
+Rando.views = {};
 
-    initialize: function () {
-        Backbone.View.prototype.initialize.call(this);
+Rando.views.BaseView = Backbone.View.extend({
 
-        this._shareWidget = new Rando.ShareWidget();
+    initialize: function (options) {
+        Backbone.View.prototype.initialize.apply(this, arguments);
+
+        this.app = options.app;
+
+        this._shareWidget = new Rando.views.ShareWidget();
     },
 
     render: function () {
@@ -77,7 +81,7 @@ Rando.BaseView = Backbone.View.extend({
 });
 
 
-Rando.ShareWidget = Backbone.View.extend({
+Rando.views.ShareWidget = Backbone.View.extend({
     render: function () {
         var $share = $('#global-share'),
             $panel = $('#social-panel'),
@@ -134,9 +138,14 @@ Rando.ShareWidget = Backbone.View.extend({
 });
 
 
-Rando.HomeView = Rando.BaseView.extend({
+Rando.views.HomeView = Rando.views.BaseView.extend({
+
+    setMap: function (map) {
+        mainmapSetup(map, this.app);
+    },
+
     render: function () {
-        Rando.BaseView.prototype.render.call(this);
+        Rando.views.BaseView.prototype.render.call(this);
 
         this._initFilters();
 
@@ -232,9 +241,14 @@ Rando.HomeView = Rando.BaseView.extend({
 });
 
 
-Rando.HomeViewMobile = Rando.BaseView.extend({
+Rando.views.HomeViewMobile = Rando.views.BaseView.extend({
+
+    setMap: function (map) {
+        mainmapSetup(map, this.app);
+    },
+
     render: function () {
-        Rando.BaseView.prototype.render.call(this);
+        Rando.views.BaseView.prototype.render.call(this);
 
         var $menuButton = $('#toggle-header-mobile'),
                 $menu       = $('header');
@@ -312,10 +326,14 @@ Rando.HomeViewMobile = Rando.BaseView.extend({
 });
 
 
-Rando.DetailView = Rando.BaseView.extend({
+Rando.views.DetailView = Rando.views.BaseView.extend({
+
+    setMap: function (map) {
+        detailmapSetup(map, this.app);
+    },
 
     render: function () {
-        Rando.BaseView.prototype.render.call(this);
+        Rando.views.BaseView.prototype.render.call(this);
 
         $("#mainmap").hide();  // We are elsewhere
 
