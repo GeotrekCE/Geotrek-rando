@@ -3,6 +3,14 @@ CHANGELOG
 =========
 
 
+1.32.4 (2014-09-16)
+-------------------
+
+**BUG fixes**
+
+* Fix park center warning being always displayed
+
+
 1.32.3 (2014-09-16)
 -------------------
 

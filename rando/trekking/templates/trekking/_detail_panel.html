@@ -199,7 +199,7 @@
     </div><!-- left column -->
 
     <div class="span8">
-      {% if True %}
+      {% if object.properties.is_park_centered %}
         <div id="park-center-warning" class="alert alert-info">
             <p class="icon-park-center">{{ park_center_warning }}, <a class="pjax" href="{% locale_url request.LANGUAGE_CODE "flatpages:redirect" FLATPAGES_POLICY_PAGE %}">{{ park_center_link }}</a></p>
         </div>
