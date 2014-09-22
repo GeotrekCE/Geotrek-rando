@@ -9,9 +9,11 @@ CHANGELOG
 
 * If static page contains an URL only, then add a link to this URL on menu
 
-
 **Internal changes**
 
+* Ignore tile download errors during MBTiles creation (useful when tiles server
+  does not cover the whole world)
+* Use the ``main`` tiles URL for the global MBTiles, and ``detail`` for individual treks
 * Download elevation profiles as SVG from server
 
 
