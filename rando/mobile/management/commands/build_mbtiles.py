@@ -61,16 +61,17 @@ class Command(BaseCommand):
         if not os.path.exists(self.output_folder):
             os.makedirs(self.output_folder)
 
-        tiles_url = None
+        self.main_tiles_url = None
+        self.detail_tiles_url = None
         for tiles_layer in settings.LEAFLET_CONFIG['TILES']:
+            if tiles_layer[0] == 'main':
+                self.main_tiles_url = tiles_layer[1]
             if tiles_layer[0] == 'detail':
-                tiles_url = tiles_layer[1]
-        logger.info("Tiles URL is %s" % tiles_url)
+                self.detail_tiles_url = tiles_layer[1]
 
         self.builder_args = {
-            'tiles_url': tiles_url,
-            'tile_format': format_from_url(tiles_url),
-            'tiles_headers': {"Referer": self.site_url}
+            'tiles_headers': {"Referer": self.site_url},
+            'ignore_errors': True,
         }
 
         self._build_global_mbtiles()
@@ -84,6 +85,9 @@ class Command(BaseCommand):
         """ Creates a MBTiles on the global extent.
         Builds a temporary file and overwrites the existing one on success.
         """
+        self.builder_args['tiles_url'] = self.main_tiles_url
+        self.builder_args['tile_format'] = format_from_url(self.main_tiles_url)
+
         server_settings = Settings.objects.all()
         global_extent = server_settings.map.extent
 
@@ -105,6 +109,9 @@ class Command(BaseCommand):
         """ Creates a MBTiles for the specified Trek object.
         Builds a temporary file and overwrites the existing one on success.
         """
+        self.builder_args['tiles_url'] = self.detail_tiles_url
+        self.builder_args['tile_format'] = format_from_url(self.detail_tiles_url)
+
         logger.info("Build MBTiles for trek '%s'..." % trek.properties.name)
         trek_file = os.path.join(self.output_folder, 'trek-%s.mbtiles' % trek.id)
         tmp_trek_file = trek_file + '.tmp'
