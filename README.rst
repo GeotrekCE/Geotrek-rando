@@ -545,6 +545,7 @@ CREDITS
 AUTHORS
 =======
 
+    * Sylvain Beorchia
     * Adrien Denat
     * Yahya Mzoughi
     * Gaël Utard

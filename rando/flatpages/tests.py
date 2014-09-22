@@ -81,3 +81,8 @@ class FlatPagesTest(TestCase):
             {'url': '/media/image1.png', 'title': 'Image 1', 'alt': 'image-1', 'mimetype': ['image', 'png']},
             {'url': '/media/image2.jpg', 'title': '', 'alt': '', 'mimetype': ['image', 'jpeg']}
         ])
+
+    def test_flatpages_is_a_link(self):
+        html = u"http://www.makina-corpus.com"
+        page = FlatPage(content=html)
+        self.assertEqual(page.link, 'http://www.makina-corpus.com')

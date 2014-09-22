@@ -2,6 +2,13 @@
 CHANGELOG
 =========
 
+1.33.0 (unreleased)
+-------------------
+
+**New features**
+
+* If static page contains an URL only, then add a link to this URL on menu
+
 
 1.32.4 (2014-09-16)
 -------------------
