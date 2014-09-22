@@ -88,7 +88,7 @@ class FlatPage(object):
 
         # Search for static pages links
         self.link = ''
-        if self.content.lower().find('http') == 0:
+        if self.content and self.content.lower().find('http') == 0:
             self.link = self.content
 
     @property
