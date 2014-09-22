@@ -5,7 +5,11 @@
         <li class="home"><a class="btn pjax icon-home" href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}" title="{% trans "Home" %}"></a></li>
     {% get_flatpages as flatpages %}
     {% for page in flatpages %}
-        <li><a class="btn pjax {% if title == page.title %}active{% endif %}" href="{% locale_url request.LANGUAGE_CODE "flatpages:page" page.slug %}">{{ page.title }}</a></li>
+        {% if page.link|length > 0 %}
+            <li><a target="blank_" class="btn pjax {% if title == page.title %}active{% endif %}" href="{{ page.link }}">{{ page.title }}</a></li>
+        {% else %}
+            <li><a class="btn pjax {% if title == page.title %}active{% endif %}" href="{% locale_url request.LANGUAGE_CODE "flatpages:page" page.slug %}">{{ page.title }}</a></li>
+        {% endif %}
     {% endfor %}
     </ul>
 </div>
