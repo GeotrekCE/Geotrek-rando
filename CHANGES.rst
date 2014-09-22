@@ -10,6 +10,11 @@ CHANGELOG
 * If static page contains an URL only, then add a link to this URL on menu
 
 
+**Internal changes**
+
+* Download elevation profiles as SVG from server
+
+
 1.32.4 (2014-09-16)
 -------------------
 
