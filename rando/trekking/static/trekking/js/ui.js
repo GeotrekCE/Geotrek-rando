@@ -26,7 +26,7 @@ function view_home() {
     window.trekFilter.load(treksList);
 
     $('#clear-filters').off('click').on('click', function () {
-        window.trekFilter.clear();
+        $(window).trigger('filters:clear');
     });
 
     $("#mainmap").show();  // We are on home with map
@@ -194,11 +194,18 @@ function init_mobile() {
     // Remove desktop specific events
     $('#side-bar .result').off('dblclick mouseenter mouseleave');
 
+    // Clear search on cross click
+    $('#text-search .navbar-search').click(function (e) {
+        if ($(e.target).hasClass('clear')) {
+            $(window).trigger('filters:clear');
+        }
+    });
+
     // Show search tab
     $('#search').on('focus', function (e) {
 
         // Reset button when searching (trigger closing of mobile keyboard)
-        $('#text-search .navbar-search div').removeClass('icon-search').addClass('icon-fontawesome-webfont-1').one('click', function (e) {
+        $('#text-search .navbar-search div').removeClass('icon-search').addClass('clear icon-fontawesome-webfont-1').one('click', function (e) {
             $('#search').blur();
         });
 

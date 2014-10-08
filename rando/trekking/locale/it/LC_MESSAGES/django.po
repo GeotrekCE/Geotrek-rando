@@ -65,6 +65,9 @@ msgstr ""
 msgid "Download GPX"
 msgstr "Scarica GPX"
 
+msgid "Downloads"
+msgstr "Scarica"
+
 msgid "GPX"
 msgstr ""
 
@@ -101,9 +104,6 @@ msgstr "Difficoltà"
 
 msgid "Route"
 msgstr "Percorso"
-
-msgid "Valleys"
-msgstr "Valli"
 
 msgid "Disabled-friendly infrastructures"
 msgstr "Infrastrutture per disabili"

@@ -209,7 +209,7 @@ def sync_content_trekking(sender, **kwargs):
 
     languages = server_settings.languages.available.keys()
     logger.debug("Languages: %s" % languages)
-    for language in languages[:1]:
+    for language in languages:
         inputkwlang = dict(language=language, **input_kwargs)
 
         TrekListInputFile(**inputkwlang).pull()
@@ -229,6 +229,9 @@ def sync_content_trekking(sender, **kwargs):
     for trek in models.Trek.tmp_objects.filter(language=settings.LANGUAGE_CODE).all():
         InputFile(trek.properties.map_image_url, **input_kwargs).pull_if_modified()
         InputFile(trek.properties.altimetric_profile, **input_kwargs).pull_if_modified()
+
+        profile_svg_url = trek.properties.altimetric_profile.replace('.json', '.svg')
+        InputFile(profile_svg_url, **input_kwargs).pull_if_modified()
 
         if trek.properties.thumbnail:
             InputFile(trek.properties.thumbnail, **input_kwargs).pull_if_modified()

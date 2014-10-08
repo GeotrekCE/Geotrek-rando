@@ -86,6 +86,11 @@ class FlatPage(object):
         self.content = content
         self.fullpath = fullpath
 
+        # Search for static pages links
+        self.link = ''
+        if self.content and self.content.lower().find('http') == 0:
+            self.link = self.content
+
     @property
     def last_modified(self):
         t = os.path.getmtime(self.fullpath)

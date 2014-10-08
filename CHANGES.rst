@@ -2,7 +2,6 @@
 CHANGELOG
 =========
 
-
 1.33dev (unreleased)
 --------------------
 
@@ -15,7 +14,45 @@ CHANGELOG
 * Changed apparence and position of favorites
 * Removed tabs in results, detail and static pages
 * Add setting ``BACKPACK_ENABLED`` to enable/disable favorites (fixes #54)
+* If static page contains an URL only, then add a link to this URL on menu
 
+**Internal changes**
+
+* Ignore tile download errors during MBTiles creation (useful when tiles server
+  does not cover the whole world)
+* Use the ``main`` tiles URL for the global MBTiles, and ``detail`` for individual treks
+* Download elevation profiles as SVG from server
+
+
+1.32.4 (2014-09-16)
+-------------------
+
+**BUG fixes**
+
+* Fix park center warning being always displayed
+
+
+1.32.3 (2014-09-16)
+-------------------
+
+**BUG fixes**
+
+* Fix translation of Downloads in trek detail page
+* Fix missing slash in URL of treks GeoJSON
+* Fix related treks links to navigate in AJAX
+* Fix search clear in responsive version (fixes #196)
+
+
+1.32.2 (2014-09-15)
+-------------------
+
+**BUG fixes**
+
+* Fix trek synchronization, only the first language was synced (fixes #205).
+* Fix POI list not being display in responsive version (width <900px) (fixes #206)
+* Changed french translation from "Photos satellite" to "Photos aérienne"
+* Added the ability to customize the districts label (used to be *Valleys*).
+  Default value is now *Districts*.
 
 1.32.1 (2014-09-03)
 -------------------

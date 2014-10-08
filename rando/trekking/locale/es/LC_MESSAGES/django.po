@@ -67,6 +67,9 @@ msgstr "Descargar en formato GPX"
 msgid "GPX"
 msgstr "GPX"
 
+msgid "Downloads"
+msgstr "Descargas"
+
 msgid "Download for Google Earth"
 msgstr "Descargar en formato Google Earth"
 
@@ -100,9 +103,6 @@ msgstr "Dificultad"
 
 msgid "Route"
 msgstr "Recorrido"
-
-msgid "Valleys"
-msgstr "Valles"
 
 msgid "Disabled-friendly infrastructures"
 msgstr "Equipos para minusválidos"

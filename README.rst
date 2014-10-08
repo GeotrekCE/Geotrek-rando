@@ -134,7 +134,7 @@ Regularly (once a week), you can also notify Google that your sitemap changed, u
 For *Geotrek-mobile*, the server needs to build the *MBTiles* background files
 for each trek. Add the following schedule task :
 
-    15 * * * *  cd /path/to/application && bin/python ./manage.py build_mbtiles
+    15 * * * *  cd /path/to/application && bin/python ./manage.py build_mbtiles http://rando.server.com
 
 
 =============
@@ -545,6 +545,7 @@ CREDITS
 AUTHORS
 =======
 
+    * Sylvain Beorchia
     * Adrien Denat
     * Yahya Mzoughi
     * Gaël Utard

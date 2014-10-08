@@ -280,6 +280,14 @@ PARK_CENTER_LINK = {
     'es': 'consulte la reglamentación, por favor.',
 }
 
+DISTRICT_LABEL = {
+    'en': 'Districts',
+    'fr': 'Secteurs',
+    'it': 'Settori',
+    'es': 'Sectores',
+}
+
+
 FOOTER_FILENAME = 'footer.html'
 POPUP_FILENAME = 'popup_home.html'
 POPUP_HOME_ENABLED = False
