@@ -70,10 +70,65 @@ RECAPTCHA_PRIVATE_KEY = '6Ldrbu4SAAAAAPbt5g3Vw2BA_LGL1-BZwaBSsnfz'
 #     "NO_GLOBALS": False
 # }
 #
+# Zoom level where map background switches from 'main' to 'detail' on home
+# SWITCH_DETAIL_ZOOM = 12
+
 # Tourism Layers
 #...............
 #
 # TOURISM_ENABLED = True
+
+
+# Static pages
+#..............
+
+# Customize titles from filenames
+# FLATPAGES_TITLES = {
+#     'a-savoir': u"À Savoir",
+# }
+
+# Hide pages from menu
+#FLATPAGES_TARGETS = {
+#    u"À Savoir": 'hidden',
+#}
+
+
+#
+# Types of attachments to be published in detail pages
+# FILELIST_MIMETYPES = ['audio', 'video', 'application/pdf']
+
+#
+# Rename the district notion
+#
+# DISTRICT_LABEL = {
+#     'en': 'Territory',
+#     'fr': 'Territoire',
+#     'it': 'Territorio',
+#     'es': 'Territorio',
+# }
+
+#
+# Rename the notion of "park center"
+#
+# Id of policy page
+# FLATPAGES_POLICY_PAGE = 003
+#
+# PARK_CENTER_WARNING = {
+#     'en': 'This trek is within park center',
+#     'fr': 'Cet itinéraire est dans le coeur du parc national',
+#     'it': 'Questo itinerario si snoda nella parte centrale del Parco Nazionale',
+#     'es': 'Este itinerario atraviesa la zona central del Parque Nacional',
+# }
+# PARK_CENTER_LINK = {
+#     'en': 'please read access rules.',
+#     'fr': 'veuillez consulter la réglementation.',
+#     'it': 'siete inviatati a leggere le regole di accesso.',
+#     'es': 'consulte la reglamentación, por favor.',
+# }
+
+#
+# Redirect visitors to the language of their browser
+# LOCALEURL_USE_ACCEPT_LANGUAGE = True
 
 #
 # In preprod
