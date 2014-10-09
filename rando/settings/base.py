@@ -287,6 +287,13 @@ DISTRICT_LABEL = {
     'es': 'Sectores',
 }
 
+SEARCH_PLACEHOLDER = {
+    'en': 'Name, Valley, ...',
+    'fr': 'Nom, vallée, ...',
+    'it': 'Nome, Valle,...',
+    'es': 'Lugar, valle, ...',
+}
+
 
 FOOTER_FILENAME = 'footer.html'
 POPUP_FILENAME = 'popup_home.html'

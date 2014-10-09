@@ -11,12 +11,16 @@ def main(request):
     except AttributeError:
         extent = [0,0,0,0]
 
+    def trans(setting):
+        default = setting.get(settings.LANGUAGE_CODE, '')
+        return setting.get(request.LANGUAGE_CODE, default)
+
     return {
         'treks_url': '/' + Trek.filepath,
         'map_extent': extent,
-        'DISTRICT_LABEL': settings.DISTRICT_LABEL.get(request.LANGUAGE_CODE,
-                                                      settings.DISTRICT_LABEL.get(settings.LANGUAGE_CODE, '')),
+        'DISTRICT_LABEL': trans(settings.DISTRICT_LABEL),
         'FLATPAGES_POLICY_PAGE': settings.FLATPAGES_POLICY_PAGE,
+        'SEARCH_PLACEHOLDER': trans(settings.SEARCH_PLACEHOLDER),
         'PRINT_ENABLED': settings.PRINT_ENABLED,
         'VIEW3D_ENABLED': settings.VIEW3D_ENABLED,
     }

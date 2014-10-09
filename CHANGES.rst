@@ -15,6 +15,7 @@ CHANGELOG
 * Removed tabs in results, detail and static pages
 * Add setting ``BACKPACK_ENABLED`` to enable/disable favorites (fixes #54)
 * If static page contains an URL only, then add a link to this URL on menu
+* Add ability to customize search filter place holder (fixes #221)
 
 **Internal features**
 
