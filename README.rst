@@ -128,7 +128,7 @@ Regularly (once a week), you can also notify Google that your sitemap changed, u
 
 ::
 
-    make ping_google url=http://rando.server.com
+    30 1 * * 0  cd /path/to/application && make ping_google url=http://rando.server.com
 
 
 For *Geotrek-mobile*, the server needs to build the *MBTiles* background files
