@@ -27,32 +27,22 @@ class FlatPageManager(object):
     def get(self, **kwargs):
         slug = kwargs['slug']
         try:
-            available = [fp for fp in self.all() if fp.slug() == slug]
+            available = [fp for fp in self.all() if fp.slug == slug]
             return available[0]
         except IndexError:
             raise Exception("%s does not exist" % (kwargs))
 
     @staticmethod
     def parse_filename(filename, default_pk):
-        """
-        >>> FlatPageManager.parse_filename('001-title.html', 2)
-        (1, 'title')
-        >>> FlatPageManager.parse_filename('title.html', 2)
-        (2, 'title')
-        >>> FlatPageManager.parse_filename('001.html', 2)
-        (2, '001')
-        """
         basename = os.path.splitext(filename)[0]
         m = re.search(r'^(\d+)-(.+)', basename)
         if m:
             pk = int(m.group(1))
-            title = m.group(2)
+            slug = m.group(2)
         else:
             pk = default_pk
-            title = basename
-        # Use title overidden in settings, if present.
-        title = settings.FLATPAGES_TITLES.get(title, title)
-        return (pk, title)
+            slug = basename
+        return (pk, slug)
 
     @staticmethod
     def _filter_reserved_names(dirlist):
@@ -78,7 +68,11 @@ class FlatPageManager(object):
                 content = f.read()
             # Filter by pk (see redirect view)
             if self.pk is None or int(self.pk) == pk:
-                yield self.klass(pk, title, content, fullpath)
+                yield self.klass(pk,
+                                 title=title,
+                                 content=content,
+                                 fullpath=fullpath,
+                                 slug=slugify(title))
 
     @property
     def json(self):
@@ -89,12 +83,12 @@ class FlatPageManager(object):
         for page in self.all():
             result = {
                 'title': page.title,
-                'slug': page.slug(),
+                'slug': page.slug,
                 'last_modified': page.last_modified.isoformat(),
                 'target': page.target,
                 'content': page.content,
                 'media': page.parse_media(),
-                'url': reverse('flatpages:page', kwargs={'slug': page.slug()})
+                'url': reverse('flatpages:page', kwargs={'slug': page.slug})
             }
             results.append(result)
 
@@ -102,9 +96,10 @@ class FlatPageManager(object):
 
 
 class FlatPage(object):
-    def __init__(self, pk=None, title=None, content=None, fullpath=None):
+    def __init__(self, pk=None, title=None, content=None, fullpath=None, slug=None):
         self.pk = pk
-        self.title = title
+        self._title = title or (slug and slug.capitalize())
+        self.slug = slug or slugify(title)
         self.content = content
         self.fullpath = fullpath
 
@@ -120,7 +115,11 @@ class FlatPage(object):
 
     @property
     def target(self):
-        return settings.FLATPAGES_TARGETS.get(self.title, 'all')
+        return settings.FLATPAGES_TARGETS.get(self.slug, 'all')
+
+    @property
+    def title(self):
+        return settings.FLATPAGES_TITLES.get(self.slug, self._title)
 
     def parse_media(self):
         soup = BeautifulSoup(self.content or '')
@@ -143,9 +142,6 @@ class FlatPage(object):
             })
 
         return results
-
-    def slug(self):
-        return slugify(self.title)
 
     @models.permalink
     def get_absolute_url(self):

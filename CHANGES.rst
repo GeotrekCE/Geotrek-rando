@@ -8,6 +8,8 @@ CHANGELOG
 **Breaking changes**
 
 * Will require at least Geotrek 0.24
+* If you customized ``FLATPAGES_TARGETS``, replace keys with filenames like
+  ``FLATPAGES_TITLES``.
 
 **New features**
 
@@ -15,6 +17,10 @@ CHANGELOG
 * Removed tabs in results, detail and static pages
 * Add setting ``BACKPACK_ENABLED`` to enable/disable favorites (fixes #54)
 * If static page contains an URL only, then add a link to this URL on menu
+
+**Bug fixes**
+
+* Fix flatpages targets setting behaviour, like titles (fixes #216)
 
 **Internal features**
 
