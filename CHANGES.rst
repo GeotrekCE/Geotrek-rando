@@ -16,11 +16,18 @@ CHANGELOG
 * Add setting ``BACKPACK_ENABLED`` to enable/disable favorites (fixes #54)
 * If static page contains an URL only, then add a link to this URL on menu
 
+**Internal features**
+
+* Generate zip files instead of mbtiles files for mobile application
+* Generate a zip file per language with all ressources (json, media) for
+  mobile application
+
 **Internal changes**
 
-* Ignore tile download errors during MBTiles creation (useful when tiles server
-  does not cover the whole world)
-* Use the ``main`` tiles URL for the global MBTiles, and ``detail`` for individual treks
+* Ignore tile download errors during tiles files creation (useful when tiles
+  server does not cover the whole world)
+* Use the ``main`` tiles URL for the global tiles, and ``detail`` for individual
+  treks
 * Download elevation profiles as SVG from server
 
 

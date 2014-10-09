@@ -1,10 +1,12 @@
 import os
 import datetime
+import json
 import re
 import mimetypes
 
 from BeautifulSoup import BeautifulSoup
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.defaultfilters import slugify
 
@@ -77,6 +79,26 @@ class FlatPageManager(object):
             # Filter by pk (see redirect view)
             if self.pk is None or int(self.pk) == pk:
                 yield self.klass(pk, title, content, fullpath)
+
+    @property
+    def json(self):
+        """
+        Returns a JSON to describe all flat pages.
+        """
+        results = []
+        for page in self.all():
+            result = {
+                'title': page.title,
+                'slug': page.slug(),
+                'last_modified': page.last_modified.isoformat(),
+                'target': page.target,
+                'content': page.content,
+                'media': page.parse_media(),
+                'url': reverse('flatpages:page', kwargs={'slug': page.slug()})
+            }
+            results.append(result)
+
+        return json.dumps(results)
 
 
 class FlatPage(object):

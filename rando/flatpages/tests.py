@@ -18,16 +18,9 @@ TESTS_PAGES_PATH = os.path.join(TESTS_DATA_PATH, 'media', 'pages')
 class FlatPagesJSONTest(TestCase):
 
     def setUp(self):
-        self.path = 'api/pages/pages.json'
-
-        self.response = self.client.get('/fr/files/' + self.path)
-        results = json.loads(self.response.content)
+        self.json = FlatPage.objects.filter(language='fr').json
+        results = json.loads(self.json)
         self.first = results[0]
-
-    def test_url_is_like_other_synced_resources(self):
-        self.assertFalse(os.path.exists(os.path.join(TESTS_DATA_PATH, self.path)))
-        self.assertEqual(self.response.status_code, 200)
-        self.assertEqual(self.response['Content-Type'], 'application/json')
 
     def test_pages_properties_are_exposed(self):
         self.assertEqual(self.first['title'], 'Fake page')
