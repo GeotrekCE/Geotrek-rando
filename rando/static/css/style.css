@@ -1872,8 +1872,6 @@ p.tab-content-empty a.change-lang {
 }
 .detail-content h3 {
   font-size: 14px;
-  margin-bottom: 10px;
-  margin-top: 20px;
 }
 .detail-content h4 {
   background-color: #877f84;
@@ -1905,7 +1903,7 @@ p.tab-content-empty a.change-lang {
 }
 .detail-content #detail-content-title .title {
   display: inline-block;
-  margin-right: 5px;
+  margin-right: 10px;
 }
 @media (max-width: 767px) {
   .detail-content #detail-content-title .title {
@@ -1913,6 +1911,7 @@ p.tab-content-empty a.change-lang {
   }
 }
 .detail-content #detail-content-title .title h2 {
+  margin: 5px;
   vertical-align: top;
 }
 .detail-content #detail-content-title .title h2 .back-list {
@@ -1923,8 +1922,12 @@ p.tab-content-empty a.change-lang {
   color: white;
   border-radius: 999px;
 }
+.detail-content #detail-content-title .title h3 {
+  margin: 0px;
+}
 .detail-content #detail-content-title #trek-identity {
   display: inline-block;
+  position: absolute;
 }
 .detail-content #detail-content-title #trek-identity p {
   margin-bottom: 0;
