@@ -18,11 +18,13 @@ CHANGELOG
 * Add setting ``BACKPACK_ENABLED`` to enable/disable favorites (fixes #54)
 * If static page contains an URL only, then add a link to this URL on menu
 * Add ability to customize search filter place holder (fixes #221)
+* Better apparence of usages and themes in detail pages (fixes #112)
 
 **Bug fixes**
 
 * Fix flatpages targets setting behaviour, like titles (fixes #216)
 * Fix initial map extent to be centered on treks
+* Fix 3D popup position (fixes #165)
 
 **Internal features**
 

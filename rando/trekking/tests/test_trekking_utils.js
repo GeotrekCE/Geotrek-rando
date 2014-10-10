@@ -13,7 +13,7 @@ module.exports = (function() {
     function assertFilterResults(test, name, min, max, expected) {
         test.comment('Set ' + name + ' to slots ' + min + ' - ' + max);
         setSliderFilter(name, min, max);
-        test.assertSelectorHasText('#tab-results span.badge', expected.length,
+        test.assertSelectorHasText('#results .number .badge', expected.length,
                                    expected.length + ' result(s).');
         for (var i=0; i<expected.length; i++) {
             var trekId = expected[i];
