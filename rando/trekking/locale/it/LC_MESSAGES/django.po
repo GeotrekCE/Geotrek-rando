@@ -181,9 +181,6 @@ msgstr "Comuni"
 msgid "Search"
 msgstr "Cerca"
 
-msgid "Name, Valley, ..."
-msgstr "Nome, Valle,..."
-
 msgid "Results"
 msgstr "Risultati"
 

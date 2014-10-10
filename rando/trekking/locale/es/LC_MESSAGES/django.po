@@ -179,9 +179,6 @@ msgstr "Municipios"
 msgid "Search"
 msgstr "Buscar"
 
-msgid "Name, Valley, ..."
-msgstr "Nombre del lugar, Valle, ..."
-
 msgid "Results"
 msgstr "Resultados"
 
