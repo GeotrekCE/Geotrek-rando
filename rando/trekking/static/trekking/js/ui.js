@@ -103,7 +103,7 @@ function refresh_results(matching) {
     else
         $('#noresult').show(200);
     // Refresh label with number of results
-    $('#tab-results span.badge').html(matching.length);
+    $('#results .number .badge').html(matching.length);
 }
 
 
@@ -121,7 +121,7 @@ function view_detail() {
         $('#detailmap .helpclic').hide();
     }
 
-    $('#tab-results span.badge').html(window.trekFilter.getResultsCount());
+    $('#results .number .badge').html(window.trekFilter.getResultsCount());
 
     // Cycle Trek carousel automatically on start
     if (!MOBILE) {

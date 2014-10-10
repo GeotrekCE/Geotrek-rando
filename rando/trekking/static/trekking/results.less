@@ -7,11 +7,14 @@
 }
 
 #side-bar .result {
-  clear: both;
   border-bottom: solid 1px @resultBorder;
   cursor: pointer;
   position: relative;
   padding: 5px;
+
+  &::after {
+    clear: both;
+  }
 }
 
 #side-bar .result .illust {

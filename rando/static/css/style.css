@@ -1095,11 +1095,13 @@ header #lang-switch {
   background-color: #f0f2ed;
 }
 #side-bar .result {
-  clear: both;
   border-bottom: solid 1px #d7ddcf;
   cursor: pointer;
   position: relative;
   padding: 5px;
+}
+#side-bar .result::after {
+  clear: both;
 }
 #side-bar .result .illust {
   float: left;
@@ -1513,15 +1515,6 @@ header #lang-switch {
   border-bottom: none;
   -webkit-touch-callout: none;
 }
-#tab-results,
-#tab-backpack {
-  width: 50%;
-}
-#text-search,
-#result-backpack-tabs {
-  width: 97%;
-  float: left;
-}
 #toggle-side-bar {
   position: relative;
   height: 100%;
@@ -1576,28 +1569,27 @@ header #lang-switch {
 #side-bar .nav-tabs > li.active > a {
   border-bottom: solid 1px white;
 }
-#result-backpack-content {
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  right: 3%;
-  top: 75px;
+#side-bar #results {
+  margin-right: 3%;
   border-right: 1px solid rgba(35, 34, 34, 0.2);
   padding-top: 1px;
   background-color: white;
   -webkit-overflow-scrolling: touch;
 }
-#result-backpack-tabs span.badge {
-  margin-right: 2px;
+#side-bar #results .number {
+  text-align: center;
+  color: #877f84;
+  font-weight: bold;
+  padding: 4px;
 }
-#result-backpack-tabs .icon-search:before {
+#side-bar #results .icon-search:before {
   position: absolute;
   left: 50%;
   top: 6px;
   font-size: 22px;
   margin-left: -75px;
 }
-#result-backpack-tabs .icon-backpack:before {
+#side-bar #results .icon-backpack:before {
   position: absolute;
   left: 50%;
   top: 5px;
@@ -1634,12 +1626,7 @@ p.tab-content-empty a.change-lang {
   width: 180px;
   padding-left: 20px;
 }
-#text-search {
-  float: left;
-  width: 97%;
-}
 #text-search .span4 {
-  width: 100%;
   margin-left: 0;
 }
 #text-search .control-group {
@@ -1647,7 +1634,8 @@ p.tab-content-empty a.change-lang {
   margin-bottom: 5px;
 }
 #text-search .navbar-search {
-  width: 100%;
+  float: none;
+  width: 97%;
   margin-top: 4px;
   margin-bottom: 4px;
   padding-left: 5px;
@@ -2633,8 +2621,7 @@ ul.errorlist {
     overflow: hidden;
     -webkit-overflow-scrolling: touch;
   }
-  #text-search,
-  #result-backpack-tabs {
+  #text-search {
     width: 100%;
   }
   #result-backpack-content {
