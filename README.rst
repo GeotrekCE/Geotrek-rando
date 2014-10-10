@@ -147,7 +147,7 @@ SOFTWARE UPDATE
 
 All versions are published on `the Github forge <https://github.com/makinacorpus/Geotrek-rando/releases>`_.
 
-Before upgrading, **READ CAREFULLY** the release notes, either from the ``docs/changelog.rst``
+Before upgrading, **READ CAREFULLY** the release notes, either from the ``CHANGES``
 files `or online <https://github.com/makinacorpus/Geotrek-rando/releases>`_.
 
 Download and extract the new version :
@@ -192,7 +192,7 @@ Restart !
     sudo /etc/init.d/apache2 restart
 
 
-Re-synchronize, just in case.
+Check the version in the web page source. Re-synchronize, just in case.
 
 
 =============
