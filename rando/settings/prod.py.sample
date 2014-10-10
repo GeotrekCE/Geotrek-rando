@@ -48,6 +48,13 @@ RECAPTCHA_PRIVATE_KEY = '6Ldrbu4SAAAAAPbt5g3Vw2BA_LGL1-BZwaBSsnfz'
 #
 # FILTER_DURATION_VALUES = [('< 2H', 2), ('2-4H', 4), ('> 4H', 4.01)]
 #
+# SEARCH_PLACEHOLDER = {
+#     'en': 'Name, Valley, ...',
+#     'fr': 'Nom, vallée, ...',
+#     'it': 'Nome, Valle,...',
+#     'es': 'Lugar, valle, ...',
+# }
+
 
 #
 # Flat pages customizations

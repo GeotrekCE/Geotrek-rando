@@ -6,7 +6,6 @@ $(window).on('view:detail', view_detail);
 $(window).on("filters:changed", function(e, visible) {
     refresh_results(visible);
 });
-$(window).on('view:home view:detail', initBackpack);
 
 
 function view_home() {
@@ -33,19 +32,6 @@ function view_home() {
     $("#mainmap").show();  // We are on home with map
     invalidate_maps();
 
-    // Results tabs panels behaviour
-    $('#result-backpack-tabs .nav-tabs a').on('click', function (e) {
-        e.preventDefault();
-        $(this).tab('show');
-        $(this).parents('ul.nav-tabs').find('span.badge-warning').removeClass('badge-warning');
-        $(this).find('span.badge').addClass('badge-warning');
-    });
-
-    // Show active tab
-    // (see filter-hash.js)
-    if (/results|backpack/.test(window.location.hash)) {
-        $('#tab-' + window.location.hash.slice(1) + ' a').click();
-    }
     // Focus search field
     if (/search/.test(window.location.hash)) {
         $('input#search').focus();
@@ -117,79 +103,9 @@ function refresh_results(matching) {
     else
         $('#noresult').show(200);
     // Refresh label with number of results
-    $('#tab-results span.badge').html(matching.length);
+    $('#results .number .badge').html(matching.length);
 }
 
-
-function initBackpack() {
-    $(window).on("backpack:change", refresh_backpack);
-
-    // Refresh tab results
-    refresh_backpack();
-
-    var $detailBackpack = $(".detail-content .btn.backpack"),
-        trekId = $detailBackpack.data('id');
-    if (window.backPack.contains(trekId))
-        $detailBackpack.addClass('active');
-    else
-        $detailBackpack.removeClass('active');
-
-    // Add trek to backpack
-    $('.btn.backpack').on('click', function (e) {
-        var trekid = $(this).data('id'),
-            trekname = $(this).data('name');
-        if (window.backPack.contains(trekid)) {
-            window.backPack.remove(trekid);
-            $(this).removeClass('active');
-            // Track event
-            _gaq.push(['_trackEvent', 'Backpack', 'Remove', trekname]);
-        }
-        else {
-            window.backPack.save(trekid);
-            $(this).addClass('active');
-            _gaq.push(['_trackEvent', 'Backpack', 'Add', trekname]);
-        }
-    });
-}
-
-
-function refresh_backpack() {
-    $('#backpack .result').each(function () {
-        var $trek = $(this),
-            trekId = $trek.data('id');
-        if (window.backPack.contains(trekId)) {
-            $trek.show(200);
-        }
-        else {
-            $trek.hide(200);
-        }
-    });
-
-    $('#results .result, #backpack .result').each(function () {
-        var $trek = $(this),
-            trekId = $trek.data('id');
-        if (window.backPack.contains(trekId)) {
-            $trek.find('.btn.backpack').addClass('active')
-                                       .attr('title', gettext('Remove from favorites'))
-                                       .removeClass('icon-backpack-add')
-                                       .addClass('icon-backpack-remove');
-        }
-        else {
-            $trek.find('.btn.backpack').removeClass('active')
-                                       .attr('title', gettext('Add to favorites'))
-                                       .removeClass('icon-backpack-remove')
-                                       .addClass('icon-backpack-add');
-        }
-    });
-
-    if (window.backPack.length() > 0)
-        $('#backpackempty').hide(200);
-    else
-        $('#backpackempty').show(200);
-
-    // Refresh label with number of items
-    $('#tab-backpack span.badge').html(window.backPack.length());
-}
 
 function view_detail() {
     $("#mainmap").hide();  // We are elsewhere
@@ -205,7 +121,7 @@ function view_detail() {
         $('#detailmap .helpclic').hide();
     }
 
-    $('#tab-results span.badge').html(window.trekFilter.getResultsCount());
+    $('#results .number .badge').html(window.trekFilter.getResultsCount());
 
     // Cycle Trek carousel automatically on start
     if (!MOBILE) {
@@ -300,26 +216,6 @@ function init_mobile() {
                 $(document).off('click.results');
             }
         });
-    });
-
-    // Show backpack tab
-    $('#tab-backpack a').off('click').on('click', function (e) {
-        e.preventDefault();
-
-        if ($(this).parent().hasClass('active')) {
-            $(document).off('click.backpack');
-        } else {
-            $(document).on('click.backpack', function (e) {
-                if ($('#tab-backpack').has(e.target).length === 0 && e.target != $('#tab-backpack')[0]){
-                    $('#backpack').hide();
-                    $('#tab-backpack').removeClass('active');
-                    $(document).off('click.backpack');
-                }
-            });
-        }
-
-        $(this).parent().toggleClass('active');
-        $('#backpack').toggle();
     });
 
     var resultTaped = false;

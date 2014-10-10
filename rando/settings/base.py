@@ -146,6 +146,7 @@ INSTALLED_APPS = (
     'compressor',
     'captcha',
     'rando.core',
+    'rando.backpack',
     'rando.trekking',
     'rando.view3d',
     'rando.flatpages',
@@ -286,11 +287,20 @@ DISTRICT_LABEL = {
     'es': 'Sectores',
 }
 
+SEARCH_PLACEHOLDER = {
+    'en': 'Name, Valley, ...',
+    'fr': 'Nom, vallée, ...',
+    'it': 'Nome, Valle,...',
+    'es': 'Lugar, valle, ...',
+}
+
 
 FOOTER_FILENAME = 'footer.html'
 POPUP_FILENAME = 'popup_home.html'
 POPUP_HOME_ENABLED = False
 POPUP_HOME_FORCED = False
+
+BACKPACK_ENABLED = True
 
 PRINT_ENABLED = False
 VIEW3D_ENABLED = False

@@ -2,18 +2,42 @@
 CHANGELOG
 =========
 
-1.33.0 (unreleased)
--------------------
+1.33dev (unreleased)
+--------------------
+
+**Breaking changes**
+
+* Will require at least Geotrek 0.24
+* If you customized ``FLATPAGES_TARGETS``, replace keys with filenames like
+  ``FLATPAGES_TITLES``.
 
 **New features**
 
+* Changed apparence and position of favorites
+* Removed tabs in results, detail and static pages
+* Add setting ``BACKPACK_ENABLED`` to enable/disable favorites (fixes #54)
 * If static page contains an URL only, then add a link to this URL on menu
+* Add ability to customize search filter place holder (fixes #221)
+* Better apparence of usages and themes in detail pages (fixes #112)
+
+**Bug fixes**
+
+* Fix flatpages targets setting behaviour, like titles (fixes #216)
+* Fix initial map extent to be centered on treks
+* Fix 3D popup position (fixes #165)
+
+**Internal features**
+
+* Generate zip files instead of mbtiles files for mobile application
+* Generate a zip file per language with all ressources (json, media) for
+  mobile application
 
 **Internal changes**
 
-* Ignore tile download errors during MBTiles creation (useful when tiles server
-  does not cover the whole world)
-* Use the ``main`` tiles URL for the global MBTiles, and ``detail`` for individual treks
+* Ignore tile download errors during tiles files creation (useful when tiles
+  server does not cover the whole world)
+* Use the ``main`` tiles URL for the global tiles, and ``detail`` for individual
+  treks
 * Download elevation profiles as SVG from server
 
 

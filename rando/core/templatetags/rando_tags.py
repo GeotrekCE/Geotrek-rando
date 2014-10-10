@@ -47,7 +47,7 @@ def listid(objects, key='id'):
 
 @register.filter(is_safe=True)
 def pictogram(value, klass=""):
-    if value is None or not value.pictogram:
+    if value is None or 'pictogram' not in value:
         return ''
     assert value.pictogram.startswith(settings.MEDIA_URL), '%s does not start with %s' % (value.pictogram, settings.MEDIA_URL)
     url = value.pictogram

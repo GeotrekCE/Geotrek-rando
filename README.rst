@@ -135,10 +135,10 @@ Regularly (once a week), you can also notify Google that your sitemap changed, u
     30 1 * * 0  cd /path/to/application && /usr/bin/make ping_google url=http://rando.server.com
 
 
-For *Geotrek-mobile*, the server needs to build the *MBTiles* background files
-for each trek. Add the following schedule task :
+For *Geotrek-mobile*, the server needs to build the ressource files (tiles,
+data, media) for each trek. Add the following schedule task :
 
-    15 * * * *  cd /path/to/application && bin/python ./manage.py build_mbtiles http://rando.server.com
+    15 * * * *  cd /path/to/application && bin/python ./manage.py build_mobile_data http://rando.server.com
 
 
 ===============

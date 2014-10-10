@@ -5,116 +5,13 @@
 *
 */
 
-
-.alert-blank {
-    color: @mainColor;
-    background-color: transparent;
-    border: 1px solid @mainColor;
-
-    & > div {
-      color: @textColor;
-    }
-}
-
-
-#detail-content-top {
-  margin-bottom: 15px;
-
-  h2 {
-    margin-top: 15px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-}
-
-
-#toolbox {
-  margin-right: 15px;
-  margin-bottom: 0;
-  margin-top: 0;
-  text-align: right;
-  min-width: 290px;
-
-  a {
-    &:before {
-      font-size: 20px;
-      position: absolute;
-      left: 5px;
-    }
-  }
-
-  a.print,
-  a.backpack,
-  a.download,
-  a.feedback {
-    position: relative;
-    padding-left: 30px;
-    vertical-align: top;
-    margin-left: 5px;
-  }
-
-  a.gpx,
-  a.kml {
-    padding-left: 25px;
-  }
-
-  a.backpack,
-  a.download,
-  a.feedback,
-  #btn-print {
-    margin-top: 5px;
-  }
-}
-
-html.no-webgl #toolbox a.view3d {
-  display: none;
-}
-
-
-#detail-content-top h2:first-letter, .flatpage-content h2:first-letter {
- font-size: 2em;
-}
-
-#detail-content-top h2, .flatpage-content h2 {
- font-size: 2em;
- color: @detailContentTitle;
- text-transform:uppercase;
-}
-
-#detail-content-title {
-  width: 98%;
-  padding: 10px 1%;
-  background-color: @detailContentBackground;
-  border-top: 1px solid @detailContentBorder;
-  border-bottom: 1px solid @detailContentBorder;
-  margin-bottom: 18px;
-
-  h2 {
-    margin-top: -9px;
-    margin-bottom: 0;
-    line-height: 1.4em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  h3 {
-    background: none;
-    font-weight: normal;
-    font-size: 14px;
-    font-family: @fontFamily;
-    margin: 0;
-    margin-left: 2px;
-    line-height: 20px;
-  }
-}
-
 .detail-content {
+  .row-fluid.meta {
+    margin-top: 15px;
+  }
+
   h3 {
     font-size: 14px;
-    margin-bottom: 10px;
-    margin-top: 20px;
   }
 
   h4 {
@@ -127,7 +24,159 @@ html.no-webgl #toolbox a.view3d {
   p {
     text-align:justify;
   }
+
+  p.teaser {
+    line-height:1.1em;
+    font-size: 18px;
+    font-family: inherit;
+    font-weight: bold;
+    color: inherit;
+    text-rendering: optimizelegibility;
+  }
+
+  p.image {
+    text-align: center;
+  }
+
+
+  #detail-content-title {
+
+    width: 98%;
+    padding: 10px 1%;
+    background-color: @detailContentBackground;
+    border-top: 1px solid @detailContentBorder;
+    border-bottom: 1px solid @detailContentBorder;
+    margin-bottom: 18px;
+
+    .title {
+      display: inline-block;
+
+      @media(max-width: @screen-sm) {
+        display: none;
+      }
+
+      margin-right: 10px;
+
+      h2 {
+        margin: 5px;
+        vertical-align: top;
+
+        .back-list {
+          text-decoration: none;
+
+          &:before {
+            background-color: @mainColor;
+            color: white;
+            border-radius: 999px;
+          }
+        }
+      }
+
+      h3 {
+        margin: 0px;
+      }
+    }
+
+    #trek-identity {
+      display: inline-block;
+      position: absolute;
+
+      p {
+        margin-bottom: 0;
+        color: @identityText;
+        text-align: left;
+      }
+
+      .info {
+        display: inline-block;
+        text-align: center;
+        margin-right: 10px;
+        & span {
+          display: block;
+        }
+      }
+
+      #themes, #usages {
+        vertical-align: top;
+        ul {
+          margin: 0;
+          text-align: center;
+        }
+      }
+
+      #usages {
+        margin-left: 30px;
+        margin-right: 20px;
+      }
+
+      #themes li, #usages li, #networks li {
+        list-style-type: none;
+        display: inline-block;
+      }
+
+      #themes .pictogram, #usages .pictogram {
+        -webkit-filter: saturate(0%) grayscale(100%) brightness(69%) contrast(1000%);
+      }
+
+    }
+
+
+    #toolbox {
+
+      float: right;
+      text-align: right;
+      max-width: 300px;
+
+      a {
+        &:before {
+          font-size: 20px;
+          position: absolute;
+          left: 5px;
+        }
+      }
+
+      a.print,
+      a.backpack,
+      a.download,
+      a.feedback {
+        position: relative;
+        padding-left: 30px;
+        vertical-align: top;
+        margin-left: 5px;
+      }
+
+      a.gpx,
+      a.kml {
+        padding-left: 25px;
+      }
+
+      a.backpack,
+      a.download,
+      a.feedback,
+      #btn-print {
+        margin-top: 5px;
+      }
+    }
+
+    html.no-webgl #toolbox a.view3d {
+      display: none;
+    }
+
+  }
+
 }
+
+
+.alert-blank {
+    color: @mainColor;
+    background-color: transparent;
+    border: 1px solid @mainColor;
+
+    & > div {
+      color: @textColor;
+    }
+}
+
 
 .alert {
   h3 {
@@ -171,55 +220,6 @@ html.no-webgl #toolbox a.view3d {
   }
 }
 
-p.teaser {
-  line-height:1.1em;
-  font-size: 18px;
-  font-family: inherit;
-  font-weight: bold;
-  color: inherit;
-  text-rendering: optimizelegibility;
-}
-
-.detail-content p.image {
- text-align: center;
-}
-
-#trek-identity {
-  p {
-    margin-bottom: 0;
-    color: @identityText;
-    text-align: left;
-  }
-
-  span.value {
-    /* Geotrek 0.23 layout */
-    color: @mainColor;
-  }
-
-
-  .info {
-    display: inline-block;
-    text-align: center;
-    margin-right: 10px;
-    & span {
-      display: block;
-    }
-  }
-
-  #themes, #usages {
-    color: @themesText;
-    vertical-align: top;
-    ul {
-      margin: 0;
-      text-align: center;
-    }
-  }
-
-  #usages {
-    margin-left: 30px;
-    margin-right: 20px;
-  }
-}
 
 
 .leaflet-marker-icon.point-reference {
@@ -286,14 +286,7 @@ p.teaser {
   }
 }
 
-#themes li, #usages li, #networks li {
-  list-style-type: none;
-  display: inline-block;
-}
 
-#themes .pictogram, #usages .pictogram {
-  opacity: 0.5;
-}
 
 .trek-networks {
   img {
@@ -301,9 +294,6 @@ p.teaser {
   }
 }
 
-.row-fluid.meta {
-  margin-top: 15px;
-}
 
 
 #park-center-warning {

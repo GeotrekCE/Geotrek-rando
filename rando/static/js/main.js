@@ -68,7 +68,6 @@ window._gaq = window._gaq || [];
 $(document).ready(function (e) {
     window.MOBILE = !!Modernizr.mq('only all and (max-width: 767px)');
     window.trekFilter = new TrekFilter();
-    window.backPack = new BackPack();
 
     init_ui();
     page_load();

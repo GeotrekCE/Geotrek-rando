@@ -62,9 +62,6 @@ class TrekFulltextTest(SimpleTestCase):
 
 class TrekkingNavigationTest(NavigationTest):
 
-    def test_backpack(self):
-        self.assertTrue(self.casper(self._get_tests_file('test_backpack.js')))
-
     def test_filters_difficulty(self):
         self.assertTrue(self.casper(self._get_tests_file('test_filters_difficulty.js')))
 

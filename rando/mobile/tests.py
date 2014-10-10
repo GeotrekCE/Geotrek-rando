@@ -1,6 +1,6 @@
 from django.test import SimpleTestCase
 
-from .management.commands.build_mbtiles import format_from_url
+from .management.commands.build_mobile_data import format_from_url
 
 
 class ImageExtensionGuessTest(SimpleTestCase):
