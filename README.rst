@@ -111,7 +111,7 @@ Setup the Geotrek server you want to synchronize, using the ``GEOTREK_SERVER`` s
 
 ::
 
-    cd Geotrek-rando-vX.Y.Z/
+    cd Geotrek-rando-X.Y.Z/
 
     make sync
 
@@ -155,17 +155,17 @@ Download and extract the new version :
 ::
 
     unzip vX.Y.Z.zip
-    cd Geotrek-rando-vX.Y.Z/
+    cd Geotrek-rando-X.Y.Z/
 
 
 Copy the configuration and synchronized files of the previous version :
 
 ::
 
-    # Configuration files
+    # Synchronized files
     cp -aR ../previous-version/var/ .
 
-    # Settings
+    # Prod settings
     cp ../previous-version/rando/settings/prod.py rando/settings/prod.py
 
 
