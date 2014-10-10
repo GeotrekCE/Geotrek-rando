@@ -27,25 +27,24 @@ Once the OS is installed (basic installation, with OpenSSH server), with the fol
 
     sudo apt-get install -y python-virtualenv libapache2-mod-wsgi python-dev build-essential unzip
 
+:note:
+
+    Do not forget basic security packages like ``fail2ban`` or
+    `automatic security updates <https://help.ubuntu.com/community/AutomaticSecurityUpdates>`_.
+
 
 Copy and extract the source archive, and run install :
 
 ::
 
-    cd /path/to/application
-    make install
+    unzip vX.Y.Z.zip
+    cd Geotrek-rando-vX.Y.Z/
 
-Prepare deployment :
-
-::
-
-    make deploy
+    make install deploy
 
 
 Configuration
 -------------
-
-Copy ``rando/settings/prod.py.sample`` to ``rando/settings/prod.py`` and edit it to override settings.
 
 Be careful to save the file with UTF-8 encoding, especially if you use accents and special characters.
 
@@ -89,6 +88,7 @@ Activate it and restart apache :
 
 ::
 
+    sudo a2enmod headers
     sudo a2ensite rando
     sudo /etc/init.d/apache2 restart
 
@@ -111,6 +111,8 @@ Setup the Geotrek server you want to synchronize, using the ``GEOTREK_SERVER`` s
 
 ::
 
+    cd Geotrek-rando-vX.Y.Z/
+
     make sync
 
 You can schedule synchronization in a crontab (e.g. every hour) :
@@ -119,7 +121,9 @@ You can schedule synchronization in a crontab (e.g. every hour) :
 
     crontab -e
 
-    # Add the following line
+Add the following line
+
+::
 
     0 * * * *  cd /path/to/application && /usr/bin/make sync
 
@@ -135,6 +139,60 @@ For *Geotrek-mobile*, the server needs to build the *MBTiles* background files
 for each trek. Add the following schedule task :
 
     15 * * * *  cd /path/to/application && bin/python ./manage.py build_mbtiles http://rando.server.com
+
+
+===============
+SOFTWARE UPDATE
+===============
+
+All versions are published on `the Github forge <https://github.com/makinacorpus/Geotrek-rando/releases>`_.
+
+Before upgrading, **READ CAREFULLY** the release notes, either from the ``docs/changelog.rst``
+files `or online <https://github.com/makinacorpus/Geotrek-rando/releases>`_.
+
+Download and extract the new version :
+
+::
+
+    unzip vX.Y.Z.zip
+    cd Geotrek-rando-vX.Y.Z/
+
+
+Copy the configuration and synchronized files of the previous version :
+
+::
+
+    # Configuration files
+    cp -aR ../previous-version/var/ .
+
+    # Settings
+    cp ../previous-version/rando/settings/prod.py rando/settings/prod.py
+
+
+Make sure the Apache virtualhost refers to the folder of this new version.
+In order to avoid editing Apache configuration at each upgrade, you can
+rename the folders.
+
+::
+
+    mv /path/to/application/ /path/to/application.old/
+    mv /path/to/Geotrek-rando-X.Y.Z/ /path/to/application/
+
+
+Deploy !
+
+::
+
+    make install deploy
+
+Restart !
+
+::
+
+    sudo /etc/init.d/apache2 restart
+
+
+Re-synchronize, just in case.
 
 
 =============
@@ -289,19 +347,26 @@ Map elements
 The background layers can be configured from ``settings/prod.py``. See sample.
 
 
-The map elements colors can be set from the ``footer.html`` page, using a ``<script>`` block :
+The map elements colors can be set from the ``footer.html`` page, using a ``<script>`` block
+and a custom JavaScript file :
 
 ::
 
-    <script type="text/javascript">
-        var TREK_LAYER_OPTIONS = {
-            style: {'color': '#F89406', 'weight': 5, 'opacity': 0.8},
-            hoverstyle: {'color': '#F89406', 'weight': 5, 'opacity': 1.0},
-            outlinestyle: {'color': 'yellow', 'weight': 10, 'opacity': 0.8},
-            positionstyle: {'fillOpacity': 1.0, 'opacity': 1.0, 'fillColor': 'white', 'color': 'black', 'width': 3},
-            arrowstyle: {'fill': '#E97000', 'font-weight': 'bold'}
-        };
-    </script>
+    <script type="text/javascript" src="/media/custom.js"></script>
+
+And in ``custom.js`` :
+
+::
+
+
+    var TREK_LAYER_OPTIONS = {
+        style: {'color': '#F89406', 'weight': 5, 'opacity': 0.8},
+        hoverstyle: {'color': '#F89406', 'weight': 5, 'opacity': 1.0},
+        outlinestyle: {'color': 'yellow', 'weight': 10, 'opacity': 0.8},
+        positionstyle: {'fillOpacity': 1.0, 'opacity': 1.0, 'fillColor': 'white', 'color': 'black', 'width': 3},
+        arrowstyle: {'fill': '#E97000', 'font-weight': 'bold'}
+    };
+
 
 ``style`` is the base color; ``hoverstyle`` is for mouse over; ``outlinestyle`` is for outline effect.
 ``arrowstyle`` controls the color and weight of direction arrows.
@@ -321,18 +386,16 @@ or on dedicated services like `MapBox <http://mapbox.com>`_.
 
 The tiles of this layer can then be added to the maps, using this snippet (for example) of code, placed in the ``footer.html`` page. See Leaflet API documentation if any problem.
 
+And in ``custom.js`` :
+
 ::
 
-    <script type="text/javascript">
-        (function() {
-              // Add it on all maps at initialization
-              $(window).on('map:ready', function (e, map) {
-                    L.tileLayer('http://livembtiles.makina-corpus.net/makina/coeur-ecrins/{z}/{x}/{y}.png')
-                     .addTo(map)
-                     .bringToFront();
-              });
-        })();
-    </script>
+    // Add it on all maps at initialization
+    $(window).on('map:ready', function (e, map) {
+        L.tileLayer('http://livembtiles.makina-corpus.net/makina/coeur-ecrins/{z}/{x}/{y}.png')
+         .addTo(map)
+         .bringToFront();
+    });
 
 :note:
 
@@ -344,17 +407,15 @@ The tiles of this layer can then be added to the maps, using this snippet (for e
 Altimetric profile colors
 -------------------------
 
-In the ``footer.html`` block :
+In ``custom.js`` :
 
 ::
 
-    <script type="text/javascript">
-        var ALTIMETRIC_PROFILE_OPTIONS = {
-            fillColor: '#FFD1A1',
-            lineColor: '#F77E00',
-            lineWidth: 3,
-        };
-    </script>
+    var ALTIMETRIC_PROFILE_OPTIONS = {
+        fillColor: '#FFD1A1',
+        lineColor: '#F77E00',
+        lineWidth: 3,
+    };
 
 See `Jquery sparkline <http://omnipotent.net/jquery.sparkline>`_ options.
 
