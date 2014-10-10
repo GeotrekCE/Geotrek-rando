@@ -25,6 +25,6 @@ def page_redirect(request, pk):
     pages = [p for p in FlatPage.objects.filter(language=lang, pk=pk).all()]
     if len(pages) > 0:
         return locale_redirect("flatpages:page",
-                               kwargs={'slug': pages[0].slug()},
+                               kwargs={'slug': pages[0].slug},
                                locale=lang)
     raise Http404

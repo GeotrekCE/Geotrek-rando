@@ -8,6 +8,8 @@ CHANGELOG
 **Breaking changes**
 
 * Will require at least Geotrek 0.24
+* If you customized ``FLATPAGES_TARGETS``, replace keys with filenames like
+  ``FLATPAGES_TITLES``.
 
 **New features**
 
@@ -18,6 +20,7 @@ CHANGELOG
 
 **Bug fixes**
 
+* Fix flatpages targets setting behaviour, like titles (fixes #216)
 * Fix initial map extent to be centered on treks
 
 **Internal features**

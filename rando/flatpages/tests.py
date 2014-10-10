@@ -7,8 +7,7 @@ from django.test import TestCase
 from django.test.utils import override_settings
 
 from rando.core.tests import TESTS_DATA_PATH
-from rando.flatpages.models import FlatPage
-from rando.flatpages.templatetags.flatpages_tags import get_flatpages
+from rando.flatpages.models import FlatPage, FlatPageManager
 
 
 TESTS_PAGES_PATH = os.path.join(TESTS_DATA_PATH, 'media', 'pages')
@@ -47,10 +46,22 @@ class FlatPagesTest(TestCase):
         page = FlatPage()
         self.assertEqual(page.target, 'all')
 
-    @override_settings(FLATPAGES_TARGETS={'a-title': 'mobile'})
+    @override_settings(FLATPAGES_TARGETS={'a-title': 'mobile'},
+                       FLATPAGES_TITLES={'a-title': 'A title'})
     def test_flatpages_targets_can_be_controlled_via_setting(self):
         page = FlatPage(title='a-title')
         self.assertEqual(page.target, 'mobile')
+
+    @override_settings(FLATPAGES_TITLES={'a-title': 'A title'})
+    def test_flatpages_titles_can_be_controlled_via_setting(self):
+        result = FlatPageManager.parse_filename('001-a-title.html', 2)
+        self.assertEqual(result, (1, 'a-title'))
+
+        result = FlatPageManager.parse_filename('page.html', 2)
+        self.assertEqual(result, (2, 'page'))
+
+        result = FlatPageManager.parse_filename('001.html', 2)
+        self.assertEqual(result, (2, '001'))
 
     def test_media_is_empty_if_content_is_none(self):
         page = FlatPage()
