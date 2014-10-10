@@ -15,13 +15,13 @@ casper.test.begin('Filters location hash', function(test) {
     });
 
     casper.thenOpen(home_url, function () {
-        test.assertSelectorHasText('#tab-results span.badge', 3,
+        test.assertSelectorHasText('#results .number .badge', 3,
                                    'Test catalog has 3 treks');
         casper.wait(4000);
     });
 
     casper.thenOpen(home_url + filter_ascent_600m, function () {
-        test.assertSelectorHasText('#tab-results span.badge', 1,
+        test.assertSelectorHasText('#results .number .badge', 1,
                                    'Filters state is loaded from hash on page load.');
     });
 
@@ -37,7 +37,7 @@ casper.test.begin('Filters location hash', function(test) {
         casper.evaluate(function (hash) {
             window.location.hash = hash;
         }, filter_duration_1day);
-        test.assertSelectorHasText('#tab-results span.badge', 1,
+        test.assertSelectorHasText('#results .number .badge', 1,
                                    'Filters state is refreshed on hash change');
 
         casper.click('#clear-filters');

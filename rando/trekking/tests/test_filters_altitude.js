@@ -9,7 +9,7 @@ casper.test.begin('Treks can be filtered by altitude', function(test) {
     var home_url = casper.cli.options['url-base'] + '/fr/';
 
     casper.start(home_url, function () {
-        test.assertSelectorHasText('#tab-results span.badge', 3,
+        test.assertSelectorHasText('#results .number .badge', 3,
                                    'Test catalog has 3 treks');
     });
 
