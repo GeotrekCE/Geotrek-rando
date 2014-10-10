@@ -16,6 +16,10 @@ CHANGELOG
 * Add setting ``BACKPACK_ENABLED`` to enable/disable favorites (fixes #54)
 * If static page contains an URL only, then add a link to this URL on menu
 
+**Bug fixes**
+
+* Fix initial map extent to be centered on treks
+
 **Internal features**
 
 * Generate zip files instead of mbtiles files for mobile application

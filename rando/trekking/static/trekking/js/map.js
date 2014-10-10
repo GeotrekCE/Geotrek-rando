@@ -610,7 +610,7 @@ function mainmapInit(map, djoptions) {
         if (window.trekFilter.matching.length > 0) {
             treksLayer.showOnly(window.trekFilter.matching);
         }
-        map.fitBounds(treksLayer.getFullBounds());
+        map.fitFakeBounds(treksLayer.getFullBounds());
     });
 
     // Filter list by map bounds
