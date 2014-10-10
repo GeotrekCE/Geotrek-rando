@@ -17,6 +17,10 @@ CHANGELOG
 * If static page contains an URL only, then add a link to this URL on menu
 * Better apparence of usages and themes in detail pages (fixes #112)
 
+**Bug fixes**
+
+* Fix 3D popup position (fixes #165)
+
 **Internal features**
 
 * Generate zip files instead of mbtiles files for mobile application
