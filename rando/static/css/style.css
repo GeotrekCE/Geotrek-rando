@@ -1944,7 +1944,6 @@ p.tab-content-empty a.change-lang {
 }
 .detail-content #detail-content-title #trek-identity #themes,
 .detail-content #detail-content-title #trek-identity #usages {
-  color: #877f84;
   vertical-align: top;
 }
 .detail-content #detail-content-title #trek-identity #themes ul,
@@ -1964,7 +1963,7 @@ p.tab-content-empty a.change-lang {
 }
 .detail-content #detail-content-title #trek-identity #themes .pictogram,
 .detail-content #detail-content-title #trek-identity #usages .pictogram {
-  opacity: 0.5;
+  -webkit-filter: saturate(0%) grayscale(100%) brightness(69%) contrast(1000%);
 }
 .detail-content #detail-content-title #toolbox {
   float: right;
