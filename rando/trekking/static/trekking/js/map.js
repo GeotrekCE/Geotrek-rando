@@ -498,9 +498,8 @@ L.Control.TogglePOILayer = L.Control.extend({
     onAdd: function(map) {
         this.map = map;
 
-        this._container = L.DomUtil.create('div', 'simple-layer-switcher pois');
+        this._container = L.DomUtil.create('div', 'simple-layer-switcher pois');        
         var className = 'toggle-layer pois active';
-
         this.button = L.DomUtil.create('a', className, this._container);
         this.button.setAttribute('title', gettext('Points of interest'));
         $(this.button).tooltip({placement: 'right'});
@@ -773,6 +772,7 @@ function detailmapInit(map, bounds) {
 
     var poisLayerSwitcher = new L.Control.TogglePOILayer(poisLayer);
     poisLayerSwitcher.addTo(map);
+    map.poisLayerSwitcher = poisLayerSwitcher;
 
     map.whenReady(function () {
         map.switchLayer('detail');
@@ -1051,7 +1051,11 @@ function initPOIsList(map) {
 
         $(window).off('map:ready').on('map:ready', function () {
             map.addControl(poiSidebar);
-            poiSidebar.show();
+            
+            if(!$('#pois-sidebar').hasClass('default_closed'))
+                poiSidebar.show();
+            else
+                map.poisLayerSwitcher.toggleLayer();
 
             var $sidebar = $('#pois-sidebar');
 

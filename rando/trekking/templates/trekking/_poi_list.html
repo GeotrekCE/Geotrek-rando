@@ -1,5 +1,6 @@
 {% load i18n rando_tags %}
-<div id="pois-sidebar" class="reattach" data-destination="#poi-list">
+
+<div id="pois-sidebar" class="reattach {% if not POI_PANEL_OPENED %}default_closed{% endif %}" data-destination="#poi-list">
 
   <h5>{% trans "On the way..." %}</h5>
 
