@@ -2,6 +2,11 @@
 CHANGELOG
 =========
 
+1.33.1 (unreleased)
+-------------------
+
+* Fix list result scroll regression (fixes #235)
+
 1.33.0 (2014-10-20)
 -------------------
 
