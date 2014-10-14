@@ -112,7 +112,7 @@
 
             var content = L.Util.template('<div class="tourism">' +
                                             '<h3>{title}</h3>' +
-                                            '<img class="preview" src="{picture_url}" width="200">' +
+                                            '<img class="preview" src="{picture_url}" height="150">' +
                                             '<p class="description">{description}</p>' +
                                             '<a class="website" href="{website}" target="_blank">{website_label}</a>' +
                                             '<span class="phone">{phone_label}: <a href="tel:{phone}">{phone}</a></span>' +
