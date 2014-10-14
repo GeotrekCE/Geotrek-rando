@@ -1052,7 +1052,7 @@ function initPOIsList(map) {
         $(window).off('map:ready').on('map:ready', function () {
             map.addControl(poiSidebar);
             
-            if(!$('#pois-sidebar').hasClass('default_closed'))
+            if($('#pois-sidebar').hasClass('default-opened'))
                 poiSidebar.show();
             else
                 map.poisLayerSwitcher.toggleLayer();
