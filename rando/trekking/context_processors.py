@@ -23,4 +23,5 @@ def main(request):
         'SEARCH_PLACEHOLDER': trans(settings.SEARCH_PLACEHOLDER),
         'PRINT_ENABLED': settings.PRINT_ENABLED,
         'VIEW3D_ENABLED': settings.VIEW3D_ENABLED,
+        'POI_PANEL_OPENED' : settings.POI_PANEL_OPENED,
     }

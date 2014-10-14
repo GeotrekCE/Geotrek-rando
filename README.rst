@@ -516,6 +516,15 @@ It is possible to enable comment threads in detail pages, using Disqus.
 * Configure the apparence and default language from Disqus parameters webpage.
 
 
+POI panel on detail pages
+-------------------------
+
+By default, the POI panel on the map is automatically opened. This may be changed.
+
+* Set ``POI_PANEL_OPENED = False`` in settings.
+
+False will make the panel closed, and the POI layer hidden. True will make the panel opened and the POI layer visible.
+
 ===============
 TROUBLESHOOTING
 ===============
