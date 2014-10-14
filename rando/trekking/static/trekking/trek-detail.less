@@ -42,20 +42,18 @@
   #detail-content-title {
 
     width: 98%;
-    padding: 10px 1%;
+    padding: 5px 1%;
     background-color: @detailContentBackground;
     border-top: 1px solid @detailContentBorder;
     border-bottom: 1px solid @detailContentBorder;
     margin-bottom: 18px;
 
     .title {
-      display: inline-block;
+      min-height: 50px;
 
       @media(max-width: @screen-sm) {
         display: none;
       }
-
-      margin-right: 10px;
 
       h2 {
         margin: 5px;
@@ -71,15 +69,13 @@
           }
         }
       }
+    }
 
-      h3 {
-        margin: 0px;
-      }
+    h3 {
+      margin: 0px;
     }
 
     #trek-identity {
-      display: inline-block;
-      position: absolute;
 
       p {
         margin-bottom: 0;
@@ -125,7 +121,6 @@
 
       float: right;
       text-align: right;
-      max-width: 300px;
 
       a {
         &:before {
