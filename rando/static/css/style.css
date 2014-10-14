@@ -1575,6 +1575,8 @@ header #lang-switch {
   padding-top: 1px;
   background-color: white;
   -webkit-overflow-scrolling: touch;
+  max-height: 97%;
+  overflow: auto;
 }
 #side-bar #results .number {
   text-align: center;
