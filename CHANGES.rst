@@ -19,6 +19,7 @@ CHANGELOG
 * If static page contains an URL only, then add a link to this URL on menu
 * Add ability to customize search filter place holder (fixes #221)
 * Better apparence of usages and themes in detail pages (fixes #112)
+* Add setting ``POI_PANEL_OPENED`` to control the default behaviour of the POI's panel on detail page
 
 **Bug fixes**
 
