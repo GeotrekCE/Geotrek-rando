@@ -8,6 +8,7 @@ class TrekView3D(BaseTrekView):
     template_name = 'view3d/view3d.html'
 
     TILES_NUMBER_LIMIT = settings.VIEW3D_TILES_NUMBER_LIMIT
+    VIEW3D_CAMERAS_ENABLED = settings.VIEW3D_CAMERAS_ENABLED
 
     def tiles(self):
         for tiles_layer in settings.LEAFLET_CONFIG['TILES']:
