@@ -2,6 +2,14 @@
 CHANGELOG
 =========
 
+1.33.1 (unreleased)
+-------------------
+
+**Bug fixes**
+
+* Fix font in 3D window (fixes #229, by @camillemonchicourt)
+* Fix POI scroll in 3D window (fixes #230, by @camillemonchicourt)
+
 1.33.0 (2014-10-20)
 -------------------
 

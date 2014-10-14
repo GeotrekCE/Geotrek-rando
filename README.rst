@@ -613,6 +613,7 @@ AUTHORS
     * Mathieu Leplatre
     * Anaïs Peyrucq
     * Satya Azemar
+    * Camille Monchicourt
 
 |makinacom|_
 

@@ -11,6 +11,7 @@ body {
   background-image: url('img/background.jpg');
   background-size: 100% 100%;
   background-repeat: repeat-x;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 canvas {
   position: absolute;
@@ -69,6 +70,7 @@ canvas {
   float: left;
   width: 20%;
   height: 100%;
+  overflow: auto;
 }
 .poi_side p {
   text-align: justify;
