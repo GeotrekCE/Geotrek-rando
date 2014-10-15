@@ -1902,7 +1902,7 @@ p.tab-content-empty a.change-lang {
   margin-bottom: 18px;
 }
 .detail-content #detail-content-title .title {
-  min-height: 50px;
+  width: 50%;
 }
 @media (max-width: 767px) {
   .detail-content #detail-content-title .title {
@@ -1910,19 +1910,30 @@ p.tab-content-empty a.change-lang {
   }
 }
 .detail-content #detail-content-title .title h2 {
-  margin: 5px;
-  vertical-align: top;
+  margin: 0px;
+  display: inline-block;
+  width: 80%;
 }
-.detail-content #detail-content-title .title h2 .back-list {
+.detail-content #detail-content-title .title .back-list {
   text-decoration: none;
+  font-size: 31.5px;
 }
-.detail-content #detail-content-title .title h2 .back-list:before {
+.detail-content #detail-content-title .title .back-list:before {
   background-color: #f89406;
   color: white;
   border-radius: 999px;
 }
 .detail-content #detail-content-title h3 {
   margin: 0px;
+}
+.detail-content #detail-content-title #trek-identity {
+  margin-left: 0px;
+  text-align: right;
+}
+@media (max-width: 767px) {
+  .detail-content #detail-content-title #trek-identity {
+    text-align: left;
+  }
 }
 .detail-content #detail-content-title #trek-identity p {
   margin-bottom: 0;

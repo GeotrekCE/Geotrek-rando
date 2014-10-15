@@ -23,16 +23,13 @@
   <div id="detail-content-title">
     <div class="row-fluid">
 
-      <div class="title span12">
-        <h2><a href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}" class="back-list pjax icon-left-open-mini" title="{% trans "Back to list" %}"></a> {{ object.properties.name }}</h2>
+      <div class="title span6">
+        <a href="{% locale_url request.LANGUAGE_CODE "trekking:home" %}" class="back-list pjax icon-left-open-mini" title="{% trans "Back to list" %}"></a>
+
+        <h2>{{ object.properties.name }}</h2>
       </div>
 
-    </div>
-
-
-    <div class="row-fluid">
-      <div id="trek-identity" class="span8">
-
+      <div id="trek-identity" class="span6">
         <div class="info duration" title="{% trans "Duration" %}">
           <span>{{ object.properties.duration_pretty }}</span>
           <div class="pictogram medium">
@@ -75,12 +72,17 @@
           <li>{{ theme|pictogram:"medium" }}</li>
           {% if forloop.last %}</ul></div>{% endif %}
         {% endfor %}
-
-        <h3 id="departure-arrival">{% trans "Departure" %} : {{ object.properties.departure }}{% if object.properties.arrival %} &rarr; {% trans "Arrival" %} : {{ object.properties.arrival }}{% endif %}</h3>
       </div>
 
+    </div>
 
-      <div id="toolbox" class="span4">
+
+    <div class="row-fluid">
+
+      <div class="span5 departure">
+        <h3 id="departure-arrival">{% trans "Departure" %} : {{ object.properties.departure }}{% if object.properties.arrival %} &rarr; {% trans "Arrival" %} : {{ object.properties.arrival }}{% endif %}</h3>
+      </div>
+      <div id="toolbox" class="span7">
         {% if FEEDBACK_FORM_ENABLED %}
         <a class="btn feedback icon-feedback" href="#" data-slug="{{ trek.properties.slug }}" title="{% trans "Feedback" %}">
         {% trans "Feedback" %}

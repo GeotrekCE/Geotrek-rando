@@ -49,24 +49,26 @@
     margin-bottom: 18px;
 
     .title {
-      min-height: 50px;
+      width: 50%;
 
       @media(max-width: @screen-sm) {
         display: none;
       }
 
       h2 {
-        margin: 5px;
-        vertical-align: top;
+        margin: 0px;
+        display: inline-block;
+        width: 80%;
+      }
 
-        .back-list {
-          text-decoration: none;
+      .back-list {
+        text-decoration: none;
+        font-size: 31.5px;
 
-          &:before {
-            background-color: @mainColor;
-            color: white;
-            border-radius: 999px;
-          }
+        &:before {
+          background-color: @mainColor;
+          color: white;
+          border-radius: 999px;
         }
       }
     }
@@ -76,6 +78,13 @@
     }
 
     #trek-identity {
+
+      margin-left: 0px;
+      text-align: right;
+
+      @media(max-width: @screen-sm) {
+        text-align: left;
+      }
 
       p {
         margin-bottom: 0;
