@@ -3,10 +3,9 @@
 {% load static i18n leaflet_tags rando_tags localeurl_tags %}
 
 
-{% block title %}
-  {{ block.super }}
+{% block title2 %}
   <h3 id="departure-arrival">{% trans "Departure" %} : {{ trek.departure }}{% if trek.arrival %} &rarr; {% trans "Arrival" %} : {{ trek.arrival }}{% endif %}</h3>
-{% endblock title %}
+{% endblock title2 %}
 
 
 {% block identity %}
@@ -228,7 +227,7 @@
                 <h5>{% trans "Sharing paths" %}</h5>
                 <ul>
               {% endif %}
-              <li><a href="{% locale_url request.LANGUAGE_CODE "trekking:trek_detail" relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+              <li><a class="pjax" href="{% locale_url request.LANGUAGE_CODE "trekking:trek_detail" relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
               {% if forloop.last %}</ul>{% endif %}
             {% endfor %}
 
@@ -264,50 +263,6 @@
 
 {% block extracontent %}
   {% if pois %}
-  <div style="display: none">
-    <div id="pois-sidebar">
-
-      <h5>{% trans "On the way..." %}</h5>
-
-      <div class="pois-list">
-        {% for poi in pois %}
-          <div class="poi" data-pk="{{ poi.pk }}">
-            <div class="title">
-              {{ poi.type|pictogram }}
-              <span class="name">{{ poi.name }}</span>
-              <a class="jump up" href="#">&#x21e1;</a>
-              <a class="jump down" href="#">&#x21e3;</a>
-            </div>
-            <div class="content">
-              <p>{{ poi.description|safe }}</p>
-              {% if poi.pictures|length > 0 %}
-              <div class="picture">
-                <img src="{{ poi.pictures.0.url }}" alt="{{ poi.pictures.0.title }}" />
-
-                <div class="carousel-caption">
-                  {% if poi.pictures|length > 1 %}
-                    <span class="pictures-info pull-right icon-camera">&times;{{ poi.pictures|length }}</span>
-                  {% endif %}
-                  <p>{{ poi.pictures.0.legend }} {% if poi.pictures.0.author %}({{ poi.pictures.0.author }}){% endif %}</p>
-                </div>
-              </div>
-              {% endif %}
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-
-    </div>
-  </div>
-
-  <div id="pois-carousels-{{ trek.pk }}" class="reattach" data-destination="body">
-  {% for poi in pois %}
-    <div id="popup-poi-carousel-{{ poi.pk }}" class="popup poi modal hide fade" role="dialog" aria-labelledby="poi-carousel" aria-hidden="true">
-        <div class="modal-body">
-        {% include "_carousel.html" with prefix=poi.pk pictures=poi.pictures default="False" %}
-      </div>
-    </div>
-  {% endfor %}
-  </div>
+     {% include "trekking/_poi_list.html" %}
   {% endif %}
 {% endblock extracontent %}

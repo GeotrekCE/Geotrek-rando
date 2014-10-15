@@ -12,8 +12,6 @@
 
   h3 {
     font-size: 14px;
-    margin-bottom: 10px;
-    margin-top: 20px;
   }
 
   h4 {
@@ -44,38 +42,49 @@
   #detail-content-title {
 
     width: 98%;
-    padding: 10px 1%;
+    padding: 5px 1%;
     background-color: @detailContentBackground;
     border-top: 1px solid @detailContentBorder;
     border-bottom: 1px solid @detailContentBorder;
     margin-bottom: 18px;
 
     .title {
-      display: inline-block;
+      width: 50%;
 
       @media(max-width: @screen-sm) {
         display: none;
       }
 
-      margin-right: 5px;
-
       h2 {
-        vertical-align: top;
+        margin: 0px;
+        display: inline-block;
+        width: 80%;
+      }
 
-        .back-list {
-          text-decoration: none;
+      .back-list {
+        text-decoration: none;
+        font-size: 31.5px;
 
-          &:before {
-            background-color: @mainColor;
-            color: white;
-            border-radius: 999px;
-          }
+        &:before {
+          background-color: @mainColor;
+          color: white;
+          border-radius: 999px;
         }
       }
     }
 
+    h3 {
+      margin: 0px;
+    }
+
     #object-identity {
-      display: inline-block;
+
+      margin-left: 0px;
+      text-align: right;
+
+      @media(max-width: @screen-sm) {
+        text-align: left;
+      }
 
       p {
         margin-bottom: 0;
@@ -93,7 +102,6 @@
       }
 
       #themes, #usages {
-        color: @themesText;
         vertical-align: top;
         ul {
           margin: 0;
@@ -112,7 +120,7 @@
       }
 
       #themes .pictogram, #usages .pictogram {
-        opacity: 0.5;
+        -webkit-filter: saturate(0%) grayscale(100%) brightness(69%) contrast(1000%);
       }
 
     }
@@ -122,7 +130,6 @@
 
       float: right;
       text-align: right;
-      max-width: 300px;
 
       a {
         &:before {

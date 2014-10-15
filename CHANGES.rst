@@ -2,20 +2,90 @@
 CHANGELOG
 =========
 
+1.34.0 (2014-10-15)
+-------------------
 
-1.33dev (unreleased)
---------------------
+**Bug fixes**
+
+* Fix font in 3D window (fixes #229, by @camillemonchicourt)
+* Fix POI scroll in 3D window (fixes #230, by @camillemonchicourt)
+* Fix trek detail header not being responsive (fixes #238)
+* Fix list result scroll regression (fixes #235)
+* Fix tourism popups not panning vertically (ref #191)
+
+**New features**
+
+* Add setting ``POI_PANEL_OPENED`` to control the default behaviour of the POI's panel on detail page
+
+
+1.33.0 (2014-10-20)
+-------------------
 
 **Breaking changes**
 
 * Will require at least Geotrek 0.24
+* If you customized ``FLATPAGES_TARGETS``, replace keys with filenames like
+  ``FLATPAGES_TITLES``.
 
 **New features**
 
 * Changed apparence and position of favorites
 * Removed tabs in results, detail and static pages
 * Add setting ``BACKPACK_ENABLED`` to enable/disable favorites (fixes #54)
+* If static page contains an URL only, then add a link to this URL on menu
+* Add ability to customize search filter place holder (fixes #221)
+* Better apparence of usages and themes in detail pages (fixes #112)
 
+**Bug fixes**
+
+* Fix flatpages targets setting behaviour, like titles (fixes #216)
+* Fix initial map extent to be centered on treks
+* Fix 3D popup position (fixes #165)
+
+**Internal features**
+
+* Generate zip files instead of mbtiles files for mobile application
+* Generate a zip file per language with all ressources (json, media) for
+  mobile application
+
+**Internal changes**
+
+* Ignore tile download errors during tiles files creation (useful when tiles
+  server does not cover the whole world)
+* Use the ``main`` tiles URL for the global tiles, and ``detail`` for individual
+  treks
+* Download elevation profiles as SVG from server
+
+
+1.32.4 (2014-09-16)
+-------------------
+
+**BUG fixes**
+
+* Fix park center warning being always displayed
+
+
+1.32.3 (2014-09-16)
+-------------------
+
+**BUG fixes**
+
+* Fix translation of Downloads in trek detail page
+* Fix missing slash in URL of treks GeoJSON
+* Fix related treks links to navigate in AJAX
+* Fix search clear in responsive version (fixes #196)
+
+
+1.32.2 (2014-09-15)
+-------------------
+
+**BUG fixes**
+
+* Fix trek synchronization, only the first language was synced (fixes #205).
+* Fix POI list not being display in responsive version (width <900px) (fixes #206)
+* Changed french translation from "Photos satellite" to "Photos aérienne"
+* Added the ability to customize the districts label (used to be *Valleys*).
+  Default value is now *Districts*.
 
 1.32.1 (2014-09-03)
 -------------------

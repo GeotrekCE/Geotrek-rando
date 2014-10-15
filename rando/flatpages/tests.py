@@ -7,8 +7,7 @@ from django.test import TestCase
 from django.test.utils import override_settings
 
 from rando.core.tests import TESTS_DATA_PATH
-from rando.flatpages.models import FlatPage
-from rando.flatpages.templatetags.flatpages_tags import get_flatpages
+from rando.flatpages.models import FlatPage, FlatPageManager
 
 
 TESTS_PAGES_PATH = os.path.join(TESTS_DATA_PATH, 'media', 'pages')
@@ -18,16 +17,9 @@ TESTS_PAGES_PATH = os.path.join(TESTS_DATA_PATH, 'media', 'pages')
 class FlatPagesJSONTest(TestCase):
 
     def setUp(self):
-        self.path = 'api/pages/pages.json'
-
-        self.response = self.client.get('/fr/files/' + self.path)
-        results = json.loads(self.response.content)
+        self.json = FlatPage.objects.filter(language='fr').json
+        results = json.loads(self.json)
         self.first = results[0]
-
-    def test_url_is_like_other_synced_resources(self):
-        self.assertFalse(os.path.exists(os.path.join(TESTS_DATA_PATH, self.path)))
-        self.assertEqual(self.response.status_code, 200)
-        self.assertEqual(self.response['Content-Type'], 'application/json')
 
     def test_pages_properties_are_exposed(self):
         self.assertEqual(self.first['title'], 'Fake page')
@@ -54,10 +46,22 @@ class FlatPagesTest(TestCase):
         page = FlatPage()
         self.assertEqual(page.target, 'all')
 
-    @override_settings(FLATPAGES_TARGETS={'a-title': 'mobile'})
+    @override_settings(FLATPAGES_TARGETS={'a-title': 'mobile'},
+                       FLATPAGES_TITLES={'a-title': 'A title'})
     def test_flatpages_targets_can_be_controlled_via_setting(self):
         page = FlatPage(title='a-title')
         self.assertEqual(page.target, 'mobile')
+
+    @override_settings(FLATPAGES_TITLES={'a-title': 'A title'})
+    def test_flatpages_titles_can_be_controlled_via_setting(self):
+        result = FlatPageManager.parse_filename('001-a-title.html', 2)
+        self.assertEqual(result, (1, 'a-title'))
+
+        result = FlatPageManager.parse_filename('page.html', 2)
+        self.assertEqual(result, (2, 'page'))
+
+        result = FlatPageManager.parse_filename('001.html', 2)
+        self.assertEqual(result, (2, '001'))
 
     def test_media_is_empty_if_content_is_none(self):
         page = FlatPage()
@@ -81,3 +85,8 @@ class FlatPagesTest(TestCase):
             {'url': '/media/image1.png', 'title': 'Image 1', 'alt': 'image-1', 'mimetype': ['image', 'png']},
             {'url': '/media/image2.jpg', 'title': '', 'alt': '', 'mimetype': ['image', 'jpeg']}
         ])
+
+    def test_flatpages_is_a_link(self):
+        html = u"http://www.makina-corpus.com"
+        page = FlatPage(content=html)
+        self.assertEqual(page.link, 'http://www.makina-corpus.com')

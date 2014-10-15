@@ -20,6 +20,8 @@ deploy: bin/python
 	mkdir -p var/input/media
 	mkdir -p var/input/media/pages
 	touch var/input/media/style.css
+	touch var/input/media/footer.html
+	touch var/input/media/popup_home.html
 	cp -n rando/settings/prod.py.sample rando/settings/prod.py
 	bin/python ./manage.py collectstatic --clear --noinput --ignore="*.less"
 

@@ -112,6 +112,7 @@ class TrekListInputFile(PublishedCollection):
             return record
 
         self.download_resource(properties['altimetric_profile'])
+        self.download_resource(properties['altimetric_profile_svg'])
 
         for theme in properties['themes']:
             self.download_resource(theme['pictogram'])

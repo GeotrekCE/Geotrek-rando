@@ -280,16 +280,34 @@ PARK_CENTER_LINK = {
     'es': 'consulte la reglamentación, por favor.',
 }
 
+DISTRICT_LABEL = {
+    'en': 'Districts',
+    'fr': 'Secteurs',
+    'it': 'Settori',
+    'es': 'Sectores',
+}
+
+SEARCH_PLACEHOLDER = {
+    'en': 'Name, Valley, ...',
+    'fr': 'Nom, vallée, ...',
+    'it': 'Nome, Valle,...',
+    'es': 'Lugar, valle, ...',
+}
+
+
 FOOTER_FILENAME = 'footer.html'
 POPUP_FILENAME = 'popup_home.html'
 POPUP_HOME_ENABLED = False
 POPUP_HOME_FORCED = False
+
+POI_PANEL_OPENED = True
 
 BACKPACK_ENABLED = True
 
 PRINT_ENABLED = False
 VIEW3D_ENABLED = False
 VIEW3D_TILES_NUMBER_LIMIT = 200
+VIEW3D_CAMERAS_ENABLED = ('examine', 'bird', 'hiker')
 
 TOURISM_ENABLED = True
 TOURISM_DATASOURCE_FAULT_TOLERANT = True

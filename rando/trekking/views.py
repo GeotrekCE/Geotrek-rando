@@ -22,9 +22,9 @@ class TrekDetail(BaseTrekView):
         context = super(TrekDetail, self).get_context_data(**kwargs)
         obj = context['trek']
 
-        context['trek_has_related'] = (len(obj.properties.relationships_departure) > 0 or
-                                       len(obj.properties.relationships_edge) > 0 or
-                                       len(obj.properties.relationships_circuit))
+        context['trek_has_related'] = (len(obj.relationships_departure) > 0 or
+                                       len(obj.relationships_edge) > 0 or
+                                       len(obj.relationships_circuit))
 
         context['pois'] = obj.pois.all()
 

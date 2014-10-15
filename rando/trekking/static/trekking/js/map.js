@@ -321,7 +321,6 @@ L.Control.TogglePOILayer = L.Control.extend({
 
         this._container = L.DomUtil.create('div', 'simple-layer-switcher pois');
         var className = 'toggle-layer pois active';
-
         this.button = L.DomUtil.create('a', className, this._container);
         this.button.setAttribute('title', gettext('Points of interest'));
         $(this.button).tooltip({placement: 'right'});
@@ -413,7 +412,7 @@ function mainmapInit(map, djoptions) {
     // Filter
     //
     // Reset view on filter reset
-    $(window.trekFilter).on('reset', function (){
+    $(window).on('filters:clear', function (){
         map.fitFakeBounds(treksBounds);
     });
     // Filter layers
@@ -424,7 +423,7 @@ function mainmapInit(map, djoptions) {
         if (window.trekFilter.matching.length > 0) {
             treksLayer.showOnly(window.trekFilter.matching);
         }
-        map.fitBounds(treksLayer.getFullBounds());
+        map.fitFakeBounds(treksLayer.getFullBounds());
     });
 
     // Filter list by map bounds
@@ -587,6 +586,7 @@ function detailmapInit(map, bounds) {
 
     var poisLayerSwitcher = new L.Control.TogglePOILayer(poisLayer);
     poisLayerSwitcher.addTo(map);
+    map.poisLayerSwitcher = poisLayerSwitcher;
 
     map.whenReady(function () {
         map.switchLayer('detail');
@@ -865,7 +865,11 @@ function initPOIsList(map) {
 
         $(window).off('map:ready').on('map:ready', function () {
             map.addControl(poiSidebar);
-            poiSidebar.show();
+            
+            if($('#pois-sidebar').hasClass('default-opened'))
+                poiSidebar.show();
+            else
+                map.poisLayerSwitcher.toggleLayer();
 
             var $sidebar = $('#pois-sidebar');
 

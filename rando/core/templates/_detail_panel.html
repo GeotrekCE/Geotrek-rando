@@ -22,49 +22,55 @@
 
   <div id="detail-content-title">
 
-    <div class="title">
-      {% block title %}
-      <h2><a href="{% locale_url request.LANGUAGE_CODE "core:home" %}" class="back-list pjax icon-left-open-mini" title="{% trans "Back to list" %}"></a> {{ object.name }}</h2>
-      {% endblock title %}
+    <div class="row-fluid">
+      <div class="title span6">
+        {% block title %}
+        <h2><a href="{% locale_url request.LANGUAGE_CODE "core:home" %}" class="back-list pjax icon-left-open-mini" title="{% trans "Back to list" %}"></a> {{ object.name }}</h2>
+        {% endblock title %}
+      </div><!-- title -->
+      <div id="object-identity">
+        {% block identity %}
+        {% endblock identity %}
+      </div><!-- object-identity -->
     </div>
 
-    <div id="object-identity">
-      {% block identity %}
-      {% endblock identity %}
+    <div class="row-fluid">
+      <div class="span5">
+        {% block title2 %}
+        {% endblock title2 %}
+      </div>
+      <div id="toolbox" class="span7">
+        {% block toolbox %}
+
+        {% if FEEDBACK_FORM_ENABLED %}
+        <a class="btn feedback icon-feedback" href="#" data-slug="{{ object.slug }}" title="{% trans "Feedback" %}">
+        {% trans "Feedback" %}
+        </a>
+        {% endif %}
+
+
+        {% if BACKPACK_ENABLED %}
+        <a class="btn backpack icon-backpack-add" href="#" data-id="{{ object.pk }}" data-name="{{ object.name }}">
+          {% trans "Favorites" %}
+        </a>
+        {% endif %}
+
+
+        {% if PRINT_ENABLED %}
+        <a class="btn download print icon-print" title="{% trans "Print" %}" href="{% locale_url request.LANGUAGE_CODE "core:fileserve" object.printable %}" target="_blank">
+          <span class="hidden-phone">{% trans "Print" %}</span><span class="visible-phone">{% trans "PDF" %}</span>
+        </a>
+        {% else %}
+        <a class="btn download print disabled" title="{% trans "Soon!" %}" >
+          {% trans "Print" %}
+        </a>
+        {% endif %}
+
+        {% endblock toolbox %}
+      </div><!-- toolbox -->
     </div>
 
-
-    <div id="toolbox">
-      {% block toolbox %}
-
-      {% if FEEDBACK_FORM_ENABLED %}
-      <a class="btn feedback icon-feedback" href="#" data-slug="{{ object.slug }}" title="{% trans "Feedback" %}">
-      {% trans "Feedback" %}
-      </a>
-      {% endif %}
-
-
-      {% if BACKPACK_ENABLED %}
-      <a class="btn backpack icon-backpack-add" href="#" data-id="{{ object.pk }}" data-name="{{ object.name }}">
-        {% trans "Favorites" %}
-      </a>
-      {% endif %}
-
-
-      {% if PRINT_ENABLED %}
-      <a class="btn download print icon-print" title="{% trans "Print" %}" href="{% locale_url request.LANGUAGE_CODE "core:fileserve" object.printable %}" target="_blank">
-        <span class="hidden-phone">{% trans "Print" %}</span><span class="visible-phone">{% trans "PDF" %}</span>
-      </a>
-      {% else %}
-      <a class="btn download print disabled" title="{% trans "Soon!" %}" >
-        {% trans "Print" %}
-      </a>
-      {% endif %}
-
-      {% endblock toolbox %}
-    </div>
-
-  </div>
+  </div><!-- detail-content-title -->
 
   <div class="row-fluid page-inner-content">
     {% block maincontent %}

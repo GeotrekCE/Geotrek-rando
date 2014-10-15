@@ -81,24 +81,30 @@
         </div>
 
         <ul class="camera_switcher">
+            {% if "examine" in view.VIEW3D_CAMERAS_ENABLED %}
             <li class="camera camera--examine camera--disabled" data-camera-id="examine">
                 <span class="camera-title">{% trans "Sky" %}</span>
                 <span class="camera-icon">
                     <img src="{% static "view3d/img/camera-examine.svg" %}"/>
                 </span>
             </li>
+            {% endif %}
+            {% if "bird" in view.VIEW3D_CAMERAS_ENABLED %}
             <li class="camera camera--bird camera--disabled" data-camera-id="bird">
                 <span class="camera-title">{% trans "Bird" %}</span>
                 <span class="camera-icon">
                     <img src="{% static "view3d/img/camera-bird.svg" %}"/>
                 </span>
             </li>
+            {% endif %}
+            {% if "hiker" in view.VIEW3D_CAMERAS_ENABLED %}
             <li class="camera camera--hiker camera--disabled" data-camera-id="hiker">
                 <span class="camera-title">{% trans "Hiker" %}</span>
                 <span class="camera-icon">
                     <img src="{% static "view3d/img/camera-hiker.svg" %}"/>
                 </span>
             </li>
+            {% endif %}
         </ul>
 
         <div class="poi poi--clicked"></div>

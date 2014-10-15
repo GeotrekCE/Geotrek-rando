@@ -20,7 +20,7 @@ msgstr ""
 
 #: static/trekking/js/map.js:432 static/trekking/js/map.js.c:457
 msgid "Show satellite"
-msgstr "Photos satellite"
+msgstr "Photos aériennes"
 
 #: static/trekking/js/map.js:449
 msgid "Show plan"
