@@ -9,6 +9,7 @@ CHANGELOG
 
 * Fix font in 3D window (fixes #229, by @camillemonchicourt)
 * Fix POI scroll in 3D window (fixes #230, by @camillemonchicourt)
+* Fix tourism popups not panning vertically (ref #191)
 
 1.33.0 (2014-10-20)
 -------------------
