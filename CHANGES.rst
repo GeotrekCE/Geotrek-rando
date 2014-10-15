@@ -11,6 +11,7 @@ CHANGELOG
 * Fix POI scroll in 3D window (fixes #230, by @camillemonchicourt)
 * Fix trek detail header not being responsive (fixes #238)
 * Fix list result scroll regression (fixes #235)
+* Fix tourism popups not panning vertically (ref #191)
 
 **New features**
 

@@ -1575,7 +1575,7 @@ header #lang-switch {
   padding-top: 1px;
   background-color: white;
   -webkit-overflow-scrolling: touch;
-  max-height: 97%;
+  max-height: 95%;
   overflow: auto;
 }
 #side-bar #results .number {
