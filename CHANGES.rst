@@ -2,7 +2,7 @@
 CHANGELOG
 =========
 
-1.33.1 (unreleased)
+1.34.0 (unreleased)
 -------------------
 
 **Bug fixes**
@@ -10,6 +10,12 @@ CHANGELOG
 * Fix font in 3D window (fixes #229, by @camillemonchicourt)
 * Fix POI scroll in 3D window (fixes #230, by @camillemonchicourt)
 * Fix trek detail header not being responsive (fixes #238)
+* Fix list result scroll regression (fixes #235)
+
+**New features**
+
+* Add setting ``POI_PANEL_OPENED`` to control the default behaviour of the POI's panel on detail page
+
 
 1.33.0 (2014-10-20)
 -------------------
@@ -28,7 +34,6 @@ CHANGELOG
 * If static page contains an URL only, then add a link to this URL on menu
 * Add ability to customize search filter place holder (fixes #221)
 * Better apparence of usages and themes in detail pages (fixes #112)
-* Add setting ``POI_PANEL_OPENED`` to control the default behaviour of the POI's panel on detail page
 
 **Bug fixes**
 
