@@ -140,6 +140,8 @@ Regularly (once a week), you can also notify Google that your sitemap changed, u
 For *Geotrek-mobile*, the server needs to build the ressource files (tiles,
 data, media) for each trek. Add the following schedule task :
 
+::
+
     15 * * * *  cd /path/to/application && bin/python ./manage.py build_mobile_data http://rando.server.com
 
 
