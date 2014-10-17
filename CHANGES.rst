@@ -2,6 +2,15 @@
 CHANGELOG
 =========
 
+1.34.1dev (unreleased)
+----------------------
+
+**Internal changes**
+
+* Store tiles in ``var/tmp`` folder instead of system ``/tmp``. This way, cache
+  of tiles will be kept after reboot.
+
+
 1.34.0 (2014-10-15)
 -------------------
 
