@@ -46,6 +46,8 @@ Copy and extract the source archive, and run install :
 Configuration
 -------------
 
+The configuration file is ``rando/settings/prod.py``
+
 Be careful to save the file with UTF-8 encoding, especially if you use accents and special characters.
 
 Most important settings :
