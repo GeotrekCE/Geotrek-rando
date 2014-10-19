@@ -111,6 +111,7 @@ class Command(BaseCommand):
 
         treks = Trek.objects.filter(language=language)
         media = set()
+        missing_media = set()
 
         zipfile.write(treks.fullpath, 'trek.geojson')
 
@@ -125,23 +126,37 @@ class Command(BaseCommand):
             for picture in trek.properties.pictures:
                 media.add((picture['url'], trek_dest))
             for desk in trek.properties.information_desks:
-                media.add((desk['photo_url'], trek_dest))
+                if desk['photo_url']:
+                    media.add((desk['photo_url'], trek_dest))
             for attr in ('usages', 'themes', 'networks'):
                 for item in trek.properties.get(attr):
-                    media.add((item['pictogram'], 'trek/pictogram'))
-            media.add((trek.properties.difficulty['pictogram'], 'trek/pictogram'))
+                    if item['pictogram']:
+                        media.add((item['pictogram'], 'trek/pictogram'))
+                    else:
+                        missing_media.add('pictogram for %s %s' % (attr, item.get('label') or item['name']))
+            if trek.properties.difficulty['pictogram']:
+                media.add((trek.properties.difficulty['pictogram'], 'trek/pictogram'))
+            else:
+                missing_media.add('pictogram for difficulty %s' % trek.properties.difficulty['label'])
             for poi in trek.pois.all():
                 poi_dest = 'poi/{poi.pk}'.format(poi=poi)
                 for picture in poi.properties.pictures:
                     media.add((picture['url'], poi_dest))
-                media.add((poi.properties.thumbnail, poi_dest))
-                media.add((poi.properties.type['pictogram'], 'poi/pictogram'))
+                if poi.properties.thumbnail:
+                    media.add((poi.properties.thumbnail, poi_dest))
+                if poi.properties.type['pictogram']:
+                    media.add((poi.properties.type['pictogram'], 'poi/pictogram'))
+                else:
+                    missing_media.add('pictogram for poi type %s' % poi.properties.type['label'])
 
         pages_json = FlatPage.objects.filter(language=language).json
         zipfile.writestr('staticpages/pages.json', pages_json)
         for page in FlatPage.objects.filter(language=language).all():
             for item in page.parse_media():
                 media.add((item['url'], 'staticpages/images'))
+
+        if missing_media:
+            logger.warning('Missing media: ' + ', '.join(missing_media))
 
         for url, dest in media:
             url = unquote(url).lstrip('/')
