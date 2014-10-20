@@ -11,7 +11,7 @@ from zipfile import ZipFile
 
 from rando import logger
 from rando.core.models import Settings
-from rando.trekking.models import Trek, POIs
+from rando.trekking.models import Trek
 from rando.flatpages.models import FlatPage
 from rando.mobile import mobile_settings
 
@@ -85,6 +85,7 @@ class Command(BaseCommand):
         self.builder_args = {
             'tiles_headers': {"Referer": self.site_url},
             'ignore_errors': True,
+            'tiles_dir': os.path.join(settings.INPUT_TMP_ROOT, 'tiles')
         }
 
         if not options['no_tiles']:
@@ -102,9 +103,8 @@ class Command(BaseCommand):
         logger.info("Build ressources file %s..." % language)
 
         output_folder = os.path.join(settings.INPUT_DATA_ROOT, language, 'api/trek')
-        print output_folder
         if not os.path.exists(output_folder):
-            print 'mkdir', output_folder
+            logger.info("Create folder %s" % output_folder)
             os.makedirs(output_folder)
         zipfilename = os.path.join(output_folder, 'trek.zip')
         zipfile = ZipFile(zipfilename, 'w')

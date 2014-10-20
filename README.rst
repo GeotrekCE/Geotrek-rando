@@ -46,6 +46,8 @@ Copy and extract the source archive, and run install :
 Configuration
 -------------
 
+The configuration file is ``rando/settings/prod.py``
+
 Be careful to save the file with UTF-8 encoding, especially if you use accents and special characters.
 
 Most important settings :
@@ -137,6 +139,8 @@ Regularly (once a week), you can also notify Google that your sitemap changed, u
 
 For *Geotrek-mobile*, the server needs to build the ressource files (tiles,
 data, media) for each trek. Add the following schedule task :
+
+::
 
     15 * * * *  cd /path/to/application && bin/python ./manage.py build_mobile_data http://rando.server.com
 
@@ -633,6 +637,7 @@ AUTHORS
     * Anaïs Peyrucq
     * Satya Azemar
     * Camille Monchicourt
+    * Noël Martinon
 
 |makinacom|_
 

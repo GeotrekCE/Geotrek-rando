@@ -3,6 +3,7 @@ import re
 
 from easydict import EasyDict as edict
 from django.test import SimpleTestCase
+from django.test.utils import override_settings
 
 from rando.core.tests import NavigationTest
 from rando.trekking.models import Trek
@@ -73,3 +74,10 @@ class TrekkingNavigationTest(NavigationTest):
 
     def test_filters_hash(self):
         self.assertTrue(self.casper(self._get_tests_file('test_filters_hash.js')))
+
+    def test_filters_poi_panel(self):
+        self.assertTrue(self.casper(self._get_tests_file('test_poi_panel.js')))
+
+    @override_settings(POI_PANEL_OPENED=False)
+    def test_filters_poi_panel_closed(self):
+        self.assertTrue(self.casper(self._get_tests_file('test_poi_panel_closed.js')))

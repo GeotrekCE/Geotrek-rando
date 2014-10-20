@@ -577,16 +577,18 @@ function detailmapInit(map, bounds) {
         wholeBounds.extend(poisLayer.getBounds());
     });
 
-    initPOIsList(map);
+    var hasPOIs = initPOIsList(map);
 
     var informationDesksLayer = initDetailInformationDesksLayer(map, informationDeskUrl);
     informationDesksLayer.on('data:loaded', function () {
         wholeBounds.extend(informationDesksLayer.getBounds());
     });
 
-    var poisLayerSwitcher = new L.Control.TogglePOILayer(poisLayer);
-    poisLayerSwitcher.addTo(map);
-    map.poisLayerSwitcher = poisLayerSwitcher;
+    if (hasPOIs) {
+        var poisLayerSwitcher = new L.Control.TogglePOILayer(poisLayer);
+        poisLayerSwitcher.addTo(map);
+        map.poisLayerSwitcher = poisLayerSwitcher;
+    }
 
     map.whenReady(function () {
         map.switchLayer('detail');
@@ -852,86 +854,89 @@ function initDetailPoisLayer(map, poiUrl) {
 }
 
 function initPOIsList(map) {
-    if (L.DomUtil.get('pois-sidebar')) {
-        var poiSidebar = L.control.sidebar('pois-sidebar', {
-            closeButton: false,
-            position: 'right'
-        });
-
-        $(window).off('pois:shown').on('pois:shown', function () {
-            poiSidebar.show();
-        });
-        $(window).off('pois:hidden').on('pois:hidden', function () {
-            poiSidebar.hide();
-        });
-
-        $(window).off('map:ready').on('map:ready', function () {
-            map.addControl(poiSidebar);
-            
-            if($('#pois-sidebar').hasClass('default-opened'))
-                poiSidebar.show();
-            else
-                map.poisLayerSwitcher.toggleLayer();
-
-            var $sidebar = $('#pois-sidebar');
-
-            $sidebar.find('.pictogram').tooltip({placement: 'right'});
-
-            // Hilight marker when list hovered
-            $sidebar.find('.poi').hoverIntent(
-                function enter() {
-                    $(this).addClass('active');
-                    $(window).trigger('poilist:mouseover', [$(this).data('pk')]);
-                },
-                function leave() {
-                    $(this).removeClass('active');
-                    $(window).trigger('poilist:mouseout', [$(this).data('pk')]);
-                }
-            );
-
-            $sidebar.find('.jump').click(function (e) {
-                var up = $(this).hasClass('up'),
-                    $poi = $(this).closest('.poi'),
-                    pk = $poi.data('pk');
-                var $jump = $poi.next('.poi');
-                if (up) {
-                    $jump = $poi.prev('.poi');
-                }
-                $(window).trigger('poimap:mouseover', [$jump.data('pk')]);
-                e.preventDefault();
-            });
-
-            // Scroll to detail when marker hovered
-            $(window).off('poimap:mouseover').on('poimap:mouseover', function (e, pk) {
-                var $item = $sidebar.find('.poi[data-pk=' + pk + ']');
-                var scrollTo = $item.parent().scrollTop() +
-                               $item.offset().top -
-                               $item.parent().offset().top +
-                               DETAIL_POI_OPTIONS.listMarginTop;  // padding + margin
-
-                $sidebar.animate({ scrollTop: scrollTo }, DETAIL_POI_OPTIONS.scroll);
-            });
-
-            // Prevent scrolling page when bottom reached
-            $sidebar.bind('mousewheel DOMMouseScroll', function ( e ) {
-                var e0 = e.originalEvent,
-                    delta = e0.wheelDelta || -e0.detail;
-
-                this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-                e.preventDefault();
-            });
-
-            // Show carousel on click
-            $sidebar.find('.poi .picture').click(function () {
-                var pk = $(this).closest('.poi').data('pk');
-                var $popup = $("#popup-poi-carousel-" + pk);
-                $popup.on('shown', function () {
-                    $popup.carousel();
-                });
-                $popup.modal('show');
-            });
-
-        });
-
+    if (!L.DomUtil.get('pois-sidebar')) {
+        return false;
     }
+
+    var poiSidebar = L.control.sidebar('pois-sidebar', {
+        closeButton: false,
+        position: 'right'
+    });
+
+    $(window).off('pois:shown').on('pois:shown', function () {
+        poiSidebar.show();
+    });
+    $(window).off('pois:hidden').on('pois:hidden', function () {
+        poiSidebar.hide();
+    });
+
+    $(window).off('map:ready').on('map:ready', function () {
+        map.addControl(poiSidebar);
+
+        if($('#pois-sidebar').hasClass('default-opened'))
+            poiSidebar.show();
+        else
+            map.poisLayerSwitcher.toggleLayer();
+
+        var $sidebar = $('#pois-sidebar');
+
+        $sidebar.find('.pictogram').tooltip({placement: 'right'});
+
+        // Hilight marker when list hovered
+        $sidebar.find('.poi').hoverIntent(
+            function enter() {
+                $(this).addClass('active');
+                $(window).trigger('poilist:mouseover', [$(this).data('pk')]);
+            },
+            function leave() {
+                $(this).removeClass('active');
+                $(window).trigger('poilist:mouseout', [$(this).data('pk')]);
+            }
+        );
+
+        $sidebar.find('.jump').click(function (e) {
+            var up = $(this).hasClass('up'),
+                $poi = $(this).closest('.poi'),
+                pk = $poi.data('pk');
+            var $jump = $poi.next('.poi');
+            if (up) {
+                $jump = $poi.prev('.poi');
+            }
+            $(window).trigger('poimap:mouseover', [$jump.data('pk')]);
+            e.preventDefault();
+        });
+
+        // Scroll to detail when marker hovered
+        $(window).off('poimap:mouseover').on('poimap:mouseover', function (e, pk) {
+            var $item = $sidebar.find('.poi[data-pk=' + pk + ']');
+            var scrollTo = $item.parent().scrollTop() +
+                           $item.offset().top -
+                           $item.parent().offset().top +
+                           DETAIL_POI_OPTIONS.listMarginTop;  // padding + margin
+
+            $sidebar.animate({ scrollTop: scrollTo }, DETAIL_POI_OPTIONS.scroll);
+        });
+
+        // Prevent scrolling page when bottom reached
+        $sidebar.bind('mousewheel DOMMouseScroll', function ( e ) {
+            var e0 = e.originalEvent,
+                delta = e0.wheelDelta || -e0.detail;
+
+            this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+            e.preventDefault();
+        });
+
+        // Show carousel on click
+        $sidebar.find('.poi .picture').click(function () {
+            var pk = $(this).closest('.poi').data('pk');
+            var $popup = $("#popup-poi-carousel-" + pk);
+            $popup.on('shown', function () {
+                $popup.carousel();
+            });
+            $popup.modal('show');
+        });
+
+    });
+
+    return true;
 }

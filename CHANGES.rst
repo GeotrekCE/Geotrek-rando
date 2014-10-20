@@ -2,6 +2,19 @@
 CHANGELOG
 =========
 
+1.34.1dev (unreleased)
+----------------------
+
+**Bug fixes**
+
+* Do not show POI panel switcher if no POI on trek
+
+**Internal changes**
+
+* Store tiles in ``var/tmp`` folder instead of system ``/tmp``. This way, cache
+  of tiles will be kept after reboot.
+
+
 1.34.0 (2014-10-15)
 -------------------
 
