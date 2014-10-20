@@ -110,7 +110,7 @@ msgid "Transport"
 msgstr ""
 
 msgid "Access"
-msgstr "Accès"
+msgstr "Accès routier"
 
 msgid "Information desks"
 msgstr "Lieux de renseignement"
