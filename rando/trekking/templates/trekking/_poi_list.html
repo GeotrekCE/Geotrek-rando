@@ -1,6 +1,6 @@
 {% load i18n rando_tags %}
 
-<div id="pois-sidebar" class="reattach {% if POI_PANEL_OPENED %}default-opened{% endif %}" data-destination="#poi-list">
+<div id="pois-sidebar" class="{% if POI_PANEL_OPENED %}default-opened{% endif %}">
 
   <h5>{% trans "On the way..." %}</h5>
 
@@ -8,7 +8,7 @@
     {% for poi in pois %}
       <div class="poi" data-pk="{{ poi.pk }}">
         <div class="title">
-          {{ poi.type|pictogram }}
+          {{ poi.properties.type|pictogram }}
           <span class="name">{{ poi.name }}</span>
           <a class="jump up" href="#">&#x21e1;</a>
           <a class="jump down" href="#">&#x21e3;</a>
