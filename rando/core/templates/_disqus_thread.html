@@ -1,0 +1,7 @@
+<div id="disqus_thread"
+   data-disqus-shortname="{{ DISQUS_SHORTNAME }}"
+   data-disqus-identifier="{{ modelname }}-{{ object.pk }}"
+   data-disqus-url="{{ request.build_absolute_uri|slice:":-1" }}{{ object.get_absolute_url }}"
+   data-disqus-title="{{ object.title }}"
+   data-disqus-language="{{ request.LANGUAGE_CODE }}">
+</div>

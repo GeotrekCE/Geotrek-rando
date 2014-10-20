@@ -247,13 +247,7 @@
     </div>
 
     {% if DISQUS_ENABLED %}
-      <div id="disqus_thread"
-           data-disqus-shortname="{{ DISQUS_SHORTNAME }}"
-           data-disqus-identifier="trek-{{ trek.pk }}"
-           data-disqus-url="{{ request.build_absolute_uri|slice:":-1" }}{% url "trekking:trek_detail" trek.slug %}"
-           data-disqus-title="{{ object.title }}"
-           data-disqus-language="{{ request.LANGUAGE_CODE }}">
-      </div>
+      {% include "_disqus_thread.html" %}
     {% endif %}
 
   </div><!-- right column -->
