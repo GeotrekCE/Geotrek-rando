@@ -632,6 +632,8 @@ function initDetailTrekMap(map, trekGeoJson) {
     trekLayer.eachLayer(function (layer) {
         if (layer instanceof L.MultiPolyline)
             return;
+        if (layer instanceof L.Marker)
+            return;
 
         // Do not try to draw path orientation if no SVG support
         if (!$('html').hasClass('no-svg')) {

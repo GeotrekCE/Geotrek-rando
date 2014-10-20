@@ -7,6 +7,7 @@ from .models import Trek, POI
 class POIDetail(BaseView):
 
     model = POI
+    pjax_template_name = "trekking/_poi_detail.html"
 
 
 class BaseTrekView(BaseView):
@@ -16,7 +17,7 @@ class BaseTrekView(BaseView):
 
 class TrekDetail(BaseTrekView):
 
-    pjax_template_name = "trekking/_detail_panel.html"
+    pjax_template_name = "trekking/_trek_detail.html"
 
     def get_context_data(self, **kwargs):
         context = super(TrekDetail, self).get_context_data(**kwargs)
