@@ -637,6 +637,7 @@ AUTHORS
     * Anaïs Peyrucq
     * Satya Azemar
     * Camille Monchicourt
+    * Noël Martinon
 
 |makinacom|_
 
