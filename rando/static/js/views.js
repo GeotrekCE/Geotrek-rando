@@ -28,6 +28,8 @@ Rando.views.BaseView = Backbone.View.extend({
         // On PJAX load (each change of page)
         //
 
+        FastClick.attach(document.body);
+
         // Buttons
         $('body').on('click', 'a.utils', function (e){
             e.preventDefault();
@@ -242,7 +244,7 @@ Rando.views.HomeView = Rando.views.BaseView.extend({
         else
             $('#noresult').show(200);
         // Refresh label with number of results
-        $('#tab-results span.badge').html(matching.length);
+        $('#results .number span.badge').html(matching.length);
     }
 });
 
@@ -356,7 +358,7 @@ Rando.views.DetailView = Rando.views.BaseView.extend({
             $('#detailmap .helpclic').hide();
         }
 
-        $('#tab-results span.badge').html(this.app.trekCollection.length);
+        $('#results .number span.badge').html(this.app.trekCollection.length);
 
         // Cycle Trek carousel automatically on start
         if (!Rando.MOBILE) {

@@ -6,11 +6,54 @@ var App = Backbone.Router.extend({
 
     initialize: function () {
 
-        this._current = null;
+        this._currentView = null;
         this.homeView = new Rando.views.HomeView({ app: this });
         this.homeViewMobile = new Rando.views.HomeViewMobile({ app: this });
         this.detailView = new Rando.views.DetailView({ app: this });
 
+        $(window).trigger('view:ui');
+
+        this._initializeCollections();
+        this._initializePjax();
+        this._initializeWindowResize();
+
+        // Bind django-leaflet map initialization callback
+        $(window).on('map:init', function (jqEvent) {
+            this._currentView.setupMap(jqEvent.originalEvent.detail.map);
+        }.bind(this));
+
+        // Start watching URL
+        Backbone.history.start({
+            pushState: true,
+            root: "/"
+        });
+
+    },
+
+    routes: {
+        ':lang/': 'home',
+        ':lang/*slug': 'detail',
+    },
+
+    home: function (lang) {
+        console.log('home', lang);
+
+        this._currentView = Rando.MOBILE ? this.homeViewMobile : this.homeView;
+        this._currentView.render();
+
+        $(window).trigger('view:home');
+    },
+
+    detail: function (lang, slug) {
+        console.log('detail', lang, slug);
+
+        this._currentView = this.detailView;
+        this._currentView.render();
+
+        $(window).trigger('view:detail');
+    },
+
+    _initializeCollections: function () {
         this.trekCollection = new Rando.models.TrekCollection();
 
         var trekFilter = new TrekFilter();
@@ -25,12 +68,11 @@ var App = Backbone.Router.extend({
             this.trekLayer.fire('data:loaded');
         }, this);
 
-        $(window).on('map:init', function (jqEvent) {
-            this._current.setupMap(jqEvent.originalEvent.detail.map);
-        }.bind(this));
+        // Fetch collections
+        this.trekCollection.fetch();
+    },
 
-        $(window).trigger('view:ui');
-
+    _initializePjax: function () {
         // Bind PJAX events to Backbone router
         $(document).bind("pjax:success", function refreshRouter(e) {
             var url = window.location.pathname;
@@ -39,12 +81,13 @@ var App = Backbone.Router.extend({
 
         $(document).on('pjax:start', function (e) {
             $(window).trigger('view:leave');
-            this._current.remove();
+            this._currentView.remove();
         }.bind(this));
 
+        $(document).pjax('a.pjax', '#pjax-content');
+    },
 
-        FastClick.attach(document.body);
-
+    _initializeWindowResize: function () {
         Rando.MOBILE = false;
         function refreshMobile() {
             Rando.MOBILE = !!Modernizr.mq('only all and (max-width: 767px)');
@@ -52,42 +95,8 @@ var App = Backbone.Router.extend({
         refreshMobile();
         $(window).smartresize(refreshMobile);
         $(window).smartresize(Rando.utils.invalidateMaps);
+    }
 
-        $(document).pjax('a.pjax', '#pjax-content');
-
-
-        // Fetch collections
-        this.trekCollection.fetch();
-
-        // Start watching URL
-        Backbone.history.start({
-            pushState: true,
-            root: "/"
-        });
-    },
-
-    routes: {
-        ':lang/': 'home',
-        ':lang/*slug': 'detail',
-    },
-
-    home: function (lang) {
-        console.log('home', lang);
-
-        this._current = Rando.MOBILE ? this.homeViewMobile : this.homeView;
-        this._current.render();
-
-        $(window).trigger('view:home');
-    },
-
-    detail: function (lang, slug) {
-        console.log('detail', lang, slug);
-
-        this._current = this.detailView;
-        this._current.render();
-
-        $(window).trigger('view:detail');
-    },
 });
 
 

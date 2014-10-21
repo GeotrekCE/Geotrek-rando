@@ -30,7 +30,8 @@ class BaseView(PJAXResponseMixin, DetailView):
         modelname = self.model.__name__.lower()
         context[modelname] = obj = self.get_object()
         context['modelname'] = modelname
-        context['thumbnail'] = self.request.build_absolute_uri(obj.thumbnail)
+        if getattr(obj, 'thumbnail', None):
+            context['thumbnail'] = self.request.build_absolute_uri(obj.thumbnail)
         return context
 
     def get_object(self):

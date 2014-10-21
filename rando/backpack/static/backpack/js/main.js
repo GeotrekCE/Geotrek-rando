@@ -59,7 +59,7 @@
         // On detail page, show button as active if favorited
         var $detailBackpack = $(".detail-content .btn.backpack"),
             trekId = $detailBackpack.data('id');
-        if (window.backPack.contains(trekId))
+        if (backPack.contains(trekId))
             $detailBackpack.addClass('active');
         else
             $detailBackpack.removeClass('active');
@@ -92,7 +92,7 @@
         $('#results .result').each(function () {
             var $trek = $(this),
                 trekId = $trek.data('id');
-            if (window.backPack.contains(trekId)) {
+            if (backPack.contains(trekId)) {
                 $trek.find('.btn.backpack').addClass('active')
                                            .attr('title', gettext('Remove from favorites'))
                                            .removeClass('icon-backpack-add')
