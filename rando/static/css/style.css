@@ -527,6 +527,9 @@ header a {
 .leaflet-control-zoom-fullscreen:before {
   content: "e";
 }
+.leaflet-control-layers {
+  display: none;
+}
 .leaflet-control.simple-layer-switcher a.background {
   opacity: 1.0;
   width: 30px;

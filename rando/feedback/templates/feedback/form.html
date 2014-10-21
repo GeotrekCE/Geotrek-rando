@@ -1,8 +1,7 @@
-
 {% load i18n localeurl_tags leaflet_tags %}
 
 <form id="feedback-form" method="POST" action='{% locale_url request.LANGUAGE_CODE "feedback:feedback_view" %}'>
-    
+
     {% csrf_token %}
 
     {{ form.non_field_errors}}

@@ -68,8 +68,6 @@ function feedbackmapInit(map, bounds) {
 
     map.whenReady(function () {
 
-        if (map.layerscontrol) map.removeControl(map.layerscontrol);
-
         new L.Control.ResetView(getWholeBounds, {position: 'topright'}).addTo(map);
         map.addControl(new L.Control.Scale({imperial: false, position: 'bottomright'}));
 
@@ -90,7 +88,6 @@ function feedbackmapInit(map, bounds) {
         return wholeBounds;
     }
 }
-
 
 $(window).on("view:detail", function (e) {
 
