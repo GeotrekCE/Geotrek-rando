@@ -8,6 +8,7 @@ CHANGELOG
 **Bug fixes**
 
 * Do not show POI panel switcher if no POI on trek
+* Do not crash generating mobile data when media are missing
 
 **Internal changes**
 
