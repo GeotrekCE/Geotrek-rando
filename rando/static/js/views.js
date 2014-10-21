@@ -19,8 +19,28 @@ Rando.views.BaseView = Backbone.View.extend({
     },
 
     setupMap: function (map) {
+        //
+        // Setup of the map of each page
+        //
+        this._map = map;
+
+        map.attributionControl.setPrefix('');
+
+        L.control.fullscreen({
+            position: 'topright',
+            title: gettext('Fullscreen')
+        }).addTo(map);
+
         var control = new L.Control.SwitchBackgroundLayers();
         control.addTo(map);
+
+        map.addControl(new L.Control.ResetView(this.getWholeBounds.bind(this), {position: 'topright'}));
+        map.addControl(new L.Control.Scale({imperial: false, position: 'bottomright'}));
+
+        // Reduce minimap offset
+        map.whenReady(function () {
+            map.minimapcontrol.options.zoomLevelOffset = -3;
+        });
     },
 
     render: function () {
@@ -84,7 +104,11 @@ Rando.views.BaseView = Backbone.View.extend({
         Backbone.View.prototype.remove.call(this);
         this._shareWidget.remove();
         return this;
-    }
+    },
+
+    getWholeBounds: function () {
+        throw new Error("getWholeBounds() not implemented.");
+    },
 });
 
 
@@ -149,8 +173,27 @@ Rando.views.HomeView = Rando.views.BaseView.extend({
 
     setupMap: function (map) {
         Rando.views.BaseView.prototype.setupMap.call(this, map);
+
+        if (!map.restoreView()) {
+            map.fitFakeBounds(this.getWholeBounds());
+        }
+
         mainmapSetup(map, this.app);
+
+        map.whenReady(function () {
+            $(window).trigger('map:ready', [map, 'main']);
+        });
+
     },
+
+
+    getWholeBounds: function () {
+        var _extent = $(map._container).data('treks-extent');
+        var bounds = L.latLngBounds([_extent[3], _extent[0]],
+                                    [_extent[1], _extent[2]]);
+        return bounds;
+    },
+
 
     render: function () {
         Rando.views.BaseView.prototype.render.call(this);
@@ -245,7 +288,7 @@ Rando.views.HomeView = Rando.views.BaseView.extend({
             $('#noresult').show(200);
         // Refresh label with number of results
         $('#results .number span.badge').html(matching.length);
-    }
+    },
 });
 
 
@@ -255,6 +298,7 @@ Rando.views.HomeViewMobile = Rando.views.BaseView.extend({
         Rando.views.BaseView.prototype.setupMap.call(this, map);
         mainmapSetup(map, this.app);
     },
+
 
     render: function () {
         Rando.views.BaseView.prototype.render.call(this);
@@ -337,10 +381,58 @@ Rando.views.HomeViewMobile = Rando.views.BaseView.extend({
 
 Rando.views.DetailView = Rando.views.BaseView.extend({
 
+    getObjectLayer: function () {
+        if (!this._layer) {
+            var objectGeoJson = JSON.parse(document.getElementById('object-geojson').innerHTML);
+            this._layer = L.geoJson(objectGeoJson);
+        }
+        return this._layer;
+    },
+
+
+    getWholeBounds: function () {
+        return this.getObjectLayer().getBounds();
+    },
+
+
     setupMap: function (map) {
         Rando.views.BaseView.prototype.setupMap.call(this, map);
-        detailmapSetup(map, this.app);
+
+        this.getObjectLayer().addTo(map);
+
+        map.whenReady(function () {
+            // TODO map.switchLayer('detail');
+
+            // Minimize minimap by default
+            map.minimapcontrol._minimize();
+
+            // Activate wheel zoom on click
+            this._protectWheelZoom(map);
+
+            $(window).trigger('map:ready', [map, 'detail']);
+        }.bind(this));
     },
+
+
+    _protectWheelZoom: function (map) {
+        // Prevent wheel until the user clicks on the map
+        // Useful to scroll within the page, without zooming on map :)
+        // Some users do not like it, so it might become an option one day.
+        map.scrollWheelZoom.disable();
+        var enableWheel = function () {
+            map.scrollWheelZoom.enable();
+            $(map._container).css('cursor','-moz-grab');
+            $(map._container).css('cursor','-webkit-grab');
+            $(map._container).addClass('enabled');
+            $('.helpclic').hide();
+        };
+
+        $(map._container).css('cursor','pointer');
+
+        // Enable wheel zoom on clic (~ focus)
+        map.on('click', enableWheel);
+    },
+
 
     render: function () {
         Rando.views.BaseView.prototype.render.call(this);
@@ -358,22 +450,13 @@ Rando.views.DetailView = Rando.views.BaseView.extend({
             $('#detailmap .helpclic').hide();
         }
 
-        $('#results .number span.badge').html(this.app.trekCollection.length);
-
         // Cycle Trek carousel automatically on start
         if (!Rando.MOBILE) {
             $('#trek-carousel .carousel').carousel('cycle');
         }
 
-        //Load altimetric graph
-        if ($('#altitudegraph').length > 0) {
-            var jsonurl = $('#altitudegraph').data('url');
-            this._altimetricInit(jsonurl);
-        }
-
         // Tooltips
-        $('#usages div, #themes div').tooltip();
-        $('#object-identity .info').tooltip();
+        $('#object-identity').tooltip();
         $('a.print.disabled').tooltip({placement: 'left'});
 
         // Load Disqus thread (if enabled)
@@ -392,41 +475,4 @@ Rando.views.DetailView = Rando.views.BaseView.extend({
 
         return this;
     },
-
-
-    _altimetricInit: function(jsonurl) {
-        /*
-         * Load altimetric profile from JSON
-         */
-        $.getJSON(jsonurl, function(data) {
-            function updateSparkline() {
-                $('#profilealtitude').sparkline(data.profile, L.Util.extend({
-                    tooltipSuffix: ' m',
-                    numberDigitGroupSep: '',
-                    width: '100%',
-                    height: 100
-                }, ALTIMETRIC_PROFILE_OPTIONS));
-            }
-
-            updateSparkline();
-
-            $(window).smartresize(function() {
-                updateSparkline();
-            });
-
-            $('#profilealtitude').bind('sparklineRegionChange', function(ev) {
-                var sparkline = ev.sparklines[0],
-                    region = sparkline.getCurrentRegionFields();
-                    value = region.y;
-                $('#mouseoverprofil').text(Math.round(region.x) +"m");
-                // Trigger global event
-                $('#profilealtitude').trigger('hover:distance', region.x);
-            }).bind('mouseleave', function() {
-                $('#mouseoverprofil').text('');
-                $('#profilealtitude').trigger('hover:distance', null);
-            });
-
-        });
-    }
-
 });

@@ -150,7 +150,10 @@
         <script src="{% static "js/vendor/leaflet.overintent.js" %}"></script>
         <script src="{% static "js/vendor/L.Control.Sidebar.js" %}"></script>
         <script src="{% static "js/vendor/jquery.easing-custom.js" %}"></script>
+        <script src="{% static "js/vendor/underscore.js" %}"></script>
+        <script src="{% static "js/vendor/backbone.js" %}"></script>
 
+        <script src="{% static "js/map-tools.js" %}"></script>
 
         {% if BACKPACK_ENABLED %}
         <script src="{% static "backpack/js/main.js" %}"></script>
@@ -160,34 +163,29 @@
         <script src="{% static "js/filter-hash.js" %}"></script>
         {% endif %}
 
-        <script src="{% static "js/map-tools.js" %}"></script>
         <script src="{% static "trekking/js/map.js" %}"></script>
         <script src="{% static "trekking/js/filter.js" %}"></script>
-
-        <script src="{% static "js/vendor/underscore.js" %}"></script>
-        <script src="{% static "js/vendor/backbone.js" %}"></script>
-
-        <script src="{% static "js/settings.js" %}"></script>
-        <script src="{% static "js/models.js" %}"
-                data-treks-url="{% locale_url request.LANGUAGE_CODE "core:fileserve" treks_url %}"></script>
-        <script src="{% static "js/views.js" %}"></script>
-        <script src="{% static "js/utils.js" %}"></script>
-        <script src="{% static "js/main.js" %}"></script>
-
-
-        {% if POPUP_HOME_ENABLED %}
-        <script src="{% static "js/popup-home.js" %}"></script>
-        {% endif %}
 
         {% if FEEDBACK_FORM_ENABLED %}
         <script src="{% static "feedback/js/ajaxcsrf.js" %}"></script>
         <script src="{% static "feedback/js/form.popup.js" %}"></script>
         {% endif %}
 
+        {% if POPUP_HOME_ENABLED %}
+        <script src="{% static "js/popup-home.js" %}"></script>
+        {% endif %}
+
         {% if VIEW3D_ENABLED %}
         <script src="{% static "view3d/main.js" %}"></script>
         {% endif %}
 
+        <script src="{% static "js/settings.js" %}"></script>
+        <script src="{% static "js/models.js" %}"
+                data-treks-url="{% locale_url request.LANGUAGE_CODE "core:fileserve" treks_url %}"></script>
+        <script src="{% static "js/views.js" %}"></script>
+        <script src="{% static "trekking/js/views.js" %}"></script>
+        <script src="{% static "js/utils.js" %}"></script>
+        <script src="{% static "js/main.js" %}"></script>
         {% endcompress %}
 
 

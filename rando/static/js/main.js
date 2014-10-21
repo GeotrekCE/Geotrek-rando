@@ -9,7 +9,7 @@ var App = Backbone.Router.extend({
         this._currentView = null;
         this.homeView = new Rando.views.HomeView({ app: this });
         this.homeViewMobile = new Rando.views.HomeViewMobile({ app: this });
-        this.detailView = new Rando.views.DetailView({ app: this });
+        this.detailView = new Rando.views.TrekDetailView({ app: this });
 
         $(window).trigger('view:ui');
 
