@@ -136,6 +136,14 @@
     <div class="row-fluid meta">
 
       <div class="span6">
+
+        <div id="poi-list">
+          <!-- POIs list -->
+          {% if pois %}
+            {% include "trekking/_poi_list_panel.html" %}
+          {% endif %}
+        </div>
+
         <div id="altitudegraph" data-url="{% url "core:fileserve" trek.altimetric_profile %}">
           <h4>{% trans "Altitude profile" %}</h4>
           <p class="axislabel">{% trans "Altitude (m)" %}</p>
@@ -206,7 +214,7 @@
                 <h5>{% trans "Sharing departure" %}</h5>
                 <ul>
               {% endif %}
-              <li><a href="{% locale_url request.LANGUAGE_CODE "trekking:trek_detail" relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+              <li><a class="pjax" href="{% locale_url request.LANGUAGE_CODE "trekking:trek_detail" relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
               {% if forloop.last %}</ul>{% endif %}
             {% endfor %}
 
@@ -224,7 +232,7 @@
                 <h5>{% trans "Sharing circuit" %}</h5>
                 <ul>
               {% endif %}
-              <li><a href="{% locale_url request.LANGUAGE_CODE "trekking:trek_detail" relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
+              <li><a class="pjax" href="{% locale_url request.LANGUAGE_CODE "trekking:trek_detail" relationship.trek.slug %}">{{ relationship.trek.name }}</a></li>
               {% if forloop.last %}</ul>{% endif %}
             {% endfor %}
           </div>
@@ -240,11 +248,3 @@
 
   </div><!-- right column -->
 {% endblock maincontent %}
-
-
-{% block extracontent %}
-  <!-- POIs list -->
-  {% if pois %}
-     {% include "trekking/_poi_list_panel.html" %}
-  {% endif %}
-{% endblock extracontent %}
