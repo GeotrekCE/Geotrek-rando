@@ -1,11 +1,3 @@
-$(window).on('map:init', function (e) {
-    var data = e.detail || e.originalEvent.detail,
-        map = data.map;
-    var control = new L.Control.SwitchBackgroundLayers();
-    control.addTo(map);
-});
-
-
 var FakeBoundsMapMixin = {
     __fakeBounds: function (bounds) {
         /* Depending on sidebar open/close, we correct the bounds of the map
@@ -59,7 +51,7 @@ var FakeBoundsMapMixin = {
         if (L.point(x, y).distanceTo(current) < options.minimumDistance)
             return;
 
-        return this.setView(point, this._zoom, { pan: options })
+        return this.setView(point, this._zoom, { pan: options });
     }
 };
 

@@ -34,7 +34,6 @@ Rando.models.TrekCollection = Rando.models.ResultsCollection.extend({
 
     url: function () {
         var url = $('[data-treks-url]').data('treks-url');
-        console.log(url);
         return url;
     }
 });

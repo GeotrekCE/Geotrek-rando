@@ -18,6 +18,11 @@ Rando.views.BaseView = Backbone.View.extend({
         this._shareWidget = new Rando.views.ShareWidget();
     },
 
+    setupMap: function (map) {
+        var control = new L.Control.SwitchBackgroundLayers();
+        control.addTo(map);
+    },
+
     render: function () {
         //
         // On PJAX load (each change of page)
@@ -141,6 +146,7 @@ Rando.views.ShareWidget = Backbone.View.extend({
 Rando.views.HomeView = Rando.views.BaseView.extend({
 
     setupMap: function (map) {
+        Rando.views.BaseView.prototype.setupMap.call(this, map);
         mainmapSetup(map, this.app);
     },
 
@@ -244,6 +250,7 @@ Rando.views.HomeView = Rando.views.BaseView.extend({
 Rando.views.HomeViewMobile = Rando.views.BaseView.extend({
 
     setupMap: function (map) {
+        Rando.views.BaseView.prototype.setupMap.call(this, map);
         mainmapSetup(map, this.app);
     },
 
@@ -329,6 +336,7 @@ Rando.views.HomeViewMobile = Rando.views.BaseView.extend({
 Rando.views.DetailView = Rando.views.BaseView.extend({
 
     setupMap: function (map) {
+        Rando.views.BaseView.prototype.setupMap.call(this, map);
         detailmapSetup(map, this.app);
     },
 
