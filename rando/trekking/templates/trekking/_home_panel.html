@@ -39,9 +39,11 @@
       <a href="{% locale_url settings.languages.default "trekking:home" %}" class="change-lang">{% trans "Change language" %}</a>
       {% endif %}
     </p>
+    <div class="list">
     {% for trek in treks %}
         {% include "trekking/_trek_result.html" %}
     {% endfor %}
+    </div>
   </div>
 
 </div>

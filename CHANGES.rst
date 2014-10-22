@@ -5,7 +5,9 @@ CHANGELOG
 1.35dev (unreleased)
 --------------------
 
-* Nothing changed yet.
+**New features**
+
+* Move results that are out of map viewport at the end of the list (fixes #202)
 
 
 1.34.1 (2014-10-21)
