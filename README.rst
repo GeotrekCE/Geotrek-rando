@@ -37,8 +37,8 @@ Copy and extract the source archive, and run install :
 
 ::
 
-    unzip vX.Y.Z.zip
-    cd Geotrek-rando-vX.Y.Z/
+    unzip Geotrek-rando-X.Y.Z.zip
+    cd Geotrek-rando-X.Y.Z/
 
     make install deploy
 
@@ -158,7 +158,7 @@ Download and extract the new version :
 
 ::
 
-    unzip vX.Y.Z.zip
+    unzip Geotrek-rando-X.Y.Z.zip
     cd Geotrek-rando-X.Y.Z/
 
 
