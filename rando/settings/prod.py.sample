@@ -58,12 +58,6 @@ RECAPTCHA_PRIVATE_KEY = '6Ldrbu4SAAAAAPbt5g3Vw2BA_LGL1-BZwaBSsnfz'
 
 
 #
-# Flat pages customizations
-#
-# FLATPAGES_POLICY_PAGE = 3
-#
-
-#
 # Layers customizations
 #......................
 #
@@ -95,6 +89,9 @@ RECAPTCHA_PRIVATE_KEY = '6Ldrbu4SAAAAAPbt5g3Vw2BA_LGL1-BZwaBSsnfz'
 #     'a-savoir': u"À Savoir",
 # }
 
+# Id of policy page
+# FLATPAGES_POLICY_PAGE = 003
+
 # Hide pages from menu
 #FLATPAGES_TARGETS = {
 #    u"À Savoir": 'hidden',
@@ -117,9 +114,6 @@ RECAPTCHA_PRIVATE_KEY = '6Ldrbu4SAAAAAPbt5g3Vw2BA_LGL1-BZwaBSsnfz'
 
 #
 # Rename the notion of "park center"
-#
-# Id of policy page
-# FLATPAGES_POLICY_PAGE = 003
 #
 # PARK_CENTER_WARNING = {
 #     'en': 'This trek is within park center',
