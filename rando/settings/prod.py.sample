@@ -75,6 +75,9 @@ RECAPTCHA_PRIVATE_KEY = '6Ldrbu4SAAAAAPbt5g3Vw2BA_LGL1-BZwaBSsnfz'
 # Zoom level where map background switches from 'main' to 'detail' on home
 # SWITCH_DETAIL_ZOOM = 12
 
+# Limit to zoom 16.
+# LEAFLET_CONFIG['MAX_ZOOM'] = 16
+
 # Tourism Layers
 #...............
 #
