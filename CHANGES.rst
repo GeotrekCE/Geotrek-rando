@@ -2,6 +2,15 @@
 CHANGELOG
 =========
 
+2.0 (unreleased)
+----------------
+
+**Internal changes**
+
+* Complete refactor of synchronization code
+* Split logics for trekking, generalize for other kinds of objects
+
+
 1.34.1 (2014-10-21)
 ----------------------
 
