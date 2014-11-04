@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>{{ object.properties.name }} - {% trans "3D View" %}</title>
+    <title>{{ trek.name }} - {% trans "3D View" %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static "view3d/main.css" %}" />
@@ -36,14 +36,14 @@
     <script src="{% static "view3d/Rando.ExamineCamera.js" %}"></script>
     <script src="{% static "view3d/Rando.HikerCamera.js" %}"></script>
 </head>
-<body data-dem-url="{% url "core:fileserve" object.properties.elevation_area_url %}"
-      data-profile-url="{% url "core:fileserve" object.properties.altimetric_profile %}"
-      data-poi-url="{% url "core:fileserve" object.properties.poi_layer %}"
+<body data-dem-url="{% url "core:fileserve" trek.elevation_area_url %}"
+      data-profile-url="{% url "core:fileserve" trek.altimetric_profile %}"
+      data-poi-url="{% url "core:fileserve" trek.poi_layer %}"
       data-static-url="{% static "view3d/" %}"
       data-tiles-number-limit="{{ view.TILES_NUMBER_LIMIT }}"
       data-tiles-url="{{ view.tiles.url }}">
     <div class="trek-info">
-        {{ object.properties.name }}
+        {{ trek.name }}
     </div>
     <div id="rootDiv">
         <div class="not-supported">

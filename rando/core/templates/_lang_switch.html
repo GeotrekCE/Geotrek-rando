@@ -2,14 +2,14 @@
 <div id="lang-switch" class="hidden-tablet hidden-phone reattach" data-destination="header">
   <ul>
     {% if trek %}
-      {% for lang in trek.properties.published_status %}
+      {% for lang in trek.published_status %}
           {% if lang.status %}
             {% if lang.lang == request.LANGUAGE_CODE %}
             <li class="active">
             {% else %}
             <li>
             {% endif %}
-            <a href="{% locale_url lang.lang "trekking:redirect" pk=object.properties.pk %}">
+            <a href="{% locale_url lang.lang "trekking:trek_redirect" pk=trek.pk %}">
               <span class="hidden">{{ lang.language }}</span>
               <img src="{% get_static_prefix %}img/flags/{{ lang.lang }}.png" alt="{{ lang.language }}">
             </a>
@@ -23,7 +23,7 @@
           {% else %}
           <li>
           {% endif %}
-          <a href="{% locale_url lang "trekking:home" %}">
+          <a href="{% locale_url lang "core:home" %}">
             <span class="hidden">{{ lang }}</span>
             <img src="{% get_static_prefix %}img/flags/{{ lang }}.png" alt="{{ lang }}">
           </a>

@@ -1,0 +1,44 @@
+{% load i18n rando_tags %}
+
+<div id="pois-sidebar" class="reattach {% if POI_PANEL_OPENED %}default-opened{% endif %}" data-destination="#poi-list">
+
+  <h5>{% trans "On the way..." %}</h5>
+
+  <div class="pois-list">
+    {% for poi in pois %}
+      <div class="poi" data-pk="{{ poi.pk }}">
+        <div class="title">
+          {{ poi.properties.type|pictogram }}
+          <span class="name">{{ poi.name }}</span>
+          <a class="jump up" href="#">&#x21e1;</a>
+          <a class="jump down" href="#">&#x21e3;</a>
+        </div>
+        <div class="content">
+          <p>{{ poi.description|safe }}</p>
+          {% if poi.pictures|length > 0 %}
+          <div class="picture">
+            <img src="{{ poi.pictures.0.url }}" alt="{{ poi.pictures.0.title }}" />
+
+            <div class="carousel-caption">
+              {% if poi.pictures|length > 1 %}
+                <span class="pictures-info pull-right icon-camera">&times;{{ poi.pictures|length }}</span>
+              {% endif %}
+              <p>{{ poi.pictures.0.legend }} {% if poi.pictures.0.author %}({{ poi.pictures.0.author }}){% endif %}</p>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div id="pois-carousels-{{ trek.pk }}" class="reattach" data-destination="body">
+{% for poi in pois %}
+  <div id="popup-poi-carousel-{{ poi.pk }}" class="popup poi modal hide fade" role="dialog" aria-labelledby="poi-carousel" aria-hidden="true">
+      <div class="modal-body">
+      {% include "_carousel.html" with prefix=poi.pk pictures=poi.pictures default="False" %}
+    </div>
+  </div>
+{% endfor %}
+</div>

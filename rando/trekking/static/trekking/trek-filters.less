@@ -1,0 +1,44 @@
+.filters-bar {
+
+  .theme {
+    margin-right: 0;
+    width:auto;
+    float:left;
+
+    .filter {
+      display: inline-block;
+      text-align: center;
+      vertical-align: top;
+      max-width: 53px;
+      margin-left: 2px;
+
+      p {
+        margin: 0;
+        padding: 0;
+        font-size: 7pt;
+        line-height: 7pt;
+        text-align: center;
+
+        -ms-word-break: hyphenate;
+        word-break: hyphenate;
+        -webkit-hyphens: auto;
+           -moz-hyphens: auto;
+                hyphens: auto;
+      }
+
+      &.active {
+        img {
+          margin-left: -25px;
+        }
+
+        p {
+          color: orange;
+        }
+      }
+
+      img:hover {
+        margin-left: -25px;
+      }
+    }
+  }
+}

@@ -72,10 +72,6 @@ class JSONModel(object):
         t = os.path.getmtime(self.objects.fullpath)
         return datetime.datetime.fromtimestamp(t)
 
-    @property
-    def pk(self):
-        return self.properties.pk
-
     @classproperty
     def objects(cls):
         return cls.manager_class(cls, cls.filepath)
@@ -90,6 +86,11 @@ class JSONModel(object):
 class GeoJSONModel(JSONModel):
     manager_class = GeoJSONManager
 
+    def __getattr__(self, name):
+        if name in self.properties:
+            return self.properties[name]
+        return super(GeoJSONModel, self).__getattribute__(name)
+
     @property
     def geojson(self):
         return json.dumps({
@@ -103,3 +104,29 @@ class GeoJSONModel(JSONModel):
 
 class Settings(JSONModel):
     filepath = 'api/settings.json'
+
+
+class AttachmentFile(JSONModel):
+    filepath = 'api/{objectname}/{object__pk}/attachments.json'
+
+
+class PublishedModel(GeoJSONModel):
+
+    @property
+    def short_description(self):
+        """The short_description property."""
+        return self.description[:100] + '...'
+
+    @property
+    def attachments(self):
+        return AttachmentFile.objects.filter(objectname=self.__class__.__name__.lower(),
+                                             object__pk=self.pk,
+                                             language=self.objects.language)
+
+    @property
+    def main_image(self):
+        try:
+            first = self.properties.pictures[0]
+            return first['url']
+        except IndexError:
+            return None

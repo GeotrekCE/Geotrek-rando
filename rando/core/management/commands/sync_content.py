@@ -6,6 +6,7 @@ from os.path import join, getmtime, dirname, getsize
 from os import makedirs, utime
 import errno
 import urllib2
+import json
 
 from django.core.management.base import BaseCommand
 from django.utils.http import http_date, parse_http_date_safe
@@ -68,6 +69,8 @@ def recursive_copy(root_src_dir, root_dst_dir):
 class InputFile(object):
 
     def __init__(self, url, store=None, language=None, client=None, stdout=None, stderr=None):
+        self.initkwargs = dict(store=store, language=language, client=client, stdout=stdout, stderr=stderr)
+
         url = url[1:] if url.startswith('/') else url
         self.url = url
 
@@ -90,7 +93,7 @@ class InputFile(object):
         self.reply = None
 
     def pull_if_modified(self):
-        self.pull(ifmodified=True)
+        return self.pull(ifmodified=True)
 
     def pull(self, ifmodified=False):
         """
@@ -118,7 +121,7 @@ class InputFile(object):
 
         if self.reply.status_code in (304,):
             cprint("%s (Up-to-date)" % self.reply.status_code, 'green', attrs=['bold'], file=self.stdout)
-            return
+            return self
         elif self.reply.status_code != requests.codes.ok:
             cprint("%s (Failed)" % self.reply.status_code, 'red', attrs=['bold'], file=self.stderr)
             raise IOError("Failed to retrieve %s (code: %s)" % (self.reply.url,
@@ -136,10 +139,28 @@ class InputFile(object):
         if last_modified:
             utime(self.path_tmp, (last_modified, last_modified))
 
+        return self
+
     def content(self):
         if not self.reply.content:
             return open(self.path, 'rb').read()
         return self.reply.content
+
+
+class JsonInputFile(InputFile):
+
+    def serialize_json(self, data):
+        """
+        Serializes JSON with less precision.
+        """
+        backup_encoder = getattr(json.encoder, 'c_make_encoder', None)
+        backup_repr = json.encoder.FLOAT_REPR
+        json.encoder.c_make_encoder = None
+        json.encoder.FLOAT_REPR = lambda o: format(o, '.%sf' % settings.COORDS_FORMAT_PRECISION)
+        serialized = json.dumps(data)
+        json.encoder.FLOAT_REPR = backup_repr
+        json.encoder.c_make_encoder = backup_encoder
+        return serialized
 
 
 class SyncSession(object):

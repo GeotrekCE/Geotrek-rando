@@ -1,4 +1,4 @@
-{% load i18n static leaflet_tags rando_tags localeurl_tags %}
+{% load i18n static leaflet_tags rando_tags localeurl_tags trekking_tags %}
 
 {% include "_share.html" with title=TITLE %}
 
@@ -6,7 +6,7 @@
   <title>{{ TITLE }}</title>
 {% endif %}
 
-{% include "trekking/_filters.html" %}
+{% trekking_filters %}
 
 <!--  search-bar-->
 

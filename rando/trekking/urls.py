@@ -1,11 +1,17 @@
 from django.conf import settings
 from django.conf.urls import patterns, url
-from .views import HomeView, TrekView, trek_redirect
 from django.views.decorators.cache import cache_page
+
+from rando.core import views as core_views
+from rando.trekking import views as trekking_views
+from rando.trekking import models as trekking_models
 
 
 urlpatterns = patterns('',
-    url(r'^$', cache_page(settings.CACHE_DURATION)(HomeView.as_view()), name="home"),
-    url(r'^(?P<slug>[-\w]+)$', cache_page(settings.CACHE_DURATION)(TrekView.as_view()), name="detail"),
-    url(r'^to/(?P<pk>\d+)$', trek_redirect, name="redirect"),
+    url(r'^poi/(?P<slug>[-\w]+)$', cache_page(settings.CACHE_DURATION)(trekking_views.POIDetail.as_view()), name="poi_detail"),
+    url(r'^poi/to/(?P<pk>\d+)$', core_views.DetailRedirect.as_view(model=trekking_models.POI), name="poi_redirect"),
+
+    # Treks have no URL prefix, they are here since version 1:
+    url(r'^to/(?P<pk>\d+)$', core_views.DetailRedirect.as_view(model=trekking_models.Trek), name="trek_redirect"),
+    url(r'^(?P<slug>[-\w]+)$', cache_page(settings.CACHE_DURATION)(trekking_views.TrekDetail.as_view()), name="trek_detail"),
 )

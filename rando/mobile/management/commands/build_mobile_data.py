@@ -118,36 +118,36 @@ class Command(BaseCommand):
         for trek in treks.all():
             arcname = os.path.join('trek/{trek.pk}/pois.geojson'.format(trek=trek))
             zipfile.write(trek.pois.fullpath, arcname)
-            url = trek.properties.altimetric_profile.replace('.json', '.svg')
+            url = trek.altimetric_profile.replace('.json', '.svg')
             fullpath = os.path.join(settings.INPUT_DATA_ROOT, url.lstrip('/'))
             arcname = os.path.join('trek/{trek.pk}/profile.svg'.format(trek=trek))
             zipfile.write(fullpath, arcname)
             trek_dest = 'trek/{trek.pk}'.format(trek=trek)
-            for picture in trek.properties.pictures:
+            for picture in trek.pictures:
                 media.add((picture['url'], trek_dest))
-            for desk in trek.properties.information_desks:
+            for desk in trek.information_desks:
                 if desk['photo_url']:
                     media.add((desk['photo_url'], trek_dest))
             for attr in ('usages', 'themes', 'networks'):
-                for item in trek.properties.get(attr):
+                for item in trek.get(attr):
                     if item['pictogram']:
                         media.add((item['pictogram'], 'trek/pictogram'))
                     else:
                         missing_media.add('pictogram for %s %s' % (attr, item.get('label') or item['name']))
-            if trek.properties.difficulty['pictogram']:
-                media.add((trek.properties.difficulty['pictogram'], 'trek/pictogram'))
+            if trek.difficulty['pictogram']:
+                media.add((trek.difficulty['pictogram'], 'trek/pictogram'))
             else:
-                missing_media.add('pictogram for difficulty %s' % trek.properties.difficulty['label'])
+                missing_media.add('pictogram for difficulty %s' % trek.difficulty['label'])
             for poi in trek.pois.all():
                 poi_dest = 'poi/{poi.pk}'.format(poi=poi)
-                for picture in poi.properties.pictures:
+                for picture in poi.pictures:
                     media.add((picture['url'], poi_dest))
-                if poi.properties.thumbnail:
-                    media.add((poi.properties.thumbnail, poi_dest))
+                if poi.thumbnail:
+                    media.add((poi.thumbnail, poi_dest))
                 if poi.properties.type['pictogram']:
-                    media.add((poi.properties.type['pictogram'], 'poi/pictogram'))
+                    media.add((poi.type['pictogram'], 'poi/pictogram'))
                 else:
-                    missing_media.add('pictogram for poi type %s' % poi.properties.type['label'])
+                    missing_media.add('pictogram for poi type %s' % poi.type['label'])
 
         pages_json = FlatPage.objects.filter(language=language).json
         zipfile.writestr('staticpages/pages.json', pages_json)
@@ -197,7 +197,7 @@ class Command(BaseCommand):
         self.builder_args['tiles_url'] = self.detail_tiles_url
         self.builder_args['tile_format'] = format_from_url(self.detail_tiles_url)
 
-        logger.info("Build tiles file for trek '%s'..." % trek.properties.name)
+        logger.info("Build tiles file for trek '%s'..." % trek.name)
         trek_file = os.path.join(self.output_folder, 'trek-%s.zip' % trek.id)
         tmp_trek_file = trek_file + '.tmp'
 

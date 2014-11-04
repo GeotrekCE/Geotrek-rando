@@ -33,9 +33,9 @@ def kilo(value):
 
 @register.filter
 def thumbnail(trek):
-    if trek.properties.thumbnail:
-        assert trek.properties.thumbnail.startswith(settings.MEDIA_URL)
-        return trek.properties.thumbnail
+    if trek.thumbnail:
+        assert trek.thumbnail.startswith(settings.MEDIA_URL)
+        return trek.thumbnail
     return overridable("img/default-thumbnail.jpg")
 
 
