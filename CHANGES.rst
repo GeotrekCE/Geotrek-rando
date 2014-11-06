@@ -2,6 +2,13 @@
 CHANGELOG
 =========
 
+1.34.2 (unreleased)
+-------------------
+
+**Bug fixes**
+
+* Prevent emails to be sent twice on synchronization errors
+
 1.34.1 (2014-10-21)
 ----------------------
 
