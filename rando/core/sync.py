@@ -62,16 +62,24 @@ class PublishedCollection(GeoJSONCollection):
         if not self.full:
             return features
 
-        # Fill this GeoJSON with detail properties
+        # Download list JSON
         source = 'api/{objectname}s/'.format(objectname=self.objectname)
-        path = 'api/{objectname}s/{objectname}s.json'.format(objectname=self.objectname)
+        path = source + 'index.json'
         jsonfile = self.download_resource(url=source, store=path, klass=JsonInputFile, language=self.language)
 
         records = json.loads(jsonfile.content())
         records_by_id = {}
         for record in records:
-            records_by_id[record['id']] = record
+            recordid = record['id']
+            records_by_id[recordid] = record
 
+            # Download detail JSON
+            source = 'api/{objectname}s/{id}/'.format(objectname=self.objectname, id=recordid)
+            path = source + 'index.json'
+            self.download_resource(url=source, store=path, klass=JsonInputFile, language=self.language)
+
+
+        # Fill this GeoJSON with detail properties
         for feature in features:
             properties = feature['properties']
             details = records_by_id[feature['id']]
