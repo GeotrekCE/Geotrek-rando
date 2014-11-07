@@ -80,6 +80,8 @@ class InputFile(object):
         self.stderr = stderr or sys.stderr
 
         unquoted = urllib2.unquote(self.url)
+        if unquoted.endswith('/'):
+            unquoted += 'index.json'
 
         # Allow to store at a different place
         # (e.g. url is ``/object/18/file/`` and local is ``/path-18.json``)

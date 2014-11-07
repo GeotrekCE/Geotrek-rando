@@ -64,8 +64,7 @@ class PublishedCollection(GeoJSONCollection):
 
         # Download list JSON
         source = 'api/{objectname}s/'.format(objectname=self.objectname)
-        path = source + 'index.json'
-        jsonfile = self.download_resource(url=source, store=path, klass=JsonInputFile, language=self.language)
+        jsonfile = self.download_resource(url=source, klass=JsonInputFile, language=self.language)
 
         records = json.loads(jsonfile.content())
         records_by_id = {}
@@ -75,8 +74,7 @@ class PublishedCollection(GeoJSONCollection):
 
             # Download detail JSON
             source = 'api/{objectname}s/{id}/'.format(objectname=self.objectname, id=recordid)
-            path = source + 'index.json'
-            self.download_resource(url=source, store=path, klass=JsonInputFile, language=self.language)
+            self.download_resource(url=source, klass=JsonInputFile, language=self.language)
 
 
         # Fill this GeoJSON with detail properties
