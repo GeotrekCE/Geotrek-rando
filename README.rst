@@ -561,6 +561,23 @@ Synchronization failed with 404
 Try to access this URL manually and check the logs on the remote server.
 
 
+=======
+WEB API
+=======
+
+=================  =======================================
+Content            URL
+=================  =======================================
+Treks list         ``/<LANG>/files/api/treks/``
+Trek detail        ``/<LANG>/files/api/treks/<ID>/``
+Treks geometries   ``/<LANG>/files/api/trek/trek.geojson``
+-----------------  ---------------------------------------
+POIs list          ``/<LANG>/files/api/pois/``
+POI detail         ``/<LANG>/files/api/pois/<ID>/``
+POIs geometries    ``/<LANG>/files/api/poi/poi.geojson``
+=================  =======================================
+
+
 ===========
 DEVELOPMENT
 ===========
