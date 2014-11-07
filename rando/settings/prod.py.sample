@@ -72,7 +72,7 @@ RECAPTCHA_PRIVATE_KEY = '6Ldrbu4SAAAAAPbt5g3Vw2BA_LGL1-BZwaBSsnfz'
 #     "NO_GLOBALS": False
 # }
 #
-# Zoom level where map background switches from 'main' to 'detail' on home
+# Zoom level where map background switches from 'main' to 'detail' on home and detail pages maps
 # SWITCH_DETAIL_ZOOM = 12
 
 # Limit to zoom 16 on home and details pages maps
