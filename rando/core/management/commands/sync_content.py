@@ -132,7 +132,8 @@ class InputFile(object):
         mkdir_p(dirname(self.path_tmp))
         with open(self.path_tmp, 'wb') as f:
             f.write(self.content())
-            f.write("\n")
+            f.flush()
+
         logger.debug("  %s\n" % self.path.replace(settings.INPUT_DATA_ROOT, ''))
 
         last_modified = parse_http_date_safe(self.reply.headers.get('last-modified'))

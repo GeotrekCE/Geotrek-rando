@@ -27,7 +27,6 @@ class InformationDeskInputFile(GeoJSONCollection):
 class POIListInputFile(PublishedCollection):
 
     objectname = 'poi'
-    full = False
 
     def handle_record(self, record):
         record = super(POIListInputFile, self).handle_record(record)
@@ -44,7 +43,7 @@ class POIListInputFile(PublishedCollection):
 class TrekListInputFile(PublishedCollection):
 
     objectname = 'trek'
-    full = True
+    full = True  # Complete properties with detail json
 
     def filter_record(self, record):
         filtered = super(TrekListInputFile, self).filter_record(record)
@@ -112,7 +111,7 @@ class TrekListInputFile(PublishedCollection):
             return record
 
         self.download_resource(properties['altimetric_profile'])
-        self.download_resource(properties['altimetric_profile_svg'])
+        self.download_resource(properties['elevation_svg_url'])
 
         for theme in properties['themes']:
             self.download_resource(theme['pictogram'])
