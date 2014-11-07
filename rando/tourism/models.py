@@ -7,3 +7,7 @@ class DataSource(JSONModel):
 
 class InformationDesk(GeoJSONModel):
     filepath = 'api/informationdesk/informationdesk.geojson'
+
+
+class TouristicContentCategories(JSONModel):
+    filepath = 'api/touristiccontent/categories/'

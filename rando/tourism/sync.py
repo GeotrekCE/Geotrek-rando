@@ -23,6 +23,14 @@ class DataSourceInputFile(JSONCollection):
         return record
 
 
+class TouristicContentCategoriesInputFile(JSONCollection):
+
+    def handle_record(self, record):
+        if self.language == settings.LANGUAGE_CODE:
+            self.download_resource(record['pictogram'])
+        return record
+
+
 class InformationDeskInputFile(GeoJSONCollection):
 
     def handle_record(self, record):
@@ -58,3 +66,4 @@ def sync_content_tourism(sender, **kwargs):
 
         DataSourceInputFile(url=tourism_models.DataSource.filepath, **inputkwlang).pull_if_modified()
         InformationDeskInputFile(url=tourism_models.InformationDesk.filepath, **inputkwlang).pull_if_modified()
+        TouristicContentCategoriesInputFile(url=tourism_models.TouristicContentCategories.filepath, **inputkwlang).pull_if_modified()
