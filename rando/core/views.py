@@ -58,6 +58,8 @@ def fileserve(request, path):
         mimetypes.add_type('application/vnd.google-earth.kmz', '.kmz')
 
     path = path[1:] if path.startswith('/') else path
+    path = path + 'index.json' if path.endswith('/') else path
+
     if not os.path.exists(os.path.join(settings.INPUT_DATA_ROOT, path)):
         path = os.path.join(request.LANGUAGE_CODE, path)
     return static_serve(request, path, document_root=settings.INPUT_DATA_ROOT)
