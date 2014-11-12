@@ -9,6 +9,8 @@ CHANGELOG
 
 * Complete refactor of synchronization code
 * Split logics for trekking, generalize for other kinds of objects
+* The same API as *Geotrek-admin* is now served under ``/files/api/``
+* Detail JSON of objects are now served under ``files/api/<TYPE>s/<ID>/``
 
 
 1.34.1 (2014-10-21)
