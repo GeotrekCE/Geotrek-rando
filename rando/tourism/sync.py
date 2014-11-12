@@ -11,7 +11,7 @@ class DataSourceInputFile(JSONCollection):
     def handle_record(self, record):
         geojson_url = record['geojson_url']
         try:
-            self.download_ressource(geojson_url, language=self.language)
+            self.download_resource(geojson_url, language=self.language)
         except IOError:
             logger.error("Could not retrieve datasource %s" % geojson_url)
             if not settings.TOURISM_DATASOURCE_FAULT_TOLERANT:
