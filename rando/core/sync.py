@@ -58,10 +58,6 @@ class PublishedCollection(GeoJSONCollection):
     def fetch_list(self, content):
         features = super(PublishedCollection, self).fetch_list(content)
 
-        # Mode light : do not complete GeoJSON properties
-        if not self.full:
-            return features
-
         # Download list JSON
         source = 'api/{objectname}s/'.format(objectname=self.objectname)
         jsonfile = self.download_resource(url=source, klass=JsonInputFile, language=self.language)
@@ -76,6 +72,9 @@ class PublishedCollection(GeoJSONCollection):
             source = 'api/{objectname}s/{id}/'.format(objectname=self.objectname, id=recordid)
             self.download_resource(url=source, klass=JsonInputFile, language=self.language)
 
+        # Mode light : do not complete GeoJSON properties
+        if not self.full:
+            return features
 
         # Fill this GeoJSON with detail properties
         for feature in features:
