@@ -23,20 +23,26 @@ class DataSourceInputFile(JSONCollection):
         return record
 
 
+class TouristicContentInputFile(PublishedCollection):
+    objectname = 'touristiccontent'
+
+
 class TouristicContentCategoriesInputFile(JSONCollection):
 
     def handle_record(self, record):
         if self.language == settings.LANGUAGE_CODE:
             self.download_resource(record['pictogram'])
+
+        # Download category GeoJSON
+        geojson_url = tourism_models.TouristicContentCategories.geojson_url(record['id'])
+        localfile = 'api/touristiccontent/category-%s.geojson' % record['id']
+        self.download_resource(url=geojson_url, klass=GeoJSONCollection,
+                               store=localfile, language=self.language)
         return record
 
 
-class TouristicContentInputFile(PublishedCollection):
-    pass
-
-
 class TouristicEventInputFile(PublishedCollection):
-    pass
+    objectname = 'touristicevent'
 
 
 class InformationDeskInputFile(GeoJSONCollection):
