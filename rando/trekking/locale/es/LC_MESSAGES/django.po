@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-28 12:30+0200\n"
+"POT-Creation-Date: 2014-11-25 21:50+0100\n"
 "PO-Revision-Date: 2013-06-16 19:06+0100\n"
 "Last-Translator: Pedro Ramos Artiles <pedro.ramosartiles@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,10 +22,6 @@ msgstr ""
 msgid "From %(departure)s to %(arrival)s"
 msgstr "De %(departure)s a %(arrival)s"
 
-#, fuzzy
-msgid "1 day"
-msgstr "2 días"
-
 #, python-format
 msgid "< %sm"
 msgstr ""
@@ -34,11 +30,48 @@ msgstr ""
 msgid "> %sm"
 msgstr ""
 
+#, python-format
 msgid "%sm"
 msgstr ""
 
+#, fuzzy
+msgid "Preview"
+msgstr "Vista provisional de"
+
 msgid "Back to list"
 msgstr "Volver a la lista"
+
+msgid "Duration"
+msgstr "Duración"
+
+msgid "Difficulty"
+msgstr "Dificultad"
+
+msgid "Route"
+msgstr "Recorrido"
+
+msgid "Total Length"
+msgstr "Longitud total"
+
+msgid "Ascent"
+msgstr "Desnivel"
+
+#, fuzzy
+msgid "Descent"
+msgstr "Desnivel"
+
+msgid "Uses"
+msgstr "Usos"
+
+msgid "Thematic"
+msgstr "Temática"
+
+#, fuzzy
+msgid "Departure"
+msgstr "Primeros pasos"
+
+msgid "Arrival"
+msgstr ""
 
 msgid "Feedback"
 msgstr ""
@@ -67,42 +100,11 @@ msgstr "Descargar en formato GPX"
 msgid "GPX"
 msgstr "GPX"
 
-msgid "Downloads"
-msgstr "Descargas"
-
 msgid "Download for Google Earth"
 msgstr "Descargar en formato Google Earth"
 
 msgid "KML"
 msgstr "KML"
-
-#, fuzzy
-msgid "Departure"
-msgstr "Primeros pasos"
-
-msgid "Arrival"
-msgstr ""
-
-msgid "Duration"
-msgstr "Duración"
-
-msgid "Total Length"
-msgstr "Longitud total"
-
-msgid "Ascent"
-msgstr "Desnivel"
-
-msgid "Uses"
-msgstr "Usos"
-
-msgid "Thematic"
-msgstr "Temática"
-
-msgid "Difficulty"
-msgstr "Dificultad"
-
-msgid "Route"
-msgstr "Recorrido"
 
 msgid "Disabled-friendly infrastructures"
 msgstr "Equipos para minusválidos"
@@ -115,6 +117,9 @@ msgstr "Acceso"
 
 msgid "Information desks"
 msgstr "Punto de Información"
+
+msgid "Detail map static"
+msgstr ""
 
 msgid "Clic for map interaction"
 msgstr "Pinche aqui para actualizar el mapa"
@@ -140,10 +145,13 @@ msgstr "Recomendación"
 msgid "See also"
 msgstr "Mas información"
 
-msgid "Marks"
-msgstr "Marcas"
+msgid "Downloads"
+msgstr "Descargas"
 
 msgid "Markings"
+msgstr "Marcas"
+
+msgid "Marks"
 msgstr "Marcas"
 
 msgid "Related treks"
@@ -157,9 +165,6 @@ msgstr "En el tramo"
 
 msgid "Sharing circuit"
 msgstr "En el recorrido"
-
-msgid "On the way..."
-msgstr "En el camino..."
 
 msgid "Filters"
 msgstr "Filtros"
@@ -188,11 +193,11 @@ msgstr "Nungun resultado"
 msgid "Change language"
 msgstr "Cambiar la idioma"
 
-msgid "Empty"
-msgstr "Vacio"
-
 msgid "Website"
 msgstr "Sitio web"
+
+msgid "Email"
+msgstr ""
 
 msgid "Lat"
 msgstr ""
@@ -200,17 +205,27 @@ msgstr ""
 msgid "Lng"
 msgstr ""
 
+msgid "On the way..."
+msgstr "En el camino..."
+
 msgid "Preview of"
 msgstr "Vista provisional de"
 
 msgid "Municipality"
 msgstr "Municipio"
 
-msgid "Remove from favorites"
-msgstr "Borrar de mis favoritos"
-
 msgid "Add to favorites"
 msgstr "Añadir a mis favoritos"
 
 msgid "Zoom to trek"
 msgstr "Zoom itinerario"
+
+#, fuzzy
+#~ msgid "1 day"
+#~ msgstr "2 días"
+
+#~ msgid "Empty"
+#~ msgstr "Vacio"
+
+#~ msgid "Remove from favorites"
+#~ msgstr "Borrar de mis favoritos"
