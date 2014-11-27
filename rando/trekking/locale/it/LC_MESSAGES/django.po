@@ -93,6 +93,9 @@ msgstr "Lunghezza totale"
 msgid "Ascent"
 msgstr "Dislivello"
 
+msgid "Descent"
+msgstr "Dislivello discendente"
+
 msgid "Uses"
 msgstr "Utilizzo"
 

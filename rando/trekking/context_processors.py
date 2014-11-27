@@ -24,4 +24,5 @@ def main(request):
         'PRINT_ENABLED': settings.PRINT_ENABLED,
         'VIEW3D_ENABLED': settings.VIEW3D_ENABLED,
         'POI_PANEL_OPENED' : settings.POI_PANEL_OPENED,
+        'TREK_SHOW_DESCENT': settings.TREK_SHOW_DESCENT,
     }

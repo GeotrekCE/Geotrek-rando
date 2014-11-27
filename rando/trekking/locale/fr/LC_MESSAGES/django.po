@@ -89,7 +89,10 @@ msgid "Total Length"
 msgstr "Longueur totale"
 
 msgid "Ascent"
-msgstr "Dénivelé"
+msgstr "Dénivelé montant"
+
+msgid "Descent"
+msgstr "Dénivelé descendant"
 
 msgid "Uses"
 msgstr "Usages"

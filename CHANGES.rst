@@ -5,13 +5,18 @@ CHANGELOG
 1.35dev (unreleased)
 --------------------
 
+**Bug fixes**
+
+* Prevent emails to be sent twice on synchronization errors
+
 **New features**
 
+* Add setting TREK_SHOW_DESCENT to show descent in trek details
 * Move results that are out of map viewport at the end of the list (fixes #202)
 
 
 1.34.1 (2014-10-21)
--------------------
+----------------------
 
 **Bug fixes**
 
