@@ -60,13 +60,15 @@
             <img src="{% static "img/ascent.svg" %}" alt="{% trans "Ascent" %}"/>
           </div>
         </div>
+        {% if TREK_SHOW_DESCENT %}
         <div class="info descent" title="{% trans "Descent" %}">
           <span>{{ object.properties.descent }}&#x202f;m</span>
           <div class="pictogram medium">
             <img src="{% static "img/descent.svg" %}" alt="{% trans "Descent" %}"/>
           </div>
         </div>
-        
+        {% endif %}
+
         {% for usage in object.properties.usages %}
           {% if forloop.first %}<div class="info" id="usages">{% trans "Uses" %}<ul>{% endif %}
           <li>{{ usage|pictogram:"medium" }}</li>

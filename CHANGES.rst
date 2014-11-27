@@ -9,6 +9,11 @@ CHANGELOG
 
 * Prevent emails to be sent twice on synchronization errors
 
+**New features**
+
+* Add setting TREK_SHOW_DESCENT to show descent in trek details
+
+
 1.34.1 (2014-10-21)
 ----------------------
 
