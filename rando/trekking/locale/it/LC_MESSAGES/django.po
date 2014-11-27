@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-25 21:50+0100\n"
+"POT-Creation-Date: 2014-06-28 12:30+0200\n"
 "PO-Revision-Date: 2013-05-30 10:57+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,6 +22,10 @@ msgstr ""
 msgid "From %(departure)s to %(arrival)s"
 msgstr "Da %(departure)s a %(arrival)s"
 
+#, fuzzy
+msgid "1 day"
+msgstr "2 giornate"
+
 #, python-format
 msgid "< %sm"
 msgstr ""
@@ -34,44 +38,8 @@ msgstr ""
 msgid "%sm"
 msgstr "%s min."
 
-#, fuzzy
-msgid "Preview"
-msgstr "Anteprima di"
-
 msgid "Back to list"
 msgstr "Torna alla lista"
-
-msgid "Duration"
-msgstr "Durata"
-
-msgid "Difficulty"
-msgstr "Difficoltà"
-
-msgid "Route"
-msgstr "Percorso"
-
-msgid "Total Length"
-msgstr "Lunghezza totale"
-
-msgid "Ascent"
-msgstr "Dislivello"
-
-#, fuzzy
-msgid "Descent"
-msgstr "Dislivello"
-
-msgid "Uses"
-msgstr "Utilizzo"
-
-msgid "Thematic"
-msgstr "Tema"
-
-#, fuzzy
-msgid "Departure"
-msgstr "Partenza condivisa"
-
-msgid "Arrival"
-msgstr ""
 
 msgid "Feedback"
 msgstr ""
@@ -97,6 +65,9 @@ msgstr ""
 msgid "Download GPX"
 msgstr "Scarica GPX"
 
+msgid "Downloads"
+msgstr "Scarica"
+
 msgid "GPX"
 msgstr ""
 
@@ -105,6 +76,34 @@ msgstr "Scarica per Google Earth"
 
 msgid "KML"
 msgstr ""
+
+#, fuzzy
+msgid "Departure"
+msgstr "Partenza condivisa"
+
+msgid "Arrival"
+msgstr ""
+
+msgid "Duration"
+msgstr "Durata"
+
+msgid "Total Length"
+msgstr "Lunghezza totale"
+
+msgid "Ascent"
+msgstr "Dislivello"
+
+msgid "Uses"
+msgstr "Utilizzo"
+
+msgid "Thematic"
+msgstr "Tema"
+
+msgid "Difficulty"
+msgstr "Difficoltà"
+
+msgid "Route"
+msgstr "Percorso"
 
 msgid "Disabled-friendly infrastructures"
 msgstr "Infrastrutture per disabili"
@@ -117,9 +116,6 @@ msgstr "Accesso"
 
 msgid "Information desks"
 msgstr "Ufficio Informazioni"
-
-msgid "Detail map static"
-msgstr ""
 
 msgid "Clic for map interaction"
 msgstr "Cliccare per interagire con la mappa"
@@ -145,14 +141,12 @@ msgstr "Consigli"
 msgid "See also"
 msgstr "Ulteriori informazioni"
 
-msgid "Downloads"
-msgstr "Scarica"
-
 msgid "Markings"
 msgstr "Marcature"
 
 msgid "Marks"
 msgstr "Marcature"
+
 
 msgid "Related treks"
 msgstr "Itinerari collegati"
@@ -165,6 +159,9 @@ msgstr "Percorsi condivisi"
 
 msgid "Sharing circuit"
 msgstr "Circuito condiviso"
+
+msgid "On the way..."
+msgstr "Sul percorso..."
 
 msgid "Filters"
 msgstr "Filtri"
@@ -193,11 +190,11 @@ msgstr "Nessun risultato"
 msgid "Change language"
 msgstr "Cambiare lingua"
 
+msgid "Empty"
+msgstr "Vuoto"
+
 msgid "Website"
 msgstr "Sito web"
-
-msgid "Email"
-msgstr ""
 
 msgid "Lat"
 msgstr ""
@@ -205,27 +202,17 @@ msgstr ""
 msgid "Lng"
 msgstr ""
 
-msgid "On the way..."
-msgstr "Sul percorso..."
-
 msgid "Preview of"
 msgstr "Anteprima di"
 
 msgid "Municipality"
 msgstr "Comune"
 
+msgid "Remove from favorites"
+msgstr "Elimina dai preferiti"
+
 msgid "Add to favorites"
 msgstr "Aggiungi ai preferiti"
 
 msgid "Zoom to trek"
 msgstr "Zoom sull'itinerario"
-
-#, fuzzy
-#~ msgid "1 day"
-#~ msgstr "2 giornate"
-
-#~ msgid "Empty"
-#~ msgstr "Vuoto"
-
-#~ msgid "Remove from favorites"
-#~ msgstr "Elimina dai preferiti"
