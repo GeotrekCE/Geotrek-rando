@@ -8,6 +8,7 @@ CHANGELOG
 **Bug fixes**
 
 * Prevent emails to be sent twice on synchronization errors
+* Prevent popup to always appear when POPUP_HOME_FORCED is true
 
 **New features**
 
