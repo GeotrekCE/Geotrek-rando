@@ -2,16 +2,18 @@
 CHANGELOG
 =========
 
-1.34.2 (unreleased)
--------------------
+1.35dev (unreleased)
+--------------------
 
 **Bug fixes**
 
 * Prevent emails to be sent twice on synchronization errors
+* Prevent popup to always appear when POPUP_HOME_FORCED is true
 
 **New features**
 
 * Add setting TREK_SHOW_DESCENT to show descent in trek details
+* Move results that are out of map viewport at the end of the list (fixes #202)
 
 
 1.34.1 (2014-10-21)

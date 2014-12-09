@@ -616,17 +616,26 @@ function mainmapInit(map, djoptions) {
     map.on('moveend', function (e) {
         if (!map._loaded || MOBILE) return;  // Bounds should be set.
 
-        $('#side-bar .result').removeClass('outbounds');
+        var $resultsList = $('#side-bar .list');
+        $resultsList.find('.result').removeClass('outbounds');
         if (!$(map._container).is(':visible')) {
             // If map is hidden (viewing detail page), consider all visible :)
             return;
         }
+
+        // Mark treks with class "outbounds" when out of viewport
         var inBounds = treksLayer.search(map.getFakeBounds());
-        $('#side-bar .result').addClass('outbounds');
+        $resultsList.find('.result').addClass('outbounds');
         for (var i=0, n=inBounds.length; i<n; i++) {
             var pk = inBounds[i].feature.properties.pk;
-            $("#side-bar .result[data-id='" + pk + "']").removeClass('outbounds');
+            $resultsList.find(".result[data-id='" + pk + "']")
+                        .removeClass('outbounds');
         }
+
+        // Move outbounds results to the end of the list
+        $('#side-bar .result.outbounds').each(function () {
+            $(this).detach().appendTo($resultsList);
+        });
     });
 
     // Go to detail page on double-click
