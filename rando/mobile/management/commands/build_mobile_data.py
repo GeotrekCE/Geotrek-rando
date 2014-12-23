@@ -90,17 +90,20 @@ class Command(BaseCommand):
 
         if not options['no_tiles']:
             self._build_global_tiles()
+            # FIXME: should get all trek published in any language
             for trek in Trek.objects.filter(language=settings.LANGUAGE_CODE).all():
                 self._build_trek_tiles(trek)
 
         server_settings = Settings.objects.all()
         for language in server_settings.languages.available:
-            self._build_ressources(language)
+            self._build_global_ressources(language)
+            for trek in Trek.objects.filter(language=language).all():
+                self._build_trek_ressources(trek, language)
 
         logger.info('Done.')
 
-    def _build_ressources(self, language):
-        logger.info("Build ressources file %s..." % language)
+    def _build_global_ressources(self, language):
+        logger.info("Build %s global ressources file..." % language)
 
         output_folder = os.path.join(settings.INPUT_DATA_ROOT, language, 'api/trek')
         if not os.path.exists(output_folder):
@@ -116,18 +119,11 @@ class Command(BaseCommand):
         zipfile.write(treks.fullpath, 'trek.geojson')
 
         for trek in treks.all():
-            arcname = os.path.join('trek/{trek.pk}/pois.geojson'.format(trek=trek))
-            zipfile.write(trek.pois.fullpath, arcname)
-            url = trek.properties.altimetric_profile.replace('.json', '.svg')
-            fullpath = os.path.join(settings.INPUT_DATA_ROOT, url.lstrip('/'))
-            arcname = os.path.join('trek/{trek.pk}/profile.svg'.format(trek=trek))
-            zipfile.write(fullpath, arcname)
             trek_dest = 'trek/{trek.pk}'.format(trek=trek)
-            for picture in trek.properties.pictures:
-                media.add((picture['url'], trek_dest))
-            for desk in trek.properties.information_desks:
-                if desk['photo_url']:
-                    media.add((desk['photo_url'], trek_dest))
+            # Thumbnail
+            if trek.properties.thumbnail:
+                media.add((trek.properties.thumbnail, trek_dest))
+            # Pictos
             for attr in ('usages', 'themes', 'networks'):
                 for item in trek.properties.get(attr):
                     if item['pictogram']:
@@ -140,10 +136,6 @@ class Command(BaseCommand):
                 missing_media.add('pictogram for difficulty %s' % trek.properties.difficulty['label'])
             for poi in trek.pois.all():
                 poi_dest = 'poi/{poi.pk}'.format(poi=poi)
-                for picture in poi.properties.pictures:
-                    media.add((picture['url'], poi_dest))
-                if poi.properties.thumbnail:
-                    media.add((poi.properties.thumbnail, poi_dest))
                 if poi.properties.type['pictogram']:
                     media.add((poi.properties.type['pictogram'], 'poi/pictogram'))
                 else:
@@ -151,9 +143,56 @@ class Command(BaseCommand):
 
         pages_json = FlatPage.objects.filter(language=language).json
         zipfile.writestr('staticpages/pages.json', pages_json)
-        for page in FlatPage.objects.filter(language=language).all():
-            for item in page.parse_media():
-                media.add((item['url'], 'staticpages/images'))
+        #for page in FlatPage.objects.filter(language=language).all():
+            #for item in page.parse_media():
+                #media.add((item['url'], 'staticpages/images'))
+
+        if missing_media:
+            logger.warning('Missing media: ' + ', '.join(missing_media))
+
+        for url, dest in media:
+            url = unquote(url).lstrip('/')
+            fullpath = os.path.join(settings.INPUT_DATA_ROOT, url)
+            arcname = os.path.join(dest, os.path.basename(url))
+            zipfile.write(fullpath, arcname)
+
+        zipfile.close()
+        logger.info('%s done.' % zipfilename)
+
+    def _build_trek_ressources(self, trek, language):
+        logger.info("Build %s ressources file for trek '%s'..." % (language, trek.properties.name))
+
+        output_folder = os.path.join(settings.INPUT_DATA_ROOT, language, 'api/trek')
+        if not os.path.exists(output_folder):
+            logger.info("Create folder %s" % output_folder)
+            os.makedirs(output_folder)
+        zipfilename = os.path.join(output_folder, 'trek-%u.zip' % trek.id)
+        zipfile = ZipFile(zipfilename, 'w')
+
+        media = set()
+        missing_media = set()
+
+        # POIs json
+        arcname = os.path.join('trek/{trek.pk}/pois.geojson'.format(trek=trek))
+        zipfile.write(trek.pois.fullpath, arcname)
+        # Profile svg
+        url = trek.properties.altimetric_profile.replace('.json', '.svg')
+        fullpath = os.path.join(settings.INPUT_DATA_ROOT, url.lstrip('/'))
+        arcname = os.path.join('trek/{trek.pk}/profile.svg'.format(trek=trek))
+        zipfile.write(fullpath, arcname)
+        trek_dest = 'trek/{trek.pk}'.format(trek=trek)
+        # All pictures
+        for picture in trek.properties.pictures:
+            media.add((picture['url'], trek_dest))
+        # Information desks picture
+        for desk in trek.properties.information_desks:
+            if desk['photo_url']:
+                media.add((desk['photo_url'], trek_dest))
+        # Only one picture per POI
+        for poi in trek.pois.all():
+            poi_dest = 'poi/{poi.pk}'.format(poi=poi)
+            if poi.properties.pictures:
+                media.add((poi.properties.pictures[0]['url'], poi_dest))
 
         if missing_media:
             logger.warning('Missing media: ' + ', '.join(missing_media))
