@@ -88,13 +88,18 @@ class Command(BaseCommand):
             'tiles_dir': os.path.join(settings.INPUT_TMP_ROOT, 'tiles')
         }
 
+        server_settings = Settings.objects.all()
+
         if not options['no_tiles']:
             self._build_global_tiles()
-            # FIXME: should get all trek published in any language
-            for trek in Trek.objects.filter(language=settings.LANGUAGE_CODE).all():
-                self._build_trek_tiles(trek)
+            done = set()
+            for language in server_settings.languages.available:
+                for trek in Trek.objects.filter(language=language).all():
+                    if trek.id in done:
+                        continue
+                    self._build_trek_tiles(trek)
+                    done.add(trek.id)
 
-        server_settings = Settings.objects.all()
         for language in server_settings.languages.available:
             self._build_global_ressources(language)
             for trek in Trek.objects.filter(language=language).all():
