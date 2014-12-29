@@ -146,8 +146,8 @@ function TrekFilter()
                         elem.attr('checked', !!value);
                     }
                     else if (elem.is('option')) {
-                        if (!!value) elem.attr('selected', 'selected');
-                        else elem.removeAttr('selected');
+                        elem.prop('selected', !!value);
+                        elem.parent().trigger("liszt:updated");
                     }
                     else {
                         if (value === true)
