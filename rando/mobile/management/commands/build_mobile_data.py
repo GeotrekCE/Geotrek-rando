@@ -124,6 +124,9 @@ class Command(BaseCommand):
         zipfile.write(treks.fullpath, 'trek.geojson')
 
         for trek in treks.all():
+            # POIs json
+            arcname = os.path.join('trek/{trek.pk}/pois.geojson'.format(trek=trek))
+            zipfile.write(trek.pois.fullpath, arcname)
             trek_dest = 'trek/{trek.pk}'.format(trek=trek)
             # Thumbnail
             if trek.properties.thumbnail:
@@ -177,9 +180,6 @@ class Command(BaseCommand):
         media = set()
         missing_media = set()
 
-        # POIs json
-        arcname = os.path.join('trek/{trek.pk}/pois.geojson'.format(trek=trek))
-        zipfile.write(trek.pois.fullpath, arcname)
         # Profile svg
         url = trek.properties.altimetric_profile.replace('.json', '.svg')
         fullpath = os.path.join(settings.INPUT_DATA_ROOT, url.lstrip('/'))
