@@ -2,10 +2,14 @@
 CHANGELOG
 =========
 
-1.36.0dev (unreleased)
+1.36.0 (2014-12-30)
 --------------------
 
 **Bug fixes**
+
+* Update chosen widgets when landing with filtered url (fixes #248)
+
+**New features**
 
 * Reduce the size of data to be downloaded by the mobile application
 
