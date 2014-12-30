@@ -5,6 +5,10 @@ CHANGELOG
 1.36.0dev (unreleased)
 --------------------
 
+**Bug fixes**
+
+* Reduce the size of data to be downloaded by the mobile application
+
 
 1.35.0 (2014-12-09)
 --------------------

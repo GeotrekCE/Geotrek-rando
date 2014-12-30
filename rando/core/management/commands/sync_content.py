@@ -136,7 +136,7 @@ class InputFile(object):
             utime(self.path_tmp, (last_modified, last_modified))
 
     def content(self):
-        if not self.reply.content:
+        if self.reply.content is None:
             return open(self.path, 'rb').read()
         return self.reply.content
 
