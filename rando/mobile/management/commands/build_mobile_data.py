@@ -130,7 +130,7 @@ class Command(BaseCommand):
             zipfile.write(trek.pois.fullpath, arcname)
             # Profile svg
             url = trek.properties.altimetric_profile.replace('.json', '.svg')
-            fullpath = os.path.join(settings.INPUT_DATA_ROOT, url.lstrip('/'))
+            fullpath = os.path.join(settings.INPUT_DATA_ROOT, language, url.lstrip('/'))
             arcname = os.path.join(trek_dest, 'profile.svg')
             zipfile.write(fullpath, arcname)
             # Thumbnail
