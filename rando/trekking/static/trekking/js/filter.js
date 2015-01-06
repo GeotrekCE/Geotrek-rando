@@ -120,6 +120,7 @@ function TrekFilter()
 
         $('#search').val(self.state.search || '');
         $('option[data-filter]').removeProp('selected');
+        $('div[data-filter].active').removeClass('active');
 
         for (var category in self.state) {
             for (var filter in self.state[category]) {
@@ -155,7 +156,6 @@ function TrekFilter()
                         else {
                             // Remove false values
                             delete self.state[category][filter];
-                            elem.removeClass('active');
                         }
                     }
                 }
