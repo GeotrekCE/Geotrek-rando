@@ -119,6 +119,7 @@ function TrekFilter()
         self.state = this.__loadState();
 
         $('#search').val(self.state.search || '');
+        $('option[data-filter]').removeProp('selected');
 
         for (var category in self.state) {
             for (var filter in self.state[category]) {
@@ -147,7 +148,6 @@ function TrekFilter()
                     }
                     else if (elem.is('option')) {
                         elem.prop('selected', !!value);
-                        elem.parent().trigger("liszt:updated");
                     }
                     else {
                         if (value === true)
@@ -161,6 +161,9 @@ function TrekFilter()
                 }
             }
         }
+
+        $('select[data-filter]').trigger("liszt:updated");
+
         self.save();
         self.initEvents();
     };
