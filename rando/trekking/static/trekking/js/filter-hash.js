@@ -23,9 +23,11 @@ $(document).ready(function() {
             if (hash.length > 0) {
                 var hexhash = hexToString(hash);
                 var serialized = LZString.decompress(hexhash);
-                localStorage.setItem('filterState', serialized);
-                $(window).trigger('filters:reload');
+            } else {
+                var serialized = null;
             }
+            localStorage.setItem('filterState', serialized);
+            $(window).trigger('filters:reload');
         }
         catch (err) {}
     }
