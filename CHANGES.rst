@@ -13,6 +13,32 @@ CHANGELOG
 * Detail JSON of objects are now served under ``files/api/<TYPE>s/<ID>/``
 
 
+1.36.0 (2014-12-30)
+--------------------
+
+**Bug fixes**
+
+* Update chosen widgets when landing with filtered url (fixes #248)
+
+**New features**
+
+* Reduce the size of data to be downloaded by the mobile application
+
+
+1.35.0 (2014-12-09)
+--------------------
+
+**Bug fixes**
+
+* Prevent emails to be sent twice on synchronization errors
+* Prevent popup to always appear when POPUP_HOME_FORCED is true
+
+**New features**
+
+* Add setting TREK_SHOW_DESCENT to show descent in trek details
+* Move results that are out of map viewport at the end of the list (fixes #202)
+
+
 1.34.1 (2014-10-21)
 ----------------------
 

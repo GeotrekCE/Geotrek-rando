@@ -11,7 +11,6 @@ import json
 from django.core.management.base import BaseCommand
 from django.utils.http import http_date, parse_http_date_safe
 from django.conf import settings
-from django.core.mail import mail_admins
 from django.core.cache import cache
 
 import requests
@@ -145,7 +144,7 @@ class InputFile(object):
         return self
 
     def content(self):
-        if not self.reply.content:
+        if self.reply.content is None:
             return open(self.path, 'rb').read()
         return self.reply.content
 
@@ -205,8 +204,6 @@ class SyncSession(object):
         except (AssertionError, IOError) as e:
             logger.fatal(e)
             cprint("Failed!", 'red', attrs=['bold'], file=self.stdout)
-            # Send email to admins (silent if not configured)
-            mail_admins("[Geotrek] Synchronization failed", repr(e), fail_silently=True)
 
         finally:
             # Clean-up temp files
