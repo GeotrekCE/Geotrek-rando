@@ -159,6 +159,7 @@ COMPRESS_PARSER = 'compressor.parser.HtmlParser'
 
 MIN_BYTE_SYZE = 10
 
+FLATPAGES_ENABLED = True
 FLATPAGES_ROOT = os.path.join(MEDIA_ROOT, 'pages')
 FLATPAGES_TITLES = {}
 FLATPAGES_TARGETS = {}

@@ -1,27 +1,11 @@
 import json
 
 from django.conf import settings
-from django.template.loader import render_to_string
 
-from rando.core.sync import GeoJSONCollection, PublishedCollection, reroot, cprint
+from rando.core.sync import PublishedCollection, reroot, cprint
 from rando import logger
 from rando.trekking import models
-
-
-class InformationDeskInputFile(GeoJSONCollection):
-
-    def handle_record(self, record):
-        record = super(InformationDeskInputFile, self).handle_record(record)
-        properties = record['properties']
-        properties['photo_url'] = reroot(properties['photo_url'])
-        properties['html'] = render_to_string('trekking/_information_desk.html',
-                                              {'desk': properties})
-
-        if self.language == settings.LANGUAGE_CODE:
-            if properties.get('photo_url'):
-                self.download_resource(properties['photo_url'])
-
-        return record
+from rando.tourism.sync import InformationDeskInputFile
 
 
 class POIListInputFile(PublishedCollection):
@@ -143,5 +127,5 @@ def sync_content_trekking(sender, **kwargs):
 
         TrekListInputFile(url=models.Trek.filepath, **inputkwlang).pull()
         f = POIListInputFile(url=models.POI.filepath, **inputkwlang)
-        f.full = True
+        f.full = True  # Full only here for list.
         f.pull()
