@@ -144,9 +144,9 @@ class InputFile(object):
         return self
 
     def content(self):
-        if self.reply.content is None:
-            return open(self.path, 'rb').read()
-        return self.reply.content
+        if self.reply.status_code == requests.codes.ok:
+            return self.reply.content
+        return open(self.path, 'rb').read()
 
 
 class JsonInputFile(InputFile):
