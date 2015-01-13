@@ -135,6 +135,9 @@ RECAPTCHA_PRIVATE_KEY = '6Ldrbu4SAAAAAPbt5g3Vw2BA_LGL1-BZwaBSsnfz'
 # Redirect visitors to the language of their browser
 # LOCALEURL_USE_ACCEPT_LANGUAGE = True
 
+# Show descent value in trek detail pages
+# TREK_SHOW_DESCENT = False
+
 #
 # In preprod
 #..................
