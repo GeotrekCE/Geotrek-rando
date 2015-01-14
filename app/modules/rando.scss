@@ -4,6 +4,10 @@
 @import 'commons/styles/_reset';
 @import 'config/styles/_config';
 
+* {
+    box-sizing: border-box;
+}
+
 html {
 	font-family: $font-family;
 	font-size: 14px;
@@ -16,3 +20,4 @@ html, body, .main-container {
 }
 
 @import 'layout/styles/_layout';
+@import 'treks/styles/_treks-liste';

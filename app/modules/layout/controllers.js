@@ -1,21 +1,17 @@
 'use strict';
 
-function LayoutController($rootScope, treks) {
-    $rootScope.treks = treks;
-    console.log('treks loaded : ');
+function LayoutController($scope, treks) {
+    $scope.treks = treks;
     console.log(treks);
 }
 
 function HeaderController() {
-    console.log('header loaded');
 }
 
 function SidebarController() {
-    console.log('sidebar loaded');
 }
 
 function FooterController() {
-    console.log('footer loaded');
 }
 
 

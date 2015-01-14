@@ -1,7 +1,7 @@
 'use strict';
 
-function TreksListeController($rootScope) {
-    var treks = $rootScope.treks;
+function TreksListeController($scope) {
+    
 }
 
 
