@@ -19,7 +19,7 @@ npm install
 ### Launch gulp default task
 ```
 gulp
-``
+```
 
 
 # CREDITS
