@@ -5,4 +5,4 @@ node_modules
 
 # Prevent js bundle and compiled sass to be push
 ./app/rando.js
-./app/styles/rando.css
+./app/rando.css

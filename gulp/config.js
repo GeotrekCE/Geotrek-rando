@@ -1,6 +1,5 @@
 var dest = './app',
     src = './app',
-    stylesFolder = 'styles',
     modulesFolder = 'modules';
 
 
@@ -12,8 +11,9 @@ module.exports = {
     }
   },
   sass: {
-    src: src + '/' + stylesFolder + "/sass/rando.{sass,scss}",
-    dest: dest + '/' + stylesFolder,
+    src: src + '/' + modulesFolder + '/rando.{sass,scss}',
+    dest: dest,
+    toWatch: src + '/' + modulesFolder + '/**/*.scss',
     settings: {
       // Required if you want to use SASS syntax
       // See https://github.com/dlmanning/gulp-sass/issues/81
@@ -30,14 +30,13 @@ module.exports = {
   //   dest: dest
   // },
   browserify: {
+    debug: true,
     // A separate bundle will be generated for each
     // bundle config in the list below
     bundleConfigs: [{
       entries: src + '/' + modulesFolder + '/app.js',
       dest: dest,
-      outputName: 'rando.js',
-      // list of externally available modules to exclude from the bundle
-      external: []
+      outputName: 'rando.js'
     }]
   },
   production: {

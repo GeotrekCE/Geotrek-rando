@@ -19,19 +19,19 @@ npm install
 ### Launch gulp default task
 ```
 gulp
-```
+``
 
 
-### CREDITS
+# CREDITS
 
 
-### AUTHORS
+# AUTHORS
 
 * [Simon Bats](https://github.com/SBats)
 
 [<img src="http://depot.makina-corpus.org/public/logo.gif">](http://www.makina-corpus.com)
 
-### LICENCE
+# LICENCE
 
 * OpenSource - BSD
 
