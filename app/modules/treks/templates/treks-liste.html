@@ -1,10 +1,10 @@
 <div class="treks-liste">
     <ul>
-        <li ng-repeat="trek in treks.features" id="trek-{{trek.id}}" class="trek">
+        <li ng-repeat="trek in treks.features" ng-id="trek-{{trek.id}}" class="trek">
             <div class="fav-or-not">
                 Favoris
             </div>
-            <img ng-src="trek.properties.pictures[0].url" ng-alt="trek.properties.pictures[0].title">
+            <img ng-src="{{trek.properties.pictures[0].url}}" ng-alt="{{trek.properties.pictures[0].title}}">
             <span class="title">{{trek.properties.name}}</span>
             <div class="infos">
                 <span>{{trek.properties.districts[0].name}} - </span>
@@ -15,7 +15,7 @@
             </div>
             <ul class="themes">
                 <li ng-repeat="theme in trek.properties.themes">
-                    <img ng-src="theme.pictogram" ng-alt="theme.label">
+                    <img ng-src="{{theme.pictogram}}" ng-alt="{{theme.label}}">
                 </li>
             </ul>
             <div class="know-more">
