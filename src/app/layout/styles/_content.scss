@@ -7,6 +7,17 @@
         height: 100%;
         .content {
             height: 100%;
+            .results-drawer {
+                width: 40%;
+                height: 100%;
+                overflow: auto;
+                padding: 1em;
+                background: lightgray;
+                position: absolute;
+                left: 0;
+                top: 0;
+                z-index: 8;
+            }
         }
     }
 }

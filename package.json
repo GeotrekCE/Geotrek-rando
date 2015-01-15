@@ -7,15 +7,17 @@
     "angular": "^1.3.8",
     "angular-resource": "^1.3.8",
     "angular-ui-router": "^0.2.13",
+    "bootstrap-sass": "^3.3.1",
     "jquery": "~1.x.x",
-    "bootstrap-sass": "^3.3.1"
+    "leaflet": "^0.7.3"
   },
   "browser": {
     "angular": "./node_modules/angular/angular.js",
     "angular-ui-router": "./node_modules/angular-ui-router/release/angular-ui-router.js",
     "angular-resource": "./node_modules/angular-resource/angular-resource.js",
     "jquery": "./node_modules/jquery/dist/jquery.js",
-    "bootstrap": "./node_modules/bootstrap-sass/assets/javascripts/bootstrap.js"
+    "bootstrap": "./node_modules/bootstrap-sass/assets/javascripts/bootstrap.js",
+    "leaflet": "./node_modules/leaflet/dist/leaflet.js"
   },
   "devDependencies": {
     "browser-sync": "~1.3.6",

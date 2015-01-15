@@ -2,7 +2,7 @@
 
 var dependencies = [
     // Our submodules
-    'rando.config', 'rando.treks', 'rando.layout',
+    'rando.config', 'rando.treks', 'rando.layout', 'rando.map',
 
     // External stuff
     'ui.router', 'ngResource'
@@ -15,4 +15,4 @@ require('./config');
 //require('./commons');
 require('./layout');
 require('./treks');
-//require('./map');
+require('./map');
