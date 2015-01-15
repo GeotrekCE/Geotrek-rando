@@ -1,8 +1,8 @@
 <div id="header" ui-view="header"></div>
-<div id="sidebar" ui-view="sidebar"></div>
-<div id="main-content">
-	<div ui-view="content" class="container">
-		
-	</div>
+<div id="main-content" class="fluid-cotainer">
+    <div class="row">
+        <div id="sidebar" ui-view="sidebar" class="col-sm-1"></div>
+        <div ui-view="content" class="col-sm-11 content"></div>
+    </div>
 </div>
 <div id="footer" ui-view="footer"></div>

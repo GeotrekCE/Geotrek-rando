@@ -1,27 +1,27 @@
-<div class="treks-liste">
-    <ul>
-        <li ng-repeat="trek in treks.features" ng-id="trek-{{trek.id}}" class="trek">
+<section class="treks-liste">
+    <article ng-repeat="trek in treks.features" ng-id="trek-{{trek.id}}" class="trek col-sm-12 col-md-6">
+        <div class="visual">
             <div class="fav-or-not">
-                Favoris
+                <i class="glyphicon glyphicon-heart"></i>
             </div>
-            <img ng-src="{{trek.properties.pictures[0].url}}" ng-alt="{{trek.properties.pictures[0].title}}">
-            <span class="title">{{trek.properties.name}}</span>
-            <div class="infos">
-                <span>{{trek.properties.districts[0].name}} - </span>
-                <span>{{trek.properties.duration_pretty}} - </span>
-                <span>Dénivelé {{trek.properties.ascent}} - </span>
-                <span>{{trek.properties.difficulty.label}} - </span>
-                <span>{{trek.properties.usages[0].label}}</span>
-            </div>
-            <ul class="themes">
-                <li ng-repeat="theme in trek.properties.themes">
-                    <img ng-src="{{theme.pictogram}}" ng-alt="{{theme.label}}">
-                </li>
-            </ul>
-            <div class="know-more">
-                <span>+</span>
-            </div>
+            <img ng-src="{{trek.properties.pictures[0].url}}" ng-alt="{{trek.properties.pictures[0].title}}">    
+        </div>
+        <h1 class="title">{{trek.properties.name}}</h1>
+        <div class="infos">
+            <span>{{trek.properties.districts[0].name}} - </span>
+            <span>{{trek.properties.duration_pretty}} - </span>
+            <span>Dénivelé {{trek.properties.ascent}} - </span>
+            <span>{{trek.properties.difficulty.label}} - </span>
+            <span>{{trek.properties.usages[0].label}}</span>
+        </div>
+        <ul class="themes">
+            <li ng-repeat="theme in trek.properties.themes">
+                <img ng-src="{{theme.pictogram}}" ng-alt="{{theme.label}}">
+            </li>
+        </ul>
+        <div class="know-more">
+            <span>+</span>
+        </div>
 
-        </li>
-    </ul>
-</div>
+    </article>
+</section>

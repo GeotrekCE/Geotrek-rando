@@ -11,7 +11,7 @@
     "bootstrap-sass": "^3.3.1"
   },
   "browser": {
-    "angularCommon": "./node_modules/angular/angular.js",
+    "angular": "./node_modules/angular/angular.js",
     "angular-ui-router": "./node_modules/angular-ui-router/release/angular-ui-router.js",
     "angular-resource": "./node_modules/angular-resource/angular-resource.js",
     "jquery": "./node_modules/jquery/dist/jquery.js",
