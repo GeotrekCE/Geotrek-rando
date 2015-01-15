@@ -1,6 +1,6 @@
-var dest = './app',
-    src = './app',
-    modulesFolder = 'modules';
+var dest = './src',
+    src = './src',
+    appFolder = 'app';
 
 
 module.exports = {
@@ -11,9 +11,9 @@ module.exports = {
     }
   },
   sass: {
-    src: src + '/' + modulesFolder + '/rando.{sass,scss}',
+    src: src + '/' + appFolder + '/rando.{sass,scss}',
     dest: dest,
-    toWatch: src + '/' + modulesFolder + '/**/*.scss',
+    toWatch: src + '/' + appFolder + '/**/*.scss',
     settings: {
       // Required if you want to use SASS syntax
       // See https://github.com/dlmanning/gulp-sass/issues/81
@@ -29,12 +29,16 @@ module.exports = {
   //   src: src + "/htdocs/**",
   //   dest: dest
   // },
+  vendors: {
+    outputName : 'rando-vendors.js',
+    dest: dest
+  },
   browserify: {
     debug: true,
     // A separate bundle will be generated for each
     // bundle config in the list below
     bundleConfigs: [{
-      entries: src + '/' + modulesFolder + '/app.js',
+      entries: src + '/' + appFolder + '/app.js',
       dest: dest,
       outputName: 'rando.js'
     }]

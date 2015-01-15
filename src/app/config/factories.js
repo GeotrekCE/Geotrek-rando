@@ -4,7 +4,7 @@ function settingsFactory(globalSettings) {
 
     // CONSTANTS VAR that user can change
     //
-    var DOMAIN = 'http://192.168.100.44:8888',
+    var DOMAIN = 'http://192.168.100.47:8888',
 
         //PATHS AND DIRECTORY
         FILES_DIR = 'files/api',

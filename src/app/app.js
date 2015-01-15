@@ -8,13 +8,7 @@ var dependencies = [
     'ui.router', 'ngResource'
 ];
 
-var angular = require('angularCommon');
 angular.module('geotrekRando', dependencies);
-
-
-// Require Geotrek components
-require('angular-ui-router');
-require('angular-resource');
 
 // Require Geotrek components
 require('./config');
