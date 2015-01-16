@@ -4,6 +4,29 @@ function treksService(settingsFactory, $resource, $q) {
 
     var self = this;
 
+    this.getStartPoint = function(trek) {
+        console.log(trek);
+        var firstPointCoordinates = trek.geometry.coordinates[0];
+
+        return {'lat': firstPointCoordinates[1],
+                'lng': firstPointCoordinates[0]}
+    };
+
+    this.getEndPoint = function(trek) {
+        var nbPts = trek.geometry.coordinates.length;
+        var lastPointCoordinates = trek.geometry.coordinates[nbPts-1];
+
+        return {'lat': lastPointCoordinates[1],
+                'lng': lastPointCoordinates[0]}
+    };
+
+    this.getParkingPoint = function(trek) {
+        var parkingCoordinates = trek.properties.parking_location;
+
+        return parkingCoordinates ? {'lat': parkingCoordinates[1],
+                'lng': parkingCoordinates[0]} : null
+    };
+
     this.replaceImgURLs = function (treksData) {        
 
         // Parse trek pictures, and change their URL

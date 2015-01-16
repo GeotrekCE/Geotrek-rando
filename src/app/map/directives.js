@@ -7,6 +7,7 @@ function mapDirective() {
     return {
         restrict: 'E',
         replace: true,
+        transclude: true,
         template: require('./templates/map.html'),
         controller: controllers.MapController
     };

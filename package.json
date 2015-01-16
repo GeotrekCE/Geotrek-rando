@@ -9,7 +9,8 @@
     "angular-ui-router": "^0.2.13",
     "bootstrap-sass": "^3.3.1",
     "jquery": "~1.x.x",
-    "leaflet": "^0.7.3"
+    "leaflet": "^0.7.3",
+    "leaflet.markercluster": "^0.4.0"
   },
   "browser": {
     "angular": "./node_modules/angular/angular.js",
@@ -17,7 +18,8 @@
     "angular-resource": "./node_modules/angular-resource/angular-resource.js",
     "jquery": "./node_modules/jquery/dist/jquery.js",
     "bootstrap": "./node_modules/bootstrap-sass/assets/javascripts/bootstrap.js",
-    "leaflet": "./node_modules/leaflet/dist/leaflet.js"
+    "leaflet": "./node_modules/leaflet/dist/leaflet.js",
+    "leaflet.markercluster": "./node_modules/leaflet.markercluster/dist/leaflet.markercluster.js"
   },
   "devDependencies": {
     "browser-sync": "~1.3.6",
