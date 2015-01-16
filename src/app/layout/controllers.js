@@ -1,8 +1,7 @@
 'use strict';
 
-function LayoutController($scope, treks) {
-    $scope.treks = treks;
-    console.log(treks);
+function LayoutController() {
+
 }
 
 function HeaderController() {

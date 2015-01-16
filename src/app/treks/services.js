@@ -1,11 +1,10 @@
 'use strict';
 
-function treksService(settingsFactory, $resource, $q) {
+function treksService(settingsFactory, $resource, $q, filtersService) {
 
     var self = this;
 
     this.getStartPoint = function(trek) {
-        console.log(trek);
         var firstPointCoordinates = trek.geometry.coordinates[0];
 
         return {'lat': firstPointCoordinates[1],
@@ -83,6 +82,16 @@ function treksService(settingsFactory, $resource, $q) {
 
         return deferred.promise;
 
+    };
+
+    this.filterTreks = function () {
+        var deferred = $q.defer();
+
+        filteredTreks = filtersService.filterTreks();
+        deferred.resolve(filteredTreks);
+
+
+        return deferred.promise;
     };
 
 }

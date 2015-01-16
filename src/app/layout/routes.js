@@ -10,12 +10,7 @@ function layoutRoutes($stateProvider, $urlRouterProvider) {
         .state('layout', {
             abstract: true,
             template: require('./templates/layout.html'),
-            controller: controller.LayoutController,
-            resolve: {
-                treks : function(treksService) {
-                    return treksService.getTreks();
-                }
-            }
+            controller: controller.LayoutController
         })
         .state('root', {
             parent: 'layout',

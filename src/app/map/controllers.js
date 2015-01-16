@@ -1,16 +1,26 @@
 'use strict';
 
-function MapController($scope, settingsFactory, mapService, iconsService) {
+function MapController($scope, settingsFactory, mapService, iconsService, treksService) {
     
     var map, treksLayer;
 
-    var treks = $scope.treks;
+    function updateTreks(callback) {
+        treksService.getTreks()
+        .then(
+            function(data) {
+                $scope.treks = data;
+                if (callback && typeof callback[0] === 'function') {
+                    callback[0](callback[1]);
+                }
+            }
+        );
+    }
 
-    function mapInit(mapId) {
+    function mapInit(parameters) {
+        var mapParameters = mapService.getMapInitParameters(),
+            mapSelector = parameters[0] || 'map';
 
-        var mapParameters = mapService.getMapInitParameters();
-
-        map = L.map(mapId, mapParameters);
+        map = L.map(mapSelector, mapParameters);
 
         treksLayer = new L.MarkerClusterGroup({
             showCoverageOnHover: false,
@@ -33,7 +43,7 @@ function MapController($scope, settingsFactory, mapService, iconsService) {
         treksLayer.clearLayers();
 
         //$scope.mapService = mapService;
-        angular.forEach(treks.features/*filterFilter($rootScope.filteredTreks, $scope.activeFilters.search)*/, function(trek) {
+        angular.forEach($scope.treks.features/*filterFilter($rootScope.filteredTreks, $scope.activeFilters.search)*/, function(trek) {
             var trekDeparture = mapService.createClusterMarkerFromTrek(trek);
             trekDeparture.on({
                 click: function(e) {
@@ -50,7 +60,7 @@ function MapController($scope, settingsFactory, mapService, iconsService) {
         }*/
     };
 
-    mapInit('map');
+    updateTreks([mapInit,['map']]);
 }
 
 module.exports = {
