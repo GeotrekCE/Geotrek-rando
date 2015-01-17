@@ -4,15 +4,22 @@ function settingsFactory(globalSettings) {
 
     // CONSTANTS VAR that user can change
     //
-    var DOMAIN = /*'http://192.168.100.44:8888'*/'http://prod-rando-fr.makina-corpus.net/',
+    var DOMAIN = 'http://192.168.1.26:8888'/*'http://prod-rando-fr.makina-corpus.net/'*/,
 
         //PATHS AND DIRECTORY
         FILES_DIR = 'files/api',
         TREK_DIR = 'trek',
-        TILES_DIR = 'tiles',
+        POI_DIR = 'pois',
+        TOURRISTICE_EVENTS_DIR = 'touristicevents',
+        TOURRISTICE_EVENT_DIR = 'touristicevent',
+        TOURRISTIC_CONTENTS_DIR = 'touristiccontents',
+        TOURRISTIC_CONTENT_DIR = 'touristiccontent',
+        CATEGORIES_DIR = TOURRISTIC_CONTENT_DIR + '/' + 'categories/',
 
         TREKS_FILE = 'trek.geojson',
-        //POI_FILE = 'pois.geojson',
+        POI_FILE = 'poi.geojson',
+        EVENTS_FILE = 'touristicevent.geojson',
+        TOURRISTIC_FILE = 'touristiccontent.geojson',
 
         MAIN_LEAFLET_BACKGROUND = {
             LAYER_URL: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -40,6 +47,10 @@ function settingsFactory(globalSettings) {
     // PUBLIC VAR
     //
     var treksUrl =  DOMAIN + '/' + _activeLang + '/' + FILES_DIR + '/' + TREK_DIR + '/' + TREKS_FILE,
+        poisUrl =  DOMAIN + '/' + _activeLang + '/' + FILES_DIR + '/' + POI_DIR + '/' + POI_FILE,
+        eventsUrl =  DOMAIN + '/' + _activeLang + '/' + FILES_DIR + '/' + TOURRISTICE_EVENT_DIR + '/' + EVENTS_FILE,
+        tourristicUrl =  DOMAIN + '/' + _activeLang + '/' + FILES_DIR + '/' + TOURRISTIC_CONTENT_DIR + '/' + TOURRISTIC_FILE,
+        categoriesUrl =  DOMAIN + '/' + _activeLang + '/' + FILES_DIR + '/' + CATEGORIES_DIR,
         filters = {
             durations : [
                 { id: 4, name: '<1/2 J', interval: [0, 4]},
@@ -76,6 +87,10 @@ function settingsFactory(globalSettings) {
 
         //PUBLIC VAR
         treksUrl: treksUrl,
+        poisUrl: poisUrl,
+        eventsUrl: eventsUrl,
+        tourristicUrl: tourristicUrl,
+        categoriesUrl: categoriesUrl,
         filters: filters,
 
         //METHODS
