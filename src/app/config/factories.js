@@ -4,7 +4,7 @@ function settingsFactory(globalSettings) {
 
     // CONSTANTS VAR that user can change
     //
-    var DOMAIN = 'http://192.168.100.44:8888',
+    var DOMAIN = /*'http://192.168.100.44:8888'*/'http://prod-rando-fr.makina-corpus.net/',
 
         //PATHS AND DIRECTORY
         FILES_DIR = 'files/api',
@@ -14,7 +14,14 @@ function settingsFactory(globalSettings) {
         TREKS_FILE = 'trek.geojson',
         //POI_FILE = 'pois.geojson',
 
-        LEAFLET_BACKGROUND_URL = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        MAIN_LEAFLET_BACKGROUND = {
+            LAYER_URL: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            ATTRIBUTION: '(c) IGN Geoportail'
+        },
+        SATELLITE_LEAFLET_BACKGROUND = {
+            LAYER_URL: 'http://{s}.tile.mapbox.com/v3/makina-corpus.i3p1001l/{z}/{x}/{y}.png',
+            ATTRIBUTION: '(c) MapBox Satellite'
+        },
 
         LEAFLET_CONF = {
             CENTER_LATITUDE: 44.83,
@@ -22,7 +29,6 @@ function settingsFactory(globalSettings) {
             DEFAULT_ZOOM: 12,
             DEFAULT_MIN_ZOOM: 8,
             DEFAULT_MAX_ZOOM: 16,
-            ATTRIBUTION: '(c) IGN Geoportail',
             TREK_COLOR: '#F89406'
         };
 
@@ -33,7 +39,7 @@ function settingsFactory(globalSettings) {
 
     // PUBLIC VAR
     //
-    var treksUrl =  DOMAIN + '/' + FILES_DIR + '/' + TREK_DIR + '/' + TREKS_FILE,
+    var treksUrl =  DOMAIN + '/' + _activeLang + '/' + FILES_DIR + '/' + TREK_DIR + '/' + TREKS_FILE,
         filters = {
             durations : [
                 { id: 4, name: '<1/2 J', interval: [0, 4]},
@@ -64,7 +70,8 @@ function settingsFactory(globalSettings) {
     return {
         //CONSTANTS
         DOMAIN: DOMAIN,
-        LEAFLET_BACKGROUND_URL: LEAFLET_BACKGROUND_URL,
+        MAIN_LEAFLET_BACKGROUND: MAIN_LEAFLET_BACKGROUND,
+        SATELLITE_LEAFLET_BACKGROUND: SATELLITE_LEAFLET_BACKGROUND,
         LEAFLET_CONF: LEAFLET_CONF,
 
         //PUBLIC VAR

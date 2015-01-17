@@ -1,0 +1,40 @@
+.leaflet-control.simple-layer-switcher {
+  a.background {
+    opacity: 1.0;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    margin-top: 0;
+    outline: solid 1px white;
+    &.satellite {
+      background-image: url(images/switcher-satellite.jpg);
+    }
+    &.main {
+      background-image: url(images/switcher-main.png);
+    }
+  }
+  .toggle-layer {
+    background-color: #877f84;
+    height: 20px;
+    width: 20px;
+    padding: 5px;
+    margin-top: 5px;
+    display: block;
+    opacity: 0.5;
+    background-size: 100%;
+    background-position: 50% 50%;
+    &.active {
+      margin-left: -1px;
+      margin-bottom: -1px;
+      margin-top: 4px;
+      background-color: #f89406;
+      opacity: 1.0;
+      outline: solid 2px #ffffff;
+      border: solid 1px #c67605;
+    }
+    img {
+      height: 20px;
+      width: 20px;
+    }
+  }
+}

@@ -2,7 +2,7 @@
 
 function MapController($scope, settingsFactory, mapService, iconsService, treksService) {
     
-    var map, treksLayer;
+    var map;
 
     function updateTreks(callback) {
         treksService.getTreks()
@@ -17,48 +17,15 @@ function MapController($scope, settingsFactory, mapService, iconsService, treksS
     }
 
     function mapInit(parameters) {
-        var mapParameters = mapService.getMapInitParameters(),
-            mapSelector = parameters[0] || 'map';
 
-        map = L.map(mapSelector, mapParameters);
+        var mapSelector = parameters[0] || 'map';
 
-        treksLayer = new L.MarkerClusterGroup({
-            showCoverageOnHover: false,
-            iconCreateFunction: function(cluster) {
-                return iconsService.getClusterIcon(cluster);
-            }
-        });
-        $scope.treksLayer = treksLayer;
+        map = mapService.initMap(mapSelector);
 
-        // Show the scale and attribution controls
-        mapService.setScale(map);
-        mapService.setAttribution(map);
-        showTreks();
+        // Load treks in map
+        mapService.displayTreks($scope.treks.features);
 
     }
-
-     // Add treks geojson to the map
-    function showTreks() {
-        // Remove all markers so the displayed markers can fit the search results
-        treksLayer.clearLayers();
-
-        //$scope.mapService = mapService;
-        angular.forEach($scope.treks.features/*filterFilter($rootScope.filteredTreks, $scope.activeFilters.search)*/, function(trek) {
-            var trekDeparture = mapService.createClusterMarkerFromTrek(trek);
-            trekDeparture.on({
-                click: function(e) {
-                    console.log('marker Clicked');
-                    //$state.go("home.map.detail", { trekId: trek.id });
-                }
-            });
-            treksLayer.addLayer(trekDeparture);
-        });
-        map.addLayer(treksLayer);
-
-        /*if ((updateBounds == undefined) || (updateBounds == true)) {    
-            map.fitBounds(treksLayer.getBounds());
-        }*/
-    };
 
     updateTreks([mapInit,['map']]);
 }
