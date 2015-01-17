@@ -172,10 +172,10 @@ function mapService($q, settingsFactory, treksService, iconsService) {
         this.setScale();
         this.setAttribution();
         this.setZoomControlPosition();
-        this.setFullScreenControll();
+        this.setFullScreenControl();
         this.setMinimap();
         this.createSatelliteView();
-    }
+    };
 
     this.setScale = function () {
         L.control.scale({imperial: false}).addTo(this._map);
@@ -185,7 +185,7 @@ function mapService($q, settingsFactory, treksService, iconsService) {
         this._map.zoomControl.setPosition('topright');
     };
 
-    this.setFullScreenControll = function () {
+    this.setFullScreenControl = function () {
         L.control.fullscreen({
             position: 'topright',
             title: 'Fullscreen'
@@ -207,7 +207,7 @@ function mapService($q, settingsFactory, treksService, iconsService) {
             };
 
         var miniMap = new L.Control.MiniMap(miniMapLayer, miniMapOptions).addTo(this._map);
-    }
+    };
 
     this.setAttribution = function () {
         this._map.attributionControl.setPrefix(settingsFactory.LEAFLET_CONF.ATTRIBUTION);
@@ -307,8 +307,6 @@ function mapService($q, settingsFactory, treksService, iconsService) {
     this.initCustomsMixins = function () {
         this.addMapLayersMixin();
         this.topPadding();
-        this.addFakeBoundsMixin();
-        //this.togglePoiLayer();
     }
 
     this.addMapLayersMixin = function () {
@@ -347,113 +345,6 @@ function mapService($q, settingsFactory, treksService, iconsService) {
 
         };
     };
-
-    this.addFakeBoundsMixin = function () {
-        var FakeBoundsMapMixin = {
-            __fakeBounds: function (bounds) {
-                /* Depending on sidebar open/close, we correct the bounds of the map
-                If init, we increase, else we reduce.
-                */
-                if (!this._loaded)
-                    return bounds;
-
-                var mapBounds = this.getBounds(),
-                    from = arguments.length === 0;
-                bounds = from ? mapBounds : bounds;
-
-                var closed = $('#side-bar').hasClass('closed');
-                if (closed) {
-                    return bounds;
-                }
-
-                var sidebarW = $('#side-bar').outerWidth() / $('#mainmap').width(),
-                    boundswidth = mapBounds.getSouthEast().lng - mapBounds.getSouthWest().lng,
-                    offset = sidebarW * boundswidth * (from ? 1 : -1);
-
-                var oldSouthWest = bounds.getSouthWest(),
-                    southWest = L.latLng(oldSouthWest.lat, oldSouthWest.lng + offset);
-                return L.latLngBounds(southWest, bounds.getNorthEast());
-            },
-
-            fitFakeBounds: function (bounds) {
-                this.fitBounds(bounds);
-                this.whenReady(function () {
-                    this.fitBounds(this.__fakeBounds(bounds));
-                }, this);
-            },
-
-            getFakeBounds: function () {
-                return this.__fakeBounds();
-            },
-
-            fakePanTo: function (latlng) {
-                var bounds = new L.LatLngBounds([latlng, latlng]),
-                    fakeBounds = this.__fakeBounds(bounds);
-                this.panTo(fakeBounds.getCenter());
-            },
-
-            panToOffset: function (latlng, offset, options) {
-                var x = this.latLngToContainerPoint(latlng).x - offset[0];
-                var y = this.latLngToContainerPoint(latlng).y - offset[1];
-                var point = this.containerPointToLatLng([x, y]);
-
-                var current = this.latLngToContainerPoint(this.getCenter());
-
-                if (L.point(x, y).distanceTo(current) < options.minimumDistance)
-                    return;
-
-                return this.setView(point, this._zoom, { pan: options })
-            }
-        };
-
-        L.Map.include(FakeBoundsMapMixin);
-    }
-
-    this.togglePoiLayer = function () {
-        L.Control.TogglePOILayer = L.Control.extend({
-        options: {
-            position: 'bottomleft',
-        },
-
-        initialize: function (layer, options) {
-            this.layer = layer;
-            L.Control.prototype.initialize.call(this, options);
-        },
-
-        onAdd: function(map) {
-            this.map = map;
-
-            this._container = L.DomUtil.create('div', 'simple-layer-switcher pois');
-            var className = 'toggle-layer pois active';
-            this.button = L.DomUtil.create('a', className, this._container);
-            this.button.setAttribute('title', gettext('Points of interest'));
-            $(this.button).tooltip({placement: 'right'});
-
-            L.DomEvent.disableClickPropagation(this.button);
-            L.DomEvent.on(this.button, 'click', function (e) {
-                this.toggleLayer();
-            }, this);
-
-            return this._container;
-        },
-
-        toggleLayer: function () {
-            if (this.layer) {
-                if (this.map.hasLayer(this.layer)) {
-                    $(window).trigger('pois:hidden');
-                    L.DomUtil.removeClass(this.button, 'active');
-                    this.map.removeLayer(this.layer);
-                }
-                else {
-                    $(window).trigger('pois:shown');
-                    L.DomUtil.addClass(this.button, 'active');
-                    this.map.addLayer(this.layer);
-                }
-            }
-        }
-
-    });
-    }
 
 }
 
