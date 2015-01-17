@@ -1,5 +1,6 @@
 .DS_Store
 .sass-cache
+.log
 Desktop.ini
 node_modules
 

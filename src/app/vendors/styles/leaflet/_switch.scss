@@ -7,10 +7,10 @@
     margin-top: 0;
     outline: solid 1px white;
     &.satellite {
-      background-image: url(images/switcher-satellite.jpg);
+      background-image: url(#{$root-images-path}/switcher-satellite.jpg);
     }
     &.main {
-      background-image: url(images/switcher-main.png);
+      background-image: url(#{$root-images-path}/switcher-main.png);
     }
   }
   .toggle-layer {

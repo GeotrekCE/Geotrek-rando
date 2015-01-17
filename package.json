@@ -10,8 +10,9 @@
     "bootstrap-sass": "^3.3.1",
     "jquery": "~1.x.x",
     "leaflet": "^0.7.3",
-    "leaflet.markercluster": "^0.4.0",
-    "leaflet.fullscreen": "^1.1.4"
+    "leaflet-minimap": "git://github.com/Norkart/Leaflet-MiniMap.git",
+    "leaflet.fullscreen": "^1.1.4",
+    "leaflet.markercluster": "^0.4.0"
   },
   "browser": {
     "angular": "./node_modules/angular/angular.js",
@@ -20,6 +21,7 @@
     "jquery": "./node_modules/jquery/dist/jquery.js",
     "bootstrap": "./node_modules/bootstrap-sass/assets/javascripts/bootstrap.js",
     "leaflet": "./node_modules/leaflet/dist/leaflet.js",
+    "leaflet-minimap": "./node_modules/leaflet-minimap/src/Control.MiniMap.js",
     "leaflet.markercluster": "./node_modules/leaflet.markercluster/dist/leaflet.markercluster.js",
     "leaflet.fullscreen": "./node_modules/leaflet.fullscreen/Control.FullScreen.js"
   },

@@ -173,6 +173,7 @@ function mapService($q, settingsFactory, treksService, iconsService) {
         this.setAttribution();
         this.setZoomControlPosition();
         this.setFullScreenControll();
+        this.setMinimap();
         this.createSatelliteView();
     }
 
@@ -190,6 +191,23 @@ function mapService($q, settingsFactory, treksService, iconsService) {
             title: 'Fullscreen'
         }).addTo(this._map);
     };
+
+    this.setMinimap = function () {
+        var miniMapLayer = new L.tileLayer(
+                settingsFactory.MAIN_LEAFLET_BACKGROUND.LAYER_URL,
+                {
+                    minZoom: 0,
+                    maxZoom: 13,
+                    attribution: settingsFactory.MAIN_LEAFLET_BACKGROUND.ATTRIBUTION
+                }
+            ),
+            miniMapOptions = {
+                toggleDisplay: true,
+                zoomLevelOffset: -3
+            };
+
+        var miniMap = new L.Control.MiniMap(miniMapLayer, miniMapOptions).addTo(this._map);
+    }
 
     this.setAttribution = function () {
         this._map.attributionControl.setPrefix(settingsFactory.LEAFLET_CONF.ATTRIBUTION);
