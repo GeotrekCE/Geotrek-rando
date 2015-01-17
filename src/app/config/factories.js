@@ -6,20 +6,30 @@ function settingsFactory(globalSettings) {
     //
     var DOMAIN = 'http://192.168.1.26:8888'/*'http://prod-rando-fr.makina-corpus.net/'*/,
 
+        // SET TO TRUE ELEMENTS AVAILABLE FOR YOUR GEOTREK !
+        ENABLE_TREKS = true,
+        ENABLE_TOURISTIC_CONTENT = true,
+        ENABLE_TOURISTIC_EVENTS = true,
+
+        // CHOSE POSITION IN CATEGORIES LIST FOR TOURISTICS EVENTS
+        // NUMBER FOR SPECIFIC POSITION
+        // false FOR LAST POSITION
+        TOURISTIC_EVENTS_SPECIFIC_POSITION = 3,
+
         //PATHS AND DIRECTORY
         FILES_DIR = 'files/api',
         TREK_DIR = 'trek',
         POI_DIR = 'pois',
-        TOURRISTICE_EVENTS_DIR = 'touristicevents',
-        TOURRISTICE_EVENT_DIR = 'touristicevent',
-        TOURRISTIC_CONTENTS_DIR = 'touristiccontents',
-        TOURRISTIC_CONTENT_DIR = 'touristiccontent',
-        CATEGORIES_DIR = TOURRISTIC_CONTENT_DIR + '/' + 'categories/',
+        TOURISTIC_EVENTS_DIR = 'touristicevents',
+        TOURISTIC_EVENT_DIR = 'touristicevent',
+        TOURISTIC_CONTENTS_DIR = 'touristiccontents',
+        TOURISTIC_CONTENT_DIR = 'touristiccontent',
+        CATEGORIES_DIR = TOURISTIC_CONTENT_DIR + '/' + 'categories/',
 
         TREKS_FILE = 'trek.geojson',
         POI_FILE = 'poi.geojson',
         EVENTS_FILE = 'touristicevent.geojson',
-        TOURRISTIC_FILE = 'touristiccontent.geojson',
+        TOURISTIC_FILE = 'touristiccontent.geojson',
 
         MAIN_LEAFLET_BACKGROUND = {
             LAYER_URL: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -48,8 +58,8 @@ function settingsFactory(globalSettings) {
     //
     var treksUrl =  DOMAIN + '/' + _activeLang + '/' + FILES_DIR + '/' + TREK_DIR + '/' + TREKS_FILE,
         poisUrl =  DOMAIN + '/' + _activeLang + '/' + FILES_DIR + '/' + POI_DIR + '/' + POI_FILE,
-        eventsUrl =  DOMAIN + '/' + _activeLang + '/' + FILES_DIR + '/' + TOURRISTICE_EVENT_DIR + '/' + EVENTS_FILE,
-        tourristicUrl =  DOMAIN + '/' + _activeLang + '/' + FILES_DIR + '/' + TOURRISTIC_CONTENT_DIR + '/' + TOURRISTIC_FILE,
+        eventsUrl =  DOMAIN + '/' + _activeLang + '/' + FILES_DIR + '/' + TOURISTIC_EVENT_DIR + '/' + EVENTS_FILE,
+        touristicUrl =  DOMAIN + '/' + _activeLang + '/' + FILES_DIR + '/' + TOURISTIC_CONTENT_DIR + '/' + TOURISTIC_FILE,
         categoriesUrl =  DOMAIN + '/' + _activeLang + '/' + FILES_DIR + '/' + CATEGORIES_DIR,
         filters = {
             durations : [
@@ -81,6 +91,10 @@ function settingsFactory(globalSettings) {
     return {
         //CONSTANTS
         DOMAIN: DOMAIN,
+        ENABLE_TREKS: ENABLE_TREKS,
+        ENABLE_TOURISTIC_CONTENT: ENABLE_TOURISTIC_CONTENT,
+        ENABLE_TOURISTIC_EVENTS: ENABLE_TOURISTIC_EVENTS,
+        TOURISTIC_EVENTS_SPECIFIC_POSITION: TOURISTIC_EVENTS_SPECIFIC_POSITION,
         MAIN_LEAFLET_BACKGROUND: MAIN_LEAFLET_BACKGROUND,
         SATELLITE_LEAFLET_BACKGROUND: SATELLITE_LEAFLET_BACKGROUND,
         LEAFLET_CONF: LEAFLET_CONF,
@@ -89,7 +103,7 @@ function settingsFactory(globalSettings) {
         treksUrl: treksUrl,
         poisUrl: poisUrl,
         eventsUrl: eventsUrl,
-        tourristicUrl: tourristicUrl,
+        touristicUrl: touristicUrl,
         categoriesUrl: categoriesUrl,
         filters: filters,
 
