@@ -1,0 +1,11 @@
+.categories {
+    list-style: none;
+    .category {
+        button {
+            background: white;
+            svf {
+                fill: $primary-color;
+            }
+        }
+    }
+}

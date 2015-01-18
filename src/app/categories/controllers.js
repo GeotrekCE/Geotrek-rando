@@ -1,6 +1,6 @@
 'use strict';
 
-function CategoriesListeController($scope, categoriesService) {
+function CategoriesListeController($scope, categoriesService, $sce) {
 
     function loadCategories() {
         categoriesService.getCategories()

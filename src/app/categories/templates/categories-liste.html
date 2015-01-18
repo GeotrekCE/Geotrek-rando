@@ -1,2 +1,8 @@
 <ul class="categories">
+    <li ng-repeat="category in categories" class="category" ng-id="cat-{{category.id}}">
+        <button>
+            <ng-include src="category.pictogram"></ng-include>
+            <span>{{category.label}}</span>
+        </button>
+    </li>
 </ul>

@@ -1,6 +1,6 @@
 'use strict';
 
-function mapService($q, settingsFactory, treksService, iconsService) {
+function mapService($q, globalSettings, treksService, iconsService) {
 
     var self = this;
 
@@ -9,26 +9,26 @@ function mapService($q, settingsFactory, treksService, iconsService) {
         // Set background Layers
         this._baseLayers = {
             main: L.tileLayer(
-                settingsFactory.MAIN_LEAFLET_BACKGROUND.LAYER_URL,
+                globalSettings.MAIN_LEAFLET_BACKGROUND.LAYER_URL,
                 {
                     id: 'main',
-                    attribution: settingsFactory.MAIN_LEAFLET_BACKGROUND.ATTRIBUTION
+                    attribution: globalSettings.MAIN_LEAFLET_BACKGROUND.ATTRIBUTION
                 }
             ),
             satellite: L.tileLayer(
-                settingsFactory.SATELLITE_LEAFLET_BACKGROUND.LAYER_URL,
+                globalSettings.SATELLITE_LEAFLET_BACKGROUND.LAYER_URL,
                 {
                     id: 'satellite',
-                    attribution: settingsFactory.SATELLITE_LEAFLET_BACKGROUND.ATTRIBUTION
+                    attribution: globalSettings.SATELLITE_LEAFLET_BACKGROUND.ATTRIBUTION
                 }
             )
         };
 
         var mapParameters = {
-            center: [settingsFactory.LEAFLET_CONF.CENTER_LATITUDE, settingsFactory.LEAFLET_CONF.CENTER_LONGITUDE],
-            zoom: settingsFactory.LEAFLET_CONF.DEFAULT_ZOOM,
-            minZoom: settingsFactory.LEAFLET_CONF.DEFAULT_MIN_ZOOM,
-            maxZoom: settingsFactory.LEAFLET_CONF.DEFAULT_MAX_ZOOM,
+            center: [globalSettings.LEAFLET_CONF.CENTER_LATITUDE, globalSettings.LEAFLET_CONF.CENTER_LONGITUDE],
+            zoom: globalSettings.LEAFLET_CONF.DEFAULT_ZOOM,
+            minZoom: globalSettings.LEAFLET_CONF.DEFAULT_MIN_ZOOM,
+            maxZoom: globalSettings.LEAFLET_CONF.DEFAULT_MAX_ZOOM,
             scrollWheelZoom: true,
             layers: this._baseLayers.main
         };
@@ -194,11 +194,11 @@ function mapService($q, settingsFactory, treksService, iconsService) {
 
     this.setMinimap = function () {
         var miniMapLayer = new L.tileLayer(
-                settingsFactory.MAIN_LEAFLET_BACKGROUND.LAYER_URL,
+                globalSettings.MAIN_LEAFLET_BACKGROUND.LAYER_URL,
                 {
                     minZoom: 0,
                     maxZoom: 13,
-                    attribution: settingsFactory.MAIN_LEAFLET_BACKGROUND.ATTRIBUTION
+                    attribution: globalSettings.MAIN_LEAFLET_BACKGROUND.ATTRIBUTION
                 }
             ),
             miniMapOptions = {
@@ -210,7 +210,7 @@ function mapService($q, settingsFactory, treksService, iconsService) {
     };
 
     this.setAttribution = function () {
-        this._map.attributionControl.setPrefix(settingsFactory.LEAFLET_CONF.ATTRIBUTION);
+        this._map.attributionControl.setPrefix(globalSettings.LEAFLET_CONF.ATTRIBUTION);
     };
 
     this.setPositionMarker = function () {

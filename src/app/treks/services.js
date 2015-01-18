@@ -1,6 +1,6 @@
 'use strict';
 
-function treksService(settingsFactory, $resource, $q, filtersService) {
+function treksService(globalSettings, settingsFactory, $resource, $q, filtersService) {
 
     var self = this;
 
@@ -31,23 +31,23 @@ function treksService(settingsFactory, $resource, $q, filtersService) {
         // Parse trek pictures, and change their URL
         angular.forEach(treksData.features, function(trek) {
             angular.forEach(trek.properties.pictures, function(picture) {
-                picture.url = settingsFactory.DOMAIN + picture.url;
+                picture.url = globalSettings.DOMAIN + picture.url;
             });
             angular.forEach(trek.properties.usages, function(usage) {
-                usage.pictogram = settingsFactory.DOMAIN + usage.pictogram;
+                usage.pictogram = globalSettings.DOMAIN + usage.pictogram;
             });
             angular.forEach(trek.properties.themes, function(theme) {
-                theme.pictogram = settingsFactory.DOMAIN + theme.pictogram;
+                theme.pictogram = globalSettings.DOMAIN + theme.pictogram;
             });
             angular.forEach(trek.properties.networks, function(network) {
-                network.pictogram = settingsFactory.DOMAIN + network.pictogram;
+                network.pictogram = globalSettings.DOMAIN + network.pictogram;
             });
             angular.forEach(trek.properties.information_desks, function(information_desk) {
-                information_desk.photo_url = settingsFactory.DOMAIN + information_desk.photo_url;
+                information_desk.photo_url = globalSettings.DOMAIN + information_desk.photo_url;
             });
-            trek.properties.thumbnail = settingsFactory.DOMAIN + trek.properties.thumbnail;
-            trek.properties.difficulty.pictogram = settingsFactory.DOMAIN + trek.properties.difficulty.pictogram;
-            trek.properties.altimetric_profile = settingsFactory.DOMAIN + trek.properties.altimetric_profile.replace(".json", ".svg");
+            trek.properties.thumbnail = globalSettings.DOMAIN + trek.properties.thumbnail;
+            trek.properties.difficulty.pictogram = globalSettings.DOMAIN + trek.properties.difficulty.pictogram;
+            trek.properties.altimetric_profile = globalSettings.DOMAIN + trek.properties.altimetric_profile.replace(".json", ".svg");
         });
         return treksData;
     };

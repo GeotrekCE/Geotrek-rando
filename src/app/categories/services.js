@@ -1,6 +1,6 @@
 'use strict';
 
-function categoriesService(settingsFactory, $q, treksService, contentsService, eventsService) {
+function categoriesService(globalSettings, $q, treksService, contentsService, eventsService) {
     var self = this;
 
     this.findIndexofId = function (anArray, id) {
@@ -30,7 +30,7 @@ function categoriesService(settingsFactory, $q, treksService, contentsService, e
         // Parse trek pictures, and change their URL
         angular.forEach(categoriesData, function (category) {
             if (category.pictogram) {
-                category.pictogram = settingsFactory.DOMAIN + category.pictogram;
+                category.pictogram = globalSettings.DOMAIN + category.pictogram;
             }
         });
 
@@ -113,7 +113,7 @@ function categoriesService(settingsFactory, $q, treksService, contentsService, e
 
             } else {
 
-                var catIndex = self.findIndexofId(contentsCategories,aContent.category.id);
+                var catIndex = self.findIndexofId(contentsCategories, aContent.category.id);
 
                 angular.forEach(aContent.type1, function (aType) {
 
@@ -160,7 +160,7 @@ function categoriesService(settingsFactory, $q, treksService, contentsService, e
             self._categoriesList = [];
             var promises = [];
 
-            if (settingsFactory.ENABLE_TREKS) {
+            if (globalSettings.ENABLE_TREKS) {
                 promises.push(
                     treksService.getTreks()
                         .then(
@@ -171,7 +171,7 @@ function categoriesService(settingsFactory, $q, treksService, contentsService, e
                 );
             }
 
-            if (settingsFactory.ENABLE_TOURISTIC_CONTENT) {
+            if (globalSettings.ENABLE_TOURISTIC_CONTENT) {
                 promises.push(
                     contentsService.getContents()
                         .then(
@@ -182,7 +182,7 @@ function categoriesService(settingsFactory, $q, treksService, contentsService, e
                 );
             }
 
-            if (settingsFactory.ENABLE_TOURISTIC_EVENTS) {
+            if (globalSettings.ENABLE_TOURISTIC_EVENTS) {
                 promises.push(
                     eventsService.getEvents()
                         .then(
@@ -197,20 +197,20 @@ function categoriesService(settingsFactory, $q, treksService, contentsService, e
             $q.all(promises)
                 .then(
                     function () {
-                        if (settingsFactory.ENABLE_TREKS) {
+                        if (globalSettings.ENABLE_TREKS) {
                             self._categoriesList.push(trekCat);
                         }
-                        if (settingsFactory.ENABLE_TOURISTIC_CONTENT) {
+                        if (globalSettings.ENABLE_TOURISTIC_CONTENT) {
                             angular.forEach(contentCats, function (aContentsCat) {
                                 self._categoriesList.push(aContentsCat);
                             });
                         }
-                        if (settingsFactory.ENABLE_TOURISTIC_EVENTS) {
+                        if (globalSettings.ENABLE_TOURISTIC_EVENTS) {
 
-                            if (settingsFactory.TOURISTIC_EVENTS_SPECIFIC_POSITION
-                                    && typeof settingsFactory.TOURISTIC_EVENTS_SPECIFIC_POSITION === 'number'
-                                    && settingsFactory.TOURISTIC_EVENTS_SPECIFIC_POSITION <= self._categoriesList.length) {
-                                self._categoriesList.splice(settingsFactory.TOURISTIC_EVENTS_SPECIFIC_POSITION - 1, 0, eventCat);
+                            if (globalSettings.TOURISTIC_EVENTS_SPECIFIC_POSITION
+                                    && typeof globalSettings.TOURISTIC_EVENTS_SPECIFIC_POSITION === 'number'
+                                    && globalSettings.TOURISTIC_EVENTS_SPECIFIC_POSITION <= self._categoriesList.length) {
+                                self._categoriesList.splice(globalSettings.TOURISTIC_EVENTS_SPECIFIC_POSITION - 1, 0, eventCat);
                             } else {
                                 self._categoriesList.push(eventCat);
                             }

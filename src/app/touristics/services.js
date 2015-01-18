@@ -1,6 +1,6 @@
 'use strict';
 
-function contentsService(settingsFactory, $resource, $q) {
+function contentsService(globalSettings, settingsFactory, $resource, $q) {
 
     var self = this;
 
@@ -9,16 +9,16 @@ function contentsService(settingsFactory, $resource, $q) {
         // Parse content pictures, and change their URL
         angular.forEach(contentsData, function(content) {
 
-            content.category.pictogram = settingsFactory.DOMAIN + content.category.pictogram;
+            content.category.pictogram = globalSettings.DOMAIN + content.category.pictogram;
             angular.forEach(content.themes, function(theme) {
-                theme.pictogram = settingsFactory.DOMAIN + theme.pictogram;
+                theme.pictogram = globalSettings.DOMAIN + theme.pictogram;
             });
-            content.map_image_url = settingsFactory.DOMAIN + content.map_image_url;
-            content.filelist_url = settingsFactory.DOMAIN + content.filelist_url;
-            content.printable = settingsFactory.DOMAIN + content.printable;
-            content.thumbnail = settingsFactory.DOMAIN + content.thumbnail;
+            content.map_image_url = globalSettings.DOMAIN + content.map_image_url;
+            content.filelist_url = globalSettings.DOMAIN + content.filelist_url;
+            content.printable = globalSettings.DOMAIN + content.printable;
+            content.thumbnail = globalSettings.DOMAIN + content.thumbnail;
             angular.forEach(content.pictures, function(picture) {
-                picture.url = settingsFactory.DOMAIN + picture.url;
+                picture.url = globalSettings.DOMAIN + picture.url;
             });
             
         });
@@ -60,7 +60,7 @@ function contentsService(settingsFactory, $resource, $q) {
 
 }
 
-function eventsService(settingsFactory, $resource, $q) {
+function eventsService(globalSettings, settingsFactory, $resource, $q) {
 
     var self = this;
 
@@ -70,14 +70,14 @@ function eventsService(settingsFactory, $resource, $q) {
         angular.forEach(eventsData.b, function(trEvent) {
 
             angular.forEach(trEvent.themes, function(theme) {
-                theme.pictogram = settingsFactory.DOMAIN + theme.pictogram;
+                theme.pictogram = globalSettings.DOMAIN + theme.pictogram;
             });
-            trEvent.map_image_url = settingsFactory.DOMAIN + trEvent.map_image_url;
-            trEvent.filelist_url = settingsFactory.DOMAIN + trEvent.filelist_url;
-            trEvent.printable = settingsFactory.DOMAIN + trEvent.printable;
-            trEvent.thumbnail = settingsFactory.DOMAIN + trEvent.thumbnail;
+            trEvent.map_image_url = globalSettings.DOMAIN + trEvent.map_image_url;
+            trEvent.filelist_url = globalSettings.DOMAIN + trEvent.filelist_url;
+            trEvent.printable = globalSettings.DOMAIN + trEvent.printable;
+            trEvent.thumbnail = globalSettings.DOMAIN + trEvent.thumbnail;
             angular.forEach(trEvent.pictures, function(picture) {
-                picture.url = settingsFactory.DOMAIN + picture.url;
+                picture.url = globalSettings.DOMAIN + picture.url;
             });
             
         });
