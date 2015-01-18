@@ -2,7 +2,7 @@
 
 var constants = {
 
-    DOMAIN: 'http://192.168.1.26:8888'/*'http://prod-rando-fr.makina-corpus.net/'*/,
+    DOMAIN: 'http://192.168.1.26:8888',
     DEFAULT_LANGUAGE: 'fr',
 
     // SET TO TRUE ELEMENTS AVAILABLE FOR YOUR GEOTREK !
@@ -48,7 +48,7 @@ var constants = {
         TREK_COLOR: '#F89406'
     }
 
-}
+};
 
 function providersConfig($sceDelegateProvider) {
 

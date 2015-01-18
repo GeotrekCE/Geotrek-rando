@@ -4,23 +4,23 @@ function contentsService(globalSettings, settingsFactory, $resource, $q) {
 
     var self = this;
 
-    this.replaceImgURLs = function (contentsData) {        
+    this.replaceImgURLs = function (contentsData) {
 
         // Parse content pictures, and change their URL
-        angular.forEach(contentsData, function(content) {
+        angular.forEach(contentsData, function (content) {
 
             content.category.pictogram = globalSettings.DOMAIN + content.category.pictogram;
-            angular.forEach(content.themes, function(theme) {
+            angular.forEach(content.themes, function (theme) {
                 theme.pictogram = globalSettings.DOMAIN + theme.pictogram;
             });
             content.map_image_url = globalSettings.DOMAIN + content.map_image_url;
             content.filelist_url = globalSettings.DOMAIN + content.filelist_url;
             content.printable = globalSettings.DOMAIN + content.printable;
             content.thumbnail = globalSettings.DOMAIN + content.thumbnail;
-            angular.forEach(content.pictures, function(picture) {
+            angular.forEach(content.pictures, function (picture) {
                 picture.url = globalSettings.DOMAIN + picture.url;
             });
-            
+
         });
         return contentsData;
     };
@@ -42,7 +42,7 @@ function contentsService(globalSettings, settingsFactory, $resource, $q) {
                     isArray: true,
                     cache: true
                 }
-            },{stripTrailingSlashes: false});
+            }, {stripTrailingSlashes: false});
 
             requests.query().$promise
                 .then(function (file) {
@@ -64,22 +64,22 @@ function eventsService(globalSettings, settingsFactory, $resource, $q) {
 
     var self = this;
 
-    this.replaceImgURLs = function (eventsData) {        
+    this.replaceImgURLs = function (eventsData) {
 
         // Parse trEvent pictures, and change their URL
-        angular.forEach(eventsData.b, function(trEvent) {
+        angular.forEach(eventsData.b, function (trEvent) {
 
-            angular.forEach(trEvent.themes, function(theme) {
+            angular.forEach(trEvent.themes, function (theme) {
                 theme.pictogram = globalSettings.DOMAIN + theme.pictogram;
             });
             trEvent.map_image_url = globalSettings.DOMAIN + trEvent.map_image_url;
             trEvent.filelist_url = globalSettings.DOMAIN + trEvent.filelist_url;
             trEvent.printable = globalSettings.DOMAIN + trEvent.printable;
             trEvent.thumbnail = globalSettings.DOMAIN + trEvent.thumbnail;
-            angular.forEach(trEvent.pictures, function(picture) {
+            angular.forEach(trEvent.pictures, function (picture) {
                 picture.url = globalSettings.DOMAIN + picture.url;
             });
-            
+
         });
         return eventsData;
     };
@@ -101,7 +101,7 @@ function eventsService(globalSettings, settingsFactory, $resource, $q) {
                     isArray: true,
                     cache: true
                 }
-            },{stripTrailingSlashes: false});
+            }, {stripTrailingSlashes: false});
 
             requests.query().$promise
                 .then(function (file) {

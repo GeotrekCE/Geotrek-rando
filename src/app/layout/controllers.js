@@ -1,7 +1,6 @@
 'use strict';
 
 function LayoutController() {
-
 }
 
 function HeaderController() {

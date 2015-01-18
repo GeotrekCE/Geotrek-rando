@@ -1,33 +1,31 @@
 'use strict';
 
-function MapController($scope, settingsFactory, mapService, iconsService, treksService) {
-    
-    var map;
+function MapController($scope, mapService, treksService) {
 
     function updateTreks(callback) {
         treksService.getTreks()
-        .then(
-            function(data) {
-                $scope.treks = data;
-                if (callback && typeof callback[0] === 'function') {
-                    callback[0](callback[1]);
+            .then(
+                function (data) {
+                    $scope.treks = data;
+                    if (callback && typeof callback[0] === 'function') {
+                        callback[0](callback[1]);
+                    }
                 }
-            }
-        );
+            );
     }
 
     function mapInit(parameters) {
 
         var mapSelector = parameters[0] || 'map';
 
-        map = mapService.initMap(mapSelector);
+        mapService.initMap(mapSelector);
 
         // Load treks in map
         mapService.displayTreks($scope.treks.features);
 
     }
 
-    updateTreks([mapInit,['map']]);
+    updateTreks([mapInit, ['map']]);
 }
 
 module.exports = {

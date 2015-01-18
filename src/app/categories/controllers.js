@@ -1,6 +1,6 @@
 'use strict';
 
-function CategoriesListeController($scope, categoriesService, $sce) {
+function CategoriesListeController($scope, categoriesService) {
 
     function loadCategories() {
         categoriesService.getCategories()
@@ -14,7 +14,7 @@ function CategoriesListeController($scope, categoriesService, $sce) {
 
     loadCategories();
 
-};
+}
 
 module.exports = {
     CategoriesListeController: CategoriesListeController

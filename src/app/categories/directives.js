@@ -9,8 +9,8 @@ function categoriesListeDirective() {
         template: require('./templates/categories-liste.html'),
         controller: controllers.CategoriesListeController
     };
-};
+}
 
 module.exports = {
     categoriesListeDirective: categoriesListeDirective
-}
+};

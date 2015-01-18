@@ -1,6 +1,6 @@
 'use strict';
 
-function mapService($q, globalSettings, treksService, iconsService) {
+function mapService(globalSettings, treksService, iconsService) {
 
     var self = this;
 
@@ -42,15 +42,13 @@ function mapService($q, globalSettings, treksService, iconsService) {
         this.initMapControls();
 
         this.createTreksLayer();
-
-        return map;
     };
 
     this.createTreksLayer = function () {
 
         this._treksLayer = new L.MarkerClusterGroup({
             showCoverageOnHover: false,
-            iconCreateFunction: function(cluster) {
+            iconCreateFunction: function (cluster) {
                 return iconsService.getClusterIcon(cluster);
             }
         });
@@ -63,10 +61,10 @@ function mapService($q, globalSettings, treksService, iconsService) {
         this._treksLayer.clearLayers();
 
         //$scope.mapService = mapService;
-        angular.forEach(trekCollection, function(trek) {
+        angular.forEach(trekCollection, function (trek) {
             var trekDeparture = self.createClusterMarkerFromTrek(trek);
             trekDeparture.on({
-                click: function(e) {
+                click: function () {
                     console.log('marker Clicked');
                     //$state.go("home.map.detail", { trekId: trek.id });
                 }
@@ -110,13 +108,18 @@ function mapService($q, globalSettings, treksService, iconsService) {
             name: trek.properties.departure,
         }));
 
-        if(parkingPoint) {
-            markers.push(L.marker([parkingPoint.lat, parkingPoint.lng], {
-            icon: iconsService.getParkingIcon(),
-            name: "Parking",
-            description: trek.properties.advised_parking,
-            }));
-        };
+        if (parkingPoint) {
+            markers.push(
+                L.marker(
+                    [parkingPoint.lat, parkingPoint.lng],
+                    {
+                        icon: iconsService.getParkingIcon(),
+                        name: "Parking",
+                        description: trek.properties.advised_parking,
+                    }
+                )
+            );
+        }
 
         var informationCount = 0;
         angular.forEach(trek.properties.information_desks, function (information) {
@@ -125,12 +128,17 @@ function mapService($q, globalSettings, treksService, iconsService) {
                 + "<p>" + information.postal_code + " " + information.municipality + "</p>"
                 + "<p><a href='" + information.website + "'>Web</a> - <a href='tel:" + information.phone + "'>" + information.phone + "</a></p>";
 
-            markers.push(L.marker([information.latitude, information.longitude], {
-                icon: iconsService.getInformationIcon(),
-                name: information.name,
-                thumbnail: information.photo_url,
-                description: informationDescription,
-            }));
+            markers.push(
+                L.marker(
+                    [information.latitude, information.longitude],
+                    {
+                        icon: iconsService.getInformationIcon(),
+                        name: information.name,
+                        thumbnail: information.photo_url,
+                        description: informationDescription,
+                    }
+                )
+            );
             informationCount += 1;
         });
 
@@ -140,14 +148,17 @@ function mapService($q, globalSettings, treksService, iconsService) {
                 'lng': poi.geometry.coordinates[0]
             };
             var poiIcon = iconsService.getPOIIcon(poi);
-            markers.push(L.marker([poiCoords.lat, poiCoords.lng], {
-                icon: poiIcon,
-                name: poi.properties.name,
-                description: poi.properties.description,
-                thumbnail: poi.properties.thumbnail,
-                img: poi.properties.pictures[0],
-                pictogram: poi.properties.type.pictogram
-            }));
+            markers.push(
+                L.marker([poiCoords.lat, poiCoords.lng],
+                    {
+                        icon: poiIcon,
+                        name: poi.properties.name,
+                        description: poi.properties.description,
+                        thumbnail: poi.properties.thumbnail,
+                        img: poi.properties.pictures[0],
+                        pictogram: poi.properties.type.pictogram
+                    })
+            );
         });
 
         return markers;
@@ -156,9 +167,12 @@ function mapService($q, globalSettings, treksService, iconsService) {
     this.createClusterMarkerFromTrek = function (trek) {
         var startPoint = treksService.getStartPoint(trek);
 
-        var marker = L.marker([startPoint.lat, startPoint.lng], {
-            icon: iconsService.getTrekIcon()
-        });
+        var marker = L.marker(
+            [startPoint.lat, startPoint.lng],
+            {
+                icon: iconsService.getTrekIcon()
+            }
+        );
 
         return marker;
     };
@@ -206,7 +220,7 @@ function mapService($q, globalSettings, treksService, iconsService) {
                 zoomLevelOffset: -3
             };
 
-        var miniMap = new L.Control.MiniMap(miniMapLayer, miniMapOptions).addTo(this._map);
+        this._miniMap = new L.Control.MiniMap(miniMapLayer, miniMapOptions).addTo(this._map);
     };
 
     this.setAttribution = function () {
@@ -226,7 +240,7 @@ function mapService($q, globalSettings, treksService, iconsService) {
             className: 'leaflet-live-user',
             weight: 2
         };
-    }
+    };
 
     this.createSatelliteView = function () {
         L.Control.SwitchBackgroundLayers = L.Control.extend({
@@ -241,15 +255,17 @@ function mapService($q, globalSettings, treksService, iconsService) {
                 this.switch_detail_zoom = $(map._container).data('switch-detail-zoom');
                 if (this.switch_detail_zoom > 0) {
                     map.on('zoomend', function (e) {
-                        if (map.isShowingLayer('satellite'))
+                        if (map.isShowingLayer('satellite')) {
                             return;
-                        if (e.target.getZoom() > this.switch_detail_zoom) {
-                            if (!map.isShowingLayer('detail'))
-                                setTimeout(function () { map.switchLayer('detail'); }, 100);
                         }
-                        else {
-                            if (!map.isShowingLayer('main'))
+                        if (e.target.getZoom() > this.switch_detail_zoom) {
+                            if (!map.isShowingLayer('detail')) {
+                                setTimeout(function () { map.switchLayer('detail'); }, 100);
+                            }
+                        } else {
+                            if (!map.isShowingLayer('main')) {
                                 setTimeout(function () { map.switchLayer('main'); }, 100);
+                            }
                         }
                     }, this);
                 }
@@ -264,7 +280,7 @@ function mapService($q, globalSettings, treksService, iconsService) {
                                         container: map._container});
 
                 L.DomEvent.disableClickPropagation(this.button);
-                L.DomEvent.on(this.button, 'click', function (e) {
+                L.DomEvent.on(this.button, 'click', function () {
                     this.toggleLayer();
                 }, this);
 
@@ -272,17 +288,15 @@ function mapService($q, globalSettings, treksService, iconsService) {
             },
 
             toggleLayer: function () {
-                
+
                 if (this.map.isShowingLayer('main') || this.map.isShowingLayer('detail')) {
                     this.map.switchLayer('satellite');
 
                     L.DomUtil.removeClass(this.button, 'satellite');
                     L.DomUtil.addClass(this.button, 'main');
                     this.button.setAttribute('title', 'Show plan');
-                }
-                else {
-                    this.map.switchLayer(this.map.getZoom() > this.switch_detail_zoom ?
-                                         'detail' : 'main');
+                } else {
+                    this.map.switchLayer(this.map.getZoom() > this.switch_detail_zoom ? 'detail' : 'main');
 
                     L.DomUtil.removeClass(this.button, 'main');
                     L.DomUtil.addClass(this.button, 'satellite');
@@ -297,7 +311,7 @@ function mapService($q, globalSettings, treksService, iconsService) {
         });
 
         var switchControl = new L.Control.SwitchBackgroundLayers();
-            switchControl.addTo(this._map);
+        switchControl.addTo(this._map);
     };
 
 
@@ -307,7 +321,7 @@ function mapService($q, globalSettings, treksService, iconsService) {
     this.initCustomsMixins = function () {
         this.addMapLayersMixin();
         this.topPadding();
-    }
+    };
 
     this.addMapLayersMixin = function () {
         var LayerSwitcherMixin = {
@@ -315,15 +329,15 @@ function mapService($q, globalSettings, treksService, iconsService) {
             isShowingLayer: function (name) {
                 if (this.hasLayer(self._baseLayers[name])) {
                     return true;
-                } else {
-                    return false;
                 }
+                return false;
             },
 
             switchLayer: function (destLayer) {
-                for (var base in self._baseLayers) { 
-                    if (this.hasLayer(self._baseLayers[base]) && self._baseLayers[base] != self._baseLayers[destLayer]) { 
-                        this.removeLayer(self._baseLayers[base]); 
+                var base;
+                for (base in self._baseLayers) {
+                    if (this.hasLayer(self._baseLayers[base]) && self._baseLayers[base] !== self._baseLayers[destLayer]) {
+                        this.removeLayer(self._baseLayers[base]);
                     }
                 }
                 this.addLayer(self._baseLayers[destLayer]);
@@ -331,7 +345,7 @@ function mapService($q, globalSettings, treksService, iconsService) {
         };
 
         L.Map.include(LayerSwitcherMixin);
-    }
+    };
 
     this.topPadding = function () {
         L.LatLngBounds.prototype.padTop = function (bufferRatio) {
@@ -340,15 +354,16 @@ function mapService($q, globalSettings, treksService, iconsService) {
                 heightBuffer = Math.abs(sw.lat - ne.lat) * bufferRatio;
 
             return new L.LatLngBounds(
-                    new L.LatLng(sw.lat, sw.lng),
-                    new L.LatLng(ne.lat + heightBuffer, ne.lng));
+                new L.LatLng(sw.lat, sw.lng),
+                new L.LatLng(ne.lat + heightBuffer, ne.lng)
+            );
 
         };
     };
 
 }
 
-function iconsService($window) {
+function iconsService() {
 
     var trek_icons = {
         default_icon: {},
@@ -393,7 +408,7 @@ function iconsService($window) {
             iconUrl: pictogramUrl,
             iconSize: [32, 32],
             iconAnchor: [16, 16]
-        })
+        });
     };
 
     this.getClusterIcon = function (cluster) {

@@ -1,9 +1,9 @@
 'use strict';
 
-function utilsService(settingsFactory) {
-    
-};
+function utilsService() {
+
+}
 
 module.exports = {
     utilsService: utilsService
-}
+};

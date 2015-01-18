@@ -4,15 +4,15 @@ function TreksListeController($scope, treksService) {
 
     function updateTreks() {
         treksService.getTreks()
-        .then(
-            function(data) {
-                $scope.treks = data;
-            }
-        );
+            .then(
+                function (data) {
+                    $scope.treks = data;
+                }
+            );
     }
 
     updateTreks();
-        
+
 }
 
 
