@@ -24,7 +24,7 @@ function settingsFactory(globalSettings) {
         TOURISTIC_EVENT_DIR = 'touristicevent',
         TOURISTIC_CONTENTS_DIR = 'touristiccontents',
         TOURISTIC_CONTENT_DIR = 'touristiccontent',
-        CATEGORIES_DIR = TOURISTIC_CONTENT_DIR + '/' + 'categories/',
+        CATEGORIES_DIR = TOURISTIC_CONTENT_DIR + '/' + 'categories',
 
         TREKS_FILE = 'trek.geojson',
         POI_FILE = 'poi.geojson',
@@ -58,9 +58,9 @@ function settingsFactory(globalSettings) {
     //
     var treksUrl =  DOMAIN + '/' + _activeLang + '/' + FILES_DIR + '/' + TREK_DIR + '/' + TREKS_FILE,
         poisUrl =  DOMAIN + '/' + _activeLang + '/' + FILES_DIR + '/' + POI_DIR + '/' + POI_FILE,
-        eventsUrl =  DOMAIN + '/' + _activeLang + '/' + FILES_DIR + '/' + TOURISTIC_EVENT_DIR + '/' + EVENTS_FILE,
-        touristicUrl =  DOMAIN + '/' + _activeLang + '/' + FILES_DIR + '/' + TOURISTIC_CONTENT_DIR + '/' + TOURISTIC_FILE,
-        categoriesUrl =  DOMAIN + '/' + _activeLang + '/' + FILES_DIR + '/' + CATEGORIES_DIR,
+        eventsUrl =  DOMAIN + '/' + _activeLang + '/' + FILES_DIR + '/' + TOURISTIC_EVENTS_DIR + '/',
+        touristicUrl =  DOMAIN + '/' + _activeLang + '/' + FILES_DIR + '/' + TOURISTIC_CONTENTS_DIR + '/',
+        categoriesUrl =  DOMAIN + '/' + _activeLang + '/' + FILES_DIR + '/' + CATEGORIES_DIR + '/',
         filters = {
             durations : [
                 { id: 4, name: '<1/2 J', interval: [0, 4]},

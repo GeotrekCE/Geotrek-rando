@@ -7,7 +7,9 @@ var dependencies = [
     'rando.layout',
     'rando.map',
     'rando.filters',
+    'rando.touristics',
     'rando.categories',
+
 
     // External stuff
     'ui.router',
@@ -21,6 +23,7 @@ require('./config');
 //require('./commons');
 require('./layout');
 require('./treks');
+require('./touristics');
 require('./categories');
-require('./map');
 require('./filters');
+require('./map');
