@@ -1,12 +1,34 @@
 'use strict';
 
-function categoriesService(settingsFactory, $resource, $q) {
+function categoriesService(settingsFactory, $q, treksService, contentsService, eventsService) {
     var self = this;
 
-    this.replaceImgURLs = function (categoriesData) {        
+    this.findIndexofId = function (anArray, id) {
+        var length = anArray.length, i;
+        for (i = 0; i < length; i++) {
+            if (anArray[i].id === id) {
+                return i;
+            }
+        }
+    };
+
+    this.idInArray = function (anArray, usage) {
+
+        var isInArray = false;
+
+        angular.forEach(anArray, function (arrayElement) {
+            if (arrayElement.id === usage.id) {
+                isInArray = true;
+            }
+        });
+
+        return isInArray;
+    };
+
+    this.replaceImgURLs = function (categoriesData) {
 
         // Parse trek pictures, and change their URL
-        angular.forEach(categoriesData, function(category) {
+        angular.forEach(categoriesData, function (category) {
             if (category.pictogram) {
                 category.pictogram = settingsFactory.DOMAIN + category.pictogram;
             }
@@ -15,91 +37,195 @@ function categoriesService(settingsFactory, $resource, $q) {
         return categoriesData;
     };
 
-    this.getTreksCategory = function () {
+    this.getTreksCategories = function (treks) {
 
-        var trekCategory = {
+        var treksUsages = [];
+
+        angular.forEach(treks.features, function (aTrek) {
+
+            angular.forEach(aTrek.properties.usages, function (usage) {
+
+                if (!(self.idInArray(treksUsages, usage))) {
+                    treksUsages.push(usage);
+                }
+
+            });
+
+        });
+
+        var treksCategory = {
             id: 80085,
-            label: 'Treks',
-        }
+            label: 'Randonnées',
+            pictogram: './images/trek-category.svg',
+            type1_label: 'Type d\'usage',
+            type2_label: 'Usage',
+            types: treksUsages
+        };
 
-        self._categoriesList.push(trekCategory);
+        return treksCategory;
 
     };
 
-    this.getTouristicEvents = function () {
+    this.getTouristicEventsCategories = function (events) {
+
+        var eventsUsages = [];
+
+        angular.forEach(events, function (anEvent) {
+
+            if (!(self.idInArray(eventsUsages, anEvent.type))) {
+                eventsUsages.push(anEvent.type);
+            }
+
+        });
 
         var eventsCategory = {
             id: 54635,
             label: 'Evènements tourristiques',
-        }
-        if (settingsFactory.TOURISTIC_EVENTS_SPECIFIC_POSITION 
-            && typeof settingsFactory.TOURISTIC_EVENTS_SPECIFIC_POSITION === 'number' 
-            && settingsFactory.TOURISTIC_EVENTS_SPECIFIC_POSITION <= self._categoriesList.length) {
-            self._categoriesList.splice(settingsFactory.TOURISTIC_EVENTS_SPECIFIC_POSITION-1,0,eventsCategory);
-        } else {
-            self._categoriesList.push(eventsCategory);
-        }
+            pictogram: './images/events-category.svg',
+            type1_label: 'Type d\'usage',
+            type2_label: 'Type',
+            types: eventsUsages
+        };
+
+        return eventsCategory;
+
+    };
+
+    this.getTouristicContentCategories = function (contents) {
+
+        var contentsCategories = [];
+
+        angular.forEach(contents, function (aContent) {
+
+            if (!(self.idInArray(contentsCategories, aContent.category))) {
+
+                var currentCategory = {
+                    id: aContent.category.id,
+                    label: aContent.category.label,
+                    pictogram: aContent.category.pictogram,
+                    type1_label: aContent.category.type1_label,
+                    type2_label: aContent.category.type2_label,
+                    type1: aContent.type1 || [],
+                    type2: aContent.type2 || []
+                };
+
+                contentsCategories.push(currentCategory);
+
+            } else {
+
+                var catIndex = self.findIndexofId(contentsCategories,aContent.category.id);
+
+                angular.forEach(aContent.type1, function (aType) {
+
+                    if (!(self.idInArray(contentsCategories[catIndex].type1, aType))) {
+
+                        contentsCategories[catIndex].type1.push(aType);
+
+                    }
+
+                });
+
+                angular.forEach(aContent.type2, function (aType) {
+
+                    if (!(self.idInArray(contentsCategories[catIndex].type2, aType))) {
+
+                        contentsCategories[catIndex].type2.push(aType);
+
+                    }
+
+                });
+
+            }
+
+
+        });
+
+        return contentsCategories;
 
     };
 
     this.getCategories = function () {
 
-        var deferred = $q.defer();
+        var deferred = $q.defer(),
+            trekCat,
+            contentCats,
+            eventCat;
 
         if (self._categoriesList) {
 
             deferred.resolve(self._categoriesList);
 
         } else {
-            var url = settingsFactory.categoriesUrl;
 
             self._categoriesList = [];
+            var promises = [];
 
-            if(settingsFactory.ENABLE_TOURISTIC_CONTENT) {
-                var requests = $resource(url, {}, {
-                    query: {
-                        method: 'GET',
-                        isArray: true,
-                        cache: true
-                    }
-                },{stripTrailingSlashes: false});
-
-                requests.query().$promise
-                    .then(function (file) {
-                        if (settingsFactory.ENABLE_TREKS) {
-                            self.getTreksCategory();
-                        }
-                        var data = angular.fromJson(file);
-                        var convertedData = self.replaceImgURLs(data);
-                        angular.forEach(convertedData, function (category) {
-                            if (category.id) {
-                                self._categoriesList.push(category);
+            if (settingsFactory.ENABLE_TREKS) {
+                promises.push(
+                    treksService.getTreks()
+                        .then(
+                            function (treks) {
+                                trekCat = self.getTreksCategories(treks);
                             }
-                        });
-                        if (settingsFactory.ENABLE_TOURISTIC_EVENTS) {
-                            self.getTouristicEvents();
-                        }
-                        deferred.resolve(self._categoriesList);
-                    });
-            } else {
-                if (settingsFactory.ENABLE_TREKS) {
-                    self.getTreksCategory();
-                }
-                if (settingsFactory.ENABLE_TOURISTIC_EVENTS) {
-                    self.getTouristicEvents();
-                }
-                deferred.resolve(self._categoriesList);
+                        )
+                );
             }
 
-            
+            if (settingsFactory.ENABLE_TOURISTIC_CONTENT) {
+                promises.push(
+                    contentsService.getContents()
+                        .then(
+                            function (contents) {
+                                contentCats = self.getTouristicContentCategories(contents);
+                            }
+                        )
+                );
+            }
 
+            if (settingsFactory.ENABLE_TOURISTIC_EVENTS) {
+                promises.push(
+                    eventsService.getEvents()
+                        .then(
+                            function (trEvents) {
+                                eventCat = self.getTouristicEventsCategories(trEvents);
+                            }
+                        )
+
+                );
+            }
+
+            $q.all(promises)
+                .then(
+                    function () {
+                        if (settingsFactory.ENABLE_TREKS) {
+                            self._categoriesList.push(trekCat);
+                        }
+                        if (settingsFactory.ENABLE_TOURISTIC_CONTENT) {
+                            angular.forEach(contentCats, function (aContentsCat) {
+                                self._categoriesList.push(aContentsCat);
+                            });
+                        }
+                        if (settingsFactory.ENABLE_TOURISTIC_EVENTS) {
+
+                            if (settingsFactory.TOURISTIC_EVENTS_SPECIFIC_POSITION
+                                    && typeof settingsFactory.TOURISTIC_EVENTS_SPECIFIC_POSITION === 'number'
+                                    && settingsFactory.TOURISTIC_EVENTS_SPECIFIC_POSITION <= self._categoriesList.length) {
+                                self._categoriesList.splice(settingsFactory.TOURISTIC_EVENTS_SPECIFIC_POSITION - 1, 0, eventCat);
+                            } else {
+                                self._categoriesList.push(eventCat);
+                            }
+
+                        }
+                        deferred.resolve(self._categoriesList);
+                    }
+                );
         }
 
         return deferred.promise;
 
     };
-};
+}
 
 module.exports = {
     categoriesService: categoriesService
-}
+};
