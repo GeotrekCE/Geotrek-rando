@@ -2,7 +2,7 @@
 
 var constants = {
 
-    DOMAIN: 'http://192.168.1.26:8888',
+    DOMAIN: 'http://192.168.100.44:8888',
     DEFAULT_LANGUAGE: 'fr',
 
     // SET TO TRUE ELEMENTS AVAILABLE FOR YOUR GEOTREK !

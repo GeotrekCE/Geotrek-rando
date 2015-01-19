@@ -9,6 +9,7 @@ var dependencies = [
     'rando.filters',
     'rando.touristics',
     'rando.categories',
+    'rando.results',
 
 
     // External stuff
@@ -24,6 +25,7 @@ require('./config');
 require('./layout');
 require('./treks');
 require('./touristics');
+require('./results');
 require('./categories');
 require('./filters');
 require('./map');

@@ -1,0 +1,90 @@
+.results-liste {
+    ul {
+        list-style: none;
+        padding: 0;
+        .result {
+            display: block;
+            position: relative;
+            border-left: 10px solid $primary-color;
+            background: white;
+            margin-bottom: 2em;
+            box-shadow: 0px 1px 2px 0px #444;
+            .visual {
+                height: 120px;
+                margin-left: -15px;
+                margin-right: -15px;
+                position: relative;
+                overflow: hidden;
+                .fav-or-not {
+                    position: absolute;
+                    top: 1em;
+                    left: 1em;
+                    i {
+                        opacity: 0.8;
+                        font-size: 2em;
+                        text-shadow:
+                            -1px -1px 0 #fff,
+                            1px -1px 0 #fff,
+                            -1px 1px 0 #fff,
+                            1px 1px 0 #fff;
+                        &:hover {
+                            opacity: 1;
+                        }  
+                    }
+                }
+                img {
+                    width: 100%;
+                    height: auto;
+
+                }
+            }
+            .title {
+                display: block;
+                font-size: 1.2em;
+                line-height: 1.2em;
+                font-weight: bold;
+                margin: 0.5em 0;
+            }
+            .infos {
+                display: block;
+                span {
+                    font-style: italic;
+                }
+            }
+            .themes {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+                li {
+                    display: inline-block;
+                    height: 2em;
+                    width: 2em;
+                    overflow: hidden;
+                    img {
+                        height: auto;
+                        height: 100%;
+                    }
+                }
+            }
+            .know-more {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                width: 0;
+                height: 0;
+                border-bottom: 40px solid $primary-color;
+                border-left: 40px solid transparent;
+                span {
+                    color: white;
+                    font-size: 1.5em;
+                    position: absolute;
+                    right: 6px;
+                    top: 11px;
+                }
+            }
+
+        }
+
+    }
+    
+}

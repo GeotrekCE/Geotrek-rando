@@ -7,7 +7,6 @@ function CategoriesListeController($scope, categoriesService) {
             .then(
                 function (data) {
                     $scope.categories = data;
-                    console.log(data);
                 }
             );
     }

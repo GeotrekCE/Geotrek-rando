@@ -1,0 +1,29 @@
+<section class="results-liste">
+    <ul>
+        <li ng-repeat="result in results" ng-id="result-{{result.id}}" class="result col-sm-12 col-md-6">
+            <div class="visual">
+                <div class="fav-or-not">
+                    <i class="glyphicon glyphicon-heart"></i>
+                </div>
+                <img ng-src="{{result.properties.pictures[0].url}}" ng-alt="{{result.properties.pictures[0].title}}">    
+            </div>
+            <h1 class="title">{{result.properties.name}}</h1>
+            <div class="infos">
+                <span>{{result.properties.districts[0].name}} - </span>
+                <span>{{result.properties.duration_pretty}} - </span>
+                <span>Dénivelé {{result.properties.ascent}} - </span>
+                <span>{{result.properties.difficulty.label}} - </span>
+                <span>{{result.properties.usages[0].label}}</span>
+            </div>
+            <ul class="themes">
+                <li ng-repeat="theme in result.properties.themes">
+                    <img ng-src="{{theme.pictogram}}" ng-alt="{{theme.label}}">
+                </li>
+            </ul>
+            <div class="know-more">
+                <span>+</span>
+            </div>
+
+        </li>
+    </ul>
+</section>
