@@ -35,83 +35,23 @@
 
 
         &.category-treks {
-            button {
-                svg {
-                    fill: $treks-color;
-                }
-            }
-            &.active {
-                button {
-                    background: $treks-color;
-                    svg {
-                        fill: white;
-                    }
-                }
-            }
+            @include categories-list-coloring($treks-color);
         }
 
         &.category-musee {
-            button {
-                svg {
-                    fill: $museums-color;
-                }
-            }
-            &.active {
-                button {
-                    background: $museums-color;
-                    svg {
-                        fill: white;
-                    }
-                }
-            }
+            @include categories-list-coloring($museums-color);
         }
 
         &.category-restaurants {
-            button {
-                svg {
-                    fill: $restaurants-color;
-                }
-            }
-            &.active {
-                button {
-                    background: $restaurants-color;
-                    svg {
-                        fill: white;
-                    }
-                }
-            }
+            @include categories-list-coloring($restaurants-color);
         }
 
         &.category-sorties {
-            button {
-                svg {
-                    fill: $outing-color;
-                }
-            }
-            &.active {
-                button {
-                    background: $outing-color;
-                    svg {
-                        fill: white;
-                    }
-                }
-            }
+            @include categories-list-coloring($outing-color);
         }
 
         &.category-events {
-            button {
-                svg {
-                    fill: $events-color;
-                }
-            }
-            &.active {
-                button {
-                    background: $events-color;
-                    svg {
-                        fill: white;
-                    }
-                }
-            }
+            @include categories-list-coloring($events-color);
         }
 
     }

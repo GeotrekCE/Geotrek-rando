@@ -1,0 +1,22 @@
+@mixin categories-list-coloring($current-color) {
+    button {
+        svg {
+            fill: $current-color;
+        }
+    }
+    &.active {
+        button {
+            background: $current-color;
+            svg {
+                fill: white;
+            }
+        }
+    }
+}
+
+@mixin results-list-coloring($current-color) {
+    border-color: $current-color;
+    .know-more {
+        border-bottom: 40px solid $current-color;
+    }
+}

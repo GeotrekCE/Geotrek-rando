@@ -1,6 +1,6 @@
 'use strict';
 
-function contentsService(globalSettings, settingsFactory, $resource, $q) {
+function contentsService(globalSettings, settingsFactory, $resource, $q, utilsFactory) {
 
     var self = this;
 
@@ -20,6 +20,8 @@ function contentsService(globalSettings, settingsFactory, $resource, $q) {
             angular.forEach(content.pictures, function (picture) {
                 picture.url = globalSettings.DOMAIN + picture.url;
             });
+
+            content.cat_class = 'category-' + utilsFactory.removeDiacritics(content.category.label.toLowerCase());
 
         });
         return contentsData;
@@ -67,7 +69,7 @@ function eventsService(globalSettings, settingsFactory, $resource, $q) {
     this.replaceImgURLs = function (eventsData) {
 
         // Parse trEvent pictures, and change their URL
-        angular.forEach(eventsData.b, function (trEvent) {
+        angular.forEach(eventsData, function (trEvent) {
 
             angular.forEach(trEvent.themes, function (theme) {
                 theme.pictogram = globalSettings.DOMAIN + theme.pictogram;
@@ -79,6 +81,8 @@ function eventsService(globalSettings, settingsFactory, $resource, $q) {
             angular.forEach(trEvent.pictures, function (picture) {
                 picture.url = globalSettings.DOMAIN + picture.url;
             });
+
+            trEvent.cat_class = 'category-events';
 
         });
         return eventsData;

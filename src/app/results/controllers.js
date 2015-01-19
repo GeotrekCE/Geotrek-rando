@@ -53,7 +53,6 @@ function ResultsListeController($scope, $q, globalSettings, treksService, conten
         $q.all(promises)
             .then(
                 function () {
-                    console.log(results);
                     $scope.results = results;
                 }
             );

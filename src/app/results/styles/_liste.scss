@@ -83,6 +83,26 @@
                 }
             }
 
+            &.category-treks {
+                @include results-list-coloring($treks-color);
+            }
+
+            &.category-musee {
+                @include results-list-coloring($museums-color);
+            }
+
+            &.category-restaurants {
+                @include results-list-coloring($restaurants-color);
+            }
+
+            &.category-sorties {
+                @include results-list-coloring($outing-color);
+            }
+
+            &.category-events {
+                @include results-list-coloring($events-color);
+            }
+
         }
 
     }

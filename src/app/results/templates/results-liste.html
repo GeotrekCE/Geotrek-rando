@@ -1,6 +1,6 @@
 <section class="results-liste">
     <ul>
-        <li ng-repeat="result in results" ng-id="result-{{result.id}}" class="result col-sm-12 col-md-6">
+        <li ng-repeat="result in results" ng-id="result-{{result.id}}" class="result col-sm-12 col-md-6 {{result.properties.cat_class}}">
             <div class="visual">
                 <div class="fav-or-not">
                     <i class="glyphicon glyphicon-heart"></i>

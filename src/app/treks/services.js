@@ -54,6 +54,8 @@ function treksService(globalSettings, settingsFactory, $resource, $q, filtersSer
             trek.properties.thumbnail = globalSettings.DOMAIN + trek.properties.thumbnail;
             trek.properties.difficulty.pictogram = globalSettings.DOMAIN + trek.properties.difficulty.pictogram;
             trek.properties.altimetric_profile = globalSettings.DOMAIN + trek.properties.altimetric_profile.replace(".json", ".svg");
+
+            trek.properties.cat_class = 'category-treks';
         });
         return treksData;
     };
