@@ -15,12 +15,6 @@
                 height: 100%;
                 fill: $primary-color;
             }
-            &.active {
-                background: $primary-color;
-                svg {
-                    fill: white;
-                }
-            }
             &:focus {
                 outline: none;
                 outline-color: transparent;
@@ -30,5 +24,95 @@
                 margin-left: -9%;
             }
         }
+        &.active {
+            button {
+                background: $primary-color;
+                svg {
+                    fill: white;
+                }
+            }
+        }
+
+
+        &.category-treks {
+            button {
+                svg {
+                    fill: $treks-color;
+                }
+            }
+            &.active {
+                button {
+                    background: $treks-color;
+                    svg {
+                        fill: white;
+                    }
+                }
+            }
+        }
+
+        &.category-musee {
+            button {
+                svg {
+                    fill: $museums-color;
+                }
+            }
+            &.active {
+                button {
+                    background: $museums-color;
+                    svg {
+                        fill: white;
+                    }
+                }
+            }
+        }
+
+        &.category-restaurants {
+            button {
+                svg {
+                    fill: $restaurants-color;
+                }
+            }
+            &.active {
+                button {
+                    background: $restaurants-color;
+                    svg {
+                        fill: white;
+                    }
+                }
+            }
+        }
+
+        &.category-sorties {
+            button {
+                svg {
+                    fill: $outing-color;
+                }
+            }
+            &.active {
+                button {
+                    background: $outing-color;
+                    svg {
+                        fill: white;
+                    }
+                }
+            }
+        }
+
+        &.category-events {
+            button {
+                svg {
+                    fill: $events-color;
+                }
+            }
+            &.active {
+                button {
+                    background: $events-color;
+                    svg {
+                        fill: white;
+                    }
+                }
+            }
+        }
+
     }
 }

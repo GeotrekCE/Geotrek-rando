@@ -1,4 +1,4 @@
 'use strict';
 
 angular.module('rando.commons', [])
-    .service('utilsService', require('./services').utilsService);
+    .factory('utilsFactory', require('./factories').utilsFactory);

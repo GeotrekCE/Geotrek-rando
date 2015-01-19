@@ -1,6 +1,6 @@
 'use strict';
 
-function categoriesService(globalSettings, $q, treksService, contentsService, eventsService) {
+function categoriesService(globalSettings, $q, treksService, contentsService, eventsService, utilsFactory) {
     var self = this;
 
     this.findIndexofId = function (anArray, id) {
@@ -59,7 +59,8 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
             pictogram: './images/trek-category.svg',
             type1_label: 'Type d\'usage',
             type2_label: 'Usage',
-            types: treksUsages
+            types: treksUsages,
+            cat_class: 'category-treks'
         };
 
         return treksCategory;
@@ -84,7 +85,8 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
             pictogram: './images/events-category.svg',
             type1_label: 'Type d\'usage',
             type2_label: 'Type',
-            types: eventsUsages
+            types: eventsUsages,
+            cat_class: 'category-events'
         };
 
         return eventsCategory;
@@ -106,7 +108,8 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                     type1_label: aContent.category.type1_label,
                     type2_label: aContent.category.type2_label,
                     type1: aContent.type1 || [],
-                    type2: aContent.type2 || []
+                    type2: aContent.type2 || [],
+                    cat_class: 'category-' + utilsFactory.removeDiacritics(aContent.category.label.toLowerCase())
                 };
 
                 contentsCategories.push(currentCategory);
