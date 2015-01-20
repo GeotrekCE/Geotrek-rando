@@ -4,6 +4,10 @@ var dest = './src',
 
 
 module.exports = {
+  unit: {
+    tests: ['src/**/test/unit/*.js'],
+    src: ['src/*/*.js']
+  },
   browserSync: {
     server: {
       // Serve up our build folder

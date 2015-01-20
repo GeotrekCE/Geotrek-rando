@@ -32,6 +32,15 @@ function treksService(globalSettings, settingsFactory, $resource, $q, filtersSer
         } : null;
     };
 
+    this.addCategoryClass = function (treksData) {
+
+        angular.forEach(treksData.features, function (trek) {
+            trek.properties.cat_class = 'category-treks';
+        });
+
+        return treksData;
+    };
+
     this.replaceImgURLs = function (treksData) {
 
         // Parse trek pictures, and change their URL
@@ -54,8 +63,6 @@ function treksService(globalSettings, settingsFactory, $resource, $q, filtersSer
             trek.properties.thumbnail = globalSettings.DOMAIN + trek.properties.thumbnail;
             trek.properties.difficulty.pictogram = globalSettings.DOMAIN + trek.properties.difficulty.pictogram;
             trek.properties.altimetric_profile = globalSettings.DOMAIN + trek.properties.altimetric_profile.replace(".json", ".svg");
-
-            trek.properties.cat_class = 'category-treks';
         });
         return treksData;
     };
@@ -82,8 +89,9 @@ function treksService(globalSettings, settingsFactory, $resource, $q, filtersSer
                 .then(function (file) {
                     var data = angular.fromJson(file);
                     var convertedImgs = self.replaceImgURLs(data);
-                    self._trekList = convertedImgs;
-                    deferred.resolve(convertedImgs);
+                    var refactoredTreks = self.addCategoryClass(convertedImgs);
+                    self._trekList = refactoredTreks;
+                    deferred.resolve(refactoredTreks);
                 });
 
         }
