@@ -20,7 +20,10 @@ npm install
 ```
 gulp --dist
 ```
-It will bundle all vendors js files in vendors.js and all the app js files in rando.js
+It will :
+* bundle all vendors js files in src/vendors.js 
+* bundle all the app js files in src/rando.js
+* compile sass files and bundle them in src/rando.css
 
 # DEVELOPMENT
 
