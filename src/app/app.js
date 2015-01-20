@@ -18,6 +18,20 @@ var dependencies = [
     'ngResource'
 ];
 
+var angular = require('angular');
+window._ = require('lodash');
+window.jQuery = require('jquery');
+window.L = require('leaflet');
+
+// Load external dependencies
+require('ui.router');
+require('ngResource');
+require('bootstrap');
+require('leaflet-minimap');
+require('leaflet.markercluster');
+require('leaflet.fullscreen');
+require('angular-mocks'); // that one will exclude if not angular.mock
+
 angular.module('geotrekRando', dependencies);
 
 // Require Geotrek components

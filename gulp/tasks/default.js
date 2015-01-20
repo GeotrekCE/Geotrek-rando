@@ -1,3 +1,8 @@
 var gulp = require('gulp');
+var buildMode = require('../config').buildMode;
 
-gulp.task('default', ['sass', 'vendors', 'watch']);
+if (buildMode.dist) {
+    gulp.task('default', ['dist']);
+} else {
+    gulp.task('default', ['watch']);
+}

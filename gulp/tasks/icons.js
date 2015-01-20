@@ -1,9 +1,9 @@
 var gulp = require('gulp');
 var merge = require('merge-stream');
-var config = require('../config').images;
+var config = require('../config').icons;
 var _ = require('lodash');
 
-gulp.task('images', function () {
+gulp.task('icons', function () {
 
     var merged = merge();
 

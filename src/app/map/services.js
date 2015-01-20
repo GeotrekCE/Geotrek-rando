@@ -252,7 +252,7 @@ function mapService(globalSettings, treksService, iconsService) {
 
                 this.map = map;
 
-                this.switch_detail_zoom = $(map._container).data('switch-detail-zoom');
+                this.switch_detail_zoom = jQuery(map._container).data('switch-detail-zoom');
                 if (this.switch_detail_zoom > 0) {
                     map.on('zoomend', function (e) {
                         if (map.isShowingLayer('satellite')) {
@@ -276,7 +276,7 @@ function mapService(globalSettings, treksService, iconsService) {
 
                 this.button = L.DomUtil.create('a', className, this._container);
                 this.button.setAttribute('title', 'Show satellite');
-                $(this.button).tooltip({placement: 'right',
+                jQuery(this.button).tooltip({placement: 'right',
                                         container: map._container});
 
                 L.DomEvent.disableClickPropagation(this.button);
@@ -303,8 +303,8 @@ function mapService(globalSettings, treksService, iconsService) {
                     this.button.setAttribute('title', 'Show satellite');
                 }
 
-                $(this.button).tooltip('destroy');
-                $(this.button).tooltip({placement: 'right',
+                jQuery(this.button).tooltip('destroy');
+                jQuery(this.button).tooltip({placement: 'right',
                                         container: this.map._container});
             }
 

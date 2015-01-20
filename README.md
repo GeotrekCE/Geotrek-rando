@@ -16,10 +16,21 @@ clone the current repository and then :
 npm install
 ```
 
-### Launch gulp default task
+### Launch gulp distribution task
+```
+gulp --dist
+```
+It will bundle all vendors js files in vendors.js and all the app js files in rando.js
+
+# DEVELOPMENT
+
+### Launch gulp bundling and watching task
 ```
 gulp
 ```
+Launch the app on localhost:3000 and watch for any change in sass or js files in src folder :
+* Each time a sass file is changed, the wole css is reinjected
+* Each time a js file is saved, the browser's tab is refreshed
 
 
 # CREDITS
