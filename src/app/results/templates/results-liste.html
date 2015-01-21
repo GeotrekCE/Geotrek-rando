@@ -1,19 +1,22 @@
 <section class="results-liste">
     <ul>
-        <li ng-repeat="result in results" ng-id="result-{{result.id}}" class="result col-sm-12 col-md-6 {{result.properties.cat_class}}">
+        <li ng-repeat="result in results" ng-id="result-{{result.category}}-{{result.id}}" class="result col-sm-12 col-md-6 category-{{result.category}}">
             <div class="visual">
                 <div class="fav-or-not">
                     <i class="glyphicon glyphicon-heart"></i>
                 </div>
-                <img ng-src="{{result.properties.pictures[0].url}}" ng-alt="{{result.properties.pictures[0].title}}">    
+                <img ng-if="result.properties.pictures[0]" ng-src="{{result.properties.pictures[0].url}}" ng-alt="{{result.properties.pictures[0].title}}">
+                <img ng-if="!result.properties.pictures[0]" ng-src="./images/placeholder.png" alt="placeholder image">
             </div>
             <h1 class="title">{{result.properties.name}}</h1>
             <div class="infos">
-                <span>{{result.properties.districts[0].name}} - </span>
-                <span>{{result.properties.duration_pretty}} - </span>
-                <span>Dénivelé {{result.properties.ascent}} - </span>
-                <span>{{result.properties.difficulty.label}} - </span>
-                <span>{{result.properties.usages[0].label}}</span>
+                <span ng-if="result.properties.cities[0]">{{result.properties.cities[0].name}}</span>
+                <span ng-if="result.properties.duration_pretty">{{result.properties.duration_pretty}}</span>
+                <span ng-if="result.properties.ascent">Dénivelé {{result.properties.ascent}}</span>
+                <span ng-if="result.properties.difficulty">{{result.properties.difficulty.label}}</span>
+                <span ng-if="result.properties.usages[0]">{{result.properties.usages[0].label}}</span>
+                <span ng-if="result.properties.type1[0]">{{result.properties.type1[0].name}}</span>
+                <span ng-if="result.properties.type[0]">{{result.properties.type[0].name}}</span>
             </div>
             <ul class="themes">
                 <li ng-repeat="theme in result.properties.themes">
@@ -23,7 +26,6 @@
             <div class="know-more">
                 <span>+</span>
             </div>
-
         </li>
     </ul>
 </section>

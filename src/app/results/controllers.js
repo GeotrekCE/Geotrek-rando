@@ -12,10 +12,9 @@ function ResultsListeController($scope, $q, globalSettings, treksService, conten
                 treksService.getTreks()
                     .then(
                         function (treks) {
-                            var i;
-                            for (i = 0; i < treks.features.length; i++) {
-                                results.push(treks.features[i]);
-                            }
+                            _.forEach(treks.features, function (trek) {
+                                results.push(trek);
+                            });
                         }
                     )
             );
@@ -26,10 +25,9 @@ function ResultsListeController($scope, $q, globalSettings, treksService, conten
                 contentsService.getContents()
                     .then(
                         function (contents) {
-                            var i;
-                            for (i = 0; i < contents.length; i++) {
-                                results.push(contents[i]);
-                            }
+                            _.forEach(contents.features, function (content) {
+                                results.push(content);
+                            });
                         }
                     )
             );
@@ -40,10 +38,9 @@ function ResultsListeController($scope, $q, globalSettings, treksService, conten
                 eventsService.getEvents()
                     .then(
                         function (trEvents) {
-                            var i;
-                            for (i = 0; i < trEvents.length; i++) {
-                                results.push(trEvents[i]);
-                            }
+                            _.forEach(trEvents.features, function (trEvent) {
+                                results.push(trEvent);
+                            });
                         }
                     )
 
@@ -53,6 +50,7 @@ function ResultsListeController($scope, $q, globalSettings, treksService, conten
         $q.all(promises)
             .then(
                 function () {
+                    console.log(results);
                     $scope.results = results;
                 }
             );

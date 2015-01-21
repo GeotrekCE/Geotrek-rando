@@ -9,11 +9,10 @@ function settingsFactory(globalSettings) {
 
     // PUBLIC VAR
     //
-    var treksUrl =  globalSettings.DOMAIN + '/' + _activeLang + '/' + globalSettings.FILES_DIR + '/' + globalSettings.TREK_DIR + '/' + globalSettings.TREKS_FILE,
-        poisUrl =  globalSettings.DOMAIN + '/' + _activeLang + '/' + globalSettings.FILES_DIR + '/' + globalSettings.POI_DIR + '/' + globalSettings.POI_FILE,
-        eventsUrl =  globalSettings.DOMAIN + '/' + _activeLang + '/' + globalSettings.FILES_DIR + '/' + globalSettings.TOURISTIC_EVENTS_DIR + '/',
-        touristicUrl =  globalSettings.DOMAIN + '/' + _activeLang + '/' + globalSettings.FILES_DIR + '/' + globalSettings.TOURISTIC_CONTENTS_DIR + '/',
-        categoriesUrl =  globalSettings.DOMAIN + '/' + _activeLang + '/' + globalSettings.FILES_DIR + '/' + globalSettings.TOURISTIC_CONTENT_DIR + '/' + globalSettings.CATEGORIES_DIR + '/',
+    var treksUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.TREK_DIR + '/',
+        poisUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.POI_DIR + '/',
+        eventsUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.TOURISTIC_EVENTS_DIR + '/',
+        touristicUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.TOURISTIC_CONTENTS_DIR + '/',
         filters = {
             durations : [
                 { id: 4, name: '<1/2 J', interval: [0, 4]},
@@ -48,7 +47,6 @@ function settingsFactory(globalSettings) {
         poisUrl: poisUrl,
         eventsUrl: eventsUrl,
         touristicUrl: touristicUrl,
-        categoriesUrl: categoriesUrl,
         filters: filters,
 
         //METHODS

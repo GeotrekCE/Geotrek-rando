@@ -16,7 +16,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
         var isInArray = false;
 
-        angular.forEach(anArray, function (arrayElement) {
+        _.forEach(anArray, function (arrayElement) {
             if (arrayElement.id === usage.id) {
                 isInArray = true;
             }
@@ -28,7 +28,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
     this.replaceImgURLs = function (categoriesData) {
 
         // Parse trek pictures, and change their URL
-        angular.forEach(categoriesData, function (category) {
+        _.forEach(categoriesData, function (category) {
             if (category.pictogram) {
                 category.pictogram = globalSettings.DOMAIN + category.pictogram;
             }
@@ -41,9 +41,9 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
         var treksUsages = [];
 
-        angular.forEach(treks.features, function (aTrek) {
+        _.forEach(treks.features, function (aTrek) {
 
-            angular.forEach(aTrek.properties.usages, function (usage) {
+            _.forEach(aTrek.properties.usages, function (usage) {
 
                 if (!(self.idInArray(treksUsages, usage))) {
                     treksUsages.push(usage);
@@ -71,7 +71,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
         var eventsUsages = [];
 
-        angular.forEach(events, function (anEvent) {
+        _.forEach(events.features, function (anEvent) {
 
             if (!(self.idInArray(eventsUsages, anEvent.type))) {
                 eventsUsages.push(anEvent.type);
@@ -97,28 +97,28 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
         var contentsCategories = [];
 
-        angular.forEach(contents, function (aContent) {
+        _.forEach(contents.features, function (aContent) {
 
-            if (!(self.idInArray(contentsCategories, aContent.category))) {
+            if (!(self.idInArray(contentsCategories, aContent.properties.category))) {
 
                 var currentCategory = {
-                    id: aContent.category.id,
-                    label: aContent.category.label,
-                    pictogram: aContent.category.pictogram,
-                    type1_label: aContent.category.type1_label,
-                    type2_label: aContent.category.type2_label,
-                    type1: aContent.type1 || [],
-                    type2: aContent.type2 || [],
-                    cat_class: 'category-' + utilsFactory.removeDiacritics(aContent.category.label.toLowerCase())
+                    id: aContent.properties.category.id,
+                    label: aContent.properties.category.label,
+                    pictogram: aContent.properties.category.pictogram,
+                    type1_label: aContent.properties.category.type1_label,
+                    type2_label: aContent.properties.category.type2_label,
+                    type1: aContent.properties.type1 || [],
+                    type2: aContent.properties.type2 || [],
+                    cat_class: 'category-' + utilsFactory.removeDiacritics(aContent.properties.category.label.toLowerCase())
                 };
 
                 contentsCategories.push(currentCategory);
 
             } else {
 
-                var catIndex = self.findIndexofId(contentsCategories, aContent.category.id);
+                var catIndex = self.findIndexofId(contentsCategories, aContent.properties.category.id);
 
-                angular.forEach(aContent.type1, function (aType) {
+                _.forEach(aContent.properties.type1, function (aType) {
 
                     if (!(self.idInArray(contentsCategories[catIndex].type1, aType))) {
 
@@ -128,7 +128,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
                 });
 
-                angular.forEach(aContent.type2, function (aType) {
+                _.forEach(aContent.properties.type2, function (aType) {
 
                     if (!(self.idInArray(contentsCategories[catIndex].type2, aType))) {
 
@@ -204,7 +204,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                             self._categoriesList.push(trekCat);
                         }
                         if (globalSettings.ENABLE_TOURISTIC_CONTENT) {
-                            angular.forEach(contentCats, function (aContentsCat) {
+                            _.forEach(contentCats, function (aContentsCat) {
                                 self._categoriesList.push(aContentsCat);
                             });
                         }

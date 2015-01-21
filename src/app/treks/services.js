@@ -32,37 +32,44 @@ function treksService(globalSettings, settingsFactory, $resource, $q, filtersSer
         } : null;
     };
 
-    this.addCategoryClass = function (treksData) {
-
-        angular.forEach(treksData.features, function (trek) {
-            trek.properties.cat_class = 'category-treks';
-        });
-
-        return treksData;
-    };
-
-    this.replaceImgURLs = function (treksData) {
-
+    this.refactorTrek = function (treksData) {
         // Parse trek pictures, and change their URL
-        angular.forEach(treksData.features, function (trek) {
-            angular.forEach(trek.properties.pictures, function (picture) {
-                picture.url = globalSettings.DOMAIN + picture.url;
-            });
-            angular.forEach(trek.properties.usages, function (usage) {
-                usage.pictogram = globalSettings.DOMAIN + usage.pictogram;
-            });
-            angular.forEach(trek.properties.themes, function (theme) {
-                theme.pictogram = globalSettings.DOMAIN + theme.pictogram;
-            });
-            angular.forEach(trek.properties.networks, function (network) {
-                network.pictogram = globalSettings.DOMAIN + network.pictogram;
-            });
-            angular.forEach(trek.properties.information_desks, function (information_desk) {
-                information_desk.photo_url = globalSettings.DOMAIN + information_desk.photo_url;
-            });
-            trek.properties.thumbnail = globalSettings.DOMAIN + trek.properties.thumbnail;
-            trek.properties.difficulty.pictogram = globalSettings.DOMAIN + trek.properties.difficulty.pictogram;
-            trek.properties.altimetric_profile = globalSettings.DOMAIN + trek.properties.altimetric_profile.replace(".json", ".svg");
+        _.forEach(treksData.features, function (trek) {
+            if (trek.properties.pictures && trek.properties.pictures !== null) {
+                _.forEach(trek.properties.pictures, function (picture) {
+                    picture.url = globalSettings.DOMAIN + picture.url;
+                });
+            }
+            if (trek.properties.usages && trek.properties.usages !== null) {
+                _.forEach(trek.properties.usages, function (usage) {
+                    usage.pictogram = globalSettings.DOMAIN + usage.pictogram;
+                });
+            }
+            if (trek.properties.themes && trek.properties.themes !== null) {
+                _.forEach(trek.properties.themes, function (theme) {
+                    theme.pictogram = globalSettings.DOMAIN + theme.pictogram;
+                });
+            }
+            if (trek.properties.networks && trek.properties.networks !== null) {
+                _.forEach(trek.properties.networks, function (network) {
+                    network.pictogram = globalSettings.DOMAIN + network.pictogram;
+                });
+            }
+            if (trek.properties.information_desks && trek.properties.information_desks !== null) {
+                _.forEach(trek.properties.information_desks, function (information_desk) {
+                    information_desk.photo_url = globalSettings.DOMAIN + information_desk.photo_url;
+                });
+            }
+            if (trek.properties.thumbnail && trek.properties.thumbnail !== null) {
+                trek.properties.thumbnail = globalSettings.DOMAIN + trek.properties.thumbnail;
+            }
+            if (trek.properties.pictogram && trek.properties.pictogram !== null) {
+                trek.properties.difficulty.pictogram = globalSettings.DOMAIN + trek.properties.difficulty.pictogram;
+            }
+            if (trek.properties.altimetric_profile && trek.properties.altimetric_profile !== null) {
+                trek.properties.altimetric_profile = globalSettings.DOMAIN + trek.properties.altimetric_profile.replace(".json", ".svg");
+            }
+            trek.category = 'treks';
         });
         return treksData;
     };
@@ -76,20 +83,21 @@ function treksService(globalSettings, settingsFactory, $resource, $q, filtersSer
             deferred.resolve(self._trekList);
 
         } else {
-            var url = settingsFactory.treksUrl;
+            //var url = settingsFactory.treksUrl;
+            var url = 'jsons/api/treks.geojson';
 
             var requests = $resource(url, {}, {
                 query: {
                     method: 'GET',
-                    cache: true
+                    cache: true,
+
                 }
-            });
+            }, {stripTrailingSlashes: false});
 
             requests.query().$promise
                 .then(function (file) {
                     var data = angular.fromJson(file);
-                    var convertedImgs = self.replaceImgURLs(data);
-                    var refactoredTreks = self.addCategoryClass(convertedImgs);
+                    var refactoredTreks = self.refactorTrek(data);
                     self._trekList = refactoredTreks;
                     deferred.resolve(refactoredTreks);
                 });

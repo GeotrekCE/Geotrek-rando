@@ -2,13 +2,13 @@
 
 var constants = {
 
-    DOMAIN: 'http://192.168.100.49:8888',
+    DOMAIN: 'http://prod-geotrek-fr.makina-corpus.net',
     DEFAULT_LANGUAGE: 'fr',
 
     // SET TO TRUE ELEMENTS AVAILABLE FOR YOUR GEOTREK !
     ENABLE_TREKS: true,
-    ENABLE_TOURISTIC_CONTENT: false,
-    ENABLE_TOURISTIC_EVENTS: false,
+    ENABLE_TOURISTIC_CONTENT: true,
+    ENABLE_TOURISTIC_EVENTS: true,
 
     // CHOSE POSITION IN CATEGORIES LIST FOR TOURISTICS EVENTS
     // NUMBER FOR SPECIFIC POSITION
@@ -16,19 +16,11 @@ var constants = {
     TOURISTIC_EVENTS_SPECIFIC_POSITION: 3,
 
     //PATHS AND DIRECTORY
-    FILES_DIR: 'files/api',
-    TREK_DIR: 'trek',
+    API_DIR: 'api',
+    TREK_DIR: 'treks',
     POI_DIR: 'pois',
     TOURISTIC_EVENTS_DIR: 'touristicevents',
-    TOURISTIC_EVENT_DIR: 'touristicevent',
     TOURISTIC_CONTENTS_DIR: 'touristiccontents',
-    TOURISTIC_CONTENT_DIR: 'touristiccontent',
-    CATEGORIES_DIR: 'categories',
-
-    TREKS_FILE: 'trek.geojson',
-    POI_FILE: 'poi.geojson',
-    EVENTS_FILE: 'touristicevent.geojson',
-    TOURISTIC_FILE: 'touristiccontent.geojson',
 
     MAIN_LEAFLET_BACKGROUND: {
         LAYER_URL: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -43,7 +35,7 @@ var constants = {
         CENTER_LATITUDE: 44.83,
         CENTER_LONGITUDE: 6.34,
         DEFAULT_ZOOM: 12,
-        DEFAULT_MIN_ZOOM: 8,
+        DEFAULT_MIN_ZOOM: 0,
         DEFAULT_MAX_ZOOM: 16,
         TREK_COLOR: '#F89406'
     }
