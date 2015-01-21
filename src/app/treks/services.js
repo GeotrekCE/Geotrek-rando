@@ -83,8 +83,7 @@ function treksService(globalSettings, settingsFactory, $resource, $q, filtersSer
             deferred.resolve(self._trekList);
 
         } else {
-            //var url = settingsFactory.treksUrl;
-            var url = 'jsons/api/treks.geojson';
+            var url = settingsFactory.treksUrl;
 
             var requests = $resource(url, {}, {
                 query: {

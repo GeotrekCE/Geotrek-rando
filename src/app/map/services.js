@@ -5,6 +5,7 @@ function mapService(globalSettings, treksService, iconsService) {
     var self = this;
 
     this._markersLayers = {};
+    this._clustersLayer = {};
     this.map = {};
 
     this.initMap = function (mapSelector) {
@@ -52,11 +53,21 @@ function mapService(globalSettings, treksService, iconsService) {
             this._markersLayers.touristicsLayer = self.createLayer();
         }
 
+        this._clustersLayer = self.createClusterLayer();
+
         return map;
         
     };
 
     this.createLayer = function () {
+
+        var layer = new L.LayerGroup();
+
+        return layer;
+
+    };
+
+    this.createClusterLayer = function () {
 
         var clusterLayer = new L.MarkerClusterGroup({
             showCoverageOnHover: false,
@@ -70,7 +81,7 @@ function mapService(globalSettings, treksService, iconsService) {
     };
 
     // Add treks geojson to the map
-    this.displayResults = function (results) {
+    this.displayResults = function (results, updateBounds) {
 
         // Remove all markers so the displayed markers can fit the search results
         _.forEach(self._markersLayers, function(layer) {
@@ -84,7 +95,7 @@ function mapService(globalSettings, treksService, iconsService) {
             } else {
                 currentLayer = self._markersLayers.touristicsLayer;
             }
-            var currentMarker = self.createClusterMarkerFromElement(result);
+            var currentMarker = self.createMarkerFromElement(result);
             console.log(currentLayer);
             currentMarker.on({
                 click: function () {
@@ -94,18 +105,20 @@ function mapService(globalSettings, treksService, iconsService) {
             });
             currentLayer.addLayer(currentMarker);
         });
-        console.log(self._markersLayers.treksLayer);
+
         if (globalSettings.ENABLE_TREKS) {
-            self.map.addLayer(self._markersLayers.treksLayer);
+            self._clustersLayer.addLayer(self._markersLayers.treksLayer);
         }
 
         if (globalSettings.ENABLE_TOURISTIC_CONTENT || globalSettings.ENABLE_TOURISTIC_EVENTS) {
-            self.map.addLayer(self._markersLayers.touristicsLayer);
+            self._clustersLayer.addLayer(self._markersLayers.touristicsLayer);
         }
+
+        self.map.addLayer(self._clustersLayer);
         
-        // if ((updateBounds == undefined) || (updateBounds == true)) {    
-        //     this.map.fitBounds(this._treksLayer.getBounds());
-        // }
+        if ((updateBounds === undefined) || (updateBounds === true)) {    
+            self.map.fitBounds(self._clustersLayer.getBounds());
+        }
 
     };
 
@@ -196,15 +209,15 @@ function mapService(globalSettings, treksService, iconsService) {
         return markers;
     };
 
-    this.createClusterMarkerFromElement = function (element) {
+    this.createMarkerFromElement = function (element) {
         var startPoint = {},
             marker;
 
         if (element.category === 'treks') {
             startPoint = treksService.getStartPoint(element);
         } else {
-            startPoint.lat = element.geometry.coordinates[0];
-            startPoint.lng = element.geometry.coordinates[1];
+            startPoint.lng = element.geometry.coordinates[0];
+            startPoint.lat = element.geometry.coordinates[1];
         }
         
 

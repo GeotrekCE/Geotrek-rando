@@ -122,8 +122,7 @@ function eventsService(globalSettings, settingsFactory, $resource, $q) {
             deferred.resolve(self._eventsList);
 
         } else {
-            //var url = settingsFactory.eventsUrl;
-            var url = 'jsons/api/touristicevents.geojson';
+            var url = settingsFactory.eventsUrl;
 
             var requests = $resource(url, {}, {
                 query: {
