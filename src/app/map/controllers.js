@@ -12,10 +12,9 @@ function MapController($scope, $q, globalSettings, mapService, treksService, con
                 treksService.getTreks()
                     .then(
                         function (treks) {
-                            var i;
-                            for (i = 0; i < treks.features.length; i++) {
-                                results.push(treks.features[i]);
-                            }
+                            _.forEach(treks.features, function (trek) {
+                                results.push(trek);
+                            });
                         }
                     )
             );
@@ -26,10 +25,9 @@ function MapController($scope, $q, globalSettings, mapService, treksService, con
                 contentsService.getContents()
                     .then(
                         function (contents) {
-                            var i;
-                            for (i = 0; i < contents.length; i++) {
-                                results.push(contents[i]);
-                            }
+                            _.forEach(contents.features, function (content) {
+                                results.push(content);
+                            });
                         }
                     )
             );
@@ -40,10 +38,9 @@ function MapController($scope, $q, globalSettings, mapService, treksService, con
                 eventsService.getEvents()
                     .then(
                         function (trEvents) {
-                            var i;
-                            for (i = 0; i < trEvents.length; i++) {
-                                results.push(trEvents[i]);
-                            }
+                            _.forEach(trEvents.features, function (trEvent) {
+                                results.push(trEvent);
+                            });
                         }
                     )
 
@@ -64,17 +61,14 @@ function MapController($scope, $q, globalSettings, mapService, treksService, con
 
     function mapInit(parameters) {
 
+        //$scope.mapService = mapService;
+
         var mapSelector = parameters[0] || 'map';
 
-        mapService.initMap(mapSelector);
+        $scope.map = mapService.initMap(mapSelector);
 
-        // Load treks in map
-        mapService.displayTreks($scope.results);
+        mapService.displayResults($scope.results);
 
-    }
-
-    function updateMap() {
-        mapService.displayTreks($scope.results);
     }
 
     updateResults([mapInit, ['map']]);

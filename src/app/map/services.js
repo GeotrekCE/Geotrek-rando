@@ -4,6 +4,9 @@ function mapService(globalSettings, treksService, iconsService) {
 
     var self = this;
 
+    this._markersLayers = {};
+    this.map = {};
+
     this.initMap = function (mapSelector) {
 
         // Set background Layers
@@ -36,47 +39,76 @@ function mapService(globalSettings, treksService, iconsService) {
         //Mixins for map
         this.initCustomsMixins();
 
-        this._map = L.map(mapSelector, mapParameters);
+        this.map = L.map(mapSelector, mapParameters);
 
         // Set-up maps controls (needs _map to be defined);
         this.initMapControls();
 
-        this.createTreksLayer();
+        if (globalSettings.ENABLE_TREKS) {
+            this._markersLayers.treksLayer = self.createLayer();
+        }
+
+        if (globalSettings.ENABLE_TOURISTIC_CONTENT || globalSettings.ENABLE_TOURISTIC_EVENTS) {
+            this._markersLayers.touristicsLayer = self.createLayer();
+        }
+
+        return map;
+        
     };
 
-    this.createTreksLayer = function () {
+    this.createLayer = function () {
 
-        this._treksLayer = new L.MarkerClusterGroup({
+        var clusterLayer = new L.MarkerClusterGroup({
             showCoverageOnHover: false,
             iconCreateFunction: function (cluster) {
                 return iconsService.getClusterIcon(cluster);
             }
         });
 
+        return clusterLayer;
+
     };
 
     // Add treks geojson to the map
-    this.displayTreks = function (trekCollection) {
-        // Remove all markers so the displayed markers can fit the search results
-        this._treksLayer.clearLayers();
+    this.displayResults = function (results) {
 
-        //$scope.mapService = mapService;
-        angular.forEach(trekCollection, function (trek) {
-            var trekDeparture = self.createClusterMarkerFromTrek(trek);
-            trekDeparture.on({
+        // Remove all markers so the displayed markers can fit the search results
+        _.forEach(self._markersLayers, function(layer) {
+            layer.clearLayers();
+        });
+
+        _.forEach(results, function (result) {
+            var currentLayer;
+            if (result.category === 'treks') {
+                currentLayer = self._markersLayers.treksLayer;
+            } else {
+                currentLayer = self._markersLayers.touristicsLayer;
+            }
+            var currentMarker = self.createClusterMarkerFromElement(result);
+            console.log(currentLayer);
+            currentMarker.on({
                 click: function () {
                     console.log('marker Clicked');
-                    //$state.go("home.map.detail", { trekId: trek.id });
+                    //$state.go("home.map.detail", { trekId: result.id });
                 }
             });
-            self._treksLayer.addLayer(trekDeparture);
+            currentLayer.addLayer(currentMarker);
         });
-        this._map.addLayer(this._treksLayer);
+        console.log(self._markersLayers.treksLayer);
+        if (globalSettings.ENABLE_TREKS) {
+            self.map.addLayer(self._markersLayers.treksLayer);
+        }
 
-        /*if ((updateBounds == undefined) || (updateBounds == true)) {    
-            this._map.fitBounds(this._treksLayer.getBounds());
-        }*/
+        if (globalSettings.ENABLE_TOURISTIC_CONTENT || globalSettings.ENABLE_TOURISTIC_EVENTS) {
+            self.map.addLayer(self._markersLayers.touristicsLayer);
+        }
+        
+        // if ((updateBounds == undefined) || (updateBounds == true)) {    
+        //     this.map.fitBounds(this._treksLayer.getBounds());
+        // }
+
     };
+
 
     // MARKERS AND CLUSTERS  //////////////////////////////
     //
@@ -122,7 +154,7 @@ function mapService(globalSettings, treksService, iconsService) {
         }
 
         var informationCount = 0;
-        angular.forEach(trek.properties.information_desks, function (information) {
+        _.forEach(trek.properties.information_desks, function (information) {
             var informationDescription = "<p>" + information.description + "</p>"
                 + "<p>" + information.street + "</p>"
                 + "<p>" + information.postal_code + " " + information.municipality + "</p>"
@@ -142,7 +174,7 @@ function mapService(globalSettings, treksService, iconsService) {
             informationCount += 1;
         });
 
-        angular.forEach(pois, function (poi) {
+        _.forEach(pois, function (poi) {
             var poiCoords = {
                 'lat': poi.geometry.coordinates[1],
                 'lng': poi.geometry.coordinates[0]
@@ -164,10 +196,19 @@ function mapService(globalSettings, treksService, iconsService) {
         return markers;
     };
 
-    this.createClusterMarkerFromTrek = function (trek) {
-        var startPoint = treksService.getStartPoint(trek);
+    this.createClusterMarkerFromElement = function (element) {
+        var startPoint = {},
+            marker;
 
-        var marker = L.marker(
+        if (element.category === 'treks') {
+            startPoint = treksService.getStartPoint(element);
+        } else {
+            startPoint.lat = element.geometry.coordinates[0];
+            startPoint.lng = element.geometry.coordinates[1];
+        }
+        
+
+        marker = L.marker(
             [startPoint.lat, startPoint.lng],
             {
                 icon: iconsService.getTrekIcon()
@@ -192,18 +233,18 @@ function mapService(globalSettings, treksService, iconsService) {
     };
 
     this.setScale = function () {
-        L.control.scale({imperial: false}).addTo(this._map);
+        L.control.scale({imperial: false}).addTo(this.map);
     };
 
     this.setZoomControlPosition = function () {
-        this._map.zoomControl.setPosition('topright');
+        this.map.zoomControl.setPosition('topright');
     };
 
     this.setFullScreenControl = function () {
         L.control.fullscreen({
             position: 'topright',
             title: 'Fullscreen'
-        }).addTo(this._map);
+        }).addTo(this.map);
     };
 
     this.setMinimap = function () {
@@ -220,11 +261,11 @@ function mapService(globalSettings, treksService, iconsService) {
                 zoomLevelOffset: -3
             };
 
-        this._miniMap = new L.Control.MiniMap(miniMapLayer, miniMapOptions).addTo(this._map);
+        this._miniMap = new L.Control.MiniMap(miniMapLayer, miniMapOptions).addTo(this.map);
     };
 
     this.setAttribution = function () {
-        this._map.attributionControl.setPrefix(globalSettings.LEAFLET_CONF.ATTRIBUTION);
+        this.map.attributionControl.setPrefix(globalSettings.LEAFLET_CONF.ATTRIBUTION);
     };
 
     this.setPositionMarker = function () {
@@ -311,7 +352,7 @@ function mapService(globalSettings, treksService, iconsService) {
         });
 
         var switchControl = new L.Control.SwitchBackgroundLayers();
-        switchControl.addTo(this._map);
+        switchControl.addTo(this.map);
     };
 
 
