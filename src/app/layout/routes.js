@@ -4,7 +4,10 @@ var controller = require('./controllers');
 
 function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider) {
 
-    //$locationProvider.html5Mode(true).hashPrefix('!');
+    /*$locationProvider.html5Mode({
+        enabled: true,
+        requireBase: true
+    });*/
 
     $urlRouterProvider.otherwise('/');
 
@@ -39,12 +42,7 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider) {
         })
         .state('layout.detail', {
             parent: 'layout',
-            url: ':slug',
-            resolve: {
-                elementSlug: function ($stateParams) {
-                    return $stateParams.slug;
-                }
-            },
+            url: ':slug/',
             views: {
                 'header' : {
                     template: require('./templates/header.html'),

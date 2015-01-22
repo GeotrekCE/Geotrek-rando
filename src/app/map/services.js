@@ -96,7 +96,7 @@ function mapService(globalSettings, treksService, iconsService) {
                 currentLayer = self._markersLayers.touristicsLayer;
             }
             var currentMarker = self.createMarkerFromElement(result);
-            console.log(currentLayer);
+
             currentMarker.on({
                 click: function () {
                     console.log('marker Clicked');

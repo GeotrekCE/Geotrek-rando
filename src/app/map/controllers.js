@@ -1,56 +1,13 @@
 'use strict';
 
-function MapController($scope, $q, globalSettings, mapService, treksService, contentsService, eventsService) {
+function MapController($scope, resultsService, mapService) {
 
     function updateResults(callback) {
 
-        var promises = [],
-            results = [];
-
-        if (globalSettings.ENABLE_TREKS) {
-            promises.push(
-                treksService.getTreks()
-                    .then(
-                        function (treks) {
-                            _.forEach(treks.features, function (trek) {
-                                results.push(trek);
-                            });
-                        }
-                    )
-            );
-        }
-
-        if (globalSettings.ENABLE_TOURISTIC_CONTENT) {
-            promises.push(
-                contentsService.getContents()
-                    .then(
-                        function (contents) {
-                            _.forEach(contents.features, function (content) {
-                                results.push(content);
-                            });
-                        }
-                    )
-            );
-        }
-
-        if (globalSettings.ENABLE_TOURISTIC_EVENTS) {
-            promises.push(
-                eventsService.getEvents()
-                    .then(
-                        function (trEvents) {
-                            _.forEach(trEvents.features, function (trEvent) {
-                                results.push(trEvent);
-                            });
-                        }
-                    )
-
-            );
-        }
-
-        $q.all(promises)
+        resultsService.getAllResults()
             .then(
-                function () {
-                    $scope.results = results;
+                function (data) {
+                    $scope.results = data;
                     if (callback && typeof callback[0] === 'function') {
                         callback[0](callback[1]);
                     }

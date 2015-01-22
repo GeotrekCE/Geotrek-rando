@@ -1,6 +1,6 @@
 'use strict';
 
-function treksService(globalSettings, settingsFactory, $resource, $q, filtersService) {
+function treksService(globalSettings, settingsFactory, $resource, $q) {
 
     var self = this;
 
@@ -44,6 +44,9 @@ function treksService(globalSettings, settingsFactory, $resource, $q, filtersSer
                 _.forEach(trek.properties.usages, function (usage) {
                     usage.pictogram = globalSettings.DOMAIN + usage.pictogram;
                 });
+            }
+            if (trek.properties.difficulty && trek.properties.difficulty !== null) {
+                trek.properties.difficulty.pictogram = globalSettings.DOMAIN + trek.properties.difficulty.pictogram;
             }
             if (trek.properties.themes && trek.properties.themes !== null) {
                 _.forEach(trek.properties.themes, function (theme) {
@@ -105,16 +108,6 @@ function treksService(globalSettings, settingsFactory, $resource, $q, filtersSer
 
         return deferred.promise;
 
-    };
-
-    this.filterTreks = function () {
-        var deferred = $q.defer();
-
-        var filteredTreks = filtersService.filterTreks();
-        deferred.resolve(filteredTreks);
-
-
-        return deferred.promise;
     };
 
 }
