@@ -2,27 +2,30 @@
 
 var controller = require('./controllers');
 
-function layoutRoutes($stateProvider, $urlRouterProvider) {
+function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider) {
+
+    //$locationProvider.html5Mode(true).hashPrefix('!');
 
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
         .state('layout', {
             abstract: true,
+            url: '/',
             template: require('./templates/layout.html'),
             controller: controller.LayoutController
         })
-        .state('root', {
+        .state('layout.root', {
             parent: 'layout',
-            url: '/',
+            url: '',
             views: {
                 'header' : {
                     template: require('./templates/header.html'),
                     controller: controller.HeaderController
                 },
                 'sidebar' : {
-                    template: require('./templates/sidebar.html'),
-                    controller: controller.SidebarController
+                    template: require('./templates/sidebar-home.html'),
+                    controller: controller.SidebarHomeController
                 },
                 'content' : {
                     template: require('./templates/content-home.html'),
@@ -30,9 +33,35 @@ function layoutRoutes($stateProvider, $urlRouterProvider) {
                 'footer' : {
                     template: require('./templates/footer.html'),
                     controller: controller.FooterController
-                },
+                }
             }
 
+        })
+        .state('layout.detail', {
+            parent: 'layout',
+            url: ':slug',
+            resolve: {
+                elementSlug: function ($stateParams) {
+                    return $stateParams.slug;
+                }
+            },
+            views: {
+                'header' : {
+                    template: require('./templates/header.html'),
+                    controller: controller.HeaderController
+                },
+                'sidebar' : {
+                    template: require('./templates/sidebar-detail.html'),
+                    controller: controller.SidebarController
+                },
+                'content' : {
+                    template: require('./templates/content-detail.html'),
+                },
+                'footer' : {
+                    template: require('./templates/footer.html'),
+                    controller: controller.FooterController
+                }
+            }
         });
 }
 

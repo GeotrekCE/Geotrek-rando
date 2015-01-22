@@ -4,9 +4,10 @@ function LayoutController() {
 }
 
 function HeaderController() {
+    jQuery('[data-toggle="tooltip"]').tooltip();
 }
 
-function SidebarController() {
+function SidebarHomeController() {
 }
 
 function FooterController() {
@@ -16,6 +17,6 @@ function FooterController() {
 module.exports = {
     LayoutController: LayoutController,
     HeaderController: HeaderController,
-    SidebarController: SidebarController,
+    SidebarController: SidebarHomeController,
     FooterController: FooterController
 };
