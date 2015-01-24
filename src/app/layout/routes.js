@@ -50,7 +50,7 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider) {
                 },
                 'sidebar' : {
                     template: require('./templates/sidebar-detail.html'),
-                    controller: controller.SidebarController
+                    controller: controller.SidebarDetailController
                 },
                 'content' : {
                     template: require('./templates/content-detail.html'),

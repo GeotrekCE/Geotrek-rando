@@ -56,7 +56,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
         var treksCategory = {
             id: 80085,
             label: 'Randonnées',
-            pictogram: './images/trek-category.svg',
+            pictogram: './images/icons/trek-category.svg',
             type1_label: 'Type d\'usage',
             type2_label: 'Usage',
             types: treksUsages,
@@ -82,7 +82,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
         var eventsCategory = {
             id: 54635,
             label: 'Evènements tourristiques',
-            pictogram: './images/events-category.svg',
+            pictogram: './images/icons/events-category.svg',
             type1_label: 'Type d\'usage',
             type2_label: 'Type',
             types: eventsUsages,
