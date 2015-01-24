@@ -21,6 +21,8 @@
         .pictures {
             height: 100%;
             overflow: hidden;
+            padding: 0;
+            border-right: 15px solid $primary-color;
             ul {
                list-style: none;
                padding: 0;
@@ -35,21 +37,32 @@
         }
         .main-infos {
             height: 100%;
+            padding: 0;
             .header {
-                border-bottom: $dark-grey;
+                padding: 1em 2em;
+                border-bottom: 1px solid $dark-grey;
+                background: $light-grey;
+                h1 {
+                    font-size: 1.3em;
+                    font-weight: 900;
+                    margin-top: 0;
+                }
             }
-
-            .pictos {
-                ul {
-                    list-style: none;
-                    padding: 0;
-                    li {
-                        display: inline-block;
-                        height: 2em;
-                        width: 2em;
-                        overflow: hidden;
+            .content {
+                padding: 1em 2em;
+                .pictos {
+                    ul {
+                        list-style: none;
+                        padding: 0;
+                        li {
+                            display: inline-block;
+                            height: 2em;
+                            width: 2em;
+                            overflow: hidden;
+                        }
                     }
                 }
+
             }
         }
     }
@@ -58,9 +71,37 @@
         width: 100%;
         height: 59%;
         .more-infos {
+            background: $light-grey;
+            padding: 0;
             height: 100%;
+            .nav-tabs {
+                li {
+                    a {
+                        border-radius: 0;
+                        border: 1px solid $dark-grey;
+                        color: $dark-grey;
+                    }
+                    &.active {
+                        a {
+                            background: $light-grey;
+                            border-bottom: 8px solid #4d4d4d;
+                            padding-bottom: 3px;
+                        }
+                    }
+                }
+
+            }
+            .tab-content {
+                padding: 1em;
+            }
+        }
+        .pois {
+            background: $light-grey;
+            padding: 0;
         }
         .detail-map {
+            background: $light-grey;
+            padding: 0;
             height: 100%;
         }
 

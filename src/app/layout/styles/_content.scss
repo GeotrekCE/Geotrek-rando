@@ -4,7 +4,7 @@
     padding-top: 70px;
     overflow: hidden;
     position: relative;
-    .content {
+    & > .content {
         height: 100%;
         margin-left: 70px;
         position: relative;

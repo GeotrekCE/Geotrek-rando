@@ -24,6 +24,7 @@ function DetailController($scope, $stateParams, utilsFactory, resultsService) {
     }
 
     getResultDetails();
+    initTabs('more-infos .nav-tabs a');
 
 }
 

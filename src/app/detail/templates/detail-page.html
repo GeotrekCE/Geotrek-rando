@@ -17,65 +17,58 @@
             <div class="header">
                 <h1>{{result.properties.name}}</h1>
                 <div class="from-to">
-                    <span>{{result.properties.departure}} -></span>
-                    <span>{{result.properties.arrival}}</span>
+                    <span ng-if="result.properties.departure">{{result.properties.departure}} -></span>
+                    <span ng-if="result.properties.arrival">{{result.properties.arrival}}</span>
                 </div>
             </div>
-            <div class="pictos">
-                <ul>
-                    <li ng-if="result.properties.duration_pretty" class="duration">
-                        <ng-include src="'./images/icons/duration.svg'"></ng-include>
-                        {{result.properties.duration_pretty}}
-                    </li>
-                    <li ng-if="resut.properties.difficulty.label" class="difficulty">
-                        <ng-include src="resut.properties.difficulty.pictogram"></ng-include>
-                        {{resut.properties.difficulty.label}}
-                    </li>
-                    <li ng-if="resut.properties.route" class="route">
-                        <ng-include src="resut.properties.route.pictogram"></ng-include>
-                        {{resut.properties.route.label}}
-                    </li>
-                    <li ng-if="result.properties.length" class="length">
-                        <ng-include src="'./images/icons/length.svg'"></ng-include>
-                        {{parseLength(result.properties.length)}}
-                    </li>
-                    <li ng-if="result.properties.ascent" class="ascent">
-                        <ng-include src="'./images/icons/ascent.svg'"></ng-include>
-                        {{parseLength(result.properties.ascent)}}
-                    </li>
-                    <li ng-if="result.properties.usages" ng-repeat="usage in result.properties.usages" class="usage {{removeDiacritics(usage.label)}}">
-                        <ng-include src="usage.pictogram"></ng-include>
-                        {{removeDiacritics(usage.label)}}
-                    </li>
-                    <li ng-if="result.properties.themes" ng-repeat="theme in result.properties.themes" class="theme {{removeDiacritics(theme.label)}}">
-                        <ng-include src="theme.pictogram"></ng-include>
-                        {{removeDiacritics(theme.label)}}
-                    </li>
-                </ul>
-            </div>
-            <div ng-if="result.properties.ambiance" class="headline">
-                <div ng-bind-html="sanitizeData(result.properties.description_teaser)"></div>
+            <div class="content">
+                <div class="pictos">
+                    <ul>
+                        <li ng-if="result.properties.duration_pretty" class="duration">
+                            <ng-include src="'./images/icons/duration.svg'"></ng-include>
+                            {{result.properties.duration_pretty}}
+                        </li>
+                        <li ng-if="resut.properties.difficulty.label" class="difficulty">
+                            <ng-include src="resut.properties.difficulty.pictogram"></ng-include>
+                            {{resut.properties.difficulty.label}}
+                        </li>
+                        <li ng-if="resut.properties.route" class="route">
+                            <ng-include src="resut.properties.route.pictogram"></ng-include>
+                            {{resut.properties.route.label}}
+                        </li>
+                        <li ng-if="result.properties.length" class="length">
+                            <ng-include src="'./images/icons/length.svg'"></ng-include>
+                            {{parseLength(result.properties.length)}}
+                        </li>
+                        <li ng-if="result.properties.ascent" class="ascent">
+                            <ng-include src="'./images/icons/ascent.svg'"></ng-include>
+                            {{parseLength(result.properties.ascent)}}
+                        </li>
+                        <li ng-if="result.properties.usages" ng-repeat="usage in result.properties.usages" class="usage {{removeDiacritics(usage.label)}}">
+                            <ng-include src="usage.pictogram"></ng-include>
+                            {{removeDiacritics(usage.label)}}
+                        </li>
+                        <li ng-if="result.properties.themes" ng-repeat="theme in result.properties.themes" class="theme {{removeDiacritics(theme.label)}}">
+                            <ng-include src="theme.pictogram"></ng-include>
+                            {{removeDiacritics(theme.label)}}
+                        </li>
+                    </ul>
+                </div>
+                <div ng-if="result.properties.ambiance" class="headline">
+                    <div ng-bind-html="sanitizeData(result.properties.description_teaser)"></div>
+                </div>
             </div>
         </div>
 
     </div>
 
     <div class="bottom-part row">
-        <div class="col-sm-6 more-infos">
+        <div class="col-sm-4 more-infos">
             <div role="tabpanel">
 
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs justifiedv" role="tablist">
-                    <li role="presentation" class="active"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Home</a></li>
-                    <li role="presentation"><a href="#information" aria-controls="information" role="tab" data-toggle="tab">Profile</a></li>
-                    <li role="presentation"><a href="#poi" aria-controls="poi" role="tab" data-toggle="tab">Messages</a></li>
-                    <li role="presentation"><a href="#close-to" aria-controls="close-to" role="tab" data-toggle="tab">Settings</a></li>
-                </ul>
-
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="description">
-                        <h2 ng-if="result.properties.description_teaser" ng-bind-html="sanitizeData(result.properties.description_teaser)" class="description_teaser"></h2>
+                <tabset justified="true">
+                    <tab heading="Description">
+                        <div ng-if="result.properties.description_teaser" ng-bind-html="sanitizeData(result.properties.description_teaser)" class="description_teaser"></div>
                         <div ng-if="result.properties.description" ng-bind-html="sanitizeData(result.properties.description)" class="description"></div>
                         <div ng-if="is_park_centered" class="is-park-centered">
                             <p>Cet itinéraire est dans le coeur du parc national, veuillez consulter la réglementation.</p>
@@ -83,25 +76,21 @@
                         <div ng-if="result.properties.advice" class="advice">
                             <div ng-bind-html="sanitizeData(result.properties.advice)"></div>
                         </div>
-                    </div>
-
-                    <div role="tabpanel" class="tab-pane" id="information">
-                        
-                    </div>
-
-                    <div role="tabpanel" class="tab-pane" id="poi">
-                        
-                    </div>
-
-                    <div role="tabpanel" class="tab-pane" id="close-to">
-                        
-                    </div>
-                </div>
+                    </tab>
+                    <tab heading="Informations">
+                        Informations
+                    </tab>
+                    <tab heading="A proximité">A proximité</tab>
+                </tabset>
 
             </div>
         </div>
 
-        <div class="col-sm-6 detail-map">
+        <div class="col-sm-4 pois">
+            <h3>Patrimoine</h3>
+        </div>
+
+        <div class="col-sm-4 detail-map">
             <geotrek-map></geotrek-map>
         </div>   
     </div>
