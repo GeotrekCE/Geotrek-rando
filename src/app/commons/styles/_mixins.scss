@@ -20,3 +20,12 @@
         border-bottom: 40px solid $current-color;
     }
 }
+
+@mixin detail-page-coloring($current-color) {
+    .cat-icon {
+        background: $current-color;
+    }
+    .pictures {
+        border-color: $current-color;
+    }
+}
