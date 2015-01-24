@@ -16,7 +16,8 @@ var dependencies = [
 
     // External stuff
     'ui.router',
-    'ngResource'
+    'ngResource',
+    'ui.bootstrap',
 ];
 
 var angular = require('angular');
@@ -25,6 +26,7 @@ window.jQuery = require('jquery');
 window.L = require('leaflet');
 
 // Load external dependencies
+require('ui.bootstrap');
 require('ui.router');
 require('ngResource');
 require('bootstrap');
