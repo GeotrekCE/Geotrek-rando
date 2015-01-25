@@ -1,11 +1,13 @@
 .detail-page {
-    height: 100%;
-    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     .top-part {
         margin: 1% 0 0;
-        width: 100%;
-        height: 39%;
+        flex: 1;
         position: relative;
+        display: flex;
+        flex-direction: row;
         .cat-icon {
             height: 4em;
             width: 4em;
@@ -19,7 +21,7 @@
             }
         }
         .pictures {
-            height: 100%;
+            flex: 1;
             overflow: hidden;
             padding: 0;
             border-right: 15px solid $primary-color;
@@ -36,7 +38,7 @@
             }
         }
         .main-infos {
-            height: 100%;
+            flex: 1;
             padding: 0;
             .header {
                 padding: 1em 2em;
@@ -68,12 +70,13 @@
     }
     .bottom-part {
         margin: 1% 0 0;
-        width: 100%;
-        height: 59%;
+        flex: 1;
+        display: flex;
+        flex-direction: row;
         .more-infos {
             background: $light-grey;
             padding: 0;
-            height: 100%;
+            flex: 1;
             .nav-tabs {
                 li {
                     a {
@@ -98,11 +101,13 @@
         .pois {
             background: $light-grey;
             padding: 0;
+            flex: 1;
         }
         .detail-map {
             background: $light-grey;
             padding: 0;
-            height: 100%;
+            flex: 1;
+            display: flex;
         }
 
     }

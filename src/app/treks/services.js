@@ -70,7 +70,7 @@ function treksService(globalSettings, settingsFactory, $resource, $q) {
                 trek.properties.difficulty.pictogram = globalSettings.DOMAIN + trek.properties.difficulty.pictogram;
             }
             if (trek.properties.altimetric_profile && trek.properties.altimetric_profile !== null) {
-                trek.properties.altimetric_profile = globalSettings.DOMAIN + trek.properties.altimetric_profile.replace(".json", ".svg");
+                trek.properties.altimetric_profile = globalSettings.DOMAIN + trek.properties.altimetric_profile;
             }
             trek.category = 'treks';
         });

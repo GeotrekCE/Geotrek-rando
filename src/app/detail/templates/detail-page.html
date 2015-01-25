@@ -1,11 +1,11 @@
 <section class="detail-page category-{{result.category}}">
-    <div class="top-part row">
+    <div class="top-part">
 
         <div class="cat-icon">
             <ng-include src="result.properties.pictogram.url"></ng-include>
         </div>
 
-        <div class="col-sm-6 pictures">
+        <div class="pictures">
             <ul>
                 <li ng-repeat="picture in result.properties.pictures">
                     <img ng-src="{{picture.url}}" ng-alt="{{picture.title}}">
@@ -13,7 +13,7 @@
             </ul>
         </div>
 
-        <div class="col-sm-6 main-infos">
+        <div class="main-infos">
             <div class="header">
                 <h1>{{result.properties.name}}</h1>
                 <div class="from-to">
@@ -46,11 +46,15 @@
                         </li>
                         <li ng-if="result.properties.usages" ng-repeat="usage in result.properties.usages" class="usage {{removeDiacritics(usage.label)}}">
                             <ng-include src="usage.pictogram"></ng-include>
-                            {{removeDiacritics(usage.label)}}
+                            {{usage.label}}
+                        </li>
+                        <li ng-if="result.properties.networks" ng-repeat="network in result.properties.networks" class="network {{removeDiacritics(network.name)}}">
+                            <ng-include src="network.pictogram"></ng-include>
+                            {{network.name}}
                         </li>
                         <li ng-if="result.properties.themes" ng-repeat="theme in result.properties.themes" class="theme {{removeDiacritics(theme.label)}}">
                             <ng-include src="theme.pictogram"></ng-include>
-                            {{removeDiacritics(theme.label)}}
+                            {{theme.label}}
                         </li>
                     </ul>
                 </div>
@@ -62,8 +66,8 @@
 
     </div>
 
-    <div class="bottom-part row">
-        <div class="col-sm-4 more-infos">
+    <div class="bottom-part">
+        <div class="more-infos">
             <div role="tabpanel">
 
                 <tabset justified="true">
@@ -78,7 +82,21 @@
                         </div>
                     </tab>
                     <tab heading="Informations">
-                        Informations
+                        <div ng-if="result.properties.altimetric_profile" class="profile">
+                            <ng-include src="result.properties.altimetric_profile"></ng-include>
+                        </div>
+                        <div class="transport">
+                            
+                        </div>
+                        <div class="access">
+                            
+                        </div>
+                        <div class="info-desks">
+                            
+                        </div>
+                        <div class="going-further">
+                            
+                        </div>
                     </tab>
                     <tab heading="A proximité">A proximité</tab>
                 </tabset>
@@ -86,11 +104,11 @@
             </div>
         </div>
 
-        <div class="col-sm-4 pois">
+        <div class="pois">
             <h3>Patrimoine</h3>
         </div>
 
-        <div class="col-sm-4 detail-map">
+        <div class="detail-map">
             <geotrek-map></geotrek-map>
         </div>   
     </div>
