@@ -23,6 +23,11 @@ html, body, .main-container {
     width: 100%;
 }
 
+.main-container {
+    display: flex;
+    flex-direction: column;
+}
+
 @import 'layout/styles/_layout';
 @import 'categories/styles/_liste';
 @import 'results/styles/_liste';
