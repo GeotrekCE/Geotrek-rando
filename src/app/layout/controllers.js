@@ -10,8 +10,21 @@ function HeaderController() {
 function SidebarHomeController() {
 }
 
-function SidebarDetailController() {
+function SidebarDetailController($scope, $stateParams, utilsFactory, resultsService) {
+
+    function getResultDetails() {
+        resultsService.getAResult($stateParams.slug)
+            .then(
+                function (data) {
+                    $scope.result = data;
+                }
+            );
+    }
+
+    getResultDetails();
+
     jQuery('[data-toggle="tooltip"]').tooltip();
+
 }
 
 function FooterController() {

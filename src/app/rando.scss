@@ -28,6 +28,14 @@ html, body, .main-container {
     flex-direction: column;
 }
 
+a {
+    color: $primary-color;
+    transition: all 0.2s ease-out;
+    &:hover {
+        color: darken($primary-color, 5%);
+    }
+}
+
 @import 'layout/styles/_layout';
 @import 'categories/styles/_liste';
 @import 'results/styles/_liste';

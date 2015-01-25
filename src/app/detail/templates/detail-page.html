@@ -19,48 +19,53 @@
                 <div class="from-to">
                     <span ng-if="result.properties.departure">{{result.properties.departure}} -></span>
                     <span ng-if="result.properties.arrival">{{result.properties.arrival}}</span>
+                    <span ng-if="!result.properties.departure && !result.properties.arrival && result.properties.cities[0]">{{result.properties.cities[0].name}}</span>
                 </div>
             </div>
             <div class="content">
                 <div class="pictos">
                     <ul>
+                        <li ng-if="result.properties.type1[0]" class="type1">
+                            <span>{{result.properties.type1[0].name}}</span>
+                        </li>
+                        <li ng-if="result.properties.type2[0]" class="type2">
+                            <span>{{result.properties.type2[0].name}}</span>
+                        </li>
                         <li ng-if="result.properties.duration_pretty" class="duration">
                             <ng-include src="'./images/icons/duration.svg'"></ng-include>
-                            {{result.properties.duration_pretty}}
+                            <span>{{result.properties.duration_pretty}}</span>
                         </li>
-                        <li ng-if="resut.properties.difficulty.label" class="difficulty">
-                            <ng-include src="resut.properties.difficulty.pictogram"></ng-include>
-                            {{resut.properties.difficulty.label}}
+                        <li ng-if="result.properties.difficulty.label" class="difficulty">
+                            <ng-include src="result.properties.difficulty.pictogram"></ng-include>
+                            <span>{{result.properties.difficulty.label}}</span>
                         </li>
-                        <li ng-if="resut.properties.route" class="route">
-                            <ng-include src="resut.properties.route.pictogram"></ng-include>
-                            {{resut.properties.route.label}}
+                        <li ng-if="result.properties.route" class="route">
+                            <ng-include src="result.properties.route.pictogram"></ng-include>
+                            <span>{{result.properties.route.label}}</span>
                         </li>
                         <li ng-if="result.properties.length" class="length">
                             <ng-include src="'./images/icons/length.svg'"></ng-include>
-                            {{parseLength(result.properties.length)}}
+                            <span>{{parseLength(result.properties.length)}}</span>
                         </li>
                         <li ng-if="result.properties.ascent" class="ascent">
                             <ng-include src="'./images/icons/ascent.svg'"></ng-include>
-                            {{parseLength(result.properties.ascent)}}
+                            <span>{{parseLength(result.properties.ascent)}}</span>
                         </li>
                         <li ng-if="result.properties.usages" ng-repeat="usage in result.properties.usages" class="usage {{removeDiacritics(usage.label)}}">
                             <ng-include src="usage.pictogram"></ng-include>
-                            {{usage.label}}
+                            <span>{{usage.label}}</span>
                         </li>
                         <li ng-if="result.properties.networks" ng-repeat="network in result.properties.networks" class="network {{removeDiacritics(network.name)}}">
                             <ng-include src="network.pictogram"></ng-include>
-                            {{network.name}}
+                            <span>{{network.name}}</span>
                         </li>
                         <li ng-if="result.properties.themes" ng-repeat="theme in result.properties.themes" class="theme {{removeDiacritics(theme.label)}}">
                             <ng-include src="theme.pictogram"></ng-include>
-                            {{theme.label}}
+                            <span>{{theme.label}}</span>
                         </li>
                     </ul>
                 </div>
-                <div ng-if="result.properties.ambiance" class="headline">
-                    <div ng-bind-html="sanitizeData(result.properties.description_teaser)"></div>
-                </div>
+                <div ng-if="result.properties.description_teaser" ng-bind-html="sanitizeData(result.properties.description_teaser)" class="description_teaser"></div>
             </div>
         </div>
 
@@ -72,9 +77,9 @@
 
                 <tabset justified="true">
                     <tab heading="Description">
-                        <div ng-if="result.properties.description_teaser" ng-bind-html="sanitizeData(result.properties.description_teaser)" class="description_teaser"></div>
+                       <div ng-if="result.properties.ambiance" ng-bind-html="sanitizeData(result.properties.description_teaser)" class="ambiance"></div>
                         <div ng-if="result.properties.description" ng-bind-html="sanitizeData(result.properties.description)" class="description"></div>
-                        <div ng-if="is_park_centered" class="is-park-centered">
+                        <div ng-if="result.properties.is_park_centered" class="is-park-centered">
                             <p>Cet itinéraire est dans le coeur du parc national, veuillez consulter la réglementation.</p>
                         </div>
                         <div ng-if="result.properties.advice" class="advice">
@@ -85,27 +90,56 @@
                         <div ng-if="result.properties.altimetric_profile" class="profile">
                             <ng-include src="result.properties.altimetric_profile"></ng-include>
                         </div>
+                        <div ng-if="result.properties.disabled_infrastructure" class="disabled-infrastructure">
+                            <div ng-bind-html="sanitizeData(result.properties.disabled_infrastructure)"></div>
+                        </div>
                         <div class="transport">
-                            
+                            <h4>Transports</h4>
                         </div>
                         <div class="access">
-                            
+                            <h4>Accès routier</h4>
                         </div>
-                        <div class="info-desks">
-                            
+                        <div ng-if="result.properties.information_desks[0]" class="info-desks">
+                            <h4>Lieux de renseignements</h4>
+                            <ul>
+                                <li ng-repeat="desk in result.properties.information_desks" class="desk">
+                                    <div class="name">{{desk.name}}</div>
+                                    <img ng-src="{{desk.photo_url}}" alt="{{desk.name}}"/>
+                                    <p class="description">{{desk.description}}</p>
+                                    <div class="address">
+                                        <div class="street">
+                                            {{desk.street}}
+                                        </div>
+                                        <span>{{desk.postal_code}}</span>
+                                        <span>{{desk.municipality}}</span>
+                                    </div>
+                                    <div class="contact">
+                                        <a ng-if="desk.website" class="website" href="{{desk.website}}">Site web</a>
+                                        <a ng-if="desk.email" class="mail" href="{{desk.email}}">{{desk.email}}</a>
+                                        <a ng-if="desk.phone" class="phone" href="tel:{{desk.phone}}">{{desk.phone}}</a>
+                                    </div>
+
+                                </li>
+                            </ul>
+                        </div>
+                        <div ng-if="result.properties.contact || result.properties.email" class="contact">
+                            <h4>Contact</h4>
+                            <div ng-if="result.properties.contact" ng-bind-html="sanitizeData(result.properties.contact)"></div>
+                            <a ng-if="result.properties.email" href="mailto:{{result.properties.email}}">{{result.properties.email}}</a>
                         </div>
                         <div class="going-further">
-                            
+                            <h4>Pour Plus d'informations</h4>
+                            <ul ng-if="result.propeties.web_links[0]" class="websites">
+                                <li ng-repeat="link in result.properties.web_links">
+                                    <a href="{{link.url}}" title="{{link.name}}">{{link.name}}</a>
+                                </li>
+                            </ul>
                         </div>
                     </tab>
                     <tab heading="A proximité">A proximité</tab>
                 </tabset>
 
             </div>
-        </div>
-
-        <div class="pois">
-            <h3>Patrimoine</h3>
         </div>
 
         <div class="detail-map">

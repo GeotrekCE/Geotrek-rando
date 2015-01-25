@@ -66,8 +66,14 @@ function treksService(globalSettings, settingsFactory, $resource, $q) {
             if (trek.properties.thumbnail && trek.properties.thumbnail !== null) {
                 trek.properties.thumbnail = globalSettings.DOMAIN + trek.properties.thumbnail;
             }
-            if (trek.properties.pictogram && trek.properties.pictogram !== null) {
-                trek.properties.difficulty.pictogram = globalSettings.DOMAIN + trek.properties.difficulty.pictogram;
+            if (trek.properties.gpx && trek.properties.gpx !== null) {
+                trek.properties.gpx = globalSettings.DOMAIN + trek.properties.gpx;
+            }
+            if (trek.properties.kml && trek.properties.kml !== null) {
+                trek.properties.kml = globalSettings.DOMAIN + trek.properties.kml;
+            }
+            if (trek.properties.printable && trek.properties.printable !== null) {
+                trek.properties.printable = globalSettings.DOMAIN + trek.properties.printable;
             }
             if (trek.properties.altimetric_profile && trek.properties.altimetric_profile !== null) {
                 trek.properties.altimetric_profile = globalSettings.DOMAIN + trek.properties.altimetric_profile;
