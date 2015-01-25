@@ -35,6 +35,7 @@ Launch the app on localhost:3000 and watch for any change in sass or js files in
 * Each time a sass file is changed, the wole css is reinjected
 * Each time a js file is saved, the browser's tab is refreshed
 
+Please note that you currently need to force CORS request in your browser in order to get data from our test server.
 
 # CREDITS
 
