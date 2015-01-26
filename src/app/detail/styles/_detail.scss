@@ -2,6 +2,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    background: $neutral-grey;
     .top-part {
         margin: 1% 0 0;
         flex: 1;
@@ -42,7 +43,7 @@
             padding: 0;
             .header {
                 padding: 1em 2em;
-                border-bottom: 1px solid $dark-grey;
+                border-bottom: 1px solid $neutral-grey;
                 background: $light-grey;
                 h1 {
                     font-size: 1.3em;
@@ -51,6 +52,7 @@
                 }
             }
             .content {
+                background: $light-grey;
                 padding: 1em 2em;
                 .pictos {
                     ul {
@@ -84,6 +86,7 @@
             padding: 0;
             flex: 1;
             display: flex;
+            margin-right: 15px;
             div[role="tabpanel"] {
                 flex: 1;
                 display: flex;
@@ -95,22 +98,26 @@
             }
             .nav-tabs {
                 li {
+                    border: 1px solid $neutral-grey;
                     a {
                         border-radius: 0;
-                        border: 1px solid $dark-grey;
+                        border: 0;
+                        background: $light-grey;
+                        border-bottom: 0px solid $dark-grey;
                         font-weight: bold;
                         color: $dark-grey;
                         transition: all 0.1s ease-out;
                     }
                     &:hover {
                         a {
-                            border-bottom-width: 4px;
-                            padding-bottom: 7px;
+                            background: lighten($light-grey, 3%);
+                            border-bottom-width: 3px;
+                            padding-bottom: 8px;
                         }
                     }
                     &.active {
                         a {
-                            background: $light-grey;
+                            background: lighten($light-grey, 5%);
                             border-bottom-width: 8px;
                             padding-bottom: 3px;
                         }
@@ -123,6 +130,7 @@
                 flex: 1;
                 overflow-x: hidden;
                 overflow-y: scroll;
+                background: lighten($light-grey, 5%);
                 .ambiance {
                     float: left;
                     width: 60%;
@@ -135,7 +143,7 @@
                     margin-bottom: 1em;
                     padding: 10px;
                     font-weight: bold;
-                    background: transparentize($primary-color,0.4);
+                    background: transparentize($primary-color, 0.4);
                     color: darken($primary-color, 20%);
                 }
 
