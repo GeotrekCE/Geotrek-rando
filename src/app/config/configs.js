@@ -38,7 +38,8 @@ var constants = {
         DEFAULT_MIN_ZOOM: 0,
         DEFAULT_MAX_ZOOM: 16,
         TREK_COLOR: '#F89406'
-    }
+    },
+    TREKS_TO_GEOJSON_ZOOM_LEVEL : 14
 
 };
 

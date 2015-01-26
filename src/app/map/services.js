@@ -55,6 +55,7 @@ function mapService(globalSettings, treksService, iconsService) {
     // Add treks geojson to the map
     this.displayResults = function (results, updateBounds) {
 
+        this.treksIconified = this.map.getZoom() < globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL;
         this.clearAllLayers();
 
         _.forEach(results, function (result) {
@@ -62,12 +63,21 @@ function mapService(globalSettings, treksService, iconsService) {
                 currentMarker;
 
             if (result.category === 'treks') {
-                currentLayer = self._treksMarkersLayer;
+                if (self.treksIconified) {
+                    currentLayer = self._treksMarkersLayer;
+                    
+                } else {
+                    currentLayer = self._treksgeoJsonLayer;
+                }
             } else {
                 currentLayer = self._touristicsMarkersLayer;
             }
 
-            currentMarker = self.createMarkerFromElement(result);
+            if (result.category === 'treks' && !self.treksIconified) {
+                currentMarker = self.createGeoJSONfromElement(result);
+            } else {
+                currentMarker = self.createMarkerFromElement(result);
+            }
 
             currentMarker.on({
                 click: function () {

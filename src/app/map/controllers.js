@@ -1,6 +1,6 @@
 'use strict';
 
-function MapController($scope, $rootScope, $state, resultsService, mapService, $stateParams) {
+function MapController($scope, globalSettings, $rootScope, $state, resultsService, mapService, $stateParams) {
 
     function updateMapWithResults() {
 
@@ -37,6 +37,16 @@ function MapController($scope, $rootScope, $state, resultsService, mapService, $
     }
 
     mapInit('map');
+
+    $scope.map.on('zoomend', function () {
+        if ($state.current.name === 'layout.root') {
+            if ((mapService.treksIconified && $scope.map.getZoom() >= globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL)
+                    || (!mapService.treksIconified && $scope.map.getZoom() < globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL)) {
+                mapService.displayResults($scope.results, false);
+            }
+        }
+
+    });
 
     $rootScope.$on('$stateChangeSuccess',
         function () {
