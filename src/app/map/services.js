@@ -4,11 +4,115 @@ function mapService(globalSettings, treksService, iconsService) {
 
     var self = this;
 
-    this._markersLayers = {};
-    this._clustersLayer = {};
-    this.map = {};
+    this.createLayer = function () {
+
+        var layer = new L.LayerGroup();
+
+        return layer;
+
+    };
+
+    this.createClusterLayer = function () {
+
+        var clusterLayer = new L.MarkerClusterGroup({
+            showCoverageOnHover: false,
+            iconCreateFunction: function (cluster) {
+                return iconsService.getClusterIcon(cluster);
+            }
+        });
+
+        return clusterLayer;
+
+    };
+
+    this.createGeoJSONLayer = function () {
+        
+        var layer = new L.geoJson();
+
+        return layer;
+    };
+
+    this.clearAllLayers = function () {
+        // Remove all markers so the displayed markers can fit the search results
+        self._treksMarkersLayer.clearLayers();
+
+        self._touristicsMarkersLayer.clearLayers();
+
+        self._treksgeoJsonLayer.clearLayers();
+
+    };
+
+    this.updateBounds = function (updateBounds, layer) {
+
+        if ((updateBounds === undefined) || (updateBounds === true)) {    
+            self.map.fitBounds(layer.getBounds());
+        }
+
+    };
+
+    // Add treks geojson to the map
+    this.displayResults = function (results, updateBounds) {
+
+        this.clearAllLayers();
+
+        _.forEach(results, function (result) {
+            var currentLayer,
+                currentMarker;
+
+            if (result.category === 'treks') {
+                currentLayer = self._treksMarkersLayer;
+            } else {
+                currentLayer = self._touristicsMarkersLayer;
+            }
+
+            currentMarker = self.createMarkerFromElement(result);
+
+            currentMarker.on({
+                click: function () {
+                    console.log('marker Clicked');
+                    //$state.go("home.map.detail", { trekId: result.id });
+                }
+            });
+            currentLayer.addLayer(currentMarker);
+            self._clustersLayer.addLayer(currentLayer);
+        });
+
+        self.updateBounds(updateBounds, self._clustersLayer);
+
+    };
+
+    this.displayDetail = function (result, updateBounds) {
+
+        var currentElement,
+            currentLayer;
+
+        this.clearAllLayers();
+
+        if (result.category === 'treks') {
+            currentLayer = self._treksgeoJsonLayer;
+            currentElement = self.createGeoJSONfromElement(result);
+            
+        } else {
+            currentLayer = self._touristicsMarkersLayer;
+            currentElement = self.createMarkerFromElement(result);
+        }
+
+        currentLayer.addLayer(currentElement);
+        self._clustersLayer.addLayer(currentLayer);
+
+        if (result.category === 'treks') {
+            self.updateBounds(updateBounds, currentLayer);
+        } else {
+            self.updateBounds(updateBounds, self._clustersLayer);
+        }
+
+    };
 
     this.initMap = function (mapSelector) {
+
+        if (this.map) {
+            return this.map;
+        }
 
         // Set background Layers
         this._baseLayers = {
@@ -45,98 +149,40 @@ function mapService(globalSettings, treksService, iconsService) {
         // Set-up maps controls (needs _map to be defined);
         this.initMapControls();
 
-        if (globalSettings.ENABLE_TREKS) {
-            this._markersLayers.treksLayer = self.createLayer();
-        }
-
-        if (globalSettings.ENABLE_TOURISTIC_CONTENT || globalSettings.ENABLE_TOURISTIC_EVENTS) {
-            this._markersLayers.touristicsLayer = self.createLayer();
-        }
-
+        //Set-up Layers
         this._clustersLayer = self.createClusterLayer();
 
-        return map;
-        
-    };
-
-    this.createLayer = function () {
-
-        var layer = new L.LayerGroup();
-
-        return layer;
-
-    };
-
-    this.createClusterLayer = function () {
-
-        var clusterLayer = new L.MarkerClusterGroup({
-            showCoverageOnHover: false,
-            iconCreateFunction: function (cluster) {
-                return iconsService.getClusterIcon(cluster);
-            }
-        });
-
-        return clusterLayer;
-
-    };
-
-    // Add treks geojson to the map
-    this.displayResults = function (results, updateBounds) {
-
-        // Remove all markers so the displayed markers can fit the search results
-        _.forEach(self._markersLayers, function(layer) {
-            layer.clearLayers();
-        });
-
-        _.forEach(results, function (result) {
-            var currentLayer;
-            if (result.category === 'treks') {
-                currentLayer = self._markersLayers.treksLayer;
-            } else {
-                currentLayer = self._markersLayers.touristicsLayer;
-            }
-            var currentMarker = self.createMarkerFromElement(result);
-
-            currentMarker.on({
-                click: function () {
-                    console.log('marker Clicked');
-                    //$state.go("home.map.detail", { trekId: result.id });
-                }
-            });
-            currentLayer.addLayer(currentMarker);
-        });
-
         if (globalSettings.ENABLE_TREKS) {
-            self._clustersLayer.addLayer(self._markersLayers.treksLayer);
+            this._treksMarkersLayer = self.createLayer();
+            this._treksgeoJsonLayer = self.createGeoJSONLayer();
         }
 
         if (globalSettings.ENABLE_TOURISTIC_CONTENT || globalSettings.ENABLE_TOURISTIC_EVENTS) {
-            self._clustersLayer.addLayer(self._markersLayers.touristicsLayer);
+            this._touristicsMarkersLayer = self.createLayer();
         }
 
-        self.map.addLayer(self._clustersLayer);
+        this.map.addLayer(this._clustersLayer);
+
+        return this.map;
         
-        if ((updateBounds === undefined) || (updateBounds === true)) {    
-            self.map.fitBounds(self._clustersLayer.getBounds());
-        }
-
     };
+
 
 
     // MARKERS AND CLUSTERS  //////////////////////////////
     //
     //
-    var _markers = [];
+    this.markers = [];
 
     this.getMarkers = function () {
-        return _markers;
+        return this.markers;
     };
 
     this.setMarkers = function (markers) {
-        _markers = markers;
+        this.markers = markers;
     };
 
-    this.createMarkersFromTrek = function (trek, pois) {
+    /*this.createMarkersFromTrek = function (trek, pois) {
         var markers = [];
 
         var startPoint = treksService.getStartPoint(trek);
@@ -207,7 +253,7 @@ function mapService(globalSettings, treksService, iconsService) {
         });
 
         return markers;
-    };
+    };*/
 
     this.createMarkerFromElement = function (element) {
         var startPoint = {},
@@ -219,7 +265,6 @@ function mapService(globalSettings, treksService, iconsService) {
             startPoint.lng = element.geometry.coordinates[0];
             startPoint.lat = element.geometry.coordinates[1];
         }
-        
 
         marker = L.marker(
             [startPoint.lat, startPoint.lng],
@@ -229,6 +274,15 @@ function mapService(globalSettings, treksService, iconsService) {
         );
 
         return marker;
+    };
+
+    this.createGeoJSONfromElement = function (element) {
+        var geoJson;
+
+        geoJson = L.geoJson(element);
+
+        return geoJson;
+
     };
 
 

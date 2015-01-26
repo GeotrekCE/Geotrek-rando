@@ -1,34 +1,51 @@
 'use strict';
 
-function MapController($scope, resultsService, mapService) {
+function MapController($scope, $rootScope, $state, resultsService, mapService, $stateParams) {
 
-    function updateResults(callback) {
+    function updateMapWithResults() {
 
         resultsService.getAllResults()
             .then(
                 function (data) {
                     $scope.results = data;
-                    if (callback && typeof callback[0] === 'function') {
-                        callback[0](callback[1]);
-                    }
+                    mapService.displayResults($scope.results);
                 }
             );
 
     }
 
-    function mapInit(parameters) {
+    function updateMapWithDetails() {
+        resultsService.getAResult($stateParams.slug)
+            .then(
+                function (data) {
+                    $scope.result = data;
+                    mapService.displayDetail($scope.result);
+                }
+            );
+    }
 
-        //$scope.mapService = mapService;
+    function mapInit(selector) {
 
-        var mapSelector = parameters[0] || 'map';
-
+        var mapSelector = selector || 'map';
         $scope.map = mapService.initMap(mapSelector);
-
-        mapService.displayResults($scope.results);
+        if ($state.current.name === 'layout.detail') {
+            updateMapWithDetails();
+        } else {
+            updateMapWithResults();
+        }
 
     }
 
-    updateResults([mapInit, ['map']]);
+    mapInit('map');
+
+    $rootScope.$on('$stateChangeSuccess',
+        function () {
+            if ($state.current.name === 'layout.detail') {
+                updateMapWithDetails();
+            } else {
+                updateMapWithResults();
+            }
+        });
 }
 
 module.exports = {
