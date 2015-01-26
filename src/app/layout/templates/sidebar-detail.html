@@ -1,52 +1,60 @@
 <div>
     <ul class="detail-actions">
         <li class="back-to-home">
-            <a data-toggle="tooltip" data-placement="right" title="Retour à la carte" ui-sref="layout.root">
-                <i class="fa fa-reply"></i>
-                <span class="sr-only">Retour à la carte</span>
-            </a>
+            <button tooltip-placement="right" tooltip="Retour à la carte">
+                <a ui-sref="layout.root" title="Retour à la carte">
+                    <i class="fa fa-reply"></i>
+                    <span class="sr-only">Retour à la carte</span>
+                </a>
+            </button>
         </li>
         <li ng-if="result.properties.printable" class="print">
-            <a data-toggle="tooltip" data-placement="right" title="Imprimer la fiche de l'itinéraire" href="{{result.properties.printable}}">
-                <i class="fa fa-print"></i>
-                <span class="sr-only">Imprimer la fiche</span>
-            </a>
+            <button tooltip-placement="right" tooltip="Imprimer la fiche de l'itinéraire">
+                <a href="{{result.properties.printable}}" title="Imprimer la fiche de l'itinéraire">
+                    <i class="fa fa-print"></i>
+                    <span class="sr-only">Imprimer la fiche</span>
+                </a>
+            </button>
         </li>
         <li class="favorites">
-            <button data-toggle="tooltip" data-placement="right" title="Ajouter à mes favoris">
+            <button tooltip-placement="right" tooltip="Ajouter à mes favoris">
                 <i class="fa fa-heart"></i>
                 <span class="sr-only">Ajouter à mes favoris</span>
             </button>
         </li>
         <li class="share">
-            <button data-toggle="tooltip" data-placement="right" title="Partager cet itinéraire">
+            <button tooltip-placement="right" tooltip="Partager cet itinéraire">
                 <i class="fa fa-share-alt"></i>
                 <span class="sr-only">Partager cet itinéraire</span>
             </button>
         </li>
         <li class="signal">
-            <button data-toggle="tooltip" data-placement="right" title="Signaler un problème ou une erreur">
+            <button tooltip-placement="right" tooltip="Signaler un problème ou une erreur">
                 <i class="fa fa-pencil"></i>
                 <span class="sr-only">Signaler un problème ou une erreur</span>
             </button>
         </li>
         <li ng-if="result.category === 'treks' && result.properties.kml" class="kml">
-            <a data-toggle="tooltip" data-placement="right" title="Télécharger le fichier KML de l'itinéraire" href="{{result.properties.kml}}">
-                <span class="txt-icon">KML</span>
-                <span class="sr-only">Télécharger le fichier KML de l'itinéraire</span>
-            </a>
+            <button tooltip-placement="right" tooltip="Télécharger le fichier KML de l'itinéraire">
+                <a href="{{result.properties.kml}}" title="Télécharger le fichier KML de l'itinéraire">
+                    <span class="txt-icon">KML</span>
+                    <span class="sr-only">Télécharger le fichier KML de l'itinéraire</span>
+                </a>
+            </button>
         </li>
         <li ng-if="result.category === 'treks' && result.properties.gpx" class="gpx">
-            <a data-toggle="tooltip" data-placement="right" title="Télécharger le fichier GPX de l'itinéraire" href="{{result.properties.gpx}}">
-                <span class="txt-icon">GPX</span>
-                <span class="sr-only">Télécharger le fichier GPX de l'itinéraire</span>
-            </a>
+            <button tooltip-placement="right" tooltip="Télécharger le fichier GPX de l'itinéraire">
+                <a href="Télécharger le fichier GPX de l'itinéraire" title="{{result.properties.gpx}}">
+                    <span class="txt-icon">GPX</span>
+                    <span class="sr-only">Télécharger le fichier GPX de l'itinéraire</span>
+                </a>
+            </button>
         </li>
         <li ng-if="result.category === 'treks'" class="rep-3d">
-            <a data-toggle="tooltip" data-placement="right" title="Voir l'itinéraire en 3D !">
+            <button tooltip-placement="right" tooltip="Voir l'itinéraire en 3D !">
                 <span class="txt-icon">3D</span>
                 <span class="sr-only">Voir l'itinéraire en 3D !</span>
-            </a>
+            </button>
         </li>
     </ul>
 </div>

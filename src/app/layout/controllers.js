@@ -4,7 +4,6 @@ function LayoutController() {
 }
 
 function HeaderController() {
-    jQuery('[data-toggle="tooltip"]').tooltip();
 }
 
 function SidebarHomeController() {
@@ -22,8 +21,6 @@ function SidebarDetailController($scope, $stateParams, utilsFactory, resultsServ
     }
 
     getResultDetails();
-
-    jQuery('[data-toggle="tooltip"]').tooltip();
 
 }
 

@@ -10,19 +10,24 @@
         li {
             height: 40px;
             margin: 10px 0;
-            button, a {
-                text-decoration: none;
-                display: block;
-                padding: 10px;
+            button {
+                padding: 0;
                 text-align: center;
                 width: 100%;
                 height: 100%;
                 margin-left: -10%;
                 border: none;
-                background: white;
                 box-shadow: none;
                 background: white;
                 color: $dark-grey;
+                a {
+                    padding: 10px;
+                    text-decoration: none;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    color: $dark-grey;
+                }
                 .txt-icon {
                     font-weight: bold;
                 }
