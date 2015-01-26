@@ -60,7 +60,8 @@ function mapService(globalSettings, treksService, iconsService) {
 
         _.forEach(results, function (result) {
             var currentLayer,
-                currentMarker;
+                currentMarker,
+                listeEquivalent;
 
             if (result.category === 'treks') {
                 if (self.treksIconified) {
@@ -80,6 +81,18 @@ function mapService(globalSettings, treksService, iconsService) {
             }
 
             currentMarker.on({
+                mouseover: function () {
+                    listeEquivalent = jQuery('#result-' + result.category + '-' + result.id);
+                    if (!listeEquivalent.hasClass('hovered')) {
+                        listeEquivalent.addClass('hovered');
+                    }
+                },
+                mouseout: function () {
+                    listeEquivalent = jQuery('#result-' + result.category + '-' + result.id);
+                    if (listeEquivalent.hasClass('hovered')) {
+                        listeEquivalent.removeClass('hovered');
+                    }
+                },
                 click: function () {
                     console.log('marker Clicked');
                     //$state.go("home.map.detail", { trekId: result.id });

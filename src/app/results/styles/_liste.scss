@@ -9,6 +9,13 @@
             flex: 1;
             min-width: 40%;
             margin: 1em;
+            &.hovered {
+                //order: -1;
+                .result {
+                    transform: scale(1.03);
+                    box-shadow: 0px 3px 3px 0px lighten($dark-grey,30%);
+                }
+            }
         }
         .result {
             display: block;
@@ -16,7 +23,8 @@
             border-left: 10px solid $primary-color;
             background: white;
             padding: 0 15px;
-            box-shadow: 0px 1px 2px 0px #444;
+            box-shadow: 0px 1px 2px 0px $dark-grey;
+            transition: all 0.1s ease-out;
             .visual {
                 height: 150px;
                 margin-left: -15px;
