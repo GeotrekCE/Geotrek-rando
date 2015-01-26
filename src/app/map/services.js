@@ -34,6 +34,8 @@ function mapService(globalSettings, treksService, iconsService) {
 
     this.clearAllLayers = function () {
         // Remove all markers so the displayed markers can fit the search results
+        self._clustersLayer.clearLayers();
+
         self._treksMarkersLayer.clearLayers();
 
         self._touristicsMarkersLayer.clearLayers();
@@ -109,10 +111,6 @@ function mapService(globalSettings, treksService, iconsService) {
     };
 
     this.initMap = function (mapSelector) {
-
-        if (this.map) {
-            return this.map;
-        }
 
         // Set background Layers
         this._baseLayers = {
