@@ -36,11 +36,14 @@ function mapService(globalSettings, treksService, iconsService) {
         // Remove all markers so the displayed markers can fit the search results
         self._clustersLayer.clearLayers();
 
-        self._treksMarkersLayer.clearLayers();
+        if (globalSettings.ENABLE_TREKS) {
+            self._treksMarkersLayer.clearLayers();
+            self._treksgeoJsonLayer.clearLayers();
+        }
 
-        self._touristicsMarkersLayer.clearLayers();
-
-        self._treksgeoJsonLayer.clearLayers();
+        if (globalSettings.ENABLE_TOURISTIC_CONTENT || globalSettings.ENABLE_TOURISTIC_EVENTS) {
+            self._touristicsMarkersLayer.clearLayers();
+        }
 
     };
 
