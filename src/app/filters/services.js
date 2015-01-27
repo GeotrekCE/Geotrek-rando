@@ -1,13 +1,13 @@
 'use strict';
 
-function filtersService(globalSettings) {
+function filtersService(globalSettings, utilsFactory) {
 
     var self = this;
 
     this.createTouristicCategoryFilters = function (categories) {
 
-        if (!this.filters) {
-            this.initGlobalFilters();
+        if (!self.filters) {
+            self.initGlobalFilters();
         }
 
         _.forEach(categories, function (category) {
@@ -42,8 +42,8 @@ function filtersService(globalSettings) {
 
     this.initGlobalFilters = function (results) {
 
-        if (!this.filters) {
-            this.filters = {
+        if (!self.filters) {
+            self.filters = {
                 categories:     [],
                 themes:         [],
                 districts:      [],
@@ -53,50 +53,48 @@ function filtersService(globalSettings) {
         }
 
         if (results !== undefined) {
-
             _.forEach(results, function (result) {
-
                 if (result.properties.themes && result.properties.themes.length > 0) {
                     _.forEach(result.properties.themes, function (theme) {
-                        if (self.filters.themes.indexOf(theme.id) === -1 && theme.code !== undefined) {
-                            self.filters.themes.push(theme.id);   
+                        if (!(utilsFactory.idIsInArray(self.filters.themes, theme)) && theme !== undefined) {
+                            self.filters.themes.push(theme);
                         }
                     });
                 }
 
                 if (result.properties.districts && result.properties.districts.length > 0) {
                     _.forEach(result.properties.districts, function (district) {
-                        if (self.filters.districts.indexOf(district.code) === -1 && district.code !== undefined) {
-                            self.filters.districts.push(district.code);   
+                        if (!(utilsFactory.idIsInArray(self.filters.districts, district)) && district !== undefined) {
+                            self.filters.districts.push(district);
                         }
                     });
                 }
 
                 if (result.properties.areas && result.properties.areas.length > 0) {
                     _.forEach(result.properties.areas, function (valley) {
-                        if (self.filters.valley.indexOf(valley.code) === -1 && valley.code !== undefined) {
-                            self.filters.valley.push(valley.code);   
+                        if (!(utilsFactory.idIsInArray(self.filters.valley, valley)) && valley !== undefined) {
+                            self.filters.valley.push(valley);
                         }
                     });
                 }
-                
+
             });
         }
 
-        console.log(this.filters);
+        return this.filters;
 
     };
 
-    this.getFiltersValue = function () {
+    this.getFilters = function () {
 
-        if (this.filters) {
-            return this.filters;
+        if (self.filters) {
+            return self.filters;
         }
 
-        this.initFilters();
+        self.initGlobalFilters();
     };
 
-    this.filterResults = function (results) {
+    /*this.filterResults = function (results) {
         var filteredResults;
 
         filteredResults = _.filter(results, function (result) {
@@ -108,7 +106,7 @@ function filtersService(globalSettings) {
         });
 
         return filteredResults;
-    };
+    };*/
 
 }
 

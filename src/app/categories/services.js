@@ -3,28 +3,6 @@
 function categoriesService(globalSettings, $q, treksService, contentsService, eventsService, utilsFactory, filtersService) {
     var self = this;
 
-    this.findIndexofId = function (anArray, id) {
-        var length = anArray.length, i;
-        for (i = 0; i < length; i++) {
-            if (anArray[i].id === id) {
-                return i;
-            }
-        }
-    };
-
-    this.idInArray = function (anArray, usage) {
-
-        var isInArray = false;
-
-        _.forEach(anArray, function (arrayElement) {
-            if (arrayElement.id === usage.id) {
-                isInArray = true;
-            }
-        });
-
-        return isInArray;
-    };
-
     this.replaceImgURLs = function (categoriesData) {
 
         // Parse trek pictures, and change their URL
@@ -40,14 +18,15 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
     this.getTreksCategories = function (treks) {
 
         var treksUsages = [],
-            difficulties = [];
-            console.log(treks);
+            difficulties = [],
+            themes = [];
+
         _.forEach(treks.features, function (aTrek) {
 
             if (aTrek.properties.usages && aTrek.properties.usages.length > 0) {
                 _.forEach(aTrek.properties.usages, function (usage) {
 
-                    if (!(self.idInArray(treksUsages, usage)) && usage !== undefined) {
+                    if (!(utilsFactory.idIsInArray(treksUsages, usage)) && usage !== undefined) {
                         treksUsages.push(usage);
                     }
 
@@ -55,9 +34,19 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
             }
 
             if (aTrek.properties.difficulty) {
-                if (!(self.idInArray(difficulties, aTrek.properties.difficulty)) && aTrek.properties.difficulty !== undefined) {
+                if (!(utilsFactory.idIsInArray(difficulties, aTrek.properties.difficulty)) && aTrek.properties.difficulty !== undefined) {
                     difficulties.push(aTrek.properties.difficulty);
                 }
+            }
+
+            if (aTrek.properties.themes && aTrek.properties.themes.length > 0) {
+                _.forEach(aTrek.properties.themes, function (theme) {
+
+                    if (!(utilsFactory.idIsInArray(themes, theme)) && theme !== undefined) {
+                        themes.push(theme);
+                    }
+
+                });
             }
 
         });
@@ -71,6 +60,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
             type1: [],
             type2: treksUsages,
             difficulties: difficulties,
+            themes: themes,
             cat_class: 'category-treks'
         };
 
@@ -80,12 +70,23 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
     this.getTouristicEventsCategories = function (events) {
 
-        var eventsUsages = [];
+        var eventsUsages = [],
+            themes = [];
 
         _.forEach(events.features, function (anEvent) {
 
-            if (!(self.idInArray(eventsUsages, anEvent.type))) {
+            if (!(utilsFactory.idIsInArray(eventsUsages, anEvent.type))) {
                 eventsUsages.push(anEvent.properties.type);
+            }
+
+            if (anEvent.properties.themes && anEvent.properties.themes.length > 0) {
+                _.forEach(anEvent.properties.themes, function (theme) {
+
+                    if (!(utilsFactory.idIsInArray(themes, theme)) && theme !== undefined) {
+                        themes.push(theme);
+                    }
+
+                });
             }
 
         });
@@ -98,6 +99,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
             type2_label: 'Type',
             type1: [],
             type2: eventsUsages,
+            themes: themes,
             cat_class: 'category-events'
         };
 
@@ -111,7 +113,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
         _.forEach(contents.features, function (aContent) {
 
-            if (!(self.idInArray(contentsCategories, aContent.properties.category))) {
+            if (!(utilsFactory.idIsInArray(contentsCategories, aContent.properties.category))) {
 
                 var currentCategory = {
                     id: aContent.properties.category.id,
@@ -121,6 +123,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                     type2_label: aContent.properties.category.type2_label,
                     type1: aContent.properties.type1 || [],
                     type2: aContent.properties.type2 || [],
+                    themes: aContent.properties.themes || [],
                     cat_class: 'category-' + utilsFactory.removeDiacritics(aContent.properties.category.label.toLowerCase())
                 };
 
@@ -128,11 +131,11 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
             } else {
 
-                var catIndex = self.findIndexofId(contentsCategories, aContent.properties.category.id);
+                var catIndex = utilsFactory.findIndexOfId(contentsCategories, aContent.properties.category.id);
 
                 _.forEach(aContent.properties.type1, function (aType) {
 
-                    if (!(self.idInArray(contentsCategories[catIndex].type1, aType))) {
+                    if (!(utilsFactory.idIsInArray(contentsCategories[catIndex].type1, aType))) {
 
                         contentsCategories[catIndex].type1.push(aType);
 
@@ -142,13 +145,23 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
                 _.forEach(aContent.properties.type2, function (aType) {
 
-                    if (!(self.idInArray(contentsCategories[catIndex].type2, aType))) {
+                    if (!(utilsFactory.idIsInArray(contentsCategories[catIndex].type2, aType))) {
 
                         contentsCategories[catIndex].type2.push(aType);
 
                     }
 
                 });
+
+                if (aContent.properties.themes && aContent.properties.themes.length > 0) {
+                    _.forEach(aContent.properties.themes, function (theme) {
+
+                        if (!(utilsFactory.idIsInArray(contentsCategories[catIndex].themes, theme)) && theme !== undefined) {
+                            contentsCategories[catIndex].themes.push(theme);
+                        }
+
+                    });
+                }
 
             }
 

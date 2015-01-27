@@ -122,10 +122,34 @@ function utilsFactory($sce) {
         return parsedLength;
     };
 
+    var idIsInArray = function (anArray, element) {
+
+        var isInArray = false;
+
+        _.forEach(anArray, function (arrayElement) {
+            if (arrayElement.id === element.id) {
+                isInArray = true;
+            }
+        });
+
+        return isInArray;
+    };
+
+    var findIndexOfId = function (anArray, id) {
+        var length = anArray.length, i;
+        for (i = 0; i < length; i++) {
+            if (anArray[i].id === id) {
+                return i;
+            }
+        }
+    };
+
     return {
         removeDiacritics: removeDiacritics,
         sanitizeData: sanitizeData,
-        parseLength: parseLength
+        parseLength: parseLength,
+        idIsInArray: idIsInArray,
+        findIndexOfId: findIndexOfId
     };
 
 }
