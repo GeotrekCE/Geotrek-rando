@@ -7,8 +7,9 @@
         flex-wrap: wrap;
         & > li {
             flex: 1;
-            min-width: 40%;
-            margin: 1em;
+            min-width: 50%;
+            max-width: 50%;
+            padding: 1em;
             &.hovered {
                 //order: -1;
                 .result {
