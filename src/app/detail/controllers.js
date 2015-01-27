@@ -1,6 +1,6 @@
 'use strict';
 
-function DetailController($scope, $stateParams, utilsFactory, resultsService) {
+function DetailController($scope, $stateParams, utilsFactory, resultsService, poisService) {
 
     $scope.sanitizeData = utilsFactory.sanitizeData;
     $scope.parseLength = utilsFactory.parseLength;
@@ -16,9 +16,20 @@ function DetailController($scope, $stateParams, utilsFactory, resultsService) {
     function getResultDetails() {
         resultsService.getAResult($stateParams.slug)
             .then(
-                function (data) {
-                    $scope.result = data;
-                    console.log(data);
+                function (result) {
+                    $scope.result = result;
+                    getPoisOfResult(result);
+                    console.log(result);
+                }
+            );
+    }
+
+    function getPoisOfResult(result) {
+        poisService.getPois()
+            .then(
+                function (pois) {
+                    $scope.pois = pois;
+                    console.log(pois);
                 }
             );
     }
