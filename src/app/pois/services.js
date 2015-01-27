@@ -34,13 +34,13 @@ function poisService($resource, $q, globalSettings, settingsFactory) {
         return poisData;
     };
 
-    this.getPois = function (closeTo) {
+    this.getPois = function () {
 
         var deferred = $q.defer();
 
-        if (self._trekList) {
+        if (self._pois) {
 
-            deferred.resolve(self._trekList);
+            deferred.resolve(self._pois);
 
         } else {
             var url = settingsFactory.poisUrl;
@@ -65,6 +65,31 @@ function poisService($resource, $q, globalSettings, settingsFactory) {
 
         return deferred.promise;
 
+    };
+
+    this.getPoisFromElement = function (ElementId) {
+
+        var deferred = $q.defer();
+
+        var url = settingsFactory.poisUrl;
+
+        var requests = $resource(url, {}, {
+            query: {
+                method: 'GET',
+                cache: true,
+
+            }
+        }, {stripTrailingSlashes: false});
+
+        requests.query().$promise
+            .then(function (file) {
+                var data = angular.fromJson(file);
+                var refactoredPois = self.refactorPois(data);
+                self._pois = refactoredPois;
+                deferred.resolve(refactoredPois);
+            });
+
+        return deferred.promise;
     };
 
 }
