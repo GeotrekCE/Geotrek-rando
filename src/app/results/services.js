@@ -1,6 +1,7 @@
 'use strict';
 
-function resultsService($q, globalSettings, treksService, contentsService, eventsService) {
+function resultsService($q, globalSettings, treksService, contentsService, eventsService, filtersService) {
+
     this.getAllResults = function () {
         var deferred = $q.defer(),
             promises = [],
@@ -55,6 +56,9 @@ function resultsService($q, globalSettings, treksService, contentsService, event
         $q.all(promises)
             .then(
                 function () {
+                    if (!filtersService.filters) {
+                        filtersService.initGlobalFilters(results);
+                    }
                     deferred.resolve(results);
                 }
             );

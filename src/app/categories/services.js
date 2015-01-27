@@ -1,6 +1,6 @@
 'use strict';
 
-function categoriesService(globalSettings, $q, treksService, contentsService, eventsService, utilsFactory) {
+function categoriesService(globalSettings, $q, treksService, contentsService, eventsService, utilsFactory, filtersService) {
     var self = this;
 
     this.findIndexofId = function (anArray, id) {
@@ -39,17 +39,26 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
     this.getTreksCategories = function (treks) {
 
-        var treksUsages = [];
-
+        var treksUsages = [],
+            difficulties = [];
+            console.log(treks);
         _.forEach(treks.features, function (aTrek) {
 
-            _.forEach(aTrek.properties.usages, function (usage) {
+            if (aTrek.properties.usages && aTrek.properties.usages.length > 0) {
+                _.forEach(aTrek.properties.usages, function (usage) {
 
-                if (!(self.idInArray(treksUsages, usage))) {
-                    treksUsages.push(usage);
+                    if (!(self.idInArray(treksUsages, usage)) && usage !== undefined) {
+                        treksUsages.push(usage);
+                    }
+
+                });
+            }
+
+            if (aTrek.properties.difficulty) {
+                if (!(self.idInArray(difficulties, aTrek.properties.difficulty)) && aTrek.properties.difficulty !== undefined) {
+                    difficulties.push(aTrek.properties.difficulty);
                 }
-
-            });
+            }
 
         });
 
@@ -59,7 +68,9 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
             pictogram: './images/icons/trek-category.svg',
             type1_label: 'Type d\'usage',
             type2_label: 'Usage',
-            types: treksUsages,
+            type1: [],
+            type2: treksUsages,
+            difficulties: difficulties,
             cat_class: 'category-treks'
         };
 
@@ -74,7 +85,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
         _.forEach(events.features, function (anEvent) {
 
             if (!(self.idInArray(eventsUsages, anEvent.type))) {
-                eventsUsages.push(anEvent.type);
+                eventsUsages.push(anEvent.properties.type);
             }
 
         });
@@ -85,7 +96,8 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
             pictogram: './images/icons/events-category.svg',
             type1_label: 'Type d\'usage',
             type2_label: 'Type',
-            types: eventsUsages,
+            type1: [],
+            type2: eventsUsages,
             cat_class: 'category-events'
         };
 
@@ -219,6 +231,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                             }
 
                         }
+                        filtersService.createTouristicCategoryFilters(self._categoriesList);
                         deferred.resolve(self._categoriesList);
                     }
                 );

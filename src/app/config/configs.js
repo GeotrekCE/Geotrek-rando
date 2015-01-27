@@ -39,7 +39,21 @@ var constants = {
         DEFAULT_MAX_ZOOM: 16,
         TREK_COLOR: '#F89406'
     },
-    TREKS_TO_GEOJSON_ZOOM_LEVEL : 14
+    TREKS_TO_GEOJSON_ZOOM_LEVEL : 14,
+
+    FILTERS: {
+        DURATION : [
+            { id: 4, name: '<1/2 J', interval: {min: 0, max: 4} },
+            { id: 10, name: '1/2 - 1', interval: {min: 4, max: 10} },
+            { id: 24, name: '> 1 J', interval: {min: 10, max: 99999} }
+        ],
+        ASCENT :  [
+            { id: 0, name: '<300m', interval: {min: 0, max: 300} },
+            { id: 300, name: '300-600', interval: {min: 301, max: 600} },
+            { id: 600, name: '600-1000', interval: {min: 601, max: 1000} },
+            { id: 1000, name: '>1000m', interval: {min: 1001, max: 99999} }
+        ]
+    }
 
 };
 
