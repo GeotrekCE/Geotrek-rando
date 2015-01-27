@@ -12,7 +12,9 @@ function resultsService($q, globalSettings, treksService, contentsService, event
                     .then(
                         function (treks) {
                             _.forEach(treks.features, function (trek) {
-                                results.push(trek);
+                                if (trek.properties.published) {
+                                    results.push(trek);
+                                }
                             });
                         }
                     )
@@ -25,7 +27,9 @@ function resultsService($q, globalSettings, treksService, contentsService, event
                     .then(
                         function (contents) {
                             _.forEach(contents.features, function (content) {
-                                results.push(content);
+                                if (content.properties.published) {
+                                    results.push(content);
+                                }
                             });
                         }
                     )
@@ -38,7 +42,9 @@ function resultsService($q, globalSettings, treksService, contentsService, event
                     .then(
                         function (trEvents) {
                             _.forEach(trEvents.features, function (trEvent) {
-                                results.push(trEvent);
+                                if (trEvent.properties.published) {
+                                    results.push(trEvent);
+                                }
                             });
                         }
                     )
