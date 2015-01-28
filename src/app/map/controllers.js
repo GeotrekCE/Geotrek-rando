@@ -8,7 +8,11 @@ function MapController($scope, globalSettings, $rootScope, $state, resultsServic
             .then(
                 function (data) {
                     $scope.results = data;
-                    mapService.displayResults($scope.results);
+                    if (data.length > 0) {
+                        mapService.displayResults($scope.results);
+                    } else {
+                        mapService.clearAllLayers();
+                    }
                 }
             );
 
