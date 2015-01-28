@@ -7,6 +7,7 @@ function GlobalFiltersController($scope, resultsService, filtersService) {
             .then(
                 function (data) {
                     $scope.filters = filtersService.initGlobalFilters(data);
+                    $scope.activeFilter = {};
                     console.log($scope.filters);
                 }
             );
