@@ -123,37 +123,37 @@ function filtersService(globalSettings, utilsFactory) {
     };
 
     this.filterElement = function (element, filters) {
-        var result = false;
+        var areasResult = false,
+            districtsResult = false,
+            themesResult = false;
 
-        _.forEach(filters, function (filter, filterKey) {
+        if (filters.areas) {
+            _.forEach(element.properties.areas, function (area) {
+                _.forEach(filters.areas, function (filter) {
+                    if (area.id.toString() === filter.toString()) {areasResult = true; }
+                });
+            });
+        } else {
+            areasResult = true;
+        }
 
-            switch (filterKey) {
+        if (filters.districts) {
+            _.forEach(element.properties.districts, function (district) {
+                _.forEach(filters.districts, function (filter) {
+                    if (district.id.toString() === filter.toString()) {districtsResult = true; }
+                });
+            });
+        } else {
+            districtsResult = true;
+        }
 
-            case 'areas':
-                result = self.testById(element, filter, filterKey);
-                break;
+        if (filters.themes) {
+            themesResult = self.testById(element, filters.themes, 'themes');
+        } else {
+            themesResult = true;
+        }
 
-            case 'categories':
-                result = self.testById(element, filter, filterKey);
-                break;
-
-            case 'themes':
-                result = self.testById(element, filter, filterKey);
-                break;
-
-            case 'districts':
-                result = self.testById(element, filter, filterKey);
-                break;
-
-            case 'default':
-                result = true;
-                break;
-
-            }
-
-        });
-
-        return result;
+        return areasResult && districtsResult && themesResult;
 
     };
 

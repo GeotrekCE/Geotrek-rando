@@ -146,6 +146,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                         filteredResults.push(result);
                     }
                 });
+                console.log(filteredResults);
                 deferred.resolve(filteredResults);
             } else {
                 deferred.resolve(this._results);
