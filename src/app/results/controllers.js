@@ -15,6 +15,10 @@ function ResultsListeController($scope, resultsService) {
 
     updateResults();
 
+    $scope.$on('updateFilters', function () {
+        updateResults();
+    });
+
 }
 
 

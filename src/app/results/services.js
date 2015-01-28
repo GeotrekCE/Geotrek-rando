@@ -121,6 +121,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
         var deferred = $q.defer(),
             filteredResults = [],
             filters = $location.search();
+        console.log(filters);
 
         if (!this._results) {
             self.getAllResults()

@@ -56,6 +56,12 @@ function MapController($scope, globalSettings, $rootScope, $state, resultsServic
                 updateMapWithResults();
             }
         });
+
+    $scope.$on('updateFilters', function () {
+        if ($state.current.name === 'layout.root') {
+            updateMapWithResults();
+        }
+    });
 }
 
 module.exports = {

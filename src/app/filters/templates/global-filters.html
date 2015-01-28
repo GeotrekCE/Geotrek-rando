@@ -1,16 +1,16 @@
 <div id="global-filters">
     <form>
         <div class="recherche">
-            <input type="text" ng-model="activeFilters.search"/>
+            <input type="text" ng-model="activeFilters.search"  ng-change="propagateActiveFilters()"/>
         </div>
         <div class="select-boxes">
-            <select class="form-control districts" ng-model="activeFilters.districts" value="0">
+            <select class="form-control districts" ng-model="activeFilters.districts" value="0" ng-change="propagateActiveFilters()">
                 <option value="0">Toutes les Communes</option>
                 <option ng-repeat="district in filters.districts" value="{{district.code}}">{{district.label}}</option>
             </select>
-            <select class="form-control valleys" ng-model="activeFilters.valley" value="0">
+            <select class="form-control valleys" ng-model="activeFilters.areas" value="0" ng-change="propagateActiveFilters()">
                 <option value="0">Toutes les Vallées</option>
-                <option ng-repeat="valley in filters.valley" value="{{valley.id}}">{{valley.name}}</option>
+                <option ng-repeat="area in filters.areas" value="{{area.id}}">{{area.name}}</option>
             </select>
         </div>
         <div class="themes">
@@ -19,11 +19,8 @@
                     <span class="sr-only">{{theme.label}}</span>
                     <img src="{{theme.pictogram}}"/>
                 </label>
-                <input type="checkbox" id="theme-{{theme.id}}" value="{{theme.id}}" ng-model="activeFilters.themes"/>
+                <input type="checkbox" id="theme-{{theme.id}}" value="{{theme.id}}" ng-model="activeFilters.themes[theme.id]"  ng-change="propagateActiveFilters()"/>
             </div>
         </div>
-        <button ng-click="logActiveFilters()">
-            <span>Get Active Filters</span>
-        </button>
     </form>
 </div>

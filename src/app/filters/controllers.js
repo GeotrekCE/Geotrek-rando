@@ -1,6 +1,6 @@
 'use strict';
 
-function GlobalFiltersController($scope, resultsService, filtersService) {
+function GlobalFiltersController($rootScope, $scope, $location, resultsService, filtersService) {
 
     function initFiltersView() {
         resultsService.getAllResults()
@@ -12,16 +12,43 @@ function GlobalFiltersController($scope, resultsService, filtersService) {
             );
     }
 
-    $scope.logActiveFilters = function () {
-        console.log($scope.activeFilters);
+    $scope.propagateActiveFilters = function () {
+        console.log('changed');
+        var query = {};
+
+        _.forEach($scope.activeFilters, function (filter, key) {
+            if (key === 'themes') {
+                if (filter.length > 0) {
+                    var tempArray = [],
+                        themesNotAllFalse = false;
+                    _.forEach(filter, function (element, elementKey) {
+                        if (element && element !== '0') {
+                            tempArray.push(elementKey);
+                            themesNotAllFalse = true;
+                        }
+                    });
+                    if (themesNotAllFalse) {
+                        query[key] = tempArray;
+                    }
+                }
+            } else {
+                if (filter && filter !== '0') {
+                    query[key] = filter;
+                }
+            }
+
+        });
+        $location.search(query);
+        $rootScope.$broadcast('updateFilters');
     };
 
     $scope.activeFilters = {
         search: '',
-        valley: '0',
+        areas: '0',
         districts: '0',
         themes: []
     };
+
     initFiltersView();
 
 }
