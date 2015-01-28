@@ -64,6 +64,11 @@ class Command(BaseCommand):
             dest='no_tiles',
             default=False,
             help='Do not generate tiles files'),
+        make_option('-f', '--force',
+            action='store_true',
+            dest='force',
+            default=False,
+            help='Force regeneration of ressource files if data do not changed'),
     )
 
     def execute(self, *args, **options):
@@ -101,13 +106,13 @@ class Command(BaseCommand):
                     done.add(trek.id)
 
         for language in server_settings.languages.available:
-            self._build_global_ressources(language)
+            self._build_global_ressources(language, options['force'])
             for trek in Trek.objects.filter(language=language).all():
-                self._build_trek_ressources(trek, language)
+                self._build_trek_ressources(trek, language, options['force'])
 
         logger.info('Done.')
 
-    def _build_global_ressources(self, language):
+    def _build_global_ressources(self, language, force):
         logger.info("Build %s global ressources file..." % language)
 
         output_folder = os.path.join(settings.INPUT_DATA_ROOT, language, 'api/trek')
@@ -115,7 +120,7 @@ class Command(BaseCommand):
             logger.info("Create folder %s" % output_folder)
             os.makedirs(output_folder)
         zipfilename = os.path.join(output_folder, 'trek.zip')
-        zipfile = ZipFile(zipfilename, 'w')
+        zipfile = ZipFile(zipfilename + '.new', 'w')
 
         treks = Trek.objects.filter(language=language)
         media = set()
@@ -169,10 +174,25 @@ class Command(BaseCommand):
             arcname = os.path.join(dest, os.path.basename(url))
             zipfile.write(fullpath, arcname)
 
-        zipfile.close()
-        logger.info('%s done.' % zipfilename)
+        try:
+            oldzipfile = ZipFile(zipfilename, 'r')
+        except IOError:
+            uptodate = False
+        else:
+            old = set([(zi.filename, zi.CRC) for zi in oldzipfile.infolist()])
+            new = set([(zi.filename, zi.CRC) for zi in zipfile.infolist()])
+            uptodate = (old == new) and not force
+            oldzipfile.close()
 
-    def _build_trek_ressources(self, trek, language):
+        zipfile.close()
+        if uptodate:
+            os.unlink(zipfilename + '.new')
+            logger.info('%s was up to date.' % zipfilename)
+        else:
+            os.rename(zipfilename + '.new', zipfilename)
+            logger.info('%s done.' % zipfilename)
+
+    def _build_trek_ressources(self, trek, language, force):
         logger.info("Build %s ressources file for trek '%s'..." % (language, trek.properties.name))
 
         output_folder = os.path.join(settings.INPUT_DATA_ROOT, language, 'api/trek')
@@ -180,7 +200,7 @@ class Command(BaseCommand):
             logger.info("Create folder %s" % output_folder)
             os.makedirs(output_folder)
         zipfilename = os.path.join(output_folder, 'trek-%u.zip' % trek.id)
-        zipfile = ZipFile(zipfilename, 'w')
+        zipfile = ZipFile(zipfilename + '.new', 'w')
 
         media = set()
         missing_media = set()
@@ -208,8 +228,23 @@ class Command(BaseCommand):
             arcname = os.path.join(dest, os.path.basename(url))
             zipfile.write(fullpath, arcname)
 
+        try:
+            oldzipfile = ZipFile(zipfilename, 'r')
+        except IOError:
+            uptodate = False
+        else:
+            old = set([(zi.filename, zi.CRC) for zi in oldzipfile.infolist()])
+            new = set([(zi.filename, zi.CRC) for zi in zipfile.infolist()])
+            uptodate = (old == new) and not force
+            oldzipfile.close()
+
         zipfile.close()
-        logger.info('%s done.' % zipfilename)
+        if uptodate:
+            os.unlink(zipfilename + '.new')
+            logger.info('%s was up to date.' % zipfilename)
+        else:
+            os.rename(zipfilename + '.new', zipfilename)
+            logger.info('%s done.' % zipfilename)
 
     def _build_global_tiles(self):
         """ Creates a tiles file on the global extent.

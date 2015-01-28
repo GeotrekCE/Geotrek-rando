@@ -5,6 +5,10 @@ CHANGELOG
 1.36.1dev (unreleased)
 --------------------
 
+**New features**
+
+* Do not replace ressource zip files if data do not changed
+
 
 1.36.0 (2014-12-30)
 --------------------
