@@ -49,8 +49,7 @@ function contentsService(globalSettings, settingsFactory, $resource, $q, utilsFa
             deferred.resolve(self._contentsList);
 
         } else {
-            //var url = settingsFactory.touristicUrl;
-            var url = 'jsons/api/touristiccontents.geojson';
+            var url = settingsFactory.touristicUrl;
 
             var requests = $resource(url, {}, {
                 query: {
@@ -127,9 +126,6 @@ function eventsService(globalSettings, settingsFactory, $resource, $q) {
             var requests = $resource(url, {}, {
                 query: {
                     method: 'GET',
-                    params: {
-                        format: 'json'
-                    },
                     cache: true
                 }
             }, {stripTrailingSlashes: false});

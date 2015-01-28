@@ -47,7 +47,7 @@ function filtersService(globalSettings, utilsFactory) {
                 categories:     [],
                 themes:         [],
                 districts:      [],
-                valley:         [],
+                areas:         [],
                 search:         ''
             };
         }
@@ -71,9 +71,9 @@ function filtersService(globalSettings, utilsFactory) {
                 }
 
                 if (result.properties.areas && result.properties.areas.length > 0) {
-                    _.forEach(result.properties.areas, function (valley) {
-                        if (!(utilsFactory.idIsInArray(self.filters.valley, valley)) && valley !== undefined) {
-                            self.filters.valley.push(valley);
+                    _.forEach(result.properties.areas, function (area) {
+                        if (!(utilsFactory.idIsInArray(self.filters.areas, area)) && area !== undefined) {
+                            self.filters.areas.push(area);
                         }
                     });
                 }
@@ -92,6 +92,69 @@ function filtersService(globalSettings, utilsFactory) {
         }
 
         self.initGlobalFilters();
+    };
+
+    this.testById = function (element, filter, filterKey) {
+
+        var result = false;
+
+        if (element.properties[filterKey]) {
+
+            var prototype = Object.prototype.toString.call(element.properties[filterKey]);
+
+            if (prototype === '[object Array]') {
+                _.forEach(element.properties[filterKey], function (element) {
+                    _.forEach(filter, function (filterValue) {
+                        if (element.id.toString() === filterValue.toString()) {
+                            result = true;
+                        }
+                    });
+
+                });
+            } else if (prototype === '[object Object]') {
+                if (element.properties[filterKey].id.toString() === filter.toString()) {
+                    result = true;
+                }
+            }
+
+        }
+
+        return result;
+    };
+
+    this.filterElement = function (element, filters) {
+        var result = false;
+
+        _.forEach(filters, function (filter, filterKey) {
+
+            switch (filterKey) {
+
+            case 'areas':
+                result = self.testById(element, filter, filterKey);
+                break;
+
+            case 'categories':
+                result = self.testById(element, filter, filterKey);
+                break;
+
+            case 'themes':
+                result = self.testById(element, filter, filterKey);
+                break;
+
+            case 'districts':
+                result = self.testById(element, filter, filterKey);
+                break;
+
+            case 'default':
+                result = true;
+                break;
+
+            }
+
+        });
+
+        return result;
+
     };
 
     /*this.filterResults = function (results) {

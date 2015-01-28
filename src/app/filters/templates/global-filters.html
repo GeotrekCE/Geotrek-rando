@@ -1,14 +1,14 @@
 <div id="global-filters">
     <form>
         <div class="recherche">
-            <input type="text" ng-model="activeFilter.search"/>
+            <input type="text" ng-model="activeFilters.search"/>
         </div>
         <div class="select-boxes">
-            <select class="form-control districts" ng-model="activeFilter.districts" value="0">
+            <select class="form-control districts" ng-model="activeFilters.districts" value="0">
                 <option value="0">Toutes les Communes</option>
                 <option ng-repeat="district in filters.districts" value="{{district.code}}">{{district.label}}</option>
             </select>
-            <select class="form-control valleys" ng-model="activeFilter.valley" value="0">
+            <select class="form-control valleys" ng-model="activeFilters.valley" value="0">
                 <option value="0">Toutes les Vallées</option>
                 <option ng-repeat="valley in filters.valley" value="{{valley.id}}">{{valley.name}}</option>
             </select>
@@ -19,8 +19,11 @@
                     <span class="sr-only">{{theme.label}}</span>
                     <img src="{{theme.pictogram}}"/>
                 </label>
-                <input type="checkbox" id="theme-{{theme.id}}" value="{{theme.id}}" ng-model="activeFilter.themes[theme.id]"/>
+                <input type="checkbox" id="theme-{{theme.id}}" value="{{theme.id}}" ng-model="activeFilters.themes"/>
             </div>
         </div>
+        <button ng-click="logActiveFilters()">
+            <span>Get Active Filters</span>
+        </button>
     </form>
 </div>

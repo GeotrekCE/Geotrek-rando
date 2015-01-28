@@ -4,12 +4,12 @@ function ResultsListeController($scope, resultsService) {
 
     function updateResults() {
 
-        resultsService.getAllResults()
-        .then(
-            function (data) {
-                $scope.results = data;
-            }
-        );
+        resultsService.getFilteredResults()
+            .then(
+                function (data) {
+                    $scope.results = data;
+                }
+            );
 
     }
 

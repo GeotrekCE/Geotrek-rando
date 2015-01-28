@@ -4,7 +4,7 @@ function MapController($scope, globalSettings, $rootScope, $state, resultsServic
 
     function updateMapWithResults() {
 
-        resultsService.getAllResults()
+        resultsService.getFilteredResults()
             .then(
                 function (data) {
                     $scope.results = data;

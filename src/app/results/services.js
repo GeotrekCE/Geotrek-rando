@@ -1,11 +1,17 @@
 'use strict';
 
-function resultsService($q, globalSettings, treksService, contentsService, eventsService) {
+function resultsService($q, $location, globalSettings, treksService, contentsService, eventsService, filtersService) {
+
+    var self = this;
 
     this.getAllResults = function () {
         var deferred = $q.defer(),
             promises = [],
             results = [];
+
+        if (this._results) {
+            deferred.resolve(this._results);
+        }
 
         if (globalSettings.ENABLE_TREKS) {
             promises.push(
@@ -56,6 +62,7 @@ function resultsService($q, globalSettings, treksService, contentsService, event
         $q.all(promises)
             .then(
                 function () {
+                    self._results = results;
                     deferred.resolve(results);
                 }
             );
@@ -105,6 +112,43 @@ function resultsService($q, globalSettings, treksService, contentsService, event
                     }
                 );
 
+        }
+
+        return deferred.promise;
+    };
+
+    this.getFilteredResults = function () {
+        var deferred = $q.defer(),
+            filteredResults = [],
+            filters = $location.search();
+
+        if (!this._results) {
+            self.getAllResults()
+                .then(
+                    function (results) {
+                        if (!_.isEmpty(filters)) {
+                            _.forEach(results, function (result) {
+                                if (filtersService.filterElement(result, filters)) {
+                                    filteredResults.push(result);
+                                }
+                            });
+                            deferred.resolve(filteredResults);
+                        } else {
+                            deferred.resolve(results);
+                        }
+                    }
+                );
+        } else {
+            if (!_.isEmpty(filters)) {
+                _.forEach(this._results, function (result) {
+                    if (filtersService.filterElement(result, filters)) {
+                        filteredResults.push(result);
+                    }
+                });
+                deferred.resolve(filteredResults);
+            } else {
+                deferred.resolve(this._results);
+            }
         }
 
         return deferred.promise;
