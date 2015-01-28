@@ -2,15 +2,20 @@
     <form>
         <div class="top-part">
             <div class="search">
-                <input type="text" ng-model="activeFilters.search"  ng-change="propagateActiveFilters()"/>
+                <div class="input-group">
+                    <input type="text" ng-model="activeFilters.search"  ng-change="propagateActiveFilters()" placeholder="Rechercher..."/>
+                    <div class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                    </div>
+                </div>
             </div>
             <div class="select-boxes">
                 <select class="form-control districts" ng-model="activeFilters.districts" value="0" ng-change="propagateActiveFilters()">
-                    <option value="0">Toutes les Communes</option>
+                    <option value="0">Communes</option>
                     <option ng-repeat="district in filters.districts" value="{{district.code}}">{{district.label}}</option>
                 </select>
                 <select class="form-control valleys" ng-model="activeFilters.areas" value="0" ng-change="propagateActiveFilters()">
-                    <option value="0">Toutes les Vallées</option>
+                    <option value="0">Vallées</option>
                     <option ng-repeat="area in filters.areas" value="{{area.id}}">{{area.name}}</option>
                 </select>
             </div>

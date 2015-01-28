@@ -9,8 +9,20 @@
                 flex: 1;
                 display: flex;
                 padding: 10px;
-                input {
+                .input-group {
                     flex: 1;
+                    border: 1px solid $neutral-grey;
+                    input {
+                        width: 100%;
+                        border: none;
+                        margin: 0;
+                        padding: 6px;
+                        box-shadow: none;
+                    }
+                    .input-group-addon {
+                        background: white;
+                        border: none;
+                    }
                 }
             }
             .select-boxes {
@@ -20,6 +32,7 @@
                 .form-control {
                     margin: 0 5px;
                     flex: 1;
+                    border: 1px solid $neutral-grey;
                 }
             }
         }
@@ -30,12 +43,15 @@
             justify-content: space-around;
             .theme {
                 flex: 1;
-                overflow: hidden;
                 height: 3em;
                 max-width: 4em;
                 position: relative;
                 margin: 0;
+                padding: 4px;
+                background: white;
+                border: 1px solid $neutral-grey;
                 label {
+                    overflow: hidden;
                     margin: 0;
                     height: 100%;
                     width: 100%;
@@ -43,8 +59,12 @@
                     opacity: 0.6;
                     &:hover {
                         opacity: 0.8;
+                        img {
+                            opacity: 0.8;
+                        }
                     }
                     img {
+                        opacity: 0.6;
                         height: 100%;
                         margin-left: 20%;
                     }
@@ -59,6 +79,9 @@
                     left: 0;
                     &:checked + label {
                         opacity: 1;
+                        img {
+                            opacity: 1;
+                        }
                     }
                 }
             }
