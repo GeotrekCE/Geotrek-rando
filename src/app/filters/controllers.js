@@ -7,13 +7,19 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
             .then(
                 function (data) {
                     $scope.filters = filtersService.initGlobalFilters(data);
-                    console.log($scope.filters);
+
+                    $scope.activeFilters = {
+                        search: $location.search().search || '',
+                        areas: $location.search().areas || '0',
+                        districts: $location.search().districts || '0',
+                        themes: $location.search().themes || []
+                    };
+
                 }
             );
     }
 
     $scope.propagateActiveFilters = function () {
-        console.log('changed');
         var query = {};
 
         _.forEach($scope.activeFilters, function (filter, key) {
@@ -40,13 +46,6 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
         });
         $location.search(query);
         $rootScope.$broadcast('updateFilters');
-    };
-
-    $scope.activeFilters = {
-        search: '',
-        areas: '0',
-        districts: '0',
-        themes: []
     };
 
     initFiltersView();
