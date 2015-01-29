@@ -66,7 +66,7 @@ function mapService(globalSettings, treksService, iconsService) {
                 currentMarker,
                 listeEquivalent;
 
-            if (result.category.id === globalSettings.TREKS_CATEGORY_ID) {
+            if (parseInt(result.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10)) {
                 if (self.treksIconified) {
                     currentLayer = self._treksMarkersLayer;
                     
@@ -77,7 +77,7 @@ function mapService(globalSettings, treksService, iconsService) {
                 currentLayer = self._touristicsMarkersLayer;
             }
 
-            if (result.category.id === globalSettings.TREKS_CATEGORY_ID && !self.treksIconified) {
+            if (parseInt(result.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10) && !self.treksIconified) {
                 currentMarker = self.createGeoJSONfromElement(result);
             } else {
                 currentMarker = self.createMarkerFromElement(result);
@@ -116,7 +116,7 @@ function mapService(globalSettings, treksService, iconsService) {
 
         this.clearAllLayers();
 
-        if (result.category.id === globalSettings.TREKS_CATEGORY_ID) {
+        if (parseInt(result.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10)) {
             currentLayer = self._treksgeoJsonLayer;
             currentElement = self.createGeoJSONfromElement(result);
             
@@ -128,7 +128,7 @@ function mapService(globalSettings, treksService, iconsService) {
         currentLayer.addLayer(currentElement);
         self._clustersLayer.addLayer(currentLayer);
 
-        if (result.category.id === globalSettings.TREKS_CATEGORY_ID) {
+        if (parseInt(result.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10)) {
             self.updateBounds(updateBounds, currentLayer);
         } else {
             self.updateBounds(updateBounds, self._clustersLayer);
@@ -283,7 +283,7 @@ function mapService(globalSettings, treksService, iconsService) {
         var startPoint = {},
             marker;
 
-        if (element.category.id === globalSettings.TREKS_CATEGORY_ID) {
+        if (parseInt(element.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10)) {
             startPoint = treksService.getStartPoint(element);
         } else {
             startPoint.lng = element.geometry.coordinates[0];

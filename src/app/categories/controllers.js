@@ -1,6 +1,6 @@
 'use strict';
 
-function CategoriesListeController($scope, $rootScope, $location, categoriesService) {
+function CategoriesListeController($scope, $rootScope, $location, globalSettings, categoriesService) {
 
     function loadCategories() {
         categoriesService.getCategories()
@@ -13,7 +13,13 @@ function CategoriesListeController($scope, $rootScope, $location, categoriesServ
 
                         if ($location.search().categories) {
                             _.forEach($location.search().categories, function (filter) {
-                                if (category.id.toString() === filter.toString()) {
+                                if (parseInt(category.id, 10) === parseInt(filter, 10)) {
+                                    category.active = true;
+                                }
+                            });
+                        } else {
+                            _.forEach(globalSettings.DEFAULT_ACTIVE_CATEGORIES, function (filter) {
+                                if (parseInt(category.id, 10) === parseInt(filter, 10)) {
                                     category.active = true;
                                 }
                             });

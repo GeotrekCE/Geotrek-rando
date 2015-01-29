@@ -5,6 +5,11 @@ var constants = {
     DOMAIN: 'http://prod-geotrek-fr.makina-corpus.net',
     DEFAULT_LANGUAGE: 'fr',
 
+
+    // CATEGORIES PARAMETERS //
+    //
+    //
+
     // SET TO TRUE ELEMENTS AVAILABLE FOR YOUR GEOTREK !
     ENABLE_TREKS: true,
     ENABLE_TOURISTIC_CONTENT: true,
@@ -15,12 +20,18 @@ var constants = {
     // false FOR LAST POSITION
     TOURISTIC_EVENTS_SPECIFIC_POSITION: 3,
 
-    //PATHS AND DIRECTORY
-    API_DIR: 'api',
-    TREK_DIR: 'treks',
-    POI_DIR: 'pois',
-    TOURISTIC_EVENTS_DIR: 'touristicevents',
-    TOURISTIC_CONTENTS_DIR: 'touristiccontents',
+    // CATEGORIES ID BECAUS NOT AVAILABLE IN DATA JSON
+    TREKS_CATEGORY_ID: 80085,
+    EVENTS_CATEGORY_ID: 54635,
+
+    // CHOSE WHICH CATEGORIES ARE ACTIVE BY DEFAULT
+    DEFAULT_ACTIVE_CATEGORIES: [80085],
+
+
+
+    // MAP PARAMETERS //
+    //
+    //
 
     MAIN_LEAFLET_BACKGROUND: {
         LAYER_URL: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -41,9 +52,27 @@ var constants = {
     },
     TREKS_TO_GEOJSON_ZOOM_LEVEL : 14,
     UPDATE_MAP_ON_FILTER: false,
-    TREKS_CATEGORY_ID: 80085,
-    EVENTS_CATEGORY_ID: 54635,
 
+
+
+
+    // PATHS AND DIRECTORY //
+    //
+    //
+
+
+    API_DIR: 'api',
+    TREK_DIR: 'treks',
+    POI_DIR: 'pois',
+    TOURISTIC_EVENTS_DIR: 'touristicevents',
+    TOURISTIC_CONTENTS_DIR: 'touristiccontents',
+
+
+
+
+    // FILTERS VALUES //
+    //
+    //
     FILTERS: {
         DURATION : [
             { id: 4, name: '<1/2 J', interval: {min: 0, max: 4} },

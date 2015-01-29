@@ -160,7 +160,13 @@ function filtersService(globalSettings, utilsFactory) {
 
         if (filters.categories) {
             _.forEach(filters.categories, function (filter) {
-                if (element.category.id.toString() === filter.toString()) {
+                if (parseInt(element.category.id, 10) === parseInt(filter, 10)) {
+                    categoriesResult = true;
+                }
+            });
+        } else {
+            _.forEach(globalSettings.DEFAULT_ACTIVE_CATEGORIES, function (filter) {
+                if (parseInt(element.category.id, 10) === parseInt(filter, 10)) {
                     categoriesResult = true;
                 }
             });
