@@ -41,6 +41,8 @@ var constants = {
     },
     TREKS_TO_GEOJSON_ZOOM_LEVEL : 14,
     UPDATE_MAP_ON_FILTER: false,
+    TREKS_CATEGORY_ID: 80085,
+    EVENTS_CATEGORY_ID: 54635,
 
     FILTERS: {
         DURATION : [

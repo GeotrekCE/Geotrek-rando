@@ -146,14 +146,25 @@ function filtersService(globalSettings, utilsFactory) {
     };
 
     this.filtersChanged = function (filters) {
+        console.log(filters);
+        console.log(self.activeFilters);
         return !_.isEqual(filters, self.activeFilters);
     };
 
     this.filterElement = function (element, filters) {
-        var areasResult = false,
+        var categoriesResult = false,
+            areasResult = false,
             districtsResult = false,
             themesResult = false,
             searchResult = false;
+
+        if (filters.categories) {
+            _.forEach(filters.categories, function (filter) {
+                if (element.category.id.toString() === filter.toString()) {
+                    categoriesResult = true;
+                }
+            });
+        }
 
         self.activeFilters = filters;
 
@@ -189,7 +200,7 @@ function filtersService(globalSettings, utilsFactory) {
             themesResult = true;
         }
 
-        return searchResult && areasResult && districtsResult && themesResult;
+        return categoriesResult && searchResult && areasResult && districtsResult && themesResult;
 
     };
 

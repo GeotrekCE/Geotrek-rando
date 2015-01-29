@@ -1,5 +1,5 @@
 <ul class="categories">
-    <li ng-repeat="category in categories" class="category {{category.cat_class}}" ng-id="cat-{{category.id}}">
+    <li ng-repeat="category in categories" class="category {{category.cat_class}}" ng-class="{active : category.active}" ng-id="cat-{{category.id}}" ng-click="toggleCategory(category)">
         <button>
             <ng-include src="category.pictogram"></ng-include>
             <span>{{category.label}}</span>

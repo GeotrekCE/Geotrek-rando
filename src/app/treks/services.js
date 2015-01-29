@@ -78,7 +78,7 @@ function treksService(globalSettings, settingsFactory, $resource, $q) {
             if (trek.properties.altimetric_profile && trek.properties.altimetric_profile !== null) {
                 trek.properties.altimetric_profile = globalSettings.DOMAIN + trek.properties.altimetric_profile;
             }
-            trek.category = 'treks';
+            trek.category = {name: 'treks', id: globalSettings.TREKS_CATEGORY_ID};
         });
         return treksData;
     };

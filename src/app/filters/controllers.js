@@ -52,6 +52,11 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
             }
 
         });
+
+        if ($location.search().categories) {
+            query.categories = $location.search().categories;
+        }
+
         $location.search(query);
         $rootScope.$broadcast('updateFilters');
     };

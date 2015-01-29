@@ -125,45 +125,23 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
             self.getAllResults()
                 .then(
                     function (results) {
-                        if (!_.isEmpty(filters)) {
-                            self.filteredResults = [];
-                            _.forEach(results, function (result) {
-                                if (filtersService.filterElement(result, filters)) {
-                                    self.filteredResults.push(result);
-                                }
-                            });
-                            deferred.resolve(self.filteredResults);
-                        } else {
-                            deferred.resolve(results);
-                        }
-                    }
-                );
-        } else {
-            if (!_.isEmpty(filters)) {
-                if (filtersService.filtersChanged(filters)) {
-                    self.filteredResults = [];
-                    _.forEach(self._results, function (result) {
-                        if (filtersService.filterElement(result, filters)) {
-                            self.filteredResults.push(result);
-                        }
-                    });
-                    deferred.resolve(self.filteredResults);
-                } else {
-                    if (!self.filteredResults) {
                         self.filteredResults = [];
-                        _.forEach(self._results, function (result) {
+                        _.forEach(results, function (result) {
                             if (filtersService.filterElement(result, filters)) {
                                 self.filteredResults.push(result);
                             }
                         });
                         deferred.resolve(self.filteredResults);
-                    } else {
-                        deferred.resolve(self.filteredResults);
                     }
+                );
+        } else {
+            self.filteredResults = [];
+            _.forEach(self._results, function (result) {
+                if (filtersService.filterElement(result, filters)) {
+                    self.filteredResults.push(result);
                 }
-            } else {
-                deferred.resolve(self._results);
-            }
+            });
+            deferred.resolve(self.filteredResults);
         }
 
         return deferred.promise;

@@ -34,7 +34,10 @@ function contentsService(globalSettings, settingsFactory, $resource, $q, utilsFa
                     picture.url = globalSettings.DOMAIN + picture.url;
                 });
             }
-            content.category = utilsFactory.removeDiacritics(content.properties.category.label.toLowerCase());
+            content.category = {
+                name: utilsFactory.removeDiacritics(content.properties.category.label.toLowerCase()),
+                id: content.properties.category.id
+            };
 
         });
         return contentsData;
@@ -106,7 +109,7 @@ function eventsService(globalSettings, settingsFactory, $resource, $q) {
                 });
             }
 
-            trEvent.category = 'events';
+            trEvent.category = {name: 'events', id: globalSettings.EVENTS_CATEGORY_ID};
 
         });
         return eventsData;
