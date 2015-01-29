@@ -2,14 +2,14 @@
 
 function MapController($scope, globalSettings, $rootScope, $state, resultsService, mapService, $stateParams) {
 
-    function updateMapWithResults() {
+    function updateMapWithResults(updateBounds) {
 
         resultsService.getFilteredResults()
             .then(
                 function (data) {
                     $scope.results = data;
                     if (data.length > 0) {
-                        mapService.displayResults($scope.results);
+                        mapService.displayResults($scope.results, updateBounds);
                     } else {
                         mapService.clearAllLayers();
                     }
@@ -63,7 +63,7 @@ function MapController($scope, globalSettings, $rootScope, $state, resultsServic
 
     $scope.$on('updateFilters', function () {
         if ($state.current.name === 'layout.root') {
-            updateMapWithResults();
+            updateMapWithResults(globalSettings.UPDATE_MAP_ON_FILTER);
         }
     });
 }

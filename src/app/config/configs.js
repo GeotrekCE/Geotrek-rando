@@ -40,6 +40,7 @@ var constants = {
         TREK_COLOR: '#F89406'
     },
     TREKS_TO_GEOJSON_ZOOM_LEVEL : 14,
+    UPDATE_MAP_ON_FILTER: false,
 
     FILTERS: {
         DURATION : [
