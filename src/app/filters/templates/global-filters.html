@@ -9,15 +9,29 @@
                     </div>
                 </div>
             </div>
-            <div class="select-boxes">
-                <select class="form-control districts" ng-model="activeFilters.districts" value="0" ng-change="propagateActiveFilters()">
-                    <option value="0">Communes</option>
-                    <option ng-repeat="district in filters.districts" value="{{district.code}}">{{district.label}}</option>
-                </select>
-                <select class="form-control valleys" ng-model="activeFilters.areas" value="0" ng-change="propagateActiveFilters()">
-                    <option value="0">Vallées</option>
-                    <option ng-repeat="area in filters.areas" value="{{area.id}}">{{area.name}}</option>
-                </select>
+            <div class="geo-filters">
+                <div class="selector districts" ng-class="{empty: filters.districts.length === 0}">
+                    <span>Districts <i class="caret"></i></span>
+                    <div class="choices">
+                        <div ng-repeat="district in filters.districts" class="district form-group">
+                            <input type="checkbox" id="district-{{district.code}}" value="{{district.code}}" ng-model="activeFilters.districts[district.code]"  ng-change="propagateActiveFilters()"/>
+                            <label for="district-{{district.code}}">
+                                <span>{{district.name}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="selector areas" ng-class="{empty: filters.areas.length === 0}">
+                    <span>Vallées <i class="caret"></i></span>
+                    <div class="choices">
+                        <div ng-repeat="area in filters.areas" class="area form-group">
+                            <input type="checkbox" id="area-{{area.id}}" value="{{area.id}}" ng-model="activeFilters.areas[area.id]"  ng-change="propagateActiveFilters()"/>
+                            <label for="area-{{area.id}}">
+                                <span>{{area.name}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="themes">

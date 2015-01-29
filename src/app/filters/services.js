@@ -48,7 +48,7 @@ function filtersService(globalSettings, utilsFactory) {
                 categories:     [],
                 themes:         [],
                 districts:      [],
-                areas:         [],
+                areas:          [],
                 search:         ''
             };
         }

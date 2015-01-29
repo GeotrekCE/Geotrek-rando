@@ -10,15 +10,18 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
 
                     $scope.activeFilters = {
                         search: $location.search().search || '',
-                        areas: $location.search().areas || '0',
-                        districts: $location.search().districts || '0',
+                        areas:  [],
+                        districts: [],
                         themes: []
                     };
 
                     _.forEach($location.search().themes, function (themeId) {
                         $scope.activeFilters.themes[themeId] = true;
                     });
-                    console.log($scope.activeFilters);
+
+                    _.forEach($location.search().areas, function (areaId) {
+                        $scope.activeFilters.areas[areaId] = true;
+                    });
 
                 }
             );
@@ -26,19 +29,19 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
 
     $scope.propagateActiveFilters = function () {
         var query = {};
-
         _.forEach($scope.activeFilters, function (filter, key) {
-            if (key === 'themes') {
+
+            if (key === 'themes' || key === 'districts' || key === 'areas') {
                 if (filter.length > 0) {
                     var tempArray = [],
-                        themesNotAllFalse = false;
+                        NotAllFalse = false;
                     _.forEach(filter, function (element, elementKey) {
                         if (element && element !== '0') {
                             tempArray.push(elementKey);
-                            themesNotAllFalse = true;
+                            NotAllFalse = true;
                         }
                     });
-                    if (themesNotAllFalse) {
+                    if (NotAllFalse) {
                         query[key] = tempArray;
                     }
                 }
