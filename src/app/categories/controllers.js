@@ -12,17 +12,31 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
                         category.active = false;
 
                         if ($location.search().categories) {
-                            _.forEach($location.search().categories, function (filter) {
-                                if (parseInt(category.id, 10) === parseInt(filter, 10)) {
+                            if (typeof $location.search().categories === 'string') {
+                                if (parseInt(category.id, 10) === parseInt($location.search().categories, 10)) {
                                     category.active = true;
                                 }
-                            });
+                            } else {
+                                _.forEach($location.search().categories, function (filter) {
+                                    if (parseInt(category.id, 10) === parseInt(filter, 10)) {
+                                        category.active = true;
+                                    }
+                                });
+                            }
+
                         } else {
-                            _.forEach(globalSettings.DEFAULT_ACTIVE_CATEGORIES, function (filter) {
-                                if (parseInt(category.id, 10) === parseInt(filter, 10)) {
+                            if (typeof globalSettings.DEFAULT_ACTIVE_CATEGORIES === 'string') {
+                                if (parseInt(category.id, 10) === parseInt(globalSettings.DEFAULT_ACTIVE_CATEGORIES, 10)) {
                                     category.active = true;
                                 }
-                            });
+                            } else {
+                                _.forEach(globalSettings.DEFAULT_ACTIVE_CATEGORIES, function (filter) {
+                                    if (parseInt(category.id, 10) === parseInt(filter, 10)) {
+                                        category.active = true;
+                                    }
+                                });
+                            }
+
                         }
 
                     });

@@ -159,17 +159,29 @@ function filtersService(globalSettings, utilsFactory) {
             searchResult = false;
 
         if (filters.categories) {
-            _.forEach(filters.categories, function (filter) {
-                if (parseInt(element.category.id, 10) === parseInt(filter, 10)) {
+            if (typeof filters.categories === 'string') {
+                if (parseInt(element.category.id, 10) === parseInt(filters.categories, 10)) {
                     categoriesResult = true;
                 }
-            });
+            } else {
+                _.forEach(filters.categories, function (filter) {
+                    if (parseInt(element.category.id, 10) === parseInt(filter, 10)) {
+                        categoriesResult = true;
+                    }
+                });
+            }
         } else {
-            _.forEach(globalSettings.DEFAULT_ACTIVE_CATEGORIES, function (filter) {
-                if (parseInt(element.category.id, 10) === parseInt(filter, 10)) {
+            if (typeof globalSettings.DEFAULT_ACTIVE_CATEGORIES === 'string') {
+                if (parseInt(element.category.id, 10) === parseInt(globalSettings.DEFAULT_ACTIVE_CATEGORIES, 10)) {
                     categoriesResult = true;
                 }
-            });
+            } else {
+                _.forEach(globalSettings.DEFAULT_ACTIVE_CATEGORIES, function (filter) {
+                    if (parseInt(element.category.id, 10) === parseInt(filter, 10)) {
+                        categoriesResult = true;
+                    }
+                });
+            }
         }
 
         self.activeFilters = filters;
