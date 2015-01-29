@@ -2,12 +2,17 @@
 CHANGELOG
 =========
 
-1.36.1dev (unreleased)
---------------------
+1.37.0 (2015-01-29)
+-------------------
 
 **New features**
 
 * Do not replace ressource zip files if data do not changed
+* Put png altimetric profiles instead of svg ones in zip files for mobile app
+
+**Bug fixes**
+
+* Reset widgets before loading filters
 
 
 1.36.0 (2014-12-30)
