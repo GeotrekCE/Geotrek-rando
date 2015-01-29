@@ -218,8 +218,9 @@ def sync_content_trekking(sender, **kwargs):
             InputFile(trek.properties.gpx, **inputkwlang).pull_if_modified()
             InputFile(trek.properties.kml, **inputkwlang).pull_if_modified()
 
-            profile_svg_url = trek.properties.altimetric_profile.replace('.json', '.svg')
-            InputFile(profile_svg_url, **inputkwlang).pull_if_modified()
+            profile_png_url = 'media/profiles/trek-%u.png' % trek.id
+            profile_png_dest = 'api/trek/%u/profile.png' % trek.id
+            InputFile(profile_png_url, store=profile_png_dest, **inputkwlang).pull_if_modified()
 
             if trek.properties.information_desk_layer:
                 # Only available in Geotrek 0.24
