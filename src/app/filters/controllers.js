@@ -12,8 +12,13 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
                         search: $location.search().search || '',
                         areas: $location.search().areas || '0',
                         districts: $location.search().districts || '0',
-                        themes: $location.search().themes || []
+                        themes: []
                     };
+
+                    _.forEach($location.search().themes, function (themeId) {
+                        $scope.activeFilters.themes[themeId] = true;
+                    });
+                    console.log($scope.activeFilters);
 
                 }
             );
