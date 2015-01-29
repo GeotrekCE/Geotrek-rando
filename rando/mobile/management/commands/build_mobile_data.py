@@ -134,9 +134,9 @@ class Command(BaseCommand):
             arcname = os.path.join(trek_dest, 'pois.geojson')
             zipfile.write(trek.pois.fullpath, arcname)
             # Profile svg
-            url = trek.properties.altimetric_profile.replace('.json', '.svg')
+            url = trek.properties.altimetric_profile.replace('.json', '.png')
             fullpath = os.path.join(settings.INPUT_DATA_ROOT, language, url.lstrip('/'))
-            arcname = os.path.join(trek_dest, 'profile.svg')
+            arcname = os.path.join(trek_dest, 'profile.png')
             zipfile.write(fullpath, arcname)
             # Thumbnail
             if trek.properties.thumbnail:
