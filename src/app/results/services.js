@@ -119,21 +119,20 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
 
     this.getFilteredResults = function () {
         var deferred = $q.defer(),
-            filteredResults = [],
             filters = $location.search();
-        console.log(filters);
 
         if (!this._results) {
             self.getAllResults()
                 .then(
                     function (results) {
                         if (!_.isEmpty(filters)) {
+                            self.filteredResults = [];
                             _.forEach(results, function (result) {
                                 if (filtersService.filterElement(result, filters)) {
-                                    filteredResults.push(result);
+                                    self.filteredResults.push(result);
                                 }
                             });
-                            deferred.resolve(filteredResults);
+                            deferred.resolve(self.filteredResults);
                         } else {
                             deferred.resolve(results);
                         }
@@ -141,15 +140,29 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                 );
         } else {
             if (!_.isEmpty(filters)) {
-                _.forEach(this._results, function (result) {
-                    if (filtersService.filterElement(result, filters)) {
-                        filteredResults.push(result);
+                if (filtersService.filtersChanged(filters)) {
+                    self.filteredResults = [];
+                    _.forEach(self._results, function (result) {
+                        if (filtersService.filterElement(result, filters)) {
+                            self.filteredResults.push(result);
+                        }
+                    });
+                    deferred.resolve(self.filteredResults);
+                } else {
+                    if (!self.filteredResults) {
+                        self.filteredResults = [];
+                        _.forEach(self._results, function (result) {
+                            if (filtersService.filterElement(result, filters)) {
+                                self.filteredResults.push(result);
+                            }
+                        });
+                        deferred.resolve(self.filteredResults);
+                    } else {
+                        deferred.resolve(self.filteredResults);
                     }
-                });
-                console.log(filteredResults);
-                deferred.resolve(filteredResults);
+                }
             } else {
-                deferred.resolve(this._results);
+                deferred.resolve(self._results);
             }
         }
 

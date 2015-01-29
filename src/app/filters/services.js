@@ -3,6 +3,7 @@
 function filtersService(globalSettings, utilsFactory) {
 
     var self = this;
+    this.activeFilters = {};
 
     this.createTouristicCategoryFilters = function (categories) {
 
@@ -94,6 +95,28 @@ function filtersService(globalSettings, utilsFactory) {
         self.initGlobalFilters();
     };
 
+    this.testByString = function (element, query) {
+
+        var result = false;
+        element = _.values(element);
+
+        _.each(element, function (property) {
+            if (!result) {
+                if (typeof property === 'string') {
+                    var regex = new RegExp(query, 'gi');
+                    if (property.match(regex) !== null) {
+                        result = true;
+                    }
+                } else if (typeof property === 'object') {
+                    result = self.testByString(property, query);
+                }
+            }
+
+        });
+
+        return result;
+    };
+
     this.testById = function (element, filter, filterKey) {
 
         var result = false;
@@ -122,10 +145,23 @@ function filtersService(globalSettings, utilsFactory) {
         return result;
     };
 
+    this.filtersChanged = function (filters) {
+        return !_.isEqual(filters, self.activeFilters);
+    };
+
     this.filterElement = function (element, filters) {
         var areasResult = false,
             districtsResult = false,
-            themesResult = false;
+            themesResult = false,
+            searchResult = false;
+
+        self.activeFilters = filters;
+
+        if (filters.search) {
+            searchResult = self.testByString(element.properties, filters.search);
+        } else {
+            searchResult = true;
+        }
 
         if (filters.areas) {
             _.forEach(element.properties.areas, function (area) {
@@ -153,7 +189,7 @@ function filtersService(globalSettings, utilsFactory) {
             themesResult = true;
         }
 
-        return areasResult && districtsResult && themesResult;
+        return searchResult && areasResult && districtsResult && themesResult;
 
     };
 
