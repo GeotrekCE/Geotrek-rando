@@ -97,7 +97,10 @@ function treksService(globalSettings, settingsFactory, $resource, $q) {
             var requests = $resource(url, {}, {
                 query: {
                     method: 'GET',
-                    cache: true,
+                    params: {
+                        format: 'geojson'
+                    },
+                    cache: true
 
                 }
             }, {stripTrailingSlashes: false});

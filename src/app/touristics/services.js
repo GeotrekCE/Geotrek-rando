@@ -57,6 +57,9 @@ function contentsService(globalSettings, settingsFactory, $resource, $q, utilsFa
             var requests = $resource(url, {}, {
                 query: {
                     method: 'GET',
+                    params: {
+                        format: 'geojson'
+                    },
                     cache: true
                 }
             }, {stripTrailingSlashes: false});
@@ -129,6 +132,9 @@ function eventsService(globalSettings, settingsFactory, $resource, $q) {
             var requests = $resource(url, {}, {
                 query: {
                     method: 'GET',
+                    params: {
+                        format: 'geojson'
+                    },
                     cache: true
                 }
             }, {stripTrailingSlashes: false});
