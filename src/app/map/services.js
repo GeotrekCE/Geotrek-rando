@@ -85,13 +85,13 @@ function mapService(globalSettings, treksService, iconsService) {
 
             currentMarker.on({
                 mouseover: function () {
-                    listeEquivalent = jQuery('#result-' + result.category + '-' + result.id);
+                    listeEquivalent = jQuery('#result-' + result.category.name + '-' + result.id);
                     if (!listeEquivalent.hasClass('hovered')) {
                         listeEquivalent.addClass('hovered');
                     }
                 },
                 mouseout: function () {
-                    listeEquivalent = jQuery('#result-' + result.category + '-' + result.id);
+                    listeEquivalent = jQuery('#result-' + result.category.name + '-' + result.id);
                     if (listeEquivalent.hasClass('hovered')) {
                         listeEquivalent.removeClass('hovered');
                     }

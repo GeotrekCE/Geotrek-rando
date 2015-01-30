@@ -15,7 +15,8 @@
                         <div ng-repeat="type1 in category.type1" class="type1 form-group">
                             <input type="checkbox" id="type1-{{type1.id}}" value="{{type1.id}}" ng-model="category.filters.type1[type1.id]"  ng-change="propagateFilters()"/>
                             <label for="type1-{{type1.id}}">
-                                <span>{{type1.name}}</span>
+                                <span ng-if="type1.name">{{type1.name}}</span>
+                                <span ng-if="type1.label">{{type1.label}}</span>
                             </label>
                         </div>
                     </div>
@@ -27,7 +28,8 @@
                         <div ng-repeat="type2 in category.type2" class="type2 form-group">
                             <input type="checkbox" id="type2-{{type2.id}}" value="{{type2.id}}" ng-model="category.filters.type2[type2.id]"  ng-change="propagateFilters()"/>
                             <label for="type2-{{type2.id}}">
-                                <span>{{type2.name}}</span>
+                                <span ng-if="type2.name">{{type2.name}}</span>
+                                <span ng-if="type2.label">{{type2.label}}</span>
                             </label>
                         </div>
                     </div>

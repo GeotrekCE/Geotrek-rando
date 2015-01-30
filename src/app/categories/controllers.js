@@ -58,11 +58,14 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
 
         _.forEach($scope.categories, function (category) {
             if (category.active) {
-                activeCategories.push(category.id);
+                activeCategories[category.id] = {
+                    filters: category.filters
+                };
             }
         });
 
         currentQuery.categories =  activeCategories;
+        console.log(currentQuery);
         $location.search(currentQuery);
         $rootScope.$broadcast('updateFilters');
     };
