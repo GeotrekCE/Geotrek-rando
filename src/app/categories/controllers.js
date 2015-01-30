@@ -7,7 +7,6 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
             .then(
                 function (data) {
                     $scope.categories = data;
-                    console.log(data);
                     _.forEach($scope.categories, function (category) {
 
                         category.active = false;
@@ -28,21 +27,25 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
 
                             _.forEach($location.search(), function (filter, filterName) {
                                 if (filterName.indexOf('-') > -1) {
-                                    console.log(filterName);
                                     var categoryId = filterName.split('-')[0],
                                         filterKey = filterName.split('-')[1];
                                     if (parseInt(categoryId, 10) === parseInt(category.id, 10)) {
-                                        _.forEach(filter, function (filterValue) {
+                                        if (typeof filter === 'string') {
                                             if (!category.filters[filterKey]) {
                                                 category.filters[filterKey] = {};
                                             }
-                                            category.filters[filterKey][filterValue] = true;
-                                        });
+                                            category.filters[filterKey][filter] = true;
+                                        } else {
+                                            _.forEach(filter, function (filterValue) {
+                                                if (!category.filters[filterKey]) {
+                                                    category.filters[filterKey] = {};
+                                                }
+                                                category.filters[filterKey][filterValue] = true;
+                                            });
+                                        }
                                     }
                                 }
                             });
-
-                            console.log(category);
 
                         } else {
                             if (typeof globalSettings.DEFAULT_ACTIVE_CATEGORIES === 'string') {
@@ -60,7 +63,6 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
                         }
 
                     });
-                    console.log($scope.categories);
                 }
             );
     }

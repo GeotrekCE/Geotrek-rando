@@ -117,7 +117,7 @@ function filtersService(globalSettings, utilsFactory) {
         return result;
     };
 
-    this.testById = function (element, filter, filterKey) {
+    /*this.testById = function (element, filter, filterKey) {
 
         var result = false;
 
@@ -143,30 +143,100 @@ function filtersService(globalSettings, utilsFactory) {
         }
 
         return result;
+    };*/
+
+    this.testById = function (element, filter, filterKey) {
+        var result = false,
+            currentElement;
+
+        if (element === undefined) {
+            return false;
+        }
+
+        if (element[filterKey]) {
+            currentElement = element[filterKey];
+        } else {
+            currentElement = element;
+        }
+
+        if (parseInt(currentElement.id, 10) === parseInt(filter, 10)) {
+            result = true;
+        } else {
+            if (typeof currentElement === 'object') {
+                _.forEach(currentElement, function (subelement) {
+                    if (self.testById(subelement, filter, filterKey)) {
+                        result = true;
+                    }
+                });
+            }
+        }
+
+        return result;
     };
 
     this.filtersChanged = function (filters) {
-        console.log(filters);
-        console.log(self.activeFilters);
         return !_.isEqual(filters, self.activeFilters);
     };
 
     this.filterElement = function (element, filters) {
         var categoriesResult = false,
+            categorySubFilter = true,
             areasResult = false,
             districtsResult = false,
             themesResult = false,
             searchResult = false;
 
         if (filters.categories) {
+            var catIsFiltered = false;
             if (typeof filters.categories === 'string') {
-                if (parseInt(element.category.id, 10) === parseInt(filters.categories, 10)) {
+                catIsFiltered = self.testById(element.category, filters.categories, 'category');
+
+                if (catIsFiltered) {
                     categoriesResult = true;
+                    _.forEach(filters, function (filter, filterName) {
+                        if (filterName.indexOf('-') > -1) {
+                            var categoryId = filterName.split('-')[0],
+                                filterKey = filterName.split('-')[1];
+                            if (parseInt(categoryId, 10) === parseInt(element.category.id, 10)) {
+                                categorySubFilter = false;
+                                if (parseInt(categoryId, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10) && filterKey === 'type2') {
+                                    if (self.testById(element.properties, filter, 'usages')) {
+                                        categorySubFilter = true;
+                                    }
+                                } else {
+                                    if (self.testById(element.properties, filter, filterKey)) {
+                                        categorySubFilter = true;
+                                    }
+                                }
+                            }
+                        }
+                    });
                 }
             } else {
                 _.forEach(filters.categories, function (filter) {
-                    if (parseInt(element.category.id, 10) === parseInt(filter, 10)) {
+                    catIsFiltered = self.testById(element, filter, 'category');
+
+                    if (catIsFiltered) {
                         categoriesResult = true;
+                        _.forEach(filters, function (filter, filterName) {
+                            if (filterName.indexOf('-') > -1) {
+                                var categoryId = filterName.split('-')[0],
+                                    filterKey = filterName.split('-')[1];
+                                if (parseInt(categoryId, 10) === parseInt(element.category.id, 10)) {
+                                    categorySubFilter = false;
+                                    if (parseInt(categoryId, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10) && filterKey === 'type2') {
+                                        if (self.testById(element.properties, filter, 'usages')) {
+                                            categorySubFilter = true;
+                                        }
+                                    } else {
+                                        if (self.testById(element.properties, filter, filterKey)) {
+                                            categorySubFilter = true;
+                                        }
+                                    }
+                                }
+                            }
+                        });
+
                     }
                 });
             }
@@ -195,7 +265,7 @@ function filtersService(globalSettings, utilsFactory) {
         if (filters.areas) {
             _.forEach(element.properties.areas, function (area) {
                 _.forEach(filters.areas, function (filter) {
-                    if (area.id.toString() === filter.toString()) {areasResult = true; }
+                    if (area.id.toString() === filter.toString()) { areasResult = true; }
                 });
             });
         } else {
@@ -205,7 +275,7 @@ function filtersService(globalSettings, utilsFactory) {
         if (filters.districts) {
             _.forEach(element.properties.districts, function (district) {
                 _.forEach(filters.districts, function (filter) {
-                    if (district.id.toString() === filter.toString()) {districtsResult = true; }
+                    if (district.id.toString() === filter.toString()) { districtsResult = true; }
                 });
             });
         } else {
@@ -213,12 +283,18 @@ function filtersService(globalSettings, utilsFactory) {
         }
 
         if (filters.themes) {
-            themesResult = self.testById(element, filters.themes, 'themes');
+            if (typeof filters.themes === 'string') {
+                themesResult = self.testById(element.properties, filters.themes, 'themes');
+            } else {
+                _.forEach(filters.themes, function (theme) {
+                    themesResult = self.testById(element.properties, theme, 'themes');
+                });
+            }
         } else {
             themesResult = true;
         }
 
-        return categoriesResult && searchResult && areasResult && districtsResult && themesResult;
+        return categoriesResult && categorySubFilter && searchResult && areasResult && districtsResult && themesResult;
 
     };
 
