@@ -7,9 +7,11 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
             .then(
                 function (data) {
                     $scope.categories = data;
+                    console.log(data);
                     _.forEach($scope.categories, function (category) {
 
                         category.active = false;
+                        category.filters = {};
 
                         if ($location.search().categories) {
                             if (typeof $location.search().categories === 'string') {
@@ -46,10 +48,14 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
     }
 
     $scope.toggleCategory = function (category) {
+        category.active = !category.active;
+        $scope.propagateFilters();
+    };
+
+    $scope.propagateFilters = function () {
         var currentQuery = $location.search(),
             activeCategories = [];
 
-        category.active = !category.active;
         _.forEach($scope.categories, function (category) {
             if (category.active) {
                 activeCategories.push(category.id);

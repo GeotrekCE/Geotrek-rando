@@ -12,6 +12,25 @@
             }
         }
     }
+    .filters {
+        .category-name {
+            background: $current-color;
+        }
+        form {
+            border-color: $current-color;
+        }
+        .choices {
+            border-color: $current-color;
+            input {
+                &:checked + label {
+                    background-color: $current-color;
+                }
+                &:focus {
+                    border-color: $current-color;
+                }
+            }
+        }
+    }
 }
 
 @mixin results-list-coloring($current-color) {

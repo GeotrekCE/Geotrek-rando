@@ -1,8 +1,38 @@
 <ul class="categories">
-    <li ng-repeat="category in categories" class="category {{category.cat_class}}" ng-class="{active : category.active}" ng-id="cat-{{category.id}}" ng-click="toggleCategory(category)">
-        <button>
+    <li ng-repeat="category in categories" class="category {{category.cat_class}}" ng-class="{active : category.active}" ng-id="cat-{{category.id}}">
+        <button ng-click="toggleCategory(category)">
             <ng-include src="category.pictogram"></ng-include>
-            <span>{{category.label}}</span>
+            <span class="sr-only">{{category.label}}</span>
         </button>
+        <div class="filters">
+            <div class="category-name">
+                <span>{{category.label}}</span>
+            </div>
+            <form>
+                <div class="selector type1" ng-class="{empty: category.type1.length === 0}">
+                    <span>{{category.type1_label}} <i class="caret"></i></span>
+                    <div class="choices">
+                        <div ng-repeat="type1 in category.type1" class="type1 form-group">
+                            <input type="checkbox" id="type1-{{type1.id}}" value="{{type1.id}}" ng-model="category.filters.type1[type1.id]"  ng-change="propagateFilters()"/>
+                            <label for="type1-{{type1.id}}">
+                                <span>{{type1.name}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="selector type2" ng-class="{empty: category.type2.length === 0}">
+                    <span>{{category.type2_label}} <i class="caret"></i></span>
+                    <div class="choices">
+                        <div ng-repeat="type2 in category.type2" class="type2 form-group">
+                            <input type="checkbox" id="type2-{{type2.id}}" value="{{type2.id}}" ng-model="category.filters.type2[type2.id]"  ng-change="propagateFilters()"/>
+                            <label for="type2-{{type2.id}}">
+                                <span>{{type2.name}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </li>
 </ul>
