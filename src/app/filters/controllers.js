@@ -28,9 +28,12 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
     }
 
     $scope.propagateActiveFilters = function () {
-        var query = {};
-        _.forEach($scope.activeFilters, function (filter, key) {
+        var query = $location.search();
 
+        _.forEach($scope.activeFilters, function (filter, key) {
+            if (query[key]) {
+                delete query[key];
+            }
             if (key === 'themes' || key === 'districts' || key === 'areas') {
                 if (filter.length > 0) {
                     var tempArray = [],
@@ -52,10 +55,6 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
             }
 
         });
-
-        if ($location.search().categories) {
-            query.categories = $location.search().categories;
-        }
 
         $location.search(query);
         $rootScope.$broadcast('updateFilters');

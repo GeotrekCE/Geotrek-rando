@@ -26,6 +26,24 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
                                 });
                             }
 
+                            _.forEach($location.search(), function (filter, filterName) {
+                                if (filterName.indexOf('-') > -1) {
+                                    console.log(filterName);
+                                    var categoryId = filterName.split('-')[0],
+                                        filterKey = filterName.split('-')[1];
+                                    if (parseInt(categoryId, 10) === parseInt(category.id, 10)) {
+                                        _.forEach(filter, function (filterValue) {
+                                            if (!category.filters[filterKey]) {
+                                                category.filters[filterKey] = {};
+                                            }
+                                            category.filters[filterKey][filterValue] = true;
+                                        });
+                                    }
+                                }
+                            });
+
+                            console.log(category);
+
                         } else {
                             if (typeof globalSettings.DEFAULT_ACTIVE_CATEGORIES === 'string') {
                                 if (parseInt(category.id, 10) === parseInt(globalSettings.DEFAULT_ACTIVE_CATEGORIES, 10)) {
@@ -58,14 +76,32 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
 
         _.forEach($scope.categories, function (category) {
             if (category.active) {
-                activeCategories[category.id] = {
-                    filters: category.filters
-                };
+                activeCategories.push(category.id);
+                _.forEach(category.filters, function (filter, filterKey) {
+                    var filterIsNotEmpty = false;
+                    var currentFilterValues = [];
+                    _.forEach(filter, function (value, valueKey) {
+                        if (value) {
+                            filterIsNotEmpty = true;
+                            currentFilterValues.push(valueKey);
+                        }
+                    });
+                    if (filterIsNotEmpty) {
+                        currentQuery[category.id + '-' + filterKey] = currentFilterValues;
+                    } else {
+                        delete currentQuery[category.id + '-' + filterKey];
+                    }
+                });
+            } else {
+                _.forEach(category.filters, function (filter, filterKey) {
+                    if (currentQuery[category.id + '-' + filterKey]) {
+                        delete currentQuery[category.id + '-' + filterKey];
+                    }
+                });
             }
         });
 
         currentQuery.categories =  activeCategories;
-        console.log(currentQuery);
         $location.search(currentQuery);
         $rootScope.$broadcast('updateFilters');
     };
