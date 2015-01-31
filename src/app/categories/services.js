@@ -19,6 +19,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
         var treksUsages = [],
             difficulties = [],
+            routes = [],
             themes = [];
 
         _.forEach(treks.features, function (aTrek) {
@@ -36,6 +37,12 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
             if (aTrek.properties.difficulty) {
                 if (!(utilsFactory.idIsInArray(difficulties, aTrek.properties.difficulty)) && aTrek.properties.difficulty !== undefined) {
                     difficulties.push(aTrek.properties.difficulty);
+                }
+            }
+
+            if (aTrek.properties.route) {
+                if (!(utilsFactory.idIsInArray(routes, aTrek.properties.route)) && aTrek.properties.route !== undefined) {
+                    routes.push(aTrek.properties.route);
                 }
             }
 
@@ -60,6 +67,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
             type1: [],
             type2: treksUsages,
             difficulties: difficulties,
+            routes: routes,
             themes: themes,
             cat_class: 'category-treks'
         };
