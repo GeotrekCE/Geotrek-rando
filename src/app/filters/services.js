@@ -117,34 +117,6 @@ function filtersService(globalSettings, utilsFactory) {
         return result;
     };
 
-    /*this.testById = function (element, filter, filterKey) {
-
-        var result = false;
-
-        if (element.properties[filterKey]) {
-
-            var prototype = Object.prototype.toString.call(element.properties[filterKey]);
-
-            if (prototype === '[object Array]') {
-                _.forEach(element.properties[filterKey], function (element) {
-                    _.forEach(filter, function (filterValue) {
-                        if (element.id.toString() === filterValue.toString()) {
-                            result = true;
-                        }
-                    });
-
-                });
-            } else if (prototype === '[object Object]') {
-                if (element.properties[filterKey].id.toString() === filter.toString()) {
-                    result = true;
-                }
-            }
-
-        }
-
-        return result;
-    };*/
-
     this.testById = function (element, filter, filterKey) {
         var result = false,
             currentElement;
@@ -153,6 +125,7 @@ function filtersService(globalSettings, utilsFactory) {
             return false;
         }
 
+        // Try to find the filter element as a direct child of our element, else test element itself
         if (element[filterKey]) {
             currentElement = element[filterKey];
         } else {
@@ -162,6 +135,7 @@ function filtersService(globalSettings, utilsFactory) {
         if (parseInt(currentElement.id, 10) === parseInt(filter, 10)) {
             result = true;
         } else {
+            // If element is an object or an array, we can browse it to find the filter
             if (typeof currentElement === 'object') {
                 _.forEach(currentElement, function (subelement) {
                     if (self.testById(subelement, filter, filterKey)) {
@@ -178,166 +152,170 @@ function filtersService(globalSettings, utilsFactory) {
         return !_.isEqual(filters, self.activeFilters);
     };
 
-    this.filterElement = function (element, filters) {
-        var categoriesResult = false,
-            categorySubFilter = false,
-            areasResult = false,
-            districtsResult = false,
-            themesResult = false,
-            searchResult = false;
+    this.matchAny = function (element, filters, name, matchBy) {
 
-        if (filters.categories) {
-            var catIsFiltered = false,
-                catSubFilters = {};
-            if (typeof filters.categories === 'string') {
-                catIsFiltered = self.testById(element.category, filters.categories, 'category');
+        var result = false;
 
-                if (catIsFiltered) {
-                    categoriesResult = true;
+        // If matchBy is not defined or equal id, we are looking for the id matching the filter
+        if (matchBy === undefined || matchBy === 'id') {
 
-                    _.forEach(filters, function (filter, filterName) {
-                        if (filterName.indexOf('-') > -1) {
-                            var categoryId = filterName.split('-')[0],
-                                filterKey = filterName.split('-')[1];
-                            if (parseInt(categoryId, 10) === parseInt(element.category.id, 10)) {
-                                if (!catSubFilters[filterKey]) {
-                                    catSubFilters[filterKey] = [];
-                                }
-                                catSubFilters[filterKey] = filter;
-                            }
-                        }
-                    });
-                    if (Object.keys(catSubFilters).length > 0) {
-                        _.forEach(catSubFilters, function (subFilter, subFilterName) {
-                            _.forEach(subFilter, function (subFilterValue) {
-                                if (parseInt(element.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10) && subFilterName === 'type2') {
-                                    if (self.testById(element.properties, subFilterValue, 'usages')) {
-                                        categorySubFilter = true;
-                                    }
-                                } else {
-                                    if (self.testById(element.properties, subFilterValue, subFilterName)) {
-                                        categorySubFilter = true;
-                                    }
-                                }
-                            });
-                        });
-                    } else {
-                        categorySubFilter = true;
-                    }
-                }
+            // $location provide a string if there's only one value, an array if there's more
+            if (typeof filters === 'string') {
+                result = self.testById(element, filters, name);
             } else {
-                _.forEach(filters.categories, function (filter) {
-                    catIsFiltered = self.testById(element, filter, 'category');
-
-                    if (catIsFiltered) {
-                        categoriesResult = true;
-                        _.forEach(filters, function (filter, filterName) {
-                            if (filterName.indexOf('-') > -1) {
-                                var categoryId = filterName.split('-')[0],
-                                    filterKey = filterName.split('-')[1];
-                                if (parseInt(categoryId, 10) === parseInt(element.category.id, 10)) {
-                                    if (!catSubFilters[filterKey]) {
-                                        catSubFilters[filterKey] = [];
-                                    }
-                                    catSubFilters[filterKey] = filter;
-                                }
-                            }
-                        });
-
-                        if (Object.keys(catSubFilters).length > 0) {
-                            _.forEach(catSubFilters, function (subFilter, subFilterName) {
-                                _.forEach(subFilter, function (subFilterValue) {
-                                    if (parseInt(element.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10) && subFilterName === 'type2') {
-                                        if (self.testById(element.properties, subFilterValue, 'usages')) {
-                                            categorySubFilter = true;
-                                        }
-                                    } else {
-                                        if (self.testById(element.properties, subFilterValue, subFilterName)) {
-                                            categorySubFilter = true;
-                                        }
-                                    }
-                                });
-                            });
-                        } else {
-                            categorySubFilter = true;
-                        }
-
+                _.forEach(filters, function (filter) {
+                    // VAL X OR VAL Y
+                    // We set true for any value that pass
+                    if (self.testById(element, filter, name)) {
+                        result = true;
                     }
                 });
             }
-        } else {
-            if (typeof globalSettings.DEFAULT_ACTIVE_CATEGORIES === 'string') {
-                if (parseInt(element.category.id, 10) === parseInt(globalSettings.DEFAULT_ACTIVE_CATEGORIES, 10)) {
-                    categoriesResult = true;
-                }
-            } else {
-                _.forEach(globalSettings.DEFAULT_ACTIVE_CATEGORIES, function (filter) {
-                    if (parseInt(element.category.id, 10) === parseInt(filter, 10)) {
-                        categoriesResult = true;
-                    }
-                });
-            }
+
         }
 
-        self.activeFilters = filters;
-
-        if (filters.search) {
-            searchResult = self.testByString(element.properties, filters.search);
-        } else {
-            searchResult = true;
+        // We want to filter element by a value withing an interval
+        if (matchBy === 'interval') {
+            console.log('match by interval');
         }
 
-        if (filters.areas) {
-            _.forEach(element.properties.areas, function (area) {
-                _.forEach(filters.areas, function (filter) {
-                    if (area.id.toString() === filter.toString()) { areasResult = true; }
-                });
-            });
-        } else {
-            areasResult = true;
-        }
-
-        if (filters.districts) {
-            _.forEach(element.properties.districts, function (district) {
-                _.forEach(filters.districts, function (filter) {
-                    if (district.id.toString() === filter.toString()) { districtsResult = true; }
-                });
-            });
-        } else {
-            districtsResult = true;
-        }
-
-        if (filters.themes) {
-            if (typeof filters.themes === 'string') {
-                themesResult = self.testById(element.properties, filters.themes, 'themes');
-            } else {
-                _.forEach(filters.themes, function (theme) {
-                    if (self.testById(element.properties, theme, 'themes')) {
-                        themesResult = true;
-                    }
-                });
-            }
-        } else {
-            themesResult = true;
-        }
-
-        return categoriesResult && categorySubFilter && searchResult && areasResult && districtsResult && themesResult;
-
+        return result;
     };
 
-    /*this.filterResults = function (results) {
-        var filteredResults;
+    this.categoryHasSubfilters = function (elementCategoryId, filters) {
+        var catSubFilters = {};
 
-        filteredResults = _.filter(results, function (result) {
-            _.forEach(this.filters, function (filter) {
-                if (true) {
+        _.forEach(filters, function (filter, filterName) {
+            // subfilters are composed like catId-subFilterName
+            if (filterName.indexOf('-') > -1) {
+                var categoryId = filterName.split('-')[0],
+                    filterKey = filterName.split('-')[1];
 
+                if (parseInt(categoryId, 10) === parseInt(elementCategoryId, 10)) {
+
+                    // Treks is the only category that have an usage property instead of a type2 property
+                    if (parseInt(elementCategoryId, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10) && filterKey === 'type2') {
+                        filterKey = 'usages';
+                    }
+
+                    //Init catSubfilters child if it doesn't exists
+                    if (!catSubFilters[filterKey]) {
+                        catSubFilters[filterKey] = [];
+                    }
+                    catSubFilters[filterKey] = filter;
                 }
-            });
+            }
         });
 
-        return filteredResults;
-    };*/
+        return catSubFilters;
+    };
+
+    this.filterElement = function (element, filters) {
+
+        // Set Up final test vars
+        var categoriesFilter = false,
+            themesFilter = false,
+            searchFilter = false,
+            areasFilter = false,
+            districtsFilter = false;
+
+        // Define all type of filters that needs an interval check instead of an id one
+        var filtersByInterval = [];
+
+
+        // Update service activeFilters
+        self.activeFilters = filters;
+
+
+        /* Filter by Categories */
+        /*                  */
+        /*                  */
+
+        // Use default active categories from config if there's no categories filter
+        if (filters.categories) {
+
+            // We can look for category subfilters if the element category match
+            if (self.matchAny(element, filters.categories, 'category')) {
+
+                var subFilters = self.categoryHasSubfilters(element.category.id, filters);
+                // if no subfilters found, then whole category filter pass
+                if (_.size(subFilters) > 0) {
+                    var subfiltersResults = [];
+                    _.forEach(subFilters, function (subFilter, subFilterName) {
+                        if (filtersByInterval.indexOf(subFilterName) > -1) {
+                            subfiltersResults.push(self.matchAny(element.properties, subFilter, subFilterName, 'interval'));
+                        } else {
+                            subfiltersResults.push(self.matchAny(element.properties, subFilter, subFilterName));
+                        }
+
+                    });
+                    if (subfiltersResults.indexOf(false) === -1) {
+                        categoriesFilter = true;
+                    }
+
+                } else {
+                    categoriesFilter = true;
+                }
+
+            }
+
+        } else {
+            categoriesFilter = self.matchAny(element, globalSettings.DEFAULT_ACTIVE_CATEGORIES, 'category');
+        }
+
+
+        /* Filter by Themes */
+        /*                  */
+        /*                  */
+
+        // If themes filter is not defined the test pass
+        if (filters.themes) {
+            themesFilter = self.matchAny(element.properties, filters.themes, 'themes');
+        } else {
+            themesFilter = true;
+        }
+
+
+        /* Filter by Search Query */
+        /*                        */
+        /*                        */
+
+        // If search is not defined the test pass
+        if (filters.search) {
+            searchFilter = self.testByString(element.properties, filters.search);
+        } else {
+            searchFilter = true;
+        }
+
+
+        /* Filter by Areas */
+        /*                 */
+        /*                 */
+
+        // If areas filter is not defined the test pass
+        if (filters.areas) {
+            areasFilter = self.matchAny(element.properties, filters.areas, 'areas');
+        } else {
+            areasFilter = true;
+        }
+
+
+        /* Filter by Districts */
+        /*                     */
+        /*                     */
+
+        // If district filter is not defined the test pass
+        if (filters.districts) {
+            districtsFilter = self.matchAny(element.properties, filters.districts, 'districts');
+        } else {
+            districtsFilter = true;
+        }
+
+        // CATEGORY && THEME && QUERY && AREA && DISTRICT
+        // Global test that pass if all filters test are true
+        return categoriesFilter && themesFilter && searchFilter && areasFilter && districtsFilter;
+
+    };
 
 }
 
