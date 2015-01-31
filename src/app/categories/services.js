@@ -24,36 +24,39 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
         _.forEach(treks.features, function (aTrek) {
 
-            if (aTrek.properties.usages && aTrek.properties.usages.length > 0) {
-                _.forEach(aTrek.properties.usages, function (usage) {
+            if (aTrek.properties.published) {
 
-                    if (!(utilsFactory.idIsInArray(treksUsages, usage)) && usage !== undefined) {
-                        treksUsages.push(usage);
-                    }
+                if (aTrek.properties.usages && aTrek.properties.usages.length > 0) {
+                    _.forEach(aTrek.properties.usages, function (usage) {
 
-                });
-            }
+                        if (!(utilsFactory.idIsInArray(treksUsages, usage)) && usage !== undefined) {
+                            treksUsages.push(usage);
+                        }
 
-            if (aTrek.properties.difficulty) {
-                if (!(utilsFactory.idIsInArray(difficulties, aTrek.properties.difficulty)) && aTrek.properties.difficulty !== undefined) {
-                    difficulties.push(aTrek.properties.difficulty);
+                    });
                 }
-            }
 
-            if (aTrek.properties.route) {
-                if (!(utilsFactory.idIsInArray(routes, aTrek.properties.route)) && aTrek.properties.route !== undefined) {
-                    routes.push(aTrek.properties.route);
-                }
-            }
-
-            if (aTrek.properties.themes && aTrek.properties.themes.length > 0) {
-                _.forEach(aTrek.properties.themes, function (theme) {
-
-                    if (!(utilsFactory.idIsInArray(themes, theme)) && theme !== undefined) {
-                        themes.push(theme);
+                if (aTrek.properties.difficulty) {
+                    if (!(utilsFactory.idIsInArray(difficulties, aTrek.properties.difficulty)) && aTrek.properties.difficulty !== undefined) {
+                        difficulties.push(aTrek.properties.difficulty);
                     }
+                }
 
-                });
+                if (aTrek.properties.route) {
+                    if (!(utilsFactory.idIsInArray(routes, aTrek.properties.route)) && aTrek.properties.route !== undefined) {
+                        routes.push(aTrek.properties.route);
+                    }
+                }
+
+                if (aTrek.properties.themes && aTrek.properties.themes.length > 0) {
+                    _.forEach(aTrek.properties.themes, function (theme) {
+
+                        if (!(utilsFactory.idIsInArray(themes, theme)) && theme !== undefined) {
+                            themes.push(theme);
+                        }
+
+                    });
+                }
             }
 
         });
