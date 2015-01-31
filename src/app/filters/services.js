@@ -287,7 +287,9 @@ function filtersService(globalSettings, utilsFactory) {
                 themesResult = self.testById(element.properties, filters.themes, 'themes');
             } else {
                 _.forEach(filters.themes, function (theme) {
-                    themesResult = self.testById(element.properties, theme, 'themes');
+                    if (self.testById(element.properties, theme, 'themes')) {
+                        themesResult = true;
+                    }
                 });
             }
         } else {
