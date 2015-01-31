@@ -9,7 +9,7 @@
                 <span>{{category.label}}</span>
             </div>
             <form>
-                <div class="selector type1" ng-class="{empty: category.type1.length === 0}">
+                <div ng-if="category.type1 && category.type1.length > 0" class="selector type1" ng-class="{empty: category.type1.length === 0}">
                     <span>{{category.type1_label}} <i class="caret"></i></span>
                     <div class="choices">
                         <div ng-repeat="type1 in category.type1" class="type1 form-group">
@@ -22,7 +22,7 @@
                     </div>
                 </div>
 
-                <div class="selector type2" ng-class="{empty: category.type2.length === 0}">
+                <div ng-if="category.type2 && category.type2.length > 0" class="selector type2" ng-class="{empty: category.type2.length === 0}">
                     <span>{{category.type2_label}} <i class="caret"></i></span>
                     <div class="choices">
                         <div ng-repeat="type2 in category.type2" class="type2 form-group">
@@ -30,6 +30,19 @@
                             <label for="type2-{{type2.id}}">
                                 <span ng-if="type2.name">{{type2.name}}</span>
                                 <span ng-if="type2.label">{{type2.label}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-if="category.difficulties && category.difficulties.length > 0" class="selector difficulties">
+                    <span>Difficulté <i class="caret"></i></span>
+                    <div class="choices">
+                        <div ng-repeat="difficulty in category.difficulties" class="difficulty form-group">
+                            <input type="checkbox" id="difficulty-{{difficulty.id}}" value="{{difficulty.id}}" ng-model="category.filters.difficulty[difficulty.id]"  ng-change="propagateFilters()"/>
+                            <label for="difficulty-{{difficulty.id}}">
+                                <ng-include src="difficulty.pictogram"></ng-include>
+                                <span>{{difficulty.label}}</span>
                             </label>
                         </div>
                     </div>

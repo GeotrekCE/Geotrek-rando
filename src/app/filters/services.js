@@ -180,37 +180,50 @@ function filtersService(globalSettings, utilsFactory) {
 
     this.filterElement = function (element, filters) {
         var categoriesResult = false,
-            categorySubFilter = true,
+            categorySubFilter = false,
             areasResult = false,
             districtsResult = false,
             themesResult = false,
             searchResult = false;
 
         if (filters.categories) {
-            var catIsFiltered = false;
+            var catIsFiltered = false,
+                catSubFilters = {};
             if (typeof filters.categories === 'string') {
                 catIsFiltered = self.testById(element.category, filters.categories, 'category');
 
                 if (catIsFiltered) {
                     categoriesResult = true;
+
                     _.forEach(filters, function (filter, filterName) {
                         if (filterName.indexOf('-') > -1) {
                             var categoryId = filterName.split('-')[0],
                                 filterKey = filterName.split('-')[1];
                             if (parseInt(categoryId, 10) === parseInt(element.category.id, 10)) {
-                                categorySubFilter = false;
-                                if (parseInt(categoryId, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10) && filterKey === 'type2') {
-                                    if (self.testById(element.properties, filter, 'usages')) {
-                                        categorySubFilter = true;
-                                    }
-                                } else {
-                                    if (self.testById(element.properties, filter, filterKey)) {
-                                        categorySubFilter = true;
-                                    }
+                                if (!catSubFilters[filterKey]) {
+                                    catSubFilters[filterKey] = [];
                                 }
+                                catSubFilters[filterKey] = filter;
                             }
                         }
                     });
+                    if (Object.keys(catSubFilters).length > 0) {
+                        _.forEach(catSubFilters, function (subFilter, subFilterName) {
+                            _.forEach(subFilter, function (subFilterValue) {
+                                if (parseInt(element.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10) && subFilterName === 'type2') {
+                                    if (self.testById(element.properties, subFilterValue, 'usages')) {
+                                        categorySubFilter = true;
+                                    }
+                                } else {
+                                    if (self.testById(element.properties, subFilterValue, subFilterName)) {
+                                        categorySubFilter = true;
+                                    }
+                                }
+                            });
+                        });
+                    } else {
+                        categorySubFilter = true;
+                    }
                 }
             } else {
                 _.forEach(filters.categories, function (filter) {
@@ -223,19 +236,31 @@ function filtersService(globalSettings, utilsFactory) {
                                 var categoryId = filterName.split('-')[0],
                                     filterKey = filterName.split('-')[1];
                                 if (parseInt(categoryId, 10) === parseInt(element.category.id, 10)) {
-                                    categorySubFilter = false;
-                                    if (parseInt(categoryId, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10) && filterKey === 'type2') {
-                                        if (self.testById(element.properties, filter, 'usages')) {
-                                            categorySubFilter = true;
-                                        }
-                                    } else {
-                                        if (self.testById(element.properties, filter, filterKey)) {
-                                            categorySubFilter = true;
-                                        }
+                                    if (!catSubFilters[filterKey]) {
+                                        catSubFilters[filterKey] = [];
                                     }
+                                    catSubFilters[filterKey] = filter;
                                 }
                             }
                         });
+
+                        if (Object.keys(catSubFilters).length > 0) {
+                            _.forEach(catSubFilters, function (subFilter, subFilterName) {
+                                _.forEach(subFilter, function (subFilterValue) {
+                                    if (parseInt(element.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10) && subFilterName === 'type2') {
+                                        if (self.testById(element.properties, subFilterValue, 'usages')) {
+                                            categorySubFilter = true;
+                                        }
+                                    } else {
+                                        if (self.testById(element.properties, subFilterValue, subFilterName)) {
+                                            categorySubFilter = true;
+                                        }
+                                    }
+                                });
+                            });
+                        } else {
+                            categorySubFilter = true;
+                        }
 
                     }
                 });

@@ -63,6 +63,7 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
                         }
 
                     });
+                    console.log($scope.categories);
                 }
             );
     }
