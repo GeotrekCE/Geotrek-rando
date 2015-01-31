@@ -42,7 +42,7 @@
 
 @mixin marker-coloring($current-color) {
     svg .base {
-        fill: $current-color;    
+        fill: $current-color;
     }
 }
 

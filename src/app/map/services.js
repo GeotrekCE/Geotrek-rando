@@ -495,7 +495,7 @@ function mapService(globalSettings, treksService, iconsService) {
 
 }
 
-function iconsService($http) {
+function iconsService($rootScope, $compile) {
 
     var map_icons = {
         default_icon: {},
@@ -563,8 +563,7 @@ function iconsService($http) {
     };
 
     this.getMarkerIcon = function (categoryName) {
-
-        var markerMarkup = '<svg version="1.1" class="map-marker" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="56px" viewBox="0 0 40 56" enable-background="new 0 0 40 56" xml:space="preserve"><path class="base" fill="#333333" d="M39.996,19.897c0-11.096-8.994-19.922-20.091-19.922c-11.096,0-19.816,9.08-19.816,20.176 c0,4.17,1.562,8.232,3.572,11.442c0,0,14.862,24.239,16.568,24.239c1.706,0,16.472-24.935,16.472-24.935 C38.796,27.882,39.996,23.984,39.996,19.897z"/><path class="top-shadow" opacity="0.2" d="M19.905,1.985c10.812,0,19.603,8.387,20.049,19.079c0.021-0.387,0.042-0.774,0.042-1.166 c0-11.096-8.994-19.922-20.091-19.922c-11.096,0-19.816,9.08-19.816,20.176c0,0.349,0.027,0.694,0.048,1.04 C0.63,10.544,9.137,1.985,19.905,1.985z"/><circle class="center-shadow" opacity="0.4" cx="19.906" cy="20.999" r="14.08"/></svg>';
+        var markerMarkup = '<div class="cat-icon"></div><svg version="1.1" class="map-marker" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="56px" viewBox="0 0 40 56" enable-background="new 0 0 40 56" xml:space="preserve"><path class="base" fill="#333333" d="M39.996,19.897c0-11.096-8.994-19.922-20.091-19.922c-11.096,0-19.816,9.08-19.816,20.176 c0,4.17,1.562,8.232,3.572,11.442c0,0,14.862,24.239,16.568,24.239c1.706,0,16.472-24.935,16.472-24.935 C38.796,27.882,39.996,23.984,39.996,19.897z"/><path class="top-shadow" opacity="0.2" d="M19.905,1.985c10.812,0,19.603,8.387,20.049,19.079c0.021-0.387,0.042-0.774,0.042-1.166 c0-11.096-8.994-19.922-20.091-19.922c-11.096,0-19.816,9.08-19.816,20.176c0,0.349,0.027,0.694,0.048,1.04 C0.63,10.544,9.137,1.985,19.905,1.985z"/><circle class="center-shadow" opacity="0.4" cx="19.906" cy="20.999" r="14.08"/></svg>';
 
         var newIcon = new L.divIcon({
             html: markerMarkup,

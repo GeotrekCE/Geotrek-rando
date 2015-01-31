@@ -1,6 +1,16 @@
 .leaflet-marker-icon {
+    position: relative;
+    .cat-icon {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 20px;
+        height: 20px;
+        background: url('./images/icons/trek-category.svg') center center no-repeat;
+        background-size: auto 100%;
+    }
     svg .base {
-            fill: $primary-color;    
+        fill: $primary-color;
     }
     &.treks {
         @include marker-coloring($treks-color);
