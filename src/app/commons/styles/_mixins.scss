@@ -40,6 +40,12 @@
     }
 }
 
+@mixin marker-coloring($current-color) {
+    svg .base {
+        fill: $current-color;    
+    }
+}
+
 @mixin detail-page-coloring($current-color) {
     .cat-icon {
         background: $current-color;

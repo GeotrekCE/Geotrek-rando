@@ -1,0 +1,273 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/admin/.nvm/v0.10.33/bin/node',
+1 verbose cli   '/Users/admin/.nvm/v0.10.33/bin/npm',
+1 verbose cli   'install' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 warn package.json geotrekrando@2.0.0 No repository field.
+5 warn package.json geotrekrando@2.0.0 Normalized value of bugs field is an empty object. Deleted.
+6 verbose readDependencies using package.json deps
+7 verbose install where, deps [ '/Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2',
+7 verbose install   [ 'angular',
+7 verbose install     'angular-bootstrap',
+7 verbose install     'angular-mocks',
+7 verbose install     'angular-resource',
+7 verbose install     'angular-ui-router',
+7 verbose install     'angular-slider',
+7 verbose install     'bootstrap-sass',
+7 verbose install     'font-awesome',
+7 verbose install     'jquery',
+7 verbose install     'leaflet',
+7 verbose install     'leaflet-minimap',
+7 verbose install     'leaflet.fullscreen',
+7 verbose install     'leaflet.markercluster',
+7 verbose install     'lodash',
+7 verbose install     'browser-sync',
+7 verbose install     'browserify',
+7 verbose install     'browserify-shim',
+7 verbose install     'chai',
+7 verbose install     'exorcist',
+7 verbose install     'gulp',
+7 verbose install     'gulp-autoprefixer',
+7 verbose install     'gulp-changed',
+7 verbose install     'gulp-concat',
+7 verbose install     'gulp-filesize',
+7 verbose install     'gulp-imagemin',
+7 verbose install     'gulp-istanbul',
+7 verbose install     'gulp-minify-css',
+7 verbose install     'gulp-mocha',
+7 verbose install     'gulp-notify',
+7 verbose install     'gulp-sass',
+7 verbose install     'gulp-sourcemaps',
+7 verbose install     'gulp-streamify',
+7 verbose install     'gulp-uglify',
+7 verbose install     'gulp-util',
+7 verbose install     'jasmine-core',
+7 verbose install     'karma',
+7 verbose install     'karma-jasmine',
+7 verbose install     'karma-phantomjs-launcher',
+7 verbose install     'merge-stream',
+7 verbose install     'partialify',
+7 verbose install     'pretty-hrtime',
+7 verbose install     'require-dir',
+7 verbose install     'sinon',
+7 verbose install     'sinon-chai',
+7 verbose install     'vinyl-source-stream',
+7 verbose install     'watchify' ] ]
+8 info preinstall geotrekrando@2.0.0
+9 warn package.json karma-phantomjs-launcher@0.1.4 No README data
+10 warn package.json leaflet.markercluster@0.4.0 No repository field.
+11 verbose readDependencies using package.json deps
+12 verbose already installed skipping jquery@~1.x.x /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+13 verbose already installed skipping leaflet@^0.7.3 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+14 verbose cache add [ 'leaflet-minimap@git://github.com/Norkart/Leaflet-MiniMap.git',
+14 verbose cache add   null ]
+15 verbose cache add name=undefined spec="leaflet-minimap@git://github.com/Norkart/Leaflet-MiniMap.git" args=["leaflet-minimap@git://github.com/Norkart/Leaflet-MiniMap.git",null]
+16 verbose parsed url { protocol: null,
+16 verbose parsed url   slashes: null,
+16 verbose parsed url   auth: null,
+16 verbose parsed url   host: null,
+16 verbose parsed url   port: null,
+16 verbose parsed url   hostname: null,
+16 verbose parsed url   hash: null,
+16 verbose parsed url   search: null,
+16 verbose parsed url   query: null,
+16 verbose parsed url   pathname: 'leaflet-minimap@git://github.com/Norkart/Leaflet-MiniMap.git',
+16 verbose parsed url   path: 'leaflet-minimap@git://github.com/Norkart/Leaflet-MiniMap.git',
+16 verbose parsed url   href: 'leaflet-minimap@git://github.com/Norkart/Leaflet-MiniMap.git' }
+17 verbose already installed skipping leaflet.fullscreen@^1.1.4 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+18 verbose already installed skipping leaflet.markercluster@^0.4.0 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+19 verbose cache add name="leaflet-minimap" spec="git://github.com/Norkart/Leaflet-MiniMap.git" args=["leaflet-minimap","git://github.com/Norkart/Leaflet-MiniMap.git"]
+20 verbose parsed url { protocol: 'git:',
+20 verbose parsed url   slashes: true,
+20 verbose parsed url   auth: null,
+20 verbose parsed url   host: 'github.com',
+20 verbose parsed url   port: null,
+20 verbose parsed url   hostname: 'github.com',
+20 verbose parsed url   hash: null,
+20 verbose parsed url   search: null,
+20 verbose parsed url   query: null,
+20 verbose parsed url   pathname: '/Norkart/Leaflet-MiniMap.git',
+20 verbose parsed url   path: '/Norkart/Leaflet-MiniMap.git',
+20 verbose parsed url   href: 'git://github.com/Norkart/Leaflet-MiniMap.git' }
+21 verbose already installed skipping lodash@^2.4.1 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+22 silly lockFile f147e6ad--com-Norkart-Leaflet-MiniMap-git git://github.com/Norkart/Leaflet-MiniMap.git
+23 verbose lock git://github.com/Norkart/Leaflet-MiniMap.git /Users/admin/.npm/f147e6ad--com-Norkart-Leaflet-MiniMap-git.lock
+24 verbose already installed skipping browser-sync@~1.3.6 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+25 verbose already installed skipping browserify@^8.0.2 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+26 verbose already installed skipping browserify-shim@^3.8.2 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+27 verbose addRemoteGit [ 'git://github.com/Norkart/Leaflet-MiniMap.git', 'master' ]
+28 verbose already installed skipping chai@^1.10.0 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+29 verbose already installed skipping exorcist@^0.1.6 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+30 verbose already installed skipping gulp@^3.8.7 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+31 verbose already installed skipping gulp-autoprefixer@^2.0.0 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+32 verbose already installed skipping gulp-changed@^0.4.1 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+33 verbose already installed skipping gulp-concat@^2.4.2 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+34 verbose already installed skipping gulp-filesize@0.0.6 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+35 verbose already installed skipping gulp-imagemin@^0.6.2 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+36 verbose already installed skipping gulp-istanbul@^0.5.0 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+37 verbose already installed skipping gulp-minify-css@^0.3.11 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+38 verbose already installed skipping gulp-mocha@^2.0.0 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+39 verbose already installed skipping gulp-notify@^1.4.2 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+40 verbose already installed skipping gulp-sass@^1.1.0 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+41 verbose already installed skipping gulp-sourcemaps@^1.2.8 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+42 verbose git remote.origin.url git://github.com/Norkart/Leaflet-MiniMap.git
+43 verbose already installed skipping gulp-streamify@0.0.5 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+44 verbose already installed skipping gulp-uglify@^1.0.2 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+45 verbose already installed skipping gulp-util@^3.0.0 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+46 verbose already installed skipping jasmine-core@^2.1.3 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+47 verbose already installed skipping karma@^0.12.31 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+48 verbose already installed skipping karma-jasmine@^0.3.5 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+49 verbose already installed skipping karma-phantomjs-launcher@^0.1.4 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+50 verbose already installed skipping merge-stream@^0.1.7 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+51 verbose already installed skipping partialify@^3.1.2 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+52 verbose already installed skipping pretty-hrtime@~0.2.1 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+53 verbose already installed skipping require-dir@^0.1.0 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+54 verbose already installed skipping sinon@^1.12.2 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+55 verbose already installed skipping sinon-chai@^2.6.0 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+56 verbose already installed skipping vinyl-source-stream@^1.0.0 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+57 verbose already installed skipping watchify@^2.2.1 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+58 verbose already installed skipping angular@^1.3.8 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+59 verbose already installed skipping angular-bootstrap@^0.12.0 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+60 verbose already installed skipping angular-mocks@^1.3.9 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+61 verbose already installed skipping angular-resource@^1.3.8 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+62 verbose already installed skipping angular-ui-router@^0.2.13 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+63 verbose cache add [ 'angular-slider@https://github.com/PopSugar/angular-slider.git',
+63 verbose cache add   null ]
+64 verbose cache add name=undefined spec="angular-slider@https://github.com/PopSugar/angular-slider.git" args=["angular-slider@https://github.com/PopSugar/angular-slider.git",null]
+65 verbose parsed url { protocol: null,
+65 verbose parsed url   slashes: null,
+65 verbose parsed url   auth: null,
+65 verbose parsed url   host: null,
+65 verbose parsed url   port: null,
+65 verbose parsed url   hostname: null,
+65 verbose parsed url   hash: null,
+65 verbose parsed url   search: null,
+65 verbose parsed url   query: null,
+65 verbose parsed url   pathname: 'angular-slider@https://github.com/PopSugar/angular-slider.git',
+65 verbose parsed url   path: 'angular-slider@https://github.com/PopSugar/angular-slider.git',
+65 verbose parsed url   href: 'angular-slider@https://github.com/PopSugar/angular-slider.git' }
+66 verbose already installed skipping bootstrap-sass@^3.3.1 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+67 verbose cache add name="angular-slider" spec="https://github.com/PopSugar/angular-slider.git" args=["angular-slider","https://github.com/PopSugar/angular-slider.git"]
+68 verbose parsed url { protocol: 'https:',
+68 verbose parsed url   slashes: true,
+68 verbose parsed url   auth: null,
+68 verbose parsed url   host: 'github.com',
+68 verbose parsed url   port: null,
+68 verbose parsed url   hostname: 'github.com',
+68 verbose parsed url   hash: null,
+68 verbose parsed url   search: null,
+68 verbose parsed url   query: null,
+68 verbose parsed url   pathname: '/PopSugar/angular-slider.git',
+68 verbose parsed url   path: '/PopSugar/angular-slider.git',
+68 verbose parsed url   href: 'https://github.com/PopSugar/angular-slider.git' }
+69 silly lockFile b62686f8--com-PopSugar-angular-slider-git https://github.com/PopSugar/angular-slider.git
+70 verbose lock https://github.com/PopSugar/angular-slider.git /Users/admin/.npm/b62686f8--com-PopSugar-angular-slider-git.lock
+71 verbose already installed skipping font-awesome@^4.2.0 /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+72 verbose addRemoteTarball [ 'https://github.com/PopSugar/angular-slider.git', null ]
+73 info retry fetch attempt 1 at 19:19:04
+74 verbose fetch to= /var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/github.com/PopSugar/angular-slider.git
+75 http GET https://github.com/PopSugar/angular-slider.git
+76 verbose git fetch -a origin (git://github.com/Norkart/Leaflet-MiniMap.git) From git://github.com/Norkart/Leaflet-MiniMap
+76 verbose git fetch -a origin (git://github.com/Norkart/Leaflet-MiniMap.git)  * [new branch]      bringbackie8 -> bringbackie8
+77 verbose git rev-list -n1 master f1964a27e6eca272763d0bd7aba1a80ee5f729b3
+78 verbose resolved git url git://github.com/Norkart/Leaflet-MiniMap.git#f1964a27e6eca272763d0bd7aba1a80ee5f729b3
+79 verbose tar unpack /var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/1422728344777-0.039313389686867595/tmp.tgz
+80 silly lockFile d94eccd8-39313389686867595-tmp-tgz-unpack tar:///var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/1422728344777-0.039313389686867595/tmp.tgz-unpack
+81 verbose lock tar:///var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/1422728344777-0.039313389686867595/tmp.tgz-unpack /Users/admin/.npm/d94eccd8-39313389686867595-tmp-tgz-unpack.lock
+82 silly lockFile 87c6bf9d-777-0-039313389686867595-tmp-tgz tar:///var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/1422728344777-0.039313389686867595/tmp.tgz
+83 verbose lock tar:///var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/1422728344777-0.039313389686867595/tmp.tgz /Users/admin/.npm/87c6bf9d-777-0-039313389686867595-tmp-tgz.lock
+84 silly gunzTarPerm modes [ '755', '644' ]
+85 silly gunzTarPerm extractEntry
+86 silly gunzTarPerm modified mode [ '', 509, 493 ]
+87 silly gunzTarPerm extractEntry .gitignore
+88 silly gunzTarPerm modified mode [ '.gitignore', 436, 420 ]
+89 silly gunzTarPerm extractEntry LICENSE.txt
+90 silly gunzTarPerm modified mode [ 'LICENSE.txt', 436, 420 ]
+91 silly gunzTarPerm extractEntry dist/
+92 silly gunzTarPerm modified mode [ 'dist/', 509, 493 ]
+93 silly gunzTarPerm extractEntry dist/Control.MiniMap.min.css
+94 silly gunzTarPerm modified mode [ 'dist/Control.MiniMap.min.css', 436, 420 ]
+95 silly gunzTarPerm extractEntry dist/Control.MiniMap.min.js
+96 silly gunzTarPerm modified mode [ 'dist/Control.MiniMap.min.js', 436, 420 ]
+97 silly gunzTarPerm extractEntry dist/images/
+98 silly gunzTarPerm modified mode [ 'dist/images/', 509, 493 ]
+99 silly gunzTarPerm extractEntry dist/images/toggle.svg
+100 silly gunzTarPerm modified mode [ 'dist/images/toggle.svg', 436, 420 ]
+101 silly gunzTarPerm extractEntry example/
+102 silly gunzTarPerm modified mode [ 'example/', 509, 493 ]
+103 silly gunzTarPerm extractEntry example/example.html
+104 silly gunzTarPerm modified mode [ 'example/example.html', 436, 420 ]
+105 silly gunzTarPerm extractEntry example/example_customRects.html
+106 silly gunzTarPerm modified mode [ 'example/example_customRects.html', 436, 420 ]
+107 silly gunzTarPerm extractEntry example/example_differentminimised.html
+108 silly gunzTarPerm modified mode [ 'example/example_differentminimised.html', 436, 420 ]
+109 silly gunzTarPerm extractEntry example/example_dist.html
+110 silly gunzTarPerm modified mode [ 'example/example_dist.html', 436, 420 ]
+111 silly gunzTarPerm extractEntry example/example_fixedzoom.html
+112 silly gunzTarPerm modified mode [ 'example/example_fixedzoom.html', 436, 420 ]
+113 silly gunzTarPerm extractEntry example/example_larger.html
+114 silly gunzTarPerm modified mode [ 'example/example_larger.html', 436, 420 ]
+115 silly gunzTarPerm extractEntry example/example_layerchange.html
+116 silly gunzTarPerm modified mode [ 'example/example_layerchange.html', 436, 420 ]
+117 silly gunzTarPerm extractEntry example/example_layergroup.html
+118 silly gunzTarPerm modified mode [ 'example/example_layergroup.html', 436, 420 ]
+119 silly gunzTarPerm extractEntry example/example_lowzoom.html
+120 silly gunzTarPerm modified mode [ 'example/example_lowzoom.html', 436, 420 ]
+121 silly gunzTarPerm extractEntry example/example_toggleDisplay.html
+122 silly gunzTarPerm modified mode [ 'example/example_toggleDisplay.html', 436, 420 ]
+123 silly gunzTarPerm extractEntry example/example_topleft.html
+124 silly gunzTarPerm modified mode [ 'example/example_topleft.html', 436, 420 ]
+125 silly gunzTarPerm extractEntry example/fullscreen.css
+126 silly gunzTarPerm modified mode [ 'example/fullscreen.css', 436, 420 ]
+127 silly gunzTarPerm extractEntry example/local_pubs_restaurant_norway.js
+128 silly gunzTarPerm modified mode [ 'example/local_pubs_restaurant_norway.js', 436, 420 ]
+129 silly gunzTarPerm extractEntry package.json
+130 silly gunzTarPerm modified mode [ 'package.json', 436, 420 ]
+131 silly gunzTarPerm extractEntry readme.md
+132 silly gunzTarPerm modified mode [ 'readme.md', 436, 420 ]
+133 silly gunzTarPerm extractEntry src/
+134 silly gunzTarPerm modified mode [ 'src/', 509, 493 ]
+135 silly gunzTarPerm extractEntry src/Control.MiniMap-de.js
+136 silly gunzTarPerm modified mode [ 'src/Control.MiniMap-de.js', 436, 420 ]
+137 silly gunzTarPerm extractEntry src/Control.MiniMap.css
+138 silly gunzTarPerm modified mode [ 'src/Control.MiniMap.css', 436, 420 ]
+139 silly gunzTarPerm extractEntry src/Control.MiniMap.js
+140 silly gunzTarPerm modified mode [ 'src/Control.MiniMap.js', 436, 420 ]
+141 silly gunzTarPerm extractEntry src/images/
+142 silly gunzTarPerm modified mode [ 'src/images/', 509, 493 ]
+143 silly gunzTarPerm extractEntry src/images/toggle.svg
+144 silly gunzTarPerm modified mode [ 'src/images/toggle.svg', 436, 420 ]
+145 silly lockFile d94eccd8-39313389686867595-tmp-tgz-unpack tar:///var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/1422728344777-0.039313389686867595/tmp.tgz-unpack
+146 silly lockFile d94eccd8-39313389686867595-tmp-tgz-unpack tar:///var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/1422728344777-0.039313389686867595/tmp.tgz-unpack
+147 silly lockFile 87c6bf9d-777-0-039313389686867595-tmp-tgz tar:///var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/1422728344777-0.039313389686867595/tmp.tgz
+148 silly lockFile 87c6bf9d-777-0-039313389686867595-tmp-tgz tar:///var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/1422728344777-0.039313389686867595/tmp.tgz
+149 silly lockFile f147e6ad--com-Norkart-Leaflet-MiniMap-git git://github.com/Norkart/Leaflet-MiniMap.git
+150 silly lockFile f147e6ad--com-Norkart-Leaflet-MiniMap-git git://github.com/Norkart/Leaflet-MiniMap.git
+151 http 200 https://github.com/PopSugar/angular-slider.git
+152 verbose tar unpack /var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/github.com/PopSugar/angular-slider.git
+153 silly lockFile c16d6e3e-pSugar-angular-slider-git-unpack tar:///var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/github.com/PopSugar/angular-slider.git-unpack
+154 verbose lock tar:///var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/github.com/PopSugar/angular-slider.git-unpack /Users/admin/.npm/c16d6e3e-pSugar-angular-slider-git-unpack.lock
+155 silly lockFile 30412308--com-PopSugar-angular-slider-git tar:///var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/github.com/PopSugar/angular-slider.git
+156 verbose lock tar:///var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/github.com/PopSugar/angular-slider.git /Users/admin/.npm/30412308--com-PopSugar-angular-slider-git.lock
+157 silly gunzTarPerm modes [ '755', '644' ]
+158 error not a package /var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/github.com/PopSugar/angular-slider.git
+159 silly lockFile c16d6e3e-pSugar-angular-slider-git-unpack tar:///var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/github.com/PopSugar/angular-slider.git-unpack
+160 silly lockFile c16d6e3e-pSugar-angular-slider-git-unpack tar:///var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/github.com/PopSugar/angular-slider.git-unpack
+161 silly lockFile 30412308--com-PopSugar-angular-slider-git tar:///var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/github.com/PopSugar/angular-slider.git
+162 silly lockFile 30412308--com-PopSugar-angular-slider-git tar:///var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/github.com/PopSugar/angular-slider.git
+163 silly lockFile b62686f8--com-PopSugar-angular-slider-git https://github.com/PopSugar/angular-slider.git
+164 silly lockFile b62686f8--com-PopSugar-angular-slider-git https://github.com/PopSugar/angular-slider.git
+165 error Error: ENOENT, open '/var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/github.com/PopSugar/angular-slider.git-unpack/package.json'
+166 error If you need help, you may report this *entire* log,
+166 error including the npm and node versions, at:
+166 error     <http://github.com/npm/npm/issues>
+167 error System Darwin 13.3.0
+168 error command "/Users/admin/.nvm/v0.10.33/bin/node" "/Users/admin/.nvm/v0.10.33/bin/npm" "install"
+169 error cwd /Volumes/Stock/Works/geotrek/rando-v2/dev/rando-v2
+170 error node -v v0.10.33
+171 error npm -v 1.4.28
+172 error path /var/folders/8d/_tvzbt5d3s7_3g91r3jrww2c0000gn/T/npm-6613-pBbeI3Sd/github.com/PopSugar/angular-slider.git-unpack/package.json
+173 error code ENOENT
+174 error errno 34
+175 verbose exit [ 34, true ]

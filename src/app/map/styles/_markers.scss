@@ -1,10 +1,26 @@
-.trek-icon {
-    background: #333;
-    padding: 3px;
-    border-radius: 20px;
-    text-align: center;
-    color: white;
-    font-weight: bold;
+.leaflet-marker-icon {
+    svg .base {
+            fill: $primary-color;    
+    }
+    &.treks {
+        @include marker-coloring($treks-color);
+    }
+
+    &.musee {
+        @include marker-coloring($museums-color);
+    }
+
+    &.restaurants {
+        @include marker-coloring($restaurants-color);
+    }
+
+    &.sorties {
+        @include marker-coloring($outing-color);
+    }
+
+    &.events {
+        @include marker-coloring($events-color);
+    }
 }
 
 .trek-cluster {
