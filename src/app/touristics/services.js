@@ -36,7 +36,8 @@ function contentsService(globalSettings, settingsFactory, $resource, $q, utilsFa
             }
             content.category = {
                 name: utilsFactory.removeDiacritics(content.properties.category.label.toLowerCase()),
-                id: content.properties.category.id
+                id: content.properties.category.id,
+                pictogram: content.properties.category.pictogram
             };
 
         });
@@ -112,7 +113,7 @@ function eventsService(globalSettings, settingsFactory, $resource, $q) {
                 });
             }
 
-            trEvent.category = {name: 'events', id: globalSettings.EVENTS_CATEGORY_ID};
+            trEvent.category = {name: 'events', id: globalSettings.EVENTS_CATEGORY_ID, pictogram: '/images/icons/events-category.svg'};
 
         });
         return eventsData;
