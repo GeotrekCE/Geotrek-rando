@@ -66,3 +66,7 @@
         border-color: $current-color;
     }
 }
+
+@mixin category-color($current-color) {
+    color: $current-color;
+}

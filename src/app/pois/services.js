@@ -48,6 +48,9 @@ function poisService($resource, $q, globalSettings, settingsFactory) {
             var requests = $resource(url, {}, {
                 query: {
                     method: 'GET',
+                    params: {
+                        format: 'geojson'
+                    },
                     cache: true,
 
                 }

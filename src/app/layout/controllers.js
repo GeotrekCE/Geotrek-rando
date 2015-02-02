@@ -9,7 +9,7 @@ function HeaderController() {
 function SidebarHomeController() {
 }
 
-function SidebarDetailController($scope, $stateParams, utilsFactory, resultsService) {
+function SidebarDetailController($scope, $rootScope, $stateParams, resultsService, favoritesService) {
 
     function getResultDetails() {
         resultsService.getAResult($stateParams.slug)
@@ -19,6 +19,18 @@ function SidebarDetailController($scope, $stateParams, utilsFactory, resultsServ
                 }
             );
     }
+
+    $scope.toggleFavorites = function (currentElement) {
+        var currentAction = '';
+        if (favoritesService.isInFavorites(currentElement)) {
+            currentAction = 'remove';
+        } else {
+            currentAction = 'add';
+        }
+        $rootScope.$broadcast('changeFavorite', {element: currentElement, action: currentAction});
+    };
+
+    $scope.isInFavorites = favoritesService.isInFavorites;
 
     getResultDetails();
 
