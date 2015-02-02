@@ -43,8 +43,11 @@
             }
             .isFav i {
                 font-size: 1.5em;
-                color: red;
             }
         }
-    }  
+    }
+
+    & > div {
+        @include detail-sidebar-coloring();
+    }
 }

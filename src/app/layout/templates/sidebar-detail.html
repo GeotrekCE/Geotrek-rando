@@ -1,4 +1,4 @@
-<div>
+<div class="category-{{result.category.name}}">
     <ul class="detail-actions">
         <li class="back-to-home">
             <button tooltip-placement="right" tooltip="Retour à la carte">
@@ -17,12 +17,12 @@
             </button>
         </li>
         <li class="favorites">
-            <button class="isFav" ng-if="!isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="right" tooltip="Dans mes favoris">
+            <button class="isFav" ng-if="isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="right" tooltip="Dans mes favoris">
                 <i class="fa fa-heart"></i>
                 <span class="sr-only">Dans mes favoris</span>
             </button>
 
-            <button ng-if="isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="right" tooltip="Ajouter à mes favoris">
+            <button ng-if="!isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="right" tooltip="Ajouter à mes favoris">
                 <i class="fa fa-heart"></i>
                 <span class="sr-only">Ajouter à mes favoris</span>
             </button>

@@ -88,3 +88,13 @@
         }
     }
 }
+
+@mixin detail-sidebar-coloring() {
+    @each $category in $categories {
+        &.category-#{nth($category, 1)} {
+            .isFav i {
+                color: nth($category, 2);
+            }
+        }
+    }
+}

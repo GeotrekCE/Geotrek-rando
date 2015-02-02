@@ -84,49 +84,51 @@
                     }
                 }
             }
-            .choices {
-                position: absolute;
-                top: 0;
-                left: 100%;
-                width: 0;
-                overflow: hidden;
-                z-index: 11;
-                background: white;
-                border: 0px solid $primary-color;
-                .form-group {
-                    margin: 5px;
+            
+        }
+
+        .choices {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            width: 0;
+            overflow: hidden;
+            z-index: 11;
+            background: white;
+            border: 0px solid $primary-color;
+            .form-group {
+                margin: 5px;
+                background: $light-grey;
+                position: relative;
+                input {
+                    display: block;
+                    position: absolute;
+                    cursor: pointer;
+                    -webkit-appearance: none;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+                    margin: 0;
+                    z-index: 11;
+                    &:checked + label {
+                        background: $primary-color;
+                        color: white;
+                    }
+                    &:focus {
+                        outline: none;
+                        outline-color: transparent;
+                        outline-style: none;
+                        border: 1px solid $primary-color;
+                        box-shadow: 0px 1px 2px 0px $dark-grey;
+                    }
+                }
+                label {
+                    margin: 0;
+                    width: 100%;
+                    padding: 0.5em;
                     background: $light-grey;
-                    position: relative;
-                    input {
-                        display: block;
-                        position: absolute;
-                        cursor: pointer;
-                        -webkit-appearance: none;
-                        top: 0;
-                        left: 0;
-                        height: 100%;
-                        width: 100%;
-                        margin: 0;
-                        z-index: 11;
-                        &:checked + label {
-                            background: $primary-color;
-                            color: white;
-                        }
-                        &:focus {
-                            outline: none;
-                            outline-color: transparent;
-                            outline-style: none;
-                            border: 1px solid $primary-color;
-                            box-shadow: 0px 1px 2px 0px $dark-grey;
-                        }
-                    }
-                    label {
-                        margin: 0;
-                        width: 100%;
-                        padding: 0.5em;
-                        background: $light-grey;
-                        color: $dark-grey;
-                    }
+                    color: $dark-grey;
                 }
             }
         }
