@@ -26,6 +26,7 @@
             padding: 0 15px;
             box-shadow: 0px 1px 2px 0px $dark-grey;
             transition: all 0.1s ease-out;
+            @include results-list-coloring();
             .visual {
                 height: 150px;
                 margin-left: -15px;
@@ -112,26 +113,6 @@
                     right: 6px;
                     top: 11px;
                 }
-            }
-
-            &.category-treks {
-                @include results-list-coloring($treks-color);
-            }
-
-            &.category-musee {
-                @include results-list-coloring($museums-color);
-            }
-
-            &.category-restaurants {
-                @include results-list-coloring($restaurants-color);
-            }
-
-            &.category-sorties {
-                @include results-list-coloring($outing-color);
-            }
-
-            &.category-events {
-                @include results-list-coloring($events-color);
             }
 
         }

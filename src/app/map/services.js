@@ -580,7 +580,7 @@ function iconsService($compile) {
             iconSize: [40, 56],
             iconAnchor: [20, 56],
             labelAnchor: [20, 20],
-            className: category.name
+            className: 'category-' + category.name
         });
         return newIcon;
     };

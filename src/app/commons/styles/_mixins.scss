@@ -1,72 +1,90 @@
-@mixin categories-list-coloring($current-color) {
-    button {
-        svg {
-            fill: $current-color;
+@mixin categories-list-coloring() {
+    @each $category in $categories {
+        &.category-#{nth($category, 1)} {
+            button {
+                svg {
+                    fill: nth($category, 2);
+                }
+            }
+            &.active {
+                button {
+                    background: nth($category, 2);
+                    svg {
+                        fill: white;
+                    }
+                }
+            }
+            .filters {
+                .category-name {
+                    background: nth($category, 2);
+                }
+                form {
+                    border-color: nth($category, 2);
+                }
+                .choices {
+                    border-color: nth($category, 2);
+                    input {
+                        &:checked + label {
+                            background-color: nth($category, 2);
+                        }
+                        &:focus {
+                            border-color: nth($category, 2);
+                        }
+                    }
+                }
+            } 
         }
     }
-    &.active {
-        button {
-            background: $current-color;
-            svg {
-                fill: white;
+}
+
+@mixin results-list-coloring() {
+    @each $category in $categories {
+        &.category-#{nth($category, 1)} {
+            border-color: nth($category, 2);
+            .know-more {
+                border-bottom: 40px solid nth($category, 2);
+            }
+            .fav-or-not.isFav i {
+                color: nth($category, 2);
             }
         }
     }
-    .filters {
-        .category-name {
-            background: $current-color;
-        }
-        form {
-            border-color: $current-color;
-        }
-        .choices {
-            border-color: $current-color;
-            input {
-                &:checked + label {
-                    background-color: $current-color;
-                }
-                &:focus {
-                    border-color: $current-color;
+}
+
+@mixin favorites-list-coloring() {
+    @each $category in $categories {
+        &.category-#{nth($category, 1)} {
+            border-color: nth($category, 2);
+            #header .navbar &:hover {
+                a {
+                    color: nth($category, 2);
                 }
             }
         }
     }
 }
 
-@mixin results-list-coloring($current-color) {
-    border-color: $current-color;
-    .know-more {
-        border-bottom: 40px solid $current-color;
-    }
-    .fav-or-not.isFav i {
-        color: $current-color;
-    }
-}
-
-@mixin favorites-list-coloring($current-color) {
-    border-color: $current-color;
-    #header .navbar &:hover {
-        a {
-            color: $current-color;
+@mixin marker-coloring() {
+    @each $category in $categories {
+        &.category-#{nth($category, 1)} {
+            svg .base {
+                fill: nth($category, 2);
+            }
         }
     }
 }
 
-@mixin marker-coloring($current-color) {
-    svg .base {
-        fill: $current-color;
+@mixin detail-page-coloring() {
+    @each $category in $categories {
+        &.category-#{nth($category, 1)} {
+            .top-part {
+                .cat-icon {
+                    background: nth($category, 2);
+                }
+                .pictures {
+                    border-color: nth($category, 2);
+                }
+            }
+        }
     }
-}
-
-@mixin detail-page-coloring($current-color) {
-    .cat-icon {
-        background: $current-color;
-    }
-    .pictures {
-        border-color: $current-color;
-    }
-}
-
-@mixin category-color($current-color) {
-    color: $current-color;
 }

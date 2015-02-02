@@ -10,6 +10,7 @@
             display: flex;
             margin: 0.8em 0;
             border-left: 5px solid $dark-grey;
+            @include favorites-list-coloring();
             a {
                 flex: 1;
                 display: flex;
@@ -31,26 +32,6 @@
                         height: auto;
                     }
                 }
-            }
-
-            &.category-treks {
-                @include favorites-list-coloring($treks-color);
-            }
-
-            &.category-musee {
-                @include favorites-list-coloring($museums-color);
-            }
-
-            &.category-restaurants {
-                @include favorites-list-coloring($restaurants-color);
-            }
-
-            &.category-sorties {
-                @include favorites-list-coloring($outing-color);
-            }
-
-            &.category-events {
-                @include favorites-list-coloring($events-color);
             }
         }
     }

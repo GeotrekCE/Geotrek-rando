@@ -1,5 +1,6 @@
 .leaflet-marker-icon {
     position: relative;
+    @include marker-coloring();
     .cat-icon {
         position: absolute;
         top: 10px;
@@ -11,25 +12,6 @@
     }
     svg .base {
         fill: $primary-color;
-    }
-    &.treks {
-        @include marker-coloring($treks-color);
-    }
-
-    &.musee {
-        @include marker-coloring($museums-color);
-    }
-
-    &.restaurants {
-        @include marker-coloring($restaurants-color);
-    }
-
-    &.sorties {
-        @include marker-coloring($outing-color);
-    }
-
-    &.events {
-        @include marker-coloring($events-color);
     }
 }
 

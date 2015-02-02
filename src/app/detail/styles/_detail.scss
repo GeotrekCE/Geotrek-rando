@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     background: $neutral-grey;
+    @include detail-page-coloring();
     .top-part {
         margin: 1% 0 0;
         flex: 1;
@@ -194,25 +195,5 @@
             display: flex;
         }
 
-    }
-
-    &.category-treks {
-        @include detail-page-coloring($treks-color);
-    }
-
-    &.category-musee {
-        @include detail-page-coloring($museums-color);
-    }
-
-    &.category-restaurants {
-        @include detail-page-coloring($restaurants-color);
-    }
-
-    &.category-sorties {
-        @include detail-page-coloring($outing-color);
-    }
-
-    &.category-events {
-        @include detail-page-coloring($events-color);
     }
 }
