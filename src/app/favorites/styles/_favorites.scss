@@ -1,0 +1,85 @@
+.favorites-liste {
+    display: flex;
+    flex-direction: column;
+    ul {
+        list-style: none;
+        padding: 0 1em;
+        .favorite {
+            min-width: 400px;
+            flex: 1;
+            display: flex;
+            margin: 0.8em 0;
+            border-left: 5px solid $dark-grey;
+            a {
+                flex: 1;
+                display: flex;
+                padding: 0;
+                text-decoration: none;
+                padding: 0;
+                span {
+                    flex: 1;
+                    margin-left: 1em;
+                    align-self: center;
+                }
+                .picture {
+                    height: 3em;
+                    width: 3em;
+                    overflow: hidden;
+                    float: left;
+                    img {
+                        max-width: 150%;
+                        height: auto;
+                    }
+                }
+            }
+
+            &.category-treks {
+                @include favorites-list-coloring($treks-color);
+            }
+
+            &.category-musee {
+                @include favorites-list-coloring($museums-color);
+            }
+
+            &.category-restaurants {
+                @include favorites-list-coloring($restaurants-color);
+            }
+
+            &.category-sorties {
+                @include favorites-list-coloring($outing-color);
+            }
+
+            &.category-events {
+                @include favorites-list-coloring($events-color);
+            }
+        }
+    }
+    .header {
+        flex: 1;
+        display: flex;
+        padding: 1em;
+        background: $light-grey;
+        span {
+            flex: 1;
+            font-size: 1.2em;
+            font-weight: bold;
+            align-self: center;
+        }
+    }
+    .remove {
+        flex: 1;
+        max-width: 3em;
+        align-self: center;
+        cursor: pointer;
+        i {
+            font-size: 1.2em;
+            opacity: 0.6;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+    .no-favorites {
+        padding: 1em;
+    }
+}

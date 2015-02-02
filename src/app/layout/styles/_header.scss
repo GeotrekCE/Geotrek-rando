@@ -10,70 +10,78 @@
         margin: 0;
         padding: 0;
         height: 100%;
-    }
+    }   
+}
 
-    .navbar-header {
+.navbar-header {
+    height: 100%;
+    .navbar-brand {
         height: 100%;
-        .navbar-brand {
+        margin: 0;
+        padding: 0;
+        background: $primary-color url(#{$root-images-path}/mask-header.svg) no-repeat center right;
+        #logo {
+            float: left;
+        }
+        #banner {
+            float: left;
+            color: white;
             height: 100%;
-            margin: 0;
-            padding: 0;
-            background: $primary-color url(#{$root-images-path}/mask-header.svg) no-repeat center right;
-            #logo {
-                float: left;
-            }
-            #banner {
-                float: left;
-                color: white;
-                height: 100%;
-                line-height: 70px;
-                h1 {
-                    font-size: 1.2em;
-                    font-weight: lighter;
-                    text-transform: uppercase;
-                    margin: 0 10px;
-                    line-height: 1.2em;
-                    margin-right: 200px;
-                    vertical-align: middle;
-                    display: inline-block;
-                    letter-spacing: 2px;
-                }
+            line-height: 70px;
+            h1 {
+                font-size: 1.2em;
+                font-weight: lighter;
+                text-transform: uppercase;
+                margin: 0 10px;
+                line-height: 1.2em;
+                margin-right: 200px;
+                vertical-align: middle;
+                display: inline-block;
+                letter-spacing: 2px;
             }
         }
     }
+}
 
-    .navbar-nav {
-        height: 100%;
-        line-height: 70px;
-        &.navbar-right {
-            margin-right: 0;
+.navbar-nav {
+    height: 100%;
+    line-height: 70px;
+    &.navbar-right {
+        margin-right: 0;
+    }
+    li {
+        line-height: normal;
+        a {
+            text-transform: uppercase;
+            color: $dark-grey;
+            padding-top: 25px;
+            padding-bottom: 25px;
         }
-        li {
-            line-height: normal;
-            a, .glyphicon {
-                text-transform: uppercase;
-                color: $dark-grey;
-                padding-top: 25px;
-                padding-bottom: 25px;
+        .glyphicon {
+            color: $dark-grey;
+            font-size: 1.1em;
+            line-height: 1.1em;
+            cursor: pointer;
+        }
+        > .glyphicon {
+            padding: 26px 15px 28px;
+        }
+        &:hover, &:focus {
+            background-color: $light-grey;
+            > a, > .glyphicon, > a > .glyphicon {
+                color: $primary-color;
             }
-            .glyphicon {
-                padding: 25px 15px;
-                color: $dark-grey;
-                font-size: 1.2em;
-                line-height: 1.2em;
-                cursor: pointer;
-            }
-            &:hover, &:focus {
-                background-color: $light-grey;
-                > a, > .glyphicon {
-                    color: $primary-color;
-                }
-            }
-            .dropdown-menu a {
+        }
+        .dropdown-menu {
+            max-height: 500%;
+            overflow: auto;
+            a {
                 padding-top: 15px;
                 padding-bottom: 15px;
             }
         }
+        &.favorites .dropdown-menu {
+            padding: 0;
+        }
     }
-    
 }

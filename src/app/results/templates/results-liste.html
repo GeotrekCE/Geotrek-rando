@@ -4,7 +4,7 @@
         <li ng-repeat="result in results" id="result-{{result.category.name}}-{{result.id}}">
             <div class="result category-{{result.category.name}}">
                 <div class="visual">
-                    <div class="fav-or-not">
+                    <div class="fav-or-not" ng-click="toggleFavorites(result)" ng-class="{isFav: isInFavorites(result)}">
                         <i class="glyphicon glyphicon-heart"></i>
                     </div>
                     <img ng-if="result.properties.pictures[0]" ng-src="{{result.properties.pictures[0].url}}" ng-alt="{{result.properties.pictures[0].title}}">

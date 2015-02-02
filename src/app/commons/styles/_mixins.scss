@@ -38,6 +38,18 @@
     .know-more {
         border-bottom: 40px solid $current-color;
     }
+    .fav-or-not.isFav i {
+        color: $current-color;
+    }
+}
+
+@mixin favorites-list-coloring($current-color) {
+    border-color: $current-color;
+    #header .navbar &:hover {
+        a {
+            color: $current-color;
+        }
+    }
 }
 
 @mixin marker-coloring($current-color) {

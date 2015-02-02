@@ -13,6 +13,7 @@ var dependencies = [
     'rando.categories',
     'rando.results',
     'rando.detail',
+    'rando.favorites',
 
 
     // External stuff
@@ -50,3 +51,4 @@ require('./categories');
 require('./filters');
 require('./map');
 require('./detail');
+require('./favorites');

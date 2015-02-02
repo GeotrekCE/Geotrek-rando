@@ -1,6 +1,6 @@
 'use strict';
 
-function ResultsListeController($scope, resultsService) {
+function ResultsListeController($scope, $rootScope, favoritesService, resultsService) {
 
     function updateResults() {
 
@@ -12,6 +12,18 @@ function ResultsListeController($scope, resultsService) {
             );
 
     }
+
+    $scope.toggleFavorites = function (currentElement) {
+        var currentAction = '';
+        if (favoritesService.isInFavorites(currentElement)) {
+            currentAction = 'remove';
+        } else {
+            currentAction = 'add';
+        }
+        $rootScope.$broadcast('changeFavorite', {element: currentElement, action: currentAction});
+    };
+
+    $scope.isInFavorites = favoritesService.isInFavorites;
 
     updateResults();
 

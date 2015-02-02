@@ -48,6 +48,11 @@
                             opacity: 1;
                         }  
                     }
+                    &.isFav {
+                        i {
+                            opacity: 1;
+                        }
+                    }
                 }
                 img {
                     width: 100%;

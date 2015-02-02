@@ -78,7 +78,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                 .then(
                     function (treks) {
                         _.forEach(treks.features, function (trek) {
-                            if (trek.properties.slug === elementSlug) {
+                            if (trek.properties.slug === elementSlug && trek.properties.published) {
                                 deferred.resolve(trek);
                             }
                         });
@@ -92,7 +92,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                 .then(
                     function (contents) {
                         _.forEach(contents.features, function (content) {
-                            if (content.properties.slug === elementSlug) {
+                            if (content.properties.slug === elementSlug && content.properties.published) {
                                 deferred.resolve(content);
                             }
                         });
@@ -105,7 +105,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                 .then(
                     function (trEvents) {
                         _.forEach(trEvents.features, function (trEvent) {
-                            if (trEvent.properties.slug === elementSlug) {
+                            if (trEvent.properties.slug === elementSlug && trEvent.properties.published) {
                                 deferred.resolve(trEvent);
                             }
                         });
