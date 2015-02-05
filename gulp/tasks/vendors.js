@@ -50,7 +50,8 @@ gulp.task('vendors', function () {
         .bundle()
         .on('error', handleErrors)
         .pipe(exorcist(
-            config.dest + '/maps/' + config.outputName + '.map'
+            config.dest + '/maps/' + config.outputName + '.map',
+            'maps/' + config.outputName + '.map'
         ))
         .pipe(source(config.outputName))
         .pipe(streamify(uglify()))

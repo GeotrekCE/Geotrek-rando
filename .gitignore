@@ -5,7 +5,6 @@ Desktop.ini
 node_modules
 
 # Prevent js bundle and compiled sass to be push
-src/maps/*
 src/rando.js
 src/rando-vendors.js
 src/rando.css
