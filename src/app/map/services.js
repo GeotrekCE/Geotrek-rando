@@ -2,7 +2,8 @@
 
 function mapService($q, globalSettings, treksService, iconsService) {
 
-    var self = this;
+    var self = this,
+        loadingMarkers = false;
 
     this.createLayer = function () {
 
@@ -60,91 +61,108 @@ function mapService($q, globalSettings, treksService, iconsService) {
 
         var counter = 0;
 
-        this.treksIconified = this.map.getZoom() < globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL;
-        this.clearAllLayers();
+        if (!self.loadingMarkers) {
+            self.loadingMarkers = true;
 
-        _.forEach(results, function (result) {
+            this.treksIconified = this.map.getZoom() < globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL;
+            this.clearAllLayers();
 
-            counter++;
+            _.forEach(results, function (result) {
 
-            var currentLayer,
-                currentCount = counter,
-                type = '',
-                listeEquivalent;
+                counter++;
+
+                var currentLayer,
+                    currentCount = counter,
+                    type = '',
+                    listeEquivalent;
+
+                if (parseInt(result.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10)) {
+                    if (self.treksIconified) {
+                        currentLayer = self._treksMarkersLayer;
+
+                    } else {
+                        currentLayer = self._treksgeoJsonLayer;
+                    }
+                } else {
+                    currentLayer = self._touristicsMarkersLayer;
+                }
+
+                if (parseInt(result.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10) && !self.treksIconified) {
+                    type = 'geojson';
+                } else {
+                    type = 'marker';
+                }
+
+                self.createLayerFromElement(result, type)
+                    .then(
+                        function (layer) {
+                            layer.on({
+                                mouseover: function () {
+                                    listeEquivalent = jQuery('#result-' + result.category.name + '-' + result.id);
+                                    if (!listeEquivalent.hasClass('hovered')) {
+                                        listeEquivalent.addClass('hovered');
+                                    }
+                                },
+                                mouseout: function () {
+                                    listeEquivalent = jQuery('#result-' + result.category.name + '-' + result.id);
+                                    if (listeEquivalent.hasClass('hovered')) {
+                                        listeEquivalent.removeClass('hovered');
+                                    }
+                                },
+                                click: function () {
+                                    console.log('marker Clicked');
+                                    //$state.go("home.map.detail", { trekId: result.id });
+                                }
+                            });
+                            currentLayer.addLayer(layer);
+                            self._clustersLayer.addLayer(currentLayer);
+                            if (currentCount === _.size(results)) {
+                                self.updateBounds(updateBounds, self._clustersLayer);
+                                self.loadingMarkers = false;
+                            }
+                        }
+                    );
+
+            });
+        }
+
+    };
+
+    this.displayDetail = function (result, updateBounds) {
+
+        var type = '',
+            currentLayer;
+
+        if (!self.loadingMarkers) {
+
+            self.loadingMarkers = true;
+
+            this.clearAllLayers();
 
             if (parseInt(result.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10)) {
-                if (self.treksIconified) {
-                    currentLayer = self._treksMarkersLayer;
+                currentLayer = self._treksgeoJsonLayer;
+                type = 'geojson';
 
-                } else {
-                    currentLayer = self._treksgeoJsonLayer;
-                }
             } else {
                 currentLayer = self._touristicsMarkersLayer;
-            }
-
-            if (parseInt(result.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10) && !self.treksIconified) {
-                type = 'geojson';
-            } else {
                 type = 'marker';
             }
 
             self.createLayerFromElement(result, type)
                 .then(
                     function (layer) {
-                        layer.on({
-                            mouseover: function () {
-                                listeEquivalent = jQuery('#result-' + result.category.name + '-' + result.id);
-                                if (!listeEquivalent.hasClass('hovered')) {
-                                    listeEquivalent.addClass('hovered');
-                                }
-                            },
-                            mouseout: function () {
-                                listeEquivalent = jQuery('#result-' + result.category.name + '-' + result.id);
-                                if (listeEquivalent.hasClass('hovered')) {
-                                    listeEquivalent.removeClass('hovered');
-                                }
-                            },
-                            click: function () {
-                                console.log('marker Clicked');
-                                //$state.go("home.map.detail", { trekId: result.id });
-                            }
-                        });
                         currentLayer.addLayer(layer);
                         self._clustersLayer.addLayer(currentLayer);
-                        if (currentCount === _.size(results)) {
+
+                        if (parseInt(result.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10)) {
+                            self.updateBounds(updateBounds, currentLayer);
+                        } else {
                             self.updateBounds(updateBounds, self._clustersLayer);
                         }
+
+                        self.loadingMarkers = false;
                     }
                 );
-
-        });
-
-    };
-
-    this.displayDetail = function (result, updateBounds) {
-
-        var currentElement,
-            currentLayer;
-
-        this.clearAllLayers();
-
-        if (parseInt(result.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10)) {
-            currentLayer = self._treksgeoJsonLayer;
-            currentElement = self.createLayerFromElement(result, 'geojson');
-
-        } else {
-            currentLayer = self._touristicsMarkersLayer;
-            currentElement = self.createLayerFromElement(result, 'marker');
-        }
-
-        currentLayer.addLayer(currentElement);
-        self._clustersLayer.addLayer(currentLayer);
-
-        if (parseInt(result.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10)) {
-            self.updateBounds(updateBounds, currentLayer);
-        } else {
-            self.updateBounds(updateBounds, self._clustersLayer);
         }
 
     };
