@@ -28,7 +28,6 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
                 if (aTrek.properties.usages && aTrek.properties.usages.length > 0) {
                     _.forEach(aTrek.properties.usages, function (usage) {
-
                         if (!(utilsFactory.idIsInArray(treksUsages, usage)) && usage !== undefined) {
                             treksUsages.push(usage);
                         }
@@ -86,18 +85,20 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
         _.forEach(events.features, function (anEvent) {
 
-            if (!(utilsFactory.idIsInArray(eventsUsages, anEvent.type))) {
-                eventsUsages.push(anEvent.properties.type);
-            }
+            if (anEvent.properties.published) {
+                if (!(utilsFactory.idIsInArray(eventsUsages, anEvent.properties.type))) {
+                    eventsUsages.push(anEvent.properties.type);
+                }
 
-            if (anEvent.properties.themes && anEvent.properties.themes.length > 0) {
-                _.forEach(anEvent.properties.themes, function (theme) {
+                if (anEvent.properties.themes && anEvent.properties.themes.length > 0) {
+                    _.forEach(anEvent.properties.themes, function (theme) {
 
-                    if (!(utilsFactory.idIsInArray(themes, theme)) && theme !== undefined) {
-                        themes.push(theme);
-                    }
+                        if (!(utilsFactory.idIsInArray(themes, theme)) && theme !== undefined) {
+                            themes.push(theme);
+                        }
 
-                });
+                    });
+                }
             }
 
         });
@@ -124,54 +125,58 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
         _.forEach(contents.features, function (aContent) {
 
-            if (!(utilsFactory.idIsInArray(contentsCategories, aContent.properties.category))) {
+            if (aContent.properties.published) {
 
-                var currentCategory = {
-                    id: aContent.properties.category.id,
-                    label: aContent.properties.category.label,
-                    pictogram: aContent.properties.category.pictogram,
-                    type1_label: aContent.properties.category.type1_label,
-                    type2_label: aContent.properties.category.type2_label,
-                    type1: aContent.properties.type1 || [],
-                    type2: aContent.properties.type2 || [],
-                    themes: aContent.properties.themes || [],
-                    cat_class: 'category-' + utilsFactory.removeDiacritics(aContent.properties.category.label.toLowerCase())
-                };
+                if (!(utilsFactory.idIsInArray(contentsCategories, aContent.properties.category))) {
 
-                contentsCategories.push(currentCategory);
+                    var currentCategory = {
+                        id: aContent.properties.category.id,
+                        label: aContent.properties.category.label,
+                        pictogram: aContent.properties.category.pictogram,
+                        type1_label: aContent.properties.category.type1_label,
+                        type2_label: aContent.properties.category.type2_label,
+                        type1: aContent.properties.type1 || [],
+                        type2: aContent.properties.type2 || [],
+                        themes: aContent.properties.themes || [],
+                        cat_class: 'category-' + utilsFactory.removeDiacritics(aContent.properties.category.label.toLowerCase())
+                    };
 
-            } else {
+                    contentsCategories.push(currentCategory);
 
-                var catIndex = utilsFactory.findIndexOfId(contentsCategories, aContent.properties.category.id);
+                } else {
 
-                _.forEach(aContent.properties.type1, function (aType) {
+                    var catIndex = utilsFactory.findIndexOfId(contentsCategories, aContent.properties.category.id);
 
-                    if (!(utilsFactory.idIsInArray(contentsCategories[catIndex].type1, aType))) {
+                    _.forEach(aContent.properties.type1, function (aType) {
 
-                        contentsCategories[catIndex].type1.push(aType);
+                        if (!(utilsFactory.idIsInArray(contentsCategories[catIndex].type1, aType))) {
 
-                    }
+                            contentsCategories[catIndex].type1.push(aType);
 
-                });
-
-                _.forEach(aContent.properties.type2, function (aType) {
-
-                    if (!(utilsFactory.idIsInArray(contentsCategories[catIndex].type2, aType))) {
-
-                        contentsCategories[catIndex].type2.push(aType);
-
-                    }
-
-                });
-
-                if (aContent.properties.themes && aContent.properties.themes.length > 0) {
-                    _.forEach(aContent.properties.themes, function (theme) {
-
-                        if (!(utilsFactory.idIsInArray(contentsCategories[catIndex].themes, theme)) && theme !== undefined) {
-                            contentsCategories[catIndex].themes.push(theme);
                         }
 
                     });
+
+                    _.forEach(aContent.properties.type2, function (aType) {
+
+                        if (!(utilsFactory.idIsInArray(contentsCategories[catIndex].type2, aType))) {
+
+                            contentsCategories[catIndex].type2.push(aType);
+
+                        }
+
+                    });
+
+                    if (aContent.properties.themes && aContent.properties.themes.length > 0) {
+                        _.forEach(aContent.properties.themes, function (theme) {
+
+                            if (!(utilsFactory.idIsInArray(contentsCategories[catIndex].themes, theme)) && theme !== undefined) {
+                                contentsCategories[catIndex].themes.push(theme);
+                            }
+
+                        });
+                    }
+
                 }
 
             }

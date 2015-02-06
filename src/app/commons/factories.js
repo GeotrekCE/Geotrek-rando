@@ -126,6 +126,10 @@ function utilsFactory($sce) {
 
         var isInArray = false;
 
+        if (element === null) {
+            return true;
+        }
+
         _.forEach(anArray, function (arrayElement) {
             if (arrayElement.id === element.id) {
                 isInArray = true;

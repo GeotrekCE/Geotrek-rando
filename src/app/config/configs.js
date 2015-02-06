@@ -2,7 +2,7 @@
 
 var constants = {
 
-    DOMAIN: 'http://prod-geotrek-fr.makina-corpus.net',
+    DOMAIN: 'http://geotrekdemo.ecrins-parcnational.fr',
     DEFAULT_LANGUAGE: 'fr',
 
 
