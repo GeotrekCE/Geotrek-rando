@@ -11,7 +11,7 @@
         z-index: 99999;
         transition: all .2s;
         border-radius: 3px 0px 0px 0px;
-        &.minimized {
+        &[class*="minimized"] {
             -webkit-transform: rotate(180deg);
             transform: rotate(180deg);
             border-radius: 0px;
