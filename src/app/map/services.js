@@ -1,6 +1,6 @@
 'use strict';
 
-function mapService(globalSettings, treksService, iconsService) {
+function mapService($q, globalSettings, treksService, iconsService) {
 
     var self = this;
 
@@ -49,27 +49,33 @@ function mapService(globalSettings, treksService, iconsService) {
 
     this.updateBounds = function (updateBounds, layer) {
 
-        if ((updateBounds === undefined) || (updateBounds === true)) {    
+        if ((updateBounds === undefined) || (updateBounds === true)) {
             self.map.fitBounds(layer.getBounds());
         }
 
     };
 
     // Add treks geojson to the map
-    this.displayResults = function (scope, results, updateBounds) {
+    this.displayResults = function (results, updateBounds) {
+
+        var counter = 0;
 
         this.treksIconified = this.map.getZoom() < globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL;
         this.clearAllLayers();
 
         _.forEach(results, function (result) {
+
+            counter++;
+
             var currentLayer,
-                currentMarker,
+                currentCount = counter,
+                type = '',
                 listeEquivalent;
 
             if (parseInt(result.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10)) {
                 if (self.treksIconified) {
                     currentLayer = self._treksMarkersLayer;
-                    
+
                 } else {
                     currentLayer = self._treksgeoJsonLayer;
                 }
@@ -78,38 +84,45 @@ function mapService(globalSettings, treksService, iconsService) {
             }
 
             if (parseInt(result.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10) && !self.treksIconified) {
-                currentMarker = self.createGeoJSONfromElement(result);
+                type = 'geojson';
             } else {
-                currentMarker = self.createMarkerFromElement(scope, result);
+                type = 'marker';
             }
 
-            currentMarker.on({
-                mouseover: function () {
-                    listeEquivalent = jQuery('#result-' + result.category.name + '-' + result.id);
-                    if (!listeEquivalent.hasClass('hovered')) {
-                        listeEquivalent.addClass('hovered');
+            self.createLayerFromElement(result, type)
+                .then(
+                    function (layer) {
+                        layer.on({
+                            mouseover: function () {
+                                listeEquivalent = jQuery('#result-' + result.category.name + '-' + result.id);
+                                if (!listeEquivalent.hasClass('hovered')) {
+                                    listeEquivalent.addClass('hovered');
+                                }
+                            },
+                            mouseout: function () {
+                                listeEquivalent = jQuery('#result-' + result.category.name + '-' + result.id);
+                                if (listeEquivalent.hasClass('hovered')) {
+                                    listeEquivalent.removeClass('hovered');
+                                }
+                            },
+                            click: function () {
+                                console.log('marker Clicked');
+                                //$state.go("home.map.detail", { trekId: result.id });
+                            }
+                        });
+                        currentLayer.addLayer(layer);
+                        self._clustersLayer.addLayer(currentLayer);
+                        if (currentCount === _.size(results)) {
+                            self.updateBounds(updateBounds, self._clustersLayer);
+                        }
                     }
-                },
-                mouseout: function () {
-                    listeEquivalent = jQuery('#result-' + result.category.name + '-' + result.id);
-                    if (listeEquivalent.hasClass('hovered')) {
-                        listeEquivalent.removeClass('hovered');
-                    }
-                },
-                click: function () {
-                    console.log('marker Clicked');
-                    //$state.go("home.map.detail", { trekId: result.id });
-                }
-            });
-            currentLayer.addLayer(currentMarker);
-            self._clustersLayer.addLayer(currentLayer);
-        });
+                );
 
-        self.updateBounds(updateBounds, self._clustersLayer);
+        });
 
     };
 
-    this.displayDetail = function (scope, result, updateBounds) {
+    this.displayDetail = function (result, updateBounds) {
 
         var currentElement,
             currentLayer;
@@ -118,11 +131,11 @@ function mapService(globalSettings, treksService, iconsService) {
 
         if (parseInt(result.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10)) {
             currentLayer = self._treksgeoJsonLayer;
-            currentElement = self.createGeoJSONfromElement(result);
-            
+            currentElement = self.createLayerFromElement(result, 'geojson');
+
         } else {
             currentLayer = self._touristicsMarkersLayer;
-            currentElement = self.createMarkerFromElement(scope, result);
+            currentElement = self.createLayerFromElement(result, 'marker');
         }
 
         currentLayer.addLayer(currentElement);
@@ -188,7 +201,7 @@ function mapService(globalSettings, treksService, iconsService) {
         this.map.addLayer(this._clustersLayer);
 
         return this.map;
-        
+
     };
 
 
@@ -279,34 +292,38 @@ function mapService(globalSettings, treksService, iconsService) {
         return markers;
     };*/
 
-    this.createMarkerFromElement = function (scope, element) {
-        var startPoint = {},
-            marker;
+    this.createLayerFromElement = function (element, type) {
+        var deferred = $q.defer();
 
-        if (parseInt(element.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10)) {
-            startPoint = treksService.getStartPoint(element);
+        if (type === "geojson") {
+            deferred.resolve(L.geoJson(element));
         } else {
-            startPoint.lng = element.geometry.coordinates[0];
-            startPoint.lat = element.geometry.coordinates[1];
+            var startPoint = {};
+
+            if (parseInt(element.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10)) {
+                startPoint = treksService.getStartPoint(element);
+            } else {
+                startPoint.lng = element.geometry.coordinates[0];
+                startPoint.lat = element.geometry.coordinates[1];
+            }
+
+            iconsService.getIcon(element.category)
+                .then(
+                    function (currentIcon) {
+
+                        var marker = L.marker(
+                            [startPoint.lat, startPoint.lng],
+                            {
+                                icon: currentIcon
+                            }
+                        );
+
+                        deferred.resolve(marker);
+                    }
+                );
         }
 
-        marker = L.marker(
-            [startPoint.lat, startPoint.lng],
-            {
-                icon: iconsService.getMarkerIcon(scope, element.category)
-            }
-        );
-
-        return marker;
-    };
-
-    this.createGeoJSONfromElement = function (element) {
-        var geoJson;
-
-        geoJson = L.geoJson(element);
-
-        return geoJson;
-
+        return deferred.promise;
     };
 
 
@@ -495,7 +512,9 @@ function mapService(globalSettings, treksService, iconsService) {
 
 }
 
-function iconsService($compile) {
+function iconsService($http, $q, categoriesService) {
+
+    var self = this;
 
     var map_icons = {
         default_icon: {},
@@ -525,6 +544,90 @@ function iconsService($compile) {
             iconSize: [40, 40],
             labelAnchor: [20, -50]
         })
+    };
+
+    this.getCategoriesIcons = function () {
+
+        var deferred = $q.defer();
+
+        if (self.categoriesIcons) {
+            deferred.resolve(self.categoriesIcons);
+        } else {
+
+            categoriesService.getCategories()
+                .then(
+                    function (categories) {
+                        var counter = 0;
+                        _.forEach(categories, function (category) {
+                            if (!self.categoriesIcons) {
+                                self.categoriesIcons = {};
+                            }
+                            counter++;
+                            var currentCounter = counter;
+                            $http.get(category.pictogram)
+                                .success(
+                                    function (icon) {
+                                        self.categoriesIcons[category.id] = icon.toString();
+                                        if (currentCounter === _.size(categories)) {
+                                            deferred.resolve(self.categoriesIcons);
+                                        }
+                                    }
+                                ).error(
+                                    function () {
+                                        self.categoriesIcons[category.id] = '';
+                                        if (currentCounter === _.size(categories)) {
+                                            deferred.resolve(self.categoriesIcons);
+                                        }
+                                    }
+                                );
+                        });
+                    }
+                );
+        }
+
+        return deferred.promise;
+    };
+
+    this.getCategoryIcon = function (categoryId) {
+
+        var deferred = $q.defer();
+
+        if (self.categoriesIcons) {
+            deferred.resolve(self.categoriesIcons[categoryId]);
+        } else {
+            self.getCategoriesIcons()
+                .then(
+                    function (icons) {
+                        deferred.resolve(icons[categoryId]);
+                    }
+                );
+        }
+
+        return deferred.promise;
+    };
+
+    this.getMarkerIcon = function () {
+        var deferred = $q.defer();
+
+        if (self.markerIcon) {
+            deferred.resolve(self.markerIcon);
+        } else {
+
+            $http.get('/images/map/marker.svg')
+                .success(
+                    function (icon) {
+                        self.markerIcon = icon.toString();
+                        deferred.resolve(self.markerIcon);
+                    }
+                ).error(
+                    function () {
+                        self.markerIcon = '';
+                        deferred.resolve(self.markerIcon);
+                    }
+                );
+        }
+
+        return deferred.promise;
     };
 
     this.getPOIIcon = function (poi) {
@@ -562,27 +665,44 @@ function iconsService($compile) {
         return map_icons.information_icon;
     };
 
-    this.getMarkerIcon = function (scope, category) {
-        var element = document.createElement('div');
-        var tempDom;
-        //var markerMarkup = '<div class="cat-icon"></div><svg version="1.1" class="map-marker" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="56px" viewBox="0 0 40 56" enable-background="new 0 0 40 56" xml:space="preserve"><path class="base" fill="#333333" d="M39.996,19.897c0-11.096-8.994-19.922-20.091-19.922c-11.096,0-19.816,9.08-19.816,20.176 c0,4.17,1.562,8.232,3.572,11.442c0,0,14.862,24.239,16.568,24.239c1.706,0,16.472-24.935,16.472-24.935 C38.796,27.882,39.996,23.984,39.996,19.897z"/><path class="top-shadow" opacity="0.2" d="M19.905,1.985c10.812,0,19.603,8.387,20.049,19.079c0.021-0.387,0.042-0.774,0.042-1.166 c0-11.096-8.994-19.922-20.091-19.922c-11.096,0-19.816,9.08-19.816,20.176c0,0.349,0.027,0.694,0.048,1.04 C0.63,10.544,9.137,1.985,19.905,1.985z"/><circle class="center-shadow" opacity="0.4" cx="19.906" cy="20.999" r="14.08"/></svg>';
-        var markerMarkup = '<div class="category-icon" ng-include="\'' + category.pictogram + '\'"></div>';
-        markerMarkup += '<div class="marker-icon" ng-include="\'/images/map/marker.svg\'"></ng-include>';
+    this.getIcon = function (category) {
 
-        tempDom = $compile(markerMarkup)(scope);
-        _.forEach(tempDom, function (currentElement) {
-            console.log(currentElement);
-            element.appendChild(currentElement);
-        });
-        console.log(element);
-        var newIcon = new L.divIcon({
-            html: element,
-            iconSize: [40, 56],
-            iconAnchor: [20, 56],
-            labelAnchor: [20, 20],
-            className: 'category-' + category.name
-        });
-        return newIcon;
+        var deferred = $q.defer(),
+            markerIcon,
+            categoryIcon;
+
+        $q.all([
+            self.getMarkerIcon()
+                .then(
+                    function (icon) {
+                        markerIcon = icon;
+                    }
+                ),
+            self.getCategoryIcon(category.id)
+                .then(
+                    function (icon) {
+                        categoryIcon = icon;
+                    }
+                )
+        ]).then(
+            function () {
+                var markup = '';
+                markup += '<div class="marker-icon">' + markerIcon + '</div>';
+                markup += '<div class="cat-icon">' + categoryIcon + '</div>';
+
+                var newIcon = new L.divIcon({
+                    html: markup,
+                    iconSize: [40, 56],
+                    iconAnchor: [20, 56],
+                    labelAnchor: [20, 20],
+                    className: 'category-' + category.name
+                });
+                deferred.resolve(newIcon);
+            }
+        );
+
+        return deferred.promise;
+
     };
 
 

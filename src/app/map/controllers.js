@@ -9,7 +9,7 @@ function MapController($scope, globalSettings, $rootScope, $state, resultsServic
                 function (data) {
                     $scope.results = data;
                     if (data.length > 0) {
-                        mapService.displayResults($scope, $scope.results, updateBounds);
+                        mapService.displayResults($scope.results, updateBounds);
                     } else {
                         mapService.clearAllLayers();
                     }
@@ -23,7 +23,7 @@ function MapController($scope, globalSettings, $rootScope, $state, resultsServic
             .then(
                 function (data) {
                     $scope.result = data;
-                    mapService.displayDetail($scope, $scope.result);
+                    mapService.displayDetail($scope.result);
                 }
             );
     }
@@ -46,7 +46,7 @@ function MapController($scope, globalSettings, $rootScope, $state, resultsServic
         if ($state.current.name === 'layout.root') {
             if ((mapService.treksIconified && $scope.map.getZoom() >= globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL)
                     || (!mapService.treksIconified && $scope.map.getZoom() < globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL)) {
-                mapService.displayResults($scope, $scope.results, false);
+                mapService.displayResults($scope.results, false);
             }
         }
 
