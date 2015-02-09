@@ -218,16 +218,16 @@ def sync_content_trekking(sender, **kwargs):
             InputFile(trek.properties.gpx, **inputkwlang).pull_if_modified()
             InputFile(trek.properties.kml, **inputkwlang).pull_if_modified()
 
-            profile_png_url = 'media/profiles/trek-%u.png' % trek.id
-            profile_png_dest = 'api/trek/%u/profile.png' % trek.id
-            InputFile(profile_png_url, store=profile_png_dest, **inputkwlang).pull_if_modified()
-
             if trek.properties.information_desk_layer:
                 # Only available in Geotrek 0.24
                 InformationDeskInputFile(trek.properties.information_desk_layer, **inputkwlang).pull_if_modified()
 
             if settings.PRINT_ENABLED:
                 InputFile(trek.properties.printable, **inputkwlang).pull_if_modified()
+
+            profile_png_url = 'media/profiles/trek-%u.png' % trek.id
+            profile_png_dest = 'api/trek/%u/profile.png' % trek.id
+            InputFile(profile_png_url, store=profile_png_dest, **inputkwlang).pull_if_modified()
 
     # Fetch media only once, since they do not depend on language
     for trek in models.Trek.tmp_objects.filter(language=settings.LANGUAGE_CODE).all():
