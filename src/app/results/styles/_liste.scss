@@ -10,7 +10,7 @@
             min-width: 50%;
             max-width: 50%;
             padding: 1em;
-            &.hovered {
+            &:hover, &.hovered {
                 //order: -1;
                 .result {
                     transform: scale(1.03);

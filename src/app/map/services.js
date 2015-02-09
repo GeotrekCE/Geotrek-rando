@@ -73,8 +73,7 @@ function mapService($q, utilsFactory, globalSettings, treksService, iconsService
 
                 var currentLayer,
                     currentCount = counter,
-                    type = '',
-                    listeEquivalent;
+                    type = '';
 
                 if (result.geometry.type !== "Point" && !self.treksIconified) {
                     currentLayer = self._treksgeoJsonLayer;
@@ -87,17 +86,21 @@ function mapService($q, utilsFactory, globalSettings, treksService, iconsService
                 self.createLayerFromElement(result, type)
                     .then(
                         function (layer) {
+                            var listeEquivalent = document.querySelector('#result-' + result.category.name + '-' + result.id);
                             layer.on({
                                 mouseover: function () {
-                                    listeEquivalent = jQuery('#result-' + result.category.name + '-' + result.id);
-                                    if (!listeEquivalent.hasClass('hovered')) {
-                                        listeEquivalent.addClass('hovered');
+                                    if (!listeEquivalent.classList.contains('hovered')) {
+                                        listeEquivalent.classList.add('hovered');
                                     }
                                 },
                                 mouseout: function () {
-                                    listeEquivalent = jQuery('#result-' + result.category.name + '-' + result.id);
-                                    if (listeEquivalent.hasClass('hovered')) {
-                                        listeEquivalent.removeClass('hovered');
+                                    if (listeEquivalent.classList.contains('hovered')) {
+                                        listeEquivalent.classList.remove('hovered');
+                                    }
+                                },
+                                remove: function () {
+                                    if (listeEquivalent.classList.contains('hovered')) {
+                                        listeEquivalent.classList.remove('hovered');
                                     }
                                 },
                                 click: function () {
@@ -306,9 +309,7 @@ function mapService($q, utilsFactory, globalSettings, treksService, iconsService
 
         if (type === "geojson") {
             var geoStyle = {
-                weight: 5,
-                opacity: 0.65,
-                className: element.category.name
+                className:  'layer-' + element.category.name + '-' + element.id + ' ' + element.category.name
             };
 
             if (element.geometry.type === 'Polygon') {
@@ -328,7 +329,7 @@ function mapService($q, utilsFactory, globalSettings, treksService, iconsService
                 startPoint.lat = element.geometry.coordinates[1];
             }
 
-            iconsService.getIcon(element.category)
+            iconsService.getIcon(element)
                 .then(
                     function (currentIcon) {
 
@@ -686,7 +687,7 @@ function iconsService($http, $q, categoriesService) {
         return map_icons.information_icon;
     };
 
-    this.getIcon = function (category) {
+    this.getIcon = function (element) {
 
         var deferred = $q.defer(),
             markerIcon,
@@ -699,7 +700,7 @@ function iconsService($http, $q, categoriesService) {
                         markerIcon = icon;
                     }
                 ),
-            self.getCategoryIcon(category.id)
+            self.getCategoryIcon(element.category.id)
                 .then(
                     function (icon) {
                         categoryIcon = icon;
@@ -716,7 +717,7 @@ function iconsService($http, $q, categoriesService) {
                     iconSize: [40, 56],
                     iconAnchor: [20, 56],
                     labelAnchor: [20, 20],
-                    className: category.name
+                    className: 'layer-' + element.category.name + '-' + element.id + ' ' + element.category.name
                 });
                 deferred.resolve(newIcon);
             }

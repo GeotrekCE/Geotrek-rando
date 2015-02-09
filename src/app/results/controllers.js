@@ -23,6 +23,21 @@ function ResultsListeController($scope, $rootScope, favoritesService, resultsSer
         $rootScope.$broadcast('changeFavorite', {element: currentElement, action: currentAction});
     };
 
+    $scope.hoverLayerElement = function (currentElement, state) {
+        var layerEquivalent = document.querySelector('.layer-' + currentElement.category.name + '-' + currentElement.id);
+        if (layerEquivalent !== null) {
+            if (state === 'enter') {
+                if (!layerEquivalent.classList.contains('hovered')) {
+                    layerEquivalent.classList.add('hovered');
+                }
+            } else {
+                if (layerEquivalent.classList.contains('hovered')) {
+                    layerEquivalent.classList.remove('hovered');
+                }
+            }
+        }
+    };
+
     $scope.isInFavorites = favoritesService.isInFavorites;
 
     updateResults();

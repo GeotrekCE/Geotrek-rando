@@ -1,6 +1,9 @@
 .leaflet-marker-icon {
     position: relative;
     @include marker-coloring();
+    > div {
+        transition: all 0.1s ease-out;
+    }
     .cat-icon {
         position: absolute;
         top: 10px;
@@ -10,6 +13,18 @@
         svg {
             fill: white;
             height: 100%;
+        }
+    }
+    &:hover, &.hovered {
+        .marker-icon {
+            transform: scale(1.2);
+            transform-origin: center bottom;
+        }
+
+        .cat-icon {
+            top: 4px;
+            transform: scale(1.2);
+            transform-origin: center bottom;
         }
     }
 }
@@ -27,7 +42,14 @@
 .leaflet-overlay-pane {
     svg {
         path {
+            weight: 5;
+            opacity: 0.7;
+            stroke-opacity: 0.7;
             @include geojson-coloring();
+            &:hover, &.hovered {
+                opacity: 1;
+                stroke-opacity: 1;
+            }
         }
     }
 }
