@@ -14,12 +14,6 @@
     }
 }
 
-.leaflet-overlay-pane {
-    svg g path{
-        @include geojson-coloring();
-    }
-}
-
 .trek-cluster {
     background: white;
     border: 8px solid $primary-color;
@@ -28,4 +22,12 @@
     text-align: center;
     color: $primary-color;
     font-weight: bold;
+}
+
+.leaflet-overlay-pane {
+    svg {
+        path {
+            @include geojson-coloring();
+        }
+    }
 }

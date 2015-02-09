@@ -77,8 +77,10 @@
 @mixin geojson-coloring() {
     @each $category in $categories {
         &.category-#{nth($category, 1)} {
-            fill: nth($category, 2);
             stroke: nth($category, 2);
+            &.fill {
+                fill: nth($category, 2);
+            }
         }
     }
 }

@@ -311,6 +311,10 @@ function mapService($q, utilsFactory, globalSettings, treksService, iconsService
                 className: element.category.name
             };
 
+            if (element.geometry.type === 'Polygon') {
+                geoStyle.className += ' fill';
+            }
+
             deferred.resolve(L.geoJson(element, {
                 style: geoStyle
             }));
