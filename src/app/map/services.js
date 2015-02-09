@@ -89,18 +89,24 @@ function mapService($q, utilsFactory, globalSettings, treksService, iconsService
                             var listeEquivalent = document.querySelector('#result-' + result.category.name + '-' + result.id);
                             layer.on({
                                 mouseover: function () {
-                                    if (!listeEquivalent.classList.contains('hovered')) {
-                                        listeEquivalent.classList.add('hovered');
+                                    if (listeEquivalent !== null) {
+                                        if (!listeEquivalent.classList.contains('hovered')) {
+                                            listeEquivalent.classList.add('hovered');
+                                        }
                                     }
                                 },
                                 mouseout: function () {
-                                    if (listeEquivalent.classList.contains('hovered')) {
-                                        listeEquivalent.classList.remove('hovered');
+                                    if (listeEquivalent !== null) {
+                                        if (listeEquivalent.classList.contains('hovered')) {
+                                            listeEquivalent.classList.remove('hovered');
+                                        }
                                     }
                                 },
                                 remove: function () {
-                                    if (listeEquivalent.classList.contains('hovered')) {
-                                        listeEquivalent.classList.remove('hovered');
+                                    if (listeEquivalent !== null) {
+                                        if (listeEquivalent.classList.contains('hovered')) {
+                                            listeEquivalent.classList.remove('hovered');
+                                        }
                                     }
                                 },
                                 click: function () {

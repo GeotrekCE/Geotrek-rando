@@ -23,6 +23,12 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
                         $scope.activeFilters.areas[areaId] = true;
                     });
 
+                    _.forEach($location.search().districts, function (districtId) {
+                        $scope.activeFilters.districts[districtId] = true;
+                    });
+
+                    console.log($scope.filters);
+
                 }
             );
     }

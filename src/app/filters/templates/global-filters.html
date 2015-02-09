@@ -14,8 +14,8 @@
                     <span>Districts <i class="caret"></i></span>
                     <div class="choices">
                         <div ng-repeat="district in filters.districts" class="district form-group">
-                            <input type="checkbox" id="district-{{district.code}}" value="{{district.code}}" ng-model="activeFilters.districts[district.code]"  ng-change="propagateActiveFilters()"/>
-                            <label for="district-{{district.code}}">
+                            <input type="checkbox" id="district-{{district.id}}" value="{{district.id}}" ng-model="activeFilters.districts[district.id]"  ng-change="propagateActiveFilters()"/>
+                            <label for="district-{{district.id}}">
                                 <span>{{district.name}}</span>
                             </label>
                         </div>
