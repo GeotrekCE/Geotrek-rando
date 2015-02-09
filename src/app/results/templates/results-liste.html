@@ -2,7 +2,7 @@
     <global-filters></global-filters>
     <ul>
         <li ng-repeat="result in results" id="result-{{result.category.name}}-{{result.id}}">
-            <div class="result category-{{result.category.name}}">
+            <div class="result {{result.category.name}}">
                 <div class="visual">
                     <div class="fav-or-not" ng-click="toggleFavorites(result)" ng-class="{isFav: isInFavorites(result)}">
                         <i class="glyphicon glyphicon-heart"></i>

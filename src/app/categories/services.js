@@ -138,7 +138,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                         type1: aContent.properties.type1 || [],
                         type2: aContent.properties.type2 || [],
                         themes: aContent.properties.themes || [],
-                        cat_class: 'category-' + utilsFactory.removeDiacritics(aContent.properties.category.label.toLowerCase())
+                        cat_class: 'category-' + utilsFactory.removeDiacritics(aContent.properties.category.label.toLowerCase().split(' ').join('-'))
                     };
 
                     contentsCategories.push(currentCategory);

@@ -4,7 +4,7 @@
         <div class="remove" ng-click="removeAllFavorites()" ng-if="favorites && favorites.length > 0"><i class="fa fa-trash"></i></div>
     </div>
     <ul ng-if="favorites && favorites.length > 0">
-        <li ng-repeat="favorite in favorites" class="favorite category-{{favorite.category.name}}" id="fav-{{favorite.category.name}}-{{favorite.id}}">
+        <li ng-repeat="favorite in favorites" class="favorite {{favorite.category.name}}" id="fav-{{favorite.category.name}}-{{favorite.id}}">
             <a ui-sref="layout.detail({slug: favorite.properties.slug})">
                 <div class="picture">
                     <img ng-src="{{favorite.properties.pictures[0].url}}" alt="{{favorite.properties.name}}-thumbnail"/>

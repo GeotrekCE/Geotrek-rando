@@ -148,12 +148,45 @@ function utilsFactory($sce) {
         }
     };
 
+    var getStartPoint = function (element) {
+        var firstPointCoordinates = element.geometry.coordinates[0];
+        if(typeof firstPointCoordinates[0] !== 'number') {
+            firstPointCoordinates = firstPointCoordinates[0];
+        }
+        return {
+            'lat': firstPointCoordinates[1],
+            'lng': firstPointCoordinates[0]
+        };
+    };
+
+    var getEndPoint = function (element) {
+        var nbPts = element.geometry.coordinates.length;
+        var lastPointCoordinates = element.geometry.coordinates[nbPts - 1];
+
+        return {
+            'lat': lastPointCoordinates[1],
+            'lng': lastPointCoordinates[0]
+        };
+    };
+
+    var getParkingPoint = function (element) {
+        var parkingCoordinates = element.properties.parking_location;
+
+        return parkingCoordinates ? {
+            'lat': parkingCoordinates[1],
+            'lng': parkingCoordinates[0]
+        } : null;
+    };
+
     return {
         removeDiacritics: removeDiacritics,
         sanitizeData: sanitizeData,
         parseLength: parseLength,
         idIsInArray: idIsInArray,
-        findIndexOfId: findIndexOfId
+        findIndexOfId: findIndexOfId,
+        getStartPoint: getStartPoint,
+        getEndPoint: getEndPoint,
+        getParkingPoint: getParkingPoint
     };
 
 }

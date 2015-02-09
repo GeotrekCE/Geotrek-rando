@@ -1,6 +1,6 @@
 'use strict';
 
-function mapService($q, globalSettings, treksService, iconsService) {
+function mapService($q, utilsFactory, globalSettings, treksService, iconsService) {
 
     var self = this,
         loadingMarkers = false;
@@ -76,20 +76,11 @@ function mapService($q, globalSettings, treksService, iconsService) {
                     type = '',
                     listeEquivalent;
 
-                if (parseInt(result.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10)) {
-                    if (self.treksIconified) {
-                        currentLayer = self._treksMarkersLayer;
-
-                    } else {
-                        currentLayer = self._treksgeoJsonLayer;
-                    }
-                } else {
-                    currentLayer = self._touristicsMarkersLayer;
-                }
-
-                if (parseInt(result.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10) && !self.treksIconified) {
+                if (result.geometry.type !== "Point" && !self.treksIconified) {
+                    currentLayer = self._treksgeoJsonLayer;
                     type = 'geojson';
                 } else {
+                    currentLayer = self._touristicsMarkersLayer;
                     type = 'marker';
                 }
 
@@ -139,7 +130,7 @@ function mapService($q, globalSettings, treksService, iconsService) {
 
             this.clearAllLayers();
 
-            if (parseInt(result.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10)) {
+            if (result.geometry.type !== "Point") {
                 currentLayer = self._treksgeoJsonLayer;
                 type = 'geojson';
 
@@ -154,7 +145,7 @@ function mapService($q, globalSettings, treksService, iconsService) {
                         currentLayer.addLayer(layer);
                         self._clustersLayer.addLayer(currentLayer);
 
-                        if (parseInt(result.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10)) {
+                        if (result.geometry.type !== "Point") {
                             self.updateBounds(updateBounds, currentLayer);
                         } else {
                             self.updateBounds(updateBounds, self._clustersLayer);
@@ -314,12 +305,20 @@ function mapService($q, globalSettings, treksService, iconsService) {
         var deferred = $q.defer();
 
         if (type === "geojson") {
-            deferred.resolve(L.geoJson(element));
+            var geoStyle = {
+                weight: 5,
+                opacity: 0.65,
+                className: element.category.name
+            };
+
+            deferred.resolve(L.geoJson(element, {
+                style: geoStyle
+            }));
         } else {
             var startPoint = {};
 
-            if (parseInt(element.category.id, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10)) {
-                startPoint = treksService.getStartPoint(element);
+            if (element.geometry.type !== "Point") {
+                startPoint = utilsFactory.getStartPoint(element);
             } else {
                 startPoint.lng = element.geometry.coordinates[0];
                 startPoint.lat = element.geometry.coordinates[1];
@@ -713,7 +712,7 @@ function iconsService($http, $q, categoriesService) {
                     iconSize: [40, 56],
                     iconAnchor: [20, 56],
                     labelAnchor: [20, 20],
-                    className: 'category-' + category.name
+                    className: category.name
                 });
                 deferred.resolve(newIcon);
             }

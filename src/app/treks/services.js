@@ -4,34 +4,6 @@ function treksService(globalSettings, settingsFactory, $resource, $q) {
 
     var self = this;
 
-    this.getStartPoint = function (trek) {
-        var firstPointCoordinates = trek.geometry.coordinates[0];
-
-        return {
-            'lat': firstPointCoordinates[1],
-            'lng': firstPointCoordinates[0]
-        };
-    };
-
-    this.getEndPoint = function (trek) {
-        var nbPts = trek.geometry.coordinates.length;
-        var lastPointCoordinates = trek.geometry.coordinates[nbPts - 1];
-
-        return {
-            'lat': lastPointCoordinates[1],
-            'lng': lastPointCoordinates[0]
-        };
-    };
-
-    this.getParkingPoint = function (trek) {
-        var parkingCoordinates = trek.properties.parking_location;
-
-        return parkingCoordinates ? {
-            'lat': parkingCoordinates[1],
-            'lng': parkingCoordinates[0]
-        } : null;
-    };
-
     this.refactorTrek = function (treksData) {
         // Parse trek pictures, and change their URL
         _.forEach(treksData.features, function (trek) {
@@ -78,7 +50,7 @@ function treksService(globalSettings, settingsFactory, $resource, $q) {
             if (trek.properties.altimetric_profile && trek.properties.altimetric_profile !== null) {
                 trek.properties.altimetric_profile = globalSettings.DOMAIN + trek.properties.altimetric_profile;
             }
-            trek.category = {name: 'treks', id: globalSettings.TREKS_CATEGORY_ID, pictogram: '/images/icons/trek-category.svg'};
+            trek.category = {name: 'category-treks', id: globalSettings.TREKS_CATEGORY_ID, pictogram: '/images/icons/trek-category.svg'};
         });
         return treksData;
     };

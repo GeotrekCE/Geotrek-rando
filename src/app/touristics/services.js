@@ -35,7 +35,7 @@ function contentsService(globalSettings, settingsFactory, $resource, $q, utilsFa
                 });
             }
             content.category = {
-                name: utilsFactory.removeDiacritics(content.properties.category.label.toLowerCase()),
+                name: 'category-' + utilsFactory.removeDiacritics(content.properties.category.label.toLowerCase().split(' ').join('-')),
                 id: content.properties.category.id,
                 pictogram: content.properties.category.pictogram
             };
@@ -113,7 +113,7 @@ function eventsService(globalSettings, settingsFactory, $resource, $q) {
                 });
             }
 
-            trEvent.category = {name: 'events', id: globalSettings.EVENTS_CATEGORY_ID, pictogram: '/images/icons/events-category.svg'};
+            trEvent.category = {name: 'category-events', id: globalSettings.EVENTS_CATEGORY_ID, pictogram: '/images/icons/events-category.svg'};
 
         });
         return eventsData;
