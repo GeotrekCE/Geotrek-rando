@@ -4,7 +4,12 @@
 Desktop.ini
 node_modules
 
-# Prevent js bundle and compiled sass to be push
+# Prevent js bundle and compiled sass to be pushed
 src/rando.js
 src/rando-vendors.js
 src/rando.css
+
+
+# Prevent custom config to be pushed
+
+src/app/config/configs.js
