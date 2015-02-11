@@ -16,6 +16,11 @@ clone the current repository and then :
 npm install
 ```
 
+### Config the app
+To do so, you need to duplicate src/app/config/configs-default.js and rename it config.js
+Then you can chose options that suits your needs in it !
+Each time you change your config file, you need to do the next step again.
+
 ### Launch gulp distribution task
 ```
 gulp --dist
@@ -34,6 +39,7 @@ gulp
 Launch the app on localhost:3000 and watch for any change in sass or js files in src folder :
 * Each time a sass file is changed, the wole css is reinjected
 * Each time a js file is saved, the browser's tab is refreshed
+* Will alow you to change your config file without needing to relaunch gulp
 
 Please note that you currently need to force CORS request in your browser in order to get data from our test server.
 
