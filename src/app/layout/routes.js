@@ -2,12 +2,14 @@
 
 var controller = require('./controllers');
 
-function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider) {
+function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, globalSettings) {
 
-    /*$locationProvider.html5Mode({
-        enabled: true,
-        requireBase: true
-    });*/
+    if (globalSettings.ENABLE_HTML_MODE) {
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: true
+        });
+    }
 
     $urlRouterProvider.otherwise('/');
 
