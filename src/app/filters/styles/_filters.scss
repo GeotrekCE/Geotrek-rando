@@ -64,6 +64,7 @@
                                 display: block;
                                 position: absolute;
                                 cursor: pointer;
+                                opacity: 0;
                                 top: 0;
                                 left: 0;
                                 height: 100%;
@@ -72,6 +73,9 @@
                                 z-index: 11;
                                 &:checked + label {
                                     opacity: 1;
+                                }
+                                &:focus + label {
+                                    outline: 2px solid $dark-grey
                                 }
                             }
                             label {
@@ -135,6 +139,9 @@
                             opacity: 1;
                         }
                     }
+                    &:focus + label {
+                        outline: 2px solid $dark-grey
+                    }
                 }
             }
         }
@@ -142,5 +149,8 @@
     input[type="text"], select, input[type="checkbox"] {
         border-radius: 0;
         -webkit-appearance: none;
+    }
+    input[type="checkbox"] {
+        opacity: 0;
     }
 }
