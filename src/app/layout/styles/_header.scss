@@ -11,10 +11,7 @@
         padding: 0;
         height: 100%;
     }   
-}
 
-.navbar-header {
-    height: 100%;
     .navbar-brand {
         height: 100%;
         margin: 0;
@@ -41,6 +38,10 @@
             }
         }
     }
+}
+
+.navbar-header {
+    height: 100%;
 }
 
 .navbar-nav {

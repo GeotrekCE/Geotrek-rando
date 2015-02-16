@@ -1,6 +1,6 @@
 'use strict';
 
-function contentsService(globalSettings, settingsFactory, $resource, $q, utilsFactory) {
+function contentsService(globalSettings, settingsFactory, $resource, $q) {
 
     var self = this;
 
@@ -35,7 +35,7 @@ function contentsService(globalSettings, settingsFactory, $resource, $q, utilsFa
                 });
             }
             content.category = {
-                name: 'category-' + utilsFactory.removeDiacritics(content.properties.category.label.toLowerCase().split(' ').join('-')),
+                name: 'category-' + content.properties.category.id.toString(),
                 id: content.properties.category.id,
                 pictogram: content.properties.category.pictogram
             };
@@ -113,7 +113,7 @@ function eventsService(globalSettings, settingsFactory, $resource, $q) {
                 });
             }
 
-            trEvent.category = {name: 'category-events', id: globalSettings.EVENTS_CATEGORY_ID, pictogram: '/images/icons/events-category.svg'};
+            trEvent.category = {name: 'category-' + globalSettings.EVENTS_CATEGORY_ID.toString(), id: globalSettings.EVENTS_CATEGORY_ID, pictogram: '/images/icons/events-category.svg'};
 
         });
         return eventsData;

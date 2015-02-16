@@ -50,7 +50,7 @@ function treksService(globalSettings, settingsFactory, $resource, $q) {
             if (trek.properties.altimetric_profile && trek.properties.altimetric_profile !== null) {
                 trek.properties.altimetric_profile = globalSettings.DOMAIN + trek.properties.altimetric_profile;
             }
-            trek.category = {name: 'category-treks', id: globalSettings.TREKS_CATEGORY_ID, pictogram: '/images/icons/trek-category.svg'};
+            trek.category = {name: 'category-' + globalSettings.TREKS_CATEGORY_ID.toString(), id: globalSettings.TREKS_CATEGORY_ID, pictogram: '/images/icons/trek-category.svg'};
         });
         return treksData;
     };

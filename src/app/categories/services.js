@@ -61,7 +61,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
         });
 
         var treksCategory = {
-            id: 80085,
+            id: globalSettings.TREKS_CATEGORY_ID,
             label: 'Randonnées',
             pictogram: './images/icons/trek-category.svg',
             type1_label: 'Type d\'usage',
@@ -71,7 +71,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
             difficulties: difficulties,
             routes: routes,
             themes: themes,
-            cat_class: 'category-treks'
+            cat_class: 'category-' + globalSettings.TREKS_CATEGORY_ID
         };
 
         return treksCategory;
@@ -104,7 +104,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
         });
 
         var eventsCategory = {
-            id: 54635,
+            id: globalSettings.EVENTS_CATEGORY_ID,
             label: 'Evènements tourristiques',
             pictogram: './images/icons/events-category.svg',
             type1_label: 'Type d\'usage',
@@ -112,7 +112,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
             type1: [],
             type2: eventsUsages,
             themes: themes,
-            cat_class: 'category-events'
+            cat_class: 'category-' + globalSettings.EVENTS_CATEGORY_ID
         };
 
         return eventsCategory;
@@ -138,7 +138,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                         type1: aContent.properties.type1 || [],
                         type2: aContent.properties.type2 || [],
                         themes: aContent.properties.themes || [],
-                        cat_class: 'category-' + utilsFactory.removeDiacritics(aContent.properties.category.label.toLowerCase().split(' ').join('-'))
+                        cat_class: 'category-' + aContent.properties.category.id.toString()
                     };
 
                     contentsCategories.push(currentCategory);
