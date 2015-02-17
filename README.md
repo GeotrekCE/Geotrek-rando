@@ -17,7 +17,7 @@ npm install
 ```
 
 ### Config the app
-To do so, you need to duplicate src/app/config/configs-default.js and rename it config.js
+To do so, you need to duplicate src/app/config/configs-default.js and rename it configs.js
 Then you can chose options that suits your needs in it !
 Each time you change your config file, you need to do the next step again.
 
