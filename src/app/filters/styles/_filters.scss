@@ -51,14 +51,16 @@
                         position: absolute;
                         top: 100%;
                         left: 0;
+                        border: 1px solid $neutral-grey;
+                        border-top: none;
                         width: 100%;
                         max-height: 0;
                         overflow: hidden;
                         z-index: 11;
                         background: white;
                         .form-group {
-                            margin: 5px;
-                            background: $light-grey;
+                            margin: 0;
+                            background: white;
                             position: relative;
                             input {
                                 display: block;
@@ -73,13 +75,17 @@
                                 z-index: 11;
                                 &:checked + label {
                                     opacity: 1;
+                                    background: $neutral-grey;
                                 }
                                 &:focus + label {
                                     outline: 2px solid $dark-grey
                                 }
                             }
                             label {
-                                margin: 0;
+                                display: block;
+                                height: 100%;
+                                width: 100%;
+                                padding: 0.6em;
                                 opacity: 0.6;
                             }
                         }

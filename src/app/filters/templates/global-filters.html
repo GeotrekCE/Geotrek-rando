@@ -11,7 +11,7 @@
             </div>
             <div class="geo-filters">
                 <div class="selector districts" ng-class="{empty: filters.districts.length === 0}">
-                    <span>Districts <i class="caret"></i></span>
+                    <span>Districts <span ng-if="activeFilters.districts.length > 0" class="badge">{{activeFilters.districts.length}}</span></span>
                     <div class="choices">
                         <div ng-repeat="district in filters.districts" class="district form-group">
                             <input type="checkbox" id="district-{{district.id}}" value="{{district.id}}" ng-model="activeFilters.districts[district.id]"  ng-change="propagateActiveFilters()"/>
@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="selector areas" ng-class="{empty: filters.areas.length === 0}">
-                    <span>Vallées <i class="caret"></i></span>
+                    <span>Vallées <span ng-if="activeFilters.areas.length > 0" class="badge">{{activeFilters.areas.length}}</span></span>
                     <div class="choices">
                         <div ng-repeat="area in filters.areas" class="area form-group">
                             <input type="checkbox" id="area-{{area.id}}" value="{{area.id}}" ng-model="activeFilters.areas[area.id]"  ng-change="propagateActiveFilters()"/>
