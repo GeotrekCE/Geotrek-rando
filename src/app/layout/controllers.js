@@ -1,6 +1,18 @@
 'use strict';
 
-function LayoutController() {
+function LayoutController($rootScope, $state) {
+    $rootScope.$on("$stateChangeSuccess",  function (event, toState, toParams, fromState, fromParams) {
+        // to be used for back button //won't work when page is reloaded.
+        $rootScope.previousState_name = fromState.name;
+    });
+    //back button function called from back button's ng-click="back()"
+    $rootScope.back = function () {
+        if (!$rootScope.previousState_name) {
+            $state.go('layout.root');
+        } else {
+            window.history.back();
+        }
+    };
 }
 
 function HeaderController() {
@@ -31,6 +43,8 @@ function SidebarDetailController($scope, $rootScope, $stateParams, resultsServic
     };
 
     $scope.isInFavorites = favoritesService.isInFavorites;
+
+    $scope.back = $rootScope.back;
 
     getResultDetails();
 

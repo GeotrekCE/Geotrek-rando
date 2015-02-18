@@ -1,8 +1,8 @@
-<div class="category-{{result.category.name}}">
+<div class="{{result.category.name}}">
     <ul class="detail-actions">
         <li class="back-to-home">
             <button tooltip-placement="right" tooltip="Retour à la carte">
-                <a ui-sref="layout.root" title="Retour à la carte">
+                <a title="Retour à la carte" ng-click="back()">
                     <i class="fa fa-reply"></i>
                     <span class="sr-only">Retour à la carte</span>
                 </a>
