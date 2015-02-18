@@ -1,72 +1,116 @@
 .categories {
     list-style: none;
+    display: flex;
+    flex-direction: column;
     padding: 0;
+    height: 100%;
     .category {
-        height: 40px;
-        margin: 10px 0;
+        flex: 1;
+        order: 1;
         position: relative;
+        background: $light-grey;
+        width: 70px;
+        max-height: 50px;
+        min-height: 0;
+        overflow: hidden;
+        border-bottom: 1px solid $neutral-grey;
+        transition: width 0.1s ease-out, min-height 0s ease-out;
         @include categories-list-coloring();
         button {
-            width: 100%;
-            height: 100%;
-            margin-left: -10%;
+            width: 70px;
+            height: 50px;
+            padding: 1em;
+            z-index: 14;
             border: none;
             background: white;
             box-shadow: none;
+            transition: width 0.1s ease-out;
             svg {
                 height: 100%;
                 fill: $primary-color;
+            }
+            span {
+                position: relative;
+                top: -5px;
+                padding: 0 1em;
+                left: 200%;
+                transition: left 0.1s ease-out;
             }
             &:focus {
                 outline: none;
                 outline-color: transparent;
                 outline-style: none;
                 box-shadow: 0px 1px 2px 0px $dark-grey;
-                margin-top: -2px;
-                margin-left: -9%;
             }
         }
         &:hover {
+            width: 300px;
+            min-height: 100%;
+            z-index: 99;
+            transition-delay: 0.4s;
+            & > button {
+                width: 300px;
+                transition-delay: 0.4s;
+                & > span {
+                    left: 0;
+                    transition-delay: 0.4s;
+                }
+            }
             .filters {
-                transition-delay: 0.5s;
-                opacity: 1;
-                left: 100%;
+                .category-name > span {
+                    left: 0;
+                    transition-delay: 0.6s;
+                }
+                .selector {
+                    left: 0;
+                }
             }
         }
         &.active {
             button {
-                background: $primary-color;
+                background: $dark-grey;
                 svg {
                     fill: white;
                 }
             }
         }
         .filters {
-            position: absolute;
-            top: 0;
-            left: -500%;
-            opacity: 0;
-            margin-left: -10px;
-            width: 400%;
+            width: 300px;
+            //overflow-x: hidden;
             z-index: 12;
             transition: all 0.1s ease-out;
             .category-name {
-                width: 100%;
-                height: 2.7em;
-                padding: 0.7em 1em;
+                width: 300px;
+                height: 47px;
+                padding: 1em;
+                overflow: hidden; 
                 background: $primary-color;
+                & > span {
+                    position: relative;
+                    left: -100%;
+                    transition: all 0.1s ease-out;
+                    
+                }
             }
             form {
-                padding: 0.5em 1em;
-                background: $light-grey;
+                width: 300px;
+                height: 100%;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
                 color: $dark-grey;
-                border: 2px solid $primary-color;
             }
             .selector {
-                margin: 0 5px;
+                margin: 0;
                 flex: 1;
+                width: 100%;
+                order: 1;
+                opacity: 0.6;
                 position: relative;
-                border: 1px solid $neutral-grey;
+                transition: all 0.1s ease-out;
+                position: relative;
+                left: 200%;
+                border-bottom: 1px solid $neutral-grey;
                 background: white;
                 text-align: center;
                 &.empty {
@@ -74,12 +118,15 @@
                 }
                 & > span {
                     display: block;
-                    padding: 5px;
+                    padding: 1em;
                     cursor: pointer;
                 }
                 &:hover, &:focus {
+                    opacity: 1;
+                    min-height: 100%;
+                    left: -100%;
+                    transition-delay: 0.4s;
                     .choices {
-                        width: 100%;
                         border-width: 2px;
                     }
                 }
@@ -91,14 +138,12 @@
             position: absolute;
             top: 0;
             left: 100%;
-            width: 0;
+            width: 100%;
             overflow: hidden;
             z-index: 11;
             background: white;
-            border: 0px solid $primary-color;
             .form-group {
-                margin: 5px;
-                background: $light-grey;
+                margin: 0;
                 position: relative;
                 input {
                     display: block;
@@ -113,6 +158,7 @@
                     z-index: 11;
                     &:checked + label {
                         background: $primary-color;
+                        border-bottom: 1px solid white;
                         color: white;
                     }
                     &:focus {
@@ -126,8 +172,9 @@
                 label {
                     margin: 0;
                     width: 100%;
-                    padding: 0.5em;
-                    background: $light-grey;
+                    padding: 1em;
+                    background: white;
+                    border-top: 1px solid $primary-color;
                     color: $dark-grey;
                 }
             }

@@ -2,13 +2,16 @@
     @each $category in $categories {
         &.category-#{nth($category, 1)} {
             button {
+                color: nth($category, 2);
                 svg {
                     fill: nth($category, 2);
                 }
             }
             &.active {
+                background: darken(nth($category, 2), 5%);
                 button {
                     background: nth($category, 2);
+                    color: white;
                     svg {
                         fill: white;
                     }
@@ -22,13 +25,15 @@
                     border-color: nth($category, 2);
                 }
                 .choices {
-                    border-color: nth($category, 2);
                     input {
+                        & + label {
+                            border-color: darken(nth($category, 2), 10%);
+                        }
                         &:checked + label {
-                            background-color: nth($category, 2);
+                            background-color: darken(nth($category, 2), 10%);
                         }
                         &:focus {
-                            border-color: nth($category, 2);
+                            border-color: darken(nth($category, 2), 30%);
                         }
                     }
                 }

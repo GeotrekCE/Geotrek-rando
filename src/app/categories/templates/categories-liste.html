@@ -2,12 +2,9 @@
     <li ng-repeat="category in categories" class="category {{category.cat_class}}" ng-class="{active : category.active}" ng-id="cat-{{category.id}}">
         <button ng-click="toggleCategory(category)">
             <ng-include src="category.pictogram"></ng-include>
-            <span class="sr-only">{{category.label}}</span>
+            <span class="category-name">{{category.label}}</span>
         </button>
         <div class="filters">
-            <div class="category-name">
-                <span>{{category.label}}</span>
-            </div>
             <form>
                 <div ng-if="category.type1 && category.type1.length > 0" class="selector type1" ng-class="{empty: category.type1.length === 0}">
                     <span>{{category.type1_label}} <i class="caret"></i></span>

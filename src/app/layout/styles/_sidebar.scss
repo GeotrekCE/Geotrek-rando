@@ -48,6 +48,7 @@
     }
 
     & > div {
+        height: 100%;
         @include detail-sidebar-coloring();
     }
 }
