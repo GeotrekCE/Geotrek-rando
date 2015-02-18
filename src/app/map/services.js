@@ -1,6 +1,6 @@
 'use strict';
 
-function mapService($q, utilsFactory, globalSettings, treksService, iconsService) {
+function mapService($q, $state, utilsFactory, globalSettings, treksService, iconsService) {
 
     var self = this,
         loadingMarkers = false;
@@ -86,9 +86,10 @@ function mapService($q, utilsFactory, globalSettings, treksService, iconsService
                 self.createLayerFromElement(result, type)
                     .then(
                         function (layer) {
-                            var listeEquivalent = document.querySelector('#result-' + result.category.name + '-' + result.id);
+                            var selector = '#result-' + result.category.name + '-' + result.id.toString();
                             layer.on({
                                 mouseover: function () {
+                                    var listeEquivalent = document.querySelector(selector);
                                     if (listeEquivalent !== null) {
                                         if (!listeEquivalent.classList.contains('hovered')) {
                                             listeEquivalent.classList.add('hovered');
@@ -96,6 +97,7 @@ function mapService($q, utilsFactory, globalSettings, treksService, iconsService
                                     }
                                 },
                                 mouseout: function () {
+                                    var listeEquivalent = document.querySelector(selector);
                                     if (listeEquivalent !== null) {
                                         if (listeEquivalent.classList.contains('hovered')) {
                                             listeEquivalent.classList.remove('hovered');
@@ -103,6 +105,7 @@ function mapService($q, utilsFactory, globalSettings, treksService, iconsService
                                     }
                                 },
                                 remove: function () {
+                                    var listeEquivalent = document.querySelector(selector);
                                     if (listeEquivalent !== null) {
                                         if (listeEquivalent.classList.contains('hovered')) {
                                             listeEquivalent.classList.remove('hovered');
@@ -110,8 +113,7 @@ function mapService($q, utilsFactory, globalSettings, treksService, iconsService
                                     }
                                 },
                                 click: function () {
-                                    console.log('marker Clicked');
-                                    //$state.go("home.map.detail", { trekId: result.id });
+                                    $state.go("layout.detail", { slug: result.properties.slug });
                                 }
                             });
                             currentLayer.addLayer(layer);
