@@ -40,8 +40,10 @@ function favoritesService() {
     };
 
     this.isInFavorites = function (element) {
-        if (self._favorites[element.category.id + '-' + element.id]) {
-            return true;
+        if (element) {
+            if (self._favorites[element.category.id + '-' + element.id]) {
+                return true;
+            }
         }
 
         return false;

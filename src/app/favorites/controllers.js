@@ -5,14 +5,16 @@ function FavoritesController($scope, favoritesService, resultsService) {
     $scope.updateFavorites = function () {
         var savedFavorites = favoritesService.getFavorites();
         $scope.favorites = [];
-        _.forEach(savedFavorites, function (aFavorite) {
-            resultsService.getAResult(aFavorite.slug)
-                .then(
-                    function (result) {
-                        $scope.favorites.push(result);
-                    }
-                );
-        });
+        if (_.size(savedFavorites) > 0) {
+            _.forEach(savedFavorites, function (aFavorite) {
+                resultsService.getAResult(aFavorite.slug)
+                    .then(
+                        function (result) {
+                            $scope.favorites.push(result);
+                        }
+                    );
+            });
+        }
     };
 
     $scope.removeAFavorite = function (currentElement) {
