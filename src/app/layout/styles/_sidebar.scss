@@ -8,20 +8,19 @@
         list-style: none;
         padding: 0;
         li {
-            height: 40px;
-            margin: 10px 0;
+            height: 50px;
             button {
                 padding: 0;
                 text-align: center;
                 width: 100%;
                 height: 100%;
-                margin-left: -10%;
                 border: none;
+                border-bottom: 1px solid $neutral-grey;
                 box-shadow: none;
                 background: white;
                 color: $dark-grey;
                 a {
-                    padding: 10px;
+                    padding: 1em;
                     text-decoration: none;
                     display: block;
                     width: 100%;
@@ -37,8 +36,6 @@
                     outline-color: transparent;
                     outline-style: none;
                     box-shadow: 0px 1px 2px 0px #444;
-                    margin-top: -2px;
-                    margin-left: -9%;
                 }
             }
             .isFav i {
