@@ -16,6 +16,13 @@
                         fill: white;
                     }
                 }
+                .filters .choices {
+                    input {
+                        &:focus + label, &:hover + label {
+                            background-color: darken(nth($category, 2), 10%);
+                        }
+                    }
+                }
             }
             .filters {
                 .category-name {
@@ -26,17 +33,12 @@
                 }
                 .choices {
                     input {
-                        & + label {
-                            border-color: darken(nth($category, 2), 10%);
-                        }
-                        &:checked + label {
-                            background-color: darken(nth($category, 2), 10%);
-                        }
-                        &:focus {
-                            border-color: darken(nth($category, 2), 30%);
+                        &:focus + label, &:hover + label {
+                            background-color: $neutral-grey;
                         }
                     }
                 }
+
             } 
         }
     }

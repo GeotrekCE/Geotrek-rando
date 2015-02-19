@@ -9,6 +9,7 @@
         order: 1;
         position: relative;
         background: $light-grey;
+        color: $dark-grey;
         width: 70px;
         max-height: 50px;
         min-height: 0;
@@ -53,7 +54,7 @@
                 transition-delay: 0.4s;
                 & > span {
                     left: 0;
-                    transition-delay: 0.4s;
+                    transition-delay: 0.5s;
                 }
             }
             .filters {
@@ -67,24 +68,30 @@
             }
         }
         &.active {
+            color: white;
             button {
                 background: $dark-grey;
                 svg {
                     fill: white;
                 }
             }
+            .choices .form-group input {
+                & + label:before {
+                    border-color: white;
+                }
+                &:checked + label:before {
+                    background: white;
+                }
+            }
         }
         .filters {
             width: 300px;
-            //overflow-x: hidden;
             z-index: 12;
             transition: all 0.1s ease-out;
             .category-name {
                 width: 300px;
                 height: 47px;
                 padding: 1em;
-                overflow: hidden; 
-                background: $primary-color;
                 & > span {
                     position: relative;
                     left: -100%;
@@ -96,23 +103,14 @@
                 width: 300px;
                 height: 100%;
                 padding: 0;
-                display: flex;
-                flex-direction: column;
-                color: $dark-grey;
             }
             .selector {
                 margin: 0;
-                flex: 1;
                 width: 100%;
-                order: 1;
-                opacity: 0.6;
                 position: relative;
                 transition: all 0.1s ease-out;
                 position: relative;
                 left: 200%;
-                border-bottom: 1px solid $neutral-grey;
-                background: white;
-                text-align: center;
                 &.empty {
                     display: none;
                 }
@@ -120,28 +118,25 @@
                     display: block;
                     padding: 1em;
                     cursor: pointer;
+                    i {
+                        margin-right: 1em;
+                        transition: all 0.3s ease-out;
+                    }
+                }
+                &.opened span i {
+                    transform: rotate(225deg);
                 }
                 &:hover, &:focus {
-                    opacity: 1;
-                    min-height: 100%;
-                    left: -100%;
                     transition-delay: 0.4s;
-                    .choices {
-                        border-width: 2px;
-                    }
                 }
             }
             
         }
 
         .choices {
-            position: absolute;
-            top: 0;
-            left: 100%;
             width: 100%;
             overflow: hidden;
             z-index: 11;
-            background: white;
             .form-group {
                 margin: 0;
                 position: relative;
@@ -149,6 +144,7 @@
                     display: block;
                     position: absolute;
                     cursor: pointer;
+                    color: white;
                     opacity: 0;
                     top: 0;
                     left: 0;
@@ -156,16 +152,13 @@
                     width: 100%;
                     margin: 0;
                     z-index: 11;
-                    &:checked + label {
-                        background: $primary-color;
-                        border-bottom: 1px solid white;
-                        color: white;
+                    &:checked + label:before {
+                        background: $dark-grey;
                     }
                     &:focus {
                         outline: none;
                         outline-color: transparent;
                         outline-style: none;
-                        border: 1px solid $primary-color;
                         box-shadow: 0px 1px 2px 0px $dark-grey;
                     }
                 }
@@ -173,9 +166,18 @@
                     margin: 0;
                     width: 100%;
                     padding: 1em;
-                    background: white;
-                    border-top: 1px solid $primary-color;
-                    color: $dark-grey;
+                    font-weight: normal;
+                    &:before {
+                        content: '';
+                        display: inline-block;
+                        vertical-align: middle;
+                        width: 1em;
+                        height: 1em;
+                        margin-right: 1em;
+                        border: 1px solid $dark-grey;
+                        border-radius: 0.5em;
+                        transition: all 0.2s ease-out;
+                    }
                 }
             }
         }
