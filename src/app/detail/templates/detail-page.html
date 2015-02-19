@@ -2,7 +2,8 @@
     <div class="top-part">
 
         <div class="cat-icon">
-            <ng-include src="result.category.pictogram"></ng-include>
+            <ng-include ng-if="isSVG(result.category.pictogram)" src="result.category.pictogram"></ng-include>
+            <img ng-if="!isSVG(result.category.pictogram)" ng-src="{{result.category.pictogram}}" ng-alt="{{result.category.name}}">
         </div>
 
         <div class="pictures">
@@ -36,11 +37,13 @@
                             <span>{{result.properties.duration_pretty}}</span>
                         </li>
                         <li ng-if="result.properties.difficulty.label" class="difficulty">
-                            <ng-include src="result.properties.difficulty.pictogram"></ng-include>
+                            <ng-include ng-if="isSVG(result.properties.difficulty.pictogram)" src="result.properties.difficulty.pictogram"></ng-include>
+                            <img ng-if="!isSVG(result.properties.difficulty.pictogram)" ng-src="{{result.properties.difficulty.pictogram}}" ng-alt="{{result.properties.difficulty.label}}">
                             <span>{{result.properties.difficulty.label}}</span>
                         </li>
                         <li ng-if="result.properties.route" class="route">
-                            <ng-include src="result.properties.route.pictogram"></ng-include>
+                            <ng-include ng-if="isSVG(result.properties.route.pictogram)" src="result.properties.route.pictogram"></ng-include>
+                            <img ng-if="!isSVG(result.properties.route.pictogram)" ng-src="{{result.properties.route.pictogram}}" ng-alt="{{result.properties.route.label}}">
                             <span>{{result.properties.route.label}}</span>
                         </li>
                         <li ng-if="result.properties.length" class="length">
@@ -52,15 +55,18 @@
                             <span>{{parseLength(result.properties.ascent)}}</span>
                         </li>
                         <li ng-if="result.properties.usages" ng-repeat="usage in result.properties.usages" class="usage {{removeDiacritics(usage.label)}}">
-                            <ng-include src="usage.pictogram"></ng-include>
+                            <ng-include ng-if="isSVG(usage.pictogram)" src="usage.pictogram"></ng-include>
+                            <ng-include ng-if="!isSVG(usage.pictogram)" ng-src="{{usage.pictogram}}" ng-alt="{{usage.label}}">
                             <span>{{usage.label}}</span>
                         </li>
                         <li ng-if="result.properties.networks" ng-repeat="network in result.properties.networks" class="network {{removeDiacritics(network.name)}}">
-                            <ng-include src="network.pictogram"></ng-include>
+                            <ng-include ng-if="isSVG(network.pictogram)" src="network.pictogram"></ng-include>
+                            <img ng-if="!isSVG(network.pictogram)" ng-src="{{network.pictogram}}" alt="network.name">
                             <span>{{network.name}}</span>
                         </li>
                         <li ng-if="result.properties.themes" ng-repeat="theme in result.properties.themes" class="theme {{removeDiacritics(theme.label)}}">
-                            <ng-include src="theme.pictogram"></ng-include>
+                            <ng-include ng-if="isSVG(theme.pictogram)" src="theme.pictogram"></ng-include>
+                            <img-if="!isSVG(theme.pictogram)" ng-src="{{theme.pictogram}}" ng-alt="{{theme.label}}">
                             <span>{{theme.label}}</span>
                         </li>
                     </ul>
@@ -88,7 +94,7 @@
                     </tab>
                     <tab heading="Informations">
                         <div ng-if="result.properties.altimetric_profile" class="profile">
-                            <ng-include src="result.properties.altimetric_profile"></ng-include>
+                            
                         </div>
                         <div ng-if="result.properties.disabled_infrastructure" class="disabled-infrastructure">
                             <div ng-bind-html="sanitizeData(result.properties.disabled_infrastructure)"></div>

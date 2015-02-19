@@ -13,6 +13,16 @@ function DetailController($scope, $stateParams, utilsFactory, resultsService, po
         });
     }
 
+    function getPoisOfResult(result) {
+        poisService.getPois()
+            .then(
+                function (pois) {
+                    $scope.pois = pois;
+                    console.log(pois);
+                }
+            );
+    }
+
     function getResultDetails() {
         resultsService.getAResult($stateParams.slug)
             .then(
@@ -24,15 +34,14 @@ function DetailController($scope, $stateParams, utilsFactory, resultsService, po
             );
     }
 
-    function getPoisOfResult(result) {
-        poisService.getPois()
-            .then(
-                function (pois) {
-                    $scope.pois = pois;
-                    console.log(pois);
-                }
-            );
-    }
+    $scope.isSVG = function (file) {
+        var regexp = /\.(svg)$/i;
+        if (file.toString().match(regexp)) {
+            return true;
+        }
+
+        return false;
+    };
 
     getResultDetails();
     initTabs('more-infos .nav-tabs a');
