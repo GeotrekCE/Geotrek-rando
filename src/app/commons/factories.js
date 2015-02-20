@@ -202,7 +202,8 @@ function utilsFactory($sce) {
         findIndexOfId: findIndexOfId,
         getStartPoint: getStartPoint,
         getEndPoint: getEndPoint,
-        getParkingPoint: getParkingPoint
+        getParkingPoint: getParkingPoint,
+        isSVG: isSVG
     };
 
 }
