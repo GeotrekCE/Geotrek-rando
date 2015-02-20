@@ -178,6 +178,17 @@ function utilsFactory($sce) {
         } : null;
     };
 
+    var isSVG = function (file) {
+        var regexp = /\.(svg)$/i;
+        if (file) {
+            if (file.toString().match(regexp)) {
+                return true;
+            }
+        }
+
+        return false;
+    };
+
     return {
         removeDiacritics: removeDiacritics,
         sanitizeData: sanitizeData,

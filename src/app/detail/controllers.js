@@ -34,14 +34,7 @@ function DetailController($scope, $stateParams, utilsFactory, resultsService, po
             );
     }
 
-    $scope.isSVG = function (file) {
-        var regexp = /\.(svg)$/i;
-        if (file.toString().match(regexp)) {
-            return true;
-        }
-
-        return false;
-    };
+    $scope.isSVG = utilsFactory.isSVG;
 
     getResultDetails();
     initTabs('more-infos .nav-tabs a');
