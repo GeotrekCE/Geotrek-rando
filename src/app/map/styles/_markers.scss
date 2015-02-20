@@ -88,3 +88,8 @@
         }
     }
 }
+
+.detail-map .leaflet-overlay-pane svg path {
+    opacity: 1;
+    stroke-opacity: 1;
+}
