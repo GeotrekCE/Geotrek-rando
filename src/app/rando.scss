@@ -36,6 +36,12 @@ a {
     }
 }
 
+.card {
+    border: 1px solid $neutral-grey;
+    border-radius: 2px;
+    box-shadow: 0px 1px 2px 0px $dark-grey;
+}
+
 @import 'layout/styles/_layout';
 @import 'categories/styles/_liste';
 @import 'results/styles/_liste';
