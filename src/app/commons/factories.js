@@ -149,10 +149,15 @@ function utilsFactory($sce) {
     };
 
     var getStartPoint = function (element) {
-        var firstPointCoordinates = element.geometry.coordinates[0];
-        if(typeof firstPointCoordinates[0] !== 'number') {
-            firstPointCoordinates = firstPointCoordinates[0];
+        var firstPointCoordinates = [];
+        if (element.geometry.type === 'Point') {
+            firstPointCoordinates = element.geometry.coordinates;
+        } else if (element.geometry.type === 'LineString') {
+            firstPointCoordinates = element.geometry.coordinates[0];
+        } else if (element.geometry.type === 'Polygon') {
+            firstPointCoordinates = element.geometry.coordinates[0][0];
         }
+
         return {
             'lat': firstPointCoordinates[1],
             'lng': firstPointCoordinates[0]

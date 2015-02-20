@@ -267,20 +267,22 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, icon
             );
         }
 
-        iconsService.getIcon('arrival')
-            .then(
-                function (currentIcon) {
+        if (element.geometry.type === 'LineString') {
+            iconsService.getIcon('arrival')
+                .then(
+                    function (currentIcon) {
 
-                    var marker = L.marker(
-                        [endPoint.lat, endPoint.lng],
-                        {
-                            icon: currentIcon
-                        }
-                    );
+                        var marker = L.marker(
+                            [endPoint.lat, endPoint.lng],
+                            {
+                                icon: currentIcon
+                            }
+                        );
 
-                    self._poisMarkersLayer.addLayer(marker);
-                }
-            );
+                        self._poisMarkersLayer.addLayer(marker);
+                    }
+                );
+        }
 
         iconsService.getIcon('departure')
             .then(
