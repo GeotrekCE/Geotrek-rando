@@ -165,6 +165,8 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, icon
                         self.loadingMarkers = false;
                     }
                 );
+
+            self.createPOISFromElement(result);
         }
 
     };
@@ -218,7 +220,10 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, icon
             this._touristicsMarkersLayer = self.createLayer();
         }
 
+        this._poisMarkersLayer = self.createLayer();
+
         this.map.addLayer(this._clustersLayer);
+        this.map.addLayer(this._poisMarkersLayer);
 
         return this.map;
 
@@ -237,6 +242,42 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, icon
 
     this.setMarkers = function (markers) {
         this.markers = markers;
+    };
+
+    this.createPOISFromElement = function (element) {
+
+        var startPoint = utilsFactory.getStartPoint(element),
+            endPoint = utilsFactory.getEndPoint(element);
+
+        iconsService.getIcon('arrival')
+            .then(
+                function (currentIcon) {
+
+                    var marker = L.marker(
+                        [endPoint.lat, endPoint.lng],
+                        {
+                            icon: currentIcon
+                        }
+                    );
+
+                    self._poisMarkersLayer.addLayer(marker);
+                }
+            );
+
+        iconsService.getIcon('departure')
+            .then(
+                function (currentIcon) {
+
+                    var marker = L.marker(
+                        [startPoint.lat, startPoint.lng],
+                        {
+                            icon: currentIcon
+                        }
+                    );
+
+                    self._poisMarkersLayer.addLayer(marker);
+                }
+            );
     };
 
     /*this.createMarkersFromTrek = function (trek, pois) {
@@ -337,7 +378,7 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, icon
                 startPoint.lat = element.geometry.coordinates[1];
             }
 
-            iconsService.getIcon(element)
+            iconsService.getElementIcon(element)
                 .then(
                     function (currentIcon) {
 
@@ -546,34 +587,49 @@ function iconsService($http, $q, categoriesService) {
 
     var self = this;
 
-    var map_icons = {
+    this.icons_liste = {
         default_icon: {},
-        departure_icon: L.icon({
-            iconUrl: 'images/marker-source.png',
-            iconSize: [64, 64],
-            iconAnchor: [32, 64],
-            labelAnchor: [20, -50]
-        }),
-        arrival_icon: L.icon({
-            iconUrl: 'images/marker-target.png',
-            iconSize: [64, 64],
-            iconAnchor: [32, 64],
-            labelAnchor: [20, -50]
-        }),
-        parking_icon: L.icon({
-            iconUrl: 'images/parking.png',
-            iconSize: [32, 32],
-            iconAnchor: [16, 16]
-        }),
-        information_icon: L.icon({
-            iconUrl: 'images/information.svg',
-            iconSize: [32, 32],
-            iconAnchor: [16, 16]
-        }),
-        poi_icon: L.icon({
-            iconSize: [40, 40],
-            labelAnchor: [20, -50]
-        })
+        departure: {
+            iconUrl: '/images/map/flag.svg',
+            iconSize: [53, 53],
+            iconAnchor: [14, 53],
+            labelAnchor: [27, 27],
+            className: 'departure-marker'
+        },
+        arrival: {
+            iconUrl: '/images/map/flag.svg',
+            iconSize: [53, 53],
+            iconAnchor: [14, 53],
+            labelAnchor: [27, 27],
+            className: 'arrival-marker'
+        },
+        parking: {
+            iconUrl: '/images/map/park.svg',
+            iconSize: [],
+            iconAnchor: [],
+            labelAnchor: [],
+            className: ''
+        },
+        information: {
+            iconUrl: '/images/map/info.svg',
+            iconSize: [],
+            iconAnchor: [],
+            labelAnchor: [],
+            className: ''
+        },
+        poi: {
+            iconUrl: '/images/map/poi.svg',
+            iconSize: [],
+            iconAnchor: [],
+            labelAnchor: [],
+            className: ''
+        },
+        marker: {
+            iconUrl: '/images/map/marker.svg',
+            iconSize: [40, 56],
+            iconAnchor: [20, 56],
+            labelAnchor: [20, 20]
+        }
     };
 
     this.getCategoriesIcons = function () {
@@ -642,17 +698,11 @@ function iconsService($http, $q, categoriesService) {
         if (self.markerIcon) {
             deferred.resolve(self.markerIcon);
         } else {
-
-            $http.get('/images/map/marker.svg')
-                .success(
-                    function (icon) {
-                        self.markerIcon = icon.toString();
-                        deferred.resolve(self.markerIcon);
-                    }
-                ).error(
-                    function () {
-                        self.markerIcon = '';
-                        deferred.resolve(self.markerIcon);
+            self.getSVGIcon(self.icons_liste.marker.iconUrl)
+                .then(
+                    function (iconMarkup) {
+                        self.markerIcon = iconMarkup;
+                        deferred.resolve(iconMarkup);
                     }
                 );
         }
@@ -660,14 +710,21 @@ function iconsService($http, $q, categoriesService) {
         return deferred.promise;
     };
 
-    this.getPOIIcon = function (poi) {
-        var pictogramUrl = poi.properties.type.pictogram;
+    this.getSVGIcon = function (url) {
+        var deferred = $q.defer();
 
-        return L.icon({
-            iconUrl: pictogramUrl,
-            iconSize: [32, 32],
-            iconAnchor: [16, 16]
-        });
+        $http.get(url)
+            .success(
+                function (icon) {
+                    deferred.resolve(icon.toString());
+                }
+            ).error(
+                function () {
+                    deferred.resolve('');
+                }
+            );
+
+        return deferred.promise;
     };
 
     this.getClusterIcon = function (cluster) {
@@ -679,23 +736,38 @@ function iconsService($http, $q, categoriesService) {
         });
     };
 
-    this.getDepartureIcon = function () {
-        return map_icons.departure_icon;
+    this.getIcon = function (iconName) {
+        var deferred = $q.defer();
+
+        if (!iconName || !self.icons_liste[iconName]) {
+            console.log('no icon');
+            deferred.reject('icon doesn\'t exist');
+        } else {
+            if (self[iconName]) {
+                deferred.resolve(self[iconName]);
+            } else {
+                self.getSVGIcon(self.icons_liste[iconName].iconUrl)
+                    .then(
+                        function (iconMarkup) {
+                            var markup = '';
+                            markup += '<div>' + iconMarkup + '</div>';
+
+                            self[iconName] = new L.divIcon({
+                                html: markup,
+                                iconSize: self.icons_liste[iconName].iconSize,
+                                iconAnchor: self.icons_liste[iconName].iconAnchor,
+                                className: self.icons_liste[iconName].className
+                            });
+                            deferred.resolve(self[iconName]);
+                        }
+                    );
+            }
+        }
+
+        return deferred.promise;
     };
 
-    this.getArrivalIcon = function () {
-        return map_icons.arrival_icon;
-    };
-
-    this.getParkingIcon = function () {
-        return map_icons.parking_icon;
-    };
-
-    this.getInformationIcon = function () {
-        return map_icons.information_icon;
-    };
-
-    this.getIcon = function (element) {
+    this.getElementIcon = function (element) {
 
         var deferred = $q.defer(),
             markerIcon,

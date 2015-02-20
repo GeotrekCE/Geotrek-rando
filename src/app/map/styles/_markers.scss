@@ -40,6 +40,23 @@
     font-weight: bold;
 }
 
+.departure-marker {
+    svg, svg .base {
+        fill: $valid-color;
+    }
+}
+
+.arrival-marker {
+    left: -26px;
+    svg {
+        transform: rotateY(180deg);
+        transform-style: preserve-3d;
+    }
+    svg, svg .base {
+        fill: $alert-color;
+    }
+}
+
 .leaflet-overlay-pane {
     svg {
         path {
