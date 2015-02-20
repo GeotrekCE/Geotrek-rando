@@ -210,6 +210,11 @@
             padding: 1em;
             background: white;
             border-left: 4px solid $primary-color;
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
         }
     }
 
