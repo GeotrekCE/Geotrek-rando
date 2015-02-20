@@ -18,7 +18,7 @@ function DetailController($scope, $stateParams, utilsFactory, resultsService, po
             .then(
                 function (pois) {
                     $scope.pois = pois;
-                    console.log(pois);
+                    //console.log(pois);
                 }
             );
     }
@@ -29,7 +29,7 @@ function DetailController($scope, $stateParams, utilsFactory, resultsService, po
                 function (result) {
                     $scope.result = result;
                     getPoisOfResult(result);
-                    console.log(result);
+                    //console.log(result);
                 }
             );
     }

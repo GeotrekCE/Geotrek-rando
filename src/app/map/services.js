@@ -1,6 +1,6 @@
 'use strict';
 
-function mapService($q, $state, utilsFactory, globalSettings, treksService, iconsService) {
+function mapService($q, $state, utilsFactory, globalSettings, treksService, poisService, iconsService) {
 
     var self = this,
         loadingMarkers = false;
@@ -72,18 +72,21 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, icon
                 counter++;
 
                 var currentLayer,
+                    elementLocation,
                     currentCount = counter,
                     type = '';
 
                 if (result.geometry.type !== "Point" && !self.treksIconified) {
                     currentLayer = self._treksgeoJsonLayer;
                     type = 'geojson';
+                    elementLocation = [];
                 } else {
                     currentLayer = self._touristicsMarkersLayer;
-                    type = 'marker';
+                    type = 'category';
+                    elementLocation = utilsFactory.getStartPoint(result);
                 }
 
-                self.createLayerFromElement(result, type)
+                self.createLayerFromElement(result, type, elementLocation)
                     .then(
                         function (layer) {
                             var selector = '#result-' + result.category.name + '-' + result.id.toString();
@@ -133,6 +136,7 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, icon
     this.displayDetail = function (result, updateBounds) {
 
         var type = '',
+            elementLocation,
             currentLayer;
 
         if (!self.loadingMarkers) {
@@ -144,13 +148,14 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, icon
             if (result.geometry.type !== "Point") {
                 currentLayer = self._treksgeoJsonLayer;
                 type = 'geojson';
-
+                elementLocation = [];
             } else {
                 currentLayer = self._touristicsMarkersLayer;
-                type = 'marker';
+                type = 'category';
+                elementLocation = utilsFactory.getStartPoint(result);
             }
 
-            self.createLayerFromElement(result, type)
+            self.createLayerFromElement(result, type, elementLocation)
                 .then(
                     function (layer) {
                         currentLayer.addLayer(layer);
@@ -246,58 +251,51 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, icon
 
     this.createPOISFromElement = function (element) {
 
-        var startPoint = utilsFactory.getStartPoint(element),
-            endPoint = utilsFactory.getEndPoint(element),
-            parkingPoint = utilsFactory.getParkingPoint(element);
+        var startPoint = utilsFactory.getStartPoint(element);
 
-        if (parkingPoint) {
-            iconsService.getIcon('parking')
-            .then(
-                function (currentIcon) {
-
-                    var marker = L.marker(
-                        [parkingPoint.lat, parkingPoint.lng],
-                        {
-                            icon: currentIcon
-                        }
-                    );
-
-                    self._poisMarkersLayer.addLayer(marker);
-                }
-            );
-        }
-
-        if (element.geometry.type === 'LineString') {
-            iconsService.getIcon('arrival')
+        if (element.properties.parkin_elementLocation) {
+            var parkingPoint = utilsFactory.getParkingPoint(element);
+            self.createLayerFromElement(element, 'parking', parkingPoint)
                 .then(
-                    function (currentIcon) {
-
-                        var marker = L.marker(
-                            [endPoint.lat, endPoint.lng],
-                            {
-                                icon: currentIcon
-                            }
-                        );
-
+                    function (marker) {
                         self._poisMarkersLayer.addLayer(marker);
                     }
                 );
         }
 
-        iconsService.getIcon('departure')
-            .then(
-                function (currentIcon) {
+        if (element.geometry.type === 'LineString') {
+            var endPoint = utilsFactory.getEndPoint(element);
 
-                    var marker = L.marker(
-                        [startPoint.lat, startPoint.lng],
-                        {
-                            icon: currentIcon
-                        }
-                    );
+            self.createLayerFromElement(element, 'departure', startPoint)
+                .then(
+                    function (marker) {
+                        self._poisMarkersLayer.addLayer(marker);
+                    }
+                );
 
-                    self._poisMarkersLayer.addLayer(marker);
-                }
-            );
+            self.createLayerFromElement(element, 'arrival', endPoint)
+                .then(
+                    function (marker) {
+                        self._poisMarkersLayer.addLayer(marker);
+                    }
+                );
+            
+
+            poisService.getPoisFromElement(element.id)
+                .then(
+                    function (pois) {
+                        _.forEach(pois.features, function (poi) {
+                            var poiLocation = utilsFactory.getStartPoint(poi);
+                            self.createLayerFromElement(poi, 'poi', poiLocation)
+                                .then(
+                                    function (marker) {
+                                        self._poisMarkersLayer.addLayer(marker);
+                                    }
+                                );
+                        });
+                    }
+                );
+        }
     };
 
     /*this.createMarkersFromTrek = function (trek, pois) {
@@ -373,7 +371,7 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, icon
         return markers;
     };*/
 
-    this.createLayerFromElement = function (element, type) {
+    this.createLayerFromElement = function (element, type, elementLocation) {
         var deferred = $q.defer();
 
         if (type === "geojson") {
@@ -389,26 +387,36 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, icon
                 style: geoStyle
             }));
         } else {
-            var startPoint = {};
+            var promise,
+                param;
 
-            if (element.geometry.type !== "Point") {
-                startPoint = utilsFactory.getStartPoint(element);
-            } else {
-                startPoint.lng = element.geometry.coordinates[0];
-                startPoint.lat = element.geometry.coordinates[1];
+            switch (type) {
+            case 'category':
+                promise = iconsService.getElementIcon;
+                param = element;
+                break;
+
+            case 'poi':
+                promise = iconsService.getPOIIcon;
+                param = element;
+                break;
+
+            default:
+                promise = iconsService.getIcon;
+                param = type;
+                break;
             }
 
-            iconsService.getElementIcon(element)
+            promise(param)
                 .then(
                     function (currentIcon) {
 
                         var marker = L.marker(
-                            [startPoint.lat, startPoint.lng],
+                            [elementLocation.lat, elementLocation.lng],
                             {
                                 icon: currentIcon
                             }
                         );
-
                         deferred.resolve(marker);
                     }
                 );
@@ -603,7 +611,7 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, icon
 
 }
 
-function iconsService($http, $q, categoriesService) {
+function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
 
     var self = this;
 
@@ -642,8 +650,14 @@ function iconsService($http, $q, categoriesService) {
             labelAnchor: [],
             className: ''
         },
-        marker: {
-            iconUrl: '/images/map/marker.svg',
+        category_base: {
+            iconUrl: '/images/map/category_base.svg',
+            iconSize: [40, 56],
+            iconAnchor: [20, 56],
+            labelAnchor: [20, 20]
+        },
+        poi_base: {
+            iconUrl: '/images/map/category_base.svg',
             iconSize: [40, 56],
             iconAnchor: [20, 56],
             labelAnchor: [20, 20]
@@ -710,13 +724,86 @@ function iconsService($http, $q, categoriesService) {
         return deferred.promise;
     };
 
+    this.getPoiTypesIcons = function () {
+        var deferred = $q.defer();
+
+        if (self.poisTypesIcons) {
+            deferred.resolve(self.poisTypesIcons);
+        } else {
+
+            poisService.getPois()
+                .then(
+                    function (pois) {
+                        var counter = 0;
+                        _.forEach(pois.features, function (poi) {
+                            if (!self.poisTypesIcons) {
+                                self.poisTypesIcons = {};
+                            }
+                            counter++;
+                            var currentCounter = counter;
+                            if (!utilsFactory.isSVG(poi.properties.type.pictogram)) {
+                                self.poisTypesIcons[poi.properties.type.id] = {
+                                    markup: poi.properties.type.pictogram,
+                                    isSVG: false
+                                };
+                                if (currentCounter === _.size(pois)) {
+                                    deferred.resolve(self.poisTypesIcons);
+                                }
+                            } else {
+                                $http.get(poi.properties.type.pictogram)
+                                    .success(
+                                        function (icon) {
+                                            self.poisTypesIcons[poi.properties.type.id] = {
+                                                markup: icon.toString(),
+                                                isSVG: true
+                                            };
+                                            if (currentCounter === _.size(pois)) {
+                                                deferred.resolve(self.poisTypesIcons);
+                                            }
+                                        }
+                                    ).error(
+                                        function () {
+                                            self.poisTypesIcons[poi.properties.type.id] = {
+                                                markup: '',
+                                                isSVG: true
+                                            };
+                                            if (currentCounter === _.size(pois)) {
+                                                deferred.resolve(self.poisTypesIcons);
+                                            }
+                                        }
+                                    );
+                            }
+                        });
+                    }
+                );
+        }
+
+        return deferred.promise;
+    };
+
+    this.getAPoiTypeIcon = function (poiTypeId) {
+        var deferred = $q.defer();
+        if (self.poisTypesIcons) {
+            deferred.resolve(self.poisTypesIcons[poiTypeId]);
+        } else {
+            self.getPoiTypesIcons()
+                .then(
+                    function (icons) {
+                        deferred.resolve(icons[poiTypeId]);
+                    }
+                );
+        }
+
+        return deferred.promise;
+    };
+
     this.getMarkerIcon = function () {
         var deferred = $q.defer();
 
         if (self.markerIcon) {
             deferred.resolve(self.markerIcon);
         } else {
-            self.getSVGIcon(self.icons_liste.marker.iconUrl)
+            self.getSVGIcon(self.icons_liste.category_base.iconUrl)
                 .then(
                     function (iconMarkup) {
                         self.markerIcon = iconMarkup;
@@ -728,19 +815,25 @@ function iconsService($http, $q, categoriesService) {
         return deferred.promise;
     };
 
-    this.getSVGIcon = function (url) {
+    this.getSVGIcon = function (url, iconName) {
         var deferred = $q.defer();
 
-        $http.get(url)
-            .success(
-                function (icon) {
-                    deferred.resolve(icon.toString());
-                }
-            ).error(
-                function () {
-                    deferred.resolve('');
-                }
-            );
+        if (self.icons_liste[iconName].markup) {
+            deferred.resolve(self.icons_liste[iconName].markup);
+        } else {
+            $http.get(url)
+                .success(
+                    function (icon) {
+                        self.icons_liste[iconName].markup = icon.toString();
+                        deferred.resolve(icon.toString());
+                    }
+                ).error(
+                    function () {
+                        self.icons_liste[iconName].markup = '';
+                        deferred.resolve('');
+                    }
+                );
+        }
 
         return deferred.promise;
     };
@@ -764,23 +857,75 @@ function iconsService($http, $q, categoriesService) {
             if (self[iconName]) {
                 deferred.resolve(self[iconName]);
             } else {
-                self.getSVGIcon(self.icons_liste[iconName].iconUrl)
-                    .then(
-                        function (iconMarkup) {
+                if (!utilsFactory.isSVG(self.icons_liste[iconName].iconUrl)) {
+                    self[iconName] = new L.divIcon({
+                        html: self.icons_liste[iconName].iconUrl,
+                        iconSize: self.icons_liste[iconName].iconSize,
+                        iconAnchor: self.icons_liste[iconName].iconAnchor,
+                        className: self.icons_liste[iconName].className
+                    });
+                    deferred.resolve(self[iconName]);
+                } else {
+                    self.getSVGIcon(self.icons_liste[iconName].iconUrl, iconName)
+                        .then(
+                            function (iconMarkup) {
 
-                            self[iconName] = new L.divIcon({
-                                html: iconMarkup,
-                                iconSize: self.icons_liste[iconName].iconSize,
-                                iconAnchor: self.icons_liste[iconName].iconAnchor,
-                                className: self.icons_liste[iconName].className
-                            });
-                            deferred.resolve(self[iconName]);
-                        }
-                    );
+                                self[iconName] = new L.divIcon({
+                                    html: iconMarkup,
+                                    iconSize: self.icons_liste[iconName].iconSize,
+                                    iconAnchor: self.icons_liste[iconName].iconAnchor,
+                                    className: self.icons_liste[iconName].className
+                                });
+                                deferred.resolve(self[iconName]);
+                            }
+                        );
+                }
             }
         }
 
         return deferred.promise;
+    };
+
+    this.getPOIIcon = function (poi) {
+        var deferred = $q.defer(),
+            markerIcon,
+            poiIcon;
+
+        $q.all([
+            self.getSVGIcon(self.icons_liste.poi_base.iconUrl, 'poi_base')
+                .then(
+                    function (icon) {
+                        markerIcon = icon;
+                    }
+                ),
+            self.getAPoiTypeIcon(poi.properties.type.id)
+                .then(
+                    function (icon) {
+                        if (icon.isSVG) {
+                            poiIcon = icon.markup;
+                        } else {
+                            poiIcon = '<img src="' + icon.markup + '" alt=""';
+                        }
+                    }
+                )
+        ]).then(
+            function () {
+                var markup = '';
+                markup += '<div class="marker">' + markerIcon + '</div>';
+                markup += '<div class="icon">' + poiIcon + '</div>';
+                var newIcon = new L.divIcon({
+                    html: markup,
+                    iconSize: self.icons_liste.poi_base.iconSize,
+                    iconAnchor: self.icons_liste.poi_base.iconAnchor,
+                    labelAnchor: self.icons_liste.poi_base.labelAnchor,
+                    className: 'double-marker poi layer-' + poi.properties.type.id + '-' + poi.id + ' ' + poi.properties.type.id
+                });
+                deferred.resolve(newIcon);
+            }
+        );
+
+        return deferred.promise;
+
     };
 
     this.getElementIcon = function (element) {
@@ -790,7 +935,7 @@ function iconsService($http, $q, categoriesService) {
             categoryIcon;
 
         $q.all([
-            self.getMarkerIcon()
+            self.getSVGIcon(self.icons_liste.category_base.iconUrl, 'category_base')
                 .then(
                     function (icon) {
                         markerIcon = icon;
@@ -805,15 +950,15 @@ function iconsService($http, $q, categoriesService) {
         ]).then(
             function () {
                 var markup = '';
-                markup += '<div class="marker-icon">' + markerIcon + '</div>';
-                markup += '<div class="cat-icon">' + categoryIcon + '</div>';
+                markup += '<div class="marker">' + markerIcon + '</div>';
+                markup += '<div class="icon">' + categoryIcon + '</div>';
 
                 var newIcon = new L.divIcon({
                     html: markup,
-                    iconSize: [40, 56],
-                    iconAnchor: [20, 56],
-                    labelAnchor: [20, 20],
-                    className: 'layer-' + element.category.name + '-' + element.id + ' ' + element.category.name
+                    iconSize: self.icons_liste.category_base.iconSize,
+                    iconAnchor: self.icons_liste.category_base.iconAnchor,
+                    labelAnchor: self.icons_liste.category_base.labelAnchor,
+                    className: 'double-marker layer-' + element.category.name + '-' + element.id + ' ' + element.category.name
                 });
                 deferred.resolve(newIcon);
             }

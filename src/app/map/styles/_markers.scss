@@ -1,14 +1,18 @@
 .leaflet-marker-icon {
     position: relative;
     @include marker-coloring();
-    > div {
+    
+}
+
+.double-marker {
+    & > div {
         transition: all 0.1s ease-out;
     }
-    svg {
+    svg, img {
         height: 100%;
         max-width: 100%;
     }
-    .cat-icon {
+    .icon {
         position: absolute;
         top: 10px;
         left: 10px;
@@ -19,15 +23,20 @@
         }
     }
     &:hover, &.hovered {
-        .marker-icon {
+        .marker {
             transform: scale(1.2);
             transform-origin: center bottom;
         }
 
-        .cat-icon {
+        .icon {
             top: 4px;
             transform: scale(1.2);
             transform-origin: center bottom;
+        }
+    }
+    &.poi {
+        .marker svg .base {
+            fill: $primary-color;
         }
     }
 }

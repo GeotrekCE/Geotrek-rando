@@ -74,7 +74,7 @@
 @mixin marker-coloring() {
     @each $category in $categories {
         &.category-#{nth($category, 1)} {
-            .marker-icon svg .base {
+            .marker svg .base {
                 fill: nth($category, 2);
             }
         }

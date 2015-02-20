@@ -30,6 +30,7 @@ function poisService($resource, $q, globalSettings, settingsFactory) {
             if (poi.properties.type.pictogram && poi.properties.type.pictogram !== null) {
                 poi.properties.type.pictogram = globalSettings.DOMAIN + poi.properties.type.pictogram;
             }
+
         });
         return poisData;
     };
@@ -61,7 +62,7 @@ function poisService($resource, $q, globalSettings, settingsFactory) {
                     var data = angular.fromJson(file);
                     var refactoredPois = self.refactorPois(data);
                     self._pois = refactoredPois;
-                    deferred.resolve(refactoredPois);
+                    deferred.resolve(self._pois);
                 });
 
         }
@@ -79,6 +80,10 @@ function poisService($resource, $q, globalSettings, settingsFactory) {
         var requests = $resource(url, {}, {
             query: {
                 method: 'GET',
+                params: {
+                    format: 'geojson',
+                    trek: ElementId
+                },
                 cache: true,
 
             }
@@ -88,7 +93,6 @@ function poisService($resource, $q, globalSettings, settingsFactory) {
             .then(function (file) {
                 var data = angular.fromJson(file);
                 var refactoredPois = self.refactorPois(data);
-                self._pois = refactoredPois;
                 deferred.resolve(refactoredPois);
             });
 
