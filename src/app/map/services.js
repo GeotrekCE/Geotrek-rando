@@ -247,7 +247,25 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, icon
     this.createPOISFromElement = function (element) {
 
         var startPoint = utilsFactory.getStartPoint(element),
-            endPoint = utilsFactory.getEndPoint(element);
+            endPoint = utilsFactory.getEndPoint(element),
+            parkingPoint = utilsFactory.getParkingPoint(element);
+
+        if (parkingPoint) {
+            iconsService.getIcon('parking')
+            .then(
+                function (currentIcon) {
+
+                    var marker = L.marker(
+                        [parkingPoint.lat, parkingPoint.lng],
+                        {
+                            icon: currentIcon
+                        }
+                    );
+
+                    self._poisMarkersLayer.addLayer(marker);
+                }
+            );
+        }
 
         iconsService.getIcon('arrival')
             .then(
@@ -591,24 +609,22 @@ function iconsService($http, $q, categoriesService) {
         default_icon: {},
         departure: {
             iconUrl: '/images/map/flag.svg',
-            iconSize: [53, 53],
-            iconAnchor: [14, 53],
-            labelAnchor: [27, 27],
+            iconSize: [46, 52],
+            iconAnchor: [13, 52],
             className: 'departure-marker'
         },
         arrival: {
             iconUrl: '/images/map/flag.svg',
-            iconSize: [53, 53],
-            iconAnchor: [14, 53],
-            labelAnchor: [27, 27],
+            iconSize: [46, 52],
+            iconAnchor: [13, 52],
             className: 'arrival-marker'
         },
         parking: {
-            iconUrl: '/images/map/park.svg',
-            iconSize: [],
-            iconAnchor: [],
-            labelAnchor: [],
-            className: ''
+            iconUrl: '/images/map/parking.svg',
+            iconSize: [20, 20],
+            iconAnchor: [10, 10],
+            labelAnchor: [10, 10],
+            className: 'parking-marker'
         },
         information: {
             iconUrl: '/images/map/info.svg',
@@ -749,11 +765,9 @@ function iconsService($http, $q, categoriesService) {
                 self.getSVGIcon(self.icons_liste[iconName].iconUrl)
                     .then(
                         function (iconMarkup) {
-                            var markup = '';
-                            markup += '<div>' + iconMarkup + '</div>';
 
                             self[iconName] = new L.divIcon({
-                                html: markup,
+                                html: iconMarkup,
                                 iconSize: self.icons_liste[iconName].iconSize,
                                 iconAnchor: self.icons_liste[iconName].iconAnchor,
                                 className: self.icons_liste[iconName].className

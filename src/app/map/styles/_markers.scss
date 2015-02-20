@@ -4,6 +4,10 @@
     > div {
         transition: all 0.1s ease-out;
     }
+    svg {
+        height: 100%;
+        max-width: 100%;
+    }
     .cat-icon {
         position: absolute;
         top: 10px;
@@ -12,8 +16,6 @@
         height: 20px;
         svg {
             fill: white;
-            height: 100%;
-            max-width: 100%;
         }
     }
     &:hover, &.hovered {
@@ -54,6 +56,12 @@
     }
     svg, svg .base {
         fill: $alert-color;
+    }
+}
+
+.parking-marker {
+    svg, svg .base {
+        fill: $info-color;
     }
 }
 
