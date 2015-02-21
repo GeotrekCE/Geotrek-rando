@@ -67,6 +67,10 @@
                 line-height: 1.2em;
                 font-weight: bold;
                 margin: 0.5em 0;
+                a {
+                    color: inherit;
+                    text-decoration: none;
+                }
             }
             .infos {
                 display: block;

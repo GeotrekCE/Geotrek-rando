@@ -3,14 +3,18 @@
     <ul>
         <li ng-repeat="result in results" id="result-{{result.category.name}}-{{result.id}}" ng-mouseover="hoverLayerElement(result,'enter')" ng-mouseleave="hoverLayerElement(result,'leave')">
             <div class="result {{result.category.name}}">
-                <div class="visual">
+                <div class="visual" ui-sref="">
                     <div class="fav-or-not" ng-click="toggleFavorites(result)" ng-class="{isFav: isInFavorites(result)}">
                         <i class="glyphicon glyphicon-heart"></i>
                     </div>
-                    <img ng-if="result.properties.pictures[0]" ng-src="{{result.properties.pictures[0].url}}" ng-alt="{{result.properties.pictures[0].title}}">
-                    <img ng-if="!result.properties.pictures[0]" ng-src="./images/placeholder.png" alt="placeholder image">
+                    <a ui-sref="layout.detail({slug: result.properties.slug})">
+                        <img ng-if="result.properties.pictures[0]" ng-src="{{result.properties.pictures[0].url}}" ng-alt="{{result.properties.pictures[0].title}}">
+                        <img ng-if="!result.properties.pictures[0]" ng-src="./images/placeholder.png" alt="placeholder image">
+                    </a>
                 </div>
-                <h1 class="title">{{result.properties.name}}</h1>
+                <h1 class="title">
+                    <a ui-sref="layout.detail({slug: result.properties.slug})">{{result.properties.name}}</a>
+                </h1>
                 <div class="infos">
                     <span ng-if="result.properties.cities[0]">{{result.properties.cities[0].name}}</span>
                     <span ng-if="result.properties.duration_pretty">{{result.properties.duration_pretty}}</span>
