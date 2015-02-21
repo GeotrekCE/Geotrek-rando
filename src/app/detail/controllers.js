@@ -14,11 +14,11 @@ function DetailController($scope, $stateParams, utilsFactory, resultsService, po
     }
 
     function getPoisOfResult(result) {
-        poisService.getPois()
+        poisService.getPoisFromElement(result.id)
             .then(
                 function (pois) {
-                    $scope.pois = pois;
-                    //console.log(pois);
+                    $scope.pois = pois.features;
+                    console.log(pois);
                 }
             );
     }
@@ -29,7 +29,7 @@ function DetailController($scope, $stateParams, utilsFactory, resultsService, po
                 function (result) {
                     $scope.result = result;
                     getPoisOfResult(result);
-                    //console.log(result);
+                    console.log(result);
                 }
             );
     }

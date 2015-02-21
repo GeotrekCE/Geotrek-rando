@@ -37,7 +37,7 @@ a {
 }
 
 .card {
-    border: 1px solid $neutral-grey;
+    //border: 1px solid $neutral-grey;
     border-radius: 2px;
     box-shadow: 0px 1px 2px 0px $dark-grey;
 }
@@ -49,3 +49,4 @@ a {
 @import 'favorites/styles/_favorites';
 @import 'map/styles/_map';
 @import 'detail/styles/_detail';
+@import 'pois/styles/_poi-liste';

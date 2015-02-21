@@ -8,6 +8,7 @@
         flex: 1;
         display: flex;
         flex-direction: column;
+        border-right: 1px solid $neutral-grey;
         .header {
             display: flex;
             background: $primary-color;
@@ -225,7 +226,37 @@
         .elements {
             background: $light-grey;
             padding: 0;
-            flex: 1;
+            display: flex;
+                flex-direction: column;
+                flex: 1;
+            div[role="tabpanel"], div[role="tabpanel"] > div {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+            .tab-content {
+                flex: 1;
+                overflow-y: auto;
+                overflow-x: hidden;
+                background: $light-grey;
+            }
+            .nav-tabs li {
+                a {
+                    color: $dark-grey;
+                    border: none;
+                    border-right: 1px solid $neutral-grey;
+                    border-radius: 0;
+                    background: white;
+                }
+                &:last-child a {
+                    border-right: none;
+                }
+                &.active {
+                    a {
+                        border-bottom: 3px solid $primary-color;
+                    }
+                }
+           } 
         }
         .detail-map {
             background: $light-grey;

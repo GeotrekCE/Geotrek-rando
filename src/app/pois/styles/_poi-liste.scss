@@ -1,0 +1,43 @@
+.pois-liste {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    li {
+        width: 46%;
+        margin: 2%;
+        display: flex;
+        flex-direction: column;
+        background: white;
+        color: $dark-grey;
+        .type {
+            img {
+                height: 1.3em;
+                margin-right: 0.6em;
+                width: auto;
+            }
+            span {
+                color: lighten($dark-grey, 20%);
+                vertical-align: middle;
+            }
+        }
+        .header {
+            width: 100%;
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+        .infos {
+            flex: 1;
+            padding: 1em;
+            min-height: 7em;
+            .title {
+                font-size: 1.5em;
+                font-weight: 300;
+            }
+        }
+    }
+}
