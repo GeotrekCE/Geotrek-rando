@@ -23,9 +23,16 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
             <ul class="nav navbar-nav static-pages navbar-right">
-                <li><a href="http://google.fr">Page statique 1</a></li>
-                <li><a href="http://google.fr">Page statique 2</a></li>
-                <li><a href="http://google.fr">Page statique 3</a></li>
+                <li class="static-pages dropdown">
+                    <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        Pages statiques <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="http://google.fr">Page statique 1</a></li>
+                        <li><a href="http://google.fr">Page statique 2</a></li>
+                        <li><a href="http://google.fr">Page statique 3</a></li>
+                    </ul>
+                </li>
                 <li class="divider"></li>
                 <li class="share" tooltip-placement="bottom" tooltip="Partager">
                     <span class="glyphicon glyphicon-share"></span>
