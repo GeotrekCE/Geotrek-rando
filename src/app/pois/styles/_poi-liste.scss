@@ -69,5 +69,8 @@
                 flex-grow: 0.0000001;
             }
         }
+        &:hover, &.hovered {
+            transform: scale(1.04);
+        }
     }
 }

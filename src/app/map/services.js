@@ -289,6 +289,36 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
                             self.createLayerFromElement(poi, 'poi', poiLocation)
                                 .then(
                                     function (marker) {
+                                        var selector = '#poi-' + poi.id.toString();
+                                        marker.on({
+                                            mouseover: function () {
+                                                var listeEquivalent = document.querySelector(selector);
+                                                if (listeEquivalent !== null) {
+                                                    if (!listeEquivalent.classList.contains('hovered')) {
+                                                        listeEquivalent.classList.add('hovered');
+                                                    }
+                                                }
+                                            },
+                                            mouseout: function () {
+                                                var listeEquivalent = document.querySelector(selector);
+                                                if (listeEquivalent !== null) {
+                                                    if (listeEquivalent.classList.contains('hovered')) {
+                                                        listeEquivalent.classList.remove('hovered');
+                                                    }
+                                                }
+                                            },
+                                            remove: function () {
+                                                var listeEquivalent = document.querySelector(selector);
+                                                if (listeEquivalent !== null) {
+                                                    if (listeEquivalent.classList.contains('hovered')) {
+                                                        listeEquivalent.classList.remove('hovered');
+                                                    }
+                                                }
+                                            },
+                                            click: function () {
+                                                //$state.go("layout.detail", { slug: result.properties.slug });
+                                            }
+                                        });
                                         self._poisMarkersLayer.addLayer(marker);
                                     }
                                 );

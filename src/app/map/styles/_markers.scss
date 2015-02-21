@@ -23,6 +23,7 @@
         }
     }
     &:hover, &.hovered {
+        z-index: 99999 !important;
         .marker {
             transform: scale(1.2);
             transform-origin: center bottom;
