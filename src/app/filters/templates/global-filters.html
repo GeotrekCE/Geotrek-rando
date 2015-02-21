@@ -39,7 +39,8 @@
                 <input type="checkbox" id="theme-{{theme.id}}" value="{{theme.id}}" ng-model="activeFilters.themes[theme.id]"  ng-change="propagateActiveFilters()"/>
                 <label for="theme-{{theme.id}}">
                     <span class="sr-only">{{theme.label}}</span>
-                    <img src="{{theme.pictogram}}"/>
+                    <img ng-if="!isSVG(theme.pictogram)" ng-src="{{theme.pictogram}}" ng-alt="{{theme.label}}">
+                    <ng-include ng-if="isSVG(theme.pictogram)" src="theme.pictogram"></ng-include>
                 </label>
             </div>
         </div>

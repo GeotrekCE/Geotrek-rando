@@ -2,7 +2,7 @@
     width: 100%;
     height: 70px;
     background-color: white;
-    z-index: 10;
+    z-index: 10000;
     box-shadow: 0px 0px 2px 0px #444;
     .navbar, .container-fluid {
         border: none;
@@ -16,7 +16,10 @@
         height: 100%;
         margin: 0;
         padding: 0;
-        background: $primary-color url(#{$root-images-path}/mask-header.svg) no-repeat center right;
+        background: $primary-color;
+        @media (min-width: 1200px) {
+            background: $primary-color url(#{$root-images-path}/mask-header.svg) no-repeat center right;
+        }
         #logo {
             float: left;
         }
@@ -31,10 +34,12 @@
                 text-transform: uppercase;
                 margin: 0 10px;
                 line-height: 1.2em;
-                margin-right: 200px;
                 vertical-align: middle;
                 display: inline-block;
                 letter-spacing: 2px;
+                @media (min-width: 1200px) {
+                    margin-right: 200px;
+                }
             }
         }
     }

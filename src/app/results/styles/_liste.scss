@@ -6,9 +6,7 @@
         flex-direction: row;
         flex-wrap: wrap;
         & > li {
-            flex: 1;
-            min-width: 50%;
-            max-width: 50%;
+            width: 50%;
             padding: 1em;
             &:hover, &.hovered {
                 //order: -1;
@@ -16,6 +14,9 @@
                     transform: scale(1.03);
                     box-shadow: 0px 3px 3px 0px lighten($dark-grey,30%);
                 }
+            }
+            @media (max-width: 1200px) {
+                width: 100%;
             }
         }
         .result {

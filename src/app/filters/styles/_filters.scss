@@ -4,11 +4,15 @@
         flex-direction: column;
         .top-part {
             display: flex;
+            flex-wrap: wrap;
             flex: 1;
             .search {
                 flex: 1;
                 display: flex;
                 padding: 10px;
+                @media (max-width: 1200px) {
+                    min-width: 100%;
+                }
                 .input-group {
                     flex: 1;
                     border: 1px solid $neutral-grey;
@@ -102,21 +106,25 @@
             padding: 10px;
             flex: 1;
             display: flex;
-            justify-content: space-around;
+            flex-wrap: wrap;
             .theme {
-                flex: 1;
                 height: 3em;
-                max-width: 4em;
+                min-width: 4em;
+                flex: 1;
                 position: relative;
-                margin: 0;
+                margin: auto;
                 padding: 4px;
                 background: white;
                 border: 1px solid $neutral-grey;
+                @media (max-width: 1200px) {
+                    min-width: 5em;
+                }
                 label {
                     overflow: hidden;
                     margin: 0;
                     height: 100%;
                     width: 100%;
+                    text-align: center;
                     cursor: pointer;
                     opacity: 0.6;
                     &:hover {
@@ -128,7 +136,13 @@
                     img {
                         opacity: 0.6;
                         height: 100%;
-                        margin-left: 20%;
+                    }
+                    svg {
+                        height: 100%;
+                        max-width: 100%;
+                    }
+                    svg, svg .base {
+                        fill: $dark-grey;
                     }
                 }
                 input {
@@ -144,9 +158,12 @@
                         img {
                             opacity: 1;
                         }
+                        svg, svg .base {
+                            fill: $primary-color;
+                        }
                     }
                     &:focus + label {
-                        outline: 2px solid $dark-grey
+                        box-shadow: 0 0 2px 0 $dark-grey;
                     }
                 }
             }

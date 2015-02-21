@@ -1,6 +1,6 @@
 'use strict';
 
-function GlobalFiltersController($rootScope, $scope, $location, resultsService, filtersService) {
+function GlobalFiltersController($rootScope, $scope, $location, resultsService, filtersService, utilsFactory) {
 
     function initFiltersView() {
         resultsService.getAllResults()
@@ -65,6 +65,8 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
         $location.search(query);
         $rootScope.$broadcast('updateFilters');
     };
+
+    $scope.isSVG = utilsFactory.isSVG;
 
     initFiltersView();
 
