@@ -13,6 +13,7 @@
         width: 70px;
         max-height: 50px;
         min-height: 0;
+        z-index: 30;
         overflow: hidden;
         border-bottom: 1px solid $neutral-grey;
         transition: width 0.1s ease-out, min-height 0s ease-out;
