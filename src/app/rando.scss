@@ -14,7 +14,7 @@ $vendors-images-path: "./app/vendors/images/";
 
 html {
 	font-family: $font-family;
-	font-size: 14px;
+	font-size: 16px;
 	color: #333;
 }
 
@@ -31,7 +31,7 @@ html, body, .main-container {
 a {
     color: $primary-color;
     transition: all 0.2s ease-out;
-    &:hover {
+    &:hover, &:focus, &:active {
         color: darken($primary-color, 5%);
     }
 }
