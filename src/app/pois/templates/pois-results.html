@@ -2,7 +2,7 @@
     <li ng-repeat="poi in pois" id="poi-{{poi.id}}" class="poi {{poi.properties.type.label}} card" ng-class="{closed: !isOpened}" ng-mouseover="hoverMarkerPoi(poi,'enter')" ng-mouseleave="hoverMarkerPoi(poi,'leave')">
         <div class="card-part">
             <div class="header">
-                <img ng-if="poi.properties.pictures[0]" ng-src="{{poi.properties.pictures[0]}}" ng-alt="{{poi.properties.type.label}}">
+                <img ng-if="poi.properties.pictures[0]" ng-src="{{poi.properties.pictures[0].url}}" ng-alt="{{poi.properties.type.label}}">
                 <img ng-if="!poi.properties.pictures[0]" ng-src="./images/placeholder.png" alt="placeholder image">
             </div>
             <div class="infos">

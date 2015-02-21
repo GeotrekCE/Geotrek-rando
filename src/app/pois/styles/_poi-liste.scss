@@ -71,6 +71,7 @@
         }
         &:hover, &.hovered {
             transform: scale(1.04);
+            perspective: 300px;
         }
     }
 }
