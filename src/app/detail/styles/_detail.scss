@@ -109,7 +109,16 @@
                             border-right: 1px solid $neutral-grey;
                             text-align: center;
                             &:nth-child(5n) {
-                                border-right: none;
+                                border-right-width: 0;
+                            }
+                            @media (max-width: 1200px) {
+                                width: 25%;
+                                &:nth-child(4n) {
+                                    border-right-width: 0;
+                                }
+                                &:nth-child(5n) {
+                                    border-right-width: 1px;
+                                }
                             }
                             & > div {
                                 vertical-align: middle;
