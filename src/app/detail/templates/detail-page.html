@@ -2,31 +2,42 @@
     <div class="informations">
 
         <div class="header">
-            <div class="cat-icon">
-                <ng-include ng-if="isSVG(result.category.pictogram)" src="result.category.pictogram"></ng-include>
-                <img ng-if="!isSVG(result.category.pictogram)" ng-src="{{result.category.pictogram}}" ng-alt="{{result.category.name}}">
+            <div class="element-title">
+                <div class="cat-icon">
+                    <ng-include ng-if="isSVG(result.category.pictogram)" src="result.category.pictogram"></ng-include>
+                    <img ng-if="!isSVG(result.category.pictogram)" ng-src="{{result.category.pictogram}}" ng-alt="{{result.category.name}}">
+                </div>
+                <h1>{{result.properties.name}}</h1>
             </div>
-            <h1>{{result.properties.name}}</h1>
+            <div class="from-to">
+                <span ng-if="result.properties.departure && result.properties.departure !== result.properties.arrival">Départ : {{result.properties.departure}}</span>
+                <span ng-if="result.properties.arrival">
+                    <span ng-if="result.properties.departure !== result.properties.arrival" class="arrival">
+                        Arrivée :
+                    </span>
+                    <span ng-if="result.properties.departure === result.properties.arrival" class="loop">
+                        Boucle :
+                    </span>
+                    {{result.properties.arrival}}
+                </span>
+                <span ng-if="!result.properties.departure && !result.properties.arrival && result.properties.cities[0]">{{result.properties.cities[0].name}}</span>
+            </div>
         </div>
 
         <div class="main-infos">
             <div class="intro">
                 <div class="pictures">
-                    <ul>
+                    <div class="main-visual">
+                        <img ng-src="{{result.properties.pictures[0].url}}" ng-alt="{{result.properties.pictures[0].legend}}">
+                        <div class="picture-credit">{{result.properties.pictures[0].author}}</div>
+                    </div>
+                    <ul ng-if="result.properties.pictures.length > 1">
                         <li ng-repeat="picture in result.properties.pictures">
                             <img ng-src="{{picture.url}}" ng-alt="{{picture.title}}">
                         </li>
                     </ul>
                 </div>
                 <div class="text">
-                    <div class="from-to">
-                        <div ng-if="result.properties.departure && result.properties.departure !== result.properties.arrival">{{result.properties.departure}}</div>
-                        <div ng-if="result.properties.arrival">
-                            <i ng-if="result.properties.departure !== result.properties.arrival" class="fa fa-long-arrow-right"></i>
-                            <i ng-if="result.properties.departure === result.properties.arrival" class="fa fa-undo"></i>
-                            {{result.properties.arrival}}</div>
-                        <div ng-if="!result.properties.departure && !result.properties.arrival && result.properties.cities[0]">{{result.properties.cities[0].name}}</div>
-                    </div>
                     <div class="pictos">
                         <ul>
                             <li ng-if="result.properties.type1[0]" class="type1">
@@ -96,11 +107,11 @@
                     </div>
                 </div>
             </div>
-            <div ng-if="result.properties.description_teaser" class="description_teaser">
-                <i class="fa fa-quote-left"></i>
-                <div ng-bind-html="sanitizeData(result.properties.description_teaser)"></div>
-            </div>
-            <div class="more-infos">
+            <div class="element-description">
+                <div ng-if="result.properties.description_teaser" class="description_teaser">
+                    <i class="fa fa-quote-left"></i>
+                    <div ng-bind-html="sanitizeData(result.properties.description_teaser)"></div>
+                </div>
                 <div ng-if="result.properties.ambiance" ng-bind-html="sanitizeData(result.properties.description_teaser)" class="ambiance"></div>
                 <div ng-if="result.properties.description" ng-bind-html="sanitizeData(result.properties.description)" class="description"></div>
                 <div ng-if="result.properties.is_park_centered" class="is-park-centered card">
@@ -117,6 +128,8 @@
                 <div ng-if="result.properties.disabled_infrastructure" class="disabled-infrastructure">
                     <div ng-bind-html="sanitizeData(result.properties.disabled_infrastructure)"></div>
                 </div>
+            </div>
+            <div class="more-infos">
                 <div class="transport">
                     <h4>Transports</h4>
                 </div>

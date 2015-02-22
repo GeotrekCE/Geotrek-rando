@@ -96,11 +96,8 @@
     @each $category in $categories {
         &.category-#{nth($category, 1)} {
             .informations {
-                .header {
+                .element-title {
                     background: nth($category, 2);
-                }
-                .pictures {
-                    border-color: nth($category, 2);
                 }
                 .main-infos .description_teaser {
                     color: nth($category, 2);

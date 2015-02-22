@@ -56,22 +56,25 @@
             flex-basis: auto;
             max-height: 900em;
             overflow: hidden;
+            border-left: 1px solid $neutral-grey;
             transition: all 0.2s ease;
             .description {
-                padding: 1em;        
+                padding: 1em;
+                font-size: 1.2em;  
             }
         }
         &.closed {
-            width: 46%;
+            width: 29%;
             .hidden-part {
                 max-height: 0;
+                border-left-width: 0px;
                 width: 0;
                 flex-grow: 0.0000001;
             }
-        }
-        &:hover, &.hovered {
-            transform: scale(1.04);
-            perspective: 300px;
+            &:hover, &.hovered {
+                transform: scale(1.04);
+                perspective: 300px;
+            }
         }
     }
 }
