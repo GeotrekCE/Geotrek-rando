@@ -4,6 +4,16 @@ function GalleryController($rootScope, $scope) {
     var gallery = document.querySelector('.lightbox-gallery'),
         slides = [];
 
+    function computeMargins() {
+        _.each(slides, function (element) {
+            var width = parseInt(window.getComputedStyle(element.querySelector('img')).width.slice(0, -2), 10);
+            var height = parseInt(window.getComputedStyle(element.querySelector('img')).height.slice(0, -2), 10);
+
+            element.style.marginLeft = width / -2 + "px";
+            element.style.marginTop = height / -2 + "px";
+        });
+    }
+
     function initGallery(images) {
         var i;
 
@@ -24,10 +34,8 @@ function GalleryController($rootScope, $scope) {
 
         gallery.insertBefore(listeHandler, gallery.firstChild);
 
+        computeMargins();
         for (i = 0; i < slides.length; i++) {
-            var width = parseInt(window.getComputedStyle(slides[i].querySelector('img')).width.slice(0, -2), 10);
-
-            slides[i].style.marginLeft = width / -2 + "px";
             if (i > 0 && i < slides.length - 1) {
                 slides[i].classList.add('inactive');
             }
@@ -142,6 +150,8 @@ function GalleryController($rootScope, $scope) {
     $rootScope.$on("openLightbox", function (event, slideIndex) {
         openLightbox(slideIndex);
     });
+
+    jQuery(window).on('resize', computeMargins);
 
 }
 
