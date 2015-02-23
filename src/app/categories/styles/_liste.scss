@@ -18,8 +18,11 @@
         border-bottom: 1px solid $neutral-grey;
         transition: width 0.1s ease-out, min-height 0s ease-out;
         @include categories-list-coloring();
-        button {
+        a {
             width: 70px;
+            display: block;
+            text-decoration: none;
+            text-align: center;
             height: 50px;
             padding: 1em;
             z-index: 14;
@@ -50,7 +53,7 @@
             min-height: 100%;
             z-index: 99;
             transition-delay: 0.4s;
-            & > button {
+            & > a {
                 width: 300px;
                 transition-delay: 0.4s;
                 & > span {
@@ -70,7 +73,7 @@
         }
         &.active {
             color: white;
-            button {
+            a {
                 background: $dark-grey;
                 svg {
                     fill: white;

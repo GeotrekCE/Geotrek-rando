@@ -1,7 +1,7 @@
 @mixin categories-list-coloring() {
     @each $category in $categories {
         &.category-#{nth($category, 1)} {
-            button {
+            a {
                 color: nth($category, 2);
                 svg {
                     fill: nth($category, 2);
@@ -9,7 +9,7 @@
             }
             &.active {
                 background: darken(nth($category, 2), 5%);
-                button {
+                a {
                     background: nth($category, 2);
                     color: white;
                     svg {

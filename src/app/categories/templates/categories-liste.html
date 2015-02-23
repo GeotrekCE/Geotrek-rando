@@ -1,9 +1,9 @@
 <ul class="categories">
     <li ng-repeat="category in categories" class="category {{category.cat_class}}" ng-class="{active : category.active}" ng-id="cat-{{category.id}}">
-        <button ng-click="toggleCategory(category)">
+        <a href ng-click="toggleCategory(category)">
             <ng-include src="category.pictogram"></ng-include>
             <span class="category-name">{{category.label}}</span>
-        </button>
+        </a>
         <div class="filters">
             <form>
                 <div ng-if="category.type1 && category.type1.length > 0" class="selector type1" ng-class="{empty: category.type1.length === 0, opened: type1IsCollapsed}">

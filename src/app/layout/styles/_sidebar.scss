@@ -9,9 +9,11 @@
         padding: 0;
         li {
             height: 50px;
-            button {
-                padding: 0;
+            a {
+                padding: 1em;
                 text-align: center;
+                text-decoration: none;
+                display: block;
                 width: 100%;
                 height: 100%;
                 border: none;
@@ -19,14 +21,6 @@
                 box-shadow: none;
                 background: white;
                 color: $dark-grey;
-                a {
-                    padding: 1em;
-                    text-decoration: none;
-                    display: block;
-                    width: 100%;
-                    height: 100%;
-                    color: $dark-grey;
-                }
                 .txt-icon {
                     font-weight: bold;
                 }
