@@ -17,6 +17,8 @@ function GalleryController($rootScope, $scope) {
     function initGallery(images) {
         var i;
 
+        slides = [];
+
         var listeHandler = document.createElement('ul');
         _.each(images, function (image) {
             var currentImage = document.createElement('li');
@@ -65,12 +67,18 @@ function GalleryController($rootScope, $scope) {
     function displaySlideX(slideIndex) {
         var i = 0,
             prevSlide = getPrevSlide(slideIndex);
-
+        console.log(slides.indexOf(prevSlide));
         for (i = 0; i < slides.length; i++) {
-            slides[i].classList.remove('prev');
-            slides[i].classList.remove('inactive');
-            if (i !== slideIndex && slides[i] !== prevSlide) {
-                slides[i].classList.add('inactive');
+            if (slides[i].classList.contains('prev')) {
+                slides[i].classList.remove('prev');
+            }
+            if (slides[i].classList.contains('inactive')) {
+                slides[i].classList.remove('inactive');
+            }
+            if (i !== slideIndex && i !== slides.indexOf(prevSlide)) {
+                if (!slides[i].classList.contains('inactive')) {
+                    slides[i].classList.add('inactive');
+                }
             }
         }
         prevSlide.classList.add('prev');
