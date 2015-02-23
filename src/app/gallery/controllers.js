@@ -34,7 +34,7 @@ function GalleryController($rootScope, $scope) {
             listeHandler.appendChild(currentImage);
         });
 
-        gallery.insertBefore(listeHandler, gallery.firstChild);
+        gallery.insertBefore(listeHandler, gallery.querySelector('.controls'));
 
         computeMargins();
         for (i = 0; i < slides.length; i++) {
