@@ -42,14 +42,18 @@
                 <div class="text">
                     <div class="pictos">
                         <ul>
-                            <li ng-if="result.properties.type1[0]" class="type1">
+                            <li ng-if="result.properties.type1[0]" ng-repeat="type in result.properties.type1" class="type1">
                                 <div>
-                                    <span>{{result.properties.type1[0].name}}</span>
+                                    <ng-include ng-if="isSVG(type.pictogram)" src="type.pictogram"></ng-include>
+                                    <img ng-if="!isSVG(type.pictogram)" ng-src="{{type.pictogram}}" ng-alt="{{type.name}}">
+                                    <span>{{type.name}}</span>
                                 </div>
                             </li>
-                            <li ng-if="result.properties.type2[0]" class="type2">
+                            <li ng-if="result.properties.type2[0]" ng-repeat="type in result.properties.type2" class="type2">
                                 <div>
-                                    <span>{{result.properties.type2[0].name}}</span>
+                                    <ng-include ng-if="isSVG(type.pictogram)" src="type.pictogram"></ng-include>
+                                    <img ng-if="!isSVG(type.pictogram)" ng-src="{{type.pictogram}}" ng-alt="{{type.name}}">
+                                    <span>{{type.name}}</span>
                                 </div>
                             </li>
                             <li ng-if="result.properties.duration_pretty" class="duration">
@@ -82,13 +86,6 @@
                                 <div>
                                     <ng-include src="'./images/icons/ascent.svg'"></ng-include>
                                     <span>{{parseLength(result.properties.ascent)}}</span>
-                                </div>
-                            </li>
-                            <li ng-if="result.properties.usages" ng-repeat="usage in result.properties.usages" class="usage {{removeDiacritics(usage.label)}}">
-                                <div>
-                                    <ng-include ng-if="isSVG(usage.pictogram)" src="usage.pictogram"></ng-include>
-                                    <ng-include ng-if="!isSVG(usage.pictogram)" ng-src="{{usage.pictogram}}" ng-alt="{{usage.label}}">
-                                    <span>{{usage.label}}</span>
                                 </div>
                             </li>
                             <li ng-if="result.properties.networks" ng-repeat="network in result.properties.networks" class="network {{removeDiacritics(network.name)}}">
