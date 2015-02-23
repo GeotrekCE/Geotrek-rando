@@ -56,18 +56,16 @@ function GalleryController($rootScope, $scope) {
 
     function displaySlideX(slideIndex) {
         var i = 0,
-            nextSlide = getNextSlide(slideIndex),
             prevSlide = getPrevSlide(slideIndex);
 
         for (i = 0; i < slides.length; i++) {
-            slides[i].classList.remove('inactive');
             slides[i].classList.remove('prev');
+            slides[i].classList.remove('inactive');
+            if (i !== slideIndex && slides[i] !== prevSlide) {
+                slides[i].classList.add('inactive');
+            }
         }
         prevSlide.classList.add('prev');
-
-        if (slides.length > 2) {
-            nextSlide.classList.add('inactive');
-        }
     }
 
     function openLightbox(slideIndex) {
@@ -122,6 +120,7 @@ function GalleryController($rootScope, $scope) {
             currentSlide.classList.add('inactive');
         }
         prevSlide.classList.remove('prev');
+        newPrevSlide.classList.remove('inactive');
         newPrevSlide.classList.add('prev');
     };
 
