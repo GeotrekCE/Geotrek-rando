@@ -108,18 +108,18 @@
                     </div>
                 </div>
             </div>
-            <div class="element-description">
+            <div class="element-description card">
                 <div ng-if="result.properties.description_teaser" class="description_teaser">
                     <i class="fa fa-quote-left"></i>
                     <div ng-bind-html="sanitizeData(result.properties.description_teaser)"></div>
                 </div>
                 <div ng-if="result.properties.ambiance" ng-bind-html="sanitizeData(result.properties.description_teaser)" class="ambiance"></div>
                 <div ng-if="result.properties.description" ng-bind-html="sanitizeData(result.properties.description)" class="description"></div>
-                <div ng-if="result.properties.is_park_centered" class="is-park-centered card">
+                <div ng-if="result.properties.is_park_centered" class="is-park-centered">
                     <i class="fa fa-info-circle"></i>
                     <p>Cet itinéraire est dans le coeur du parc national, veuillez consulter la réglementation.</p>
                 </div>
-                <div ng-if="result.properties.advice" class="advice card">
+                <div ng-if="result.properties.advice" class="advice">
                     <i class="fa fa-exclamation-triangle"></i>
                     <div ng-bind-html="sanitizeData(result.properties.advice)"></div>
                 </div>

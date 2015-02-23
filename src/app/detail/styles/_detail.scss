@@ -1,14 +1,15 @@
 .detail-page {
     flex: 1;
     display: flex;
-    background: $light-grey;
+    background: $neutral-grey;
     @include detail-page-coloring();
 
     .informations {
-        flex: 1;
+        width: 40%;
         display: flex;
         flex-direction: column;
         border-right: 1px solid $neutral-grey;
+        background: $light-grey;
         .element-title {
             display: flex;
             background: $primary-color;
@@ -53,35 +54,39 @@
         }
         .intro {
             .pictures {
+                position: relative;
                 .main-visual {
                     overflow: hidden;
-                    max-height: 25em;
+                    max-height: 18em;
                     position: relative;
                     img {
                         width: 100%;
                     }
                 }
                 ul {
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
                     padding: 0.6em;
                     margin: 0;
-                    height: 5em;
+                    width: 6em;
+                    height: 100%;
                     background: light-grey;
                     overflow-x: auto;
                     white-space: nowrap;
-                    width: 100%;
+                    background: transparentize(black, 0.4);
                     li {
-                        height: 100%;
+                        width: 100%;
                         position: relative;
-                        display: inline-block;
-                        margin: 0 0.6em;
+                        display: block;
+                        margin: 0.6em 0;
                         cursor: pointer;
                         img {
-                            height: 100%;
+                            width: 100%;
                         }
                     }
                 }
                 .picture-credit {
-                    background: transparentize(black, 0.6);
                     text-align: left;
                     color: white;
                     font-size: 0.8em;
@@ -96,31 +101,15 @@
                 .pictos {
                     ul {
                         list-style: none;
-                        padding: 0;
+                        padding: 0.6em;
                         margin: 0;
                         display: flex;
                         flex-wrap: wrap;
                         li {
-                            padding: 1em;
-                            width: 20%;
-                            height: 6.5em;
-                            line-height: 4.5em;
-                            background: white;
-                            border-bottom: 1px solid $neutral-grey;
-                            border-right: 1px solid $neutral-grey;
+                            padding: 0.6em 1em;
                             text-align: center;
-                            &:nth-child(5n) {
-                                border-right-width: 0;
-                            }
-                            @media (max-width: 1200px) {
-                                width: 25%;
-                                &:nth-child(4n) {
-                                    border-right-width: 0;
-                                }
-                                &:nth-child(5n) {
-                                    border-right-width: 1px;
-                                }
-                            }
+                            height: 3em;
+                            line-height: 3em;
                             & > div {
                                 vertical-align: middle;
                                 line-height: normal;
@@ -128,14 +117,15 @@
                                 width: 100%;
                             }
                             img, svg {
-                                width: 2.5em;
-                                height: 2.5em;
+                                width: 2em;
+                                height: 2em;
+                                vertical-align: middle;
                             }
                             svg, svg .base {
                                 fill: $dark-grey;
                             }
                             span {
-                                display: block;
+                                vertical-align: middle;
                             }
                         }
                     }
@@ -148,7 +138,7 @@
             margin: 1em 0;
             padding: 2em;
             & > div {
-                margin: 2em 0;
+                margin: 1rem 0;
                 &:first-child {
                     margin-top: 0;
                 }
@@ -270,15 +260,16 @@
     }
 
     .interests {
-        flex: 1;
+        width: 59.5%;
+        margin-left: 0.5%;
         display: flex;
         flex-direction: column;
         .elements {
             background: $light-grey;
             padding: 0;
             display: flex;
-                flex-direction: column;
-                flex: 1;
+            flex-direction: column;
+            flex: 1;
             div[role="tabpanel"], div[role="tabpanel"] > div {
                 flex: 1;
                 display: flex;
