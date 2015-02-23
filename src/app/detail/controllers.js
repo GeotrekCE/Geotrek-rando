@@ -1,6 +1,6 @@
 'use strict';
 
-function DetailController($scope, $stateParams, utilsFactory, resultsService, poisService) {
+function DetailController($scope, $rootScope, $stateParams, utilsFactory, resultsService, poisService) {
 
     $scope.sanitizeData = utilsFactory.sanitizeData;
     $scope.parseLength = utilsFactory.parseLength;
@@ -28,17 +28,22 @@ function DetailController($scope, $stateParams, utilsFactory, resultsService, po
             .then(
                 function (result) {
                     $scope.result = result;
+                    $rootScope.$emit('initGallery', result.properties.pictures);
                     getPoisOfResult(result);
                     console.log(result);
                 }
             );
     }
 
+    $scope.showLightbox = function (slideIndex) {
+        $rootScope.$emit('openLightbox', slideIndex);
+    };
+
     $scope.isSVG = utilsFactory.isSVG;
 
     getResultDetails();
     initTabs('more-infos .nav-tabs a');
-
+    console.log($rootScope.currentState_name);
 }
 
 module.exports = {

@@ -14,6 +14,7 @@ var dependencies = [
     'rando.results',
     'rando.detail',
     'rando.favorites',
+    'rando.gallery',
 
 
     // External stuff
@@ -52,3 +53,4 @@ require('./filters');
 require('./map');
 require('./detail');
 require('./favorites');
+require('./gallery');

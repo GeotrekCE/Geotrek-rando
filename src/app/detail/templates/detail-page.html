@@ -29,10 +29,12 @@
                 <div class="pictures">
                     <div class="main-visual">
                         <img ng-src="{{result.properties.pictures[0].url}}" ng-alt="{{result.properties.pictures[0].legend}}">
-                        <div class="picture-credit">{{result.properties.pictures[0].author}}</div>
+                        <div class="picture-credit">
+                            {{result.properties.pictures[0].author}}
+                        </div>
                     </div>
                     <ul ng-if="result.properties.pictures.length > 1">
-                        <li ng-repeat="picture in result.properties.pictures">
+                        <li ng-repeat="picture in result.properties.pictures" ng-click="showLightbox($index)">
                             <img ng-src="{{picture.url}}" ng-alt="{{picture.title}}">
                         </li>
                     </ul>

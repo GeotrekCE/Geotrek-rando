@@ -1,9 +1,12 @@
 'use strict';
 
 function LayoutController($rootScope, $state) {
+    $rootScope.currentState_name = $state.current.name;
+
     $rootScope.$on("$stateChangeSuccess",  function (event, toState, toParams, fromState, fromParams) {
         // to be used for back button //won't work when page is reloaded.
         $rootScope.previousState_name = fromState.name;
+        $rootScope.currentState_name = toState.name;
     });
     //back button function called from back button's ng-click="back()"
     $rootScope.back = function () {
