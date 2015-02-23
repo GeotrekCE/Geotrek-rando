@@ -189,14 +189,16 @@
             <geotrek-map></geotrek-map>
         </div>
 
-        <div class="elements">
+        <div ng-if="pois.length > 0 || result.properties.touristic_contents.length > 0 || result.properties.touristic_events.length > 0 || result.properties.treks.length > 0" class="elements">
             <div role="tabpanel">
 
                 <tabset justified="true">
-                    <tab heading="Patrimoine">
+                    <tab ng-if="pois.length > 0" heading="Patrimoine">
                         <pois-liste></pois-liste>
                     </tab>
-                    <tab heading="A proximité">A proximité</tab>
+                    <tab ng-if="result.properties.touristic_contents.length > 0 || result.properties.touristic_events.length > 0 || result.properties.treks.length > 0" heading="A proximité">
+                        A proximité
+                    </tab>
                 </tabset>
 
             </div>
