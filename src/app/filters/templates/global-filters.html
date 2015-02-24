@@ -11,10 +11,10 @@
             </div>
             <div class="geo-filters">
                 <div class="selector districts" ng-class="{empty: filters.districts.length === 0}">
-                    <span>Districts <span ng-if="activeFilters.districts.length > 0" class="badge">{{activeFilters.districts.length}}</span></span>
+                    <span>Districts <span ng-if="filterLength.districts > 0" class="badge">{{filterLength.districts}}</span></span>
                     <div class="choices">
                         <div ng-repeat="district in filters.districts" class="district form-group">
-                            <input type="checkbox" id="district-{{district.id}}" value="{{district.id}}" ng-model="activeFilters.districts[district.id]"  ng-change="propagateActiveFilters()"/>
+                            <input type="checkbox" id="district-{{district.id}}" value="{{district.id}}" ng-false-value="{{null}}" ng-model="activeFilters.districts[district.id]"  ng-change="propagateActiveFilters()"/>
                             <label for="district-{{district.id}}">
                                 <span>{{district.name}}</span>
                             </label>
@@ -22,10 +22,10 @@
                     </div>
                 </div>
                 <div class="selector areas" ng-class="{empty: filters.areas.length === 0}">
-                    <span>Vallées <span ng-if="activeFilters.areas.length > 0" class="badge">{{activeFilters.areas.length}}</span></span>
+                    <span>Vallées <span ng-if="filterLength.areas > 0" class="badge">{{filterLength.areas}}</span></span>
                     <div class="choices">
                         <div ng-repeat="area in filters.areas" class="area form-group">
-                            <input type="checkbox" id="area-{{area.id}}" value="{{area.id}}" ng-model="activeFilters.areas[area.id]"  ng-change="propagateActiveFilters()"/>
+                            <input type="checkbox" id="area-{{area.id}}" value="{{area.id}}" ng-model="activeFilters.areas[area.id]" ng-false-value="{{null}}" ng-change="propagateActiveFilters()"/>
                             <label for="area-{{area.id}}">
                                 <span>{{area.name}}</span>
                             </label>
@@ -36,7 +36,7 @@
         </div>
         <div class="themes">
             <div ng-repeat="theme in filters.themes" class="theme form-group" tooltip-placement="top" tooltip="{{theme.label}}">
-                <input type="checkbox" id="theme-{{theme.id}}" value="{{theme.id}}" ng-model="activeFilters.themes[theme.id]"  ng-change="propagateActiveFilters()"/>
+                <input type="checkbox" id="theme-{{theme.id}}" value="{{theme.id}}" ng-model="activeFilters.themes[theme.id]" ng-false-value="{{null}}" ng-change="propagateActiveFilters()"/>
                 <label for="theme-{{theme.id}}">
                     <span class="sr-only">{{theme.label}}</span>
                     <img ng-if="!isSVG(theme.pictogram)" ng-src="{{theme.pictogram}}" ng-alt="{{theme.label}}">

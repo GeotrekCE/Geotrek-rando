@@ -2,6 +2,17 @@
 
 function GlobalFiltersController($rootScope, $scope, $location, resultsService, filtersService, utilsFactory) {
 
+    $scope.filterLength = {};
+
+    function countActiveValues(filterName) {
+        $scope.filterLength[filterName] = 0;
+        _.forEach($scope.activeFilters[filterName], function (value) {
+            if (value) {
+                $scope.filterLength[filterName]++;
+            }
+        });
+    }
+
     function initFiltersView() {
         resultsService.getAllResults()
             .then(
@@ -15,14 +26,23 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
                         themes: []
                     };
 
+                    $scope.filterLength = {
+                        districts: 0,
+                        areas: 0,
+                        themes: 0
+                    };
+
+                    countActiveValues('themes');
                     _.forEach($location.search().themes, function (themeId) {
                         $scope.activeFilters.themes[themeId] = true;
                     });
 
+                    countActiveValues('areas');
                     _.forEach($location.search().areas, function (areaId) {
                         $scope.activeFilters.areas[areaId] = true;
                     });
 
+                    countActiveValues('districts');
                     _.forEach($location.search().districts, function (districtId) {
                         $scope.activeFilters.districts[districtId] = true;
                     });
@@ -41,6 +61,7 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
                 delete query[key];
             }
             if (key === 'themes' || key === 'districts' || key === 'areas') {
+                countActiveValues(key);
                 if (filter.length > 0) {
                     var tempArray = [],
                         NotAllFalse = false;
