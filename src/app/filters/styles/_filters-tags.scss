@@ -1,0 +1,23 @@
+.filters-tags {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90%;
+    ul {
+        z-index: 99999;
+        padding: 1em;
+        list-style: none; 
+    }
+    li {
+        display: inline-block;
+        margin: 1em;
+        background: white;
+        .text {
+            background: $primary-color;
+            color: white;
+        }
+        .remove {
+
+        }
+    }
+}

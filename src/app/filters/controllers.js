@@ -4,6 +4,10 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
 
     $scope.filterLength = {};
 
+    function updateFiltersTags() {
+        $scope.activeFiltersTags = filtersService.getSelectedFilters($location.search());
+    }
+
     function countActiveValues(filterName) {
         $scope.filterLength[filterName] = 0;
         _.forEach($scope.activeFilters[filterName], function (value) {
@@ -18,7 +22,6 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
             .then(
                 function (data) {
                     $scope.filters = filtersService.initGlobalFilters(data);
-                    console.log($scope.filters);
                     $scope.activeFilters = {
                         search: $location.search().search || '',
                         areas:  [],
@@ -47,6 +50,7 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
                         $scope.activeFilters.districts[districtId] = true;
                     });
 
+                    updateFiltersTags();
                 }
             );
     }
@@ -83,6 +87,7 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
 
         $location.search(query);
         $rootScope.$broadcast('updateFilters');
+        updateFiltersTags();
     };
 
     $scope.isSVG = utilsFactory.isSVG;

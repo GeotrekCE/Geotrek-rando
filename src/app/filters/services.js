@@ -53,7 +53,7 @@ function filtersService(globalSettings, utilsFactory) {
             };
         }
 
-        if (results !== undefined) {
+        if (results) {
             _.forEach(results, function (result) {
                 if (result.properties.themes && result.properties.themes.length > 0) {
                     _.forEach(result.properties.themes, function (theme) {
@@ -82,17 +82,99 @@ function filtersService(globalSettings, utilsFactory) {
             });
         }
 
-        return this.filters;
+        return self.filters;
 
     };
 
     this.getFilters = function () {
+        return self.filters;
+    };
 
-        if (self.filters) {
-            return self.filters;
-        }
+    this.getAFilter = function (id, type, subtype, subId) {
+        var filters = self.getFilters(),
+            filter = null;
 
-        self.initGlobalFilters();
+        _.forEach(filters[type], function (currentFilter) {
+            if (!subtype) {
+                if (parseInt(currentFilter.id, 10) === parseInt(id, 10)) {
+                    filter = currentFilter;
+                }
+            } else {
+                if (parseInt(currentFilter.id, 10) === parseInt(id, 10)) {
+                    _.forEach(currentFilter[subtype], function (currentSubFilter) {
+                        if (parseInt(currentSubFilter.id, 10) === parseInt(subId, 10)) {
+                            filter = currentSubFilter;
+                        }
+                    });
+                }
+            }
+        });
+
+        return filter;
+    };
+
+    this.getSelectedFilters = function (activeFilters) {
+        var selectedFilters = [];
+
+        _.forEach(activeFilters, function (aFilter, index) {
+            var tempElement,
+                tagElement;
+
+            if (index.indexOf('_') > -1) {
+                var type = 'categories',
+                    id = index.split('_')[0],
+                    subtype = index.split('_')[1],
+                    subId = aFilter;
+
+                if (typeof aFilter === 'string') {
+                    tempElement = self.getAFilter(id, type, subtype, subId);
+                    tagElement = {
+                        id: tempElement.id,
+                        label: tempElement.label || tempElement.name,
+                        type: type,
+                        typeId: id,
+                        subtype: subtype
+                    };
+
+                    selectedFilters.push(tagElement);
+                } else {
+                    _.forEach(aFilter, function () {
+                        tempElement = self.getAFilter(id, type, subtype, subId);
+                        tagElement = {
+                            id: tempElement.id,
+                            label: tempElement.label || tempElement.name,
+                            type: type,
+                            typeId: id,
+                            subtype: subtype
+                        };
+                        selectedFilters.push(tagElement);
+                    });
+                }
+            } else {
+                if (typeof aFilter === 'string') {
+                    tempElement = self.getAFilter(aFilter, index);
+                    tagElement = {
+                        id: tempElement.id,
+                        label: tempElement.label || tempElement.name,
+                        type: index,
+                    };
+                    selectedFilters.push(tagElement);
+                } else {
+                    _.forEach(aFilter, function (aSubFilter) {
+                        tempElement = self.getAFilter(aSubFilter, index);
+                        tagElement = {
+                            id: tempElement.id,
+                            label: tempElement.label || tempElement.name,
+                            type: index,
+                        };
+                        selectedFilters.push(tagElement);
+                    });
+                }
+            }
+
+        });
+
+        return selectedFilters;
     };
 
     this.testByString = function (element, query) {

@@ -1,0 +1,12 @@
+<div class="filters-tags">
+    <ul>
+        <li ng-repeat="filter in activeFiltersTags" id="tag-{{filter.id}}" class="category-{{filter.typeId}}">
+            <div class="text">
+                <span ng-if="filter.subtype">{{filter.subtype}} : </span>
+                <span ng-if="!filter.subtype">{{filter.type}} : </span>
+                <span>{{filter.label}}</span>
+            </div>
+            <div class="remove"><i class="fa fa-times"></i></div>
+        </li>
+    </ul>
+</div>

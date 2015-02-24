@@ -11,17 +11,6 @@ function resultsListeDirective() {
     };
 }
 
-function tagsFiltersDirective() {
-    return {
-        restrict: 'E',
-        replace: true,
-        scope: true,
-        template: require('./templates/tags-filters.html'),
-        controller: controllers.TagsFiltersController
-    };
-}
-
 module.exports = {
-    resultsListeDirective: resultsListeDirective,
-    tagsFiltersDirective: tagsFiltersDirective
+    resultsListeDirective: resultsListeDirective
 };

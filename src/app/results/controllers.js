@@ -48,20 +48,6 @@ function ResultsListeController($scope, $rootScope, favoritesService, resultsSer
 
 }
 
-function TagsFiltersController($scope) {
-
-    function updateFilters() {
-        $scope.activeFiltersTags = [];
-    }
-
-    updateFilters();
-
-    $scope.$on('updateFilters', function () {
-        updateFilters();
-    });
-
-}
-
 module.exports = {
     ResultsListeController: ResultsListeController
 };

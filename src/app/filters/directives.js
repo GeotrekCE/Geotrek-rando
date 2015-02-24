@@ -12,6 +12,17 @@ function globalFiltersDirective() {
     };
 }
 
+function filtersTagsDirective() {
+    return {
+        restrict: 'E',
+        replace: true,
+        scope: true,
+        template: require('./templates/tags-filters.html'),
+        controller: controllers.GlobalFiltersController
+    };
+}
+
 module.exports = {
-    globalFiltersDirective: globalFiltersDirective
+    globalFiltersDirective: globalFiltersDirective,
+    filtersTagsDirective: filtersTagsDirective
 };
