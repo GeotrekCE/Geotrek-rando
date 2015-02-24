@@ -44,18 +44,18 @@
                 <div class="text">
                     <div class="pictos">
                         <ul>
-                            <li ng-if="result.properties.type1[0]" ng-repeat="type in result.properties.type1" class="type1">
+                            <li ng-if="result.properties.type1[0]" ng-repeat="currentType in result.properties.type1" class="type1">
                                 <div>
-                                    <ng-include ng-if="isSVG(type.pictogram)" src="type.pictogram"></ng-include>
-                                    <img ng-if="!isSVG(type.pictogram)" ng-src="{{type.pictogram}}" ng-alt="{{type.name}}">
-                                    <span>{{type.name}}</span>
+                                    <ng-include ng-if="isSVG(currentType.pictogram)" src="currentType.pictogram"></ng-include>
+                                    <img ng-if="!isSVG(currentType.pictogram)" ng-src="{{currentType.pictogram}}" ng-alt="{{currentType.name}}">
+                                    <span>{{currentType.name}}</span>
                                 </div>
                             </li>
-                            <li ng-if="result.properties.type2[0]" ng-repeat="type in result.properties.type2" class="type2">
+                            <li ng-if="result.properties.type2[0]" ng-repeat="currentType2 in result.properties.type2" class="type2">
                                 <div>
-                                    <ng-include ng-if="isSVG(type.pictogram)" src="type.pictogram"></ng-include>
-                                    <img ng-if="!isSVG(type.pictogram)" ng-src="{{type.pictogram}}" ng-alt="{{type.name}}">
-                                    <span>{{type.name}}</span>
+                                    <ng-include ng-if="isSVG(currentType2.pictogram)" src="currentType2.pictogram"></ng-include>
+                                    <img ng-if="!isSVG(currentType2.pictogram)" ng-src="{{currentType2.pictogram}}" ng-alt="{{currentType2.name}}">
+                                    <span>{{currentType2.name}}</span>
                                 </div>
                             </li>
                             <li ng-if="result.properties.duration_pretty" class="duration">
@@ -195,7 +195,7 @@
             <div role="tabpanel">
 
                 <tabset justified="true">
-                    <tab ng-if="pois.length > 0" heading="Patrimoine">
+                    <tab ng-if="pois.length > 0" heading="Patrimoine" active="true">
                         <pois-liste></pois-liste>
                     </tab>
                     <tab ng-if="result.properties.touristic_contents.length > 0 || result.properties.touristic_events.length > 0 || result.properties.treks.length > 0" heading="A proximité">

@@ -2,6 +2,7 @@
 
 function DetailController($scope, $rootScope, $stateParams, utilsFactory, resultsService, poisService) {
 
+    var mainImage;
     $scope.sanitizeData = utilsFactory.sanitizeData;
     $scope.parseLength = utilsFactory.parseLength;
     $scope.removeDiacritics = utilsFactory.removeDiacritics;
@@ -27,9 +28,9 @@ function DetailController($scope, $rootScope, $stateParams, utilsFactory, result
         resultsService.getAResult($stateParams.slug)
             .then(
                 function (result) {
+                    getPoisOfResult(result);
                     $scope.result = result;
                     $rootScope.$emit('initGallery', result.properties.pictures);
-                    getPoisOfResult(result);
                     console.log(result);
                 }
             );
