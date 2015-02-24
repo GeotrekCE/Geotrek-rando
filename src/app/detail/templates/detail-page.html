@@ -1,11 +1,11 @@
-<section class="detail-page {{result.category.name}}">
+<section class="detail-page category-{{result.properties.category.id}}">
     <div class="informations">
 
         <div class="header">
             <div class="element-title">
                 <div class="cat-icon">
-                    <ng-include ng-if="isSVG(result.category.pictogram)" src="result.category.pictogram"></ng-include>
-                    <img ng-if="!isSVG(result.category.pictogram)" ng-src="{{result.category.pictogram}}" ng-alt="{{result.category.name}}">
+                    <ng-include ng-if="isSVG(result.properties.category.pictogram)" src="result.properties.category.pictogram"></ng-include>
+                    <img ng-if="!isSVG(result.properties.category.pictogram)" ng-src="{{result.properties.category.pictogram}}" ng-alt="{{result.properties.category.label}}">
                 </div>
                 <h1>{{result.properties.name}}</h1>
             </div>

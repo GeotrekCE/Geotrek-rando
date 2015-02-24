@@ -24,7 +24,7 @@ function ResultsListeController($scope, $rootScope, favoritesService, resultsSer
     };
 
     $scope.hoverLayerElement = function (currentElement, state) {
-        var layerEquivalent = document.querySelector('.layer-' + currentElement.category.name + '-' + currentElement.id);
+        var layerEquivalent = document.querySelector('.layer-category-' + currentElement.properties.category.id + '-' + currentElement.id);
         if (layerEquivalent !== null) {
             if (state === 'enter') {
                 if (!layerEquivalent.classList.contains('hovered')) {
@@ -48,6 +48,19 @@ function ResultsListeController($scope, $rootScope, favoritesService, resultsSer
 
 }
 
+function TagsFiltersController($scope) {
+
+    function updateFilters() {
+        $scope.activeFiltersTags = [];
+    }
+
+    updateFilters();
+
+    $scope.$on('updateFilters', function () {
+        updateFilters();
+    });
+
+}
 
 module.exports = {
     ResultsListeController: ResultsListeController

@@ -9,7 +9,7 @@ function contentsService(globalSettings, settingsFactory, $resource, $q) {
         // Parse content pictures, and change their URL
         _.forEach(contentsData.features, function (content) {
 
-            if (content.properties.themes && content.properties.themes !== null) {
+            if (content.properties.category.pictogram && content.properties.category.pictogram !== null) {
                 content.properties.category.pictogram = globalSettings.DOMAIN + content.properties.category.pictogram;
             }
             if (content.properties.themes && content.properties.themes !== null) {
@@ -17,28 +17,23 @@ function contentsService(globalSettings, settingsFactory, $resource, $q) {
                     theme.pictogram = globalSettings.DOMAIN + theme.pictogram;
                 });
             }
-            if (content.properties.themes && content.properties.themes !== null) {
+            if (content.properties.map_image_url && content.properties.map_image_url !== null) {
                 content.properties.map_image_url = globalSettings.DOMAIN + content.properties.map_image_url;
             }
-            if (content.properties.themes && content.properties.themes !== null) {
+            if (content.properties.filelist_url && content.properties.filelist_url !== null) {
                 content.properties.filelist_url = globalSettings.DOMAIN + content.properties.filelist_url;
             }
-            if (content.properties.themes && content.properties.themes !== null) {
+            if (content.properties.printable && content.properties.printable !== null) {
                 content.properties.printable = globalSettings.DOMAIN + content.properties.printable;
             }
-            if (content.properties.themes && content.properties.themes !== null) {
+            if (content.properties.thumbnail && content.properties.thumbnail !== null) {
                 content.properties.thumbnail = globalSettings.DOMAIN + content.properties.thumbnail;
             }
-            if (content.properties.themes && content.properties.themes !== null) {
+            if (content.properties.pictures && content.properties.pictures !== null) {
                 _.forEach(content.properties.pictures, function (picture) {
                     picture.url = globalSettings.DOMAIN + picture.url;
                 });
             }
-            content.category = {
-                name: 'category-' + content.properties.category.id.toString(),
-                id: content.properties.category.id,
-                pictogram: content.properties.category.pictogram
-            };
 
         });
         return contentsData;
@@ -90,6 +85,9 @@ function eventsService(globalSettings, settingsFactory, $resource, $q) {
         // Parse trEvent pictures, and change their URL
         _.forEach(eventsData.features, function (trEvent) {
 
+            if (trEvent.properties.category.pictogram && trEvent.properties.category.pictogram !== null) {
+                trEvent.properties.category.pictogram = globalSettings.DOMAIN + trEvent.properties.category.pictogram;
+            }
             if (trEvent.properties.themes && trEvent.properties.themes !== null) {
                 _.forEach(trEvent.properties.themes, function (theme) {
                     theme.pictogram = globalSettings.DOMAIN + theme.pictogram;
@@ -112,8 +110,6 @@ function eventsService(globalSettings, settingsFactory, $resource, $q) {
                     picture.url = globalSettings.DOMAIN + picture.url;
                 });
             }
-
-            trEvent.category = {name: 'category-' + globalSettings.EVENTS_CATEGORY_ID.toString(), id: globalSettings.EVENTS_CATEGORY_ID, pictogram: '/images/icons/events-category.svg'};
 
         });
         return eventsData;

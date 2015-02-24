@@ -27,9 +27,9 @@ function filtersService(globalSettings, utilsFactory) {
                 newCategory.type2 = category.type2;
             }
 
-            if (category.id === 80085) {
+            if (category.difficulties) {
                 newCategory.difficulty = [];
-                if (category.difficulties && category.difficulties.length > 0) {
+                if (category.difficulties.length > 0) {
                     newCategory.difficulty = category.difficulties;
                 }
                 newCategory.duration = globalSettings.FILTERS.DURATION;
@@ -187,16 +187,11 @@ function filtersService(globalSettings, utilsFactory) {
 
         _.forEach(filters, function (filter, filterName) {
             // subfilters are composed like catId-subFilterName
-            if (filterName.indexOf('-') > -1) {
-                var categoryId = filterName.split('-')[0],
-                    filterKey = filterName.split('-')[1];
+            if (filterName.indexOf('_') > -1) {
+                var categoryId = filterName.split('_')[0],
+                    filterKey = filterName.split('_')[1];
 
                 if (parseInt(categoryId, 10) === parseInt(elementCategoryId, 10)) {
-
-                    // Treks is the only category that have an usage property instead of a type2 property
-                    if (parseInt(elementCategoryId, 10) === parseInt(globalSettings.TREKS_CATEGORY_ID, 10) && filterKey === 'type2') {
-                        filterKey = 'usages';
-                    }
 
                     //Init catSubfilters child if it doesn't exists
                     if (!catSubFilters[filterKey]) {
@@ -235,9 +230,9 @@ function filtersService(globalSettings, utilsFactory) {
         if (filters.categories) {
 
             // We can look for category subfilters if the element category match
-            if (self.matchAny(element, filters.categories, 'category')) {
+            if (self.matchAny(element.properties.category, filters.categories, 'category')) {
 
-                var subFilters = self.categoryHasSubfilters(element.category.id, filters);
+                var subFilters = self.categoryHasSubfilters(element.properties.category.id, filters);
                 // if no subfilters found, then whole category filter pass
                 if (_.size(subFilters) > 0) {
                     var subfiltersResults = [];

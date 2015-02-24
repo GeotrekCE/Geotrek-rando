@@ -18,7 +18,7 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
             .then(
                 function (data) {
                     $scope.filters = filtersService.initGlobalFilters(data);
-
+                    console.log($scope.filters);
                     $scope.activeFilters = {
                         search: $location.search().search || '',
                         areas:  [],
@@ -46,8 +46,6 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
                     _.forEach($location.search().districts, function (districtId) {
                         $scope.activeFilters.districts[districtId] = true;
                     });
-
-                    console.log($scope.filters);
 
                 }
             );

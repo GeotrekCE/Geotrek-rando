@@ -89,7 +89,7 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
                 self.createLayerFromElement(result, type, elementLocation)
                     .then(
                         function (layer) {
-                            var selector = '#result-' + result.category.name + '-' + result.id.toString();
+                            var selector = '#result-' + result.properties.category.label + '-' + result.id.toString();
                             layer.on({
                                 mouseover: function () {
                                     var listeEquivalent = document.querySelector(selector);
@@ -406,7 +406,7 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
 
         if (type === "geojson") {
             var geoStyle = {
-                className:  'layer-' + element.category.name + '-' + element.id + ' ' + element.category.name
+                className:  'layer-' + element.properties.category.label + '-' + element.id + ' ' + element.properties.category.label
             };
 
             if (element.geometry.type === 'Polygon') {
@@ -971,7 +971,7 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
                         markerIcon = icon;
                     }
                 ),
-            self.getCategoryIcon(element.category.id)
+            self.getCategoryIcon(element.properties.category.id)
                 .then(
                     function (icon) {
                         categoryIcon = icon;
@@ -988,7 +988,7 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
                     iconSize: self.icons_liste.category_base.iconSize,
                     iconAnchor: self.icons_liste.category_base.iconAnchor,
                     labelAnchor: self.icons_liste.category_base.labelAnchor,
-                    className: 'double-marker layer-' + element.category.name + '-' + element.id + ' ' + element.category.name
+                    className: 'double-marker layer-category' + element.properties.category.id + '-' + element.id + ' category-' + element.properties.category.id
                 });
                 deferred.resolve(newIcon);
             }

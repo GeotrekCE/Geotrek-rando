@@ -12,9 +12,14 @@ function treksService(globalSettings, settingsFactory, $resource, $q) {
                     picture.url = globalSettings.DOMAIN + picture.url;
                 });
             }
-            if (trek.properties.usages && trek.properties.usages !== null) {
-                _.forEach(trek.properties.usages, function (usage) {
-                    usage.pictogram = globalSettings.DOMAIN + usage.pictogram;
+            if (trek.properties.type1 && trek.properties.type1 !== null) {
+                _.forEach(trek.properties.type1, function (aType1) {
+                    aType1.pictogram = globalSettings.DOMAIN + aType1.pictogram;
+                });
+            }
+            if (trek.properties.type2 && trek.properties.type2 !== null) {
+                _.forEach(trek.properties.type2, function (aType2) {
+                    aType2.pictogram = globalSettings.DOMAIN + aType2.pictogram;
                 });
             }
             if (trek.properties.difficulty && trek.properties.difficulty !== null) {
@@ -38,6 +43,9 @@ function treksService(globalSettings, settingsFactory, $resource, $q) {
             if (trek.properties.thumbnail && trek.properties.thumbnail !== null) {
                 trek.properties.thumbnail = globalSettings.DOMAIN + trek.properties.thumbnail;
             }
+            if (trek.properties.category.pictogram && trek.properties.category.pictogram !== null) {
+                trek.properties.category.pictogram = globalSettings.DOMAIN + trek.properties.category.pictogram;
+            }
             if (trek.properties.gpx && trek.properties.gpx !== null) {
                 trek.properties.gpx = globalSettings.DOMAIN + trek.properties.gpx;
             }
@@ -50,7 +58,6 @@ function treksService(globalSettings, settingsFactory, $resource, $q) {
             if (trek.properties.altimetric_profile && trek.properties.altimetric_profile !== null) {
                 trek.properties.altimetric_profile = globalSettings.DOMAIN + trek.properties.altimetric_profile;
             }
-            trek.category = {name: 'category-' + globalSettings.TREKS_CATEGORY_ID.toString(), id: globalSettings.TREKS_CATEGORY_ID, pictogram: '/images/icons/trek-category.svg'};
         });
         return treksData;
     };

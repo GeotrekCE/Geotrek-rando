@@ -1,4 +1,4 @@
-<div class="{{result.category.name}}">
+<div class="category-{{result.properties.category.id}}">
     <ul class="detail-actions">
         <li class="back-to-home">
             <a href title="Retour à la carte" ng-click="back()" tooltip-placement="right" tooltip="Retour à la carte">
@@ -35,19 +35,19 @@
                 <span class="sr-only">Signaler un problème ou une erreur</span>
             </a>
         </li>
-        <li ng-if="result.category === 'treks' && result.properties.kml" class="kml">
+        <li ng-if="result.properties.kml" class="kml">
             <a href="{{result.properties.kml}}" title="Télécharger le fichier KML de l'itinéraire" tooltip-placement="right" tooltip="Télécharger le fichier KML de l'itinéraire">
                 <span class="txt-icon">KML</span>
                 <span class="sr-only">Télécharger le fichier KML de l'itinéraire</span>
             </a>
         </li>
-        <li ng-if="result.category === 'treks' && result.properties.gpx" class="gpx">
+        <li ng-if="result.properties.gpx" class="gpx">
             <a href="{{result.properties.gpx}}" title="Télécharger le fichier GPX de l'itinéraire" tooltip-placement="right" tooltip="Télécharger le fichier GPX de l'itinéraire">
                 <span class="txt-icon">GPX</span>
                 <span class="sr-only">Télécharger le fichier GPX de l'itinéraire</span>
             </a>
         </li>
-        <li ng-if="result.category === 'treks'" class="rep-3d">
+        <li ng-if="result.properties.category.id === -2" class="rep-3d">
             <a href tooltip-placement="right" tooltip="Voir l'itinéraire en 3D !">
                 <span class="txt-icon">3D</span>
                 <span class="sr-only">Voir l'itinéraire en 3D !</span>

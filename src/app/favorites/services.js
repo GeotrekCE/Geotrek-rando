@@ -31,8 +31,8 @@ function favoritesService() {
     };
 
     this.addAFavorite = function (element) {
-        if (!self._favorites[element.category.id + '-' + element.id]) {
-            self._favorites[element.category.id + '-' + element.id] = {
+        if (!self._favorites[element.properties.category.id + '-' + element.id]) {
+            self._favorites[element.properties.category.id + '-' + element.id] = {
                 slug: element.properties.slug
             };
             self.setFavorites();
@@ -41,7 +41,7 @@ function favoritesService() {
 
     this.isInFavorites = function (element) {
         if (element) {
-            if (self._favorites[element.category.id + '-' + element.id]) {
+            if (self._favorites[element.properties.category.id + '-' + element.id]) {
                 return true;
             }
         }
@@ -50,8 +50,8 @@ function favoritesService() {
     };
 
     this.removeAFavorite = function (element) {
-        if (self._favorites[element.category.id + '-' + element.id]) {
-            delete self._favorites[element.category.id + '-' + element.id];
+        if (self._favorites[element.properties.category.id + '-' + element.id]) {
+            delete self._favorites[element.properties.category.id + '-' + element.id];
             self.setFavorites();
         }
     };

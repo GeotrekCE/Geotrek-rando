@@ -26,9 +26,9 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
                             }
 
                             _.forEach($location.search(), function (filter, filterName) {
-                                if (filterName.indexOf('-') > -1) {
-                                    var categoryId = filterName.split('-')[0],
-                                        filterKey = filterName.split('-')[1];
+                                if (filterName.indexOf('_') > -1) {
+                                    var categoryId = filterName.split('_')[0],
+                                        filterKey = filterName.split('_')[1];
                                     if (parseInt(categoryId, 10) === parseInt(category.id, 10)) {
                                         if (typeof filter === 'string') {
                                             if (!category.filters[filterKey]) {
@@ -90,15 +90,15 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
                         }
                     });
                     if (filterIsNotEmpty) {
-                        currentQuery[category.id + '-' + filterKey] = currentFilterValues;
+                        currentQuery[category.id + '_' + filterKey] = currentFilterValues;
                     } else {
-                        delete currentQuery[category.id + '-' + filterKey];
+                        delete currentQuery[category.id + '_' + filterKey];
                     }
                 });
             } else {
                 _.forEach(category.filters, function (filter, filterKey) {
-                    if (currentQuery[category.id + '-' + filterKey]) {
-                        delete currentQuery[category.id + '-' + filterKey];
+                    if (currentQuery[category.id + '_' + filterKey]) {
+                        delete currentQuery[category.id + '_' + filterKey];
                     }
                 });
             }
