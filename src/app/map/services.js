@@ -89,7 +89,7 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
                 self.createLayerFromElement(result, type, elementLocation)
                     .then(
                         function (layer) {
-                            var selector = '#result-' + result.properties.category.label + '-' + result.id.toString();
+                            var selector = '#result-category-' + result.properties.category.id.toString() + '-' + result.id.toString();
                             layer.on({
                                 mouseover: function () {
                                     var listeEquivalent = document.querySelector(selector);
@@ -988,7 +988,7 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
                     iconSize: self.icons_liste.category_base.iconSize,
                     iconAnchor: self.icons_liste.category_base.iconAnchor,
                     labelAnchor: self.icons_liste.category_base.labelAnchor,
-                    className: 'double-marker layer-category' + element.properties.category.id + '-' + element.id + ' category-' + element.properties.category.id
+                    className: 'double-marker layer-category-' + element.properties.category.id + '-' + element.id + ' category-' + element.properties.category.id
                 });
                 deferred.resolve(newIcon);
             }
