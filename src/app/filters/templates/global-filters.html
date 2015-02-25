@@ -14,7 +14,7 @@
                     <span>Districts <span ng-if="filterLength.districts > 0" class="badge">{{filterLength.districts}}</span></span>
                     <div class="choices">
                         <div ng-repeat="district in filters.districts" class="district form-group">
-                            <input type="checkbox" id="district-{{district.id}}" value="{{district.id}}" ng-false-value="{{null}}" ng-model="activeFilters.districts[district.id]"  ng-change="propagateActiveFilters()"/>
+                            <input type="checkbox" id="district-{{district.id}}" value="{{district.id}}" ng-false-value="null" ng-model="activeFilters.districts[district.id]"  ng-change="propagateActiveFilters()"/>
                             <label for="district-{{district.id}}">
                                 <span>{{district.name}}</span>
                             </label>
@@ -25,7 +25,7 @@
                     <span>Vallées <span ng-if="filterLength.areas > 0" class="badge">{{filterLength.areas}}</span></span>
                     <div class="choices">
                         <div ng-repeat="area in filters.areas" class="area form-group">
-                            <input type="checkbox" id="area-{{area.id}}" value="{{area.id}}" ng-model="activeFilters.areas[area.id]" ng-false-value="{{null}}" ng-change="propagateActiveFilters()"/>
+                            <input type="checkbox" id="area-{{area.id}}" value="{{area.id}}" ng-model="activeFilters.areas[area.id]" ng-false-value="null" ng-change="propagateActiveFilters()"/>
                             <label for="area-{{area.id}}">
                                 <span>{{area.name}}</span>
                             </label>
@@ -36,7 +36,7 @@
         </div>
         <div class="themes">
             <div ng-repeat="theme in filters.themes" class="theme form-group" tooltip-placement="top" tooltip="{{theme.label}}">
-                <input type="checkbox" id="theme-{{theme.id}}" value="{{theme.id}}" ng-model="activeFilters.themes[theme.id]" ng-false-value="{{null}}" ng-change="propagateActiveFilters()"/>
+                <input type="checkbox" id="theme-{{theme.id}}" value="{{theme.id}}" ng-model="activeFilters.themes[theme.id]" ng-false-value="null" ng-change="propagateActiveFilters()"/>
                 <label for="theme-{{theme.id}}">
                     <span class="sr-only">{{theme.label}}</span>
                     <img ng-if="!isSVG(theme.pictogram)" ng-src="{{theme.pictogram}}" ng-alt="{{theme.label}}">
