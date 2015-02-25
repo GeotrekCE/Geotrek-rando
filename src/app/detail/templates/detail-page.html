@@ -113,7 +113,7 @@
                     <i class="fa fa-quote-left"></i>
                     <div ng-bind-html="sanitizeData(result.properties.description_teaser)"></div>
                 </div>
-                <div ng-if="result.properties.ambiance" ng-bind-html="sanitizeData(result.properties.description_teaser)" class="ambiance"></div>
+                <div ng-if="result.properties.ambiance" ng-bind-html="sanitizeData(result.properties.ambiance)" class="ambiance"></div>
                 <div ng-if="result.properties.description" ng-bind-html="sanitizeData(result.properties.description)" class="description"></div>
                 <div ng-if="result.properties.is_park_centered" class="is-park-centered">
                     <i class="fa fa-info-circle"></i>
@@ -127,18 +127,21 @@
                             
                 </div>
                 <div ng-if="result.properties.disabled_infrastructure" class="disabled-infrastructure">
+                    <i class="fa fa-wheelchair"></i>
                     <div ng-bind-html="sanitizeData(result.properties.disabled_infrastructure)"></div>
                 </div>
             </div>
             <div class="more-infos">
-                <div class="transport">
-                    <h4>Transports</h4>
+                <div ng-if="result.properties.public_transport" class="transport">
+                    <h4><i class="fa fa-bus"></i>Transports</h4>
+                    <div class="card" ng-bind-html="sanitizeData(result.properties.public_transport)"></div>
                 </div>
-                <div class="access">
-                    <h4>Accès routier</h4>
+                <div ng-if="result.properties.access" class="access">
+                    <h4><i class="fa fa-road"></i>Accès routier</h4>
+                    <div class="card" ng-bind-html="sanitizeData(result.properties.access)"></div>
                 </div>
                 <div ng-if="result.properties.information_desks[0]" class="info-desks">
-                    <h4>Lieux de renseignements</h4>
+                    <h4><i class="fa fa-tty"></i>Lieux de renseignements</h4>
                     <ul>
                         <li ng-repeat="desk in result.properties.information_desks" class="desk card">
                             <div class="infos">
@@ -166,17 +169,21 @@
                     </ul>
                 </div>
                 <div ng-if="result.properties.contact || result.properties.email" class="contact-card">
-                    <h4>Contact</h4>
+                    <h4><i class="fa fa-tty"></i>Contact</h4>
                     <div class="card">
                         <div class="contact" ng-if="result.properties.contact" ng-bind-html="sanitizeData(result.properties.contact)"></div>
                         <a ng-if="result.properties.email" href="mailto:{{result.properties.email}}">{{result.properties.email}}</a>
                     </div>
                 </div>
-                <div class="going-further">
-                    <h4>Pour Plus d'informations</h4>
-                    <ul ng-if="result.propeties.web_links[0]" class="websites">
+                <div ng-if="result.properties.web_links[0]" class="going-further">
+                    <h4><i class="fa fa-info"></i>Pour Plus d'informations</h4>
+                    <ul ng-if="result.properties.web_links[0]" class="websites">
                         <li ng-repeat="link in result.properties.web_links">
-                            <a href="{{link.url}}" title="{{link.name}}">{{link.name}}</a>
+                            <a href="{{link.url}}" title="{{link.name}}">
+                                <img ng-if="link.category.pictogram && !isSVG(link.category.pictogram)" ng-src="{{link.category.pictogram}}" ng-alt="{{link.category.label}}">
+                                <ng-include ng-if="link.category.pictogram && isSVG(link.category.pictogram)" src="link.category.pictogram"></ng-include>
+                                <span>{{link.name}}</span>
+                            </a>
                         </li>
                     </ul>
                 </div>

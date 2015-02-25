@@ -406,7 +406,7 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
 
         if (type === "geojson") {
             var geoStyle = {
-                className:  'layer-' + element.properties.category.label + '-' + element.id + ' ' + element.properties.category.label
+                className:  'layer-category-' + element.properties.category.id + '-' + element.id + ' category-' + element.properties.category.id
             };
 
             if (element.geometry.type === 'Polygon') {

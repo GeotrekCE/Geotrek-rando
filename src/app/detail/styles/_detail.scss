@@ -50,6 +50,10 @@
                 font-weight: normal;
                 color: $dark-grey;
                 border-bottom: 2px solid $neutral-grey;
+                i {
+                    float: left;
+                    margin-right: 0.6em;
+                }
             }
         }
         .intro {
@@ -157,16 +161,24 @@
             }
         }
         .more-infos {
+            display: flex;
+            flex-wrap: wrap;
             & > div {
-                margin: 0 1.5em 1em;
+                width: 100%;
+                padding: 0 1.5em 1em;
+            }
+            .access, .transport {
+                width: 50%;
+                .card {
+                    background: white;
+                    padding: 1em;
+                }
             }
         }
         
-        .is-park-centered {
+        .is-park-centered, .advice, .disabled-infrastructure {
             padding: 1em;
-            background: transparentize($primary-color, 0.6);
-            border-color: $primary-color;
-            color: darken($primary-color, 10%);
+            color: $dark-grey;
             p {
                 margin: 0;
             }
@@ -175,15 +187,14 @@
                 margin-right: 0.6em;
             }
         }
+        .is-park-centered {
+            background: transparentize($warning-color, 0);
+        }
         .advice {
-            padding: 1em;
-            background: transparentize($alert-color, 0.6);
-            border-color: $alert-color;
-            color: darken($alert-color, 10%);
-            i {
-                float: left;
-                margin-right: 0.6em;
-            }
+            background: transparentize($alert-color, 0);
+        }
+        .disabled-infrastructure {
+            background: transparentize($info-color, 0);
         }
         .info-desks {
             ul {
@@ -251,6 +262,13 @@
             padding: 1em;
             background: white;
             border-left: 4px solid $primary-color;
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+        }
+        .going-further {
             ul {
                 list-style: none;
                 padding: 0;
