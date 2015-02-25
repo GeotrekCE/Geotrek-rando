@@ -31,20 +31,20 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
             themes: 0
         };
 
-        countActiveValues('themes');
         _.forEach($location.search().themes, function (themeId) {
             $scope.activeFilters.themes[themeId] = true;
         });
+        countActiveValues('themes');
 
-        countActiveValues('areas');
         _.forEach($location.search().areas, function (areaId) {
             $scope.activeFilters.areas[areaId] = true;
         });
+        countActiveValues('areas');
 
-        countActiveValues('districts');
         _.forEach($location.search().districts, function (districtId) {
             $scope.activeFilters.districts[districtId] = true;
         });
+        countActiveValues('districts');
     }
 
     function initFiltersView() {
