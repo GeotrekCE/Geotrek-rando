@@ -32,6 +32,9 @@ function filtersService(globalSettings, utilsFactory) {
                 if (category.difficulties.length > 0) {
                     newCategory.difficulty = category.difficulties;
                 }
+                if (category.routes.length > 0) {
+                    newCategory.route = category.routes;
+                }
                 newCategory.duration = globalSettings.FILTERS.DURATION;
                 newCategory.ascent = globalSettings.FILTERS.ASCENT;
             }
@@ -117,60 +120,40 @@ function filtersService(globalSettings, utilsFactory) {
         var selectedFilters = [];
 
         _.forEach(activeFilters, function (aFilter, index) {
-            var tempElement,
-                tagElement;
+            var type = index,
+                id = 0,
+                subtype = null,
+                subId = null;
 
             if (index.indexOf('_') > -1) {
-                var type = 'categories',
-                    id = index.split('_')[0],
-                    subtype = index.split('_')[1],
-                    subId = aFilter;
-
-                if (typeof aFilter === 'string') {
-                    tempElement = self.getAFilter(id, type, subtype, subId);
-                    tagElement = {
-                        id: tempElement.id,
-                        label: tempElement.label || tempElement.name,
-                        type: type,
-                        typeId: id,
-                        subtype: subtype
-                    };
-
-                    selectedFilters.push(tagElement);
-                } else {
-                    _.forEach(aFilter, function () {
-                        tempElement = self.getAFilter(id, type, subtype, subId);
-                        tagElement = {
-                            id: tempElement.id,
-                            label: tempElement.label || tempElement.name,
-                            type: type,
-                            typeId: id,
-                            subtype: subtype
-                        };
-                        selectedFilters.push(tagElement);
-                    });
-                }
-            } else {
-                if (typeof aFilter === 'string') {
-                    tempElement = self.getAFilter(aFilter, index);
-                    tagElement = {
-                        id: tempElement.id,
-                        label: tempElement.label || tempElement.name,
-                        type: index,
-                    };
-                    selectedFilters.push(tagElement);
-                } else {
-                    _.forEach(aFilter, function (aSubFilter) {
-                        tempElement = self.getAFilter(aSubFilter, index);
-                        tagElement = {
-                            id: tempElement.id,
-                            label: tempElement.label || tempElement.name,
-                            type: index,
-                        };
-                        selectedFilters.push(tagElement);
-                    });
-                }
+                type = 'categories';
+                id = index.split('_')[0];
+                subtype = index.split('_')[1];
             }
+
+            if (typeof aFilter === 'string') {
+                aFilter = [aFilter];
+            }
+
+            _.forEach(aFilter, function (aSubFilter) {
+                if (subtype) {
+                    subId = aSubFilter;
+                } else {
+                    id = aSubFilter;
+                }
+
+                var tempElement = self.getAFilter(id, type, subtype, subId);
+
+                var tagElement = {
+                    id: tempElement.id,
+                    label: tempElement.label || tempElement.name,
+                    type: type,
+                    typeId: id,
+                    subtype: subtype,
+                    queryLabel: index
+                };
+                selectedFilters.push(tagElement);
+            });
 
         });
 

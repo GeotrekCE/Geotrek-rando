@@ -122,3 +122,13 @@
         }
     }
 }
+
+@mixin filters-tags-coloring() {
+    @each $category in $categories {
+        &.category-#{nth($category, 1)} {
+            .remove {
+                background: nth($category, 2);
+            }
+        }
+    }
+}

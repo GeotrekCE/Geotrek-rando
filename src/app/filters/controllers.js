@@ -17,40 +17,45 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
         });
     }
 
+    function updateFilters() {
+        $scope.activeFilters = {
+            search: $location.search().search || '',
+            areas:  [],
+            districts: [],
+            themes: []
+        };
+
+        $scope.filterLength = {
+            districts: 0,
+            areas: 0,
+            themes: 0
+        };
+
+        countActiveValues('themes');
+        _.forEach($location.search().themes, function (themeId) {
+            $scope.activeFilters.themes[themeId] = true;
+        });
+
+        countActiveValues('areas');
+        _.forEach($location.search().areas, function (areaId) {
+            $scope.activeFilters.areas[areaId] = true;
+        });
+
+        countActiveValues('districts');
+        _.forEach($location.search().districts, function (districtId) {
+            $scope.activeFilters.districts[districtId] = true;
+        });
+    }
+
     function initFiltersView() {
         resultsService.getAllResults()
             .then(
                 function (data) {
                     $scope.filters = filtersService.initGlobalFilters(data);
-                    $scope.activeFilters = {
-                        search: $location.search().search || '',
-                        areas:  [],
-                        districts: [],
-                        themes: []
-                    };
-
-                    $scope.filterLength = {
-                        districts: 0,
-                        areas: 0,
-                        themes: 0
-                    };
-
-                    countActiveValues('themes');
-                    _.forEach($location.search().themes, function (themeId) {
-                        $scope.activeFilters.themes[themeId] = true;
-                    });
-
-                    countActiveValues('areas');
-                    _.forEach($location.search().areas, function (areaId) {
-                        $scope.activeFilters.areas[areaId] = true;
-                    });
-
-                    countActiveValues('districts');
-                    _.forEach($location.search().districts, function (districtId) {
-                        $scope.activeFilters.districts[districtId] = true;
-                    });
-
+                    updateFilters();
                     updateFiltersTags();
+                    $rootScope.$on('updateFilters', updateFilters);
+                    $rootScope.$on('updateFilters', updateFiltersTags);
                 }
             );
     }
@@ -87,7 +92,37 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
 
         $location.search(query);
         $rootScope.$broadcast('updateFilters');
-        updateFiltersTags();
+    };
+
+    $scope.removeFilterByTag = function (tagLabel, tagValue) {
+        var query = $location.search();
+        if (typeof query[tagLabel] === 'string') {
+            if (parseInt(tagValue, 10) === parseInt(query[tagLabel], 10)) {
+                delete query[tagLabel];
+            }
+        } else {
+            _.forEach(query[tagLabel], function (filter, index) {
+                if (parseInt(tagValue, 10) === parseInt(filter, 10)) {
+                    query[tagLabel].splice(index, 1);
+                }
+            });
+            if (query[tagLabel].length === 0) {
+                delete query[tagLabel];
+            }
+        }
+
+        if (tagLabel === 'categories') {
+            _.forEach(query, function (filter, index) {
+                console.log(parseInt(index.split('_')[0], 10));
+                console.log(parseInt(tagValue, 10));
+                if (parseInt(index.split('_')[0], 10) === parseInt(tagValue, 10)) {
+                    delete query[index];
+                }
+            });
+        }
+
+        $location.search(query);
+        $rootScope.$broadcast('updateFilters');
     };
 
     $scope.isSVG = utilsFactory.isSVG;

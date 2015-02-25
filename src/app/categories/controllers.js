@@ -2,67 +2,72 @@
 
 function CategoriesListeController($scope, $rootScope, $location, globalSettings, categoriesService) {
 
+    function updateCategories() {
+        _.forEach($scope.categories, function (category) {
+
+            category.active = false;
+            category.filters = {};
+
+            if ($location.search().categories) {
+                if (typeof $location.search().categories === 'string') {
+                    if (parseInt(category.id, 10) === parseInt($location.search().categories, 10)) {
+                        category.active = true;
+                    }
+                } else {
+                    _.forEach($location.search().categories, function (filter) {
+                        if (parseInt(category.id, 10) === parseInt(filter, 10)) {
+                            category.active = true;
+                        }
+                    });
+                }
+
+                _.forEach($location.search(), function (filter, filterName) {
+                    if (filterName.indexOf('_') > -1) {
+                        var categoryId = filterName.split('_')[0],
+                            filterKey = filterName.split('_')[1];
+                        if (parseInt(categoryId, 10) === parseInt(category.id, 10)) {
+                            if (typeof filter === 'string') {
+                                if (!category.filters[filterKey]) {
+                                    category.filters[filterKey] = {};
+                                }
+                                category.filters[filterKey][filter] = true;
+                            } else {
+                                _.forEach(filter, function (filterValue) {
+                                    if (!category.filters[filterKey]) {
+                                        category.filters[filterKey] = {};
+                                    }
+                                    category.filters[filterKey][filterValue] = true;
+                                });
+                            }
+                        }
+                    }
+                });
+
+            } else {
+                if (typeof globalSettings.DEFAULT_ACTIVE_CATEGORIES === 'string') {
+                    if (parseInt(category.id, 10) === parseInt(globalSettings.DEFAULT_ACTIVE_CATEGORIES, 10)) {
+                        category.active = true;
+                    }
+                } else {
+                    _.forEach(globalSettings.DEFAULT_ACTIVE_CATEGORIES, function (filter) {
+                        if (parseInt(category.id, 10) === parseInt(filter, 10)) {
+                            category.active = true;
+                        }
+                    });
+                }
+
+            }
+
+        });
+    }
+
     function loadCategories() {
         categoriesService.getCategories()
             .then(
                 function (data) {
                     $scope.categories = data;
-                    _.forEach($scope.categories, function (category) {
-
-                        category.active = false;
-                        category.filters = {};
-
-                        if ($location.search().categories) {
-                            if (typeof $location.search().categories === 'string') {
-                                if (parseInt(category.id, 10) === parseInt($location.search().categories, 10)) {
-                                    category.active = true;
-                                }
-                            } else {
-                                _.forEach($location.search().categories, function (filter) {
-                                    if (parseInt(category.id, 10) === parseInt(filter, 10)) {
-                                        category.active = true;
-                                    }
-                                });
-                            }
-
-                            _.forEach($location.search(), function (filter, filterName) {
-                                if (filterName.indexOf('_') > -1) {
-                                    var categoryId = filterName.split('_')[0],
-                                        filterKey = filterName.split('_')[1];
-                                    if (parseInt(categoryId, 10) === parseInt(category.id, 10)) {
-                                        if (typeof filter === 'string') {
-                                            if (!category.filters[filterKey]) {
-                                                category.filters[filterKey] = {};
-                                            }
-                                            category.filters[filterKey][filter] = true;
-                                        } else {
-                                            _.forEach(filter, function (filterValue) {
-                                                if (!category.filters[filterKey]) {
-                                                    category.filters[filterKey] = {};
-                                                }
-                                                category.filters[filterKey][filterValue] = true;
-                                            });
-                                        }
-                                    }
-                                }
-                            });
-
-                        } else {
-                            if (typeof globalSettings.DEFAULT_ACTIVE_CATEGORIES === 'string') {
-                                if (parseInt(category.id, 10) === parseInt(globalSettings.DEFAULT_ACTIVE_CATEGORIES, 10)) {
-                                    category.active = true;
-                                }
-                            } else {
-                                _.forEach(globalSettings.DEFAULT_ACTIVE_CATEGORIES, function (filter) {
-                                    if (parseInt(category.id, 10) === parseInt(filter, 10)) {
-                                        category.active = true;
-                                    }
-                                });
-                            }
-
-                        }
-
-                    });
+                    updateCategories();
+                    $rootScope.$on('updateFilters', updateCategories);
                     console.log($scope.categories);
                 }
             );

@@ -3,21 +3,41 @@
     top: 0;
     left: 0;
     width: 90%;
+    z-index: 99999;
     ul {
-        z-index: 99999;
-        padding: 1em;
+        padding: 10px;
         list-style: none; 
     }
     li {
         display: inline-block;
-        margin: 1em;
-        background: white;
+        margin: 0 1em 0.6em;
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 2px 0 0 transparentize($dark-grey, 0.6);
+        cursor: default;
+        font-weight: 400;
+        @include filters-tags-coloring();
+        & > div {
+            display: inline-block;
+            padding: 0.4em 0.6em;
+        }
         .text {
-            background: $primary-color;
-            color: white;
+            color: $dark-grey;
         }
         .remove {
-
+            background: $primary-color;
+            color: white;
+            cursor: pointer;
+            font-weight: 300;
+            span {
+                opacity: 0.8;
+                transition: all 0.2s ease;
+            }
+            &:hover {
+                span {
+                    opacity: 1;
+                    transform: scale(1.2);
+                }   
+            }
         }
     }
 }
