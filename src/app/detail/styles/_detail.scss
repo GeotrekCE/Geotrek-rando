@@ -276,10 +276,16 @@
                 flex-direction: column;
             }
             .tab-content {
+                display: flex;
                 flex: 1;
-                overflow-y: auto;
-                overflow-x: hidden;
+                overflow: hidden;
                 background: $light-grey;
+                & > .active {
+                    display: flex;
+                }
+                .tab-pane {
+                    flex: 1;
+                }
             }
             .nav-tabs li {
                 a {
