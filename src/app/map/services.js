@@ -36,6 +36,7 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
     this.clearAllLayers = function () {
         // Remove all markers so the displayed markers can fit the search results
         self._clustersLayer.clearLayers();
+        self._poisMarkersLayer.clearLayers();
 
         if (globalSettings.ENABLE_TREKS) {
             self._treksMarkersLayer.clearLayers();
@@ -48,10 +49,14 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
 
     };
 
-    this.updateBounds = function (updateBounds, layer) {
-
+    this.updateBounds = function (updateBounds, layer, padding) {
+        if (padding === undefined || padding < 0) {
+            var padding = 0;
+        }
         if ((updateBounds === undefined) || (updateBounds === true)) {
-            self.map.fitBounds(layer.getBounds());
+            console.log(layer);
+            console.log(layer.getBounds());
+            self.map.fitBounds(layer.getBounds().pad(padding));
         }
 
     };
@@ -160,18 +165,21 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
                     function (layer) {
                         currentLayer.addLayer(layer);
                         self._clustersLayer.addLayer(currentLayer);
-
                         if (result.geometry.type !== "Point") {
                             self.updateBounds(updateBounds, currentLayer);
                         } else {
                             self.updateBounds(updateBounds, self._clustersLayer);
                         }
-
-                        self.loadingMarkers = false;
                     }
                 );
 
-            self.createPOISFromElement(result);
+            self.createPOISFromElement(result)
+                .then(
+                    function () {
+                        self.updateBounds(true, self._poisMarkersLayer, 0.5);
+                        self.loadingMarkers = false;
+                    }
+                );
         }
 
     };
@@ -225,7 +233,7 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
             this._touristicsMarkersLayer = self.createLayer();
         }
 
-        this._poisMarkersLayer = self.createLayer();
+        this._poisMarkersLayer = self.createClusterLayer();
 
         this.map.addLayer(this._clustersLayer);
         this.map.addLayer(this._poisMarkersLayer);
@@ -250,82 +258,103 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
     };
 
     this.createPOISFromElement = function (element) {
-
-        var startPoint = utilsFactory.getStartPoint(element);
+        var deferred = $q.defer(),
+            promises = [],
+            startPoint = utilsFactory.getStartPoint(element);
 
         if (element.properties.parkin_elementLocation) {
             var parkingPoint = utilsFactory.getParkingPoint(element);
-            self.createLayerFromElement(element, 'parking', parkingPoint)
-                .then(
-                    function (marker) {
-                        self._poisMarkersLayer.addLayer(marker);
-                    }
-                );
+            promises.push(
+                self.createLayerFromElement(element, 'parking', parkingPoint)
+                    .then(
+                        function (marker) {
+                            self._poisMarkersLayer.addLayer(marker);
+                        }
+                    )
+            );
         }
 
         if (element.geometry.type === 'LineString') {
             var endPoint = utilsFactory.getEndPoint(element);
 
-            self.createLayerFromElement(element, 'departure', startPoint)
-                .then(
-                    function (marker) {
-                        self._poisMarkersLayer.addLayer(marker);
-                    }
-                );
+            promises.push(
+                self.createLayerFromElement(element, 'departure', startPoint)
+                    .then(
+                        function (marker) {
+                            self._poisMarkersLayer.addLayer(marker);
+                        }
+                    )
+            );
 
-            self.createLayerFromElement(element, 'arrival', endPoint)
-                .then(
-                    function (marker) {
-                        self._poisMarkersLayer.addLayer(marker);
-                    }
-                );
+            promises.push(
+                self.createLayerFromElement(element, 'arrival', endPoint)
+                    .then(
+                        function (marker) {
+                            self._poisMarkersLayer.addLayer(marker);
+                        }
+                    )
+            );
             
 
-            poisService.getPoisFromElement(element.id)
-                .then(
-                    function (pois) {
-                        _.forEach(pois.features, function (poi) {
-                            var poiLocation = utilsFactory.getStartPoint(poi);
-                            self.createLayerFromElement(poi, 'poi', poiLocation)
-                                .then(
-                                    function (marker) {
-                                        var selector = '#poi-' + poi.id.toString();
-                                        marker.on({
-                                            mouseover: function () {
-                                                var listeEquivalent = document.querySelector(selector);
-                                                if (listeEquivalent !== null) {
-                                                    if (!listeEquivalent.classList.contains('hovered')) {
-                                                        listeEquivalent.classList.add('hovered');
+            promises.push(
+                poisService.getPoisFromElement(element.id)
+                    .then(
+                        function (pois) {
+                            var counter = 0;
+                            _.forEach(pois.features, function (poi) {
+                                var poiLocation = utilsFactory.getStartPoint(poi);
+                                self.createLayerFromElement(poi, 'poi', poiLocation)
+                                    .then(
+                                        function (marker) {
+                                            var selector = '#poi-' + poi.id.toString();
+
+                                            counter++;
+                                            marker.on({
+                                                mouseover: function () {
+                                                    var listeEquivalent = document.querySelector(selector);
+                                                    if (listeEquivalent !== null) {
+                                                        if (!listeEquivalent.classList.contains('hovered')) {
+                                                            listeEquivalent.classList.add('hovered');
+                                                        }
                                                     }
-                                                }
-                                            },
-                                            mouseout: function () {
-                                                var listeEquivalent = document.querySelector(selector);
-                                                if (listeEquivalent !== null) {
-                                                    if (listeEquivalent.classList.contains('hovered')) {
-                                                        listeEquivalent.classList.remove('hovered');
+                                                },
+                                                mouseout: function () {
+                                                    var listeEquivalent = document.querySelector(selector);
+                                                    if (listeEquivalent !== null) {
+                                                        if (listeEquivalent.classList.contains('hovered')) {
+                                                            listeEquivalent.classList.remove('hovered');
+                                                        }
                                                     }
-                                                }
-                                            },
-                                            remove: function () {
-                                                var listeEquivalent = document.querySelector(selector);
-                                                if (listeEquivalent !== null) {
-                                                    if (listeEquivalent.classList.contains('hovered')) {
-                                                        listeEquivalent.classList.remove('hovered');
+                                                },
+                                                remove: function () {
+                                                    var listeEquivalent = document.querySelector(selector);
+                                                    if (listeEquivalent !== null) {
+                                                        if (listeEquivalent.classList.contains('hovered')) {
+                                                            listeEquivalent.classList.remove('hovered');
+                                                        }
                                                     }
+                                                },
+                                                click: function () {
+                                                    //$state.go("layout.detail", { slug: result.properties.slug });
                                                 }
-                                            },
-                                            click: function () {
-                                                //$state.go("layout.detail", { slug: result.properties.slug });
-                                            }
-                                        });
-                                        self._poisMarkersLayer.addLayer(marker);
-                                    }
-                                );
-                        });
-                    }
-                );
+                                            });
+                                            self._poisMarkersLayer.addLayer(marker);
+                                        }
+                                    );
+                            });
+                        }
+                    )
+            );
         }
+
+        $q.all(promises)
+            .then(
+                function () {
+                    deferred.resolve(true);
+                }
+            );
+
+        return deferred.promise;
     };
 
     /*this.createMarkersFromTrek = function (trek, pois) {

@@ -3,13 +3,13 @@
 function MapController($scope, globalSettings, $rootScope, $state, resultsService, mapService, $stateParams) {
 
     function updateMapWithResults(updateBounds) {
-
         resultsService.getFilteredResults()
             .then(
                 function (data) {
                     $scope.results = data;
+                    console.log(data);
                     if (data.length > 0) {
-                        mapService.displayResults($scope.results, updateBounds);
+                        mapService.displayResults(data, updateBounds);
                     } else {
                         mapService.clearAllLayers();
                     }
