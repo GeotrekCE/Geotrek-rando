@@ -9,25 +9,17 @@
                 </div>
                 <h1>{{result.properties.name}}</h1>
             </div>
-            <div class="from-to">
-                <span ng-if="result.properties.departure && result.properties.departure !== result.properties.arrival">Départ : {{result.properties.departure}}</span>
-                <span ng-if="result.properties.arrival">
-                    <span ng-if="result.properties.departure !== result.properties.arrival" class="arrival">
-                        Arrivée :
-                    </span>
-                    <span ng-if="result.properties.departure === result.properties.arrival" class="loop">
-                        Boucle :
-                    </span>
-                    {{result.properties.arrival}}
-                </span>
-                <span ng-if="!result.properties.departure && !result.properties.arrival && result.properties.cities[0]">
-                    Lieux : {{result.properties.cities[0].name}}
-                </span>
-            </div>
         </div>
 
         <div class="main-infos">
             <div class="intro">
+                <div class="ambiance-and-teaser">
+                    <div ng-if="result.properties.description_teaser" class="description_teaser">
+                        <i class="fa fa-quote-left"></i>
+                        <div ng-bind-html="sanitizeData(result.properties.description_teaser)"></div>
+                    </div>
+                    <div ng-if="result.properties.ambiance" ng-bind-html="sanitizeData(result.properties.ambiance)" class="ambiance"></div>
+                </div>
                 <div class="pictures">
                     <div class="main-visual">
                         <img ng-src="{{result.properties.pictures[0].url}}" ng-alt="{{result.properties.pictures[0].legend}}">
@@ -106,14 +98,24 @@
                             </li>
                         </ul>
                     </div>
+                    <div class="from-to">
+                        <span ng-if="result.properties.departure && result.properties.departure !== result.properties.arrival">Départ : {{result.properties.departure}}</span>
+                        <span ng-if="result.properties.arrival">
+                            <span ng-if="result.properties.departure !== result.properties.arrival" class="arrival">
+                                Arrivée :
+                            </span>
+                            <span ng-if="result.properties.departure === result.properties.arrival" class="loop">
+                                Boucle :
+                            </span>
+                            {{result.properties.arrival}}
+                        </span>
+                        <span ng-if="!result.properties.departure && !result.properties.arrival && result.properties.cities[0]">
+                            Lieux : {{result.properties.cities[0].name}}
+                        </span>
+                    </div>
                 </div>
             </div>
-            <div class="element-description card">
-                <div ng-if="result.properties.description_teaser" class="description_teaser">
-                    <i class="fa fa-quote-left"></i>
-                    <div ng-bind-html="sanitizeData(result.properties.description_teaser)"></div>
-                </div>
-                <div ng-if="result.properties.ambiance" ng-bind-html="sanitizeData(result.properties.ambiance)" class="ambiance"></div>
+            <div class="element-description">
                 <div ng-if="result.properties.description" ng-bind-html="sanitizeData(result.properties.description)" class="description"></div>
                 <div ng-if="result.properties.is_park_centered" class="is-park-centered">
                     <i class="fa fa-info-circle"></i>
