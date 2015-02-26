@@ -665,7 +665,7 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
             this._touristicsMarkersLayer = self.createLayer();
         }
 
-        this._poisMarkersLayer = self.createClusterLayer();
+        this._poisMarkersLayer = self.createLayer();
 
         this.map.addLayer(this._clustersLayer);
         this.map.addLayer(this._poisMarkersLayer);
