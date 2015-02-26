@@ -127,6 +127,7 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
                             currentLayer.addLayer(layer);
                             self._clustersLayer.addLayer(currentLayer);
                             if (currentCount === _.size(results)) {
+                                self.map.invalidateSize();
                                 self.updateBounds(updateBounds, self._clustersLayer);
                                 self.loadingMarkers = false;
                             }
@@ -176,7 +177,8 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
             self.createPOISFromElement(result)
                 .then(
                     function () {
-                        self.updateBounds(true, self._poisMarkersLayer, 0.5);
+                        self.map.invalidateSize();
+                        //self.updateBounds(true, self._poisMarkersLayer, 0.5);
                         self.loadingMarkers = false;
                     }
                 );
