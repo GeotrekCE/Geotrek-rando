@@ -221,7 +221,6 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
         } else {
 
-            self._categoriesList = [];
             var promises = [];
 
             if (globalSettings.ENABLE_TREKS) {
@@ -261,6 +260,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
             $q.all(promises)
                 .then(
                     function () {
+                        self._categoriesList = [];
                         if (globalSettings.ENABLE_TREKS) {
                             self._categoriesList.push(trekCat);
                         }

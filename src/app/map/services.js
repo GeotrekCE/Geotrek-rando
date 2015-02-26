@@ -5,246 +5,6 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
     var self = this,
         loadingMarkers = false;
 
-    this.createLayer = function () {
-
-        var layer = new L.LayerGroup();
-
-        return layer;
-
-    };
-
-    this.createClusterLayer = function () {
-
-        var clusterLayer = new L.MarkerClusterGroup({
-            showCoverageOnHover: false,
-            iconCreateFunction: function (cluster) {
-                return iconsService.getClusterIcon(cluster);
-            }
-        });
-
-        return clusterLayer;
-
-    };
-
-    this.createGeoJSONLayer = function () {
-
-        var layer = new L.geoJson();
-
-        return layer;
-    };
-
-    this.clearAllLayers = function () {
-        // Remove all markers so the displayed markers can fit the search results
-        self._clustersLayer.clearLayers();
-        self._poisMarkersLayer.clearLayers();
-
-        if (globalSettings.ENABLE_TREKS) {
-            self._treksMarkersLayer.clearLayers();
-            self._treksgeoJsonLayer.clearLayers();
-        }
-
-        if (globalSettings.ENABLE_TOURISTIC_CONTENT || globalSettings.ENABLE_TOURISTIC_EVENTS) {
-            self._touristicsMarkersLayer.clearLayers();
-        }
-
-    };
-
-    this.updateBounds = function (updateBounds, layer, padding) {
-        if (padding === undefined || padding < 0) {
-            var padding = 0;
-        }
-        if ((updateBounds === undefined) || (updateBounds === true)) {
-            console.log(layer);
-            console.log(layer.getBounds());
-            self.map.fitBounds(layer.getBounds().pad(padding));
-        }
-
-    };
-
-    // Add treks geojson to the map
-    this.displayResults = function (results, updateBounds) {
-
-        var counter = 0;
-
-        if (!self.loadingMarkers) {
-            self.loadingMarkers = true;
-
-            this.treksIconified = this.map.getZoom() < globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL;
-            this.clearAllLayers();
-
-            _.forEach(results, function (result) {
-
-                counter++;
-
-                var currentLayer,
-                    elementLocation,
-                    currentCount = counter,
-                    type = '';
-
-                if (result.geometry.type !== "Point" && !self.treksIconified) {
-                    currentLayer = self._treksgeoJsonLayer;
-                    type = 'geojson';
-                    elementLocation = [];
-                } else {
-                    currentLayer = self._touristicsMarkersLayer;
-                    type = 'category';
-                    elementLocation = utilsFactory.getStartPoint(result);
-                }
-
-                self.createLayerFromElement(result, type, elementLocation)
-                    .then(
-                        function (layer) {
-                            var selector = '#result-category-' + result.properties.category.id.toString() + '-' + result.id.toString();
-                            layer.on({
-                                mouseover: function () {
-                                    var listeEquivalent = document.querySelector(selector);
-                                    if (listeEquivalent !== null) {
-                                        if (!listeEquivalent.classList.contains('hovered')) {
-                                            listeEquivalent.classList.add('hovered');
-                                        }
-                                    }
-                                },
-                                mouseout: function () {
-                                    var listeEquivalent = document.querySelector(selector);
-                                    if (listeEquivalent !== null) {
-                                        if (listeEquivalent.classList.contains('hovered')) {
-                                            listeEquivalent.classList.remove('hovered');
-                                        }
-                                    }
-                                },
-                                remove: function () {
-                                    var listeEquivalent = document.querySelector(selector);
-                                    if (listeEquivalent !== null) {
-                                        if (listeEquivalent.classList.contains('hovered')) {
-                                            listeEquivalent.classList.remove('hovered');
-                                        }
-                                    }
-                                },
-                                click: function () {
-                                    $state.go("layout.detail", { slug: result.properties.slug });
-                                }
-                            });
-                            currentLayer.addLayer(layer);
-                            self._clustersLayer.addLayer(currentLayer);
-                            if (currentCount === _.size(results)) {
-                                self.map.invalidateSize();
-                                self.updateBounds(updateBounds, self._clustersLayer);
-                                self.loadingMarkers = false;
-                            }
-                        }
-                    );
-
-            });
-        }
-
-    };
-
-    this.displayDetail = function (result, updateBounds) {
-
-        var type = '',
-            elementLocation,
-            currentLayer;
-
-        if (!self.loadingMarkers) {
-
-            self.loadingMarkers = true;
-
-            this.clearAllLayers();
-
-            if (result.geometry.type !== "Point") {
-                currentLayer = self._treksgeoJsonLayer;
-                type = 'geojson';
-                elementLocation = [];
-            } else {
-                currentLayer = self._touristicsMarkersLayer;
-                type = 'category';
-                elementLocation = utilsFactory.getStartPoint(result);
-            }
-
-            self.createLayerFromElement(result, type, elementLocation)
-                .then(
-                    function (layer) {
-                        currentLayer.addLayer(layer);
-                        self._clustersLayer.addLayer(currentLayer);
-                        if (result.geometry.type !== "Point") {
-                            self.updateBounds(updateBounds, currentLayer);
-                        } else {
-                            self.updateBounds(updateBounds, self._clustersLayer);
-                        }
-                    }
-                );
-
-            self.createPOISFromElement(result)
-                .then(
-                    function () {
-                        self.map.invalidateSize();
-                        //self.updateBounds(true, self._poisMarkersLayer, 0.5);
-                        self.loadingMarkers = false;
-                    }
-                );
-        }
-
-    };
-
-    this.initMap = function (mapSelector) {
-
-        // Set background Layers
-        this._baseLayers = {
-            main: L.tileLayer(
-                globalSettings.MAIN_LEAFLET_BACKGROUND.LAYER_URL,
-                {
-                    id: 'main',
-                    attribution: globalSettings.MAIN_LEAFLET_BACKGROUND.ATTRIBUTION
-                }
-            ),
-            satellite: L.tileLayer(
-                globalSettings.SATELLITE_LEAFLET_BACKGROUND.LAYER_URL,
-                {
-                    id: 'satellite',
-                    attribution: globalSettings.SATELLITE_LEAFLET_BACKGROUND.ATTRIBUTION
-                }
-            )
-        };
-
-        var mapParameters = {
-            center: [globalSettings.LEAFLET_CONF.CENTER_LATITUDE, globalSettings.LEAFLET_CONF.CENTER_LONGITUDE],
-            zoom: globalSettings.LEAFLET_CONF.DEFAULT_ZOOM,
-            minZoom: globalSettings.LEAFLET_CONF.DEFAULT_MIN_ZOOM,
-            maxZoom: globalSettings.LEAFLET_CONF.DEFAULT_MAX_ZOOM,
-            scrollWheelZoom: true,
-            layers: this._baseLayers.main
-        };
-
-        //Mixins for map
-        this.initCustomsMixins();
-
-        this.map = L.map(mapSelector, mapParameters);
-
-        // Set-up maps controls (needs _map to be defined);
-        this.initMapControls();
-
-        //Set-up Layers
-        this._clustersLayer = self.createClusterLayer();
-
-        if (globalSettings.ENABLE_TREKS) {
-            this._treksMarkersLayer = self.createLayer();
-            this._treksgeoJsonLayer = self.createGeoJSONLayer();
-        }
-
-        if (globalSettings.ENABLE_TOURISTIC_CONTENT || globalSettings.ENABLE_TOURISTIC_EVENTS) {
-            this._touristicsMarkersLayer = self.createLayer();
-        }
-
-        this._poisMarkersLayer = self.createClusterLayer();
-
-        this.map.addLayer(this._clustersLayer);
-        this.map.addLayer(this._poisMarkersLayer);
-
-        return this.map;
-
-    };
-
-
 
     // MARKERS AND CLUSTERS  //////////////////////////////
     //
@@ -668,6 +428,250 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
             );
 
         };
+    };
+
+
+
+    // MAIN FUNCTIONS AN INIT
+    //
+    //
+
+    this.createLayer = function () {
+
+        var layer = new L.LayerGroup();
+
+        return layer;
+
+    };
+
+    this.createClusterLayer = function () {
+
+        var clusterLayer = new L.MarkerClusterGroup({
+            showCoverageOnHover: false,
+            iconCreateFunction: function (cluster) {
+                return iconsService.getClusterIcon(cluster);
+            }
+        });
+
+        return clusterLayer;
+
+    };
+
+    this.createGeoJSONLayer = function () {
+
+        var layer = new L.geoJson();
+
+        return layer;
+    };
+
+    this.clearAllLayers = function () {
+        // Remove all markers so the displayed markers can fit the search results
+        self._clustersLayer.clearLayers();
+        self._poisMarkersLayer.clearLayers();
+
+        if (globalSettings.ENABLE_TREKS) {
+            self._treksMarkersLayer.clearLayers();
+            self._treksgeoJsonLayer.clearLayers();
+        }
+
+        if (globalSettings.ENABLE_TOURISTIC_CONTENT || globalSettings.ENABLE_TOURISTIC_EVENTS) {
+            self._touristicsMarkersLayer.clearLayers();
+        }
+
+    };
+
+    this.updateBounds = function (updateBounds, layer, padding) {
+        if (padding === undefined || padding < 0) {
+            var padding = 0;
+        }
+        if ((updateBounds === undefined) || (updateBounds === true)) {
+            self.map.fitBounds(layer.getBounds().pad(padding));
+        }
+
+    };
+
+    // Add treks geojson to the map
+    this.displayResults = function (results, updateBounds) {
+
+        var counter = 0;
+
+        if (!self.loadingMarkers) {
+            self.loadingMarkers = true;
+
+            this.treksIconified = this.map.getZoom() < globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL;
+            this.clearAllLayers();
+
+            _.forEach(results, function (result) {
+
+                counter++;
+
+                var currentLayer,
+                    elementLocation,
+                    currentCount = counter,
+                    type = '';
+
+                if (result.geometry.type !== "Point" && !self.treksIconified) {
+                    currentLayer = self._treksgeoJsonLayer;
+                    type = 'geojson';
+                    elementLocation = [];
+                } else {
+                    currentLayer = self._touristicsMarkersLayer;
+                    type = 'category';
+                    elementLocation = utilsFactory.getStartPoint(result);
+                }
+
+                self.createLayerFromElement(result, type, elementLocation)
+                    .then(
+                        function (layer) {
+
+                            var selector = '#result-category-' + result.properties.category.id.toString() + '-' + result.id.toString();
+                            layer.on({
+                                mouseover: function () {
+                                    var listeEquivalent = document.querySelector(selector);
+                                    if (listeEquivalent !== null) {
+                                        if (!listeEquivalent.classList.contains('hovered')) {
+                                            listeEquivalent.classList.add('hovered');
+                                        }
+                                    }
+                                },
+                                mouseout: function () {
+                                    var listeEquivalent = document.querySelector(selector);
+                                    if (listeEquivalent !== null) {
+                                        if (listeEquivalent.classList.contains('hovered')) {
+                                            listeEquivalent.classList.remove('hovered');
+                                        }
+                                    }
+                                },
+                                remove: function () {
+                                    var listeEquivalent = document.querySelector(selector);
+                                    if (listeEquivalent !== null) {
+                                        if (listeEquivalent.classList.contains('hovered')) {
+                                            listeEquivalent.classList.remove('hovered');
+                                        }
+                                    }
+                                },
+                                click: function () {
+                                    $state.go("layout.detail", { slug: result.properties.slug });
+                                }
+                            });
+                            currentLayer.addLayer(layer);
+                            self._clustersLayer.addLayer(currentLayer);
+                            if (currentCount === _.size(results)) {
+                                self.map.invalidateSize();
+                                self.updateBounds(updateBounds, self._clustersLayer);
+                                self.loadingMarkers = false;
+                            }
+                        }
+                    );
+
+            });
+        }
+
+    };
+
+    this.displayDetail = function (result, updateBounds) {
+
+        var type = '',
+            elementLocation,
+            currentLayer;
+
+        if (!self.loadingMarkers) {
+
+            self.loadingMarkers = true;
+
+            this.clearAllLayers();
+
+            if (result.geometry.type !== "Point") {
+                currentLayer = self._treksgeoJsonLayer;
+                type = 'geojson';
+                elementLocation = [];
+            } else {
+                currentLayer = self._touristicsMarkersLayer;
+                type = 'category';
+                elementLocation = utilsFactory.getStartPoint(result);
+            }
+
+            self.createLayerFromElement(result, type, elementLocation)
+                .then(
+                    function (layer) {
+                        currentLayer.addLayer(layer);
+                        self._clustersLayer.addLayer(currentLayer);
+                        if (result.geometry.type !== "Point") {
+                            self.updateBounds(updateBounds, currentLayer);
+                        } else {
+                            self.updateBounds(updateBounds, self._clustersLayer);
+                        }
+                    }
+                );
+
+            self.createPOISFromElement(result)
+                .then(
+                    function () {
+                        self.map.invalidateSize();
+                        //self.updateBounds(true, self._poisMarkersLayer, 0.5);
+                        self.loadingMarkers = false;
+                    }
+                );
+        }
+
+    };
+
+    this.initMap = function (mapSelector) {
+
+        // Set background Layers
+        this._baseLayers = {
+            main: L.tileLayer(
+                globalSettings.MAIN_LEAFLET_BACKGROUND.LAYER_URL,
+                {
+                    id: 'main',
+                    attribution: globalSettings.MAIN_LEAFLET_BACKGROUND.ATTRIBUTION
+                }
+            ),
+            satellite: L.tileLayer(
+                globalSettings.SATELLITE_LEAFLET_BACKGROUND.LAYER_URL,
+                {
+                    id: 'satellite',
+                    attribution: globalSettings.SATELLITE_LEAFLET_BACKGROUND.ATTRIBUTION
+                }
+            )
+        };
+
+        var mapParameters = {
+            center: [globalSettings.LEAFLET_CONF.CENTER_LATITUDE, globalSettings.LEAFLET_CONF.CENTER_LONGITUDE],
+            zoom: globalSettings.LEAFLET_CONF.DEFAULT_ZOOM,
+            minZoom: globalSettings.LEAFLET_CONF.DEFAULT_MIN_ZOOM,
+            maxZoom: globalSettings.LEAFLET_CONF.DEFAULT_MAX_ZOOM,
+            scrollWheelZoom: true,
+            layers: this._baseLayers.main
+        };
+
+        //Mixins for map
+        this.initCustomsMixins();
+
+        this.map = L.map(mapSelector, mapParameters);
+
+        // Set-up maps controls (needs _map to be defined);
+        this.initMapControls();
+
+        //Set-up Layers
+        this._clustersLayer = self.createClusterLayer();
+
+        if (globalSettings.ENABLE_TREKS) {
+            this._treksMarkersLayer = self.createLayer();
+            this._treksgeoJsonLayer = self.createGeoJSONLayer();
+        }
+
+        if (globalSettings.ENABLE_TOURISTIC_CONTENT || globalSettings.ENABLE_TOURISTIC_EVENTS) {
+            this._touristicsMarkersLayer = self.createLayer();
+        }
+
+        this._poisMarkersLayer = self.createClusterLayer();
+
+        this.map.addLayer(this._clustersLayer);
+        this.map.addLayer(this._poisMarkersLayer);
+
+        return this.map;
+
     };
 
 }
