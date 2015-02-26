@@ -2,36 +2,37 @@
     <global-filters></global-filters>
     <ul>
         <li ng-repeat="result in results" id="result-category-{{result.properties.category.id}}-{{result.id}}" ng-mouseover="hoverLayerElement(result,'enter')" ng-mouseleave="hoverLayerElement(result,'leave')">
+
             <div class="result category-{{result.properties.category.id}}">
-                <div class="visual">
-                    <div class="fav-or-not" ng-click="toggleFavorites(result)" ng-class="{isFav: isInFavorites(result)}">
-                        <i class="glyphicon glyphicon-heart"></i>
-                    </div>
-                    <a ui-sref="layout.detail({slug: result.properties.slug})">
+                <div class="fav-or-not" ng-click="toggleFavorites(result)" ng-class="{isFav: isInFavorites(result)}">
+                    <i class="glyphicon glyphicon-heart"></i>
+                </div>
+                <a ui-sref="layout.detail({slug: result.properties.slug})">
+                    <div class="visual">
                         <img ng-if="result.properties.pictures[0]" ng-src="{{result.properties.pictures[0].url}}" ng-alt="{{result.properties.pictures[0].title}}">
                         <img ng-if="!result.properties.pictures[0]" ng-src="./images/placeholder.png" alt="placeholder image">
-                    </a>
-                </div>
-                <h1 class="title">
-                    <a ui-sref="layout.detail({slug: result.properties.slug})">{{result.properties.name}}</a>
-                </h1>
-                <div class="infos">
-                    <span ng-if="result.properties.cities[0]">{{result.properties.cities[0].name}}</span>
-                    <span ng-if="result.properties.duration_pretty">{{result.properties.duration_pretty}}</span>
-                    <span ng-if="result.properties.ascent">Dénivelé {{result.properties.ascent}}</span>
-                    <span ng-if="result.properties.difficulty">{{result.properties.difficulty.label}}</span>
-                    <span ng-if="result.properties.usages[0]">{{result.properties.usages[0].label}}</span>
-                    <span ng-if="result.properties.type1[0]">{{result.properties.type1[0].name}}</span>
-                    <span ng-if="result.properties.type[0]">{{result.properties.type[0].name}}</span>
-                </div>
-                <ul class="themes">
-                    <li ng-repeat="theme in result.properties.themes">
-                        <img ng-src="{{theme.pictogram}}" ng-alt="{{theme.label}}">
-                    </li>
-                </ul>
-                <div class="know-more">
-                    <a ui-sref="layout.detail({slug: result.properties.slug})">+</a>
-                </div>
+                    </div>
+                    <h1 class="title">
+                        {{result.properties.name}}
+                    </h1>
+                    <div class="infos">
+                        <span ng-if="result.properties.cities[0]">{{result.properties.cities[0].name}}</span>
+                        <span ng-if="result.properties.duration_pretty">{{result.properties.duration_pretty}}</span>
+                        <span ng-if="result.properties.ascent">Dénivelé {{result.properties.ascent}}</span>
+                        <span ng-if="result.properties.difficulty">{{result.properties.difficulty.label}}</span>
+                        <span ng-if="result.properties.usages[0]">{{result.properties.usages[0].label}}</span>
+                        <span ng-if="result.properties.type1[0]">{{result.properties.type1[0].name}}</span>
+                        <span ng-if="result.properties.type[0]">{{result.properties.type[0].name}}</span>
+                    </div>
+                    <ul class="themes">
+                        <li ng-repeat="theme in result.properties.themes">
+                            <img ng-src="{{theme.pictogram}}" ng-alt="{{theme.label}}">
+                        </li>
+                    </ul>
+                    <div class="know-more">
+                        <span>+</span>
+                    </div>
+                </a>
             </div>
         </li>
     </ul>
