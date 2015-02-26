@@ -38,15 +38,15 @@
                         <ul>
                             <li ng-if="result.properties.type1[0]" ng-repeat="currentType in result.properties.type1" class="type1">
                                 <div>
-                                    <ng-include ng-if="isSVG(currentType.pictogram)" src="currentType.pictogram"></ng-include>
-                                    <img ng-if="!isSVG(currentType.pictogram)" ng-src="{{currentType.pictogram}}" ng-alt="{{currentType.name}}">
+                                    <ng-include ng-if="currentType.pictogram && isSVG(currentType.pictogram)" src="currentType.pictogram"></ng-include>
+                                    <img ng-if="currentType.pictogram && !isSVG(currentType.pictogram)" ng-src="{{currentType.pictogram}}" ng-alt="{{currentType.name}}">
                                     <span>{{currentType.name}}</span>
                                 </div>
                             </li>
                             <li ng-if="result.properties.type2[0]" ng-repeat="currentType2 in result.properties.type2" class="type2">
                                 <div>
-                                    <ng-include ng-if="isSVG(currentType2.pictogram)" src="currentType2.pictogram"></ng-include>
-                                    <img ng-if="!isSVG(currentType2.pictogram)" ng-src="{{currentType2.pictogram}}" ng-alt="{{currentType2.name}}">
+                                    <ng-include ng-if="currentType2.pictogram && isSVG(currentType2.pictogram)" src="currentType2.pictogram"></ng-include>
+                                    <img ng-if="currentType2.pictogram && !isSVG(currentType2.pictogram)" ng-src="{{currentType2.pictogram}}" ng-alt="{{currentType2.name}}">
                                     <span>{{currentType2.name}}</span>
                                 </div>
                             </li>
@@ -58,15 +58,15 @@
                             </li>
                             <li ng-if="result.properties.difficulty.label" class="difficulty">
                                 <div>
-                                    <ng-include ng-if="isSVG(result.properties.difficulty.pictogram)" src="result.properties.difficulty.pictogram"></ng-include>
-                                    <img ng-if="!isSVG(result.properties.difficulty.pictogram)" ng-src="{{result.properties.difficulty.pictogram}}" ng-alt="{{result.properties.difficulty.label}}">
+                                    <ng-include ng-if="result.properties.difficulty.pictogram && isSVG(result.properties.difficulty.pictogram)" src="result.properties.difficulty.pictogram"></ng-include>
+                                    <img ng-if="result.properties.difficulty.pictogram && !isSVG(result.properties.difficulty.pictogram)" ng-src="{{result.properties.difficulty.pictogram}}" ng-alt="{{result.properties.difficulty.label}}">
                                     <span>{{result.properties.difficulty.label}}</span>
                                 </div>
                             </li>
                             <li ng-if="result.properties.route" class="route">
                                 <div>
-                                    <ng-include ng-if="isSVG(result.properties.route.pictogram)" src="result.properties.route.pictogram"></ng-include>
-                                    <img ng-if="!isSVG(result.properties.route.pictogram)" ng-src="{{result.properties.route.pictogram}}" ng-alt="{{result.properties.route.label}}">
+                                    <ng-include ng-if="result.properties.route.pictogram && isSVG(result.properties.route.pictogram)" src="result.properties.route.pictogram"></ng-include>
+                                    <img ng-if="result.properties.route.pictogram && !isSVG(result.properties.route.pictogram)" ng-src="{{result.properties.route.pictogram}}" ng-alt="{{result.properties.route.label}}">
                                     <span>{{result.properties.route.label}}</span>
                                 </div>
                             </li>
@@ -84,15 +84,15 @@
                             </li>
                             <li ng-if="result.properties.networks" ng-repeat="network in result.properties.networks" class="network {{removeDiacritics(network.name)}}">
                                 <div>
-                                    <ng-include ng-if="isSVG(network.pictogram)" src="network.pictogram"></ng-include>
-                                    <img ng-if="!isSVG(network.pictogram)" ng-src="{{network.pictogram}}" alt="network.name">
+                                    <ng-include ng-if="network.pictogram && isSVG(network.pictogram)" src="network.pictogram"></ng-include>
+                                    <img ng-if="network.pictogram && !isSVG(network.pictogram)" ng-src="{{network.pictogram}}" alt="network.name">
                                     <span>{{network.name}}</span>
                                 </div>
                             </li>
                             <li ng-if="result.properties.themes" ng-repeat="theme in result.properties.themes" class="theme {{removeDiacritics(theme.label)}}">
                                 <div>
-                                    <ng-include ng-if="isSVG(theme.pictogram)" src="theme.pictogram"></ng-include>
-                                    <img ng-if="!isSVG(theme.pictogram)" ng-src="{{theme.pictogram}}" ng-alt="{{theme.label}}">
+                                    <ng-include ng-if="theme.pictogram &&isSVG(theme.pictogram)" src="theme.pictogram"></ng-include>
+                                    <img ng-if="theme.pictogram && !isSVG(theme.pictogram)" ng-src="{{theme.pictogram}}" ng-alt="{{theme.label}}">
                                     <span>{{theme.label}}</span>
                                 </div>
                             </li>

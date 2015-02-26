@@ -9,17 +9,23 @@ function treksService(globalSettings, settingsFactory, $resource, $q) {
         _.forEach(treksData.features, function (trek) {
             if (trek.properties.pictures) {
                 _.forEach(trek.properties.pictures, function (picture) {
-                    picture.url = globalSettings.DOMAIN + picture.url;
+                    if (picture.url) {
+                        picture.url = globalSettings.DOMAIN + picture.url;
+                    }
                 });
             }
             if (trek.properties.type1) {
                 _.forEach(trek.properties.type1, function (aType1) {
-                    aType1.pictogram = globalSettings.DOMAIN + aType1.pictogram;
+                    if (aType1.pictogram) {
+                        aType1.pictogram = globalSettings.DOMAIN + aType1.pictogram;
+                    }
                 });
             }
             if (trek.properties.type2) {
                 _.forEach(trek.properties.type2, function (aType2) {
-                    aType2.pictogram = globalSettings.DOMAIN + aType2.pictogram;
+                    if (aType2.pictogram) {
+                        aType2.pictogram = globalSettings.DOMAIN + aType2.pictogram;
+                    }
                 });
             }
             if (trek.properties.difficulty) {
@@ -27,17 +33,23 @@ function treksService(globalSettings, settingsFactory, $resource, $q) {
             }
             if (trek.properties.themes) {
                 _.forEach(trek.properties.themes, function (theme) {
-                    theme.pictogram = globalSettings.DOMAIN + theme.pictogram;
+                    if (theme.pictogram) {
+                        theme.pictogram = globalSettings.DOMAIN + theme.pictogram;
+                    }
                 });
             }
             if (trek.properties.networks) {
                 _.forEach(trek.properties.networks, function (network) {
-                    network.pictogram = globalSettings.DOMAIN + network.pictogram;
+                    if (network.pictogram) {
+                        network.pictogram = globalSettings.DOMAIN + network.pictogram;
+                    }
                 });
             }
             if (trek.properties.information_desks) {
                 _.forEach(trek.properties.information_desks, function (information_desk) {
-                    information_desk.photo_url = globalSettings.DOMAIN + information_desk.photo_url;
+                    if (information_desk.photo_url) {
+                        information_desk.photo_url = globalSettings.DOMAIN + information_desk.photo_url;
+                    }
                 });
             }
             if (trek.properties.web_links) {

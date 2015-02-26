@@ -14,7 +14,9 @@ function contentsService(globalSettings, settingsFactory, $resource, $q) {
             }
             if (content.properties.themes) {
                 _.forEach(content.properties.themes, function (theme) {
-                    theme.pictogram = globalSettings.DOMAIN + theme.pictogram;
+                    if (theme.pictogram) {
+                        theme.pictogram = globalSettings.DOMAIN + theme.pictogram;
+                    }
                 });
             }
             if (content.properties.map_image_url) {
@@ -31,7 +33,9 @@ function contentsService(globalSettings, settingsFactory, $resource, $q) {
             }
             if (content.properties.pictures) {
                 _.forEach(content.properties.pictures, function (picture) {
-                    picture.url = globalSettings.DOMAIN + picture.url;
+                    if (picture.url) {
+                        picture.url = globalSettings.DOMAIN + picture.url;
+                    }
                 });
             }
 
@@ -90,7 +94,9 @@ function eventsService(globalSettings, settingsFactory, $resource, $q) {
             }
             if (trEvent.properties.themes) {
                 _.forEach(trEvent.properties.themes, function (theme) {
-                    theme.pictogram = globalSettings.DOMAIN + theme.pictogram;
+                    if (theme.pictogram) {
+                        theme.pictogram = globalSettings.DOMAIN + theme.pictogram;
+                    }
                 });
             }
             if (trEvent.properties.map_image_url) {
@@ -107,7 +113,9 @@ function eventsService(globalSettings, settingsFactory, $resource, $q) {
             }
             if (trEvent.properties.pictures) {
                 _.forEach(trEvent.properties.pictures, function (picture) {
-                    picture.url = globalSettings.DOMAIN + picture.url;
+                    if (picture.url) {
+                        picture.url = globalSettings.DOMAIN + picture.url;
+                    }
                 });
             }
 
