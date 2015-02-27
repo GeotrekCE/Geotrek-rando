@@ -154,7 +154,7 @@ function utilsFactory($sce) {
             firstPointCoordinates = element.geometry.coordinates;
         } else if (element.geometry.type === 'LineString') {
             firstPointCoordinates = element.geometry.coordinates[0];
-        } else if (element.geometry.type === 'Polygon') {
+        } else if (element.geometry.type === 'Polygon' || element.geometry.type === 'MultiLineString') {
             firstPointCoordinates = element.geometry.coordinates[0][0];
         }
 
