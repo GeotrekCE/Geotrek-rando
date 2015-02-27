@@ -137,7 +137,7 @@
             
         }
         .difficulties, .ascent, .duration {
-            padding: 1em;
+            padding: 1em 2em;
         }
         slider, [slider] {
             margin: 0;
@@ -146,6 +146,31 @@
                 display: block;
                 top: auto;
                 bottom: -2em;
+                &.value {
+                    display: none;
+                }
+            }
+            .bar {
+                background: transparentize(white, 0.4);
+                border-radius: 2px;
+            }
+            .selection {
+                background: white;
+            }
+            .handle {
+                border: 1px solid $neutral-grey;
+                background: white;
+                opacity: 0.9;
+                transition: all 0.2s ease;
+                &:after {
+                    content: none;
+                }
+                &:hover, &:focus, &:active {
+                    opacity: 1;
+                }
+                &:active {
+                    transform: scale(1.2);
+                }
             }
         }
 
