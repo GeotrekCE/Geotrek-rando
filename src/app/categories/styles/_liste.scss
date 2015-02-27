@@ -136,6 +136,18 @@
             }
             
         }
+        .difficulties, .ascent, .duration {
+            padding: 1em;
+        }
+        slider, [slider] {
+            margin: 0;
+            .bubble {
+                color: inherit;
+                display: block;
+                top: auto;
+                bottom: -2em;
+            }
+        }
 
         .choices {
             width: 100%;

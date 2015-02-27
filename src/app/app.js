@@ -18,9 +18,8 @@ var dependencies = [
 
 
     // External stuff
-    'ngTouch',
     'ui.router',
-    'vr.directives.slider',
+    'ui.slider',
     'ngResource',
     'ui.bootstrap',
 ];
@@ -31,7 +30,6 @@ window.jQuery = require('jquery');
 window.L = require('leaflet');
 
 // Load external dependencies
-require('angular-touch');
 require('ui.bootstrap');
 require('ui.router');
 require('angular-slider');
