@@ -46,7 +46,57 @@
                 </div>
 
                 <div ng-if="category.difficulty && category.difficulty.values.length > 1" class="slider difficulties">
-                    <slider ng-model-low="category.difficulty.min" ng-model-high="category.difficulty.max" floor="0" ceiling="{{category.difficulty.values.length - 1}}" step="1"></slider>
+                    <span>Difficultée : </span>
+                    <span ng-if="category.difficulty.min === 0 && category.difficulty.max === category.difficulty.values.length - 1">
+                        Toutes
+                    </span>
+                    <span ng-if="(category.difficulty.min !== 0 || category.difficulty.max !== category.difficulty.values.length - 1) && category.difficulty.min !== category.difficulty.max">
+                        {{category.difficulty.values[category.difficulty.min].label}} -> {{category.difficulty.values[category.difficulty.max].label}}
+                    </span>
+                    <span ng-if="category.difficulty.min === category.difficulty.max">
+                        {{category.difficulty.values[category.difficulty.min].label}}
+                    </span>
+                    <div class="slider-container">
+                        <slider ng-model-low="category.difficulty.min" ng-model-high="category.difficulty.max" floor="0" ceiling="{{category.difficulty.values.length - 1}}" step="1"></slider>
+                        <label class="min-label">{{category.difficulty.values[0].label}}</label>
+                        <label class="max-label">{{category.difficulty.values[category.difficulty.values.length - 1].label}}</label>
+                    </div>
+                </div>
+
+                <div ng-if="category.duration && category.duration.values.length > 1" class="slider difficulties">
+                    <span>Difficultée : </span>
+                    <span ng-if="category.duration.min === 0 && category.duration.max === category.duration.values.length - 1">
+                        Toutes
+                    </span>
+                    <span ng-if="(category.duration.min !== 0 || category.duration.max !== category.duration.values.length - 1) && category.duration.min !== category.duration.max">
+                        {{category.duration.values[category.duration.min].label}} -> {{category.duration.values[category.duration.max].label}}
+                    </span>
+                    <span ng-if="category.duration.min === category.duration.max">
+                        {{category.duration.values[category.duration.min].label}}
+                    </span>
+                    <div class="slider-container">
+                        <slider ng-model-low="category.duration.min" ng-model-high="category.duration.max" floor="0" ceiling="{{category.duration.values.length - 1}}" step="1"></slider>
+                        <label class="min-label">{{category.duration.values[0].label}}</label>
+                        <label class="max-label">{{category.duration.values[category.duration.values.length - 1].label}}</label>
+                    </div>
+                </div>
+
+                <div ng-if="category.ascent && category.ascent.values.length > 1" class="slider difficulties">
+                    <span>Difficultée : </span>
+                    <span ng-if="category.ascent.min === 0 && category.ascent.max === category.ascent.values.length - 1">
+                        Toutes
+                    </span>
+                    <span ng-if="(category.ascent.min !== 0 || category.ascent.max !== category.ascent.values.length - 1) && category.ascent.min !== category.ascent.max">
+                        {{category.ascent.values[category.ascent.min].label}} -> {{category.ascent.values[category.ascent.max].label}}
+                    </span>
+                    <span ng-if="category.ascent.min === category.ascent.max">
+                        {{category.ascent.values[category.ascent.min].label}}
+                    </span>
+                    <div class="slider-container">
+                        <slider ng-model-low="category.ascent.min" ng-model-high="category.ascent.max" floor="0" ceiling="{{category.ascent.values.length - 1}}" step="1"></slider>
+                        <label class="min-label">{{category.ascent.values[0].label}}</label>
+                        <label class="max-label">{{category.ascent.values[category.ascent.values.length - 1].label}}</label>
+                    </div>
                 </div>
             </form>
         </div>
