@@ -137,18 +137,29 @@
             
         }
         .difficulties, .ascent, .duration {
-            padding: 1em 2em;
+            padding: 1em;
+            .slider-container {
+                padding: 1em;
+            }
+            label {
+                margin-top: 0.4em;
+                font-size: 0.8em;
+                font-weight: 300;
+            }
+            .min-label {
+                float: left;
+            }
+            .max-label {
+                float: right;
+            }
         }
         slider, [slider] {
             margin: 0;
             .bubble {
                 color: inherit;
-                display: block;
+                display: none;
                 top: auto;
                 bottom: -2em;
-                &.value {
-                    display: none;
-                }
             }
             .bar {
                 background: transparentize(white, 0.4);
