@@ -17,11 +17,26 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
     this.getTreksCategories = function (treks) {
 
-        var treksType1 = [],
-            treksType2 = [],
-            difficulties = [],
-            routes = [],
-            themes = [];
+        var treksType1 = {
+                type: 'checkbox',
+                values: []
+            },
+            treksType2 = {
+                type: 'checkbox',
+                values: []
+            },
+            difficulties = {
+                type: 'range',
+                values: []
+            },
+            routes = {
+                type: 'checkbox',
+                values: []
+            },
+            themes = {
+                type: 'checkbox',
+                values: []
+            };
 
         _.forEach(treks.features, function (aTrek) {
 
@@ -29,8 +44,8 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
                 if (aTrek.properties.type1 && aTrek.properties.type1.length > 0) {
                     _.forEach(aTrek.properties.type1, function (aType1) {
-                        if (!(utilsFactory.idIsInArray(treksType1, aType1)) && aType1 !== undefined) {
-                            treksType1.push(aType1);
+                        if (!(utilsFactory.idIsInArray(treksType1.values, aType1)) && aType1 !== undefined) {
+                            treksType1.values.push(aType1);
                         }
 
                     });
@@ -38,30 +53,30 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
                 if (aTrek.properties.type2 && aTrek.properties.type2.length > 0) {
                     _.forEach(aTrek.properties.type2, function (aType2) {
-                        if (!(utilsFactory.idIsInArray(treksType1, aType2)) && aType2 !== undefined) {
-                            treksType1.push(aType2);
+                        if (!(utilsFactory.idIsInArray(treksType2.values, aType2)) && aType2 !== undefined) {
+                            treksType2.values.push(aType2);
                         }
 
                     });
                 }
 
                 if (aTrek.properties.difficulty) {
-                    if (!(utilsFactory.idIsInArray(difficulties, aTrek.properties.difficulty)) && aTrek.properties.difficulty !== undefined) {
-                        difficulties.push(aTrek.properties.difficulty);
+                    if (!(utilsFactory.idIsInArray(difficulties.values, aTrek.properties.difficulty)) && aTrek.properties.difficulty !== undefined) {
+                        difficulties.values.push(aTrek.properties.difficulty);
                     }
                 }
 
                 if (aTrek.properties.route) {
-                    if (!(utilsFactory.idIsInArray(routes, aTrek.properties.route)) && aTrek.properties.route !== undefined) {
-                        routes.push(aTrek.properties.route);
+                    if (!(utilsFactory.idIsInArray(routes.values, aTrek.properties.route)) && aTrek.properties.route !== undefined) {
+                        routes.values.push(aTrek.properties.route);
                     }
                 }
 
                 if (aTrek.properties.themes && aTrek.properties.themes.length > 0) {
                     _.forEach(aTrek.properties.themes, function (theme) {
 
-                        if (!(utilsFactory.idIsInArray(themes, theme)) && theme !== undefined) {
-                            themes.push(theme);
+                        if (!(utilsFactory.idIsInArray(themes.values, theme)) && theme !== undefined) {
+                            themes.values.push(theme);
                         }
 
                     });
@@ -69,6 +84,8 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
             }
 
         });
+
+        difficulties.values = _.map(_.sortBy(difficulties.values, 'id'));
 
         var catInfos = treks.features[0].properties.category;
 
@@ -92,27 +109,27 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
     this.getTouristicEventsCategories = function (events) {
 
-        var eventsType1 = [],
-            eventsType2 = [],
-            themes = [];
+        var eventsType1 = {
+                type: 'checkbox',
+                values: []
+            },
+            themes = {
+                type: 'checkbox',
+                values: []
+            };
 
         _.forEach(events.features, function (anEvent) {
 
             if (anEvent.properties.published) {
-
-                if (!(utilsFactory.idIsInArray(eventsType1, anEvent.properties.type1))) {
-                    eventsType1.push(anEvent.properties.type1);
-                }
-
-                if (!(utilsFactory.idIsInArray(eventsType2, anEvent.properties.type2))) {
-                    eventsType2.push(anEvent.properties.type2);
+                if (!(utilsFactory.idIsInArray(eventsType1.values, anEvent.properties.type1))) {
+                    eventsType1.values.push(anEvent.properties.type1);
                 }
 
                 if (anEvent.properties.themes && anEvent.properties.themes.length > 0) {
                     _.forEach(anEvent.properties.themes, function (theme) {
 
-                        if (!(utilsFactory.idIsInArray(themes, theme)) && theme !== undefined) {
-                            themes.push(theme);
+                        if (!(utilsFactory.idIsInArray(themes.values, theme)) && theme !== undefined) {
+                            themes.values.push(theme);
                         }
 
                     });
@@ -128,9 +145,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
             label: catInfos.label,
             pictogram: catInfos.pictogram,
             type1_label: catInfos.type1_label,
-            type2_label: catInfos.type2_label,
             type1: eventsType1,
-            type2: eventsType2,
             themes: themes,
             cat_class: 'category-' + catInfos.id.toString()
         };
@@ -155,9 +170,9 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                         pictogram: aContent.properties.category.pictogram,
                         type1_label: aContent.properties.category.type1_label,
                         type2_label: aContent.properties.category.type2_label,
-                        type1: aContent.properties.type1 || [],
-                        type2: aContent.properties.type2 || [],
-                        themes: aContent.properties.themes || [],
+                        type1: {type: 'checkbox', values: aContent.properties.type1 || []},
+                        type2: {type: 'checkbox', values: aContent.properties.type2 || []},
+                        themes: {type: 'checkbox', values: aContent.properties.themes || []},
                         cat_class: 'category-' + aContent.properties.category.id.toString()
                     };
 
@@ -169,9 +184,9 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
                     _.forEach(aContent.properties.type1, function (aType) {
 
-                        if (!(utilsFactory.idIsInArray(contentsCategories[catIndex].type1, aType))) {
+                        if (!(utilsFactory.idIsInArray(contentsCategories[catIndex].type1.values, aType))) {
 
-                            contentsCategories[catIndex].type1.push(aType);
+                            contentsCategories[catIndex].type1.values.push(aType);
 
                         }
 
@@ -179,9 +194,9 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
                     _.forEach(aContent.properties.type2, function (aType) {
 
-                        if (!(utilsFactory.idIsInArray(contentsCategories[catIndex].type2, aType))) {
+                        if (!(utilsFactory.idIsInArray(contentsCategories[catIndex].type2.values, aType))) {
 
-                            contentsCategories[catIndex].type2.push(aType);
+                            contentsCategories[catIndex].type2.values.push(aType);
 
                         }
 
@@ -190,8 +205,8 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                     if (aContent.properties.themes && aContent.properties.themes.length > 0) {
                         _.forEach(aContent.properties.themes, function (theme) {
 
-                            if (!(utilsFactory.idIsInArray(contentsCategories[catIndex].themes, theme)) && theme !== undefined) {
-                                contentsCategories[catIndex].themes.push(theme);
+                            if (!(utilsFactory.idIsInArray(contentsCategories[catIndex].themes.values, theme)) && theme !== undefined) {
+                                contentsCategories[catIndex].themes.values.push(theme);
                             }
 
                         });

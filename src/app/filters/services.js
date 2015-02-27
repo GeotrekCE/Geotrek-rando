@@ -12,6 +12,7 @@ function filtersService(globalSettings, utilsFactory) {
         }
 
         _.forEach(categories, function (category) {
+            //console.log(category);
             var newCategory = {
                 label: category.label,
                 id: category.id,
@@ -19,20 +20,20 @@ function filtersService(globalSettings, utilsFactory) {
                 type2: []
             };
 
-            if (category.type1 && category.type1.length > 0) {
+            if (category.type1 && category.type1.values.length > 0) {
                 newCategory.type1 = category.type1;
             }
 
-            if (category.type2 && category.type2.length > 0) {
+            if (category.type2 && category.type2.values.length > 0) {
                 newCategory.type2 = category.type2;
             }
 
             if (category.difficulties) {
                 newCategory.difficulty = [];
-                if (category.difficulties.length > 0) {
+                if (category.difficulties.values.length > 0) {
                     newCategory.difficulty = category.difficulties;
                 }
-                if (category.routes.length > 0) {
+                if (category.routes.values.length > 0) {
                     newCategory.route = category.routes;
                 }
                 newCategory.duration = globalSettings.FILTERS.DURATION;

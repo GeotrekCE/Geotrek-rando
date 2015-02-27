@@ -113,8 +113,6 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
 
         if (tagLabel === 'categories') {
             _.forEach(query, function (filter, index) {
-                console.log(parseInt(index.split('_')[0], 10));
-                console.log(parseInt(tagValue, 10));
                 if (parseInt(index.split('_')[0], 10) === parseInt(tagValue, 10)) {
                     delete query[index];
                 }
