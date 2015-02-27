@@ -99,7 +99,9 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
                             maxIndex = $scope.categories[categoryIndex].difficulty.max;
                         $scope.categories[categoryIndex].filters.difficulty = {};
                         if (minIndex !== 0 || maxIndex !== $scope.categories[categoryIndex].difficulty.values.length - 1) {
-                            $scope.categories[categoryIndex].filters.difficulty[$scope.categories[categoryIndex].difficulty.values[minIndex].id.toString() + '-' + $scope.categories[categoryIndex].difficulty.values[maxIndex].id.toString()] = true;
+                            var min = $scope.categories[categoryIndex].difficulty.values[minIndex].id.toString();
+                            var max = $scope.categories[categoryIndex].difficulty.values[maxIndex].id.toString();
+                            $scope.categories[categoryIndex].filters.difficulty[min + '-' + max] = true;
                         } else {
                             $scope.categories[categoryIndex].filters.difficulty['0-max'] = false;
                         }
