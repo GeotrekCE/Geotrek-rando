@@ -25,7 +25,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                 type: 'checkbox',
                 values: []
             },
-            difficulties = {
+            difficulty = {
                 type: 'range',
                 values: []
             },
@@ -61,8 +61,8 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                 }
 
                 if (aTrek.properties.difficulty) {
-                    if (!(utilsFactory.idIsInArray(difficulties.values, aTrek.properties.difficulty)) && aTrek.properties.difficulty !== undefined) {
-                        difficulties.values.push(aTrek.properties.difficulty);
+                    if (!(utilsFactory.idIsInArray(difficulty.values, aTrek.properties.difficulty)) && aTrek.properties.difficulty !== undefined) {
+                        difficulty.values.push(aTrek.properties.difficulty);
                     }
                 }
 
@@ -85,7 +85,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
         });
 
-        difficulties.values = _.map(_.sortBy(difficulties.values, 'id'));
+        difficulty.values = _.map(_.sortBy(difficulty.values, 'id'));
 
         var catInfos = treks.features[0].properties.category;
 
@@ -97,7 +97,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
             type2_label: catInfos.type2_label,
             type1: treksType1,
             type2: treksType2,
-            difficulties: difficulties,
+            difficulty: difficulty,
             routes: routes,
             themes: themes,
             cat_class: 'category-' + catInfos.id.toString()

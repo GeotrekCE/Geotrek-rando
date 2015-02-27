@@ -12,7 +12,6 @@ function filtersService(globalSettings, utilsFactory) {
         }
 
         _.forEach(categories, function (category) {
-            //console.log(category);
             var newCategory = {
                 label: category.label,
                 id: category.id,
@@ -28,10 +27,10 @@ function filtersService(globalSettings, utilsFactory) {
                 newCategory.type2 = category.type2;
             }
 
-            if (category.difficulties) {
+            if (category.difficulty) {
                 newCategory.difficulty = [];
-                if (category.difficulties.values.length > 0) {
-                    newCategory.difficulty = category.difficulties;
+                if (category.difficulty.values.length > 0) {
+                    newCategory.difficulty = category.difficulty;
                 }
                 if (category.routes.values.length > 0) {
                     newCategory.route = category.routes;
@@ -104,12 +103,39 @@ function filtersService(globalSettings, utilsFactory) {
                     filter = currentFilter;
                 }
             } else {
-                if (parseInt(currentFilter.id, 10) === parseInt(id, 10)) {
-                    _.forEach(currentFilter[subtype], function (currentSubFilter) {
-                        if (parseInt(currentSubFilter.id, 10) === parseInt(subId, 10)) {
-                            filter = currentSubFilter;
+
+                if (subId.indexOf('-') > -1 && currentFilter[subtype]) {
+                    var min = subId.split('-')[0],
+                        max = subId.split('-')[1],
+                        minFilter = null,
+                        maxFilter = null;
+
+                    _.forEach(currentFilter[subtype].values, function (currentSubFilter) {
+                        if (parseInt(currentSubFilter.id, 10) === parseInt(min, 10)) {
+                            minFilter = currentSubFilter;
+                        }
+                        if (parseInt(currentSubFilter.id, 10) === parseInt(max, 10)) {
+                            maxFilter = currentSubFilter;
                         }
                     });
+
+                    if (minFilter && maxFilter) {
+                        filter = {id: subId};
+                        if (parseInt(minFilter.id, 10) === parseInt(maxFilter.id, 10)) {
+                            filter.label = minFilter.label;
+                        } else {
+                            filter.label = minFilter.label + ' -> ' + maxFilter.label;
+                        }
+                    }
+
+                } else {
+                    if (parseInt(currentFilter.id, 10) === parseInt(id, 10)) {
+                        _.forEach(currentFilter[subtype], function (currentSubFilter) {
+                            if (parseInt(currentSubFilter.id, 10) === parseInt(subId, 10)) {
+                                filter = currentSubFilter;
+                            }
+                        });
+                    }
                 }
             }
         });
@@ -137,6 +163,7 @@ function filtersService(globalSettings, utilsFactory) {
             }
 
             _.forEach(aFilter, function (aSubFilter) {
+
                 if (subtype) {
                     subId = aSubFilter;
                 } else {
@@ -144,7 +171,6 @@ function filtersService(globalSettings, utilsFactory) {
                 }
 
                 var tempElement = self.getAFilter(id, type, subtype, subId);
-
                 var tagElement = {
                     id: tempElement.id,
                     label: tempElement.label || tempElement.name,
@@ -242,7 +268,12 @@ function filtersService(globalSettings, utilsFactory) {
 
         // We want to filter element by a value withing an interval
         if (matchBy === 'interval') {
-            console.log('match by interval');
+            var min = filters.toString().split('-')[0],
+                max = filters.toString().split('-')[1];
+
+            if (parseInt(min, 10) <= parseInt(element[name].id, 10) && parseInt(element[name].id, 10) <= parseInt(max, 10)) {
+                result = true;
+            }
         }
 
         return result;
@@ -281,7 +312,7 @@ function filtersService(globalSettings, utilsFactory) {
             districtsFilter = false;
 
         // Define all type of filters that needs an interval check instead of an id one
-        var filtersByInterval = [];
+        var filtersByInterval = ['difficulty'];
 
 
         // Update service activeFilters

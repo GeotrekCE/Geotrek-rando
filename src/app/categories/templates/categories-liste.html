@@ -45,8 +45,8 @@
                     </div>
                 </div>
 
-                <div ng-if="category.difficulties && category.difficulties.values.length > 1" class="slider difficulties">
-                    <slider ng-model-low="category.difficulties.min" ng-model-high="category.difficulties.max" floor="0" ceiling="{{category.difficulties.values.length - 1}}" step="1"></slider>
+                <div ng-if="category.difficulty && category.difficulty.values.length > 1" class="slider difficulties">
+                    <slider ng-model-low="category.difficulty.min" ng-model-high="category.difficulty.max" floor="0" ceiling="{{category.difficulty.values.length - 1}}" step="1"></slider>
                 </div>
             </form>
         </div>

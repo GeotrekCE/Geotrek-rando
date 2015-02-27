@@ -37,9 +37,20 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
 
                                 var capture = filterValue.toString().match(/^(\d+)-(\d+)$/i);
                                 if (capture) {
+                                    var minIndex,
+                                        maxIndex;
                                     category.filters[filterKey] = filterValue;
-                                    category[filterKey].min = parseInt(capture[1], 10);
-                                    category[filterKey].max = parseInt(capture[2], 10);
+                                    _.forEach(category[filterKey].values, function (currentFilter, index) {
+                                        if (parseInt(currentFilter.id, 10) === parseInt(capture[1], 10)) {
+                                            minIndex = index;
+                                        }
+
+                                        if (parseInt(currentFilter.id, 10) === parseInt(capture[2], 10)) {
+                                            maxIndex = index;
+                                        }
+                                    });
+                                    category[filterKey].min = minIndex;
+                                    category[filterKey].max = maxIndex;
                                 } else {
                                     category.filters[filterKey][filterValue] = true;
                                 }
@@ -64,31 +75,49 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
         });
     }
 
+    function resetRangeFilter(filter) {
+        filter.min = 0;
+        filter.max = filter.values.length - 1;
+    }
+
     function initRangeFilters() {
+
         _.forEach($scope.categories, function (category, categoryIndex) {
-            if (category.difficulties && category.difficulties.values.length > 1) {
-                category.difficulties.min = 0;
-                category.difficulties.max = category.difficulties.values.length - 1;
+            if (category.difficulty && category.difficulty.values.length > 1) {
+                resetRangeFilter(category.difficulty);
                 $scope.$watchGroup(
                     [
                         function (scope) {
-                            return scope.categories[categoryIndex].difficulties.min;
+                            return scope.categories[categoryIndex].difficulty.min;
                         },
                         function (scope) {
-                            return scope.categories[categoryIndex].difficulties.max;
+                            return scope.categories[categoryIndex].difficulty.max;
                         }
                     ],
                     function () {
-                        if ($scope.categories[categoryIndex].difficulties.min !== 0 || $scope.categories[categoryIndex].difficulties.max !== $scope.categories[categoryIndex].difficulties.values.length - 1) {
-                            $scope.categories[categoryIndex].filters.difficulties = {};
-                            $scope.categories[categoryIndex].filters.difficulties[$scope.categories[categoryIndex].difficulties.min.toString() + '-' + $scope.categories[categoryIndex].difficulties.max.toString()] = true;
+                        var minIndex = $scope.categories[categoryIndex].difficulty.min,
+                            maxIndex = $scope.categories[categoryIndex].difficulty.max;
+                        $scope.categories[categoryIndex].filters.difficulty = {};
+                        if (minIndex !== 0 || maxIndex !== $scope.categories[categoryIndex].difficulty.values.length - 1) {
+                            $scope.categories[categoryIndex].filters.difficulty[$scope.categories[categoryIndex].difficulty.values[minIndex].id.toString() + '-' + $scope.categories[categoryIndex].difficulty.values[maxIndex].id.toString()] = true;
                         } else {
-                            delete $scope.categories[categoryIndex].filters.difficulties;
+                            $scope.categories[categoryIndex].filters.difficulty['0-max'] = false;
                         }
                         $scope.propagateFilters();
                     },
                     true
                 );
+                $scope.$on('resetRange', function (event, data) {
+                    var eventCategory = data.category,
+                        filter = data.filter;
+
+                    _.forEach($scope.categories, function (currentCategory) {
+                        if (parseInt(currentCategory.id, 10) === parseInt(eventCategory, 10) && currentCategory[filter]) {
+                            resetRangeFilter(currentCategory[filter]);
+                        }
+                    });
+
+                });
             }
         });
     }
