@@ -220,10 +220,9 @@ function filtersService(globalSettings, utilsFactory) {
         var result = false,
             currentElement;
 
-        if (element === undefined) {
+        if (!element) {
             return false;
         }
-
         // Try to find the filter element as a direct child of our element, else test element itself
         if (element[filterKey]) {
             currentElement = element[filterKey];

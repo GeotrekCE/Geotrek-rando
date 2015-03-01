@@ -8,6 +8,7 @@ function ResultsListeController($scope, $rootScope, favoritesService, resultsSer
             .then(
                 function (data) {
                     $scope.results = data;
+                    //console.log(data);
                 }
             );
 
