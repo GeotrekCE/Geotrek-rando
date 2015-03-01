@@ -94,51 +94,58 @@ function filtersService(globalSettings, utilsFactory) {
     };
 
     this.getAFilter = function (id, type, subtype, subId) {
-        var filters = self.getFilters(),
-            filter = null;
+        var filter = null;
+        if (type === 'search') {
+            filter = {
+                id: type,
+                label: id
+            };
+        } else {
+            var filters = self.getFilters();
 
-        _.forEach(filters[type], function (currentFilter) {
-            if (!subtype) {
-                if (parseInt(currentFilter.id, 10) === parseInt(id, 10)) {
-                    filter = currentFilter;
-                }
-            } else {
-
-                if (subId.indexOf('-') > -1 && currentFilter[subtype]) {
-                    var min = subId.split('-')[0],
-                        max = subId.split('-')[1],
-                        minFilter = null,
-                        maxFilter = null;
-
-                    _.forEach(currentFilter[subtype].values, function (currentSubFilter) {
-                        if (parseInt(currentSubFilter.id, 10) === parseInt(min, 10)) {
-                            minFilter = currentSubFilter;
-                        }
-                        if (parseInt(currentSubFilter.id, 10) === parseInt(max, 10)) {
-                            maxFilter = currentSubFilter;
-                        }
-                    });
-
-                    if (minFilter && maxFilter) {
-                        filter = {id: subId};
-                        if (parseInt(minFilter.id, 10) === parseInt(maxFilter.id, 10)) {
-                            filter.label = minFilter.label;
-                        } else {
-                            filter.label = minFilter.label + ' -> ' + maxFilter.label;
-                        }
-                    }
-
-                } else {
+            _.forEach(filters[type], function (currentFilter) {
+                if (!subtype) {
                     if (parseInt(currentFilter.id, 10) === parseInt(id, 10)) {
+                        filter = currentFilter;
+                    }
+                } else {
+
+                    if (subId.indexOf('-') > -1 && currentFilter[subtype]) {
+                        var min = subId.split('-')[0],
+                            max = subId.split('-')[1],
+                            minFilter = null,
+                            maxFilter = null;
+
                         _.forEach(currentFilter[subtype].values, function (currentSubFilter) {
-                            if (parseInt(currentSubFilter.id, 10) === parseInt(subId, 10)) {
-                                filter = currentSubFilter;
+                            if (parseInt(currentSubFilter.id, 10) === parseInt(min, 10)) {
+                                minFilter = currentSubFilter;
+                            }
+                            if (parseInt(currentSubFilter.id, 10) === parseInt(max, 10)) {
+                                maxFilter = currentSubFilter;
                             }
                         });
+
+                        if (minFilter && maxFilter) {
+                            filter = {id: subId};
+                            if (parseInt(minFilter.id, 10) === parseInt(maxFilter.id, 10)) {
+                                filter.label = minFilter.label;
+                            } else {
+                                filter.label = minFilter.label + ' -> ' + maxFilter.label;
+                            }
+                        }
+
+                    } else {
+                        if (parseInt(currentFilter.id, 10) === parseInt(id, 10)) {
+                            _.forEach(currentFilter[subtype].values, function (currentSubFilter) {
+                                if (parseInt(currentSubFilter.id, 10) === parseInt(subId, 10)) {
+                                    filter = currentSubFilter;
+                                }
+                            });
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
 
         return filter;
     };
