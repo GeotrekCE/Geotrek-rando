@@ -1,6 +1,6 @@
 <div class="filters-tags">
     <ul>
-        <li ng-repeat="filter in activeFiltersTags" id="tag-{{filter.id}}" class="category-{{filter.typeId}}">
+        <li ng-repeat="filter in activeFiltersTags" id="tag-{{filter.id}}" class="category-{{filter.typeId}}" ng-class="{'category-relative': filter.type === 'categories'}">
             <div class="remove" ng-click="removeFilterByTag(filter.queryLabel, filter.id)"><span>X</span></div>
             <div class="text">
                 <span>{{filter.label}}</span>
