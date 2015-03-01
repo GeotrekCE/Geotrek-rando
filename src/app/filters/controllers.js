@@ -96,9 +96,8 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
 
     $scope.removeFilterByTag = function (tagLabel, tagValue) {
         var query = $location.search();
-
         if (typeof query[tagLabel] === 'string') {
-            if (parseInt(tagValue, 10) === parseInt(query[tagLabel], 10)) {
+            if (parseInt(tagValue, 10) === parseInt(query[tagLabel], 10) || tagLabel === 'search') {
                 delete query[tagLabel];
             }
         } else {

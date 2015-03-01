@@ -97,7 +97,7 @@ function filtersService(globalSettings, utilsFactory) {
         var filter = null;
         if (type === 'search') {
             filter = {
-                id: type,
+                id: id,
                 label: id
             };
         } else {
