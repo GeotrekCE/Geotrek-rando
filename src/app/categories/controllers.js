@@ -39,7 +39,8 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
                                 if (capture) {
                                     var minIndex,
                                         maxIndex;
-                                    category.filters[filterKey] = filterValue;
+                                    category.filters[filterKey] = {};
+                                    category.filters[filterKey][filterValue] = true;
                                     _.forEach(category[filterKey].values, function (currentFilter, index) {
                                         if (parseInt(currentFilter.id, 10) === parseInt(capture[1], 10)) {
                                             minIndex = index;
@@ -82,45 +83,60 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
 
     function initRangeFilters() {
 
-        _.forEach($scope.categories, function (category, categoryIndex) {
-            if (category.difficulty && category.difficulty.values.length > 1) {
-                resetRangeFilter(category.difficulty);
-                $scope.$watchGroup(
-                    [
-                        function (scope) {
-                            return scope.categories[categoryIndex].difficulty.min;
-                        },
-                        function (scope) {
-                            return scope.categories[categoryIndex].difficulty.max;
-                        }
-                    ],
-                    function () {
-                        var minIndex = $scope.categories[categoryIndex].difficulty.min,
-                            maxIndex = $scope.categories[categoryIndex].difficulty.max;
-                        $scope.categories[categoryIndex].filters.difficulty = {};
-                        if (minIndex !== 0 || maxIndex !== $scope.categories[categoryIndex].difficulty.values.length - 1) {
-                            var min = $scope.categories[categoryIndex].difficulty.values[minIndex].id.toString();
-                            var max = $scope.categories[categoryIndex].difficulty.values[maxIndex].id.toString();
-                            $scope.categories[categoryIndex].filters.difficulty[min + '-' + max] = true;
-                        } else {
-                            $scope.categories[categoryIndex].filters.difficulty['0-max'] = false;
-                        }
-                        $scope.propagateFilters();
-                    },
-                    true
-                );
-                $scope.$on('resetRange', function (event, data) {
-                    var eventCategory = data.category,
-                        filter = data.filter;
+        _.forEach($scope.categories, function (category) {
+            _.forEach(category, function (property, propertyName) {
+                if (property.type && property.type === 'range') {
 
-                    _.forEach($scope.categories, function (currentCategory) {
-                        if (parseInt(currentCategory.id, 10) === parseInt(eventCategory, 10) && currentCategory[filter]) {
-                            resetRangeFilter(currentCategory[filter]);
-                        }
-                    });
+                    if (property.values.length > 1) {
+                        resetRangeFilter(property);
+                        $scope.$watchGroup(
+                            [
+                                function () {
+                                    return property.min;
+                                },
+                                function () {
+                                    return property.max;
+                                }
+                            ],
+                            function () {
+                                var minIndex = property.min,
+                                    maxIndex = property.max;
+                                category.filters[propertyName] = {};
+                                if (minIndex !== 0 || maxIndex !== property.values.length - 1) {
+                                    var min = property.values[minIndex].id.toString();
+                                    var max = property.values[maxIndex].id.toString();
+                                    category.filters[propertyName][min + '-' + max] = true;
+                                } else {
+                                    category.filters[propertyName]['0-max'] = false;
+                                }
+                                $scope.propagateFilters();
+                            },
+                            true
+                        );
+                        $scope.$on('resetRange', function (event, data) {
+                            var eventCategory = data.category,
+                                filter = data.filter;
 
-                });
-            }
+                            _.forEach($scope.categories, function (currentCategory) {
+                                if (parseInt(currentCategory.id, 10) === parseInt(eventCategory, 10)) {
+                                    if (filter === 'all') {
+                                        _.forEach(currentCategory, function (currentFilter, currentFilterName) {
+                                            if (currentFilter.type === 'range') {
+                                                resetRangeFilter(currentCategory[currentFilterName]);
+                                            }
+                                        });
+                                    } else if (currentCategory[filter]) {
+                                        resetRangeFilter(currentCategory[filter]);
+                                    }
+                                }
+
+                            });
+
+                        });
+                    }
+
+                }
+            });
         });
     }
 
@@ -144,7 +160,6 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
     $scope.propagateFilters = function () {
         var currentQuery = $location.search(),
             activeCategories = [];
-
         _.forEach($scope.categories, function (category) {
             if (category.active) {
                 activeCategories.push(category.id);
@@ -152,6 +167,7 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
                     var filterIsNotEmpty = false;
                     var currentFilterValues = [];
                     _.forEach(filter, function (value, valueKey) {
+
                         if (value) {
                             filterIsNotEmpty = true;
                             currentFilterValues.push(valueKey);

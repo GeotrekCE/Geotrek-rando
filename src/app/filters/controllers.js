@@ -105,7 +105,7 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
             _.forEach(query[tagLabel], function (filter, index) {
                 if (parseInt(tagValue, 10) === parseInt(filter, 10)) {
                     query[tagLabel].splice(index, 1);
-                    if (tagValue.indexOf('-') > -1) {
+                    if (tagValue.toString().indexOf('-') > -1) {
                         $rootScope.$broadcast('resetRange', {category: tagLabel.split('_')[0], filter: tagLabel.split('_')[1]});
                     }
                 }
@@ -121,6 +121,7 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
                     delete query[index];
                 }
             });
+            $rootScope.$broadcast('resetRange', {category: tagValue, filter: 'all'});
         }
 
         $location.search(query);

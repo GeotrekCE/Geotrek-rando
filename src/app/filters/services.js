@@ -35,8 +35,8 @@ function filtersService(globalSettings, utilsFactory) {
                 if (category.routes.values.length > 0) {
                     newCategory.route = category.routes;
                 }
-                newCategory.duration = globalSettings.FILTERS.DURATION;
-                newCategory.ascent = globalSettings.FILTERS.ASCENT;
+                newCategory.duration = category.duration;
+                newCategory.ascent = category.ascent;
             }
 
             self.filters.categories.push(newCategory);
@@ -130,7 +130,7 @@ function filtersService(globalSettings, utilsFactory) {
 
                 } else {
                     if (parseInt(currentFilter.id, 10) === parseInt(id, 10)) {
-                        _.forEach(currentFilter[subtype], function (currentSubFilter) {
+                        _.forEach(currentFilter[subtype].values, function (currentSubFilter) {
                             if (parseInt(currentSubFilter.id, 10) === parseInt(subId, 10)) {
                                 filter = currentSubFilter;
                             }
@@ -269,9 +269,10 @@ function filtersService(globalSettings, utilsFactory) {
         // We want to filter element by a value withing an interval
         if (matchBy === 'interval') {
             var min = filters.toString().split('-')[0],
-                max = filters.toString().split('-')[1];
+                max = filters.toString().split('-')[1],
+                elementId = element[name].id || element[name];
 
-            if (parseInt(min, 10) <= parseInt(element[name].id, 10) && parseInt(element[name].id, 10) <= parseInt(max, 10)) {
+            if (parseInt(min, 10) <= parseInt(elementId, 10) && parseInt(elementId, 10) <= parseInt(max, 10)) {
                 result = true;
             }
         }
@@ -312,7 +313,7 @@ function filtersService(globalSettings, utilsFactory) {
             districtsFilter = false;
 
         // Define all type of filters that needs an interval check instead of an id one
-        var filtersByInterval = ['difficulty'];
+        var filtersByInterval = ['difficulty', 'duration', 'ascent'];
 
 
         // Update service activeFilters

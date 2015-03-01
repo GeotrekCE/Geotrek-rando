@@ -29,6 +29,14 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                 type: 'range',
                 values: []
             },
+            duration = {
+                type: 'range',
+                values: globalSettings.FILTERS.DURATION
+            },
+            ascent = {
+                type: 'range',
+                values: globalSettings.FILTERS.ASCENT
+            },
             routes = {
                 type: 'checkbox',
                 values: []
@@ -86,6 +94,8 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
         });
 
         difficulty.values = _.map(_.sortBy(difficulty.values, 'id'));
+        duration.values = _.map(_.sortBy(duration.values, 'id'));
+        ascent.values = _.map(_.sortBy(ascent.values, 'id'));
 
         var catInfos = treks.features[0].properties.category;
 
@@ -98,6 +108,8 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
             type1: treksType1,
             type2: treksType2,
             difficulty: difficulty,
+            duration: duration,
+            ascent: ascent,
             routes: routes,
             themes: themes,
             cat_class: 'category-' + catInfos.id.toString()

@@ -16,7 +16,9 @@
         z-index: 30;
         overflow: hidden;
         border-bottom: 1px solid $neutral-grey;
-        transition: width 0.1s ease-out, min-height 0s ease-out;
+        display: flex;
+        flex-direction: column;
+        transition: width 0.1s ease-out, min-height 0s ease-out, padding 0s ease-out;
         @include categories-list-coloring();
         a {
             width: 70px;
@@ -51,6 +53,7 @@
         &:hover {
             width: 300px;
             min-height: 100%;
+            padding-bottom: 70px;
             z-index: 99;
             transition-delay: 0.4s;
             & > a {
@@ -90,6 +93,8 @@
         }
         .filters {
             width: 300px;
+            flex: 1;
+            overflow-y: auto;
             z-index: 12;
             transition: all 0.1s ease-out;
             .category-name {

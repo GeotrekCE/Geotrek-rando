@@ -7,7 +7,6 @@ function MapController($scope, globalSettings, $rootScope, $state, resultsServic
             .then(
                 function (data) {
                     $scope.results = data;
-                    console.log(data);
                     if (data.length > 0) {
                         mapService.displayResults(data, updateBounds);
                     } else {
