@@ -126,6 +126,7 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
             self.createLayerFromElement(nearElement, 'category', startPoint)
                 .then(
                     function (marker) {
+                        marker.options.icon.options.className += ' near-marker';
                         var selector = '#near-category-' + nearElement.properties.category.id + '-' + nearElement.id;
                         marker.on({
                             mouseover: function () {
@@ -438,6 +439,7 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
         // Remove all markers so the displayed markers can fit the search results
         self._clustersLayer.clearLayers();
         self._poisMarkersLayer.clearLayers();
+        self._nearMarkersLayer.clearLayers();
 
         if (globalSettings.ENABLE_TREKS) {
             self._treksMarkersLayer.clearLayers();

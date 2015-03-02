@@ -94,3 +94,7 @@
     opacity: 1;
     stroke-opacity: 1;
 }
+
+.detail-map.hide-near-elements .near-marker {
+    display: none;
+}

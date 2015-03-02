@@ -63,6 +63,20 @@ function DetailController($scope, $rootScope, $q, $stateParams, utilsFactory, re
             );
     }
 
+    $scope.tabIsShown = function (showOrHide) {
+        var map = document.querySelector(".detail-map"),
+            className = 'hide-near-elements';
+        if (showOrHide) {
+            if (map.classList.contains(className)) {
+                map.classList.remove(className);
+            }
+        } else {
+            if (!map.classList.contains(className)) {
+                map.classList.add(className);
+            }
+        }
+    };
+
     $scope.showLightbox = function (slideIndex) {
         $rootScope.$emit('openLightbox', slideIndex);
     };

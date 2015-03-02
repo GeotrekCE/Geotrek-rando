@@ -207,7 +207,7 @@
                     <tab ng-if="pois.length > 0" heading="Patrimoine" active="true">
                         <pois-liste></pois-liste>
                     </tab>
-                    <tab ng-if="result.properties.touristic_contents.length > 0 || result.properties.touristic_events.length > 0 || result.properties.treks.length > 0" heading="A proximité">
+                    <tab ng-if="result.properties.touristic_contents.length > 0 || result.properties.touristic_events.length > 0 || result.properties.treks.length > 0" heading="A proximité" select="tabIsShown(true)" deselect="tabIsShown(false)">
                         <near-liste></near-liste>
                     </tab>
                 </tabset>
