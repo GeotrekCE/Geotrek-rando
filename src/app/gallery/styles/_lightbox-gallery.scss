@@ -31,12 +31,17 @@
         height: 100%;
     }
     ul {
+        position: relative;
+        height: 100%;
+        width: 100%;
         list-style: none;
         padding: 0;
         margin: 0;
     }
     li {
         position: absolute;
+        height: 100%;
+        width: 100%;
         top: 50%;
         left: 50%;
         margin-left: -25%;

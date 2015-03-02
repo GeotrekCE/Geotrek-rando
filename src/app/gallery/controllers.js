@@ -5,13 +5,46 @@ function GalleryController($rootScope, $scope) {
         slides = [];
 
     function computeMargins() {
-        _.each(slides, function (element) {
-            var width = parseInt(window.getComputedStyle(element.querySelector('img')).width.slice(0, -2), 10);
-            var height = parseInt(window.getComputedStyle(element.querySelector('img')).height.slice(0, -2), 10);
+        var lightbox = document.querySelector('.lightbox-gallery'),
+            lightboxWidth = parseInt(window.getComputedStyle(lightbox).width, 10) - parseInt(window.getComputedStyle(lightbox).paddingLeft, 10) - parseInt(window.getComputedStyle(lightbox).paddingRight, 10),
+            lightboxHeight = parseInt(window.getComputedStyle(lightbox).height, 10) - parseInt(window.getComputedStyle(lightbox).paddingTop, 10) - parseInt(window.getComputedStyle(lightbox).paddingBottom, 10);
 
-            element.style.marginLeft = width / -2 + "px";
-            element.style.marginTop = height / -2 + "px";
+        _.each(slides, function (element) {
+            var tempImg = document.createElement('img');
+            tempImg.src = element.querySelector('img').src;
+            tempImg.onload = function () {
+                var width = 0, height = 0;
+                var tempWidth = tempImg.width;
+                var tempHeight = tempImg.height;
+                var ratio = tempWidth / tempHeight;
+                if (tempWidth > tempHeight) {
+                    if (tempWidth > lightboxWidth) {
+                        width = lightboxWidth;
+                    } else {
+                        width = tempWidth;
+                    }
+                    height = width / ratio;
+
+                } else {
+                    if (tempHeight > lightboxHeight) {
+                        height = lightboxHeight;
+                    } else {
+                        height = tempHeight;
+                    }
+                    width = height * ratio;
+                }
+
+                element.style.marginLeft = width / -2 + "px";
+                element.style.marginTop = height / -2 + "px";
+            };
         });
+    }
+
+    function updateMarginsOnResize() {
+        if ($scope.resizeTimeout) {
+            window.clearTimeout($scope.resizeTimeout);
+        }
+        $scope.resizeTimeout = window.setTimeout(computeMargins, 800);
     }
 
     function initGallery(images) {
@@ -20,7 +53,7 @@ function GalleryController($rootScope, $scope) {
         slides = [];
 
         var listeHandler = document.createElement('ul');
-        _.each(images, function (image) {
+        _.forEach(images, function (image) {
             var currentImage = document.createElement('li');
             var picture = document.createElement('img');
             picture.src = image.url;
@@ -46,6 +79,8 @@ function GalleryController($rootScope, $scope) {
             }
         }
 
+        window.angular.element(window).on('resize', updateMarginsOnResize);
+
     }
 
     function getNextSlide(slideIndex) {
@@ -67,7 +102,6 @@ function GalleryController($rootScope, $scope) {
     function displaySlideX(slideIndex) {
         var i = 0,
             prevSlide = getPrevSlide(slideIndex);
-        console.log(slides.indexOf(prevSlide));
         for (i = 0; i < slides.length; i++) {
             if (slides[i].classList.contains('prev')) {
                 slides[i].classList.remove('prev');
@@ -151,6 +185,10 @@ function GalleryController($rootScope, $scope) {
         }
     });
 
+    $rootScope.$on("$stateChangeStart", function () {
+        window.angular.element(window).off('resize', updateMarginsOnResize);
+    });
+
     $rootScope.$on("initGallery", function (event, images) {
         initGallery(images);
     });
@@ -158,8 +196,6 @@ function GalleryController($rootScope, $scope) {
     $rootScope.$on("openLightbox", function (event, slideIndex) {
         openLightbox(slideIndex);
     });
-
-    jQuery(window).on('resize', computeMargins);
 
 }
 
