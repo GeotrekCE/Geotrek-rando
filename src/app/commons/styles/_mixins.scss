@@ -113,6 +113,16 @@
     }
 }
 
+@mixin detail-near-elements-coloring() {
+    @each $category in $categories {
+        &.category-#{nth($category, 1)} {
+            .hover {
+                background: transparentize(nth($category, 2), 0.2);
+            }
+        }
+    }
+}
+
 @mixin detail-sidebar-coloring() {
     @each $category in $categories {
         &.category-#{nth($category, 1)} {

@@ -70,7 +70,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
         return deferred.promise;
     };
 
-    this.getAResult = function (elementSlug) {
+    this.getAResultBySlug = function (elementSlug) {
         var deferred = $q.defer();
 
         if (globalSettings.ENABLE_TREKS) {
@@ -106,6 +106,53 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                     function (trEvents) {
                         _.forEach(trEvents.features, function (trEvent) {
                             if (trEvent.properties.slug === elementSlug && trEvent.properties.published) {
+                                deferred.resolve(trEvent);
+                            }
+                        });
+                    }
+                );
+
+        }
+
+        return deferred.promise;
+    };
+
+    this.getAResultByID = function (elementID, categoryID) {
+        var deferred = $q.defer();
+
+        if (globalSettings.ENABLE_TREKS && parseInt(categoryID, 10) === -2) {
+            treksService.getTreks()
+                .then(
+                    function (treks) {
+                        _.forEach(treks.features, function (trek) {
+                            if (parseInt(trek.id, 10) === parseInt(elementID, 10) && trek.properties.published) {
+                                deferred.resolve(trek);
+                            }
+                        });
+                    }
+                );
+        }
+
+        if (globalSettings.ENABLE_TOURISTIC_CONTENT && parseInt(categoryID, 10) > 0) {
+
+            contentsService.getContents()
+                .then(
+                    function (contents) {
+                        _.forEach(contents.features, function (content) {
+                            if (parseInt(content.id, 10) === parseInt(elementID, 10) && parseInt(content.properties.category.id, 10) === parseInt(categoryID, 10) && content.properties.published) {
+                                deferred.resolve(content);
+                            }
+                        });
+                    }
+                );
+        }
+
+        if (globalSettings.ENABLE_TOURISTIC_EVENTS && parseInt(categoryID, 10) === -1) {
+            eventsService.getEvents()
+                .then(
+                    function (trEvents) {
+                        _.forEach(trEvents.features, function (trEvent) {
+                            if (parseInt(trEvent.id, 10) === parseInt(elementID, 10) && trEvent.properties.published) {
                                 deferred.resolve(trEvent);
                             }
                         });

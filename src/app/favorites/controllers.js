@@ -7,7 +7,7 @@ function FavoritesController($scope, favoritesService, resultsService) {
         $scope.favorites = [];
         if (_.size(savedFavorites) > 0) {
             _.forEach(savedFavorites, function (aFavorite) {
-                resultsService.getAResult(aFavorite.slug)
+                resultsService.getAResultBySlug(aFavorite.slug)
                     .then(
                         function (result) {
                             $scope.favorites.push(result);

@@ -1,6 +1,6 @@
 'use strict';
 
-function DetailController($scope, $rootScope, $stateParams, utilsFactory, resultsService, poisService) {
+function DetailController($scope, $rootScope, $q, $stateParams, utilsFactory, resultsService, poisService) {
 
     var mainImage;
     $scope.sanitizeData = utilsFactory.sanitizeData;
@@ -14,6 +14,31 @@ function DetailController($scope, $rootScope, $stateParams, utilsFactory, result
         });
     }
 
+    function getNearElements(result) {
+        var promises = [],
+            nearElements = result.properties.treks.concat(result.properties.touristic_contents, result.properties.touristic_events);
+
+        $scope.nearElements = [];
+        _.forEach(nearElements, function (element) {
+            promises.push(
+                resultsService.getAResultByID(element.id, element.category_id)
+                    .then(
+                        function (elementData) {
+                            $scope.nearElements.push(elementData);
+                        }
+                    )
+            );
+        });
+
+        $q.all(promises)
+            .then(
+                function () {
+                    console.log('nearElements');
+                    console.log($scope.nearElements);
+                }
+            );
+    }
+
     function getPoisOfResult(result) {
         poisService.getPoisFromElement(result.id)
             .then(
@@ -25,10 +50,11 @@ function DetailController($scope, $rootScope, $stateParams, utilsFactory, result
     }
 
     function getResultDetails() {
-        resultsService.getAResult($stateParams.slug)
+        resultsService.getAResultBySlug($stateParams.slug)
             .then(
                 function (result) {
                     getPoisOfResult(result);
+                    getNearElements(result);
                     $scope.result = result;
                     $rootScope.$emit('initGallery', result.properties.pictures);
                     console.log(result);

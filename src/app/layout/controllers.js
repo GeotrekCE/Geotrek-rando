@@ -27,7 +27,7 @@ function SidebarHomeController() {
 function SidebarDetailController($scope, $rootScope, $stateParams, resultsService, favoritesService) {
 
     function getResultDetails() {
-        resultsService.getAResult($stateParams.slug)
+        resultsService.getAResultBySlug($stateParams.slug)
             .then(
                 function (data) {
                     $scope.result = data;

@@ -18,7 +18,7 @@ function MapController($scope, globalSettings, $rootScope, $state, resultsServic
     }
 
     function updateMapWithDetails() {
-        resultsService.getAResult($stateParams.slug)
+        resultsService.getAResultBySlug($stateParams.slug)
             .then(
                 function (data) {
                     $scope.result = data;
