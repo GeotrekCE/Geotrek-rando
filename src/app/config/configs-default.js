@@ -71,15 +71,17 @@ var constants = {
     //
     FILTERS: {
         DURATION : [
-            { id: 4, name: '<1/2 J', interval: {min: 0, max: 4} },
-            { id: 10, name: '1/2 - 1', interval: {min: 4, max: 10} },
-            { id: 24, name: '> 1 J', interval: {min: 10, max: 99999} }
+            { id: 0, label: '<1/2 J'},
+            { id: 10, label: '1/2 J'},
+            { id: 24, label: '1 J'},
+            { id: 999, label: '> 1 J'}
         ],
         ASCENT :  [
-            { id: 0, name: '<300m', interval: {min: 0, max: 300} },
-            { id: 300, name: '300-600', interval: {min: 301, max: 600} },
-            { id: 600, name: '600-1000', interval: {min: 601, max: 1000} },
-            { id: 1000, name: '>1000m', interval: {min: 1001, max: 99999} }
+            { id: 0, label: '<300m'},
+            { id: 300, label: '300'},
+            { id: 600, label: '600'},
+            { id: 1000, label: '1000'},
+            { id: 9999, label: '>1000m'}
         ]
     }
 
