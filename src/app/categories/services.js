@@ -133,8 +133,14 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
         _.forEach(events.features, function (anEvent) {
 
             if (anEvent.properties.published) {
-                if (!(utilsFactory.idIsInArray(eventsType1.values, anEvent.properties.type1))) {
-                    eventsType1.values.push(anEvent.properties.type1);
+
+                if (anEvent.properties.type1 && anEvent.properties.type1.length > 0) {
+                    _.forEach(anEvent.properties.type1, function (aType1) {
+                        if (!(utilsFactory.idIsInArray(eventsType1.values, aType1)) && aType1 !== undefined) {
+                            eventsType1.values.push(aType1);
+                        }
+
+                    });
                 }
 
                 if (anEvent.properties.themes && anEvent.properties.themes.length > 0) {
