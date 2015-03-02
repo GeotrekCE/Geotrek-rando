@@ -74,7 +74,7 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
                                             marker.on({
                                                 mouseover: function () {
                                                     var listeEquivalent = document.querySelector(selector);
-                                                    if (listeEquivalent !== null) {
+                                                    if (listeEquivalent) {
                                                         if (!listeEquivalent.classList.contains('hovered')) {
                                                             listeEquivalent.classList.add('hovered');
                                                         }
@@ -82,7 +82,7 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
                                                 },
                                                 mouseout: function () {
                                                     var listeEquivalent = document.querySelector(selector);
-                                                    if (listeEquivalent !== null) {
+                                                    if (listeEquivalent) {
                                                         if (listeEquivalent.classList.contains('hovered')) {
                                                             listeEquivalent.classList.remove('hovered');
                                                         }
@@ -90,7 +90,7 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
                                                 },
                                                 remove: function () {
                                                     var listeEquivalent = document.querySelector(selector);
-                                                    if (listeEquivalent !== null) {
+                                                    if (listeEquivalent) {
                                                         if (listeEquivalent.classList.contains('hovered')) {
                                                             listeEquivalent.classList.remove('hovered');
                                                         }
@@ -119,78 +119,48 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
         return deferred.promise;
     };
 
-    /*this.createMarkersFromTrek = function (trek, pois) {
-        var markers = [];
-
-        var startPoint = treksService.getStartPoint(trek);
-        var endPoint = treksService.getEndPoint(trek);
-        var parkingPoint = treksService.getParkingPoint(trek);
-
-        markers.push(L.marker([endPoint.lat, endPoint.lng], {
-            icon: iconsService.getArrivalIcon(),
-            name: trek.properties.arrival,
-        }));
-
-        markers.push(L.marker([startPoint.lat, startPoint.lng], {
-            icon: iconsService.getDepartureIcon(),
-            name: trek.properties.departure,
-        }));
-
-        if (parkingPoint) {
-            markers.push(
-                L.marker(
-                    [parkingPoint.lat, parkingPoint.lng],
-                    {
-                        icon: iconsService.getParkingIcon(),
-                        name: "Parking",
-                        description: trek.properties.advised_parking,
+    this.createNearElementsMarkers = function (nearElements) {
+        var startPoint = [];
+        _.forEach(nearElements, function (nearElement) {
+            startPoint = utilsFactory.getStartPoint(nearElement);
+            self.createLayerFromElement(nearElement, 'category', startPoint)
+                .then(
+                    function (marker) {
+                        var selector = '#near-category-' + nearElement.properties.category.id + '-' + nearElement.id;
+                        marker.on({
+                            mouseover: function () {
+                                var listeEquivalent = document.querySelector(selector);
+                                if (listeEquivalent) {
+                                    if (!listeEquivalent.classList.contains('hovered')) {
+                                        listeEquivalent.classList.add('hovered');
+                                    }
+                                }
+                            },
+                            mouseout: function () {
+                                var listeEquivalent = document.querySelector(selector);
+                                if (listeEquivalent) {
+                                    if (listeEquivalent.classList.contains('hovered')) {
+                                        listeEquivalent.classList.remove('hovered');
+                                    }
+                                }
+                            },
+                            remove: function () {
+                                var listeEquivalent = document.querySelector(selector);
+                                if (listeEquivalent) {
+                                    if (listeEquivalent.classList.contains('hovered')) {
+                                        listeEquivalent.classList.remove('hovered');
+                                    }
+                                }
+                            },
+                            click: function () {
+                                $state.go("layout.detail", { slug: nearElement.properties.slug });
+                            }
+                        });
+                        self._nearMarkersLayer.addLayer(marker);
                     }
-                )
-            );
-        }
-
-        var informationCount = 0;
-        _.forEach(trek.properties.information_desks, function (information) {
-            var informationDescription = "<p>" + information.description + "</p>"
-                + "<p>" + information.street + "</p>"
-                + "<p>" + information.postal_code + " " + information.municipality + "</p>"
-                + "<p><a href='" + information.website + "'>Web</a> - <a href='tel:" + information.phone + "'>" + information.phone + "</a></p>";
-
-            markers.push(
-                L.marker(
-                    [information.latitude, information.longitude],
-                    {
-                        icon: iconsService.getInformationIcon(),
-                        name: information.name,
-                        thumbnail: information.photo_url,
-                        description: informationDescription,
-                    }
-                )
-            );
-            informationCount += 1;
+                );
         });
-
-        _.forEach(pois, function (poi) {
-            var poiCoords = {
-                'lat': poi.geometry.coordinates[1],
-                'lng': poi.geometry.coordinates[0]
-            };
-            var poiIcon = iconsService.getPOIIcon(poi);
-            markers.push(
-                L.marker([poiCoords.lat, poiCoords.lng],
-                    {
-                        icon: poiIcon,
-                        name: poi.properties.name,
-                        description: poi.properties.description,
-                        thumbnail: poi.properties.thumbnail,
-                        img: poi.properties.pictures[0],
-                        pictogram: poi.properties.type.pictogram
-                    })
-            );
-        });
-
-        return markers;
-    };*/
+    };
 
     this.createLayerFromElement = function (element, type, elementLocation) {
         var deferred = $q.defer();
@@ -528,7 +498,7 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
                             layer.on({
                                 mouseover: function () {
                                     var listeEquivalent = document.querySelector(selector);
-                                    if (listeEquivalent !== null) {
+                                    if (listeEquivalent) {
                                         if (!listeEquivalent.classList.contains('hovered')) {
                                             listeEquivalent.classList.add('hovered');
                                         }
@@ -536,7 +506,7 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
                                 },
                                 mouseout: function () {
                                     var listeEquivalent = document.querySelector(selector);
-                                    if (listeEquivalent !== null) {
+                                    if (listeEquivalent) {
                                         if (listeEquivalent.classList.contains('hovered')) {
                                             listeEquivalent.classList.remove('hovered');
                                         }
@@ -544,7 +514,7 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
                                 },
                                 remove: function () {
                                     var listeEquivalent = document.querySelector(selector);
-                                    if (listeEquivalent !== null) {
+                                    if (listeEquivalent) {
                                         if (listeEquivalent.classList.contains('hovered')) {
                                             listeEquivalent.classList.remove('hovered');
                                         }
@@ -666,9 +636,11 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
         }
 
         this._poisMarkersLayer = self.createLayer();
+        this._nearMarkersLayer = self.createLayer();
 
         this.map.addLayer(this._clustersLayer);
         this.map.addLayer(this._poisMarkersLayer);
+        this.map.addLayer(this._nearMarkersLayer);
 
         return this.map;
 

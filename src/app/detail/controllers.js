@@ -1,6 +1,6 @@
 'use strict';
 
-function DetailController($scope, $rootScope, $q, $stateParams, utilsFactory, resultsService, poisService) {
+function DetailController($scope, $rootScope, $q, $stateParams, utilsFactory, resultsService, poisService, mapService) {
 
     var mainImage;
     $scope.sanitizeData = utilsFactory.sanitizeData;
@@ -33,6 +33,7 @@ function DetailController($scope, $rootScope, $q, $stateParams, utilsFactory, re
         $q.all(promises)
             .then(
                 function () {
+                    mapService.createNearElementsMarkers($scope.nearElements);
                     console.log('nearElements');
                     console.log($scope.nearElements);
                 }
