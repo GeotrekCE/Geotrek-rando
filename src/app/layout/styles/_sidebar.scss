@@ -1,9 +1,11 @@
 #sidebar {
     height: 100%;
     width: 70px;
+    float: left;
     background-color: $primary-color;
     color: white;
-
+    z-index: 3;
+    position: relative;
     .detail-actions {
         list-style: none;
         padding: 0;

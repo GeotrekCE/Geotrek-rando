@@ -1,19 +1,27 @@
 #main-content {
     width: 100%;
+    padding-top: 70px;
+    top: -70px;
     height: 100%;
-    flex: 1;
-    display: flex;
-    flex-direction: row;
     overflow: hidden;
     position: relative;
     & > .content {
-        flex: 1;
-        display: flex;
-        flex-direction: row;
+        height: 100%;
+        width: 100%;
+        padding-left: 70px;
+        margin-left: -70px;
+        float: left;
         .results-drawer {
             width: 40%;
+            height: 100%;
+            float: left;
             overflow: auto;
             background: $light-grey;
+        }
+        .general-map {
+            width: 60%;
+            height: 100%;
+            float: left;
         }
     }
 }

@@ -1,12 +1,11 @@
 .categories {
     list-style: none;
-    display: flex;
-    flex-direction: column;
     padding: 0;
+    margin: 0;
     height: 100%;
+    width: 100%;
+    position: relative;
     .category {
-        flex: 1;
-        order: 1;
         position: relative;
         background: $light-grey;
         color: $dark-grey;
@@ -25,6 +24,7 @@
             display: block;
             text-decoration: none;
             text-align: center;
+            min-height: 50px;
             height: 50px;
             padding: 1em;
             z-index: 14;
@@ -51,10 +51,11 @@
             }
         }
         &:hover {
+            top: 0;
+            left: 0;
             width: 300px;
-            min-height: 100%;
-            padding-bottom: 70px;
             z-index: 99;
+            min-height: 100%;
             transition-delay: 0.4s;
             & > a {
                 width: 300px;
@@ -93,7 +94,7 @@
         }
         .filters {
             width: 300px;
-            flex: 1;
+            min-height: 100%;
             overflow-y: auto;
             z-index: 12;
             transition: all 0.1s ease-out;

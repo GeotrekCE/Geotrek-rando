@@ -3,13 +3,14 @@
     padding: 0;
     margin: 0;
     display: flex;
-    flex: 1;
     flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
     overflow-y: auto;
     li {
         width: 29%;
         height: 10em;
-        margin: 2%;
+        margin: 1.3em 2%;
         max-height: 100%;
         display: flex;
         background: white;

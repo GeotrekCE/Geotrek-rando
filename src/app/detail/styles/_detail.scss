@@ -1,11 +1,14 @@
 .detail-page {
-    flex: 1;
-    display: flex;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
     background: $neutral-grey;
     @include detail-page-coloring();
 
     .informations {
         width: 40%;
+        height: 100%;
+        float: left;
         display: flex;
         flex-direction: column;
         border-right: 1px solid $neutral-grey;
@@ -286,46 +289,49 @@
 
     .interests {
         width: 59.5%;
+        height: 100%;
         margin-left: 0.5%;
-        display: flex;
+        float: left;
         flex-direction: column;
         .elements {
             background: $light-grey;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            flex: 1;
+            width: 100%;
+            height: 50%;
             div[role="tabpanel"], div[role="tabpanel"] > div {
-                flex: 1;
-                display: flex;
-                flex-direction: column;
+                height: 100%;
+                width: 100%;
             }
             .tab-content {
-                display: flex;
-                flex: 1;
+                height: 100%;
+                width: 100%;
+                //padding-bottom: 50px;
                 overflow: hidden;
                 background: $light-grey;
-                & > .active {
-                    display: flex;
-                }
                 .tab-pane {
-                    flex: 1;
+                    height: 100%;
+                    width: 100%;
+                    padding-top: 43px;
+                    margin-top: -43px;
                 }
             }
-            .nav-tabs li {
-                a {
-                    color: $dark-grey;
-                    border: none;
-                    border-right: 1px solid $neutral-grey;
-                    border-radius: 0;
-                    background: white;
-                }
-                &:last-child a {
-                    border-right: none;
-                }
-                &.active {
+            .nav-tabs {
+                height: 43px;
+                li {
                     a {
-                        border-bottom: 3px solid $primary-color;
+                        color: $dark-grey;
+                        border: none;
+                        border-right: 1px solid $neutral-grey;
+                        border-radius: 0;
+                        background: white;
+                    }
+                    &:last-child a {
+                        border-right: none;
+                    }
+                    &.active {
+                        a {
+                            border-bottom: 3px solid $primary-color;
+                        }
                     }
                 }
            } 
@@ -333,9 +339,8 @@
         .detail-map {
             background: $light-grey;
             padding: 0;
-            flex: 1;
-            min-height: 50%;
-            display: flex;
+            height: 50%;
+            width: 100%;
         }
     }
 }
