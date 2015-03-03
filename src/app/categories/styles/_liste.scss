@@ -73,6 +73,7 @@
             transition: top 0.3s ease-out, opacity 0.3s ease-out;
             transition-delay: 0.5s, 0.4s;
             .category-name {
+                cursor: pointer;
                 display: block;
                 width: 300px;
                 height: 47px;

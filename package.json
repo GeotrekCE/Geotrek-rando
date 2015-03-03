@@ -9,6 +9,7 @@
     "angular-mocks": "^1.3.9",
     "angular-resource": "^1.3.8",
     "angular-slider": "git://github.com/PopSugar/angular-slider.git",
+    "angular-translate": "^2.6.1",
     "angular-ui-router": "^0.2.13",
     "bootstrap-sass": "^3.3.1",
     "font-awesome": "^4.2.0",
@@ -21,6 +22,7 @@
   },
   "browser": {
     "angular": "./src/app/angular-browserify.js",
+    "angular-translate": "./node_modules/angular-translate/dist/angular-translate.js",
     "ui.bootstrap": "./node_modules/angular-bootstrap/dist/ui-bootstrap-tpls.min.js",
     "ui.router": "./node_modules/angular-ui-router/release/angular-ui-router.js",
     "angular-slider": "./node_modules/angular-slider/slider.js",

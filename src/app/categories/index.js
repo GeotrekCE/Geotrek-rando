@@ -2,7 +2,8 @@
 
 var angular = require('angular');
 
-angular.module('rando.categories', [])
+angular.module('rando.categories', ['pascalprecht.translate'])
     .service('categoriesService', require('./services').categoriesService)
     .controller('CategoriesListeController', require('./controllers').CategoriesListeController)
-    .directive('categoriesListe', require('./directives').categoriesListeDirective);
+    .directive('categoriesListe', require('./directives').categoriesListeDirective)
+    .config(require('./lang').translateCategories);

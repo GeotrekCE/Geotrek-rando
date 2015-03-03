@@ -36,7 +36,7 @@
                 </div>
 
                 <div ng-if="category.routes && category.routes.values.length > 0" class="selector routes" ng-class="{opened: routeIsCollapsed}">
-                    <span ng-click="routeIsCollapsed = !routeIsCollapsed"><i class="fa fa-plus"></i> Parcours</span>
+                    <span ng-click="routeIsCollapsed = !routeIsCollapsed"><i class="fa fa-plus"></i> {{'FILTERS_NAMES.CHECKBOX.ROUTES' | translate}}</span>
                     <div class="choices" collapse="!routeIsCollapsed">
                         <div ng-repeat="route in category.routes.values" class="route form-group">
                             <input type="checkbox" id="route-{{route.id}}" value="{{route.id}}" ng-model="category.filters.route[route.id]"  ng-change="propagateFilters()"/>
@@ -49,9 +49,9 @@
                 </div>
 
                 <div ng-if="category.difficulty && category.difficulty.values.length > 1" class="slider difficulties">
-                    <span>Difficultée : </span>
+                    <span>{{'FILTERS_NAMES.RANGE.DIFFICULTIES' | translate}}</span>
                     <span ng-if="parseInt(category.difficulty.min, 10) === 0 && parseInt(category.difficulty.max, 10) === (parseInt(category.difficulty.values.length, 10) - 1)">
-                        Toutes
+                        {{'FILTERS_VALUES.ALL' | translate}}
                     </span>
                     <span ng-if="(parseInt(category.difficulty.min, 10) !== 0 || parseInt(category.difficulty.max, 10) !== (parseInt(category.difficulty.values.length, 10) - 1)) && parseInt(category.difficulty.min, 10) !== parseInt(category.difficulty.max, 10)">
                         {{category.difficulty.values[category.difficulty.min].label}} -> {{category.difficulty.values[category.difficulty.max].label}}
@@ -67,9 +67,9 @@
                 </div>
 
                 <div ng-if="category.duration && category.duration.values.length > 1" class="slider duration">
-                    <span>Durée : </span>
+                    <span>{{'FILTERS_NAMES.RANGE.DURATION' | translate}}</span>
                     <span ng-if="category.duration.min === 0 && category.duration.max === category.duration.values.length - 1">
-                        Toutes
+                        {{'FILTERS_VALUES.ALL' | translate}}
                     </span>
                     <span ng-if="(category.duration.min !== 0 || category.duration.max !== category.duration.values.length - 1) && category.duration.min !== category.duration.max">
                         {{category.duration.values[category.duration.min].label}} -> {{category.duration.values[category.duration.max].label}}
@@ -85,9 +85,9 @@
                 </div>
 
                 <div ng-if="category.ascent && category.ascent.values.length > 1" class="slider ascent">
-                    <span>Inclinaison : </span>
+                    <span>{{'FILTERS_NAMES.RANGE.ASCENT' | translate}}</span>
                     <span ng-if="parseInt(category.ascent.min, 10) === 0 && parseInt(category.ascent.max, 10) === (parseInt(category.ascent.values.length, 10) - 1)">
-                        Toutes
+                        {{'FILTERS_VALUES.ALL' | translate}}
                     </span>
                     <span ng-if="(parseInt(category.ascent.min, 10) !== 0 || parseInt(category.ascent.max, 10) !== (parseInt(category.ascent.values.length, 10) - 1)) && parseInt(category.ascent.min, 10) !== parseInt(category.ascent.max, 10)">
                         {{category.ascent.values[category.ascent.min].label}} -> {{category.ascent.values[category.ascent.max].label}}

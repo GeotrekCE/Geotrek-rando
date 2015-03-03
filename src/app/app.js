@@ -20,6 +20,7 @@ var dependencies = [
 
     // External stuff
     'ui.router',
+    'pascalprecht.translate',
     'ui.slider',
     'ngResource',
     'ui.bootstrap',
@@ -34,6 +35,7 @@ window.L = require('leaflet');
 require('ui.bootstrap');
 require('ui.router');
 require('angular-slider');
+require('angular-translate');
 require('ngResource');
 require('bootstrap');
 require('leaflet-minimap');
