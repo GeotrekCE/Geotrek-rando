@@ -1,40 +1,23 @@
 @mixin categories-list-coloring() {
     @each $category in $categories {
         &.category-#{nth($category, 1)} {
-            a {
-                color: nth($category, 2);
-                svg {
-                    fill: nth($category, 2);
-                }
+            &:hover a svg {
+                fill: nth($category, 2);
             }
             &.active {
-                background: darken(nth($category, 2), 5%);
                 a {
                     background: nth($category, 2);
-                    color: white;
-                    svg {
-                        fill: white;
-                    }
-                }
-                .filters .choices {
-                    input {
-                        &:focus + label, &:hover + label {
-                            background-color: darken(nth($category, 2), 10%);
-                        }
-                    }
                 }
             }
             .filters {
+                background: darken(nth($category, 2), 5%);
                 .category-name {
                     background: nth($category, 2);
-                }
-                form {
-                    border-color: nth($category, 2);
                 }
                 .choices {
                     input {
                         &:focus + label, &:hover + label {
-                            background-color: $neutral-grey;
+                            background-color: darken(nth($category, 2), 10%);
                         }
                     }
                 }
