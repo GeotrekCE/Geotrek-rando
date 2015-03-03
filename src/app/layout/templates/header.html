@@ -4,7 +4,7 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
+                <span class="sr-only">{{'HEADER.TOGGLE_NAV' | translate}}</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -14,7 +14,7 @@
                     <img src="./images/main-logo.svg">
                 </div>
                 <div id="banner">
-                    <h1>Destination Parc national des Cévennes</h1>
+                    <h1>{{'HEADER.BANNER_TEXT' | translate}}</h1>
                 </div>
             </a>
         </div>
@@ -25,7 +25,7 @@
             <ul class="nav navbar-nav static-pages navbar-right">
                 <li class="static-pages dropdown">
                     <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        Pages statiques <span class="caret"></span>
+                        {{'HEADER.ABOUT_US' | translate}} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="http://google.fr">Page statique 1</a></li>
@@ -34,12 +34,12 @@
                     </ul>
                 </li>
                 <li class="divider"></li>
-                <li class="share" tooltip-placement="bottom" tooltip="Partager">
+                <li class="share" tooltip-placement="bottom" tooltip="{{'HEADER.SHARE' | translate}}">
                     <span class="glyphicon glyphicon-share"></span>
                 </li>
                 <li class="divider"></li>
                 <li class="favorites dropdown">
-                    <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" tooltip-placement="bottom" tooltip="Favoris">
+                    <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" tooltip-placement="bottom" tooltip="{{'HEADER.FAVORITES' | translate}}">
                         <span class="glyphicon glyphicon-heart"></span>
                     </a>
                     <div class="dropdown-menu" role="menu">
@@ -47,16 +47,7 @@
                     </div>
                 </li>
                 <li class="divider"></li>
-                <li class="languages dropdown">
-                    <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        Fr <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Français</a></li>
-                        <li><a href="#">English</a></li>
-                        <li><a href="#">Español</a></li>
-                    </ul>
-                </li>
+                <translation-menu></translation-menu>
             </ul>
 
         </div><!-- /.navbar-collapse -->

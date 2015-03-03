@@ -99,13 +99,13 @@
                         </ul>
                     </div>
                     <div class="from-to">
-                        <span ng-if="result.properties.departure && result.properties.departure !== result.properties.arrival">Départ : {{result.properties.departure}}</span>
+                        <span ng-if="result.properties.departure && result.properties.departure !== result.properties.arrival">{{ 'START' | translate}} {{result.properties.departure}}</span>
                         <span ng-if="result.properties.arrival">
                             <span ng-if="result.properties.departure !== result.properties.arrival" class="arrival">
-                                Arrivée :
+                                {{ 'ARRIVAL' | translate}}
                             </span>
                             <span ng-if="result.properties.departure === result.properties.arrival" class="loop">
-                                Boucle :
+                                {{ 'LOOP' | translate}}
                             </span>
                             {{result.properties.arrival}}
                         </span>
@@ -119,7 +119,7 @@
                 <div ng-if="result.properties.description" ng-bind-html="sanitizeData(result.properties.description)" class="description"></div>
                 <div ng-if="result.properties.is_park_centered" class="is-park-centered">
                     <i class="fa fa-info-circle"></i>
-                    <p>Cet itinéraire est dans le coeur du parc national, veuillez consulter la réglementation.</p>
+                    <p>{{ 'PARK_CENTERED' | translate}}</p>
                 </div>
                 <div ng-if="result.properties.advice" class="advice">
                     <i class="fa fa-exclamation-triangle"></i>
@@ -135,15 +135,15 @@
             </div>
             <div class="more-infos">
                 <div ng-if="result.properties.public_transport" class="transport">
-                    <h4><i class="fa fa-bus"></i>Transports</h4>
+                    <h4><i class="fa fa-bus"></i>{{ 'TRANSPORTS' | translate}}</h4>
                     <div class="card" ng-bind-html="sanitizeData(result.properties.public_transport)"></div>
                 </div>
                 <div ng-if="result.properties.access" class="access">
-                    <h4><i class="fa fa-road"></i>Accès routier</h4>
+                    <h4><i class="fa fa-road"></i>{{ 'ACCESS' | translate}}</h4>
                     <div class="card" ng-bind-html="sanitizeData(result.properties.access)"></div>
                 </div>
                 <div ng-if="result.properties.information_desks[0]" class="info-desks">
-                    <h4><i class="fa fa-tty"></i>Lieux de renseignements</h4>
+                    <h4><i class="fa fa-tty"></i>{{ 'INFORMATION_DESKS' | translate}}</h4>
                     <ul>
                         <li ng-repeat="desk in result.properties.information_desks" class="desk card">
                             <div class="infos">
@@ -171,14 +171,14 @@
                     </ul>
                 </div>
                 <div ng-if="result.properties.contact || result.properties.email" class="contact-card">
-                    <h4><i class="fa fa-tty"></i>Contact</h4>
+                    <h4><i class="fa fa-tty"></i>{{ 'CONTACT' | translate}}</h4>
                     <div class="card">
                         <div class="contact" ng-if="result.properties.contact" ng-bind-html="sanitizeData(result.properties.contact)"></div>
                         <a ng-if="result.properties.email" href="mailto:{{result.properties.email}}">{{result.properties.email}}</a>
                     </div>
                 </div>
                 <div ng-if="result.properties.web_links[0]" class="going-further">
-                    <h4><i class="fa fa-info"></i>Pour Plus d'informations</h4>
+                    <h4><i class="fa fa-info"></i>{{ 'KNOW_MORE' | translate}}</h4>
                     <ul ng-if="result.properties.web_links[0]" class="websites">
                         <li ng-repeat="link in result.properties.web_links">
                             <a href="{{link.url}}" title="{{link.name}}">
@@ -204,10 +204,10 @@
             <div role="tabpanel">
 
                 <tabset justified="true">
-                    <tab ng-if="pois.length > 0" heading="Patrimoine" active="true">
+                    <tab ng-if="pois.length > 0" heading="{{ 'POI' | translate}}" active="true">
                         <pois-liste></pois-liste>
                     </tab>
-                    <tab ng-if="result.properties.touristic_contents.length > 0 || result.properties.touristic_events.length > 0 || result.properties.treks.length > 0" heading="A proximité" select="tabIsShown(true)" deselect="tabIsShown(false)">
+                    <tab ng-if="result.properties.touristic_contents.length > 0 || result.properties.touristic_events.length > 0 || result.properties.treks.length > 0" heading="{{ 'NEAR' | translate}}" select="tabIsShown(true)" deselect="tabIsShown(false)">
                         <near-liste></near-liste>
                     </tab>
                 </tabset>

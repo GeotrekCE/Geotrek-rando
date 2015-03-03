@@ -1,56 +1,56 @@
 <div class="category-{{result.properties.category.id}}">
     <ul class="detail-actions">
         <li class="back-to-home">
-            <a href title="Retour à la carte" ng-click="back()" tooltip-placement="right" tooltip="Retour à la carte">
+            <a href title="{{'SIDEBAR.BACK' | translate}}"  ng-click="back()" tooltip-placement="right" tooltip="{{'SIDEBAR.BACK' | translate}}">
                 <i class="fa fa-reply"></i>
-                <span class="sr-only">Retour à la carte</span>
+                <span class="sr-only">{{'SIDEBAR.BACK' | translate}}</span>
             </a>
         </li>
         <li ng-if="result.properties.printable" class="print">
-            <a href="{{result.properties.printable}}" title="Imprimer la fiche de l'itinéraire" tooltip-placement="right" tooltip="Imprimer la fiche de l'itinéraire">
+            <a href="{{result.properties.printable}}" title="{{'SIDEBAR.PRINT' | translate}}"  tooltip-placement="right" tooltip="{{'SIDEBAR.PRINT' | translate}}">
                 <i class="fa fa-print"></i>
-                <span class="sr-only">Imprimer la fiche</span>
+                <span class="sr-only">{{'SIDEBAR.PRINT' | translate}}</span>
             </a>
         </li>
         <li class="favorites">
-            <a href class="isFav" ng-if="isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="right" tooltip="Dans mes favoris">
+            <a href title="{{'SIDEBAR.REMOVE_FAVS' | translate}}" class="isFav" ng-if="isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="right" tooltip="{{'SIDEBAR.REMOVE_FAVS' | translate}}">
                 <i class="fa fa-heart"></i>
-                <span class="sr-only">Dans mes favoris</span>
+                <span class="sr-only">{{'SIDEBAR.REMOVE_FAVS' | translate}}</span>
             </a>
 
-            <a href ng-if="!isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="right" tooltip="Ajouter à mes favoris">
+            <a href title="{{'SIDEBAR.ADD_FAVS' | translate}}" ng-if="!isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="right" tooltip="{{'SIDEBAR.ADD_FAVS' | translate}}">
                 <i class="fa fa-heart"></i>
-                <span class="sr-only">Ajouter à mes favoris</span>
+                <span class="sr-only">{{'SIDEBAR.ADD_FAVS' | translate}}</span>
             </a>
         </li>
         <li class="share">
-            <a href tooltip-placement="right" tooltip="Partager cet itinéraire">
+            <a href title="{{'SIDEBAR.SHARE' | translate}}" tooltip-placement="right" tooltip="{{'SIDEBAR.SHARE' | translate}}">
                 <i class="fa fa-share-alt"></i>
-                <span class="sr-only">Partager cet itinéraire</span>
+                <span class="sr-only">{{'SIDEBAR.SHARE' | translate}}</span>
             </a>
         </li>
         <li class="signal">
-            <a href tooltip-placement="right" tooltip="Signaler un problème ou une erreur">
+            <a href title="{{'SIDEBAR.WARNING' | translate}}" tooltip-placement="right" tooltip="{{'SIDEBAR.WARNING' | translate}}">
                 <i class="fa fa-pencil"></i>
-                <span class="sr-only">Signaler un problème ou une erreur</span>
+                <span class="sr-only">{{'SIDEBAR.WARNING' | translate}}</span>
             </a>
         </li>
         <li ng-if="result.properties.kml" class="kml">
-            <a href="{{result.properties.kml}}" title="Télécharger le fichier KML de l'itinéraire" tooltip-placement="right" tooltip="Télécharger le fichier KML de l'itinéraire">
+            <a href="{{result.properties.kml}}" title="{{'SIDEBAR.KML' | translate}}" tooltip-placement="right" tooltip="{{'SIDEBAR.KML' | translate}}">
                 <span class="txt-icon">KML</span>
-                <span class="sr-only">Télécharger le fichier KML de l'itinéraire</span>
+                <span class="sr-only">{{'SIDEBAR.KML' | translate}}</span>
             </a>
         </li>
         <li ng-if="result.properties.gpx" class="gpx">
-            <a href="{{result.properties.gpx}}" title="Télécharger le fichier GPX de l'itinéraire" tooltip-placement="right" tooltip="Télécharger le fichier GPX de l'itinéraire">
+            <a href="{{result.properties.gpx}}" title="{{'SIDEBAR.GPX' | translate}}" tooltip-placement="right" tooltip="{{'SIDEBAR.GPX' | translate}}">
                 <span class="txt-icon">GPX</span>
-                <span class="sr-only">Télécharger le fichier GPX de l'itinéraire</span>
+                <span class="sr-only">{{'SIDEBAR.GPX' | translate}}</span>
             </a>
         </li>
         <li ng-if="result.properties.category.id === -2" class="rep-3d">
-            <a href tooltip-placement="right" tooltip="Voir l'itinéraire en 3D !">
+            <a href title="{{'SIDEBAR.3D' | translate}}" tooltip-placement="right" tooltip="{{'SIDEBAR.3D' | translate}}">
                 <span class="txt-icon">3D</span>
-                <span class="sr-only">Voir l'itinéraire en 3D !</span>
+                <span class="sr-only">{{'SIDEBAR.3D' | translate}}</span>
             </a>
         </li>
     </ul>

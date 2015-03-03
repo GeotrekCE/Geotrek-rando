@@ -1,6 +1,6 @@
 <div class="favorites-liste">
     <div class="header">
-        <span>Favoris</span>
+        <span>{{'FAVORITES' | translate}}</span>
         <div class="remove" ng-click="removeAllFavorites(); $event.stopPropagation();" ng-if="favorites && favorites.length > 0"><i class="fa fa-trash"></i></div>
     </div>
     <ul ng-if="favorites && favorites.length > 0">
@@ -16,5 +16,5 @@
             </div>
         </li>
     </ul>
-    <div ng-if="!favorites || favorites.length === 0" class="no-favorites">Vous n'avez pas encore de favoris !</div>
+    <div ng-if="!favorites || favorites.length === 0" class="no-favorites">{{'NO_FAVORITES' | translate}}</div>
 </div>

@@ -3,6 +3,7 @@
 var dependencies = [
     // Our submodules
     'rando.config',
+    'rando.translation',
     'rando.commons',
     'rando.treks',
     'rando.pois',
@@ -19,8 +20,8 @@ var dependencies = [
 
 
     // External stuff
-    'ui.router',
     'pascalprecht.translate',
+    'ui.router',
     'ui.slider',
     'ngResource',
     'ui.bootstrap',
@@ -47,6 +48,7 @@ angular.module('geotrekRando', dependencies);
 
 // Require Geotrek components
 require('./config');
+require('./translation');
 require('./commons');
 require('./layout');
 require('./treks');

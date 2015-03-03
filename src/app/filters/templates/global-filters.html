@@ -3,7 +3,7 @@
         <div class="top-part">
             <div class="search">
                 <div class="input-group">
-                    <input type="text" ng-model="activeFilters.search"  ng-change="propagateActiveFilters()" placeholder="Rechercher..."/>
+                    <input type="text" ng-model="activeFilters.search"  ng-change="propagateActiveFilters()" placeholder="{{'SEARCH' | translate}}..."/>
                     <div class="input-group-addon">
                         <i class="fa fa-search"></i>
                     </div>
@@ -11,7 +11,7 @@
             </div>
             <div class="geo-filters">
                 <div class="selector districts" ng-class="{empty: filters.districts.length === 0}">
-                    <span>Districts <span ng-if="filterLength.districts > 0" class="badge">{{filterLength.districts}}</span></span>
+                    <span>{{'DISTRICTS' | translate}} <span ng-if="filterLength.districts > 0" class="badge">{{filterLength.districts}}</span></span>
                     <div class="choices">
                         <div ng-repeat="district in filters.districts" class="district form-group">
                             <input type="checkbox" id="district-{{district.id}}" value="{{district.id}}" ng-false-value="null" ng-model="activeFilters.districts[district.id]"  ng-change="propagateActiveFilters()"/>
@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="selector areas" ng-class="{empty: filters.areas.length === 0}">
-                    <span>Vallées <span ng-if="filterLength.areas > 0" class="badge">{{filterLength.areas}}</span></span>
+                    <span>{{'AREAS' | translate}} <span ng-if="filterLength.areas > 0" class="badge">{{filterLength.areas}}</span></span>
                     <div class="choices">
                         <div ng-repeat="area in filters.areas" class="area form-group">
                             <input type="checkbox" id="area-{{area.id}}" value="{{area.id}}" ng-model="activeFilters.areas[area.id]" ng-false-value="null" ng-change="propagateActiveFilters()"/>

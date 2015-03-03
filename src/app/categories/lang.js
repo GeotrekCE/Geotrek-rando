@@ -1,6 +1,6 @@
 'use strict';
 
-function translateCategories($translateProvider, globalSettings) {
+function translateCategories($translateProvider) {
     $translateProvider.translations('fr', {
         'FILTERS_NAMES': {
             'CHECKBOX': {
@@ -32,8 +32,6 @@ function translateCategories($translateProvider, globalSettings) {
             'ALL': 'All'
         }
     });
-
-    $translateProvider.preferredLanguage(globalSettings.DEFAULT_LANGUAGE);
 }
 
 module.exports = {
