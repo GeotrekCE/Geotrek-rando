@@ -18,6 +18,15 @@ module.exports = {
             baseDir: dest
         }
     },
+    translate: {
+        src: [
+            src + '/' + appFolder + '/translation/po/*.po'
+        ],
+        dest: dest + '/' + appFolder + '/config/lang',
+        options: {
+            'format': 'mf'
+        }
+    },
     sass: {
         src: src + '/' + appFolder + '/rando.{sass,scss}',
         dest: dest,

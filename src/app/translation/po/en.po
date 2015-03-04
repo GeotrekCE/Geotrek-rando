@@ -1,0 +1,118 @@
+msgid ""
+msgstr ""
+"Project: Geotrek-rando\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en\n"
+
+# CATEORIES
+msgid "ROUTES"
+msgstr "routes"
+
+msgid "DIFFICULTIES"
+msgstr "Difficulties"
+
+msgid "DURATION"
+msgstr "Duration"
+
+msgid "ASCENT"
+msgstr "Ascent"
+
+msgid "ALL"
+msgstr "All"
+
+# FAVORITES
+msgid "FAVORITES"
+msgstr "Favorites"
+
+msgid "NO_FAVORITES"
+msgstr "You don't have any favorites yet !"
+
+# DETAILS
+msgid "START"
+msgstr "Start"
+
+msgid "ARRIVAL"
+msgstr "Arrival"
+
+msgid "LOOP"
+msgstr "Loop"
+
+msgid "PARK_CENTERED"
+msgstr "Park centered"
+
+msgid "TRANSPORT"
+msgstr "Transport"
+
+msgid "ACCESS"
+msgstr "Access"
+
+msgid "INFORMATION_DESKS"
+msgstr "Information desks"
+
+msgid "CONTACT"
+msgstr "Contact"
+
+msgid "KNOW_MORE"
+msgstr "Know more"
+
+msgid "POI"
+msgstr "POIS"
+
+msgid "NEAR"
+msgstr "Near from here"
+
+# FILTERS
+msgid "DISTRICTS"
+msgstr "Districts"
+
+msgid "SEARCH"
+msgstr "Search"
+
+msgid "AREAS"
+msgstr "Areas"
+
+# LAYOUT
+msgid "TOGGLE_NAV"
+msgstr "Toggle navigation"
+
+msgid "BANNER_TEXT"
+msgstr "English title Cévennes"
+
+msgid "ABOUT_US"
+msgstr "About us"
+
+msgid "BACK"
+msgstr "Back to the map"
+
+msgid "PRINT"
+msgstr "Print"
+
+msgid "ADD_FAVS"
+msgstr "Add to favorites"
+
+msgid "REMOVE_FAVS"
+msgstr "Remove from favorites"
+
+msgid "SHARE"
+msgstr "Share"
+
+msgid "WARNING"
+msgstr "Signal a mistake or an issue"
+
+msgid "KML"
+msgstr "Download the KML file"
+
+msgid "GPX"
+msgstr "Download the GPX file"
+
+msgid "3D"
+msgstr "3D visualization"

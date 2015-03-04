@@ -9,5 +9,6 @@ var watchify = require('./browserify');
 
 gulp.task('watch', ['watchify', 'browserSync'], function () {
     gulp.watch(config.sass.toWatch, ['sass']);
+    gulp.watch(config.translate.src, ['browserify']);
     // Watchify will watch and recompile our JS, so no need to gulp.watch it
 });
