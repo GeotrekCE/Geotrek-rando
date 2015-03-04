@@ -27,6 +27,9 @@ function translationService(globalSettings) {
     };
 
     this.getCurrentLang = function () {
+        if (!self.currentLang) {
+            return self.getDefaultLang();
+        }
         return self.currentLang;
     };
 

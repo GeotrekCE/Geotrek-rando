@@ -4,8 +4,8 @@ function favoritesService() {
 
     var self = this;
 
-    this.getFavorites = function (forceRefresh) {
-        if (self._favorites && !forceRefresh) {
+    this.getFavorites = function () {
+        if (self._favorites) {
             return self._favorites;
         }
 
@@ -33,7 +33,8 @@ function favoritesService() {
     this.addAFavorite = function (element) {
         if (!self._favorites[element.properties.category.id + '-' + element.id]) {
             self._favorites[element.properties.category.id + '-' + element.id] = {
-                slug: element.properties.slug
+                id: element.id,
+                category: element.properties.category.id
             };
             self.setFavorites();
         }

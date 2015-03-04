@@ -1,13 +1,13 @@
 'use strict';
 
-function FavoritesController($scope, favoritesService, resultsService) {
+function FavoritesController($scope, $rootScope, favoritesService, resultsService) {
 
     function updateFavorites(forceRefresh) {
-        var savedFavorites = favoritesService.getFavorites(forceRefresh);
+        var savedFavorites = favoritesService.getFavorites();
         $scope.favorites = [];
         if (_.size(savedFavorites) > 0) {
             _.forEach(savedFavorites, function (aFavorite) {
-                resultsService.getAResultBySlug(aFavorite.slug)
+                resultsService.getAResultByID(aFavorite.id, aFavorite.category, forceRefresh)
                     .then(
                         function (result) {
                             $scope.favorites.push(result);
@@ -34,7 +34,7 @@ function FavoritesController($scope, favoritesService, resultsService) {
 
     updateFavorites();
 
-    $scope.$on('switchGlobalLang', function () {
+    $rootScope.$on('switchGlobalLang', function () {
         updateFavorites(true);
     });
 
