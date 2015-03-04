@@ -47,8 +47,8 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
         countActiveValues('districts');
     }
 
-    function initFiltersView(forceRefresh) {
-        resultsService.getAllResults(forceRefresh)
+    function initFiltersView() {
+        resultsService.getAllResults()
             .then(
                 function (data) {
                     $scope.filters = filtersService.initGlobalFilters(data);
@@ -131,7 +131,7 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
 
     initFiltersView();
     $rootScope.$on('switchGlobalLang', function () {
-        initFiltersView(true);
+        initFiltersView();
     });
 
 }

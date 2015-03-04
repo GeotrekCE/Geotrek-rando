@@ -258,7 +258,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
             if (globalSettings.ENABLE_TREKS) {
                 promises.push(
-                    treksService.getTreks(forceRefresh)
+                    treksService.getTreks()
                         .then(
                             function (treks) {
                                 if (treks.features.length > 0) {
@@ -271,7 +271,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
             if (globalSettings.ENABLE_TOURISTIC_CONTENT) {
                 promises.push(
-                    contentsService.getContents(forceRefresh)
+                    contentsService.getContents()
                         .then(
                             function (contents) {
                                 if (contents.features.length > 0) {
@@ -284,7 +284,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
             if (globalSettings.ENABLE_TOURISTIC_EVENTS) {
                 promises.push(
-                    eventsService.getEvents(forceRefresh)
+                    eventsService.getEvents()
                         .then(
                             function (trEvents) {
                                 if (trEvents.features.length > 0) {

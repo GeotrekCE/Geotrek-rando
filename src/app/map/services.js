@@ -59,9 +59,11 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
             
 
             promises.push(
-                poisService.getPoisFromElement(element.id)
+                poisService.getPoisFromElement(element.id, true)
                     .then(
                         function (pois) {
+                            console.log('poi');
+                            console.log(pois);
                             var counter = 0;
                             _.forEach(pois.features, function (poi) {
                                 var poiLocation = utilsFactory.getStartPoint(poi);
@@ -763,14 +765,14 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
         return deferred.promise;
     };
 
-    this.getPoiTypesIcons = function () {
+    this.getPoiTypesIcons = function (forceRefresh) {
         var deferred = $q.defer();
 
-        if (self.poisTypesIcons) {
+        if (self.poisTypesIcons && !forceRefresh) {
             deferred.resolve(self.poisTypesIcons);
         } else {
 
-            poisService.getPois()
+            poisService.getPois(forceRefresh)
                 .then(
                     function (pois) {
                         var counter = 0;
@@ -820,12 +822,12 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
         return deferred.promise;
     };
 
-    this.getAPoiTypeIcon = function (poiTypeId) {
+    this.getAPoiTypeIcon = function (poiTypeId, forceRefresh) {
         var deferred = $q.defer();
-        if (self.poisTypesIcons) {
+        if (self.poisTypesIcons && !forceRefresh) {
             deferred.resolve(self.poisTypesIcons[poiTypeId]);
         } else {
-            self.getPoiTypesIcons()
+            self.getPoiTypesIcons(forceRefresh)
                 .then(
                     function (icons) {
                         deferred.resolve(icons[poiTypeId]);
@@ -937,7 +939,7 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
                         markerIcon = icon;
                     }
                 ),
-            self.getAPoiTypeIcon(poi.properties.type.id)
+            self.getAPoiTypeIcon(poi.properties.type.id, false)
                 .then(
                     function (icon) {
                         if (icon.isSVG) {

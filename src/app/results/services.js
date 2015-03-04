@@ -72,7 +72,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
 
     this.getAResultBySlug = function (elementSlug, forceRefresh) {
         var deferred = $q.defer();
-
+        var findTrek = true, findContent = true, findEvent = true;
         if (globalSettings.ENABLE_TREKS) {
             treksService.getTreks(forceRefresh)
                 .then(
@@ -82,6 +82,10 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                                 deferred.resolve(trek);
                             }
                         });
+                        findTrek = null;
+                        if (findTrek === null && findContent === null && findEvent === null) {
+                            deferred.reject('No matching element found');
+                        }
                     }
                 );
         }
@@ -96,6 +100,10 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                                 deferred.resolve(content);
                             }
                         });
+                        findContent = null;
+                        if (findTrek === null && findContent === null && findEvent === null) {
+                            deferred.reject('No matching element found');
+                        }
                     }
                 );
         }
@@ -109,6 +117,10 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                                 deferred.resolve(trEvent);
                             }
                         });
+                        findEvent = null;
+                        if (findTrek === null && findContent === null && findEvent === null) {
+                            deferred.reject('No matching element found');
+                        }
                     }
                 );
 
@@ -129,6 +141,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                                 deferred.resolve(trek);
                             }
                         });
+                        deferred.reject('No matching element found');
                     }
                 );
         }
@@ -143,6 +156,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                                 deferred.resolve(content);
                             }
                         });
+                        deferred.reject('No matching element found');
                     }
                 );
         }
@@ -156,6 +170,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                                 deferred.resolve(trEvent);
                             }
                         });
+                        deferred.reject('No matching element found');
                     }
                 );
 

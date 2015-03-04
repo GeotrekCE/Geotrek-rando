@@ -100,8 +100,7 @@ function treksService(globalSettings, settingsFactory, translationService, $reso
                     },
                     headers: {
                         'Accept-Language': translationService.getCurrentLang().code
-                    },
-                    cache: !forceRefresh
+                    }
 
                 }
             }, {stripTrailingSlashes: false});
@@ -109,7 +108,6 @@ function treksService(globalSettings, settingsFactory, translationService, $reso
             requests.query().$promise
                 .then(function (file) {
                     var data = angular.fromJson(file);
-                    console.log(data);
                     var refactoredTreks = self.refactorTrek(data);
                     self._trekList = refactoredTreks;
                     deferred.resolve(refactoredTreks);

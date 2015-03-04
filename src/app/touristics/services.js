@@ -62,8 +62,7 @@ function contentsService(globalSettings, settingsFactory, translationService, $r
                     },
                     headers: {
                         'Accept-Language': translationService.getCurrentLang().code
-                    },
-                    cache: !forceRefresh
+                    }
                 }
             }, {stripTrailingSlashes: false});
 
@@ -145,8 +144,7 @@ function eventsService(globalSettings, settingsFactory, translationService, $res
                     },
                     headers: {
                         'Accept-Language': translationService.getCurrentLang().code
-                    },
-                    cache: !forceRefresh
+                    }
                 }
             }, {stripTrailingSlashes: false});
 

@@ -1,6 +1,6 @@
 'use strict';
 
-function DetailController($scope, $rootScope, $q, $stateParams, utilsFactory, resultsService, poisService, mapService) {
+function DetailController($scope, $rootScope, $state, $q, $stateParams, utilsFactory, resultsService, poisService, mapService) {
 
     var mainImage;
     $scope.sanitizeData = utilsFactory.sanitizeData;
@@ -43,31 +43,44 @@ function DetailController($scope, $rootScope, $q, $stateParams, utilsFactory, re
     function getPoisOfResult(result, forceRefresh) {
         poisService.getPoisFromElement(result.id, forceRefresh)
             .then(
-                function (pois) {
-                    $scope.pois = pois.features;
+                function (elementPois) {
+                    $scope.pois = elementPois.features;
                     $rootScope.$emit('resetPOIGallery');
-                    console.log(pois);
+                    console.log(elementPois);
                 }
             );
     }
 
-    function getResultDetails(refresh) {
+    function getResultDetails(forceRefresh) {
         var promise;
-        if (!refresh) {
+        if (!forceRefresh) {
             promise = resultsService.getAResultBySlug($stateParams.slug);
         } else {
-            promise = resultsService.getAResultByID($scope.result.id, $scope.result.properties.category.id, refresh);
+            promise = resultsService.getAResultByID($scope.result.id, $scope.result.properties.category.id);
         }
 
         promise
             .then(
                 function (result) {
-                    getPoisOfResult(result, refresh);
-                    getNearElements(result);
                     $scope.result = result;
+                    getPoisOfResult(result, forceRefresh);
+                    getNearElements(result);
                     initTabs('more-infos .nav-tabs a');
                     $rootScope.$emit('initGallery', result.properties.pictures);
                     console.log(result);
+                    // if (forceRefresh) {
+                    //     $state.go(
+                    //         'layout.detail',
+                    //         {slug: result.properties.slug},
+                    //         {
+                    //             location: "replace",
+                    //             inherit: false
+                    //         }
+                    //     );
+                    // }
+                },
+                function (error) {
+                    $state.go("layout.root");
                 }
             );
     }
@@ -94,7 +107,9 @@ function DetailController($scope, $rootScope, $q, $stateParams, utilsFactory, re
 
     getResultDetails();
     $rootScope.$on('switchGlobalLang', function () {
-        getResultDetails(true);
+        if ($state.current.name === 'layout.detail') {
+            getResultDetails(true);
+        }
     });
 }
 

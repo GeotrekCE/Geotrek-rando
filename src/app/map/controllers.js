@@ -17,8 +17,16 @@ function MapController($scope, globalSettings, $rootScope, $state, resultsServic
 
     }
 
-    function updateMapWithDetails() {
-        resultsService.getAResultBySlug($stateParams.slug)
+    function updateMapWithDetails(forceRefresh) {
+
+        var promise;
+        if (!forceRefresh) {
+            promise = resultsService.getAResultBySlug($stateParams.slug);
+        } else {
+            promise = resultsService.getAResultByID($scope.result.id, $scope.result.properties.category.id);
+        }
+
+        promise
             .then(
                 function (data) {
                     $scope.result = data;
@@ -63,6 +71,14 @@ function MapController($scope, globalSettings, $rootScope, $state, resultsServic
     $scope.$on('updateFilters', function () {
         if ($state.current.name === 'layout.root') {
             updateMapWithResults(globalSettings.UPDATE_MAP_ON_FILTER);
+        }
+    });
+
+    $rootScope.$on('switchGlobalLang', function () {
+        if ($state.current.name === 'layout.detail') {
+            updateMapWithDetails(true);
+        } else {
+            updateMapWithResults(true);
         }
     });
 }

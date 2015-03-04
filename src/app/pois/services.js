@@ -55,7 +55,7 @@ function poisService($resource, $q, globalSettings, settingsFactory, translation
                     headers: {
                         'Accept-Language': translationService.getCurrentLang().code
                     },
-                    cache: true,
+                    cache: !forceRefresh,
 
                 }
             }, {stripTrailingSlashes: false});
@@ -89,8 +89,7 @@ function poisService($resource, $q, globalSettings, settingsFactory, translation
                 },
                 headers: {
                     'Accept-Language': translationService.getCurrentLang().code
-                },
-                cache: !forceRefresh,
+                }
 
             }
         }, {stripTrailingSlashes: false});

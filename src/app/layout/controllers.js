@@ -1,6 +1,6 @@
 'use strict';
 
-function LayoutController($rootScope, $state) {
+function LayoutController($rootScope, $state, resultsService) {
     $rootScope.currentState_name = $state.current.name;
 
     $rootScope.$on("$stateChangeSuccess",  function (event, toState, toParams, fromState, fromParams) {
@@ -16,6 +16,15 @@ function LayoutController($rootScope, $state) {
             window.history.back();
         }
     };
+
+    $rootScope.$on('startSwitchGlobalLang', function () {
+        resultsService.getAllResults(true)
+            .then(
+                function () {
+                    $rootScope.$emit('switchGlobalLang');
+                }
+            );
+    });
 }
 
 function HeaderController() {
@@ -27,19 +36,14 @@ function SidebarHomeController() {
 function SidebarDetailController($scope, $rootScope, $stateParams, resultsService, favoritesService) {
 
     function getResultDetails(refresh) {
-        var promise;
-        if (!refresh) {
-            promise = resultsService.getAResultBySlug($stateParams.slug);
-        } else {
-            promise = resultsService.getAResultByID($scope.result.id, $scope.result.properties.category.id, refresh);
+        if ($stateParams.slug) {
+            resultsService.getAResultBySlug($stateParams.slug)
+                .then(
+                    function (data) {
+                        $scope.result = data;
+                    }
+                );
         }
-
-        promise
-            .then(
-                function (data) {
-                    $scope.result = data;
-                }
-            );
     }
 
     $scope.toggleFavorites = function (currentElement) {
@@ -57,9 +61,6 @@ function SidebarDetailController($scope, $rootScope, $stateParams, resultsServic
     $scope.back = $rootScope.back;
 
     getResultDetails();
-    $rootScope.$on('switchGlobalLang', function () {
-        getResultDetails(true);
-    });
 
 }
 
