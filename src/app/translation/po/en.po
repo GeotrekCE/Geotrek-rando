@@ -18,13 +18,13 @@ msgid "ROUTES"
 msgstr "routes"
 
 msgid "DIFFICULTIES"
-msgstr "Difficulties"
+msgstr "Difficulties:"
 
 msgid "DURATION"
-msgstr "Duration"
+msgstr "Duration:"
 
 msgid "ASCENT"
-msgstr "Ascent"
+msgstr "Ascent:"
 
 msgid "ALL"
 msgstr "All"
@@ -38,13 +38,13 @@ msgstr "You don't have any favorites yet !"
 
 # DETAILS
 msgid "START"
-msgstr "Start"
+msgstr "Start:"
 
 msgid "ARRIVAL"
-msgstr "Arrival"
+msgstr "Arrival:"
 
 msgid "LOOP"
-msgstr "Loop"
+msgstr "Loop:"
 
 msgid "PARK_CENTERED"
 msgstr "Park centered"
@@ -68,7 +68,7 @@ msgid "POI"
 msgstr "POIS"
 
 msgid "NEAR"
-msgstr "Near from here"
+msgstr "Nearby"
 
 # FILTERS
 msgid "DISTRICTS"

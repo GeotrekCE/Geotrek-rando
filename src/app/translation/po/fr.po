@@ -17,13 +17,13 @@ msgid "ROUTES"
 msgstr "Parcours"
 
 msgid "DIFFICULTIES"
-msgstr "Difficulté"
+msgstr "Difficulté :"
 
 msgid "DURATION"
-msgstr "Durée"
+msgstr "Durée :"
 
 msgid "ASCENT"
-msgstr "Dénivelé"
+msgstr "Dénivelé :"
 
 msgid "ALL"
 msgstr "Toutes"
@@ -37,13 +37,13 @@ msgstr "Vous n'avez pas encore de favoris !"
 
 # DETAILS
 msgid "START"
-msgstr "Départ"
+msgstr "Départ :"
 
 msgid "ARRIVAL"
-msgstr "Arrivée"
+msgstr "Arrivée :"
 
 msgid "LOOP"
-msgstr "Boucle"
+msgstr "Boucle :"
 
 msgid "PARK_CENTERED"
 msgstr "Cet itinéraire est dans le coeur du parc national, veuillez consulter la réglementation."

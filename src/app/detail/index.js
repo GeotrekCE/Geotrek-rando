@@ -2,7 +2,6 @@
 
 var angular = require('angular');
 
-angular.module('rando.detail', ['ui.bootstrap', 'pascalprecht.translate'])
-    .config(require('./lang').translateDetails)
+angular.module('rando.detail', ['ui.bootstrap'])
     .controller('DetailController', require('./controllers').DetailController)
     .directive('detailPage', require('./directives').detailDirective);
