@@ -140,8 +140,8 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
         });
     }
 
-    function loadCategories() {
-        categoriesService.getCategories()
+    function loadCategories(forceRefresh) {
+        categoriesService.getCategories(forceRefresh)
             .then(
                 function (data) {
                     $scope.categories = data;
@@ -194,7 +194,9 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
     };
 
     loadCategories();
-
+    $rootScope.$on('switchGlobalLang', function () {
+        loadCategories(true);
+    });
 }
 
 module.exports = {

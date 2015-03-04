@@ -241,14 +241,14 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
     };
 
-    this.getCategories = function () {
+    this.getCategories = function (forceRefresh) {
 
         var deferred = $q.defer(),
-            trekCat,
-            contentCats,
-            eventCat;
+            trekCat = null,
+            contentCats = null,
+            eventCat = null;
 
-        if (self._categoriesList) {
+        if (self._categoriesList && !forceRefresh) {
 
             deferred.resolve(self._categoriesList);
 
@@ -258,10 +258,12 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
             if (globalSettings.ENABLE_TREKS) {
                 promises.push(
-                    treksService.getTreks()
+                    treksService.getTreks(forceRefresh)
                         .then(
                             function (treks) {
-                                trekCat = self.getTreksCategories(treks);
+                                if (treks.features.length > 0) {
+                                    trekCat = self.getTreksCategories(treks);
+                                }
                             }
                         )
                 );
@@ -269,10 +271,12 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
             if (globalSettings.ENABLE_TOURISTIC_CONTENT) {
                 promises.push(
-                    contentsService.getContents()
+                    contentsService.getContents(forceRefresh)
                         .then(
                             function (contents) {
-                                contentCats = self.getTouristicContentCategories(contents);
+                                if (contents.features.length > 0) {
+                                    contentCats = self.getTouristicContentCategories(contents);
+                                }
                             }
                         )
                 );
@@ -280,10 +284,12 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
             if (globalSettings.ENABLE_TOURISTIC_EVENTS) {
                 promises.push(
-                    eventsService.getEvents()
+                    eventsService.getEvents(forceRefresh)
                         .then(
                             function (trEvents) {
-                                eventCat = self.getTouristicEventsCategories(trEvents);
+                                if (trEvents.features.length > 0) {
+                                    eventCat = self.getTouristicEventsCategories(trEvents);
+                                }
                             }
                         )
 
@@ -294,15 +300,15 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                 .then(
                     function () {
                         self._categoriesList = [];
-                        if (globalSettings.ENABLE_TREKS) {
+                        if (globalSettings.ENABLE_TREKS && trekCat) {
                             self._categoriesList.push(trekCat);
                         }
-                        if (globalSettings.ENABLE_TOURISTIC_CONTENT) {
+                        if (globalSettings.ENABLE_TOURISTIC_CONTENT && contentCats) {
                             _.forEach(contentCats, function (aContentsCat) {
                                 self._categoriesList.push(aContentsCat);
                             });
                         }
-                        if (globalSettings.ENABLE_TOURISTIC_EVENTS) {
+                        if (globalSettings.ENABLE_TOURISTIC_EVENTS && eventCat) {
 
                             if (globalSettings.TOURISTIC_EVENTS_SPECIFIC_POSITION
                                     && typeof globalSettings.TOURISTIC_EVENTS_SPECIFIC_POSITION === 'number'

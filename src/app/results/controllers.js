@@ -2,9 +2,9 @@
 
 function ResultsListeController($scope, $rootScope, favoritesService, resultsService) {
 
-    function updateResults() {
+    function updateResults(forceRefresh) {
 
-        resultsService.getFilteredResults()
+        resultsService.getFilteredResults(forceRefresh)
             .then(
                 function (data) {
                     $scope.results = data;
@@ -45,6 +45,10 @@ function ResultsListeController($scope, $rootScope, favoritesService, resultsSer
 
     $scope.$on('updateFilters', function () {
         updateResults();
+    });
+
+    $rootScope.$on('switchGlobalLang', function () {
+        updateResults(true);
     });
 
 }

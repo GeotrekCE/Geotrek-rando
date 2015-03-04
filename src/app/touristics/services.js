@@ -1,6 +1,6 @@
 'use strict';
 
-function contentsService(globalSettings, settingsFactory, $resource, $q) {
+function contentsService(globalSettings, settingsFactory, translationService, $resource, $q) {
 
     var self = this;
 
@@ -43,11 +43,11 @@ function contentsService(globalSettings, settingsFactory, $resource, $q) {
         return contentsData;
     };
 
-    this.getContents = function () {
+    this.getContents = function (forceRefresh) {
 
         var deferred = $q.defer();
 
-        if (self._contentsList) {
+        if (self._contentsList && !forceRefresh) {
 
             deferred.resolve(self._contentsList);
 
@@ -60,7 +60,10 @@ function contentsService(globalSettings, settingsFactory, $resource, $q) {
                     params: {
                         format: 'geojson'
                     },
-                    cache: true
+                    headers: {
+                        'Accept-Language': translationService.getCurrentLang().code
+                    },
+                    cache: !forceRefresh
                 }
             }, {stripTrailingSlashes: false});
 
@@ -80,7 +83,7 @@ function contentsService(globalSettings, settingsFactory, $resource, $q) {
 
 }
 
-function eventsService(globalSettings, settingsFactory, $resource, $q) {
+function eventsService(globalSettings, settingsFactory, translationService, $resource, $q) {
 
     var self = this;
 
@@ -123,11 +126,11 @@ function eventsService(globalSettings, settingsFactory, $resource, $q) {
         return eventsData;
     };
 
-    this.getEvents = function () {
+    this.getEvents = function (forceRefresh) {
 
         var deferred = $q.defer();
 
-        if (self._eventsList) {
+        if (self._eventsList && !forceRefresh) {
 
             deferred.resolve(self._eventsList);
 
@@ -140,7 +143,10 @@ function eventsService(globalSettings, settingsFactory, $resource, $q) {
                     params: {
                         format: 'geojson'
                     },
-                    cache: true
+                    headers: {
+                        'Accept-Language': translationService.getCurrentLang().code
+                    },
+                    cache: !forceRefresh
                 }
             }, {stripTrailingSlashes: false});
 

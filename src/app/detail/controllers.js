@@ -40,23 +40,32 @@ function DetailController($scope, $rootScope, $q, $stateParams, utilsFactory, re
             );
     }
 
-    function getPoisOfResult(result) {
-        poisService.getPoisFromElement(result.id)
+    function getPoisOfResult(result, forceRefresh) {
+        poisService.getPoisFromElement(result.id, forceRefresh)
             .then(
                 function (pois) {
                     $scope.pois = pois.features;
+                    $rootScope.$emit('resetPOIGallery');
                     console.log(pois);
                 }
             );
     }
 
-    function getResultDetails() {
-        resultsService.getAResultBySlug($stateParams.slug)
+    function getResultDetails(refresh) {
+        var promise;
+        if (!refresh) {
+            promise = resultsService.getAResultBySlug($stateParams.slug);
+        } else {
+            promise = resultsService.getAResultByID($scope.result.id, $scope.result.properties.category.id, refresh);
+        }
+
+        promise
             .then(
                 function (result) {
-                    getPoisOfResult(result);
+                    getPoisOfResult(result, refresh);
                     getNearElements(result);
                     $scope.result = result;
+                    initTabs('more-infos .nav-tabs a');
                     $rootScope.$emit('initGallery', result.properties.pictures);
                     console.log(result);
                 }
@@ -84,8 +93,9 @@ function DetailController($scope, $rootScope, $q, $stateParams, utilsFactory, re
     $scope.isSVG = utilsFactory.isSVG;
 
     getResultDetails();
-    initTabs('more-infos .nav-tabs a');
-    console.log($rootScope.currentState_name);
+    $rootScope.$on('switchGlobalLang', function () {
+        getResultDetails(true);
+    });
 }
 
 module.exports = {

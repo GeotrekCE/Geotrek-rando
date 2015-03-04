@@ -1,6 +1,6 @@
 'use strict';
 
-function poisService($resource, $q, globalSettings, settingsFactory) {
+function poisService($resource, $q, globalSettings, settingsFactory, translationService) {
 
     var self = this;
 
@@ -35,11 +35,11 @@ function poisService($resource, $q, globalSettings, settingsFactory) {
         return poisData;
     };
 
-    this.getPois = function () {
+    this.getPois = function (forceRefresh) {
 
         var deferred = $q.defer();
 
-        if (self._pois) {
+        if (self._pois && !forceRefresh) {
 
             deferred.resolve(self._pois);
 
@@ -51,6 +51,9 @@ function poisService($resource, $q, globalSettings, settingsFactory) {
                     method: 'GET',
                     params: {
                         format: 'geojson'
+                    },
+                    headers: {
+                        'Accept-Language': translationService.getCurrentLang().code
                     },
                     cache: true,
 
@@ -71,7 +74,7 @@ function poisService($resource, $q, globalSettings, settingsFactory) {
 
     };
 
-    this.getPoisFromElement = function (ElementId) {
+    this.getPoisFromElement = function (ElementId, forceRefresh) {
 
         var deferred = $q.defer();
 
@@ -84,7 +87,10 @@ function poisService($resource, $q, globalSettings, settingsFactory) {
                     format: 'geojson',
                     trek: ElementId
                 },
-                cache: true,
+                headers: {
+                    'Accept-Language': translationService.getCurrentLang().code
+                },
+                cache: !forceRefresh,
 
             }
         }, {stripTrailingSlashes: false});

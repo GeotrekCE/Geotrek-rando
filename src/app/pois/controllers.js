@@ -1,6 +1,6 @@
 'use strict';
 
-function PoisListeController($scope) {
+function PoisListeController($scope, $rootScope) {
 
     $scope.hoverMarkerPoi = function (currentPoi, state) {
         var layerEquivalent = document.querySelector('.layer-' + currentPoi.properties.type.id + '-' + currentPoi.id);
@@ -41,6 +41,9 @@ function PoisListeController($scope) {
     };
 
     initListeClasses();
+    $rootScope.$on('resetPOIGallery', function () {
+        initListeClasses();
+    });
 }
 
 module.exports = {

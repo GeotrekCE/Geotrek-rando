@@ -26,8 +26,15 @@ function SidebarHomeController() {
 
 function SidebarDetailController($scope, $rootScope, $stateParams, resultsService, favoritesService) {
 
-    function getResultDetails() {
-        resultsService.getAResultBySlug($stateParams.slug)
+    function getResultDetails(refresh) {
+        var promise;
+        if (!refresh) {
+            promise = resultsService.getAResultBySlug($stateParams.slug);
+        } else {
+            promise = resultsService.getAResultByID($scope.result.id, $scope.result.properties.category.id, refresh);
+        }
+
+        promise
             .then(
                 function (data) {
                     $scope.result = data;
@@ -50,6 +57,9 @@ function SidebarDetailController($scope, $rootScope, $stateParams, resultsServic
     $scope.back = $rootScope.back;
 
     getResultDetails();
+    $rootScope.$on('switchGlobalLang', function () {
+        getResultDetails(true);
+    });
 
 }
 

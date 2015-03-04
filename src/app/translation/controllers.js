@@ -1,15 +1,17 @@
 'use strict';
 
-function TranslationController($scope, $translate, globalSettings, translationService) {
+function TranslationController($scope, $rootScope, $translate, translationService) {
     function initTranslation() {
-        $scope.languages = globalSettings.AVAILABLE_LANGUAGES;
+        $scope.languages = translationService.getAllLang();
         $scope.activeLang = translationService.getDefaultLang();
-        $translate.use($scope.activeLang);
+        $translate.use($scope.activeLang.code);
     }
 
-    $scope.toggleLang = function (langCode) {
-        $scope.activeLang = langCode;
-        $translate.use(langCode);
+    $scope.toggleLang = function (lang) {
+        $scope.activeLang = lang;
+        translationService.setCurrentLang(lang);
+        $translate.use(lang.code);
+        $rootScope.$emit('switchGlobalLang');
     };
 
     initTranslation();

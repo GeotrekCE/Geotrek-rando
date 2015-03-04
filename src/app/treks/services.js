@@ -1,6 +1,6 @@
 'use strict';
 
-function treksService(globalSettings, settingsFactory, $resource, $q) {
+function treksService(globalSettings, settingsFactory, translationService, $resource, $q) {
 
     var self = this;
 
@@ -81,11 +81,11 @@ function treksService(globalSettings, settingsFactory, $resource, $q) {
         return treksData;
     };
 
-    this.getTreks = function () {
+    this.getTreks = function (forceRefresh) {
 
         var deferred = $q.defer();
 
-        if (self._trekList) {
+        if (self._trekList && !forceRefresh) {
 
             deferred.resolve(self._trekList);
 
@@ -98,7 +98,10 @@ function treksService(globalSettings, settingsFactory, $resource, $q) {
                     params: {
                         format: 'geojson'
                     },
-                    cache: true
+                    headers: {
+                        'Accept-Language': translationService.getCurrentLang().code
+                    },
+                    cache: !forceRefresh
 
                 }
             }, {stripTrailingSlashes: false});
@@ -106,6 +109,7 @@ function treksService(globalSettings, settingsFactory, $resource, $q) {
             requests.query().$promise
                 .then(function (file) {
                     var data = angular.fromJson(file);
+                    console.log(data);
                     var refactoredTreks = self.refactorTrek(data);
                     self._trekList = refactoredTreks;
                     deferred.resolve(refactoredTreks);

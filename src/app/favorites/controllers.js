@@ -2,8 +2,8 @@
 
 function FavoritesController($scope, favoritesService, resultsService) {
 
-    $scope.updateFavorites = function () {
-        var savedFavorites = favoritesService.getFavorites();
+    function updateFavorites(forceRefresh) {
+        var savedFavorites = favoritesService.getFavorites(forceRefresh);
         $scope.favorites = [];
         if (_.size(savedFavorites) > 0) {
             _.forEach(savedFavorites, function (aFavorite) {
@@ -15,24 +15,28 @@ function FavoritesController($scope, favoritesService, resultsService) {
                     );
             });
         }
-    };
+    }
 
     $scope.removeAFavorite = function (currentElement) {
         favoritesService.removeAFavorite(currentElement);
-        $scope.updateFavorites();
+        updateFavorites();
     };
 
     $scope.removeAllFavorites = function () {
         favoritesService.removeAllFavorites();
-        $scope.updateFavorites();
+        updateFavorites();
     };
 
     $scope.addAFavorite = function (currentElement) {
         favoritesService.addAFavorite(currentElement);
-        $scope.updateFavorites();
+        updateFavorites();
     };
 
-    $scope.updateFavorites();
+    updateFavorites();
+
+    $scope.$on('switchGlobalLang', function () {
+        updateFavorites(true);
+    });
 
     $scope.$on('changeFavorite', function (event, args) {
         if (args.action === 'add') {

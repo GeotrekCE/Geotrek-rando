@@ -4,8 +4,8 @@ function favoritesService() {
 
     var self = this;
 
-    this.getFavorites = function () {
-        if (self._favorites) {
+    this.getFavorites = function (forceRefresh) {
+        if (self._favorites && !forceRefresh) {
             return self._favorites;
         }
 
