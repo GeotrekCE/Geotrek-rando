@@ -1,9 +1,9 @@
 'use strict';
 
-function translateLayout($translateProvider, globalSettings) {
-    $translateProvider.translations('fr', globalSettings.FR_DICTIONNARY);
+function translateLayout($translateProvider) {
+    $translateProvider.translations('fr', require('../translation/lang/fr.json'));
 
-    $translateProvider.translations('en', globalSettings.EN_DICTIONNARY);
+    $translateProvider.translations('en', require('../translation/lang/en.json'));
 }
 
 module.exports = {

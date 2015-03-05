@@ -22,7 +22,7 @@ module.exports = {
         src: [
             src + '/' + appFolder + '/translation/po/*.po'
         ],
-        dest: dest + '/' + appFolder + '/config/lang',
+        dest: dest + '/' + appFolder + '/translation/lang',
         options: {
             'format': 'mf'
         }

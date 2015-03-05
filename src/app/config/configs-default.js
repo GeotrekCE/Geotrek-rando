@@ -15,8 +15,6 @@ var constants = {
         {code: 'fr', label: 'Français'},
         {code: 'en', label: 'English'}
     ],
-    FR_DICTIONNARY: require('./lang/fr.json'),
-    EN_DICTIONNARY: require('./lang/en.json'),
 
 
     // CATEGORIES PARAMETERS //
