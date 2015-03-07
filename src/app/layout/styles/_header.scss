@@ -17,9 +17,11 @@
         height: 100%;
         margin: 0;
         padding: 0;
-        background: $primary-color;
-        @media (min-width: 1200px) {
+        @media (min-width: 768px) {
             background: $primary-color url(#{$root-images-path}/mask-header.svg) no-repeat center right;
+        }
+        @media (max-width: 768px) {
+            width: 75%;
         }
         #logo {
             float: left;
@@ -29,17 +31,29 @@
             color: white;
             height: 100%;
             line-height: 70px;
+            @media (max-width: 1200px) {
+                width: 60%;
+            }
+            @media (max-width: 400px) {
+                width: auto;
+            }
             h1 {
-                font-size: 1.2em;
+                font-size: 1em;
                 font-weight: lighter;
                 text-transform: uppercase;
                 margin: 0 10px;
-                line-height: 1.2em;
+                line-height: 1em;
                 vertical-align: middle;
                 display: inline-block;
                 letter-spacing: 2px;
                 @media (min-width: 1200px) {
                     margin-right: 200px;
+                    font-size: 1.2em;
+                    line-height: 1.2em;
+                }
+                @media (max-width: 400px) {
+                    display: none;
+                    font-size: 0.8em;
                 }
             }
         }
@@ -48,6 +62,47 @@
 
 .navbar-header {
     height: 100%;
+    @media (max-width: 1200px) {
+        width: 60%;
+    }
+    @media (max-width: 768px) {
+        width: 100%;
+        background: $primary-color;
+        .container-fluid > & {
+            margin: 0;
+        }
+    }
+    .navbar-toggle {
+        padding: 1em;
+        margin: 12px;
+        .icon-bar {
+            background: white;
+            transition: all 0.2s ease;
+            &:nth-child(2) {
+                transform: translateY(6px) rotate(45deg);
+            }
+            &:nth-child(3) {
+                transform: rotate(-45deg);
+            }
+            &:last-child {
+                opacity: 0;
+            }
+        }
+        &.collapsed .icon-bar {
+            transform: none;
+            opacity: 1;
+        }
+    }
+}
+
+.navbar-collapse {
+    @media (max-width: 768px) {
+        background: white;
+        padding: 0;
+        .container-fluid > & {
+             margin: 0;
+        }
+    }
 }
 
 .navbar-nav {
@@ -56,13 +111,19 @@
     &.navbar-right {
         margin-right: 0;
     }
+    @media (max-width: 768px) {
+        margin: 0;
+    }
     li {
         line-height: normal;
         a {
-            text-transform: uppercase;
+            //text-transform: uppercase;
             color: $dark-grey;
             padding-top: 25px;
             padding-bottom: 25px;
+            @media (max-width: 768px) {
+                padding: 1em 2em;
+            }
         }
         .glyphicon {
             color: $dark-grey;
