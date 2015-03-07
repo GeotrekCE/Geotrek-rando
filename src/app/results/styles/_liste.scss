@@ -1,35 +1,45 @@
 .results-liste {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     & > ul {
+        background: $light-grey;
         list-style: none;
         padding: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        flex: 1 1 50%;
+        width: 100%;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
+        justify-content: flex-start;
         & > li {
-            width: 50%;
-            padding: 1em;
-            &:hover, &.hovered {
-                //order: -1;
-                .result {
-                    transform: translateY(-5px);
-                    .visual img {
-                        transform: scale(1.2);
-                    }
-                }
-            }
-            @media (max-width: 1200px) {
-                width: 100%;
-            }
-        }
-        .result {
+            flex: 1 1 40%;
+            max-height: 20rem;
+            padding: 0 1em;
             display: block;
             position: relative;
             border-left: 10px solid $primary-color;
             background: white;
-            padding: 0 15px;
+            margin: 1em;
             box-shadow: 0px 1px 2px 0px $dark-grey;
             transition: all 0.1s ease-out;
             @include results-list-coloring();
+            &:hover, &.hovered {
+                //order: -1;
+                transform: translateY(-5px);
+            }
+            @media (min-width: 768px) and (max-width: 1200px) {
+                flex: 1 1 100%;
+            }
+            @media (max-width: 550px) {
+                flex: 1 1 100%;
+            }
+        }
+        .result {
             a {
                 color: inherit;
                 text-decoration: none;
@@ -60,7 +70,7 @@
                 }
             }
             .visual {
-                height: 150px;
+                max-height: 150px;
                 margin-left: -15px;
                 margin-right: -15px;
                 position: relative;
@@ -76,7 +86,7 @@
                 display: block;
                 font-size: 1.2em;
                 line-height: 1.2em;
-                font-weight: bold;
+                font-weight: 500;
                 margin: 0.5em 0;
                 a {
                     color: inherit;
@@ -86,7 +96,7 @@
             .infos {
                 display: block;
                 span {
-                    font-style: italic;
+                    font-size: 0.9em;
                     &:not(:last-child):after {
                         content: '-';
                         margin: 0 6px;
@@ -99,9 +109,10 @@
                 list-style: none;
                 min-height: 2em;
                 li {
+                    margin: 0.4em;
                     display: inline-block;
-                    height: 2em;
-                    width: 2em;
+                    height: 1.6em;
+                    width: 1.6em;
                     overflow: hidden;
                     img {
                         height: auto;

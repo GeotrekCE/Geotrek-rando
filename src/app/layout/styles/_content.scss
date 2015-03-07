@@ -10,18 +10,33 @@
         width: 100%;
         padding-left: 60px;
         margin-left: -60px;
+        position: relative;
         float: left;
         .results-drawer {
             width: 40%;
             height: 100%;
             float: left;
-            overflow: auto;
+            overflow: hidden;
             background: $light-grey;
+            @media (max-width: 768px) {
+                position: absolute;
+                width: 100%;
+                top: 0%;
+                left: 0;
+                padding-left: 60px;
+            }
         }
         .general-map {
             width: 60%;
             height: 100%;
             float: left;
+            @media (max-width: 768px) {
+                position: absolute;
+                width: 100%;
+                top: 0%;
+                left: 100%;
+                padding-left: 60px;
+            }
         }
     }
 }

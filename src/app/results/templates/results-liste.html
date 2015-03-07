@@ -1,9 +1,9 @@
 <section class="results-liste">
     <global-filters></global-filters>
     <ul>
-        <li ng-repeat="result in results" id="result-category-{{result.properties.category.id}}-{{result.id}}" ng-mouseover="hoverLayerElement(result,'enter')" ng-mouseleave="hoverLayerElement(result,'leave')">
+        <li ng-repeat="result in results" id="result-category-{{result.properties.category.id}}-{{result.id}}" ng-mouseover="hoverLayerElement(result,'enter')" ng-mouseleave="hoverLayerElement(result,'leave')" class="result category-{{result.properties.category.id}}">
 
-            <div class="result category-{{result.properties.category.id}}">
+            <div>
                 <div class="fav-or-not" ng-click="toggleFavorites(result)" ng-class="{isFav: isInFavorites(result)}">
                     <i class="glyphicon glyphicon-heart"></i>
                 </div>
@@ -18,11 +18,10 @@
                     <div class="infos">
                         <span ng-if="result.properties.cities[0]">{{result.properties.cities[0].name}}</span>
                         <span ng-if="result.properties.duration_pretty">{{result.properties.duration_pretty}}</span>
-                        <span ng-if="result.properties.ascent">Dénivelé {{result.properties.ascent}}</span>
+                        <span ng-if="result.properties.ascent">{{'ASCENT' | translate}} {{result.properties.ascent}} m</span>
                         <span ng-if="result.properties.difficulty">{{result.properties.difficulty.label}}</span>
-                        <span ng-if="result.properties.usages[0]">{{result.properties.usages[0].label}}</span>
                         <span ng-if="result.properties.type1[0]">{{result.properties.type1[0].name}}</span>
-                        <span ng-if="result.properties.type[0]">{{result.properties.type[0].name}}</span>
+                        <span ng-if="result.properties.type2[0]">{{result.properties.type2[0].name}}</span>
                     </div>
                     <ul class="themes">
                         <li ng-repeat="theme in result.properties.themes">

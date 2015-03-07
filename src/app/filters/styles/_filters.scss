@@ -1,4 +1,5 @@
 #global-filters {
+    box-shadow: 0 2px 2px 0 $neutral-grey;
     form {
         display: flex;
         flex-direction: column;
@@ -9,7 +10,7 @@
             .search {
                 flex: 1;
                 display: flex;
-                padding: 10px;
+                padding: 0.4rem;
                 @media (max-width: 1200px) {
                     min-width: 100%;
                 }
@@ -32,7 +33,7 @@
             .geo-filters {
                 flex: 1;
                 display: flex;
-                padding: 10px 5px;
+                padding: 0.4rem 5px;
                 .selector {
                     margin: 0 5px;
                     flex: 1;
@@ -86,9 +87,10 @@
                                 &:checked + label {
                                     padding-left: 0.6em;
                                     border-width: 0.4em;
+                                    background: $light-grey;
                                 }
                                 &:focus + label {
-                                    background: $light-grey;
+                                    background: $neutral-grey;
                                 }
                             }
                             label {
@@ -128,6 +130,7 @@
             flex: 1;
             display: flex;
             flex-wrap: wrap;
+            padding-bottom: 0.4rem;
             .theme {
                 height: 2.5em;
                 min-width: 3em;
