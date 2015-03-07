@@ -131,7 +131,10 @@ function utilsFactory($sce) {
         }
 
         _.forEach(anArray, function (arrayElement) {
-            if (arrayElement.id === element.id) {
+            if (arrayElement.id && element.id && arrayElement.id === element.id) {
+                isInArray = true;
+            }
+            if (arrayElement.code && element.code && arrayElement.code === element.code) {
                 isInArray = true;
             }
         });

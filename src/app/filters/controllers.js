@@ -18,30 +18,43 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
     }
 
     function updateFilters() {
+        var themesArray = [], citiesArray = [], districtsArray = [];
         $scope.activeFilters = {
             search: $location.search().search || '',
-            areas:  [],
+            cities:  [],
             districts: [],
             themes: []
         };
 
         $scope.filterLength = {
             districts: 0,
-            areas: 0,
+            cities: 0,
             themes: 0
         };
 
-        _.forEach($location.search().themes, function (themeId) {
+        themesArray = $location.search().themes;
+        if (typeof themesArray === 'string') {
+            themesArray = [themesArray];
+        }
+        _.forEach(themesArray, function (themeId) {
             $scope.activeFilters.themes[themeId] = true;
         });
         countActiveValues('themes');
 
-        _.forEach($location.search().areas, function (areaId) {
-            $scope.activeFilters.areas[areaId] = true;
+        citiesArray = $location.search().cities;
+        if (typeof citiesArray === 'string') {
+            citiesArray = [citiesArray];
+        }
+        _.forEach(citiesArray, function (citiyId) {
+            $scope.activeFilters.cities[citiyId] = true;
         });
-        countActiveValues('areas');
+        countActiveValues('cities');
 
-        _.forEach($location.search().districts, function (districtId) {
+        districtsArray = $location.search().districts;
+        if (typeof districtsArray === 'string') {
+            districtsArray = [districtsArray];
+        }
+        _.forEach(districtsArray, function (districtId) {
             $scope.activeFilters.districts[districtId] = true;
         });
         countActiveValues('districts');
@@ -62,12 +75,12 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
 
     $scope.propagateActiveFilters = function () {
         var query = $location.search();
-
+        console.log($scope.activeFilters);
         _.forEach($scope.activeFilters, function (filter, key) {
             if (query[key]) {
                 delete query[key];
             }
-            if (key === 'themes' || key === 'districts' || key === 'areas') {
+            if (key === 'themes' || key === 'districts' || key === 'cities') {
                 countActiveValues(key);
                 if (filter.length > 0) {
                     var tempArray = [],
@@ -87,7 +100,7 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
                     query[key] = filter;
                 }
             }
-
+            console.log(filter);
         });
 
         $location.search(query);

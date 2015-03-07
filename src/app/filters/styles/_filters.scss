@@ -50,6 +50,7 @@
                         display: block;
                         padding: 5px;
                         cursor: pointer;
+                        box-shadow: 0 2px 2px 0 $neutral-grey;
                     }
                     .choices {
                         position: absolute;
@@ -59,7 +60,9 @@
                         border-top: none;
                         width: 100%;
                         max-height: 0;
-                        overflow: hidden;
+                        text-align: left;
+                        overflow-y: auto;
+                        overflow-x: hidden;
                         z-index: 11;
                         background: white;
                         .form-group {
@@ -77,47 +80,63 @@
                                 width: 100%;
                                 margin: 0;
                                 z-index: 11;
+                                /*&:checked + label:before {
+                                    background: $dark-grey;
+                                }*/
                                 &:checked + label {
-                                    opacity: 1;
-                                    background: $neutral-grey;
+                                    padding-left: 0.6em;
+                                    border-width: 0.4em;
                                 }
                                 &:focus + label {
-                                    outline: 2px solid $dark-grey
+                                    background: $light-grey;
                                 }
                             }
                             label {
                                 display: block;
                                 height: 100%;
                                 width: 100%;
-                                padding: 0.6em;
-                                opacity: 0.6;
+                                padding: 0.4em 0.6em;
+                                font-weight: normal;
+                                font-size: 0.9em;
+                                padding-left: 1em;
+                                //padding-left: 2em;
+                                opacity: 1;
+                                border-left: 0 solid $dark-grey;
+                                /*&:before {
+                                    content: '';
+                                    position: absolute;
+                                    background: transparent;
+                                    border: 1px solid $dark-grey;
+                                    height: 0.6em;
+                                    width: 0.6em;
+                                    border-radius: 50%;
+                                    left: 0.5em;
+                                    top: 0.6em;
+                                }*/
                             }
                         }
                     }
                     &:hover, &:focus {
                         .choices {
-                            max-height: 999999px;
+                            max-height: 300px;
                         }
                     }
                 }
             }
         }
         .themes {
-            padding: 10px;
             flex: 1;
             display: flex;
             flex-wrap: wrap;
             .theme {
-                height: 3em;
-                min-width: 4em;
+                height: 2.5em;
+                min-width: 3em;
                 flex: 1;
                 position: relative;
                 margin: auto;
                 padding: 4px;
-                background: white;
-                border: 1px solid $neutral-grey;
                 @media (max-width: 1200px) {
-                    min-width: 5em;
+                    //min-width: 5em;
                 }
                 label {
                     overflow: hidden;

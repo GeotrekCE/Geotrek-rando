@@ -71,13 +71,13 @@ msgstr "A proximité"
 
 # FILTERS
 msgid "DISTRICTS"
-msgstr "Communes"
+msgstr "Massifs"
 
 msgid "SEARCH"
 msgstr "Rechercher"
 
-msgid "AREAS"
-msgstr "Vallées"
+msgid "CITIES"
+msgstr "Communes"
 
 # LAYOUT
 msgid "TOGGLE_NAV"

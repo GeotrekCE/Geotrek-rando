@@ -51,12 +51,13 @@ function filtersService(globalSettings, utilsFactory) {
                 categories:     [],
                 themes:         [],
                 districts:      [],
-                areas:          [],
+                cities:          [],
                 search:         ''
             };
         }
 
         if (results) {
+            console.log(results);
             _.forEach(results, function (result) {
                 if (result.properties.themes && result.properties.themes.length > 0) {
                     _.forEach(result.properties.themes, function (theme) {
@@ -74,10 +75,10 @@ function filtersService(globalSettings, utilsFactory) {
                     });
                 }
 
-                if (result.properties.areas && result.properties.areas.length > 0) {
-                    _.forEach(result.properties.areas, function (area) {
-                        if (!(utilsFactory.idIsInArray(self.filters.areas, area)) && area !== undefined) {
-                            self.filters.areas.push(area);
+                if (result.properties.cities && result.properties.cities.length > 0) {
+                    _.forEach(result.properties.cities, function (city) {
+                        if (!(utilsFactory.idIsInArray(self.filters.cities, city)) && city !== undefined) {
+                            self.filters.cities.push(city);
                         }
                     });
                 }
@@ -105,7 +106,7 @@ function filtersService(globalSettings, utilsFactory) {
 
             _.forEach(filters[type], function (currentFilter) {
                 if (!subtype) {
-                    if (parseInt(currentFilter.id, 10) === parseInt(id, 10)) {
+                    if (parseInt(currentFilter.id, 10) === parseInt(id, 10) || parseInt(currentFilter.code, 10) === parseInt(id, 10)) {
                         filter = currentFilter;
                     }
                 } else {
@@ -179,7 +180,7 @@ function filtersService(globalSettings, utilsFactory) {
 
                 var tempElement = self.getAFilter(id, type, subtype, subId);
                 var tagElement = {
-                    id: tempElement.id,
+                    id: tempElement.id || tempElement.code,
                     label: tempElement.label || tempElement.name,
                     type: type,
                     typeId: id,
@@ -230,7 +231,7 @@ function filtersService(globalSettings, utilsFactory) {
             currentElement = element;
         }
 
-        if (parseInt(currentElement.id, 10) === parseInt(filter, 10)) {
+        if (parseInt(currentElement.id, 10) === parseInt(filter, 10) || parseInt(currentElement.code, 10) === parseInt(filter, 10)) {
             result = true;
         } else {
             // If element is an object or an array, we can browse it to find the filter
@@ -315,7 +316,7 @@ function filtersService(globalSettings, utilsFactory) {
         var categoriesFilter = false,
             themesFilter = false,
             searchFilter = false,
-            areasFilter = false,
+            citiesFilter = false,
             districtsFilter = false;
 
         // Define all type of filters that needs an interval check instead of an id one
@@ -387,15 +388,15 @@ function filtersService(globalSettings, utilsFactory) {
         }
 
 
-        /* Filter by Areas */
+        /* Filter by cities */
         /*                 */
         /*                 */
 
-        // If areas filter is not defined the test pass
-        if (filters.areas) {
-            areasFilter = self.matchAny(element.properties, filters.areas, 'areas');
+        // If cities filter is not defined the test pass
+        if (filters.cities) {
+            citiesFilter = self.matchAny(element.properties, filters.cities, 'cities');
         } else {
-            areasFilter = true;
+            citiesFilter = true;
         }
 
 
@@ -410,9 +411,9 @@ function filtersService(globalSettings, utilsFactory) {
             districtsFilter = true;
         }
 
-        // CATEGORY && THEME && QUERY && AREA && DISTRICT
+        // CATEGORY && THEME && QUERY && CITY && DISTRICT
         // Global test that pass if all filters test are true
-        return categoriesFilter && themesFilter && searchFilter && areasFilter && districtsFilter;
+        return categoriesFilter && themesFilter && searchFilter && citiesFilter && districtsFilter;
 
     };
 

@@ -10,24 +10,24 @@
                 </div>
             </div>
             <div class="geo-filters">
+                <div class="selector cities" ng-class="{empty: filters.cities.length === 0}">
+                    <span>{{'CITIES' | translate}} <span class="caret"></span> <span ng-if="filterLength.cities > 0" class="badge">{{filterLength.cities}}</span></span>
+                    <div class="choices">
+                        <div ng-repeat="city in filters.cities" class="city form-group">
+                            <input type="checkbox" id="city-{{city.code}}" value="{{city.code}}" ng-model="activeFilters.cities[city.code]" ng-false-value="null" ng-change="propagateActiveFilters()"/>
+                            <label for="city-{{city.code}}">
+                                <span>{{city.name}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
                 <div class="selector districts" ng-class="{empty: filters.districts.length === 0}">
-                    <span>{{'DISTRICTS' | translate}} <span ng-if="filterLength.districts > 0" class="badge">{{filterLength.districts}}</span></span>
+                    <span>{{'DISTRICTS' | translate}} <span class="caret"></span> <span ng-if="filterLength.districts > 0" class="badge">{{filterLength.districts}}</span></span>
                     <div class="choices">
                         <div ng-repeat="district in filters.districts" class="district form-group">
                             <input type="checkbox" id="district-{{district.id}}" value="{{district.id}}" ng-false-value="null" ng-model="activeFilters.districts[district.id]"  ng-change="propagateActiveFilters()"/>
                             <label for="district-{{district.id}}">
                                 <span>{{district.name}}</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="selector areas" ng-class="{empty: filters.areas.length === 0}">
-                    <span>{{'AREAS' | translate}} <span ng-if="filterLength.areas > 0" class="badge">{{filterLength.areas}}</span></span>
-                    <div class="choices">
-                        <div ng-repeat="area in filters.areas" class="area form-group">
-                            <input type="checkbox" id="area-{{area.id}}" value="{{area.id}}" ng-model="activeFilters.areas[area.id]" ng-false-value="null" ng-change="propagateActiveFilters()"/>
-                            <label for="area-{{area.id}}">
-                                <span>{{area.name}}</span>
                             </label>
                         </div>
                     </div>
