@@ -4,11 +4,12 @@
             <ng-include src="category.pictogram"></ng-include>
         </a>
         <div class="filters">
-            <div class="category-name" ng-click="toggleCategory(category)">
-                <i ng-if="category.active" class="fa fa-check-circle-o"></i>
-                <span>{{category.label}}</span>
-            </div>
             <form>
+                <div class="category-name" ng-click="toggleCategory(category)">
+                    <i ng-if="category.active" class="fa fa-check-circle-o"></i>
+                    <span>{{category.label}}</span>
+                </div>
+
                 <div ng-if="category.type1 && category.type1.values.length > 0" class="selector type1" ng-class="{empty: category.type1.values.length === 0, opened: type1IsCollapsed}">
                     <span ng-click="type1IsCollapsed = !type1IsCollapsed"><i class="fa fa-plus"></i> {{category.type1_label}}</span>
                     <div class="choices" collapse="!type1IsCollapsed">

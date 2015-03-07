@@ -6,17 +6,16 @@
     width: 100%;
     position: relative;
     .category {
-        width: 70px;
+        width: 60px;
         max-height: 50px;
         min-height: 0;
         z-index: 30;
         overflow: hidden;
-        border-bottom: 1px solid $neutral-grey;
         display: flex;
         flex-direction: column;
         @include categories-list-coloring();
         a {
-            width: 70px;
+            width: 60px;
             position: relative;
             display: block;
             text-decoration: none;
@@ -26,7 +25,6 @@
             padding: 1em;
             z-index: 14;
             border: none;
-            background: white;
             box-shadow: none;
             svg {
                 height: 100%;
@@ -40,7 +38,7 @@
             }
         }
         &:hover {
-            z-index: 99;
+            z-index: 9999;
             a svg {
                 fill: $dark-grey;
             }
@@ -64,18 +62,21 @@
             color: white;
             position: absolute;
             top: 200%;
-            left:70px;
+            left: 60px;
             background: $dark-grey;
             width: 300px;
             height: 100%;
             overflow-y: auto;
             z-index: 12;
-            transition: top 0.3s ease-out, opacity 0.3s ease-out;
+            transition: top 0s ease-out, opacity 0.3s ease-out;
             transition-delay: 0.5s, 0.4s;
+            @media (max-width: 400px) {
+                width: 260px;
+            }
             .category-name {
                 cursor: pointer;
                 display: block;
-                width: 300px;
+                width: 100%;
                 height: 47px;
                 padding: 1em;
                 i {
@@ -84,7 +85,7 @@
                 }
             }
             form {
-                width: 300px;
+                width: 100%;
                 height: 100%;
                 padding: 0;
             }
@@ -196,7 +197,7 @@
                 label {
                     margin: 0;
                     width: 100%;
-                    padding: 1em;
+                    padding: 1em 1em 1em 2em;
                     font-weight: normal;
                     &:before {
                         content: '';
