@@ -79,6 +79,9 @@ msgstr "Rechercher"
 msgid "CITIES"
 msgstr "Communes"
 
+msgid "RESET"
+msgstr "Réinitialiser"
+
 # LAYOUT
 msgid "TOGGLE_NAV"
 msgstr "Ouvrir le menu"

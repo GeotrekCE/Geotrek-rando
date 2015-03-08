@@ -1,5 +1,5 @@
 #global-filters {
-    box-shadow: 0 2px 2px 0 $neutral-grey;
+    box-shadow: 0 1px 2px 0px lighten($dark-grey, 50%);
     form {
         display: flex;
         flex-direction: column;
@@ -16,13 +16,12 @@
                 }
                 .input-group {
                     flex: 1;
-                    border: 1px solid $neutral-grey;
+                    box-shadow: 0 1px 1px 0px lighten($dark-grey, 50%);
                     input {
                         width: 100%;
                         border: none;
                         margin: 0;
                         padding: 6px;
-                        box-shadow: none;
                     }
                     .input-group-addon {
                         background: white;
@@ -38,7 +37,7 @@
                     margin: 0 5px;
                     flex: 1;
                     position: relative;
-                    border: 1px solid $neutral-grey;
+                    box-shadow: 0 1px 1px 0px lighten($dark-grey, 50%);
                     background: white;
                     text-align: center;
                     &.empty {
@@ -51,13 +50,12 @@
                         display: block;
                         padding: 5px;
                         cursor: pointer;
-                        box-shadow: 0 2px 2px 0 $neutral-grey;
                     }
                     .choices {
                         position: absolute;
                         top: 100%;
                         left: 0;
-                        border: 1px solid $neutral-grey;
+                        box-shadow: 0 1px 1px 0px lighten($dark-grey, 50%);
                         border-top: none;
                         width: 100%;
                         max-height: 0;
@@ -87,10 +85,10 @@
                                 &:checked + label {
                                     padding-left: 0.6em;
                                     border-width: 0.4em;
-                                    background: $light-grey;
-                                }
-                                &:focus + label {
                                     background: $neutral-grey;
+                                }
+                                &:hover + label, &:focus + label {
+                                    background: $light-grey;
                                 }
                             }
                             label {

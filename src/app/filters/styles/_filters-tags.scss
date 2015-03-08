@@ -16,6 +16,9 @@
         cursor: default;
         font-weight: 400;
         @include filters-tags-coloring();
+        &.reset .remove {
+            background: $dark-grey;
+        }
         & > div {
             display: inline-block;
             padding: 0.4em 0.6em;

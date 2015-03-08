@@ -71,14 +71,17 @@ msgid "NEAR"
 msgstr "Nearby"
 
 # FILTERS
-msgid "DISTRICTS"
-msgstr "Districts"
+msgid "CITIES"
+msgstr "Cities"
 
 msgid "SEARCH"
 msgstr "Search"
 
 msgid "AREAS"
 msgstr "Areas"
+
+msgid "RESET"
+msgstr "Reset"
 
 # LAYOUT
 msgid "TOGGLE_NAV"

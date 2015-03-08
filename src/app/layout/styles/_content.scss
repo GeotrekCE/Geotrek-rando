@@ -3,7 +3,7 @@
     padding-top: 70px;
     top: -70px;
     height: 100%;
-    overflow: hidden;
+    //overflow: hidden;
     position: relative;
     & > .content {
         height: 100%;
@@ -16,7 +16,6 @@
             width: 40%;
             height: 100%;
             float: left;
-            overflow: hidden;
             background: $light-grey;
             @media (max-width: 768px) {
                 position: absolute;

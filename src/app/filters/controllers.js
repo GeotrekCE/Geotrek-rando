@@ -140,6 +140,13 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
         $rootScope.$broadcast('updateFilters');
     };
 
+    $scope.resetFilters = function () {
+        var query = $location.search();
+        console.log(query);
+        $location.search({});
+        $rootScope.$broadcast('updateFilters');
+    };
+
     $scope.isSVG = utilsFactory.isSVG;
 
     initFiltersView();

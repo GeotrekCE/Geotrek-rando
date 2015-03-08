@@ -9,7 +9,6 @@
         width: 60px;
         max-height: 50px;
         min-height: 0;
-        z-index: 30;
         overflow: hidden;
         display: flex;
         flex-direction: column;
@@ -38,7 +37,7 @@
             }
         }
         &:hover {
-            z-index: 9999;
+            z-index: 99999;
             a svg {
                 fill: $dark-grey;
             }
