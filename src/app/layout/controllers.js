@@ -1,6 +1,6 @@
 'use strict';
 
-function LayoutController($rootScope, $state, resultsService) {
+function LayoutController($rootScope, $scope, $state, resultsService) {
     $rootScope.currentState_name = $state.current.name;
 
     $rootScope.$on("$stateChangeSuccess",  function (event, toState, toParams, fromState, fromParams) {
@@ -25,6 +25,8 @@ function LayoutController($rootScope, $state, resultsService) {
                 }
             );
     });
+
+    $rootScope.mapIsShown = false;
 }
 
 function HeaderController() {

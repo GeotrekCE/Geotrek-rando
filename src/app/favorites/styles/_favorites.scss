@@ -1,3 +1,10 @@
+.favorites {
+    .dropdown-toggle span {
+        @media (max-width: 768px) {
+            margin-right: 0.4em;   
+        }
+    }
+}
 .favorites-liste {
     display: flex;
     flex-direction: column;
@@ -11,6 +18,9 @@
             margin: 0.8em 0;
             border-left: 5px solid $dark-grey;
             @include favorites-list-coloring();
+            @media (max-width: 768px) {
+                min-width: 0;
+            }
             a {
                 flex: 1;
                 display: flex;
@@ -52,6 +62,9 @@
         max-width: 3em;
         align-self: center;
         cursor: pointer;
+        @media (max-width: 768px) {
+            text-align: center;
+        }
         i {
             font-size: 1.2em;
             opacity: 0.6;

@@ -1,6 +1,9 @@
 #header {
     width: 100%;
     height: 70px;
+    @media (max-width: 768px) {
+        height: 50px;
+    }
     background-color: white;
     position: relative;
     z-index: 10000;
@@ -23,8 +26,15 @@
         @media (max-width: 768px) {
             width: 75%;
         }
+        @media (max-width: 450px) {
+            width: auto;
+        }
         #logo {
             float: left;
+            height: 100%;
+            img {
+                height: 100%;
+            }
         }
         #banner {
             float: left;
@@ -34,7 +44,11 @@
             @media (max-width: 1200px) {
                 width: 60%;
             }
-            @media (max-width: 400px) {
+            @media (max-width: 768px) {
+                line-height: 50px;
+                width: 80%;
+            }
+            @media (max-width: 450px) {
                 width: auto;
             }
             h1 {
@@ -51,7 +65,7 @@
                     font-size: 1.2em;
                     line-height: 1.2em;
                 }
-                @media (max-width: 400px) {
+                @media (max-width: 450px) {
                     display: none;
                     font-size: 0.8em;
                 }
@@ -72,9 +86,27 @@
             margin: 0;
         }
     }
+    .switch-vue {
+        float: right;
+        height: 3em;
+        width: 3em; 
+        padding: 0.7em;
+        margin: 4px;
+        color: white;
+        @media (min-width: 768px) {
+            display: none;
+        }
+        svg {
+            height: 100%;
+            width: 100%;
+        }
+        svg, svg .base {
+            fill: white;
+        }
+    }
     .navbar-toggle {
         padding: 1em;
-        margin: 12px;
+        margin: 4px;
         .icon-bar {
             background: white;
             transition: all 0.2s ease;
@@ -99,6 +131,7 @@
     @media (max-width: 768px) {
         background: white;
         padding: 0;
+        width: 100%;
         .container-fluid > & {
              margin: 0;
         }

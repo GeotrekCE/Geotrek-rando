@@ -1,20 +1,27 @@
-<div class="favorites-liste">
-    <div class="header">
-        <span>{{'FAVORITES' | translate}}</span>
-        <div class="remove" ng-click="removeAllFavorites(); $event.stopPropagation();" ng-if="favorites && favorites.length > 0"><i class="fa fa-trash"></i></div>
-    </div>
-    <ul ng-if="favorites && favorites.length > 0">
-        <li ng-repeat="favorite in favorites" class="favorite category-{{favorite.properties.category.id}}" id="fav-category-{{favorite.properties.category.id}}-{{favorite.id}}">
-            <a ui-sref="layout.detail({slug: favorite.properties.slug})">
-                <div class="picture">
-                    <img ng-src="{{favorite.properties.pictures[0].url}}" alt="{{favorite.properties.name}}-thumbnail"/>
-                </div>
-                <span class="name">{{favorite.properties.name}}</span>
-            </a>
-            <div class="remove" ng-click="removeAFavorite(favorite); $event.stopPropagation();">
-                <i class="fa fa-trash"></i>
+<li class="favorites dropdown">
+    <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" tooltip-placement="bottom" tooltip="{{'FAVORITES' | translate}}">
+        <span class="glyphicon glyphicon-heart"></span><span class="visible-xs-inline">{{'FAVORITES' | translate}}</span>
+    </a>
+    <div class="dropdown-menu" role="menu">
+        <div class="favorites-liste">
+            <div class="header">
+                <span class="hidden-xs">{{'FAVORITES' | translate}}</span>
+                <div class="remove" ng-click="removeAllFavorites(); $event.stopPropagation();" ng-if="favorites && favorites.length > 0"><i class="fa fa-trash"></i></div>
             </div>
-        </li>
-    </ul>
-    <div ng-if="!favorites || favorites.length === 0" class="no-favorites">{{'NO_FAVORITES' | translate}}</div>
-</div>
+            <ul ng-if="favorites && favorites.length > 0">
+                <li ng-repeat="favorite in favorites" class="favorite category-{{favorite.properties.category.id}}" id="fav-category-{{favorite.properties.category.id}}-{{favorite.id}}">
+                    <a ui-sref="layout.detail({slug: favorite.properties.slug})">
+                        <div class="picture">
+                            <img ng-src="{{favorite.properties.pictures[0].url}}" alt="{{favorite.properties.name}}-thumbnail"/>
+                        </div>
+                        <span class="name">{{favorite.properties.name}}</span>
+                    </a>
+                    <div class="remove" ng-click="removeAFavorite(favorite); $event.stopPropagation();">
+                        <i class="fa fa-trash"></i>
+                    </div>
+                </li>
+            </ul>
+            <div ng-if="!favorites || favorites.length === 0" class="no-favorites">{{'NO_FAVORITES' | translate}}</div>
+        </div>
+    </div>
+</li>

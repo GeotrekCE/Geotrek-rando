@@ -1,6 +1,6 @@
-<div class="results-drawer">
+<div class="results-drawer" ng-class="{'shown': !$root.mapIsShown}">
     <results-liste></results-liste>    
 </div>
-<div class="general-map">
+<div class="general-map" ng-class="{'shown': $root.mapIsShown}">
     <geotrek-map></geotrek-map>
 </div>

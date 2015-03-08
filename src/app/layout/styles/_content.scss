@@ -3,8 +3,11 @@
     padding-top: 70px;
     top: -70px;
     height: 100%;
-    //overflow: hidden;
     position: relative;
+    @media (max-width: 768px) {
+        padding-top: 50px;
+        top: -50px;
+    }
     & > .content {
         height: 100%;
         width: 100%;
@@ -12,29 +15,40 @@
         margin-left: -60px;
         position: relative;
         float: left;
+        @media (max-width: 768px) {
+            z-index: 10;
+        }
         .results-drawer {
             width: 40%;
             height: 100%;
             float: left;
             background: $light-grey;
+            transition: left 0.3s ease;
             @media (max-width: 768px) {
                 position: absolute;
                 width: 100%;
                 top: 0%;
-                left: 0;
+                left: -100%;
                 padding-left: 60px;
+                &.shown {
+                    left: 0;
+                }
             }
         }
         .general-map {
             width: 60%;
             height: 100%;
             float: left;
+            transition: left 0.3s ease;
             @media (max-width: 768px) {
                 position: absolute;
                 width: 100%;
                 top: 0%;
                 left: 100%;
                 padding-left: 60px;
+                &.shown {
+                    left: 0;
+                }
             }
         }
     }

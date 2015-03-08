@@ -5,6 +5,9 @@
     background-color: $neutral-grey;
     color: white;
     position: relative;
+    @media (max-width: 768px) {
+        z-index: 20;
+    }
     .detail-actions {
         list-style: none;
         padding: 0;
