@@ -6,10 +6,9 @@
                 <span>{{filter.label}}</span>
             </div>
         </li>
-        <li ng-if="activeFiltersTags.length > 0" id="tag-reset" class="reset">
-            <div class="remove" ng-click="resetFilters()"><span>X</span></div>
+        <li ng-if="activeFiltersTags.length > 0" id="tag-reset" class="reset" ng-click="resetFilters()">
             <div class="text">
-                <span>{{ 'RESET' | translate}}</span>
+                <span><i class="fa fa-refresh"></i> {{ 'RESET' | translate}}</span>
             </div>
         </li>
     </ul>

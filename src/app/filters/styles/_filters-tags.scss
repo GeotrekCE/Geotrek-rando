@@ -13,18 +13,18 @@
         margin: 0 1em 0.6em;
         background: rgba(255, 255, 255, 0.8);
         box-shadow: 0 2px 0 0 transparentize($dark-grey, 0.6);
+        color: $dark-grey;
         cursor: default;
         font-weight: 400;
         @include filters-tags-coloring();
-        &.reset .remove {
+        &.reset {
             background: $dark-grey;
+            color: white;
+            cursor: pointer;
         }
         & > div {
             display: inline-block;
             padding: 0.4em 0.6em;
-        }
-        .text {
-            color: $dark-grey;
         }
         .remove {
             background: $primary-color;
