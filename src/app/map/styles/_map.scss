@@ -3,4 +3,10 @@
     width: 100%;
 }
 
+@media (max-width: 7868px) {
+    .leaflet-control-minimap, .leaflet-control-zoom {
+        display: none;
+    }
+}
+
 @import '_markers';

@@ -7,11 +7,18 @@ function DetailController($scope, $rootScope, $state, $q, $stateParams, utilsFac
     $scope.parseLength = utilsFactory.parseLength;
     $scope.removeDiacritics = utilsFactory.removeDiacritics;
 
-    function initTabs(selector) {
-        jQuery(selector + ' a').click(function (e) {
-            e.preventDefault();
-            jQuery(this).tab('show');
-        });
+    $scope.togglePois = function () {
+        $scope.poisAreShown = !$scope.poisAreShown;
+    };
+
+    $scope.showLightbox = function (slideIndex) {
+        $rootScope.$emit('openLightbox', slideIndex);
+    };
+
+    $scope.isSVG = utilsFactory.isSVG;
+
+    function initCollapse(selector) {
+        $scope.poisAreShown = true;
     }
 
     function getNearElements(result) {
@@ -45,6 +52,9 @@ function DetailController($scope, $rootScope, $state, $q, $stateParams, utilsFac
             .then(
                 function (elementPois) {
                     $scope.pois = elementPois.features;
+                    if ($scope.pois.length === 0) {
+                        $scope.poisAreShown = false;
+                    }
                     $rootScope.$emit('resetPOIGallery');
                     console.log(elementPois);
                 }
@@ -65,7 +75,7 @@ function DetailController($scope, $rootScope, $state, $q, $stateParams, utilsFac
                     $scope.result = result;
                     getPoisOfResult(result, forceRefresh);
                     getNearElements(result);
-                    initTabs('more-infos .nav-tabs a');
+                    initCollapse();
                     $rootScope.$emit('initGallery', result.properties.pictures);
                     console.log(result);
                     // if (forceRefresh) {
@@ -84,26 +94,6 @@ function DetailController($scope, $rootScope, $state, $q, $stateParams, utilsFac
                 }
             );
     }
-
-    $scope.tabIsShown = function (showOrHide) {
-        var map = document.querySelector(".detail-map"),
-            className = 'hide-near-elements';
-        if (showOrHide) {
-            if (map.classList.contains(className)) {
-                map.classList.remove(className);
-            }
-        } else {
-            if (!map.classList.contains(className)) {
-                map.classList.add(className);
-            }
-        }
-    };
-
-    $scope.showLightbox = function (slideIndex) {
-        $rootScope.$emit('openLightbox', slideIndex);
-    };
-
-    $scope.isSVG = utilsFactory.isSVG;
 
     getResultDetails();
     $rootScope.$on('switchGlobalLang', function () {

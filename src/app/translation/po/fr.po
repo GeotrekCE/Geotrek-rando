@@ -48,7 +48,7 @@ msgstr "Boucle :"
 msgid "PARK_CENTERED"
 msgstr "Cet itinéraire est dans le coeur du parc national, veuillez consulter la réglementation."
 
-msgid "TRANSPORT"
+msgid "TRANSPORTS"
 msgstr "Transports"
 
 msgid "ACCESS"

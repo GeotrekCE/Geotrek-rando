@@ -1,18 +1,74 @@
 .detail-page {
     height: 100%;
     width: 100%;
+    position: relative;
     overflow: hidden;
     background: $neutral-grey;
     @include detail-page-coloring();
-
+    @media (max-width: 768px) {
+        &.showMap {
+            .informations {
+                left: -100%;
+            }
+            .detail-map {
+                left: 0%;
+            }
+            .interests {
+                left: 100%;
+            }
+        }
+    }
     .informations {
-        width: 40%;
+        //position: relative;
         height: 100%;
+        width: 100%;
         float: left;
         display: flex;
         flex-direction: column;
         border-right: 1px solid $neutral-grey;
         background: $light-grey;
+        transition: width 0.3s ease, left 0.3s ease;
+        @media (min-width: 769px) {
+            width: 35%;
+            height: 100%;
+            &:after {
+                content: '';
+                display: block;
+                position: absolute;
+                top: -200%;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                background: $dark-grey;
+                opacity: 0;
+                transition: opacity 0.3s ease 0s, top 0s ease 0.3s ;
+            }
+            &.collapsed {
+                width: 4%;
+                overflow: hidden;
+                & > div {
+                    min-width: 600px;
+                }
+                &:after {
+                    top: 0;
+                    opacity: 0.8;
+                    transition: opacity 0.3s ease 0.1s, top 0s ease 0s;
+                }
+            }
+            
+        }
+        h3 {
+            display: block;
+            font-weight: 300;
+            font-size: 1.3em;
+            padding: 0.5em 0.8em;
+            margin: 0;
+            border-bottom: 1px solid $neutral-grey;
+            transition: border 0.3s ease;
+            i {
+                margin-right: 0.8rem;
+            }
+        }
         .element-title {
             display: flex;
             background: $primary-color;
@@ -38,9 +94,9 @@
             }
         }
         .from-to {
-            padding: 0.4em 2em;
-            background: $neutral-grey;
-            margin-top: 1em;
+            padding: 0.6em 2em;
+            background: $primary-color;
+            color: white;
             & > span {
                 margin-right: 1em;
             }
@@ -49,16 +105,6 @@
             flex: 1;
             overflow-y: scroll;
             overflow-x: hidden;
-            h4 {
-                font-size: 1.5em;
-                font-weight: normal;
-                color: $dark-grey;
-                border-bottom: 2px solid $neutral-grey;
-                i {
-                    float: left;
-                    margin-right: 0.6em;
-                }
-            }
         }
         .intro {
             .ambiance-and-teaser {
@@ -123,7 +169,7 @@
                             height: 3em;
                             line-height: 3em;
                             & > div {
-                                vertical-align: middle;
+                                vertical-align: top;
                                 line-height: normal;
                                 display: inline-block;
                                 width: 100%;
@@ -173,15 +219,19 @@
         .more-infos {
             display: flex;
             flex-wrap: wrap;
-            & > div {
-                width: 100%;
-                padding: 0 1.5em 1em;
+            @media (max-width: 768px) {
+                & > div {
+                    width: 100%;
+                }
             }
             .access, .transport {
-                width: 50%;
+                @media (min-width: 769px) {
+                    width: 50%;
+                }                
                 .card {
                     background: white;
                     padding: 1em;
+                    margin: 0.4rem;
                 }
             }
         }
@@ -207,27 +257,32 @@
             background: transparentize($info-color, 0);
         }
         .info-desks {
+            padding-bottom: 1em;
             ul {
                 list-style: none;
-                padding: 0;
+                padding: 0.4rem;
                 li {
-                    //max-width: 50%;
-                    display: flex;
                     background: white;
                     border: none;
+                    position: relative;
+                    &:not(:last-child) {
+                        margin-bottom: 1em;
+                    }
                     .infos {
-                        flex: 1;
-                        display: flex;
                         width: 100%;
-                        padding: 0.6em;
+                        min-height: 9rem;
+                        padding: 0.6rem;
                         color: white;
+                        overflow: hidden;
                     }
                     .image {
                         display: block;
-                        position: relative;
-                        margin: 1em 1em 1em 0.4em;
-                        width: 7em;
-                        height: 7em;
+                        top: 0.6rem;
+                        left: 0.6rem;
+                        position: absolute;
+                        margin: 0.4em;
+                        width: 7rem;
+                        height: 7rem;
                         border-radius: 50%;
                         overflow: hidden;
                         img {
@@ -251,14 +306,13 @@
                         padding: 0.6em 0;
                     }
                     .contact {
-                        flex: 1;
+                        padding-left: 8.2rem;
                         a {
                             color: white;
                             display: block;
                         }
                     }
                     .description {
-                        flex: 1;
                         padding: 1em;
                         .text {
 
@@ -267,79 +321,158 @@
                 }
             }
         }
-        .contact-card .card {
-            display: inline-block;
-            padding: 1em;
-            background: white;
-            border-left: 4px solid $primary-color;
-            ul {
-                list-style: none;
-                padding: 0;
-                margin: 0;
+        .contact-card {
+            padding-bottom: 1em;
+            .card {
+                display: inline-block;
+                padding: 1em;
+                background: white;
+                border-left: 4px solid $primary-color;
+                &:not(:last-child) {
+                    margin-bottom: 1em;
+                }
+                ul {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
             }
         }
         .going-further {
+            padding-bottom: 1em;
+            width: 100%;
             ul {
                 list-style: none;
-                padding: 0;
+                padding: 0.4rem;
                 margin: 0;
             }
         }
     }
 
-    .interests {
-        width: 59.5%;
+    /*.interests {
+        width: 64.5%;
         height: 100%;
         margin-left: 0.5%;
         float: left;
         flex-direction: column;
-        .elements {
-            background: $light-grey;
-            padding: 0;
-            width: 100%;
-            height: 50%;
-            div[role="tabpanel"], div[role="tabpanel"] > div {
-                height: 100%;
-                width: 100%;
-            }
-            .tab-content {
-                height: 100%;
-                width: 100%;
-                //padding-bottom: 50px;
-                overflow: hidden;
-                background: $light-grey;
-                .tab-pane {
+        
+    }*/
+    .interests {
+        background: $light-grey;
+        padding: 0;
+        width: 100%;
+        transition: width 0.3s ease, left 0.3s ease;
+        @media (min-width: 769px) {
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 19%;
+            height: 100%;
+            float: left;
+            display: flex;
+            flex-direction: column;
+            &.expend {
+                width: 35%;
+                .collapsor {
+                    margin-top: 0;
+                    padding-bottom: 0;
+                }
+                .pois {
                     height: 100%;
-                    width: 100%;
-                    padding-top: 43px;
-                    margin-top: -43px;
+                    .pois-liste {
+                        height: 100%;
+                    }
+                    h3 {
+                        display: none;
+                    }
+                }
+                .near-elements {
+                    display: none;
                 }
             }
-            .nav-tabs {
-                height: 43px;
-                li {
-                    a {
-                        color: $dark-grey;
-                        border: none;
-                        border-right: 1px solid $neutral-grey;
-                        border-radius: 0;
-                        background: white;
+            & > div {
+                transition: all 0.2s ease;
+                height: 40px;
+                position: relative;
+                overflow: hidden;
+                &:not(.collapsed) {
+                    flex: 1 1 auto;
+                    h3 {
+                        border-bottom: 2px solid $primary-color;
                     }
-                    &:last-child a {
-                        border-right: none;
-                    }
-                    &.active {
-                        a {
-                            border-bottom: 3px solid $primary-color;
+                }
+                &.collapsed {
+                    h3 {
+                        i {
+                            transform: rotate(-90deg);
                         }
                     }
                 }
-           } 
+            }
         }
-        .detail-map {
-            background: $light-grey;
-            padding: 0;
-            height: 50%;
+        @media (min-width: 1600px) {
+            width: 17%;
+        }
+        .collapsor {
+            width: 100%;
+            @media (min-width: 769px) {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                margin-top: 40px;
+                padding-bottom: 40px;
+                overflow: hidden;
+            }
+        }
+        h3 {
+            cursor: pointer;
+            &:hover {
+                i {
+                    opacity: 0.8;
+                }
+            }
+            i {
+                float: right;
+                transition: transform 0.3s ease;
+                opacity: 0.6;
+                @media (max-width: 768px) {
+                    display: none;
+                }
+            }
+        }
+    }
+    .detail-map {
+        background: $light-grey;
+        float: left;
+        z-index: 2;
+        padding: 0;
+        height: 100%;
+        width: 45.5%;
+        margin-left: 0.5%;
+        transition: width 0.3s ease, left 0.3s ease;
+        @media (min-width: 1600px) {
+            width: 47.5%;
+            &.no-interests {
+                width: 66.5%;
+            }
+        }
+        @media (min-width: 769px) {
+            &.expend {
+                width: 60.5%;
+            }
+            &.no-interests {
+                width: 64.5%;
+            }
+        }
+        @media (max-width: 768px) {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            height: 100%;
             width: 100%;
         }
     }

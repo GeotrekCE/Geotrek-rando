@@ -2,137 +2,94 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    height: 100%;
     width: 100%;
-    overflow-y: auto;
+    @media (min-width: 768px) {
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
     li {
-        width: 29%;
-        height: 10em;
-        margin: 1.3em 2%;
-        max-height: 100%;
-        display: flex;
+        display: block;
+        float: left;
+        width: 46%;
+        margin: 2%;
         background: white;
         position: relative;
-        overflow: hidden;
         transition: all 0.2s ease;
         @include detail-near-elements-coloring();
-        .card-part {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            min-width: 50%;
-        }
-        .header {
-            flex: 1;
-            text-align: center;
-            //max-height: 14em;
+        @media (min-width: 768px) {
             overflow: hidden;
-            position: relative;
-            &:after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.25) 100%);
-            }
-            img {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                //max-height: 100%;
-                transition: all 0.2s ease;
-            }
-        }
-        .title {
-            font-size: 1.5em;
-            font-weight: 300;
-            display: block;
-            transition: all 0.2s ease;
-            cursor: pointer;
-            position: absolute;
-            top: 5%;
-            left: 5%;
-            width: 95%;
-            padding: 0.4em;
-            color: white;
-            text-shadow: 0px 2px 2px rgba(150, 150, 150, 1);
-        }
-        .toggle {
-            position: absolute;
-            bottom: -100%;
-            right: 0;
-            color: white;
-            transform: rotate(0deg);
-            font-size: 1.5em;
-            transition: all 0.2s ease;
-            cursor: pointer;
-            padding: 0.4em;
-            & > div, & > i {
-                position: relative;
-                bottom: -40px;
-                transition: all 0.2s ease;
-            }
-            .cat-icon {
-                display: inline-block;
-                img, svg {
-                    height: 1.2em;
-                    width: 1.5em;
-                }
-                svg, svg .base {
-                    fill: white;
+            max-height: 8rem;
+            width: 96%;
+            &:hover, &.hovered {
+                .cat-icon, .toggle {
+                    bottom: 0.4rem;
                 }
             }
         }
-        .hover {
-            display: block;
-            position: absolute;
-            bottom: 0%;
-            left: 0;
+    }
+    a {
+        display: block;
+        width: 100%;
+    }
+    .picture {
+        max-height: 8rem;
+        overflow: hidden;
+        img {
             width: 100%;
-            height: 100%;
-            padding: 0.6em;
-            opacity: 0;
-            background: transparentize($primary-color, 0.2);
-            transition: all 0.2s ease;
-            color: white;
-            cursor: pointer;
-            i {
-                position: absolute;
-                bottom: 0.6em;
-                right: 0.6em;
-                font-size: 1.2em;
-            }
         }
-        &:hover, &.hovered {
-            .hover {
-                opacity: 1;
-            }
-            .header img {
-                transform: scale(1.4);
-            }
-            .title {
-                top: 2%;
-                left: 2%;
-                text-shadow: none;
-            }
-            .toggle {
-                bottom: 0;
-                transition-delay: 0.05s;
-                & > div, & > i {
-                    bottom: 0;
-                }
-                & > i {
-                    transition-delay: 0s;
-                }
-                .cat-icon {
-                    transition-delay: 0.15s;
-                }
-            }
+        &:after {
+            content: '';
+            display: block;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: transparentize(black, 0.5);
+        }
+    }
+    .title {
+        position: absolute;
+        font-size: 1.2rem;
+        font-weight: 300;
+        top: 0;
+        left: 0;
+        height: 60%;
+        width: 100%;
+        padding: 0.4rem;
+        color: white;
+        text-align: center;
+        text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.7);
+    }
+    .cat-icon {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        margin-left: -2rem;
+        width: 1.5rem;
+        svg, img {
+            max-width: 100%;
+        }
+        svg, svg .base {
+            fill: white;
+        }
+        @media (min-width: 768px) {
+            transition: bottom 0.3s ease;
+            bottom: -50%;
+        }
+    }
+    .toggle {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        margin-left: 0.5rem;
+        width: 1.5rem;
+        font-size: 1.5rem;
+        color: white;
+        @media (min-width: 768px) {
+            transition: bottom 0.4s ease;
+            bottom: -50%;
         }
     }
 }

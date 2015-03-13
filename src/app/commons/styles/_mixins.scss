@@ -82,6 +82,9 @@
                 .element-title {
                     background: nth($category, 2);
                 }
+                .from-to {
+                    background: nth($category, 2);
+                }
                 .main-infos .description_teaser {
                     color: nth($category, 2);
                 }
@@ -99,8 +102,8 @@
 @mixin detail-near-elements-coloring() {
     @each $category in $categories {
         &.category-#{nth($category, 1)} {
-            .hover {
-                background: transparentize(nth($category, 2), 0.2);
+            .picture:after {
+                background: transparentize(nth($category, 2), 0.5);
             }
         }
     }

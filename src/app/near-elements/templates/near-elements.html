@@ -1,19 +1,18 @@
 <ul class="near-liste">
     <li ng-repeat="near in nearElements" id="near-category-{{near.properties.category.id}}-{{near.id}}" class="near category-{{near.properties.category.id}} card">
         <a ui-sref="layout.detail({slug: near.properties.slug})" class="card-part" ng-mouseover="hoverMarkerNear(near,'enter')" ng-mouseleave="hoverMarkerNear(near,'leave')">
-            <div class="header">
+            <div class="picture">
                 <img ng-if="near.properties.pictures[0]" ng-src="{{near.properties.pictures[0].url}}" ng-alt="{{near.properties.type.label}}">
                 <img ng-if="!near.properties.pictures[0]" ng-src="./images/placeholder.png" alt="placeholder image">
             </div>
-            <div class="hover"></div>
+            <span class="title">{{near.properties.name}}</span>
+            <div class="cat-icon">
+                <ng-include ng-if="isSVG(near.properties.category.pictogram)" src="near.properties.category.pictogram"></ng-include>
+                <img ng-if="!isSVG(near.properties.category.pictogram)" ng-src="{{near.properties.category.pictogram}}" ng-alt="{{near.properties.category.label}}">
+            </div>
             <div class="toggle">
-                <div class="cat-icon">
-                    <ng-include ng-if="isSVG(near.properties.category.pictogram)" src="near.properties.category.pictogram"></ng-include>
-                    <img ng-if="!isSVG(near.properties.category.pictogram)" ng-src="{{near.properties.category.pictogram}}" ng-alt="{{near.properties.category.label}}">
-                </div>
                 <i class="fa fa-link"></i>
             </div>
-            <span class="title">{{near.properties.name}}</span>
         </a>
     </li>
 </ul>

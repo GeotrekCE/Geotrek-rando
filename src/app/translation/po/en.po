@@ -49,8 +49,8 @@ msgstr "Loop:"
 msgid "PARK_CENTERED"
 msgstr "Park centered"
 
-msgid "TRANSPORT"
-msgstr "Transport"
+msgid "TRANSPORTS"
+msgstr "Transports"
 
 msgid "ACCESS"
 msgstr "Access"

@@ -26,6 +26,9 @@ function PoisListeController($scope, $rootScope) {
 
     $scope.togglePoi = function (poiId) {
         if ($scope.isOpened[poiId] === 'closed') {
+            document.querySelector('.informations').classList.add('collapsed');
+            document.querySelector('.interests').classList.add('expend');
+            document.querySelector('.detail-map').classList.add('expend');
             _.forEach($scope.isOpened, function (isOpenedValue, index) {
                 if (parseInt(index, 10) === parseInt(poiId, 10)) {
                     $scope.isOpened[index] = 'opened';
@@ -34,6 +37,9 @@ function PoisListeController($scope, $rootScope) {
                 }
             });
         } else {
+            document.querySelector('.informations').classList.remove('collapsed');
+            document.querySelector('.interests').classList.remove('expend');
+            document.querySelector('.detail-map').classList.remove('expend');
             _.forEach($scope.isOpened, function (isOpenedValue, index) {
                 $scope.isOpened[index] = 'closed';
             });

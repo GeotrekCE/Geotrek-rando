@@ -1,19 +1,18 @@
 <ul class="pois-liste">
     <li ng-repeat="poi in pois" id="poi-{{poi.id}}" class="poi {{poi.properties.type.label}} card" ng-class="isOpened[poi.id]" ng-mouseover="hoverMarkerPoi(poi,'enter')" ng-mouseleave="hoverMarkerPoi(poi,'leave')">
-        <div class="card-part">
-            <div class="header">
-                <img ng-if="poi.properties.pictures[0]" ng-src="{{poi.properties.pictures[0].url}}" ng-alt="{{poi.properties.type.label}}">
-                <img ng-if="!poi.properties.pictures[0]" ng-src="./images/placeholder.png" alt="placeholder image">
-                <div ng-if="poi.properties.pictures[0]" class="credits">{{poi.properties.pictures[0].author}}</div>
-            </div>
-            <div class="hover" ng-click="togglePoi(poi.id)"></div>
-        </div>
-        <div class="hidden-part">
+        <div class="header">
             <i class="toggle fa fa-plus" ng-click="togglePoi(poi.id)"></i>
             <span class="title" ng-click="togglePoi(poi.id)">{{poi.properties.name}}</span>
             <div class="type">
                 <img ng-src="{{poi.properties.type.pictogram}}" ng-alt="{{poi.properties.type.label}}">
                 <span>{{poi.properties.type.label}}</span>
+            </div>
+        </div>
+        <div class="content">
+            <div class="picture">
+                <img ng-if="poi.properties.pictures[0]" ng-src="{{poi.properties.pictures[0].url}}" ng-alt="{{poi.properties.type.label}}">
+                <img ng-if="!poi.properties.pictures[0]" ng-src="./images/placeholder.png" alt="placeholder image">
+                <div ng-if="poi.properties.pictures[0]" class="credits">{{poi.properties.pictures[0].author}}</div>
             </div>
             <div class="description" ng-bind-html="sanitizeData(poi.properties.description)"></div>
         </div>

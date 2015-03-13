@@ -1,4 +1,4 @@
-<section class="detail-page category-{{result.properties.category.id}}">
+<section class="detail-page category-{{result.properties.category.id}}" ng-class="{'showMap': $root.mapIsShown}">
     <div class="informations">
 
         <div class="header">
@@ -135,15 +135,15 @@
             </div>
             <div class="more-infos">
                 <div ng-if="result.properties.public_transport" class="transport">
-                    <h4><i class="fa fa-bus"></i>{{ 'TRANSPORTS' | translate}}</h4>
+                    <h3><i class="fa fa-bus"></i>{{ 'TRANSPORTS' | translate}}</h3>
                     <div class="card" ng-bind-html="sanitizeData(result.properties.public_transport)"></div>
                 </div>
                 <div ng-if="result.properties.access" class="access">
-                    <h4><i class="fa fa-road"></i>{{ 'ACCESS' | translate}}</h4>
+                    <h3><i class="fa fa-road"></i>{{ 'ACCESS' | translate}}</h3>
                     <div class="card" ng-bind-html="sanitizeData(result.properties.access)"></div>
                 </div>
                 <div ng-if="result.properties.information_desks[0]" class="info-desks">
-                    <h4><i class="fa fa-tty"></i>{{ 'INFORMATION_DESKS' | translate}}</h4>
+                    <h3><i class="fa fa-tty"></i>{{ 'INFORMATION_DESKS' | translate}}</h3>
                     <ul>
                         <li ng-repeat="desk in result.properties.information_desks" class="desk card">
                             <div class="infos">
@@ -171,14 +171,30 @@
                     </ul>
                 </div>
                 <div ng-if="result.properties.contact || result.properties.email" class="contact-card">
-                    <h4><i class="fa fa-tty"></i>{{ 'CONTACT' | translate}}</h4>
+                    <h3><i class="fa fa-tty"></i>{{ 'CONTACT' | translate}}</h3>
                     <div class="card">
                         <div class="contact" ng-if="result.properties.contact" ng-bind-html="sanitizeData(result.properties.contact)"></div>
                         <a ng-if="result.properties.email" href="mailto:{{result.properties.email}}">{{result.properties.email}}</a>
                     </div>
                 </div>
+
+                <div ng-if="pois.length > 0 || result.properties.touristic_contents.length > 0 || result.properties.touristic_events.length > 0 || result.properties.treks.length > 0" class="interests">
+                    <div class="pois" ng-if="pois.length > 0" ng-class="{collapsed: !poisAreShown}">
+                        <h3 ng-click="togglePois()">{{'POI' | translate}} <i class="fa fa-angle-down"></i></h3>
+                        <div class="collapsor">
+                            <pois-liste></pois-liste>
+                        </div>
+                    </div>
+                    <div class="near-elements" ng-if="result.properties.touristic_contents.length > 0 || result.properties.touristic_events.length > 0 || result.properties.treks.length > 0" ng-class="{collapsed: poisAreShown}">
+                        <h3 ng-click="togglePois()">{{'NEAR' | translate}} <i class="fa fa-angle-down"></i></h3>
+                        <div class="collapsor">
+                            <near-liste></near-liste>
+                        </div>
+                    </div>
+                </div>
+
                 <div ng-if="result.properties.web_links[0]" class="going-further">
-                    <h4><i class="fa fa-info"></i>{{ 'KNOW_MORE' | translate}}</h4>
+                    <h3><i class="fa fa-info"></i>{{ 'KNOW_MORE' | translate}}</h3>
                     <ul ng-if="result.properties.web_links[0]" class="websites">
                         <li ng-repeat="link in result.properties.web_links">
                             <a href="{{link.url}}" title="{{link.name}}">
@@ -195,24 +211,7 @@
 
     </div>
 
-    <div class="interests">
-        <div class="detail-map">
-            <geotrek-map></geotrek-map>
-        </div>
-
-        <div ng-if="pois.length > 0 || result.properties.touristic_contents.length > 0 || result.properties.touristic_events.length > 0 || result.properties.treks.length > 0" class="elements">
-            <div role="tabpanel">
-
-                <tabset justified="true">
-                    <tab ng-if="pois.length > 0" heading="{{ 'POI' | translate}}" active="true">
-                        <pois-liste></pois-liste>
-                    </tab>
-                    <tab ng-if="result.properties.touristic_contents.length > 0 || result.properties.touristic_events.length > 0 || result.properties.treks.length > 0" heading="{{ 'NEAR' | translate}}" select="tabIsShown(true)" deselect="tabIsShown(false)">
-                        <near-liste></near-liste>
-                    </tab>
-                </tabset>
-
-            </div>
-        </div>
+    <div class="detail-map" ng-class="{'no-interests': pois.length <= 0 && result.properties.touristic_contents.length >= 0 && result.properties.touristic_events.length >= 0 && result.properties.treks.length <= 0}">
+        <geotrek-map></geotrek-map>
     </div>
 </section>
