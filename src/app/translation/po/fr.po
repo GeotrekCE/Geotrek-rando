@@ -7,7 +7,7 @@ msgstr ""
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
 "X-Generator: Poedit 1.7.4\n"
@@ -17,13 +17,13 @@ msgid "ROUTES"
 msgstr "Parcours"
 
 msgid "DIFFICULTIES"
-msgstr "Difficulté :"
+msgstr "DifficultÃ© :"
 
 msgid "DURATION"
-msgstr "Durée :"
+msgstr "DurÃ©e :"
 
 msgid "ASCENT"
-msgstr "Dénivelé :"
+msgstr "DÃ©nivelÃ© :"
 
 msgid "ALL"
 msgstr "Toutes"
@@ -37,22 +37,22 @@ msgstr "Vous n'avez pas encore de favoris !"
 
 # DETAILS
 msgid "START"
-msgstr "Départ :"
+msgstr "DÃ©part :"
 
 msgid "ARRIVAL"
-msgstr "Arrivée :"
+msgstr "ArrivÃ©e :"
 
 msgid "LOOP"
 msgstr "Boucle :"
 
 msgid "PARK_CENTERED"
-msgstr "Cet itinéraire est dans le coeur du parc national, veuillez consulter la réglementation."
+msgstr "Cet itinÃ©raire est dans le coeur du parc national, veuillez consulter la rÃ©glementation."
 
 msgid "TRANSPORTS"
 msgstr "Transports"
 
 msgid "ACCESS"
-msgstr "Accès routiers"
+msgstr "AccÃ¨s routiers"
 
 msgid "INFORMATION_DESKS"
 msgstr "Points d'information"
@@ -67,7 +67,7 @@ msgid "POI"
 msgstr "Patrimoine"
 
 msgid "NEAR"
-msgstr "A proximité"
+msgstr "A proximitÃ©"
 
 # FILTERS
 msgid "DISTRICTS"
@@ -80,7 +80,7 @@ msgid "CITIES"
 msgstr "Communes"
 
 msgid "RESET"
-msgstr "Réinitialiser"
+msgstr "RÃ©initialiser"
 
 # LAYOUT
 msgid "TOGGLE_NAV"
@@ -93,13 +93,13 @@ msgid "ABOUT_US"
 msgstr "En savoir plus"
 
 msgid "BACK"
-msgstr "Retour à la carte"
+msgstr "Retour Ã Â la carte"
 
 msgid "PRINT"
 msgstr "Imprimer la fiche"
 
 msgid "ADD_FAVS"
-msgstr "Ajouter à mes favoris"
+msgstr "Ajouter Ã  mes favoris"
 
 msgid "REMOVE_FAVS"
 msgstr "Retirer de mes favoris"
@@ -108,13 +108,13 @@ msgid "SHARE"
 msgstr "Partager"
 
 msgid "WARNING"
-msgstr "Signaler un problème ou une erreur"
+msgstr "Signaler un problÃ¨me ou une erreur"
 
 msgid "KML"
-msgstr "Télécharger la fiche KML"
+msgstr "TÃ©lÃ©charger la fiche KML"
 
 msgid "GPX"
-msgstr "Télécharger la fiche GPX"
+msgstr "TÃ©lÃ©charger la fiche GPX"
 
 msgid "3D"
-msgstr "Voir l'itinéraire en 3D"
+msgstr "Voir l'itinÃ©raire en 3D"
