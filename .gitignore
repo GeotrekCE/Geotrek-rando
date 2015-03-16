@@ -11,5 +11,8 @@ src/rando.css
 
 
 # Prevent custom config to be pushed
-
 src/app/config/configs.js
+
+# Prevent custom unempty po files to be commited
+src/app/translation/po/fr-custom.po
+src/app/translation/po/en-custom.po
