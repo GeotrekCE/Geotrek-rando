@@ -1,3 +1,5 @@
 *.mo
+en-custom.po
+fr-custom.po
 
 !.gitignore
