@@ -88,7 +88,7 @@ msgid "TOGGLE_NAV"
 msgstr "Toggle navigation"
 
 msgid "BANNER_TEXT"
-msgstr "English title Cévennes"
+msgstr "Geotrek Rando"
 
 msgid "ABOUT_US"
 msgstr "About us"

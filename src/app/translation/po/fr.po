@@ -87,7 +87,7 @@ msgid "TOGGLE_NAV"
 msgstr "Ouvrir le menu"
 
 msgid "BANNER_TEXT"
-msgstr "Destination Parc national des Cévennes"
+msgstr "Geotrek Rando"
 
 msgid "ABOUT_US"
 msgstr "En savoir plus"
