@@ -15,3 +15,6 @@ msgstr ""
 #. MODELE :
 #. msgid "ID_DE_L_ELEMENT_ORIGINAL_A_REMPLACER"
 #. msgstr "La traduction qui s'affichera"
+
+msgid "BANNER_TEXT"
+msgstr "Destination parc national des Cévennes"

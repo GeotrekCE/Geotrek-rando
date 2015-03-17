@@ -1,6 +1,7 @@
 'use strict';
 
-function LayoutController($rootScope, $scope, $state, resultsService) {
+function LayoutController($rootScope, $scope, $state, resultsService, globalSettings) {
+    $scope.showHome = globalSettings.SHOW_HOME;
     $rootScope.currentState_name = $state.current.name;
 
     $rootScope.$on("$stateChangeSuccess",  function (event, toState, toParams, fromState, fromParams) {

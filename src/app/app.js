@@ -17,6 +17,7 @@ var dependencies = [
     'rando.detail',
     'rando.favorites',
     'rando.gallery',
+    'rando.home',
 
 
     // External stuff
@@ -62,3 +63,4 @@ require('./map');
 require('./detail');
 require('./favorites');
 require('./gallery');
+require('./home');

@@ -4,6 +4,7 @@ var constants = {
 
     DOMAIN: 'http://geotrekdemo.ecrins-parcnational.fr',
     ENABLE_HTML_MODE: true,
+    SHOW_HOME: true,
 
 
     // LANGUAGES PARAMETERS //

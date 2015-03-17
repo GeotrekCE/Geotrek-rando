@@ -21,7 +21,6 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
             controller: controller.LayoutController
         })
         .state('layout.root', {
-            parent: 'layout',
             url: '',
             views: {
                 'header' : {
@@ -43,7 +42,6 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
 
         })
         .state('layout.detail', {
-            parent: 'layout',
             url: ':slug/',
             views: {
                 'header' : {
