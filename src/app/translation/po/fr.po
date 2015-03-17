@@ -13,6 +13,9 @@ msgstr ""
 "X-Generator: Poedit 1.7.4\n"
 
 # CATEORIES
+msgid "CATEGORIES"
+msgstr "Catégories"
+
 msgid "ROUTES"
 msgstr "Parcours"
 
@@ -70,6 +73,9 @@ msgid "NEAR"
 msgstr "A proximité"
 
 # FILTERS
+msgid "THEMES"
+msgstr "Thèmes"
+
 msgid "DISTRICTS"
 msgstr "Massifs"
 
@@ -118,3 +124,7 @@ msgstr "Télécharger la fiche GPX"
 
 msgid "3D"
 msgstr "Voir l'itinéraire en 3D"
+
+# HOME PAGE
+msgid "LOOKING_FOR"
+msgstr "Que recherchez-vous ?"

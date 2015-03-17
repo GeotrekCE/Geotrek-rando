@@ -1,11 +1,31 @@
 <section id="home-page">
     <div class="header">
-        <h1>{{'BANNER_TEXT | translate'}}</h1>
+        <div class="logo">
+            <ng-include src="'images/main-logo.svg'"></ng-include>
+        </div>
+        <h1>{{'BANNER_TEXT' | translate}}</h1>
+        <div class="prefiltering">
+            <span>{{'LOOKING_FOR' | translate}}</span>
+            <form>
+                <div class="form-group">
+                    <select id="category-prefilter" class="form-control" ng-model="prefilter.categories">
+                        <option value="0">{{'CATEGORIES' | translate}}</option>
+                        <option ng-repeat="category in categories" value="{{category.id}}">{{category.label}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select id="theme-prefilter" class="form-control" ng-model="prefilter.themes">
+                        <option value="0">{{'THEMES' | translate}}</option>
+                        <option ng-repeat="theme in filters.themes" value="{{theme.id}}">{{theme.label}}</option>
+                    </select>
+                </div>
+                <input type="submit" ng-click="prefilterHome()"/>
+            </form>
+        </div>
     </div>
     <div class="content">
         
     </div>
     <div class="footer">
-        
     </div>
 </section>

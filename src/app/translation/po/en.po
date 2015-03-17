@@ -13,7 +13,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: en\n"
 
-# CATEORIES
+# CATEGORIES
+msgid "CATEGORIES"
+msgstr "Categories"
+
 msgid "ROUTES"
 msgstr "routes"
 
@@ -71,6 +74,9 @@ msgid "NEAR"
 msgstr "Nearby"
 
 # FILTERS
+msgid "THEMES"
+msgstr "Themes"
+
 msgid "CITIES"
 msgstr "Cities"
 
@@ -119,3 +125,7 @@ msgstr "Download the GPX file"
 
 msgid "3D"
 msgstr "3D visualization"
+
+# HOME PAGE
+msgid "LOOKING_FOR"
+msgstr "What are you looking for?"
