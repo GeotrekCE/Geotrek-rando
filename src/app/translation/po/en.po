@@ -127,5 +127,11 @@ msgid "3D"
 msgstr "3D visualization"
 
 # HOME PAGE
-msgid "LOOKING_FOR"
-msgstr "What are you looking for?"
+msgid "ACCESS_SITE"
+msgstr "Enter website"
+
+msgid "DONT_SHOW_HOME"
+msgstr "Don't display this page anymore"
+
+msgid "SUGGESTED"
+msgstr "The ones we love:"

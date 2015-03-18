@@ -4,28 +4,59 @@
             <ng-include src="'images/main-logo.svg'"></ng-include>
         </div>
         <h1>{{'BANNER_TEXT' | translate}}</h1>
-        <div class="prefiltering">
-            <span>{{'LOOKING_FOR' | translate}}</span>
-            <form>
-                <div class="form-group">
-                    <select id="category-prefilter" class="form-control" ng-model="prefilter.categories">
-                        <option value="0">{{'CATEGORIES' | translate}}</option>
-                        <option ng-repeat="category in categories" value="{{category.id}}">{{category.label}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <select id="theme-prefilter" class="form-control" ng-model="prefilter.themes">
-                        <option value="0">{{'THEMES' | translate}}</option>
-                        <option ng-repeat="theme in filters.themes" value="{{theme.id}}">{{theme.label}}</option>
-                    </select>
-                </div>
-                <input type="submit" ng-click="prefilterHome()"/>
-            </form>
+        <div class="access-chose">
+            <a href ng-click="accessSite()">{{'ACCESS_SITE' | translate}}</a>
+            <a class="disable-home" href ng-click="disableHomePage()">{{'DONT_SHOW_HOME' | translate}}</a>
         </div>
     </div>
     <div class="content">
-        
+        <div class="suggested-contents">
+            <h2>{{'SUGGESTED' | translate}}</h2>
+            <ul>
+                <li>
+                    <a ui-sref="layout.detail({slug: barre-des-cevennes})">
+                        <img src="http://geotrek-pnc.makina-corpus.net/media/paperclip/trekking_trek/429/09036.jpg.800x800_q85.jpg">
+                        <span>Bouger dans la nature</span>
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </li>
+                <li>
+                    <a ui-sref="layout.detail({slug: itineraire-de-test-complet})">
+                        <img src="http://geotrek-pnc.makina-corpus.net/media/paperclip/trekking_trek/411/07535.jpg.800x800_q85.jpg">
+                        <span>Découvrir et visiter</span>
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </li>
+                <li>
+                    <a ui-sref="layout.detail({slug: de-nos-jour-aux-dinosaures})">
+                        <img src="http://geotrek-pnc.makina-corpus.net/media/paperclip/trekking_trek/478/05850.jpg.800x800_q85.jpg">
+                        <span>Participer au Festival Nature</span>
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </li>
+                <li>
+                    <a ui-sref="layout.detail({slug: test-la-carline})">
+                        <img src="http://geotrek-pnc.makina-corpus.net/media/paperclip/tourism_touristiccontent/4/la_carline_03.jpg.800x800_q85.jpg">
+                        <span>Séjourner Esprit Parc national</span>
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="footer">
+        <ul class="parternships-left">
+            <li><img src="images/credits/logo-eco-tourrism-med.jpg" alt="Mediterranean experience of eco-tourism"></li>
+            <li><img src="images/credits/logo-enpi.jpg" alt="ENPI CBCMED"></li>
+            <li><img src="images/credits/logo-partenaires-parc.png" alt="Partenaire Parcs nationaux de France"></li>
+        </ul>
+        <ul class="legals">
+            <li><a href>Conceptions et crédits</a></li>
+            <li><a href>Mentions légales</a></li>
+            <li><a href>Contacts</a></li>
+        </ul>
+        <ul class="parternships-right">
+            <li><img src="images/credits/logo-financement-ue.png" alt="Project founded by the European Union"></li>
+        </ul>
     </div>
 </section>

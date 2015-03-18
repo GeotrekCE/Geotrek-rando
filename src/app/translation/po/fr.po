@@ -126,5 +126,12 @@ msgid "3D"
 msgstr "Voir l'itinéraire en 3D"
 
 # HOME PAGE
-msgid "LOOKING_FOR"
-msgstr "Que recherchez-vous ?"
+msgid "ACCESS_SITE"
+msgstr "Accéder au site"
+
+msgid "DONT_SHOW_HOME"
+msgstr "Ne plus montrer cette page"
+
+msgid "SUGGESTED"
+msgstr "Nos coup de coeurs :"
+

@@ -1,8 +1,12 @@
 'use strict';
 
 function LayoutController($rootScope, $scope, $state, resultsService, globalSettings) {
-    $scope.showHome = globalSettings.SHOW_HOME;
     $rootScope.currentState_name = $state.current.name;
+    if ($state.current.name === 'layout.root') {
+        $rootScope.showHome = globalSettings.SHOW_HOME;
+    } else {
+        $rootScope.showHome = false;
+    }
 
     $rootScope.$on("$stateChangeSuccess",  function (event, toState, toParams, fromState, fromParams) {
         // to be used for back button //won't work when page is reloaded.
@@ -11,7 +15,7 @@ function LayoutController($rootScope, $scope, $state, resultsService, globalSett
     });
     //back button function called from back button's ng-click="back()"
     $rootScope.back = function () {
-        if (!$rootScope.previousState_name) {
+        if (!$rootScope.previousState_name || $rootScope.previousState_name !== 'layout.root') {
             $state.go('layout.root');
         } else {
             window.history.back();
