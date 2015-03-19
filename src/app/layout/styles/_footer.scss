@@ -1,0 +1,59 @@
+#footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    font-size: 0.8rem;
+    line-height: 0.8rem;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    @media (max-width: 768px) {
+        display: none;
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        height: 10vh;
+        width: 25%;
+        flex-wrap: wrap;
+        justify-content: center;
+        display: inline-flex;
+        align-content: center;
+        @media (max-width: 500px) {
+            width: 100%;
+        }
+    }
+    li {
+        line-height: 10vh;
+        padding: 0 0.4rem;
+    }
+    a {
+        color: $dark-grey;
+    }
+    img {
+        height: 2.5rem;
+        width: auto;
+    }
+    .parternships-left {
+        @media (min-width: 500px) {
+            justify-content: flex-start;
+        }
+    }
+    .parternships-right {
+        @media (min-width: 500px) {
+            justify-content: flex-end;
+        }
+    }
+    .legals {
+        width: 50%;
+        margin: auto;
+        text-align: center;
+        @media (max-width: 500px) {
+            width: 25%;
+            order: -1;
+        }
+    }
+}

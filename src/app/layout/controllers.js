@@ -2,6 +2,7 @@
 
 function LayoutController($rootScope, $scope, $state, resultsService, globalSettings, homeService) {
     $rootScope.currentState_name = $state.current.name;
+    $rootScope.showFooterOnApp = globalSettings.SHOW_FOOTER;
     if ($state.current.name === 'layout.root') {
         if (globalSettings.SHOW_HOME) {
             $rootScope.showHome = !homeService.getChoice();

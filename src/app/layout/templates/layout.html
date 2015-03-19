@@ -1,8 +1,8 @@
 <div id="header" ui-view="header"></div>
-<div id="main-content">
+<div id="main-content" ng-class="{'footer-active': $root.showFooterOnApp}">
     <div id="sidebar" ui-view="sidebar"></div>
     <div ui-view="content" class="content"></div>
 </div>
-<div id="footer" ui-view="footer"></div>
+<div id="footer" ui-view="footer" ng-if="$root.showFooterOnApp"></div>
 <lightbox-gallery></lightbox-gallery>
 <home-page ng-if="$root.showHome"></home-page>

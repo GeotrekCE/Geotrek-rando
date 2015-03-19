@@ -138,3 +138,13 @@ msgstr "Ne plus montrer cette page"
 msgid "SUGGESTED"
 msgstr "Nos coup de coeurs :"
 
+# FOOTER
+
+msgid "LEGALS"
+msgstr "Mentions légales"
+
+msgid "CREDITS"
+msgstr "Conceptions et crédits"
+
+msgid "CONTACT"
+msgstr "Contact"

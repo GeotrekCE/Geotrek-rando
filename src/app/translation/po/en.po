@@ -138,3 +138,14 @@ msgstr "Don't display this page anymore"
 
 msgid "SUGGESTED"
 msgstr "The ones we love:"
+
+# FOOTER
+
+msgid "LEGALS"
+msgstr "Legals"
+
+msgid "CREDITS"
+msgstr "Credits"
+
+msgid "CONTACT"
+msgstr "Contact"

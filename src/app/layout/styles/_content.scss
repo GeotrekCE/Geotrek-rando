@@ -4,6 +4,11 @@
     top: -70px;
     height: 100%;
     position: relative;
+    @media (min-width: 768px) {
+        &.footer-active {
+            height: 90vh;
+        }
+    }
     @media (max-width: 768px) {
         padding-top: 50px;
         top: -50px;
