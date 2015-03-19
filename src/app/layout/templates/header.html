@@ -27,6 +27,11 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
             <ul class="nav navbar-nav static-pages navbar-right">
+                <li class="home" tooltip-placement="bottom" tooltip="{{'HOME' | translate}}">
+                    <a ui-sref="layout.root" ng-click="displayHomePage()">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </li>
                 <li class="static-pages dropdown">
                     <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         {{'ABOUT_US' | translate}} <span class="caret"></span>

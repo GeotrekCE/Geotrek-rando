@@ -5,8 +5,8 @@
         </div>
         <h1>{{'BANNER_TEXT' | translate}}</h1>
         <div class="access-chose">
-            <a href ng-click="accessSite()">{{'ACCESS_SITE' | translate}}</a>
-            <a class="disable-home" href ng-click="disableHomePage()">{{'DONT_SHOW_HOME' | translate}}</a>
+            <a href ng-click="toggleHome()"><span>{{'ACCESS_SITE' | translate}}</span></a>
+            <a class="disable-home" href ng-click="disableHomePage()"><span>{{'DONT_SHOW_HOME' | translate}}</span></a>
         </div>
     </div>
     <div class="content">

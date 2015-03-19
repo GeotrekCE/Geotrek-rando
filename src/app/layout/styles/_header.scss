@@ -158,18 +158,18 @@
                 padding: 1em 2em;
             }
         }
-        .glyphicon {
-            color: $dark-grey;
+        .glyphicon, .fa {
+            color: inherit;
             font-size: 1.1em;
             line-height: 1.1em;
             cursor: pointer;
         }
-        > .glyphicon {
+        > .glyphicon, > .fa {
             padding: 26px 15px 28px;
         }
         &:hover, &:focus {
             background-color: $light-grey;
-            > a, > .glyphicon, > a > .glyphicon {
+            > a, > .glyphicon, > .fa  {
                 color: $primary-color;
             }
         }

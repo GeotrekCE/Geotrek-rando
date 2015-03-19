@@ -8,6 +8,7 @@
     overflow: auto;
     background: white;
     z-index: 999999;
+    transition: opacity 0.3s ease-out;
     .header {
         overflow: hidden;
         position: relative;
@@ -39,6 +40,7 @@
             a {
                 display: inline-block;
                 height: 3rem;
+                line-height: 1.5rem;
                 padding: 6px 1.5rem;
                 margin: 1rem;
                 background: $primary-color;
@@ -53,6 +55,9 @@
                     background: $neutral-grey;
                     border-top: 2px solid $neutral-grey;
                     border-bottom: 2px solid $dark-grey;
+                }
+                span {
+                    vertical-align: middle;
                 }
             }
         }

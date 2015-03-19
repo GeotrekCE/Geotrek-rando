@@ -1,13 +1,14 @@
 'use strict';
 
-function HomeController($scope, $rootScope, $location, categoriesService, filtersService, resultsService) {
+function HomeController($scope, $rootScope, homeService) {
 
-    $scope.accessSite = function () {
-        $rootScope.showHome = false;
+    $scope.toggleHome = function () {
+        $rootScope.showHome = !$rootScope.showHome;
     };
 
     $scope.disableHomePage = function () {
-        $scope.accessSite();
+        homeService.setChoice();
+        $scope.toggleHome();
     };
 
 }

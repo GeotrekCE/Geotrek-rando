@@ -1,9 +1,11 @@
 'use strict';
 
-function LayoutController($rootScope, $scope, $state, resultsService, globalSettings) {
+function LayoutController($rootScope, $scope, $state, resultsService, globalSettings, homeService) {
     $rootScope.currentState_name = $state.current.name;
     if ($state.current.name === 'layout.root') {
-        $rootScope.showHome = globalSettings.SHOW_HOME;
+        if (globalSettings.SHOW_HOME) {
+            $rootScope.showHome = !homeService.getChoice();
+        }
     } else {
         $rootScope.showHome = false;
     }
@@ -34,7 +36,12 @@ function LayoutController($rootScope, $scope, $state, resultsService, globalSett
     $rootScope.mapIsShown = false;
 }
 
-function HeaderController() {
+function HeaderController($rootScope, $scope) {
+
+    $scope.displayHomePage = function () {
+        $rootScope.showHome = true;
+    };
+
 }
 
 function SidebarHomeController() {

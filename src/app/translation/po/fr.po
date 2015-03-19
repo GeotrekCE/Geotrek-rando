@@ -95,6 +95,9 @@ msgstr "Ouvrir le menu"
 msgid "BANNER_TEXT"
 msgstr "Geotrek Rando"
 
+msgid "HOME"
+msgstr "Afficher la page d'accueil"
+
 msgid "ABOUT_US"
 msgstr "En savoir plus"
 
