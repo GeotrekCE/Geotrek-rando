@@ -18,12 +18,25 @@
         margin: 0;
         height: 10vh;
         width: 25%;
+        text-align: center;
         flex-wrap: wrap;
         justify-content: center;
         display: inline-flex;
         align-content: center;
         @media (max-width: 500px) {
             width: 100%;
+        }
+        &:first-child {
+            @media (min-width: 500px) {
+                justify-content: flex-start;
+                text-align: left;
+            }
+        }
+        &:last-child {
+            @media (min-width: 500px) {
+                justify-content: flex-end;
+                text-align: right;
+            }
         }
     }
     li {
@@ -38,19 +51,11 @@
         width: auto;
     }
     .parternships-left {
-        @media (min-width: 500px) {
-            justify-content: flex-start;
-        }
-    }
-    .parternships-right {
-        @media (min-width: 500px) {
-            justify-content: flex-end;
-        }
+        
     }
     .legals {
         width: 50%;
         margin: auto;
-        text-align: center;
         @media (max-width: 500px) {
             width: 25%;
             order: -1;
