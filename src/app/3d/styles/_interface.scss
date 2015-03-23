@@ -1,0 +1,83 @@
+/**
+ * CSS Module : interface
+ * 
+ * @author: Célian GARCIA
+ */
+
+@bg_color: rgba(255,255,255, 0.2);
+
+.interface {
+    position: absolute;
+    z-index: 0;
+    top: 0px;
+    left: 0px;
+    width : 100%;
+    height: 100%;
+    pointer-events: none;
+    
+    h1 {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 50px;
+        width: 34em;
+        height: 6em;
+        
+        margin: 0;
+        font-size: 100%;
+        font-weight: 400;
+        vertical-align: baseline;
+        
+        background: url('../../img/logo_geotrek.png') -3px 0px no-repeat ;
+    }
+    
+    .geotrek_link {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+
+        background: @bg_color;
+        border: none;
+        border-radius: 0 0 0.35em 0.35em;
+
+        line-height: 6em;
+        letter-spacing: 3px;
+        text-align: center;
+        text-transform: uppercase;
+
+        span {
+            margin: 0;
+            padding: 0;
+            font-size: 100%;
+            vertical-align: baseline;
+            padding-left: 5em;
+        }
+    }
+    
+    .attribution {
+        background-color: @bg_color;
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        height: auto;
+        width: auto;
+        border-radius: 0.35em;
+    }
+}
+
+.poi{
+    background-color : @bg_color;
+    position : absolute;
+    width: auto;
+    height: auto;
+    padding: 2px;
+    border-radius: 0.35em;
+    text-align:center;
+    display : none;
+}
+
+.interface * {
+    pointer-events: auto;
+}
+
+

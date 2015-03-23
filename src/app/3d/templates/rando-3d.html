@@ -1,0 +1,98 @@
+<div class="3d-popup">
+    <section class="interface">
+        <h1>
+            <a class="geotrek_link" href="http://geotrek.fr/" target="_blank" >
+                <span>Geotrek 3D</span>
+            </a>
+            <p> Visualisation des données de Geotrek en 3D grâce à 
+                <a href='http://www.babylonjs.com/' target='_blank'>
+                    <strong>BabylonJs</strong>
+                </a> 
+            </p>
+        </h1>
+
+        <div class="controls controls--examine" >
+            <h3>Mode Examine</h3>
+            <span class="controls-description"></span>
+            <span> Zoom : <b>Molette souris</b></span>
+            <span> Inclinaison/Rotation : <b>Clic Gauche</b></span>
+            <span> Se déplacer : <img src="/images/3d/icon_783__.png"/></span>
+        </div>
+        
+        <div class="controls controls--bird" >
+            <h3>Mode Oiseau</h3>
+            <span class="controls-description"></span>
+            <span> Zoom : <b>Molette souris</b></span>
+            <span> Tourner regard : <b>Clic Gauche</b></span>
+            <span> Se déplacer : <img src="/images/3d/icon_783__.png"/></span>
+        </div>
+
+        <div class="controls controls--hiker" >
+            <h3>Mode Randonneur</h3>
+            <span class="controls-description"></span>
+            <span> Tourner regard : <b>Clic Gauche</b></span>
+            <span> Play/Pause : <b>Espace</b></span>
+            <span> Stop : <b>Entrée</b></span>
+        </div>
+
+        <div class="attribution" style="padding:3px;">
+            <span>
+                Tiles from  <a href='https://www.mapbox.com/about/maps/' target='_blank'><strong>©Mapbox</strong></a> 
+            </span>
+        </div>
+        
+        <ul class="camera_switcher">
+            <li class="camera camera--examine camera--disabled">
+                <span class="camera-icon">
+                    <img src="/images/3d/camera--disabled.png"></img>
+                </span>
+                <span class="camera-title"> Exam</span>
+                <span class="camera-description"></span>
+            </li>
+            <li class="camera camera--bird camera--disabled">
+                <span class="camera-icon">
+                    <img src="/images/3d/camera--disabled.png"></img>
+                </span>
+                <span class="camera-title"> Oiseau</span>
+                <span class="camera-description"></span>
+            </li>
+            <li class="camera camera--hiker camera--disabled">
+                <span class="camera-icon">
+                    <img src="/images/3d/camera--disabled.png"></img>
+                </span>
+                <span class="camera-title"> Rando</span>
+                <span class="camera-description"></span>
+            </li>
+        </ul>
+    </section>
+    
+    <canvas id="canvas_renderer"></canvas>
+
+    <div class="poi_side">
+        <img class="close_btn" src="/images/3d/arrow.png"></img>
+        <h2></h2>
+        <span class="description"></span>
+    </div>
+
+    <div class="poi poi--clicked">
+    </div>
+
+    <div class="poi poi--hover">
+    </div>
+
+    <!-- Underscore-->
+    <script src="/app/3d/lib/underscore.js"></script>
+    
+    <!-- BABYLON-->
+    <script src="/app/3d/lib/babylon.1.12.js"></script>
+    
+    <!-- TweenLite -->
+    <script src="/app/3d/lib/EasePack.min.js"></script>
+    <script src="/app/3d/lib/TweenLite.min.js"></script>
+    <script src="/app/3d/lib/TimelineLite.min.js"></script>
+    <script src="/app/3d/lib/BezierPlugin.min.js"></script>
+    <script src="/app/3d/lib/DirectionalRotationPlugin.min.js"></script>
+
+    <!-- Rando3D-->
+    <script src="/app/3d/lib/rando3D.1.3.js"></script>
+</div>

@@ -9,7 +9,8 @@ function settingsFactory(globalSettings) {
 
     // PUBLIC VAR
     //
-    var treksUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.TREK_DIR + '/',
+    var treksUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.TREKS_DIR + '/',
+        trekUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.TREK_DIR + '/',
         poisUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.POI_DIR + '/',
         eventsUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.TOURISTIC_EVENTS_DIR + '/',
         touristicUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.TOURISTIC_CONTENTS_DIR + '/';
@@ -31,6 +32,7 @@ function settingsFactory(globalSettings) {
 
         //PUBLIC VAR
         treksUrl: treksUrl,
+        trekUrl: trekUrl,
         poisUrl: poisUrl,
         eventsUrl: eventsUrl,
         touristicUrl: touristicUrl,

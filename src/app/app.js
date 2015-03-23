@@ -18,6 +18,7 @@ var dependencies = [
     'rando.favorites',
     'rando.gallery',
     'rando.home',
+    'rando.rando3D',
 
 
     // External stuff
@@ -40,6 +41,7 @@ require('angular-slider');
 require('angular-translate');
 require('ngResource');
 require('bootstrap');
+require('sparklines');
 require('leaflet-minimap');
 require('leaflet.markercluster');
 require('leaflet.fullscreen');
@@ -64,3 +66,4 @@ require('./detail');
 require('./favorites');
 require('./gallery');
 require('./home');
+require('./3d');
