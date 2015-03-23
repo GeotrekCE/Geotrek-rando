@@ -95,6 +95,19 @@
     stroke-opacity: 1;
 }
 
+.elevationMarker {
+    display: block;
+    border-radius: 50%;
+    width: 16px;
+    height: 15px;
+    background: $light-grey;
+    border: 4px solid $dark-grey;
+    opacity: 0;
+    &.active {
+        opacity: 1;
+    }
+}
+
 .detail-map.hide-near-elements .near-marker {
     display: none;
 }

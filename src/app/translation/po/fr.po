@@ -12,7 +12,11 @@ msgstr ""
 "Language: fr\n"
 "X-Generator: Poedit 1.7.4\n"
 
+
 # CATEORIES
+#
+#
+
 msgid "CATEGORIES"
 msgstr "Catégories"
 
@@ -31,14 +35,22 @@ msgstr "Dénivelé :"
 msgid "ALL"
 msgstr "Toutes"
 
+
 # FAVORITES
+#
+#
+
 msgid "FAVORITES"
 msgstr "Favoris"
 
 msgid "NO_FAVORITES"
 msgstr "Vous n'avez pas encore de favoris !"
 
+
 # DETAILS
+#
+#
+
 msgid "START"
 msgstr "Départ :"
 
@@ -72,7 +84,26 @@ msgstr "Patrimoine"
 msgid "NEAR"
 msgstr "A proximité"
 
+msgid "PROFILE_ALTI"
+msgstr "Profil altimétrique"
+
+msgid "ELEVATIION_IN_M"
+msgstr "Altitude (m)"
+
+msgid "MIN"
+msgstr "Min :"
+
+msgid "MAX"
+msgstr "Max :"
+
+msgid "LENGTH_IN_M"
+msgstr "Distance (m)"
+
+
 # FILTERS
+#
+#
+
 msgid "THEMES"
 msgstr "Thèmes"
 
@@ -88,7 +119,11 @@ msgstr "Communes"
 msgid "RESET"
 msgstr "Réinitialiser"
 
+
 # LAYOUT
+#
+#
+
 msgid "TOGGLE_NAV"
 msgstr "Ouvrir le menu"
 
@@ -128,7 +163,11 @@ msgstr "Télécharger la fiche GPX"
 msgid "3D"
 msgstr "Voir l'itinéraire en 3D"
 
+
 # HOME PAGE
+#
+#
+
 msgid "ACCESS_SITE"
 msgstr "Accéder au site"
 
@@ -138,7 +177,10 @@ msgstr "Ne plus montrer cette page"
 msgid "SUGGESTED"
 msgstr "Nos coup de coeurs :"
 
+
 # FOOTER
+#
+#
 
 msgid "LEGALS"
 msgstr "Mentions légales"

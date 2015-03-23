@@ -13,7 +13,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: en\n"
 
+
 # CATEGORIES
+#
+#
+
 msgid "CATEGORIES"
 msgstr "Categories"
 
@@ -32,14 +36,22 @@ msgstr "Ascent:"
 msgid "ALL"
 msgstr "All"
 
+
 # FAVORITES
+#
+#
+
 msgid "FAVORITES"
 msgstr "Favorites"
 
 msgid "NO_FAVORITES"
 msgstr "You don't have any favorites yet !"
 
+
 # DETAILS
+#
+#
+
 msgid "START"
 msgstr "Start:"
 
@@ -73,7 +85,26 @@ msgstr "POIS"
 msgid "NEAR"
 msgstr "Nearby"
 
+msgid "PROFILE_ALTI"
+msgstr "Elevation chart"
+
+msgid "ELEVATIION_IN_M"
+msgstr "Elevation (m)"
+
+msgid "MIN"
+msgstr "Min:"
+
+msgid "MAX"
+msgstr "Max:"
+
+msgid "LENGTH_IN_M"
+msgstr "Length (m)"
+
+
 # FILTERS
+#
+#
+
 msgid "THEMES"
 msgstr "Themes"
 
@@ -89,7 +120,11 @@ msgstr "Areas"
 msgid "RESET"
 msgstr "Reset"
 
+
 # LAYOUT
+#
+#
+
 msgid "TOGGLE_NAV"
 msgstr "Toggle navigation"
 
@@ -129,7 +164,11 @@ msgstr "Download the GPX file"
 msgid "3D"
 msgstr "3D visualization"
 
+
 # HOME PAGE
+#
+#
+
 msgid "ACCESS_SITE"
 msgstr "Enter website"
 
@@ -139,7 +178,10 @@ msgstr "Don't display this page anymore"
 msgid "SUGGESTED"
 msgstr "The ones we love:"
 
+
 # FOOTER
+#
+#
 
 msgid "LEGALS"
 msgstr "Legals"

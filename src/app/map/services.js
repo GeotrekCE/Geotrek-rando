@@ -1,6 +1,6 @@
 'use strict';
 
-function mapService($q, $state, utilsFactory, globalSettings, treksService, poisService, iconsService) {
+function mapService($q, $state, $resource, utilsFactory, globalSettings, settingsFactory, treksService, poisService, iconsService) {
 
     var self = this,
         loadingMarkers = false;
@@ -456,12 +456,91 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
 
     this.updateBounds = function (updateBounds, layer, padding) {
         if (padding === undefined || padding < 0) {
-            var padding = 0;
+            padding = 0;
         }
         if ((updateBounds === undefined) || (updateBounds === true)) {
             self.map.fitBounds(layer.getBounds().pad(padding));
         }
 
+    };
+
+    this.createElevation = function (result) {
+        /*
+         * Load altimetric profile from JSON
+         */
+
+        var url = settingsFactory.trekUrl + result.id + '/profile.json';
+        var requests = $resource(url, {}, {
+            query: {
+                method: 'GET'
+            }
+        }, {stripTrailingSlashes: false});
+
+        requests.query().$promise
+            .then(function (data) {
+                var primaryColor = window.getComputedStyle(document.querySelector('.informations .element-title')).backgroundColor;
+                var transparentizedColor = primaryColor.replace(/^(rgb)\((\d{1,3},\s*\d{1,3},\s*\d{1,3})\)$/gm, '$1a($2, 0.8)');
+
+                function updateSparkline() {
+                    jQuery('#elevation .canvas-container').sparkline(data.profile,
+                        L.Util.extend(
+                            {
+                                tooltipSuffix: ' m',
+                                numberDigitGroupSep: '',
+                                width: '100%',
+                                height: 150
+                            },
+                            {
+                                type: 'line',
+                                lineWidth: 3,
+                                spotColor: 'transparent',
+                                minSpotColor: 'transparent',
+                                maxSpotColor: 'transparent',
+                                fillColor: transparentizedColor,
+                                lineColor: primaryColor,
+                                highlightSpotColor: 'rgba(0, 0, 0, 0.5)',
+                                highlightLineColor: primaryColor
+                            }
+                        ));
+                }
+
+                updateSparkline();
+
+                self.currentElevationPoint = L.marker([0, 0], {
+                    icon: L.divIcon({
+                        iconSize: [16, 16],
+                        iconAnchor: [8, 8],
+                        className: 'elevationMarker'
+                    })
+                });
+                self.currentElevationPoint.addTo(self.map);
+                console.log(self.currentElevationPoint);
+
+                jQuery(window).on('resize', function () {
+                    updateSparkline();
+                });
+
+                jQuery('#elevation').on('sparklineRegionChange', function (ev) {
+                    var sparkline = ev.sparklines[0],
+                        region = sparkline.getCurrentRegionFields();
+                    var currentPoint = data.profile.filter(function testLength(element) {
+                        if (element[0] === region.x ) {
+                            return element;
+                        }
+                    });
+                    self.currentElevationPoint.setLatLng([currentPoint[0][2][1], currentPoint[0][2][0]]);
+                    //value = region.y;
+                    jQuery('#mouseoverprofil').text(Math.round(region.x) + "m");
+                    // Trigger global event
+                    jQuery('#elevation').trigger('hover:distance', region.x);
+                }).on('mouseover', function () {
+                    jQuery('.elevationMarker').addClass('active');
+                }).on('mouseleave', function () {
+                    jQuery('.elevationMarker').removeClass('active');
+                    jQuery('#mouseoverprofil').text('');
+                    jQuery('#elevation').trigger('hover:distance', null);
+                });
+            });
     };
 
     // Add treks geojson to the map
@@ -554,6 +633,8 @@ function mapService($q, $state, utilsFactory, globalSettings, treksService, pois
             self.loadingMarkers = true;
 
             this.clearAllLayers();
+
+            this.createElevation(result);
 
             if (result.geometry.type !== "Point") {
                 currentLayer = self._treksgeoJsonLayer;

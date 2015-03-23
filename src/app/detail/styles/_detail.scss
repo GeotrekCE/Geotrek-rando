@@ -235,7 +235,21 @@
                 }
             }
         }
-        
+        #elevation {
+            width: 100%;
+            .chart-container {
+                margin: 0.4rem;
+            }
+            .axislabel {
+                display: inline-block;
+                font-size: 0.7rem;
+                line-height: 0.7rem;
+                margin: 0.4rem 0;
+                & + .axislabel {
+                    margin-left: 0.5rem;
+                }
+            }
+        }
         .is-park-centered, .advice, .disabled-infrastructure {
             padding: 1em;
             color: $dark-grey;
@@ -476,4 +490,8 @@
             width: 100%;
         }
     }
+}
+.jqstooltip {
+    height: auto !important;
+    width: auto !important;
 }

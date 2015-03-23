@@ -34,7 +34,8 @@
     "leaflet-minimap": "./node_modules/leaflet-minimap/src/Control.MiniMap.js",
     "leaflet.markercluster": "./node_modules/leaflet.markercluster/dist/leaflet.markercluster.js",
     "leaflet.fullscreen": "./node_modules/leaflet.fullscreen/Control.FullScreen.js",
-    "lodash": "./node_modules/lodash/lodash.js"
+    "lodash": "./node_modules/lodash/lodash.js",
+    "sparklines": "./src/app/vendors/scripts/sparklines.min.js"
   },
   "devDependencies": {
     "browser-sync": "~1.3.6",
