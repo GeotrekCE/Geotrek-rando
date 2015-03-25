@@ -36,6 +36,17 @@ msgid "ALL"
 msgstr "Toutes"
 
 
+# RESULTS
+#
+#
+
+msgid "RESULT"
+msgstr "résultat"
+
+msgid "RESULTS"
+msgstr "résultats"
+
+
 # FAVORITES
 #
 #

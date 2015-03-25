@@ -4,6 +4,17 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    .results-count {
+        display: block;
+        width: 100%;
+        color: lighten($dark-grey, 20%);
+        background: white;
+        text-align: center;
+        .number {
+            color: $dark-grey;
+            font-weight: bolder;
+        }
+    }
     & > ul {
         background: $light-grey;
         list-style: none;
