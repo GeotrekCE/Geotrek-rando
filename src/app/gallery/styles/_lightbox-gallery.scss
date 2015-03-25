@@ -6,7 +6,7 @@
     height: 100%;
     padding: 3em;
     z-index: 99999999;
-    background: transparentize($dark-grey, 0.2);
+    background: transparentize(black, 0.1);
     overflow: hidden;
     opacity: 0;
     transition: opacity 0.3s ease 0.2s, top 0s ease 0.5s;

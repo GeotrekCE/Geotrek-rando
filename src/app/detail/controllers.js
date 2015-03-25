@@ -77,17 +77,6 @@ function DetailController($scope, $rootScope, $state, $q, $stateParams, utilsFac
                     getNearElements(result);
                     initCollapse();
                     $rootScope.$emit('initGallery', result.properties.pictures);
-                    console.log(result);
-                    // if (forceRefresh) {
-                    //     $state.go(
-                    //         'layout.detail',
-                    //         {slug: result.properties.slug},
-                    //         {
-                    //             location: "replace",
-                    //             inherit: false
-                    //         }
-                    //     );
-                    // }
                 },
                 function (error) {
                     $state.go("layout.root");
