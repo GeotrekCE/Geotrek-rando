@@ -70,7 +70,8 @@ var constants = {
 
 
     API_DIR: 'api',
-    TREK_DIR: 'treks',
+    TREKS_DIR: 'treks',
+    TREK_DIR: 'trek',
     POI_DIR: 'pois',
     TOURISTIC_EVENTS_DIR: 'touristicevents',
     TOURISTIC_CONTENTS_DIR: 'touristiccontents',
