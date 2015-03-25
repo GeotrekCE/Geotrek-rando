@@ -159,37 +159,35 @@
                     left: 0;
                 }
             }
-            .text {
-                .pictos {
-                    ul {
-                        list-style: none;
-                        padding: 0.6em;
-                        margin: 0;
-                        display: flex;
-                        flex-wrap: wrap;
-                        li {
-                            padding: 0.6em 1em;
-                            text-align: center;
-                            height: 3em;
-                            line-height: 3em;
-                            & > div {
-                                vertical-align: top;
-                                line-height: normal;
-                                display: inline-block;
-                                width: 100%;
-                            }
-                            img, svg {
-                                width: 2em;
-                                height: 2em;
-                                vertical-align: middle;
-                            }
-                            svg, svg .base {
-                                fill: $dark-grey;
-                            }
-                            span {
-                                vertical-align: middle;
-                            }
-                        }
+        }
+        .pictos {
+            ul {
+                list-style: none;
+                padding: 0.6em;
+                margin: 0;
+                display: flex;
+                flex-wrap: wrap;
+                li {
+                    padding: 0.2em 0.6em;
+                    text-align: center;
+                    height: 2.4em;
+                    line-height: 2.4em;
+                    & > div {
+                        vertical-align: top;
+                        line-height: normal;
+                        display: inline-block;
+                        width: 100%;
+                    }
+                    img, svg {
+                        width: 1.6em;
+                        height: 1.6em;
+                        vertical-align: middle;
+                    }
+                    svg, svg .base {
+                        fill: $dark-grey;
+                    }
+                    span {
+                        vertical-align: middle;
                     }
                 }
             }
