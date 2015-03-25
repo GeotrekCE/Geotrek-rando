@@ -119,6 +119,8 @@ msgstr "Communes"
 msgid "RESET"
 msgstr "Réinitialiser"
 
+msgid "SELECTED"
+msgstr "sélectionnées"
 
 # LAYOUT
 #

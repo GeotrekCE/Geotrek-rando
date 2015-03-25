@@ -11,9 +11,16 @@
             </div>
             <div class="geo-filters">
                 <div class="selector cities" ng-class="{empty: filters.cities.length === 0}">
-                    <span>{{'CITIES' | translate}} <span class="caret"></span> <span ng-if="filterLength.cities > 0" class="badge">{{filterLength.cities}}</span></span>
+                    <span ng-if="filterLength.cities > 0">{{filterLength.cities}} {{'CITIES' | translate}} {{'SELECTED' | translate}} <span class="caret"></span></span>
+                    <span ng-if="!filterLength.cities || filterLength.cities === 0">{{'CITIES' | translate}} <span class="caret"></span></span>
                     <div class="choices">
-                        <div ng-repeat="city in filters.cities" class="city form-group">
+                        <div class="input-group">
+                            <input type="search" ng-model="citiesAuto" placeholder="{{'SEARCH' | translate}}">
+                            <div class="input-group-addon">
+                                <i class="fa fa-search"></i>
+                            </div>
+                        </div>
+                        <div ng-repeat="city in filters.cities | filter:citiesAuto" class="city form-group">
                             <input type="checkbox" id="city-{{city.code}}" value="{{city.code}}" ng-model="activeFilters.cities[city.code]" ng-false-value="null" ng-change="propagateActiveFilters()"/>
                             <label for="city-{{city.code}}">
                                 <span>{{city.name}}</span>
@@ -22,9 +29,16 @@
                     </div>
                 </div>
                 <div class="selector districts" ng-class="{empty: filters.districts.length === 0}">
-                    <span>{{'DISTRICTS' | translate}} <span class="caret"></span> <span ng-if="filterLength.districts > 0" class="badge">{{filterLength.districts}}</span></span>
+                    <span ng-if="filterLength.districts > 0">{{filterLength.districts}} {{'DISTRICTS' | translate}} {{'SELECTED' | translate}} <span class="caret"></span></span>
+                    <span ng-if="!filterLength.districts || filterLength.districts === 0">{{'DISTRICTS' | translate}} <span class="caret"></span></span>
                     <div class="choices">
-                        <div ng-repeat="district in filters.districts" class="district form-group">
+                        <div class="input-group">
+                            <input type="search" ng-model="districtsAuto" placeholder="{{'SEARCH' | translate}}">
+                            <div class="input-group-addon">
+                                <i class="fa fa-search"></i>
+                            </div>
+                        </div>
+                        <div ng-repeat="district in filters.districts | filter:districtsAuto" class="district form-group">
                             <input type="checkbox" id="district-{{district.id}}" value="{{district.id}}" ng-false-value="null" ng-model="activeFilters.districts[district.id]"  ng-change="propagateActiveFilters()"/>
                             <label for="district-{{district.id}}">
                                 <span>{{district.name}}</span>

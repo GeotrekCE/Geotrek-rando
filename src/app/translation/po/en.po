@@ -120,6 +120,8 @@ msgstr "Areas"
 msgid "RESET"
 msgstr "Reset"
 
+msgid "SELECTED"
+msgstr "selected"
 
 # LAYOUT
 #

@@ -64,6 +64,28 @@
                         overflow-x: hidden;
                         z-index: 11;
                         background: white;
+                        & > .input-group {
+                            background: white;
+                            margin: 0.2rem;
+                            padding: 0.3rem;
+                            border: 1px solid $neutral-grey;
+                            input {
+                                width: 100%;
+                                border: none;
+                                font-size: 0.8rem;
+                                line-height: 0.8rem;
+                                vertical-align: middle;
+                            }
+                            .input-group-addon {
+                                background: none;
+                                border: none;
+                                padding: 0 0.2rem;
+                                i {
+                                    font-size: 0.8rem;
+                                    line-height: 0.8rem;
+                                }
+                            }
+                        }
                         .form-group {
                             margin: 0;
                             background: white;
