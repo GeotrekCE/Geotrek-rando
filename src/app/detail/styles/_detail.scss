@@ -131,7 +131,7 @@
                     width: 6em;
                     height: 100%;
                     background: light-grey;
-                    overflow-x: auto;
+                    overflow: hidden;
                     white-space: nowrap;
                     background: transparentize(black, 0.4);
                     li {
@@ -140,6 +140,9 @@
                         display: block;
                         margin: 0.6em 0;
                         cursor: pointer;
+                        &:first-child {
+                            margin-top: 0;
+                        }
                         img {
                             width: 100%;
                         }

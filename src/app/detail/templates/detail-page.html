@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <ul ng-if="result.properties.pictures.length > 1">
-                        <li ng-repeat="picture in result.properties.pictures" ng-click="showLightbox($index)">
+                        <li ng-repeat="picture in result.properties.pictures" ng-if="!$first" ng-click="showLightbox($index)">
                             <img ng-src="{{picture.url}}" ng-alt="{{picture.title}}">
                         </li>
                     </ul>
