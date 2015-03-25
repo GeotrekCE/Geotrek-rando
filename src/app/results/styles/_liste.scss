@@ -30,7 +30,7 @@
         & > li {
             flex: 1 1 40%;
             max-height: 20rem;
-            padding: 0 1em;
+            padding: 0 1em 2.4em;
             display: block;
             position: relative;
             border-left: 10px solid $primary-color;
@@ -118,16 +118,21 @@
                 padding: 0;
                 margin: 0;
                 list-style: none;
-                min-height: 2em;
+                height: 2em;
+                position: absolute;
+                bottom: 0.4rem;
                 li {
                     margin: 0.4em;
                     display: inline-block;
                     height: 1.6em;
                     width: 1.6em;
                     overflow: hidden;
-                    img {
-                        height: auto;
-                        height: 100%;
+                    img, svg {
+                        max-width: 100%;
+                        max-height: 100%;
+                    }
+                    svg, svg .base {
+                        fill: $dark-grey;
                     }
                 }
             }

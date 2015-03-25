@@ -1,6 +1,6 @@
 'use strict';
 
-function ResultsListeController($scope, $rootScope, favoritesService, resultsService) {
+function ResultsListeController($scope, $rootScope, utilsFactory, favoritesService, resultsService) {
 
     function updateResults(forceRefresh) {
 
@@ -40,7 +40,7 @@ function ResultsListeController($scope, $rootScope, favoritesService, resultsSer
     };
 
     $scope.isInFavorites = favoritesService.isInFavorites;
-
+    $scope.isSVG = utilsFactory.isSVG;
     updateResults();
 
     $scope.$on('updateFilters', function () {
