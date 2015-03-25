@@ -107,7 +107,8 @@ function utilsFactory($sce) {
     };
 
     var sanitizeData = function (data) {
-        return $sce.trustAsHtml(data);
+        var parsed = data.replace(/style="[a-zA-Z0-9:;\.\s\(\)\-\,]*"/gi, '');
+        return $sce.trustAsHtml(parsed);
     };
 
     var parseLength = function (length) {
