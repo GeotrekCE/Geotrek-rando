@@ -70,7 +70,7 @@ msgid "ARRIVAL"
 msgstr "Arrival:"
 
 msgid "LOOP"
-msgstr "Loop:"
+msgstr "Start / Arrival:"
 
 msgid "PARK_CENTERED"
 msgstr "Park centered"

@@ -69,7 +69,7 @@ msgid "ARRIVAL"
 msgstr "Arrivée :"
 
 msgid "LOOP"
-msgstr "Boucle :"
+msgstr "Départ / Arrivée :"
 
 msgid "PARK_CENTERED"
 msgstr "Cet itinéraire est dans le coeur du parc national, veuillez consulter la réglementation."
