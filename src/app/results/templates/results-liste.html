@@ -1,7 +1,7 @@
 <section class="results-liste">
     <global-filters></global-filters>
     <ul>
-        <li ng-repeat="result in results" id="result-category-{{result.properties.category.id}}-{{result.id}}" ng-mouseover="hoverLayerElement(result,'enter')" ng-mouseleave="hoverLayerElement(result,'leave')" class="result category-{{result.properties.category.id}}">
+        <li ng-repeat="result in results | orderBy:'properties.name'" id="result-category-{{result.properties.category.id}}-{{result.id}}" ng-mouseover="hoverLayerElement(result,'enter')" ng-mouseleave="hoverLayerElement(result,'leave')" class="result category-{{result.properties.category.id}}">
 
             <div>
                 <div class="fav-or-not" ng-click="toggleFavorites(result)" ng-class="{isFav: isInFavorites(result)}">
