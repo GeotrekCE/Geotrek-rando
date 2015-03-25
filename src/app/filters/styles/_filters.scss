@@ -149,8 +149,19 @@
         .themes {
             flex: 1;
             display: flex;
-            flex-wrap: wrap;
             padding-bottom: 0.4rem;
+            h4 {
+                display: block;
+                padding: 0 0.5rem;
+                color: $dark-grey;
+                font-size: 0.8rem;
+                align-self: center;
+            }
+            .values {
+                flex: 1;
+                display: flex;
+                flex-wrap: wrap;
+            }
             .theme {
                 height: 2.5em;
                 min-width: 3em;

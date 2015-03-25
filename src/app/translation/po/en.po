@@ -106,7 +106,7 @@ msgstr "Length (m)"
 #
 
 msgid "THEMES"
-msgstr "Themes"
+msgstr "Themes:"
 
 msgid "CITIES"
 msgstr "Cities"

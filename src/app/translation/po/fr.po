@@ -105,7 +105,7 @@ msgstr "Distance (m)"
 #
 
 msgid "THEMES"
-msgstr "Thèmes"
+msgstr "Thèmes :"
 
 msgid "DISTRICTS"
 msgstr "Massifs"

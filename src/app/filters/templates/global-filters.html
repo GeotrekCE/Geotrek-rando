@@ -49,13 +49,16 @@
             </div>
         </div>
         <div class="themes">
-            <div ng-repeat="theme in filters.themes" class="theme form-group" tooltip-placement="top" tooltip="{{theme.label}}">
-                <input type="checkbox" id="theme-{{theme.id}}" value="{{theme.id}}" ng-model="activeFilters.themes[theme.id]" ng-false-value="null" ng-change="propagateActiveFilters()"/>
-                <label for="theme-{{theme.id}}">
-                    <span class="sr-only">{{theme.label}}</span>
-                    <img ng-if="!isSVG(theme.pictogram)" ng-src="{{theme.pictogram}}" ng-alt="{{theme.label}}">
-                    <ng-include ng-if="isSVG(theme.pictogram)" src="theme.pictogram"></ng-include>
-                </label>
+            <h4>{{'THEMES' | translate}}</h4>
+            <div class="values">
+                <div ng-repeat="theme in filters.themes" class="theme form-group" tooltip-placement="top" tooltip="{{theme.label}}">
+                    <input type="checkbox" id="theme-{{theme.id}}" value="{{theme.id}}" ng-model="activeFilters.themes[theme.id]" ng-false-value="null" ng-change="propagateActiveFilters()"/>
+                    <label for="theme-{{theme.id}}">
+                        <span class="sr-only">{{theme.label}}</span>
+                        <img ng-if="!isSVG(theme.pictogram)" ng-src="{{theme.pictogram}}" ng-alt="{{theme.label}}">
+                        <ng-include ng-if="isSVG(theme.pictogram)" src="theme.pictogram"></ng-include>
+                    </label>
+                </div>
             </div>
         </div>
     </form>
