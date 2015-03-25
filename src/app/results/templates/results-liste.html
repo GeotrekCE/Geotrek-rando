@@ -21,12 +21,14 @@
                         {{result.properties.name}}
                     </h1>
                     <div class="infos">
+                        <span ng-if="result.properties.begin_date">{{result.properties.begin_date | date:'dd/MM/yyyy'}}</span>
                         <span ng-if="result.properties.cities[0]">{{result.properties.cities[0].name}}</span>
                         <span ng-if="result.properties.duration_pretty">{{result.properties.duration_pretty}}</span>
                         <span ng-if="result.properties.ascent">{{'ASCENT' | translate}} {{result.properties.ascent}} m</span>
                         <span ng-if="result.properties.difficulty">{{result.properties.difficulty.label}}</span>
                         <span ng-if="result.properties.type1[0]">{{result.properties.type1[0].name}}</span>
                         <span ng-if="result.properties.type2[0]">{{result.properties.type2[0].name}}</span>
+                        <span ng-if="result.properties.target_audience">{{result.properties.target_audience}}</span>
                     </div>
                     <ul class="themes">
                         <li ng-repeat="theme in result.properties.themes">
