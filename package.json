@@ -18,7 +18,8 @@
     "leaflet-minimap": "git://github.com/Norkart/Leaflet-MiniMap.git",
     "leaflet.fullscreen": "^1.1.4",
     "leaflet.markercluster": "^0.4.0",
-    "lodash": "^2.4.1"
+    "lodash": "^2.4.1",
+    "rando3d": "git://github.com/makinacorpus/rando3D.git"
   },
   "browser": {
     "angular": "./src/app/angular-browserify.js",

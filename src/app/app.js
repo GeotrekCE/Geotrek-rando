@@ -1,7 +1,7 @@
 'use strict';
 
 var dependencies = [
-    // Our submodules
+    // OUR SUBMODULES
     'rando.config',
     'rando.translation',
     'rando.commons',
@@ -21,12 +21,12 @@ var dependencies = [
     'rando.rando3D',
 
 
-    // External stuff
+    // EXTERNAL STUFFS
     'pascalprecht.translate',
     'ui.router',
     'ui.slider',
     'ngResource',
-    'ui.bootstrap',
+    'ui.bootstrap'
 ];
 
 var angular = require('angular');
@@ -34,7 +34,7 @@ window._ = require('lodash');
 window.jQuery = require('jquery');
 window.L = require('leaflet');
 
-// Load external dependencies
+// LOAD EXTERNAL DEPENDENCIES
 require('ui.bootstrap');
 require('ui.router');
 require('angular-slider');
@@ -42,14 +42,20 @@ require('angular-translate');
 require('ngResource');
 require('bootstrap');
 require('sparklines');
+
+//MAP LIBRARIES
 require('leaflet-minimap');
 require('leaflet.markercluster');
 require('leaflet.fullscreen');
+
+//TEST LIBRARIES
 require('angular-mocks'); // that one will exclude if not angular.mock
 
+
+//INIT APP
 angular.module('geotrekRando', dependencies);
 
-// Require Geotrek components
+// REQUIRE APP COMPONENTS
 require('./config');
 require('./translation');
 require('./commons');

@@ -1,4 +1,5 @@
 var distMode = (process.argv.slice(2).indexOf('--dist') >= 0);
+var vendorsMode = (process.argv.slice(2).indexOf('--vendors') >= 0);
 var dest = './src',
     src = './src',
     appFolder = 'app';
@@ -10,7 +11,8 @@ module.exports = {
         src: ['src/*/*.js']
     },
     buildMode: {
-        dist: distMode
+        dist: distMode,
+        vendors: vendorsMode
     },
     browserSync: {
         server: {

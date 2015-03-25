@@ -1,7 +1,15 @@
 var gulp = require('gulp');
+var buildMode = require('../config').buildMode;
 
-gulp.task('build', [
-    'browserify',
-    'sass',
-    'vendors'
-]);
+if (buildMode.vendors) {
+    gulp.task('build', [
+        'browserify',
+        'vendors',
+        'sass'
+    ]);
+} else {
+    gulp.task('build', [
+        'browserify',
+        'sass'
+    ]);
+}

@@ -3,6 +3,7 @@
 .log
 Desktop.ini
 node_modules
+npm-debug.log
 
 # Prevent js bundle and compiled sass to be pushed
 src/rando.js

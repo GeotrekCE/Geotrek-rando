@@ -48,7 +48,7 @@ function HeaderController($rootScope, $scope) {
 function SidebarHomeController() {
 }
 
-function SidebarDetailController($scope, $rootScope, $stateParams, resultsService, favoritesService) {
+function SidebarDetailController($scope, $rootScope, $modal, $stateParams, resultsService, favoritesService) {
 
     function getResultDetails(refresh) {
         if ($stateParams.slug) {
@@ -69,6 +69,12 @@ function SidebarDetailController($scope, $rootScope, $stateParams, resultsServic
             currentAction = 'add';
         }
         $rootScope.$broadcast('changeFavorite', {element: currentElement, action: currentAction});
+    };
+
+    $scope.show3d = function () {
+        var modal = $modal.open({
+            templateUrl: '/app/layout/templates/modal-3d.html'
+        });
     };
 
     $scope.isInFavorites = favoritesService.isInFavorites;

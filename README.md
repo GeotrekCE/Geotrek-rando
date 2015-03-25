@@ -41,6 +41,12 @@ Launch the app on localhost:3000 and watch for any change in sass or js files in
 * Each time a js file is saved, the browser's tab is refreshed
 * Will alow you to change your config file without needing to relaunch gulp
 
+Options :
+```
+--vendors
+```
+-> Will also bundle vendors. You need to do it the first time you launch the dev version if you haven't done any gulp --dist before. 
+
 Please note that you currently need to force CORS request in your browser in order to get data from our test server.
 
 # CREDITS
