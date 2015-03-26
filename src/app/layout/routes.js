@@ -60,6 +60,26 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
                     controller: controller.FooterController
                 }
             }
+        })
+        .state('layout.flat', {
+            url: ':flatID/',
+            views: {
+                'header' : {
+                    template: require('./templates/header.html'),
+                    controller: controller.HeaderController
+                },
+                'sidebar' : {
+                    template: require('./templates/sidebar-flat.html'),
+                    controller: controller.SidebarFlatController
+                },
+                'content' : {
+                    template: require('./templates/content-flat.html'),
+                },
+                'footer' : {
+                    template: require('./templates/footer.html'),
+                    controller: controller.FooterController
+                }
+            }
         });
 }
 

@@ -85,6 +85,10 @@ function SidebarDetailController($scope, $rootScope, $modal, $stateParams, resul
 
 }
 
+function SidebarFlatController() {
+
+}
+
 function FooterController() {
 }
 
@@ -94,5 +98,6 @@ module.exports = {
     HeaderController: HeaderController,
     SidebarHomeController: SidebarHomeController,
     SidebarDetailController: SidebarDetailController,
+    SidebarFlatController: SidebarFlatController,
     FooterController: FooterController
 };

@@ -19,7 +19,7 @@ var dependencies = [
     'rando.gallery',
     'rando.home',
     'rando.rando3D',
-
+    'rando.flat',
 
     // EXTERNAL STUFFS
     'pascalprecht.translate',
@@ -73,3 +73,4 @@ require('./favorites');
 require('./gallery');
 require('./home');
 require('./3d');
+require('./flat-pages');

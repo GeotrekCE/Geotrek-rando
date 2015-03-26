@@ -13,7 +13,8 @@ function settingsFactory(globalSettings) {
         trekUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.TREK_DIR + '/',
         poisUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.POI_DIR + '/',
         eventsUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.TOURISTIC_EVENTS_DIR + '/',
-        touristicUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.TOURISTIC_CONTENTS_DIR + '/';
+        touristicUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.TOURISTIC_CONTENTS_DIR + '/',
+        flatUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.FLAT_DIR + '/';
 
     //PUBLIC METHODS
     //
@@ -36,6 +37,7 @@ function settingsFactory(globalSettings) {
         poisUrl: poisUrl,
         eventsUrl: eventsUrl,
         touristicUrl: touristicUrl,
+        flatUrl: flatUrl,
 
         //METHODS
         setLang: setLang,
