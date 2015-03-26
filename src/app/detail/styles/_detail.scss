@@ -207,12 +207,46 @@
                     margin-bottom: 0;
                 }
             }
+            ol {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                counter-reset:li;
+                li {
+                    position: relative;
+                    line-height: 1.5rem;
+                    vertical-align: middle;
+                    padding-left: 2rem;
+                    padding-bottom: 0.5rem;
+                    &:empty {
+                        display: none;
+                    }
+                }
+                li:before {
+                    content:counter(li); /* Use the counter as content */
+                    counter-increment:li;
+                    position: absolute;
+                    background: $alert-color;
+                    font-weight: bolder;
+                    vertical-align: middle;
+                    font-size: 1rem;
+                    text-align: center;
+                    line-height: 1rem;
+                    left: 0;
+                    top: 0;
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    padding: 0.25rem;
+                    border-radius: 50%;
+                }
+            }
         }
         .description_teaser {
             font-size: 1.5em;
+            line-height: 1.2em;
             font-weight: lighter;
             color: $primary-color;
-            margin-bottom: 1em;
+            margin-bottom: 1rem;
             i {
                 float: left;
                 margin-right: 1em;
@@ -326,6 +360,7 @@
                         a {
                             color: white;
                             display: block;
+                            text-decoration: underline;
                         }
                     }
                     .description {
