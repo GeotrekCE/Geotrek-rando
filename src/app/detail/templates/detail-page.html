@@ -136,7 +136,7 @@
                     </div>
                     <div ng-if="result.properties.website" class="website">
                         <h5>{{'WEBSITE' | translate}}</h5>
-                        <span>{{result.properties.website}}</span>
+                        <span><a href="{{result.properties.website}}" target="_blank" title="{{result.properties.website}}">{{result.properties.website}}</a></span>
                     </div>
                     <div ng-if="result.properties.booking" class="booking">
                         <h5>{{'BOOKING' | translate}}</h5>
@@ -160,7 +160,7 @@
                     </div>
                     <div ng-if="result.properties.practical_info" class="practical-info">
                         <h5>{{'PRATICAL_INFOS' | translate}}</h5>
-                        <span>{{result.properties.practical_info}}</span>
+                        <div ng-bind-html="sanitizeData(result.properties.practical_info)"></div>
                     </div>
                     <div ng-if="result.properties.speaker" class="speaker">
                         <h5>{{'SPEAKERS' | translate}}</h5>
@@ -206,12 +206,13 @@
                     <div class="card" ng-bind-html="sanitizeData(result.properties.access)"></div>
                 </div>
                 <div ng-if="result.properties.information_desks[0]" class="info-desks">
-                    <h3><i class="fa fa-tty"></i>{{ 'INFORMATION_DESKS' | translate}}</h3>
+                    <h3><i class="fa fa-info"></i>{{ 'INFORMATION_DESKS' | translate}}</h3>
                     <ul>
                         <li ng-repeat="desk in result.properties.information_desks" class="desk card">
                             <div class="infos">
                                 <div class="image">
-                                    <img ng-src="{{desk.photo_url}}" alt="{{desk.name}}"/>
+                                    <img ng-if="desk.photo_url" ng-src="{{desk.photo_url}}" alt="{{desk.name}}"/>
+                                    <img ng-if="!desk.photo_url" ng-src="/images/desk-placeholder.jpg" alt="{{desk.name}}"/>
                                 </div>
                                 <div class="contact">
                                     <div class="name">{{desk.name}}</div>
@@ -222,9 +223,9 @@
                                         <span>{{desk.postal_code}}</span>
                                         <span>{{desk.municipality}}</span>
                                     </div>
-                                    <a ng-if="desk.website" class="website" href="{{desk.website}}">Site web</a>
-                                    <a ng-if="desk.email" class="mail" href="mailto:{{desk.email}}">{{desk.email}}</a>
-                                    <a ng-if="desk.phone" class="phone" href="tel:{{desk.phone}}">{{desk.phone}}</a>
+                                    <a ng-if="desk.website" class="website" href="{{desk.website}}" target="_blank">Site web</a>
+                                    <a ng-if="desk.email" class="mail" href="mailto:{{desk.email}}" target="_blank">{{desk.email}}</a>
+                                    <a ng-if="desk.phone" class="phone" href="tel:{{desk.phone}}" target="_blank">{{desk.phone}}</a>
                                 </div>
                             </div>
                             <div class="description">
@@ -238,31 +239,31 @@
                     <ul>
                         <li class="card">
                             <div class="contact" ng-if="result.properties.contact" ng-bind-html="sanitizeData(result.properties.contact)"></div>
-                            <a ng-if="result.properties.email" href="mailto:{{result.properties.email}}">{{result.properties.email}}</a>
+                            <a ng-if="result.properties.email" href="mailto:{{result.properties.email}}" target="_blank">{{result.properties.email}}</a>
                         </li>
                     </ul>
                 </div>
 
                 <div ng-if="pois.length > 0 || result.properties.touristic_contents.length > 0 || result.properties.touristic_events.length > 0 || result.properties.treks.length > 0" class="interests">
-                    <div class="pois" ng-if="pois.length > 0" ng-class="{collapsed: !poisAreShown}">
-                        <h3 ng-click="togglePois()">{{'POI' | translate}} <i class="fa fa-angle-down"></i></h3>
-                        <div class="collapsor">
-                            <pois-liste></pois-liste>
-                        </div>
-                    </div>
                     <div class="near-elements" ng-if="result.properties.touristic_contents.length > 0 || result.properties.touristic_events.length > 0 || result.properties.treks.length > 0" ng-class="{collapsed: poisAreShown}">
                         <h3 ng-click="togglePois()">{{'NEAR' | translate}} <i class="fa fa-angle-down"></i></h3>
                         <div class="collapsor">
                             <near-liste></near-liste>
                         </div>
                     </div>
+                    <div class="pois" ng-if="pois.length > 0 && result.properties.category.id === -2" ng-class="{collapsed: !poisAreShown}">
+                        <h3 ng-click="togglePois()">{{'POI' | translate}} <i class="fa fa-angle-down"></i></h3>
+                        <div class="collapsor">
+                            <pois-liste></pois-liste>
+                        </div>
+                    </div>
                 </div>
 
                 <div ng-if="result.properties.web_links[0]" class="going-further">
-                    <h3><i class="fa fa-info"></i>{{ 'KNOW_MORE' | translate}}</h3>
+                    <h3><i class="fa fa-plus"></i>{{ 'KNOW_MORE' | translate}}</h3>
                     <ul ng-if="result.properties.web_links[0]" class="websites">
                         <li ng-repeat="link in result.properties.web_links">
-                            <a href="{{link.url}}" title="{{link.name}}">
+                            <a href="{{link.url}}" title="{{link.name}}" target="_blank">
                                 <img ng-if="link.category.pictogram && !isSVG(link.category.pictogram)" ng-src="{{link.category.pictogram}}" ng-alt="{{link.category.label}}">
                                 <ng-include ng-if="link.category.pictogram && isSVG(link.category.pictogram)" src="link.category.pictogram"></ng-include>
                                 <span>{{link.name}}</span>
