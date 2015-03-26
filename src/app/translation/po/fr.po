@@ -110,6 +110,33 @@ msgstr "Max :"
 msgid "LENGTH_IN_M"
 msgstr "Distance (m)"
 
+msgid "DATES"
+msgstr "Dates :"
+
+msgid "WEBSITE"
+msgstr "Site internet :"
+
+msgid "MEETING_POINT"
+msgstr "Lieu de rendez-vous :"
+
+msgid "MEETING_TIME"
+msgstr "Heure de rendez-vous :"
+
+msgid "SPEAKERS"
+msgstr "Intervenants :"
+
+msgid "BOOKING"
+msgstr "Réservations :"
+
+msgid "ORGANIZERS"
+msgstr "Organisateurs :"
+
+msgid "PARTICIPANTS_NUMBER"
+msgstr "Nombre de participants :"
+
+msgid "PRATICAL_INFOS"
+msgstr "Infos pratiques :"
+
 
 # FILTERS
 #

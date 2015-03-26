@@ -72,6 +72,7 @@ function DetailController($scope, $rootScope, $state, $q, $stateParams, utilsFac
         promise
             .then(
                 function (result) {
+                    console.log(result);
                     $scope.result = result;
                     getPoisOfResult(result, forceRefresh);
                     getNearElements(result);

@@ -111,6 +111,33 @@ msgstr "Max:"
 msgid "LENGTH_IN_M"
 msgstr "Length (m)"
 
+msgid "DATES"
+msgstr "Dates:"
+
+msgid "WEBSITE"
+msgstr "Website :"
+
+msgid "MEETING_POINT"
+msgstr "Meeting point:"
+
+msgid "MEETING_TIME"
+msgstr "Meeting time:"
+
+msgid "SPEAKERS"
+msgstr "Speakers:"
+
+msgid "BOOKING"
+msgstr "Booking:"
+
+msgid "ORGANIZERS"
+msgstr "Organizers:"
+
+msgid "PARTICIPANTS_NUMBER"
+msgstr "Participants number:"
+
+msgid "PRATICAL_INFOS"
+msgstr "Practical informations:"
+
 
 # FILTERS
 #

@@ -240,6 +240,13 @@
                     border-radius: 50%;
                 }
             }
+            .events-info {
+                h5 {
+                    font-weight: lighter;
+                    font-size: 1.1rem;
+                    margin-bottom: 0.2rem;
+                }
+            }
         }
         .description_teaser {
             font-size: 1.5em;
@@ -374,6 +381,10 @@
         }
         .contact-card {
             padding-bottom: 1em;
+            ul {
+                padding: 0.4rem;
+                margin: 0;
+            }
             .card {
                 display: inline-block;
                 padding: 1em;
