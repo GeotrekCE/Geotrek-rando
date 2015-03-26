@@ -1,3 +1,4 @@
-<div class="page-container">
-    <div bind-html="sanitize(flat.body)"></div>
+<div class="page-container flat-page">
+    <h1>{{flatPage.title}}</h1>
+    <div ng-if="flatPage.content" class="page-content" ng-bind-html="sanitizeData(flatPage.content, true)"></div>
 </div>

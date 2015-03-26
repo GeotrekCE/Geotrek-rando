@@ -1,7 +1,18 @@
 'use strict';
 
-function FlatPagesController() {
+function FlatPagesController(utilsFactory, flatService, $scope, $stateParams) {
+    $scope.sanitizeData = utilsFactory.sanitizeData;
 
+    function getPage() {
+        flatService.getAFlatPage($stateParams.flatID)
+            .then(
+                function (pageData) {
+                    $scope.flatPage = pageData;
+                }
+            );
+    }
+
+    getPage();
 }
 
 function FlatMenuController(flatService, $scope) {
@@ -9,9 +20,9 @@ function FlatMenuController(flatService, $scope) {
     function initFlatMenu() {
         flatService.getFlatPages()
             .then(
-                function (data) {
-                    $scope.flatpages = data;
-                    console.log(data);
+                function (pagesData) {
+                    $scope.flatpages = pagesData;
+                    console.log(pagesData);
                 }
             );
     }

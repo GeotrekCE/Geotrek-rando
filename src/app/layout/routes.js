@@ -62,7 +62,7 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
             }
         })
         .state('layout.flat', {
-            url: ':flatID/',
+            url: 'informations/:flatID/',
             views: {
                 'header' : {
                     template: require('./templates/header.html'),

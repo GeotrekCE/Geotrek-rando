@@ -1,0 +1,21 @@
+.flat-page {
+    background: $light-grey;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    overflow: auto;
+    h1 {
+        font-size: 2rem;
+        font-weight: lighter;
+        margin-top: 0;
+        color: $dark-grey;
+        border-bottom: 1px solid $neutral-grey;
+    }
+
+    .page-content {
+        padding: 1rem;
+        .divider {
+            border-bottom: 1px solid currentColor;
+        }
+    }
+}

@@ -1,6 +1,6 @@
 'use strict';
 
-function flatService($q, $resource, settingsFactory, translationService) {
+function flatService($q, $resource, utilsFactory, settingsFactory, translationService) {
 
     var self = this;
 
@@ -40,6 +40,28 @@ function flatService($q, $resource, settingsFactory, translationService) {
 
         return deferred.promise;
 
+    };
+
+    this.getAFlatPage = function (pageId) {
+        var deferred = $q.defer();
+        self.getFlatPages()
+            .then(
+                function (data) {
+                    _.forEach(data, function (currentPage) {
+                        if (!isNaN(utilsFactory.isTrueInt(pageId))) {
+                            if (currentPage.id === parseInt(pageId, 10)) {
+                                deferred.resolve(currentPage);
+                            }
+                        } else if (typeof pageId === 'string') {
+                            if (currentPage.slug === pageId) {
+                                deferred.resolve(currentPage);
+                            }
+                        }
+                    });
+                }
+            );
+
+        return deferred.promise;
     };
 }
 

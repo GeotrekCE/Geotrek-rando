@@ -106,9 +106,18 @@ function utilsFactory($sce) {
         });
     };
 
-    var sanitizeData = function (data) {
-        var parsed = data.replace(/style="[a-zA-Z0-9:;\.\s\(\)\-\,]*"/gi, '');
-        return $sce.trustAsHtml(parsed);
+    var isTrueInt = function (value) {
+        if(/^(\-|\+)?([0-9]+)$/.test(value)) {
+            return Number(value);
+        }
+        return NaN;
+    }
+
+    var sanitizeData = function (data, removeStyle) {
+        if (removeStyle) {
+            var data = data.replace(/style=".*"/gim, '');
+        }
+        return $sce.trustAsHtml(data);
     };
 
     var parseLength = function (length) {
@@ -201,6 +210,7 @@ function utilsFactory($sce) {
     return {
         removeDiacritics: removeDiacritics,
         sanitizeData: sanitizeData,
+        isTrueInt: isTrueInt,
         parseLength: parseLength,
         idIsInArray: idIsInArray,
         findIndexOfId: findIndexOfId,
