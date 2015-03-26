@@ -47,6 +47,9 @@ msgstr "result"
 msgid "RESULTS"
 msgstr "results"
 
+msgid "NO_RESULTS"
+msgstr "No results found for your query"
+
 
 # FAVORITES
 #

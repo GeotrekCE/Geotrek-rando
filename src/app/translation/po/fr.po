@@ -46,6 +46,8 @@ msgstr "résultat"
 msgid "RESULTS"
 msgstr "résultats"
 
+msgid "NO_RESULTS"
+msgstr "Aucun résultat correspondant à votre recherche"
 
 # FAVORITES
 #

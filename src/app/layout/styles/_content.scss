@@ -21,9 +21,6 @@
         margin-left: -60px;
         position: relative;
         float: left;
-        @media (max-width: 768px) {
-            z-index: 10;
-        }
         .results-drawer {
             width: 40%;
             height: 100%;
