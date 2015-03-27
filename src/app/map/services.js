@@ -595,6 +595,12 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                     currentLayer = self._treksgeoJsonLayer;
                     type = 'geojson';
                     elementLocation = [];
+                    self.createLayerFromElement(result, 'departure', utilsFactory.getStartPoint(result))
+                    .then(
+                        function (marker) {
+                            self._poisMarkersLayer.addLayer(marker);
+                        }
+                    );
                 } else {
                     currentLayer = self._touristicsMarkersLayer;
                     type = 'category';
