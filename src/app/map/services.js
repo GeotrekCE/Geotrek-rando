@@ -1125,7 +1125,7 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
         ]).then(
             function () {
                 var markup = '';
-                markup += '<div class="marker">' + markerIcon + '</div>';
+                markup += '<div class="marker" data-popup="' + poi.properties.name + '">' + markerIcon + '</div>';
                 markup += '<div class="icon">' + poiIcon + '</div>';
                 var newIcon = new L.divIcon({
                     html: markup,
