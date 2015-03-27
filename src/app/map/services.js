@@ -231,6 +231,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
         this.setFullScreenControl();
         this.setMinimap();
         this.createSatelliteView();
+        this.setResetViewControl();
     };
 
     this.setScale = function () {
@@ -246,6 +247,33 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
             position: 'topright',
             title: 'Fullscreen'
         }).addTo(this.map);
+    };
+
+    this.setResetViewControl = function () {
+        L.Control.Resetview = L.Control.extend({
+            options: {
+                position: 'topright'
+            },
+            onAdd: function (map) {
+                var controlContainer = L.DomUtil.create('div', 'leaflet-control-resetview leaflet-bar');
+                var controlButton = L.DomUtil.create('a', 'leaflet-control-resetview-button', controlContainer);
+                controlButton.title = 'Reset view';
+
+                L.DomEvent.disableClickPropagation(controlButton);
+                L.DomEvent.on(controlButton, 'click', function () {
+                    var globalBounds = self._clustersLayer.getBounds();
+                    if (self._treksgeoJsonLayer) {
+                        globalBounds.extend(self._treksgeoJsonLayer.getBounds());
+                    }
+
+                    map.fitBounds(globalBounds);
+                }, this);
+                return controlContainer;
+            }
+        });
+
+        this.resetViewControl = new L.Control.Resetview();
+        this.map.addControl(this.resetViewControl);
     };
 
     this.setMinimap = function () {
