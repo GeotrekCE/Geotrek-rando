@@ -60,6 +60,9 @@
             .marker svg .base {
                 fill: nth($category, 2);
             }
+            .marker::before {
+                border-bottom-color: nth($category, 2);
+            }
         }
     }
 }

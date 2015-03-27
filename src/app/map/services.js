@@ -578,6 +578,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                         function (layer) {
 
                             var selector = '#result-category-' + result.properties.category.id.toString() + '-' + result.id.toString();
+
                             layer.on({
                                 mouseover: function () {
                                     var listeEquivalent = document.querySelector(selector);
@@ -774,9 +775,9 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
         },
         category_base: {
             iconUrl: '/images/map/category_base.svg',
-            iconSize: [40, 56],
-            iconAnchor: [20, 56],
-            labelAnchor: [20, 20]
+            iconSize: [34, 48],
+            iconAnchor: [17, 48],
+            labelAnchor: [17, 17]
         },
         poi_base: {
             iconUrl: '/images/map/category_base.svg',
@@ -1072,7 +1073,7 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
         ]).then(
             function () {
                 var markup = '';
-                markup += '<div class="marker">' + markerIcon + '</div>';
+                markup += '<div class="marker" data-popup="' + element.properties.name + '">' + markerIcon + '</div>';
                 markup += '<div class="icon">' + categoryIcon + '</div>';
 
                 var newIcon = new L.divIcon({

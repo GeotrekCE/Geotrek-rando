@@ -5,6 +5,7 @@
 }
 
 .double-marker {
+    position: relative;
     & > div {
         transition: all 0.1s ease-out;
     }
@@ -12,12 +13,44 @@
         height: 100%;
         max-width: 100%;
     }
+    .marker::after {
+        content: '';
+        display: block;
+        position: absolute;
+        opacity: 0;
+        bottom: 100%;
+        left: 50%;
+        margin-left: -1rem;
+        width: 0;
+        height: 0;
+        border-left: 0 solid transparent;
+        border-right: 0 solid transparent;
+        border-top: 0 solid white;
+    }
+    .marker::before {
+        border-radius: 2px 2px 0 0;
+        content: attr(data-popup);
+        display: block;
+        position: absolute;
+        overflow: hidden;
+        opacity: 0;
+        width: 0;
+        height: 0;
+        padding: 0;
+        font-size: 0.7rem;
+        bottom: calc(100% + 0.7rem);
+        text-align: center;
+        left: 50%;
+        margin-left: -4rem;
+        background: white;
+        border-bottom: 2px solid $neutral-grey;
+    }
     .icon {
         position: absolute;
         top: 10px;
-        left: 10px;
-        width: 20px;
-        height: 20px;
+        left: 9px;
+        width: 17px;
+        height: 17px;
         svg {
             fill: white;
         }
@@ -27,6 +60,19 @@
         .marker {
             transform: scale(1.2);
             transform-origin: center bottom;
+            &::after, &::before {
+                opacity: 1;
+            }
+            &::before {
+                padding: 1rem;
+                width: 8rem;
+                height: auto;
+            }
+            &::after {
+                border-left-width: 1rem;
+                border-right-width: 1rem;
+                border-top-width: 0.7rem;
+            }
         }
 
         .icon {
