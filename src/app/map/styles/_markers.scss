@@ -89,12 +89,12 @@
 }
 
 .trek-cluster {
-    background: white;
+    background: darken($primary-color, 10%);
     border: 8px solid $primary-color;
     padding: 3px;
     border-radius: 20px;
     text-align: center;
-    color: $primary-color;
+    color: white;
     font-weight: bold;
 }
 
