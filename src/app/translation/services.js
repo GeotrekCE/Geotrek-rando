@@ -1,7 +1,8 @@
 'use strict';
 
 function translationService(globalSettings) {
-    var self = this;
+    var self = this,
+        storageName = globalSettings.PLATFORM_ID + '-language';
 
     this.getDefaultLang = function () {
 
@@ -52,18 +53,18 @@ function translationService(globalSettings) {
 
     this.getFavoriteLang = function () {
 
-        if (!localStorage.getItem('geotrek-rando-language')) {
+        if (!localStorage.getItem(storageName)) {
             return false;
         }
 
-        var lang_json = localStorage.getItem('geotrek-rando-language');
+        var lang_json = localStorage.getItem(storageName);
         return JSON.parse(lang_json);
     };
 
     this.setFavoriteLang = function () {
         if (self.currentLang) {
             var lang_json = JSON.stringify(self.currentLang);
-            localStorage.setItem('geotrek-rando-language', lang_json);
+            localStorage.setItem(storageName, lang_json);
         }
     };
 }

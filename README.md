@@ -21,7 +21,8 @@ To do so, you need to:
 1 - duplicate src/app/config/configs-default.js and rename it configs.js
 Then you can chose options that suits your needs in it !
 (Each time you change your config file, you need to do the next step again.)
-2 - rename any file ending by .example with [lang]-custom.po in src/app/translation/po/
+2 - change the PLATFORM_ID at the top of the config.js file with a unique id as it will be used for localStorage.
+3 - rename any file ending by .example with [lang]-custom.po in src/app/translation/po/
 (ex: fr-custom.po.example -> fr-custom.po, en-custom.po.example -> en-custom.po)
 Thos files will allow you to override any translation in [lang].po files.
 

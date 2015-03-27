@@ -1,19 +1,20 @@
 'use strict';
 
-function favoritesService() {
+function favoritesService(globalSettings) {
 
-    var self = this;
+    var self = this,
+        storageName = globalSettings.PLATFORM_ID + '-favorites';
 
     this.getFavorites = function () {
         if (self._favorites) {
             return self._favorites;
         }
 
-        if (!localStorage.getItem('geotrek-rando-favorites')) {
+        if (!localStorage.getItem(storageName)) {
             self._favorites = {};
             self.setFavorites();
         } else {
-            var favorites_json = localStorage.getItem('geotrek-rando-favorites');
+            var favorites_json = localStorage.getItem(storageName);
             self._favorites = JSON.parse(favorites_json);
         }
 
@@ -22,12 +23,12 @@ function favoritesService() {
 
     this.setFavorites = function () {
         var favorites_json = JSON.stringify(self._favorites);
-        localStorage.setItem('geotrek-rando-favorites', favorites_json);
+        localStorage.setItem(storageName, favorites_json);
     };
 
     this.removeAllFavorites = function () {
         self._favorites = {};
-        localStorage.removeItem('geotrek-rando-favorites');
+        localStorage.removeItem(storageName);
     };
 
     this.addAFavorite = function (element) {
