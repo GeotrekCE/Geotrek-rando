@@ -31,31 +31,6 @@
         @media (min-width: 769px) {
             width: 35%;
             height: 100%;
-            &:after {
-                content: '';
-                display: block;
-                position: absolute;
-                top: -200%;
-                left: 0;
-                height: 100%;
-                width: 100%;
-                background: $dark-grey;
-                opacity: 0;
-                transition: opacity 0.3s ease 0s, top 0s ease 0.3s ;
-            }
-            &.collapsed {
-                width: 4%;
-                overflow: hidden;
-                & > div {
-                    min-width: 600px;
-                }
-                &:after {
-                    top: 0;
-                    opacity: 0.8;
-                    transition: opacity 0.3s ease 0.1s, top 0s ease 0s;
-                }
-            }
-            
         }
         h3 {
             display: block;
@@ -430,30 +405,11 @@
             position: absolute;
             top: 0;
             right: 0;
-            width: 19%;
+            width: 24%;
             height: 100%;
             float: left;
             display: flex;
             flex-direction: column;
-            &.expend {
-                width: 35%;
-                .collapsor {
-                    margin-top: 0;
-                    padding-bottom: 0;
-                }
-                .pois {
-                    height: 100%;
-                    .pois-liste {
-                        height: 100%;
-                    }
-                    h3 {
-                        display: none;
-                    }
-                }
-                .near-elements {
-                    display: none;
-                }
-            }
             & > div {
                 transition: all 0.2s ease;
                 height: 40px;
@@ -473,9 +429,6 @@
                     }
                 }
             }
-        }
-        @media (min-width: 1600px) {
-            width: 17%;
         }
         .collapsor {
             width: 100%;
@@ -513,19 +466,15 @@
         z-index: 2;
         padding: 0;
         height: 100%;
-        width: 45.5%;
+        width: 40.5%;
         margin-left: 0.5%;
         transition: width 0.3s ease, left 0.3s ease;
         @media (min-width: 1600px) {
-            width: 47.5%;
             &.no-interests {
                 width: 66.5%;
             }
         }
         @media (min-width: 769px) {
-            &.expend {
-                width: 60.5%;
-            }
             &.no-interests {
                 width: 64.5%;
             }
