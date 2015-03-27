@@ -1,6 +1,9 @@
 'use strict';
 
-function NearListeController($scope) {
+function NearListeController($scope, favoritesService, $rootScope) {
+
+    $scope.isInFavorites = favoritesService.isInFavorites;
+
     $scope.hoverMarkerNear = function (currentPoi, state) {
         var layerEquivalent = document.querySelector('.layer-category-' + currentPoi.properties.category.id + '-' + currentPoi.id);
         if (layerEquivalent !== null) {
@@ -14,6 +17,16 @@ function NearListeController($scope) {
                 }
             }
         }
+    };
+
+    $scope.toggleFavorites = function (currentElement) {
+        var currentAction = '';
+        if (favoritesService.isInFavorites(currentElement)) {
+            currentAction = 'remove';
+        } else {
+            currentAction = 'add';
+        }
+        $rootScope.$broadcast('changeFavorite', {element: currentElement, action: currentAction});
     };
 }
 
