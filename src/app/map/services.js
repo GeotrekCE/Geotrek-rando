@@ -177,9 +177,11 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                 geoStyle.className += ' fill';
             }
 
-            deferred.resolve(L.geoJson(element, {
+            var geoJsonLayer = L.geoJson(element, {
                 style: geoStyle
-            }));
+            });
+            geoJsonLayer.options.result = element;
+            deferred.resolve(geoJsonLayer);
         } else {
             var promise,
                 param;
@@ -211,6 +213,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                                 icon: currentIcon
                             }
                         );
+                        marker.options.result = element;
                         deferred.resolve(marker);
                     }
                 );
@@ -433,7 +436,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
 
 
 
-    // MAIN FUNCTIONS AN INIT
+    // MAIN FUNCTIONS AND INIT
     //
     //
 
@@ -490,6 +493,56 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
             self.map.fitBounds(layer.getBounds().pad(padding));
         }
 
+    };
+
+    this.testMarkersVisibility = function (layer) {
+        // Construct an empty list to fill with onscreen markers.
+        var inBounds = [],
+            isVisibe = false,
+        // Get the map bounds - the top-left and bottom-right locations.
+            bounds = self.map.getBounds();
+
+        // For each marker, consider whether it is currently visible by comparing
+        // with the current map bounds.
+        layer.eachLayer(function(marker) {
+            if (marker.options.result) {
+                if (marker.options.result.geometry.type !== 'Point') {
+                    _.forEach(marker.options.result.geometry.coordinates, function (currentPoint) {
+                        if (bounds.contains([currentPoint[1], currentPoint[0]])) {
+                            isVisibe = true;
+                        }
+                    });
+                    if (isVisibe) {inBounds.push(marker);};
+                } else {
+                    if (bounds.contains(marker.getLatLng())) {
+                        inBounds.push(marker);
+                    }
+                }
+            }
+        });
+
+        return inBounds;
+    };
+
+    this.resultsVisibility = function () {
+        var visibleMarkers = self.testMarkersVisibility(self._clustersLayer),
+            visibleGeoJson = self.testMarkersVisibility(self._treksgeoJsonLayer);
+
+        var visbleResults = _.merge(visibleMarkers, visibleGeoJson);
+        _.forEach(document.querySelectorAll('.results-drawer .result'), function (aResult) {
+            console.log(aResult.classList);
+            if (aResult.classList.contains('visible')) {
+                aResult.classList.remove('visible');
+            }
+        });
+        _.forEach(visbleResults, function (marker) {
+            var currentResult = marker.options.result
+            var selector = '#result-category-' + currentResult.properties.category.id.toString() + '-' + currentResult.id.toString();
+            var listResult = document.querySelector(selector);
+            if (!listResult.classList.contains('visible')) {
+                listResult.classList.add('visible')
+            }
+        });
     };
 
     this.createElevation = function (result) {
@@ -647,6 +700,8 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                             if (currentCount === _.size(results)) {
                                 self.map.invalidateSize();
                                 self.updateBounds(updateBounds, self._clustersLayer);
+                                self.resultsVisibility();
+                                self.map.on('move', self.resultsVisibility);
                                 self.loadingMarkers = false;
                             }
                         }
@@ -664,6 +719,8 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
             currentLayer;
 
         if (!self.loadingMarkers) {
+
+            self.map.off('move', self.resultsVisibility);
 
             self.loadingMarkers = true;
 

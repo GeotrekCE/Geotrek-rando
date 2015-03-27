@@ -43,6 +43,7 @@
             padding: 0 1em 2.4em;
             display: block;
             position: relative;
+            opacity: 0.5;
             border-left: 10px solid $primary-color;
             background: white;
             margin: 1.5%;
@@ -58,6 +59,10 @@
             }
             @media (max-width: 550px) {
                 flex: 1 1 100%;
+            }
+            &.visible {
+                opacity: 1;
+                order: -1;
             }
         }
         .result {
