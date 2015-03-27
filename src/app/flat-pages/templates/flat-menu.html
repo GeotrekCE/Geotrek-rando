@@ -1,5 +1,5 @@
-<li class="static-pages dropdown">
-    <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+<li class="static-pages dropdown" ng-class="{open: expandOnHover}" ng-mouseover="expandOnHover = true;" ng-mouseleave="expandOnHover = false;">
+    <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="expandOnHover">
         {{'ABOUT_US' | translate}} <span class="caret"></span>
     </a>
     <ul class="dropdown-menu" role="menu">

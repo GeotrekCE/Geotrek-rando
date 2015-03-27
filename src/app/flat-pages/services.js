@@ -4,11 +4,11 @@ function flatService($q, $resource, utilsFactory, settingsFactory, translationSe
 
     var self = this;
 
-    this.getFlatPages = function () {
+    this.getFlatPages = function (forceReload) {
 
         var deferred = $q.defer();
 
-        if (self._flatList) {
+        if (self._flatList && !forceReload) {
 
             deferred.resolve(self._flatList);
 
@@ -58,6 +58,7 @@ function flatService($q, $resource, utilsFactory, settingsFactory, translationSe
                             }
                         }
                     });
+                    deferred.reject('doesn\'t exist');
                 }
             );
 
