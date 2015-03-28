@@ -1,6 +1,6 @@
 'use strict';
 
-function MapController($scope, globalSettings, $rootScope, $state, resultsService, mapService, $stateParams) {
+function MapController($scope, globalSettings, $translate, $rootScope, $state, resultsService, mapService, $stateParams) {
 
     function updateMapWithResults(updateBounds) {
         resultsService.getFilteredResults()
@@ -35,10 +35,60 @@ function MapController($scope, globalSettings, $rootScope, $state, resultsServic
             );
     }
 
+    function initCtrlsTranslation() {
+        var controllersListe = [
+            {
+                selector: '.leaflet-control-zoom-in',
+                isTitle: true,
+                translationID: 'ZOOM_IN'
+            },
+            {
+                selector: '.leaflet-control-zoom-out',
+                isTitle: true,
+                translationID: 'ZOOM_OUT'
+            },
+            {
+                selector: '.leaflet-control-zoom-fullscreen',
+                isTitle: true,
+                translationID: 'FULL_SCREEN'
+            },
+            {
+                selector: '.leaflet-control-resetview-button',
+                isTitle: true,
+                translationID: 'RECENTER_VIEW'
+            },
+            {
+                selector: '.simple-layer-switcher .toggle-layer',
+                isTitle: true,
+                translationID: 'TILES_SWITCH'
+            },
+            {
+                selector: '.leaflet-control-viewportfilter-caption',
+                isTitle: false,
+                translationID: 'VIEWPORT_FILTERING'
+            }
+        ];
+
+        _.forEach(controllersListe, function (currentController) {
+            var domElement = document.querySelector(currentController.selector);
+            $translate(currentController.translationID)
+                .then(
+                    function (translation) {
+                        if (currentController.isTitle) {
+                            domElement.setAttribute('title', translation);
+                        } else {
+                            domElement.innerHTML = translation;
+                        }
+                    }
+                );
+        });
+    }
+
     function mapInit(selector) {
 
         var mapSelector = selector || 'map';
         $scope.map = mapService.initMap(mapSelector);
+        initCtrlsTranslation();
         if ($state.current.name === 'layout.detail') {
             updateMapWithDetails();
         } else {
@@ -80,6 +130,7 @@ function MapController($scope, globalSettings, $rootScope, $state, resultsServic
         } else {
             updateMapWithResults(true);
         }
+        initCtrlsTranslation();
     });
 }
 

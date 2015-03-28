@@ -3,6 +3,10 @@
     width: 100%;
 }
 
+.leaflet-control-zoom a {
+    position: relative;
+}
+
 .leaflet-control-viewportfilter {
     padding: 0.5rem 1rem;
     position: relative;

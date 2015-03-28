@@ -208,6 +208,29 @@ msgid "3D"
 msgstr "3D visualization"
 
 
+# MAP
+#
+#
+
+msgid "ZOOM_IN"
+msgstr "Zoom in"
+
+msgid "ZOOM_OUT"
+msgstr "Zoom out"
+
+msgid "FULL_SCREEN"
+msgstr "Full screen"
+
+msgid "RECENTER_VIEW"
+msgstr "Recenter map"
+
+msgid "TILES_SWITCH"
+msgstr "Switch map background"
+
+msgid "VIEWPORT_FILTERING"
+msgstr "Filter with map"
+
+
 # HOME PAGE
 #
 #

@@ -206,6 +206,29 @@ msgid "3D"
 msgstr "Voir l'itinéraire en 3D"
 
 
+# MAP
+#
+#
+
+msgid "ZOOM_IN"
+msgstr "Zoomer"
+
+msgid "ZOOM_OUT"
+msgstr "Dézoomer"
+
+msgid "FULL_SCREEN"
+msgstr "Plein écran"
+
+msgid "RECENTER_VIEW"
+msgstr "Recentrer la carte"
+
+msgid "TILES_SWITCH"
+msgstr "Changer de fond de carte"
+
+msgid "VIEWPORT_FILTERING"
+msgstr "Filtrer avec la carte"
+
+
 # HOME PAGE
 #
 #

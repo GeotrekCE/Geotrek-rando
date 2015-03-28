@@ -371,9 +371,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                 var className = 'toggle-layer background satellite';
 
                 this.button = L.DomUtil.create('a', className, this._container);
-                this.button.setAttribute('title', 'Show satellite');
-                jQuery(this.button).tooltip({placement: 'right',
-                                        container: map._container});
+                this.button.title = 'Show satellite';
 
                 L.DomEvent.disableClickPropagation(this.button);
                 L.DomEvent.on(this.button, 'click', function () {
@@ -390,18 +388,12 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
 
                     L.DomUtil.removeClass(this.button, 'satellite');
                     L.DomUtil.addClass(this.button, 'main');
-                    this.button.setAttribute('title', 'Show plan');
                 } else {
                     this.map.switchLayer(this.map.getZoom() > this.switch_detail_zoom ? 'detail' : 'main');
 
                     L.DomUtil.removeClass(this.button, 'main');
                     L.DomUtil.addClass(this.button, 'satellite');
-                    this.button.setAttribute('title', 'Show satellite');
                 }
-
-                jQuery(this.button).tooltip('destroy');
-                jQuery(this.button).tooltip({placement: 'right',
-                                        container: this.map._container});
             }
 
         });
