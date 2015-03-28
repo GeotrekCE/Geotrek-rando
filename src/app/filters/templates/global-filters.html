@@ -20,7 +20,7 @@
                                 <i class="fa fa-search"></i>
                             </div>
                         </div>
-                        <div ng-repeat="city in filters.cities | filter:citiesAuto" class="city form-group">
+                        <div ng-repeat="city in filters.cities | filter:citiesAuto | orderBy:'name'" class="city form-group">
                             <input type="checkbox" id="city-{{city.code}}" value="{{city.code}}" ng-model="activeFilters.cities[city.code]" ng-false-value="null" ng-change="propagateActiveFilters()"/>
                             <label for="city-{{city.code}}">
                                 <span>{{city.name}}</span>
@@ -38,7 +38,7 @@
                                 <i class="fa fa-search"></i>
                             </div>
                         </div>
-                        <div ng-repeat="district in filters.districts | filter:districtsAuto" class="district form-group">
+                        <div ng-repeat="district in filters.districts | filter:districtsAuto | orderBy:'name'" class="district form-group">
                             <input type="checkbox" id="district-{{district.id}}" value="{{district.id}}" ng-false-value="null" ng-model="activeFilters.districts[district.id]"  ng-change="propagateActiveFilters()"/>
                             <label for="district-{{district.id}}">
                                 <span>{{district.name}}</span>
