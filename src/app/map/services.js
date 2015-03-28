@@ -56,14 +56,11 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                         }
                     )
             );
-            
 
             promises.push(
                 poisService.getPoisFromElement(element.id, true)
                     .then(
                         function (pois) {
-                            console.log('poi');
-                            console.log(pois);
                             var counter = 0;
                             _.forEach(pois.features, function (poi) {
                                 var poiLocation = utilsFactory.getStartPoint(poi);
@@ -502,20 +499,17 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
         // Get the map bounds - the top-left and bottom-right locations.
             bounds = self.map.getBounds();
 
-        // For each marker, consider whether it is currently visible by comparing
+        // For each layer, consider whether it is currently visible by comparing
         // with the current map bounds.
-        layer.eachLayer(function(marker) {
-            if (marker.options.result) {
-                if (marker.options.result.geometry.type !== 'Point') {
-                    _.forEach(marker.options.result.geometry.coordinates, function (currentPoint) {
-                        if (bounds.contains([currentPoint[1], currentPoint[0]])) {
-                            isVisibe = true;
-                        }
-                    });
-                    if (isVisibe) {inBounds.push(marker);};
+        layer.eachLayer(function(layer) {
+            if (layer.options.result) {
+                if (layer.options.result.geometry.type !== 'Point' && !self.treksIconified) {
+                    if (bounds.intersects(layer.getBounds())) {
+                        inBounds.push(layer.options.result);
+                    }
                 } else {
-                    if (bounds.contains(marker.getLatLng())) {
-                        inBounds.push(marker);
+                    if (bounds.contains(layer.getLatLng())) {
+                        inBounds.push(layer.options.result);
                     }
                 }
             }
@@ -528,19 +522,26 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
         var visibleMarkers = self.testMarkersVisibility(self._clustersLayer),
             visibleGeoJson = self.testMarkersVisibility(self._treksgeoJsonLayer);
 
-        var visbleResults = _.merge(visibleMarkers, visibleGeoJson);
-        _.forEach(document.querySelectorAll('.results-drawer .result'), function (aResult) {
-            console.log(aResult.classList);
-            if (aResult.classList.contains('visible')) {
-                aResult.classList.remove('visible');
-            }
-        });
-        _.forEach(visbleResults, function (marker) {
-            var currentResult = marker.options.result
+        var visbleResults = _.union(visibleMarkers, visibleGeoJson);
+       _.forEach(self.currentResults, function (currentResult) {
+            var isVisibe = false;
             var selector = '#result-category-' + currentResult.properties.category.id.toString() + '-' + currentResult.id.toString();
             var listResult = document.querySelector(selector);
-            if (!listResult.classList.contains('visible')) {
-                listResult.classList.add('visible')
+            if (listResult) {
+                _.forEach(visbleResults, function (currentActiveResult) {
+                    if(currentResult.properties.category.id === currentActiveResult.properties.category.id && currentResult.id === currentActiveResult.id) {
+                        isVisibe = true;
+                    }
+                });
+                if (isVisibe) {
+                    if (listResult.classList.contains('not-in-viewport')) {
+                        listResult.classList.remove('not-in-viewport');
+                    }
+                } else {
+                    if (!listResult.classList.contains('not-in-viewport')) {
+                        listResult.classList.add('not-in-viewport');
+                    }
+                }
             }
         });
     };
@@ -595,7 +596,6 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                     })
                 });
                 self.currentElevationPoint.addTo(self.map);
-                console.log(self.currentElevationPoint);
 
                 jQuery(window).on('resize', function () {
                     updateSparkline();
@@ -631,6 +631,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
 
         if (!self.loadingMarkers) {
             self.loadingMarkers = true;
+            self.currentResults = results;
 
             this.treksIconified = this.map.getZoom() < globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL;
             this.clearAllLayers();
@@ -701,7 +702,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                                 self.map.invalidateSize();
                                 self.updateBounds(updateBounds, self._clustersLayer);
                                 self.resultsVisibility();
-                                self.map.on('move', self.resultsVisibility);
+                                self.map.on('moveend', self.resultsVisibility);
                                 self.loadingMarkers = false;
                             }
                         }
@@ -720,7 +721,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
 
         if (!self.loadingMarkers) {
 
-            self.map.off('move', self.resultsVisibility);
+            self.map.off('moveend', self.resultsVisibility);
 
             self.loadingMarkers = true;
 
@@ -1065,7 +1066,6 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
         var deferred = $q.defer();
 
         if (!iconName || !self.icons_liste[iconName]) {
-            console.log('no icon');
             deferred.reject('icon doesn\'t exist');
         } else {
             if (self[iconName]) {
