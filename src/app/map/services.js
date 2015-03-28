@@ -544,8 +544,6 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
     };
 
     this.resultsVisibility = function () {
-        console.log('filterByViewport');
-        console.log(self.filterByViewport);
         var visibleMarkers = self.testMarkersVisibility(self._clustersLayer),
             visibleGeoJson = self.testMarkersVisibility(self._treksgeoJsonLayer);
 
