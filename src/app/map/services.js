@@ -1085,7 +1085,7 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
             iconSize: [40, 40],
             iconAnchor: [20, 20],
             className: 'trek-cluster',
-            html: '<span class="count">' + cluster.getChildCount() + '</span>'
+            html: '<div class="marker"><span class="count">' + cluster.getChildCount() + '</span></div>'
         });
     };
 

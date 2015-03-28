@@ -87,7 +87,7 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
     function mapInit(selector) {
 
         var mapSelector = selector || 'map';
-        $scope.map = mapService.initMap(mapSelector);
+        $rootScope.map = mapService.initMap(mapSelector);
         initCtrlsTranslation();
         if ($state.current.name === 'layout.detail') {
             updateMapWithDetails();
@@ -99,10 +99,10 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
 
     mapInit('map');
 
-    $scope.map.on('zoomend', function () {
+    $rootScope.map.on('zoomend', function () {
         if ($state.current.name === 'layout.root') {
-            if ((mapService.treksIconified && $scope.map.getZoom() >= globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL)
-                    || (!mapService.treksIconified && $scope.map.getZoom() < globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL)) {
+            if ((mapService.treksIconified && $rootScope.map.getZoom() >= globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL)
+                    || (!mapService.treksIconified && $rootScope.map.getZoom() < globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL)) {
                 mapService.displayResults($scope.results, false);
             }
         }

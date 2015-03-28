@@ -18,6 +18,7 @@
     "leaflet-minimap": "git://github.com/Norkart/Leaflet-MiniMap.git",
     "leaflet.fullscreen": "^1.1.4",
     "leaflet.markercluster": "^0.4.0",
+    "leaflet-geometryutil": "git://github.com/makinacorpus/Leaflet.GeometryUtil.git",
     "lodash": "^2.4.1",
     "rando3d": "git://github.com/makinacorpus/rando3D.git"
   },
@@ -35,6 +36,7 @@
     "leaflet-minimap": "./node_modules/leaflet-minimap/src/Control.MiniMap.js",
     "leaflet.markercluster": "./node_modules/leaflet.markercluster/dist/leaflet.markercluster.js",
     "leaflet.fullscreen": "./node_modules/leaflet.fullscreen/Control.FullScreen.js",
+    "leaflet-geometryutil": "./node_modules/leaflet-geometryutil/dist/leaflet.geometryutil.js",
     "lodash": "./node_modules/lodash/lodash.js",
     "sparklines": "./src/app/vendors/scripts/sparklines.min.js"
   },

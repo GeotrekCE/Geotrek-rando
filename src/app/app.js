@@ -47,6 +47,7 @@ require('sparklines');
 require('leaflet-minimap');
 require('leaflet.markercluster');
 require('leaflet.fullscreen');
+require('leaflet-geometryutil');
 
 //TEST LIBRARIES
 require('angular-mocks'); // that one will exclude if not angular.mock

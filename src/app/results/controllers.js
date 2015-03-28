@@ -8,7 +8,6 @@ function ResultsListeController($scope, $rootScope, utilsFactory, favoritesServi
             .then(
                 function (data) {
                     $scope.results = data;
-                    //console.log(data);
                 }
             );
 
@@ -26,15 +25,23 @@ function ResultsListeController($scope, $rootScope, utilsFactory, favoritesServi
 
     $scope.hoverLayerElement = function (currentElement, state) {
         var layerEquivalent = document.querySelector('.layer-category-' + currentElement.properties.category.id + '-' + currentElement.id);
-        if (layerEquivalent !== null) {
-            if (state === 'enter') {
-                if (!layerEquivalent.classList.contains('hovered')) {
-                    layerEquivalent.classList.add('hovered');
-                }
-            } else {
-                if (layerEquivalent.classList.contains('hovered')) {
-                    layerEquivalent.classList.remove('hovered');
-                }
+        if (!layerEquivalent) {
+            var mapLayers = [];
+            $rootScope.map.eachLayer(function (currentLayer) { mapLayers.push(currentLayer); });
+            var position = utilsFactory.getStartPoint(currentElement);
+            var cluster = L.GeometryUtil.closestLayer($rootScope.map, mapLayers, position);
+            if (cluster) {
+                layerEquivalent = cluster.layer._icon;
+            }
+        }
+
+        if (state === 'enter') {
+            if (!layerEquivalent.classList.contains('hovered')) {
+                layerEquivalent.classList.add('hovered');
+            }
+        } else {
+            if (layerEquivalent.classList.contains('hovered')) {
+                layerEquivalent.classList.remove('hovered');
             }
         }
     };
