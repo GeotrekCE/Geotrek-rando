@@ -225,17 +225,18 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
     //
 
     this.initMapControls = function () {
-        this.setScale();
+        this.setViewPortFilteringControl();
         this.setAttribution();
         this.setZoomControlPosition();
         this.setFullScreenControl();
         this.setMinimap();
+        this.setScale();
         this.createSatelliteView();
         this.setResetViewControl();
     };
 
     this.setScale = function () {
-        L.control.scale({imperial: false}).addTo(this.map);
+        L.control.scale({imperial: false, position: 'bottomright'}).addTo(this.map);
     };
 
     this.setZoomControlPosition = function () {
@@ -274,6 +275,31 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
 
         this.resetViewControl = new L.Control.Resetview();
         this.map.addControl(this.resetViewControl);
+    };
+
+    this.setViewPortFilteringControl = function () {
+        L.Control.ViewportFilter = L.Control.extend({
+            options: {
+                position: 'bottomleft'
+            },
+            onAdd: function (map) {
+                var controlContainer = L.DomUtil.create('div', 'leaflet-control-viewportfilter');
+                var controlInput = L.DomUtil.create('input', 'leaflet-control-viewportfilter-button', controlContainer);
+                controlInput.type = 'checkbox';
+                controlInput.value = 'viewport-filtering';
+                var controlCaption = L.DomUtil.create('span', 'leaflet-control-viewportfilter-caption', controlContainer);
+                controlCaption.innerHTML = 'Filter when I move the map';
+
+                L.DomEvent.on(controlInput, 'change', function () {
+                    self.filterByViewport = document.querySelector('.leaflet-control-viewportfilter-button').checked;
+                    self.resultsVisibility();
+                }, this);
+                return controlContainer;
+            }
+        });
+
+        this.ViewportFilterControl = new L.Control.ViewportFilter();
+        this.map.addControl(this.ViewportFilterControl);
     };
 
     this.setMinimap = function () {
@@ -495,13 +521,12 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
     this.testMarkersVisibility = function (layer) {
         // Construct an empty list to fill with onscreen markers.
         var inBounds = [],
-            isVisibe = false,
         // Get the map bounds - the top-left and bottom-right locations.
             bounds = self.map.getBounds();
 
         // For each layer, consider whether it is currently visible by comparing
         // with the current map bounds.
-        layer.eachLayer(function(layer) {
+        layer.eachLayer(function (layer) {
             if (layer.options.result) {
                 if (layer.options.result.geometry.type !== 'Point' && !self.treksIconified) {
                     if (bounds.intersects(layer.getBounds())) {
@@ -519,31 +544,42 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
     };
 
     this.resultsVisibility = function () {
+        console.log('filterByViewport');
+        console.log(self.filterByViewport);
         var visibleMarkers = self.testMarkersVisibility(self._clustersLayer),
             visibleGeoJson = self.testMarkersVisibility(self._treksgeoJsonLayer);
 
         var visbleResults = _.union(visibleMarkers, visibleGeoJson);
-       _.forEach(self.currentResults, function (currentResult) {
-            var isVisibe = false;
+
+        _.forEach(self.currentResults, function (currentResult) {
             var selector = '#result-category-' + currentResult.properties.category.id.toString() + '-' + currentResult.id.toString();
             var listResult = document.querySelector(selector);
             if (listResult) {
-                _.forEach(visbleResults, function (currentActiveResult) {
-                    if(currentResult.properties.category.id === currentActiveResult.properties.category.id && currentResult.id === currentActiveResult.id) {
-                        isVisibe = true;
-                    }
-                });
-                if (isVisibe) {
+                if (!self.filterByViewport) {
                     if (listResult.classList.contains('not-in-viewport')) {
                         listResult.classList.remove('not-in-viewport');
                     }
                 } else {
-                    if (!listResult.classList.contains('not-in-viewport')) {
-                        listResult.classList.add('not-in-viewport');
+                    var isVisibe = false;
+
+                    _.forEach(visbleResults, function (currentActiveResult) {
+                        if (currentResult.properties.category.id === currentActiveResult.properties.category.id && currentResult.id === currentActiveResult.id) {
+                            isVisibe = true;
+                        }
+                    });
+                    if (isVisibe) {
+                        if (listResult.classList.contains('not-in-viewport')) {
+                            listResult.classList.remove('not-in-viewport');
+                        }
+                    } else {
+                        if (!listResult.classList.contains('not-in-viewport')) {
+                            listResult.classList.add('not-in-viewport');
+                        }
                     }
                 }
             }
         });
+
     };
 
     this.createElevation = function (result) {
@@ -795,6 +831,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
 
         //Mixins for map
         this.initCustomsMixins();
+        self.filterByViewport = false;
 
         this.map = L.map(mapSelector, mapParameters);
 
