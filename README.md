@@ -18,11 +18,14 @@ npm install
 
 ### Config the app
 To do so, you need to: 
-1 - duplicate src/app/config/configs-default.js and rename it configs.js
+1 - duplicate `src/app/config/configs-default.js` and rename it `configs.js`
 Then you can chose options that suits your needs in it !
-(Each time you change your config file, you need to do the next step again.)
-2 - change the PLATFORM_ID at the top of the config.js file with a unique id as it will be used for localStorage.
-3 - rename any file ending by .example with [lang]-custom.po in src/app/translation/po/
+(Each time you change your config file, you need to launch gulp if you're not in dev mode.)
+2 - change the `PLATFORM_ID` at the top of the previously created `config.js` file with a *unique id* as it will be used for localStorage.
+3 - duplicate `src/app/config/styles/_configs-default.scss` and rename it `_configs.scss`.
+In this file you can override colors and font configuration of the app.
+(don't forget the `_` bfore the name !)
+4 - In `src/app/translation/po/`, rename any file ending by .example with [lang]-custom.po.
 (ex: fr-custom.po.example -> fr-custom.po, en-custom.po.example -> en-custom.po)
 Thos files will allow you to override any translation in [lang].po files.
 
