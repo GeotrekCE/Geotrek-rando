@@ -55,9 +55,8 @@ var constants = {
         CENTER_LATITUDE: 44.83,
         CENTER_LONGITUDE: 6.34,
         DEFAULT_ZOOM: 12,
-        DEFAULT_MIN_ZOOM: 0,
-        DEFAULT_MAX_ZOOM: 16,
-        TREK_COLOR: '#F89406'
+        DEFAULT_MIN_ZOOM: 8,
+        DEFAULT_MAX_ZOOM: 18
     },
     TREKS_TO_GEOJSON_ZOOM_LEVEL : 14,
     UPDATE_MAP_ON_FILTER: false,

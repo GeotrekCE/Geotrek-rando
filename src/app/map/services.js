@@ -476,6 +476,20 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
 
     };
 
+    this.createPOIsLayer = function () {
+
+        var clusterLayer = new L.MarkerClusterGroup({
+            showCoverageOnHover: false,
+            disableClusteringAtZoom: globalSettings.LEAFLET_CONF.DEFAULT_MAX_ZOOM,
+            iconCreateFunction: function (cluster) {
+                return iconsService.getPOIClusterIcon(cluster);
+            }
+        });
+
+        return clusterLayer;
+
+    };
+
     this.createGeoJSONLayer = function () {
 
         var layer = new L.geoJson();
@@ -840,7 +854,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
             this._touristicsMarkersLayer = self.createLayer();
         }
 
-        this._poisMarkersLayer = self.createLayer();
+        this._poisMarkersLayer = self.createPOIsLayer();
         this._nearMarkersLayer = self.createLayer();
 
         this.map.addLayer(this._clustersLayer);
@@ -900,9 +914,9 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
         },
         poi_base: {
             iconUrl: '/images/map/category_base.svg',
-            iconSize: [40, 56],
-            iconAnchor: [20, 56],
-            labelAnchor: [20, 20]
+            iconSize: [34, 34],
+            iconAnchor: [17, 34],
+            labelAnchor: [17, 17]
         }
     };
 
@@ -1084,8 +1098,36 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
         return new L.DivIcon({
             iconSize: [40, 40],
             iconAnchor: [20, 20],
-            className: 'trek-cluster',
+            className: 'element-cluster',
             html: '<div class="marker"><span class="count">' + cluster.getChildCount() + '</span></div>'
+        });
+    };
+
+    this.getPOIClusterIcon = function (cluster) {
+        var children = cluster.getAllChildMarkers(),
+            iconsMarkup = '',
+            i = 0,
+            icons = {ICON0: '', ICON1: '', ICON2: '', ICON3: ''},
+            template = '' +
+                '<div class="icon-group">' +
+                    '<div class="icon">{ICON0}</div>' +
+                    '<div class="icon">{ICON1}</div>' +
+                    '<div class="icon">{ICON2}</div>' +
+                    '<div class="icon">{ICON3}</div>' +
+                '</div>';
+
+        for (i = 0; i < Math.min(children.length, 4); i++) {
+            if (children[i].options.result && children[i].options.result.properties.type) {
+                icons['ICON'+i] = '<img src="' + children[i].options.result.properties.type.pictogram + '"/>';
+            }
+        }
+        iconsMarkup = L.Util.template(template, icons);
+
+        return new L.DivIcon({
+            iconSize: [40, 40],
+            iconAnchor: [20, 40],
+            className: 'poi-cluster',
+            html: iconsMarkup
         });
     };
 
@@ -1133,12 +1175,12 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
             poiIcon;
 
         $q.all([
-            self.getSVGIcon(self.icons_liste.poi_base.iconUrl, 'poi_base')
+            /*self.getSVGIcon(self.icons_liste.poi_base.iconUrl, 'poi_base')
                 .then(
                     function (icon) {
                         markerIcon = icon;
                     }
-                ),
+                ),*/
             self.getAPoiTypeIcon(poi.properties.type.id, false)
                 .then(
                     function (icon) {
@@ -1151,9 +1193,10 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
                 )
         ]).then(
             function () {
-                var markup = '';
-                markup += '<div class="marker" data-popup="' + poi.properties.name + '">' + markerIcon + '</div>';
-                markup += '<div class="icon">' + poiIcon + '</div>';
+                var markup = '' +
+                    '<div class="marker" data-popup="' + poi.properties.name + '">' +
+                        '<div class="icon">' + poiIcon + '</div>' +
+                    '</div>';
                 var newIcon = new L.divIcon({
                     html: markup,
                     iconSize: self.icons_liste.poi_base.iconSize,
@@ -1190,9 +1233,11 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
                 )
         ]).then(
             function () {
-                var markup = '';
-                markup += '<div class="marker" data-popup="' + element.properties.name + '">' + markerIcon + '</div>';
-                markup += '<div class="icon">' + categoryIcon + '</div>';
+                var markup = '' +
+                    '<div class="marker" data-popup="' + element.properties.name + '">' +
+                        markerIcon +
+                    '</div>' +
+                    '<div class="icon">' + categoryIcon + '</div>';
 
                 var newIcon = new L.divIcon({
                     html: markup,
