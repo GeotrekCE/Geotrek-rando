@@ -30,7 +30,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                 self.createLayerFromElement(element, 'parking', parkingPoint)
                     .then(
                         function (marker) {
-                            self._poisMarkersLayer.addLayer(marker);
+                            self._nearMarkersLayer.addLayer(marker);
                         }
                     )
             );
@@ -43,7 +43,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                 self.createLayerFromElement(element, 'departure', startPoint)
                     .then(
                         function (marker) {
-                            self._poisMarkersLayer.addLayer(marker);
+                            self._nearMarkersLayer.addLayer(marker);
                         }
                     )
             );
@@ -52,7 +52,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                 self.createLayerFromElement(element, 'arrival', endPoint)
                     .then(
                         function (marker) {
-                            self._poisMarkersLayer.addLayer(marker);
+                            self._nearMarkersLayer.addLayer(marker);
                         }
                     )
             );
@@ -1202,7 +1202,7 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
                     iconSize: self.icons_liste.poi_base.iconSize,
                     iconAnchor: self.icons_liste.poi_base.iconAnchor,
                     labelAnchor: self.icons_liste.poi_base.labelAnchor,
-                    className: 'double-marker poi layer-' + poi.properties.type.id + '-' + poi.id + ' ' + poi.properties.type.id
+                    className: 'double-marker popup poi layer-' + poi.properties.type.id + '-' + poi.id + ' ' + poi.properties.type.id
                 });
                 deferred.resolve(newIcon);
             }
@@ -1244,7 +1244,7 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
                     iconSize: self.icons_liste.category_base.iconSize,
                     iconAnchor: self.icons_liste.category_base.iconAnchor,
                     labelAnchor: self.icons_liste.category_base.labelAnchor,
-                    className: 'double-marker layer-category-' + element.properties.category.id + '-' + element.id + ' category-' + element.properties.category.id
+                    className: 'double-marker popup layer-category-' + element.properties.category.id + '-' + element.id + ' category-' + element.properties.category.id
                 });
                 deferred.resolve(newIcon);
             }
