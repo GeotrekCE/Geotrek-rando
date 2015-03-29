@@ -1,18 +1,30 @@
 'use strict';
 
-function PoisListeController($scope, $rootScope) {
+function PoisListeController($scope, $rootScope, utilsFactory) {
 
     $scope.hoverMarkerPoi = function (currentPoi, state) {
         var layerEquivalent = document.querySelector('.layer-' + currentPoi.properties.type.id + '-' + currentPoi.id);
-        if (layerEquivalent !== null) {
-            if (state === 'enter') {
-                if (!layerEquivalent.classList.contains('hovered')) {
-                    layerEquivalent.classList.add('hovered');
+        if (!layerEquivalent) {
+            var mapLayers = [];
+            $rootScope.map.eachLayer(function (currentLayer) {
+                if (currentLayer._childCount) {
+                    mapLayers.push(currentLayer);
                 }
-            } else {
-                if (layerEquivalent.classList.contains('hovered')) {
-                    layerEquivalent.classList.remove('hovered');
-                }
+            });
+            var position = utilsFactory.getStartPoint(currentPoi);
+            var cluster = L.GeometryUtil.closestLayer($rootScope.map, mapLayers, position);
+
+            if (cluster) {
+                layerEquivalent = cluster.layer._icon;
+            }
+        }
+        if (state === 'enter') {
+            if (!layerEquivalent.classList.contains('hovered')) {
+                layerEquivalent.classList.add('hovered');
+            }
+        } else {
+            if (layerEquivalent.classList.contains('hovered')) {
+                layerEquivalent.classList.remove('hovered');
             }
         }
     };

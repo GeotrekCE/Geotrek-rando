@@ -27,7 +27,11 @@ function ResultsListeController($scope, $rootScope, utilsFactory, favoritesServi
         var layerEquivalent = document.querySelector('.layer-category-' + currentElement.properties.category.id + '-' + currentElement.id);
         if (!layerEquivalent) {
             var mapLayers = [];
-            $rootScope.map.eachLayer(function (currentLayer) { mapLayers.push(currentLayer); });
+            $rootScope.map.eachLayer(function (currentLayer) {
+                if (currentLayer._childCount) {
+                    mapLayers.push(currentLayer);
+                }
+            });
             var position = utilsFactory.getStartPoint(currentElement);
             var cluster = L.GeometryUtil.closestLayer($rootScope.map, mapLayers, position);
             if (cluster) {
