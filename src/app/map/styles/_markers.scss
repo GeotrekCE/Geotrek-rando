@@ -13,7 +13,7 @@
         height: 100%;
         max-width: 100%;
     }
-    .marker::after {
+    &.popup .marker::after {
         content: '';
         display: block;
         position: absolute;
@@ -27,7 +27,7 @@
         border-right: 0 solid transparent;
         border-top: 0 solid white;
     }
-    .marker::before {
+    &.popup .marker::before {
         border-radius: 2px 2px 0 0;
         content: attr(data-popup);
         display: block;
@@ -60,6 +60,9 @@
         .marker {
             transform: scale(1.2);
             transform-origin: center bottom;
+        }
+
+        &.popup .marker {
             &::after, &::before {
                 opacity: 1;
             }
