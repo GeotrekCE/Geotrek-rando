@@ -524,6 +524,26 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
 
     };
 
+    this.highlightPath = function (element) {
+
+        if (!self.treksIconified) {
+            if (self.geoHover) {
+                self._nearMarkersLayer.removeLayer(self.geoHover);
+            }
+
+            var hoverStyle = {
+                className:  'layer-highlight'
+            };
+
+            self.geoHover = L.geoJson(element, {
+                style: hoverStyle
+            });
+            self.geoHover.addTo(self._nearMarkersLayer);
+            self.geoHover.bringToBack();
+        }
+        
+    };
+
     this.testMarkersVisibility = function (layer) {
         // Construct an empty list to fill with onscreen markers.
         var inBounds = [],
@@ -715,6 +735,9 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                                             listeEquivalent.classList.add('hovered');
                                         }
                                     }
+                                    if (result.geometry.type !== "Point") {
+                                        self.highlightPath(result);
+                                    }
                                 },
                                 mouseout: function () {
                                     var listeEquivalent = document.querySelector(selector);
@@ -722,6 +745,9 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                                         if (listeEquivalent.classList.contains('hovered')) {
                                             listeEquivalent.classList.remove('hovered');
                                         }
+                                    }
+                                    if (self.geoHover) {
+                                        self._nearMarkersLayer.removeLayer(self.geoHover);
                                     }
                                 },
                                 remove: function () {
@@ -736,6 +762,16 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                                     $state.go("layout.detail", { slug: result.properties.slug });
                                 }
                             });
+                            if (result.geometry.type !== "Point") {
+                                jQuery(selector).on('mouseenter', function () {
+                                    self.highlightPath(result);
+                                });
+                                jQuery(selector).on('mouseleave', function () {
+                                    if (self.geoHover) {
+                                        self._nearMarkersLayer.removeLayer(self.geoHover);
+                                    }
+                                });
+                            }
                             currentLayer.addLayer(layer);
                             self._clustersLayer.addLayer(currentLayer);
                             if (currentCount === _.size(results)) {

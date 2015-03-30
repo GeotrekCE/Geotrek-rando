@@ -179,21 +179,18 @@
 .leaflet-overlay-pane {
     svg {
         path {
-            weight: 5;
-            opacity: 0.7;
-            stroke-opacity: 0.7;
+            stroke-opacity: 1;
             @include geojson-coloring();
-            &:hover, &.hovered {
-                opacity: 1;
-                stroke-opacity: 1;
-            }
         }
     }
 }
 
+.layer-highlight {
+    stroke-width: 10;
+    stroke: yellow;
+}
+
 .detail-map .leaflet-overlay-pane svg path {
-    opacity: 1;
-    stroke-opacity: 1;
 }
 
 .elevationMarker {

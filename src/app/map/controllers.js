@@ -89,6 +89,7 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
         var mapSelector = selector || 'map';
         $rootScope.map = mapService.initMap(mapSelector);
         initCtrlsTranslation();
+
         if ($state.current.name === 'layout.detail') {
             updateMapWithDetails();
         } else {
