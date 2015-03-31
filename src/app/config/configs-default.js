@@ -4,6 +4,7 @@ var constants = {
 
     PLATFORM_ID: 'geotrek-rando',
     DOMAIN: 'http://geotrekdemo.ecrins-parcnational.fr',
+    LOGO_FILE: '', // '' means no logo // Put the file in src/images/custom
     ENABLE_HTML_MODE: true,
     SHOW_HOME: true,
     SHOW_FOOTER: true,

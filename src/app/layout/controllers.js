@@ -37,11 +37,13 @@ function LayoutController($rootScope, $scope, $state, resultsService, globalSett
     $rootScope.mapIsShown = false;
 }
 
-function HeaderController($rootScope, $scope) {
+function HeaderController($rootScope, $scope, globalSettings) {
 
     $scope.displayHomePage = function () {
         $rootScope.showHome = true;
     };
+
+    $scope.logo = globalSettings.LOGO_FILE;
 
 }
 
