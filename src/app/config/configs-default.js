@@ -75,6 +75,7 @@ var constants = {
     TREKS_DIR: 'treks',
     TREK_DIR: 'trek',
     POI_DIR: 'pois',
+    FLAT_DIR: 'flatpages',
     TOURISTIC_EVENTS_DIR: 'touristicevents',
     TOURISTIC_CONTENTS_DIR: 'touristiccontents',
 
