@@ -1,7 +1,7 @@
 <section id="home-page">
     <div class="header">
-        <div class="logo">
-            <ng-include src="'images/main-logo.svg'"></ng-include>
+        <div ng-if="logo" class="logo">
+            <img ng-src="./images/custom/{{logo}}">
         </div>
         <h1>{{'BANNER_TEXT' | translate}}</h1>
         <div class="access-chose">
@@ -44,19 +44,5 @@
             </ul>
         </div>
     </div>
-    <div class="footer">
-        <ul class="parternships-left">
-            <li><img src="images/credits/logo-eco-tourrism-med.jpg" alt="Mediterranean experience of eco-tourism"></li>
-            <li><img src="images/credits/logo-enpi.jpg" alt="ENPI CBCMED"></li>
-            <li><img src="images/credits/logo-partenaires-parc.png" alt="Partenaire Parcs nationaux de France"></li>
-        </ul>
-        <ul class="legals">
-            <li><a href>{{'CREDITS' | translate}}</a></li>
-            <li><a href>{{'LEGALS' | translate}}</a></li>
-            <li><a href>{{'CONTACT' | translate}}</a></li>
-        </ul>
-        <ul class="parternships-right">
-            <li><img src="images/credits/logo-financement-ue.png" alt="Project founded by the European Union"></li>
-        </ul>
-    </div>
+    <geotrek-footer></geotrek-footer>
 </section>

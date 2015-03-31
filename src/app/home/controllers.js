@@ -1,6 +1,6 @@
 'use strict';
 
-function HomeController($scope, $rootScope, homeService) {
+function HomeController($scope, $rootScope, homeService, globalSettings) {
 
     $scope.toggleHome = function () {
         $rootScope.showHome = !$rootScope.showHome;
@@ -10,6 +10,8 @@ function HomeController($scope, $rootScope, homeService) {
         homeService.setChoice();
         $scope.toggleHome();
     };
+
+    $scope.logo = globalSettings.LOGO_FILE;
 
 }
 

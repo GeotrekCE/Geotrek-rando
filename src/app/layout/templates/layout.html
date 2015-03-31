@@ -3,6 +3,6 @@
     <div id="sidebar" ui-view="sidebar"></div>
     <div ui-view="content" class="content"></div>
 </div>
-<div id="footer" ui-view="footer" ng-if="$root.showFooterOnApp"></div>
+<geotrek-footer ng-if="$root.showFooterOnApp"></geotrek-footer>
 <lightbox-gallery></lightbox-gallery>
 <home-page ng-if="$root.showHome"></home-page>

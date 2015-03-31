@@ -6,8 +6,9 @@ var constants = {
     DOMAIN: 'http://geotrekdemo.ecrins-parcnational.fr',
     LOGO_FILE: '', // '' means no logo // Put the file in src/images/custom
     ENABLE_HTML_MODE: true,
-    SHOW_HOME: true,
-    SHOW_FOOTER: true,
+    SHOW_HOME: false,
+    SHOW_FOOTER: false,
+    FOOTER_TEMPLATE_FILE: '',
 
     // LANGUAGES PARAMETERS //
     //

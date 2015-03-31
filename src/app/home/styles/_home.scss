@@ -132,7 +132,8 @@
             }
         }
     }
-    .footer {
+    #footer {
+        position: relative;
         width: 100%;
         background: white;
         font-size: 0.8rem;

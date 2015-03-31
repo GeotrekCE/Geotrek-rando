@@ -33,10 +33,6 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
                 },
                 'content' : {
                     template: require('./templates/content-home.html'),
-                },
-                'footer' : {
-                    template: require('./templates/footer.html'),
-                    controller: controller.FooterController
                 }
             }
 
@@ -54,10 +50,6 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
                 },
                 'content' : {
                     template: require('./templates/content-detail.html'),
-                },
-                'footer' : {
-                    template: require('./templates/footer.html'),
-                    controller: controller.FooterController
                 }
             }
         })
@@ -74,10 +66,6 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
                 },
                 'content' : {
                     template: require('./templates/content-flat.html'),
-                },
-                'footer' : {
-                    template: require('./templates/footer.html'),
-                    controller: controller.FooterController
                 }
             }
         });
