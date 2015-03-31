@@ -43,6 +43,8 @@ function HeaderController($rootScope, $scope, globalSettings) {
         $rootScope.showHome = true;
     };
 
+    $scope.isHomeActive = globalSettings.SHOW_HOME;
+
     $scope.logo = globalSettings.LOGO_FILE;
 
 }

@@ -27,14 +27,14 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
             <ul class="nav navbar-nav static-pages navbar-right">
-                <li class="home" tooltip-placement="bottom" tooltip="{{'HOME' | translate}}">
+                <li class="home" tooltip-placement="bottom" tooltip="{{'HOME' | translate}}" ng-if="isHomeActive">
                     <a ui-sref="layout.root" ng-click="displayHomePage()">
                         <span class="glyphicon glyphicon-home"></span>
                     </a>
                 </li>
                 <flat-menu></flat-menu>
                 <li class="divider"></li>
-                <li class="share" tooltip-placement="bottom" tooltip="{{'SHARE' | translate}}">
+                <li ng-if='false' class="share" tooltip-placement="bottom" tooltip="{{'SHARE' | translate}}">
                     <a href>
                         <span class="glyphicon glyphicon-share"></span>
                     </a>
