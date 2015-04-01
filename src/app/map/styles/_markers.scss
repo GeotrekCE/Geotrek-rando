@@ -153,6 +153,13 @@
     }
 }
 
+.departure-marker, .arrival-marker {
+    svg .base {
+        stroke: black;
+        stroke-width: 2;
+    }
+}
+
 .departure-marker {
     svg, svg .base {
         fill: $valid-color;
