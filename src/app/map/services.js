@@ -63,7 +63,6 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                         function (pois) {
                             var counter = 0;
                             _.forEach(pois.features, function (poi) {
-                                console.log(poi);
                                 var poiLocation = utilsFactory.getStartPoint(poi);
                                 self.createLayerFromElement(poi, 'poi', poiLocation)
                                     .then(
@@ -101,7 +100,6 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                                                 }
                                             });
                                             self._poisMarkersLayer.addLayer(marker);
-                                            console.log(self._poisMarkersLayer);
                                         }
                                     );
                             });
