@@ -60,6 +60,10 @@
 
 }
 
+.detail-map .leaflet-control-viewportfilter {
+    display: none;
+}
+
 @media (max-width: 768px) {
     .leaflet-control-minimap, .leaflet-control-zoom {
         display: none;
