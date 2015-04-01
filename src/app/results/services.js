@@ -49,7 +49,10 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                     .then(
                         function (trEvents) {
                             _.forEach(trEvents.features, function (trEvent) {
-                                if (trEvent.properties.published) {
+                                var currentDate = new Date();
+                                var eventDate = trEvent.properties.end_date || trEvent.properties.begin_date;
+                                eventDate = new Date(eventDate);
+                                if (trEvent.properties.published && eventDate > currentDate) {
                                     results.push(trEvent);
                                 }
                             });
