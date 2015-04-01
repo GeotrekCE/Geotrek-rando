@@ -95,7 +95,7 @@ function MediaController(media, $scope, $timeout) {
 
             player.src = 'https://player.vimeo.com/video/' + media.code + '?title=0&byline=0&portrait=0';
 
-        } else if (media.backend === 'Soundcloud') {
+        } else if (media.backend === 'SoundCloud') {
 
             player.scrolling = "no";
             player.src = 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + media.code + '&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true';
@@ -105,7 +105,7 @@ function MediaController(media, $scope, $timeout) {
         
     }
 
-    $timeout(initPlayer, 1000);
+    $timeout(initPlayer, 500);
 }
 
 module.exports = {
