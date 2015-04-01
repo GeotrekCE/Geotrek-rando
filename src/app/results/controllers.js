@@ -39,13 +39,15 @@ function ResultsListeController($scope, $rootScope, utilsFactory, favoritesServi
             }
         }
 
-        if (state === 'enter') {
-            if (!layerEquivalent.classList.contains('hovered')) {
-                layerEquivalent.classList.add('hovered');
-            }
-        } else {
-            if (layerEquivalent.classList.contains('hovered')) {
-                layerEquivalent.classList.remove('hovered');
+        if (layerEquivalent) {
+            if (state === 'enter') {
+                if (!layerEquivalent.classList.contains('hovered')) {
+                    layerEquivalent.classList.add('hovered');
+                }
+            } else {
+                if (layerEquivalent.classList.contains('hovered')) {
+                    layerEquivalent.classList.remove('hovered');
+                }
             }
         }
     };
