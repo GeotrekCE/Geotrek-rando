@@ -4,16 +4,20 @@ var constants = {
 
     PLATFORM_ID: 'geotrek-rando',
     DOMAIN: 'http://geotrekdemo.ecrins-parcnational.fr',
-    LOGO_FILE: '', // '' means no logo // Put the file in src/images/custom
     ENABLE_HTML_MODE: true,
-    SHOW_HOME: false,
-    SHOW_FOOTER: false,
-    FOOTER_TEMPLATE_FILE: '',
 
 
     // INTERFACE PARAMETERS //
     //
     //
+    LOGO_FILE: '', // '' = no logo // Put the file in src/images/custom
+    SHOW_HOME: false,
+    HOME_TEMPLATE_FILE: {
+        fr: '',
+        en: ''
+    },
+    SHOW_FOOTER: false,
+    FOOTER_TEMPLATE_FILE: '',
 
     ENABLE_DISTRICTS_FILTERING: true,
     ENABLE_CITIES_FILTERING: true,

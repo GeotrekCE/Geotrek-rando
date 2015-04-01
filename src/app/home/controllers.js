@@ -1,6 +1,16 @@
 'use strict';
 
-function HomeController($scope, $rootScope, homeService, globalSettings) {
+function HomeController($scope, $rootScope, translationService, homeService, globalSettings) {
+
+    $scope.initHome = function () {
+        var currentLang = translationService.getCurrentLang();
+        $scope.homeTemplate = 'app/home/templates/';
+        if (globalSettings.HOME_TEMPLATE_FILE[currentLang.code]) {
+            $scope.homeTemplate += 'custom/' + globalSettings.HOME_TEMPLATE_FILE[currentLang.code];
+        } else {
+            $scope.homeTemplate += 'home-default.html';
+        }
+    };
 
     $scope.toggleHome = function () {
         $rootScope.showHome = !$rootScope.showHome;
@@ -12,6 +22,8 @@ function HomeController($scope, $rootScope, homeService, globalSettings) {
     };
 
     $scope.logo = globalSettings.LOGO_FILE;
+
+    $scope.initHome();
 
 }
 
