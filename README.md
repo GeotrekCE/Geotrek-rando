@@ -16,18 +16,24 @@ clone the current repository and then :
 npm install
 ```
 
-### Config the app
-To do so, you need to: 
+### Create and rename custom files
 1 - duplicate `src/app/config/configs-default.js` and rename it `configs.js`
 Then you can chose options that suits your needs in it !
 (Each time you change your config file, you need to launch gulp if you're not in dev mode.)
-2 - change the `PLATFORM_ID` at the top of the previously created `config.js` file with a *unique id* as it will be used for localStorage.
-3 - duplicate `src/app/config/styles/_configs-default.scss` and rename it `_configs.scss`.
+2 - duplicate `src/app/config/styles/_configs-default.scss` and rename it `_configs.scss`.
 In this file you can override colors and font configuration of the app.
 (don't forget the `_` bfore the name !)
-4 - In `src/app/translation/po/`, rename any file ending by .example with [lang]-custom.po.
+3 - In `src/app/translation/po/`, rename any file ending by .example with [lang]-custom.po.
 (ex: fr-custom.po.example -> fr-custom.po, en-custom.po.example -> en-custom.po)
 Thos files will allow you to override any translation in [lang].po files.
+4 - Create a file named `_custom-homme.scss` in the folder `src/app/home/styles/custom/`
+
+
+### Config the app
+To do so, you need to: 
+1 - change the `PLATFORM_ID` at the top of the previously created `config.js` file with a *unique id* as it will be used for localStorage.
+
+
 
 ### Launch gulp distribution task
 ```
