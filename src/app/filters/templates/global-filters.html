@@ -9,8 +9,8 @@
                     </div>
                 </div>
             </div>
-            <div class="geo-filters">
-                <div class="selector cities" ng-class="{empty: filters.cities.length === 0}">
+            <div class="geo-filters" ng-class="{hidden: !enabCities && !enabDistricts && !enabStructures}">
+                <div ng-if="enabCities" class="selector cities" ng-class="{empty: filters.cities.length === 0}">
                     <span ng-if="filterLength.cities > 0">{{filterLength.cities}} {{'CITIES' | translate}} {{'SELECTED' | translate}} <span class="caret"></span></span>
                     <span ng-if="!filterLength.cities || filterLength.cities === 0">{{'CITIES' | translate}} <span class="caret"></span></span>
                     <div class="choices">
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="selector districts" ng-class="{empty: filters.districts.length === 0}">
+                <div ng-if="enabDistricts" class="selector districts" ng-class="{empty: filters.districts.length === 0}">
                     <span ng-if="filterLength.districts > 0">{{filterLength.districts}} {{'DISTRICTS' | translate}} {{'SELECTED' | translate}} <span class="caret"></span></span>
                     <span ng-if="!filterLength.districts || filterLength.districts === 0">{{'DISTRICTS' | translate}} <span class="caret"></span></span>
                     <div class="choices">
@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <div class="themes">
+        <div class="themes" ng-if="filters.themes.length > 0">
             <h4>{{'THEMES' | translate}}</h4>
             <div class="values">
                 <div ng-repeat="theme in filters.themes" class="theme form-group" tooltip-placement="top" tooltip="{{theme.label}}">

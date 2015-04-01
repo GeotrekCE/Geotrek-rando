@@ -1,7 +1,10 @@
 'use strict';
 
-function GlobalFiltersController($rootScope, $scope, $location, resultsService, filtersService, utilsFactory) {
+function GlobalFiltersController($rootScope, $scope, $location, globalSettings, resultsService, filtersService, utilsFactory) {
 
+    $scope.enabDistricts = globalSettings.ENABLE_DISTRICTS_FILTERING;
+    $scope.enabCities = globalSettings.ENABLE_CITIES_FILTERING;
+    $scope.enabStructures = globalSettings.ENABLE_STRUCTURE_FILTERING;
     $scope.filterLength = {};
 
     function updateFiltersTags() {

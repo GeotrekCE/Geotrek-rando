@@ -10,6 +10,17 @@ var constants = {
     SHOW_FOOTER: false,
     FOOTER_TEMPLATE_FILE: '',
 
+
+    // INTERFACE PARAMETERS //
+    //
+    //
+
+    ENABLE_DISTRICTS_FILTERING: true,
+    ENABLE_CITIES_FILTERING: true,
+    ENABLE_STRUCTURE_FILTERING: true,
+
+
+
     // LANGUAGES PARAMETERS //
     //
     //
