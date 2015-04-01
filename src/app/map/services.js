@@ -63,6 +63,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                         function (pois) {
                             var counter = 0;
                             _.forEach(pois.features, function (poi) {
+                                console.log(poi);
                                 var poiLocation = utilsFactory.getStartPoint(poi);
                                 self.createLayerFromElement(poi, 'poi', poiLocation)
                                     .then(
@@ -100,6 +101,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                                                 }
                                             });
                                             self._poisMarkersLayer.addLayer(marker);
+                                            console.log(self._poisMarkersLayer);
                                         }
                                     );
                             });
@@ -1038,7 +1040,7 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
                                     markup: poi.properties.type.pictogram,
                                     isSVG: false
                                 };
-                                if (currentCounter === _.size(pois)) {
+                                if (currentCounter === _.size(pois.features)) {
                                     deferred.resolve(self.poisTypesIcons);
                                 }
                             } else {
@@ -1049,7 +1051,7 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
                                                 markup: icon.toString(),
                                                 isSVG: true
                                             };
-                                            if (currentCounter === _.size(pois)) {
+                                            if (currentCounter === _.size(pois.features)) {
                                                 deferred.resolve(self.poisTypesIcons);
                                             }
                                         }
