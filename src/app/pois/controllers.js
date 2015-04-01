@@ -1,6 +1,6 @@
 'use strict';
 
-function PoisListeController($scope, $rootScope, utilsFactory) {
+function PoisListeController($scope, $rootScope, utilsFactory, $modal) {
 
     $scope.hoverMarkerPoi = function (currentPoi, state) {
         var layerEquivalent = document.querySelector('.layer-' + currentPoi.properties.type.id + '-' + currentPoi.id);
@@ -18,13 +18,15 @@ function PoisListeController($scope, $rootScope, utilsFactory) {
                 layerEquivalent = cluster.layer._icon;
             }
         }
-        if (state === 'enter') {
-            if (!layerEquivalent.classList.contains('hovered')) {
-                layerEquivalent.classList.add('hovered');
-            }
-        } else {
-            if (layerEquivalent.classList.contains('hovered')) {
-                layerEquivalent.classList.remove('hovered');
+        if (layerEquivalent) {
+            if (state === 'enter') {
+                if (!layerEquivalent.classList.contains('hovered')) {
+                    layerEquivalent.classList.add('hovered');
+                }
+            } else {
+                if (layerEquivalent.classList.contains('hovered')) {
+                    layerEquivalent.classList.remove('hovered');
+                }
             }
         }
     };
@@ -58,12 +60,56 @@ function PoisListeController($scope, $rootScope, utilsFactory) {
         }
     };
 
+    $scope.openPlayer = function (media) {
+        var mediaModal = $modal.open({
+            templateUrl: 'app/pois/templates/media-modal.html',
+            controller: 'MediaController',
+            resolve: {
+                media: function () {
+                    return media;
+                }
+            }
+        });
+    };
+
     initListeClasses();
     $rootScope.$on('resetPOIGallery', function () {
         initListeClasses();
     });
 }
 
+function MediaController(media, $scope, $timeout) {
+    console.log(media);
+    function initPlayer() {
+        var player = document.createElement('iframe');
+        player.width = '100%';
+        player.height = '100%';
+        player.frameborder = '0';
+        player.setAttribute('allowfullscreen', '');
+        player.setAttribute('webkitallowfullscreen', '');
+        player.setAttribute('mozallowfullscreen', '');
+        if (media.backend === 'Youtube') {
+
+            player.src = 'https://www.youtube.com/embed/' + media.code + '?rel=0&amp;controls=0&amp;showinfo=0';
+
+        } else if (media.backend === 'Vimeo') {
+
+            player.src = 'https://player.vimeo.com/video/' + media.code + '?title=0&byline=0&portrait=0';
+
+        } else if (media.backend === 'Soundcloud') {
+
+            player.scrolling = "no";
+            player.src = 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + media.code + '&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true';
+
+        }
+        document.querySelector('#media-player').appendChild(player);
+        
+    }
+
+    $timeout(initPlayer, 1000);
+}
+
 module.exports = {
-    PoisListeController : PoisListeController
+    PoisListeController: PoisListeController,
+    MediaController: MediaController
 };

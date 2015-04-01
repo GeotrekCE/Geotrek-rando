@@ -8,7 +8,7 @@
         overflow-y: auto;
         overflow-x: hidden;
     }
-    li {
+    li.poi {
         width: 100%;
         margin: 0;
         background: white;
@@ -107,6 +107,23 @@
         }
         .description {
             padding: 1em 1.4em;
+            padding-bottom: 0;
+        }
+        .medias-liste {
+            padding: 1em 1.4em;
+            margin: 0;
+            list-style: none;
+            .media {
+                margin: 0 0.7rem;
+                display: inline-block;
+                a {
+                    font-size: 1.5rem;
+                    color: inherit;
+                    &:hover {
+                        color: $primary-color;
+                    }
+                }
+            }
         }
         @media (max-width: 768px) {
             &.closed {
