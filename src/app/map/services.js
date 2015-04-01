@@ -262,12 +262,13 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
 
                 L.DomEvent.disableClickPropagation(controlButton);
                 L.DomEvent.on(controlButton, 'click', function () {
-                    var globalBounds = self._clustersLayer.getBounds();
+                    var layers = [self._clustersLayer];
                     if (self._treksgeoJsonLayer) {
-                        globalBounds.extend(self._treksgeoJsonLayer.getBounds());
+                        layers.push(self._treksgeoJsonLayer);
+                        
                     }
 
-                    map.fitBounds(globalBounds);
+                    self.updateBounds(true, layers);
                 }, this);
                 return controlContainer;
             }
@@ -514,12 +515,19 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
 
     };
 
-    this.updateBounds = function (updateBounds, layer, padding) {
+    this.updateBounds = function (updateBounds, layers, padding) {
+        var globalBounds = layers[0].getBounds();
+        if (layers.length > 1) {
+            var i = 1;
+            for (i; i < layers.length; i++) {
+                globalBounds.extend(layers[i].getBounds());
+            }
+        }
         if (padding === undefined || padding < 0) {
             padding = 0;
         }
         if ((updateBounds === undefined) || (updateBounds === true)) {
-            self.map.fitBounds(layer.getBounds().pad(padding));
+            self.map.fitBounds(globalBounds, {padding: padding, maxZoom: self.maxZoomFitting});
         }
 
     };
@@ -689,6 +697,8 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
 
         var counter = 0;
 
+        this.maxZoomFitting = globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL - 1;
+
         if (!self.loadingMarkers) {
             self.loadingMarkers = true;
             self.currentResults = results;
@@ -776,7 +786,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                             self._clustersLayer.addLayer(currentLayer);
                             if (currentCount === _.size(results)) {
                                 self.map.invalidateSize();
-                                self.updateBounds(updateBounds, self._clustersLayer);
+                                self.updateBounds(updateBounds, [self._clustersLayer]);
                                 self.resultsVisibility();
                                 self.map.on('moveend', self.resultsVisibility);
                                 self.loadingMarkers = false;
@@ -794,6 +804,8 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
         var type = '',
             elementLocation,
             currentLayer;
+
+        this.maxZoomFitting = globalSettings.DEFAULT_MAX_ZOOM;
 
         if (!self.loadingMarkers) {
 
@@ -821,9 +833,9 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                         currentLayer.addLayer(layer);
                         self._clustersLayer.addLayer(currentLayer);
                         if (result.geometry.type !== "Point") {
-                            self.updateBounds(updateBounds, currentLayer);
+                            self.updateBounds(updateBounds, [currentLayer]);
                         } else {
-                            self.updateBounds(updateBounds, self._clustersLayer);
+                            self.updateBounds(updateBounds, [self._clustersLayer]);
                         }
                     }
                 );
@@ -868,6 +880,8 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
             scrollWheelZoom: true,
             layers: this._baseLayers.main
         };
+
+        this.maxZoomFitting = globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL - 1;
 
         //Mixins for map
         this.initCustomsMixins();
