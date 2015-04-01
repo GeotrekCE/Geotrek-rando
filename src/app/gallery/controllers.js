@@ -51,7 +51,6 @@ function GalleryController($rootScope, $scope) {
         var i;
 
         slides = [];
-
         var listeHandler = document.createElement('ul');
         _.forEach(images, function (image) {
             var currentImage = document.createElement('li');
@@ -68,16 +67,31 @@ function GalleryController($rootScope, $scope) {
         });
 
         gallery.insertBefore(listeHandler, gallery.querySelector('.controls'));
+        var controls = gallery.querySelector('.controls');
 
         computeMargins();
-        for (i = 0; i < slides.length; i++) {
-            if (i > 0 && i < slides.length - 1) {
-                slides[i].classList.add('inactive');
+        if (slides.length > 1) {
+            if (controls.querySelector('.prev').classList.contains('hidden')) {
+                controls.querySelector('.prev').classList.remove('hidden');
             }
-            if (i === slides.length - 1) {
-                slides[i].classList.add('prev');
+
+            if (controls.querySelector('.next').classList.contains('hidden')) {
+                controls.querySelector('.next').classList.remove('hidden');
             }
+
+            for (i = 0; i < slides.length; i++) {
+                if (i > 0 && i < slides.length - 1) {
+                    slides[i].classList.add('inactive');
+                }
+                if (i === slides.length - 1) {
+                    slides[i].classList.add('prev');
+                }
+            }
+        } else {
+            controls.querySelector('.prev').classList.add('hidden');
+            controls.querySelector('.next').classList.add('hidden');
         }
+        
 
         window.angular.element(window).on('resize', updateMarginsOnResize);
 
@@ -119,7 +133,7 @@ function GalleryController($rootScope, $scope) {
     }
 
     function openLightbox(slideIndex) {
-        if (typeof slideIndex === 'number') {
+        if (typeof slideIndex === 'number' && slides.length > 1) {
             displaySlideX(slideIndex);
         }
 
