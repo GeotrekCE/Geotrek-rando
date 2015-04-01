@@ -79,7 +79,6 @@ function PoisListeController($scope, $rootScope, utilsFactory, $modal) {
 }
 
 function MediaController(media, $scope, $timeout) {
-    console.log(media);
     function initPlayer() {
         var player = document.createElement('iframe');
         player.width = '100%';

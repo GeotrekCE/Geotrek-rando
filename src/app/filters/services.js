@@ -57,7 +57,6 @@ function filtersService(globalSettings, utilsFactory) {
         }
 
         if (results) {
-            console.log(results);
             _.forEach(results, function (result) {
                 if (result.properties.themes && result.properties.themes.length > 0) {
                     _.forEach(result.properties.themes, function (theme) {

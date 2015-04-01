@@ -32,7 +32,6 @@ function FlatMenuController(flatService, $scope, $rootScope) {
             .then(
                 function (pagesData) {
                     $scope.flatpages = pagesData;
-                    console.log(pagesData);
                     if (forceReload) {
                         $rootScope.$emit('flatUpdated');
                     }

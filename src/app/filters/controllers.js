@@ -75,7 +75,6 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
 
     $scope.propagateActiveFilters = function () {
         var query = $location.search();
-        console.log($scope.activeFilters);
         _.forEach($scope.activeFilters, function (filter, key) {
             if (query[key]) {
                 delete query[key];
@@ -100,7 +99,6 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
                     query[key] = filter;
                 }
             }
-            console.log(filter);
         });
 
         $location.search(query);
@@ -142,7 +140,6 @@ function GlobalFiltersController($rootScope, $scope, $location, resultsService, 
 
     $scope.resetFilters = function () {
         var query = $location.search();
-        console.log(query);
         $location.search({});
         $rootScope.$broadcast('updateFilters');
     };

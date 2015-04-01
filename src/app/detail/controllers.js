@@ -41,8 +41,6 @@ function DetailController($scope, $rootScope, $state, $q, $stateParams, utilsFac
             .then(
                 function () {
                     mapService.createNearElementsMarkers($scope.nearElements);
-                    console.log('nearElements');
-                    console.log($scope.nearElements);
                 }
             );
     }
@@ -56,7 +54,6 @@ function DetailController($scope, $rootScope, $state, $q, $stateParams, utilsFac
                         $scope.poisAreShown = false;
                     }
                     $rootScope.$emit('resetPOIGallery');
-                    console.log(elementPois);
                 }
             );
     }
@@ -72,7 +69,6 @@ function DetailController($scope, $rootScope, $state, $q, $stateParams, utilsFac
         promise
             .then(
                 function (result) {
-                    console.log(result);
                     $scope.result = result;
                     getPoisOfResult(result, forceRefresh);
                     getNearElements(result);
