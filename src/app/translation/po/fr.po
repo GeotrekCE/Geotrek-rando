@@ -240,7 +240,7 @@ msgid "DONT_SHOW_HOME"
 msgstr "Ne plus montrer cette page"
 
 msgid "SUGGESTED"
-msgstr "Nos coup de coeurs :"
+msgstr "Nos coups de coeur :"
 
 
 # FOOTER
@@ -251,7 +251,7 @@ msgid "LEGALS"
 msgstr "Mentions légales"
 
 msgid "CREDITS"
-msgstr "Conceptions et crédits"
+msgstr "Conception et crédits"
 
 msgid "CONTACT"
 msgstr "Contact"
