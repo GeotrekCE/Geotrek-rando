@@ -1,36 +1,30 @@
-@import url("interface.less");
-
-
-@item_size : 50px;
-@switcher_top : 300px;
-@switcher_bottom : auto;
-@switcher_left : auto;
-@switcher_right : 0px;
-@lines-to-show : 3;
-@description_width: 200px;
+$switcher-top : 300px;
+$switcher-bottom : auto;
+$switcher-left : auto;
+$switcher-right : 0px;
+$lines-to-show : 3;
+$description-width: 200px;
 
 .camera_switcher {
     display: none;
-    background-color: @bg_color;
+    background-color: $bg-color;
     border-radius: 0.35em 0 0 0.35em;
     position:absolute;
-    top: @switcher_top;
-    bottom: @switcher_bottom;
-    left: @switcher_left;
-    right: @switcher_right;
-    width: @item_size;
+    top: $switcher-top;
+    bottom: $switcher-bottom;
+    left: $switcher-left;
+    right: $switcher-right;
     height: auto;
-    padding:2px;
+    width: 70px;
+    padding: 2px;
     margin: 0px;
 
     .camera {
         text-align:center;
         border-bottom: solid 1px rgba(255, 255, 255, 0.2); 
         list-style-type: none;
-        width: @item_size;
-        height: @item_size;
-        float:left;
-        
+        float: left;
+        width: 100%;
         padding: 0px;
         margin: 0px;
         cursor : pointer;
@@ -43,6 +37,10 @@
                 height:100%;
             }
         };
+
+        .camera-title {
+            display: block;
+        }
     };
     .camera:last-child {
         border-bottom: none; 
@@ -50,17 +48,8 @@
 
     .camera--enabled {
         &:hover {
-            .camera-icon {
-                img {
-                    width: auto;
-                    height: auto;
-                }
-            }
-            .camera-title {
-                display:block;
-            }
             .camera-description {
-                display:block;
+                display: block;
                 display: -webkit-box;
             }
         }
@@ -68,20 +57,12 @@
 
     .camera--selected {
         cursor: auto;
-
-        .camera-icon {
-            img {
-                width: auto;
-                height: auto;
-            }
-        }
-        .camera-title {
-            display:block;
-        }
+        border-left: 1px solid white;
     }
 
     .camera--disabled {
         cursor: default;
+        opacity: 0.4;
     }
 
     .camera-title {
@@ -93,12 +74,10 @@
         text-align: left;
         font-size: 14px;
         display: none;
-        width : @description_width;
-        height: @item_size;
+        width : $description-width;
         position: absolute;
-        margin-left: -@description_width - 30;
-        margin-top: -@item_size;
-        -webkit-line-clamp: @lines-to-show;
+        margin-left: -$description-width - 30;
+        -webkit-line-clamp: $lines-to-show;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -106,7 +85,7 @@
 }
 
 .controls {
-    background-color: @bg_color;
+    background-color: $bg-color;
     border-radius: 0 0 0.35em 0.35em;
     position: absolute;
     top: 0px;
@@ -115,7 +94,7 @@
     width : 300px;;
     padding : 5px;
     display: none;
-    float:right;
+    float: right;
     
     span{
         float: left;

@@ -77,7 +77,13 @@ function SidebarDetailController($scope, $rootScope, $modal, $stateParams, resul
 
     $scope.show3d = function () {
         var modal = $modal.open({
-            templateUrl: '/app/layout/templates/modal-3d.html'
+            templateUrl: '/app/3d/templates/rando-3d.html',
+            controller: 'Rando3DController',
+            resolve: {
+                result: function () {
+                    return $scope.result;
+                }
+            }
         });
     };
 

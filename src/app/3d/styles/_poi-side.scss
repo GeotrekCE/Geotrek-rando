@@ -1,0 +1,44 @@
+/**
+ * CSS Module : poi_side 
+ * 
+ * @author: Célian GARCIA
+ */
+
+.poi_side {
+    background-color: rgba(20, 20, 20, 0.8);
+    position: absolute;
+    top: 0px;
+    left: -100%;
+    width: 24rem;
+    height: 100%;
+    transition: left 0.3s ease-out;
+    &.opened {
+        left: 0;
+    }
+
+    p {
+        text-align: justify;
+        margin : 1rem;
+    }
+
+    .description {
+        width : 100%;
+    }
+
+    h2 {
+        text-align: center;
+        margin : 1rem 2rem;
+    }
+
+    .close_btn {
+        position:absolute;
+        margin: 1rem;
+        font-size: 1.5rem;
+        cursor: pointer;
+        opacity: 0.8;
+        margin: 1rem;
+        &:hover {
+            opacity: 1;
+        }
+    }
+}

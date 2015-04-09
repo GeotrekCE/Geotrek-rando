@@ -4,8 +4,6 @@
  * @author: Célian GARCIA
  */
 
-@bg_color: rgba(255,255,255, 0.2);
-
 .interface {
     position: absolute;
     z-index: 0;
@@ -15,50 +13,33 @@
     height: 100%;
     pointer-events: none;
     
-    h1 {
+    .credits {
         position: absolute;
-        z-index: 1;
-        top: 0;
-        left: 50px;
-        width: 34em;
-        height: 6em;
-        
-        margin: 0;
-        font-size: 100%;
-        font-weight: 400;
-        vertical-align: baseline;
-        
-        background: url('../../img/logo_geotrek.png') -3px 0px no-repeat ;
-    }
-    
-    .geotrek_link {
-        display: inline-block;
-        width: 100%;
-        height: 100%;
-
-        background: @bg_color;
+        bottom: 1rem;
+        left: 1rem;
+        display: block;
+        height: 40px;
         border: none;
-        border-radius: 0 0 0.35em 0.35em;
+        line-height: 40px;
 
-        line-height: 6em;
-        letter-spacing: 3px;
-        text-align: center;
-        text-transform: uppercase;
-
-        span {
-            margin: 0;
-            padding: 0;
-            font-size: 100%;
-            vertical-align: baseline;
-            padding-left: 5em;
+        img {
+            height: 100%;
+            width: auto;
+            filter: url(./images/grayscale.svg);
+            filter: grayscale(100%);
+        }
+        &:hover {
+            img {
+                filter: none;
+            }
         }
     }
     
     .attribution {
-        background-color: @bg_color;
+        background-color: $bg-color;
         position: absolute;
-        right: 10px;
-        bottom: 10px;
+        right: 1rem;
+        bottom: 1rem;
         height: auto;
         width: auto;
         border-radius: 0.35em;
@@ -66,7 +47,7 @@
 }
 
 .poi{
-    background-color : @bg_color;
+    background-color : $bg-color;
     position : absolute;
     width: auto;
     height: auto;

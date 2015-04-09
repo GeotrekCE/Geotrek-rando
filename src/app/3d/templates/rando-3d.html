@@ -1,16 +1,6 @@
-<div class="3d-popup">
+<div id="rando-3d">
+    <h1>{{result.properties.name}}</h1>
     <section class="interface">
-        <h1>
-            <a class="geotrek_link" href="http://geotrek.fr/" target="_blank" >
-                <span>Geotrek 3D</span>
-            </a>
-            <p> Visualisation des données de Geotrek en 3D grâce à 
-                <a href='http://www.babylonjs.com/' target='_blank'>
-                    <strong>BabylonJs</strong>
-                </a> 
-            </p>
-        </h1>
-
         <div class="controls controls--examine" >
             <h3>Mode Examine</h3>
             <span class="controls-description"></span>
@@ -35,33 +25,36 @@
             <span> Stop : <b>Entrée</b></span>
         </div>
 
+        <div class="credits">
+            <a class="geotrek_link" href="http://makina-corpus.com/" target="_blank" >
+                <img src="/images/logo_makina-corpus.png">
+            </a>
+        </div>
+
         <div class="attribution" style="padding:3px;">
             <span>
-                Tiles from  <a href='https://www.mapbox.com/about/maps/' target='_blank'><strong>©Mapbox</strong></a> 
+                <a href='https://www.mapbox.com/about/maps/' target='_blank'><strong>©Mapbox</strong></a> 
             </span>
         </div>
         
         <ul class="camera_switcher">
             <li class="camera camera--examine camera--disabled">
                 <span class="camera-icon">
-                    <img src="/images/3d/camera--disabled.png"></img>
+                    <img src="/images/3d/camera-examine.svg"></img>
                 </span>
                 <span class="camera-title"> Exam</span>
-                <span class="camera-description"></span>
             </li>
             <li class="camera camera--bird camera--disabled">
                 <span class="camera-icon">
-                    <img src="/images/3d/camera--disabled.png"></img>
+                    <img src="/images/3d/camera-bird.svg"></img>
                 </span>
                 <span class="camera-title"> Oiseau</span>
-                <span class="camera-description"></span>
             </li>
             <li class="camera camera--hiker camera--disabled">
                 <span class="camera-icon">
-                    <img src="/images/3d/camera--disabled.png"></img>
+                    <img src="/images/3d/camera-hiker.svg"></img>
                 </span>
                 <span class="camera-title"> Rando</span>
-                <span class="camera-description"></span>
             </li>
         </ul>
     </section>
@@ -69,7 +62,7 @@
     <canvas id="canvas_renderer"></canvas>
 
     <div class="poi_side">
-        <img class="close_btn" src="/images/3d/arrow.png"></img>
+        <div class="close_btn"><i class="fa fa-times"></i></div>
         <h2></h2>
         <span class="description"></span>
     </div>

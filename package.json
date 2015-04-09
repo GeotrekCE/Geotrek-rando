@@ -15,12 +15,12 @@
     "font-awesome": "^4.2.0",
     "jquery": "~1.x.x",
     "leaflet": "^0.7.3",
+    "leaflet-geometryutil": "git://github.com/makinacorpus/Leaflet.GeometryUtil.git",
     "leaflet-minimap": "git://github.com/Norkart/Leaflet-MiniMap.git",
     "leaflet.fullscreen": "^1.1.4",
     "leaflet.markercluster": "^0.4.0",
-    "leaflet-geometryutil": "git://github.com/makinacorpus/Leaflet.GeometryUtil.git",
     "lodash": "^2.4.1",
-    "rando3d": "git://github.com/makinacorpus/rando3D.git"
+    "rando3D": "git://github.com/makinacorpus/rando3D.git#exportable"
   },
   "browser": {
     "angular": "./src/app/angular-browserify.js",
@@ -38,7 +38,8 @@
     "leaflet.fullscreen": "./node_modules/leaflet.fullscreen/Control.FullScreen.js",
     "leaflet-geometryutil": "./node_modules/leaflet-geometryutil/dist/leaflet.geometryutil.js",
     "lodash": "./node_modules/lodash/lodash.js",
-    "sparklines": "./src/app/vendors/scripts/sparklines.min.js"
+    "sparklines": "./src/app/vendors/scripts/sparklines.min.js",
+    "rando3d": "./node_modules/rando3D"
   },
   "devDependencies": {
     "browser-sync": "~1.3.6",
