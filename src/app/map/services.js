@@ -78,6 +78,14 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                                                             listeEquivalent.classList.add('hovered');
                                                         }
                                                     }
+
+                                                    var elementOffset = jQuery(selector).position().top;
+                                                    var containerScrollPosition = jQuery('.pois-liste').scrollTop();
+                                                    if (containerScrollPosition - parseInt(elementOffset, 10) !== 0) {
+                                                        jQuery('.pois-liste').animate({
+                                                            scrollTop: containerScrollPosition + elementOffset
+                                                        }, 300);
+                                                    }
                                                 },
                                                 mouseout: function () {
                                                     var listeEquivalent = document.querySelector(selector);
@@ -734,7 +742,6 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                 self.createLayerFromElement(result, type, elementLocation)
                     .then(
                         function (layer) {
-
                             var selector = '#result-category-' + result.properties.category.id.toString() + '-' + result.id.toString();
 
                             layer.on({
@@ -784,6 +791,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                             }
                             currentLayer.addLayer(layer);
                             self._clustersLayer.addLayer(currentLayer);
+
                             if (currentCount === _.size(results)) {
                                 self.map.invalidateSize();
                                 self.updateBounds(updateBounds, [self._clustersLayer]);
