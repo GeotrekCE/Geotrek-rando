@@ -32,7 +32,7 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
                 },
                 {
                     name: "twitter:image:src",
-                    content: globalSettings.DOMAIN + "/images/home/head.jpg"
+                    content: globalSettings.DOMAIN + "/images/custom/home/head.jpg"
                 }
 
             ];
@@ -48,7 +48,7 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
                 },
                 {
                     property: "og:image",
-                    content: globalSettings.DOMAIN + "/images/home/head.jpg"
+                    content: globalSettings.DOMAIN + "/images/custom/home/head.jpg"
                 },
                 {
                     property: "og:description",
