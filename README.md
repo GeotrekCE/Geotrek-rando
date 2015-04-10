@@ -22,11 +22,11 @@ Then you can chose options that suits your needs in it !
 (Each time you change your config file, you need to launch gulp if you're not in dev mode.)
 2 - duplicate `src/app/config/styles/_configs-default.scss` and rename it `_configs.scss`.
 In this file you can override colors and font configuration of the app.
-(don't forget the `_` bfore the name !)
+(don't forget the `_` before the name !)
 3 - In `src/app/translation/po/`, rename any file ending by .example with [lang]-custom.po.
 (ex: fr-custom.po.example -> fr-custom.po, en-custom.po.example -> en-custom.po)
 Thos files will allow you to override any translation in [lang].po files.
-4 - Create a file named `_custom-homme.scss` in the folder `src/app/home/styles/custom/`
+4 - Create a file named `_custom-home` in the folder `src/app/home/styles/custom/`
 
 
 ### Config the app
