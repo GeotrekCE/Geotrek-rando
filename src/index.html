@@ -7,7 +7,8 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <base href="/">
-  
+  <meta ng-repeat="tag in $root.twitterTags" name="{{tag.name}}" content="{{tag.content}}">
+  <meta ng-repeat="tag in $root.facebookTags" property="{{tag.property}}" content="{{tag.content}}">
   <link rel="stylesheet" href="rando.css">
   <link href='http://fonts.googleapis.com/css?family=Roboto:500,300,700,400' rel='stylesheet' type='text/css'>
   <script src="rando-vendors.js"></script>

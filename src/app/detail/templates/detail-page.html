@@ -88,7 +88,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="pictures">
+                <div class="pictures" ng-if="result.properties.pictures[0]">
                     <div class="main-visual" ng-click="showLightbox(0)">
                         <img ng-src="{{result.properties.pictures[0].url}}" ng-alt="{{result.properties.pictures[0].legend}}">
                         <div class="picture-credit">

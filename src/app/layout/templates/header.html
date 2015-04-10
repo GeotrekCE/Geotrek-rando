@@ -34,10 +34,27 @@
                 </li>
                 <flat-menu></flat-menu>
                 <li class="divider"></li>
-                <li ng-if='false' class="share" tooltip-placement="bottom" tooltip="{{'SHARE' | translate}}">
-                    <a href>
+                <li class="share" tooltip-placement="bottom" tooltip="{{'SHARE' | translate}}">
+                    <a href class="dropdown-toggle" data-toggle="dropdown" role="button">
                         <span class="glyphicon glyphicon-share"></span>
                     </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="twitter">
+                            <a href="https://twitter.com/share" target="_blank">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li class="facebook">
+                            <a href target="_blank">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li ng-if="false" class="google-plus">
+                            <a href target="_blank">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="divider"></li>
                 <favorites></favorites>
