@@ -115,7 +115,7 @@ function utilsFactory($sce) {
 
     var sanitizeData = function (data, removeStyle) {
         if (removeStyle) {
-            var data = data.replace(/style=".*"/gim, '');
+            var data = data.replace(/[a-zA-Z0-9\-\_]*style="[^\"]*"/gim, '');
         }
         return $sce.trustAsHtml(data);
     };
