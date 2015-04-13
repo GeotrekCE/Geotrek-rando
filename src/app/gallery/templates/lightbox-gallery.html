@@ -1,14 +1,11 @@
-<div class="lightbox-gallery">
-    <div class="overlay" ng-click="close()"></div>
-    <div class="controls">
-        <div class="prev" ng-click="prev()">
-            <i class="fa fa-chevron-left"></i>
-        </div>
-        <div class="next" ng-click="next()">
-            <i class="fa fa-chevron-right"></i>
-        </div>
-        <div class="close" ng-click="close()">
-            <i class="fa fa-times"></i>
-        </div>
-    </div>
+<div class="modal-close-button" ng-click="close()">
+    <i class="fa fa-times"></i>
 </div>
+<carousel interval="myInterval">
+    <slide ng-repeat="slide in slides" active="slide.active">
+        <img ng-src="{{slide.url}}" style="margin: auto; margin-top: {{slide.marginTop}};">
+        <div class="carousel-caption">
+            <p>{{slide.text}}</p>
+        </div>
+    </slide>
+</carousel>

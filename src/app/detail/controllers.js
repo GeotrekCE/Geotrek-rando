@@ -1,6 +1,6 @@
 'use strict';
 
-function DetailController($scope, $rootScope, $state, $q, $stateParams, globalSettings, utilsFactory, resultsService, poisService, mapService) {
+function DetailController($scope, $rootScope, $state, $q, $modal, $stateParams, globalSettings, utilsFactory, resultsService, poisService, mapService) {
 
     var mainImage;
     $scope.sanitizeData = utilsFactory.sanitizeData;
@@ -16,8 +16,20 @@ function DetailController($scope, $rootScope, $state, $q, $stateParams, globalSe
         $scope.poisAreShown = !$scope.poisAreShown;
     };
 
-    $scope.showLightbox = function (slideIndex) {
-        $rootScope.$emit('openLightbox', slideIndex);
+    $scope.showLightbox = function (images, slideIndex) {
+        var modal = $modal.open({
+            templateUrl: '/app/gallery/templates/lightbox-gallery.html',
+            controller: 'GalleryController',
+            windowClass: 'lightbox',
+            resolve: {
+                images: function () {
+                    return images;
+                },
+                slideIndex: function () {
+                    return slideIndex;
+                }
+            }
+        });
     };
 
     $scope.isSVG = utilsFactory.isSVG;

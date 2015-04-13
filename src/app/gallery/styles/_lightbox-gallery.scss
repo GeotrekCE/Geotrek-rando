@@ -1,92 +1,92 @@
-.lightbox-gallery {
-    position: absolute;
-    top: -200%;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 3em;
-    z-index: 99999999;
-    background: transparentize(black, 0.1);
-    overflow: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease 0.2s, top 0s ease 0.5s;
-    & > * {
-        opacity: 0;
-        transition: opacity 0.2s ease;
-    }
-    &.active {
-        top: 0;
-        opacity: 1;
-        transition: top 0s ease, opacity 0.3s ease 0.1s;
-        & > * {
-            opacity: 1;
-            transition: opacity 0.3s ease 0.3s;
-        }
-    }
-    .overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-    ul {
-        position: relative;
-        height: 100%;
-        width: 100%;
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    li {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        top: 50%;
-        left: 50%;
-        margin-left: -25%;
-        margin-top: -25%;
-        display: block;
-        opacity: 1;
-        transition: all 0.3s ease;
-        transition-delay: 0.3s;
-        &.inactive, &.prev {
-            opacity: 0;
-            transition-delay: 0;
-        }
-        img {
-            max-height: 100%;
-            max-width: 100%;
-            height: auto;
-            width: auto;
-        }
-        .credits {
-            color: white;
-            font-weight: lighter;
-        }
-    }
-    .controls {
-        & > div {
-            position: absolute;
-            color: white;
-            opacity: 0.8;
-            cursor: pointer;
-            top: 50%;
-            font-size: 3em;
-            transition: all 0.3s ease;
-            &:hover, &:focus {
-                opacity: 1;
-            }
-        }
-        .prev {
-            left: 1em;
-        }
-        .next {
-            right: 1em;
-        }
-        .close {
-            top: 1em;
-            right: 1em;
-        }
-    }
-}
+// .lightbox-gallery {
+//     position: absolute;
+//     top: -200%;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     padding: 3em;
+//     z-index: 99999999;
+//     background: transparentize(black, 0.1);
+//     overflow: hidden;
+//     opacity: 0;
+//     transition: opacity 0.3s ease 0.2s, top 0s ease 0.5s;
+//     & > * {
+//         opacity: 0;
+//         transition: opacity 0.2s ease;
+//     }
+//     &.active {
+//         top: 0;
+//         opacity: 1;
+//         transition: top 0s ease, opacity 0.3s ease 0.1s;
+//         & > * {
+//             opacity: 1;
+//             transition: opacity 0.3s ease 0.3s;
+//         }
+//     }
+//     .overlay {
+//         position: absolute;
+//         top: 0;
+//         left: 0;
+//         width: 100%;
+//         height: 100%;
+//     }
+//     ul {
+//         position: relative;
+//         height: 100%;
+//         width: 100%;
+//         list-style: none;
+//         padding: 0;
+//         margin: 0;
+//     }
+//     li {
+//         position: absolute;
+//         height: 100%;
+//         width: 100%;
+//         top: 50%;
+//         left: 50%;
+//         margin-left: -25%;
+//         margin-top: -25%;
+//         display: block;
+//         opacity: 1;
+//         transition: all 0.3s ease;
+//         transition-delay: 0.3s;
+//         &.inactive, &.prev {
+//             opacity: 0;
+//             transition-delay: 0;
+//         }
+//         img {
+//             max-height: 100%;
+//             max-width: 100%;
+//             height: auto;
+//             width: auto;
+//         }
+//         .credits {
+//             color: white;
+//             font-weight: lighter;
+//         }
+//     }
+//     .controls {
+//         & > div {
+//             position: absolute;
+//             color: white;
+//             opacity: 0.8;
+//             cursor: pointer;
+//             top: 50%;
+//             font-size: 3em;
+//             transition: all 0.3s ease;
+//             &:hover, &:focus {
+//                 opacity: 1;
+//             }
+//         }
+//         .prev {
+//             left: 1em;
+//         }
+//         .next {
+//             right: 1em;
+//         }
+//         .close {
+//             top: 1em;
+//             right: 1em;
+//         }
+//     }
+// }

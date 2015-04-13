@@ -10,9 +10,9 @@
         </div>
         <div class="content">
             <div class="picture">
-                <img ng-if="poi.properties.pictures[0]" ng-src="{{poi.properties.pictures[0].url}}" ng-alt="{{poi.properties.type.label}}">
-                <img ng-if="!poi.properties.pictures[0]" ng-src="./images/placeholder.png" alt="placeholder image">
+                <img ng-if="poi.properties.pictures[0]" ng-src="{{poi.properties.pictures[0].url}}" ng-alt="{{poi.properties.type.label}}" ng-click="showLightbox(poi.properties.pictures, 0)">
                 <div ng-if="poi.properties.pictures[0]" class="credits">{{poi.properties.pictures[0].author}}</div>
+                <img ng-if="!poi.properties.pictures[0]" ng-src="./images/placeholder.png" alt="placeholder image" class="placeholder">
             </div>
             <div class="description" ng-bind-html="sanitizeData(poi.properties.description, true)"></div>
             <div class="medias">

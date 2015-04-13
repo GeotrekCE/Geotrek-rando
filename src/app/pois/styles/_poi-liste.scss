@@ -40,6 +40,9 @@
                 width: 100%;
                 margin: auto;
                 transition: all 0.2s ease;
+                &:not(.placeholder) {
+                    cursor: pointer;
+                }
             }
         }
         .credits {

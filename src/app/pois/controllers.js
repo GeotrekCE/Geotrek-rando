@@ -31,6 +31,22 @@ function PoisListeController($scope, $rootScope, utilsFactory, $modal) {
         }
     };
 
+    $scope.showLightbox = function (images, slideIndex) {
+        var modal = $modal.open({
+            templateUrl: '/app/gallery/templates/lightbox-gallery.html',
+            controller: 'GalleryController',
+            windowClass: 'lightbox',
+            resolve: {
+                images: function () {
+                    return images;
+                },
+                slideIndex: function () {
+                    return slideIndex;
+                }
+            }
+        });
+    };
+
     function initListeClasses() {
         $scope.isOpened = {};
         _.each($scope.pois, function (poi) {
@@ -78,7 +94,7 @@ function PoisListeController($scope, $rootScope, utilsFactory, $modal) {
     });
 }
 
-function MediaController(media, $scope, $timeout) {
+function MediaController(media, $scope, $timeout, $modalInstance) {
     function initPlayer() {
         var player = document.createElement('iframe');
         player.width = '100%';
@@ -104,6 +120,10 @@ function MediaController(media, $scope, $timeout) {
         document.querySelector('#media-player').appendChild(player);
         
     }
+
+    $scope.close = function () {
+        $modalInstance.dismiss('close');
+    };
 
     $timeout(initPlayer, 500);
 }

@@ -1,6 +1,7 @@
 'use strict';
 
-function GalleryController($rootScope, $scope) {
+function GalleryController(images, slideIndex, $q, $scope, $modalInstance) {
+/*
     var gallery = document.querySelector('.lightbox-gallery'),
         slides = [];
 
@@ -210,6 +211,72 @@ function GalleryController($rootScope, $scope) {
     $rootScope.$on("openLightbox", function (event, slideIndex) {
         openLightbox(slideIndex);
     });
+
+*/
+    function computeMargin(image) {
+        var deferred = $q.defer();
+
+        var docElement = document.documentElement,
+            curentBody = document.getElementsByTagName('body')[0],
+            viewportWidth = window.innerWidth || docElement.clientWidth || curentBody.clientWidth,
+            viewportHeight = window.innerHeight || docElement.clientHeight || curentBody.clientHeight;
+
+        var computedMargin = 0;
+        var tempImg = document.createElement('img');
+        tempImg.onload = function () {
+            computedMargin = (viewportHeight - tempImg.height) / 2;
+            deferred.resolve(computedMargin);
+        };
+        tempImg.src = image.url;
+
+        return deferred.promise;
+    }
+
+    function initGallery() {
+        $scope.slides = [];
+        $scope.myInterval = 0;
+
+        _.forEach(images, function (image) {
+            computeMargin(image)
+                .then(
+                    function (currentMargin) {
+                        $scope.slides.push({
+                            url: image.url,
+                            text: image.author,
+                            marginTop: currentMargin + 'px'
+                        });
+
+                        if ($scope.slides[slideIndex]) {
+                            $scope.slides[slideIndex].active = true;
+                        }
+                    }
+                );
+        });
+    }
+
+    function resizeCompute() {
+        _.forEach($scope.slides, function (slide) {
+            computeMargin(slide)
+                .then(
+                    function (currentMargin) {
+                        slide.marginTop = currentMargin + 'px';
+                    }
+                );
+        });
+    }
+
+    $scope.close = function () {
+        $modalInstance.dismiss('close');
+    };
+
+    jQuery(window).on('resize', function () {
+        if ($scope.resizeTimeout) {
+            window.clearTimeout($scope.resizeTimeout);
+        }
+        $scope.resizeTimeout = window.setTimeout(resizeCompute, 800);
+    });
+
+    initGallery();
 
 }
 

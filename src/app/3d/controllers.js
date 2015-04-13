@@ -1,6 +1,6 @@
 'use strict';
 
-function Rando3DController(result, $scope, $timeout, globalSettings, settingsFactory) {
+function Rando3DController(result, $scope, $timeout, $modalInstance, globalSettings, settingsFactory) {
     console.log(result);
     $scope.result = result;
     function init3D() {
@@ -30,6 +30,10 @@ function Rando3DController(result, $scope, $timeout, globalSettings, settingsFac
     }
 
     $timeout(init3D, 500);
+
+    $scope.close = function () {
+        $modalInstance.dismiss('close');
+    };
     
 }
 
