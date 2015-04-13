@@ -1,11 +1,16 @@
 'use strict';
 
-function DetailController($scope, $rootScope, $state, $q, $stateParams, utilsFactory, resultsService, poisService, mapService) {
+function DetailController($scope, $rootScope, $state, $q, $stateParams, globalSettings, utilsFactory, resultsService, poisService, mapService) {
 
     var mainImage;
     $scope.sanitizeData = utilsFactory.sanitizeData;
     $scope.parseLength = utilsFactory.parseLength;
     $scope.removeDiacritics = utilsFactory.removeDiacritics;
+    if (globalSettings.RULES_FLAT_PAGES_ID) {
+        $scope.rulesId = globalSettings.RULES_FLAT_PAGES_ID;
+    } else {
+        $scope.rulesId = null;
+    }
 
     $scope.togglePois = function () {
         $scope.poisAreShown = !$scope.poisAreShown;

@@ -169,7 +169,8 @@
                 </div>
                 <div ng-if="result.properties.is_park_centered" class="is-park-centered">
                     <i class="fa fa-info-circle"></i>
-                    <p>{{ 'PARK_CENTERED' | translate}}</p>
+                    <p ng-if="!rulesId">{{ 'PARK_CENTERED' | translate}}</p>
+                    <a ng-if="rulesId" ui-sref="layout.flat({flatID: rulesId})">{{ 'PARK_CENTERED' | translate}}</a>
                 </div>
                 <div ng-if="result.properties.advice" class="advice">
                     <i class="fa fa-exclamation-triangle"></i>

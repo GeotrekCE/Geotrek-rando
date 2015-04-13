@@ -3,6 +3,7 @@
 var constants = {
 
     PLATFORM_ID: 'geotrek-rando',
+    TWITTER_ID: '',
     DOMAIN: 'http://geotrekdemo.ecrins-parcnational.fr',
     ENABLE_HTML_MODE: true,
 
@@ -22,6 +23,8 @@ var constants = {
     ENABLE_DISTRICTS_FILTERING: true,
     ENABLE_CITIES_FILTERING: true,
     ENABLE_STRUCTURE_FILTERING: true,
+
+    RULES_FLAT_PAGES_ID: '',
 
 
 
