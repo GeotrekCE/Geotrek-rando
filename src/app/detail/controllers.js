@@ -21,6 +21,15 @@ function DetailController($scope, $rootScope, $state, $q, $stateParams, utilsFac
         $scope.poisAreShown = true;
     }
 
+    function switchInterestsNodes() {
+        if (document.querySelector('.main-infos .interests') && window.matchMedia("(min-width: 769px)").matches) {
+            document.querySelector('.detail-map').appendChild(document.querySelector('.main-infos .interests'));
+        }
+        if (document.querySelector('.detail-map .interests') && window.matchMedia("(max-width: 768px)").matches) {
+            document.querySelector('.main-infos').appendChild(document.querySelector('.detail-map .interests'));
+        }
+    }
+
     function getNearElements(result) {
         var promises = [],
             nearElements = result.properties.treks.concat(result.properties.touristic_contents, result.properties.touristic_events);
@@ -82,6 +91,10 @@ function DetailController($scope, $rootScope, $state, $q, $stateParams, utilsFac
     }
 
     getResultDetails();
+    switchInterestsNodes();
+
+    angular.element(window).on('resize', switchInterestsNodes);
+
     $rootScope.$on('switchGlobalLang', function () {
         if ($state.current.name === 'layout.detail') {
             getResultDetails(true);

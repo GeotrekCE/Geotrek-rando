@@ -64,6 +64,10 @@
     display: none;
 }
 
+.leaflet-container:-webkit-full-screen .leaflet-right {
+    right: 25%;
+}
+
 @media (max-width: 768px) {
     .leaflet-control-minimap, .leaflet-control-zoom {
         display: none;
