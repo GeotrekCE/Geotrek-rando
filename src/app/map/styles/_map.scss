@@ -64,7 +64,7 @@
     display: none;
 }
 
-.leaflet-container:-webkit-full-screen .leaflet-right {
+.detail-map .leaflet-container:-webkit-full-screen .leaflet-right, .detail-map .leaflet-container:fullscreen .leaflet-right, .detail-map .leaflet-container:-moz-full-screen .leaflet-right {
     right: 25%;
 }
 
