@@ -57,6 +57,37 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                     )
             );
 
+            if (element.properties.points_reference) {
+                var i = 0,
+                    tempRefPoint;
+                for (i = 0; i < element.properties.points_reference.coordinates.length; i++) {
+                    tempRefPoint = {
+                        order: i + 1,
+                        coordinates: {
+                            'lat': element.properties.points_reference.coordinates[i][1],
+                            'lng': element.properties.points_reference.coordinates[i][0]
+                        }
+                    };
+                    promises.push(
+                        self.createLayerFromElement(tempRefPoint, 'ref-point', tempRefPoint.coordinates)
+                            .then(
+                                function (marker) {
+                                    self._nearMarkersLayer.addLayer(marker);
+                                }
+                            )
+                    );
+                }
+                var parkingPoint = utilsFactory.getParkingPoint(element);
+                promises.push(
+                    self.createLayerFromElement(element, 'parking', parkingPoint)
+                        .then(
+                            function (marker) {
+                                self._nearMarkersLayer.addLayer(marker);
+                            }
+                        )
+                );
+            }
+
             promises.push(
                 poisService.getPoisFromElement(element.id, true)
                     .then(
@@ -199,6 +230,11 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
 
             case 'poi':
                 promise = iconsService.getPOIIcon;
+                param = element;
+                break;
+
+            case 'ref-point':
+                promise = iconsService.getRefIcon;
                 param = element;
                 break;
 
@@ -946,7 +982,7 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
         parking: {
             iconUrl: '/images/map/parking.svg',
             iconSize: [20, 20],
-            iconAnchor: [10, 10],
+            iconAnchor: [10, 20],
             labelAnchor: [10, 10],
             className: 'parking-marker'
         },
@@ -956,6 +992,13 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
             iconAnchor: [],
             labelAnchor: [],
             className: ''
+        },
+        ref_point: {
+            iconUrl: '',
+            iconSize: [26 ,26],
+            iconAnchor: [13, 26],
+            labelAnchor: [13, 13],
+            className: 'ref-point'
         },
         poi: {
             iconUrl: '/images/map/poi.svg',
@@ -1188,6 +1231,23 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
             html: iconsMarkup
         });
     };
+
+    this.getRefIcon = function (refElement) {
+        var deferred = $q.defer();
+
+        var markup = '<span>' + refElement.order + '</span>';
+
+        var newIcon = new L.divIcon({
+            html: markup,
+            iconSize: self.icons_liste.ref_point.iconSize,
+            iconAnchor: self.icons_liste.ref_point.iconAnchor,
+            labelAnchor: self.icons_liste.ref_point.labelAnchor,
+            className: self.icons_liste.ref_point.className + ' ' + self.icons_liste.ref_point.className + '-' + refElement.order
+        });
+        deferred.resolve(newIcon);
+
+        return deferred.promise;
+    }
 
     this.getIcon = function (iconName) {
         var deferred = $q.defer();

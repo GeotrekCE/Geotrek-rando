@@ -154,6 +154,7 @@
 }
 
 .departure-marker, .arrival-marker {
+    cursor: default;
     svg .base {
         stroke: black;
         stroke-width: 2;
@@ -178,10 +179,25 @@
 }
 
 .parking-marker {
+    cursor: default;
     svg, svg .base {
         height: 100%;
         width: 100%;
         fill: $parking-color;
+    }
+}
+
+.ref-point {
+    cursor: default;
+    background: white;
+    border-radius: 50%;
+    color: black;
+    font-size: 1rem;
+    text-align: center;
+    line-height: 1rem;
+    border: $ref-point-color 3px solid;
+    span {
+        vertical-align: middle;
     }
 }
 

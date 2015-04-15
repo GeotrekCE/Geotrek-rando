@@ -201,16 +201,17 @@
                     content:counter(li); /* Use the counter as content */
                     counter-increment:li;
                     position: absolute;
-                    background: $alert-color;
+                    background: white;
+                    border: 3px solid $ref-point-color;
                     font-weight: bolder;
                     vertical-align: middle;
                     font-size: 1rem;
                     text-align: center;
-                    line-height: 1rem;
+                    line-height: 0.6rem;
                     left: 0;
                     top: 0;
-                    width: 1.5rem;
-                    height: 1.5rem;
+                    width: 1.6rem;
+                    height: 1.6rem;
                     padding: 0.25rem;
                     border-radius: 50%;
                 }
