@@ -179,7 +179,9 @@
 
 .parking-marker {
     svg, svg .base {
-        fill: $info-color;
+        height: 100%;
+        width: 100%;
+        fill: $parking-color;
     }
 }
 

@@ -24,7 +24,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
             promises = [],
             startPoint = utilsFactory.getStartPoint(element);
 
-        if (element.properties.parkin_elementLocation) {
+        if (element.properties.parking_location) {
             var parkingPoint = utilsFactory.getParkingPoint(element);
             promises.push(
                 self.createLayerFromElement(element, 'parking', parkingPoint)
