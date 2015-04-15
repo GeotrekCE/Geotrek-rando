@@ -3,7 +3,6 @@
 var constants = {
 
     PLATFORM_ID: 'geotrek-rando',
-    TWITTER_ID: '',
     DOMAIN: 'http://geotrekdemo.ecrins-parcnational.fr',
     ENABLE_HTML_MODE: true,
 
@@ -55,6 +54,16 @@ var constants = {
 
     // CHOSE WHICH CATEGORIES ARE ACTIVE BY DEFAULT
     DEFAULT_ACTIVE_CATEGORIES: [-2],
+
+
+
+    // SOCIAL NETWORKS PARAMETERS //
+    //
+    //
+
+    FACEBOOK_APP_ID: '',
+    TWITTER_ID: '@makina_corpus',
+    DEFAULT_SHARE_IMG: 'home/head.jpg',
 
 
 

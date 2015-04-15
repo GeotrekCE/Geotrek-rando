@@ -1,0 +1,27 @@
+<li class="share" tooltip-placement="bottom" tooltip="{{'SHARE' | translate}}">
+    <a href class="dropdown-toggle" data-toggle="dropdown" role="button">
+        <span class="glyphicon glyphicon-share"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+        <li ng-if="twitterShareLink" class="twitter">
+            <a href="{{twitterShareLink}}" target="_blank">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li ng-if="false && fbShareLink" class="facebook">
+            <a href="{{fbShareLink}}" target="_blank">
+                <i class="fa fa-facebook"></i>
+            </a>
+        </li>
+        <li ng-if="false" class="google-plus">
+            <a href target="_blank">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li ng-if="mailShareLink" class="mail">
+            <a href="{{mailShareLink}}" target="_blank">
+                <i class="fa fa-envelope"></i>
+            </a>
+        </li>
+    </ul>
+</li>
