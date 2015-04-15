@@ -12,17 +12,18 @@
     width: 24rem;
     height: 100%;
     transition: left 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
     &.opened {
         left: 0;
     }
 
-    p {
-        text-align: justify;
-        margin : 1rem;
-    }
-
     .description {
         width : 100%;
+        text-align: justify;
+        padding : 1rem;
+        flex: 1 1 auto;
+        overflow: auto;
     }
 
     h2 {
@@ -33,6 +34,9 @@
     .close_btn {
         position:absolute;
         margin: 1rem;
+        display: block;
+        height: 2rem;
+        width: 2rem;
         font-size: 1.5rem;
         cursor: pointer;
         opacity: 0.8;
