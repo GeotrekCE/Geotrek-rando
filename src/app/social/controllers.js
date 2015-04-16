@@ -1,21 +1,46 @@
 'use strict';
 
-function SocialController($scope, $rootScope, $location, $state, $stateParams, $translate, resultsService, flatService, globalSettings) {
+function SocialController($scope, $rootScope, $location, $state, $stateParams, $translate, resultsService, flatService, globalSettings, utilsFactory) {
 
-    function initShareButtons(currentTitle) {
-        $scope.fbShareLink = 'https://www.facebook.com/sharer/sharer.php';
+    function initShareButtons(translatedContent, element) {
 
-        $scope.twitterShareLink = 'https://twitter.com/share?' +
-            'text=' + encodeURIComponent(currentTitle);
+        $scope.fbShareLink = 'https://www.facebook.com/dialog/feed?' +
+            'app_id=' + globalSettings.FACEBOOK_APP_ID +
+            '&link=' + encodeURIComponent($location.absUrl()) +
+            '&redirect_uri=' + encodeURIComponent($location.absUrl());
+
+        $scope.twitterShareLink = 'https://twitter.com/share?';
+
+        if (element) {
+            $scope.fbShareLink += '' +
+                '&name=' + encodeURIComponent(element.properties.name) +
+                '&caption=' + encodeURIComponent(utilsFactory.decodeEntities(element.properties.description_teaser)) +
+                '&description=' + encodeURIComponent(utilsFactory.decodeEntities(element.properties.ambiance)) +
+                '&picture=' + encodeURIComponent(element.properties.pictures[0].url);
+
+            $scope.twitterShareLink += 'text=' + encodeURIComponent(element.properties.name);
+
+            $scope.mailShareLink = 'mailto:?Subject=' + encodeURIComponent(element.properties.name) + '&Body=' + encodeURIComponent(utilsFactory.decodeEntities(element.properties.description_teaser)) + '%0D%0A' + encodeURIComponent($location.absUrl());
+
+        } else {
+            $scope.fbShareLink += '' +
+                '&name=' + encodeURIComponent(translatedContent.BANNER_TEXT) +
+                '&caption=' + encodeURIComponent($location.absUrl()) +
+                '&description=' + encodeURIComponent(translatedContent.SHARING_DEFAULT_TEXT) +
+                '&picture=' + encodeURIComponent(globalSettings.DOMAIN + "/images/custom/" + globalSettings.DEFAULT_SHARE_IMG);
+
+            $scope.twitterShareLink += 'text=' + encodeURIComponent(translatedContent.SHARING_DEFAULT_TEXT);
+
+            $scope.mailShareLink = 'mailto:?Subject=' + encodeURIComponent(translatedContent.BANNER_TEXT) + '&Body=' + encodeURIComponent(translatedContent.SHARING_DEFAULT_TEXT) + '%0D%0A' + encodeURIComponent($location.absUrl());
+
+        }
 
         if (globalSettings.TWITTER_ID) {
             $scope.twitterShareLink += '&related=' + globalSettings.TWITTER_ID;
         }
-
-        $scope.mailShareLink = 'mailto:?Subject=' + encodeURIComponent(currentTitle) + '&Body=' + $location.absUrl();
     }
 
-    function initHomeMetaTags(translation) {
+    function initHomeMetaTags(translatedContent) {
         $rootScope.twitterTags = [
             {
                 name: "twitter:card",
@@ -23,7 +48,7 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
             },
             {
                 name: "twitter:title",
-                content: translation
+                content: translatedContent.BANNER_TEXT
             },
             {
                 name: "twitter:site",
@@ -35,7 +60,7 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
             },
             {
                 name: "twitter:description",
-                content: "Description"
+                content: translatedContent.SHARING_DEFAULT_TEXT
             },
             {
                 name: "twitter:image:src",
@@ -51,7 +76,7 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
             },
             {
                 property: "og:title",
-                content: translation
+                content: translatedContent.BANNER_TEXT
             },
             {
                 property: "og:url",
@@ -63,7 +88,7 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
             },
             {
                 property: "og:description",
-                content: "Description"
+                content: translatedContent.SHARING_DEFAULT_TEXT
             }
         ];
     }
@@ -156,11 +181,28 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
     }
 
     function initShareOnTranslate() {
-        $translate('BANNER_TEXT')
+        $translate(['BANNER_TEXT', 'SHARING_DEFAULT_TEXT'])
             .then(
-                function (data) {
-                    initShareButtons(data);
-                    initHomeMetaTags(data);
+                function (translation) {
+                    if ($state.current.name === 'layout.flat') {
+                        flatService.getAFlatPage($stateParams.flatID)
+                            .then(
+                                function (data) {
+                                    var flatElement = {
+                                        BANNER_TEXT: data.title,
+                                        SHARING_DEFAULT_TEXT: translation.SHARING_DEFAULT_TEXT
+                                    };
+                                    initShareButtons(flatElement);
+                                    initHomeMetaTags(flatElement);
+                                },
+                                function (err) {
+                                    console.log(err);
+                                }
+                            );
+                    } else {
+                        initShareButtons(translation);
+                        initHomeMetaTags(translation);
+                    }
                 },
                 function (err) {
                     console.log(err);
@@ -177,19 +219,7 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
                     function (data) {
                         currentTitle = data.properties.name;
                         initDetailMetaTags(data);
-                        initShareButtons(currentTitle);
-                    },
-                    function (err) {
-                        console.log(err);
-                    }
-                );
-        } else if ($state.current.name === 'layout.flat') {
-            flatService.getAFlatPage($stateParams.flatID)
-                .then(
-                    function (data) {
-                        currentTitle = data.title;
-                        initShareButtons(currentTitle);
-                        initHomeMetaTags(currentTitle);
+                        initShareButtons(currentTitle, data);
                     },
                     function (err) {
                         console.log(err);

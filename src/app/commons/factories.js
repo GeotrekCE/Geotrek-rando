@@ -120,6 +120,24 @@ function utilsFactory($sce) {
         return $sce.trustAsHtml(data);
     };
 
+    var removeTags = function (markup) {
+        return markup.replace(/(<([^>]+)>)/ig,"")
+    };
+
+    var decodeEntities = function (str) {
+        if(str && typeof str === 'string') {
+            var element = document.createElement('div');
+            // strip script/html tags
+            str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+            str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
+            element.innerHTML = str;
+            str = element.textContent;
+            element.textContent = '';
+        }
+
+        return str;
+    };
+
     var parseLength = function (length) {
         var intLength = parseInt(length),
             parsedLength= '';
@@ -210,6 +228,8 @@ function utilsFactory($sce) {
     return {
         removeDiacritics: removeDiacritics,
         sanitizeData: sanitizeData,
+        removeTags: removeTags,
+        decodeEntities: decodeEntities,
         isTrueInt: isTrueInt,
         parseLength: parseLength,
         idIsInArray: idIsInArray,

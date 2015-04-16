@@ -61,7 +61,7 @@ var constants = {
     //
     //
 
-    FACEBOOK_APP_ID: '',
+    FACEBOOK_APP_ID: '1424383581199261',
     TWITTER_ID: '@makina_corpus',
     DEFAULT_SHARE_IMG: 'home/head.jpg',
 

@@ -164,6 +164,17 @@ msgstr "Reset"
 msgid "SELECTED"
 msgstr "selected"
 
+
+
+# SOCIAL
+#
+#
+
+msgid "SHARING_DEFAULT_TEXT"
+msgstr "Geotrek is really great for planing your next nature trip!"
+
+
+
 # LAYOUT
 #
 #

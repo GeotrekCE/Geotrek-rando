@@ -162,6 +162,16 @@ msgstr "Réinitialiser"
 msgid "SELECTED"
 msgstr "sélectionnées"
 
+
+# SOCIAL
+#
+#
+
+msgid "SHARING_DEFAULT_TEXT"
+msgstr "Geotrek est vraiment parfait pour préparer son voyage dans la nature !"
+
+
+
 # LAYOUT
 #
 #
