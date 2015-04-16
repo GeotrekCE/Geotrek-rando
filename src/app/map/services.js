@@ -500,6 +500,10 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
     //
     //
 
+    this.invalidateSize = function () {
+        self.map.invalidateSize();
+    };
+
     this.createLayer = function () {
 
         var layer = new L.LayerGroup();
