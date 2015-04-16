@@ -31,6 +31,9 @@ function treksService(globalSettings, settingsFactory, translationService, $reso
             if (trek.properties.difficulty) {
                 trek.properties.difficulty.pictogram = globalSettings.DOMAIN + trek.properties.difficulty.pictogram;
             }
+            if (trek.properties.route) {
+                trek.properties.route.pictogram = globalSettings.DOMAIN + trek.properties.route.pictogram;
+            }
             if (trek.properties.themes) {
                 _.forEach(trek.properties.themes, function (theme) {
                     if (theme.pictogram) {
