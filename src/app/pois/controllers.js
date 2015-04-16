@@ -63,7 +63,7 @@ function PoisListeController($scope, $rootScope, utilsFactory, $modal) {
                 if (parseInt(index, 10) === parseInt(poiId, 10)) {
                     $scope.isOpened[index] = 'opened';
                 } else {
-                    $scope.isOpened[index] = 'hidden';
+                    $scope.isOpened[index] = 'is-hidden';
                 }
             });
         } else {

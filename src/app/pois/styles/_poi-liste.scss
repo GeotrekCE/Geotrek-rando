@@ -15,17 +15,6 @@
         position: relative;
         color: $dark-grey;
         transition: all 0.2s ease;
-        @media (max-width: 768px) {
-            display: flex;
-            flex-direction: column;
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100vh;
-            z-index: 2;
-            overflow-y: auto;
-            padding-bottom: 50px;
-        }
         @media (min-width: 769px) {
             border-bottom: 1px solid $neutral-grey;
         }
@@ -66,10 +55,10 @@
             padding: 0.6em 0.8em 0.2em;
             display: block;
             transition: all 0.2s ease;
-            cursor: pointer;
             z-index: 1;
             @media (max-width: 768px) {
                 padding-right: 2rem;
+                cursor: pointer;
             }
         }
         .toggle {
@@ -129,6 +118,19 @@
             }
         }
         @media (max-width: 768px) {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            z-index: 2;
+            overflow-y: auto;
+            padding-bottom: 50px;
+            &.is-hidden {
+                display: none;
+                visibility: none;
+            }
             &.closed {
                 //margin-bottom: 1em;
                 margin: 2%;
