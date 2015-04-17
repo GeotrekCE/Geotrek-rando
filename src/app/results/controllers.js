@@ -3,11 +3,12 @@
 function ResultsListeController($scope, $rootScope, utilsFactory, favoritesService, resultsService) {
 
     function updateResults(forceRefresh) {
-
+        $scope.isLoading = true;
         resultsService.getFilteredResults(forceRefresh)
             .then(
                 function (data) {
                     $scope.results = data;
+                    $scope.isLoading = false;
                 }
             );
 

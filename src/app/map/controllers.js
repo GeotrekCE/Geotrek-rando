@@ -9,6 +9,9 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
                     $scope.results = data;
                     if (data.length > 0) {
                         mapService.displayResults(data, updateBounds);
+                        if ($scope.mapInit) {
+                            $scope.mapInit = false;
+                        }
                     } else {
                         mapService.clearAllLayers();
                     }
@@ -31,6 +34,9 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
                 function (data) {
                     $scope.result = data;
                     mapService.displayDetail($scope.result);
+                    if ($scope.mapInit) {
+                        $scope.mapInit = false;
+                    }
                 }
             );
     }
@@ -85,7 +91,7 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
     }
 
     function mapInit(selector) {
-
+        $scope.mapInit = true;
         var mapSelector = selector || 'map';
         $rootScope.map = mapService.initMap(mapSelector);
         initCtrlsTranslation();
@@ -95,7 +101,6 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
         } else {
             updateMapWithResults();
         }
-
     }
 
     mapInit('map');

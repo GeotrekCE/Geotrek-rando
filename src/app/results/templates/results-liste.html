@@ -5,7 +5,7 @@
         <span ng-if=" results.length <= 1">{{'RESULT' | translate}}</span>
         <span ng-if=" results.length >= 1">{{'RESULTS' | translate}}</span>
     </div>
-    <div class="results">
+    <div class="results" ng-class="{isLoading: isLoading}">
         <ul>
             <li ng-repeat="result in results | orderBy:'properties.name'" id="result-category-{{result.properties.category.id}}-{{result.id}}" ng-mouseover="hoverLayerElement(result,'enter')" ng-mouseleave="hoverLayerElement(result,'leave')" class="result category-{{result.properties.category.id}}">
 
