@@ -153,28 +153,35 @@
     }
 }
 
-.departure-marker, .arrival-marker {
+.departure-marker, .arrival-marker, .departure-arrival-marker {
     cursor: default;
-    svg .base {
-        stroke: black;
-        stroke-width: 2;
+    svg {
+        width: 100%;
+        height: 100%;
+        .stick .base {
+            fill: $stick-color;
+        }
     }
 }
 
 .departure-marker {
-    svg, svg .base {
-        fill: $valid-color;
+    svg .flag {
+        fill: $departure-color;
     }
 }
 
 .arrival-marker {
-    left: -26px;
-    svg {
-        transform: rotateY(180deg);
-        transform-style: preserve-3d;
+    svg .flag {
+        fill: $arrival-color;
     }
-    svg, svg .base {
-        fill: $alert-color;
+}
+
+.departure-arrival-marker {
+    svg .flag-d {
+        fill: $departure-color;
+    }
+    svg .flag-a {
+        fill: $arrival-color;
     }
 }
 

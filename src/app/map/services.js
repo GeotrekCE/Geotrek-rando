@@ -38,24 +38,34 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
 
         if (element.geometry.type === 'LineString') {
             var endPoint = utilsFactory.getEndPoint(element);
+            if (startPoint.lat === endPoint.lat && startPoint.lng === endPoint.lng) {
+                promises.push(
+                    self.createLayerFromElement(element, 'departureArrival', startPoint)
+                        .then(
+                            function (marker) {
+                                self._nearMarkersLayer.addLayer(marker);
+                            }
+                        )
+                );
+            } else {
+                promises.push(
+                    self.createLayerFromElement(element, 'departure', startPoint)
+                        .then(
+                            function (marker) {
+                                self._nearMarkersLayer.addLayer(marker);
+                            }
+                        )
+                );
 
-            promises.push(
-                self.createLayerFromElement(element, 'departure', startPoint)
-                    .then(
-                        function (marker) {
-                            self._nearMarkersLayer.addLayer(marker);
-                        }
-                    )
-            );
-
-            promises.push(
-                self.createLayerFromElement(element, 'arrival', endPoint)
-                    .then(
-                        function (marker) {
-                            self._nearMarkersLayer.addLayer(marker);
-                        }
-                    )
-            );
+                promises.push(
+                    self.createLayerFromElement(element, 'arrival', endPoint)
+                        .then(
+                            function (marker) {
+                                self._nearMarkersLayer.addLayer(marker);
+                            }
+                        )
+                );
+            }
 
             if (element.properties.points_reference) {
                 var i = 0,
@@ -972,16 +982,22 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
     this.icons_liste = {
         default_icon: {},
         departure: {
-            iconUrl: '/images/map/flag.svg',
+            iconUrl: '/images/map/departure.svg',
             iconSize: [46, 52],
             iconAnchor: [13, 52],
             className: 'departure-marker'
         },
         arrival: {
-            iconUrl: '/images/map/flag.svg',
+            iconUrl: '/images/map/arrival.svg',
             iconSize: [46, 52],
             iconAnchor: [13, 52],
             className: 'arrival-marker'
+        },
+        departureArrival: {
+            iconUrl: '/images/map/departure-arrival.svg',
+            iconSize: [46, 52],
+            iconAnchor: [13, 52],
+            className: 'departure-arrival-marker'
         },
         parking: {
             iconUrl: '/images/map/parking.svg',

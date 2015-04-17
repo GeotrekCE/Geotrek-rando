@@ -9,16 +9,23 @@ $font-family: 'Roboto', Helvetica, Arial, sans-serif;
 $primary-color: #97BB35;
 $secondary-color: #444;
 
-$alert-color: #EF9A9A;
-$valid-color: #C5E1A5;
-$info-color: #81D4FA;
-$parking-color: #3964ED;
-$ref-point-color: #E83737;
-$warning-color: #FFCC80;
-
 $categories: /* Randonnées ID -> */-2 #c7361e, /* Musee ID -> */8 #ca69a2, /* Restaurants ID -> */5 #31afe1, /* Sorties ID -> */2 #934c94, /* Evenements ID -> */-1 #ffd500, /* Activités pleine-nature ID -> */3 #934c94, /* Hébergements ID -> */1 #0b72b5, /* Séjours 100% eco ID -> */7 #3d842e, /* Produits du terroir ID -> */6 #7ab51d;
+
 
 // COMMONS COLORS
 $dark-grey: #4d4d4d;
 $neutral-grey: #e6e6e6;
 $light-grey: #f2f2f2;
+
+$alert-color: #EF9A9A;
+$valid-color: #C5E1A5;
+$info-color: #81D4FA;
+$warning-color: #FFCC80;
+
+
+// MAP AND MARKERS COLORS
+$departure-color: #429f46;
+$arrival-color: #c52727;
+$stick-color: #8c6d62;
+$parking-color: #3964ED;
+$ref-point-color: #E83737;
