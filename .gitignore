@@ -12,6 +12,7 @@ src/rando.css
 
 
 # Prevent custom config to be pushed
+src/app/_custo.scss
 src/app/config/configs.js
 src/app/config/styles/_config.scss
 
