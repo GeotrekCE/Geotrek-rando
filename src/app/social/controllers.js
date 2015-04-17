@@ -15,8 +15,13 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
             $scope.fbShareLink += '' +
                 '&name=' + encodeURIComponent(element.properties.name) +
                 '&caption=' + encodeURIComponent(utilsFactory.decodeEntities(element.properties.description_teaser)) +
-                '&description=' + encodeURIComponent(utilsFactory.decodeEntities(element.properties.ambiance)) +
-                '&picture=' + encodeURIComponent(element.properties.pictures[0].url);
+                '&description=' + encodeURIComponent(utilsFactory.decodeEntities(element.properties.ambiance));
+
+            if (element.properties.pictures[0]) {
+                $scope.fbShareLink += '&picture=' + encodeURIComponent(element.properties.pictures[0].url);
+            } else {
+                $scope.fbShareLink += '&picture=' + encodeURIComponent(globalSettings.DOMAIN + "/images/custom/" + globalSettings.DEFAULT_SHARE_IMG);
+            }
 
             $scope.twitterShareLink += 'text=' + encodeURIComponent(element.properties.name);
 
