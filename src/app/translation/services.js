@@ -13,7 +13,12 @@ function translationService(globalSettings) {
         }
 
         if (!self.defaultLang && !favoriteLang) {
-            var localLanguage = navigator.languages[0] || navigator.language || navigator.userLanguage || navigator.browserLanguage || null;
+            var localLanguage;
+            if (navigator.languages) {
+                localLanguage = navigator.languages[0];
+            } else {
+                localLanguage = navigator.language || navigator.userLanguage || navigator.browserLanguage || null;
+            }
             self.defaultLang = globalSettings.DEFAULT_LANGUAGE;
 
             if (localLanguage) {
