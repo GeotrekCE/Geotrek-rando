@@ -149,8 +149,14 @@ msgstr "Practical informations:"
 msgid "THEMES"
 msgstr "Themes:"
 
+msgid "DISTRICTS"
+msgstr "Disctricts"
+
 msgid "CITIES"
 msgstr "Cities"
+
+msgid "STRUCTURES"
+msgstr "Structures"
 
 msgid "SEARCH"
 msgstr "Search"

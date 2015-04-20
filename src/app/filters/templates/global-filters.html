@@ -9,7 +9,7 @@
                     </div>
                 </div>
             </div>
-            <div class="geo-filters" ng-class="{hidden: !enabCities && !enabDistricts && !enabStructures}">
+            <div class="geo-filters" ng-class="{hidden: !enabCities && !enabDistricts && !enabStructures, fullsize: enabCities && enabDistricts && enabStructures}">
                 <div ng-if="enabCities" class="selector cities" ng-class="{empty: filters.cities.length === 0}">
                     <span ng-if="filterLength.cities > 0">{{filterLength.cities}} {{'CITIES' | translate}} {{'SELECTED' | translate}} <span class="caret"></span></span>
                     <span ng-if="!filterLength.cities || filterLength.cities === 0">{{'CITIES' | translate}} <span class="caret"></span></span>
@@ -42,6 +42,24 @@
                             <input type="checkbox" id="district-{{district.id}}" value="{{district.id}}" ng-false-value="null" ng-model="activeFilters.districts[district.id]"  ng-change="propagateActiveFilters()"/>
                             <label for="district-{{district.id}}">
                                 <span>{{district.name}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="enabStructures" class="selector structures" ng-class="{empty: filters.structure.length === 0}">
+                    <span ng-if="filterLength.structure > 0">{{filterLength.structure}} {{'STRUCTURES' | translate}} {{'SELECTED' | translate}} <span class="caret"></span></span>
+                    <span ng-if="!filterLength.structure || filterLength.structure === 0">{{'STRUCTURES' | translate}} <span class="caret"></span></span>
+                    <div class="choices">
+                        <div class="input-group">
+                            <input type="search" ng-model="structuresAuto" placeholder="{{'SEARCH' | translate}}">
+                            <div class="input-group-addon">
+                                <i class="fa fa-search"></i>
+                            </div>
+                        </div>
+                        <div ng-repeat="aStructure in filters.structure | filter:structuresAuto | orderBy:'name'" class="structure form-group">
+                            <input type="checkbox" id="structure-{{aStructure.id}}" value="{{aStructure.id}}" ng-model="activeFilters.structure[aStructure.id]" ng-false-value="null" ng-change="propagateActiveFilters()"/>
+                            <label for="structure-{{aStructure.id}}">
+                                <span>{{aStructure.name}}</span>
                             </label>
                         </div>
                     </div>

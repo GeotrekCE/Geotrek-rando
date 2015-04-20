@@ -33,6 +33,9 @@
                 flex: 1;
                 display: flex;
                 padding: 0.4rem 5px;
+                &.fullsize {
+                    flex: 1 1 100%;
+                }
                 .selector {
                     margin: 0 5px;
                     flex: 1;
@@ -138,7 +141,7 @@
                             }
                         }
                     }
-                    &:hover, &:focus {
+                    &:not(.empty):hover, &:not(.empty):focus {
                         .choices {
                             max-height: 300px;
                         }

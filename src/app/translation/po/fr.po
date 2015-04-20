@@ -156,6 +156,9 @@ msgstr "Rechercher"
 msgid "CITIES"
 msgstr "Communes"
 
+msgid "STRUCTURES"
+msgstr "Structures"
+
 msgid "RESET"
 msgstr "Réinitialiser"
 

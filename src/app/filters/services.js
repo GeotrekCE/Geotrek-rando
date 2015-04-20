@@ -51,7 +51,8 @@ function filtersService(globalSettings, utilsFactory) {
                 categories:     [],
                 themes:         [],
                 districts:      [],
-                cities:          [],
+                cities:         [],
+                structure:      [],
                 search:         ''
             };
         }
@@ -80,6 +81,12 @@ function filtersService(globalSettings, utilsFactory) {
                             self.filters.cities.push(city);
                         }
                     });
+                }
+
+                if (result.properties.structure) {
+                    if (!(utilsFactory.idIsInArray(self.filters.structure, result.properties.structure)) && result.properties.structure !== undefined) {
+                        self.filters.structure.push(result.properties.structure);
+                    }
                 }
 
             });
@@ -316,7 +323,8 @@ function filtersService(globalSettings, utilsFactory) {
             themesFilter = false,
             searchFilter = false,
             citiesFilter = false,
-            districtsFilter = false;
+            districtsFilter = false,
+            structureFilter = false;
 
         // Define all type of filters that needs an interval check instead of an id one
         var filtersByInterval = ['difficulty', 'duration', 'ascent'];
@@ -410,9 +418,22 @@ function filtersService(globalSettings, utilsFactory) {
             districtsFilter = true;
         }
 
+
+        /* Filter by Districts */
+        /*                     */
+        /*                     */
+
+        // If district filter is not defined the test pass
+        if (filters.structure) {
+            structureFilter = self.matchAny(element.properties, filters.structure, 'structure');
+        } else {
+            structureFilter = true;
+        }
+
+
         // CATEGORY && THEME && QUERY && CITY && DISTRICT
         // Global test that pass if all filters test are true
-        return categoriesFilter && themesFilter && searchFilter && citiesFilter && districtsFilter;
+        return categoriesFilter && themesFilter && searchFilter && citiesFilter && districtsFilter && structureFilter;
 
     };
 
