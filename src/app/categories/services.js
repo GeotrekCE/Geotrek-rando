@@ -102,6 +102,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
         var treksCategory = {
             id: catInfos.id,
             label: catInfos.label,
+            order: catInfos.order,
             pictogram: catInfos.pictogram,
             type1_label: catInfos.type1_label,
             type2_label: catInfos.type2_label,
@@ -161,6 +162,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
         var eventsCategory = {
             id: catInfos.id,
             label: catInfos.label,
+            order: catInfos.order,
             pictogram: catInfos.pictogram,
             type1_label: catInfos.type1_label,
             type1: eventsType1,
@@ -185,6 +187,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                     var currentCategory = {
                         id: aContent.properties.category.id,
                         label: aContent.properties.category.label,
+                        order: aContent.properties.category.order,
                         pictogram: aContent.properties.category.pictogram,
                         type1_label: aContent.properties.category.type1_label,
                         type2_label: aContent.properties.category.type2_label,
@@ -309,15 +312,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                             });
                         }
                         if (globalSettings.ENABLE_TOURISTIC_EVENTS && eventCat) {
-
-                            if (globalSettings.TOURISTIC_EVENTS_SPECIFIC_POSITION
-                                    && typeof globalSettings.TOURISTIC_EVENTS_SPECIFIC_POSITION === 'number'
-                                    && globalSettings.TOURISTIC_EVENTS_SPECIFIC_POSITION <= self._categoriesList.length) {
-                                self._categoriesList.splice(globalSettings.TOURISTIC_EVENTS_SPECIFIC_POSITION - 1, 0, eventCat);
-                            } else {
-                                self._categoriesList.push(eventCat);
-                            }
-
+                            self._categoriesList.push(eventCat);
                         }
                         filtersService.createTouristicCategoryFilters(self._categoriesList);
                         deferred.resolve(self._categoriesList);

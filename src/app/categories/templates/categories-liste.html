@@ -1,5 +1,5 @@
 <ul class="categories">
-    <li ng-repeat="category in categories" class="category {{category.cat_class}}" ng-class="{active : category.active}" ng-id="cat-{{category.id}}">
+    <li ng-repeat="category in categories | orderBy: 'order'" class="category {{category.cat_class}}" ng-class="{active : category.active}" ng-id="cat-{{category.id}}">
         <a href ng-click="toggleCategory(category)">
             <ng-include src="category.pictogram"></ng-include>
         </a>
