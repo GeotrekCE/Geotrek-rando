@@ -16,7 +16,7 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
                 }
 
                 _.forEach(categoriesArray, function (filter) {
-                    if (parseInt(category.id, 10) === parseInt(filter, 10)) {
+                    if (category.id.toString() === filter.toString()) {
                         category.active = true;
                     }
                 });
@@ -25,7 +25,7 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
                     if (filterName.indexOf('_') > -1) {
                         var categoryId = filterName.split('_')[0],
                             filterKey = filterName.split('_')[1];
-                        if (parseInt(categoryId, 10) === parseInt(category.id, 10)) {
+                        if (categoryId.toString() === category.id.toString()) {
                             if (typeof filter === 'string') {
                                 filter = [filter];
                             }
@@ -42,11 +42,11 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
                                     category.filters[filterKey] = {};
                                     category.filters[filterKey][filterValue] = true;
                                     _.forEach(category[filterKey].values, function (currentFilter, index) {
-                                        if (parseInt(currentFilter.id, 10) === parseInt(capture[1], 10)) {
+                                        if (currentFilter.id.toString() === capture[1].toString()) {
                                             minIndex = index;
                                         }
 
-                                        if (parseInt(currentFilter.id, 10) === parseInt(capture[2], 10)) {
+                                        if (currentFilter.id.toString() === capture[2].toString()) {
                                             maxIndex = index;
                                         }
                                     });
@@ -66,7 +66,7 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
                 }
 
                 _.forEach(globalSettings.DEFAULT_ACTIVE_CATEGORIES, function (filter) {
-                    if (parseInt(category.id, 10) === parseInt(filter, 10)) {
+                    if (category.id.toString() === filter.toString()) {
                         category.active = true;
                     }
                 });
@@ -85,7 +85,7 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
 
         _.forEach($scope.categories, function (category) {
             _.forEach(category, function (property, propertyName) {
-                if (property.type && property.type === 'range') {
+                if (property && property.type && property.type === 'range') {
 
                     if (property.values.length > 1) {
                         resetRangeFilter(property);
@@ -118,7 +118,7 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
                                 filter = data.filter;
 
                             _.forEach($scope.categories, function (currentCategory) {
-                                if (parseInt(currentCategory.id, 10) === parseInt(eventCategory, 10)) {
+                                if (currentCategory.id.toString() === eventCategory.toString()) {
                                     if (filter === 'all') {
                                         _.forEach(currentCategory, function (currentFilter, currentFilterName) {
                                             if (currentFilter.type === 'range') {
@@ -162,7 +162,7 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
             activeCategories = [];
         _.forEach($scope.categories, function (category) {
             if (category.active) {
-                activeCategories.push(category.id);
+                activeCategories.push(category.id.toString());
                 _.forEach(category.filters, function (filter, filterKey) {
                     var filterIsNotEmpty = false;
                     var currentFilterValues = [];
@@ -174,15 +174,15 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
                         }
                     });
                     if (filterIsNotEmpty) {
-                        currentQuery[category.id + '_' + filterKey] = currentFilterValues;
+                        currentQuery[category.id.toString() + '_' + filterKey] = currentFilterValues;
                     } else {
-                        delete currentQuery[category.id + '_' + filterKey];
+                        delete currentQuery[category.id.toString() + '_' + filterKey];
                     }
                 });
             } else {
                 _.forEach(category.filters, function (filter, filterKey) {
-                    if (currentQuery[category.id + '_' + filterKey]) {
-                        delete currentQuery[category.id + '_' + filterKey];
+                    if (currentQuery[category.id.toString() + '_' + filterKey]) {
+                        delete currentQuery[category.id.toString() + '_' + filterKey];
                     }
                 });
             }

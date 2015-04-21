@@ -80,6 +80,7 @@ function treksService(globalSettings, settingsFactory, translationService, $reso
             if (trek.properties.altimetric_profile) {
                 trek.properties.altimetric_profile = globalSettings.DOMAIN + trek.properties.altimetric_profile;
             }
+            trek.properties.contentType = 'trek';
         });
         return treksData;
     };

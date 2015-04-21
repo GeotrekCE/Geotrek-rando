@@ -222,7 +222,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
             if (element.geometry.type === 'Polygon') {
                 geoStyle.className += ' fill';
             }
-
+            console.log(element);
             var geoJsonLayer = L.geoJson(element, {
                 style: geoStyle
             });
@@ -653,7 +653,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                     var isVisibe = false;
 
                     _.forEach(visbleResults, function (currentActiveResult) {
-                        if (currentResult.properties.category.id === currentActiveResult.properties.category.id && currentResult.id === currentActiveResult.id) {
+                        if (currentResult.properties.category.id.toString() === currentActiveResult.properties.category.id.toString() && currentResult.id.toString() === currentActiveResult.id.toString()) {
                             isVisibe = true;
                         }
                     });

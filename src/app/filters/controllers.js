@@ -122,12 +122,12 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
     $scope.removeFilterByTag = function (tagLabel, tagValue) {
         var query = $location.search();
         if (typeof query[tagLabel] === 'string') {
-            if (parseInt(tagValue, 10) === parseInt(query[tagLabel], 10) || tagLabel === 'search') {
+            if (tagValue === query[tagLabel] || tagLabel === 'search') {
                 delete query[tagLabel];
             }
         } else {
             _.forEach(query[tagLabel], function (filter, index) {
-                if (parseInt(tagValue, 10) === parseInt(filter, 10)) {
+                if (tagValue === filter) {
                     query[tagLabel].splice(index, 1);
                     if (tagValue.toString().indexOf('-') > -1) {
                         $rootScope.$broadcast('resetRange', {category: tagLabel.split('_')[0], filter: tagLabel.split('_')[1]});
@@ -141,7 +141,7 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
 
         if (tagLabel === 'categories') {
             _.forEach(query, function (filter, index) {
-                if (parseInt(index.split('_')[0], 10) === parseInt(tagValue, 10)) {
+                if (index.split('_')[0] === tagValue) {
                     delete query[index];
                 }
             });

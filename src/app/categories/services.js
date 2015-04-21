@@ -17,106 +17,91 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
     this.getTreksCategories = function (treks) {
 
-        var treksType1 = {
-                type: 'checkbox',
-                values: []
-            },
-            treksType2 = {
-                type: 'checkbox',
-                values: []
-            },
-            difficulty = {
-                type: 'range',
-                values: []
-            },
-            duration = {
-                type: 'range',
-                values: globalSettings.FILTERS.DURATION
-            },
-            ascent = {
-                type: 'range',
-                values: globalSettings.FILTERS.ASCENT
-            },
-            routes = {
-                type: 'checkbox',
-                values: []
-            },
-            themes = {
-                type: 'checkbox',
-                values: []
-            };
+        var treksCategories = [];
 
         _.forEach(treks.features, function (aTrek) {
 
             if (aTrek.properties.published) {
 
-                if (aTrek.properties.type1 && aTrek.properties.type1.length > 0) {
-                    _.forEach(aTrek.properties.type1, function (aType1) {
-                        if (!(utilsFactory.idIsInArray(treksType1.values, aType1)) && aType1 !== undefined) {
-                            treksType1.values.push(aType1);
+                if (!(utilsFactory.idIsInArray(treksCategories, aTrek.properties.category))) {
+
+                    var currentCategory = {
+                        id: aTrek.properties.category.id,
+                        type: 'treks',
+                        label: aTrek.properties.category.label,
+                        order: aTrek.properties.category.order,
+                        pictogram: aTrek.properties.category.pictogram,
+                        type1_label: aTrek.properties.category.type1_label,
+                        type2_label: aTrek.properties.category.type2_label,
+                        type1: {type: 'checkbox', values: aTrek.properties.type1 || []},
+                        type2: {type: 'checkbox', values: aTrek.properties.type2 || []},
+                        route: {type: 'checkbox', values: [aTrek.properties.route] || []},
+                        difficulty: {type: 'range', values: [aTrek.properties.difficulty] || []},
+                        duration: {type: 'range', values: globalSettings.FILTERS.DURATION || []},
+                        ascent: {type: 'range', values: globalSettings.FILTERS.ASCENT || []},
+                        themes: {type: 'checkbox', values: aTrek.properties.themes || []},
+                        cat_class: 'category-' + aTrek.properties.category.id.toString()
+                    };
+
+                    currentCategory.duration.values = _.map(_.sortBy(currentCategory.duration.values, 'id'));
+                    currentCategory.ascent.values = _.map(_.sortBy(currentCategory.ascent.values, 'id'));
+
+                    treksCategories.push(currentCategory);
+
+                } else {
+
+                    var catIndex = utilsFactory.findIndexOfId(treksCategories, aTrek.properties.category.id);
+
+                    _.forEach(aTrek.properties.type1, function (aType) {
+
+                        if (!(utilsFactory.idIsInArray(treksCategories[catIndex].type1.values, aType))) {
+
+                            treksCategories[catIndex].type1.values.push(aType);
+
                         }
 
                     });
-                }
 
-                if (aTrek.properties.type2 && aTrek.properties.type2.length > 0) {
-                    _.forEach(aTrek.properties.type2, function (aType2) {
-                        if (!(utilsFactory.idIsInArray(treksType2.values, aType2)) && aType2 !== undefined) {
-                            treksType2.values.push(aType2);
+                    _.forEach(aTrek.properties.type2, function (aType) {
+
+                        if (!(utilsFactory.idIsInArray(treksCategories[catIndex].type2.values, aType))) {
+
+                            treksCategories[catIndex].type2.values.push(aType);
+
                         }
 
                     });
-                }
 
-                if (aTrek.properties.difficulty) {
-                    if (!(utilsFactory.idIsInArray(difficulty.values, aTrek.properties.difficulty)) && aTrek.properties.difficulty !== undefined) {
-                        difficulty.values.push(aTrek.properties.difficulty);
+                    if (aTrek.properties.route) {
+                        if (!(utilsFactory.idIsInArray(treksCategories[catIndex].route.values, aTrek.properties.route))) {
+                            treksCategories[catIndex].route.values.push(aTrek.properties.route);
+                        }
                     }
-                }
 
-                if (aTrek.properties.route) {
-                    if (!(utilsFactory.idIsInArray(routes.values, aTrek.properties.route)) && aTrek.properties.route !== undefined) {
-                        routes.values.push(aTrek.properties.route);
-                    }
-                }
-
-                if (aTrek.properties.themes && aTrek.properties.themes.length > 0) {
-                    _.forEach(aTrek.properties.themes, function (theme) {
-
-                        if (!(utilsFactory.idIsInArray(themes.values, theme)) && theme !== undefined) {
-                            themes.values.push(theme);
+                    if (aTrek.properties.difficulty) {
+                        if (!(utilsFactory.idIsInArray(treksCategories[catIndex].difficulty.values, aTrek.properties.difficulty))) {
+                            treksCategories[catIndex].difficulty.values.push(aTrek.properties.difficulty);
                         }
+                        treksCategories[catIndex].difficulty.values = _.map(_.sortBy(treksCategories[catIndex].difficulty.values, 'id'));
+                    }
 
-                    });
+                    if (aTrek.properties.themes && aTrek.properties.themes.length > 0) {
+                        _.forEach(aTrek.properties.themes, function (theme) {
+
+                            if (!(utilsFactory.idIsInArray(treksCategories[catIndex].themes.values, theme)) && theme !== undefined) {
+                                treksCategories[catIndex].themes.values.push(theme);
+                            }
+
+                        });
+                    }
+
                 }
+
             }
 
         });
 
-        difficulty.values = _.map(_.sortBy(difficulty.values, 'id'));
-        duration.values = _.map(_.sortBy(duration.values, 'id'));
-        ascent.values = _.map(_.sortBy(ascent.values, 'id'));
-
-        var catInfos = treks.features[0].properties.category;
-
-        var treksCategory = {
-            id: catInfos.id,
-            label: catInfos.label,
-            order: catInfos.order,
-            pictogram: catInfos.pictogram,
-            type1_label: catInfos.type1_label,
-            type2_label: catInfos.type2_label,
-            type1: treksType1,
-            type2: treksType2,
-            difficulty: difficulty,
-            duration: duration,
-            ascent: ascent,
-            routes: routes,
-            themes: themes,
-            cat_class: 'category-' + catInfos.id.toString()
-        };
-
-        return treksCategory;
+        return treksCategories;
 
     };
 
@@ -161,6 +146,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
         var eventsCategory = {
             id: catInfos.id,
+            type: 'events',
             label: catInfos.label,
             order: catInfos.order,
             pictogram: catInfos.pictogram,
@@ -186,6 +172,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
                     var currentCategory = {
                         id: aContent.properties.category.id,
+                        type: 'contents',
                         label: aContent.properties.category.label,
                         order: aContent.properties.category.order,
                         pictogram: aContent.properties.category.pictogram,
@@ -247,7 +234,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
     this.getCategories = function (forceRefresh) {
 
         var deferred = $q.defer(),
-            trekCat = null,
+            trekCats = null,
             contentCats = null,
             eventCat = null;
 
@@ -265,7 +252,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                         .then(
                             function (treks) {
                                 if (treks.features.length > 0) {
-                                    trekCat = self.getTreksCategories(treks);
+                                    trekCats = self.getTreksCategories(treks);
                                 }
                             }
                         )
@@ -303,8 +290,10 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                 .then(
                     function () {
                         self._categoriesList = [];
-                        if (globalSettings.ENABLE_TREKS && trekCat) {
-                            self._categoriesList.push(trekCat);
+                        if (globalSettings.ENABLE_TREKS && trekCats) {
+                            _.forEach(trekCats, function (aTreksCat) {
+                                self._categoriesList.push(aTreksCat);
+                            });
                         }
                         if (globalSettings.ENABLE_TOURISTIC_CONTENT && contentCats) {
                             _.forEach(contentCats, function (aContentsCat) {

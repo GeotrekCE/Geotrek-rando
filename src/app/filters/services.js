@@ -27,13 +27,13 @@ function filtersService(globalSettings, utilsFactory) {
                 newCategory.type2 = category.type2;
             }
 
-            if (category.difficulty) {
+            if (category.type === 'treks') {
                 newCategory.difficulty = [];
                 if (category.difficulty.values.length > 0) {
                     newCategory.difficulty = category.difficulty;
                 }
-                if (category.routes.values.length > 0) {
-                    newCategory.route = category.routes;
+                if (category.route.values.length > 0) {
+                    newCategory.route = category.route;
                 }
                 newCategory.duration = category.duration;
                 newCategory.ascent = category.ascent;
@@ -112,7 +112,7 @@ function filtersService(globalSettings, utilsFactory) {
 
             _.forEach(filters[type], function (currentFilter) {
                 if (!subtype) {
-                    if (parseInt(currentFilter.id, 10) === parseInt(id, 10) || parseInt(currentFilter.code, 10) === parseInt(id, 10)) {
+                    if ((currentFilter.id && currentFilter.id.toString() === id.toString()) || (currentFilter.code && currentFilter.code.toString() === id.toString())) {
                         filter = currentFilter;
                     }
                 } else {
@@ -124,17 +124,17 @@ function filtersService(globalSettings, utilsFactory) {
                             maxFilter = null;
 
                         _.forEach(currentFilter[subtype].values, function (currentSubFilter) {
-                            if (parseInt(currentSubFilter.id, 10) === parseInt(min, 10)) {
+                            if (currentSubFilter.id.toString() === min.toString()) {
                                 minFilter = currentSubFilter;
                             }
-                            if (parseInt(currentSubFilter.id, 10) === parseInt(max, 10)) {
+                            if (currentSubFilter.id.toString() === max.toString()) {
                                 maxFilter = currentSubFilter;
                             }
                         });
 
                         if (minFilter && maxFilter) {
                             filter = {id: subId};
-                            if (parseInt(minFilter.id, 10) === parseInt(maxFilter.id, 10)) {
+                            if (minFilter.id.toString() === maxFilter.id.toString()) {
                                 filter.label = minFilter.label;
                             } else {
                                 filter.label = minFilter.label + ' -> ' + maxFilter.label;
@@ -142,9 +142,9 @@ function filtersService(globalSettings, utilsFactory) {
                         }
 
                     } else {
-                        if (parseInt(currentFilter.id, 10) === parseInt(id, 10)) {
+                        if (currentFilter.id.toString() === id.toString()) {
                             _.forEach(currentFilter[subtype].values, function (currentSubFilter) {
-                                if (parseInt(currentSubFilter.id, 10) === parseInt(subId, 10)) {
+                                if (currentSubFilter.id.toString() === subId.toString()) {
                                     filter = currentSubFilter;
                                 }
                             });
@@ -237,7 +237,7 @@ function filtersService(globalSettings, utilsFactory) {
             currentElement = element;
         }
 
-        if (parseInt(currentElement.id, 10) === parseInt(filter, 10) || parseInt(currentElement.code, 10) === parseInt(filter, 10)) {
+        if ((currentElement.id && currentElement.id.toString() === filter.toString()) || (currentElement.code && currentElement.code.toString() === filter.toString())) {
             result = true;
         } else {
             // If element is an object or an array, we can browse it to find the filter
@@ -302,7 +302,7 @@ function filtersService(globalSettings, utilsFactory) {
                 var categoryId = filterName.split('_')[0],
                     filterKey = filterName.split('_')[1];
 
-                if (parseInt(categoryId, 10) === parseInt(elementCategoryId, 10)) {
+                if (categoryId.toString() === elementCategoryId.toString()) {
 
                     //Init catSubfilters child if it doesn't exists
                     if (!catSubFilters[filterKey]) {

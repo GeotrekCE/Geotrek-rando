@@ -135,12 +135,12 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
     this.getAResultByID = function (elementID, categoryID, forceRefresh) {
         var deferred = $q.defer();
 
-        if (globalSettings.ENABLE_TREKS && parseInt(categoryID, 10) === -2) {
+        if (globalSettings.ENABLE_TREKS) {
             treksService.getTreks(forceRefresh)
                 .then(
                     function (treks) {
                         _.forEach(treks.features, function (trek) {
-                            if (parseInt(trek.id, 10) === parseInt(elementID, 10) && trek.properties.published) {
+                            if (trek.id === elementID && trek.properties.published && trek.properties.category.id === categoryID) {
                                 deferred.resolve(trek);
                             }
                         });
@@ -149,13 +149,13 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                 );
         }
 
-        if (globalSettings.ENABLE_TOURISTIC_CONTENT && parseInt(categoryID, 10) > 0) {
+        if (globalSettings.ENABLE_TOURISTIC_CONTENT) {
 
             contentsService.getContents(forceRefresh)
                 .then(
                     function (contents) {
                         _.forEach(contents.features, function (content) {
-                            if (parseInt(content.id, 10) === parseInt(elementID, 10) && parseInt(content.properties.category.id, 10) === parseInt(categoryID, 10) && content.properties.published) {
+                            if (content.id === elementID && content.properties.published && content.properties.category.id === categoryID) {
                                 deferred.resolve(content);
                             }
                         });
@@ -164,12 +164,12 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                 );
         }
 
-        if (globalSettings.ENABLE_TOURISTIC_EVENTS && parseInt(categoryID, 10) === -1) {
+        if (globalSettings.ENABLE_TOURISTIC_EVENTS) {
             eventsService.getEvents(forceRefresh)
                 .then(
                     function (trEvents) {
                         _.forEach(trEvents.features, function (trEvent) {
-                            if (parseInt(trEvent.id, 10) === parseInt(elementID, 10) && trEvent.properties.published) {
+                            if (trEvent.id === elementID && trEvent.properties.published && trEvent.properties.category.id === categoryID) {
                                 deferred.resolve(trEvent);
                             }
                         });

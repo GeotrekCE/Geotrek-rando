@@ -38,7 +38,7 @@ function contentsService(globalSettings, settingsFactory, translationService, $r
                     }
                 });
             }
-
+            content.properties.contentType = 'content';
         });
         return contentsData;
     };
@@ -120,6 +120,8 @@ function eventsService(globalSettings, settingsFactory, translationService, $res
                     }
                 });
             }
+
+            trEvent.properties.contentType = 'event';
 
         });
         return eventsData;
