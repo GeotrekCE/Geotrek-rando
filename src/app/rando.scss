@@ -70,15 +70,10 @@ a {
     &:before {
         width: 100%;
         height: 100%;
-        top: 50%;
-        left: 50%;
-        margin-top: -2rem;
-        margin-left: -2rem;
-        width: 4rem;
-        height: 4rem;
-        border-radius: 50%;
+        top: 0;
+        left: 0;
         background: $dark-grey;
-        opacity: 0.3;
+        opacity: 0.6;
     }
     &:after {
         top: 50%;

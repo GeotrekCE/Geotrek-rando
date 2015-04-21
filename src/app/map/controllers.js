@@ -3,17 +3,17 @@
 function MapController($scope, globalSettings, $translate, $rootScope, $state, resultsService, mapService, $stateParams) {
 
     function updateMapWithResults(updateBounds) {
+        $rootScope.elementsLoading ++;
         resultsService.getFilteredResults()
             .then(
                 function (data) {
                     $scope.results = data;
                     if (data.length > 0) {
                         mapService.displayResults(data, updateBounds);
-                        if ($scope.mapInit) {
-                            $scope.mapInit = false;
-                        }
+                        $rootScope.elementsLoading --;
                     } else {
                         mapService.clearAllLayers();
+                        $rootScope.elementsLoading --;
                     }
                 }
             );
@@ -21,7 +21,7 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
     }
 
     function updateMapWithDetails(forceRefresh) {
-
+        $rootScope.elementsLoading ++;
         var promise;
         if (!forceRefresh) {
             promise = resultsService.getAResultBySlug($stateParams.slug);
@@ -34,9 +34,9 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
                 function (data) {
                     $scope.result = data;
                     mapService.displayDetail($scope.result);
-                    if ($scope.mapInit) {
-                        $scope.mapInit = false;
-                    }
+                    $rootScope.elementsLoading --;
+                }, function () {
+                    $rootScope.elementsLoading --;
                 }
             );
     }
@@ -91,7 +91,6 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
     }
 
     function mapInit(selector) {
-        $scope.mapInit = true;
         var mapSelector = selector || 'map';
         $rootScope.map = mapService.initMap(mapSelector);
         initCtrlsTranslation();

@@ -89,7 +89,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
     }
 
     function getResultDetails(forceRefresh) {
-        $scope.isLoading = true;
+        $rootScope.elementsLoading ++;
         var promise;
         if (!forceRefresh) {
             promise = resultsService.getAResultBySlug($stateParams.slug);
@@ -101,7 +101,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
             .then(
                 function (result) {
                     $scope.result = result;
-                    $scope.isLoading = false;
+                    $rootScope.elementsLoading --;
                     getPoisOfResult(result, forceRefresh);
                     getNearElements(result);
                     initCollapse();
@@ -109,6 +109,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                 },
                 function (error) {
                     $state.go("layout.root");
+                    $rootScope.elementsLoading --;
                 }
             );
     }
