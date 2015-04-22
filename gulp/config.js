@@ -90,5 +90,50 @@ module.exports = {
         cssSrc: dest + '/*.css',
         jsSrc: dest + '/*.js',
         dest: dest
+    },
+    custom: {
+        customModulePath: src + '/' + appFolder + '/custom',
+        templatesFolder: 'templates',
+        stylesFolder: 'styles',
+        scriptsFolder: '',
+        appConfig: {
+            path: src + '/' + appFolder + '/config/',
+            defaultFileName: 'configs-default.js',
+            customFileName: 'configs.js',
+            varName: 'constants'
+        },
+        filesToCreate: [
+            {
+                path: src + '/' + appFolder + '/config/styles/',
+                defaultFileName: '_config-default.scss',
+                customFileName: '_config.scss'
+            },
+            {
+                path: '',
+                defaultFileName: '',
+                customFileName: '_custom-footer.scss'
+            },
+            {
+                path: '',
+                defaultFileName: '',
+                customFileName: 'custom-footer.html'
+            },
+            {
+                path: '',
+                defaultFileName: '',
+                customFileName: '_custom-home.scss'
+            },
+            {
+                path: '',
+                defaultFileName: '',
+                customFileName: 'custom-home.html'
+            }
+        ],
+        languages: {
+            enable: true,
+            configListeVarName: 'AVAILABLE_LANGUAGES',
+            pathToPoFolder: src + '/' + appFolder + "/translation/po",
+            useExample: true
+        }
     }
 };

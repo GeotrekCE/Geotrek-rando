@@ -4,11 +4,11 @@ function HomeController($scope, $rootScope, translationService, homeService, glo
 
     $scope.initHome = function () {
         var currentLang = translationService.getCurrentLang();
-        $scope.homeTemplate = 'app/home/templates/';
+
         if (globalSettings.HOME_TEMPLATE_FILE[currentLang.code]) {
-            $scope.homeTemplate += 'custom/' + globalSettings.HOME_TEMPLATE_FILE[currentLang.code];
+            $scope.homeTemplate = 'app/custom/templates/' + globalSettings.HOME_TEMPLATE_FILE[currentLang.code];
         } else {
-            $scope.homeTemplate += 'home-default.html';
+            $scope.homeTemplate = 'app/home/templates/home-default.html';
         }
     };
 
