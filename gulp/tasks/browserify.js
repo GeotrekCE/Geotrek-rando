@@ -22,6 +22,7 @@ var exorcist     = require('exorcist');
 var config       = require('../config').browserify;
 var _            = require('lodash');
 var translateTask = require('./translate');
+var custoTask = require('./customisation');
 
 
 var browserifyTask = function (callback, devMode) {
@@ -89,7 +90,7 @@ var browserifyTask = function (callback, devMode) {
 
         return bundle();
     };
-
+    custoTask();
     translateTask();
     config.bundleConfigs.forEach(browserifyThis);
 

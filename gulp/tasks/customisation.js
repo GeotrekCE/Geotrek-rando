@@ -7,14 +7,13 @@ var _            = require('lodash');
 var config       = require('../config').custom;
 var prefix       = '/../.';
 
-gulp.task('customisation', function () {
-
+function customisationTask() {
     var self = this;
 
     //First - read custom config file
     //
     var configFile = path.join(__dirname, prefix + config.appConfig.path + config.appConfig.customFileName);
-	var defaultConfigFile = path.join(__dirname, prefix + config.appConfig.path + config.appConfig.defaultFileName);
+    var defaultConfigFile = path.join(__dirname, prefix + config.appConfig.path + config.appConfig.defaultFileName);
 
     function getFileType(fileName) {
         if (fileName.match(/^\S*\.(js|coffee)$/gi)) {
@@ -99,8 +98,8 @@ gulp.task('customisation', function () {
         }
         
     });
+}
 
-    
+gulp.task('customisation', customisationTask);
 
-
-});
+module.exports = customisationTask;

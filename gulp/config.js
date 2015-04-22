@@ -127,6 +127,11 @@ module.exports = {
                 path: '',
                 defaultFileName: '',
                 customFileName: 'custom-home.html'
+            },
+            {
+                path: '',
+                defaultFileName: '',
+                customFileName: '_custom-override.scss'
             }
         ],
         languages: {
