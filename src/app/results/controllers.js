@@ -1,6 +1,6 @@
 'use strict';
 
-function ResultsListeController($scope, $rootScope, utilsFactory, favoritesService, resultsService) {
+function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory, favoritesService, resultsService) {
 
     function updateResults(forceRefresh) {
         $rootScope.elementsLoading ++;
@@ -55,6 +55,7 @@ function ResultsListeController($scope, $rootScope, utilsFactory, favoritesServi
         }
     };
 
+    $scope.favIcon = (globalSettings.FAVORITES_ICON ? globalSettings.FAVORITES_ICON : 'heart');
     $scope.isInFavorites = favoritesService.isInFavorites;
     $scope.isSVG = utilsFactory.isSVG;
     updateResults();

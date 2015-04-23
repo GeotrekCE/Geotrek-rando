@@ -14,12 +14,12 @@
         </li>
         <li class="favorites">
             <a href title="{{'REMOVE_FAVS' | translate}}" class="isFav" ng-if="isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="right" tooltip="{{'REMOVE_FAVS' | translate}}">
-                <i class="fa fa-heart"></i>
+                <i class="fa fa-{{favIcon}}"></i>
                 <span class="sr-only">{{'REMOVE_FAVS' | translate}}</span>
             </a>
 
             <a href title="{{'ADD_FAVS' | translate}}" ng-if="!isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="right" tooltip="{{'ADD_FAVS' | translate}}">
-                <i class="fa fa-heart"></i>
+                <i class="fa fa-{{favIcon}}"></i>
                 <span class="sr-only">{{'ADD_FAVS' | translate}}</span>
             </a>
         </li>

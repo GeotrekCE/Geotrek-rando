@@ -88,6 +88,7 @@ function SidebarDetailController($scope, $rootScope, $modal, $stateParams, $loca
         });
     };
 
+    $scope.favIcon = (globalSettings.FAVORITES_ICON ? globalSettings.FAVORITES_ICON : 'heart');
     $scope.isInFavorites = favoritesService.isInFavorites;
 
     $scope.back = $rootScope.back;

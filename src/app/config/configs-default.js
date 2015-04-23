@@ -24,6 +24,8 @@ var constants = {
     ENABLE_STRUCTURE_FILTERING: true,
 
     RULES_FLAT_PAGES_ID: '',
+    FAVORITES_ICON: '', // use font awesome plain icons (outline for results is done in css) ('' -> heart)
+    SHARE_ICON: '', // use font awesome icons ('' -> arrow share icon)
 
 
 

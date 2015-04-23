@@ -2,6 +2,8 @@
 
 function SocialController($scope, $rootScope, $location, $state, $stateParams, $translate, resultsService, flatService, globalSettings, utilsFactory) {
 
+    $scope.shareIcon = (globalSettings.SHARE_ICON ? globalSettings.SHARE_ICON : 'share');
+
     function initShareButtons(translatedContent, element) {
 
         $scope.fbShareLink = 'https://www.facebook.com/dialog/feed?' +

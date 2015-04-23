@@ -11,7 +11,7 @@
 
                 <div>
                     <div class="fav-or-not" ng-click="toggleFavorites(result)" ng-class="{isFav: isInFavorites(result)}">
-                        <i class="glyphicon glyphicon-heart"></i>
+                        <i class="fa fa-{{favIcon}}"></i>
                     </div>
                     <a ui-sref="layout.detail({slug: result.properties.slug})">
                         <div class="visual">

@@ -1,6 +1,8 @@
 'use strict';
 
-function FavoritesController($scope, $rootScope, favoritesService, resultsService) {
+function FavoritesController($scope, $rootScope, globalSettings, favoritesService, resultsService) {
+
+    $scope.favIcon = (globalSettings.FAVORITES_ICON ? globalSettings.FAVORITES_ICON : 'heart');
 
     function updateFavorites(forceRefresh) {
         var savedFavorites = favoritesService.getFavorites();
