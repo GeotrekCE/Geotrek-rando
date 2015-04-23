@@ -4,7 +4,6 @@ function ResultsListeController($scope, $rootScope, utilsFactory, favoritesServi
 
     function updateResults(forceRefresh) {
         $rootScope.elementsLoading ++;
-        console.log($rootScope.elementsLoading);
         resultsService.getFilteredResults(forceRefresh)
             .then(
                 function (data) {
