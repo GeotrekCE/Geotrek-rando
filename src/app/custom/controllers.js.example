@@ -1,0 +1,17 @@
+'use strict'
+
+var angular = require('angular');
+
+/* CONTROLLER DECLARATION TEMPLATE
+
+angular.module('rando.custom').controller('NameOfYourCustomController', function (aDependency, anotherDependency) {
+    
+});
+
+/!\ the name of the module must be 'rando.custom', otherwise you'll get an error of a non existing module.
+
+HINT: You can declare as many controllers as you whish
+HINT2: You'll probably need $scope and $rootScope as dependencies
+HINT3: To access map instance, use $rootScope.map
+
+*/

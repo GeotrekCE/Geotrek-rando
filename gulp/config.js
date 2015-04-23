@@ -132,6 +132,21 @@ module.exports = {
                 path: '',
                 defaultFileName: '',
                 customFileName: '_custom-override.scss'
+            },
+            {
+                path: '',
+                defaultFileName: 'directives.js.example',
+                customFileName: 'directives.js'
+            },
+            {
+                path: '',
+                defaultFileName: 'controllers.js.example',
+                customFileName: 'controllers.js'
+            },
+            {
+                path: '',
+                defaultFileName: 'services.js.example',
+                customFileName: 'services.js'
             }
         ],
         languages: {

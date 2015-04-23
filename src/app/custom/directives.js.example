@@ -1,0 +1,22 @@
+'use strict'
+
+var angular = require('angular');
+
+/* SERVICE DECLARATION TEMPLATE
+
+angular.module('rando.custom').directive('nameOfYourDirective', function () {
+    return {
+        restrict: 'EAC',
+        replace: true,
+        scope: true,
+        template: require('./templates/your-custom-template-name.html'),
+        controller: NameOfYourCustomController
+    };
+});
+
+/!\ the name of the module must be 'rando.custom', otherwise you'll get an error of a non existing module.
+
+HINT: You can declare as many directives as you whish
+HINT2: When you call a directive in a template, nameOfYourDirective become name-of-your-directive. In short, every Maj letter must be replace by - and the min version of the letter.
+
+*/
