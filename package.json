@@ -13,7 +13,7 @@
     "angular-ui-router": "^0.2.13",
     "bootstrap-sass": "^3.3.1",
     "font-awesome": "^4.2.0",
-    "jquery": "~1.x.x",
+    "jquery": "^1.11.x",
     "leaflet": "^0.7.3",
     "leaflet-geometryutil": "git://github.com/makinacorpus/Leaflet.GeometryUtil.git",
     "leaflet-minimap": "git://github.com/Norkart/Leaflet-MiniMap.git",
@@ -42,8 +42,8 @@
     "rando3d": "./node_modules/rando3D"
   },
   "devDependencies": {
-    "browser-sync": "~1.3.6",
-    "browserify": "^8.0.2",
+    "browser-sync": "^2.6.4",
+    "browserify": "^9.0.8",
     "browserify-shim": "^3.8.2",
     "chai": "^1.10.0",
     "exorcist": "^0.1.6",
@@ -75,7 +75,7 @@
     "sinon": "^1.12.2",
     "sinon-chai": "^2.6.0",
     "vinyl-source-stream": "^1.0.0",
-    "watchify": "^2.2.1"
+    "watchify": "^3.1.2"
   },
   "readmeFilename": "README.md",
   "bugs": {}
