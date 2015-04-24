@@ -126,7 +126,12 @@ module.exports = {
             {
                 path: '',
                 defaultFileName: '',
-                customFileName: 'custom-home.html'
+                customFileName: 'custom-home-fr.html'
+            },
+            {
+                path: '',
+                defaultFileName: '',
+                customFileName: 'custom-home-en.html'
             },
             {
                 path: '',

@@ -561,8 +561,15 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
         self._clustersLayer.clearLayers();
         self._poisMarkersLayer.clearLayers();
         self._nearMarkersLayer.clearLayers();
-        self._geoJsonLayer.clearLayers();
-        self._categoriesMarkersLayer.clearLayers();
+
+        if (globalSettings.ENABLE_TREKS) {
+            self._treksMarkersLayer.clearLayers();
+            self._treksgeoJsonLayer.clearLayers();
+        }
+
+        if (globalSettings.ENABLE_TOURISTIC_CONTENT || globalSettings.ENABLE_TOURISTIC_EVENTS) {
+            self._touristicsMarkersLayer.clearLayers();
+        }
 
     };
 
@@ -630,7 +637,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
 
     this.resultsVisibility = function () {
         var visibleMarkers = self.testMarkersVisibility(self._clustersLayer),
-            visibleGeoJson = self.testMarkersVisibility(self._geoJsonLayer);
+            visibleGeoJson = self.testMarkersVisibility(self._treksgeoJsonLayer);
 
         var visbleResults = _.union(visibleMarkers, visibleGeoJson);
 
@@ -758,6 +765,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
             this.clearAllLayers();
 
             _.forEach(results, function (result) {
+
                 counter++;
 
                 var currentLayer,
@@ -766,7 +774,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                     type = '';
 
                 if (result.geometry.type !== "Point" && !self.treksIconified) {
-                    currentLayer = self._geoJsonLayer;
+                    currentLayer = self._treksgeoJsonLayer;
                     type = 'geojson';
                     elementLocation = [];
                     self.createLayerFromElement(result, 'departure', utilsFactory.getStartPoint(result))
@@ -776,7 +784,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                         }
                     );
                 } else {
-                    currentLayer = self._categoriesMarkersLayer;
+                    currentLayer = (result.properties.contentType === 'trek' ? self._treksMarkersLayer : self._touristicsMarkersLayer);
                     type = 'category';
                     elementLocation = utilsFactory.getStartPoint(result);
                 }
@@ -868,11 +876,11 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
             this.createElevation(result);
 
             if (result.geometry.type !== "Point") {
-                currentLayer = self._geoJsonLayer;
+                currentLayer = self._treksgeoJsonLayer;
                 type = 'geojson';
                 elementLocation = [];
             } else {
-                currentLayer = self._categoriesMarkersLayer;
+                currentLayer = (result.properties.contentType === 'trek' ? self._treksMarkersLayer : self._touristicsMarkersLayer);
                 type = 'category';
                 elementLocation = utilsFactory.getStartPoint(result);
             }
@@ -945,8 +953,14 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
         //Set-up Layers
         this._clustersLayer = self.createClusterLayer();
 
-        this._categoriesMarkersLayer = self.createLayer();
-        this._geoJsonLayer = self.createGeoJSONLayer();
+        if (globalSettings.ENABLE_TREKS) {
+            this._treksMarkersLayer = self.createLayer();
+            this._treksgeoJsonLayer = self.createGeoJSONLayer();
+        }
+
+        if (globalSettings.ENABLE_TOURISTIC_CONTENT || globalSettings.ENABLE_TOURISTIC_EVENTS) {
+            this._touristicsMarkersLayer = self.createLayer();
+        }
 
         this._poisMarkersLayer = self.createPOIsLayer();
         this._nearMarkersLayer = self.createLayer();
