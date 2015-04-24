@@ -561,15 +561,8 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
         self._clustersLayer.clearLayers();
         self._poisMarkersLayer.clearLayers();
         self._nearMarkersLayer.clearLayers();
-
-        if (globalSettings.ENABLE_TREKS) {
-            self._treksMarkersLayer.clearLayers();
-            self._treksgeoJsonLayer.clearLayers();
-        }
-
-        if (globalSettings.ENABLE_TOURISTIC_CONTENT || globalSettings.ENABLE_TOURISTIC_EVENTS) {
-            self._touristicsMarkersLayer.clearLayers();
-        }
+        self._geoJsonLayer.clearLayers();
+        self._categoriesMarkersLayer.clearLayers();
 
     };
 
@@ -637,7 +630,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
 
     this.resultsVisibility = function () {
         var visibleMarkers = self.testMarkersVisibility(self._clustersLayer),
-            visibleGeoJson = self.testMarkersVisibility(self._treksgeoJsonLayer);
+            visibleGeoJson = self.testMarkersVisibility(self._geoJsonLayer);
 
         var visbleResults = _.union(visibleMarkers, visibleGeoJson);
 
@@ -765,7 +758,6 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
             this.clearAllLayers();
 
             _.forEach(results, function (result) {
-
                 counter++;
 
                 var currentLayer,
@@ -774,7 +766,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                     type = '';
 
                 if (result.geometry.type !== "Point" && !self.treksIconified) {
-                    currentLayer = self._treksgeoJsonLayer;
+                    currentLayer = self._geoJsonLayer;
                     type = 'geojson';
                     elementLocation = [];
                     self.createLayerFromElement(result, 'departure', utilsFactory.getStartPoint(result))
@@ -784,7 +776,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
                         }
                     );
                 } else {
-                    currentLayer = self._touristicsMarkersLayer;
+                    currentLayer = self._categoriesMarkersLayer;
                     type = 'category';
                     elementLocation = utilsFactory.getStartPoint(result);
                 }
@@ -876,11 +868,11 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
             this.createElevation(result);
 
             if (result.geometry.type !== "Point") {
-                currentLayer = self._treksgeoJsonLayer;
+                currentLayer = self._geoJsonLayer;
                 type = 'geojson';
                 elementLocation = [];
             } else {
-                currentLayer = self._touristicsMarkersLayer;
+                currentLayer = self._categoriesMarkersLayer;
                 type = 'category';
                 elementLocation = utilsFactory.getStartPoint(result);
             }
@@ -953,14 +945,8 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
         //Set-up Layers
         this._clustersLayer = self.createClusterLayer();
 
-        if (globalSettings.ENABLE_TREKS) {
-            this._treksMarkersLayer = self.createLayer();
-            this._treksgeoJsonLayer = self.createGeoJSONLayer();
-        }
-
-        if (globalSettings.ENABLE_TOURISTIC_CONTENT || globalSettings.ENABLE_TOURISTIC_EVENTS) {
-            this._touristicsMarkersLayer = self.createLayer();
-        }
+        this._categoriesMarkersLayer = self.createLayer();
+        this._geoJsonLayer = self.createGeoJSONLayer();
 
         this._poisMarkersLayer = self.createPOIsLayer();
         this._nearMarkersLayer = self.createLayer();
@@ -975,26 +961,26 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
 
 }
 
-function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
+function iconsService($http, $q, globalSettings, categoriesService, poisService, utilsFactory) {
 
     var self = this;
 
     this.icons_liste = {
         default_icon: {},
         departure: {
-            iconUrl: '/images/map/departure.svg',
+            iconUrl: globalSettings.DEPARTURE_ICON ? '/images/custom/map/' + globalSettings.DEPARTURE_ICON : '/images/map/departure.svg',
             iconSize: [46, 52],
             iconAnchor: [13, 52],
             className: 'departure-marker'
         },
         arrival: {
-            iconUrl: '/images/map/arrival.svg',
+            iconUrl: globalSettings.ARRIVAL_ICON ? '/images/custom/map/' + globalSettings.ARRIVAL_ICON : '/images/map/arrival.svg',
             iconSize: [46, 52],
             iconAnchor: [13, 52],
             className: 'arrival-marker'
         },
         departureArrival: {
-            iconUrl: '/images/map/departure-arrival.svg',
+            iconUrl: globalSettings.DEPARTURE_ARRIVAL_ICON ? '/images/custom/map/' + globalSettings.DEPARTURE_ARRIVAL_ICON : '/images/map/departure-arrival.svg',
             iconSize: [46, 52],
             iconAnchor: [13, 52],
             className: 'departure-arrival-marker'
@@ -1021,20 +1007,20 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
             className: 'ref-point'
         },
         poi: {
-            iconUrl: '/images/map/poi.svg',
+            iconUrl: '',
             iconSize: [],
             iconAnchor: [],
             labelAnchor: [],
             className: ''
         },
         category_base: {
-            iconUrl: '/images/map/category_base.svg',
+            iconUrl: globalSettings.MARKER_BASE_ICON ? '/images/custom/map/' + globalSettings.MARKER_BASE_ICON : '/images/map/category_base.svg',
             iconSize: [34, 48],
             iconAnchor: [17, 48],
             labelAnchor: [17, 17]
         },
         poi_base: {
-            iconUrl: '/images/map/category_base.svg',
+            iconUrl: '',
             iconSize: [34, 34],
             iconAnchor: [17, 34],
             labelAnchor: [17, 17]
@@ -1267,7 +1253,7 @@ function iconsService($http, $q, categoriesService, poisService, utilsFactory) {
         deferred.resolve(newIcon);
 
         return deferred.promise;
-    }
+    };
 
     this.getIcon = function (iconName) {
         var deferred = $q.defer();

@@ -11,24 +11,24 @@ function poisService($resource, $q, globalSettings, settingsFactory, translation
             if (poi.properties.pictures && poi.properties.pictures[0]) {
                 _.forEach(poi.properties.pictures, function (picture) {
                     if (picture.url !== null) {
-                        picture.url = globalSettings.DOMAIN + picture.url;
+                        picture.url = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + picture.url;
                     }
                 });
             }
             if (poi.properties.filelist_url && poi.properties.filelist_url !== null) {
-                poi.properties.filelist_url = globalSettings.DOMAIN + poi.properties.filelist_url;
+                poi.properties.filelist_url = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + poi.properties.filelist_url;
             }
             if (poi.properties.map_image_url && poi.properties.map_image_url !== null) {
-                poi.properties.map_image_url = globalSettings.DOMAIN + poi.properties.map_image_url;
+                poi.properties.map_image_url = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + poi.properties.map_image_url;
             }
             if (poi.properties.printable && poi.properties.printable !== null) {
-                poi.properties.printable = globalSettings.DOMAIN + poi.properties.printable;
+                poi.properties.printable = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + poi.properties.printable;
             }
             if (poi.properties.thumbnail && poi.properties.thumbnail !== null) {
-                poi.properties.thumbnail = globalSettings.DOMAIN + poi.properties.thumbnail;
+                poi.properties.thumbnail = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + poi.properties.thumbnail;
             }
             if (poi.properties.type.pictogram && poi.properties.type.pictogram !== null) {
-                poi.properties.type.pictogram = globalSettings.DOMAIN + poi.properties.type.pictogram;
+                poi.properties.type.pictogram = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + poi.properties.type.pictogram;
             }
 
         });
@@ -44,19 +44,12 @@ function poisService($resource, $q, globalSettings, settingsFactory, translation
             deferred.resolve(self._pois);
 
         } else {
-            var url = settingsFactory.poisUrl;
+            var url = settingsFactory.poisUrl.replace(/\$lang/, translationService.getCurrentLang().code);
 
             var requests = $resource(url, {}, {
                 query: {
                     method: 'GET',
-                    params: {
-                        format: 'geojson'
-                    },
-                    headers: {
-                        'Accept-Language': translationService.getCurrentLang().code
-                    },
                     cache: !forceRefresh,
-
                 }
             }, {stripTrailingSlashes: false});
 
@@ -74,23 +67,15 @@ function poisService($resource, $q, globalSettings, settingsFactory, translation
 
     };
 
-    this.getPoisFromElement = function (ElementId, forceRefresh) {
+    this.getPoisFromElement = function (elementId, forceRefresh) {
 
         var deferred = $q.defer();
 
-        var url = settingsFactory.poisUrl;
+        var url = settingsFactory.trekUrl.replace(/\$lang/, translationService.getCurrentLang().code) + '/' + elementId + '/' + globalSettings.POI_FILE;
 
         var requests = $resource(url, {}, {
             query: {
-                method: 'GET',
-                params: {
-                    format: 'geojson',
-                    trek: ElementId
-                },
-                headers: {
-                    'Accept-Language': translationService.getCurrentLang().code
-                }
-
+                method: 'GET'
             }
         }, {stripTrailingSlashes: false});
 

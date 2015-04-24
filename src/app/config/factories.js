@@ -9,12 +9,12 @@ function settingsFactory(globalSettings) {
 
     // PUBLIC VAR
     //
-    var treksUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.TREKS_DIR + '/',
-        trekUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.TREK_DIR + '/',
-        poisUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.POI_DIR + '/',
-        eventsUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.TOURISTIC_EVENTS_DIR + '/',
-        touristicUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.TOURISTIC_CONTENTS_DIR + '/',
-        flatUrl =  globalSettings.DOMAIN + '/' + globalSettings.API_DIR + '/' + globalSettings.FLAT_DIR + '/';
+    var treksUrl =  globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.TREKS_FILE,
+        trekUrl =  globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.TREK_DIR + '/',
+        poisUrl =  globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + '/' + globalSettings.API_DIR + '/' + globalSettings.POI_FILE,
+        eventsUrl =  globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.TOURISTIC_EVENTS_FILE,
+        touristicUrl =  globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.TOURISTIC_CONTENTS_FILE,
+        flatUrl =  globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.FLAT_FILE;
 
     //PUBLIC METHODS
     //

@@ -76,7 +76,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
             .then(
                 function (elementPois) {
                     $scope.pois = elementPois.features;
-                    if ($scope.pois.length === 0) {
+                    if ($scope.pois && $scope.pois.length === 0) {
                         $scope.poisAreShown = false;
                         // Wait till css animation is over
                         $timeout(function () {

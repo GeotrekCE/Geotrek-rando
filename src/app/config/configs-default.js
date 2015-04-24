@@ -82,10 +82,16 @@ var constants = {
         CENTER_LONGITUDE: 6.34,
         DEFAULT_ZOOM: 12,
         DEFAULT_MIN_ZOOM: 8,
-        DEFAULT_MAX_ZOOM: 18
+        DEFAULT_MAX_ZOOM: 17
     },
     TREKS_TO_GEOJSON_ZOOM_LEVEL : 14,
     UPDATE_MAP_ON_FILTER: false,
+
+    // Put the files in src/images/custom/map
+    MARKER_BASE_ICON: '',
+    DEPARTURE_ICON: '',
+    ARRIVAL_ICON: '',
+    DEPARTURE_ARRIVAL_ICON: '',
 
 
 
@@ -96,12 +102,17 @@ var constants = {
 
 
     API_DIR: 'api',
+    DATA_DIR: 'data',
     TREKS_DIR: 'treks',
-    TREK_DIR: 'trek',
-    POI_DIR: 'pois',
-    FLAT_DIR: 'flatpages',
+    TREKS_FILE: 'treks.geojson',
+    POI_FILE: 'pois.geojson',
+    FLAT_FILE: 'flatpages.geojson',
     TOURISTIC_EVENTS_DIR: 'touristicevents',
+    TOURISTIC_EVENTS_FILE: 'touristicevents.geojson',
     TOURISTIC_CONTENTS_DIR: 'touristiccontents',
+    TOURISTIC_CONTENTS_FILE: 'touristiccontents.geojson',
+    DEM_FILE: 'dem.json',
+    PROFILE_FILE: 'profile.json',
 
 
 

@@ -13,19 +13,12 @@ function flatService($q, $resource, utilsFactory, settingsFactory, translationSe
             deferred.resolve(self._flatList);
 
         } else {
-            var url = settingsFactory.flatUrl;
+            var url = settingsFactory.flatUrl.replace(/\$lang/, translationService.getCurrentLang().code);
 
             var requests = $resource(url, {}, {
                 query: {
                     method: 'GET',
-                    params: {
-                        format: 'geojson'
-                    },
-                    isArray: true,
-                    headers: {
-                        'Accept-Language': translationService.getCurrentLang().code
-                    }
-
+                    isArray: true
                 }
             }, {stripTrailingSlashes: false});
 
