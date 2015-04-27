@@ -620,11 +620,11 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         layer.eachLayer(function (layer) {
             if (layer.options.result) {
                 if (layer.options.result.geometry.type !== 'Point' && !self.treksIconified) {
-                    if (bounds.intersects(layer.getBounds())) {
+                    if (layer.getBounds && bounds.intersects(layer.getBounds())) {
                         inBounds.push(layer.options.result);
                     }
                 } else {
-                    if (bounds.contains(layer.getLatLng())) {
+                    if (layer.getLatLng && bounds.contains(layer.getLatLng())) {
                         inBounds.push(layer.options.result);
                     }
                 }
@@ -773,20 +773,61 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                     type = '';
 
                 if (result.geometry.type !== "Point" && !self.treksIconified) {
-                    currentLayer = self._treksgeoJsonLayer;
-                    type = 'geojson';
-                    elementLocation = [];
-                    self.createLayerFromElement(result, 'departure', utilsFactory.getStartPoint(result))
-                    .then(
-                        function (marker) {
-                            self._poisMarkersLayer.addLayer(marker);
-                        }
-                    );
-                } else {
-                    currentLayer = (result.properties.contentType === 'trek' ? self._treksMarkersLayer : self._touristicsMarkersLayer);
-                    type = 'category';
-                    elementLocation = utilsFactory.getStartPoint(result);
+                    self.createLayerFromElement(result, 'geojson', [])
+                        .then(
+                            function (layer) {
+                                var selector = '#result-category-' + result.properties.category.id.toString() + '-' + result.id.toString();
+
+                                layer.on({
+                                    mouseover: function () {
+                                        var listeEquivalent = document.querySelector(selector);
+                                        if (listeEquivalent) {
+                                            if (!listeEquivalent.classList.contains('hovered')) {
+                                                listeEquivalent.classList.add('hovered');
+                                            }
+                                        }
+                                        self.highlightPath(result);
+                                    },
+                                    mouseout: function () {
+                                        var listeEquivalent = document.querySelector(selector);
+                                        if (listeEquivalent) {
+                                            if (listeEquivalent.classList.contains('hovered')) {
+                                                listeEquivalent.classList.remove('hovered');
+                                            }
+                                        }
+                                        if (self.geoHover) {
+                                            self._nearMarkersLayer.removeLayer(self.geoHover);
+                                        }
+                                    },
+                                    remove: function () {
+                                        var listeEquivalent = document.querySelector(selector);
+                                        if (listeEquivalent) {
+                                            if (listeEquivalent.classList.contains('hovered')) {
+                                                listeEquivalent.classList.remove('hovered');
+                                            }
+                                        }
+                                    },
+                                    click: function () {
+                                        $state.go("layout.detail", { slug: result.properties.slug });
+                                    }
+                                });
+                                jQuery(selector).on('mouseenter', function () {
+                                    self.highlightPath(result);
+                                });
+                                jQuery(selector).on('mouseleave', function () {
+                                    if (self.geoHover) {
+                                        self._nearMarkersLayer.removeLayer(self.geoHover);
+                                    }
+                                });
+                                self._treksgeoJsonLayer.addLayer(layer);
+                                self._clustersLayer.addLayer(self._treksgeoJsonLayer);
+                            }
+                        );
                 }
+
+                currentLayer = (result.properties.contentType === 'trek' ? self._treksMarkersLayer : self._touristicsMarkersLayer);
+                type = 'category';
+                elementLocation = utilsFactory.getStartPoint(result);
 
                 self.createLayerFromElement(result, type, elementLocation)
                     .then(
