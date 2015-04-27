@@ -33,7 +33,7 @@ var constants = {
     //
     //
 
-    DEFAULT_LANGUAGE: 'en',
+    DEFAULT_LANGUAGE: 'fr',
     AVAILABLE_LANGUAGES: [
         {code: 'fr', label: 'Français'},
         {code: 'en', label: 'English'}
@@ -50,7 +50,7 @@ var constants = {
     ENABLE_TOURISTIC_EVENTS: true,
 
     // CHOSE WHICH CATEGORIES ARE ACTIVE BY DEFAULT
-    DEFAULT_ACTIVE_CATEGORIES: [-2],
+    DEFAULT_ACTIVE_CATEGORIES: ['T'],
 
 
 
