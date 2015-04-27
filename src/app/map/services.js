@@ -1,6 +1,6 @@
 'use strict';
 
-function mapService($q, $state, $resource, utilsFactory, globalSettings, settingsFactory, treksService, poisService, iconsService) {
+function mapService($q, $state, $resource, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, iconsService) {
 
     var self = this,
         loadingMarkers = false;
@@ -222,7 +222,6 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
             if (element.geometry.type === 'Polygon') {
                 geoStyle.className += ' fill';
             }
-            console.log(element);
             var geoJsonLayer = L.geoJson(element, {
                 style: geoStyle
             });
@@ -677,7 +676,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, setting
          * Load altimetric profile from JSON
          */
 
-        var url = settingsFactory.trekUrl + result.id + '/profile.json';
+        var url = settingsFactory.trekUrl.replace(/\$lang/, translationService.getCurrentLang().code) + result.id + '/' + globalSettings.PROFILE_FILE;
         var requests = $resource(url, {}, {
             query: {
                 method: 'GET'

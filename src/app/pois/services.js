@@ -70,7 +70,7 @@ function poisService($resource, $q, globalSettings, settingsFactory, translation
     this.getPoisFromElement = function (elementId, forceRefresh) {
 
         var deferred = $q.defer();
-
+        console.log(settingsFactory.trekUrl.replace(/\$lang/, translationService.getCurrentLang().code));
         var url = settingsFactory.trekUrl.replace(/\$lang/, translationService.getCurrentLang().code) + '/' + elementId + '/' + globalSettings.POI_FILE;
 
         var requests = $resource(url, {}, {
