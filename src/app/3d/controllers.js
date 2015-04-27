@@ -13,7 +13,7 @@ function Rando3DController(result, $scope, $timeout, $modalInstance, globalSetti
             TILE_TEX_URL: "https://a.tiles.mapbox.com/v3/makina-corpus.i3p1001l/{z}/{x}/{y}.png",
             SIDE_TEX_URL: "/images/3d/side.jpg",
             CAM_SPEED_F: 100,
-            PICTO_PREFIX: globalSettings.DOMAIN,
+            PICTO_PREFIX: globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR,
             TREK_COLOR: {
                 R: 0.6,
                 V: 0.1,
