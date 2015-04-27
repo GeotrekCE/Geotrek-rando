@@ -252,7 +252,7 @@
                             <near-liste></near-liste>
                         </div>
                     </div>
-                    <div class="pois" ng-if="pois.length > 0 && result.properties.category.id === -2" ng-class="{collapsed: !poisAreShown}">
+                    <div class="pois" ng-if="pois.length > 0 && result.properties.contentType === 'trek'" ng-class="{collapsed: !poisAreShown}">
                         <h3 ng-click="togglePois()">{{'POI' | translate}} <i class="fa fa-angle-down"></i></h3>
                         <div class="collapsor">
                             <pois-liste></pois-liste>
