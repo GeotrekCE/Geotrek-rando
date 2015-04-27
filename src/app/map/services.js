@@ -1015,7 +1015,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
 }
 
-function iconsService($http, $q, globalSettings, categoriesService, poisService, utilsFactory) {
+function iconsService($resource, $q, globalSettings, categoriesService, poisService, utilsFactory) {
 
     var self = this;
 
@@ -1099,22 +1099,23 @@ function iconsService($http, $q, globalSettings, categoriesService, poisService,
                             }
                             counter++;
                             var currentCounter = counter;
-                            $http.get(category.pictogram)
-                                .success(
-                                    function (icon) {
-                                        self.categoriesIcons[category.id] = icon.toString();
+
+                            var requests = $resource(category.pictogram, {}, {
+                                query: {
+                                    method: 'GET',
+                                    cache: true,
+                                    responseType: 'document'
+                                }
+                            });
+
+                            requests.query().$promise
+                                .then(function (icon) {
+                                    self.categoriesIcons[category.id] = icon.documentElement.outerHTML;
                                         if (currentCounter === _.size(categories)) {
                                             deferred.resolve(self.categoriesIcons);
                                         }
-                                    }
-                                ).error(
-                                    function () {
-                                        self.categoriesIcons[category.id] = '';
-                                        if (currentCounter === _.size(categories)) {
-                                            deferred.resolve(self.categoriesIcons);
-                                        }
-                                    }
-                                );
+                                });
+
                         });
                     }
                 );
@@ -1238,18 +1239,19 @@ function iconsService($http, $q, globalSettings, categoriesService, poisService,
         if (self.icons_liste[iconName].markup) {
             deferred.resolve(self.icons_liste[iconName].markup);
         } else {
-            $http.get(url)
-                .success(
-                    function (icon) {
-                        self.icons_liste[iconName].markup = icon.toString();
-                        deferred.resolve(icon.toString());
-                    }
-                ).error(
-                    function () {
-                        self.icons_liste[iconName].markup = '';
-                        deferred.resolve('');
-                    }
-                );
+            var requests = $resource(url, {}, {
+                query: {
+                    method: 'GET',
+                    cache: true,
+                    responseType: 'document'
+                }
+            });
+
+            requests.query().$promise
+                .then(function (icon) {
+                    self.icons_liste[iconName].markup = icon.documentElement.outerHTML;
+                    deferred.resolve(icon.toString());
+                });
         }
 
         return deferred.promise;
