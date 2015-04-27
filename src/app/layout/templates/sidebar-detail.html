@@ -41,7 +41,7 @@
                 <span class="sr-only">{{'GPX' | translate}}</span>
             </a>
         </li>
-        <li ng-if="result.properties.category.id === -2" class="rep-3d">
+        <li ng-if="result.properties.contentType === 'trek'" class="rep-3d">
             <a href title="{{'3D' | translate}}" tooltip-placement="right" tooltip="{{'3D' | translate}}" ng-click="show3d()">
                 <span class="txt-icon">3D</span>
                 <span class="sr-only">{{'3D' | translate}}</span>
