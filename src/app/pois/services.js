@@ -11,24 +11,24 @@ function poisService($resource, $q, globalSettings, settingsFactory, translation
             if (poi.properties.pictures && poi.properties.pictures[0]) {
                 _.forEach(poi.properties.pictures, function (picture) {
                     if (picture.url !== null) {
-                        picture.url = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + picture.url;
+                        picture.url = globalSettings.API_URL + picture.url;
                     }
                 });
             }
             if (poi.properties.filelist_url && poi.properties.filelist_url !== null) {
-                poi.properties.filelist_url = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + poi.properties.filelist_url;
+                poi.properties.filelist_url = globalSettings.API_URL + poi.properties.filelist_url;
             }
             if (poi.properties.map_image_url && poi.properties.map_image_url !== null) {
-                poi.properties.map_image_url = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + poi.properties.map_image_url;
+                poi.properties.map_image_url = globalSettings.API_URL + poi.properties.map_image_url;
             }
             if (poi.properties.printable && poi.properties.printable !== null) {
-                poi.properties.printable = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + poi.properties.printable;
+                poi.properties.printable = globalSettings.API_URL + poi.properties.printable;
             }
             if (poi.properties.thumbnail && poi.properties.thumbnail !== null) {
-                poi.properties.thumbnail = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + poi.properties.thumbnail;
+                poi.properties.thumbnail = globalSettings.API_URL + poi.properties.thumbnail;
             }
             if (poi.properties.type.pictogram && poi.properties.type.pictogram !== null) {
-                poi.properties.type.pictogram = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + poi.properties.type.pictogram;
+                poi.properties.type.pictogram = globalSettings.API_URL + poi.properties.type.pictogram;
             }
 
         });
@@ -70,7 +70,7 @@ function poisService($resource, $q, globalSettings, settingsFactory, translation
     this.getPoisFromElement = function (elementId, forceRefresh) {
 
         var deferred = $q.defer();
-        var url = settingsFactory.trekUrl.replace(/\$lang/, translationService.getCurrentLang().code) + '/' + elementId + '/' + globalSettings.POI_FILE;
+        var url = settingsFactory.trekUrl.replace(/\$lang/, translationService.getCurrentLang().code) + elementId + '/' + globalSettings.POI_FILE;
 
         var requests = $resource(url, {}, {
             query: {

@@ -9,11 +9,11 @@ function Rando3DController(result, $scope, $timeout, $modalInstance, globalSetti
             IMAGES_FOLDER: 'images/3d/',
             DEM_URL: settingsFactory.trekUrl.replace(/\$lang/, translationService.getCurrentLang().code) + pk + '/' + globalSettings.DEM_FILE,
             PROFILE_URL: settingsFactory.trekUrl.replace(/\$lang/, translationService.getCurrentLang().code) + pk + '/' + globalSettings.PROFILE_FILE,
-            POI_URL: settingsFactory.trekUrl.replace(/\$lang/, translationService.getCurrentLang().code) + '/' + pk + '/' + globalSettings.POI_FILE,
+            POI_URL: settingsFactory.trekUrl.replace(/\$lang/, translationService.getCurrentLang().code) + pk + '/' + globalSettings.POI_FILE,
             TILE_TEX_URL: "https://a.tiles.mapbox.com/v3/makina-corpus.i3p1001l/{z}/{x}/{y}.png",
             SIDE_TEX_URL: "/images/3d/side.jpg",
             CAM_SPEED_F: 100,
-            PICTO_PREFIX: globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR,
+            PICTO_PREFIX: globalSettings.API_URL,
             TREK_COLOR: {
                 R: 0.6,
                 V: 0.1,

@@ -3,7 +3,7 @@
 var constants = {
 
     PLATFORM_ID: 'geotrek-rando',
-    DOMAIN: 'http://geotrekdemo.ecrins-parcnational.fr',
+    API_URL: 'http://geotrekdemo.ecrins-parcnational.fr',
     ENABLE_HTML_MODE: true,
 
 
@@ -102,7 +102,6 @@ var constants = {
 
 
     API_DIR: 'api',
-    DATA_DIR: 'data',
     TREKS_DIR: 'treks',
     TREKS_FILE: 'treks.geojson',
     POI_FILE: 'pois.geojson',
@@ -143,7 +142,7 @@ function providersConfig($sceDelegateProvider) {
     $sceDelegateProvider.resourceUrlWhitelist([
         // Allow same origin resource loads.
         'self',
-        constants.DOMAIN + '/**'
+        constants.API_URL + '/**'
     ]);
 
     // resrources blacklisted for our app

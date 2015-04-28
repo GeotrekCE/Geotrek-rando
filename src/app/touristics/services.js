@@ -10,31 +10,31 @@ function contentsService(globalSettings, settingsFactory, translationService, $r
         _.forEach(contentsData.features, function (content) {
 
             if (content.properties.category.pictogram) {
-                content.properties.category.pictogram = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + content.properties.category.pictogram;
+                content.properties.category.pictogram = globalSettings.API_URL + content.properties.category.pictogram;
             }
             if (content.properties.themes) {
                 _.forEach(content.properties.themes, function (theme) {
                     if (theme.pictogram) {
-                        theme.pictogram = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + theme.pictogram;
+                        theme.pictogram = globalSettings.API_URL + theme.pictogram;
                     }
                 });
             }
             if (content.properties.map_image_url) {
-                content.properties.map_image_url = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + content.properties.map_image_url;
+                content.properties.map_image_url = globalSettings.API_URL + content.properties.map_image_url;
             }
             if (content.properties.filelist_url) {
-                content.properties.filelist_url = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + content.properties.filelist_url;
+                content.properties.filelist_url = globalSettings.API_URL + content.properties.filelist_url;
             }
             if (content.properties.printable) {
-                content.properties.printable = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + content.properties.printable;
+                content.properties.printable = globalSettings.API_URL + content.properties.printable;
             }
             if (content.properties.thumbnail) {
-                content.properties.thumbnail = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + content.properties.thumbnail;
+                content.properties.thumbnail = globalSettings.API_URL + content.properties.thumbnail;
             }
             if (content.properties.pictures) {
                 _.forEach(content.properties.pictures, function (picture) {
                     if (picture.url) {
-                        picture.url = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + picture.url;
+                        picture.url = globalSettings.API_URL + picture.url;
                     }
                 });
             }
@@ -86,31 +86,31 @@ function eventsService(globalSettings, settingsFactory, translationService, $res
         _.forEach(eventsData.features, function (trEvent) {
 
             if (trEvent.properties.category.pictogram) {
-                trEvent.properties.category.pictogram = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + trEvent.properties.category.pictogram;
+                trEvent.properties.category.pictogram = globalSettings.API_URL + trEvent.properties.category.pictogram;
             }
             if (trEvent.properties.themes) {
                 _.forEach(trEvent.properties.themes, function (theme) {
                     if (theme.pictogram) {
-                        theme.pictogram = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + theme.pictogram;
+                        theme.pictogram = globalSettings.API_URL + theme.pictogram;
                     }
                 });
             }
             if (trEvent.properties.map_image_url) {
-                trEvent.properties.map_image_url = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + trEvent.properties.map_image_url;
+                trEvent.properties.map_image_url = globalSettings.API_URL + trEvent.properties.map_image_url;
             }
             if (trEvent.properties.filelist_url) {
-                trEvent.properties.filelist_url = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + trEvent.properties.filelist_url;
+                trEvent.properties.filelist_url = globalSettings.API_URL + trEvent.properties.filelist_url;
             }
             if (trEvent.properties.printable) {
-                trEvent.properties.printable = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + trEvent.properties.printable;
+                trEvent.properties.printable = globalSettings.API_URL + trEvent.properties.printable;
             }
             if (trEvent.properties.thumbnail) {
-                trEvent.properties.thumbnail = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + trEvent.properties.thumbnail;
+                trEvent.properties.thumbnail = globalSettings.API_URL + trEvent.properties.thumbnail;
             }
             if (trEvent.properties.pictures) {
                 _.forEach(trEvent.properties.pictures, function (picture) {
                     if (picture.url) {
-                        picture.url = globalSettings.DOMAIN + '/' + globalSettings.DATA_DIR + picture.url;
+                        picture.url = globalSettings.API_URL + picture.url;
                     }
                 });
             }

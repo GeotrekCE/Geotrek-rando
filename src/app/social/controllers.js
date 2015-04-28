@@ -22,7 +22,7 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
             if (element.properties.pictures[0]) {
                 $scope.fbShareLink += '&picture=' + encodeURIComponent(element.properties.pictures[0].url);
             } else {
-                $scope.fbShareLink += '&picture=' + encodeURIComponent(globalSettings.DOMAIN + "/images/custom/" + globalSettings.DEFAULT_SHARE_IMG);
+                $scope.fbShareLink += '&picture=' + encodeURIComponent(globalSettings.API_URL + "/images/custom/" + globalSettings.DEFAULT_SHARE_IMG);
             }
 
             $scope.twitterShareLink += 'text=' + encodeURIComponent(element.properties.name);
@@ -34,7 +34,7 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
                 '&name=' + encodeURIComponent(translatedContent.BANNER_TEXT) +
                 '&caption=' + encodeURIComponent($location.absUrl()) +
                 '&description=' + encodeURIComponent(translatedContent.SHARING_DEFAULT_TEXT) +
-                '&picture=' + encodeURIComponent(globalSettings.DOMAIN + "/images/custom/" + globalSettings.DEFAULT_SHARE_IMG);
+                '&picture=' + encodeURIComponent(globalSettings.API_URL + "/images/custom/" + globalSettings.DEFAULT_SHARE_IMG);
 
             $scope.twitterShareLink += 'text=' + encodeURIComponent(translatedContent.SHARING_DEFAULT_TEXT);
 
@@ -71,7 +71,7 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
             },
             {
                 name: "twitter:image:src",
-                content: globalSettings.DOMAIN + "/images/custom/" + globalSettings.DEFAULT_SHARE_IMG
+                content: globalSettings.API_URL + "/images/custom/" + globalSettings.DEFAULT_SHARE_IMG
             }
 
         ];
@@ -91,7 +91,7 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
             },
             {
                 property: "og:image",
-                content: globalSettings.DOMAIN + "/images/custom/home/head.jpg"
+                content: globalSettings.API_URL + "/images/custom/home/head.jpg"
             },
             {
                 property: "og:description",
@@ -167,7 +167,7 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
             if (data.properties.pictures[0]) {
                 img = data.properties.pictures[0].url;
             } else {
-                img = globalSettings.DOMAIN + "/images/custom/" + globalSettings.DEFAULT_SHARE_IMG;
+                img = globalSettings.API_URL + "/images/custom/" + globalSettings.DEFAULT_SHARE_IMG;
             }
 
             var cardImg = {

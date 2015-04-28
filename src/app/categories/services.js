@@ -8,7 +8,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
         // Parse trek pictures, and change their URL
         _.forEach(categoriesData, function (category) {
             if (category.pictogram) {
-                category.pictogram = globalSettings.DOMAIN + category.pictogram;
+                category.pictogram = globalSettings.API_URL + category.pictogram;
             }
         });
 
