@@ -776,36 +776,50 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                     self.createLayerFromElement(result, 'geojson', [])
                         .then(
                             function (layer) {
-                                var selector = '#result-category-' + result.properties.category.id.toString() + '-' + result.id.toString();
-
+                                var selector = '#result-category-' + result.properties.category.id + '-' + result.id;
+                                var itself = '.layer-category-' + result.properties.category.id + '-' + result.id;
                                 layer.on({
                                     mouseover: function () {
                                         var listeEquivalent = document.querySelector(selector);
-                                        if (listeEquivalent) {
-                                            if (!listeEquivalent.classList.contains('hovered')) {
-                                                listeEquivalent.classList.add('hovered');
-                                            }
+                                        var markerEquivalent = document.querySelectorAll(itself);
+                                        if (listeEquivalent && !listeEquivalent.classList.contains('hovered')) {
+                                            listeEquivalent.classList.add('hovered');
                                         }
+                                        _.each(markerEquivalent, function (currentMarker) {
+                                            if (currentMarker && !currentMarker.classList.contains('hovered')) {
+                                                currentMarker.classList.add('hovered');
+                                            }
+                                        });
+
                                         self.highlightPath(result);
                                     },
                                     mouseout: function () {
                                         var listeEquivalent = document.querySelector(selector);
-                                        if (listeEquivalent) {
-                                            if (listeEquivalent.classList.contains('hovered')) {
-                                                listeEquivalent.classList.remove('hovered');
-                                            }
+                                        var markerEquivalent = document.querySelectorAll(itself);
+                                        if (listeEquivalent && listeEquivalent.classList.contains('hovered')) {
+                                            listeEquivalent.classList.remove('hovered');
                                         }
+                                        _.each(markerEquivalent, function (currentMarker) {
+                                            if (currentMarker && currentMarker.classList.contains('hovered')) {
+                                                currentMarker.classList.remove('hovered');
+                                            }
+                                        });
                                         if (self.geoHover) {
                                             self._nearMarkersLayer.removeLayer(self.geoHover);
                                         }
                                     },
                                     remove: function () {
                                         var listeEquivalent = document.querySelector(selector);
-                                        if (listeEquivalent) {
-                                            if (listeEquivalent.classList.contains('hovered')) {
-                                                listeEquivalent.classList.remove('hovered');
-                                            }
+                                        var markerEquivalent = document.querySelectorAll(itself);
+                                        if (listeEquivalent && listeEquivalent.classList.contains('hovered')) {
+                                            listeEquivalent.classList.remove('hovered');
                                         }
+                                        _.each(markerEquivalent, function (currentMarker) {
+                                            if (currentMarker && currentMarker.classList.contains('hovered')) {
+                                                currentMarker.classList.remove('hovered');
+                                            }
+                                        });
+
                                     },
                                     click: function () {
                                         $state.go("layout.detail", { slug: result.properties.slug });

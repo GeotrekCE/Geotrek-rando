@@ -27,8 +27,8 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
     };
 
     $scope.hoverLayerElement = function (currentElement, state) {
-        var layerEquivalent = document.querySelector('.layer-category-' + currentElement.properties.category.id + '-' + currentElement.id);
-        if (!layerEquivalent) {
+        var layerEquivalent = document.querySelectorAll('.layer-category-' + currentElement.properties.category.id + '-' + currentElement.id);
+        if (layerEquivalent.length === 0) {
             var mapLayers = [];
             $rootScope.map.eachLayer(function (currentLayer) {
                 if (currentLayer._childCount) {
@@ -40,18 +40,20 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
             if (cluster) {
                 layerEquivalent = cluster.layer._icon;
             }
-        }
-
-        if (layerEquivalent) {
-            if (state === 'enter') {
-                if (!layerEquivalent.classList.contains('hovered')) {
-                    layerEquivalent.classList.add('hovered');
+        } else {
+            _.each(layerEquivalent, function (selectedLayer) {
+                if (selectedLayer) {
+                    if (state === 'enter') {
+                        if (!selectedLayer.classList.contains('hovered')) {
+                            selectedLayer.classList.add('hovered');
+                        }
+                    } else {
+                        if (selectedLayer.classList.contains('hovered')) {
+                            selectedLayer.classList.remove('hovered');
+                        }
+                    }
                 }
-            } else {
-                if (layerEquivalent.classList.contains('hovered')) {
-                    layerEquivalent.classList.remove('hovered');
-                }
-            }
+            });
         }
     };
 
