@@ -1117,14 +1117,19 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
                             var requests = $resource(category.pictogram, {}, {
                                 query: {
                                     method: 'GET',
-                                    cache: true,
-                                    responseType: 'document'
+                                    cache: true
                                 }
                             });
 
                             requests.query().$promise
                                 .then(function (icon) {
-                                    self.categoriesIcons[category.id] = icon.documentElement.outerHTML;
+                                    var finalIcon = '';
+                                    _.each(icon, function(el, index) {
+                                        if (!isNaN(parseInt(index, 10))) {
+                                            finalIcon += el;
+                                        }
+                                    });
+                                    self.categoriesIcons[category.id] = finalIcon;
                                         if (currentCounter === _.size(categories)) {
                                             deferred.resolve(self.categoriesIcons);
                                         }
@@ -1256,15 +1261,20 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
             var requests = $resource(url, {}, {
                 query: {
                     method: 'GET',
-                    cache: true,
-                    responseType: 'document'
+                    cache: true
                 }
             });
 
             requests.query().$promise
                 .then(function (icon) {
-                    self.icons_liste[iconName].markup = icon.documentElement.outerHTML;
-                    deferred.resolve(icon.toString());
+                    var finalIcon = '';
+                    _.each(icon, function(el, index) {
+                        if (!isNaN(parseInt(index, 10))) {
+                            finalIcon += el;
+                        }
+                    });
+                    self.icons_liste[iconName].markup = finalIcon;
+                    deferred.resolve(finalIcon);
                 });
         }
 
