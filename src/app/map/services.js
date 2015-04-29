@@ -970,17 +970,11 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         this._baseLayers = {
             main: L.tileLayer(
                 globalSettings.MAIN_LEAFLET_BACKGROUND.LAYER_URL,
-                {
-                    id: 'main',
-                    attribution: globalSettings.MAIN_LEAFLET_BACKGROUND.ATTRIBUTION
-                }
+                globalSettings.MAIN_LEAFLET_BACKGROUND.OPTIONS
             ),
             satellite: L.tileLayer(
                 globalSettings.SATELLITE_LEAFLET_BACKGROUND.LAYER_URL,
-                {
-                    id: 'satellite',
-                    attribution: globalSettings.SATELLITE_LEAFLET_BACKGROUND.ATTRIBUTION
-                }
+                globalSettings.SATELLITE_LEAFLET_BACKGROUND.OPTIONS
             )
         };
 

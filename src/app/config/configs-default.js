@@ -70,11 +70,17 @@ var constants = {
 
     MAIN_LEAFLET_BACKGROUND: {
         LAYER_URL: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        ATTRIBUTION: '(c) IGN Geoportail'
+        OPTIONS: {
+            id: 'main',
+            attribution: '(c) OpenstreetMap'
+        }
     },
     SATELLITE_LEAFLET_BACKGROUND: {
         LAYER_URL: 'http://{s}.tile.mapbox.com/v3/makina-corpus.i3p1001l/{z}/{x}/{y}.png',
-        ATTRIBUTION: '(c) MapBox Satellite'
+        OPTIONS: {
+            id: 'satellite',
+            attribution: '(c) MapBox Satellite'
+        }
     },
 
     LEAFLET_CONF: {
