@@ -58,6 +58,9 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                     .then(
                         function (elementData) {
                             $scope.nearElements.push(elementData);
+                        },
+                        function (err) {
+                            console.error(err);
                         }
                     )
             );

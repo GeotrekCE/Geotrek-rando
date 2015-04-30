@@ -56,7 +56,8 @@ function contentsService(globalSettings, settingsFactory, translationService, $r
 
             var requests = $resource(url, {}, {
                 query: {
-                    method: 'GET'
+                    method: 'GET',
+                    cache: true
                 }
             }, {stripTrailingSlashes: false});
 
@@ -134,7 +135,8 @@ function eventsService(globalSettings, settingsFactory, translationService, $res
 
             var requests = $resource(url, {}, {
                 query: {
-                    method: 'GET'
+                    method: 'GET',
+                    cache: true
                 }
             }, {stripTrailingSlashes: false});
 

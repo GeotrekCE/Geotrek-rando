@@ -134,50 +134,66 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
 
     this.getAResultByID = function (elementID, categoryID, forceRefresh) {
         var deferred = $q.defer();
+        var promises = [];
+        var result = null;
 
         if (globalSettings.ENABLE_TREKS) {
-            treksService.getTreks(forceRefresh)
-                .then(
-                    function (treks) {
-                        _.forEach(treks.features, function (trek) {
-                            if (trek.id === elementID && trek.properties.published && trek.properties.category.id === categoryID) {
-                                deferred.resolve(trek);
-                            }
-                        });
-                        deferred.reject('No matching element found');
-                    }
-                );
+            promises.push(
+                treksService.getTreks(forceRefresh)
+                    .then(
+                        function (treks) {
+                            _.forEach(treks.features, function (trek) {
+                                if (trek.id === elementID && trek.properties.published && trek.properties.category.id === categoryID) {
+                                    result = trek;
+                                }
+                            });
+                        }
+                    )
+            );
         }
 
         if (globalSettings.ENABLE_TOURISTIC_CONTENT) {
-
-            contentsService.getContents(forceRefresh)
-                .then(
-                    function (contents) {
-                        _.forEach(contents.features, function (content) {
-                            if (content.id === elementID && content.properties.published && content.properties.category.id === categoryID) {
-                                deferred.resolve(content);
-                            }
-                        });
-                        deferred.reject('No matching element found');
-                    }
-                );
+            promises.push(
+                contentsService.getContents(forceRefresh)
+                    .then(
+                        function (contents) {
+                            _.forEach(contents.features, function (content) {
+                                if (content.id === elementID && content.properties.published && content.properties.category.id === categoryID) {
+                                    result = content;
+                                }
+                            });
+                        }
+                    )
+            );
         }
 
         if (globalSettings.ENABLE_TOURISTIC_EVENTS) {
-            eventsService.getEvents(forceRefresh)
-                .then(
-                    function (trEvents) {
-                        _.forEach(trEvents.features, function (trEvent) {
-                            if (trEvent.id === elementID && trEvent.properties.published && trEvent.properties.category.id === categoryID) {
-                                deferred.resolve(trEvent);
-                            }
-                        });
-                        deferred.reject('No matching element found');
-                    }
-                );
+            promises.push(
+                eventsService.getEvents(forceRefresh)
+                    .then(
+                        function (trEvents) {
+                            _.forEach(trEvents.features, function (trEvent) {
+                                if (trEvent.id === elementID && trEvent.properties.published && trEvent.properties.category.id === categoryID) {
+                                    result = trEvent;
+                                }
+                            });
+                            
+                        }
+                    )
+            );
 
         }
+
+        $q.all(promises)
+            .then(
+                function () {
+                    if (result) {
+                        deferred.resolve(result);
+                    } else {
+                        deferred.reject('No matching element found');
+                    }
+                }
+            );
 
         return deferred.promise;
     };

@@ -98,7 +98,8 @@ function treksService(globalSettings, settingsFactory, translationService, $reso
 
             var requests = $resource(url, {}, {
                 query: {
-                    method: 'GET'
+                    method: 'GET',
+                    cache: true
                 }
             }, {stripTrailingSlashes: false});
 
