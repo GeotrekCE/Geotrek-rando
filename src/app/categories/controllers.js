@@ -144,7 +144,13 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
         categoriesService.getCategories(forceRefresh)
             .then(
                 function (data) {
-                    $scope.categories = data;
+                    var activeCategories = [];
+                    _.each(data, function (cat) {
+                        if (globalSettings.LIST_EXCLUDE_CATEGORIES.indexOf(cat.id) === -1) {
+                            activeCategories.push(cat);
+                        }
+                    });
+                    $scope.categories = activeCategories;
                     initRangeFilters();
                     updateCategories();
                     $rootScope.$on('updateFilters', updateCategories);
