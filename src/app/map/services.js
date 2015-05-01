@@ -36,7 +36,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             );
         }
 
-        if (element.geometry.type === 'LineString') {
+        if (element.geometry.type === 'LineString' || element.geometry.type === 'MultiLineString') {
             var endPoint = utilsFactory.getEndPoint(element);
             if (startPoint.lat === endPoint.lat && startPoint.lng === endPoint.lng) {
                 promises.push(

@@ -196,8 +196,17 @@ function utilsFactory($sce) {
     };
 
     var getEndPoint = function (element) {
-        var nbPts = element.geometry.coordinates.length;
-        var lastPointCoordinates = element.geometry.coordinates[nbPts - 1];
+        var lastPointCoordinates = [];
+        if (element.geometry.type === 'Point') {
+            lastPointCoordinates = element.geometry.coordinates;
+        } else if (element.geometry.type === 'LineString') {
+            var nbPts = element.geometry.coordinates.length;
+            lastPointCoordinates = element.geometry.coordinates[nbPts - 1];
+        } else if (element.geometry.type === 'Polygon' || element.geometry.type === 'MultiLineString') {
+            var nbLines = element.geometry.coordinates.length;
+            var nbPts = element.geometry.coordinates[nbLines - 1].length;
+            lastPointCoordinates = element.geometry.coordinates[nbLines - 1][nbPts - 1];
+        }
 
         return {
             'lat': lastPointCoordinates[1],
