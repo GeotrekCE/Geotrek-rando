@@ -357,20 +357,22 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
     };
 
     this.setMinimap = function () {
-        var miniMapLayer = new L.tileLayer(
-                globalSettings.MAIN_LEAFLET_BACKGROUND.LAYER_URL,
-                {
-                    minZoom: 0,
-                    maxZoom: 13,
-                    attribution: globalSettings.MAIN_LEAFLET_BACKGROUND.ATTRIBUTION
-                }
-            ),
-            miniMapOptions = {
-                toggleDisplay: true,
-                zoomLevelOffset: -3
-            };
+        if (globalSettings.ACTIVE_MINIMAP) {
+            var miniMapLayer = new L.tileLayer(
+                    globalSettings.MAIN_LEAFLET_BACKGROUND.LAYER_URL,
+                    {
+                        minZoom: globalSettings.MINIMAP_ZOOM.MINI,
+                        maxZoom: globalSettings.MINIMAP_ZOOM.MAX,
+                        attribution: globalSettings.MAIN_LEAFLET_BACKGROUND.ATTRIBUTION
+                    }
+                ),
+                miniMapOptions = {
+                    toggleDisplay: true,
+                    zoomLevelOffset: globalSettings.MINIMAP_OFFSET
+                };
 
-        this._miniMap = new L.Control.MiniMap(miniMapLayer, miniMapOptions).addTo(this.map);
+            this._miniMap = new L.Control.MiniMap(miniMapLayer, miniMapOptions).addTo(this.map);
+        }
     };
 
     this.setAttribution = function () {

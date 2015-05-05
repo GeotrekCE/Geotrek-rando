@@ -95,6 +95,12 @@ var constants = {
     },
     TREKS_TO_GEOJSON_ZOOM_LEVEL : 14,
     UPDATE_MAP_ON_FILTER: false,
+    ACTIVE_MINIMAP: true,
+    MINIMAP_ZOOM: {
+        MINI: 0,
+        MAX: 12
+    },
+    MINIMAP_OFFSET: -3,
 
     // Put the files in src/images/custom/map
     MARKER_BASE_ICON: '',
