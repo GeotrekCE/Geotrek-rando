@@ -246,14 +246,14 @@
                 </div>
 
                 <div ng-if="pois.length > 0 || result.properties.touristic_contents.length > 0 || result.properties.touristic_events.length > 0 || result.properties.treks.length > 0" class="interests">
-                    <div class="near-elements" ng-if="result.properties.touristic_contents.length > 0 || result.properties.touristic_events.length > 0 || result.properties.treks.length > 0" ng-class="{collapsed: poisAreShown}">
-                        <h3 ng-click="togglePois()">{{'NEAR' | translate}} <i class="fa fa-angle-down"></i></h3>
+                    <div class="near-elements" ng-if="result.properties.touristic_contents.length > 0 || result.properties.touristic_events.length > 0 || result.properties.treks.length > 0" ng-class="{collapsed: interestShown !== 'near'}">
+                        <h3 ng-click="toggleInterest('near')">{{'NEAR' | translate}} <i class="fa fa-angle-down"></i></h3>
                         <div class="collapsor">
                             <near-liste></near-liste>
                         </div>
                     </div>
-                    <div class="pois" ng-if="pois.length > 0 && result.properties.contentType === 'trek'" ng-class="{collapsed: !poisAreShown}">
-                        <h3 ng-click="togglePois()">{{'POI' | translate}} <i class="fa fa-angle-down"></i></h3>
+                    <div class="pois" ng-if="pois.length > 0 && result.properties.contentType === 'trek'" ng-class="{collapsed: interestShown !== 'pois'}">
+                        <h3 ng-click="toggleInterest('pois')">{{'POI' | translate}} <i class="fa fa-angle-down"></i></h3>
                         <div class="collapsor">
                             <pois-liste></pois-liste>
                         </div>
@@ -278,7 +278,7 @@
 
     </div>
 
-    <div class="detail-map" ng-class="{'no-interests': pois.length <= 0 && result.properties.touristic_contents.length >= 0 && result.properties.touristic_events.length >= 0 && result.properties.treks.length <= 0}">
+    <div class="detail-map" ng-class="{'no-interests': interestShown === null}">
         <geotrek-map></geotrek-map>
     </div>
 </section>

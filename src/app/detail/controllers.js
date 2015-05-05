@@ -12,8 +12,12 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         $scope.rulesId = null;
     }
 
-    $scope.togglePois = function () {
-        $scope.poisAreShown = !$scope.poisAreShown;
+    $scope.toggleInterest = function (currentInterest) {
+        if ($scope.interestShown === currentInterest) {
+            $scope.interestShown = '';
+        } else {
+            $scope.interestShown = currentInterest;
+        }
     };
 
     $scope.showLightbox = function (images, slideIndex) {
@@ -34,10 +38,6 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
 
     $scope.isSVG = utilsFactory.isSVG;
 
-    function initCollapse(selector) {
-        $scope.poisAreShown = true;
-    }
-
     function switchInterestsNodes() {
         if (document.querySelector('.main-infos .interests') && window.matchMedia("(min-width: 769px)").matches) {
             document.querySelector('.detail-map').appendChild(document.querySelector('.main-infos .interests'));
@@ -48,7 +48,8 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
     }
 
     function getNearElements(result) {
-        var promises = [],
+        var deferred = $q.defer(),
+            promises = [],
             nearElements = result.properties.treks.concat(result.properties.touristic_contents, result.properties.touristic_events);
 
         $scope.nearElements = [];
@@ -70,25 +71,73 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
             .then(
                 function () {
                     mapService.createNearElementsMarkers($scope.nearElements);
+                    deferred.resolve($scope.nearElements);
                 }
             );
+
+        return deferred.promise;
     }
 
     function getPoisOfResult(result, forceRefresh) {
+        var deferred = $q.defer();
+
         poisService.getPoisFromElement(result.id, forceRefresh)
             .then(
                 function (elementPois) {
                     $scope.pois = elementPois.features;
-                    if ($scope.pois && $scope.pois.length === 0) {
-                        $scope.poisAreShown = false;
-                        // Wait till css animation is over
+                    $rootScope.$emit('resetPOIGallery');
+                    deferred.resolve($scope.pois);
+                }
+            );
+
+        return deferred.promise;
+    }
+
+    function getInterests(result, forceRefresh) {
+        var promises = [],
+            activeDefaultType = null;
+
+        if (result.properties.contentType === 'trek') {
+            promises.push(
+                getPoisOfResult(result, forceRefresh)
+                    .then(
+                        function (pois) {
+                            if (pois.length > 0) {
+                                if (globalSettings.DEFAULT_INTEREST === 'pois' || !activeDefaultType) {
+                                    activeDefaultType = 'pois';
+                                }
+                            }
+                        }
+                    )
+            );
+        }
+
+        promises.push(
+            getNearElements(result)
+                .then(
+                    function (nearElements) {
+                        if (nearElements.length > 0) {
+                            if (globalSettings.DEFAULT_INTEREST === 'near' || !activeDefaultType) {
+                                activeDefaultType = 'near';
+                            }
+                        }
+                    }
+                )
+        );
+
+        $q.all(promises)
+            .then(
+                function () {
+                    if (!activeDefaultType) {
                         $timeout(function () {
                             $rootScope.$emit('refreshMapSize');
                         }, 500);
                     }
-                    $rootScope.$emit('resetPOIGallery');
+                    $scope.toggleInterest(activeDefaultType);
                 }
             );
+
+        
     }
 
     function getResultDetails(forceRefresh) {
@@ -105,9 +154,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                 function (result) {
                     $scope.result = result;
                     $rootScope.elementsLoading --;
-                    getPoisOfResult(result, forceRefresh);
-                    getNearElements(result);
-                    initCollapse();
+                    getInterests(result, forceRefresh);
                     $rootScope.$emit('initGallery', result.properties.pictures);
                 },
                 function (error) {
