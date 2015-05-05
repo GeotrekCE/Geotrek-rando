@@ -278,7 +278,7 @@
 
     </div>
 
-    <div class="detail-map" ng-class="{'no-interests': interestShown === null}">
+    <div class="detail-map" ng-class="{'no-interests': interestShown === null, 'hide-near-elements': interestShown !== 'near', 'hide-pois': interestShown !== 'pois'}">
         <geotrek-map></geotrek-map>
     </div>
 </section>

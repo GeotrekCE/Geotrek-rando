@@ -240,6 +240,16 @@
     }
 }
 
-.detail-map.hide-near-elements .near-marker {
-    display: none;
+@for $i from 1 through 100 {
+    .detail-map .near-marker:nth-child(#{$i}),
+    .detail-map .poi-cluster:nth-child(#{$i}),
+    .detail-map .double-marker.poi:nth-child(#{$i}) { 
+        transition: top (#{0.2s + ($i* 0.05)}) cubic-bezier(0.58,-0.3, 0.53, 1.17);
+    }
+}
+
+.detail-map.hide-near-elements .near-marker,
+.detail-map.hide-pois .poi-cluster,
+.detail-map.hide-pois .double-marker.poi {
+    top: -100vh;
 }
