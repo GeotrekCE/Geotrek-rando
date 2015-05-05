@@ -256,15 +256,18 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             promise(param)
                 .then(
                     function (currentIcon) {
-
-                        var marker = L.marker(
-                            [elementLocation.lat, elementLocation.lng],
-                            {
-                                icon: currentIcon
-                            }
-                        );
-                        marker.options.result = element;
-                        deferred.resolve(marker);
+                        if (elementLocation) {
+                            var marker = L.marker(
+                                [elementLocation.lat, elementLocation.lng],
+                                {
+                                    icon: currentIcon
+                                }
+                            );
+                            marker.options.result = element;
+                            deferred.resolve(marker);
+                        } else {
+                            deferred.reject('no position provided');
+                        }
                     }
                 );
         }
