@@ -50,8 +50,24 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
     function getNearElements(result) {
         var deferred = $q.defer(),
             promises = [],
-            nearElements = result.properties.treks.concat(result.properties.touristic_contents, result.properties.touristic_events);
+            elementChildren = [],
+            tempNear = [];
 
+        _.each(result.properties.children, function(child) {
+            elementChildren.push({
+                category_id: result.properties.category.id,
+                id: child
+            });
+        });
+
+        var nearElements = _.union(result.properties.treks, result.properties.touristic_contents, result.properties.touristic_events);
+
+        _.each(nearElements, function (element) {
+            if (!utilsFactory.elementIsInArray(elementChildren, element)) {
+                tempNear.push(element);
+            }
+        });
+        nearElements = tempNear;
         $scope.nearElements = [];
         _.forEach(nearElements, function (element) {
             promises.push(
@@ -70,8 +86,70 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         $q.all(promises)
             .then(
                 function () {
-                    mapService.createNearElementsMarkers($scope.nearElements);
+                    mapService.createElementsMarkers($scope.nearElements, 'near');
                     deferred.resolve($scope.nearElements);
+                }
+            );
+
+        return deferred.promise;
+    }
+
+    function getChildren(result) {
+        var deferred = $q.defer(),
+            promises = [],
+            elementChildren = [];
+
+        _.each(result.properties.children, function(child) {
+            elementChildren.push({
+                category_id: result.properties.category.id,
+                id: child
+            });
+        });
+
+        $scope.elementChildren = [];
+
+        _.forEach(elementChildren, function (element) {
+            promises.push(
+                resultsService.getAResultByID(element.id, element.category_id)
+                    .then(
+                        function (elementData) {
+                            $scope.elementChildren.push(elementData);
+                        },
+                        function (err) {
+                            console.error(err);
+                        }
+                    )
+            );
+        });
+
+        $q.all(promises)
+            .then(
+                function () {
+                    mapService.createElementsMarkers($scope.elementChildren, 'children');
+                    deferred.resolve($scope.elementChildren);
+                }
+            );
+
+        return deferred.promise;
+    }
+
+    function getParent(result) {
+        var deferred = $q.defer();
+
+        var parentElement = {
+            category_id: result.properties.category.id,
+            id: result.properties.parent
+        };
+
+        resultsService.getAResultByID(parentElement.id, parentElement.category_id)
+            .then(
+                function (elementData) {
+                    $scope.parentElement = elementData;
+                    //mapService.createElementsMarkers($scope.elementChildren, 'parent');
+                    deferred.resolve($scope.parentElement);
+                },
+                function (err) {
+                    console.error(err);
                 }
             );
 
@@ -125,6 +203,36 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                 )
         );
 
+        if (result.properties.children.length > 0) {
+            promises.push(
+                getChildren(result)
+                    .then(
+                        function (children) {
+                            if (children.length > 0) {
+                                if (globalSettings.DEFAULT_INTEREST === 'children' || !activeDefaultType) {
+                                    activeDefaultType = 'children';
+                                }
+                            }
+                        }
+                    )
+            );
+        }
+
+        if (result.properties.parent) {
+            promises.push(
+                getParent(result)
+                    .then(
+                        function (parent) {
+                            if (parent) {
+                                if (globalSettings.DEFAULT_INTEREST === 'parent' || !activeDefaultType) {
+                                    activeDefaultType = 'parent';
+                                }
+                            }
+                        }
+                    )
+            );
+        }
+
         $q.all(promises)
             .then(
                 function () {
@@ -158,8 +266,8 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                     $rootScope.$emit('initGallery', result.properties.pictures);
                 },
                 function (error) {
-                    $state.go("layout.root");
                     $rootScope.elementsLoading --;
+                    $state.go("layout.root");
                 }
             );
     }

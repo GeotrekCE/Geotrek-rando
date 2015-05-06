@@ -8,6 +8,7 @@ var dependencies = [
     'rando.treks',
     'rando.pois',
     'rando.near',
+    'rando.filiation',
     'rando.layout',
     'rando.footer',
     'rando.map',
@@ -69,6 +70,7 @@ require('./layout');
 require('./treks');
 require('./pois');
 require('./near-elements');
+require('./filiation');
 require('./touristics');
 require('./results');
 require('./categories');

@@ -245,8 +245,8 @@
                     </ul>
                 </div>
 
-                <div ng-if="pois.length > 0 || result.properties.touristic_contents.length > 0 || result.properties.touristic_events.length > 0 || result.properties.treks.length > 0" class="interests">
-                    <div class="near-elements" ng-if="result.properties.touristic_contents.length > 0 || result.properties.touristic_events.length > 0 || result.properties.treks.length > 0" ng-class="{collapsed: interestShown !== 'near'}">
+                <div ng-if="pois.length > 0 || nearElements.length > 0 || elementChildren.length > 0 || parentElement" class="interests">
+                    <div class="near-elements" ng-if="nearElements.length > 0 " ng-class="{collapsed: interestShown !== 'near'}">
                         <h3 ng-click="toggleInterest('near')">{{'NEAR' | translate}} <i class="fa fa-angle-down"></i></h3>
                         <div class="collapsor">
                             <near-liste></near-liste>
@@ -256,6 +256,18 @@
                         <h3 ng-click="toggleInterest('pois')">{{'POI' | translate}} <i class="fa fa-angle-down"></i></h3>
                         <div class="collapsor">
                             <pois-liste></pois-liste>
+                        </div>
+                    </div>
+                    <div class="children" ng-if="elementChildren.length > 0" ng-class="{collapsed: interestShown !== 'children'}">
+                        <h3 ng-click="toggleInterest('children')">{{'CHILDREN' | translate}} <i class="fa fa-angle-down"></i></h3>
+                        <div class="collapsor">
+                            <children-liste></children-liste>
+                        </div>
+                    </div>
+                    <div class="parent" ng-if="parentElement" ng-class="{collapsed: interestShown !== 'parent'}">
+                        <h3 ng-click="toggleInterest('parent')">{{'PARENT' | translate}} <i class="fa fa-angle-down"></i></h3>
+                        <div class="collapsor">
+                            <parent-liste></parent-liste>
                         </div>
                     </div>
                 </div>
@@ -278,7 +290,7 @@
 
     </div>
 
-    <div class="detail-map" ng-class="{'no-interests': interestShown === null, 'hide-near-elements': interestShown !== 'near', 'hide-pois': interestShown !== 'pois'}">
+    <div class="detail-map" ng-class="{'no-interests': interestShown === null, 'hide-near-elements': interestShown !== 'near', 'hide-pois': interestShown !== 'pois', 'hide-children': interestShown !== 'children'}">
         <geotrek-map></geotrek-map>
     </div>
 </section>

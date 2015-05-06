@@ -167,15 +167,15 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         return deferred.promise;
     };
 
-    this.createNearElementsMarkers = function (nearElements) {
+    this.createElementsMarkers = function (elements, type) {
         var startPoint = [];
-        _.forEach(nearElements, function (nearElement) {
-            startPoint = utilsFactory.getStartPoint(nearElement);
-            self.createLayerFromElement(nearElement, 'category', startPoint)
+        _.forEach(elements, function (element) {
+            startPoint = utilsFactory.getStartPoint(element);
+            self.createLayerFromElement(element, 'category', startPoint)
                 .then(
                     function (marker) {
-                        marker.options.icon.options.className += ' near-marker';
-                        var selector = '#near-category-' + nearElement.properties.category.id + '-' + nearElement.id;
+                        marker.options.icon.options.className += ' ' + type + '-marker';
+                        var selector = '#' + type + '-category-' + element.properties.category.id + '-' + element.id;
                         marker.on({
                             mouseover: function () {
                                 var listeEquivalent = document.querySelector(selector);
@@ -202,7 +202,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                 }
                             },
                             click: function () {
-                                $state.go("layout.detail", { slug: nearElement.properties.slug });
+                                $state.go("layout.detail", { slug: element.properties.slug });
                             }
                         });
                         self._nearMarkersLayer.addLayer(marker);

@@ -97,6 +97,12 @@ msgstr "Patrimoine"
 msgid "NEAR"
 msgstr "A proximité"
 
+msgid "CHILDREN"
+msgstr "Etapes"
+
+msgid "PARENT"
+msgstr "Randonnée parente"
+
 msgid "PROFILE_ALTI"
 msgstr "Profil altimétrique"
 

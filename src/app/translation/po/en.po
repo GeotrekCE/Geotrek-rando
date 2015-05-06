@@ -99,6 +99,12 @@ msgstr "POIS"
 msgid "NEAR"
 msgstr "Nearby"
 
+msgid "CHILDREN"
+msgstr "Sub-treks"
+
+msgid "PARENT"
+msgstr "Parent trek"
+
 msgid "PROFILE_ALTI"
 msgstr "Elevation chart"
 

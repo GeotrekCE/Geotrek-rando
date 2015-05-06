@@ -155,7 +155,7 @@ function utilsFactory($sce) {
         var isInArray = false;
 
         if (element === null) {
-            return true;
+            return isInArray;
         }
 
         _.forEach(anArray, function (arrayElement) {
@@ -177,6 +177,38 @@ function utilsFactory($sce) {
                 return i;
             }
         }
+    };
+
+    var isSameElement = function (elementA, elementB) {
+        // We compare cat Id and then plain id of an element
+        if (elementA.properties && elementB.properties) {
+            if (elementA.properties.category.id === elementB.properties.category.id && elementA.id === elementB.id) {
+                return true;
+            }
+        }
+
+        if (elementA.category_id && elementB.category_id) {
+            if (elementA.category_id === elementB.category_id && elementA.id === elementB.id) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    var elementIsInArray = function (anArray, element) {
+        var isInArray = false;
+
+        if (element === null) {
+            return isInArray;
+        }
+
+        _.forEach(anArray, function (arrayElement) {
+            if (isSameElement(arrayElement, element)) {
+                isInArray = true;
+            }
+        });
+
+        return isInArray;
     };
 
     var getStartPoint = function (element) {
@@ -243,6 +275,8 @@ function utilsFactory($sce) {
         parseLength: parseLength,
         idIsInArray: idIsInArray,
         findIndexOfId: findIndexOfId,
+        isSameElement: isSameElement,
+        elementIsInArray: elementIsInArray,
         getStartPoint: getStartPoint,
         getEndPoint: getEndPoint,
         getParkingPoint: getParkingPoint,
