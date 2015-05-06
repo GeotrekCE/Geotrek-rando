@@ -57,7 +57,7 @@ function treksService(globalSettings, settingsFactory, translationService, $reso
             }
             if (trek.properties.web_links) {
                 _.forEach(trek.properties.web_links, function (link) {
-                    if (link.category.pictogram) {
+                    if (link.category && link.category.pictogram) {
                         link.category.pictogram = globalSettings.API_URL + link.category.pictogram;
                     }
                 });
