@@ -153,10 +153,10 @@ var constants = {
         ],
         LENGTH :  [
             { id: 0, label: '<10km'},
-            { id: 1000, label: '10km'},
-            { id: 2000, label: '20km'},
-            { id: 3000, label: '30km'},
-            { id: 9999, label: '>30km'}
+            { id: 10000, label: '10km'},
+            { id: 20000, label: '20km'},
+            { id: 30000, label: '30km'},
+            { id: 99999, label: '>30km'}
         ]
     }
 
