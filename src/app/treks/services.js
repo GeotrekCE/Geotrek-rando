@@ -77,6 +77,9 @@ function treksService(globalSettings, settingsFactory, translationService, $reso
             if (trek.properties.printable) {
                 trek.properties.printable = globalSettings.API_URL + trek.properties.printable;
             }
+            if (trek.properties['length']) {
+                trek.properties.eLength = trek.properties['length'];
+            }
             if (trek.properties.altimetric_profile) {
                 trek.properties.altimetric_profile = globalSettings.API_URL + trek.properties.altimetric_profile;
             }

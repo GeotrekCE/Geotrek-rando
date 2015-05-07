@@ -32,6 +32,9 @@ msgstr "Durée :"
 msgid "ASCENT"
 msgstr "Dénivelé :"
 
+msgid "LENGTH"
+msgstr "Distance :"
+
 msgid "ALL"
 msgstr "Toutes"
 

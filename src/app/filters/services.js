@@ -37,6 +37,7 @@ function filtersService(globalSettings, utilsFactory) {
                 }
                 newCategory.duration = category.duration;
                 newCategory.ascent = category.ascent;
+                newCategory.eLength = category.eLength;
             }
 
             self.filters.categories.push(newCategory);
@@ -327,7 +328,7 @@ function filtersService(globalSettings, utilsFactory) {
             structureFilter = false;
 
         // Define all type of filters that needs an interval check instead of an id one
-        var filtersByInterval = ['difficulty', 'duration', 'ascent'];
+        var filtersByInterval = ['difficulty', 'duration', 'ascent', 'eLength'];
 
 
         // Update service activeFilters

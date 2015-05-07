@@ -39,12 +39,14 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                         difficulty: {type: 'range', values: [aTrek.properties.difficulty] || []},
                         duration: {type: 'range', values: globalSettings.FILTERS.DURATION || []},
                         ascent: {type: 'range', values: globalSettings.FILTERS.ASCENT || []},
+                        eLength: {type: 'range', values: globalSettings.FILTERS.LENGTH || []},
                         themes: {type: 'checkbox', values: aTrek.properties.themes || []},
                         cat_class: 'category-' + aTrek.properties.category.id.toString()
                     };
 
                     currentCategory.duration.values = _.map(_.sortBy(currentCategory.duration.values, 'id'));
                     currentCategory.ascent.values = _.map(_.sortBy(currentCategory.ascent.values, 'id'));
+                    currentCategory.eLength.values = _.map(_.sortBy(currentCategory.eLength.values, 'id'));
 
                     treksCategories.push(currentCategory);
 

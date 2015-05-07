@@ -102,6 +102,24 @@
                         <label class="max-label">{{category.ascent.values[category.ascent.values.length - 1].label}}</label>
                     </div>
                 </div>
+
+                <div ng-if="category.eLength && category.eLength.values.length > 1" class="slider eLength">
+                    <span>{{'LENGTH' | translate}}</span>
+                    <span ng-if="category.eLength.min === 0 && category.eLength.max === category.eLength.values.length - 1">
+                        {{'ALL' | translate}}
+                    </span>
+                    <span ng-if="(category.eLength.min !== 0 || category.eLength.max !== category.eLength.values.length - 1) && category.eLength.min !== category.eLength.max">
+                        {{category.eLength.values[category.eLength.min].label}} -> {{category.eLength.values[category.eLength.max].label}}
+                    </span>
+                    <span ng-if="category.eLength.min === category.eLength.max">
+                        {{category.eLength.values[category.eLength.min].label}}
+                    </span>
+                    <div class="slider-container">
+                        <slider ng-model-low="category.eLength.min" ng-model-high="category.eLength.max" floor="0" ceiling="{{category.eLength.values.length - 1}}" step="1"></slider>
+                        <label class="min-label">{{category.eLength.values[0].label}}</label>
+                        <label class="max-label">{{category.eLength.values[category.eLength.values.length - 1].label}}</label>
+                    </div>
+                </div>
             </form>
         </div>
     </li>
