@@ -246,18 +246,6 @@
                 </div>
 
                 <div ng-if="pois.length > 0 || nearElements.length > 0 || elementChildren.length > 0 || parentElement" class="interests">
-                    <div class="near-elements" ng-if="nearElements.length > 0 " ng-class="{collapsed: interestShown !== 'near'}">
-                        <h3 ng-click="toggleInterest('near')">{{'NEAR' | translate}} <i class="fa fa-angle-down"></i></h3>
-                        <div class="collapsor">
-                            <near-liste></near-liste>
-                        </div>
-                    </div>
-                    <div class="pois" ng-if="pois.length > 0 && result.properties.contentType === 'trek'" ng-class="{collapsed: interestShown !== 'pois'}">
-                        <h3 ng-click="toggleInterest('pois')">{{'POI' | translate}} <i class="fa fa-angle-down"></i></h3>
-                        <div class="collapsor">
-                            <pois-liste></pois-liste>
-                        </div>
-                    </div>
                     <div class="children" ng-if="elementChildren.length > 0" ng-class="{collapsed: interestShown !== 'children'}">
                         <h3 ng-click="toggleInterest('children')">{{'CHILDREN' | translate}} <i class="fa fa-angle-down"></i></h3>
                         <div class="collapsor">
@@ -268,6 +256,18 @@
                         <h3 ng-click="toggleInterest('parent')">{{'PARENT' | translate}} <i class="fa fa-angle-down"></i></h3>
                         <div class="collapsor">
                             <parent-liste></parent-liste>
+                        </div>
+                    </div>
+                    <div class="near-elements" ng-if="nearElements.length > 0 " ng-class="{collapsed: interestShown !== 'near'}">
+                        <h3 ng-click="toggleInterest('near')">{{'NEAR' | translate}} <i class="fa fa-angle-down"></i></h3>
+                        <div class="collapsor">
+                            <near-liste></near-liste>
+                        </div>
+                    </div>
+                    <div class="pois" ng-if="pois.length > 0 && result.properties.contentType === 'trek'" ng-class="{collapsed: interestShown !== 'pois'}">
+                        <h3 ng-click="toggleInterest('pois')">{{'POI' | translate}} <i class="fa fa-angle-down"></i></h3>
+                        <div class="collapsor">
+                            <pois-liste></pois-liste>
                         </div>
                     </div>
                 </div>
