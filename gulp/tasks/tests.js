@@ -41,6 +41,23 @@ gulp.task('tests:e2e', ['webdriver_update'], function(cb) {
     });
 });
 
+
+var karma = require('gulp-karma');
+
+gulp.task('tests:unit', function() {
+    return gulp.src('src/tests/unit/**/*.specs.js')
+        .pipe(karma({
+            configFile: 'karma.conf.js',
+            action: 'run'
+        }))
+        .on('error', function(err) {
+            // Make sure failed tests cause gulp to exit non-zero
+            throw err;
+        });
+});
+
+
 gulp.task('tests', [
+    'tests:unit',
     'tests:e2e',
 ]);
