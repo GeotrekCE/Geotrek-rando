@@ -1,6 +1,6 @@
 'use strict';
 
-function CategoriesListeController($scope, $rootScope, $location, globalSettings, categoriesService) {
+function CategoriesListeController($scope, $rootScope, $location, utilsFactory, globalSettings, categoriesService) {
 
     function updateCategories() {
         var currentQuery = $location.search();
@@ -198,6 +198,8 @@ function CategoriesListeController($scope, $rootScope, $location, globalSettings
         $location.search(currentQuery);
         $rootScope.$broadcast('updateFilters');
     };
+
+    $scope.isSVG = utilsFactory.isSVG;
 
     loadCategories();
     $rootScope.$on('switchGlobalLang', function () {

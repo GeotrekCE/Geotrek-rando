@@ -1,7 +1,8 @@
 <ul class="categories">
     <li ng-repeat="category in categories | orderBy: 'order'" class="category {{category.cat_class}}" ng-class="{active : category.active}" ng-id="cat-{{category.id}}">
         <a href ng-click="toggleCategory(category)">
-            <ng-include src="category.pictogram"></ng-include>
+            <ng-include ng-if="isSVG(category.pictogram)" src="category.pictogram"></ng-include>
+            <img ng-if="!isSVG(category.pictogram)" src="{{category.pictogram}}">
         </a>
         <div class="filters">
             <form>

@@ -53,6 +53,10 @@
                 max-width: 5em;
                 padding: 0.6em 1.5em;
                 text-align: center;
+                img {
+                    max-height: 2rem;
+                    max-width: 2rem;
+                }
                 svg {
                     fill: white;
                     vertical-align: middle;

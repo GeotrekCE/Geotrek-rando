@@ -1113,26 +1113,34 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
                             counter++;
                             var currentCounter = counter;
 
-                            var requests = $resource(category.pictogram, {}, {
-                                query: {
-                                    method: 'GET',
-                                    cache: true
-                                }
-                            });
-
-                            requests.query().$promise
-                                .then(function (icon) {
-                                    var finalIcon = '';
-                                    _.each(icon, function(el, index) {
-                                        if (!isNaN(parseInt(index, 10))) {
-                                            finalIcon += el;
-                                        }
-                                    });
-                                    self.categoriesIcons[category.id] = finalIcon;
-                                        if (currentCounter === _.size(categories)) {
-                                            deferred.resolve(self.categoriesIcons);
-                                        }
+                            if (utilsFactory.isSVG(category.pictogram)) {
+                                var requests = $resource(category.pictogram, {}, {
+                                    query: {
+                                        method: 'GET',
+                                        cache: true
+                                    }
                                 });
+
+                                requests.query().$promise
+                                    .then(function (icon) {
+                                        var finalIcon = '';
+                                        _.each(icon, function(el, index) {
+                                            if (!isNaN(parseInt(index, 10))) {
+                                                finalIcon += el;
+                                            }
+                                        });
+                                        self.categoriesIcons[category.id] = finalIcon;
+                                            if (currentCounter === _.size(categories)) {
+                                                deferred.resolve(self.categoriesIcons);
+                                            }
+                                    });
+                            } else {
+                                self.categoriesIcons[category.id] = '<img src="' + category.pictogram + '" />';
+                                if (currentCounter === _.size(categories)) {
+                                    deferred.resolve(self.categoriesIcons);
+                                }
+                            }
+                            
 
                         });
                     }
@@ -1419,22 +1427,32 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
 
         var deferred = $q.defer(),
             markerIcon,
-            categoryIcon;
+            categoryIcon,
+            promises = [];
 
-        $q.all([
-            self.getSVGIcon(self.icons_liste.category_base.iconUrl, 'category_base')
-                .then(
-                    function (icon) {
-                        markerIcon = icon;
-                    }
-                ),
+        if (utilsFactory.isSVG(self.icons_liste.category_base.iconUrl)) {
+            promises.push(
+                self.getSVGIcon(self.icons_liste.category_base.iconUrl, 'category_base')
+                    .then(
+                        function (icon) {
+                            markerIcon = icon;
+                        }
+                    )
+            );
+        } else {
+            markerIcon = '<img src="' + self.icons_liste.category_base.iconUrl + '"/>';
+        }
+
+        promises.push(
             self.getCategoryIcon(element.properties.category.id)
                 .then(
                     function (icon) {
                         categoryIcon = icon;
                     }
                 )
-        ]).then(
+        );
+
+        $q.all(promises).then(
             function () {
                 var markup = '' +
                     '<div class="marker" data-popup="' + element.properties.name + '">' +
