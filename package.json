@@ -64,6 +64,7 @@
     "gulp-mocha": "^2.0.0",
     "gulp-notify": "^1.4.2",
     "gulp-po2json": "^0.2.0",
+    "gulp-protractor": "^1.0.0",
     "gulp-sass": "^1.1.0",
     "gulp-sourcemaps": "^1.2.8",
     "gulp-streamify": "0.0.5",

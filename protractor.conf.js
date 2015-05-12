@@ -21,12 +21,10 @@ var browserConfs = {
 
 
 exports.config = {
-    seleniumAddress: 'http://localhost:4444/wd/hub',
-    specs: ['src/tests/e2e/**/*.specs.js'],
     multiCapabilities: [
-        browserConfs.chrome,
-        browserConfs.firefox,
-        // browserConfs.phantom,
+        // browserConfs.chrome,
+        // browserConfs.firefox,
+        browserConfs.phantom,
     ],
     baseUrl: 'http://geotrek.local'
 };
