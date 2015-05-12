@@ -81,7 +81,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                 .then(
                     function (treks) {
                         _.forEach(treks.features, function (trek) {
-                            if (trek.properties.slug === elementSlug && trek.properties.published) {
+                            if (trek.properties.slug === elementSlug) {
                                 deferred.resolve(trek);
                             }
                         });
@@ -99,7 +99,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                 .then(
                     function (contents) {
                         _.forEach(contents.features, function (content) {
-                            if (content.properties.slug === elementSlug && content.properties.published) {
+                            if (content.properties.slug === elementSlug) {
                                 deferred.resolve(content);
                             }
                         });
@@ -116,7 +116,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                 .then(
                     function (trEvents) {
                         _.forEach(trEvents.features, function (trEvent) {
-                            if (trEvent.properties.slug === elementSlug && trEvent.properties.published) {
+                            if (trEvent.properties.slug === elementSlug) {
                                 deferred.resolve(trEvent);
                             }
                         });
@@ -143,7 +143,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                     .then(
                         function (treks) {
                             _.forEach(treks.features, function (trek) {
-                                if (trek.id === elementID && trek.properties.published && trek.properties.category.id === categoryID) {
+                                if (trek.id === elementID && trek.properties.category.id === categoryID) {
                                     result = trek;
                                 }
                             });
@@ -158,7 +158,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                     .then(
                         function (contents) {
                             _.forEach(contents.features, function (content) {
-                                if (content.id === elementID && content.properties.published && content.properties.category.id === categoryID) {
+                                if (content.id === elementID && content.properties.category.id === categoryID) {
                                     result = content;
                                 }
                             });
@@ -173,7 +173,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                     .then(
                         function (trEvents) {
                             _.forEach(trEvents.features, function (trEvent) {
-                                if (trEvent.id === elementID && trEvent.properties.published && trEvent.properties.category.id === categoryID) {
+                                if (trEvent.id === elementID && trEvent.properties.category.id === categoryID) {
                                     result = trEvent;
                                 }
                             });
