@@ -960,6 +960,9 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                         currentLayer.addLayer(layer);
                         self._clustersLayer.addLayer(currentLayer);
                         if (result.geometry.type !== "Point") {
+                            if (globalSettings.ALWAYS_HIGHLIGHT_TREKS) {
+                                self.highlightPath(result, true);
+                            }
                             self.updateBounds(updateBounds, [currentLayer]);
                         } else {
                             self.updateBounds(updateBounds, [self._clustersLayer]);
