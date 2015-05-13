@@ -5,7 +5,7 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
     $rootScope.showFooterOnApp = globalSettings.SHOW_FOOTER;
     $rootScope.elementsLoading = 0;
     if ($state.current.name === 'layout.root') {
-        if (globalSettings.SHOW_HOME) {
+        if (globalSettings.SHOW_HOME && angular.equals({}, $location.search())) {
             $rootScope.showHome = !homeService.getChoice();
         }
     } else {
