@@ -104,6 +104,7 @@ var constants = {
         MAX: 12
     },
     MINIMAP_OFFSET: -3,
+    ALWAYS_HIGHLIGHT_TREKS: false,
 
     // Put the files in src/images/custom/map
     MARKER_BASE_ICON: '',

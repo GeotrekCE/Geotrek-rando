@@ -221,7 +221,7 @@
 
 .layer-highlight {
     stroke-width: 10;
-    stroke: yellow;
+    stroke: $linear-highlight-color;
 }
 
 .detail-map .leaflet-overlay-pane svg path {

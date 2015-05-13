@@ -594,22 +594,27 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     };
 
-    this.highlightPath = function (element) {
+    this.highlightPath = function (element, permanent) {
+        var hoverStyle = {
+            className:  'layer-highlight'
+        },
+        geoElement;
 
         if (!self.treksIconified) {
-            if (self.geoHover) {
-                self._nearMarkersLayer.removeLayer(self.geoHover);
-            }
-
-            var hoverStyle = {
-                className:  'layer-highlight'
-            };
-
-            self.geoHover = L.geoJson(element, {
+            geoElement = L.geoJson(element, {
                 style: hoverStyle
             });
-            self.geoHover.addTo(self._nearMarkersLayer);
-            self.geoHover.bringToBack();
+            if (!permanent) {
+                if (self.geoHover) {
+                    self._nearMarkersLayer.removeLayer(self.geoHover);
+                }
+
+                self.geoHover = geoElement;
+            }
+            
+             
+            geoElement.addTo(self._nearMarkersLayer);
+            geoElement.bringToBack();
         }
         
     };
@@ -783,6 +788,11 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                             function (layer) {
                                 var selector = '#result-category-' + result.properties.category.id + '-' + result.id;
                                 var itself = '.layer-category-' + result.properties.category.id + '-' + result.id;
+
+                                if (globalSettings.ALWAYS_HIGHLIGHT_TREKS) {
+                                    self.highlightPath(result, true);
+                                }
+
                                 layer.on({
                                     mouseover: function () {
                                         var listeEquivalent = document.querySelector(selector);
