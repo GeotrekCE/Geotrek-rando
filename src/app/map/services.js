@@ -145,7 +145,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                                     }
                                                 },
                                                 click: function () {
-                                                    //$state.go("layout.detail", { slug: result.properties.slug });
+                                                    //$state.go("layout.detail", { catSlug: result.properties.category.slug, slug: result.properties.slug });
                                                 }
                                             });
                                             self._poisMarkersLayer.addLayer(marker);
@@ -202,7 +202,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                 }
                             },
                             click: function () {
-                                $state.go("layout.detail", { slug: element.properties.slug });
+                                $state.go("layout.detail", { catSlug: element.properties.category.slug, slug: element.properties.slug });
                             }
                         });
                         self._nearMarkersLayer.addLayer(marker);
@@ -827,7 +827,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
                                     },
                                     click: function () {
-                                        $state.go("layout.detail", { slug: result.properties.slug });
+                                        $state.go("layout.detail", { catSlug: result.properties.category.slug, slug: result.properties.slug });
                                     }
                                 });
                                 jQuery(selector).on('mouseenter', function () {
@@ -885,7 +885,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                     }
                                 },
                                 click: function () {
-                                    $state.go("layout.detail", { slug: result.properties.slug });
+                                    $state.go("layout.detail", { catSlug: result.properties.category.slug, slug: result.properties.slug });
                                 }
                             });
                             if (result.geometry.type !== "Point") {

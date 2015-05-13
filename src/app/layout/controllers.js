@@ -57,7 +57,7 @@ function SidebarDetailController($scope, $rootScope, $modal, $stateParams, $loca
 
     function getResultDetails(refresh) {
         if ($stateParams.slug) {
-            resultsService.getAResultBySlug($stateParams.slug)
+            resultsService.getAResultBySlug($stateParams.slug, $stateParams.catSlug)
                 .then(
                     function (data) {
                         $scope.result = data;

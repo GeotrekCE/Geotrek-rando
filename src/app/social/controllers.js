@@ -221,7 +221,7 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
         var currentTitle = '';
 
         if ($state.current.name === 'layout.detail') {
-            resultsService.getAResultBySlug($stateParams.slug)
+            resultsService.getAResultBySlug($stateParams.slug, $stateParams.catSlug)
                 .then(
                     function (data) {
                         currentTitle = data.properties.name;

@@ -73,7 +73,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
         return deferred.promise;
     };
 
-    this.getAResultBySlug = function (elementSlug, forceRefresh) {
+    this.getAResultBySlug = function (elementSlug, categorySlug, forceRefresh) {
         var deferred = $q.defer();
         var findTrek = true, findContent = true, findEvent = true;
         if (globalSettings.ENABLE_TREKS) {
@@ -81,7 +81,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                 .then(
                     function (treks) {
                         _.forEach(treks.features, function (trek) {
-                            if (trek.properties.slug === elementSlug) {
+                            if (trek.properties.slug === elementSlug && trek.properties.category.slug === categorySlug) {
                                 deferred.resolve(trek);
                             }
                         });
@@ -99,7 +99,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                 .then(
                     function (contents) {
                         _.forEach(contents.features, function (content) {
-                            if (content.properties.slug === elementSlug) {
+                            if (content.properties.slug === elementSlug && content.properties.category.slug === categorySlug) {
                                 deferred.resolve(content);
                             }
                         });
@@ -116,7 +116,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                 .then(
                     function (trEvents) {
                         _.forEach(trEvents.features, function (trEvent) {
-                            if (trEvent.properties.slug === elementSlug) {
+                            if (trEvent.properties.slug === elementSlug && trEvent.properties.category.slug === categorySlug) {
                                 deferred.resolve(trEvent);
                             }
                         });
