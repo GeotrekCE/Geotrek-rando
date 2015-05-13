@@ -1034,32 +1034,32 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
 
     this.icons_liste = {
         default_icon: {},
-        departure: {
-            iconUrl: globalSettings.DEPARTURE_ICON ? '/images/custom/map/' + globalSettings.DEPARTURE_ICON : '/images/map/departure.svg',
+        departure: globalSettings.DEPARTURE_ICON || {
+            iconUrl: '/images/map/departure.svg',
             iconSize: [46, 52],
-            iconAnchor: [13, 52],
+            iconAnchor: [23, 52],
             className: 'departure-marker'
         },
-        arrival: {
-            iconUrl: globalSettings.ARRIVAL_ICON ? '/images/custom/map/' + globalSettings.ARRIVAL_ICON : '/images/map/arrival.svg',
+        arrival: globalSettings.ARRIVAL_ICON || {
+            iconUrl: '/images/map/arrival.svg',
             iconSize: [46, 52],
             iconAnchor: [13, 52],
             className: 'arrival-marker'
         },
-        departureArrival: {
-            iconUrl: globalSettings.DEPARTURE_ARRIVAL_ICON ? '/images/custom/map/' + globalSettings.DEPARTURE_ARRIVAL_ICON : '/images/map/departure-arrival.svg',
+        departureArrival: globalSettings.DEPARTURE_ARRIVAL_ICON || {
+            iconUrl: '/images/map/departure-arrival.svg',
             iconSize: [46, 52],
             iconAnchor: [13, 52],
             className: 'departure-arrival-marker'
         },
-        parking: {
+        parking: globalSettings.PARKING_ICON || {
             iconUrl: '/images/map/parking.svg',
             iconSize: [20, 20],
             iconAnchor: [10, 20],
             labelAnchor: [10, 10],
             className: 'parking-marker'
         },
-        information: {
+        information: globalSettings.INFO_ICON || {
             iconUrl: '/images/map/info.svg',
             iconSize: [],
             iconAnchor: [],
@@ -1080,8 +1080,8 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
             labelAnchor: [],
             className: ''
         },
-        category_base: {
-            iconUrl: globalSettings.MARKER_BASE_ICON ? '/images/custom/map/' + globalSettings.MARKER_BASE_ICON : '/images/map/category_base.svg',
+        category_base: globalSettings.MARKER_BASE_ICON || {
+            iconUrl: '/images/map/category_base.svg',
             iconSize: [34, 48],
             iconAnchor: [17, 48],
             labelAnchor: [17, 17]
