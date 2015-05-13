@@ -88,7 +88,6 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                 function () {
                     mapService.createElementsMarkers($scope.nearElements, 'near');
                     deferred.resolve($scope.nearElements);
-                    console.log($scope.nearElements);
                 }
             );
 
