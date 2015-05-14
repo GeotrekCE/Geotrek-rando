@@ -1,0 +1,15 @@
+#global-filters form .top-part .geo-filters, #global-filters form .top-part .search {
+    display: table-cell;
+}
+
+#global-filters form .themes .theme {
+    display: inline-block;
+}
+
+.results-liste .results {
+    height: calc(100% - 12vh);
+}
+
+.results-liste .results > ul > li {
+    display: inline-block;
+}

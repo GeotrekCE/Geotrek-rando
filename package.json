@@ -20,7 +20,8 @@
     "leaflet.fullscreen": "^1.1.4",
     "leaflet.markercluster": "^0.4.0",
     "lodash": "^2.4.1",
-    "rando3D": "git://github.com/makinacorpus/rando3D.git#exportable"
+    "rando3D": "git://github.com/makinacorpus/rando3D.git#exportable",
+    "classlist-polyfill": "^1.0.0"
   },
   "browser": {
     "angular": "./src/app/angular-browserify.js",
@@ -39,7 +40,8 @@
     "leaflet-geometryutil": "./node_modules/leaflet-geometryutil/dist/leaflet.geometryutil.js",
     "lodash": "./node_modules/lodash/lodash.js",
     "sparklines": "./src/app/vendors/scripts/sparklines.min.js",
-    "rando3d": "./node_modules/rando3D"
+    "rando3d": "./node_modules/rando3D",
+    "classlist-polyfill": "./node_modules/classlist-polyfill/src/index.js"
   },
   "devDependencies": {
     "browser-sync": "^2.6.4",

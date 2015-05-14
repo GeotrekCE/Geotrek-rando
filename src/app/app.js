@@ -38,6 +38,7 @@ window._ = require('lodash');
 window.jQuery = require('jquery');
 window.L = require('leaflet');
 window.rando3D = require('rando3d');
+require('classlist-polyfill');
 
 // LOAD EXTERNAL DEPENDENCIES
 require('ui.bootstrap');
