@@ -1,7 +1,8 @@
 'use strict';
 
-function NearListeController($scope, favoritesService, $rootScope) {
+function NearListeController($scope, globalSettings, favoritesService, $rootScope) {
 
+    $scope.favIcon = (globalSettings.FAVORITES_ICON ? globalSettings.FAVORITES_ICON : 'heart');
     $scope.isInFavorites = favoritesService.isInFavorites;
 
     $scope.hoverMarkerNear = function (currentPoi, state) {

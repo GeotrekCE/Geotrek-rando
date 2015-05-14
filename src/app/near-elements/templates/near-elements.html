@@ -1,7 +1,7 @@
 <ul class="near-liste">
     <li ng-repeat="near in nearElements" id="near-category-{{near.properties.category.id}}-{{near.id}}" class="near category-{{near.properties.category.id}} card">
         <div class="fav-or-not" ng-click="toggleFavorites(near)" ng-class="{isFav: isInFavorites(near)}">
-            <i class="glyphicon glyphicon-heart"></i>
+            <i class="fa fa-{{favIcon}}"></i>
         </div>
         <a ui-sref="layout.detail({catSlug: near.properties.category.slug, slug: near.properties.slug})" class="card-part" ng-mouseover="hoverMarkerNear(near,'enter')" ng-mouseleave="hoverMarkerNear(near,'leave')">
             <div class="picture">
