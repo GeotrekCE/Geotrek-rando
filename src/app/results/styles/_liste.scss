@@ -39,6 +39,7 @@
         justify-content: flex-start;
         & > li {
             flex: 0 1 47%;
+            max-width: 47%;
             max-height: 20rem;
             padding: 0 1em 2.4em;
             display: block;
