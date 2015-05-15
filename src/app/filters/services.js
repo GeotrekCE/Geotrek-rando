@@ -281,7 +281,7 @@ function filtersService(globalSettings, utilsFactory) {
         }
 
         // We want to filter element by a value withing an interval
-        if (matchBy === 'interval') {
+        if (matchBy === 'interval' && element[name]) {
             var min = filters.toString().split('-')[0],
                 max = filters.toString().split('-')[1],
                 elementId = element[name].id || element[name];
