@@ -594,13 +594,13 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     };
 
-    this.highlightPath = function (element, permanent) {
+    this.highlightPath = function (element, permanent, detailView) {
         var hoverStyle = {
             className:  'layer-highlight'
         },
-        geoElement;
+        geoElement = {};
 
-        if (!self.treksIconified) {
+        if (!self.treksIconified || detailView) {
             geoElement = L.geoJson(element, {
                 style: hoverStyle
             });
@@ -961,7 +961,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                         self._clustersLayer.addLayer(currentLayer);
                         if (result.geometry.type !== "Point") {
                             if (globalSettings.ALWAYS_HIGHLIGHT_TREKS) {
-                                self.highlightPath(result, true);
+                                self.highlightPath(result, true, true);
                             }
                             self.updateBounds(updateBounds, [currentLayer]);
                         } else {
