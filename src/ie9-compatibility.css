@@ -1,3 +1,7 @@
+#header .navbar-brand #logo img {
+    max-width: auto;
+}
+
 #global-filters form .top-part .geo-filters, #global-filters form .top-part .search {
     display: table-cell;
 }
@@ -12,4 +16,32 @@
 
 .results-liste .results > ul > li {
     display: inline-block;
+}
+
+.detail-page .informations .pictos ul li {
+    display: inline-block;
+}
+
+.detail-page .informations .element-title .cat-icon,
+.detail-page .informations .element-title h1 {
+    display: inline-block;
+}
+
+.detail-page .informations .main-infos {
+    height: 100%;
+    padding-bottom: 50px;
+}
+
+.detail-page .interests > div:not(.collapsed) {
+    height: 100%;
+}
+
+#footer .legals,
+#footer .logo,
+#footer .legals .links li {
+    display: inline-block;
+}
+
+#footer .logo img {
+    margin-top: -22px;
 }
