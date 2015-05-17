@@ -181,8 +181,12 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                     .then(
                         function (pois) {
                             if (pois.length > 0) {
-                                if (globalSettings.DEFAULT_INTEREST === 'pois' || !activeDefaultType) {
-                                    activeDefaultType = 'pois';
+                                if (globalSettings.DEFAULT_INTEREST === '') {
+                                    activeDefaultType = '';
+                                } else {
+                                    if (globalSettings.DEFAULT_INTEREST === 'pois' || !activeDefaultType) {
+                                        activeDefaultType = 'pois';
+                                    }
                                 }
                             }
                         }
@@ -195,8 +199,12 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                 .then(
                     function (nearElements) {
                         if (nearElements.length > 0) {
-                            if (globalSettings.DEFAULT_INTEREST === 'near' || !activeDefaultType) {
-                                activeDefaultType = 'near';
+                            if (globalSettings.DEFAULT_INTEREST === '') {
+                                activeDefaultType = '';
+                            } else {
+                                if (globalSettings.DEFAULT_INTEREST === 'near' || !activeDefaultType) {
+                                    activeDefaultType = 'near';
+                                }
                             }
                         }
                     }
@@ -209,8 +217,12 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                     .then(
                         function (children) {
                             if (children.length > 0) {
-                                if (globalSettings.DEFAULT_INTEREST === 'children' || !activeDefaultType) {
-                                    activeDefaultType = 'children';
+                                if (globalSettings.DEFAULT_INTEREST === '') {
+                                    activeDefaultType = '';
+                                } else {
+                                    if (globalSettings.DEFAULT_INTEREST === 'children' || !activeDefaultType) {
+                                        activeDefaultType = 'children';
+                                    }
                                 }
                             }
                         }
@@ -224,8 +236,12 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                     .then(
                         function (parent) {
                             if (parent) {
-                                if (globalSettings.DEFAULT_INTEREST === 'parent' || !activeDefaultType) {
-                                    activeDefaultType = 'parent';
+                                if (globalSettings.DEFAULT_INTEREST === '') {
+                                    activeDefaultType = '';
+                                } else {
+                                    if (globalSettings.DEFAULT_INTEREST === 'parent' || !activeDefaultType) {
+                                        activeDefaultType = 'parent';
+                                    }
                                 }
                             }
                         }
@@ -236,7 +252,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         $q.all(promises)
             .then(
                 function () {
-                    if (!activeDefaultType) {
+                    if (activeDefaultType === null) {
                         $timeout(function () {
                             $rootScope.$emit('refreshMapSize');
                         }, 500);
