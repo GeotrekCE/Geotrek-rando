@@ -27,6 +27,8 @@ var dependencies = [
 
     // EXTERNAL STUFFS
     'pascalprecht.translate',
+    'angulartics',
+    'angulartics.google.analytics',
     'ui.router',
     'ui.slider',
     'ngResource',
@@ -45,6 +47,8 @@ require('ui.bootstrap');
 require('ui.router');
 require('angular-slider');
 require('angular-translate');
+require('angulartics');
+require('angulartics-ga');
 require('ngResource');
 require('bootstrap');
 require('sparklines');

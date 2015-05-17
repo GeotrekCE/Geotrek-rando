@@ -11,7 +11,9 @@
     "angular-slider": "git://github.com/PopSugar/angular-slider.git",
     "angular-translate": "^2.6.1",
     "angular-ui-router": "^0.2.13",
+    "angulartics": "^0.17.2",
     "bootstrap-sass": "^3.3.1",
+    "classlist-polyfill": "^1.0.0",
     "font-awesome": "^4.2.0",
     "jquery": "^1.11.x",
     "leaflet": "^0.7.3",
@@ -20,12 +22,13 @@
     "leaflet.fullscreen": "^1.1.4",
     "leaflet.markercluster": "^0.4.0",
     "lodash": "^2.4.1",
-    "rando3D": "git://github.com/makinacorpus/rando3D.git#exportable",
-    "classlist-polyfill": "^1.0.0"
+    "rando3D": "git://github.com/makinacorpus/rando3D.git#exportable"
   },
   "browser": {
     "angular": "./src/app/angular-browserify.js",
     "angular-translate": "./node_modules/angular-translate/dist/angular-translate.js",
+    "angulartics": "./node_modules/angulartics/dist/angulartics.min.js",
+    "angulartics-ga": "./node_modules/angulartics/dist/angulartics-ga.min.js",
     "ui.bootstrap": "./node_modules/angular-bootstrap/dist/ui-bootstrap-tpls.min.js",
     "ui.router": "./node_modules/angular-ui-router/release/angular-ui-router.js",
     "angular-slider": "./node_modules/angular-slider/slider.js",
