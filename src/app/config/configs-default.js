@@ -26,7 +26,7 @@ var constants = {
     RULES_FLAT_PAGES_ID: '',
     FAVORITES_ICON: '', // use font awesome plain icons (outline for results is done in css) ('' -> heart)
     SHARE_ICON: '', // use font awesome icons ('' -> arrow share icon)
-
+    PLACEHOLDER_IMAGE: '', //defined path to custom placeholder image from /images/custom
 
 
     // LANGUAGES PARAMETERS //

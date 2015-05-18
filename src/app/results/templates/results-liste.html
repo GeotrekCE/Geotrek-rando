@@ -16,7 +16,7 @@
                     <a ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: result.properties.slug})">
                         <div class="visual">
                             <img ng-if="result.properties.pictures[0]" ng-src="{{result.properties.pictures[0].url}}" ng-alt="{{result.properties.pictures[0].title}}">
-                            <img ng-if="!result.properties.pictures[0]" ng-src="./images/placeholder.png" alt="placeholder image">
+                            <img ng-if="!result.properties.pictures[0]" ng-src="{{$root.placeHolderImage}}" alt="placeholder image">
                         </div>
                         <h1 class="title">
                             {{result.properties.name}}
