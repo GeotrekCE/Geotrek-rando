@@ -3,10 +3,10 @@
         <div class="fav-or-not" ng-click="toggleFavorites(child)" ng-class="{isFav: isInFavorites(child)}">
             <i class="glyphicon glyphicon-heart"></i>
         </div>
-        <a ui-sref="layout.detail({slug: child.properties.slug})" class="card-part" ng-mouseover="hoverMarkerFiliation(child,'enter')" ng-mouseleave="hoverMarkerFiliation(child,'leave')">
+        <a ui-sref="layout.detail({catSlug: child.properties.category.slug, slug: child.properties.slug})" class="card-part" ng-mouseover="hoverMarkerFiliation(child,'enter')" ng-mouseleave="hoverMarkerFiliation(child,'leave')">
             <div class="picture">
                 <img ng-if="child.properties.pictures[0]" ng-src="{{child.properties.pictures[0].url}}" ng-alt="{{child.properties.type.label}}">
-                <img ng-if="!child.properties.pictures[0]" ng-src="./images/placeholder.png" alt="placeholder image">
+                <img ng-if="!child.properties.pictures[0]" ng-src="{{$root.placeHolderImage}}" alt="placeholder image">
             </div>
             <div class="cat-icon">
                 <ng-include ng-if="isSVG(child.properties.category.pictogram)" src="child.properties.category.pictogram"></ng-include>

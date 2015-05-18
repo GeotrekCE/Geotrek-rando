@@ -6,16 +6,17 @@
         .top-part {
             display: flex;
             flex-wrap: wrap;
-            flex: 1;
+            flex: 1 1 auto;
             .search {
-                flex: 1;
+                flex: 1 1 50%;
+                max-width: 50%;
                 display: flex;
                 padding: 0.4rem;
                 @media (max-width: 1200px) {
                     min-width: 100%;
                 }
                 .input-group {
-                    flex: 1;
+                    flex: 1 1 auto;
                     box-shadow: 0 1px 1px 0px lighten($dark-grey, 50%);
                     input {
                         width: 100%;
@@ -30,11 +31,15 @@
                 }
             }
             .geo-filters {
-                flex: 1;
+                flex: 1 1 50%;
+                @media (min-width: 1200px) {
+                    max-width: 50%;
+                }
                 display: flex;
                 padding: 0.4rem 5px;
                 &.fullsize {
                     flex: 1 1 100%;
+                    max-width: 100%;
                 }
                 .selector {
                     margin: 0 5px;
@@ -150,7 +155,7 @@
             }
         }
         .themes {
-            flex: 1;
+            flex: 1 1 auto;
             display: flex;
             padding-bottom: 0.4rem;
             h4 {
@@ -161,14 +166,14 @@
                 align-self: center;
             }
             .values {
-                flex: 1;
+                flex: 1 1 auto;
                 display: flex;
                 flex-wrap: wrap;
             }
             .theme {
                 height: 2.5em;
                 min-width: 3em;
-                flex: 1;
+                flex: 1 1 auto;
                 position: relative;
                 margin: auto;
                 padding: 4px;

@@ -65,7 +65,7 @@
                 }
             }
             h1 {
-                flex: 1;
+                flex: 1 1 auto;
                 font-size: 1.5em;
                 margin: 0;
                 font-weight: lighter;
@@ -81,7 +81,7 @@
             }
         }
         .main-infos {
-            flex: 1;
+            flex: 1 1 90%;
             overflow-y: scroll;
             overflow-x: hidden;
         }

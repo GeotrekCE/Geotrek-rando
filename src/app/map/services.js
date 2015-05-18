@@ -145,7 +145,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                                     }
                                                 },
                                                 click: function () {
-                                                    //$state.go("layout.detail", { slug: result.properties.slug });
+                                                    //$state.go("layout.detail", { catSlug: result.properties.category.slug, slug: result.properties.slug });
                                                 }
                                             });
                                             self._poisMarkersLayer.addLayer(marker);
@@ -202,7 +202,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                 }
                             },
                             click: function () {
-                                $state.go("layout.detail", { slug: element.properties.slug });
+                                $state.go("layout.detail", { catSlug: element.properties.category.slug, slug: element.properties.slug });
                             }
                         });
                         self._nearMarkersLayer.addLayer(marker);
@@ -594,22 +594,27 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     };
 
-    this.highlightPath = function (element) {
+    this.highlightPath = function (element, permanent, detailView) {
+        var hoverStyle = {
+            className:  'layer-highlight'
+        },
+        geoElement = {};
 
-        if (!self.treksIconified) {
-            if (self.geoHover) {
-                self._nearMarkersLayer.removeLayer(self.geoHover);
-            }
-
-            var hoverStyle = {
-                className:  'layer-highlight'
-            };
-
-            self.geoHover = L.geoJson(element, {
+        if (!self.treksIconified || detailView) {
+            geoElement = L.geoJson(element, {
                 style: hoverStyle
             });
-            self.geoHover.addTo(self._nearMarkersLayer);
-            self.geoHover.bringToBack();
+            if (!permanent) {
+                if (self.geoHover) {
+                    self._nearMarkersLayer.removeLayer(self.geoHover);
+                }
+
+                self.geoHover = geoElement;
+            }
+            
+             
+            geoElement.addTo(self._nearMarkersLayer);
+            geoElement.bringToBack();
         }
         
     };
@@ -783,6 +788,11 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                             function (layer) {
                                 var selector = '#result-category-' + result.properties.category.id + '-' + result.id;
                                 var itself = '.layer-category-' + result.properties.category.id + '-' + result.id;
+
+                                if (globalSettings.ALWAYS_HIGHLIGHT_TREKS) {
+                                    self.highlightPath(result, true);
+                                }
+
                                 layer.on({
                                     mouseover: function () {
                                         var listeEquivalent = document.querySelector(selector);
@@ -827,7 +837,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
                                     },
                                     click: function () {
-                                        $state.go("layout.detail", { slug: result.properties.slug });
+                                        $state.go("layout.detail", { catSlug: result.properties.category.slug, slug: result.properties.slug });
                                     }
                                 });
                                 jQuery(selector).on('mouseenter', function () {
@@ -885,7 +895,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                     }
                                 },
                                 click: function () {
-                                    $state.go("layout.detail", { slug: result.properties.slug });
+                                    $state.go("layout.detail", { catSlug: result.properties.category.slug, slug: result.properties.slug });
                                 }
                             });
                             if (result.geometry.type !== "Point") {
@@ -950,6 +960,9 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                         currentLayer.addLayer(layer);
                         self._clustersLayer.addLayer(currentLayer);
                         if (result.geometry.type !== "Point") {
+                            if (globalSettings.ALWAYS_HIGHLIGHT_TREKS) {
+                                self.highlightPath(result, true, true);
+                            }
                             self.updateBounds(updateBounds, [currentLayer]);
                         } else {
                             self.updateBounds(updateBounds, [self._clustersLayer]);
@@ -1034,32 +1047,32 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
 
     this.icons_liste = {
         default_icon: {},
-        departure: {
-            iconUrl: globalSettings.DEPARTURE_ICON ? '/images/custom/map/' + globalSettings.DEPARTURE_ICON : '/images/map/departure.svg',
+        departure: globalSettings.DEPARTURE_ICON || {
+            iconUrl: '/images/map/departure.svg',
             iconSize: [46, 52],
-            iconAnchor: [13, 52],
+            iconAnchor: [23, 52],
             className: 'departure-marker'
         },
-        arrival: {
-            iconUrl: globalSettings.ARRIVAL_ICON ? '/images/custom/map/' + globalSettings.ARRIVAL_ICON : '/images/map/arrival.svg',
+        arrival: globalSettings.ARRIVAL_ICON || {
+            iconUrl: '/images/map/arrival.svg',
             iconSize: [46, 52],
             iconAnchor: [13, 52],
             className: 'arrival-marker'
         },
-        departureArrival: {
-            iconUrl: globalSettings.DEPARTURE_ARRIVAL_ICON ? '/images/custom/map/' + globalSettings.DEPARTURE_ARRIVAL_ICON : '/images/map/departure-arrival.svg',
+        departureArrival: globalSettings.DEPARTURE_ARRIVAL_ICON || {
+            iconUrl: '/images/map/departure-arrival.svg',
             iconSize: [46, 52],
             iconAnchor: [13, 52],
             className: 'departure-arrival-marker'
         },
-        parking: {
+        parking: globalSettings.PARKING_ICON || {
             iconUrl: '/images/map/parking.svg',
             iconSize: [20, 20],
             iconAnchor: [10, 20],
             labelAnchor: [10, 10],
             className: 'parking-marker'
         },
-        information: {
+        information: globalSettings.INFO_ICON || {
             iconUrl: '/images/map/info.svg',
             iconSize: [],
             iconAnchor: [],
@@ -1080,8 +1093,8 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
             labelAnchor: [],
             className: ''
         },
-        category_base: {
-            iconUrl: globalSettings.MARKER_BASE_ICON ? '/images/custom/map/' + globalSettings.MARKER_BASE_ICON : '/images/map/category_base.svg',
+        category_base: globalSettings.MARKER_BASE_ICON || {
+            iconUrl: '/images/map/category_base.svg',
             iconSize: [34, 48],
             iconAnchor: [17, 48],
             labelAnchor: [17, 17]

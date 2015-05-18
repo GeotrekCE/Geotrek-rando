@@ -24,7 +24,7 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
         $rootScope.elementsLoading ++;
         var promise;
         if (!forceRefresh) {
-            promise = resultsService.getAResultBySlug($stateParams.slug);
+            promise = resultsService.getAResultBySlug($stateParams.slug, $stateParams.catSlug);
         } else {
             promise = resultsService.getAResultByID($scope.result.id, $scope.result.properties.category.id);
         }

@@ -9,7 +9,7 @@
     & > div {
         transition: all 0.1s ease-out;
     }
-    svg, img {
+    .marker, svg, img {
         height: 100%;
         width: 100%;
     }
@@ -221,7 +221,7 @@
 
 .layer-highlight {
     stroke-width: 10;
-    stroke: yellow;
+    stroke: $linear-highlight-color;
 }
 
 .detail-map .leaflet-overlay-pane svg path {

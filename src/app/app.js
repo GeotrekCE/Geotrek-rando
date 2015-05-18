@@ -27,6 +27,8 @@ var dependencies = [
 
     // EXTERNAL STUFFS
     'pascalprecht.translate',
+    'angulartics',
+    'angulartics.google.analytics',
     'ui.router',
     'ui.slider',
     'ngResource',
@@ -38,12 +40,15 @@ window._ = require('lodash');
 window.jQuery = require('jquery');
 window.L = require('leaflet');
 window.rando3D = require('rando3d');
+require('classlist-polyfill');
 
 // LOAD EXTERNAL DEPENDENCIES
 require('ui.bootstrap');
 require('ui.router');
 require('angular-slider');
 require('angular-translate');
+require('angulartics');
+require('angulartics-ga');
 require('ngResource');
 require('bootstrap');
 require('sparklines');

@@ -38,7 +38,7 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
 
         })
         .state('layout.detail', {
-            url: ':slug/',
+            url: ':catSlug/:slug/',
             views: {
                 'header' : {
                     template: require('./templates/header.html'),

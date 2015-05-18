@@ -11,10 +11,27 @@
   <meta ng-repeat="tag in $root.facebookTags" property="{{tag.property}}" content="{{tag.content}}">
   <link rel="stylesheet" href="rando.css">
   <link href='http://fonts.googleapis.com/css?family=Roboto:500,300,700,400' rel='stylesheet' type='text/css'>
+  <!--[if IE 9]>
+    <link rel="stylesheet" type="text/css" href="ie9-compatibility.css">
+  <![endif]-->
   <script src="rando-vendors.js"></script>
   <script src="rando.js"></script>
 </head>
 <body>
   <div ui-view class="main-container"></div>
 </body>
+<script> 
+  var $buoop = {
+    c:2,
+    test: false,
+    text_fr: "Votre navigateur ne permet pas l'affichage du site dans des conditions optimales. Dans un objectif de <b>performance</b>, de <b>sécurité</b> et de <b>qualité de visite</b>, <a>nous vous recommandons de mettre à jour votre navigateur</a>",
+  }; 
+  function $buo_f(){
+    var e = document.createElement("script");
+    e.src = "//browser-update.org/update.min.js";
+    document.body.appendChild(e);
+  }
+  try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+  catch(e){window.attachEvent("onload", $buo_f)}
+</script>
 </html>

@@ -4,8 +4,24 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
     $rootScope.currentState_name = $state.current.name;
     $rootScope.showFooterOnApp = globalSettings.SHOW_FOOTER;
     $rootScope.elementsLoading = 0;
+    $rootScope.mapIsShown = false;
+    $rootScope.placeHolderImage = globalSettings.PLACEHOLDER_IMAGE ? './images/custom/' + globalSettings.PLACEHOLDER_IMAGE : './images/placeholder.png';
+
+    function initAnalytics() {
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', globalSettings.GOOGLE_ANALYTICS_ID, 'auto');
+    }
+
+    if (globalSettings.GOOGLE_ANALYTICS_ID) {
+        initAnalytics();
+    }
+
     if ($state.current.name === 'layout.root') {
-        if (globalSettings.SHOW_HOME) {
+        if (globalSettings.SHOW_HOME && angular.equals({}, $location.search())) {
             $rootScope.showHome = !homeService.getChoice();
         }
     } else {
@@ -34,8 +50,6 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
                 }
             );
     });
-
-    $rootScope.mapIsShown = false;
 }
 
 function HeaderController($rootScope, $scope, globalSettings) {
@@ -57,7 +71,7 @@ function SidebarDetailController($scope, $rootScope, $modal, $stateParams, $loca
 
     function getResultDetails(refresh) {
         if ($stateParams.slug) {
-            resultsService.getAResultBySlug($stateParams.slug)
+            resultsService.getAResultBySlug($stateParams.slug, $stateParams.catSlug)
                 .then(
                     function (data) {
                         $scope.result = data;

@@ -10,7 +10,7 @@
             </div>
             <ul ng-if="favorites && favorites.length > 0">
                 <li ng-repeat="favorite in favorites" class="favorite category-{{favorite.properties.category.id}}" id="fav-category-{{favorite.properties.category.id}}-{{favorite.id}}">
-                    <a ui-sref="layout.detail({slug: favorite.properties.slug})">
+                    <a ui-sref="layout.detail({catSlug: favorite.properties.category.slug, slug: favorite.properties.slug})">
                         <div class="picture">
                             <img ng-src="{{favorite.properties.pictures[0].url}}" alt="{{favorite.properties.name}}-thumbnail"/>
                         </div>
