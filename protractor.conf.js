@@ -12,19 +12,19 @@ var browserConfs = {
         browserName: 'firefox',
         count: 1,
     },
-    phantom: {
-        'browserName': 'phantomjs',
-        'phantomjs.binary.path': require('phantomjs').path,
-        'phantomjs.ghostdriver.cli.args': ['--loglevel=DEBUG']
-    }
+    // phantom: {
+        // 'browserName': 'phantomjs',
+        // 'phantomjs.binary.path': require('phantomjs').path,
+        // 'phantomjs.ghostdriver.cli.args': ['--loglevel=DEBUG']
+    // }
 }
 
 
 exports.config = {
     multiCapabilities: [
-        // browserConfs.chrome,
+        browserConfs.chrome,
         // browserConfs.firefox,
-        browserConfs.phantom,
+        // browserConfs.phantom
     ],
     baseUrl: 'http://geotrek.local'
 };
