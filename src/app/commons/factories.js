@@ -142,9 +142,9 @@ function utilsFactory($sce) {
         var intLength = parseInt(length),
             parsedLength= '';
         if (intLength >= 1000) {
-            parsedLength = (intLength/1000) + 'km';
+            parsedLength = Math.round(intLength/1000) + ' km';
         } else {
-            parsedLength = intLength + 'm';
+            parsedLength = intLength + ' m';
         }
 
         return parsedLength;
