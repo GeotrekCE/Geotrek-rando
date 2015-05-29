@@ -37,22 +37,6 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
             }
 
         })
-        .state('layout.detail', {
-            url: ':catSlug/:slug/',
-            views: {
-                'header' : {
-                    template: require('./templates/header.html'),
-                    controller: controller.HeaderController
-                },
-                'sidebar' : {
-                    template: require('./templates/sidebar-detail.html'),
-                    controller: controller.SidebarDetailController
-                },
-                'content' : {
-                    template: require('./templates/content-detail.html'),
-                }
-            }
-        })
         .state('layout.flat', {
             url: 'informations/:flatID/',
             views: {
@@ -66,6 +50,22 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
                 },
                 'content' : {
                     template: require('./templates/content-flat.html'),
+                }
+            }
+        })
+        .state('layout.detail', {
+            url: ':catSlug/:slug/',
+            views: {
+                'header' : {
+                    template: require('./templates/header.html'),
+                    controller: controller.HeaderController
+                },
+                'sidebar' : {
+                    template: require('./templates/sidebar-detail.html'),
+                    controller: controller.SidebarDetailController
+                },
+                'content' : {
+                    template: require('./templates/content-detail.html'),
                 }
             }
         });
