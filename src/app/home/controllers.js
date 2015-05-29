@@ -25,6 +25,13 @@ function HomeController($scope, $rootScope, translationService, homeService, glo
 
     $scope.initHome();
 
+    $rootScope.$on('$stateChangeStart', function (event, toState) {
+        console.log(toState);
+        if (toState.name !== 'layout.root' && $rootScope.showHome) {
+            $scope.toggleHome();
+        }
+    });
+
 }
 
 module.exports = {
