@@ -1304,7 +1304,7 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
     this.getClusterIcon = function (cluster) {
         return new L.DivIcon({
             iconSize: [40, 40],
-            iconAnchor: [20, 40],
+            iconAnchor: [20, 20],
             className: 'element-cluster',
             html: '<div class="marker"><span class="count">' + cluster.getChildCount() + '</span></div>'
         });

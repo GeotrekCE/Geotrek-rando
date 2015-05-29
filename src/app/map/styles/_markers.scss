@@ -1,11 +1,9 @@
 .leaflet-marker-icon {
-    position: relative;
     @include marker-coloring();
     
 }
 
 .double-marker {
-    position: relative;
     & > div {
         transition: all 0.1s ease-out;
     }
