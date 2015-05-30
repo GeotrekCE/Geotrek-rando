@@ -205,6 +205,10 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
     $rootScope.$on('switchGlobalLang', function () {
         loadCategories(true);
     });
+
+    $rootScope.$on('updateCategories', function () {
+        updateCategories();
+    });
 }
 
 module.exports = {

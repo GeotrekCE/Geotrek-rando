@@ -1,6 +1,6 @@
 'use strict';
 
-function HomeController($scope, $rootScope, translationService, homeService, globalSettings) {
+function HomeController($scope, $rootScope, translationService, $location, homeService, globalSettings) {
 
     $scope.initHome = function () {
         var currentLang = translationService.getCurrentLang();
@@ -21,12 +21,18 @@ function HomeController($scope, $rootScope, translationService, homeService, glo
         $scope.toggleHome();
     };
 
+    $scope.accessSpecificCategory = function (currentQuery) {
+        $location.search(currentQuery);
+        $rootScope.$broadcast('updateCategories');
+        $rootScope.$broadcast('updateFilters');
+        $scope.toggleHome();
+    };
+
     $scope.logo = globalSettings.LOGO_FILE;
 
     $scope.initHome();
 
     $rootScope.$on('$stateChangeStart', function (event, toState) {
-        console.log(toState);
         if (toState.name !== 'layout.root' && $rootScope.showHome) {
             $scope.toggleHome();
         }
