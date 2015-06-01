@@ -13,7 +13,7 @@ msgstr ""
 "X-Generator: Poedit 1.7.4\n"
 
 
-# CATEORIES
+# CATEGORIES
 #
 #
 
@@ -51,6 +51,7 @@ msgstr "résultats"
 
 msgid "NO_RESULTS"
 msgstr "Aucun résultat correspondant à votre recherche"
+
 
 # FAVORITES
 #
@@ -181,7 +182,6 @@ msgstr "sélectionnées"
 
 msgid "SHARING_DEFAULT_TEXT"
 msgstr "Geotrek est vraiment parfait pour préparer son voyage dans la nature !"
-
 
 
 # LAYOUT

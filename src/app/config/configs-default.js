@@ -14,7 +14,9 @@ var constants = {
     SHOW_HOME: false,
     HOME_TEMPLATE_FILE: {
         fr: '',
-        en: ''
+        en: '',
+        de: '',
+        nl: ''
     },
     SHOW_FOOTER: false,
     FOOTER_TEMPLATE_FILE: '',
@@ -36,7 +38,9 @@ var constants = {
     DEFAULT_LANGUAGE: 'fr',
     AVAILABLE_LANGUAGES: [
         {code: 'fr', label: 'Français'},
-        {code: 'en', label: 'English'}
+        {code: 'en', label: 'English'},
+        {code: 'de', label: 'Deutsch'},
+        {code: 'nl', label: 'Nederlands'}
     ],
 
 

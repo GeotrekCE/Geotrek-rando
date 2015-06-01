@@ -1,0 +1,271 @@
+msgid ""
+msgstr ""
+"Project: Geotrek-rando\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"X-Generator: Poedit 1.7.4\n"
+
+
+# CATEGORIES
+#
+#
+
+msgid "CATEGORIES"
+msgstr "Kategorien"
+
+msgid "ROUTES"
+msgstr "Routen"
+
+msgid "DIFFICULTIES"
+msgstr "Schwierigkeit"
+
+msgid "DURATION"
+msgstr "Dauer"
+
+msgid "ASCENT"
+msgstr "Anstieg"
+
+msgid "ALL"
+msgstr "Alles"
+
+
+# RESULTS
+#
+#
+
+msgid "RESULT"
+msgstr "Ergebnis"
+
+msgid "RESULTS"
+msgstr "Ergebnisse"
+
+msgid "NO_RESULTS"
+msgstr "Ihre Suche ergab keine Ergebnisse."
+
+
+# FAVORITES
+#
+#
+
+msgid "FAVORITES"
+msgstr "Favoriten"
+
+msgid "NO_FAVORITES"
+msgstr "Sie haben noch keine Favoriten!"
+
+
+# DETAILS
+#
+#
+
+msgid "START"
+msgstr "Start:"
+
+msgid "ARRIVAL"
+msgstr "Ziel:"
+
+msgid "LOOP"
+msgstr "Start/Ziel:"
+
+msgid "PARK_CENTERED"
+msgstr "Diese Route liegt im Herzen des Nationalparks. Folgen Sie bitten den Vorschriften."
+
+msgid "TRANSPORTS"
+msgstr "Transport"
+
+msgid "ACCESS"
+msgstr "Zufahrt"
+
+msgid "INFORMATION_DESKS"
+msgstr "Informationspunkte"
+
+msgid "CONTACT"
+msgstr "Kontakt"
+
+msgid "KNOW_MORE"
+msgstr "weitere Informationen"
+
+msgid "POI"
+msgstr "Kulturerbe"
+
+msgid "NEAR"
+msgstr "In der Umgebung"
+
+msgid "PROFILE_ALTI"
+msgstr "Höhenmessungsprofil"
+
+msgid "ELEVATIION_IN_M"
+msgstr "Höhenlage"
+
+msgid "MIN"
+msgstr "min."
+
+msgid "MAX"
+msgstr "max."
+
+msgid "LENGTH_IN_M"
+msgstr "Entfernung (m)"
+
+msgid "DATES"
+msgstr "Datum:"
+
+msgid "WEBSITE"
+msgstr "Internetseite:"
+
+msgid "MEETING_POINT"
+msgstr "Treffpunkt:"
+
+msgid "MEETING_TIME"
+msgstr "Zeit des Treffpunktes:"
+
+msgid "SPEAKERS"
+msgstr "Referenten:"
+
+msgid "BOOKING"
+msgstr "Reservierungen:"
+
+msgid "ORGANIZERS"
+msgstr "Organisation"
+
+msgid "PARTICIPANTS_NUMBER"
+msgstr "Anzahl der Teilnehmer:"
+
+msgid "PRATICAL_INFOS"
+msgstr "praktische Informationen:"
+
+
+# FILTERS
+#
+#
+
+msgid "THEMES"
+msgstr "Themen:"
+
+msgid "DISTRICTS"
+msgstr "Massive"
+
+msgid "SEARCH"
+msgstr "Suchen"
+
+msgid "CITIES"
+msgstr "Kommunen"
+
+msgid "STRUCTURES"
+msgstr "Strukturen"
+
+msgid "RESET"
+msgstr "zurücksetzen"
+
+msgid "SELECTED"
+msgstr "auswählen"
+
+
+# SOCIAL
+#
+#
+
+msgid "SHARING_DEFAULT_TEXT"
+msgstr "Geotrek, der perfekte Begleiter zur Vorbereitung eines Ausfluges in die Natur!"
+
+
+# LAYOUT
+#
+#
+
+msgid "TOGGLE_NAV"
+msgstr "Menü öffnen"
+
+msgid "BANNER_TEXT"
+msgstr "Geotrek Rando"
+
+msgid "HOME"
+msgstr "Startseite öffnen"
+
+msgid "ABOUT_US"
+msgstr "weitere Informationen"
+
+msgid "BACK"
+msgstr "zurück zur Karte"
+
+msgid "PRINT"
+msgstr "Dokument drucken"
+
+msgid "ADD_FAVS"
+msgstr "zu meinen Favoriten hinzufügen"
+
+msgid "REMOVE_FAVS"
+msgstr "aus meinen Favoriten entfernen"
+
+msgid "SHARE"
+msgstr "teilen"
+
+msgid "WARNING"
+msgstr "Problem oder Fehler signalisieren"
+
+msgid "KML"
+msgstr "KML Dokument herunterladen"
+
+msgid "GPX"
+msgstr "GPX Dokument herunterladen"
+
+msgid "3D"
+msgstr "Reiseroute in 3D anzeigen"
+
+
+# MAP
+#
+#
+
+msgid "ZOOM_IN"
+msgstr "Zoomen"
+
+msgid "ZOOM_OUT"
+msgstr "entzoomen"
+
+msgid "FULL_SCREEN"
+msgstr "Vollbildschirm"
+
+msgid "RECENTER_VIEW"
+msgstr "Karte zentrieren"
+
+msgid "TILES_SWITCH"
+msgstr "Hintergrund der Karte wechseln"
+
+msgid "VIEWPORT_FILTERING"
+msgstr "mit der Karte filtern"
+
+
+# HOME PAGE
+#
+#
+
+msgid "ACCESS_SITE"
+msgstr "Zugang zur Webseite"
+
+msgid "DONT_SHOW_HOME"
+msgstr "diese Seite nicht mehr anzeigen"
+
+msgid "SUGGESTED"
+msgstr "unsere Vorlieben"
+
+
+# FOOTER
+#
+#
+
+msgid "LEGALS"
+msgstr "Impressum"
+
+msgid "CREDITS"
+msgstr "Konzeption und Quellennachweis/Bildnachweis"
+
+msgid "CONTACT"
+msgstr "Kontakt"
+

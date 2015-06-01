@@ -1,0 +1,271 @@
+msgid ""
+msgstr ""
+"Project: Geotrek-rando\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
+"X-Generator: Poedit 1.7.4\n"
+
+
+# CATEGORIES
+#
+#
+
+msgid "CATEGORIES"
+msgstr "Categorieën"
+
+msgid "ROUTES"
+msgstr "Route"
+
+msgid "DIFFICULTIES"
+msgstr "Moeilijkheidsgraad"
+
+msgid "DURATION"
+msgstr "Duur"
+
+msgid "ASCENT"
+msgstr "Hoogteverschil"
+
+msgid "ALL"
+msgstr "Alle"
+
+
+# RESULTS
+#
+#
+
+msgid "RESULT"
+msgstr "Resultaat"
+
+msgid "RESULTS"
+msgstr "Resultaten"
+
+msgid "NO_RESULTS"
+msgstr "Geen passende resultaten bij uw zoekopdracht"
+
+
+# FAVORITES
+#
+#
+
+msgid "FAVORITES"
+msgstr "Favorieten"
+
+msgid "NO_FAVORITES"
+msgstr "U heeft nog geen favorieten"
+
+
+# DETAILS
+#
+#
+
+msgid "START"
+msgstr "Vertrek"
+
+msgid "ARRIVAL"
+msgstr "Aankomst"
+
+msgid "LOOP"
+msgstr "Vertrek/Aankomst"
+
+msgid "PARK_CENTERED"
+msgstr "Deze route gaat door het hart van een nationaal park, houdt u zich alstublieft aan de regels"
+
+msgid "TRANSPORTS"
+msgstr "Transport"
+
+msgid "ACCESS"
+msgstr "Toegang tot de routes"
+
+msgid "INFORMATION_DESKS"
+msgstr "Informatiepunten"
+
+msgid "CONTACT"
+msgstr "Contact"
+
+msgid "KNOW_MORE"
+msgstr "Meer informatie"
+
+msgid "POI"
+msgstr "Erfgoed"
+
+msgid "NEAR"
+msgstr "In de omgeving"
+
+msgid "PROFILE_ALTI"
+msgstr "Hoogteprofiel"
+
+msgid "ELEVATIION_IN_M"
+msgstr "Hoogte (m)"
+
+msgid "MIN"
+msgstr "Min."
+
+msgid "MAX"
+msgstr "Max."
+
+msgid "LENGTH_IN_M"
+msgstr "Afstand (m)"
+
+msgid "DATES"
+msgstr "Data"
+
+msgid "WEBSITE"
+msgstr "Website"
+
+msgid "MEETING_POINT"
+msgstr "Ontmoetingsplaats"
+
+msgid "MEETING_TIME"
+msgstr "Ontmoetingstijd"
+
+msgid "SPEAKERS"
+msgstr "sprekers"
+
+msgid "BOOKING"
+msgstr "Reserveringen"
+
+msgid "ORGANIZERS"
+msgstr "Organisatie"
+
+msgid "PARTICIPANTS_NUMBER"
+msgstr "Aantal deelnemers"
+
+msgid "PRATICAL_INFOS"
+msgstr "Handige informatie"
+
+
+# FILTERS
+#
+#
+
+msgid "THEMES"
+msgstr "Thema's"
+
+msgid "DISTRICTS"
+msgstr "Gebergtes"
+
+msgid "SEARCH"
+msgstr "Zoeken"
+
+msgid "CITIES"
+msgstr "Gemeenten"
+
+msgid "STRUCTURES"
+msgstr "Structuren"
+
+msgid "RESET"
+msgstr "Opnieuw beginnen"
+
+msgid "SELECTED"
+msgstr "Geselectioneerd"
+
+
+# SOCIAL
+#
+#
+
+msgid "SHARING_DEFAULT_TEXT"
+msgstr "Geotrek is echt perfect om u voor te bereiden op uw reis in de natuur"
+
+
+# LAYOUT
+#
+#
+
+msgid "TOGGLE_NAV"
+msgstr "Het menu openen"
+
+msgid "BANNER_TEXT"
+msgstr "Geotrek Rando"
+
+msgid "HOME"
+msgstr "Terug naar homepage"
+
+msgid "ABOUT_US"
+msgstr "Meer informatie"
+
+msgid "BACK"
+msgstr "Terug naar de kaart"
+
+msgid "PRINT"
+msgstr "De kaart printen"
+
+msgid "ADD_FAVS"
+msgstr "Toevoegen aan mijn favorieten"
+
+msgid "REMOVE_FAVS"
+msgstr "Verwijderen uit mijn favorieten"
+
+msgid "SHARE"
+msgstr "deelnemen"
+
+msgid "WARNING"
+msgstr "Een probleem of fout waarnemen"
+
+msgid "KML"
+msgstr "De KML kaart downloaden"
+
+msgid "GPX"
+msgstr "De GPX kaart downloaden"
+
+msgid "3D"
+msgstr "De route in 3D bekijken"
+
+
+# MAP
+#
+#
+
+msgid "ZOOM_IN"
+msgstr "Inzoomen"
+
+msgid "ZOOM_OUT"
+msgstr "Uitzoomen"
+
+msgid "FULL_SCREEN"
+msgstr "Volbeeld"
+
+msgid "RECENTER_VIEW"
+msgstr "De kaart centreren"
+
+msgid "TILES_SWITCH"
+msgstr "Verander het aanzicht van de kaart"
+
+msgid "VIEWPORT_FILTERING"
+msgstr "Filteren met de kaart"
+
+
+# HOME PAGE
+#
+#
+
+msgid "ACCESS_SITE"
+msgstr "Toegang tot de website"
+
+msgid "DONT_SHOW_HOME"
+msgstr "Laat me deze pagina niet meer zien"
+
+msgid "SUGGESTED"
+msgstr "Onze aanbevelingen"
+
+
+# FOOTER
+#
+#
+
+msgid "LEGALS"
+msgstr "Wettelijke bepalingen"
+
+msgid "CREDITS"
+msgstr "Ontwerp en credits"
+
+msgid "CONTACT"
+msgstr "Contact"
+
