@@ -52,7 +52,11 @@ function contentsService(globalSettings, settingsFactory, translationService, $r
             deferred.resolve(self._contentsList);
 
         } else {
-            var url = settingsFactory.touristicUrl.replace(/\$lang/, translationService.getCurrentLang().code);
+            var lang = translationService.getCurrentLang();
+            if (lang.code) {
+                lang = lang.code;
+            }
+            var url = settingsFactory.touristicUrl.replace(/\$lang/, lang);
 
             var requests = $resource(url, {}, {
                 query: {
@@ -131,7 +135,11 @@ function eventsService(globalSettings, settingsFactory, translationService, $res
             deferred.resolve(self._eventsList);
 
         } else {
-            var url = settingsFactory.eventsUrl.replace(/\$lang/, translationService.getCurrentLang().code);
+            var lang = translationService.getCurrentLang();
+            if (lang.code) {
+                lang = lang.code;
+            }
+            var url = settingsFactory.eventsUrl.replace(/\$lang/, lang);
 
             var requests = $resource(url, {}, {
                 query: {

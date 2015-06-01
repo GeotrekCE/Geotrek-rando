@@ -13,7 +13,11 @@ function flatService($q, $resource, utilsFactory, settingsFactory, translationSe
             deferred.resolve(self._flatList);
 
         } else {
-            var url = settingsFactory.flatUrl.replace(/\$lang/, translationService.getCurrentLang().code);
+            var lang = translationService.getCurrentLang();
+            if (lang.code) {
+                lang = lang.code;
+            }
+            var url = settingsFactory.flatUrl.replace(/\$lang/, lang);
 
             var requests = $resource(url, {}, {
                 query: {
