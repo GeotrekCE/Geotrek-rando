@@ -10,7 +10,6 @@ var autoprefixer = require('gulp-autoprefixer');
 gulp.task('sass', function () {
 
     function compileSass(element, index) {
-        console.log(element);
         gulp.src(element.src)
             .pipe(sourcemaps.init())
             .pipe(sass(config.settings))
