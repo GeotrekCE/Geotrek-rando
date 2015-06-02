@@ -33,11 +33,13 @@ function customisationTask() {
             var defaultConfig = fs.readFileSync(defaultConfigFile);
             fs.appendFileSync(configFile, defaultConfig);
         } else {
+            var message = 'Default config file "' + defaultConfigFile + '" doesn\'t exist. You must create it.';
+            console.log(message);
             notifier.notify({
                 'title': 'File missing',
-                'message': 'Default config file "' + defaultConfigFile + '" doesn\'t exist. You must create it.'
+                'message': message
             });
-            self.emit('end');
+            return false;
         }
             
     }
@@ -55,11 +57,13 @@ function customisationTask() {
                     if (fs.existsSync(path.join(langFilesPath, fileName + '.example'))) {
                         fileContent = fs.readFileSync(path.join(langFilesPath, fileName + '.example'));
                     } else {
+                        var message = 'Example po file "' + path.join(langFilesPath, fileName + '.example') + '" doesn\'t exist. You must create it.';
+                        console.log(message);
                         notifier.notify({
                             'title': 'File missing',
-                            'message': 'Example po file "' + path.join(langFilesPath, fileName + '.example') + '" doesn\'t exist. You must create it.'
+                            'message': message
                         });
-                        self.emit('end');
+                        return false;
                     }
                 }
 
@@ -80,11 +84,13 @@ function customisationTask() {
             if (fileType) {
                 filePath = path.join(filePath, config[fileType + 'Folder']);
             } else {
+                var message = 'The format of "' + file.customFileName + '" isn\'t recognise.';
+                console.log(message);
                 notifier.notify({
                     'title': 'Invalid file format',
-                    'message': 'The format of "' + file.customFileName + '" isn\'t recognise.'
+                    'message': message
                 });
-                self.emit('end');
+                return false;
             }
         }
 
