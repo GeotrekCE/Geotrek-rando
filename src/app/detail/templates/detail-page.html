@@ -110,13 +110,13 @@
                         <div ng-if="result.properties.ambiance" ng-bind-html="sanitizeData(result.properties.ambiance, true)" class="ambiance"></div>
                     </div>
                     <div class="from-to">
-                        <span ng-if="result.properties.departure && result.properties.departure !== result.properties.arrival">{{:: 'START' | translate}} {{::result.properties.departure}}</span>
+                        <span ng-if="result.properties.departure && result.properties.departure !== result.properties.arrival">{{ 'START' | translate}} {{::result.properties.departure}}</span>
                         <span ng-if="result.properties.arrival">
                             <span ng-if="result.properties.departure !== result.properties.arrival" class="arrival">
-                                {{:: 'ARRIVAL' | translate}}
+                                {{ 'ARRIVAL' | translate}}
                             </span>
                             <span ng-if="result.properties.departure === result.properties.arrival" class="loop">
-                                {{:: 'LOOP' | translate}}
+                                {{ 'LOOP' | translate}}
                             </span>
                             {{::result.properties.arrival}}
                         </span>
@@ -130,47 +130,47 @@
                 <div ng-if="result.properties.description" ng-bind-html="sanitizeData(result.properties.description, true)" class="description"></div>
                 <div class="events-info">
                     <div ng-if="result.properties.begin_date" class="date">
-                        <h5>{{::'DATES' | translate}}</h5>
+                        <h5>{{'DATES' | translate}}</h5>
                         <span ng-if="result.properties.begin_date" class="begin-date">{{::result.properties.begin_date | date:'dd/MM/yyyy'}}</span>
                         <span ng-if="result.properties.ending-date && result.properties.ending-date !== result.properties.begin_date" class="ending-date"> -> {{::result.properties.begin_date | date:'dd/MM/yyyy'}}</span>
                     </div>
                     <div ng-if="result.properties.website" class="website">
-                        <h5>{{::'WEBSITE' | translate}}</h5>
+                        <h5>{{'WEBSITE' | translate}}</h5>
                         <span><a href="{{result.properties.website}}" target="_blank" title="{{::result.properties.website}}">{{::result.properties.website}}</a></span>
                     </div>
                     <div ng-if="result.properties.booking" class="booking">
-                        <h5>{{::'BOOKING' | translate}}</h5>
+                        <h5>{{'BOOKING' | translate}}</h5>
                         <span>{{::result.properties.booking}}</span>
                     </div>
                     <div ng-if="result.properties.meeting_point" class="meeting-point">
-                        <h5>{{::'MEETING_POINT' | translate}}</h5>
+                        <h5>{{'MEETING_POINT' | translate}}</h5>
                         <span>{{::result.properties.meeting_point}}</span>
                     </div>
                     <div ng-if="result.properties.meeting_time" class="meeting-time">
-                        <h5>{{::'MEETING_TIME' | translate}}</h5>
+                        <h5>{{'MEETING_TIME' | translate}}</h5>
                         <span>{{::result.properties.meeting_time | date:'h:mm'}}</span>
                     </div>
                     <div ng-if="result.properties.organizer" class="organizer">
-                        <h5>{{::'ORGANIZERS' | translate}}</h5>
+                        <h5>{{'ORGANIZERS' | translate}}</h5>
                         <span>{{::result.properties.organizer}}</span>
                     </div>
                     <div ng-if="result.properties.participant_number" class="participant-number">
-                        <h5>{{::'PARTICIPANTS_NUMBER' | translate}}</h5>
+                        <h5>{{'PARTICIPANTS_NUMBER' | translate}}</h5>
                         <span>{{::result.properties.participant_number}}</span>
                     </div>
                     <div ng-if="result.properties.practical_info" class="practical-info">
-                        <h5>{{::'PRATICAL_INFOS' | translate}}</h5>
+                        <h5>{{'PRATICAL_INFOS' | translate}}</h5>
                         <div ng-bind-html="sanitizeData(result.properties.practical_info, true)"></div>
                     </div>
                     <div ng-if="result.properties.speaker" class="speaker">
-                        <h5>{{::'SPEAKERS' | translate}}</h5>
+                        <h5>{{'SPEAKERS' | translate}}</h5>
                         <span>{{::result.properties.speaker}}</span>
                     </div>
                 </div>
                 <div ng-if="result.properties.is_park_centered" class="is-park-centered">
                     <i class="fa fa-info-circle"></i>
-                    <p ng-if="!rulesId">{{:: 'PARK_CENTERED' | translate}}</p>
-                    <a ng-if="rulesId" ui-sref="layout.flat({flatID: rulesId})">{{:: 'PARK_CENTERED' | translate}}</a>
+                    <p ng-if="!rulesId">{{ 'PARK_CENTERED' | translate}}</p>
+                    <a ng-if="rulesId" ui-sref="layout.flat({flatID: rulesId})">{{ 'PARK_CENTERED' | translate}}</a>
                 </div>
                 <div ng-if="result.properties.advice" class="advice">
                     <i class="fa fa-exclamation-triangle"></i>
@@ -186,28 +186,28 @@
             </div>
             <div class="more-infos">
                 <div ng-if="result.properties.contentType === 'trek'" id="elevation">
-                    <h3><i class="fa fa-area-chart"></i>{{::'PROFILE_ALTI' | translate}}</h3>
+                    <h3><i class="fa fa-area-chart"></i>{{'PROFILE_ALTI' | translate}}</h3>
                     <div class="chart-container">
-                        <p class="axislabel">{{::'ELEVATIION_IN_M' | translate}}</p>
+                        <p class="axislabel">{{'ELEVATIION_IN_M' | translate}}</p>
                         <p id="elevation-details" class="axislabel">
-                            <span class="min">{{::'MIN' | translate}} <span class="value">{{:: result.properties.min_elevation }} m</span></span> -
-                            <span class="max">{{::'MAX' | translate}} <span class="value">{{:: result.properties.max_elevation }} m</span></span>
+                            <span class="min">{{'MIN' | translate}} <span class="value">{{:: result.properties.min_elevation }} m</span></span> -
+                            <span class="max">{{'MAX' | translate}} <span class="value">{{:: result.properties.max_elevation }} m</span></span>
                         </p>
                         <div class="canvas-container"></div>
-                        <span id="elevation-altitude"></span> <span class="axislabel">{{::'LENGTH_IN_M' | translate}}</span>
+                        <span id="elevation-altitude"></span> <span class="axislabel">{{'LENGTH_IN_M' | translate}}</span>
                         <p id="mouseoverprofil" class="axislabel" >&nbsp;</p>
                     </div>
                 </div>
                 <div ng-if="result.properties.public_transport" class="transport">
-                    <h3><i class="fa fa-bus"></i>{{:: 'TRANSPORTS' | translate}}</h3>
+                    <h3><i class="fa fa-bus"></i>{{ 'TRANSPORTS' | translate}}</h3>
                     <div class="card" ng-bind-html="sanitizeData(result.properties.public_transport, true)"></div>
                 </div>
                 <div ng-if="result.properties.access" class="access">
-                    <h3><i class="fa fa-road"></i>{{:: 'ACCESS' | translate}}</h3>
+                    <h3><i class="fa fa-road"></i>{{ 'ACCESS' | translate}}</h3>
                     <div class="card" ng-bind-html="sanitizeData(result.properties.access, true)"></div>
                 </div>
                 <div ng-if="result.properties.information_desks[0]" class="info-desks">
-                    <h3><i class="fa fa-info"></i>{{:: 'INFORMATION_DESKS' | translate}}</h3>
+                    <h3><i class="fa fa-info"></i>{{ 'INFORMATION_DESKS' | translate}}</h3>
                     <ul>
                         <li ng-repeat="desk in result.properties.information_desks" class="desk card">
                             <div class="infos">
@@ -236,7 +236,7 @@
                     </ul>
                 </div>
                 <div ng-if="result.properties.contact || result.properties.email" class="contact-card">
-                    <h3><i class="fa fa-tty"></i>{{:: 'CONTACT' | translate}}</h3>
+                    <h3><i class="fa fa-tty"></i>{{ 'CONTACT' | translate}}</h3>
                     <ul>
                         <li class="card">
                             <div class="contact" ng-if="result.properties.contact" ng-bind-html="sanitizeData(result.properties.contact, true)"></div>
@@ -247,25 +247,25 @@
 
                 <div ng-if="pois.length > 0 || nearElements.length > 0 || elementChildren.length > 0 || parentElement" class="interests">
                     <div class="children" ng-if="elementChildren.length > 0" ng-class="{collapsed: interestShown !== 'children'}">
-                        <h3 ng-click="toggleInterest('children')">{{::'CHILDREN' | translate}} <i class="fa fa-angle-down"></i></h3>
+                        <h3 ng-click="toggleInterest('children')">{{'CHILDREN' | translate}} <i class="fa fa-angle-down"></i></h3>
                         <div class="collapsor">
                             <children-liste></children-liste>
                         </div>
                     </div>
                     <div class="parent" ng-if="parentElement" ng-class="{collapsed: interestShown !== 'parent'}">
-                        <h3 ng-click="toggleInterest('parent')">{{::'PARENT' | translate}} <i class="fa fa-angle-down"></i></h3>
+                        <h3 ng-click="toggleInterest('parent')">{{'PARENT' | translate}} <i class="fa fa-angle-down"></i></h3>
                         <div class="collapsor">
                             <parent-liste></parent-liste>
                         </div>
                     </div>
                     <div class="near-elements" ng-if="nearElements.length > 0 " ng-class="{collapsed: interestShown !== 'near'}">
-                        <h3 ng-click="toggleInterest('near')">{{::'NEAR' | translate}} <i class="fa fa-angle-down"></i></h3>
+                        <h3 ng-click="toggleInterest('near')">{{'NEAR' | translate}} <i class="fa fa-angle-down"></i></h3>
                         <div class="collapsor">
                             <near-liste></near-liste>
                         </div>
                     </div>
                     <div class="pois" ng-if="pois.length > 0 && result.properties.contentType === 'trek'" ng-class="{collapsed: interestShown !== 'pois'}">
-                        <h3 ng-click="toggleInterest('pois')">{{::'POI' | translate}} <i class="fa fa-angle-down"></i></h3>
+                        <h3 ng-click="toggleInterest('pois')">{{'POI' | translate}} <i class="fa fa-angle-down"></i></h3>
                         <div class="collapsor">
                             <pois-liste></pois-liste>
                         </div>
@@ -273,7 +273,7 @@
                 </div>
 
                 <div ng-if="result.properties.web_links[0]" class="going-further">
-                    <h3><i class="fa fa-plus"></i>{{:: 'KNOW_MORE' | translate}}</h3>
+                    <h3><i class="fa fa-plus"></i>{{ 'KNOW_MORE' | translate}}</h3>
                     <ul ng-if="result.properties.web_links[0]" class="websites">
                         <li ng-repeat="link in result.properties.web_links">
                             <a href="{{::link.url}}" title="{{::link.name}}" target="_blank">

@@ -1,9 +1,9 @@
 <div class="filters-tags">
     <ul>
-        <li ng-repeat="filter in activeFiltersTags | orderBy:'typeId'" id="tag-{{filter.id}}" class="category-{{filter.typeId}}" ng-class="{'category-relative': filter.type === 'categories'}">
+        <li ng-repeat="filter in activeFiltersTags | orderBy:'typeId' track by filter.id" id="tag-{{::filter.id}}" class="category-{{::filter.typeId}}" ng-class="{'category-relative': filter.type === 'categories'}">
             <div class="remove" ng-click="removeFilterByTag(filter.queryLabel, filter.id)"><span>X</span></div>
             <div class="text">
-                <span>{{filter.label}}</span>
+                <span>{{::filter.label}}</span>
             </div>
         </li>
         <li ng-if="activeFiltersTags.length > 0" id="tag-reset" class="reset" ng-click="resetFilters()">

@@ -44,7 +44,7 @@
                             <input type="checkbox" id="route-{{::route.id}}" value="{{::route.id}}" ng-model="category.filters.route[route.id]"  ng-change="propagateFilters()"/>
                             <label for="route-{{::route.id}}">
                                 <ng-include src="route.pictogram"></ng-include>
-                                <span>{{route.label}}</span>
+                                <span>{{::route.label}}</span>
                             </label>
                         </div>
                     </div>

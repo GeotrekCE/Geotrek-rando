@@ -1,4 +1,4 @@
-<div class="category-{{result.properties.category.id}}">
+<div class="category-{{::result.properties.category.id}}">
     <ul class="detail-actions">
         <li class="back-to-home">
             <a href title="{{'BACK' | translate}}"  ng-click="back()" tooltip-placement="right" tooltip="{{'BACK' | translate}}">
@@ -7,19 +7,19 @@
             </a>
         </li>
         <li ng-if="result.properties.printable" class="print">
-            <a href="{{result.properties.printable}}" target="_self" title="{{'PRINT' | translate}}"  tooltip-placement="right" tooltip="{{'PRINT' | translate}}">
+            <a href="{{::result.properties.printable}}" target="_self" title="{{'PRINT' | translate}}"  tooltip-placement="right" tooltip="{{'PRINT' | translate}}">
                 <i class="fa fa-print"></i>
                 <span class="sr-only">{{'PRINT' | translate}}</span>
             </a>
         </li>
         <li class="favorites">
             <a href title="{{'REMOVE_FAVS' | translate}}" class="isFav" ng-if="isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="right" tooltip="{{'REMOVE_FAVS' | translate}}">
-                <i class="fa fa-{{favIcon}}"></i>
+                <i class="fa fa-{{::favIcon}}"></i>
                 <span class="sr-only">{{'REMOVE_FAVS' | translate}}</span>
             </a>
 
             <a href title="{{'ADD_FAVS' | translate}}" ng-if="!isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="right" tooltip="{{'ADD_FAVS' | translate}}">
-                <i class="fa fa-{{favIcon}}"></i>
+                <i class="fa fa-{{::favIcon}}"></i>
                 <span class="sr-only">{{'ADD_FAVS' | translate}}</span>
             </a>
         </li>
@@ -30,13 +30,13 @@
             </a>
         </li>
         <li ng-if="result.properties.kml" class="kml">
-            <a href="{{result.properties.kml}}" target="_self" title="{{'KML' | translate}}" tooltip-placement="right" tooltip="{{'KML' | translate}}">
+            <a href="{{::result.properties.kml}}" target="_self" title="{{'KML' | translate}}" tooltip-placement="right" tooltip="{{'KML' | translate}}">
                 <span class="txt-icon">KML</span>
                 <span class="sr-only">{{'KML' | translate}}</span>
             </a>
         </li>
         <li ng-if="result.properties.gpx" class="gpx">
-            <a href="{{result.properties.gpx}}" target="_self" title="{{'GPX' | translate}}" tooltip-placement="right" tooltip="{{'GPX' | translate}}">
+            <a href="{{::result.properties.gpx}}" target="_self" title="{{'GPX' | translate}}" tooltip-placement="right" tooltip="{{'GPX' | translate}}">
                 <span class="txt-icon">GPX</span>
                 <span class="sr-only">{{'GPX' | translate}}</span>
             </a>

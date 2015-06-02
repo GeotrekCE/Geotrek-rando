@@ -1,18 +1,18 @@
 <ul class="near-liste">
-    <li ng-repeat="near in nearElements" id="near-category-{{near.properties.category.id}}-{{near.id}}" class="near category-{{near.properties.category.id}} card">
+    <li ng-repeat="near in nearElements track by near.properties.category.id + '-' + near.id" id="near-category-{{::near.properties.category.id}}-{{::near.id}}" class="near category-{{::near.properties.category.id}} card">
         <div class="fav-or-not" ng-click="toggleFavorites(near)" ng-class="{isFav: isInFavorites(near)}">
-            <i class="fa fa-{{favIcon}}"></i>
+            <i class="fa fa-{{::favIcon}}"></i>
         </div>
         <a ui-sref="layout.detail({catSlug: near.properties.category.slug, slug: near.properties.slug})" class="card-part" ng-mouseover="hoverMarkerNear(near,'enter')" ng-mouseleave="hoverMarkerNear(near,'leave')">
             <div class="picture">
-                <img ng-if="near.properties.pictures[0]" ng-src="{{near.properties.pictures[0].url}}" ng-alt="{{near.properties.type.label}}">
-                <img ng-if="!near.properties.pictures[0]" ng-src="{{$root.placeHolderImage}}" alt="placeholder image">
+                <img ng-if="near.properties.pictures[0]" ng-src="{{::near.properties.pictures[0].url}}" ng-alt="{{::near.properties.type.label}}">
+                <img ng-if="!near.properties.pictures[0]" ng-src="{{::$root.placeHolderImage}}" alt="placeholder image">
             </div>
             <div class="cat-icon">
                 <ng-include ng-if="isSVG(near.properties.category.pictogram)" src="near.properties.category.pictogram"></ng-include>
-                <img ng-if="!isSVG(near.properties.category.pictogram)" ng-src="{{near.properties.category.pictogram}}" ng-alt="{{near.properties.category.label}}">
+                <img ng-if="!isSVG(near.properties.category.pictogram)" ng-src="{{::near.properties.category.pictogram}}" ng-alt="{{::near.properties.category.label}}">
             </div>
-            <span class="title">{{near.properties.name}}</span>
+            <span class="title">{{::near.properties.name}}</span>
             <div class="know-more">
                 <span>+</span>
             </div>

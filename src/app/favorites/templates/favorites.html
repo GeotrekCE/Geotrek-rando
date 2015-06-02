@@ -1,11 +1,11 @@
 <li class="favorites dropdown">
-    <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" tooltip-placement="bottom" tooltip="{{::'FAVORITES' | translate}}">
-        <span class="fa fa-{{::favIcon}}"></span><span class="visible-xs-inline">{{::'FAVORITES' | translate}}</span>
+    <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" tooltip-placement="bottom" tooltip="{{'FAVORITES' | translate}}">
+        <span class="fa fa-{{::favIcon}}"></span><span class="visible-xs-inline">{{'FAVORITES' | translate}}</span>
     </a>
     <div class="dropdown-menu" role="menu">
         <div class="favorites-liste">
             <div class="header">
-                <span class="hidden-xs">{{::'FAVORITES' | translate}}</span>
+                <span class="hidden-xs">{{'FAVORITES' | translate}}</span>
                 <div class="remove" ng-click="removeAllFavorites(); $event.stopPropagation();" ng-if="favorites && favorites.length > 0"><i class="fa fa-trash"></i></div>
             </div>
             <ul ng-if="favorites && favorites.length > 0">
@@ -21,7 +21,7 @@
                     </div>
                 </li>
             </ul>
-            <div ng-if="!favorites || favorites.length === 0" class="no-favorites">{{::'NO_FAVORITES' | translate}}</div>
+            <div ng-if="!favorites || favorites.length === 0" class="no-favorites">{{'NO_FAVORITES' | translate}}</div>
         </div>
     </div>
 </li>

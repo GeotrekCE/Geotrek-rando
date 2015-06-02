@@ -2,10 +2,10 @@
     <i class="fa fa-times"></i>
 </div>
 <carousel interval="myInterval">
-    <slide ng-repeat="slide in slides" active="slide.active">
-        <img ng-src="{{slide.url}}" style="margin: auto; margin-top: {{slide.marginTop}};">
+    <slide ng-repeat="slide in slides track by slide.url" active="slide.active">
+        <img ng-src="{{::slide.url}}" style="margin: auto; margin-top: {{::slide.marginTop}};">
         <div class="carousel-caption">
-            <p>{{slide.text}}</p>
+            <p>{{::slide.text}}</p>
         </div>
     </slide>
 </carousel>
