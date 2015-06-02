@@ -1,37 +1,37 @@
 <ul class="categories">
-    <li ng-repeat="category in categories | orderBy: 'order'" class="category {{category.cat_class}}" ng-class="{active : category.active}" ng-id="cat-{{category.id}}">
+    <li ng-repeat="category in categories track by category.id | orderBy: 'order'" class="category {{::category.cat_class}}" ng-class="{active : category.active}" id="cat-{{::category.id}}">
         <a href ng-click="toggleCategory(category)">
             <ng-include ng-if="isSVG(category.pictogram)" src="category.pictogram"></ng-include>
-            <img ng-if="!isSVG(category.pictogram)" src="{{category.pictogram}}">
+            <img ng-if="!isSVG(category.pictogram)" src="{{::category.pictogram}}">
         </a>
         <div class="filters">
             <form>
                 <div class="category-name" ng-click="toggleCategory(category)">
                     <i ng-if="category.active" class="fa fa-check-circle-o"></i>
-                    <span>{{category.label}}</span>
+                    <span>{{::category.label}}</span>
                 </div>
 
                 <div ng-if="category.type1 && category.type1.values.length > 0" class="selector type1" ng-class="{empty: category.type1.values.length === 0, opened: type1IsCollapsed}">
-                    <span ng-click="type1IsCollapsed = !type1IsCollapsed"><i class="fa fa-plus"></i> {{category.type1_label}}</span>
+                    <span ng-click="type1IsCollapsed = !type1IsCollapsed"><i class="fa fa-plus"></i> {{::category.type1_label}}</span>
                     <div class="choices" collapse="!type1IsCollapsed">
                         <div ng-repeat="type1 in category.type1.values" class="type1 form-group">
-                            <input type="checkbox" id="type1-{{type1.id}}" value="{{type1.id}}" ng-model="category.filters.type1[type1.id]"  ng-change="propagateFilters()"/>
-                            <label for="type1-{{type1.id}}">
-                                <span ng-if="type1.name">{{type1.name}}</span>
-                                <span ng-if="type1.label">{{type1.label}}</span>
+                            <input type="checkbox" id="type1-{{::type1.id}}" value="{{::type1.id}}" ng-model="category.filters.type1[type1.id]"  ng-change="propagateFilters()"/>
+                            <label for="type1-{{::type1.id}}">
+                                <span ng-if="type1.name">{{::type1.name}}</span>
+                                <span ng-if="type1.label">{{::type1.label}}</span>
                             </label>
                         </div>
                     </div>
                 </div>
 
                 <div ng-if="category.type2 && category.type2.values.length > 0" class="selector type2" ng-class="{empty: category.type2.values.length === 0, opened: type2IsCollapsed}">
-                    <span ng-click="type2IsCollapsed = !type2IsCollapsed"><i class="fa fa-plus"></i> {{category.type2_label}}</span>
+                    <span ng-click="type2IsCollapsed = !type2IsCollapsed"><i class="fa fa-plus"></i> {{::category.type2_label}}</span>
                     <div class="choices" collapse="!type2IsCollapsed">
                         <div ng-repeat="type2 in category.type2.values" class="type2 form-group">
-                            <input type="checkbox" id="type2-{{type2.id}}" value="{{type2.id}}" ng-model="category.filters.type2[type2.id]"  ng-change="propagateFilters()"/>
+                            <input type="checkbox" id="type2-{{::type2.id}}" value="{{::type2.id}}" ng-model="category.filters.type2[type2.id]"  ng-change="propagateFilters()"/>
                             <label for="type2-{{type2.id}}">
-                                <span ng-if="type2.name">{{type2.name}}</span>
-                                <span ng-if="type2.label">{{type2.label}}</span>
+                                <span ng-if="type2.name">{{::type2.name}}</span>
+                                <span ng-if="type2.label">{{::type2.label}}</span>
                             </label>
                         </div>
                     </div>
@@ -41,8 +41,8 @@
                     <span ng-click="routeIsCollapsed = !routeIsCollapsed"><i class="fa fa-plus"></i> {{'ROUTES' | translate}}</span>
                     <div class="choices" collapse="!routeIsCollapsed">
                         <div ng-repeat="route in category.routes.values" class="route form-group">
-                            <input type="checkbox" id="route-{{route.id}}" value="{{route.id}}" ng-model="category.filters.route[route.id]"  ng-change="propagateFilters()"/>
-                            <label for="route-{{route.id}}">
+                            <input type="checkbox" id="route-{{::route.id}}" value="{{::route.id}}" ng-model="category.filters.route[route.id]"  ng-change="propagateFilters()"/>
+                            <label for="route-{{::route.id}}">
                                 <ng-include src="route.pictogram"></ng-include>
                                 <span>{{route.label}}</span>
                             </label>
@@ -62,9 +62,9 @@
                         {{category.difficulty.values[category.difficulty.min].label}}
                     </span>
                     <div class="slider-container">
-                        <slider ng-model-low="category.difficulty.min" ng-model-high="category.difficulty.max" floor="0" ceiling="{{category.difficulty.values.length - 1}}" step="1"></slider>
-                        <label class="min-label">{{category.difficulty.values[0].label}}</label>
-                        <label class="max-label">{{category.difficulty.values[category.difficulty.values.length - 1].label}}</label>
+                        <slider ng-model-low="category.difficulty.min" ng-model-high="category.difficulty.max" floor="0" ceiling="{{::category.difficulty.values.length - 1}}" step="1"></slider>
+                        <label class="min-label">{{::category.difficulty.values[0].label}}</label>
+                        <label class="max-label">{{::category.difficulty.values[category.difficulty.values.length - 1].label}}</label>
                     </div>
                 </div>
 
@@ -80,9 +80,9 @@
                         {{category.duration.values[category.duration.min].label}}
                     </span>
                     <div class="slider-container">
-                        <slider ng-model-low="category.duration.min" ng-model-high="category.duration.max" floor="0" ceiling="{{category.duration.values.length - 1}}" step="1"></slider>
-                        <label class="min-label">{{category.duration.values[0].label}}</label>
-                        <label class="max-label">{{category.duration.values[category.duration.values.length - 1].label}}</label>
+                        <slider ng-model-low="category.duration.min" ng-model-high="category.duration.max" floor="0" ceiling="{{::category.duration.values.length - 1}}" step="1"></slider>
+                        <label class="min-label">{{::category.duration.values[0].label}}</label>
+                        <label class="max-label">{{::category.duration.values[category.duration.values.length - 1].label}}</label>
                     </div>
                 </div>
 
@@ -98,9 +98,9 @@
                         {{category.ascent.values[category.ascent.min].label}}
                     </span>
                     <div class="slider-container">
-                        <slider ng-model-low="category.ascent.min" ng-model-high="category.ascent.max" floor="0" ceiling="{{category.ascent.values.length - 1}}" step="1"></slider>
-                        <label class="min-label">{{category.ascent.values[0].label}}</label>
-                        <label class="max-label">{{category.ascent.values[category.ascent.values.length - 1].label}}</label>
+                        <slider ng-model-low="category.ascent.min" ng-model-high="category.ascent.max" floor="0" ceiling="{{::category.ascent.values.length - 1}}" step="1"></slider>
+                        <label class="min-label">{{::category.ascent.values[0].label}}</label>
+                        <label class="max-label">{{::category.ascent.values[category.ascent.values.length - 1].label}}</label>
                     </div>
                 </div>
 
@@ -116,9 +116,9 @@
                         {{category.eLength.values[category.eLength.min].label}}
                     </span>
                     <div class="slider-container">
-                        <slider ng-model-low="category.eLength.min" ng-model-high="category.eLength.max" floor="0" ceiling="{{category.eLength.values.length - 1}}" step="1"></slider>
-                        <label class="min-label">{{category.eLength.values[0].label}}</label>
-                        <label class="max-label">{{category.eLength.values[category.eLength.values.length - 1].label}}</label>
+                        <slider ng-model-low="category.eLength.min" ng-model-high="category.eLength.max" floor="0" ceiling="{{::category.eLength.values.length - 1}}" step="1"></slider>
+                        <label class="min-label">{{::category.eLength.values[0].label}}</label>
+                        <label class="max-label">{{::category.eLength.values[category.eLength.values.length - 1].label}}</label>
                     </div>
                 </div>
             </form>
