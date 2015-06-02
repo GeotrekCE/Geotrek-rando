@@ -23,6 +23,5 @@ src/app/custom/directives.js
 src/app/custom/controllers.js
 src/app/custom/services.js
 #
-# Po files
-src/app/translation/po/fr-custom.po
-src/app/translation/po/en-custom.po
+# Custom po files
+src/app/translation/po/*-custom.po
