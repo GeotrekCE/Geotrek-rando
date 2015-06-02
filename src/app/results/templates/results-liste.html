@@ -7,35 +7,35 @@
     </div>
     <div class="results">
         <ul>
-            <li ng-repeat="result in results | orderBy:'properties.name'" id="result-category-{{result.properties.category.id}}-{{result.id}}" ng-mouseover="hoverLayerElement(result,'enter')" ng-mouseleave="hoverLayerElement(result,'leave')" class="result category-{{result.properties.category.id}}">
+            <li ng-repeat="result in results | orderBy:'properties.name' track by result.properties.category.id + '-' + result.id" id="result-category-{{::result.properties.category.id}}-{{::result.id}}" ng-mouseover="hoverLayerElement(result,'enter')" ng-mouseleave="hoverLayerElement(result,'leave')" class="result category-{{::result.properties.category.id}}">
 
                 <div>
                     <div class="fav-or-not" ng-click="toggleFavorites(result)" ng-class="{isFav: isInFavorites(result)}">
-                        <i class="fa fa-{{favIcon}}"></i>
+                        <i class="fa fa-{{::favIcon}}"></i>
                     </div>
                     <a ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: result.properties.slug})">
                         <div class="visual">
-                            <img ng-if="result.properties.pictures[0]" ng-src="{{result.properties.pictures[0].url}}" ng-alt="{{result.properties.pictures[0].title}}">
-                            <img ng-if="!result.properties.pictures[0]" ng-src="{{$root.placeHolderImage}}" alt="placeholder image">
+                            <img ng-if="result.properties.pictures[0]" ng-src="{{::result.properties.pictures[0].url}}" ng-alt="{{::result.properties.pictures[0].title}}">
+                            <img ng-if="!result.properties.pictures[0]" ng-src="{{::$root.placeHolderImage}}" alt="placeholder image">
                         </div>
                         <h1 class="title">
-                            {{result.properties.name}}
+                            {{::result.properties.name}}
                         </h1>
                         <div class="infos">
-                            <span ng-if="result.properties.begin_date" class="begin-date">{{result.properties.begin_date | date:'dd/MM/yyyy'}}</span>
-                            <span ng-if="result.properties.end_date && result.properties.begin_date !== result.properties.end_date" class="end-date">{{result.properties.end_date | date:'dd/MM/yyyy'}}</span>
-                            <span ng-if="result.properties.cities[0]" class="cities">{{result.properties.cities[0].name}}</span>
-                            <span ng-if="result.properties.duration_pretty" class="duration">{{result.properties.duration_pretty}}</span>
-                            <span ng-if="result.properties.ascent" class="ascent">{{'ASCENT' | translate}} {{result.properties.ascent}} m</span>
-                            <span ng-if="result.properties.difficulty" class="difficulty">{{result.properties.difficulty.label}}</span>
-                            <span ng-if="result.properties.type1[0]" class="type1">{{result.properties.type1[0].name}}</span>
-                            <span ng-if="result.properties.type2[0]" class="type2">{{result.properties.type2[0].name}}</span>
-                            <span ng-if="result.properties.target_audience" class="target">{{result.properties.target_audience}}</span>
+                            <span ng-if="result.properties.begin_date" class="begin-date">{{::result.properties.begin_date | date:'dd/MM/yyyy'}}</span>
+                            <span ng-if="result.properties.end_date && result.properties.begin_date !== result.properties.end_date" class="end-date">{{::result.properties.end_date | date:'dd/MM/yyyy'}}</span>
+                            <span ng-if="result.properties.cities[0]" class="cities">{{::result.properties.cities[0].name}}</span>
+                            <span ng-if="result.properties.duration_pretty" class="duration">{{::result.properties.duration_pretty}}</span>
+                            <span ng-if="result.properties.ascent" class="ascent">{{::'ASCENT' | translate}} {{result.properties.ascent}} m</span>
+                            <span ng-if="result.properties.difficulty" class="difficulty">{{::result.properties.difficulty.label}}</span>
+                            <span ng-if="result.properties.type1[0]" class="type1">{{::result.properties.type1[0].name}}</span>
+                            <span ng-if="result.properties.type2[0]" class="type2">{{::result.properties.type2[0].name}}</span>
+                            <span ng-if="result.properties.target_audience" class="target">{{::result.properties.target_audience}}</span>
                         </div>
                         <ul class="themes">
                             <li ng-repeat="theme in result.properties.themes">
                                 <ng-include ng-if="isSVG(theme.pictogram)" src="theme.pictogram"></ng-include>
-                                <img ng-if="!isSVG(theme.pictogram)" ng-src="{{theme.pictogram}}" ng-alt="{{theme.label}}">
+                                <img ng-if="!isSVG(theme.pictogram)" ng-src="{{::theme.pictogram}}" ng-alt="{{::theme.label}}">
                             </li>
                         </ul>
                         <div class="know-more">
@@ -46,7 +46,7 @@
             </li>
         </ul>
         <div class="no-results" ng-if="results.length === 0">
-            <span>{{'NO_RESULTS' | translate}}</span>
+            <span>{{::'NO_RESULTS' | translate}}</span>
         </div>
     </div>
 </section>
