@@ -30,7 +30,16 @@ module.exports = {
         }
     },
     sass: {
-        src: src + '/' + appFolder + '/rando.{sass,scss}',
+        files: [
+            {
+                src: src + '/' + appFolder + '/rando.{sass,scss}',
+                outputName: 'rando.css'
+            },
+            {
+                src: src + '/' + appFolder + '/vendors/styles/vendors.{sass,scss}',
+                outputName: 'rando-vendors.css'
+            }
+        ],
         dest: dest,
         toWatch: src + '/' + appFolder + '/**/*.scss',
         settings: {

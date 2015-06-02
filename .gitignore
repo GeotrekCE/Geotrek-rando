@@ -9,6 +9,7 @@ npm-debug.log
 src/rando.js
 src/rando-vendors.js
 src/rando.css
+src/rando-vendors.css
 
 
 # Prevent custom files to be pushed

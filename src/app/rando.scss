@@ -1,10 +1,8 @@
 // GEOTREK RANDO STYLE
 
-$icon-font-path: "./app/vendors/fonts/bootstrap/";
 $root-images-path: "./images/";
-$vendors-images-path: "./app/vendors/images/";
 
-@import 'vendors/styles/_vendors';
+//@import 'vendors/styles/_vendors';
 @import 'commons/styles/_mixins';
 @import 'config/styles/_config-default';
 @import 'config/styles/_config';

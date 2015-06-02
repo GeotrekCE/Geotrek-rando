@@ -1,0 +1,11 @@
+//we don't import vendors Scss in main file to prevent to many rules in one doc fore IE9
+$fa-font-path: "/app/vendors/fonts/fontawesome/";
+$icon-font-path: "./app/vendors/fonts/bootstrap/";
+$root-images-path: "./images/";
+$vendors-images-path: "./app/vendors/images/";
+
+@import '_font-awesome';
+@import '_bootstrap';
+@import '_leaflet-main';
+@import '_clusters';
+@import '_slider';
