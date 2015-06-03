@@ -74,6 +74,12 @@ msgstr "Aankomst"
 msgid "LOOP"
 msgstr "Vertrek/Aankomst"
 
+msgid "TOWN_START"
+msgstr "Starting town:"
+
+msgid "TOWN_CROSSED"
+msgstr "Crossed towns:"
+
 msgid "PARK_CENTERED"
 msgstr "Deze route gaat door het hart van een nationaal park, houdt u zich alstublieft aan de regels"
 

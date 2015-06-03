@@ -276,6 +276,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         promise
             .then(
                 function (result) {
+                    console.log(result);
                     $scope.result = result;
                     $rootScope.elementsLoading --;
                     getInterests(result, forceRefresh);

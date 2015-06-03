@@ -77,6 +77,12 @@ msgstr "Arrivée :"
 msgid "LOOP"
 msgstr "Départ / Arrivée :"
 
+msgid "TOWN_START"
+msgstr "Commune de départ :"
+
+msgid "TOWN_CROSSED"
+msgstr "Communes traversées :"
+
 msgid "PARK_CENTERED"
 msgstr "Cet itinéraire est dans le coeur du parc national, veuillez consulter la réglementation."
 
