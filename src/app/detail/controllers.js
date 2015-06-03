@@ -211,7 +211,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                 )
         );
 
-        if (result.properties.children.length > 0) {
+        if (result.properties.children && result.properties.children.length > 0) {
             promises.push(
                 getChildren(result)
                     .then(
