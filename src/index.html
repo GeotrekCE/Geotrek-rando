@@ -3,10 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Geotrek rando</title>
-  <meta name="description" content="">
+  <title>{{$root.metaTitle}}</title>
+  <meta name="description" content="{{$root.metaDescription}}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <base href="/">
   <meta ng-repeat="tag in $root.twitterTags" name="{{tag.name}}" content="{{tag.content}}">
   <meta ng-repeat="tag in $root.facebookTags" property="{{tag.property}}" content="{{tag.content}}">
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
