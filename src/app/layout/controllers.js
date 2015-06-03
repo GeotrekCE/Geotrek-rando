@@ -16,6 +16,23 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
         ga('create', globalSettings.GOOGLE_ANALYTICS_ID, 'auto');
     }
 
+    function iniDefaultMeta() {
+        if ($state.current.name === 'layout.root') {
+            $translate(['DEFAULT_META_TITLE', 'DEFAULT_META_DESCRIPTION'])
+                .then(
+                    function (translation) {
+                        $rootScope.metaTitle = translation.DEFAULT_META_TITLE;
+                        $rootScope.metaDescription = translation.DEFAULT_META_DESCRIPTION;
+                    },
+                    function (err) {
+                        console.log(err);
+                    }
+                );
+        }
+    }
+
+    iniDefaultMeta();
+
     if (globalSettings.GOOGLE_ANALYTICS_ID) {
         initAnalytics();
     }
@@ -32,6 +49,10 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
         // to be used for back button //won't work when page is reloaded.
         $rootScope.previousState_name = fromState.name;
         $rootScope.currentState_name = toState.name;
+
+        if (toState.name === 'layout.root') {
+            iniDefaultMeta();
+        }
     });
     //back button function called from back button's ng-click="back()"
     $rootScope.back = function () {

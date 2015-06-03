@@ -13,9 +13,9 @@
                 <ng-include ng-if="!$root.mapIsShown" src="'/images/icons/map.svg'"></ng-include>
                 <ng-include ng-if="$root.mapIsShown" src="'/images/icons/results.svg'"></ng-include>
             </div>
-            <a class="navbar-brand" ui-sref="layout.root">
+            <a class="navbar-brand" ui-sref="layout.root" title="{{'DEFAULT_META_TITLE' | translate}}">
                 <div ng-if="logo" id="logo">
-                    <img ng-src="./images/custom/{{logo}}">
+                    <img ng-src="./images/custom/{{logo}}" alt="{{'LOGO_ALT' | translate}}">
                 </div>
                 <div id="banner">
                     <h1>{{'BANNER_TEXT' | translate}}</h1>

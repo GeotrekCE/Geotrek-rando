@@ -12,6 +12,17 @@ msgstr ""
 "Language: fr\n"
 "X-Generator: Poedit 1.7.4\n"
 
+# META
+#
+#
+
+msgid "DEFAULT_META_TITLE"
+msgstr "Geotrek Rando"
+
+msgid "DEFAULT_META_DESCRIPTION"
+msgstr "Geotrek est une web app permettant de préparer à l'avance ses randonnées !"
+
+
 
 # CATEGORIES
 #
@@ -272,6 +283,14 @@ msgstr "Ne plus montrer cette page"
 
 msgid "SUGGESTED"
 msgstr "Nos coups de coeur :"
+
+
+# HEADER
+#
+#
+
+msgid "LOGO_ALT"
+msgstr "Logo Geotrek"
 
 
 # FOOTER

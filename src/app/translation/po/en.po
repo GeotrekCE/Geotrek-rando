@@ -13,6 +13,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: en\n"
 
+# META
+#
+#
+
+msgid "DEFAULT_META_TITLE"
+msgstr "Geotrek Rando"
+
+msgid "DEFAULT_META_DESCRIPTION"
+msgstr "Geotrek is a web app allowing you to prepare your next trekking trip !"
+
+
 
 # CATEGORIES
 #
@@ -276,6 +287,15 @@ msgstr "Don't display this page anymore"
 
 msgid "SUGGESTED"
 msgstr "The ones we love:"
+
+
+# HEADER
+#
+#
+
+msgid "LOGO_ALT"
+msgstr "Geotrek logo"
+
 
 
 # FOOTER

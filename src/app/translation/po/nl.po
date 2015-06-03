@@ -12,6 +12,17 @@ msgstr ""
 "Language: nl\n"
 "X-Generator: Poedit 1.7.4\n"
 
+# META
+#
+#
+
+msgid "DEFAULT_META_TITLE"
+msgstr "Geotrek Rando"
+
+msgid "DEFAULT_META_DESCRIPTION"
+msgstr "Geotrek is een web app zodat u uw volgende trekking reis !"
+
+
 
 # CATEGORIES
 #
@@ -263,6 +274,14 @@ msgstr "Laat me deze pagina niet meer zien"
 
 msgid "SUGGESTED"
 msgstr "Onze aanbevelingen"
+
+
+# HEADER
+#
+#
+
+msgid "LOGO_ALT"
+msgstr "Geotrek logo"
 
 
 # FOOTER

@@ -8,6 +8,8 @@ function FlatPagesController(utilsFactory, flatService, $scope, $state, $rootSco
         flatService.getAFlatPage(page)
             .then(
                 function (pageData) {
+                    $rootScope.metaTitle = pageData.title;
+                    $rootScope.metaDescription = pageData.title;
                     $scope.flatPage = pageData;
                     if (!isNaN(utilsFactory.isTrueInt(page))) {
                         $state.go('layout.flat', {flatID: $scope.flatPage.slug});
