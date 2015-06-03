@@ -7,7 +7,7 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
         _.forEach($scope.categories, function (category) {
 
             category.active  = false;
-            category.open    = false;
+            category.open    = category.open | false;
             category.filters = {};
             if (currentQuery.categories) {
                 var categoriesArray = currentQuery.categories;
