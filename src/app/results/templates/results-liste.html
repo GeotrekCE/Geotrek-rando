@@ -28,8 +28,8 @@
                             <span ng-if="result.properties.duration_pretty" class="duration">{{::result.properties.duration_pretty}}</span>
                             <span ng-if="result.properties.ascent" class="ascent">{{::'ASCENT' | translate}} {{result.properties.ascent}} m</span>
                             <span ng-if="result.properties.difficulty" class="difficulty">{{::result.properties.difficulty.label}}</span>
-                            <span ng-if="result.properties.type1[0]" class="type1">{{::result.properties.type1[0].name}}</span>
-                            <span ng-if="result.properties.type2[0]" class="type2">{{::result.properties.type2[0].name}}</span>
+                            <span ng-if="result.properties.type1[0] && result.properties.contentType !== 'trek'" class="type1">{{::result.properties.type1[0].name}}</span>
+                            <span ng-if="result.properties.type2[0] && result.properties.contentType !== 'trek'" class="type2">{{::result.properties.type2[0].name}}</span>
                             <span ng-if="result.properties.target_audience" class="target">{{::result.properties.target_audience}}</span>
                         </div>
                         <ul class="themes">
