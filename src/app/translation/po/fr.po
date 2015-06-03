@@ -101,6 +101,9 @@ msgstr "Contact"
 msgid "KNOW_MORE"
 msgstr "En savoir plus"
 
+msgid "RELATED_TREKS"
+msgstr "Itinéraires liés"
+
 msgid "POI"
 msgstr "Patrimoine"
 
