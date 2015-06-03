@@ -294,7 +294,15 @@
 
     .slider-container {
         padding: 0 2em .75em 2.5em;
+
+        label {
+            opacity: 0;
+            transition: all 0.5s ease-out;
+        }
     }
-
-
+    &:hover {
+        .slider-container label {
+            opacity: 1;
+        }
+    }
 }
