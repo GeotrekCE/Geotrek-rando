@@ -123,6 +123,10 @@ function SidebarDetailController($scope, $rootScope, $modal, $stateParams, $loca
         });
     };
 
+    $scope.showWarningPanel = function () {
+        $rootScope.$broadcast('showWarningPanel', {result: $scope.result});
+    };
+
     $scope.favIcon = (globalSettings.FAVORITES_ICON ? globalSettings.FAVORITES_ICON : 'heart');
     $scope.isInFavorites = favoritesService.isInFavorites;
 
