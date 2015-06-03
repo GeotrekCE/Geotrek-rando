@@ -1,8 +1,13 @@
 @mixin categories-list-coloring() {
     @each $category in $categories {
         &.category-#{nth($category, 1)} {
-            &:hover a svg {
-                fill: nth($category, 2);
+            &.open a {
+                svg {
+                    fill: nth($category, 2);
+                }
+                &:after {
+                    color: nth($category, 2);
+                }
             }
             &.active {
                 a {
