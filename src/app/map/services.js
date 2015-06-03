@@ -1099,12 +1099,12 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
             iconAnchor: [17, 48],
             labelAnchor: [17, 17]
         },
-        poi_base: {
-            iconUrl: '',
-            iconSize: [34, 34],
-            iconAnchor: [17, 34],
+        poi_base: globalSettings.POI_BASE_ICON || {
+            iconUrl: '/images/map/category_base.svg',
+            iconSize: [34, 48],
+            iconAnchor: [17, 48],
             labelAnchor: [17, 17]
-        }
+        },
     };
 
     this.getCategoriesIcons = function () {
@@ -1395,16 +1395,22 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
 
     this.getPOIIcon = function (poi) {
         var deferred = $q.defer(),
-            markerIcon,
-            poiIcon;
+            baseIcon = null,
+            poiIcon = null,
+            promises = [];
 
-        $q.all([
-            /*self.getSVGIcon(self.icons_liste.poi_base.iconUrl, 'poi_base')
-                .then(
-                    function (icon) {
-                        markerIcon = icon;
-                    }
-                ),*/
+        if (self.icons_liste.poi_base.iconUrl) {
+            promises.push(
+                self.getSVGIcon(self.icons_liste.poi_base.iconUrl, 'poi_base')
+                    .then(
+                        function (icon) {
+                            baseIcon = icon;
+                        }
+                    )
+            );
+        }
+
+        promises.push(
             self.getAPoiTypeIcon(poi.properties.type.id, false)
                 .then(
                     function (icon) {
@@ -1415,22 +1421,35 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
                         }
                     }
                 )
-        ]).then(
-            function () {
-                var markup = '' +
-                    '<div class="marker" data-popup="' + poi.properties.name + '">' +
-                        '<div class="icon">' + poiIcon + '</div>' +
-                    '</div>';
-                var newIcon = new L.divIcon({
-                    html: markup,
-                    iconSize: self.icons_liste.poi_base.iconSize,
-                    iconAnchor: self.icons_liste.poi_base.iconAnchor,
-                    labelAnchor: self.icons_liste.poi_base.labelAnchor,
-                    className: 'double-marker popup poi layer-' + poi.properties.type.id + '-' + poi.id + ' ' + poi.properties.type.id
-                });
-                deferred.resolve(newIcon);
-            }
         );
+
+        $q.all(promises)
+            .then(
+                function () {
+
+                    if (baseIcon) {
+                        var markup = '' +
+                            '<div class="marker" data-popup="' + poi.properties.name + '">' +
+                                baseIcon +
+                            '</div>' +
+                            '<div class="icon">' + poiIcon + '</div>';
+                    } else {
+                       var markup = '' +
+                            '<div class="marker" data-popup="' + poi.properties.name + '">' +
+                                '<div class="icon">' + poiIcon + '</div>' +
+                            '</div>'; 
+                    }
+                    
+                    var newIcon = new L.divIcon({
+                        html: markup,
+                        iconSize: self.icons_liste.poi_base.iconSize,
+                        iconAnchor: self.icons_liste.poi_base.iconAnchor,
+                        labelAnchor: self.icons_liste.poi_base.labelAnchor,
+                        className: 'double-marker popup poi layer-' + poi.properties.type.id + '-' + poi.id + ' category-' + poi.properties.type.id
+                    });
+                    deferred.resolve(newIcon);
+                }
+            );
 
         return deferred.promise;
 
