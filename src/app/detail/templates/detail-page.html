@@ -121,8 +121,12 @@
                             {{::result.properties.arrival}}
                         </span>
                         <span ng-if="!result.properties.departure && !result.properties.arrival && result.properties.cities[0]">
-                            Commune de départ : {{::result.properties.cities[0].name}}
+                            {{ 'TOWN_START' | translate}} {{::result.properties.cities[0].name}}
                         </span>
+                        <div ng-if="result.properties.cities.length > 1">
+                            <span>{{ 'TOWN_CROSSED' | translate}}</span>
+                            <span ng-if="!$first" ng-repeat="city in result.properties.cities track by city.code">{{::city.name}}</span>
+                        </div>
                     </div>
                 </div>
             </div>

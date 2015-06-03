@@ -78,6 +78,12 @@ msgstr "Arrival:"
 msgid "LOOP"
 msgstr "Start / Arrival:"
 
+msgid "TOWN_START"
+msgstr "Starting town:"
+
+msgid "TOWN_CROSSED"
+msgstr "Crossed towns:"
+
 msgid "PARK_CENTERED"
 msgstr "Park centered"
 

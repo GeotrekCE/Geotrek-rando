@@ -74,6 +74,12 @@ msgstr "Ziel:"
 msgid "LOOP"
 msgstr "Start/Ziel:"
 
+msgid "TOWN_START"
+msgstr "Starting town:"
+
+msgid "TOWN_CROSSED"
+msgstr "Crossed towns:"
+
 msgid "PARK_CENTERED"
 msgstr "Diese Route liegt im Herzen des Nationalparks. Folgen Sie bitten den Vorschriften."
 
