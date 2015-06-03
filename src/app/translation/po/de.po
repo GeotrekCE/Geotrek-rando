@@ -75,10 +75,10 @@ msgid "LOOP"
 msgstr "Start/Ziel:"
 
 msgid "TOWN_START"
-msgstr "Starting town:"
+msgstr "Start Stadt:"
 
 msgid "TOWN_CROSSED"
-msgstr "Crossed towns:"
+msgstr "querte Stadt:"
 
 msgid "PARK_CENTERED"
 msgstr "Diese Route liegt im Herzen des Nationalparks. Folgen Sie bitten den Vorschriften."
@@ -97,6 +97,9 @@ msgstr "Kontakt"
 
 msgid "KNOW_MORE"
 msgstr "weitere Informationen"
+
+msgid "RELATED_TREKS"
+msgstr "verwandte Wanderungen"
 
 msgid "POI"
 msgstr "Kulturerbe"

@@ -75,10 +75,10 @@ msgid "LOOP"
 msgstr "Vertrek/Aankomst"
 
 msgid "TOWN_START"
-msgstr "Starting town:"
+msgstr "Beginnend stad:"
 
 msgid "TOWN_CROSSED"
-msgstr "Crossed towns:"
+msgstr "Gekruist stad:"
 
 msgid "PARK_CENTERED"
 msgstr "Deze route gaat door het hart van een nationaal park, houdt u zich alstublieft aan de regels"
@@ -97,6 +97,9 @@ msgstr "Contact"
 
 msgid "KNOW_MORE"
 msgstr "Meer informatie"
+
+msgid "RELATED_TREKS"
+msgstr "Gerelateerde Tochten"
 
 msgid "POI"
 msgstr "Erfgoed"

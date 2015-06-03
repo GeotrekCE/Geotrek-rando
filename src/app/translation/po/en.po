@@ -102,6 +102,9 @@ msgstr "Contact"
 msgid "KNOW_MORE"
 msgstr "Know more"
 
+msgid "RELATED_TREKS"
+msgstr "Related treks"
+
 msgid "POI"
 msgstr "POIS"
 
