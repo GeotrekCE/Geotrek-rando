@@ -204,7 +204,6 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
     };
 
     $scope.toggleDisplayCategory = function (category, state) {
-        console.log('category.open', category.open);
         category.open = (typeof state === 'boolean') ? state : !category.open;
         $scope.hideSiblings(category);
     };
