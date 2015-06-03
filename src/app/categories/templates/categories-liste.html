@@ -15,7 +15,7 @@
                     <span class="item-title" ng-click="type1IsCollapsed = !type1IsCollapsed"><i class="fa fa-angle-right"></i> {{::category.type1_label}}</span>
                     <div class="choices" collapse="!type1IsCollapsed">
                         <div ng-repeat="type1 in category.type1.values" class="type1 form-group">
-                            <input type="checkbox" id="type1-{{::type1.id}}" value="{{::type1.id}}" ng-model="category.filters.type1[type1.id]"  ng-change="propagateFilters()"/>
+                            <input type="checkbox" id="type1-{{::type1.id}}" value="{{::type1.id}}" ng-model="category.filters.type1[type1.id]"  ng-change="filterChange(category)"/>
                             <label for="type1-{{::type1.id}}">
                                 <span ng-if="type1.name">{{::type1.name}}</span>
                                 <span ng-if="type1.label">{{::type1.label}}</span>
@@ -28,7 +28,7 @@
                     <span class="item-title" ng-click="type2IsCollapsed = !type2IsCollapsed"><i class="fa fa-angle-right"></i> {{::category.type2_label}}</span>
                     <div class="choices" collapse="!type2IsCollapsed">
                         <div ng-repeat="type2 in category.type2.values" class="type2 form-group">
-                            <input type="checkbox" id="type2-{{::type2.id}}" value="{{::type2.id}}" ng-model="category.filters.type2[type2.id]"  ng-change="propagateFilters()"/>
+                            <input type="checkbox" id="type2-{{::type2.id}}" value="{{::type2.id}}" ng-model="category.filters.type2[type2.id]"  ng-change="filterChange(category)"/>
                             <label for="type2-{{type2.id}}">
                                 <span ng-if="type2.name">{{::type2.name}}</span>
                                 <span ng-if="type2.label">{{::type2.label}}</span>
@@ -41,7 +41,7 @@
                     <span ng-click="routeIsCollapsed = !routeIsCollapsed"><i class="fa fa-angle-right"></i> {{'ROUTES' | translate}}</span>
                     <div class="choices" collapse="!routeIsCollapsed">
                         <div ng-repeat="route in category.routes.values" class="route form-group">
-                            <input type="checkbox" id="route-{{::route.id}}" value="{{::route.id}}" ng-model="category.filters.route[route.id]"  ng-change="propagateFilters()"/>
+                            <input type="checkbox" id="route-{{::route.id}}" value="{{::route.id}}" ng-model="category.filters.route[route.id]"  ng-change="filterChange(category)"/>
                             <label for="route-{{::route.id}}">
                                 <ng-include src="route.pictogram"></ng-include>
                                 <span>{{::route.label}}</span>

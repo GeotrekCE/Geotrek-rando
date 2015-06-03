@@ -159,9 +159,13 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
             );
     }
 
-    $scope.toggleCategory = function (category) {
-        category.active = !category.active;
+    $scope.toggleCategory = function (category, force) {
+        category.active = (typeof force === 'boolean') ? force : !category.active;
         $scope.propagateFilters();
+    };
+
+    $scope.filterChange = function (category) {
+        $scope.toggleCategory(category, true);
     };
 
     $scope.propagateFilters = function () {
