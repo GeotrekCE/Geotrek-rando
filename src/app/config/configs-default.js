@@ -48,6 +48,10 @@ var constants = {
     //
     //
 
+    /**
+     * Enable to have only one category enabled at once :
+     * Activating a category deactivate all previously activated cat.
+     */
     ENABLE_UNIQUE_CAT: false,
 
     // SET TO TRUE ELEMENTS AVAILABLE FOR YOUR GEOTREK !
