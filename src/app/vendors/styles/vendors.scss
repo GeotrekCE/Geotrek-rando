@@ -4,6 +4,8 @@ $icon-font-path: "./app/vendors/fonts/bootstrap/";
 $root-images-path: "./images/";
 $vendors-images-path: "./app/vendors/images/";
 
+$font-family-sans-serif: 'Open Sans', Helvetica, Arial, sans-serif;
+
 @import '_font-awesome';
 @import '_bootstrap';
 @import '_leaflet-main';
