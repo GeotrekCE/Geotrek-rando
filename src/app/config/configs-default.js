@@ -49,6 +49,8 @@ var constants = {
     //
     //
 
+    ENABLE_UNIQUE_CAT: false,
+
     // SET TO TRUE ELEMENTS AVAILABLE FOR YOUR GEOTREK !
     ENABLE_TREKS: true,
     ENABLE_TOURISTIC_CONTENT: true,

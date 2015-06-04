@@ -164,8 +164,19 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
 
     $scope.toggleCategory = function (category, force) {
         category.active = (typeof force === 'boolean') ? force : !category.active;
+        if (globalSettings.ENABLE_UNIQUE_CAT) {
+            $scope.deactivateSiblings(category);
+        }
         $scope.propagateFilters();
     };
+
+    $scope.deactivateSiblings = function (mainCategory) {
+        _.forEach($scope.categories, function (category) {
+            console.log(category, mainCategory, category === mainCategory);
+            if (category === mainCategory) return;
+            category.active = false;
+        });
+    }
 
     $scope.filterChange = function (category) {
         $scope.toggleCategory(category, true);
