@@ -90,5 +90,8 @@
     "watchify": "^3.1.2"
   },
   "readmeFilename": "README.md",
-  "bugs": {}
+  "bugs": {},
+  "scripts": {
+    "test": "gulp --dist && gulp tests:unit"
+  }
 }
