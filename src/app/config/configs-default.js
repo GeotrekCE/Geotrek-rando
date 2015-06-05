@@ -122,8 +122,7 @@ var constants = {
     ARRIVAL_ICON: '',
     DEPARTURE_ARRIVAL_ICON: '',
 
-
-
+    SHOW_FILTERS_ON_MAP: true,
 
     // PATHS AND DIRECTORY //
     //
