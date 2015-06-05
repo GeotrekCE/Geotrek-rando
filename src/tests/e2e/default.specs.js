@@ -5,7 +5,7 @@ describe('Geotrek default tests', function() {
     });
 
     it('should have a title', function() {
-        expect(browser.getTitle()).toEqual('Geotrek rando');
+        expect(browser.getTitle()).toEqual('Geotrek Rando');
     });
 
 
