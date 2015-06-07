@@ -171,11 +171,13 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
     };
 
     $scope.deactivateSiblings = function (mainCategory) {
-        _.forEach($scope.categories, function (category) {
+        var categories = $scope.categories;
+        _.forEach(categories, function (category) {
             console.log(category, mainCategory, category === mainCategory);
             if (category === mainCategory) return;
             category.active = false;
         });
+        $scope.categories = categories;
     }
 
     $scope.filterChange = function (category) {
@@ -224,10 +226,12 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
     };
 
     $scope.hideSiblings = function (mainCategory) {
-        _.forEach($scope.categories, function (category) {
+        var categories = $scope.categories;
+        _.forEach(categories, function (category) {
             if (category === mainCategory) return;
             category.open = false;
         });
+        $scope.categories = categories;
     }
 
     $scope.isSVG = utilsFactory.isSVG;
