@@ -4,7 +4,8 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
 
     function updateCategories() {
         var currentQuery = $location.search();
-        _.forEach($scope.categories, function (category) {
+        var categories = $scope.categories;
+        _.forEach(categories, function (category) {
 
             category.active  = false;
             category.open    = category.open | false;
@@ -75,6 +76,7 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
             }
 
         });
+        $scope.categories = categories;
     }
 
     function resetRangeFilter(filter) {
@@ -83,8 +85,8 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
     }
 
     function initRangeFilters() {
-
-        _.forEach($scope.categories, function (category) {
+        var categories = $scope.categories;
+        _.forEach(categories, function (category) {
             _.forEach(category, function (property, propertyName) {
                 if (property && property.type && property.type === 'range') {
 
@@ -117,8 +119,8 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
                         $scope.$on('resetRange', function (event, data) {
                             var eventCategory = data.category,
                                 filter = data.filter;
-
-                            _.forEach($scope.categories, function (currentCategory) {
+                            var categories = $scope.categories;
+                            _.forEach(categories, function (currentCategory) {
                                 if (currentCategory.id.toString() === eventCategory.toString()) {
                                     if (filter === 'all') {
                                         _.forEach(currentCategory, function (currentFilter, currentFilterName) {
@@ -132,13 +134,14 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
                                 }
 
                             });
-
+                            $scope.categories = categories;
                         });
                     }
 
                 }
             });
         });
+        $scope.categories = categories;
     }
 
     function loadCategories(forceRefresh) {
@@ -168,11 +171,13 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
     };
 
     $scope.deactivateSiblings = function (mainCategory) {
-        _.forEach($scope.categories, function (category) {
+        var categories = $scope.categories;
+        _.forEach(categories, function (category) {
             console.log(category, mainCategory, category === mainCategory);
             if (category === mainCategory) return;
             category.active = false;
         });
+        $scope.categories = categories;
     }
 
     $scope.filterChange = function (category) {
@@ -221,10 +226,12 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
     };
 
     $scope.hideSiblings = function (mainCategory) {
-        _.forEach($scope.categories, function (category) {
+        var categories = $scope.categories;
+        _.forEach(categories, function (category) {
             if (category === mainCategory) return;
             category.open = false;
         });
+        $scope.categories = categories;
     }
 
     $scope.isSVG = utilsFactory.isSVG;
