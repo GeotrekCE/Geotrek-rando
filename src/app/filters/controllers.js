@@ -12,66 +12,52 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
     }
 
     function countActiveValues(filterName) {
-        $scope.filterLength[filterName] = 0;
-        _.forEach($scope.activeFilters[filterName], function (value) {
-            if (value) {
-                $scope.filterLength[filterName]++;
-            }
-        });
-    }
-
-    function updateFilters() {
-        var themesArray = [], citiesArray = [], districtsArray = [], structureArray = [];
-        $scope.activeFilters = {
-            search: $location.search().search || '',
-            cities:  [],
-            districts: [],
-            structure: [],
-            themes: []
-        };
-
-        $scope.filterLength = {
+        var filterLength = {
             districts: 0,
             cities: 0,
             structure: 0,
             themes: 0
         };
 
-        themesArray = $location.search().themes;
-        if (typeof themesArray === 'string') {
-            themesArray = [themesArray];
-        }
-        _.forEach(themesArray, function (themeId) {
-            $scope.activeFilters.themes[themeId] = true;
+        _.forEach(filterLength, function (numberOfValue, valueName) {
+            _.forEach($scope.activeFilters[valueName], function (value) {
+                if (value) {
+                    filterLength[valueName]++;
+                }
+            });
         });
-        countActiveValues('themes');
 
-        citiesArray = $location.search().cities;
-        if (typeof citiesArray === 'string') {
-            citiesArray = [citiesArray];
-        }
-        _.forEach(citiesArray, function (citiyId) {
-            $scope.activeFilters.cities[citiyId] = true;
-        });
-        countActiveValues('cities');
+        $scope.filterLength = filterLength;
+        
+    }
 
-        districtsArray = $location.search().districts;
-        if (typeof districtsArray === 'string') {
-            districtsArray = [districtsArray];
-        }
-        _.forEach(districtsArray, function (districtId) {
-            $scope.activeFilters.districts[districtId] = true;
-        });
-        countActiveValues('districts');
+    function getFilterFromUrl(filterName) {
+        var urlFilters = $location.search()[filterName],
+            activeFiltersArray = [];
 
-        structureArray = $location.search().structure;
-        if (typeof structureArray === 'string') {
-            structureArray = [structureArray];
+        if (typeof urlFilters === 'string') {
+            urlFilters = [urlFilters];
         }
-        _.forEach(structureArray, function (structureId) {
-            $scope.activeFilters.structure[structureId] = true;
+        _.forEach(urlFilters, function (filterId) {
+            activeFiltersArray[filterId] = true;
         });
-        countActiveValues('structure');
+
+        return activeFiltersArray;
+    }
+
+    function updateFilters() {
+        var activeFilters = {
+            search: $location.search().search || '',
+            cities:  getFilterFromUrl('cities'),
+            districts: getFilterFromUrl('districts'),
+            structure: getFilterFromUrl('structure'),
+            themes: getFilterFromUrl('themes')
+        };
+
+        $scope.activeFilters = activeFilters;
+
+        countActiveValues();
+
     }
 
     function initFiltersView() {
