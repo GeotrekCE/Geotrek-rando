@@ -92,6 +92,6 @@
   "readmeFilename": "README.md",
   "bugs": {},
   "scripts": {
-    "test": "gulp --dist && gulp tests:unit"
+    "test": "gulp --dist && gulp tests"
   }
 }
