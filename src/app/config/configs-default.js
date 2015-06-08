@@ -3,7 +3,8 @@
 var constants = {
 
     PLATFORM_ID: 'geotrek-rando',
-    API_URL: 'http://geotrekdemo.ecrins-parcnational.fr',
+    // API_URL: 'http://geotrekdemo.ecrins-parcnational.fr',
+    API_URL: '/data',
     ENABLE_HTML_MODE: true,
 
 
