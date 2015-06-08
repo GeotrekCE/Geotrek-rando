@@ -25,5 +25,11 @@ exports.config = {
         // browserConfs.chrome,
         browserConfs.firefox,
         // browserConfs.phantom
-    ]
+    ],
+    jasmineNodeOpts: {
+        showColors: true,
+        defaultTimeoutInterval: 30000,
+        isVerbose: true
+    }
+
 };
