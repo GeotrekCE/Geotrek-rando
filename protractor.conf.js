@@ -10,7 +10,7 @@ var browserConfs = {
     },
     firefox: {
         browserName: 'firefox',
-        count: 1,
+        // count: 1,
     },
     // phantom: {
         // 'browserName': 'phantomjs',
@@ -22,9 +22,8 @@ var browserConfs = {
 
 exports.config = {
     multiCapabilities: [
-        browserConfs.chrome,
-        // browserConfs.firefox,
+        // browserConfs.chrome,
+        browserConfs.firefox,
         // browserConfs.phantom
-    ],
-    baseUrl: 'http://geotrek.local'
+    ]
 };
