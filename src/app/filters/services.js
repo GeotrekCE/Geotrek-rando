@@ -60,41 +60,34 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
 
         if (results) {
             _.forEach(results, function (result) {
-                if (result.properties.themes && result.properties.themes.length > 0) {
-                    _.forEach(result.properties.themes, function (theme) {
-                        if (!(utilsFactory.idIsInArray(self.filters.themes, theme)) && theme !== undefined) {
-                            self.filters.themes.push(theme);
-                        }
-                    });
-                }
-
-                if (result.properties.districts && result.properties.districts.length > 0) {
-                    _.forEach(result.properties.districts, function (district) {
-                        if (!(utilsFactory.idIsInArray(self.filters.districts, district)) && district !== undefined) {
-                            self.filters.districts.push(district);
-                        }
-                    });
-                }
-
-                if (result.properties.cities && result.properties.cities.length > 0) {
-                    _.forEach(result.properties.cities, function (city) {
-                        if (!(utilsFactory.idIsInArray(self.filters.cities, city)) && city !== undefined) {
-                            self.filters.cities.push(city);
-                        }
-                    });
-                }
-
-                if (result.properties.structure) {
-                    if (!(utilsFactory.idIsInArray(self.filters.structure, result.properties.structure)) && result.properties.structure !== undefined) {
-                        self.filters.structure.push(result.properties.structure);
-                    }
-                }
+                self.addPropertyToFilters(result.properties.themes, 'themes');
+                self.addPropertyToFilters(result.properties.districts, 'districts');
+                self.addPropertyToFilters(result.properties.cities, 'cities');
+                self.addPropertyToFilters(result.properties.structure, 'structure');
 
             });
         }
 
         return self.filters;
 
+    };
+
+    self.addPropertyToFilters = function (property, propertyName) {
+        if (property) {
+            if (typeof property !== 'object') {
+                property = [property];
+            }
+
+            if (property.length > 0) {
+                angular.forEach(property, function (value) {
+                    if (!(utilsFactory.idIsInArray(self.filters[propertyName], value)) && value !== undefined) {
+                        return self.filters[propertyName].push(value);
+                    }
+                });
+            }
+        }
+ 
+        return false;
     };
 
     this.getFilters = function () {
