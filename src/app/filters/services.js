@@ -247,41 +247,33 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return result;
     };
 
+    this.matchByRange = function (element, filters, name) {
+        var min = filters.toString().split('-')[0],
+            max = filters.toString().split('-')[1],
+            elementId = element[name].id || element[name];
 
-    this.matchAny = function (element, filters, name, matchBy) {
-
-        var result = false;
-
-        // If matchBy is not defined or equal id, we are looking for the id matching the filter
-        if (matchBy === undefined || matchBy === 'id') {
-
-            // $location provide a string if there's only one value, an array if there's more
-            if (typeof filters === 'string') {
-                result = self.testById(element, filters, name);
-            } else {
-                angular.forEach(filters, function (filter) {
-                    // VAL X OR VAL Y
-                    // We set true for any value that pass
-                    if (self.testById(element, filter, name)) {
-                        result = true;
-                    }
-                });
-            }
-
+        if (parseInt(min, 10) <= parseInt(elementId, 10) && parseInt(elementId, 10) <= parseInt(max, 10)) {
+            return true;
         }
 
-        // We want to filter element by a value withing an interval
-        if (matchBy === 'interval' && element[name]) {
-            var min = filters.toString().split('-')[0],
-                max = filters.toString().split('-')[1],
-                elementId = element[name].id || element[name];
+        return false;
+    };
 
-            if (parseInt(min, 10) <= parseInt(elementId, 10) && parseInt(elementId, 10) <= parseInt(max, 10)) {
-                result = true;
-            }
+    this.matchById = function (element, filters, name) {
+        // $location provide a string if there's only one value, an array if there's more
+        if (typeof filters === 'string') {
+            return self.testById(element, filters, name);
+        } else {
+            var result = false;
+            angular.forEach(filters, function (filter) {
+                // VAL X OR VAL Y
+                // We set true for any value that pass
+                if (self.testById(element, filter, name)) {
+                    result = true;
+                }
+            });
+            return result;
         }
-
-        return result;
     };
 
     this.categoryHasSubfilters = function (elementCategoryId, filters) {
@@ -338,12 +330,12 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     this.filterElement = function (element, filters) {
 
         // Set Up final test vars
-        var categoriesFilter = false,
-            themesFilter = false,
-            searchFilter = false,
-            citiesFilter = false,
-            districtsFilter = false,
-            structureFilter = false;
+        var categoriesFilter = true,
+            themesFilter = true,
+            searchFilter = true,
+            citiesFilter = true,
+            districtsFilter = true,
+            structureFilter = true;
 
         // Define all type of filters that needs an interval check instead of an id one
         var filtersByInterval = ['difficulty', 'duration', 'ascent', 'eLength'];
@@ -352,7 +344,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
 
         if (filters.categories) {
 
-            if (self.matchAny(element.properties.category, filters.categories, 'category')) {
+            if (self.matchById(element.properties.category, filters.categories, 'category')) {
 
                 var subFilters = self.categoryHasSubfilters(element.properties.category.id, filters);
 
@@ -360,9 +352,9 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
                     var subfiltersResults = [];
                     angular.forEach(subFilters, function (subFilter, subFilterName) {
                         if (filtersByInterval.indexOf(subFilterName) > -1) {
-                            subfiltersResults.push(self.matchAny(element.properties, subFilter, subFilterName, 'interval'));
+                            subfiltersResults.push(self.matchByRange(element.properties, subFilter, subFilterName));
                         } else {
-                            subfiltersResults.push(self.matchAny(element.properties, subFilter, subFilterName));
+                            subfiltersResults.push(self.matchById(element.properties, subFilter, subFilterName));
                         }
 
                     });
@@ -381,37 +373,27 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             }
 
         } else {
-            categoriesFilter = self.matchAny(element, globalSettings.DEFAULT_ACTIVE_CATEGORIES, 'category');
+            categoriesFilter = self.matchById(element, globalSettings.DEFAULT_ACTIVE_CATEGORIES, 'category');
         }
 
         if (filters.themes) {
-            themesFilter = self.matchAny(element.properties, filters.themes, 'themes');
-        } else {
-            themesFilter = true;
+            themesFilter = self.matchById(element.properties, filters.themes, 'themes');
         }
 
         if (filters.search) {
             searchFilter = self.testByString(element.properties, filters.search);
-        } else {
-            searchFilter = true;
         }
 
         if (filters.cities) {
-            citiesFilter = self.matchAny(element.properties, filters.cities, 'cities');
-        } else {
-            citiesFilter = true;
+            citiesFilter = self.matchById(element.properties, filters.cities, 'cities');
         }
 
          if (filters.districts) {
-            districtsFilter = self.matchAny(element.properties, filters.districts, 'districts');
-        } else {
-            districtsFilter = true;
+            districtsFilter = self.matchById(element.properties, filters.districts, 'districts');
         }
 
         if (filters.structure) {
-            structureFilter = self.matchAny(element.properties, filters.structure, 'structure');
-        } else {
-            structureFilter = true;
+            structureFilter = self.matchById(element.properties, filters.structure, 'structure');
         }
 
 
