@@ -4,7 +4,7 @@ function contentsService(globalSettings, settingsFactory, translationService, $r
 
     var self = this;
 
-    this.replaceImgURLs = function (contentsData) {
+    this.refactorContent = function (contentsData) {
 
         // Parse content pictures, and change their URL
         _.forEach(contentsData.features, function (content) {
@@ -38,6 +38,9 @@ function contentsService(globalSettings, settingsFactory, translationService, $r
                     }
                 });
             }
+            if (!content.uid) {
+                content.uid = content.properties.category.id + '-' + content.id;
+            }
             content.properties.contentType = 'content';
         });
         return contentsData;
@@ -68,9 +71,9 @@ function contentsService(globalSettings, settingsFactory, translationService, $r
             requests.query().$promise
                 .then(function (file) {
                     var data = angular.fromJson(file);
-                    var convertedImgs = self.replaceImgURLs(data);
-                    self._contentsList = convertedImgs;
-                    deferred.resolve(convertedImgs);
+                    var refactoredContents = self.refactorContent(data);
+                    self._contentsList = refactoredContents;
+                    deferred.resolve(refactoredContents);
                 });
 
         }
@@ -119,7 +122,9 @@ function eventsService(globalSettings, settingsFactory, translationService, $res
                     }
                 });
             }
-
+            if (!trEvent.uid) {
+                trEvent.uid = trEvent.properties.category.id + '-' + trEvent.id;
+            }
             trEvent.properties.contentType = 'event';
 
         });

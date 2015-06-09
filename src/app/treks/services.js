@@ -83,6 +83,9 @@ function treksService(globalSettings, settingsFactory, translationService, $reso
             if (trek.properties.altimetric_profile) {
                 trek.properties.altimetric_profile = globalSettings.API_URL + trek.properties.altimetric_profile;
             }
+            if (!trek.uid) {
+                trek.uid = trek.properties.category.id + '-' + trek.id;
+            }
             trek.properties.contentType = 'trek';
         });
         return treksData;
