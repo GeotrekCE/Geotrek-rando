@@ -1,6 +1,6 @@
 'use strict';
 
-function resultsService($q, $location, globalSettings, treksService, contentsService, eventsService, filtersService) {
+function resultsService($q, $location, globalSettings, treksService, contentsService, eventsService) {
 
     var self = this;
 
@@ -198,35 +198,6 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
         return deferred.promise;
     };
 
-    this.getFilteredResults = function (forceRefresh) {
-        var deferred = $q.defer(),
-            filters = $location.search();
-
-        if (!this._results || forceRefresh) {
-            self.getAllResults(forceRefresh)
-                .then(
-                    function (results) {
-                        self.filteredResults = [];
-                        _.forEach(results, function (result) {
-                            if (filtersService.filterElement(result, filters)) {
-                                self.filteredResults.push(result);
-                            }
-                        });
-                        deferred.resolve(self.filteredResults);
-                    }
-                );
-        } else {
-            self.filteredResults = [];
-            _.forEach(self._results, function (result) {
-                if (filtersService.filterElement(result, filters)) {
-                    self.filteredResults.push(result);
-                }
-            });
-            deferred.resolve(self.filteredResults);
-        }
-
-        return deferred.promise;
-    };
 }
 
 module.exports = {

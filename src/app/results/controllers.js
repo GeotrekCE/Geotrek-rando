@@ -1,10 +1,10 @@
 'use strict';
 
-function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory, favoritesService, resultsService) {
+function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory, favoritesService, filtersService) {
 
     function updateResults(forceRefresh) {
         $rootScope.elementsLoading ++;
-        resultsService.getFilteredResults(forceRefresh)
+        filtersService.getFilteredResults(forceRefresh)
             .then(
                 function (data) {
                     $scope.results = data;

@@ -1,6 +1,6 @@
 'use strict';
 
-function CategoriesListeController($scope, $rootScope, $location, utilsFactory, globalSettings, categoriesService) {
+function CategoriesListeController($scope, $rootScope, $location, utilsFactory, globalSettings, categoriesService, filtersService) {
 
     function updateCategories() {
         var currentQuery = $location.search();
@@ -197,7 +197,7 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
             }
         });
 
-        currentQuery.categories =  activeCategories;
+        currentQuery.categories = activeCategories;
         $location.search(currentQuery);
         $rootScope.$broadcast('updateFilters');
     };

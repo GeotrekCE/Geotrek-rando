@@ -1,10 +1,10 @@
 'use strict';
 
-function MapController($scope, globalSettings, $translate, $rootScope, $state, resultsService, mapService, $stateParams) {
+function MapController($scope, globalSettings, $translate, $rootScope, $state, resultsService, filtersService, mapService, $stateParams) {
 
     function updateMapWithResults(updateBounds) {
         $rootScope.elementsLoading ++;
-        resultsService.getFilteredResults()
+        filtersService.getFilteredResults()
             .then(
                 function (data) {
                     $scope.results = data;
