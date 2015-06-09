@@ -11,7 +11,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             self.initGlobalFilters();
         }
 
-        _.forEach(categories, function (category) {
+        angular.forEach(categories, function (category) {
             var newCategory = {
                 label: category.label,
                 id: category.id,
@@ -59,7 +59,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         }
 
         if (results) {
-            _.forEach(results, function (result) {
+            angular.forEach(results, function (result) {
                 self.addPropertyToFilters(result.properties.themes, 'themes');
                 self.addPropertyToFilters(result.properties.districts, 'districts');
                 self.addPropertyToFilters(result.properties.cities, 'cities');
@@ -104,7 +104,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         } else {
             var filters = self.getFilters();
 
-            _.forEach(filters[type], function (currentFilter) {
+            angular.forEach(filters[type], function (currentFilter) {
                 if (!subtype) {
                     if ((currentFilter.id && currentFilter.id.toString() === id.toString()) || (currentFilter.code && currentFilter.code.toString() === id.toString())) {
                         filter = currentFilter;
@@ -117,7 +117,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
                             minFilter = null,
                             maxFilter = null;
 
-                        _.forEach(currentFilter[subtype].values, function (currentSubFilter) {
+                        angular.forEach(currentFilter[subtype].values, function (currentSubFilter) {
                             if (currentSubFilter.id.toString() === min.toString()) {
                                 minFilter = currentSubFilter;
                             }
@@ -137,7 +137,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
 
                     } else {
                         if (currentFilter.id.toString() === id.toString()) {
-                            _.forEach(currentFilter[subtype].values, function (currentSubFilter) {
+                            angular.forEach(currentFilter[subtype].values, function (currentSubFilter) {
                                 if (currentSubFilter.id.toString() === subId.toString()) {
                                     filter = currentSubFilter;
                                 }
@@ -154,7 +154,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     this.getSelectedFilters = function (activeFilters) {
         var selectedFilters = [];
 
-        _.forEach(activeFilters, function (aFilter, index) {
+        angular.forEach(activeFilters, function (aFilter, index) {
             var type = index,
                 id = 0,
                 subtype = null,
@@ -170,7 +170,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
                 aFilter = [aFilter];
             }
 
-            _.forEach(aFilter, function (aSubFilter) {
+            angular.forEach(aFilter, function (aSubFilter) {
 
                 if (subtype) {
                     subId = aSubFilter;
@@ -200,7 +200,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         var result = false;
         element = _.values(element);
 
-        _.each(element, function (property) {
+        angular.forEach(element, function (property) {
             if (!result) {
                 if (typeof property === 'string') {
                     var regex = new RegExp(query, 'gi');
@@ -236,7 +236,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         } else {
             // If element is an object or an array, we can browse it to find the filter
             if (typeof currentElement === 'object') {
-                _.forEach(currentElement, function (subelement) {
+                angular.forEach(currentElement, function (subelement) {
                     if (self.testById(subelement, filter, filterKey)) {
                         result = true;
                     }
@@ -259,7 +259,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             if (typeof filters === 'string') {
                 result = self.testById(element, filters, name);
             } else {
-                _.forEach(filters, function (filter) {
+                angular.forEach(filters, function (filter) {
                     // VAL X OR VAL Y
                     // We set true for any value that pass
                     if (self.testById(element, filter, name)) {
@@ -287,7 +287,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     this.categoryHasSubfilters = function (elementCategoryId, filters) {
         var catSubFilters = {};
 
-        _.forEach(filters, function (filter, filterName) {
+        angular.forEach(filters, function (filter, filterName) {
             // subfilters are composed like catId-subFilterName
             if (filterName.indexOf('_') > -1) {
                 var categoryId = filterName.split('_')[0],
@@ -323,7 +323,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             .then(
                 function (results) {
                     self.filteredResults = [];
-                    _.forEach(results, function (result) {
+                    angular.forEach(results, function (result) {
                         if (self.filterElement(result, filters)) {
                             self.filteredResults.push(result);
                         }
@@ -367,7 +367,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
                 // if no subfilters found, then whole category filter pass
                 if (_.size(subFilters) > 0) {
                     var subfiltersResults = [];
-                    _.forEach(subFilters, function (subFilter, subFilterName) {
+                    angular.forEach(subFilters, function (subFilter, subFilterName) {
                         if (filtersByInterval.indexOf(subFilterName) > -1) {
                             subfiltersResults.push(self.matchAny(element.properties, subFilter, subFilterName, 'interval'));
                         } else {
