@@ -1,6 +1,6 @@
 'use strict';
 
-function filtersService(globalSettings, utilsFactory) {
+function filtersService($q, $location, globalSettings, utilsFactory, resultsService) {
 
     var self = this;
     this.activeFilters = {};
@@ -254,9 +254,6 @@ function filtersService(globalSettings, utilsFactory) {
         return result;
     };
 
-    this.filtersChanged = function (filters) {
-        return !_.isEqual(filters, self.activeFilters);
-    };
 
     this.matchAny = function (element, filters, name, matchBy) {
 
@@ -315,6 +312,34 @@ function filtersService(globalSettings, utilsFactory) {
         });
 
         return catSubFilters;
+    };
+
+    this.filtersChanged = function (filters) {
+        return !angular.equals(filters, self.activeFilters);
+    };
+
+    this.updateActiveFilters = function () {
+        self.activeFilters = $location.search();
+    };
+
+    this.getFilteredResults = function (forceRefresh) {
+        var deferred = $q.defer(),
+            filters = $location.search();
+
+        resultsService.getAllResults(forceRefresh)
+            .then(
+                function (results) {
+                    self.filteredResults = [];
+                    _.forEach(results, function (result) {
+                        if (self.filterElement(result, filters)) {
+                            self.filteredResults.push(result);
+                        }
+                    });
+                    deferred.resolve(self.filteredResults);
+                }
+            );
+
+        return deferred.promise;
     };
 
     this.filterElement = function (element, filters) {
