@@ -348,23 +348,14 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         // Define all type of filters that needs an interval check instead of an id one
         var filtersByInterval = ['difficulty', 'duration', 'ascent', 'eLength'];
 
-
-        // Update service activeFilters
         self.activeFilters = filters;
 
-
-        /* Filter by Categories */
-        /*                  */
-        /*                  */
-
-        // Use default active categories from config if there's no categories filter
         if (filters.categories) {
 
-            // We can look for category subfilters if the element category match
             if (self.matchAny(element.properties.category, filters.categories, 'category')) {
 
                 var subFilters = self.categoryHasSubfilters(element.properties.category.id, filters);
-                // if no subfilters found, then whole category filter pass
+
                 if (_.size(subFilters) > 0) {
                     var subfiltersResults = [];
                     angular.forEach(subFilters, function (subFilter, subFilterName) {
@@ -377,72 +368,46 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
                     });
                     if (subfiltersResults.indexOf(false) === -1) {
                         categoriesFilter = true;
+                    } else {
+                        categoriesFilter = false;
                     }
 
                 } else {
                     categoriesFilter = true;
                 }
 
+            } else {
+                categoriesFilter = false;
             }
 
         } else {
             categoriesFilter = self.matchAny(element, globalSettings.DEFAULT_ACTIVE_CATEGORIES, 'category');
         }
 
-
-        /* Filter by Themes */
-        /*                  */
-        /*                  */
-
-        // If themes filter is not defined the test pass
         if (filters.themes) {
             themesFilter = self.matchAny(element.properties, filters.themes, 'themes');
         } else {
             themesFilter = true;
         }
 
-
-        /* Filter by Search Query */
-        /*                        */
-        /*                        */
-
-        // If search is not defined the test pass
         if (filters.search) {
             searchFilter = self.testByString(element.properties, filters.search);
         } else {
             searchFilter = true;
         }
 
-
-        /* Filter by cities */
-        /*                 */
-        /*                 */
-
-        // If cities filter is not defined the test pass
         if (filters.cities) {
             citiesFilter = self.matchAny(element.properties, filters.cities, 'cities');
         } else {
             citiesFilter = true;
         }
 
-
-        /* Filter by Districts */
-        /*                     */
-        /*                     */
-
-        // If district filter is not defined the test pass
-        if (filters.districts) {
+         if (filters.districts) {
             districtsFilter = self.matchAny(element.properties, filters.districts, 'districts');
         } else {
             districtsFilter = true;
         }
 
-
-        /* Filter by Districts */
-        /*                     */
-        /*                     */
-
-        // If district filter is not defined the test pass
         if (filters.structure) {
             structureFilter = self.matchAny(element.properties, filters.structure, 'structure');
         } else {
