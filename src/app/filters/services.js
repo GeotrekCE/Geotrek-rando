@@ -3,9 +3,9 @@
 function filtersService($q, $location, globalSettings, utilsFactory, resultsService) {
 
     var self = this;
-    this.activeFilters = {};
+    self.activeFilters = {};
 
-    this.createTouristicCategoryFilters = function (categories) {
+    self.createTouristicCategoryFilters = function (categories) {
 
         if (!self.filters) {
             self.initGlobalFilters();
@@ -45,7 +45,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
 
     };
 
-    this.initGlobalFilters = function (results) {
+    self.initGlobalFilters = function (results) {
 
         if (!self.filters) {
             self.filters = {
@@ -90,11 +90,11 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return false;
     };
 
-    this.getFilters = function () {
+    self.getFilters = function () {
         return self.filters;
     };
 
-    this.getAFilter = function (id, type, subtype, subId) {
+    self.getAFilter = function (id, type, subtype, subId) {
         var filter = null;
         if (type === 'search') {
             filter = {
@@ -151,7 +151,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return filter;
     };
 
-    this.getTagFilters = function (activeFilters) {
+    self.getTagFilters = function (activeFilters) {
         var tagFilters = [];
 
         angular.forEach(activeFilters, function (aFilter, index) {
@@ -195,7 +195,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return tagFilters;
     };
 
-    this.testByString = function (element, query) {
+    self.testByString = function (element, query) {
 
         var result = false;
         element = _.values(element);
@@ -217,7 +217,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return result;
     };
 
-    this.testById = function (element, filter, filterKey) {
+    self.testById = function (element, filter, filterKey) {
         var result = false,
             currentElement;
 
@@ -247,7 +247,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return result;
     };
 
-    this.matchByRange = function (element, filters, name) {
+    self.matchByRange = function (element, filters, name) {
         var min = filters.toString().split('-')[0],
             max = filters.toString().split('-')[1],
             elementId = element[name].id || element[name];
@@ -259,7 +259,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return false;
     };
 
-    this.matchById = function (element, filters, name) {
+    self.matchById = function (element, filters, name) {
         // $location provide a string if there's only one value, an array if there's more
         if (typeof filters === 'string') {
             return self.testById(element, filters, name);
@@ -276,7 +276,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         }
     };
 
-    this.categoryHasSubfilters = function (elementCategoryId, filters) {
+    self.categoryHasSubfilters = function (elementCategoryId, filters) {
         var catSubFilters = {};
 
         angular.forEach(filters, function (filter, filterName) {
@@ -299,15 +299,15 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return catSubFilters;
     };
 
-    this.filtersChanged = function (filters) {
+    self.filtersChanged = function (filters) {
         return !angular.equals(filters, self.activeFilters);
     };
 
-    this.updateActiveFilters = function () {
+    self.updateActiveFilters = function () {
         self.activeFilters = $location.search();
     };
 
-    this.getFilteredResults = function (forceRefresh) {
+    self.getFilteredResults = function (forceRefresh) {
         var deferred = $q.defer(),
             filters = $location.search();
 
@@ -327,7 +327,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return deferred.promise;
     };
 
-    this.filterElement = function (element, filters) {
+    self.filterElement = function (element, filters) {
 
         // Set Up final test vars
         var categoriesFilter = true,
