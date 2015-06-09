@@ -8,7 +8,7 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
     $scope.filterLength = {};
 
     function updateFiltersTags() {
-        $scope.activeFiltersTags = filtersService.getSelectedFilters($location.search());
+        $scope.activeFiltersTags = filtersService.getTagFilters($location.search());
     }
 
     function countActiveValues(filterName) {
@@ -57,7 +57,9 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
         $scope.activeFilters = activeFilters;
 
         countActiveValues();
-
+        if (globalSettings.SHOW_FILTERS_ON_MAP) {
+            updateFiltersTags();
+        }
     }
 
     function initFiltersView() {
@@ -66,9 +68,7 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
                 function (data) {
                     $scope.filters = filtersService.initGlobalFilters(data);
                     updateFilters();
-                    updateFiltersTags();
                     $rootScope.$on('updateFilters', updateFilters);
-                    $rootScope.$on('updateFilters', updateFiltersTags);
                 }
             );
     }

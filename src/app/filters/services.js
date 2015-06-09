@@ -151,8 +151,8 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return filter;
     };
 
-    this.getSelectedFilters = function (activeFilters) {
-        var selectedFilters = [];
+    this.getTagFilters = function (activeFilters) {
+        var tagFilters = [];
 
         angular.forEach(activeFilters, function (aFilter, index) {
             var type = index,
@@ -187,12 +187,12 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
                     subtype: subtype,
                     queryLabel: index
                 };
-                selectedFilters.push(tagElement);
+                tagFilters.push(tagElement);
             });
 
         });
 
-        return selectedFilters;
+        return tagFilters;
     };
 
     this.testByString = function (element, query) {
