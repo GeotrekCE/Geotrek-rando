@@ -92,8 +92,9 @@ var browserifyTask = function (callback, devMode) {
     };
     custoTask();
     translateTask();
-    config.bundleConfigs.forEach(browserifyThis);
-
+    setTimeout(function () {
+        config.bundleConfigs.forEach(browserifyThis);
+    }, 500);
 };
 
 gulp.task('browserify', browserifyTask);
