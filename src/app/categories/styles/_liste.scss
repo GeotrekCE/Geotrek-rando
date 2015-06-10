@@ -86,10 +86,7 @@
 
             .category-name {
                 &:after {
-                    border-color: rgba(255,255,255,0.2);
-                }
-                .glyphicon-ok {
-                    opacity: 1;
+                    background-color: #fff;
                 }
             }
         }
@@ -100,33 +97,23 @@
             height: 47px;
             padding: 1em;
             position: relative;
-            .text {
+            span {
                 font-weight: bold;
                 font-size: 1.2em;
                 display: inline-block;
                 vertical-align: bottom;
-            }
-            .glyphicon {
-                position: absolute;
-                right: 1.9em;
-                top: 50%;
-                margin-top: -.5em;
             }
             &:after {
                 content: '';
                 display: block;
                 width: 1em;
                 height: 1em;
-                border: .1em solid #fff;
+                border: 1px solid #fff;
                 background-color: transparent;
                 position: absolute;
                 right: 1.9em;
                 top: 50%;
                 margin-top: -.5em;
-            }
-            .glyphicon-ok {
-                transition: opacity 0.2s ease;
-                opacity: .2;
             }
         }
         .filters {
@@ -257,23 +244,6 @@
     .choices {
         overflow: hidden;
         z-index: 11;
-
-        .form-group.checked {
-            .glyphicon-ok {
-                opacity: 1;
-            }
-            &:before {
-                border-color: rgba(255,255,255,0.2);
-            }
-        }
-        .glyphicon {
-            position: absolute;
-            right: 2em;
-            top: 50%;
-            margin-top: -8px;
-            opacity: .2;
-        }
-
         .form-group {
             margin: 0;
             position: relative;
@@ -289,6 +259,9 @@
                 width: 100%;
                 margin: 0;
                 z-index: 11;
+                &:checked + label:before {
+                    background: white;
+                }
                 &:focus {
                     outline: none;
                     outline-color: transparent;
@@ -303,18 +276,18 @@
                 font-size: 0.8rem;
                 line-height: 0.8rem;
                 font-weight: normal;
-            }
-            &:before {
-                position: absolute;
-                display: block;
-                content: '';
-                right: 2em;
-                top: 50%;
-                margin-top: -8px;
-                width: 1em;
-                height: 1em;
-                border: 1px solid white;
-                transition: all 0.2s ease-out;
+                &:before {
+                    content: '';
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 1em;
+                    height: 1em;
+                    margin-right: 1em;
+                    border: 1px solid white;
+                    transition: all 0.2s ease-out;
+                    position: absolute;
+                    right: 1.2em;
+                }
             }
         }
     }
