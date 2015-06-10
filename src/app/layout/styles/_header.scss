@@ -23,8 +23,6 @@
         margin: 0;
         padding: 0;
         @media (min-width: 768px) {
-            background: url(#{$root-images-path}/mask-header.svg) no-repeat center right;
-            padding-right: 180px;
             display: flex;
         }
         @media (max-width: 768px) {
@@ -36,6 +34,7 @@
         #logo {
             float: left;
             height: 100%;
+            padding: 10px;
             img {
                 height: 100%;
                 max-height: 100%;
@@ -43,7 +42,7 @@
         }
         #banner {
             float: left;
-            color: white;
+            color: $primary-color;
             height: 70px;
             line-height: 70px;
             @media (min-width: 768px) {
@@ -81,7 +80,6 @@
 .navbar-header {
     height: 100%;
     width: 70%;
-    background: $primary-color;
     @media (max-width: 1200px) {
         width: 60%;
     }
@@ -97,7 +95,7 @@
         width: 3em; 
         padding: 0.7em;
         margin: 4px;
-        color: white;
+        color: $primary-color;
         @media (min-width: 768px) {
             display: none;
         }
@@ -106,14 +104,14 @@
             width: 100%;
         }
         svg .base {
-            fill: white;
+            fill: $primary-color;
         }
     }
     .navbar-toggle {
         padding: 1em;
         margin: 4px;
         .icon-bar {
-            background: white;
+            background: $primary-color;
             transition: all 0.2s ease;
             &:nth-child(2) {
                 transform: translateY(6px) rotate(45deg);
