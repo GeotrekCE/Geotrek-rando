@@ -7,6 +7,20 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
     $rootScope.mapIsShown = false;
     $rootScope.placeHolderImage = globalSettings.PLACEHOLDER_IMAGE ? './images/custom/' + globalSettings.PLACEHOLDER_IMAGE : './images/placeholder.png';
 
+    if (globalSettings.FAVICON) {
+        var base = './images/custom/';
+        $rootScope.favIcon = {
+            png: base + globalSettings.FAVICON.png,
+            ico: base + globalSettings.FAVICON.ico
+        };
+    } else {
+        var base = './images/';
+        $rootScope.favIcon = {
+            png: base + 'favicon-geotrek.png',
+            ico: base + 'favicon-geotrek.ico'
+        };
+    }
+
     function initAnalytics() {
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

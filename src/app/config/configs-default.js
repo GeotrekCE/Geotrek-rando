@@ -11,6 +11,7 @@ var constants = {
     //
     //
     LOGO_FILE: '', // '' = no logo // Put the file in src/images/custom
+    FAVICON: '', // Should be an object containing png: 'file.png', and ico: 'file.ico' // Put the file in src/images/custom
     SHOW_HOME: false,
     HOME_TEMPLATE_FILE: {
         fr: '',
