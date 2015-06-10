@@ -1,6 +1,6 @@
 <ul class="categories">
-    <li ng-repeat="category in categories | orderBy: 'order' track by category.id" class="category {{category.cat_class}}" ng-class="{active : category.active, open: category.open}" ng-id="cat-{{category.id}}">
-        <a href ng-click="toggleDisplayCategory(category)">
+    <li ng-repeat="category in categories | orderBy: 'order' track by category.id" class="category {{::category.cat_class}}" ng-class="{active : category.active}" id="cat-{{::category.id}}">
+        <a href ng-click="toggleCategory(category)">
             <ng-include ng-if="isSVG(category.pictogram)" src="category.pictogram"></ng-include>
             <img ng-if="!isSVG(category.pictogram)" src="{{::category.pictogram}}">
         </a>

@@ -7,8 +7,7 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
         var categories = $scope.categories;
         _.forEach(categories, function (category) {
 
-            category.active  = false;
-            category.open    = false;
+            category.active = false;
             category.filters = {};
             if (currentQuery.categories) {
                 var categoriesArray = currentQuery.categories;
@@ -219,20 +218,6 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
         $location.search(currentQuery);
         $rootScope.$broadcast('updateFilters');
     };
-
-    $scope.toggleDisplayCategory = function (category, state) {
-        category.open = (typeof state === 'boolean') ? state : !category.open;
-        $scope.hideSiblings(category);
-    };
-
-    $scope.hideSiblings = function (mainCategory) {
-        var categories = $scope.categories;
-        _.forEach(categories, function (category) {
-            if (category === mainCategory) return;
-            category.open = false;
-        });
-        $scope.categories = categories;
-    }
 
     $scope.isSVG = utilsFactory.isSVG;
 
