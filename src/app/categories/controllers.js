@@ -3,9 +3,11 @@
 function CategoriesListeController($scope, $rootScope, $location, utilsFactory, globalSettings, categoriesService, filtersService) {
 
     function updateCategories() {
-        var currentQuery = filtersService.getActiveFilters();
-        var categories = $scope.categories;
-        _.forEach(categories, function (category) {
+        var currentQuery = filtersService.getActiveFilters(),
+            categories = $scope.categories;
+
+        for (var i = categories.length - 1; i >= 0; i--) {
+            var category = categories[i];
 
             category.active = false;
             category.filters = {};
@@ -16,11 +18,11 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
                     categoriesArray = [categoriesArray];
                 }
 
-                _.forEach(categoriesArray, function (filter) {
-                    if (category.id.toString() === filter.toString()) {
+                for (var j = categoriesArray.length - 1; j >= 0; j--) {
+                    if (category.id.toString() === categoriesArray[j].toString()) {
                         category.active = true;
                     }
-                });
+                }
 
                 _.forEach(currentQuery, function (filter, filterName) {
                     if (filterName.indexOf('_') > -1) {
@@ -31,7 +33,8 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
                                 filter = [filter];
                             }
 
-                            _.forEach(filter, function (filterValue) {
+                            for (var k = filter.length - 1; k >= 0; k--) {
+                                var filterValue = filter[k];
                                 if (!category.filters[filterKey]) {
                                     category.filters[filterKey] = {};
                                 }
@@ -42,21 +45,25 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
                                         maxIndex;
                                     category.filters[filterKey] = {};
                                     category.filters[filterKey][filterValue] = true;
-                                    _.forEach(category[filterKey].values, function (currentFilter, index) {
+
+                                    for (var l = category[filterKey].values.length - 1; l >= 0; l--) {
+                                        var currentFilter = category[filterKey].values[l];
+
                                         if (currentFilter.id.toString() === capture[1].toString()) {
-                                            minIndex = index;
+                                            minIndex = l;
                                         }
 
                                         if (currentFilter.id.toString() === capture[2].toString()) {
-                                            maxIndex = index;
+                                            maxIndex = l;
                                         }
-                                    });
+                                    }
+
                                     category[filterKey].min = minIndex;
                                     category[filterKey].max = maxIndex;
                                 } else {
                                     category.filters[filterKey][filterValue] = true;
                                 }
-                            });
+                            }
                         }
                     }
                 });
@@ -66,15 +73,15 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
                     globalSettings.DEFAULT_ACTIVE_CATEGORIES = [globalSettings.DEFAULT_ACTIVE_CATEGORIES];
                 }
 
-                _.forEach(globalSettings.DEFAULT_ACTIVE_CATEGORIES, function (filter) {
-                    if (category.id.toString() === filter.toString()) {
+                for (var m = globalSettings.DEFAULT_ACTIVE_CATEGORIES.length - 1; m >= 0; m--) {
+                    if (category.id.toString() === globalSettings.DEFAULT_ACTIVE_CATEGORIES[m].toString()) {
                         category.active = true;
                     }
-                });
+                }
 
             }
+        }
 
-        });
         $scope.categories = categories;
     }
 
@@ -146,14 +153,8 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
     function loadCategories(forceRefresh) {
         categoriesService.getCategories(forceRefresh)
             .then(
-                function (data) {
-                    var activeCategories = [];
-                    _.each(data, function (cat) {
-                        if (globalSettings.LIST_EXCLUDE_CATEGORIES.indexOf(cat.id) === -1) {
-                            activeCategories.push(cat);
-                        }
-                    });
-                    $scope.categories = activeCategories;
+                function (categories) {
+                    $scope.categories = categories;
                     initRangeFilters();
                     updateCategories();
                     $rootScope.$on('updateFilters', updateCategories);
@@ -168,8 +169,11 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
 
     $scope.propagateFilters = function () {
         var currentQuery = $location.search(),
+            categories = $scope.categories,
             activeCategories = [];
-        _.forEach($scope.categories, function (category) {
+        for (var i = categories.length - 1; i >= 0; i--) {
+            var category = categories[i];
+
             if (category.active) {
                 activeCategories.push(category.id.toString());
                 _.forEach(category.filters, function (filter, filterKey) {
@@ -195,7 +199,7 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
                     }
                 });
             }
-        });
+        }
 
         currentQuery.categories = activeCategories;
         filtersService.updateActiveFilters(currentQuery);
