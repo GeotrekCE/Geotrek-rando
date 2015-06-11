@@ -3,7 +3,7 @@
 function CategoriesListeController($scope, $rootScope, $location, utilsFactory, globalSettings, categoriesService, filtersService) {
 
     function updateCategories() {
-        var currentQuery = $location.search();
+        var currentQuery = filtersService.getActiveFilters();
         var categories = $scope.categories;
         _.forEach(categories, function (category) {
 
@@ -198,7 +198,7 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
         });
 
         currentQuery.categories = activeCategories;
-        $location.search(currentQuery);
+        filtersService.updateActiveFilters(currentQuery);
         $rootScope.$broadcast('updateFilters');
     };
 

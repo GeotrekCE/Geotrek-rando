@@ -303,13 +303,18 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return !angular.equals(filters, self.activeFilters);
     };
 
-    self.updateActiveFilters = function () {
-        self.activeFilters = $location.search();
+    self.updateActiveFilters = function (activeFilters) {
+        self.activeFilters = activeFilters;
+        $location.search(activeFilters);
+    };
+
+    self.getActiveFilters = function () {
+        return self.activeFilters;
     };
 
     self.getFilteredResults = function (forceRefresh) {
         var deferred = $q.defer(),
-            filters = $location.search();
+            filters = self.getActiveFilters();
 
         resultsService.getAllResults(forceRefresh)
             .then(

@@ -101,7 +101,7 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
             }
         });
 
-        $location.search(query);
+        filtersService.updateActiveFilters(query);
         $rootScope.$broadcast('updateFilters');
     };
 
