@@ -6,10 +6,19 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
         $rootScope.elementsLoading ++;
         filtersService.getFilteredResults(forceRefresh)
             .then(
-                function (data) {
-                    $scope.results = data;
+                function (results) {
+                    $scope.results = results;
+                    var resultsInterval = setInterval(function () {
+                        if ($scope.resultsDisplayLimit < $scope.results.length) {
+                            $scope.resultsDisplayLimit += 20;
+                        } else {
+                            clearInterval(resultsInterval);
+                        }
+                    }, 300);
                     $rootScope.elementsLoading --;
-                },function () {
+                },
+                function (err) {
+                    console.error(err);
                     $rootScope.elementsLoading --; 
                 }
             );
@@ -57,7 +66,8 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
         });
     };
 
-    $scope.favIcon = (globalSettings.FAVORITES_ICON ? globalSettings.FAVORITES_ICON : 'heart');
+    $scope.resultsDisplayLimit = 20;
+    $scope.favoriteIcon = (globalSettings.FAVORITES_ICON ? globalSettings.FAVORITES_ICON : 'heart');
     $scope.isInFavorites = favoritesService.isInFavorites;
     $scope.isSVG = utilsFactory.isSVG;
     updateResults();

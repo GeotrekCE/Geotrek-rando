@@ -7,11 +7,11 @@
     </div>
     <div class="results">
         <ul>
-            <li ng-repeat="result in results | orderBy:'properties.name' track by result.uid" id="result-category-{{::result.uid}}" ng-mouseover="hoverLayerElement(result,'enter')" ng-mouseleave="hoverLayerElement(result,'leave')" class="result category-{{::result.properties.category.id}}">
+            <li ng-repeat="result in results | orderBy:'properties.name' | limitTo: resultsDisplayLimit track by result.uid" id="result-category-{{::result.uid}}" ng-mouseover="hoverLayerElement(result,'enter')" ng-mouseleave="hoverLayerElement(result,'leave')" class="result category-{{::result.properties.category.id}}">
 
                 <div>
                     <div class="fav-or-not" ng-click="toggleFavorites(result)" ng-class="{isFav: isInFavorites(result)}">
-                        <i class="fa fa-{{::favIcon}}"></i>
+                        <i class="fa fa-{{::favoriteIcon}}"></i>
                     </div>
                     <a ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: result.properties.slug})">
                         <div class="visual">
