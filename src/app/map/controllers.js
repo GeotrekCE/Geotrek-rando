@@ -97,8 +97,6 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
 
         if ($state.current.name === 'layout.detail') {
             updateMapWithDetails();
-        } else {
-            updateMapWithResults();
         }
     }
 
@@ -118,12 +116,10 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
         function () {
             if ($state.current.name === 'layout.detail') {
                 updateMapWithDetails();
-            } else {
-                updateMapWithResults();
             }
         });
 
-    $scope.$on('updateFilters', function () {
+    $rootScope.$on('resultsUpdated', function () {
         if ($state.current.name === 'layout.root') {
             updateMapWithResults(globalSettings.UPDATE_MAP_ON_FILTER);
         }

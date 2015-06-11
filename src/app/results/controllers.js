@@ -15,6 +15,7 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
                             clearInterval(resultsInterval);
                         }
                     }, 300);
+                    $rootScope.$emit('resultsUpdated');
                     $rootScope.elementsLoading --;
                 },
                 function (err) {
