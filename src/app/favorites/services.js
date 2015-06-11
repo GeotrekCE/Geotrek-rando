@@ -32,8 +32,8 @@ function favoritesService(globalSettings) {
     };
 
     this.addAFavorite = function (element) {
-        if (!self._favorites[element.properties.category.id + '-' + element.id]) {
-            self._favorites[element.properties.category.id + '-' + element.id] = {
+        if (!self._favorites[element.uid]) {
+            self._favorites[element.uid] = {
                 id: element.id,
                 category: element.properties.category.id
             };
@@ -43,7 +43,7 @@ function favoritesService(globalSettings) {
 
     this.isInFavorites = function (element) {
         if (element) {
-            if (self._favorites[element.properties.category.id + '-' + element.id]) {
+            if (self._favorites[element.uid]) {
                 return true;
             }
         }
@@ -52,8 +52,8 @@ function favoritesService(globalSettings) {
     };
 
     this.removeAFavorite = function (element) {
-        if (self._favorites[element.properties.category.id + '-' + element.id]) {
-            delete self._favorites[element.properties.category.id + '-' + element.id];
+        if (self._favorites[element.uid]) {
+            delete self._favorites[element.uid];
             self.setFavorites();
         }
     };
