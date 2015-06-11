@@ -66,5 +66,3 @@ Please note that you currently need to force CORS request in your browser in ord
 # LICENCE
 
 * OpenSource - BSD
-
-[<img src="http://depot.makina-corpus.org/public/logo.gif">](http://www.makina-corpus.com)
