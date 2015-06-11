@@ -94,7 +94,11 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return self.filters;
     };
 
-    self.getAFilter = function (id, type, subtype, subId) {
+
+    // Tag Filters
+    //
+
+    self.getATagFilter = function (id, type, subtype, subId) {
         var filter = null;
         if (type === 'search') {
             filter = {
@@ -193,6 +197,128 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         });
 
         return tagFilters;
+    };
+
+    
+
+
+    // Active Filters
+    //
+
+    self.filtersChanged = function (filters) {
+        return !angular.equals(filters, self.activeFilters);
+    };
+
+    self.updateActiveFilters = function (activeFilters) {
+        self.activeFilters = activeFilters;
+        $location.search(activeFilters);
+    };
+
+    self.getActiveFilters = function () {
+        return self.activeFilters;
+    };
+
+
+
+
+
+    //  Filtering
+    //
+
+    self.getFilteredResults = function (forceRefresh) {
+        var deferred = $q.defer(),
+            filters = self.getActiveFilters();
+
+        resultsService.getAllResults(forceRefresh)
+            .then(
+                function (results) {
+                    self.filteredResults = [];
+                    angular.forEach(results, function (result) {
+                        if (self.filterElement(result, filters)) {
+                            self.filteredResults.push(result);
+                        }
+                    });
+                    deferred.resolve(self.filteredResults);
+                }
+            );
+
+        return deferred.promise;
+    };
+
+    self.filterElement = function (element, filters) {
+
+        // Set Up final test vars
+        var categoriesFilter = true,
+            themesFilter = true,
+            searchFilter = true,
+            citiesFilter = true,
+            districtsFilter = true,
+            structureFilter = true;
+
+        // Define all type of filters that needs an interval check instead of an id one
+        var filtersByInterval = ['difficulty', 'duration', 'ascent', 'eLength'];
+
+        self.activeFilters = filters;
+
+        if (filters.categories) {
+
+            if (self.matchById(element.properties.category, filters.categories, 'category')) {
+
+                var subFilters = self.categoryHasSubfilters(element.properties.category.id, filters);
+
+                if (_.size(subFilters) > 0) {
+                    var subfiltersResults = [];
+                    angular.forEach(subFilters, function (subFilter, subFilterName) {
+                        if (filtersByInterval.indexOf(subFilterName) > -1) {
+                            subfiltersResults.push(self.matchByRange(element.properties, subFilter, subFilterName));
+                        } else {
+                            subfiltersResults.push(self.matchById(element.properties, subFilter, subFilterName));
+                        }
+
+                    });
+                    if (subfiltersResults.indexOf(false) === -1) {
+                        categoriesFilter = true;
+                    } else {
+                        categoriesFilter = false;
+                    }
+
+                } else {
+                    categoriesFilter = true;
+                }
+
+            } else {
+                categoriesFilter = false;
+            }
+
+        } else {
+            categoriesFilter = self.matchById(element, globalSettings.DEFAULT_ACTIVE_CATEGORIES, 'category');
+        }
+
+        if (filters.themes) {
+            themesFilter = self.matchById(element.properties, filters.themes, 'themes');
+        }
+
+        if (filters.search) {
+            searchFilter = self.testByString(element.properties, filters.search);
+        }
+
+        if (filters.cities) {
+            citiesFilter = self.matchById(element.properties, filters.cities, 'cities');
+        }
+
+         if (filters.districts) {
+            districtsFilter = self.matchById(element.properties, filters.districts, 'districts');
+        }
+
+        if (filters.structure) {
+            structureFilter = self.matchById(element.properties, filters.structure, 'structure');
+        }
+
+
+        // CATEGORY && THEME && QUERY && CITY && DISTRICT
+        // Global test that pass if all filters test are true
+        return categoriesFilter && themesFilter && searchFilter && citiesFilter && districtsFilter && structureFilter;
+
     };
 
     self.testByString = function (element, query) {
@@ -297,115 +423,6 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         });
 
         return catSubFilters;
-    };
-
-    self.filtersChanged = function (filters) {
-        return !angular.equals(filters, self.activeFilters);
-    };
-
-    self.updateActiveFilters = function (activeFilters) {
-        self.activeFilters = activeFilters;
-        $location.search(activeFilters);
-    };
-
-    self.getActiveFilters = function () {
-        return self.activeFilters;
-    };
-
-    self.getFilteredResults = function (forceRefresh) {
-        var deferred = $q.defer(),
-            filters = self.getActiveFilters();
-
-        resultsService.getAllResults(forceRefresh)
-            .then(
-                function (results) {
-                    self.filteredResults = [];
-                    angular.forEach(results, function (result) {
-                        if (self.filterElement(result, filters)) {
-                            self.filteredResults.push(result);
-                        }
-                    });
-                    deferred.resolve(self.filteredResults);
-                }
-            );
-
-        return deferred.promise;
-    };
-
-    self.filterElement = function (element, filters) {
-
-        // Set Up final test vars
-        var categoriesFilter = true,
-            themesFilter = true,
-            searchFilter = true,
-            citiesFilter = true,
-            districtsFilter = true,
-            structureFilter = true;
-
-        // Define all type of filters that needs an interval check instead of an id one
-        var filtersByInterval = ['difficulty', 'duration', 'ascent', 'eLength'];
-
-        self.activeFilters = filters;
-
-        if (filters.categories) {
-
-            if (self.matchById(element.properties.category, filters.categories, 'category')) {
-
-                var subFilters = self.categoryHasSubfilters(element.properties.category.id, filters);
-
-                if (_.size(subFilters) > 0) {
-                    var subfiltersResults = [];
-                    angular.forEach(subFilters, function (subFilter, subFilterName) {
-                        if (filtersByInterval.indexOf(subFilterName) > -1) {
-                            subfiltersResults.push(self.matchByRange(element.properties, subFilter, subFilterName));
-                        } else {
-                            subfiltersResults.push(self.matchById(element.properties, subFilter, subFilterName));
-                        }
-
-                    });
-                    if (subfiltersResults.indexOf(false) === -1) {
-                        categoriesFilter = true;
-                    } else {
-                        categoriesFilter = false;
-                    }
-
-                } else {
-                    categoriesFilter = true;
-                }
-
-            } else {
-                categoriesFilter = false;
-            }
-
-        } else {
-            categoriesFilter = self.matchById(element, globalSettings.DEFAULT_ACTIVE_CATEGORIES, 'category');
-        }
-
-        if (filters.themes) {
-            themesFilter = self.matchById(element.properties, filters.themes, 'themes');
-        }
-
-        if (filters.search) {
-            searchFilter = self.testByString(element.properties, filters.search);
-        }
-
-        if (filters.cities) {
-            citiesFilter = self.matchById(element.properties, filters.cities, 'cities');
-        }
-
-         if (filters.districts) {
-            districtsFilter = self.matchById(element.properties, filters.districts, 'districts');
-        }
-
-        if (filters.structure) {
-            structureFilter = self.matchById(element.properties, filters.structure, 'structure');
-        }
-
-
-        // CATEGORY && THEME && QUERY && CITY && DISTRICT
-        // Global test that pass if all filters test are true
-        return categoriesFilter && themesFilter && searchFilter && citiesFilter && districtsFilter && structureFilter;
-
     };
 
 }
