@@ -138,10 +138,6 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
         initCtrlsTranslation();
     });
 
-    $rootScope.$on('refreshMapSize', function () {
-        mapService.invalidateSize();
-    });
-
     $scope.showFilters = function () {
         return !!globalSettings.SHOW_FILTERS_ON_MAP;
     };

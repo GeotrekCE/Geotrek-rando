@@ -254,7 +254,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                 function () {
                     if (activeDefaultType === null) {
                         $timeout(function () {
-                            $rootScope.$emit('refreshMapSize');
+                            mapService.invalidateSize();
                         }, 500);
                     }
                     $scope.toggleInterest(activeDefaultType);
