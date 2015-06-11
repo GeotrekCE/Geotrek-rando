@@ -20,11 +20,11 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
         };
 
         _.forEach(filterLength, function (numberOfValue, valueName) {
-            _.forEach($scope.activeFilters[valueName], function (value) {
-                if (value) {
+            for (var i = $scope.activeFilters[valueName].length - 1; i >= 0; i--) {
+                if ($scope.activeFilters[valueName][i]) {
                     filterLength[valueName]++;
                 }
-            });
+            }
         });
 
         $scope.filterLength = filterLength;
