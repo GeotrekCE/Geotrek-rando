@@ -71,7 +71,6 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
     $scope.favoriteIcon = (globalSettings.FAVORITES_ICON ? globalSettings.FAVORITES_ICON : 'heart');
     $scope.isInFavorites = favoritesService.isInFavorites;
     $scope.isSVG = utilsFactory.isSVG;
-    updateResults();
 
     $scope.$on('updateFilters', function () {
         updateResults();
