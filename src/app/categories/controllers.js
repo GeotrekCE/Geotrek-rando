@@ -4,6 +4,10 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
 
     var initRangeFiltersEvent = $rootScope.$on('updateFilters', initRangeFilters);
 
+    function updateFiltersTags() {
+        $rootScope.activeFiltersTags = filtersService.getTagFilters();
+    }
+
     function loadCategories(forceRefresh) {
         categoriesService.getCategories(forceRefresh)
             .then(
@@ -55,7 +59,6 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
     function initRangeFilters() {
         initRangeFiltersEvent();
         var categories = $scope.categories;
-        console.log(categories);
 
         $scope.activeRangeValues = {};
 
@@ -76,24 +79,16 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
         });
 
         $scope.$on('resetRange', function (event, data) {
-            var eventCategory = data.category,
-                filter = data.filter;
-            var categories = $scope.categories;
-            _.forEach(categories, function (currentCategory) {
-                if (currentCategory.id.toString() === eventCategory.toString()) {
-                    if (filter === 'all') {
-                        _.forEach(currentCategory, function (currentFilter, currentFilterName) {
-                            if (currentFilter.type === 'range') {
-                                resetRangeFilter(currentCategory[currentFilterName]);
-                            }
-                        });
-                    } else if (currentCategory[filter]) {
-                        resetRangeFilter(currentCategory[filter]);
-                    }
+            var filter = data.filter;
+            var rangeFilters = $scope.activeRangeValues;
+            _.forEach(rangeFilters, function (rangeFilter, rangeFilterName) {
+
+                if (filter === 'all' || rangeFilterName.toString() === filter.toString()) {
+                    resetRangeFilter(rangeFilter);
                 }
 
             });
-            $scope.categories = categories;
+            $scope.activeRangeValues = rangeFilters;
         });
     }
 
@@ -144,6 +139,9 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
 
     $scope.propagateActiveFilters = function () {
         filtersService.updateActiveFilters($rootScope.activeFilters);
+        if (globalSettings.SHOW_FILTERS_ON_MAP) {
+            updateFiltersTags();
+        }
         $rootScope.$broadcast('updateFilters');
     };
 

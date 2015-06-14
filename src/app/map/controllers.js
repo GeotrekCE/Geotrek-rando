@@ -97,6 +97,11 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
 
         if ($state.current.name === 'layout.detail') {
             updateMapWithDetails();
+            $scope.showFiltersOnMap = false;
+        }
+
+        if ($state.current.name === 'layout.root') {
+            $scope.showFiltersOnMap = !!globalSettings.SHOW_FILTERS_ON_MAP;
         }
     }
 
@@ -116,6 +121,11 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
         function () {
             if ($state.current.name === 'layout.detail') {
                 updateMapWithDetails();
+                $scope.showFiltersOnMap = false;
+            }
+
+            if ($state.current.name === 'layout.root') {
+                $scope.showFiltersOnMap = !!globalSettings.SHOW_FILTERS_ON_MAP;
             }
         });
 
@@ -134,9 +144,6 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
         initCtrlsTranslation();
     });
 
-    $scope.showFilters = function () {
-        return !!globalSettings.SHOW_FILTERS_ON_MAP;
-    };
 }
 
 module.exports = {

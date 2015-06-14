@@ -8,7 +8,7 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
     $scope.filterLength = {};
 
     function updateFiltersTags() {
-        $rootScope.activeFiltersTags = filtersService.getTagFilters($location.search());
+        $rootScope.activeFiltersTags = filtersService.getTagFilters();
     }
 
     function initFiltersView() {
@@ -17,6 +17,9 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
                 function (filters) {
                     $scope.filters = filters;
                     $rootScope.activeFilters = filtersService.getActiveFilters();
+                    if (globalSettings.SHOW_FILTERS_ON_MAP) {
+                        updateFiltersTags();
+                    }
                     $rootScope.$broadcast('updateFilters');
                 }
             );
@@ -49,44 +52,42 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
 
     $scope.propagateActiveFilters = function () {
         filtersService.updateActiveFilters($rootScope.activeFilters);
+        if (globalSettings.SHOW_FILTERS_ON_MAP) {
+            updateFiltersTags();
+        }
         $rootScope.$broadcast('updateFilters');
     };
 
-    // $scope.removeFilterByTag = function (tagLabel, tagValue) {
-    //     var query = $location.search();
-    //     if (typeof query[tagLabel] === 'string') {
-    //         if (tagValue.toString() === query[tagLabel] || tagLabel === 'search') {
-    //             delete query[tagLabel];
-    //         }
-    //     } else {
-    //         _.forEach(query[tagLabel], function (filter, index) {
-    //             if (tagValue.toString() === filter.toString()) {
-    //                 query[tagLabel].splice(index, 1);
-    //                 if (tagValue.toString().indexOf('-') > -1) {
-    //                     $rootScope.$broadcast('resetRange', {category: tagLabel.split('_')[0], filter: tagLabel.split('_')[1]});
-    //                 }
-    //             }
-    //         });
-    //         if (query[tagLabel].length === 0) {
-    //             delete query[tagLabel];
-    //         }
-    //     }
+    $scope.removeFilterByTag = function (tagLabel, tagValue) {
+        var activeFilters = $rootScope.activeFilters;
 
-    //     if (tagLabel === 'categories') {
-    //         _.forEach(query, function (filter, index) {
-    //             if (index.split('_')[0] === tagValue.toString()) {
-    //                 delete query[index];
-    //             }
-    //         });
-    //         $rootScope.$broadcast('resetRange', {category: tagValue.toString(), filter: 'all'});
-    //     }
+        if (typeof activeFilters[tagLabel] === 'string') {
+            if (tagValue.toString() === activeFilters[tagLabel] || tagLabel === 'search') {
+                delete activeFilters[tagLabel];
+            }
+        } else {
+            _.forEach(activeFilters[tagLabel], function (filter, index) {
+                if (filter && tagValue.toString() === filter.toString()) {
+                    activeFilters[tagLabel].splice(index, 1);
+                    if (tagValue.toString().indexOf('-') > -1) {
+                        $rootScope.$broadcast('resetRange', {filter: tagLabel});
+                    }
+                }
+            });
+            if (activeFilters[tagLabel].length === 0) {
+                delete activeFilters[tagLabel];
+            }
+        }
 
-    //     $location.search(query);
-    //     $rootScope.$broadcast('updateFilters');
-    // };
+        $rootScope.activeFilters = activeFilters;
+        $scope.propagateActiveFilters();
+    };
 
     $scope.resetFilters = function () {
         filtersService.resetActiveFilters();
+        $rootScope.activeFilters = filtersService.getActiveFilters();
+        $rootScope.$broadcast('resetRange', {filter: 'all'});
+        $scope.propagateActiveFilters();
     };
 
     $scope.isSVG = utilsFactory.isSVG;

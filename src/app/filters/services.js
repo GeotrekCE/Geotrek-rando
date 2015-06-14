@@ -95,11 +95,12 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
 
                 self.filters.categories.push(newCategory);
 
-                if (typeof globalSettings.DEFAULT_ACTIVE_CATEGORIES !== 'object') {
-                    globalSettings.DEFAULT_ACTIVE_CATEGORIES = [globalSettings.DEFAULT_ACTIVE_CATEGORIES];
+                var defaultActiveCategories = globalSettings.DEFAULT_ACTIVE_CATEGORIES;
+                if (typeof defaultActiveCategories !== 'object') {
+                    defaultActiveCategories = [defaultActiveCategories];
                 }
  
-                if (globalSettings.DEFAULT_ACTIVE_CATEGORIES.indexOf(category.id.toString()) > -1) {
+                if (defaultActiveCategories.indexOf(category.id.toString()) > -1 && activeFiltersModel.categories.indexOf(category.id.toString()) === -1) {
                     activeFiltersModel.categories.push(category.id);
                 }
             }
@@ -190,7 +191,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     };
 
     self.addFilterValueToActiveFilters = function (filterValues, filterName) {
-        if (!self.activeFilters[filterName]) {
+        if (!self.activeFilters[filterName] || filterName === 'categories') {
             self.activeFilters[filterName] = [];
         }
 
@@ -216,6 +217,65 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
 
     // Tag Filters
     //
+    
+    self.getTagFilters = function () {
+        var tagFilters = [],
+            finalArray = [];
+        angular.forEach(self.activeFilters, function (aFilter, index) {
+            var type = index,
+                id = 0,
+                subtype = null,
+                subId = null;
+
+            if (index.indexOf('_') > -1) {
+                type = 'categories';
+                id = index.split('_')[0];
+                subtype = index.split('_')[1];
+            }
+
+            if (typeof aFilter === 'string') {
+                aFilter = [aFilter];
+            }
+
+            angular.forEach(aFilter, function (aSubFilter) {
+
+                if (subtype) {
+                    subId = aSubFilter;
+                } else {
+                    id = aSubFilter;
+                }
+
+                var tempElement = self.getATagFilter(id, type, subtype, subId);
+                if (tempElement) {
+                    var tagElement = {
+                        uid: (tempElement.id || tempElement.code) + '-' + index,
+                        id: tempElement.id || tempElement.code,
+                        label: tempElement.label || tempElement.name,
+                        type: type,
+                        typeId: id,
+                        subtype: subtype,
+                        queryLabel: index
+                    };
+                    tagFilters.push(tagElement);
+                }
+            });
+
+        });
+
+        angular.forEach(tagFilters, function (filterTag) {
+            if (filterTag.subtype) {
+                angular.forEach(tagFilters, function (tag) {
+                    if (tag.typeId === filterTag.typeId && tag.queryLabel === 'categories') {
+                        finalArray.push(filterTag);
+                    }
+                });
+            } else {
+                finalArray.push(filterTag);
+            }
+        });
+
+        return finalArray;
+    };
 
     self.getATagFilter = function (id, type, subtype, subId) {
         var filter = null;
@@ -273,52 +333,6 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
 
         return filter;
     };
-
-    self.getTagFilters = function (activeFilters) {
-        var tagFilters = [];
-
-        angular.forEach(activeFilters, function (aFilter, index) {
-            var type = index,
-                id = 0,
-                subtype = null,
-                subId = null;
-
-            if (index.indexOf('_') > -1) {
-                type = 'categories';
-                id = index.split('_')[0];
-                subtype = index.split('_')[1];
-            }
-
-            if (typeof aFilter === 'string') {
-                aFilter = [aFilter];
-            }
-
-            angular.forEach(aFilter, function (aSubFilter) {
-
-                if (subtype) {
-                    subId = aSubFilter;
-                } else {
-                    id = aSubFilter;
-                }
-
-                var tempElement = self.getAFilter(id, type, subtype, subId);
-                var tagElement = {
-                    id: tempElement.id || tempElement.code,
-                    label: tempElement.label || tempElement.name,
-                    type: type,
-                    typeId: id,
-                    subtype: subtype,
-                    queryLabel: index
-                };
-                tagFilters.push(tagElement);
-            });
-
-        });
-
-        return tagFilters;
-    };
-
-
 
 
 
@@ -388,7 +402,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     self.matchByCategories = function (element, filters) {
         var result = true;
 
-        if (filters.categories.length > 0) {
+        if (filters.categories && filters.categories.length > 0) {
 
             if (self.matchById(element.properties.category, filters.categories, 'category')) {
 
