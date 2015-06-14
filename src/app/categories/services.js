@@ -1,6 +1,6 @@
 'use strict';
 
-function categoriesService(globalSettings, $q, treksService, contentsService, eventsService, utilsFactory, filtersService) {
+function categoriesService(globalSettings, $q, treksService, contentsService, eventsService, utilsFactory) {
     var self = this;
 
     this.replaceImgURLs = function (categoriesData) {
@@ -309,7 +309,6 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                         if (globalSettings.ENABLE_TOURISTIC_EVENTS && eventCat && globalSettings.LIST_EXCLUDE_CATEGORIES.indexOf(eventCat.id) === -1) {
                             self._categoriesList.push(eventCat);
                         }
-                        filtersService.createTouristicCategoryFilters(self._categoriesList);
                         deferred.resolve(self._categoriesList);
                     }
                 );

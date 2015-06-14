@@ -2,87 +2,14 @@
 
 function CategoriesListeController($scope, $rootScope, $location, utilsFactory, globalSettings, categoriesService, filtersService) {
 
-    function updateCategories() {
-        var currentQuery = filtersService.getActiveFilters(),
-            categories = $scope.categories;
-
-        for (var i = categories.length - 1; i >= 0; i--) {
-            var category = categories[i];
-
-            category.active = false;
-            category.filters = {};
-            if (currentQuery.categories) {
-                var categoriesArray = currentQuery.categories;
-
-                if (typeof categoriesArray === 'string') {
-                    categoriesArray = [categoriesArray];
+    function loadCategories(forceRefresh) {
+        categoriesService.getCategories(forceRefresh)
+            .then(
+                function (categories) {
+                    $scope.categories = categories;
+                    //initRangeFilters();
                 }
-
-                for (var j = categoriesArray.length - 1; j >= 0; j--) {
-                    if (category.id.toString() === categoriesArray[j].toString()) {
-                        category.active = true;
-                    }
-                }
-
-                _.forEach(currentQuery, function (filter, filterName) {
-                    if (filterName.indexOf('_') > -1) {
-                        var categoryId = filterName.split('_')[0],
-                            filterKey = filterName.split('_')[1];
-                        if (categoryId.toString() === category.id.toString()) {
-                            if (typeof filter === 'string') {
-                                filter = [filter];
-                            }
-
-                            for (var k = filter.length - 1; k >= 0; k--) {
-                                var filterValue = filter[k];
-                                if (!category.filters[filterKey]) {
-                                    category.filters[filterKey] = {};
-                                }
-
-                                var capture = filterValue.toString().match(/^(\d+)-(\d+)$/i);
-                                if (capture) {
-                                    var minIndex,
-                                        maxIndex;
-                                    category.filters[filterKey] = {};
-                                    category.filters[filterKey][filterValue] = true;
-
-                                    for (var l = category[filterKey].values.length - 1; l >= 0; l--) {
-                                        var currentFilter = category[filterKey].values[l];
-
-                                        if (currentFilter.id.toString() === capture[1].toString()) {
-                                            minIndex = l;
-                                        }
-
-                                        if (currentFilter.id.toString() === capture[2].toString()) {
-                                            maxIndex = l;
-                                        }
-                                    }
-
-                                    category[filterKey].min = minIndex;
-                                    category[filterKey].max = maxIndex;
-                                } else {
-                                    category.filters[filterKey][filterValue] = true;
-                                }
-                            }
-                        }
-                    }
-                });
-
-            } else {
-                if (typeof globalSettings.DEFAULT_ACTIVE_CATEGORIES === 'string') {
-                    globalSettings.DEFAULT_ACTIVE_CATEGORIES = [globalSettings.DEFAULT_ACTIVE_CATEGORIES];
-                }
-
-                for (var m = globalSettings.DEFAULT_ACTIVE_CATEGORIES.length - 1; m >= 0; m--) {
-                    if (category.id.toString() === globalSettings.DEFAULT_ACTIVE_CATEGORIES[m].toString()) {
-                        category.active = true;
-                    }
-                }
-
-            }
-        }
-
-        $scope.categories = categories;
+            );
     }
 
     function resetRangeFilter(filter) {
@@ -118,7 +45,7 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
                                 } else {
                                     category.filters[propertyName]['0-max'] = false;
                                 }
-                                $scope.propagateFilters();
+                                //$scope.propagateActiveFilters();
                             },
                             true
                         );
@@ -150,59 +77,35 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
         $scope.categories = categories;
     }
 
-    function loadCategories(forceRefresh) {
-        categoriesService.getCategories(forceRefresh)
-            .then(
-                function (categories) {
-                    $scope.categories = categories;
-                    initRangeFilters();
-                    updateCategories();
-                    $rootScope.$on('updateFilters', updateCategories);
-                }
-            );
-    }
-
     $scope.toggleCategory = function (category) {
-        category.active = !category.active;
-        $scope.propagateFilters();
+        var categories = $rootScope.activeFilters.categories,
+            indexOfCategory = categories.indexOf(category.id.toString());
+        if (indexOfCategory > -1) {
+            categories.splice(indexOfCategory, 1);
+        } else {
+            categories.push(category.id.toString());
+        }
+        $scope.propagateActiveFilters();
     };
 
-    $scope.propagateFilters = function () {
-        var currentQuery = $location.search(),
-            categories = $scope.categories,
-            activeCategories = [];
-        for (var i = categories.length - 1; i >= 0; i--) {
-            var category = categories[i];
+    $scope.toogleCategoryFilter = function (categoryId, filterType, filterId) {
+        var categoryFilter = $rootScope.activeFilters[categoryId + '_' + filterType];
 
-            if (category.active) {
-                activeCategories.push(category.id.toString());
-                _.forEach(category.filters, function (filter, filterKey) {
-                    var filterIsNotEmpty = false;
-                    var currentFilterValues = [];
-                    _.forEach(filter, function (value, valueKey) {
-
-                        if (value) {
-                            filterIsNotEmpty = true;
-                            currentFilterValues.push(valueKey);
-                        }
-                    });
-                    if (filterIsNotEmpty) {
-                        currentQuery[category.id.toString() + '_' + filterKey] = currentFilterValues;
-                    } else {
-                        delete currentQuery[category.id.toString() + '_' + filterKey];
-                    }
-                });
+        if (categoryFilter) {
+            var indexOfFilter = categoryFilter.indexOf(filterId.toString());
+            if (indexOfFilter > -1) {
+                categoryFilter.splice(indexOfFilter, 1);
             } else {
-                _.forEach(category.filters, function (filter, filterKey) {
-                    if (currentQuery[category.id.toString() + '_' + filterKey]) {
-                        delete currentQuery[category.id.toString() + '_' + filterKey];
-                    }
-                });
+                $rootScope.activeFilters[categoryId + '_' + filterType].push(filterId.toString());    
             }
+        } else {
+            $rootScope.activeFilters[categoryId + '_' + filterType] = [filterId.toString()];
         }
+        $scope.propagateActiveFilters();
+    };
 
-        currentQuery.categories = activeCategories;
-        filtersService.updateActiveFilters(currentQuery);
+    $scope.propagateActiveFilters = function () {
+        filtersService.updateActiveFilters($rootScope.activeFilters);
         $rootScope.$broadcast('updateFilters');
     };
 
@@ -213,9 +116,6 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
         loadCategories(true);
     });
 
-    $rootScope.$on('updateCategories', function () {
-        updateCategories();
-    });
 }
 
 module.exports = {

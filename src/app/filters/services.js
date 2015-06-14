@@ -1,62 +1,113 @@
 'use strict';
 
-function filtersService($q, $location, globalSettings, utilsFactory, resultsService) {
+function filtersService($q, $location, globalSettings, utilsFactory, resultsService, categoriesService) {
 
-    var self = this;
-    self.activeFilters = {};
+    var self = this,
+        activeFiltersModel = {
+            categories:     [],
+            themes:         [],
+            districts:      [],
+            cities:         [],
+            structure:      [],
+            search:         null
+        };
 
-    self.createTouristicCategoryFilters = function (categories) {
+    // Define all type of filters that needs an interval check instead of an id one
+    var filtersByInterval = ['difficulty', 'duration', 'ascent', 'eLength'];
 
+    self.initFilters = function () {
+        var deferred = $q.defer(),
+            promises = [];
+ 
         if (!self.filters) {
-            self.initGlobalFilters();
+            self.filters = angular.copy(activeFiltersModel);
         }
 
+        promises.push(
+            categoriesService.getCategories()
+                .then(
+                    function (categories) {
+                        self.InitCategoriesFilters(categories);
+                    },
+                    function (err) {
+                        console.error(err);
+                    }
+                )
+        );
+
+        promises.push(
+            resultsService.getAllResults()
+                .then(
+                    function (results) {
+                        self.initGlobalFilters(results);
+                    },
+                    function (err) {
+                        console.error(err);
+                    }
+                )
+        );
+
+        $q.all(promises)
+            .then(
+                function () {
+                    self.initActiveFilter();
+                    deferred.resolve(self.filters);
+                },
+                function (err) {
+                    console.error(err);
+                }
+            );
+ 
+        return deferred.promise;
+    };
+
+    self.InitCategoriesFilters = function (categories) {
+
         angular.forEach(categories, function (category) {
-            var newCategory = {
-                label: category.label,
-                id: category.id,
-                type1: [],
-                type2: []
-            };
+            if (globalSettings.LIST_EXCLUDE_CATEGORIES.indexOf(category.id.toString()) === -1) {
+                var newCategory = {
+                    label: category.label,
+                    id: category.id,
+                    type1: [],
+                    type2: []
+                };
 
-            if (category.type1 && category.type1.values.length > 0) {
-                newCategory.type1 = category.type1;
-            }
-
-            if (category.type2 && category.type2.values.length > 0) {
-                newCategory.type2 = category.type2;
-            }
-
-            if (category.type === 'treks') {
-                newCategory.difficulty = [];
-                if (category.difficulty.values.length > 0) {
-                    newCategory.difficulty = category.difficulty;
+                if (category.type1 && category.type1.values.length > 0) {
+                    newCategory.type1 = category.type1;
                 }
-                if (category.route.values.length > 0) {
-                    newCategory.route = category.route;
-                }
-                newCategory.duration = category.duration;
-                newCategory.ascent = category.ascent;
-                newCategory.eLength = category.eLength;
-            }
 
-            self.filters.categories.push(newCategory);
+                if (category.type2 && category.type2.values.length > 0) {
+                    newCategory.type2 = category.type2;
+                }
+
+                if (category.type === 'treks') {
+                    newCategory.difficulty = [];
+                    if (category.difficulty.values.length > 0) {
+                        newCategory.difficulty = category.difficulty;
+                    }
+                    if (category.route.values.length > 0) {
+                        newCategory.route = category.route;
+                    }
+                    newCategory.duration = category.duration;
+                    newCategory.ascent = category.ascent;
+                    newCategory.eLength = category.eLength;
+                }
+
+                self.filters.categories.push(newCategory);
+
+                if (typeof globalSettings.DEFAULT_ACTIVE_CATEGORIES !== 'object') {
+                    globalSettings.DEFAULT_ACTIVE_CATEGORIES = [globalSettings.DEFAULT_ACTIVE_CATEGORIES];
+                }
+ 
+                if (globalSettings.DEFAULT_ACTIVE_CATEGORIES.indexOf(category.id.toString()) > -1) {
+                    activeFiltersModel.categories.push(category.id);
+                }
+            }
         });
 
     };
 
     self.initGlobalFilters = function (results) {
-
-        if (!self.filters) {
-            self.filters = {
-                categories:     [],
-                themes:         [],
-                districts:      [],
-                cities:         [],
-                structure:      [],
-                search:         ''
-            };
-        }
 
         if (results) {
             angular.forEach(results, function (result) {
@@ -93,6 +144,74 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     self.getFilters = function () {
         return self.filters;
     };
+
+
+
+
+    // Active FIlters
+    //
+
+    self.initActiveFilter = function (forceRefresh) {
+        
+        if (!self.activeFilters || forceRefresh) {
+            self.activeFilters = angular.copy(activeFiltersModel);
+            if (angular.equals($location.search(), {})) {
+                $location.search(self.activeFilters);
+            } else {
+                self.updateActiveFiltersFromUrl();
+            }
+        }
+    };
+
+    self.resetActiveFilters = function () {
+        $location.search({});
+        self.initActiveFilter(true);
+    };
+
+    self.filtersChanged = function (filters) {
+        return !angular.equals(filters, self.activeFilters);
+    };
+
+    self.updateActiveFilters = function (activeFilters) {
+        if (activeFilters.search === '') {
+            activeFilters.search = null;
+        }
+        self.activeFilters = activeFilters;
+        $location.search(activeFilters);
+    };
+
+    self.updateActiveFiltersFromUrl = function () {
+        var urlFilters = $location.search();
+
+        angular.forEach(urlFilters, function (filterValues, filterName) {
+            self.addFilterValueToActiveFilters(filterValues, filterName);
+        });
+        return self.activeFilters;
+    };
+
+    self.addFilterValueToActiveFilters = function (filterValues, filterName) {
+        if (!self.activeFilters[filterName]) {
+            self.activeFilters[filterName] = [];
+        }
+
+        if (typeof filterValues === 'string') {
+            filterValues = [filterValues];
+        }
+
+        angular.forEach(filterValues, function (filterId) {
+            if (self.activeFilters[filterName].indexOf(filterId) === -1) {
+                self.activeFilters[filterName].push(filterId);
+            }
+        });
+    };
+
+    self.getActiveFilters = function () {
+        return self.activeFilters;
+    };
+
+
+
+
 
 
     // Tag Filters
@@ -199,25 +318,6 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return tagFilters;
     };
 
-    
-
-
-    // Active Filters
-    //
-
-    self.filtersChanged = function (filters) {
-        return !angular.equals(filters, self.activeFilters);
-    };
-
-    self.updateActiveFilters = function (activeFilters) {
-        self.activeFilters = activeFilters;
-        $location.search(activeFilters);
-    };
-
-    self.getActiveFilters = function () {
-        return self.activeFilters;
-    };
-
 
 
 
@@ -245,7 +345,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return deferred.promise;
     };
 
-    self.filterElement = function (element, filters) {
+    self.filterElement = function (element) {
 
         // Set Up final test vars
         var categoriesFilter = true,
@@ -255,12 +355,9 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             districtsFilter = true,
             structureFilter = true;
 
-        // Define all type of filters that needs an interval check instead of an id one
-        var filtersByInterval = ['difficulty', 'duration', 'ascent', 'eLength'];
-
-        self.activeFilters = filters;
-
-        if (filters.categories) {
+        var filters = self.activeFilters;
+        
+        if (filters.categories.length > 0) {
 
             if (self.matchById(element.properties.category, filters.categories, 'category')) {
 
@@ -294,7 +391,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             categoriesFilter = self.matchById(element, globalSettings.DEFAULT_ACTIVE_CATEGORIES, 'category');
         }
 
-        if (filters.themes) {
+        if (filters.themes.length > 0) {
             themesFilter = self.matchById(element.properties, filters.themes, 'themes');
         }
 
@@ -302,23 +399,52 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             searchFilter = self.testByString(element.properties, filters.search);
         }
 
-        if (filters.cities) {
+        if (filters.cities.length > 0) {
             citiesFilter = self.matchById(element.properties, filters.cities, 'cities');
         }
 
-         if (filters.districts) {
+         if (filters.districts.length > 0) {
             districtsFilter = self.matchById(element.properties, filters.districts, 'districts');
         }
 
-        if (filters.structure) {
+        if (filters.structure.length > 0) {
             structureFilter = self.matchById(element.properties, filters.structure, 'structure');
         }
-
 
         // CATEGORY && THEME && QUERY && CITY && DISTRICT
         // Global test that pass if all filters test are true
         return categoriesFilter && themesFilter && searchFilter && citiesFilter && districtsFilter && structureFilter;
 
+    };
+
+
+    self.matchByRange = function (element, filters, name) {
+        var min = filters.toString().split('-')[0],
+            max = filters.toString().split('-')[1],
+            elementId = element[name].id || element[name];
+
+        if (parseInt(min, 10) <= parseInt(elementId, 10) && parseInt(elementId, 10) <= parseInt(max, 10)) {
+            return true;
+        }
+
+        return false;
+    };
+
+    self.matchById = function (element, filters, name) {
+        // $location provide a string if there's only one value, an array if there's more
+        if (typeof filters === 'string') {
+            return self.testById(element, filters, name);
+        } else {
+            var result = false;
+            angular.forEach(filters, function (filter) {
+                // VAL X OR VAL Y
+                // We set true for any value that pass
+                if (self.testById(element, filter, name)) {
+                    result = true;
+                }
+            });
+            return result;
+        }
     };
 
     self.testByString = function (element, query) {
@@ -373,35 +499,6 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return result;
     };
 
-    self.matchByRange = function (element, filters, name) {
-        var min = filters.toString().split('-')[0],
-            max = filters.toString().split('-')[1],
-            elementId = element[name].id || element[name];
-
-        if (parseInt(min, 10) <= parseInt(elementId, 10) && parseInt(elementId, 10) <= parseInt(max, 10)) {
-            return true;
-        }
-
-        return false;
-    };
-
-    self.matchById = function (element, filters, name) {
-        // $location provide a string if there's only one value, an array if there's more
-        if (typeof filters === 'string') {
-            return self.testById(element, filters, name);
-        } else {
-            var result = false;
-            angular.forEach(filters, function (filter) {
-                // VAL X OR VAL Y
-                // We set true for any value that pass
-                if (self.testById(element, filter, name)) {
-                    result = true;
-                }
-            });
-            return result;
-        }
-    };
-
     self.categoryHasSubfilters = function (elementCategoryId, filters) {
         var catSubFilters = {};
 
@@ -411,7 +508,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
                 var categoryId = filterName.split('_')[0],
                     filterKey = filterName.split('_')[1];
 
-                if (categoryId.toString() === elementCategoryId.toString()) {
+                if (categoryId.toString() === elementCategoryId.toString() && filter.length > 0) {
 
                     //Init catSubfilters child if it doesn't exists
                     if (!catSubFilters[filterKey]) {
