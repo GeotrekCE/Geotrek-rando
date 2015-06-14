@@ -31,7 +31,7 @@ var dependencies = [
     'angulartics',
     'angulartics.google.analytics',
     'ui.router',
-    'ui.slider',
+    'rzModule',
     'ngResource',
     'ui.bootstrap'
 ];
@@ -46,7 +46,7 @@ require('classlist-polyfill');
 // LOAD EXTERNAL DEPENDENCIES
 require('ui.bootstrap');
 require('ui.router');
-require('angular-slider');
+require('angularjs-slider');
 require('angular-translate');
 require('angulartics');
 require('angulartics-ga');

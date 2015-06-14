@@ -357,39 +357,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
 
         var filters = self.activeFilters;
         
-        if (filters.categories.length > 0) {
-
-            if (self.matchById(element.properties.category, filters.categories, 'category')) {
-
-                var subFilters = self.categoryHasSubfilters(element.properties.category.id, filters);
-
-                if (_.size(subFilters) > 0) {
-                    var subfiltersResults = [];
-                    angular.forEach(subFilters, function (subFilter, subFilterName) {
-                        if (filtersByInterval.indexOf(subFilterName) > -1) {
-                            subfiltersResults.push(self.matchByRange(element.properties, subFilter, subFilterName));
-                        } else {
-                            subfiltersResults.push(self.matchById(element.properties, subFilter, subFilterName));
-                        }
-
-                    });
-                    if (subfiltersResults.indexOf(false) === -1) {
-                        categoriesFilter = true;
-                    } else {
-                        categoriesFilter = false;
-                    }
-
-                } else {
-                    categoriesFilter = true;
-                }
-
-            } else {
-                categoriesFilter = false;
-            }
-
-        } else {
-            categoriesFilter = self.matchById(element, globalSettings.DEFAULT_ACTIVE_CATEGORIES, 'category');
-        }
+        categoriesFilter = self.matchByCategories(element, filters);
 
         if (filters.themes.length > 0) {
             themesFilter = self.matchById(element.properties, filters.themes, 'themes');
@@ -417,6 +385,71 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
 
     };
 
+    self.matchByCategories = function (element, filters) {
+        var result = true;
+
+        if (filters.categories.length > 0) {
+
+            if (self.matchById(element.properties.category, filters.categories, 'category')) {
+
+                result = self.matchCategorySubFilters(element, filters);
+
+            } else {
+                result = false;
+            }
+
+        } else {
+            result = self.matchById(element, globalSettings.DEFAULT_ACTIVE_CATEGORIES, 'category');
+        }
+
+        return result;
+    };
+
+    self.matchCategorySubFilters = function (element, filters) {
+        var subFilters = self.categoryHasSubfilters(element.properties.category.id, filters);
+
+        if (_.size(subFilters) > 0) {
+            var subfiltersResults = [];
+            angular.forEach(subFilters, function (subFilter, subFilterName) {
+                if (filtersByInterval.indexOf(subFilterName) > -1) {
+                    subfiltersResults.push(self.matchByRange(element.properties, subFilter, subFilterName));
+                } else {
+                    subfiltersResults.push(self.matchById(element.properties, subFilter, subFilterName));
+                }
+
+            });
+            if (subfiltersResults.indexOf(false) === -1) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } else {
+            return true;
+        }
+    };
+
+    self.categoryHasSubfilters = function (elementCategoryId, filters) {
+        var catSubFilters = {};
+        angular.forEach(filters, function (filter, filterName) {
+            // categories subfilters are composed like catId-subFilterName
+            if (filterName.indexOf('_') > -1) {
+                var categoryId = filterName.split('_')[0],
+                    filterKey = filterName.split('_')[1];
+
+                if (categoryId.toString() === elementCategoryId.toString() && filter && filter.length > 0) {
+
+                    //Init catSubfilters child if it doesn't exists
+                    if (!catSubFilters[filterKey]) {
+                        catSubFilters[filterKey] = [];
+                    }
+                    catSubFilters[filterKey] = filter;
+                }
+            }
+        });
+
+        return catSubFilters;
+    };
 
     self.matchByRange = function (element, filters, name) {
         var min = filters.toString().split('-')[0],
@@ -497,29 +530,6 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         }
 
         return result;
-    };
-
-    self.categoryHasSubfilters = function (elementCategoryId, filters) {
-        var catSubFilters = {};
-
-        angular.forEach(filters, function (filter, filterName) {
-            // subfilters are composed like catId-subFilterName
-            if (filterName.indexOf('_') > -1) {
-                var categoryId = filterName.split('_')[0],
-                    filterKey = filterName.split('_')[1];
-
-                if (categoryId.toString() === elementCategoryId.toString() && filter.length > 0) {
-
-                    //Init catSubfilters child if it doesn't exists
-                    if (!catSubFilters[filterKey]) {
-                        catSubFilters[filterKey] = [];
-                    }
-                    catSubFilters[filterKey] = filter;
-                }
-            }
-        });
-
-        return catSubFilters;
     };
 
 }

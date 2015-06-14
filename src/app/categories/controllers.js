@@ -2,12 +2,13 @@
 
 function CategoriesListeController($scope, $rootScope, $location, utilsFactory, globalSettings, categoriesService, filtersService) {
 
+    var initRangeFiltersEvent = $rootScope.$on('updateFilters', initRangeFilters);
+
     function loadCategories(forceRefresh) {
         categoriesService.getCategories(forceRefresh)
             .then(
                 function (categories) {
                     $scope.categories = categories;
-                    //initRangeFilters();
                 }
             );
     }
@@ -17,65 +18,102 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
         filter.max = filter.values.length - 1;
     }
 
+    function initRangeValues(categoryId, filter, filterName) {
+        var uid = categoryId + '_' + filterName;
+        var activeFilters = filtersService.getActiveFilters();
+        var valuesLength = filter.values.length;
+
+        $scope.activeRangeValues[uid] = {
+            floor: 0,
+            ceil: valuesLength - 1,
+            values: filter.values
+        };
+        if (activeFilters && activeFilters[uid]) {
+            var minValue = activeFilters[uid][0].split('-')[0],
+                maxValue = activeFilters[uid][0].split('-')[1],
+                minIndex = 0,
+                maxIndex = valuesLength - 1;
+
+            angular.forEach(filter.values, function (value, valueIndex) {
+                if (value.id.toString() === minValue.toString()) {
+                    minIndex = valueIndex;
+                }
+
+                if (value.id.toString() === maxValue.toString()) {
+                    maxIndex = valueIndex;
+                }
+            });
+
+            $scope.activeRangeValues[uid].min = minIndex;
+            $scope.activeRangeValues[uid].max = maxIndex;
+        } else {
+            $scope.activeRangeValues[uid].min = 0;
+            $scope.activeRangeValues[uid].max = valuesLength - 1;
+        }
+    }
+
     function initRangeFilters() {
+        initRangeFiltersEvent();
         var categories = $scope.categories;
-        _.forEach(categories, function (category) {
-            _.forEach(category, function (property, propertyName) {
+        console.log(categories);
+
+        $scope.activeRangeValues = {};
+
+        for (var i = categories.length - 1; i >= 0; i--) {
+            var category = categories[i];
+
+            angular.forEach(category, function (property, propertyName) {
                 if (property && property.type && property.type === 'range') {
 
-                    if (property.values.length > 1) {
-                        resetRangeFilter(property);
-                        $scope.$watchGroup(
-                            [
-                                function () {
-                                    return property.min;
-                                },
-                                function () {
-                                    return property.max;
-                                }
-                            ],
-                            function () {
-                                var minIndex = property.min,
-                                    maxIndex = property.max;
-                                category.filters[propertyName] = {};
-                                if (minIndex !== 0 || maxIndex !== property.values.length - 1) {
-                                    var min = property.values[minIndex].id.toString();
-                                    var max = property.values[maxIndex].id.toString();
-                                    category.filters[propertyName][min + '-' + max] = true;
-                                } else {
-                                    category.filters[propertyName]['0-max'] = false;
-                                }
-                                //$scope.propagateActiveFilters();
-                            },
-                            true
-                        );
-                        $scope.$on('resetRange', function (event, data) {
-                            var eventCategory = data.category,
-                                filter = data.filter;
-                            var categories = $scope.categories;
-                            _.forEach(categories, function (currentCategory) {
-                                if (currentCategory.id.toString() === eventCategory.toString()) {
-                                    if (filter === 'all') {
-                                        _.forEach(currentCategory, function (currentFilter, currentFilterName) {
-                                            if (currentFilter.type === 'range') {
-                                                resetRangeFilter(currentCategory[currentFilterName]);
-                                            }
-                                        });
-                                    } else if (currentCategory[filter]) {
-                                        resetRangeFilter(currentCategory[filter]);
-                                    }
-                                }
-
-                            });
-                            $scope.categories = categories;
-                        });
-                    }
+                    initRangeValues(category.id, property, propertyName);
 
                 }
             });
+        }
+
+        $scope.$on("slideEnded", function() {
+            $scope.updateActiveRangeFilters();
         });
-        $scope.categories = categories;
+
+        $scope.$on('resetRange', function (event, data) {
+            var eventCategory = data.category,
+                filter = data.filter;
+            var categories = $scope.categories;
+            _.forEach(categories, function (currentCategory) {
+                if (currentCategory.id.toString() === eventCategory.toString()) {
+                    if (filter === 'all') {
+                        _.forEach(currentCategory, function (currentFilter, currentFilterName) {
+                            if (currentFilter.type === 'range') {
+                                resetRangeFilter(currentCategory[currentFilterName]);
+                            }
+                        });
+                    } else if (currentCategory[filter]) {
+                        resetRangeFilter(currentCategory[filter]);
+                    }
+                }
+
+            });
+            $scope.categories = categories;
+        });
     }
+
+    $scope.updateActiveRangeFilters = function () {
+        var categoriesRangeFilters = $scope.activeRangeValues;
+
+        angular.forEach(categoriesRangeFilters, function (filterValues, filterName) {
+            var minIndex = filterValues.min,
+                maxIndex = filterValues.max;
+            if (minIndex !== 0 || maxIndex !== filterValues.values.length - 1) {
+                var min = filterValues.values[minIndex].id.toString();
+                var max = filterValues.values[maxIndex].id.toString();
+                $rootScope.activeFilters[filterName] = [min + '-' + max];
+            } else {
+                $rootScope.activeFilters[filterName] = null;
+            }
+        });
+
+        $scope.propagateActiveFilters();
+    };
 
     $scope.toggleCategory = function (category) {
         var categories = $rootScope.activeFilters.categories,
@@ -112,6 +150,7 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
     $scope.isSVG = utilsFactory.isSVG;
 
     loadCategories();
+
     $rootScope.$on('switchGlobalLang', function () {
         loadCategories(true);
     });
