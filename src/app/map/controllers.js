@@ -96,7 +96,6 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
         initCtrlsTranslation();
 
         if ($state.current.name === 'layout.detail') {
-            updateMapWithDetails();
             $scope.showFiltersOnMap = false;
         }
 
@@ -120,7 +119,6 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
     $rootScope.$on('$stateChangeSuccess',
         function () {
             if ($state.current.name === 'layout.detail') {
-                updateMapWithDetails();
                 $scope.showFiltersOnMap = false;
             }
 
@@ -132,6 +130,12 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
     $rootScope.$on('resultsUpdated', function () {
         if ($state.current.name === 'layout.root') {
             updateMapWithResults(globalSettings.UPDATE_MAP_ON_FILTER);
+        }
+    });
+
+    $rootScope.$on('detailUpdated', function () {
+        if ($state.current.name === 'layout.detail') {
+            updateMapWithDetails();
         }
     });
 

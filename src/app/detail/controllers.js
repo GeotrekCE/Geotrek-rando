@@ -279,6 +279,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                     $rootScope.metaTitle = result.properties.name;
                     $rootScope.metaDescription = result.properties.description_teaser;
                     $scope.result = result;
+                    $rootScope.$emit('detailUpdated');
                     $rootScope.elementsLoading --;
                     getInterests(result, forceRefresh);
                     $rootScope.$emit('initGallery', result.properties.pictures);
