@@ -252,7 +252,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             max = filters.toString().split('-')[1],
             elementId = element[name].id || element[name];
 
-        if (parseInt(min, 10) <= parseInt(elementId, 10) && parseInt(elementId, 10) <= parseInt(max, 10)) {
+        if (parseFloat(min, 10) <= parseFloat(elementId, 10) && parseFloat(elementId, 10) <= parseFloat(max, 10)) {
             return true;
         }
 
