@@ -1,11 +1,10 @@
 # GEOTREK RANDO V2 ![master](https://api.travis-ci.org/makinacorpus/Geotrek-rando.svg?branch=master)
 ### Public portal of Geotrek (http://geotrek.fr).
 
-
-# OVERVIEW
+## OVERVIEW
 V2 currently under heavy development. It still need an old geotrek rando for data fetching.
 
-# INSTALL
+## INSTALL
 
 clone the current repository and then :
 
@@ -31,7 +30,7 @@ Minimum config:
 1 - change the `PLATFORM_ID` at the top of the previously created `config.js` file with a *unique id* as it will be used for localStorage.
 
 
-# DEVELOPMENT
+## DEVELOPMENT
 
 ### Launch gulp bundling and watching task
 ```
@@ -50,10 +49,10 @@ Options :
 
 Please note that you currently need to force CORS request in your browser in order to get data from our test server.
 
-# CREDITS
+## CREDITS
 
 
-# AUTHORS
+## AUTHORS
 
 * [Simon Bats](https://github.com/SBats)
 * [Gaël Utard](https://github.com/gutard)
@@ -61,6 +60,6 @@ Please note that you currently need to force CORS request in your browser in ord
 
 [<img src="http://depot.makina-corpus.org/public/logo.gif">](http://www.makina-corpus.com)
 
-# LICENCE
+## LICENCE
 
 * OpenSource - BSD
