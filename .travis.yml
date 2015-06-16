@@ -1,3 +1,12 @@
+notifications:
+  irc:
+    template:
+      - "%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}"
+      - "Diff: %{compare_url} Build: %{build_url}"
+    channels:
+      - "irc.freenode.net#makinacorpus-geotrek"
+    skip_join: true
+
 language: node_js
 
 node_js:
