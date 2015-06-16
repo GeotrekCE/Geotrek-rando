@@ -1,11 +1,9 @@
-# GEOTREK RANDO V2
+# GEOTREK RANDO V2 ![master](https://api.travis-ci.org/makinacorpus/Geotrek-rando.svg?branch=master)
 ### Public portal of Geotrek (http://geotrek.fr).
-========
 
 
 # OVERVIEW
 V2 currently under heavy development. It still need an old geotrek rando for data fetching.
-
 
 # INSTALL
 
