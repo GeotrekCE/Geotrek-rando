@@ -21,5 +21,4 @@ cache:
     - node_modules
 
 script:
-  - "npm i"
   - "npm test"
