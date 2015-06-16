@@ -35,7 +35,7 @@ gulp.task('tests:e2e', ['webdriver_update'], function(cb) {
             ]
         })).on('error', function(e) {
             connect.serverClose();
-            console.log(e)
+            throw e;
         }).on('end', connect.serverClose)
         .on('end', cb);
     });
