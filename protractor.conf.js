@@ -1,35 +1,19 @@
-var browserConfs = {
-    chrome: {
-        browserName: 'chrome',
-        count: 1,
-        chromeOptions: {
-            args: [
-                '--test-type'
-            ]
-        }
-    },
-    firefox: {
-        browserName: 'firefox',
-        // count: 1,
-    },
-    // phantom: {
-        // 'browserName': 'phantomjs',
-        // 'phantomjs.binary.path': require('phantomjs').path,
-        // 'phantomjs.ghostdriver.cli.args': ['--loglevel=DEBUG']
-    // }
-}
-
+var ScreenshotReporter = require('./src/tests/lib/screenshot-reporter.js');
 
 exports.config = {
     multiCapabilities: [
-        // browserConfs.chrome,
-        browserConfs.firefox,
-        // browserConfs.phantom
+        {
+            browserName: 'firefox',
+        }
     ],
     jasmineNodeOpts: {
         showColors: true,
         defaultTimeoutInterval: 30000,
         isVerbose: true
-    }
+    },
 
+    onPrepare: function() {
+        browser.driver.manage().window().setSize(1280, 1024);
+        jasmine.getEnv().addReporter(new ScreenshotReporter("/tmp/protractorss"));
+    }
 };
