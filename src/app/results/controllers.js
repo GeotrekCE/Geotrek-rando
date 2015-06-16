@@ -9,7 +9,10 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
                 function (data) {
                     $scope.results = data;
                     $rootScope.elementsLoading --;
-                },function () {
+                },function (err) {
+                    if (console) {
+                        console.error(err);
+                    }
                     $rootScope.elementsLoading --; 
                 }
             );

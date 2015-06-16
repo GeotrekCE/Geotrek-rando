@@ -3,7 +3,6 @@
 var controllers = require('./controllers');
 
 function mapDirective() {
-    console.log('map loading');
     return {
         restrict: 'E',
         replace: true,

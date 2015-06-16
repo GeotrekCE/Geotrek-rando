@@ -1,7 +1,6 @@
 'use strict';
 
 function Rando3DController(result, $scope, $timeout, $modalInstance, globalSettings, translationService, settingsFactory) {
-    console.log(result);
     $scope.result = result;
     function init3D() {
         var pk = result.id;
@@ -25,7 +24,6 @@ function Rando3DController(result, $scope, $timeout, $modalInstance, globalSetti
         var cameraID = "examine";
         var app3D = new Rando3D();
         var scene = app3D.init(customSettings, canvas, cameraID);
-        console.log(scene);
         scene.init();    
     }
 

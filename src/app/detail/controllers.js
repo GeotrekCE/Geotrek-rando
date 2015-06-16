@@ -77,7 +77,9 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                             $scope.nearElements.push(elementData);
                         },
                         function (err) {
-                            console.error(err);
+                            if (console) {
+                                console.error(err);
+                            }
                         }
                     )
             );
@@ -116,7 +118,9 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                             $scope.elementChildren.push(elementData);
                         },
                         function (err) {
-                            console.error(err);
+                            if (console) {
+                                console.error(err);
+                            }
                         }
                     )
             );
@@ -149,7 +153,9 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                     deferred.resolve($scope.parentElement);
                 },
                 function (err) {
-                    console.error(err);
+                    if (console) {
+                        console.error(err);
+                    }
                 }
             );
 

@@ -203,7 +203,9 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
                                     initHomeMetaTags(flatElement);
                                 },
                                 function (err) {
-                                    console.log(err);
+                                    if (console) {
+                                        console.error(err);
+                                    }
                                 }
                             );
                     } else {
@@ -212,7 +214,9 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
                     }
                 },
                 function (err) {
-                    console.log(err);
+                    if (console) {
+                        console.error(err);
+                    }
                 }
             );
     }
@@ -229,7 +233,9 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
                         initShareButtons(currentTitle, data);
                     },
                     function (err) {
-                        console.log(err);
+                        if (console) {
+                            console.error(err);
+                        }
                     }
                 );
         } else {

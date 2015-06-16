@@ -39,7 +39,9 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
                         $rootScope.metaDescription = translation.DEFAULT_META_DESCRIPTION;
                     },
                     function (err) {
-                        console.log(err);
+                        if (console) {
+                            console.error(err);
+                        }
                     }
                 );
         }
