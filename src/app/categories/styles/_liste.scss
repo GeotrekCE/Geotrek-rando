@@ -140,8 +140,10 @@
         }
 
         rzslider {
+            margin: 15px 0 15px 0;
             span.rz-bar {
                 background: transparentize(white, 0.5);
+                height: 5px;
                 .rz-selection {
                     background: white;
                 }
