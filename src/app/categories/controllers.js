@@ -1,6 +1,6 @@
 'use strict';
 
-function CategoriesListeController($scope, $rootScope, $location, utilsFactory, globalSettings, categoriesService, filtersService) {
+function CategoriesListeController($scope, $rootScope, $location, $timeout,  utilsFactory, globalSettings, categoriesService, filtersService) {
 
     var initRangeFiltersEvent = $rootScope.$on('updateFilters', initRangeFilters);
 
@@ -74,9 +74,14 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
             });
         }
 
-        $scope.$on("slideEnded", function() {
-            $scope.updateActiveRangeFilters();
-        });
+        $scope.$watch('activeRangeValues', function () {
+            if ($scope.rangeUpdate) {
+                $timeout.cancel($scope.rangeUpdate);
+            }
+            $scope.rangeUpdate = $timeout(function () {
+                $scope.updateActiveRangeFilters(); 
+            }, 300);
+        }, true);
 
         $scope.$on('resetRange', function (event, data) {
             var filter = data.filter;
@@ -95,7 +100,7 @@ function CategoriesListeController($scope, $rootScope, $location, utilsFactory, 
     $scope.updateActiveRangeFilters = function () {
         var categoriesRangeFilters = $scope.activeRangeValues;
 
-        angular.forEach(categoriesRangeFilters, function (filterValues, filterName) {
+        angular.forEach($scope.activeRangeValues, function (filterValues, filterName) {
             var minIndex = filterValues.min,
                 maxIndex = filterValues.max;
             if (minIndex !== 0 || maxIndex !== filterValues.values.length - 1) {
