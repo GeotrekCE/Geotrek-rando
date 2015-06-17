@@ -1,6 +1,10 @@
 'use strict';
 
-function HomeController($scope, $rootScope, translationService, $location, homeService, globalSettings) {
+function HomeController($scope, $rootScope, translationService, $location, homeService, globalSettings, filtersService) {
+
+    function updateFiltersTags() {
+        $rootScope.activeFiltersTags = filtersService.getTagFilters();
+    }
 
     $scope.initHome = function () {
         var currentLang = translationService.getCurrentLang();
@@ -23,10 +27,14 @@ function HomeController($scope, $rootScope, translationService, $location, homeS
         $scope.toggleHome();
     };
 
-    $scope.accessSpecificCategory = function (currentQuery) {
-        $location.search(currentQuery);
-        $rootScope.$broadcast('updateCategories');
+    $scope.accessSpecificCategory = function (currentCategory) {
+        if (typeof currentCategory !== 'object') {
+            currentCategory = [currentCategory];
+        }
+        $rootScope.activeFilters.categories = currentCategory;
+        filtersService.updateActiveFilters($rootScope.activeFilters);
         $rootScope.$broadcast('updateFilters');
+        updateFiltersTags();
         $scope.toggleHome();
     };
 
