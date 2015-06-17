@@ -466,12 +466,14 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     };
 
     self.matchByRange = function (element, filters, name) {
-        var min = filters.toString().split('-')[0],
-            max = filters.toString().split('-')[1],
-            elementId = element[name].id || element[name];
+        if (element[name]) {
+            var min = filters.toString().split('-')[0],
+                max = filters.toString().split('-')[1],
+                elementId = element[name].id || element[name];
 
-        if (parseInt(min, 10) <= parseInt(elementId, 10) && parseInt(elementId, 10) <= parseInt(max, 10)) {
-            return true;
+            if (parseInt(min, 10) <= parseInt(elementId, 10) && parseInt(elementId, 10) <= parseInt(max, 10)) {
+                return true;
+            }
         }
 
         return false;
