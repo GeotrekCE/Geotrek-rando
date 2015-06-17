@@ -63,7 +63,7 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
 
         if (typeof activeFilters[tagLabel] === 'string') {
             if (tagValue.toString() === activeFilters[tagLabel] || tagLabel === 'search') {
-                delete activeFilters[tagLabel];
+                activeFilters[tagLabel] = [];
             }
         } else {
             _.forEach(activeFilters[tagLabel], function (filter, index) {
@@ -75,7 +75,7 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
                 }
             });
             if (activeFilters[tagLabel].length === 0) {
-                delete activeFilters[tagLabel];
+                activeFilters[tagLabel] = [];
             }
         }
 
