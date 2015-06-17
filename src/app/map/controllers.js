@@ -96,9 +96,11 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
         initCtrlsTranslation();
 
         if ($state.current.name === 'layout.detail') {
-            updateMapWithDetails();
-        } else {
-            updateMapWithResults();
+            $scope.showFiltersOnMap = false;
+        }
+
+        if ($state.current.name === 'layout.root') {
+            $scope.showFiltersOnMap = !!globalSettings.SHOW_FILTERS_ON_MAP;
         }
     }
 
@@ -117,15 +119,23 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
     $rootScope.$on('$stateChangeSuccess',
         function () {
             if ($state.current.name === 'layout.detail') {
-                updateMapWithDetails();
-            } else {
-                updateMapWithResults();
+                $scope.showFiltersOnMap = false;
+            }
+
+            if ($state.current.name === 'layout.root') {
+                $scope.showFiltersOnMap = !!globalSettings.SHOW_FILTERS_ON_MAP;
             }
         });
 
-    $scope.$on('updateFilters', function () {
+    $rootScope.$on('resultsUpdated', function () {
         if ($state.current.name === 'layout.root') {
             updateMapWithResults(globalSettings.UPDATE_MAP_ON_FILTER);
+        }
+    });
+
+    $rootScope.$on('detailUpdated', function () {
+        if ($state.current.name === 'layout.detail') {
+            updateMapWithDetails();
         }
     });
 
@@ -138,13 +148,6 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
         initCtrlsTranslation();
     });
 
-    $rootScope.$on('refreshMapSize', function () {
-        mapService.invalidateSize();
-    });
-
-    $scope.showFilters = function () {
-        return !!globalSettings.SHOW_FILTERS_ON_MAP;
-    };
 }
 
 module.exports = {

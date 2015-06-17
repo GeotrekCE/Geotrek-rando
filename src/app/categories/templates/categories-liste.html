@@ -1,5 +1,5 @@
 <ul class="categories">
-    <li ng-repeat="category in categories | orderBy: 'order' track by category.id" class="category {{::category.cat_class}}" ng-class="{active : category.active}" id="cat-{{::category.id}}">
+    <li ng-repeat="category in categories | orderBy: 'order' track by category.id" class="category {{::category.cat_class}}" ng-class="{active : activeFilters.categories.indexOf(category.id) > -1}" id="cat-{{::category.id}}">
         <a href ng-click="toggleCategory(category)">
             <ng-include ng-if="isSVG(category.pictogram)" src="category.pictogram"></ng-include>
             <img ng-if="!isSVG(category.pictogram)" src="{{::category.pictogram}}">
@@ -15,7 +15,7 @@
                     <span ng-click="type1IsCollapsed = !type1IsCollapsed"><i class="fa fa-plus"></i> {{::category.type1_label}}</span>
                     <div class="choices" collapse="!type1IsCollapsed">
                         <div ng-repeat="type1 in category.type1.values" class="type1 form-group">
-                            <input type="checkbox" id="type1-{{::type1.id}}" value="{{::type1.id}}" ng-model="category.filters.type1[type1.id]"  ng-change="propagateFilters()"/>
+                            <input type="checkbox" id="type1-{{::type1.id}}" ng-click="toogleCategoryFilter(category.id, 'type1', type1.id)" ng-checked="activeFilters[category.id + '_type1'].indexOf(type1.id.toString()) > -1"/>
                             <label for="type1-{{::type1.id}}">
                                 <span ng-if="type1.name">{{::type1.name}}</span>
                                 <span ng-if="type1.label">{{::type1.label}}</span>
@@ -28,7 +28,7 @@
                     <span ng-click="type2IsCollapsed = !type2IsCollapsed"><i class="fa fa-plus"></i> {{::category.type2_label}}</span>
                     <div class="choices" collapse="!type2IsCollapsed">
                         <div ng-repeat="type2 in category.type2.values" class="type2 form-group">
-                            <input type="checkbox" id="type2-{{::type2.id}}" value="{{::type2.id}}" ng-model="category.filters.type2[type2.id]"  ng-change="propagateFilters()"/>
+                            <input type="checkbox" id="type2-{{::type2.id}}" ng-click="toogleCategoryFilter(category.id, 'type2', type2.id)" ng-checked="activeFilters[category.id + '_type2'].indexOf(type2.id.toString()) > -1"/>
                             <label for="type2-{{type2.id}}">
                                 <span ng-if="type2.name">{{::type2.name}}</span>
                                 <span ng-if="type2.label">{{::type2.label}}</span>
@@ -41,7 +41,7 @@
                     <span ng-click="routeIsCollapsed = !routeIsCollapsed"><i class="fa fa-plus"></i> {{'ROUTES' | translate}}</span>
                     <div class="choices" collapse="!routeIsCollapsed">
                         <div ng-repeat="route in category.routes.values" class="route form-group">
-                            <input type="checkbox" id="route-{{::route.id}}" value="{{::route.id}}" ng-model="category.filters.route[route.id]"  ng-change="propagateFilters()"/>
+                            <input type="checkbox" id="route-{{::route.id}}" ng-click="toogleCategoryFilter(category.id, 'route', route.id)" ng-checked="activeFilters[category.id + '_route'].indexOf(route.id.toString()) > -1"/>
                             <label for="route-{{::route.id}}">
                                 <ng-include src="route.pictogram"></ng-include>
                                 <span>{{::route.label}}</span>
@@ -52,17 +52,17 @@
 
                 <div ng-if="category.difficulty && category.difficulty.values.length > 1" class="slider difficulties">
                     <span>{{'DIFFICULTIES' | translate}}</span>
-                    <span ng-if="category.difficulty.min === 0 && category.difficulty.max === category.difficulty.values.length - 1">
+                    <span ng-if="activeRangeValues[category.id + '_difficulty'].min === 0 && activeRangeValues[category.id + '_difficulty'].max === activeRangeValues[category.id + '_difficulty'].ceil">
                         {{'ALL' | translate}}
                     </span>
-                    <span ng-if="(category.difficulty.min !== 0 || category.difficulty.max !== category.difficulty.values.length - 1) && category.difficulty.min !== category.difficulty.max">
-                        {{category.difficulty.values[category.difficulty.min].label}} -> {{category.difficulty.values[category.difficulty.max].label}}
+                    <span ng-if="(activeRangeValues[category.id + '_difficulty'].min !== 0 || activeRangeValues[category.id + '_difficulty'].max !== activeRangeValues[category.id + '_difficulty'].ceil) && activeRangeValues[category.id + '_difficulty'].min !== activeRangeValues[category.id + '_difficulty'].max">
+                        {{category.difficulty.values[activeRangeValues[category.id + '_difficulty'].min].label}} -> {{category.difficulty.values[activeRangeValues[category.id + '_difficulty'].max].label}}
                     </span>
-                    <span ng-if="category.difficulty.min === category.difficulty.max">
-                        {{category.difficulty.values[category.difficulty.min].label}}
+                    <span ng-if="activeRangeValues[category.id + '_difficulty'].min === activeRangeValues[category.id + '_difficulty'].max">
+                        {{category.difficulty.values[activeRangeValues[category.id + '_difficulty'].min].label}}
                     </span>
                     <div class="slider-container">
-                        <slider ng-model-low="category.difficulty.min" ng-model-high="category.difficulty.max" floor="0" ceiling="{{::category.difficulty.values.length - 1}}" step="1"></slider>
+                        <rzslider rz-slider-floor="activeRangeValues[category.id + '_difficulty'].floor" rz-slider-ceil="activeRangeValues[category.id + '_difficulty'].ceil" rz-slider-model="activeRangeValues[category.id + '_difficulty'].min" rz-slider-high="activeRangeValues[category.id + '_difficulty'].max" rz-slider-step="1"></rzslider>
                         <label class="min-label">{{::category.difficulty.values[0].label}}</label>
                         <label class="max-label">{{::category.difficulty.values[category.difficulty.values.length - 1].label}}</label>
                     </div>
@@ -70,17 +70,17 @@
 
                 <div ng-if="category.duration && category.duration.values.length > 1" class="slider duration">
                     <span>{{'DURATION' | translate}}</span>
-                    <span ng-if="category.duration.min === 0 && category.duration.max === category.duration.values.length - 1">
+                    <span ng-if="activeRangeValues[category.id + '_duration'].min === 0 && activeRangeValues[category.id + '_duration'].max === activeRangeValues[category.id + '_duration'].ceil">
                         {{'ALL' | translate}}
                     </span>
-                    <span ng-if="(category.duration.min !== 0 || category.duration.max !== category.duration.values.length - 1) && category.duration.min !== category.duration.max">
-                        {{category.duration.values[category.duration.min].label}} -> {{category.duration.values[category.duration.max].label}}
+                    <span ng-if="(activeRangeValues[category.id + '_duration'].min !== 0 || activeRangeValues[category.id + '_duration'].max !== activeRangeValues[category.id + '_duration'].ceil) && activeRangeValues[category.id + '_duration'].min !== activeRangeValues[category.id + '_duration'].max">
+                        {{category.duration.values[activeRangeValues[category.id + '_duration'].min].label}} -> {{category.duration.values[activeRangeValues[category.id + '_duration'].max].label}}
                     </span>
-                    <span ng-if="category.duration.min === category.duration.max">
-                        {{category.duration.values[category.duration.min].label}}
+                    <span ng-if="activeRangeValues[category.id + '_duration'].min === activeRangeValues[category.id + '_duration'].max">
+                        {{category.duration.values[activeRangeValues[category.id + '_duration'].min].label}}
                     </span>
                     <div class="slider-container">
-                        <slider ng-model-low="category.duration.min" ng-model-high="category.duration.max" floor="0" ceiling="{{::category.duration.values.length - 1}}" step="1"></slider>
+                        <rzslider rz-slider-floor="activeRangeValues[category.id + '_duration'].floor" rz-slider-ceil="activeRangeValues[category.id + '_duration'].ceil" rz-slider-model="activeRangeValues[category.id + '_duration'].min" rz-slider-high="activeRangeValues[category.id + '_duration'].max" rz-slider-step="1"></rzslider>
                         <label class="min-label">{{::category.duration.values[0].label}}</label>
                         <label class="max-label">{{::category.duration.values[category.duration.values.length - 1].label}}</label>
                     </div>
@@ -88,17 +88,17 @@
 
                 <div ng-if="category.ascent && category.ascent.values.length > 1" class="slider ascent">
                     <span>{{'ASCENT' | translate}}</span>
-                    <span ng-if="category.ascent.min === 0 && category.ascent.max === category.ascent.values.length - 1">
+                    <span ng-if="activeRangeValues[category.id + '_ascent'].min === 0 && activeRangeValues[category.id + '_ascent'].max === activeRangeValues[category.id + '_ascent'].ceil">
                         {{'ALL' | translate}}
                     </span>
-                    <span ng-if="(category.ascent.min !== 0 || category.ascent.max !== category.ascent.values.length - 1) && category.ascent.min !== category.ascent.max">
-                        {{category.ascent.values[category.ascent.min].label}} -> {{category.ascent.values[category.ascent.max].label}}
+                    <span ng-if="(activeRangeValues[category.id + '_ascent'].min !== 0 || activeRangeValues[category.id + '_ascent'].max !== activeRangeValues[category.id + '_ascent'].ceil) && activeRangeValues[category.id + '_ascent'].min !== activeRangeValues[category.id + '_ascent'].max">
+                        {{category.ascent.values[activeRangeValues[category.id + '_ascent'].min].label}} -> {{category.ascent.values[activeRangeValues[category.id + '_ascent'].max].label}}
                     </span>
-                    <span ng-if="category.ascent.min === category.ascent.max">
-                        {{category.ascent.values[category.ascent.min].label}}
+                    <span ng-if="activeRangeValues[category.id + '_ascent'].min === activeRangeValues[category.id + '_ascent'].max">
+                        {{category.ascent.values[activeRangeValues[category.id + '_ascent'].min].label}}
                     </span>
                     <div class="slider-container">
-                        <slider ng-model-low="category.ascent.min" ng-model-high="category.ascent.max" floor="0" ceiling="{{::category.ascent.values.length - 1}}" step="1"></slider>
+                        <rzslider rz-slider-floor="activeRangeValues[category.id + '_ascent'].floor" rz-slider-ceil="activeRangeValues[category.id + '_ascent'].ceil" rz-slider-model="activeRangeValues[category.id + '_ascent'].min" rz-slider-high="activeRangeValues[category.id + '_ascent'].max" rz-slider-step="1"></rzslider>
                         <label class="min-label">{{::category.ascent.values[0].label}}</label>
                         <label class="max-label">{{::category.ascent.values[category.ascent.values.length - 1].label}}</label>
                     </div>
@@ -106,17 +106,17 @@
 
                 <div ng-if="category.eLength && category.eLength.values.length > 1" class="slider eLength">
                     <span>{{'LENGTH' | translate}}</span>
-                    <span ng-if="category.eLength.min === 0 && category.eLength.max === category.eLength.values.length - 1">
+                    <span ng-if="activeRangeValues[category.id + '_eLength'].min === 0 && activeRangeValues[category.id + '_eLength'].max === activeRangeValues[category.id + '_eLength'].ceil">
                         {{'ALL' | translate}}
                     </span>
-                    <span ng-if="(category.eLength.min !== 0 || category.eLength.max !== category.eLength.values.length - 1) && category.eLength.min !== category.eLength.max">
-                        {{category.eLength.values[category.eLength.min].label}} -> {{category.eLength.values[category.eLength.max].label}}
+                    <span ng-if="(activeRangeValues[category.id + '_eLength'].min !== 0 || activeRangeValues[category.id + '_eLength'].max !== activeRangeValues[category.id + '_eLength'].ceil) && activeRangeValues[category.id + '_eLength'].min !== activeRangeValues[category.id + '_eLength'].max">
+                        {{category.eLength.values[activeRangeValues[category.id + '_eLength'].min].label}} -> {{category.eLength.values[activeRangeValues[category.id + '_eLength'].max].label}}
                     </span>
-                    <span ng-if="category.eLength.min === category.eLength.max">
-                        {{category.eLength.values[category.eLength.min].label}}
+                    <span ng-if="activeRangeValues[category.id + '_eLength'].min === activeRangeValues[category.id + '_eLength'].max">
+                        {{category.eLength.values[activeRangeValues[category.id + '_eLength'].min].label}}
                     </span>
                     <div class="slider-container">
-                        <slider ng-model-low="category.eLength.min" ng-model-high="category.eLength.max" floor="0" ceiling="{{::category.eLength.values.length - 1}}" step="1"></slider>
+                        <rzslider rz-slider-floor="activeRangeValues[category.id + '_eLength'].floor" rz-slider-ceil="activeRangeValues[category.id + '_eLength'].ceil" rz-slider-model="activeRangeValues[category.id + '_eLength'].min" rz-slider-high="activeRangeValues[category.id + '_eLength'].max" rz-slider-step="1"></rzslider>
                         <label class="min-label">{{::category.eLength.values[0].label}}</label>
                         <label class="max-label">{{::category.eLength.values[category.eLength.values.length - 1].label}}</label>
                     </div>
