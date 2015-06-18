@@ -1,8 +1,12 @@
 describe('Trecks test data (content filtering)', function() {
 
-    beforeEach(function() {
+    beforeAll(function () {
         browser.get('/');
-        browser.executeScript("localStorage.setItem('geotrek-rando-language', '{\"code\":\"fr\",\"label\":\"English\"}');");
+        browser.executeScript("localStorage.clear(); localStorage.setItem('geotrek-rando-language', '{\"code\":\"fr\",\"label\":\"English\"}');");
+    });
+
+    afterAll(function () {
+        browser.executeScript("localStorage.clear();");
     });
 
     it('should display 8 results when all categories are checked', function () {
@@ -19,5 +23,4 @@ describe('Trecks test data (content filtering)', function() {
         browser.get('/#/?categories=C8');
         expect(element.all(by.repeater('result in results')).count()).toEqual(2);
     });
-
 });

@@ -1,6 +1,6 @@
 describe('Geotrek default tests', function() {
 
-    beforeEach(function() {
+    beforeAll(function() {
         browser.get('/');
     });
 
