@@ -2,12 +2,19 @@ describe('Trecks test data (detailed)', function() {
 
     beforeAll(function () {
         browser.get('/');
-        browser.executeScript("localStorage.clear(); localStorage.setItem('geotrek-rando-language', '{\"code\":\"fr\",\"label\":\"English\"}');");
+        browser.executeScript(function () {
+            localStorage.clear();
+            localStorage.setItem('geotrek-rando-language', JSON.stringify({
+                code: 'fr'
+            }));
+        });
         browser.get('/#/itineraire/boucle-du-pic-des-trois-seigneurs/');
     });
 
     afterAll(function () {
-        browser.executeScript("localStorage.clear();");
+        browser.executeScript(function () {
+            localStorage.clear();
+        });
     });
 
     it('should have the right title', function() {

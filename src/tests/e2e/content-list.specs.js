@@ -2,11 +2,18 @@ describe('Trecks test data (content filtering)', function() {
 
     beforeAll(function () {
         browser.get('/');
-        browser.executeScript("localStorage.clear(); localStorage.setItem('geotrek-rando-language', '{\"code\":\"fr\",\"label\":\"English\"}');");
+        browser.executeScript(function () {
+            localStorage.clear();
+            localStorage.setItem('geotrek-rando-language', JSON.stringify({
+                code: 'fr'
+            }));
+        });
     });
 
     afterAll(function () {
-        browser.executeScript("localStorage.clear();");
+        browser.executeScript(function () {
+            localStorage.clear();
+        });
     });
 
     it('should display 8 results when all categories are checked', function () {
