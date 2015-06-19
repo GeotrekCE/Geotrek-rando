@@ -64,7 +64,7 @@
                         <li ng-if="result.properties.ascent" class="ascent">
                             <div>
                                 <ng-include src="'./images/icons/ascent.svg'"></ng-include>
-                                <span>{{::parseLength(result.properties.ascent)}}</span>
+                                <span>{{::result.properties.ascent}} m</span>
                             </div>
                         </li>
                         <li ng-if="result.properties.networks" ng-repeat="network in result.properties.networks" class="network {{removeDiacritics(network.name)}}">
