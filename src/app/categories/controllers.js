@@ -172,8 +172,10 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
         if (!category.open) {
             category.open = false;
         }
+        if (!category.open) {
+            $scope.activateCategory(category);
+        }
         category.open = !category.open;
-        $scope.activateCategory(category);
         $scope.hideSiblings(category);
     };
 
