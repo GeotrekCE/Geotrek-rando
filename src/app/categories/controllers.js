@@ -119,7 +119,10 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
         var categories = $rootScope.activeFilters.categories,
             indexOfCategory = categories.indexOf(category.id.toString());
         if (indexOfCategory < 0) {
-            categories.push(category.id.toString());
+            if (globalSettings.ENABLE_UNIQUE_CAT) {
+                $rootScope.activeFilters.categories = [];
+            }
+            $rootScope.activeFilters.categories.push(category.id.toString());
         }
         $scope.propagateActiveFilters();
     };
@@ -139,7 +142,10 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
         if (indexOfCategory > -1) {
             categories.splice(indexOfCategory, 1);
         } else {
-            categories.push(category.id.toString());
+            if (globalSettings.ENABLE_UNIQUE_CAT) {
+                $rootScope.activeFilters.categories = [];
+            }
+            $rootScope.activeFilters.categories.push(category.id.toString());
         }
         $scope.propagateActiveFilters();
     };
@@ -181,8 +187,9 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
 
     $scope.hideSiblings = function (mainCategory) {
         _.forEach($scope.categories, function (category) {
-            if (category === mainCategory) return;
-            category.open = false;
+            if (category.id !== mainCategory.id) {
+                category.open = false;
+            }
         });
     };
 

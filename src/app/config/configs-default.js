@@ -62,6 +62,9 @@ var constants = {
     // CHOSE WHICH CATEGORIES ARE EXCLUDE FROM CAT MENU
     LIST_EXCLUDE_CATEGORIES: [],
 
+    // CHOSE IF ONLY ONE CATEGORY CAN BE SELECTED AT A TIME
+    ENABLE_UNIQUE_CAT: false,
+
     // CHOSE WHICH INTEREST TO SHOW BY DEFAULT // possible values -> 'pois' | 'near' | 'children' | 'parent'
     DEFAULT_INTEREST: 'pois',
 
