@@ -118,33 +118,26 @@
                     display: block;
                     padding: 1em;
                     cursor: pointer;
-                    i {
-                        padding: 0 1rem;
-                        vertical-align: middle;
-                        float: right;
-                        font-size: 1.5rem;
-                        transition: all 0.3s ease-out;
-                    }
-                }
-                &.opened span i {
-                    transform: rotate(180deg);
                 }
                 &:hover, &:focus {
                     transition-delay: 0.4s;
                 }
             }
+            .opened .more-or-less .bar:first-child {
+                transform: rotate(180deg);
+            }
             
         }
         .menu-header {
             width: 100%;
-            height: 50px;
+            height: 51px;
             display: flex;
             border-bottom: 1px solid transparentize(black, 0.7);
         }
         .category-name, .close-menu {
             cursor: pointer;
             padding: 1em;
-            height: 49px;
+            height: 50px;
             flex: 1 1 50%;
             i {
                 font-size: 1.2em;
@@ -158,6 +151,31 @@
             flex: 0 0 45px;
             background: transparentize(black, 0.9);
             color: black;
+            span {
+                font-size: 1.2em;
+            }
+        }
+        .more-or-less {
+            height: 20px;
+            width: 20px;
+            margin-right: 0.5rem;
+            float: right;
+            display: inline-block;
+            position: relative;
+            vertical-align: middle;
+            .bar {
+                width: 14px;
+                height: 2px;
+                background: white;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                margin-top: -1px;
+                transition: all 0.2s ease-out;
+                &:first-child {
+                    transform: rotate(90deg);
+                }
+            }
         }
         .checkbox {
             height: 20px;
@@ -171,6 +189,7 @@
             vertical-align: middle;
             margin: 0;
             margin-right: 0.5rem;
+            border-radius: 8%;
             i {
                 vertical-align: top;
                 font-size: 0.8rem;
@@ -180,8 +199,12 @@
             border-bottom: 1px solid transparentize(black, 0.7);
         }
         .filter-title {
+            cursor: pointer;
             padding: 1em;
             background: transparentize(black, 0.9);
+            > span:first-child {
+                font-weight: bolder;
+            }
         }
         .slider {
             .slider-container {

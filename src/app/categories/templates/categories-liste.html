@@ -14,12 +14,12 @@
                         <span>{{::category.label}}</span>
                     </div>
                     <div class="close-menu" ng-click="closeCategoryMenu(category)">
-                        <i class="fa fa-times"></i>
+                        <span>X</span>
                     </div>
                 </div>
 
-                <div ng-if="category.difficulty && category.difficulty.values.length > 1" class="slider difficulties">
-                    <div class="filter-title">
+                <div ng-if="category.difficulty && category.difficulty.values.length > 1" class="slider difficulties" ng-class="{opened: difficultyIsCollapsed}">
+                    <div class="filter-title" ng-click="difficultyIsCollapsed = !difficultyIsCollapsed">
                         <span>{{'DIFFICULTIES' | translate}}</span>
                         <span ng-if="activeRangeValues[category.id + '_difficulty'].min === 0 && activeRangeValues[category.id + '_difficulty'].max === activeRangeValues[category.id + '_difficulty'].ceil">
                             {{'ALL' | translate}}
@@ -30,16 +30,21 @@
                         <span ng-if="activeRangeValues[category.id + '_difficulty'].min === activeRangeValues[category.id + '_difficulty'].max">
                             {{category.difficulty.values[activeRangeValues[category.id + '_difficulty'].min].label}}
                         </span>
+                        <span class="more-or-less">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </span>
                     </div>
-                    <div class="slider-container">
-                        <rzslider rz-slider-floor="activeRangeValues[category.id + '_difficulty'].floor" rz-slider-ceil="activeRangeValues[category.id + '_difficulty'].ceil" rz-slider-model="activeRangeValues[category.id + '_difficulty'].min" rz-slider-high="activeRangeValues[category.id + '_difficulty'].max" rz-slider-step="1" rz-slider-show-ticks="true"></rzslider>
+
+                    <div class="slider-container" collapse="!difficultyIsCollapsed">
+                        <rzslider rz-slider-floor="activeRangeValues[category.id + '_difficulty'].floor" rz-slider-ceil="activeRangeValues[category.id + '_difficulty'].ceil" rz-slider-model="activeRangeValues[category.id + '_difficulty'].min" rz-slider-high="activeRangeValues[category.id + '_difficulty'].max" rz-slider-step="1"></rzslider>
                         <label class="min-label">{{::category.difficulty.values[0].label}}</label>
                         <label class="max-label">{{::category.difficulty.values[category.difficulty.values.length - 1].label}}</label>
                     </div>
                 </div>
 
-                <div ng-if="category.duration && category.duration.values.length > 1" class="slider duration">
-                    <div class="filter-title">
+                <div ng-if="category.duration && category.duration.values.length > 1" class="slider duration" ng-class="{opened: durationIsCollapsed}">
+                    <div class="filter-title" ng-click="durationIsCollapsed = !durationIsCollapsed">
                         <span>{{'DURATION' | translate}}</span>
                         <span ng-if="activeRangeValues[category.id + '_duration'].min === 0 && activeRangeValues[category.id + '_duration'].max === activeRangeValues[category.id + '_duration'].ceil">
                             {{'ALL' | translate}}
@@ -50,16 +55,20 @@
                         <span ng-if="activeRangeValues[category.id + '_duration'].min === activeRangeValues[category.id + '_duration'].max">
                             {{category.duration.values[activeRangeValues[category.id + '_duration'].min].label}}
                         </span>
+                        <span class="more-or-less">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </span>
                     </div>
-                    <div class="slider-container">
-                        <rzslider rz-slider-floor="activeRangeValues[category.id + '_duration'].floor" rz-slider-ceil="activeRangeValues[category.id + '_duration'].ceil" rz-slider-model="activeRangeValues[category.id + '_duration'].min" rz-slider-high="activeRangeValues[category.id + '_duration'].max" rz-slider-step="1" rz-slider-show-ticks="true"></rzslider>
+                    <div class="slider-container" collapse="!durationIsCollapsed">
+                        <rzslider rz-slider-floor="activeRangeValues[category.id + '_duration'].floor" rz-slider-ceil="activeRangeValues[category.id + '_duration'].ceil" rz-slider-model="activeRangeValues[category.id + '_duration'].min" rz-slider-high="activeRangeValues[category.id + '_duration'].max" rz-slider-step="1"></rzslider>
                         <label class="min-label">{{::category.duration.values[0].label}}</label>
                         <label class="max-label">{{::category.duration.values[category.duration.values.length - 1].label}}</label>
                     </div>
                 </div>
 
-                <div ng-if="category.ascent && category.ascent.values.length > 1" class="slider ascent">
-                    <div class="filter-title">
+                <div ng-if="category.ascent && category.ascent.values.length > 1" class="slider ascent" ng-class="{opened: ascentIsCollapsed}">
+                    <div class="filter-title" ng-click="ascentIsCollapsed = !ascentIsCollapsed">
                         <span>{{'ASCENT' | translate}}</span>
                         <span ng-if="activeRangeValues[category.id + '_ascent'].min === 0 && activeRangeValues[category.id + '_ascent'].max === activeRangeValues[category.id + '_ascent'].ceil">
                             {{'ALL' | translate}}
@@ -70,16 +79,21 @@
                         <span ng-if="activeRangeValues[category.id + '_ascent'].min === activeRangeValues[category.id + '_ascent'].max">
                             {{category.ascent.values[activeRangeValues[category.id + '_ascent'].min].label}}
                         </span>
+                        <span class="more-or-less">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </span>
                     </div>
-                    <div class="slider-container">
-                        <rzslider rz-slider-floor="activeRangeValues[category.id + '_ascent'].floor" rz-slider-ceil="activeRangeValues[category.id + '_ascent'].ceil" rz-slider-model="activeRangeValues[category.id + '_ascent'].min" rz-slider-high="activeRangeValues[category.id + '_ascent'].max" rz-slider-step="1" rz-slider-show-ticks="true"></rzslider>
+                    <div class="slider-container" collapse="!ascentIsCollapsed">
+                        <rzslider rz-slider-floor="activeRangeValues[category.id + '_ascent'].floor" rz-slider-ceil="activeRangeValues[category.id + '_ascent'].ceil" rz-slider-model="activeRangeValues[category.id + '_ascent'].min" rz-slider-high="activeRangeValues[category.id + '_ascent'].max" rz-slider-step="1"></rzslider>
+
                         <label class="min-label">{{::category.ascent.values[0].label}}</label>
                         <label class="max-label">{{::category.ascent.values[category.ascent.values.length - 1].label}}</label>
                     </div>
                 </div>
 
-                <div ng-if="category.eLength && category.eLength.values.length > 1" class="slider eLength">
-                    <div class="filter-title">
+                <div ng-if="category.eLength && category.eLength.values.length > 1" class="slider eLength" ng-class="{opened: lengthIsCollapsed}">
+                    <div class="filter-title" ng-click="lengthIsCollapsed = !lengthIsCollapsed">
                         <span>{{'LENGTH' | translate}}</span>
                         <span ng-if="activeRangeValues[category.id + '_eLength'].min === 0 && activeRangeValues[category.id + '_eLength'].max === activeRangeValues[category.id + '_eLength'].ceil">
                             {{'ALL' | translate}}
@@ -90,16 +104,26 @@
                         <span ng-if="activeRangeValues[category.id + '_eLength'].min === activeRangeValues[category.id + '_eLength'].max">
                             {{category.eLength.values[activeRangeValues[category.id + '_eLength'].min].label}}
                         </span>
+                        <span class="more-or-less">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </span>
                     </div>
-                    <div class="slider-container">
-                        <rzslider rz-slider-floor="activeRangeValues[category.id + '_eLength'].floor" rz-slider-ceil="activeRangeValues[category.id + '_eLength'].ceil" rz-slider-model="activeRangeValues[category.id + '_eLength'].min" rz-slider-high="activeRangeValues[category.id + '_eLength'].max" rz-slider-step="1" rz-slider-show-ticks="true"></rzslider>
+                    <div class="slider-container" collapse="!lengthIsCollapsed">
+                        <rzslider rz-slider-floor="activeRangeValues[category.id + '_eLength'].floor" rz-slider-ceil="activeRangeValues[category.id + '_eLength'].ceil" rz-slider-model="activeRangeValues[category.id + '_eLength'].min" rz-slider-high="activeRangeValues[category.id + '_eLength'].max" rz-slider-step="1"></rzslider>
                         <label class="min-label">{{::category.eLength.values[0].label}}</label>
                         <label class="max-label">{{::category.eLength.values[category.eLength.values.length - 1].label}}</label>
                     </div>
                 </div>
 
                 <div ng-if="category.type1 && category.type1.values.length > 0" class="selector type1" ng-class="{empty: category.type1.values.length === 0, opened: type1IsCollapsed}">
-                    <span ng-click="type1IsCollapsed = !type1IsCollapsed" class="filter-title">{{::category.type1_label}}<i class="fa fa-angle-down"></i></span>
+                    <span ng-click="type1IsCollapsed = !type1IsCollapsed" class="filter-title">
+                        <span>{{::category.type1_label}}</span>
+                        <span class="more-or-less">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </span>
+                    </span>
                     <div class="choices" collapse="!type1IsCollapsed">
                         <div ng-repeat="type1 in category.type1.values" class="type1 form-group">
                             <input type="checkbox" id="type1-{{::type1.id}}" ng-click="toogleCategoryFilter(category.id, 'type1', type1.id)" ng-checked="activeFilters[category.id + '_type1'].indexOf(type1.id.toString()) > -1"/>
@@ -115,7 +139,13 @@
                 </div>
 
                 <div ng-if="category.type2 && category.type2.values.length > 0" class="selector type2" ng-class="{empty: category.type2.values.length === 0, opened: type2IsCollapsed}">
-                    <span ng-click="type2IsCollapsed = !type2IsCollapsed" class="filter-title">{{::category.type2_label}}<i class="fa fa-angle-down"></i></span>
+                    <span ng-click="type2IsCollapsed = !type2IsCollapsed" class="filter-title">
+                        <span>{{::category.type2_label}}</span>
+                        <span class="more-or-less">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </span>
+                    </span>
                     <div class="choices" collapse="!type2IsCollapsed">
                         <div ng-repeat="type2 in category.type2.values" class="type2 form-group">
                             <input type="checkbox" id="type2-{{::type2.id}}" ng-click="toogleCategoryFilter(category.id, 'type2', type2.id)" ng-checked="activeFilters[category.id + '_type2'].indexOf(type2.id.toString()) > -1"/>
@@ -132,7 +162,11 @@
 
                 <div ng-if="category.routes && category.routes.values.length > 0" class="selector routes" ng-class="{opened: routeIsCollapsed}">
                     <span ng-click="routeIsCollapsed = !routeIsCollapsed" class="filter-title">
-                        {{'ROUTES' | translate}}<i class="fa fa-angle-down"></i>
+                        <span>{{'ROUTES' | translate}}</span>
+                        <span class="more-or-less">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </span>
                     </span>
                     <div class="choices" collapse="!routeIsCollapsed">
                         <div ng-repeat="route in category.route.values" class="route form-group">
