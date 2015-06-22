@@ -11,45 +11,6 @@
                     <span>{{::category.label}}</span>
                 </div>
 
-                <div ng-if="category.type1 && category.type1.values.length > 0" class="selector type1" ng-class="{empty: category.type1.values.length === 0, opened: type1IsCollapsed}">
-                    <span ng-click="type1IsCollapsed = !type1IsCollapsed"><i class="fa fa-plus"></i> {{::category.type1_label}}</span>
-                    <div class="choices" collapse="!type1IsCollapsed">
-                        <div ng-repeat="type1 in category.type1.values" class="type1 form-group">
-                            <input type="checkbox" id="type1-{{::type1.id}}" ng-click="toogleCategoryFilter(category.id, 'type1', type1.id)" ng-checked="activeFilters[category.id + '_type1'].indexOf(type1.id.toString()) > -1"/>
-                            <label for="type1-{{::type1.id}}">
-                                <span ng-if="type1.name">{{::type1.name}}</span>
-                                <span ng-if="type1.label">{{::type1.label}}</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div ng-if="category.type2 && category.type2.values.length > 0" class="selector type2" ng-class="{empty: category.type2.values.length === 0, opened: type2IsCollapsed}">
-                    <span ng-click="type2IsCollapsed = !type2IsCollapsed"><i class="fa fa-plus"></i> {{::category.type2_label}}</span>
-                    <div class="choices" collapse="!type2IsCollapsed">
-                        <div ng-repeat="type2 in category.type2.values" class="type2 form-group">
-                            <input type="checkbox" id="type2-{{::type2.id}}" ng-click="toogleCategoryFilter(category.id, 'type2', type2.id)" ng-checked="activeFilters[category.id + '_type2'].indexOf(type2.id.toString()) > -1"/>
-                            <label for="type2-{{type2.id}}">
-                                <span ng-if="type2.name">{{::type2.name}}</span>
-                                <span ng-if="type2.label">{{::type2.label}}</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div ng-if="category.routes && category.routes.values.length > 0" class="selector routes" ng-class="{opened: routeIsCollapsed}">
-                    <span ng-click="routeIsCollapsed = !routeIsCollapsed"><i class="fa fa-plus"></i> {{'ROUTES' | translate}}</span>
-                    <div class="choices" collapse="!routeIsCollapsed">
-                        <div ng-repeat="route in category.routes.values" class="route form-group">
-                            <input type="checkbox" id="route-{{::route.id}}" ng-click="toogleCategoryFilter(category.id, 'route', route.id)" ng-checked="activeFilters[category.id + '_route'].indexOf(route.id.toString()) > -1"/>
-                            <label for="route-{{::route.id}}">
-                                <ng-include src="route.pictogram"></ng-include>
-                                <span>{{::route.label}}</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
                 <div ng-if="category.difficulty && category.difficulty.values.length > 1" class="slider difficulties">
                     <span>{{'DIFFICULTIES' | translate}}</span>
                     <span ng-if="activeRangeValues[category.id + '_difficulty'].min === 0 && activeRangeValues[category.id + '_difficulty'].max === activeRangeValues[category.id + '_difficulty'].ceil">
@@ -119,6 +80,45 @@
                         <rzslider rz-slider-floor="activeRangeValues[category.id + '_eLength'].floor" rz-slider-ceil="activeRangeValues[category.id + '_eLength'].ceil" rz-slider-model="activeRangeValues[category.id + '_eLength'].min" rz-slider-high="activeRangeValues[category.id + '_eLength'].max" rz-slider-step="1"></rzslider>
                         <label class="min-label">{{::category.eLength.values[0].label}}</label>
                         <label class="max-label">{{::category.eLength.values[category.eLength.values.length - 1].label}}</label>
+                    </div>
+                </div>
+
+                <div ng-if="category.type1 && category.type1.values.length > 0" class="selector type1" ng-class="{empty: category.type1.values.length === 0, opened: type1IsCollapsed}">
+                    <span ng-click="type1IsCollapsed = !type1IsCollapsed"><i class="fa fa-plus"></i> {{::category.type1_label}}</span>
+                    <div class="choices" collapse="!type1IsCollapsed">
+                        <div ng-repeat="type1 in category.type1.values" class="type1 form-group">
+                            <input type="checkbox" id="type1-{{::type1.id}}" ng-click="toogleCategoryFilter(category.id, 'type1', type1.id)" ng-checked="activeFilters[category.id + '_type1'].indexOf(type1.id.toString()) > -1"/>
+                            <label for="type1-{{::type1.id}}">
+                                <span ng-if="type1.name">{{::type1.name}}</span>
+                                <span ng-if="type1.label">{{::type1.label}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-if="category.type2 && category.type2.values.length > 0" class="selector type2" ng-class="{empty: category.type2.values.length === 0, opened: type2IsCollapsed}">
+                    <span ng-click="type2IsCollapsed = !type2IsCollapsed"><i class="fa fa-plus"></i> {{::category.type2_label}}</span>
+                    <div class="choices" collapse="!type2IsCollapsed">
+                        <div ng-repeat="type2 in category.type2.values" class="type2 form-group">
+                            <input type="checkbox" id="type2-{{::type2.id}}" ng-click="toogleCategoryFilter(category.id, 'type2', type2.id)" ng-checked="activeFilters[category.id + '_type2'].indexOf(type2.id.toString()) > -1"/>
+                            <label for="type2-{{type2.id}}">
+                                <span ng-if="type2.name">{{::type2.name}}</span>
+                                <span ng-if="type2.label">{{::type2.label}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-if="category.routes && category.routes.values.length > 0" class="selector routes" ng-class="{opened: routeIsCollapsed}">
+                    <span ng-click="routeIsCollapsed = !routeIsCollapsed"><i class="fa fa-plus"></i> {{'ROUTES' | translate}}</span>
+                    <div class="choices" collapse="!routeIsCollapsed">
+                        <div ng-repeat="route in category.routes.values" class="route form-group">
+                            <input type="checkbox" id="route-{{::route.id}}" ng-click="toogleCategoryFilter(category.id, 'route', route.id)" ng-checked="activeFilters[category.id + '_route'].indexOf(route.id.toString()) > -1"/>
+                            <label for="route-{{::route.id}}">
+                                <ng-include src="route.pictogram"></ng-include>
+                                <span>{{::route.label}}</span>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </form>
