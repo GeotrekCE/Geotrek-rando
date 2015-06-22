@@ -15,7 +15,7 @@
                 }
             }
             .filters {
-                background: darken(nth($category, 2), 5%);
+                background: nth($category, 2);
                 .category-name {
                     background: nth($category, 2);
                 }
