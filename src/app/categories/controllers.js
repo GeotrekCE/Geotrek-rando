@@ -160,7 +160,15 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
         $scope.propagateActiveFilters();
     };
 
-    $scope.toggleDisplayCategory = function (category) {
+    $scope.closeCategoryMenu = function (category) {
+        category.open = false;
+    };
+
+    $scope.openCategoryMenu = function (category) {
+        category.open = true;
+    };
+
+    $scope.toggleCategoryMenu = function (category) {
         if (!category.open) {
             category.open = false;
         }

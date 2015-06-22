@@ -1,14 +1,19 @@
 <ul class="categories">
     <li ng-repeat="category in categories | orderBy: 'order' track by category.id" class="category {{::category.cat_class}}" ng-class="{active : activeFilters.categories.indexOf(category.id) > -1, open: category.open}" id="cat-{{::category.id}}">
-        <a href ng-click="toggleDisplayCategory(category)">
+        <a href ng-click="toggleCategoryMenu(category)">
             <ng-include ng-if="isSVG(category.pictogram)" src="category.pictogram"></ng-include>
             <img ng-if="!isSVG(category.pictogram)" src="{{::category.pictogram}}">
         </a>
         <div class="filters">
             <form>
-                <div class="category-name" ng-click="toggleCategory(category)">
-                    <i ng-if="category.active" class="fa fa-check-circle-o"></i>
-                    <span>{{::category.label}}</span>
+                <div class="menu-header">
+                    <div class="category-name" ng-click="toggleCategory(category)">
+                        <i ng-if="category.active" class="fa fa-check-circle-o"></i>
+                        <span>{{::category.label}}</span>
+                    </div>
+                    <div class="close-menu" ng-click="closeCategoryMenu(category)">
+                        <i class="fa fa-times"></i>
+                    </div>
                 </div>
 
                 <div ng-if="category.difficulty && category.difficulty.values.length > 1" class="slider difficulties">

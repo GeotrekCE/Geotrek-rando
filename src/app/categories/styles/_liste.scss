@@ -100,16 +100,25 @@
             @media (max-width: 400px) {
                 width: 260px;
             }
-            .category-name {
-                cursor: pointer;
-                display: block;
+            .menu-header {
                 width: 100%;
-                height: 47px;
+                height: 50px;
+                display: flex;
+            }
+            .category-name, .close-menu {
+                cursor: pointer;
                 padding: 1em;
+                height: 50px;
+                flex: 1 1 50%;
                 i {
                     font-size: 1.2em;
-                    margin-right: 0.4em;
                 }
+            }
+            .close-menu {
+                text-align: center;
+                flex: 0 0 45px;
+                background: transparentize(black, 0.8);
+                color: black;
             }
             form {
                 width: 100%;
