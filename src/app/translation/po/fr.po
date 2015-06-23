@@ -115,6 +115,15 @@ msgstr "En savoir plus"
 msgid "RELATED_TREKS"
 msgstr "Itinéraires liés"
 
+msgid "HAS_COMMON_DEPARTURE"
+msgstr "Au départ :"
+
+msgid "HAS_COMMON_EDGE"
+msgstr "Sur le chemin :"
+
+msgid "IS_CIRCUIT_STEP"
+msgstr "Étapes :"
+
 msgid "POI"
 msgstr "Patrimoine"
 

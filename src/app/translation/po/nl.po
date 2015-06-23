@@ -112,6 +112,15 @@ msgstr "Meer informatie"
 msgid "RELATED_TREKS"
 msgstr "Gerelateerde Tochten"
 
+msgid "HAS_COMMON_DEPARTURE"
+msgstr "Common vertrek :"
+
+msgid "HAS_COMMON_EDGE"
+msgstr "Op weg :"
+
+msgid "IS_CIRCUIT_STEP"
+msgstr "Stappen :"
+
 msgid "POI"
 msgstr "Erfgoed"
 

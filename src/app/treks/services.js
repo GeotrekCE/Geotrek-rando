@@ -83,6 +83,29 @@ function treksService(globalSettings, settingsFactory, translationService, $reso
             if (trek.properties.altimetric_profile) {
                 trek.properties.altimetric_profile = globalSettings.API_URL + trek.properties.altimetric_profile;
             }
+            if (trek.properties.relationships.length > 0) {
+                var relatedElements = {
+                    has_common_departure: [],
+                    has_common_edge: [],
+                    is_circuit_step: []
+                };
+
+                _.forEach(trek.properties.relationships, function (relatedTrek) {
+                    if (relatedTrek.published) {
+                        if (relatedTrek.has_common_departure) {
+                            relatedElements.has_common_departure.push(relatedTrek.trek);
+                        }
+                        if (relatedTrek.has_common_edge) {
+                            relatedElements.has_common_edge.push(relatedTrek.trek);
+                        }
+                        if (relatedTrek.is_circuit_step) {
+                            relatedElements.is_circuit_step.push(relatedTrek.trek);
+                        }
+                    }
+                });
+
+                trek.properties.relationships = relatedElements;
+            }
             if (!trek.uid) {
                 trek.uid = trek.properties.category.id + '-' + trek.id;
             }

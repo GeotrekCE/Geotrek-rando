@@ -119,6 +119,15 @@ msgstr "weitere Informationen"
 msgid "RELATED_TREKS"
 msgstr "verwandte Wanderungen"
 
+msgid "HAS_COMMON_DEPARTURE"
+msgstr "gemeinsame Abfahrt :"
+
+msgid "HAS_COMMON_EDGE"
+msgstr "Auf Ihrem Weg :"
+
+msgid "IS_CIRCUIT_STEP"
+msgstr "Treppe :"
+
 msgid "POI"
 msgstr "Kulturerbe"
 

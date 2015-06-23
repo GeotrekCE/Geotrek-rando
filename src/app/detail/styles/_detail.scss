@@ -392,6 +392,15 @@
                 margin: 0;
             }
         }
+        .related-treks {
+            > div {
+                margin-left: 0.4rem;
+            }
+            h4 {
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+            }
+        }
     }
 
     .interests {

@@ -116,6 +116,15 @@ msgstr "Know more"
 msgid "RELATED_TREKS"
 msgstr "Related treks"
 
+msgid "HAS_COMMON_DEPARTURE"
+msgstr "Common departure:"
+
+msgid "HAS_COMMON_EDGE"
+msgstr "On your way:"
+
+msgid "IS_CIRCUIT_STEP"
+msgstr "Steps:"
+
 msgid "POI"
 msgstr "POIS"
 
