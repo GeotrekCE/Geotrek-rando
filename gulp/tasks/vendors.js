@@ -20,19 +20,19 @@ gulp.task('vendors', function () {
         debug: config.debug
     });
 
-    for (key in PACKAGE.browser) {
+    for (key in PACKAGE.vendors) {
 
         if (global.distMode) {
             if (config.dist_ignore.indexOf(key) === -1) {
                 bundler.require(
-                    PACKAGE.browser[key],
+                    PACKAGE.vendors[key],
                     {expose: key}
                 );
             }
         } else {
 
             bundler.require(
-                PACKAGE.browser[key],
+                PACKAGE.vendors[key],
                 {expose: key}
             );
 

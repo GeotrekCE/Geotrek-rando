@@ -25,7 +25,7 @@
     "lodash": "^2.4.1",
     "rando3D": "git://github.com/makinacorpus/rando3D.git#exportable"
   },
-  "browser": {
+  "vendors": {
     "angular": "./src/app/angular-browserify.js",
     "angular-translate": "./node_modules/angular-translate/dist/angular-translate.js",
     "angular-google-analytics": "./node_modules/angular-google-analytics/dist/angular-google-analytics.js",
