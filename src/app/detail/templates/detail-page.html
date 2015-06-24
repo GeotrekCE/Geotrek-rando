@@ -125,7 +125,7 @@
                         </span>
                         <div ng-if="result.properties.cities.length > 1">
                             <span>{{ 'TOWN_CROSSED' | translate}}</span>
-                            <span ng-if="!$first" ng-repeat="city in result.properties.cities track by city.code"><span ng-if="$index > 1">, </span>{{::city.name}}</span>
+                            <span ng-repeat="city in result.properties.cities track by city.code"><span ng-if="$index > 0">, </span>{{::city.name}}</span>
                         </div>
                     </div>
                 </div>
