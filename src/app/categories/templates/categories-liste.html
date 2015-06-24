@@ -109,13 +109,12 @@
                     </div>
                 </div>
 
-                <div ng-if="category.routes && category.routes.values.length > 0" class="selector routes" ng-class="{opened: routeIsCollapsed}">
+                <div ng-if="category.route && category.route.values.length > 0" class="selector route" ng-class="{opened: routeIsCollapsed}">
                     <span ng-click="routeIsCollapsed = !routeIsCollapsed"><i class="fa fa-plus"></i> {{'ROUTES' | translate}}</span>
                     <div class="choices" collapse="!routeIsCollapsed">
-                        <div ng-repeat="route in category.routes.values" class="route form-group">
+                        <div ng-repeat="route in category.route.values" class="route form-group">
                             <input type="checkbox" id="route-{{::route.id}}" ng-click="toogleCategoryFilter(category.id, 'route', route.id)" ng-checked="activeFilters[category.id + '_route'].indexOf(route.id.toString()) > -1"/>
                             <label for="route-{{::route.id}}">
-                                <ng-include src="route.pictogram"></ng-include>
                                 <span>{{::route.label}}</span>
                             </label>
                         </div>
