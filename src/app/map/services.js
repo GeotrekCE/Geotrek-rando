@@ -30,7 +30,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                 self.createLayerFromElement(element, 'parking', parkingPoint)
                     .then(
                         function (marker) {
-                            self._nearMarkersLayer.addLayer(marker);
+                            self._infosMarkersLayer.addLayer(marker);
                         }
                     )
             );
@@ -43,7 +43,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                     self.createLayerFromElement(element, 'departureArrival', startPoint)
                         .then(
                             function (marker) {
-                                self._nearMarkersLayer.addLayer(marker);
+                                self._infosMarkersLayer.addLayer(marker);
                             }
                         )
                 );
@@ -52,7 +52,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                     self.createLayerFromElement(element, 'departure', startPoint)
                         .then(
                             function (marker) {
-                                self._nearMarkersLayer.addLayer(marker);
+                                self._infosMarkersLayer.addLayer(marker);
                             }
                         )
                 );
@@ -61,7 +61,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                     self.createLayerFromElement(element, 'arrival', endPoint)
                         .then(
                             function (marker) {
-                                self._nearMarkersLayer.addLayer(marker);
+                                self._infosMarkersLayer.addLayer(marker);
                             }
                         )
                 );
@@ -82,20 +82,11 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                         self.createLayerFromElement(tempRefPoint, 'ref-point', tempRefPoint.coordinates)
                             .then(
                                 function (marker) {
-                                    self._nearMarkersLayer.addLayer(marker);
+                                    self._infosMarkersLayer.addLayer(marker);
                                 }
                             )
                     );
                 }
-                var parkingPoint = utilsFactory.getParkingPoint(element);
-                promises.push(
-                    self.createLayerFromElement(element, 'parking', parkingPoint)
-                        .then(
-                            function (marker) {
-                                self._nearMarkersLayer.addLayer(marker);
-                            }
-                        )
-                );
             }
 
             promises.push(
@@ -553,6 +544,20 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     };
 
+    this.createTouristicLayer = function () {
+
+        var clusterLayer = new L.MarkerClusterGroup({
+            showCoverageOnHover: false,
+            disableClusteringAtZoom: globalSettings.LEAFLET_CONF.DEFAULT_MAX_ZOOM,
+            iconCreateFunction: function (cluster) {
+                return iconsService.getTouristicClusterIcon(cluster);
+            }
+        });
+
+        return clusterLayer;
+
+    };
+
     this.createGeoJSONLayer = function () {
 
         var layer = new L.geoJson();
@@ -565,6 +570,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         self._clustersLayer.clearLayers();
         self._poisMarkersLayer.clearLayers();
         self._nearMarkersLayer.clearLayers();
+        self._infosMarkersLayer.clearLayers();
 
         if (globalSettings.ENABLE_TREKS) {
             self._treksMarkersLayer.clearLayers();
@@ -606,14 +612,14 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             });
             if (!permanent) {
                 if (self.geoHover) {
-                    self._nearMarkersLayer.removeLayer(self.geoHover);
+                    self._infosMarkersLayer.removeLayer(self.geoHover);
                 }
 
                 self.geoHover = geoElement;
             }
             
              
-            geoElement.addTo(self._nearMarkersLayer);
+            geoElement.addTo(self._infosMarkersLayer);
             geoElement.bringToBack();
         }
         
@@ -1029,11 +1035,13 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         }
 
         this._poisMarkersLayer = self.createPOIsLayer();
-        this._nearMarkersLayer = self.createLayer();
+        this._nearMarkersLayer = self.createTouristicLayer();
+        this._infosMarkersLayer = self.createLayer();
 
         this.map.addLayer(this._clustersLayer);
         this.map.addLayer(this._poisMarkersLayer);
         this.map.addLayer(this._nearMarkersLayer);
+        this.map.addLayer(this._infosMarkersLayer);
 
         return this.map;
 
@@ -1306,6 +1314,15 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
             iconSize: [40, 40],
             iconAnchor: [20, 20],
             className: 'element-cluster',
+            html: '<div class="marker"><span class="count">' + cluster.getChildCount() + '</span></div>'
+        });
+    };
+
+    this.getTouristicClusterIcon = function (cluster) {
+        return new L.DivIcon({
+            iconSize: [40, 40],
+            iconAnchor: [20, 20],
+            className: 'touristic-cluster',
             html: '<div class="marker"><span class="count">' + cluster.getChildCount() + '</span></div>'
         });
     };

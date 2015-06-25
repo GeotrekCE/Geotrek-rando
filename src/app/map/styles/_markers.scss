@@ -84,7 +84,7 @@
     }
 }
 
-.element-cluster {
+.element-cluster, .touristic-cluster {
     .marker {
         background: darken($primary-color, 10%);
         border: 8px solid $primary-color;
@@ -211,6 +211,7 @@
 }
 
 .detail-map.hide-near-elements .near-marker,
+.detail-map.hide-near-elements .touristic-cluster,
 .detail-map.hide-children .children-marker,
 .detail-map.hide-pois .poi-cluster,
 .detail-map.hide-pois .double-marker.poi {
