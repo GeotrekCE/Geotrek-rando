@@ -76,6 +76,12 @@ msgstr "U heeft nog geen favorieten"
 #
 #
 
+msgid "CATEGORY"
+msgstr "Categorie"
+
+msgid "INFORMATIONS"
+msgstr Iinformatie"
+
 msgid "START"
 msgstr "Vertrek"
 

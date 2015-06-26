@@ -15,75 +15,103 @@
             <div class="intro">
                 <div class="pictos">
                     <ul>
-                        <li ng-if="result.properties.type1[0]" ng-repeat="currentType in result.properties.type1 track by currentType.id" class="type1">
-                            <div>
-                                <ng-include ng-if="currentType.pictogram && isSVG(currentType.pictogram)" src="currentType.pictogram"></ng-include>
-                                <img ng-if="currentType.pictogram && !isSVG(currentType.pictogram)" ng-src="{{::currentType.pictogram}}" ng-alt="{{::currentType.name}}">
-                                <span>{{::currentType.name}}</span>
+                        
+                        <li ng-if="result.properties.category.label" class="category-label">
+                            <div class="caption">
+                                <h3>{{'CATEGORY' | translate}}</h3>
+                            </div>
+                            <div class="content">
+                                <div>
+                                    <ng-include ng-if="result.properties.category.pictogram && isSVG(result.properties.category.pictogram)" src="result.properties.category.pictogram"></ng-include>
+                                    <img ng-if="result.properties.category.pictogram && !isSVG(result.properties.category.pictogram)" ng-src="{{::result.properties.category.pictogram}}" ng-alt="{{::result.properties.category.label}}">
+                                    <span>{{::result.properties.category.label}}</span>
+                                </div>
                             </div>
                         </li>
-                        <li ng-if="result.properties.type2[0]" ng-repeat="currentType2 in result.properties.type2 track by currentType2.id" class="type2">
-                            <div>
-                                <ng-include ng-if="currentType2.pictogram && isSVG(currentType2.pictogram)" src="currentType2.pictogram"></ng-include>
-                                <img ng-if="currentType2.pictogram && !isSVG(currentType2.pictogram)" ng-src="{{::currentType2.pictogram}}" ng-alt="{{::currentType2.name}}">
-                                <span>{{::currentType2.name}}</span>
+                        <li ng-if="result.properties.category.label" class="divider"></li>
+                        
+                        <li ng-if="result.properties.type1.length > 0" class="type1">
+                            <div class="caption">
+                                <h3>{{::result.properties.category.type1_label}}</h3>
+                            </div>
+                            <div class="content">
+                                <div ng-repeat="currentType in result.properties.type1 track by currentType.id">
+                                    <ng-include ng-if="currentType.pictogram && isSVG(currentType.pictogram)" src="currentType.pictogram"></ng-include>
+                                    <img ng-if="currentType.pictogram && !isSVG(currentType.pictogram)" ng-src="{{::currentType.pictogram}}" ng-alt="{{::currentType.name}}">
+                                    <span>{{::currentType.name}}</span>
+                                </div>
                             </div>
                         </li>
-                        <li ng-if="result.properties.duration_pretty" class="duration">
-                            <div>
-                                <ng-include src="'./images/icons/duration.svg'"></ng-include>
-                                <span>{{::result.properties.duration_pretty}}</span>
+                        <li ng-if="result.properties.type1.length > 0" class="divider"></li>
+                        
+                        <li ng-if="result.properties.type2.length > 0" class="type2">
+                            <div class="caption">
+                                <h3>{{::result.properties.category.type2_label}}</h3>
+                            </div>
+                            <div class="content">
+                                <div ng-repeat="currentType2 in result.properties.type2 track by currentType2.id">
+                                    <ng-include ng-if="currentType2.pictogram && isSVG(currentType2.pictogram)" src="currentType2.pictogram"></ng-include>
+                                    <img ng-if="currentType2.pictogram && !isSVG(currentType2.pictogram)" ng-src="{{::currentType2.pictogram}}" ng-alt="{{::currentType2.name}}">
+                                    <span>{{::currentType2.name}}</span>
+                                </div>
                             </div>
                         </li>
-                        <li ng-if="!result.properties.duration_pretty && result.properties.duration" class="duration">
-                            <div>
-                                <ng-include src="'./images/icons/duration.svg'"></ng-include>
-                                <span>{{::result.properties.duration}}</span>
+                        <li ng-if="result.properties.type2.length > 0" class="divider"></li>
+                       
+                        <li>
+                            <div class="caption">
+                                <h3>{{'INFORMATIONS' | translate}}</h3>
+                            </div>
+
+                            <div class="content">
+                                <div ng-if="result.properties.duration_pretty" class="duration">
+                                    <ng-include src="'./images/icons/duration.svg'"></ng-include>
+                                    <span>{{::result.properties.duration_pretty}}</span>
+                                </div>
+                                <div ng-if="!result.properties.duration_pretty && result.properties.duration" class="duration">
+                                    <ng-include src="'./images/icons/duration.svg'"></ng-include>
+                                    <span>{{::result.properties.duration}}</span>
+                                </div>
+                                <div ng-if="result.properties.difficulty.label" class="difficulty">
+                                    <ng-include ng-if="result.properties.difficulty.pictogram && isSVG(result.properties.difficulty.pictogram)" src="result.properties.difficulty.pictogram"></ng-include>
+                                    <img ng-if="result.properties.difficulty.pictogram && !isSVG(result.properties.difficulty.pictogram)" ng-src="{{::result.properties.difficulty.pictogram}}" ng-alt="{{::result.properties.difficulty.label}}">
+                                    <span>{{::result.properties.difficulty.label}}</span>
+                                </div>
+                                <div ng-if="result.properties.route" class="route">
+                                    <ng-include ng-if="result.properties.route.pictogram && isSVG(result.properties.route.pictogram)" src="result.properties.route.pictogram"></ng-include>
+                                    <img ng-if="result.properties.route.pictogram && !isSVG(result.properties.route.pictogram)" ng-src="{{::result.properties.route.pictogram}}" ng-alt="{{::result.properties.route.label}}">
+                                    <span>{{::result.properties.route.label}}</span>
+                                </div>
+                                <div ng-if="result.properties.length" class="length">
+                                    <ng-include src="'./images/icons/length.svg'"></ng-include>
+                                    <span>{{::parseLength(result.properties.length)}}</span>
+                                </div>
+                                <div ng-if="result.properties.ascent" class="ascent">
+                                    <ng-include src="'./images/icons/ascent.svg'"></ng-include>
+                                    <span>{{::parseLength(result.properties.ascent)}}</span>
+                                </div>
+                                <div ng-if="result.properties.networks" ng-repeat="network in result.properties.networks" class="network {{removeDiacritics(network.name)}}">
+                                    <ng-include ng-if="network.pictogram && isSVG(network.pictogram)" src="network.pictogram"></ng-include>
+                                    <img ng-if="network.pictogram && !isSVG(network.pictogram)" ng-src="{{::network.pictogram}}" alt="network.name">
+                                    <span>{{::network.name}}</span>
+                                </div>
+                                <div ng-if="result.properties.target_audience" class="target_audience">
+                                    <span>{{::result.properties.target_audience}}</span>
+                                </div>
                             </div>
                         </li>
-                        <li ng-if="result.properties.difficulty.label" class="difficulty">
-                            <div>
-                                <ng-include ng-if="result.properties.difficulty.pictogram && isSVG(result.properties.difficulty.pictogram)" src="result.properties.difficulty.pictogram"></ng-include>
-                                <img ng-if="result.properties.difficulty.pictogram && !isSVG(result.properties.difficulty.pictogram)" ng-src="{{::result.properties.difficulty.pictogram}}" ng-alt="{{::result.properties.difficulty.label}}">
-                                <span>{{::result.properties.difficulty.label}}</span>
+                        <li class="divider"></li>
+
+                        <li ng-if="result.properties.themes" class="themes">
+                            <div class="caption">
+                                <h3>{{'THEMES' | translate}}</h3>
                             </div>
-                        </li>
-                        <li ng-if="result.properties.route" class="route">
-                            <div>
-                                <ng-include ng-if="result.properties.route.pictogram && isSVG(result.properties.route.pictogram)" src="result.properties.route.pictogram"></ng-include>
-                                <img ng-if="result.properties.route.pictogram && !isSVG(result.properties.route.pictogram)" ng-src="{{::result.properties.route.pictogram}}" ng-alt="{{::result.properties.route.label}}">
-                                <span>{{::result.properties.route.label}}</span>
-                            </div>
-                        </li>
-                        <li ng-if="result.properties.length" class="length">
-                            <div>
-                                <ng-include src="'./images/icons/length.svg'"></ng-include>
-                                <span>{{::parseLength(result.properties.length)}}</span>
-                            </div>
-                        </li>
-                        <li ng-if="result.properties.ascent" class="ascent">
-                            <div>
-                                <ng-include src="'./images/icons/ascent.svg'"></ng-include>
-                                <span>{{::result.properties.ascent}} m</span>
-                            </div>
-                        </li>
-                        <li ng-if="result.properties.networks" ng-repeat="network in result.properties.networks" class="network {{removeDiacritics(network.name)}}">
-                            <div>
-                                <ng-include ng-if="network.pictogram && isSVG(network.pictogram)" src="network.pictogram"></ng-include>
-                                <img ng-if="network.pictogram && !isSVG(network.pictogram)" ng-src="{{::network.pictogram}}" alt="network.name">
-                                <span>{{::network.name}}</span>
-                            </div>
-                        </li>
-                        <li ng-if="result.properties.target_audience" class="target_audience">
-                             <div>
-                                 <span>{{::result.properties.target_audience}}</span>
-                             </div>
-                        </li>
-                        <li ng-if="result.properties.themes" ng-repeat="theme in result.properties.themes" class="theme {{::removeDiacritics(theme.label)}}">
-                            <div>
-                                <ng-include ng-if="theme.pictogram &&isSVG(theme.pictogram)" src="theme.pictogram"></ng-include>
-                                <img ng-if="theme.pictogram && !isSVG(theme.pictogram)" ng-src="{{::theme.pictogram}}" ng-alt="{{::theme.label}}">
-                                <span>{{theme.label}}</span>
+                            <div class="content">
+                                <div ng-repeat="theme in result.properties.themes" class="theme {{::removeDiacritics(theme.label)}}">
+                                    <ng-include ng-if="theme.pictogram &&isSVG(theme.pictogram)" src="theme.pictogram"></ng-include>
+                                    <img ng-if="theme.pictogram && !isSVG(theme.pictogram)" ng-src="{{::theme.pictogram}}" ng-alt="{{::theme.label}}">
+                                    <span>{{theme.label}}</span>
+                                </div>
                             </div>
                         </li>
                     </ul>

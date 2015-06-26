@@ -80,6 +80,12 @@ msgstr "You don't have any favorites yet !"
 #
 #
 
+msgid "CATEGORY"
+msgstr "Category"
+
+msgid "INFORMATIONS"
+msgstr "Infos"
+
 msgid "START"
 msgstr "Start:"
 
@@ -185,7 +191,7 @@ msgstr "Practical informations:"
 #
 
 msgid "THEMES"
-msgstr "Themes:"
+msgstr "Themes"
 
 msgid "DISTRICTS"
 msgstr "Disctricts"

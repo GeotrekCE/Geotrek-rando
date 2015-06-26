@@ -144,18 +144,37 @@
                 list-style: none;
                 padding: 0.6em;
                 margin: 0;
-                display: flex;
-                flex-wrap: wrap;
                 li {
-                    padding: 0.2em 0.6em;
-                    text-align: center;
-                    height: 2.4em;
-                    line-height: 2.4em;
-                    & > div {
-                        vertical-align: top;
-                        line-height: normal;
-                        display: inline-block;
+                    display: flex;
+                    flex-wrap: wrap;
+                    padding: 0.5rem;
+                    &.divider {
                         width: 100%;
+                        height: 1px;
+                        line-height: 1px;
+                        text-align: left;
+                        padding: 0;
+                        border-bottom: 1px solid $neutral-grey;
+                    }
+                    .caption {
+                       flex: 0 0 30%; 
+                    }
+                    .content {
+                        flex: 1 1 70%;
+                        & > div {
+                            height: 1.5rem;
+                            vertical-align: middle;
+                            display: inline-block;
+                            margin: 0 0.5rem;
+                        }
+                    }
+                    h3 {
+                        height: 1.5rem;
+                        font-size: 1rem;
+                        padding: 0;
+                        vertical-align: middle;
+                        color: lighten($dark-grey, 10);
+                        border-bottom: none;
                     }
                     img, svg {
                         width: 1.6em;

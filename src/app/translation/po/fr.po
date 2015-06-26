@@ -79,6 +79,12 @@ msgstr "Vous n'avez pas encore de favoris !"
 #
 #
 
+msgid "CATEGORY"
+msgstr "Catégorie"
+
+msgid "INFORMATIONS"
+msgstr "Infos"
+
 msgid "START"
 msgstr "Départ :"
 
@@ -184,7 +190,7 @@ msgstr "Infos pratiques :"
 #
 
 msgid "THEMES"
-msgstr "Thèmes :"
+msgstr "Thèmes"
 
 msgid "DISTRICTS"
 msgstr "Massifs"
