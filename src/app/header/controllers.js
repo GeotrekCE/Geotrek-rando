@@ -8,10 +8,10 @@ function headerController($scope, $rootScope, globalSettings) {
     }
 
     $scope.displayHomePage = function () {
-        $rootScope.showHome = true;
+        if (globalSettings.SHOW_HOME) {
+            $rootScope.showHome = true;
+        }
     };
-
-    $scope.isHomeActive = globalSettings.SHOW_HOME;
 
     $scope.logo = globalSettings.LOGO_FILE;
 }

@@ -13,7 +13,7 @@
                 <ng-include ng-if="!$root.mapIsShown" src="'/images/icons/map.svg'"></ng-include>
                 <ng-include ng-if="$root.mapIsShown" src="'/images/icons/results.svg'"></ng-include>
             </div>
-            <a class="navbar-brand" ui-sref="layout.root" title="{{'DEFAULT_META_TITLE' | translate}}">
+            <a class="navbar-brand" ui-sref="layout.root" ng-click="displayHomePage()" title="{{'DEFAULT_META_TITLE' | translate}}">
                 <div ng-if="logo" id="logo">
                     <img ng-src="./images/custom/{{logo}}" alt="{{'LOGO_ALT' | translate}}">
                 </div>
@@ -27,9 +27,9 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
             <ul class="nav navbar-nav static-pages navbar-right">
-                <li class="home" tooltip-placement="bottom" tooltip="{{'HOME' | translate}}" ng-if="isHomeActive">
-                    <a ui-sref="layout.root" ng-click="displayHomePage()">
-                        <span class="fa fa-home"></span>
+                <li class="home" tooltip-placement="bottom" tooltip="{{'SEARCH_LIST' | translate}}" ng-if="$root.currentState_name !== 'layout.root'">
+                    <a ui-sref="layout.root">
+                        <span class="fa fa-search"></span>
                     </a>
                 </li>
                 <flat-menu></flat-menu>

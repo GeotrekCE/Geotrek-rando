@@ -224,6 +224,9 @@ msgstr "Geotrek Rando"
 msgid "HOME"
 msgstr "Startseite öffnen"
 
+msgid "SEARCH_LIST"
+msgstr "Suchseite"
+
 msgid "ABOUT_US"
 msgstr "weitere Informationen"
 
