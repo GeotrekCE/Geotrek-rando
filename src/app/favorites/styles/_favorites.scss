@@ -1,6 +1,6 @@
 .favorites {
     .dropdown-toggle span {
-        @media (max-width: 768px) {
+        @media (max-width: 767px) {
             margin-right: 0.4em;   
         }
     }
@@ -18,7 +18,7 @@
             margin: 0.8em 0;
             border-left: 5px solid $dark-grey;
             @include favorites-list-coloring();
-            @media (max-width: 768px) {
+            @media (max-width: 767px) {
                 min-width: 0;
             }
             a {
@@ -62,7 +62,7 @@
         max-width: 3em;
         align-self: center;
         cursor: pointer;
-        @media (max-width: 768px) {
+        @media (max-width: 767px) {
             text-align: center;
         }
         i {

@@ -58,9 +58,11 @@
             }
             @media (min-width: 768px) and (max-width: 1200px) {
                 flex: 1 1 100%;
+                max-width: 100%;
             }
             @media (max-width: 550px) {
                 flex: 1 1 100%;
+                max-width: 100%;
             }
             &.not-in-viewport {
                 opacity: 0.5;

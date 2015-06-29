@@ -5,7 +5,7 @@
     overflow: hidden;
     background: $neutral-grey;
     @include detail-page-coloring();
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         &.showMap {
             .informations {
                 left: -100%;
@@ -28,7 +28,7 @@
         border-right: 1px solid $neutral-grey;
         background: $light-grey;
         transition: width 0.3s ease, left 0.3s ease;
-        @media (min-width: 769px) {
+        @media (min-width: 768px) {
             width: 35%;
             height: 100%;
         }
@@ -242,13 +242,13 @@
         .more-infos {
             display: flex;
             flex-wrap: wrap;
-            @media (max-width: 768px) {
+            @media (max-width: 767px) {
                 & > div {
                     width: 100%;
                 }
             }
             .access, .transport {
-                @media (min-width: 769px) {
+                @media (min-width: 768px) {
                     width: 50%;
                 }                
                 .card {
@@ -408,7 +408,7 @@
         padding: 0;
         width: 100%;
         transition: width 0.3s ease, left 0.3s ease;
-        @media (min-width: 769px) {
+        @media (min-width: 768px) {
             overflow-y: auto;
             overflow-x: hidden;
             position: absolute;
@@ -453,7 +453,7 @@
         .collapsor {
             width: 100%;
             overflow: hidden;
-            @media (min-width: 769px) {
+            @media (min-width: 768px) {
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -474,7 +474,7 @@
                 float: right;
                 transition: transform 0.3s ease;
                 opacity: 0.6;
-                @media (max-width: 768px) {
+                @media (max-width: 767px) {
                     display: none;
                 }
             }
@@ -494,12 +494,12 @@
                 width: 66.5%;
             }
         }
-        @media (min-width: 769px) {
+        @media (min-width: 768px) {
             &.no-interests {
                 width: 64.5%;
             }
         }
-        @media (max-width: 768px) {
+        @media (max-width: 767px) {
             position: absolute;
             top: 0;
             left: 100%;

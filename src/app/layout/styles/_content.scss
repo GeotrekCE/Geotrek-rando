@@ -10,7 +10,7 @@
             height: 90vh;
         }
     }
-    @media (max-width: 768px) {
+    @media (max-width: 769px) {
         padding-top: 50px;
         top: -50px;
     }
@@ -27,7 +27,7 @@
             float: left;
             background: $light-grey;
             transition: left 0.3s ease;
-            @media (max-width: 768px) {
+            @media (max-width: 767px) {
                 position: absolute;
                 width: 100%;
                 top: 0%;
@@ -43,7 +43,7 @@
             height: 100%;
             float: left;
             transition: left 0.3s ease;
-            @media (max-width: 768px) {
+            @media (max-width: 767px) {
                 position: absolute;
                 width: 100%;
                 top: 0%;
