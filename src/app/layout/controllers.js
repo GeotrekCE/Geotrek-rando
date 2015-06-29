@@ -89,18 +89,6 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
     });
 }
 
-function HeaderController($rootScope, $scope, globalSettings) {
-
-    $scope.displayHomePage = function () {
-        $rootScope.showHome = true;
-    };
-
-    $scope.isHomeActive = globalSettings.SHOW_HOME;
-
-    $scope.logo = globalSettings.LOGO_FILE;
-
-}
-
 function SidebarHomeController() {
 }
 
@@ -162,7 +150,6 @@ function FooterController() {
 
 module.exports = {
     LayoutController: LayoutController,
-    HeaderController: HeaderController,
     SidebarHomeController: SidebarHomeController,
     SidebarDetailController: SidebarDetailController,
     SidebarFlatController: SidebarFlatController,

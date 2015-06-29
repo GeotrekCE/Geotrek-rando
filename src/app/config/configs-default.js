@@ -22,6 +22,7 @@ var constants = {
     },
     SHOW_FOOTER: false,
     FOOTER_TEMPLATE_FILE: '',
+    HEADER_TEMPLATE_FILE: '',
 
     ENABLE_DISTRICTS_FILTERING: true,
     ENABLE_CITIES_FILTERING: true,

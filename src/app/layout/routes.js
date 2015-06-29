@@ -23,10 +23,6 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
         .state('layout.root', {
             url: '',
             views: {
-                'header' : {
-                    template: require('./templates/header.html'),
-                    controller: controller.HeaderController
-                },
                 'sidebar' : {
                     template: require('./templates/sidebar-home.html'),
                     controller: controller.SidebarHomeController
@@ -40,10 +36,6 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
         .state('layout.flat', {
             url: 'informations/:flatID/',
             views: {
-                'header' : {
-                    template: require('./templates/header.html'),
-                    controller: controller.HeaderController
-                },
                 'sidebar' : {
                     template: require('./templates/sidebar-flat.html'),
                     controller: controller.SidebarFlatController
@@ -56,10 +48,6 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
         .state('layout.detail', {
             url: ':catSlug/:slug/',
             views: {
-                'header' : {
-                    template: require('./templates/header.html'),
-                    controller: controller.HeaderController
-                },
                 'sidebar' : {
                     template: require('./templates/sidebar-detail.html'),
                     controller: controller.SidebarDetailController

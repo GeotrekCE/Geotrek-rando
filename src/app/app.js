@@ -10,6 +10,7 @@ var dependencies = [
     'rando.near',
     'rando.filiation',
     'rando.layout',
+    'rando.header',
     'rando.footer',
     'rando.map',
     'rando.filters',
@@ -71,6 +72,7 @@ angular.module('geotrekRando', dependencies);
 require('./config');
 require('./translation');
 require('./commons');
+require('./header');
 require('./footer');
 require('./layout');
 require('./treks');
