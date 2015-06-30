@@ -24,7 +24,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         }
 
         promises.push(
-            categoriesService.getCategories()
+            categoriesService.getNonExcludedCategories()
                 .then(
                     function (categories) {
                         self.InitCategoriesFilters(categories);

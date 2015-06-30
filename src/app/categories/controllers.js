@@ -9,7 +9,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
     }
 
     function loadCategories(forceRefresh) {
-        categoriesService.getCategories(forceRefresh)
+        categoriesService.getNonExcludedCategories(forceRefresh)
             .then(
                 function (categories) {
                     $scope.categories = categories;

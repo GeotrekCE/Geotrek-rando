@@ -233,6 +233,30 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
     };
 
+    this.getNonExcludedCategories = function (forceRefresh) {
+        var deferred = $q.defer(),
+            filteredCategories = [];
+
+        self.getCategories(forceRefresh)
+            .then(
+                function (categories) {
+                    for (var i = categories.length - 1; i >= 0; i--) {
+                        var category = categories[i];
+
+                        if (globalSettings.LIST_EXCLUDE_CATEGORIES.indexOf(category.id) === -1) {
+                            filteredCategories.push(category);
+                        }
+                    }
+                    deferred.resolve(filteredCategories);
+                },
+                function (err) {
+                    console.error(err);
+                }
+            );
+
+        return deferred.promise;
+    };
+
     this.getCategories = function (forceRefresh) {
 
         var deferred = $q.defer(),
@@ -293,20 +317,16 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                     function () {
                         self._categoriesList = [];
                         if (globalSettings.ENABLE_TREKS && trekCats) {
-                            _.forEach(trekCats, function (aTreksCat) {
-                                if (globalSettings.LIST_EXCLUDE_CATEGORIES.indexOf(aTreksCat.id) === -1) {
-                                    self._categoriesList.push(aTreksCat);
-                                }
-                            });
+                            for (var i = trekCats.length - 1; i >= 0; i--) {
+                                self._categoriesList.push(trekCats[i]);
+                            }
                         }
                         if (globalSettings.ENABLE_TOURISTIC_CONTENT && contentCats) {
-                            _.forEach(contentCats, function (aContentsCat) {
-                                if (globalSettings.LIST_EXCLUDE_CATEGORIES.indexOf(aContentsCat.id) === -1) {
-                                    self._categoriesList.push(aContentsCat);
-                                }
-                            });
+                            for (var j = contentCats.length - 1; j >= 0; j--) {
+                                self._categoriesList.push(contentCats[j]);
+                            }
                         }
-                        if (globalSettings.ENABLE_TOURISTIC_EVENTS && eventCat && globalSettings.LIST_EXCLUDE_CATEGORIES.indexOf(eventCat.id) === -1) {
+                        if (globalSettings.ENABLE_TOURISTIC_EVENTS && eventCat) {
                             self._categoriesList.push(eventCat);
                         }
                         deferred.resolve(self._categoriesList);
