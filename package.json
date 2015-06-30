@@ -11,7 +11,7 @@
     "angularjs-slider": "git://github.com/rzajac/angularjs-slider.git",
     "angular-translate": "^2.6.1",
     "angular-ui-router": "^0.2.13",
-    "angulartics": "^0.17.2",
+    "angular-google-analytics": "^0.0.15",
     "bootstrap-sass": "^3.3.1",
     "classlist-polyfill": "^1.0.0",
     "font-awesome": "^4.2.0",
@@ -28,8 +28,7 @@
   "browser": {
     "angular": "./src/app/angular-browserify.js",
     "angular-translate": "./node_modules/angular-translate/dist/angular-translate.js",
-    "angulartics": "./node_modules/angulartics/dist/angulartics.min.js",
-    "angulartics-ga": "./node_modules/angulartics/dist/angulartics-ga.min.js",
+    "angular-google-analytics": "./node_modules/angular-google-analytics/dist/angular-google-analytics.js",
     "ui.bootstrap": "./node_modules/angular-bootstrap/dist/ui-bootstrap-tpls.min.js",
     "ui.router": "./node_modules/angular-ui-router/release/angular-ui-router.js",
     "angularjs-slider": "./node_modules/jusas-angularjs-slider/dist/rzslider.min.js",

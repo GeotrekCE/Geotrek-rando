@@ -1,6 +1,6 @@
 'use strict';
 
-function LayoutController($rootScope, $scope, $state, $location, resultsService, globalSettings, homeService, $translate, $timeout) {
+function LayoutController($rootScope, $scope, $state, $location, resultsService, globalSettings, homeService, $translate, $timeout, Analytics) {
     $rootScope.currentState_name = $state.current.name;
     $rootScope.showFooterOnApp = globalSettings.SHOW_FOOTER;
     $rootScope.elementsLoading = 0;
@@ -21,15 +21,6 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
         };
     }
 
-    function initAnalytics() {
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        ga('create', globalSettings.GOOGLE_ANALYTICS_ID, 'auto');
-    }
-
     function iniDefaultMeta() {
         if ($state.current.name === 'layout.root') {
             $translate(['DEFAULT_META_TITLE', 'DEFAULT_META_DESCRIPTION'])
@@ -48,10 +39,6 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
     }
 
     iniDefaultMeta();
-
-    if (globalSettings.GOOGLE_ANALYTICS_ID) {
-        initAnalytics();
-    }
 
     if ($state.current.name === 'layout.root') {
         if (globalSettings.SHOW_HOME && angular.equals({}, $location.search())) {
