@@ -104,17 +104,19 @@
 
             props.picture_url = props.pictures && props.pictures.length > 0 ?
                                 props.pictures[0].url : '';
-            props.website = props.website === '' ? '' :
-                            /https?/.test(props.website) ? props.website :
+            props.website = (props.website === '' || /https?/.test(props.website)) ? props.website :
                             'http://' + props.website;
             props['website_label'] = gettext('Website');
+            if (props.website !== '')
+                props.website = L.Util.template('<a class="website" href="{website}" target="_blank">{website_label}</a>',
+                                                props);
             props['phone_label'] = gettext('Contact');
 
             var content = L.Util.template('<div class="tourism">' +
                                             '<h3>{title}</h3>' +
                                             '<img class="preview" src="{picture_url}" height="150">' +
                                             '<p class="description">{description}</p>' +
-                                            '<a class="website" href="{website}" target="_blank">{website_label}</a>' +
+                                            '{website}' +
                                             '<span class="phone">{phone_label}: <a href="tel:{phone}">{phone}</a></span>' +
                                           '</div>', props);
             var popup = L.popup({
