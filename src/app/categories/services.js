@@ -26,21 +26,21 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                 if (!(utilsFactory.idIsInArray(treksCategories, aTrek.properties.category))) {
 
                     var currentCategory = {
-                        id: aTrek.properties.category.id,
+                        id: angular.copy(aTrek.properties.category.id),
                         type: 'treks',
-                        label: aTrek.properties.category.label,
-                        order: aTrek.properties.category.order,
-                        pictogram: aTrek.properties.category.pictogram,
-                        type1_label: aTrek.properties.category.type1_label,
-                        type2_label: aTrek.properties.category.type2_label,
-                        type1: {type: 'checkbox', values: aTrek.properties.type1 || []},
-                        type2: {type: 'checkbox', values: aTrek.properties.type2 || []},
-                        route: {type: 'checkbox', values: [aTrek.properties.route] || []},
-                        difficulty: {type: 'range', values: [aTrek.properties.difficulty] || []},
+                        label: angular.copy(aTrek.properties.category.label),
+                        order: angular.copy(aTrek.properties.category.order),
+                        pictogram: angular.copy(aTrek.properties.category.pictogram),
+                        type1_label: angular.copy(aTrek.properties.category.type1_label),
+                        type2_label: angular.copy(aTrek.properties.category.type2_label),
+                        type1: {type: 'checkbox', values: angular.copy(aTrek.properties.type1) || []},
+                        type2: {type: 'checkbox', values: angular.copy(aTrek.properties.type2) || []},
+                        route: {type: 'checkbox', values: [angular.copy(aTrek.properties.route)] || []},
+                        difficulty: {type: 'range', values: [angular.copy(aTrek.properties.difficulty)] || []},
                         duration: {type: 'range', values: globalSettings.FILTERS.DURATION || []},
                         ascent: {type: 'range', values: globalSettings.FILTERS.ASCENT || []},
                         eLength: {type: 'range', values: globalSettings.FILTERS.LENGTH || []},
-                        themes: {type: 'checkbox', values: aTrek.properties.themes || []},
+                        themes: {type: 'checkbox', values: angular.copy(aTrek.properties.themes) || []},
                         cat_class: 'category-' + aTrek.properties.category.id.toString()
                     };
 
@@ -173,16 +173,16 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                 if (!(utilsFactory.idIsInArray(contentsCategories, aContent.properties.category))) {
 
                     var currentCategory = {
-                        id: aContent.properties.category.id,
+                        id: angular.copy(aContent.properties.category.id),
                         type: 'contents',
-                        label: aContent.properties.category.label,
-                        order: aContent.properties.category.order,
-                        pictogram: aContent.properties.category.pictogram,
-                        type1_label: aContent.properties.category.type1_label,
-                        type2_label: aContent.properties.category.type2_label,
-                        type1: {type: 'checkbox', values: aContent.properties.type1 || []},
-                        type2: {type: 'checkbox', values: aContent.properties.type2 || []},
-                        themes: {type: 'checkbox', values: aContent.properties.themes || []},
+                        label: angular.copy(aContent.properties.category.label),
+                        order: angular.copy(aContent.properties.category.order),
+                        pictogram: angular.copy(aContent.properties.category.pictogram),
+                        type1_label: angular.copy(aContent.properties.category.type1_label),
+                        type2_label: angular.copy(aContent.properties.category.type2_label),
+                        type1: {type: 'checkbox', values: angular.copy(aContent.properties.type1) || []},
+                        type2: {type: 'checkbox', values: angular.copy(aContent.properties.type2) || []},
+                        themes: {type: 'checkbox', values: angular.copy(aContent.properties.themes) || []},
                         cat_class: 'category-' + aContent.properties.category.id.toString()
                     };
 
