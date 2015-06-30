@@ -158,12 +158,21 @@
             flex: 1 1 auto;
             display: flex;
             padding-bottom: 0.4rem;
+            @media (min-width: 768px) and (max-width: 1200px) {
+                justify-content: flex-start;
+            }
             h4 {
                 display: block;
                 padding: 0 0.5rem;
                 color: $dark-grey;
                 font-size: 0.8rem;
                 align-self: center;
+                @media (min-width: 768px) and (max-width: 1200px) {
+                    width: 150px;
+                }
+                @media (max-width: 450px) {
+                    display: none;
+                }
             }
             .values {
                 flex: 1 1 auto;
@@ -172,13 +181,13 @@
             }
             .theme {
                 height: 2.5em;
-                min-width: 3em;
-                flex: 1 1 auto;
+                flex: 1 1 2.5em;
                 position: relative;
                 margin: auto;
                 padding: 4px;
-                @media (max-width: 1200px) {
-                    //min-width: 5em;
+                @media (min-width: 768px) and (max-width: 1200px) {
+                    margin: 0 1em;
+                    flex: 0 1 2.5em;
                 }
                 label {
                     overflow: hidden;
