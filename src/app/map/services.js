@@ -595,7 +595,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             padding = 0;
         }
         if ((updateBounds === undefined) || (updateBounds === true)) {
-            self.map.fitBounds(globalBounds, {padding: padding, maxZoom: self.maxZoomFitting});
+            self.map.fitBounds(globalBounds, {padding: padding, maxZoom: self.maxZoomFitting, animate: false});
         }
 
     };
