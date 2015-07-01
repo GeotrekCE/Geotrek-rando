@@ -8,7 +8,7 @@
     "angular-bootstrap": "^0.12.0",
     "angular-mocks": "^1.3.9",
     "angular-resource": "^1.3.8",
-    "angularjs-slider": "git://github.com/makinacorpus/angularjs-slider.git#0.1.21",
+    "angularjs-slider": "git://github.com/makinacorpus/angularjs-slider.git#70d25f4643091160945ca38bb29fa692aca44ab9",
     "angular-translate": "^2.6.1",
     "angular-ui-router": "^0.2.13",
     "angular-google-analytics": "^0.0.15",
