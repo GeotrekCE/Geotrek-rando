@@ -122,10 +122,20 @@ module.exports = {
                 defaultFileName: '',
                 customFileName: '_custom-footer.scss'
             },
-            {
                 path: '',
                 defaultFileName: '',
                 customFileName: 'custom-footer.html'
+            },
+            {
+                path: '',
+                defaultFileName: '',
+                customFileName: '_custom-header.scss'
+            },
+            {
+            {
+                path: '',
+                defaultFileName: '',
+                customFileName: 'custom-header.html'
             },
             {
                 path: '',
