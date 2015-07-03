@@ -1,9 +1,19 @@
 .warning-panel {
     position: absolute;
+    padding: 1rem;
     left: -100vw;
     top: 0;
-
+    background: $light-grey;
+    width: 35%;
+    height: 100%;
+    overflow-y: auto;
     &.opened {
         left: 0;
+    }
+    form {
+        padding: 1rem;
+    }
+    textarea {
+        resize: vertical;
     }
 }

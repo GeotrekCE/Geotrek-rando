@@ -247,6 +247,24 @@ msgstr "deelnemen"
 msgid "WARNING"
 msgstr "Een probleem of fout waarnemen"
 
+msgid "FORM_NAME"
+msgstr "Naam"
+
+msgid "FORM_EMAIL"
+msgstr "E-mail"
+
+msgid "FORM_CATEGORY"
+msgstr "Categorie"
+
+msgid "FORM_COMMENT"
+msgstr "Commentaar"
+
+msgid "FORM_MAP"
+msgstr "Plaats"
+
+msgid "FORM_SEND"
+msgstr "Sturen"
+
 msgid "KML"
 msgstr "De KML kaart downloaden"
 

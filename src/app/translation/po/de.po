@@ -254,6 +254,24 @@ msgstr "teilen"
 msgid "WARNING"
 msgstr "Problem oder Fehler signalisieren"
 
+msgid "FORM_NAME"
+msgstr "Name"
+
+msgid "FORM_EMAIL"
+msgstr "Email"
+
+msgid "FORM_CATEGORY"
+msgstr "Kategorie"
+
+msgid "FORM_COMMENT"
+msgstr "Kommentar"
+
+msgid "FORM_MAP"
+msgstr "Lage"
+
+msgid "FORM_SEND"
+msgstr "Senden"
+
 msgid "KML"
 msgstr "KML Dokument herunterladen"
 

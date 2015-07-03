@@ -1,3 +1,29 @@
 <div class="warning-panel" ng-class="{opened: showWarningPanel}">
     <h4>{{'WARNING' | translate}}</h4>
+    <form name="warningForm">
+        <div class="form-group">
+            <label for="warning-name">{{'FORM_NAME' | translate}}</label>
+            <input id="warning-name" class="form-control" type="text" ng-model="warning.name" required="">
+        </div>
+        <div class="form-group">
+            <label for="warning-email">{{'FORM_EMAIL' | translate}}</label>
+            <input id="warning-email" class="form-control" type="email" ng-model="warning.email" required="">
+        </div>
+        <div class="form-group">
+            <label for="warning-email">{{'FORM_CATEGORY' | translate}}</label>
+            <select id="warning-category" class="form-control" ng-model="warning.category">
+                <option ng-repeat="category in warningCategories" value="{{category.id}}">{{category.label}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="warning-comment">{{'FORM_COMMENT' | translate}}</label>
+            <textarea id="warning-comment" class="form-control" ng-model="warning.comment" required=""></textarea>
+        </div>
+        <div class="form-group">
+            <label>{{'FORM_MAP' | translate}}</label>
+            <div id="warning-map"></div>
+            <input type="hidden" ng-model="warning.location" required="">
+        </div>
+        <input type="submit" class="btn btn-default" value="{{'FORM_SEND' | translate}}" ng-click="sendWarning()">
+    </form>
 </div>

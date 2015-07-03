@@ -260,6 +260,24 @@ msgstr "Share"
 msgid "WARNING"
 msgstr "Signal a mistake or an issue"
 
+msgid "FORM_NAME"
+msgstr "Name"
+
+msgid "FORM_EMAIL"
+msgstr "Email"
+
+msgid "FORM_CATEGORY"
+msgstr "Category"
+
+msgid "FORM_COMMENT"
+msgstr "Comment"
+
+msgid "FORM_MAP"
+msgstr "Location"
+
+msgid "FORM_SEND"
+msgstr "Send"
+
 msgid "KML"
 msgstr "Download the KML file"
 
