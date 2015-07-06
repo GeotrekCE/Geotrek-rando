@@ -1,17 +1,22 @@
 # GEOTREK RANDO V2 ![master](https://img.shields.io/travis/makinacorpus/Geotrek-rando/master.svg?label=master)
 ### Public portal of Geotrek (http://geotrek.fr).
 
+
 ## PREREQUISITES
 
 Geotrek-Rando v2 can synchronize only with Geotrek-Admin >= v2.0.0
 
+
 ## INSTALL
+
 ### Set-up working environment
+
 - Install Node
 See https://gist.github.com/isaacs/579814 depending on your environment.
 (Read last comments as some links may change over time)
 
 ### Install Gulp-cli
+
 ```
 npm install gulp-cli
 ```
@@ -19,11 +24,13 @@ npm install gulp-cli
 ### Clone the current repository
 
 ### Install modules via NPM
+
 ```
 npm install
 ```
 
 ### Launch gulp distribution task
+
 ```
 gulp --dist
 ```
@@ -35,10 +42,12 @@ It will :
 * bundle all vendors js files in src/vendors.js 
 
 
-## Configuration
+## CONFIGURATION
+
 *Please be aware that you need to run the gulp task `gulp --dist` again (or use development mode) in order for changes to be visible*
 
 ### Minimum required
+
 Those change are done in the `configs.js` file in `src/app/config/`.
 
 1 - `PLATFORM_ID`: unique id used to represent your platorm. You need to change it, otherwise you may have conflict with other geotrek deployments. It's used for favorites and othe things specific to your platforms.
@@ -48,6 +57,7 @@ If you want to use HTML5 mode (`ENABLE_HTML_MODE = true`), you need to configure
 
 
 ### Style override
+
 You can override style by creating or editting the `_custom-oerride.scss` file in the `src/app/custom/styles` folder. It's loaded after every other stylesheet so you can basically do whatever you want. It's a SASS styling file.
 
 
@@ -92,10 +102,11 @@ Each example file contain the strict minimum code in order to allows you to add 
 
 
 ### Add and use custom images or fonts
+
 Basically, any image or font you would like to use should go into `images/custom`. Thent you can either use it in a template or a stylesheet, or in the config if it's, for example, the main logo of your Geotrek-rando version.
 
 
-### Export data from Geotrek-Rando
+## EDPORT DATA FROM GEOTREK-RANDO
 
 ### Install and configure nginx
 
@@ -127,6 +138,7 @@ server {
 
 Then run `service nginx restart`
 
+
 ## DEVELOPMENT
 
 ### Launch gulp bundling and watching task
@@ -147,8 +159,6 @@ Options :
 
 Please note that you currently need to force CORS request in your browser in order to get data from our test server.
 
-## CREDITS
-
 
 ## AUTHORS
 
@@ -158,6 +168,7 @@ Please note that you currently need to force CORS request in your browser in ord
 * [Laurent Saint-Félix](https://github.com/Anaethelion)
 
 [<img src="http://depot.makina-corpus.org/public/logo.gif">](http://www.makina-corpus.com)
+
 
 ## LICENCE
 
