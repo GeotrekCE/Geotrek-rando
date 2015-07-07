@@ -1,6 +1,5 @@
 'use strict'
 
-var angular = require('angular');
-
 angular.module('rando.header', [])
+    .controller('headerController', require('./controllers').headerController)
     .directive('randoHeader', require('./directives').randoHeader);
