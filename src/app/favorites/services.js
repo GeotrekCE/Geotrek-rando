@@ -43,7 +43,7 @@ function favoritesService(globalSettings) {
 
     this.isInFavorites = function (element) {
         if (element) {
-            if (self._favorites[element.uid]) {
+            if (self._favorites && self._favorites[element.uid]) {
                 return true;
             }
         }
