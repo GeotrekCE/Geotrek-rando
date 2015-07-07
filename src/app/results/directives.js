@@ -7,7 +7,7 @@ function resultsListeDirective() {
         restrict: 'E',
         replace: true,
         template: require('./templates/results-liste.html'),
-        controller: controllers.ResultsListeController
+        controller: 'ResultsListeController'
     };
 }
 
