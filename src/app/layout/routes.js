@@ -1,7 +1,5 @@
 'use strict';
 
-var controller = require('./controllers');
-
 function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, globalSettings) {
 
     if (globalSettings.ENABLE_HTML_MODE) {
@@ -18,14 +16,14 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
             abstract: true,
             url: '/',
             template: require('./templates/layout.html'),
-            controller: controller.LayoutController
+            controller: 'LayoutController'
         })
         .state('layout.root', {
             url: '',
             views: {
                 'sidebar' : {
                     template: require('./templates/sidebar-home.html'),
-                    controller: controller.SidebarHomeController
+                    controller: 'SidebarHomeController'
                 },
                 'content' : {
                     template: require('./templates/content-home.html'),
@@ -38,7 +36,7 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
             views: {
                 'sidebar' : {
                     template: require('./templates/sidebar-flat.html'),
-                    controller: controller.SidebarFlatController
+                    controller: 'SidebarFlatController'
                 },
                 'content' : {
                     template: require('./templates/content-flat.html'),
@@ -50,7 +48,7 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
             views: {
                 'sidebar' : {
                     template: require('./templates/sidebar-detail.html'),
-                    controller: controller.SidebarDetailController
+                    controller: 'SidebarDetailController'
                 },
                 'content' : {
                     template: require('./templates/content-detail.html'),

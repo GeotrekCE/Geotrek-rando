@@ -24,7 +24,7 @@ function Rando3DController(result, $scope, $timeout, $modalInstance, globalSetti
         var cameraID = "examine";
         var app3D = new Rando3D();
         var scene = app3D.init(customSettings, canvas, cameraID);
-        scene.init();    
+        scene.init();
     }
 
     $timeout(init3D, 500);
@@ -32,7 +32,7 @@ function Rando3DController(result, $scope, $timeout, $modalInstance, globalSetti
     $scope.close = function () {
         $modalInstance.dismiss('close');
     };
-    
+
 }
 
 module.exports = {

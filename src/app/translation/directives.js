@@ -7,7 +7,7 @@ function translationMenuDirective() {
         restrict: 'E',
         replace: true,
         template: require('./templates/translation-menu.html'),
-        controller: controllers.TranslationController
+        controller: 'TranslationController'
     };
 }
 

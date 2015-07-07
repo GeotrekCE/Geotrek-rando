@@ -118,7 +118,7 @@ function MediaController(media, $scope, $timeout, $modalInstance) {
 
         }
         document.querySelector('#media-player').appendChild(player);
-        
+
     }
 
     $scope.close = function () {

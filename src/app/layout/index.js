@@ -1,8 +1,12 @@
 'use strict';
 
-var angular = require('angular');
+var controllers = require('./controllers');
 
 angular.module('rando.layout', ['ui.router', 'rando.treks', 'angular-google-analytics'])
+    .controller('LayoutController',        controllers.LayoutController)
+    .controller('SidebarHomeController',   controllers.SidebarHomeController)
+    .controller('SidebarFlatController',   controllers.SidebarFlatController)
+    .controller('SidebarDetailController', controllers.SidebarDetailController)
     .config(require('./routes').layoutRoutes)
     .config(require('./lang').translateLayout)
     .config(require('./analytics').AnalyticsConfig)
