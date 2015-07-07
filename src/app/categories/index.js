@@ -1,7 +1,5 @@
 'use strict';
 
-var angular = require('angular');
-
 angular.module('rando.categories', [])
     .service('categoriesService', require('./services').categoriesService)
     .controller('CategoriesListeController', require('./controllers').CategoriesListeController)

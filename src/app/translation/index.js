@@ -1,7 +1,5 @@
 'use strict';
 
-var angular = require('angular');
-
 angular.module('rando.translation', ['pascalprecht.translate'])
     .service('translationService', require('./services').translationService)
     .controller('TranslationController', require('./controllers').TranslationController)

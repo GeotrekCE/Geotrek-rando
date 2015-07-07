@@ -1,14 +1,12 @@
 'use strict';
 
-var controllers = require('./controllers');
-
 function globalFiltersDirective() {
     return {
         restrict: 'E',
         replace: true,
         scope: true,
         template: require('./templates/global-filters.html'),
-        controller: controllers.GlobalFiltersController
+        controller: 'GlobalFiltersController'
     };
 }
 
@@ -18,7 +16,7 @@ function filtersTagsDirective() {
         replace: true,
         scope: true,
         template: require('./templates/tags-filters.html'),
-        controller: controllers.GlobalFiltersController
+        controller: 'GlobalFiltersController'
     };
 }
 

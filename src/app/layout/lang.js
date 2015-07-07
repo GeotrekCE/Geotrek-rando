@@ -39,7 +39,7 @@ function translateLayout($translateProvider) {
     $translateProvider.translations('en', translateEn);
 
     $translateProvider.translations('de', translateDe);
-    
+
     $translateProvider.translations('nl', translateNl);
 }
 
