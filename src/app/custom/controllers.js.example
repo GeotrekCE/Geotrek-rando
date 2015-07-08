@@ -1,11 +1,15 @@
 'use strict'
 
-var angular = require('angular');
+function detailPageFooterController () {
+
+}
+
+angular.module('rando.custom').controller('detailPageFooterController', detailPageFooterController);
 
 /* CONTROLLER DECLARATION TEMPLATE
 
 angular.module('rando.custom').controller('NameOfYourCustomController', function (aDependency, anotherDependency) {
-    
+
 });
 
 /!\ the name of the module must be 'rando.custom', otherwise you'll get an error of a non existing module.

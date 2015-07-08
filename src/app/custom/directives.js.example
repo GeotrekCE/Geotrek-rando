@@ -1,6 +1,14 @@
 'use strict'
 
-var angular = require('angular');
+angular.module('rando.custom').directive('detailPageFooter', function () {
+    return {
+        restrict: 'E',
+        replace: true,
+        scope: true,
+        template: require('./templates/custom-detail-page-footer.html'),
+        controller: 'detailPageFooterController'
+    };
+});
 
 /* SERVICE DECLARATION TEMPLATE
 
@@ -10,7 +18,7 @@ angular.module('rando.custom').directive('nameOfYourDirective', function () {
         replace: true,
         scope: true,
         template: require('./templates/your-custom-template-name.html'),
-        controller: NameOfYourCustomController
+        controller: 'NameOfYourCustomController'
     };
 });
 

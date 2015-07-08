@@ -1,11 +1,9 @@
 'use strict'
 
-var angular = require('angular');
-
 /* SERVICE DECLARATION TEMPLATE
 
 angular.module('rando.custom').service('nameOfYourService', function (aDependency, anotherDependency) {
-    
+
     this.myMethod = function () {
         return 'Yeah it works !';
     };

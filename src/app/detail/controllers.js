@@ -307,6 +307,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
             getResultDetails(true);
         }
     });
+
 }
 
 module.exports = {
