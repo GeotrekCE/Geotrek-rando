@@ -1,13 +1,14 @@
 describe('Trecks test data (actions)', function() {
+    var constants = require('../../app/config/configs').constants;
 
     beforeAll(function() {
         browser.get('/');
-        browser.executeScript(function () {
+        browser.executeScript(function (constants) {
             localStorage.clear();
-            localStorage.setItem('geotrek-rando-language', JSON.stringify({
+            localStorage.setItem(constants.PLATFORM_ID + '-language', JSON.stringify({
                 code: 'fr'
             }));
-            localStorage.setItem('geotrek-rando-favorites', JSON.stringify({
+            localStorage.setItem(constants.PLATFORM_ID + '-favorites', JSON.stringify({
                 'T-2': {
                     id: 2,
                     category: 'T'
@@ -17,7 +18,7 @@ describe('Trecks test data (actions)', function() {
                     category: 'T'
                 }
             }));
-        });
+        }, constants);
     });
 
     it('Two items should be favorited', function () {

@@ -1,13 +1,14 @@
 describe('Trecks test data (content filtering)', function() {
+    var constants = require('../../app/config/configs').constants;
 
     beforeAll(function () {
         browser.get('/');
-        browser.executeScript(function () {
+        browser.executeScript(function (constants) {
             localStorage.clear();
-            localStorage.setItem('geotrek-rando-language', JSON.stringify({
+            localStorage.setItem(constants.PLATFORM_ID + '-language', JSON.stringify({
                 code: 'fr'
             }));
-        });
+        }, constants);
     });
 
     afterAll(function () {
