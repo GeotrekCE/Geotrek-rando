@@ -115,13 +115,37 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
         $scope.propagateActiveFilters();
     };
 
+    $scope.activateCategory = function (category) {
+        var categories = $rootScope.activeFilters.categories,
+            indexOfCategory = categories.indexOf(category.id.toString());
+        if (indexOfCategory < 0) {
+            if (globalSettings.ENABLE_UNIQUE_CAT) {
+                $rootScope.activeFilters.categories = [];
+            }
+            $rootScope.activeFilters.categories.push(category.id.toString());
+        }
+        $scope.propagateActiveFilters();
+    };
+
+    $scope.deactivateCategory = function (category) {
+        var categories = $rootScope.activeFilters.categories,
+            indexOfCategory = categories.indexOf(category.id.toString());
+        if (indexOfCategory > -1) {
+            categories.splice(indexOfCategory, 1);
+        }
+        $scope.propagateActiveFilters();
+    };
+
     $scope.toggleCategory = function (category) {
         var categories = $rootScope.activeFilters.categories,
             indexOfCategory = categories.indexOf(category.id.toString());
         if (indexOfCategory > -1) {
             categories.splice(indexOfCategory, 1);
         } else {
-            categories.push(category.id.toString());
+            if (globalSettings.ENABLE_UNIQUE_CAT) {
+                $rootScope.activeFilters.categories = [];
+            }
+            $rootScope.activeFilters.categories.push(category.id.toString());
         }
         $scope.propagateActiveFilters();
     };
@@ -140,6 +164,33 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
             $rootScope.activeFilters[categoryId + '_' + filterType] = [filterId.toString()];
         }
         $scope.propagateActiveFilters();
+    };
+
+    $scope.closeCategoryMenu = function (category) {
+        category.open = false;
+    };
+
+    $scope.openCategoryMenu = function (category) {
+        category.open = true;
+    };
+
+    $scope.toggleCategoryMenu = function (category) {
+        if (!category.open) {
+            category.open = false;
+        }
+        if (!category.open) {
+            $scope.activateCategory(category);
+        }
+        category.open = !category.open;
+        $scope.hideSiblings(category);
+    };
+
+    $scope.hideSiblings = function (mainCategory) {
+        _.forEach($scope.categories, function (category) {
+            if (category.id !== mainCategory.id) {
+                category.open = false;
+            }
+        });
     };
 
     $scope.propagateActiveFilters = function () {

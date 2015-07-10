@@ -419,7 +419,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             }
 
         } else {
-            result = self.matchById(element, globalSettings.DEFAULT_ACTIVE_CATEGORIES, 'category');
+            result = false;
         }
 
         return result;
