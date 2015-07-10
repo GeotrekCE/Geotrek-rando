@@ -26,6 +26,7 @@ var dependencies = [
     'rando.social',
     'rando.custom',
     'rando.warning',
+    'rando.googleapi',
 
     // EXTERNAL STUFFS
     'pascalprecht.translate',
@@ -91,3 +92,4 @@ require('./3d');
 require('./flat-pages');
 require('./custom');
 require('./warning');
+require('./googleapi');
