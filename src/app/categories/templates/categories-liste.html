@@ -160,7 +160,7 @@
                     </div>
                 </div>
 
-                <div ng-if="category.routes && category.routes.values.length > 0" class="selector routes" ng-class="{opened: routeIsCollapsed}">
+                <div ng-if="category.route && category.route.values.length > 0" class="selector routes" ng-class="{opened: routeIsCollapsed}">
                     <span ng-click="routeIsCollapsed = !routeIsCollapsed" class="filter-title">
                         <span>{{'ROUTES' | translate}}</span>
                         <span class="more-or-less">
