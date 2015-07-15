@@ -233,7 +233,7 @@ msgid "ABOUT_US"
 msgstr "En savoir plus"
 
 msgid "BACK"
-msgstr "Retour à la carte"
+msgstr "Retour à la carte"
 
 msgid "PRINT"
 msgstr "Imprimer la fiche"
