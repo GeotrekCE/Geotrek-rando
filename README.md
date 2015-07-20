@@ -4,7 +4,7 @@
 
 ## PREREQUISITES
 
-Geotrek-Rando v2 can synchronize only with Geotrek-Admin >= v2.0.0
+Geotrek-Rando v2 can synchronize only with Geotrek-Admin v2
 
 
 ## INSTALL
@@ -106,7 +106,7 @@ Each example file contain the strict minimum code in order to allows you to add 
 Basically, any image or font you would like to use should go into `images/custom`. Thent you can either use it in a template or a stylesheet, or in the config if it's, for example, the main logo of your Geotrek-rando version.
 
 
-## EDPORT DATA FROM GEOTREK-RANDO
+## EXPORT DATA FROM GEOTREK-RANDO
 
 ### Install and configure nginx
 
