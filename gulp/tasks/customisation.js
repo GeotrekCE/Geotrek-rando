@@ -1,14 +1,14 @@
-var fs           = require('fs');
-var path         = require('path');
-var bundleLogger = require('../util/bundleLogger');
-var notifier     = require('node-notifier');
 var gulp         = require('gulp');
-var _            = require('lodash');
-var config       = require('../config').custom;
-var prefix       = '/../.';
 
-function customisationTask() {
-    var self = this;
+gulp.task('customisation', function () {
+    var fs           = require('fs');
+    var path         = require('path');
+    var bundleLogger = require('../util/bundleLogger');
+    var notifier     = require('node-notifier');
+    var _            = require('lodash');
+    var config       = require('../config').custom;
+    var prefix       = '/../.';
+    var self         = this;
 
     //First - read custom config file
     //
@@ -41,7 +41,6 @@ function customisationTask() {
             });
             return false;
         }
-            
     }
 
     if (config.languages.enable) {
@@ -102,10 +101,5 @@ function customisationTask() {
 
             fs.appendFileSync(path.join(filePath, file.customFileName), fileContent);
         }
-        
     });
-}
-
-gulp.task('customisation', customisationTask);
-
-module.exports = customisationTask;
+});

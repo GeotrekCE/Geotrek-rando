@@ -21,12 +21,8 @@ var uglify       = require('gulp-uglify');
 var exorcist     = require('exorcist');
 var config       = require('../config').browserify;
 var _            = require('lodash');
-var translateTask = require('./translate');
-var custoTask = require('./customisation');
-
 
 var browserifyTask = function (callback, devMode) {
-
     var bundleQueue = config.bundleConfigs.length;
 
     var browserifyThis = function (bundleConfig) {
@@ -90,14 +86,15 @@ var browserifyTask = function (callback, devMode) {
 
         return bundle();
     };
-    custoTask();
-    translateTask();
-    setTimeout(function () {
-        config.bundleConfigs.forEach(browserifyThis);
-    }, 500);
+
+    config.bundleConfigs.forEach(browserifyThis);
 };
 
-gulp.task('browserify', browserifyTask);
 
-module.exports = browserifyTask;
+gulp.task('browserify', ['customisation', 'translate'], function (callback) {
+    browserifyTask(callback, false);
+});
 
+gulp.task('watchify', ['customisation', 'translate'], function (callback) {
+    browserifyTask(callback, true);
+});
