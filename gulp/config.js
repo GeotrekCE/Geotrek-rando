@@ -70,7 +70,7 @@ module.exports = {
         outputName : 'rando-vendors.js',
         dest: dest
     },
-    browserify: {
+    mainapp: {
         debug: true,
         entries: src + '/' + appFolder + '/app.js',
         dest: dest,

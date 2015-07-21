@@ -10,7 +10,7 @@
 
 var gulp = require('gulp');
 
-var browserifyTask = function (callback, watchMode) {
+var mainappTask = function (callback, watchMode) {
     var browserify    = require('browserify');
     var browserSync   = require('browser-sync');
     var watchify      = require('watchify');
@@ -21,7 +21,7 @@ var browserifyTask = function (callback, watchMode) {
 
     var bundleLogger  = require('../util/bundleLogger');
     var handleErrors  = require('../util/handleErrors');
-    var config        = require('../config').browserify;
+    var config        = require('../config').mainapp;
 
     var outputName    = config.outputName;
     var outputPath    = config.dest;
@@ -36,7 +36,9 @@ var browserifyTask = function (callback, watchMode) {
             .on('error', handleErrors)
             .on('end', function () {
                 bundleLogger.end(outputName);
-                callback();
+                if (!watchMode) {
+                    callback();
+                }
             });
 
         localBundle
@@ -82,10 +84,10 @@ var browserifyTask = function (callback, watchMode) {
 };
 
 
-gulp.task('browserify', ['customisation', 'translate'], function (callback) {
-    browserifyTask(callback, false);
+gulp.task('mainapp', ['customisation', 'translate'], function (callback) {
+    mainappTask(callback, false);
 });
 
-gulp.task('watchify', ['customisation', 'translate'], function (callback) {
-    browserifyTask(callback, true);
+gulp.task('watch:mainapp', ['customisation', 'translate'], function (callback) {
+    mainappTask(callback, true);
 });
