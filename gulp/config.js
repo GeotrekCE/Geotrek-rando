@@ -43,9 +43,7 @@ module.exports = {
         dest: dest,
         toWatch: src + '/' + appFolder + '/**/*.scss',
         settings: {
-            // Required if you want to use SASS syntax
-            // See https://github.com/dlmanning/gulp-sass/issues/81
-            sourceComments: 'map',
+            outputStyle: 'compact',
             imagePath: '/images' // Used by the image-url helper
         }
     },
