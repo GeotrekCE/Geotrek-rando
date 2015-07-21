@@ -1,18 +1,11 @@
-var distMode = (process.argv.slice(2).indexOf('--dist') >= 0);
-var vendorsMode = (process.argv.slice(2).indexOf('--vendors') >= 0);
-var dest = './src',
-    src = './src',
-    appFolder = 'app';
-
+var dest      = './src';
+var src       = './src';
+var appFolder = 'app';
 
 module.exports = {
     unit: {
         tests: ['src/**/test/unit/*.js'],
         src: ['src/*/*.js']
-    },
-    buildMode: {
-        dist: distMode,
-        vendors: vendorsMode
     },
     browserSync: {
         server: {
@@ -74,12 +67,8 @@ module.exports = {
         dest: dest + appFolder + '/vendors/fonts'
     },
     vendors: {
-        debug: true,
         outputName : 'rando-vendors.js',
-        dest: dest,
-        dist_ignore: [
-            "angular-mocks"
-        ]
+        dest: dest
     },
     browserify: {
         debug: true,
