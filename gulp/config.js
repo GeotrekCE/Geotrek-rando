@@ -72,15 +72,9 @@ module.exports = {
     },
     browserify: {
         debug: true,
-        // A separate bundle will be generated for each
-        // bundle config in the list below
-        bundleConfigs: [
-            {
-                entries: src + '/' + appFolder + '/app.js',
-                dest: dest,
-                outputName: 'rando.js'
-            }
-        ]
+        entries: src + '/' + appFolder + '/app.js',
+        dest: dest,
+        outputName: 'rando.js'
     },
     production: {
         cssSrc: dest + '/*.css',

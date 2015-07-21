@@ -8,86 +8,77 @@
    See browserify.bundleConfigs in gulp/config.js
 */
 
-var browserify   = require('browserify');
-var browserSync  = require('browser-sync');
-var watchify     = require('watchify');
-var partialify   = require('partialify');
-var bundleLogger = require('../util/bundleLogger');
-var gulp         = require('gulp');
-var handleErrors = require('../util/handleErrors');
-var source       = require('vinyl-source-stream');
-var streamify    = require('gulp-streamify');
-var uglify       = require('gulp-uglify');
-var exorcist     = require('exorcist');
-var config       = require('../config').browserify;
-var _            = require('lodash');
+var gulp = require('gulp');
 
-var browserifyTask = function (callback, devMode) {
-    var bundleQueue = config.bundleConfigs.length;
+var browserifyTask = function (callback, watchMode) {
+    var browserify    = require('browserify');
+    var browserSync   = require('browser-sync');
+    var watchify      = require('watchify');
+    var partialify    = require('partialify');
+    var source        = require('vinyl-source-stream');
+    var streamify     = require('gulp-streamify');
+    var _             = require('lodash');
 
-    var browserifyThis = function (bundleConfig) {
+    var bundleLogger  = require('../util/bundleLogger');
+    var handleErrors  = require('../util/handleErrors');
+    var config        = require('../config').browserify;
 
-        var reportFinished = function () {
-            // Log when bundling completes
-            bundleLogger.end(bundleConfig.outputName);
+    var outputName    = config.outputName;
+    var outputPath    = config.dest;
+    var bundleEntries = config.entries;
 
-            if (bundleQueue) {
-                bundleQueue--;
-                if (bundleQueue === 0) {
-                    // If queue is empty, tell gulp the task is complete.
-                    // https://github.com/gulpjs/gulp/blob/master/docs/API.md#accept-a-callback
-                    callback();
-                }
-            }
-        };
+    var bundle = function () {
+        bundleLogger.start(outputName);
 
-        var bundler = browserify({
-            // Required watchify args
-            cache: {},
-            packageCache: {},
-            fullPaths: false,
-            // Specify the entry point of your app
-            entries: bundleConfig.entries,
-            // Add file extentions to make optional in your requires
-            extensions: config.extensions,
-            // exclude all externals
-            bundleExternal: false,
-            // Enable source maps!
-            debug: config.debug
-        })
-            .transform(partialify);
+        var localBundle = bundler.bundle();
 
-        var bundle = function () {
-            // Log when bundling starts
-            bundleLogger.start(bundleConfig.outputName);
+        localBundle
+            .on('error', handleErrors)
+            .on('end', function () {
+                bundleLogger.end(outputName);
+                callback();
+            });
 
-            return bundler
-                .bundle()
-                // Report compile errors
-                .on('error', handleErrors)
-                // Use vinyl-source-stream to make the
-                // stream gulp compatible. Specify the
-                // desired output filename here.
-                .pipe(source(bundleConfig.outputName))
-                //.pipe(streamify(uglify()))
-                // Specify the output destination
-                .pipe(gulp.dest(bundleConfig.dest))
-                .on('end', reportFinished)
-                .pipe(browserSync.reload({stream: true}));
-        };
+        localBundle
+            .pipe(source(outputName))
+            .pipe(gulp.dest(outputPath));
 
-        if (devMode) {
-            // Wrap with watchify and rebundle on changes
-            bundler = watchify(bundler);
-            // Rebundle on update
-            bundler.on('update', bundle);
-            bundleLogger.watch(bundleConfig.outputName);
-        }
+        localBundle
+            .pipe(browserSync.reload({stream: true}));
 
-        return bundle();
+        return localBundle;
     };
 
-    config.bundleConfigs.forEach(browserifyThis);
+    var bundlerOptions = {
+        // Required watchify args
+        cache: {},
+        packageCache: {},
+        fullPaths: false,
+        // Specify the entry point of your app
+        entries: bundleEntries,
+        // Add file extentions to make optional in your requires
+        extensions: config.extensions,
+        // exclude all externals
+        bundleExternal: false
+    };
+
+    var bundler = browserify(bundlerOptions);
+
+    bundler.transform(partialify);
+    bundler.transform({
+        global: true,
+        mangle: false
+    }, 'uglifyify');
+
+    if (watchMode) {
+        // Wrap with watchify and rebundle on changes
+        bundler = watchify(bundler);
+        // Rebundle on update
+        bundler.on('update', bundle);
+        bundleLogger.watch(outputName);
+    }
+
+    return bundle();
 };
 
 
