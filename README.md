@@ -4,7 +4,8 @@
 
 ## PREREQUISITES
 
-Geotrek-Rando v2 can synchronize only with Geotrek-Admin v2
+- Geotrek-Rando v2 can synchronize only with Geotrek-Admin v2
+- Ubuntu 14.04
 
 
 ## INSTALL
@@ -12,20 +13,27 @@ Geotrek-Rando v2 can synchronize only with Geotrek-Admin v2
 ### Set-up working environment
 
 - Install Node
-See https://gist.github.com/isaacs/579814 depending on your environment.
-(Read last comments as some links may change over time)
+
+```
+curl -sL https://deb.nodesource.com/setup | sudo bash -
+sudo apt-get install nodejs build-essential
+```
 
 ### Install Gulp-cli
 
 ```
+cd
 npm install gulp-cli
 ```
 
-### Clone the current repository
+### Download Geotrek-Rando
+
+Download and extract latest release of Geotrek-Rando from [GitHub](https://github.com/makinacorpus/Geotrek-rando/releases/latest).
 
 ### Install modules via NPM
 
 ```
+cd Geotrek-rando-*
 npm install
 ```
 
@@ -58,7 +66,7 @@ If you want to use HTML5 mode (`ENABLE_HTML_MODE = true`), you need to configure
 
 ### Style override
 
-You can override style by creating or editting the `_custom-oerride.scss` file in the `src/app/custom/styles` folder. It's loaded after every other stylesheet so you can basically do whatever you want. It's a SASS styling file.
+You can override style by creating or editting the `_custom-override.scss` file in the `src/app/custom/styles` folder. It's loaded after every other stylesheet so you can basically do whatever you want. It's a SASS styling file.
 
 
 ### Customisation of Header
@@ -128,7 +136,7 @@ server {
         application/vnd.google-earth.kmz kmz;
     }
     location /data/ {
-        root <where I export>;
+        root <where I export>/;
     }
     location / {
         try_files $uri $uri/ /index.html;
