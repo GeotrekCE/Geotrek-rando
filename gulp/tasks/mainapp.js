@@ -15,6 +15,7 @@ var watchify    = require('watchify');
 var browserSync = require('browser-sync');
 var gulpif      = require('gulp-if');
 var exorcist    = require('exorcist');
+var jshint      = require('gulp-jshint');
 
 var partialify    = require('partialify');
 
@@ -55,7 +56,13 @@ function browserifyShare() {
         // if watch is enable, wrap this bundle inside watchify
         b = watchify(b);
         bundleLogger.watch(outputName);
-        b.on('update', function() { bundleShare(b); });
+        b.on('update', function (filename) {
+            gulp.src(filename)
+                .pipe(jshint())
+                .pipe(jshint.reporter('jshint-stylish'));
+
+            bundleShare(b);
+        });
     }
 
     bundleShare(b);
