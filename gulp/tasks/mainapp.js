@@ -8,86 +8,75 @@
    See browserify.bundleConfigs in gulp/config.js
 */
 
-var gulp = require('gulp');
+var gulp        = require('gulp');
+var browserify  = require('browserify');
+var source      = require('vinyl-source-stream');
+var watchify    = require('watchify');
+var browserSync = require('browser-sync');
+var gulpif      = require('gulp-if');
+var exorcist    = require('exorcist');
 
-var mainappTask = function (callback, watchMode) {
-    var browserify    = require('browserify');
-    var browserSync   = require('browser-sync');
-    var watchify      = require('watchify');
-    var partialify    = require('partialify');
-    var source        = require('vinyl-source-stream');
-    var streamify     = require('gulp-streamify');
-    var _             = require('lodash');
+var partialify    = require('partialify');
 
-    var bundleLogger  = require('../util/bundleLogger');
-    var handleErrors  = require('../util/handleErrors');
-    var config        = require('../config').mainapp;
+var bundleLogger  = require('../util/bundleLogger');
+var handleErrors  = require('../util/handleErrors');
+var config        = require('../config').mainapp;
 
-    var outputName    = config.outputName;
-    var outputPath    = config.dest;
-    var bundleEntries = config.entries;
+var outputName    = config.outputName;
+var outputPath    = config.dest;
+var bundleEntries = config.entries;
 
-    var bundle = function () {
-        bundleLogger.start(outputName);
+var watch;
+var srcMap        = false;
+var brwSync       = true;
 
-        var localBundle = bundler.bundle();
+gulp.task('mainapp', ['customisation', 'translate'], function(){
+    watch = false;
+    browserifyShare();
+});
 
-        localBundle
-            .on('error', handleErrors)
-            .on('end', function () {
-                bundleLogger.end(outputName);
-                if (!watchMode) {
-                    callback();
-                }
-            });
+gulp.task('watch:mainapp', ['customisation', 'translate'], function(){
+    watch = true;
+    browserifyShare();
+});
 
-        localBundle
-            .pipe(source(outputName))
-            .pipe(gulp.dest(outputPath));
-
-        localBundle
-            .pipe(browserSync.reload({stream: true}));
-
-        return localBundle;
-    };
-
-    var bundlerOptions = {
-        // Required watchify args
+function browserifyShare() {
+    var b = browserify({
         cache: {},
         packageCache: {},
         fullPaths: false,
-        // Specify the entry point of your app
         entries: bundleEntries,
-        // Add file extentions to make optional in your requires
         extensions: config.extensions,
-        // exclude all externals
-        bundleExternal: false
-    };
+        bundleExternal: false,
+        debug: srcMap
+    });
 
-    var bundler = browserify(bundlerOptions);
+    if (watch) {
+        // if watch is enable, wrap this bundle inside watchify
+        b = watchify(b);
+        bundleLogger.watch(outputName);
+        b.on('update', function() { bundleShare(b); });
+    }
 
-    bundler.transform(partialify);
-    bundler.transform({
+    bundleShare(b);
+}
+
+
+function bundleShare(b) {
+    bundleLogger.start(outputName);
+
+    b.transform(partialify);
+
+    b.transform({
         global: true,
         mangle: false
     }, 'uglifyify');
 
-    if (watchMode) {
-        // Wrap with watchify and rebundle on changes
-        bundler = watchify(bundler);
-        // Rebundle on update
-        bundler.on('update', bundle);
-        bundleLogger.watch(outputName);
-    }
-
-    return bundle();
-};
-
-
-gulp.task('mainapp', ['customisation', 'translate'], function (callback) {
-    mainappTask(callback, false);
-});
-
-gulp.task('watch:mainapp', ['customisation', 'translate'], function (callback) {
-    mainappTask(callback, true);
-});
+    b.bundle()
+        .on('error', handleErrors)
+        .on('end', function () { bundleLogger.end(outputName); })
+        .pipe(gulpif(srcMap, exorcist(outputPath + '/maps/' + outputName + '.map', 'maps/' + outputName + '.map')))
+        .pipe(source(outputName))
+        .pipe(gulp.dest(outputPath))
+        .pipe(gulpif(brwSync && watch, browserSync.reload({stream: true})));
+}
