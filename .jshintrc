@@ -1,0 +1,34 @@
+{
+    // Enforcing
+    "curly": true,
+    "eqeqeq": true,
+    "forin": true,
+    "freeze": true,
+    "futurehostile": true,
+    "latedef": true,
+    "noarg": true,
+    "nocomma": true,
+    "nonbsp": true,
+    "nonew": true,
+    "notypeof": true,
+    "strict": true,
+    "undef": true,
+    "unused": true,
+
+    // Relaxing
+    "globalstrict": true,
+    "validthis": true,
+
+    // Environments
+    "browser": true,
+    "browserify": true,
+    "devel": true,
+    "jasmine": true,
+    "jquery": true,
+
+    "globals": {
+        "angular": true,
+        "L": true,
+        "_": true
+    }
+}
