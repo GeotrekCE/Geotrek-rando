@@ -1,18 +1,11 @@
-var distMode = (process.argv.slice(2).indexOf('--dist') >= 0);
-var vendorsMode = (process.argv.slice(2).indexOf('--vendors') >= 0);
-var dest = './src',
-    src = './src',
-    appFolder = 'app';
-
+var dest      = './src';
+var src       = './src';
+var appFolder = 'app';
 
 module.exports = {
     unit: {
         tests: ['src/**/test/unit/*.js'],
         src: ['src/*/*.js']
-    },
-    buildMode: {
-        dist: distMode,
-        vendors: vendorsMode
     },
     browserSync: {
         server: {
@@ -43,9 +36,7 @@ module.exports = {
         dest: dest,
         toWatch: src + '/' + appFolder + '/**/*.scss',
         settings: {
-            // Required if you want to use SASS syntax
-            // See https://github.com/dlmanning/gulp-sass/issues/81
-            sourceComments: 'map',
+            outputStyle: 'compact',
             imagePath: '/images' // Used by the image-url helper
         }
     },
@@ -76,24 +67,14 @@ module.exports = {
         dest: dest + appFolder + '/vendors/fonts'
     },
     vendors: {
-        debug: true,
         outputName : 'rando-vendors.js',
-        dest: dest,
-        dist_ignore: [
-            "angular-mocks"
-        ]
+        dest: dest
     },
-    browserify: {
+    mainapp: {
         debug: true,
-        // A separate bundle will be generated for each
-        // bundle config in the list below
-        bundleConfigs: [
-            {
-                entries: src + '/' + appFolder + '/app.js',
-                dest: dest,
-                outputName: 'rando.js'
-            }
-        ]
+        entries: src + '/' + appFolder + '/app.js',
+        dest: dest,
+        outputName: 'rando.js'
     },
     production: {
         cssSrc: dest + '/*.css',

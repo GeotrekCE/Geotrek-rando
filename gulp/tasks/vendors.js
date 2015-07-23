@@ -1,64 +1,45 @@
-var browserify = require('browserify');
-var source = require('vinyl-source-stream');
-var partialify = require('partialify');
-var streamify = require('gulp-streamify');
-var gulp = require('gulp');
+var gulp         = require('gulp');
+var PACKAGE      = require('../../package.json');
+
+var browserify   = require('browserify');
+var source       = require('vinyl-source-stream');
+var streamify    = require('gulp-streamify');
+
 var handleErrors = require('../util/handleErrors');
 var bundleLogger = require('../util/bundleLogger');
-var config = require('../config').vendors;
-var uglify = require('gulp-uglify');
-var PACKAGE = require('../../package.json');
-var exorcist = require('exorcist');
-var _ = require('lodash');
-var src = [], key;
+var config       = require('../config').vendors;
 
 gulp.task('vendors', function () {
 
-    var key;
-    var bundler = browserify({
-        // Enable source maps if true
-        debug: config.debug
-    });
+    var bundler    = browserify();
+    var outputName = config.outputName;
+    var outputPath = config.dest;
 
-    for (key in PACKAGE.vendors) {
-
-        if (global.distMode) {
-            if (config.dist_ignore.indexOf(key) === -1) {
-                bundler.require(
-                    PACKAGE.vendors[key],
-                    {expose: key}
-                );
-            }
-        } else {
-
-            bundler.require(
-                PACKAGE.vendors[key],
-                {expose: key}
-            );
-
-        }
-
+    for (var key in PACKAGE.vendors) {
+        bundler.require(
+            PACKAGE.vendors[key],
+            {expose: key}
+        );
     }
 
     // Use partialify to allow Angular templates to be require()
-    bundler.transform(partialify);
+    bundler.transform(require('partialify'));
+    bundler.transform({
+        global: true
+    }, 'uglifyify');
 
     // Log when bundling starts
-    bundleLogger.start(config.outputName);
+    bundleLogger.start(outputName);
 
-    return bundler
-        .bundle()
+    var bundle = bundler.bundle();
+
+    bundle
         .on('error', handleErrors)
-        .pipe(exorcist(
-            config.dest + '/maps/' + config.outputName + '.map',
-            'maps/' + config.outputName + '.map'
-        ))
-        .pipe(source(config.outputName))
-        //.pipe(streamify(uglify({mangle: false})))
-        .pipe(gulp.dest(config.dest))
-        .on('end', function () {
-            // Log when bundling completes
-            bundleLogger.end(config.outputName);
-        });
+        .on('end', function () { bundleLogger.end(outputName); });
 
+    bundle
+        .pipe(source(outputName))     // Setup the right filename
+        .pipe(gulp.dest(outputPath)); // Output in specified directory
+
+    return bundle;
 });

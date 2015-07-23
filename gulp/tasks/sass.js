@@ -1,27 +1,35 @@
 var gulp         = require('gulp');
+var gulpif       = require('gulp-if');
 var browserSync  = require('browser-sync');
+
 var sass         = require('gulp-sass');
 var rename       = require("gulp-rename");
 var sourcemaps   = require('gulp-sourcemaps');
+var autoprefixer = require('gulp-autoprefixer');
+
 var handleErrors = require('../util/handleErrors');
 var config       = require('../config').sass;
-var autoprefixer = require('gulp-autoprefixer');
+
+var srcMap       = false;
+var brwSync      = true;
 
 gulp.task('sass', function () {
 
-    function compileSass(element, index) {
-        gulp.src(element.src)
-            .pipe(sourcemaps.init())
-            .pipe(sass(config.settings))
-            .on('error', handleErrors)
-            .pipe(sourcemaps.write())
-            .pipe(autoprefixer({ browsers: ['last 2 version'] }))
-            .pipe(rename(element.outputName))
-            .pipe(gulp.dest(config.dest))
-            .pipe(browserSync.reload({stream:true}));
-    }
+    config.files.forEach(function (element) {
+        var stream = gulp.src(element.src);
 
-    config.files.forEach(compileSass);
-    return true;
-  
+        stream
+            .on('error', handleErrors);
+
+        stream
+            .pipe(gulpif(srcMap, sourcemaps.init()))
+            .pipe(sass(config.settings))
+            .pipe(autoprefixer({ browsers: ['last 2 version'] }))
+            .pipe(gulpif(srcMap, sourcemaps.write()))
+            .pipe(rename(element.outputName)) // Setup the right filename
+            .pipe(gulp.dest(config.dest));    // Output in specified directory
+
+        stream
+            .pipe(gulpif(brwSync, browserSync.reload({stream:true})));
+    });
 });
