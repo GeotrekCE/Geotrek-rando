@@ -26,7 +26,7 @@
     "rando3D": "git://github.com/makinacorpus/rando3D.git#exportable"
   },
   "vendors": {
-    "angular": "./src/app/angular-browserify.js",
+    "angular": "./node_modules/angular",
     "angular-translate": "./node_modules/angular-translate/dist/angular-translate.js",
     "angular-google-analytics": "./node_modules/angular-google-analytics/dist/angular-google-analytics.js",
     "ui.bootstrap": "./node_modules/angular-bootstrap/dist/ui-bootstrap-tpls.min.js",
