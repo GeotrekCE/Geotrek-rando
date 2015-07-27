@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-function FiliationController($scope, favoritesService, $rootScope) {
+function FiliationController($scope, favoritesService) {
     $scope.isInFavorites = favoritesService.isInFavorites;
 
     $scope.hoverMarkerFiliation = function (currentPoi, state) {
@@ -19,13 +19,11 @@ function FiliationController($scope, favoritesService, $rootScope) {
     };
 
     $scope.toggleFavorites = function (currentElement) {
-        var currentAction = '';
         if (favoritesService.isInFavorites(currentElement)) {
-            currentAction = 'remove';
+            favoritesService.removeAFavorite(currentElement);
         } else {
-            currentAction = 'add';
+            favoritesService.addAFavorite(currentElement);
         }
-        $rootScope.$broadcast('changeFavorite', {element: currentElement, action: currentAction});
     };
 }
 

@@ -21,31 +21,17 @@ function FavoritesController($scope, $rootScope, globalSettings, favoritesServic
 
     $scope.removeAFavorite = function (currentElement) {
         favoritesService.removeAFavorite(currentElement);
-        updateFavorites();
     };
 
     $scope.removeAllFavorites = function () {
         favoritesService.removeAllFavorites();
-        updateFavorites();
-    };
-
-    $scope.addAFavorite = function (currentElement) {
-        favoritesService.addAFavorite(currentElement);
-        updateFavorites();
     };
 
     updateFavorites();
+    favoritesService.addCallback(updateFavorites);
 
     $rootScope.$on('switchGlobalLang', function () {
         updateFavorites(true);
-    });
-
-    $scope.$on('changeFavorite', function (event, args) {
-        if (args.action === 'add') {
-            $scope.addAFavorite(args.element);
-        } else if (args.action === 'remove') {
-            $scope.removeAFavorite(args.element);
-        }
     });
 
 }

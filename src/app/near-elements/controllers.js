@@ -1,6 +1,6 @@
 'use strict';
 
-function NearListeController($scope, globalSettings, favoritesService, $rootScope) {
+function NearListeController($scope, globalSettings, favoritesService) {
 
     $scope.favIcon = (globalSettings.FAVORITES_ICON ? globalSettings.FAVORITES_ICON : 'heart');
     $scope.isInFavorites = favoritesService.isInFavorites;
@@ -21,13 +21,11 @@ function NearListeController($scope, globalSettings, favoritesService, $rootScop
     };
 
     $scope.toggleFavorites = function (currentElement) {
-        var currentAction = '';
         if (favoritesService.isInFavorites(currentElement)) {
-            currentAction = 'remove';
+            favoritesService.removeAFavorite(currentElement);
         } else {
-            currentAction = 'add';
+            favoritesService.addAFavorite(currentElement);
         }
-        $rootScope.$broadcast('changeFavorite', {element: currentElement, action: currentAction});
     };
 }
 

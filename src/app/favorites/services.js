@@ -1,49 +1,50 @@
 'use strict';
 
 function favoritesService(globalSettings) {
+    var that = this;
+    var storageName = globalSettings.PLATFORM_ID + '-favorites';
+    that.serviceCallbacks = [];
 
-    var self = this,
-        storageName = globalSettings.PLATFORM_ID + '-favorites';
-
-    this.getFavorites = function () {
-        if (self._favorites) {
-            return self._favorites;
+    that.getFavorites = function () {
+        if (that._favorites) {
+            return that._favorites;
         }
 
         if (!localStorage.getItem(storageName)) {
-            self._favorites = {};
-            self.setFavorites();
+            that._favorites = {};
+            that.setFavorites();
         } else {
             var favorites_json = localStorage.getItem(storageName);
-            self._favorites = JSON.parse(favorites_json);
+            that._favorites = JSON.parse(favorites_json);
         }
 
-        return self._favorites;
+        return that._favorites;
     };
 
-    this.setFavorites = function () {
-        var favorites_json = JSON.stringify(self._favorites);
+    that.setFavorites = function () {
+        var favorites_json = JSON.stringify(that._favorites);
         localStorage.setItem(storageName, favorites_json);
     };
 
-    this.removeAllFavorites = function () {
-        self._favorites = {};
+    that.removeAllFavorites = function () {
+        that._favorites = {};
         localStorage.removeItem(storageName);
     };
 
-    this.addAFavorite = function (element) {
-        if (!self._favorites[element.uid]) {
-            self._favorites[element.uid] = {
+    that.addAFavorite = function (element) {
+        if (!that._favorites[element.uid]) {
+            that._favorites[element.uid] = {
                 id: element.id,
                 category: element.properties.category.id
             };
-            self.setFavorites();
+            that.setFavorites();
+            that.callCallbacks();
         }
     };
 
-    this.isInFavorites = function (element) {
+    that.isInFavorites = function (element) {
         if (element) {
-            if (self._favorites && self._favorites[element.uid]) {
+            if (that._favorites && that._favorites[element.uid]) {
                 return true;
             }
         }
@@ -51,11 +52,22 @@ function favoritesService(globalSettings) {
         return false;
     };
 
-    this.removeAFavorite = function (element) {
-        if (self._favorites[element.uid]) {
-            delete self._favorites[element.uid];
-            self.setFavorites();
+    that.removeAFavorite = function (element) {
+        if (that._favorites[element.uid]) {
+            delete that._favorites[element.uid];
+            that.setFavorites();
+            that.callCallbacks();
         }
+    };
+
+    that.addCallback = function (callbackFunction) {
+        that.serviceCallbacks.push(callbackFunction);
+    };
+
+    that.callCallbacks = function () {
+        that.serviceCallbacks.forEach(function (callbackFunction) {
+            callbackFunction(that._favorites);
+        });
     };
 }
 
