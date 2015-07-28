@@ -8,13 +8,7 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
             .then(
                 function (results) {
                     $scope.results = results;
-                    var resultsInterval = setInterval(function () {
-                        if ($scope.resultsDisplayLimit < $scope.results.length) {
-                            $scope.resultsDisplayLimit += 20;
-                        } else {
-                            clearInterval(resultsInterval);
-                        }
-                    }, 300);
+                    startLazyLoading();
                     $rootScope.$emit('resultsUpdated');
                     $rootScope.elementsLoading --;
                 },function (err) {
@@ -25,6 +19,17 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
                 }
             );
 
+    }
+
+    function startLazyLoading () {
+        $scope.resultsDisplayLimit = 20;
+        var resultsInterval = setInterval(function () {
+            if ($scope.resultsDisplayLimit < $scope.results.length) {
+                $scope.resultsDisplayLimit += 20;
+            } else {
+                clearInterval(resultsInterval);
+            }
+        }, 300);
     }
 
     $scope.toggleFavorites = function (currentElement) {
@@ -68,7 +73,6 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
         });
     };
 
-    $scope.resultsDisplayLimit = 20;
     $scope.favoriteIcon = (globalSettings.FAVORITES_ICON ? globalSettings.FAVORITES_ICON : 'heart');
     $scope.isInFavorites = favoritesService.isInFavorites;
     $scope.isSVG = utilsFactory.isSVG;
