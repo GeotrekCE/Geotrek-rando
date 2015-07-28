@@ -35,3 +35,7 @@ gulp.task('sass', function () {
             .pipe(gulpif(brwSync, browserSync.reload({stream:true})));
     });
 });
+
+gulp.task('watch:sass', function () {
+    gulp.watch(config.toWatch, ['sass']);
+});

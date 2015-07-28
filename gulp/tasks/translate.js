@@ -9,3 +9,7 @@ gulp.task('translate', ['customisation'], function () {
         .pipe(po2json(config.options))
         .pipe(gulp.dest(config.dest));
 });
+
+gulp.task('watch:translate', function () {
+    gulp.watch(config.src, ['mainapp']);
+});
