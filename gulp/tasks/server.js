@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp       = require('gulp');
 var portfinder = require('portfinder');
 var connect    = require('gulp-connect');

@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp        = require('gulp');
 var po2json     = require('gulp-po2json');
 var config      = require('../config').translate;

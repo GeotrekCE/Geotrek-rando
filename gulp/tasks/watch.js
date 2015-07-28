@@ -1,3 +1,5 @@
+'use strict';
+
 /* Notes:
    - gulp/tasks/mainapp.js handles js recompiling with watchify
    - gulp/tasks/browserSync.js watches and reloads compiled files

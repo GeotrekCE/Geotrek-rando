@@ -1,3 +1,5 @@
+'use strict';
+
 /* browserify task
    ---------------
    Bundle javascripty things with browserify!
