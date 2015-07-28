@@ -34,7 +34,7 @@ var srcMap        = false;
 var brwSync       = true;
 
 gulp.task('mainapp', ['customisation', 'translate'], function(){
-    browserifyShare(true);
+    browserifyShare();
 });
 
 gulp.task('watch:mainapp', ['customisation', 'translate'], function(){
@@ -42,7 +42,7 @@ gulp.task('watch:mainapp', ['customisation', 'translate'], function(){
     browserifyShare();
 });
 
-function browserifyShare(justBrowserify) {
+function browserifyShare() {
     var b = browserify({
         cache: {},
         packageCache: {},
@@ -53,7 +53,7 @@ function browserifyShare(justBrowserify) {
         debug: srcMap
     });
 
-    if (watch && !justBrowserify) {
+    if (watch) {
         // if watch is enable, wrap this bundle inside watchify
         b = watchify(b);
         bundleLogger.watch(outputName);

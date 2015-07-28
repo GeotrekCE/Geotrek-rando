@@ -11,5 +11,5 @@ gulp.task('translate', ['customisation'], function () {
 });
 
 gulp.task('watch:translate', function () {
-    gulp.watch(config.src, ['mainapp']);
+    gulp.watch(config.src, ['translate']);
 });
