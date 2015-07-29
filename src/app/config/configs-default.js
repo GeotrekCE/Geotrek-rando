@@ -141,8 +141,9 @@ var constants = {
     TOURISTIC_CONTENTS_FILE: 'touristiccontents.geojson',
     DEM_FILE: 'dem.json',
     PROFILE_FILE: 'profile.json',
-    WARNING_DIR: 'feedback',
-    WARNING_FILE: 'categories.json',
+    WARNING_CAT_DIR: 'feedback',
+    WARNING_CAT_FILE: 'categories.json',
+    WARNING_SUBMIT_URL: 'reports/report',
 
 
 

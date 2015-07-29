@@ -1,14 +1,14 @@
 'use strict';
 
-function WarningService(translationService, settingsFactory, $resource, $q) {
-    var self = this;
+function WarningService(translationService, settingsFactory, $resource, $http, $q) {
+    var that = this;
 
-    self.getWarningCategories = function (forceRefresh) {
+    that.getWarningCategories = function (forceRefresh) {
         var deferred = $q.defer();
 
-        if (self._warningCategories && !forceRefresh) {
+        if (that._warningCategories && !forceRefresh) {
 
-            deferred.resolve(self._warningCategories);
+            deferred.resolve(that._warningCategories);
 
         } else {
             var lang = translationService.getCurrentLang();
@@ -27,7 +27,7 @@ function WarningService(translationService, settingsFactory, $resource, $q) {
             requests.query().$promise
                 .then(function (data) {
                     var categories = angular.fromJson(data);
-                    self._warningCategories = categories;
+                    that._warningCategories = categories;
                     deferred.resolve(categories);
                 });
 
@@ -36,41 +36,154 @@ function WarningService(translationService, settingsFactory, $resource, $q) {
         return deferred.promise;
     };
 
-    self.sendWarning = function (formData) {
-        var deferred = $q.defer(),
-            url = settingsFactory.warningTargetUrl;
+    that.sendWarning = function (formData) {
 
-        console.log(formData);
-        console.log(url);
-        var requests = $resource(url, {}, {
-            query: {
-                method: 'POST',
-                data: {
-                    name: formData.name,
-                    email: formData.email,
-                    category: formData.category,
-                    comment: formData.comment,
-                    geom: {
-                        type: "Point",
-                        coordinates: [
-                            formData.location.lng,
-                            formData.location.lat
-                        ]
-                    }
+        var lang = translationService.getCurrentLang();
+        if (lang.code) {
+            lang = lang.code;
+        }
+        var url = settingsFactory.warningSubmitUrl.replace(/\$lang/, lang);
+
+        return $http({
+            method: 'POST',
+            url: url,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj) {
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
                 }
+                return str.join("&");
+            },
+            data: {
+                name: formData.name,
+                email: formData.email,
+                category: formData.category,
+                comment: formData.comment,
+                geom: '{"type": "Point", "coordinates": [' + formData.location.lng + ',' + formData.location.lat + ']}'
             }
-        }, {stripTrailingSlashes: false});
+        });
+    };
+}
 
-        requests.query().$promise
-            .then(function (message) {
-                console.log(message);
-                deferred.resolve(message);
-            });
+function WarningMapService(globalSettings, utilsFactory) {
+    var that = this;
 
-        return deferred.promise;
+
+    //  CALLBACKS
+    //
+
+    that.addCallback = function (callbackFunction) {
+        if (!that.callbacksArray) {
+            that.callbacksArray = [];
+        }
+
+        that.callbacksArray.push(callbackFunction)
+    };
+
+    that.removeCallback = function (callbackIndex) {
+        that.callbacksArray.splice(callbackIndex, 1);
+    };
+
+    that.callCallbacks = function (newLocation) {
+        that.callbacksArray.forEach(function (callbackFunction) {
++           callbackFunction(newLocation);
+        });
+    };
+
+
+    //  MARKERS
+    //
+
+    that.setWarningLocation = function (newLocation) {
+        that.warningMarker.setLatLng(newLocation);
+        that.callCallbacks(newLocation);
+    };
+
+    that.createWarningMarker = function (markerLocation) {
+        var warningIcon = new L.DivIcon({
+            iconSize: [40, 40],
+            iconAnchor: [20, 20],
+            className: 'warning-marker',
+            html: '<div class="marker"></div>'
+        });
+
+        return L.marker(markerLocation, {
+            icon: warningIcon
+        });
+    };
+
+
+    //  CONTROLS
+    //
+
+    that.initMapControls = function () {
+        that.setAttribution();
+        that.setZoomControlPosition();
+    };
+
+    that.setZoomControlPosition = function () {
+        that.map.zoomControl.setPosition('topright');
+    };
+
+    that.setAttribution = function () {
+        that.map.attributionControl.setPrefix(globalSettings.LEAFLET_CONF.ATTRIBUTION);
+    };
+
+
+    //  MAP
+    //
+
+    that.getMap = function (mapSelector, element) {
+        if (that.map) {
+            return that.map;
+        } else {
+            return that.createMap(mapSelector, element);
+        }
+    };
+
+    that.removeMap = function () {
+        that.map.remove();
+        that.map = null;
+    }
+
+    that.createMap = function (mapSelector, element) {
+        that._baseLayers = {
+            main: L.tileLayer(
+                globalSettings.MAIN_LEAFLET_BACKGROUND.LAYER_URL,
+                globalSettings.MAIN_LEAFLET_BACKGROUND.OPTIONS
+            ),
+            satellite: L.tileLayer(
+                globalSettings.SATELLITE_LEAFLET_BACKGROUND.LAYER_URL,
+                globalSettings.SATELLITE_LEAFLET_BACKGROUND.OPTIONS
+            )
+        };
+
+        var elementLocation = utilsFactory.getStartPoint(element);
+
+        var mapParameters = {
+            center: elementLocation,
+            zoom: globalSettings.LEAFLET_CONF.DEFAULT_ZOOM,
+            minZoom: globalSettings.LEAFLET_CONF.DEFAULT_MIN_ZOOM,
+            maxZoom: globalSettings.LEAFLET_CONF.DEFAULT_MAX_ZOOM,
+            scrollWheelZoom: true,
+            layers: that._baseLayers.main
+        };
+        that.map = L.map(mapSelector, mapParameters);
+        that.initMapControls();
+        that.warningMarker = that.createWarningMarker(elementLocation);
+
+        that.warningMarker.addTo(that.map);
+
+        that.map.on('click', function(e) {
+            that.setWarningLocation(e.latlng);
+        });
+
+        return that.map;
     };
 }
 
 module.exports = {
-    WarningService: WarningService
+    WarningService: WarningService,
+    WarningMapService: WarningMapService
 };

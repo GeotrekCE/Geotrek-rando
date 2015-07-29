@@ -7,13 +7,30 @@
     width: 35%;
     height: 100%;
     overflow-y: auto;
+    transition: left 0.3s ease-in-ease-out;
     &.opened {
         left: 0;
+    }
+    .close {
+        position: absolute;
+        right: 1em;
+        top: 1.2em;
     }
     form {
         padding: 1rem;
     }
     textarea {
         resize: vertical;
+    }
+    #warning-map {
+        width: 100%;
+        height: 200px;
+    }
+    .warning-marker .marker {
+        width: 100%;
+        height: 100%;
+        display: block;
+        border-radius: 50%;
+        background: red;
     }
 }
