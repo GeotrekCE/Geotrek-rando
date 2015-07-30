@@ -33,8 +33,8 @@ function WarningPanelController($scope, $rootScope, WarningService, WarningMapSe
             .then(function (categories) {
                 $scope.warning = {};
                 $scope.warning.location = utilsFactory.getStartPoint($scope.result);
-                $scope.warning.category = categories[0].id;
                 $scope.warningCategories = categories;
+                $scope.warning.category = categories[0].id.toString();
                 WarningMapService.getMap('warning-map', $scope.result);
                 WarningMapService.addCallback(updateLocation);
             })
