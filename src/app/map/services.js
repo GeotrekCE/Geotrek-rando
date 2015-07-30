@@ -312,7 +312,6 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                     var layers = [self._clustersLayer];
                     if (self._treksgeoJsonLayer) {
                         layers.push(self._treksgeoJsonLayer);
-                        
                     }
 
                     self.updateBounds(true, layers);
@@ -617,12 +616,11 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
                 self.geoHover = geoElement;
             }
-            
-             
+
             geoElement.addTo(self._infosMarkersLayer);
             geoElement.bringToBack();
         }
-        
+
     };
 
     this.testMarkersVisibility = function (layer) {
@@ -1161,7 +1159,6 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
                                     deferred.resolve(self.categoriesIcons);
                                 }
                             }
-                            
 
                         });
                     }
@@ -1454,9 +1451,9 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
                        var markup = '' +
                             '<div class="marker" data-popup="' + poi.properties.name + '">' +
                                 '<div class="icon">' + poiIcon + '</div>' +
-                            '</div>'; 
+                            '</div>';
                     }
-                    
+
                     var newIcon = new L.divIcon({
                         html: markup,
                         iconSize: self.icons_liste.poi_base.iconSize,
@@ -1470,6 +1467,31 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
 
         return deferred.promise;
 
+    };
+
+    this.getWarningIcon = function () {
+        var deferred = $q.defer();
+
+        self.getSVGIcon(self.icons_liste.poi_base.iconUrl, 'category_base')
+            .then(function (icon) {
+                var markup = '' +
+                    '<div class="marker">' +
+                        icon +
+                    '</div>' +
+                    '<div class="icon"><i class="fa fa-exclamation-circle"></i></div>';
+
+                var warningIcon = new L.DivIcon({
+                    html: markup,
+                    iconSize: self.icons_liste.poi_base.iconSize,
+                    iconAnchor: self.icons_liste.poi_base.iconAnchor,
+                    labelAnchor: self.icons_liste.poi_base.labelAnchor,
+                    className: 'double-marker warning-marker'
+                });
+
+                deferred.resolve(warningIcon);
+            });
+
+        return deferred.promise;
     };
 
     this.getElementIcon = function (element) {

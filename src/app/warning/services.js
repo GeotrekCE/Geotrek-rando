@@ -66,7 +66,7 @@ function WarningService(translationService, settingsFactory, $resource, $http, $
     };
 }
 
-function WarningMapService(globalSettings, utilsFactory) {
+function WarningMapService(globalSettings, utilsFactory, iconsService) {
     var that = this;
 
 
@@ -78,7 +78,7 @@ function WarningMapService(globalSettings, utilsFactory) {
             that.callbacksArray = [];
         }
 
-        that.callbacksArray.push(callbackFunction)
+        that.callbacksArray.push(callbackFunction);
     };
 
     that.removeCallback = function (callbackIndex) {
@@ -101,16 +101,18 @@ function WarningMapService(globalSettings, utilsFactory) {
     };
 
     that.createWarningMarker = function (markerLocation) {
-        var warningIcon = new L.DivIcon({
-            iconSize: [40, 40],
-            iconAnchor: [20, 20],
-            className: 'warning-marker',
-            html: '<div class="marker"></div>'
-        });
+        var warningIcon = null;
 
-        return L.marker(markerLocation, {
-            icon: warningIcon
-        });
+        iconsService.getWarningIcon()
+            .then(function (icon) {
+                warningIcon = icon;
+
+                that.warningMarker = L.marker(markerLocation, {
+                    icon: warningIcon
+                });
+
+                that.warningMarker.addTo(that.map);
+            });
     };
 
 
@@ -171,9 +173,7 @@ function WarningMapService(globalSettings, utilsFactory) {
         };
         that.map = L.map(mapSelector, mapParameters);
         that.initMapControls();
-        that.warningMarker = that.createWarningMarker(elementLocation);
-
-        that.warningMarker.addTo(that.map);
+        that.createWarningMarker(elementLocation);
 
         that.map.on('click', function(e) {
             that.setWarningLocation(e.latlng);
