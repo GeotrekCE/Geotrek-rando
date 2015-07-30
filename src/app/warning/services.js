@@ -145,8 +145,10 @@ function WarningMapService(globalSettings, utilsFactory, iconsService) {
     };
 
     that.removeMap = function () {
-        that.map.remove();
-        that.map = null;
+        if (that.map) {
+            that.map.remove();
+            that.map = null;
+        }
     };
 
     that.createMap = function (mapSelector, element) {
