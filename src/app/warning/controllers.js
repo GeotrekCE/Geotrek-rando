@@ -13,16 +13,17 @@ function WarningPanelController($scope, $rootScope, WarningService, WarningMapSe
     $scope.close = function () {
         $scope.showWarningPanel = false;
         WarningMapService.removeMap();
+        $scope.warning = null;
     };
 
     $scope.sendWarning = function () {
         if ($scope.warningForm.$valid) {
             WarningService.sendWarning($scope.warning)
-                .then(function (message) {
-                    console.log(message);
+                .then(function (answer) {
+                    $scope.warningStatus = 'success';
                 })
                 .catch(function (err) {
-                    console.log(err);
+                    $scope.warningStatus = 'error';
                 });
         }
     };
@@ -31,6 +32,7 @@ function WarningPanelController($scope, $rootScope, WarningService, WarningMapSe
         $scope.result = args.result;
         WarningService.getWarningCategories()
             .then(function (categories) {
+                $scope.warningStatus = null;
                 $scope.warning = {};
                 $scope.warning.location = utilsFactory.getStartPoint($scope.result);
                 $scope.warningCategories = categories;

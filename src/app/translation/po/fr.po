@@ -184,6 +184,12 @@ msgstr "Nombre de participants :"
 msgid "PRATICAL_INFOS"
 msgstr "Infos pratiques :"
 
+msgid "SUCCESS_WARNING"
+msgstr "Le message a bien été enregistré. Merci pour votre aide !"
+
+msgid "ERROR_WARNING"
+msgstr "Le message n'a pu être enregistré. Veuillez nous excuser pour ce désagrément. Nos équipe ont été prévenues et analysent le problème."
+
 
 # FILTERS
 #
