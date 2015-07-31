@@ -1,3 +1,4 @@
+'use strict';
 // Karma configuration
 // Generated on Mon Jan 19 2015 17:21:01 GMT+0100 (CET)
 
@@ -14,22 +15,24 @@ module.exports = function(config) {
 
 
     // list of files / patterns to load in the browser
-    // files: [
-      // 'src/tests/unit/**/*.specs.js'
-    // ],
+    files: [],
 
 
     // list of files to exclude
-    exclude: [
-    ],
+    exclude: [],
 
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        'src/tests/unit/**/*.specs.js': ['browserify']
+        'src/**/*.js': ['browserify']
     },
 
+
+    browserify: {
+        debug: true,
+        transform: ['partialify']
+    },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
