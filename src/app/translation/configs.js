@@ -1,13 +1,11 @@
 'use strict';
 
 function translationConfig($translateProvider, globalSettings) {
-    $translateProvider.translations('fr', require('../translation/lang/fr.json'));
+    var langs = require('../translation/lang/lang.json');
 
-    $translateProvider.translations('en', require('../translation/lang/en.json'));
-
-    $translateProvider.translations('de', require('../translation/lang/de.json'));
-
-    $translateProvider.translations('nl', require('../translation/lang/nl.json'));
+    angular.forEach(langs, function (translation, langCode) {
+        $translateProvider.translations(langCode, translation);
+    });
 
     $translateProvider.preferredLanguage(globalSettings.DEFAULT_LANGUAGE);
     $translateProvider.useSanitizeValueStrategy('escape');
