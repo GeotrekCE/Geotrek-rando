@@ -18,9 +18,7 @@ module.exports = {
         }
     },
     translate: {
-        src: [
-            src + '/' + appFolder + '/translation/po/*.po'
-        ],
+        src: src + '/' + appFolder + '/translation/po',
         dest: dest + '/' + appFolder + '/translation/lang',
         options: {
             'format': 'mf'
@@ -161,27 +159,7 @@ module.exports = {
                 path: '',
                 defaultFileName: 'services.js.example',
                 customFileName: 'services.js'
-            },
-            {
-                path: src + '/' + appFolder + '/translation/po/',
-                defaultFileName: 'fr-custom.po.example',
-                customFileName: 'fr-custom.po'
-            },
-            {
-                path: src + '/' + appFolder + '/translation/po/',
-                defaultFileName: 'en-custom.po.example',
-                customFileName: 'en-custom.po'
-            },
-            {
-                path: src + '/' + appFolder + '/translation/po/',
-                defaultFileName: 'de-custom.po.example',
-                customFileName: 'de-custom.po'
-            },
-            {
-                path: src + '/' + appFolder + '/translation/po/',
-                defaultFileName: 'nl-custom.po.example',
-                customFileName: 'nl-custom.po'
-            },
+            }
         ],
         languages: {
             enable: true,
