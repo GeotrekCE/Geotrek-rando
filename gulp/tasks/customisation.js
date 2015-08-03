@@ -45,35 +45,6 @@ gulp.task('customisation', function () {
         }
     }
 
-    if (config.languages.enable) {
-        var appConfig = require(configFile)[config.appConfig.varName];
-        var languages = appConfig[config.languages.configListeVarName];
-        var langFilesPath = config.languages.pathToPoFolder;
-
-        _.each(languages, function (lang) {
-            var fileName = lang.code + '-custom.po';
-            var fileContent = '';
-            if (!fs.existsSync(path.join(langFilesPath, fileName))) {
-                if (config.languages.useExample) {
-                    if (fs.existsSync(path.join(langFilesPath, fileName + '.example'))) {
-                        fileContent = fs.readFileSync(path.join(langFilesPath, fileName + '.example'));
-                    } else {
-                        var message = 'Example po file "' + path.join(langFilesPath, fileName + '.example') + '" doesn\'t exist. You must create it.';
-                        console.log(message);
-                        notifier.notify({
-                            'title': 'File missing',
-                            'message': message
-                        });
-                        return false;
-                    }
-                }
-
-                fs.appendFileSync(path.join(langFilesPath, fileName), fileContent);
-            }
-
-        });
-    }
-
     _.each(config.filesToCreate, function (file) {
         var fileType = getFileType(file.customFileName);
         var filePath = '';

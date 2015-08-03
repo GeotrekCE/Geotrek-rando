@@ -160,12 +160,6 @@ module.exports = {
                 defaultFileName: 'services.js.example',
                 customFileName: 'services.js'
             }
-        ],
-        languages: {
-            enable: true,
-            configListeVarName: 'AVAILABLE_LANGUAGES',
-            pathToPoFolder: src + '/' + appFolder + "/translation/po",
-            useExample: true
-        }
+        ]
     }
 };
