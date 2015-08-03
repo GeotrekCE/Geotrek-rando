@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Test warning panel - ', function() {
-    var panel, toggleButton, form, name, email, category, comment, location, submit;
+    var panel, openButton, closeButton, form, name, email, category, comment, location, submit;
     beforeAll(function () {
         browser.get('/');
         browser.executeScript(function () {
@@ -12,7 +12,8 @@ describe('Test warning panel - ', function() {
         });
         browser.get('/#/itineraire/boucle-du-pic-des-trois-seigneurs/');
 
-        toggleButton = element(by.css('.detail-actions .signal a'));
+        openButton = element(by.css('.detail-actions .signal a'));
+        closeButton = element(by.css('.warning-panel .close'));
         panel        = element(by.css('.warning-panel'));
         form         = element(by.css('.warning-panel form'));
         name         = element(by.css('.warning-panel form #warning-name'));
@@ -24,7 +25,7 @@ describe('Test warning panel - ', function() {
     });
 
     it('should have the warning button on sidebar', function() {
-        expect(toggleButton.isPresent()).toBe(true);
+        expect(openButton.isPresent()).toBe(true);
     });
 
     it('should have the warning pannel hidden', function() {
@@ -33,7 +34,7 @@ describe('Test warning panel - ', function() {
     });
 
     it('should display panel on click', function() {
-        toggleButton.click();
+        openButton.click();
         expect(panel.getAttribute('class')).toMatch('opened');
     });
 
@@ -83,6 +84,15 @@ describe('Test warning panel - ', function() {
 
     it('should now valid the form', function() {
         expect(form.getAttribute('class')).not.toMatch('ng-invalid');
+    });
+
+    it('should have a close button on panel', function() {
+        expect(closeButton.isPresent()).toBe(true);
+    });
+
+    it('should close panel on click on vlose button', function() {
+        closeButton.click();
+        expect(panel.getAttribute('class')).not.toMatch('opened');
     });
 
 });
