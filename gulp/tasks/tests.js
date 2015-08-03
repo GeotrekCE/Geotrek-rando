@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
+var config = require('../config').tests;
 
 // The protractor task
 var protractor = require('gulp-protractor').protractor;
@@ -30,7 +31,7 @@ gulp.task('tests:e2e', ['webdriver_update'], function(cb) {
             port: port,
         });
 
-        gulp.src(['src/tests/e2e/**/*.specs.js']).pipe(protractor({
+        gulp.src(config.e2e.src).pipe(protractor({
             configFile: 'protractor.conf.js',
             args: [
                 '--baseUrl', 'http://localhost:' + port
@@ -47,7 +48,7 @@ gulp.task('tests:e2e', ['webdriver_update'], function(cb) {
 var karma = require('gulp-karma');
 
 gulp.task('tests:unit', function() {
-    return gulp.src('src/tests/unit/**/*.specs.js')
+    return gulp.src(config.unit.src)
         .pipe(karma({
             configFile: 'karma.conf.js',
             action: 'run'

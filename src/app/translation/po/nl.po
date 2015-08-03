@@ -175,6 +175,12 @@ msgstr "Aantal deelnemers"
 msgid "PRATICAL_INFOS"
 msgstr "Handige informatie"
 
+msgid "SUCCESS_WARNING"
+msgstr "Your message has been sent. Thank you for your help!"
+
+msgid "ERROR_WARNING"
+msgstr "Your message couldn't been sent. Please excuse us for the inconvenience. Our team is already on it!"
+
 
 # FILTERS
 #
@@ -246,6 +252,24 @@ msgstr "deelnemen"
 
 msgid "WARNING"
 msgstr "Een probleem of fout waarnemen"
+
+msgid "FORM_NAME"
+msgstr "Naam"
+
+msgid "FORM_EMAIL"
+msgstr "E-mail"
+
+msgid "FORM_CATEGORY"
+msgstr "Categorie"
+
+msgid "FORM_COMMENT"
+msgstr "Commentaar"
+
+msgid "FORM_MAP"
+msgstr "Plaats"
+
+msgid "FORM_SEND"
+msgstr "Sturen"
 
 msgid "KML"
 msgstr "De KML kaart downloaden"

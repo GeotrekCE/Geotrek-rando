@@ -137,6 +137,18 @@
     }
 }
 
+.warning-marker {
+    svg .base {
+        fill: $alert-color;
+    }
+    .icon {
+        color: white;
+        i {
+            font-size: 1.2rem;
+        }
+    }
+}
+
 .departure-marker {
     svg .flag {
         fill: $departure-color;

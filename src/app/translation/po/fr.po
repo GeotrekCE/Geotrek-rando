@@ -184,6 +184,12 @@ msgstr "Nombre de participants :"
 msgid "PRATICAL_INFOS"
 msgstr "Infos pratiques :"
 
+msgid "SUCCESS_WARNING"
+msgstr "Le message a bien été enregistré. Merci pour votre aide !"
+
+msgid "ERROR_WARNING"
+msgstr "Le message n'a pu être enregistré. Veuillez nous excuser pour ce désagrément. Nos équipe ont été prévenues et analysent le problème."
+
 
 # FILTERS
 #
@@ -255,6 +261,24 @@ msgstr "Partager"
 
 msgid "WARNING"
 msgstr "Signaler un problème ou une erreur"
+
+msgid "FORM_NAME"
+msgstr "Nom"
+
+msgid "FORM_EMAIL"
+msgstr "Email"
+
+msgid "FORM_CATEGORY"
+msgstr "Catégorie"
+
+msgid "FORM_COMMENT"
+msgstr "Commentaire"
+
+msgid "FORM_MAP"
+msgstr "Emplacement"
+
+msgid "FORM_SEND"
+msgstr "Signaler"
 
 msgid "KML"
 msgstr "Télécharger la fiche KML"

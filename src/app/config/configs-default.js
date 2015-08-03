@@ -5,6 +5,7 @@ var constants = {
     PLATFORM_ID: 'geotrek-rando',
     // API_URL: 'http://geotrekdemo.ecrins-parcnational.fr',
     API_URL: 'tests/dataset',
+    BACKOFFICE_URL: '',
     ENABLE_HTML_MODE: false,
 
 
@@ -140,6 +141,9 @@ var constants = {
     TOURISTIC_CONTENTS_FILE: 'touristiccontents.geojson',
     DEM_FILE: 'dem.json',
     PROFILE_FILE: 'profile.json',
+    WARNING_CAT_DIR: 'feedback',
+    WARNING_CAT_FILE: 'categories.json',
+    WARNING_SUBMIT_URL: 'reports/report',
 
 
 

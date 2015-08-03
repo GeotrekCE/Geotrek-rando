@@ -182,6 +182,12 @@ msgstr "Anzahl der Teilnehmer:"
 msgid "PRATICAL_INFOS"
 msgstr "praktische Informationen:"
 
+msgid "SUCCESS_WARNING"
+msgstr "Your message has been sent. Thank you for your help!"
+
+msgid "ERROR_WARNING"
+msgstr "Your message couldn't been sent. Please excuse us for the inconvenience. Our team is already on it!"
+
 
 # FILTERS
 #
@@ -253,6 +259,24 @@ msgstr "teilen"
 
 msgid "WARNING"
 msgstr "Problem oder Fehler signalisieren"
+
+msgid "FORM_NAME"
+msgstr "Name"
+
+msgid "FORM_EMAIL"
+msgstr "Email"
+
+msgid "FORM_CATEGORY"
+msgstr "Kategorie"
+
+msgid "FORM_COMMENT"
+msgstr "Kommentar"
+
+msgid "FORM_MAP"
+msgstr "Lage"
+
+msgid "FORM_SEND"
+msgstr "Senden"
 
 msgid "KML"
 msgstr "KML Dokument herunterladen"

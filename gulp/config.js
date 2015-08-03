@@ -3,9 +3,13 @@ var src       = './src';
 var appFolder = 'app';
 
 module.exports = {
-    unit: {
-        tests: ['src/**/test/unit/*.js'],
-        src: ['src/*/*.js']
+    tests: {
+        unit: {
+            src: ['src/**/tests/unit/*.js']
+        },
+        e2e: {
+            src: ['src/**/tests/e2e/*.js']
+        }
     },
     browserSync: {
         server: {
