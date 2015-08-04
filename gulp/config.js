@@ -90,9 +90,9 @@ module.exports = {
         scriptsFolder: '',
         appConfig: {
             path: src + '/' + appFolder + '/config/',
-            defaultFileName: 'configs-default.js',
-            customFileName: 'configs.js',
-            varName: 'constants'
+            finalFileName: 'settings.constant.json',
+            defaultFileName: 'settings.default.json',
+            customFileName: 'settings.custom.json'
         },
         filesToCreate: [
             {
@@ -108,37 +108,12 @@ module.exports = {
             {
                 path: '',
                 defaultFileName: '',
-                customFileName: 'custom-footer.html'
-            },
-            {
-                path: '',
-                defaultFileName: '',
                 customFileName: '_custom-header.scss'
             },
             {
                 path: '',
                 defaultFileName: '',
-                customFileName: 'custom-header.html'
-            },
-            {
-                path: '',
-                defaultFileName: '',
-                customFileName: 'custom-detail-page-footer.html'
-            },
-            {
-                path: '',
-                defaultFileName: '',
                 customFileName: '_custom-home.scss'
-            },
-            {
-                path: '',
-                defaultFileName: '',
-                customFileName: 'custom-home-fr.html'
-            },
-            {
-                path: '',
-                defaultFileName: '',
-                customFileName: 'custom-home-en.html'
             },
             {
                 path: '',

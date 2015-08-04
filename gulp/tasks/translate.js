@@ -4,6 +4,7 @@ var fs      = require('fs');
 var merge   = require('merge-stream');
 var gulp    = require('gulp');
 var concat  = require('gulp-concat');
+var path    = require('path');
 var sort    = require('gulp-sort');
 var po2json = require('gulp-po2json');
 var config  = require('../config').translate;
@@ -12,14 +13,14 @@ gulp.task('translate', ['translate:concat', 'translate:byLang']);
 
 gulp.task('translate:concat', ['translate:byLang'], function () {
     var regexFile = /^(\w+).\w+$/i;
-    var finalFile = config.dest + '/lang.json';
+    var finalFile = path.join(config.dest, 'lang.json');
     fs.readdir(config.dest, function (err, files) {
         var translations = {};
         for (var i = files.length - 1; i >= 0; i--) {
             var fileName = files[i];
             if (fileName.match(regexFile) && fileName !== 'lang.json') {
                 var lang = regexFile.exec(fileName)[1];
-                translations[lang] = require('../../' + config.dest + '/' + fileName);
+                translations[lang] = JSON.parse(fs.readFileSync(path.join(config.dest, fileName), {encoding: 'utf8'}));
             }
         }
         fs.writeFile(finalFile, JSON.stringify(translations), function (err) {
@@ -39,7 +40,7 @@ gulp.task('translate:byLang', function () {
         var stats = fs.statSync(config.src + '/' + folder);
         if (stats.isDirectory()) {
             streamArray.push(
-                gulp.src(config.src + '/' + folder + '/*.po')
+                gulp.src(path.join(config.src, folder, '*.po'))
                     .pipe(sort({
                         asc: false
                     }))
