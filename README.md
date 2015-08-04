@@ -7,6 +7,18 @@
 - Geotrek-Rando v2 can synchronize only with Geotrek-Admin v2
 - Ubuntu 14.04
 
+### Syncronization
+
+You have to set up a data directory on the Geotrek-Rando server and synchronize it with Geotrek-Admin data.
+To do so, you have to run the Geotrek-Admin command (`<...>` has to be replaced by your actual configuration):
+
+```
+./bin/django sync_rando -v2 --url <http://url_of_my_geotrek_admin_serveur> <my_data_directory>
+```
+
+If Geotrek-Admin and Geotrek-Rando are not on the same server, you have to transfer data by your own (ftp, ssh, usb key…).
+If you want to synchronize automatically every night, you can configure a cron task.
+Make sure access rights will allow nginx to read all files in `<my_data_directory>`.
 
 ## INSTALL
 
@@ -59,7 +71,7 @@ It will :
 Those change are done in the `configs.js` file in `src/app/config/`.
 
 1 - `PLATFORM_ID`: unique id used to represent your platorm. You need to change it, otherwise you may have conflict with other geotrek deployments. It's used for favorites and othe things specific to your platforms.
-2 - `API_URL`: Url where Geotrek-rando will get data (generally a Geotrek admin instance or the synchronized Geotrek-rando version).
+2 - `API_URL`: Url where Geotrek-rando will get data (eg, the url of Geotrek-Rando followed by `/data`).
 3 - `ENABLE_HTML_MODE`: tells AngularJS if it should use the HTML5 history API (and remove the # from the url) or not.
 If you want to use HTML5 mode (`ENABLE_HTML_MODE = true`), you need to configure your server accordingly to [those settings](https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions#how-to-configure-your-server-to-work-with-html5mode).
 
@@ -119,13 +131,17 @@ Basically, any image or font you would like to use should go into `images/custom
 ### Install and configure nginx
 
 Create the file `/etc/nginx/site-available/geotrek-rando` and symlink it to
-`/etc/nginx/site-enabled/geotrek-rando`.
+`/etc/nginx/site-enabled/geotrek-rando`. This example supposes you synchronized
+Geotrek-Admin data to `<my_data_directory>` and you configured Geotrek-Rando
+`API_URL` to your `http://<my_server_name>/data`.
+
+be carefull with trailing slashes. They are important and change the behaviour of nginx.
 
 ```
 server {
     listen 80;
-    server_name <my server name>;
-    root <where I cloned repository>/src;
+    server_name <my_server_name>;
+    root <my_installation_directory>/src;
     if_modified_since before;
     expires 1h;
     gzip on;
@@ -136,7 +152,7 @@ server {
         application/vnd.google-earth.kmz kmz;
     }
     location /data/ {
-        root <where I export>/;
+        root <my_data_directory>/;
     }
     location / {
         try_files $uri $uri/ /index.html;
