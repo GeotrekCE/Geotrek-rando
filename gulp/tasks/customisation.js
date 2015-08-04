@@ -11,7 +11,7 @@ function createConfigFile() {
     var appConfig   = config.appConfig;
     var configPath  = appConfig.path;
     var defaultConf = fs.readFileSync(path.join(configPath, appConfig.defaultFileName), {encoding: 'utf8'});
-    var customConf  = {};
+    var customConf  = '{}';
     var finalConf   = {};
     var finalFile   = path.join(configPath, appConfig.finalFileName);
     if(fs.existsSync(path.join(configPath, appConfig.customFileName))) {
