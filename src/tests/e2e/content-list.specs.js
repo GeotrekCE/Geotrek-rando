@@ -1,5 +1,6 @@
+'use strict';
 describe('Trecks test data (content filtering)', function() {
-    var constants = require('../../app/config/configs').constants;
+    var constants = require('../../app/config/settings.constant.json');
 
     beforeAll(function () {
         browser.get('/');
