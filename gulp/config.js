@@ -104,6 +104,11 @@ module.exports = {
             {
                 path: '',
                 defaultFileName: '',
+                customFileName: 'custom-detail-page-footer.html'
+            },
+            {
+                path: '',
+                defaultFileName: '',
                 customFileName: '_custom-footer.scss'
             },
             {
