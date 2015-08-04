@@ -25,6 +25,12 @@ module.exports = {
         }
     },
     sass: {
+        config: {
+            path: src + '/' + appFolder + '/config/styles',
+            defaultFileName: '_config-default',
+            customFileName: '_config-custom',
+            finalFileName: 'config'
+        },
         files: [
             {
                 src: src + '/' + appFolder + '/rando.{sass,scss}',
@@ -36,7 +42,7 @@ module.exports = {
             }
         ],
         dest: dest,
-        toWatch: src + '/' + appFolder + '/**/*.scss',
+        toWatch: src + '/' + appFolder + '/**/!(config).scss',
         settings: {
             outputStyle: 'compact',
             imagePath: '/images' // Used by the image-url helper
@@ -95,11 +101,6 @@ module.exports = {
             customFileName: 'settings.custom.json'
         },
         filesToCreate: [
-            {
-                path: src + '/' + appFolder + '/config/styles/',
-                defaultFileName: '_config-default.scss',
-                customFileName: '_config.scss'
-            },
             {
                 path: '',
                 defaultFileName: '',

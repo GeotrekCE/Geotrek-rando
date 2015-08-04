@@ -80,5 +80,5 @@ gulp.task('customisation:config', createConfigFile);
 gulp.task('customisation', ['customisation:config'], createCustomisationFiles);
 
 gulp.task('watch:config', function () {
-    gulp.watch(config.appConfig.path + '/' + '!(' + config.appConfig.finalFileName + ').json', ['customisation:config']);
+    gulp.watch(path.join(config.appConfig.path, '!(' + config.appConfig.finalFileName + ').json'), ['customisation:config']);
 });
