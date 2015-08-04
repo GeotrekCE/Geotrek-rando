@@ -2,7 +2,7 @@
 
 function SocialController($scope, $rootScope, $location, $state, $stateParams, $translate, resultsService, flatService, globalSettings, utilsFactory) {
 
-    $scope.shareIcon = (globalSettings.SHARE_ICON ? globalSettings.SHARE_ICON : 'share');
+    $scope.shareIcon = (globalSettings.SHARE_ICON ? globalSettings.SHARE_ICON : 'share-alt');
 
     function initShareButtons(translatedContent, element) {
 
