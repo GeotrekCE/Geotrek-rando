@@ -27,11 +27,11 @@ module.exports = {
     sass: {
         config: {
             path: src + '/' + appFolder + '/config/styles',
-            finalFileName: 'config'
+            finalFileName: '_config'
         },
         customisation: {
             path: src + '/' + appFolder + '/custom/styles',
-            finalFileName: 'customisation'
+            finalFileName: '_customisation'
         },
         files: [
             {
