@@ -64,7 +64,7 @@ function createCustomisationFiles() {
         }
 
         if (!fs.existsSync(path.join(filePath, file.customFileName))) {
-            console.log('file' + file.customFileName + ' doesn\'t exists ---- creating it !');
+            console.log('file ' + file.customFileName + ' doesn\'t exists ---- creating it !');
             if (file.defaultFileName) {
                 fileContent = fs.readFileSync(path.join(filePath, file.defaultFileName));
             }
