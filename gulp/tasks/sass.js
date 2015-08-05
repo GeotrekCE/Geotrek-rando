@@ -5,7 +5,6 @@ var concat       = require('gulp-concat');
 var merge        = require('merge-stream');
 var path         = require('path');
 var gulpif       = require('gulp-if');
-var sort         = require('gulp-sort');
 var browserSync  = require('browser-sync');
 
 var sass         = require('gulp-sass');
@@ -19,15 +18,10 @@ var config       = require('../config').sass;
 var srcMap       = false;
 var brwSync      = true;
 
-function concatConfigFiles() {
-    var appConfig   = config.config;
-    var configPath  = appConfig.path;
-    return gulp.src(path.join(configPath, '!(' + appConfig.finalFileName + ').scss'))
-        .pipe(sort({
-            asc: false
-        }))
-        .pipe(concat(appConfig.finalFileName + '.scss'))
-        .pipe(gulp.dest(configPath));
+function concatSassFiles(src, fileName, dest) {
+    return gulp.src(src)
+        .pipe(concat(fileName + '.scss'))
+        .pipe(gulp.dest(dest));
 }
 
 function compileSass() {
@@ -51,9 +45,22 @@ function compileSass() {
     return merge(streams);
 }
 
-gulp.task('sass:config', concatConfigFiles);
+function sassConfig() {
+    var appConfig   = config.config;
+    var configPath  = appConfig.path;
+    return concatSassFiles(path.join(configPath, '!(' + appConfig.finalFileName + ').@(scss|sass|css)'), appConfig.finalFileName, configPath);
+}
 
-gulp.task('sass', ['sass:config'], compileSass);
+function sassCustomisation() {
+    var appConfig   = config.customisation;
+    var customisationPath  = appConfig.path;
+    return concatSassFiles(path.join(customisationPath, '!(' + appConfig.finalFileName + ').@(scss|sass|css)'), appConfig.finalFileName, customisationPath);
+}
+
+gulp.task('sass:config', sassConfig);
+gulp.task('sass:customisation', sassCustomisation);
+
+gulp.task('sass', ['sass:config', 'sass:customisation'], compileSass);
 
 gulp.task('watch:sass', function () {
     gulp.watch(config.toWatch, ['sass']);

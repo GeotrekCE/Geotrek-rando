@@ -27,9 +27,11 @@ module.exports = {
     sass: {
         config: {
             path: src + '/' + appFolder + '/config/styles',
-            defaultFileName: '_config-default',
-            customFileName: '_config-custom',
             finalFileName: 'config'
+        },
+        customisation: {
+            path: src + '/' + appFolder + '/custom/styles',
+            finalFileName: 'customisation'
         },
         files: [
             {
@@ -42,7 +44,7 @@ module.exports = {
             }
         ],
         dest: dest,
-        toWatch: src + '/' + appFolder + '/**/!(config).scss',
+        toWatch: src + '/' + appFolder + '/**/!(config | customisation).scss',
         settings: {
             outputStyle: 'compact',
             imagePath: '/images' // Used by the image-url helper
@@ -105,26 +107,6 @@ module.exports = {
                 path: '',
                 defaultFileName: '',
                 customFileName: 'custom-detail-page-footer.html'
-            },
-            {
-                path: '',
-                defaultFileName: '',
-                customFileName: '_custom-footer.scss'
-            },
-            {
-                path: '',
-                defaultFileName: '',
-                customFileName: '_custom-header.scss'
-            },
-            {
-                path: '',
-                defaultFileName: '',
-                customFileName: '_custom-home.scss'
-            },
-            {
-                path: '',
-                defaultFileName: '',
-                customFileName: '_custom-override.scss'
             },
             {
                 path: '',
