@@ -50,12 +50,9 @@ function translationService(globalSettings) {
             self.languages = [];
             var enabledLangs = globalSettings.ENABLED_LANGUAGES;
             var availableLangs = globalSettings.AVAILABLE_LANGUAGES;
-            console.log(availableLangs);
-            console.log(enabledLangs);
             for (var i = 0; i < enabledLangs.length; i++) {
                 var langCode = enabledLangs[i];
                 if (availableLangs[langCode]) {
-                    console.log('ok');
                     self.languages.push({
                         code: langCode,
                         label: availableLangs[langCode]
