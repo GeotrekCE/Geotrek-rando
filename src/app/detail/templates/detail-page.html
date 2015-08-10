@@ -123,6 +123,9 @@
                             {{::result.properties.pictures[0].author}}
                         </div>
                     </div>
+                    <div class="picture-legend">
+                        {{::result.properties.pictures[0].legend}}
+                    </div>
                     <ul ng-if="result.properties.pictures.length > 1">
                         <li ng-repeat="picture in result.properties.pictures" ng-if="!$first" ng-click="showLightbox(result.properties.pictures, $index)">
                             <img ng-src="{{::picture.url}}" ng-alt="{{::picture.title}}">
