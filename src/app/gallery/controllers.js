@@ -242,7 +242,7 @@ function GalleryController(images, slideIndex, $q, $scope, $modalInstance) {
                     function (currentMargin) {
                         $scope.slides.push({
                             url: image.url,
-                            text: image.author,
+                            text: image.legend + ' - ' + image.author,
                             marginTop: currentMargin + 'px'
                         });
 
