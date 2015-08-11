@@ -1,0 +1,115 @@
+{
+    "PLATFORM_ID": "geotrek-rando",
+    "API_URL": "tests/dataset",
+    "BACKOFFICE_URL": "",
+    "ENABLE_HTML_MODE": false,
+    "LOGO_FILE": "",
+    "FAVICON": "",
+    "SHOW_HOME": false,
+    "HOME_TEMPLATE_FILE": {
+        "fr": "",
+        "en": "",
+        "de": "",
+        "nl": ""
+    },
+    "SHOW_FOOTER": false,
+    "FOOTER_TEMPLATE_FILE": "",
+    "HEADER_TEMPLATE_FILE": "",
+    "ENABLE_DISTRICTS_FILTERING": true,
+    "ENABLE_CITIES_FILTERING": true,
+    "ENABLE_STRUCTURE_FILTERING": true,
+    "RULES_FLAT_PAGES_ID": "",
+    "FAVORITES_ICON": "heart",
+    "SHARE_ICON": "share-alt",
+    "PLACEHOLDER_IMAGE": "",
+    "DEFAULT_LANGUAGE": "en",
+    "AVAILABLE_LANGUAGES": {
+        "fr": "Français",
+        "en": "English",
+        "de": "Deutsch",
+        "nl": "Nederlands"
+    },
+    "ENABLED_LANGUAGES": ["fr", "en", "de", "nl"],
+    "ENABLE_TREKS": true,
+    "ENABLE_TOURISTIC_CONTENT": true,
+    "ENABLE_TOURISTIC_EVENTS": true,
+    "DEFAULT_ACTIVE_CATEGORIES": ["T"],
+    "LIST_EXCLUDE_CATEGORIES": [],
+    "ENABLE_UNIQUE_CAT": false,
+    "DEFAULT_INTEREST": "pois",
+    "FACEBOOK_APP_ID": "",
+    "TWITTER_ID": "",
+    "DEFAULT_SHARE_IMG": "",
+    "GOOGLE_ANALYTICS_ID": "",
+    "MAIN_LEAFLET_BACKGROUND": {
+        "LAYER_URL": "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        "OPTIONS": {
+            "id": "main",
+            "attribution": "(c) OpenstreetMap"
+        }
+    },
+    "SATELLITE_LEAFLET_BACKGROUND": {
+        "LAYER_URL": "http://{s}.tile.mapbox.com/v3/makina-corpus.i3p1001l/{z}/{x}/{y}.png",
+        "OPTIONS": {
+            "id": "satellite",
+            "attribution": "(c) MapBox Satellite"
+        }
+    },
+    "LEAFLET_CONF": {
+        "CENTER_LATITUDE": 44.83,
+        "CENTER_LONGITUDE": 6.34,
+        "DEFAULT_ZOOM": 12,
+        "DEFAULT_MIN_ZOOM": 8,
+        "DEFAULT_MAX_ZOOM": 17
+    },
+    "TREKS_TO_GEOJSON_ZOOM_LEVEL" : 14,
+    "UPDATE_MAP_ON_FILTER": false,
+    "ACTIVE_MINIMAP": true,
+    "MINIMAP_ZOOM": {
+        "MINI": 0,
+        "MAX": 12
+    },
+    "MINIMAP_OFFSET": -3,
+    "ALWAYS_HIGHLIGHT_TREKS": false,
+    "SHOW_FILTERS_ON_MAP": true,
+    "MARKER_BASE_ICON": "",
+    "POI_BASE_ICON": "",
+    "DEPARTURE_ICON": "",
+    "ARRIVAL_ICON": "",
+    "DEPARTURE_ARRIVAL_ICON": "",
+    "API_DIR": "api",
+    "TREKS_DIR": "treks",
+    "TREKS_FILE": "treks.geojson",
+    "POI_FILE": "pois.geojson",
+    "FLAT_FILE": "flatpages.geojson",
+    "TOURISTIC_EVENTS_DIR": "touristicevents",
+    "TOURISTIC_EVENTS_FILE": "touristicevents.geojson",
+    "TOURISTIC_CONTENTS_DIR": "touristiccontents",
+    "TOURISTIC_CONTENTS_FILE": "touristiccontents.geojson",
+    "DEM_FILE": "dem.json",
+    "PROFILE_FILE": "profile.json",
+    "WARNING_CAT_DIR": "feedback",
+    "WARNING_CAT_FILE": "categories.json",
+    "WARNING_SUBMIT_URL": "reports/report",
+    "DURATION_FILTER": [
+        { "id": 0, "label": "<1/2 J"},
+        { "id": 10, "label": "1/2 J"},
+        { "id": 24, "label": "1 J"},
+        { "id": 999, "label": "> 1 J"}
+    ],
+    "ASCENT_FILTER":  [
+        { "id": 0, "label": "<300m"},
+        { "id": 300, "label": "300"},
+        { "id": 600, "label": "600"},
+        { "id": 1000, "label": "1000"},
+        { "id": 9999, "label": ">1000m"}
+    ],
+    "LENGTH_FILTER":  [
+        { "id": 0, "label": "<10km"},
+        { "id": 10000, "label": "10km"},
+        { "id": 20000, "label": "20km"},
+        { "id": 30000, "label": "30km"},
+        { "id": 99999, "label": ">30km"}
+    ]
+
+}

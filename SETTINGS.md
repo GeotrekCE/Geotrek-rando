@@ -1,0 +1,180 @@
+# GEOTREK RANDO V2 - Settings
+
+In order to extend the default configuration, you just need to add your customisation to the `src/app/config/settings.custom.json` main object.
+**You don't need to set all the values, just the one you want to be different from the default configuration.**
+
+## Global settings
+
+Option     | Type      | Default   | Description
+--------|-----------|-----------|------------
+PLAFTORM_ID | String | `"geotrek-rando"` | Unique id for your geotrek website.You need to change it. It's used for Localstorage between other things.
+API_URL | String (url) | `"tests/dataset"` |URL of the location where geotrek rando should find the api. If you're using Geotrek Admin, it can be either the admin server url or the rando server url (if you activate data sync on the admi nside)
+BACKOFFICE_URL | String (url) | `""` | URL of your backoffice where rando can send requests like for the warning module.
+ENABLE_HTML_MODE | Boolean | `false` | Active HTML5 mode. Please refer to [ui-router FAQ](https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions#how-to-configure-your-server-to-work-with-html5mode)
+
+
+## Interface parameters
+
+### Main options
+
+Option     | Type      | Default   | Description
+--------|----------|-----------|------------
+LOGO_FILE | String (file name) | `""` |If you want to use a logo in the app. It's just the name of the file, which goes into `src/images/custom`. Accept .jpg, .png, .svg.
+FAVICON | [Object (ico and png images)](#favicon-options) | `{}` | Object containing the custom favicon files you want to use. Both ico and png are required. Files go into `src/images/custom`.
+SHOW_HOME | Boolean | `false` | Enable home page
+HOME_TEMPLATE_FILE | Object | `{}` | For each lang you can specify a different home template. Formated like this "lang-code": "file-name.html".
+SHOW_FOOTER | Boolean | `false` | Display footer on all pages
+FOOTER_TEMPLATE_FILE | String (file name) | `""` | Name of a custom template for the footer of the app
+HEADER_TEMPLATE_FILE | String(file name) | `""` | Name of a custom template for the header of the app
+ENABLE_DISTRICTS_FILTERING | Boolean | `true` | Show districts filtering on results page
+ENABLE_CITIES_FILTERING | Boolean | `true` | Show cities filtering on results page
+ENABLE_STRUCTURE_FILTERING | Boolean | `true` | Show structure filtering on results page
+RULES_FLAT_PAGES_ID | string | `""` | Specify the rules flat-page id which will be used in the detail page part about the rules.
+FAVORITES_ICON | String ([font awesome icon](http://fortawesome.github.io/Font-Awesome/icons/)) | `"heart"` | Specify the icon used for the favorites on the website. It must be a valid font awesome icon.
+SHARE_ICON | String ([font awesome icon](http://fortawesome.github.io/Font-Awesome/icons/)) | `"share-alt"` | Specify the icon used for the favorites on the website. It must be a valid font awesome icon.
+PLACEHOLDER_IMAGE | string(file name) | `""` | Placeholder used for contents elements.
+
+### Favicon options
+All the options are required
+
+Option     | Type      | Default   | Description
+--------|----------|-----------|------------
+ico | string (file name) | `''` | Name of the .ico file for the favicon
+png | string (file name) | `''` | Name of the .png file for the favicon
+
+
+## Languages
+
+Option     | Type      | Default   | Description
+--------|----------|-----------|------------
+DEFAULT_LANGUAGE | string (lang code) | `"en"` | Define default language of the app
+ENABLED_LANGUAGES | array of strings (lang codes) | ` | "fr", "en", "de", "nl"]` | This is the list of the enabled languages in the header lang menu and the app.
+
+
+## Categories
+
+Option     | Type      | Default   | Description
+--------|----------|-----------|------------
+ENABLE_TREKS | Boolean | `true` | Enable treks service and fetching from the API
+ENABLE_TOURISTIC_CONTENT | Boolean | `true` | Enable touristic contents service and fetching from the API
+ENABLE_TOURISTIC_EVENTS | Boolean | `true` | Enable touristic events service and fetching from the API
+DEFAULT_ACTIVE_CATEGORIES | Array of strings (categories id) | `["T"]` | List of default active categories.
+LIST_EXCLUDE_CATEGORIES | Array of strings (categories id) | |  `[]` | List of categories excluded from the filters on results page.
+ENABLE_UNIQUE_CAT | Boolean | `false` | If true, only one category can be activated at the same time in the result page filters.
+DEFAULT_INTEREST | String | `"pois"` | Chose which interest to open by default on detail page. Possible values: `"pois"`, `"near"`, `"children"`, `"parent"`, ""
+
+
+## Social networks
+
+Option     | Type      | Default   | Description
+--------|----------|-----------|------------
+FACEBOOK_APP_ID | String | `""` | ID Of your Facebook app.
+TWITTER_ID | string | `""` | ID of your Twitter account.
+DEFAULT_SHARE_IMG | String(file name) | `""` | Name of your custom image used by default for socail networks sharing.
+GOOGLE_ANALYTICS_ID | String | `""` | ID of your Google Analytics account.
+
+
+## Map
+
+### Main options
+
+Option     | Type      | Default   | Description
+--------|----------|-----------|------------
+MAIN_LEAFLET_BACKGROUND | [Layer Object](#layers-objects-options) | cf [Layers Objects default](#layers-objects-options) | Define the main leaflet tiles used by the website.
+LEAFLET_CONF | [Leaflet Conf Object](#layers-conf-options) | cf [Leaflet Conf Object default](#layers-conf-options) |  Basic conf of the map.
+TREKS_TO_GEOJSON_ZOOM_LEVEL | Int | `14` | Zoom level at which the map switch between markers and linear mode for treks.
+UPDATE_MAP_ON_FILTER | Boolean | `false` | If true, update map viewport each time a filter is changed.
+ACTIVE_MINIMAP | Boolean | `true` | If true, show minimap.
+MINIMAP_ZOOM | [Zoom conf Object](#layers-objects-options) | cf [Zoom conf default](#layers-objects-options) | Define max an min zoom levels for the mini-map
+MINIMAP_OFFSET | Int | `-3` | Value of the difference between the map zoom and the mini-map zoom.
+ALWAYS_HIGHLIGHT_TREKS | Boolean | `false` | If true, always display a border around the linear versions of treks.
+SHOW_FILTERS_ON_MAP | boolean | `true` | If false, hide the tags filters on the top of the map. 
+
+
+### Layers objects options
+
+Option     | Type      | Default   | Description
+--------|----------|-----------|------------
+LAYER_URL | String (tiles server url) | `"http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"` for main view and `http://{s}.tile.mapbox.com/v3/makina-corpus.i3p1001l/{z}/{x}/{y}.png"` for satellite view | Url of the layer. It needs to be a valid tiles server url.
+OPTIONS | Object ([Leaflet tileLayer options](http://leafletjs.com/reference.html#tilelayer-options)) | `{"id": "main", "attribution": "(c) OpenstreetMap"}` for main view and `{"id": "satellite", "attribution": "(c) MapBox Satellite"}` for satellite view | Leaflet tilelayer options.
+
+### Leaflet conf options
+
+Option     | Type      | Default   | Description
+--------|----------|-----------|------------
+CENTER_LATITUDE | float(longitude) | `44.83` | Lat of the default centering of the map
+CENTER_LONGITUDE | float(longitude) | `6.34` | Lng of the default centering of the map
+DEFAULT_ZOOM | int | `12` | Default zoom of the map on launch
+DEFAULT_MIN_ZOOM | int | `8` | Min zoom of the map
+DEFAULT_MAX_ZOOM | int | `17` | Max zoom of the map
+
+### Zoom conf options
+
+Option     | Type      | Default   | Description
+--------|----------|-----------|------------
+MINI | Int | `0` | Min zoom level for minimap
+MAX | Int | `12` | Max zoom level for minimap
+
+
+
+## Markers
+
+Option     | Type      | Default   | Description
+--------|----------|-----------|------------
+MARKER_BASE_ICON | [Leaflet Icon Object](http://leafletjs.com/reference.html#icon) | `""` | Base of the marker for elements. The category icon defined in the API is put above this one. You'll need to adapt custom css according to those changes.
+POI_BASE_ICON | [Leaflet Icon Object](http://leafletjs.com/reference.html#icon) | `""` | Base of the marker for POIs.
+DEPARTURE_ICON | [Leaflet Icon Object](http://leafletjs.com/reference.html#icon) | `""` | Marker used for departure of a trek on a detail page.
+ARRIVAL_ICON | [Leaflet Icon Object](http://leafletjs.com/reference.html#icon) | `""` | Marker used for arrival of a trek on a detail page.
+DEPARTURE_ARRIVAL_ICON | [Leaflet Icon Object](http://leafletjs.com/reference.html#icon) | `""` | Marker used if departure and arrival are on the same place of a trek on a detail page. (ex: a looping trek)
+
+
+## Filters
+
+### Main options
+
+Option     | Type      | Default   | Description
+--------|----------|-----------|------------
+DURATION_FILTER | array of [Filters values Objects](#filters-value-options) (id in hours) | cf [Default filters objects](#default-filters-objects) | Values of the filter for a trek duration
+ASCENT_FILTER | array of [Filters values Objects](#filters-value-options) (id in metters) | cf [Default filters objects](#default-filters-objects) | Values of the filter for a trek ascent
+LENGTH_FILTER | array of [Filters values Objects](#filters-value-options) (id in metters) | cf [Default filters objects](#default-filters-objects) | Values of the filter for a trek length
+
+### Filters value options
+
+Option     | Type      | Default   | Description
+--------|----------|-----------|------------
+id | Int | cf [Default filters objects](#default-filters-objects) | Value used for comparison with the elements values. (ex: a 2 hours trek will be between an id of 0 and 10 by default)
+label | String | cf [Default filters objects](#default-filters-objects) | Text shown on the filters menu on the results page.
+
+### Default filters objects
+
+**Duration**
+```
+[
+    { "id": 0, "label": "<1/2 J"},
+    { "id": 10, "label": "1/2 J"},
+    { "id": 24, "label": "1 J"},
+    { "id": 999, "label": "> 1 J"}
+]
+```
+
+**Ascent**
+```
+[
+    { "id": 0, "label": "<300m"},
+    { "id": 300, "label": "300"},
+    { "id": 600, "label": "600"},
+    { "id": 1000, "label": "1000"},
+    { "id": 9999, "label": ">1000m"}
+]
+```
+
+**Length**
+```
+[
+    { "id": 0, "label": "<10km"},
+    { "id": 10000, "label": "10km"},
+    { "id": 20000, "label": "20km"},
+    { "id": 30000, "label": "30km"},
+    { "id": 99999, "label": ">30km"}
+]
+```

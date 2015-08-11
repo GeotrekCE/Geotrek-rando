@@ -80,7 +80,7 @@ msgid "CATEGORY"
 msgstr "Categorie"
 
 msgid "INFORMATIONS"
-msgstr Iinformatie"
+msgstr "Iinformatie"
 
 msgid "START"
 msgstr "Vertrek"

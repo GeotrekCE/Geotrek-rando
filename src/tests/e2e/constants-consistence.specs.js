@@ -1,5 +1,7 @@
+'use strict'
+
 describe('Geotrek constants consistency', function() {
-    var constants = require('../../app/config/configs').constants;
+    var constants = require('../../app/config/settings.constant.json');
 
     beforeAll(function() {
         browser.get('/');
@@ -13,7 +15,7 @@ describe('Geotrek constants consistency', function() {
 
 
     it('should build language menu according AVAILABLE_LANGUAGES constant', function () {
-        var constantLanguagesArrayLength = constants.AVAILABLE_LANGUAGES.length;
+        var constantLanguagesArrayLength = constants.ENABLED_LANGUAGES.length;
         var expectedLanguagesMenuItems   = (constantLanguagesArrayLength > 1) ? constantLanguagesArrayLength : 0;
 
         expect(

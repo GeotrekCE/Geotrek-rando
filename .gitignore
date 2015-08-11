@@ -15,8 +15,10 @@ src/rando-vendors.css
 # Prevent custom files to be pushed
 #
 # Config files
-src/app/config/configs.js
-src/app/config/styles/_config.scss
+src/app/config/settings.constant.json
+src/app/config/settings.custom.json
+src/app/config/styles/_configuration.scss
+src/app/config/styles/_config-custom.scss
 #
 # Custom Module Files
 src/app/custom/directives.js

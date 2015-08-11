@@ -30,9 +30,6 @@ function translationService(globalSettings) {
             }
         }
 
-        //TEST PURPOSE FORCE USE OF A DEFAULT LANG
-        //self.defaultLang = globalSettings.AVAILABLE_LANGUAGES[1];
-
         self.currentLang = self.defaultLang;
         return self.defaultLang;
     };
@@ -50,7 +47,18 @@ function translationService(globalSettings) {
 
     this.getAllLang = function () {
         if (!self.languages) {
-            self.languages = globalSettings.AVAILABLE_LANGUAGES;
+            self.languages = [];
+            var enabledLangs = globalSettings.ENABLED_LANGUAGES;
+            var availableLangs = globalSettings.AVAILABLE_LANGUAGES;
+            for (var i = 0; i < enabledLangs.length; i++) {
+                var langCode = enabledLangs[i];
+                if (availableLangs[langCode]) {
+                    self.languages.push({
+                        code: langCode,
+                        label: availableLangs[langCode]
+                    });
+                }
+            }
         }
 
         return self.languages;

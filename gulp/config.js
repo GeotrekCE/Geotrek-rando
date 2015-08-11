@@ -18,15 +18,21 @@ module.exports = {
         }
     },
     translate: {
-        src: [
-            src + '/' + appFolder + '/translation/po/*.po'
-        ],
+        src: src + '/' + appFolder + '/translation/po',
         dest: dest + '/' + appFolder + '/translation/lang',
         options: {
             'format': 'mf'
         }
     },
     sass: {
+        config: {
+            path: src + '/' + appFolder + '/config/styles',
+            finalFileName: '_configuration'
+        },
+        customisation: {
+            path: src + '/' + appFolder + '/custom/styles',
+            finalFileName: '_customisation'
+        },
         files: [
             {
                 src: src + '/' + appFolder + '/rando.{sass,scss}',
@@ -38,7 +44,7 @@ module.exports = {
             }
         ],
         dest: dest,
-        toWatch: src + '/' + appFolder + '/**/*.scss',
+        toWatch: src + '/' + appFolder + '/**/!(_configuration | _customisation).scss',
         settings: {
             outputStyle: 'compact',
             imagePath: '/images' // Used by the image-url helper
@@ -92,60 +98,15 @@ module.exports = {
         scriptsFolder: '',
         appConfig: {
             path: src + '/' + appFolder + '/config/',
-            defaultFileName: 'configs-default.js',
-            customFileName: 'configs.js',
-            varName: 'constants'
+            finalFileName: 'settings.constant.json',
+            defaultFileName: 'settings.default.json',
+            customFileName: 'settings.custom.json'
         },
         filesToCreate: [
-            {
-                path: src + '/' + appFolder + '/config/styles/',
-                defaultFileName: '_config-default.scss',
-                customFileName: '_config.scss'
-            },
-            {
-                path: '',
-                defaultFileName: '',
-                customFileName: '_custom-footer.scss'
-            },
-            {
-                path: '',
-                defaultFileName: '',
-                customFileName: 'custom-footer.html'
-            },
-            {
-                path: '',
-                defaultFileName: '',
-                customFileName: '_custom-header.scss'
-            },
-            {
-                path: '',
-                defaultFileName: '',
-                customFileName: 'custom-header.html'
-            },
             {
                 path: '',
                 defaultFileName: '',
                 customFileName: 'custom-detail-page-footer.html'
-            },
-            {
-                path: '',
-                defaultFileName: '',
-                customFileName: '_custom-home.scss'
-            },
-            {
-                path: '',
-                defaultFileName: '',
-                customFileName: 'custom-home-fr.html'
-            },
-            {
-                path: '',
-                defaultFileName: '',
-                customFileName: 'custom-home-en.html'
-            },
-            {
-                path: '',
-                defaultFileName: '',
-                customFileName: '_custom-override.scss'
             },
             {
                 path: '',
@@ -161,33 +122,7 @@ module.exports = {
                 path: '',
                 defaultFileName: 'services.js.example',
                 customFileName: 'services.js'
-            },
-            {
-                path: src + '/' + appFolder + '/translation/po/',
-                defaultFileName: 'fr-custom.po.example',
-                customFileName: 'fr-custom.po'
-            },
-            {
-                path: src + '/' + appFolder + '/translation/po/',
-                defaultFileName: 'en-custom.po.example',
-                customFileName: 'en-custom.po'
-            },
-            {
-                path: src + '/' + appFolder + '/translation/po/',
-                defaultFileName: 'de-custom.po.example',
-                customFileName: 'de-custom.po'
-            },
-            {
-                path: src + '/' + appFolder + '/translation/po/',
-                defaultFileName: 'nl-custom.po.example',
-                customFileName: 'nl-custom.po'
-            },
-        ],
-        languages: {
-            enable: true,
-            configListeVarName: 'AVAILABLE_LANGUAGES',
-            pathToPoFolder: src + '/' + appFolder + "/translation/po",
-            useExample: true
-        }
+            }
+        ]
     }
 };

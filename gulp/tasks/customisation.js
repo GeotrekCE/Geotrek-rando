@@ -1,78 +1,46 @@
 'use strict';
 
 var gulp         = require('gulp');
+var fs           = require('fs');
+var path         = require('path');
+var notifier     = require('node-notifier');
+var _            = require('lodash');
+var config       = require('../config').custom;
 
-gulp.task('customisation', function () {
-    var fs           = require('fs');
-    var path         = require('path');
-    var bundleLogger = require('../util/bundleLogger');
-    var notifier     = require('node-notifier');
-    var _            = require('lodash');
-    var config       = require('../config').custom;
-    var prefix       = '/../.';
-    var self         = this;
+function createConfigFile() {
+    var appConfig   = config.appConfig;
+    var configPath  = appConfig.path;
+    var defaultConf = fs.readFileSync(path.join(configPath, appConfig.defaultFileName), {encoding: 'utf8'});
+    var customConf  = '{}';
+    var finalConf   = {};
+    var finalFile   = path.join(configPath, appConfig.finalFileName);
+    if(fs.existsSync(path.join(configPath, appConfig.customFileName))) {
+        customConf = fs.readFileSync(path.join(configPath, appConfig.customFileName), {encoding: 'utf8'});
+    }
+    finalConf = _.assign(JSON.parse(defaultConf), JSON.parse(customConf));
 
-    //First - read custom config file
-    //
-    var configFile = path.join(__dirname, prefix + config.appConfig.path + config.appConfig.customFileName);
-    var defaultConfigFile = path.join(__dirname, prefix + config.appConfig.path + config.appConfig.defaultFileName);
-
-    function getFileType(fileName) {
-        if (fileName.match(/^\S*\.(js|coffee)$/gi)) {
-            return 'scripts';
-        } else if (fileName.match(/^\S*\.(html|coffee)$/gi)) {
-            return 'templates';
-        } else if (fileName.match(/^\S*\.(css|sass|scss|less)$/gi)) {
-            return 'styles';
-        } else {
-            return false;
+    fs.writeFile(finalFile, JSON.stringify(finalConf), function (err) {
+        if (err) {
+            console.log('Eror - Couldn\'t write file: ' + finalFile);
+            throw err;
         }
+    });
+}
+
+function getFileType(fileName) {
+    if (fileName.match(/^\S*\.(js|coffee)$/gi)) {
+        return 'scripts';
+    } else if (fileName.match(/^\S*\.(html|coffee)$/gi)) {
+        return 'templates';
+    } else if (fileName.match(/^\S*\.(css|sass|scss|less)$/gi)) {
+        return 'styles';
+    } else {
+        return false;
     }
+}
 
-    if (!fs.existsSync(configFile)) {
-        console.log('Custom config file doesn\'t exist ---- creating it !');
-        if (fs.existsSync(defaultConfigFile)) {
-            var defaultConfig = fs.readFileSync(defaultConfigFile);
-            fs.appendFileSync(configFile, defaultConfig);
-        } else {
-            var message = 'Default config file "' + defaultConfigFile + '" doesn\'t exist. You must create it.';
-            console.log(message);
-            notifier.notify({
-                'title': 'File missing',
-                'message': message
-            });
-            return false;
-        }
-    }
+function createCustomisationFiles() {
 
-    if (config.languages.enable) {
-        var appConfig = require(configFile)[config.appConfig.varName];
-        var languages = appConfig[config.languages.configListeVarName];
-        var langFilesPath = config.languages.pathToPoFolder;
-
-        _.each(languages, function (lang) {
-            var fileName = lang.code + '-custom.po';
-            var fileContent = '';
-            if (!fs.existsSync(path.join(langFilesPath, fileName))) {
-                if (config.languages.useExample) {
-                    if (fs.existsSync(path.join(langFilesPath, fileName + '.example'))) {
-                        fileContent = fs.readFileSync(path.join(langFilesPath, fileName + '.example'));
-                    } else {
-                        var message = 'Example po file "' + path.join(langFilesPath, fileName + '.example') + '" doesn\'t exist. You must create it.';
-                        console.log(message);
-                        notifier.notify({
-                            'title': 'File missing',
-                            'message': message
-                        });
-                        return false;
-                    }
-                }
-
-                fs.appendFileSync(path.join(langFilesPath, fileName), fileContent);
-            }
-
-        });
-    }
 
     _.each(config.filesToCreate, function (file) {
         var fileType = getFileType(file.customFileName);
@@ -96,7 +64,7 @@ gulp.task('customisation', function () {
         }
 
         if (!fs.existsSync(path.join(filePath, file.customFileName))) {
-            console.log('file' + file.customFileName + ' doesn\'t exists ---- creating it !');
+            console.log('file ' + file.customFileName + ' doesn\'t exists ---- creating it !');
             if (file.defaultFileName) {
                 fileContent = fs.readFileSync(path.join(filePath, file.defaultFileName));
             }
@@ -104,4 +72,13 @@ gulp.task('customisation', function () {
             fs.appendFileSync(path.join(filePath, file.customFileName), fileContent);
         }
     });
+}
+
+gulp.task('customisation:config', createConfigFile);
+
+
+gulp.task('customisation', ['customisation:config'], createCustomisationFiles);
+
+gulp.task('watch:config', function () {
+    gulp.watch(path.join(config.appConfig.path, '!(' + config.appConfig.finalFileName + ').json'), ['customisation:config']);
 });

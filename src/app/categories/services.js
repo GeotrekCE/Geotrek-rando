@@ -37,9 +37,9 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                         type2: {type: 'checkbox', values: angular.copy(aTrek.properties.type2) || []},
                         route: {type: 'checkbox', values: [angular.copy(aTrek.properties.route)] || []},
                         difficulty: {type: 'range', values: [angular.copy(aTrek.properties.difficulty)] || []},
-                        duration: {type: 'range', values: globalSettings.FILTERS.DURATION || []},
-                        ascent: {type: 'range', values: globalSettings.FILTERS.ASCENT || []},
-                        eLength: {type: 'range', values: globalSettings.FILTERS.LENGTH || []},
+                        duration: {type: 'range', values: globalSettings.DURATION_FILTER || []},
+                        ascent: {type: 'range', values: globalSettings.ASCENT_FILTER || []},
+                        eLength: {type: 'range', values: globalSettings.LENGTH_FILTER || []},
                         themes: {type: 'checkbox', values: angular.copy(aTrek.properties.themes) || []},
                         cat_class: 'category-' + aTrek.properties.category.id.toString()
                     };

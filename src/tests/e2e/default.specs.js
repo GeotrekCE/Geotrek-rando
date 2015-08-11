@@ -1,5 +1,6 @@
+'use strict';
 describe('Geotrek default tests', function() {
-    var constants = require('../../app/config/configs').constants;
+    var constants = require('../../app/config/settings.constant.json');
 
     beforeAll(function() {
         browser.get('/');
@@ -14,7 +15,7 @@ describe('Geotrek default tests', function() {
         var location = '?';
         for (var i = constants.DEFAULT_ACTIVE_CATEGORIES.length - 1; i >= 0; i--) {
             location += 'categories=' + constants.DEFAULT_ACTIVE_CATEGORIES[i];
-        };
+        }
         expect(browser.getLocationAbsUrl()).toMatch("/" + location);
     });
 
