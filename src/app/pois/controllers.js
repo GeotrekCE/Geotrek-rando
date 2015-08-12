@@ -1,6 +1,6 @@
 'use strict';
 
-function PoisListeController($scope, $rootScope, utilsFactory, $modal) {
+function PoisListeController($scope, $rootScope, globalSettings, utilsFactory, $modal) {
 
     $scope.hoverMarkerPoi = function (currentPoi, state) {
         var layerEquivalent = document.querySelector('.layer-' + currentPoi.properties.type.id + '-' + currentPoi.id);
@@ -47,10 +47,23 @@ function PoisListeController($scope, $rootScope, utilsFactory, $modal) {
         });
     };
 
+    function initPois() {
+        updateFilesUrl();
+        initListeClasses();
+    }
+
     function initListeClasses() {
         $scope.isOpened = {};
         _.each($scope.pois, function (poi) {
             $scope.isOpened[poi.id] = 'closed';
+        });
+    }
+
+    function updateFilesUrl() {
+        _.each($scope.pois, function (poi) {
+            _.each(poi.properties.files, function (file) {
+                file.url = globalSettings.API_URL + file.url;
+            });
         });
     }
 
@@ -88,10 +101,8 @@ function PoisListeController($scope, $rootScope, utilsFactory, $modal) {
         });
     };
 
-    initListeClasses();
-    $rootScope.$on('resetPOIGallery', function () {
-        initListeClasses();
-    });
+    initPois();
+    $rootScope.$on('resetPOIGallery', initPois);
 }
 
 function MediaController(media, $scope, $timeout, $modalInstance) {
@@ -103,20 +114,7 @@ function MediaController(media, $scope, $timeout, $modalInstance) {
         player.setAttribute('allowfullscreen', '');
         player.setAttribute('webkitallowfullscreen', '');
         player.setAttribute('mozallowfullscreen', '');
-        if (media.backend === 'Youtube') {
-
-            player.src = 'https://www.youtube.com/embed/' + media.code + '?rel=0&amp;controls=0&amp;showinfo=0';
-
-        } else if (media.backend === 'Vimeo') {
-
-            player.src = 'https://player.vimeo.com/video/' + media.code + '?title=0&byline=0&portrait=0';
-
-        } else if (media.backend === 'SoundCloud') {
-
-            player.scrolling = "no";
-            player.src = 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + media.code + '&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true';
-
-        }
+        player.src = media.url;
         document.querySelector('#media-player').appendChild(player);
 
     }

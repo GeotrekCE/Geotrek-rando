@@ -17,10 +17,15 @@
             <div class="description" ng-bind-html="sanitizeData(poi.properties.description, true)"></div>
             <div class="medias">
                 <ul class="medias-liste">
-                    <li ng-repeat="media in poi.properties.videos track by media.legend" class="media" ng-class="{video: media.backend === 'Youtube' || media.backend === 'Vimeo', audio: media.backend === 'SoundCloud'}">
+                    <li ng-repeat="media in poi.properties.videos track by $index" class="media" ng-class="{video: media.backend === 'Youtube' || media.backend === 'Vimeo', audio: media.backend === 'SoundCloud'}">
                         <a href ng-click="openPlayer(media)" title="{{::media.legend}}">
                             <i ng-if="media.backend === 'Youtube' || media.backend === 'Vimeo'" class="fa fa-file-video-o"></i>
                             <i ng-if="media.backend === 'SoundCloud'" class="fa fa-file-audio-o"></i>
+                        </a>
+                    </li>
+                    <li ng-repeat="file in poi.properties.files track by $index" class="media file">
+                        <a href="{{::file.url}}" title="{{::file.legend}}">
+                            <i class="fa fa-file-o"></i>
                         </a>
                     </li>
                 </ul>
