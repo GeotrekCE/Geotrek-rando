@@ -54,7 +54,7 @@
         }
     }
     &:hover, &.hovered {
-        z-index: 99999 !important;
+        z-index: 55555555 !important;
         .marker {
             transform: scale(1.2);
             transform-origin: center bottom;
@@ -96,7 +96,7 @@
         transition: all 0.1s ease-out;
     }
     &:hover, &.hovered {
-        z-index: 99999 !important;
+        z-index: 55555555 !important;
         .marker {
             transform: scale(1.3);
             transform-origin: center bottom;
@@ -118,7 +118,7 @@
         }
     }
     &:hover, &.hovered {
-        z-index: 99999 !important;
+        z-index: 55555555 !important;
         .icon-group {
             transform: scale(1.2);
             transform-origin: center bottom;
