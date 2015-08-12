@@ -101,7 +101,7 @@ msgid "TOWN_CROSSED"
 msgstr "Communes traversées :"
 
 msgid "PARK_CENTERED"
-msgstr "Cet itinéraire est dans le coeur du parc national, veuillez consulter la réglementation."
+msgstr "Cet itinéraire est dans le cœur du Parc national, veuillez consulter la réglementation."
 
 msgid "TRANSPORTS"
 msgstr "Transports"
@@ -324,7 +324,7 @@ msgid "DONT_SHOW_HOME"
 msgstr "Ne plus montrer cette page"
 
 msgid "SUGGESTED"
-msgstr "Nos coups de coeur :"
+msgstr "Nos coups de cœur :"
 
 
 # HEADER
