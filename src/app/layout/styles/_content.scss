@@ -1,3 +1,9 @@
+@media (min-width: 768px) and (max-width: 1024px) {
+    html, body {
+        font-size: 10px;
+    }
+}
+
 #main-content {
     z-index: 1;
     width: 100%;
