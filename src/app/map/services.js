@@ -520,6 +520,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
         var clusterLayer = new L.MarkerClusterGroup({
             showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2,
             iconCreateFunction: function (cluster) {
                 return iconsService.getClusterIcon(cluster);
             }
