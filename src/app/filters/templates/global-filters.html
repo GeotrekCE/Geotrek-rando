@@ -20,6 +20,12 @@
                                 <i class="fa fa-search"></i>
                             </div>
                         </div>
+                        <div class="city form-group">
+                            <input type="checkbox" id="city-all" ng-click="toogleFilter('cities', 'all')" ng-checked="activeFilters.cities.length === 0"/>
+                            <label for="city-all">
+                                <span>{{'ALL_CITIES' | translate}}</span>
+                            </label>
+                        </div>
                         <div ng-repeat="city in filters.cities | filter:citiesAuto | orderBy:'name' track by city.code" class="city form-group">
                             <input type="checkbox" id="city-{{::city.code}}" ng-click="toogleFilter('cities', city.code)" ng-checked="activeFilters.cities.indexOf(city.code.toString()) > -1"/>
                             <label for="city-{{::city.code}}">
@@ -38,6 +44,12 @@
                                 <i class="fa fa-search"></i>
                             </div>
                         </div>
+                        <div class="district form-group">
+                            <input type="checkbox" id="district-all" ng-click="toogleFilter('districts', 'all')" ng-checked="activeFilters.districts.length === 0"/>
+                            <label for="district-all">
+                                <span>{{'ALL_DISTRICTS' | translate}}</span>
+                            </label>
+                        </div>
                         <div ng-repeat="district in filters.districts | filter:districtsAuto | orderBy:'name' track by district.id" class="district form-group">
                             <input type="checkbox" id="district-{{::district.id}}" ng-click="toogleFilter('districts', district.id)" ng-checked="activeFilters.districts.indexOf(district.id.toString()) > -1"/>
                             <label for="district-{{::district.id}}">
@@ -55,6 +67,12 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-search"></i>
                             </div>
+                        </div>
+                        <div class="structure form-group">
+                            <input type="checkbox" id="structure-all" ng-click="toogleFilter('structure', 'all')" ng-checked="activeFilters.structure.length === 0"/>
+                            <label for="structure-all">
+                                <span>{{'ALL_STRUCTURES' | translate}}</span>
+                            </label>
                         </div>
                         <div ng-repeat="aStructure in filters.structure | filter:structuresAuto | orderBy:'name' track by aStructure.id" class="structure form-group">
                             <input type="checkbox" id="structure-{{::aStructure.id}}" ng-click="toogleFilter('structure', aStructure.id)" ng-checked="activeFilters.structure.indexOf(aStructure.id.toString()) > -1"/>

@@ -29,13 +29,17 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
         var filters = $rootScope.activeFilters[filterType];
 
         if (filters) {
-            var indexOfFilter = filters.indexOf(filterId.toString());
-            if (indexOfFilter > -1) {
-                filters.splice(indexOfFilter, 1);
+            if (filterId === 'all') {
+                $rootScope.activeFilters[filterType] = [];
             } else {
-                $rootScope.activeFilters[filterType].push(filterId.toString());    
+                var indexOfFilter = filters.indexOf(filterId.toString());
+                if (indexOfFilter > -1) {
+                    filters.splice(indexOfFilter, 1);
+                } else {
+                    $rootScope.activeFilters[filterType].push(filterId.toString());
+                }
             }
-        } else {
+        } else if (filterId !== 'all') {
             $rootScope.activeFilters[filterType] = [filterId.toString()];
         }
         $scope.propagateActiveFilters();
@@ -46,7 +50,7 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
             $timeout.cancel($scope.searchFieldUpdate);
         }
         $scope.searchFieldUpdate = $timeout(function () {
-            $scope.propagateActiveFilters();  
+            $scope.propagateActiveFilters();
         }, 500);
     };
 

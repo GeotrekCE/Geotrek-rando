@@ -199,14 +199,23 @@ msgstr "Themen"
 msgid "DISTRICTS"
 msgstr "Massive"
 
+msgid "ALL_DISTRICTS"
+msgstr "Alles Massive"
+
 msgid "SEARCH"
 msgstr "Suchen"
 
 msgid "CITIES"
 msgstr "Kommunen"
 
+msgid "ALL_CITIES"
+msgstr "Alles Kommunen"
+
 msgid "STRUCTURES"
 msgstr "Strukturen"
+
+msgid "ALL_STRUCTURES"
+msgstr "Alles Strukturen"
 
 msgid "RESET"
 msgstr "zurücksetzen"

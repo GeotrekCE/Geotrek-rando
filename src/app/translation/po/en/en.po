@@ -203,11 +203,20 @@ msgstr "Themes"
 msgid "DISTRICTS"
 msgstr "Disctricts"
 
+msgid "ALL_DISTRICTS"
+msgstr "All districts"
+
 msgid "CITIES"
 msgstr "Cities"
 
+msgid "ALL_CITIES"
+msgstr "All cities"
+
 msgid "STRUCTURES"
 msgstr "Structures"
+
+msgid "ALL_STRUCTURES"
+msgstr "All structures"
 
 msgid "SEARCH"
 msgstr "Search"

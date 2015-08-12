@@ -201,14 +201,23 @@ msgstr "Thèmes"
 msgid "DISTRICTS"
 msgstr "Massifs"
 
+msgid "ALL_DISTRICTS"
+msgstr "Tous les massifs"
+
 msgid "SEARCH"
 msgstr "Rechercher"
 
 msgid "CITIES"
 msgstr "Communes"
 
+msgid "ALL_CITIES"
+msgstr "Toutes les communes"
+
 msgid "STRUCTURES"
 msgstr "Structures"
+
+msgid "ALL_STRUCTURES"
+msgstr "Toutes les structures"
 
 msgid "RESET"
 msgstr "Réinitialiser"

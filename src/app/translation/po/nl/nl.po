@@ -192,14 +192,23 @@ msgstr "Thema's"
 msgid "DISTRICTS"
 msgstr "Gebergtes"
 
+msgid "ALL_DISTRICTS"
+msgstr "Alle Gebergtes"
+
 msgid "SEARCH"
 msgstr "Zoeken"
 
 msgid "CITIES"
 msgstr "Gemeenten"
 
+msgid "ALL_CITIES"
+msgstr "Alle Gemeenten"
+
 msgid "STRUCTURES"
 msgstr "Structuren"
+
+msgid "ALL_STRUCTURES"
+msgstr "Alle Structuren"
 
 msgid "RESET"
 msgstr "Opnieuw beginnen"
