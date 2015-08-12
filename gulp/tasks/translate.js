@@ -54,5 +54,10 @@ gulp.task('translate:byLang', function () {
 });
 
 gulp.task('watch:translate', function () {
-    gulp.watch(config.src, ['translate']);
+    gulp.watch(
+        path.join(
+            config.src,
+            '**/*.po'
+        ),
+        ['translate']);
 });
