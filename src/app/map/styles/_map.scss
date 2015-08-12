@@ -64,9 +64,22 @@
     display: none;
 }
 
-.detail-map .leaflet-container:-webkit-full-screen .leaflet-right, .detail-map .leaflet-container:fullscreen .leaflet-right, .detail-map .leaflet-container:-moz-full-screen .leaflet-right {
+
+// Rules are separated because they don't work if declared with comas...
+//
+.detail-map .leaflet-container:-webkit-full-screen .leaflet-right {
     right: 25%;
 }
+.detail-map .leaflet-container:-moz-full-screen .leaflet-right {
+    right: 25%;
+}
+.detail-map .leaflet-container:full-screen .leaflet-right {
+    right: 25%;
+}
+.detail-map .leaflet-pseudo-fullscreen .leaflet-right {
+    right: 25%;
+}
+
 
 @media (max-width: 767px) {
     .leaflet-control-minimap, .leaflet-control-zoom {
