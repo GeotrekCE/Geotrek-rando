@@ -108,8 +108,8 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
 
     $rootScope.map.on('zoomend', function () {
         if ($state.current.name === 'layout.root') {
-            if ((mapService.treksIconified && $rootScope.map.getZoom() >= globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL)
-                    || (!mapService.treksIconified && $rootScope.map.getZoom() < globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL)) {
+            if ((mapService.treksIconified && $rootScope.map.getZoom() >= globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL) ||
+                (!mapService.treksIconified && $rootScope.map.getZoom() < globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL)) {
                 mapService.displayResults($scope.results, false);
             }
         }

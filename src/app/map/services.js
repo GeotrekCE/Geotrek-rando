@@ -1,10 +1,12 @@
+/* global $http */
+
 'use strict';
 
 function mapService($q, $state, $resource, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, iconsService) {
 
-    var self = this,
-        loadingMarkers = false;
+    var self = this;
 
+    this.loadingMarkers = false;
 
     // MARKERS AND CLUSTERS  //////////////////////////////
     //
@@ -19,7 +21,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         this.markers = markers;
     };
 
-    this.createPOISFromElement = function (element) {
+    this.createPOISFromElement = function (element) {
         var deferred = $q.defer(),
             promises = [],
             startPoint = utilsFactory.getStartPoint(element);
@@ -302,7 +304,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             options: {
                 position: 'topright'
             },
-            onAdd: function (map) {
+            onAdd: function () {
                 var controlContainer = L.DomUtil.create('div', 'leaflet-control-resetview leaflet-bar');
                 var controlButton = L.DomUtil.create('a', 'leaflet-control-resetview-button', controlContainer);
                 controlButton.title = 'Reset view';
@@ -329,7 +331,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             options: {
                 position: 'bottomleft'
             },
-            onAdd: function (map) {
+            onAdd: function () {
                 var controlContainer = L.DomUtil.create('div', 'leaflet-control-viewportfilter');
                 var controlInput = L.DomUtil.create('input', 'leaflet-control-viewportfilter-button', controlContainer);
                 controlInput.type = 'checkbox';
@@ -1441,15 +1443,16 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
         $q.all(promises)
             .then(
                 function () {
+                    var markup;
 
                     if (baseIcon) {
-                        var markup = '' +
+                        markup = '' +
                             '<div class="marker" data-popup="' + poi.properties.name + '">' +
                                 baseIcon +
                             '</div>' +
                             '<div class="icon">' + poiIcon + '</div>';
                     } else {
-                       var markup = '' +
+                       markup = '' +
                             '<div class="marker" data-popup="' + poi.properties.name + '">' +
                                 '<div class="icon">' + poiIcon + '</div>' +
                             '</div>';
