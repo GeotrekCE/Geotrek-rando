@@ -585,7 +585,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     };
 
-    this.updateBounds = function (updateBounds, layers, padding) {
+    this.updateBounds = function (doUpdate, layers, padding) {
         var globalBounds = layers[0].getBounds();
         if (layers.length > 1) {
             var i = 1;
@@ -596,10 +596,9 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         if (padding === undefined || padding < 0) {
             padding = 0;
         }
-        if ((updateBounds === undefined) || (updateBounds === true)) {
+        if ((doUpdate === undefined) || (doUpdate === true)) {
             self.map.fitBounds(globalBounds, {padding: padding, maxZoom: self.maxZoomFitting, animate: false});
         }
-
     };
 
     this.highlightPath = function (element, permanent, detailView) {
@@ -767,7 +766,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
     };
 
     // Add treks geojson to the map
-    this.displayResults = function (results, updateBounds) {
+    this.displayResults = function (results, doUpdate) {
 
         var counter = 0;
 
@@ -920,7 +919,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
                             if (currentCount === _.size(results)) {
                                 self.map.invalidateSize();
-                                self.updateBounds(updateBounds, [self._clustersLayer]);
+                                self.updateBounds(doUpdate, [self._clustersLayer]);
                                 self.resultsVisibility();
                                 self.map.on('moveend', self.resultsVisibility);
                                 self.loadingMarkers = false;
@@ -933,7 +932,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     };
 
-    this.displayDetail = function (result, updateBounds) {
+    this.displayDetail = function (result, doUpdate) {
 
         var type = '',
             elementLocation,
@@ -970,9 +969,9 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                             if (globalSettings.ALWAYS_HIGHLIGHT_TREKS) {
                                 self.highlightPath(result, true, true);
                             }
-                            self.updateBounds(updateBounds, [currentLayer]);
+                            self.updateBounds(doUpdate, [currentLayer]);
                         } else {
-                            self.updateBounds(updateBounds, [self._clustersLayer]);
+                            self.updateBounds(doUpdate, [self._clustersLayer]);
                         }
                     }
                 );

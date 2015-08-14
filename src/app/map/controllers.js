@@ -2,14 +2,14 @@
 
 function MapController($scope, globalSettings, $translate, $rootScope, $state, resultsService, filtersService, mapService, $stateParams) {
 
-    function updateMapWithResults(updateBounds) {
+    function updateMapWithResults(doUpdate) {
         $rootScope.elementsLoading ++;
         filtersService.getFilteredResults()
             .then(
                 function (data) {
                     $scope.results = data;
                     if (data.length > 0) {
-                        mapService.displayResults(data, updateBounds);
+                        mapService.displayResults(data, doUpdate);
                         $rootScope.elementsLoading --;
                     } else {
                         mapService.clearAllLayers();
