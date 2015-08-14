@@ -767,8 +767,8 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     // Add treks geojson to the map
     this.displayResults = function (results, doUpdate) {
-
-        var counter = 0;
+        var deferred = $q.defer();
+        var counter  = 0;
 
         this.maxZoomFitting = globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL - 1;
 
@@ -779,8 +779,9 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             this.treksIconified = this.map.getZoom() < globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL;
             this.clearAllLayers();
 
-            _.forEach(results, function (result) {
+            var promiseArray = [];
 
+            _.forEach(results, function (result) {
                 counter++;
 
                 var currentLayer,
@@ -789,147 +790,159 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                     type = '';
 
                 if (result.geometry.type !== "Point" && !self.treksIconified) {
-                    self.createLayerFromElement(result, 'geojson', [])
-                        .then(
-                            function (layer) {
-                                var selector = '#result-category-' + result.properties.category.id + '-' + result.id;
-                                var itself = '.layer-category-' + result.properties.category.id + '-' + result.id;
+                    promiseArray.push(
+                        self.createLayerFromElement(result, 'geojson', [])
+                            .then(
+                                function (layer) {
+                                    var selector = '#result-category-' + result.properties.category.id + '-' + result.id;
+                                    var itself = '.layer-category-' + result.properties.category.id + '-' + result.id;
 
-                                if (globalSettings.ALWAYS_HIGHLIGHT_TREKS) {
-                                    self.highlightPath(result, true);
-                                }
+                                    if (globalSettings.ALWAYS_HIGHLIGHT_TREKS) {
+                                        self.highlightPath(result, true);
+                                    }
 
-                                layer.on({
-                                    mouseover: function () {
-                                        var listeEquivalent = document.querySelector(selector);
-                                        var markerEquivalent = document.querySelectorAll(itself);
-                                        if (listeEquivalent && !listeEquivalent.classList.contains('hovered')) {
-                                            listeEquivalent.classList.add('hovered');
-                                        }
-                                        _.each(markerEquivalent, function (currentMarker) {
-                                            if (currentMarker && !currentMarker.classList.contains('hovered')) {
-                                                currentMarker.classList.add('hovered');
+                                    layer.on({
+                                        mouseover: function () {
+                                            var listeEquivalent = document.querySelector(selector);
+                                            var markerEquivalent = document.querySelectorAll(itself);
+                                            if (listeEquivalent && !listeEquivalent.classList.contains('hovered')) {
+                                                listeEquivalent.classList.add('hovered');
                                             }
-                                        });
+                                            _.each(markerEquivalent, function (currentMarker) {
+                                                if (currentMarker && !currentMarker.classList.contains('hovered')) {
+                                                    currentMarker.classList.add('hovered');
+                                                }
+                                            });
 
+                                            self.highlightPath(result);
+                                        },
+                                        mouseout: function () {
+                                            var listeEquivalent = document.querySelector(selector);
+                                            var markerEquivalent = document.querySelectorAll(itself);
+                                            if (listeEquivalent && listeEquivalent.classList.contains('hovered')) {
+                                                listeEquivalent.classList.remove('hovered');
+                                            }
+                                            _.each(markerEquivalent, function (currentMarker) {
+                                                if (currentMarker && currentMarker.classList.contains('hovered')) {
+                                                    currentMarker.classList.remove('hovered');
+                                                }
+                                            });
+                                            if (self.geoHover) {
+                                                self._nearMarkersLayer.removeLayer(self.geoHover);
+                                            }
+                                        },
+                                        remove: function () {
+                                            var listeEquivalent = document.querySelector(selector);
+                                            var markerEquivalent = document.querySelectorAll(itself);
+                                            if (listeEquivalent && listeEquivalent.classList.contains('hovered')) {
+                                                listeEquivalent.classList.remove('hovered');
+                                            }
+                                            _.each(markerEquivalent, function (currentMarker) {
+                                                if (currentMarker && currentMarker.classList.contains('hovered')) {
+                                                    currentMarker.classList.remove('hovered');
+                                                }
+                                            });
+
+                                        },
+                                        click: function () {
+                                            $state.go("layout.detail", { catSlug: result.properties.category.slug, slug: result.properties.slug });
+                                        }
+                                    });
+                                    jQuery(selector).on('mouseenter', function () {
                                         self.highlightPath(result);
-                                    },
-                                    mouseout: function () {
-                                        var listeEquivalent = document.querySelector(selector);
-                                        var markerEquivalent = document.querySelectorAll(itself);
-                                        if (listeEquivalent && listeEquivalent.classList.contains('hovered')) {
-                                            listeEquivalent.classList.remove('hovered');
-                                        }
-                                        _.each(markerEquivalent, function (currentMarker) {
-                                            if (currentMarker && currentMarker.classList.contains('hovered')) {
-                                                currentMarker.classList.remove('hovered');
-                                            }
-                                        });
+                                    });
+                                    jQuery(selector).on('mouseleave', function () {
                                         if (self.geoHover) {
                                             self._nearMarkersLayer.removeLayer(self.geoHover);
                                         }
-                                    },
-                                    remove: function () {
-                                        var listeEquivalent = document.querySelector(selector);
-                                        var markerEquivalent = document.querySelectorAll(itself);
-                                        if (listeEquivalent && listeEquivalent.classList.contains('hovered')) {
-                                            listeEquivalent.classList.remove('hovered');
-                                        }
-                                        _.each(markerEquivalent, function (currentMarker) {
-                                            if (currentMarker && currentMarker.classList.contains('hovered')) {
-                                                currentMarker.classList.remove('hovered');
-                                            }
-                                        });
-
-                                    },
-                                    click: function () {
-                                        $state.go("layout.detail", { catSlug: result.properties.category.slug, slug: result.properties.slug });
-                                    }
-                                });
-                                jQuery(selector).on('mouseenter', function () {
-                                    self.highlightPath(result);
-                                });
-                                jQuery(selector).on('mouseleave', function () {
-                                    if (self.geoHover) {
-                                        self._nearMarkersLayer.removeLayer(self.geoHover);
-                                    }
-                                });
-                                self._treksgeoJsonLayer.addLayer(layer);
-                                self._clustersLayer.addLayer(self._treksgeoJsonLayer);
-                            }
-                        );
+                                    });
+                                    self._treksgeoJsonLayer.addLayer(layer);
+                                    self._clustersLayer.addLayer(self._treksgeoJsonLayer);
+                                }
+                            )
+                    );
                 }
 
                 currentLayer = (result.properties.contentType === 'trek' ? self._treksMarkersLayer : self._touristicsMarkersLayer);
                 type = 'category';
                 elementLocation = utilsFactory.getStartPoint(result);
 
-                self.createLayerFromElement(result, type, elementLocation)
-                    .then(
-                        function (layer) {
-                            var selector = '#result-category-' + result.properties.category.id.toString() + '-' + result.id.toString();
+                promiseArray.push(
+                    self.createLayerFromElement(result, type, elementLocation)
+                        .then(
+                            function (layer) {
+                                var selector = '#result-category-' + result.properties.category.id.toString() + '-' + result.id.toString();
 
-                            layer.on({
-                                mouseover: function () {
-                                    var listeEquivalent = document.querySelector(selector);
-                                    if (listeEquivalent) {
-                                        if (!listeEquivalent.classList.contains('hovered')) {
-                                            listeEquivalent.classList.add('hovered');
+                                layer.on({
+                                    mouseover: function () {
+                                        var listeEquivalent = document.querySelector(selector);
+                                        if (listeEquivalent) {
+                                            if (!listeEquivalent.classList.contains('hovered')) {
+                                                listeEquivalent.classList.add('hovered');
+                                            }
                                         }
+                                        if (result.geometry.type !== "Point") {
+                                            self.highlightPath(result);
+                                        }
+                                    },
+                                    mouseout: function () {
+                                        var listeEquivalent = document.querySelector(selector);
+                                        if (listeEquivalent) {
+                                            if (listeEquivalent.classList.contains('hovered')) {
+                                                listeEquivalent.classList.remove('hovered');
+                                            }
+                                        }
+                                        if (self.geoHover) {
+                                            self._nearMarkersLayer.removeLayer(self.geoHover);
+                                        }
+                                    },
+                                    remove: function () {
+                                        var listeEquivalent = document.querySelector(selector);
+                                        if (listeEquivalent) {
+                                            if (listeEquivalent.classList.contains('hovered')) {
+                                                listeEquivalent.classList.remove('hovered');
+                                            }
+                                        }
+                                    },
+                                    click: function () {
+                                        $state.go("layout.detail", { catSlug: result.properties.category.slug, slug: result.properties.slug });
                                     }
-                                    if (result.geometry.type !== "Point") {
+                                });
+                                if (result.geometry.type !== "Point") {
+                                    jQuery(selector).on('mouseenter', function () {
                                         self.highlightPath(result);
-                                    }
-                                },
-                                mouseout: function () {
-                                    var listeEquivalent = document.querySelector(selector);
-                                    if (listeEquivalent) {
-                                        if (listeEquivalent.classList.contains('hovered')) {
-                                            listeEquivalent.classList.remove('hovered');
+                                    });
+                                    jQuery(selector).on('mouseleave', function () {
+                                        if (self.geoHover) {
+                                            self._nearMarkersLayer.removeLayer(self.geoHover);
                                         }
-                                    }
-                                    if (self.geoHover) {
-                                        self._nearMarkersLayer.removeLayer(self.geoHover);
-                                    }
-                                },
-                                remove: function () {
-                                    var listeEquivalent = document.querySelector(selector);
-                                    if (listeEquivalent) {
-                                        if (listeEquivalent.classList.contains('hovered')) {
-                                            listeEquivalent.classList.remove('hovered');
-                                        }
-                                    }
-                                },
-                                click: function () {
-                                    $state.go("layout.detail", { catSlug: result.properties.category.slug, slug: result.properties.slug });
+                                    });
                                 }
-                            });
-                            if (result.geometry.type !== "Point") {
-                                jQuery(selector).on('mouseenter', function () {
-                                    self.highlightPath(result);
-                                });
-                                jQuery(selector).on('mouseleave', function () {
-                                    if (self.geoHover) {
-                                        self._nearMarkersLayer.removeLayer(self.geoHover);
-                                    }
-                                });
-                            }
-                            currentLayer.addLayer(layer);
-                            self._clustersLayer.addLayer(currentLayer);
+                                currentLayer.addLayer(layer);
+                                self._clustersLayer.addLayer(currentLayer);
 
-                            if (currentCount === _.size(results)) {
-                                self.map.invalidateSize();
-                                self.updateBounds(doUpdate, [self._clustersLayer]);
-                                self.resultsVisibility();
-                                self.map.on('moveend', self.resultsVisibility);
-                                self.loadingMarkers = false;
+                                if (currentCount === _.size(results)) {
+                                    self.map.invalidateSize();
+                                    self.updateBounds(doUpdate, [self._clustersLayer]);
+                                    self.resultsVisibility();
+                                    self.map.on('moveend', self.resultsVisibility);
+                                    self.loadingMarkers = false;
+                                }
                             }
-                        }
-                    );
+                        )
+                );
 
             });
+
+            $q.all(promiseArray).finally(function () {
+                deferred.resolve(true);
+            });
+
+        } else {
+            deferred.resolve(false);
         }
 
+        return deferred.promise;
     };
 
     this.displayDetail = function (result, doUpdate) {
