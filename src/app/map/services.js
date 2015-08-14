@@ -281,7 +281,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         this.setMinimap();
         this.setScale();
         this.createSatelliteView();
-        this.setResetViewControl();
+        this.createResetViewButton();
     };
 
     this.setScale = function () {
@@ -299,7 +299,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         }).addTo(this.map);
     };
 
-    this.setResetViewControl = function () {
+    this.createResetViewButton = function () {
         L.Control.Resetview = L.Control.extend({
             options: {
                 position: 'topright'
