@@ -1,23 +1,27 @@
 'use strict';
 
-function MapController($scope, globalSettings, $translate, $rootScope, $state, resultsService, filtersService, mapService, $stateParams) {
+function MapController($q, $scope, globalSettings, $translate, $rootScope, $state, resultsService, filtersService, mapService, $stateParams) {
 
     function updateMapWithResults(doUpdate) {
-        $rootScope.elementsLoading ++;
-        filtersService.getFilteredResults()
-            .then(
-                function (data) {
-                    $scope.results = data;
-                    if (data.length > 0) {
-                        mapService.displayResults(data, doUpdate);
-                        $rootScope.elementsLoading --;
-                    } else {
-                        mapService.clearAllLayers();
-                        $rootScope.elementsLoading --;
-                    }
-                }
-            );
+        var deferred = $q.defer();
 
+        $rootScope.elementsLoading ++;
+        deferred.resolve(
+            filtersService.getFilteredResults()
+                .then(
+                    function (data) {
+                        $scope.results = data;
+                        if (data.length > 0) {
+                            mapService.displayResults(data, doUpdate);
+                            $rootScope.elementsLoading --;
+                        } else {
+                            mapService.clearAllLayers();
+                            $rootScope.elementsLoading --;
+                        }
+                    }
+                )
+        );
+        return deferred.promise;
     }
 
     function updateMapWithDetails(forceRefresh) {
