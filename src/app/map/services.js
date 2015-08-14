@@ -586,19 +586,35 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
     };
 
     this.updateBounds = function (doUpdate, layers, padding) {
-        var globalBounds = layers[0].getBounds();
-        if (layers.length > 1) {
-            var i = 1;
-            for (i; i < layers.length; i++) {
-                globalBounds.extend(layers[i].getBounds());
+        if (doUpdate === false) {
+            return self.map;
+        }
+
+        function getBounds (layers) {
+            var bounds;
+
+            if (!(layers instanceof Array)) {
+                layers = [layers];
             }
+
+            layers.forEach(function (layer) {
+                var currentBounds = layer.getBounds();
+                if (bounds && bounds.extend) {
+                    bounds.extend(currentBounds);
+                } else {
+                    bounds = currentBounds;
+                }
+            });
+            return bounds;
         }
-        if (padding === undefined || padding < 0) {
-            padding = 0;
-        }
-        if ((doUpdate === undefined) || (doUpdate === true)) {
-            self.map.fitBounds(globalBounds, {padding: padding, maxZoom: self.maxZoomFitting, animate: false});
-        }
+
+        var fitBoundsOptions = {
+            padding: !isFinite(padding) ? 0 : Math.abs(padding),
+            maxZoom: self.maxZoomFitting,
+            animate: false
+        };
+
+        return self.map.fitBounds(getBounds(layers), fitBoundsOptions);
     };
 
     this.highlightPath = function (element, permanent, detailView) {
