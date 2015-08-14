@@ -315,7 +315,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         }
 
         function resetViewButtonClick () {
-            return self.updateBounds(getLayersToFit(), 0, true);
+            return self.updateBounds(getLayersToFit());
         }
 
         function resetViewButtonOnAdd () {
@@ -958,7 +958,9 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
                                 if (currentCount === _.size(results)) {
                                     self.map.invalidateSize();
-                                    self.updateBounds([self._clustersLayer], 0, doUpdate);
+                                    if (doUpdate) {
+                                        self.updateBounds([self._clustersLayer]);
+                                    }
                                     self.resultsVisibility();
                                     self.map.on('moveend', self.resultsVisibility);
                                     self.loadingMarkers = false;
@@ -1017,9 +1019,13 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                             if (globalSettings.ALWAYS_HIGHLIGHT_TREKS) {
                                 self.highlightPath(result, true, true);
                             }
-                            self.updateBounds([currentLayer], 0, doUpdate);
+                            if (doUpdate !== false) {
+                                self.updateBounds([currentLayer]);
+                            }
                         } else {
-                            self.updateBounds([self._clustersLayer], 0, doUpdate);
+                            if (doUpdate !== false) {
+                                self.updateBounds([self._clustersLayer]);
+                            }
                         }
                     }
                 );
@@ -1028,7 +1034,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                 .then(
                     function () {
                         self.map.invalidateSize();
-                        //self.updateBounds(self._poisMarkersLayer, 0.5, true);
+                        //self.updateBounds(self._poisMarkersLayer, 0.5);
                         self.loadingMarkers = false;
                     }
                 );
