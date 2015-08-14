@@ -282,6 +282,8 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         this.setScale();
         this.createSatelliteView();
         this.createResetViewButton();
+
+        return this;
     };
 
     this.setScale = function () {
@@ -299,31 +301,42 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         }).addTo(this.map);
     };
 
+    /**
+     * Create and attach the map control button allowing to reset pan/zoom to the main loaded content
+     * @return {Oject} Map object
+     */
     this.createResetViewButton = function () {
+        function getLayersToFit () {
+            var layers = [self._clustersLayer];
+            if (self._treksgeoJsonLayer) {
+                layers.push(self._treksgeoJsonLayer);
+            }
+            return layers;
+        }
+
+        function resetViewButtonClick () {
+            return self.updateBounds(true, getLayersToFit());
+        }
+
+        function resetViewButtonOnAdd () {
+            var container = L.DomUtil.create('div', 'leaflet-control-resetview leaflet-bar');
+            var button    = L.DomUtil.create('a',   'leaflet-control-resetview-button', container);
+            button.title  = 'Reset view';
+
+            L.DomEvent.disableClickPropagation(button);
+            L.DomEvent.on(button, 'click', resetViewButtonClick, self);
+
+            return container;
+        }
+
         L.Control.Resetview = L.Control.extend({
             options: {
                 position: 'topright'
             },
-            onAdd: function () {
-                var controlContainer = L.DomUtil.create('div', 'leaflet-control-resetview leaflet-bar');
-                var controlButton = L.DomUtil.create('a', 'leaflet-control-resetview-button', controlContainer);
-                controlButton.title = 'Reset view';
-
-                L.DomEvent.disableClickPropagation(controlButton);
-                L.DomEvent.on(controlButton, 'click', function () {
-                    var layers = [self._clustersLayer];
-                    if (self._treksgeoJsonLayer) {
-                        layers.push(self._treksgeoJsonLayer);
-                    }
-
-                    self.updateBounds(true, layers);
-                }, this);
-                return controlContainer;
-            }
+            onAdd: resetViewButtonOnAdd
         });
 
-        this.resetViewControl = new L.Control.Resetview();
-        this.map.addControl(this.resetViewControl);
+        return this.map.addControl(new L.Control.Resetview());
     };
 
     this.setViewPortFilteringControl = function () {
@@ -585,6 +598,12 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     };
 
+    /**
+     * Fit bounds of self.map to object on <layers>
+     * @param  {Array}  layers
+     * @param  {Number} padding
+     * @return {Object} Map object
+     */
     this.updateBounds = function (doUpdate, layers, padding) {
         if (doUpdate === false) {
             return self.map;
