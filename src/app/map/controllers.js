@@ -5,6 +5,11 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
     function updateMapWithResults(fitBounds) {
         var deferred = $q.defer();
 
+        if ($scope.shouldFitBounds) {
+            fitBounds = true;
+        }
+        $scope.shouldFitBounds = false;
+
         $rootScope.elementsLoading ++;
         deferred.resolve(
             filtersService.getFilteredResults()
@@ -98,6 +103,8 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
         var mapSelector = selector || 'map';
         $rootScope.map = mapService.initMap(mapSelector);
         initCtrlsTranslation();
+
+        $scope.shouldFitBounds = true;
 
         if ($state.current.name === 'layout.detail') {
             $scope.showFiltersOnMap = false;
