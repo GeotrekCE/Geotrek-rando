@@ -1,23 +1,27 @@
 'use strict';
 
-function MapController($scope, globalSettings, $translate, $rootScope, $state, resultsService, filtersService, mapService, $stateParams) {
+function MapController($q, $scope, globalSettings, $translate, $rootScope, $state, resultsService, filtersService, mapService, $stateParams) {
 
-    function updateMapWithResults(updateBounds) {
+    function updateMapWithResults(fitBounds) {
+        var deferred = $q.defer();
+
         $rootScope.elementsLoading ++;
-        filtersService.getFilteredResults()
-            .then(
-                function (data) {
-                    $scope.results = data;
-                    if (data.length > 0) {
-                        mapService.displayResults(data, updateBounds);
-                        $rootScope.elementsLoading --;
-                    } else {
-                        mapService.clearAllLayers();
-                        $rootScope.elementsLoading --;
+        deferred.resolve(
+            filtersService.getFilteredResults()
+                .then(
+                    function (data) {
+                        $scope.results = data;
+                        if (data.length > 0) {
+                            mapService.displayResults(data, fitBounds);
+                            $rootScope.elementsLoading --;
+                        } else {
+                            mapService.clearAllLayers();
+                            $rootScope.elementsLoading --;
+                        }
                     }
-                }
-            );
-
+                )
+        );
+        return deferred.promise;
     }
 
     function updateMapWithDetails(forceRefresh) {
@@ -108,8 +112,8 @@ function MapController($scope, globalSettings, $translate, $rootScope, $state, r
 
     $rootScope.map.on('zoomend', function () {
         if ($state.current.name === 'layout.root') {
-            if ((mapService.treksIconified && $rootScope.map.getZoom() >= globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL)
-                    || (!mapService.treksIconified && $rootScope.map.getZoom() < globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL)) {
+            if ((mapService.treksIconified && $rootScope.map.getZoom() >= globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL) ||
+                (!mapService.treksIconified && $rootScope.map.getZoom() < globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL)) {
                 mapService.displayResults($scope.results, false);
             }
         }

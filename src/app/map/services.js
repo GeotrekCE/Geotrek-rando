@@ -1,10 +1,12 @@
+/* global $http */
+
 'use strict';
 
 function mapService($q, $state, $resource, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, iconsService) {
 
-    var self = this,
-        loadingMarkers = false;
+    var self = this;
 
+    this.loadingMarkers = false;
 
     // MARKERS AND CLUSTERS  //////////////////////////////
     //
@@ -19,7 +21,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         this.markers = markers;
     };
 
-    this.createPOISFromElement = function (element) {
+    this.createPOISFromElement = function (element) {
         var deferred = $q.defer(),
             promises = [],
             startPoint = utilsFactory.getStartPoint(element);
@@ -279,7 +281,9 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         this.setMinimap();
         this.setScale();
         this.createSatelliteView();
-        this.setResetViewControl();
+        this.createResetViewButton();
+
+        return this;
     };
 
     this.setScale = function () {
@@ -297,31 +301,42 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         }).addTo(this.map);
     };
 
-    this.setResetViewControl = function () {
+    /**
+     * Create and attach the map control button allowing to reset pan/zoom to the main loaded content
+     * @return {Oject} Map object
+     */
+    this.createResetViewButton = function () {
+        function getLayersToFit () {
+            var layers = [self._clustersLayer];
+            if (self._treksgeoJsonLayer) {
+                layers.push(self._treksgeoJsonLayer);
+            }
+            return layers;
+        }
+
+        function resetViewButtonClick () {
+            return self.updateBounds(getLayersToFit());
+        }
+
+        function resetViewButtonOnAdd () {
+            var container = L.DomUtil.create('div', 'leaflet-control-resetview leaflet-bar');
+            var button    = L.DomUtil.create('a',   'leaflet-control-resetview-button', container);
+            button.title  = 'Reset view';
+
+            L.DomEvent.disableClickPropagation(button);
+            L.DomEvent.on(button, 'click', resetViewButtonClick, self);
+
+            return container;
+        }
+
         L.Control.Resetview = L.Control.extend({
             options: {
                 position: 'topright'
             },
-            onAdd: function (map) {
-                var controlContainer = L.DomUtil.create('div', 'leaflet-control-resetview leaflet-bar');
-                var controlButton = L.DomUtil.create('a', 'leaflet-control-resetview-button', controlContainer);
-                controlButton.title = 'Reset view';
-
-                L.DomEvent.disableClickPropagation(controlButton);
-                L.DomEvent.on(controlButton, 'click', function () {
-                    var layers = [self._clustersLayer];
-                    if (self._treksgeoJsonLayer) {
-                        layers.push(self._treksgeoJsonLayer);
-                    }
-
-                    self.updateBounds(true, layers);
-                }, this);
-                return controlContainer;
-            }
+            onAdd: resetViewButtonOnAdd
         });
 
-        this.resetViewControl = new L.Control.Resetview();
-        this.map.addControl(this.resetViewControl);
+        return this.map.addControl(new L.Control.Resetview());
     };
 
     this.setViewPortFilteringControl = function () {
@@ -329,7 +344,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             options: {
                 position: 'bottomleft'
             },
-            onAdd: function (map) {
+            onAdd: function () {
                 var controlContainer = L.DomUtil.create('div', 'leaflet-control-viewportfilter');
                 var controlInput = L.DomUtil.create('input', 'leaflet-control-viewportfilter-button', controlContainer);
                 controlInput.type = 'checkbox';
@@ -583,21 +598,42 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     };
 
-    this.updateBounds = function (updateBounds, layers, padding) {
-        var globalBounds = layers[0].getBounds();
-        if (layers.length > 1) {
-            var i = 1;
-            for (i; i < layers.length; i++) {
-                globalBounds.extend(layers[i].getBounds());
-            }
-        }
-        if (padding === undefined || padding < 0) {
-            padding = 0;
-        }
-        if ((updateBounds === undefined) || (updateBounds === true)) {
-            self.map.fitBounds(globalBounds, {padding: padding, maxZoom: self.maxZoomFitting, animate: false});
+    /**
+     * Fit bounds of self.map to object on <layers>
+     * @param  {Array}  layers
+     * @param  {Number} padding
+     * @return {Object} Map object
+     */
+    this.updateBounds = function (layers, padding, fitBounds) {
+        if (fitBounds === false) {
+            return self.map;
         }
 
+        function getBounds (layers) {
+            var bounds;
+
+            if (!(layers instanceof Array)) {
+                layers = [layers];
+            }
+
+            layers.forEach(function (layer) {
+                var currentBounds = layer.getBounds();
+                if (bounds && bounds.extend) {
+                    bounds.extend(currentBounds);
+                } else {
+                    bounds = currentBounds;
+                }
+            });
+            return bounds;
+        }
+
+        var fitBoundsOptions = {
+            padding: !isFinite(padding) ? 0 : Math.abs(padding),
+            maxZoom: self.maxZoomFitting,
+            animate: false
+        };
+
+        return self.map.fitBounds(getBounds(layers), fitBoundsOptions);
     };
 
     this.highlightPath = function (element, permanent, detailView) {
@@ -765,9 +801,9 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
     };
 
     // Add treks geojson to the map
-    this.displayResults = function (results, updateBounds) {
-
-        var counter = 0;
+    this.displayResults = function (results, fitBounds) {
+        var deferred = $q.defer();
+        var counter  = 0;
 
         this.maxZoomFitting = globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL - 1;
 
@@ -778,8 +814,9 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             this.treksIconified = this.map.getZoom() < globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL;
             this.clearAllLayers();
 
-            _.forEach(results, function (result) {
+            var promiseArray = [];
 
+            _.forEach(results, function (result) {
                 counter++;
 
                 var currentLayer,
@@ -788,150 +825,164 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                     type = '';
 
                 if (result.geometry.type !== "Point" && !self.treksIconified) {
-                    self.createLayerFromElement(result, 'geojson', [])
-                        .then(
-                            function (layer) {
-                                var selector = '#result-category-' + result.properties.category.id + '-' + result.id;
-                                var itself = '.layer-category-' + result.properties.category.id + '-' + result.id;
+                    promiseArray.push(
+                        self.createLayerFromElement(result, 'geojson', [])
+                            .then(
+                                function (layer) {
+                                    var selector = '#result-category-' + result.properties.category.id + '-' + result.id;
+                                    var itself = '.layer-category-' + result.properties.category.id + '-' + result.id;
 
-                                if (globalSettings.ALWAYS_HIGHLIGHT_TREKS) {
-                                    self.highlightPath(result, true);
-                                }
+                                    if (globalSettings.ALWAYS_HIGHLIGHT_TREKS) {
+                                        self.highlightPath(result, true);
+                                    }
 
-                                layer.on({
-                                    mouseover: function () {
-                                        var listeEquivalent = document.querySelector(selector);
-                                        var markerEquivalent = document.querySelectorAll(itself);
-                                        if (listeEquivalent && !listeEquivalent.classList.contains('hovered')) {
-                                            listeEquivalent.classList.add('hovered');
-                                        }
-                                        _.each(markerEquivalent, function (currentMarker) {
-                                            if (currentMarker && !currentMarker.classList.contains('hovered')) {
-                                                currentMarker.classList.add('hovered');
+                                    layer.on({
+                                        mouseover: function () {
+                                            var listeEquivalent = document.querySelector(selector);
+                                            var markerEquivalent = document.querySelectorAll(itself);
+                                            if (listeEquivalent && !listeEquivalent.classList.contains('hovered')) {
+                                                listeEquivalent.classList.add('hovered');
                                             }
-                                        });
+                                            _.each(markerEquivalent, function (currentMarker) {
+                                                if (currentMarker && !currentMarker.classList.contains('hovered')) {
+                                                    currentMarker.classList.add('hovered');
+                                                }
+                                            });
 
+                                            self.highlightPath(result);
+                                        },
+                                        mouseout: function () {
+                                            var listeEquivalent = document.querySelector(selector);
+                                            var markerEquivalent = document.querySelectorAll(itself);
+                                            if (listeEquivalent && listeEquivalent.classList.contains('hovered')) {
+                                                listeEquivalent.classList.remove('hovered');
+                                            }
+                                            _.each(markerEquivalent, function (currentMarker) {
+                                                if (currentMarker && currentMarker.classList.contains('hovered')) {
+                                                    currentMarker.classList.remove('hovered');
+                                                }
+                                            });
+                                            if (self.geoHover) {
+                                                self._nearMarkersLayer.removeLayer(self.geoHover);
+                                            }
+                                        },
+                                        remove: function () {
+                                            var listeEquivalent = document.querySelector(selector);
+                                            var markerEquivalent = document.querySelectorAll(itself);
+                                            if (listeEquivalent && listeEquivalent.classList.contains('hovered')) {
+                                                listeEquivalent.classList.remove('hovered');
+                                            }
+                                            _.each(markerEquivalent, function (currentMarker) {
+                                                if (currentMarker && currentMarker.classList.contains('hovered')) {
+                                                    currentMarker.classList.remove('hovered');
+                                                }
+                                            });
+
+                                        },
+                                        click: function () {
+                                            $state.go("layout.detail", { catSlug: result.properties.category.slug, slug: result.properties.slug });
+                                        }
+                                    });
+                                    jQuery(selector).on('mouseenter', function () {
                                         self.highlightPath(result);
-                                    },
-                                    mouseout: function () {
-                                        var listeEquivalent = document.querySelector(selector);
-                                        var markerEquivalent = document.querySelectorAll(itself);
-                                        if (listeEquivalent && listeEquivalent.classList.contains('hovered')) {
-                                            listeEquivalent.classList.remove('hovered');
-                                        }
-                                        _.each(markerEquivalent, function (currentMarker) {
-                                            if (currentMarker && currentMarker.classList.contains('hovered')) {
-                                                currentMarker.classList.remove('hovered');
-                                            }
-                                        });
+                                    });
+                                    jQuery(selector).on('mouseleave', function () {
                                         if (self.geoHover) {
                                             self._nearMarkersLayer.removeLayer(self.geoHover);
                                         }
-                                    },
-                                    remove: function () {
-                                        var listeEquivalent = document.querySelector(selector);
-                                        var markerEquivalent = document.querySelectorAll(itself);
-                                        if (listeEquivalent && listeEquivalent.classList.contains('hovered')) {
-                                            listeEquivalent.classList.remove('hovered');
-                                        }
-                                        _.each(markerEquivalent, function (currentMarker) {
-                                            if (currentMarker && currentMarker.classList.contains('hovered')) {
-                                                currentMarker.classList.remove('hovered');
-                                            }
-                                        });
-
-                                    },
-                                    click: function () {
-                                        $state.go("layout.detail", { catSlug: result.properties.category.slug, slug: result.properties.slug });
-                                    }
-                                });
-                                jQuery(selector).on('mouseenter', function () {
-                                    self.highlightPath(result);
-                                });
-                                jQuery(selector).on('mouseleave', function () {
-                                    if (self.geoHover) {
-                                        self._nearMarkersLayer.removeLayer(self.geoHover);
-                                    }
-                                });
-                                self._treksgeoJsonLayer.addLayer(layer);
-                                self._clustersLayer.addLayer(self._treksgeoJsonLayer);
-                            }
-                        );
+                                    });
+                                    self._treksgeoJsonLayer.addLayer(layer);
+                                    self._clustersLayer.addLayer(self._treksgeoJsonLayer);
+                                }
+                            )
+                    );
                 }
 
                 currentLayer = (result.properties.contentType === 'trek' ? self._treksMarkersLayer : self._touristicsMarkersLayer);
                 type = 'category';
                 elementLocation = utilsFactory.getStartPoint(result);
 
-                self.createLayerFromElement(result, type, elementLocation)
-                    .then(
-                        function (layer) {
-                            var selector = '#result-category-' + result.properties.category.id.toString() + '-' + result.id.toString();
+                promiseArray.push(
+                    self.createLayerFromElement(result, type, elementLocation)
+                        .then(
+                            function (layer) {
+                                var selector = '#result-category-' + result.properties.category.id.toString() + '-' + result.id.toString();
 
-                            layer.on({
-                                mouseover: function () {
-                                    var listeEquivalent = document.querySelector(selector);
-                                    if (listeEquivalent) {
-                                        if (!listeEquivalent.classList.contains('hovered')) {
-                                            listeEquivalent.classList.add('hovered');
+                                layer.on({
+                                    mouseover: function () {
+                                        var listeEquivalent = document.querySelector(selector);
+                                        if (listeEquivalent) {
+                                            if (!listeEquivalent.classList.contains('hovered')) {
+                                                listeEquivalent.classList.add('hovered');
+                                            }
                                         }
+                                        if (result.geometry.type !== "Point") {
+                                            self.highlightPath(result);
+                                        }
+                                    },
+                                    mouseout: function () {
+                                        var listeEquivalent = document.querySelector(selector);
+                                        if (listeEquivalent) {
+                                            if (listeEquivalent.classList.contains('hovered')) {
+                                                listeEquivalent.classList.remove('hovered');
+                                            }
+                                        }
+                                        if (self.geoHover) {
+                                            self._nearMarkersLayer.removeLayer(self.geoHover);
+                                        }
+                                    },
+                                    remove: function () {
+                                        var listeEquivalent = document.querySelector(selector);
+                                        if (listeEquivalent) {
+                                            if (listeEquivalent.classList.contains('hovered')) {
+                                                listeEquivalent.classList.remove('hovered');
+                                            }
+                                        }
+                                    },
+                                    click: function () {
+                                        $state.go("layout.detail", { catSlug: result.properties.category.slug, slug: result.properties.slug });
                                     }
-                                    if (result.geometry.type !== "Point") {
+                                });
+                                if (result.geometry.type !== "Point") {
+                                    jQuery(selector).on('mouseenter', function () {
                                         self.highlightPath(result);
-                                    }
-                                },
-                                mouseout: function () {
-                                    var listeEquivalent = document.querySelector(selector);
-                                    if (listeEquivalent) {
-                                        if (listeEquivalent.classList.contains('hovered')) {
-                                            listeEquivalent.classList.remove('hovered');
+                                    });
+                                    jQuery(selector).on('mouseleave', function () {
+                                        if (self.geoHover) {
+                                            self._nearMarkersLayer.removeLayer(self.geoHover);
                                         }
-                                    }
-                                    if (self.geoHover) {
-                                        self._nearMarkersLayer.removeLayer(self.geoHover);
-                                    }
-                                },
-                                remove: function () {
-                                    var listeEquivalent = document.querySelector(selector);
-                                    if (listeEquivalent) {
-                                        if (listeEquivalent.classList.contains('hovered')) {
-                                            listeEquivalent.classList.remove('hovered');
-                                        }
-                                    }
-                                },
-                                click: function () {
-                                    $state.go("layout.detail", { catSlug: result.properties.category.slug, slug: result.properties.slug });
+                                    });
                                 }
-                            });
-                            if (result.geometry.type !== "Point") {
-                                jQuery(selector).on('mouseenter', function () {
-                                    self.highlightPath(result);
-                                });
-                                jQuery(selector).on('mouseleave', function () {
-                                    if (self.geoHover) {
-                                        self._nearMarkersLayer.removeLayer(self.geoHover);
-                                    }
-                                });
-                            }
-                            currentLayer.addLayer(layer);
-                            self._clustersLayer.addLayer(currentLayer);
+                                currentLayer.addLayer(layer);
+                                self._clustersLayer.addLayer(currentLayer);
 
-                            if (currentCount === _.size(results)) {
-                                self.map.invalidateSize();
-                                self.updateBounds(updateBounds, [self._clustersLayer]);
-                                self.resultsVisibility();
-                                self.map.on('moveend', self.resultsVisibility);
-                                self.loadingMarkers = false;
+                                if (currentCount === _.size(results)) {
+                                    self.map.invalidateSize();
+                                    if (fitBounds) {
+                                        self.updateBounds([self._clustersLayer]);
+                                    }
+                                    self.resultsVisibility();
+                                    self.map.on('moveend', self.resultsVisibility);
+                                    self.loadingMarkers = false;
+                                }
                             }
-                        }
-                    );
+                        )
+                );
 
             });
+
+            $q.all(promiseArray).finally(function () {
+                deferred.resolve(true);
+            });
+
+        } else {
+            deferred.resolve(false);
         }
 
+        return deferred.promise;
     };
 
-    this.displayDetail = function (result, updateBounds) {
+    this.displayDetail = function (result, fitBounds) {
 
         var type = '',
             elementLocation,
@@ -968,9 +1019,13 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                             if (globalSettings.ALWAYS_HIGHLIGHT_TREKS) {
                                 self.highlightPath(result, true, true);
                             }
-                            self.updateBounds(updateBounds, [currentLayer]);
+                            if (fitBounds !== false) {
+                                self.updateBounds(currentLayer);
+                            }
                         } else {
-                            self.updateBounds(updateBounds, [self._clustersLayer]);
+                            if (fitBounds !== false) {
+                                self.updateBounds(self._clustersLayer);
+                            }
                         }
                     }
                 );
@@ -979,7 +1034,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                 .then(
                     function () {
                         self.map.invalidateSize();
-                        //self.updateBounds(true, self._poisMarkersLayer, 0.5);
+                        //self.updateBounds(self._poisMarkersLayer, 0.5);
                         self.loadingMarkers = false;
                     }
                 );
@@ -1441,15 +1496,16 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
         $q.all(promises)
             .then(
                 function () {
+                    var markup;
 
                     if (baseIcon) {
-                        var markup = '' +
+                        markup = '' +
                             '<div class="marker" data-popup="' + poi.properties.name + '">' +
                                 baseIcon +
                             '</div>' +
                             '<div class="icon">' + poiIcon + '</div>';
                     } else {
-                       var markup = '' +
+                       markup = '' +
                             '<div class="marker" data-popup="' + poi.properties.name + '">' +
                                 '<div class="icon">' + poiIcon + '</div>' +
                             '</div>';
