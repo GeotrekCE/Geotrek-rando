@@ -118,9 +118,14 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
     }
 
     function mapInit(selector) {
+        var deferred = $q.defer();
+
         var mapSelector = selector || 'map';
         $rootScope.map = mapService.initMap(mapSelector);
-        initCtrlsTranslation();
+
+        initCtrlsTranslation().finally(function () {
+            deferred.resolve(true);
+        });
 
         $scope.shouldFitBounds = true;
 
@@ -131,6 +136,8 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
         if ($state.current.name === 'layout.root') {
             $scope.showFiltersOnMap = !!globalSettings.SHOW_FILTERS_ON_MAP;
         }
+
+        return deferred.promise;
     }
 
     mapInit('map');
