@@ -1020,11 +1020,11 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                 self.highlightPath(result, true, true);
                             }
                             if (doUpdate !== false) {
-                                self.updateBounds([currentLayer]);
+                                self.updateBounds(currentLayer);
                             }
                         } else {
                             if (doUpdate !== false) {
-                                self.updateBounds([self._clustersLayer]);
+                                self.updateBounds(self._clustersLayer);
                             }
                         }
                     }
