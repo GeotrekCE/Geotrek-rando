@@ -30,6 +30,8 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
     }
 
     function updateMapWithDetails(forceRefresh) {
+        var deferred = $q.defer();
+
         $rootScope.elementsLoading ++;
         var promise;
         if (!forceRefresh) {
@@ -38,16 +40,20 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
             promise = resultsService.getAResultByID($scope.result.id, $scope.result.properties.category.id);
         }
 
-        promise
-            .then(
-                function (data) {
-                    $scope.result = data;
-                    mapService.displayDetail($scope.result);
-                    $rootScope.elementsLoading --;
-                }, function () {
-                    $rootScope.elementsLoading --;
-                }
-            );
+        deferred.resolve(
+            promise
+                .then(
+                    function (data) {
+                        $scope.result = data;
+                        mapService.displayDetail($scope.result);
+                        $rootScope.elementsLoading --;
+                    }, function () {
+                        $rootScope.elementsLoading --;
+                    }
+                )
+        );
+
+        return deferred.promise;
     }
 
     function initCtrlsTranslation() {
