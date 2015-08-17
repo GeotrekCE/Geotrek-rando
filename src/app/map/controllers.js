@@ -152,37 +152,39 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
 
     });
 
-    $rootScope.$on('$stateChangeSuccess',
-        function () {
-            if ($state.current.name === 'layout.detail') {
-                $scope.showFiltersOnMap = false;
-            }
+    var rootScopeEvents = [
+        $rootScope.$on('$stateChangeSuccess',
+            function () {
+                if ($state.current.name === 'layout.detail') {
+                    $scope.showFiltersOnMap = false;
+                }
 
+                if ($state.current.name === 'layout.root') {
+                    $scope.showFiltersOnMap = !!globalSettings.SHOW_FILTERS_ON_MAP;
+                }
+            }
+        ),
+        $rootScope.$on('resultsUpdated', function () {
             if ($state.current.name === 'layout.root') {
-                $scope.showFiltersOnMap = !!globalSettings.SHOW_FILTERS_ON_MAP;
+                updateMapWithResults(globalSettings.UPDATE_MAP_ON_FILTER);
             }
-        });
+        }),
+        $rootScope.$on('detailUpdated', function () {
+            if ($state.current.name === 'layout.detail') {
+                updateMapWithDetails();
+            }
+        }),
+        $rootScope.$on('switchGlobalLang', function () {
+            if ($state.current.name === 'layout.detail') {
+                updateMapWithDetails(true);
+            } else {
+                updateMapWithResults(true);
+            }
+            initCtrlsTranslation();
+        })
+    ];
 
-    $rootScope.$on('resultsUpdated', function () {
-        if ($state.current.name === 'layout.root') {
-            updateMapWithResults(globalSettings.UPDATE_MAP_ON_FILTER);
-        }
-    });
-
-    $rootScope.$on('detailUpdated', function () {
-        if ($state.current.name === 'layout.detail') {
-            updateMapWithDetails();
-        }
-    });
-
-    $rootScope.$on('switchGlobalLang', function () {
-        if ($state.current.name === 'layout.detail') {
-            updateMapWithDetails(true);
-        } else {
-            updateMapWithResults(true);
-        }
-        initCtrlsTranslation();
-    });
+    $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
 
 }
 
