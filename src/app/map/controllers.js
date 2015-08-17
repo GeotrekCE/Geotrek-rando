@@ -57,6 +57,8 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
     }
 
     function initCtrlsTranslation() {
+        var deferred = $q.defer();
+
         var controllersListe = [
             {
                 selector: '.leaflet-control-zoom-in',
@@ -90,19 +92,29 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
             }
         ];
 
+        var promises = [];
+
         _.forEach(controllersListe, function (currentController) {
             var domElement = document.querySelector(currentController.selector);
-            $translate(currentController.translationID)
-                .then(
-                    function (translation) {
-                        if (currentController.isTitle) {
-                            domElement.setAttribute('title', translation);
-                        } else {
-                            domElement.innerHTML = translation;
+            promises.push(
+                $translate(currentController.translationID)
+                    .then(
+                        function (translation) {
+                            if (currentController.isTitle) {
+                                domElement.setAttribute('title', translation);
+                            } else {
+                                domElement.innerHTML = translation;
+                            }
                         }
-                    }
-                );
+                    )
+            );
         });
+
+        $q.all(promises).finally(function () {
+            deferred.resolve(true);
+        });
+
+        return deferred.promise;
     }
 
     function mapInit(selector) {
