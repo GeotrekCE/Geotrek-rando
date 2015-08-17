@@ -604,8 +604,8 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
      * @param  {Number} padding
      * @return {Object} Map object
      */
-    this.updateBounds = function (layers, padding, doUpdate) {
-        if (doUpdate === false) {
+    this.updateBounds = function (layers, padding, fitBounds) {
+        if (fitBounds === false) {
             return self.map;
         }
 
@@ -801,7 +801,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
     };
 
     // Add treks geojson to the map
-    this.displayResults = function (results, doUpdate) {
+    this.displayResults = function (results, fitBounds) {
         var deferred = $q.defer();
         var counter  = 0;
 
@@ -958,7 +958,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
                                 if (currentCount === _.size(results)) {
                                     self.map.invalidateSize();
-                                    if (doUpdate) {
+                                    if (fitBounds) {
                                         self.updateBounds([self._clustersLayer]);
                                     }
                                     self.resultsVisibility();
@@ -982,7 +982,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         return deferred.promise;
     };
 
-    this.displayDetail = function (result, doUpdate) {
+    this.displayDetail = function (result, fitBounds) {
 
         var type = '',
             elementLocation,
@@ -1019,11 +1019,11 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                             if (globalSettings.ALWAYS_HIGHLIGHT_TREKS) {
                                 self.highlightPath(result, true, true);
                             }
-                            if (doUpdate !== false) {
+                            if (fitBounds !== false) {
                                 self.updateBounds(currentLayer);
                             }
                         } else {
-                            if (doUpdate !== false) {
+                            if (fitBounds !== false) {
                                 self.updateBounds(self._clustersLayer);
                             }
                         }

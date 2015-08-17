@@ -2,7 +2,7 @@
 
 function MapController($q, $scope, globalSettings, $translate, $rootScope, $state, resultsService, filtersService, mapService, $stateParams) {
 
-    function updateMapWithResults(doUpdate) {
+    function updateMapWithResults(fitBounds) {
         var deferred = $q.defer();
 
         $rootScope.elementsLoading ++;
@@ -12,7 +12,7 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
                     function (data) {
                         $scope.results = data;
                         if (data.length > 0) {
-                            mapService.displayResults(data, doUpdate);
+                            mapService.displayResults(data, fitBounds);
                             $rootScope.elementsLoading --;
                         } else {
                             mapService.clearAllLayers();
