@@ -42,11 +42,16 @@ function HomeController($scope, $rootScope, translationService, $location, homeS
 
     $scope.initHome();
 
-    $rootScope.$on('$stateChangeStart', function (event, toState) {
-        if (toState.name !== 'layout.root' && $rootScope.showHome) {
-            $scope.toggleHome();
-        }
-    });
+
+    var rootScopeEvents = [
+        $rootScope.$on('$stateChangeStart', function (event, toState) {
+            if (toState.name !== 'layout.root' && $rootScope.showHome) {
+                $scope.toggleHome();
+            }
+        })
+    ];
+
+    $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
 
 }
 
