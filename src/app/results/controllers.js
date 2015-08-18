@@ -81,9 +81,13 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
         updateResults();
     });
 
-    $rootScope.$on('switchGlobalLang', function () {
-        updateResults(true);
-    });
+    var rootScopeEvents = [
+        $rootScope.$on('switchGlobalLang', function () {
+            updateResults(true);
+        })
+    ];
+
+    $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
 
 }
 
