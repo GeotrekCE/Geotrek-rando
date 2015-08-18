@@ -4,6 +4,8 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
 
     $scope.shareIcon = (globalSettings.SHARE_ICON ? globalSettings.SHARE_ICON : 'share-alt');
 
+    var rootScopeEvents = [];
+
     function initShareButtons(translatedContent, element) {
 
         $scope.fbShareLink = 'https://www.facebook.com/dialog/feed?' +
@@ -239,16 +241,22 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
                     }
                 );
         } else {
-            $rootScope.$on('translationReady', function () {
-                initShareOnTranslate();
-            });
+            rootScopeEvents.push(
+                $rootScope.$on('translationReady', function () {
+                    initShareOnTranslate();
+                })
+            );
         }
 
     }
 
     initShare();
 
-    $rootScope.$on('$stateChangeSuccess', initShare);
+    rootScopeEvents.push(
+        $rootScope.$on('$stateChangeSuccess', initShare)
+    );
+
+    $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
 }
 
 module.exports = {
