@@ -48,15 +48,17 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
         $rootScope.showHome = false;
     }
 
-    $rootScope.$on("$stateChangeSuccess",  function (event, toState, toParams, fromState, fromParams) {
-        // to be used for back button //won't work when page is reloaded.
-        $rootScope.previousState_name = fromState.name;
-        $rootScope.currentState_name = toState.name;
+    var rootScopeEvents = [
+        $rootScope.$on("$stateChangeSuccess",  function (event, toState, toParams, fromState, fromParams) {
+            // to be used for back button //won't work when page is reloaded.
+            $rootScope.previousState_name = fromState.name;
+            $rootScope.currentState_name = toState.name;
 
-        if (toState.name === 'layout.root') {
-            iniDefaultMeta();
-        }
-    });
+            if (toState.name === 'layout.root') {
+                iniDefaultMeta();
+            }
+        })
+    ];
     //back button function called from back button's ng-click="back()"
     $rootScope.back = function () {
         if (!$rootScope.previousState_name || $rootScope.previousState_name !== 'layout.root') {
@@ -66,14 +68,19 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
         }
     };
 
-    $rootScope.$on('startSwitchGlobalLang', function () {
-        resultsService.getAllResults(true)
-            .then(
-                function () {
-                    $rootScope.$emit('switchGlobalLang');
-                }
-            );
-    });
+    rootScopeEvents.push(
+        $rootScope.$on('startSwitchGlobalLang', function () {
+            resultsService.getAllResults(true)
+                .then(
+                    function () {
+                        $rootScope.$emit('switchGlobalLang');
+                    }
+                );
+        })
+    );
+
+    $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
+
 }
 
 function SidebarHomeController() {

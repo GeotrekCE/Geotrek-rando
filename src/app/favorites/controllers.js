@@ -36,9 +36,13 @@ function FavoritesController($scope, $rootScope, globalSettings, favoritesServic
 
     updateFavorites();
 
-    $rootScope.$on('switchGlobalLang', function () {
-        updateFavorites(true);
-    });
+    var rootScopeEvents = [
+        $rootScope.$on('switchGlobalLang', function () {
+            updateFavorites(true);
+        })
+    ];
+
+    $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
 
     $scope.$on('changeFavorite', function (event, args) {
         if (args.action === 'add') {

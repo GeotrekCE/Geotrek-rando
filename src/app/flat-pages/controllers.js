@@ -22,9 +22,19 @@ function FlatPagesController(utilsFactory, flatService, $scope, $state, $rootSco
     }
 
     getPage();
-    $rootScope.$on('flatUpdated', function () {
-        getPage($scope.flatPage.id);
+
+    var rootScopeEvens = [
+        $rootScope.$on('flatUpdated', function () {
+            getPage($scope.flatPage.id);
+        })
+    ];
+
+    $scope.$on('$destroy', function () {
+        rootScopeEvents.forEach(function (dereg) {
+            dereg();
+        });
     });
+
 }
 
 function FlatMenuController(flatService, $scope, $rootScope) {
@@ -42,9 +52,15 @@ function FlatMenuController(flatService, $scope, $rootScope) {
     }
 
     initFlatMenu();
-    $rootScope.$on('startSwitchGlobalLang', function () {
-        initFlatMenu(true);
-    });
+
+    var rootScopeEvens = [
+        $rootScope.$on('startSwitchGlobalLang', function () {
+            initFlatMenu(true);
+        })
+    ];
+
+    $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
+
 }
 
 module.exports = {

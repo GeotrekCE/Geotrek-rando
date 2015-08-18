@@ -102,7 +102,11 @@ function PoisListeController($scope, $rootScope, globalSettings, utilsFactory, $
     };
 
     initPois();
-    $rootScope.$on('resetPOIGallery', initPois);
+
+    var rootScopeEvents = [ $rootScope.$on('resetPOIGallery', initPois) ];
+
+    $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
+
 }
 
 function MediaController(media, $scope, $timeout, $modalInstance) {

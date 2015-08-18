@@ -97,9 +97,14 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
     $scope.isSVG = utilsFactory.isSVG;
 
     initFiltersView();
-    $rootScope.$on('switchGlobalLang', function () {
-        initFiltersView();
-    });
+
+    var rootScopeEvents = [
+        $rootScope.$on('switchGlobalLang', function () {
+            initFiltersView();
+        })
+    ];
+
+    $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
 
 }
 
