@@ -205,9 +205,13 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
 
     loadCategories();
 
-    $rootScope.$on('switchGlobalLang', function () {
-        loadCategories(true);
-    });
+    var rootScopeEvents = [
+        $rootScope.$on('switchGlobalLang', function () {
+            loadCategories(true);
+        })
+    ];
+
+    $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
 
 }
 
