@@ -302,11 +302,15 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
 
     angular.element(window).on('resize', switchInterestsNodes);
 
-    $rootScope.$on('switchGlobalLang', function () {
-        if ($state.current.name === 'layout.detail') {
-            getResultDetails(true);
-        }
-    });
+    var rootScopeEvents = [
+        $rootScope.$on('switchGlobalLang', function () {
+            if ($state.current.name === 'layout.detail') {
+                getResultDetails(true);
+            }
+        })
+    ];
+
+    $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
 
 }
 
