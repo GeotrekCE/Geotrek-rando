@@ -55,6 +55,7 @@
             "attribution": "(c) MapBox Satellite"
         }
     },
+    "OPTIONAL_LEAFLET_BACKGROUNDS": [],
     "LEAFLET_CONF": {
         "CENTER_LATITUDE": 44.83,
         "CENTER_LONGITUDE": 6.34,

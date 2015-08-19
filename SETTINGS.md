@@ -81,6 +81,8 @@ GOOGLE_ANALYTICS_ID | String | `""` | ID of your Google Analytics account.
 Option     | Type      | Default   | Description
 --------|----------|-----------|------------
 MAIN_LEAFLET_BACKGROUND | [Layer Object](#layers-objects-options) | cf [Layers Objects default](#layers-objects-options) | Define the main leaflet tiles used by the website.
+SATELLITE_LEAFLET_BACKGROUND | [Layer Object](#layers-objects-options) | cf [Layers Objects default](#layers-objects-options) | Define the satellite leaflet tiles used by the website.
+OPTIONAL_LEAFLET_BACKGROUNDS | Array of [Layer Objects](#layers-objects-options) | `[]` | This array allows you to define other Leaflet tiles layers that will add to the `MAIN_LEAFLET_BACKGROUND`.
 LEAFLET_CONF | [Leaflet Conf Object](#layers-conf-options) | cf [Leaflet Conf Object default](#layers-conf-options) |  Basic conf of the map.
 TREKS_TO_GEOJSON_ZOOM_LEVEL | Int | `14` | Zoom level at which the map switch between markers and linear mode for treks.
 UPDATE_MAP_ON_FILTER | Boolean | `false` | If true, update map viewport each time a filter is changed.

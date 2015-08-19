@@ -1046,15 +1046,29 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
         // Set background Layers
         this._baseLayers = {
-            main: L.tileLayer(
-                globalSettings.MAIN_LEAFLET_BACKGROUND.LAYER_URL,
-                globalSettings.MAIN_LEAFLET_BACKGROUND.OPTIONS
-            ),
+            main: [
+                L.tileLayer(
+                    globalSettings.MAIN_LEAFLET_BACKGROUND.LAYER_URL,
+                    globalSettings.MAIN_LEAFLET_BACKGROUND.OPTIONS
+                )
+            ],
             satellite: L.tileLayer(
                 globalSettings.SATELLITE_LEAFLET_BACKGROUND.LAYER_URL,
                 globalSettings.SATELLITE_LEAFLET_BACKGROUND.OPTIONS
             )
         };
+
+        if (globalSettings.OPTIONAL_LEAFLET_BACKGROUNDS.length > 0) {
+            for (var i = globalSettings.OPTIONAL_LEAFLET_BACKGROUNDS.length - 1; i >= 0; i--) {
+                var layer = globalSettings.OPTIONAL_LEAFLET_BACKGROUNDS[i];
+                this._baseLayers.main.push(
+                    L.tileLayer(
+                        layer.LAYER_URL,
+                        layer.OPTIONS
+                    )
+                );
+            }
+        }
 
         var mapParameters = {
             center: [globalSettings.LEAFLET_CONF.CENTER_LATITUDE, globalSettings.LEAFLET_CONF.CENTER_LONGITUDE],
