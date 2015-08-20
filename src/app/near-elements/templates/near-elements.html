@@ -1,5 +1,5 @@
 <ul class="near-liste">
-    <li ng-repeat="near in nearElements track by near.properties.category.id + '-' + near.id" id="near-category-{{::near.properties.category.id}}-{{::near.id}}" class="near category-{{::near.properties.category.id}} card">
+    <li ng-repeat="near in nearElements | orderBy: ['properties.begin_date', 'properties.name'] track by near.uid" id="near-category-{{::near.properties.category.id}}-{{::near.id}}" class="near category-{{::near.properties.category.id}} card">
         <div class="fav-or-not" ng-click="toggleFavorites(near)" ng-class="{isFav: isInFavorites(near)}">
             <i class="fa fa-{{::favIcon}}"></i>
         </div>

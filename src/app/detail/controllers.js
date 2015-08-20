@@ -74,7 +74,15 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                 resultsService.getAResultByID(element.id, element.category_id)
                     .then(
                         function (elementData) {
-                            $scope.nearElements.push(elementData);
+                            if (elementData.properties.begin_date) {
+                                var currentDate = new Date().toISOString().substr(0, 10);
+                                var eventDate = elementData.properties.end_date || elementData.properties.begin_date;
+                                if (eventDate > currentDate) {
+                                    $scope.nearElements.push(elementData);
+                                }
+                            } else {
+                                $scope.nearElements.push(elementData);
+                            }
                         },
                         function (err) {
                             if (console) {
