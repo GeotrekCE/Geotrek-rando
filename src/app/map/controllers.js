@@ -186,6 +186,13 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
 
     $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
 
+    $scope.$on('$destroy', function (event) {
+        var map = $rootScope.map;
+
+        if (map && typeof map.remove === 'function') {
+            map.remove();
+        }
+    });
 }
 
 module.exports = {
