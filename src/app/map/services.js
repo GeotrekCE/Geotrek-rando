@@ -961,9 +961,11 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
                                 if (currentCount === _.size(results)) {
                                     self.map.invalidateSize();
-                                    if (fitBounds) {
+
+                                    if (fitBounds === true) {
                                         self.updateBounds([self._clustersLayer]);
                                     }
+
                                     self.resultsVisibility();
                                     self.map.on('moveend', self.resultsVisibility);
                                     self.loadingMarkers = false;

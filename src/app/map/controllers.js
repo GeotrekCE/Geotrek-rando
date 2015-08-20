@@ -1,14 +1,21 @@
 'use strict';
 
-function MapController($q, $scope, globalSettings, $translate, $rootScope, $state, resultsService, filtersService, mapService, $stateParams) {
+function MapController($q, $scope, globalSettings, $translate, $rootScope, $state, resultsService, filtersService, mapService, boundsService, $stateParams) {
+
+    $scope.currentState = $state.current.name;
 
     function updateMapWithResults(fitBounds) {
         var deferred = $q.defer();
 
+        var bounds = boundsService.getBounds($scope.currentState);
+
         if ($scope.shouldFitBounds) {
             fitBounds = true;
+            $scope.shouldFitBounds = false;
+        } else if (bounds) {
+            fitBounds = false;
+            $rootScope.map.fitBounds(bounds, {animate:false});
         }
-        $scope.shouldFitBounds = false;
 
         $rootScope.elementsLoading ++;
         deferred.resolve(
@@ -188,6 +195,8 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
 
     $scope.$on('$destroy', function (event) {
         var map = $rootScope.map;
+
+        boundsService.setBounds(map.getBounds(), $scope.currentState);
 
         if (map && typeof map.remove === 'function') {
             map.remove();
