@@ -206,8 +206,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     this.createLayerFromElement = function (element, type, elementLocation) {
         var deferred = $q.defer();
-
-        if (type === "geojson") {
+        if (type === "geojson" && element.geometry.type !== 'MultiPoint') {
             var geoStyle = {
                 className:  'layer-category-' + element.properties.category.id + '-' + element.id + ' category-' + element.properties.category.id
             };
@@ -225,6 +224,10 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                 param;
 
             switch (type) {
+            case 'geojson':
+                promise = iconsService.getElementIcon;
+                param = element;
+                break;
             case 'category':
                 promise = iconsService.getElementIcon;
                 param = element;
@@ -670,7 +673,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         // with the current map bounds.
         layer.eachLayer(function (layer) {
             if (layer.options.result) {
-                if (layer.options.result.geometry.type !== 'Point' && !self.treksIconified) {
+                if (layer.options.result.geometry.type !== 'Point' && layer.options.result.geometry.type !== 'MultiPoint' && !self.treksIconified) {
                     if (layer.getBounds && bounds.intersects(layer.getBounds())) {
                         inBounds.push(layer.options.result);
                     }
@@ -824,7 +827,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                     currentCount = counter,
                     type = '';
 
-                if (result.geometry.type !== "Point" && !self.treksIconified) {
+                if (result.geometry.type !== "Point" && result.geometry.type !== 'MultiPoint' && !self.treksIconified) {
                     promiseArray.push(
                         self.createLayerFromElement(result, 'geojson', [])
                             .then(
@@ -916,7 +919,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                                 listeEquivalent.classList.add('hovered');
                                             }
                                         }
-                                        if (result.geometry.type !== "Point") {
+                                        if (result.geometry.type !== "Point" && result.geometry.type !== 'MultiPoint') {
                                             self.highlightPath(result);
                                         }
                                     },
@@ -943,7 +946,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                         $state.go("layout.detail", { catSlug: result.properties.category.slug, slug: result.properties.slug });
                                     }
                                 });
-                                if (result.geometry.type !== "Point") {
+                                if (result.geometry.type !== "Point" && result.geometry.type !== "MultiPoint") {
                                     jQuery(selector).on('mouseenter', function () {
                                         self.highlightPath(result);
                                     });
@@ -1000,7 +1003,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
             this.createElevation(result);
 
-            if (result.geometry.type !== "Point") {
+            if (result.geometry.type !== "Point" && result.geometry.type !== "MultiPoint") {
                 currentLayer = self._treksgeoJsonLayer;
                 type = 'geojson';
                 elementLocation = [];
@@ -1015,7 +1018,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                     function (layer) {
                         currentLayer.addLayer(layer);
                         self._clustersLayer.addLayer(currentLayer);
-                        if (result.geometry.type !== "Point") {
+                        if (result.geometry.type !== "Point" && result.geometry.type !== "MultiPoint") {
                             if (globalSettings.ALWAYS_HIGHLIGHT_TREKS) {
                                 self.highlightPath(result, true, true);
                             }
@@ -1596,6 +1599,7 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
 
         $q.all(promises).then(
             function () {
+
                 var markup = '' +
                     '<div class="marker" data-popup="' + element.properties.name + '">' +
                         markerIcon +

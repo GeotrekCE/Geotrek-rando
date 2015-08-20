@@ -215,7 +215,7 @@ function utilsFactory($sce) {
         var firstPointCoordinates = [];
         if (element.geometry.type === 'Point') {
             firstPointCoordinates = element.geometry.coordinates;
-        } else if (element.geometry.type === 'LineString') {
+        } else if (element.geometry.type === 'LineString' || element.geometry.type === 'MultiPoint') {
             firstPointCoordinates = element.geometry.coordinates[0];
         } else if (element.geometry.type === 'Polygon' || element.geometry.type === 'MultiLineString') {
             firstPointCoordinates = element.geometry.coordinates[0][0];
@@ -231,7 +231,7 @@ function utilsFactory($sce) {
         var lastPointCoordinates = [];
         if (element.geometry.type === 'Point') {
             lastPointCoordinates = element.geometry.coordinates;
-        } else if (element.geometry.type === 'LineString') {
+        } else if (element.geometry.type === 'LineString' || element.geometry.type === 'MultiPoint') {
             var nbPts = element.geometry.coordinates.length;
             lastPointCoordinates = element.geometry.coordinates[nbPts - 1];
         } else if (element.geometry.type === 'Polygon' || element.geometry.type === 'MultiLineString') {
