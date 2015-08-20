@@ -11,7 +11,7 @@
                         <div class="checkbox">
                             <i ng-if="activeFilters.categories.indexOf(category.id) > -1" class="fa fa-check"></i>    
                         </div>
-                        <span>{{::category.label}}</span>
+                        <span>{{category.label}}</span>
                     </div>
                     <div class="close-menu" ng-click="closeCategoryMenu(category)">
                         <span>X</span>
@@ -38,8 +38,8 @@
 
                     <div class="slider-container" collapse="!difficultyIsCollapsed">
                         <rzslider rz-slider-floor="activeRangeValues[category.id + '_difficulty'].floor" rz-slider-ceil="activeRangeValues[category.id + '_difficulty'].ceil" rz-slider-model="activeRangeValues[category.id + '_difficulty'].min" rz-slider-high="activeRangeValues[category.id + '_difficulty'].max" rz-slider-step="1" rz-slider-show-ticks="true"></rzslider>
-                        <label class="min-label">{{::category.difficulty.values[0].label}}</label>
-                        <label class="max-label">{{::category.difficulty.values[category.difficulty.values.length - 1].label}}</label>
+                        <label class="min-label">{{category.difficulty.values[0].label}}</label>
+                        <label class="max-label">{{category.difficulty.values[category.difficulty.values.length - 1].label}}</label>
                     </div>
                 </div>
 
@@ -62,8 +62,8 @@
                     </div>
                     <div class="slider-container" collapse="!durationIsCollapsed">
                         <rzslider rz-slider-floor="activeRangeValues[category.id + '_duration'].floor" rz-slider-ceil="activeRangeValues[category.id + '_duration'].ceil" rz-slider-model="activeRangeValues[category.id + '_duration'].min" rz-slider-high="activeRangeValues[category.id + '_duration'].max" rz-slider-step="1" rz-slider-show-ticks="true"></rzslider>
-                        <label class="min-label">{{::category.duration.values[0].label}}</label>
-                        <label class="max-label">{{::category.duration.values[category.duration.values.length - 1].label}}</label>
+                        <label class="min-label">{{category.duration.values[0].label}}</label>
+                        <label class="max-label">{{category.duration.values[category.duration.values.length - 1].label}}</label>
                     </div>
                 </div>
 
@@ -87,8 +87,8 @@
                     <div class="slider-container" collapse="!ascentIsCollapsed">
                         <rzslider rz-slider-floor="activeRangeValues[category.id + '_ascent'].floor" rz-slider-ceil="activeRangeValues[category.id + '_ascent'].ceil" rz-slider-model="activeRangeValues[category.id + '_ascent'].min" rz-slider-high="activeRangeValues[category.id + '_ascent'].max" rz-slider-step="1" rz-slider-show-ticks="true"></rzslider>
 
-                        <label class="min-label">{{::category.ascent.values[0].label}}</label>
-                        <label class="max-label">{{::category.ascent.values[category.ascent.values.length - 1].label}}</label>
+                        <label class="min-label">{{category.ascent.values[0].label}}</label>
+                        <label class="max-label">{{category.ascent.values[category.ascent.values.length - 1].label}}</label>
                     </div>
                 </div>
 
@@ -111,14 +111,14 @@
                     </div>
                     <div class="slider-container" collapse="!lengthIsCollapsed">
                         <rzslider rz-slider-floor="activeRangeValues[category.id + '_eLength'].floor" rz-slider-ceil="activeRangeValues[category.id + '_eLength'].ceil" rz-slider-model="activeRangeValues[category.id + '_eLength'].min" rz-slider-high="activeRangeValues[category.id + '_eLength'].max" rz-slider-step="1" rz-slider-show-ticks="true"></rzslider>
-                        <label class="min-label">{{::category.eLength.values[0].label}}</label>
-                        <label class="max-label">{{::category.eLength.values[category.eLength.values.length - 1].label}}</label>
+                        <label class="min-label">{{category.eLength.values[0].label}}</label>
+                        <label class="max-label">{{category.eLength.values[category.eLength.values.length - 1].label}}</label>
                     </div>
                 </div>
 
                 <div ng-if="category.type1 && category.type1.values.length > 0" class="selector type1" ng-class="{empty: category.type1.values.length === 0, opened: type1IsCollapsed}">
                     <span ng-click="type1IsCollapsed = !type1IsCollapsed" class="filter-title">
-                        <span>{{::category.type1_label}}</span>
+                        <span>{{category.type1_label}}</span>
                         <span class="more-or-less">
                             <div class="bar"></div>
                             <div class="bar"></div>
@@ -129,10 +129,10 @@
                             <input type="checkbox" id="type1-{{::type1.id}}" ng-click="toogleCategoryFilter(category.id, 'type1', type1.id)" ng-checked="activeFilters[category.id + '_type1'].indexOf(type1.id.toString()) > -1"/>
                             <label for="type1-{{::type1.id}}">
                                 <div class="checkbox">
-                                    <i ng-if="activeFilters[category.id + '_type1'].indexOf(type1.id.toString()) > -1" class="fa fa-check"></i>    
+                                    <i ng-if="activeFilters[category.id + '_type1'].indexOf(type1.id.toString()) > -1" class="fa fa-check"></i>
                                 </div>
-                                <span ng-if="type1.name">{{::type1.name}}</span>
-                                <span ng-if="type1.label">{{::type1.label}}</span>
+                                <span ng-if="type1.name">{{type1.name}}</span>
+                                <span ng-if="type1.label">{{type1.label}}</span>
                             </label>
                         </div>
                     </div>
@@ -140,7 +140,7 @@
 
                 <div ng-if="category.type2 && category.type2.values.length > 0" class="selector type2" ng-class="{empty: category.type2.values.length === 0, opened: type2IsCollapsed}">
                     <span ng-click="type2IsCollapsed = !type2IsCollapsed" class="filter-title">
-                        <span>{{::category.type2_label}}</span>
+                        <span>{{category.type2_label}}</span>
                         <span class="more-or-less">
                             <div class="bar"></div>
                             <div class="bar"></div>
@@ -153,8 +153,8 @@
                                 <div class="checkbox">
                                     <i ng-if="activeFilters[category.id + '_type2'].indexOf(type2.id.toString()) > -1" class="fa fa-check"></i>    
                                 </div>
-                                <span ng-if="type2.name">{{::type2.name}}</span>
-                                <span ng-if="type2.label">{{::type2.label}}</span>
+                                <span ng-if="type2.name">{{type2.name}}</span>
+                                <span ng-if="type2.label">{{type2.label}}</span>
                             </label>
                         </div>
                     </div>
@@ -175,7 +175,7 @@
                                 <div class="checkbox">
                                     <i ng-if="activeFilters[category.id + '_route'].indexOf(route.id.toString()) > -1" class="fa fa-check"></i>    
                                 </div>
-                                <span>{{::route.label}}</span>
+                                <span>{{route.label}}</span>
                             </label>
                         </div>
                     </div>
