@@ -49,9 +49,8 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                     .then(
                         function (trEvents) {
                             _.forEach(trEvents.features, function (trEvent) {
-                                var currentDate = new Date();
+                                var currentDate = new Date().toISOString().substr(0, 10);
                                 var eventDate = trEvent.properties.end_date || trEvent.properties.begin_date;
-                                eventDate = new Date(eventDate);
                                 if (trEvent.properties.published && eventDate > currentDate) {
                                     results.push(trEvent);
                                 }
