@@ -1624,7 +1624,27 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
 
 }
 
+function boundsService() {
+    this.bounds = {};
+
+    this.setBounds = function (latLngBounds, context) {
+        console.log('serviceCall:setBounds (' + context + ')');
+        this.bounds[context] = latLngBounds;
+        return this.getBounds(context);
+    };
+
+    this.getBounds = function (context) {
+        if (context) {
+            return this.bounds[context];
+        } else {
+            return this.bounds;
+        }
+    };
+
+}
+
 module.exports = {
     mapService: mapService,
-    iconsService: iconsService
+    iconsService: iconsService,
+    boundsService: boundsService
 };
