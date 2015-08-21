@@ -137,12 +137,20 @@ Regularly (once a week), you can also notify Google that your sitemap changed, u
     30 1 * * 0  cd /path/to/application && /usr/bin/make ping_google url=http://rando.server.com
 
 
-For *Geotrek-mobile*, the server needs to build the ressource files (tiles,
-data, media) for each trek. Add the following schedule task :
+For *Geotrek-mobile*, the server needs to build the ressource files (tiles, datas, medias) for each trek. 
 
 ::
 
-    15 * * * *  cd /path/to/application && bin/python ./manage.py build_mobile_data http://rando.server.com
+    bin/python ./manage.py build_mobile_data http://rando.server.com
+
+
+To schedule this task (e.g. every night at 2PM) :
+
+::
+
+    0 2 * * *  cd /path/to/application && bin/python ./manage.py build_mobile_data http://rando.server.com
+
+We don't know when tiles change or not. So ``build_mobile_data`` always build tiles. But you can add ``--no-tiles`` option to skip this step in your daily cron and build tiles manually from time to time.
 
 
 ===============
