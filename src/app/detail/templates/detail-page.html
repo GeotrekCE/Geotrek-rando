@@ -15,7 +15,7 @@
             <div class="intro">
                 <div class="pictos">
                     <ul>
-                        
+
                         <li ng-if="result.properties.category.label" class="category-label">
                             <div class="caption">
                                 <h3>{{'CATEGORY' | translate}}</h3>
@@ -29,7 +29,7 @@
                             </div>
                         </li>
                         <li ng-if="result.properties.category.label" class="divider"></li>
-                        
+
                         <li ng-if="result.properties.type1.length > 0" class="type1">
                             <div class="caption">
                                 <h3>{{::result.properties.category.type1_label}}</h3>
@@ -43,7 +43,7 @@
                             </div>
                         </li>
                         <li ng-if="result.properties.type1.length > 0" class="divider"></li>
-                        
+
                         <li ng-if="result.properties.type2.length > 0" class="type2">
                             <div class="caption">
                                 <h3>{{::result.properties.category.type2_label}}</h3>
@@ -57,7 +57,7 @@
                             </div>
                         </li>
                         <li ng-if="result.properties.type2.length > 0" class="divider"></li>
-                       
+
                         <li>
                             <div class="caption">
                                 <h3>{{'INFORMATIONS' | translate}}</h3>
@@ -173,6 +173,10 @@
                         <h5>{{'WEBSITE' | translate}}</h5>
                         <span><a href="{{result.properties.website}}" target="_blank" title="{{::result.properties.website}}">{{::result.properties.website}}</a></span>
                     </div>
+                    <div ng-if="result.properties.email" class="email">
+                        <h5>{{'EMAIL' | translate}}</h5>
+                        <span><a href="mailto:{{::result.properties.email}}" target="_blank" title="{{::result.properties.email}}">{{::result.properties.email}}</a></span>
+                    </div>
                     <div ng-if="result.properties.booking" class="booking">
                         <h5>{{'BOOKING' | translate}}</h5>
                         <span>{{::result.properties.booking}}</span>
@@ -212,7 +216,7 @@
                     <div ng-bind-html="sanitizeData(result.properties.advice, true)"></div>
                 </div>
                 <div ng-if="result.properties.altimetric_profile" class="profile">
-                            
+
                 </div>
                 <div ng-if="result.properties.disabled_infrastructure" class="disabled-infrastructure">
                     <i class="fa fa-wheelchair"></i>
@@ -275,7 +279,6 @@
                     <ul>
                         <li class="card">
                             <div class="contact" ng-if="result.properties.contact" ng-bind-html="sanitizeData(result.properties.contact, true)"></div>
-                            <a ng-if="result.properties.email" href="mailto:{{::result.properties.email}}" target="_blank">{{::result.properties.email}}</a>
                         </li>
                     </ul>
                 </div>
@@ -322,7 +325,7 @@
 
                 <div ng-if="result.properties.relationships.has_common_departure.length > 0 || result.properties.relationships.has_common_edge.length > 0 || result.properties.relationships.is_circuit_step.length > 0" class="related-treks">
                     <h3><i class="fa fa-plus"></i>{{ 'RELATED_TREKS' | translate}}</h3>
-                    
+
                     <div ng-if="result.properties.relationships.has_common_departure.length > 0">
                         <h4>{{'HAS_COMMON_DEPARTURE' | translate}}</h4>
                         <ul>

@@ -162,7 +162,10 @@ msgid "DATES"
 msgstr "Dates:"
 
 msgid "WEBSITE"
-msgstr "Website :"
+msgstr "Website:"
+
+msgid "EMAIL"
+msgstr "E-mail:"
 
 msgid "MEETING_POINT"
 msgstr "Meeting point:"

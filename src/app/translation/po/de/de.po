@@ -161,6 +161,9 @@ msgstr "Datum:"
 msgid "WEBSITE"
 msgstr "Internetseite:"
 
+msgid "EMAIL"
+msgstr "Email:"
+
 msgid "MEETING_POINT"
 msgstr "Treffpunkt:"
 
