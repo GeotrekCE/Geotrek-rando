@@ -612,23 +612,20 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             return self.map;
         }
 
-        function getBounds (layers) {
-            var bounds;
-
-            if (!(layers instanceof Array)) {
-                layers = [layers];
-            }
-
-            layers.forEach(function (layer) {
-                var currentBounds = layer.getBounds();
-                if (bounds && bounds.extend) {
-                    bounds.extend(currentBounds);
-                } else {
-                    bounds = currentBounds;
-                }
-            });
-            return bounds;
+        if (!(layers instanceof Array)) {
+            layers = [layers];
         }
+
+        var bounds;
+
+        layers.forEach(function (layer) {
+            var currentBounds = layer.getBounds();
+            if (bounds && bounds.extend) {
+                bounds.extend(currentBounds);
+            } else {
+                bounds = currentBounds;
+            }
+        });
 
         var fitBoundsOptions = {
             padding: !isFinite(padding) ? 0 : Math.abs(padding),
@@ -636,7 +633,11 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             animate: false
         };
 
-        return self.map.fitBounds(getBounds(layers), fitBoundsOptions);
+        if (bounds.isValid()) {
+            return self.map.fitBounds(bounds, fitBoundsOptions);
+        } else {
+            return self.map;
+        }
     };
 
     this.highlightPath = function (element, permanent, detailView) {
@@ -961,9 +962,11 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
                                 if (currentCount === _.size(results)) {
                                     self.map.invalidateSize();
-                                    if (fitBounds) {
+
+                                    if (fitBounds === true) {
                                         self.updateBounds([self._clustersLayer]);
                                     }
+
                                     self.resultsVisibility();
                                     self.map.on('moveend', self.resultsVisibility);
                                     self.loadingMarkers = false;
@@ -1624,7 +1627,27 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
 
 }
 
+function boundsService() {
+    this.bounds = {};
+
+    this.setBounds = function (latLngBounds, context) {
+        console.log('serviceCall:setBounds (' + context + ')');
+        this.bounds[context] = latLngBounds;
+        return this.getBounds(context);
+    };
+
+    this.getBounds = function (context) {
+        if (context) {
+            return this.bounds[context];
+        } else {
+            return this.bounds;
+        }
+    };
+
+}
+
 module.exports = {
     mapService: mapService,
-    iconsService: iconsService
+    iconsService: iconsService,
+    boundsService: boundsService
 };
