@@ -18,7 +18,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     self.initFilters = function () {
         var deferred = $q.defer(),
             promises = [];
- 
+
         if (!self.filters) {
             self.filters = angular.copy(activeFiltersModel);
         }
@@ -63,7 +63,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
                     }
                 }
             );
- 
+
         return deferred.promise;
     };
 
@@ -105,7 +105,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
                 if (typeof defaultActiveCategories !== 'object') {
                     defaultActiveCategories = [defaultActiveCategories];
                 }
- 
+
                 if (defaultActiveCategories.indexOf(category.id.toString()) > -1 && activeFiltersModel.categories.indexOf(category.id.toString()) === -1) {
                     activeFiltersModel.categories.push(category.id);
                 }
@@ -144,7 +144,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
                 });
             }
         }
- 
+
         return false;
     };
 
@@ -159,7 +159,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     //
 
     self.initActiveFilter = function (forceRefresh) {
-        
+
         if (!self.activeFilters || forceRefresh) {
             self.activeFilters = angular.copy(activeFiltersModel);
             if (angular.equals($location.search(), {})) {
@@ -223,7 +223,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
 
     // Tag Filters
     //
-    
+
     self.getTagFilters = function () {
         var tagFilters = [],
             finalArray = [];
@@ -376,7 +376,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             structureFilter = true;
 
         var filters = self.activeFilters;
-        
+
         categoriesFilter = self.matchByCategories(element, filters);
 
         if (filters.themes.length > 0) {
