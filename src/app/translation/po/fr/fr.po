@@ -46,6 +46,12 @@ msgstr "Dénivelé :"
 msgid "LENGTH"
 msgstr "Distance :"
 
+msgid "DATE_FILTER_START"
+msgstr "Date de début"
+
+msgid "DATE_FILTER_END"
+msgstr "Date de fin"
+
 msgid "ALL"
 msgstr "Toutes"
 

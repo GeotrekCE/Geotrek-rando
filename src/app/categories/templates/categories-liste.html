@@ -116,6 +116,42 @@
                     </div>
                 </div>
 
+                <div ng-if="category.type === 'events'" class="selector date" ng-class="{opened: startDateIsCollapsed}">
+                    <span ng-click="startDateIsCollapsed = !startDateIsCollapsed" class="filter-title">
+                        <span translate="DATE_FILTER_START"></span>
+                        <span class="more-or-less">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </span>
+                    </span>
+                    <div class="choices" collapse="!startDateIsCollapsed">
+                        <div class="date-start form-group">
+                            <div class="date-picker">
+                                <input type="date" class="input-group" ng-model="datepicker.begining.value">
+                                <datepicker ng-model="datepicker.begining.value" show-weeks="false" format="'yyyy-MM-dd'" class="well well-sm"></datepicker>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-if="category.type === 'events'" class="selector date" ng-class="{opened: endDateIsCollapsed}">
+                    <span ng-click="endDateIsCollapsed = !endDateIsCollapsed" class="filter-title">
+                        <span translate="DATE_FILTER_END"></span>
+                        <span class="more-or-less">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </span>
+                    </span>
+                    <div class="choices" collapse="!endDateIsCollapsed">
+                        <div class="date-start form-group">
+                            <div class="date-picker">
+                                <input type="date" class="input-group" ng-model="datepicker.ending.value">
+                                <datepicker ng-model="datepicker.ending.value" show-weeks="false" format="'yyyy-MM-dd'" class="well well-sm"></datepicker>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div ng-if="category.type1 && category.type1.values.length > 0" class="selector type1" ng-class="{empty: category.type1.values.length === 0, opened: type1IsCollapsed}">
                     <span ng-click="type1IsCollapsed = !type1IsCollapsed" class="filter-title">
                         <span>{{category.type1_label}}</span>

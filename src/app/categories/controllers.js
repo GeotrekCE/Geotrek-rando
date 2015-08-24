@@ -2,7 +2,15 @@
 
 function CategoriesListeController($scope, $rootScope, $location, $timeout,  utilsFactory, globalSettings, categoriesService, filtersService) {
 
-    var initRangeFiltersEvent = $rootScope.$on('updateFilters', initRangeFilters);
+    var initFiltersEvent = $rootScope.$on('updateFilters', initFilters);
+
+    function initFilters() {
+        initDatePickers();
+        initRangeFilters();
+
+        //disable event
+        initFiltersEvent();
+    }
 
     function updateFiltersTags() {
         $rootScope.activeFiltersTags = filtersService.getTagFilters();
@@ -12,6 +20,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
         categoriesService.getNonExcludedCategories(forceRefresh)
             .then(
                 function (categories) {
+                    console.log(categories);
                     $scope.categories = categories;
                 }
             );
@@ -57,7 +66,6 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
     }
 
     function initRangeFilters() {
-        initRangeFiltersEvent();
         var categories = $scope.categories;
 
         $scope.activeRangeValues = {};
@@ -79,7 +87,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
                 $timeout.cancel($scope.rangeUpdate);
             }
             $scope.rangeUpdate = $timeout(function () {
-                $scope.updateActiveRangeFilters(); 
+                $scope.updateActiveRangeFilters();
             }, 300);
         }, true);
 
@@ -96,6 +104,43 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
             $scope.activeRangeValues = rangeFilters;
         });
     }
+
+    function initDatePickers() {
+        $scope.datepicker = {
+            begining: {
+                opened: false,
+                value: new Date()
+            },
+            ending: {
+                opened: false,
+                value: null
+            }
+        };
+
+        // $scope.$watch('datepicker.begining.value', function (newVal) {
+        //     console.log(Date.parse(newVal));
+        //     console.log(newVal);
+        //     if (!isNaN(Date.parse(newVal))) {
+        //         $scope.datepicker.begining.value = new Date(newVal).toISOString().substr(0, 10);
+        //     }
+        // });
+    }
+
+    $scope.checkDateValidity = function (dateValue) {
+        if (isNaN(Date.parse(dateValue))) {
+            return null;
+        }
+    };
+
+    $scope.toggleDatePickder = function (picker) {
+        console.log(picker);
+        console.log($scope.datepicker[picker].opened);
+        if ($scope.datepicker[picker]) {
+            $scope.datepicker[picker].opened = !$scope.datepicker[picker].opened;
+        }
+        console.log($scope.datepicker[picker].opened);
+        console.log($scope.datepicker[picker]);
+    };
 
     $scope.updateActiveRangeFilters = function () {
         var categoriesRangeFilters = $scope.activeRangeValues;
@@ -158,7 +203,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
             if (indexOfFilter > -1) {
                 categoryFilter.splice(indexOfFilter, 1);
             } else {
-                $rootScope.activeFilters[categoryId + '_' + filterType].push(filterId.toString());    
+                $rootScope.activeFilters[categoryId + '_' + filterType].push(filterId.toString());
             }
         } else {
             $rootScope.activeFilters[categoryId + '_' + filterType] = [filterId.toString()];
