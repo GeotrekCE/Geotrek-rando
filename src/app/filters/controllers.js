@@ -62,6 +62,41 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
         $rootScope.$broadcast('updateFilters');
     };
 
+    $scope.isSVG = utilsFactory.isSVG;
+
+    initFiltersView();
+
+    var rootScopeEvents = [
+        $rootScope.$on('switchGlobalLang', function () {
+            initFiltersView();
+        })
+    ];
+
+    $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
+
+}
+
+function FiltersTagsController($rootScope, $scope, globalSettings, filtersService) {
+
+    function updateFiltersTags() {
+        $rootScope.activeFiltersTags = filtersService.getTagFilters();
+    }
+
+    $scope.propagateActiveFilters = function () {
+        filtersService.updateActiveFilters($rootScope.activeFilters);
+        if (globalSettings.SHOW_FILTERS_ON_MAP) {
+            updateFiltersTags();
+        }
+        $rootScope.$broadcast('updateFilters');
+    };
+
+    $scope.resetFilters = function () {
+        filtersService.resetActiveFilters();
+        $rootScope.activeFilters = filtersService.getActiveFilters();
+        $rootScope.$broadcast('resetRange', {filter: 'all'});
+        $scope.propagateActiveFilters();
+    };
+
     $scope.removeFilterByTag = function (tagLabel, tagValue) {
         var activeFilters = $rootScope.activeFilters;
 
@@ -86,28 +121,9 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
         $rootScope.activeFilters = activeFilters;
         $scope.propagateActiveFilters();
     };
-
-    $scope.resetFilters = function () {
-        filtersService.resetActiveFilters();
-        $rootScope.activeFilters = filtersService.getActiveFilters();
-        $rootScope.$broadcast('resetRange', {filter: 'all'});
-        $scope.propagateActiveFilters();
-    };
-
-    $scope.isSVG = utilsFactory.isSVG;
-
-    initFiltersView();
-
-    var rootScopeEvents = [
-        $rootScope.$on('switchGlobalLang', function () {
-            initFiltersView();
-        })
-    ];
-
-    $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
-
 }
 
 module.exports = {
-    GlobalFiltersController: GlobalFiltersController
+    GlobalFiltersController: GlobalFiltersController,
+    FiltersTagsController: FiltersTagsController
 };

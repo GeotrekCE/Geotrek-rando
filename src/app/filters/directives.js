@@ -16,7 +16,7 @@ function filtersTagsDirective() {
         replace: true,
         scope: true,
         template: require('./templates/tags-filters.html'),
-        controller: 'GlobalFiltersController'
+        controller: 'FiltersTagsController'
     };
 }
 
