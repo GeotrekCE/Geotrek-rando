@@ -17,6 +17,7 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
                 function (filters) {
                     $scope.filters = filters;
                     $rootScope.activeFilters = filtersService.getActiveFilters();
+                    console.log($rootScope.activeFilters);
                     if (globalSettings.SHOW_FILTERS_ON_MAP) {
                         updateFiltersTags();
                     }
@@ -55,6 +56,7 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
     };
 
     $scope.propagateActiveFilters = function () {
+        console.log($rootScope.activeFilters);
         filtersService.updateActiveFilters($rootScope.activeFilters);
         if (globalSettings.SHOW_FILTERS_ON_MAP) {
             updateFiltersTags();
