@@ -20,7 +20,6 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
         categoriesService.getNonExcludedCategories(forceRefresh)
             .then(
                 function (categories) {
-                    console.log(categories);
                     $scope.categories = categories;
                 }
             );
