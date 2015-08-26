@@ -18,7 +18,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     self.initFilters = function () {
         var deferred = $q.defer(),
             promises = [];
- 
+
         if (!self.filters) {
             self.filters = angular.copy(activeFiltersModel);
         }
@@ -63,7 +63,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
                     }
                 }
             );
- 
+
         return deferred.promise;
     };
 
@@ -99,13 +99,21 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
                     newCategory.eLength = category.eLength;
                 }
 
+                if (category.begin_date) {
+                    newCategory.begin_date = null;
+                }
+
+                if (category.end_date) {
+                    newCategory.end_date = null;
+                }
+
                 self.filters.categories.push(newCategory);
 
                 var defaultActiveCategories = globalSettings.DEFAULT_ACTIVE_CATEGORIES;
                 if (typeof defaultActiveCategories !== 'object') {
                     defaultActiveCategories = [defaultActiveCategories];
                 }
- 
+
                 if (defaultActiveCategories.indexOf(category.id.toString()) > -1 && activeFiltersModel.categories.indexOf(category.id.toString()) === -1) {
                     activeFiltersModel.categories.push(category.id);
                 }
@@ -144,7 +152,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
                 });
             }
         }
- 
+
         return false;
     };
 
@@ -159,7 +167,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     //
 
     self.initActiveFilter = function (forceRefresh) {
-        
+
         if (!self.activeFilters || forceRefresh) {
             self.activeFilters = angular.copy(activeFiltersModel);
             if (angular.equals($location.search(), {})) {
@@ -201,15 +209,22 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             self.activeFilters[filterName] = [];
         }
 
-        if (typeof filterValues === 'string') {
-            filterValues = [filterValues];
+
+        if (filterName === 'search' || filterName.match(/^\S*(begin_date|end_date)$/i)) {
+            self.activeFilters[filterName] = filterValues;
+        } else {
+            if (typeof filterValues === 'string') {
+                filterValues = [filterValues];
+            }
+
+            angular.forEach(filterValues, function (filterId) {
+                if (self.activeFilters[filterName].indexOf(filterId) === -1) {
+                    self.activeFilters[filterName].push(filterId);
+                }
+            });
         }
 
-        angular.forEach(filterValues, function (filterId) {
-            if (self.activeFilters[filterName].indexOf(filterId) === -1) {
-                self.activeFilters[filterName].push(filterId);
-            }
-        });
+
     };
 
     self.getActiveFilters = function () {
@@ -223,7 +238,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
 
     // Tag Filters
     //
-    
+
     self.getTagFilters = function () {
         var tagFilters = [],
             finalArray = [];
@@ -376,7 +391,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             structureFilter = true;
 
         var filters = self.activeFilters;
-        
+
         categoriesFilter = self.matchByCategories(element, filters);
 
         if (filters.themes.length > 0) {
@@ -426,13 +441,17 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     };
 
     self.matchCategorySubFilters = function (element, filters) {
-        var subFilters = self.categoryHasSubfilters(element.properties.category.id, filters);
+        var subFilters = self.getCategorySubfilters(element.properties.category.id, filters);
 
         if (_.size(subFilters) > 0) {
             var subfiltersResults = [];
             angular.forEach(subFilters, function (subFilter, subFilterName) {
                 if (filtersByInterval.indexOf(subFilterName) > -1) {
                     subfiltersResults.push(self.matchByRange(element.properties, subFilter, subFilterName));
+                } else if (subFilterName === 'begin_date') {
+                    subfiltersResults.push(self.matchByDateBegin(element.properties.begin_date, subFilter));
+                } else if (subFilterName === 'end_date') {
+                    subfiltersResults.push(self.matchByDateEnd(element.properties.end_date, subFilter));
                 } else {
                     subfiltersResults.push(self.matchById(element.properties, subFilter, subFilterName));
                 }
@@ -449,13 +468,13 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         }
     };
 
-    self.categoryHasSubfilters = function (elementCategoryId, filters) {
+    self.getCategorySubfilters = function (elementCategoryId, filters) {
         var catSubFilters = {};
         angular.forEach(filters, function (filter, filterName) {
             // categories subfilters are composed like catId-subFilterName
             if (filterName.indexOf('_') > -1) {
                 var categoryId = filterName.split('_')[0],
-                    filterKey = filterName.split('_')[1];
+                    filterKey = filterName.substr(filterName.indexOf('_') + 1);
 
                 if (categoryId.toString() === elementCategoryId.toString() && filter && filter.length > 0) {
 
@@ -469,6 +488,20 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         });
 
         return catSubFilters;
+    };
+
+    self.matchByDateBegin = function (elementDate, filterDate) {
+        if (Date.parse(elementDate) >= Date.parse(filterDate)) {
+            return true;
+        }
+        return false;
+    };
+
+    self.matchByDateEnd = function (elementDate, filterDate) {
+        if (Date.parse(elementDate) <= Date.parse(filterDate)) {
+            return true;
+        }
+        return false;
     };
 
     self.matchByRange = function (element, filters, name) {

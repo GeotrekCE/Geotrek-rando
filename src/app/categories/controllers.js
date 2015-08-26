@@ -2,7 +2,15 @@
 
 function CategoriesListeController($scope, $rootScope, $location, $timeout,  utilsFactory, globalSettings, categoriesService, filtersService) {
 
-    var initRangeFiltersEvent = $rootScope.$on('updateFilters', initRangeFilters);
+    var initFiltersEvent = $rootScope.$on('updateFilters', initFilters);
+
+    function initFilters() {
+        initDatePickers();
+        initRangeFilters();
+
+        //disable event
+        initFiltersEvent();
+    }
 
     function updateFiltersTags() {
         $rootScope.activeFiltersTags = filtersService.getTagFilters();
@@ -57,7 +65,6 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
     }
 
     function initRangeFilters() {
-        initRangeFiltersEvent();
         var categories = $scope.categories;
 
         $scope.activeRangeValues = {};
@@ -79,7 +86,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
                 $timeout.cancel($scope.rangeUpdate);
             }
             $scope.rangeUpdate = $timeout(function () {
-                $scope.updateActiveRangeFilters(); 
+                $scope.updateActiveRangeFilters();
             }, 300);
         }, true);
 
@@ -97,9 +104,53 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
         });
     }
 
-    $scope.updateActiveRangeFilters = function () {
-        var categoriesRangeFilters = $scope.activeRangeValues;
+    function initDateValues() {
+        var categories = $scope.categories;
 
+        for (var i = categories.length - 1; i >= 0; i--) {
+            var category = categories[i];
+
+            angular.forEach(category, function (property, propertyName) {
+
+                var filterName = category.id + '_' + propertyName;
+                var activeFilter = $scope.activeFilters[filterName];
+
+                if (activeFilter && (propertyName === 'begin_date' || propertyName === 'end_date')) {
+                    $scope.activeDateFilters[filterName] = new Date(activeFilter);
+                }
+            });
+        }
+    }
+
+    function initDatePickers() {
+        $scope.activeDateFilters = {};
+
+        initDateValues();
+
+        $scope.$watch('activeDateFilters', function () {
+            $scope.updateActiveDateFilters();
+        }, true);
+    }
+
+    $scope.disableDateFilter = function (dateFilterName) {
+        $scope.activeDateFilters[dateFilterName] = null;
+
+        $scope.updateActiveDateFilters();
+    };
+
+    $scope.updateActiveDateFilters = function () {
+        angular.forEach($scope.activeDateFilters, function (filterValues, filterName) {
+            if (filterValues) {
+                $rootScope.activeFilters[filterName] = filterValues.toISOString();
+            } else {
+                $rootScope.activeFilters[filterName] = null;
+            }
+        });
+
+        $scope.propagateActiveFilters();
+    };
+
+    $scope.updateActiveRangeFilters = function () {
         angular.forEach($scope.activeRangeValues, function (filterValues, filterName) {
             var minIndex = filterValues.min,
                 maxIndex = filterValues.max;
@@ -158,7 +209,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
             if (indexOfFilter > -1) {
                 categoryFilter.splice(indexOfFilter, 1);
             } else {
-                $rootScope.activeFilters[categoryId + '_' + filterType].push(filterId.toString());    
+                $rootScope.activeFilters[categoryId + '_' + filterType].push(filterId.toString());
             }
         } else {
             $rootScope.activeFilters[categoryId + '_' + filterType] = [filterId.toString()];

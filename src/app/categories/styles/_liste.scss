@@ -255,7 +255,7 @@
             .form-group {
                 margin: 0;
                 position: relative;
-                input {
+                input[type="checkbox"], input[type="radio"] {
                     display: block;
                     position: absolute;
                     cursor: pointer;
@@ -283,6 +283,23 @@
                     font-weight: normal;
                     span {
                         vertical-align: middle;
+                    }
+                }
+                .date-picker {
+                    color: $dark-grey;
+                    input {
+                        width: 100%;
+                        padding: 0 10px;
+                    }
+                    input[type='date']::-webkit-calendar-picker-indicator {
+                        display: none;
+                        -webkit-appearance: none;
+                    }
+                    .input-group-addon {
+                        cursor: pointer;
+                    }
+                    table {
+                        margin: auto;
                     }
                 }
             }
