@@ -291,6 +291,13 @@
                         width: 100%;
                         padding: 0 10px;
                     }
+                    input[type='date']::-webkit-calendar-picker-indicator {
+                        display: none;
+                        -webkit-appearance: none;
+                    }
+                    .input-group-addon {
+                        cursor: pointer;
+                    }
                     table {
                         margin: auto;
                     }

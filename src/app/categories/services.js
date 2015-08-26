@@ -154,6 +154,8 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
             pictogram: catInfos.pictogram,
             type1_label: catInfos.type1_label,
             type1: eventsType1,
+            begin_date: null,
+            end_date: null,
             themes: themes,
             cat_class: 'category-' + catInfos.id.toString()
         };

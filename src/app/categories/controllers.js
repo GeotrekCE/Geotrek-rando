@@ -105,22 +105,53 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
         });
     }
 
-    function initDatePickers() {
-        $scope.datepicker = {
-            begining: {
-                opened: false,
-                value: new Date()
-            },
-            ending: {
-                opened: false,
-                value: null
-            }
-        };
+    function initDateValues() {
+        var categories = $scope.categories;
+
+        for (var i = categories.length - 1; i >= 0; i--) {
+            var category = categories[i];
+
+            angular.forEach(category, function (property, propertyName) {
+
+                var filterName = category.id + '_' + propertyName;
+                var activeFilter = $scope.activeFilters[filterName];
+
+                if (activeFilter && (propertyName === 'begin_date' || propertyName === 'end_date')) {
+                    $scope.activeDateFilters[filterName] = new Date(activeFilter);
+                }
+            });
+        }
     }
 
-    $scope.updateActiveRangeFilters = function () {
-        var categoriesRangeFilters = $scope.activeRangeValues;
+    function initDatePickers() {
+        $scope.activeDateFilters = {};
 
+        initDateValues();
+
+        $scope.$watch('activeDateFilters', function () {
+            $scope.updateActiveDateFilters();
+        }, true);
+    }
+
+    $scope.disableDateFilter = function (dateFilterName) {
+        $scope.activeDateFilters[dateFilterName] = null;
+
+        $scope.updateActiveDateFilters();
+    };
+
+    $scope.updateActiveDateFilters = function () {
+        angular.forEach($scope.activeDateFilters, function (filterValues, filterName) {
+            if (filterValues) {
+                $rootScope.activeFilters[filterName] = filterValues.toISOString();
+            } else {
+                $rootScope.activeFilters[filterName] = null;
+            }
+        });
+
+        $scope.propagateActiveFilters();
+    };
+
+    $scope.updateActiveRangeFilters = function () {
         angular.forEach($scope.activeRangeValues, function (filterValues, filterName) {
             var minIndex = filterValues.min,
                 maxIndex = filterValues.max;
