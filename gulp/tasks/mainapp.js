@@ -53,6 +53,13 @@ function browserifyShare() {
         debug: srcMap
     });
 
+    b.transform(partialify);
+
+    b.transform({
+        global: true,
+        mangle: false
+    }, 'uglifyify');
+
     if (watch) {
         // if watch is enable, wrap this bundle inside watchify
         b = watchify(b);
@@ -72,13 +79,6 @@ function browserifyShare() {
 
 function bundleShare(b) {
     bundleLogger.start(outputName);
-
-    b.transform(partialify);
-
-    b.transform({
-        global: true,
-        mangle: false
-    }, 'uglifyify');
 
     return b.bundle()
         .on('error', handleErrors)
