@@ -23,7 +23,7 @@ function FlatPagesController(utilsFactory, flatService, $scope, $state, $rootSco
 
     getPage();
 
-    var rootScopeEvens = [
+    var rootScopeEvents = [
         $rootScope.$on('flatUpdated', function () {
             getPage($scope.flatPage.id);
         })
@@ -53,7 +53,7 @@ function FlatMenuController(flatService, $scope, $rootScope) {
 
     initFlatMenu();
 
-    var rootScopeEvens = [
+    var rootScopeEvents = [
         $rootScope.$on('startSwitchGlobalLang', function () {
             initFlatMenu(true);
         })
