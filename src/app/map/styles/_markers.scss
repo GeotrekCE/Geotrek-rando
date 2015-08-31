@@ -1,6 +1,5 @@
 .leaflet-marker-icon {
     @include marker-coloring();
-    
 }
 
 .double-marker {
@@ -53,11 +52,38 @@
             fill: white;
         }
     }
+    &.service {
+        background: white;
+        width: 30px;
+        height: 30px;
+        // border-radius: 50%;
+        border: 2px solid $services-color;
+        &.popup .marker::before {
+            border-bottom-color: $services-color;
+        }
+        .icon {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 17px;
+            height: 17px;
+            svg, .base {
+                fill: $services-color;
+            }
+        }
+    }
     &:hover, &.hovered {
         z-index: 55555555 !important;
-        .marker {
-            transform: scale(1.2);
-            transform-origin: center bottom;
+        &:not(.service) {
+            .marker {
+                transform: scale(1.2);
+                transform-origin: center bottom;
+            }
+            .icon {
+                top: 3px;
+                // transform: scale(1.2);
+                // transform-origin: center bottom;
+            }
         }
 
         &.popup .marker {
@@ -74,12 +100,6 @@
                 border-right-width: 1rem;
                 border-top-width: 0.7rem;
             }
-        }
-
-        .icon {
-            top: 3px;
-            // transform: scale(1.2);
-            // transform-origin: center bottom;
         }
     }
 }

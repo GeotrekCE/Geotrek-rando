@@ -1,8 +1,6 @@
-/* global $http */
-
 'use strict';
 
-function mapService($q, $state, $resource, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, iconsService) {
+function mapService($q, $state, $resource, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService) {
 
     var self = this;
 
@@ -148,6 +146,28 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                         }
                     )
             );
+
+            promises.push(
+                servicesService.getServicesFromElement(element.id)
+                    .then(
+                        function (services) {
+                            var counter = 0;
+                            _.forEach(services.features, function (service) {
+                                var poiLocation = utilsFactory.getStartPoint(service);
+                                self.createLayerFromElement(service, 'service', poiLocation)
+                                    .then(
+                                        function (marker) {
+                                            var selector = '#service-' + service.id.toString();
+
+                                            counter++;
+                                            console.log(counter);
+                                            self._servicesMarkersLayer.addLayer(marker);
+                                        }
+                                    );
+                            });
+                        }
+                    )
+            );
         }
 
         $q.all(promises)
@@ -235,6 +255,11 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
             case 'poi':
                 promise = iconsService.getPOIIcon;
+                param = element;
+                break;
+
+            case 'service':
+                promise = iconsService.getServiceIcon;
                 param = element;
                 break;
 
@@ -1111,11 +1136,13 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         this._poisMarkersLayer = self.createPOIsLayer();
         this._nearMarkersLayer = self.createTouristicLayer();
         this._infosMarkersLayer = self.createLayer();
+        this._servicesMarkersLayer = self.createLayer();
 
         this.map.addLayer(this._clustersLayer);
         this.map.addLayer(this._poisMarkersLayer);
         this.map.addLayer(this._nearMarkersLayer);
         this.map.addLayer(this._infosMarkersLayer);
+        this.map.addLayer(this._servicesMarkersLayer);
 
         return this.map;
 
@@ -1123,7 +1150,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
 }
 
-function iconsService($resource, $q, globalSettings, categoriesService, poisService, utilsFactory) {
+function iconsService($resource, $q, $http, globalSettings, categoriesService, poisService, servicesService, utilsFactory) {
 
     var self = this;
 
@@ -1175,6 +1202,13 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
             labelAnchor: [],
             className: ''
         },
+        service: {
+            iconUrl: '',
+            iconSize: [],
+            iconAnchor: [],
+            labelAnchor: [],
+            className: ''
+        },
         category_base: globalSettings.MARKER_BASE_ICON || {
             iconUrl: '/images/map/category_base.svg',
             iconSize: [34, 48],
@@ -1186,6 +1220,12 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
             iconSize: [34, 48],
             iconAnchor: [17, 48],
             labelAnchor: [17, 17]
+        },
+        service_base: globalSettings.SERVICE_BASE_ICON || {
+            iconUrl: '',
+            iconSize: [30, 30],
+            iconAnchor: [15, 15],
+            labelAnchor: [15, 15]
         },
     };
 
@@ -1328,6 +1368,79 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
                 .then(
                     function (icons) {
                         deferred.resolve(icons[poiTypeId]);
+                    }
+                );
+        }
+
+        return deferred.promise;
+    };
+
+    this.getServiceTypesIcons = function (forceRefresh) {
+        var deferred = $q.defer();
+
+        if (self.servicesTypesIcons && !forceRefresh) {
+            deferred.resolve(self.servicesTypesIcons);
+        } else {
+
+            servicesService.getServices(forceRefresh)
+                .then(
+                    function (services) {
+                        var counter = 0;
+                        _.forEach(services.features, function (service) {
+                            if (!self.servicesTypesIcons) {
+                                self.servicesTypesIcons = {};
+                            }
+                            counter++;
+                            var currentCounter = counter;
+                            if (!utilsFactory.isSVG(service.properties.type.pictogram)) {
+                                self.servicesTypesIcons[service.properties.type.id] = {
+                                    markup: service.properties.type.pictogram,
+                                    isSVG: false
+                                };
+                                if (currentCounter === _.size(services.features)) {
+                                    deferred.resolve(self.servicesTypesIcons);
+                                }
+                            } else {
+                                $http.get(service.properties.type.pictogram)
+                                    .success(
+                                        function (icon) {
+                                            self.servicesTypesIcons[service.properties.type.id] = {
+                                                markup: icon.toString(),
+                                                isSVG: true
+                                            };
+                                            if (currentCounter === _.size(services.features)) {
+                                                deferred.resolve(self.servicesTypesIcons);
+                                            }
+                                        }
+                                    ).error(
+                                        function () {
+                                            self.servicesTypesIcons[service.properties.type.id] = {
+                                                markup: '',
+                                                isSVG: true
+                                            };
+                                            if (currentCounter === _.size(services)) {
+                                                deferred.resolve(self.servicesTypesIcons);
+                                            }
+                                        }
+                                    );
+                            }
+                        });
+                    }
+                );
+        }
+
+        return deferred.promise;
+    };
+
+    this.getAServiceTypeIcon = function (serviceTypeId, forceRefresh) {
+        var deferred = $q.defer();
+        if (self.servicesTypesIcons && !forceRefresh) {
+            deferred.resolve(self.servicesTypesIcons[serviceTypeId]);
+        } else {
+            self.getServiceTypesIcons(forceRefresh)
+                .then(
+                    function (icons) {
+                        deferred.resolve(icons[serviceTypeId]);
                     }
                 );
         }
@@ -1537,6 +1650,69 @@ function iconsService($resource, $q, globalSettings, categoriesService, poisServ
                         iconAnchor: self.icons_liste.poi_base.iconAnchor,
                         labelAnchor: self.icons_liste.poi_base.labelAnchor,
                         className: 'double-marker popup poi layer-' + poi.properties.type.id + '-' + poi.id + ' category-' + poi.properties.type.id
+                    });
+                    deferred.resolve(newIcon);
+                }
+            );
+
+        return deferred.promise;
+
+    };
+
+    this.getServiceIcon = function (service) {
+        var deferred = $q.defer(),
+            baseIcon = null,
+            serviceIcon = null,
+            promises = [];
+
+        if (self.icons_liste.service_base.iconUrl) {
+            promises.push(
+                self.getSVGIcon(self.icons_liste.service_base.iconUrl, 'service_base')
+                    .then(
+                        function (icon) {
+                            baseIcon = icon;
+                        }
+                    )
+            );
+        }
+
+        promises.push(
+            self.getAServiceTypeIcon(service.properties.type.id, false)
+                .then(
+                    function (icon) {
+                        if (icon.isSVG) {
+                            serviceIcon = icon.markup;
+                        } else {
+                            serviceIcon = '<img src="' + icon.markup + '" alt=""';
+                        }
+                    }
+                )
+        );
+
+        $q.all(promises)
+            .then(
+                function () {
+                    var markup;
+
+                    if (baseIcon) {
+                        markup = '' +
+                            '<div class="marker" data-popup="' + service.properties.type.name + '">' +
+                                baseIcon +
+                            '</div>' +
+                            '<div class="icon">' + serviceIcon + '</div>';
+                    } else {
+                       markup = '' +
+                            '<div class="marker" data-popup="' + service.properties.type.name + '">' +
+                                '<div class="icon">' + serviceIcon + '</div>' +
+                            '</div>';
+                    }
+
+                    var newIcon = new L.divIcon({
+                        html: markup,
+                        iconSize: self.icons_liste.service_base.iconSize,
+                        iconAnchor: self.icons_liste.service_base.iconAnchor,
+                        labelAnchor: self.icons_liste.service_base.labelAnchor,
+                        className: 'double-marker popup service layer-' + service.properties.type.id + '-' + service.id
                     });
                     deferred.resolve(newIcon);
                 }
