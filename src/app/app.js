@@ -7,6 +7,7 @@ var dependencies = [
     'rando.commons',
     'rando.treks',
     'rando.pois',
+    'rando.services',
     'rando.near',
     'rando.filiation',
     'rando.layout',
@@ -76,6 +77,7 @@ require('./footer');
 require('./layout');
 require('./treks');
 require('./pois');
+require('./services');
 require('./near-elements');
 require('./filiation');
 require('./touristics');
