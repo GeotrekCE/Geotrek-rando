@@ -614,6 +614,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         self._poisMarkersLayer.clearLayers();
         self._nearMarkersLayer.clearLayers();
         self._infosMarkersLayer.clearLayers();
+        self._servicesMarkersLayer.clearLayers();
 
         if (globalSettings.ENABLE_TREKS) {
             self._treksMarkersLayer.clearLayers();
