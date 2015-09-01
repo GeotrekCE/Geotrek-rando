@@ -332,6 +332,9 @@ msgstr "Recenter map"
 msgid "TILES_SWITCH"
 msgstr "Switch map background"
 
+msgid "SERVICES_TOGGLE"
+msgstr "Show / Hide services"
+
 msgid "VIEWPORT_FILTERING"
 msgstr "Filter with map"
 

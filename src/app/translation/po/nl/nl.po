@@ -318,6 +318,9 @@ msgstr "De kaart centreren"
 msgid "TILES_SWITCH"
 msgstr "Verander het aanzicht van de kaart"
 
+msgid "SERVICES_TOGGLE"
+msgstr "Beeldscherm / Verbergen diensten"
+
 msgid "VIEWPORT_FILTERING"
 msgstr "Filteren met de kaart"
 

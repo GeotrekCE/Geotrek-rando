@@ -93,6 +93,11 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
                 translationID: 'TILES_SWITCH'
             },
             {
+                selector: '.simple-services-toggle .toggle-layer',
+                isTitle: true,
+                translationID: 'SERVICES_TOGGLE'
+            },
+            {
                 selector: '.leaflet-control-viewportfilter-caption',
                 isTitle: false,
                 translationID: 'VIEWPORT_FILTERING'

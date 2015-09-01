@@ -325,6 +325,9 @@ msgstr "Karte zentrieren"
 msgid "TILES_SWITCH"
 msgstr "Hintergrund der Karte wechseln"
 
+msgid "SERVICES_TOGGLE"
+msgstr "Anzeigen / Verbergen dienstleistungen"
+
 msgid "VIEWPORT_FILTERING"
 msgstr "mit der Karte filtern"
 

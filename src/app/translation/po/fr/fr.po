@@ -327,6 +327,9 @@ msgstr "Recentrer la carte"
 msgid "TILES_SWITCH"
 msgstr "Changer de fond de carte"
 
+msgid "SERVICES_TOGGLE"
+msgstr "Activer / Masquer les services"
+
 msgid "VIEWPORT_FILTERING"
 msgstr "Filtrer avec la carte"
 
