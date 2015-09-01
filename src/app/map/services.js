@@ -25,7 +25,6 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         servicesService.getServicesFromElement(element.id)
             .then(
                 function (services) {
-                    console.log(services);
                     var counter = 0;
                     _.forEach(services.features, function (service) {
                         var poiLocation = utilsFactory.getStartPoint(service);
