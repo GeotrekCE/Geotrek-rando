@@ -19,6 +19,43 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         this.markers = markers;
     };
 
+    this.addGeoServices = function (element) {
+        var deferred = $q.defer();
+
+        servicesService.getServicesFromElement(element.id)
+            .then(
+                function (services) {
+                    console.log(services);
+                    var counter = 0;
+                    _.forEach(services.features, function (service) {
+                        var poiLocation = utilsFactory.getStartPoint(service);
+                        self.createLayerFromElement(service, 'service', poiLocation)
+                            .then(
+                                function (marker) {
+                                    counter++;
+                                    self._servicesMarkersLayer.addLayer(marker);
+                                    if (counter === services.features.length) {
+                                        var controlClasses = self.servicesControl.getContainer().classList;
+                                        if (counter > 0) {
+                                            if (controlClasses.contains('hidden')) {
+                                                controlClasses.remove('hidden');
+                                            }
+                                        } else {
+                                            if (!controlClasses.contains('hidden')) {
+                                                controlClasses.add('hidden');
+                                            }
+                                        }
+                                        deferred.resolve();
+                                    }
+                                }
+                            );
+                    });
+                }
+            );
+
+        return deferred.promise;
+    };
+
     this.createPOISFromElement = function (element) {
         var deferred = $q.defer(),
             promises = [],
@@ -147,27 +184,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                     )
             );
 
-            promises.push(
-                servicesService.getServicesFromElement(element.id)
-                    .then(
-                        function (services) {
-                            var counter = 0;
-                            _.forEach(services.features, function (service) {
-                                var poiLocation = utilsFactory.getStartPoint(service);
-                                self.createLayerFromElement(service, 'service', poiLocation)
-                                    .then(
-                                        function (marker) {
-                                            var selector = '#service-' + service.id.toString();
-
-                                            counter++;
-                                            console.log(counter);
-                                            self._servicesMarkersLayer.addLayer(marker);
-                                        }
-                                    );
-                            });
-                        }
-                    )
-            );
+            promises.push(this.addGeoServices(element));
         }
 
         $q.all(promises)
@@ -309,6 +326,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         this.setMinimap();
         this.setScale();
         this.createSatelliteView();
+        this.createServicesToggleControl();
         this.createResetViewButton();
 
         return this;
@@ -492,6 +510,48 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
         var switchControl = new L.Control.SwitchBackgroundLayers();
         switchControl.addTo(this.map);
+    };
+
+    this.createServicesToggleControl = function () {
+
+        L.Control.ServicesToggle = L.Control.extend({
+            options: {
+                position: 'bottomleft',
+            },
+
+            onAdd: function (map) {
+
+                this.map = map;
+
+                this._container = L.DomUtil.create('div', 'simple-services-toggle');
+
+                var className = 'toggle-layer services active';
+
+                this.button = L.DomUtil.create('a', className, this._container);
+                this.button.title = 'Toggle Services';
+
+                L.DomEvent.disableClickPropagation(this.button);
+                L.DomEvent.on(this.button, 'click', function () {
+                    this.toggleLayer();
+                }, this);
+
+                return this._container;
+            },
+
+            toggleLayer: function () {
+
+                if (this.map.hasLayer(self._servicesMarkersLayer)) {
+                    this.map.removeLayer(self._servicesMarkersLayer);
+                    this.button.classList.remove('active');
+                } else {
+                    this.map.addLayer(self._servicesMarkersLayer);
+                    this.button.classList.add('active');
+                }
+            }
+
+        });
+        self.servicesControl = new L.Control.ServicesToggle();
+        self.servicesControl.addTo(this.map);
     };
 
 
