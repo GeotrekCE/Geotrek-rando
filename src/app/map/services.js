@@ -1170,6 +1170,10 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             layers: this._baseLayers.main
         };
 
+        if (globalSettings.MAP_BOUNDS_CONSTRAINTS) {
+            mapParameters.maxBounds = new L.latLngBounds(globalSettings.MAP_BOUNDS_CONSTRAINTS);
+        }
+
         this.maxZoomFitting = globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL - 1;
 
         //Mixins for map

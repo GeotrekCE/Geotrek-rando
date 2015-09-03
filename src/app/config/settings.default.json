@@ -63,6 +63,7 @@
         "DEFAULT_MIN_ZOOM": 8,
         "DEFAULT_MAX_ZOOM": 17
     },
+    "MAP_BOUNDS_CONSTRAINTS": null,
     "TREKS_TO_GEOJSON_ZOOM_LEVEL" : 14,
     "UPDATE_MAP_ON_FILTER": false,
     "ACTIVE_MINIMAP": true,
@@ -114,5 +115,4 @@
         { "id": 30000, "label": "30km"},
         { "id": 99999, "label": ">30km"}
     ]
-
 }
