@@ -68,7 +68,7 @@ It will :
 
 ### Minimum required
 
-Those change are done in the `src/app/config/settings.custom.json` file.
+Those change are done in the `src/app/config/settings.default.json` file.
 All available options are detailed in the `SETTINGS.md` file or this repository.
 
 1 - `PLATFORM_ID`: unique id used to represent your platorm. You need to change it, otherwise you may have conflict with other geotrek deployments. It's used for favorites and othe things specific to your platforms.
