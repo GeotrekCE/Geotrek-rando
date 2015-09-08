@@ -1,6 +1,6 @@
 <ul class="categories" ng-class="{extend: extend}">
     <li class="categories-head">
-        <div class="categories-title" ng-click="extendCategories()">Menu</div><div class="categories-filters-close"><button>Retour</button></div><div class="categories-close"><button ng-click="foldCategories()">Fermer</button></div>
+        <div class="categories-title" ng-click="toggleCategories()">Menu</div><div class="categories-filters-close"><button>Retour</button></div><div class="categories-close"><button ng-click="foldCategories()">Fermer</button></div>
     </li>
     <li ng-repeat="category in categories | orderBy: 'order' track by category.id" class="category {{::category.cat_class}}" ng-class="{active : activeFilters.categories.indexOf(category.id) > -1, open: category.open}" id="cat-{{::category.id}}">
         <!--

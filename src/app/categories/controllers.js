@@ -254,6 +254,9 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
         $rootScope.$broadcast('updateFilters');
     };
 
+    $scope.toggleCategories = function () {
+        $scope.extend = !$scope.extend;
+    }
     $scope.extendCategories = function () {
         $scope.extend = true;
     }
