@@ -217,15 +217,15 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
         $scope.propagateActiveFilters();
     };
 
-    $scope.closeCategoryMenu = function (category) {
+    $scope.closeCategoryFilters = function (category) {
         category.open = false;
     };
 
-    $scope.openCategoryMenu = function (category) {
+    $scope.openCategoryFilters = function (category) {
         category.open = true;
     };
 
-    $scope.toggleCategoryMenu = function (category) {
+    $scope.toggleCategoryFilters = function (category) {
         if (!category.open) {
             category.open = false;
         }
