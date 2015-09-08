@@ -3,17 +3,23 @@
         <div class="categories-title" ng-click="extendCategories()">Menu</div><div class="categories-filters-close"><button>Retour</button></div><div class="categories-close"><button ng-click="foldCategories()">Fermer</button></div>
     </li>
     <li ng-repeat="category in categories | orderBy: 'order' track by category.id" class="category {{::category.cat_class}}" ng-class="{active : activeFilters.categories.indexOf(category.id) > -1, open: category.open}" id="cat-{{::category.id}}">
-        <span class="category-icon" ng-click="extendCategories()">
+        <!--
+        ICON
+        --><span class="category-icon" ng-click="extendCategories()">
             <span class="circle">
                 <ng-include ng-if="isSVG(category.pictogram)" src="category.pictogram"></ng-include>
                 <img ng-if="!isSVG(category.pictogram)" src="{{::category.pictogram}}">
             </span>
-        </span><span class="category-title">
+        </span><!--
+        TITLE
+        --><span class="category-title">
             <div class="category-title-checkbox checkbox"><i ng-if="activeFilters.categories.indexOf(category.id) > -1" class="fa fa-check"></i></div>
             <span class="category-title-text">{{category.label}}</span>
-        </span><a class="category-filters-link" href ng-click="toggleCategoryFilters(category)">
-&gt;
-        </a>
+        </span><!--
+        FILTERS LINK
+        --><button class="category-filters-link" href ng-click="toggleCategoryFilters(category)">&gt;</button>
+
+
         <div class="filters">
             <form>
                 <div class="menu-header">
