@@ -23,8 +23,8 @@
     & > .content {
         height: 100%;
         width: 100%;
-        padding-left: 60px;
-        margin-left: -60px;
+        padding-left: 90px;
+        margin-left: -90px;
         position: relative;
         float: left;
         .results-drawer {
@@ -38,7 +38,7 @@
                 width: 100%;
                 top: 0%;
                 left: -100%;
-                padding-left: 60px;
+                padding-left: 90px;
                 &.shown {
                     left: 0;
                 }

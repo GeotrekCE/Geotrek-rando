@@ -1,3 +1,37 @@
+.categories-head {
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 10px 0 5px 0;
+    .categories-title,
+    .categories-filters-close,
+    .categories-close {
+        display: inline-block;
+    }
+    .categories-title {
+        width: 90px;
+        text-align: center;
+    }
+    .categories-filters-close,
+    .categories-close {
+        width: 130px;
+    }
+
+    .categories-filters-close {
+        visibility: hidden;
+    }
+
+    .categories-close {
+        text-align: right;
+    }
+    button {
+        border: none;
+        background-color: transparent;
+        text-transform: uppercase;
+        margin: 0;
+        padding: 0;
+    }
+}
+
 .categories {
     list-style: none;
     padding: 0;
@@ -5,26 +39,133 @@
     height: 100%;
     width: 100%;
     position: relative;
-    .category {
-        width: 60px;
-        max-height: 50px;
-        min-height: 0;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        @include categories-list-coloring();
-        a {
-            width: 60px;
+
+    white-space: nowrap;
+    overflow: hidden;
+
+    background-color: #3a3a3a;
+
+    transition: width 150ms ease;
+
+    &.extend {
+        width: 365px;
+    }
+
+    &.extend {
+        @each $category in $categories {
+            .category-#{nth($category, 1)} {
+                background-color: rgba(nth($category, 2), .5);
+            }
+        }
+    }
+
+    .category-icon,
+    .category-title,
+    .category-filters-link {
+        display: inline-block;
+        vertical-align: top;
+        height: 50px;
+    }
+
+    .active {
+        .category-icon {
+            opacity: 1;
+        }
+    }
+
+    .category-icon {
+        opacity: .3;
+        width: 90px;
+        text-align: center;
+        padding: 3px 0;
+
+        .circle {
+            display: inline-block;
+            width: 44px;
+            height: 44px;
+            line-height: 44px;
+            border-radius: 50%;
+            background-color: currentColor;
             position: relative;
-            display: block;
+
+            svg {
+                fill: #fff;
+                position: absolute;
+                max-width: 60%;
+                max-height: 60%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+    @each $category in $categories {
+        .category-#{nth($category, 1)} {
+            .category-icon .circle {
+                background-color: nth($category, 2);
+            }
+        }
+    }
+
+    .category-title {
+        width: 235px;
+        overflow: hidden;
+        line-height: 50px;
+        padding-left: 0.25rem;
+        white-space: nowrap;
+    }
+
+    .category-title-checkbox {
+        vertical-align: middle;
+    }
+
+    .category-title-text {
+        display: inline-block;
+        vertical-align: middle;
+        text-transform: uppercase;
+        line-height: 1.2;
+        white-space: normal;
+        max-width: 200px;
+    }
+
+    .category-filters-link {
+        width: 40px;
+    }
+    @each $category in $categories {
+        .category-#{nth($category, 1)} {
+            .category-filters-link {
+                background-color: nth($category, 2);
+            }
+        }
+    }
+
+    .category {
+        width: 100%;
+        min-height: 0;
+        margin-bottom: 1px;
+        flex-direction: column;
+
+        transition: background-color 150ms ease;
+
+        a {
+            // width: 100%;
+            position: relative;
+            display: inline-block;
             text-decoration: none;
             text-align: center;
             min-height: 50px;
             height: 50px;
-            padding: 1em;
+            padding: 2.5px;
             z-index: 14;
             border: none;
             box-shadow: none;
+            .circle {
+                display: inline-block;
+                width: 45px;
+                border-radius: 50%;
+                height: 45px;
+                border: 1px solid red;
+            }
             img {
                 max-width: 100%;
                 max-height: 22px;
@@ -78,7 +219,6 @@
         &.active {
             a {
                 color: white;
-                background: $dark-grey;
                 svg {
                     fill: white !important;
                 }
@@ -188,7 +328,7 @@
             text-align: center;
             vertical-align: middle;
             margin: 0;
-            margin-right: 0.5rem;
+            margin-right: 0.25rem;
             border-radius: 8%;
             i {
                 vertical-align: top;

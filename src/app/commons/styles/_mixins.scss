@@ -1,37 +1,3 @@
-@mixin categories-list-coloring() {
-    @each $category in $categories {
-        &.category-#{nth($category, 1)} {
-            &.open a {
-                svg {
-                    fill: nth($category, 2);
-                }
-                &:after {
-                    color: nth($category, 2);
-                }
-             }
-            &.active {
-                a {
-                    background: nth($category, 2);
-                }
-            }
-            .filters {
-                background: nth($category, 2);
-                .category-name {
-                    background: nth($category, 2);
-                }
-                .choices {
-                    input {
-                        &:focus + label, &:hover + label {
-                            background-color: darken(nth($category, 2), 10%);
-                        }
-                    }
-                }
-
-            }
-        }
-    }
-}
-
 @mixin results-list-coloring() {
     @each $category in $categories {
         &.category-#{nth($category, 1)} {

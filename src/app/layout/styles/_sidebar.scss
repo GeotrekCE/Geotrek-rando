@@ -1,16 +1,19 @@
 #sidebar {
     height: 100%;
-    width: 60px;
+    width: 90px;
     float: left;
-    background-color: white;
+    background-color: #3a3a3a;
     color: white;
     position: relative;
     z-index: 3;
-    .detail-actions, .flat-actions {
+
+    .detail-actions,
+    .flat-actions {
         list-style: none;
         padding: 0;
         li {
             height: 50px;
+            margin-bottom: 1px;
             a {
                 padding: 1em;
                 text-align: center;

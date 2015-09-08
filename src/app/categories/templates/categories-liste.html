@@ -1,8 +1,18 @@
 <ul class="categories">
+    <li class="categories-head">
+        <div class="categories-title">Menu</div><div class="categories-filters-close"><button>Retour</button></div><div class="categories-close"><button>Fermer</button></div>
+    </li>
     <li ng-repeat="category in categories | orderBy: 'order' track by category.id" class="category {{::category.cat_class}}" ng-class="{active : activeFilters.categories.indexOf(category.id) > -1, open: category.open}" id="cat-{{::category.id}}">
-        <a href ng-click="toggleCategoryMenu(category)">
-            <ng-include ng-if="isSVG(category.pictogram)" src="category.pictogram"></ng-include>
-            <img ng-if="!isSVG(category.pictogram)" src="{{::category.pictogram}}">
+        <span class="category-icon">
+            <span class="circle">
+                <ng-include ng-if="isSVG(category.pictogram)" src="category.pictogram"></ng-include>
+                <img ng-if="!isSVG(category.pictogram)" src="{{::category.pictogram}}">
+            </span>
+        </span><span class="category-title">
+            <div class="category-title-checkbox checkbox"><i ng-if="activeFilters.categories.indexOf(category.id) > -1" class="fa fa-check"></i></div>
+            <span class="category-title-text">{{category.label}}</span>
+        </span><a class="category-filters-link" href ng-click="toggleCategoryMenu(category)">
+&gt;
         </a>
         <div class="filters">
             <form>
