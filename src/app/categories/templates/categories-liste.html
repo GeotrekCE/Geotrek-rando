@@ -1,9 +1,9 @@
-<ul class="categories">
+<ul class="categories" ng-class="{extend: extend}">
     <li class="categories-head">
-        <div class="categories-title">Menu</div><div class="categories-filters-close"><button>Retour</button></div><div class="categories-close"><button>Fermer</button></div>
+        <div class="categories-title" ng-click="extendCategories()">Menu</div><div class="categories-filters-close"><button>Retour</button></div><div class="categories-close"><button ng-click="foldCategories()">Fermer</button></div>
     </li>
     <li ng-repeat="category in categories | orderBy: 'order' track by category.id" class="category {{::category.cat_class}}" ng-class="{active : activeFilters.categories.indexOf(category.id) > -1, open: category.open}" id="cat-{{::category.id}}">
-        <span class="category-icon">
+        <span class="category-icon" ng-click="extendCategories()">
             <span class="circle">
                 <ng-include ng-if="isSVG(category.pictogram)" src="category.pictogram"></ng-include>
                 <img ng-if="!isSVG(category.pictogram)" src="{{::category.pictogram}}">

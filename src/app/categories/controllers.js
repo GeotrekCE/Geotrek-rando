@@ -4,6 +4,8 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
 
     var initFiltersEvent = $rootScope.$on('updateFilters', initFilters);
 
+    $scope.extend = false;
+
     function initFilters() {
         initDatePickers();
         initRangeFilters();
@@ -251,6 +253,13 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
         }
         $rootScope.$broadcast('updateFilters');
     };
+
+    $scope.extendCategories = function () {
+        $scope.extend = true;
+    }
+    $scope.foldCategories = function () {
+        $scope.extend = false;
+    }
 
     $scope.isSVG = utilsFactory.isSVG;
 
