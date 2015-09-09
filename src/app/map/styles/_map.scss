@@ -82,8 +82,16 @@
             opacity: 1;
         }
     }
+    &.hidden {
+        display: none;
+    }
 }
 
+div:not(.detail-map) > #map {
+    .leaflet-control .services {
+        display: none;
+    }
+}
 
 // Rules are separated because they don't work if declared with comas...
 //

@@ -26,6 +26,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             .then(
                 function (services) {
                     var counter = 0;
+                    var controlClasses = self.servicesControl.getContainer().classList;
                     _.forEach(services.features, function (service) {
                         var poiLocation = utilsFactory.getStartPoint(service);
                         self.createLayerFromElement(service, 'service', poiLocation)
@@ -34,21 +35,17 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                     counter++;
                                     self._servicesMarkersLayer.addLayer(marker);
                                     if (counter === services.features.length) {
-                                        var controlClasses = self.servicesControl.getContainer().classList;
-                                        if (counter > 0) {
-                                            if (controlClasses.contains('hidden')) {
-                                                controlClasses.remove('hidden');
-                                            }
-                                        } else {
-                                            if (!controlClasses.contains('hidden')) {
-                                                controlClasses.add('hidden');
-                                            }
+                                        if (controlClasses.contains('hidden')) {
+                                            controlClasses.remove('hidden');
                                         }
                                         deferred.resolve();
                                     }
                                 }
                             );
                     });
+                    if (services.features.length === 0 && !controlClasses.contains('hidden')) {
+                        controlClasses.add('hidden');
+                    }
                 }
             );
 
