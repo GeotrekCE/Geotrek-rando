@@ -1137,12 +1137,12 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
         // Set background Layers
         this._baseLayers = {
-            main: [
+            main: L.layerGroup([
                 L.tileLayer(
                     globalSettings.MAIN_LEAFLET_BACKGROUND.LAYER_URL,
                     globalSettings.MAIN_LEAFLET_BACKGROUND.OPTIONS
                 )
-            ],
+            ]),
             satellite: L.tileLayer(
                 globalSettings.SATELLITE_LEAFLET_BACKGROUND.LAYER_URL,
                 globalSettings.SATELLITE_LEAFLET_BACKGROUND.OPTIONS
@@ -1152,7 +1152,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         if (globalSettings.OPTIONAL_LEAFLET_BACKGROUNDS.length > 0) {
             for (var i = globalSettings.OPTIONAL_LEAFLET_BACKGROUNDS.length - 1; i >= 0; i--) {
                 var layer = globalSettings.OPTIONAL_LEAFLET_BACKGROUNDS[i];
-                this._baseLayers.main.push(
+                this._baseLayers.main.addLayer(
                     L.tileLayer(
                         layer.LAYER_URL,
                         layer.OPTIONS
