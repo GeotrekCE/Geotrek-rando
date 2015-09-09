@@ -25,7 +25,11 @@ function servicesService($resource, $q, globalSettings, settingsFactory, transla
             deferred.resolve(self._services);
 
         } else {
-            var url = settingsFactory.servicesUrl.replace(/\$lang/, translationService.getCurrentLang().code);
+            var currentLang = translationService.getCurrentLang();
+            if (currentLang.code) {
+                currentLang = currentLang.code;
+            }
+            var url = settingsFactory.servicesUrl.replace(/\$lang/, currentLang);
 
             var requests = $resource(url, {}, {
                 query: {
@@ -51,7 +55,11 @@ function servicesService($resource, $q, globalSettings, settingsFactory, transla
     this.getServicesFromElement = function (elementId) {
 
         var deferred = $q.defer();
-        var url = settingsFactory.trekUrl.replace(/\$lang/, translationService.getCurrentLang().code) + elementId + '/' + globalSettings.SERVICES_FILE;
+        var currentLang = translationService.getCurrentLang();
+        if (currentLang.code) {
+            currentLang = currentLang.code;
+        }
+        var url = settingsFactory.trekUrl.replace(/\$lang/, currentLang) + elementId + '/' + globalSettings.SERVICES_FILE;
         var requests = $resource(url, {}, {
             query: {
                 method: 'GET'

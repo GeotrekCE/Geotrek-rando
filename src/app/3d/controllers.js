@@ -4,11 +4,15 @@ function Rando3DController(result, $scope, $timeout, $modalInstance, globalSetti
     $scope.result = result;
     function init3D() {
         var pk = result.id;
+        var currentLang = translationService.getCurrentLang().code;
+        if (currentLang.code) {
+            currentLang = currentLang.code;
+        }
         var customSettings = {
             IMAGES_FOLDER: 'images/3d/',
-            DEM_URL: settingsFactory.trekUrl.replace(/\$lang/, translationService.getCurrentLang().code) + pk + '/' + globalSettings.DEM_FILE,
-            PROFILE_URL: settingsFactory.trekUrl.replace(/\$lang/, translationService.getCurrentLang().code) + pk + '/' + globalSettings.PROFILE_FILE,
-            POI_URL: settingsFactory.trekUrl.replace(/\$lang/, translationService.getCurrentLang().code) + pk + '/' + globalSettings.POI_FILE,
+            DEM_URL: settingsFactory.trekUrl.replace(/\$lang/, currentLang) + pk + '/' + globalSettings.DEM_FILE,
+            PROFILE_URL: settingsFactory.trekUrl.replace(/\$lang/, currentLang) + pk + '/' + globalSettings.PROFILE_FILE,
+            POI_URL: settingsFactory.trekUrl.replace(/\$lang/, currentLang) + pk + '/' + globalSettings.POI_FILE,
             TILE_TEX_URL: "https://a.tiles.mapbox.com/v3/makina-corpus.i3p1001l/{z}/{x}/{y}.png",
             SIDE_TEX_URL: "/images/3d/side.jpg",
             CAM_SPEED_F: 100,

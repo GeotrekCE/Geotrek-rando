@@ -821,8 +821,11 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         /*
          * Load altimetric profile from JSON
          */
-
-        var url = settingsFactory.trekUrl.replace(/\$lang/, translationService.getCurrentLang().code) + result.id + '/' + globalSettings.PROFILE_FILE;
+        var currentLang = translationService.getCurrentLang();
+        if (currentLang.code) {
+            currentLang = currentLang.code;
+        }
+        var url = settingsFactory.trekUrl.replace(/\$lang/, currentLang) + result.id + '/' + globalSettings.PROFILE_FILE;
         var requests = $resource(url, {}, {
             query: {
                 method: 'GET'

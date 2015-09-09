@@ -44,7 +44,11 @@ function poisService($resource, $q, globalSettings, settingsFactory, translation
             deferred.resolve(self._pois);
 
         } else {
-            var url = settingsFactory.poisUrl.replace(/\$lang/, translationService.getCurrentLang().code);
+            var currentLang = translationService.getCurrentLang();
+            if (currentLang.code) {
+                currentLang = currentLang.code;
+            }
+            var url = settingsFactory.poisUrl.replace(/\$lang/, currentLang);
 
             var requests = $resource(url, {}, {
                 query: {
@@ -70,7 +74,11 @@ function poisService($resource, $q, globalSettings, settingsFactory, translation
     this.getPoisFromElement = function (elementId, forceRefresh) {
 
         var deferred = $q.defer();
-        var url = settingsFactory.trekUrl.replace(/\$lang/, translationService.getCurrentLang().code) + elementId + '/' + globalSettings.POI_FILE;
+        var currentLang = translationService.getCurrentLang();
+        if (currentLang.code) {
+            currentLang = currentLang.code;
+        }
+        var url = settingsFactory.trekUrl.replace(/\$lang/, currentLang) + elementId + '/' + globalSettings.POI_FILE;
 
         var requests = $resource(url, {}, {
             query: {

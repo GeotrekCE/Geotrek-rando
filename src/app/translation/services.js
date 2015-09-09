@@ -19,10 +19,10 @@ function translationService(globalSettings) {
             } else {
                 localLanguage = navigator.language || navigator.userLanguage || navigator.browserLanguage || null;
             }
-            self.defaultLang = globalSettings.DEFAULT_LANGUAGE;
+            self.defaultLang = this.getLang(globalSettings.DEFAULT_LANGUAGE);
 
             if (localLanguage) {
-                _.forEach(globalSettings.AVAILABLE_LANGUAGES, function (lang) {
+                _.forEach(this.getAllLang, function (lang) {
                     if (localLanguage.substr(0, 2) === lang.code) {
                         self.defaultLang = lang;
                     }
@@ -62,6 +62,19 @@ function translationService(globalSettings) {
         }
 
         return self.languages;
+    };
+
+    this.getLang = function (langCode) {
+        var languages = this.getAllLang();
+
+        for (var i = languages.length - 1; i >= 0; i--) {
+            var currentLang = languages[i];
+            if (currentLang.code === langCode) {
+                return currentLang;
+            }
+        }
+
+        return false;
     };
 
     this.getFavoriteLang = function () {
