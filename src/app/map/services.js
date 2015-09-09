@@ -21,33 +21,41 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     this.addGeoServices = function (element) {
         var deferred = $q.defer();
-
-        servicesService.getServicesFromElement(element.id)
-            .then(
-                function (services) {
-                    var counter = 0;
-                    var controlClasses = self.servicesControl.getContainer().classList;
-                    _.forEach(services.features, function (service) {
-                        var poiLocation = utilsFactory.getStartPoint(service);
-                        self.createLayerFromElement(service, 'service', poiLocation)
-                            .then(
-                                function (marker) {
-                                    counter++;
-                                    self._servicesMarkersLayer.addLayer(marker);
-                                    if (counter === services.features.length) {
-                                        if (controlClasses.contains('hidden')) {
-                                            controlClasses.remove('hidden');
+        var controlClasses = self.servicesControl.getContainer().classList;
+        if (element.properties.contentType === 'trek') {
+            servicesService.getServicesFromElement(element.id)
+                .then(
+                    function (services) {
+                        var counter = 0;
+                        _.forEach(services.features, function (service) {
+                            var poiLocation = utilsFactory.getStartPoint(service);
+                            self.createLayerFromElement(service, 'service', poiLocation)
+                                .then(
+                                    function (marker) {
+                                        counter++;
+                                        self._servicesMarkersLayer.addLayer(marker);
+                                        if (counter === services.features.length) {
+                                            if (controlClasses.contains('hidden')) {
+                                                controlClasses.remove('hidden');
+                                            }
+                                            deferred.resolve();
                                         }
-                                        deferred.resolve();
                                     }
-                                }
-                            );
-                    });
-                    if (services.features.length === 0 && !controlClasses.contains('hidden')) {
-                        controlClasses.add('hidden');
+                                );
+                        });
+                        if (services.features.length === 0 && !controlClasses.contains('hidden')) {
+                            controlClasses.add('hidden');
+                            deferred.resolve();
+                        }
                     }
-                }
-            );
+                );
+
+        } else {
+            if (!controlClasses.contains('hidden')) {
+                controlClasses.add('hidden');
+                deferred.resolve();
+            }
+        }
 
         return deferred.promise;
     };
@@ -180,8 +188,9 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                     )
             );
 
-            promises.push(this.addGeoServices(element));
         }
+
+        promises.push(this.addGeoServices(element));
 
         $q.all(promises)
             .then(
