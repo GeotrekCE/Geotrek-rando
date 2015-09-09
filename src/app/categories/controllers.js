@@ -5,6 +5,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
     var initFiltersEvent = $rootScope.$on('updateFilters', initFilters);
 
     $scope.extend = false;
+    $scope.filtering = false;
 
     function initFilters() {
         initDatePickers();
@@ -220,25 +221,23 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
     };
 
     $scope.closeCategoryFilters = function (category) {
-        category.open = false;
+        $scope.filtering = false;
+        if (category) {
+            category.open = false;
+        } else {
+            _.forEach($scope.categories, function (category) {
+                category.open = false;
+            });
+        }
     };
 
     $scope.openCategoryFilters = function (category) {
-        category.open = true;
+        category.open    = true;
+        $scope.filtering = true;
+        hideSiblings(category);
     };
 
-    $scope.toggleCategoryFilters = function (category) {
-        if (!category.open) {
-            category.open = false;
-        }
-        if (!category.open) {
-            $scope.activateCategory(category);
-        }
-        category.open = !category.open;
-        $scope.hideSiblings(category);
-    };
-
-    $scope.hideSiblings = function (mainCategory) {
+    var hideSiblings = function (mainCategory) {
         _.forEach($scope.categories, function (category) {
             if (category.id !== mainCategory.id) {
                 category.open = false;
@@ -256,12 +255,17 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
 
     $scope.toggleCategories = function () {
         $scope.extend = !$scope.extend;
+        if (!$scope.extend) {
+            $scope.closeCategoryFilters();
+        }
     }
     $scope.extendCategories = function () {
         $scope.extend = true;
     }
+
     $scope.foldCategories = function () {
         $scope.extend = false;
+        $scope.closeCategoryFilters();
     }
 
     $scope.isSVG = utilsFactory.isSVG;
