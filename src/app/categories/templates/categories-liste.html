@@ -20,7 +20,7 @@
         --><button class="category-filters-link" ng-click="openCategoryFilters(category)">&gt;</button>
 
 
-        <div class="filters">
+        <div class="category-filters filters">
             <form>
                 <div class="menu-header">
                     <div class="category-name" ng-click="toggleCategory(category)">
@@ -28,9 +28,6 @@
                             <i ng-if="activeFilters.categories.indexOf(category.id) > -1" class="fa fa-check"></i>
                         </div>
                         <span>{{category.label}}</span>
-                    </div>
-                    <div class="close-menu" ng-click="closeCategoryFilters(category)">
-                        <span>X</span>
                     </div>
                 </div>
 
