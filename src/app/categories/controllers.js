@@ -13,6 +13,10 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
 
         //disable event
         initFiltersEvent();
+
+        $scope.categories.forEach(function (category) {
+            category.hasFilters = (category.ascent && category.ascent.values.length > 1) || (category.begin_date !== undefined) || (category.difficulty && category.difficulty.values.length > 1) || (category.duration && category.duration.values.length > 1) || (category.eLength && category.eLength.values.length > 1) || (category.end_date !== undefined) || (category.route && category.route.values.length > 0) || (category.type1 && category.type1.values.length > 0) || (category.type2 && category.type2.values.length > 0);
+        });
     }
 
     function updateFiltersTags() {
