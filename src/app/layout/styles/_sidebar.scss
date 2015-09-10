@@ -1,6 +1,9 @@
 #sidebar {
     height: 100%;
     width: 90px;
+    @media (max-width: 540px) {
+        width: 55px;
+    }
     float: left;
     background-color: #3a3a3a;
     color: white;
