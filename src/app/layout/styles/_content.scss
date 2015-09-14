@@ -48,7 +48,16 @@
             width: 60%;
             height: 100%;
             float: left;
+            position: relative;
             transition: left 0.3s ease;
+
+            #map {
+                z-index: 1;
+            }
+            .filters-tags {
+                z-index: 2;
+            }
+
             @media (max-width: 767px) {
                 position: absolute;
                 width: 100%;

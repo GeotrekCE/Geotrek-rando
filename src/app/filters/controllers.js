@@ -121,6 +121,10 @@ function FiltersTagsController($rootScope, $scope, globalSettings, filtersServic
         $rootScope.activeFilters = activeFilters;
         $scope.propagateActiveFilters();
     };
+
+    $scope.toggleExtend = function () {
+        $scope.extend = !$scope.extend;
+    }
 }
 
 module.exports = {
