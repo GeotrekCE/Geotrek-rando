@@ -26,11 +26,33 @@
 
     .categories-filters-close {
         visibility: hidden;
-        padding-left: 1em;
+        padding-left: .7em;
+        .stripe {
+            display: inline-block;
+            vertical-align: top;
+            svg {
+                display: inline-block;
+                vertical-align: top;
+                fill: #fff;
+                width: 7px;
+                transform: rotate(180deg);
+            }
+        }
     }
 
     .categories-close {
         text-align: right;
+        .cross {
+            display: inline-block;
+            vertical-align: top;
+            svg {
+                display: inline-block;
+                vertical-align: top;
+                fill: #fff;
+                width: 11px;
+                transform: rotate(180deg);
+            }
+        }
     }
     button {
         border: none;
@@ -177,6 +199,14 @@
         &:hover {
             margin-left: -5px;
             width: 45px;
+        }
+        .stripe {
+            display: inline-block;
+            svg {
+                display: inline-block;
+                vertical-align: middle;
+                fill: #fff;
+            }
         }
     }
     @each $category in $categories {

@@ -1,6 +1,6 @@
 <ul class="categories" ng-class="{extend: extend, filtering: filtering}">
     <li class="categories-head">
-        <div class="categories-title" ng-click="toggleCategories()">Menu</div><div class="categories-filters-close"><button ng-click="closeCategoryFilters()">Retour</button></div><div class="categories-close"><button ng-click="foldCategories()">Fermer</button></div>
+        <div class="categories-title" ng-click="toggleCategories()">Menu</div><div class="categories-filters-close"><button ng-click="closeCategoryFilters()"> <ng-include class="stripe" src="'/images/icons/stripe.svg'"></ng-include> Retour</button></div><div class="categories-close"><button ng-click="foldCategories()">Fermer <ng-include class="cross" src="'/images/icons/cross.svg'"></ng-include></button></div>
     </li>
     <li ng-repeat="category in categories | orderBy: 'order' track by category.id" class="category {{::category.cat_class}}" ng-class="{active : activeFilters.categories.indexOf(category.id) > -1, open: category.open}" id="cat-{{::category.id}}">
         <!--
@@ -17,7 +17,7 @@
             <span class="category-title-text">{{category.label}}</span>
         </span><!--
         FILTERS LINK
-        --><button class="category-filters-link" ng-click="openCategoryFilters(category)"  ng-if="category.hasFilters">&gt;</button>
+        --><button class="category-filters-link" ng-click="openCategoryFilters(category)"  ng-if="category.hasFilters"><ng-include class="stripe" src="'/images/icons/stripe.svg'"></ng-include></button>
 
 
         <div class="category-filters filters">

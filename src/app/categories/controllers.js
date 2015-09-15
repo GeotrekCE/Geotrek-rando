@@ -264,6 +264,9 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
         }
     }
     $scope.extendCategories = function () {
+        if ($scope.extend && $scope.filtering) {
+            $scope.openCategoryFilters(this.category);
+        }
         $scope.extend = true;
     }
 
