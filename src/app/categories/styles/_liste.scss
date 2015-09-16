@@ -117,7 +117,8 @@
     }
 
     .active {
-        .category-icon {
+        .category-icon,
+        .category-title {
             opacity: 1;
         }
     }
@@ -167,6 +168,7 @@
 
     .category-title {
         cursor: pointer;
+        opacity: .5;
         width: 235px;
         overflow: hidden;
         line-height: 50px;
