@@ -16,7 +16,7 @@
         padding: 0;
         height: 100%;
         width: 100%;
-    }   
+    }
 
     .navbar-brand {
         height: 100%;
@@ -183,7 +183,8 @@
         }
         .dropdown-menu {
             max-height: 500%;
-            overflow: auto;
+            overflow-y: auto;
+            overflow-x: hidden;
             a {
                 padding-top: 15px;
                 padding-bottom: 15px;
