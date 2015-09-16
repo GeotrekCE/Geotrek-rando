@@ -51,6 +51,9 @@
             position: relative;
             transition: left 0.3s ease;
 
+            #global-filters {
+                z-index: 2;
+            }
             #map {
                 z-index: 1;
             }

@@ -60,6 +60,7 @@ require('leaflet-minimap');
 require('leaflet.markercluster');
 require('leaflet.fullscreen');
 require('leaflet-geometryutil');
+require('leaflet-active-area');
 
 //TEST LIBRARIES
 require('angular-mocks'); // that one will exclude if not angular.mock

@@ -1194,6 +1194,14 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
         this.map = L.map(mapSelector, mapParameters);
 
+        this.map.setActiveArea({
+            position: 'absolute',
+            top: '68px',
+            right: '0',
+            bottom: '0',
+            left: '0'
+        });
+
         // Set-up maps controls (needs _map to be defined);
         this.initMapControls();
 

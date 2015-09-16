@@ -93,6 +93,10 @@ div:not(.detail-map) > #map {
     }
 }
 
+.general-map .leaflet-top {
+    top: 68px;
+}
+
 // Rules are separated because they don't work if declared with comas...
 //
 .detail-map .leaflet-container:-webkit-full-screen .leaflet-right {
