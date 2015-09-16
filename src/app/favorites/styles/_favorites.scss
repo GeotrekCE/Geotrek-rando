@@ -1,7 +1,7 @@
 .favorites {
     .dropdown-toggle span {
         @media (max-width: 767px) {
-            margin-right: 0.4em;   
+            margin-right: 0.4em;
         }
     }
     .count {
@@ -20,8 +20,6 @@
             flex: 1;
             display: flex;
             margin: 0.8em 0;
-            border-left: 5px solid $dark-grey;
-            @include favorites-list-coloring();
             @media (max-width: 767px) {
                 min-width: 0;
             }
@@ -31,19 +29,45 @@
                 padding: 0;
                 text-decoration: none;
                 padding: 0;
-                span {
-                    flex: 1;
-                    margin-left: 1em;
-                    align-self: center;
+            }
+            &:hover a {
+                color: inherit;
+            }
+            span {
+                flex: 1;
+                margin-left: 1em;
+                align-self: center;
+            }
+            .picture {
+                height: 3em;
+                width: 3em;
+                overflow: hidden;
+                float: left;
+                img {
+                    max-width: 150%;
+                    height: auto;
                 }
-                .picture {
-                    height: 3em;
-                    width: 3em;
-                    overflow: hidden;
-                    float: left;
-                    img {
-                        max-width: 150%;
-                        height: auto;
+            }
+            .category-icon {
+                height: 3em;
+                width: 3em;
+                padding: 10px;
+                text-align: center;
+                svg, img {
+                    max-width: 100%;
+                    max-height: 100%;
+                }
+                svg {
+                    fill: white;
+                }
+            }
+            @each $category in $categories {
+                &.category-#{nth($category, 1)} {
+                    .category-icon {
+                        background-color: nth($category, 2);
+                    }
+                    &:hover .name {
+                        color: nth($category, 2);
                     }
                 }
             }

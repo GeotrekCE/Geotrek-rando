@@ -27,7 +27,7 @@
                     }
                 }
 
-            } 
+            }
         }
     }
 }
@@ -41,19 +41,6 @@
             }
             .fav-or-not.isFav i {
                 color: nth($category, 2);
-            }
-        }
-    }
-}
-
-@mixin favorites-list-coloring() {
-    @each $category in $categories {
-        &.category-#{nth($category, 1)} {
-            border-color: nth($category, 2);
-            #header .navbar &:hover {
-                a {
-                    color: nth($category, 2);
-                }
             }
         }
     }

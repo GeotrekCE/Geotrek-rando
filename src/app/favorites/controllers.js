@@ -1,6 +1,6 @@
 'use strict';
 
-function FavoritesController($scope, $rootScope, globalSettings, favoritesService, resultsService) {
+function FavoritesController($scope, $rootScope, globalSettings, favoritesService, resultsService, utilsFactory) {
 
     $scope.favIcon = (globalSettings.FAVORITES_ICON ? globalSettings.FAVORITES_ICON : 'heart');
 
@@ -51,6 +51,8 @@ function FavoritesController($scope, $rootScope, globalSettings, favoritesServic
             $scope.removeAFavorite(args.element);
         }
     });
+
+    $scope.isSVG = utilsFactory.isSVG;
 
 }
 
