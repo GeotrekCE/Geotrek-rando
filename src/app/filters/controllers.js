@@ -2,10 +2,11 @@
 
 function GlobalFiltersController($rootScope, $scope, $location, globalSettings, resultsService, filtersService, utilsFactory, $timeout) {
 
-    $scope.enabDistricts = globalSettings.ENABLE_DISTRICTS_FILTERING;
-    $scope.enabCities = globalSettings.ENABLE_CITIES_FILTERING;
+    $scope.enabDistricts  = globalSettings.ENABLE_DISTRICTS_FILTERING;
+    $scope.enabCities     = globalSettings.ENABLE_CITIES_FILTERING;
     $scope.enabStructures = globalSettings.ENABLE_STRUCTURE_FILTERING;
-    $scope.filterLength = {};
+    $scope.filterLength   = {};
+    $scope.extend         = false;
 
     function updateFiltersTags() {
         $rootScope.activeFiltersTags = filtersService.getTagFilters();
@@ -61,6 +62,10 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
         }
         $rootScope.$broadcast('updateFilters');
     };
+
+    $scope.toggleExtend = function () {
+        $scope.extend = !$scope.extend;
+    }
 
     $scope.isSVG = utilsFactory.isSVG;
 
