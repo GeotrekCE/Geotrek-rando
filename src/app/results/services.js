@@ -197,6 +197,43 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
         return deferred.promise;
     };
 
+    this.getRandomContentsByCategory = function (category, quantity) {
+        var deferred = $q.defer();
+        var parsedResults = [];
+        var randomResults = [];
+
+        if (!category) {
+            deferred.reject('No category provided');
+        }
+
+        this.getAllResults()
+            .then(
+                function (results) {
+                    _.forEach(results, function (result) {
+                        var elementCategory = result.properties.category.id;
+                        if (category === 'all' || category === elementCategory) {
+                            parsedResults.push(result);
+                        }
+                    });
+
+                    var max = quantity <= parsedResults.length ? parseInt(quantity) : parsedResults;
+                    for (var i = max; i >= 0; i--) {
+                        var index = Math.floor(Math.random() * parsedResults.length);
+                        randomResults.push(parsedResults[index]);
+                        parsedResults.splice(index, 1);
+                    }
+
+                    if (randomResults.length === 0) {
+                        deferred.reject('No matching category or no element in this category');
+                    }
+                    deferred.resolve(randomResults);
+
+                }
+            );
+
+        return deferred.promise;
+    };
+
 }
 
 module.exports = {
