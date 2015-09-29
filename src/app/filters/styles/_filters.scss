@@ -34,7 +34,7 @@
 }
 
 .global-filters-top {
-    
+    position: relative;
 }
 
 .global-filters-search {
@@ -54,6 +54,29 @@
         .input-group-addon {
             background: white;
             border: none;
+        }
+    }
+}
+
+.global-filters-more {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    cursor: pointer;
+    .stripe {
+        transition: transform 200ms ease;
+        transform: rotate(90deg) translate(2px, 0);
+        display: inline-block;
+        margin-left: .5em;
+        svg {
+            width: 8px;
+        }
+    }
+}
+.global-filters.extend {
+    .global-filters-more {
+        .stripe {
+            transform: rotate(-90deg) translate(-2px, 2px);
         }
     }
 }
