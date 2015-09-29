@@ -45,11 +45,13 @@
             }
         }
         .general-map {
+            box-shadow: -20px 0 30px 30px rgba(0, 0, 0, .5);
             width: 50%;
             height: 100%;
             float: left;
             position: relative;
             transition: left 0.3s ease;
+            z-index: 1;
 
             #global-filters {
                 z-index: 2;
