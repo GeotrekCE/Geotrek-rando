@@ -214,5 +214,8 @@
             padding-top: 15px;
             padding-bottom: 15px;
         }
+        > .active > a {
+            background-color: $dark-grey;
+        }
     }
 }
