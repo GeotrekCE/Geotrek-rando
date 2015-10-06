@@ -1,173 +1,180 @@
-.results-liste {
+.results-list-wrapper {
     overflow: auto;
     height: 100%;
     width: 100%;
-    .results-count {
-        display: block;
-        width: 100%;
-        color: lighten($dark-grey, 20%);
-        background: white;
-        text-align: center;
-        .number {
-            color: $dark-grey;
-            font-weight: bolder;
-        }
+}
+
+.results-count {
+    display: block;
+    width: 100%;
+    color: lighten($dark-grey, 20%);
+    background: white;
+    text-align: center;
+    .number {
+        color: $dark-grey;
+        font-weight: bolder;
     }
-    .no-results {
-        display: block;
-        width: 100%;
-        padding: 5% 16%;
-        text-align: center;
-        font-size: 2rem;
-        color: lighten($dark-grey, 50%);
+}
+
+.no-results {
+    display: block;
+    width: 100%;
+    padding: 5% 16%;
+    text-align: center;
+    font-size: 2rem;
+    color: lighten($dark-grey, 50%);
+}
+
+.results-list { // ul
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.results-item { // li.result
+    flex: 0 1 47%;
+    max-width: 47%;
+    max-height: 20rem;
+    padding: 0 1em 2.4em;
+    display: block;
+    position: relative;
+    opacity: 1;
+    order: -1;
+    border-left: 10px solid $primary-color;
+    background: white;
+    margin: 0.5rem 1.5%;
+    box-shadow: 0px 1px 2px 0px $dark-grey;
+    transition: all 0.1s ease-out;
+    @include results-list-coloring();
+    &:hover, &.hovered {
+        //order: -1;
+        transform: translateY(-5px);
     }
-    .results {
-        list-style: none;
-        padding: 0;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        .results-item {
-            flex: 0 1 47%;
-            max-width: 47%;
-            max-height: 20rem;
-            padding: 0 1em 2.4em;
-            display: block;
-            position: relative;
+    @media (min-width: 768px) and (max-width: 1200px) {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+    @media (max-width: 550px) {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+    &.not-in-viewport {
+        opacity: 0.5;
+        order: 1;
+    }
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
+.result-visual {
+    max-height: 150px;
+    margin-left: -15px;
+    margin-right: -15px;
+    position: relative;
+    overflow: hidden;
+    img {
+        width: 100%;
+        height: auto;
+        transition: transform 0.2s ease;
+
+    }
+}
+
+.result-item-fav-control {
+    position: absolute;
+    z-index: 2;
+    top: 1em;
+    left: 1em;
+    cursor: pointer;
+    i {
+        opacity: 0.8;
+        font-size: 1.6em;
+        text-shadow:
+            -1px -1px 0 #fff,
+            1px -1px 0 #fff,
+            -1px 1px 0 #fff,
+            1px 1px 0 #fff;
+        transition: color 0.2s ease;
+        &:hover {
             opacity: 1;
-            order: -1;
-            border-left: 10px solid $primary-color;
-            background: white;
-            margin: 0.5rem 1.5%;
-            box-shadow: 0px 1px 2px 0px $dark-grey;
-            transition: all 0.1s ease-out;
-            @include results-list-coloring();
-            &:hover, &.hovered {
-                //order: -1;
-                transform: translateY(-5px);
-            }
-            @media (min-width: 768px) and (max-width: 1200px) {
-                flex: 1 1 100%;
-                max-width: 100%;
-            }
-            @media (max-width: 550px) {
-                flex: 1 1 100%;
-                max-width: 100%;
-            }
-            &.not-in-viewport {
-                opacity: 0.5;
-                order: 1;
-            }
-            a {
-                color: inherit;
-                text-decoration: none;
-            }
-            .fav-or-not {
-                position: absolute;
-                z-index: 2;
-                top: 1em;
-                left: 1em;
-                cursor: pointer;
-                i {
-                    opacity: 0.8;
-                    font-size: 1.6em;
-                    text-shadow:
-                        -1px -1px 0 #fff,
-                        1px -1px 0 #fff,
-                        -1px 1px 0 #fff,
-                        1px 1px 0 #fff;
-                    transition: color 0.2s ease;
-                    &:hover {
-                        opacity: 1;
-                    }  
-                }
-                &.isFav {
-                    i {
-                        opacity: 1;
-                    }
-                }
-            }
-            .visual {
-                max-height: 150px;
-                margin-left: -15px;
-                margin-right: -15px;
-                position: relative;
-                overflow: hidden;
-                img {
-                    width: 100%;
-                    height: auto;
-                    transition: transform 0.2s ease;
-
-                }
-            }
-            .title {
-                display: block;
-                font-size: 1.2em;
-                line-height: 1.2em;
-                font-weight: 500;
-                margin: 0.5em 0;
-                a {
-                    color: inherit;
-                    text-decoration: none;
-                }
-            }
-            .infos {
-                display: block;
-                span {
-                    font-size: 0.9em;
-                    &:not(:last-child):after {
-                        content: '-';
-                        margin: 0 3px 0 6px;
-                    }
-                }
-            }
-            .themes {
-                padding: 0;
-                margin: 0;
-                list-style: none;
-                line-height: 0.2em;
-                position: absolute;
-                bottom: 0;
-                li {
-                    margin: 0.4em;
-                    margin-top: 0;
-                    display: inline-block;
-                    height: 1.6em;
-                    width: 1.6em;
-                    overflow: hidden;
-                    img, svg {
-                        max-width: 100%;
-                        max-height: 100%;
-                    }
-                    svg .base {
-                        fill: $dark-grey;
-                    }
-                }
-            }
-            .know-more {
-                display: block;
-                position: absolute;
-                right: 0;
-                bottom: 0;
-                width: 0;
-                height: 0;
-                border-bottom: 40px solid $primary-color;
-                border-left: 40px solid transparent;
-                span {
-                    cursor: pointer;
-                    text-decoration: none;
-                    color: white;
-                    font-size: 1.5em;
-                    font-weight: 300;
-                    position: absolute;
-                    right: 6px;
-                    top: 11px;
-                }
-            }
-
-        }
-
+        }  
     }
-    
+    &.isFav {
+        i {
+            opacity: 1;
+        }
+    }
+}
+
+.result-title {
+    display: block;
+    font-size: 1.2em;
+    line-height: 1.2em;
+    font-weight: 500;
+    margin: 0.5em 0;
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
+.result-infos {
+    display: block;
+    span {
+        font-size: 0.9em;
+        &:not(:last-child):after {
+            content: '-';
+            margin: 0 3px 0 6px;
+        }
+    }
+}
+
+.result-themes {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 0.2em;
+    position: absolute;
+    bottom: 0;
+    li {
+        margin: 0.4em;
+        margin-top: 0;
+        display: inline-block;
+        height: 1.6em;
+        width: 1.6em;
+        overflow: hidden;
+        img, svg {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        svg .base {
+            fill: $dark-grey;
+        }
+    }
+}
+
+.result-know-more {
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 40px solid $primary-color;
+    border-left: 40px solid transparent;
+    span {
+        cursor: pointer;
+        text-decoration: none;
+        color: white;
+        font-size: 1.5em;
+        font-weight: 300;
+        position: absolute;
+        right: 6px;
+        top: 11px;
+    }
 }
