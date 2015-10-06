@@ -4,8 +4,15 @@
         <span ng-if=" results.length <= 1">{{'RESULT' | translate}}</span>
         <span ng-if=" results.length >= 1">{{'RESULTS' | translate}}</span>
     </div>
+
+
     <ul class="results">
-        <li ng-repeat="result in results | orderBy: -['properties.begin_date', 'properties.name'] | limitTo: resultsDisplayLimit track by result.uid" id="result-category-{{::result.uid}}" ng-mouseover="hoverLayerElement(result,'enter')" ng-mouseleave="hoverLayerElement(result,'leave')" class="result results-item category-{{::result.properties.category.id}}">
+        <li
+            id="result-category-{{::result.uid}}"
+            class="result results-item category-{{::result.properties.category.id}}"
+            ng-repeat="result in results | orderBy: -['properties.begin_date', 'properties.name'] | limitTo: resultsDisplayLimit track by result.uid"
+            ng-mouseover="hoverLayerElement(result,'enter')"
+            ng-mouseleave="hoverLayerElement(result,'leave')">
 
             <div>
                 <div class="fav-or-not" ng-click="toggleFavorites(result)" ng-class="{isFav: isInFavorites(result)}">
@@ -20,15 +27,15 @@
                         {{::result.properties.name}}
                     </h1>
                     <div class="infos">
-                        <span ng-if="result.properties.begin_date" class="begin-date">{{::result.properties.begin_date | date:'dd/MM/yyyy'}}</span>
-                        <span ng-if="result.properties.end_date && result.properties.begin_date !== result.properties.end_date" class="end-date">{{::result.properties.end_date | date:'dd/MM/yyyy'}}</span>
-                        <span ng-if="result.properties.cities[0]" class="cities">{{::result.properties.cities[0].name}}</span>
-                        <span ng-if="result.properties.duration_pretty" class="duration">{{::result.properties.duration_pretty}}</span>
-                        <span ng-if="result.properties.ascent" class="ascent">{{::'ASCENT' | translate}} {{result.properties.ascent}} m</span>
-                        <span ng-if="result.properties.difficulty" class="difficulty">{{::result.properties.difficulty.label}}</span>
-                        <span ng-if="result.properties.type1[0] && result.properties.contentType !== 'trek'" class="type1">{{::result.properties.type1[0].name}}</span>
-                        <span ng-if="result.properties.type2[0] && result.properties.contentType !== 'trek'" class="type2">{{::result.properties.type2[0].name}}</span>
-                        <span ng-if="result.properties.target_audience" class="target">{{::result.properties.target_audience}}</span>
+                        <span class="begin-date" ng-if="result.properties.begin_date">{{::result.properties.begin_date | date:'dd/MM/yyyy'}}</span>
+                        <span class="end-date"   ng-if="result.properties.end_date && result.properties.begin_date !== result.properties.end_date">{{::result.properties.end_date | date:'dd/MM/yyyy'}}</span>
+                        <span class="cities"     ng-if="result.properties.cities[0]">{{::result.properties.cities[0].name}}</span>
+                        <span class="duration"   ng-if="result.properties.duration_pretty">{{::result.properties.duration_pretty}}</span>
+                        <span class="ascent"     ng-if="result.properties.ascent">{{::'ASCENT' | translate}} {{result.properties.ascent}} m</span>
+                        <span class="difficulty" ng-if="result.properties.difficulty">{{::result.properties.difficulty.label}}</span>
+                        <span class="type1"      ng-if="result.properties.type1[0] && result.properties.contentType !== 'trek'">{{::result.properties.type1[0].name}}</span>
+                        <span class="type2"      ng-if="result.properties.type2[0] && result.properties.contentType !== 'trek'">{{::result.properties.type2[0].name}}</span>
+                        <span class="target"     ng-if="result.properties.target_audience">{{::result.properties.target_audience}}</span>
                     </div>
                     <ul class="themes">
                         <li ng-repeat="theme in result.properties.themes track by theme.label">
@@ -43,7 +50,11 @@
             </div>
         </li>
     </ul>
+
+
     <div class="no-results" ng-if="results.length === 0">
         <span>{{::'NO_RESULTS' | translate}}</span>
     </div>
+
+
 </section>
