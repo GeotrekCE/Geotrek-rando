@@ -19,6 +19,22 @@ function contentsService(globalSettings, settingsFactory, translationService, $r
                     }
                 });
             }
+
+            if (content.properties.type1) {
+                _.forEach(content.properties.type1, function (aType1) {
+                    if (aType1.pictogram) {
+                        aType1.pictogram = globalSettings.API_URL + aType1.pictogram;
+                    }
+                });
+            }
+            if (content.properties.type2) {
+                _.forEach(content.properties.type2, function (aType2) {
+                    if (aType2.pictogram) {
+                        aType2.pictogram = globalSettings.API_URL + aType2.pictogram;
+                    }
+                });
+            }
+
             if (content.properties.map_image_url) {
                 content.properties.map_image_url = globalSettings.API_URL + content.properties.map_image_url;
             }
@@ -100,6 +116,20 @@ function eventsService(globalSettings, settingsFactory, translationService, $res
                 _.forEach(trEvent.properties.themes, function (theme) {
                     if (theme.pictogram) {
                         theme.pictogram = globalSettings.API_URL + theme.pictogram;
+                    }
+                });
+            }
+            if (trEvent.properties.type1) {
+                _.forEach(trEvent.properties.type1, function (aType1) {
+                    if (aType1.pictogram) {
+                        aType1.pictogram = globalSettings.API_URL + aType1.pictogram;
+                    }
+                });
+            }
+            if (trEvent.properties.type2) {
+                _.forEach(trEvent.properties.type2, function (aType2) {
+                    if (aType2.pictogram) {
+                        aType2.pictogram = globalSettings.API_URL + aType2.pictogram;
                     }
                 });
             }
