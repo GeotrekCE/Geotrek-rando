@@ -400,6 +400,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                 var controlInput = L.DomUtil.create('input', 'leaflet-control-viewportfilter-button', controlContainer);
                 controlInput.type = 'checkbox';
                 controlInput.value = 'viewport-filtering';
+                controlInput.checked = globalSettings.FILTER_BY_VIEWPORT_DEFAULT;
                 var controlCaption = L.DomUtil.create('span', 'leaflet-control-viewportfilter-caption', controlContainer);
                 controlCaption.innerHTML = 'Filter when I move the map';
 
@@ -1187,7 +1188,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
         //Mixins for map
         this.initCustomsMixins();
-        self.filterByViewport = false;
+        self.filterByViewport = globalSettings.FILTER_BY_VIEWPORT_DEFAULT;
 
         this.map = L.map(mapSelector, mapParameters);
 
