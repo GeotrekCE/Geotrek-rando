@@ -849,6 +849,8 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                             },
                             {
                                 type: 'line',
+                                chartRangeMin: data.limits.floor,
+                                chartRangeMax: data.limits.ceil,
                                 lineWidth: 3,
                                 spotColor: 'transparent',
                                 minSpotColor: 'transparent',
