@@ -74,6 +74,7 @@
     "MINIMAP_OFFSET": -3,
     "ALWAYS_HIGHLIGHT_TREKS": false,
     "SHOW_FILTERS_ON_MAP": true,
+    "FILTER_BY_VIEWPORT_DEFAULT": false,
     "MARKER_BASE_ICON": "",
     "POI_BASE_ICON": "",
     "SERVICE_BASE_ICON": "",
