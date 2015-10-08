@@ -7,6 +7,25 @@
 
 * Changed configuration method allowing to override only what is needed and offerring easier customisation and maintainability.
 * New warning module allowing users to send a message to Geotrek Admin.
+* Show services (trek info) on map
+* Add a setting to check "Filter with map" by default
+* Add function to get random element from a category
+* Events are displayed after other elements on lists
+* Add picto to bookmarks elements (fixes #342)
+* Sort bookmarks by name (fixes #343)
+* Enable map constraints to defined bounds (fixes #8770)
+* Add date filters for touristic events
+* Add optional tiles layers support
+* Various other improvements…
+
+**Bug fixes**
+
+* Fix path of png pictograms for type1/type2
+* Prevent horizontal scroll bar to show on favorite dropdown
+* Fixed issue with lang if no favoriteLang
+* Fixed services map control images path
+* Fixed satellite view with tileLayers
+* Various other fixes…
 
 **How to update**
 
