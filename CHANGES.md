@@ -1,6 +1,6 @@
 # CHANGELOG
 
-2.0.1.dev0
+2.1.0 (2015-10-08)
 ------------------
 
 **New Features**
@@ -16,6 +16,7 @@
 * Enable map constraints to defined bounds (fixes #8770)
 * Add date filters for touristic events
 * Add optional tiles layers support
+* Flatten altimetric profile
 * Various other improvements…
 
 **Bug fixes**
