@@ -5,15 +5,29 @@
 }
 
 .results-count {
-    display: block;
-    width: 100%;
-    color: lighten($dark-grey, 20%);
-    background: white;
+    padding: 1em 0;
     text-align: center;
-    .number {
-        color: $dark-grey;
-        font-weight: bolder;
+    position: relative;
+    background-color: #fff;
+
+    font-family: serif;
+    font-style: italic;
+    font-size: 1.4em;
+
+    &:before {
+        content: " ";
+        border-bottom: 1px solid black;
+        position: absolute;
+        top: 50%;
+        left: 40px;
+        right: 40px;
     }
+}
+
+.results-count-inner {
+    position: relative;
+    background-color: inherit;
+    padding: 0 1em;
 }
 
 .no-results {
@@ -26,8 +40,9 @@
 }
 
 .results-list { // ul
+    background-color: inherit;
     list-style: none;
-    padding: 0;
+    padding: 0 2em;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -35,8 +50,8 @@
 }
 
 .results-item { // li.result
+    overflow: hidden;
     flex: 0 1 47%;
-    max-width: 47%;
     max-height: 20rem;
     padding: 0 1em 2.4em;
     display: block;
@@ -44,15 +59,17 @@
     opacity: 1;
     order: -1;
     border-left: 10px solid $primary-color;
-    background: white;
+    background: rgba(245, 245, 245, 1);
     margin: 0.5rem 1.5%;
-    box-shadow: 0px 1px 2px 0px $dark-grey;
+    // box-shadow: 0px 1px 2px 0px $dark-grey;
+    border: 2px solid silver;
     transition: all 0.1s ease-out;
-    @include results-list-coloring();
+
     &:hover, &.hovered {
-        //order: -1;
         transform: translateY(-5px);
     }
+
+
     @media (min-width: 768px) and (max-width: 1200px) {
         flex: 1 1 100%;
         max-width: 100%;
@@ -64,10 +81,6 @@
     &.not-in-viewport {
         opacity: 0.5;
         order: 1;
-    }
-    a {
-        color: inherit;
-        text-decoration: none;
     }
 }
 
@@ -81,74 +94,158 @@
         width: 100%;
         height: auto;
         transition: transform 0.2s ease;
-
     }
 }
 
-.result-item-fav-control {
+.result-actions {
+    position: relative;
+    height: 40px;
+    margin-top: -20px;
+}
+
+.result-action {
     position: absolute;
-    z-index: 2;
-    top: 1em;
-    left: 1em;
-    cursor: pointer;
-    i {
-        opacity: 0.8;
-        font-size: 1.6em;
-        text-shadow:
-            -1px -1px 0 #fff,
-            1px -1px 0 #fff,
-            -1px 1px 0 #fff,
-            1px 1px 0 #fff;
-        transition: color 0.2s ease;
-        &:hover {
-            opacity: 1;
-        }  
-    }
-    &.isFav {
-        i {
-            opacity: 1;
+    top: 0;
+    left: 0;
+    height: 40px;
+    width: 40px;
+
+    border-radius: 20px;
+    line-height: 40px;
+    display: inline-block;
+    vertical-align: top;
+    border: 2px solid rgba(245, 245, 245, 1);
+    color: #fff;
+    background-color: rgba(120, 120, 120, 1);
+    text-align: center;
+    overflow: hidden;
+    text-shadow: .5px .5px 1px rgba(0, 0, 0, .6);
+
+    transition: all 250ms ease;
+
+    @each $category in $categories {
+        .category-#{nth($category, 1)} & {
+            background-color: lighten(desaturate(nth($category, 2), 20), 20);
+            &:hover {
+                background-color: nth($category, 2);
+            }
         }
     }
+
+    &:hover {
+        text-decoration: none;
+        color: #fff;
+    }
+
+    svg {
+        fill: #fff;
+        position: absolute;
+        max-width: 70%;
+        max-height: 70%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .results-item:hover &,
+    .results-item.hovered & {
+        @for $i from 0 through 5 {
+            &:nth-child(#{$i}) {
+                left: (45px * ($i - 1));
+            }
+        }
+    }
+}
+
+.result-view-details {
+    width: auto;
+    max-width: 40px;
+    .results-item:hover &,
+    .results-item.hovered & {
+        max-width: 300px;
+        padding: 0 10px;
+    }
+}
+
+.result-category-icon {
+    z-index: 1;
+    @each $category in $categories {
+        .category-#{nth($category, 1)} & {
+            background-color: nth($category, 2);
+        }
+    }
+}
+
+.result-fav-control {
+    position: absolute;
+    z-index: 2;
+    top: .7em;
+    right: .7em;
+    cursor: pointer;
+}
+
+.result-fav-icon {
+    color: rgba(0, 0, 0, .7);
+    font-size: 1.3em;
+    transition: color 0.2s ease;
+    @include textoutline(#fff);
+
+    .isFav & { color: rgba(200, 0, 0, 1); }
+    &:hover  { color: rgba(120, 0, 0, .8); }
 }
 
 .result-title {
-    display: block;
     font-size: 1.2em;
-    line-height: 1.2em;
     font-weight: 500;
-    margin: 0.5em 0;
+    line-height: 1.2em;
+
+    display: block;
+
+    margin: .5em 0;
     a {
-        color: inherit;
         text-decoration: none;
+
+        color: inherit;
     }
 }
 
+
 .result-infos {
     display: block;
+
     span {
-        font-size: 0.9em;
+        font-size: .9em;
         &:not(:last-child):after {
-            content: '-';
             margin: 0 3px 0 6px;
+
+            content: '-';
         }
     }
 }
 
+
 .result-themes {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    line-height: 0.2em;
+    line-height: .2em;
+
     position: absolute;
     bottom: 0;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+
     li {
-        margin: 0.4em;
-        margin-top: 0;
         display: inline-block;
-        height: 1.6em;
-        width: 1.6em;
         overflow: hidden;
-        img, svg {
+
+        width: 1.6em;
+        height: 1.6em;
+        margin: .4em;
+        margin-top: 0;
+
+        img,
+        svg {
             max-width: 100%;
             max-height: 100%;
         }
@@ -158,23 +255,32 @@
     }
 }
 
+
 .result-know-more {
-    display: block;
     position: absolute;
     right: 0;
     bottom: 0;
+
+    display: block;
+
     width: 0;
     height: 0;
+
     border-bottom: 40px solid $primary-color;
     border-left: 40px solid transparent;
+
     span {
-        cursor: pointer;
-        text-decoration: none;
-        color: white;
         font-size: 1.5em;
         font-weight: 300;
+
         position: absolute;
-        right: 6px;
         top: 11px;
+        right: 6px;
+
+        cursor: pointer;
+        text-decoration: none;
+
+        color: white;
     }
 }
+

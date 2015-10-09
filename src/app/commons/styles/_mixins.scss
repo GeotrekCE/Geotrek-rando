@@ -1,17 +1,3 @@
-@mixin results-list-coloring() {
-    @each $category in $categories {
-        &.category-#{nth($category, 1)} {
-            border-color: nth($category, 2);
-            .know-more {
-                border-bottom: 40px solid nth($category, 2);
-            }
-            .fav-or-not.isFav i {
-                color: nth($category, 2);
-            }
-        }
-    }
-}
-
 @mixin marker-coloring() {
     @each $category in $categories {
         &.category-#{nth($category, 1)} {
@@ -95,4 +81,12 @@
             }
         }
     }
+}
+
+@mixin textoutline($color: blue) {
+    text-shadow:
+        -1px -1px 0 $color,
+        1px -1px 0 $color,
+        -1px 1px 0 $color,
+        1px 1px 0 $color;
 }
