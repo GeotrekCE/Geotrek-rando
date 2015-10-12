@@ -3,9 +3,13 @@
 2.1.1.dev0
 ------------------
 
+**Breaking changes**
+
+* `SHOW_HOME` is now to `true` by default in order to test home page. You need to set it to false if you didn't have a home page.
+
 **New Features**
 
-*
+* Add random content widget and method.
 
 **Bug fixes**
 
