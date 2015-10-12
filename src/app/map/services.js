@@ -732,6 +732,18 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         }
     };
 
+    this.centerOn = function (result) {
+        var coords = utilsFactory.getStartPoint(result);
+        self.setCenter(coords);
+        return self.map;
+    };
+
+    this.setCenter = function (coords) {
+        self.map.panTo(coords);
+        return self.map;
+    };
+
+
     this.highlightPath = function (element, permanent, detailView) {
         var hoverStyle = {
             className:  'layer-highlight'

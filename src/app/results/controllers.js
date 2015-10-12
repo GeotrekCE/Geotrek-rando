@@ -1,6 +1,6 @@
 'use strict';
 
-function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory, favoritesService, filtersService) {
+function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory, favoritesService, filtersService, mapService) {
 
     function updateResults(forceRefresh) {
         $rootScope.elementsLoading ++;
@@ -71,6 +71,10 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
                 }
             }
         });
+    };
+
+    $scope.mapFocusOn = function (result) {
+        mapService.centerOn(result);
     };
 
     $scope.favoriteIcon = (globalSettings.FAVORITES_ICON ? globalSettings.FAVORITES_ICON : 'heart');
