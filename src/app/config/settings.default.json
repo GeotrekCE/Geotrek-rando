@@ -5,7 +5,7 @@
     "ENABLE_HTML_MODE": false,
     "LOGO_FILE": "",
     "FAVICON": "",
-    "SHOW_HOME": false,
+    "SHOW_HOME": true,
     "HOME_TEMPLATE_FILE": {
         "fr": "",
         "en": "",

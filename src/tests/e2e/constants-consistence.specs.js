@@ -4,12 +4,12 @@ describe('Geotrek constants consistency', function() {
     var constants = require('../../app/config/settings.constant.json');
 
     beforeAll(function() {
-        browser.get('/');
+        browser.get('/#/no-homme');
     });
 
     it('should display footer only if SHOW_FOOTER is true', function () {
         expect(
-            element(by.id('footer')).isPresent()
+            element(by.id('main-content')).element(by.id('footer')).isPresent()
         ).toBe(constants.SHOW_FOOTER);
     });
 

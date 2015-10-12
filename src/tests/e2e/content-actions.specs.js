@@ -3,7 +3,7 @@ describe('Trecks test data (actions)', function() {
     var constants = require('../../app/config/settings.constant.json');
 
     beforeAll(function() {
-        browser.get('/');
+        browser.get('/#/no-homme');
         browser.executeScript(function (constants) {
             localStorage.clear();
             localStorage.setItem(constants.PLATFORM_ID + '-language', JSON.stringify({
@@ -23,7 +23,7 @@ describe('Trecks test data (actions)', function() {
     });
 
     it('Two items should be favorited', function () {
-        browser.get('/');
+        browser.get('/#/no-homme');
         var favs = element.all(by.css('.isFav'));
         expect(favs.count()).toEqual(2);
     });
