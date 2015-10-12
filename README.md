@@ -112,7 +112,7 @@ You can override style by creating `scss` files in the `src/app/custom/styles` f
 
 ### Customisation of Home page
 
-1 - Create a `html` file in the `src/app/custom/templates` folder, with thewith the code of the language you want to apply it to (ex: `custom-home-fr.html`).
+1 - Create a `html` file in the `src/app/custom/templates` folder, with thewith the code of the language you want to apply it to (ex: `custom-home-fr.html`). You can use somes widgets which are documented in the `HOME_WIDGETS.md` file.
 
 2 - Add the file name to the corresponding lang of the object `HOME_TEMPLATE_FILE` in the `src/app/config/settings.custom.json` file.
 

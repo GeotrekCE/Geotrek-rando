@@ -10,6 +10,20 @@ function homePage() {
     };
 }
 
+function randomContent() {
+    return {
+        restrict: 'E',
+        replace: true,
+        template: require('./templates/random-contents.html'),
+        scope: {
+            categories: '@',
+            quantity: '@',
+        },
+        controller: 'RandomWidgetController'
+    };
+}
+
 module.exports = {
-    homePage: homePage
+    homePage: homePage,
+    randomContent: randomContent
 };

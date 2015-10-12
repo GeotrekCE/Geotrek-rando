@@ -55,6 +55,27 @@ function HomeController($scope, $rootScope, translationService, $location, homeS
 
 }
 
+function RandomWidgetController($scope, resultsService) {
+    function getRandomContents() {
+        resultsService.getRandomContentsByCategory($scope.categories, $scope.quantity)
+            .then(
+                function (randomContents) {
+                    $scope.randomContents = randomContents;
+                },
+                function (err) {
+                    console.error(err);
+                }
+            );
+    }
+
+    function init() {
+        getRandomContents();
+    }
+
+    init();
+}
+
 module.exports = {
-    HomeController: HomeController
+    HomeController: HomeController,
+    RandomWidgetController: RandomWidgetController
 };

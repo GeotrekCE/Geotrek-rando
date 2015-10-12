@@ -1,0 +1,6 @@
+<ul class="random-list">
+    <li class="random-element" id="random-{{content.id}}" ng-repeat="content in randomContents">
+        <img ng-src="{{content.properties.pictures[0].url}}" alt="{{content.properties.pictures[0].title}}">
+        <div class="title" ng-bind="content.properties.name"></div>
+    </li>
+</ul>

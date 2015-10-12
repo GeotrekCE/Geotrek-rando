@@ -215,14 +215,12 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                             parsedResults.push(result);
                         }
                     });
-
-                    var max = quantity <= parsedResults.length ? parseInt(quantity) : parsedResults;
-                    for (var i = max; i >= 0; i--) {
+                    var max = quantity <= parsedResults.length - 1 ? parseInt(quantity) : parsedResults.length;
+                    for (var i = max - 1; i >= 0; i--) {
                         var index = Math.floor(Math.random() * parsedResults.length);
                         randomResults.push(parsedResults[index]);
                         parsedResults.splice(index, 1);
                     }
-
                     if (randomResults.length === 0) {
                         deferred.reject('No matching category or no element in this category');
                     }
