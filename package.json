@@ -97,6 +97,9 @@
   "readmeFilename": "README.md",
   "bugs": {},
   "scripts": {
-    "test": "gulp && gulp tests"
+    "dist": "gulp",
+    "test": "gulp && gulp tests",
+    "watch": "gulp watch",
+    "start": "gulp && gulp watch"
   }
 }

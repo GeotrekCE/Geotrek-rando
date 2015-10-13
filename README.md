@@ -31,13 +31,6 @@ curl -sL https://deb.nodesource.com/setup | sudo bash -
 sudo apt-get install nodejs build-essential
 ```
 
-### Install Gulp-cli
-
-```
-cd
-npm install gulp-cli
-```
-
 ### Download Geotrek-Rando
 
 Download and extract latest release of Geotrek-Rando from [GitHub](https://github.com/makinacorpus/Geotrek-rando/releases/latest).
@@ -49,10 +42,10 @@ cd Geotrek-rando-*
 npm install
 ```
 
-### Launch gulp distribution task
+### Launch distribution task
 
 ```
-gulp
+npm run dist
 ```
 It will :
 * create missing config files
@@ -64,7 +57,7 @@ It will :
 
 ## CONFIGURATION & CUSTOMISATION
 
-*Please be aware that you need to run the gulp task `gulp` again (or use development mode) in order for changes to be visible*
+*Please be aware that you need to run the npm task `dist` twice (or use development mode) in order for changes to be visible*
 
 ### Minimum required
 
@@ -174,10 +167,10 @@ Then run `service nginx restart`
 
 ## DEVELOPMENT
 
-### Launch gulp bundling and watching task
+### Launch bundling and watching task
 
 ```
-gulp watch
+npm run watch
 ```
 Launch the app on localhost:3000 and watch for any change in sass or js files in src folder :
 * Each time a sass file is changed, the wole css is reinjected
