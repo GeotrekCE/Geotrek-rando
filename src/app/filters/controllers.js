@@ -16,6 +16,7 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
         filtersService.initFilters()
             .then(
                 function (filters) {
+                    filters.themes = _.sortBy(filters.themes, 'label');
                     $scope.filters = filters;
                     $rootScope.activeFilters = filtersService.getActiveFilters();
                     if (globalSettings.SHOW_FILTERS_ON_MAP) {
