@@ -1,5 +1,14 @@
 .leaflet-marker-icon {
-    @include marker-coloring();
+    @each $category in $categories {
+        &.category-#{nth($category, 1)} {
+            .marker svg .base {
+                fill: nth($category, 2);
+            }
+            &.popup .marker::before {
+                border-bottom-color: nth($category, 2);
+            }
+        }
+    }
 }
 
 .double-marker {
@@ -44,10 +53,10 @@
     }
     .icon {
         position: absolute;
-        top: 10px;
-        left: 9px;
-        width: 17px;
-        height: 17px;
+        top: 2px;
+        left: 2px;
+        width: 36px;
+        height: 36px;
         svg {
             fill: white;
         }
@@ -80,9 +89,8 @@
                 transform-origin: center bottom;
             }
             .icon {
-                top: 3px;
-                // transform: scale(1.2);
-                // transform-origin: center bottom;
+                transform: scale(1.2);
+                transform-origin: center 58px;
             }
         }
 
@@ -104,17 +112,27 @@
     }
 }
 
-.element-cluster, .touristic-cluster {
+.element-cluster,
+.touristic-cluster {
     .marker {
-        background: darken($primary-color, 10%);
-        border: 8px solid $primary-color;
-        padding: 3px;
-        border-radius: 20px;
-        text-align: center;
-        color: white;
+        font-family: 'frutiger';
+        font-size: 16px;
         font-weight: bold;
-        transition: all 0.1s ease-out;
+        line-height: 37px;
+
+        height: 100%;
+        padding: 0;
+
+        transition: all .1s ease-out;
+        text-align: center;
+
+        color: rgba(50, 50, 50, 1);
+        border: 4px solid currentColor;
+        border-radius: 20px;
+        background-color: rgba(245, 245, 245, 1);
     }
+
+
     &:hover, &.hovered {
         z-index: 55555555 !important;
         .marker {

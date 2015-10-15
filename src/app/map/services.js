@@ -1307,15 +1307,15 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
         },
         category_base: globalSettings.MARKER_BASE_ICON || {
             iconUrl: '/images/map/category_base.svg',
-            iconSize: [34, 48],
-            iconAnchor: [17, 48],
-            labelAnchor: [17, 17]
+            iconSize: [40, 60],
+            iconAnchor: [20, 60],
+            labelAnchor: [20, 20]
         },
         poi_base: globalSettings.POI_BASE_ICON || {
             iconUrl: '/images/map/category_base.svg',
-            iconSize: [34, 48],
-            iconAnchor: [17, 48],
-            labelAnchor: [17, 17]
+            iconSize: [40, 60],
+            iconAnchor: [20, 60],
+            labelAnchor: [20, 20]
         },
         service_base: globalSettings.SERVICE_BASE_ICON || {
             iconUrl: '',
