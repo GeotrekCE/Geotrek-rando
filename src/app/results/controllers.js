@@ -74,6 +74,7 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
     };
 
     $scope.mapFocusOn = function (result) {
+        $rootScope.mapIsShown = true;
         mapService.centerOn(result);
     };
 

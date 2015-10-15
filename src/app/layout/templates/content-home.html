@@ -1,8 +1,8 @@
-<div class="general-map" ng-class="{'shown': $root.mapIsShown}">
+<div class="content-pane map-pane general-map">
     <global-filters></global-filters>
     <geotrek-map></geotrek-map>
     <filters-tags ng-if="showFiltersOnMap"></filters-tags>
 </div>
-<div class="results-drawer" ng-class="{'shown': !$root.mapIsShown}">
+<div class="content-pane results-pane results-drawer">
     <results-liste></results-liste>
 </div>

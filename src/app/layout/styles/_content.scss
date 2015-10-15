@@ -5,74 +5,119 @@
 }
 
 #main-content {
-    z-index: 1;
-    width: 100%;
-    padding-top: 90px;
-    top: -90px;
-    height: 100%;
     position: relative;
+    z-index: 1;
+    top: -90px;
+
+    width: 100%;
+    height: 100%;
+    padding-top: 90px;
     @media (min-width: 768px) {
         &.footer-active {
             height: 90vh;
         }
     }
     @media (max-width: 769px) {
-        padding-top: 50px;
         top: -50px;
+
+        padding-top: 50px;
     }
-    & > .content {
-        height: 100%;
+}
+
+.view-content {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+    padding-left: 90px;
+}
+
+.content-pane {
+    position: relative;
+
+    float: left;
+
+    width: 50%;
+    height: 100%;
+
+    transition: left .3s ease, padding .3s ease;
+
+    box-shadow: -20px 0 30px 30px rgba(0, 0, 0, .5);
+}
+
+.map-pane {
+    z-index: 1;
+}
+.results-pane {
+    z-index: 0;
+}
+
+@media (max-width: 767px) {
+    .content-pane {
+        position: absolute;
+        top: 0;
+        left: 100%;
         width: 100%;
-        padding-left: 90px;
-        margin-left: -90px;
-        position: relative;
-        float: left;
-        .results-drawer {
-            width: 50%;
-            height: 100%;
-            float: left;
-            // background: $light-grey;
-            transition: left 0.3s ease;
-            @media (max-width: 767px) {
-                position: absolute;
-                width: 100%;
-                top: 0%;
-                left: -100%;
-                padding-left: 90px;
-                &.shown {
-                    left: 0;
-                }
-            }
+    }
+
+    .map-pane {
+        .global-filters,
+        .filters-tags {
+            left: 90px;
         }
-        .general-map {
-            box-shadow: -20px 0 30px 30px rgba(0, 0, 0, .5);
-            width: 50%;
-            height: 100%;
-            float: left;
-            position: relative;
-            transition: left 0.3s ease;
-            z-index: 1;
+    }
 
-            #global-filters {
-                z-index: 2;
-            }
-            #map {
-                z-index: 1;
-            }
-            .filters-tags {
-                z-index: 2;
-            }
-
-            @media (max-width: 767px) {
-                position: absolute;
-                width: 100%;
-                top: 0%;
-                left: 100%;
-                padding-left: 60px;
-                &.shown {
-                    left: 0;
-                }
-            }
+    .map-mode {
+        .map-pane {
+            left: 0;
+            padding-left: 90px;
+        }
+        .results-pane {
+            left: 100%;
+        }
+    }
+    .results-mode {
+        .map-pane {
+            left: -100%;
+        }
+        .results-pane {
+            left: 0;
+            padding-left: 90px;
         }
     }
 }
+
+@media (max-width: 540px) {
+    .map-pane {
+        .global-filters,
+        .filters-tags {
+            left: 55px;
+        }
+    }
+
+    .map-mode {
+        .map-pane {
+            left: 0;
+            padding-left: 55px;
+        }
+    }
+    .results-mode {
+        .results-pane {
+            left: 0;
+            padding-left: 55px;
+        }
+    }
+}
+
+
+
+.global-filters {
+    z-index: 1;
+}
+.leaflet-container {
+    z-index: 0;
+}
+.filters-tags {
+    z-index: 1;
+}
+

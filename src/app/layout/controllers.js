@@ -4,7 +4,7 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
     $rootScope.currentState_name = $state.current.name;
     $rootScope.showFooterOnApp = globalSettings.SHOW_FOOTER;
     $rootScope.elementsLoading = 0;
-    $rootScope.mapIsShown = false;
+    $rootScope.mapIsShown = true;
     $rootScope.placeHolderImage = globalSettings.PLACEHOLDER_IMAGE ? './images/custom/' + globalSettings.PLACEHOLDER_IMAGE : './images/placeholder.png';
 
     if (globalSettings.FAVICON) {
