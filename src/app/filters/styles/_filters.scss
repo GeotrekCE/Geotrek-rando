@@ -42,9 +42,7 @@
 .global-filters-search {
     max-width: 50%;
     padding: 0.4rem;
-    @media (max-width: 1200px) {
-        min-width: 100%;
-    }
+
     .input-group {
         box-shadow: 0 1px 1px 0px lighten($dark-grey, 50%);
         input {
@@ -209,6 +207,9 @@
 
 .global-filters-themes {
     padding-bottom: 0.4rem;
+    @media (max-width: 540px) {
+        font-size: .75em;
+    }
 }
 
 .global-filters-themes-title {

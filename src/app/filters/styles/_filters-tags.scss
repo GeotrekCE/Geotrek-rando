@@ -80,6 +80,9 @@
     padding: .75em 3em;
 
     list-style: none;
+    @media (max-width: 767px) {
+        padding: .75em .5em;
+    }
 }
 
 
@@ -89,6 +92,9 @@
     display: inline-block;
 
     margin: 0 .2em .5em;
+    @media (max-width: 767px) {
+        margin: 0 .1em .35em .1em;
+    }
 
     text-transform: uppercase;
     padding-left: .3em;

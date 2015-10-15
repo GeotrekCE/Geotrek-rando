@@ -14,8 +14,8 @@
             ng-if="activeFiltersTags.length > 0"
             ng-click="resetFilters()">
             <span class="text">{{ 'RESET' | translate}}</span><ng-include class="filters-tags-icon" src="'/images/icons/refresh.svg'"></ng-include>
-        </li>
-        <li
+        </li><!--
+        --><li
             class="filters-tags-item filters-tag category-{{::filter.typeId}}"
             id="tag-{{::filter.id}}"
             ng-repeat="filter in activeFiltersTags | orderBy:'typeId' track by filter.uid"
