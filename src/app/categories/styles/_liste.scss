@@ -277,21 +277,7 @@
         }
 
         .category-filter {
-            padding-left: 20px;
-
-            + .category-filter {
-                position: relative;
-                &:before {
-                    content: "";
-                    display: block;
-                    position: absolute;
-                    top: 0;
-                    left: 1.75em;
-                    right: 10px;
-                    height: 1px;
-                    background-color: rgba(#000, .2);
-                }
-            }
+            // padding-left: 20px;
         }
 
         .more-or-less {
@@ -319,7 +305,10 @@
 
         .filter-title {
             cursor: pointer;
-            padding: .35em .1em .35em 1em;
+            padding: .35em .1em .10em 1.75em;
+            background-color: rgba(0, 0, 0, .15);
+            margin-right: 10px;
+            margin-left: 10px;
             > span:first-child {
                 font-weight: bolder;
             }
@@ -327,7 +316,7 @@
 
         .slider {
             .slider-container {
-                padding: 1em 2em 2em;
+                padding: .5em 2em 1.75em;
             }
             label {
                 margin-top: 0.4em;
@@ -353,12 +342,15 @@
             }
 
             span.rz-pointer {
-                background: white;
+                background-color: rgba(255, 255, 255, .3);
                 &:after {
-                    background: transparentize(black, 0.4);
+                    background-color: rgba(0, 0, 0, .85);
                 }
-                &.rz-active:after {
-                    background: black;
+                &.rz-active {
+                    background-color: rgba(255, 255, 255, .7);
+                    &:after {
+                        background-color: black;
+                    }
                 }
             }
 
@@ -370,6 +362,7 @@
         .choices {
             width: 100%;
             overflow: hidden;
+            padding: .35em 0 .75em;
             z-index: 11;
             .form-group {
                 margin: 0;
@@ -396,7 +389,7 @@
                 label {
                     margin: 0;
                     width: 100%;
-                    padding: 1em 1em 1em 2em;
+                    padding: .35em 1em .35em 2em;
                     font-size: 0.8rem;
                     line-height: 0.8rem;
                     font-weight: normal;
