@@ -204,6 +204,19 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
         $scope.propagateActiveFilters();
     };
 
+    $scope.toggleAllCategories = function () {
+        var categories = $scope.categories;
+        if ($rootScope.activeFilters.categories.length > 0) {
+            $rootScope.activeFilters.categories = [];
+        } else {
+            $rootScope.activeFilters.categories = [];
+            categories.forEach(function (category) {
+                $rootScope.activeFilters.categories.push(category.id.toString());
+            });
+        }
+        $scope.propagateActiveFilters();
+    };
+
     $scope.toggleCategory = function (category) {
         var categories = $rootScope.activeFilters.categories,
             indexOfCategory = categories.indexOf(category.id.toString());

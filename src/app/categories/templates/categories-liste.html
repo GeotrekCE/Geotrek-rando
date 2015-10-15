@@ -1,6 +1,14 @@
 <ul class="categories" ng-class="{extend: extend, filtering: filtering}">
     <li class="categories-head">
-        <div class="categories-title" ng-click="toggleCategories()">Menu</div><div class="categories-filters-close"><button ng-click="closeCategoryFilters()"> <ng-include class="stripe" src="'/images/icons/stripe.svg'"></ng-include> Retour</button></div><div class="categories-close"><button ng-click="foldCategories()">Fermer <ng-include class="cross" src="'/images/icons/cross.svg'"></ng-include></button></div>
+        <!--
+            MENU
+        --><div class="categories-title" ng-click="toggleCategories()">Menu</div><!--
+            Toggle All
+        --><div class="categories-all-check checkbox" ng-click="toggleAllCategories()" ng-class="{full: activeFilters.categories.length === categories.length, checked: activeFilters.categories.length > 0}"><i ng-if="true" class="fa fa-check"></i></div><!--
+            Close subfilters
+        --><div class="categories-filters-close"><button ng-click="closeCategoryFilters()"> <ng-include class="stripe" src="'/images/icons/stripe.svg'"></ng-include> Retour</button></div><!--
+            Close Categories
+        --><div class="categories-close"><button ng-click="foldCategories()">Fermer <ng-include class="cross" src="'/images/icons/cross.svg'"></ng-include></button></div>
     </li>
     <li ng-repeat="category in categories | orderBy: 'order' track by category.id" class="category {{::category.cat_class}}" ng-class="{active : activeFilters.categories.indexOf(category.id) > -1, open: category.open}" id="cat-{{::category.id}}">
         <!--
