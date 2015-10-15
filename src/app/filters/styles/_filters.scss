@@ -4,7 +4,7 @@
     left: 0;
     right: 0;
 
-    padding: 15px 20px;
+    padding: 10px 20px;
 
     background-color: rgba(#fff, .8);
     transition: all 300ms ease;
@@ -12,11 +12,13 @@
     overflow: hidden;
     .global-filters-bottom {
         height: 0;
-        opacity: 0.3;
+        opacity: 0;
+        transition: opacity 350ms ease;
     }
     &.extend {
         overflow: visible;
         .global-filters-bottom {
+            margin-top: 5px;
             height: auto;
             opacity: 1;
         }
