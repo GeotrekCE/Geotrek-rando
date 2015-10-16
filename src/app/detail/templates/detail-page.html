@@ -2,7 +2,12 @@
     <detail-content></detail-content>
     <warning-panel></warning-panel>
 
-    <div class="detail-map" ng-class="{'no-interests': interestShown === null, 'hide-near-elements': interestShown !== 'near', 'hide-pois': interestShown !== 'pois', 'hide-children': interestShown !== 'children'}">
-        <geotrek-map></geotrek-map>
-    </div>
+    <geotrek-map
+        class="detail-map"
+        ng-class="{
+            'no-interests':       interestShown === null,
+            'hide-near-elements': interestShown !== 'near',
+            'hide-pois':          interestShown !== 'pois',
+            'hide-children':      interestShown !== 'children'
+        }"></geotrek-map>
 </section>

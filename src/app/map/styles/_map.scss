@@ -1,4 +1,4 @@
-#map {
+.general-map .leaflet-container {
     height: 100%;
     width: 100%;
 }
@@ -87,9 +87,10 @@
     }
 }
 
-div:not(.detail-map) > #map {
-    .leaflet-control .services {
-        display: none;
+.leaflet-control .services {
+    display: none;
+    .detail-map & {
+        display: block;
     }
 }
 
@@ -99,16 +100,16 @@ div:not(.detail-map) > #map {
 
 // Rules are separated because they don't work if declared with comas...
 //
-.detail-map .leaflet-container:-webkit-full-screen .leaflet-right {
+.detail-map.leaflet-container:-webkit-full-screen .leaflet-right {
     right: 25%;
 }
-.detail-map .leaflet-container:-moz-full-screen .leaflet-right {
+.detail-map.leaflet-container:-moz-full-screen .leaflet-right {
     right: 25%;
 }
-.detail-map .leaflet-container:full-screen .leaflet-right {
+.detail-map.leaflet-container:full-screen .leaflet-right {
     right: 25%;
 }
-.detail-map .leaflet-pseudo-fullscreen .leaflet-right {
+.detail-map.leaflet-pseudo-fullscreen .leaflet-right {
     right: 25%;
 }
 

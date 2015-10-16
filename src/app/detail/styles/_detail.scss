@@ -509,7 +509,7 @@
         padding: 0;
         height: 100%;
         width: 40.5%;
-        margin-left: 0.5%;
+        // margin-left: 0.5%;
         transition: width 0.3s ease, left 0.3s ease;
         @media (min-width: 1600px) {
             &.no-interests {
@@ -528,7 +528,7 @@
             height: 100%;
             width: 100%;
         }
-        .leaflet-container + .interests {
+        &.leaflet-container + .interests {
             z-index: 99999999999999;
         }
     }
