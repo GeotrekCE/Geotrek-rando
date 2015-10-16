@@ -17,7 +17,16 @@ function detailContent() {
     };
 }
 
+function detailAside() {
+    return {
+        restrict: 'E',
+        replace: true,
+        template: require('./templates/detail-aside.html')
+    };
+}
+
 module.exports = {
     detailDirective: detailDirective,
-    detailContent: detailContent
+    detailContent:   detailContent,
+    detailAside:     detailAside
 };
