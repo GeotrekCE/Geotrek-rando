@@ -9,6 +9,15 @@ function detailDirective() {
     };
 }
 
+function detailContent() {
+    return {
+        restrict: 'E',
+        replace: true,
+        template: require('./templates/detail-content.html')
+    };
+}
+
 module.exports = {
-    detailDirective: detailDirective
+    detailDirective: detailDirective,
+    detailContent: detailContent
 };
