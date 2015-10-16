@@ -17,7 +17,7 @@
         </div>
         <div class="global-filters-bottom">
             <div class="global-filters-geo-filters geo-filters" ng-class="{hidden: !enabCities && !enabDistricts && !enabStructures, fullsize: enabCities && enabDistricts && enabStructures}">
-                <div ng-if="enabCities" class="selector cities" ng-class="{empty: filters.cities.length === 0}">
+                <div ng-if="enabCities" class="selector cities" ng-class="{empty: filters.cities.length === 0, opened: selectMenus.cities.opened}" ng-mouseenter="openSelectMenu('cities')" ng-mouseleave="closeSelectMenu('cities')">
                     <span ng-if="filterLength.cities > 0">{{filterLength.cities}} {{'CITIES' | translate}} {{'SELECTED' | translate}} <span class="caret"></span></span>
                     <span ng-if="!filterLength.cities || filterLength.cities === 0">{{'CITIES' | translate}} <span class="caret"></span></span>
                     <div class="choices">
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-                <div ng-if="enabDistricts" class="selector districts" ng-class="{empty: filters.districts.length === 0}">
+                <div ng-if="enabDistricts" class="selector districts" ng-class="{empty: filters.districts.length === 0, opened: selectMenus.districts.opened}" ng-mouseenter="openSelectMenu('districts')" ng-mouseleave="closeSelectMenu('districts')">
                     <span ng-if="filterLength.districts > 0">{{filterLength.districts}} {{'DISTRICTS' | translate}} {{'SELECTED' | translate}} <span class="caret"></span></span>
                     <span ng-if="!filterLength.districts || filterLength.districts === 0">{{'DISTRICTS' | translate}} <span class="caret"></span></span>
                     <div class="choices">
@@ -65,7 +65,7 @@
                         </div>
                     </div>
                 </div>
-                <div ng-if="enabStructures" class="selector structures" ng-class="{empty: filters.structure.length === 0}">
+                <div ng-if="enabStructures" class="selector structures" ng-class="{empty: filters.structure.length === 0, opened: selectMenus.structure.opened}" ng-mouseenter="openSelectMenu('structures')" ng-mouseleave="closeSelectMenu('structure')">
                     <span ng-if="filterLength.structure > 0">{{filterLength.structure}} {{'STRUCTURES' | translate}} {{'SELECTED' | translate}} <span class="caret"></span></span>
                     <span ng-if="!filterLength.structure || filterLength.structure === 0">{{'STRUCTURES' | translate}} <span class="caret"></span></span>
                     <div class="choices">

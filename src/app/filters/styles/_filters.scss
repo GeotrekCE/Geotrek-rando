@@ -197,7 +197,7 @@
                 }
             }
         }
-        &:not(.empty):hover, &:not(.empty):focus {
+        &:not(.empty).opened {
             .choices {
                 max-height: 300px;
             }
