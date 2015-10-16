@@ -29,6 +29,7 @@ HEADER_TEMPLATE_FILE | String(file name) | `""` | Name of a custom template for 
 ENABLE_DISTRICTS_FILTERING | Boolean | `true` | Show districts filtering on results page
 ENABLE_CITIES_FILTERING | Boolean | `true` | Show cities filtering on results page
 ENABLE_STRUCTURE_FILTERING | Boolean | `true` | Show structure filtering on results page
+GEO_FILTERS_AUTO_CLOSE | Boolean | `false` | If true select filters menus will close when a value is selected.
 RULES_FLAT_PAGES_ID | string | `""` | Specify the rules flat-page id which will be used in the detail page part about the rules.
 FAVORITES_ICON | String ([font awesome icon](http://fortawesome.github.io/Font-Awesome/icons/)) | `"heart"` | Specify the icon used for the favorites on the website. It must be a valid font awesome icon.
 SHARE_ICON | String ([font awesome icon](http://fortawesome.github.io/Font-Awesome/icons/)) | `"share-alt"` | Specify the icon used for the favorites on the website. It must be a valid font awesome icon.

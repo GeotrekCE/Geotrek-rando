@@ -6,6 +6,26 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
     $scope.enabCities = globalSettings.ENABLE_CITIES_FILTERING;
     $scope.enabStructures = globalSettings.ENABLE_STRUCTURE_FILTERING;
     $scope.filterLength = {};
+    $scope.selectMenus = {
+        cities: {
+            opened: false
+        },
+        districts: {
+            opened: false
+        },
+        structure: {
+            opened: false
+        }
+
+    };
+
+    function openSelectMenu(selectName) {
+        $scope.selectMenus[selectName].opened = true;
+    }
+
+    function closeSelectMenu(selectName) {
+        $scope.selectMenus[selectName].opened = false;
+    }
 
     function updateFiltersTags() {
         $rootScope.activeFiltersTags = filtersService.getTagFilters();
@@ -42,6 +62,9 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
         } else if (filterId !== 'all') {
             $rootScope.activeFilters[filterType] = [filterId.toString()];
         }
+        if (globalSettings.GEO_FILTERS_AUTO_CLOSE && $scope.selectMenus[filterType]) {
+            closeSelectMenu(filterType);
+        }
         $scope.propagateActiveFilters();
     };
 
@@ -73,6 +96,8 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
     ];
 
     $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
+    $scope.openSelectMenu  = openSelectMenu;
+    $scope.closeSelectMenu = closeSelectMenu;
 
 }
 
