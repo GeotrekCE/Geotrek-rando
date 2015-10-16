@@ -32,7 +32,7 @@
     padding-left: 90px;
 }
 
-.content-pane {
+.resultsview-pane {
     position: relative;
 
     float: left;
@@ -53,7 +53,7 @@
 }
 
 @media (max-width: 767px) {
-    .content-pane {
+    .resultsview-pane {
         position: absolute;
         top: 0;
         left: 100%;
