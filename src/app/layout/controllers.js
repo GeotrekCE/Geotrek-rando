@@ -7,6 +7,7 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
     $rootScope.mapIsShown = true;
     $rootScope.placeHolderImage = globalSettings.PLACEHOLDER_IMAGE ? './images/custom/' + globalSettings.PLACEHOLDER_IMAGE : './images/placeholder.png';
 
+
     if (globalSettings.FAVICON) {
         var base = './images/custom/';
         $rootScope.favIcon = {
@@ -49,6 +50,7 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
     }
 
     var rootScopeEvents = [
+
         $rootScope.$on("$stateChangeSuccess",  function (event, toState, toParams, fromState, fromParams) {
             // to be used for back button //won't work when page is reloaded.
             $rootScope.previousState_name = fromState.name;
