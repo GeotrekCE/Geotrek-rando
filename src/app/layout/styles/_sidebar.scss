@@ -21,12 +21,21 @@
     height: 50px;
     line-height: 50px;
     white-space: nowrap;
+
+    @media (max-width: 767px) {
+        height: 30px;
+        line-height: 30px;
+    }
 }
 
 .toolbar-action {
     line-height: 30px;
     display: inline-block;
     vertical-align: middle;
+
+    @media (max-width: 767px) {
+        line-height: 25px;
+    }
 
     .isFav i {
         transform: scale(1.5);
