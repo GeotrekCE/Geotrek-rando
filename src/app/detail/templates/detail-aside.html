@@ -1,4 +1,4 @@
-<div ng-if="pois.length > 0 || nearElements.length > 0 || elementChildren.length > 0 || parentElement" class="interests">
+<div class="detailsview-pane detail-aside-pane interests" ng-if="pois.length > 0 || nearElements.length > 0 || elementChildren.length > 0 || parentElement">
     <div class="children" ng-if="elementChildren.length > 0" ng-class="{collapsed: interestShown !== 'children'}">
         <h3 ng-click="toggleInterest('children')">{{'CHILDREN' | translate}} <i class="fa fa-angle-down"></i></h3>
         <div class="collapsor">
