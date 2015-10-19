@@ -50,16 +50,6 @@
     }
 }
 
-@mixin detail-sidebar-coloring() {
-    @each $category in $categories {
-        &.category-#{nth($category, 1)} {
-            .isFav i {
-                color: nth($category, 2);
-            }
-        }
-    }
-}
-
 @mixin textoutline($color: blue) {
     text-shadow:
         -1px -1px 0 $color,

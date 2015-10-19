@@ -1,46 +1,46 @@
 .sidebar {
-    height: 100%;
-    width: 90px;
-    @media (max-width: 540px) {
-        width: 55px;
-    }
-    float: left;
-    background-color: #3a3a3a;
-    color: white;
-    position: relative;
-    z-index: 3;
-    box-shadow: -20px 0 30px 30px rgba(0, 0, 0, .5);
-
-    .toolbar-actions {
-        list-style: none;
-        padding: 0;
-    }
-
-    & > div {
+    .layout-root & {
         height: 100%;
-        @include detail-sidebar-coloring();
+        width: 90px;
+        @media (max-width: 540px) {
+            width: 55px;
+        }
+        float: left;
+        background-color: #3a3a3a;
+        color: white;
+        position: relative;
+        z-index: 3;
+        box-shadow: -20px 0 30px 30px rgba(0, 0, 0, .5);
     }
 }
 
-.toolbar-action {
+.toolbar-actions {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     height: 50px;
-    margin-bottom: 1px;
+    line-height: 50px;
+    white-space: nowrap;
+}
+
+.toolbar-action {
+    line-height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+
     .isFav i {
         transform: scale(1.5);
+    }
+
+    + .toolbar-action {
+        border-left: 1px solid currentColor;
     }
 }
 
 .toolbar-action-link {
-    padding: 1em;
-    text-align: center;
-    text-decoration: none;
     display: block;
-    width: 100%;
-    height: 100%;
-    border: none;
-    box-shadow: none;
-    background: white;
     color: $dark-grey;
+    padding: 0 20px;
     .txt-icon {
         font-weight: bold;
     }
@@ -51,4 +51,8 @@
         outline-style: none;
         box-shadow: 0px 1px 2px 0px #444;
     }
+}
+
+.toolbar-action-label {
+    display: none;
 }
