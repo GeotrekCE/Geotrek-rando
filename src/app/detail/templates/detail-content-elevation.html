@@ -1,0 +1,13 @@
+<div class="detail-content-elevation" ng-if="result.properties.contentType === 'trek'" id="elevation">
+    <h3><i class="fa fa-area-chart"></i>{{'PROFILE_ALTI' | translate}}</h3>
+    <div class="chart-container">
+        <p class="axislabel">{{'ELEVATIION_IN_M' | translate}}</p>
+        <p id="elevation-details" class="axislabel">
+            <span class="min">{{'MIN' | translate}} <span class="value">{{:: result.properties.min_elevation }} m</span></span> -
+            <span class="max">{{'MAX' | translate}} <span class="value">{{:: result.properties.max_elevation }} m</span></span>
+        </p>
+        <div class="canvas-container"></div>
+        <span id="elevation-altitude"></span> <span class="axislabel">{{'LENGTH_IN_M' | translate}}</span>
+        <p id="mouseoverprofil" class="axislabel" >&nbsp;</p>
+    </div>
+</div>
