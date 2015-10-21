@@ -41,7 +41,7 @@
     </div>
 
     <div class="detail-content-descriptions element-description">
-        <div ng-if="result.properties.description" ng-bind-html="sanitizeData(result.properties.description, true)" class="description"></div>
+        <div class="detail-content-description" ng-if="result.properties.description" ng-bind-html="sanitizeData(result.properties.description, true)"></div>
         <div class="detail-content-events-info">
             <div ng-if="result.properties.begin_date" class="date">
                 <h5>{{'DATES' | translate}}</h5>
