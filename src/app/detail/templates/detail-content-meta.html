@@ -1,10 +1,10 @@
-<div class="detail-content-meta pictos">
-    <ul>
-        <li ng-if="result.properties.category.label" class="category-label">
-            <div class="caption">
-                <h3>{{'CATEGORY' | translate}}</h3>
+<div>
+    <ul class="detail-content-meta pictos">
+        <li ng-if="result.properties.category.label" class="detail-content-meta-item category-label">
+            <div class="meta-item-title caption">
+                {{'CATEGORY' | translate}}
             </div>
-            <div class="content">
+            <div class="meta-item-content">
                 <div>
                     <ng-include ng-if="result.properties.category.pictogram && isSVG(result.properties.category.pictogram)" src="result.properties.category.pictogram"></ng-include>
                     <img ng-if="result.properties.category.pictogram && !isSVG(result.properties.category.pictogram)" ng-src="{{::result.properties.category.pictogram}}" ng-alt="{{::result.properties.category.label}}">
@@ -13,13 +13,13 @@
             </div>
         </li>
 
-        <li ng-if="result.properties.category.label" class="divider"></li>
+        <li ng-if="result.properties.category.label" class="detail-content-meta-item divider"></li>
 
-        <li ng-if="result.properties.type1.length > 0" class="type1">
-            <div class="caption">
-                <h3>{{::result.properties.category.type1_label}}</h3>
+        <li ng-if="result.properties.type1.length > 0" class="detail-content-meta-item type1">
+            <div class="meta-item-title caption">
+                {{::result.properties.category.type1_label}}
             </div>
-            <div class="content">
+            <div class="meta-item-content">
                 <div ng-repeat="currentType in result.properties.type1 track by currentType.id">
                     <ng-include ng-if="currentType.pictogram && isSVG(currentType.pictogram)" src="currentType.pictogram"></ng-include>
                     <img ng-if="currentType.pictogram && !isSVG(currentType.pictogram)" ng-src="{{::currentType.pictogram}}" ng-alt="{{::currentType.name}}">
@@ -28,13 +28,13 @@
             </div>
         </li>
 
-        <li ng-if="result.properties.type1.length > 0" class="divider"></li>
+        <li ng-if="result.properties.type1.length > 0" class="detail-content-meta-item divider"></li>
 
-        <li ng-if="result.properties.type2.length > 0" class="type2">
-            <div class="caption">
-                <h3>{{::result.properties.category.type2_label}}</h3>
+        <li ng-if="result.properties.type2.length > 0" class="detail-content-meta-item type2">
+            <div class="meta-item-title caption">
+                {{::result.properties.category.type2_label}}
             </div>
-            <div class="content">
+            <div class="meta-item-content">
                 <div ng-repeat="currentType2 in result.properties.type2 track by currentType2.id">
                     <ng-include ng-if="currentType2.pictogram && isSVG(currentType2.pictogram)" src="currentType2.pictogram"></ng-include>
                     <img ng-if="currentType2.pictogram && !isSVG(currentType2.pictogram)" ng-src="{{::currentType2.pictogram}}" ng-alt="{{::currentType2.name}}">
@@ -43,14 +43,14 @@
             </div>
         </li>
 
-        <li ng-if="result.properties.type2.length > 0" class="divider"></li>
+        <li ng-if="result.properties.type2.length > 0" class="detail-content-meta-item divider"></li>
 
-        <li>
-            <div class="caption">
-                <h3>{{'INFORMATIONS' | translate}}</h3>
+        <li class="detail-content-meta-item">
+            <div class="meta-item-title caption">
+                {{'INFORMATIONS' | translate}}
             </div>
 
-            <div class="content">
+            <div class="meta-item-content">
                 <div ng-if="result.properties.duration_pretty" class="duration">
                     <ng-include src="'./images/icons/duration.svg'"></ng-include>
                     <span>{{::result.properties.duration_pretty}}</span>
@@ -88,13 +88,13 @@
             </div>
         </li>
 
-        <li class="divider"></li>
+        <li class="detail-content-meta-item divider"></li>
 
-        <li ng-if="result.properties.themes" class="themes">
-            <div class="caption">
-                <h3>{{'THEMES' | translate}}</h3>
+        <li ng-if="result.properties.themes" class="detail-content-meta-item themes">
+            <div class="meta-item-title caption">
+                {{'THEMES' | translate}}
             </div>
-            <div class="content">
+            <div class="meta-item-content">
                 <div ng-repeat="theme in result.properties.themes" class="theme {{::removeDiacritics(theme.label)}}">
                     <ng-include ng-if="theme.pictogram &&isSVG(theme.pictogram)" src="theme.pictogram"></ng-include>
                     <img ng-if="theme.pictogram && !isSVG(theme.pictogram)" ng-src="{{::theme.pictogram}}" ng-alt="{{::theme.label}}">

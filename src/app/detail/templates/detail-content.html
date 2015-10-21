@@ -17,14 +17,14 @@
             <detail-content-pictures></detail-content-pictures>
 
             <div class="detail-content-intro-text">
-                <div class="ambiance-and-teaser">
+                <div class="detail-content-ambiance-and-teaser">
                     <div class="detail-content-teaser description_teaser" ng-if="result.properties.description_teaser">
                         <i class="fa fa-quote-left"></i>
                         <div ng-bind-html="sanitizeData(result.properties.description_teaser, true)"></div>
                     </div>
                     <div ng-if="result.properties.ambiance" ng-bind-html="sanitizeData(result.properties.ambiance, true)" class="ambiance"></div>
                 </div>
-                <div class="from-to">
+                <div class="detail-content-from-to">
                     <span ng-if="result.properties.departure && result.properties.departure !== result.properties.arrival">{{ 'START' | translate}} {{::result.properties.departure}}</span>
                     <span ng-if="result.properties.arrival">
                         <span ng-if="result.properties.departure !== result.properties.arrival" class="arrival">
@@ -48,7 +48,7 @@
 
         <div class="detail-content-descriptions element-description">
             <div ng-if="result.properties.description" ng-bind-html="sanitizeData(result.properties.description, true)" class="description"></div>
-            <div class="events-info">
+            <div class="detail-content-events-info">
                 <div ng-if="result.properties.begin_date" class="date">
                     <h5>{{'DATES' | translate}}</h5>
                     <span ng-if="result.properties.begin_date" class="begin-date">{{::result.properties.begin_date | date:'dd/MM/yyyy'}}</span>
@@ -134,13 +134,13 @@
             <div class="detail-content-desks info-desks" ng-if="result.properties.information_desks[0]">
                 <h3><i class="fa fa-info"></i>{{ 'INFORMATION_DESKS' | translate}}</h3>
                 <ul>
-                    <li ng-repeat="desk in result.properties.information_desks" class="desk card">
-                        <div class="infos">
-                            <div class="image">
+                    <li ng-repeat="desk in result.properties.information_desks" class="detail-content-desk card">
+                        <div class="detail-content-desk-infos">
+                            <div class="detail-content-desk-image">
                                 <img ng-if="desk.photo_url" ng-src="{{::desk.photo_url}}" alt="{{::desk.name}}"/>
                                 <img ng-if="!desk.photo_url" ng-src="/images/desk-placeholder.jpg" alt="{{::desk.name}}"/>
                             </div>
-                            <div class="contact">
+                            <div class="detail-content-desk-contact">
                                 <div class="name">{{::desk.name}}</div>
                                 <div class="address">
                                     <div class="street">
@@ -154,7 +154,7 @@
                                 <a ng-if="desk.phone" class="phone" href="tel:{{::desk.phone}}" target="_blank">{{::desk.phone}}</a>
                             </div>
                         </div>
-                        <div class="description">
+                        <div class="detail-content-desk-description">
                             <div class="text" ng-bind-html="sanitizeData(desk.description, true)"></div>
                         </div>
                     </li>

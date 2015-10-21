@@ -8,39 +8,25 @@
     position: relative;
     overflow: hidden;
     background: $neutral-grey;
-    @each $category in $categories {
-        &.category-#{nth($category, 1)} {
-            .informations {
-                .element-title {
-                    background: nth($category, 2);
-                }
-                .from-to {
-                    background: nth($category, 2);
-                }
-                .main-infos .description_teaser {
-                    color: nth($category, 2);
-                }
-                .info-desks .infos {
-                    background: nth($category, 2);
-                }
-                .contact-card .card {
-                    border-left-color: nth($category, 2);
-                }
-            }
-        }
-    }
 
-    @media (max-width: 767px) {
-        &.showMap {
-            .informations {
-                left: -100%;
-            }
-            .detail-map {
-                left: 0%;
-            }
-            .interests {
-                left: 100%;
-            }
+
+}
+@each $category in $categories {
+    &.category-#{nth($category, 1)} {
+        .detail-content-title {
+            background: nth($category, 2);
+        }
+        .detail-content-from-to {
+            background: nth($category, 2);
+        }
+        .detail-content-teaser {
+            color: nth($category, 2);
+        }
+        .detail-content-desk-infos {
+            background: nth($category, 2);
+        }
+        .detail-content-desk-card {
+            border-left-color: nth($category, 2);
         }
     }
 }
