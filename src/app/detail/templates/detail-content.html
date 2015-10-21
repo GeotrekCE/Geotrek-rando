@@ -1,6 +1,6 @@
 <div class="detailsview-pane detail-content-pane informations">
-    <div class="header">
-        <div class="element-title">
+    <div class="header detail-content-header">
+        <div class="detail-content-title element-title">
             <div class="cat-icon">
                 <ng-include ng-if="isSVG(result.properties.category.pictogram)" src="result.properties.category.pictogram"></ng-include>
                 <img ng-if="!isSVG(result.properties.category.pictogram)" ng-src="{{::result.properties.category.pictogram}}" ng-alt="{{::result.properties.category.label}}">
@@ -10,8 +10,8 @@
     </div>
 
     <div class="main-infos">
-        <div class="intro">
-            <div class="pictos">
+        <div class="detail-content-intro intro">
+            <div class="detail-content-meta pictos">
                 <ul>
 
                     <li ng-if="result.properties.category.label" class="category-label">
@@ -114,7 +114,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="pictures" ng-if="result.properties.pictures[0]">
+            <div class="detail-content-pictures pictures" ng-if="result.properties.pictures[0]">
                 <div class="main-visual" ng-click="showLightbox(result.properties.pictures, 0)">
                     <img ng-src="{{::result.properties.pictures[0].url}}" ng-alt="{{::result.properties.pictures[0].legend}}">
                     <div class="picture-credit">
@@ -130,9 +130,9 @@
                     </li>
                 </ul>
             </div>
-            <div class="text">
+            <div class="detail-content-intro-text">
                 <div class="ambiance-and-teaser">
-                    <div ng-if="result.properties.description_teaser" class="description_teaser">
+                    <div class="detail-content-teaser description_teaser" ng-if="result.properties.description_teaser">
                         <i class="fa fa-quote-left"></i>
                         <div ng-bind-html="sanitizeData(result.properties.description_teaser, true)"></div>
                     </div>
@@ -159,7 +159,7 @@
                 </div>
             </div>
         </div>
-        <div class="element-description">
+        <div class="detail-content-descriptions element-description">
             <div ng-if="result.properties.description" ng-bind-html="sanitizeData(result.properties.description, true)" class="description"></div>
             <div class="events-info">
                 <div ng-if="result.properties.begin_date" class="date">
@@ -204,25 +204,22 @@
                     <span>{{::result.properties.speaker}}</span>
                 </div>
             </div>
-            <div ng-if="result.properties.is_park_centered" class="is-park-centered">
+            <div class="detail-content-notice is-park-centered" ng-if="result.properties.is_park_centered">
                 <i class="fa fa-info-circle"></i>
                 <p ng-if="!rulesId">{{ 'PARK_CENTERED' | translate}}</p>
                 <a ng-if="rulesId" ui-sref="layout.flat({flatID: rulesId})">{{ 'PARK_CENTERED' | translate}}</a>
             </div>
-            <div ng-if="result.properties.advice" class="advice">
+            <div class="detail-content-notice advice" ng-if="result.properties.advice">
                 <i class="fa fa-exclamation-triangle"></i>
                 <div ng-bind-html="sanitizeData(result.properties.advice, true)"></div>
             </div>
-            <div ng-if="result.properties.altimetric_profile" class="profile">
-
-            </div>
-            <div ng-if="result.properties.disabled_infrastructure" class="disabled-infrastructure">
+            <div class="detail-content-notice disabled-infrastructure" ng-if="result.properties.disabled_infrastructure">
                 <i class="fa fa-wheelchair"></i>
                 <div ng-bind-html="sanitizeData(result.properties.disabled_infrastructure, true)"></div>
             </div>
         </div>
-        <div class="more-infos">
-            <div ng-if="result.properties.contentType === 'trek'" id="elevation">
+        <div class="detail-content-infos more-infos">
+            <div class="detail-content-elevation" ng-if="result.properties.contentType === 'trek'" id="elevation">
                 <h3><i class="fa fa-area-chart"></i>{{'PROFILE_ALTI' | translate}}</h3>
                 <div class="chart-container">
                     <p class="axislabel">{{'ELEVATIION_IN_M' | translate}}</p>
@@ -235,15 +232,18 @@
                     <p id="mouseoverprofil" class="axislabel" >&nbsp;</p>
                 </div>
             </div>
-            <div ng-if="result.properties.public_transport" class="transport">
+
+            <div class="detail-content-transport transport" ng-if="result.properties.public_transport">
                 <h3><i class="fa fa-bus"></i>{{ 'TRANSPORTS' | translate}}</h3>
                 <div class="card" ng-bind-html="sanitizeData(result.properties.public_transport, true)"></div>
             </div>
-            <div ng-if="result.properties.access" class="access">
+
+            <div class="detail-content-access access" ng-if="result.properties.access">
                 <h3><i class="fa fa-road"></i>{{ 'ACCESS' | translate}}</h3>
                 <div class="card" ng-bind-html="sanitizeData(result.properties.access, true)"></div>
             </div>
-            <div ng-if="result.properties.information_desks[0]" class="info-desks">
+
+            <div class="detail-content-desks info-desks" ng-if="result.properties.information_desks[0]">
                 <h3><i class="fa fa-info"></i>{{ 'INFORMATION_DESKS' | translate}}</h3>
                 <ul>
                     <li ng-repeat="desk in result.properties.information_desks" class="desk card">
@@ -272,7 +272,8 @@
                     </li>
                 </ul>
             </div>
-            <div ng-if="result.properties.contact || result.properties.email" class="contact-card">
+
+            <div class="detail-content-contact contact-card" ng-if="result.properties.contact || result.properties.email">
                 <h3><i class="fa fa-tty"></i>{{ 'CONTACT' | translate}}</h3>
                 <ul>
                     <li class="card">
@@ -281,7 +282,7 @@
                 </ul>
             </div>
 
-            <div ng-if="result.properties.web_links[0]" class="going-further">
+            <div class="detail-content-further going-further" ng-if="result.properties.web_links[0]">
                 <h3><i class="fa fa-plus"></i>{{ 'KNOW_MORE' | translate}}</h3>
                 <ul ng-if="result.properties.web_links[0]" class="websites">
                     <li ng-repeat="link in result.properties.web_links">
@@ -294,7 +295,7 @@
                 </ul>
             </div>
 
-            <div ng-if="result.properties.relationships.has_common_departure.length > 0 || result.properties.relationships.has_common_edge.length > 0 || result.properties.relationships.is_circuit_step.length > 0" class="related-treks">
+            <div class="detail-content-related related-treks" ng-if="result.properties.relationships.has_common_departure.length > 0 || result.properties.relationships.has_common_edge.length > 0 || result.properties.relationships.is_circuit_step.length > 0">
                 <h3><i class="fa fa-plus"></i>{{ 'RELATED_TREKS' | translate}}</h3>
 
                 <div ng-if="result.properties.relationships.has_common_departure.length > 0">

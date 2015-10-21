@@ -9,30 +9,6 @@
     }
 }
 
-@mixin detail-page-coloring() {
-    @each $category in $categories {
-        &.category-#{nth($category, 1)} {
-            .informations {
-                .element-title {
-                    background: nth($category, 2);
-                }
-                .from-to {
-                    background: nth($category, 2);
-                }
-                .main-infos .description_teaser {
-                    color: nth($category, 2);
-                }
-                .info-desks .infos {
-                    background: nth($category, 2);
-                }
-                .contact-card .card {
-                    border-left-color: nth($category, 2);
-                }
-            }
-        }
-    }
-}
-
 @mixin detail-near-elements-coloring() {
     @each $category in $categories {
         &.category-#{nth($category, 1)} {

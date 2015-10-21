@@ -1,25 +1,25 @@
 <div class="detailsview-pane detail-aside-pane interests" ng-if="pois.length > 0 || nearElements.length > 0 || elementChildren.length > 0 || parentElement">
-    <div class="children" ng-if="elementChildren.length > 0" ng-class="{collapsed: interestShown !== 'children'}">
-        <h3 ng-click="toggleInterest('children')">{{'CHILDREN' | translate}} <i class="fa fa-angle-down"></i></h3>
-        <div class="collapsor">
+    <div class="detail-aside-group children" ng-if="elementChildren.length > 0" ng-class="{collapsed: interestShown !== 'children'}">
+        <div class="detail-aside-group-title" ng-click="toggleInterest('children')">{{'CHILDREN' | translate}} <i class="fa fa-angle-down"></i></div>
+        <div class="detail-aside-group-content collapsor">
             <children-liste></children-liste>
         </div>
     </div>
-    <div class="parent" ng-if="parentElement" ng-class="{collapsed: interestShown !== 'parent'}">
-        <h3 ng-click="toggleInterest('parent')">{{'PARENT' | translate}} <i class="fa fa-angle-down"></i></h3>
-        <div class="collapsor">
+    <div class="detail-aside-group parent" ng-if="parentElement" ng-class="{collapsed: interestShown !== 'parent'}">
+        <div class="detail-aside-group-title" ng-click="toggleInterest('parent')">{{'PARENT' | translate}} <i class="fa fa-angle-down"></i></div>
+        <div class="detail-aside-group-content collapsor">
             <parent-liste></parent-liste>
         </div>
     </div>
-    <div class="near-elements" ng-if="nearElements.length > 0 " ng-class="{collapsed: interestShown !== 'near'}">
-        <h3 ng-click="toggleInterest('near')">{{'NEAR' | translate}} <i class="fa fa-angle-down"></i></h3>
-        <div class="collapsor">
+    <div class="detail-aside-group near-elements" ng-if="nearElements.length > 0 " ng-class="{collapsed: interestShown !== 'near'}">
+        <div class="detail-aside-group-title" ng-click="toggleInterest('near')">{{'NEAR' | translate}} <i class="fa fa-angle-down"></i></div>
+        <div class="detail-aside-group-content collapsor">
             <near-liste></near-liste>
         </div>
     </div>
-    <div class="pois" ng-if="pois.length > 0 && result.properties.contentType === 'trek'" ng-class="{collapsed: interestShown !== 'pois'}">
-        <h3 ng-click="toggleInterest('pois')">{{'POI' | translate}} <i class="fa fa-angle-down"></i></h3>
-        <div class="collapsor">
+    <div class="detail-aside-group pois" ng-if="pois.length > 0 && result.properties.contentType === 'trek'" ng-class="{collapsed: interestShown !== 'pois'}">
+        <div class="detail-aside-group-title" ng-click="toggleInterest('pois')">{{'POI' | translate}} <i class="fa fa-angle-down"></i></div>
+        <div class="detail-aside-group-content collapsor">
             <pois-liste></pois-liste>
         </div>
     </div>
