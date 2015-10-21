@@ -5,4 +5,5 @@ angular.module('rando.detail', ['ui.bootstrap'])
     .directive('detailPage',    require('./directives').detailDirective)
     .directive('detailContent', require('./directives').detailContent)
     .directive('detailContentMeta', require('./directives').detailContentMeta)
+    .directive('detailContentPictures', require('./directives').detailContentPictures)
     .directive('detailAside',   require('./directives').detailAside);

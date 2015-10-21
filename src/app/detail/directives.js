@@ -25,6 +25,14 @@ function detailContentMeta() {
     };
 }
 
+function detailContentPictures() {
+    return {
+        restrict: 'E',
+        replace: true,
+        template: require('./templates/detail-content-pictures.html')
+    };
+}
+
 function detailAside() {
     return {
         restrict: 'E',
@@ -34,8 +42,9 @@ function detailAside() {
 }
 
 module.exports = {
-    detailDirective: detailDirective,
-    detailContent:   detailContent,
-    detailContentMeta:   detailContentMeta,
-    detailAside:     detailAside
+    detailDirective:         detailDirective,
+    detailContent:           detailContent,
+    detailContentMeta:       detailContentMeta,
+    detailContentPictures:   detailContentPictures,
+    detailAside:             detailAside
 };
