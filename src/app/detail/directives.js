@@ -17,6 +17,14 @@ function detailContent() {
     };
 }
 
+function detailContentMeta() {
+    return {
+        restrict: 'E',
+        replace: true,
+        template: require('./templates/detail-content-meta.html')
+    };
+}
+
 function detailAside() {
     return {
         restrict: 'E',
@@ -28,5 +36,6 @@ function detailAside() {
 module.exports = {
     detailDirective: detailDirective,
     detailContent:   detailContent,
+    detailContentMeta:   detailContentMeta,
     detailAside:     detailAside
 };
