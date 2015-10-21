@@ -1,67 +1,119 @@
 .sidebar {
     .layout-root & {
-        height: 100%;
+        position: relative;
+        z-index: 3;
+
+        float: left;
+
         width: 90px;
+        height: 100%;
+
+        color: white;
+        background-color: #3a3a3a;
+        box-shadow: -20px 0 30px 30px rgba(0, 0, 0, .5);
         @media (max-width: 540px) {
             width: 55px;
         }
-        float: left;
-        background-color: #3a3a3a;
-        color: white;
-        position: relative;
-        z-index: 3;
-        box-shadow: -20px 0 30px 30px rgba(0, 0, 0, .5);
     }
 }
 
 .toolbar-actions {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    height: 50px;
     line-height: 50px;
-    white-space: nowrap;
 
+    position: relative;
+
+    height: 50px;
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+
+    white-space: nowrap;
     @media (max-width: 767px) {
-        height: 30px;
         line-height: 30px;
+
+        height: 30px;
     }
 }
 
 .toolbar-action {
     line-height: 30px;
+
     display: inline-block;
+
     vertical-align: middle;
 
+    border-left: 1px solid rgba(#aaa, .5);
     @media (max-width: 767px) {
         line-height: 25px;
     }
-
-    .isFav i {
-        transform: scale(1.5);
+    &:first-child {
+        border-left: none;
     }
+    .dropdown-menu {
+        left: auto;
 
-    + .toolbar-action {
-        border-left: 1px solid currentColor;
+        min-width: 100px;
+    }
+    &.share {
+        .fa-share-alt {
+            font-size: 1.6em;
+
+            position: relative;
+            top: 2px;
+
+            display: inline-block;
+
+            vertical-align: middle;
+        }
     }
 }
 
-.toolbar-action-link {
+.toolbar-action-link,
+.dropdown-toggle {
     display: block;
+
+    padding: 0 30px;
+
     color: $dark-grey;
-    padding: 0 20px;
+    @media (max-width: 767px) {
+        padding: 0 10px;
+    }
     .txt-icon {
         font-weight: bold;
     }
-    &:focus {
-        background: $light-grey;
-        outline: none;
-        outline-color: transparent;
-        outline-style: none;
-        box-shadow: 0px 1px 2px 0px #444;
+    .stripe-icon svg {
+        transform: rotate(180deg);
+    }
+    .svg-icon {
+        max-width: 100%;
+        max-height: 100%;
+        svg {
+            display: inline-block;
+
+            vertical-align: middle;
+            path {
+                fill: currentColor;
+            }
+        }
+    }
+    &.active {
+        color: orange;
+    }
+    &:hover {
+        text-decoration: none;
     }
 }
 
 .toolbar-action-label {
     display: none;
+    .back-to-home & {
+        font-weight: bold;
+
+        display: inline-block;
+
+        vertical-align: middle;
+        text-transform: uppercase;
+    }
 }
+
