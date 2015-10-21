@@ -12,32 +12,31 @@
 
     <detail-content-pictures></detail-content-pictures>
 
-    <div class="detail-content-intro-text">
-        <div class="detail-content-ambiance-and-teaser">
-            <div class="detail-content-teaser description_teaser" ng-if="result.properties.description_teaser">
-                <i class="fa fa-quote-left"></i>
-                <div ng-bind-html="sanitizeData(result.properties.description_teaser, true)"></div>
-            </div>
-            <div ng-if="result.properties.ambiance" ng-bind-html="sanitizeData(result.properties.ambiance, true)" class="ambiance"></div>
+    <div class="detail-content-ambiance-and-teaser">
+        <div class="detail-content-teaser description_teaser" ng-if="result.properties.description_teaser">
+            <i class="fa fa-quote-left"></i>
+            <div ng-bind-html="sanitizeData(result.properties.description_teaser, true)"></div>
         </div>
-        <div class="detail-content-from-to">
-            <span ng-if="result.properties.departure && result.properties.departure !== result.properties.arrival">{{ 'START' | translate}} {{::result.properties.departure}}</span>
-            <span ng-if="result.properties.arrival">
-                <span ng-if="result.properties.departure !== result.properties.arrival" class="arrival">
-                    {{ 'ARRIVAL' | translate}}
-                </span>
-                <span ng-if="result.properties.departure === result.properties.arrival" class="loop">
-                    {{ 'LOOP' | translate}}
-                </span>
-                {{::result.properties.arrival}}
+        <div ng-if="result.properties.ambiance" ng-bind-html="sanitizeData(result.properties.ambiance, true)" class="ambiance"></div>
+    </div>
+
+    <div class="detail-content-from-to">
+        <span ng-if="result.properties.departure && result.properties.departure !== result.properties.arrival">{{ 'START' | translate}} {{::result.properties.departure}}</span>
+        <span ng-if="result.properties.arrival">
+            <span ng-if="result.properties.departure !== result.properties.arrival" class="arrival">
+                {{ 'ARRIVAL' | translate}}
             </span>
-            <span ng-if="!result.properties.departure && !result.properties.arrival && result.properties.cities[0]">
-                {{ 'TOWN_START' | translate}} {{::result.properties.cities[0].name}}
+            <span ng-if="result.properties.departure === result.properties.arrival" class="loop">
+                {{ 'LOOP' | translate}}
             </span>
-            <div ng-if="result.properties.cities.length > 1">
-                <span>{{ 'TOWN_CROSSED' | translate}}</span>
-                <span ng-repeat="city in result.properties.cities track by city.code"><span ng-if="$index > 0">, </span>{{::city.name}}</span>
-            </div>
+            {{::result.properties.arrival}}
+        </span>
+        <span ng-if="!result.properties.departure && !result.properties.arrival && result.properties.cities[0]">
+            {{ 'TOWN_START' | translate}} {{::result.properties.cities[0].name}}
+        </span>
+        <div ng-if="result.properties.cities.length > 1">
+            <span>{{ 'TOWN_CROSSED' | translate}}</span>
+            <span ng-repeat="city in result.properties.cities track by city.code"><span ng-if="$index > 0">, </span>{{::city.name}}</span>
         </div>
     </div>
 
