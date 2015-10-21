@@ -331,17 +331,18 @@
             width: 100%;
         }
     }
-    .access,
-    .transport {
-        @media (min-width: 768px) {
-            width: 50%;
-        }
-        .card {
-            margin: .4rem;
-            padding: 1em;
+}
 
-            background: white;
-        }
+.detail-content-access,
+.detail-content-transport {
+    @media (min-width: 768px) {
+        width: 50%;
+    }
+    .card {
+        margin: .4rem;
+        padding: 1em;
+
+        background: white;
     }
 }
 
