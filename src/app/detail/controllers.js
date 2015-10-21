@@ -306,9 +306,9 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
     }
 
     getResultDetails();
-    switchInterestsNodes();
+    // switchInterestsNodes();
 
-    angular.element(window).on('resize', switchInterestsNodes);
+    // angular.element(window).on('resize', switchInterestsNodes);
 
     var rootScopeEvents = [
         $rootScope.$on('switchGlobalLang', function () {
