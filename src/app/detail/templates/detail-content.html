@@ -131,35 +131,7 @@
                 <div class="card" ng-bind-html="sanitizeData(result.properties.access, true)"></div>
             </div>
 
-            <div class="detail-content-desks info-desks" ng-if="result.properties.information_desks[0]">
-                <h3><i class="fa fa-info"></i>{{ 'INFORMATION_DESKS' | translate}}</h3>
-                <ul>
-                    <li ng-repeat="desk in result.properties.information_desks" class="detail-content-desk card">
-                        <div class="detail-content-desk-infos">
-                            <div class="detail-content-desk-image">
-                                <img ng-if="desk.photo_url" ng-src="{{::desk.photo_url}}" alt="{{::desk.name}}"/>
-                                <img ng-if="!desk.photo_url" ng-src="/images/desk-placeholder.jpg" alt="{{::desk.name}}"/>
-                            </div>
-                            <div class="detail-content-desk-contact">
-                                <div class="name">{{::desk.name}}</div>
-                                <div class="address">
-                                    <div class="street">
-                                        {{::desk.street}}
-                                    </div>
-                                    <span>{{::desk.postal_code}}</span>
-                                    <span>{{::desk.municipality}}</span>
-                                </div>
-                                <a ng-if="desk.website" class="website" href="{{::desk.website}}" target="_blank">Site web</a>
-                                <a ng-if="desk.email" class="mail" href="mailto:{{::desk.email}}" target="_blank">{{::desk.email}}</a>
-                                <a ng-if="desk.phone" class="phone" href="tel:{{::desk.phone}}" target="_blank">{{::desk.phone}}</a>
-                            </div>
-                        </div>
-                        <div class="detail-content-desk-description">
-                            <div class="text" ng-bind-html="sanitizeData(desk.description, true)"></div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <detail-content-desks></detail-content-desks>
 
             <div class="detail-content-contact contact-card" ng-if="result.properties.contact || result.properties.email">
                 <h3><i class="fa fa-tty"></i>{{ 'CONTACT' | translate}}</h3>
