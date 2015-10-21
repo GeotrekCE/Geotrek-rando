@@ -1,0 +1,43 @@
+<div class="detail-content-events-info">
+    <div ng-if="result.properties.begin_date" class="date">
+        <h5>{{'DATES' | translate}}</h5>
+        <span ng-if="result.properties.begin_date" class="begin-date">{{::result.properties.begin_date | date:'dd/MM/yyyy'}}</span>
+        <span ng-if="result.properties.ending-date && result.properties.ending-date !== result.properties.begin_date" class="ending-date"> -> {{::result.properties.begin_date | date:'dd/MM/yyyy'}}</span>
+    </div>
+    <div ng-if="result.properties.website" class="website">
+        <h5>{{'WEBSITE' | translate}}</h5>
+        <span><a href="{{result.properties.website}}" target="_blank" title="{{::result.properties.website}}">{{::result.properties.website}}</a></span>
+    </div>
+    <div ng-if="result.properties.email" class="email">
+        <h5>{{'EMAIL' | translate}}</h5>
+        <span><a href="mailto:{{::result.properties.email}}" target="_blank" title="{{::result.properties.email}}">{{::result.properties.email}}</a></span>
+    </div>
+    <div ng-if="result.properties.booking" class="booking">
+        <h5>{{'BOOKING' | translate}}</h5>
+        <span>{{::result.properties.booking}}</span>
+    </div>
+    <div ng-if="result.properties.meeting_point" class="meeting-point">
+        <h5>{{'MEETING_POINT' | translate}}</h5>
+        <span>{{::result.properties.meeting_point}}</span>
+    </div>
+    <div ng-if="result.properties.meeting_time" class="meeting-time">
+        <h5>{{'MEETING_TIME' | translate}}</h5>
+        <span>{{::result.properties.meeting_time | date:'h:mm'}}</span>
+    </div>
+    <div ng-if="result.properties.organizer" class="organizer">
+        <h5>{{'ORGANIZERS' | translate}}</h5>
+        <span>{{::result.properties.organizer}}</span>
+    </div>
+    <div ng-if="result.properties.participant_number" class="participant-number">
+        <h5>{{'PARTICIPANTS_NUMBER' | translate}}</h5>
+        <span>{{::result.properties.participant_number}}</span>
+    </div>
+    <div ng-if="result.properties.practical_info" class="practical-info">
+        <h5>{{'PRATICAL_INFOS' | translate}}</h5>
+        <div ng-bind-html="sanitizeData(result.properties.practical_info, true)"></div>
+    </div>
+    <div ng-if="result.properties.speaker" class="speaker">
+        <h5>{{'SPEAKERS' | translate}}</h5>
+        <span>{{::result.properties.speaker}}</span>
+    </div>
+</div>
