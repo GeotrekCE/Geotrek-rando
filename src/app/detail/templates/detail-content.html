@@ -11,8 +11,11 @@
 
     <div class="main-infos">
         <div class="detail-content-intro intro">
+
             <detail-content-meta></detail-content-meta>
+
             <detail-content-pictures></detail-content-pictures>
+
             <div class="detail-content-intro-text">
                 <div class="ambiance-and-teaser">
                     <div class="detail-content-teaser description_teaser" ng-if="result.properties.description_teaser">
@@ -42,6 +45,7 @@
                 </div>
             </div>
         </div>
+
         <div class="detail-content-descriptions element-description">
             <div ng-if="result.properties.description" ng-bind-html="sanitizeData(result.properties.description, true)" class="description"></div>
             <div class="events-info">
@@ -101,6 +105,7 @@
                 <div ng-bind-html="sanitizeData(result.properties.disabled_infrastructure, true)"></div>
             </div>
         </div>
+
         <div class="detail-content-infos more-infos">
             <div class="detail-content-elevation" ng-if="result.properties.contentType === 'trek'" id="elevation">
                 <h3><i class="fa fa-area-chart"></i>{{'PROFILE_ALTI' | translate}}</h3>
@@ -207,9 +212,7 @@
                         </li>
                     </ul>
                 </div>
-
             </div>
-
         </div>
 
 
