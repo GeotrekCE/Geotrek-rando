@@ -1,12 +1,11 @@
 <div class="detailsview-pane detail-content-pane informations">
-    <div class="header detail-content-header">
-        <div class="detail-content-title element-title">
-            <div class="cat-icon">
-                <ng-include ng-if="isSVG(result.properties.category.pictogram)" src="result.properties.category.pictogram"></ng-include>
-                <img ng-if="!isSVG(result.properties.category.pictogram)" ng-src="{{::result.properties.category.pictogram}}" ng-alt="{{::result.properties.category.label}}">
-            </div>
-            <h1>{{result.properties.name}}</h1>
+
+    <div class="detail-content-title element-title">
+        <div class="cat-icon">
+            <ng-include ng-if="isSVG(result.properties.category.pictogram)" src="result.properties.category.pictogram"></ng-include>
+            <img ng-if="!isSVG(result.properties.category.pictogram)" ng-src="{{::result.properties.category.pictogram}}" ng-alt="{{::result.properties.category.label}}">
         </div>
+        <h1>{{result.properties.name}}</h1>
     </div>
 
     <detail-content-meta></detail-content-meta>
