@@ -5,7 +5,7 @@
             <ng-include ng-if="isSVG(result.properties.category.pictogram)" src="result.properties.category.pictogram"></ng-include>
             <img ng-if="!isSVG(result.properties.category.pictogram)" ng-src="{{::result.properties.category.pictogram}}" ng-alt="{{::result.properties.category.label}}">
         </div>
-        <h1>{{result.properties.name}}</h1>
+        <h1 class="detail-content-title-text">{{result.properties.name}}</h1>
     </div>
 
     <detail-content-meta></detail-content-meta>
