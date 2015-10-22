@@ -12,34 +12,30 @@
 
     <detail-content-pictures></detail-content-pictures>
 
-    <div class="detail-content-ambiance-and-teaser">
-        <div class="detail-content-teaser description_teaser" ng-if="result.properties.description_teaser">
-            <i class="fa fa-quote-left"></i>
-            <div ng-bind-html="sanitizeData(result.properties.description_teaser, true)"></div>
-        </div>
-        <div ng-if="result.properties.ambiance" ng-bind-html="sanitizeData(result.properties.ambiance, true)" class="ambiance"></div>
-    </div>
+    <div class="detail-content-amiance" ng-if="result.properties.ambiance"           ng-bind-html="sanitizeData(result.properties.ambiance, true)"></div>
+
+    <div class="detail-content-teaser"  ng-if="result.properties.description_teaser" ng-bind-html="sanitizeData(result.properties.description_teaser, true)"></div>
+
+    <div class="detail-content-description" ng-if="result.properties.description"    ng-bind-html="sanitizeData(result.properties.description, true)"></div>
 
     <detail-content-from-to></detail-content-from-to>
 
-    <div class="detail-content-descriptions element-description">
-        <div class="detail-content-description" ng-if="result.properties.description" ng-bind-html="sanitizeData(result.properties.description, true)"></div>
+    <detail-content-events-info></detail-content-events-info>
 
-        <detail-content-events-info></detail-content-events-info>
+    <div class="detail-content-notice is-park-centered" ng-if="result.properties.is_park_centered">
+        <i class="fa fa-info-circle"></i>
+        <p ng-if="!rulesId">{{ 'PARK_CENTERED' | translate}}</p>
+        <a ng-if="rulesId" ui-sref="layout.flat({flatID: rulesId})">{{ 'PARK_CENTERED' | translate}}</a>
+    </div>
 
-        <div class="detail-content-notice is-park-centered" ng-if="result.properties.is_park_centered">
-            <i class="fa fa-info-circle"></i>
-            <p ng-if="!rulesId">{{ 'PARK_CENTERED' | translate}}</p>
-            <a ng-if="rulesId" ui-sref="layout.flat({flatID: rulesId})">{{ 'PARK_CENTERED' | translate}}</a>
-        </div>
-        <div class="detail-content-notice advice" ng-if="result.properties.advice">
-            <i class="fa fa-exclamation-triangle"></i>
-            <div ng-bind-html="sanitizeData(result.properties.advice, true)"></div>
-        </div>
-        <div class="detail-content-notice disabled-infrastructure" ng-if="result.properties.disabled_infrastructure">
-            <i class="fa fa-wheelchair"></i>
-            <div ng-bind-html="sanitizeData(result.properties.disabled_infrastructure, true)"></div>
-        </div>
+    <div class="detail-content-notice advice" ng-if="result.properties.advice">
+        <i class="fa fa-exclamation-triangle"></i>
+        <div ng-bind-html="sanitizeData(result.properties.advice, true)"></div>
+    </div>
+
+    <div class="detail-content-notice disabled-infrastructure" ng-if="result.properties.disabled_infrastructure">
+        <i class="fa fa-wheelchair"></i>
+        <div ng-bind-html="sanitizeData(result.properties.disabled_infrastructure, true)"></div>
     </div>
 
     <detail-content-elevation></detail-content-elevation>

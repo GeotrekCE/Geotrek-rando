@@ -127,12 +127,6 @@
         }
     }
 
-.detail-content-ambiance-and-teaser {
-    padding: 1em;
-
-    background: white;
-}
-
 .detail-content-from-to {
     padding: .6em 2em;
 
@@ -226,21 +220,7 @@
     }
 }
 
-.detail-content-descriptions {
-    margin-bottom: 1em;
-    padding: 2em;
-
-    border-top: 1px solid $neutral-grey;
-    background: white;
-    & > div {
-        margin: 1rem 0;
-        &:first-child {
-            margin-top: 0;
-        }
-        &:last-child {
-            margin-bottom: 0;
-        }
-    }
+.detail-content-description {
     ol {
         margin: 0;
         padding: 0;
