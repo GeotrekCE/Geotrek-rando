@@ -322,17 +322,6 @@
     }
 }
 
-.detail-content-infos {
-    display: flex;
-
-    flex-wrap: wrap;
-    @media (max-width: 767px) {
-        & > div {
-            width: 100%;
-        }
-    }
-}
-
 .detail-content-access,
 .detail-content-transport {
     @media (min-width: 768px) {
