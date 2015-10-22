@@ -1,106 +1,94 @@
-<div>
-    <ul class="detail-content-meta pictos">
-        <li ng-if="result.properties.category.label" class="detail-content-meta-item category-label">
-            <div class="meta-item-title caption">
-                {{'CATEGORY' | translate}}
-            </div>
-            <div class="meta-item-content">
-                <div>
-                    <ng-include ng-if="result.properties.category.pictogram && isSVG(result.properties.category.pictogram)" src="result.properties.category.pictogram"></ng-include>
-                    <img ng-if="result.properties.category.pictogram && !isSVG(result.properties.category.pictogram)" ng-src="{{::result.properties.category.pictogram}}" ng-alt="{{::result.properties.category.label}}">
-                    <span>{{::result.properties.category.label}}</span>
-                </div>
-            </div>
-        </li>
+<ul class="detail-content-meta pictos">
+    <li class="detail-content-meta-item category-label" ng-if="result.properties.category.label">
+        <div class="meta-item-title">
+            {{'CATEGORY' | translate}}
+        </div>
+        <ul class="meta-item-content">
+            <li class="meta-item-content-item">
+                <span>{{::result.properties.category.label}}</span>
+            </li>
+        </ul>
+    </li>
 
-        <li ng-if="result.properties.category.label" class="detail-content-meta-item divider"></li>
+    <li class="detail-content-meta-item" ng-if="result.properties.type1.length > 0">
+        <div class="meta-item-title">
+            {{::result.properties.category.type1_label}}
+        </div>
+        <ul class="meta-item-content">
+            <li class="meta-item-content-item" ng-repeat="currentType in result.properties.type1 track by currentType.id">
+                <ng-include ng-if="currentType.pictogram && isSVG(currentType.pictogram)" src="currentType.pictogram"></ng-include>
+                <img ng-if="currentType.pictogram && !isSVG(currentType.pictogram)" ng-src="{{::currentType.pictogram}}" ng-alt="{{::currentType.name}}">
+                <span>{{::currentType.name}}</span>
+            </li>
+        </ul>
+    </li>
 
-        <li ng-if="result.properties.type1.length > 0" class="detail-content-meta-item type1">
-            <div class="meta-item-title caption">
-                {{::result.properties.category.type1_label}}
-            </div>
-            <div class="meta-item-content">
-                <div ng-repeat="currentType in result.properties.type1 track by currentType.id">
-                    <ng-include ng-if="currentType.pictogram && isSVG(currentType.pictogram)" src="currentType.pictogram"></ng-include>
-                    <img ng-if="currentType.pictogram && !isSVG(currentType.pictogram)" ng-src="{{::currentType.pictogram}}" ng-alt="{{::currentType.name}}">
-                    <span>{{::currentType.name}}</span>
-                </div>
-            </div>
-        </li>
+    <li class="detail-content-meta-item" ng-if="result.properties.type2.length > 0">
+        <div class="meta-item-title">
+            {{::result.properties.category.type2_label}}
+        </div>
+        <ul class="meta-item-content">
+            <li class="meta-item-content-item" ng-repeat="currentType2 in result.properties.type2 track by currentType2.id">
+                <ng-include ng-if="currentType2.pictogram && isSVG(currentType2.pictogram)" src="currentType2.pictogram"></ng-include>
+                <img ng-if="currentType2.pictogram && !isSVG(currentType2.pictogram)" ng-src="{{::currentType2.pictogram}}" ng-alt="{{::currentType2.name}}">
+                <span>{{::currentType2.name}}</span>
+            </li>
+        </ul>
+    </li>
 
-        <li ng-if="result.properties.type1.length > 0" class="detail-content-meta-item divider"></li>
+    <li class="detail-content-meta-item">
+        <div class="meta-item-title">
+            {{'INFORMATIONS' | translate}}
+        </div>
 
-        <li ng-if="result.properties.type2.length > 0" class="detail-content-meta-item type2">
-            <div class="meta-item-title caption">
-                {{::result.properties.category.type2_label}}
-            </div>
-            <div class="meta-item-content">
-                <div ng-repeat="currentType2 in result.properties.type2 track by currentType2.id">
-                    <ng-include ng-if="currentType2.pictogram && isSVG(currentType2.pictogram)" src="currentType2.pictogram"></ng-include>
-                    <img ng-if="currentType2.pictogram && !isSVG(currentType2.pictogram)" ng-src="{{::currentType2.pictogram}}" ng-alt="{{::currentType2.name}}">
-                    <span>{{::currentType2.name}}</span>
-                </div>
-            </div>
-        </li>
+        <ul class="meta-item-content">
+            <li class="meta-item-content-item" ng-if="result.properties.duration_pretty">
+                <ng-include src="'./images/icons/duration.svg'"></ng-include>
+                <span>{{::result.properties.duration_pretty}}</span>
+            </li>
+            <li class="meta-item-content-item" ng-if="!result.properties.duration_pretty && result.properties.duration">
+                <ng-include src="'./images/icons/duration.svg'"></ng-include>
+                <span>{{::result.properties.duration}}</span>
+            </li>
+            <li class="meta-item-content-item" ng-if="result.properties.difficulty.label">
+                <ng-include ng-if="result.properties.difficulty.pictogram && isSVG(result.properties.difficulty.pictogram)" src="result.properties.difficulty.pictogram"></ng-include>
+                <img ng-if="result.properties.difficulty.pictogram && !isSVG(result.properties.difficulty.pictogram)" ng-src="{{::result.properties.difficulty.pictogram}}" ng-alt="{{::result.properties.difficulty.label}}">
+                <span>{{::result.properties.difficulty.label}}</span>
+            </li>
+            <li class="meta-item-content-item" ng-if="result.properties.route">
+                <ng-include ng-if="result.properties.route.pictogram && isSVG(result.properties.route.pictogram)" src="result.properties.route.pictogram"></ng-include>
+                <img ng-if="result.properties.route.pictogram && !isSVG(result.properties.route.pictogram)" ng-src="{{::result.properties.route.pictogram}}" ng-alt="{{::result.properties.route.label}}">
+                <span>{{::result.properties.route.label}}</span>
+            </li>
+            <li class="meta-item-content-item" ng-if="result.properties.length">
+                <ng-include src="'./images/icons/length.svg'"></ng-include>
+                <span>{{::parseLength(result.properties.length)}}</span>
+            </li>
+            <li class="meta-item-content-item" ng-if="result.properties.ascent">
+                <ng-include src="'./images/icons/ascent.svg'"></ng-include>
+                <span>{{::parseLength(result.properties.ascent)}}</span>
+            </li>
+            <li class="meta-item-content-item" ng-if="result.properties.networks" ng-repeat="network in result.properties.networks">
+                <ng-include ng-if="network.pictogram && isSVG(network.pictogram)" src="network.pictogram"></ng-include>
+                <img ng-if="network.pictogram && !isSVG(network.pictogram)" ng-src="{{::network.pictogram}}" alt="network.name">
+                <span>{{::network.name}}</span>
+            </li>
+            <li class="meta-item-content-item" ng-if="result.properties.target_audience">
+                <span>{{::result.properties.target_audience}}</span>
+            </li>
+        </ul>
+    </li>
 
-        <li ng-if="result.properties.type2.length > 0" class="detail-content-meta-item divider"></li>
-
-        <li class="detail-content-meta-item">
-            <div class="meta-item-title caption">
-                {{'INFORMATIONS' | translate}}
-            </div>
-
-            <div class="meta-item-content">
-                <div ng-if="result.properties.duration_pretty" class="duration">
-                    <ng-include src="'./images/icons/duration.svg'"></ng-include>
-                    <span>{{::result.properties.duration_pretty}}</span>
-                </div>
-                <div ng-if="!result.properties.duration_pretty && result.properties.duration" class="duration">
-                    <ng-include src="'./images/icons/duration.svg'"></ng-include>
-                    <span>{{::result.properties.duration}}</span>
-                </div>
-                <div ng-if="result.properties.difficulty.label" class="difficulty">
-                    <ng-include ng-if="result.properties.difficulty.pictogram && isSVG(result.properties.difficulty.pictogram)" src="result.properties.difficulty.pictogram"></ng-include>
-                    <img ng-if="result.properties.difficulty.pictogram && !isSVG(result.properties.difficulty.pictogram)" ng-src="{{::result.properties.difficulty.pictogram}}" ng-alt="{{::result.properties.difficulty.label}}">
-                    <span>{{::result.properties.difficulty.label}}</span>
-                </div>
-                <div ng-if="result.properties.route" class="route">
-                    <ng-include ng-if="result.properties.route.pictogram && isSVG(result.properties.route.pictogram)" src="result.properties.route.pictogram"></ng-include>
-                    <img ng-if="result.properties.route.pictogram && !isSVG(result.properties.route.pictogram)" ng-src="{{::result.properties.route.pictogram}}" ng-alt="{{::result.properties.route.label}}">
-                    <span>{{::result.properties.route.label}}</span>
-                </div>
-                <div ng-if="result.properties.length" class="length">
-                    <ng-include src="'./images/icons/length.svg'"></ng-include>
-                    <span>{{::parseLength(result.properties.length)}}</span>
-                </div>
-                <div ng-if="result.properties.ascent" class="ascent">
-                    <ng-include src="'./images/icons/ascent.svg'"></ng-include>
-                    <span>{{::parseLength(result.properties.ascent)}}</span>
-                </div>
-                <div ng-if="result.properties.networks" ng-repeat="network in result.properties.networks" class="network {{removeDiacritics(network.name)}}">
-                    <ng-include ng-if="network.pictogram && isSVG(network.pictogram)" src="network.pictogram"></ng-include>
-                    <img ng-if="network.pictogram && !isSVG(network.pictogram)" ng-src="{{::network.pictogram}}" alt="network.name">
-                    <span>{{::network.name}}</span>
-                </div>
-                <div ng-if="result.properties.target_audience" class="target_audience">
-                    <span>{{::result.properties.target_audience}}</span>
-                </div>
-            </div>
-        </li>
-
-        <li class="detail-content-meta-item divider"></li>
-
-        <li ng-if="result.properties.themes" class="detail-content-meta-item themes">
-            <div class="meta-item-title caption">
-                {{'THEMES' | translate}}
-            </div>
-            <div class="meta-item-content">
-                <div ng-repeat="theme in result.properties.themes" class="theme {{::removeDiacritics(theme.label)}}">
-                    <ng-include ng-if="theme.pictogram &&isSVG(theme.pictogram)" src="theme.pictogram"></ng-include>
-                    <img ng-if="theme.pictogram && !isSVG(theme.pictogram)" ng-src="{{::theme.pictogram}}" ng-alt="{{::theme.label}}">
-                    <span>{{theme.label}}</span>
-                </div>
-            </div>
-        </li>
-    </ul>
-</div>
+    <li class="detail-content-meta-item" ng-if="result.properties.themes">
+        <div class="meta-item-title">
+            {{'THEMES' | translate}}
+        </div>
+        <ul class="meta-item-content">
+            <li class="meta-item-content-item" ng-repeat="theme in result.properties.themes">
+                <ng-include ng-if="theme.pictogram &&isSVG(theme.pictogram)" src="theme.pictogram"></ng-include>
+                <img ng-if="theme.pictogram && !isSVG(theme.pictogram)" ng-src="{{::theme.pictogram}}" ng-alt="{{::theme.label}}">
+                <span>{{theme.label}}</span>
+            </li>
+        </ul>
+    </li>
+</ul>

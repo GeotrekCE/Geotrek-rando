@@ -12,7 +12,12 @@
 
 }
 @each $category in $categories {
-    &.category-#{nth($category, 1)} {
+    .category-#{nth($category, 1)} {
+
+        .meta-item-title {
+            color: nth($category, 2);
+        }
+
         .detail-content-title {
             background: nth($category, 2);
         }
