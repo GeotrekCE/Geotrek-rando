@@ -65,6 +65,14 @@ function detailContentDesks() {
     };
 }
 
+function detailContentRelated() {
+    return {
+        restrict: 'E',
+        replace: true,
+        template: require('./templates/detail-content-related.html')
+    };
+}
+
 function detailAside() {
     return {
         restrict: 'E',
@@ -82,5 +90,6 @@ module.exports = {
     detailContentEventsInfo: detailContentEventsInfo,
     detailContentElevation:  detailContentElevation,
     detailContentDesks:      detailContentDesks,
+    detailContentRelated:    detailContentRelated,
     detailAside:             detailAside
 };
