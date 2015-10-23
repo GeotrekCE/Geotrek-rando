@@ -1,20 +1,15 @@
-<div class="detail-content-pictures pictures" ng-if="result.properties.pictures[0]">
+<div class="detail-content-picture-wrapper" ng-if="result.properties.pictures[0]">
 
-    <div class="detail-content-main-visual" ng-click="showLightbox(result.properties.pictures, 0)">
+    <div class="detail-content-picture" ng-click="showLightbox(result.properties.pictures, 0)">
         <img ng-src="{{::result.properties.pictures[0].url}}" ng-alt="{{::result.properties.pictures[0].legend}}">
-        <div class="detail-content-main-visual-credit">
+        <div class="detail-content-picture-credit">
             {{::result.properties.pictures[0].author}}
         </div>
+        <div class="detail-content-picture-how-many" ng-if="result.properties.pictures.length > 1">
+            {{ result.properties.pictures.length }}
+            <ng-include></ng-include>
+            <ng-include class="camera" src="'/images/icons/camera.svg'"></ng-include>
+        </div>
     </div>
-
-    <div class="detail-content-main-visual-legend">
-        {{::result.properties.pictures[0].legend}}
-    </div>
-
-    <ul ng-if="result.properties.pictures.length > 1">
-        <li ng-repeat="picture in result.properties.pictures" ng-if="!$first" ng-click="showLightbox(result.properties.pictures, $index)">
-            <img ng-src="{{::picture.url}}" ng-alt="{{::picture.title}}">
-        </li>
-    </ul>
 
 </div>
