@@ -851,7 +851,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                 var transparentizedColor = primaryColor.replace(/^(rgb)\((\d{1,3},\s*\d{1,3},\s*\d{1,3})\)$/gm, '$1a($2, 0.8)');
 
                 function updateSparkline() {
-                    jQuery('#elevation .canvas-container').sparkline(data.profile,
+                    jQuery('#elevation .detail-content-elevation-canvas').sparkline(data.profile,
                         L.Util.extend(
                             {
                                 tooltipSuffix: ' m',

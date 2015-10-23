@@ -14,6 +14,12 @@
 @each $category in $categories {
     .category-#{nth($category, 1)} {
 
+        .detail-content-pane {
+            h3 {
+                color: nth($category, 2);
+            }
+        }
+
         .meta-item-title {
             color: nth($category, 2);
         }

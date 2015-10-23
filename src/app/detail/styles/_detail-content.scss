@@ -15,6 +15,12 @@
         width: 35%;
         height: 100%;
     }
+
+    h3 {
+        font-size: 1.143em;
+        font-weight: bold;
+        margin: 1em 0 0 0;
+    }
 }
 
 .detail-content-title {
@@ -293,19 +299,37 @@
 }
 
 .detail-content-elevation {
-    width: 100%;
-    .chart-container {
-        margin: .4rem;
+
+    margin: 1.5em 2rem 0 2rem;
+    border-top: 1px solid rgba(0, 0, 0, .2);
+
+    padding-bottom: 1em;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+
+    .elevation-y {
+        margin-top: .6em;
     }
-    .axislabel {
-        font-size: .7rem;
-        line-height: .7rem;
 
-        display: inline-block;
+    .elevation-x {
+        margin-top: .25em;
+    }
 
-        margin: .4rem 0;
-        & + .axislabel {
-            margin-left: .5rem;
+    .elevation-legend {
+        color: rgba(180, 180, 180, 1);
+    }
+
+    .elevation-y-value {
+        list-style-type: none;
+        display: inline;
+        margin: 0;
+        padding: 0;
+        > li {
+            display: inline;
+            + li {
+                &:before {
+                    content: '- ';
+                }
+            }
         }
     }
 }
