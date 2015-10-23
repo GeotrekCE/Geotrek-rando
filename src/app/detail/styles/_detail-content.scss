@@ -106,20 +106,6 @@
             }
         }
 
-.detail-content-from-to {
-    padding: .6em 2em;
-
-    color: white;
-    background: $primary-color;
-    & > span {
-        margin-right: 1em;
-    }
-}
-
-.detail-content-picture-wrapper {
-
-}
-
 .detail-content-picture {
     position: relative;
 
@@ -159,16 +145,21 @@
     }
 }
 
-.detail-content-picture-legend {
-    font-size: .8em;
+.detail-content-ambiance {
+    font-size: 1.2em;
+    font-style: italic;
+
+    margin: 1em 2rem 0 2rem;
 }
 
 .detail-content-teaser {
-    font-size: 1.5em;
-    font-weight: lighter;
+    font-family: serif;
+    font-size: 1.8em;
+    font-weight: bold;
+    font-style: italic;
     line-height: 1.2em;
 
-    margin-bottom: 1rem;
+    margin: .5em 2rem 0 2rem;
 
     color: $primary-color;
     i {
@@ -179,6 +170,10 @@
 }
 
 .detail-content-description {
+
+	margin: 1em 2rem 0 2rem;
+	font-size: 1.2em;
+
     ol {
         margin: 0;
         padding: 0;
@@ -224,7 +219,27 @@
     }
 }
 
+.detail-content-from-to {
+    font-size: 1.1em;
+
+    margin-top: 1.25em;
+    padding: 1em 2rem;
+
+    color: white;
+    background: $primary-color;
+
+	& > span {
+	margin-right: 1em;
+	}
+
+	.from-to-label {
+	font-weight: bold;
+	}
+}
+
 .detail-content-events-info {
+	margin: 1em 2rem 0 2rem;
+
     h5 {
         font-size: 1.1rem;
         font-weight: lighter;
@@ -234,26 +249,30 @@
 }
 
 .detail-content-notice {
-    padding: 1em;
+    margin: 1em 2rem 0 2rem;
+    padding: 1.3em 1em 1em;
 
     color: $dark-grey;
     p {
         margin: 0;
     }
-    a {
-        color: inherit;
-    }
-    i {
-        float: left;
 
-        margin-right: .6em;
+    .notice-symbol {
+        vertical-align: baseline;
+        float: left;
+        font-size: 1.5em;
+        margin-top: -.30em;
+        margin-right: .35em;
     }
 
     &.is-park-centered {
         background: $warning-color;
+        a {
+            color: inherit;
+        }
     }
     &.advice {
-        background: $alert-color;
+        background: rgba(230, 230, 230, 1);
     }
     &.disabled-infrastructure {
         background: $info-color;
