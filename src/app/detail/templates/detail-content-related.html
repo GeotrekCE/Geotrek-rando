@@ -1,5 +1,5 @@
 <div class="detail-content-related related-treks" ng-if="result.properties.relationships.has_common_departure.length > 0 || result.properties.relationships.has_common_edge.length > 0 || result.properties.relationships.is_circuit_step.length > 0">
-    <h3><i class="fa fa-plus"></i>{{ 'RELATED_TREKS' | translate}}</h3>
+    <h3>{{ 'RELATED_TREKS' | translate}}</h3>
 
     <div ng-if="result.properties.relationships.has_common_departure.length > 0">
         <h4>{{'HAS_COMMON_DEPARTURE' | translate}}</h4>

@@ -41,19 +41,19 @@
     <detail-content-elevation></detail-content-elevation>
 
     <div class="detail-content-transport transport" ng-if="result.properties.public_transport">
-        <h3><i class="fa fa-bus"></i>{{ 'TRANSPORTS' | translate}}</h3>
+        <h3>{{ 'TRANSPORTS' | translate}}</h3>
         <div class="card" ng-bind-html="sanitizeData(result.properties.public_transport, true)"></div>
     </div>
 
     <div class="detail-content-access access" ng-if="result.properties.access">
-        <h3><i class="fa fa-road"></i>{{ 'ACCESS' | translate}}</h3>
+        <h3>{{ 'ACCESS' | translate}}</h3>
         <div class="card" ng-bind-html="sanitizeData(result.properties.access, true)"></div>
     </div>
 
     <detail-content-desks></detail-content-desks>
 
     <div class="detail-content-contact contact-card" ng-if="result.properties.contact || result.properties.email">
-        <h3><i class="fa fa-tty"></i>{{ 'CONTACT' | translate}}</h3>
+        <h3>{{ 'CONTACT' | translate}}</h3>
         <ul>
             <li class="card">
                 <div class="contact" ng-if="result.properties.contact" ng-bind-html="sanitizeData(result.properties.contact, true)"></div>
@@ -62,7 +62,7 @@
     </div>
 
     <div class="detail-content-further going-further" ng-if="result.properties.web_links[0]">
-        <h3><i class="fa fa-plus"></i>{{ 'KNOW_MORE' | translate}}</h3>
+        <h3>{{ 'KNOW_MORE' | translate}}</h3>
         <ul ng-if="result.properties.web_links[0]" class="websites">
             <li ng-repeat="link in result.properties.web_links">
                 <a href="{{::link.url}}" title="{{::link.name}}" target="_blank">
