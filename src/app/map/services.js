@@ -847,7 +847,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
         requests.query().$promise
             .then(function (data) {
-                var primaryColor = window.getComputedStyle(document.querySelector('.informations .element-title')).backgroundColor;
+                var primaryColor = 'rgba(200, 200, 200, 1)';
                 var transparentizedColor = primaryColor.replace(/^(rgb)\((\d{1,3},\s*\d{1,3},\s*\d{1,3})\)$/gm, '$1a($2, 0.8)');
 
                 function updateSparkline() {
