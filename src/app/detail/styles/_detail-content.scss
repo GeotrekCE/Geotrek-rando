@@ -285,16 +285,23 @@
     }
 }
 
+.detail-content-transport-access {
+    display: flex;
+    padding: 0 2rem 0 2rem;
+}
+
 .detail-content-access,
 .detail-content-transport {
-    @media (min-width: 768px) {
-        width: 50%;
+    flex: 1 1 auto;
+    width: 50%;
+    + div {
+        margin-left: 15px;
     }
-    .card {
-        margin: .4rem;
-        padding: 1em;
 
-        background: white;
+    .text {
+        font-size: 1.1em;
+        font-weight: normal;
+        margin-top: 5px;
     }
 }
 

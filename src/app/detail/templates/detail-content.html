@@ -40,14 +40,16 @@
 
     <detail-content-elevation></detail-content-elevation>
 
-    <div class="detail-content-transport transport" ng-if="result.properties.public_transport">
-        <h3>{{ 'TRANSPORTS' | translate}}</h3>
-        <div class="card" ng-bind-html="sanitizeData(result.properties.public_transport, true)"></div>
-    </div>
+    <div class="detail-content-transport-access">
+        <div class="detail-content-transport transport" ng-if="result.properties.public_transport">
+            <h3>{{ 'TRANSPORTS' | translate}}</h3>
+            <div class="text" ng-bind-html="sanitizeData(result.properties.public_transport, true)"></div>
+        </div>
 
-    <div class="detail-content-access access" ng-if="result.properties.access">
-        <h3>{{ 'ACCESS' | translate}}</h3>
-        <div class="card" ng-bind-html="sanitizeData(result.properties.access, true)"></div>
+        <div class="detail-content-access access" ng-if="result.properties.access">
+            <h3>{{ 'ACCESS' | translate}}</h3>
+            <div class="text" ng-bind-html="sanitizeData(result.properties.access, true)"></div>
+        </div>
     </div>
 
     <detail-content-desks></detail-content-desks>
