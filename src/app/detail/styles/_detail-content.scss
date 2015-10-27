@@ -288,6 +288,7 @@
 .detail-content-transport-access {
     display: flex;
     padding: 0 2rem 0 2rem;
+    margin-top: .5em;
 }
 
 .detail-content-access,
@@ -342,88 +343,83 @@
 }
 
 .detail-content-desks {
-    padding-bottom: 1em;
-    ul {
-        padding: .4rem;
+    background-color: rgba(230, 230, 230, 1);
+    padding: .25em 2rem 0 2rem;
+    margin-top: 1.75em;
+}
 
-        list-style: none;
-    }
+.detail-content-desks-list {
+    list-style-type: none;
+    margin: 1em 0 0 0;
+    padding: 0;
+    font-size: 1.1em;
 }
 
 .detail-content-desk {
-    position: relative;
-
-    border: none;
-    background: white;
-    &:not(:last-child) {
-        margin-bottom: 1em;
+    + .detail-content-desk {
+        border-top: 1px solid rgba(128, 128, 128, .65);
+        padding-top: 1.5rem;
     }
-
-
 }
 
 .detail-content-desk-infos {
-    overflow: hidden;
-
-    width: 100%;
-    min-height: 9rem;
-    padding: .6rem;
-
-    color: white;
+    display: flex;
 }
 
 .detail-content-desk-image {
-    position: absolute;
-    top: .6rem;
-    left: .6rem;
+    position: relative;
 
-    display: block;
-    overflow: hidden;
+    width: 11rem;
 
-    width: 7rem;
-    height: 7rem;
-    margin: .4em;
+    > div {
+        width: 8rem;
+        height: 8rem;
+        margin: 0 auto;
 
-    border-radius: 50%;
-    img {
-        width: 100%;
-        height: 100%;
+        border-radius: 50%;
+        background-position: center center;
+        background-size: cover;
     }
     &:after {
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 50%;
+        left: 50%;
 
-        width: 100%;
-        height: 100%;
+        display: block;
+
+        width: 40px;
+        height: 40px;
 
         content: '';
+        transform: translate(-50%, -50%);
 
         border-radius: 50%;
-        box-shadow: inset 0 0 6px 0 $dark-grey;
+        background-color: #333;
     }
 }
 
+
 .detail-content-desk-contact {
-    padding-left: 8.2rem;
-    a {
-        display: block;
-
-        text-decoration: underline;
-
-        color: white;
-    }
+    flex: 1 1 auto;
 
     .name {
-        font-size: 1.2em;
-        font-weight: normal;
-
-        padding: .6em 0;
+        font-weight: bold;
+    }
+    .address {
+        margin: 0;
+    }
+    .links {
+        list-style-type: none;
+        margin: 1em 0 0 0;
+        padding: 0;
     }
 }
 
 .detail-content-desk-description {
-    padding: 1em;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-top: 1px solid rgba(128, 128, 128, .35);
 }
 
 .detail-content-contact {

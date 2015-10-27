@@ -33,12 +33,6 @@
         .detail-content-teaser {
             color: nth($category, 2);
         }
-        .detail-content-desk-infos {
-            background: nth($category, 2);
-        }
-        .detail-content-desk-card {
-            border-left-color: nth($category, 2);
-        }
     }
 }
 

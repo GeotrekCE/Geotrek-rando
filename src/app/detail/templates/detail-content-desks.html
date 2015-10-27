@@ -1,24 +1,24 @@
 <div class="detail-content-desks info-desks" ng-if="result.properties.information_desks[0]">
     <h3>{{ 'INFORMATION_DESKS' | translate}}</h3>
-    <ul>
-        <li ng-repeat="desk in result.properties.information_desks" class="detail-content-desk card">
+    <ul class="detail-content-desks-list">
+        <li ng-repeat="desk in result.properties.information_desks" class="detail-content-desk">
             <div class="detail-content-desk-infos">
+
                 <div class="detail-content-desk-image">
-                    <img ng-if="desk.photo_url" ng-src="{{::desk.photo_url}}" alt="{{::desk.name}}"/>
-                    <img ng-if="!desk.photo_url" ng-src="/images/desk-placeholder.jpg" alt="{{::desk.name}}"/>
+                    <div ng-if="desk.photo_url"  style="background-image: url({{::desk.photo_url}});"></div>
+                    <div ng-if="!desk.photo_url" style="background-image: url(/images/desk-placeholder.jpg);"></div>
                 </div>
+
                 <div class="detail-content-desk-contact">
                     <div class="name">{{::desk.name}}</div>
-                    <div class="address">
-                        <div class="street">
-                            {{::desk.street}}
-                        </div>
-                        <span>{{::desk.postal_code}}</span>
-                        <span>{{::desk.municipality}}</span>
-                    </div>
-                    <a ng-if="desk.website" class="website" href="{{::desk.website}}" target="_blank">Site web</a>
-                    <a ng-if="desk.email" class="mail" href="mailto:{{::desk.email}}" target="_blank">{{::desk.email}}</a>
-                    <a ng-if="desk.phone" class="phone" href="tel:{{::desk.phone}}" target="_blank">{{::desk.phone}}</a>
+                    <address class="address">
+                        <span class="street">{{::desk.street}}</span><span ng-if="desk.postal_code || desk.municipality">, {{::desk.postal_code}}&nbsp;{{::desk.municipality}}</span>
+                    </address>
+                    <ul class="links">
+                        <li class="link"><a ng-if="desk.website" class="website" href="{{::desk.website}}" target="_blank">{{::desk.website}}</a></li>
+                        <li class="link"><a ng-if="desk.email" class="mail" href="mailto:{{::desk.email}}" target="_blank">{{::desk.email}}</a></li>
+                        <li class="link"><a ng-if="desk.phone" class="phone" href="tel:{{::desk.phone}}" target="_blank">{{::desk.phone}}</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="detail-content-desk-description">
