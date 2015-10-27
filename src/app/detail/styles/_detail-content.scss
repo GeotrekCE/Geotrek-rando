@@ -19,7 +19,12 @@
     h3 {
         font-size: 1.143em;
         font-weight: bold;
+
         margin: 1em 0 0 0;
+    }
+
+    a {
+        color: rgba(20, 60, 255, 1);
     }
 }
 
@@ -423,10 +428,12 @@
 }
 
 .detail-content-contact {
+    margin: .5em 2rem 0 2rem;
+
     padding-bottom: 1em;
     ul {
         margin: 0;
-        padding: .4rem;
+        padding: .4rem 0;
     }
     .card {
         display: inline-block;
