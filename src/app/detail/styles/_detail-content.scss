@@ -6,11 +6,13 @@
 
     width: 100%;
     height: 100%;
+    padding-bottom: 30px;
 
     transition: width .3s ease, left .3s ease;
 
     border-right: 1px solid $neutral-grey;
     background: $light-grey;
+
     @media (min-width: 768px) {
         width: 35%;
         height: 100%;
@@ -403,7 +405,6 @@
     }
 }
 
-
 .detail-content-desk-contact {
     flex: 1 1 auto;
 
@@ -455,23 +456,33 @@
 }
 
 .detail-content-further {
-    width: 100%;
+    margin: .5em 2rem 0 2rem;
     padding-bottom: 1em;
+    font-size: 1.1em;
     ul {
-        margin: 0;
-        padding: .4rem;
+        margin: .75em 0 0 0;
+        padding: 0;
 
         list-style: none;
     }
 }
 
 .detail-content-related {
-    > div {
-        margin-left: .4rem;
+    font-size: 1.1em;
+    line-height: 1;
+
+    margin: .5em 2rem 0 2rem;
+
+    .related-treks {
+        margin: 0;
+        padding: 0;
+        list-style-position: inside;
     }
+
     h4 {
+        font-weight: bold;
         font-size: 1rem;
 
-        margin-bottom: .5rem;
+        margin-bottom: .25rem;
     }
 }
