@@ -79,6 +79,8 @@
     }
 
     .map-pane {
+        width: 100%;
+
         .global-filters,
         .filters-tags {
             left: 90px;
@@ -89,6 +91,7 @@
         .map-pane {
             left: 0;
             padding-left: 90px;
+            position: absolute !important;
         }
         .results-pane {
             left: 100%;
@@ -138,4 +141,3 @@
 .filters-tags {
     z-index: 1;
 }
-

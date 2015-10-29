@@ -1,9 +1,9 @@
- <section class="detail-page category-{{::result.properties.category.id}}" ng-class="{'showMap': $root.mapIsShown}">
+ <section class="detail-page details-pane category-{{::result.properties.category.id}}">
     <detail-content></detail-content>
     <warning-panel></warning-panel>
 
     <geotrek-map
-        class="detail-map"
+        class="detail-map map-pane"
         ng-class="{
             'no-interests':       interestShown === null,
             'hide-near-elements': interestShown !== 'near',

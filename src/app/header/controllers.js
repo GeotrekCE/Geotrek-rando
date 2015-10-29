@@ -13,6 +13,10 @@ function headerController($scope, $rootScope, globalSettings) {
         }
     };
 
+    $scope.switchMap = function () {
+        $rootScope.mapIsShown = !$rootScope.mapIsShown;
+    }
+
     $scope.logo = globalSettings.LOGO_FILE;
 }
 
