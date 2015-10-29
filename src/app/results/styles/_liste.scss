@@ -82,7 +82,7 @@
     }
     &.not-in-viewport {
         opacity: 0.5;
-        order: 1;
+        order: 10;
     }
 }
 
