@@ -33,17 +33,15 @@
     height: 40px;
 
     transition: all .2s ease;
-    &:not(.collapsed) {
+    .detail-aside-group-title {
+        i {
+            transform: rotate(-90deg);
+        }
+    }
+    &.active {
         flex: 1 1 auto;
         .detail-aside-group-title {
             border-bottom: 2px solid $primary-color;
-        }
-    }
-    &.collapsed {
-        .detail-aside-group-title {
-            i {
-                transform: rotate(-90deg);
-            }
         }
     }
 }

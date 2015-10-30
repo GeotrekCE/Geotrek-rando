@@ -12,11 +12,13 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         $scope.rulesId = null;
     }
 
-    $scope.toggleInterest = function (currentInterest) {
-        if ($scope.interestShown === currentInterest) {
-            $scope.interestShown = '';
+    $scope.currentInterest = '';
+
+    $scope.toggleInterest = function (interest) {
+        if ($scope.currentInterest === interest) {
+            $scope.currentInterest = '';
         } else {
-            $scope.interestShown = currentInterest;
+            $scope.currentInterest = interest;
         }
     };
 
@@ -275,7 +277,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                 }
             );
 
-        
+
     }
 
     function getResultDetails(forceRefresh) {

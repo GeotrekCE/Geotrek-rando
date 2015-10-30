@@ -5,10 +5,10 @@
     <geotrek-map
         class="detail-map map-pane"
         ng-class="{
-            'no-interests':       interestShown === null,
-            'hide-near-elements': interestShown !== 'near',
-            'hide-pois':          interestShown !== 'pois',
-            'hide-children':      interestShown !== 'children'
+            'no-interests':       currentInterest === 'none',
+            'hide-near-elements': currentInterest !== 'near',
+            'hide-pois':          currentInterest !== 'pois',
+            'hide-children':      currentInterest !== 'children'
         }"></geotrek-map>
 
     <detail-aside></detail-aside>
