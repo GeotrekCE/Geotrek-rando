@@ -3,7 +3,6 @@
  */
 
 .detail-aside-pane {
-    width: 100%;
     padding: 0 0 0 1.5em;
 
     color: #fff;
@@ -13,8 +12,10 @@
         display: flex;
         flex-direction: column;
 
-        width: 24.5%;
-        height: 100%;
+        .detail-aside-group,
+        .detail-aside-group-title {
+            height: 50px;
+        }
     }
 }
 
@@ -30,14 +31,9 @@
         flex: 1 1 auto;
     }
 
-    +.detail-aside-group {
+    + .detail-aside-group {
         border-top: 1px solid rgba(#fff, .5);
     }
-}
-
-.detail-aside-group,
-.detail-aside-group-title {
-    height: 50px;
 }
 
 .detail-aside-group-title {

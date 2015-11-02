@@ -5,32 +5,12 @@
 .detail-map {
     z-index: 2;
 
-    float: left;
-
-    width: 40.5%;
-    height: 100%;
     padding: 0;
-    // margin-left: 0.5%;
 
     transition: width .3s ease, left .3s ease;
 
     background: $light-grey;
-    @media (min-width: 1600px) {
-        &.no-interests {
-            width: 66.5%;
-        }
-    }
-    @media (min-width: 768px) {
-        &.no-interests {
-            width: 64.5%;
-        }
-    }
-    @media (max-width: 767px) {
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-    }
+
     &.leaflet-container + .interests {
         z-index: 99999999999999;
     }

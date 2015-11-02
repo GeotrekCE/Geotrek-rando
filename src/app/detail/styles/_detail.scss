@@ -3,14 +3,14 @@
 @import 'detail-aside';
 
 .detail-page {
-    height: 100%;
+    overflow: auto;
+
     width: 100%;
-    position: relative;
-    overflow: hidden;
+    height: 100%;
+
     background: $neutral-grey;
-
-
 }
+
 @each $category in $categories {
     .category-#{nth($category, 1)} {
 
@@ -39,4 +39,45 @@
 .jqstooltip {
     height: auto !important;
     width: auto !important;
+}
+
+.details-pane {
+    display: flex;
+    align-items: stretch;
+
+    .detailsview-pane {
+        height: 100%;
+    }
+
+    .detail-content-pane {
+        flex: 0 1 40%;
+    }
+
+    .map-pane {
+        flex: 1;
+    }
+
+    .detail-aside-pane {
+        flex: 0 1 25%;
+    }
+
+    @media (max-width: 767px) {
+        display: block;
+
+        .detailsview-pane {
+            height: auto;
+        }
+
+        .map-pane {
+            position: absolute !important; // Need !important because of JS adding position: relative;
+            top: 0;
+            left: 100%;
+
+            width: 100%;
+            height: 100%;
+            .map-mode & {
+                left: 0;
+            }
+        }
+    }
 }

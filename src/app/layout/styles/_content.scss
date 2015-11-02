@@ -71,39 +71,41 @@
 }
 
 @media (max-width: 767px) {
-    .resultsview-pane {
-        position: absolute;
-        top: 0;
-        left: 100%;
-        width: 100%;
-    }
-
-    .map-pane {
-        width: 100%;
-
-        .global-filters,
-        .filters-tags {
-            left: 90px;
-        }
-    }
-
-    .map-mode {
-        .map-pane {
-            left: 0;
-            padding-left: 90px;
-            position: absolute !important;
-        }
-        .results-pane {
+    .layout-root {
+        .resultsview-pane {
+            position: absolute;
+            top: 0;
             left: 100%;
+            width: 100%;
         }
-    }
-    .results-mode {
+
         .map-pane {
-            left: -100%;
+            width: 100%;
+
+            .global-filters,
+            .filters-tags {
+                left: 90px;
+            }
         }
-        .results-pane {
-            left: 0;
-            padding-left: 90px;
+
+        .map-mode {
+            .map-pane {
+                left: 0;
+                padding-left: 90px;
+                position: absolute !important;
+            }
+            .results-pane {
+                left: 100%;
+            }
+        }
+        .results-mode {
+            .map-pane {
+                left: -100%;
+            }
+            .results-pane {
+                left: 0;
+                padding-left: 90px;
+            }
         }
     }
 }
