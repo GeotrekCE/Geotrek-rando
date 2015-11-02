@@ -12,7 +12,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         $scope.rulesId = null;
     }
 
-    $scope.currentInterest = '';
+    $scope.currentInterest = 'none';
 
     $scope.toggleInterest = function (interest) {
         if ($scope.currentInterest === interest) {
