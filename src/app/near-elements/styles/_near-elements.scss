@@ -1,113 +1,21 @@
+.near-elements {
+    .detail-aside-group-content {
+        margin-right: 0;
+        padding-right: 1.75em;
+    }
+}
+
 .near-liste {
-    list-style: none;
-    padding: 0;
+    display: block;
+
     margin: 0;
-    width: 100%;
-    @media (min-width: 768px) {
-        height: 100%;
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-    li {
-        display: block;
-        float: left;
-        width: 46%;
-        top: 0;
-        margin: 2%;
-        background: white;
-        position: relative;
-        border-left: 10px solid $dark-grey;
-        background: white;
-        box-shadow: 0px 1px 2px 0px $dark-grey;
-        transition: all 0.1s ease-out;
-        @include detail-near-elements-coloring();
-        @media (min-width: 768px) {
-            width: 96%;
-            &:hover, &.hovered {
-                top: -0.4rem;
-            }
-        }
-    }
-    a {
-        display: block;
-        width: 100%;
-        color: inherit;
-        text-decoration: none;
-    }
-    .fav-or-not {
-        position: absolute;
-        z-index: 2;
-        top: 1em;
-        left: 1em;
-        cursor: pointer;
-        i {
-            opacity: 0.8;
-            font-size: 1.6em;
-            text-shadow:
-                -1px -1px 0 #fff,
-                1px -1px 0 #fff,
-                -1px 1px 0 #fff,
-                1px 1px 0 #fff;
-            transition: color 0.2s ease;
-            &:hover {
-                opacity: 1;
-            }  
-        }
-        &.isFav {
-            i {
-                opacity: 1;
-            }
-        }
-    }
-    .picture {
-        max-height: 8rem;
-        overflow: hidden;
-        img {
-            width: 100%;
-        }
-    }
-    .title {
-        display: block;
-        font-size: 1.2em;
-        line-height: 1.2em;
-        font-weight: 500;
-        margin: 0.5rem;
-        margin-right: 1.5rem;
-    }
-    .cat-icon {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 2rem;
-        height: 2rem;
-        padding: 0.25rem;
-        background: $dark-grey;
-        svg, img {
-            max-height: 100%;
-            width: 100%;
-        }
-        svg .base {
-            fill: white;
-        }
-    }
-    .know-more {
-        display: block;
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        width: 0;
-        height: 0;
-        border-bottom: 40px solid $dark-grey;
-        border-left: 40px solid transparent;
-        span {
-            cursor: pointer;
-            text-decoration: none;
-            color: white;
-            font-size: 1.5em;
-            font-weight: 300;
-            position: absolute;
-            right: 6px;
-            top: 11px;
-        }
+    padding: 0;
+
+    color: #333;
+
+    .results-item {
+        width: auto;
+        margin-right: 0;
+        margin-left: 0;
     }
 }

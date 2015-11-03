@@ -15,7 +15,7 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
                     if (console) {
                         console.error(err);
                     }
-                    $rootScope.elementsLoading --; 
+                    $rootScope.elementsLoading --;
                 }
             );
 
