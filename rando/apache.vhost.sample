@@ -12,15 +12,13 @@
 Alias /static/ /PATH_TO_SOURCE/var/static/
 
 <Directory /PATH_TO_SOURCE/var/static>
-  Order deny,allow
-  Allow from all
+  Require all granted
 </Directory>
 
 Alias /media/ /PATH_TO_SOURCE/var/input/media/
 
 <Directory /PATH_TO_SOURCE/var/input/media>
-  Order deny,allow
-  Allow from all
+  Require all granted
 </Directory>
 
 Header set Access-Control-Allow-Origin "*"
@@ -33,10 +31,9 @@ AddType application/vnd.google-earth.kmz .kmz
 WSGIScriptAlias / /PATH_TO_SOURCE/rando/wsgi.py
 WSGIPythonPath /PATH_TO_SOURCE/:/PATH_TO_SOURCE/lib/python2.7/site-packages
 <Directory /PATH_TO_SOURCE/rando/>
-    <Files wsgi.py>
-        Order deny,allow
-        Allow from all
-    </Files>
+  <Files wsgi.py>
+    Require all granted
+  </Files>
 </Directory>
 
 
