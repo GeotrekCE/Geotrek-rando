@@ -21,7 +21,7 @@ Option     | Type      | Default   | Description
 --------|----------|-----------|------------
 LOGO_FILE | String (file name) | `""` |If you want to use a logo in the app. It's just the name of the file, which goes into `src/images/custom`. Accept .jpg, .png, .svg.
 FAVICON | [Object (ico and png images)](#favicon-options) | `{}` | Object containing the custom favicon files you want to use. Both ico and png are required. Files go into `src/images/custom`.
-SHOW_HOME | Boolean | `false` | Enable home page
+SHOW_HOME | Boolean | `true` | Enable home page
 HOME_TEMPLATE_FILE | Object | `{}` | For each lang you can specify a different home template. Formated like this "lang-code": "file-name.html".
 SHOW_FOOTER | Boolean | `false` | Display footer on all pages
 FOOTER_TEMPLATE_FILE | String (file name) | `""` | Name of a custom template for the footer of the app
