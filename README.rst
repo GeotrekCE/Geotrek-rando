@@ -25,7 +25,7 @@ Installation on Debian / Ubuntu
 
 Once the OS is installed (basic installation, with OpenSSH server), with the following packages :
 
-    sudo apt-get install -y python-virtualenv libapache2-mod-wsgi python-dev build-essential unzip
+    sudo apt-get install -y python-virtualenv apache2 libapache2-mod-wsgi python-dev build-essential unzip
 
 :note:
 
@@ -74,14 +74,14 @@ Copy the virtual host example :
 
 ::
 
-    sudo cp rando/apache.vhost.sample /etc/apache2/sites-available/rando
+    sudo cp rando/apache.vhost.sample /etc/apache2/sites-available/rando.conf
 
 
 Edit it and replace ``/PATH_TO_SOURCE/`` by the correct absolute path (i.e where is this README file)
 
 ::
 
-    sudo nano /etc/apache2/sites-available/rando
+    sudo nano /etc/apache2/sites-available/rando.conf
 
 Be careful, the sample Apache configuration assumes that you have python in version 2.7 (Default in Ubuntu 12.04+ and Debian wheezy).
 If you run python 2.6 (Debian squeeze), make sure the line ``WSGIPythonPath`` points to the folder ``lib/python2.6/site-packages``.
