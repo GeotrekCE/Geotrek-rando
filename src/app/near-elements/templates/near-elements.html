@@ -20,7 +20,7 @@
                 <ng-include ng-if="isSVG(near.properties.category.pictogram)"  src="near.properties.category.pictogram"></ng-include>
                 <img        ng-if="!isSVG(near.properties.category.pictogram)" ng-src="{{::near.properties.category.pictogram}}" ng-alt="{{::category.label}}">
             </div>
-            <a class="result-action result-map-focus" ng-click="mapFocusOn(result)" href="#"><ng-include src="'./images/icons/gps-symbol.svg'"></ng-include></a>
+            <a class="result-action result-map-focus" ng-click="mapFocusOn(near)" href="#"><ng-include src="'./images/icons/gps-symbol.svg'"></ng-include></a>
             <a class="result-action result-view-details" ui-sref="layout.detail({catSlug: near.properties.category.slug, slug: near.properties.slug})">En savoir plus</a>
         </div>
 
