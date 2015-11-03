@@ -78,7 +78,6 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
         mapService.centerOn(result);
     };
 
-    $scope.favoriteIcon = (globalSettings.FAVORITES_ICON ? globalSettings.FAVORITES_ICON : 'heart');
     $scope.isInFavorites = favoritesService.isInFavorites;
     $scope.isSVG = utilsFactory.isSVG;
 

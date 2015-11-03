@@ -6,7 +6,7 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
     $rootScope.elementsLoading = 0;
     $rootScope.mapIsShown = true;
     $rootScope.placeHolderImage = globalSettings.PLACEHOLDER_IMAGE ? './images/custom/' + globalSettings.PLACEHOLDER_IMAGE : './images/placeholder.png';
-
+    $rootScope.favoriteIcon = (globalSettings.FAVORITES_ICON ? globalSettings.FAVORITES_ICON : 'heart');
 
     if (globalSettings.FAVICON) {
         var base = './images/custom/';
