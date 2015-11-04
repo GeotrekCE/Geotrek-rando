@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
@@ -34,7 +35,6 @@
 /* Landscape phone to portrait tablet */
 /* Portrait tablet to landscape and desktop */
 /* 13 inch devices */
-@charset "UTF-8";
 @font-face {
   font-family: "geotrek-rando";
   src: url("../fonts/geotrek-rando.eot");
@@ -276,7 +276,7 @@ h4 {
   font-size: 14px;
 }
 a {
-  color: #f89406;
+  color: #F89406;
   -webkit-transition: color 100ms;
   -moz-transition: color 100ms;
   -o-transition: color 100ms;
@@ -450,7 +450,7 @@ header {
   box-shadow: 0 0 2px rgba(35, 34, 34, 0.1);
 }
 header h1 {
-  color: #f89406;
+  color: #F89406;
   background: url(../img/icon-64.png) no-repeat;
   background-position-y: 50%;
   margin-left: 10px;
@@ -890,7 +890,7 @@ header #lang-switch {
 #mainmap .leaflet-marker-icon.trek-icon {
   border-radius: 999px;
   border-style: solid;
-  background-color: #f89406;
+  background-color: #F89406;
   background-image: url(../img/trek-icon.svg);
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -969,7 +969,7 @@ header #lang-switch {
   position: absolute;
   bottom: 30px;
   right: 15px;
-  color: #f89406;
+  color: #F89406;
 }
 .leaflet-popup-content p.popupdetail a:before {
   position: absolute;
@@ -1128,7 +1128,7 @@ header #lang-switch {
 }
 #side-bar .result .info-result p {
   margin: 0;
-  color: #877f84;
+  color: #877F84;
 }
 #backpack {
   overflow: hidden;
@@ -1164,7 +1164,7 @@ header #lang-switch {
 }
 .comments-count a {
   text-decoration: none;
-  color: #877f84;
+  color: #877F84;
 }
 .theme-tools {
   float: left;
@@ -1229,10 +1229,20 @@ header #lang-switch {
 * Chosen override
 */
 .chzn-container-active .chzn-choices {
-  border: 1px solid #877f84;
+  border: 1px solid #877F84;
 }
 .chzn-container .chzn-results {
   max-height: 190px;
+}
+.chzn-container-multi .chzn-choices {
+  padding: 0 5px 0 0;
+}
+.chzn-container-multi .chzn-choices .search-choice {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.chzn-container-multi .chzn-choices .search-choice span {
+  word-wrap: break-word;
 }
 .chzn-container .chzn-results .highlighted {
   background-color: #919191;
@@ -1256,7 +1266,7 @@ header #lang-switch {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  color: #877f84;
+  color: #877F84;
   padding: 5px;
   padding-left: 10px;
   background: #fcfdfc;
@@ -1286,7 +1296,7 @@ header #lang-switch {
   left: 10px;
 }
 .filters-bar p.title .active {
-  color: #f89406;
+  color: #F89406;
   text-shadow: 0px 0px 2px #ffff00;
 }
 .filters-bar .span {
@@ -1320,12 +1330,12 @@ header #lang-switch {
   position: relative;
   z-index: 300;
   line-height: 0.7em;
-  background: #f89406;
+  background: #F89406;
   text-shadow: none;
   width: 20px;
 }
 .filters-bar #filters-actions span {
-  color: #877f84;
+  color: #877F84;
   font-weight: bold;
 }
 .filter,
@@ -1343,7 +1353,7 @@ header #lang-switch {
   background: #d7ddcf;
 }
 .ui-slider .ui-slider-range {
-  background: #f89406;
+  background: #F89406;
   top: 0;
 }
 .ui-slider .ui-slider-handle {
@@ -1433,7 +1443,7 @@ header #lang-switch {
 }
 #clear-filters.active {
   opacity: 1;
-  background-color: #f89406;
+  background-color: #F89406;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -1497,7 +1507,7 @@ header #lang-switch {
   min-height: 45px;
 }
 #side-bar .badge-warning {
-  background-color: #f89406;
+  background-color: #F89406;
 }
 @media (max-width: 767px) {
   #side-bar {
@@ -1549,7 +1559,7 @@ header #lang-switch {
   border-radius: 0;
   text-align: center;
   font-weight: bold;
-  color: #877f84;
+  color: #877F84;
   background-repeat: no-repeat;
   background-position: 20px 50%;
   margin: 0px;
@@ -1580,7 +1590,7 @@ header #lang-switch {
 }
 #side-bar #results .number {
   text-align: center;
-  color: #877f84;
+  color: #877F84;
   font-weight: bold;
   padding: 4px;
 }
@@ -1603,7 +1613,7 @@ p.tab-content-empty {
   text-align: center;
   width: 100%;
   margin-top: 20px;
-  color: #877f84;
+  color: #877F84;
 }
 p.tab-content-empty a.change-lang {
   display: block;
@@ -1684,14 +1694,14 @@ p.tab-content-empty a.change-lang {
   color: #4d4d4d;
   text-shadow: 0 1px 0 #ffffff;
   background-color: #ffffff;
-  border: 1px solid #f89406;
+  border: 1px solid #F89406;
   outline: 0;
-  -webkit-box-shadow: 0px 0px 3px #f89406;
-  -moz-box-shadow: 0px 0px 3px #f89406;
-  box-shadow: 0px 0px 3px #f89406;
-  -webkit-box-shadow: 0 0 3px #f89406;
-  -moz-box-shadow: 0 0 3px #f89406;
-  box-shadow: 0 0 3px #f89406;
+  -webkit-box-shadow: 0px 0px 3px #F89406;
+  -moz-box-shadow: 0px 0px 3px #F89406;
+  box-shadow: 0px 0px 3px #F89406;
+  -webkit-box-shadow: 0 0 3px #F89406;
+  -moz-box-shadow: 0 0 3px #F89406;
+  box-shadow: 0 0 3px #F89406;
 }
 #text-search .navbar-search div {
   position: absolute;
@@ -1799,7 +1809,7 @@ p.tab-content-empty a.change-lang {
 #pois-sidebar .pois-list .poi {
   padding-bottom: 15px;
   margin-top: 15px;
-  border-bottom: solid 1px #877f84;
+  border-bottom: solid 1px #877F84;
 }
 #pois-sidebar .pois-list .poi:first-of-type {
   margin-top: 5px;
@@ -1815,7 +1825,7 @@ p.tab-content-empty a.change-lang {
   display: none;
 }
 #pois-sidebar .pois-list .poi.active {
-  color: #f89406;
+  color: #F89406;
 }
 #pois-sidebar .pois-list .poi .title .name {
   font-size: 1.2em;
@@ -1876,7 +1886,7 @@ p.tab-content-empty a.change-lang {
   font-size: 14px;
 }
 .detail-content h4 {
-  background-color: #877f84;
+  background-color: #877F84;
   text-align: center;
   color: white;
   width: 100%;
@@ -1921,7 +1931,7 @@ p.tab-content-empty a.change-lang {
   font-size: 31.5px;
 }
 .detail-content #detail-content-title .title .back-list:before {
-  background-color: #f89406;
+  background-color: #F89406;
   color: white;
   border-radius: 999px;
 }
@@ -1939,7 +1949,7 @@ p.tab-content-empty a.change-lang {
 }
 .detail-content #detail-content-title #trek-identity p {
   margin-bottom: 0;
-  color: #877f84;
+  color: #877F84;
   text-align: left;
 }
 .detail-content #detail-content-title #trek-identity .info {
@@ -2005,12 +2015,12 @@ p.tab-content-empty a.change-lang {
   display: none;
 }
 .alert-blank {
-  color: #f89406;
+  color: #F89406;
   background-color: transparent;
-  border: 1px solid #f89406;
+  border: 1px solid #F89406;
 }
 .alert-blank > div {
-  color: #877f84;
+  color: #877F84;
 }
 .alert h3 {
   margin: 0px;
@@ -2076,7 +2086,7 @@ p.tab-content-empty a.change-lang {
   text-align: right;
 }
 #trek-information-desk .information-desk {
-  border-bottom: #f89406 solid 1px;
+  border-bottom: #F89406 solid 1px;
 }
 #trek-information-desk .information-desk .description {
   margin-bottom: 0.8em;
@@ -2119,7 +2129,7 @@ p.tab-content-empty a.change-lang {
   float: left;
 }
 #altitudegraph {
-  color: #f89406;
+  color: #F89406;
   font-size: 10px;
 }
 #altitudegraph p {
@@ -2280,7 +2290,7 @@ ul.errorlist {
   display: block;
 }
 .leaflet-control.simple-layer-switcher .toggle-layer {
-  background-color: #877f84;
+  background-color: #877F84;
   height: 20px;
   width: 20px;
   padding: 5px;
@@ -2294,7 +2304,7 @@ ul.errorlist {
   margin-left: -1px;
   margin-bottom: -1px;
   margin-top: 4px;
-  background-color: #f89406;
+  background-color: #F89406;
   opacity: 1.0;
   outline: solid 2px #ffffff;
   border: solid 1px #c67605;
@@ -2304,7 +2314,7 @@ ul.errorlist {
   width: 20px;
 }
 .leaflet-marker-icon.tourism {
-  background-color: #f89406;
+  background-color: #F89406;
   border: solid 1px #c67605;
   outline: solid 1px #ffffff;
   padding: 1px;
@@ -2503,7 +2513,7 @@ ul.errorlist {
     border-bottom: 1px solid #d7ddcf;
   }
   #navigationbar ul li .btn {
-    color: #333333 !important;
+    color: #333 !important;
     background: none !important;
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
@@ -2538,7 +2548,7 @@ ul.errorlist {
     height: 46px;
     padding: 0;
     float: left;
-    color: #555555;
+    color: #555;
     -webkit-touch-callout: none;
     -webkit-tap-highlight-color: rgba(35, 34, 34, 0);
     -webkit-user-select: none;
@@ -2667,7 +2677,7 @@ ul.errorlist {
   #mobile-header-detail {
     display: block;
     width: 100%;
-    background: #ff4500;
+    background: orangered;
     position: fixed;
     z-index: 9999;
     border-bottom: 2px solid #992c04;
