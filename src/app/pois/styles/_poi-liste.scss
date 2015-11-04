@@ -1,4 +1,4 @@
-.pois-liste {
+.poi-list {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -8,173 +8,185 @@
         overflow-y: auto;
         overflow-x: hidden;
     }
-    li.poi {
-        width: 100%;
-        margin: 0;
-        background: white;
-        position: relative;
-        color: $dark-grey;
-        transition: all 0.2s ease;
-        @media (min-width: 768px) {
-            border-bottom: 1px solid $neutral-grey;
-        }
-        .picture {
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-            @media (min-width: 768px) {
-                //max-height: 16rem;
-            }
-            img {
-                width: 100%;
-                margin: auto;
-                transition: all 0.2s ease;
-                &:not(.placeholder) {
-                    cursor: pointer;
-                }
-            }
-        }
-        .credits {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 0 1em;
-            font-weight: 400;
-            font-size: 0.8em;
-            text-align: left;
-            color: white;
-        }
-        .header {
-            text-align: left;
-            border-bottom: 1px solid $neutral-grey;
-        }
-        .title {
-            font-size: 1.3em;
-            font-weight: 300;
-            padding: 0.6em 0.8em 0.2em;
-            display: block;
-            transition: all 0.2s ease;
-            z-index: 1;
-            @media (max-width: 767px) {
-                padding-right: 2rem;
-                cursor: pointer;
-            }
-        }
-        .toggle {
-            position: absolute;
-            top: 0.4rem;
-            right: 0.6rem;
-            font-size: 1.2em;
-            transition: all 0.2s ease;
-            cursor: pointer;
-            padding: 0.6em;
-            transform: rotate(225deg);
-            &:hover {
-                color: $primary-color;
-            }
-            @media (min-width: 768px) {
-                display: none;
-            }
-        }
-        .type {
-            padding: 0 1em 1em 1em;
-            display: block;
-            img {
-                height: 1.3em;
-                margin-right: 0.6em;
-                width: auto;
-            }
-            span {
-                color: lighten($dark-grey, 20%);
-                vertical-align: middle;
-            }
-        }
-        .content {
-            @media (max-width: 767px) {
-                max-height: 9999rem;
-                overflow-y: auto;
-                overflow-x: hidden;
-            }
-        }
-        .description {
-            padding: 1em 1.4em;
-            padding-bottom: 0;
-        }
-        .medias-liste {
-            padding: 1em 1.4em;
-            margin: 0;
-            list-style: none;
-            .media {
-                margin: 0 0.7rem;
-                display: inline-block;
-                a {
-                    font-size: 1.5rem;
-                    color: inherit;
-                    &:hover {
-                        color: $primary-color;
-                    }
-                }
-            }
-        }
+}
+
+.poi-list-item {
+    width: 100%;
+    margin: 0;
+    background: white;
+    position: relative;
+    color: $dark-grey;
+    transition: all 0.2s ease;
+    @media (min-width: 768px) {
+        border-bottom: 1px solid $neutral-grey;
+    }
+    .content {
         @media (max-width: 767px) {
-            display: flex;
-            flex-direction: column;
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100vh;
-            z-index: 2;
+            max-height: 9999rem;
             overflow-y: auto;
-            padding-bottom: 50px;
-            &.is-hidden {
-                display: none;
-                visibility: none;
-            }
-            &.closed {
-                //margin-bottom: 1em;
-                margin: 2%;
-                width: 96%;
-                height: auto;
-                display: block;
+            overflow-x: hidden;
+        }
+    }
+
+    @media (max-width: 767px) {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 2;
+        overflow-y: auto;
+        padding-bottom: 50px;
+        &.is-hidden {
+            display: none;
+            visibility: none;
+        }
+        &.closed {
+            //margin-bottom: 1em;
+            margin: 2%;
+            width: 96%;
+            height: auto;
+            display: block;
+            position: relative;
+            padding-bottom: 0;
+            .poi-header {
                 position: relative;
-                padding-bottom: 0;
-                .header {
-                    position: relative;
-                    border-bottom-width: 0;
+                border-bottom-width: 0;
+            }
+            .poi-type {
+                padding: 0;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                margin-top: -0.8rem;
+                img {
+                    height: 1.6rem;
                 }
-                .type {
-                    padding: 0;
-                    position: absolute;
-                    left: 0;
-                    top: 50%;
-                    margin-top: -0.8rem;
-                    img {
-                        height: 1.6rem;
-                    }
-                    span {
-                        display: none;
-                    }
-                }
-                .credits {
+                span {
                     display: none;
                 }
-                .title {
-                    padding: 0.5rem 2rem;
-                    font-size: 1rem;
-                }
-                .content {
-                    max-height: 0;
-                }
-                .toggle {
-                    padding: 0.5rem 0.4rem;
-                    right: 0;
-                    transform: rotate(0deg);
-                }
-                .description {
-                    display: none;
-                }
+            }
+            .poi-picture-credits {
+                display: none;
+            }
+            .poi-title {
+                padding: 0.5rem 2rem;
+                font-size: 1rem;
+            }
+            .content {
+                max-height: 0;
+            }
+            .toggle {
+                padding: 0.5rem 0.4rem;
+                right: 0;
+                transform: rotate(0deg);
+            }
+            .poi-description {
+                display: none;
             }
         }
+    }
+}
+
+.poi-picture {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    @media (min-width: 768px) {
+        //max-height: 16rem;
+    }
+    img {
+        width: 100%;
+        margin: auto;
+        transition: all 0.2s ease;
+        &:not(.placeholder) {
+            cursor: pointer;
+        }
+    }
+}
+
+.poi-picture-credits {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 1em;
+    font-weight: 400;
+    font-size: 0.8em;
+    text-align: left;
+    color: white;
+}
+
+.poi-header {
+    text-align: left;
+    border-bottom: 1px solid $neutral-grey;
+}
+
+.poi-title {
+    font-size: 1.3em;
+    font-weight: 300;
+    padding: 0.6em 0.8em 0.2em;
+    display: block;
+    transition: all 0.2s ease;
+    z-index: 1;
+    @media (max-width: 767px) {
+        padding-right: 2rem;
+        cursor: pointer;
+    }
+}
+
+.poi-toggle {
+    position: absolute;
+    top: 0.4rem;
+    right: 0.6rem;
+    font-size: 1.2em;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    padding: 0.6em;
+    transform: rotate(225deg);
+    &:hover {
+        color: $primary-color;
+    }
+    @media (min-width: 768px) {
+        display: none;
+    }
+}
+
+.poi-type {
+    padding: 0 1em 1em 1em;
+    display: block;
+    img {
+        height: 1.3em;
+        margin-right: 0.6em;
+        width: auto;
+    }
+    span {
+        color: lighten($dark-grey, 20%);
+        vertical-align: middle;
+    }
+}
+
+.poi-description {
+    padding: 1em 1.4em;
+    padding-bottom: 0;
+}
+
+.poi-media-list {
+    padding: 1em 1.4em;
+    margin: 0;
+    list-style: none;
+}
+
+.poi-media {
+    margin: 0 0.7rem;
+    display: inline-block;
+}
+
+.poi-media-link {
+    font-size: 1.5rem;
+    color: inherit;
+    &:hover {
+        color: $primary-color;
     }
 }
