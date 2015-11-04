@@ -72,3 +72,9 @@ You will need to:
 ------------------
 
 **Initial release of v2**
+
+Geotrek-rando V2 has been totally redesigned from scratch with AngularJS, to be full JS. This allows to host it on a shared hosting or a CDN.
+
+It requires Geotrek-admin version 2.X and can't be synchronised with Geotrek-admin v0.X and v1.X.
+
+Geotrek-rando v1 is available at https://github.com/makinacorpus/Geotrek-rando/tree/v1.X
