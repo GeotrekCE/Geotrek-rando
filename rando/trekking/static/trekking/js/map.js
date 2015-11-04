@@ -780,9 +780,11 @@ function detailmapInit(map, bounds) {
     });
 
     if (hasPOIs) {
-        var poisLayerSwitcher = new L.Control.TogglePOILayer(poisLayer);
-        poisLayerSwitcher.addTo(map);
-        map.poisLayerSwitcher = poisLayerSwitcher;
+        window.setTimeout(function () {
+          var poisLayerSwitcher = new L.Control.TogglePOILayer(poisLayer);
+          poisLayerSwitcher.addTo(map);
+          map.poisLayerSwitcher = poisLayerSwitcher;
+        },0);
     }
 
     map.whenReady(function () {
