@@ -1,20 +1,30 @@
 <ul class="pois-liste poi-list">
-    <li ng-repeat="poi in pois track by poi.id" id="poi-{{::poi.id}}" class="poi-list-item poi {{::poi.properties.type.label}} card" ng-class="isOpened[poi.id]" ng-mouseover="hoverMarkerPoi(poi,'enter')" ng-mouseleave="hoverMarkerPoi(poi,'leave')">
-        <div class="header poi-header">
-            <i class="poi-toggle toggle fa fa-plus" ng-click="togglePoi(poi.id)"></i>
-            <span class="poi-title" ng-click="togglePoi(poi.id)">{{::poi.properties.name}}</span>
+    <li ng-repeat="poi in pois track by poi.id" id="poi-{{::poi.id}}" class="poi-item poi {{::poi.properties.type.label}} card" ng-class="isOpened[poi.id]" ng-mouseover="hoverMarkerPoi(poi,'enter')" ng-mouseleave="hoverMarkerPoi(poi,'leave')">
+
+        <div
+            class="poi-picture poi-picture-empty"
+            ng-if="!poi.properties.pictures[0]"
+            style="background-image: url({{::$root.placeHolderImage}});">
+        </div>
+        <div
+            class="poi-picture"
+            ng-if="poi.properties.pictures[0]"
+            style="background-image: url({{::poi.properties.pictures[0].url}});"
+            ng-click="showLightbox(poi.properties.pictures, 0)">
+            <div ng-if="poi.properties.pictures[0]" class="poi-picture-credits">{{::poi.properties.pictures[0].author}}</div>
+        </div>
+
+        <div class="poi-content content">
+
+            <div class="poi-title" ng-click="togglePoi(poi.id)">{{::poi.properties.name}}</div>
+
             <div class="poi-type type">
                 <img ng-src="{{::poi.properties.type.pictogram}}" ng-alt="{{::poi.properties.type.label}}">
                 <span>{{::poi.properties.type.label}}</span>
             </div>
-        </div>
-        <div class="poi-content content">
-            <div class="poi-picture picture">
-                <img ng-if="poi.properties.pictures[0]" ng-src="{{::poi.properties.pictures[0].url}}" ng-alt="{{::poi.properties.type.label}}" ng-click="showLightbox(poi.properties.pictures, 0)">
-                <div ng-if="poi.properties.pictures[0]" class="poi-picture-credits">{{::poi.properties.pictures[0].author}}</div>
-                <img ng-if="!poi.properties.pictures[0]" ng-src="{{::$root.placeHolderImage}}" alt="placeholder image" class="poi-picture-placeholder">
-            </div>
+
             <div class="description poi-description" ng-bind-html="sanitizeData(poi.properties.description, true)"></div>
+
             <div class="medias poi-medias">
                 <ul class="medias-liste poi-media-list">
                     <li ng-repeat="media in poi.properties.videos track by $index" class="poi-media media" ng-class="{video: media.backend === 'Youtube' || media.backend === 'Vimeo', audio: media.backend === 'SoundCloud'}">
@@ -30,6 +40,7 @@
                     </li>
                 </ul>
             </div>
+
         </div>
     </li>
 </ul>
