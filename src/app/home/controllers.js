@@ -42,7 +42,6 @@ function HomeController($scope, $rootScope, translationService, $location, homeS
 
     $scope.initHome();
 
-
     var rootScopeEvents = [
         $rootScope.$on('$stateChangeStart', function (event, toState) {
             if (toState.name !== 'layout.root' && $rootScope.showHome) {
@@ -55,7 +54,7 @@ function HomeController($scope, $rootScope, translationService, $location, homeS
 
 }
 
-function RandomWidgetController($scope, resultsService) {
+function RandomWidgetController($scope, resultsService, utilsFactory) {
     function getRandomContents() {
         resultsService.getRandomContentsByCategory($scope.categories, $scope.quantity)
             .then(
@@ -72,6 +71,7 @@ function RandomWidgetController($scope, resultsService) {
         getRandomContents();
     }
 
+    $scope.isSVG = utilsFactory.isSVG;
     init();
 }
 
