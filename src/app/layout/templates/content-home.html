@@ -3,6 +3,11 @@
     <geotrek-map></geotrek-map>
     <filters-tags ng-if="showFiltersOnMap"></filters-tags>
 </div>
-<div class="resultsview-pane results-pane results-drawer">
+<div class="results-pane-controls" ng-class="{ 'fold-results': foldResults }">
+    <button class="results-pane-toggle" ng-click="resultsPaneToggle()">
+        <ng-include class="stripe" src="'/images/icons/stripe.svg'"></ng-include>
+    </button>
+</div>
+<div class="resultsview-pane results-pane results-drawer" ng-class="{ 'fold-results': foldResults }">
     <results-liste></results-liste>
 </div>

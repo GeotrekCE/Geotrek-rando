@@ -1,6 +1,6 @@
 'use strict';
 
-function LayoutController($rootScope, $scope, $state, $location, resultsService, globalSettings, homeService, $translate, $timeout, Analytics) {
+function LayoutController($rootScope, $scope, $state, $location, resultsService, globalSettings, homeService, $translate, $timeout, Analytics, mapService) {
     $rootScope.currentState_name = $state.current.name;
     $rootScope.showFooterOnApp = globalSettings.SHOW_FOOTER;
     $rootScope.elementsLoading = 0;
@@ -38,6 +38,14 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
                 );
         }
     }
+
+    $scope.foldResults = false;
+    $scope.resultsPaneToggle = function () {
+        $scope.foldResults = !$scope.foldResults;
+        setTimeout(function () {
+            mapService.invalidateSize();
+        }, 100);
+    };
 
     iniDefaultMeta();
 
