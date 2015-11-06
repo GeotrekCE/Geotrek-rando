@@ -6,16 +6,101 @@
 }
 
 .poi-item {
-    border: 2px solid rgba(230, 230, 230, 1);
     font-size: 1.2em;
+
+    position: relative;
+    overflow: hidden;
 
     margin: 0;
 
     color: $dark-grey;
+    border: 2px solid rgba(230, 230, 230, 1);
     background: white;
 
-    +.poi-item {
+    + .poi-item {
         margin-top: 1em;
+    }
+}
+
+.poi-overlay {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    transition: opacity 300ms ease;
+
+    opacity: 0;
+    background-color: rgba(#000, .4);
+
+    .plus {
+        position: absolute;
+        top: 6.5em;
+        left: 50%;
+
+        width: 38px;
+        height: 38px;
+
+        border-radius: 50%;
+        background-color: #333;
+        border: 1px solid #fff;
+        transform: translate(-50%, -50%);
+        &:before, &:after {
+            content: " ";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            background-color: #fff;
+            transform: translate(-50%, -50%);
+            width: 3px;
+            height: 16px;
+        }
+        &:after {
+            transform: translate(-50%, -50%) rotate(90deg);
+        }
+    }
+
+    &.visible {
+        opacity: 1;
+    }
+    .expanded & {
+        bottom: 100%;
+        opacity: 0;
+    }
+}
+
+.poi-fold {
+    position: absolute;
+    right: 0;
+    bottom: -1.75em;
+    left: 0;
+
+    height: 1.5em;
+
+    cursor: pointer;
+    transition: bottom 300ms ease;
+    text-align: center;
+
+    opacity: .7;
+    background-color: rgba(#000, .05);
+
+    .stripe-icon {
+        display: inline-block;
+
+        transform: rotate(-90deg);
+        svg {
+            display: inline-block;
+        }
+    }
+
+    .expanded & {
+        bottom: 0;
+    }
+
+    &:hover {
+        opacity: 1;
     }
 }
 
@@ -40,6 +125,7 @@
     right: 1.2em;
     bottom: .5em;
 
+    opacity: .5;
     color: #fff;
     text-shadow: .5px .5px 1px rgba(0, 0, 0, .6);
     .camera {
@@ -48,8 +134,11 @@
         margin-left: 5px;
 
         vertical-align: middle;
-                }
-            }
+    }
+    .expanded & {
+        opacity: 1;
+    }
+}
 
 .poi-picture-empty {
     cursor: default;
@@ -73,6 +162,10 @@
 
 .poi-content {
     padding: 1em;
+
+    .expanded & {
+        padding-bottom: 2em;
+    }
 }
 
 .poi-title {
@@ -90,6 +183,17 @@
         width: auto;
         height: 1.3em;
         margin-right: .25em;
+    }
+}
+
+.poi-drawer {
+    overflow: hidden;
+
+    max-height: 0;
+
+    transition: max-height 300ms ease;
+    .expanded & {
+        max-height: 100vh;
     }
 }
 
