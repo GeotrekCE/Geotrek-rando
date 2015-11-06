@@ -10,7 +10,7 @@
             Close Categories
         --><div class="categories-close"><button ng-click="foldCategories()">Fermer <ng-include class="cross" src="'/images/icons/cross.svg'"></ng-include></button></div>
     </li>
-    <li ng-repeat="category in categories | orderBy: 'order' track by category.id" class="category {{::category.cat_class}}" ng-class="{active : activeFilters.categories.indexOf(category.id) > -1, open: category.open}" id="cat-{{::category.id}}">
+    <li ng-repeat="category in categories | orderBy: 'order' track by category.id" class="category {{::category.cat_class}}" ng-class="{active : activeFilters.categories.indexOf(category.id) > -1, open: category.open}" id="cat-{{::category.id}}" title="{{category.label}}">
         <!--
         ICON
         --><span class="category-icon" ng-click="extendCategories()">
