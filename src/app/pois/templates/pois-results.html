@@ -12,6 +12,12 @@
             style="background-image: url({{::poi.properties.pictures[0].url}});"
             ng-click="showLightbox(poi.properties.pictures, 0)">
             <div ng-if="poi.properties.pictures[0]" class="poi-picture-credits">{{::poi.properties.pictures[0].author}}</div>
+
+            <div class="poi-picture-how-many" ng-if="poi.properties.pictures.length > 1">
+                {{ poi.properties.pictures.length }}
+                <ng-include class="camera" src="'/images/icons/camera.svg'"></ng-include>
+            </div>
+
         </div>
 
         <div class="poi-content content">

@@ -32,6 +32,25 @@
     background-size: cover;
 }
 
+.poi-picture-how-many {
+    font-size: .8em;
+    font-weight: bold;
+
+    position: absolute;
+    right: 1.2em;
+    bottom: .5em;
+
+    color: #fff;
+    text-shadow: .5px .5px 1px rgba(0, 0, 0, .6);
+    .camera {
+        display: inline-block;
+
+        margin-left: 5px;
+
+        vertical-align: middle;
+                }
+            }
+
 .poi-picture-empty {
     cursor: default;
 }
