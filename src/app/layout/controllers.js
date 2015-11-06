@@ -44,7 +44,7 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
         $scope.foldResults = !$scope.foldResults;
         setTimeout(function () {
             mapService.invalidateSize();
-        }, 100);
+        }, 350);
     };
 
     iniDefaultMeta();
