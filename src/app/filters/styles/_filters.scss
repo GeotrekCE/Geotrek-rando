@@ -158,18 +158,13 @@
             flex: 1 1 auto;
             display: flex;
             padding-bottom: 0.4rem;
-            @media (min-width: 768px) and (max-width: 1200px) {
-                justify-content: flex-start;
-            }
+            justify-content: flex-start;
             h4 {
                 display: block;
                 padding: 0 0.5rem;
                 color: $dark-grey;
                 font-size: 0.8rem;
                 align-self: center;
-                @media (min-width: 768px) and (max-width: 1200px) {
-                    width: 150px;
-                }
                 @media (max-width: 450px) {
                     display: none;
                 }
@@ -181,14 +176,10 @@
             }
             .theme {
                 height: 2.5em;
-                flex: 1 1 2.5em;
+                flex: 0 1 50px;
                 position: relative;
-                margin: auto;
+                margin: auto 0;
                 padding: 4px;
-                @media (min-width: 768px) and (max-width: 1200px) {
-                    margin: 0 1em;
-                    flex: 0 1 2.5em;
-                }
                 label {
                     overflow: hidden;
                     margin: 0;
@@ -209,7 +200,7 @@
                     }
                     svg {
                         height: 100%;
-                        max-width: 100%;
+                        width: 100%;
                     }
                     svg .base {
                         fill: $dark-grey;
