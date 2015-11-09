@@ -150,25 +150,6 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
             promises = [],
             parentsElement = [];
 
-        /*var parentElement = {
-            category_id: result.properties.category.id,
-            id: result.properties.parent
-        };
-
-        resultsService.getAResultByID(parentElement.id, parentElement.category_id)
-            .then(
-                function (elementData) {
-                    $scope.parentElement = elementData;
-                    //mapService.createElementsMarkers($scope.elementChildren, 'parent');
-                    deferred.resolve($scope.parentElement);
-                },
-                function (err) {
-                    if (console) {
-                        console.error(err);
-                    }
-                }
-            );*/
-
         _.each(result.properties.parents, function(parent) {
             parentsElement.push({
                 category_id: result.properties.category.id,
@@ -312,7 +293,6 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                 }
             );
 
-        
     }
 
     function getResultDetails(forceRefresh) {
