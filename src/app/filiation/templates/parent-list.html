@@ -1,5 +1,5 @@
-<ul class="parent-liste">
-    <li id="parent-category-{{::parentElement.properties.category.id}}-{{::parentElement.id}}" class="parent category-{{::parentElement.properties.category.id}} card">
+<ul class="parents-liste">
+    <li ng-repeat="parentElement in parentsElement track by parentElement.properties.category.id + '-' + parentElement.id" id="parent-category-{{::parentElement.properties.category.id}}-{{::parentElement.id}}" class="parent category-{{::parentElement.properties.category.id}} card">
         <div class="fav-or-not" ng-click="toggleFavorites(parentElement)" ng-class="{isFav: isInFavorites(parentElement)}">
             <i class="glyphicon glyphicon-heart"></i>
         </div>

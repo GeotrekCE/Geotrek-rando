@@ -146,9 +146,11 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
     }
 
     function getParent(result) {
-        var deferred = $q.defer();
+        var deferred = $q.defer(),
+            promises = [],
+            parentsElement = [];
 
-        var parentElement = {
+        /*var parentElement = {
             category_id: result.properties.category.id,
             id: result.properties.parent
         };
@@ -164,6 +166,41 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                     if (console) {
                         console.error(err);
                     }
+                }
+            );*/
+
+        _.each(result.properties.parents, function(parent) {
+            parentsElement.push({
+                category_id: result.properties.category.id,
+                id: parent
+            });
+        });
+
+        console.log(parentsElement);
+
+        $scope.parentsElement = [];
+
+        _.forEach(parentsElement, function (element) {
+            promises.push(
+                resultsService.getAResultByID(element.id, element.category_id)
+                    .then(
+                        function (elementData) {
+                            $scope.parentsElement.push(elementData);
+                        },
+                        function (err) {
+                            if (console) {
+                                console.error(err);
+                            }
+                        }
+                    )
+            );
+        });
+
+        $q.all(promises)
+            .then(
+                function () {
+                    // mapService.createElementsMarkers($scope.parentsElement, 'parent');
+                    deferred.resolve($scope.parentsElement);
                 }
             );
 
@@ -244,17 +281,17 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
             );
         }
 
-        if (result.properties.parent) {
+        if (result.properties.parents) {
             promises.push(
                 getParent(result)
                     .then(
-                        function (parent) {
-                            if (parent) {
+                        function (parents) {
+                            if (parents.length > 0) {
                                 if (globalSettings.DEFAULT_INTEREST === '') {
                                     activeDefaultType = '';
                                 } else {
-                                    if (globalSettings.DEFAULT_INTEREST === 'parent' || !activeDefaultType) {
-                                        activeDefaultType = 'parent';
+                                    if (globalSettings.DEFAULT_INTEREST === 'parents' || !activeDefaultType) {
+                                        activeDefaultType = 'parents';
                                     }
                                 }
                             }
@@ -290,6 +327,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         promise
             .then(
                 function (result) {
+                    console.log(result);
                     $rootScope.metaTitle = result.properties.name;
                     $rootScope.metaDescription = result.properties.description_teaser;
                     $scope.result = result;

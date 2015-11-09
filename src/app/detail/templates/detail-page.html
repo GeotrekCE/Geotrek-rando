@@ -283,15 +283,15 @@
                     </ul>
                 </div>
 
-                <div ng-if="pois.length > 0 || nearElements.length > 0 || elementChildren.length > 0 || parentElement" class="interests">
+                <div ng-if="pois.length > 0 || nearElements.length > 0 || elementChildren.length > 0 || parentsElement.length > 0" class="interests">
                     <div class="children" ng-if="elementChildren.length > 0" ng-class="{collapsed: interestShown !== 'children'}">
                         <h3 ng-click="toggleInterest('children')">{{'CHILDREN' | translate}} <i class="fa fa-angle-down"></i></h3>
                         <div class="collapsor">
                             <children-liste></children-liste>
                         </div>
                     </div>
-                    <div class="parent" ng-if="parentElement" ng-class="{collapsed: interestShown !== 'parent'}">
-                        <h3 ng-click="toggleInterest('parent')">{{'PARENT' | translate}} <i class="fa fa-angle-down"></i></h3>
+                    <div class="parent" ng-if="parentsElement.length > 0" ng-class="{collapsed: interestShown !== 'parents'}">
+                        <h3 ng-click="toggleInterest('parents')">{{'PARENT' | translate}} <i class="fa fa-angle-down"></i></h3>
                         <div class="collapsor">
                             <parent-liste></parent-liste>
                         </div>
