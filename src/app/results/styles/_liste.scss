@@ -40,8 +40,7 @@
         & > li {
             flex: 0 1 47%;
             max-width: 47%;
-            max-height: 20rem;
-            padding: 0 1em 2.4em;
+            padding: 0 1rem 2.4rem;
             display: block;
             position: relative;
             opacity: 1;
@@ -101,8 +100,8 @@
             }
             .visual {
                 max-height: 150px;
-                margin-left: -15px;
-                margin-right: -15px;
+                margin-left: -1rem;
+                margin-right: -1rem;
                 position: relative;
                 overflow: hidden;
                 img {
