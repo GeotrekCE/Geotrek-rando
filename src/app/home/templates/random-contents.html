@@ -1,6 +1,14 @@
 <ul class="random-list">
-    <li class="random-element" id="random-{{content.id}}" ng-repeat="content in randomContents">
-        <img ng-src="{{content.properties.pictures[0].url}}" alt="{{content.properties.pictures[0].title}}">
-        <div class="title" ng-bind="content.properties.name"></div>
+    <li class="random-element category-{{content.properties.category.id}}" id="random-{{content.id}}" ng-repeat="content in randomContents">
+        <a ui-sref="layout.detail({catSlug: content.properties.category.slug, slug: content.properties.slug})">
+            <img class="content-picture" ng-src="{{content.properties.pictures[0].url}}" alt="{{content.properties.pictures[0].title}}">
+            <div class="content-description">
+                <div class="content-category" tooltip-placement="right" tooltip="{{::content.properties.category.label}}">
+                    <ng-include ng-if="isSVG(content.properties.category.pictogram)"  src="content.properties.category.pictogram"></ng-include>
+                    <img        ng-if="!isSVG(content.properties.category.pictogram)" ng-src="{{::content.properties.category.pictogram}}" ng-alt="{{::category.label}}">
+                </div>
+                <div class="content-title" ng-bind="content.properties.name"></div>
+            </div>
+        </a>
     </li>
 </ul>

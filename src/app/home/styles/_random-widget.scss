@@ -2,31 +2,62 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .random-element {
-    display: inline-block;
     height: 150px;
-    width: 21%;
-    margin: 0 2%;
+    flex: 1 0 200px;
+    margin: 0.5rem 2% 0;
     overflow: hidden;
     position: relative;
-    .title {
+    a {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    .content-description {
         min-height: 2rem;
         width: calc(100% - 4px);
         position: absolute;
         bottom: 2px;
         left: 50%;
         transform: translate(-50%, 0);
-        padding: 0.5rem;
         background: white;
-        text-align: center;
-        font-size: 1rem;
+        display: flex;
         line-height: 1rem;
-        vertical-align: middle;
     }
-    img {
+    .content-title {
+        flex: 1 1 auto;
+        font-size: 1.2rem;
+        line-height: 1rem;
+        margin: auto;
+        padding: 0 0.5rem;
+    }
+    .content-picture {
         width: 100%;
         height: auto;
+    }
+    .content-category {
+        width: 40px;
+        height: 40px;
+        padding: 8px;
+        background: $dark-grey;
+        svg {
+            height: 100%;
+            width: 100%;
+            fill: white;
+        }
+    }
+    @each $category in $categories {
+        &.category-#{nth($category, 1)} {
+            .content-category {
+                background-color: nth($category, 2);
+            }
+            .content-title {
+                color: nth($category, 2);
+            }
+        }
     }
 }
