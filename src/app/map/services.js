@@ -213,8 +213,12 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             self.createLayerFromElement(element, 'category', startPoint)
                 .then(
                     function (marker) {
+
+                        popupService.attachPopups(marker);
+
                         marker.options.icon.options.className += ' ' + type + '-marker';
                         var selector = '#' + type + '-category-' + element.properties.category.id + '-' + element.id;
+                        /*
                         marker.on({
                             mouseover: function () {
                                 var listeEquivalent = document.querySelector(selector);
@@ -244,6 +248,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                 $state.go("layout.detail", { catSlug: element.properties.category.slug, slug: element.properties.slug });
                             }
                         });
+                        */
                         self._nearMarkersLayer.addLayer(marker);
                     }
                 );
@@ -1029,6 +1034,9 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                             function (layer) {
                                 var selector = '#result-category-' + result.properties.category.id.toString() + '-' + result.id.toString();
 
+                                popupService.attachPopups(layer);
+
+                                /*
                                 layer.on({
                                     mouseover: function () {
                                         var listeEquivalent = document.querySelector(selector);
@@ -1064,6 +1072,8 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                         $state.go("layout.detail", { catSlug: result.properties.category.slug, slug: result.properties.slug });
                                     }
                                 });
+                                */
+
                                 if (result.geometry.type !== "Point" && result.geometry.type !== "MultiPoint") {
                                     jQuery(selector).on('mouseenter', function () {
                                         self.highlightPath(result);
