@@ -1,6 +1,6 @@
 'use strict';
 
-function mapService($q, $state, $resource, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService) {
+function mapService($q, $state, $resource, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService, popupService) {
 
     var self = this;
 
@@ -71,6 +71,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                 self.createLayerFromElement(element, 'parking', parkingPoint)
                     .then(
                         function (marker) {
+                            popupService.attachPopups(marker);
                             self._infosMarkersLayer.addLayer(marker);
                         }
                     )
@@ -143,6 +144,8 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                             var selector = '#poi-' + poi.id.toString();
 
                                             counter++;
+                                            popupService.attachPopups(marker);
+                                            /*
                                             marker.on({
                                                 mouseover: function () {
                                                     var listeEquivalent = document.querySelector(selector);
@@ -180,6 +183,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                                     //$state.go("layout.detail", { catSlug: result.properties.category.slug, slug: result.properties.slug });
                                                 }
                                             });
+                                            */
                                             self._poisMarkersLayer.addLayer(marker);
                                         }
                                     );
@@ -1918,8 +1922,55 @@ function boundsService() {
 
 }
 
+function popupService() {
+
+    var infoOpen = false;
+
+    var _attachPopups = function _attachPopups (marker) {
+
+        marker.bindPopup(L.popup(), { 'offset': L.point(0, -20) }).openPopup();
+        var popup = marker.getPopup();
+
+        // console.log(marker);
+
+        marker.on({
+            click: function () {
+                popup.setContent('informations');
+                popup.hint = false;
+                infoOpen = true;
+                this.openPopup();
+                popup._container.classList.remove('infoPopup');
+                popup._container.classList.add('hintPopup');
+
+            },
+            mouseover: function () {
+                if (!popup._isOpen && !infoOpen) {
+                    popup.setContent('hint tip');
+                    popup.hint = true;
+                    this.openPopup();
+                    popup._container.classList.remove('hintPopup');
+                    popup._container.classList.add('infoPopup');
+                }
+            },
+            mouseout: function () {
+                if (popup._isOpen && popup.hint) {
+                    this.closePopup();
+                }
+            },
+            popupclose: function () {
+                infoOpen = false;
+            }
+        });
+
+        return marker;
+
+    }
+    this.attachPopups = _attachPopups;
+}
+
 module.exports = {
     mapService: mapService,
     iconsService: iconsService,
-    boundsService: boundsService
+    boundsService: boundsService,
+    popupService: popupService
 };
