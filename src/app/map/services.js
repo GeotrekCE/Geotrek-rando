@@ -208,7 +208,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     this.createElementsMarkers = function (elements, type) {
         var startPoint = [];
-        _.forEach(elements, function (element) {
+        elements.forEach(function (element) {
             startPoint = utilsFactory.getStartPoint(element);
             self.createLayerFromElement(element, 'category', startPoint)
                 .then(
