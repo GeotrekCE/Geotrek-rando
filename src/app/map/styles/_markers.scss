@@ -269,3 +269,25 @@
 .detail-map.hide-pois .double-marker.poi {
     display: none;
 }
+
+.leaflet-popup {
+    .leaflet-popup-content-wrapper {
+        border-radius: 0;
+    }
+}
+
+.geotrek-hint-popup {
+    .leaflet-popup-content {
+        margin: .75em 1em;
+    }
+
+    .leaflet-popup-content-wrapper,
+    .leaflet-popup-tip {
+        box-shadow: 0 .2em .5em rgba(#000, .1);
+        background-color: rgba(#fff, .85);
+    }
+
+    .leaflet-popup-close-button {
+        display: none;
+    }
+}
