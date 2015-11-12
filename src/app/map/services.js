@@ -1926,6 +1926,19 @@ function popupService() {
 
     var infoOpen = false;
 
+    var _buildHintContent = function _buildHintContent () {
+        var markerDom = this._icon;
+        var m;
+        var dataPopup;
+        if (markerDom instanceof HTMLElement) {
+            m = markerDom.querySelector('.marker')
+            if (m) {
+                dataPopup = m.getAttribute('data-popup');
+            }
+        }
+        return dataPopup;
+    };
+
     var _attachPopups = function _attachPopups (marker) {
 
         marker.bindPopup(L.popup(), { 'offset': L.point(0, -20) }).openPopup();
@@ -1936,29 +1949,37 @@ function popupService() {
         marker.on({
             click: function () {
                 popup.setContent('informations');
-                popup.hint = false;
-                infoOpen = true;
-                this.openPopup();
-                popup._container.classList.remove('infoPopup');
-                popup._container.classList.add('hintPopup');
+                popup.hint = false; // Disallow close on mouseout
+                infoOpen   = true;  // Disallow opening hintPopup while an infoPopup is open
 
+                this.openPopup();
+
+                popup._container.classList.remove('geotrek-hint-popup');
+                popup._container.classList.add('geotrek-info-popup');
+
+                return this;
             },
             mouseover: function () {
-                if (!popup._isOpen && !infoOpen) {
-                    popup.setContent('hint tip');
-                    popup.hint = true;
+                var content = _buildHintContent.call(this);
+                if (!popup._isOpen && !infoOpen && content) {
+                    popup.setContent(content);
+                    popup.hint = true; // Allow close on mouseout
+
                     this.openPopup();
-                    popup._container.classList.remove('hintPopup');
-                    popup._container.classList.add('infoPopup');
+
+                    popup._container.classList.remove('geotrek-info-popup');
+                    popup._container.classList.add('geotrek-hint-popup');
                 }
+                return this;
             },
             mouseout: function () {
-                if (popup._isOpen && popup.hint) {
+                if (popup._isOpen && popup.hint) { // Close popup only if it's open & if it's a hintPopup
                     this.closePopup();
                 }
+                return this;
             },
             popupclose: function () {
-                infoOpen = false;
+                infoOpen = false; // Re-allow opening hintPopup
             }
         });
 
