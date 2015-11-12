@@ -1904,6 +1904,7 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
                     iconSize: self.icons_liste.category_base.iconSize,
                     iconAnchor: self.icons_liste.category_base.iconAnchor,
                     labelAnchor: self.icons_liste.category_base.labelAnchor,
+                    popupAnchor: L.point(0, -1 * self.icons_liste.category_base.iconSize[1]),
                     className: 'double-marker popup layer-category-' + element.properties.category.id + '-' + element.id + ' category-' + element.properties.category.id
                 });
                 deferred.resolve(newIcon);
@@ -1961,7 +1962,7 @@ function popupService() {
 
     var _attachPopups = function _attachPopups (marker) {
 
-        marker.bindPopup(L.popup(), { 'offset': L.point(0, -20) }).openPopup();
+        marker.bindPopup(L.popup()).openPopup();
         var popup = marker.getPopup();
 
         marker.on({
