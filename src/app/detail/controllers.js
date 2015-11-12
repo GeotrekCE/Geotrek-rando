@@ -308,7 +308,6 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         promise
             .then(
                 function (result) {
-                    console.log(result);
                     $rootScope.metaTitle = result.properties.name;
                     $rootScope.metaDescription = result.properties.description_teaser;
                     $scope.result = result;
