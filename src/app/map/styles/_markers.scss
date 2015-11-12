@@ -39,6 +39,22 @@
         background-color: transparent;
     }
 
+    .marker {
+        .background {
+            transition: fill 300ms ease;
+
+            fill: rgba(#000, .5);
+        }
+    }
+
+    &:hover {
+        .marker {
+            .background {
+                fill: rgba(#333, .8);
+            }
+        }
+    }
+
     /*
     &.popup .marker::after {
         content: '';
@@ -103,6 +119,7 @@
             }
         }
     }
+    /*
     &:hover, &.hovered {
         z-index: 55555555 !important;
         &:not(.service) {
@@ -132,6 +149,7 @@
             }
         }
     }
+    */
 }
 
 .element-cluster,
@@ -159,7 +177,7 @@
         z-index: 55555555 !important;
         .marker {
             transform: scale(1.3);
-            transform-origin: center bottom;
+            transform-origin: center center;
         }
     }
 }
@@ -181,7 +199,7 @@
         z-index: 55555555 !important;
         .icon-group {
             transform: scale(1.2);
-            transform-origin: center bottom;
+            transform-origin: center center;
         }
     }
 }
