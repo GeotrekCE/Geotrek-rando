@@ -252,6 +252,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     this.createLayerFromElement = function (element, type, elementLocation) {
         var deferred = $q.defer();
+        var popupContents = {};
         if (type === "geojson" && element.geometry.type !== 'MultiPoint') {
             var geoStyle = {
                 className:  'layer-category-' + element.properties.category.id + '-' + element.id + ' category-' + element.properties.category.id
@@ -277,11 +278,13 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             case 'category':
                 promise = iconsService.getElementIcon;
                 param = element;
+                popupContents.hint = element.properties.name;
                 break;
 
             case 'poi':
                 promise = iconsService.getPOIIcon;
                 param = element;
+                popupContents.hint = element.properties.name;
                 break;
 
             case 'service':
@@ -311,6 +314,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                 }
                             );
                             marker.options.result = element;
+                            marker.popupContents = popupContents;
                             deferred.resolve(marker);
                         } else {
                             deferred.reject('no position provided');
@@ -1926,25 +1930,29 @@ function popupService() {
 
     var infoOpen = false;
 
-    var _buildHintContent = function _buildHintContent () {
-        var markerDom = this._icon;
+    var _getHintContent = function _getHintContent () {
+        if (this.popupContents && this.popupContents.hint) {
+            return this.popupContents.hint;
+        }
+
         var m;
         var dataPopup;
+        var markerDom = this._icon;
+
         if (markerDom instanceof HTMLElement) {
             m = markerDom.querySelector('.marker')
             if (m) {
-                dataPopup = m.getAttribute('data-popup');
+                return m.getAttribute('data-popup');
             }
         }
-        return dataPopup;
+
+        return null;
     };
 
     var _attachPopups = function _attachPopups (marker) {
 
         marker.bindPopup(L.popup(), { 'offset': L.point(0, -20) }).openPopup();
         var popup = marker.getPopup();
-
-        // console.log(marker);
 
         marker.on({
             click: function () {
@@ -1960,9 +1968,9 @@ function popupService() {
                 return this;
             },
             mouseover: function () {
-                var content = _buildHintContent.call(this);
-                if (!popup._isOpen && !infoOpen && content) {
-                    popup.setContent(content);
+                var hintContent = _getHintContent.call(this); // Get hint content from marker object or data-popup attr.
+                if (!popup._isOpen && !infoOpen && hintContent) {
+                    popup.setContent(hintContent);
                     popup.hint = true; // Allow close on mouseout
 
                     this.openPopup();
