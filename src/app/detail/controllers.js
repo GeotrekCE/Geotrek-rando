@@ -159,8 +159,6 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
             });
         });
 
-        console.log(parentsElement);
-
         $scope.parentsElement = [];
 
         _.forEach(parentsElement, function (element) {
