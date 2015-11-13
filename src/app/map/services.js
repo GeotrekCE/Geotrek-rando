@@ -1922,7 +1922,6 @@ function boundsService() {
     this.bounds = {};
 
     this.setBounds = function (latLngBounds, context) {
-        console.log('serviceCall:setBounds (' + context + ')');
         this.bounds[context] = latLngBounds;
         return this.getBounds(context);
     };
