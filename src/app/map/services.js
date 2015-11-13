@@ -1614,6 +1614,7 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
         return new L.DivIcon({
             iconSize: [40, 40],
             iconAnchor: [20, 20],
+            popupAnchor: [0, -40],
             className: 'element-cluster',
             html: '<div class="marker"><span class="count">' + cluster.getChildCount() + '</span></div>'
         });
@@ -1623,6 +1624,7 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
         return new L.DivIcon({
             iconSize: [40, 40],
             iconAnchor: [20, 20],
+            popupAnchor: [0, -40],
             className: 'touristic-cluster',
             html: '<div class="marker"><span class="count">' + cluster.getChildCount() + '</span></div>'
         });
@@ -1651,6 +1653,7 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
         return new L.DivIcon({
             iconSize: [40, 40],
             iconAnchor: [20, 40],
+            popupAnchor: [0, -40],
             className: 'poi-cluster',
             html: iconsMarkup
         });
@@ -1661,13 +1664,10 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
 
         var markup = '<span>' + refElement.order + '</span>';
 
-        var newIcon = new L.divIcon({
+        var newIcon = new L.divIcon(_.merge({}, self.icons_liste.ref_point, {
             html: markup,
-            iconSize: self.icons_liste.ref_point.iconSize,
-            iconAnchor: self.icons_liste.ref_point.iconAnchor,
-            labelAnchor: self.icons_liste.ref_point.labelAnchor,
             className: self.icons_liste.ref_point.className + ' ' + self.icons_liste.ref_point.className + '-' + refElement.order
-        });
+        }));
         deferred.resolve(newIcon);
 
         return deferred.promise;
@@ -1683,24 +1683,18 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
                 deferred.resolve(self[iconName]);
             } else {
                 if (!utilsFactory.isSVG(self.icons_liste[iconName].iconUrl)) {
-                    self[iconName] = new L.divIcon({
-                        html: self.icons_liste[iconName].iconUrl,
-                        iconSize: self.icons_liste[iconName].iconSize,
-                        iconAnchor: self.icons_liste[iconName].iconAnchor,
-                        className: self.icons_liste[iconName].className
-                    });
+                    self[iconName] = new L.divIcon(_.merge({}, self.icons_liste[iconName], {
+                        html: self.icons_liste[iconName].iconUrl
+                    }));
                     deferred.resolve(self[iconName]);
                 } else {
                     self.getSVGIcon(self.icons_liste[iconName].iconUrl, iconName)
                         .then(
                             function (iconMarkup) {
 
-                                self[iconName] = new L.divIcon({
-                                    html: iconMarkup,
-                                    iconSize: self.icons_liste[iconName].iconSize,
-                                    iconAnchor: self.icons_liste[iconName].iconAnchor,
-                                    className: self.icons_liste[iconName].className
-                                });
+                                self[iconName] = new L.divIcon(_.merge({}, self.icons_liste[iconName], {
+                                    html: iconMarkup
+                                }));
                                 deferred.resolve(self[iconName]);
                             }
                         );
@@ -1759,13 +1753,10 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
                             '</div>';
                     }
 
-                    var newIcon = new L.divIcon({
+                    var newIcon = new L.divIcon(_.merge({}, self.icons_liste.poi_base, {
                         html: markup,
-                        iconSize: self.icons_liste.poi_base.iconSize,
-                        iconAnchor: self.icons_liste.poi_base.iconAnchor,
-                        labelAnchor: self.icons_liste.poi_base.labelAnchor,
                         className: 'double-marker popup poi layer-' + poi.properties.type.id + '-' + poi.id + ' category-' + poi.properties.type.id
-                    });
+                    }));
                     deferred.resolve(newIcon);
                 }
             );
@@ -1822,13 +1813,10 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
                             '</div>';
                     }
 
-                    var newIcon = new L.divIcon({
+                    var newIcon = new L.divIcon(_.merge({}, self.icons_liste.service_base, {
                         html: markup,
-                        iconSize: self.icons_liste.service_base.iconSize,
-                        iconAnchor: self.icons_liste.service_base.iconAnchor,
-                        labelAnchor: self.icons_liste.service_base.labelAnchor,
                         className: 'double-marker popup service layer-' + service.properties.type.id + '-' + service.id
-                    });
+                    }));
                     deferred.resolve(newIcon);
                 }
             );
@@ -1848,13 +1836,10 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
                     '</div>' +
                     '<div class="icon"><i class="fa fa-exclamation-circle"></i></div>';
 
-                var warningIcon = new L.DivIcon({
+                var warningIcon = new L.DivIcon(_.merge({}, self.icons_liste.poi_base, {
                     html: markup,
-                    iconSize: self.icons_liste.poi_base.iconSize,
-                    iconAnchor: self.icons_liste.poi_base.iconAnchor,
-                    labelAnchor: self.icons_liste.poi_base.labelAnchor,
                     className: 'double-marker warning-marker'
-                });
+                }));
 
                 deferred.resolve(warningIcon);
             });
@@ -1900,14 +1885,10 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
                     '</div>' +
                     '<div class="icon">' + categoryIcon + '</div>';
 
-                var newIcon = new L.divIcon({
+                var newIcon = new L.divIcon(_.merge({}, self.icons_liste.category_base, {
                     html: markup,
-                    iconSize: self.icons_liste.category_base.iconSize,
-                    iconAnchor: self.icons_liste.category_base.iconAnchor,
-                    labelAnchor: self.icons_liste.category_base.labelAnchor,
-                    popupAnchor: L.point(0, -1 * self.icons_liste.category_base.iconSize[1]),
                     className: 'double-marker popup layer-category-' + element.properties.category.id + '-' + element.id + ' category-' + element.properties.category.id
-                });
+                }));
                 deferred.resolve(newIcon);
             }
         );
