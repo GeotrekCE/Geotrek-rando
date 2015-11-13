@@ -1271,28 +1271,34 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
 
     this.icons_liste = {
         default_icon: {},
+
         departure: _.merge({
             iconUrl: '/images/map/departure.svg',
             iconSize: [46, 52],
             iconAnchor: [23, 52],
+            popupAnchor: [0, -52],
             className: 'departure-marker'
         }, globalSettings.DEPARTURE_ICON),
         arrival: _.merge({
             iconUrl: '/images/map/arrival.svg',
             iconSize: [46, 52],
             iconAnchor: [13, 52],
+            popupAnchor: [0, -52],
             className: 'arrival-marker'
         }, globalSettings.ARRIVAL_ICON),
         departureArrival: _.merge({
             iconUrl: '/images/map/departure-arrival.svg',
             iconSize: [46, 52],
             iconAnchor: [13, 52],
+            popupAnchor: [0, -52],
             className: 'departure-arrival-marker'
         }, globalSettings.DEPARTURE_ARRIVAL_ICON),
+
         parking: _.merge({
             iconUrl: '/images/map/parking.svg',
             iconSize: [20, 20],
-            iconAnchor: [10, 20],
+            iconAnchor: [10, 10],
+            popupAnchor: [0, -10],
             labelAnchor: [10, 10],
             className: 'parking-marker'
         }, globalSettings.PARKING_ICON),
@@ -1300,6 +1306,7 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
             iconUrl: '/images/map/info.svg',
             iconSize: [],
             iconAnchor: [],
+            popupAnchor: [],
             labelAnchor: [],
             className: ''
         }, globalSettings.INFO_ICON),
@@ -1307,6 +1314,7 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
             iconUrl: '',
             iconSize: [26 ,26],
             iconAnchor: [13, 26],
+            popupAnchor: [0, -26],
             labelAnchor: [13, 13],
             className: 'ref-point'
         },
@@ -1314,6 +1322,7 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
             iconUrl: '',
             iconSize: [],
             iconAnchor: [],
+            popupAnchor: [],
             labelAnchor: [],
             className: ''
         },
@@ -1321,27 +1330,33 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
             iconUrl: '',
             iconSize: [],
             iconAnchor: [],
+            popupAnchor: [],
             labelAnchor: [],
             className: ''
         },
+
         category_base: _.merge({
             iconUrl: '/images/map/category_base.svg',
             iconSize: [40, 60],
             iconAnchor: [20, 60],
+            popupAnchor: [0, -60],
             labelAnchor: [20, 20]
         }, globalSettings.MARKER_BASE_ICON),
         poi_base: _.merge({
             iconUrl: '/images/map/category_base.svg',
             iconSize: [40, 60],
             iconAnchor: [20, 60],
+            popupAnchor: [0, -60],
             labelAnchor: [20, 20]
         }, globalSettings.POI_BASE_ICON),
         service_base: _.merge({
             iconUrl: '',
             iconSize: [30, 30],
             iconAnchor: [15, 15],
+            popupAnchor: [0, -15],
             labelAnchor: [15, 15]
-        }, globalSettings.SERVICE_BASE_ICON),
+        }, globalSettings.SERVICE_BASE_ICON)
+
     };
 
     this.getCategoriesIcons = function () {
