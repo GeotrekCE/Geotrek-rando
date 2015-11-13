@@ -1935,13 +1935,19 @@ function boundsService() {
 
 function popupService() {
 
-    var infoOpen = false;
+    var infoOpen = false; // Lock to allow only one popup opened at a time
 
     var _getHintContent = function _getHintContent () {
+        /**
+         * New way : get hint content from marker object
+         */
         if (this.popupContents && this.popupContents.hint) {
             return this.popupContents.hint;
         }
 
+        /**
+         * Fallback (old way) : get hint content form .marker[data-popup]
+         */
         var m;
         var dataPopup;
         var markerDom = this._icon;
@@ -1975,7 +1981,7 @@ function popupService() {
                 return this;
             },
             mouseover: function () {
-                var hintContent = _getHintContent.call(this); // Get hint content from marker object or data-popup attr.
+                var hintContent = _getHintContent.call(this); // Get hint content from marker object
                 if (!popup._isOpen && !infoOpen && hintContent) {
                     popup.setContent(hintContent);
                     popup.hint = true; // Allow close on mouseout
