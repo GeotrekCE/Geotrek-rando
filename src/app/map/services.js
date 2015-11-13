@@ -71,6 +71,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                 self.createLayerFromElement(element, 'parking', parkingPoint)
                     .then(
                         function (marker) {
+                            marker.popupContents.hint = element.properties.advised_parking;
                             popupService.attachPopups(marker);
                             self._infosMarkersLayer.addLayer(marker);
                         }
