@@ -1270,38 +1270,38 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
 
     this.icons_liste = {
         default_icon: {},
-        departure: globalSettings.DEPARTURE_ICON || {
+        departure: _.merge({
             iconUrl: '/images/map/departure.svg',
             iconSize: [46, 52],
             iconAnchor: [23, 52],
             className: 'departure-marker'
-        },
-        arrival: globalSettings.ARRIVAL_ICON || {
+        }, globalSettings.DEPARTURE_ICON),
+        arrival: _.merge({
             iconUrl: '/images/map/arrival.svg',
             iconSize: [46, 52],
             iconAnchor: [13, 52],
             className: 'arrival-marker'
-        },
-        departureArrival: globalSettings.DEPARTURE_ARRIVAL_ICON || {
+        }, globalSettings.ARRIVAL_ICON),
+        departureArrival: _.merge({
             iconUrl: '/images/map/departure-arrival.svg',
             iconSize: [46, 52],
             iconAnchor: [13, 52],
             className: 'departure-arrival-marker'
-        },
-        parking: globalSettings.PARKING_ICON || {
+        }, globalSettings.DEPARTURE_ARRIVAL_ICON),
+        parking: _.merge({
             iconUrl: '/images/map/parking.svg',
             iconSize: [20, 20],
             iconAnchor: [10, 20],
             labelAnchor: [10, 10],
             className: 'parking-marker'
-        },
-        information: globalSettings.INFO_ICON || {
+        }, globalSettings.PARKING_ICON),
+        information: _.merge({
             iconUrl: '/images/map/info.svg',
             iconSize: [],
             iconAnchor: [],
             labelAnchor: [],
             className: ''
-        },
+        }, globalSettings.INFO_ICON),
         ref_point: {
             iconUrl: '',
             iconSize: [26 ,26],
@@ -1323,24 +1323,24 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
             labelAnchor: [],
             className: ''
         },
-        category_base: globalSettings.MARKER_BASE_ICON || {
+        category_base: _.merge({
             iconUrl: '/images/map/category_base.svg',
             iconSize: [40, 60],
             iconAnchor: [20, 60],
             labelAnchor: [20, 20]
-        },
-        poi_base: globalSettings.POI_BASE_ICON || {
+        }, globalSettings.MARKER_BASE_ICON),
+        poi_base: _.merge({
             iconUrl: '/images/map/category_base.svg',
             iconSize: [40, 60],
             iconAnchor: [20, 60],
             labelAnchor: [20, 20]
-        },
-        service_base: globalSettings.SERVICE_BASE_ICON || {
+        }, globalSettings.POI_BASE_ICON),
+        service_base: _.merge({
             iconUrl: '',
             iconSize: [30, 30],
             iconAnchor: [15, 15],
             labelAnchor: [15, 15]
-        },
+        }, globalSettings.SERVICE_BASE_ICON),
     };
 
     this.getCategoriesIcons = function () {
