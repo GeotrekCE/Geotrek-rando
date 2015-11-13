@@ -1035,6 +1035,10 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                             function (layer) {
                                 var selector = '#result-category-' + result.properties.category.id.toString() + '-' + result.id.toString();
 
+                                _.merge(layer.popupContents, {
+                                    info: result.properties.slug
+                                });
+
                                 popupService.attachPopups(layer);
 
                                 /*
@@ -1937,6 +1941,17 @@ function popupService() {
 
     var infoOpen = false; // Lock to allow only one popup opened at a time
 
+    var _getInfoContent = function _getInfoContent () {
+        /**
+         * Get info content from marker object
+         */
+        if (this.popupContents && this.popupContents.info) {
+            return this.popupContents.info;
+        }
+
+        return null;
+    }
+
     var _getHintContent = function _getHintContent () {
         /**
          * New way : get hint content from marker object
@@ -1969,14 +1984,17 @@ function popupService() {
 
         marker.on({
             click: function () {
-                popup.setContent('informations');
-                popup.hint = false; // Disallow close on mouseout
-                infoOpen   = true;  // Disallow opening hintPopup while an infoPopup is open
+                var infoContent = _getInfoContent.call(this); // Get info content
+                if (infoContent) {
+                    popup.setContent(infoContent);
+                    popup.hint = false; // Disallow close on mouseout
+                    infoOpen   = true;  // Disallow opening hintPopup while an infoPopup is open
 
-                this.openPopup();
+                    this.openPopup();
 
-                popup._container.classList.remove('geotrek-hint-popup');
-                popup._container.classList.add('geotrek-info-popup');
+                    popup._container.classList.remove('geotrek-hint-popup');
+                    popup._container.classList.add('geotrek-info-popup');
+                }
 
                 return this;
             },
