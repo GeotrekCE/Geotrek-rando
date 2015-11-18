@@ -71,7 +71,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                 self.createLayerFromElement(element, 'parking', parkingPoint)
                     .then(
                         function (marker) {
-                            marker.popupContents.hint = element.properties.advised_parking;
+                            marker.popupSources.hint = element.properties.advised_parking;
                             popupService.attachPopups(marker);
                             self._infosMarkersLayer.addLayer(marker);
                         }
@@ -258,7 +258,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     this.createLayerFromElement = function (element, type, elementLocation) {
         var deferred = $q.defer();
-        var popupContents = {};
+        var popupSources = {};
         if (type === "geojson" && element.geometry.type !== 'MultiPoint') {
             var geoStyle = {
                 className:  'layer-category-' + element.properties.category.id + '-' + element.id + ' category-' + element.properties.category.id
@@ -284,13 +284,13 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             case 'category':
                 promise = iconsService.getElementIcon;
                 param = element;
-                popupContents.hint = element.properties.name;
+                popupSources.hint = element.properties.name;
                 break;
 
             case 'poi':
                 promise = iconsService.getPOIIcon;
                 param = element;
-                popupContents.hint = element.properties.name;
+                popupSources.hint = element.properties.name;
                 break;
 
             case 'service':
@@ -320,7 +320,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                 }
                             );
                             marker.options.result = element;
-                            marker.popupContents = popupContents;
+                            marker.popupSources = popupSources;
                             deferred.resolve(marker);
                         } else {
                             deferred.reject('no position provided');
@@ -1035,7 +1035,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                             function (layer) {
                                 var selector = '#result-category-' + result.properties.category.id.toString() + '-' + result.id.toString();
 
-                                _.merge(layer.popupContents, {
+                                _.merge(layer.popupSources, {
                                     selector: '#result-popup-' + result.uid
                                 });
 
@@ -1945,12 +1945,12 @@ function popupService() {
         /**
          * Get info content from marker object
          */
-        if (this.popupContents) {
-            if (this.popupContents.info) {
-                return this.popupContents.info;
+        if (this.popupSources) {
+            if (this.popupSources.info) {
+                return this.popupSources.info;
             }
-            if (this.popupContents.selector) {
-                return document.querySelector(this.popupContents.selector);
+            if (this.popupSources.selector) {
+                return document.querySelector(this.popupSources.selector);
             }
         }
 
@@ -1961,8 +1961,8 @@ function popupService() {
         /**
          * New way : get hint content from marker object
          */
-        if (this.popupContents && this.popupContents.hint) {
-            return this.popupContents.hint;
+        if (this.popupSources && this.popupSources.hint) {
+            return this.popupSources.hint;
         }
 
         /**
