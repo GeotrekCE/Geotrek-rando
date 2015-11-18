@@ -11,7 +11,7 @@
         <li
             class="result results-item category-{{::result.properties.category.id}}"
             id="result-category-{{::result.uid}}"
-            ng-repeat="result in results | orderBy: ['properties.begin_date', 'properties.name'] | limitTo: resultsDisplayLimit track by result.uid"
+            ng-repeat="result in results | orderBy: ['properties.begin_date', 'properties.name'] track by result.uid"
             ng-mouseover="hoverLayerElement(result,'enter')"
             ng-mouseleave="hoverLayerElement(result,'leave')">
 
