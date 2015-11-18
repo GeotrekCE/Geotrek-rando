@@ -1,19 +1,34 @@
 # CHANGELOG
 
-2.1.1.dev0
+2.2.1 (2015-18-05)
+------------------
+
+**Bug fixes**
+
+* fixed results list item responsive
+* better responsive for themes filters
+* update parents display and options for new API
+
+2.2.0 (2015-11-05)
 ------------------
 
 **Breaking changes**
 
-* `SHOW_HOME` is now to `true` by default in order to test home page. You need to set it to false if you didn't have a home page.
+* `SHOW_HOME` is now to `true` by default in order to test home page. You need to set it to false if you didn't have a home page
 
 **New Features**
 
-* Add random content widget and method.
+* Add random content widget and method
+* Add random contents widgets on default home page
+* Remove system dependency to gulp by using npm scripts (npm run)
+* Add a gulp task helping extraction of customization files
+* Add select filters auto-closing option
 
 **Bug fixes**
 
-*
+* Type 1 and 2 categories filters should always be last on the list
+* Remove useless spaces in categories filters template
+* Fixed results ordering
 
 2.1.0 (2015-10-08)
 ------------------
