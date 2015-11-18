@@ -1036,7 +1036,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                 var selector = '#result-category-' + result.properties.category.id.toString() + '-' + result.id.toString();
 
                                 _.merge(layer.popupContents, {
-                                    info: result.properties.slug
+                                    selector: '#result-popup-' + result.uid
                                 });
 
                                 popupService.attachPopups(layer);
@@ -1945,8 +1945,13 @@ function popupService() {
         /**
          * Get info content from marker object
          */
-        if (this.popupContents && this.popupContents.info) {
-            return this.popupContents.info;
+        if (this.popupContents) {
+            if (this.popupContents.info) {
+                return this.popupContents.info;
+            }
+            if (this.popupContents.selector) {
+                return document.querySelector(this.popupContents.selector);
+            }
         }
 
         return null;
@@ -1977,46 +1982,93 @@ function popupService() {
         return null;
     };
 
+    var _getInfoPopup = function _getInfoPopup () {
+        if (!this.popupStore) return false;
+
+        var popup = this.popupStore.info;
+        if (!popup) return false;
+
+        var content = popup.getContent();
+        if (content) return popup; // If popupContent exists: popup is already defined
+
+        popup.setContent(_getInfoContent.call(this));
+
+        return popup;
+    };
+
+    var _getHintPopup = function _getHintPopup () {
+        if (!this.popupStore) return false;
+
+        var popup = this.popupStore.hint;
+        if (!popup) return false;
+
+        var content = popup.getContent();
+        if (content) return popup; // If popupContent exists: popup is already defined
+
+        popup.setContent(_getHintContent.call(this));
+
+        return popup;
+    }
+
+    var _buildPopupStore = function _buildPopupStore () {
+        return _.merge({}, {
+            info: L.popup({
+                className: 'geotrek-info-popup',
+                closeButton: true,
+                autoPan: true
+            }),
+            hint: L.popup({
+                className: 'geotrek-hint-popup',
+                closeButton: false,
+                autoPan: false
+            })
+        });
+    }
+
     var _attachPopups = function _attachPopups (marker) {
 
-        marker.bindPopup(L.popup()).openPopup();
-        var popup = marker.getPopup();
+        marker.popupStore = _buildPopupStore();
 
         marker.on({
             click: function () {
-                var infoContent = _getInfoContent.call(this); // Get info content
-                if (infoContent) {
-                    popup.setContent(infoContent);
-                    popup.hint = false; // Disallow close on mouseout
-                    infoOpen   = true;  // Disallow opening hintPopup while an infoPopup is open
+                var popup = _getInfoPopup.call(this);
 
-                    this.openPopup();
+                if (!popup) return this;
 
-                    popup._container.classList.remove('geotrek-hint-popup');
-                    popup._container.classList.add('geotrek-info-popup');
-                }
+                this.unbindPopup().bindPopup(popup);
+                this.openPopup();
+
+                infoOpen = true;  // Disallow opening hintPopup while an infoPopup is open
 
                 return this;
             },
+
             mouseover: function () {
-                var hintContent = _getHintContent.call(this); // Get hint content from marker object
-                if (!popup._isOpen && !infoOpen && hintContent) {
-                    popup.setContent(hintContent);
-                    popup.hint = true; // Allow close on mouseout
-
-                    this.openPopup();
-
-                    popup._container.classList.remove('geotrek-info-popup');
-                    popup._container.classList.add('geotrek-hint-popup');
+                var currentPopup = this.getPopup();
+                if (infoOpen || currentPopup && currentPopup._isOpen) {
+                    return this;
                 }
+
+                var popup = _getHintPopup.call(this);
+
+                if (popup && !popup._isOpen) {
+                    this.unbindPopup().bindPopup(popup);
+                    this.openPopup();
+                }
+
                 return this;
             },
+
             mouseout: function () {
-                if (popup._isOpen && popup.hint) { // Close popup only if it's open & if it's a hintPopup
+                var popup = this.getPopup();
+
+                if (popup && popup.options && !popup.options.closeButton) {
                     this.closePopup();
                 }
+
                 return this;
             },
+
             popupclose: function () {
                 infoOpen = false; // Re-allow opening hintPopup
             }
