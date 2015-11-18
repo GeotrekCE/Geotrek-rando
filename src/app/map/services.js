@@ -1991,9 +1991,10 @@ function popupService() {
         var content = popup.getContent();
         if (content) return popup; // If popupContent exists: popup is already defined
 
-        popup.setContent(_getInfoContent.call(this));
+        content = _getInfoContent.call(this);
+        popup.setContent(content);
 
-        return popup;
+        return content ? popup : false;
     };
 
     var _getHintPopup = function _getHintPopup () {
@@ -2005,9 +2006,10 @@ function popupService() {
         var content = popup.getContent();
         if (content) return popup; // If popupContent exists: popup is already defined
 
-        popup.setContent(_getHintContent.call(this));
+        content = _getHintContent.call(this);
+        popup.setContent(content);
 
-        return popup;
+        return content ? popup : false;
     }
 
     var _buildPopupStore = function _buildPopupStore () {
