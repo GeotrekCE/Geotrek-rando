@@ -19,7 +19,7 @@
 <!-- popup -->
 
             <div
-                class="results-popup-item"
+                class="results-popup-item category-{{::result.properties.category.id}}"
                 id="result-popup-{{::result.uid}}">
 
                 <div class="result-actions">
@@ -31,7 +31,7 @@
                 </div>
 
                 <h1 class="result-title title">
-                    {{::result.properties.name}}
+                    <a ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: result.properties.slug})">{{::result.properties.name}}</a>
                 </h1>
 
                 <div class="result-infos infos">

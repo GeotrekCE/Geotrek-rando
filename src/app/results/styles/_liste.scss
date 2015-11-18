@@ -85,6 +85,40 @@
     }
 }
 
+.results-popup-item {
+    position: relative;
+    z-index: 0;
+
+    display: block;
+
+    min-width: 200px;
+    margin: -16px -21px;
+    padding: 0 1em 2.4em;
+
+    transition: all .1s ease-out;
+
+    border: 2px solid rgba(230, 230, 230, 1);
+
+    .results-list & {
+        display: none;
+    }
+
+    .result-view-details {
+        // left: 50px;
+        right: 5px;
+        left: auto;
+
+        max-width: none;
+        padding: 0 10px;
+    }
+
+    .result-action {
+        text-decoration: none;
+
+        color: #fff;
+    }
+}
+
 .result-visual {
     max-height: 150px;
     margin-left: -15px;
