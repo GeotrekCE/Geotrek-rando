@@ -1982,31 +1982,21 @@ function popupService() {
         return null;
     };
 
-    var _getInfoPopup = function _getInfoPopup () {
-        if (!this.popupStore) return false;
-
-        var popup = this.popupStore.info;
-        if (!popup) return false;
-
-        var content = popup.getContent();
-        if (content) return popup; // If popupContent exists: popup is already defined
-
-        content = _getInfoContent.call(this);
-        popup.setContent(content);
-
-        return content ? popup : false;
+    var _getContentMethod = {
+        hint: _getHintContent,
+        info: _getInfoContent
     };
 
-    var _getHintPopup = function _getHintPopup () {
+    var _getPopup = function _getPopup (type) {
         if (!this.popupStore) return false;
 
-        var popup = this.popupStore.hint;
+        var popup = this.popupStore[type];
         if (!popup) return false;
 
         var content = popup.getContent();
         if (content) return popup; // If popupContent exists: popup is already defined
 
-        content = _getHintContent.call(this);
+        content = _getContentMethod[type].call(this);
         popup.setContent(content);
 
         return content ? popup : false;
@@ -2033,7 +2023,7 @@ function popupService() {
 
         marker.on({
             click: function () {
-                var popup = _getInfoPopup.call(this);
+                var popup = _getPopup.call(this, 'info');
 
                 if (!popup) return this;
 
@@ -2051,7 +2041,7 @@ function popupService() {
                     return this;
                 }
 
-                var popup = _getHintPopup.call(this);
+                var popup = _getPopup.call(this, 'hint');
 
                 if (popup && !popup._isOpen) {
                     this.unbindPopup().bindPopup(popup);
