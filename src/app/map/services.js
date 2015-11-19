@@ -220,13 +220,14 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                 .then(
                     function (marker) {
 
+                        marker.options.icon.options.className += ' ' + type + '-marker';
+                        var selector = '#' + type + '-category-' + element.properties.category.id + '-' + element.id;
+
                         _.merge(marker.popupSources, {
-                            selector: '#near-popup-' + element.properties.category.id + '-' + element.id
+                            selector: '#result-category-' + element.properties.category.id + '-' + element.id
                         });
                         popupService.attachPopups(marker);
 
-                        marker.options.icon.options.className += ' ' + type + '-marker';
-                        var selector = '#' + type + '-category-' + element.properties.category.id + '-' + element.id;
                         /*
                         marker.on({
                             mouseover: function () {
