@@ -15,6 +15,10 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
     $scope.currentInterest = 'none';
 
     $scope.toggleInterest = function (interest) {
+        if (mapService.map && mapService.map.closePopup) {
+            mapService.map.closePopup();
+        }
+
         if ($scope.currentInterest === interest) {
             $scope.currentInterest = '';
         } else {
