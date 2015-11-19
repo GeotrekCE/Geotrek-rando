@@ -1266,6 +1266,8 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         this.map.addLayer(this._infosMarkersLayer);
         this.map.addLayer(this._servicesMarkersLayer);
 
+        popupService.setMap(this.map);
+
         return this.map;
 
     };
@@ -1919,7 +1921,6 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
 
     };
 
-
 }
 
 function boundsService() {
@@ -1941,6 +1942,17 @@ function boundsService() {
 }
 
 function popupService() {
+
+    var _map;
+
+    var _setMap = function _setMap (map) {
+        _map = map;
+
+        _map.on('unload', _unlockPopup);
+        return this;
+    }
+
+    this.setMap = _setMap;
 
     var _infoOpen = false; // Lock to allow only one popup opened at a time
 
