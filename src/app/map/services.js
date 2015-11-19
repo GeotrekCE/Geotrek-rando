@@ -145,6 +145,11 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                             var selector = '#poi-' + poi.id.toString();
 
                                             counter++;
+
+                                            _.merge(marker.popupSources, {
+                                                selector: selector
+                                            });
+
                                             popupService.attachPopups(marker);
                                             /*
                                             marker.on({
