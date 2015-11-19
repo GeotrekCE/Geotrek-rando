@@ -215,6 +215,9 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                 .then(
                     function (marker) {
 
+                        _.merge(marker.popupSources, {
+                            selector: '#near-popup-' + element.properties.category.id + '-' + element.id
+                        });
                         popupService.attachPopups(marker);
 
                         marker.options.icon.options.className += ' ' + type + '-marker';
@@ -1939,7 +1942,19 @@ function boundsService() {
 
 function popupService() {
 
-    var infoOpen = false; // Lock to allow only one popup opened at a time
+    var _infoOpen = false; // Lock to allow only one popup opened at a time
+
+    var _lockPopup = function _lockPopup () {
+        _infoOpen = true;
+    }
+
+    var _unlockPopup = function _unlockPopup () {
+        _infoOpen = false;
+    }
+
+    var _isPopupLocked = function _isPopupLocked () {
+        return _infoOpen;
+    }
 
     var _getInfoContent = function _getInfoContent () {
         /**
@@ -1950,7 +1965,7 @@ function popupService() {
                 return this.popupSources.info;
             }
             if (this.popupSources.selector) {
-                return document.querySelector(this.popupSources.selector);
+                return document.querySelector(this.popupSources.selector).outerHTML;
             }
         }
 
@@ -1997,9 +2012,12 @@ function popupService() {
         if (content) return popup; // If popupContent exists: popup is already defined
 
         content = _getContentMethod[type].call(this);
-        popup.setContent(content);
 
-        return content ? popup : false;
+        if (content) {
+            this.popupStore[type].setContent(content);
+        }
+
+        return content ? this.popupStore[type] : false;
     }
 
     var _buildPopupStore = function _buildPopupStore () {
@@ -2030,14 +2048,18 @@ function popupService() {
                 this.unbindPopup().bindPopup(popup);
                 this.openPopup();
 
-                infoOpen = true;  // Disallow opening hintPopup while an infoPopup is open
+                _lockPopup(); // Disallow opening hintPopup while an infoPopup is open
 
                 return this;
             },
 
             mouseover: function () {
+                if (_isPopupLocked()) {
+                    return this;
+                }
+
                 var currentPopup = this.getPopup();
-                if (infoOpen || currentPopup && currentPopup._isOpen) {
+                if (currentPopup && currentPopup._isOpen) {
                     return this;
                 }
 
@@ -2062,14 +2084,19 @@ function popupService() {
             },
 
             popupclose: function () {
-                infoOpen = false; // Re-allow opening hintPopup
+                if (_isPopupLocked()) {
+                    _unlockPopup(); // Re-allow opening hintPopup
+                }
+
+                return this;
             }
         });
 
         return marker;
 
     }
-    this.attachPopups = _attachPopups;
+
+    this.attachPopups = _attachPopups; // Publish method
 }
 
 module.exports = {
