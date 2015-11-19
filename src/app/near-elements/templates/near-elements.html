@@ -6,49 +6,6 @@
         ng-mouseover="hoverMarkerNear(near,'enter')"
         ng-mouseleave="hoverMarkerNear(near,'leave')">
 
-        <!-- popup -->
-
-        <div
-            class="results-popup-item category-{{::near.properties.category.id}}"
-            id="near-popup-{{::near.uid}}">
-
-            <div class="result-actions">
-                <div class="result-action result-category-icon">
-                    <ng-include ng-if="isSVG(near.properties.category.pictogram)"  src="near.properties.category.pictogram"></ng-include>
-                    <img        ng-if="!isSVG(near.properties.category.pictogram)" ng-src="{{::near.properties.category.pictogram}}" ng-alt="{{::category.label}}">
-                </div>
-                <a class="result-action result-view-details" ui-sref="layout.detail({catSlug: near.properties.category.slug, slug: near.properties.slug})">En savoir plus</a>
-            </div>
-
-            <h1 class="result-title title">
-                <a ui-sref="layout.detail({catSlug: near.properties.category.slug, slug: near.properties.slug})">{{::near.properties.name}}</a>
-            </h1>
-
-            <div class="result-infos infos">
-                <span class="begin-date" ng-if="near.properties.begin_date">{{::near.properties.begin_date | date:'dd/MM/yyyy'}}</span>
-                <span class="end-date"   ng-if="near.properties.end_date && near.properties.begin_date !== near.properties.end_date">{{::near.properties.end_date | date:'dd/MM/yyyy'}}</span>
-                <span class="cities"     ng-if="near.properties.cities[0]">{{::near.properties.cities[0].name}}</span>
-                <span class="duration"   ng-if="near.properties.duration_pretty">{{::near.properties.duration_pretty}}</span>
-                <span class="ascent"     ng-if="near.properties.ascent">{{::'ASCENT' | translate}} {{near.properties.ascent}} m</span>
-                <span class="difficulty" ng-if="near.properties.difficulty">{{::near.properties.difficulty.label}}</span>
-                <span class="type1"      ng-if="near.properties.type1[0] && near.properties.contentType !== 'trek'">{{::near.properties.type1[0].name}}</span>
-                <span class="type2"      ng-if="near.properties.type2[0] && near.properties.contentType !== 'trek'">{{::near.properties.type2[0].name}}</span>
-                <span class="target"     ng-if="near.properties.target_audience">{{::near.properties.target_audience}}</span>
-            </div>
-
-            <div class="result-themes themes">
-                <div class="result-themes-label">{{ 'THEMES' | translate }}</div>
-                <ul class="result-themes-list">
-                    <li class="result-theme" ng-repeat="theme in near.properties.themes track by theme.label">
-                        <ng-include ng-if="isSVG(theme.pictogram)" src="theme.pictogram"></ng-include>
-                        <img ng-if="!isSVG(theme.pictogram)" ng-src="{{::theme.pictogram}}" ng-alt="{{::theme.label}}">
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-        <!-- /popup -->
-
         <div class="result-fav-control fav-or-not" ng-click="toggleFavorites(result)" ng-class="{isFav: isInFavorites(result)}">
             <i class="result-fav-icon fa fa-{{::favoriteIcon}}"></i>
         </div>

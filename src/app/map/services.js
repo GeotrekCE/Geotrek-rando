@@ -1039,7 +1039,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                 var selector = '#result-category-' + result.properties.category.id.toString() + '-' + result.id.toString();
 
                                 _.merge(layer.popupSources, {
-                                    selector: '#result-popup-' + result.uid
+                                    selector: '#result-category-' + result.uid
                                 });
 
                                 popupService.attachPopups(layer);
