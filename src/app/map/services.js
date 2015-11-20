@@ -33,9 +33,10 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                 .then(
                                     function (marker) {
                                         counter++;
-                                        self._servicesMarkersLayer.addLayer(marker);
 
                                         popupService.attachPopups(marker);
+
+                                        self._servicesMarkersLayer.addLayer(marker);
 
                                         if (counter === services.features.length) {
                                             if (controlClasses.contains('hidden')) {
@@ -75,7 +76,9 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                     .then(
                         function (marker) {
                             marker.popupSources.hint = element.properties.advised_parking;
+
                             popupService.attachPopups(marker);
+
                             self._infosMarkersLayer.addLayer(marker);
                         }
                     )
@@ -159,45 +162,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                             });
 
                                             popupService.attachPopups(marker);
-                                            /*
-                                            marker.on({
-                                                mouseover: function () {
-                                                    var listeEquivalent = document.querySelector(selector);
-                                                    if (listeEquivalent) {
-                                                        if (!listeEquivalent.classList.contains('hovered')) {
-                                                            listeEquivalent.classList.add('hovered');
-                                                        }
-                                                    }
 
-                                                    var elementOffset = jQuery(selector).position().top;
-                                                    var containerScrollPosition = jQuery('.pois-liste').scrollTop();
-                                                    if (containerScrollPosition - parseInt(elementOffset, 10) !== 0) {
-                                                        jQuery('.pois-liste').animate({
-                                                            scrollTop: containerScrollPosition + elementOffset
-                                                        }, 300);
-                                                    }
-                                                },
-                                                mouseout: function () {
-                                                    var listeEquivalent = document.querySelector(selector);
-                                                    if (listeEquivalent) {
-                                                        if (listeEquivalent.classList.contains('hovered')) {
-                                                            listeEquivalent.classList.remove('hovered');
-                                                        }
-                                                    }
-                                                },
-                                                remove: function () {
-                                                    var listeEquivalent = document.querySelector(selector);
-                                                    if (listeEquivalent) {
-                                                        if (listeEquivalent.classList.contains('hovered')) {
-                                                            listeEquivalent.classList.remove('hovered');
-                                                        }
-                                                    }
-                                                },
-                                                click: function () {
-                                                    //$state.go("layout.detail", { catSlug: result.properties.category.slug, slug: result.properties.slug });
-                                                }
-                                            });
-                                            */
                                             self._poisMarkersLayer.addLayer(marker);
                                         }
                                     );
@@ -234,39 +199,9 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                         _.merge(marker.popupSources, {
                             selector: '#result-category-' + element.properties.category.id + '-' + element.id
                         });
+
                         popupService.attachPopups(marker);
 
-                        /*
-                        marker.on({
-                            mouseover: function () {
-                                var listeEquivalent = document.querySelector(selector);
-                                if (listeEquivalent) {
-                                    if (!listeEquivalent.classList.contains('hovered')) {
-                                        listeEquivalent.classList.add('hovered');
-                                    }
-                                }
-                            },
-                            mouseout: function () {
-                                var listeEquivalent = document.querySelector(selector);
-                                if (listeEquivalent) {
-                                    if (listeEquivalent.classList.contains('hovered')) {
-                                        listeEquivalent.classList.remove('hovered');
-                                    }
-                                }
-                            },
-                            remove: function () {
-                                var listeEquivalent = document.querySelector(selector);
-                                if (listeEquivalent) {
-                                    if (listeEquivalent.classList.contains('hovered')) {
-                                        listeEquivalent.classList.remove('hovered');
-                                    }
-                                }
-                            },
-                            click: function () {
-                                $state.go("layout.detail", { catSlug: element.properties.category.slug, slug: element.properties.slug });
-                            }
-                        });
-                        */
                         self._nearMarkersLayer.addLayer(marker);
                     }
                 );
@@ -1058,44 +993,6 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                 });
 
                                 popupService.attachPopups(layer);
-
-                                /*
-                                layer.on({
-                                    mouseover: function () {
-                                        var listeEquivalent = document.querySelector(selector);
-                                        if (listeEquivalent) {
-                                            if (!listeEquivalent.classList.contains('hovered')) {
-                                                listeEquivalent.classList.add('hovered');
-                                            }
-                                        }
-                                        if (result.geometry.type !== "Point" && result.geometry.type !== 'MultiPoint') {
-                                            self.highlightPath(result);
-                                        }
-                                    },
-                                    mouseout: function () {
-                                        var listeEquivalent = document.querySelector(selector);
-                                        if (listeEquivalent) {
-                                            if (listeEquivalent.classList.contains('hovered')) {
-                                                listeEquivalent.classList.remove('hovered');
-                                            }
-                                        }
-                                        if (self.geoHover) {
-                                            self._nearMarkersLayer.removeLayer(self.geoHover);
-                                        }
-                                    },
-                                    remove: function () {
-                                        var listeEquivalent = document.querySelector(selector);
-                                        if (listeEquivalent) {
-                                            if (listeEquivalent.classList.contains('hovered')) {
-                                                listeEquivalent.classList.remove('hovered');
-                                            }
-                                        }
-                                    },
-                                    click: function () {
-                                        $state.go("layout.detail", { catSlug: result.properties.category.slug, slug: result.properties.slug });
-                                    }
-                                });
-                                */
 
                                 if (result.geometry.type !== "Point" && result.geometry.type !== "MultiPoint") {
                                     jQuery(selector).on('mouseenter', function () {
