@@ -147,7 +147,12 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                             counter++;
 
                                             _.merge(marker.popupSources, {
-                                                selector: selector
+                                                selector: selector,
+                                                scroll: {
+                                                    event: 'mouseover',
+                                                    container: '.detail-aside-group-content',
+                                                    target: selector
+                                                }
                                             });
 
                                             popupService.attachPopups(marker);
@@ -2053,12 +2058,42 @@ function popupService() {
         });
     }
 
+    var _doScroll = function _doScroll (eventType) {
+        var $ = jQuery;
+
+        if (!$ || !this.popupSources || !this.popupSources.scroll) { // Test if all needed params exist
+            return false;
+        }
+
+        if (this.popupSources.scroll.event !== eventType) { // Do we need to scroll for current eventType
+            return false;
+        }
+
+        var $target = $(this.popupSources.scroll.target);
+
+        if (!$target.length) { // Does scroll target exists
+            return false;
+        }
+
+        var $container = $target.closest(this.popupSources.scroll.container);
+
+        if (!$container.length) { // If there is no container found, use direct parent element
+            $container = $target.parent();
+        }
+
+        $container.scrollTo($target, 200);
+
+        return true;
+    };
+
     var _attachPopups = function _attachPopups (marker) {
 
         marker.popupStore = _buildPopupStore();
 
         marker.on({
-            click: function () {
+            click: function (e) {
+                _doScroll.call(this, e.type);
+
                 var popup = _getPopup.call(this, 'info');
 
                 if (!popup) return this;
@@ -2071,10 +2106,12 @@ function popupService() {
                 return this;
             },
 
-            mouseover: function () {
+            mouseover: function (e) {
                 if (_isPopupLocked()) {
                     return this;
                 }
+
+                _doScroll.call(this, e.type);
 
                 var currentPopup = this.getPopup();
                 if (currentPopup && currentPopup._isOpen) {
