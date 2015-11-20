@@ -34,6 +34,9 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                     function (marker) {
                                         counter++;
                                         self._servicesMarkersLayer.addLayer(marker);
+
+                                        popupService.attachPopups(marker);
+
                                         if (counter === services.features.length) {
                                             if (controlClasses.contains('hidden')) {
                                                 controlClasses.remove('hidden');
@@ -310,6 +313,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             case 'service':
                 promise = iconsService.getServiceIcon;
                 param = element;
+                popupSources.hint = element.properties.type.name;
                 break;
 
             case 'ref-point':
