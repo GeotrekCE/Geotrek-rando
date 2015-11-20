@@ -75,7 +75,7 @@
     z-index: 0;
 }
 
-.results-pane-controls {
+.toggle-pane-controls {
     position: fixed;
     z-index: 9;
     top: 0;
@@ -94,7 +94,7 @@
     align-items: stretch;
 }
 
-.results-pane-toggle {
+.toggle-pane-toggle {
     margin: 0;
     padding-right: .2em;
     padding-left: .5em;
@@ -127,10 +127,10 @@
 }
 
 .fold-results {
-    &.results-pane-controls {
+    &.toggle-pane-controls {
         width: 5%;
     }
-    .results-pane-toggle {
+    .toggle-pane-toggle {
         width: 70%;
         padding-left: 0;
         svg {
@@ -139,6 +139,22 @@
     }
     &.results-pane {
         margin-right: -90%;
+    }
+}
+
+.fold-aside {
+    &.toggle-pane-controls {
+        width: 5%;
+    }
+    .toggle-pane-toggle {
+        width: 70%;
+        padding-left: 0;
+        svg {
+            transform: rotate(180deg);
+        }
+    }
+    &.detail-aside-pane {
+        margin-right: -21%;
     }
 }
 

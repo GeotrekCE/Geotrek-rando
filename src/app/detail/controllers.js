@@ -26,6 +26,14 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         }
     };
 
+    $scope.foldAside = false;
+    $scope.asidePaneToggle = function () {
+        $scope.foldAside = !$scope.foldAside;
+        setTimeout(function () {
+            mapService.invalidateSize();
+        }, 350);
+    };
+
     $scope.showLightbox = function (images, slideIndex) {
         var modal = $modal.open({
             templateUrl: '/app/gallery/templates/lightbox-gallery.html',

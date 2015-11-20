@@ -11,5 +11,11 @@
             'hide-children':      currentInterest !== 'children'
         }"></geotrek-map>
 
-    <detail-aside></detail-aside>
+    <div class="aside-pane-controls toggle-pane-controls" ng-class="{ 'fold-aside': foldAside }">
+        <button class="aside-pane-toggle toggle-pane-toggle" ng-click="asidePaneToggle()">
+            <ng-include class="stripe" src="'/images/icons/stripe.svg'"></ng-include>
+        </button>
+    </div>
+
+    <detail-aside ng-class="{ 'fold-aside': foldAside }"></detail-aside>
 </section>
