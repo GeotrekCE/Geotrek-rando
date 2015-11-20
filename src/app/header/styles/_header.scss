@@ -1,9 +1,9 @@
 #header {
     display: block;
     width: 100%;
-    height: 90px;
+    height: $header-height-desktop;
     @media (max-width: 767px) {
-        height: 50px;
+        height: $header-height-mobile;
     }
     background-color: #e9e9e9;
     position: relative;
@@ -73,7 +73,7 @@
     left: 0;
     display: flex;
 
-    line-height: 90px;
+    line-height: $header-height-desktop;
 
     @media (max-width: 767px) {
         right: 120px;
@@ -101,11 +101,11 @@
 }
 
 .header-logo {
-    height: 90px;
+    height: $header-height-desktop;
     float: left;
     vertical-align: middle;
     @media (max-width: 767px) {
-        height: 50px;
+        height: $header-height-mobile;
     }
 }
 
@@ -125,14 +125,14 @@
              margin: 0;
         }
 
-        top: 50px;
+        top: $header-height-mobile;
         height: auto;
     }
 }
 
 .header-links {
     height: 100%;
-    line-height: 90px;
+    line-height: $header-height-desktop;
     &.navbar-right {
         margin-right: 0;
     }

@@ -18,23 +18,23 @@
 
     &.layout-root {
         display: flex;
-        top: -90px;
-        padding-top: 90px;
+        top: -$header-height-desktop;
+        padding-top: $header-height-desktop;
 
         @media (max-width: 767px) {
-            top: -50px;
-            padding-top: 50px;
+            top: -$header-height-mobile;
+            padding-top: $header-height-mobile;
         }
     }
 
     &.layout-detail,
     &.layout-flat {
-        top: -140px;
-        padding-top: 140px;
+        top: calc(-#{$header-height-desktop} - 50px);
+        padding-top: calc(#{$header-height-desktop} + 50px);
 
         @media (max-width: 767px) {
-            top: -80px;
-            padding-top: 80px;
+            top: calc(-#{$header-height-mobile} - 30px);
+            padding-top: calc(#{$header-height-mobile} + 30px);
         }
     }
 
