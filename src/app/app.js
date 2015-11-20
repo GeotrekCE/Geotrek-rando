@@ -45,6 +45,8 @@ window.L = require('leaflet');
 window.rando3D = require('rando3d');
 require('classlist-polyfill');
 
+require('jquery.scrollto');
+
 // LOAD EXTERNAL DEPENDENCIES
 require('ui.bootstrap');
 require('ui.router');

@@ -9,9 +9,12 @@
     font-size: 1.2em;
 
     position: relative;
+
     overflow: hidden;
 
     margin: 0;
+
+    list-style-type: none;
 
     color: $dark-grey;
     border: 2px solid rgba(230, 230, 230, 1);
@@ -19,6 +22,18 @@
 
     + .poi-item {
         margin-top: 1em;
+    }
+}
+
+.leaflet-popup {
+    .poi-item {
+        margin: -16px -21px;
+    }
+    .poi-picture,
+    .poi-fold,
+    .poi-overlay,
+    .poi-drawer {
+        display: none;
     }
 }
 

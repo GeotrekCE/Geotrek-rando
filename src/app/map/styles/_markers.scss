@@ -318,13 +318,17 @@
     .leaflet-popup-content-wrapper {
         border-radius: 0;
     }
+
+    .leaflet-popup-close-button {
+        z-index: 1;
+    }
 }
 
 .geotrek-hint-popup {
     .leaflet-popup-content-wrapper,
     .leaflet-popup-tip {
-        box-shadow: 0 .2em .5em rgba(#000, .1);
         background-color: rgba(#fff, .85);
+        box-shadow: 0 .2em .5em rgba(#000, .1);
     }
 
     .leaflet-popup-close-button {

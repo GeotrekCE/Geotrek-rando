@@ -71,7 +71,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                 self.createLayerFromElement(element, 'parking', parkingPoint)
                     .then(
                         function (marker) {
-                            marker.popupContents.hint = element.properties.advised_parking;
+                            marker.popupSources.hint = element.properties.advised_parking;
                             popupService.attachPopups(marker);
                             self._infosMarkersLayer.addLayer(marker);
                         }
@@ -145,6 +145,16 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                             var selector = '#poi-' + poi.id.toString();
 
                                             counter++;
+
+                                            _.merge(marker.popupSources, {
+                                                selector: selector,
+                                                scroll: {
+                                                    event: 'mouseover',
+                                                    container: '.detail-aside-group-content',
+                                                    target: selector
+                                                }
+                                            });
+
                                             popupService.attachPopups(marker);
                                             /*
                                             marker.on({
@@ -215,10 +225,14 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                 .then(
                     function (marker) {
 
-                        popupService.attachPopups(marker);
-
                         marker.options.icon.options.className += ' ' + type + '-marker';
                         var selector = '#' + type + '-category-' + element.properties.category.id + '-' + element.id;
+
+                        _.merge(marker.popupSources, {
+                            selector: '#result-category-' + element.properties.category.id + '-' + element.id
+                        });
+                        popupService.attachPopups(marker);
+
                         /*
                         marker.on({
                             mouseover: function () {
@@ -258,7 +272,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     this.createLayerFromElement = function (element, type, elementLocation) {
         var deferred = $q.defer();
-        var popupContents = {};
+        var popupSources = {};
         if (type === "geojson" && element.geometry.type !== 'MultiPoint') {
             var geoStyle = {
                 className:  'layer-category-' + element.properties.category.id + '-' + element.id + ' category-' + element.properties.category.id
@@ -284,13 +298,13 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             case 'category':
                 promise = iconsService.getElementIcon;
                 param = element;
-                popupContents.hint = element.properties.name;
+                popupSources.hint = element.properties.name;
                 break;
 
             case 'poi':
                 promise = iconsService.getPOIIcon;
                 param = element;
-                popupContents.hint = element.properties.name;
+                popupSources.hint = element.properties.name;
                 break;
 
             case 'service':
@@ -320,7 +334,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                 }
                             );
                             marker.options.result = element;
-                            marker.popupContents = popupContents;
+                            marker.popupSources = popupSources;
                             deferred.resolve(marker);
                         } else {
                             deferred.reject('no position provided');
@@ -1035,8 +1049,8 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                             function (layer) {
                                 var selector = '#result-category-' + result.properties.category.id.toString() + '-' + result.id.toString();
 
-                                _.merge(layer.popupContents, {
-                                    info: result.properties.slug
+                                _.merge(layer.popupSources, {
+                                    selector: '#result-category-' + result.uid
                                 });
 
                                 popupService.attachPopups(layer);
@@ -1262,6 +1276,8 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         this.map.addLayer(this._nearMarkersLayer);
         this.map.addLayer(this._infosMarkersLayer);
         this.map.addLayer(this._servicesMarkersLayer);
+
+        popupService.setMap(this.map);
 
         return this.map;
 
@@ -1916,7 +1932,6 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
 
     };
 
-
 }
 
 function boundsService() {
@@ -1939,14 +1954,42 @@ function boundsService() {
 
 function popupService() {
 
-    var infoOpen = false; // Lock to allow only one popup opened at a time
+    var _map;
+
+    var _setMap = function _setMap (map) {
+        _map = map;
+
+        _map.on('unload', _unlockPopup);
+        return this;
+    }
+
+    this.setMap = _setMap;
+
+    var _infoOpen = false; // Lock to allow only one popup opened at a time
+
+    var _lockPopup = function _lockPopup () {
+        _infoOpen = true;
+    }
+
+    var _unlockPopup = function _unlockPopup () {
+        _infoOpen = false;
+    }
+
+    var _isPopupLocked = function _isPopupLocked () {
+        return _infoOpen;
+    }
 
     var _getInfoContent = function _getInfoContent () {
         /**
          * Get info content from marker object
          */
-        if (this.popupContents && this.popupContents.info) {
-            return this.popupContents.info;
+        if (this.popupSources) {
+            if (this.popupSources.info) {
+                return this.popupSources.info;
+            }
+            if (this.popupSources.selector) {
+                return document.querySelector(this.popupSources.selector).outerHTML;
+            }
         }
 
         return null;
@@ -1956,8 +1999,8 @@ function popupService() {
         /**
          * New way : get hint content from marker object
          */
-        if (this.popupContents && this.popupContents.hint) {
-            return this.popupContents.hint;
+        if (this.popupSources && this.popupSources.hint) {
+            return this.popupSources.hint;
         }
 
         /**
@@ -1977,55 +2020,138 @@ function popupService() {
         return null;
     };
 
+    var _getContentMethod = {
+        hint: _getHintContent,
+        info: _getInfoContent
+    };
+
+    var _getPopup = function _getPopup (type) {
+        if (!this.popupStore) return false;
+
+        var popup = this.popupStore[type];
+        if (!popup) return false;
+
+        var content = popup.getContent();
+        if (content) return popup; // If popupContent exists: popup is already defined
+
+        content = _getContentMethod[type].call(this);
+
+        if (content) {
+            this.popupStore[type].setContent(content);
+        }
+
+        return content ? this.popupStore[type] : false;
+    }
+
+    var _buildPopupStore = function _buildPopupStore () {
+        return _.merge({}, {
+            info: L.popup({
+                className: 'geotrek-info-popup',
+                closeButton: true,
+                autoPan: true
+            }),
+            hint: L.popup({
+                className: 'geotrek-hint-popup',
+                closeButton: false,
+                autoPan: false
+            })
+        });
+    }
+
+    var _doScroll = function _doScroll (eventType) {
+        var $ = jQuery;
+
+        if (!$ || !this.popupSources || !this.popupSources.scroll) { // Test if all needed params exist
+            return false;
+        }
+
+        if (this.popupSources.scroll.event !== eventType) { // Do we need to scroll for current eventType
+            return false;
+        }
+
+        var $target = $(this.popupSources.scroll.target);
+
+        if (!$target.length) { // Does scroll target exists
+            return false;
+        }
+
+        var $container = $target.closest(this.popupSources.scroll.container);
+
+        if (!$container.length) { // If there is no container found, use direct parent element
+            $container = $target.parent();
+        }
+
+        $container.scrollTo($target, 200);
+
+        return true;
+    };
+
     var _attachPopups = function _attachPopups (marker) {
 
-        marker.bindPopup(L.popup()).openPopup();
-        var popup = marker.getPopup();
+        marker.popupStore = _buildPopupStore();
 
         marker.on({
-            click: function () {
-                var infoContent = _getInfoContent.call(this); // Get info content
-                if (infoContent) {
-                    popup.setContent(infoContent);
-                    popup.hint = false; // Disallow close on mouseout
-                    infoOpen   = true;  // Disallow opening hintPopup while an infoPopup is open
+            click: function (e) {
+                _doScroll.call(this, e.type);
 
+                var popup = _getPopup.call(this, 'info');
+
+                if (!popup) return this;
+
+                this.unbindPopup().bindPopup(popup);
+                this.openPopup();
+
+                _lockPopup(); // Disallow opening hintPopup while an infoPopup is open
+
+                return this;
+            },
+
+            mouseover: function (e) {
+                if (_isPopupLocked()) {
+                    return this;
+                }
+
+                _doScroll.call(this, e.type);
+
+                var currentPopup = this.getPopup();
+                if (currentPopup && currentPopup._isOpen) {
+                    return this;
+                }
+
+                var popup = _getPopup.call(this, 'hint');
+
+                if (popup && !popup._isOpen) {
+                    this.unbindPopup().bindPopup(popup);
                     this.openPopup();
-
-                    popup._container.classList.remove('geotrek-hint-popup');
-                    popup._container.classList.add('geotrek-info-popup');
                 }
 
                 return this;
             },
-            mouseover: function () {
-                var hintContent = _getHintContent.call(this); // Get hint content from marker object
-                if (!popup._isOpen && !infoOpen && hintContent) {
-                    popup.setContent(hintContent);
-                    popup.hint = true; // Allow close on mouseout
 
-                    this.openPopup();
-
-                    popup._container.classList.remove('geotrek-info-popup');
-                    popup._container.classList.add('geotrek-hint-popup');
-                }
-                return this;
-            },
             mouseout: function () {
-                if (popup._isOpen && popup.hint) { // Close popup only if it's open & if it's a hintPopup
+                var popup = this.getPopup();
+
+                if (popup && popup.options && !popup.options.closeButton) {
                     this.closePopup();
                 }
+
                 return this;
             },
+
             popupclose: function () {
-                infoOpen = false; // Re-allow opening hintPopup
+                if (_isPopupLocked()) {
+                    _unlockPopup(); // Re-allow opening hintPopup
+                }
+
+                return this;
             }
         });
 
         return marker;
 
     }
-    this.attachPopups = _attachPopups;
+
+    this.attachPopups = _attachPopups; // Publish method
 }
 
 module.exports = {
