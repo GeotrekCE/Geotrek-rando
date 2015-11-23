@@ -38,6 +38,8 @@
                 {{::result.properties.name}}
             </h1>
 
+            <div class="result-teaser" ng-bind-html="sanitizeData(result.properties.description_teaser, true)"></div>
+
             <div class="result-infos infos">
                 <span class="begin-date" ng-if="result.properties.begin_date">{{::result.properties.begin_date | date:'dd/MM/yyyy'}}</span>
                 <span class="end-date"   ng-if="result.properties.end_date && result.properties.begin_date !== result.properties.end_date">{{::result.properties.end_date | date:'dd/MM/yyyy'}}</span>

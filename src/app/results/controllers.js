@@ -79,7 +79,8 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
     };
 
     $scope.isInFavorites = favoritesService.isInFavorites;
-    $scope.isSVG = utilsFactory.isSVG;
+    $scope.isSVG         = utilsFactory.isSVG;
+    $scope.sanitizeData  = utilsFactory.sanitizeData;
 
     $scope.$on('updateFilters', function () {
         updateResults();
