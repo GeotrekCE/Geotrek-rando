@@ -92,6 +92,10 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                     self.createLayerFromElement(element, 'departureArrival', startPoint)
                         .then(
                             function (marker) {
+                                _.merge(marker.popupSources, {
+                                    hint: element.properties.departure + '\n' + element.properties.arrival
+                                });
+                                popupService.attachPopups(marker);
                                 self._infosMarkersLayer.addLayer(marker);
                             }
                         )
@@ -101,6 +105,10 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                     self.createLayerFromElement(element, 'departure', startPoint)
                         .then(
                             function (marker) {
+                                _.merge(marker.popupSources, {
+                                    hint: element.properties.departure
+                                });
+                                popupService.attachPopups(marker);
                                 self._infosMarkersLayer.addLayer(marker);
                             }
                         )
@@ -110,6 +118,10 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                     self.createLayerFromElement(element, 'arrival', endPoint)
                         .then(
                             function (marker) {
+                                _.merge(marker.popupSources, {
+                                    hint: element.properties.arrival
+                                });
+                                popupService.attachPopups(marker);
                                 self._infosMarkersLayer.addLayer(marker);
                             }
                         )

@@ -209,6 +209,7 @@
 }
 
 .departure-marker, .arrival-marker, .departure-arrival-marker {
+    @include transparentOverlay;
     cursor: default;
     svg {
         width: 100%;
