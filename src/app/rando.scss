@@ -9,7 +9,7 @@ $root-images-path: "./images/";
     box-sizing: border-box;
 }
 
-html {
+html, body {
 	font-family: $font-family;
 	font-size: 16px;
 	color: #333;
