@@ -1215,14 +1215,14 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
         arrival: _.merge({
             iconUrl: '/images/map/arrival.svg',
             iconSize: [46, 52],
-            iconAnchor: [13, 52],
+            iconAnchor: [23, 52],
             popupAnchor: [0, -52],
             className: 'arrival-marker'
         }, globalSettings.ARRIVAL_ICON),
         departureArrival: _.merge({
             iconUrl: '/images/map/departure-arrival.svg',
             iconSize: [46, 52],
-            iconAnchor: [13, 52],
+            iconAnchor: [23, 52],
             popupAnchor: [0, -52],
             className: 'departure-arrival-marker'
         }, globalSettings.DEPARTURE_ARRIVAL_ICON),
