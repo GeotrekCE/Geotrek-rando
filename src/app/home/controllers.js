@@ -54,7 +54,7 @@ function HomeController($scope, $rootScope, translationService, $location, homeS
 
 }
 
-function RandomWidgetController($scope, resultsService, utilsFactory) {
+function RandomContentsListWidgetController($scope, resultsService, utilsFactory) {
     function getRandomContents() {
         resultsService.getRandomContentsByCategory($scope.categories, $scope.quantity)
             .then(
@@ -75,7 +75,30 @@ function RandomWidgetController($scope, resultsService, utilsFactory) {
     init();
 }
 
+function RandomContentWidgetController($scope, resultsService, utilsFactory) {
+    function getRandomContent() {
+        resultsService.getRandomContentsByCategory($scope.category, 1)
+            .then(
+                function (randomContent) {
+                    console.log(randomContent);
+                    $scope.randomContent = randomContent[0];
+                },
+                function (err) {
+                    console.error(err);
+                }
+            );
+    }
+
+    function init() {
+        getRandomContent();
+    }
+
+    $scope.isSVG = utilsFactory.isSVG;
+    init();
+}
+
 module.exports = {
     HomeController: HomeController,
-    RandomWidgetController: RandomWidgetController
+    RandomContentsListWidgetController: RandomContentsListWidgetController,
+    RandomContentWidgetController: RandomContentWidgetController
 };
