@@ -1,6 +1,6 @@
 'use strict';
 
-function mapService($q, $state, $resource, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService, popupService) {
+function mapService($q, $state, $resource, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService, popupService, layersService) {
 
     var self = this;
 
@@ -397,20 +397,12 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     this.setMinimap = function () {
         if (globalSettings.ACTIVE_MINIMAP) {
-            var miniMapLayer = new L.tileLayer(
-                    globalSettings.MAIN_LEAFLET_BACKGROUND.LAYER_URL,
-                    {
-                        minZoom: globalSettings.MINIMAP_ZOOM.MINI,
-                        maxZoom: globalSettings.MINIMAP_ZOOM.MAX,
-                        attribution: globalSettings.MAIN_LEAFLET_BACKGROUND.ATTRIBUTION
-                    }
-                ),
-                miniMapOptions = {
+            var miniMapOptions = {
                     toggleDisplay: true,
                     zoomLevelOffset: globalSettings.MINIMAP_OFFSET
                 };
 
-            this._miniMap = new L.Control.MiniMap(miniMapLayer, miniMapOptions).addTo(this.map);
+            this._miniMap = new L.Control.MiniMap(layersService.getMainLayersGroup(), miniMapOptions).addTo(this.map);
         }
     };
 
@@ -1109,31 +1101,16 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     this.initMap = function (mapSelector) {
 
+        var permanentTileLayers = layersService.getMainLayersGroup();
+
         // Set background Layers
         this._baseLayers = {
-            main: L.layerGroup([
-                L.tileLayer(
-                    globalSettings.MAIN_LEAFLET_BACKGROUND.LAYER_URL,
-                    globalSettings.MAIN_LEAFLET_BACKGROUND.OPTIONS
-                )
-            ]),
+            main: permanentTileLayers,
             satellite: L.tileLayer(
                 globalSettings.SATELLITE_LEAFLET_BACKGROUND.LAYER_URL,
                 globalSettings.SATELLITE_LEAFLET_BACKGROUND.OPTIONS
             )
         };
-
-        if (globalSettings.OPTIONAL_LEAFLET_BACKGROUNDS.length > 0) {
-            for (var i = globalSettings.OPTIONAL_LEAFLET_BACKGROUNDS.length - 1; i >= 0; i--) {
-                var layer = globalSettings.OPTIONAL_LEAFLET_BACKGROUNDS[i];
-                this._baseLayers.main.addLayer(
-                    L.tileLayer(
-                        layer.LAYER_URL,
-                        layer.OPTIONS
-                    )
-                );
-            }
-        }
 
         var mapParameters = {
             center: [globalSettings.LEAFLET_CONF.CENTER_LATITUDE, globalSettings.LEAFLET_CONF.CENTER_LONGITUDE],
@@ -1141,7 +1118,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             minZoom: globalSettings.LEAFLET_CONF.DEFAULT_MIN_ZOOM,
             maxZoom: globalSettings.LEAFLET_CONF.DEFAULT_MAX_ZOOM,
             scrollWheelZoom: true,
-            layers: this._baseLayers.main
+            layers: permanentTileLayers
         };
 
         if (globalSettings.MAP_BOUNDS_CONSTRAINTS) {
@@ -2067,9 +2044,52 @@ function popupService() {
     this.attachPopups = _attachPopups; // Publish method
 }
 
+function layersService (globalSettings) {
+
+    /**
+     * Return PERMANENT_TILELAYERS
+     *     or MAIN_LEAFLET_BACKGROUND
+     *     or OPTIONAL_LEAFLET_BACKGROUNDS
+     *     or MAIN_LEAFLET_BACKGROUND + OPTIONAL_LEAFLET_BACKGROUNDS
+     */
+    var _getMainLayersConf = function _getMainLayersConf () {
+        if (globalSettings.OPTIONAL_LEAFLET_BACKGROUNDS instanceof Array) {
+            if (typeof globalSettings.MAIN_LEAFLET_BACKGROUND === 'object') {
+                return [globalSettings.MAIN_LEAFLET_BACKGROUND].concat(globalSettings.OPTIONAL_LEAFLET_BACKGROUNDS);
+            } else {
+                return globalSettings.OPTIONAL_LEAFLET_BACKGROUNDS;
+            }
+        } else if (typeof globalSettings.MAIN_LEAFLET_BACKGROUND === 'object') {
+            return [globalSettings.MAIN_LEAFLET_BACKGROUND];
+        }
+
+        if (globalSettings.PERMANENT_TILELAYERS) {
+            return globalSettings.PERMANENT_TILELAYERS;
+        }
+
+        return false;
+    };
+
+    var _getMainLayersGroup = function _getMainLayersGroup () {
+        var layersConf = _getMainLayersConf();
+
+        if (!layersConf) return false;
+
+        var LGroup = L.layerGroup();
+        layersConf.forEach(function (layerConf) {
+            LGroup.addLayer(L.tileLayer(layerConf.LAYER_URL, layerConf.OPTIONS));
+        });
+
+        return LGroup;
+    };
+
+    this.getMainLayersGroup = _getMainLayersGroup;
+}
+
 module.exports = {
     mapService: mapService,
     iconsService: iconsService,
     boundsService: boundsService,
-    popupService: popupService
+    popupService: popupService,
+    layersService: layersService
 };
