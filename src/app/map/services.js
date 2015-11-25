@@ -309,9 +309,10 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         this.setFullScreenControl();
         this.setMinimap();
         this.setScale();
-        this.createSatelliteView();
+        // this.createSatelliteView();
         this.createServicesToggleControl();
         this.createResetViewButton();
+        this.createLayerSwitch();
 
         return this;
     };
@@ -368,6 +369,27 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
         return this.map.addControl(new L.Control.Resetview());
     };
+
+    this.createLayerSwitch = function () {
+        var layersControl = L.control.layers({
+            /**
+             * Radio buttons :
+             *     PERMANENT_TILELAYERS
+             *     SATELLITE_LEAFLET_BACKGROUND
+             */
+            default: this._baseLayers.main,
+            satellite: this._baseLayers.satellite
+        }, {
+            /**
+             * Cheboxes
+             */
+            // 'generate from optionnal layers'
+        }, {
+            position: 'bottomleft'
+        });
+
+        return layersControl.addTo(this.map);
+    }
 
     this.setViewPortFilteringControl = function () {
         L.Control.ViewportFilter = L.Control.extend({

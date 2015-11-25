@@ -108,6 +108,7 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
 
         _.forEach(controllersListe, function (currentController) {
             var domElement = document.querySelector(currentController.selector);
+            if (!domElement) return false; // Avoid error if element does not exist
             promises.push(
                 $translate(currentController.translationID)
                     .then(
