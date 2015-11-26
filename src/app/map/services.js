@@ -379,12 +379,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
              */
             default: this._baseLayers.main,
             satellite: this._baseLayers.satellite
-        }, {
-            /**
-             * Cheboxes
-             */
-            // 'generate from optionnal layers'
-        }, {
+        }, this._optionalLayers, {
             position: 'bottomleft'
         });
 
@@ -1133,6 +1128,8 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                 globalSettings.SATELLITE_LEAFLET_BACKGROUND.OPTIONS
             )
         };
+
+        this._optionalLayers = layersService.getOptionalLayers();
 
         var mapParameters = {
             center: [globalSettings.LEAFLET_CONF.CENTER_LATITUDE, globalSettings.LEAFLET_CONF.CENTER_LONGITUDE],
@@ -2092,6 +2089,14 @@ function layersService (globalSettings) {
         return false;
     };
 
+    var _getOptionalLayersConf = function _getOptionalLayersConf () {
+        if (globalSettings.OPTIONAL_TILELAYERS) {
+            return globalSettings.OPTIONAL_TILELAYERS;
+        }
+
+        return false;
+    };
+
     var _getMainLayersGroup = function _getMainLayersGroup () {
         var layersConf = _getMainLayersConf();
 
@@ -2113,7 +2118,31 @@ function layersService (globalSettings) {
         return LGroup;
     };
 
+    var _getOptionalLayers = function _getOptionalLayers () {
+        var layersConf  = _getOptionalLayersConf();
+        var defaultName = globalSettings.OPTIONAL_TILELAYERS_NAME || 'Layer';
+
+        if (!layersConf) return false;
+
+        var layers = {};
+
+        layersConf.forEach(function (layerConf, index) {
+            var layerName, layerOptions;
+
+            if (typeof layerConf === 'string') {
+                layers[[defaultName, index + 1].join(' ')] = L.tileLayer(layerConf);
+            } else if (layerConf.LAYER_URL) {
+                layerName         = layerConf.LAYER_NAME || [defaultName, index + 1].join(' ');
+                layerOptions      = layerConf.OPTIONS || {};
+                layers[layerName] = L.tileLayer(layerConf.LAYER_URL, layerOptions);
+            }
+        });
+
+        return layers;
+    }
+
     this.getMainLayersGroup = _getMainLayersGroup;
+    this.getOptionalLayers  = _getOptionalLayers;
 }
 
 module.exports = {
