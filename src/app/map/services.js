@@ -2099,7 +2099,15 @@ function layersService (globalSettings) {
 
         var LGroup = L.layerGroup();
         layersConf.forEach(function (layerConf) {
-            LGroup.addLayer(L.tileLayer(layerConf.LAYER_URL, layerConf.OPTIONS));
+            var layer, layerOptions;
+            if (typeof layerConf === 'string') {
+                layer = L.tileLayer(layerConf);
+            } else if (layerConf.LAYER_URL) {
+                layerOptions = layerConf.OPTIONS || {};
+                layer        = L.tileLayer(layerConf.LAYER_URL, layerOptions);
+            }
+
+            LGroup.addLayer(layer);
         });
 
         return LGroup;
