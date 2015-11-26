@@ -371,17 +371,18 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
     };
 
     this.createLayerSwitch = function () {
-        var layersControl = L.control.layers({
-            /**
-             * Radio buttons :
-             *     PERMANENT_TILELAYERS
-             *     SATELLITE_LEAFLET_BACKGROUND
-             */
-            default: this._baseLayers.main,
-            satellite: this._baseLayers.satellite
-        }, this._optionalLayers, {
-            position: 'bottomleft'
-        });
+        var permanentTileLayersName   = globalSettings.PERMANENT_TILELAYERS_NAME  || 'Default';
+        var orthophotoTileLayersName  = globalSettings.ORTHOPHOTO_TILELAYERS_NAME || 'Satellite';
+        var permanentTileLayersParam  = {};
+
+        permanentTileLayersParam[permanentTileLayersName]  = this._baseLayers.main;
+        permanentTileLayersParam[orthophotoTileLayersName] = this._baseLayers.satellite;
+
+        var layersControl = L.control.layers(
+            permanentTileLayersParam,
+            this._optionalLayers,
+            { position: 'bottomleft' }
+        );
 
         return layersControl.addTo(this.map);
     }

@@ -43,6 +43,7 @@
     "TWITTER_ID": "",
     "DEFAULT_SHARE_IMG": "",
     "GOOGLE_ANALYTICS_ID": "",
+    "PERMANENT_TILELAYERS_NAME": "Carte",
     "PERMANENT_TILELAYERS": [
         {
             "LAYER_URL": "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -53,6 +54,7 @@
             }
         }
     ],
+    "ORTHOPHOTO_TILELAYERS_NAME": "Ortho",
     "SATELLITE_LEAFLET_BACKGROUND": {
         "LAYER_URL": "http://{s}.tile.mapbox.com/v3/makina-corpus.i3p1001l/{z}/{x}/{y}.png",
         "OPTIONS": {
