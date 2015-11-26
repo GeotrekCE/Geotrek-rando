@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="16.8 16.2 92.2 92.2" enable-background="new 16.8 16.2 92.2 92.2" xml:space="preserve">
+<g id="texture_fond">
+</g>
+<g id="logos">
+	<g>
+		<g>
+			<defs>
+				<circle id="SVGID_1_" cx="62.9" cy="62.3" r="46.1"/>
+			</defs>
+			<clipPath id="SVGID_2_">
+				<use xlink:href="#SVGID_1_"  overflow="visible"/>
+			</clipPath>
+			<g clip-path="url(#SVGID_2_)">
+				<g>
+					<rect fill="#B4CC1B" width="126.7" height="126.7"/>
+					<g>
+						<path fill="#114814" d="M33.9,51.5c0-5.4,4-9.1,9.5-9.1c2.3,0,3.8,0.5,5.3,1.3v3.6c-1.7-1.1-3.3-1.5-5-1.5c-3.6,0-6,2.3-6,5.8
+							c0,3.6,2.6,5.7,5.7,5.7c1.3,0,2.6-0.3,3.5-1.2v-6h3.6v7.7c-1.4,1.5-4,2.8-7.1,2.8C38,60.6,33.9,56.9,33.9,51.5z"/>
+						<path fill="#114814" d="M56.2,42.7H69V46h-9.3v3.4h7.5v3.2h-7.5V57h9.5v3.2h-13V42.7z"/>
+						<path fill="#114814" d="M73.7,51.5c0-5.1,3.8-9.1,9.1-9.1s9.1,4.1,9.1,9.1s-3.8,9.1-9.1,9.1S73.7,56.5,73.7,51.5z M88.2,51.5
+							c0-3.3-2.3-5.7-5.4-5.7s-5.4,2.4-5.4,5.7s2.3,5.7,5.4,5.7S88.2,54.8,88.2,51.5z"/>
+					</g>
+					<g>
+						<path fill="#FFFFFF" d="M39.3,69.2h-5.4v-1.7h12.6v1.7h-5.4v14.1h-1.8V69.2z"/>
+						<path fill="#FFFFFF" d="M49.5,67.6h7.1c3.2,0,5,1.8,5,4.3c0,2.2-1.3,3.8-3.7,4.2l5.1,7.2h-2.2l-4.9-7h-4.6v7h-1.8
+							C49.5,83.3,49.5,67.6,49.5,67.6z M56.4,74.7c2.1,0,3.3-1,3.3-2.7s-1.2-2.7-3.3-2.7h-5.1v5.4C51.3,74.7,56.4,74.7,56.4,74.7z"
+							/>
+						<path fill="#FFFFFF" d="M66,67.6h10.9v1.7h-9V74h7.4v1.7h-7.4v5.9h9.4v1.7H66V67.6z"/>
+						<path fill="#FFFFFF" d="M82.2,74.3l7.1-6.7h2.4l-7.6,7.2l8.8,8.5h-2.5l-8.2-7.9v7.9h-1.8V67.6h1.8
+							C82.2,67.6,82.2,74.3,82.2,74.3z"/>
+					</g>
+				</g>
+				<g>
+					<polygon fill="#DADADA" points="94.7,38.3 80.7,48.8 71.3,63.1 86.2,53.9 					"/>
+					<g>
+						<g>
+							<polygon fill="#ED6C4B" points="85.1,52.8 80.7,48.8 94.7,38.3 94.7,38.3 94.7,38.3 							"/>
+							<polygon fill="#FFFFFF" points="85.1,52.8 71.3,63.1 80.7,48.8 							"/>
+							<polygon fill="#EDECE8" points="80.7,48.8 71.3,63.1 83,50.8 							"/>
+							<polygon fill="#F5AA8D" points="83,50.8 94.7,38.3 85.1,52.8 							"/>
+						</g>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>
