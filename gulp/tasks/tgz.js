@@ -30,6 +30,7 @@ gulp.task('tgz:custo', function() {
       './src/app/custom/styles/_custom-header.scss',
       './src/app/custom/styles/_custom-home.scss',
       './src/app/custom/styles/_custom-override.scss',
+      './src/app/custom/templates/custom-random-content.html',
       './src/app/custom/templates/custom-detail-page-footer.html',
       './src/app/custom/templates/custom-footer.html',
       './src/app/custom/templates/custom-header.html',
