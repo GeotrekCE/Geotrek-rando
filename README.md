@@ -152,6 +152,7 @@ server {
         application/json geojson;
         application/gpx+xml gpx;
         application/vnd.google-earth.kmz kmz;
+        application/x-font-ttf ttf;
     }
     location /data/ {
         root <my_data_directory>/;
