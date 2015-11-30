@@ -1,11 +1,12 @@
 'use strict';
 
-function LayoutController($rootScope, $scope, $state, $location, resultsService, globalSettings, homeService, $translate, $timeout, Analytics) {
+function LayoutController($rootScope, $scope, $state, $location, resultsService, globalSettings, homeService, $translate, $timeout, Analytics, mapService) {
     $rootScope.currentState_name = $state.current.name;
     $rootScope.showFooterOnApp = globalSettings.SHOW_FOOTER;
     $rootScope.elementsLoading = 0;
-    $rootScope.mapIsShown = false;
+    $rootScope.mapIsShown = true;
     $rootScope.placeHolderImage = globalSettings.PLACEHOLDER_IMAGE ? './images/custom/' + globalSettings.PLACEHOLDER_IMAGE : './images/placeholder.png';
+    $rootScope.favoriteIcon = (globalSettings.FAVORITES_ICON ? globalSettings.FAVORITES_ICON : 'heart');
 
     if (globalSettings.FAVICON) {
         var base = './images/custom/';
@@ -38,6 +39,14 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
         }
     }
 
+    $scope.foldResults = false;
+    $scope.resultsPaneToggle = function () {
+        $scope.foldResults = !$scope.foldResults;
+        setTimeout(function () {
+            mapService.invalidateSize();
+        }, 350);
+    };
+
     iniDefaultMeta();
 
     if ($state.current.name === 'layout.root') {
@@ -49,6 +58,7 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
     }
 
     var rootScopeEvents = [
+
         $rootScope.$on("$stateChangeSuccess",  function (event, toState, toParams, fromState, fromParams) {
             // to be used for back button //won't work when page is reloaded.
             $rootScope.previousState_name = fromState.name;

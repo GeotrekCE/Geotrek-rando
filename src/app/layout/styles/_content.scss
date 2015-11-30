@@ -4,61 +4,206 @@
     }
 }
 
-#main-content {
-    z-index: 1;
-    width: 100%;
-    padding-top: 70px;
-    top: -70px;
-    height: 100%;
+.main-content {
     position: relative;
+    z-index: 1;
+
+    width: 100%;
+    height: 100%;
     @media (min-width: 768px) {
         &.footer-active {
             height: 90vh;
         }
     }
-    @media (max-width: 769px) {
-        padding-top: 50px;
-        top: -50px;
+
+    &.layout-root {
+        display: flex;
+        top: -$header-height-desktop;
+        padding-top: $header-height-desktop;
+
+        @media (max-width: 767px) {
+            top: -$header-height-mobile;
+            padding-top: $header-height-mobile;
+        }
     }
-    & > .content {
-        height: 100%;
-        width: 100%;
-        padding-left: 60px;
-        margin-left: -60px;
-        position: relative;
-        float: left;
-        .results-drawer {
-            width: 40%;
-            height: 100%;
-            float: left;
-            background: $light-grey;
-            transition: left 0.3s ease;
-            @media (max-width: 767px) {
-                position: absolute;
-                width: 100%;
-                top: 0%;
-                left: -100%;
-                padding-left: 60px;
-                &.shown {
-                    left: 0;
-                }
+
+    &.layout-detail,
+    &.layout-flat {
+        top: calc(-#{$header-height-desktop} - 50px);
+        padding-top: calc(#{$header-height-desktop} + 50px);
+
+        @media (max-width: 767px) {
+            top: calc(-#{$header-height-mobile} - 30px);
+            padding-top: calc(#{$header-height-mobile} + 30px);
+        }
+    }
+
+
+}
+
+.view-content {
+    position: relative;
+
+    display: flex;
+
+    width: 100%;
+    height: 100%;
+
+    flex: 1;
+}
+
+.resultsview-pane {
+    position: relative;
+
+    flex: 1;
+
+    height: 100%;
+
+    transition: left .3s ease, padding .3s ease, margin .3s ease;
+
+    box-shadow: -20px 0 30px 30px rgba(0, 0, 0, .5);
+}
+
+.map-pane {
+    flex: 1;
+    width: 50%;
+
+    z-index: 1;
+}
+
+.results-pane {
+    z-index: 0;
+}
+
+.toggle-pane-controls {
+    position: fixed;
+    z-index: 9;
+    top: 0;
+    bottom: 0;
+
+    display: flex;
+    overflow: visible;
+
+    width: 0;
+
+    transition: width .3s ease;
+
+    background-color: rgba(255, 255, 255, .8);
+    box-shadow: -20px 0 30px rgba(#000, .2) inset;
+
+    align-items: stretch;
+}
+
+.toggle-pane-toggle {
+    margin: 0;
+    padding-right: .2em;
+    padding-left: .5em;
+
+    transition: all 150ms ease;
+
+    color: rgba(#000, .25);
+    border: none;
+    outline: none;
+    background-color: transparent;
+    .stripe {
+        display: inline-block;
+
+        margin: auto;
+
+        vertical-align: middle;
+
+        flex: 1;
+        svg {
+            display: block;
+
+            fill: currentColor;
+        }
+    }
+    &:hover {
+        padding-left: 1em;
+
+        color: rgba(#000, .5);
+    }
+}
+
+.fold-results {
+    &.toggle-pane-controls {
+        width: 5%;
+    }
+    .toggle-pane-toggle {
+        width: 70%;
+        padding-left: 0;
+        svg {
+            transform: rotate(180deg);
+        }
+    }
+    &.results-pane {
+        margin-right: -90%;
+    }
+}
+
+.fold-aside {
+    &.toggle-pane-controls {
+        width: 5%;
+    }
+    .toggle-pane-toggle {
+        width: 70%;
+        padding-left: 0;
+        svg {
+            transform: rotate(180deg);
+        }
+    }
+    &.detail-aside-pane {
+        margin-right: -21%;
+    }
+}
+
+
+@media (max-width: 767px) {
+    .layout-root {
+        .resultsview-pane {
+            position: absolute;
+            top: 0;
+            left: 100%;
+
+            width: 100%;
+        }
+
+        .map-pane {
+            width: 100%;
+
+            .global-filters,
+            .filters-tags {
+                left: 0;
             }
         }
-        .general-map {
-            width: 60%;
-            height: 100%;
-            float: left;
-            transition: left 0.3s ease;
-            @media (max-width: 767px) {
-                position: absolute;
-                width: 100%;
-                top: 0%;
+
+        .map-mode {
+            .map-pane {
+                position: absolute !important;
+                left: 0;
+            }
+            .results-pane {
                 left: 100%;
-                padding-left: 60px;
-                &.shown {
-                    left: 0;
-                }
+            }
+        }
+        .results-mode {
+            .map-pane {
+                left: -100%;
+            }
+            .results-pane {
+                left: 0;
             }
         }
     }
+}
+
+.global-filters {
+    z-index: 1;
+}
+.leaflet-container {
+    z-index: 0;
+}
+.filters-tags {
+    z-index: 1;
 }

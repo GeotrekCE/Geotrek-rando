@@ -1,35 +1,75 @@
-<ul class="pois-liste">
-    <li ng-repeat="poi in pois track by poi.id" id="poi-{{::poi.id}}" class="poi {{::poi.properties.type.label}} card" ng-class="isOpened[poi.id]" ng-mouseover="hoverMarkerPoi(poi,'enter')" ng-mouseleave="hoverMarkerPoi(poi,'leave')">
-        <div class="header">
-            <i class="toggle fa fa-plus" ng-click="togglePoi(poi.id)"></i>
-            <span class="title" ng-click="togglePoi(poi.id)">{{::poi.properties.name}}</span>
-            <div class="type">
+<ul class="pois-liste poi-list">
+    <li
+        class="poi-item poi {{::poi.properties.type.label}} card"
+        ng-repeat="poi in pois track by poi.id"
+        id="poi-{{::poi.id}}"
+        ng-class="{ expanded: poi.expanded }"
+        ng-mouseover="hoverMarkerPoi(poi,'enter')"
+        ng-mouseleave="hoverMarkerPoi(poi,'leave')">
+
+        <div
+            class="poi-overlay"
+            ng-click="poi.expanded = true"
+            ng-class="{ visible: poi.mouseover }">
+            <div class="plus"></div>
+        </div>
+
+        <div
+            class="poi-fold"
+            ng-click="poi.expanded = false">
+            <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
+        </div>
+
+        <div
+            class="poi-picture poi-picture-empty"
+            ng-if="!poi.properties.pictures[0]"
+            style="background-image: url({{::$root.placeHolderImage}});">
+        </div>
+        <div
+            class="poi-picture"
+            ng-if="poi.properties.pictures[0]"
+            style="background-image: url({{::poi.properties.pictures[0].url}});"
+            ng-click="showLightbox(poi.properties.pictures, 0)">
+            <div ng-if="poi.properties.pictures[0]" class="poi-picture-credits">{{::poi.properties.pictures[0].author}}</div>
+
+            <div class="poi-picture-how-many" ng-if="poi.properties.pictures.length > 1">
+                {{ poi.properties.pictures.length }}
+                <ng-include class="camera" src="'/images/icons/camera.svg'"></ng-include>
+            </div>
+
+        </div>
+
+        <div class="poi-content content">
+
+            <div class="poi-title" ng-click="togglePoi(poi.id)">{{::poi.properties.name}}</div>
+
+            <div class="poi-type type">
                 <img ng-src="{{::poi.properties.type.pictogram}}" ng-alt="{{::poi.properties.type.label}}">
                 <span>{{::poi.properties.type.label}}</span>
             </div>
-        </div>
-        <div class="content">
-            <div class="picture">
-                <img ng-if="poi.properties.pictures[0]" ng-src="{{::poi.properties.pictures[0].url}}" ng-alt="{{::poi.properties.type.label}}" ng-click="showLightbox(poi.properties.pictures, 0)">
-                <div ng-if="poi.properties.pictures[0]" class="credits">{{::poi.properties.pictures[0].author}}</div>
-                <img ng-if="!poi.properties.pictures[0]" ng-src="{{::$root.placeHolderImage}}" alt="placeholder image" class="placeholder">
+
+            <div class="poi-drawer">
+
+                <div class="description poi-description" ng-bind-html="sanitizeData(poi.properties.description, true)"></div>
+
+                <div class="medias poi-medias">
+                    <ul class="medias-liste poi-media-list">
+                        <li ng-repeat="media in poi.properties.videos track by $index" class="poi-media media" ng-class="{video: media.backend === 'Youtube' || media.backend === 'Vimeo', audio: media.backend === 'SoundCloud'}">
+                            <a href class="poi-media-link" ng-click="openPlayer(media)" title="{{::media.legend}}">
+                                <i ng-if="media.backend === 'Youtube' || media.backend === 'Vimeo'" class="fa fa-file-video-o"></i>
+                                <i ng-if="media.backend === 'SoundCloud'" class="fa fa-file-audio-o"></i>
+                            </a>
+                        </li>
+                        <li ng-repeat="file in poi.properties.files track by $index" class="poi-media media file">
+                            <a href="{{::file.url}}" title="{{::file.legend}}" class="poi-media-link">
+                                <i class="fa fa-file-o"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
-            <div class="description" ng-bind-html="sanitizeData(poi.properties.description, true)"></div>
-            <div class="medias">
-                <ul class="medias-liste">
-                    <li ng-repeat="media in poi.properties.videos track by $index" class="media" ng-class="{video: media.backend === 'Youtube' || media.backend === 'Vimeo', audio: media.backend === 'SoundCloud'}">
-                        <a href ng-click="openPlayer(media)" title="{{::media.legend}}">
-                            <i ng-if="media.backend === 'Youtube' || media.backend === 'Vimeo'" class="fa fa-file-video-o"></i>
-                            <i ng-if="media.backend === 'SoundCloud'" class="fa fa-file-audio-o"></i>
-                        </a>
-                    </li>
-                    <li ng-repeat="file in poi.properties.files track by $index" class="media file">
-                        <a href="{{::file.url}}" title="{{::file.legend}}">
-                            <i class="fa fa-file-o"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+
         </div>
     </li>
 </ul>

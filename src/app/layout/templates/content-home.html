@@ -1,6 +1,13 @@
-<div class="results-drawer" ng-class="{'shown': !$root.mapIsShown}">
-    <results-liste></results-liste>    
-</div>
-<div class="general-map" ng-class="{'shown': $root.mapIsShown}">
+<div class="resultsview-pane map-pane general-map">
+    <global-filters></global-filters>
     <geotrek-map></geotrek-map>
+    <filters-tags ng-if="showFiltersOnMap"></filters-tags>
+</div>
+<div class="results-pane-controls toggle-pane-controls" ng-class="{ 'fold-results': foldResults }">
+    <button class="results-pane-toggle toggle-pane-toggle" ng-click="resultsPaneToggle()">
+        <ng-include class="stripe" src="'/images/icons/stripe.svg'"></ng-include>
+    </button>
+</div>
+<div class="resultsview-pane results-pane results-drawer" ng-class="{ 'fold-results': foldResults }">
+    <results-liste></results-liste>
 </div>

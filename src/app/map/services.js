@@ -1,6 +1,6 @@
 'use strict';
 
-function mapService($q, $state, $resource, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService) {
+function mapService($q, $state, $resource, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService, popupService, layersService) {
 
     var self = this;
 
@@ -33,7 +33,11 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                 .then(
                                     function (marker) {
                                         counter++;
+
+                                        popupService.attachPopups(marker);
+
                                         self._servicesMarkersLayer.addLayer(marker);
+
                                         if (counter === services.features.length) {
                                             if (controlClasses.contains('hidden')) {
                                                 controlClasses.remove('hidden');
@@ -71,6 +75,10 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                 self.createLayerFromElement(element, 'parking', parkingPoint)
                     .then(
                         function (marker) {
+                            marker.popupSources.hint = element.properties.advised_parking;
+
+                            popupService.attachPopups(marker);
+
                             self._infosMarkersLayer.addLayer(marker);
                         }
                     )
@@ -84,6 +92,10 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                     self.createLayerFromElement(element, 'departureArrival', startPoint)
                         .then(
                             function (marker) {
+                                _.merge(marker.popupSources, {
+                                    hint: element.properties.departure + '\n' + element.properties.arrival
+                                });
+                                popupService.attachPopups(marker);
                                 self._infosMarkersLayer.addLayer(marker);
                             }
                         )
@@ -93,6 +105,10 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                     self.createLayerFromElement(element, 'departure', startPoint)
                         .then(
                             function (marker) {
+                                _.merge(marker.popupSources, {
+                                    hint: element.properties.departure
+                                });
+                                popupService.attachPopups(marker);
                                 self._infosMarkersLayer.addLayer(marker);
                             }
                         )
@@ -102,6 +118,10 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                     self.createLayerFromElement(element, 'arrival', endPoint)
                         .then(
                             function (marker) {
+                                _.merge(marker.popupSources, {
+                                    hint: element.properties.arrival
+                                });
+                                popupService.attachPopups(marker);
                                 self._infosMarkersLayer.addLayer(marker);
                             }
                         )
@@ -143,43 +163,18 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                             var selector = '#poi-' + poi.id.toString();
 
                                             counter++;
-                                            marker.on({
-                                                mouseover: function () {
-                                                    var listeEquivalent = document.querySelector(selector);
-                                                    if (listeEquivalent) {
-                                                        if (!listeEquivalent.classList.contains('hovered')) {
-                                                            listeEquivalent.classList.add('hovered');
-                                                        }
-                                                    }
 
-                                                    var elementOffset = jQuery(selector).position().top;
-                                                    var containerScrollPosition = jQuery('.pois-liste').scrollTop();
-                                                    if (containerScrollPosition - parseInt(elementOffset, 10) !== 0) {
-                                                        jQuery('.pois-liste').animate({
-                                                            scrollTop: containerScrollPosition + elementOffset
-                                                        }, 300);
-                                                    }
-                                                },
-                                                mouseout: function () {
-                                                    var listeEquivalent = document.querySelector(selector);
-                                                    if (listeEquivalent) {
-                                                        if (listeEquivalent.classList.contains('hovered')) {
-                                                            listeEquivalent.classList.remove('hovered');
-                                                        }
-                                                    }
-                                                },
-                                                remove: function () {
-                                                    var listeEquivalent = document.querySelector(selector);
-                                                    if (listeEquivalent) {
-                                                        if (listeEquivalent.classList.contains('hovered')) {
-                                                            listeEquivalent.classList.remove('hovered');
-                                                        }
-                                                    }
-                                                },
-                                                click: function () {
-                                                    //$state.go("layout.detail", { catSlug: result.properties.category.slug, slug: result.properties.slug });
+                                            _.merge(marker.popupSources, {
+                                                selector: selector,
+                                                scroll: {
+                                                    event: 'mouseover',
+                                                    container: '.detail-aside-group-content',
+                                                    target: selector
                                                 }
                                             });
+
+                                            popupService.attachPopups(marker);
+
                                             self._poisMarkersLayer.addLayer(marker);
                                         }
                                     );
@@ -204,42 +199,21 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     this.createElementsMarkers = function (elements, type) {
         var startPoint = [];
-        _.forEach(elements, function (element) {
+        elements.forEach(function (element) {
             startPoint = utilsFactory.getStartPoint(element);
             self.createLayerFromElement(element, 'category', startPoint)
                 .then(
                     function (marker) {
+
                         marker.options.icon.options.className += ' ' + type + '-marker';
                         var selector = '#' + type + '-category-' + element.properties.category.id + '-' + element.id;
-                        marker.on({
-                            mouseover: function () {
-                                var listeEquivalent = document.querySelector(selector);
-                                if (listeEquivalent) {
-                                    if (!listeEquivalent.classList.contains('hovered')) {
-                                        listeEquivalent.classList.add('hovered');
-                                    }
-                                }
-                            },
-                            mouseout: function () {
-                                var listeEquivalent = document.querySelector(selector);
-                                if (listeEquivalent) {
-                                    if (listeEquivalent.classList.contains('hovered')) {
-                                        listeEquivalent.classList.remove('hovered');
-                                    }
-                                }
-                            },
-                            remove: function () {
-                                var listeEquivalent = document.querySelector(selector);
-                                if (listeEquivalent) {
-                                    if (listeEquivalent.classList.contains('hovered')) {
-                                        listeEquivalent.classList.remove('hovered');
-                                    }
-                                }
-                            },
-                            click: function () {
-                                $state.go("layout.detail", { catSlug: element.properties.category.slug, slug: element.properties.slug });
-                            }
+
+                        _.merge(marker.popupSources, {
+                            selector: '#result-category-' + element.properties.category.id + '-' + element.id
                         });
+
+                        popupService.attachPopups(marker);
+
                         self._nearMarkersLayer.addLayer(marker);
                     }
                 );
@@ -248,6 +222,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     this.createLayerFromElement = function (element, type, elementLocation) {
         var deferred = $q.defer();
+        var popupSources = {};
         if (type === "geojson" && element.geometry.type !== 'MultiPoint') {
             var geoStyle = {
                 className:  'layer-category-' + element.properties.category.id + '-' + element.id + ' category-' + element.properties.category.id
@@ -273,16 +248,19 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             case 'category':
                 promise = iconsService.getElementIcon;
                 param = element;
+                popupSources.hint = element.properties.name;
                 break;
 
             case 'poi':
                 promise = iconsService.getPOIIcon;
                 param = element;
+                popupSources.hint = element.properties.name;
                 break;
 
             case 'service':
                 promise = iconsService.getServiceIcon;
                 param = element;
+                popupSources.hint = element.properties.type.name;
                 break;
 
             case 'ref-point':
@@ -307,6 +285,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                                 }
                             );
                             marker.options.result = element;
+                            marker.popupSources = popupSources;
                             deferred.resolve(marker);
                         } else {
                             deferred.reject('no position provided');
@@ -330,9 +309,10 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         this.setFullScreenControl();
         this.setMinimap();
         this.setScale();
-        this.createSatelliteView();
+        // this.createSatelliteView();
         this.createServicesToggleControl();
         this.createResetViewButton();
+        this.createLayerSwitch();
 
         return this;
     };
@@ -390,6 +370,23 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         return this.map.addControl(new L.Control.Resetview());
     };
 
+    this.createLayerSwitch = function () {
+        var permanentTileLayersName   = globalSettings.PERMANENT_TILELAYERS_NAME  || 'Default';
+        var orthophotoTileLayersName  = globalSettings.ORTHOPHOTO_TILELAYERS_NAME || 'Satellite';
+        var permanentTileLayersParam  = {};
+
+        permanentTileLayersParam[permanentTileLayersName]  = this._baseLayers.main;
+        permanentTileLayersParam[orthophotoTileLayersName] = this._baseLayers.satellite;
+
+        var layersControl = L.control.layers(
+            permanentTileLayersParam,
+            this._optionalLayers,
+            { position: 'bottomleft' }
+        );
+
+        return layersControl.addTo(this.map);
+    }
+
     this.setViewPortFilteringControl = function () {
         L.Control.ViewportFilter = L.Control.extend({
             options: {
@@ -418,20 +415,12 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     this.setMinimap = function () {
         if (globalSettings.ACTIVE_MINIMAP) {
-            var miniMapLayer = new L.tileLayer(
-                    globalSettings.MAIN_LEAFLET_BACKGROUND.LAYER_URL,
-                    {
-                        minZoom: globalSettings.MINIMAP_ZOOM.MINI,
-                        maxZoom: globalSettings.MINIMAP_ZOOM.MAX,
-                        attribution: globalSettings.MAIN_LEAFLET_BACKGROUND.ATTRIBUTION
-                    }
-                ),
-                miniMapOptions = {
+            var miniMapOptions = {
                     toggleDisplay: true,
                     zoomLevelOffset: globalSettings.MINIMAP_OFFSET
                 };
 
-            this._miniMap = new L.Control.MiniMap(miniMapLayer, miniMapOptions).addTo(this.map);
+            this._miniMap = new L.Control.MiniMap(layersService.getMainLayersGroup(), miniMapOptions).addTo(this.map);
         }
     };
 
@@ -732,6 +721,18 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         }
     };
 
+    this.centerOn = function (result) {
+        var coords = utilsFactory.getStartPoint(result);
+        self.setCenter(coords);
+        return self.map;
+    };
+
+    this.setCenter = function (coords) {
+        self.map.panTo(coords);
+        return self.map;
+    };
+
+
     this.highlightPath = function (element, permanent, detailView) {
         var hoverStyle = {
             className:  'layer-highlight'
@@ -835,11 +836,11 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
         requests.query().$promise
             .then(function (data) {
-                var primaryColor = window.getComputedStyle(document.querySelector('.informations .element-title')).backgroundColor;
+                var primaryColor = 'rgba(200, 200, 200, 1)';
                 var transparentizedColor = primaryColor.replace(/^(rgb)\((\d{1,3},\s*\d{1,3},\s*\d{1,3})\)$/gm, '$1a($2, 0.8)');
 
                 function updateSparkline() {
-                    jQuery('#elevation .canvas-container').sparkline(data.profile,
+                    jQuery('#elevation .detail-content-elevation-canvas').sparkline(data.profile,
                         L.Util.extend(
                             {
                                 tooltipSuffix: ' m',
@@ -1009,41 +1010,12 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                             function (layer) {
                                 var selector = '#result-category-' + result.properties.category.id.toString() + '-' + result.id.toString();
 
-                                layer.on({
-                                    mouseover: function () {
-                                        var listeEquivalent = document.querySelector(selector);
-                                        if (listeEquivalent) {
-                                            if (!listeEquivalent.classList.contains('hovered')) {
-                                                listeEquivalent.classList.add('hovered');
-                                            }
-                                        }
-                                        if (result.geometry.type !== "Point" && result.geometry.type !== 'MultiPoint') {
-                                            self.highlightPath(result);
-                                        }
-                                    },
-                                    mouseout: function () {
-                                        var listeEquivalent = document.querySelector(selector);
-                                        if (listeEquivalent) {
-                                            if (listeEquivalent.classList.contains('hovered')) {
-                                                listeEquivalent.classList.remove('hovered');
-                                            }
-                                        }
-                                        if (self.geoHover) {
-                                            self._nearMarkersLayer.removeLayer(self.geoHover);
-                                        }
-                                    },
-                                    remove: function () {
-                                        var listeEquivalent = document.querySelector(selector);
-                                        if (listeEquivalent) {
-                                            if (listeEquivalent.classList.contains('hovered')) {
-                                                listeEquivalent.classList.remove('hovered');
-                                            }
-                                        }
-                                    },
-                                    click: function () {
-                                        $state.go("layout.detail", { catSlug: result.properties.category.slug, slug: result.properties.slug });
-                                    }
+                                _.merge(layer.popupSources, {
+                                    selector: '#result-category-' + result.uid
                                 });
+
+                                popupService.attachPopups(layer);
+
                                 if (result.geometry.type !== "Point" && result.geometry.type !== "MultiPoint") {
                                     jQuery(selector).on('mouseenter', function () {
                                         self.highlightPath(result);
@@ -1147,31 +1119,18 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     this.initMap = function (mapSelector) {
 
+        var permanentTileLayers = layersService.getMainLayersGroup();
+
         // Set background Layers
         this._baseLayers = {
-            main: L.layerGroup([
-                L.tileLayer(
-                    globalSettings.MAIN_LEAFLET_BACKGROUND.LAYER_URL,
-                    globalSettings.MAIN_LEAFLET_BACKGROUND.OPTIONS
-                )
-            ]),
+            main: permanentTileLayers,
             satellite: L.tileLayer(
                 globalSettings.SATELLITE_LEAFLET_BACKGROUND.LAYER_URL,
                 globalSettings.SATELLITE_LEAFLET_BACKGROUND.OPTIONS
             )
         };
 
-        if (globalSettings.OPTIONAL_LEAFLET_BACKGROUNDS.length > 0) {
-            for (var i = globalSettings.OPTIONAL_LEAFLET_BACKGROUNDS.length - 1; i >= 0; i--) {
-                var layer = globalSettings.OPTIONAL_LEAFLET_BACKGROUNDS[i];
-                this._baseLayers.main.addLayer(
-                    L.tileLayer(
-                        layer.LAYER_URL,
-                        layer.OPTIONS
-                    )
-                );
-            }
-        }
+        this._optionalLayers = layersService.getOptionalLayers();
 
         var mapParameters = {
             center: [globalSettings.LEAFLET_CONF.CENTER_LATITUDE, globalSettings.LEAFLET_CONF.CENTER_LONGITUDE],
@@ -1179,7 +1138,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             minZoom: globalSettings.LEAFLET_CONF.DEFAULT_MIN_ZOOM,
             maxZoom: globalSettings.LEAFLET_CONF.DEFAULT_MAX_ZOOM,
             scrollWheelZoom: true,
-            layers: this._baseLayers.main
+            layers: permanentTileLayers
         };
 
         if (globalSettings.MAP_BOUNDS_CONSTRAINTS) {
@@ -1193,6 +1152,14 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         self.filterByViewport = globalSettings.FILTER_BY_VIEWPORT_DEFAULT;
 
         this.map = L.map(mapSelector, mapParameters);
+
+        this.map.setActiveArea({
+            position: 'absolute',
+            top: '68px',
+            right: '0',
+            bottom: '0',
+            left: '0'
+        });
 
         // Set-up maps controls (needs _map to be defined);
         this.initMapControls();
@@ -1220,6 +1187,8 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         this.map.addLayer(this._infosMarkersLayer);
         this.map.addLayer(this._servicesMarkersLayer);
 
+        popupService.setMap(this.map);
+
         return this.map;
 
     };
@@ -1232,42 +1201,50 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
 
     this.icons_liste = {
         default_icon: {},
-        departure: globalSettings.DEPARTURE_ICON || {
+
+        departure: _.merge({
             iconUrl: '/images/map/departure.svg',
             iconSize: [46, 52],
             iconAnchor: [23, 52],
+            popupAnchor: [0, -52],
             className: 'departure-marker'
-        },
-        arrival: globalSettings.ARRIVAL_ICON || {
+        }, globalSettings.DEPARTURE_ICON),
+        arrival: _.merge({
             iconUrl: '/images/map/arrival.svg',
             iconSize: [46, 52],
-            iconAnchor: [13, 52],
+            iconAnchor: [23, 52],
+            popupAnchor: [0, -52],
             className: 'arrival-marker'
-        },
-        departureArrival: globalSettings.DEPARTURE_ARRIVAL_ICON || {
+        }, globalSettings.ARRIVAL_ICON),
+        departureArrival: _.merge({
             iconUrl: '/images/map/departure-arrival.svg',
             iconSize: [46, 52],
-            iconAnchor: [13, 52],
+            iconAnchor: [23, 52],
+            popupAnchor: [0, -52],
             className: 'departure-arrival-marker'
-        },
-        parking: globalSettings.PARKING_ICON || {
+        }, globalSettings.DEPARTURE_ARRIVAL_ICON),
+
+        parking: _.merge({
             iconUrl: '/images/map/parking.svg',
             iconSize: [20, 20],
-            iconAnchor: [10, 20],
+            iconAnchor: [10, 10],
+            popupAnchor: [0, -10],
             labelAnchor: [10, 10],
             className: 'parking-marker'
-        },
-        information: globalSettings.INFO_ICON || {
+        }, globalSettings.PARKING_ICON),
+        information: _.merge({
             iconUrl: '/images/map/info.svg',
             iconSize: [],
             iconAnchor: [],
+            popupAnchor: [],
             labelAnchor: [],
             className: ''
-        },
+        }, globalSettings.INFO_ICON),
         ref_point: {
             iconUrl: '',
             iconSize: [26 ,26],
             iconAnchor: [13, 26],
+            popupAnchor: [0, -26],
             labelAnchor: [13, 13],
             className: 'ref-point'
         },
@@ -1275,6 +1252,7 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
             iconUrl: '',
             iconSize: [],
             iconAnchor: [],
+            popupAnchor: [],
             labelAnchor: [],
             className: ''
         },
@@ -1282,27 +1260,33 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
             iconUrl: '',
             iconSize: [],
             iconAnchor: [],
+            popupAnchor: [],
             labelAnchor: [],
             className: ''
         },
-        category_base: globalSettings.MARKER_BASE_ICON || {
+
+        category_base: _.merge({
             iconUrl: '/images/map/category_base.svg',
-            iconSize: [34, 48],
-            iconAnchor: [17, 48],
-            labelAnchor: [17, 17]
-        },
-        poi_base: globalSettings.POI_BASE_ICON || {
+            iconSize: [40, 60],
+            iconAnchor: [20, 60],
+            popupAnchor: [0, -60],
+            labelAnchor: [20, 20]
+        }, globalSettings.MARKER_BASE_ICON),
+        poi_base: _.merge({
             iconUrl: '/images/map/category_base.svg',
-            iconSize: [34, 48],
-            iconAnchor: [17, 48],
-            labelAnchor: [17, 17]
-        },
-        service_base: globalSettings.SERVICE_BASE_ICON || {
+            iconSize: [40, 60],
+            iconAnchor: [20, 60],
+            popupAnchor: [0, -60],
+            labelAnchor: [20, 20]
+        }, globalSettings.POI_BASE_ICON),
+        service_base: _.merge({
             iconUrl: '',
             iconSize: [30, 30],
             iconAnchor: [15, 15],
+            popupAnchor: [0, -15],
             labelAnchor: [15, 15]
-        },
+        }, globalSettings.SERVICE_BASE_ICON)
+
     };
 
     this.getCategoriesIcons = function () {
@@ -1575,6 +1559,7 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
         return new L.DivIcon({
             iconSize: [40, 40],
             iconAnchor: [20, 20],
+            popupAnchor: [0, -40],
             className: 'element-cluster',
             html: '<div class="marker"><span class="count">' + cluster.getChildCount() + '</span></div>'
         });
@@ -1584,6 +1569,7 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
         return new L.DivIcon({
             iconSize: [40, 40],
             iconAnchor: [20, 20],
+            popupAnchor: [0, -40],
             className: 'touristic-cluster',
             html: '<div class="marker"><span class="count">' + cluster.getChildCount() + '</span></div>'
         });
@@ -1612,6 +1598,7 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
         return new L.DivIcon({
             iconSize: [40, 40],
             iconAnchor: [20, 40],
+            popupAnchor: [0, -40],
             className: 'poi-cluster',
             html: iconsMarkup
         });
@@ -1622,13 +1609,10 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
 
         var markup = '<span>' + refElement.order + '</span>';
 
-        var newIcon = new L.divIcon({
+        var newIcon = new L.divIcon(_.merge({}, self.icons_liste.ref_point, {
             html: markup,
-            iconSize: self.icons_liste.ref_point.iconSize,
-            iconAnchor: self.icons_liste.ref_point.iconAnchor,
-            labelAnchor: self.icons_liste.ref_point.labelAnchor,
             className: self.icons_liste.ref_point.className + ' ' + self.icons_liste.ref_point.className + '-' + refElement.order
-        });
+        }));
         deferred.resolve(newIcon);
 
         return deferred.promise;
@@ -1644,24 +1628,18 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
                 deferred.resolve(self[iconName]);
             } else {
                 if (!utilsFactory.isSVG(self.icons_liste[iconName].iconUrl)) {
-                    self[iconName] = new L.divIcon({
-                        html: self.icons_liste[iconName].iconUrl,
-                        iconSize: self.icons_liste[iconName].iconSize,
-                        iconAnchor: self.icons_liste[iconName].iconAnchor,
-                        className: self.icons_liste[iconName].className
-                    });
+                    self[iconName] = new L.divIcon(_.merge({}, self.icons_liste[iconName], {
+                        html: self.icons_liste[iconName].iconUrl
+                    }));
                     deferred.resolve(self[iconName]);
                 } else {
                     self.getSVGIcon(self.icons_liste[iconName].iconUrl, iconName)
                         .then(
                             function (iconMarkup) {
 
-                                self[iconName] = new L.divIcon({
-                                    html: iconMarkup,
-                                    iconSize: self.icons_liste[iconName].iconSize,
-                                    iconAnchor: self.icons_liste[iconName].iconAnchor,
-                                    className: self.icons_liste[iconName].className
-                                });
+                                self[iconName] = new L.divIcon(_.merge({}, self.icons_liste[iconName], {
+                                    html: iconMarkup
+                                }));
                                 deferred.resolve(self[iconName]);
                             }
                         );
@@ -1720,13 +1698,10 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
                             '</div>';
                     }
 
-                    var newIcon = new L.divIcon({
+                    var newIcon = new L.divIcon(_.merge({}, self.icons_liste.poi_base, {
                         html: markup,
-                        iconSize: self.icons_liste.poi_base.iconSize,
-                        iconAnchor: self.icons_liste.poi_base.iconAnchor,
-                        labelAnchor: self.icons_liste.poi_base.labelAnchor,
                         className: 'double-marker popup poi layer-' + poi.properties.type.id + '-' + poi.id + ' category-' + poi.properties.type.id
-                    });
+                    }));
                     deferred.resolve(newIcon);
                 }
             );
@@ -1783,13 +1758,10 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
                             '</div>';
                     }
 
-                    var newIcon = new L.divIcon({
+                    var newIcon = new L.divIcon(_.merge({}, self.icons_liste.service_base, {
                         html: markup,
-                        iconSize: self.icons_liste.service_base.iconSize,
-                        iconAnchor: self.icons_liste.service_base.iconAnchor,
-                        labelAnchor: self.icons_liste.service_base.labelAnchor,
                         className: 'double-marker popup service layer-' + service.properties.type.id + '-' + service.id
-                    });
+                    }));
                     deferred.resolve(newIcon);
                 }
             );
@@ -1809,13 +1781,10 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
                     '</div>' +
                     '<div class="icon"><i class="fa fa-exclamation-circle"></i></div>';
 
-                var warningIcon = new L.DivIcon({
+                var warningIcon = new L.DivIcon(_.merge({}, self.icons_liste.poi_base, {
                     html: markup,
-                    iconSize: self.icons_liste.poi_base.iconSize,
-                    iconAnchor: self.icons_liste.poi_base.iconAnchor,
-                    labelAnchor: self.icons_liste.poi_base.labelAnchor,
                     className: 'double-marker warning-marker'
-                });
+                }));
 
                 deferred.resolve(warningIcon);
             });
@@ -1861,13 +1830,10 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
                     '</div>' +
                     '<div class="icon">' + categoryIcon + '</div>';
 
-                var newIcon = new L.divIcon({
+                var newIcon = new L.divIcon(_.merge({}, self.icons_liste.category_base, {
                     html: markup,
-                    iconSize: self.icons_liste.category_base.iconSize,
-                    iconAnchor: self.icons_liste.category_base.iconAnchor,
-                    labelAnchor: self.icons_liste.category_base.labelAnchor,
                     className: 'double-marker popup layer-category-' + element.properties.category.id + '-' + element.id + ' category-' + element.properties.category.id
-                });
+                }));
                 deferred.resolve(newIcon);
             }
         );
@@ -1876,14 +1842,12 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
 
     };
 
-
 }
 
 function boundsService() {
     this.bounds = {};
 
     this.setBounds = function (latLngBounds, context) {
-        console.log('serviceCall:setBounds (' + context + ')');
         this.bounds[context] = latLngBounds;
         return this.getBounds(context);
     };
@@ -1898,8 +1862,294 @@ function boundsService() {
 
 }
 
+function popupService() {
+
+    var _map;
+
+    var _setMap = function _setMap (map) {
+        _map = map;
+
+        _map.on('unload', _unlockPopup);
+        return this;
+    }
+
+    this.setMap = _setMap;
+
+    var _infoOpen = false; // Lock to allow only one popup opened at a time
+
+    var _lockPopup = function _lockPopup () {
+        _infoOpen = true;
+    }
+
+    var _unlockPopup = function _unlockPopup () {
+        _infoOpen = false;
+    }
+
+    var _isPopupLocked = function _isPopupLocked () {
+        return _infoOpen;
+    }
+
+    var _getInfoContent = function _getInfoContent () {
+        /**
+         * Get info content from marker object
+         */
+        if (this.popupSources) {
+            if (this.popupSources.info) {
+                return this.popupSources.info;
+            }
+            if (this.popupSources.selector) {
+                return document.querySelector(this.popupSources.selector).outerHTML;
+            }
+        }
+
+        return null;
+    }
+
+    var _getHintContent = function _getHintContent () {
+        /**
+         * New way : get hint content from marker object
+         */
+        if (this.popupSources && this.popupSources.hint) {
+            return this.popupSources.hint;
+        }
+
+        /**
+         * Fallback (old way) : get hint content form .marker[data-popup]
+         */
+        var m;
+        var dataPopup;
+        var markerDom = this._icon;
+
+        if (markerDom instanceof HTMLElement) {
+            m = markerDom.querySelector('.marker')
+            if (m) {
+                return m.getAttribute('data-popup');
+            }
+        }
+
+        return null;
+    };
+
+    var _getContentMethod = {
+        hint: _getHintContent,
+        info: _getInfoContent
+    };
+
+    var _getPopup = function _getPopup (type) {
+        if (!this.popupStore) return false;
+
+        var popup = this.popupStore[type];
+        if (!popup) return false;
+
+        var content = popup.getContent();
+        if (content) return popup; // If popupContent exists: popup is already defined
+
+        content = _getContentMethod[type].call(this);
+
+        if (content) {
+            this.popupStore[type].setContent(content);
+        }
+
+        return content ? this.popupStore[type] : false;
+    }
+
+    var _buildPopupStore = function _buildPopupStore () {
+        return _.merge({}, {
+            info: L.popup({
+                className: 'geotrek-info-popup',
+                closeButton: true,
+                autoPan: true
+            }),
+            hint: L.popup({
+                className: 'geotrek-hint-popup',
+                closeButton: false,
+                autoPan: false
+            })
+        });
+    }
+
+    var _doScroll = function _doScroll (eventType) {
+        var $ = jQuery;
+
+        if (!$ || !this.popupSources || !this.popupSources.scroll) { // Test if all needed params exist
+            return false;
+        }
+
+        if (this.popupSources.scroll.event !== eventType) { // Do we need to scroll for current eventType
+            return false;
+        }
+
+        var $target = $(this.popupSources.scroll.target);
+
+        if (!$target.length) { // Does scroll target exists
+            return false;
+        }
+
+        var $container = $target.closest(this.popupSources.scroll.container);
+
+        if (!$container.length) { // If there is no container found, use direct parent element
+            $container = $target.parent();
+        }
+
+        $container.scrollTo($target, 200);
+
+        return true;
+    };
+
+    var _attachPopups = function _attachPopups (marker) {
+
+        marker.popupStore = _buildPopupStore();
+
+        marker.on({
+            click: function (e) {
+                _doScroll.call(this, e.type);
+
+                var popup = _getPopup.call(this, 'info');
+
+                if (!popup) return this;
+
+                this.unbindPopup().bindPopup(popup);
+                this.openPopup();
+
+                _lockPopup(); // Disallow opening hintPopup while an infoPopup is open
+
+                return this;
+            },
+
+            mouseover: function (e) {
+                if (_isPopupLocked()) {
+                    return this;
+                }
+
+                _doScroll.call(this, e.type);
+
+                var currentPopup = this.getPopup();
+                if (currentPopup && currentPopup._isOpen) {
+                    return this;
+                }
+
+                var popup = _getPopup.call(this, 'hint');
+
+                if (popup && !popup._isOpen) {
+                    this.unbindPopup().bindPopup(popup);
+                    this.openPopup();
+                }
+
+                return this;
+            },
+
+            mouseout: function () {
+                var popup = this.getPopup();
+
+                if (popup && popup.options && !popup.options.closeButton) {
+                    this.closePopup();
+                }
+
+                return this;
+            },
+
+            popupclose: function () {
+                if (_isPopupLocked()) {
+                    _unlockPopup(); // Re-allow opening hintPopup
+                }
+
+                return this;
+            }
+        });
+
+        return marker;
+
+    }
+
+    this.attachPopups = _attachPopups; // Publish method
+}
+
+function layersService (globalSettings) {
+
+    /**
+     * Return PERMANENT_TILELAYERS
+     *     or MAIN_LEAFLET_BACKGROUND
+     *     or OPTIONAL_LEAFLET_BACKGROUNDS
+     *     or MAIN_LEAFLET_BACKGROUND + OPTIONAL_LEAFLET_BACKGROUNDS
+     */
+    var _getMainLayersConf = function _getMainLayersConf () {
+        if (globalSettings.OPTIONAL_LEAFLET_BACKGROUNDS instanceof Array) {
+            if (typeof globalSettings.MAIN_LEAFLET_BACKGROUND === 'object') {
+                return [globalSettings.MAIN_LEAFLET_BACKGROUND].concat(globalSettings.OPTIONAL_LEAFLET_BACKGROUNDS);
+            } else {
+                return globalSettings.OPTIONAL_LEAFLET_BACKGROUNDS;
+            }
+        } else if (typeof globalSettings.MAIN_LEAFLET_BACKGROUND === 'object') {
+            return [globalSettings.MAIN_LEAFLET_BACKGROUND];
+        }
+
+        if (globalSettings.PERMANENT_TILELAYERS) {
+            return globalSettings.PERMANENT_TILELAYERS;
+        }
+
+        return false;
+    };
+
+    var _getOptionalLayersConf = function _getOptionalLayersConf () {
+        if (globalSettings.OPTIONAL_TILELAYERS) {
+            return globalSettings.OPTIONAL_TILELAYERS;
+        }
+
+        return false;
+    };
+
+    var _getMainLayersGroup = function _getMainLayersGroup () {
+        var layersConf = _getMainLayersConf();
+
+        if (!layersConf) return false;
+
+        var LGroup = L.layerGroup();
+        layersConf.forEach(function (layerConf) {
+            var layer, layerOptions;
+            if (typeof layerConf === 'string') {
+                layer = L.tileLayer(layerConf);
+            } else if (layerConf.LAYER_URL) {
+                layerOptions = layerConf.OPTIONS || {};
+                layer        = L.tileLayer(layerConf.LAYER_URL, layerOptions);
+            }
+
+            LGroup.addLayer(layer);
+        });
+
+        return LGroup;
+    };
+
+    var _getOptionalLayers = function _getOptionalLayers () {
+        var layersConf  = _getOptionalLayersConf();
+        var defaultName = globalSettings.OPTIONAL_TILELAYERS_NAME || 'Layer';
+
+        if (!layersConf) return false;
+
+        var layers = {};
+
+        layersConf.forEach(function (layerConf, index) {
+            var layerName, layerOptions;
+
+            if (typeof layerConf === 'string') {
+                layers[[defaultName, index + 1].join(' ')] = L.tileLayer(layerConf);
+            } else if (layerConf.LAYER_URL) {
+                layerName         = layerConf.LAYER_NAME || [defaultName, index + 1].join(' ');
+                layerOptions      = layerConf.OPTIONS || {};
+                layers[layerName] = L.tileLayer(layerConf.LAYER_URL, layerOptions);
+            }
+        });
+
+        return layers;
+    }
+
+    this.getMainLayersGroup = _getMainLayersGroup;
+    this.getOptionalLayers  = _getOptionalLayers;
+}
+
 module.exports = {
     mapService: mapService,
     iconsService: iconsService,
-    boundsService: boundsService
+    boundsService: boundsService,
+    popupService: popupService,
+    layersService: layersService
 };

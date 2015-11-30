@@ -1,6 +1,6 @@
 'use strict';
 
-function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory, favoritesService, filtersService) {
+function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory, favoritesService, filtersService, mapService) {
 
     function updateResults(forceRefresh) {
         $rootScope.elementsLoading ++;
@@ -15,7 +15,7 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
                     if (console) {
                         console.error(err);
                     }
-                    $rootScope.elementsLoading --; 
+                    $rootScope.elementsLoading --;
                 }
             );
 
@@ -73,9 +73,14 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
         });
     };
 
-    $scope.favoriteIcon = (globalSettings.FAVORITES_ICON ? globalSettings.FAVORITES_ICON : 'heart');
+    $scope.mapFocusOn = function (result) {
+        $rootScope.mapIsShown = true;
+        mapService.centerOn(result);
+    };
+
     $scope.isInFavorites = favoritesService.isInFavorites;
-    $scope.isSVG = utilsFactory.isSVG;
+    $scope.isSVG         = utilsFactory.isSVG;
+    $scope.sanitizeData  = utilsFactory.sanitizeData;
 
     $scope.$on('updateFilters', function () {
         updateResults();

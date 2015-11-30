@@ -1,6 +1,6 @@
 'use strict';
 
-function NearListeController($scope, globalSettings, favoritesService, $rootScope) {
+function NearListeController($scope, globalSettings, favoritesService, $rootScope, mapService) {
 
     $scope.favIcon = (globalSettings.FAVORITES_ICON ? globalSettings.FAVORITES_ICON : 'heart');
     $scope.isInFavorites = favoritesService.isInFavorites;
@@ -29,6 +29,12 @@ function NearListeController($scope, globalSettings, favoritesService, $rootScop
         }
         $rootScope.$broadcast('changeFavorite', {element: currentElement, action: currentAction});
     };
+
+    $scope.mapFocusOn = function (result) {
+        $rootScope.mapIsShown = true;
+        mapService.centerOn(result);
+    };
+
 }
 
 module.exports = {

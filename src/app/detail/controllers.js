@@ -12,12 +12,26 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         $scope.rulesId = null;
     }
 
-    $scope.toggleInterest = function (currentInterest) {
-        if ($scope.interestShown === currentInterest) {
-            $scope.interestShown = '';
-        } else {
-            $scope.interestShown = currentInterest;
+    $scope.currentInterest = 'none';
+
+    $scope.toggleInterest = function (interest) {
+        if (mapService.map && mapService.map.closePopup) {
+            mapService.map.closePopup();
         }
+
+        if ($scope.currentInterest === interest) {
+            $scope.currentInterest = '';
+        } else {
+            $scope.currentInterest = interest;
+        }
+    };
+
+    $scope.foldAside = false;
+    $scope.asidePaneToggle = function () {
+        $scope.foldAside = !$scope.foldAside;
+        setTimeout(function () {
+            mapService.invalidateSize();
+        }, 350);
     };
 
     $scope.showLightbox = function (images, slideIndex) {
@@ -157,8 +171,6 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
             });
         });
 
-        console.log(parentsElement);
-
         $scope.parentsElement = [];
 
         _.forEach(parentsElement, function (element) {
@@ -292,7 +304,6 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                     $scope.toggleInterest(activeDefaultType);
                 }
             );
-
     }
 
     function getResultDetails(forceRefresh) {
@@ -307,7 +318,6 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         promise
             .then(
                 function (result) {
-                    console.log(result);
                     $rootScope.metaTitle = result.properties.name;
                     $rootScope.metaDescription = result.properties.description_teaser;
                     $scope.result = result;
@@ -324,9 +334,9 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
     }
 
     getResultDetails();
-    switchInterestsNodes();
+    // switchInterestsNodes();
 
-    angular.element(window).on('resize', switchInterestsNodes);
+    // angular.element(window).on('resize', switchInterestsNodes);
 
     var rootScopeEvents = [
         $rootScope.$on('switchGlobalLang', function () {

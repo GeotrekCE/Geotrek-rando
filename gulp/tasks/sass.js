@@ -25,7 +25,6 @@ function concatSassFiles(src, fileName, dest) {
 }
 
 function compileSass() {
-
     var streams = [];
     config.files.forEach(function (element) {
 

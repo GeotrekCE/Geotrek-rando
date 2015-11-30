@@ -1,535 +1,37 @@
+@import 'detail-content';
+@import 'detail-map';
+@import 'detail-aside';
+
 .detail-page {
-    height: 100%;
+    overflow: auto;
+
     width: 100%;
-    position: relative;
-    overflow: hidden;
+    height: 100%;
+
     background: $neutral-grey;
-    @include detail-page-coloring();
-    @media (max-width: 767px) {
-        &.showMap {
-            .informations {
-                left: -100%;
-            }
-            .detail-map {
-                left: 0%;
-            }
-            .interests {
-                left: 100%;
-            }
-        }
-    }
-    .informations {
-        //position: relative;
-        height: 100%;
-        width: 100%;
-        float: left;
-        display: flex;
-        flex-direction: column;
-        border-right: 1px solid $neutral-grey;
-        background: $light-grey;
-        transition: width 0.3s ease, left 0.3s ease;
-        @media (min-width: 768px) {
-            width: 35%;
-            height: 100%;
-        }
-        h3 {
-            display: block;
-            font-weight: 300;
-            font-size: 1.3em;
-            padding: 0.5em 0.8em;
-            margin: 0;
-            border-bottom: 1px solid $neutral-grey;
-            transition: border 0.3s ease;
-            i {
-                margin-right: 0.8rem;
-            }
-        }
-        .element-title {
-            display: flex;
-            background: $primary-color;
-            border-bottom: 1px solid $neutral-grey;
-            align-items: center;
-            .cat-icon {
-                max-width: 5em;
-                padding: 0.6em 1.5em;
-                text-align: center;
-                img {
-                    max-height: 2rem;
-                    max-width: 2rem;
-                }
-                svg {
-                    fill: white;
-                    vertical-align: middle;
-                    max-width: 100%;
-                    height: 3em;
-                }
-            }
-            h1 {
-                flex: 1 1 auto;
-                font-size: 1.5em;
-                margin: 0;
-                font-weight: lighter;
-                color: white;
-            }
-        }
-        .from-to {
-            padding: 0.6em 2em;
-            background: $primary-color;
-            color: white;
-            & > span {
-                margin-right: 1em;
-            }
-        }
-        .main-infos {
-            flex: 1 1 90%;
-            overflow-y: scroll;
-            overflow-x: hidden;
-        }
-        .intro {
-            .ambiance-and-teaser {
-                padding: 1em;
-                background: white;
-            }
-            .pictures {
-                position: relative;
-                .main-visual {
-                    overflow: hidden;
-                    //max-height: 18em;
-                    position: relative;
-                    cursor: pointer;
-                    img {
-                        width: 100%;
-                    }
-                }
-                ul {
-                    position: absolute;
-                    right: 0;
-                    bottom: 0;
-                    padding: 0.6em;
-                    margin: 0;
-                    width: 6em;
-                    height: 100%;
-                    background: light-grey;
-                    overflow: hidden;
-                    white-space: nowrap;
-                    background: transparentize(black, 0.4);
-                    li {
-                        width: 100%;
-                        position: relative;
-                        display: block;
-                        margin: 0.6em 0;
-                        cursor: pointer;
-                        &:first-child {
-                            margin-top: 0;
-                        }
-                        img {
-                            width: 100%;
-                        }
-                    }
-                }
-                .picture-credit {
-                    text-align: left;
-                    color: white;
-                    font-size: 0.8em;
-                    position: absolute;
-                    width: 100%;
-                    padding: 0 1em;
-                    bottom: 0;
-                    left: 0;
-                }
-                .picture-legend {
-                    font-size: .8em;
-                }
-            }
-        }
-        .pictos {
-            ul {
-                list-style: none;
-                padding: 0.6em;
-                margin: 0;
-                li {
-                    display: flex;
-                    flex-wrap: wrap;
-                    padding: 0.5rem;
-                    &.divider {
-                        width: 100%;
-                        height: 1px;
-                        line-height: 1px;
-                        text-align: left;
-                        padding: 0;
-                        border-bottom: 1px solid $neutral-grey;
-                    }
-                    .caption {
-                       flex: 0 0 30%; 
-                    }
-                    .content {
-                        flex: 1 1 70%;
-                        & > div {
-                            height: 1.5rem;
-                            vertical-align: middle;
-                            display: inline-block;
-                            margin: 0 0.5rem;
-                        }
-                    }
-                    h3 {
-                        height: 1.5rem;
-                        font-size: 1rem;
-                        padding: 0;
-                        vertical-align: middle;
-                        color: lighten($dark-grey, 10);
-                        border-bottom: none;
-                    }
-                    img, svg {
-                        width: 1.6em;
-                        height: 1.6em;
-                        vertical-align: middle;
-                    }
-                    svg .base {
-                        fill: $dark-grey;
-                    }
-                    span {
-                        vertical-align: middle;
-                    }
-                }
-            }
-        }
-        .element-description {
-            background: white;
-            //box-shadow: inset 0 2px 5px -3px #4d4d4d;
-            border-top: 1px solid $neutral-grey;
-            margin-bottom: 1em;
-            padding: 2em;
-            & > div {
-                margin: 1rem 0;
-                &:first-child {
-                    margin-top: 0;
-                }
-                &:last-child {
-                    margin-bottom: 0;
-                }
-            }
-            ol {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-                counter-reset:li;
-                li {
-                    position: relative;
-                    line-height: 1.5rem;
-                    vertical-align: middle;
-                    padding-left: 2rem;
-                    padding-bottom: 0.5rem;
-                    &:empty {
-                        display: none;
-                    }
-                }
-                li:before {
-                    content:counter(li); /* Use the counter as content */
-                    counter-increment:li;
-                    position: absolute;
-                    background: white;
-                    border: 3px solid $ref-point-color;
-                    font-weight: bolder;
-                    vertical-align: middle;
-                    font-size: 1rem;
-                    text-align: center;
-                    line-height: 0.6rem;
-                    left: 0;
-                    top: 0;
-                    width: 1.6rem;
-                    height: 1.6rem;
-                    padding: 0.25rem;
-                    border-radius: 50%;
-                }
-            }
-            .events-info {
-                h5 {
-                    font-weight: lighter;
-                    font-size: 1.1rem;
-                    margin-bottom: 0.2rem;
-                }
-            }
-        }
-        .description_teaser {
-            font-size: 1.5em;
-            line-height: 1.2em;
-            font-weight: lighter;
-            color: $primary-color;
-            margin-bottom: 1rem;
-            i {
-                float: left;
-                margin-right: 1em;
-            }
-        }
-        .more-infos {
-            display: flex;
-            flex-wrap: wrap;
-            @media (max-width: 767px) {
-                & > div {
-                    width: 100%;
-                }
-            }
-            .access, .transport {
-                @media (min-width: 768px) {
-                    width: 50%;
-                }                
-                .card {
-                    background: white;
-                    padding: 1em;
-                    margin: 0.4rem;
-                }
-            }
-        }
-        #elevation {
-            width: 100%;
-            .chart-container {
-                margin: 0.4rem;
-            }
-            .axislabel {
-                display: inline-block;
-                font-size: 0.7rem;
-                line-height: 0.7rem;
-                margin: 0.4rem 0;
-                & + .axislabel {
-                    margin-left: 0.5rem;
-                }
-            }
-        }
-        .is-park-centered, .advice, .disabled-infrastructure {
-            padding: 1em;
-            color: $dark-grey;
-            p {
-                margin: 0;
-            }
-            a {
-                color: inherit;
-            }
-            i {
-                float: left;
-                margin-right: 0.6em;
-            }
-        }
-        .is-park-centered {
-            background: transparentize($warning-color, 0);
-        }
-        .advice {
-            background: transparentize($alert-color, 0);
-        }
-        .disabled-infrastructure {
-            background: transparentize($info-color, 0);
-        }
-        .info-desks {
-            padding-bottom: 1em;
-            ul {
-                list-style: none;
-                padding: 0.4rem;
-                li {
-                    background: white;
-                    border: none;
-                    position: relative;
-                    &:not(:last-child) {
-                        margin-bottom: 1em;
-                    }
-                    .infos {
-                        width: 100%;
-                        min-height: 9rem;
-                        padding: 0.6rem;
-                        color: white;
-                        overflow: hidden;
-                    }
-                    .image {
-                        display: block;
-                        top: 0.6rem;
-                        left: 0.6rem;
-                        position: absolute;
-                        margin: 0.4em;
-                        width: 7rem;
-                        height: 7rem;
-                        border-radius: 50%;
-                        overflow: hidden;
-                        img {
-                            width: 100%;
-                            height: 100%;
-                        }
-                        &:after {
-                            content: '';
-                            position: absolute;
-                            border-radius: 50%;
-                            top: 0;
-                            left: 0;
-                            width: 100%;
-                            height: 100%;
-                            box-shadow: inset 0px 0px 6px 0px $dark-grey;
-                        }
-                    }
-                    .name {
-                        font-size: 1.2em;
-                        font-weight: normal;
-                        padding: 0.6em 0;
-                    }
-                    .contact {
-                        padding-left: 8.2rem;
-                        a {
-                            color: white;
-                            display: block;
-                            text-decoration: underline;
-                        }
-                    }
-                    .description {
-                        padding: 1em;
-                        .text {
+}
 
-                        }
-                    }
-                }
-            }
-        }
-        .contact-card {
-            padding-bottom: 1em;
-            ul {
-                padding: 0.4rem;
-                margin: 0;
-            }
-            .card {
-                display: inline-block;
-                padding: 1em;
-                background: white;
-                border-left: 4px solid $primary-color;
-                &:not(:last-child) {
-                    margin-bottom: 1em;
-                }
-                ul {
-                    list-style: none;
-                    padding: 0;
-                    margin: 0;
-                }
-            }
-        }
-        .going-further {
-            padding-bottom: 1em;
-            width: 100%;
-            ul {
-                list-style: none;
-                padding: 0.4rem;
-                margin: 0;
-            }
-        }
-        .related-treks {
-            > div {
-                margin-left: 0.4rem;
-            }
-            h4 {
-                font-size: 1rem;
-                margin-bottom: 0.5rem;
-            }
-        }
-    }
+@each $category in $categories {
+    .category-#{nth($category, 1)} {
 
-    .interests {
-        background: $light-grey;
-        padding: 0;
-        width: 100%;
-        transition: width 0.3s ease, left 0.3s ease;
-        @media (min-width: 768px) {
-            overflow-y: auto;
-            overflow-x: hidden;
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 24%;
-            height: 100%;
-            float: left;
-            display: flex;
-            flex-direction: column;
+        .detail-content-pane {
             h3 {
-                font-weight: 300;
-                font-size: 1.3em;
-                padding: 0.5em 0.8em;
-                margin: 0;
-                border-bottom: 1px solid $neutral-grey;
-                transition: border 0.3s ease;
-                i {
-                    margin-right: 0.8rem;
-                }
-            }
-            & > div {
-                transition: all 0.2s ease;
-                height: 40px;
-                position: relative;
-                overflow: hidden;
-                &:not(.collapsed) {
-                    flex: 1 1 auto;
-                    h3 {
-                        border-bottom: 2px solid $primary-color;
-                    }
-                }
-                &.collapsed {
-                    h3 {
-                        i {
-                            transform: rotate(-90deg);
-                        }
-                    }
-                }
+                color: nth($category, 2);
             }
         }
-        .collapsor {
-            width: 100%;
-            overflow: hidden;
-            @media (min-width: 768px) {
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 100%;
-                width: 100%;
-                margin-top: 40px;
-                padding-bottom: 40px;
-            }
+
+        .meta-item-title {
+            color: nth($category, 2);
         }
-        h3 {
-            cursor: pointer;
-            &:hover {
-                i {
-                    opacity: 0.8;
-                }
-            }
-            i {
-                float: right;
-                transition: transform 0.3s ease;
-                opacity: 0.6;
-                @media (max-width: 767px) {
-                    display: none;
-                }
-            }
+
+        .detail-content-title {
+            background: nth($category, 2);
         }
-    }
-    .detail-map {
-        background: $light-grey;
-        float: left;
-        z-index: 2;
-        padding: 0;
-        height: 100%;
-        width: 40.5%;
-        margin-left: 0.5%;
-        transition: width 0.3s ease, left 0.3s ease;
-        @media (min-width: 1600px) {
-            &.no-interests {
-                width: 66.5%;
-            }
+        .detail-content-from-to {
+            background: nth($category, 2);
         }
-        @media (min-width: 768px) {
-            &.no-interests {
-                width: 64.5%;
-            }
-        }
-        @media (max-width: 767px) {
-            position: absolute;
-            top: 0;
-            left: 100%;
-            height: 100%;
-            width: 100%;
-        }
-        .leaflet-container + .interests {
-            z-index: 99999999999999;
+        .detail-content-teaser {
+            color: nth($category, 2);
         }
     }
 }
@@ -537,4 +39,45 @@
 .jqstooltip {
     height: auto !important;
     width: auto !important;
+}
+
+.details-pane {
+    display: flex;
+    align-items: stretch;
+
+    .detailsview-pane {
+        height: 100%;
+    }
+
+    .detail-content-pane {
+        flex: 0 1 40%;
+    }
+
+    .map-pane {
+        flex: 1;
+    }
+
+    .detail-aside-pane {
+        flex: 0 1 25%;
+    }
+
+    @media (max-width: 767px) {
+        display: block;
+
+        .detailsview-pane {
+            height: auto;
+        }
+
+        .map-pane {
+            position: absolute !important; // Need !important because of JS adding position: relative;
+            top: 0;
+            left: 100%;
+
+            width: 100%;
+            height: 100%;
+            .map-mode & {
+                left: 0;
+            }
+        }
+    }
 }

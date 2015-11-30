@@ -4,12 +4,29 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
 
     var initFiltersEvent = $rootScope.$on('updateFilters', initFilters);
 
+    $scope.extend = false;
+    $scope.filtering = false;
+
+    $scope.difficultyIsCollapsed = globalSettings.FILTERS_DEFAULT_OPEN;
+    $scope.durationIsCollapsed   = globalSettings.FILTERS_DEFAULT_OPEN;
+    $scope.ascentIsCollapsed     = globalSettings.FILTERS_DEFAULT_OPEN;
+    $scope.lengthIsCollapsed     = globalSettings.FILTERS_DEFAULT_OPEN;
+    $scope.startDateIsCollapsed  = globalSettings.FILTERS_DEFAULT_OPEN;
+    $scope.endDateIsCollapsed    = globalSettings.FILTERS_DEFAULT_OPEN;
+    $scope.type1IsCollapsed      = globalSettings.FILTERS_DEFAULT_OPEN;
+    $scope.type2IsCollapsed      = globalSettings.FILTERS_DEFAULT_OPEN;
+    $scope.routeIsCollapsed      = globalSettings.FILTERS_DEFAULT_OPEN;
+
     function initFilters() {
         initDatePickers();
         initRangeFilters();
 
         //disable event
         initFiltersEvent();
+
+        $scope.categories.forEach(function (category) {
+            category.hasFilters = (category.ascent && category.ascent.values.length > 1) || (category.begin_date !== undefined) || (category.difficulty && category.difficulty.values.length > 1) || (category.duration && category.duration.values.length > 1) || (category.eLength && category.eLength.values.length > 1) || (category.end_date !== undefined) || (category.route && category.route.values.length > 0) || (category.type1 && category.type1.values.length > 0) || (category.type2 && category.type2.values.length > 0);
+        });
     }
 
     function updateFiltersTags() {
@@ -187,6 +204,19 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
         $scope.propagateActiveFilters();
     };
 
+    $scope.toggleAllCategories = function () {
+        var categories = $scope.categories;
+        if ($rootScope.activeFilters.categories.length > 0) {
+            $rootScope.activeFilters.categories = [];
+        } else {
+            $rootScope.activeFilters.categories = [];
+            categories.forEach(function (category) {
+                $rootScope.activeFilters.categories.push(category.id.toString());
+            });
+        }
+        $scope.propagateActiveFilters();
+    };
+
     $scope.toggleCategory = function (category) {
         var categories = $rootScope.activeFilters.categories,
             indexOfCategory = categories.indexOf(category.id.toString());
@@ -217,26 +247,24 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
         $scope.propagateActiveFilters();
     };
 
-    $scope.closeCategoryMenu = function (category) {
-        category.open = false;
-    };
-
-    $scope.openCategoryMenu = function (category) {
-        category.open = true;
-    };
-
-    $scope.toggleCategoryMenu = function (category) {
-        if (!category.open) {
+    $scope.closeCategoryFilters = function (category) {
+        $scope.filtering = false;
+        if (category) {
             category.open = false;
+        } else {
+            _.forEach($scope.categories, function (category) {
+                category.open = false;
+            });
         }
-        if (!category.open) {
-            $scope.activateCategory(category);
-        }
-        category.open = !category.open;
-        $scope.hideSiblings(category);
     };
 
-    $scope.hideSiblings = function (mainCategory) {
+    $scope.openCategoryFilters = function (category) {
+        category.open    = true;
+        $scope.filtering = true;
+        hideSiblings(category);
+    };
+
+    var hideSiblings = function (mainCategory) {
         _.forEach($scope.categories, function (category) {
             if (category.id !== mainCategory.id) {
                 category.open = false;
@@ -251,6 +279,24 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout,  uti
         }
         $rootScope.$broadcast('updateFilters');
     };
+
+    $scope.toggleCategories = function () {
+        $scope.extend = !$scope.extend;
+        if (!$scope.extend) {
+            $scope.closeCategoryFilters();
+        }
+    }
+    $scope.extendCategories = function () {
+        if ($scope.extend && $scope.filtering) {
+            $scope.openCategoryFilters(this.category);
+        }
+        $scope.extend = true;
+    }
+
+    $scope.foldCategories = function () {
+        $scope.extend = false;
+        $scope.closeCategoryFilters();
+    }
 
     $scope.isSVG = utilsFactory.isSVG;
 

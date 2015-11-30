@@ -1,0 +1,28 @@
+<div class="detail-content-from-to">
+    <div class="departure" ng-if="result.properties.departure && result.properties.departure !== result.properties.arrival">
+            <span class="from-to-label">{{ 'START' | translate}}</span>
+            <span class="from-to-value">{{::result.properties.departure}}</span>
+    </div>
+
+    <div class="arrival" ng-if="result.properties.arrival">
+        <span class="from-to-label" ng-if="result.properties.departure !== result.properties.arrival">
+            {{ 'ARRIVAL' | translate}}
+        </span>
+        <span class="from-to-label" ng-if="result.properties.departure === result.properties.arrival">
+            {{ 'LOOP' | translate}}
+        </span>
+        <span class="from-to-value">
+            {{::result.properties.arrival}}
+        </span>
+    </div>
+
+    <div ng-if="!result.properties.departure && !result.properties.arrival && result.properties.cities[0]">
+        <span class="from-to-label">{{ 'TOWN_START' | translate}}</span>
+        <span class="from-to-value">{{::result.properties.cities[0].name}}</span>
+    </div>
+
+    <div ng-if="result.properties.cities.length > 1">
+        <span class="from-to-label">{{ 'TOWN_CROSSED' | translate}}</span>
+        <span class="from-to-value" ng-repeat="city in result.properties.cities track by city.code"><span ng-if="$index > 0">, </span>{{::city.name}}</span>
+    </div>
+</div>

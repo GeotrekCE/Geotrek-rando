@@ -9,9 +9,9 @@ $root-images-path: "./images/";
     box-sizing: border-box;
 }
 
-html {
+html, body {
 	font-family: $font-family;
-	font-size: 16px;
+	font-size: 14px;
 	color: #333;
 }
 
@@ -83,6 +83,25 @@ a {
         border-bottom: 1.2rem solid white;
         animation: triangle-loader 2.4s 0s cubic-bezier(.09,.57,.49,.9) infinite;
         animation-fill-mode: both;
+    }
+}
+
+.checkbox {
+    height: 20px;
+    line-height: 20px;
+    width: 20px;
+    display: inline-block;
+    border: 1px solid white;
+    background: rgba(white, 0.2);
+    padding: 2px;
+    text-align: center;
+    vertical-align: middle;
+    margin: 0;
+    margin-right: 0.25rem;
+    border-radius: 8%;
+    i {
+        vertical-align: top;
+        font-size: 0.8rem;
     }
 }
 

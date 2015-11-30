@@ -1,94 +1,9 @@
-@mixin categories-list-coloring() {
-    @each $category in $categories {
-        &.category-#{nth($category, 1)} {
-            &.open a {
-                svg {
-                    fill: nth($category, 2);
-                }
-                &:after {
-                    color: nth($category, 2);
-                }
-             }
-            &.active {
-                a {
-                    background: nth($category, 2);
-                }
-            }
-            .filters {
-                background: nth($category, 2);
-                .category-name {
-                    background: nth($category, 2);
-                }
-                .choices {
-                    input {
-                        &:focus + label, &:hover + label {
-                            background-color: darken(nth($category, 2), 10%);
-                        }
-                    }
-                }
-
-            }
-        }
-    }
-}
-
-@mixin results-list-coloring() {
-    @each $category in $categories {
-        &.category-#{nth($category, 1)} {
-            border-color: nth($category, 2);
-            .know-more {
-                border-bottom: 40px solid nth($category, 2);
-            }
-            .fav-or-not.isFav i {
-                color: nth($category, 2);
-            }
-        }
-    }
-}
-
-@mixin marker-coloring() {
-    @each $category in $categories {
-        &.category-#{nth($category, 1)} {
-            .marker svg .base {
-                fill: nth($category, 2);
-            }
-            &.popup .marker::before {
-                border-bottom-color: nth($category, 2);
-            }
-        }
-    }
-}
-
 @mixin geojson-coloring() {
     @each $category in $categories {
         &.category-#{nth($category, 1)} {
             stroke: nth($category, 2);
             &.fill {
                 fill: nth($category, 2);
-            }
-        }
-    }
-}
-
-@mixin detail-page-coloring() {
-    @each $category in $categories {
-        &.category-#{nth($category, 1)} {
-            .informations {
-                .element-title {
-                    background: nth($category, 2);
-                }
-                .from-to {
-                    background: nth($category, 2);
-                }
-                .main-infos .description_teaser {
-                    color: nth($category, 2);
-                }
-                .info-desks .infos {
-                    background: nth($category, 2);
-                }
-                .contact-card .card {
-                    border-left-color: nth($category, 2);
-                }
             }
         }
     }
@@ -111,22 +26,10 @@
     }
 }
 
-@mixin detail-sidebar-coloring() {
-    @each $category in $categories {
-        &.category-#{nth($category, 1)} {
-            .isFav i {
-                color: nth($category, 2);
-            }
-        }
-    }
-}
-
-@mixin filters-tags-coloring() {
-    @each $category in $categories {
-        &.category-#{nth($category, 1)} {
-            &.category-relative .remove {
-                background: nth($category, 2);
-            }
-        }
-    }
+@mixin textoutline($color: blue) {
+    text-shadow:
+        -1px -1px 0 $color,
+        1px -1px 0 $color,
+        -1px 1px 0 $color,
+        1px 1px 0 $color;
 }

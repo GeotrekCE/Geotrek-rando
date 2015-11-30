@@ -1,3 +1,20 @@
+.children-liste {
+    display: block;
+
+    margin: 0;
+    padding: 0 0 2em 0;
+
+    color: #333;
+
+    .results-item {
+        width: auto;
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
+
+
+/*
 .children-liste, .parents-liste {
     list-style: none;
     padding: 0;
@@ -51,7 +68,7 @@
             transition: color 0.2s ease;
             &:hover {
                 opacity: 1;
-            }  
+            }
         }
         &.isFav {
             i {
@@ -111,3 +128,4 @@
         }
     }
 }
+*/

@@ -108,6 +108,7 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
 
         _.forEach(controllersListe, function (currentController) {
             var domElement = document.querySelector(currentController.selector);
+            if (!domElement) return false; // Avoid error if element does not exist
             promises.push(
                 $translate(currentController.translationID)
                     .then(
@@ -142,11 +143,11 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
         $scope.shouldFitBounds = true;
 
         if ($state.current.name === 'layout.detail') {
-            $scope.showFiltersOnMap = false;
+            $rootScope.showFiltersOnMap = false;
         }
 
         if ($state.current.name === 'layout.root') {
-            $scope.showFiltersOnMap = !!globalSettings.SHOW_FILTERS_ON_MAP;
+            $rootScope.showFiltersOnMap = !!globalSettings.SHOW_FILTERS_ON_MAP;
         }
 
         return deferred.promise;
@@ -168,11 +169,11 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
         $rootScope.$on('$stateChangeSuccess',
             function () {
                 if ($state.current.name === 'layout.detail') {
-                    $scope.showFiltersOnMap = false;
+                    $rootScope.showFiltersOnMap = false;
                 }
 
                 if ($state.current.name === 'layout.root') {
-                    $scope.showFiltersOnMap = !!globalSettings.SHOW_FILTERS_ON_MAP;
+                    $rootScope.showFiltersOnMap = !!globalSettings.SHOW_FILTERS_ON_MAP;
                 }
             }
         ),

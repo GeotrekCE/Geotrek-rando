@@ -37,18 +37,24 @@
     "DEFAULT_ACTIVE_CATEGORIES": ["T"],
     "LIST_EXCLUDE_CATEGORIES": [],
     "ENABLE_UNIQUE_CAT": false,
+    "FILTERS_DEFAULT_OPEN": false,
     "DEFAULT_INTEREST": "pois",
     "FACEBOOK_APP_ID": "",
     "TWITTER_ID": "",
     "DEFAULT_SHARE_IMG": "",
     "GOOGLE_ANALYTICS_ID": "",
-    "MAIN_LEAFLET_BACKGROUND": {
-        "LAYER_URL": "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        "OPTIONS": {
-            "id": "main",
-            "attribution": "(c) OpenstreetMap"
+    "PERMANENT_TILELAYERS_NAME": "Carte",
+    "PERMANENT_TILELAYERS": [
+        {
+            "LAYER_URL": "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            "OPTIONS": {
+                "attribution": "(c) OpenstreetMap",
+                "minZoom": 8,
+                "maxZoom": 17
+            }
         }
-    },
+    ],
+    "ORTHOPHOTO_TILELAYERS_NAME": "Ortho",
     "SATELLITE_LEAFLET_BACKGROUND": {
         "LAYER_URL": "http://{s}.tile.mapbox.com/v3/makina-corpus.i3p1001l/{z}/{x}/{y}.png",
         "OPTIONS": {
@@ -56,7 +62,8 @@
             "attribution": "(c) MapBox Satellite"
         }
     },
-    "OPTIONAL_LEAFLET_BACKGROUNDS": [],
+    "OPTIONAL_TILELAYERS": [],
+    "OPTIONAL_TILELAYERS_NAME": "Optional",
     "LEAFLET_CONF": {
         "CENTER_LATITUDE": 44.83,
         "CENTER_LONGITUDE": 6.34,

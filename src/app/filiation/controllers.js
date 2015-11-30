@@ -1,6 +1,6 @@
 'use strict'
 
-function FiliationController($scope, favoritesService, $rootScope) {
+function FiliationController($scope, $rootScope, favoritesService, mapService) {
     $scope.isInFavorites = favoritesService.isInFavorites;
 
     $scope.hoverMarkerFiliation = function (currentPoi, state) {
@@ -27,6 +27,13 @@ function FiliationController($scope, favoritesService, $rootScope) {
         }
         $rootScope.$broadcast('changeFavorite', {element: currentElement, action: currentAction});
     };
+
+    $scope.mapFocusOn = function (result) {
+        $rootScope.mapIsShown = true;
+        mapService.centerOn(result);
+    };
+
+
 }
 
 module.exports = {

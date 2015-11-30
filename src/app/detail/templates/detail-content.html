@@ -1,0 +1,87 @@
+<div class="detailsview-pane detail-content-pane informations">
+
+    <div class="detail-content-title element-title">
+        <div class="cat-icon">
+            <ng-include ng-if="isSVG(result.properties.category.pictogram)" src="result.properties.category.pictogram"></ng-include>
+            <img ng-if="!isSVG(result.properties.category.pictogram)" ng-src="{{::result.properties.category.pictogram}}" ng-alt="{{::result.properties.category.label}}">
+        </div>
+        <h1 class="detail-content-title-text">{{result.properties.name}}</h1>
+    </div>
+
+    <detail-content-meta></detail-content-meta>
+
+    <detail-content-pictures></detail-content-pictures>
+
+    <div class="detail-content-ambiance" ng-if="result.properties.ambiance"           ng-bind-html="sanitizeData(result.properties.ambiance, true)"></div>
+
+    <div class="detail-content-teaser"  ng-if="result.properties.description_teaser" ng-bind-html="sanitizeData(result.properties.description_teaser, true)"></div>
+
+    <div class="detail-content-description" ng-if="result.properties.description"    ng-bind-html="sanitizeData(result.properties.description, true)"></div>
+
+    <detail-content-from-to></detail-content-from-to>
+
+    <detail-content-events-info></detail-content-events-info>
+
+    <div class="detail-content-notice is-park-centered" ng-if="result.properties.is_park_centered">
+        <i class="notice-symbol fa fa-info-circle"></i>
+        <p ng-if="!rulesId">{{ 'PARK_CENTERED' | translate}}</p>
+        <a ng-if="rulesId" ui-sref="layout.flat({flatID: rulesId})">{{ 'PARK_CENTERED' | translate}}</a>
+    </div>
+
+    <div class="detail-content-notice event-notice-custom" ng-if="result.properties.category.id === 'E'">
+        <i class="notice-symbol fa fa-info-circle"></i>
+        <p>{{ 'EVENT_CUSTOM_1' | translate }}</p>
+    </div>
+
+    <div class="detail-content-notice advice" ng-if="result.properties.advice">
+        <i class="notice-symbol fa fa-exclamation-triangle"></i>
+        <div ng-bind-html="sanitizeData(result.properties.advice, true)"></div>
+    </div>
+
+    <div class="detail-content-notice disabled-infrastructure" ng-if="result.properties.disabled_infrastructure">
+        <i class="notice-symbol fa fa-wheelchair"></i>
+        <div ng-bind-html="sanitizeData(result.properties.disabled_infrastructure, true)"></div>
+    </div>
+
+    <detail-content-elevation></detail-content-elevation>
+
+    <div class="detail-content-transport-access">
+        <div class="detail-content-transport transport" ng-if="result.properties.public_transport">
+            <h3>{{ 'TRANSPORTS' | translate}}</h3>
+            <div class="text" ng-bind-html="sanitizeData(result.properties.public_transport, true)"></div>
+        </div>
+
+        <div class="detail-content-access access" ng-if="result.properties.access">
+            <h3>{{ 'ACCESS' | translate}}</h3>
+            <div class="text" ng-bind-html="sanitizeData(result.properties.access, true)"></div>
+        </div>
+    </div>
+
+    <detail-content-desks></detail-content-desks>
+
+    <div class="detail-content-contact contact-card" ng-if="result.properties.contact || result.properties.email">
+        <h3>{{ 'CONTACT' | translate}}</h3>
+        <ul>
+            <li class="card">
+                <div class="contact" ng-if="result.properties.contact" ng-bind-html="sanitizeData(result.properties.contact, true)"></div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="detail-content-further going-further" ng-if="result.properties.web_links[0]">
+        <h3>{{ 'KNOW_MORE' | translate}}</h3>
+        <ul ng-if="result.properties.web_links[0]" class="websites">
+            <li ng-repeat="link in result.properties.web_links">
+                <a href="{{::link.url}}" title="{{::link.name}}" target="_blank">
+                    <img ng-if="link.category.pictogram && !isSVG(link.category.pictogram)" ng-src="{{::link.category.pictogram}}" ng-alt="{{::link.category.label}}">
+                    <ng-include ng-if="link.category.pictogram && isSVG(link.category.pictogram)" src="link.category.pictogram"></ng-include>
+                    <span>{{::link.name}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <detail-content-related></detail-content-related>
+
+    <detail-page-footer></detail-page-footer>
+</div>

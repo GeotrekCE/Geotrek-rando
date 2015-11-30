@@ -1,51 +1,61 @@
-<div class="category-{{::result.properties.category.id}}">
-    <ul class="detail-actions">
-        <li class="back-to-home">
-            <a href title="{{'BACK' | translate}}"  ng-click="back()" tooltip-placement="right" tooltip="{{'BACK' | translate}}">
-                <i class="fa fa-reply"></i>
-                <span class="sr-only">{{'BACK' | translate}}</span>
-            </a>
-        </li>
-        <li ng-if="result.properties.printable" class="print">
-            <a href="{{::result.properties.printable}}" target="_self" title="{{'PRINT' | translate}}"  tooltip-placement="right" tooltip="{{'PRINT' | translate}}">
-                <i class="fa fa-print"></i>
-                <span class="sr-only">{{'PRINT' | translate}}</span>
-            </a>
-        </li>
-        <li class="favorites">
-            <a href title="{{'REMOVE_FAVS' | translate}}" class="isFav" ng-if="isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="right" tooltip="{{'REMOVE_FAVS' | translate}}">
-                <i class="fa fa-{{::favIcon}}"></i>
-                <span class="sr-only">{{'REMOVE_FAVS' | translate}}</span>
-            </a>
+<ul class="toolbar-actions detail-actions category-{{::result.properties.category.id}}">
+    <li class="toolbar-action back-to-home">
+        <a class="toolbar-action-link" href title="{{'BACK' | translate}}"  ng-click="back()" tooltip-placement="right" tooltip="{{'BACK' | translate}}">
+            <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
+            <span class="toolbar-action-label">{{'BACK' | translate}}</span>
+        </a>
+    </li>
 
-            <a href title="{{'ADD_FAVS' | translate}}" ng-if="!isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="right" tooltip="{{'ADD_FAVS' | translate}}">
-                <i class="fa fa-{{::favIcon}}"></i>
-                <span class="sr-only">{{'ADD_FAVS' | translate}}</span>
-            </a>
-        </li>
-        <li class="signal">
-            <a href title="{{'WARNING' | translate}}" tooltip-placement="right" tooltip="{{'WARNING' | translate}}" ng-click="showWarningPanel()">
-                <i class="fa fa-exclamation-circle"></i>
-                <span class="sr-only">{{'WARNING' | translate}}</span>
-            </a>
-        </li>
-        <li ng-if="result.properties.kml" class="kml">
-            <a href="{{::result.properties.kml}}" target="_self" title="{{'KML' | translate}}" tooltip-placement="right" tooltip="{{'KML' | translate}}">
-                <span class="txt-icon">KML</span>
-                <span class="sr-only">{{'KML' | translate}}</span>
-            </a>
-        </li>
-        <li ng-if="result.properties.gpx" class="gpx">
-            <a href="{{::result.properties.gpx}}" target="_self" title="{{'GPX' | translate}}" tooltip-placement="right" tooltip="{{'GPX' | translate}}">
-                <span class="txt-icon">GPX</span>
-                <span class="sr-only">{{'GPX' | translate}}</span>
-            </a>
-        </li>
-        <li ng-if="result.properties.contentType === 'trek'" class="rep-3d">
-            <a href title="{{'3D' | translate}}" tooltip-placement="right" tooltip="{{'3D' | translate}}" ng-click="show3d()">
-                <span class="txt-icon">3D</span>
-                <span class="sr-only">{{'3D' | translate}}</span>
-            </a>
-        </li>
-    </ul>
-</div>
+    <social-menu class="toolbar-action"></social-menu>
+
+    <li class="toolbar-action favorites">
+        <a class="toolbar-action-link active" href title="{{'REMOVE_FAVS' | translate}}" class="isFav" ng-if="isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="bottom" tooltip="{{'REMOVE_FAVS' | translate}}">
+            <ng-include class="favorite-icon svg-icon" src="'/images/icons/favorite.svg'"></ng-include>
+            <span class="toolbar-action-label">{{'REMOVE_FAVS' | translate}}</span>
+        </a>
+
+        <a class="toolbar-action-link" href title="{{'ADD_FAVS' | translate}}" ng-if="!isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="bottom" tooltip="{{'ADD_FAVS' | translate}}">
+            <ng-include class="favorite-icon svg-icon" src="'/images/icons/favorite.svg'"></ng-include>
+            <span class="toolbar-action-label">{{'ADD_FAVS' | translate}}</span>
+        </a>
+    </li>
+    <li class="toolbar-action print" ng-if="result.properties.printable">
+        <a class="toolbar-action-link" href="{{::result.properties.printable}}" target="_self" title="{{'PRINT' | translate}}" tooltip-placement="bottom" tooltip="{{'PRINT' | translate}}">
+            <ng-include class="print-icon svg-icon" src="'/images/icons/print.svg'"></ng-include>
+            <span class="toolbar-action-label">{{'PRINT' | translate}}</span>
+        </a>
+    </li>
+    <li class="toolbar-action kml" ng-if="result.properties.kml || result.properties.gpx">
+        <a class="toolbar-action-link" href tooltip-placement="bottom" tooltip="{{'DOWNLOAD' | translate}}" class="dropdown-toggle" data-toggle="dropdown" role="button">
+            <ng-include class="download-icon svg-icon" src="'/images/icons/download.svg'"></ng-include>
+        </a>
+
+        <ul class="dropdown-menu" role="menu">
+            <li class="toolbar-action kml" ng-if="result.properties.kml">
+                <a class="toolbar-action-link" href="{{::result.properties.kml}}" target="_self" title="{{'KML' | translate}}" tooltip-placement="bottom" tooltip="{{'KML' | translate}}">
+                    <span class="txt-icon">KML</span>
+                    <span class="toolbar-action-label">{{'KML' | translate}}</span>
+                </a>
+            </li>
+            <li class="toolbar-action gpx" ng-if="result.properties.gpx">
+                <a class="toolbar-action-link" href="{{::result.properties.gpx}}" target="_self" title="{{'GPX' | translate}}" tooltip-placement="bottom" tooltip="{{'GPX' | translate}}">
+                    <span class="txt-icon">GPX</span>
+                    <span class="toolbar-action-label">{{'GPX' | translate}}</span>
+                </a>
+            </li>
+        </ul>
+
+    </li>
+    <li class="toolbar-action rep-3d" ng-if="result.properties.contentType === 'trek'">
+        <a class="toolbar-action-link" href title="{{'3D' | translate}}" tooltip-placement="bottom" tooltip="{{'3D' | translate}}" ng-click="show3d()">
+            <ng-include class="3d-icon svg-icon" src="'/images/icons/3d.svg'"></ng-include>
+            <span class="toolbar-action-label">{{'3D' | translate}}</span>
+        </a>
+    </li>
+    <li class="toolbar-action signal">
+        <a class="toolbar-action-link" href title="{{'WARNING' | translate}}" tooltip-placement="bottom" tooltip="{{'WARNING' | translate}}" ng-click="showWarningPanel()">
+            <ng-include class="warning-icon svg-icon" src="'/images/icons/warning.svg'"></ng-include>
+            <span class="toolbar-action-label">{{'WARNING' | translate}}</span>
+        </a>
+    </li>
+</ul>

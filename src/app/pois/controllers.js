@@ -3,6 +3,9 @@
 function PoisListeController($scope, $rootScope, globalSettings, utilsFactory, $modal) {
 
     $scope.hoverMarkerPoi = function (currentPoi, state) {
+
+        currentPoi.mouseover = state === 'enter';
+
         var layerEquivalent = document.querySelector('.layer-' + currentPoi.properties.type.id + '-' + currentPoi.id);
         if (!layerEquivalent) {
             var mapLayers = [];

@@ -45,6 +45,8 @@ window.L = require('leaflet');
 window.rando3D = require('rando3d');
 require('classlist-polyfill');
 
+require('jquery.scrollto');
+
 // LOAD EXTERNAL DEPENDENCIES
 require('ui.bootstrap');
 require('ui.router');
@@ -60,6 +62,7 @@ require('leaflet-minimap');
 require('leaflet.markercluster');
 require('leaflet.fullscreen');
 require('leaflet-geometryutil');
+require('leaflet-active-area');
 
 //TEST LIBRARIES
 require('angular-mocks'); // that one will exclude if not angular.mock

@@ -1,4 +1,4 @@
-#map {
+.general-map .leaflet-container {
     height: 100%;
     width: 100%;
 }
@@ -87,27 +87,101 @@
     }
 }
 
-div:not(.detail-map) > #map {
-    .leaflet-control .services {
-        display: none;
+.leaflet-control .services {
+    display: none;
+    .detail-map & {
+        display: block;
     }
+}
+
+.general-map .leaflet-top {
+    top: 68px;
 }
 
 // Rules are separated because they don't work if declared with comas...
 //
-.detail-map .leaflet-container:-webkit-full-screen .leaflet-right {
+.detail-map.leaflet-container:-webkit-full-screen .leaflet-right {
     right: 25%;
 }
-.detail-map .leaflet-container:-moz-full-screen .leaflet-right {
+.detail-map.leaflet-container:-moz-full-screen .leaflet-right {
     right: 25%;
 }
-.detail-map .leaflet-container:full-screen .leaflet-right {
+.detail-map.leaflet-container:full-screen .leaflet-right {
     right: 25%;
 }
-.detail-map .leaflet-pseudo-fullscreen .leaflet-right {
+.detail-map.leaflet-pseudo-fullscreen .leaflet-right {
     right: 25%;
 }
 
+
+.leaflet-control-layers {
+}
+
+.leaflet-control-layers-toggle {
+    position: relative;
+
+    width: 30px;
+    height: 30px;
+
+    border: 1px solid #fff;
+    background-image: url(#{$root-images-path}/switcher-satellite.jpg);
+    background-size: cover;
+
+    &,
+    &:before,
+    &:after {
+        border-radius: 1px;
+    }
+    &:before,
+    &:after {
+        position: absolute;
+        z-index: -1;
+        top: 3px;
+        left: 3px;
+
+        display: block;
+
+        width: 30px;
+        height: 30px;
+
+        content: '';
+
+        border: 1px solid rgba(#fff, .2);
+        background-color: rgba(#000, .2);
+    }
+
+    &:after {
+        top: 6px;
+        left: 6px;
+    }
+}
+
+.leaflet-control-layers-expanded {
+    padding: 0;
+
+    border: none;
+    border-radius: 0;
+    background: transparent;
+}
+
+.leaflet-control-layers-separator {
+    border: none;
+}
+
+.leaflet-control-layers-base,
+.leaflet-control-layers-overlays {
+    background-color: rgba(#3a3a3a, .85);
+    color: #fff;
+    overflow: hidden;
+    // border: 2px solid #aaa;
+
+    label {
+        padding: 0 .8em;
+        margin: .3em 0;
+        // outline: 1px solid red;
+    }
+
+}
 
 @media (max-width: 767px) {
     .leaflet-control-minimap, .leaflet-control-zoom {
