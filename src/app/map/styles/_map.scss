@@ -114,6 +114,75 @@
 }
 
 
+.leaflet-control-layers {
+}
+
+.leaflet-control-layers-toggle {
+    position: relative;
+
+    width: 30px;
+    height: 30px;
+
+    border: 1px solid #fff;
+    background-image: url(#{$root-images-path}/switcher-satellite.jpg);
+    background-size: cover;
+
+    &,
+    &:before,
+    &:after {
+        border-radius: 1px;
+    }
+    &:before,
+    &:after {
+        position: absolute;
+        z-index: -1;
+        top: 3px;
+        left: 3px;
+
+        display: block;
+
+        width: 30px;
+        height: 30px;
+
+        content: '';
+
+        border: 1px solid rgba(#fff, .2);
+        background-color: rgba(#000, .2);
+    }
+
+    &:after {
+        top: 6px;
+        left: 6px;
+    }
+}
+
+.leaflet-control-layers-expanded {
+    padding: 0;
+
+    border: none;
+    border-radius: 0;
+    background: transparent;
+}
+
+.leaflet-control-layers-separator {
+    border: none;
+}
+
+.leaflet-control-layers-base,
+.leaflet-control-layers-overlays {
+    background-color: rgba(#3a3a3a, .85);
+    color: #fff;
+    overflow: hidden;
+    // border: 2px solid #aaa;
+
+    label {
+        padding: 0 .8em;
+        margin: .3em 0;
+        // outline: 1px solid red;
+    }
+
+}
+
 @media (max-width: 767px) {
     .leaflet-control-minimap, .leaflet-control-zoom {
         display: none;
