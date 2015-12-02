@@ -5,18 +5,10 @@
             <span class="toolbar-action-label">{{'BACK' | translate}}</span>
         </a>
     </li>
-
-    <social-menu class="toolbar-action"></social-menu>
-
-    <li class="toolbar-action favorites">
-        <a class="toolbar-action-link active" href title="{{'REMOVE_FAVS' | translate}}" class="isFav" ng-if="isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="bottom" tooltip="{{'REMOVE_FAVS' | translate}}">
-            <ng-include class="favorite-icon svg-icon" src="'/images/icons/favorite.svg'"></ng-include>
-            <span class="toolbar-action-label">{{'REMOVE_FAVS' | translate}}</span>
-        </a>
-
-        <a class="toolbar-action-link" href title="{{'ADD_FAVS' | translate}}" ng-if="!isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="bottom" tooltip="{{'ADD_FAVS' | translate}}">
-            <ng-include class="favorite-icon svg-icon" src="'/images/icons/favorite.svg'"></ng-include>
-            <span class="toolbar-action-label">{{'ADD_FAVS' | translate}}</span>
+    <li class="toolbar-action rep-3d" ng-if="result.properties.contentType === 'trek'">
+        <a class="toolbar-action-link" href title="{{'3D' | translate}}" tooltip-placement="bottom" tooltip="{{'3D' | translate}}" ng-click="show3d()">
+            <ng-include class="3d-icon svg-icon" src="'/images/icons/3d.svg'"></ng-include>
+            <span class="toolbar-action-label">{{'3D' | translate}}</span>
         </a>
     </li>
     <li class="toolbar-action print" ng-if="result.properties.printable">
@@ -29,7 +21,6 @@
         <a class="toolbar-action-link" href tooltip-placement="bottom" tooltip="{{'DOWNLOAD' | translate}}" class="dropdown-toggle" data-toggle="dropdown" role="button">
             <ng-include class="download-icon svg-icon" src="'/images/icons/download.svg'"></ng-include>
         </a>
-
         <ul class="dropdown-menu" role="menu">
             <li class="toolbar-action kml" ng-if="result.properties.kml">
                 <a class="toolbar-action-link" href="{{::result.properties.kml}}" target="_self" title="{{'KML' | translate}}" tooltip-placement="bottom" tooltip="{{'KML' | translate}}">
@@ -44,18 +35,23 @@
                 </a>
             </li>
         </ul>
-
-    </li>
-    <li class="toolbar-action rep-3d" ng-if="result.properties.contentType === 'trek'">
-        <a class="toolbar-action-link" href title="{{'3D' | translate}}" tooltip-placement="bottom" tooltip="{{'3D' | translate}}" ng-click="show3d()">
-            <ng-include class="3d-icon svg-icon" src="'/images/icons/3d.svg'"></ng-include>
-            <span class="toolbar-action-label">{{'3D' | translate}}</span>
-        </a>
     </li>
     <li class="toolbar-action signal">
         <a class="toolbar-action-link" href title="{{'WARNING' | translate}}" tooltip-placement="bottom" tooltip="{{'WARNING' | translate}}" ng-click="showWarningPanel()">
             <ng-include class="warning-icon svg-icon" src="'/images/icons/warning.svg'"></ng-include>
             <span class="toolbar-action-label">{{'WARNING' | translate}}</span>
+        </a>
+    </li>
+    <social-menu class="toolbar-action"></social-menu>
+    <li class="toolbar-action favorites">
+        <a class="toolbar-action-link active" href title="{{'REMOVE_FAVS' | translate}}" class="isFav" ng-if="isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="bottom" tooltip="{{'REMOVE_FAVS' | translate}}">
+            <ng-include class="favorite-icon svg-icon" src="'/images/icons/favorite.svg'"></ng-include>
+            <span class="toolbar-action-label">{{'REMOVE_FAVS' | translate}}</span>
+        </a>
+
+        <a class="toolbar-action-link" href title="{{'ADD_FAVS' | translate}}" ng-if="!isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="bottom" tooltip="{{'ADD_FAVS' | translate}}">
+            <ng-include class="favorite-icon svg-icon" src="'/images/icons/favorite.svg'"></ng-include>
+            <span class="toolbar-action-label">{{'ADD_FAVS' | translate}}</span>
         </a>
     </li>
 </ul>
