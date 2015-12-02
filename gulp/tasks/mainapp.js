@@ -18,6 +18,7 @@ var browserSync   = require('browser-sync');
 var gulpif        = require('gulp-if');
 var exorcist      = require('exorcist');
 var jshint        = require('gulp-jshint');
+var path          = require('path');
 
 var partialify    = require('partialify');
 
@@ -65,9 +66,11 @@ function browserifyShare() {
         b = watchify(b);
         bundleLogger.watch(outputName);
         b.on('update', function (filename) {
-            gulp.src(filename)
-                .pipe(jshint())
-                .pipe(jshint.reporter('jshint-stylish'));
+            if (path.extname(filename) === '.js') {
+              gulp.src(filename)
+                  .pipe(jshint())
+                  .pipe(jshint.reporter('jshint-stylish'));
+            }
 
             bundleShare(b);
         });
