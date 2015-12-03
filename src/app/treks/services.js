@@ -109,6 +109,10 @@ function treksService(globalSettings, settingsFactory, translationService, $reso
             if (!trek.uid) {
                 trek.uid = trek.properties.category.id + '-' + trek.id;
             }
+            if (!trek.luid) {
+                var lang = translationService.getCurrentLang();
+                trek.luid = lang + '_' + trek.properties.category.id + '-' + trek.id;
+            }
             trek.properties.contentType = 'trek';
         });
         return treksData;

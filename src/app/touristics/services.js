@@ -57,6 +57,10 @@ function contentsService(globalSettings, settingsFactory, translationService, $r
             if (!content.uid) {
                 content.uid = content.properties.category.id + '-' + content.id;
             }
+            if (!content.luid) {
+                var lang = translationService.getCurrentLang();
+                content.luid = lang + '_' + content.properties.category.id + '-' + content.id;
+            }
             content.properties.contentType = 'content';
         });
         return contentsData;
@@ -154,6 +158,10 @@ function eventsService(globalSettings, settingsFactory, translationService, $res
             }
             if (!trEvent.uid) {
                 trEvent.uid = trEvent.properties.category.id + '-' + trEvent.id;
+            }
+            if (!trEvent.luid) {
+                var lang = translationService.getCurrentLang();
+                trEvent.luid = lang + '_' + trEvent.properties.category.id + '-' + trEvent.id;
             }
             trEvent.properties.contentType = 'event';
 
