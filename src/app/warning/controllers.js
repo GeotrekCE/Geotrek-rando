@@ -2,8 +2,16 @@
 
 function WarningPanelController($scope, $rootScope, WarningService, WarningMapService, utilsFactory) {
 
+    var onMap = false;
+
     $scope.initWarningPanel = function () {
-        $scope.showWarningPanel = true;
+        $rootScope.showWarningPanel = true;
+        if ($rootScope.mapIsShown) {
+            onMap = true;
+            $rootScope.mapIsShown = false;
+        } else {
+            onMap = false;
+        }
     };
 
     function updateLocation(newLocation) {
@@ -11,7 +19,10 @@ function WarningPanelController($scope, $rootScope, WarningService, WarningMapSe
     }
 
     $scope.close = function () {
-        $scope.showWarningPanel = false;
+        if (onMap) {
+            $rootScope.mapIsShown = true;
+        }
+        $rootScope.showWarningPanel = false;
         WarningMapService.removeMap();
         $scope.warning = null;
     };
@@ -28,7 +39,7 @@ function WarningPanelController($scope, $rootScope, WarningService, WarningMapSe
         }
     };
 
-    $scope.$on('showWarningPanel', function (event, args) {
+    $rootScope.$on('showWarningPanel', function (event, args) {
         $scope.result = args.result;
         WarningService.getWarningCategories()
             .then(function (categories) {

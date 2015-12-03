@@ -66,7 +66,7 @@ function WarningService(translationService, settingsFactory, $resource, $http, $
     };
 }
 
-function WarningMapService(globalSettings, utilsFactory, iconsService) {
+function WarningMapService(globalSettings, utilsFactory, iconsService, layersService) {
     var that = this;
 
 
@@ -153,10 +153,7 @@ function WarningMapService(globalSettings, utilsFactory, iconsService) {
 
     that.createMap = function (mapSelector, element) {
         that._baseLayers = {
-            main: L.tileLayer(
-                globalSettings.MAIN_LEAFLET_BACKGROUND.LAYER_URL,
-                globalSettings.MAIN_LEAFLET_BACKGROUND.OPTIONS
-            ),
+            main: layersService.getMainLayersGroup(),
             satellite: L.tileLayer(
                 globalSettings.SATELLITE_LEAFLET_BACKGROUND.LAYER_URL,
                 globalSettings.SATELLITE_LEAFLET_BACKGROUND.OPTIONS
