@@ -11,6 +11,16 @@ function translationMenuDirective() {
     };
 }
 
+function translationMenuDirectiveSimple() {
+    return {
+        restrict: 'E',
+        replace: true,
+        template: require('./templates/translation-menu-simple.html'),
+        controller: 'TranslationController'
+    };
+}
+
 module.exports = {
-    translationMenuDirective: translationMenuDirective
+    translationMenuDirective: translationMenuDirective,
+    translationMenuDirectiveSimple: translationMenuDirectiveSimple
 };

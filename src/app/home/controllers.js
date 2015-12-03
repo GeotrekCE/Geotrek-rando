@@ -50,6 +50,12 @@ function HomeController($scope, $rootScope, translationService, $location, homeS
         })
     ];
 
+    rootScopeEvents.push(
+        $rootScope.$on('startSwitchGlobalLang', function () {
+            $scope.initHome();
+        })
+    );
+
     $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
 
 }
