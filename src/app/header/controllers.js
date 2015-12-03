@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 function headerController($scope, $rootScope, globalSettings) {
     if (globalSettings.HEADER_TEMPLATE_FILE) {
@@ -15,7 +15,8 @@ function headerController($scope, $rootScope, globalSettings) {
 
     $scope.switchMap = function () {
         $rootScope.mapIsShown = !$rootScope.mapIsShown;
-    }
+        $rootScope.showWarningPanel = false;
+    };
 
     $scope.logo = globalSettings.LOGO_FILE;
 }

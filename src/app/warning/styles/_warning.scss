@@ -4,7 +4,7 @@
     left: -100vw;
     top: 0;
     background: $light-grey;
-    width: 35%;
+    width: 40%;
     height: 100%;
     overflow-y: auto;
     transition: left 0.3s ease-in-ease-out;
@@ -34,6 +34,20 @@
         .icon {
             font-size: 2rem;
             text-align: center;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .details-pane .detailsview-pane {
+        &.warning-panel {
+            transition: width .3s ease, left .3s ease;
+            width: 100%;
+            height: 100%;
+
+            h4 {
+                padding: 0 1rem;
+            }
         }
     }
 }
