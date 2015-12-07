@@ -12,6 +12,10 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         $scope.rulesId = null;
     }
 
+    $scope.getUrlImg = function(path) {
+        return globalSettings.API_URL + path;
+    }
+
     $scope.currentInterest = 'none';
 
     $scope.toggleInterest = function (interest) {

@@ -115,12 +115,18 @@ msgstr "Transports"
 
 msgid "ACCESS"
 msgstr "Access"
+ 
+msgid "PARKING"
+msgstr "Parking:"
 
 msgid "INFORMATION_DESKS"
 msgstr "Information desks"
 
 msgid "CONTACT"
 msgstr "Contact"
+
+msgid "SOURCE"
+msgstr "Source"
 
 msgid "KNOW_MORE"
 msgstr "Know more"

@@ -12,13 +12,13 @@
 
     <detail-content-pictures></detail-content-pictures>
 
-    <div class="detail-content-ambiance" ng-if="result.properties.ambiance"           ng-bind-html="sanitizeData(result.properties.ambiance, true)"></div>
-
     <div class="detail-content-teaser"  ng-if="result.properties.description_teaser" ng-bind-html="sanitizeData(result.properties.description_teaser, true)"></div>
 
-    <div class="detail-content-description" ng-if="result.properties.description"    ng-bind-html="sanitizeData(result.properties.description, true)"></div>
+    <div class="detail-content-ambiance" ng-if="result.properties.ambiance"           ng-bind-html="sanitizeData(result.properties.ambiance, true)"></div>
 
     <detail-content-from-to></detail-content-from-to>
+
+    <div class="detail-content-description" ng-if="result.properties.description"    ng-bind-html="sanitizeData(result.properties.description, true)"></div>
 
     <detail-content-events-info></detail-content-events-info>
 
@@ -54,6 +54,11 @@
         <div class="detail-content-access access" ng-if="result.properties.access">
             <h3>{{ 'ACCESS' | translate}}</h3>
             <div class="text" ng-bind-html="sanitizeData(result.properties.access, true)"></div>
+
+            <div class="" ng-if="result.properties.advised_parking">
+                <strong>{{ 'PARKING' | translate}}</strong>
+                <span class="text" ng-bind-html="sanitizeData(result.properties.advised_parking, true)"></span>
+            </div>
         </div>
     </div>
 
@@ -66,6 +71,22 @@
                 <div class="contact" ng-if="result.properties.contact" ng-bind-html="sanitizeData(result.properties.contact, true)"></div>
             </li>
         </ul>
+    </div>
+
+    <div class="detail-content-source">
+        <div class="detail-content-transport transport" ng-if="result.properties.source[0]">
+            <h3>{{ 'SOURCE' | translate}}</h3>
+            <ul>
+                <li ng-repeat="source in result.properties.source" ng-class="{'noimg': !source.pictogram}">
+                    <img ng-if="source.pictogram" ng-src="{{getUrlImg(source.pictogram)}}" alt="{{::source.name}}" />
+                    <strong>{{::source.name}}</strong>
+                    <br>
+                    <a href="{{::source.website}}" target="_blank" ng-if="source.website != ''">
+                        {{::source.website}}
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <div class="detail-content-further going-further" ng-if="result.properties.web_links[0]">

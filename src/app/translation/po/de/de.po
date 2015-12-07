@@ -119,11 +119,17 @@ msgstr "Transport"
 msgid "ACCESS"
 msgstr "Zufahrt"
 
+msgid "PARKING"
+msgstr "Parking:"
+
 msgid "INFORMATION_DESKS"
 msgstr "Informationspunkte"
 
 msgid "CONTACT"
 msgstr "Kontakt"
+
+msgid "SOURCE"
+msgstr "Source"
 
 msgid "KNOW_MORE"
 msgstr "weitere Informationen"
