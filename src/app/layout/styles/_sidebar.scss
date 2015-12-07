@@ -46,6 +46,10 @@
     border-left: 1px solid rgba(#aaa, .5);
     @media (max-width: 767px) {
         line-height: 25px;
+
+        &.rep-3d {
+            display: none;
+        }
     }
     &:first-child {
         border-left: none;
