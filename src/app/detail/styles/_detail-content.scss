@@ -461,6 +461,24 @@
 
         list-style: none;
     }
+
+    li {
+        display: block;
+        overflow: hidden;
+        margin-bottom: .75em;
+        
+        &.noimg {
+            padding-left: 74px;
+        }
+    }
+
+    img {
+        width: 64px;
+        height: auto;
+        display: block;
+        float: left;
+        margin-right: 10px;
+    }
 }
 
 .detail-content-further {

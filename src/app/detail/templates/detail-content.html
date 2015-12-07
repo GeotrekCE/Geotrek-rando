@@ -77,11 +77,13 @@
         <div class="detail-content-transport transport" ng-if="result.properties.source[0]">
             <h3>{{ 'SOURCE' | translate}}</h3>
             <ul>
-                <li ng-repeat="source in result.properties.source">
-                    <a href="source.website" ng-if="source.website != ''">
-                        <span ng-bind="source.name"></span>
+                <li ng-repeat="source in result.properties.source" ng-class="{'noimg': !source.pictogram}">
+                    <img ng-if="source.pictogram" ng-src="{{getUrlImg(source.pictogram)}}" alt="{{::source.name}}" />
+                    <strong>{{::source.name}}</strong>
+                    <br>
+                    <a href="{{::source.website}}" target="_blank" ng-if="source.website != ''">
+                        {{::source.website}}
                     </a>
-                    <span ng-if="source.website == ''" ng-bind="source.name"></span>
                 </li>
             </ul>
         </div>
