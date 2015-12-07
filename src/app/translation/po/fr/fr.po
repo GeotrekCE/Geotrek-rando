@@ -115,9 +115,12 @@ msgstr "Transports"
 msgid "ACCESS"
 msgstr "Accès routiers"
 
+msgid "PARKING"
+msgstr "Stationnement :"
+
 msgid "INFORMATION_DESKS"
 msgstr "Points d'information"
-
+ 
 msgid "CONTACT"
 msgstr "Contact"
 

@@ -12,7 +12,7 @@ function TranslationController($scope, $rootScope, $translate, translationServic
         $scope.activeLang = lang;
         translationService.setCurrentLang(lang);
         translationService.setFavoriteLang();
-        $translate.use(lang.code);
+        $translate.use(lang);
         $rootScope.$emit('startSwitchGlobalLang');
     };
 
