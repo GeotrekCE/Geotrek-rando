@@ -118,6 +118,12 @@
 
         vertical-align: middle;
         text-transform: uppercase;
+        padding-top: .2em;
     }
 }
 
+@media (max-width: 767px) {
+    .back-to-home .toolbar-action-label {
+        display: none;
+    }
+}
