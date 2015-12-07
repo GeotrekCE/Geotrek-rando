@@ -115,6 +115,9 @@ msgstr "Transports"
 
 msgid "ACCESS"
 msgstr "Access"
+ 
+msgid "PARKING"
+msgstr "Parking:"
 
 msgid "INFORMATION_DESKS"
 msgstr "Information desks"

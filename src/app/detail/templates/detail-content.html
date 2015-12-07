@@ -54,6 +54,12 @@
         <div class="detail-content-access access" ng-if="result.properties.access">
             <h3>{{ 'ACCESS' | translate}}</h3>
             <div class="text" ng-bind-html="sanitizeData(result.properties.access, true)"></div>
+
+            <div class="" ng-if="result.properties.advised_parking">
+                <strong>{{ 'PARKING' | translate}}</strong>
+                <span class="text" ng-bind-html="sanitizeData(result.properties.advised_parking, true)"></span>
+            </div>
+
         </div>
     </div>
 
