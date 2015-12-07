@@ -59,7 +59,6 @@
                 <strong>{{ 'PARKING' | translate}}</strong>
                 <span class="text" ng-bind-html="sanitizeData(result.properties.advised_parking, true)"></span>
             </div>
-
         </div>
     </div>
 
@@ -72,6 +71,20 @@
                 <div class="contact" ng-if="result.properties.contact" ng-bind-html="sanitizeData(result.properties.contact, true)"></div>
             </li>
         </ul>
+    </div>
+
+    <div class="detail-content-source">
+        <div class="detail-content-transport transport" ng-if="result.properties.source[0]">
+            <h3>{{ 'SOURCE' | translate}}</h3>
+            <ul>
+                <li ng-repeat="source in result.properties.source">
+                    <a href="source.website" ng-if="source.website != ''">
+                        <span ng-bind="source.name"></span>
+                    </a>
+                    <span ng-if="source.website == ''" ng-bind="source.name"></span>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <div class="detail-content-further going-further" ng-if="result.properties.web_links[0]">

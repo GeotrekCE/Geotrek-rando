@@ -112,11 +112,17 @@ msgstr "Transport"
 msgid "ACCESS"
 msgstr "Toegang tot de routes"
 
+msgid "PARKING"
+msgstr "Parking:"
+
 msgid "INFORMATION_DESKS"
 msgstr "Informatiepunten"
 
 msgid "CONTACT"
 msgstr "Contact"
+
+msgid "SOURCE"
+msgstr "Source"
 
 msgid "KNOW_MORE"
 msgstr "Meer informatie"

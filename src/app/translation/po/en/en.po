@@ -125,6 +125,9 @@ msgstr "Information desks"
 msgid "CONTACT"
 msgstr "Contact"
 
+msgid "SOURCE"
+msgstr "Source"
+
 msgid "KNOW_MORE"
 msgstr "Know more"
 
