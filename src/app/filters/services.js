@@ -340,7 +340,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
                         }
 
                     } else {
-                        if (currentFilter.id.toString() === id.toString()) {
+                        if (currentFilter.id.toString() === id.toString() && currentFilter[subtype]) {
                             angular.forEach(currentFilter[subtype].values, function (currentSubFilter) {
                                 if (currentSubFilter.id.toString() === subId.toString()) {
                                     filter = currentSubFilter;
