@@ -170,6 +170,9 @@ msgstr "Entfernung (m)"
 msgid "DATES"
 msgstr "Datum:"
 
+msgid "DATE"
+msgstr "Datum:"
+
 msgid "WEBSITE"
 msgstr "Internetseite:"
 

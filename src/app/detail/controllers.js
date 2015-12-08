@@ -1,6 +1,6 @@
 'use strict';
 
-function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $stateParams, globalSettings, utilsFactory, resultsService, poisService, mapService) {
+function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $stateParams, globalSettings, utilsFactory, resultsService, poisService, mapService, translationService) {
 
     var mainImage;
     $scope.sanitizeData = utilsFactory.sanitizeData;
@@ -14,7 +14,11 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
 
     $scope.getUrlImg = function(path) {
         return globalSettings.API_URL + path;
-    }
+    };
+
+    $scope.formatTime = function(date) {
+        return utilsFactory.formatTime(date, translationService.getCurrentLang());
+    };
 
     $scope.currentInterest = 'none';
 
