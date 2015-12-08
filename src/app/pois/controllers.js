@@ -2,6 +2,8 @@
 
 function PoisListeController($scope, $rootScope, globalSettings, utilsFactory, $modal) {
 
+    $scope.poiExpanded = globalSettings.POI_EXPANDED;
+
     $scope.hoverMarkerPoi = function (currentPoi, state) {
 
         currentPoi.mouseover = state === 'enter';
