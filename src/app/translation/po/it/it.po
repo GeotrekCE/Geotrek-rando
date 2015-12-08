@@ -1,0 +1,379 @@
+msgid ""
+msgstr ""
+"Project: Geotrek-rando\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
+"X-Generator: Poedit 1.7.4\n"
+
+# META
+#
+#
+
+msgid "DEFAULT_META_TITLE"
+msgstr "Geotrek Rando"
+
+msgid "DEFAULT_META_DESCRIPTION"
+msgstr "Geotrek est une web app permettant de préparer à l'avance ses randonnées !"
+
+
+
+# CATEGORIES
+#
+#
+
+msgid "CATEGORIES"
+msgstr ""
+
+msgid "ROUTES"
+msgstr "Percorso"
+
+msgid "DIFFICULTIES"
+msgstr "Difficoltà :"
+
+msgid "DURATION"
+msgstr "Durata :"
+
+msgid "ASCENT"
+msgstr "Dislivello :"
+
+msgid "LENGTH"
+msgstr "Lunghezza :"
+
+msgid "DATE_FILTER_START"
+msgstr "Date de début"
+
+msgid "DATE_FILTER_END"
+msgstr "Date de fin"
+
+msgid "ALL"
+msgstr "Tutto"
+
+
+# RESULTS
+#
+#
+
+msgid "RESULT"
+msgstr "Risultato"
+
+msgid "RESULTS"
+msgstr "Risultati"
+
+msgid "NO_RESULTS"
+msgstr "Nessun risultato"
+
+
+# FAVORITES
+#
+#
+
+msgid "FAVORITES"
+msgstr "Preferiti"
+
+msgid "NO_FAVORITES"
+msgstr "No preferiti"
+
+
+# DETAILS
+#
+#
+
+msgid "CATEGORY"
+msgstr ""
+
+msgid "INFORMATIONS"
+msgstr "Informazioni"
+
+msgid "START"
+msgstr "Partenza condivisa :"
+
+msgid "ARRIVAL"
+msgstr ""
+
+msgid "LOOP"
+msgstr ""
+
+msgid "TOWN_START"
+msgstr ""
+
+msgid "TOWN_CROSSED"
+msgstr ""
+
+msgid "PARK_CENTERED"
+msgstr ""
+
+msgid "TRANSPORTS"
+msgstr ""
+
+msgid "ACCESS"
+msgstr "Accesso"
+
+msgid "PARKING"
+msgstr "Stationnement :"
+
+msgid "INFORMATION_DESKS"
+msgstr "Ufficio Informazioni"
+
+msgid "CONTACT"
+msgstr ""
+
+msgid "SOURCE"
+msgstr ""
+
+msgid "KNOW_MORE"
+msgstr ""
+
+msgid "RELATED_TREKS"
+msgstr "Itinerari collegati"
+
+msgid "HAS_COMMON_DEPARTURE"
+msgstr ""
+
+msgid "HAS_COMMON_EDGE"
+msgstr ""
+
+msgid "IS_CIRCUIT_STEP"
+msgstr ""
+
+msgid "POI"
+msgstr "Patrimonio"
+
+msgid "NEAR"
+msgstr ""
+
+msgid "CHILDREN"
+msgstr ""
+
+msgid "PARENT"
+msgstr ""
+
+msgid "PROFILE_ALTI"
+msgstr "Profilo altimetrico"
+
+msgid "ELEVATIION_IN_M"
+msgstr "Quota (m)"
+
+msgid "MIN"
+msgstr ""
+
+msgid "MAX"
+msgstr ""
+
+msgid "LENGTH_IN_M"
+msgstr "Distance (m)"
+
+msgid "DATES"
+msgstr "Dates :"
+
+msgid "DATE"
+msgstr "Date :"
+
+msgid "WEBSITE"
+msgstr "Sito web"
+
+msgid "EMAIL"
+msgstr ""
+
+msgid "MEETING_POINT"
+msgstr ""
+
+msgid "MEETING_TIME"
+msgstr ""
+
+msgid "SPEAKERS"
+msgstr ""
+
+msgid "BOOKING"
+msgstr ""
+
+msgid "ORGANIZERS"
+msgstr ""
+
+msgid "PARTICIPANTS_NUMBER"
+msgstr ""
+
+msgid "PRATICAL_INFOS"
+msgstr ""
+
+msgid "SUCCESS_WARNING"
+msgstr ""
+
+msgid "ERROR_WARNING"
+msgstr ""
+
+
+# FILTERS
+#
+#
+
+msgid "THEMES"
+msgstr ""
+
+msgid "DISTRICTS"
+msgstr ""
+
+msgid "ALL_DISTRICTS"
+msgstr ""
+
+msgid "SEARCH"
+msgstr "Cerca"
+
+msgid "CITIES"
+msgstr "Comuni"
+
+msgid "ALL_CITIES"
+msgstr ""
+
+msgid "STRUCTURES"
+msgstr ""
+
+msgid "ALL_STRUCTURES"
+msgstr ""
+
+msgid "RESET"
+msgstr ""
+
+msgid "SELECTED"
+msgstr ""
+
+
+# SOCIAL
+#
+#
+
+msgid "SHARING_DEFAULT_TEXT"
+msgstr "Geotrek est vraiment parfait pour préparer son voyage dans la nature !"
+
+
+# LAYOUT
+#
+#
+
+msgid "TOGGLE_NAV"
+msgstr ""
+
+msgid "BANNER_TEXT"
+msgstr "Geotrek Rando"
+
+msgid "HOME"
+msgstr ""
+
+msgid "SEARCH_LIST"
+msgstr ""
+
+msgid "ABOUT_US"
+msgstr ""
+
+msgid "BACK"
+msgstr ""
+
+msgid "PRINT"
+msgstr "Stampa"
+
+msgid "ADD_FAVS"
+msgstr "Aggiungi ai preferiti"
+
+msgid "REMOVE_FAVS"
+msgstr "Elimina dai preferiti"
+
+msgid "SHARE"
+msgstr "Spartire"
+
+msgid "WARNING"
+msgstr ""
+
+msgid "FORM_NAME"
+msgstr ""
+
+msgid "FORM_EMAIL"
+msgstr ""
+
+msgid "FORM_CATEGORY"
+msgstr ""
+
+msgid "FORM_COMMENT"
+msgstr ""
+
+msgid "FORM_MAP"
+msgstr ""
+
+msgid "FORM_SEND"
+msgstr ""
+
+msgid "KML"
+msgstr "Scarica KML"
+
+msgid "GPX"
+msgstr "Scarica GPX"
+
+msgid "3D"
+msgstr "
+
+
+# MAP
+#
+#
+
+msgid "ZOOM_IN"
+msgstr ""
+
+msgid "ZOOM_OUT"
+msgstr ""
+
+msgid "FULL_SCREEN"
+msgstr ""
+
+msgid "RECENTER_VIEW"
+msgstr ""
+
+msgid "TILES_SWITCH"
+msgstr ""
+
+msgid "SERVICES_TOGGLE"
+msgstr ""
+
+msgid "VIEWPORT_FILTERING"
+msgstr ""
+
+
+# HOME PAGE
+#
+#
+
+msgid "ACCESS_SITE"
+msgstr ""
+
+msgid "DONT_SHOW_HOME"
+msgstr ""
+
+msgid "SUGGESTED"
+msgstr ""
+
+
+# HEADER
+#
+#
+
+msgid "LOGO_ALT"
+msgstr "Logo Geotrek"
+
+
+# FOOTER
+#
+#
+
+msgid "LEGALS"
+msgstr ""
+
+msgid "CREDITS"
+msgstr ""
+
+msgid "CONTACT"
+msgstr ""
