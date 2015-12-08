@@ -82,9 +82,12 @@ GOOGLE_ANALYTICS_ID | String | `""` | ID of your Google Analytics account.
 
 Option     | Type      | Default   | Description
 --------|----------|-----------|------------
-MAIN_LEAFLET_BACKGROUND | [Layer Object](#layers-objects-options) | cf [Layers Objects default](#layers-objects-options) | Define the main leaflet tiles used by the website.
+PERMANENT_TILELAYERS | Array of [Layers Objects Options](#layers-objects-options) | cf [Layers Objects default](#layers-objects-options) | Define the main leaflet tile layers used by the website.
+PERMANENT_TILELAYERS_NAME | String | "Carte" | String used in layer selector for `PERMANENT_TILELAYERS` layer group.
 SATELLITE_LEAFLET_BACKGROUND | [Layer Object](#layers-objects-options) | cf [Layers Objects default](#layers-objects-options) | Define the satellite leaflet tiles used by the website.
-OPTIONAL_LEAFLET_BACKGROUNDS | Array of [Layer Objects](#layers-objects-options) | `[]` | This array allows you to define other Leaflet tiles layers that will add to the `MAIN_LEAFLET_BACKGROUND`.
+ORTHOPHOTO_TILELAYERS_NAME | String | "Ortho" | String used in layer selector for `SATELLITE_LEAFLET_BACKGROUND` layer.
+OPTIONAL_TILELAYERS | Array of [Layers Objects Options](#layers-objects-options) | Empty Array | This array allows you to define other Leaflet tiles layers that will be available in layer selector.
+OPTIONAL_TILELAYERS_NAME | String | "Optional" | Default name prefix for `OPTIONAL_TILELAYERS` layers in layer selector.
 LEAFLET_CONF | [Leaflet Conf Object](#layers-conf-options) | cf [Leaflet Conf Object default](#layers-conf-options) |  Basic conf of the map.
 TREKS_TO_GEOJSON_ZOOM_LEVEL | Int | `14` | Zoom level at which the map switch between markers and linear mode for treks.
 UPDATE_MAP_ON_FILTER | Boolean | `false` | If true, update map viewport each time a filter is changed.
