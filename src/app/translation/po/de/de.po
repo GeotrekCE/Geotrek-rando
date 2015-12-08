@@ -367,4 +367,3 @@ msgstr "Konzeption und Quellennachweis/Bildnachweis"
 
 msgid "CONTACT"
 msgstr "Kontakt"
-

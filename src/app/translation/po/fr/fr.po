@@ -172,6 +172,9 @@ msgstr "Distance (m)"
 msgid "DATES"
 msgstr "Dates :"
 
+msgid "DATE"
+msgstr "Date :"
+
 msgid "WEBSITE"
 msgstr "Site internet :"
 
