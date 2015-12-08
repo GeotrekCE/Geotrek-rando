@@ -213,7 +213,7 @@
                         </span>
                     </span>
                     <div class="choices" collapse="!type1IsCollapsed">
-                        <div ng-repeat="type1 in category.type1.values" class="type1 form-group">
+                        <div ng-repeat="type1 in category.type1.values | orderBy: 'name'" class="type1 form-group">
                             <input type="checkbox" id="type1-{{::type1.id}}" ng-click="toogleCategoryFilter(category.id, 'type1', type1.id)" ng-checked="activeFilters[category.id + '_type1'].indexOf(type1.id.toString()) > -1"/>
                             <label for="type1-{{::type1.id}}">
                                 <div class="checkbox">
