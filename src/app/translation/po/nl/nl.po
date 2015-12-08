@@ -161,6 +161,9 @@ msgid "LENGTH_IN_M"
 msgstr "Afstand (m)"
 
 msgid "DATES"
+msgstr "Datas"
+
+msgid "DATE"
 msgstr "Data"
 
 msgid "WEBSITE"
@@ -365,4 +368,3 @@ msgstr "Ontwerp en credits"
 
 msgid "CONTACT"
 msgstr "Contact"
-

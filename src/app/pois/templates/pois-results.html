@@ -3,20 +3,20 @@
         class="poi-item poi {{::poi.properties.type.label}} card"
         ng-repeat="poi in pois track by poi.id"
         id="poi-{{::poi.id}}"
-        ng-class="{ expanded: poi.expanded }"
+        ng-class="{ expanded: poiExpanded }"
         ng-mouseover="hoverMarkerPoi(poi,'enter')"
         ng-mouseleave="hoverMarkerPoi(poi,'leave')">
 
         <div
             class="poi-overlay"
-            ng-click="poi.expanded = true"
+            ng-click="poiExpanded = true"
             ng-class="{ visible: poi.mouseover }">
             <div class="plus"></div>
         </div>
 
         <div
             class="poi-fold"
-            ng-click="poi.expanded = false">
+            ng-click="poiExpanded = false">
             <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
         </div>
 

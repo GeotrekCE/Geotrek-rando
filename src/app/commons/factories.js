@@ -266,6 +266,18 @@ function utilsFactory($sce) {
         return false;
     };
 
+    var formatTime = function(strDate, lang){
+        var date = strDate.split(':');
+        switch (lang) {
+            case 'fr':
+                return date[0] + ' h ' + date[1];
+            case 'en':
+                return date[0] + ' : ' + date[1];
+            default:
+                return date[0] + ' h ' + date[1];
+        }
+    };
+
     return {
         removeDiacritics: removeDiacritics,
         sanitizeData: sanitizeData,
@@ -280,7 +292,8 @@ function utilsFactory($sce) {
         getStartPoint: getStartPoint,
         getEndPoint: getEndPoint,
         getParkingPoint: getParkingPoint,
-        isSVG: isSVG
+        isSVG: isSVG,
+        formatTime: formatTime
     };
 
 }

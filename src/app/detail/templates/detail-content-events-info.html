@@ -1,8 +1,9 @@
 <div class="detail-content-events-info">
     <div ng-if="result.properties.begin_date" class="date">
-        <h5>{{'DATES' | translate}}</h5>
+        <h5 ng-if="!result.properties.end_date || result.properties.end_date == result.properties.begin_date">{{'DATE' | translate}}</h5>
+        <h5 ng-if="result.properties.end_date && result.properties.end_date != result.properties.begin_date">{{'DATES' | translate}}</h5>
         <span ng-if="result.properties.begin_date" class="begin-date">{{::result.properties.begin_date | date:'dd/MM/yyyy'}}</span>
-        <span ng-if="result.properties.ending-date && result.properties.ending-date !== result.properties.begin_date" class="ending-date"> -> {{::result.properties.begin_date | date:'dd/MM/yyyy'}}</span>
+        <span ng-if="result.properties.end_date && result.properties.end_date != result.properties.begin_date" class="ending-date"> -> {{::result.properties.end_date | date:'dd/MM/yyyy'}}</span>
     </div>
     <div ng-if="result.properties.website" class="website">
         <h5>{{'WEBSITE' | translate}}</h5>
@@ -22,7 +23,7 @@
     </div>
     <div ng-if="result.properties.meeting_time" class="meeting-time">
         <h5>{{'MEETING_TIME' | translate}}</h5>
-        <span>{{::result.properties.meeting_time | date:'h:mm'}}</span>
+        <span>{{formatTime(result.properties.meeting_time)}}</span>
     </div>
     <div ng-if="result.properties.organizer" class="organizer">
         <h5>{{'ORGANIZERS' | translate}}</h5>

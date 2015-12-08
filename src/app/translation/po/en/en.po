@@ -115,7 +115,7 @@ msgstr "Transports"
 
 msgid "ACCESS"
 msgstr "Access"
- 
+
 msgid "PARKING"
 msgstr "Parking:"
 
@@ -172,6 +172,9 @@ msgstr "Length (m)"
 
 msgid "DATES"
 msgstr "Dates:"
+
+msgid "DATE"
+msgstr "Date:"
 
 msgid "WEBSITE"
 msgstr "Website:"
