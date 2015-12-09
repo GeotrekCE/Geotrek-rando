@@ -18,8 +18,8 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
         if (element) {
             $scope.fbShareLink += '' +
                 '&name=' + encodeURIComponent(element.properties.name) +
-                '&caption=' + encodeURIComponent(utilsFactory.decodeEntities(element.properties.description_teaser)) +
-                '&description=' + encodeURIComponent(utilsFactory.decodeEntities(element.properties.ambiance));
+                '&caption=' + encodeURIComponent(utilsFactory.decodeEntities(element.properties.ambiance)) +
+                '&description=' + encodeURIComponent(utilsFactory.decodeEntities(element.properties.description_teaser));
 
             if (element.properties.pictures[0]) {
                 $scope.fbShareLink += '&picture=' + encodeURIComponent(element.properties.pictures[0].url);
