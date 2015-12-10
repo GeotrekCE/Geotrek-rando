@@ -157,7 +157,8 @@
 }
 
 .element-cluster,
-.touristic-cluster {
+.near-cluster,
+.children-cluster {
     .marker {
         font-family: 'frutiger';
         font-size: 16px;
@@ -308,8 +309,9 @@
 }
 
 .detail-map.hide-near-elements .near-marker,
-.detail-map.hide-near-elements .touristic-cluster,
+.detail-map.hide-near-elements .near-cluster,
 .detail-map.hide-children .children-marker,
+.detail-map.hide-children .children-cluster,
 .detail-map.hide-pois .poi-cluster,
 .detail-map.hide-pois .double-marker.poi {
     display: none;

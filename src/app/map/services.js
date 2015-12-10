@@ -198,25 +198,46 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
     };
 
     this.createElementsMarkers = function (elements, type) {
+        // console.log(type);
         var startPoint = [];
         elements.forEach(function (element) {
             startPoint = utilsFactory.getStartPoint(element);
-            self.createLayerFromElement(element, 'category', startPoint)
-                .then(
-                    function (marker) {
 
-                        marker.options.icon.options.className += ' ' + type + '-marker';
-                        var selector = '#' + type + '-category-' + element.properties.category.id + '-' + element.id;
+            if(type === 'near') {
+                self.createLayerFromElement(element, 'near', startPoint)
+                    .then(
+                        function (marker) {
 
-                        _.merge(marker.popupSources, {
-                            selector: '#result-category-' + element.properties.category.id + '-' + element.id
-                        });
+                            marker.options.icon.options.className += ' ' + type + '-marker';
+                            var selector = '#' + type + '-category-' + element.properties.category.id + '-' + element.id;
 
-                        popupService.attachPopups(marker);
+                            _.merge(marker.popupSources, {
+                                selector: '#result-category-' + element.properties.category.id + '-' + element.id
+                            });
 
-                        self._nearMarkersLayer.addLayer(marker);
-                    }
-                );
+                            popupService.attachPopups(marker);
+
+                            self._nearMarkersLayer.addLayer(marker);
+                        }
+                    );
+            }
+            if (type === 'children') {
+                self.createLayerFromElement(element, 'children', startPoint)
+                    .then(
+                        function (marker) {
+
+                            marker.options.icon.options.className += ' ' + type + '-marker';
+                            var selector = '#' + type + '-category-' + element.properties.category.id + '-' + element.id;
+
+                            _.merge(marker.popupSources, {
+                                selector: '#result-category-' + element.properties.category.id + '-' + element.id
+                            });
+
+                            popupService.attachPopups(marker);
+                            self._childMarkersLayer.addLayer(marker);
+                        }
+                    );
+            }
         });
     };
 
@@ -245,10 +266,23 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                 promise = iconsService.getElementIcon;
                 param = element;
                 break;
+
             case 'category':
                 promise = iconsService.getElementIcon;
                 param = element;
                 popupSources.hint = element.properties.name;
+                break;
+
+            case 'near':
+                promise = iconsService.getElementIcon;
+                param = element;
+                popupSources.hint = type;
+                break;
+
+            case 'children':
+                promise = iconsService.getElementIcon;
+                param = element;
+                popupSources.hint = type;
                 break;
 
             case 'poi':
@@ -642,13 +676,27 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     };
 
-    this.createTouristicLayer = function () {
+    this.createNearLayer = function () {
 
         var clusterLayer = new L.MarkerClusterGroup({
             showCoverageOnHover: false,
             disableClusteringAtZoom: globalSettings.LEAFLET_CONF.DEFAULT_MAX_ZOOM,
             iconCreateFunction: function (cluster) {
-                return iconsService.getTouristicClusterIcon(cluster);
+                return iconsService.getNearClusterIcon(cluster);
+            }
+        });
+
+        return clusterLayer;
+
+    };
+
+    this.createChildLayer = function () {
+
+        var clusterLayer = new L.MarkerClusterGroup({
+            showCoverageOnHover: false,
+            disableClusteringAtZoom: globalSettings.LEAFLET_CONF.DEFAULT_MAX_ZOOM,
+            iconCreateFunction: function (cluster) {
+                return iconsService.getChildClusterIcon(cluster);
             }
         });
 
@@ -1165,7 +1213,10 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         this.initMapControls();
 
         //Set-up Layers
+        this._nearMarkersLayer = self.createNearLayer();
+        this._childMarkersLayer = self.createChildLayer();
         this._clustersLayer = self.createClusterLayer();
+
 
         if (globalSettings.ENABLE_TREKS) {
             this._treksMarkersLayer = self.createLayer();
@@ -1177,13 +1228,13 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         }
 
         this._poisMarkersLayer = self.createPOIsLayer();
-        this._nearMarkersLayer = self.createTouristicLayer();
         this._infosMarkersLayer = self.createLayer();
         this._servicesMarkersLayer = self.createLayer();
 
         this.map.addLayer(this._clustersLayer);
         this.map.addLayer(this._poisMarkersLayer);
         this.map.addLayer(this._nearMarkersLayer);
+        this.map.addLayer(this._childMarkersLayer);
         this.map.addLayer(this._infosMarkersLayer);
         this.map.addLayer(this._servicesMarkersLayer);
 
@@ -1565,12 +1616,22 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
         });
     };
 
-    this.getTouristicClusterIcon = function (cluster) {
+    this.getNearClusterIcon = function (cluster) {
         return new L.DivIcon({
             iconSize: [40, 40],
             iconAnchor: [20, 20],
             popupAnchor: [0, -40],
-            className: 'touristic-cluster',
+            className: 'near-cluster',
+            html: '<div class="marker"><span class="count">' + cluster.getChildCount() + '</span></div>'
+        });
+    };
+
+    this.getChildClusterIcon = function (cluster) {
+        return new L.DivIcon({
+            iconSize: [40, 40],
+            iconAnchor: [20, 20],
+            popupAnchor: [0, -40],
+            className: 'children-cluster',
             html: '<div class="marker"><span class="count">' + cluster.getChildCount() + '</span></div>'
         });
     };
