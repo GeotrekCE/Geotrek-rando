@@ -62,7 +62,6 @@ ENABLE_TOURISTIC_EVENTS | Boolean | `true` | Enable touristic events service and
 DEFAULT_ACTIVE_CATEGORIES | Array of strings (categories id) | `["T"]` | List of default active categories.
 LIST_EXCLUDE_CATEGORIES | Array of strings (categories id) | |  `[]` | List of categories excluded from the filters on results page.
 ENABLE_UNIQUE_CAT | Boolean | `false` | If true, only one category can be activated at the same time in the result page filters.
-FILTERS_DEFAULT_OPEN | Boolean | `false` | Expand POIS list.
 DEFAULT_INTEREST | String | `"pois"` | Chose which interest to open by default on detail page. Possible values: `"pois"`, `"near"`, `"children"`, `"parents"`, ""
 
 
@@ -129,6 +128,7 @@ MAX | Int | `12` | Max zoom level for minimap
 
 Option     | Type      | Default   | Description
 --------|----------|-----------|------------
+POI_EXPANDED | Boolean | `false` | Expand POIS list.
 MARKER_BASE_ICON | [Leaflet Icon Object](http://leafletjs.com/reference.html#icon) | `""` | Base of the marker for elements. The category icon defined in the API is put above this one. You'll need to adapt custom css according to those changes.
 POI_BASE_ICON | [Leaflet Icon Object](http://leafletjs.com/reference.html#icon) | `""` | Base of the marker for POIs.
 DEPARTURE_ICON | [Leaflet Icon Object](http://leafletjs.com/reference.html#icon) | `""` | Marker used for departure of a trek on a detail page.
