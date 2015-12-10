@@ -343,7 +343,6 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
         this.setFullScreenControl();
         this.setMinimap();
         this.setScale();
-        // this.createSatelliteView();
         this.createServicesToggleControl();
         this.createResetViewButton();
         this.createLayerSwitch();
@@ -475,70 +474,6 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             className: 'leaflet-live-user',
             weight: 2
         };
-    };
-
-    this.createSatelliteView = function () {
-        L.Control.SwitchBackgroundLayers = L.Control.extend({
-            options: {
-                position: 'bottomleft',
-            },
-
-            onAdd: function (map) {
-
-                this.map = map;
-
-                this.switch_detail_zoom = jQuery(map._container).data('switch-detail-zoom');
-                if (this.switch_detail_zoom > 0) {
-                    map.on('zoomend', function (e) {
-                        if (map.isShowingLayer('satellite')) {
-                            return;
-                        }
-                        if (e.target.getZoom() > this.switch_detail_zoom) {
-                            if (!map.isShowingLayer('detail')) {
-                                setTimeout(function () { map.switchLayer('detail'); }, 100);
-                            }
-                        } else {
-                            if (!map.isShowingLayer('main')) {
-                                setTimeout(function () { map.switchLayer('main'); }, 100);
-                            }
-                        }
-                    }, this);
-                }
-
-                this._container = L.DomUtil.create('div', 'simple-layer-switcher');
-
-                var className = 'toggle-layer background satellite';
-
-                this.button = L.DomUtil.create('a', className, this._container);
-                this.button.title = 'Show satellite';
-
-                L.DomEvent.disableClickPropagation(this.button);
-                L.DomEvent.on(this.button, 'click', function () {
-                    this.toggleLayer();
-                }, this);
-
-                return this._container;
-            },
-
-            toggleLayer: function () {
-
-                if (this.map.isShowingLayer('main') || this.map.isShowingLayer('detail')) {
-                    this.map.switchLayer('satellite');
-
-                    L.DomUtil.removeClass(this.button, 'satellite');
-                    L.DomUtil.addClass(this.button, 'main');
-                } else {
-                    this.map.switchLayer(this.map.getZoom() > this.switch_detail_zoom ? 'detail' : 'main');
-
-                    L.DomUtil.removeClass(this.button, 'main');
-                    L.DomUtil.addClass(this.button, 'satellite');
-                }
-            }
-
-        });
-
-        var switchControl = new L.Control.SwitchBackgroundLayers();
-        switchControl.addTo(this.map);
     };
 
     this.createServicesToggleControl = function () {
