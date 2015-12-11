@@ -937,7 +937,8 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                     });
                     self.currentElevationPoint.setLatLng([currentPoint[0][2][1], currentPoint[0][2][0]]);
                     //value = region.y;
-                    jQuery('#mouseoverprofil').text(Math.round(region.x) + "m");
+                    var distance = (region.x < 10000) ? Math.round(region.x) + " m" : Math.round(region.x/100)/10 + " km";
+                    jQuery('#mouseoverprofil').text(distance);
                     // Trigger global event
                     jQuery('#elevation').trigger('hover:distance', region.x);
                 }).on('mouseover', function () {
