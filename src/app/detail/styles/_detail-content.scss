@@ -383,22 +383,6 @@
         background-position: center center;
         background-size: cover;
     }
-    &:after {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-
-        display: block;
-
-        width: 40px;
-        height: 40px;
-
-        content: '';
-        transform: translate(-50%, -50%);
-
-        border-radius: 50%;
-        background-color: #333;
-    }
 }
 
 .detail-content-desk-contact {
