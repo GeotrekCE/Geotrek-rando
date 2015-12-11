@@ -96,7 +96,9 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
 function SidebarHomeController() {
 }
 
-function SidebarDetailController($scope, $rootScope, $modal, $stateParams, $location, globalSettings, resultsService, favoritesService) {
+function SidebarDetailController($scope, $rootScope, $modal, $stateParams, $location, globalSettings, resultsService, favoritesService, webglService) {
+
+    $scope.webGLisEnable = webglService.isEnabled();
 
     function getResultDetails(refresh) {
         if ($stateParams.slug) {

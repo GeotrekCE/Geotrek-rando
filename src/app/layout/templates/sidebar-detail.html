@@ -5,7 +5,7 @@
             <span class="toolbar-action-label">{{'BACK' | translate}}</span>
         </a>
     </li>
-    <li class="toolbar-action rep-3d" ng-if="result.properties.contentType === 'trek'">
+    <li class="toolbar-action rep-3d" ng-if="result.properties.contentType === 'trek' && webGLisEnable">
         <a class="toolbar-action-link" href title="{{'3D' | translate}}" tooltip-placement="bottom" tooltip="{{'3D' | translate}}" ng-click="show3d()">
             <ng-include class="3d-icon svg-icon" src="'/images/icons/3d.svg'"></ng-include>
             <span class="toolbar-action-label">{{'3D' | translate}}</span>
