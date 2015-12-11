@@ -136,8 +136,8 @@ msgstr ""
 msgid "Distance (m)"
 msgstr "Distance (m)"
 
-msgid "Advice"
-msgstr "Recommandation"
+msgid "Advices"
+msgstr "Recommandations"
 
 msgid "See also"
 msgstr "Plus d'informations"

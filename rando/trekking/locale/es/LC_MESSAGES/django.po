@@ -137,8 +137,8 @@ msgstr "Max"
 msgid "Distance (m)"
 msgstr "Distancia (m)"
 
-msgid "Advice"
-msgstr "Recomendación"
+msgid "Advices"
+msgstr "Recomendaciones"
 
 msgid "See also"
 msgstr "Mas información"
