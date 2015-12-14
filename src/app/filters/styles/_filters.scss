@@ -56,11 +56,14 @@
             border: none;
         }
     }
+    @media (max-width: 560px) {
+        max-width: 87%;
+    }
 }
 
 .global-filters-more {
     position: absolute;
-    top: 1em;
+    top: 23%;
     right: 1em;
     cursor: pointer;
     .stripe {
@@ -70,6 +73,11 @@
         margin-left: .5em;
         svg {
             width: 8px;
+        }
+    }
+    span {
+        @media (max-width: 560px) {
+            display: none;
         }
     }
 }
@@ -83,18 +91,14 @@
 
 .global-filters-geo-filters {
     flex: 1 1 100%;
-    @media (min-width: 1200px) {
-        // max-width: 50%;
-    }
-    display: flex;
+
     padding: 0.4rem 5px;
     &.fullsize {
         flex: 1 1 100%;
         max-width: 100%;
     }
     .selector {
-        margin: 0 5px;
-        flex: 1;
+        margin: 5px 0;
         position: relative;
         box-shadow: 0 1px 1px 0px lighten($dark-grey, 50%);
         background: white;
@@ -203,6 +207,16 @@
             }
         }
     }
+    @media (min-width: 1200px) {
+        // max-width: 50%;
+    }
+    @media (min-width: 560px) {
+        display: flex;
+        .selector {
+            margin: 0 5px;
+            flex: 1;
+        }
+    }
 }
 
 .global-filters-themes {
@@ -221,7 +235,10 @@
 .global-filters-theme {
     line-height: 2;
     display: inline-block;
-    width: 50%;
+    width: 100%;
+    @media (min-width: 560px) {
+        width: 50%;
+    }
     opacity: 0.6;
     margin: 0;
     &:hover {
