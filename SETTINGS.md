@@ -116,6 +116,7 @@ Option     | Type      | Default   | Description
 --------|----------|-----------|------------
 LAYER_URL | String (tiles server url) | `"http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"` for main view and `http://{s}.tile.mapbox.com/v3/makina-corpus.i3p1001l/{z}/{x}/{y}.png"` for satellite view | Url of the layer. It needs to be a valid tiles server url.
 OPTIONS | Object ([Leaflet tileLayer options](http://leafletjs.com/reference.html#tilelayer-options)) | `{"attribution": "(c) OpenstreetMap", "minZoom": 8, "maxZoom": 17}` for main view and `{"id": "satellite", "attribution": "(c) MapBox Satellite"}` for satellite view | Leaflet tilelayer options.
+BOUNDS | String | | Url of a geoJson polygon. Current layer will be displayed only when the center of the map viewport is inside this polygon.
 
 ### Leaflet conf options
 

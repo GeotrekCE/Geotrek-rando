@@ -1,6 +1,6 @@
 'use strict';
 
-function mapService($q, $state, $resource, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService, popupService, layersService) {
+function mapService($q, $state, $resource, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService, popupService, layersService, boundsLimitService) {
 
     var self = this;
 
@@ -1101,6 +1101,38 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
 
     };
 
+    this.moveEvent = function moveEvent () {
+        var map        = this;
+        var viewCenter = map.getCenter();
+        var pending    = false;
+
+        map.eachLayer(function (layer) {
+            if (!(layer instanceof L.TileLayer)) return false;
+            if (!layer.options.boundsLimit) return false;
+
+            layer.options.boundsLimit = boundsLimitService.check(layer.options.boundsLimit);
+
+            var geoJSON = layer.options.boundsLimit.data;
+            var gLayer;
+            var pip     = [];
+
+            if (geoJSON) {
+                gLayer = L.geoJson(geoJSON);
+                pip    = L.pip.pointInLayer(viewCenter, gLayer, true);
+            } else if (layer.options.boundsLimit.status === 'pending') {
+                pending = true;
+            }
+
+            if (pip) {
+                layer.setOpacity(pip.length)
+            }
+        });
+
+        if (pending) {
+            setTimeout(self.moveEvent.bind(map), 1000);
+        }
+    };
+
     this.initMap = function (mapSelector) {
 
         var permanentTileLayers = layersService.getMainLayersGroup();
@@ -1144,6 +1176,8 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             bottom: '0',
             left: '0'
         });
+
+        this.map.on('moveend', _.throttle(this.moveEvent, 1000, { trailing: true }));
 
         // Set-up maps controls (needs _map to be defined);
         this.initMapControls();
@@ -1859,6 +1893,60 @@ function boundsService() {
 
 }
 
+function boundsLimitService($http) {
+
+    var dataStore = {};
+
+    this.check = function (boundsLimit) {
+        var dataSet = dataStore[boundsLimit.url] || {};
+
+        if (!dataSet.url && boundsLimit.url) {
+            dataSet.url = boundsLimit.url;
+        }
+
+        if (dataSet.status === 'done') {
+            return dataSet;
+        }
+
+        if (dataSet.status === 'pending') {
+            return dataSet;
+        }
+
+        if (dataSet.status === 'fail') {
+            return dataSet;
+        }
+
+        if (dataSet.status === 'error') {
+            return dataSet;
+        }
+
+        if (!boundsLimit.url) return dataSet;
+
+        var query = $http.get(boundsLimit.url);
+
+        dataSet.status = 'pending';
+
+        query.then(function (resp) {
+            // Success
+            if (resp.status === 200) {
+                dataSet.status = 'done';
+                dataSet.data   = resp.data;
+            } else {
+                dataSet.status = 'error';
+            }
+            dataStore[boundsLimit.url] = dataSet;
+        }, function () {
+            // Error
+            boundsLimit.status = 'fail';
+            dataStore[boundsLimit.url] = dataSet;
+        });
+
+        dataStore[boundsLimit.url] = dataSet;
+
+        return dataSet;
+    };
+}
+
 function popupService() {
 
     var _map;
@@ -2061,7 +2149,7 @@ function popupService() {
     this.attachPopups = _attachPopups; // Publish method
 }
 
-function layersService (globalSettings) {
+function layersService ($http, globalSettings) {
 
     /**
      * Return PERMANENT_TILELAYERS
@@ -2107,7 +2195,14 @@ function layersService (globalSettings) {
                 layer = L.tileLayer(layerConf);
             } else if (layerConf.LAYER_URL) {
                 layerOptions = layerConf.OPTIONS || {};
-                layer        = L.tileLayer(layerConf.LAYER_URL, layerOptions);
+
+                if (layerConf.BOUNDS) {
+                    layerOptions.boundsLimit = {
+                        url: layerConf.BOUNDS
+                    };
+                }
+
+                layer = L.tileLayer(layerConf.LAYER_URL, layerOptions);
             }
 
             LGroup.addLayer(layer);
@@ -2147,6 +2242,7 @@ module.exports = {
     mapService: mapService,
     iconsService: iconsService,
     boundsService: boundsService,
+    boundsLimitService: boundsLimitService,
     popupService: popupService,
     layersService: layersService
 };

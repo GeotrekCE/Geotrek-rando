@@ -48,6 +48,7 @@
     "lodash": "./node_modules/lodash/lodash.js",
     "sparklines": "./src/app/vendors/scripts/sparklines.min.js",
     "rando3d": "./node_modules/rando3D",
+    "leaflet-pip": "./node_modules/leaflet-pip",
     "classlist-polyfill": "./node_modules/classlist-polyfill/src/index.js"
   },
   "devDependencies": {
@@ -87,6 +88,7 @@
     "karma-browserify": "^4.1.2",
     "karma-jasmine": "^0.3.5",
     "karma-phantomjs-launcher": "^0.1.4",
+    "leaflet-pip": "^0.1.1",
     "merge-stream": "^0.1.7",
     "mkdirp": "^0.5.1",
     "node-notifier": "^4.1.0",

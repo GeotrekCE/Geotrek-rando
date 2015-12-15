@@ -40,9 +40,14 @@ var dependencies = [
 
 var angular = require('angular');
 window._ = require('lodash');
+
 window.jQuery = require('jquery');
+
 window.L = require('leaflet');
+window.L.pip = require('leaflet-pip');
+
 window.rando3D = require('rando3d');
+
 require('classlist-polyfill');
 
 require('jquery.scrollto');
