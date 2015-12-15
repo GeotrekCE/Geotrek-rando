@@ -288,7 +288,8 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
             case 'poi':
                 promise = iconsService.getPOIIcon;
                 param = element;
-                popupSources.hint = element.properties.name;
+                popupSources.hint = 'selector';
+                popupSources.info = 'none';
                 break;
 
             case 'service':
@@ -1980,6 +1981,10 @@ function popupService() {
          */
         if (this.popupSources) {
             if (this.popupSources.info) {
+                if (this.popupSources.info === 'none') {
+                    return null;
+                }
+
                 return this.popupSources.info;
             }
             if (this.popupSources.selector) {
@@ -1991,6 +1996,13 @@ function popupService() {
     }
 
     var _getHintContent = function _getHintContent () {
+        /**
+         * Alt way : if value === 'selector', do like InfoContent
+         */
+         if (this.popupSources && this.popupSources.hint && this.popupSources.hint === 'selector' && this.popupSources.selector) {
+             return document.querySelector(this.popupSources.selector).outerHTML;
+         }
+
         /**
          * New way : get hint content from marker object
          */
