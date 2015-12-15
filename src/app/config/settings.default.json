@@ -55,15 +55,15 @@
         }
     ],
     "ORTHOPHOTO_TILELAYERS_NAME": "Ortho",
-    "SATELLITE_LEAFLET_BACKGROUND": {
+    "ORTHOPHOTO_TILELAYERS": {
         "LAYER_URL": "http://{s}.tile.mapbox.com/v3/makina-corpus.i3p1001l/{z}/{x}/{y}.png",
         "OPTIONS": {
             "id": "satellite",
             "attribution": "(c) MapBox Satellite"
         }
     },
-    "OPTIONAL_TILELAYERS": [],
     "OPTIONAL_TILELAYERS_NAME": "Optional",
+    "OPTIONAL_TILELAYERS": [],
     "LEAFLET_CONF": {
         "CENTER_LATITUDE": 44.83,
         "CENTER_LONGITUDE": 6.34,

@@ -49,8 +49,18 @@ png | string (file name) | `''` | Name of the .png file for the favicon
 Option     | Type      | Default   | Description
 --------|----------|-----------|------------
 DEFAULT_LANGUAGE | string (lang code) | `"en"` | Define default language of the app
+AVAILABLE_LANGUAGES | Object (lang) | cf [Available languages object](#available-languages-object)  | Available languages of the app
 ENABLED_LANGUAGES | array of strings (lang codes) | ` | "fr", "en", "de", "nl"]` | This is the list of the enabled languages in the header lang menu and the app.
 
+**Available languages object**
+```
+{
+    "fr": "Français",
+    "en": "English",
+    "de": "Deutsch",
+    "nl": "Nederlands"
+}
+```
 
 ## Categories
 
@@ -62,6 +72,7 @@ ENABLE_TOURISTIC_EVENTS | Boolean | `true` | Enable touristic events service and
 DEFAULT_ACTIVE_CATEGORIES | Array of strings (categories id) | `["T"]` | List of default active categories.
 LIST_EXCLUDE_CATEGORIES | Array of strings (categories id) | |  `[]` | List of categories excluded from the filters on results page.
 ENABLE_UNIQUE_CAT | Boolean | `false` | If true, only one category can be activated at the same time in the result page filters.
+FILTERS_DEFAULT_OPEN | Boolean | `false` | Disable filters by default.
 DEFAULT_INTEREST | String | `"pois"` | Chose which interest to open by default on detail page. Possible values: `"pois"`, `"near"`, `"children"`, `"parents"`, ""
 
 
@@ -81,20 +92,21 @@ GOOGLE_ANALYTICS_ID | String | `""` | ID of your Google Analytics account.
 
 Option     | Type      | Default   | Description
 --------|----------|-----------|------------
-PERMANENT_TILELAYERS | Array of [Layers Objects Options](#layers-objects-options) | cf [Layers Objects default](#layers-objects-options) | Define the main leaflet tile layers used by the website.
 PERMANENT_TILELAYERS_NAME | String | "Carte" | String used in layer selector for `PERMANENT_TILELAYERS` layer group.
-SATELLITE_LEAFLET_BACKGROUND | [Layer Object](#layers-objects-options) | cf [Layers Objects default](#layers-objects-options) | Define the satellite leaflet tiles used by the website.
+PERMANENT_TILELAYERS | Array of [Layers Objects Options](#layers-objects-options) | cf [Layers Objects default](#layers-objects-options) | Define the main leaflet tile layers used by the website.
 ORTHOPHOTO_TILELAYERS_NAME | String | "Ortho" | String used in layer selector for `SATELLITE_LEAFLET_BACKGROUND` layer.
-OPTIONAL_TILELAYERS | Array of [Layers Objects Options](#layers-objects-options) | Empty Array | This array allows you to define other Leaflet tiles layers that will be available in layer selector.
+ORTHOPHOTO_TILELAYERS | [Layer Object](#layers-objects-options) | cf [Layers Objects default](#layers-objects-options) | Define the satellite leaflet tiles used by the website.
 OPTIONAL_TILELAYERS_NAME | String | "Optional" | Default name prefix for `OPTIONAL_TILELAYERS` layers in layer selector.
+OPTIONAL_TILELAYERS | Array of [Layers Objects Options](#layers-objects-options) | Empty Array | This array allows you to define other Leaflet tiles layers that will be available in layer selector.
 LEAFLET_CONF | [Leaflet Conf Object](#layers-conf-options) | cf [Leaflet Conf Object default](#layers-conf-options) |  Basic conf of the map.
+MAP_BOUNDS_CONSTRAINTS | Array | `null` | Represents a rectangular area in pixel coordinates.
 TREKS_TO_GEOJSON_ZOOM_LEVEL | Int | `14` | Zoom level at which the map switch between markers and linear mode for treks.
 UPDATE_MAP_ON_FILTER | Boolean | `false` | If true, update map viewport each time a filter is changed.
 ACTIVE_MINIMAP | Boolean | `true` | If true, show minimap.
 MINIMAP_ZOOM | [Zoom conf Object](#layers-objects-options) | cf [Zoom conf default](#layers-objects-options) | Define max an min zoom levels for the mini-map
 MINIMAP_OFFSET | Int | `-3` | Value of the difference between the map zoom and the mini-map zoom.
 ALWAYS_HIGHLIGHT_TREKS | Boolean | `false` | If true, always display a border around the linear versions of treks.
-SHOW_FILTERS_ON_MAP | boolean | `true` | If false, hide the tags filters on the top of the map. 
+SHOW_FILTERS_ON_MAP | boolean | `true` | If false, hide the tags filters on the top of the map.
 FILTER_BY_VIEWPORT_DEFAULT | boolean | `false` | If true, "Filter with map" is checked by default
 
 
@@ -103,7 +115,7 @@ FILTER_BY_VIEWPORT_DEFAULT | boolean | `false` | If true, "Filter with map" is 
 Option     | Type      | Default   | Description
 --------|----------|-----------|------------
 LAYER_URL | String (tiles server url) | `"http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"` for main view and `http://{s}.tile.mapbox.com/v3/makina-corpus.i3p1001l/{z}/{x}/{y}.png"` for satellite view | Url of the layer. It needs to be a valid tiles server url.
-OPTIONS | Object ([Leaflet tileLayer options](http://leafletjs.com/reference.html#tilelayer-options)) | `{"id": "main", "attribution": "(c) OpenstreetMap"}` for main view and `{"id": "satellite", "attribution": "(c) MapBox Satellite"}` for satellite view | Leaflet tilelayer options.
+OPTIONS | Object ([Leaflet tileLayer options](http://leafletjs.com/reference.html#tilelayer-options)) | `{"attribution": "(c) OpenstreetMap", "minZoom": 8, "maxZoom": 17}` for main view and `{"id": "satellite", "attribution": "(c) MapBox Satellite"}` for satellite view | Leaflet tilelayer options.
 
 ### Leaflet conf options
 
@@ -123,7 +135,6 @@ MINI | Int | `0` | Min zoom level for minimap
 MAX | Int | `12` | Max zoom level for minimap
 
 
-
 ## Markers
 
 Option     | Type      | Default   | Description
@@ -131,9 +142,29 @@ Option     | Type      | Default   | Description
 POI_EXPANDED | Boolean | `false` | Expand POIS list.
 MARKER_BASE_ICON | [Leaflet Icon Object](http://leafletjs.com/reference.html#icon) | `""` | Base of the marker for elements. The category icon defined in the API is put above this one. You'll need to adapt custom css according to those changes.
 POI_BASE_ICON | [Leaflet Icon Object](http://leafletjs.com/reference.html#icon) | `""` | Base of the marker for POIs.
+SERVICE_BASE_ICON | [Leaflet Icon Object](http://leafletjs.com/reference.html#icon) | `""` | Marker used for services on a detail page.
 DEPARTURE_ICON | [Leaflet Icon Object](http://leafletjs.com/reference.html#icon) | `""` | Marker used for departure of a trek on a detail page.
 ARRIVAL_ICON | [Leaflet Icon Object](http://leafletjs.com/reference.html#icon) | `""` | Marker used for arrival of a trek on a detail page.
 DEPARTURE_ARRIVAL_ICON | [Leaflet Icon Object](http://leafletjs.com/reference.html#icon) | `""` | Marker used if departure and arrival are on the same place of a trek on a detail page. (ex: a looping trek)
+
+
+## Directories
+
+API_DIR | "api" | API dir file
+TREKS_DIR | "treks" | Treks dir file
+TREKS_FILE | "treks.geojson" | Treks file
+POI_FILE | "pois.geojson" | POI file
+SERVICES_FILE | "services.geojson" | Service file
+FLAT_FILE | "flatpages.geojson" | Flat pages file
+TOURISTIC_EVENTS_DIR | "touristicevents" | Touristic events dir file
+TOURISTIC_EVENTS_FILE | "touristicevents.geojson" | Touristic event file
+TOURISTIC_CONTENTS_DIR | "touristiccontents" | Touristic content dir file
+TOURISTIC_CONTENTS_FILE | "touristiccontents.geojson" | Touristic content file
+DEM_FILE | "dem.json" | DEM file
+PROFILE_FILE | "profile.json" | Profile file
+WARNING_CAT_DIR | "feedback" | Warning catefories dir file
+WARNING_CAT_FILE | "categories.json" | Warning categories file
+WARNING_SUBMIT_URL | "reports/report" | Warning submit URL
 
 
 ## Filters

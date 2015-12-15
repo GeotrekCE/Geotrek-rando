@@ -155,8 +155,8 @@ function WarningMapService(globalSettings, utilsFactory, iconsService, layersSer
         that._baseLayers = {
             main: layersService.getMainLayersGroup(),
             satellite: L.tileLayer(
-                globalSettings.SATELLITE_LEAFLET_BACKGROUND.LAYER_URL,
-                globalSettings.SATELLITE_LEAFLET_BACKGROUND.OPTIONS
+                globalSettings.ORTHOPHOTO_TILELAYERS.LAYER_URL,
+                globalSettings.ORTHOPHOTO_TILELAYERS.OPTIONS
             )
         };
 
