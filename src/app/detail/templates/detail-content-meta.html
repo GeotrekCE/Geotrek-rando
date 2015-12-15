@@ -66,7 +66,7 @@
             </li>
             <li class="meta-item-content-item" ng-if="result.properties.ascent">
                 <ng-include src="'./images/icons/ascent.svg'"></ng-include>
-                <span>{{::parseLength(result.properties.ascent)}}</span>
+                <span>{{::result.properties.ascent}}&nbsp;m</span>
             </li>
             <li class="meta-item-content-item" ng-if="result.properties.networks" ng-repeat="network in result.properties.networks">
                 <ng-include ng-if="network.pictogram && isSVG(network.pictogram)" src="network.pictogram"></ng-include>
