@@ -27,3 +27,6 @@ src/app/custom/services.js
 #
 # Custom po files
 src/app/translation/po/*-custom.po
+#
+# Custom images files
+src/images/custom/*
