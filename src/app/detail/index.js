@@ -11,4 +11,5 @@ angular.module('rando.detail', ['ui.bootstrap'])
     .directive('detailContentElevation', require('./directives').detailContentElevation)
     .directive('detailContentDesks', require('./directives').detailContentDesks)
     .directive('detailContentRelated', require('./directives').detailContentRelated)
-    .directive('detailAside',   require('./directives').detailAside);
+    .directive('detailAside',   require('./directives').detailAside)
+    .service('detailService',   require('./services').detailService);
