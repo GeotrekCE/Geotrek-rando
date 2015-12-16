@@ -1,6 +1,6 @@
 'use strict';
 
-function mapService($q, $state, $resource, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService, popupService, layersService, boundsLimitService) {
+function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService, popupService, layersService, boundsLimitService) {
 
     var self = this;
 
@@ -433,7 +433,7 @@ function mapService($q, $state, $resource, utilsFactory, globalSettings, transla
                 controlInput.value = 'viewport-filtering';
                 controlInput.checked = globalSettings.FILTER_BY_VIEWPORT_DEFAULT;
                 var controlCaption = L.DomUtil.create('span', 'leaflet-control-viewportfilter-caption', controlContainer);
-                controlCaption.innerHTML = 'Filter when I move the map';
+                controlCaption.innerHTML = $filter('translate')('FILTER_ON_MOVE_MAP');
 
                 L.DomEvent.on(controlInput, 'change', function () {
                     self.filterByViewport = document.querySelector('.leaflet-control-viewportfilter-button').checked;
