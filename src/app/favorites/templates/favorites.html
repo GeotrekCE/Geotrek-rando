@@ -13,7 +13,7 @@
                     <a ui-sref="layout.detail({catSlug: favorite.properties.category.slug, slug: favorite.properties.slug})">
                         <div class="category-icon">
                             <ng-include ng-if="isSVG(favorite.properties.category.pictogram)" src="favorite.properties.category.pictogram"></ng-include>
-                            <img ng-if="!isSVG(favorite.properties.category.pictogram)" ng-src="favorite.properties.category.pictogram">
+                            <img ng-if="!isSVG(favorite.properties.category.pictogram)" ng-src="{{::favorite.properties.category.pictogram}}">
                         </div>
                         <div class="picture">
                             <img ng-src="{{::favorite.properties.pictures[0].url}}" alt="{{::favorite.properties.name}}-thumbnail"/>

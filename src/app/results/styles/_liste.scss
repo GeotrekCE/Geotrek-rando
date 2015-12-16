@@ -201,6 +201,10 @@
 
 .result-category-icon {
     z-index: 1;
+    img {
+        max-width: 100%;
+        height: auto;
+    }
     @each $category in $categories {
         .category-#{nth($category, 1)} & {
             background-color: nth($category, 2);
