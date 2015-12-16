@@ -146,7 +146,7 @@ msgid "POI"
 msgstr "Patrimoine"
 
 msgid "NEAR"
-msgstr "A proximité"
+msgstr "À proximité"
 
 msgid "CHILDREN"
 msgstr "Etapes"
