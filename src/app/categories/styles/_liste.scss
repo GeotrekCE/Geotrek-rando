@@ -281,13 +281,24 @@
         }
 
         .more-or-less {
+            // height: 20px;
+            // width: 20px;
+            // margin-right: 0.5rem;
+            // float: right;
+            // display: inline-block;
+            // position: relative;
+            // vertical-align: middle;
+
             height: 20px;
             width: 20px;
+            position: absolute;
+            display: block;
             margin-right: 0.5rem;
-            float: right;
-            display: inline-block;
-            position: relative;
-            vertical-align: middle;
+            right: 0px;
+            top: 50%;
+            margin-top: -10px;
+
+
             .bar {
                 width: 10px;
                 height: 2px;
@@ -309,6 +320,7 @@
             background-color: rgba(0, 0, 0, .15);
             margin-right: 10px;
             margin-left: 10px;
+            position: relative;
             > span:first-child {
                 font-weight: bolder;
             }
