@@ -1,6 +1,6 @@
 'use strict';
 
-function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $stateParams, globalSettings, utilsFactory, resultsService, poisService, mapService, translationService) {
+function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $stateParams, globalSettings, utilsFactory, resultsService, poisService, mapService, translationService, detailService) {
 
     var mainImage;
     $scope.sanitizeData = utilsFactory.sanitizeData;
@@ -336,6 +336,9 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                     $rootScope.elementsLoading --;
                     getInterests(result, forceRefresh);
                     $rootScope.$emit('initGallery', result.properties.pictures);
+
+                    $scope.result.informations = detailService.hasInfos(result.properties, 'duration_pretty', 'duration', 'difficulty.label', 'route', 'ascent', 'networks', 'target_audience')
+
                 },
                 function (error) {
                     $rootScope.elementsLoading --;

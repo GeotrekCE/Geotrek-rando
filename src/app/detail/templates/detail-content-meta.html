@@ -1,5 +1,5 @@
 <ul class="detail-content-meta pictos">
-    <li class="detail-content-meta-item category-label" ng-if="result.properties.category.label">
+    <li class="detail-content-meta-item category-label" ng-if="result.properties.category.label.length > 0">
         <div class="meta-item-title">
             {{'CATEGORY' | translate}}
         </div>
@@ -36,7 +36,7 @@
         </ul>
     </li>
 
-    <li class="detail-content-meta-item">
+    <li class="detail-content-meta-item" ng-if="result.informations">
         <div class="meta-item-title">
             {{'INFORMATIONS' | translate}}
         </div>
@@ -79,7 +79,7 @@
         </ul>
     </li>
 
-    <li class="detail-content-meta-item" ng-if="result.properties.themes">
+    <li class="detail-content-meta-item" ng-if="result.properties.themes.length > 0">
         <div class="meta-item-title">
             {{'THEMES' | translate}}
         </div>
