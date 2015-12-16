@@ -2239,6 +2239,13 @@ function layersService ($http, globalSettings) {
             } else if (layerConf.LAYER_URL) {
                 layerName         = layerConf.LAYER_NAME || [defaultName, index + 1].join(' ');
                 layerOptions      = layerConf.OPTIONS || {};
+
+                if (layerConf.BOUNDS) {
+                    layerOptions.boundsLimit = {
+                        url: layerConf.BOUNDS
+                    };
+                }
+
                 layers[layerName] = L.tileLayer(layerConf.LAYER_URL, layerOptions);
             }
         });
