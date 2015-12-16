@@ -213,6 +213,9 @@ msgstr "Le message n'a pu être enregistré. Veuillez nous excuser pour ce désa
 #
 #
 
+msgid "FILTER_ON_MOVE_MAP"
+msgstr "Filtrer par la carte"
+
 msgid "THEMES"
 msgstr "Thèmes"
 
