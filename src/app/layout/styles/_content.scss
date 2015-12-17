@@ -43,7 +43,8 @@
 
 .view-content {
     position: relative;
-
+    z-index: 5;
+    
     display: flex;
 
     width: 100%;

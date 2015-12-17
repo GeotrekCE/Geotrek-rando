@@ -1,4 +1,6 @@
 .sidebar {
+    position: relative;
+    z-index: 10;
     .layout-root & {
         position: relative;
         z-index: 3;
