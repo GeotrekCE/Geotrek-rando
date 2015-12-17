@@ -224,6 +224,11 @@
     @media (max-width: 540px) {
         font-size: .75em;
     }
+
+    @media (max-width: 559px) {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .global-filters-themes-title {
@@ -255,6 +260,11 @@
         margin-left: .25em;
     }
 }
+.global-filters-themes-title {
+    @media (min-width: 560px) {
+        width: 100%;
+    }
+}
 
 .global-filters-theme-icon {
     display: inline-block;
@@ -269,4 +279,11 @@
 
 .global-filters-bottom {
 
+}
+
+
+@for $i from 1 through 15 {
+    .flex-order-#{$i} {
+        order: $i;
+    }
 }
