@@ -156,7 +156,7 @@
     transition: all 250ms ease;
 
     @each $category in $categories {
-        .category-#{nth($category, 1)} & {
+        li.category-#{nth($category, 1)} & {
             background-color: lighten(desaturate(nth($category, 2), 20), 20);
             &:hover {
                 background-color: nth($category, 2);
@@ -206,7 +206,7 @@
         height: auto;
     }
     @each $category in $categories {
-        .category-#{nth($category, 1)} & {
+        li.category-#{nth($category, 1)} & {
             background-color: nth($category, 2);
         }
     }
