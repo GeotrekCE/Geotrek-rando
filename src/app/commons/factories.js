@@ -101,8 +101,8 @@ function utilsFactory($sce) {
 
     // "what?" version ... http://jsperf.com/diacritics/12
     var removeDiacritics = function (str) {
-        return str.replace(/[^\u0000-\u007E]/g, function(a){ 
-           return diacriticsMap[a] || a; 
+        return str.replace(/[^\u0000-\u007E]/g, function(a){
+           return diacriticsMap[a] || a;
         });
     };
 
@@ -118,10 +118,6 @@ function utilsFactory($sce) {
             var data = data.replace(/[a-zA-Z0-9\-\_]*style="[^\"]*"/gim, '');
         }
         return $sce.trustAsHtml(data);
-    };
-
-    var removeTags = function (markup) {
-        return markup.replace(/(<([^>]+)>)/ig,"")
     };
 
     var decodeEntities = function (str) {
@@ -281,7 +277,6 @@ function utilsFactory($sce) {
     return {
         removeDiacritics: removeDiacritics,
         sanitizeData: sanitizeData,
-        removeTags: removeTags,
         decodeEntities: decodeEntities,
         isTrueInt: isTrueInt,
         parseLength: parseLength,
