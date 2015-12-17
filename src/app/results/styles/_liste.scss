@@ -63,7 +63,9 @@
     margin: 0.5rem 1.5%;
     border: 2px solid rgba(230, 230, 230, 1);
     transition: all 0.1s ease-out;
-
+    &.no-theme {
+        padding-bottom: 1em;
+    }
     .results-list & {
         &:hover, &.hovered {
             transform: translateY(-5px);
