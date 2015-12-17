@@ -136,6 +136,15 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
         var mapSelector = selector || 'map';
         $rootScope.map = mapService.initMap(mapSelector);
 
+        // events are fired when entering or exiting fullscreen.
+        $rootScope.map.on('enterFullscreen', function(){
+          $rootScope.screenstate = true;
+        });
+
+        $rootScope.map.on('exitFullscreen', function(){
+          $rootScope.screenstate = false;
+        });
+
         initCtrlsTranslation().finally(function () {
             deferred.resolve(true);
         });
