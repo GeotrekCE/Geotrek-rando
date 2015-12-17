@@ -276,7 +276,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
             case 'near':
                 promise = iconsService.getElementIcon;
                 param = element;
-                popupSources.hint = type;
+                popupSources.hint = element.properties.name;
                 break;
 
             case 'children':
