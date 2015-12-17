@@ -15,7 +15,7 @@
     </div>
     <div ng-if="result.properties.booking" class="booking">
         <h5>{{'BOOKING' | translate}}</h5>
-        <span>{{::result.properties.booking}}</span>
+        <span>{{::result.properties.booking | removeTags}}</span>
     </div>
     <div ng-if="result.properties.meeting_point" class="meeting-point">
         <h5>{{'MEETING_POINT' | translate}}</h5>
