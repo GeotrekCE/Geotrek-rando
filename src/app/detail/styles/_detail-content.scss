@@ -453,7 +453,7 @@
         display: block;
         overflow: hidden;
         margin-bottom: .75em;
-        
+
         &.noimg {
             padding-left: 74px;
         }
@@ -513,4 +513,14 @@
 
 .carousel-indicators {
     bottom: 0;
+}
+
+.detail-content-approved {
+    margin: 1em 2rem 0 2rem;
+    width: 8em;
+    height: 5.5em;
+    img, svg {
+        max-width: 100%;
+        max-height: 100%;
+    }
 }
