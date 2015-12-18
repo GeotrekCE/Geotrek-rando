@@ -52,8 +52,8 @@
         </div>
 
         <div class="approuved">
-            <ng-include ng-if="isSVG(theme.pictogram)" src="theme.pictogram"></ng-include>
-            <img ng-if="!isSVG(theme.pictogram)" ng-src="{{::theme.pictogram}}" ng-alt="{{::theme.label}}">
+            <ng-include ng-if="isSVG(approved)" src="approved"></ng-include>
+            <img ng-if="!isSVG(approved)" ng-src="{{::approved}}" ng-alt="{{::approvedLabel}}">
         </div>
 
     </li>

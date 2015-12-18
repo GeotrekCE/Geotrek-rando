@@ -18,7 +18,8 @@ function ItemsListController($scope, globalSettings, favoritesService, $rootScop
     };
 
     $scope.isInFavorites = favoritesService.isInFavorites;
-
+    $scope.approved = globalSettings.APPROVED_SMALL;
+    $scope.approvedLabel = globalSettings.APPROVED_LABEL;
 }
 
 module.exports = {
