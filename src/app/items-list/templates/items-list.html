@@ -1,13 +1,14 @@
-<ul class="near-liste results results-list">
+<ul class="{{type}}-list">
     <li
         class="result results-item category-{{::result.properties.category.id}}"
         id="result-category-{{::result.uid}}"
-        ng-repeat="result in nearElements | orderBy: -['properties.begin_date', 'properties.name'] track by result.uid"
+        ng-repeat="result in elements | orderBy: ['properties.begin_date', 'properties.name'] track by result.luid"
         ng-mouseover="hoverMarkerNear(result,'enter')"
-        ng-mouseleave="hoverMarkerNear(result,'leave')">
+        ng-mouseleave="hoverMarkerNear(result,'leave')"
+        ng-class="{'no-theme': result.properties.themes.length === 0}">
 
         <div class="result-fav-control fav-or-not" ng-click="toggleFavorites(result)" ng-class="{isFav: isInFavorites(result)}">
-            <i class="result-fav-icon fa fa-{{::favoriteIcon}}"></i>
+            <i class="result-fav-icon fa fa-{{::$root.favoriteIcon}}"></i>
         </div>
 
         <div class="result-visual">
@@ -40,7 +41,7 @@
             <span class="target"     ng-if="result.properties.target_audience">{{::result.properties.target_audience}}</span>
         </div>
 
-        <div class="result-themes themes">
+        <div class="result-themes themes" ng-if="result.properties.themes.length > 0">
             <div class="result-themes-label">{{ 'THEMES' | translate }}</div>
             <ul class="result-themes-list">
                 <li class="result-theme" ng-repeat="theme in result.properties.themes track by theme.label">
