@@ -1,6 +1,6 @@
 'use strict';
 
-function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory, favoritesService, filtersService, mapService) {
+function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory, filtersService, mapService) {
 
     function updateResults(forceRefresh) {
         $rootScope.elementsLoading ++;
@@ -31,16 +31,6 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
             }
         }, 300);
     }
-
-    $scope.toggleFavorites = function (currentElement) {
-        var currentAction = '';
-        if (favoritesService.isInFavorites(currentElement)) {
-            currentAction = 'remove';
-        } else {
-            currentAction = 'add';
-        }
-        $rootScope.$broadcast('changeFavorite', {element: currentElement, action: currentAction});
-    };
 
     $scope.hoverLayerElement = function (currentElement, state) {
         var layerEquivalent = document.querySelectorAll('.layer-category-' + currentElement.properties.category.id + '-' + currentElement.id);
@@ -78,7 +68,7 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
         mapService.centerOn(result);
     };
 
-    $scope.isInFavorites = favoritesService.isInFavorites;
+
     $scope.isSVG         = utilsFactory.isSVG;
     $scope.sanitizeData  = utilsFactory.sanitizeData;
 

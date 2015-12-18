@@ -5,16 +5,17 @@
             <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
         </div>
         <div class="detail-aside-group-content">
-            <children-liste></children-liste>
+            <items-list elements="elementChildren" type="aside"></items-list>
+            <!-- <children-liste></children-liste> -->
         </div>
     </div>
-    <div class="detail-aside-group parent" ng-if="parentElement" ng-class="{active: currentInterest === 'parent'}">
+    <div class="detail-aside-group parent" ng-if="parentsElement.length" ng-class="{active: currentInterest === 'parent'}">
         <div class="detail-aside-group-title" ng-click="toggleInterest('parent')">
             <span>{{ 'PARENT' | translate }}</span>
             <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
         </div>
         <div class="detail-aside-group-content">
-            <parent-liste></parent-liste>
+            <items-list elements="parentsElement" type="aside"></items-list>
         </div>
     </div>
     <div class="detail-aside-group near-elements" ng-if="nearElements.length " ng-class="{active: currentInterest === 'near'}">
@@ -23,7 +24,8 @@
             <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
         </div>
         <div class="detail-aside-group-content">
-            <near-liste></near-liste>
+            <items-list elements="nearElements" type="aside"></items-list>
+            <!-- <near-liste></near-liste> -->
         </div>
     </div>
     <div class="detail-aside-group pois" ng-if="pois.length && result.properties.contentType === 'trek'" ng-class="{active: currentInterest === 'pois'}">
@@ -31,7 +33,7 @@
             <span>{{ 'POI' | translate }}</span>
             <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
         </div>
-        <div class="detail-aside-group-content">
+        <div class="detail-aside-group-content" type="aside">
             <pois-liste></pois-liste>
         </div>
     </div>

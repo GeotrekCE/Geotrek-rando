@@ -39,16 +39,6 @@
     color: lighten($dark-grey, 50%);
 }
 
-.results-list { // ul
-    background-color: inherit;
-    list-style: none;
-    padding: 0 2em;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-}
-
 .results-item { // li.result
     overflow: hidden;
     flex: 0 1 auto;
@@ -63,10 +53,22 @@
     margin: 0.5rem 1.5%;
     border: 2px solid rgba(230, 230, 230, 1);
     transition: all 0.1s ease-out;
+
+}
+
+.results-list,
+.aside-list {
+    background-color: inherit;
+    list-style: none;
+    padding: 0 2em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
     &.no-theme {
         padding-bottom: 1em;
     }
-    .results-list & {
+    .results-item {
         &:hover, &.hovered {
             transform: translateY(-5px);
             border-color: rgba(200, 200, 200, 1);
@@ -181,8 +183,8 @@
         transform: translate(-50%, -50%);
     }
 
-    .results-list .results-item:hover &,
-    .results-list .results-item.hovered & {
+    .results-item:hover &,
+    .results-item.hovered & {
         @for $i from 0 through 5 {
             &:nth-child(#{$i}) {
                 left: (45px * ($i - 1));

@@ -105,6 +105,8 @@
     "WARNING_CAT_DIR": "feedback",
     "WARNING_CAT_FILE": "categories.json",
     "WARNING_SUBMIT_URL": "reports/report",
+    "APPROVED_BIG": "approuved-big.png",
+    "APPROVED_SMALL": "approuved-small.png",
     "DURATION_FILTER": [
         { "id": 0, "label": "<1/2 J"},
         { "id": 10, "label": "1/2 J"},

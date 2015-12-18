@@ -282,7 +282,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
             case 'children':
                 promise = iconsService.getElementIcon;
                 param = element;
-                popupSources.hint = type;
+                popupSources.hint = element.properties.name;
                 break;
 
             case 'poi':
