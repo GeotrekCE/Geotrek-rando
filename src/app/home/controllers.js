@@ -77,7 +77,6 @@ function RandomContentsListWidgetController($scope, resultsService, utilsFactory
         getRandomContents();
     }
 
-    $scope.isSVG = utilsFactory.isSVG;
     init();
 }
 
@@ -99,7 +98,6 @@ function RandomContentWidgetController($scope, resultsService, utilsFactory) {
         getRandomContent();
     }
 
-    $scope.isSVG = utilsFactory.isSVG;
     init();
 }
 

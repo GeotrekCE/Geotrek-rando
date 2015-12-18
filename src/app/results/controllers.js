@@ -68,8 +68,6 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
         mapService.centerOn(result);
     };
 
-
-    $scope.isSVG         = utilsFactory.isSVG;
     $scope.sanitizeData  = utilsFactory.sanitizeData;
 
     $scope.$on('updateFilters', function () {

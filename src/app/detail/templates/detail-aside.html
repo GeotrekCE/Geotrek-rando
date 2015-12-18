@@ -6,7 +6,6 @@
         </div>
         <div class="detail-aside-group-content">
             <items-list elements="elementChildren" type="aside"></items-list>
-            <!-- <children-liste></children-liste> -->
         </div>
     </div>
     <div class="detail-aside-group parent" ng-if="parentsElement.length" ng-class="{active: currentInterest === 'parent'}">
@@ -25,7 +24,6 @@
         </div>
         <div class="detail-aside-group-content">
             <items-list elements="nearElements" type="aside"></items-list>
-            <!-- <near-liste></near-liste> -->
         </div>
     </div>
     <div class="detail-aside-group pois" ng-if="pois.length && result.properties.contentType === 'trek'" ng-class="{active: currentInterest === 'pois'}">

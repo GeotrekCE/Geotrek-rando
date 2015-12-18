@@ -1217,7 +1217,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
 
 }
 
-function iconsService($resource, $q, $http, globalSettings, categoriesService, poisService, servicesService, utilsFactory) {
+function iconsService($resource, $q, $http, $filter, globalSettings, categoriesService, poisService, servicesService) {
 
     var self = this;
 
@@ -1329,8 +1329,7 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
                             }
                             counter++;
                             var currentCounter = counter;
-
-                            if (utilsFactory.isSVG(category.pictogram)) {
+                            if ($filter('isSVG')(category.pictogram)) {
                                 var requests = $resource(category.pictogram, {}, {
                                     query: {
                                         method: 'GET',
@@ -1401,7 +1400,7 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
                             }
                             counter++;
                             var currentCounter = counter;
-                            if (!utilsFactory.isSVG(poi.properties.type.pictogram)) {
+                            if (!$filter('isSVG')(poi.properties.type.pictogram)) {
                                 self.poisTypesIcons[poi.properties.type.id] = {
                                     markup: poi.properties.type.pictogram,
                                     isSVG: false
@@ -1474,7 +1473,7 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
                             }
                             counter++;
                             var currentCounter = counter;
-                            if (!utilsFactory.isSVG(service.properties.type.pictogram)) {
+                            if (!$filter('isSVG')(service.properties.type.pictogram)) {
                                 self.servicesTypesIcons[service.properties.type.id] = {
                                     markup: service.properties.type.pictogram,
                                     isSVG: false
@@ -1659,7 +1658,7 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
             if (self[iconName]) {
                 deferred.resolve(self[iconName]);
             } else {
-                if (!utilsFactory.isSVG(self.icons_liste[iconName].iconUrl)) {
+                if (!$filter('isSVG')(self.icons_liste[iconName].iconUrl)) {
                     self[iconName] = new L.divIcon(_.merge({}, self.icons_liste[iconName], {
                         html: self.icons_liste[iconName].iconUrl
                     }));
@@ -1831,7 +1830,7 @@ function iconsService($resource, $q, $http, globalSettings, categoriesService, p
             categoryIcon,
             promises = [];
 
-        if (utilsFactory.isSVG(self.icons_liste.category_base.iconUrl)) {
+        if ($filter('isSVG')(self.icons_liste.category_base.iconUrl)) {
             promises.push(
                 self.getSVGIcon(self.icons_liste.category_base.iconUrl, 'category_base')
                     .then(

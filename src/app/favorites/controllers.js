@@ -52,8 +52,6 @@ function FavoritesController($scope, $rootScope, globalSettings, favoritesServic
         }
     });
 
-    $scope.isSVG = utilsFactory.isSVG;
-
 }
 
 module.exports = {
