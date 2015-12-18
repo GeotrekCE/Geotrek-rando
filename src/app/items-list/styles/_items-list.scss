@@ -14,18 +14,20 @@
     }
 }
 
-.approved {
-    position: absolute;
-    right: 15px;
-    bottom: .3em;
-    width: 2.5em;
-    height: 1.6em;
-    img, svg {
-        max-width: 100%;
-        max-height: 100%;
+.result {
+    .approved {
+        position: absolute;
+        right: 15px;
+        bottom: .3em;
+        width: 2.5em;
+        height: 1.6em;
+        img, svg {
+            max-width: 100%;
+            max-height: 100%;
+        }
     }
-}
 
-.themes.is-approved {
-    padding-right: 2.5em;
+    .themes.is-approved {
+        padding-right: 2.5em;
+    }    
 }

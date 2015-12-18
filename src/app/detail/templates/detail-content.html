@@ -12,13 +12,18 @@
 
     <detail-content-pictures></detail-content-pictures>
 
+    <div class="detail-content-approved" ng-if="result.properties.approved">
+        <ng-include ng-if="isSVG(approved)" src="approved"></ng-include>
+        <img ng-if="!isSVG(approved)" ng-src="{{::approved}}" ng-alt="{{::approvedLabel}}">
+    </div>
+
     <div class="detail-content-teaser"  ng-if="result.properties.description_teaser" ng-bind-html="sanitizeData(result.properties.description_teaser, true)"></div>
 
     <div class="detail-content-ambiance" ng-if="result.properties.ambiance"           ng-bind-html="sanitizeData(result.properties.ambiance, true)"></div>
 
     <detail-content-from-to></detail-content-from-to>
 
-    <div class="detail-content-description" ng-if="result.properties.description"    ng-bind-html="sanitizeData(result.properties.description, true)"></div>
+    <div class="detail-content-description" ng-if="result.properties.description" ng-bind-html="sanitizeData(result.properties.description, true)"></div>
 
     <detail-content-events-info></detail-content-events-info>
 
