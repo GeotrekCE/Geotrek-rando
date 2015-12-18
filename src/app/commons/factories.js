@@ -251,17 +251,6 @@ function utilsFactory($sce) {
         } : null;
     };
 
-    var isSVG = function (file) {
-        var regexp = /\.(svg)$/i;
-        if (file) {
-            if (file.toString().match(regexp)) {
-                return true;
-            }
-        }
-
-        return false;
-    };
-
     var formatTime = function(strDate, lang){
         var date = strDate.split(':');
         switch (lang) {
@@ -287,7 +276,6 @@ function utilsFactory($sce) {
         getStartPoint: getStartPoint,
         getEndPoint: getEndPoint,
         getParkingPoint: getParkingPoint,
-        isSVG: isSVG,
         formatTime: formatTime
     };
 

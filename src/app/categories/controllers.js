@@ -298,8 +298,6 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, $loc
         $scope.closeCategoryFilters();
     }
 
-    $scope.isSVG = utilsFactory.isSVG;
-
     loadCategories();
 
     var rootScopeEvents = [
@@ -437,7 +435,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, $loc
         });
     };
 
-    // locale change 
+    // locale change
     $scope.setLang = function (lang) {
         // droddown closed
         $scope.status.isopen = false;
