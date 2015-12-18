@@ -41,7 +41,7 @@
             <span class="target"     ng-if="result.properties.target_audience">{{::result.properties.target_audience}}</span>
         </div>
 
-        <div class="result-themes themes" ng-if="result.properties.themes.length > 0">
+        <div class="result-themes themes" ng-if="result.properties.themes.length > 0" ng-class="{'is-approved': result.properties.approved}">
             <div class="result-themes-label">{{ 'THEMES' | translate }}</div>
             <ul class="result-themes-list">
                 <li class="result-theme" ng-repeat="theme in result.properties.themes track by theme.label">
@@ -51,7 +51,7 @@
             </ul>
         </div>
 
-        <div class="approuved">
+        <div class="approved" ng-if="result.properties.approved">
             <ng-include ng-if="isSVG(approved)" src="approved"></ng-include>
             <img ng-if="!isSVG(approved)" ng-src="{{::approved}}" ng-alt="{{::approvedLabel}}">
         </div>
