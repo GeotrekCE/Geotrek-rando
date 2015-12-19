@@ -1,6 +1,6 @@
 'use strict';
 
-function ItemsListController($scope, globalSettings, favoritesService, $rootScope, mapService) {
+function ItemsListController($scope, $filter, globalSettings, favoritesService, $rootScope, mapService) {
 
     $scope.toggleFavorites = function (currentElement) {
         var currentAction = '';
@@ -18,7 +18,8 @@ function ItemsListController($scope, globalSettings, favoritesService, $rootScop
     };
 
     $scope.isInFavorites = favoritesService.isInFavorites;
-    $scope.approved = globalSettings.APPROVED_SMALL;
+
+    $scope.approved = $filter('isSVG')(globalSettings.APPROVED_BIG) ? globalSettings.APPROVED_BIG : globalSettings.APPROVED_SMALL;
     $scope.approvedLabel = globalSettings.APPROVED_LABEL;
 }
 
