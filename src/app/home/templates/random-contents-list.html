@@ -4,8 +4,8 @@
             <img class="content-picture" ng-src="{{content.properties.pictures[0].url}}" alt="{{content.properties.pictures[0].title}}">
             <div class="content-description">
                 <div class="content-category" tooltip-placement="right" tooltip="{{::content.properties.category.label}}">
-                    <ng-include ng-if="isSVG(content.properties.category.pictogram)"  src="content.properties.category.pictogram"></ng-include>
-                    <img        ng-if="!isSVG(content.properties.category.pictogram)" ng-src="{{::content.properties.category.pictogram}}" ng-alt="{{::content.properties.category.label}}">
+                    <ng-include ng-if="(content.properties.category.pictogram | isSVG)"  src="content.properties.category.pictogram"></ng-include>
+                    <img        ng-if="!(content.properties.category.pictogram | isSVG)" ng-src="{{::content.properties.category.pictogram}}" ng-alt="{{::content.properties.category.label}}">
                 </div>
                 <div class="content-title" ng-bind="content.properties.name"></div>
             </div>
