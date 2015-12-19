@@ -8,10 +8,6 @@ function itemsListDirective() {
             type: '@'
         },
         template: require('./templates/items-list.html'),
-        // controller: function() {
-        //     console.log('test');
-        // }
-        // controller: 'ResultsListeController'
         controller: 'ItemsListController'
     };
 }
