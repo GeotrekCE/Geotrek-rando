@@ -2,8 +2,8 @@
 
     <div class="detail-content-title element-title">
         <div class="cat-icon">
-            <ng-include ng-if="isSVG(result.properties.category.pictogram)" src="result.properties.category.pictogram"></ng-include>
-            <img ng-if="!isSVG(result.properties.category.pictogram)" ng-src="{{::result.properties.category.pictogram}}" ng-alt="{{::result.properties.category.label}}">
+            <ng-include ng-if="result.properties.category.pictogram | isSVG" src="result.properties.category.pictogram"></ng-include>
+            <img ng-if="!result.properties.category.pictogram | isSVG" ng-src="{{::result.properties.category.pictogram}}" ng-alt="{{::result.properties.category.label}}">
         </div>
         <h1 class="detail-content-title-text">{{result.properties.name}}</h1>
     </div>
@@ -13,8 +13,8 @@
     <detail-content-pictures></detail-content-pictures>
 
     <div class="detail-content-approved" ng-if="result.properties.approved">
-        <ng-include ng-if="isSVG(approved)" src="approved"></ng-include>
-        <img ng-if="!isSVG(approved)" ng-src="{{::approved}}" ng-alt="{{::approvedLabel}}">
+        <ng-include ng-if="approved | isSVG" src="approved"></ng-include>
+        <img ng-if="!approved | isSVG" ng-src="{{::approved}}" ng-alt="{{::approvedLabel}}">
     </div>
 
     <div class="detail-content-teaser"  ng-if="result.properties.description_teaser" ng-bind-html="sanitizeData(result.properties.description_teaser, true)"></div>
@@ -99,8 +99,8 @@
         <ul ng-if="result.properties.web_links[0]" class="websites">
             <li ng-repeat="link in result.properties.web_links">
                 <a href="{{::link.url}}" title="{{::link.name}}" target="_blank">
-                    <img ng-if="link.category.pictogram && !isSVG(link.category.pictogram)" ng-src="{{::link.category.pictogram}}" ng-alt="{{::link.category.label}}">
-                    <ng-include ng-if="link.category.pictogram && isSVG(link.category.pictogram)" src="link.category.pictogram"></ng-include>
+                    <img ng-if="link.category.pictogram && !(link.category.pictogram | isSVG)" ng-src="{{::link.category.pictogram}}" ng-alt="{{::link.category.label}}">
+                    <ng-include ng-if="link.category.pictogram && (link.category.pictogram | isSVG)" src="link.category.pictogram"></ng-include>
                     <span>{{::link.name}}</span>
                 </a>
             </li>

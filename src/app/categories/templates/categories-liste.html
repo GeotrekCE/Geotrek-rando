@@ -15,8 +15,8 @@
         ICON
         --><span class="category-icon" ng-click="extendCategories()">
             <span class="circle">
-                <ng-include ng-if="isSVG(category.pictogram)" src="category.pictogram"></ng-include>
-                <img ng-if="!isSVG(category.pictogram)" ng-src="{{::category.pictogram}}">
+                <ng-include ng-if="category.pictogram | isSVG" src="category.pictogram"></ng-include>
+                <img ng-if="!category.pictogram | isSVG" ng-src="{{::category.pictogram}}">
             </span>
         </span><!--
         TITLE
