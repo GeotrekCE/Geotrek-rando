@@ -4,22 +4,22 @@
     </a>
     <ul class="dropdown-menu" role="menu">
         <li ng-if="twitterShareLink" class="twitter">
-            <a href="{{twitterShareLink}}" target="_blank">
+            <a href="{{twitterShareLink}}" target="_blank" tooltip-placement="right" tooltip="Twitter">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
         <li ng-if="fbShareLink" class="facebook">
-            <a href="{{fbShareLink}}" target="_blank">
+            <a href="{{fbShareLink}}" target="_blank" tooltip-placement="right" tooltip="Facebook">
                 <i class="fa fa-facebook"></i>
             </a>
         </li>
         <li ng-if="false" class="google-plus">
-            <a href target="_blank">
+            <a href target="_blank" tooltip-placement="right" tooltip="Google Plus">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li ng-if="mailShareLink" class="mail">
-            <a href="{{mailShareLink}}" target="_blank">
+            <a href="{{mailShareLink}}" target="_blank" tooltip-placement="right" tooltip="Email">
                 <i class="fa fa-envelope"></i>
             </a>
         </li>
