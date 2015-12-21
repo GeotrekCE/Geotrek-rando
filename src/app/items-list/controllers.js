@@ -18,8 +18,7 @@ function ItemsListController($scope, $filter, globalSettings, favoritesService, 
     };
 
     $scope.isInFavorites = favoritesService.isInFavorites;
-
-    $scope.approved = $filter('isSVG')(globalSettings.APPROVED_BIG) ? globalSettings.APPROVED_BIG : globalSettings.APPROVED_SMALL;
+    $scope.approved = globalSettings.APPROVED_SMALL;
     $scope.approvedLabel = globalSettings.APPROVED_LABEL;
 }
 
