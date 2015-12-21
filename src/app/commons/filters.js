@@ -8,6 +8,20 @@ function removeTags($filter) {
 
 }
 
+function isSVG($filter) {
+    return function(file) {
+        var regexp = /\.(svg)$/i;
+        if (file) {
+            if (file.toString().match(regexp)) {
+                return true;
+            }
+        }
+
+        return false;
+    };
+}
+
 module.exports = {
-    removeTags: removeTags
+    removeTags: removeTags,
+    isSVG: isSVG
 };

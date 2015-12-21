@@ -58,8 +58,6 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         });
     };
 
-    $scope.isSVG = utilsFactory.isSVG;
-
     function switchInterestsNodes() {
         if (document.querySelector('.main-infos .interests') && window.matchMedia("(min-width: 769px)").matches) {
             document.querySelector('.detail-map').appendChild(document.querySelector('.main-infos .interests'));
@@ -359,6 +357,9 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
             }
         })
     ];
+
+    $scope.approved = globalSettings.APPROVED_BIG;
+    $scope.approvedLabel = globalSettings.APPROVED_LABEL;
 
     $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
 

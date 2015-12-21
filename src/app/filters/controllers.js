@@ -115,8 +115,6 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
         $scope.extend = !$scope.extend;
     }
 
-    $scope.isSVG = utilsFactory.isSVG;
-
     initFiltersView();
 
     var rootScopeEvents = [
