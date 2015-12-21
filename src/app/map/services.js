@@ -2231,13 +2231,20 @@ function layersService ($http, globalSettings) {
 
         layersConf.forEach(function (layerConf, index) {
             var layerName, layerOptions;
-            console.log(layerConf);
             if (typeof layerConf === 'string') {
                 layers[[defaultName, index + 1].join(' ')] = L.tileLayer(layerConf);
             } else if (layerConf.LAYER_URL) {
-                layerName = layerConf.LAYER_NAME || [defaultName];
-                if (layerConf.LAYER_URL.split('.').pop() === 'geojson') {
-                    layers[layerName] = new L.GeoJSON.AJAX(layerConf.LAYER_URL);
+                layerName = layerConf.LAYER_NAME || [defaultName, index + 1].join(' ');
+                if (layerConf.LAYER_URL.split('.').pop() === 'geojson' || layerConf.LAYER_URL.split('.').pop() === 'json') {
+                    layers[layerName] = new L.GeoJSON.AJAX(layerConf.LAYER_URL, {
+                        style: function (feature) {
+                            return {
+                                'fillColor': feature.properties.fill,
+                                'color': feature.properties.stroke,
+                                'fillOpacity': 1
+                            };
+                        }
+                    });
                 } else {
                     layerOptions = layerConf.OPTIONS || {};
 
