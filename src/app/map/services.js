@@ -2238,11 +2238,14 @@ function layersService ($http, globalSettings) {
                 if (layerConf.LAYER_URL.split('.').pop() === 'geojson' || layerConf.LAYER_URL.split('.').pop() === 'json') {
                     layers[layerName] = new L.GeoJSON.AJAX(layerConf.LAYER_URL, {
                         style: function (feature) {
-                            return {
-                                'fillColor': feature.properties.fill,
-                                'color': feature.properties.stroke,
-                                'fillOpacity': 1
-                            };
+                            var styles = {};
+                            if (feature.properties.fill) {
+                                styles['fillColor'] = feature.properties.fill;
+                            }
+                            if (feature.properties.stroke) {
+                                styles['color'] = feature.properties.stroke;
+                            }
+                            return styles;
                         }
                     });
                 } else {
