@@ -2164,19 +2164,18 @@ function layersService ($http, globalSettings) {
 
     /**
      * Return PERMANENT_TILELAYERS
-     *     or MAIN_LEAFLET_BACKGROUND
-     *     or OPTIONAL_LEAFLET_BACKGROUNDS
-     *     or MAIN_LEAFLET_BACKGROUND + OPTIONAL_LEAFLET_BACKGROUNDS
+     *     or OPTIONAL_TILELAYERS
+     *     or PERMANENT_TILELAYERS + OPTIONAL_TILELAYERS
      */
     var _getMainLayersConf = function _getMainLayersConf () {
-        if (globalSettings.OPTIONAL_LEAFLET_BACKGROUNDS instanceof Array) {
-            if (typeof globalSettings.MAIN_LEAFLET_BACKGROUND === 'object') {
-                return [globalSettings.MAIN_LEAFLET_BACKGROUND].concat(globalSettings.OPTIONAL_LEAFLET_BACKGROUNDS);
+        if (globalSettings.OPTIONAL_TILELAYERS instanceof Array) {
+            if (typeof globalSettings.PERMANENT_TILELAYERS === 'object') {
+                return globalSettings.PERMANENT_TILELAYERS.concat(globalSettings.OPTIONAL_TILELAYERS);
             } else {
-                return globalSettings.OPTIONAL_LEAFLET_BACKGROUNDS;
+                return globalSettings.OPTIONAL_TILELAYERS;
             }
-        } else if (typeof globalSettings.MAIN_LEAFLET_BACKGROUND === 'object') {
-            return [globalSettings.MAIN_LEAFLET_BACKGROUND];
+        } else if (typeof globalSettings.PERMANENT_TILELAYERS === 'object') {
+            return [globalSettings.PERMANENT_TILELAYERS];
         }
 
         if (globalSettings.PERMANENT_TILELAYERS) {
@@ -2232,23 +2231,27 @@ function layersService ($http, globalSettings) {
 
         layersConf.forEach(function (layerConf, index) {
             var layerName, layerOptions;
-
+            console.log(layerConf);
             if (typeof layerConf === 'string') {
                 layers[[defaultName, index + 1].join(' ')] = L.tileLayer(layerConf);
             } else if (layerConf.LAYER_URL) {
-                layerName         = layerConf.LAYER_NAME || [defaultName, index + 1].join(' ');
-                layerOptions      = layerConf.OPTIONS || {};
+                layerName = layerConf.LAYER_NAME || [defaultName];
+                if (layerConf.LAYER_URL.split('.').pop() === 'geojson') {
+                    layers[layerName] = new L.GeoJSON.AJAX(layerConf.LAYER_URL);
+                } else {
+                    layerOptions = layerConf.OPTIONS || {};
 
-                if (layerConf.BOUNDS) {
-                    layerOptions.boundsLimit = {
-                        url: layerConf.BOUNDS
-                    };
+                    if (layerConf.BOUNDS) {
+                        layerOptions.boundsLimit = {
+                            url: layerConf.BOUNDS
+                        };
+                    }
+
+                    layers[layerName] = L.tileLayer(layerConf.LAYER_URL, layerOptions);
                 }
-
-                layers[layerName] = L.tileLayer(layerConf.LAYER_URL, layerOptions);
             }
         });
-
+        console.log(layers);
         return layers;
     }
 
