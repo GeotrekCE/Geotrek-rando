@@ -20,9 +20,13 @@
     "jquery.scrollto": "^2.1.2",
     "leaflet": "^0.7.3",
     "leaflet-active-area": "mappy/Leaflet-active-area",
+<<<<<<< f7ef168029a23e7b294a07582f4c820f666a7143
     "leaflet-ajax": "^2.0.0",
+=======
+>>>>>>> Add arrows on treks layer
     "leaflet-geometryutil": "git://github.com/makinacorpus/Leaflet.GeometryUtil.git",
     "leaflet-minimap": "git://github.com/Norkart/Leaflet-MiniMap.git",
+    "leaflet-textpath": "^0.2.2",
     "leaflet.fullscreen": "^1.1.4",
     "leaflet.markercluster": "^0.4.0",
     "lodash": "^2.4.1",
@@ -47,6 +51,7 @@
     "leaflet.fullscreen": "./node_modules/leaflet.fullscreen/Control.FullScreen.js",
     "leaflet-active-area": "./node_modules/leaflet-active-area/src/leaflet.activearea.js",
     "leaflet-geometryutil": "./node_modules/leaflet-geometryutil/dist/leaflet.geometryutil.js",
+    "leaflet-textpath": "./node_modules/leaflet-textpath/leaflet.textpath.js",
     "lodash": "./node_modules/lodash/lodash.js",
     "sparklines": "./src/app/vendors/scripts/sparklines.min.js",
     "rando3d": "./node_modules/rando3D",
