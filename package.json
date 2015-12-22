@@ -20,10 +20,7 @@
     "jquery.scrollto": "^2.1.2",
     "leaflet": "^0.7.3",
     "leaflet-active-area": "mappy/Leaflet-active-area",
-<<<<<<< f7ef168029a23e7b294a07582f4c820f666a7143
     "leaflet-ajax": "^2.0.0",
-=======
->>>>>>> Add arrows on treks layer
     "leaflet-geometryutil": "git://github.com/makinacorpus/Leaflet.GeometryUtil.git",
     "leaflet-minimap": "git://github.com/Norkart/Leaflet-MiniMap.git",
     "leaflet-textpath": "^0.2.2",
