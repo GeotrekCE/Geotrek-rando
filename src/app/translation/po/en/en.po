@@ -57,6 +57,29 @@ msgid "ALL"
 msgstr "All"
 
 
+# INFORMATIONS
+#
+#
+
+msgid "I_DURATION"
+msgstr "Duration"
+
+msgid "I_DIFFICULTY"
+msgstr "Difficulty"
+
+msgid "I_LENGTH"
+msgstr "Length"
+
+msgid "I_ROUTE"
+msgstr "Route"
+
+msgid "I_ASCENT"
+msgstr "Ascent"
+
+msgid "I_NETWORK"
+msgstr "Network"
+
+
 # RESULTS
 #
 #
