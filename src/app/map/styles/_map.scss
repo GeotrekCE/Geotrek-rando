@@ -183,6 +183,17 @@
 
 }
 
+.arrow-direction {
+    margin: 20px;
+    font-size: 50px;
+    @each $category in $categories {
+        &.category-#{nth($category, 1)} {
+            fill: nth($category, 2);
+            opacity: .8
+        }
+    }
+}
+
 @media (max-width: 767px) {
     .leaflet-control-minimap, .leaflet-control-zoom {
         display: none;

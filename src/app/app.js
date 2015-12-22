@@ -62,6 +62,7 @@ require('bootstrap');
 require('sparklines');
 
 //MAP LIBRARIES
+require('leaflet-textpath');
 require('leaflet-minimap');
 require('leaflet.markercluster');
 require('leaflet.fullscreen');
