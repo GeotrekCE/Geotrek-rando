@@ -1073,7 +1073,9 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
             self.createLayerFromElement(result, type, elementLocation)
                 .then(
                     function (layer) {
-                        layer.setText('    ›    ', {offset: 12, repeat: true, center: true, attributes: {class: 'arrow-direction category-' + result.properties.category.id}});
+                        if (globalSettings.SHOW_ARROWS_ON_ROUTE) {
+                            layer.setText('    ›    ', {offset: 12, repeat: true, center: true, attributes: {class: 'arrow-direction category-' + result.properties.category.id}});
+                        }
                         currentLayer.addLayer(layer);
                         self._clustersLayer.addLayer(currentLayer);
                         if (result.geometry.type !== "Point" && result.geometry.type !== "MultiPoint") {
