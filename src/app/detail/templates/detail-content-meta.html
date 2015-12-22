@@ -17,7 +17,7 @@
         <ul class="meta-item-content">
             <li class="meta-item-content-item" ng-repeat="currentType in result.properties.type1 track by currentType.id">
                 <ng-include ng-if="currentType.pictogram && (currentType.pictogram | isSVG)" src="currentType.pictogram"></ng-include>
-                <img ng-if="currentType.pictogram && !(currentType.pictogram | isSVG))" ng-src="{{::currentType.pictogram}}" ng-alt="{{::currentType.name}}">
+                <img ng-if="currentType.pictogram && !(currentType.pictogram | isSVG)" ng-src="{{::currentType.pictogram}}" ng-alt="{{::currentType.name}}">
                 <span>{{::currentType.name}}</span>
             </li>
         </ul>
