@@ -2264,7 +2264,6 @@ function layersService ($http, globalSettings) {
                 }
             }
         });
-        console.log(layers);
         return layers;
     }
 
