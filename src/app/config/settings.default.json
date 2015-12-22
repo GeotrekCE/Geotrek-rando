@@ -84,6 +84,7 @@
     "SHOW_FILTERS_ON_MAP": true,
     "FILTER_BY_VIEWPORT_DEFAULT": false,
     "POI_EXPANDED": false,
+    "SHOW_ARROWS_ON_ROUTE": false,
     "MARKER_BASE_ICON": "",
     "POI_BASE_ICON": "",
     "SERVICE_BASE_ICON": "",
