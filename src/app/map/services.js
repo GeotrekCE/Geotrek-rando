@@ -209,7 +209,6 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                         function (marker) {
 
                             marker.options.icon.options.className += ' ' + type + '-marker';
-                            var selector = '#' + type + '-category-' + element.properties.category.id + '-' + element.id;
 
                             _.merge(marker.popupSources, {
                                 selector: '#result-category-' + element.properties.category.id + '-' + element.id
@@ -227,7 +226,6 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                         function (marker) {
 
                             marker.options.icon.options.className += ' ' + type + '-marker';
-                            var selector = '#' + type + '-category-' + element.properties.category.id + '-' + element.id;
 
                             _.merge(marker.popupSources, {
                                 selector: '#result-category-' + element.properties.category.id + '-' + element.id
@@ -550,7 +548,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                 default: 'app/vendors/images/leaflet-backgroundlayers/layers.svg'
         	},
 
-        	initialize: function (baseLayers, options) {
+            initialize: function (baseLayers, options) {
         		L.setOptions(this, options);
 
         		this._layers = {};
@@ -561,9 +559,9 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         		}
         	},
 
-        	onAdd: function (map) {
-                var className = 'background-layer-switcher',
-                    container = this._container = L.DomUtil.create('div', className);
+            onAdd: function () {
+                var className = 'background-layer-switcher';
+                this._container = L.DomUtil.create('div', className);
 
                 for (var i in this._layers) {
                     if (this.i !== 0) {
@@ -608,7 +606,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         		return this;
         	},
 
-        	_addLayer: function (layer, name, overlay) {
+            _addLayer: function (layer, name) {
         		var id = L.stamp(layer);
 
         		this._layers[id] = {
@@ -643,8 +641,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         layersControl.addTo(this.map);
         optionalLayersControl.addTo(this.map);
         return true;
-    },
-
+    };
 
     this.setViewPortFilteringControl = function () {
         L.Control.ViewportFilter = L.Control.extend({
@@ -1293,8 +1290,8 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         var pending    = false;
 
         map.eachLayer(function (layer) {
-            if (!(layer instanceof L.TileLayer)) return false;
-            if (!layer.options.boundsLimit) return false;
+            if (!(layer instanceof L.TileLayer)) { return false; }
+            if (!layer.options.boundsLimit) { return false; }
 
             layer.options.boundsLimit = boundsLimitService.check(layer.options.boundsLimit);
 
@@ -1310,7 +1307,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
             }
 
             if (pip) {
-                layer.setOpacity(pip.length)
+                layer.setOpacity(pip.length);
             }
         });
 
@@ -2105,7 +2102,7 @@ function boundsLimitService($http) {
             return dataSet;
         }
 
-        if (!boundsLimit.url) return dataSet;
+        if (!boundsLimit.url) { return dataSet; }
 
         var query = $http.get(boundsLimit.url);
 
@@ -2141,7 +2138,7 @@ function popupService() {
 
         _map.on('unload', _unlockPopup);
         return this;
-    }
+    };
 
     this.setMap = _setMap;
 
@@ -2149,15 +2146,15 @@ function popupService() {
 
     var _lockPopup = function _lockPopup () {
         _infoOpen = true;
-    }
+    };
 
     var _unlockPopup = function _unlockPopup () {
         _infoOpen = false;
-    }
+    };
 
     var _isPopupLocked = function _isPopupLocked () {
         return _infoOpen;
-    }
+    };
 
     var _getInfoContent = function _getInfoContent () {
         /**
@@ -2177,7 +2174,7 @@ function popupService() {
         }
 
         return null;
-    }
+    };
 
     var _getHintContent = function _getHintContent () {
         /**
@@ -2198,11 +2195,10 @@ function popupService() {
          * Fallback (old way) : get hint content form .marker[data-popup]
          */
         var m;
-        var dataPopup;
         var markerDom = this._icon;
 
         if (markerDom instanceof HTMLElement) {
-            m = markerDom.querySelector('.marker')
+            m = markerDom.querySelector('.marker');
             if (m) {
                 return m.getAttribute('data-popup');
             }
@@ -2217,13 +2213,13 @@ function popupService() {
     };
 
     var _getPopup = function _getPopup (type) {
-        if (!this.popupStore) return false;
+        if (!this.popupStore) { return false; }
 
         var popup = this.popupStore[type];
-        if (!popup) return false;
+        if (!popup) { return false; }
 
         var content = popup.getContent();
-        if (content) return popup; // If popupContent exists: popup is already defined
+        if (content) { return popup; } // If popupContent exists: popup is already defined
 
         content = _getContentMethod[type].call(this);
 
@@ -2232,7 +2228,7 @@ function popupService() {
         }
 
         return content ? this.popupStore[type] : false;
-    }
+    };
 
     var _buildPopupStore = function _buildPopupStore () {
         return _.merge({}, {
@@ -2247,12 +2243,12 @@ function popupService() {
                 autoPan: false
             })
         });
-    }
+    };
 
     var _doScroll = function _doScroll (eventType) {
         var $ = jQuery;
 
-        if (!$ || !this.popupSources || !this.popupSources.scroll) { // Test if all needed params exist
+        if (!$ || !this.popupSources|| !this.popupSources.scroll) { // Test if all needed params exist
             return false;
         }
 
@@ -2287,7 +2283,7 @@ function popupService() {
 
                 var popup = _getPopup.call(this, 'info');
 
-                if (!popup) return this;
+                if (!popup) { return this; }
 
                 this.unbindPopup().bindPopup(popup);
                 this.openPopup();
@@ -2340,7 +2336,7 @@ function popupService() {
 
         return marker;
 
-    }
+    };
 
     this.attachPopups = _attachPopups; // Publish method
 }
@@ -2381,7 +2377,7 @@ function layersService ($http, globalSettings) {
     var _getMainLayersGroup = function _getMainLayersGroup () {
         var layersConf = _getMainLayersConf();
 
-        if (!layersConf) return false;
+        if (!layersConf) { return false; }
 
         var LGroup = L.layerGroup();
         layersConf.forEach(function (layerConf) {
@@ -2409,7 +2405,7 @@ function layersService ($http, globalSettings) {
         var layersConf  = _getOptionalLayersConf();
         var defaultName = globalSettings.OPTIONAL_TILELAYERS_NAME || 'Layer';
 
-        if (!layersConf) return false;
+        if (!layersConf) { return false; }
 
         var layers = {};
 
@@ -2418,16 +2414,16 @@ function layersService ($http, globalSettings) {
             if (typeof layerConf === 'string') {
                 layers[[defaultName, index + 1].join(' ')] = L.tileLayer(layerConf);
             } else if (layerConf.LAYER_URL) {
-                layerName = layerConf.LAYER_NAME || [defaultName, index + 1].join(' ');
+                layerName = layerConf.LAYER_NAME || [defaultName, index + 1].join(' ');
                 if (layerConf.LAYER_URL.split('.').pop() === 'geojson' || layerConf.LAYER_URL.split('.').pop() === 'json') {
                     var options = angular.extend({
                         style: function (feature) {
                             var styles = {};
                             if (feature.properties.fill) {
-                                styles['fillColor'] = feature.properties.fill;
+                                styles.fillColor = feature.properties.fill;
                             }
                             if (feature.properties.stroke) {
-                                styles['color'] = feature.properties.stroke;
+                                styles.color = feature.properties.stroke;
                             }
                             return styles;
                         }
@@ -2447,7 +2443,7 @@ function layersService ($http, globalSettings) {
             }
         });
         return layers;
-    }
+    };
 
     this.getMainLayersGroup = _getMainLayersGroup;
     this.getOptionalLayers  = _getOptionalLayers;

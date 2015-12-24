@@ -108,7 +108,7 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
 
         _.forEach(controllersListe, function (currentController) {
             var domElement = document.querySelector(currentController.selector);
-            if (!domElement) return false; // Avoid error if element does not exist
+            if (!domElement) { return false; } // Avoid error if element does not exist
             promises.push(
                 $translate(currentController.translationID)
                     .then(
@@ -208,7 +208,7 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
 
     $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
 
-    $scope.$on('$destroy', function (event) {
+    $scope.$on('$destroy', function () {
         var map = $rootScope.map;
 
         boundsService.setBounds(map.getBounds(), $scope.currentState);
