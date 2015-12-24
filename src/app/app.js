@@ -12,6 +12,7 @@ var dependencies = [
     'rando.layout',
     'rando.header',
     'rando.footer',
+    'rando.leafletextend',
     'rando.icons',
     'rando.map',
     'rando.filters',
@@ -94,6 +95,7 @@ require('./results');
 require('./categories');
 require('./filters');
 require('./icons');
+require('./leaflet-extend');
 require('./map');
 require('./detail');
 require('./favorites');
