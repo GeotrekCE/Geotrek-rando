@@ -2,7 +2,6 @@
 
 angular.module('rando.map', [])
     .service('mapService', require('./services').mapService)
-    .service('iconsService', require('./services').iconsService)
     .service('boundsService', require('./services').boundsService)
     .service('boundsLimitService', require('./services').boundsLimitService)
     .service('popupService', require('./services').popupService)
