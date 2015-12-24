@@ -1,11 +1,18 @@
 .leaflet-control.simple-layer-switcher {
   a.background {
     opacity: 1.0;
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
+    padding: 2px;
     padding: 0;
     margin-top: 0;
-    outline: solid 1px white;
+    border: solid white 2px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+    border-radius: 3px;
+    background: #f8f8f9;
+    transition: all .2s;
+    box-sizing: content-box;
+    cursor: pointer;
     &.satellite {
       background-image: url(#{$root-images-path}/switcher-satellite.jpg);
     }
