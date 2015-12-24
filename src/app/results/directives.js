@@ -1,7 +1,5 @@
 'use strict';
 
-var controllers = require('./controllers');
-
 function resultsListeDirective() {
     return {
         restrict: 'E',

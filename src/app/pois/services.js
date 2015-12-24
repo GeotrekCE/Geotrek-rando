@@ -9,7 +9,7 @@ function poisService($resource, $q, globalSettings, settingsFactory, translation
         _.forEach(poisData.features, function (poi) {
 
             if (poi.properties.pictures && poi.properties.pictures[0]) {
-                _.forEach(poi.properties.pictures, function (picture) {
+                _.forEach(poi.properties.pictures, function (picture) {
                     if (picture.url !== null) {
                         picture.url = globalSettings.API_URL + picture.url;
                     }
@@ -71,7 +71,7 @@ function poisService($resource, $q, globalSettings, settingsFactory, translation
 
     };
 
-    this.getPoisFromElement = function (elementId, forceRefresh) {
+    this.getPoisFromElement = function (elementId) {
 
         var deferred = $q.defer();
         var currentLang = translationService.getCurrentLang();

@@ -149,7 +149,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                             deferred.reject('No matching element found');
                         }
                     }
-                )
+                );
         }
 
         if (globalSettings.ENABLE_TOURISTIC_CONTENT) {
@@ -166,7 +166,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                             deferred.reject('No matching element found');
                         }
                     }
-                )
+                );
         }
 
         if (globalSettings.ENABLE_TOURISTIC_EVENTS) {
@@ -184,7 +184,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                         }
 
                     }
-                )
+                );
         }
 
         return deferred.promise;
