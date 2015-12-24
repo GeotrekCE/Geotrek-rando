@@ -344,6 +344,7 @@ function mapService($http, $q, $state, $resource, $filter, utilsFactory, globalS
         this.setFullScreenControl();
         this.setMinimap();
         this.setScale();
+        this.createServicesToggleControl();
         this.createResetViewButton();
         this.createLayerSwitch();
 
@@ -404,6 +405,45 @@ function mapService($http, $q, $state, $resource, $filter, utilsFactory, globalS
     };
 
     this.createServicesToggleControl = function () {
+
+        L.Control.ServicesToggle = L.Control.extend({
+            options: {
+                position: 'bottomleft',
+            },
+
+            onAdd: function (map) {
+
+                this.map = map;
+
+                this._container = L.DomUtil.create('div', 'simple-services-toggle');
+
+                var className = 'toggle-layer services active';
+
+                this.button = L.DomUtil.create('a', className, this._container);
+                this.button.title = 'Toggle Services';
+
+                L.DomEvent.disableClickPropagation(this.button);
+                L.DomEvent.on(this.button, 'click', function () {
+                    this.toggleLayer();
+                }, this);
+
+                return this._container;
+            },
+
+            toggleLayer: function () {
+
+                if (this.map.hasLayer(self._servicesMarkersLayer)) {
+                    this.map.removeLayer(self._servicesMarkersLayer);
+                    this.button.classList.remove('active');
+                } else {
+                    this.map.addLayer(self._servicesMarkersLayer);
+                    this.button.classList.add('active');
+                }
+            }
+
+        });
+        self.servicesControl = new L.Control.ServicesToggle();
+        self.servicesControl.addTo(this.map);
     };
 
 
@@ -533,7 +573,7 @@ function mapService($http, $q, $state, $resource, $filter, utilsFactory, globalS
                     icon = obj.layer.options.icon ? obj.layer.options.icon : this.options.default;
 
                 control.layerId = L.stamp(obj.layer);
-                
+
                 L.DomEvent.on(control, 'click', function() {
                     if (!this._map.hasLayer(obj.layer)) {
         				this._map.addLayer(obj.layer);
