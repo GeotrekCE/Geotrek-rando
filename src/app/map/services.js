@@ -404,7 +404,225 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         return this.map.addControl(new L.Control.Resetview());
     };
 
+    this.createServicesToggleControl = function () {
+
+        L.Control.ServicesToggle = L.Control.extend({
+            options: {
+                position: 'bottomleft',
+            },
+
+            onAdd: function (map) {
+
+                this.map = map;
+
+                this._container = L.DomUtil.create('div', 'simple-services-toggle');
+
+                var className = 'toggle-layer services active';
+
+                this.button = L.DomUtil.create('a', className, this._container);
+                this.button.title = 'Toggle Services';
+
+                L.DomEvent.disableClickPropagation(this.button);
+                L.DomEvent.on(this.button, 'click', function () {
+                    this.toggleLayer();
+                }, this);
+
+                return this._container;
+            },
+
+            toggleLayer: function () {
+
+                if (this.map.hasLayer(self._servicesMarkersLayer)) {
+                    this.map.removeLayer(self._servicesMarkersLayer);
+                    this.button.classList.remove('active');
+                } else {
+                    this.map.addLayer(self._servicesMarkersLayer);
+                    this.button.classList.add('active');
+                }
+            }
+
+        });
+        self.servicesControl = new L.Control.ServicesToggle();
+        self.servicesControl.addTo(this.map);
+    };
+
+
+
     this.createLayerSwitch = function () {
+
+        /*
+         * L.Control.SwitchBackgroundLayers is a control to allow users to switch between different main layers on the map.
+         */
+        L.Control.SwitchBackgroundLayers = L.Control.extend({
+            options: {
+                position: 'bottomleft',
+            },
+
+            initialize: function (baseLayers, options) {
+        		L.setOptions(this, options);
+
+        		this._layers = {};
+
+        		for (var i in baseLayers) {
+                    if (this.i !== 0) {
+                        this._addLayer(baseLayers[i], i);
+                    }
+        		}
+
+        	},
+
+            onAdd: function (map) {
+
+                this.switch_detail_zoom = jQuery(map._container).data('switch-detail-zoom');
+                if (this.switch_detail_zoom > 0) {
+                    map.on('zoomend', function (e) {
+                        if (map.isShowingLayer('satellite')) {
+                            return;
+                        }
+                        if (e.target.getZoom() > this.switch_detail_zoom) {
+                            if (!map.isShowingLayer('detail')) {
+                                setTimeout(function () { map.switchLayer('detail'); }, 100);
+                            }
+                        } else {
+                            if (!map.isShowingLayer('main')) {
+                                setTimeout(function () { map.switchLayer('main'); }, 100);
+                            }
+                        }
+                    }, this);
+                }
+
+                this._container = L.DomUtil.create('div', 'simple-layer-switcher');
+
+                var className = 'toggle-layer background satellite';
+
+                this.button = L.DomUtil.create('a', className, this._container);
+                this.button.title = 'Show satellite';
+
+                L.DomEvent.disableClickPropagation(this.button);
+                L.DomEvent.on(this.button, 'click', function () {
+                    this._toggleLayer();
+                }, this);
+
+
+                return this._container;
+            },
+
+            _toggleLayer: function () {
+
+                if (this._map.isShowingLayer('main') || this._map.isShowingLayer('detail')) {
+                    this._map.switchLayer('satellite');
+
+                    L.DomUtil.removeClass(this.button, 'satellite');
+                    L.DomUtil.addClass(this.button, 'main');
+                } else {
+                    this._map.switchLayer(this._map.getZoom() > this.switch_detail_zoom ? 'detail' : 'main');
+
+                    L.DomUtil.removeClass(this.button, 'main');
+                    L.DomUtil.addClass(this.button, 'satellite');
+                }
+            },
+
+            _addLayer: function (layer, name) {
+        		var id = L.stamp(layer);
+
+        		this._layers[id] = {
+        			layer: layer,
+        			name: name
+        		};
+        	}
+
+        });
+
+        L.control.switchBackgroundLayers = function (baseLayers, options) {
+        	return new L.Control.SwitchBackgroundLayers(baseLayers, options);
+        };
+
+
+
+
+        /*
+         * L.Control.BackgroundLayers is a control to allow users to use custom image for layers control.
+         */
+
+        L.Control.BackgroundLayers = L.Control.extend({
+        	options: {
+        		position: 'topright',
+                default: 'app/vendors/images/leaflet-backgroundlayers/layers.svg'
+        	},
+
+        	initialize: function (baseLayers, options) {
+        		L.setOptions(this, options);
+
+        		this._layers = {};
+        		for (var i in baseLayers) {
+                    if (this.i !== 0) {
+                        this._addLayer(baseLayers[i], i);
+                    }
+        		}
+        	},
+
+        	onAdd: function (map) {
+                var className = 'background-layer-switcher',
+                    container = this._container = L.DomUtil.create('div', className);
+
+                for (var i in this._layers) {
+                    if (this.i !== 0) {
+                        var obj = this._layers[i];
+                        this._addItem(obj);
+                    }
+                }
+                return this._container;
+        	},
+
+            _addItem: function (obj) {
+                var control = document.createElement('a'),
+                    active = this._map.hasLayer(obj.layer) ? 'active' : '',
+                    icon = obj.layer.options.icon ? obj.layer.options.icon : this.options.default;
+
+                control.layerId = L.stamp(obj.layer);
+
+                L.DomEvent.on(control, 'click', function() {
+                    if (!this._map.hasLayer(obj.layer)) {
+        				this._map.addLayer(obj.layer);
+
+        			} else if (this._map.hasLayer(obj.layer)) {
+        				this._map.removeLayer(obj.layer);
+        			}
+                }, this);
+
+                control.className = 'background ' + active;
+                control.innerHTML = '<img src="' + icon + '" alt="" />';
+
+                var container = this._container;
+                container.appendChild(control);
+        	},
+
+        	addBaseLayer: function (layer, name) {
+        		this._addLayer(layer, name);
+        		return this;
+        	},
+
+        	removeLayer: function (layer) {
+        		var id = L.stamp(layer);
+        		delete this._layers[id];
+        		return this;
+        	},
+
+        	_addLayer: function (layer, name, overlay) {
+        		var id = L.stamp(layer);
+
+        		this._layers[id] = {
+        			layer: layer,
+        			name: name
+        		};
+        	}
+        });
+
+        L.control.backgroundLayers = function (baseLayers, options) {
+        	return new L.Control.BackgroundLayers(baseLayers, options);
+        };
+
+
         var permanentTileLayersName   = globalSettings.PERMANENT_TILELAYERS_NAME  || 'Default';
         var orthophotoTileLayersName  = globalSettings.ORTHOPHOTO_TILELAYERS_NAME || 'Satellite';
         var permanentTileLayersParam  = {};
@@ -412,14 +630,21 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         permanentTileLayersParam[permanentTileLayersName]  = this._baseLayers.main;
         permanentTileLayersParam[orthophotoTileLayersName] = this._baseLayers.satellite;
 
-        var layersControl = L.control.layers(
+        var layersControl = L.control.switchBackgroundLayers(
             permanentTileLayersParam,
+            { position: 'bottomleft' }
+        );
+
+        var optionalLayersControl = L.control.backgroundLayers(
             this._optionalLayers,
             { position: 'bottomleft' }
         );
 
-        return layersControl.addTo(this.map);
-    }
+        layersControl.addTo(this.map);
+        optionalLayersControl.addTo(this.map);
+        return true;
+    },
+
 
     this.setViewPortFilteringControl = function () {
         L.Control.ViewportFilter = L.Control.extend({
@@ -476,49 +701,6 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
             weight: 2
         };
     };
-
-    this.createServicesToggleControl = function () {
-
-        L.Control.ServicesToggle = L.Control.extend({
-            options: {
-                position: 'bottomleft',
-            },
-
-            onAdd: function (map) {
-
-                this.map = map;
-
-                this._container = L.DomUtil.create('div', 'simple-services-toggle');
-
-                var className = 'toggle-layer services active';
-
-                this.button = L.DomUtil.create('a', className, this._container);
-                this.button.title = 'Toggle Services';
-
-                L.DomEvent.disableClickPropagation(this.button);
-                L.DomEvent.on(this.button, 'click', function () {
-                    this.toggleLayer();
-                }, this);
-
-                return this._container;
-            },
-
-            toggleLayer: function () {
-
-                if (this.map.hasLayer(self._servicesMarkersLayer)) {
-                    this.map.removeLayer(self._servicesMarkersLayer);
-                    this.button.classList.remove('active');
-                } else {
-                    this.map.addLayer(self._servicesMarkersLayer);
-                    this.button.classList.add('active');
-                }
-            }
-
-        });
-        self.servicesControl = new L.Control.ServicesToggle();
-        self.servicesControl.addTo(this.map);
-    };
-
 
     // CUSTOM MIXINS //////////////////////////////
     //
@@ -2217,7 +2399,6 @@ function layersService ($http, globalSettings) {
 
                 layer = L.tileLayer(layerConf.LAYER_URL, layerOptions);
             }
-
             LGroup.addLayer(layer);
         });
 
@@ -2239,7 +2420,7 @@ function layersService ($http, globalSettings) {
             } else if (layerConf.LAYER_URL) {
                 layerName = layerConf.LAYER_NAME || [defaultName, index + 1].join(' ');
                 if (layerConf.LAYER_URL.split('.').pop() === 'geojson' || layerConf.LAYER_URL.split('.').pop() === 'json') {
-                    layers[layerName] = new L.GeoJSON.AJAX(layerConf.LAYER_URL, {
+                    var options = angular.extend({
                         style: function (feature) {
                             var styles = {};
                             if (feature.properties.fill) {
@@ -2250,7 +2431,8 @@ function layersService ($http, globalSettings) {
                             }
                             return styles;
                         }
-                    });
+                    }, layerConf.OPTIONS);
+                    layers[layerName] = new L.GeoJSON.AJAX(layerConf.LAYER_URL, options);
                 } else {
                     layerOptions = layerConf.OPTIONS || {};
 
