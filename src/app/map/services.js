@@ -1,6 +1,6 @@
 'use strict';
 
-function mapService($http, $q, $state, $resource, $filter, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService, popupService, layersService, boundsLimitService) {
+function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService, popupService, layersService, boundsLimitService) {
 
     var self = this;
 
@@ -464,7 +464,9 @@ function mapService($http, $q, $state, $resource, $filter, utilsFactory, globalS
         		this._layers = {};
 
         		for (var i in baseLayers) {
-        			this._addLayer(baseLayers[i], i);
+                    if (this.i !== 0) {
+                        this._addLayer(baseLayers[i], i);
+                    }
         		}
 
         	},
@@ -553,16 +555,21 @@ function mapService($http, $q, $state, $resource, $filter, utilsFactory, globalS
 
         		this._layers = {};
         		for (var i in baseLayers) {
-        			this._addLayer(baseLayers[i], i);
+                    if (this.i !== 0) {
+                        this._addLayer(baseLayers[i], i);
+                    }
         		}
         	},
 
         	onAdd: function (map) {
                 var className = 'background-layer-switcher',
                     container = this._container = L.DomUtil.create('div', className);
+
                 for (var i in this._layers) {
-                    var obj = this._layers[i];
-                    this._addItem(obj);
+                    if (this.i !== 0) {
+                        var obj = this._layers[i];
+                        this._addItem(obj);
+                    }
                 }
                 return this._container;
         	},
