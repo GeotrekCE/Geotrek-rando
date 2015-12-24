@@ -2,9 +2,17 @@
 
 function Rando3DController(result, $scope, $timeout, $modalInstance, globalSettings, translationService, settingsFactory) {
     $scope.result = result;
+    $scope.isLoading = false;
+    var loadingCallback = function () {
+        $timeout(function () {
+            $scope.isLoading = false;
+        });
+    }
+
     function init3D() {
+        $scope.isLoading = true;
         var pk = result.id;
-        var currentLang = translationService.getCurrentLang().code;
+        var currentLang = translationService.getCurrentLang();
         if (currentLang.code) {
             currentLang = currentLang.code;
         }
@@ -28,7 +36,7 @@ function Rando3DController(result, $scope, $timeout, $modalInstance, globalSetti
         var cameraID = "examine";
         var app3D = new Rando3D();
         var scene = app3D.init(customSettings, canvas, cameraID);
-        scene.init();
+        scene.init(loadingCallback);
     }
 
     $timeout(init3D, 500);
