@@ -22,7 +22,11 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
     this.addGeoServices = function (element) {
         var deferred = $q.defer();
 
-        var controlServices = L.control.servicesToggle(self._servicesMarkersLayer);
+        var controlServices = L.control.backgroundLayers(
+            self._servicesMarkersLayer,
+            { position: 'bottomleft', defaultIcon: 'images/icons/services.svg', groupLayers: true }
+        );
+
         controlServices.addTo(this.map);
         var classServices = controlServices.getContainer().classList;
 
@@ -202,7 +206,6 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
     };
 
     this.createElementsMarkers = function (elements, type) {
-        // console.log(type);
         var startPoint = [];
         elements.forEach(function (element) {
             startPoint = utilsFactory.getStartPoint(element);
@@ -346,7 +349,6 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         this.setFullScreenControl();
         this.setMinimap();
         this.setScale();
-        // this.createServicesToggleControl();
         this.createResetViewButton();
         this.createLayerSwitch();
 
@@ -368,91 +370,48 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         }).addTo(this.map);
     };
 
-    /**
-     * Create and attach the map control button allowing to reset pan/zoom to the main loaded content
-     * @return {Oject} Map object
-     */
     this.createResetViewButton = function () {
-        function getLayersToFit () {
-            var layers = [self._clustersLayer];
-            if (self._treksgeoJsonLayer) {
-                layers.push(self._treksgeoJsonLayer);
-            }
-            return layers;
-        }
-
-        function resetViewButtonClick () {
-            return self.updateBounds(getLayersToFit());
-        }
-
-        function resetViewButtonOnAdd () {
-            var container = L.DomUtil.create('div', 'leaflet-control-resetview leaflet-bar');
-            var button    = L.DomUtil.create('a',   'leaflet-control-resetview-button', container);
-            button.title  = 'Reset view';
-
-            L.DomEvent.disableClickPropagation(button);
-            L.DomEvent.on(button, 'click', resetViewButtonClick, self);
-
-            return container;
-        }
-
+        /**
+         * Create and attach the map control button allowing to reset pan/zoom to the main loaded content
+         * @return {Oject} Map object
+         */
         L.Control.Resetview = L.Control.extend({
             options: {
                 position: 'topright'
             },
-            onAdd: resetViewButtonOnAdd
+
+            onAdd: function (map) {
+                this.map = map;
+
+                var container = L.DomUtil.create('div', 'leaflet-control-resetview leaflet-bar');
+                var button    = L.DomUtil.create('a',   'leaflet-control-resetview-button', container);
+                button.title  = 'Reset view';
+
+                L.DomEvent.disableClickPropagation(button);
+                L.DomEvent.on(button, 'click', this._resetViewButtonClick, this);
+
+                return container;
+            },
+
+            _resetViewButtonClick: function () {
+                return self.updateBounds(this._getLayersToFit());
+            },
+
+            _getLayersToFit: function () {
+                var layers = [self._clustersLayer];
+                if (self._treksgeoJsonLayer) {
+                    layers.push(self._treksgeoJsonLayer);
+                }
+                return layers;
+            }
         });
 
-        return this.map.addControl(new L.Control.Resetview());
+        L.control.resetview = function () {
+            return new L.Control.Resetview();
+        };
+
+        L.control.resetview().addTo(this.map);
     };
-
-    // this.createServicesToggleControl = function () {
-    //
-    //     L.Control.ServicesToggle = L.Control.extend({
-    //         options: {
-    //             position: 'bottomleft',
-    //         },
-    //
-    //         onAdd: function (map) {
-    //
-    //             this.map = map;
-    //
-    //             this._container = L.DomUtil.create('div', 'simple-services-toggle');
-    //
-    //             var className = 'toggle-layer services active';
-    //
-    //             this.button = L.DomUtil.create('a', className, this._container);
-    //             this.button.title = 'Toggle Services';
-    //
-    //             L.DomEvent.disableClickPropagation(this.button);
-    //             L.DomEvent.on(this.button, 'click', function () {
-    //                 this.toggleLayer();
-    //             }, this);
-    //
-    //             return this._container;
-    //         },
-    //
-    //         toggleLayer: function () {
-    //
-    //             if (this.map.hasLayer(self._servicesMarkersLayer)) {
-    //                 this.map.removeLayer(self._servicesMarkersLayer);
-    //                 this.button.classList.remove('active');
-    //             } else {
-    //                 this.map.addLayer(self._servicesMarkersLayer);
-    //                 this.button.classList.add('active');
-    //             }
-    //         }
-    //
-    //     });
-    //     // self.servicesControl = new L.Control.ServicesToggle();
-    //     // self.servicesControl.addTo(this.map);
-    //
-    //     L.control.servicesToggle = function () {
-    //        return new L.Control.ServicesToggle();
-    //    };
-    // };
-
-
 
     this.createLayerSwitch = function () {
 
