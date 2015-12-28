@@ -21,7 +21,15 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
 
     this.addGeoServices = function (element) {
         var deferred = $q.defer();
-        var controlClasses = self.servicesControl.getContainer().classList;
+
+        var controlServices = L.control.backgroundLayers(
+            self._servicesMarkersLayer,
+            { position: 'bottomleft', defaultIcon: 'images/icons/services.svg', groupLayers: true }
+        );
+
+        controlServices.addTo(this.map);
+        var classServices = controlServices.getContainer().classList;
+
         if (element.properties.contentType === 'trek') {
             servicesService.getServicesFromElement(element.id)
                 .then(
@@ -39,24 +47,24 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                                         self._servicesMarkersLayer.addLayer(marker);
 
                                         if (counter === services.features.length) {
-                                            if (controlClasses.contains('hidden')) {
-                                                controlClasses.remove('hidden');
+                                            if (classServices.contains('hidden')) {
+                                                classServices.remove('hidden');
                                             }
                                             deferred.resolve();
                                         }
                                     }
                                 );
                         });
-                        if (services.features.length === 0 && !controlClasses.contains('hidden')) {
-                            controlClasses.add('hidden');
+                        if (services.features.length === 0 && !classServices.contains('hidden')) {
+                            classServices.add('hidden');
                             deferred.resolve();
                         }
                     }
                 );
 
         } else {
-            if (!controlClasses.contains('hidden')) {
-                controlClasses.add('hidden');
+            if (!classServices.contains('hidden')) {
+                classServices.add('hidden');
                 deferred.resolve();
             }
         }
@@ -198,7 +206,6 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
     };
 
     this.createElementsMarkers = function (elements, type) {
-        // console.log(type);
         var startPoint = [];
         elements.forEach(function (element) {
             startPoint = utilsFactory.getStartPoint(element);
@@ -342,7 +349,6 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         this.setFullScreenControl();
         this.setMinimap();
         this.setScale();
-        this.createServicesToggleControl();
         this.createResetViewButton();
         this.createLayerSwitch();
 
@@ -364,262 +370,50 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         }).addTo(this.map);
     };
 
-    /**
-     * Create and attach the map control button allowing to reset pan/zoom to the main loaded content
-     * @return {Oject} Map object
-     */
     this.createResetViewButton = function () {
-        function getLayersToFit () {
-            var layers = [self._clustersLayer];
-            if (self._treksgeoJsonLayer) {
-                layers.push(self._treksgeoJsonLayer);
-            }
-            return layers;
-        }
-
-        function resetViewButtonClick () {
-            return self.updateBounds(getLayersToFit());
-        }
-
-        function resetViewButtonOnAdd () {
-            var container = L.DomUtil.create('div', 'leaflet-control-resetview leaflet-bar');
-            var button    = L.DomUtil.create('a',   'leaflet-control-resetview-button', container);
-            button.title  = 'Reset view';
-
-            L.DomEvent.disableClickPropagation(button);
-            L.DomEvent.on(button, 'click', resetViewButtonClick, self);
-
-            return container;
-        }
-
+        /**
+         * Create and attach the map control button allowing to reset pan/zoom to the main loaded content
+         * @return {Oject} Map object
+         */
         L.Control.Resetview = L.Control.extend({
             options: {
                 position: 'topright'
             },
-            onAdd: resetViewButtonOnAdd
-        });
-
-        return this.map.addControl(new L.Control.Resetview());
-    };
-
-    this.createServicesToggleControl = function () {
-
-        L.Control.ServicesToggle = L.Control.extend({
-            options: {
-                position: 'bottomleft',
-            },
 
             onAdd: function (map) {
-
                 this.map = map;
 
-                this._container = L.DomUtil.create('div', 'simple-services-toggle');
+                var container = L.DomUtil.create('div', 'leaflet-control-resetview leaflet-bar');
+                var button    = L.DomUtil.create('a',   'leaflet-control-resetview-button', container);
+                button.title  = 'Reset view';
 
-                var className = 'toggle-layer services active';
+                L.DomEvent.disableClickPropagation(button);
+                L.DomEvent.on(button, 'click', this._resetViewButtonClick, this);
 
-                this.button = L.DomUtil.create('a', className, this._container);
-                this.button.title = 'Toggle Services';
-
-                L.DomEvent.disableClickPropagation(this.button);
-                L.DomEvent.on(this.button, 'click', function () {
-                    this.toggleLayer();
-                }, this);
-
-                return this._container;
+                return container;
             },
 
-            toggleLayer: function () {
+            _resetViewButtonClick: function () {
+                return self.updateBounds(this._getLayersToFit());
+            },
 
-                if (this.map.hasLayer(self._servicesMarkersLayer)) {
-                    this.map.removeLayer(self._servicesMarkersLayer);
-                    this.button.classList.remove('active');
-                } else {
-                    this.map.addLayer(self._servicesMarkersLayer);
-                    this.button.classList.add('active');
+            _getLayersToFit: function () {
+                var layers = [self._clustersLayer];
+                if (self._treksgeoJsonLayer) {
+                    layers.push(self._treksgeoJsonLayer);
                 }
+                return layers;
             }
-
         });
-        self.servicesControl = new L.Control.ServicesToggle();
-        self.servicesControl.addTo(this.map);
+
+        L.control.resetview = function () {
+            return new L.Control.Resetview();
+        };
+
+        L.control.resetview().addTo(this.map);
     };
 
-
-
     this.createLayerSwitch = function () {
-
-        /*
-         * L.Control.SwitchBackgroundLayers is a control to allow users to switch between different main layers on the map.
-         */
-        L.Control.SwitchBackgroundLayers = L.Control.extend({
-            options: {
-                position: 'bottomleft',
-            },
-
-            initialize: function (baseLayers, options) {
-        		L.setOptions(this, options);
-
-        		this._layers = {};
-
-        		for (var i in baseLayers) {
-                    if (this.i !== 0) {
-                        this._addLayer(baseLayers[i], i);
-                    }
-        		}
-
-        	},
-
-            onAdd: function (map) {
-
-                this.switch_detail_zoom = jQuery(map._container).data('switch-detail-zoom');
-                if (this.switch_detail_zoom > 0) {
-                    map.on('zoomend', function (e) {
-                        if (map.isShowingLayer('satellite')) {
-                            return;
-                        }
-                        if (e.target.getZoom() > this.switch_detail_zoom) {
-                            if (!map.isShowingLayer('detail')) {
-                                setTimeout(function () { map.switchLayer('detail'); }, 100);
-                            }
-                        } else {
-                            if (!map.isShowingLayer('main')) {
-                                setTimeout(function () { map.switchLayer('main'); }, 100);
-                            }
-                        }
-                    }, this);
-                }
-
-                this._container = L.DomUtil.create('div', 'simple-layer-switcher');
-
-                var className = 'toggle-layer background satellite';
-
-                this.button = L.DomUtil.create('a', className, this._container);
-                this.button.title = 'Show satellite';
-
-                L.DomEvent.disableClickPropagation(this.button);
-                L.DomEvent.on(this.button, 'click', function () {
-                    this._toggleLayer();
-                }, this);
-
-
-                return this._container;
-            },
-
-            _toggleLayer: function () {
-
-                if (this._map.isShowingLayer('main') || this._map.isShowingLayer('detail')) {
-                    this._map.switchLayer('satellite');
-
-                    L.DomUtil.removeClass(this.button, 'satellite');
-                    L.DomUtil.addClass(this.button, 'main');
-                } else {
-                    this._map.switchLayer(this._map.getZoom() > this.switch_detail_zoom ? 'detail' : 'main');
-
-                    L.DomUtil.removeClass(this.button, 'main');
-                    L.DomUtil.addClass(this.button, 'satellite');
-                }
-            },
-
-            _addLayer: function (layer, name) {
-        		var id = L.stamp(layer);
-
-        		this._layers[id] = {
-        			layer: layer,
-        			name: name
-        		};
-        	}
-
-        });
-
-        L.control.switchBackgroundLayers = function (baseLayers, options) {
-        	return new L.Control.SwitchBackgroundLayers(baseLayers, options);
-        };
-
-
-
-
-        /*
-         * L.Control.BackgroundLayers is a control to allow users to use custom image for layers control.
-         */
-
-        L.Control.BackgroundLayers = L.Control.extend({
-        	options: {
-        		position: 'topright',
-                default: 'app/vendors/images/leaflet-backgroundlayers/layers.svg'
-        	},
-
-            initialize: function (baseLayers, options) {
-        		L.setOptions(this, options);
-
-        		this._layers = {};
-        		for (var i in baseLayers) {
-                    if (this.i !== 0) {
-                        this._addLayer(baseLayers[i], i);
-                    }
-        		}
-        	},
-
-            onAdd: function () {
-                var className = 'background-layer-switcher';
-                this._container = L.DomUtil.create('div', className);
-
-                for (var i in this._layers) {
-                    if (this.i !== 0) {
-                        var obj = this._layers[i];
-                        this._addItem(obj);
-                    }
-                }
-                return this._container;
-        	},
-
-            _addItem: function (obj) {
-                var control = document.createElement('a'),
-                    active = this._map.hasLayer(obj.layer) ? 'active' : '',
-                    icon = obj.layer.options.icon ? obj.layer.options.icon : this.options.default;
-
-                control.layerId = L.stamp(obj.layer);
-
-                L.DomEvent.on(control, 'click', function() {
-                    if (!this._map.hasLayer(obj.layer)) {
-        				this._map.addLayer(obj.layer);
-
-        			} else if (this._map.hasLayer(obj.layer)) {
-        				this._map.removeLayer(obj.layer);
-        			}
-                }, this);
-
-                control.className = 'background ' + active;
-                control.innerHTML = '<img src="' + icon + '" alt="" />';
-
-                var container = this._container;
-                container.appendChild(control);
-        	},
-
-        	addBaseLayer: function (layer, name) {
-        		this._addLayer(layer, name);
-        		return this;
-        	},
-
-        	removeLayer: function (layer) {
-        		var id = L.stamp(layer);
-        		delete this._layers[id];
-        		return this;
-        	},
-
-            _addLayer: function (layer, name) {
-        		var id = L.stamp(layer);
-
-        		this._layers[id] = {
-        			layer: layer,
-        			name: name
-        		};
-        	}
-        });
-
-        L.control.backgroundLayers = function (baseLayers, options) {
-        	return new L.Control.BackgroundLayers(baseLayers, options);
-        };
-
 
         var permanentTileLayersName   = globalSettings.PERMANENT_TILELAYERS_NAME  || 'Default';
         var orthophotoTileLayersName  = globalSettings.ORTHOPHOTO_TILELAYERS_NAME || 'Satellite';
@@ -1399,664 +1193,6 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
 
 }
 
-function iconsService($resource, $q, $http, $filter, globalSettings, categoriesService, poisService, servicesService) {
-
-    var self = this;
-
-    this.icons_liste = {
-        default_icon: {},
-
-        departure: _.merge({
-            iconUrl: '/images/map/departure.svg',
-            iconSize: [46, 52],
-            iconAnchor: [23, 52],
-            popupAnchor: [0, -52],
-            className: 'departure-marker'
-        }, globalSettings.DEPARTURE_ICON),
-        arrival: _.merge({
-            iconUrl: '/images/map/arrival.svg',
-            iconSize: [46, 52],
-            iconAnchor: [23, 52],
-            popupAnchor: [0, -52],
-            className: 'arrival-marker'
-        }, globalSettings.ARRIVAL_ICON),
-        departureArrival: _.merge({
-            iconUrl: '/images/map/departure-arrival.svg',
-            iconSize: [46, 52],
-            iconAnchor: [23, 52],
-            popupAnchor: [0, -52],
-            className: 'departure-arrival-marker'
-        }, globalSettings.DEPARTURE_ARRIVAL_ICON),
-
-        parking: _.merge({
-            iconUrl: '/images/map/parking.svg',
-            iconSize: [20, 20],
-            iconAnchor: [10, 10],
-            popupAnchor: [0, -10],
-            labelAnchor: [10, 10],
-            className: 'parking-marker'
-        }, globalSettings.PARKING_ICON),
-        information: _.merge({
-            iconUrl: '/images/map/info.svg',
-            iconSize: [],
-            iconAnchor: [],
-            popupAnchor: [],
-            labelAnchor: [],
-            className: ''
-        }, globalSettings.INFO_ICON),
-        ref_point: {
-            iconUrl: '',
-            iconSize: [26 ,26],
-            iconAnchor: [13, 26],
-            popupAnchor: [0, -26],
-            labelAnchor: [13, 13],
-            className: 'ref-point'
-        },
-        poi: {
-            iconUrl: '',
-            iconSize: [],
-            iconAnchor: [],
-            popupAnchor: [],
-            labelAnchor: [],
-            className: ''
-        },
-        service: {
-            iconUrl: '',
-            iconSize: [],
-            iconAnchor: [],
-            popupAnchor: [],
-            labelAnchor: [],
-            className: ''
-        },
-
-        category_base: _.merge({
-            iconUrl: '/images/map/category_base.svg',
-            iconSize: [40, 60],
-            iconAnchor: [20, 60],
-            popupAnchor: [0, -60],
-            labelAnchor: [20, 20]
-        }, globalSettings.MARKER_BASE_ICON),
-        poi_base: _.merge({
-            iconUrl: '/images/map/category_base.svg',
-            iconSize: [40, 60],
-            iconAnchor: [20, 60],
-            popupAnchor: [0, -60],
-            labelAnchor: [20, 20]
-        }, globalSettings.POI_BASE_ICON),
-        service_base: _.merge({
-            iconUrl: '',
-            iconSize: [30, 30],
-            iconAnchor: [15, 15],
-            popupAnchor: [0, -15],
-            labelAnchor: [15, 15]
-        }, globalSettings.SERVICE_BASE_ICON)
-
-    };
-
-    this.getCategoriesIcons = function () {
-
-        var deferred = $q.defer();
-
-        if (self.categoriesIcons) {
-            deferred.resolve(self.categoriesIcons);
-        } else {
-
-            categoriesService.getCategories()
-                .then(
-                    function (categories) {
-                        var counter = 0;
-                        _.forEach(categories, function (category) {
-                            if (!self.categoriesIcons) {
-                                self.categoriesIcons = {};
-                            }
-                            counter++;
-                            var currentCounter = counter;
-                            if ($filter('isSVG')(category.pictogram)) {
-                                var requests = $resource(category.pictogram, {}, {
-                                    query: {
-                                        method: 'GET',
-                                        cache: true
-                                    }
-                                });
-
-                                requests.query().$promise
-                                    .then(function (icon) {
-                                        var finalIcon = '';
-                                        _.each(icon, function(el, index) {
-                                            if (!isNaN(parseInt(index, 10))) {
-                                                finalIcon += el;
-                                            }
-                                        });
-                                        self.categoriesIcons[category.id] = finalIcon;
-                                            if (currentCounter === _.size(categories)) {
-                                                deferred.resolve(self.categoriesIcons);
-                                            }
-                                    });
-                            } else {
-                                self.categoriesIcons[category.id] = '<img src="' + category.pictogram + '" />';
-                                if (currentCounter === _.size(categories)) {
-                                    deferred.resolve(self.categoriesIcons);
-                                }
-                            }
-
-                        });
-                    }
-                );
-        }
-
-        return deferred.promise;
-    };
-
-    this.getCategoryIcon = function (categoryId) {
-
-        var deferred = $q.defer();
-
-        if (self.categoriesIcons) {
-            deferred.resolve(self.categoriesIcons[categoryId]);
-        } else {
-            self.getCategoriesIcons()
-                .then(
-                    function (icons) {
-                        deferred.resolve(icons[categoryId]);
-                    }
-                );
-        }
-
-        return deferred.promise;
-    };
-
-    this.getPoiTypesIcons = function (forceRefresh) {
-        var deferred = $q.defer();
-
-        if (self.poisTypesIcons && !forceRefresh) {
-            deferred.resolve(self.poisTypesIcons);
-        } else {
-
-            poisService.getPois(forceRefresh)
-                .then(
-                    function (pois) {
-                        var counter = 0;
-                        _.forEach(pois.features, function (poi) {
-                            if (!self.poisTypesIcons) {
-                                self.poisTypesIcons = {};
-                            }
-                            counter++;
-                            var currentCounter = counter;
-                            if (!$filter('isSVG')(poi.properties.type.pictogram)) {
-                                self.poisTypesIcons[poi.properties.type.id] = {
-                                    markup: poi.properties.type.pictogram,
-                                    isSVG: false
-                                };
-                                if (currentCounter === _.size(pois.features)) {
-                                    deferred.resolve(self.poisTypesIcons);
-                                }
-                            } else {
-                                $http.get(poi.properties.type.pictogram)
-                                    .success(
-                                        function (icon) {
-                                            self.poisTypesIcons[poi.properties.type.id] = {
-                                                markup: icon.toString(),
-                                                isSVG: true
-                                            };
-                                            if (currentCounter === _.size(pois.features)) {
-                                                deferred.resolve(self.poisTypesIcons);
-                                            }
-                                        }
-                                    ).error(
-                                        function () {
-                                            self.poisTypesIcons[poi.properties.type.id] = {
-                                                markup: '',
-                                                isSVG: true
-                                            };
-                                            if (currentCounter === _.size(pois)) {
-                                                deferred.resolve(self.poisTypesIcons);
-                                            }
-                                        }
-                                    );
-                            }
-                        });
-                    }
-                );
-        }
-
-        return deferred.promise;
-    };
-
-    this.getAPoiTypeIcon = function (poiTypeId, forceRefresh) {
-        var deferred = $q.defer();
-        if (self.poisTypesIcons && !forceRefresh) {
-            deferred.resolve(self.poisTypesIcons[poiTypeId]);
-        } else {
-            self.getPoiTypesIcons(forceRefresh)
-                .then(
-                    function (icons) {
-                        deferred.resolve(icons[poiTypeId]);
-                    }
-                );
-        }
-
-        return deferred.promise;
-    };
-
-    this.getServiceTypesIcons = function (forceRefresh) {
-        var deferred = $q.defer();
-
-        if (self.servicesTypesIcons && !forceRefresh) {
-            deferred.resolve(self.servicesTypesIcons);
-        } else {
-
-            servicesService.getServices(forceRefresh)
-                .then(
-                    function (services) {
-                        var counter = 0;
-                        _.forEach(services.features, function (service) {
-                            if (!self.servicesTypesIcons) {
-                                self.servicesTypesIcons = {};
-                            }
-                            counter++;
-                            var currentCounter = counter;
-                            if (!$filter('isSVG')(service.properties.type.pictogram)) {
-                                self.servicesTypesIcons[service.properties.type.id] = {
-                                    markup: service.properties.type.pictogram,
-                                    isSVG: false
-                                };
-                                if (currentCounter === _.size(services.features)) {
-                                    deferred.resolve(self.servicesTypesIcons);
-                                }
-                            } else {
-                                $http.get(service.properties.type.pictogram)
-                                    .success(
-                                        function (icon) {
-                                            self.servicesTypesIcons[service.properties.type.id] = {
-                                                markup: icon.toString(),
-                                                isSVG: true
-                                            };
-                                            if (currentCounter === _.size(services.features)) {
-                                                deferred.resolve(self.servicesTypesIcons);
-                                            }
-                                        }
-                                    ).error(
-                                        function () {
-                                            self.servicesTypesIcons[service.properties.type.id] = {
-                                                markup: '',
-                                                isSVG: true
-                                            };
-                                            if (currentCounter === _.size(services)) {
-                                                deferred.resolve(self.servicesTypesIcons);
-                                            }
-                                        }
-                                    );
-                            }
-                        });
-                    }
-                );
-        }
-
-        return deferred.promise;
-    };
-
-    this.getAServiceTypeIcon = function (serviceTypeId, forceRefresh) {
-        var deferred = $q.defer();
-        if (self.servicesTypesIcons && !forceRefresh) {
-            deferred.resolve(self.servicesTypesIcons[serviceTypeId]);
-        } else {
-            self.getServiceTypesIcons(forceRefresh)
-                .then(
-                    function (icons) {
-                        deferred.resolve(icons[serviceTypeId]);
-                    }
-                );
-        }
-
-        return deferred.promise;
-    };
-
-    this.getMarkerIcon = function () {
-        var deferred = $q.defer();
-
-        if (self.markerIcon) {
-            deferred.resolve(self.markerIcon);
-        } else {
-            self.getSVGIcon(self.icons_liste.category_base.iconUrl)
-                .then(
-                    function (iconMarkup) {
-                        self.markerIcon = iconMarkup;
-                        deferred.resolve(iconMarkup);
-                    }
-                );
-        }
-
-        return deferred.promise;
-    };
-
-    this.getSVGIcon = function (url, iconName) {
-        var deferred = $q.defer();
-
-        if (self.icons_liste[iconName].markup) {
-            deferred.resolve(self.icons_liste[iconName].markup);
-        } else {
-            var requests = $resource(url, {}, {
-                query: {
-                    method: 'GET',
-                    cache: true
-                }
-            });
-
-            requests.query().$promise
-                .then(function (icon) {
-                    var finalIcon = '';
-                    _.each(icon, function(el, index) {
-                        if (!isNaN(parseInt(index, 10))) {
-                            finalIcon += el;
-                        }
-                    });
-                    self.icons_liste[iconName].markup = finalIcon;
-                    deferred.resolve(finalIcon);
-                });
-        }
-
-        return deferred.promise;
-    };
-
-    this.getClusterIcon = function (cluster) {
-        return new L.DivIcon({
-            iconSize: [40, 40],
-            iconAnchor: [20, 20],
-            popupAnchor: [0, -40],
-            className: 'element-cluster',
-            html: '<div class="marker"><span class="count">' + cluster.getChildCount() + '</span></div>'
-        });
-    };
-
-    this.getNearClusterIcon = function (cluster) {
-        return new L.DivIcon({
-            iconSize: [40, 40],
-            iconAnchor: [20, 20],
-            popupAnchor: [0, -40],
-            className: 'near-cluster',
-            html: '<div class="marker"><span class="count">' + cluster.getChildCount() + '</span></div>'
-        });
-    };
-
-    this.getChildClusterIcon = function (cluster) {
-        return new L.DivIcon({
-            iconSize: [40, 40],
-            iconAnchor: [20, 20],
-            popupAnchor: [0, -40],
-            className: 'children-cluster',
-            html: '<div class="marker"><span class="count">' + cluster.getChildCount() + '</span></div>'
-        });
-    };
-
-    this.getPOIClusterIcon = function (cluster) {
-        var children = cluster.getAllChildMarkers(),
-            iconsMarkup = '',
-            i = 0,
-            icons = {ICON0: '', ICON1: '', ICON2: '', ICON3: ''},
-            template = '' +
-                '<div class="icon-group">' +
-                    '<div class="icon">{ICON0}</div>' +
-                    '<div class="icon">{ICON1}</div>' +
-                    '<div class="icon">{ICON2}</div>' +
-                    '<div class="icon">{ICON3}</div>' +
-                '</div>';
-
-        for (i = 0; i < Math.min(children.length, 4); i++) {
-            if (children[i].options.result && children[i].options.result.properties.type) {
-                icons['ICON'+i] = '<img src="' + children[i].options.result.properties.type.pictogram + '"/>';
-            }
-        }
-        iconsMarkup = L.Util.template(template, icons);
-
-        return new L.DivIcon({
-            iconSize: [40, 40],
-            iconAnchor: [20, 40],
-            popupAnchor: [0, -40],
-            className: 'poi-cluster',
-            html: iconsMarkup
-        });
-    };
-
-    this.getRefIcon = function (refElement) {
-        var deferred = $q.defer();
-
-        var markup = '<span>' + refElement.order + '</span>';
-
-        var newIcon = new L.divIcon(_.merge({}, self.icons_liste.ref_point, {
-            html: markup,
-            className: self.icons_liste.ref_point.className + ' ' + self.icons_liste.ref_point.className + '-' + refElement.order
-        }));
-        deferred.resolve(newIcon);
-
-        return deferred.promise;
-    };
-
-    this.getIcon = function (iconName) {
-        var deferred = $q.defer();
-
-        if (!iconName || !self.icons_liste[iconName]) {
-            deferred.reject('icon doesn\'t exist');
-        } else {
-            if (self[iconName]) {
-                deferred.resolve(self[iconName]);
-            } else {
-                if (!$filter('isSVG')(self.icons_liste[iconName].iconUrl)) {
-                    self[iconName] = new L.divIcon(_.merge({}, self.icons_liste[iconName], {
-                        html: self.icons_liste[iconName].iconUrl
-                    }));
-                    deferred.resolve(self[iconName]);
-                } else {
-                    self.getSVGIcon(self.icons_liste[iconName].iconUrl, iconName)
-                        .then(
-                            function (iconMarkup) {
-
-                                self[iconName] = new L.divIcon(_.merge({}, self.icons_liste[iconName], {
-                                    html: iconMarkup
-                                }));
-                                deferred.resolve(self[iconName]);
-                            }
-                        );
-                }
-            }
-        }
-
-        return deferred.promise;
-    };
-
-    this.getPOIIcon = function (poi) {
-        var deferred = $q.defer(),
-            baseIcon = null,
-            poiIcon = null,
-            promises = [];
-
-        if (self.icons_liste.poi_base.iconUrl) {
-            promises.push(
-                self.getSVGIcon(self.icons_liste.poi_base.iconUrl, 'poi_base')
-                    .then(
-                        function (icon) {
-                            baseIcon = icon;
-                        }
-                    )
-            );
-        }
-
-        promises.push(
-            self.getAPoiTypeIcon(poi.properties.type.id, false)
-                .then(
-                    function (icon) {
-                        if (icon.isSVG) {
-                            poiIcon = icon.markup;
-                        } else {
-                            poiIcon = '<img src="' + icon.markup + '" alt=""';
-                        }
-                    }
-                )
-        );
-
-        $q.all(promises)
-            .then(
-                function () {
-                    var markup;
-
-                    if (baseIcon) {
-                        markup = '' +
-                            '<div class="marker" data-popup="' + poi.properties.name + '">' +
-                                baseIcon +
-                            '</div>' +
-                            '<div class="icon">' + poiIcon + '</div>';
-                    } else {
-                       markup = '' +
-                            '<div class="marker" data-popup="' + poi.properties.name + '">' +
-                                '<div class="icon">' + poiIcon + '</div>' +
-                            '</div>';
-                    }
-
-                    var newIcon = new L.divIcon(_.merge({}, self.icons_liste.poi_base, {
-                        html: markup,
-                        className: 'double-marker popup poi layer-' + poi.properties.type.id + '-' + poi.id + ' category-' + poi.properties.type.id
-                    }));
-                    deferred.resolve(newIcon);
-                }
-            );
-
-        return deferred.promise;
-
-    };
-
-    this.getServiceIcon = function (service) {
-        var deferred = $q.defer(),
-            baseIcon = null,
-            serviceIcon = null,
-            promises = [];
-
-        if (self.icons_liste.service_base.iconUrl) {
-            promises.push(
-                self.getSVGIcon(self.icons_liste.service_base.iconUrl, 'service_base')
-                    .then(
-                        function (icon) {
-                            baseIcon = icon;
-                        }
-                    )
-            );
-        }
-
-        promises.push(
-            self.getAServiceTypeIcon(service.properties.type.id, false)
-                .then(
-                    function (icon) {
-                        if (icon.isSVG) {
-                            serviceIcon = icon.markup;
-                        } else {
-                            serviceIcon = '<img src="' + icon.markup + '" alt=""';
-                        }
-                    }
-                )
-        );
-
-        $q.all(promises)
-            .then(
-                function () {
-                    var markup;
-
-                    if (baseIcon) {
-                        markup = '' +
-                            '<div class="marker" data-popup="' + service.properties.type.name + '">' +
-                                baseIcon +
-                            '</div>' +
-                            '<div class="icon">' + serviceIcon + '</div>';
-                    } else {
-                       markup = '' +
-                            '<div class="marker" data-popup="' + service.properties.type.name + '">' +
-                                '<div class="icon">' + serviceIcon + '</div>' +
-                            '</div>';
-                    }
-
-                    var newIcon = new L.divIcon(_.merge({}, self.icons_liste.service_base, {
-                        html: markup,
-                        className: 'double-marker popup service layer-' + service.properties.type.id + '-' + service.id
-                    }));
-                    deferred.resolve(newIcon);
-                }
-            );
-
-        return deferred.promise;
-
-    };
-
-    this.getWarningIcon = function () {
-        var deferred = $q.defer();
-
-        self.getSVGIcon(self.icons_liste.poi_base.iconUrl, 'category_base')
-            .then(function (icon) {
-                var markup = '' +
-                    '<div class="marker">' +
-                        icon +
-                    '</div>' +
-                    '<div class="icon"><i class="fa fa-exclamation-circle"></i></div>';
-
-                var warningIcon = new L.DivIcon(_.merge({}, self.icons_liste.poi_base, {
-                    html: markup,
-                    className: 'double-marker warning-marker'
-                }));
-
-                deferred.resolve(warningIcon);
-            });
-
-        return deferred.promise;
-    };
-
-    this.getElementIcon = function (element) {
-
-        var deferred = $q.defer(),
-            markerIcon,
-            categoryIcon,
-            promises = [];
-
-        if ($filter('isSVG')(self.icons_liste.category_base.iconUrl)) {
-            promises.push(
-                self.getSVGIcon(self.icons_liste.category_base.iconUrl, 'category_base')
-                    .then(
-                        function (icon) {
-                            markerIcon = icon;
-                        }
-                    )
-            );
-        } else {
-            markerIcon = '<img src="' + self.icons_liste.category_base.iconUrl + '"/>';
-        }
-
-        promises.push(
-            self.getCategoryIcon(element.properties.category.id)
-                .then(
-                    function (icon) {
-                        categoryIcon = icon;
-                    }
-                )
-        );
-
-        $q.all(promises).then(
-            function () {
-
-                var markup = '' +
-                    '<div class="marker" data-popup="' + element.properties.name + '">' +
-                        markerIcon +
-                    '</div>' +
-                    '<div class="icon">' + categoryIcon + '</div>';
-
-                var newIcon = new L.divIcon(_.merge({}, self.icons_liste.category_base, {
-                    html: markup,
-                    className: 'double-marker popup layer-category-' + element.properties.category.id + '-' + element.id + ' category-' + element.properties.category.id
-                }));
-                deferred.resolve(newIcon);
-            }
-        );
-
-        return deferred.promise;
-
-    };
-
-}
-
 function boundsService() {
     this.bounds = {};
 
@@ -2451,7 +1587,6 @@ function layersService ($http, globalSettings) {
 
 module.exports = {
     mapService: mapService,
-    iconsService: iconsService,
     boundsService: boundsService,
     boundsLimitService: boundsLimitService,
     popupService: popupService,
