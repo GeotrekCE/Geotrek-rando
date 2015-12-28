@@ -13,7 +13,6 @@
         padding: 2px;
         box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
         border-radius: 3px;
-        background: white;
         transition: all .2s;
         box-sizing: content-box;
         line-height: 30px;
@@ -21,11 +20,14 @@
         text-align: center;
         cursor: pointer;
 
-        &.active{
-            background: #f4f4f4;
+        background: #f4f4f4;
+        img {
+            opacity: .5;
+        }
+        &.active {
+            background: #fff;
             img {
-                opacity: .5;
-                cursor: default;
+                opacity: 1;
             }
         }
         &:hover {

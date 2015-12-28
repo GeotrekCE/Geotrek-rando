@@ -100,7 +100,7 @@ function leafletExtend() {
         options: {
             position: 'topright',
             groupLayers: false,
-            defaultIcon: 'app/vendors/images/leaflet-backgroundlayers/layers.svg'
+            defaultIcon: 'data:image/svg+xml;base64,PHN2ZyB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOmNjPSJodHRwOi8vY3JlYXRpdmVjb21tb25zLm9yZy9ucyMiIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyIgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczpzb2RpcG9kaT0iaHR0cDovL3NvZGlwb2RpLnNvdXJjZWZvcmdlLm5ldC9EVEQvc29kaXBvZGktMC5kdGQiIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIiB2ZXJzaW9uPSIxLjEiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwtOTUyLjM2MjE4KSI+PHBhdGggc3R5bGU9IiIgZD0iTSA0OS45OTk5OTUsOTY5LjAyODg3IDkuOTk5OTk4LDk4OS4wMjg4OCA0OS45OTk5OTUsMTAwOS4wMjg5IDkwLjAwMDAwMiw5ODkuMDI4ODggNDkuOTk5OTk1LDk2OS4wMjg4NyB6IG0gLTMwLjAwMDAwMiwyOC4zMzMzNCAtOS45OTk5OTUsNC45OTk5OSAzOS45OTk5OTcsMjAgNDAuMDAwMDA3LC0yMCAtMTAsLTQuOTk5OTkgLTMwLjAwMDAwNywxNC45OTk5OSAtMzAuMDAwMDAyLC0xNC45OTk5OSB6IG0gMCwxMy4zMzMyOSAtOS45OTk5OTUsNSAzOS45OTk5OTcsMjAgNDAuMDAwMDA3LC0yMCAtMTAsLTUgLTMwLjAwMDAwNywxNS4wMDAxIC0zMC4wMDAwMDIsLTE1LjAwMDEgeiIgZmlsbD0iIzAwMDAwMCIvPjwvZz48L3N2Zz4='
         },
 
         initialize: function (baseLayers, options) {
@@ -133,14 +133,18 @@ function leafletExtend() {
         },
 
         _addItem: function (obj) {
-            var control = document.createElement('a'),
-                icon = this.options.defaultIcon;
+            var control =   document.createElement('a'),
+                icon =      this.options.defaultIcon,
+                container = this._container;
 
-            if (typeof obj.layer.options !== 'undefined') {
-                if (typeof obj.layer.options.icon !== 'undefined') {
-                    icon = obj.layer.options.icon;
-                }
+            if (obj.layer.options && obj.layer.options.icon) {
+                icon = obj.layer.options.icon;
             }
+
+            if (obj.layer.options && obj.layer.options.legend) {
+                control.setAttribute('title', obj.layer.options.legend)
+            }
+
             control.layerId = L.stamp(obj.layer);
 
             L.DomEvent.on(control, 'click', function() {
@@ -155,7 +159,6 @@ function leafletExtend() {
             control.className = 'background ' + this._getState(obj.layer);
             control.innerHTML = '<img src="' + icon + '" alt="" />';
 
-            var container = this._container;
             container.appendChild(control);
         },
 
