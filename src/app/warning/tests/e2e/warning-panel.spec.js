@@ -95,4 +95,10 @@ describe('Test warning panel - ', function() {
         expect(panel.getAttribute('class')).not.toMatch('opened');
     });
 
+    afterAll(function () {
+        browser.executeScript(function () {
+            localStorage.clear();
+        });
+    });
+
 });
