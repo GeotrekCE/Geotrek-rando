@@ -19,4 +19,10 @@ describe('Geotrek flat page - ', function() {
         expect(pageContent.getText()).not.toEqual('');
     });
 
+    afterAll(function () {
+        browser.executeScript(function () {
+            localStorage.clear();
+        });
+    });
+
 });
