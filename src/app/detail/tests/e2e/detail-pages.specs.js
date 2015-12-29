@@ -31,4 +31,10 @@ describe('Geotrek detail page - ', function() {
         expect(titleSelector.getAttribute('class')).toMatch('category-T');
     });
 
+    afterAll(function () {
+        browser.executeScript(function () {
+            localStorage.clear();
+        });
+    });
+
 });
