@@ -1,6 +1,6 @@
 'use strict';
-describe('Trecks test data (actions)', function() {
-    var constants = require('../../app/config/settings.constant.json');
+describe('Favorites on home ', function() {
+    var constants = require('../../../config/settings.constant.json');
 
     beforeAll(function() {
         browser.get('/#/no-homme');
@@ -22,13 +22,13 @@ describe('Trecks test data (actions)', function() {
         }, constants);
     });
 
-    it('Two items should be favorited', function () {
+    it('should contain 2 favorites', function () {
         browser.get('/#/no-homme');
         var favs = element.all(by.css('.isFav'));
         expect(favs.count()).toEqual(2);
     });
 
-    it('', function () {
+    it('should contain 1 favorite if we click on the heart of one of them ', function () {
         var favs = element.all(by.css('.isFav'));
 
         favs.first().click();
