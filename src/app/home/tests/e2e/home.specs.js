@@ -1,13 +1,13 @@
 'use strict'
 
-describe('Geotrek random home', function() {
-    var constants = require('../../app/config/settings.constant.json');
+describe('Home page ', function() {
+    var constants = require('../../../config/settings.constant.json');
 
     beforeAll(function() {
         browser.get('/');
     });
 
-    it('should display home only if SHOW_HOME is true', function () {
+    it('should display if SHOW_HOME is true in config', function () {
         expect(
             element(by.id('home-page')).isPresent()
         ).toBe(constants.SHOW_HOME);

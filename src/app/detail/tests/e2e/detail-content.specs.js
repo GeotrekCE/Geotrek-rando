@@ -1,4 +1,4 @@
-describe('Trecks test data (detailed)', function() {
+describe('Detail page ', function() {
 
     beforeAll(function () {
         browser.get('/');

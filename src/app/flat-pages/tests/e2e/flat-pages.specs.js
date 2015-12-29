@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Geotrek flat page - ', function() {
+describe('Flat page ', function() {
     var pageContent;
 
     beforeAll(function() {
@@ -13,7 +13,7 @@ describe('Geotrek flat page - ', function() {
         });
     });
 
-    it('should display a Flat page', function () {
+    it('should display', function () {
         browser.get('/#/informations/test/');
         pageContent = element(by.css('.flat-page h1'));
         expect(pageContent.getText()).not.toEqual('');

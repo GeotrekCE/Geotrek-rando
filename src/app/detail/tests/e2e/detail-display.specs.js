@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Geotrek detail page - ', function() {
+describe('Detail page ', function() {
     var titleSelector;
 
     beforeAll(function() {
