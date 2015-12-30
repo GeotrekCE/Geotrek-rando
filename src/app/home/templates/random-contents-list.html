@@ -1,7 +1,8 @@
 <ul class="random-list">
     <li class="random-element category-{{content.properties.category.id}}" id="random-{{content.id}}" ng-repeat="content in randomContents">
         <a ui-sref="layout.detail({catSlug: content.properties.category.slug, slug: content.properties.slug})">
-            <img class="content-picture" ng-src="{{content.properties.pictures[0].url}}" alt="{{content.properties.pictures[0].title}}">
+            <img class="content-picture" ng-if="content.properties.pictures[0].url" ng-src="{{content.properties.pictures[0].url}}" alt="{{content.properties.pictures[0].title}}">
+            <img ng-if="!content.properties.pictures[0].url" ng-src="{{::$root.placeHolderImage}}" alt="placeholder image">
             <div class="content-description">
                 <div class="content-category" tooltip-placement="right" tooltip="{{::content.properties.category.label}}">
                     <ng-include ng-if="(content.properties.category.pictogram | isSVG)"  src="content.properties.category.pictogram"></ng-include>

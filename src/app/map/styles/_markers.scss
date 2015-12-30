@@ -97,10 +97,17 @@
         position: absolute;
         top: 2px;
         left: 2px;
+        display: flex;
         width: 36px;
         height: 36px;
+        align-items: center;
+
         svg {
+            width: auto;
+            height: auto;
             fill: white;
+            margin: 0 auto;
+            text-align: center;
         }
     }
     &.service {
@@ -160,10 +167,10 @@
 .near-cluster,
 .children-cluster {
     .marker {
-        font-family: 'frutiger';
+        font-family: $font-family;
         font-size: 16px;
         font-weight: bold;
-        line-height: 37px;
+        line-height: 32px;
 
         height: 100%;
         padding: 0;
