@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Test warning panel - ', function() {
+describe('Warning panel ', function() {
     var panel, openButton, closeButton, form, name, email, category, comment, location, submit;
     beforeAll(function () {
         browser.get('/');
@@ -24,21 +24,21 @@ describe('Test warning panel - ', function() {
         submit       = element(by.css('.warning-panel form input[type="submit"]'));
     });
 
-    it('should have the warning button on sidebar', function() {
+    it('should have the its button on page sidebar', function() {
         expect(openButton.isPresent()).toBe(true);
     });
 
-    it('should have the warning pannel hidden', function() {
+    it('should be hidden by default', function() {
         expect(panel.isPresent()).toBe(true);
         expect(panel.getAttribute('class')).not.toMatch('opened');
     });
 
-    it('should display panel on click', function() {
+    it('should display on click on the sidebar button', function() {
         openButton.click();
         expect(panel.getAttribute('class')).toMatch('opened');
     });
 
-    it('should not validate if no fields filled', function() {
+    it('should not validate if no fields are filled', function() {
         expect(form.getAttribute('class')).toMatch('ng-invalid');
     });
 
@@ -90,9 +90,15 @@ describe('Test warning panel - ', function() {
         expect(closeButton.isPresent()).toBe(true);
     });
 
-    it('should close panel on click on vlose button', function() {
+    it('should hide on click on close button', function() {
         closeButton.click();
         expect(panel.getAttribute('class')).not.toMatch('opened');
+    });
+
+    afterAll(function () {
+        browser.executeScript(function () {
+            localStorage.clear();
+        });
     });
 
 });

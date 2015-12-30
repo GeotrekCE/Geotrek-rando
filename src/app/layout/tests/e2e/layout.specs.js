@@ -1,6 +1,6 @@
 'use strict';
-describe('Geotrek default tests', function() {
-    var constants = require('../../app/config/settings.constant.json');
+describe('Geotrek app ', function() {
+    var constants = require('../../../config/settings.constant.json');
 
     beforeAll(function() {
         browser.get('/');
@@ -11,7 +11,7 @@ describe('Geotrek default tests', function() {
     });
 
 
-    it('should redirect to default cat', function () {
+    it('should redirect to default categories after loading', function () {
         var location = '?';
         for (var i = constants.DEFAULT_ACTIVE_CATEGORIES.length - 1; i >= 0; i--) {
             location += 'categories=' + constants.DEFAULT_ACTIVE_CATEGORIES[i];

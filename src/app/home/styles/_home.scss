@@ -13,3 +13,36 @@
         position: relative;
     }
 }
+
+.categories-prefilter {
+    color: white;
+    h2 {
+    }
+}
+
+.default-categories-prefilter {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.default-categories-prefilter-item {
+    height: 150px;
+    flex: 1 0 150px;
+    margin: 0.5rem 2% 0;
+    overflow: hidden;
+    position: relative;
+    button {
+        border: none;
+        background: none;
+        width: 100%;
+    }
+    img {
+        height: 100%;
+        width: auto;
+    }
+}
+
+.categories-prefilter {
+    background: $dark-grey;
+}
