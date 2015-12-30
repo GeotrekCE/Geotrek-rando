@@ -1,12 +1,50 @@
 <div class="header">
     <h1>{{'BANNER_TEXT' | translate}}</h1>
     <div class="access-chose">
-        <a href ng-click="toggleHome()"><span>{{'ACCESS_SITE' | translate}}</span></a>
+        <a class="hide-home" href ng-click="toggleHome()"><span>{{'ACCESS_SITE' | translate}}</span></a>
         <a class="disable-home" href ng-click="disableHomePage()"><span>{{'DONT_SHOW_HOME' | translate}}</span></a>
     </div>
 </div>
 <div class="content">
+    <div class="categories-prefilter">
+        <h2>Categories prefilter</h2>
+        <ul class="default-categories-prefilter container">
+            <li class="default-categories-prefilter-item" data-categories="['T']">
+                <button ng-click="accessSpecificCategory(['T'])">
+                    <div class="title">
+                        <span>Treks</span>
+                    </div>
+                    <img src="images/placeholder.png">
+                </button>
+            </li>
+            <li class="default-categories-prefilter-item" data-categories="['C5']">
+                <button ng-click="accessSpecificCategory(['C5'])">
+                    <div class="title">
+                        <span>Restaurants</span>
+                    </div>
+                    <img src="images/placeholder.png">
+                </button>
+            </li>
+            <li class="default-categories-prefilter-item" data-categories="['E']">
+                <button ng-click="accessSpecificCategory('E')">
+                    <div class="title">
+                        <span>Events</span>
+                    </div>
+                    <img src="images/placeholder.png">
+                </button>
+            </li>
+            <li class="default-categories-prefilter-item" data-categories="['T', 'C5', 'E']">
+                <button ng-click="accessSpecificCategory(['T', 'C5', 'E'])">
+                    <div class="title">
+                        <span>Treks, restaurants and events</span>
+                    </div>
+                    <img src="images/placeholder.png">
+                </button>
+            </li>
+        </ul>
+    </div>
     <div class="random-contents">
+        <h2>Random contents</h2>
         <random-contents-list categories="all" quantity="4"></random-content>
     </div>
 </div>
