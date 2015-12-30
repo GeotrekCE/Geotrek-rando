@@ -11,11 +11,11 @@ $header-height-mobile: 50px !default;
 $primary-color: #97BB35 !default;
 $secondary-color: #444 !default;
 
-$categories: T #00B5D1, /* Randonnées ID */
-            T4 #7ab51d, /* Pédestre ID */
+$categories: T #00B5D1, /* Itinéraire ID */
+            T4 $primary-color, /* Pédestre ID */
             C8 #F9A41A, /* Musee ID */
 			C5 #ED5435, /* Restaurants ID */
-			E #B4CC1B, /* Evenements ID */
+			E lighten($secondary-color, 20%), /* Evenements ID */
 			C3 #A05481, /* Sorties */
 			C1 #105BBC, /* Hébergements ID */
 			C7 #3d842e, /* Séjours 100% eco ID */
