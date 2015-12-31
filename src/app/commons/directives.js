@@ -1,7 +1,7 @@
 'use strict';
 
 function a() {
-    // This function prevent the browser from navigating to # 
+    // This function prevent the browser from navigating to #
     return {
         restrict: 'E',
         link: function(scope, elem, attrs) {

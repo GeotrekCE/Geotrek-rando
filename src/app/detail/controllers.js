@@ -33,6 +33,14 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         }
     };
 
+    $scope.toggleCategory = function(category) {
+        if (category.isActive !== undefined) {
+            category.isActive = category.isActive === false ? true : false;
+        } else {
+            category.isActive = true;
+        }
+    };
+
     $scope.foldAside = false;
     $scope.asidePaneToggle = function () {
         $scope.foldAside = !$scope.foldAside;
@@ -115,6 +123,15 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         $q.all(promises)
             .then(
                 function () {
+                    var nearElementsCategories = [];
+                    _.forEach($scope.nearElements, function (element) {
+                        nearElementsCategories.push(element.properties.category);
+                    });
+
+                    $scope.nearElementsCategories = _.uniq(nearElementsCategories, function(item, key, id) {
+                        return item.id;
+                    });
+
                     mapService.createElementsMarkers($scope.nearElements, 'near');
                     deferred.resolve($scope.nearElements);
                 }
