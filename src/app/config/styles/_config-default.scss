@@ -12,7 +12,7 @@ $primary-color: #B4CC1B !default;
 $secondary-color: #444 !default;
 
 $categories: T #00B5D1, /* Itinéraire ID */
-            T4 $primary-color, /* Pédestre ID */
+            T4 darken($primary-color, 5%), /* Pédestre ID */
             C8 #F9A41A, /* Musee ID */
 			C5 #ED5435, /* Restaurants ID */
 			E lighten($secondary-color, 20%), /* Evenements ID */

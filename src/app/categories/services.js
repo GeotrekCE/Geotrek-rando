@@ -339,6 +339,24 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
         return deferred.promise;
 
     };
+
+    this.getCategory = function (id) {
+        var deferred = $q.defer();
+
+        self.getNonExcludedCategories()
+            .then(
+                function (categories) {
+                    for (var i = 0; i < categories.length; i++) {
+                        if (id === categories[i].id) {
+                            deferred.resolve(categories[i]);
+                        }
+                    }
+                }
+            );
+
+        return deferred.promise;
+
+    };
 }
 
 module.exports = {

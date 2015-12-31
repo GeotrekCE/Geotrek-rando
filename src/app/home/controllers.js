@@ -7,6 +7,7 @@ function HomeController($scope, $rootScope, translationService, $location, homeS
     }
 
     $scope.initHome = function () {
+        console.log('init home');
         var currentLang = translationService.getCurrentLang();
         if (currentLang.code) {
             currentLang = currentLang.code;
@@ -28,6 +29,7 @@ function HomeController($scope, $rootScope, translationService, $location, homeS
     };
 
     $scope.accessSpecificCategory = function (currentCategory) {
+        console.log('click on a specific category on homepage');
         if (typeof currentCategory !== 'object') {
             currentCategory = [currentCategory];
         }
