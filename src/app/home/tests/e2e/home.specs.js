@@ -26,13 +26,13 @@ describe('Home page ', function() {
     });
 
     it('should have categories prefilters', function () {
-        var categoriesPrefilter = element.all(by.css('.default-categories-prefilter-item'));
+        var categoriesPrefilter = element.all(by.css('.suggested-contents-item'));
 
         expect(categoriesPrefilter.count()).toBeGreaterThan(0);
     });
 
     it('should work for a single category', function () {
-        var categoriesPrefilter = element.all(by.css('.default-categories-prefilter-item'));
+        var categoriesPrefilter = element.all(by.css('.suggested-contents-item'));
         var category = categoriesPrefilter.first().getAttribute('data-categories');
         var browserUrl;
 
@@ -43,7 +43,7 @@ describe('Home page ', function() {
     });
 
     it('should work for multiple categories', function () {
-        var categoriesPrefilter = element.all(by.css('.default-categories-prefilter-item'));
+        var categoriesPrefilter = element.all(by.css('.suggested-contents-item'));
         var categories = categoriesPrefilter.last().getAttribute('data-categories');
         var browserUrl;
 

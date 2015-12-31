@@ -15,19 +15,19 @@
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur quam similique eligendi molestias, nesciunt veniam iste, cupiditate beatae, omnis nihil porro eveniet? Ipsa, incidunt ut doloremque corrupti quam est impedit.
         </p>
         <ul class="suggested-contents">
-            <li class="suggested-contents-item category-C8" ng-click="accessSpecificCategory(['C8'])">
+            <li class="suggested-contents-item category-C8" ng-click="accessSpecificCategory(['C8'])" data-categories="['C8']">
                 <div class="title">Sorties culturelles</div>
                 <ng-include ng-if="cat_C8" src="cat_C8"></ng-include>
             </li>
-            <li class="suggested-contents-item category-C3" ng-click="accessSpecificCategory(['E', 'C3'])">
+            <li class="suggested-contents-item category-C3" ng-click="accessSpecificCategory(['E', 'C3'])" data-categories="['E', 'C3']">
                 <div class="title">Événements et sorties<br> de découverte</div>
                 <ng-include ng-if="cat_C3" src="cat_C3"></ng-include>
             </li>
-            <li class="suggested-contents-item category-T4" ng-click="accessSpecificCategory(['T4', 'T'])">
+            <li class="suggested-contents-item category-T4" ng-click="accessSpecificCategory(['T4', 'T'])" data-categories="['T4', 'T']">
                 <div class="title">Les randonnées</div>
                 <ng-include ng-if="cat_T4" src="cat_T4"></ng-include>
             </li>
-            <li class="suggested-contents-item category-C1" ng-click="accessSpecificCategory(['C1', 'C5'])">
+            <li class="suggested-contents-item category-C1" ng-click="accessSpecificCategory(['C1', 'C5'])" data-categories="['C1', 'C5']">
                 <div class="title">Restaurants <br>et hébergements</div>
                 <ng-include ng-if="cat_C1" src="cat_C1"></ng-include>
             </li>
