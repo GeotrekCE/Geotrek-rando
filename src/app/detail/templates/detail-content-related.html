@@ -1,11 +1,11 @@
 <div class="detail-content-related" ng-if="result.properties.relationships.has_common_departure.length > 0 || result.properties.relationships.has_common_edge.length > 0 || result.properties.relationships.is_circuit_step.length > 0">
     <h3>{{ 'RELATED_TREKS' | translate}}</h3>
-
+    
     <div ng-if="result.properties.relationships.has_common_departure.length > 0">
         <h4>{{'HAS_COMMON_DEPARTURE' | translate}}</h4>
         <ul class="related-treks">
             <li class="related-trek" ng-repeat="relatedTrek in result.properties.relationships.has_common_departure track by relatedTrek.id">
-                <a ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: relatedTrek.slug})">{{relatedTrek.name}}</a>
+                <a ui-sref="layout.detail({catSlug: relatedTrek.category_slug, slug: relatedTrek.slug})">{{relatedTrek.name}}</a>
             </li>
         </ul>
     </div>
@@ -14,7 +14,7 @@
         <h4>{{'HAS_COMMON_EDGE' | translate}}</h4>
         <ul class="related-treks">
             <li class="related-trek" ng-repeat="relatedTrek in result.properties.relationships.has_common_edge track by relatedTrek.id">
-                <a ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: relatedTrek.slug})">{{relatedTrek.name}}</a>
+                <a ui-sref="layout.detail({catSlug: relatedTrek.category_slug, slug: relatedTrek.slug})">{{relatedTrek.name}}</a>
             </li>
         </ul>
     </div>
@@ -23,7 +23,7 @@
         <h4>{{'IS_CIRCUIT_STEP' | translate}}</h4>
         <ul class="related-treks">
             <li class="related-trek" ng-repeat="relatedTrek in result.properties.relationships.is_circuit_step track by relatedTrek.id">
-                <a ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: relatedTrek.slug})">{{relatedTrek.name}}</a>
+                <a ui-sref="layout.detail({catSlug: relatedTrek.category_slug, slug: relatedTrek.slug})">{{relatedTrek.name}}</a>
             </li>
         </ul>
     </div>
