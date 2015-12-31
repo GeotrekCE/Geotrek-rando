@@ -172,7 +172,7 @@ msgid "NEAR"
 msgstr "À proximité"
 
 msgid "CHILDREN"
-msgstr "Etapes"
+msgstr "Étapes"
 
 msgid "PARENT"
 msgstr "Randonnée parente"
