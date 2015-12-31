@@ -1,13 +1,12 @@
 'use strict';
 
-function HomeController($scope, $rootScope, categoriesService, translationService, $location, homeService, globalSettings, filtersService) {
+function HomeController($scope, $rootScope, translationService, categoriesService, $location, homeService, globalSettings, filtersService) {
 
     function updateFiltersTags() {
         $rootScope.activeFiltersTags = filtersService.getTagFilters();
     }
 
     $scope.initHome = function () {
-        console.log('init home');
         var currentLang = translationService.getCurrentLang();
         if (currentLang.code) {
             currentLang = currentLang.code;
@@ -29,7 +28,6 @@ function HomeController($scope, $rootScope, categoriesService, translationServic
     };
 
     $scope.accessSpecificCategory = function (currentCategory) {
-        console.log('click on a specific category on homepage');
         if (typeof currentCategory !== 'object') {
             currentCategory = [currentCategory];
         }
@@ -39,8 +37,6 @@ function HomeController($scope, $rootScope, categoriesService, translationServic
         updateFiltersTags();
         $scope.toggleHome();
     };
-
-    $scope.logo = globalSettings.LOGO_FILE;
 
     // Get icons for suggested contents
     categoriesService.getNonExcludedCategories().then(
@@ -61,6 +57,8 @@ function HomeController($scope, $rootScope, categoriesService, translationServic
             }
         }
     );
+
+    $scope.logo = globalSettings.LOGO_FILE;
 
     $scope.initHome();
 
@@ -99,6 +97,7 @@ function RandomContentsListWidgetController($scope, resultsService, utilsFactory
         getRandomContents();
     }
 
+    $scope.isSVG = utilsFactory.isSVG;
     init();
 }
 
@@ -120,6 +119,7 @@ function RandomContentWidgetController($scope, resultsService, utilsFactory) {
         getRandomContent();
     }
 
+    $scope.isSVG = utilsFactory.isSVG;
     init();
 }
 
