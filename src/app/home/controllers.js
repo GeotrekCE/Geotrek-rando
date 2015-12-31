@@ -1,6 +1,6 @@
 'use strict';
 
-function HomeController($scope, $rootScope, translationService, $location, homeService, globalSettings, filtersService) {
+function HomeController($scope, $rootScope, categoriesService, translationService, $location, homeService, globalSettings, filtersService) {
 
     function updateFiltersTags() {
         $rootScope.activeFiltersTags = filtersService.getTagFilters();
@@ -41,6 +41,26 @@ function HomeController($scope, $rootScope, translationService, $location, homeS
     };
 
     $scope.logo = globalSettings.LOGO_FILE;
+
+    // Get icons for suggested contents
+    categoriesService.getNonExcludedCategories().then(
+        function (categories) {
+            for (var i = 0; i < categories.length; i++) {
+                if (categories[i].id === 'C8') {
+                    $scope.cat_C8 = categories[i].pictogram;
+                }
+                if (categories[i].id === 'C3') {
+                    $scope.cat_C3 = categories[i].pictogram;
+                }
+                if (categories[i].id === 'T4') {
+                    $scope.cat_T4 = categories[i].pictogram;
+                }
+                if (categories[i].id === 'C1') {
+                    $scope.cat_C1 = categories[i].pictogram;
+                }
+            }
+        }
+    );
 
     $scope.initHome();
 
