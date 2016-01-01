@@ -1,0 +1,45 @@
+<div class="detailsview-pane detail-aside-pane interests" ng-if="pois.length || nearElements.length || elementChildren.length || parentElement">
+    <div class="detail-aside-group children" ng-if="elementChildren.length" ng-class="{active: currentInterest === 'children'}">
+        <div class="detail-aside-group-title" ng-click="toggleInterest('children')">
+            <span>{{ 'CHILDREN' | translate }}</span>
+            <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
+        </div>
+        <div class="detail-aside-group-content">
+            <items-list elements="elementChildren" type="aside"></items-list>
+        </div>
+    </div>
+    <div class="detail-aside-group parent" ng-if="parentsElement.length" ng-class="{active: currentInterest === 'parent'}">
+        <div class="detail-aside-group-title" ng-click="toggleInterest('parent')">
+            <span>{{ 'PARENT' | translate }}</span>
+            <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
+        </div>
+        <div class="detail-aside-group-content">
+            <items-list elements="parentsElement" type="aside"></items-list>
+        </div>
+    </div>
+    <div class="detail-aside-group near-elements" ng-if="nearElements.length " ng-class="{active: currentInterest === 'near'}">
+        <div class="detail-aside-group-title" ng-click="toggleInterest('near')">
+            <span>{{ 'NEAR' | translate }} TEST</span>
+            <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
+        </div>
+
+        <div class="detail-aside-categories" ng-repeat="category in nearElementsCategories" ng-if="nearElementsCategories.length" ng-class="{active: category.isActive}">
+            <div class="detail-aside-category-title" ng-click="toggleCategory(category)">
+                <span>{{ category.label }}</span>
+                <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
+            </div>
+            <div class="detail-aside-group-content">
+                <items-list elements="nearElements" filter-by-id="{ properties: {category: { id: category.id } } }" type="aside"></items-list>
+            </div>
+        </div>
+    </div>
+    <div class="detail-aside-group pois" ng-if="pois.length && result.properties.contentType === 'trek'" ng-class="{active: currentInterest === 'pois'}">
+        <div class="detail-aside-group-title" ng-click="toggleInterest('pois')">
+            <span>{{ 'POI' | translate }}</span>
+            <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
+        </div>
+        <div class="detail-aside-group-content" type="aside">
+            <pois-liste></pois-liste>
+        </div>
+    </div>
+</div>
