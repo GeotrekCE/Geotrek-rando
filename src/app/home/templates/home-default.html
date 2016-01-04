@@ -1,51 +1,43 @@
-<div class="header">
-    <h1>{{'BANNER_TEXT' | translate}}</h1>
-    <div class="access-chose">
-        <a class="hide-home" href ng-click="toggleHome()"><span>{{'ACCESS_SITE' | translate}}</span></a>
-        <a class="disable-home" href ng-click="disableHomePage()"><span>{{'DONT_SHOW_HOME' | translate}}</span></a>
+<!-- HOME FR -->
+<section class="homepage">
+    <div class="header">
+        <img class="home-logo" ng-if="logo" ng-src="./images/logo-geotrek.svg" alt="{{'LOGO_ALT' | translate}}">
+        <div class="header-text">
+            <h1>{{'BANNER_TEXT' | translate}}</h1>
+            <div class="access-chose">
+                <a href ng-click="toggleHome()" class="hide-home button"><span>{{'ACCESS_SITE' | translate}}</span></a>
+                <a class="disable-home" href ng-click="disableHomePage()"><span>{{'DONT_SHOW_HOME' | translate}}</span></a>
+            </div>
+        </div>
     </div>
-</div>
-<div class="content">
-    <div class="categories-prefilter">
-        <h2>Categories prefilter</h2>
-        <ul class="default-categories-prefilter container">
-            <li class="default-categories-prefilter-item" data-categories="['T']">
-                <button ng-click="accessSpecificCategory(['T'])">
-                    <div class="title">
-                        <span>Treks</span>
-                    </div>
-                    <img src="images/placeholder.png">
-                </button>
+    <div class="content">
+        <p class="intro">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur quam similique eligendi molestias, nesciunt veniam iste, cupiditate beatae, omnis nihil porro eveniet? Ipsa, incidunt ut doloremque corrupti quam est impedit.
+        </p>
+        <ul class="suggested-contents">
+            <li class="suggested-contents-item category-C8" ng-click="accessSpecificCategory(['C8'])" data-categories="['C8']">
+                <div class="title">Sorties culturelles</div>
+                <ng-include ng-if="cat_C8" src="cat_C8"></ng-include>
             </li>
-            <li class="default-categories-prefilter-item" data-categories="['C5']">
-                <button ng-click="accessSpecificCategory(['C5'])">
-                    <div class="title">
-                        <span>Restaurants</span>
-                    </div>
-                    <img src="images/placeholder.png">
-                </button>
+            <li class="suggested-contents-item category-C3" ng-click="accessSpecificCategory(['E', 'C3'])" data-categories="['E', 'C3']">
+                <div class="title">Événements et sorties<br> de découverte</div>
+                <ng-include ng-if="cat_C3" src="cat_C3"></ng-include>
             </li>
-            <li class="default-categories-prefilter-item" data-categories="['E']">
-                <button ng-click="accessSpecificCategory('E')">
-                    <div class="title">
-                        <span>Events</span>
-                    </div>
-                    <img src="images/placeholder.png">
-                </button>
+            <li class="suggested-contents-item category-T4" ng-click="accessSpecificCategory(['T4', 'T'])" data-categories="['T4', 'T']">
+                <div class="title">Les randonnées</div>
+                <ng-include ng-if="cat_T4" src="cat_T4"></ng-include>
             </li>
-            <li class="default-categories-prefilter-item" data-categories="['T', 'C5', 'E']">
-                <button ng-click="accessSpecificCategory(['T', 'C5', 'E'])">
-                    <div class="title">
-                        <span>Treks, restaurants and events</span>
-                    </div>
-                    <img src="images/placeholder.png">
-                </button>
+            <li class="suggested-contents-item category-C1" ng-click="accessSpecificCategory(['C1', 'C5'])" data-categories="['C1', 'C5']">
+                <div class="title">Restaurants <br>et hébergements</div>
+                <ng-include ng-if="cat_C1" src="cat_C1"></ng-include>
             </li>
         </ul>
+
+        <h2>Exemple de contenus</h2>
+        <div class="random-contents">
+            <random-contents-list categories="all" quantity="4"></random-content>
+        </div>
     </div>
-    <div class="random-contents">
-        <h2>Random contents</h2>
-        <random-contents-list categories="all" quantity="4"></random-content>
-    </div>
-</div>
-<geotrek-footer></geotrek-footer>
+
+    <geotrek-footer></geotrek-footer>
+</section>

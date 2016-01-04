@@ -339,6 +339,8 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
         return deferred.promise;
 
     };
+
+
 }
 
 module.exports = {
