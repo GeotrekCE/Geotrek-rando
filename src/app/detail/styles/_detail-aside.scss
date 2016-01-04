@@ -17,10 +17,6 @@
             height: 50px;
         }
 
-        .detail-aside-categories,
-        .detail-aside-category-title {
-            height: 30px;
-        }
     }
 }
 
@@ -76,7 +72,7 @@
         margin-left: auto;
 
         transition: transform 250ms ease;
-        .active & {
+        .detail-aside-group.active & {
             transform: translate(-50%) rotate(90deg);
         }
         svg polygon {
@@ -90,61 +86,47 @@
 }
 
 .detail-aside-group-content {
-    overflow: auto;
-
     margin: 0 0 0 .75em;
     padding-right: 2.25em;
+    overflow: auto;
 }
 
-.detail-aside-categories {
-    position: relative;
-
+.detail-aside-categories-container {
     display: flex;
-    overflow: hidden;
     flex-direction: column;
+    flex: 1 1 auto;
+    overflow: auto;
+}
 
-    transition: all .2s ease;
-
-    .detail-aside-group-content {
-        overflow: hidden;
-    }
-
-    &.active {
-        flex: 1 1 auto;
-
-        .detail-aside-group-content {
-            overflow: auto;
-        }
-    }
+.detail-aside-categories
+.detail-aside-group-content {
+    overflow: hidden;
+    padding-right: 1.25em;
 }
 
 .detail-aside-category-title {
     font-size: 1em;
     font-weight: bold;
-
     display: flex;
-
-    padding: 0 1em 0 .5em;
-
+    padding: 0 1em 0 .75em;
     text-transform: uppercase;
-
-    align-items: flex-start;
-    flex: 0 0 auto;
 
     @media (min-width: 768px) {
         cursor: pointer;
     }
 
-    @media (max-width: 767px) {
-        height: 30px;
-    }
     .stripe-icon {
         margin-left: auto;
 
         transition: transform 250ms ease;
 
-        .active & {
+        .detail-aside-categories.active & {
             transform: translate(-50%) rotate(90deg);
+        }
+
+        svg {
+             width: 6px;
+             height: auto;
         }
 
         svg polygon {

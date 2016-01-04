@@ -19,19 +19,22 @@
     </div>
     <div class="detail-aside-group near-elements" ng-if="nearElements.length " ng-class="{active: currentInterest === 'near'}">
         <div class="detail-aside-group-title" ng-click="toggleInterest('near')">
-            <span>{{ 'NEAR' | translate }} TEST</span>
+            <span>{{ 'NEAR' | translate }}</span>
             <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
         </div>
 
-        <div class="detail-aside-categories" ng-repeat="category in nearElementsCategories" ng-if="nearElementsCategories.length" ng-class="{active: category.isActive}">
-            <div class="detail-aside-category-title" ng-click="toggleCategory(category)">
-                <span>{{ category.label }}</span>
-                <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
-            </div>
-            <div class="detail-aside-group-content">
-                <items-list elements="nearElements" filter-by-id="{ properties: {category: { id: category.id } } }" type="aside"></items-list>
+        <div class="detail-aside-categories-container">
+            <div class="detail-aside-categories" ng-repeat="category in nearElementsCategories" ng-if="nearElementsCategories.length" ng-class="{active: categoryIsCollapsed}">
+                <div class="detail-aside-category-title" ng-click="categoryIsCollapsed = !categoryIsCollapsed">
+                    <span>{{ category.label }}</span>
+                    <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
+                </div>
+                <div class="detail-aside-group-content" collapse="!categoryIsCollapsed">
+                    <items-list elements="nearElements" filter-by-id="{ properties: {category: { id: category.id } } }" type="aside"></items-list>
+                </div>
             </div>
         </div>
+
     </div>
     <div class="detail-aside-group pois" ng-if="pois.length && result.properties.contentType === 'trek'" ng-class="{active: currentInterest === 'pois'}">
         <div class="detail-aside-group-title" ng-click="toggleInterest('pois')">
