@@ -466,9 +466,9 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
     this.setMinimap = function () {
         if (globalSettings.ACTIVE_MINIMAP) {
             var miniMapOptions = {
-                    toggleDisplay: true,
-                    zoomLevelOffset: globalSettings.MINIMAP_OFFSET
-                };
+                toggleDisplay: true,
+                zoomLevelOffset: globalSettings.MINIMAP_OFFSET
+            };
 
             this._miniMap = new L.Control.MiniMap(layersService.getMainLayersGroup(), miniMapOptions).addTo(this.map);
         }
@@ -692,9 +692,9 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
 
     this.highlightPath = function (element, permanent, detailView) {
         var hoverStyle = {
-            className:  'layer-highlight'
-        },
-        geoElement = {};
+                className:  'layer-highlight'
+            },
+            geoElement = {};
 
         if (!self.treksIconified || detailView) {
             geoElement = L.geoJson(element, {
@@ -1316,9 +1316,9 @@ function popupService() {
         /**
          * Alt way : if value === 'selector', do like InfoContent
          */
-         if (this.popupSources && this.popupSources.hint && this.popupSources.hint === 'selector' && this.popupSources.selector) {
-             return document.querySelector(this.popupSources.selector).outerHTML;
-         }
+        if (this.popupSources && this.popupSources.hint && this.popupSources.hint === 'selector' && this.popupSources.selector) {
+            return document.querySelector(this.popupSources.selector).outerHTML;
+        }
 
         /**
          * New way : get hint content from marker object

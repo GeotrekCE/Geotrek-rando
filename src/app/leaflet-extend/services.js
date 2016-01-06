@@ -7,7 +7,7 @@ function leafletExtend() {
      */
     L.Control.SwitchBackgroundLayers = L.Control.extend({
         options: {
-            position: 'bottomleft',
+            position: 'bottomleft'
         },
 
         initialize: function (baseLayers, options) {
@@ -136,8 +136,8 @@ function leafletExtend() {
         },
 
         _addItem: function (obj) {
-            var control =   document.createElement('a'),
-                icon =      this.options.defaultIcon,
+            var control   = document.createElement('a'),
+                icon      = this.options.defaultIcon,
                 container = this._container;
 
             if (obj.layer.options && obj.layer.options.icon) {
