@@ -1485,15 +1485,15 @@ function layersService ($http, globalSettings) {
      *     or PERMANENT_TILELAYERS + OPTIONAL_TILELAYERS
      */
     var _getMainLayersConf = function _getMainLayersConf () {
-        if (globalSettings.OPTIONAL_TILELAYERS instanceof Array) {
-            if (typeof globalSettings.PERMANENT_TILELAYERS === 'object') {
-                return globalSettings.PERMANENT_TILELAYERS.concat(globalSettings.OPTIONAL_TILELAYERS);
-            } else {
-                return globalSettings.OPTIONAL_TILELAYERS;
-            }
-        } else if (typeof globalSettings.PERMANENT_TILELAYERS === 'object') {
-            return [globalSettings.PERMANENT_TILELAYERS];
-        }
+        // if (globalSettings.OPTIONAL_TILELAYERS instanceof Array) {
+        //     if (typeof globalSettings.PERMANENT_TILELAYERS === 'object') {
+        //         return globalSettings.PERMANENT_TILELAYERS.concat(globalSettings.OPTIONAL_TILELAYERS);
+        //     } else {
+        //         return globalSettings.OPTIONAL_TILELAYERS;
+        //     }
+        // } else if (typeof globalSettings.PERMANENT_TILELAYERS === 'object') {
+        //     return [globalSettings.PERMANENT_TILELAYERS];
+        // }
 
         if (globalSettings.PERMANENT_TILELAYERS) {
             return globalSettings.PERMANENT_TILELAYERS;
