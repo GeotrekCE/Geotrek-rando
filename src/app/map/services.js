@@ -1486,11 +1486,11 @@ function layersService ($http, globalSettings) {
      */
     var _getMainLayersConf = function _getMainLayersConf () {
         if (globalSettings.OPTIONAL_TILELAYERS instanceof Array) {
-            if (typeof globalSettings.PERMANENT_TILELAYERS === 'object') {
-                return globalSettings.PERMANENT_TILELAYERS.concat(globalSettings.OPTIONAL_TILELAYERS);
-            } else {
-                return globalSettings.OPTIONAL_TILELAYERS;
-            }
+            // if (typeof globalSettings.PERMANENT_TILELAYERS === 'object') {
+            //     return globalSettings.PERMANENT_TILELAYERS.concat(globalSettings.OPTIONAL_TILELAYERS);
+            // } else {
+            //     return globalSettings.OPTIONAL_TILELAYERS;
+            // }
         } else if (typeof globalSettings.PERMANENT_TILELAYERS === 'object') {
             return [globalSettings.PERMANENT_TILELAYERS];
         }
@@ -1552,7 +1552,8 @@ function layersService ($http, globalSettings) {
             } else if (layerConf.LAYER_URL) {
                 layerName = layerConf.LAYER_NAME || [defaultName, index + 1].join(' ');
                 if (layerConf.LAYER_URL.split('.').pop() === 'geojson' || layerConf.LAYER_URL.split('.').pop() === 'json') {
-                    var options = angular.extend({
+
+                    layerOptions = angular.extend({
                         style: function (feature) {
                             var styles = {};
                             if (feature.properties.fill) {
@@ -1564,7 +1565,8 @@ function layersService ($http, globalSettings) {
                             return styles;
                         }
                     }, layerConf.OPTIONS);
-                    layers[layerName] = new L.GeoJSON.AJAX(layerConf.LAYER_URL, options);
+
+                    layers[layerName] = L.geoJson.ajax(layerConf.LAYER_URL, layerOptions);
                 } else {
                     layerOptions = layerConf.OPTIONS || {};
 
