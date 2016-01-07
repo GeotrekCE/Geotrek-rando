@@ -14,7 +14,7 @@
 
     <div class="detail-content-approved" ng-if="result.properties.approved">
         <ng-include ng-if="approved | isSVG" src="approved"></ng-include>
-        <img ng-if="!approved | isSVG" ng-src="{{::approved}}" ng-alt="{{::approvedLabel}}">
+        <img ng-if="!(approved | isSVG)" ng-src="{{::approved}}" ng-alt="{{::approvedLabel}}">
     </div>
 
     <div class="detail-content-teaser"  ng-if="result.properties.description_teaser" ng-bind-html="sanitizeData(result.properties.description_teaser, true)"></div>
