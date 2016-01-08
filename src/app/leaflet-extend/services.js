@@ -132,6 +132,7 @@ function leafletExtend() {
                     this._addItem(obj);
                 }
             }
+            L.DomEvent.disableClickPropagation(this._container);
             return this._container;
         },
 
