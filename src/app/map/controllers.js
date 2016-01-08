@@ -15,7 +15,7 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
         // } else if (bounds) {
         //     fitBounds = false;
         // }
-        if (globalSettings.UPDATE_MAP_ON_FILTER || $scope.shouldFitBounds) {
+        if (fitBounds || $scope.shouldFitBounds) {
             if (bounds) {
                 console.log(bounds);
                 $rootScope.map.fitBounds(bounds, {animate:false});
