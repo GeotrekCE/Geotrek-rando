@@ -91,7 +91,9 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
         if (globalSettings.GEO_FILTERS_AUTO_CLOSE && $scope.selectMenus[filterType]) {
             closeSelectMenu(filterType);
         }
-        $scope.propagateActiveFilters();
+        if (globalSettings.UPDATE_MAP_ON_FILTER) {
+            $scope.propagateActiveFilters();
+        }
     };
 
     $scope.changeSearchFilter = function () {
