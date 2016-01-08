@@ -113,6 +113,7 @@
     "dist": "gulp",
     "test": "gulp && gulp tests",
     "watch": "gulp watch",
-    "start": "gulp && gulp watch"
+    "start": "gulp && gulp watch",
+    "export": "tar -czf export.tgz `git clean -xdn | cut -d' ' -f2 | grep -v -e node_modules -e 'src/rando' -e 'src/app/translation/lang' -e '_customisation.scss' -e '_configuration.scss' -e 'settings.constant.json'`"
   }
 }
