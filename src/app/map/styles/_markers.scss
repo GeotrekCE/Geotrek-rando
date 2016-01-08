@@ -276,13 +276,15 @@
 
 .ref-point {
     cursor: default;
-    background: white;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    background: $ref-point-color;
     border-radius: 50%;
-    color: black;
+    color: white;
     font-size: .9rem;
     text-align: center;
-    line-height: 1.2rem;
-    border: $ref-point-color 3px solid;
+    font-weight: bold;
+    line-height: 26px;
+    vertical-align: middle;
     span {
         vertical-align: middle;
     }
