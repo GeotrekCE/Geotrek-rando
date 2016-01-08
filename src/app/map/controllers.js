@@ -8,13 +8,19 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
         var deferred = $q.defer();
 
         var bounds = boundsService.getBounds($scope.currentState);
-
-        if ($scope.shouldFitBounds) {
-            fitBounds = true;
+        //
+        // if ($scope.shouldFitBounds) {
+        //     fitBounds = true;
+        //     $scope.shouldFitBounds = false;
+        // } else if (bounds) {
+        //     fitBounds = false;
+        // }
+        if (globalSettings.UPDATE_MAP_ON_FILTER || $scope.shouldFitBounds) {
+            if (bounds) {
+                console.log(bounds);
+                $rootScope.map.fitBounds(bounds, {animate:false});
+            }
             $scope.shouldFitBounds = false;
-        } else if (bounds) {
-            fitBounds = false;
-            $rootScope.map.fitBounds(bounds, {animate:false});
         }
 
         $rootScope.elementsLoading ++;
