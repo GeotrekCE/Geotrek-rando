@@ -53,10 +53,11 @@
 .details-pane {
     display: flex;
     align-items: stretch;
+    overflow: hidden;
 
     .detailsview-pane {
         height: 100%;
-        z-index: 2147483700;
+        z-index: 2147483647;
     }
 
     .detail-content-pane {

@@ -44,7 +44,7 @@
 .view-content {
     position: relative;
     z-index: 5;
-    
+
     display: flex;
 
     width: 100%;
@@ -78,7 +78,7 @@
 
 @media (min-width: 768px) {
     .toggle-pane-controls {
-        position: fixed;
+        position: absolute;
         z-index: 9;
         top: 0;
         bottom: 0;
@@ -94,6 +94,20 @@
         box-shadow: -20px 0 30px rgba(#000, .2) inset;
 
         align-items: stretch;
+
+        &.aside-pane-controls {
+            right: 25%;
+
+            .stripe svg * {
+                fill: white;
+            }
+        }
+
+        &.aside-pane-controls.fold-aside {
+            .stripe svg * {
+                fill: currentColor;
+            }
+        }
     }
 }
 
@@ -148,6 +162,7 @@
 .fold-aside {
     &.toggle-pane-controls {
         width: 5%;
+        right: -1%;
     }
     .toggle-pane-toggle {
         width: 70%;
