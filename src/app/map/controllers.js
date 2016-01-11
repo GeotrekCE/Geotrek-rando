@@ -6,15 +6,13 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
 
     function updateMapWithResults(fitBounds) {
         var deferred = $q.defer();
-
         var bounds = boundsService.getBounds($scope.currentState);
 
-        if ($scope.shouldFitBounds) {
-            fitBounds = true;
-            $scope.shouldFitBounds = false;
-        } else if (bounds) {
-            fitBounds = false;
-            $rootScope.map.fitBounds(bounds, {animate:false});
+        if (fitBounds || $scope.shouldFitBounds) {
+            if (bounds) {
+                $rootScope.map.fitBounds(bounds, {animate:false});
+                $scope.shouldFitBounds = false;
+            }
         }
 
         $rootScope.elementsLoading ++;
