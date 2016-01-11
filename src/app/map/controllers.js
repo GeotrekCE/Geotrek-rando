@@ -8,11 +8,15 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
         var deferred = $q.defer();
         var bounds = boundsService.getBounds($scope.currentState);
 
-        if (fitBounds || $scope.shouldFitBounds) {
-            if (bounds) {
-                $rootScope.map.fitBounds(bounds, {animate:false});
+        console.log('a');
+
+        if ($scope.shouldFitBounds && bounds) {
+            console.log('b');
+            $rootScope.map.fitBounds(bounds, {animate:false});
+            fitBounds = false;
+            setTimeout(function () {
                 $scope.shouldFitBounds = false;
-            }
+            }, 1000);
         }
 
         $rootScope.elementsLoading ++;
