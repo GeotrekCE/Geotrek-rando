@@ -6,7 +6,6 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
 
     function updateMapWithResults(fitBounds) {
         var deferred = $q.defer();
-        console.log($scope);
         var bounds = boundsService.getBounds($scope.currentState);
 
         if (fitBounds || $scope.shouldFitBounds) {
