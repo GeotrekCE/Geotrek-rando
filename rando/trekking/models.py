@@ -4,6 +4,7 @@ import json
 import HTMLParser
 
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import get_language, ugettext_lazy as _
 from django.utils.html import strip_tags
@@ -99,3 +100,7 @@ class Trek(GeoJSONModel):
         fulltext = re.sub(r'[\s,\.\']', '', fulltext)
         fulltext = fulltext.lower()
         return fulltext
+
+    @property
+    def kml_url(self):
+        return reverse("core:fileserve", args=[self.properties.kml])
