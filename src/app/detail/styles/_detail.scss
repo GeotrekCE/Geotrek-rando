@@ -54,6 +54,7 @@
     display: flex;
     align-items: stretch;
     overflow: hidden;
+    justify-content: flex-end;
 
     .detailsview-pane {
         height: 100%;
