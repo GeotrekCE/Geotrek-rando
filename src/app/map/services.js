@@ -449,7 +449,6 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                 controlInput.value = 'viewport-filtering';
                 controlInput.checked = globalSettings.FILTER_BY_VIEWPORT_DEFAULT;
                 var controlCaption = L.DomUtil.create('span', 'leaflet-control-viewportfilter-caption', controlContainer);
-                controlCaption.innerHTML = $filter('translate')('FILTER_ON_MOVE_MAP');
 
                 L.DomEvent.on(controlInput, 'change', function () {
                     self.filterByViewport = document.querySelector('.leaflet-control-viewportfilter-button').checked;
