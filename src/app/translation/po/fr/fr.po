@@ -236,9 +236,6 @@ msgstr "Le message n'a pu être enregistré. Veuillez nous excuser pour ce désa
 #
 #
 
-msgid "FILTER_ON_MOVE_MAP"
-msgstr "Filtrer par la carte"
-
 msgid "SHOW_ACTIVE_FILTERS"
 msgstr "Afficher les filtres actifs"
 
@@ -381,7 +378,7 @@ msgid "SERVICES_TOGGLE"
 msgstr "Activer / Masquer les services"
 
 msgid "VIEWPORT_FILTERING"
-msgstr "Filtrer avec la carte"
+msgstr "Filtrer par la carte"
 
 
 # HOME PAGE
