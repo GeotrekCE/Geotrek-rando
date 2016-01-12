@@ -3,8 +3,8 @@
         <svg class="filters-tags-trigger-bg" x="0px" y="0px" width="235px" height="25px">
             <path d="M235,25c-5.5,0-10-4.5-10-10v-5c0-5.5-4.5-10-10-10H20c-5.5,0-10,4.5-10,10v5c0,5.5-4.5,10-10,10H235z"/>
         </svg>
-        <span class="text"  ng-if="!extend">{{ 'Afficher les filtres actifs' | translate }}</span>
-        <span class="text"  ng-if="extend" >{{ 'Masquer les filtres actifs'  | translate }}</span>
+        <span class="text"  ng-if="!extend">{{ 'SHOW_ACTIVE_FILTERS' | translate }}</span>
+        <span class="text"  ng-if="extend" >{{ 'HIDE_ACTIVE_FILTERS'  | translate }}</span>
         <ng-include class="stripe" src="'/images/icons/stripe.svg'"></ng-include>
     </div>
     <ul class="filters-tags-list">

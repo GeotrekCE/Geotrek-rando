@@ -238,8 +238,20 @@ msgstr "Your message couldn't been sent. Please excuse us for the inconvenience.
 #
 #
 
-msgid "FILTER_ON_MOVE_MAP"
-msgstr "Filter when I move the map"
+msgid "SHOW_ACTIVE_FILTERS"
+msgstr "Show active filters"
+
+msgid "HIDE_ACTIVE_FILTERS"
+msgstr "Hide active filters"
+
+msgid "SIMPLE_SEARCH"
+msgstr "Simple search"
+
+msgid "ADVANCED_SEARCH"
+msgstr "Advanced search"
+
+msgid "SHOW_MORE"
+msgstr "Show more"
 
 msgid "THEMES"
 msgstr "Themes"
