@@ -239,6 +239,18 @@ msgstr "Le message n'a pu être enregistré. Veuillez nous excuser pour ce désa
 msgid "FILTER_ON_MOVE_MAP"
 msgstr "Filtrer par la carte"
 
+msgid "SHOW_ACTIVE_FILTERS"
+msgstr "Afficher les filtres actifs"
+
+msgid "HIDE_ACTIVE_FILTERS"
+msgstr "Masquer les filtres actifs"
+
+msgid "SIMPLE_SEARCH"
+msgstr "Moins de critères"
+
+msgid "ADVANCED_SEARCH"
+msgstr "Plus de critères"
+
 msgid "THEMES"
 msgstr "Thèmes"
 
