@@ -8,10 +8,7 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
         var deferred = $q.defer();
         var bounds = boundsService.getBounds($scope.currentState);
 
-        console.log('a');
-
         if ($scope.shouldFitBounds && bounds) {
-            console.log('b');
             $rootScope.map.fitBounds(bounds, {animate:false});
             fitBounds = false;
             setTimeout(function () {
