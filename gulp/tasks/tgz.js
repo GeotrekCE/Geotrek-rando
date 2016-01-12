@@ -15,9 +15,6 @@ var tar    = require('gulp-tar');
 var gzip   = require('gulp-gzip');
 var rename = require('gulp-rename');
 
-var handleErrors  = require('../util/handleErrors');
-var config        = require('../config');
-
 
 gulp.task('tgz:custo', function() {
     gulp.src([
@@ -26,18 +23,9 @@ gulp.task('tgz:custo', function() {
       './src/app/config/styles/_config-custom.scss',
       './src/app/custom/controllers.js',
       './src/app/custom/directives.js',
-      './src/app/custom/styles/_custom-footer.scss',
-      './src/app/custom/styles/_custom-header.scss',
-      './src/app/custom/styles/_custom-home.scss',
-      './src/app/custom/styles/_custom-override.scss',
-      './src/app/custom/templates/custom-random-content.html',
-      './src/app/custom/templates/custom-detail-page-footer.html',
-      './src/app/custom/templates/custom-footer.html',
-      './src/app/custom/templates/custom-header.html',
-      './src/app/custom/templates/custom-home-feed.html',
-      './src/app/custom/templates/custom-home-video.html',
-
-      './src/app/custom/templates/custom-home-*.html',
+      './src/app/custom/services.js',
+      './src/app/custom/styles/_custom-*.scss',
+      './src/app/custom/templates/*.html',
 
       './src/app/translation/**/*-custom.po'
     ])
