@@ -107,22 +107,23 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
         ];
 
         var promises = [];
-
         _.forEach(controllersListe, function (currentController) {
             var domElement = document.querySelector(currentController.selector);
-            if (!domElement) { return false; } // Avoid error if element does not exist
-            promises.push(
-                $translate(currentController.translationID)
-                    .then(
-                        function (translation) {
-                            if (currentController.isTitle) {
-                                domElement.setAttribute('title', translation);
-                            } else {
-                                domElement.innerHTML = translation;
+
+            if (domElement) {
+                promises.push(
+                    $translate(currentController.translationID)
+                        .then(
+                            function (translation) {
+                                if (currentController.isTitle) {
+                                    domElement.setAttribute('title', translation);
+                                } else {
+                                    domElement.innerHTML = translation;
+                                }
                             }
-                        }
-                    )
-            );
+                        )
+                );
+            }
         });
 
         $q.all(promises).finally(function () {
@@ -199,11 +200,7 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
             }
         }),
         $rootScope.$on('switchGlobalLang', function () {
-            if ($state.current.name === 'layout.detail') {
-                updateMapWithDetails(true);
-            } else {
-                updateMapWithResults(true);
-            }
+            updateMapWithResults(true);
             initCtrlsTranslation();
         })
     ];
