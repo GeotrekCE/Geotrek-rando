@@ -4,7 +4,7 @@ function TranslationController($scope, $rootScope, $translate, translationServic
     function initTranslation() {
         $scope.languages = translationService.getAllLang();
         $scope.activeLang = translationService.getCurrentLang();
-        $translate.use($scope.activeLang.code);
+        $translate.use($scope.activeLang);
         $rootScope.$emit('translationReady');
     }
 
