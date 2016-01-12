@@ -251,6 +251,9 @@ msgstr "Moins de critères"
 msgid "ADVANCED_SEARCH"
 msgstr "Plus de critères"
 
+msgid "SHOW_MORE"
+msgstr "En savoir plus"
+
 msgid "THEMES"
 msgstr "Thèmes"
 

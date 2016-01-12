@@ -253,6 +253,9 @@ msgstr "Simple search"
 msgid "ADVANCED_SEARCH"
 msgstr "Advanced search"
 
+msgid "SHOW_MORE"
+msgstr "Show more"
+
 msgid "THEMES"
 msgstr "Themes"
 
