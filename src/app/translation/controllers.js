@@ -9,6 +9,7 @@ function TranslationController($scope, $rootScope, $translate, translationServic
     }
 
     $scope.toggleLang = function (lang) {
+        $scope.activeLang = lang;
         translationService.setCurrentLang(lang);
         translationService.setFavoriteLang();
         $translate.use(lang);
