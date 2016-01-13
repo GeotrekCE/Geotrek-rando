@@ -1,5 +1,5 @@
-<rando-header ng-if="!$root.screenstate"></rando-header>
-<div class="main-content {{ currentState_name.split('.').join('-') }}" ng-class="{'footer-active': $root.showFooterOnApp, 'isLoading': $root.elementsLoading > 0, 'fullscreen': $root.screenstate }">
+<rando-header ng-if="!$root.isFullscreen"></rando-header>
+<div class="main-content {{ currentState_name.split('.').join('-') }}" ng-class="{'footer-active': $root.showFooterOnApp, 'isLoading': $root.elementsLoading > 0, 'fullscreen': $root.isFullscreen }">
     <div ui-view="sidebar" class="toolbar sidebar" id="sidebar" ></div>
     <div ui-view="content" class="view-content" ng-class="{'map-mode' : mapIsShown, 'results-mode' : !mapIsShown}"></div>
 </div>
