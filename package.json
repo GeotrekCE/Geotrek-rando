@@ -23,7 +23,7 @@
     "leaflet-ajax": "^2.0.0",
     "leaflet-geometryutil": "git://github.com/makinacorpus/Leaflet.GeometryUtil.git",
     "leaflet-minimap": "git://github.com/Norkart/Leaflet-MiniMap.git",
-    "leaflet-textpath": "^0.2.2",
+    "leaflet-textpath": "git://github.com/makinacorpus/Leaflet.TextPath.git#c45041b4687c8c46b9bb39b8f93623c933108d19",
     "leaflet.fullscreen": "^1.1.4",
     "leaflet.markercluster": "^0.4.0",
     "lodash": "^2.4.1",

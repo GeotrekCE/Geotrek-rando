@@ -1049,7 +1049,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                         self._clustersLayer.addLayer(currentLayer);
                         if (result.geometry.type !== "Point" && result.geometry.type !== "MultiPoint") {
                             if (globalSettings.SHOW_ARROWS_ON_ROUTE) {
-                                layer.setText('    ›    ', {offset: 12, repeat: true, center: true, attributes: {class: 'arrow-direction category-' + result.properties.category.id}});
+                                layer.setText('  >  ', {offset: 6, repeat: true, center: true, attributes: {class: 'arrow-direction category-' + result.properties.category.id}});
                             }
                             if (globalSettings.ALWAYS_HIGHLIGHT_TREKS) {
                                 self.highlightPath(result, true, true);
