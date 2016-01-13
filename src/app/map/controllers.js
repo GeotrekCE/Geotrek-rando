@@ -171,7 +171,9 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
     var rootScopeEvents = [
         $rootScope.map.on('enterFullscreen', function () {
             $rootScope.isFullscreen = true;
-            $rootScope.map.invalidateSize(true);
+            setTimeout(function() {
+                $rootScope.map.invalidateSize(true);
+            }, 1000);
         }),
         $rootScope.map.on('exitFullscreen', function () {
             $rootScope.isFullscreen = false;
