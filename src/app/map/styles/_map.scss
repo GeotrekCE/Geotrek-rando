@@ -184,12 +184,10 @@
 }
 
 .arrow-direction {
-    margin: 20px;
-    font-size: 50px;
+    font-size: 10px;
     @each $category in $categories {
         &.category-#{nth($category, 1)} {
-            fill: nth($category, 2);
-            opacity: .8
+            fill: darken(nth($category, 2), 25%);
         }
     }
 }
