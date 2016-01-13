@@ -1158,16 +1158,6 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         // Set-up maps controls (needs _map to be defined);
         this.initMapControls();
 
-        this.map.on('enterFullscreen', function () {
-            self.map.invalidateSize(true);
-            console.log('entered fullscreen');
-        });
-
-        this.map.on('exitFullscreen', function () {
-            self.map.invalidateSize(false);
-            console.log('exit fullscreen');
-        });
-
         //Set-up Layers
         this._nearMarkersLayer = self.createNearLayer();
         this._childMarkersLayer = self.createChildLayer();
