@@ -190,7 +190,10 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
                 }
             }
         ),
-        $rootScope.$on('resultsUpdated', function () {
+        $rootScope.$on('resultsUpdated', function (name, forceRefresh) {
+            if (forceRefresh) {
+                updateMapWithResults(forceRefresh);
+            }
             if ($state.current.name === 'layout.root') {
                 updateMapWithResults(globalSettings.UPDATE_MAP_ON_FILTER);
             }

@@ -28,12 +28,14 @@ function HomeController($scope, $rootScope, translationService, categoriesServic
     };
 
     $scope.accessSpecificCategory = function (currentCategory) {
+        $state.go('layout.root');
         if (typeof currentCategory !== 'object') {
             currentCategory = [currentCategory];
         }
         $rootScope.activeFilters.categories = currentCategory;
         filtersService.updateActiveFilters($rootScope.activeFilters);
-        $rootScope.$broadcast('updateFilters');
+        $rootScope.$broadcast('updateFilters', true);
+
         updateFiltersTags();
         $scope.toggleHome();
     };
