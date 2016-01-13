@@ -39,7 +39,7 @@
     color: lighten($dark-grey, 50%);
 }
 
-.results-item { // li.result
+.results-item {
     overflow: hidden;
     flex: 0 1 auto;
     width: 47%;
@@ -55,21 +55,11 @@
     transition: all 0.1s ease-out;
     -webkit-backface-visibility: hidden;
     -webkit-transform-style: preserve-3d;
-}
-
-.results-list,
-.aside-list {
-    background-color: inherit;
-    list-style: none;
-    padding: 0 2em;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
     &.no-theme {
         padding-bottom: 1em;
     }
-    .results-item {
+    .results-list &,
+    .aside-list & {
         &:hover, &.hovered {
             transform: translateY(-5px);
             border-color: rgba(200, 200, 200, 1);
@@ -89,6 +79,17 @@
             order: 10;
         }
     }
+}
+
+.results-list,
+.aside-list {
+    background-color: inherit;
+    list-style: none;
+    padding: 0 2em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 .leaflet-popup {
@@ -185,8 +186,10 @@
         transform: translate(-50%, -50%);
     }
 
-    .results-item:hover &,
-    .results-item.hovered & {
+    .results-list .results-item:hover &,
+    .results-list .results-item.hovered &,
+    .aside-list .results-item:hover &,
+    .aside-list .results-item.hovered & {
         @for $i from 0 through 5 {
             &:nth-child(#{$i}) {
                 left: (45px * ($i - 1));
