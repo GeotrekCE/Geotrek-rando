@@ -1551,7 +1551,9 @@ function layersService ($http, globalSettings) {
             } else if (layerConf.LAYER_URL) {
                 layerName = layerConf.LAYER_NAME || [defaultName, index + 1].join(' ');
                 if (layerConf.LAYER_URL.split('.').pop() === 'geojson' || layerConf.LAYER_URL.split('.').pop() === 'json') {
-
+                    /**
+                     * Manage geoJson layers
+                     */
                     layerOptions = angular.extend({
                         style: function (feature) {
                             var styles = {};
@@ -1565,8 +1567,13 @@ function layersService ($http, globalSettings) {
                         }
                     }, layerConf.OPTIONS);
 
+                    L.Icon.Default.imagePath = layerConf.DEFAULT_MARKER || '/app/vendors/images/leaflet/';
+
                     layers[layerName] = L.geoJson.ajax(layerConf.LAYER_URL, layerOptions);
                 } else {
+                    /**
+                     * Manage tileLayers
+                     */
                     layerOptions = layerConf.OPTIONS || {};
 
                     if (layerConf.BOUNDS) {
