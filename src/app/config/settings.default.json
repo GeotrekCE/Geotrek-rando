@@ -117,9 +117,9 @@
     ],
     "ASCENT_FILTER":  [
         { "id": 0, "label": "<300m"},
-        { "id": 300, "label": "300"},
-        { "id": 600, "label": "600"},
-        { "id": 1000, "label": "1000"},
+        { "id": 300, "label": "300m"},
+        { "id": 600, "label": "600m"},
+        { "id": 1000, "label": "1000m"},
         { "id": 9999, "label": ">1000m"}
     ],
     "LENGTH_FILTER":  [
