@@ -73,7 +73,7 @@
         <h3>{{ 'CONTACT' | translate}}</h3>
         <ul>
             <li class="card">
-                <div class="contact" ng-if="result.properties.contact" ng-bind-html="result.properties.contact | sanitizeData: true"></div>
+                <div class="contact" ng-if="result.properties.contact" ng-bind-html="result.properties.contact | sanitizeData: false"></div>
             </li>
         </ul>
     </div>
