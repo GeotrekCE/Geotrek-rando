@@ -29,12 +29,7 @@ function FlatPagesController(utilsFactory, flatService, $scope, $state, $rootSco
         })
     ];
 
-    $scope.$on('$destroy', function () {
-        rootScopeEvents.forEach(function (dereg) {
-            dereg();
-        });
-    });
-
+    $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
 }
 
 function FlatMenuController(flatService, $scope, $rootScope) {
