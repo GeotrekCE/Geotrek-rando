@@ -168,17 +168,19 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
 
     });
 
+    $rootScope.map.on('enterFullscreen', function () {
+        $rootScope.isFullscreen = true;
+        setTimeout(function() {
+            $rootScope.map.invalidateSize(true);
+        }, 1000);
+    });
+    
+    $rootScope.map.on('exitFullscreen', function () {
+        $rootScope.isFullscreen = false;
+        $rootScope.map.invalidateSize(false);
+    });
+
     var rootScopeEvents = [
-        $rootScope.map.on('enterFullscreen', function () {
-            $rootScope.isFullscreen = true;
-            setTimeout(function() {
-                $rootScope.map.invalidateSize(true);
-            }, 1000);
-        }),
-        $rootScope.map.on('exitFullscreen', function () {
-            $rootScope.isFullscreen = false;
-            $rootScope.map.invalidateSize(false);
-        }),
         $rootScope.$on('$stateChangeSuccess',
             function () {
                 if ($state.current.name === 'layout.detail') {
