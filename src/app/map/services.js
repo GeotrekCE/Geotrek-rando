@@ -469,7 +469,19 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                 zoomLevelOffset: globalSettings.MINIMAP_OFFSET
             };
 
-            this._miniMap = new L.Control.MiniMap(layersService.getMainLayersGroup(), miniMapOptions).addTo(this.map);
+            var layerOptions = {};
+
+            if (globalSettings.MINIMAP_ZOOM) {
+                if (globalSettings.MINIMAP_ZOOM.MINI) {
+                    layerOptions.minZoom = globalSettings.MINIMAP_ZOOM.MINI;
+                }
+                if (globalSettings.MINIMAP_ZOOM.MAX) {
+                    layerOptions.maxZoom = globalSettings.MINIMAP_ZOOM.MAX;
+                }
+            }
+
+            var layers = layersService.getMainLayersGroup(layerOptions);
+            this._miniMap = new L.Control.MiniMap(layers, miniMapOptions).addTo(this.map);
         }
     };
 
@@ -1509,7 +1521,7 @@ function layersService ($http, globalSettings) {
         return false;
     };
 
-    var _getMainLayersGroup = function _getMainLayersGroup () {
+    var _getMainLayersGroup = function _getMainLayersGroup (customOptions) {
         var layersConf = _getMainLayersConf();
 
         if (!layersConf) { return false; }
@@ -1518,9 +1530,10 @@ function layersService ($http, globalSettings) {
         layersConf.forEach(function (layerConf) {
             var layer, layerOptions;
             if (typeof layerConf === 'string') {
-                layer = L.tileLayer(layerConf);
+                layer = L.tileLayer(layerConf, customOptions);
             } else if (layerConf.LAYER_URL) {
                 layerOptions = layerConf.OPTIONS || {};
+                _.merge(layerOptions, customOptions);
 
                 if (layerConf.BOUNDS) {
                     layerOptions.boundsLimit = {
