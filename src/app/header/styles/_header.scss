@@ -192,5 +192,8 @@
         > .active > a {
             background-color: $dark-grey;
         }
+        &.scroll {
+            overflow-y: auto;
+        }
     }
 }
