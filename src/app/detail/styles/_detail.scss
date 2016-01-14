@@ -77,7 +77,7 @@
         display: block;
 
         .detailsview-pane {
-            height: auto;
+            z-index: 1;
         }
 
         .map-pane {
