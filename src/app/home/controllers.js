@@ -1,6 +1,6 @@
 'use strict';
 
-function HomeController($scope, $rootScope, translationService, categoriesService, $location, homeService, globalSettings, filtersService) {
+function HomeController($scope, $rootScope, $state, translationService, categoriesService, $location, homeService, globalSettings, filtersService) {
 
     function updateFiltersTags() {
         $rootScope.activeFiltersTags = filtersService.getTagFilters();
