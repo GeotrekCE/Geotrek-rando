@@ -50,7 +50,7 @@
 
             <div class="poi-drawer">
 
-                <div class="description poi-description" ng-bind-html="sanitizeData(poi.properties.description, true)"></div>
+                <div class="description poi-description" ng-bind-html="poi.properties.description | sanitizeData: true"></div>
 
                 <div class="medias poi-medias">
                     <ul class="medias-liste poi-media-list">

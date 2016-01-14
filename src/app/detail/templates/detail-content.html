@@ -17,13 +17,13 @@
         <img ng-if="!(approved | isSVG)" ng-src="{{::approved}}" ng-alt="{{::approvedLabel}}">
     </div>
 
-    <div class="detail-content-teaser"  ng-if="result.properties.description_teaser" ng-bind-html="sanitizeData(result.properties.description_teaser, true)"></div>
+    <div class="detail-content-teaser"  ng-if="result.properties.description_teaser" ng-bind-html="result.properties.description_teaser | sanitizeData: true"></div>
 
-    <div class="detail-content-ambiance" ng-if="result.properties.ambiance"           ng-bind-html="sanitizeData(result.properties.ambiance, true)"></div>
+    <div class="detail-content-ambiance" ng-if="result.properties.ambiance"           ng-bind-html="result.properties.ambiance | sanitizeData: true"></div>
 
     <detail-content-from-to></detail-content-from-to>
 
-    <div class="detail-content-description" ng-if="result.properties.description" ng-bind-html="sanitizeData(result.properties.description, true)"></div>
+    <div class="detail-content-description" ng-if="result.properties.description" ng-bind-html="result.properties.description | sanitizeData: true"></div>
 
     <detail-content-events-info></detail-content-events-info>
 
@@ -40,12 +40,12 @@
 
     <div class="detail-content-notice advice" ng-if="result.properties.advice">
         <i class="notice-symbol fa fa-exclamation-triangle"></i>
-        <div ng-bind-html="sanitizeData(result.properties.advice, true)"></div>
+        <div ng-bind-html="result.properties.advice | sanitizeData: true"></div>
     </div>
 
     <div class="detail-content-notice disabled-infrastructure" ng-if="result.properties.disabled_infrastructure">
         <i class="notice-symbol fa fa-wheelchair"></i>
-        <div ng-bind-html="sanitizeData(result.properties.disabled_infrastructure, true)"></div>
+        <div ng-bind-html="result.properties.disabled_infrastructure | sanitizeData: true"></div>
     </div>
 
     <detail-content-elevation></detail-content-elevation>
@@ -53,16 +53,16 @@
     <div class="detail-content-transport-access">
         <div class="detail-content-transport transport" ng-if="result.properties.public_transport">
             <h3>{{ 'TRANSPORTS' | translate}}</h3>
-            <div class="text" ng-bind-html="sanitizeData(result.properties.public_transport, true)"></div>
+            <div class="text" ng-bind-html="result.properties.public_transport | sanitizeData: true"></div>
         </div>
 
         <div class="detail-content-access access" ng-if="result.properties.access">
             <h3>{{ 'ACCESS' | translate}}</h3>
-            <div class="text" ng-bind-html="sanitizeData(result.properties.access, true)"></div>
+            <div class="text" ng-bind-html="result.properties.access | sanitizeData: true"></div>
 
             <div class="" ng-if="result.properties.advised_parking">
                 <strong>{{ 'PARKING' | translate}}</strong>
-                <span class="text" ng-bind-html="sanitizeData(result.properties.advised_parking, true)"></span>
+                <span class="text" ng-bind-html="result.properties.advised_parking | sanitizeData: true"></span>
             </div>
         </div>
     </div>
@@ -73,7 +73,7 @@
         <h3>{{ 'CONTACT' | translate}}</h3>
         <ul>
             <li class="card">
-                <div class="contact" ng-if="result.properties.contact" ng-bind-html="sanitizeData(result.properties.contact, true)"></div>
+                <div class="contact" ng-if="result.properties.contact" ng-bind-html="result.properties.contact | sanitizeData: true"></div>
             </li>
         </ul>
     </div>

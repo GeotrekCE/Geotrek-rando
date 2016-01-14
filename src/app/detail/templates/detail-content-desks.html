@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="detail-content-desk-description">
-                <div class="text" ng-bind-html="sanitizeData(desk.description, true)"></div>
+                <div class="text" ng-bind-html="desk.description | sanitizeData: true"></div>
             </div>
         </li>
     </ul>
