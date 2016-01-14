@@ -15,6 +15,9 @@ function ItemsListController($scope, $filter, globalSettings, favoritesService, 
     $scope.mapFocusOn = function (result) {
         $rootScope.mapIsShown = true;
         mapService.centerOn(result);
+        if (result.marker instanceof L.Marker) {
+            result.marker.fire('click');
+        }
     };
 
     $scope.isInFavorites = favoritesService.isInFavorites;

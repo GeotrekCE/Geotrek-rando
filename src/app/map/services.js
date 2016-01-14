@@ -326,6 +326,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                             );
                             marker.options.result = element;
                             marker.popupSources = popupSources;
+                            element.marker = marker;
                             deferred.resolve(marker);
                         } else {
                             deferred.reject('no position provided');
