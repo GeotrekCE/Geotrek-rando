@@ -63,11 +63,6 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
         });
     };
 
-    $scope.mapFocusOn = function (result) {
-        $rootScope.mapIsShown = true;
-        mapService.centerOn(result);
-    };
-
     $scope.sanitizeData  = utilsFactory.sanitizeData;
 
     $scope.$on('updateFilters', function () {
