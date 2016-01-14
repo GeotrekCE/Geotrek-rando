@@ -53,7 +53,6 @@
 .details-pane {
     display: flex;
     align-items: stretch;
-    overflow: hidden;
     justify-content: flex-end;
 
     .detailsview-pane {
@@ -77,6 +76,8 @@
         display: block;
 
         .detailsview-pane {
+            overflow: hidden;
+            height: auto;
             z-index: 1;
         }
 

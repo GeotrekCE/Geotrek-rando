@@ -384,6 +384,11 @@
         border-radius: 50%;
         background-position: center center;
         background-size: cover;
+
+        @media (max-width: 767px) {
+            width: 6rem;
+            height: 6rem;
+        }
     }
 }
 
