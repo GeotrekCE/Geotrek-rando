@@ -52,12 +52,12 @@
             </li>
             <li class="meta-item-content-item" ng-if="result.properties.difficulty.label">
                 <ng-include ng-if="result.properties.difficulty.pictogram && (result.properties.difficulty.pictogram | isSVG)" src="result.properties.difficulty.pictogram" tooltip-placement="top" tooltip="{{'I_DIFFICULTY' | translate}}"></ng-include>
-                <img ng-if="result.properties.difficulty.pictogram && !(result.properties.difficulty.pictogram | isSVG)" ng-src="{{::result.properties.difficulty.pictogram}}" ng-alt="{{::result.properties.difficulty.label}}">
+                <img ng-if="result.properties.difficulty.pictogram && !(result.properties.difficulty.pictogram | isSVG)" ng-src="{{::result.properties.difficulty.pictogram}}" ng-alt="{{::result.properties.difficulty.label}}" tooltip-placement="top" tooltip="{{'I_DIFFICULTY' | translate}}">
                 <span>{{::result.properties.difficulty.label}}</span>
             </li>
             <li class="meta-item-content-item" ng-if="result.properties.route">
                 <ng-include ng-if="result.properties.route.pictogram && (result.properties.route.pictogram | isSVG)" src="result.properties.route.pictogram" tooltip-placement="top" tooltip="{{'I_ROUTE' | translate}}"></ng-include>
-                <img ng-if="result.properties.route.pictogram && !(result.properties.route.pictogram | isSVG)" ng-src="{{::result.properties.route.pictogram}}" ng-alt="{{::result.properties.route.label}}">
+                <img ng-if="result.properties.route.pictogram && !(result.properties.route.pictogram | isSVG)" ng-src="{{::result.properties.route.pictogram}}" ng-alt="{{::result.properties.route.label}}" tooltip-placement="top" tooltip="{{'I_ROUTE' | translate}}">
                 <span>{{::result.properties.route.label}}</span>
             </li>
             <li class="meta-item-content-item" ng-if="result.properties.length">
@@ -70,7 +70,7 @@
             </li>
             <li class="meta-item-content-item" ng-if="result.properties.networks" ng-repeat="network in result.properties.networks">
                 <ng-include ng-if="network.pictogram && (network.pictogram | isSVG)" src="network.pictogram" tooltip-placement="top" tooltip="{{'I_NETWORK' | translate}}"></ng-include>
-                <img ng-if="network.pictogram && !(network.pictogram | isSVG)" ng-src="{{::network.pictogram}}" alt="network.name">
+                <img ng-if="network.pictogram && !(network.pictogram | isSVG)" ng-src="{{::network.pictogram}}" alt="network.name" tooltip-placement="top" tooltip="{{'I_NETWORK' | translate}}">
                 <span>{{::network.name}}</span>
             </li>
             <li class="meta-item-content-item" ng-if="result.properties.target_audience">
