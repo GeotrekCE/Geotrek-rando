@@ -9,7 +9,7 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
                 function (results) {
                     $scope.results = results;
                     startLazyLoading();
-                    $rootScope.$emit('resultsUpdated');
+                    $rootScope.$emit('resultsUpdated', forceRefresh);
                     $rootScope.elementsLoading --;
                 },function (err) {
                     if (console) {
@@ -65,9 +65,10 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
 
     $scope.sanitizeData  = utilsFactory.sanitizeData;
 
-    $scope.$on('updateFilters', function () {
-        updateResults();
+    $scope.$on('updateFilters', function (name, forceRefresh) {
+        updateResults(forceRefresh);
     });
+
 
     var rootScopeEvents = [
         $rootScope.$on('switchGlobalLang', function () {
