@@ -15,7 +15,7 @@
     </div>
     <div ng-if="result.properties.booking" class="booking">
         <h5>{{'BOOKING' | translate}}</h5>
-        <span>{{::result.properties.booking | removeTags}}</span>
+        <div ng-bind-html="result.properties.booking | sanitizeData: true"></div>
     </div>
     <div ng-if="result.properties.meeting_point" class="meeting-point">
         <h5>{{'MEETING_POINT' | translate}}</h5>
@@ -35,7 +35,7 @@
     </div>
     <div ng-if="result.properties.practical_info" class="practical-info">
         <h5>{{'PRATICAL_INFOS' | translate}}</h5>
-        <div ng-bind-html="sanitizeData(result.properties.practical_info, true)"></div>
+        <div ng-bind-html="result.properties.practical_info | sanitizeData: true"></div>
     </div>
     <div ng-if="result.properties.speaker" class="speaker">
         <h5>{{'SPEAKERS' | translate}}</h5>

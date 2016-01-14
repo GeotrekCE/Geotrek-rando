@@ -1,7 +1,6 @@
 'use strict';
 
 function FlatPagesController(utilsFactory, flatService, $scope, $state, $rootScope, $stateParams) {
-    $scope.sanitizeData = utilsFactory.sanitizeData;
 
     function getPage(pageID) {
         var page = pageID || $stateParams.flatID;

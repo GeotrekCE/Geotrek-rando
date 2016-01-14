@@ -63,8 +63,6 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
         });
     };
 
-    $scope.sanitizeData  = utilsFactory.sanitizeData;
-
     $scope.$on('updateFilters', function (name, forceRefresh) {
         updateResults(forceRefresh);
     });

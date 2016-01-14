@@ -113,13 +113,6 @@ function utilsFactory($sce) {
         return NaN;
     }
 
-    var sanitizeData = function (data, removeStyle) {
-        if (removeStyle) {
-            var data = data.replace(/[a-zA-Z0-9\-\_]*style="[^\"]*"/gim, '');
-        }
-        return $sce.trustAsHtml(data);
-    };
-
     var decodeEntities = function (str) {
         if(str && typeof str === 'string') {
             var element = document.createElement('div');
@@ -265,7 +258,6 @@ function utilsFactory($sce) {
 
     return {
         removeDiacritics: removeDiacritics,
-        sanitizeData: sanitizeData,
         decodeEntities: decodeEntities,
         isTrueInt: isTrueInt,
         parseLength: parseLength,
