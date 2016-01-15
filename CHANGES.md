@@ -1,6 +1,17 @@
 # CHANGELOG
 
-2.2.1 (2015-18-05)
+2.3.0 / 2016-01-15
+------------------
+
+**Redesign**
+
+* Complete rebuild of UI look & feel
+
+**Bug fixes**
+
+* A lot of things
+
+2.2.1 (2015-11-18)
 ------------------
 
 **Bug fixes**
