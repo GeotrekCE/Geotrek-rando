@@ -169,6 +169,9 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, $loc
 
     $scope.updateActiveRangeFilters = function () {
         angular.forEach($scope.activeRangeValues, function (filterValues, filterName) {
+            if (!filterValues.values) {
+                return false;
+            }
             var minIndex = filterValues.min,
                 maxIndex = filterValues.max;
             if (minIndex !== 0 || maxIndex !== filterValues.values.length - 1) {

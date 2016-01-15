@@ -98,52 +98,47 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
 
         var deferred = $q.defer();
 
-        if (self.categoriesIcons) {
-            deferred.resolve(self.categoriesIcons);
-        } else {
-
-            categoriesService.getCategories()
-                .then(
-                    function (categories) {
-                        var counter = 0;
-                        _.forEach(categories, function (category) {
-                            if (!self.categoriesIcons) {
-                                self.categoriesIcons = {};
-                            }
-                            counter++;
-                            var currentCounter = counter;
-                            if ($filter('isSVG')(category.pictogram)) {
-                                var requests = $resource(category.pictogram, {}, {
-                                    query: {
-                                        method: 'GET',
-                                        cache: true
-                                    }
-                                });
-
-                                requests.query().$promise
-                                    .then(function (icon) {
-                                        var finalIcon = '';
-                                        _.each(icon, function(el, index) {
-                                            if (!isNaN(parseInt(index, 10))) {
-                                                finalIcon += el;
-                                            }
-                                        });
-                                        self.categoriesIcons[category.id] = finalIcon;
-                                            if (currentCounter === _.size(categories)) {
-                                                deferred.resolve(self.categoriesIcons);
-                                            }
-                                    });
-                            } else {
-                                self.categoriesIcons[category.id] = '<img src="' + category.pictogram + '" />';
-                                if (currentCounter === _.size(categories)) {
-                                    deferred.resolve(self.categoriesIcons);
+        categoriesService.getCategories()
+            .then(
+                function (categories) {
+                    var counter = 0;
+                    _.forEach(categories, function (category) {
+                        if (!self.categoriesIcons) {
+                            self.categoriesIcons = {};
+                        }
+                        counter++;
+                        var currentCounter = counter;
+                        if ($filter('isSVG')(category.pictogram)) {
+                            var requests = $resource(category.pictogram, {}, {
+                                query: {
+                                    method: 'GET',
+                                    cache: true
                                 }
-                            }
+                            });
 
-                        });
-                    }
-                );
-        }
+                            requests.query().$promise
+                                .then(function (icon) {
+                                    var finalIcon = '';
+                                    _.each(icon, function(el, index) {
+                                        if (!isNaN(parseInt(index, 10))) {
+                                            finalIcon += el;
+                                        }
+                                    });
+                                    self.categoriesIcons[category.id] = finalIcon;
+                                        if (currentCounter === _.size(categories)) {
+                                            deferred.resolve(self.categoriesIcons);
+                                        }
+                                });
+                        } else {
+                            self.categoriesIcons[category.id] = '<img src="' + category.pictogram + '" />';
+                            if (currentCounter === _.size(categories)) {
+                                deferred.resolve(self.categoriesIcons);
+                            }
+                        }
+
+                    });
+                }
+            );
 
         return deferred.promise;
     };
@@ -152,7 +147,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
 
         var deferred = $q.defer();
 
-        if (self.categoriesIcons) {
+        if (self.categoriesIcons && self.categoriesIcons[categoryId]) {
             deferred.resolve(self.categoriesIcons[categoryId]);
         } else {
             self.getCategoriesIcons()
