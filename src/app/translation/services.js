@@ -29,20 +29,19 @@ function translationService(globalSettings) {
                 });
             }
         }
-
         self.currentLang = self.defaultLang;
-        return self.defaultLang;
-    };
-
-    this.getCurrentLang = function () {
-        if (!self.currentLang) {
-            return self.getDefaultLang();
-        }
         return self.currentLang;
     };
 
-    this.setCurrentLang = function (currentLang) {
-        self.currentLang = currentLang;
+    this.getCurrentLang = function () {
+        if (self.currentLang) {
+            return self.currentLang;
+        }
+        return self.getDefaultLang();
+    };
+
+    this.setCurrentLang = function (lang) {
+        self.currentLang = lang;
     };
 
     this.getAllLang = function () {

@@ -13,9 +13,6 @@ function Rando3DController(result, $scope, $timeout, $modalInstance, globalSetti
         $scope.isLoading = true;
         var pk = result.id;
         var currentLang = translationService.getCurrentLang();
-        if (currentLang.code) {
-            currentLang = currentLang.code;
-        }
         var customSettings = {
             IMAGES_FOLDER: 'images/3d/',
             DEM_URL: settingsFactory.trekUrl.replace(/\$lang/, currentLang) + pk + '/' + globalSettings.DEM_FILE,
