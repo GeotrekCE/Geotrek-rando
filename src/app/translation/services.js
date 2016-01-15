@@ -19,7 +19,7 @@ function translationService(globalSettings) {
             } else {
                 localLanguage = navigator.language || navigator.userLanguage || navigator.browserLanguage || null;
             }
-            self.defaultLang = this.getLang(globalSettings.DEFAULT_LANGUAGE);
+            self.defaultLang = this.getLang(globalSettings.DEFAULT_LANGUAGE).code;
 
             if (localLanguage) {
                 _.forEach(this.getAllLang, function (lang) {
@@ -29,13 +29,13 @@ function translationService(globalSettings) {
                 });
             }
         }
-        self.currentLang = self.defaultLang.code;
+        self.currentLang = self.defaultLang;
         return self.currentLang;
     };
 
     this.getCurrentLang = function () {
-        if (self.getFavoriteLang()) {
-            return self.getFavoriteLang();
+        if (self.currentLang) {
+            return self.currentLang;
         }
         return self.getDefaultLang();
     };
