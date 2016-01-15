@@ -24,12 +24,12 @@ function translationService(globalSettings) {
             if (localLanguage) {
                 _.forEach(this.getAllLang, function (lang) {
                     if (localLanguage.substr(0, 2) === lang.code) {
-                        self.defaultLang = lang;
+                        self.defaultLang = lang.code;
                     }
                 });
             }
         }
-        self.currentLang = self.defaultLang;
+        self.currentLang = self.defaultLang.code;
         return self.currentLang;
     };
 
