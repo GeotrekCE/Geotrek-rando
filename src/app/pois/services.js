@@ -45,9 +45,6 @@ function poisService($resource, $q, globalSettings, settingsFactory, translation
 
         } else {
             var currentLang = translationService.getCurrentLang();
-            if (currentLang.code) {
-                currentLang = currentLang.code;
-            }
             var url = settingsFactory.poisUrl.replace(/\$lang/, currentLang);
 
             var requests = $resource(url, {}, {
@@ -75,9 +72,6 @@ function poisService($resource, $q, globalSettings, settingsFactory, translation
 
         var deferred = $q.defer();
         var currentLang = translationService.getCurrentLang();
-        if (currentLang.code) {
-            currentLang = currentLang.code;
-        }
         var url = settingsFactory.trekUrl.replace(/\$lang/, currentLang) + elementId + '/' + globalSettings.POI_FILE;
 
         var requests = $resource(url, {}, {

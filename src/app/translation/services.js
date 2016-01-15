@@ -24,25 +24,24 @@ function translationService(globalSettings) {
             if (localLanguage) {
                 _.forEach(this.getAllLang, function (lang) {
                     if (localLanguage.substr(0, 2) === lang.code) {
-                        self.defaultLang = lang;
+                        self.defaultLang = lang.code;
                     }
                 });
             }
         }
-
         self.currentLang = self.defaultLang;
-        return self.defaultLang;
-    };
-
-    this.getCurrentLang = function () {
-        if (!self.currentLang) {
-            return self.getDefaultLang();
-        }
         return self.currentLang;
     };
 
-    this.setCurrentLang = function (currentLang) {
-        self.currentLang = currentLang;
+    this.getCurrentLang = function () {
+        if (self.currentLang) {
+            return self.currentLang;
+        }
+        return self.getDefaultLang();
+    };
+
+    this.setCurrentLang = function (lang) {
+        self.currentLang = lang;
     };
 
     this.getAllLang = function () {
@@ -70,7 +69,7 @@ function translationService(globalSettings) {
         for (var i = languages.length - 1; i >= 0; i--) {
             var currentLang = languages[i];
             if (currentLang.code === langCode) {
-                return currentLang;
+                return currentLang.code;
             }
         }
 
