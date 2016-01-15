@@ -8,9 +8,6 @@ function HomeController($scope, $rootScope, $state, translationService, categori
 
     $scope.initHome = function () {
         var currentLang = translationService.getCurrentLang();
-        if (currentLang.code) {
-            currentLang = currentLang.code;
-        }
         if (globalSettings.HOME_TEMPLATE_FILE[currentLang]) {
             $scope.homeTemplate = 'app/custom/templates/' + globalSettings.HOME_TEMPLATE_FILE[currentLang];
         } else {

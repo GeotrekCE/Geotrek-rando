@@ -2,15 +2,14 @@
 
 describe('Detail page ', function() {
     var titleSelector;
+    var constants = require('../../../config/settings.constant.json');
 
     beforeAll(function() {
         browser.get('/');
-        browser.executeScript(function () {
+        browser.executeScript(function (constants) {
             localStorage.clear();
-            localStorage.setItem('geotrek-rando-language', JSON.stringify({
-                code: 'fr'
-            }));
-        });
+            localStorage.setItem(constants.PLATFORM_ID + '-language', 'fr');
+        }, constants);
     });
 
     it('should display a Touristic content page', function () {

@@ -9,9 +9,7 @@ describe('categories menu ', function() {
         browser.get('/');
         browser.executeScript(function (constants) {
             localStorage.clear();
-            localStorage.setItem(constants.PLATFORM_ID + '-language', JSON.stringify({
-                code: 'fr'
-            }));
+            localStorage.setItem(constants.PLATFORM_ID + '-language', 'fr');
         }, constants);
         browser.get('/#/?no-home');
 

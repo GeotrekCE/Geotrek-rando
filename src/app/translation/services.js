@@ -19,30 +19,29 @@ function translationService(globalSettings) {
             } else {
                 localLanguage = navigator.language || navigator.userLanguage || navigator.browserLanguage || null;
             }
-            self.defaultLang = this.getLang(globalSettings.DEFAULT_LANGUAGE);
+            self.defaultLang = this.getLang(globalSettings.DEFAULT_LANGUAGE).code;
 
             if (localLanguage) {
                 _.forEach(this.getAllLang, function (lang) {
                     if (localLanguage.substr(0, 2) === lang.code) {
-                        self.defaultLang = lang;
+                        self.defaultLang = lang.code;
                     }
                 });
             }
         }
-
         self.currentLang = self.defaultLang;
-        return self.defaultLang;
-    };
-
-    this.getCurrentLang = function () {
-        if (!self.currentLang) {
-            return self.getDefaultLang();
-        }
         return self.currentLang;
     };
 
-    this.setCurrentLang = function (currentLang) {
-        self.currentLang = currentLang;
+    this.getCurrentLang = function () {
+        if (self.currentLang) {
+            return self.currentLang;
+        }
+        return self.getDefaultLang();
+    };
+
+    this.setCurrentLang = function (lang) {
+        self.currentLang = lang;
     };
 
     this.getAllLang = function () {
@@ -78,19 +77,16 @@ function translationService(globalSettings) {
     };
 
     this.getFavoriteLang = function () {
-
         if (!localStorage.getItem(storageName)) {
             return false;
         }
 
-        var lang_json = localStorage.getItem(storageName);
-        return JSON.parse(lang_json);
+        return localStorage.getItem(storageName);
     };
 
     this.setFavoriteLang = function () {
         if (self.currentLang) {
-            var lang_json = JSON.stringify(self.currentLang);
-            localStorage.setItem(storageName, lang_json);
+            localStorage.setItem(storageName, self.currentLang);
         }
     };
 }

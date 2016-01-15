@@ -2,14 +2,13 @@
 
 describe('Warning panel ', function() {
     var panel, openButton, closeButton, form, name, email, category, comment, location, submit;
+    var constants = require('../../../config/settings.constant.json');
     beforeAll(function () {
         browser.get('/');
-        browser.executeScript(function () {
+        browser.executeScript(function (constants) {
             localStorage.clear();
-            localStorage.setItem('geotrek-rando-language', JSON.stringify({
-                code: 'fr'
-            }));
-        });
+            localStorage.setItem(constants.PLATFORM_ID + '-language', 'fr');
+        }, constants);
         browser.get('/#/itineraire/boucle-du-pic-des-trois-seigneurs/');
 
         openButton = element(by.css('.detail-actions .signal a'));

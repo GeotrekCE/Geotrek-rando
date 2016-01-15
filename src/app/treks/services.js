@@ -127,11 +127,8 @@ function treksService(globalSettings, settingsFactory, translationService, $reso
             deferred.resolve(self._trekList);
 
         } else {
-            var lang = translationService.getCurrentLang();
-            if (lang.code) {
-                lang = lang.code;
-            }
-            var url = settingsFactory.treksUrl.replace(/\$lang/, lang);
+            var currentLang = translationService.getCurrentLang();
+            var url = settingsFactory.treksUrl.replace(/\$lang/, currentLang);
             var requests = $resource(url, {}, {
                 query: {
                     method: 'GET',
