@@ -10,6 +10,7 @@
     display: flex;
     flex-wrap: wrap;
     padding: 0 .8rem;
+    z-index: 1;
     @media (max-width: 767px) {
         display: none;
     }
