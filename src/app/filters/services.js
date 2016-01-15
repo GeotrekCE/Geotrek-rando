@@ -388,10 +388,13 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             searchFilter = true,
             citiesFilter = true,
             districtsFilter = true,
-            structureFilter = true;
+            structureFilter = true,
+            filters;
 
-        var filters = self.activeFilters;
-
+        if (!self.activeFilters) {
+            self.initActiveFilter();
+        }
+        filters = self.activeFilters;
         categoriesFilter = self.matchByCategories(element, filters);
 
         if (filters.themes.length > 0) {
