@@ -46,6 +46,11 @@
                 img {
                     max-width: 150%;
                     height: auto;
+
+                    &.placeholder {
+                        height: 100%;
+                        width: auto;
+                    }
                 }
             }
             .category-icon {

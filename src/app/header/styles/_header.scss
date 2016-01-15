@@ -49,7 +49,7 @@
 .header-map-switch {
     float: right;
     height: 3em;
-    width: 3em; 
+    width: 3em;
     padding: 0.7em;
     margin: 4px;
     color: $primary-color;
@@ -193,6 +193,7 @@
             background-color: $dark-grey;
         }
         &.scroll {
+            overflow-x: hidden;
             overflow-y: auto;
         }
     }
