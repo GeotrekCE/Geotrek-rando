@@ -19,7 +19,7 @@ function translationService(globalSettings) {
             } else {
                 localLanguage = navigator.language || navigator.userLanguage || navigator.browserLanguage || null;
             }
-            self.defaultLang = this.getLang(globalSettings.DEFAULT_LANGUAGE).code;
+            self.defaultLang = this.getLang(globalSettings.DEFAULT_LANGUAGE);
 
             if (localLanguage) {
                 _.forEach(this.getAllLang, function (lang) {
@@ -69,7 +69,7 @@ function translationService(globalSettings) {
         for (var i = languages.length - 1; i >= 0; i--) {
             var currentLang = languages[i];
             if (currentLang.code === langCode) {
-                return currentLang;
+                return currentLang.code;
             }
         }
 
