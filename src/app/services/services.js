@@ -26,9 +26,6 @@ function servicesService($resource, $q, globalSettings, settingsFactory, transla
 
         } else {
             var currentLang = translationService.getCurrentLang();
-            if (currentLang.code) {
-                currentLang = currentLang.code;
-            }
             var url = settingsFactory.servicesUrl.replace(/\$lang/, currentLang);
 
             var requests = $resource(url, {}, {
@@ -56,9 +53,6 @@ function servicesService($resource, $q, globalSettings, settingsFactory, transla
 
         var deferred = $q.defer();
         var currentLang = translationService.getCurrentLang();
-        if (currentLang.code) {
-            currentLang = currentLang.code;
-        }
         var url = settingsFactory.trekUrl.replace(/\$lang/, currentLang) + elementId + '/' + globalSettings.SERVICES_FILE;
         var requests = $resource(url, {}, {
             query: {

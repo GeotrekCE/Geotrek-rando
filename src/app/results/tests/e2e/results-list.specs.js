@@ -6,9 +6,7 @@ describe('Results list', function() {
         browser.get('/');
         browser.executeScript(function (constants) {
             localStorage.clear();
-            localStorage.setItem(constants.PLATFORM_ID + '-language', JSON.stringify({
-                code: 'fr'
-            }));
+            localStorage.setItem(constants.PLATFORM_ID + '-language', 'fr');
         }, constants);
     });
 

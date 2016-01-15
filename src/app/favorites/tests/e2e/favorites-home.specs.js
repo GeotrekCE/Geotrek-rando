@@ -6,9 +6,7 @@ describe('Favorites on home ', function() {
         browser.get('/#/no-homme');
         browser.executeScript(function (constants) {
             localStorage.clear();
-            localStorage.setItem(constants.PLATFORM_ID + '-language', JSON.stringify({
-                code: 'fr'
-            }));
+            localStorage.setItem(constants.PLATFORM_ID + '-language', 'fr');
             localStorage.setItem(constants.PLATFORM_ID + '-favorites', JSON.stringify({
                 'T-2': {
                     id: 2,

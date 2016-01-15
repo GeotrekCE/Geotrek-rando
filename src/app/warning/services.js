@@ -11,11 +11,8 @@ function WarningService(translationService, settingsFactory, $resource, $http, $
             deferred.resolve(that._warningCategories);
 
         } else {
-            var lang = translationService.getCurrentLang();
-            if (lang.code) {
-                lang = lang.code;
-            }
-            var url = settingsFactory.warningCategoriesUrl.replace(/\$lang/, lang);
+            var currentLang = translationService.getCurrentLang();
+            var url = settingsFactory.warningCategoriesUrl.replace(/\$lang/, currentLang);
             var requests = $resource(url, {}, {
                 query: {
                     method: 'GET',
@@ -38,11 +35,8 @@ function WarningService(translationService, settingsFactory, $resource, $http, $
 
     that.sendWarning = function (formData) {
 
-        var lang = translationService.getCurrentLang();
-        if (lang.code) {
-            lang = lang.code;
-        }
-        var url = settingsFactory.warningSubmitUrl.replace(/\$lang/, lang);
+        var currentLang = translationService.getCurrentLang();
+        var url = settingsFactory.warningSubmitUrl.replace(/\$lang/, currentLang);
 
         return $http({
             method: 'POST',
