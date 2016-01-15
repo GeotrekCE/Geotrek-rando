@@ -315,6 +315,9 @@ msgstr "Retour à la carte"
 msgid "PRINT"
 msgstr "Imprimer la fiche"
 
+msgid "DOWNLOAD"
+msgstr "Télécharger"
+
 msgid "ADD_FAVS"
 msgstr "Ajouter à mes favoris"
 

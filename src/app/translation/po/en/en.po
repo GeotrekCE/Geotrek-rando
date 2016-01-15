@@ -320,6 +320,9 @@ msgstr "Back to the map"
 msgid "PRINT"
 msgstr "Print"
 
+msgid "DOWNLOAD"
+msgstr "Download"
+
 msgid "ADD_FAVS"
 msgstr "Add to favorites"
 
