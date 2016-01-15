@@ -81,7 +81,17 @@ function translationService(globalSettings) {
             return false;
         }
 
-        return localStorage.getItem(storageName);
+        var localLanguage = localStorage.getItem(storageName);
+
+        try {
+            JSON.parse(localLanguage, function() {
+                self.currentLang = JSON.parse(localLanguage).code;
+                self.setFavoriteLang();
+            });
+            return self.currentLang;
+        } catch (e) {
+            return localStorage.getItem(storageName);
+        }
     };
 
     this.setFavoriteLang = function () {
