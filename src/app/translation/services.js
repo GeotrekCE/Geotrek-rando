@@ -34,6 +34,7 @@ function translationService(globalSettings) {
     };
 
     this.getCurrentLang = function () {
+        self.currentLang = self.getFavoriteLang();
         if (self.currentLang) {
             return self.currentLang;
         }
