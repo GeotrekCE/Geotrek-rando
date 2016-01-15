@@ -144,7 +144,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                                 deferred.resolve(trek);
                             }
                         });
-                        findEvent = null;
+                        findTrek = null;
                         if (findTrek === null && findContent === null && findEvent === null) {
                             deferred.reject('No matching element found');
                         }
@@ -161,7 +161,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                                 deferred.resolve(content);
                             }
                         });
-                        findEvent = null;
+                        findContent = null;
                         if (findTrek === null && findContent === null && findEvent === null) {
                             deferred.reject('No matching element found');
                         }
