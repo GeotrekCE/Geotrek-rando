@@ -1,5 +1,12 @@
 # CHANGELOG
 
+2.3.1 / 2016-01-15
+------------------
+
+**Bug fixes**
+
+* Add test to check if language in local storage is not a json
+
 2.3.0 / 2016-01-15
 ------------------
 
