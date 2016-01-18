@@ -141,6 +141,7 @@ MAX | Int | `12` | Max zoom level for minimap
 Option     | Type      | Default   | Description
 --------|----------|-----------|------------
 POI_EXPANDED | Boolean | `false` | Expand POIS list.
+NEAR_ELEMENTS_CATEGORIES | Boolean | `false` | Sort near elements by categories.
 SHOW_ARROWS_ON_ROUTE | `false` | Show arrows indicating the direction of the route.
 MARKER_BASE_ICON | [Leaflet Icon Object](http://leafletjs.com/reference.html#icon) | `""` | Base of the marker for elements. The category icon defined in the API is put above this one. You'll need to adapt custom css according to those changes.
 POI_BASE_ICON | [Leaflet Icon Object](http://leafletjs.com/reference.html#icon) | `""` | Base of the marker for POIs.
