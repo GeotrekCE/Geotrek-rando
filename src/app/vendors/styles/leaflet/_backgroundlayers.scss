@@ -24,6 +24,10 @@
         img {
             opacity: .5;
         }
+        img, svg {
+            max-width: 100% !important;
+            height: auto;
+        }
         &.active {
             background: #fff;
             img {
