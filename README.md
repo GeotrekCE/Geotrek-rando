@@ -1,4 +1,4 @@
-# GEOTREK RANDO V2 ![master](https://img.shields.io/travis/makinacorpus/Geotrek-rando/master.svg?label=master)
+# GEOTREK RANDO V2 ![master](https://travis-ci.org/makinacorpus/Geotrek-rando.svg)
 ### Public portal of Geotrek (http://geotrek.fr).
 
 
