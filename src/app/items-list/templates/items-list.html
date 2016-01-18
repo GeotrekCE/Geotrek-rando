@@ -2,7 +2,7 @@
     <li
         class="result results-item category-{{::result.properties.category.id}}"
         id="result-category-{{::result.uid}}"
-        ng-repeat="result in elements | orderBy: ['properties.begin_date', 'properties.name'] track by result.luid"
+        ng-repeat="result in elements | filter: filterById | orderBy: ['properties.begin_date', 'properties.name'] track by result.luid"
         ng-mouseover="hoverMarkerNear(result,'enter')"
         ng-mouseleave="hoverMarkerNear(result,'leave')"
         ng-class="{'no-theme': result.properties.themes.length === 0}">

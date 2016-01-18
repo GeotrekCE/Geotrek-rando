@@ -5,6 +5,7 @@ function itemsListDirective() {
         restrict: 'E',
         scope: {
             elements: '=',
+            filterById: '=',
             type: '@'
         },
         template: require('./templates/items-list.html'),
