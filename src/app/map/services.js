@@ -810,6 +810,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                         L.Util.extend(
                             {
                                 tooltipSuffix: ' m',
+                                tooltipContainer: '.detail-content-elevation-canvas',
                                 numberDigitGroupSep: '',
                                 width: '100%',
                                 height: 150
