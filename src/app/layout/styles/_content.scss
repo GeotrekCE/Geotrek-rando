@@ -90,22 +90,15 @@
 
         transition: width .3s ease;
 
-        background-color: rgba(255, 255, 255, .8);
-        box-shadow: -20px 0 30px rgba(#000, .2) inset;
+        // background-color: rgba(255, 255, 255, .8);
+        box-shadow: 40px 0 30px rgba(#000, .2) inset;
 
         align-items: stretch;
 
         &.aside-pane-controls {
-            right: 25%;
-
+            left: 0;
             .stripe svg * {
                 fill: white;
-            }
-        }
-
-        &.aside-pane-controls.fold-aside {
-            .stripe svg * {
-                fill: currentColor;
             }
         }
     }
@@ -161,11 +154,11 @@
 
 .fold-aside {
     &.toggle-pane-controls {
-        width: 5%;
-        right: -1%;
+        width: 20%;
+        left: 0;
     }
     .toggle-pane-toggle {
-        width: 70%;
+        width: 40%;
         padding-left: 0;
         svg {
             transform: rotate(180deg);
