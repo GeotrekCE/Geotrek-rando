@@ -199,12 +199,30 @@
 }
 
 .result-view-details {
-    width: auto;
-    max-width: 40px;
-    .results-item:hover &,
-    .results-item.hovered & {
-        max-width: 300px;
-        padding: 0 10px;
+        width: auto;
+        max-width: 40px;
+        .results-item:hover &,
+        .results-item.hovered & {
+            max-width: 300px;
+            padding: 0 10px;
+        }
+    @media (min-width: 768px) and (max-width: 1200px) {
+        .detail-aside-pane & {
+            font-size: 1px;
+            letter-spacing: -1px;
+            color: transparent;
+            height: 40px;
+            width: 40px;
+            display: block;
+            text-shadow: none;
+            &:before {
+                font-size: 24px;
+                line-height: 36px;
+                letter-spacing: normal;
+                color: white;
+                content: '+';
+            }
+        }
     }
 }
 
