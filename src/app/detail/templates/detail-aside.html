@@ -1,4 +1,9 @@
 <div class="detailsview-pane detail-aside-pane interests" ng-if="pois.length || nearElements.length || elementChildren.length || parentElement">
+    <div class="aside-pane-controls toggle-pane-controls" ng-class="{ 'fold-aside': foldAside }">
+        <button class="aside-pane-toggle toggle-pane-toggle" ng-click="asidePaneToggle()">
+            <ng-include class="stripe" src="'/images/icons/stripe.svg'"></ng-include>
+        </button>
+    </div>
     <div class="detail-aside-group children" ng-if="elementChildren.length" ng-class="{active: currentInterest === 'children'}">
         <div class="detail-aside-group-title" ng-click="toggleInterest('children')">
             <span>{{ 'CHILDREN' | translate }}</span>
