@@ -1,18 +1,18 @@
 'use strict';
 
-function MapController($q, $scope, globalSettings, $translate, $rootScope, $state, resultsService, filtersService, mapService, boundsService, $stateParams) {
+function MapController($q, $scope, globalSettings, $translate, $rootScope, $state, resultsService, filtersService, mapService, centerService, $stateParams) {
 
     $scope.currentState = $state.current.name;
 
     function updateMapWithResults(fitBounds) {
         var deferred = $q.defer();
-        var bounds = boundsService.getBounds($scope.currentState);
+        var center = centerService.getCenter($scope.currentState);
 
-        if ($scope.shouldFitBounds && bounds) {
-            $rootScope.map.fitBounds(bounds, {animate:false});
+        if ($scope.shouldSetView && center) {
             fitBounds = false;
             setTimeout(function () {
-                $scope.shouldFitBounds = false;
+                $rootScope.map.setView(center.LatLng, center.zoom, {animate:false});
+                $scope.shouldSetView = false;
             }, 1000);
         }
 
@@ -140,7 +140,7 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
             deferred.resolve(true);
         });
 
-        $scope.shouldFitBounds = true;
+        $scope.shouldSetView = true;
 
         if ($state.current.name === 'layout.detail') {
             $rootScope.showFiltersOnMap = false;
@@ -174,13 +174,23 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
             $rootScope.map.invalidateSize(true);
         }, 1000);
     });
-    
+
     $rootScope.map.on('exitFullscreen', function () {
         $rootScope.isFullscreen = false;
         $rootScope.map.invalidateSize(false);
     });
 
     var rootScopeEvents = [
+        $rootScope.$on('$stateChangeStart',
+            function () {
+                var map = $rootScope.map;
+                centerService.setCenter(map.getCenter(), map.getZoom(), $scope.currentState);
+
+                if (map && typeof map.remove === 'function') {
+                    map.remove();
+                }
+            }
+        ),
         $rootScope.$on('$stateChangeSuccess',
             function () {
                 if ($state.current.name === 'layout.detail') {
@@ -206,22 +216,16 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
             }
         }),
         $rootScope.$on('switchGlobalLang', function () {
-            updateMapWithResults(true);
+            if ($state.current.name === 'layout.detail') {
+                updateMapWithDetails(true);
+            } else {
+                updateMapWithResults(true);
+            }
             initCtrlsTranslation();
         })
     ];
 
     $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
-
-    $scope.$on('$destroy', function () {
-        var map = $rootScope.map;
-
-        boundsService.setBounds(map.getBounds(), $scope.currentState);
-
-        if (map && typeof map.remove === 'function') {
-            map.remove();
-        }
-    });
 }
 
 module.exports = {
