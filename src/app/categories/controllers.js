@@ -1,9 +1,6 @@
 'use strict';
 
 function CategoriesListeController($scope, $rootScope, $location, $timeout, $locale, utilsFactory, globalSettings, categoriesService, filtersService) {
-
-    var initFiltersEvent = $rootScope.$on('updateFilters', initFilters);
-
     $scope.extend = false;
     $scope.filtering = false;
 
@@ -28,6 +25,8 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, $loc
             category.hasFilters = (category.ascent && category.ascent.values.length > 1) || (category.begin_date !== undefined) || (category.difficulty && category.difficulty.values.length > 1) || (category.duration && category.duration.values.length > 1) || (category.eLength && category.eLength.values.length > 1) || (category.end_date !== undefined) || (category.route && category.route.values.length > 0) || (category.type1 && category.type1.values.length > 0) || (category.type2 && category.type2.values.length > 0);
         });
     }
+
+    var initFiltersEvent = $rootScope.$on('updateFilters', initFilters);
 
     function updateFiltersTags() {
         $rootScope.activeFiltersTags = filtersService.getTagFilters();
@@ -288,18 +287,19 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, $loc
         if (!$scope.extend) {
             $scope.closeCategoryFilters();
         }
-    }
+    };
+
     $scope.extendCategories = function () {
         if ($scope.extend && $scope.filtering) {
             $scope.openCategoryFilters(this.category);
         }
         $scope.extend = true;
-    }
+    };
 
     $scope.foldCategories = function () {
         $scope.extend = false;
         $scope.closeCategoryFilters();
-    }
+    };
 
     loadCategories();
 
@@ -363,7 +363,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, $loc
             },
             "id": "fr-fr",
             "pluralCat": function (n) {
-                if (n >= 0 && n <= 2 && n != 2) {
+                if (n >= 0 && n <= 2 && n !== 2) {
                     return PLURAL_CATEGORY.ONE;
                 }
                 return PLURAL_CATEGORY.OTHER;
@@ -418,7 +418,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, $loc
             },
             "id": "en-us",
             "pluralCat": function (n) {
-                if (n == 1) {
+                if (n === 1) {
                     return PLURAL_CATEGORY.ONE;
                 }
                 return PLURAL_CATEGORY.OTHER;
