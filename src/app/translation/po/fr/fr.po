@@ -166,7 +166,7 @@ msgid "IS_CIRCUIT_STEP"
 msgstr "Étapes :"
 
 msgid "POI"
-msgstr "Patrimoine"
+msgstr "Patrimoines"
 
 msgid "NEAR"
 msgstr "À proximité"
@@ -175,7 +175,7 @@ msgid "CHILDREN"
 msgstr "Étapes"
 
 msgid "PARENT"
-msgstr "Randonnée parente"
+msgstr "Séjours"
 
 msgid "PROFILE_ALTI"
 msgstr "Profil altimétrique"
