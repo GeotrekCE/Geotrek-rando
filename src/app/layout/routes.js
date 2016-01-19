@@ -5,7 +5,7 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
     if (globalSettings.ENABLE_HTML_MODE) {
         $locationProvider.html5Mode({
             enabled: true,
-            requireBase: true
+            requireBase: false
         });
     }
 

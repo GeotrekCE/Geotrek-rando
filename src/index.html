@@ -6,20 +6,19 @@
   <title ng-bind="$root.metaTitle"></title>
   <meta name="description" content="{{$root.metaDescription}}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <base href="/">
   <meta ng-repeat="tag in $root.twitterTags" name="{{tag.name}}" content="{{tag.content}}">
   <meta ng-repeat="tag in $root.facebookTags" property="{{tag.property}}" content="{{tag.content}}">
   <link rel="icon" type="image/png" href="{{$root.favIcon.png}}" />
   <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="{{$root.favIcon.ico}}" /><![endif]-->
-  <link rel="stylesheet" href="rando-vendors.css">
-  <link rel="stylesheet" href="rando.css">
+  <link rel="stylesheet" href="/rando-vendors.css">
+  <link rel="stylesheet" href="/rando.css">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   <!--[if IE 9]>
     <script type="text/javascript" src="app/vendors/scripts/xhr-xdr-adapter.js"></script>
     <link rel="stylesheet" type="text/css" href="ie9-compatibility.css">
   <![endif]-->
-  <script src="rando-vendors.js"></script>
-  <script src="rando.js"></script>
+  <script src="/rando-vendors.js"></script>
+  <script src="/rando.js"></script>
   <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 </head>
 <body>
