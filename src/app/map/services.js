@@ -1203,22 +1203,24 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
 
 }
 
-function boundsService() {
-    this.bounds = {};
+function centerService() {
+    this.centers = {};
 
-    this.setBounds = function (latLngBounds, context) {
-        this.bounds[context] = latLngBounds;
-        return this.getBounds(context);
+    this.setCenter = function (LatLng, zoom, context) {
+        this.centers[context] = {
+            'LatLng': LatLng,
+            'zoom': zoom
+        };
+        return this.getCenter(context);
     };
 
-    this.getBounds = function (context) {
+    this.getCenter = function (context) {
         if (context) {
-            return this.bounds[context];
+            return this.centers[context];
         } else {
-            return this.bounds;
+            return this.centers;
         }
     };
-
 }
 
 function boundsLimitService($http) {
@@ -1607,7 +1609,7 @@ function layersService ($http, globalSettings) {
 
 module.exports = {
     mapService: mapService,
-    boundsService: boundsService,
+    centerService: centerService,
     boundsLimitService: boundsLimitService,
     popupService: popupService,
     layersService: layersService
