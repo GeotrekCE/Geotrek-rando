@@ -140,6 +140,10 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, $loc
 
     function initDatePickers() {
         $scope.activeDateFilters = {};
+        
+        $scope.datePicker = {};
+        $scope.datePicker.date = {startDate: null, endDate: null};
+        console.log($scope.datePicker);
 
         initDateValues();
 

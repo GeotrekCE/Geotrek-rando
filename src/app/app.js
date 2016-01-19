@@ -36,7 +36,8 @@ var dependencies = [
     'ui.router',
     'rzModule',
     'ngResource',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'daterangepicker'
 ];
 
 var angular = require('angular');
@@ -55,6 +56,7 @@ require('jquery.scrollto');
 
 // LOAD EXTERNAL DEPENDENCIES
 require('ui.bootstrap');
+require('daterangepicker');
 require('ui.router');
 require('angularjs-slider');
 require('angular-translate');
