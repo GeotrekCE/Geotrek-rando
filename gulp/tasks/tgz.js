@@ -19,7 +19,7 @@ var rename = require('gulp-rename');
 gulp.task('tgz:custo', function() {
     gulp.src([
       './src/images/**/custom/**/*',
-
+      './src/app/config/settings.custom.json',
       './src/app/config/styles/_config-custom.scss',
       './src/app/custom/controllers.js',
       './src/app/custom/directives.js',
