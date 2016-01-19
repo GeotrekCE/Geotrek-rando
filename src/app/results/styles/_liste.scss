@@ -226,6 +226,25 @@
     }
 }
 
+@media (max-width: 768px) {
+    .results-list .result-view-details {
+        font-size: 1px;
+        letter-spacing: -1px;
+        color: transparent;
+        height: 40px;
+        width: 40px;
+        display: block;
+        text-shadow: none;
+        &:before {
+            font-size: 24px;
+            line-height: 36px;
+            letter-spacing: normal;
+            color: white;
+            content: '+';
+        }
+    }
+}
+
 .result-category-icon {
     z-index: 1;
     img {
