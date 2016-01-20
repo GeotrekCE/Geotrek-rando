@@ -1,5 +1,20 @@
 # CHANGELOG
 
+2.4.1 / 2016-01-20
+------------------
+
+**Bug fixes**
+
+  * Debug miniMap zoom limits overriding main map zoom limits
+  * Remove dependency to <base> tag to allow xlink:href of SVG when using html5mode
+  * Fix lint errors
+
+**New Features**
+
+  * Adjust .gitignore so we do not create useless empty dir
+  * Add .nvmrc file to have a reference to the most preferable version of Node
+  * Command 'npm run export' now resolve symlinks
+
 2.3.1 / 2016-01-15
 ------------------
 
