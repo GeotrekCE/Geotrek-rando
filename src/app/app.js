@@ -41,9 +41,11 @@ var dependencies = [
 ];
 
 var angular = require('angular');
+
 window._ = require('lodash');
 
 window.jQuery = require('jquery');
+window.moment = require('moment');
 
 window.L = require('leaflet');
 window.L.pip = require('leaflet-pip');
@@ -56,13 +58,14 @@ require('jquery.scrollto');
 
 // LOAD EXTERNAL DEPENDENCIES
 require('ui.bootstrap');
-require('daterangepicker');
 require('ui.router');
 require('angularjs-slider');
 require('angular-translate');
 require('angular-google-analytics');
 require('ngResource');
 require('bootstrap');
+require('bootstrap-daterangepicker');
+require('angular-daterangepicker');
 require('sparklines');
 
 //MAP LIBRARIES

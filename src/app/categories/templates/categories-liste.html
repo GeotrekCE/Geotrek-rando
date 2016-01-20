@@ -148,37 +148,7 @@
                     <div class="choices" collapse="!startDateIsCollapsed">
                         <div class="date-start form-group">
                             <div class="date-picker">
-                                <!-- <div class="input-group">
-                                    <input type="date" class="input-group" ng-model="activeDateFilters[category.id + '_begin_date']">
-                                    <div class="input-group-addon" ng-click="disableDateFilter(category.id + '_begin_date')">
-                                        <i class="fa fa-times"></i>
-                                    </div>
-                                </div> -->
-                                <input date-range-picker class="form-control date-picker" type="text" ng-model="datePicker.date" />
-                                <!-- <datepicker ng-model="activeDateFilters[category.id + '_begin_date']" show-weeks="false" format="'yyyy-MM-dd'" class="well well-sm"></datepicker> -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div ng-if="category.end_date !== undefined" class="category-filter selector date" ng-class="{opened: endDateIsCollapsed}">
-                    <span ng-click="endDateIsCollapsed = !endDateIsCollapsed" class="filter-title">
-                        <span translate="DATE_FILTER_END"></span>
-                        <span class="more-or-less">
-                            <div class="bar"></div>
-                            <div class="bar"></div>
-                        </span>
-                    </span>
-                    <div class="choices" collapse="!endDateIsCollapsed">
-                        <div class="date-start form-group">
-                            <div class="date-picker">
-                                <div class="input-group">
-                                    <input type="date" class="form-control" ng-model="activeDateFilters[category.id + '_end_date']">
-                                    <div class="input-group-addon" ng-click="disableDateFilter(category.id + '_end_date')">
-                                        <i class="fa fa-times"></i>
-                                    </div>
-                                </div>
-                                <datepicker ng-model="activeDateFilters[category.id + '_end_date']" show-weeks="false" format="'yyyy-MM-dd'" class="well well-sm"></datepicker>
+                                <input date-range-picker class="form-control date-picker" type="text" ng-model="activeDateFilters[category.id]" />
                             </div>
                         </div>
                     </div>
