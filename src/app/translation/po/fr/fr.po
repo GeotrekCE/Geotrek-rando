@@ -31,6 +31,9 @@ msgstr "Geotrek est une web app permettant de préparer à l'avance ses randonn�
 msgid "CATEGORIES"
 msgstr "Catégories"
 
+msgid "CLEAR"
+msgstr "Réinitialiser"
+
 msgid "ROUTES"
 msgstr "Parcours"
 

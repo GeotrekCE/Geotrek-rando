@@ -32,6 +32,9 @@ msgstr "Geotrek is a web app allowing you to prepare your next trekking trip !"
 msgid "CATEGORIES"
 msgstr "Categories"
 
+msgid "CLEAR"
+msgstr "Clear"
+
 msgid "ROUTES"
 msgstr "routes"
 

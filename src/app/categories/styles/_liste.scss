@@ -1,3 +1,5 @@
+@import '_daterangepicker';
+
 .categories-head {
     text-transform: uppercase;
     white-space: nowrap;
@@ -119,7 +121,20 @@
         @each $category in $categories {
             .open.category-#{nth($category, 1)} {
                 background-color: rgba(nth($category, 2), .5);
+                button.filter-button {
+                    display: inline-block;
+                    padding: .35em .1em .10em 1.75em;
+                    font-weight: bold;
+                    border: none;
+                    border-radius: 0;
+                    width: 100%;
+                    background-color: rgba(255, 255, 255, .8);
+                    color: nth($category, 2);
+                    text-transform: uppercase;
+                    margin: .35em 0;
+                }
             }
+
         }
         .categories-filters-close {
             visibility: visible;
@@ -407,21 +422,22 @@
                         vertical-align: middle;
                     }
                 }
-                .date-picker {
-                    color: $dark-grey;
+                &.date-picker {
+                    box-shadow: none;
+                    margin-right: 10px;
+                    margin-left: 10px;
                     input {
-                        width: 100%;
-                        padding: 0 10px;
-                    }
-                    input[type='date']::-webkit-calendar-picker-indicator {
-                        display: none;
+                        border: 1px solid rgba(255, 255, 255, 0.3);
+                        border-radius: 0;
+                        background: transparent;
                         -webkit-appearance: none;
-                    }
-                    .input-group-addon {
-                        cursor: pointer;
-                    }
-                    table {
-                        margin: auto;
+                        color: white;
+                        background-color: rgba(0, 0, 0, 0.1);
+
+                        &:focus, &:active {
+                            background-color: rgba(0, 0, 0, 0.2);
+                            box-shadow: none;
+                        }
                     }
                 }
             }

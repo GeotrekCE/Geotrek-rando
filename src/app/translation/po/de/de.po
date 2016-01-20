@@ -38,6 +38,9 @@ msgstr "Geotrek logo"
 msgid "CATEGORIES"
 msgstr "Kategorien"
 
+msgid "CLEAR"
+msgstr "Réinitialiser"
+
 msgid "ROUTES"
 msgstr "Routen"
 

@@ -1,6 +1,6 @@
 'use strict';
 
-function CategoriesListeController($scope, $rootScope, $location, $timeout, $locale, utilsFactory, globalSettings, categoriesService, filtersService) {
+function CategoriesListeController($scope, $rootScope, $location, $timeout, utilsFactory, globalSettings, categoriesService, filtersService) {
     $scope.extend = false;
     $scope.filtering = false;
 
@@ -161,23 +161,26 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, $loc
         }, true);
     }
 
-    $scope.disableDateFilter = function (dateFilterName) {
-        $scope.activeDateFilters[dateFilterName] = null;
+    $scope.clearDateFilter = function (dateFilterName) {
+        $scope.activeDateFilters[dateFilterName] = {
+            "startDate": null,
+            "endDate": null
+        };
 
         $scope.updateActiveDateFilters();
     };
 
     $scope.updateActiveDateFilters = function () {
         angular.forEach($scope.activeDateFilters, function (filterValues, filterName) {
-
             if (filterValues.startDate) {
                 $rootScope.activeFilters[filterName + '_begin_date'] = filterValues.startDate.toISOString();
+            } else {
+                $rootScope.activeFilters[filterName + '_begin_date'] = null;
             }
             if (filterValues.endDate) {
                 $rootScope.activeFilters[filterName + '_end_date'] = filterValues.endDate.toISOString();
-            }
-            else {
-                $rootScope.activeFilters[filterName] = null;
+            } else {
+                $rootScope.activeFilters[filterName + '_end_date'] = null;
             }
         });
 
