@@ -47,11 +47,8 @@ msgstr "Ascent:"
 msgid "LENGTH"
 msgstr "Length:"
 
-msgid "DATE_FILTER_START"
-msgstr "Begining date"
-
-msgid "DATE_FILTER_END"
-msgstr "Ending date"
+msgid "DATE_FILTER"
+msgstr "Dates"
 
 msgid "ALL"
 msgstr "All"

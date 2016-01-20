@@ -50,11 +50,8 @@ msgstr "Dauer"
 msgid "ASCENT"
 msgstr "Anstieg"
 
-msgid "DATE_FILTER_START"
-msgstr "Anfangsdatum"
-
-msgid "DATE_FILTER_END"
-msgstr "Angebotsende"
+msgid "DATE_FILTER"
+msgstr "Datum"
 
 msgid "ALL"
 msgstr "Alles"

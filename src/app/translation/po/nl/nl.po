@@ -43,11 +43,8 @@ msgstr "Duur"
 msgid "ASCENT"
 msgstr "Hoogteverschil"
 
-msgid "DATE_FILTER_START"
-msgstr "Begindatum"
-
-msgid "DATE_FILTER_END"
-msgstr "Einddatum"
+msgid "DATE_FILTER"
+msgstr "Datum"
 
 msgid "ALL"
 msgstr "Alle"

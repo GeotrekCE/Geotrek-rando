@@ -46,11 +46,8 @@ msgstr "Dislivello :"
 msgid "LENGTH"
 msgstr "Lunghezza :"
 
-msgid "DATE_FILTER_START"
-msgstr "Date de début"
-
-msgid "DATE_FILTER_END"
-msgstr "Date de fin"
+msgid "DATE_FILTER"
+msgstr "Dates"
 
 msgid "ALL"
 msgstr "Tutto"
