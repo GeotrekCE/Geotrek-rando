@@ -1534,15 +1534,13 @@ function layersService ($http, globalSettings) {
                 layer = L.tileLayer(layerConf, customOptions);
             } else if (layerConf.LAYER_URL) {
                 layerOptions = layerConf.OPTIONS || {};
-                _.merge(layerOptions, customOptions);
 
                 if (layerConf.BOUNDS) {
                     layerOptions.boundsLimit = {
                         url: layerConf.BOUNDS
                     };
                 }
-
-                layer = L.tileLayer(layerConf.LAYER_URL, layerOptions);
+                layer = L.tileLayer(layerConf.LAYER_URL, _.merge({}, layerOptions, customOptions));
             }
             LGroup.addLayer(layer);
         });
