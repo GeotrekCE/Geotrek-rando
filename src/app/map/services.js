@@ -72,7 +72,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         return deferred.promise;
     };
 
-    this.createPOISFromElement = function (element) {
+    this.createPOISFromElement = function (element, forceRefresh) {
         var deferred = $q.defer(),
             promises = [],
             startPoint = utilsFactory.getStartPoint(element);
@@ -80,7 +80,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         if (element.properties.parking_location) {
             var parkingPoint = utilsFactory.getParkingPoint(element);
             promises.push(
-                self.createLayerFromElement(element, 'parking', parkingPoint)
+                self.createLayerFromElement(element, 'parking', parkingPoint, forceRefresh)
                     .then(
                         function (marker) {
                             marker.popupSources.hint = element.properties.advised_parking;
@@ -97,7 +97,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
             var endPoint = utilsFactory.getEndPoint(element);
             if (startPoint.lat === endPoint.lat && startPoint.lng === endPoint.lng) {
                 promises.push(
-                    self.createLayerFromElement(element, 'departureArrival', startPoint)
+                    self.createLayerFromElement(element, 'departureArrival', startPoint, forceRefresh)
                         .then(
                             function (marker) {
                                 _.merge(marker.popupSources, {
@@ -110,7 +110,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                 );
             } else {
                 promises.push(
-                    self.createLayerFromElement(element, 'departure', startPoint)
+                    self.createLayerFromElement(element, 'departure', startPoint, forceRefresh)
                         .then(
                             function (marker) {
                                 _.merge(marker.popupSources, {
@@ -123,7 +123,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                 );
 
                 promises.push(
-                    self.createLayerFromElement(element, 'arrival', endPoint)
+                    self.createLayerFromElement(element, 'arrival', endPoint, forceRefresh)
                         .then(
                             function (marker) {
                                 _.merge(marker.popupSources, {
@@ -148,7 +148,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                         }
                     };
                     promises.push(
-                        self.createLayerFromElement(tempRefPoint, 'ref-point', tempRefPoint.coordinates)
+                        self.createLayerFromElement(tempRefPoint, 'ref-point', tempRefPoint.coordinates, forceRefresh)
                             .then(
                                 function (marker) {
                                     self._infosMarkersLayer.addLayer(marker);
@@ -210,7 +210,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         elements.forEach(function (element) {
             startPoint = utilsFactory.getStartPoint(element);
 
-            if(type === 'near') {
+            if (type === 'near') {
                 self.createLayerFromElement(element, 'near', startPoint)
                     .then(
                         function (marker) {
@@ -1026,9 +1026,6 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
     };
 
     this.displayDetail = function (result, fitBounds, forceRefresh) {
-        console.log(1);
-        console.log(forceRefresh);
-
         var type = '',
             elementLocation,
             currentLayer;
@@ -1078,7 +1075,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                     }
                 );
 
-            self.createPOISFromElement(result)
+            self.createPOISFromElement(result, forceRefresh)
                 .then(
                     function () {
                         self.map.invalidateSize();

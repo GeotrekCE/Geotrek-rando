@@ -333,9 +333,9 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         $rootScope.elementsLoading ++;
         var promise;
         if (!forceRefresh) {
-            promise = resultsService.getAResultBySlug($stateParams.slug, $stateParams.catSlug);
+            promise = resultsService.getAResultBySlug($stateParams.slug, $stateParams.catSlug, forceRefresh);
         } else {
-            promise = resultsService.getAResultByID($scope.result.id, $scope.result.properties.category.id);
+            promise = resultsService.getAResultByID($scope.result.id, $scope.result.properties.category.id, forceRefresh);
         }
 
         promise
@@ -343,17 +343,15 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                 function (result) {
                     $stateParams.catSlug = result.properties.category.slug;
                     $stateParams.slug = result.properties.slug;
-                    // $state.go('layout.detail');
+                    $state.go('layout.detail', {notify: false});
                     $rootScope.metaTitle = result.properties.name;
                     $rootScope.metaDescription = result.properties.description_teaser;
                     $scope.result = result;
-                    $rootScope.$emit('detailUpdated', forceRefresh);
                     $rootScope.elementsLoading --;
                     getInterests(result, forceRefresh);
                     $rootScope.$emit('initGallery', result.properties.pictures);
-
                     $scope.result.informations = detailService.hasInfos(result.properties, 'duration_pretty', 'duration', 'difficulty.label', 'route', 'ascent', 'networks', 'target_audience');
-
+                    // $rootScope.$emit('detailUpdated', forceRefresh);
                 },
                 function () {
                     $rootScope.elementsLoading --;

@@ -46,9 +46,9 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
         $rootScope.elementsLoading ++;
         var promise;
         if (!forceRefresh) {
-            promise = resultsService.getAResultBySlug($stateParams.slug, $stateParams.catSlug);
+            promise = resultsService.getAResultBySlug($stateParams.slug, $stateParams.catSlug, forceRefresh);
         } else {
-            promise = resultsService.getAResultByID($scope.result.id, $scope.result.properties.category.id);
+            promise = resultsService.getAResultByID($scope.result.id, $scope.result.properties.category.id, forceRefresh);
         }
 
         deferred.resolve(
@@ -213,7 +213,7 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
             }
         }),
         $rootScope.$on('detailUpdated', function (name, forceRefresh) {
-            if ($state.current.name === 'layout.detail') {
+            if ($state.current.name === 'layout.detail' && !forceRefresh) {
                 updateMapWithDetails(forceRefresh);
             }
         }),
