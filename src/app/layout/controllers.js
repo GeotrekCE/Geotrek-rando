@@ -9,7 +9,7 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
     $rootScope.favoriteIcon = (globalSettings.FAVORITES_ICON ? globalSettings.FAVORITES_ICON : 'heart');
 
     if (globalSettings.FAVICON) {
-        var base = './images/custom/';
+        var base = '/images/custom/';
         $rootScope.favIcon = {
             png: base + globalSettings.FAVICON.png,
             ico: base + globalSettings.FAVICON.ico
