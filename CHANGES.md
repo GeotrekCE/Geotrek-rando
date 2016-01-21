@@ -1,5 +1,20 @@
 # CHANGELOG
 
+2.4.3 / 2016-01-21
+==================
+
+**Hot fixes**
+
+  * Hot fix to avoid map crash when switching language
+
+**Bug fixes**
+
+  * Adjust favicon path for detail page
+
+**New Features**
+
+  * Add rootScope.lang in html tag
+
 2.4.2 / 2016-01-21
 ------------------
 
