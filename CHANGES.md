@@ -1,5 +1,14 @@
 # CHANGELOG
 
+2.4.2 / 2016-01-21
+------------------
+
+**New Features**
+
+  * New datepicker
+  * Adapt text and translations for single datepicker
+  * Change datepicker directive by daterangepicker
+
 2.4.1 / 2016-01-20
 ------------------
 
