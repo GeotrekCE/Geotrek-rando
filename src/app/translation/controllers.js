@@ -3,16 +3,16 @@
 function TranslationController($scope, $rootScope, $translate, translationService) {
     function initTranslation() {
         $scope.languages = translationService.getAllLang();
-        $scope.activeLang = translationService.getCurrentLang();
-        $translate.use($scope.activeLang);
+        $rootScope.lang = translationService.getCurrentLang();
+        $translate.use($rootScope.lang);
         $rootScope.$emit('translationReady');
-        window.moment.locale($scope.activeLang);
+        window.moment.locale($rootScope.lang);
     }
 
     $scope.toggleLang = function (lang) {
         translationService.setCurrentLang(lang);
         translationService.setFavoriteLang();
-        $scope.activeLang = lang;
+        $rootScope.lang = lang;
         $translate.use(lang);
         $rootScope.$emit('startSwitchGlobalLang');
     };
