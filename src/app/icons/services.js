@@ -307,9 +307,9 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         return deferred.promise;
     };
 
-    this.getSVGIcon = function (url, iconName, forceRefresh) {
+    this.getSVGIcon = function (url, iconName) {
         var deferred = $q.defer();
-        if (self.icons_liste[iconName].markup && !forceRefresh) {
+        if (self.icons_liste[iconName].markup) {
             deferred.resolve(self.icons_liste[iconName].markup);
         } else {
             var requests = $resource(url, {}, {
@@ -440,7 +440,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         return deferred.promise;
     };
 
-    this.getPOIIcon = function (poi, forceRefresh) {
+    this.getPOIIcon = function (poi) {
         var deferred = $q.defer(),
             baseIcon = null,
             poiIcon = null,
@@ -448,7 +448,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
 
         if (self.icons_liste.poi_base.iconUrl) {
             promises.push(
-                self.getSVGIcon(self.icons_liste.poi_base.iconUrl, 'poi_base', forceRefresh)
+                self.getSVGIcon(self.icons_liste.poi_base.iconUrl, 'poi_base', true)
                     .then(
                         function (icon) {
                             baseIcon = icon;
@@ -458,7 +458,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         }
 
         promises.push(
-            self.getAPoiTypeIcon(poi.properties.type.id, forceRefresh)
+            self.getAPoiTypeIcon(poi.properties.type.id, true)
                 .then(
                     function (icon) {
                         if (icon.isSVG) {

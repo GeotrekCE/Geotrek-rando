@@ -19,7 +19,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         this.markers = markers;
     };
 
-    this.addGeoServices = function (element) {
+    this.addGeoServices = function (element, forceRefresh) {
         var deferred = $q.defer();
 
         var controlServices = L.control.backgroundLayers(
@@ -37,7 +37,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                         var counter = 0;
                         _.forEach(services.features, function (service) {
                             var poiLocation = utilsFactory.getStartPoint(service);
-                            self.createLayerFromElement(service, 'service', poiLocation)
+                            self.createLayerFromElement(service, 'service', poiLocation, forceRefresh)
                                 .then(
                                     function (marker) {
                                         counter++;
@@ -165,7 +165,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                             var counter = 0;
                             _.forEach(pois.features, function (poi) {
                                 var poiLocation = utilsFactory.getStartPoint(poi);
-                                self.createLayerFromElement(poi, 'poi', poiLocation)
+                                self.createLayerFromElement(poi, 'poi', poiLocation, forceRefresh)
                                     .then(
                                         function (marker) {
                                             var selector = '#poi-' + poi.id.toString();
@@ -193,7 +193,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
 
         }
 
-        promises.push(this.addGeoServices(element));
+        promises.push(this.addGeoServices(element, forceRefresh));
 
         $q.all(promises)
             .then(
@@ -247,6 +247,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
     };
 
     this.createLayerFromElement = function (element, type, elementLocation, forceRefresh) {
+        // console.log(forceRefresh);
         var deferred = $q.defer();
         var popupSources = {};
         if (type === "geojson" && element.geometry.type !== 'MultiPoint') {

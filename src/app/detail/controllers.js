@@ -351,7 +351,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                     getInterests(result, forceRefresh);
                     $rootScope.$emit('initGallery', result.properties.pictures);
                     $scope.result.informations = detailService.hasInfos(result.properties, 'duration_pretty', 'duration', 'difficulty.label', 'route', 'ascent', 'networks', 'target_audience');
-                    // $rootScope.$emit('detailUpdated', forceRefresh);
+                    $rootScope.$emit('detailUpdated', forceRefresh);
                 },
                 function () {
                     $rootScope.elementsLoading --;
