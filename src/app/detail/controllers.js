@@ -333,9 +333,9 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         $rootScope.elementsLoading ++;
         var promise;
         if (!forceRefresh) {
-            promise = resultsService.getAResultBySlug($stateParams.slug, $stateParams.catSlug, forceRefresh);
+            promise = resultsService.getAResultBySlug($stateParams.slug, $stateParams.catSlug);
         } else {
-            promise = resultsService.getAResultByID($scope.result.id, $scope.result.properties.category.id, forceRefresh);
+            promise = resultsService.getAResultByID($scope.result.id, $scope.result.properties.category.id);
         }
 
         promise
