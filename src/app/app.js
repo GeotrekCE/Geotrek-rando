@@ -36,13 +36,16 @@ var dependencies = [
     'ui.router',
     'rzModule',
     'ngResource',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'daterangepicker'
 ];
 
 var angular = require('angular');
+
 window._ = require('lodash');
 
 window.jQuery = require('jquery');
+window.moment = require('moment');
 
 window.L = require('leaflet');
 window.L.pip = require('leaflet-pip');
@@ -61,6 +64,8 @@ require('angular-translate');
 require('angular-google-analytics');
 require('ngResource');
 require('bootstrap');
+require('bootstrap-daterangepicker');
+require('angular-daterangepicker');
 require('sparklines');
 
 //MAP LIBRARIES

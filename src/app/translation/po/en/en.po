@@ -32,6 +32,9 @@ msgstr "Geotrek is a web app allowing you to prepare your next trekking trip !"
 msgid "CATEGORIES"
 msgstr "Categories"
 
+msgid "CLEAR"
+msgstr "Clear"
+
 msgid "ROUTES"
 msgstr "routes"
 
@@ -47,11 +50,8 @@ msgstr "Ascent:"
 msgid "LENGTH"
 msgstr "Length:"
 
-msgid "DATE_FILTER_START"
-msgstr "Begining date"
-
-msgid "DATE_FILTER_END"
-msgstr "Ending date"
+msgid "DATE_FILTER"
+msgstr "Dates"
 
 msgid "ALL"
 msgstr "All"

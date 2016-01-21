@@ -31,6 +31,9 @@ msgstr "Geotrek is een web app zodat u uw volgende trekking reis !"
 msgid "CATEGORIES"
 msgstr "Categorieën"
 
+msgid "CLEAR"
+msgstr "Réinitialiser"
+
 msgid "ROUTES"
 msgstr "Route"
 
@@ -43,11 +46,8 @@ msgstr "Duur"
 msgid "ASCENT"
 msgstr "Hoogteverschil"
 
-msgid "DATE_FILTER_START"
-msgstr "Begindatum"
-
-msgid "DATE_FILTER_END"
-msgstr "Einddatum"
+msgid "DATE_FILTER"
+msgstr "Datum"
 
 msgid "ALL"
 msgstr "Alle"
