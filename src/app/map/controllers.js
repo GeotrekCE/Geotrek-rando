@@ -15,7 +15,7 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
         }
     }
 
-    function updateMapWithResults(fitBounds) {
+    function updateMapWithResults(fitBounds, forceRefresh) {
         var deferred = $q.defer();
         centerMapOnLastView(fitBounds);
 
@@ -26,7 +26,7 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
                     function (data) {
                         $scope.results = data;
                         if (data.length > 0) {
-                            mapService.displayResults(data, fitBounds);
+                            mapService.displayResults(data, fitBounds, forceRefresh);
                             $rootScope.elementsLoading --;
                         } else {
                             mapService.clearAllLayers();
@@ -56,7 +56,7 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
                 .then(
                     function (data) {
                         $scope.result = data;
-                        mapService.displayDetail($scope.result, fitBounds);
+                        mapService.displayDetail($scope.result, fitBounds, forceRefresh);
                         $rootScope.elementsLoading --;
                     }, function () {
                         $rootScope.elementsLoading --;
@@ -208,11 +208,8 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
             }
         ),
         $rootScope.$on('resultsUpdated', function (name, forceRefresh) {
-            if (forceRefresh) {
-                updateMapWithResults(forceRefresh);
-            }
             if ($state.current.name === 'layout.root') {
-                updateMapWithResults(globalSettings.UPDATE_MAP_ON_FILTER);
+                updateMapWithResults(globalSettings.UPDATE_MAP_ON_FILTER, forceRefresh);
             }
         }),
         $rootScope.$on('detailUpdated', function (name, forceRefresh) {
