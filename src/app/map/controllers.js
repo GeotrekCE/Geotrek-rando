@@ -3,9 +3,7 @@
 function MapController($q, $scope, globalSettings, $translate, $rootScope, $state, resultsService, filtersService, mapService, centerService, $stateParams) {
 
     $scope.currentState = $state.current.name;
-
-    function updateMapWithResults(fitBounds) {
-        var deferred = $q.defer();
+    function centerMapOnLastView(fitBounds) {
         var center = centerService.getCenter($scope.currentState);
 
         if ($scope.shouldSetView && center) {
@@ -15,6 +13,11 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
                 $scope.shouldSetView = false;
             }, 1000);
         }
+    }
+
+    function updateMapWithResults(fitBounds) {
+        var deferred = $q.defer();
+        centerMapOnLastView(fitBounds);
 
         $rootScope.elementsLoading ++;
         deferred.resolve(
@@ -37,6 +40,8 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
 
     function updateMapWithDetails(forceRefresh) {
         var deferred = $q.defer();
+        var fitBounds = true;
+        centerMapOnLastView(fitBounds);
 
         $rootScope.elementsLoading ++;
         var promise;
@@ -51,7 +56,7 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
                 .then(
                     function (data) {
                         $scope.result = data;
-                        mapService.displayDetail($scope.result);
+                        mapService.displayDetail($scope.result, fitBounds);
                         $rootScope.elementsLoading --;
                     }, function () {
                         $rootScope.elementsLoading --;
@@ -210,17 +215,12 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
                 updateMapWithResults(globalSettings.UPDATE_MAP_ON_FILTER);
             }
         }),
-        $rootScope.$on('detailUpdated', function () {
+        $rootScope.$on('detailUpdated', function (name, forceRefresh) {
             if ($state.current.name === 'layout.detail') {
-                updateMapWithDetails();
+                updateMapWithDetails(forceRefresh);
             }
         }),
         $rootScope.$on('switchGlobalLang', function () {
-            if ($state.current.name === 'layout.detail') {
-                updateMapWithDetails(true);
-            } else {
-                updateMapWithResults(true);
-            }
             initCtrlsTranslation();
         })
     ];
