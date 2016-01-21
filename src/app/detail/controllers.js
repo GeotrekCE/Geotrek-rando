@@ -344,7 +344,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                 function (result) {
                     $stateParams.catSlug = result.properties.category.slug;
                     $stateParams.slug = result.properties.slug;
-                    $state.go('layout.detail');
+                    // $state.go('layout.detail');
                     $rootScope.metaTitle = result.properties.name;
                     $rootScope.metaDescription = result.properties.description_teaser;
                     $scope.result = result;
