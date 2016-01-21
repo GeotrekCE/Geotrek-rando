@@ -41,7 +41,7 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
     function updateMapWithDetails(forceRefresh) {
         var deferred = $q.defer();
         var fitBounds = true;
-        centerMapOnLastView(fitBounds);
+        // centerMapOnLastView(fitBounds);
 
         $rootScope.elementsLoading ++;
         var promise;
