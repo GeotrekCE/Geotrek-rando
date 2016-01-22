@@ -2,7 +2,7 @@
 
 describe('categories menu ', function() {
     var constants = require('../../../config/settings.constant.json');
-    var categoriesMenu;
+    var categoriesMenu, categoriesMenuWrapper;
     var EC = protractor.ExpectedConditions;
 
     beforeAll(function() {
@@ -13,7 +13,8 @@ describe('categories menu ', function() {
         }, constants);
         browser.get('/#/?no-home');
 
-        categoriesMenu = element(by.css('.sidebar .categories'));
+        categoriesMenu        = element(by.css('.sidebar .categories'));
+        categoriesMenuWrapper = element(by.css('.sidebar .categories-wrapper'));
 
     });
 
@@ -35,7 +36,7 @@ describe('categories menu ', function() {
     });
 
     it('should be closed by default', function () {
-        var menuClassName = categoriesMenu.getAttribute('class');
+        var menuClassName = categoriesMenuWrapper.getAttribute('class');
         expect(menuClassName).not.toMatch('extend');
     });
 
@@ -44,7 +45,7 @@ describe('categories menu ', function() {
         var menuClassName;
 
         menuButton.click();
-        menuClassName = categoriesMenu.getAttribute('class');
+        menuClassName = categoriesMenuWrapper.getAttribute('class');
 
         expect(menuClassName).toMatch('extend');
     });
@@ -57,7 +58,7 @@ describe('categories menu ', function() {
 
         closeButton.click();
 
-        menuClassName = categoriesMenu.getAttribute('class');
+        menuClassName = categoriesMenuWrapper.getAttribute('class');
         expect(menuClassName).not.toMatch('extend');
     });
 
