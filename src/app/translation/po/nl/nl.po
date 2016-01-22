@@ -52,6 +52,9 @@ msgstr "Datum"
 msgid "ALL"
 msgstr "Alle"
 
+msgid "CLOSE"
+msgstr "Close"
+
 
 # RESULTS
 #
