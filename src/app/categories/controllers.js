@@ -14,20 +14,6 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
     $scope.type2IsCollapsed      = globalSettings.FILTERS_DEFAULT_OPEN;
     $scope.routeIsCollapsed      = globalSettings.FILTERS_DEFAULT_OPEN;
 
-    function initFilters() {
-        initDatePickers();
-        initRangeFilters();
-
-        //disable event
-        initFiltersEvent();
-
-        $scope.categories.forEach(function (category) {
-            category.hasFilters = (category.ascent && category.ascent.values.length > 1) || (category.begin_date !== undefined) || (category.difficulty && category.difficulty.values.length > 1) || (category.duration && category.duration.values.length > 1) || (category.eLength && category.eLength.values.length > 1) || (category.end_date !== undefined) || (category.route && category.route.values.length > 0) || (category.type1 && category.type1.values.length > 0) || (category.type2 && category.type2.values.length > 0);
-        });
-    }
-
-    var initFiltersEvent = $rootScope.$on('updateFilters', initFilters);
-
     function updateFiltersTags() {
         $rootScope.activeFiltersTags = filtersService.getTagFilters();
     }
@@ -281,18 +267,18 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         }
     };
 
-    $scope.openCategoryFilters = function (category) {
-        category.open    = true;
-        $scope.filtering = true;
-        hideSiblings(category);
-    };
-
     var hideSiblings = function (mainCategory) {
         _.forEach($scope.categories, function (category) {
             if (category.id !== mainCategory.id) {
                 category.open = false;
             }
         });
+    };
+
+    $scope.openCategoryFilters = function (category) {
+        category.open    = true;
+        $scope.filtering = true;
+        hideSiblings(category);
     };
 
     $scope.propagateActiveFilters = function () {
@@ -321,6 +307,20 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         $scope.extend = false;
         $scope.closeCategoryFilters();
     };
+
+    function initFilters() {
+        initDatePickers();
+        initRangeFilters();
+
+        //disable event
+        initFiltersEvent();
+
+        $scope.categories.forEach(function (category) {
+            category.hasFilters = (category.ascent && category.ascent.values.length > 1) || (category.begin_date !== undefined) || (category.difficulty && category.difficulty.values.length > 1) || (category.duration && category.duration.values.length > 1) || (category.eLength && category.eLength.values.length > 1) || (category.end_date !== undefined) || (category.route && category.route.values.length > 0) || (category.type1 && category.type1.values.length > 0) || (category.type2 && category.type2.values.length > 0);
+        });
+    }
+
+    var initFiltersEvent = $rootScope.$on('updateFilters', initFilters);
 
     loadCategories();
 
