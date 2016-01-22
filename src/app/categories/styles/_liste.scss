@@ -85,6 +85,11 @@
     }
 }
 
+.categories::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+
 .categories {
     list-style: none;
     padding: 0;
@@ -94,7 +99,8 @@
     position: relative;
 
     white-space: nowrap;
-    overflow: hidden;
+    overflow: scroll;
+    overflow-x: hidden;
 
     background-color: #3a3a3a;
 
@@ -465,8 +471,10 @@
     @media (max-width: 540px) {
         width: 265px;
     }
-    height: 100%;
-    overflow-y: auto;
+
+    min-height: 100%;
+    // overflow-y: auto;
+
     z-index: 12;
     transition: opacity 0.3s ease-out,
                 right 250ms ease-out;
