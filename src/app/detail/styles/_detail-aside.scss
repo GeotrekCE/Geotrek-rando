@@ -101,7 +101,7 @@
     margin: 0 0 0 .75em;
     padding-right: 2.25em;
     overflow: auto;
-    flex: 1;
+    flex: 1 1 auto;
     @media (min-width: 768px) {
         height: 0;
     }
