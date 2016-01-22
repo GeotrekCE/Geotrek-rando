@@ -106,7 +106,7 @@
 
 .toggle-pane-toggle {
     margin: 0;
-    padding-right: .2em;
+    padding-right: 1em;
     padding-left: .5em;
 
     transition: all 150ms ease;
@@ -159,7 +159,6 @@
     }
     .toggle-pane-toggle {
         width: 40%;
-        padding-left: 0;
         svg {
             transform: rotate(180deg);
         }
