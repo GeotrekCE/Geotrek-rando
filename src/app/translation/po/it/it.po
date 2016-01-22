@@ -55,6 +55,8 @@ msgstr "Dates"
 msgid "ALL"
 msgstr "Tutto"
 
+msgid "CLOSE"
+msgstr "Vicino"
 
 # RESULTS
 #

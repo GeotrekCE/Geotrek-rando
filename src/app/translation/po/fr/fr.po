@@ -55,6 +55,9 @@ msgstr "Dates"
 msgid "ALL"
 msgstr "Toutes"
 
+msgid "CLOSE"
+msgstr "Fermer"
+
 
 # INFORMATIONS
 #
