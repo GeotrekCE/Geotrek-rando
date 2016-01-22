@@ -260,7 +260,7 @@ msgid "THEMES"
 msgstr "Themes"
 
 msgid "DISTRICTS"
-msgstr "Disctricts"
+msgstr "Districts"
 
 msgid "ALL_DISTRICTS"
 msgstr "All districts"
