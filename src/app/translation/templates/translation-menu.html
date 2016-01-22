@@ -3,7 +3,7 @@
         {{$root.lang}} <span class="caret"></span>
     </a>
     <ul class="dropdown-menu" role="menu">
-        <li ng-repeat="lang in languages" class="lang" ng-class="{active: $root.lang === lang.code}">
+        <li ng-repeat="lang in languages" class="lang {{::lang.code}}" ng-class="{active: $root.lang === lang.code}">
             <a href ng-click="toggleLang(lang.code)">
                 {{::lang.label}}
             </a>
