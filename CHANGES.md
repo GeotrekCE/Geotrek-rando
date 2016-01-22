@@ -1,7 +1,29 @@
 # CHANGELOG
 
+2.4.4 / 2016-01-22
+------------------
+
+**Bug fixes**
+
+  * Map controls style on fullscreen and fold-aside
+  * Fullscreen style (change selector to apply only on aside)
+  * Load initFilters() call in rootScopeEvents to prevent filters disappearing
+  * Add 'close' translation
+  * Disable center on detail page - need to improve centerService
+  * Redirect to home if content not available in selected language
+  * Fix poi svg error on switch language
+  * add option to state.go to avoid reload page
+  * Add forceRefresh and fix map controller
+
+**Enhancement**
+
+  * Enable scrolling categories icon whith small viewport height
+  * Change function order to avoid lint errors
+  * Change forceRefresh option on some controllers
+  * set forceRefresh option and remove useless elements
+
 2.4.3 / 2016-01-21
-==================
+------------------
 
 **Hot fixes**
 
