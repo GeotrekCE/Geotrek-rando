@@ -19,6 +19,9 @@ cache:
   directories:
     - node_modules
 
+install:
+  - npm update
+
 script:
   - "npm test"
 
