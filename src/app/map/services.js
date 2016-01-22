@@ -19,7 +19,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         this.markers = markers;
     };
 
-    this.addGeoServices = function (element) {
+    this.addGeoServices = function (element, forceRefresh) {
         var deferred = $q.defer();
 
         var controlServices = L.control.backgroundLayers(
@@ -37,7 +37,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                         var counter = 0;
                         _.forEach(services.features, function (service) {
                             var poiLocation = utilsFactory.getStartPoint(service);
-                            self.createLayerFromElement(service, 'service', poiLocation)
+                            self.createLayerFromElement(service, 'service', poiLocation, forceRefresh)
                                 .then(
                                     function (marker) {
                                         counter++;
@@ -72,7 +72,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         return deferred.promise;
     };
 
-    this.createPOISFromElement = function (element) {
+    this.createPOISFromElement = function (element, forceRefresh) {
         var deferred = $q.defer(),
             promises = [],
             startPoint = utilsFactory.getStartPoint(element);
@@ -80,7 +80,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         if (element.properties.parking_location) {
             var parkingPoint = utilsFactory.getParkingPoint(element);
             promises.push(
-                self.createLayerFromElement(element, 'parking', parkingPoint)
+                self.createLayerFromElement(element, 'parking', parkingPoint, forceRefresh)
                     .then(
                         function (marker) {
                             marker.popupSources.hint = element.properties.advised_parking;
@@ -97,7 +97,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
             var endPoint = utilsFactory.getEndPoint(element);
             if (startPoint.lat === endPoint.lat && startPoint.lng === endPoint.lng) {
                 promises.push(
-                    self.createLayerFromElement(element, 'departureArrival', startPoint)
+                    self.createLayerFromElement(element, 'departureArrival', startPoint, forceRefresh)
                         .then(
                             function (marker) {
                                 _.merge(marker.popupSources, {
@@ -110,7 +110,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                 );
             } else {
                 promises.push(
-                    self.createLayerFromElement(element, 'departure', startPoint)
+                    self.createLayerFromElement(element, 'departure', startPoint, forceRefresh)
                         .then(
                             function (marker) {
                                 _.merge(marker.popupSources, {
@@ -123,7 +123,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                 );
 
                 promises.push(
-                    self.createLayerFromElement(element, 'arrival', endPoint)
+                    self.createLayerFromElement(element, 'arrival', endPoint, forceRefresh)
                         .then(
                             function (marker) {
                                 _.merge(marker.popupSources, {
@@ -148,7 +148,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                         }
                     };
                     promises.push(
-                        self.createLayerFromElement(tempRefPoint, 'ref-point', tempRefPoint.coordinates)
+                        self.createLayerFromElement(tempRefPoint, 'ref-point', tempRefPoint.coordinates, forceRefresh)
                             .then(
                                 function (marker) {
                                     self._infosMarkersLayer.addLayer(marker);
@@ -165,7 +165,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                             var counter = 0;
                             _.forEach(pois.features, function (poi) {
                                 var poiLocation = utilsFactory.getStartPoint(poi);
-                                self.createLayerFromElement(poi, 'poi', poiLocation)
+                                self.createLayerFromElement(poi, 'poi', poiLocation, forceRefresh)
                                     .then(
                                         function (marker) {
                                             var selector = '#poi-' + poi.id.toString();
@@ -193,7 +193,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
 
         }
 
-        promises.push(this.addGeoServices(element));
+        promises.push(this.addGeoServices(element, forceRefresh));
 
         $q.all(promises)
             .then(
@@ -210,7 +210,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         elements.forEach(function (element) {
             startPoint = utilsFactory.getStartPoint(element);
 
-            if(type === 'near') {
+            if (type === 'near') {
                 self.createLayerFromElement(element, 'near', startPoint)
                     .then(
                         function (marker) {
@@ -246,7 +246,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         });
     };
 
-    this.createLayerFromElement = function (element, type, elementLocation) {
+    this.createLayerFromElement = function (element, type, elementLocation, forceRefresh) {
         var deferred = $q.defer();
         var popupSources = {};
         if (type === "geojson" && element.geometry.type !== 'MultiPoint') {
@@ -314,7 +314,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                 break;
             }
 
-            promise(param)
+            promise(param, forceRefresh)
                 .then(
                     function (currentIcon) {
                         if (elementLocation) {
@@ -871,7 +871,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
     };
 
     // Add treks geojson to the map
-    this.displayResults = function (results, fitBounds) {
+    this.displayResults = function (results, fitBounds, forceRefresh) {
         var deferred = $q.defer();
         var counter  = 0;
 
@@ -896,7 +896,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
 
                 if (result.geometry.type !== "Point" && result.geometry.type !== 'MultiPoint' && !self.treksIconified) {
                     promiseArray.push(
-                        self.createLayerFromElement(result, 'geojson', [])
+                        self.createLayerFromElement(result, 'geojson', [], forceRefresh)
                             .then(
                                 function (layer) {
                                     var selector = '#result-category-' + result.properties.category.id + '-' + result.id;
@@ -973,7 +973,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                 elementLocation = utilsFactory.getStartPoint(result);
 
                 promiseArray.push(
-                    self.createLayerFromElement(result, type, elementLocation)
+                    self.createLayerFromElement(result, type, elementLocation, forceRefresh)
                         .then(
                             function (layer) {
                                 var selector = '#result-category-' + result.properties.category.id.toString() + '-' + result.id.toString();
@@ -1025,8 +1025,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         return deferred.promise;
     };
 
-    this.displayDetail = function (result, fitBounds) {
-
+    this.displayDetail = function (result, fitBounds, forceRefresh) {
         var type = '',
             elementLocation,
             currentLayer;
@@ -1053,7 +1052,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                 elementLocation = utilsFactory.getStartPoint(result);
             }
 
-            self.createLayerFromElement(result, type, elementLocation)
+            self.createLayerFromElement(result, type, elementLocation, forceRefresh)
                 .then(
                     function (layer) {
                         currentLayer.addLayer(layer);
@@ -1076,7 +1075,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                     }
                 );
 
-            self.createPOISFromElement(result)
+            self.createPOISFromElement(result, forceRefresh)
                 .then(
                     function () {
                         self.map.invalidateSize();

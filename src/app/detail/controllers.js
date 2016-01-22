@@ -2,7 +2,6 @@
 
 function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $stateParams, globalSettings, utilsFactory, resultsService, poisService, mapService, translationService, detailService) {
 
-    var mainImage;
     $scope.parseLength = utilsFactory.parseLength;
     $scope.removeDiacritics = utilsFactory.removeDiacritics;
     $scope.nearElementsByCategories = globalSettings.NEAR_ELEMENTS_CATEGORIES;
@@ -67,14 +66,14 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         });
     };
 
-    function switchInterestsNodes() {
-        if (document.querySelector('.main-infos .interests') && window.matchMedia("(min-width: 769px)").matches) {
-            document.querySelector('.detail-map').appendChild(document.querySelector('.main-infos .interests'));
-        }
-        if (document.querySelector('.detail-map .interests') && window.matchMedia("(max-width: 768px)").matches) {
-            document.querySelector('.main-infos').appendChild(document.querySelector('.detail-map .interests'));
-        }
-    }
+    // function switchInterestsNodes() {
+    //     if (document.querySelector('.main-infos .interests') && window.matchMedia("(min-width: 769px)").matches) {
+    //         document.querySelector('.detail-map').appendChild(document.querySelector('.main-infos .interests'));
+    //     }
+    //     if (document.querySelector('.detail-map .interests') && window.matchMedia("(max-width: 768px)").matches) {
+    //         document.querySelector('.main-infos').appendChild(document.querySelector('.detail-map .interests'));
+    //     }
+    // }
 
     function getNearElements(result) {
         var deferred = $q.defer(),
@@ -130,7 +129,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                         nearElementsCategories.push(element.properties.category);
                     });
 
-                    $scope.nearElementsCategories = _.uniq(nearElementsCategories, function(item, key, id) {
+                    $scope.nearElementsCategories = _.uniq(nearElementsCategories, function(item) {
                         return item.id;
                     });
 
@@ -344,26 +343,24 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                 function (result) {
                     $stateParams.catSlug = result.properties.category.slug;
                     $stateParams.slug = result.properties.slug;
-                    // $state.go('layout.detail');
+                    $state.go('layout.detail', {notify: false});
                     $rootScope.metaTitle = result.properties.name;
                     $rootScope.metaDescription = result.properties.description_teaser;
                     $scope.result = result;
-                    $rootScope.$emit('detailUpdated');
                     $rootScope.elementsLoading --;
                     getInterests(result, forceRefresh);
                     $rootScope.$emit('initGallery', result.properties.pictures);
-
                     $scope.result.informations = detailService.hasInfos(result.properties, 'duration_pretty', 'duration', 'difficulty.label', 'route', 'ascent', 'networks', 'target_audience');
-
+                    $rootScope.$emit('detailUpdated', forceRefresh);
                 },
-                function (error) {
+                function () {
                     $rootScope.elementsLoading --;
                     $state.go("layout.root");
                 }
             );
     }
 
-    getResultDetails();
+    getResultDetails(false);
     // switchInterestsNodes();
 
     // angular.element(window).on('resize', switchInterestsNodes);

@@ -307,27 +307,8 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         return deferred.promise;
     };
 
-    this.getMarkerIcon = function () {
-        var deferred = $q.defer();
-
-        if (self.markerIcon) {
-            deferred.resolve(self.markerIcon);
-        } else {
-            self.getSVGIcon(self.icons_liste.category_base.iconUrl)
-                .then(
-                    function (iconMarkup) {
-                        self.markerIcon = iconMarkup;
-                        deferred.resolve(iconMarkup);
-                    }
-                );
-        }
-
-        return deferred.promise;
-    };
-
     this.getSVGIcon = function (url, iconName) {
         var deferred = $q.defer();
-
         if (self.icons_liste[iconName].markup) {
             deferred.resolve(self.icons_liste[iconName].markup);
         } else {
@@ -467,7 +448,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
 
         if (self.icons_liste.poi_base.iconUrl) {
             promises.push(
-                self.getSVGIcon(self.icons_liste.poi_base.iconUrl, 'poi_base')
+                self.getSVGIcon(self.icons_liste.poi_base.iconUrl, 'poi_base', true)
                     .then(
                         function (icon) {
                             baseIcon = icon;
@@ -477,7 +458,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         }
 
         promises.push(
-            self.getAPoiTypeIcon(poi.properties.type.id, false)
+            self.getAPoiTypeIcon(poi.properties.type.id, true)
                 .then(
                     function (icon) {
                         if (icon.isSVG) {
@@ -519,7 +500,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
 
     };
 
-    this.getServiceIcon = function (service) {
+    this.getServiceIcon = function (service, forceRefresh) {
         var deferred = $q.defer(),
             baseIcon = null,
             serviceIcon = null,
@@ -527,7 +508,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
 
         if (self.icons_liste.service_base.iconUrl) {
             promises.push(
-                self.getSVGIcon(self.icons_liste.service_base.iconUrl, 'service_base')
+                self.getSVGIcon(self.icons_liste.service_base.iconUrl, 'service_base', forceRefresh)
                     .then(
                         function (icon) {
                             baseIcon = icon;
@@ -537,7 +518,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         }
 
         promises.push(
-            self.getAServiceTypeIcon(service.properties.type.id, false)
+            self.getAServiceTypeIcon(service.properties.type.id, forceRefresh)
                 .then(
                     function (icon) {
                         if (icon.isSVG) {
@@ -601,7 +582,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         return deferred.promise;
     };
 
-    this.getElementIcon = function (element) {
+    this.getElementIcon = function (element, forceRefresh) {
 
         var deferred = $q.defer(),
             markerIcon,
@@ -610,7 +591,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
 
         if ($filter('isSVG')(self.icons_liste.category_base.iconUrl)) {
             promises.push(
-                self.getSVGIcon(self.icons_liste.category_base.iconUrl, 'category_base')
+                self.getSVGIcon(self.icons_liste.category_base.iconUrl, 'category_base', forceRefresh)
                     .then(
                         function (icon) {
                             markerIcon = icon;
@@ -622,7 +603,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         }
 
         promises.push(
-            self.getCategoryIcon(element.properties.category.id)
+            self.getCategoryIcon(element.properties.category.id, forceRefresh)
                 .then(
                     function (icon) {
                         categoryIcon = icon;

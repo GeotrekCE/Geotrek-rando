@@ -100,9 +100,9 @@ function SidebarDetailController($scope, $rootScope, $modal, $stateParams, $loca
 
     $scope.webGLisEnable = webglService.isEnabled();
 
-    function getResultDetails(refresh) {
+    function getResultDetails(forceRefresh) {
         if ($stateParams.slug) {
-            resultsService.getAResultBySlug($stateParams.slug, $stateParams.catSlug)
+            resultsService.getAResultBySlug($stateParams.slug, $stateParams.catSlug, forceRefresh)
                 .then(
                     function (data) {
                         $scope.result = data;
@@ -142,7 +142,7 @@ function SidebarDetailController($scope, $rootScope, $modal, $stateParams, $loca
 
     $scope.back = $rootScope.back;
 
-    getResultDetails();
+    getResultDetails(false);
 
 }
 
