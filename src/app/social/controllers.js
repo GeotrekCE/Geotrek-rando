@@ -11,7 +11,7 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
             '&link=' + encodeURIComponent($location.absUrl()) +
             '&redirect_uri=' + encodeURIComponent($location.absUrl());
 
-        $scope.twitterShareLink = 'https://twitter.com/share?';
+        $scope.twitterShareLink = 'https://twitter.com/share?url=' + encodeURIComponent($location.absUrl()) + '&';
 
         if (element) {
             $scope.fbShareLink += '' +
