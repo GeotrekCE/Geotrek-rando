@@ -8,6 +8,13 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
     $rootScope.placeHolderImage = globalSettings.PLACEHOLDER_IMAGE ? './images/custom/' + globalSettings.PLACEHOLDER_IMAGE : './images/placeholder.png';
     $rootScope.favoriteIcon = (globalSettings.FAVORITES_ICON ? globalSettings.FAVORITES_ICON : 'heart');
 
+    var bowser          = require('bowser');
+    $rootScope.isChrome = !!bowser.chrome;
+    $rootScope.isIE     = !!bowser.msie;
+    $rootScope.isEdge   = !!bowser.msedge;
+    $rootScope.isSafari = !!bowser.safari;
+    $rootScope.isWebkit = !!bowser.webkit;
+
     if (globalSettings.FAVICON) {
         var base = '/images/custom/';
         $rootScope.favIcon = {
