@@ -300,7 +300,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         if (globalSettings.SHOW_FILTERS_ON_MAP) {
             updateFiltersTags();
         }
-        $rootScope.$broadcast('updateFilters');
+        $rootScope.$broadcast('updateFilters', true);
     };
 
     $scope.toggleCategories = function () {

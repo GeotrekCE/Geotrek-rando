@@ -5,8 +5,8 @@ function TranslationController($scope, $rootScope, $translate, translationServic
         $scope.languages = translationService.getAllLang();
         $rootScope.lang = translationService.getCurrentLang();
         $translate.use($rootScope.lang);
-        $rootScope.$emit('translationReady');
         window.moment.locale($rootScope.lang);
+        $rootScope.$emit('translationReady');
     }
 
     $scope.toggleLang = function (lang) {

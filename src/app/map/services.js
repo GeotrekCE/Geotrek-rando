@@ -247,7 +247,6 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
     };
 
     this.createLayerFromElement = function (element, type, elementLocation, forceRefresh) {
-        // console.log(forceRefresh);
         var deferred = $q.defer();
         var popupSources = {};
         if (type === "geojson" && element.geometry.type !== 'MultiPoint') {
