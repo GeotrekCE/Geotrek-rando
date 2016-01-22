@@ -98,23 +98,13 @@
     top: 68px;
 }
 
-// Rules are separated because they don't work if declared with comas...
-//
-.detail-map.leaflet-container:-webkit-full-screen .leaflet-right {
-    right: 25%;
-}
-.detail-map.leaflet-container:-moz-full-screen .leaflet-right {
-    right: 25%;
-}
-.detail-map.leaflet-container:full-screen .leaflet-right {
-    right: 25%;
-}
-.detail-map.leaflet-pseudo-fullscreen .leaflet-right {
-    right: 25%;
-}
-
-
-.leaflet-control-layers {
+.fullscreen {
+    .leaflet-right {
+        right: 25%;
+    }
+    .fold-aside .leaflet-right {
+        right: 4%;
+    }
 }
 
 .leaflet-control-layers-toggle {
