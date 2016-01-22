@@ -1,5 +1,21 @@
 # CHANGELOG
 
+2.5.0 / 2016-01-22
+------------------
+
+**Bug fixes**
+
+  * Fix style aside pane on safari and firefox
+  * Fix translation typo
+  * Add page url on twitter share link
+  * Fix style aside content for ipad
+
+**Enhancements**
+
+  * Adjust tests to match new categories menu markup
+  * Better way to hide sidebar of categories list
+  * Add a 'CSS browser selector' like library to add conditional classes to `<html>` tag
+
 2.4.4 / 2016-01-22
 ------------------
 
@@ -15,7 +31,7 @@
   * add option to state.go to avoid reload page
   * Add forceRefresh and fix map controller
 
-**Enhancement**
+**Enhancements**
 
   * Enable scrolling categories icon whith small viewport height
   * Change function order to avoid lint errors
