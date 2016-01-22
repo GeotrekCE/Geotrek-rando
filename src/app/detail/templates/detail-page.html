@@ -8,7 +8,9 @@
             'no-interests':       currentInterest === 'none',
             'hide-near-elements': currentInterest !== 'near',
             'hide-pois':          currentInterest !== 'pois',
-            'hide-children':      currentInterest !== 'children'
+            'hide-children':      currentInterest !== 'children',
+            'fold-aside':         foldAside
+
         }"></geotrek-map>
 
     <detail-aside ng-class="{ 'fold-aside': foldAside }"></detail-aside>
