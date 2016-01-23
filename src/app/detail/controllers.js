@@ -341,9 +341,10 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         promise
             .then(
                 function (result) {
-                    $stateParams.catSlug = result.properties.category.slug;
-                    $stateParams.slug = result.properties.slug;
-                    $state.go('layout.detail', {notify: false});
+                    $state.transitionTo('layout.detail',
+                        { catSlug: result.properties.category.slug, slug: result.properties.slug },
+                        { location: true, inherit: true, relative: $state.$current, notify: false }
+                    );
                     $rootScope.metaTitle = result.properties.name;
                     $rootScope.metaDescription = result.properties.description_teaser;
                     $scope.result = result;
