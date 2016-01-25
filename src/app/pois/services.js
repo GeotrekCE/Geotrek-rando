@@ -50,7 +50,7 @@ function poisService($resource, $q, globalSettings, settingsFactory, translation
             var requests = $resource(url, {}, {
                 query: {
                     method: 'GET',
-                    cache: !forceRefresh,
+                    cache: true
                 }
             }, {stripTrailingSlashes: false});
 
@@ -76,7 +76,8 @@ function poisService($resource, $q, globalSettings, settingsFactory, translation
 
         var requests = $resource(url, {}, {
             query: {
-                method: 'GET'
+                method: 'GET',
+                cache: true
             }
         }, {stripTrailingSlashes: false});
 
