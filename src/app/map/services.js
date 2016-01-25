@@ -796,7 +796,8 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         var url = settingsFactory.trekUrl.replace(/\$lang/, currentLang) + result.id + '/' + globalSettings.PROFILE_FILE;
         var requests = $resource(url, {}, {
             query: {
-                method: 'GET'
+                method: 'GET',
+                cache: true
             }
         }, {stripTrailingSlashes: false});
 

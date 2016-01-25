@@ -31,7 +31,7 @@ function servicesService($resource, $q, globalSettings, settingsFactory, transla
             var requests = $resource(url, {}, {
                 query: {
                     method: 'GET',
-                    cache: !forceRefresh,
+                    cache: true
                 }
             }, {stripTrailingSlashes: false});
 
@@ -56,7 +56,8 @@ function servicesService($resource, $q, globalSettings, settingsFactory, transla
         var url = settingsFactory.trekUrl.replace(/\$lang/, currentLang) + elementId + '/' + globalSettings.SERVICES_FILE;
         var requests = $resource(url, {}, {
             query: {
-                method: 'GET'
+                method: 'GET',
+                cache: true
             }
         }, {stripTrailingSlashes: false});
 
