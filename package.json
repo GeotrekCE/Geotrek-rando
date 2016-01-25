@@ -65,7 +65,6 @@
   "devDependencies": {
     "browser-sync": "^2.6.4",
     "browserify": "^9.0.8",
-    "browserify-shim": "^3.8.2",
     "chai": "^1.10.0",
     "exorcist": "^0.1.6",
     "gulp": "^3.8.7",
@@ -76,7 +75,6 @@
     "gulp-filesize": "0.0.6",
     "gulp-gzip": "^1.2.0",
     "gulp-if": "^1.2.5",
-    "gulp-imagemin": "^0.6.2",
     "gulp-istanbul": "^0.5.0",
     "gulp-jshint": "^1.11.2",
     "gulp-karma": "0.0.4",
