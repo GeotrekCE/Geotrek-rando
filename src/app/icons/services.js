@@ -458,7 +458,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         }
 
         promises.push(
-            self.getAPoiTypeIcon(poi.properties.type.id, true)
+            self.getAPoiTypeIcon(poi.properties.type.id)
                 .then(
                     function (icon) {
                         if (icon.isSVG) {
