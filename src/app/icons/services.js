@@ -448,7 +448,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
 
         if (self.icons_liste.poi_base.iconUrl) {
             promises.push(
-                self.getSVGIcon(self.icons_liste.poi_base.iconUrl, 'poi_base', true)
+                self.getSVGIcon(self.icons_liste.poi_base.iconUrl, 'poi_base')
                     .then(
                         function (icon) {
                             baseIcon = icon;
