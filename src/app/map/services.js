@@ -1041,9 +1041,8 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
 
             this.clearAllLayers();
 
-            this.createElevation(result);
-
             if (result.geometry.type !== "Point" && result.geometry.type !== "MultiPoint") {
+                this.createElevation(result);
                 currentLayer = self._treksgeoJsonLayer;
                 type = 'geojson';
                 elementLocation = [];
