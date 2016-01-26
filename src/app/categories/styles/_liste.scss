@@ -87,9 +87,12 @@
 
 .categories-wrapper {
     height: 100%;
-    overflow-x: hidden;
+    width: 100%;
+    overflow: hidden;
     box-shadow: -20px 0 30px 30px rgba(0, 0, 0, .5);
     position: relative;
+    transition: width 150ms ease;
+    transition-delay: 150ms;
 
     &.extend {
         width: 365px;
@@ -137,27 +140,29 @@
 .categories {
     list-style: none;
     padding: 0;
-    margin: 0 -15px 0 0;
 
-    .ie & {
-        margin-right: -18px;
+    & > ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        height: calc(100% - 36px);
+        overflow-x: hidden;
+        overflow-y: auto;
+        margin: 0 -15px 0 0;
+        .ie & {
+            margin-right: -18px;
+        }
     }
+
 
     height: 100%;
     // width: 100%;
     // position: relative;
 
     white-space: nowrap;
-    overflow: scroll;
-    overflow-x: hidden;
+    overflow: hidden;
 
     background-color: #3a3a3a;
-
-
-    transition: width 150ms ease;
-
-
-    transition-delay: 150ms;
 
     .category-icon,
     .category-title,
@@ -509,7 +514,7 @@
         width: 265px;
     }
 
-    min-height: 100%;
+    height: 100%;
     // overflow-y: auto;
 
     z-index: 12;
@@ -521,6 +526,7 @@
         height: 100%;
         padding: 0;
         position: relative;
+        overflow-y: auto;
         &:before {
             content: "";
             display: block;
