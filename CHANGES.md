@@ -1,5 +1,23 @@
 # CHANGELOG
 
+2.6.0 / 2016-01-26
+------------------
+
+**Bug fixes**
+
+  * Create elevation profile only for treks
+  * Force services to use cache
+  * Always cache requests in pois service
+  * Do not force refresh of pois icons on each call
+
+**Enhancements**
+
+  * Remove useless argument from function call
+  * Remove useless dependencies
+  * Use 'update' instead of 'install' with npm
+  * Add TravisCI specific dependencies to use Node >4
+  * Use .nvmrc node version for TravisCI
+
 2.5.0 / 2016-01-22
 ------------------
 
