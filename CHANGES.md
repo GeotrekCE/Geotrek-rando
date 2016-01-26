@@ -1,5 +1,16 @@
 # CHANGELOG
 
+2.6.1 / 2016-01-26
+------------------
+
+**Bug fixes**
+
+  * Fixed categories menu scroll system
+
+**Enhancements**
+
+  * Replaced datepicker clear button with a cross inside the input
+
 2.6.0 / 2016-01-26
 ------------------
 
