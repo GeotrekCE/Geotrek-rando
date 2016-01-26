@@ -175,6 +175,7 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
 
     $rootScope.map.on('enterFullscreen', function () {
         $rootScope.isFullscreen = true;
+        $rootScope.$digest();
         setTimeout(function() {
             $rootScope.map.invalidateSize(true);
         }, 1000);
@@ -182,7 +183,10 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
 
     $rootScope.map.on('exitFullscreen', function () {
         $rootScope.isFullscreen = false;
-        $rootScope.map.invalidateSize(false);
+        $rootScope.$digest();
+        setTimeout(function() {
+            $rootScope.map.invalidateSize(false);
+        }, 1000);
     });
 
     var rootScopeEvents = [
