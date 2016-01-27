@@ -137,6 +137,11 @@ function leafletExtend() {
         },
 
         _addItem: function (obj) {
+            if (obj.layer && obj.layer.options && obj.layer.options.force) {
+                this._map.addLayer(obj.layer);
+                return false;
+            }
+
             var control   = document.createElement('a'),
                 icon      = this.options.defaultIcon,
                 container = this._container;
