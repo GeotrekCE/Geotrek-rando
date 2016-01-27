@@ -1,3 +1,15 @@
+
+2.7.1 / 2016-01-27
+==================
+
+**Bug fixes**
+
+  * Fixed warning marker icon position
+
+**Enhancements**
+
+  * Add default leaflet config in map service
+
 2.7.0 / 2016-01-27
 ==================
 
