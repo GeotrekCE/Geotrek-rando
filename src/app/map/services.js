@@ -1135,10 +1135,13 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         this._optionalLayers = layersService.getOptionalLayers();
 
         var mapParameters = {
-            center: [globalSettings.LEAFLET_CONF.CENTER_LATITUDE, globalSettings.LEAFLET_CONF.CENTER_LONGITUDE],
-            zoom: globalSettings.LEAFLET_CONF.DEFAULT_ZOOM,
-            minZoom: globalSettings.LEAFLET_CONF.DEFAULT_MIN_ZOOM,
-            maxZoom: globalSettings.LEAFLET_CONF.DEFAULT_MAX_ZOOM,
+            center: [
+                globalSettings.LEAFLET_CONF.CENTER_LATITUDE || 44.83,
+                globalSettings.LEAFLET_CONF.CENTER_LONGITUDE || 6.34
+            ],
+            zoom: globalSettings.LEAFLET_CONF.DEFAULT_ZOOM || 12,
+            minZoom: globalSettings.LEAFLET_CONF.DEFAULT_MIN_ZOOM || 8,
+            maxZoom: globalSettings.LEAFLET_CONF.DEFAULT_MAX_ZOOM || 17,
             scrollWheelZoom: true,
             layers: permanentTileLayers
         };
