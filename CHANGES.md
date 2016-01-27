@@ -1,3 +1,23 @@
+2.7.0 / 2016-01-27
+==================
+
+**Bug fixes**
+
+  * fix ie map controllers position
+  * Change $state.go to $state.transitionTo to prevent controller reload on switch lang
+  * Force angular digest after setting rootscope var
+  * Add specific ie rule for map right controllers position in fullscreen
+
+**Enhancements**
+
+  * Change translation for date filter title
+  * Add tests for map detail page
+  * Adapt CHANGES.md style to `hub changelog` style
+
+**New features**
+
+  * Add a way to manage a "always active" layer
+
 2.6.1 / 2016-01-26
 ==================
 
