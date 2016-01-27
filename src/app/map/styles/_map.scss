@@ -101,14 +101,16 @@
 .fullscreen {
     .leaflet-right {
         right: 25%;
+        .ie & {
+            right: 26%;
+        }
     }
     .fold-aside .leaflet-right {
         right: 4%;
+        .ie & {
+            right: 5%;
+        }
     }
-}
-
-.ie .fullscreen .leaflet-right {
-    right: 26%;
 }
 
 .leaflet-control-layers-toggle {
