@@ -50,7 +50,7 @@ msgid "LENGTH"
 msgstr "Distance :"
 
 msgid "DATE_FILTER"
-msgstr "Dates"
+msgstr "Entre le ... et le ..."
 
 msgid "ALL"
 msgstr "Toutes"
