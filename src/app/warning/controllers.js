@@ -5,7 +5,7 @@ function WarningPanelController($scope, $rootScope, WarningService, WarningMapSe
     var onMap = false;
 
     $scope.initWarningPanel = function () {
-        $rootScope.showWarningPanel = true;
+        $scope.showWarningPanel = true;
         if ($rootScope.mapIsShown) {
             onMap = true;
             $rootScope.mapIsShown = false;
@@ -22,7 +22,7 @@ function WarningPanelController($scope, $rootScope, WarningService, WarningMapSe
         if (onMap) {
             $rootScope.mapIsShown = true;
         }
-        $rootScope.showWarningPanel = false;
+        $scope.showWarningPanel = false;
         WarningMapService.removeMap();
         $scope.warning = null;
     };
