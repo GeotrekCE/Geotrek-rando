@@ -38,8 +38,9 @@ function WarningPanelController($scope, $rootScope, WarningService, WarningMapSe
                 });
         }
     };
+    var rootScopeEvents = [];
 
-    $rootScope.$on('showWarningPanel', function (event, args) {
+    rootScopeEvents.push($rootScope.$on('showWarningPanel', function (event, args) {
         $scope.result = args.result;
         WarningService.getWarningCategories()
             .then(function (categories) {
@@ -55,7 +56,9 @@ function WarningPanelController($scope, $rootScope, WarningService, WarningMapSe
                 console.error(err);
             });
         $scope.initWarningPanel();
-    });
+    }));
+
+    $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
 
 }
 
