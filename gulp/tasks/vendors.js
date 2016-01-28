@@ -5,7 +5,6 @@ var PACKAGE      = require('../../package.json');
 
 var browserify   = require('browserify');
 var source       = require('vinyl-source-stream');
-var streamify    = require('gulp-streamify');
 
 var handleErrors = require('../util/handleErrors');
 var bundleLogger = require('../util/bundleLogger');
