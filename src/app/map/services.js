@@ -1584,7 +1584,6 @@ function layersService ($http, globalSettings) {
                             if (layer && layer.feature && layer.feature.properties) {
 
                                 prop = layer.feature.properties;
-                                console.log(prop);
 
                                 markup.push('<div class="info-point-title">' + (prop.name || '') + '</div>');
                                 markup.push('<div class="info-point-photo">' + (prop.photo_url ? '<img src="' + globalSettings.API_URL + prop.photo_url + '">' : '') + '</div>');

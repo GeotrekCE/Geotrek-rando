@@ -105,7 +105,6 @@ function RandomContentWidgetController($scope, resultsService, utilsFactory) {
         resultsService.getRandomContentsByCategory($scope.category, 1)
             .then(
                 function (randomContent) {
-                    console.log(randomContent);
                     $scope.randomContent = randomContent[0];
                 },
                 function (err) {
