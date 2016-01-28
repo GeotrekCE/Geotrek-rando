@@ -34,6 +34,7 @@ var watch         = false;
 var srcMap        = false;
 var brwSync       = true;
 
+/*
 gulp.task('mainapp', ['customisation', 'translate'], function(){
     browserifyShare();
 });
@@ -42,7 +43,7 @@ gulp.task('watch:mainapp', ['customisation', 'translate'], function(){
     watch = true;
     browserifyShare();
 });
-
+*/
 function browserifyShare() {
     var b = browserify({
         cache: {},

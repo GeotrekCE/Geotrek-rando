@@ -52,23 +52,24 @@ window.moment = require('moment');
 window.L = require('leaflet');
 window.L.pip = require('leaflet-pip');
 
-window.rando3D = require('rando3d');
+window.rando3D = require('rando3D');
 
 require('classlist-polyfill');
 
 require('jquery.scrollto');
 
 // LOAD EXTERNAL DEPENDENCIES
-require('ui.bootstrap');
-require('ui.router');
-require('angularjs-slider');
+require('angular-bootstrap');
+require('angular-ui-router');
+require('jusas-angularjs-slider');
 require('angular-translate');
 require('angular-google-analytics');
-require('ngResource');
-require('bootstrap');
+require('angular-resource');
+require('bootstrap-sass');
+
 require('bootstrap-daterangepicker');
-require('angular-daterangepicker');
-require('sparklines');
+require('./vendors/scripts/angular-daterangepicker/angular-daterangepicker.js');
+require('./vendors/scripts/sparklines.min.js');
 
 //MAP LIBRARIES
 require('leaflet-ajax');
@@ -77,7 +78,8 @@ require('leaflet-minimap');
 require('leaflet.markercluster');
 require('leaflet.fullscreen');
 require('leaflet-geometryutil');
-require('leaflet-active-area');
+
+require('../../node_modules/leaflet-active-area/src/leaflet.activearea.js');
 
 //TEST LIBRARIES
 require('angular-mocks'); // that one will exclude if not angular.mock
