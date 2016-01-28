@@ -1,4 +1,18 @@
 
+2.7.2 / 2016-01-28
+==================
+
+**Bug fixes**
+
+  * Don't pollute rootScope with local scope vars
+  * Cleanup rootScope event when destroying warning controller
+  * Remove useless console.log
+  * Fixed collapser in asides
+
+**New features**
+
+  * Manage popup for geoJson layer with associate properties
+
 2.7.1 / 2016-01-27
 ==================
 
