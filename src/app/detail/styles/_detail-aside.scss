@@ -33,11 +33,8 @@
     display: flex;
     overflow: hidden;
     flex-direction: column;
-
+    height: 50px;
     transition: all .2s ease;
-    @media (max-width: 767px) {
-        height: 50px;
-    }
 
     &.active {
         flex: 1 1 auto;
@@ -66,10 +63,6 @@
 
     @media (min-width: 768px) {
         cursor: pointer;
-    }
-
-    @media (max-width: 767px) {
-        height: 50px;
     }
 
     .stripe-icon {
@@ -126,7 +119,7 @@
     display: flex;
     padding: 0 1em 0 8px;
     text-transform: uppercase;
-
+    height: 25px;
     @media (min-width: 768px) {
         cursor: pointer;
     }
