@@ -349,3 +349,17 @@
         display: none;
     }
 }
+
+
+.info-point-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.info-point-photo,
+.info-point-type,
+.info-point-link {
+    text-align: center;
+    margin-top: 10px;
+}

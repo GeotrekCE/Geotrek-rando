@@ -1578,6 +1578,26 @@ function layersService ($http, globalSettings) {
                                 styles.color = feature.properties.stroke;
                             }
                             return styles;
+                        },
+                        onEachFeature: function (feature, layer) {
+                            var markup = [], prop;
+                            if (layer && layer.feature && layer.feature.properties) {
+
+                                prop = layer.feature.properties;
+                                console.log(prop);
+
+                                markup.push('<div class="info-point-title">' + (prop.name || '') + '</div>');
+                                markup.push('<div class="info-point-photo">' + (prop.photo_url ? '<img src="' + globalSettings.API_URL + prop.photo_url + '">' : '') + '</div>');
+                                markup.push('<div class="info-point-type">'  + ((prop.type && prop.type.label) || '') + '</div>');
+                                if (prop.website) {
+                                    markup.push('<div class="info-point-link"><a href="' + prop.website + '">' + prop.website + '</a></div>');
+                                }
+
+                                if (layer.bindPopup) {
+                                    layer.bindPopup(markup.join('\n'));
+                                }
+
+                            }
                         }
                     }, layerConf.OPTIONS);
 
