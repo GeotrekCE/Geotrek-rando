@@ -234,6 +234,29 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
         return deferred.promise;
     };
 
+    this.lazyCheck = function () {
+        /**
+         * `this` should be bound by caller to jQlite element
+         */
+        simpleEach(this, function eachElement (element) {
+            var pictures          = element.querySelectorAll('img[data-src]:not([src])');
+
+            var $element          = jQuery(element);
+            var elementTop        = $element.offset().top;
+            var elementHeight     = $element.height();
+            var elementBottom     = elementHeight + elementTop;
+            var elementHalfHeight = elementHeight * 0.5;
+
+            simpleEach(pictures, function eachPicture (picture) {
+                var pictureTop = jQuery(picture).offset().top;
+                var inView     = pictureTop >= (elementTop - elementHalfHeight) && pictureTop <= (elementBottom + elementHalfHeight);
+                if (inView) {
+                    picture.src = picture.getAttribute('data-src');
+                }
+            });
+        });
+    }
+
 }
 
 module.exports = {

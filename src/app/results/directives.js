@@ -9,6 +9,20 @@ function resultsListeDirective() {
     };
 }
 
+function lazyCheckDirective (resultsService) {
+    return function(scope, element) {
+
+        var method = _.throttle(resultsService.lazyCheck.bind(element), 1000);
+
+        element.bind('scroll', method);
+        if (window) { window.onresize = method; }
+        setInterval(method, 3000);
+    };
+}
+
+
+
 module.exports = {
-    resultsListeDirective: resultsListeDirective
+    resultsListeDirective: resultsListeDirective,
+    lazyCheckDirective: lazyCheckDirective
 };

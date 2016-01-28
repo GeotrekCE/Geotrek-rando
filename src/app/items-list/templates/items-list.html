@@ -9,13 +9,13 @@
             <i class="result-fav-icon fa fa-{{::$root.favoriteIcon}}"></i>
         </div>
         <div class="result-visual" style="background-image: url({{::$root.placeHolderImage}});">
-            <img ng-src="{{::result.properties.picture.url}}" ng-alt="{{::result.properties.picture.title}}">
+            <img data-src="{{::result.properties.picture.url}}" ng-alt="{{::result.properties.picture.title}}">
         </div>
         <div class="result-actions">
             <div class="result-action result-category-icon">
-                <img ng-src="{{::result.properties.category.pictogram}}" ng-alt="{{::category.label}}">
+                <img data-src="{{::result.properties.category.pictogram}}" ng-alt="{{::category.label}}">
             </div>
-            <a class="result-action result-map-focus" ng-click="mapFocusOn(result)" href="#"><img src="/images/icons/gps-symbol.svg"></a>
+            <a class="result-action result-map-focus" ng-click="mapFocusOn(result)" href="#"><img data-src="/images/icons/gps-symbol.svg"></a>
             <a class="result-action result-view-details" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: result.properties.slug})">{{:: 'SHOW_MORE' | translate }}</a>
         </div>
 
@@ -46,7 +46,7 @@
         </div>
 
         <div class="approved" ng-if="::result.properties.approved">
-            <img ng-src="{{::approved}}" ng-alt="{{::approvedLabel}}">
+            <img data-src="{{::approved}}" ng-alt="{{::approvedLabel}}">
         </div>
 
     </li>
