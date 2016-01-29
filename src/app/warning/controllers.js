@@ -40,23 +40,26 @@ function WarningPanelController($scope, $rootScope, WarningService, WarningMapSe
     };
     var rootScopeEvents = [];
 
-    rootScopeEvents.push($rootScope.$on('showWarningPanel', function (event, args) {
-        $scope.result = args.result;
-        WarningService.getWarningCategories()
-            .then(function (categories) {
-                $scope.warningStatus = null;
-                $scope.warning = {};
-                $scope.warning.location = utilsFactory.getStartPoint($scope.result);
-                $scope.warningCategories = categories;
-                $scope.warning.category = categories[0].id.toString();
-                WarningMapService.getMap('warning-map', $scope.result);
-                WarningMapService.addCallback(updateLocation);
-            })
-            .catch(function (err) {
-                console.error(err);
-            });
-        $scope.initWarningPanel();
-    }));
+    rootScopeEvents.push(
+        $rootScope.$on('showWarningPanel', function (event, args) {
+            $scope.result = args.result;
+            WarningService.getWarningCategories()
+                .then(function (categories) {
+                    $scope.warningStatus = null;
+                    $scope.warning = {};
+                    $scope.warning.location = utilsFactory.getStartPoint($scope.result);
+                    $scope.warningCategories = categories;
+                    $scope.warning.category = categories[0].id.toString();
+                    WarningMapService.getMap('warning-map', $scope.result);
+                    WarningMapService.addCallback(updateLocation);
+                })
+                .catch(function (err) {
+                    console.error(err);
+                });
+            $scope.initWarningPanel();
+        }),
+        $scope.close
+    );
 
     $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
 
