@@ -99,16 +99,21 @@
 }
 
 .fullscreen {
-    .leaflet-right {
-        right: 25%;
-        .ie & {
-            right: 26%;
-        }
+    .general-map .leaflet-top {
+        top: 0;
     }
-    .fold-aside .leaflet-right {
-        right: 4%;
-        .ie & {
-            right: 5%;
+    .detail-map {
+        .leaflet-right {
+            right: 25%;
+            .ie & {
+                right: 26%;
+            }
+        }
+        &.fold-aside .leaflet-right {
+            right: 4%;
+            .ie & {
+                right: 5%;
+            }
         }
     }
 }
