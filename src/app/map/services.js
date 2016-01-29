@@ -1589,12 +1589,16 @@ function layersService ($http, globalSettings) {
                                 markup.push('<div class="info-point-photo">' + (prop.photo_url ? '<img src="' + globalSettings.API_URL + prop.photo_url + '">' : '') + '</div>');
                                 markup.push('<div class="info-point-type">'  + ((prop.type && prop.type.label) || '') + '</div>');
                                 if (prop.website) {
-                                    markup.push('<div class="info-point-link"><a href="' + prop.website + '">' + prop.website + '</a></div>');
+                                    markup.push('<div class="info-point-link"><a target="_blank" href="' + prop.website + '">' + prop.website + '</a></div>');
                                 }
 
                                 if (layer.bindPopup) {
                                     layer.bindPopup(markup.join('\n'));
                                 }
+                            }
+
+                            if (layer instanceof L.Marker) {
+                                layer.setZIndexOffset(-5000);
                             }
 
                             if (layerConf.DEFAULT_MARKER && layer instanceof L.Marker) {
