@@ -1,4 +1,17 @@
 
+2.7.4 / 2016-01-29
+==================
+
+**Enhancements**
+
+  * Move marker created from optional geoJSON layers to back
+  * Add a simple npm command to checkout origin/latest
+  * Update package.json version number to match current release tag
+
+**Bug fixes**
+
+  * Move map controls in fullscreen only accordingly to current map state
+
 2.7.3 / 2016-01-29
 ==================
 
