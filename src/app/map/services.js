@@ -1595,12 +1595,15 @@ function layersService ($http, globalSettings) {
                                 if (layer.bindPopup) {
                                     layer.bindPopup(markup.join('\n'));
                                 }
+                            }
 
+                            if (layerConf.DEFAULT_MARKER && layer instanceof L.Marker) {
+                                layer.setIcon(L.icon(layerConf.DEFAULT_MARKER));
                             }
                         }
                     }, layerConf.OPTIONS);
 
-                    L.Icon.Default.imagePath = layerConf.DEFAULT_MARKER || '/app/vendors/images/leaflet/';
+                    L.Icon.Default.imagePath = '/app/vendors/images/leaflet';
 
                     layers[layerName] = L.geoJson.ajax(layerConf.LAYER_URL, layerOptions);
                 } else {
