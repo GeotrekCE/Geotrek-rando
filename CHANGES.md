@@ -1,4 +1,13 @@
 
+2.7.3 / 2016-01-29
+==================
+
+**Enhancements**
+
+  * Use L.icon config for geoJSON layer custom icon
+  * Remove useless dependency to gulp-streamify
+  * Remove useless function
+
 2.7.2 / 2016-01-28
 ==================
 
