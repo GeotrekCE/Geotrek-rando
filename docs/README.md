@@ -35,7 +35,7 @@ _See [contribute][] section for more details about participating to Geotrek-rand
 
 ## Settings & customization
 
-Most of the settings (mainly everything about contents) has to be done directly in [Geotrek-admin][], but some parameters regarding Geotrek-rando have to be set up in a specific file. _(Cf. [Custom settings][])_
+Most of the settings (mainly everything about contents) has to be done directly in [Geotrek-admin][], but some parameters regarding Geotrek-rando have to be set up in a specific file. _(Cf. [Settings][])_
 
 There is also a way to adjust the look and feel of the user interface by creating some specific files which will be used in place of defaults. For exemple: you could have your own header or footer files allowing you to include new elements without having to make change\* to Geotrek-rando core files. _(Cf. [Customization][])_
 
@@ -54,7 +54,7 @@ If you're wondering what means _Libre_ in [FLOSS][], it essentially imply four f
 <!-- Internal links -->
 
 [Contribute]: contribute.md
-[Custom settings]: custom.settings.json.md
+[Settings]: settings.md
 [Customization]: customization.md
 [Data source]: api_url.md
 [history]: history.md
