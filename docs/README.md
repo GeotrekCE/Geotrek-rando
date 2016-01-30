@@ -1,4 +1,4 @@
-# Geotrek-rando documentation
+# Documentation
 
 ## Overview
 
@@ -9,14 +9,19 @@ These contents may be provided by linking this app either to the API of a [Geotr
 Geotrek-rando is build as a [Single Page Application][SPA] using [AngularJS][] as main application framework, [Leaflet][] for displaying the maps, and many other smaller libraries and utilities.
 Everything is bound as a single javascript bundle using [Browserify][], managed through [Gulp][] tasks.
 
+### History
+
+The first version (v1) was builded on top of Django framework, like Geotrek-admin. But maintaining such a backend application was a kind of lose of time with no added value. Since the second version, Geotrek-rando is now a [Rich Internet application][RIA] which has a very little hosting footprint.
+
+_See main [history][] page for more informations._
+
 ## Prerequisites
 
-As Geotrek-rando works as a [SPA][], you only need an http server as [Nginx][] or [Apache][]. _(Cf. [http server][])_
+As Geotrek-rando works as a [SPA][], you only need an http server like [Nginx][] or [Apache][]. _(Cf. [http server][])_
 
 You'll also need to build the javascript main bundle which require [nodejs and npm][node]\* to be available on the building environment.
 
 Building environment could be either the same as your http server, or a local machine from which you'll sync generated files to the main server instance
-
 
 _\* In recent versions of Geotrek-rando, you'll find the recommended version of Node JS into the `.nvmrc` file in the root directory of the project._
 
@@ -26,23 +31,30 @@ Some npm package used for tests may need a build environment for compiling platf
 
 _See [contribute][] section for more details about participating to Geotrek-rando development._
 
-## Configuration
+## Settings & customization
 
-Most of the configuration (mainly everything about contents) has to be done directly in [Geotrek-admin][], but some parameters regarding Geotrek-rando have to be set up in a specific file. _(Cf. [Custom settings][])_
+Most of the settings (mainly everything about contents) has to be done directly in [Geotrek-admin][], but some parameters regarding Geotrek-rando have to be set up in a specific file. _(Cf. [Custom settings][])_
 
-**NB:** Each time you add, delete or modify a setting, you have to rebuild the main javascript bundle.
+There is also a way to adjust the look and feel of the user interface by creating some specific files which will be used in place of defaults. For exemple: you could have your own header or footer files allowing you to include new elements without having to make change\* to Geotrek-rando core files. _(Cf. [Customization][])_
+
+**NB:** Each time you add, delete or modify a setting or a customization file, you have to rebuild the main javascript bundle.
+
+_\* Making changes to core files of Geotrek-rando could prevent the possibility of upgrading it without losing your changes._
 
 [AngularJS]: http://www.angularjs.org/
 [Apache]: https://httpd.apache.org/
 [Browserify]: http://browserify.org/
 [contribute]: contribute.md
 [Custom settings]: custom.settings.json.md
+[Customization]: customization.md
 [Data source]: api_url.md
 [FLOSS]: https://en.wikipedia.org/wiki/Free_and_open-source_software "free/libre and open-source software"
 [Geotrek-admin]: https://github.com/makinacorpus/Geotrek
 [Gulp]: http://gulpjs.com/
+[history]: history.md
 [http server]: TODO.md
 [Leaflet]: http://leafletjs.com/
 [Nginx]: http://nginx.org/)
 [node]: https://nodejs.org/ "NodeJS"
+[RIA]: https://en.wikipedia.org/wiki/Rich_Internet_application
 [SPA]: https://en.wikipedia.org/wiki/Single-page_application "Single Page Application"
