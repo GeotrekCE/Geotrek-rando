@@ -11,6 +11,14 @@ These contents may be provided by linking this app either to the API of a [Geotr
 Geotrek-rando is build as a [Single Page Application][SPA] using [AngularJS][] as main application framework, [Leaflet][] for displaying the maps, and many other smaller libraries and utilities.
 Everything is bound as a single javascript bundle using [Browserify][], managed through [Gulp][] tasks.
 
+### About FLOSS
+
+If you're wondering what means _Libre_ in [FLOSS][], it essentially imply four freedoms :
+* The freedom to **run** the program for any purpose.
+* The freedom to **study** how the program works, and change it to make it do what you wish.
+* The freedom to **redistribute** copies so you can help your neighbor.
+* The freedom to **improve** the program, and release your improvements (and modified versions in general) to the public, so that the whole community benefits.
+
 ### History
 
 The first version (v1) was builded on top of Django framework, like Geotrek-admin. But maintaining such a backend application was a kind of lose of time with no added value. Since the second version, Geotrek-rando is now a [Rich Internet application][RIA] which has a very little hosting footprint.
