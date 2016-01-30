@@ -51,18 +51,23 @@ There is also a way to adjust the look and feel of the user interface by creatin
 
 _\* Making changes to core files of Geotrek-rando could prevent the possibility of upgrading it without losing your changes._
 
-[AngularJS]: http://www.angularjs.org/
-[Apache]: https://httpd.apache.org/
-[Browserify]: http://browserify.org/
-[contribute]: contribute.md
+<!-- Internal links -->
+
+[Contribute]: contribute.md
 [Custom settings]: custom.settings.json.md
 [Customization]: customization.md
 [Data source]: api_url.md
+[history]: history.md
+[http server]: hosting.md
+
+<!-- External links -->
+
+[AngularJS]: http://www.angularjs.org/
+[Apache]: https://httpd.apache.org/
+[Browserify]: http://browserify.org/
 [FLOSS]: https://en.wikipedia.org/wiki/Free_and_open-source_software "free/libre and open-source software"
 [Geotrek-admin]: https://github.com/makinacorpus/Geotrek
 [Gulp]: http://gulpjs.com/
-[history]: history.md
-[http server]: TODO.md
 [Leaflet]: http://leafletjs.com/
 [Nginx]: http://nginx.org/)
 [node]: https://nodejs.org/ "NodeJS"
