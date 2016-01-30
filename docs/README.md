@@ -11,17 +11,9 @@ These contents may be provided by linking this app either to the API of a [Geotr
 Geotrek-rando is build as a [Single Page Application][SPA] using [AngularJS][] as main application framework, [Leaflet][] for displaying the maps, and many other smaller libraries and utilities.
 Everything is bound as a single javascript bundle using [Browserify][], managed through [Gulp][] tasks.
 
-### About FLOSS
-
-If you're wondering what means _Libre_ in [FLOSS][], it essentially imply four freedoms :
-* The freedom to **run** the program for any purpose.
-* The freedom to **study** how the program works, and change it to make it do what you wish.
-* The freedom to **redistribute** copies so you can help your neighbor.
-* The freedom to **improve** the program, and release your improvements (and modified versions in general) to the public, so that the whole community benefits.
-
 ### History
 
-The first version (v1) was builded on top of Django framework, like Geotrek-admin. But maintaining such a backend application was a kind of lose of time with no added value. Since the second version, Geotrek-rando is now a [Rich Internet application][RIA] which has a very little hosting footprint.
+The first version (v1) was builded on top of Django framework, like Geotrek-admin. But maintaining such a backend application was a kind of lose of time with no added value. Since the second version, Geotrek-rando is now a [Rich Internet application][RIA] which has a very small hosting footprint.
 
 _See main [history][] page for more informations._
 
@@ -37,7 +29,7 @@ _\* In recent versions of Geotrek-rando, you'll find the recommended version of 
 
 ### For developpers
 
-Some npm package used for tests may need a build environment for compiling platform specific binaries. On debian-like environments, `build-essential` should include this requirements.
+Some npm packages used for tests may need a build environment for compiling platform specific binaries. On debian-like environments, `build-essential` should satisfy this requirements.
 
 _See [contribute][] section for more details about participating to Geotrek-rando development._
 
@@ -50,6 +42,14 @@ There is also a way to adjust the look and feel of the user interface by creatin
 **NB:** Each time you add, delete or modify a setting or a customization file, you have to rebuild the main javascript bundle.
 
 _\* Making changes to core files of Geotrek-rando could prevent the possibility of upgrading it without losing your changes._
+
+## About FLOSS
+
+If you're wondering what means _Libre_ in [FLOSS][], it essentially imply four freedoms :
+* The freedom to **run** the program for any purpose.
+* The freedom to **study** how the program works, and change it to make it do what you wish.
+* The freedom to **redistribute** copies so you can help your neighbor.
+* The freedom to **improve** the program, and release your improvements (and modified versions in general) to the public, so that the whole community benefits.
 
 <!-- Internal links -->
 
