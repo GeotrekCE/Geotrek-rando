@@ -1,12 +1,14 @@
+# Geotrek-rando documentation
+
 ‹ Back to [README](README.md)
 
-# Settings & customization
+## Settings & customization
 
-## Settings
+### Settings
 
 There are two files in Geotrek-rando managing client side settings:
 
-### `settings.custom.json`
+#### settings.custom.json
 
 > This file should remain a valid [JSON][] file.
 > Remember to check its validity each time you alter it.
@@ -19,7 +21,7 @@ Both files are always loaded by the app, but every rules from the second one wil
 
 _See [JSON settings][] for more details about each available options._
 
-### `_config-custom.scss`
+#### \_config-custom.scss
 
 > This file should remain a valid [SCSS][] file.
 > Remember to check its validity each time you alter it.
@@ -30,11 +32,11 @@ In directory `src/app/config/styles`, as for `settings.*.json` files, there is `
 
 _See [SCSS settings][] for more details about each available options._
 
-## Customization
+### Customization
 
 Beyond settings, you also have ways to customize look & feel but also create new behaviors.
 
-### Templates
+#### Templates
 
 By creating HTML files in `src/app/custom/templates` and [enabling there use in settings](settings-custom-json.md#custom_templates), you have the possibility to use your own markup for some elements of the interface. For example :
 
@@ -43,7 +45,7 @@ By creating HTML files in `src/app/custom/templates` and [enabling there use in 
 
 The filename does not really matter as far as the file stays in this directory.
 
-### Styles
+#### Styles
 
 By creating [SCSS][] files in `src/app/custom/styles` you have the ability to include as many CSS rules as you need.
 Every files you create in this directory will be merged as one during [built process](building.md).
@@ -51,7 +53,7 @@ Every files you create in this directory will be merged as one during [built pro
 **Note:** There are two reserved filename for files in this directory : Do not name your files `_customisation.scss` or `_empty.scss`.
 We suggest you to create a file for each part you alter. (e.g. `custom-menu.scss` or `custom-detail-page.scss`)
 
-### Behaviors
+#### Behaviors
 
 Having your own behavior available for your templates is possible through three files:
 
