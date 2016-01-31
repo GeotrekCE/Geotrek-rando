@@ -1,4 +1,8 @@
-> **This documentation is a work in progress**. Please apologize for non already existing page but don't miss the opportunity to contribute by doing your own pull request.
+> **This documentation is a work in progress**.
+>
+> Please apologize for non already existing page but don't miss the opportunity to contribute by doing [your own pull request](https://help.github.com/articles/creating-a-pull-request/).
+>
+> Go further by learning how to [contribute][] to the main development.
 
 # Documentation
 
