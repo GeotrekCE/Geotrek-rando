@@ -1,4 +1,16 @@
 
+2.7.5 / 2016-02-01
+==================
+
+**New features**
+
+  * Init a new browsable documentation
+  * Add a PNG version of main logo
+
+**Bug fixes**
+
+  * force warning panel to close on route change
+
 2.7.4 / 2016-01-29
 ==================
 
