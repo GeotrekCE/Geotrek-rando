@@ -20,7 +20,7 @@
                 <img        ng-if="!(result.properties.category.pictogram | isSVG)" ng-src="{{::result.properties.category.pictogram}}" ng-alt="{{::category.label}}">
             </div>
             <a class="result-action result-map-focus" ng-click="mapFocusOn(result)" href="#"><ng-include src="'./images/icons/gps-symbol.svg'"></ng-include></a>
-            <a class="result-action result-view-details" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: result.properties.slug})">{{ 'SHOW_MORE' | translate }}</a>
+            <a class="result-action result-view-details" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: result.properties.slug})">{{:: 'SHOW_MORE' | translate }}</a>
         </div>
 
         <h1 class="result-title title">
@@ -40,7 +40,7 @@
         </div>
 
         <div class="result-themes themes" ng-if="result.properties.themes.length > 0" ng-class="{'is-approved': result.properties.approved}">
-            <div class="result-themes-label">{{ 'THEMES' | translate }}</div>
+            <div class="result-themes-label">{{:: 'THEMES' | translate }}</div>
             <ul class="result-themes-list">
                 <li class="result-theme" ng-repeat="theme in result.properties.themes track by theme.label">
                     <ng-include ng-if="theme.pictogram | isSVG" src="theme.pictogram"></ng-include>
