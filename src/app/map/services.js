@@ -1008,6 +1008,8 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                                     self.resultsVisibility();
                                     self.map.on('moveend', self.resultsVisibility);
                                     self.loadingMarkers = false;
+                                } else {
+                                    self.map.off('moveend', self.resultsVisibility);
                                 }
                             }
                         )
