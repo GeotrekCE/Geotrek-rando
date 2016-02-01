@@ -212,6 +212,7 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
             }
         ),
         $rootScope.$on('resultsUpdated', function (name, forceRefresh) {
+            forceRefresh = !!forceRefresh;
             if ($state.current.name === 'layout.root') {
                 updateMapWithResults(globalSettings.UPDATE_MAP_ON_FILTER, forceRefresh);
             }
