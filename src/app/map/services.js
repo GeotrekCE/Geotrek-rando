@@ -3,6 +3,7 @@
 function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService, popupService, layersService, boundsLimitService) {
 
     var self = this;
+    var displayingResults = false;
 
     this.loadingMarkers = false;
 
@@ -873,6 +874,9 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
 
     // Add treks geojson to the map
     this.displayResults = function (results, fitBounds, forceRefresh) {
+
+        if (displayingResults) return displayingResults;
+
         var deferred = $q.defer();
         var counter  = 0;
 
@@ -1019,12 +1023,14 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
 
             $q.all(promiseArray).finally(function () {
                 deferred.resolve(true);
+                displayingResults = false;
             });
 
         } else {
             deferred.resolve(false);
+            displayingResults = false;
         }
-
+        displayingResults = deferred.promise;
         return deferred.promise;
     };
 
