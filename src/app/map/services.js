@@ -999,10 +999,14 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                                         }
                                     });
                                 }
+
                                 currentLayer.addLayer(layer);
-                                self._clustersLayer.addLayer(currentLayer);
 
                                 if (currentCount === _.size(results)) {
+
+                                    self._clustersLayer.addLayer(self._treksMarkersLayer);
+                                    self._clustersLayer.addLayer(self._touristicsMarkersLayer);
+
                                     self.map.invalidateSize();
 
                                     if (fitBounds === true) {
