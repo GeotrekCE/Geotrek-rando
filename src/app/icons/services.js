@@ -326,23 +326,11 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         if (self.icons_liste[iconName].markup) {
             deferred.resolve(self.icons_liste[iconName].markup);
         } else {
-            var requests = $resource(url, {}, {
-                query: {
-                    method: 'GET',
-                    cache: true
-                }
-            });
-
-            requests.query().$promise
-                .then(function (icon) {
-                    var finalIcon = '';
-                    _.each(icon, function(el, index) {
-                        if (!isNaN(parseInt(index, 10))) {
-                            finalIcon += el;
-                        }
-                    });
-                    self.icons_liste[iconName].markup = finalIcon;
-                    deferred.resolve(finalIcon);
+            $http({url: url})
+                .then(function (response) {
+                    var icon = response.data;
+                    self.icons_liste[iconName].markup = icon;
+                    deferred.resolve(icon);
                     self.icons_query[url] = false;
                 });
         }
