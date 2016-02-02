@@ -1,4 +1,26 @@
 
+2.7.6 / 2016-02-02
+==================
+
+**Enhancements**
+
+  * Debounce contents getter calls && use a storage for each language
+  * Avoid a useless object merge
+  * Add marker layers only once to clustering layers
+  * Add `ngNonBindable` for #map
+  * Use bind-once for result items cards fields
+  * Use $http service instead of $resource for fetching SVG
+  * Debounce getSVGIcon calls
+  * Debounce getCategoriesIcons calls
+  * Debounce displayResults calls
+  * Use onetime binding for results list items translations
+  * Remove useless listener on nearMarkers
+  * Avoid multiple event bind for resultsVisibility
+
+**Bug fixes**
+
+  * Quick fix: avoid `undefined` value for forceRefresh arg
+
 2.7.5 / 2016-02-01
 ==================
 
