@@ -3,6 +3,7 @@
 function iconsService($resource, $q, $http, $filter, globalSettings, categoriesService, poisService, servicesService) {
 
     var self = this;
+    var getCategoriesIconsPending = false;
 
     this.icons_liste = {
         default_icon: {},
@@ -96,6 +97,9 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
 
     this.getCategoriesIcons = function () {
 
+        // Early return previous promise if allready existing
+        if (getCategoriesIconsPending) return getCategoriesIconsPending;
+
         var deferred = $q.defer();
 
         categoriesService.getCategories()
@@ -127,19 +131,25 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
                                     self.categoriesIcons[category.id] = finalIcon;
                                         if (currentCounter === _.size(categories)) {
                                             deferred.resolve(self.categoriesIcons);
+                                            setTimeout(function () {
+                                                getCategoriesIconsPending = false;
+                                            }, 250);
                                         }
                                 });
                         } else {
                             self.categoriesIcons[category.id] = '<img src="' + category.pictogram + '" />';
                             if (currentCounter === _.size(categories)) {
                                 deferred.resolve(self.categoriesIcons);
+                                setTimeout(function () {
+                                    getCategoriesIconsPending = false;
+                                }, 250);
                             }
                         }
 
                     });
                 }
             );
-
+        getCategoriesIconsPending = deferred.promise;
         return deferred.promise;
     };
 
