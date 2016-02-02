@@ -3,6 +3,8 @@
 function contentsService(globalSettings, settingsFactory, translationService, $resource, $q) {
 
     var self = this;
+    self._contentsList = [];
+    var getContentsPending = false;
 
     this.refactorContent = function (contentsData) {
 
@@ -66,13 +68,17 @@ function contentsService(globalSettings, settingsFactory, translationService, $r
         return contentsData;
     };
 
-    this.getContents = function (forceRefresh) {
+    this.getContents = function () {
+
+        if (getContentsPending) return getContentsPending;
 
         var deferred = $q.defer();
+        var lang = translationService.getCurrentLang();
 
-        if (self._contentsList && !forceRefresh) {
+        if (self._contentsList[lang]) {
 
-            deferred.resolve(self._contentsList);
+            deferred.resolve(self._contentsList[lang]);
+            getContentsPending = false;
 
         } else {
             var currentLang = translationService.getCurrentLang();
@@ -89,12 +95,14 @@ function contentsService(globalSettings, settingsFactory, translationService, $r
                 .then(function (file) {
                     var data = angular.fromJson(file);
                     var refactoredContents = self.refactorContent(data);
-                    self._contentsList = refactoredContents;
+                    self._contentsList[lang] = refactoredContents;
                     deferred.resolve(refactoredContents);
+                    getContentsPending = false;
                 });
 
         }
 
+        getContentsPending = deferred.promise;
         return deferred.promise;
 
     };
@@ -104,6 +112,8 @@ function contentsService(globalSettings, settingsFactory, translationService, $r
 function eventsService(globalSettings, settingsFactory, translationService, $resource, $q) {
 
     var self = this;
+    self._eventsList = [];
+    var getEventsPending = false;
 
     this.refactorEvents = function (eventsData) {
 
@@ -166,13 +176,17 @@ function eventsService(globalSettings, settingsFactory, translationService, $res
         return eventsData;
     };
 
-    this.getEvents = function (forceRefresh) {
+    this.getEvents = function () {
+
+        if (getEventsPending) return getEventsPending;
 
         var deferred = $q.defer();
+        var lang = translationService.getCurrentLang();
 
-        if (self._eventsList && !forceRefresh) {
+        if (self._eventsList[lang]) {
 
-            deferred.resolve(self._eventsList);
+            deferred.resolve(self._eventsList[lang]);
+            getEventsPending = false;
 
         } else {
             var currentLang = translationService.getCurrentLang();
@@ -189,12 +203,14 @@ function eventsService(globalSettings, settingsFactory, translationService, $res
                 .then(function (file) {
                     var data = angular.fromJson(file);
                     var refactoredEvents = self.refactorEvents(data);
-                    self._eventsList = refactoredEvents;
+                    self._eventsList[lang] = refactoredEvents;
                     deferred.resolve(refactoredEvents);
+                    getEventsPending = false;
                 });
 
         }
 
+        getEventsPending = deferred.promise;
         return deferred.promise;
 
     };

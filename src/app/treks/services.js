@@ -3,6 +3,8 @@
 function treksService(globalSettings, settingsFactory, translationService, $resource, $q) {
 
     var self = this;
+    self._trekList = [];
+    var getTreksPending = false;
 
     this.refactorTrek = function (treksData) {
         // Parse trek pictures, and change their URL
@@ -118,13 +120,17 @@ function treksService(globalSettings, settingsFactory, translationService, $reso
         return treksData;
     };
 
-    this.getTreks = function (forceRefresh) {
+    this.getTreks = function () {
+
+        if (getTreksPending) return getTreksPending;
 
         var deferred = $q.defer();
+        var lang = translationService.getCurrentLang();
 
-        if (self._trekList && !forceRefresh) {
+        if (self._trekList[lang]) {
 
-            deferred.resolve(self._trekList);
+            deferred.resolve(self._trekList[lang]);
+            getTreksPending = false;
 
         } else {
             var currentLang = translationService.getCurrentLang();
@@ -140,12 +146,13 @@ function treksService(globalSettings, settingsFactory, translationService, $reso
                 .then(function (file) {
                     var data = angular.fromJson(file);
                     var refactoredTreks = self.refactorTrek(data);
-                    self._trekList = refactoredTreks;
+                    self._trekList[lang] = refactoredTreks;
                     deferred.resolve(refactoredTreks);
+                    getTreksPending = false;
                 });
 
         }
-
+        getTreksPending = deferred.promise;
         return deferred.promise;
 
     };
