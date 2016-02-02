@@ -3,21 +3,21 @@
         class="result results-item category-{{::result.properties.category.id}}"
         id="result-category-{{::result.uid}}"
         ng-repeat="result in elements | filter: filterById | orderBy: ['properties.begin_date', 'properties.name'] track by result.luid"
-        ng-class="{'no-theme': result.properties.themes.length === 0}">
+        ng-class="::{'no-theme': result.properties.themes.length === 0}">
 
         <div class="result-fav-control fav-or-not" ng-click="toggleFavorites(result)" ng-class="{isFav: isInFavorites(result)}">
             <i class="result-fav-icon fa fa-{{::$root.favoriteIcon}}"></i>
         </div>
 
         <div class="result-visual">
-            <img ng-if="result.properties.pictures[0]" ng-src="{{::result.properties.pictures[0].url}}" ng-alt="{{::result.properties.pictures[0].title}}">
-            <img ng-if="!result.properties.pictures[0]" ng-src="{{::$root.placeHolderImage}}" alt="placeholder image">
+            <img ng-if=::"result.properties.pictures[0]" ng-src="{{::result.properties.pictures[0].url}}" ng-alt="{{::result.properties.pictures[0].title}}">
+            <img ng-if=::"!result.properties.pictures[0]" ng-src="{{::$root.placeHolderImage}}" alt="placeholder image">
         </div>
 
         <div class="result-actions">
             <div class="result-action result-category-icon">
-                <ng-include ng-if="result.properties.category.pictogram | isSVG"  src="result.properties.category.pictogram"></ng-include>
-                <img        ng-if="!(result.properties.category.pictogram | isSVG)" ng-src="{{::result.properties.category.pictogram}}" ng-alt="{{::category.label}}">
+                <ng-include ng-if=::"result.properties.category.pictogram | isSVG"  src="result.properties.category.pictogram"></ng-include>
+                <img        ng-if=::"!(result.properties.category.pictogram | isSVG)" ng-src="{{::result.properties.category.pictogram}}" ng-alt="{{::category.label}}">
             </div>
             <a class="result-action result-map-focus" ng-click="mapFocusOn(result)" href="#"><ng-include src="'./images/icons/gps-symbol.svg'"></ng-include></a>
             <a class="result-action result-view-details" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: result.properties.slug})">{{:: 'SHOW_MORE' | translate }}</a>
@@ -28,30 +28,30 @@
         </h1>
 
         <div class="result-infos infos">
-            <span class="begin-date" ng-if="result.properties.begin_date">{{::result.properties.begin_date | date:'dd/MM/yyyy'}}</span>
-            <span class="end-date"   ng-if="result.properties.end_date && result.properties.begin_date !== result.properties.end_date">{{::result.properties.end_date | date:'dd/MM/yyyy'}}</span>
-            <span class="cities"     ng-if="result.properties.cities[0]">{{::result.properties.cities[0].name}}</span>
-            <span class="duration"   ng-if="result.properties.duration_pretty">{{::result.properties.duration_pretty}}</span>
-            <span class="ascent"     ng-if="result.properties.ascent">{{::'ASCENT' | translate}} {{result.properties.ascent}}&nbsp;m</span>
-            <span class="difficulty" ng-if="result.properties.difficulty">{{::result.properties.difficulty.label}}</span>
-            <span class="type1"      ng-if="result.properties.type1[0] && result.properties.contentType !== 'trek'">{{::result.properties.type1[0].name}}</span>
-            <span class="type2"      ng-if="result.properties.type2[0] && result.properties.contentType !== 'trek'">{{::result.properties.type2[0].name}}</span>
-            <span class="target"     ng-if="result.properties.target_audience">{{::result.properties.target_audience}}</span>
+            <span class="begin-date" ng-if="::result.properties.begin_date">{{::result.properties.begin_date | date:'dd/MM/yyyy'}}</span>
+            <span class="end-date"   ng-if="::result.properties.end_date && result.properties.begin_date !== result.properties.end_date">{{::result.properties.end_date | date:'dd/MM/yyyy'}}</span>
+            <span class="cities"     ng-if="::result.properties.cities[0]">{{::result.properties.cities[0].name}}</span>
+            <span class="duration"   ng-if="::result.properties.duration_pretty">{{::result.properties.duration_pretty}}</span>
+            <span class="ascent"     ng-if="::result.properties.ascent">{{::'ASCENT' | translate}} {{result.properties.ascent}}&nbsp;m</span>
+            <span class="difficulty" ng-if="::result.properties.difficulty">{{::result.properties.difficulty.label}}</span>
+            <span class="type1"      ng-if="::result.properties.type1[0] && result.properties.contentType !== 'trek'">{{::result.properties.type1[0].name}}</span>
+            <span class="type2"      ng-if="::result.properties.type2[0] && result.properties.contentType !== 'trek'">{{::result.properties.type2[0].name}}</span>
+            <span class="target"     ng-if="::result.properties.target_audience">{{::result.properties.target_audience}}</span>
         </div>
 
         <div class="result-themes themes" ng-if="result.properties.themes.length > 0" ng-class="{'is-approved': result.properties.approved}">
             <div class="result-themes-label">{{:: 'THEMES' | translate }}</div>
             <ul class="result-themes-list">
                 <li class="result-theme" ng-repeat="theme in result.properties.themes track by theme.label">
-                    <ng-include ng-if="theme.pictogram | isSVG" src="theme.pictogram"></ng-include>
-                    <img ng-if="!(theme.pictogram | isSVG)" ng-src="{{::theme.pictogram}}" ng-alt="{{::theme.label}}">
+                    <ng-include ng-if="::theme.pictogram | isSVG" src="theme.pictogram"></ng-include>
+                    <img ng-if="::!(theme.pictogram | isSVG)" ng-src="{{::theme.pictogram}}" ng-alt="{{::theme.label}}">
                 </li>
             </ul>
         </div>
 
-        <div class="approved" ng-if="result.properties.approved">
-            <ng-include ng-if="approved | isSVG" src="approved"></ng-include>
-            <img ng-if="!(approved | isSVG)" ng-src="{{::approved}}" ng-alt="{{::approvedLabel}}">
+        <div class="approved" ng-if="::result.properties.approved">
+            <ng-include ng-if="::approved | isSVG" src="approved"></ng-include>
+            <img ng-if="::!(approved | isSVG)" ng-src="{{::approved}}" ng-alt="{{::approvedLabel}}">
         </div>
 
     </li>
