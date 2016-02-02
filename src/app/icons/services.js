@@ -5,6 +5,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
     var self = this;
     var getCategoriesIconsPending = false;
 
+    this.icons_query = {};
     this.icons_liste = {
         default_icon: {},
 
@@ -318,6 +319,9 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
     };
 
     this.getSVGIcon = function (url, iconName) {
+
+        if (self.icons_query[url]) return self.icons_query[url];
+
         var deferred = $q.defer();
         if (self.icons_liste[iconName].markup) {
             deferred.resolve(self.icons_liste[iconName].markup);
@@ -339,9 +343,11 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
                     });
                     self.icons_liste[iconName].markup = finalIcon;
                     deferred.resolve(finalIcon);
+                    self.icons_query[url] = false;
                 });
         }
 
+        self.icons_query[url] = deferred.promise;
         return deferred.promise;
     };
 
