@@ -21,7 +21,8 @@ module.exports = {
         "angular": true,
         "jQuery": true,
         "L": true,
-        "_": true
+        "_": true,
+        "simpleEach": true
     },
     "extends": "eslint:recommended"
 };
