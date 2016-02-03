@@ -540,13 +540,15 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
 
     self.testByString = function (element, query) {
 
-        var result = false;
-        element = _.values(element);
+        var result  = false;
+        var qLength = query.length;
+        var regex   = new RegExp(query, 'gi');
+        element     = _.values(element);
 
         angular.forEach(element, function (property) {
+            var propLength = property.length;
             if (!result) {
-                if (typeof property === 'string') {
-                    var regex = new RegExp(query, 'gi');
+                if (typeof property === 'string' && propLength > qLength) {
                     if (property.match(regex) !== null) {
                         result = true;
                     }
