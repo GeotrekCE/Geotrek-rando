@@ -1,5 +1,7 @@
 'use strict';
 
+window.simpleEach = require('./vendors/scripts/simple-each.js');
+
 var dependencies = [
     // OUR SUBMODULES
     'rando.config',
