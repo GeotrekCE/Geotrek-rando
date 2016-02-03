@@ -198,6 +198,17 @@
     }
 }
 
+.result-map-focus {
+    img {
+        position: absolute;
+        max-width: 70%;
+        max-height: 70%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
 .result-view-details {
         width: auto;
         max-width: 40px;
