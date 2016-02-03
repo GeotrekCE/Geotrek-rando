@@ -4,7 +4,7 @@ function translationService(globalSettings) {
     var self = this,
         storageName = globalSettings.PLATFORM_ID + '-language';
 
-    this.getDefaultLang = function () {
+    this.getDefaultLang = function getDefaultLang () {
 
         var favoriteLang = self.getFavoriteLang();
 
@@ -33,18 +33,18 @@ function translationService(globalSettings) {
         return self.currentLang;
     };
 
-    this.getCurrentLang = function () {
+    this.getCurrentLang = function getCurrentLang () {
         if (self.currentLang) {
             return self.currentLang;
         }
         return self.getDefaultLang();
     };
 
-    this.setCurrentLang = function (lang) {
+    this.setCurrentLang = function setCurrentLang (lang) {
         self.currentLang = lang;
     };
 
-    this.getAllLang = function () {
+    this.getAllLang = function getAllLang () {
         if (!self.languages) {
             self.languages = [];
             var enabledLangs = globalSettings.ENABLED_LANGUAGES;
@@ -63,7 +63,7 @@ function translationService(globalSettings) {
         return self.languages;
     };
 
-    this.getLang = function (langCode) {
+    this.getLang = function getLang (langCode) {
         var languages = this.getAllLang();
 
         for (var i = languages.length - 1; i >= 0; i--) {
@@ -76,7 +76,7 @@ function translationService(globalSettings) {
         return false;
     };
 
-    this.getFavoriteLang = function () {
+    this.getFavoriteLang = function getFavoriteLang () {
         if (!localStorage.getItem(storageName)) {
             return false;
         }
@@ -94,7 +94,7 @@ function translationService(globalSettings) {
         }
     };
 
-    this.setFavoriteLang = function () {
+    this.setFavoriteLang = function setFavoriteLang () {
         if (self.currentLang) {
             localStorage.setItem(storageName, self.currentLang);
         }

@@ -4,7 +4,7 @@ function servicesService($resource, $q, globalSettings, settingsFactory, transla
 
     var self = this;
 
-    this.refactorServices = function (servicesData) {
+    this.refactorServices = function refactorServices (servicesData) {
         // Parse trek pictures, and change their URL
         _.forEach(servicesData.features, function (service) {
 
@@ -16,7 +16,7 @@ function servicesService($resource, $q, globalSettings, settingsFactory, transla
         return servicesData;
     };
 
-    this.getServices = function (forceRefresh) {
+    this.getServices = function getServices (forceRefresh) {
 
         var deferred = $q.defer();
 
@@ -49,7 +49,7 @@ function servicesService($resource, $q, globalSettings, settingsFactory, transla
 
     };
 
-    this.getServicesFromElement = function (elementId) {
+    this.getServicesFromElement = function getServicesFromElement (elementId) {
 
         var deferred = $q.defer();
         var currentLang = translationService.getCurrentLang();

@@ -4,7 +4,7 @@ function poisService($resource, $q, globalSettings, settingsFactory, translation
 
     var self = this;
 
-    this.refactorPois = function (poisData) {
+    this.refactorPois = function refactorPois (poisData) {
         // Parse trek pictures, and change their URL
         _.forEach(poisData.features, function (poi) {
 
@@ -35,7 +35,7 @@ function poisService($resource, $q, globalSettings, settingsFactory, translation
         return poisData;
     };
 
-    this.getPois = function (forceRefresh) {
+    this.getPois = function getPois (forceRefresh) {
 
         var deferred = $q.defer();
 
@@ -68,7 +68,7 @@ function poisService($resource, $q, globalSettings, settingsFactory, translation
 
     };
 
-    this.getPoisFromElement = function (elementId) {
+    this.getPoisFromElement = function getPoisFromElement (elementId) {
 
         var deferred = $q.defer();
         var currentLang = translationService.getCurrentLang();

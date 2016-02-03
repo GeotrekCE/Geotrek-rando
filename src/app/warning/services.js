@@ -3,7 +3,7 @@
 function WarningService(translationService, settingsFactory, $resource, $http, $q) {
     var that = this;
 
-    that.getWarningCategories = function (forceRefresh) {
+    that.getWarningCategories = function getWarningCategories (forceRefresh) {
         var deferred = $q.defer();
 
         if (that._warningCategories && !forceRefresh) {
@@ -33,7 +33,7 @@ function WarningService(translationService, settingsFactory, $resource, $http, $
         return deferred.promise;
     };
 
-    that.sendWarning = function (formData) {
+    that.sendWarning = function sendWarning (formData) {
 
         var currentLang = translationService.getCurrentLang();
         var url = settingsFactory.warningSubmitUrl.replace(/\$lang/, currentLang);
@@ -67,7 +67,7 @@ function WarningMapService(globalSettings, utilsFactory, iconsService, layersSer
     //  CALLBACKS
     //
 
-    that.addCallback = function (callbackFunction) {
+    that.addCallback = function addCallback (callbackFunction) {
         if (!that.callbacksArray) {
             that.callbacksArray = [];
         }
@@ -75,11 +75,11 @@ function WarningMapService(globalSettings, utilsFactory, iconsService, layersSer
         that.callbacksArray.push(callbackFunction);
     };
 
-    that.removeCallback = function (callbackIndex) {
+    that.removeCallback = function removeCallback (callbackIndex) {
         that.callbacksArray.splice(callbackIndex, 1);
     };
 
-    that.callCallbacks = function (newLocation) {
+    that.callCallbacks = function callCallbacks (newLocation) {
         that.callbacksArray.forEach(function (callbackFunction) {
 +           callbackFunction(newLocation);
         });
@@ -89,12 +89,12 @@ function WarningMapService(globalSettings, utilsFactory, iconsService, layersSer
     //  MARKERS
     //
 
-    that.setWarningLocation = function (newLocation) {
+    that.setWarningLocation = function setWarningLocation (newLocation) {
         that.warningMarker.setLatLng(newLocation);
         that.callCallbacks(newLocation);
     };
 
-    that.createWarningMarker = function (markerLocation) {
+    that.createWarningMarker = function createWarningMarker (markerLocation) {
         var warningIcon = null;
 
         iconsService.getWarningIcon()
@@ -113,16 +113,16 @@ function WarningMapService(globalSettings, utilsFactory, iconsService, layersSer
     //  CONTROLS
     //
 
-    that.initMapControls = function () {
+    that.initMapControls = function initMapControls () {
         that.setAttribution();
         that.setZoomControlPosition();
     };
 
-    that.setZoomControlPosition = function () {
+    that.setZoomControlPosition = function setZoomControlPosition () {
         that.map.zoomControl.setPosition('topright');
     };
 
-    that.setAttribution = function () {
+    that.setAttribution = function setAttribution () {
         that.map.attributionControl.setPrefix(globalSettings.LEAFLET_CONF.ATTRIBUTION);
     };
 
@@ -130,7 +130,7 @@ function WarningMapService(globalSettings, utilsFactory, iconsService, layersSer
     //  MAP
     //
 
-    that.getMap = function (mapSelector, element) {
+    that.getMap = function getMap (mapSelector, element) {
         if (that.map) {
             return that.map;
         } else {
@@ -138,14 +138,14 @@ function WarningMapService(globalSettings, utilsFactory, iconsService, layersSer
         }
     };
 
-    that.removeMap = function () {
+    that.removeMap = function removeMap () {
         if (that.map) {
             that.map.remove();
             that.map = null;
         }
     };
 
-    that.createMap = function (mapSelector, element) {
+    that.createMap = function createMap (mapSelector, element) {
         that._baseLayers = {
             main: layersService.getMainLayersGroup(),
             satellite: L.tileLayer(

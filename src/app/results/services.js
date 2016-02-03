@@ -4,7 +4,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
 
     var self = this;
 
-    this.getAllResults = function (forceRefresh) {
+    this.getAllResults = function getAllResults (forceRefresh) {
         var deferred = $q.defer(),
             promises = [],
             results = [];
@@ -72,7 +72,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
         return deferred.promise;
     };
 
-    this.getAResultBySlug = function (elementSlug, categorySlug, forceRefresh) {
+    this.getAResultBySlug = function getAResultBySlug (elementSlug, categorySlug, forceRefresh) {
         var deferred = $q.defer();
         var findTrek = true, findContent = true, findEvent = true;
         if (globalSettings.ENABLE_TREKS) {
@@ -131,7 +131,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
         return deferred.promise;
     };
 
-    this.getAResultByID = function (elementID, categoryID, forceRefresh) {
+    this.getAResultByID = function getAResultByID (elementID, categoryID, forceRefresh) {
         var deferred = $q.defer();
         var findTrek = true, findContent = true, findEvent = true;
 
@@ -190,7 +190,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
         return deferred.promise;
     };
 
-    this.getRandomContentsByCategory = function (category, quantity) {
+    this.getRandomContentsByCategory = function getRandomContentsByCategory (category, quantity) {
         var deferred = $q.defer();
         var parsedResults = [];
         var randomResults = [];

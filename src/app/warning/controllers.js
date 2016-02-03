@@ -4,7 +4,7 @@ function WarningPanelController($scope, $rootScope, WarningService, WarningMapSe
 
     var onMap = false;
 
-    $scope.initWarningPanel = function () {
+    $scope.initWarningPanel = function initWarningPanel () {
         $scope.showWarningPanel = true;
         if ($rootScope.mapIsShown) {
             onMap = true;
@@ -18,7 +18,7 @@ function WarningPanelController($scope, $rootScope, WarningService, WarningMapSe
         $scope.warning.location = newLocation;
     }
 
-    $scope.close = function () {
+    $scope.close = function close () {
         if (onMap) {
             $rootScope.mapIsShown = true;
         }
@@ -27,7 +27,7 @@ function WarningPanelController($scope, $rootScope, WarningService, WarningMapSe
         $scope.warning = null;
     };
 
-    $scope.sendWarning = function () {
+    $scope.sendWarning = function sendWarning () {
         if ($scope.warningForm.$valid) {
             WarningService.sendWarning($scope.warning)
                 .then(function (answer) {

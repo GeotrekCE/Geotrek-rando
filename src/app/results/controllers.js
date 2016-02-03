@@ -20,7 +20,7 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
 
     }
 
-    $scope.hoverLayerElement = function (currentElement, state) {
+    $scope.hoverLayerElement = function hoverLayerElement (currentElement, state) {
         var layerEquivalent = document.querySelectorAll('.layer-category-' + currentElement.properties.category.id + '-' + currentElement.id);
 
         if (layerEquivalent.length === 0) {

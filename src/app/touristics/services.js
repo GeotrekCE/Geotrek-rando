@@ -6,7 +6,7 @@ function contentsService(globalSettings, settingsFactory, translationService, $r
     self._contentsList = [];
     var getContentsPending = false;
 
-    this.refactorContent = function (contentsData) {
+    this.refactorContent = function refactorContent (contentsData) {
 
         // Parse content pictures, and change their URL
         _.forEach(contentsData.features, function (content) {
@@ -68,7 +68,7 @@ function contentsService(globalSettings, settingsFactory, translationService, $r
         return contentsData;
     };
 
-    this.getContents = function () {
+    this.getContents = function getContents () {
 
         if (getContentsPending) return getContentsPending;
 
@@ -115,7 +115,7 @@ function eventsService(globalSettings, settingsFactory, translationService, $res
     self._eventsList = [];
     var getEventsPending = false;
 
-    this.refactorEvents = function (eventsData) {
+    this.refactorEvents = function refactorEvents (eventsData) {
 
         // Parse trEvent pictures, and change their URL
         _.forEach(eventsData.features, function (trEvent) {
@@ -176,7 +176,7 @@ function eventsService(globalSettings, settingsFactory, translationService, $res
         return eventsData;
     };
 
-    this.getEvents = function () {
+    this.getEvents = function getEvents () {
 
         if (getEventsPending) return getEventsPending;
 
