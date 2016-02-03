@@ -6,7 +6,7 @@ function HomeController($scope, $rootScope, $state, translationService, categori
         $rootScope.activeFiltersTags = filtersService.getTagFilters();
     }
 
-    $scope.initHome = function () {
+    $scope.initHome = function initHome () {
         var currentLang = translationService.getCurrentLang();
         if (globalSettings.HOME_TEMPLATE_FILE[currentLang]) {
             $scope.homeTemplate = 'app/custom/templates/' + globalSettings.HOME_TEMPLATE_FILE[currentLang];
@@ -15,16 +15,16 @@ function HomeController($scope, $rootScope, $state, translationService, categori
         }
     };
 
-    $scope.toggleHome = function () {
+    $scope.toggleHome = function toggleHome () {
         $rootScope.showHome = !$rootScope.showHome;
     };
 
-    $scope.disableHomePage = function () {
+    $scope.disableHomePage = function disableHomePage () {
         homeService.setChoice();
         $scope.toggleHome();
     };
 
-    $scope.accessSpecificCategory = function (currentCategory) {
+    $scope.accessSpecificCategory = function accessSpecificCategory (currentCategory) {
         $state.go('layout.root');
         if (typeof currentCategory !== 'object') {
             currentCategory = [currentCategory];

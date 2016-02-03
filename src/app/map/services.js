@@ -12,15 +12,15 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
     //
     this.markers = [];
 
-    this.getMarkers = function () {
+    this.getMarkers = function getMarkers () {
         return this.markers;
     };
 
-    this.setMarkers = function (markers) {
+    this.setMarkers = function setMarkers (markers) {
         this.markers = markers;
     };
 
-    this.addGeoServices = function (element, forceRefresh) {
+    this.addGeoServices = function addGeoServices (element, forceRefresh) {
         var deferred = $q.defer();
 
         var controlServices = L.control.backgroundLayers(
@@ -73,7 +73,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         return deferred.promise;
     };
 
-    this.createPOISFromElement = function (element, forceRefresh) {
+    this.createPOISFromElement = function createPOISFromElement (element, forceRefresh) {
         var deferred = $q.defer(),
             promises = [],
             startPoint = utilsFactory.getStartPoint(element);
@@ -206,7 +206,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         return deferred.promise;
     };
 
-    this.createElementsMarkers = function (elements, type) {
+    this.createElementsMarkers = function createElementsMarkers (elements, type) {
         var startPoint = [];
         elements.forEach(function (element) {
             startPoint = utilsFactory.getStartPoint(element);
@@ -247,7 +247,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         });
     };
 
-    this.createLayerFromElement = function (element, type, elementLocation, forceRefresh) {
+    this.createLayerFromElement = function createLayerFromElement (element, type, elementLocation, forceRefresh) {
         var deferred = $q.defer();
         var popupSources = {};
         if (type === "geojson" && element.geometry.type !== 'MultiPoint') {
@@ -344,7 +344,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
     //
     //
 
-    this.initMapControls = function () {
+    this.initMapControls = function initMapControls () {
         this.setViewPortFilteringControl();
         this.setAttribution();
         this.setZoomControlPosition();
@@ -357,22 +357,22 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         return this;
     };
 
-    this.setScale = function () {
+    this.setScale = function setScale () {
         L.control.scale({imperial: false, position: 'bottomright'}).addTo(this.map);
     };
 
-    this.setZoomControlPosition = function () {
+    this.setZoomControlPosition = function setZoomControlPosition () {
         this.map.zoomControl.setPosition('topright');
     };
 
-    this.setFullScreenControl = function () {
+    this.setFullScreenControl = function setFullScreenControl () {
         L.control.fullscreen({
             position: 'topright',
             title: 'Fullscreen'
         }).addTo(this.map);
     };
 
-    this.createResetViewButton = function () {
+    this.createResetViewButton = function createResetViewButton () {
         /**
          * Create and attach the map control button allowing to reset pan/zoom to the main loaded content
          * @return {Oject} Map object
@@ -408,14 +408,14 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
             }
         });
 
-        L.control.resetview = function () {
+        L.control.resetview = function resetview () {
             return new L.Control.Resetview();
         };
 
         L.control.resetview().addTo(this.map);
     };
 
-    this.createLayerSwitch = function () {
+    this.createLayerSwitch = function createLayerSwitch () {
 
         var permanentTileLayersName   = globalSettings.PERMANENT_TILELAYERS_NAME  || 'Default';
         var orthophotoTileLayersName  = globalSettings.ORTHOPHOTO_TILELAYERS_NAME || 'Satellite';
@@ -439,7 +439,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         return true;
     };
 
-    this.setViewPortFilteringControl = function () {
+    this.setViewPortFilteringControl = function setViewPortFilteringControl () {
         L.Control.ViewportFilter = L.Control.extend({
             options: {
                 position: 'bottomleft'
@@ -464,7 +464,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         this.map.addControl(this.ViewportFilterControl);
     };
 
-    this.setMinimap = function () {
+    this.setMinimap = function setMinimap () {
         if (globalSettings.ACTIVE_MINIMAP) {
             var miniMapOptions = {
                 toggleDisplay: true,
@@ -487,11 +487,11 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         }
     };
 
-    this.setAttribution = function () {
+    this.setAttribution = function setAttribution () {
         this.map.attributionControl.setPrefix(globalSettings.LEAFLET_CONF.ATTRIBUTION);
     };
 
-    this.setPositionMarker = function () {
+    this.setPositionMarker = function setPositionMarker () {
 
         // Pulsing marker inspired by
         // http://blog.thematicmapping.org/2014/06/real-time-tracking-with-spot-and-leafet.html
@@ -509,12 +509,12 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
     // CUSTOM MIXINS //////////////////////////////
     //
     //
-    this.initCustomsMixins = function () {
+    this.initCustomsMixins = function initCustomsMixins () {
         this.addMapLayersMixin();
         this.topPadding();
     };
 
-    this.addMapLayersMixin = function () {
+    this.addMapLayersMixin = function addMapLayersMixin () {
         var LayerSwitcherMixin = {
 
             isShowingLayer: function (name) {
@@ -538,8 +538,8 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         L.Map.include(LayerSwitcherMixin);
     };
 
-    this.topPadding = function () {
-        L.LatLngBounds.prototype.padTop = function (bufferRatio) {
+    this.topPadding = function topPadding () {
+        L.LatLngBounds.prototype.padTop = function padTop (bufferRatio) {
             var sw = this._southWest,
                 ne = this._northEast,
                 heightBuffer = Math.abs(sw.lat - ne.lat) * bufferRatio;
@@ -558,11 +558,11 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
     //
     //
 
-    this.invalidateSize = function () {
+    this.invalidateSize = function invalidateSize () {
         self.map.invalidateSize();
     };
 
-    this.createLayer = function () {
+    this.createLayer = function createLayer () {
 
         var layer = new L.LayerGroup();
 
@@ -570,7 +570,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
 
     };
 
-    this.createClusterLayer = function () {
+    this.createClusterLayer = function createClusterLayer () {
 
         var clusterLayer = new L.MarkerClusterGroup({
             showCoverageOnHover: false,
@@ -584,7 +584,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
 
     };
 
-    this.createPOIsLayer = function () {
+    this.createPOIsLayer = function createPOIsLayer () {
 
         var clusterLayer = new L.MarkerClusterGroup({
             showCoverageOnHover: false,
@@ -598,7 +598,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
 
     };
 
-    this.createNearLayer = function () {
+    this.createNearLayer = function createNearLayer () {
 
         var clusterLayer = new L.MarkerClusterGroup({
             showCoverageOnHover: false,
@@ -612,7 +612,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
 
     };
 
-    this.createChildLayer = function () {
+    this.createChildLayer = function createChildLayer () {
 
         var clusterLayer = new L.MarkerClusterGroup({
             showCoverageOnHover: false,
@@ -626,14 +626,14 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
 
     };
 
-    this.createGeoJSONLayer = function () {
+    this.createGeoJSONLayer = function createGeoJSONLayer () {
 
         var layer = new L.geoJson();
 
         return layer;
     };
 
-    this.clearAllLayers = function () {
+    this.clearAllLayers = function clearAllLayers () {
         // Remove all markers so the displayed markers can fit the search results
         self._clustersLayer.clearLayers();
         self._poisMarkersLayer.clearLayers();
@@ -658,7 +658,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
      * @param  {Number} padding
      * @return {Object} Map object
      */
-    this.updateBounds = function (layers, padding, fitBounds) {
+    this.updateBounds = function updateBounds (layers, padding, fitBounds) {
         if (fitBounds === false) {
             return self.map;
         }
@@ -691,19 +691,19 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         }
     };
 
-    this.centerOn = function (result) {
+    this.centerOn = function centerOn (result) {
         var coords = utilsFactory.getStartPoint(result);
         self.setCenter(coords);
         return self.map;
     };
 
-    this.setCenter = function (coords) {
+    this.setCenter = function setCenter (coords) {
         self.map.panTo(coords);
         return self.map;
     };
 
 
-    this.highlightPath = function (element, permanent, detailView) {
+    this.highlightPath = function highlightPath (element, permanent, detailView) {
         var hoverStyle = {
                 className:  'layer-highlight'
             },
@@ -727,7 +727,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
 
     };
 
-    this.testMarkersVisibility = function (layer) {
+    this.testMarkersVisibility = function testMarkersVisibility (layer) {
         // Construct an empty list to fill with onscreen markers.
         var inBounds = [],
         // Get the map bounds - the top-left and bottom-right locations.
@@ -752,7 +752,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         return inBounds;
     };
 
-    this.resultsVisibility = function () {
+    this.resultsVisibility = function resultsVisibility () {
         var visibleMarkers = self.testMarkersVisibility(self._clustersLayer),
             visibleGeoJson = self.testMarkersVisibility(self._treksgeoJsonLayer);
 
@@ -789,7 +789,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
 
     };
 
-    this.createElevation = function (result) {
+    this.createElevation = function createElevation (result) {
         /*
          * Load altimetric profile from JSON
          */
@@ -873,7 +873,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
     };
 
     // Add treks geojson to the map
-    this.displayResults = function (results, fitBounds, forceRefresh) {
+    this.displayResults = function displayResults (results, fitBounds, forceRefresh) {
 
         if (displayingResults) return displayingResults;
 
@@ -1039,7 +1039,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         return deferred.promise;
     };
 
-    this.displayDetail = function (result, fitBounds, forceRefresh) {
+    this.displayDetail = function displayDetail (result, fitBounds, forceRefresh) {
         var type = '',
             elementLocation,
             currentLayer;
@@ -1132,7 +1132,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
         }
     };
 
-    this.initMap = function (mapSelector) {
+    this.initMap = function initMap (mapSelector) {
 
         var permanentTileLayers = layersService.getMainLayersGroup();
 
@@ -1221,7 +1221,7 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
 function centerService() {
     this.centers = {};
 
-    this.setCenter = function (LatLng, zoom, context) {
+    this.setCenter = function setCenter (LatLng, zoom, context) {
         this.centers[context] = {
             'LatLng': LatLng,
             'zoom': zoom
@@ -1229,7 +1229,7 @@ function centerService() {
         return this.getCenter(context);
     };
 
-    this.getCenter = function (context) {
+    this.getCenter = function getCenter (context) {
         if (context) {
             return this.centers[context];
         } else {
@@ -1242,7 +1242,7 @@ function boundsLimitService($http) {
 
     var dataStore = {};
 
-    this.check = function (boundsLimit) {
+    this.check = function check (boundsLimit) {
         var dataSet = dataStore[boundsLimit.url] || {};
 
         if (!dataSet.url && boundsLimit.url) {

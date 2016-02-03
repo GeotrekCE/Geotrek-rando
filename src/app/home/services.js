@@ -4,18 +4,18 @@ function homeService(globalSettings) {
 
     var storageName = globalSettings.PLATFORM_ID + '-display-home';
 
-    this.getChoice = function () {
+    this.getChoice = function getChoice () {
         if (localStorage.getItem(storageName)) {
             return true;
         }
         return false;
     };
 
-    this.setChoice = function () {
+    this.setChoice = function setChoice () {
         localStorage.setItem(storageName, 'dont-display');
     };
 
-    this.removeChoice = function () {
+    this.removeChoice = function removeChoice () {
         localStorage.removeItem(storageName);
     };
 }

@@ -4,7 +4,7 @@ function PoisListeController($scope, $rootScope, globalSettings, utilsFactory, $
 
     $scope.poiExpanded = globalSettings.POI_EXPANDED;
 
-    $scope.hoverMarkerPoi = function (currentPoi, state) {
+    $scope.hoverMarkerPoi = function hoverMarkerPoi (currentPoi, state) {
 
         currentPoi.mouseover = state === 'enter';
 
@@ -36,7 +36,7 @@ function PoisListeController($scope, $rootScope, globalSettings, utilsFactory, $
         }
     };
 
-    $scope.showLightbox = function (images, slideIndex) {
+    $scope.showLightbox = function showLightbox (images, slideIndex) {
         var modal = $modal.open({
             templateUrl: '/app/gallery/templates/lightbox-gallery.html',
             controller: 'GalleryController',
@@ -72,7 +72,7 @@ function PoisListeController($scope, $rootScope, globalSettings, utilsFactory, $
         });
     }
 
-    $scope.togglePoi = function (poiId) {
+    $scope.togglePoi = function togglePoi (poiId) {
         if ($scope.isOpened[poiId] === 'closed') {
             document.querySelector('.informations').classList.add('collapsed');
             document.querySelector('.interests').classList.add('expend');
@@ -94,7 +94,7 @@ function PoisListeController($scope, $rootScope, globalSettings, utilsFactory, $
         }
     };
 
-    $scope.openPlayer = function (media) {
+    $scope.openPlayer = function openPlayer (media) {
         var mediaModal = $modal.open({
             templateUrl: 'app/pois/templates/media-modal.html',
             controller: 'MediaController',
@@ -128,7 +128,7 @@ function MediaController(media, $scope, $timeout, $modalInstance) {
 
     }
 
-    $scope.close = function () {
+    $scope.close = function close () {
         $modalInstance.dismiss('close');
     };
 

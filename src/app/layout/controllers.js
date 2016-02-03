@@ -47,7 +47,7 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
     }
 
     $scope.foldResults = false;
-    $scope.resultsPaneToggle = function () {
+    $scope.resultsPaneToggle = function resultsPaneToggle () {
         $scope.foldResults = !$scope.foldResults;
         setTimeout(function () {
             mapService.invalidateSize();
@@ -77,7 +77,7 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
         })
     ];
     //back button function called from back button's ng-click="back()"
-    $rootScope.back = function () {
+    $rootScope.back = function back () {
         if (!$rootScope.previousState_name || $rootScope.previousState_name !== 'layout.root') {
             $state.go('layout.root');
         } else {
@@ -118,7 +118,7 @@ function SidebarDetailController($scope, $rootScope, $modal, $stateParams, $loca
         }
     }
 
-    $scope.toggleFavorites = function (currentElement) {
+    $scope.toggleFavorites = function toggleFavorites (currentElement) {
         var currentAction = '';
         if (favoritesService.isInFavorites(currentElement)) {
             currentAction = 'remove';
@@ -128,7 +128,7 @@ function SidebarDetailController($scope, $rootScope, $modal, $stateParams, $loca
         $rootScope.$broadcast('changeFavorite', {element: currentElement, action: currentAction});
     };
 
-    $scope.show3d = function () {
+    $scope.show3d = function show3d () {
         var modal = $modal.open({
             templateUrl: '/app/3d/templates/rando-3d.html',
             controller: 'Rando3DController',
@@ -140,7 +140,7 @@ function SidebarDetailController($scope, $rootScope, $modal, $stateParams, $loca
         });
     };
 
-    $scope.showWarningPanel = function () {
+    $scope.showWarningPanel = function showWarningPanel () {
         $rootScope.$broadcast('showWarningPanel', {result: $scope.result});
     };
 

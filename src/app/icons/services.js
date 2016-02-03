@@ -96,7 +96,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
 
     };
 
-    this.getCategoriesIcons = function () {
+    this.getCategoriesIcons = function getCategoriesIcons () {
 
         // Early return previous promise if allready existing
         if (getCategoriesIconsPending) return getCategoriesIconsPending;
@@ -154,7 +154,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         return deferred.promise;
     };
 
-    this.getCategoryIcon = function (categoryId) {
+    this.getCategoryIcon = function getCategoryIcon (categoryId) {
 
         var deferred = $q.defer();
 
@@ -172,7 +172,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         return deferred.promise;
     };
 
-    this.getPoiTypesIcons = function (forceRefresh) {
+    this.getPoiTypesIcons = function getPoiTypesIcons (forceRefresh) {
         var deferred = $q.defer();
 
         if (self.poisTypesIcons && !forceRefresh) {
@@ -229,7 +229,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         return deferred.promise;
     };
 
-    this.getAPoiTypeIcon = function (poiTypeId, forceRefresh) {
+    this.getAPoiTypeIcon = function getAPoiTypeIcon (poiTypeId, forceRefresh) {
         var deferred = $q.defer();
         if (self.poisTypesIcons && !forceRefresh) {
             deferred.resolve(self.poisTypesIcons[poiTypeId]);
@@ -245,7 +245,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         return deferred.promise;
     };
 
-    this.getServiceTypesIcons = function (forceRefresh) {
+    this.getServiceTypesIcons = function getServiceTypesIcons (forceRefresh) {
         var deferred = $q.defer();
 
         if (self.servicesTypesIcons && !forceRefresh) {
@@ -302,7 +302,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         return deferred.promise;
     };
 
-    this.getAServiceTypeIcon = function (serviceTypeId, forceRefresh) {
+    this.getAServiceTypeIcon = function getAServiceTypeIcon (serviceTypeId, forceRefresh) {
         var deferred = $q.defer();
         if (self.servicesTypesIcons && !forceRefresh) {
             deferred.resolve(self.servicesTypesIcons[serviceTypeId]);
@@ -318,7 +318,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         return deferred.promise;
     };
 
-    this.getSVGIcon = function (url, iconName) {
+    this.getSVGIcon = function getSVGIcon (url, iconName) {
 
         if (self.icons_query[url]) return self.icons_query[url];
 
@@ -339,7 +339,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         return deferred.promise;
     };
 
-    this.getClusterIcon = function (cluster) {
+    this.getClusterIcon = function getClusterIcon (cluster) {
         return new L.DivIcon({
             iconSize: [40, 40],
             iconAnchor: [20, 20],
@@ -349,7 +349,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         });
     };
 
-    this.getNearClusterIcon = function (cluster) {
+    this.getNearClusterIcon = function getNearClusterIcon (cluster) {
         return new L.DivIcon({
             iconSize: [40, 40],
             iconAnchor: [20, 20],
@@ -359,7 +359,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         });
     };
 
-    this.getChildClusterIcon = function (cluster) {
+    this.getChildClusterIcon = function getChildClusterIcon (cluster) {
         return new L.DivIcon({
             iconSize: [40, 40],
             iconAnchor: [20, 20],
@@ -369,7 +369,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         });
     };
 
-    this.getPOIClusterIcon = function (cluster) {
+    this.getPOIClusterIcon = function getPOIClusterIcon (cluster) {
         var children = cluster.getAllChildMarkers(),
             iconsMarkup = '',
             i = 0,
@@ -398,7 +398,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         });
     };
 
-    this.getRefIcon = function (refElement) {
+    this.getRefIcon = function getRefIcon (refElement) {
         var deferred = $q.defer();
 
         var markup = '<span>' + refElement.order + '</span>';
@@ -412,7 +412,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         return deferred.promise;
     };
 
-    this.getIcon = function (iconName) {
+    this.getIcon = function getIcon (iconName) {
         var deferred = $q.defer();
 
         if (!iconName || !self.icons_liste[iconName]) {
@@ -444,7 +444,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         return deferred.promise;
     };
 
-    this.getPOIIcon = function (poi) {
+    this.getPOIIcon = function getPOIIcon (poi) {
         var deferred = $q.defer(),
             baseIcon = null,
             poiIcon = null,
@@ -504,7 +504,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
 
     };
 
-    this.getServiceIcon = function (service, forceRefresh) {
+    this.getServiceIcon = function getServiceIcon (service, forceRefresh) {
         var deferred = $q.defer(),
             baseIcon = null,
             serviceIcon = null,
@@ -564,7 +564,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
 
     };
 
-    this.getWarningIcon = function () {
+    this.getWarningIcon = function getWarningIcon () {
         var deferred = $q.defer();
 
         self.getSVGIcon(self.icons_liste.poi_base.iconUrl, 'category_base')
@@ -586,7 +586,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         return deferred.promise;
     };
 
-    this.getElementIcon = function (element, forceRefresh) {
+    this.getElementIcon = function getElementIcon (element, forceRefresh) {
 
         var deferred = $q.defer(),
             markerIcon,
