@@ -3,19 +3,26 @@
 function resultsService($q, $location, globalSettings, treksService, contentsService, eventsService) {
 
     var self = this;
+    var getAllResultsPending = false;
 
-    this.getAllResults = function getAllResults (forceRefresh) {
+    this.getAllResults = function getAllResults () {
+
+        if (getAllResultsPending) return getAllResultsPending;
+
+
         var deferred = $q.defer(),
             promises = [],
             results = [];
 
-        if (this._results && !forceRefresh) {
+        if (this._results) {
             deferred.resolve(this._results);
+            getAllResultsPending = false;
+            return deferred.promise;
         }
 
         if (globalSettings.ENABLE_TREKS) {
             promises.push(
-                treksService.getTreks(forceRefresh)
+                treksService.getTreks()
                     .then(
                         function (treks) {
                             _.forEach(treks.features, function (trek) {
@@ -30,7 +37,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
 
         if (globalSettings.ENABLE_TOURISTIC_CONTENT) {
             promises.push(
-                contentsService.getContents(forceRefresh)
+                contentsService.getContents()
                     .then(
                         function (contents) {
                             _.forEach(contents.features, function (content) {
@@ -45,7 +52,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
 
         if (globalSettings.ENABLE_TOURISTIC_EVENTS) {
             promises.push(
-                eventsService.getEvents(forceRefresh)
+                eventsService.getEvents()
                     .then(
                         function (trEvents) {
                             _.forEach(trEvents.features, function (trEvent) {
@@ -66,9 +73,11 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                 function () {
                     self._results = results;
                     deferred.resolve(results);
+                    getAllResultsPending = false;
                 }
             );
 
+        getAllResultsPending = deferred.promise;
         return deferred.promise;
     };
 
