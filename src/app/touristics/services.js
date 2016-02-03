@@ -50,7 +50,10 @@ function contentsService(globalSettings, settingsFactory, translationService, $r
                 content.properties.thumbnail = globalSettings.API_URL + content.properties.thumbnail;
             }
             if (content.properties.pictures) {
-                _.forEach(content.properties.pictures, function (picture) {
+                if (content.properties.pictures.length) {
+                    content.properties.picture = content.properties.pictures[0];
+                }
+                _.forEach(content.properties.pictures, function (picture) {
                     if (picture.url) {
                         picture.url = globalSettings.API_URL + picture.url;
                     }
@@ -157,6 +160,9 @@ function eventsService(globalSettings, settingsFactory, translationService, $res
                 trEvent.properties.thumbnail = globalSettings.API_URL + trEvent.properties.thumbnail;
             }
             if (trEvent.properties.pictures) {
+                if (trEvent.properties.pictures.length) {
+                    trEvent.properties.picture = trEvent.properties.pictures[0];
+                }
                 _.forEach(trEvent.properties.pictures, function (picture) {
                     if (picture.url) {
                         picture.url = globalSettings.API_URL + picture.url;

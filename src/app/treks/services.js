@@ -10,6 +10,9 @@ function treksService(globalSettings, settingsFactory, translationService, $reso
         // Parse trek pictures, and change their URL
         _.forEach(treksData.features, function (trek) {
             if (trek.properties.pictures) {
+                if (trek.properties.pictures.length) {
+                    trek.properties.picture = trek.properties.pictures[0];
+                }
                 _.forEach(trek.properties.pictures, function (picture) {
                     if (picture.url) {
                         picture.url = globalSettings.API_URL + picture.url;
