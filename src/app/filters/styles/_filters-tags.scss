@@ -108,8 +108,10 @@
         }
     }
 
-    svg path {
-        fill: currentColor;
+    svg {
+        path, circle, ellipse {
+            fill: currentColor;
+        }
     }
 }
 

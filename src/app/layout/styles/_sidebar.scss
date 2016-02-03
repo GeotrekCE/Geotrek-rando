@@ -99,7 +99,7 @@
             display: inline-block;
 
             vertical-align: middle;
-            path {
+            path, circle, ellipse {
                 fill: currentColor;
             }
         }
