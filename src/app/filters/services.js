@@ -69,7 +69,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
 
     self.InitCategoriesFilters = function (categories) {
 
-        angular.forEach(categories, function (category) {
+        simpleEach(categories, function (category) {
             if (globalSettings.LIST_EXCLUDE_CATEGORIES.indexOf(category.id.toString()) === -1) {
                 var newCategory = {
                     label: category.label,
@@ -125,7 +125,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     self.initGlobalFilters = function (results) {
 
         if (results) {
-            angular.forEach(results, function (result) {
+            simpleEach(results, function (result) {
                 self.addPropertyToFilters(result.properties.themes, 'themes');
                 self.addPropertyToFilters(result.properties.districts, 'districts');
                 self.addPropertyToFilters(result.properties.cities, 'cities');
@@ -145,7 +145,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             }
 
             if (property.length > 0) {
-                angular.forEach(property, function (value) {
+                simpleEach(property, function (value) {
                     if (!(utilsFactory.idIsInArray(self.filters[propertyName], value)) && value !== undefined) {
                         return self.filters[propertyName].push(value);
                     }
@@ -217,7 +217,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
                 filterValues = [filterValues];
             }
 
-            angular.forEach(filterValues, function (filterId) {
+            simpleEach(filterValues, function (filterId) {
                 if (self.activeFilters[filterName].indexOf(filterId) === -1) {
                     self.activeFilters[filterName].push(filterId);
                 }
@@ -257,43 +257,46 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             if (typeof aFilter === 'string') {
                 aFilter = [aFilter];
             }
+            if (aFilter && aFilter.length) {
+                simpleEach(aFilter, function (aSubFilter) {
+                    if (subtype) {
+                        subId = aSubFilter;
+                    } else {
+                        id = aSubFilter;
+                    }
 
-            angular.forEach(aFilter, function (aSubFilter) {
-
-                if (subtype) {
-                    subId = aSubFilter;
-                } else {
-                    id = aSubFilter;
-                }
-
-                var tempElement = self.getATagFilter(id, type, subtype, subId);
-                if (tempElement) {
-                    var tagElement = {
-                        uid: (tempElement.id || tempElement.code) + '-' + index,
-                        id: tempElement.id || tempElement.code,
-                        label: tempElement.label || tempElement.name,
-                        type: type,
-                        typeId: id,
-                        subtype: subtype,
-                        queryLabel: index
-                    };
-                    tagFilters.push(tagElement);
-                }
-            });
-
-        });
-
-        angular.forEach(tagFilters, function (filterTag) {
-            if (filterTag.subtype) {
-                angular.forEach(tagFilters, function (tag) {
-                    if (tag.typeId === filterTag.typeId && tag.queryLabel === 'categories') {
-                        finalArray.push(filterTag);
+                    var tempElement = self.getATagFilter(id, type, subtype, subId);
+                    if (tempElement) {
+                        var tagElement = {
+                            uid: (tempElement.id || tempElement.code) + '-' + index,
+                            id: tempElement.id || tempElement.code,
+                            label: tempElement.label || tempElement.name,
+                            type: type,
+                            typeId: id,
+                            subtype: subtype,
+                            queryLabel: index
+                        };
+                        tagFilters.push(tagElement);
                     }
                 });
-            } else {
-                finalArray.push(filterTag);
             }
+
         });
+        if (tagFilters && tagFilters.length) {
+            simpleEach(tagFilters, function (filterTag) {
+                if (filterTag.subtype) {
+                    if (tagFilters && tagFilters.length) {
+                        simpleEach(tagFilters, function (tag) {
+                            if (tag.typeId === filterTag.typeId && tag.queryLabel === 'categories') {
+                                finalArray.push(filterTag);
+                            }
+                        });
+                    }
+                } else {
+                    finalArray.push(filterTag);
+                }
+            });
+        }
 
         return finalArray;
     };
@@ -308,48 +311,52 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         } else {
             var filters = self.getFilters();
 
-            angular.forEach(filters[type], function (currentFilter) {
-                if (!subtype) {
-                    if ((currentFilter.id && currentFilter.id.toString() === id.toString()) || (currentFilter.code && currentFilter.code.toString() === id.toString())) {
-                        filter = currentFilter;
-                    }
-                } else {
-
-                    if (subId.indexOf('-') > -1 && currentFilter[subtype]) {
-                        var min = subId.split('-')[0],
-                            max = subId.split('-')[1],
-                            minFilter = null,
-                            maxFilter = null;
-
-                        angular.forEach(currentFilter[subtype].values, function (currentSubFilter) {
-                            if (currentSubFilter.id.toString() === min.toString()) {
-                                minFilter = currentSubFilter;
-                            }
-                            if (currentSubFilter.id.toString() === max.toString()) {
-                                maxFilter = currentSubFilter;
-                            }
-                        });
-
-                        if (minFilter && maxFilter) {
-                            filter = {id: subId};
-                            if (minFilter.id.toString() === maxFilter.id.toString()) {
-                                filter.label = minFilter.label;
-                            } else {
-                                filter.label = minFilter.label + ' -> ' + maxFilter.label;
-                            }
+            if (filters[type] && filters[type].length) {
+                simpleEach(filters[type], function (currentFilter) {
+                    if (!subtype) {
+                        if ((currentFilter.id && currentFilter.id.toString() === id.toString()) || (currentFilter.code && currentFilter.code.toString() === id.toString())) {
+                            filter = currentFilter;
                         }
-
                     } else {
-                        if (currentFilter.id.toString() === id.toString() && currentFilter[subtype]) {
+
+                        if (subId.indexOf('-') > -1 && currentFilter[subtype]) {
+                            var min = subId.split('-')[0],
+                                max = subId.split('-')[1],
+                                minFilter = null,
+                                maxFilter = null;
+
                             angular.forEach(currentFilter[subtype].values, function (currentSubFilter) {
-                                if (currentSubFilter.id.toString() === subId.toString()) {
-                                    filter = currentSubFilter;
+                                if (currentSubFilter.id.toString() === min.toString()) {
+                                    minFilter = currentSubFilter;
+                                }
+                                if (currentSubFilter.id.toString() === max.toString()) {
+                                    maxFilter = currentSubFilter;
                                 }
                             });
+
+                            if (minFilter && maxFilter) {
+                                filter = {id: subId};
+                                if (minFilter.id.toString() === maxFilter.id.toString()) {
+                                    filter.label = minFilter.label;
+                                } else {
+                                    filter.label = minFilter.label + ' -> ' + maxFilter.label;
+                                }
+                            }
+
+                        } else {
+                            if (currentFilter.id.toString() === id.toString() && currentFilter[subtype]) {
+                                if (currentFilter[subtype].values && currentFilter[subtype].values.length) {
+                                    simpleEach(currentFilter[subtype].values, function (currentSubFilter) {
+                                        if (currentSubFilter.id.toString() === subId.toString()) {
+                                            filter = currentSubFilter;
+                                        }
+                                    });
+                                }
+                            }
                         }
                     }
-                }
-            });
+                });
+            }
         }
 
         return filter;
@@ -368,7 +375,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             .then(
                 function (results) {
                     self.filteredResults = [];
-                    angular.forEach(results, function (result) {
+                    simpleEach(results, function (result) {
                         if (self.filterElement(result, filters)) {
                             self.filteredResults.push(result);
                         }
@@ -527,13 +534,15 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             return self.testById(element, filters, name);
         } else {
             var result = false;
-            angular.forEach(filters, function (filter) {
-                // VAL X OR VAL Y
-                // We set true for any value that pass
-                if (self.testById(element, filter, name)) {
-                    result = true;
-                }
-            });
+            if (filters && filters.length) {
+                simpleEach(filters, function (filter) {
+                    // VAL X OR VAL Y
+                    // We set true for any value that pass
+                    if (self.testById(element, filter, name)) {
+                        result = true;
+                    }
+                });
+            }
             return result;
         }
     };
@@ -545,7 +554,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         var regex   = new RegExp(query, 'gi');
         element     = _.values(element);
 
-        angular.forEach(element, function (property) {
+        simpleEach(element, function (property) {
             var propLength = property.length;
             if (!result) {
                 if (typeof property === 'string' && propLength > qLength) {

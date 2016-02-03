@@ -48,7 +48,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
                 minIndex = 0,
                 maxIndex = valuesLength - 1;
 
-            angular.forEach(filter.values, function (value, valueIndex) {
+            simpleEach(filter.values, function (value, valueIndex) {
                 if (value.id.toString() === minValue.toString()) {
                     minIndex = valueIndex;
                 }
