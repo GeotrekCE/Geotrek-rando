@@ -12,17 +12,17 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         $scope.rulesId = null;
     }
 
-    $scope.getUrlImg = function(path) {
+    $scope.getUrlImg = function getUrlImg (path) {
         return globalSettings.API_URL + path;
     };
 
-    $scope.formatTime = function(date) {
+    $scope.formatTime = function formatTime (date) {
         return utilsFactory.formatTime(date, translationService.getCurrentLang());
     };
 
     $scope.currentInterest = 'none';
 
-    $scope.toggleInterest = function (interest) {
+    $scope.toggleInterest = function toggleInterest (interest) {
         if (mapService.map && mapService.map.closePopup) {
             mapService.map.closePopup();
         }
@@ -34,7 +34,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         }
     };
 
-    $scope.toggleCategory = function(category) {
+    $scope.toggleCategory = function toggleCategory (category) {
         if (category.isActive !== undefined) {
             category.isActive = category.isActive === false ? true : false;
         } else {
@@ -43,14 +43,14 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
     };
 
     $scope.foldAside = false;
-    $scope.asidePaneToggle = function () {
+    $scope.asidePaneToggle = function asidePaneToggle () {
         $scope.foldAside = !$scope.foldAside;
         setTimeout(function () {
             mapService.invalidateSize();
         }, 350);
     };
 
-    $scope.showLightbox = function (images, slideIndex) {
+    $scope.showLightbox = function showLightbox (images, slideIndex) {
         var modal = $modal.open({
             templateUrl: '/app/gallery/templates/lightbox-gallery.html',
             controller: 'GalleryController',

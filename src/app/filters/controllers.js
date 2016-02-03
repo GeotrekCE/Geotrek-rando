@@ -71,7 +71,7 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
             );
     }
 
-    $scope.toogleFilter = function (filterType, filterId) {
+    $scope.toogleFilter = function toogleFilter (filterType, filterId) {
         var filters = $rootScope.activeFilters[filterType];
 
         if (filters) {
@@ -94,7 +94,7 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
         $scope.propagateActiveFilters();
     };
 
-    $scope.changeSearchFilter = function () {
+    $scope.changeSearchFilter = function changeSearchFilter () {
         if ($scope.searchFieldUpdate) {
             $timeout.cancel($scope.searchFieldUpdate);
         }
@@ -103,7 +103,7 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
         }, 500);
     };
 
-    $scope.propagateActiveFilters = function () {
+    $scope.propagateActiveFilters = function propagateActiveFilters () {
         filtersService.updateActiveFilters($rootScope.activeFilters);
         if (globalSettings.SHOW_FILTERS_ON_MAP) {
             updateFiltersTags();
@@ -111,7 +111,7 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
         $rootScope.$broadcast('updateFilters');
     };
 
-    $scope.toggleExtend = function () {
+    $scope.toggleExtend = function toggleExtend () {
         $scope.extend = !$scope.extend;
     }
 
@@ -135,7 +135,7 @@ function FiltersTagsController($rootScope, $scope, globalSettings, filtersServic
         $rootScope.activeFiltersTags = filtersService.getTagFilters();
     }
 
-    $scope.propagateActiveFilters = function () {
+    $scope.propagateActiveFilters = function propagateActiveFilters () {
         filtersService.updateActiveFilters($rootScope.activeFilters);
         if (globalSettings.SHOW_FILTERS_ON_MAP) {
             updateFiltersTags();
@@ -143,14 +143,14 @@ function FiltersTagsController($rootScope, $scope, globalSettings, filtersServic
         $rootScope.$broadcast('updateFilters');
     };
 
-    $scope.resetFilters = function () {
+    $scope.resetFilters = function resetFilters () {
         filtersService.resetActiveFilters();
         $rootScope.activeFilters = filtersService.getActiveFilters();
         $rootScope.$broadcast('resetRange', {filter: 'all'});
         $scope.propagateActiveFilters();
     };
 
-    $scope.removeFilterByTag = function (tagLabel, tagValue) {
+    $scope.removeFilterByTag = function removeFilterByTag (tagLabel, tagValue) {
         var activeFilters = $rootScope.activeFilters;
 
         if (typeof activeFilters[tagLabel] === 'string') {
@@ -175,7 +175,7 @@ function FiltersTagsController($rootScope, $scope, globalSettings, filtersServic
         $scope.propagateActiveFilters();
     };
 
-    $scope.toggleExtend = function () {
+    $scope.toggleExtend = function toggleExtend () {
         $scope.extend = !$scope.extend;
     }
 }

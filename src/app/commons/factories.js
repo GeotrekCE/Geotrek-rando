@@ -100,20 +100,20 @@ function utilsFactory($sce) {
     }
 
     // "what?" version ... http://jsperf.com/diacritics/12
-    var removeDiacritics = function (str) {
+    var removeDiacritics = function removeDiacritics (str) {
         return str.replace(/[^\u0000-\u007E]/g, function(a){
            return diacriticsMap[a] || a;
         });
     };
 
-    var isTrueInt = function (value) {
+    var isTrueInt = function isTrueInt (value) {
         if(/^(\-|\+)?([0-9]+)$/.test(value)) {
             return Number(value);
         }
         return NaN;
     }
 
-    var decodeEntities = function (str) {
+    var decodeEntities = function decodeEntities (str) {
         if(str && typeof str === 'string') {
             var element = document.createElement('div');
             // strip script/html tags
@@ -127,7 +127,7 @@ function utilsFactory($sce) {
         return str;
     };
 
-    var parseLength = function (length) {
+    var parseLength = function parseLength (length) {
         var intLength = parseInt(length),
             parsedLength= '';
         if (intLength >= 1000) {
@@ -139,7 +139,7 @@ function utilsFactory($sce) {
         return parsedLength;
     };
 
-    var idIsInArray = function (anArray, element) {
+    var idIsInArray = function idIsInArray (anArray, element) {
 
         var isInArray = false;
 
@@ -159,7 +159,7 @@ function utilsFactory($sce) {
         return isInArray;
     };
 
-    var findIndexOfId = function (anArray, id) {
+    var findIndexOfId = function findIndexOfId (anArray, id) {
         var length = anArray.length, i;
         for (i = 0; i < length; i++) {
             if (anArray[i].id === id) {
@@ -168,7 +168,7 @@ function utilsFactory($sce) {
         }
     };
 
-    var isSameElement = function (elementA, elementB) {
+    var isSameElement = function isSameElement (elementA, elementB) {
         // We compare cat Id and then plain id of an element
         if (elementA.properties && elementB.properties) {
             if (elementA.properties.category.id === elementB.properties.category.id && elementA.id === elementB.id) {
@@ -184,7 +184,7 @@ function utilsFactory($sce) {
         return false;
     };
 
-    var elementIsInArray = function (anArray, element) {
+    var elementIsInArray = function elementIsInArray (anArray, element) {
         var isInArray = false;
 
         if (element === null) {
@@ -200,7 +200,7 @@ function utilsFactory($sce) {
         return isInArray;
     };
 
-    var getStartPoint = function (element) {
+    var getStartPoint = function getStartPoint (element) {
         var firstPointCoordinates = [];
         if (element.geometry.type === 'Point') {
             firstPointCoordinates = element.geometry.coordinates;
@@ -216,7 +216,7 @@ function utilsFactory($sce) {
         };
     };
 
-    var getEndPoint = function (element) {
+    var getEndPoint = function getEndPoint (element) {
         var lastPointCoordinates = [];
         if (element.geometry.type === 'Point') {
             lastPointCoordinates = element.geometry.coordinates;
@@ -235,7 +235,7 @@ function utilsFactory($sce) {
         };
     };
 
-    var getParkingPoint = function (element) {
+    var getParkingPoint = function getParkingPoint (element) {
         var parkingCoordinates = element.properties.parking_location;
 
         return parkingCoordinates ? {

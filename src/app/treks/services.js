@@ -6,7 +6,7 @@ function treksService(globalSettings, settingsFactory, translationService, $reso
     self._trekList = [];
     var getTreksPending = false;
 
-    this.refactorTrek = function (treksData) {
+    this.refactorTrek = function refactorTrek (treksData) {
         // Parse trek pictures, and change their URL
         _.forEach(treksData.features, function (trek) {
             if (trek.properties.pictures) {
@@ -120,7 +120,7 @@ function treksService(globalSettings, settingsFactory, translationService, $reso
         return treksData;
     };
 
-    this.getTreks = function () {
+    this.getTreks = function getTreks () {
 
         if (getTreksPending) return getTreksPending;
 

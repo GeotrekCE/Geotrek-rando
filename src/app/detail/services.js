@@ -2,7 +2,7 @@
 
 function detailService() {
 
-    this.hasInfos = function (obj) {
+    this.hasInfos = function hasInfos (obj) {
     // Retrn true if object contains at least one element of arguments
         var infos = 0;
         for (var i = 0; i < arguments.length; i++) {

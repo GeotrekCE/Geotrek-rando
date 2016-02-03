@@ -265,7 +265,7 @@ function GalleryController(images, slideIndex, $q, $scope, $modalInstance) {
         });
     }
 
-    $scope.close = function () {
+    $scope.close = function close () {
         $modalInstance.dismiss('close');
     };
 

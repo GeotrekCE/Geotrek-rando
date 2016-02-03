@@ -15,7 +15,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     // Define all type of filters that needs an interval check instead of an id one
     var filtersByInterval = ['difficulty', 'duration', 'ascent', 'eLength'];
 
-    self.initFilters = function () {
+    self.initFilters = function (initFilters ) {
         var deferred = $q.defer(),
             promises = [];
 
@@ -67,7 +67,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return deferred.promise;
     };
 
-    self.InitCategoriesFilters = function (categories) {
+    self.InitCategoriesFilters = function InitCategoriesFilters (categories) {
 
         simpleEach(categories, function (category) {
             if (globalSettings.LIST_EXCLUDE_CATEGORIES.indexOf(category.id.toString()) === -1) {
@@ -122,7 +122,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
 
     };
 
-    self.initGlobalFilters = function (results) {
+    self.initGlobalFilters = function initGlobalFilters (results) {
 
         if (results) {
             simpleEach(results, function (result) {
@@ -138,7 +138,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
 
     };
 
-    self.addPropertyToFilters = function (property, propertyName) {
+    self.addPropertyToFilters = function addPropertyToFilters (property, propertyName) {
         if (property) {
             if (typeof property !== 'object') {
                 property = [property];
@@ -156,7 +156,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return false;
     };
 
-    self.getFilters = function () {
+    self.getFilters = function getFilters () {
         return self.filters;
     };
 
@@ -166,7 +166,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     // Active FIlters
     //
 
-    self.initActiveFilter = function (forceRefresh) {
+    self.initActiveFilter = function initActiveFilter (forceRefresh) {
 
         if (!self.activeFilters || forceRefresh) {
             self.activeFilters = angular.copy(activeFiltersModel);
@@ -178,16 +178,16 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         }
     };
 
-    self.resetActiveFilters = function () {
+    self.resetActiveFilters = function (resetActiveFilters ) {
         $location.search({});
         self.initActiveFilter(true);
     };
 
-    self.filtersChanged = function (filters) {
+    self.filtersChanged = function filtersChanged (filters) {
         return !angular.equals(filters, self.activeFilters);
     };
 
-    self.updateActiveFilters = function (activeFilters) {
+    self.updateActiveFilters = function updateActiveFilters (activeFilters) {
         if (activeFilters.search === '') {
             activeFilters.search = null;
         }
@@ -195,7 +195,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         $location.search(activeFilters);
     };
 
-    self.updateActiveFiltersFromUrl = function () {
+    self.updateActiveFiltersFromUrl = function updateActiveFiltersFromUrl () {
         var urlFilters = $location.search();
 
         angular.forEach(urlFilters, function (filterValues, filterName) {
@@ -204,7 +204,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return self.activeFilters;
     };
 
-    self.addFilterValueToActiveFilters = function (filterValues, filterName) {
+    self.addFilterValueToActiveFilters = function addFilterValueToActiveFilters (filterValues, filterName) {
         if (!self.activeFilters[filterName] || filterName === 'categories') {
             self.activeFilters[filterName] = [];
         }
@@ -227,7 +227,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
 
     };
 
-    self.getActiveFilters = function () {
+    self.getActiveFilters = function getActiveFilters () {
         return self.activeFilters;
     };
 
@@ -239,7 +239,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     // Tag Filters
     //
 
-    self.getTagFilters = function () {
+    self.getTagFilters = function getTagFilters () {
         var tagFilters = [],
             finalArray = [];
         angular.forEach(self.activeFilters, function (aFilter, index) {
@@ -301,7 +301,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return finalArray;
     };
 
-    self.getATagFilter = function (id, type, subtype, subId) {
+    self.getATagFilter = function getATagFilter (id, type, subtype, subId) {
         var filter = null;
         if (type === 'search') {
             filter = {
@@ -367,7 +367,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     //  Filtering
     //
 
-    self.getFilteredResults = function (forceRefresh) {
+    self.getFilteredResults = function getFilteredResults (forceRefresh) {
         var deferred = $q.defer(),
             filters = self.getActiveFilters();
 
@@ -387,7 +387,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return deferred.promise;
     };
 
-    self.filterElement = function (element) {
+    self.filterElement = function filterElement (element) {
 
         // Set Up final test vars
         var categoriesFilter = true,
@@ -430,7 +430,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
 
     };
 
-    self.matchByCategories = function (element, filters) {
+    self.matchByCategories = function matchByCategories (element, filters) {
         var result = true;
 
         if (filters.categories && filters.categories.length > 0) {
@@ -450,7 +450,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return result;
     };
 
-    self.matchCategorySubFilters = function (element, filters) {
+    self.matchCategorySubFilters = function matchCategorySubFilters (element, filters) {
         var subFilters = self.getCategorySubfilters(element.properties.category.id, filters);
 
         if (_.size(subFilters) > 0) {
@@ -478,7 +478,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         }
     };
 
-    self.getCategorySubfilters = function (elementCategoryId, filters) {
+    self.getCategorySubfilters = function getCategorySubfilters (elementCategoryId, filters) {
         var catSubFilters = {};
         angular.forEach(filters, function (filter, filterName) {
             // categories subfilters are composed like catId-subFilterName
@@ -500,21 +500,21 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return catSubFilters;
     };
 
-    self.matchByDateBegin = function (elementDate, filterDate) {
+    self.matchByDateBegin = function matchByDateBegin (elementDate, filterDate) {
         if (Date.parse(elementDate) >= Date.parse(filterDate)) {
             return true;
         }
         return false;
     };
 
-    self.matchByDateEnd = function (elementDate, filterDate) {
+    self.matchByDateEnd = function matchByDateEnd (elementDate, filterDate) {
         if (Date.parse(elementDate) <= Date.parse(filterDate)) {
             return true;
         }
         return false;
     };
 
-    self.matchByRange = function (element, filters, name) {
+    self.matchByRange = function matchByRange (element, filters, name) {
         if (element[name]) {
             var min = filters.toString().split('-')[0],
                 max = filters.toString().split('-')[1],
@@ -528,7 +528,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return false;
     };
 
-    self.matchById = function (element, filters, name) {
+    self.matchById = function matchById (element, filters, name) {
         // $location provide a string if there's only one value, an array if there's more
         if (typeof filters === 'string') {
             return self.testById(element, filters, name);
@@ -547,7 +547,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         }
     };
 
-    self.testByString = function (element, query) {
+    self.testByString = function testByString (element, query) {
 
         var result  = false;
         var qLength = query.length;
@@ -571,7 +571,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         return result;
     };
 
-    self.testById = function (element, filter, filterKey) {
+    self.testById = function testById (element, filter, filterKey) {
         var result = false,
             currentElement;
 

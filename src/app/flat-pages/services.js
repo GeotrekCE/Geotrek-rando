@@ -4,7 +4,7 @@ function flatService($q, $resource, utilsFactory, settingsFactory, translationSe
 
     var self = this;
 
-    this.getFlatPages = function (forceReload) {
+    this.getFlatPages = function getFlatPages (forceReload) {
 
         var deferred = $q.defer();
 
@@ -36,7 +36,7 @@ function flatService($q, $resource, utilsFactory, settingsFactory, translationSe
 
     };
 
-    this.getAFlatPage = function (pageId) {
+    this.getAFlatPage = function getAFlatPage (pageId) {
         var deferred = $q.defer();
         self.getFlatPages()
             .then(

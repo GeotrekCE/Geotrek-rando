@@ -5,7 +5,7 @@ function favoritesService(globalSettings) {
     var self = this,
         storageName = globalSettings.PLATFORM_ID + '-favorites';
 
-    this.getFavorites = function () {
+    this.getFavorites = function getFavorites () {
         if (self._favorites) {
             return self._favorites;
         }
@@ -21,17 +21,17 @@ function favoritesService(globalSettings) {
         return self._favorites;
     };
 
-    this.setFavorites = function () {
+    this.setFavorites = function setFavorites () {
         var favorites_json = JSON.stringify(self._favorites);
         localStorage.setItem(storageName, favorites_json);
     };
 
-    this.removeAllFavorites = function () {
+    this.removeAllFavorites = function removeAllFavorites () {
         self._favorites = {};
         localStorage.removeItem(storageName);
     };
 
-    this.addAFavorite = function (element) {
+    this.addAFavorite = function addAFavorite (element) {
         if (!self._favorites[element.uid]) {
             self._favorites[element.uid] = {
                 id: element.id,
@@ -41,7 +41,7 @@ function favoritesService(globalSettings) {
         }
     };
 
-    this.isInFavorites = function (element) {
+    this.isInFavorites = function isInFavorites (element) {
         if (element) {
             if (self._favorites && self._favorites[element.uid]) {
                 return true;
@@ -51,7 +51,7 @@ function favoritesService(globalSettings) {
         return false;
     };
 
-    this.removeAFavorite = function (element) {
+    this.removeAFavorite = function removeAFavorite (element) {
         if (self._favorites[element.uid]) {
             delete self._favorites[element.uid];
             self.setFavorites();

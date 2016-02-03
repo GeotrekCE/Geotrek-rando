@@ -147,7 +147,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         }, true);
     }
 
-    $scope.clearDateFilter = function (dateFilterName) {
+    $scope.clearDateFilter = function clearDateFilter (dateFilterName) {
         $scope.activeDateFilters[dateFilterName] = {
             "startDate": null,
             "endDate": null
@@ -156,7 +156,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         $scope.updateActiveDateFilters();
     };
 
-    $scope.updateActiveDateFilters = function () {
+    $scope.updateActiveDateFilters = function updateActiveDateFilters () {
         angular.forEach($scope.activeDateFilters, function (filterValues, filterName) {
             if (filterValues.startDate) {
                 $rootScope.activeFilters[filterName + '_begin_date'] = filterValues.startDate.toISOString();
@@ -173,7 +173,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         $scope.propagateActiveFilters();
     };
 
-    $scope.updateActiveRangeFilters = function () {
+    $scope.updateActiveRangeFilters = function updateActiveRangeFilters () {
         angular.forEach($scope.activeRangeValues, function (filterValues, filterName) {
             if (!filterValues.values) {
                 return false;
@@ -192,7 +192,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         $scope.propagateActiveFilters();
     };
 
-    $scope.activateCategory = function (category) {
+    $scope.activateCategory = function activateCategory (category) {
         var categories = $rootScope.activeFilters.categories,
             indexOfCategory = categories.indexOf(category.id.toString());
         if (indexOfCategory < 0) {
@@ -204,7 +204,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         $scope.propagateActiveFilters();
     };
 
-    $scope.deactivateCategory = function (category) {
+    $scope.deactivateCategory = function deactivateCategory (category) {
         var categories = $rootScope.activeFilters.categories,
             indexOfCategory = categories.indexOf(category.id.toString());
         if (indexOfCategory > -1) {
@@ -213,7 +213,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         $scope.propagateActiveFilters();
     };
 
-    $scope.toggleAllCategories = function () {
+    $scope.toggleAllCategories = function toggleAllCategories () {
         var categories = $scope.categories;
         if ($rootScope.activeFilters.categories.length > 0) {
             $rootScope.activeFilters.categories = [];
@@ -226,7 +226,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         $scope.propagateActiveFilters();
     };
 
-    $scope.toggleCategory = function (category) {
+    $scope.toggleCategory = function toggleCategory (category) {
         var categories = $rootScope.activeFilters.categories,
             indexOfCategory = categories.indexOf(category.id.toString());
         if (indexOfCategory > -1) {
@@ -240,7 +240,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         $scope.propagateActiveFilters();
     };
 
-    $scope.toogleCategoryFilter = function (categoryId, filterType, filterId) {
+    $scope.toogleCategoryFilter = function toogleCategoryFilter (categoryId, filterType, filterId) {
         var categoryFilter = $rootScope.activeFilters[categoryId + '_' + filterType];
 
         if (categoryFilter) {
@@ -256,7 +256,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         $scope.propagateActiveFilters();
     };
 
-    $scope.closeCategoryFilters = function (category) {
+    $scope.closeCategoryFilters = function closeCategoryFilters (category) {
         $scope.filtering = false;
         if (category) {
             category.open = false;
@@ -267,7 +267,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         }
     };
 
-    var hideSiblings = function (mainCategory) {
+    var hideSiblings = function hideSiblings (mainCategory) {
         _.forEach($scope.categories, function (category) {
             if (category.id !== mainCategory.id) {
                 category.open = false;
@@ -275,13 +275,13 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         });
     };
 
-    $scope.openCategoryFilters = function (category) {
+    $scope.openCategoryFilters = function openCategoryFilters (category) {
         category.open    = true;
         $scope.filtering = true;
         hideSiblings(category);
     };
 
-    $scope.propagateActiveFilters = function () {
+    $scope.propagateActiveFilters = function propagateActiveFilters () {
         filtersService.updateActiveFilters($rootScope.activeFilters);
         if (globalSettings.SHOW_FILTERS_ON_MAP) {
             updateFiltersTags();
@@ -289,21 +289,21 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         $rootScope.$broadcast('updateFilters', true);
     };
 
-    $scope.toggleCategories = function () {
+    $scope.toggleCategories = function toggleCategories () {
         $scope.extend = !$scope.extend;
         if (!$scope.extend) {
             $scope.closeCategoryFilters();
         }
     };
 
-    $scope.extendCategories = function () {
+    $scope.extendCategories = function extendCategories () {
         if ($scope.extend && $scope.filtering) {
             $scope.openCategoryFilters(this.category);
         }
         $scope.extend = true;
     };
 
-    $scope.foldCategories = function () {
+    $scope.foldCategories = function foldCategories () {
         $scope.extend = false;
         $scope.closeCategoryFilters();
     };
@@ -333,7 +333,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
     $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
 
     // popup opening
-    $scope.open = function () {
+    $scope.open = function open () {
         $timeout(function () {
             $scope.opened = true;
         });

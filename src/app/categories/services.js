@@ -3,7 +3,7 @@
 function categoriesService(globalSettings, $q, treksService, contentsService, eventsService, utilsFactory) {
     var self = this;
 
-    this.replaceImgURLs = function (categoriesData) {
+    this.replaceImgURLs = function replaceImgURLs (categoriesData) {
 
         // Parse trek pictures, and change their URL
         _.forEach(categoriesData, function (category) {
@@ -15,7 +15,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
         return categoriesData;
     };
 
-    this.getTreksCategories = function (treks) {
+    this.getTreksCategories = function getTreksCategories (treks) {
 
         var treksCategories = [];
 
@@ -107,7 +107,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
     };
 
-    this.getTouristicEventsCategories = function (events) {
+    this.getTouristicEventsCategories = function getTouristicEventsCategories (events) {
 
         var eventsType1 = {
                 type: 'checkbox',
@@ -164,7 +164,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
     };
 
-    this.getTouristicContentCategories = function (contents) {
+    this.getTouristicContentCategories = function getTouristicContentCategories (contents) {
 
         var contentsCategories = [];
 
@@ -235,7 +235,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
     };
 
-    this.getNonExcludedCategories = function (forceRefresh) {
+    this.getNonExcludedCategories = function getNonExcludedCategories (forceRefresh) {
         var deferred = $q.defer(),
             filteredCategories = [];
 
@@ -259,7 +259,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
         return deferred.promise;
     };
 
-    this.getCategories = function (forceRefresh) {
+    this.getCategories = function getCategories (forceRefresh) {
 
         var deferred = $q.defer(),
             trekCats = null,

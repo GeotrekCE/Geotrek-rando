@@ -19,17 +19,17 @@ function FavoritesController($scope, $rootScope, globalSettings, favoritesServic
         }
     }
 
-    $scope.removeAFavorite = function (currentElement) {
+    $scope.removeAFavorite = function removeAFavorite (currentElement) {
         favoritesService.removeAFavorite(currentElement);
         updateFavorites();
     };
 
-    $scope.removeAllFavorites = function () {
+    $scope.removeAllFavorites = function removeAllFavorites () {
         favoritesService.removeAllFavorites();
         updateFavorites();
     };
 
-    $scope.addAFavorite = function (currentElement) {
+    $scope.addAFavorite = function addAFavorite (currentElement) {
         favoritesService.addAFavorite(currentElement);
         updateFavorites();
     };

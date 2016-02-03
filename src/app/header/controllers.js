@@ -7,13 +7,13 @@ function headerController($scope, $rootScope, globalSettings) {
         $scope.headerTemplate = '/app/header/templates/default-header.html';
     }
 
-    $scope.displayHomePage = function () {
+    $scope.displayHomePage = function displayHomePage () {
         if (globalSettings.SHOW_HOME) {
             $rootScope.showHome = true;
         }
     };
 
-    $scope.switchMap = function () {
+    $scope.switchMap = function switchMap () {
         $rootScope.mapIsShown = !$rootScope.mapIsShown;
         $rootScope.showWarningPanel = false;
     };

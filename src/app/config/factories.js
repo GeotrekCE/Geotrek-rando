@@ -21,12 +21,12 @@ function settingsFactory(globalSettings) {
 
     //PUBLIC METHODS
     //
-    var setLang = function (newLang) {
+    var setLang = function setLang (newLang) {
         _activeLang = newLang;
         return true;
     };
 
-    var getLang = function () {
+    var getLang = function getLang () {
         return _activeLang;
     };
 
