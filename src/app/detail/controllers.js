@@ -51,7 +51,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
     };
 
     $scope.showLightbox = function showLightbox (images, slideIndex) {
-        var modal = $modal.open({
+        $modal.open({
             templateUrl: '/app/gallery/templates/lightbox-gallery.html',
             controller: 'GalleryController',
             windowClass: 'lightbox',

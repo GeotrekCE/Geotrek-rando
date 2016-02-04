@@ -17,7 +17,7 @@ function randomContentsList() {
         template: require('./templates/random-contents-list.html'),
         scope: {
             categories: '@',
-            quantity: '@',
+            quantity: '@'
         },
         controller: 'RandomContentsListWidgetController'
     };

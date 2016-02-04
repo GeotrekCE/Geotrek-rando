@@ -1,6 +1,6 @@
 'use strict';
 
-function utilsFactory($sce) {
+function utilsFactory () {
 
     var defaultDiacriticsRemovalap = [
         {'base': 'A', 'letters': '\u0041\u24B6\uFF21\u00C0\u00C1\u00C2\u1EA6\u1EA4\u1EAA\u1EA8\u00C3\u0100\u0102\u1EB0\u1EAE\u1EB4\u1EB2\u0226\u01E0\u00C4\u01DE\u1EA2\u00C5\u01FA\u01CD\u0200\u0202\u1EA0\u1EAC\u1EB6\u1E00\u0104\u023A\u2C6F'},
@@ -102,7 +102,7 @@ function utilsFactory($sce) {
     // "what?" version ... http://jsperf.com/diacritics/12
     var removeDiacritics = function removeDiacritics (str) {
         return str.replace(/[^\u0000-\u007E]/g, function(a){
-           return diacriticsMap[a] || a;
+            return diacriticsMap[a] || a;
         });
     };
 
@@ -111,7 +111,7 @@ function utilsFactory($sce) {
             return Number(value);
         }
         return NaN;
-    }
+    };
 
     var decodeEntities = function decodeEntities (str) {
         if(str && typeof str === 'string') {
@@ -218,14 +218,15 @@ function utilsFactory($sce) {
 
     var getEndPoint = function getEndPoint (element) {
         var lastPointCoordinates = [];
+        var nbPts;
         if (element.geometry.type === 'Point') {
             lastPointCoordinates = element.geometry.coordinates;
         } else if (element.geometry.type === 'LineString' || element.geometry.type === 'MultiPoint') {
-            var nbPts = element.geometry.coordinates.length;
+            nbPts = element.geometry.coordinates.length;
             lastPointCoordinates = element.geometry.coordinates[nbPts - 1];
         } else if (element.geometry.type === 'Polygon' || element.geometry.type === 'MultiLineString') {
             var nbLines = element.geometry.coordinates.length;
-            var nbPts = element.geometry.coordinates[nbLines - 1].length;
+            nbPts = element.geometry.coordinates[nbLines - 1].length;
             lastPointCoordinates = element.geometry.coordinates[nbLines - 1][nbPts - 1];
         }
 
@@ -247,12 +248,12 @@ function utilsFactory($sce) {
     var formatTime = function(strDate, lang){
         var date = strDate.split(':');
         switch (lang) {
-            case 'fr':
-                return date[0] + ' h ' + date[1];
-            case 'en':
-                return date[0] + ' : ' + date[1];
-            default:
-                return date[0] + ' h ' + date[1];
+        case 'fr':
+            return date[0] + ' h ' + date[1];
+        case 'en':
+            return date[0] + ' : ' + date[1];
+        default:
+            return date[0] + ' h ' + date[1];
         }
     };
 

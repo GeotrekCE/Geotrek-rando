@@ -7,7 +7,7 @@ function headerController($scope, $rootScope, globalSettings) {
         $scope.headerTemplate = '/app/header/templates/default-header.html';
     }
 
-    $scope.displayHomePage = function displayHomePage () {
+    $scope.displayHomePage = function displayHomePage () {
         if (globalSettings.SHOW_HOME) {
             $rootScope.showHome = true;
         }

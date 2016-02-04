@@ -15,7 +15,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     // Define all type of filters that needs an interval check instead of an id one
     var filtersByInterval = ['difficulty', 'duration', 'ascent', 'eLength'];
 
-    self.initFilters = function (initFilters ) {
+    self.initFilters = function () {
         var deferred = $q.defer(),
             promises = [];
 
@@ -178,7 +178,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         }
     };
 
-    self.resetActiveFilters = function (resetActiveFilters ) {
+    self.resetActiveFilters = function () {
         $location.search({});
         self.initActiveFilter(true);
     };
@@ -416,7 +416,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             citiesFilter = self.matchById(element.properties, filters.cities, 'cities');
         }
 
-         if (filters.districts.length > 0) {
+        if (filters.districts.length > 0) {
             districtsFilter = self.matchById(element.properties, filters.districts, 'districts');
         }
 

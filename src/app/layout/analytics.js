@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 function AnalyticsConfig(AnalyticsProvider, globalSettings) {
 
@@ -12,7 +12,7 @@ function AnalyticsConfig(AnalyticsProvider, globalSettings) {
     } else {
         AnalyticsProvider.useAnalytics(false);
     }
-    
+
 }
 
 module.exports = {

@@ -1,6 +1,6 @@
 'use strict';
 
-function removeTags($filter) {
+function removeTags () {
 
     return function (markup) {
         return markup.replace(/(<([^>]+)>)/ig,"");
@@ -8,7 +8,7 @@ function removeTags($filter) {
 
 }
 
-function isSVG($filter) {
+function isSVG () {
     return function(file) {
         var regexp = /\.(svg)$/i;
         if (file) {
@@ -24,10 +24,10 @@ function isSVG($filter) {
 function sanitizeData($filter, $sce) {
     return function(data, removeStyle) {
         if (removeStyle) {
-            var data = data.replace(/[a-zA-Z0-9\-\_]*style="[^\"]*"/gim, '');
+            data = data.replace(/[a-zA-Z0-9\-\_]*style="[^\"]*"/gim, '');
         }
         return $sce.trustAsHtml(data);
-    }
+    };
 }
 
 module.exports = {

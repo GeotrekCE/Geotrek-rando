@@ -130,12 +130,12 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
                                         }
                                     });
                                     self.categoriesIcons[category.id] = finalIcon;
-                                        if (currentCounter === _.size(categories)) {
-                                            deferred.resolve(self.categoriesIcons);
-                                            setTimeout(function () {
-                                                getCategoriesIconsPending = false;
-                                            }, 250);
-                                        }
+                                    if (currentCounter === _.size(categories)) {
+                                        deferred.resolve(self.categoriesIcons);
+                                        setTimeout(function () {
+                                            getCategoriesIconsPending = false;
+                                        }, 250);
+                                    }
                                 });
                         } else {
                             self.categoriesIcons[category.id] = '<img src="' + category.pictogram + '" />';
@@ -486,7 +486,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
                             '</div>' +
                             '<div class="icon">' + poiIcon + '</div>';
                     } else {
-                       markup = '' +
+                        markup = '' +
                             '<div class="marker" data-popup="' + poi.properties.name + '">' +
                                 '<div class="icon">' + poiIcon + '</div>' +
                             '</div>';
@@ -546,7 +546,7 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
                             '</div>' +
                             '<div class="icon">' + serviceIcon + '</div>';
                     } else {
-                       markup = '' +
+                        markup = '' +
                             '<div class="marker" data-popup="' + service.properties.type.name + '">' +
                                 '<div class="icon">' + serviceIcon + '</div>' +
                             '</div>';

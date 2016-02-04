@@ -92,7 +92,7 @@ function GalleryController(images, slideIndex, $q, $scope, $modalInstance) {
             controls.querySelector('.prev').classList.add('hidden');
             controls.querySelector('.next').classList.add('hidden');
         }
-        
+
 
         window.angular.element(window).on('resize', updateMarginsOnResize);
 
@@ -218,7 +218,7 @@ function GalleryController(images, slideIndex, $q, $scope, $modalInstance) {
 
         var docElement = document.documentElement,
             curentBody = document.getElementsByTagName('body')[0],
-            viewportWidth = window.innerWidth || docElement.clientWidth || curentBody.clientWidth,
+            // viewportWidth = window.innerWidth || docElement.clientWidth || curentBody.clientWidth,
             viewportHeight = window.innerHeight || docElement.clientHeight || curentBody.clientHeight;
 
         var computedMargin = 0;

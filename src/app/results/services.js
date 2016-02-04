@@ -255,7 +255,7 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
                 }
             });
         });
-    }
+    };
 
 }
 

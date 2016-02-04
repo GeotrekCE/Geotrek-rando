@@ -37,7 +37,7 @@ function PoisListeController($scope, $rootScope, globalSettings, utilsFactory, $
     };
 
     $scope.showLightbox = function showLightbox (images, slideIndex) {
-        var modal = $modal.open({
+        $modal.open({
             templateUrl: '/app/gallery/templates/lightbox-gallery.html',
             controller: 'GalleryController',
             windowClass: 'lightbox',
@@ -95,7 +95,7 @@ function PoisListeController($scope, $rootScope, globalSettings, utilsFactory, $
     };
 
     $scope.openPlayer = function openPlayer (media) {
-        var mediaModal = $modal.open({
+        $modal.open({
             templateUrl: 'app/pois/templates/media-modal.html',
             controller: 'MediaController',
             resolve: {

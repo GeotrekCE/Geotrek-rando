@@ -26,7 +26,7 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
                     controller: 'SidebarHomeController'
                 },
                 'content' : {
-                    template: require('./templates/content-home.html'),
+                    template: require('./templates/content-home.html')
                 }
             }
 
@@ -39,7 +39,7 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
                     controller: 'SidebarFlatController'
                 },
                 'content' : {
-                    template: require('./templates/content-flat.html'),
+                    template: require('./templates/content-flat.html')
                 }
             }
         })
@@ -51,7 +51,7 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
                     controller: 'SidebarDetailController'
                 },
                 'content' : {
-                    template: require('./templates/content-detail.html'),
+                    template: require('./templates/content-detail.html')
                 }
             }
         });

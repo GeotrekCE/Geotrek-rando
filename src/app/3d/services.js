@@ -16,9 +16,9 @@ function webglService () {
         }
 
         return false;
-    }
+    };
 }
 
 module.exports = {
-  webglService: webglService
+    webglService: webglService
 };

@@ -7,9 +7,9 @@ function Rando3DController(result, $scope, $timeout, $modalInstance, globalSetti
         $timeout(function () {
             $scope.isLoading = false;
         });
-    }
+    };
 
-    function init3D() {
+    function init3D () {
         $scope.isLoading = true;
         var pk = result.id;
         var currentLang = translationService.getCurrentLang();

@@ -11,7 +11,7 @@ function a() {
                 });
             }
         }
-   };
+    };
 }
 
 module.exports = {
