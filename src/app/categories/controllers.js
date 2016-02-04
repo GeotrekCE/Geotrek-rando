@@ -308,7 +308,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         $scope.closeCategoryFilters();
     };
 
-    function initFilters() {
+    function initCatFilters() {
         initDatePickers();
         initRangeFilters();
 
@@ -322,7 +322,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
     var rootScopeEvents = [
         $rootScope.$on('updateFilters', function(name, forceRefresh) {
             if (!forceRefresh) {
-                initFilters();
+                initCatFilters();
             }
         }),
         $rootScope.$on('switchGlobalLang', function () {
