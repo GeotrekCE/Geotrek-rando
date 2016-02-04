@@ -1,6 +1,23 @@
 'use strict';
 
-function filtersService($q, $location, globalSettings, utilsFactory, resultsService, categoriesService) {
+function filtersToolsService () {
+
+    function clean (object) {
+        _.forEach(object, function (value, key) {
+            if ((value instanceof Array) && (value.length === 0)) {
+                delete object[key];
+            } else if (value === null) {
+                delete object[key];
+            }
+        });
+
+        return object;
+    }
+
+    this.clean = clean;
+}
+
+function filtersService($q, $location, globalSettings, utilsFactory, resultsService, categoriesService, filtersToolsService) {
 
     var self = this,
         activeFiltersModel = {
@@ -22,6 +39,8 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         if (!self.filters) {
             self.filters = angular.copy(activeFiltersModel);
         }
+
+        // filtersToolsService.clean(self.filters);
 
         promises.push(
             categoriesService.getNonExcludedCategories()
@@ -107,6 +126,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
                     newCategory.end_date = null;
                 }
 
+                if (!self.filters.categories) self.filters.categories = [];
                 self.filters.categories.push(newCategory);
 
                 var defaultActiveCategories = globalSettings.DEFAULT_ACTIVE_CATEGORIES;
@@ -134,6 +154,8 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             });
         }
 
+        // filtersToolsService.clean(self.filters);
+
         return self.filters;
 
     };
@@ -147,6 +169,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             if (property.length > 0) {
                 simpleEach(property, function (value) {
                     if (!(utilsFactory.idIsInArray(self.filters[propertyName], value)) && value !== undefined) {
+                        if (!self.filters[propertyName]) self.filters[propertyName] = [];
                         return self.filters[propertyName].push(value);
                     }
                 });
@@ -176,6 +199,8 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
                 self.updateActiveFiltersFromUrl();
             }
         }
+
+        filtersToolsService.clean(self.activeFilters);
     };
 
     self.resetActiveFilters = function () {
@@ -184,14 +209,18 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     };
 
     self.filtersChanged = function filtersChanged (filters) {
+        filtersToolsService.clean(self.activeFilters);
+        filtersToolsService.clean(filters);
+
         return !angular.equals(filters, self.activeFilters);
     };
 
     self.updateActiveFilters = function updateActiveFilters (activeFilters) {
         if (activeFilters.search === '') {
-            activeFilters.search = null;
+            delete activeFilters.search;
         }
-        self.activeFilters = activeFilters;
+        self.activeFilters = filtersToolsService.clean(activeFilters);
+
         $location.search(activeFilters);
     };
 
@@ -201,6 +230,9 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         angular.forEach(urlFilters, function (filterValues, filterName) {
             self.addFilterValueToActiveFilters(filterValues, filterName);
         });
+
+        filtersToolsService.clean(self.activeFilters);
+
         return self.activeFilters;
     };
 
@@ -224,11 +256,11 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             });
         }
 
-
+        filtersToolsService.clean(self.activeFilters);
     };
 
     self.getActiveFilters = function getActiveFilters () {
-        return self.activeFilters;
+        return filtersToolsService.clean(self.activeFilters);
     };
 
 
@@ -242,6 +274,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     self.getTagFilters = function getTagFilters () {
         var tagFilters = [],
             finalArray = [];
+
         angular.forEach(self.activeFilters, function (aFilter, index) {
             var type = index,
                 id = 0,
@@ -282,6 +315,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             }
 
         });
+
         if (tagFilters && tagFilters.length) {
             simpleEach(tagFilters, function (filterTag) {
                 if (filterTag.subtype) {
@@ -410,7 +444,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         filters = self.activeFilters;
         categoriesFilter = self.matchByCategories(element, filters);
 
-        if (filters.themes.length > 0) {
+        if (filters.themes && filters.themes.length > 0) {
             themesFilter = self.matchById(element.properties, filters.themes, 'themes');
         }
 
@@ -418,15 +452,15 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             searchFilter = self.testByString(element.properties, filters.search);
         }
 
-        if (filters.cities.length > 0) {
+        if (filters.cities && filters.cities.length > 0) {
             citiesFilter = self.matchById(element.properties, filters.cities, 'cities');
         }
 
-        if (filters.districts.length > 0) {
+        if (filters.districts && filters.districts.length > 0) {
             districtsFilter = self.matchById(element.properties, filters.districts, 'districts');
         }
 
-        if (filters.structure.length > 0) {
+        if (filters.structure && filters.structure.length > 0) {
             structureFilter = self.matchById(element.properties, filters.structure, 'structure');
         }
 
@@ -561,9 +595,8 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         element     = _.values(element);
 
         simpleEach(element, function (property) {
-            var propLength = property.length;
             if (!result) {
-                if (typeof property === 'string' && propLength > qLength) {
+                if (typeof property === 'string' && property.length > qLength) {
                     if (property.match(regex) !== null) {
                         result = true;
                     }
@@ -610,5 +643,6 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
 }
 
 module.exports = {
+    filtersToolsService: filtersToolsService,
     filtersService : filtersService
 };

@@ -227,8 +227,15 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
     };
 
     $scope.toggleCategory = function toggleCategory (category) {
-        var categories = $rootScope.activeFilters.categories,
+        var categories = $rootScope.activeFilters.categories;
+        var indexOfCategory;
+
+        if (categories instanceof Array) {
             indexOfCategory = categories.indexOf(category.id.toString());
+        } else {
+            $rootScope.activeFilters.categories = [];
+        }
+
         if (indexOfCategory > -1) {
             categories.splice(indexOfCategory, 1);
         } else {
