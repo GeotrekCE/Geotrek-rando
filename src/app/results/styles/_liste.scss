@@ -124,13 +124,14 @@
 }
 
 .result-visual {
+    background-image: url(/images/placeholder.png);
+    background-position: center center;
+    background-size: cover;
     height: 150px;
     margin-left: -15px;
     margin-right: -15px;
-    position: relative;
     overflow: hidden;
-    background-size: cover;
-    background-position: center center;
+    position: relative;
     img {
         width: 100%;
         height: auto;
