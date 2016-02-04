@@ -367,7 +367,11 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     //  Filtering
     //
 
+    var getFilteredResultsPending = false;
     self.getFilteredResults = function getFilteredResults (forceRefresh) {
+
+        if (getFilteredResultsPending) return getFilteredResultsPending;
+
         var deferred = $q.defer(),
             filters = self.getActiveFilters();
 
@@ -381,9 +385,11 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
                         }
                     });
                     deferred.resolve(self.filteredResults);
+                    getFilteredResultsPending = false;
                 }
             );
 
+        getFilteredResultsPending = deferred.promise;
         return deferred.promise;
     };
 
