@@ -1,6 +1,6 @@
 'use strict';
 
-function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory, filtersService, mapService) {
+function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory, filtersService) {
 
     function updateResults(forceRefresh) {
         $rootScope.elementsLoading ++;
