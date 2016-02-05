@@ -441,11 +441,25 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
             .then(
                 function (results) {
                     self.filteredResults = [];
+
                     simpleEach(results, function (result) {
-                        if (self.filterElement(result, filters)) {
+
+                        if (!result.prefiltering) { result.prefiltering = {}; }
+
+                        if (result.prefiltering[filters.footprint] === true) {
                             self.filteredResults.push(result);
+                            result.onList = true;
+                        } else if (result.prefiltering[filters.footprint] === false) {
+                            result.onList = false;
+                        } else if (self.filterElement(result, filters)) {
+                            self.filteredResults.push(result);
+                            result.onList = true;
+                            result.prefiltering[filters.footprint] = true;
+                        } else {
+                            result.prefiltering[filters.footprint] = false;
                         }
                     });
+
                     deferred.resolve(self.filteredResults);
                     getFilteredResultsPending = false;
                 }
