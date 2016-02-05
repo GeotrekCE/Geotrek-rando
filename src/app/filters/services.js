@@ -45,7 +45,7 @@ function filtersToolsService () {
     this.clean = clean;
 }
 
-function filtersService($q, $location, globalSettings, utilsFactory, resultsService, categoriesService, filtersToolsService, translationService) {
+function filtersService($rootScope, $q, $location, globalSettings, utilsFactory, resultsService, categoriesService, filtersToolsService, translationService) {
 
     var self = this,
         activeFiltersModel = {
@@ -438,30 +438,26 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         var deferred = $q.defer(),
             filters = self.getActiveFilters();
 
-        resultsService.getAllResults()
+        resultsService.getAllResults(lang)
             .then(
-                function (results) {
-                    self.filteredResults = [];
-
-                    simpleEach(results, function (result) {
+                function () {
+                    simpleEach($rootScope.allResults[lang], function (result) {
 
                         if (!result.prefiltering) { result.prefiltering = {}; }
 
                         if (result.prefiltering[filters.footprint] === true) {
-                            self.filteredResults.push(result);
-                            result.onList = true;
+                            result.isResult = true;
                         } else if (result.prefiltering[filters.footprint] === false) {
-                            result.onList = false;
+                            result.isResult = false;
                         } else if (self.filterElement(result, filters)) {
-                            self.filteredResults.push(result);
-                            result.onList = true;
+                            result.isResult = true;
                             result.prefiltering[filters.footprint] = true;
                         } else {
                             result.prefiltering[filters.footprint] = false;
                         }
                     });
 
-                    deferred.resolve(self.filteredResults);
+                    deferred.resolve($rootScope.allResults[lang]);
                     getFilteredResultsPending[lang] = false;
                 }
             );
