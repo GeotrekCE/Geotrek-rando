@@ -1,22 +1,23 @@
 'use strict';
 
-function resultsService($q, $location, globalSettings, treksService, contentsService, eventsService) {
+function resultsService($rootScope, $q, $location, globalSettings, treksService, contentsService, eventsService, translationService) {
 
-    var self = this;
-    var getAllResultsPending = false;
+    var getAllResultsPending = {};
+    $rootScope.allResults = {};
 
     this.getAllResults = function getAllResults () {
+        var lang = translationService.getCurrentLang();
 
-        if (getAllResultsPending) return getAllResultsPending;
+        if (getAllResultsPending[lang]) return getAllResultsPending[lang];
 
 
         var deferred = $q.defer(),
             promises = [],
             results = [];
 
-        if (this._results) {
-            deferred.resolve(this._results);
-            getAllResultsPending = false;
+        if ($rootScope.allResults[lang]) {
+            deferred.resolve($rootScope.allResults[lang]);
+            getAllResultsPending[lang] = false;
             return deferred.promise;
         }
 
@@ -71,13 +72,13 @@ function resultsService($q, $location, globalSettings, treksService, contentsSer
         $q.all(promises)
             .then(
                 function () {
-                    self._results = results;
+                    $rootScope.allResults[lang] = results;
                     deferred.resolve(results);
-                    getAllResultsPending = false;
+                    getAllResultsPending[lang] = false;
                 }
             );
 
-        getAllResultsPending = deferred.promise;
+        getAllResultsPending[lang] = deferred.promise;
         return deferred.promise;
     };
 
