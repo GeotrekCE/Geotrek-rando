@@ -45,7 +45,7 @@ function filtersToolsService () {
     this.clean = clean;
 }
 
-function filtersService($q, $location, globalSettings, utilsFactory, resultsService, categoriesService, filtersToolsService) {
+function filtersService($q, $location, globalSettings, utilsFactory, resultsService, categoriesService, filtersToolsService, translationService) {
 
     var self = this,
         activeFiltersModel = {
@@ -429,10 +429,11 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     //  Filtering
     //
 
-    var getFilteredResultsPending = false;
-    self.getFilteredResults = function getFilteredResults () {
+    var getFilteredResultsPending = {};
+    self.getFilteredResults = function getFilteredResults (language) {
+        var lang = language || translationService.getCurrentLang();
 
-        if (getFilteredResultsPending) return getFilteredResultsPending;
+        if (getFilteredResultsPending[lang]) return getFilteredResultsPending[lang];
 
         var deferred = $q.defer(),
             filters = self.getActiveFilters();
@@ -461,11 +462,11 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
                     });
 
                     deferred.resolve(self.filteredResults);
-                    getFilteredResultsPending = false;
+                    getFilteredResultsPending[lang] = false;
                 }
             );
 
-        getFilteredResultsPending = deferred.promise;
+        getFilteredResultsPending[lang] = deferred.promise;
         return deferred.promise;
     };
 
