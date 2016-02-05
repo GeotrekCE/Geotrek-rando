@@ -85,6 +85,9 @@ function resultsService($rootScope, $q, $location, globalSettings, treksService,
                     $rootScope.allResults[lang] = results;
                     deferred.resolve(results);
                     getAllResultsPending[lang] = false;
+                    if (results.length > 1000) {
+                        $rootScope.noTransition = true;
+                    }
                 }
             );
 
