@@ -15,11 +15,18 @@ function resultsService($rootScope, $q, $location, globalSettings, treksService,
             promises = [],
             results = [];
 
+        /**
+         * If results have been already fetched for current language, return them
+         */
         if ($rootScope.allResults[lang]) {
             deferred.resolve($rootScope.allResults[lang]);
             getAllResultsPending[lang] = false;
             return deferred.promise;
         }
+
+        /**
+         * If results have never been fetched for current language, fetch them
+         */
 
         if (globalSettings.ENABLE_TREKS) {
             promises.push(
@@ -71,6 +78,9 @@ function resultsService($rootScope, $q, $location, globalSettings, treksService,
 
         $q.all(promises)
             .then(
+                /**
+                 * When all results have been fetched :
+                 */
                 function () {
                     $rootScope.allResults[lang] = results;
                     deferred.resolve(results);
