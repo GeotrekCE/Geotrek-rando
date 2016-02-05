@@ -215,7 +215,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
 
     $scope.toggleAllCategories = function toggleAllCategories () {
         var categories = $scope.categories;
-        if ($rootScope.activeFilters.categories.length > 0) {
+        if ($rootScope.activeFilters.categories && $rootScope.activeFilters.categories.length > 0) {
             $rootScope.activeFilters.categories = [];
         } else {
             $rootScope.activeFilters.categories = [];
