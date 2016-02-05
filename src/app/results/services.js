@@ -83,11 +83,16 @@ function resultsService($rootScope, $q, $location, globalSettings, treksService,
                  */
                 function () {
                     $rootScope.allResults[lang] = results;
-                    deferred.resolve(results);
+                    window.allResults = $rootScope.allResults;
+
+                    var rLength = results.length
+                    if (!$rootScope.allResults.counts) { $rootScope.allResults.counts = {}; }
+                    $rootScope.allResults.counts[lang] = rLength;
+
+                    if (rLength > 1000) { $rootScope.noTransition = true; }
+
                     getAllResultsPending[lang] = false;
-                    if (results.length > 1000) {
-                        $rootScope.noTransition = true;
-                    }
+                    deferred.resolve(results);
                 }
             );
 

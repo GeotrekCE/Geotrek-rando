@@ -457,6 +457,9 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
                         }
                     });
 
+                    if (!$rootScope.allResults.matchs) { $rootScope.allResults.matchs = {}; }
+                    $rootScope.allResults.matchs[lang] = _.where($rootScope.allResults[lang], { isResult: true }).length;
+
                     deferred.resolve($rootScope.allResults[lang]);
                     getFilteredResultsPending[lang] = false;
                 }

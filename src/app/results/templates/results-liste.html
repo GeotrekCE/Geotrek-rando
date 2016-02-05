@@ -1,9 +1,9 @@
 <section class="results-list-wrapper" lazy-check>
     <div class="results-count">
         <span class="results-count-inner">
-            <span class="number">{{results.length}} </span>
-            <span ng-if=" results.length <= 1">{{'RESULT'  | translate}}</span>
-            <span ng-if=" results.length > 1">{{'RESULTS' | translate}}</span>
+            <span class="number">{{ $root.allResults.matchs[$root.lang] }}</span>
+            <span ng-if="$root.allResults.matchs[$root.lang] <= 1">{{'RESULT'  | translate}}</span>
+            <span ng-if="$root.allResults.matchs[$root.lang] > 1">{{'RESULTS' | translate}}</span>
         </span>
     </div>
 
