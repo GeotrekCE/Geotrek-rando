@@ -4,7 +4,7 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
 
     function updateResults(forceRefresh) {
         $rootScope.elementsLoading ++;
-        filtersService.getFilteredResults(forceRefresh)
+        filtersService.getFilteredResults()
             .then(
                 function (results) {
                     $scope.results = results;

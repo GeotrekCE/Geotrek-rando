@@ -430,7 +430,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
     //
 
     var getFilteredResultsPending = false;
-    self.getFilteredResults = function getFilteredResults (forceRefresh) {
+    self.getFilteredResults = function getFilteredResults () {
 
         if (getFilteredResultsPending) return getFilteredResultsPending;
 
