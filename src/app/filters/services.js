@@ -2,7 +2,31 @@
 
 function filtersToolsService () {
 
+    function _localeCompare (a, b) {
+        return a.localeCompare ? a.localeCompare(b) : 0;
+    }
+
+    function _sorter (input) {
+        if (typeof input !== 'object') {
+            return input;
+        } else if (input instanceof Array) {
+            return input.sort();
+        } else if (input) {
+            var keys   = Object.keys(input).sort(_localeCompare);
+            var output = {};
+            keys.forEach(function (key) {
+                output[key] = _sorter(input[key]);
+            });
+            input = output;
+            return output;
+        } else {
+            return input;
+        }
+    }
+
     function clean (object) {
+        delete object.footprint;
+
         _.forEach(object, function (value, key) {
             if ((value instanceof Array) && (value.length === 0)) {
                 delete object[key];
@@ -10,6 +34,10 @@ function filtersToolsService () {
                 delete object[key];
             }
         });
+
+        object = _sorter(object);
+
+        object.footprint = JSON.stringify(object);
 
         return object;
     }
