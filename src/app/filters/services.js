@@ -437,7 +437,7 @@ function filtersService($q, $location, globalSettings, utilsFactory, resultsServ
         var deferred = $q.defer(),
             filters = self.getActiveFilters();
 
-        resultsService.getAllResults(forceRefresh)
+        resultsService.getAllResults()
             .then(
                 function (results) {
                     self.filteredResults = [];

@@ -87,7 +87,7 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
 
     rootScopeEvents.push(
         $rootScope.$on('startSwitchGlobalLang', function () {
-            resultsService.getAllResults(true)
+            resultsService.getAllResults()
                 .then(
                     function () {
                         $rootScope.$emit('switchGlobalLang');
