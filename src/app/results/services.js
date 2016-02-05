@@ -5,8 +5,8 @@ function resultsService($rootScope, $q, $location, globalSettings, treksService,
     var getAllResultsPending = {};
     $rootScope.allResults = {};
 
-    this.getAllResults = function getAllResults () {
-        var lang = translationService.getCurrentLang();
+    this.getAllResults = function getAllResults (language) {
+        var lang = language || translationService.getCurrentLang();
 
         if (getAllResultsPending[lang]) return getAllResultsPending[lang];
 
