@@ -1,6 +1,6 @@
 'use strict';
 
-function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService, popupService, layersService, boundsLimitService) {
+function mapService($rootScope, $q, $state, $resource, $filter, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService, popupService, layersService, boundsLimitService) {
 
     var self = this;
     var displayingResults = false;
@@ -753,12 +753,17 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
     };
 
     this.resultsVisibility = function resultsVisibility () {
+
+        var lang = translationService.getCurrentLang();
+
         var visibleMarkers = self.testMarkersVisibility(self._clustersLayer),
             visibleGeoJson = self.testMarkersVisibility(self._treksgeoJsonLayer);
 
         var visbleResults = _.union(visibleMarkers, visibleGeoJson);
 
-        _.forEach(self.currentResults, function (currentResult) {
+        _.forEach($rootScope.allResults[lang], function (currentResult) {
+            if (!currentResult.isResult) return false;
+
             var selector = '#result-category-' + currentResult.properties.category.id.toString() + '-' + currentResult.id.toString();
             var listResult = document.querySelector(selector);
             if (listResult) {
@@ -873,30 +878,29 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
     };
 
     // Add treks geojson to the map
-    this.displayResults = function displayResults (results, fitBounds, forceRefresh) {
+    this.displayResults = function displayResults (fitBounds, forceRefresh) {
+
+        var lang = translationService.getCurrentLang();
 
         if (displayingResults) return displayingResults;
 
         var deferred = $q.defer();
-        var counter  = 0;
 
         this.maxZoomFitting = globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL - 1;
 
         if (!self.loadingMarkers) {
             self.loadingMarkers = true;
-            self.currentResults = results;
 
             this.treksIconified = this.map.getZoom() < globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL;
             this.clearAllLayers();
 
             var promiseArray = [];
 
-            _.forEach(results, function (result) {
-                counter++;
+            _.forEach($rootScope.allResults[lang], function (result) {
+                if (!result.isResult) return;
 
                 var currentLayer,
                     elementLocation,
-                    currentCount = counter,
                     type = '';
 
                 if (result.geometry.type !== "Point" && result.geometry.type !== 'MultiPoint' && !self.treksIconified) {
@@ -1002,24 +1006,6 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
                                 }
 
                                 currentLayer.addLayer(layer);
-
-                                if (currentCount === _.size(results)) {
-
-                                    self._clustersLayer.addLayer(self._treksMarkersLayer);
-                                    self._clustersLayer.addLayer(self._touristicsMarkersLayer);
-
-                                    self.map.invalidateSize();
-
-                                    if (fitBounds === true) {
-                                        self.updateBounds([self._clustersLayer]);
-                                    }
-
-                                    self.resultsVisibility();
-                                    self.map.on('moveend', self.resultsVisibility);
-                                    self.loadingMarkers = false;
-                                } else {
-                                    self.map.off('moveend', self.resultsVisibility);
-                                }
                             }
                         )
                 );
@@ -1027,6 +1013,20 @@ function mapService($q, $state, $resource, $filter, utilsFactory, globalSettings
             });
 
             $q.all(promiseArray).finally(function () {
+                self._clustersLayer.addLayer(self._treksMarkersLayer);
+                self._clustersLayer.addLayer(self._touristicsMarkersLayer);
+
+                self.map.invalidateSize();
+
+                if (fitBounds === true) {
+                    self.updateBounds([self._clustersLayer]);
+                }
+
+                self.resultsVisibility();
+                self.map.off('moveend', self.resultsVisibility);
+                self.map.on('moveend', self.resultsVisibility);
+                self.loadingMarkers = false;
+
                 deferred.resolve(true);
                 displayingResults = false;
             });

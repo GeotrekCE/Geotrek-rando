@@ -1,6 +1,6 @@
 'use strict';
 
-function MapController($q, $scope, globalSettings, $translate, $rootScope, $state, resultsService, filtersService, mapService, centerService, $stateParams) {
+function MapController($q, $scope, globalSettings, $translate, $rootScope, $state, resultsService, filtersService, mapService, centerService, $stateParams, translationService) {
 
     $scope.currentState = $state.current.name;
     function centerMapOnLastView(fitBounds) {
@@ -17,16 +17,16 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
 
     function updateMapWithResults(fitBounds, forceRefresh) {
         var deferred = $q.defer();
+        var lang = translationService.getCurrentLang();
         centerMapOnLastView(fitBounds);
 
         $rootScope.elementsLoading ++;
         deferred.resolve(
             filtersService.getFilteredResults()
                 .then(
-                    function (data) {
-                        $scope.results = data;
-                        if (data.length > 0) {
-                            mapService.displayResults(data, fitBounds, forceRefresh);
+                    function () {
+                        if ($rootScope.allResults.matchs[lang] > 0) {
+                            mapService.displayResults(fitBounds, forceRefresh);
                             $rootScope.elementsLoading --;
                         } else {
                             mapService.clearAllLayers();
@@ -167,7 +167,7 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
         if ($state.current.name === 'layout.root') {
             if ((mapService.treksIconified && $rootScope.map.getZoom() >= globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL) ||
                 (!mapService.treksIconified && $rootScope.map.getZoom() < globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL)) {
-                mapService.displayResults($scope.results, false);
+                mapService.displayResults(false);
             }
         }
 
