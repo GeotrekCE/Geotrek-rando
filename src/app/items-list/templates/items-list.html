@@ -35,12 +35,11 @@
             <span class="target"     ng-if="::result.properties.target_audience">{{::result.properties.target_audience}}</span>
         </div>
 
-        <div class="result-themes themes" ng-if="result.properties.themes.length > 0" ng-class="{'is-approved': result.properties.approved}">
+        <div class="result-themes themes" ng-if="::result.properties.themes.length" ng-class="::{'is-approved': result.properties.approved}">
             <div class="result-themes-label">{{:: 'THEMES' | translate }}</div>
             <ul class="result-themes-list">
-                <li class="result-theme" ng-repeat="theme in result.properties.themes track by theme.label">
-                    <ng-include ng-if="::theme.pictogram | isSVG" src="theme.pictogram"></ng-include>
-                    <img ng-if="::!(theme.pictogram | isSVG)" ng-src="{{::theme.pictogram}}" ng-alt="{{::theme.label}}">
+                <li class="result-theme" ng-repeat="theme in ::result.properties.themes track by theme.label">
+                    <img data-src="{{::theme.pictogram}}" ng-alt="{{::theme.label}}">
                 </li>
             </ul>
         </div>
