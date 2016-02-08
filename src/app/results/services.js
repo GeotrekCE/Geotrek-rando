@@ -85,7 +85,7 @@ function resultsService($rootScope, $q, $location, globalSettings, treksService,
                     $rootScope.allResults[lang] = results;
                     window.allResults = $rootScope.allResults;
 
-                    var rLength = results.length
+                    var rLength = results.length;
                     if (!$rootScope.allResults.counts) { $rootScope.allResults.counts = {}; }
                     $rootScope.allResults.counts[lang] = rLength;
 
