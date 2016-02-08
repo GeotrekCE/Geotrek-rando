@@ -3,7 +3,7 @@
 function contentsService(globalSettings, settingsFactory, translationService, $resource, $q) {
 
     var self = this;
-    self._contentsList = [];
+    self._contentsList = {};
 
     this.refactorContent = function refactorContent (contentsData) {
 
@@ -72,30 +72,27 @@ function contentsService(globalSettings, settingsFactory, translationService, $r
 
     var getContentsPending = false;
     this.getContents = function getContents () {
+        var lang = translationService.getCurrentLang();
+
         /**
          * If there is already a promise fetching contents, return it
          */
         if (getContentsPending) {
-            return getContentsPending
-        };
-
-        /**
-         * If contents have already been fetched, return them
-         */
-        if (self._contentsList) {
-            return $q.when(self._contentsList);
+            return getContentsPending;
         }
 
         /**
-         * If contents have never been fetched, fetch them
+         * If contents have already been fetched for current language, return them
          */
+        if (self._contentsList[lang]) {
+            return $q.when(self._contentsList[lang]);
+        }
 
+        /**
+         * If contents have never been fetched for current language, fetch them
+         */
         var deferred = $q.defer();
-        var lang = translationService.getCurrentLang();
-
-        var currentLang = translationService.getCurrentLang();
-        var url = settingsFactory.touristicUrl.replace(/\$lang/, currentLang);
-
+        var url      = settingsFactory.touristicUrl.replace(/\$lang/, lang);
         var requests = $resource(url, {}, {
             query: {
                 method: 'GET',
