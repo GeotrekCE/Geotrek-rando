@@ -26,33 +26,36 @@ function contentsService(globalSettings, settingsFactory, translationService, $q
             /**
              * Setup main picture (use `pictures[0]`)
              */
-             if (content.properties.pictures && content.properties.pictures.length) {
-                 content.properties.picture = content.properties.pictures[0];
-             }
+            if (content.properties.pictures && content.properties.pictures.length) {
+                content.properties.picture = content.properties.pictures[0];
+            }
 
             /**
             * Convert relative paths to absolute URL
             */
+            _.forEach(content.properties.pictures, function (picture) {
+                if (picture.url) {
+                    picture.url = globalSettings.API_URL + picture.url;
+                }
+            });
+            _.forEach(content.properties.type1, function (aType1) {
+                if (aType1.pictogram) {
+                    aType1.pictogram = globalSettings.API_URL + aType1.pictogram;
+                }
+            });
+            _.forEach(content.properties.type2, function (aType2) {
+                if (aType2.pictogram) {
+                    aType2.pictogram = globalSettings.API_URL + aType2.pictogram;
+                }
+            });
             if (content.properties.category.pictogram) {
                 content.properties.category.pictogram = globalSettings.API_URL + content.properties.category.pictogram;
             }
-                _.forEach(content.properties.themes, function (theme) {
-                    if (theme.pictogram) {
-                        theme.pictogram = globalSettings.API_URL + theme.pictogram;
-                    }
-                });
-
-                _.forEach(content.properties.type1, function (aType1) {
-                    if (aType1.pictogram) {
-                        aType1.pictogram = globalSettings.API_URL + aType1.pictogram;
-                    }
-                });
-                _.forEach(content.properties.type2, function (aType2) {
-                    if (aType2.pictogram) {
-                        aType2.pictogram = globalSettings.API_URL + aType2.pictogram;
-                    }
-                });
-
+            _.forEach(content.properties.themes, function (theme) {
+                if (theme.pictogram) {
+                    theme.pictogram = globalSettings.API_URL + theme.pictogram;
+                }
+            });
             if (content.properties.map_image_url) {
                 content.properties.map_image_url = globalSettings.API_URL + content.properties.map_image_url;
             }
@@ -65,11 +68,6 @@ function contentsService(globalSettings, settingsFactory, translationService, $q
             if (content.properties.thumbnail) {
                 content.properties.thumbnail = globalSettings.API_URL + content.properties.thumbnail;
             }
-                _.forEach(content.properties.pictures, function (picture) {
-                    if (picture.url) {
-                        picture.url = globalSettings.API_URL + picture.url;
-                    }
-                });
         });
         return contentsData;
     };
