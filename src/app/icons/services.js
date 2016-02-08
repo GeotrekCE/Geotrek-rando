@@ -1,6 +1,6 @@
 'use strict';
 
-function iconsService($resource, $q, $http, $filter, globalSettings, categoriesService, poisService, servicesService) {
+function iconsService($q, $http, $filter, globalSettings, categoriesService, poisService, servicesService) {
 
     var self = this;
 
@@ -128,15 +128,9 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
                         counter++;
                         var currentCounter = counter;
                         if ($filter('isSVG')(category.pictogram)) {
-                            var requests = $resource(category.pictogram, {}, {
-                                query: {
-                                    method: 'GET',
-                                    cache: true
-                                }
-                            });
-
-                            requests.query().$promise
-                                .then(function (icon) {
+                            $http({url : category.pictogram})
+                                .then(function (response) {
+                                    var icon = response.data;
                                     var finalIcon = '';
                                     _.each(icon, function(el, index) {
                                         if (!isNaN(parseInt(index, 10))) {
