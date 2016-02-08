@@ -1,6 +1,6 @@
 'use strict';
 
-function treksService(globalSettings, settingsFactory, translationService, $resource, $q) {
+function treksService(globalSettings, settingsFactory, translationService, $http, $q) {
 
     var self = this;
     self._trekList = [];
@@ -144,18 +144,11 @@ function treksService(globalSettings, settingsFactory, translationService, $reso
          * If treks have never been fetched for current language, fetch them
          */
         var deferred = $q.defer();
-
         var url      = settingsFactory.treksUrl.replace(/\$lang/, lang);
-        var requests = $resource(url, {}, {
-            query: {
-                method: 'GET',
-                cache: true
-            }
-        }, {stripTrailingSlashes: false});
 
-        requests.query().$promise
-            .then(function (file) {
-                var data = angular.fromJson(file);
+        $http({url: url})
+            .then(function (response) {
+                var data = angular.fromJson(response.data);
                 var refactoredTreks = self.refactorTrek(data);
                 self._trekList[lang] = refactoredTreks;
                 deferred.resolve(refactoredTreks);
