@@ -259,14 +259,14 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
         return deferred.promise;
     };
 
-    this.getCategories = function getCategories (forceRefresh) {
+    this.getCategories = function getCategories () {
 
         var deferred = $q.defer(),
             trekCats = null,
             contentCats = null,
             eventCat = null;
 
-        if (self._categoriesList && !forceRefresh) {
+        if (self._categoriesList) {
 
             deferred.resolve(self._categoriesList);
 
