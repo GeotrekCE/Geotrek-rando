@@ -275,18 +275,18 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
         if (getCategoriesPending) return getCategoriesPending;
 
+        /**
+         * Early return list of categories if it exists
+         */
+        if (self._categoriesList && self._categoriesList.length) {
+            getCategoriesPending = false;
+            return $q.when(self._categoriesList);
+        }
+
         var deferred = $q.defer(),
             trekCats = null,
             contentCats = null,
             eventCat = null;
-
-        if (self._categoriesList && self._categoriesList.length) {
-
-            deferred.resolve(self._categoriesList);
-            getCategoriesPending = false;
-            return deferred.promise;
-
-        } else {
 
             var promises = [];
 
@@ -353,7 +353,6 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                         getCategoriesPending = false;
                     }
                 );
-        }
 
         getCategoriesPending = deferred.promise;
         return deferred.promise;
