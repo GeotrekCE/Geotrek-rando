@@ -6,35 +6,52 @@ function contentsService(globalSettings, settingsFactory, translationService, $q
     self._contentsList = {};
 
     this.refactorContent = function refactorContent (contentsData) {
+        var lang = translationService.getCurrentLang();
 
         // Parse content pictures, and change their URL
         _.forEach(contentsData.features, function (content) {
 
+            /**
+             * Content Type
+             */
+            content.properties.contentType = 'content';
+
+            /**
+             * Content IDs
+             */
+            content.uid  = content.uid  || content.properties.category.id + '-' + content.id;
+            content.luid = content.luid || lang + '_' + content.properties.category.id + '-' + content.id;
+
+
+            /**
+             * Setup main picture (use `pictures[0]`)
+             */
+             if (content.properties.pictures && content.properties.pictures.length) {
+                 content.properties.picture = content.properties.pictures[0];
+             }
+
+            /**
+            * Convert relative paths to absolute URL
+            */
             if (content.properties.category.pictogram) {
                 content.properties.category.pictogram = globalSettings.API_URL + content.properties.category.pictogram;
             }
-            if (content.properties.themes) {
                 _.forEach(content.properties.themes, function (theme) {
                     if (theme.pictogram) {
                         theme.pictogram = globalSettings.API_URL + theme.pictogram;
                     }
                 });
-            }
 
-            if (content.properties.type1) {
                 _.forEach(content.properties.type1, function (aType1) {
                     if (aType1.pictogram) {
                         aType1.pictogram = globalSettings.API_URL + aType1.pictogram;
                     }
                 });
-            }
-            if (content.properties.type2) {
                 _.forEach(content.properties.type2, function (aType2) {
                     if (aType2.pictogram) {
                         aType2.pictogram = globalSettings.API_URL + aType2.pictogram;
                     }
                 });
-            }
 
             if (content.properties.map_image_url) {
                 content.properties.map_image_url = globalSettings.API_URL + content.properties.map_image_url;
@@ -48,24 +65,11 @@ function contentsService(globalSettings, settingsFactory, translationService, $q
             if (content.properties.thumbnail) {
                 content.properties.thumbnail = globalSettings.API_URL + content.properties.thumbnail;
             }
-            if (content.properties.pictures) {
-                if (content.properties.pictures.length) {
-                    content.properties.picture = content.properties.pictures[0];
-                }
                 _.forEach(content.properties.pictures, function (picture) {
                     if (picture.url) {
                         picture.url = globalSettings.API_URL + picture.url;
                     }
                 });
-            }
-            if (!content.uid) {
-                content.uid = content.properties.category.id + '-' + content.id;
-            }
-            if (!content.luid) {
-                var lang = translationService.getCurrentLang();
-                content.luid = lang + '_' + content.properties.category.id + '-' + content.id;
-            }
-            content.properties.contentType = 'content';
         });
         return contentsData;
     };
