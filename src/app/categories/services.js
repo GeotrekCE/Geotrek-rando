@@ -239,6 +239,10 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
     };
 
     this.getNonExcludedCategories = function getNonExcludedCategories () {
+
+        /**
+         * If there is already a promise, return it
+         */
         if (self._filteredCategoriesList) {
             return $q.when(self._filteredCategoriesList);
         }
@@ -273,13 +277,17 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
     var getCategoriesPending = false;
     this.getCategories = function getCategories () {
 
-        if (getCategoriesPending) return getCategoriesPending;
+        /**
+         * If there is already a promise, return it
+         */
+        if (getCategoriesPending) {
+            return getCategoriesPending;
+        }
 
         /**
          * Early return list of categories if it exists
          */
         if (self._categoriesList && self._categoriesList.length) {
-            getCategoriesPending = false;
             return $q.when(self._categoriesList);
         }
 
