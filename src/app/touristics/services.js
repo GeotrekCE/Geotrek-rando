@@ -202,20 +202,16 @@ function eventsService(globalSettings, settingsFactory, translationService, $htt
          * If events have never been fetched for current language, fetch them
          */
         var deferred = $q.defer();
+        var url      = settingsFactory.eventsUrl.replace(/\$lang/, lang);
 
-        if (true) {
-            var url = settingsFactory.eventsUrl.replace(/\$lang/, lang);
-
-            $http({url: url})
-                .then(function (response) {
-                    var data = angular.fromJson(response.data);
-                    var refactoredEvents = self.refactorEvents(data);
-                    self._eventsList[lang] = refactoredEvents;
-                    deferred.resolve(refactoredEvents);
-                    getEventsPending = false;
-                });
-
-        }
+        $http({url: url})
+            .then(function (response) {
+                var data = angular.fromJson(response.data);
+                var refactoredEvents = self.refactorEvents(data);
+                self._eventsList[lang] = refactoredEvents;
+                deferred.resolve(refactoredEvents);
+                getEventsPending = false;
+            });
 
         getEventsPending = deferred.promise;
         return deferred.promise;
