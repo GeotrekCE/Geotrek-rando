@@ -3,7 +3,7 @@
 function treksService(globalSettings, settingsFactory, translationService, $http, $q) {
 
     var self = this;
-    self._trekList = [];
+    self._trekList = {};
     var getTreksPending = false;
 
     this.refactorTrek = function refactorTrek () {
