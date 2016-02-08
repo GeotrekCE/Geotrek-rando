@@ -4,7 +4,6 @@ function treksService(globalSettings, settingsFactory, translationService, $http
 
     var self = this;
     self._trekList = {};
-    var getTreksPending = false;
 
     this.refactorTrek = function refactorTrek () {
         var lang = translationService.getCurrentLang();
@@ -132,6 +131,7 @@ function treksService(globalSettings, settingsFactory, translationService, $http
         return self._trekList[lang];
     };
 
+    var getTreksPending = false;
     this.getTreks = function getTreks () {
         var lang = translationService.getCurrentLang();
 
