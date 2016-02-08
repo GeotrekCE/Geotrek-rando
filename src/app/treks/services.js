@@ -11,68 +11,62 @@ function treksService(globalSettings, settingsFactory, translationService, $http
 
         // Parse trek pictures, and change their URL
         simpleEach(self._trekList[lang].features, function (trek) {
-            if (trek.properties.pictures) {
-                if (trek.properties.pictures.length) {
+
+            /**
+             * Setup main picture (use `pictures[0]`)
+             */
+                if (trek.properties.pictures && trek.properties.pictures.length) {
                     trek.properties.picture = trek.properties.pictures[0];
                 }
+
+            /**
+             * Convert relative paths to absolute URL
+             */
                 _.forEach(trek.properties.pictures, function (picture) {
                     if (picture.url) {
                         picture.url = globalSettings.API_URL + picture.url;
                     }
                 });
-            }
-            if (trek.properties.type1) {
                 _.forEach(trek.properties.type1, function (aType1) {
                     if (aType1.pictogram) {
                         aType1.pictogram = globalSettings.API_URL + aType1.pictogram;
                     }
                 });
-            }
-            if (trek.properties.type2) {
                 _.forEach(trek.properties.type2, function (aType2) {
                     if (aType2.pictogram) {
                         aType2.pictogram = globalSettings.API_URL + aType2.pictogram;
                     }
                 });
-            }
-            if (trek.properties.difficulty) {
-                trek.properties.difficulty.pictogram = globalSettings.API_URL + trek.properties.difficulty.pictogram;
-            }
-            if (trek.properties.route) {
-                trek.properties.route.pictogram = globalSettings.API_URL + trek.properties.route.pictogram;
-            }
-            if (trek.properties.themes) {
+                if (trek.properties.difficulty && trek.properties.difficulty.pictogram) {
+                    trek.properties.difficulty.pictogram = globalSettings.API_URL + trek.properties.difficulty.pictogram;
+                }
+                if (trek.properties.route && trek.properties.route.pictogram) {
+                    trek.properties.route.pictogram = globalSettings.API_URL + trek.properties.route.pictogram;
+                }
                 _.forEach(trek.properties.themes, function (theme) {
                     if (theme.pictogram) {
                         theme.pictogram = globalSettings.API_URL + theme.pictogram;
                     }
                 });
-            }
-            if (trek.properties.networks) {
                 _.forEach(trek.properties.networks, function (network) {
                     if (network.pictogram) {
                         network.pictogram = globalSettings.API_URL + network.pictogram;
                     }
                 });
-            }
-            if (trek.properties.information_desks) {
                 _.forEach(trek.properties.information_desks, function (information_desk) {
                     if (information_desk.photo_url) {
                         information_desk.photo_url = globalSettings.API_URL + information_desk.photo_url;
                     }
                 });
-            }
-            if (trek.properties.web_links) {
                 _.forEach(trek.properties.web_links, function (link) {
                     if (link.category && link.category.pictogram) {
                         link.category.pictogram = globalSettings.API_URL + link.category.pictogram;
                     }
                 });
-            }
             if (trek.properties.thumbnail) {
                 trek.properties.thumbnail = globalSettings.API_URL + trek.properties.thumbnail;
             }
-            if (trek.properties.category.pictogram) {
+            if (trek.properties.category && trek.properties.category.pictogram) {
                 trek.properties.category.pictogram = globalSettings.API_URL + trek.properties.category.pictogram;
             }
             if (trek.properties.gpx) {
@@ -84,12 +78,17 @@ function treksService(globalSettings, settingsFactory, translationService, $http
             if (trek.properties.printable) {
                 trek.properties.printable = globalSettings.API_URL + trek.properties.printable;
             }
-            if (trek.properties['length']) {
-                trek.properties.eLength = trek.properties['length'];
-            }
             if (trek.properties.altimetric_profile) {
                 trek.properties.altimetric_profile = globalSettings.API_URL + trek.properties.altimetric_profile;
             }
+
+            /**
+             * Rename property to avoid confusion with Array native property
+             */
+            if (trek.properties.length) {
+                trek.properties.eLength = trek.properties.length;
+            }
+
             if (trek.properties.relationships.length > 0) {
                 var relatedElements = {
                     has_common_departure: [],
@@ -122,6 +121,7 @@ function treksService(globalSettings, settingsFactory, translationService, $http
             }
             trek.properties.contentType = 'trek';
         });
+
         return self._trekList[lang];
     };
 
