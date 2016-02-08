@@ -1,6 +1,6 @@
 'use strict';
 
-function contentsService(globalSettings, settingsFactory, translationService, $resource, $q) {
+function contentsService(globalSettings, settingsFactory, translationService, $q, $http) {
 
     var self = this;
     self._contentsList = {};
@@ -93,16 +93,10 @@ function contentsService(globalSettings, settingsFactory, translationService, $r
          */
         var deferred = $q.defer();
         var url      = settingsFactory.touristicUrl.replace(/\$lang/, lang);
-        var requests = $resource(url, {}, {
-            query: {
-                method: 'GET',
-                cache: true
-            }
-        }, {stripTrailingSlashes: false});
 
-        requests.query().$promise
-            .then(function (file) {
-                var data = angular.fromJson(file);
+        $http({url: url})
+            .then(function (response) {
+                var data = angular.fromJson(response.data);
                 var refactoredContents = self.refactorContent(data);
                 self._contentsList[lang] = refactoredContents;
                 deferred.resolve(refactoredContents);
