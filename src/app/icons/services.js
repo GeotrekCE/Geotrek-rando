@@ -153,21 +153,33 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
         return deferred.promise;
     };
 
+    var getCategoryIconPending = {};
     this.getCategoryIcon = function getCategoryIcon (categoryId) {
-
-        var deferred = $q.defer();
-
-        if (self.categoriesIcons && self.categoriesIcons[categoryId]) {
-            deferred.resolve(self.categoriesIcons[categoryId]);
-        } else {
-            self.getCategoriesIcons()
-                .then(
-                    function (icons) {
-                        deferred.resolve(icons[categoryId]);
-                    }
-                );
+        /**
+         * If there is already a promise, return it
+         */
+        if (getCategoryIconPending[categoryId]) {
+            return getCategoryIconPending[categoryId];
         }
 
+        /**
+         * If icon has already been fetched for current category, return it
+         */
+        if (self.categoriesIcons && self.categoriesIcons[categoryId]) {
+            return $q.when(self.categoriesIcons[categoryId]);
+        }
+
+        /**
+         * If icon has never been fetched for current category, fetch it
+         */
+        var deferred = $q.defer();
+        self.getCategoriesIcons()
+            .then(function (icons) {
+                deferred.resolve(icons[categoryId]);
+                getCategoryIconPending[categoryId] = false;
+            });
+
+        getCategoryIconPending[categoryId] = deferred.promise;
         return deferred.promise;
     };
 
