@@ -111,7 +111,7 @@ function contentsService(globalSettings, settingsFactory, translationService, $q
 
 }
 
-function eventsService(globalSettings, settingsFactory, translationService, $resource, $q) {
+function eventsService(globalSettings, settingsFactory, translationService, $http, $q) {
 
     var self = this;
     self._eventsList = [];
@@ -197,16 +197,9 @@ function eventsService(globalSettings, settingsFactory, translationService, $res
             var currentLang = translationService.getCurrentLang();
             var url = settingsFactory.eventsUrl.replace(/\$lang/, currentLang);
 
-            var requests = $resource(url, {}, {
-                query: {
-                    method: 'GET',
-                    cache: true
-                }
-            }, {stripTrailingSlashes: false});
-
-            requests.query().$promise
-                .then(function (file) {
-                    var data = angular.fromJson(file);
+            $http({url: url})
+                .then(function (response) {
+                    var data = angular.fromJson(response.data);
                     var refactoredEvents = self.refactorEvents(data);
                     self._eventsList[lang] = refactoredEvents;
                     deferred.resolve(refactoredEvents);
