@@ -1,6 +1,6 @@
 'use strict';
 
-function categoriesService(globalSettings, $q, treksService, contentsService, eventsService, utilsFactory) {
+function categoriesService(globalSettings, $q, treksService, contentsService, eventsService, utilsFactory, translationService) {
     var self = this;
 
     self._categoriesList = [];
@@ -274,14 +274,15 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
     };
 
 
-    var getCategoriesPending = false;
+    var getCategoriesPending = {};
     this.getCategories = function getCategories () {
+        var lang = translationService.getCurrentLang();
 
         /**
          * If there is already a promise, return it
          */
-        if (getCategoriesPending) {
-            return getCategoriesPending;
+        if (getCategoriesPending[lang]) {
+            return getCategoriesPending[lang];
         }
 
         /**
@@ -358,11 +359,11 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
                     self.preprocessCategories();
                     deferred.resolve(self._categoriesList);
-                    getCategoriesPending = false;
+                    getCategoriesPending[lang] = false;
                 }
             );
 
-        getCategoriesPending = deferred.promise;
+        getCategoriesPending[lang] = deferred.promise;
         return deferred.promise;
 
     };
