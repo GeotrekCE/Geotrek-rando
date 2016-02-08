@@ -320,25 +320,32 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
 
     var getSVGIconPending = {};
     this.getSVGIcon = function getSVGIcon (url, iconName) {
-
+        /**
+         * If there is already a promise fetching icon, return it
+         */
         if (getSVGIconPending[url]) {
             return getSVGIconPending[url];
         }
 
+        /**
+         * If icon has already been fetched, return it
+         */
         if (self.icons_liste[iconName].markup) {
             return $q.when(self.icons_liste[iconName].markup);
         }
 
+        /**
+         * If icon has never been fetched, fetch it
+         */
         var deferred = $q.defer();
-        if (true) {
-            $http({url: url})
-                .then(function (response) {
-                    var icon = response.data;
-                    self.icons_liste[iconName].markup = icon;
-                    deferred.resolve(icon);
-                    getSVGIconPending[url] = false;
-                });
-        }
+
+        $http({url: url})
+            .then(function (response) {
+                var icon = response.data;
+                self.icons_liste[iconName].markup = icon;
+                deferred.resolve(icon);
+                getSVGIconPending[url] = false;
+            });
 
         getSVGIconPending[url] = deferred.promise;
         return deferred.promise;
