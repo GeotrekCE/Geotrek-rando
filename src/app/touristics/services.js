@@ -93,27 +93,25 @@ function contentsService(globalSettings, settingsFactory, translationService, $r
         var deferred = $q.defer();
         var lang = translationService.getCurrentLang();
 
-        if (true) {
-            var currentLang = translationService.getCurrentLang();
-            var url = settingsFactory.touristicUrl.replace(/\$lang/, currentLang);
+        var currentLang = translationService.getCurrentLang();
+        var url = settingsFactory.touristicUrl.replace(/\$lang/, currentLang);
 
-            var requests = $resource(url, {}, {
-                query: {
-                    method: 'GET',
-                    cache: true
-                }
-            }, {stripTrailingSlashes: false});
+        var requests = $resource(url, {}, {
+            query: {
+                method: 'GET',
+                cache: true
+            }
+        }, {stripTrailingSlashes: false});
 
-            requests.query().$promise
-                .then(function (file) {
-                    var data = angular.fromJson(file);
-                    var refactoredContents = self.refactorContent(data);
-                    self._contentsList[lang] = refactoredContents;
-                    deferred.resolve(refactoredContents);
-                    getContentsPending = false;
-                });
+        requests.query().$promise
+            .then(function (file) {
+                var data = angular.fromJson(file);
+                var refactoredContents = self.refactorContent(data);
+                self._contentsList[lang] = refactoredContents;
+                deferred.resolve(refactoredContents);
+                getContentsPending = false;
+            });
 
-        }
 
         getContentsPending = deferred.promise;
         return deferred.promise;
