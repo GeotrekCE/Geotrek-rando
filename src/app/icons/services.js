@@ -3,7 +3,8 @@
 function iconsService($resource, $q, $http, $filter, globalSettings, categoriesService, poisService, servicesService) {
 
     var self = this;
-    var getCategoriesIconsPending = false;
+
+    self.categoriesIcons = {};
 
     this.icons_liste = {
         default_icon: {},
@@ -95,11 +96,25 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
 
     };
 
+    var getCategoriesIconsPending = false;
     this.getCategoriesIcons = function getCategoriesIcons () {
+        /**
+         * If there is already a promise fetching icons, return it
+         */
+        if (getCategoriesIconsPending) {
+            return getCategoriesIconsPending;
+        }
 
-        // Early return previous promise if allready existing
-        if (getCategoriesIconsPending) return getCategoriesIconsPending;
+        /**
+         * If icons have already been fetched, return them
+         */
+        if (Object.keys(self.categoriesIcons).length) {
+            return $q.when(self.categoriesIcons);
+        }
 
+        /**
+         * If icons have never been fetched, fetch them
+         */
         var deferred = $q.defer();
 
         categoriesService.getCategories()
