@@ -146,8 +146,7 @@ function treksService(globalSettings, settingsFactory, translationService, $reso
         var deferred = $q.defer();
 
         if (true) {
-            var currentLang = translationService.getCurrentLang();
-            var url = settingsFactory.treksUrl.replace(/\$lang/, currentLang);
+            var url = settingsFactory.treksUrl.replace(/\$lang/, lang);
             var requests = $resource(url, {}, {
                 query: {
                     method: 'GET',
