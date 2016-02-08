@@ -325,10 +325,12 @@ function iconsService($resource, $q, $http, $filter, globalSettings, categoriesS
             return getSVGIconPending[url];
         }
 
-        var deferred = $q.defer();
         if (self.icons_liste[iconName].markup) {
-            deferred.resolve(self.icons_liste[iconName].markup);
-        } else {
+            return $q.when(self.icons_liste[iconName].markup);
+        }
+
+        var deferred = $q.defer();
+        if (true) {
             $http({url: url})
                 .then(function (response) {
                     var icon = response.data;
