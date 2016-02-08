@@ -140,18 +140,14 @@ function iconsService($q, $http, $filter, globalSettings, categoriesService, poi
                                     self.categoriesIcons[category.id] = finalIcon;
                                     if (currentCounter === _.size(categories)) {
                                         deferred.resolve(self.categoriesIcons);
-                                        setTimeout(function () {
-                                            getCategoriesIconsPending = false;
-                                        }, 250);
+                                        getCategoriesIconsPending = false;
                                     }
                                 });
                         } else {
                             self.categoriesIcons[category.id] = '<img src="' + category.pictogram + '" />';
                             if (currentCounter === _.size(categories)) {
                                 deferred.resolve(self.categoriesIcons);
-                                setTimeout(function () {
-                                    getCategoriesIconsPending = false;
-                                }, 250);
+                                getCategoriesIconsPending = false;
                             }
                         }
 
