@@ -6,9 +6,11 @@ function treksService(globalSettings, settingsFactory, translationService, $http
     self._trekList = [];
     var getTreksPending = false;
 
-    this.refactorTrek = function refactorTrek (treksData) {
+    this.refactorTrek = function refactorTrek () {
+        var lang = translationService.getCurrentLang();
+
         // Parse trek pictures, and change their URL
-        _.forEach(treksData.features, function (trek) {
+        simpleEach(self._trekList[lang].features, function (trek) {
             if (trek.properties.pictures) {
                 if (trek.properties.pictures.length) {
                     trek.properties.picture = trek.properties.pictures[0];
@@ -120,7 +122,7 @@ function treksService(globalSettings, settingsFactory, translationService, $http
             }
             trek.properties.contentType = 'trek';
         });
-        return treksData;
+        return self._trekList[lang];
     };
 
     this.getTreks = function getTreks () {
@@ -148,10 +150,10 @@ function treksService(globalSettings, settingsFactory, translationService, $http
 
         $http({url: url})
             .then(function (response) {
-                var data = angular.fromJson(response.data);
-                var refactoredTreks = self.refactorTrek(data);
-                self._trekList[lang] = refactoredTreks;
-                deferred.resolve(refactoredTreks);
+                self._trekList[lang] = angular.fromJson(response.data);
+                self.refactorTrek();
+
+                deferred.resolve(self._trekList[lang]);
                 getTreksPending = false;
             });
 
