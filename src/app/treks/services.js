@@ -145,25 +145,23 @@ function treksService(globalSettings, settingsFactory, translationService, $reso
          */
         var deferred = $q.defer();
 
-        if (true) {
-            var url = settingsFactory.treksUrl.replace(/\$lang/, lang);
-            var requests = $resource(url, {}, {
-                query: {
-                    method: 'GET',
-                    cache: true
-                }
-            }, {stripTrailingSlashes: false});
+        var url      = settingsFactory.treksUrl.replace(/\$lang/, lang);
+        var requests = $resource(url, {}, {
+            query: {
+                method: 'GET',
+                cache: true
+            }
+        }, {stripTrailingSlashes: false});
 
-            requests.query().$promise
-                .then(function (file) {
-                    var data = angular.fromJson(file);
-                    var refactoredTreks = self.refactorTrek(data);
-                    self._trekList[lang] = refactoredTreks;
-                    deferred.resolve(refactoredTreks);
-                    getTreksPending = false;
-                });
+        requests.query().$promise
+            .then(function (file) {
+                var data = angular.fromJson(file);
+                var refactoredTreks = self.refactorTrek(data);
+                self._trekList[lang] = refactoredTreks;
+                deferred.resolve(refactoredTreks);
+                getTreksPending = false;
+            });
 
-        }
 
         getTreksPending = deferred.promise;
         return deferred.promise;
