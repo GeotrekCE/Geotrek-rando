@@ -130,8 +130,8 @@ function treksService(globalSettings, settingsFactory, translationService, $http
          * If there is already a promise fetching results, return it
          */
         if (getTreksPending) {
-            return getTreksPending
-        };
+            return getTreksPending;
+        }
 
         /**
          * If treks have already been fetched for current language, return them
