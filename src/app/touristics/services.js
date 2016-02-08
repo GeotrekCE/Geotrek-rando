@@ -114,8 +114,7 @@ function contentsService(globalSettings, settingsFactory, translationService, $q
 function eventsService(globalSettings, settingsFactory, translationService, $http, $q) {
 
     var self = this;
-    self._eventsList = [];
-    var getEventsPending = false;
+    self._eventsList = {};
 
     this.refactorEvents = function refactorEvents (eventsData) {
 
@@ -181,21 +180,31 @@ function eventsService(globalSettings, settingsFactory, translationService, $htt
         return eventsData;
     };
 
+    var getEventsPending = false;
     this.getEvents = function getEvents () {
-
-        if (getEventsPending) return getEventsPending;
-
-        var deferred = $q.defer();
         var lang = translationService.getCurrentLang();
 
+        /**
+         * If there is already a promise fetching events, return it
+         */
+        if (getEventsPending) {
+            return getEventsPending;
+        }
+
+        /**
+         * If events have already been fetched for current language, return them
+         */
         if (self._eventsList[lang]) {
+            return $q.when(self._eventsList[lang]);
+        }
 
-            deferred.resolve(self._eventsList[lang]);
-            getEventsPending = false;
+        /**
+         * If events have never been fetched for current language, fetch them
+         */
+        var deferred = $q.defer();
 
-        } else {
-            var currentLang = translationService.getCurrentLang();
-            var url = settingsFactory.eventsUrl.replace(/\$lang/, currentLang);
+        if (true) {
+            var url = settingsFactory.eventsUrl.replace(/\$lang/, lang);
 
             $http({url: url})
                 .then(function (response) {
