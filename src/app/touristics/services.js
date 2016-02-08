@@ -117,10 +117,11 @@ function eventsService(globalSettings, settingsFactory, translationService, $htt
     var self = this;
     self._eventsList = {};
 
-    this.refactorEvents = function refactorEvents (eventsData) {
+    this.refactorEvents = function refactorEvents () {
+        var lang = translationService.getCurrentLang();
 
         // Parse trEvent pictures, and change their URL
-        _.forEach(eventsData.features, function (trEvent) {
+        _.forEach(self._eventsList[lang].features, function (trEvent) {
 
             if (trEvent.properties.category.pictogram) {
                 trEvent.properties.category.pictogram = globalSettings.API_URL + trEvent.properties.category.pictogram;
@@ -178,7 +179,7 @@ function eventsService(globalSettings, settingsFactory, translationService, $htt
             trEvent.properties.contentType = 'event';
 
         });
-        return eventsData;
+        return self._eventsList[lang];
     };
 
     var getEventsPending = false;
@@ -207,10 +208,9 @@ function eventsService(globalSettings, settingsFactory, translationService, $htt
 
         $http({url: url})
             .then(function (response) {
-                var data = angular.fromJson(response.data);
-                var refactoredEvents = self.refactorEvents(data);
-                self._eventsList[lang] = refactoredEvents;
-                deferred.resolve(refactoredEvents);
+                self._eventsList[lang] = angular.fromJson(response.data);
+                self.refactorEvents();
+                deferred.resolve(self._eventsList[lang]);
                 getEventsPending = false;
             });
 
