@@ -120,38 +120,32 @@ function iconsService($q, $http, $filter, globalSettings, categoriesService, poi
         categoriesService.getCategories()
             .then(
                 function (categories) {
-                    var counter = 0;
+                    var promisesArray = [];
+
                     _.forEach(categories, function (category) {
                         if (!self.categoriesIcons) {
                             self.categoriesIcons = {};
                         }
-                        counter++;
-                        var currentCounter = counter;
+
+                        var localPromise;
+
                         if ($filter('isSVG')(category.pictogram)) {
-                            $http({url : category.pictogram})
-                                .then(function (response) {
-                                    var icon = response.data;
-                                    var finalIcon = '';
-                                    _.each(icon, function(el, index) {
-                                        if (!isNaN(parseInt(index, 10))) {
-                                            finalIcon += el;
-                                        }
-                                    });
-                                    self.categoriesIcons[category.id] = finalIcon;
-                                    if (currentCounter === _.size(categories)) {
-                                        deferred.resolve(self.categoriesIcons);
-                                        getCategoriesIconsPending = false;
-                                    }
-                                });
+                            localPromise = $http({url : category.pictogram}).then(function (response) {
+                                self.categoriesIcons[category.id] = response.data;
+                            });
                         } else {
                             self.categoriesIcons[category.id] = '<img src="' + category.pictogram + '" />';
-                            if (currentCounter === _.size(categories)) {
-                                deferred.resolve(self.categoriesIcons);
-                                getCategoriesIconsPending = false;
-                            }
+                            localPromise = $q.when(self.categoriesIcons[category.id]);
                         }
 
+                        promisesArray.push(localPromise);
                     });
+
+                    $q.all(promisesArray).then(function () {
+                        deferred.resolve(self.categoriesIcons);
+                        getCategoriesIconsPending = false;
+                    });
+
                 }
             );
         getCategoriesIconsPending = deferred.promise;
