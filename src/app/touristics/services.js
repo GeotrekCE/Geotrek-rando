@@ -4,7 +4,6 @@ function contentsService(globalSettings, settingsFactory, translationService, $r
 
     var self = this;
     self._contentsList = [];
-    var getContentsPending = false;
 
     this.refactorContent = function refactorContent (contentsData) {
 
@@ -71,19 +70,30 @@ function contentsService(globalSettings, settingsFactory, translationService, $r
         return contentsData;
     };
 
+    var getContentsPending = false;
     this.getContents = function getContents () {
+        /**
+         * If there is already a promise fetching contents, return it
+         */
+        if (getContentsPending) {
+            return getContentsPending
+        };
 
-        if (getContentsPending) return getContentsPending;
+        /**
+         * If contents have already been fetched, return them
+         */
+        if (self._contentsList) {
+            return $q.when(self._contentsList);
+        }
+
+        /**
+         * If contents have never been fetched, fetch them
+         */
 
         var deferred = $q.defer();
         var lang = translationService.getCurrentLang();
 
-        if (self._contentsList[lang]) {
-
-            deferred.resolve(self._contentsList[lang]);
-            getContentsPending = false;
-
-        } else {
+        if (true) {
             var currentLang = translationService.getCurrentLang();
             var url = settingsFactory.touristicUrl.replace(/\$lang/, currentLang);
 
