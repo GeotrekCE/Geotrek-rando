@@ -144,24 +144,29 @@ function eventsService(globalSettings, settingsFactory, translationService, $htt
             /**
             * Convert relative paths to absolute URL
             */
+            _.forEach(trEvent.properties.pictures, function (picture) {
+                if (picture.url) {
+                    picture.url = globalSettings.API_URL + picture.url;
+                }
+            });
+            _.forEach(trEvent.properties.type1, function (aType1) {
+                if (aType1.pictogram) {
+                    aType1.pictogram = globalSettings.API_URL + aType1.pictogram;
+                }
+            });
+            _.forEach(trEvent.properties.type2, function (aType2) {
+                if (aType2.pictogram) {
+                    aType2.pictogram = globalSettings.API_URL + aType2.pictogram;
+                }
+            });
             if (trEvent.properties.category.pictogram) {
                 trEvent.properties.category.pictogram = globalSettings.API_URL + trEvent.properties.category.pictogram;
             }
-                _.forEach(trEvent.properties.themes, function (theme) {
-                    if (theme.pictogram) {
-                        theme.pictogram = globalSettings.API_URL + theme.pictogram;
-                    }
-                });
-                _.forEach(trEvent.properties.type1, function (aType1) {
-                    if (aType1.pictogram) {
-                        aType1.pictogram = globalSettings.API_URL + aType1.pictogram;
-                    }
-                });
-                _.forEach(trEvent.properties.type2, function (aType2) {
-                    if (aType2.pictogram) {
-                        aType2.pictogram = globalSettings.API_URL + aType2.pictogram;
-                    }
-                });
+            _.forEach(trEvent.properties.themes, function (theme) {
+                if (theme.pictogram) {
+                    theme.pictogram = globalSettings.API_URL + theme.pictogram;
+                }
+            });
             if (trEvent.properties.map_image_url) {
                 trEvent.properties.map_image_url = globalSettings.API_URL + trEvent.properties.map_image_url;
             }
@@ -175,13 +180,8 @@ function eventsService(globalSettings, settingsFactory, translationService, $htt
                 trEvent.properties.thumbnail = globalSettings.API_URL + trEvent.properties.thumbnail;
             }
 
-                _.forEach(trEvent.properties.pictures, function (picture) {
-                    if (picture.url) {
-                        picture.url = globalSettings.API_URL + picture.url;
-                    }
-                });
-
         });
+
         return self._eventsList[lang];
     };
 
