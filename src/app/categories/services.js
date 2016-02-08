@@ -235,11 +235,11 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
     };
 
-    this.getNonExcludedCategories = function getNonExcludedCategories (forceRefresh) {
+    this.getNonExcludedCategories = function getNonExcludedCategories () {
         var deferred = $q.defer(),
             filteredCategories = [];
 
-        self.getCategories(forceRefresh)
+        self.getCategories()
             .then(
                 function (categories) {
                     for (var i = categories.length - 1; i >= 0; i--) {
