@@ -123,10 +123,6 @@ function iconsService($q, $http, $filter, globalSettings, categoriesService, poi
                     var promisesArray = [];
 
                     _.forEach(categories, function (category) {
-                        if (!self.categoriesIcons) {
-                            self.categoriesIcons = {};
-                        }
-
                         var localPromise;
 
                         if ($filter('isSVG')(category.pictogram)) {

@@ -19,7 +19,6 @@ function treksService(globalSettings, settingsFactory, translationService, $http
             /**
              * Trek IDs
              */
-            var lang  = translationService.getCurrentLang();
             trek.uid  = trek.uid || trek.properties.category.id + '-' + trek.id;
             trek.luid = trek.luid || lang + '_' + trek.properties.category.id + '-' + trek.id;
 
