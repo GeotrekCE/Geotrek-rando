@@ -5,11 +5,11 @@ function contentsService(globalSettings, settingsFactory, translationService, $q
     var self = this;
     self._contentsList = {};
 
-    this.refactorContent = function refactorContent (contentsData) {
+    this.refactorContent = function refactorContent () {
         var lang = translationService.getCurrentLang();
 
         // Parse content pictures, and change their URL
-        _.forEach(contentsData.features, function (content) {
+        _.forEach(self._contentsList[lang].features, function (content) {
 
             /**
              * Content Type
@@ -69,7 +69,7 @@ function contentsService(globalSettings, settingsFactory, translationService, $q
                 content.properties.thumbnail = globalSettings.API_URL + content.properties.thumbnail;
             }
         });
-        return contentsData;
+        return self._contentsList[lang];
     };
 
     var getContentsPending = false;
@@ -98,10 +98,9 @@ function contentsService(globalSettings, settingsFactory, translationService, $q
 
         $http({url: url})
             .then(function (response) {
-                var data = angular.fromJson(response.data);
-                var refactoredContents = self.refactorContent(data);
-                self._contentsList[lang] = refactoredContents;
-                deferred.resolve(refactoredContents);
+                self._contentsList[lang] = angular.fromJson(response.data);
+                self.refactorContent();
+                deferred.resolve(self._contentsList[lang]);
                 getContentsPending = false;
             });
 
