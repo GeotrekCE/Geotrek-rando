@@ -288,71 +288,71 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
             contentCats = null,
             eventCat = null;
 
-            var promises = [];
+        var promises = [];
 
-            if (globalSettings.ENABLE_TREKS) {
-                promises.push(
-                    treksService.getTreks()
-                        .then(
-                            function (treks) {
-                                if (treks.features.length > 0) {
-                                    trekCats = self.getTreksCategories(treks);
-                                }
-                            }
-                        )
-                );
-            }
-
-            if (globalSettings.ENABLE_TOURISTIC_CONTENT) {
-                promises.push(
-                    contentsService.getContents()
-                        .then(
-                            function (contents) {
-                                if (contents.features.length > 0) {
-                                    contentCats = self.getTouristicContentCategories(contents);
-                                }
-                            }
-                        )
-                );
-            }
-
-            if (globalSettings.ENABLE_TOURISTIC_EVENTS) {
-                promises.push(
-                    eventsService.getEvents()
-                        .then(
-                            function (trEvents) {
-                                if (trEvents.features.length > 0) {
-                                    eventCat = self.getTouristicEventsCategories(trEvents);
-                                }
-                            }
-                        )
-
-                );
-            }
-
-            $q.all(promises)
-                .then(
-                    function () {
-                        self._categoriesList = [];
-                        if (globalSettings.ENABLE_TREKS && trekCats) {
-                            for (var i = trekCats.length - 1; i >= 0; i--) {
-                                self._categoriesList.push(trekCats[i]);
+        if (globalSettings.ENABLE_TREKS) {
+            promises.push(
+                treksService.getTreks()
+                    .then(
+                        function (treks) {
+                            if (treks.features.length > 0) {
+                                trekCats = self.getTreksCategories(treks);
                             }
                         }
-                        if (globalSettings.ENABLE_TOURISTIC_CONTENT && contentCats) {
-                            for (var j = contentCats.length - 1; j >= 0; j--) {
-                                self._categoriesList.push(contentCats[j]);
+                    )
+            );
+        }
+
+        if (globalSettings.ENABLE_TOURISTIC_CONTENT) {
+            promises.push(
+                contentsService.getContents()
+                    .then(
+                        function (contents) {
+                            if (contents.features.length > 0) {
+                                contentCats = self.getTouristicContentCategories(contents);
                             }
                         }
-                        if (globalSettings.ENABLE_TOURISTIC_EVENTS && eventCat) {
-                            self._categoriesList.push(eventCat);
-                        }
+                    )
+            );
+        }
 
-                        self.preprocessCategories();
-                        deferred.resolve(self._categoriesList);
-                        getCategoriesPending = false;
+        if (globalSettings.ENABLE_TOURISTIC_EVENTS) {
+            promises.push(
+                eventsService.getEvents()
+                    .then(
+                        function (trEvents) {
+                            if (trEvents.features.length > 0) {
+                                eventCat = self.getTouristicEventsCategories(trEvents);
+                            }
+                        }
+                    )
+
+            );
+        }
+
+        $q.all(promises)
+            .then(
+                function () {
+                    self._categoriesList = [];
+                    if (globalSettings.ENABLE_TREKS && trekCats) {
+                        for (var i = trekCats.length - 1; i >= 0; i--) {
+                            self._categoriesList.push(trekCats[i]);
+                        }
                     }
-                );
+                    if (globalSettings.ENABLE_TOURISTIC_CONTENT && contentCats) {
+                        for (var j = contentCats.length - 1; j >= 0; j--) {
+                            self._categoriesList.push(contentCats[j]);
+                        }
+                    }
+                    if (globalSettings.ENABLE_TOURISTIC_EVENTS && eventCat) {
+                        self._categoriesList.push(eventCat);
+                    }
+
+                    self.preprocessCategories();
+                    deferred.resolve(self._categoriesList);
+                    getCategoriesPending = false;
+                }
+            );
 
         getCategoriesPending = deferred.promise;
         return deferred.promise;
