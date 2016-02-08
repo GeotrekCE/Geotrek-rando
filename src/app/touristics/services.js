@@ -123,30 +123,45 @@ function eventsService(globalSettings, settingsFactory, translationService, $htt
         // Parse trEvent pictures, and change their URL
         _.forEach(self._eventsList[lang].features, function (trEvent) {
 
+            /**
+             * Content Type
+             */
+            trEvent.properties.contentType = 'event';
+
+            /**
+             * Content IDs
+             */
+            trEvent.uid  = trEvent.uid  || trEvent.properties.category.id + '-' + trEvent.id;
+            trEvent.luid = trEvent.luid || lang + '_' + trEvent.properties.category.id + '-' + trEvent.id;
+
+            /**
+             * Setup main picture (use `pictures[0]`)
+             */
+            if (trEvent.properties.pictures && trEvent.properties.pictures.length) {
+                trEvent.properties.picture = trEvent.properties.pictures[0];
+            }
+
+            /**
+            * Convert relative paths to absolute URL
+            */
             if (trEvent.properties.category.pictogram) {
                 trEvent.properties.category.pictogram = globalSettings.API_URL + trEvent.properties.category.pictogram;
             }
-            if (trEvent.properties.themes) {
                 _.forEach(trEvent.properties.themes, function (theme) {
                     if (theme.pictogram) {
                         theme.pictogram = globalSettings.API_URL + theme.pictogram;
                     }
                 });
-            }
-            if (trEvent.properties.type1) {
                 _.forEach(trEvent.properties.type1, function (aType1) {
                     if (aType1.pictogram) {
                         aType1.pictogram = globalSettings.API_URL + aType1.pictogram;
                     }
                 });
-            }
-            if (trEvent.properties.type2) {
                 _.forEach(trEvent.properties.type2, function (aType2) {
                     if (aType2.pictogram) {
                         aType2.pictogram = globalSettings.API_URL + aType2.pictogram;
                     }
                 });
-            }
             if (trEvent.properties.map_image_url) {
                 trEvent.properties.map_image_url = globalSettings.API_URL + trEvent.properties.map_image_url;
             }
@@ -159,24 +174,12 @@ function eventsService(globalSettings, settingsFactory, translationService, $htt
             if (trEvent.properties.thumbnail) {
                 trEvent.properties.thumbnail = globalSettings.API_URL + trEvent.properties.thumbnail;
             }
-            if (trEvent.properties.pictures) {
-                if (trEvent.properties.pictures.length) {
-                    trEvent.properties.picture = trEvent.properties.pictures[0];
-                }
+
                 _.forEach(trEvent.properties.pictures, function (picture) {
                     if (picture.url) {
                         picture.url = globalSettings.API_URL + picture.url;
                     }
                 });
-            }
-            if (!trEvent.uid) {
-                trEvent.uid = trEvent.properties.category.id + '-' + trEvent.id;
-            }
-            if (!trEvent.luid) {
-                var lang = translationService.getCurrentLang();
-                trEvent.luid = lang + '_' + trEvent.properties.category.id + '-' + trEvent.id;
-            }
-            trEvent.properties.contentType = 'event';
 
         });
         return self._eventsList[lang];
