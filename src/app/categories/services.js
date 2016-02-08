@@ -4,6 +4,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
     var self = this;
 
     self._categoriesList = [];
+    self._filteredCategoriesList;
 
     this.replaceImgURLs = function replaceImgURLs (categoriesData) {
 
@@ -238,27 +239,34 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
     };
 
     this.getNonExcludedCategories = function getNonExcludedCategories () {
-        var deferred = $q.defer(),
-            filteredCategories = [];
+        if (self._filteredCategoriesList) {
+            return $q.when(self._filteredCategoriesList);
+        }
+
+        var deferred = $q.defer();
 
         self.getCategories()
-            .then(
-                function (categories) {
-                    for (var i = categories.length - 1; i >= 0; i--) {
-                        var category = categories[i];
-
-                        if (globalSettings.LIST_EXCLUDE_CATEGORIES.indexOf(category.id) === -1) {
-                            filteredCategories.push(category);
-                        }
-                    }
-                    deferred.resolve(filteredCategories);
-                },
-                function (err) {
-                    console.error(err);
-                }
-            );
+            .then(function () {
+                self._filteredCategoriesList = _.where(self._categoriesList, { excluded: false });
+            })
+            .finally(function () {
+                deferred.resolve(self._filteredCategoriesList);
+            });
 
         return deferred.promise;
+    };
+
+    /**
+     * Mark which category is excluded or not
+     */
+    this.preprocessCategories = function preprocessCategories () {
+        var excludes = globalSettings.LIST_EXCLUDE_CATEGORIES || [];
+
+        if (self._categoriesList && self._categoriesList.length) {
+            simpleEach(self._categoriesList, function (category) {
+                category.excluded = !!(excludes.indexOf(category.id) > -1);
+            });
+        }
     };
 
 
@@ -339,6 +347,8 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                         if (globalSettings.ENABLE_TOURISTIC_EVENTS && eventCat) {
                             self._categoriesList.push(eventCat);
                         }
+
+                        self.preprocessCategories();
                         deferred.resolve(self._categoriesList);
                         getCategoriesPending = false;
                     }
