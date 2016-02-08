@@ -259,7 +259,11 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
         return deferred.promise;
     };
 
+
+    var getCategoriesPending = false;
     this.getCategories = function getCategories () {
+
+        if (getCategoriesPending) return getCategoriesPending;
 
         var deferred = $q.defer(),
             trekCats = null,
@@ -269,6 +273,8 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
         if (self._categoriesList) {
 
             deferred.resolve(self._categoriesList);
+            getCategoriesPending = false;
+            return deferred.promise;
 
         } else {
 
@@ -332,10 +338,12 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                             self._categoriesList.push(eventCat);
                         }
                         deferred.resolve(self._categoriesList);
+                        getCategoriesPending = false;
                     }
                 );
         }
 
+        getCategoriesPending = deferred.promise;
         return deferred.promise;
 
     };
