@@ -3,6 +3,8 @@
 function categoriesService(globalSettings, $q, treksService, contentsService, eventsService, utilsFactory) {
     var self = this;
 
+    self._categoriesList = [];
+
     this.replaceImgURLs = function replaceImgURLs (categoriesData) {
 
         // Parse trek pictures, and change their URL
@@ -270,7 +272,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
             contentCats = null,
             eventCat = null;
 
-        if (self._categoriesList) {
+        if (self._categoriesList && self._categoriesList.length) {
 
             deferred.resolve(self._categoriesList);
             getCategoriesPending = false;
