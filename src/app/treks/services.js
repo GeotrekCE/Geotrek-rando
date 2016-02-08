@@ -15,54 +15,54 @@ function treksService(globalSettings, settingsFactory, translationService, $http
             /**
              * Setup main picture (use `pictures[0]`)
              */
-                if (trek.properties.pictures && trek.properties.pictures.length) {
-                    trek.properties.picture = trek.properties.pictures[0];
-                }
+            if (trek.properties.pictures && trek.properties.pictures.length) {
+                trek.properties.picture = trek.properties.pictures[0];
+            }
 
             /**
              * Convert relative paths to absolute URL
              */
-                _.forEach(trek.properties.pictures, function (picture) {
-                    if (picture.url) {
-                        picture.url = globalSettings.API_URL + picture.url;
-                    }
-                });
-                _.forEach(trek.properties.type1, function (aType1) {
-                    if (aType1.pictogram) {
-                        aType1.pictogram = globalSettings.API_URL + aType1.pictogram;
-                    }
-                });
-                _.forEach(trek.properties.type2, function (aType2) {
-                    if (aType2.pictogram) {
-                        aType2.pictogram = globalSettings.API_URL + aType2.pictogram;
-                    }
-                });
-                if (trek.properties.difficulty && trek.properties.difficulty.pictogram) {
-                    trek.properties.difficulty.pictogram = globalSettings.API_URL + trek.properties.difficulty.pictogram;
+            _.forEach(trek.properties.pictures, function (picture) {
+                if (picture.url) {
+                    picture.url = globalSettings.API_URL + picture.url;
                 }
-                if (trek.properties.route && trek.properties.route.pictogram) {
-                    trek.properties.route.pictogram = globalSettings.API_URL + trek.properties.route.pictogram;
+            });
+            _.forEach(trek.properties.type1, function (aType1) {
+                if (aType1.pictogram) {
+                    aType1.pictogram = globalSettings.API_URL + aType1.pictogram;
                 }
-                _.forEach(trek.properties.themes, function (theme) {
-                    if (theme.pictogram) {
-                        theme.pictogram = globalSettings.API_URL + theme.pictogram;
-                    }
-                });
-                _.forEach(trek.properties.networks, function (network) {
-                    if (network.pictogram) {
-                        network.pictogram = globalSettings.API_URL + network.pictogram;
-                    }
-                });
-                _.forEach(trek.properties.information_desks, function (information_desk) {
-                    if (information_desk.photo_url) {
-                        information_desk.photo_url = globalSettings.API_URL + information_desk.photo_url;
-                    }
-                });
-                _.forEach(trek.properties.web_links, function (link) {
-                    if (link.category && link.category.pictogram) {
-                        link.category.pictogram = globalSettings.API_URL + link.category.pictogram;
-                    }
-                });
+            });
+            _.forEach(trek.properties.type2, function (aType2) {
+                if (aType2.pictogram) {
+                    aType2.pictogram = globalSettings.API_URL + aType2.pictogram;
+                }
+            });
+            if (trek.properties.difficulty && trek.properties.difficulty.pictogram) {
+                trek.properties.difficulty.pictogram = globalSettings.API_URL + trek.properties.difficulty.pictogram;
+            }
+            if (trek.properties.route && trek.properties.route.pictogram) {
+                trek.properties.route.pictogram = globalSettings.API_URL + trek.properties.route.pictogram;
+            }
+            _.forEach(trek.properties.themes, function (theme) {
+                if (theme.pictogram) {
+                    theme.pictogram = globalSettings.API_URL + theme.pictogram;
+                }
+            });
+            _.forEach(trek.properties.networks, function (network) {
+                if (network.pictogram) {
+                    network.pictogram = globalSettings.API_URL + network.pictogram;
+                }
+            });
+            _.forEach(trek.properties.information_desks, function (information_desk) {
+                if (information_desk.photo_url) {
+                    information_desk.photo_url = globalSettings.API_URL + information_desk.photo_url;
+                }
+            });
+            _.forEach(trek.properties.web_links, function (link) {
+                if (link.category && link.category.pictogram) {
+                    link.category.pictogram = globalSettings.API_URL + link.category.pictogram;
+                }
+            });
             if (trek.properties.thumbnail) {
                 trek.properties.thumbnail = globalSettings.API_URL + trek.properties.thumbnail;
             }
