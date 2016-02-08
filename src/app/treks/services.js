@@ -13,6 +13,18 @@ function treksService(globalSettings, settingsFactory, translationService, $http
         simpleEach(self._trekList[lang].features, function (trek) {
 
             /**
+             * Content Type
+             */
+            trek.properties.contentType = 'trek';
+
+            /**
+             * Trek IDs
+             */
+            var lang  = translationService.getCurrentLang();
+            trek.uid  = trek.uid || trek.properties.category.id + '-' + trek.id;
+            trek.luid = trek.luid || lang + '_' + trek.properties.category.id + '-' + trek.id;
+
+            /**
              * Setup main picture (use `pictures[0]`)
              */
             if (trek.properties.pictures && trek.properties.pictures.length) {
@@ -89,6 +101,9 @@ function treksService(globalSettings, settingsFactory, translationService, $http
                 trek.properties.eLength = trek.properties.length;
             }
 
+            /**
+             * Relationships
+             */
             if (trek.properties.relationships.length > 0) {
                 var relatedElements = {
                     has_common_departure: [],
@@ -112,14 +127,6 @@ function treksService(globalSettings, settingsFactory, translationService, $http
 
                 trek.properties.relationships = relatedElements;
             }
-            if (!trek.uid) {
-                trek.uid = trek.properties.category.id + '-' + trek.id;
-            }
-            if (!trek.luid) {
-                var lang = translationService.getCurrentLang();
-                trek.luid = lang + '_' + trek.properties.category.id + '-' + trek.id;
-            }
-            trek.properties.contentType = 'trek';
         });
 
         return self._trekList[lang];
