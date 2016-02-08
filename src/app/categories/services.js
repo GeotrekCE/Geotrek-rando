@@ -3,8 +3,8 @@
 function categoriesService(globalSettings, $q, treksService, contentsService, eventsService, utilsFactory, translationService) {
     var self = this;
 
-    self._categoriesList = [];
-    self._filteredCategoriesList;
+    self._categoriesList = {};
+    self._filteredCategoriesList = {};
 
     this.replaceImgURLs = function replaceImgURLs (categoriesData) {
 
@@ -239,22 +239,23 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
     };
 
     this.getNonExcludedCategories = function getNonExcludedCategories () {
+        var lang = translationService.getCurrentLang();
 
         /**
          * If there is already a promise, return it
          */
-        if (self._filteredCategoriesList) {
-            return $q.when(self._filteredCategoriesList);
+        if (self._filteredCategoriesList[lang]) {
+            return $q.when(self._filteredCategoriesList[lang]);
         }
 
         var deferred = $q.defer();
 
         self.getCategories()
             .then(function () {
-                self._filteredCategoriesList = _.where(self._categoriesList, { excluded: false });
+                self._filteredCategoriesList[lang] = _.where(self._categoriesList[lang], { excluded: false });
             })
             .finally(function () {
-                deferred.resolve(self._filteredCategoriesList);
+                deferred.resolve(self._filteredCategoriesList[lang]);
             });
 
         return deferred.promise;
@@ -264,10 +265,11 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
      * Mark which category is excluded or not
      */
     this.preprocessCategories = function preprocessCategories () {
+        var lang     = translationService.getCurrentLang();
         var excludes = globalSettings.LIST_EXCLUDE_CATEGORIES || [];
 
-        if (self._categoriesList && self._categoriesList.length) {
-            simpleEach(self._categoriesList, function (category) {
+        if (self._categoriesList[lang] && self._categoriesList[lang].length) {
+            simpleEach(self._categoriesList[lang], function (category) {
                 category.excluded = !!(excludes.indexOf(category.id) > -1);
             });
         }
@@ -288,8 +290,8 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
         /**
          * Early return list of categories if it exists
          */
-        if (self._categoriesList && self._categoriesList.length) {
-            return $q.when(self._categoriesList);
+        if (self._categoriesList[lang] && self._categoriesList[lang].length) {
+            return $q.when(self._categoriesList[lang]);
         }
 
         var deferred = $q.defer(),
@@ -342,23 +344,23 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
         $q.all(promises)
             .then(
                 function () {
-                    self._categoriesList = [];
+                    self._categoriesList[lang] = [];
                     if (globalSettings.ENABLE_TREKS && trekCats) {
                         for (var i = trekCats.length - 1; i >= 0; i--) {
-                            self._categoriesList.push(trekCats[i]);
+                            self._categoriesList[lang].push(trekCats[i]);
                         }
                     }
                     if (globalSettings.ENABLE_TOURISTIC_CONTENT && contentCats) {
                         for (var j = contentCats.length - 1; j >= 0; j--) {
-                            self._categoriesList.push(contentCats[j]);
+                            self._categoriesList[lang].push(contentCats[j]);
                         }
                     }
                     if (globalSettings.ENABLE_TOURISTIC_EVENTS && eventCat) {
-                        self._categoriesList.push(eventCat);
+                        self._categoriesList[lang].push(eventCat);
                     }
 
                     self.preprocessCategories();
-                    deferred.resolve(self._categoriesList);
+                    deferred.resolve(self._categoriesList[lang]);
                     getCategoriesPending[lang] = false;
                 }
             );
