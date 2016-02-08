@@ -471,44 +471,38 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
 
     self.filterElement = function filterElement (element) {
 
-        // Set Up final test vars
-        var categoriesFilter = true,
-            themesFilter = true,
-            searchFilter = true,
-            citiesFilter = true,
-            districtsFilter = true,
-            structureFilter = true,
-            filters;
-
         if (!self.activeFilters) {
             self.initActiveFilter();
         }
-        filters = self.activeFilters;
-        categoriesFilter = self.matchByCategories(element, filters);
 
-        if (filters.themes && filters.themes.length > 0) {
-            themesFilter = self.matchById(element.properties, filters.themes, 'themes');
+        var filters = self.activeFilters;
+
+        if (!self.matchByCategories(element, filters)) {
+            return false;
         }
 
-        if (filters.search) {
-            searchFilter = self.testByString(element.properties, filters.search);
+        if (filters.themes && filters.themes.length && !self.matchById(element.properties, filters.themes, 'themes')) {
+            return false;
         }
 
-        if (filters.cities && filters.cities.length > 0) {
-            citiesFilter = self.matchById(element.properties, filters.cities, 'cities');
+        if (filters.search && !self.testByString(element.properties, filters.search)) {
+            return false;
         }
 
-        if (filters.districts && filters.districts.length > 0) {
-            districtsFilter = self.matchById(element.properties, filters.districts, 'districts');
+        if (filters.cities && filters.cities.length && !self.matchById(element.properties, filters.cities, 'cities')) {
+            return false;
         }
 
-        if (filters.structure && filters.structure.length > 0) {
-            structureFilter = self.matchById(element.properties, filters.structure, 'structure');
+        if (filters.districts && filters.districts.length && !self.matchById(element.properties, filters.districts, 'districts')) {
+            return false;
         }
 
-        // CATEGORY && THEME && QUERY && CITY && DISTRICT
+        if (filters.structure && filters.structure.length && !self.matchById(element.properties, filters.structure, 'structure')) {
+            return false;
+        }
+
         // Global test that pass if all filters test are true
-        return categoriesFilter && themesFilter && searchFilter && citiesFilter && districtsFilter && structureFilter;
+        return true;
 
     };
 
