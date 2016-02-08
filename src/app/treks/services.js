@@ -124,18 +124,28 @@ function treksService(globalSettings, settingsFactory, translationService, $reso
     };
 
     this.getTreks = function getTreks () {
-
-        if (getTreksPending) return getTreksPending;
-
-        var deferred = $q.defer();
         var lang = translationService.getCurrentLang();
 
+        /**
+         * If there is already a promise fetching results, return it
+         */
+        if (getTreksPending) {
+            return getTreksPending
+        };
+
+        /**
+         * If treks have already been fetched for current language, return them
+         */
         if (self._trekList[lang]) {
+            return $q.when(self._trekList[lang]);
+        }
 
-            deferred.resolve(self._trekList[lang]);
-            getTreksPending = false;
+        /**
+         * If treks have never been fetched for current language, fetch them
+         */
+        var deferred = $q.defer();
 
-        } else {
+        if (true) {
             var currentLang = translationService.getCurrentLang();
             var url = settingsFactory.treksUrl.replace(/\$lang/, currentLang);
             var requests = $resource(url, {}, {
@@ -155,9 +165,9 @@ function treksService(globalSettings, settingsFactory, translationService, $reso
                 });
 
         }
+
         getTreksPending = deferred.promise;
         return deferred.promise;
-
     };
 
 }
