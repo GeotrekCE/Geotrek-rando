@@ -72,12 +72,12 @@ require('./vendors/scripts/angular-daterangepicker/angular-daterangepicker.js');
 require('./vendors/scripts/sparklines.min.js');
 
 //MAP LIBRARIES
+require('leaflet-geometryutil');
 require('leaflet-ajax');
 require('leaflet-textpath');
 require('leaflet-minimap');
 require('leaflet.markercluster');
 require('leaflet.fullscreen');
-require('leaflet-geometryutil');
 
 require('../../node_modules/leaflet-active-area/src/leaflet.activearea.js');
 
