@@ -1,4 +1,16 @@
 
+2.8.2 / 2016-02-09
+==================
+
+**Enhancements**
+
+  * Create npm-shrinkwrap to lock packages versions
+  * Fix npm dependencies coming from git with commit hash
+
+**Bug fixes**
+
+  * Change modules order to avoid overriding L
+
 2.8.1 / 2016-02-09
 ==================
 
