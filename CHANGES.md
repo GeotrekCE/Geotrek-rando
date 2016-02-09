@@ -1,4 +1,62 @@
 
+2.8.0 / 2016-02-09
+==================
+
+**Bug fixes**
+
+  * Init `self._trekList` as Objet instead of Array
+  * Replace irregular whitespaces
+  * Use a previously declared `lang` var
+
+**Enhancements**
+
+  * Add eslintrc rule to avoid warning on console.log
+  * Allow early return if any required filter returns false
+  * Remove redundant var init
+  * Use `$q.when` instead of creating a Defer object for returning it immediately
+  * Use $http service instead of $resource for fetching Treks/Contents/Events
+  * Do not delay resetting promise cache
+  * Add a comments
+  * Use private (instead of public) var for storing getSVGIcon promises
+  * Better use of `lang` var for storing contents
+  * Add initialization for `_categoriesList`
+  * Add argument for filtering specific language contents
+  * Rename method to avoid confusion with `filtersService`
+  * Add condition to `simpleEach` to avoid exceptions
+  * ESLint correction pass
+
+**Performance enhancements**
+
+  * Use service var instead of argument for preprocessing Treks/Contents/Events
+  * Refactor `getCategoriesIcons` method
+  * Debounce `getCategoryIcon` getter calls
+  * Debounce `getCategories` getter calls
+  * Debounce `getFilteredResults` getter calls
+  * Use $http service instead of $resource for fetching Treks/Contents/Events/Cat icons
+  * Use independent storage for each language for categories
+  * Use current language for storing promises of `getCategories`
+  * Add comments and move IDs setup to top in `refactorTrek`
+  * Use a categories preprocess instead of one more promise chaining
+
+  * Use a storage in `$rootScope` for each language in `resultsService`
+  * Use `$rootScope` variable for displaying results
+  * Adapt `mapServices` to `$rootScope` results storage
+  * Store counts of results & display it
+  * Now caching inside each content the filtering result
+  * Adjust e2e tests
+  * Add default placeholder to results
+
+  * Use lazy loading for results themes icon
+  * Avoid injecting non-used service
+  * Remove style attribute for placeholder picture
+  * Create a directive for lazy loading pictures with data-src
+
+  * Disable CSS transitions when there are more than 100 contents
+  * Add argument for getting specific language contents
+
+  * Add an angular service for cleaning filters object from empty values
+  * Maintain a strict ordering for `activeFilters`, allowing pseudo-footprint
+
 2.7.6 / 2016-02-02
 ==================
 
