@@ -20,7 +20,7 @@ cache:
     - node_modules
 
 install:
-  - npm update
+  - npm install
 
 script:
   - "npm test"
