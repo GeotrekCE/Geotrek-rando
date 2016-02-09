@@ -65,7 +65,7 @@
                         </div>
                     </div>
                 </div>
-                <div ng-if="enabStructures" class="selector structures" ng-class="{empty: filters.structure.length === 0, opened: selectMenus.structure.opened}" ng-mouseenter="openSelectMenu('structures')" ng-mouseleave="closeSelectMenu('structure')">
+                <div ng-if="enabStructures" class="selector structures" ng-class="{empty: filters.structure.length === 0, opened: selectMenus.structure.opened}" ng-mouseenter="openSelectMenu('structure')" ng-mouseleave="closeSelectMenu('structure')">
                     <span ng-if="filterLength.structure > 0">{{filterLength.structure}} {{'STRUCTURES' | translate}} {{'SELECTED' | translate}} <span class="caret"></span></span>
                     <span ng-if="!filterLength.structure || filterLength.structure === 0">{{'STRUCTURES' | translate}} <span class="caret"></span></span>
                     <div class="choices">

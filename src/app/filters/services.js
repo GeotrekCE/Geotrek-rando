@@ -190,7 +190,7 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
 
     self.addPropertyToFilters = function addPropertyToFilters (property, propertyName) {
         if (property) {
-            if (typeof property !== 'object') {
+            if (!(property instanceof Array)) {
                 property = [property];
             }
 
