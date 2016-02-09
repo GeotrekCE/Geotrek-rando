@@ -30,6 +30,8 @@
     .icon-bar {
         background: $primary-color;
         transition: all 0.2s ease;
+        @include transitionfuse;
+
         &:nth-child(2) {
             transform: translateY(6px) rotate(45deg);
         }

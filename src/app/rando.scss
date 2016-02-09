@@ -23,7 +23,7 @@ html, body, .main-container {
 
 a {
     color: $primary-color;
-    transition: all 0.2s ease-out;
+    transition: color 0.2s ease-out;
     &:hover, &:focus, &:active {
         color: darken($primary-color, 5%);
     }

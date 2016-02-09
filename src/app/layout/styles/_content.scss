@@ -4,10 +4,6 @@
     }
 }
 
-.notransition * {
-    transition: none !important;
-}
-
 .main-content {
     position: relative;
     z-index: 1;
@@ -114,6 +110,7 @@
     padding-left: .5em;
 
     transition: all 150ms ease;
+    @include transitionfuse;
 
     color: rgba(#000, .25);
     border: none;

@@ -53,8 +53,12 @@
     margin: 0.5rem 1.5%;
     border: 2px solid rgba(230, 230, 230, 1);
     transition: all 0.1s ease-out;
+    @include transitionfuse;
+
     -webkit-backface-visibility: hidden;
     -webkit-transform-style: preserve-3d;
+
+
     &.no-theme {
         padding-bottom: 1em;
     }
@@ -136,6 +140,7 @@
         width: 100%;
         height: auto;
         transition: transform 0.2s ease;
+        @include transitionfuse;
     }
 }
 
@@ -163,7 +168,8 @@
     overflow: hidden;
     text-shadow: .5px .5px 1px rgba(0, 0, 0, .6);
 
-    transition: all 250ms ease;
+    transition: left 250ms ease;
+    @include transitionfuse;
 
     @each $category in $categories {
         li.category-#{nth($category, 1)} & {

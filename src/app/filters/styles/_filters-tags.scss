@@ -6,6 +6,7 @@
 
     transition: all 200ms ease;
     transform: translate(0, 100%);
+    @include transitionfuse;
 
     background-color: rgba(#3a3a3a, .5);
     &.extend {
@@ -45,6 +46,8 @@
         margin-left: 5px;
 
         transition: transform 200ms ease;
+        @include transitionfuse;
+
         transform: rotate(-90deg);
         vertical-align: middle;
         svg {
