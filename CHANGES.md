@@ -1,4 +1,12 @@
 
+2.8.1 / 2016-02-09
+==================
+
+**Bug fixes**
+
+  * Do not disable transitions globally
+  * Fix structures filter
+
 2.8.0 / 2016-02-09
 ==================
 
