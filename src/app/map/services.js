@@ -1332,7 +1332,7 @@ function popupService() {
                 return this.popupSources.info;
             }
             if (this.popupSources.selector) {
-                return document.querySelector(this.popupSources.selector).outerHTML;
+                return document.querySelector(this.popupSources.selector).outerHTML.replace(/data-src/g, 'src');
             }
         }
 
