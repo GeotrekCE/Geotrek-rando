@@ -10,7 +10,7 @@
             <span class="detail-aside-group-counter" ng-if="displayAsidesCounter" ng-bind="elementChildren.length"></span>
             <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
         </div>
-        <div class="detail-aside-group-content">
+        <div class="detail-aside-group-content" lazy-check>
             <items-list elements="elementChildren" type="aside"></items-list>
         </div>
     </div>
@@ -20,7 +20,7 @@
             <span class="detail-aside-group-counter" ng-if="displayAsidesCounter" ng-bind="parentsElement.length"></span>
             <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
         </div>
-        <div class="detail-aside-group-content">
+        <div class="detail-aside-group-content" lazy-check>
             <items-list elements="parentsElement" type="aside"></items-list>
         </div>
     </div>
@@ -30,7 +30,7 @@
             <span class="detail-aside-group-counter" ng-if="displayAsidesCounter" ng-bind="nearElements.length"></span>
             <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
         </div>
-        <div class="detail-aside-group-content" ng-if="!nearElementsByCategories">
+        <div class="detail-aside-group-content" ng-if="!nearElementsByCategories" lazy-check>
             <items-list elements="nearElements" type="aside"></items-list>
         </div>
 
@@ -40,7 +40,7 @@
                     <span>{{ category.label }}</span>
                     <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
                 </div>
-                <div class="detail-aside-group-content" collapse="!categoryIsCollapsed">
+                <div class="detail-aside-group-content" collapse="!categoryIsCollapsed" lazy-check>
                     <items-list elements="nearElements" filter-by-id="{ properties: {category: { id: category.id } } }" type="aside"></items-list>
                 </div>
             </div>
@@ -53,7 +53,7 @@
             <span class="detail-aside-group-counter" ng-if="displayAsidesCounter" ng-bind="pois.length"></span>
             <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
         </div>
-        <div class="detail-aside-group-content" type="aside">
+        <div class="detail-aside-group-content" type="aside" lazy-check>
             <pois-liste></pois-liste>
         </div>
     </div>
