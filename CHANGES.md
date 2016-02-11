@@ -1,4 +1,12 @@
 
+2.8.4 / 2016-02-11
+==================
+
+**Bug fixes**
+
+  * Fix content listing from detail page
+  * Add `lazy-check` for aside contents
+
 2.8.2 / 2016-02-09
 ==================
 
