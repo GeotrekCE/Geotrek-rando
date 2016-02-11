@@ -7,7 +7,7 @@
         </span>
     </div>
 
-    <items-list elements="results" type="results"></items-list>
+    <items-list elements="$root.allResults[$root.lang]" filter="{ isResult: true }" type="results"></items-list>
 
     <div class="no-results" ng-if="results.length === 0">
         <span>{{::'NO_RESULTS' | translate}}</span>
