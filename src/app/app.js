@@ -56,7 +56,7 @@ window.rando3D = require('rando3D');
 
 require('classlist-polyfill');
 
-require('jquery.scrollto');
+require('./vendors/scripts/jquery.scrollTo.js');
 
 // LOAD EXTERNAL DEPENDENCIES
 require('angular-bootstrap');

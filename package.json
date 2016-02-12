@@ -19,7 +19,6 @@
     "font-awesome": "^4.2.0",
     "gulp-rename": "^1.2.2",
     "jquery": "^1.11.x",
-    "jquery.scrollto": "^2.1.2",
     "leaflet": "^0.7.3",
     "leaflet-active-area": "git+https://github.com/mappy/Leaflet-active-area#9dcbca1f1343c05612fb23f91e56f573357bcd0e",
     "leaflet-ajax": "^2.0.0",
