@@ -1,4 +1,17 @@
 
+2.8.5 / 2016-02-12
+==================
+
+**Enhancements**
+
+  * Better management of pictures height in result list
+
+**Bug fixes**
+
+  * Switching language now close categories menu
+  * Use a local version of jQuery.scrollTo to avoid loading dependency
+  * Convert `data-src` to `src` when opening popups
+
 2.8.4 / 2016-02-11
 ==================
 
