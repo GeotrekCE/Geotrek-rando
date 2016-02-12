@@ -131,7 +131,8 @@
     background-image: url(/images/placeholder.png);
     background-position: center center;
     background-size: cover;
-    height: 150px;
+    min-height: 100px;
+    max-height: 250px;
     margin-left: -15px;
     margin-right: -15px;
     overflow: hidden;
@@ -141,6 +142,9 @@
         height: auto;
         transition: transform 0.2s ease;
         @include transitionfuse;
+    }
+    &.empty {
+        height: 150px;
     }
 }
 
