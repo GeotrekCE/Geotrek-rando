@@ -28,7 +28,7 @@ gulp.task('tests:e2e', ['webdriver_update'], function(cb) {
 
         connect.server({
             root: 'src',
-            port: port,
+            port: port
         });
 
         gulp.src(config.e2e.src).pipe(protractor({
@@ -58,5 +58,5 @@ gulp.task('tests:unit', function(done) {
 
 gulp.task('tests', [
     'tests:unit',
-    'tests:e2e',
+    'tests:e2e'
 ]);
