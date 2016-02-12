@@ -45,18 +45,14 @@ gulp.task('tests:e2e', ['webdriver_update'], function(cb) {
 });
 
 
-var karma = require('gulp-karma');
+var Server = require('karma').Server;
 
-gulp.task('tests:unit', function() {
-    return gulp.src(config.unit.src)
-        .pipe(karma({
-            configFile: 'karma.conf.js',
-            action: 'run'
-        }))
-        .on('error', function(err) {
-            // Make sure failed tests cause gulp to exit non-zero
-            // throw err;
-        });
+gulp.task('tests:unit', function(done) {
+    new Server({
+        configFile: __dirname + '/../../karma.conf.js',
+        singleRun: true,
+        files: config.unit.src
+    }, done).start();
 });
 
 
