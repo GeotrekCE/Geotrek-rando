@@ -334,6 +334,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         }),
         $rootScope.$on('switchGlobalLang', function () {
             loadCategories(true);
+            $scope.foldCategories();
         })
     ];
 
