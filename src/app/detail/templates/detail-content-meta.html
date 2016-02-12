@@ -43,11 +43,11 @@
 
         <ul class="meta-item-content">
             <li class="meta-item-content-item" ng-if="result.properties.duration_pretty">
-                <ng-include src="'./images/icons/duration.svg'" tooltip-placement="top" tooltip="{{'I_DURATION' | translate}}"></ng-include>
+                <ng-include src="'/images/icons/duration.svg'" tooltip-placement="top" tooltip="{{'I_DURATION' | translate}}"></ng-include>
                 <span>{{::result.properties.duration_pretty}}</span>
             </li>
             <li class="meta-item-content-item" ng-if="!result.properties.duration_pretty && result.properties.duration" tooltip-placement="top" tooltip="{{'I_DURATION' | translate}}">
-                <ng-include src="'./images/icons/duration.svg'"></ng-include>
+                <ng-include src="'/images/icons/duration.svg'"></ng-include>
                 <span>{{::result.properties.duration}}</span>
             </li>
             <li class="meta-item-content-item" ng-if="result.properties.difficulty.label">
@@ -61,11 +61,11 @@
                 <span>{{::result.properties.route.label}}</span>
             </li>
             <li class="meta-item-content-item" ng-if="result.properties.length">
-                <ng-include src="'./images/icons/length.svg'" tooltip-placement="top" tooltip="{{'I_LENGTH' | translate}}"></ng-include>
+                <ng-include src="'/images/icons/length.svg'" tooltip-placement="top" tooltip="{{'I_LENGTH' | translate}}"></ng-include>
                 <span>{{::parseLength(result.properties.length)}}</span>
             </li>
             <li class="meta-item-content-item" ng-if="result.properties.ascent">
-                <ng-include src="'./images/icons/ascent.svg'" tooltip-placement="top" tooltip="{{'I_ASCENT' | translate}}"></ng-include>
+                <ng-include src="'/images/icons/ascent.svg'" tooltip-placement="top" tooltip="{{'I_ASCENT' | translate}}"></ng-include>
                 <span>{{::result.properties.ascent}}&nbsp;m</span>
             </li>
             <li class="meta-item-content-item" ng-if="result.properties.networks" ng-repeat="network in result.properties.networks">

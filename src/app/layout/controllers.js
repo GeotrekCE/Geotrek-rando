@@ -5,7 +5,7 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
     $rootScope.showFooterOnApp = globalSettings.SHOW_FOOTER;
     $rootScope.elementsLoading = 0;
     $rootScope.mapIsShown = true;
-    $rootScope.placeHolderImage = globalSettings.PLACEHOLDER_IMAGE ? './images/custom/' + globalSettings.PLACEHOLDER_IMAGE : './images/placeholder.png';
+    $rootScope.placeHolderImage = globalSettings.PLACEHOLDER_IMAGE ? '/images/custom/' + globalSettings.PLACEHOLDER_IMAGE : '/images/placeholder.png';
     $rootScope.favoriteIcon = (globalSettings.FAVORITES_ICON ? globalSettings.FAVORITES_ICON : 'heart');
 
     var bowser          = require('bowser');
@@ -22,7 +22,7 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
             ico: base + globalSettings.FAVICON.ico
         };
     } else {
-        var base = './images/';
+        var base = '/images/';
         $rootScope.favIcon = {
             png: base + 'favicon-geotrek.png',
             ico: base + 'favicon-geotrek.ico'
