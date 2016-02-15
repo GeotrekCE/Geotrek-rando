@@ -1,4 +1,17 @@
 
+2.8.7 / 2016-02-15
+==================
+
+**Enhancements**
+
+  * Update `package.json` dependencies versions (no changes in shrinkwrap)
+  * Merge dependencies & devDependencies from package.json
+  * Remove dependency to `browser-sync`
+  * Replace deprecated `gulp-karma` by `karma`
+  * Remove useless dependency
+  * Lint `package.json` file
+  * Update npm-shrinkwrap
+
 2.8.6 / 2016-02-15
 ==================
 
