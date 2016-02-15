@@ -1,4 +1,11 @@
 
+2.8.6 / 2016-02-15
+==================
+
+**Bug fixes**
+
+  * Adjust icons url from relative to absolute
+
 2.8.5 / 2016-02-12
 ==================
 
