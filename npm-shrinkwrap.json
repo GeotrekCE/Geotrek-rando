@@ -10060,20 +10060,6 @@
       "version": "4.3.0",
       "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.3.0.tgz"
     },
-    "lodash.assign": {
-      "version": "4.0.2",
-      "resolved": "https://registry.npmjs.org/lodash.assign/-/lodash.assign-4.0.2.tgz",
-      "dependencies": {
-        "lodash.keys": {
-          "version": "4.0.2",
-          "resolved": "https://registry.npmjs.org/lodash.keys/-/lodash.keys-4.0.2.tgz"
-        },
-        "lodash.rest": {
-          "version": "4.0.1",
-          "resolved": "https://registry.npmjs.org/lodash.rest/-/lodash.rest-4.0.1.tgz"
-        }
-      }
-    },
     "merge-stream": {
       "version": "0.1.8",
       "resolved": "https://registry.npmjs.org/merge-stream/-/merge-stream-0.1.8.tgz",
