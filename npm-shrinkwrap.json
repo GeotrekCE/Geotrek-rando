@@ -23,8 +23,8 @@
       "resolved": "https://registry.npmjs.org/angular-resource/-/angular-resource-1.5.0.tgz"
     },
     "angular-translate": {
-      "version": "2.9.0",
-      "resolved": "https://registry.npmjs.org/angular-translate/-/angular-translate-2.9.0.tgz"
+      "version": "2.9.1",
+      "resolved": "https://registry.npmjs.org/angular-translate/-/angular-translate-2.9.1.tgz"
     },
     "angular-ui-router": {
       "version": "0.2.18",
@@ -7805,8 +7805,8 @@
       "resolved": "git+https://github.com/makinacorpus/angularjs-slider.git#70d25f4643091160945ca38bb29fa692aca44ab9"
     },
     "karma": {
-      "version": "0.13.20",
-      "resolved": "https://registry.npmjs.org/karma/-/karma-0.13.20.tgz",
+      "version": "0.13.21",
+      "resolved": "https://registry.npmjs.org/karma/-/karma-0.13.21.tgz",
       "dependencies": {
         "batch": {
           "version": "0.5.3",
