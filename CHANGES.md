@@ -1,4 +1,14 @@
 
+2.8.8 / 2016-02-15
+==================
+
+**Enhancements**
+
+  * Update a bunch of npm dependencies
+  * Remove dependency to `lodash.assign` using `lodash/assign` instead
+  * Upgrade `lodash` dependency to 4.3.0
+  * Upgrade `karma-phantomjs-launcher` dependency to 1.0.0
+
 2.8.7 / 2016-02-15
 ==================
 
