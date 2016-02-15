@@ -458,7 +458,7 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
                     });
 
                     if (!$rootScope.allResults.matchs) { $rootScope.allResults.matchs = {}; }
-                    $rootScope.allResults.matchs[lang] = _.where($rootScope.allResults[lang], { isResult: true }).length;
+                    $rootScope.allResults.matchs[lang] = _.filter($rootScope.allResults[lang], _.matches({ isResult: true })).length;
 
                     deferred.resolve($rootScope.allResults[lang]);
                     getFilteredResultsPending[lang] = false;

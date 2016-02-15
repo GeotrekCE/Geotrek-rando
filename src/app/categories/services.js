@@ -252,7 +252,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
         self.getCategories()
             .then(function () {
-                self._filteredCategoriesList[lang] = _.where(self._categoriesList[lang], { excluded: false });
+                self._filteredCategoriesList[lang] = _.filter(self._categoriesList[lang], _.matches({ excluded: false }));
             })
             .finally(function () {
                 deferred.resolve(self._filteredCategoriesList[lang]);

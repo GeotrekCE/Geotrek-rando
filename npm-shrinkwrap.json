@@ -3650,6 +3650,10 @@
             }
           }
         },
+        "lodash": {
+          "version": "2.4.2",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-2.4.2.tgz"
+        },
         "through2": {
           "version": "0.6.5",
           "resolved": "https://registry.npmjs.org/through2/-/through2-0.6.5.tgz",
@@ -5109,6 +5113,10 @@
               }
             }
           }
+        },
+        "lodash": {
+          "version": "2.4.2",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-2.4.2.tgz"
         }
       }
     },
@@ -6431,10 +6439,6 @@
                       "resolved": "https://registry.npmjs.org/path-is-absolute/-/path-is-absolute-1.0.0.tgz"
                     }
                   }
-                },
-                "lodash": {
-                  "version": "4.3.0",
-                  "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.3.0.tgz"
                 },
                 "yargs": {
                   "version": "3.32.0",
@@ -9838,13 +9842,7 @@
     },
     "karma-phantomjs-launcher": {
       "version": "1.0.0",
-      "resolved": "https://registry.npmjs.org/karma-phantomjs-launcher/-/karma-phantomjs-launcher-1.0.0.tgz",
-      "dependencies": {
-        "lodash": {
-          "version": "4.3.0",
-          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.3.0.tgz"
-        }
-      }
+      "resolved": "https://registry.npmjs.org/karma-phantomjs-launcher/-/karma-phantomjs-launcher-1.0.0.tgz"
     },
     "leaflet": {
       "version": "0.7.7",
@@ -10059,8 +10057,8 @@
       "resolved": "https://registry.npmjs.org/leaflet.markercluster/-/leaflet.markercluster-0.4.0.tgz"
     },
     "lodash": {
-      "version": "2.4.2",
-      "resolved": "https://registry.npmjs.org/lodash/-/lodash-2.4.2.tgz"
+      "version": "4.3.0",
+      "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.3.0.tgz"
     },
     "lodash.assign": {
       "version": "4.0.2",
@@ -11331,6 +11329,10 @@
         "q": {
           "version": "1.0.0",
           "resolved": "https://registry.npmjs.org/q/-/q-1.0.0.tgz"
+        },
+        "lodash": {
+          "version": "2.4.2",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-2.4.2.tgz"
         },
         "source-map-support": {
           "version": "0.2.10",
