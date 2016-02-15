@@ -3,7 +3,7 @@ describe('Favorites on home ', function() {
     var constants = require('../../../config/settings.constant.json');
 
     beforeAll(function() {
-        browser.get('/#/no-homme');
+        browser.get('/#/?categorie=T');
         browser.executeScript(function (constants) {
             localStorage.clear();
             localStorage.setItem(constants.PLATFORM_ID + '-language', 'fr');
@@ -21,7 +21,7 @@ describe('Favorites on home ', function() {
     });
 
     it('should contain 2 favorites', function () {
-        browser.get('/#/no-homme');
+        browser.get('/#/?categorie=T');
         var favs = element.all(by.css('.isFav'));
         expect(favs.count()).toEqual(2);
     });
