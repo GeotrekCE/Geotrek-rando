@@ -45,7 +45,6 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "devDependencies": {
-    "browser-sync": "^2.6.4",
     "browserify": "^9.0.8",
     "chai": "^1.10.0",
     "exorcist": "^0.1.6",

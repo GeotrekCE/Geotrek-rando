@@ -11,12 +11,6 @@ module.exports = {
             src: ['src/**/tests/e2e/*.js']
         }
     },
-    browserSync: {
-        server: {
-            // Serve up our build folder
-            baseDir: dest
-        }
-    },
     translate: {
         src: src + '/' + appFolder + '/translation/po',
         dest: dest + '/' + appFolder + '/translation/lang',

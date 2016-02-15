@@ -14,7 +14,6 @@ var gulp          = require('gulp');
 var browserify    = require('browserify');
 var source        = require('vinyl-source-stream');
 var watchify      = require('watchify');
-var browserSync   = require('browser-sync');
 var gulpif        = require('gulp-if');
 var exorcist      = require('exorcist');
 var jshint        = require('gulp-jshint');
@@ -32,7 +31,6 @@ var bundleEntries = config.entries;
 
 var watch         = false;
 var srcMap        = false;
-var brwSync       = true;
 
 /*
 gulp.task('mainapp', ['customisation', 'translate'], function(){
@@ -68,9 +66,9 @@ function browserifyShare() {
         bundleLogger.watch(outputName);
         b.on('update', function (filename) {
             if (path.extname(filename) === '.js') {
-              gulp.src(filename)
-                  .pipe(jshint())
-                  .pipe(jshint.reporter('jshint-stylish'));
+                gulp.src(filename)
+                    .pipe(jshint())
+                    .pipe(jshint.reporter('jshint-stylish'));
             }
 
             bundleShare(b);
@@ -89,6 +87,5 @@ function bundleShare(b) {
         .on('end', function () { bundleLogger.end(outputName); })
         .pipe(gulpif(srcMap, exorcist(outputPath + '/maps/' + outputName + '.map', 'maps/' + outputName + '.map')))
         .pipe(source(outputName))
-        .pipe(gulp.dest(outputPath))
-        .pipe(gulpif(brwSync && watch, browserSync.reload({stream: true})));
+        .pipe(gulp.dest(outputPath));
 }

@@ -5,7 +5,6 @@ var concat       = require('gulp-concat');
 var merge        = require('merge-stream');
 var path         = require('path');
 var gulpif       = require('gulp-if');
-var browserSync  = require('browser-sync');
 
 var sass         = require('gulp-sass');
 var rename       = require("gulp-rename");
@@ -16,7 +15,6 @@ var handleErrors = require('../util/handleErrors');
 var config       = require('../config').sass;
 
 var srcMap       = false;
-var brwSync      = true;
 
 function concatSassFiles(src, fileName, dest) {
     return gulp.src(src)
@@ -36,7 +34,6 @@ function compileSass() {
             .pipe(gulpif(srcMap, sourcemaps.write()))
             .pipe(rename(element.outputName)) // Setup the right filename
             .pipe(gulp.dest(config.dest))    // Output in specified directory
-            .pipe(gulpif(brwSync, browserSync.reload({stream:true})))
         );
 
     });
