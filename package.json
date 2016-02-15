@@ -42,9 +42,7 @@
     "moment": "^2.11.1",
     "rando3D": "git+https://github.com/makinacorpus/rando3D.git#950adf9bd5d9356ba9caf3991938c8dd82a9ccdd",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
-  },
-  "devDependencies": {
+    "vinyl-source-stream": "^1.1.0",
     "browserify": "^9.0.8",
     "chai": "^1.10.0",
     "exorcist": "^0.1.6",
@@ -86,6 +84,8 @@
     "sinon-chai": "^2.6.0",
     "uglifyify": "^3.0.1",
     "watchify": "^3.1.2"
+  },
+  "devDependencies": {
   },
   "scripts": {
     "dist": "gulp",
