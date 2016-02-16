@@ -129,7 +129,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                         nearElementsCategories.push(element.properties.category);
                     });
 
-                    $scope.nearElementsCategories = _.uniq(nearElementsCategories, function(item) {
+                    $scope.nearElementsCategories = _.uniqBy(nearElementsCategories, function(item) {
                         return item.id;
                     });
 
