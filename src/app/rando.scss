@@ -61,7 +61,7 @@ a {
     &:before, &:after {
         content: '';
         position: absolute;
-        z-index: 99999999999999;
+        z-index: 2147483647;
     }
     &:before {
         width: 100%;
