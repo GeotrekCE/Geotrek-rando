@@ -51,7 +51,7 @@ msgid "LENGTH"
 msgstr "Length:"
 
 msgid "DATE_FILTER"
-msgstr "Dates"
+msgstr "From ... To ..."
 
 msgid "ALL"
 msgstr "All"
