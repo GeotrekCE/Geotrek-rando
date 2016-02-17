@@ -82,11 +82,6 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
                 translationID: 'ZOOM_OUT'
             },
             {
-                selector: '.leaflet-control-zoom-fullscreen',
-                isTitle: true,
-                translationID: 'FULL_SCREEN'
-            },
-            {
                 selector: '.leaflet-control-resetview-button',
                 isTitle: true,
                 translationID: 'RECENTER_VIEW'
@@ -173,20 +168,20 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
 
     });
 
-    $rootScope.map.on('enterFullscreen', function () {
-        $rootScope.isFullscreen = true;
-        $rootScope.$digest();
-        setTimeout(function() {
-            $rootScope.map.invalidateSize(true);
-        }, 1000);
-    });
-
-    $rootScope.map.on('exitFullscreen', function () {
-        $rootScope.isFullscreen = false;
-        $rootScope.$digest();
-        setTimeout(function() {
-            $rootScope.map.invalidateSize(false);
-        }, 1000);
+    $rootScope.map.on('fullscreenchange', function () {
+        if ($rootScope.map.isFullscreen()) {
+            $rootScope.isFullscreen = true;
+                $rootScope.$digest();
+                setTimeout(function() {
+                    $rootScope.map.invalidateSize(true);
+                }, 1000);
+        } else {
+            $rootScope.isFullscreen = false;
+            $rootScope.$digest();
+            setTimeout(function() {
+                $rootScope.map.invalidateSize(false);
+            }, 1000);
+        }
     });
 
     var rootScopeEvents = [

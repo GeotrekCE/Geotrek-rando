@@ -77,7 +77,8 @@ require('leaflet-ajax');
 require('leaflet-textpath');
 require('leaflet-minimap');
 require('leaflet.markercluster');
-require('leaflet.fullscreen');
+// require('leaflet.fullscreen');
+require('leaflet-fullscreen');
 
 require('../../node_modules/leaflet-active-area/src/leaflet.activearea.js');
 

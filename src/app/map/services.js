@@ -1,6 +1,6 @@
 'use strict';
 
-function mapService($rootScope, $q, $state, $resource, $filter, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService, popupService, layersService, boundsLimitService) {
+function mapService($rootScope, $q, $state, $resource, $translate, $filter, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService, popupService, layersService, boundsLimitService) {
 
     var self = this;
     var displayingResults = false;
@@ -366,10 +366,14 @@ function mapService($rootScope, $q, $state, $resource, $filter, utilsFactory, gl
     };
 
     this.setFullScreenControl = function setFullScreenControl () {
-        L.control.fullscreen({
-            position: 'topright',
-            title: 'Fullscreen'
-        }).addTo(this.map);
+        var map = this.map;
+
+        $translate(['FULL_SCREEN', 'EXIT_FULL_SCREEN']).then(function(translations) {
+            new L.Control.Fullscreen({
+                position: 'topright',
+                title: {true: translations.EXIT_FULL_SCREEN, false: translations.FULL_SCREEN}
+            }).addTo(map);
+        });
     };
 
     this.createResetViewButton = function createResetViewButton () {
