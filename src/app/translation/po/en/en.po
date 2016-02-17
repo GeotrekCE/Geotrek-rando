@@ -379,6 +379,9 @@ msgstr "Zoom out"
 msgid "FULL_SCREEN"
 msgstr "Full screen"
 
+msgid "EXIT_FULL_SCREEN"
+msgstr "Exit full screen"
+
 msgid "RECENTER_VIEW"
 msgstr "Recenter map"
 

@@ -374,6 +374,9 @@ msgstr "Dézoomer"
 msgid "FULL_SCREEN"
 msgstr "Plein écran"
 
+msgid "EXIT_FULL_SCREEN"
+msgstr "Quitter le plein écran"
+
 msgid "RECENTER_VIEW"
 msgstr "Recentrer la carte"
 
