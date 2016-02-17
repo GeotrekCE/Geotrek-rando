@@ -12,6 +12,6 @@
     background: $light-grey;
 
     &.leaflet-container + .interests {
-        z-index: 99999999999999;
+        z-index: 2147483647;
     }
 }
