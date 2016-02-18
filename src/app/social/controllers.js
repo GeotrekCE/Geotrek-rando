@@ -1,40 +1,56 @@
 'use strict';
 
-function SocialController($scope, $rootScope, $location, $state, $stateParams, $translate, resultsService, flatService, globalSettings, utilsFactory) {
+function SocialController($scope, $filter, $rootScope, $location, $state, $stateParams, $translate, resultsService, flatService, globalSettings, facebookService) {
 
     $scope.shareIcon = (globalSettings.SHARE_ICON ? globalSettings.SHARE_ICON : 'share-alt');
 
-    function initShareButtons(translatedContent, element) {
 
-        $scope.fbShareLink = 'https://www.facebook.com/dialog/feed?' +
-            'app_id=' + globalSettings.FACEBOOK_APP_ID +
-            '&link=' + encodeURIComponent($location.absUrl()) +
-            '&redirect_uri=' + encodeURIComponent($location.absUrl());
+    function initShareButtons(translatedContent, element) {
+        var fbOptions;
 
         $scope.twitterShareLink = 'https://twitter.com/share?url=' + encodeURIComponent($location.absUrl()) + '&';
 
         if (element) {
-            $scope.fbShareLink += '' +
-                '&name=' + encodeURIComponent(element.properties.name) +
-                '&caption=' + encodeURIComponent(utilsFactory.decodeEntities(element.properties.ambiance)) +
-                '&description=' + encodeURIComponent(utilsFactory.decodeEntities(element.properties.description_teaser));
+            fbOptions = {
+                method: 'feed',
+                link: $location.absUrl(),
+                redirect_uri: $location.absUrl(),
+                display: 'popup',
+                name: element.properties.name,
+                caption: $filter('decodeEntities')(element.properties.ambiance),
+                description: $filter('decodeEntities')(element.properties.description_teaser)
+            };
+
 
             if (element.properties.pictures[0]) {
-                $scope.fbShareLink += '&picture=' + encodeURIComponent(element.properties.pictures[0].url);
+                fbOptions.picture = element.properties.pictures[0].url;
             } else {
-                $scope.fbShareLink += '&picture=' + encodeURIComponent(globalSettings.API_URL + "/images/custom/" + globalSettings.DEFAULT_SHARE_IMG);
+                fbOptions.picture = globalSettings.API_URL + "/images/custom/" + globalSettings.DEFAULT_SHARE_IMG;
             }
+
+            $scope.shareToFacebook = function() {
+                facebookService.share(fbOptions);
+            };
 
             $scope.twitterShareLink += 'text=' + encodeURIComponent(element.properties.name);
 
-            $scope.mailShareLink = 'mailto:?Subject=' + encodeURIComponent(element.properties.name) + '&Body=' + encodeURIComponent(utilsFactory.decodeEntities(element.properties.description_teaser)) + '%0D%0A' + encodeURIComponent($location.absUrl());
+            $scope.mailShareLink = 'mailto:?Subject=' + encodeURIComponent(element.properties.name) + '&Body=' + encodeURIComponent($filter('decodeEntities')(element.properties.description_teaser)) + '%0D%0A' + encodeURIComponent($location.absUrl());
 
         } else {
-            $scope.fbShareLink += '' +
-                '&name=' + encodeURIComponent(translatedContent.BANNER_TEXT) +
-                '&caption=' + encodeURIComponent($location.absUrl()) +
-                '&description=' + encodeURIComponent(translatedContent.SHARING_DEFAULT_TEXT) +
-                '&picture=' + encodeURIComponent(globalSettings.API_URL + "/images/custom/" + globalSettings.DEFAULT_SHARE_IMG);
+            fbOptions = {
+                method: 'feed',
+                link: $location.absUrl(),
+                redirect_uri: translatedContent.BANNER_TEXT,
+                display: 'popup',
+                name: translatedContent.BANNER_TEXT,
+                caption: $location.absUrl(),
+                description: $filter('decodeEntities')(translatedContent.SHARING_DEFAULT_TEXT),
+                picture: globalSettings.API_URL + "/images/custom/" + globalSettings.DEFAULT_SHARE_IMG
+            };
+
+            $scope.shareToFacebook = function() {
+                facebookService.share(fbOptions);
+            };
 
             $scope.twitterShareLink += 'text=' + encodeURIComponent(translatedContent.SHARING_DEFAULT_TEXT);
 
@@ -238,9 +254,11 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
                         }
                     }
                 );
-        } else {
-            initShareOnTranslate();
         }
+
+        // else {
+        //     initShareOnTranslate();
+        // }
     }
 
     initShare();
@@ -257,3 +275,14 @@ function SocialController($scope, $rootScope, $location, $state, $stateParams, $
 module.exports = {
     SocialController: SocialController
 };
+
+
+
+// https://www.facebook.com/v2.3/dialog/share?
+// redirect_uri=https%3A%2F%2Fwww.facebook.com%2Fdialog%2Freturn%2Fclose
+// display=popup
+// href=http%3A%2F%2Fgoo.gl%2FdnRlG2
+// client_id=966242223397117
+// ret=login
+// ext=1455731459
+// hash=AebZm-ngrckY7Wz0

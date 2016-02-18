@@ -8,8 +8,8 @@
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
-        <li ng-if="fbShareLink" class="facebook">
-            <a href="{{fbShareLink}}" target="_blank" tooltip-placement="right" tooltip="Facebook">
+        <li ng-if="shareToFacebook" class="facebook">
+            <a href="{{fbShareLink}}" ng-click="shareToFacebook()" target="_blank" tooltip-placement="right" tooltip="Facebook">
                 <i class="fa fa-facebook"></i>
             </a>
         </li>
