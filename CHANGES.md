@@ -1,4 +1,19 @@
 
+2.8.10 / 2016-02-19
+==================
+
+**Enhancements**
+
+  * Replace facebook share link by sdk
+  * Remove useless comment
+  * Add english translation for DATE_FILTER
+
+  **Bug fixes**
+
+  * Replace leaflet.fullscreen by leaflet-fullscreen
+  * Add external links in flat pages menu
+  * Change z-index to 2147483647 (max z-index number)
+
 2.8.9 / 2016-02-16
 ==================
 
