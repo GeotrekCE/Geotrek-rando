@@ -275,14 +275,3 @@ function SocialController($scope, $filter, $rootScope, $location, $state, $state
 module.exports = {
     SocialController: SocialController
 };
-
-
-
-// https://www.facebook.com/v2.3/dialog/share?
-// redirect_uri=https%3A%2F%2Fwww.facebook.com%2Fdialog%2Freturn%2Fclose
-// display=popup
-// href=http%3A%2F%2Fgoo.gl%2FdnRlG2
-// client_id=966242223397117
-// ret=login
-// ext=1455731459
-// hash=AebZm-ngrckY7Wz0
