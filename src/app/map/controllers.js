@@ -18,19 +18,18 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
     function updateMapWithResults(fitBounds, forceRefresh) {
         var deferred = $q.defer();
         var lang = translationService.getCurrentLang();
+
         centerMapOnLastView(fitBounds);
 
-        $rootScope.elementsLoading ++;
         deferred.resolve(
             filtersService.getFilteredResults()
                 .then(
                     function () {
+                        $rootScope.elementsLoading --;
                         if ($rootScope.allResults.matchs[lang] > 0) {
                             mapService.displayResults(fitBounds, forceRefresh);
-                            $rootScope.elementsLoading --;
                         } else {
                             mapService.clearAllLayers();
-                            $rootScope.elementsLoading --;
                         }
                     }
                 )
@@ -43,7 +42,6 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
         var fitBounds = true;
         // centerMapOnLastView(fitBounds);
 
-        $rootScope.elementsLoading ++;
         var promise;
         if (!forceRefresh) {
             promise = resultsService.getAResultBySlug($stateParams.slug, $stateParams.catSlug, forceRefresh);
@@ -131,6 +129,7 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
     }
 
     function mapInit(selector) {
+        $rootScope.elementsLoading ++;
         var deferred = $q.defer();
 
         var mapSelector = selector || 'map';

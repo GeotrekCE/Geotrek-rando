@@ -142,10 +142,11 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
 
         initDateValues();
 
-        $scope.$watch('activeDateFilters', function () {
-            $scope.updateActiveDateFilters();
-        }, true);
     }
+
+    $scope.changeDates = function () {
+        $scope.updateActiveDateFilters();
+    };
 
     $scope.clearDateFilter = function clearDateFilter (dateFilterName) {
         $scope.activeDateFilters[dateFilterName] = {
@@ -293,7 +294,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         if (globalSettings.SHOW_FILTERS_ON_MAP) {
             updateFiltersTags();
         }
-        $rootScope.$broadcast('updateFilters', true);
+        $rootScope.$broadcast('updateResultsList', true);
     };
 
     $scope.toggleCategories = function toggleCategories () {
