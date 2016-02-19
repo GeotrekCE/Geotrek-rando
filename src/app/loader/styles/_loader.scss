@@ -1,0 +1,57 @@
+.load {
+    position: absolute;
+    z-index: 2147483647;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(255,255,255,.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.load-3d {
+        background: transparent;
+        width: 60px;
+        height: 60px;
+        top: 50%;
+        left: 50%;
+        margin-left: -30px;
+        margin-right: -30px;
+        .dot1, .dot2 {
+            background-color: #fff;
+        }
+    }
+}
+
+
+.spinner {
+    margin: 100px auto;
+    width: 60px;
+    height: 60px;
+    position: relative;;
+    text-align: center;
+
+    -webkit-animation: sk-rotate 2.0s infinite linear;
+    animation: sk-rotate 2.0s infinite linear;
+}
+
+.dot1, .dot2 {
+    width: 60%;
+    height: 60%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    background-color: $primary-color;
+    border-radius: 100%;
+
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.dot2 {
+    top: auto;
+    bottom: 0;
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
