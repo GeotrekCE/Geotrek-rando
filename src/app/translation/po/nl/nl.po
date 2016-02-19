@@ -101,7 +101,7 @@ msgid "LOOP"
 msgstr "Vertrek/Aankomst"
 
 msgid "TOWN_START"
-msgstr "Beginnend stad:"
+msgstr "Stad:"
 
 msgid "TOWN_CROSSED"
 msgstr "Gekruist stad:"
