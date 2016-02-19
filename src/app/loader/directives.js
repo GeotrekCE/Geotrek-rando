@@ -3,7 +3,7 @@
 function loader() {
     return {
         restrict: 'E',
-        // replace: true,
+        replace: true,
         template: require('./templates/loader.html'),
         scope: {
             loadStyle: '='
