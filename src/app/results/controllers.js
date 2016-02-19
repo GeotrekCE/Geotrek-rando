@@ -2,8 +2,9 @@
 
 function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory, filtersService) {
 
-    function updateResults(forceRefresh) {
+    function updateResultsList(forceRefresh) {
         $rootScope.elementsLoading ++;
+
         filtersService.getFilteredResults()
             .then(
                 function (results) {
@@ -51,14 +52,14 @@ function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory
         });
     };
 
-    $scope.$on('updateFilters', function (name, forceRefresh) {
-        updateResults(forceRefresh);
+    $scope.$on('updateResultsList', function (name, forceRefresh) {
+        updateResultsList(forceRefresh);
     });
 
 
     var rootScopeEvents = [
         $rootScope.$on('switchGlobalLang', function () {
-            updateResults(true);
+            updateResultsList(true);
         })
     ];
 

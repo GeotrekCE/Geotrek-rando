@@ -56,34 +56,89 @@ a {
   }
 }
 
-.isLoading {
-    position: relative;
-    &:before, &:after {
-        content: '';
-        position: absolute;
-        z-index: 2147483647;
-    }
-    &:before {
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background: $dark-grey;
-        opacity: 0.6;
-    }
-    &:after {
-        top: 50%;
-        left: 50%;
-        margin-top: -0.6rem;
-        margin-left: -1.2rem;
-        width: 0;
-        height: 0;
-        border-left: 1.2rem solid transparent;
-        border-right: 1.2rem solid transparent;
-        border-bottom: 1.2rem solid white;
-        animation: triangle-loader 2.4s 0s cubic-bezier(.09,.57,.49,.9) infinite;
-        animation-fill-mode: both;
-    }
+// .isLoading {
+//     position: relative;
+//     &:before, &:after {
+//         content: '';
+//         position: absolute;
+//         z-index: 2147483647;
+//     }
+//
+//     &:after {
+//         top: 50%;
+//         left: 50%;
+//         margin-top: -0.6rem;
+//         margin-left: -1.2rem;
+//         width: 0;
+//         height: 0;
+//         border-left: 1.2rem solid transparent;
+//         border-right: 1.2rem solid transparent;
+//         border-bottom: 1.2rem solid white;
+//         animation: triangle-loader 2.4s 0s cubic-bezier(.09,.57,.49,.9) infinite;
+//         animation-fill-mode: both;
+//     }
+// }
+
+.load {
+    position: absolute;
+    z-index: 2147483647;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(255,255,255,.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner {
+    margin: 100px auto;
+    width: 60px;
+    height: 60px;
+    position: relative;;
+    text-align: center;
+
+    -webkit-animation: sk-rotate 2.0s infinite linear;
+    animation: sk-rotate 2.0s infinite linear;
+}
+
+.dot1, .dot2 {
+    width: 60%;
+    height: 60%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    background-color: $primary-color;
+    border-radius: 100%;
+
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.dot2 {
+    top: auto;
+    bottom: 0;
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-rotate { 100% { -webkit-transform: rotate(360deg) }}
+@keyframes sk-rotate { 100% { transform: rotate(360deg); -webkit-transform: rotate(360deg) }}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% {
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
 }
 
 .checkbox {

@@ -149,7 +149,7 @@
                         </span>
                         <div class="choices" collapse="!startDateIsCollapsed">
                             <div class="date-picker form-group">
-                                <input date-range-picker clearable="true" options="{autoApply: true}" class="form-control" type="text" ng-model="activeDateFilters[category.id]" /><!--
+                                <input date-range-picker clearable="true" options="{autoApply: true, eventHandlers: {'apply.daterangepicker': changeDates }}" class="form-control" type="text" ng-model="activeDateFilters[category.id]" /><!--
                                 --><button class="filter-button" ng-click="clearDateFilter(category.id)">
                                     <ng-include class="cross" src="'/images/icons/cross.svg'"></ng-include>
                                 </button>
