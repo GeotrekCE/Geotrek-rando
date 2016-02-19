@@ -1,7 +1,7 @@
 <div class="modal-close-button" ng-click="close()">
     <i class="fa fa-times"></i>
 </div>
-<div id="rando-3d" ng-class="{isLoading: isLoading}">
+<div id="rando-3d">
     <h1>{{result.properties.name}}</h1>
     <section class="interface">
         <div class="controls controls--examine" >
@@ -11,7 +11,7 @@
             <span> Inclinaison/Rotation : <b>Clic Gauche</b></span>
             <span> Se déplacer : <img src="/images/3d/icon_783__.png"/></span>
         </div>
-        
+
         <div class="controls controls--bird" >
             <h3>Mode Oiseau</h3>
             <span class="controls-description"></span>
@@ -36,10 +36,10 @@
 
         <div class="attribution" style="padding:3px;">
             <span>
-                <a href='https://www.mapbox.com/about/maps/' target='_blank'><strong>©Mapbox</strong></a> 
+                <a href='https://www.mapbox.com/about/maps/' target='_blank'><strong>©Mapbox</strong></a>
             </span>
         </div>
-        
+
         <ul class="camera_switcher">
             <li class="camera camera--examine camera--disabled">
                 <span class="camera-icon">
@@ -77,3 +77,4 @@
     </div>
 
 </div>
+<loader load-style="'3d'" ng-show="isLoading"></loader>

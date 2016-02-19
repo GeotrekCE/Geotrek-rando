@@ -14,6 +14,7 @@ var dependencies = [
     'rando.layout',
     'rando.header',
     'rando.footer',
+    'rando.loader',
     'rando.leafletextend',
     'rando.icons',
     'rando.map',
@@ -96,6 +97,7 @@ require('./commons');
 require('./header');
 require('./footer');
 require('./layout');
+require('./loader');
 require('./treks');
 require('./pois');
 require('./services');
