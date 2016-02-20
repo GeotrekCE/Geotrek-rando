@@ -108,7 +108,7 @@ msgid "LOOP"
 msgstr "Start/Ziel:"
 
 msgid "TOWN_START"
-msgstr "Start Stadt:"
+msgstr "Stadt:"
 
 msgid "TOWN_CROSSED"
 msgstr "querte Stadt:"

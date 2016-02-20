@@ -127,7 +127,7 @@ msgid "LOOP"
 msgstr "Départ / Arrivée :"
 
 msgid "TOWN_START"
-msgstr "Commune de départ :"
+msgstr "Commune :"
 
 msgid "TOWN_CROSSED"
 msgstr "Communes traversées :"
