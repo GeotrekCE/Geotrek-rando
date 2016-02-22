@@ -62,7 +62,8 @@ require('./vendors/scripts/jquery.scrollTo.js');
 // LOAD EXTERNAL DEPENDENCIES
 require('angular-bootstrap');
 require('angular-ui-router');
-require('jusas-angularjs-slider');
+require('angularjs-slider');
+// require('jusas-angularjs-slider');
 require('angular-translate');
 require('angular-google-analytics');
 require('angular-resource');

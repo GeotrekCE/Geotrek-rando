@@ -500,6 +500,20 @@
             .category-filters {
                 background-color: nth($category, 2);
             }
+
+            rzslider .rz-ticks {
+                top: -1px;
+            }
+
+            rzslider .rz-ticks .tick {
+                background-color: lighten(nth($category, 2), 25%);
+                width: 7px;
+                height: 7px;
+            }
+
+            rzslider .rz-ticks .tick.selected {
+                background-color: white;
+            }
         }
     }
 }

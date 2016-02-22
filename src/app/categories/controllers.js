@@ -38,9 +38,13 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         var valuesLength = filter.values.length;
 
         $scope.activeRangeValues[uid] = {
-            floor: 0,
-            ceil: valuesLength - 1,
-            values: filter.values
+            values: filter.values,
+            options: {
+                floor: 0,
+                ceil: valuesLength - 1,
+                showTicks: true,
+                step: 1
+            }
         };
         if (activeFilters && activeFilters[uid]) {
             var minValue = activeFilters[uid][0].split('-')[0],
@@ -90,6 +94,9 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
             $scope.rangeUpdate = $timeout(function () {
                 $scope.updateActiveRangeFilters();
             }, 300);
+            $timeout(function () {
+                $scope.$broadcast('reCalcViewDimensions');
+            });
         }, true);
 
         $scope.$on('resetRange', function (event, data) {

@@ -5,6 +5,6 @@ module.exports = function simpleEach (arr, fn) {
     if (!arrLen) return false;
 
     for (; i < arrLen; i++) {
-        fn(arr[i]);
+        fn(arr[i], i);
     }
 };
