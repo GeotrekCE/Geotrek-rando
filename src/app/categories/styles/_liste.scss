@@ -390,6 +390,9 @@
 
             span.rz-pointer {
                 background-color: rgba(255, 255, 255, .3);
+                &:focus {
+                    outline: none;
+                }
                 &:after {
                     background-color: rgba(0, 0, 0, .85);
                 }
