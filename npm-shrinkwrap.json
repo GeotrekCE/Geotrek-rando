@@ -30,6 +30,10 @@
       "version": "0.2.18",
       "resolved": "https://registry.npmjs.org/angular-ui-router/-/angular-ui-router-0.2.18.tgz"
     },
+    "angularjs-slider": {
+      "version": "2.9.0",
+      "resolved": "https://registry.npmjs.org/angularjs-slider/-/angularjs-slider-2.9.0.tgz"
+    },
     "bootstrap-daterangepicker": {
       "version": "2.1.17",
       "resolved": "git+https://github.com/dangrossman/bootstrap-daterangepicker.git#2dc0523f351da6d467301b456e6d3ff6c5ec58a1"
@@ -8149,10 +8153,6 @@
           "resolved": "https://registry.npmjs.org/text-table/-/text-table-0.2.0.tgz"
         }
       }
-    },
-    "jusas-angularjs-slider": {
-      "version": "0.1.21",
-      "resolved": "git+https://github.com/makinacorpus/angularjs-slider.git#70d25f4643091160945ca38bb29fa692aca44ab9"
     },
     "karma": {
       "version": "0.13.21",

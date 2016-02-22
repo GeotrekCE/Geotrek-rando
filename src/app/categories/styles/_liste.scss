@@ -390,6 +390,9 @@
 
             span.rz-pointer {
                 background-color: rgba(255, 255, 255, .3);
+                &:focus {
+                    outline: none;
+                }
                 &:after {
                     background-color: rgba(0, 0, 0, .85);
                 }
@@ -499,6 +502,20 @@
         .category-#{nth($category, 1)} {
             .category-filters {
                 background-color: nth($category, 2);
+            }
+
+            rzslider .rz-ticks {
+                top: -1px;
+            }
+
+            rzslider .rz-ticks .tick {
+                background-color: lighten(nth($category, 2), 25%);
+                width: 7px;
+                height: 7px;
+            }
+
+            rzslider .rz-ticks .tick.selected {
+                background-color: white;
             }
         }
     }
