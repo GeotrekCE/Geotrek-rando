@@ -345,6 +345,33 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                         { catSlug: result.properties.category.slug, slug: result.properties.slug },
                         { location: true, inherit: true, relative: $state.$current, notify: false }
                     );
+
+                    if (result.properties.previous !== undefined) {
+                        // Get previous step
+                        var previousID = result.properties.previous[result.properties.parents[0]];
+                        if (previousID !== null && previousID !== undefined) {
+                            $scope.previousStep = true;
+                            resultsService.getAResultByID(previousID, result.properties.category.id).then(function(res) {
+                                $scope.previousStep = res.properties;
+                            }), function(err) {
+                                console.log(err);
+                            };
+                        }
+                    }
+
+                    if (result.properties.next !== undefined) {
+                        // Get next step
+                        var nextID = result.properties.next[result.properties.parents[0]];
+                        if (nextID !== null && nextID !== undefined) {
+                            $scope.nextStep = true;
+                            resultsService.getAResultByID(nextID, result.properties.category.id).then(function(res) {
+                                $scope.nextStep = res.properties;
+                            }), function(err) {
+                                console.log(err);
+                            };
+                        }
+                    }
+
                     $rootScope.metaTitle = result.properties.name;
                     $rootScope.metaDescription = result.properties.description_teaser;
                     $scope.result = result;

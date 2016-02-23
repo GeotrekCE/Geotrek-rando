@@ -56,6 +56,34 @@
     margin: 5px 0 0 0;
 }
 
+.detail-content-steps {
+    display: flex;
+    a {
+        flex: 1 0 50%;
+        display: flex;
+        align-items: stretch;
+        color: white;
+        text-decoration: none;
+        background-color: $dark-grey;
+        > * {
+            margin: auto 0;
+            padding: 1rem;
+            text-align: center;
+        }
+        &:not(:first-child) {
+            border-left: 1px solid darken($dark-grey, 5);
+        }
+    }
+    span {
+        flex: 1 1 auto;
+    }
+    i {
+        font-size: 2rem;
+        flex: 0 0 50px;
+        text-align: center;
+    }
+}
+
 .detail-content-meta {
     margin: 0;
     padding: .6em 1.5em;

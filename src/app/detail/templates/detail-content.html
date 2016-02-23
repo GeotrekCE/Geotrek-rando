@@ -8,6 +8,15 @@
         <h1 class="detail-content-title-text">{{result.properties.name}}</h1>
     </div>
 
+    <div class="detail-content-steps">
+        <a class="detail-content-steps-previous" ng-if="previousStep" href="#" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: previousStep.slug})">
+            <i class="fa fa-angle-left"></i><span ng-bind="previousStep.name"></span>
+        </a>
+        <a class="detail-content-steps-next" ng-if="nextStep" href="#" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: nextStep.slug})">
+            <span ng-bind="nextStep.name"></span><i class="fa fa-angle-right"></i>
+        </a>
+    </div>
+
     <detail-content-meta></detail-content-meta>
 
     <detail-content-pictures></detail-content-pictures>
