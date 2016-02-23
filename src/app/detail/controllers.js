@@ -146,10 +146,11 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
             promises = [],
             elementChildren = [];
 
-        _.each(result.properties.children, function(child) {
+        _.each(result.properties.children, function(child, stepNumber) {
             elementChildren.push({
                 category_id: result.properties.category.id,
-                id: child
+                id: child,
+                stepNumber: stepNumber
             });
         });
 
@@ -160,6 +161,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                 resultsService.getAResultByID(element.id, element.category_id)
                     .then(
                         function (elementData) {
+                            elementData.properties.stepNumber = element.stepNumber + 1;
                             $scope.elementChildren.push(elementData);
                         },
                         function (err) {

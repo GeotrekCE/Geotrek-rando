@@ -208,7 +208,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
 
     this.createElementsMarkers = function createElementsMarkers (elements, type) {
         var startPoint = [];
-        var stepCounter = 0;
+
         elements.forEach(function (element) {
             startPoint = utilsFactory.getStartPoint(element);
 
@@ -230,8 +230,6 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                     );
             }
             if (type === 'children') {
-                stepCounter++;
-                element.properties.stepNumber = stepCounter;
                 self.createLayerFromElement(element, 'children', startPoint)
                     .then(
                         function (marker) {
