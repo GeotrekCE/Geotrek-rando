@@ -165,6 +165,18 @@ server {
 
 Then run `service nginx restart`
 
+### Redirect URLs from v1
+
+In nginx configuration file inside `server {...}` section, add:
+
+```
+    rewrite ^/fr/pages/(.+)$ http://<your.domain.com>/informations/$1/ permanent;
+    rewrite ^/fr/(.+)$ http://<your.domaine.com>/<practice-slug>/$1/ permanent;
+    rewrite ^/fr/$ http://<your.domaine.com> permanent;
+```
+
+And replace <your.domaine.com> by your domain and <practice-slug> by the slug of your practice (check new urls of treks to get it).
+All treks will be redirected to this unique practice as it is not possible to distinguish practices in v1 urls.
 
 ## DEVELOPMENT
 
