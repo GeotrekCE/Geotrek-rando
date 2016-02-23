@@ -1,4 +1,24 @@
 
+2.9.0 / 2016-02-23
+==================
+
+**New features**
+
+  * Doc: Init the `contribute.md` page
+
+**Enhancements**
+
+  * Remove outline on rzslider focus
+  * Upgrade angular-slider with last upstream version
+  * New module for loader
+  * Show toggle all categories checkbox by default
+  * Replace "Commune de départ" by "Commune"
+
+**Bug fixes**
+
+  * Change loader style
+  * Fix results list loading
+
 2.8.10 / 2016-02-19
 ==================
 
@@ -8,7 +28,7 @@
   * Remove useless comment
   * Add english translation for DATE_FILTER
 
-  **Bug fixes**
+**Bug fixes**
 
   * Replace leaflet.fullscreen by leaflet-fullscreen
   * Add external links in flat pages menu
