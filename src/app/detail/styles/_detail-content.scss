@@ -202,26 +202,26 @@
             }
         }
         li:before {
-            font-size: 1rem;
-            font-weight: bolder;
-            line-height: 1rem;
+            font-family: "Open Sans", Helvetica, Arial, sans-serif;
+            font-size: .9rem;
+            font-weight: bold;
+            line-height: 26px;
 
             position: absolute;
-            top: 0;
-            left: 0;
+            top: -2px;
+            left: -4px;
 
-            width: 1.6rem;
-            height: 1.6rem;
-            padding: .25rem;
+            width: 26px;
+            height: 26px;
 
             content: counter(li); /* Use the counter as content */
             counter-increment: li;
             text-align: center;
             vertical-align: middle;
 
-            border: 3px solid $ref-point-color;
             border-radius: 50%;
-            background: white;
+            color: white;
+            background: $ref-point-color;
         }
     }
 }
