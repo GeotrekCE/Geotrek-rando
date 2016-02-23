@@ -388,6 +388,44 @@ function iconsService($q, $http, $filter, globalSettings, categoriesService, poi
         });
     };
 
+    this.getChildrenIcon = function getChildrenIcon (element) {
+        var deferred = $q.defer();
+        var markerIcon;
+        var promises = [];
+
+        if ($filter('isSVG')(self.icons_liste.category_base.iconUrl)) {
+            promises.push(
+                self.getSVGIcon(self.icons_liste.category_base.iconUrl, 'category_base')
+                    .then(
+                        function (icon) {
+                            markerIcon = icon;
+                        }
+                    )
+            );
+        } else {
+            markerIcon = '<img src="' + self.icons_liste.category_base.iconUrl + '"/>';
+        }
+
+        $q.all(promises).then(
+            function () {
+
+                var markup = '' +
+                    '<div class="marker" data-popup="' + element.properties.name + '">' +
+                        markerIcon +
+                    '</div>' +
+                    '<div class="icon"><span class="step-number">' + element.properties.stepNumber + '</span></div>';
+
+                var newIcon = new L.divIcon(_.merge({}, self.icons_liste.category_base, {
+                    html: markup,
+                    className: 'double-marker popup children-marker category-' + element.properties.category.id
+                }));
+                deferred.resolve(newIcon);
+            }
+        );
+
+        return deferred.promise;
+    };
+
     this.getPOIClusterIcon = function getPOIClusterIcon (cluster) {
         var children = cluster.getAllChildMarkers(),
             iconsMarkup = '',

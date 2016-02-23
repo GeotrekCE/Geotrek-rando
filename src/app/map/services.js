@@ -208,6 +208,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
 
     this.createElementsMarkers = function createElementsMarkers (elements, type) {
         var startPoint = [];
+        var stepCounter = 0;
         elements.forEach(function (element) {
             startPoint = utilsFactory.getStartPoint(element);
 
@@ -229,6 +230,8 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                     );
             }
             if (type === 'children') {
+                stepCounter++;
+                element.properties.stepNumber = stepCounter;
                 self.createLayerFromElement(element, 'children', startPoint)
                     .then(
                         function (marker) {
@@ -286,7 +289,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                 break;
 
             case 'children':
-                promise = iconsService.getElementIcon;
+                promise = iconsService.getChildrenIcon;
                 param = element;
                 popupSources.hint = element.properties.name;
                 break;
