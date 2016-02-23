@@ -30,4 +30,13 @@
     .themes.is-approved {
         padding-right: 2.5em;
     }
+
+    .step-number {
+        font-family: $font-family;
+        margin: auto;
+        font-size: 1.2rem;
+        line-height: 1.2rem;
+        font-weight: bolder;
+        color: white;
+    }
 }
