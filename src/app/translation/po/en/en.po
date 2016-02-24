@@ -179,7 +179,7 @@ msgid "CHILDREN"
 msgstr "Sub-treks"
 
 msgid "PARENT"
-msgstr "Parent trek"
+msgstr "Itinerancy"
 
 msgid "PROFILE_ALTI"
 msgstr "Elevation chart"

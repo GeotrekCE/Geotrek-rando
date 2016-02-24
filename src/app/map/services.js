@@ -208,6 +208,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
 
     this.createElementsMarkers = function createElementsMarkers (elements, type) {
         var startPoint = [];
+
         elements.forEach(function (element) {
             startPoint = utilsFactory.getStartPoint(element);
 
@@ -286,7 +287,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                 break;
 
             case 'children':
-                promise = iconsService.getElementIcon;
+                promise = iconsService.getChildrenIcon;
                 param = element;
                 popupSources.hint = element.properties.name;
                 break;

@@ -59,6 +59,14 @@
         }
     }
 
+    .step-number {
+        font-family: $font-family;
+        margin: auto;
+        font-size: 1.2rem;
+        font-weight: bolder;
+        color: white;
+    }
+
     /*
     &.popup .marker::after {
         content: '';
@@ -111,11 +119,8 @@
         }
     }
     &.service {
-        background: white;
         width: 30px;
         height: 30px;
-        // border-radius: 50%;
-        border: 2px solid $services-color;
         &.popup .marker::before {
             border-bottom-color: $services-color;
         }
