@@ -170,7 +170,7 @@ msgid "IS_CIRCUIT_STEP"
 msgstr "Steps:"
 
 msgid "POI"
-msgstr "POIS"
+msgstr "Heritages"
 
 msgid "NEAR"
 msgstr "Nearby"
