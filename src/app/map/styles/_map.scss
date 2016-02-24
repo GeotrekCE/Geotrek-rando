@@ -72,19 +72,12 @@
     .general-map .leaflet-top {
         top: 0;
     }
-    .detail-map {
-        .leaflet-right {
-            right: 25%;
-            .ie & {
-                right: 26%;
-            }
-        }
-        &.fold-aside .leaflet-right {
-            right: 4%;
-            .ie & {
-                right: 5%;
-            }
-        }
+    .fold-aside.detail-map.map-pane {
+        width: 96% !important;
+    }
+    .detail-map.map-pane {
+        width: 75% !important;
+        z-index: 300 !important;
     }
 }
 
