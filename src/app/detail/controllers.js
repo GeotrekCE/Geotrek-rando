@@ -184,7 +184,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         return deferred.promise;
     }
 
-    function getParent(result) {
+    function getParent(result, currentParentId) {
         var deferred = $q.defer(),
             promises = [],
             parentsElement = [];
@@ -203,6 +203,9 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                 resultsService.getAResultByID(element.id, element.category_id)
                     .then(
                         function (elementData) {
+                            if (elementData.id === currentParentId) {
+                                result.properties.stepNumber = detailService.getStepNumberInParent(result.id, elementData);
+                            }
                             $scope.parentsElement.push(elementData);
                         },
                         function (err) {
@@ -281,6 +284,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         );
 
         if (result.properties.children && result.properties.children.length > 0) {
+            detailService.setCurrentParent(result.id);
             promises.push(
                 getChildren(result)
                     .then(
@@ -299,9 +303,10 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
             );
         }
 
-        if (result.properties.parents) {
+        if (result.properties.parents && result.properties.parents.length > 0) {
+            var currentParentId = detailService.getCurrentParent();
             promises.push(
-                getParent(result)
+                getParent(result, currentParentId)
                     .then(
                         function (parents) {
                             if (parents.length > 0) {
@@ -349,9 +354,10 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                     );
 
                     if (result.properties.parents) {
+                        var currentParentId = detailService.getCurrentParent();
                         if (result.properties.previous !== undefined) {
                             // Get previous step
-                            var previousID = result.properties.previous[result.properties.parents[0]];
+                            var previousID = result.properties.previous[currentParentId];
                             if (previousID !== null && previousID !== undefined) {
                                 $scope.previousStep = true;
                                 resultsService.getAResultByID(previousID, result.properties.category.id).then(function(res) {
@@ -364,7 +370,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
 
                         if (result.properties.next !== undefined) {
                             // Get next step
-                            var nextID = result.properties.next[result.properties.parents[0]];
+                            var nextID = result.properties.next[currentParentId];
                             if (nextID !== null && nextID !== undefined) {
                                 $scope.nextStep = true;
                                 resultsService.getAResultByID(nextID, result.properties.category.id).then(function(res) {
@@ -402,6 +408,11 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         $rootScope.$on('switchGlobalLang', function () {
             if ($state.current.name === 'layout.detail') {
                 getResultDetails(true);
+            }
+        }),
+        $rootScope.$on('$stateChangeSuccess', function (event, toState) {
+            if (toState.name !== 'layout.detail') {
+                detailService.setCurrentParent(null);
             }
         })
     ];

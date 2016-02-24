@@ -5,15 +5,15 @@
             <ng-include ng-if="result.properties.category.pictogram | isSVG" src="result.properties.category.pictogram"></ng-include>
             <img ng-if="!result.properties.category.pictogram | isSVG" ng-src="{{::result.properties.category.pictogram}}" ng-alt="{{::result.properties.category.label}}">
         </div>
-        <h1 class="detail-content-title-text">{{result.properties.name}}</h1>
+        <h1 class="detail-content-title-text"><span ng-if="result.properties.stepNumber">{{result.properties.stepNumber}} - </span>{{result.properties.name}}</h1>
     </div>
 
-    <div class="detail-content-steps">
+    <div class="detail-content-steps" ng-if="result.properties.stepNumber">
         <a class="detail-content-steps-previous" ng-if="previousStep" href="#" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: previousStep.slug})">
-            <i class="fa fa-angle-left"></i><span ng-bind="previousStep.name"></span>
+            <i class="fa fa-angle-left"></i><span>{{result.properties.stepNumber - 1}} - {{previousStep.name}}</span>
         </a>
         <a class="detail-content-steps-next" ng-if="nextStep" href="#" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: nextStep.slug})">
-            <span ng-bind="nextStep.name"></span><i class="fa fa-angle-right"></i>
+            <span>{{result.properties.stepNumber + 1}} - {{nextStep.name}}</span><i class="fa fa-angle-right"></i>
         </a>
     </div>
 
