@@ -14,7 +14,24 @@ function a() {
     };
 }
 
+function clickAnywhereButHere($document) {
+    return {
+        restrict: 'A',
+        link: function(scope, elem, attr) {
+          elem.bind('click', function(e) {
+            // this part keeps it from firing the click on the document.
+            e.stopPropagation();
+          });
+          $document.bind('click', function() {
+            // magic here.
+            scope.$apply(attr.clickAnywhereButHere);
+        });
+        }
+    };
+}
+
 
 module.exports = {
-    a: a
+    a: a,
+    clickAnywhereButHere: clickAnywhereButHere
 };
