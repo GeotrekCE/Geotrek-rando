@@ -10728,7 +10728,7 @@
     },
     "rando3D": {
       "version": "1.3.0",
-      "resolved": "git+https://github.com/makinacorpus/rando3D.git#950adf9bd5d9356ba9caf3991938c8dd82a9ccdd",
+      "resolved": "git+https://github.com/makinacorpus/rando3D.git#ef72fc8c1728b08b10785a199f04329e210719be",
       "dependencies": {
         "babylonjs": {
           "version": "1.13.3",

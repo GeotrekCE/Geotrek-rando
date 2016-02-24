@@ -31,12 +31,16 @@ function Rando3DController(result, $scope, $timeout, $modalInstance, globalSetti
 
         var canvas = document.getElementById('canvas_renderer');
         var cameraID = "examine";
+
         var app3D = new Rando3D();
         var scene = app3D.init(customSettings, canvas, cameraID);
         scene.init(loadingCallback);
     }
 
-    $timeout(init3D, 500);
+    // TODO : aync rando-3D.js load
+    window.rando3D = require('rando3D');
+    $timeout(init3D);
+
 
     $scope.close = function () {
         $modalInstance.dismiss('close');

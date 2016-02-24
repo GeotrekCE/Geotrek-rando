@@ -1,3 +1,5 @@
+'use strict';
+
 var dest      = './src';
 var src       = './src';
 var appFolder = 'app';
@@ -72,6 +74,10 @@ module.exports = {
     },
     vendors: {
         outputName : 'rando-vendors.js',
+        dest: dest
+    },
+    rando3D: {
+        outputName : 'rando-3D.js',
         dest: dest
     },
     mainapp: {
