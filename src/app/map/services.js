@@ -606,7 +606,6 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
 
         var clusterLayer = new L.MarkerClusterGroup({
             showCoverageOnHover: false,
-            disableClusteringAtZoom: globalSettings.LEAFLET_CONF.DEFAULT_MAX_ZOOM,
             iconCreateFunction: function (cluster) {
                 return iconsService.getNearClusterIcon(cluster);
             }
@@ -620,7 +619,6 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
 
         var clusterLayer = new L.MarkerClusterGroup({
             showCoverageOnHover: false,
-            disableClusteringAtZoom: globalSettings.LEAFLET_CONF.DEFAULT_MAX_ZOOM,
             iconCreateFunction: function (cluster) {
                 return iconsService.getChildClusterIcon(cluster);
             }
