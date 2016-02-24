@@ -77,7 +77,7 @@
     "portfinder": "^1.0.1",
     "pretty-hrtime": "^1.0.1",
     "protractor": "^3.1.1",
-    "rando3D": "git+https://github.com/makinacorpus/rando3D.git#950adf9bd5d9356ba9caf3991938c8dd82a9ccdd",
+    "rando3D": "git+https://github.com/makinacorpus/rando3D.git#ef72fc8c1728b08b10785a199f04329e210719be",
     "require-dir": "^0.3.0",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",

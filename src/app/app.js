@@ -53,8 +53,6 @@ window.moment = require('moment');
 window.L = require('leaflet');
 window.L.pip = require('leaflet-pip');
 
-window.rando3D = require('rando3D');
-
 require('classlist-polyfill');
 
 require('./vendors/scripts/jquery.scrollTo.js');
