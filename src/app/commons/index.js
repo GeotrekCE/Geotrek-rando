@@ -6,4 +6,5 @@ angular.module('rando.commons', [])
 .filter('decodeEntities', require('./filters').decodeEntities)
 .filter('isSVG', require('./filters').isSVG)
 .filter('sanitizeData', require('./filters').sanitizeData)
-.directive('a', require('./directives').a);
+.directive('a', require('./directives').a)
+.directive('clickAnywhereButHere', require('./directives').clickAnywhereButHere);
