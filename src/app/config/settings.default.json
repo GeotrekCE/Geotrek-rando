@@ -88,7 +88,10 @@
     "NEAR_ELEMENTS_CATEGORIES": false,
     "SHOW_ARROWS_ON_ROUTE": false,
     "MARKER_BASE_ICON": "",
-    "POI_BASE_ICON": "",
+    "POI_BASE_ICON": {
+        "iconUrl": null,
+        "iconSize": [32, 32]
+    },
     "SERVICE_BASE_ICON": "",
     "DEPARTURE_ICON": "",
     "ARRIVAL_ICON": "",
