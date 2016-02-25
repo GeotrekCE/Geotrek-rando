@@ -107,6 +107,7 @@
     "PROFILE_FILE": "profile.json",
     "WARNING_CAT_DIR": "feedback",
     "WARNING_CAT_FILE": "categories.json",
+    "THEMES_FILE": "themes.json",
     "WARNING_SUBMIT_URL": "reports/report",
     "APPROVED_BIG": "images/approved-big.png",
     "APPROVED_SMALL": "images/approved-small.png",

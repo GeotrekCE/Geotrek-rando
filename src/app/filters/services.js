@@ -45,7 +45,7 @@ function filtersToolsService () {
     this.clean = clean;
 }
 
-function filtersService($rootScope, $q, $location, globalSettings, utilsFactory, resultsService, categoriesService, filtersToolsService, translationService) {
+function filtersService($rootScope, $q, $location, $http, globalSettings, settingsFactory, utilsFactory, resultsService, categoriesService, filtersToolsService, translationService) {
 
     var self = this,
         activeFiltersModel = {
@@ -59,6 +59,33 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
 
     // Define all type of filters that needs an interval check instead of an id one
     var filtersByInterval = ['difficulty', 'duration', 'ascent', 'eLength'];
+    self._themesList = {};
+
+    self.getThemes = function () {
+        var lang = translationService.getCurrentLang();
+
+        /**
+         * If treks have already been fetched for current language, return them
+         */
+        if (self._themesList[lang]) {
+            return $q.when(self._themesList[lang]);
+        }
+
+        /**
+         * If treks have never been fetched for current language, fetch them
+         */
+        var deferred = $q.defer();
+        var url      = settingsFactory.themesUrl.replace(/\$lang/, lang);
+
+        $http({url: url})
+            .then(function (response) {
+                self._themesList[lang] = angular.fromJson(response.data);
+
+                deferred.resolve(self._themesList[lang]);
+            });
+
+        return deferred.promise;
+    };
 
     self.initFilters = function () {
         var deferred = $q.defer(),
@@ -75,6 +102,26 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
                 .then(
                     function (categories) {
                         self.InitCategoriesFilters(categories);
+                    },
+                    function (err) {
+                        if (console) {
+                            console.error(err);
+                        }
+                    }
+                )
+        );
+
+        promises.push(
+            self.getThemes()
+                .then(
+                    function (themes) {
+                        if (!self.filters.themes) self.filters.themes = [];
+                        _.forEach(themes, function (theme) {
+                            if (theme.pictogram) {
+                                theme.pictogram = globalSettings.API_URL + theme.pictogram;
+                            }
+                            self.filters.themes.push(theme);
+                        });
                     },
                     function (err) {
                         if (console) {
@@ -174,11 +221,9 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
 
         if (results) {
             simpleEach(results, function (result) {
-                self.addPropertyToFilters(result.properties.themes, 'themes');
                 self.addPropertyToFilters(result.properties.districts, 'districts');
                 self.addPropertyToFilters(result.properties.cities, 'cities');
                 self.addPropertyToFilters(result.properties.structure, 'structure');
-
             });
         }
 

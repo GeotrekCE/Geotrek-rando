@@ -17,7 +17,8 @@ function settingsFactory(globalSettings) {
         touristicUrl =  globalSettings.API_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.TOURISTIC_CONTENTS_FILE,
         flatUrl =  globalSettings.API_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.FLAT_FILE,
         warningCategoriesUrl =  globalSettings.API_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.WARNING_CAT_DIR + '/' + globalSettings.WARNING_CAT_FILE,
-        warningSubmitUrl =  globalSettings.BACKOFFICE_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.WARNING_SUBMIT_URL;
+        warningSubmitUrl =  globalSettings.BACKOFFICE_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.WARNING_SUBMIT_URL,
+        themesUrl =  globalSettings.BACKOFFICE_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.THEMES_FILE;
 
     //PUBLIC METHODS
     //
@@ -44,6 +45,7 @@ function settingsFactory(globalSettings) {
         flatUrl: flatUrl,
         warningCategoriesUrl: warningCategoriesUrl,
         warningSubmitUrl: warningSubmitUrl,
+        themesUrl: themesUrl,
 
         //METHODS
         setLang: setLang,
