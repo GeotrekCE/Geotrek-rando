@@ -181,7 +181,10 @@
 
     .dropdown-menu {
         padding: 0;
-        max-height: 16rem;
+        max-height: calc(100vh - #{$header-height-desktop});
+        @media (max-width: 767px) {
+            max-height: calc(100vh - #{$header-height-mobile});
+        }
         a {
             padding-top: 15px;
             padding-bottom: 15px;
