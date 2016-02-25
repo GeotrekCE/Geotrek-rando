@@ -12,7 +12,7 @@
             <img data-src="{{::result.properties.picture.url}}" ng-alt="{{::result.properties.picture.title}}">
         </div>
         <div class="result-actions">
-            <div class="result-action result-category-icon">
+            <div class="result-action result-category-icon" tooltip-placement="top" tooltip="{{::result.properties.category.label}}">
                 <img ng-if="!result.properties.stepNumber && result.properties.category.pictogram" data-src="{{::result.properties.category.pictogram}}" ng-alt="{{::category.label}}">
                 <span class="step-number" ng-if="result.properties.stepNumber">{{::result.properties.stepNumber}}</span>
             </div>
@@ -39,7 +39,7 @@
         <div class="result-themes themes" ng-if="::result.properties.themes.length" ng-class="::{'is-approved': result.properties.approved}">
             <div class="result-themes-label">{{:: 'THEMES' | translate }}</div>
             <ul class="result-themes-list">
-                <li class="result-theme" ng-repeat="theme in ::result.properties.themes track by theme.label">
+                <li class="result-theme" ng-repeat="theme in ::result.properties.themes track by theme.label" tooltip-placement="top" tooltip="{{::theme.label}}">
                     <img ng-if="theme.pictogram" data-src="{{::theme.pictogram}}" ng-alt="{{::theme.label}}">
                 </li>
             </ul>

@@ -1,7 +1,7 @@
 <div class="detailsview-pane detail-content-pane informations">
 
     <div class="detail-content-title element-title">
-        <div class="cat-icon">
+        <div class="cat-icon" tooltip-placement="bottom" tooltip="{{::result.properties.category.label}}">
             <img ng-if="result.properties.category.pictogram" ng-src="{{::result.properties.category.pictogram}}" ng-alt="{{::result.properties.category.label}}">
         </div>
         <h1 class="detail-content-title-text"><span ng-if="result.properties.stepNumber">{{result.properties.stepNumber}} - </span>{{result.properties.name}}</h1>
