@@ -3,8 +3,8 @@
         <img class="content-picture" ng-src="{{randomContent.properties.pictures[0].url}}" alt="{{randomContent.properties.pictures[0].title}}">
         <div class="content-description">
             <div class="content-category" tooltip-placement="right" tooltip="{{::randomContent.properties.category.label}}">
-                <ng-include ng-if="randomContent.properties.category.pictogram | isSVG"  src="randomContent.properties.category.pictogram"></ng-include>
-                <img        ng-if="!(randomContent.properties.category.pictogram | isSVG)" ng-src="{{::randomContent.properties.category.pictogram}}" ng-alt="{{::category.label}}">
+                <ng-include ng-if="randomContent.properties.category.pictogram && (randomContent.properties.category.pictogram | isSVG)"  src="randomContent.properties.category.pictogram"></ng-include>
+                <img        ng-if="randomContent.properties.category.pictogram && !(randomContent.properties.category.pictogram | isSVG)" ng-src="{{::randomContent.properties.category.pictogram}}" ng-alt="{{::category.label}}">
             </div>
             <div class="content-title" ng-bind="randomContent.properties.name"></div>
         </div>

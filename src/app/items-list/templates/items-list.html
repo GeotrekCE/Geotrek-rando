@@ -13,7 +13,7 @@
         </div>
         <div class="result-actions">
             <div class="result-action result-category-icon">
-                <img ng-if="!result.properties.stepNumber" data-src="{{::result.properties.category.pictogram}}" ng-alt="{{::category.label}}">
+                <img ng-if="!result.properties.stepNumber && result.properties.category.pictogram" data-src="{{::result.properties.category.pictogram}}" ng-alt="{{::category.label}}">
                 <span class="step-number" ng-if="result.properties.stepNumber">{{::result.properties.stepNumber}}</span>
             </div>
             <a class="result-action result-map-focus" ng-click="mapFocusOn(result)" href="#"><img data-src="/images/icons/gps-symbol.svg"></a>
@@ -40,7 +40,7 @@
             <div class="result-themes-label">{{:: 'THEMES' | translate }}</div>
             <ul class="result-themes-list">
                 <li class="result-theme" ng-repeat="theme in ::result.properties.themes track by theme.label">
-                    <img data-src="{{::theme.pictogram}}" ng-alt="{{::theme.label}}">
+                    <img ng-if="theme.pictogram" data-src="{{::theme.pictogram}}" ng-alt="{{::theme.label}}">
                 </li>
             </ul>
         </div>

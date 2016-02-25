@@ -162,9 +162,9 @@
     width: 40px;
 
     border-radius: 20px;
-    line-height: 40px;
+    line-height: 36px;
     display: inline-block;
-    vertical-align: top;
+    vertical-align: middle;
     border: 2px solid rgba(245, 245, 245, 1);
     color: #fff;
     background-color: rgba(120, 120, 120, 1);
@@ -189,23 +189,9 @@
         color: #fff;
     }
 
-    svg {
-        fill: #fff;
-        position: absolute;
-        max-width: 70%;
-        max-height: 70%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    img {
-        position: absolute;
-        max-width: 70%;
-        max-height: 70%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    img, svg {
+        width: 100%;
+        height: 100%;
     }
 
     .results-list .results-item:hover &,
@@ -222,12 +208,9 @@
 
 .result-map-focus {
     img {
-        position: absolute;
-        max-width: 70%;
-        max-height: 70%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        max-width: 74%;
+        max-height: 74%;
+        margin: 13% auto;
     }
 }
 
@@ -280,11 +263,6 @@
 
 .result-category-icon {
     z-index: 1;
-    img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-    }
     @each $category in $categories {
         li.category-#{nth($category, 1)} & {
             background-color: nth($category, 2);
@@ -392,14 +370,12 @@
     display: inline-block;
     overflow: hidden;
 
-    width: 1.6em;
-    height: 1.6em;
-    margin-left: .2em;
-    img,
-    svg {
-        max-width: 100%;
-        max-height: 100%;
-        fill: $dark-grey;
+    width: 21px;
+    height: 21px;
+    margin-left: 5px;
+    img {
+        width: 100%;
+        height: 100%;
     }
 }
 
