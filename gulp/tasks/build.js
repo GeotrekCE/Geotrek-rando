@@ -36,6 +36,8 @@ function bundle(watch) {
         b = watchify(b);
     }
 
+    b.external('rando3D');
+
     // Transforms
     b.transform(partialify);
     b.transform({
