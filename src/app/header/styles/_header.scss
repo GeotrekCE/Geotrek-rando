@@ -58,12 +58,9 @@
     @media (min-width: 768px) {
         display: none;
     }
-    svg {
-        height: 100%;
-        width: 100%;
-    }
-    svg .base {
-        fill: $primary-color;
+    img {
+        max-height: 100%;
+        width: auto;
     }
 }
 

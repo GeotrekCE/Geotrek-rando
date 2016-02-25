@@ -5,7 +5,7 @@
 	 class="map" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:docname="ascent.svg"
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="70px" height="60px"
 	 viewBox="0 0 70 60" enable-background="new 0 0 70 60" xml:space="preserve">
-<path class="base" d="M11.604,49.473c-1.967-2.897,2.434-5.463,4.576-7.483c1.177-1.104,8.297-7.729,5.201-9.078
+<path  fill="#FFFFFF" class="base" d="M11.604,49.473c-1.967-2.897,2.434-5.463,4.576-7.483c1.177-1.104,8.297-7.729,5.201-9.078
 	c-1.888-0.823-8.494-6.59-10.713-5.14c-0.615,0.408-2.457,0.789-3.433,0.814v5.494c0.866,1.4,3.498,2.273,3.481,4.068
 	C10.688,41.018,7.014,48.905,11.604,49.473z M12.729,16.805c0.705-0.593-1.402-2.266-0.049-2.613
 	c0.326-0.084,4.822,2.517,4.852,2.164c0.09-1.053-4.953-3.99-6.039-4.6c-3.552-1.979-2.71,1.184-4.424,2.649v5.455
