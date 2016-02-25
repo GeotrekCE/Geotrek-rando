@@ -1,4 +1,36 @@
 
+2.10.0 / 2016-02-25
+==================
+
+**Major change**
+
+  * Update rando3D library, add gulp task for external script rando-3D
+
+**New features**
+
+  * Add previous and next steps buttons on detail page
+  * Order steps by number
+  * Contextualise parent for detail view
+  * Add condition in steps controller for tests
+  * Replace category/use picto with step number for list element if children
+  * Set step number in controller instead of map service
+  * Add number in steps markers on detail map
+  * Add a directive to close menu on click everywhere except on the menu
+
+**Enhancements**
+
+  * Use sass var for font family
+  * Remove useless style
+  * Remove blue border and white background from services icon
+  * Add a paragraph in doc to redirect urls from v1
+
+**Bug fixes**
+
+  * Fix pois english translation
+  * Allow cluster on detail page
+  * Fix ref points style
+  * Fix close menu button position
+
 2.9.0 / 2016-02-23
 ==================
 
