@@ -19,6 +19,19 @@ function webglService () {
     };
 }
 
+function loadRando3D ($q) {
+    var deferred = $q.defer();
+
+    var script = document.createElement('script');
+    script.src = 'rando-3D.js';
+    document.getElementsByTagName('head')[0].appendChild(script);
+    script.onload = function() {
+        deferred.resolve();
+    };
+    return deferred.promise;
+}
+
 module.exports = {
-    webglService: webglService
+    webglService: webglService,
+    loadRando3D: loadRando3D
 };

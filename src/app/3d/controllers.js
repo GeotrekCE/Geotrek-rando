@@ -1,6 +1,6 @@
 'use strict';
 
-function Rando3DController(result, $scope, $timeout, $modalInstance, globalSettings, translationService, settingsFactory) {
+function Rando3DController(result, $scope, $timeout, $modalInstance, globalSettings, loadRando3D, translationService, settingsFactory) {
     $scope.result = result;
     $scope.isLoading = false;
     var loadingCallback = function () {
@@ -37,10 +37,10 @@ function Rando3DController(result, $scope, $timeout, $modalInstance, globalSetti
         scene.init(loadingCallback);
     }
 
-    // TODO : aync rando-3D.js load
-    window.rando3D = require('rando3D');
-    $timeout(init3D);
-
+    loadRando3D.then(function() {
+        window.rando3D = require('rando3D');
+        $timeout(init3D);
+    });
 
     $scope.close = function () {
         $modalInstance.dismiss('close');
