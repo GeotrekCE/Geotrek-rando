@@ -204,9 +204,9 @@
     font-weight: lighter;
 
     display: block;
-    img {
-        width: auto;
-        height: 1.3em;
+    img, svg {
+        width: 17px;
+        height: 17px;
         margin-right: .25em;
     }
 }

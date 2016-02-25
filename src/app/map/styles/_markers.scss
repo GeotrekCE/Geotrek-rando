@@ -67,41 +67,7 @@
         color: white;
     }
 
-    /*
-    &.popup .marker::after {
-        content: '';
-        display: block;
-        position: absolute;
-        opacity: 0;
-        bottom: 100%;
-        left: 50%;
-        margin-left: -1rem;
-        width: 0;
-        height: 0;
-        border-left: 0 solid transparent;
-        border-right: 0 solid transparent;
-        border-top: 0 solid white;
-    }
-    &.popup .marker::before {
-        border-radius: 2px 2px 0 0;
-        content: attr(data-popup);
-        display: block;
-        position: absolute;
-        overflow: hidden;
-        opacity: 0;
-        width: 0;
-        height: 0;
-        padding: 0;
-        font-size: 0.7rem;
-        bottom: calc(100% + 0.7rem);
-        text-align: center;
-        left: 50%;
-        margin-left: -4rem;
-        background: white;
-        border-bottom: 2px solid $neutral-grey;
-    }
-    */
-    .icon {
+    &:not(.poi) .icon {
         position: absolute;
         top: 2px;
         left: 2px;
@@ -109,14 +75,8 @@
         width: 36px;
         height: 36px;
         align-items: center;
-
-        svg {
-            width: auto;
-            height: auto;
-            fill: white;
-            margin: 0 auto;
-            text-align: center;
-        }
+        border-radius: 36px;
+        overflow: hidden;
     }
     &.service {
         width: 30px;
@@ -207,9 +167,9 @@
         width: 46%;
         margin: 2%;
         display: inline-block;
-        img {
+        img, svg {
             width: 100%;
-            height: auto;
+            height: 100%;
         }
     }
     &:hover, &.hovered {

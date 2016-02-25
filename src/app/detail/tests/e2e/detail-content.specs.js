@@ -21,6 +21,6 @@ describe('Detail page ', function() {
     });
 
     it('title should have an icon', function() {
-        expect(element(by.css('.element-title .cat-icon svg')).isPresent()).toBe(true);
+        expect(element(by.css('.element-title .cat-icon img')).isPresent()).toBe(true);
     });
 });
