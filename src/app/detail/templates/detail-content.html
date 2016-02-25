@@ -83,6 +83,9 @@
         <ul>
             <li class="card">
                 <div class="contact" ng-if="result.properties.contact" ng-bind-html="result.properties.contact | sanitizeData: false"></div>
+                <div class="mail" ng-if="result.properties.email">
+                    <a href="mailto:{{::result.properties.email}}" target="_blank" title="{{::result.properties.email}}">{{::result.properties.email}}</a>
+                </div>
             </li>
         </ul>
     </div>

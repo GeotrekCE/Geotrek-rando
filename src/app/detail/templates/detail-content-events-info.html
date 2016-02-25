@@ -9,10 +9,6 @@
         <h5>{{'WEBSITE' | translate}}</h5>
         <span><a href="{{result.properties.website}}" target="_blank" title="{{::result.properties.website}}">{{::result.properties.website}}</a></span>
     </div>
-    <div ng-if="result.properties.email" class="email">
-        <h5>{{'EMAIL' | translate}}</h5>
-        <span><a href="mailto:{{::result.properties.email}}" target="_blank" title="{{::result.properties.email}}">{{::result.properties.email}}</a></span>
-    </div>
     <div ng-if="result.properties.booking" class="booking">
         <h5>{{'BOOKING' | translate}}</h5>
         <div ng-bind-html="result.properties.booking | sanitizeData: true"></div>
