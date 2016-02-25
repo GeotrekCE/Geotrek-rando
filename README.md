@@ -27,7 +27,7 @@ Make sure access rights will allow nginx to read all files in `<my_data_director
 - Install Node
 
 ```
-curl -sL https://deb.nodesource.com/setup | sudo bash -
+curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 sudo apt-get install nodejs build-essential
 ```
 
