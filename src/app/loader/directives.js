@@ -6,7 +6,7 @@ function loader() {
         replace: true,
         template: require('./templates/loader.html'),
         scope: {
-            loadStyle: '='
+            loadClass: '='
         }
     };
 }

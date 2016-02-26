@@ -25,7 +25,6 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
             filtersService.getFilteredResults()
                 .then(
                     function () {
-                        $rootScope.elementsLoading --;
                         if ($rootScope.allResults.matchs[lang] > 0) {
                             mapService.displayResults(fitBounds, forceRefresh);
                         } else {
@@ -186,6 +185,7 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
     var rootScopeEvents = [
         $rootScope.$on('$stateChangeStart',
             function () {
+                $rootScope.elementsLoading = 1;
                 var map = $rootScope.map;
                 centerService.setCenter(map.getCenter(), map.getZoom(), $scope.currentState);
 
@@ -208,12 +208,18 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
         $rootScope.$on('resultsUpdated', function (name, forceRefresh) {
             forceRefresh = !!forceRefresh;
             if ($state.current.name === 'layout.root') {
-                updateMapWithResults(globalSettings.UPDATE_MAP_ON_FILTER, forceRefresh);
+                $rootScope.elementsLoading = 1;
+                updateMapWithResults(globalSettings.UPDATE_MAP_ON_FILTER, forceRefresh).then(function() {
+                    $rootScope.elementsLoading --;
+                });
             }
         }),
         $rootScope.$on('detailUpdated', function (name, forceRefresh) {
             if ($state.current.name === 'layout.detail' && !forceRefresh) {
-                updateMapWithDetails(forceRefresh);
+                $rootScope.elementsLoading = 1;
+                updateMapWithDetails(forceRefresh).then(function() {
+                    $rootScope.elementsLoading --;
+                });
             }
         }),
         $rootScope.$on('switchGlobalLang', function () {

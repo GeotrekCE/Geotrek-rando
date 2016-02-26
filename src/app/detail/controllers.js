@@ -337,7 +337,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
     }
 
     function getResultDetails(forceRefresh) {
-        $rootScope.elementsLoading ++;
+        $rootScope.elementsLoading = 1;
         var promise;
         if (!forceRefresh) {
             promise = resultsService.getAResultBySlug($stateParams.slug, $stateParams.catSlug);
