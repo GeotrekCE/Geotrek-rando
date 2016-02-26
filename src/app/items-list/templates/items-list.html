@@ -12,9 +12,11 @@
             <img data-src="{{::result.properties.picture.url}}" ng-alt="{{::result.properties.picture.title}}">
         </div>
         <div class="result-actions">
-            <div class="result-action result-category-icon" tooltip-placement="top" tooltip="{{::result.properties.category.label}}">
-                <img ng-if="!result.properties.stepNumber && result.properties.category.pictogram" data-src="{{::result.properties.category.pictogram}}" ng-alt="{{::category.label}}">
-                <span class="step-number" ng-if="result.properties.stepNumber">{{::result.properties.stepNumber}}</span>
+            <div>
+                <div class="result-action result-category-icon" tooltip-placement="top" tooltip="{{::result.properties.category.label}}">
+                    <img ng-if="!result.properties.stepNumber && result.properties.category.pictogram" data-src="{{::result.properties.category.pictogram}}" ng-alt="{{::category.label}}">
+                    <span class="step-number" ng-if="result.properties.stepNumber">{{::result.properties.stepNumber}}</span>
+                </div>
             </div>
             <a class="result-action result-map-focus" ng-click="mapFocusOn(result)" href="#"><img data-src="/images/icons/gps-symbol.svg"></a>
             <a class="result-action result-view-details" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: result.properties.slug})">{{:: 'SHOW_MORE' | translate }}</a>
