@@ -3,21 +3,20 @@
 function ResultsListeController($scope, $rootScope, globalSettings, utilsFactory, filtersService) {
 
     function updateResultsList(forceRefresh) {
-        $rootScope.elementsLoading ++;
-
+        $rootScope.elementsLoading = 1;
         filtersService.getFilteredResults()
-            .then(
-                function (results) {
-                    $scope.results = results;
-                    $rootScope.$emit('resultsUpdated', forceRefresh);
-                    $rootScope.elementsLoading --;
-                },function (err) {
-                    if (console) {
-                        console.error(err);
-                    }
-                    $rootScope.elementsLoading --;
+        .then(
+            function (results) {
+                $scope.results = results;
+                $rootScope.$emit('resultsUpdated', forceRefresh);
+                $rootScope.elementsLoading --;
+            },function (err) {
+                if (console) {
+                    console.error(err);
                 }
-            );
+                $rootScope.elementsLoading --;
+            }
+        );
 
     }
 
