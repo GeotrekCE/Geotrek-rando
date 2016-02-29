@@ -1,4 +1,30 @@
 
+2.11.0 / 2016-02-29
+==================
+
+**Bug fixes**
+
+  * Fix collapser counters ie10
+  * Fix steps markers centering ie10
+  * Fix category icon size on detail page
+  * Fix search icon color on mobile
+  * Fix search icon on mobile
+  * Change loader style and show it when update filters
+  * Fix tooltip bug wih category icon in results
+  * Fix nginx config example in README
+  * Fix node version in README
+  * Change fullscreen size to avoid map on detail pane background. Remove useless css
+
+**Enhancements**
+
+  * JS for 3D in a separate script
+  * Optimize header dropdowns height
+  * Add tooltips on categories and themes solo icons
+  * Force size of pictograms and remove useless styles and some ng-include svg
+  * Put email field in contact card
+  * Remove the pin for POI types in default customization file. Set a default icon size of 32x32 pixels.
+  * Changed mobile header switch icon
+
 2.10.0 / 2016-02-25
 ==================
 
