@@ -9,6 +9,7 @@ Option     | Type      | Default   | Description
 --------|-----------|-----------|------------
 PLAFTORM_ID | String | `"geotrek-rando"` | Unique id for your geotrek website.You need to change it. It's used for Localstorage between other things.
 API_URL | String (url) | `"tests/dataset"` |URL of the location where geotrek rando should find the api. If you're using Geotrek Admin, it can be either the admin server url or the rando server url (if you activate data sync on the admi nside)
+REQUIRED_API_VERSION | String (version number) | `"2.9.3"` |Require version of the API to check if Geotrek-Admin is compatible.
 BACKOFFICE_URL | String (url) | `""` | URL of your backoffice where rando can send requests like for the warning module.
 ENABLE_HTML_MODE | Boolean | `false` | Active HTML5 mode. Please refer to [ui-router FAQ](https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions#how-to-configure-your-server-to-work-with-html5mode)
 

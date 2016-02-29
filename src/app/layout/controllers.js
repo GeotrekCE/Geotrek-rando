@@ -1,6 +1,11 @@
 'use strict';
 
-function LayoutController($rootScope, $scope, $state, $location, resultsService, globalSettings, homeService, $translate, $timeout, Analytics, mapService) {
+function LayoutController(CheckAPI, $rootScope, $scope, $state, $location, resultsService, globalSettings, homeService, $translate, $timeout, Analytics, mapService) {
+
+    if (CheckAPI) {
+        $state.go('error', {'message': CheckAPI});
+    }
+
     $rootScope.currentState_name = $state.current.name;
     $rootScope.showFooterOnApp = globalSettings.SHOW_FOOTER;
     $rootScope.elementsLoading = 0;
