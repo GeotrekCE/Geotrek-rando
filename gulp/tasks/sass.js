@@ -1,9 +1,7 @@
 'use strict';
 
 var gulp         = require('gulp');
-var concat       = require('gulp-concat');
 var merge        = require('merge-stream');
-var path         = require('path');
 var gulpif       = require('gulp-if');
 
 var sass         = require('gulp-sass');
@@ -17,12 +15,6 @@ var config       = require('../config').sass;
 var fs           = require('fs');
 
 var srcMap       = false;
-
-function concatSassFiles(src, fileName, dest) {
-    return gulp.src(src)
-        .pipe(concat(fileName + '.scss'))
-        .pipe(gulp.dest(dest));
-}
 
 function compileSass() {
     var streams = [];
