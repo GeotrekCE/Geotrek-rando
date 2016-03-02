@@ -1,6 +1,12 @@
 'use strict';
 
 function headerController($scope, $rootScope, globalSettings) {
+    $scope.mobileCollapsed = true;
+
+    $scope.toggleMobileMenu = function toggleMobileMenu() {
+        $scope.mobileCollapsed = !$scope.mobileCollapsed;
+    };
+
     if (globalSettings.HEADER_TEMPLATE_FILE) {
         $scope.headerTemplate = '/app/custom/templates/' + globalSettings.HEADER_TEMPLATE_FILE;
     } else {
