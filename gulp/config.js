@@ -82,33 +82,5 @@ module.exports = {
         cssSrc: dest + '/*.css',
         jsSrc: dest + '/*.js',
         dest: dest
-    },
-    custom: {
-        customModulePath: src + '/' + appFolder + '/custom',
-        templatesFolder: 'templates',
-        stylesFolder: 'styles',
-        scriptsFolder: '',
-        filesToCreate: [
-            {
-                path: '',
-                defaultFileName: '',
-                customFileName: 'custom-detail-page-footer.html'
-            },
-            {
-                path: '',
-                defaultFileName: 'directives.js.example',
-                customFileName: 'directives.js'
-            },
-            {
-                path: '',
-                defaultFileName: 'controllers.js.example',
-                customFileName: 'controllers.js'
-            },
-            {
-                path: '',
-                defaultFileName: 'services.js.example',
-                customFileName: 'services.js'
-            }
-        ]
     }
 };

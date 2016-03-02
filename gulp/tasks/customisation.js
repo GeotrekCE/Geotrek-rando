@@ -26,39 +26,17 @@ function getFileType(fileName) {
     }
 }
 
+function touch (file) {
+    fs.appendFileSync(file, '');
+}
+
 function createCustomisationFiles() {
-
-
-    _.each(config.filesToCreate, function (file) {
-        var fileType = getFileType(file.customFileName);
-        var filePath = '';
-        var fileContent = '';
-        if (file.path) {
-            filePath = file.path;
-        } else {
-            filePath = config.customModulePath;
-            if (fileType) {
-                filePath = path.join(filePath, config[fileType + 'Folder']);
-            } else {
-                var message = 'The format of "' + file.customFileName + '" isn\'t recognise.';
-                console.log(message);
-                notifier.notify({
-                    'title': 'Invalid file format',
-                    'message': message
-                });
-                return false;
-            }
-        }
-
-        if (!fs.existsSync(path.join(filePath, file.customFileName))) {
-            console.log('file ' + file.customFileName + ' doesn\'t exists ---- creating it !');
-            if (file.defaultFileName) {
-                fileContent = fs.readFileSync(path.join(filePath, file.defaultFileName));
-            }
-
-            fs.appendFileSync(path.join(filePath, file.customFileName), fileContent);
-        }
-    });
+    [
+        'src/app/custom/templates/custom-detail-page-footer.html',
+        'src/app/custom/directives.js',
+        'src/app/custom/controllers.js',
+        'src/app/custom/services.js'
+    ].forEach(touch);
 }
 
 gulp.task('customisation:config', createConfigFile);
