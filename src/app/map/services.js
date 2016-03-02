@@ -764,37 +764,20 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
 
         var visbleResults = _.union(visibleMarkers, visibleGeoJson);
 
-        _.forEach($rootScope.allResults[lang], function (currentResult) {
-            if (!currentResult.isResult) return false;
-
-            var selector = '#result-category-' + currentResult.properties.category.id.toString() + '-' + currentResult.id.toString();
-            var listResult = document.querySelector(selector);
-            if (listResult) {
-                if (!self.filterByViewport) {
-                    if (listResult.classList.contains('not-in-viewport')) {
-                        listResult.classList.remove('not-in-viewport');
-                    }
-                } else {
-                    var isVisibe = false;
-
-                    _.forEach(visbleResults, function (currentActiveResult) {
-                        if (currentResult.properties.category.id.toString() === currentActiveResult.properties.category.id.toString() && currentResult.id.toString() === currentActiveResult.id.toString()) {
-                            isVisibe = true;
-                        }
-                    });
-                    if (isVisibe) {
-                        if (listResult.classList.contains('not-in-viewport')) {
-                            listResult.classList.remove('not-in-viewport');
-                        }
-                    } else {
-                        if (!listResult.classList.contains('not-in-viewport')) {
-                            listResult.classList.add('not-in-viewport');
-                        }
-                    }
-                }
+        _.forEach($rootScope.allResults[lang], function(result) {
+            var isVisible = false;
+            if (!result.isResult) {
+                return false;
             }
-        });
+            _.forEach(visbleResults, function (visbleResult) {
+                isVisible = result.luid === visbleResult.luid ? true : false;
+                if (isVisible) {
+                    return false;
+                }
+            });
 
+            result.isOnMap = isVisible;
+        });
     };
 
     this.createElevation = function createElevation (result) {
