@@ -765,16 +765,15 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
         var visbleResults = _.union(visibleMarkers, visibleGeoJson);
 
         _.forEach($rootScope.allResults[lang], function(result) {
-            var isVisible = false;
-            if (!result.isResult) {
-                return false;
+            var isVisible = true;
+            if (self.filterByViewport) {
+                _.forEach(visbleResults, function (visbleResult) {
+                    isVisible = result.luid === visbleResult.luid ? true : false;
+                    if (isVisible) {
+                        return false;
+                    }
+                });
             }
-            _.forEach(visbleResults, function (visbleResult) {
-                isVisible = result.luid === visbleResult.luid ? true : false;
-                if (isVisible) {
-                    return false;
-                }
-            });
 
             result.isOnMap = isVisible;
         });
