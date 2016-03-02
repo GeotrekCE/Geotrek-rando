@@ -5,14 +5,6 @@ var src       = './src';
 var appFolder = 'app';
 
 module.exports = {
-    tests: {
-        unit: {
-            src: ['src/**/tests/unit/*.js']
-        },
-        e2e: {
-            src: ['src/**/tests/e2e/*.js']
-        }
-    },
     translate: {
         src: src + '/' + appFolder + '/translation/po',
         dest: dest + '/' + appFolder + '/translation/lang',
