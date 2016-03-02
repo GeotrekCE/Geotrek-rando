@@ -96,12 +96,6 @@ module.exports = {
         templatesFolder: 'templates',
         stylesFolder: 'styles',
         scriptsFolder: '',
-        appConfig: {
-            path: src + '/' + appFolder + '/config/',
-            finalFileName: 'settings.constant.json',
-            defaultFileName: 'settings.default.json',
-            customFileName: 'settings.custom.json'
-        },
         filesToCreate: [
             {
                 path: '',

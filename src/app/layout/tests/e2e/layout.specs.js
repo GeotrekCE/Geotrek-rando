@@ -1,6 +1,6 @@
 'use strict';
 describe('Geotrek app ', function() {
-    var constants = require('../../../config/settings.constant.json');
+    var constants = require('../../../config/settings.default.json');
 
     beforeAll(function() {
         browser.get('/');

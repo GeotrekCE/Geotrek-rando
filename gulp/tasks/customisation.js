@@ -8,23 +8,10 @@ var _            = require('lodash');
 var config       = require('../config').custom;
 
 function createConfigFile() {
-    var appConfig   = config.appConfig;
-    var configPath  = appConfig.path;
-    var defaultConf = fs.readFileSync(path.join(configPath, appConfig.defaultFileName), {encoding: 'utf8'});
-    var customConf  = '{}';
-    var finalConf   = {};
-    var finalFile   = path.join(configPath, appConfig.finalFileName);
-    if(fs.existsSync(path.join(configPath, appConfig.customFileName))) {
-        customConf = fs.readFileSync(path.join(configPath, appConfig.customFileName), {encoding: 'utf8'});
+    var configFile = 'src/app/config/settings.custom.json';
+    if (!fs.existsSync(configFile)) {
+        fs.writeFileSync(configFile, '{}');
     }
-    finalConf = _.assign(JSON.parse(defaultConf), JSON.parse(customConf));
-
-    fs.writeFile(finalFile, JSON.stringify(finalConf), function (err) {
-        if (err) {
-            console.log('Eror - Couldn\'t write file: ' + finalFile);
-            throw err;
-        }
-    });
 }
 
 function getFileType(fileName) {
@@ -80,5 +67,5 @@ gulp.task('customisation:config', createConfigFile);
 gulp.task('customisation', ['customisation:config'], createCustomisationFiles);
 
 gulp.task('watch:config', function () {
-    gulp.watch(path.join(config.appConfig.path, '!(' + config.appConfig.finalFileName + ').json'), ['customisation:config']);
+    // gulp.watch(path.join(config.appConfig.path, '!(' + config.appConfig.finalFileName + ').json'), ['customisation:config']);
 });

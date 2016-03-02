@@ -2,7 +2,7 @@
 
 describe('Detail page ', function() {
     var titleSelector;
-    var constants = require('../../../config/settings.constant.json');
+    var constants = require('../../../config/settings.default.json');
 
     beforeAll(function() {
         browser.get('/');

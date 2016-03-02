@@ -1,7 +1,7 @@
 'use strict'
 
 describe('Geotrek app ', function() {
-    var constants = require('../../settings.constant.json');
+    var constants = require('../../settings.default.json');
 
     beforeAll(function() {
         browser.get('/#/no-homme');

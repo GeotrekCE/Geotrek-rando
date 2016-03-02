@@ -1,7 +1,7 @@
 'use strict'
 
 describe('Home page ', function() {
-    var constants = require('../../../config/settings.constant.json');
+    var constants = require('../../../config/settings.default.json');
     var homePage;
 
     beforeAll(function() {
