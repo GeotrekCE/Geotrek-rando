@@ -3,7 +3,9 @@
 $root-images-path: "./images/";
 
 @import 'commons/styles/_mixins';
-@import 'config/styles/_configuration';
+
+@import 'config/styles/_config-custom';
+@import 'config/styles/_config-default';
 
 * {
     box-sizing: border-box;

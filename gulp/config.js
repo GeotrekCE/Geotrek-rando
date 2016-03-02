@@ -21,14 +21,6 @@ module.exports = {
         }
     },
     sass: {
-        config: {
-            path: src + '/' + appFolder + '/config/styles',
-            finalFileName: '_configuration'
-        },
-        customisation: {
-            path: src + '/' + appFolder + '/custom/styles',
-            finalFileName: '_customisation'
-        },
         files: [
             {
                 src: src + '/' + appFolder + '/rando.{sass,scss}',
@@ -40,7 +32,7 @@ module.exports = {
             }
         ],
         dest: dest,
-        toWatch: src + '/' + appFolder + '/**/!(_configuration | _customisation).scss',
+        toWatch: src + '/' + appFolder + '/**/!_customisation.scss',
         settings: {
             outputStyle: 'compact',
             imagePath: '/images' // Used by the image-url helper

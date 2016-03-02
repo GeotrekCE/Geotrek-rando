@@ -14,6 +14,8 @@ var autoprefixer = require('gulp-autoprefixer');
 var handleErrors = require('../util/handleErrors');
 var config       = require('../config').sass;
 
+var fs           = require('fs');
+
 var srcMap       = false;
 
 function concatSassFiles(src, fileName, dest) {
@@ -42,15 +44,17 @@ function compileSass() {
 }
 
 function sassConfig() {
-    var appConfig   = config.config;
-    var configPath  = appConfig.path;
-    return concatSassFiles(path.join(configPath, '!(' + appConfig.finalFileName + ').@(scss|sass|css)'), appConfig.finalFileName, configPath);
+    var configFile = 'src/app/config/styles/_config-custom.scss';
+    if (!fs.existsSync(configFile)) {
+        fs.writeFileSync(configFile, '');
+    }
 }
 
 function sassCustomisation() {
-    var appConfig   = config.customisation;
-    var customisationPath  = appConfig.path;
-    return concatSassFiles(path.join(customisationPath, '!(' + appConfig.finalFileName + ').@(scss|sass|css)'), appConfig.finalFileName, customisationPath);
+    var configFile = 'src/app/custom/styles/_customisation.scss';
+    if (!fs.existsSync(configFile)) {
+        fs.writeFileSync(configFile, '');
+    }
 }
 
 gulp.task('sass:config', sassConfig);

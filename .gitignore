@@ -18,7 +18,6 @@ src/rando-vendors.css
 #
 # Config files
 src/app/config/settings.custom.json
-src/app/config/styles/_configuration.scss
 src/app/config/styles/_config-custom.scss
 #
 # Custom Module Files
