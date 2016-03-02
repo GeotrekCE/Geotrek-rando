@@ -20,24 +20,7 @@ module.exports = {
             'format': 'mf'
         }
     },
-    sass: {
-        files: [
-            {
-                src: src + '/' + appFolder + '/rando.{sass,scss}',
-                outputName: 'rando.css'
-            },
-            {
-                src: src + '/' + appFolder + '/vendors/styles/vendors.{sass,scss}',
-                outputName: 'rando-vendors.css'
-            }
-        ],
-        dest: dest,
-        toWatch: src + '/' + appFolder + '/**/!_customisation.scss',
-        settings: {
-            outputStyle: 'compact',
-            imagePath: '/images' // Used by the image-url helper
-        }
-    },
+
     images: {
         frameworks: [
             {

@@ -10,24 +10,47 @@ var sourcemaps   = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 
 var handleErrors = require('../util/handleErrors');
-var config       = require('../config').sass;
 
 var fs           = require('fs');
 
 var srcMap       = false;
 
+var sassSettings = {
+    outputStyle: 'compact',
+    imagePath: '/images'
+};
+
+function touch (file) {
+    fs.appendFileSync(file, '');
+}
+
 function compileSass() {
+    [
+        'src/app/config/styles/_config-custom.scss',
+        'src/app/custom/styles/_customisation.scss'
+    ].forEach(touch);
+
     var streams = [];
-    config.files.forEach(function (element) {
+
+    [
+        {
+            src: 'src/app/rando.scss',
+            dest: 'rando.css'
+        },
+        {
+            src: 'src/app/vendors/styles/vendors.{sass,scss}',
+            dest: 'rando-vendors.css'
+        }
+    ].forEach(function (element) {
 
         streams.push(gulp.src(element.src)
             .on('error', handleErrors)
             .pipe(gulpif(srcMap, sourcemaps.init()))
-            .pipe(sass(config.settings))
+            .pipe(sass(sassSettings))
             .pipe(autoprefixer({ browsers: ['last 2 version'] }))
             .pipe(gulpif(srcMap, sourcemaps.write()))
-            .pipe(rename(element.outputName)) // Setup the right filename
-            .pipe(gulp.dest(config.dest))    // Output in specified directory
+            .pipe(rename(element.dest)) // Setup the right filename
+            .pipe(gulp.dest('src/'))    // Output in specified directory
         );
 
     });
@@ -35,25 +58,8 @@ function compileSass() {
     return merge(streams);
 }
 
-function sassConfig() {
-    var configFile = 'src/app/config/styles/_config-custom.scss';
-    if (!fs.existsSync(configFile)) {
-        fs.writeFileSync(configFile, '');
-    }
-}
-
-function sassCustomisation() {
-    var configFile = 'src/app/custom/styles/_customisation.scss';
-    if (!fs.existsSync(configFile)) {
-        fs.writeFileSync(configFile, '');
-    }
-}
-
-gulp.task('sass:config', sassConfig);
-gulp.task('sass:customisation', sassCustomisation);
-
-gulp.task('sass', ['sass:config', 'sass:customisation'], compileSass);
+gulp.task('sass', compileSass);
 
 gulp.task('watch:sass', function () {
-    gulp.watch(config.toWatch, ['sass']);
+    gulp.watch('src/app/**/!_customisation.scss', ['sass']);
 });
