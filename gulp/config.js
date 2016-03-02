@@ -51,10 +51,6 @@ module.exports = {
         outputName : 'rando-vendors.js',
         dest: dest
     },
-    rando3D: {
-        outputName : 'rando-3D.js',
-        dest: dest
-    },
     mainapp: {
         debug: true,
         entries: src + '/' + appFolder + '/app.js',

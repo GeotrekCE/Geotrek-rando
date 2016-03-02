@@ -7,14 +7,12 @@ var source       = require('vinyl-source-stream');
 
 var handleErrors = require('../util/handleErrors');
 var bundleLogger = require('../util/bundleLogger');
-var config       = require('../config').rando3D;
 
 gulp.task('rando3D', function () {
 
     var bundler    = browserify();
-    var outputName = config.outputName;
-    var outputPath = config.dest;
-
+    var outputName = 'rando-3D.js';
+    var outputPath = 'src';
 
     bundler.require('rando3D');
 
