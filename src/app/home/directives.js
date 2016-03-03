@@ -1,13 +1,22 @@
 'use strict';
 
-function homePage() {
-    return {
+function homePage(globalSettings, translationService) {
+    var currentLang = translationService.getCurrentLang();
+    var tpl         = globalSettings.HOME_TEMPLATE_FILE[currentLang];
+    var directive   = {
         restrict: 'E',
         replace: true,
         scope: true,
-        template: require('./templates/home-base.html'),
         controller: 'HomeController'
     };
+
+    if (tpl && tpl.length) {
+        directive.templateUrl = 'app/custom/templates/' + tpl;
+    } else {
+        directive.template = require('./templates/home-default.html');
+    }
+
+    return directive;
 }
 
 function randomContentsList() {
