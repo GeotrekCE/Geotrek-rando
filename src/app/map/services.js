@@ -455,11 +455,12 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                 controlInput.type = 'checkbox';
                 controlInput.value = 'viewport-filtering';
                 controlInput.checked = globalSettings.FILTER_BY_VIEWPORT_DEFAULT;
-                var controlCaption = L.DomUtil.create('span', 'leaflet-control-viewportfilter-caption', controlContainer);
+                L.DomUtil.create('span', 'leaflet-control-viewportfilter-caption', controlContainer);
 
                 L.DomEvent.on(controlInput, 'change', function () {
-                    self.filterByViewport = document.querySelector('.leaflet-control-viewportfilter-button').checked;
+                    self.filterByViewport = this._container.firstChild.checked;
                     self.resultsVisibility();
+                    $rootScope.$digest();
                 }, this);
                 return controlContainer;
             }
@@ -757,13 +758,14 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
 
     this.resultsVisibility = function resultsVisibility () {
 
+        if (self.filterByViewport) {
+            var visibleMarkers = self.testMarkersVisibility(self._clustersLayer),
+                visibleGeoJson = self.testMarkersVisibility(self._treksgeoJsonLayer);
+
+            var visbleResults = _.union(visibleMarkers, visibleGeoJson);
+        }
+
         var lang = translationService.getCurrentLang();
-
-        var visibleMarkers = self.testMarkersVisibility(self._clustersLayer),
-            visibleGeoJson = self.testMarkersVisibility(self._treksgeoJsonLayer);
-
-        var visbleResults = _.union(visibleMarkers, visibleGeoJson);
-
         _.forEach($rootScope.allResults[lang], function(result) {
             var isVisible = true;
             if (self.filterByViewport) {
