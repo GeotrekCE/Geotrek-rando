@@ -7,12 +7,6 @@ function headerController($scope, $rootScope, globalSettings) {
         $scope.mobileCollapsed = !$scope.mobileCollapsed;
     };
 
-    if (globalSettings.HEADER_TEMPLATE_FILE) {
-        $scope.headerTemplate = '/app/custom/templates/' + globalSettings.HEADER_TEMPLATE_FILE;
-    } else {
-        $scope.headerTemplate = '/app/header/templates/default-header.html';
-    }
-
     $scope.displayHomePage = function displayHomePage () {
         if (globalSettings.SHOW_HOME) {
             $rootScope.showHome = true;
