@@ -455,11 +455,12 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                 controlInput.type = 'checkbox';
                 controlInput.value = 'viewport-filtering';
                 controlInput.checked = globalSettings.FILTER_BY_VIEWPORT_DEFAULT;
-                var controlCaption = L.DomUtil.create('span', 'leaflet-control-viewportfilter-caption', controlContainer);
+                L.DomUtil.create('span', 'leaflet-control-viewportfilter-caption', controlContainer);
 
                 L.DomEvent.on(controlInput, 'change', function () {
-                    self.filterByViewport = document.querySelector('.leaflet-control-viewportfilter-button').checked;
+                    self.filterByViewport = this._container.firstChild.checked;
                     self.resultsVisibility();
+                    $rootScope.$digest();
                 }, this);
                 return controlContainer;
             }
@@ -757,44 +758,27 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
 
     this.resultsVisibility = function resultsVisibility () {
 
+        if (self.filterByViewport) {
+            var visibleMarkers = self.testMarkersVisibility(self._clustersLayer),
+                visibleGeoJson = self.testMarkersVisibility(self._treksgeoJsonLayer);
+
+            var visbleResults = _.union(visibleMarkers, visibleGeoJson);
+        }
+
         var lang = translationService.getCurrentLang();
-
-        var visibleMarkers = self.testMarkersVisibility(self._clustersLayer),
-            visibleGeoJson = self.testMarkersVisibility(self._treksgeoJsonLayer);
-
-        var visbleResults = _.union(visibleMarkers, visibleGeoJson);
-
-        _.forEach($rootScope.allResults[lang], function (currentResult) {
-            if (!currentResult.isResult) return false;
-
-            var selector = '#result-category-' + currentResult.properties.category.id.toString() + '-' + currentResult.id.toString();
-            var listResult = document.querySelector(selector);
-            if (listResult) {
-                if (!self.filterByViewport) {
-                    if (listResult.classList.contains('not-in-viewport')) {
-                        listResult.classList.remove('not-in-viewport');
+        _.forEach($rootScope.allResults[lang], function(result) {
+            var isVisible = true;
+            if (self.filterByViewport) {
+                _.forEach(visbleResults, function (visbleResult) {
+                    isVisible = result.luid === visbleResult.luid ? true : false;
+                    if (isVisible) {
+                        return false;
                     }
-                } else {
-                    var isVisibe = false;
-
-                    _.forEach(visbleResults, function (currentActiveResult) {
-                        if (currentResult.properties.category.id.toString() === currentActiveResult.properties.category.id.toString() && currentResult.id.toString() === currentActiveResult.id.toString()) {
-                            isVisibe = true;
-                        }
-                    });
-                    if (isVisibe) {
-                        if (listResult.classList.contains('not-in-viewport')) {
-                            listResult.classList.remove('not-in-viewport');
-                        }
-                    } else {
-                        if (!listResult.classList.contains('not-in-viewport')) {
-                            listResult.classList.add('not-in-viewport');
-                        }
-                    }
-                }
+                });
             }
-        });
 
+            result.isOnMap = isVisible;
+        });
     };
 
     this.createElevation = function createElevation (result) {
