@@ -7,4 +7,4 @@
 
 var gulp     = require('gulp');
 
-gulp.task('watch', ['watch:mainapp', 'watch:sass', 'watch:translate', 'watch:config']);
+gulp.task('watch', ['watch:mainapp', 'watch:sass', 'watch:translate']);
