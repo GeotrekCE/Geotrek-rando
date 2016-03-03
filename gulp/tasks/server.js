@@ -9,7 +9,7 @@ gulp.task('server', function(cb) {
     portfinder.getPort(function (err, port) {
         if (err) return;
         connect.server({
-            root: 'src',
+            root: 'public',
             port: port,
         });
     });

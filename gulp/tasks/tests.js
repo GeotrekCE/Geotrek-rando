@@ -26,7 +26,7 @@ gulp.task('tests:e2e', ['webdriver_update'], function(cb) {
         if (err) return;
 
         connect.server({
-            root: 'src',
+            root: 'public',
             port: port
         });
 
