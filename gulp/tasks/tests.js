@@ -30,7 +30,10 @@ gulp.task('tests:e2e', ['webdriver_update'], function(cb) {
             port: port
         });
 
-        gulp.src(['src/**/tests/e2e/*.js']).pipe(protractor({
+        gulp.src([
+            'src/**/tests/e2e/*.js',
+            'tests/e2e/*.js'
+        ]).pipe(protractor({
             configFile: 'protractor.conf.js',
             args: [
                 '--baseUrl', 'http://localhost:' + port
@@ -50,7 +53,10 @@ gulp.task('tests:unit', function(done) {
     new Server({
         configFile: __dirname + '/../../karma.conf.js',
         singleRun: true,
-        files: ['src/**/tests/unit/*.js']
+        files: [
+            'src/**/tests/unit/*.js',
+            'tests/unit/*.js'
+        ]
     }, done).start();
 });
 

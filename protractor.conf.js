@@ -1,4 +1,4 @@
-var ScreenshotReporter = require('./src/tests/lib/screenshot-reporter.js');
+var ScreenshotReporter = require('./tests/lib/screenshot-reporter.js');
 
 exports.config = {
     framework: 'jasmine2',
