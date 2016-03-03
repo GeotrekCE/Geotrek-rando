@@ -31,10 +31,6 @@ module.exports = {
         ],
         dest: dest + appFolder + '/vendors/fonts'
     },
-    vendors: {
-        outputName : 'rando-vendors.js',
-        dest: dest
-    },
     mainapp: {
         debug: true,
         entries: src + '/' + appFolder + '/app.js',
