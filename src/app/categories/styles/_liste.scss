@@ -101,32 +101,40 @@
         }
     }
 
-    &.extend:not(.filtering) {
-        @each $category in $categories {
-            .category-#{nth($category, 1)} {
-                background-color: rgba(nth($category, 2), .5);
+    @if $json-custom-style {
+        &.extend:not(.filtering) {
+            @each $category in $categories {
+                .category-#{nth($category, 1)} {
+                    background-color: rgba(nth($category, 2), .5);
+                }
+            }
+        }
+    }
+
+    @if $json-custom-style {
+        &.extend.filtering {
+            @each $category in $categories {
+                .open.category-#{nth($category, 1)} {
+                    background-color: rgba(nth($category, 2), .5);
+                    button.filter-button {
+                        color: nth($category, 2);
+                    }
+                }
             }
         }
     }
 
     &.extend.filtering {
-        @each $category in $categories {
-            .open.category-#{nth($category, 1)} {
-                background-color: rgba(nth($category, 2), .5);
-                button.filter-button {
-                    display: inline-block;
-                    padding: .35em .1em .10em 1.75em;
-                    font-weight: bold;
-                    border: none;
-                    border-radius: 0;
-                    width: 100%;
-                    background-color: rgba(255, 255, 255, .8);
-                    color: nth($category, 2);
-                    text-transform: uppercase;
-                    margin: .35em 0;
-                }
-            }
-
+        .open button.filter-button {
+            display: inline-block;
+            padding: .35em .1em .10em 1.75em;
+            font-weight: bold;
+            border: none;
+            border-radius: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, .8);
+            text-transform: uppercase;
+            margin: .35em 0;
         }
         .categories-filters-close {
             visibility: visible;
@@ -201,7 +209,7 @@
                 line-height: 38px;
             }
             border-radius: 50%;
-            background-color: currentColor;
+            // background-color: currentColor;
             position: relative;
 
             img, svg {
@@ -211,10 +219,13 @@
 
         }
     }
-    @each $category in $categories {
-        .category-#{nth($category, 1)} {
-            .category-icon .circle {
-                background-color: nth($category, 2);
+
+    @if $json-custom-style {
+        @each $category in $categories {
+            .category-#{nth($category, 1)} {
+                .category-icon .circle {
+                    background-color: nth($category, 2);
+                }
             }
         }
     }
@@ -265,10 +276,13 @@
             }
         }
     }
-    @each $category in $categories {
-        .category-#{nth($category, 1)} {
-            .category-filters-link {
-                background-color: nth($category, 2);
+
+    @if $json-custom-style {
+        @each $category in $categories {
+            .category-#{nth($category, 1)} {
+                .category-filters-link {
+                    background-color: nth($category, 2);
+                }
             }
         }
     }
@@ -399,6 +413,20 @@
             span.rz-bubble {
                 display: none;
             }
+
+            .rz-ticks {
+                top: -1px;
+            }
+
+            .rz-ticks .tick {
+                background-color: rgba(255,255,255,.3);
+                width: 7px;
+                height: 7px;
+            }
+
+            .rz-ticks .tick.selected {
+                background-color: white;
+            }
         }
 
         .choices {
@@ -490,24 +518,12 @@
         }
     }
 
-    @each $category in $categories {
-        .category-#{nth($category, 1)} {
-            .category-filters {
-                background-color: nth($category, 2);
-            }
-
-            rzslider .rz-ticks {
-                top: -1px;
-            }
-
-            rzslider .rz-ticks .tick {
-                background-color: lighten(nth($category, 2), 25%);
-                width: 7px;
-                height: 7px;
-            }
-
-            rzslider .rz-ticks .tick.selected {
-                background-color: white;
+    @if $json-custom-style {
+        @each $category in $categories {
+            .category-#{nth($category, 1)} {
+                .category-filters {
+                    background-color: nth($category, 2);
+                }
             }
         }
     }

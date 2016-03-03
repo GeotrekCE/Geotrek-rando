@@ -1,6 +1,6 @@
 'use strict';
 
-function configService($http, settingsFactory, translationService) {
+function configService($http, $filter, settingsFactory, translationService) {
 
     this.getCustomConfig = function getCustomConfig() {
         var currentLang = translationService.getCurrentLang();
@@ -12,27 +12,33 @@ function configService($http, settingsFactory, translationService) {
             });
     };
 
-
     this.generateColorsStyle = function getCustomConfig(colors) {
         var styles = '';
-        if (colors.categories) {
 
+        if (colors.categories) {
             _.forIn(colors.categories, function(color, category) {
                 var colorCSS = {
-                    selector: '.' + category + '-c',
+                    selector: '.category-' + category + '-c',
                     rules: [
-                        'color:' + color,
+                        'color:' + color
                     ]
                 };
                 var backgroundCSS = {
-                    selector: '.' + category + '-b',
+                    selector: '.category-' + category + '-bg',
                     rules: [
-                        'background-color:' + color,
+                        'background-color:' + color
+                    ]
+                };
+                var backgroundOpacityCSS = {
+                    selector: '.category-' + category + '-bgo',
+                    rules: [
+                        'background-color:' + 'rgba(' + $filter('hexToRgb')(color) + ', .5)'
                     ]
                 };
 
                 styles += colorCSS.selector + '{' + colorCSS.rules.join(';') + '} ';
                 styles += backgroundCSS.selector + '{' + backgroundCSS.rules.join(';') + '} ';
+                styles += backgroundOpacityCSS.selector + '{' + backgroundOpacityCSS.rules.join(';') + '} ';
             });
         }
 

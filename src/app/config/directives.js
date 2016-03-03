@@ -7,7 +7,7 @@ function customStyle(configService) {
             configService.getCustomConfig().then(function(config) {
                 if (config.colors) {
                     var styles = configService.generateColorsStyle(config.colors);
-                    angular.element(document).find('head').prepend('<style type="text/css">' + styles + '</style>');
+                    angular.element(document).find('head').append('<style type="text/css">' + styles + '</style>');
                 }
             });
         }
