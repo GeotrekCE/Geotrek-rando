@@ -50,7 +50,7 @@ function compileSass() {
             .pipe(autoprefixer({ browsers: ['last 2 version'] }))
             .pipe(gulpif(srcMap, sourcemaps.write()))
             .pipe(rename(element.dest)) // Setup the right filename
-            .pipe(gulp.dest('src/'))    // Output in specified directory
+            .pipe(gulp.dest('dist/styles'))    // Output in specified directory
         );
 
     });

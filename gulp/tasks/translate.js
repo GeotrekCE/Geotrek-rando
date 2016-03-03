@@ -9,7 +9,7 @@ gulp.task('translate', function () {
     return gulp.src(['src/app/translation/po/*.po'])
         .pipe(po2json({ format: 'mf' }))
         .pipe(sort({ asc: false }))
-        .pipe(jsoncombine('lang.json', function (data) {
+        .pipe(jsoncombine('default.json', function (data) {
 
             Object.keys(data).forEach(function (key) {
                 var split = key.split('-');
@@ -23,7 +23,7 @@ gulp.task('translate', function () {
 
             return new Buffer(JSON.stringify(data));
         }))
-        .pipe(gulp.dest('src/app/translation/lang'));
+        .pipe(gulp.dest('dist/translations'));
 });
 
 gulp.task('watch:translate', function () {
