@@ -5,14 +5,6 @@ var src       = './src';
 var appFolder = 'app';
 
 module.exports = {
-    translate: {
-        src: src + '/' + appFolder + '/translation/po',
-        dest: dest + '/' + appFolder + '/translation/lang',
-        options: {
-            'format': 'mf'
-        }
-    },
-
     images: {
         frameworks: [
             {

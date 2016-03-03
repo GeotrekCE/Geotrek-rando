@@ -38,6 +38,7 @@
     "gulp-gzip": "^1.2.0",
     "gulp-if": "^2.0.0",
     "gulp-istanbul": "^0.10.3",
+    "gulp-jsoncombine": "^1.0.3",
     "gulp-minify-css": "^1.2.3",
     "gulp-notify": "^2.2.0",
     "gulp-po2json": "^0.4.0",
