@@ -8,4 +8,6 @@
 angular.module('rando.config', [])
     .constant('globalSettings', require('./settings.constant.json'))
     .config(require('./providers.config').providersConfig)
-    .factory('settingsFactory', require('./factories').settingsFactory);
+    .factory('settingsFactory', require('./factories').settingsFactory)
+    .service('configService', require('./services').configService)
+    .directive('customStyle', require('./directives').customStyle);
