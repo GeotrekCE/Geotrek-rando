@@ -1,3 +1,21 @@
+
+2.12.0 / 2016-03-03
+==================
+
+**New features**
+
+  * Close global filters aside on click outside
+
+**Enhancements**
+
+  * Refactor isOnMap service
+
+**Bug fixes**
+
+  * Fix filter by map button
+  * Avoid filter by map when button is checked
+  * Fix header mobile menu on ios
+
 2.11.1 / 2016-03-01
 ==================
 
