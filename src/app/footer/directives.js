@@ -1,13 +1,21 @@
 'use strict';
 
-function footerDirective() {
-    return {
+function footerDirective(globalSettings) {
+    var tpl       = globalSettings.FOOTER_TEMPLATE_FILE;
+    var directive = {
         restrict: 'E',
         replace: true,
         scope: true,
-        template: require('./templates/footer-base.html'),
         controller: 'FooterController'
     };
+
+    if (tpl && tpl.length) {
+        directive.templateUrl = '/app/custom/templates/' + tpl;
+    } else {
+        directive.template = require('./templates/default-footer.html');
+    }
+
+    return directive;
 }
 
 module.exports = {
