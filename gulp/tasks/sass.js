@@ -25,11 +25,6 @@ function touch (file) {
 }
 
 function compileSass() {
-    [
-        'src/app/config/styles/_config-custom.scss',
-        'src/app/custom/styles/_customisation.scss'
-    ].forEach(touch);
-
     var streams = [];
 
     [

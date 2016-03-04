@@ -15,7 +15,11 @@ function touchJSON (file) {
 
 function touchFiles() {
     [
+        'src/app/config/styles/_configuration.scss',
+        'src/app/custom/styles/_customisation.scss',
+
         'src/app/custom/templates/custom-detail-page-footer.html',
+
         'src/app/custom/directives.js',
         'src/app/custom/controllers.js',
         'src/app/custom/services.js'

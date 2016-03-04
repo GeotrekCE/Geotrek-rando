@@ -21,7 +21,7 @@ dist/*
 #
 # Config files
 src/app/config/settings.custom.json
-src/app/config/styles/_config-custom.scss
+src/app/config/styles/_configuration.scss
 #
 # Custom Module Files
 src/app/custom/directives.js
