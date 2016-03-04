@@ -1,4 +1,12 @@
 
+2.12.1 / 2016-03-04
+==================
+
+**Bug fixes**
+
+ * Fix home filtering
+ * Set favorite category icons width and height to 100%
+
 2.12.0 / 2016-03-03
 ==================
 
