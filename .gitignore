@@ -8,12 +8,6 @@ npm-debug.log
 !.gitkeep
 
 # Prevent js bundle and compiled sass to be pushed
-src/rando.js
-src/rando.js.map
-src/rando-vendors.js
-src/rando-3D.js
-src/rando.css
-src/rando-vendors.css
 dist/*
 
 
