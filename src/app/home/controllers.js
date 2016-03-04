@@ -31,7 +31,7 @@ function HomeController($scope, $rootScope, $state, translationService, categori
         }
         $rootScope.activeFilters.categories = currentCategory;
         filtersService.updateActiveFilters($rootScope.activeFilters);
-        $rootScope.$broadcast('updateFilters', true);
+        $rootScope.$broadcast('updateResultsList', true);
 
         updateFiltersTags();
         $scope.toggleHome();
