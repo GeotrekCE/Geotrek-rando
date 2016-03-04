@@ -10780,6 +10780,10 @@
       "version": "2.8.0",
       "resolved": "https://registry.npmjs.org/sinon-chai/-/sinon-chai-2.8.0.tgz"
     },
+    "tinycolor2": {
+      "version": "1.3.0",
+      "resolved": "https://registry.npmjs.org/tinycolor2/-/tinycolor2-1.3.0.tgz"
+    },
     "uglifyify": {
       "version": "3.0.1",
       "resolved": "https://registry.npmjs.org/uglifyify/-/uglifyify-3.0.1.tgz",
