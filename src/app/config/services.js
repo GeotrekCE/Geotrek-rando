@@ -2,6 +2,10 @@
 
 function stylesConfigService($http, $filter, settingsFactory, translationService) {
 
+    // Variable to test if Json file is available - for development
+    // Set to false if API dosn't send this file.
+    this.isConfigAvailable = false;
+
     var defaultConfig = {
         "colors": {
             "main": "#f39400",
@@ -21,13 +25,6 @@ function stylesConfigService($http, $filter, settingsFactory, translationService
             }
         }
     };
-
-    this.isConfigAvailable = function(){
-        // Variable to test if Json file is available - for development
-        // Set to false if API dosn't send this file.
-        return true;
-    };
-
 
     this.getCustomConfig = function getCustomConfig() {
         var currentLang = translationService.getCurrentLang(),
