@@ -11,7 +11,7 @@ function homePage(globalSettings, translationService) {
     };
 
     if (tpl && tpl.length) {
-        directive.templateUrl = 'app/custom/templates/' + tpl;
+        directive.templateUrl = '/custom/' + tpl;
     } else {
         directive.template = require('./templates/home-default.html');
     }

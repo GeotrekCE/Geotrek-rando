@@ -9,7 +9,7 @@ function randoHeader(globalSettings) {
     };
 
     if (tpl && tpl.length) {
-        directive.templateUrl = '/app/custom/templates/' + tpl;
+        directive.templateUrl = '/custom/' + tpl;
     } else {
         directive.template = require('./templates/default-header.html');
     }
