@@ -9,6 +9,8 @@ npm-debug.log
 # Prevent js bundle and compiled sass to be pushed
 dist/*
 
+# Prevent custom files to be pushed
+/custom/*
 
 # Prevent custom files to be pushed
 #
@@ -25,6 +27,5 @@ src/app/custom/services.js
 src/app/translation/po/*-custom.po
 
 /src/images/custom
-/custom
 
 !.gitkeep
