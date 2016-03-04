@@ -24,7 +24,7 @@ function stylesConfigService($http, $filter, settingsFactory, translationService
 
     this.isConfigAvailable = function(){
         // Variable to test if Json file is available - for development
-        // May be removed when all configs are ready
+        // Set to false if API dosn't send this file.
         return true;
     };
 
@@ -45,6 +45,37 @@ function stylesConfigService($http, $filter, settingsFactory, translationService
     this.generateColorsStyle = function getCustomConfig(colors) {
         var styles = '';
         var tinycolor = require("tinycolor2");
+
+        if (colors.main) {
+            var darkenPrimary = tinycolor(colors.main).darken(5);
+
+            var mainCSS =  [
+                {
+                    selector: '.primary-c, .primary-hover-c:hover, .primary-before-c::before, a, .header-links a:hover, .header-links:focus, header-links a:hover > .glyphicon, header-links a:hover > .fa, header-links a:focus > .glyphicon, header-links a:focus > .fa',
+                    rules: ['color:' + colors.main]
+                },
+                {
+                    selector: 'a:hover, a:focus, a:active',
+                    rules: ['color:' + darkenPrimary]
+                },
+                {
+                    selector: '.primary-bg',
+                    rules: ['background-color:' + colors.main]
+                },
+                {
+                    selector: '.primary-border-l',
+                    rules: ['border-left-color:' + colors.main]
+                },
+                {
+                    selector: '.primary-fill',
+                    rules: ['fill:' + colors.main]
+                }
+            ];
+
+            _.forEach(mainCSS, function(CSS) {
+                styles += CSS.selector + '{' + CSS.rules.join(';') + '} ';
+            });
+        }
 
         if (colors.categories) {
             _.forIn(colors.categories, function(color, category) {
@@ -91,23 +122,6 @@ function stylesConfigService($http, $filter, settingsFactory, translationService
                 _.forEach(categoriesCSS, function(CSS) {
                     styles += CSS.selector + '{' + CSS.rules.join(';') + '} ';
                 });
-            });
-        }
-
-        if (colors.main) {
-            var mainCSS =  [
-                {
-                    selector: '.primary-c',
-                    rules: ['color:' + colors.main]
-                },
-                {
-                    selector: '.primary-bg',
-                    rules: ['background-color:' + colors.main]
-                }
-            ];
-
-            _.forEach(mainCSS, function(CSS) {
-                styles += CSS.selector + '{' + CSS.rules.join(';') + '} ';
             });
         }
 

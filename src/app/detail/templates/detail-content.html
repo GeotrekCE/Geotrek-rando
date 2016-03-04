@@ -24,7 +24,7 @@
         <img ng-src="{{::approved}}" ng-alt="{{::approvedLabel}}">
     </div>
 
-    <div class="detail-content-teaser category-{{::result.properties.category.id}}-c"  ng-if="result.properties.description_teaser" ng-bind-html="result.properties.description_teaser | sanitizeData: true"></div>
+    <div class="detail-content-teaser category-{{::result.properties.category.id}}-c primary-c"  ng-if="result.properties.description_teaser" ng-bind-html="result.properties.description_teaser | sanitizeData: true"></div>
 
     <div class="detail-content-ambiance" ng-if="result.properties.ambiance"           ng-bind-html="result.properties.ambiance | sanitizeData: true"></div>
 
@@ -76,7 +76,7 @@
 
     <detail-content-desks></detail-content-desks>
 
-    <div class="detail-content-contact contact-card" ng-if="result.properties.contact || result.properties.email">
+    <div class="detail-content-contact contact-card primary-border-l" ng-if="result.properties.contact || result.properties.email">
         <h3>{{ 'CONTACT' | translate}}</h3>
         <ul>
             <li class="card">

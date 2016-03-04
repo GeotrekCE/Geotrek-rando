@@ -455,7 +455,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                 controlInput.type = 'checkbox';
                 controlInput.value = 'viewport-filtering';
                 controlInput.checked = globalSettings.FILTER_BY_VIEWPORT_DEFAULT;
-                L.DomUtil.create('span', 'leaflet-control-viewportfilter-caption', controlContainer);
+                L.DomUtil.create('span', 'leaflet-control-viewportfilter-caption primary-before-c', controlContainer);
 
                 L.DomEvent.on(controlInput, 'change', function () {
                     self.filterByViewport = this._container.firstChild.checked;

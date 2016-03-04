@@ -38,7 +38,9 @@
             line-height: 1rem;
             text-align: center;
             vertical-align: middle;
-            color: $primary-color;
+            @if $json-custom-style {
+                color: $primary-color;
+            }
         }
     }
     input {

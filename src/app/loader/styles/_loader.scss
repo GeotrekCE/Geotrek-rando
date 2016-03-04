@@ -54,7 +54,9 @@
     display: inline-block;
     position: absolute;
     top: 0;
-    background-color: $primary-color;
+    @if $json-custom-style {
+        background-color: $primary-color;
+    }
     border-radius: 100%;
 
     -webkit-animation: sk-bounce 2.0s infinite ease-in-out;

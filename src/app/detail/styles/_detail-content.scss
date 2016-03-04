@@ -196,7 +196,10 @@
 
     margin: .5em 2rem 0 2rem;
 
-    color: $primary-color;
+    @if $json-custom-style {
+        color: $primary-color;
+    }
+
     i {
         float: left;
 
@@ -261,7 +264,10 @@
     padding: 1em 2rem;
 
     color: white;
-    background: $primary-color;
+
+    @if $json-custom-style {
+        background: $primary-color;
+    }
 
 	& > span {
 	margin-right: 1em;
@@ -456,7 +462,9 @@
 
         padding: 1em;
 
-        border-left: 4px solid $primary-color;
+        @if $json-custom-style {
+            border-left: 4px solid $primary-color;
+        }
         background: white;
         &:not(:last-child) {
             margin-bottom: 1em;
