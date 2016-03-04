@@ -12,9 +12,6 @@ dist/*
 # Prevent custom files to be pushed
 /custom/*
 
-# Custom po files
-src/app/translation/po/*-custom.po
-
 /src/images/custom
 
 !.gitkeep

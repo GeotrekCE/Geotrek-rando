@@ -5,23 +5,27 @@ var sort        = require('gulp-sort');
 var po2json     = require('gulp-po2json');
 var jsoncombine = require('gulp-jsoncombine');
 
+function getKey (string) {
+    var arr = string.split('/');
+    var len = arr.length;
+    return arr[len - 1];
+}
+
 gulp.task('translate', function () {
-    return gulp.src(['src/app/translation/po/*.po'])
+    return gulp.src(['src/app/translation/**/*.po'])
         .pipe(po2json({ format: 'mf' }))
         .pipe(sort({ asc: false }))
-        .pipe(jsoncombine('default.json', function (data) {
+        .pipe(jsoncombine('default.json', function (input) {
+            var output = {};
+            var all    = Object.keys(input);
 
-            Object.keys(data).forEach(function (key) {
-                var split = key.split('-');
-                var lang;
-                if (split.length > 1) {
-                    lang = split[0];
-                    require('lodash').assign(data[lang], data[key]);
-                    delete data[key];
-                }
+            all.forEach(function (poPath) {
+                var key      = getKey(poPath);
+                var previous = output[key] || {};
+                output[key]  = require('lodash').assign(previous, input[poPath]);
             });
 
-            return new Buffer(JSON.stringify(data));
+            return new Buffer(JSON.stringify(output));
         }))
         .pipe(gulp.dest('dist/translations'));
 });
