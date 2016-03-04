@@ -1,6 +1,6 @@
 'use strict';
 
-function mapService($rootScope, $q, $state, $resource, $translate, $filter, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService, popupService, layersService, boundsLimitService, configService) {
+function mapService($rootScope, $q, $state, $resource, $translate, $filter, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService, popupService, layersService, boundsLimitService, stylesConfigService) {
 
     var self = this;
     var displayingResults = false;
@@ -1060,7 +1060,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                         if (result.geometry.type !== "Point" && result.geometry.type !== "MultiPoint") {
                             if (globalSettings.SHOW_ARROWS_ON_ROUTE) {
                                 var className;
-                                if (configService.isConfigAvailable()) {
+                                if (stylesConfigService.isConfigAvailable()) {
                                     className = 'arrow-direction category-' + result.properties.category.id + '-fill-darken';
                                 } else {
                                     className = 'arrow-direction category-' + result.properties.category.id;

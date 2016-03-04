@@ -18,10 +18,8 @@ function settingsFactory(globalSettings) {
         flatUrl =  globalSettings.API_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.FLAT_FILE,
         warningCategoriesUrl =  globalSettings.API_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.WARNING_CAT_DIR + '/' + globalSettings.WARNING_CAT_FILE,
         warningSubmitUrl =  globalSettings.BACKOFFICE_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.WARNING_SUBMIT_URL,
+        stylesConfigUrl = globalSettings.BACKOFFICE_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.STYLES_CONFIG_FILE;
 
-        // Samples datas
-        // TODO : Load these datas via API
-        configUrl = '/sample-datas/configuration.json';
 
     //PUBLIC METHODS
     //
@@ -48,7 +46,7 @@ function settingsFactory(globalSettings) {
         flatUrl: flatUrl,
         warningCategoriesUrl: warningCategoriesUrl,
         warningSubmitUrl: warningSubmitUrl,
-        configUrl: configUrl,
+        stylesConfigUrl: stylesConfigUrl,
 
         //METHODS
         setLang: setLang,

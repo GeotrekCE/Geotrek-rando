@@ -169,6 +169,7 @@ PROFILE_FILE | "profile.json" | Profile file
 WARNING_CAT_DIR | "feedback" | Warning catefories dir file
 WARNING_CAT_FILE | "categories.json" | Warning categories file
 WARNING_SUBMIT_URL | "reports/report" | Warning submit URL
+STYLES_CONFIG_FILE | "styles.json" | Custom styles variables
 APPROVED_BIG | "images/approved-big.png" | Default big image for approved label (for detail page)
 APPROVED_SMALL | "images/approved-small.png" | Default small image for approved label (for results page)
 

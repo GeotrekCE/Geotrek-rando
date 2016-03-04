@@ -1,6 +1,26 @@
 'use strict';
 
-function configService($http, $filter, settingsFactory, translationService) {
+function stylesConfigService($http, $filter, settingsFactory, translationService) {
+
+    var defaultConfig = {
+        "colors": {
+            "main": "#f39400",
+            "categories": {
+                "T1": "#111",
+                "T2": "#1d1d1d",
+                "T3": "#222",
+                "E" : "#2d2d2d",
+                "C1": "#333",
+                "C2": "#3d3d3d",
+                "C3": "#444",
+                "C4": "#4d4d4d",
+                "C5": "#555",
+                "C6": "#5d5d5d",
+                "C7": "#666",
+                "C8": "#6d6d6d"
+            }
+        }
+    };
 
     this.isConfigAvailable = function(){
         // Variable to test if Json file is available - for development
@@ -8,17 +28,19 @@ function configService($http, $filter, settingsFactory, translationService) {
         return true;
     };
 
+
     this.getCustomConfig = function getCustomConfig() {
-        var currentLang = translationService.getCurrentLang();
-        var url = settingsFactory.configUrl.replace(/\$lang/, currentLang);
+        var currentLang = translationService.getCurrentLang(),
+            url = settingsFactory.stylesConfigUrl.replace(/\$lang/, currentLang);
 
         return $http({url: url})
             .then(function (response) {
                 return response.data;
-            }, function(err) {
-                console.error(err);
+            }, function() {
+                return defaultConfig;
             });
     };
+
 
     this.generateColorsStyle = function getCustomConfig(colors) {
         var styles = '';
@@ -73,7 +95,20 @@ function configService($http, $filter, settingsFactory, translationService) {
         }
 
         if (colors.main) {
+            var mainCSS =  [
+                {
+                    selector: '.primary-c',
+                    rules: ['color:' + colors.main]
+                },
+                {
+                    selector: '.primary-bg',
+                    rules: ['background-color:' + colors.main]
+                }
+            ];
 
+            _.forEach(mainCSS, function(CSS) {
+                styles += CSS.selector + '{' + CSS.rules.join(';') + '} ';
+            });
         }
 
         return styles;
@@ -81,5 +116,5 @@ function configService($http, $filter, settingsFactory, translationService) {
 }
 
 module.exports = {
-    configService: configService
+    stylesConfigService: stylesConfigService
 };
