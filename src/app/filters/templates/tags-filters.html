@@ -15,7 +15,7 @@
             <span class="text">{{ 'RESET' | translate}}</span><ng-include class="filters-tags-icon" src="'/images/icons/refresh.svg'"></ng-include>
         </li><!--
         --><li
-            class="filters-tags-item filters-tag category-{{::filter.typeId}}"
+            class="filters-tags-item filters-tag category-{{::filter.typeId}} category-{{::filter.typeId}}-border"
             id="tag-{{::filter.id}}"
             ng-repeat="filter in activeFiltersTags | orderBy:'typeId' track by filter.uid"
             ng-class="{'category-relative': filter.type === 'categories'}">

@@ -105,9 +105,11 @@
     border-left: 5px solid;
     background: rgba(240, 240, 240, 1);
 
-    @each $category in $categories {
-        &.category-#{nth($category, 1)} {
-            border-color: nth($category, 2);
+    @if $json-custom-style {
+        @each $category in $categories {
+            &.category-#{nth($category, 1)} {
+                border-color: nth($category, 2);
+            }
         }
     }
 

@@ -28,7 +28,9 @@
     padding: 1em;
     margin: 4px;
     .icon-bar {
-        background: $primary-color;
+        @if $json-custom-style {
+            background: $primary-color;
+        }
         transition: all 0.2s ease;
         @include transitionfuse;
 
@@ -54,7 +56,9 @@
     width: 3em;
     padding: 0.7em;
     margin: 4px;
-    fill: $primary-color;
+    @if $json-custom-style {
+        fill: $primary-color;
+    }
     @media (min-width: 768px) {
         display: none;
     }
@@ -149,12 +153,14 @@
             padding-right: 10px;
         }
 
-        &:hover,
-        &:focus {
-            color: $primary-color;
-            > .glyphicon,
-            > .fa  {
+        @if $json-custom-style {
+            &:hover,
+            &:focus {
                 color: $primary-color;
+                > .glyphicon,
+                > .fa  {
+                    color: $primary-color;
+                }
             }
         }
     }
@@ -171,10 +177,13 @@
         &:hover,
         &:focus {
             background-color: $light-grey;
-            > a,
-            > .glyphicon,
-            > .fa  {
-                color: $primary-color;
+
+            @if $json-custom-style {
+                > a,
+                > .glyphicon,
+                > .fa  {
+                    color: $primary-color;
+                }
             }
         }
     }

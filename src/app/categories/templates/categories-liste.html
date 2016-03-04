@@ -12,11 +12,21 @@
         --><div class="categories-close"><button ng-click="foldCategories()">{{ 'CLOSE' | translate }} <ng-include class="cross" src="'/images/icons/cross.svg'"></ng-include></button></div>
     </li>
     <ul>
-        <li ng-repeat="category in categories | orderBy: 'order' track by category.id" class="category {{::category.cat_class}}" ng-class="{active : activeFilters.categories.indexOf(category.id) > -1, open: category.open}" id="cat-{{::category.id}}" title="{{category.label}}">
+        <li
+            ng-repeat="category in categories | orderBy: 'order' track by category.id"
+            class="category {{::category.cat_class}}"
+            ng-class="{
+                active : activeFilters.categories.indexOf(category.id) > -1,
+                open: category.open,
+                '{{::category.cat_class}}-bgo': extend && !filtering || extend && filtering && category.open
+            }"
+            id="cat-{{::category.id}}"
+            title="{{category.label}}"
+        >
             <!--
             ICON
             --><span class="category-icon" ng-click="extendCategories()">
-                <span class="circle">
+                <span class="circle {{::category.cat_class}}-bg">
                     <ng-include ng-if="category.pictogram && (category.pictogram | isSVG)" src="category.pictogram"></ng-include>
                     <img ng-if="category.pictogram && !(category.pictogram | isSVG)" alt="{{category.label}}" ng-src="{{::category.pictogram}}">
                 </span>
@@ -27,10 +37,10 @@
                 <span class="category-title-text">{{category.label}}</span>
             </span><!--
             FILTERS LINK
-            --><button class="category-filters-link" ng-click="openCategoryFilters(category)"  ng-if="category.hasFilters"><ng-include class="stripe" src="'/images/icons/stripe.svg'"></ng-include></button>
+        --><button class="category-filters-link {{::category.cat_class}}-bg" ng-click="openCategoryFilters(category)"  ng-if="category.hasFilters"><ng-include class="stripe" src="'/images/icons/stripe.svg'"></ng-include></button>
 
 
-            <div class="category-filters filters">
+            <div class="category-filters filters {{::category.cat_class}}-bg">
                 <form>
                     <div class="menu-header">
                         <div class="category-name" ng-click="toggleCategory(category)">
@@ -165,7 +175,7 @@
                         <div class="choices" collapse="!startDateIsCollapsed">
                             <div class="date-picker form-group">
                                 <input date-range-picker clearable="true" options="{autoApply: true, eventHandlers: {'apply.daterangepicker': changeDates }}" class="form-control" type="text" ng-model="activeDateFilters[category.id]" /><!--
-                                --><button class="filter-button" ng-click="clearDateFilter(category.id)">
+                                --><button class="filter-button" ng-click="clearDateFilter(category.id)" ng-class="{'{{::category.cat_class}}-c': extend && filtering && category.open}">
                                     <ng-include class="cross" src="'/images/icons/cross.svg'"></ng-include>
                                 </button>
                             </div>

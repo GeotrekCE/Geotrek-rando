@@ -48,7 +48,6 @@
     position: relative;
     opacity: 1;
     order: -1;
-    border-left: 10px solid $primary-color;
     background: rgba(245, 245, 245, 1);
     margin: 0.5rem 1.5%;
     border: 2px solid rgba(230, 230, 230, 1);
@@ -175,11 +174,13 @@
     transition: left 250ms ease;
     @include transitionfuse;
 
-    @each $category in $categories {
-        li.category-#{nth($category, 1)} & {
-            background-color: lighten(desaturate(nth($category, 2), 20), 20);
-            &:hover {
-                background-color: nth($category, 2);
+    @if $json-custom-style {
+        @each $category in $categories {
+            li.category-#{nth($category, 1)} & {
+                background-color: lighten(desaturate(nth($category, 2), 20), 20);
+                &:hover {
+                    background-color: nth($category, 2);
+                }
             }
         }
     }
@@ -263,9 +264,12 @@
 
 .result-category-icon {
     z-index: 1;
-    @each $category in $categories {
-        li.category-#{nth($category, 1)} & {
-            background-color: nth($category, 2);
+
+    @if $json-custom-style {
+        @each $category in $categories {
+            li.category-#{nth($category, 1)} & {
+                background-color: nth($category, 2);
+            }
         }
     }
 }
@@ -376,34 +380,5 @@
     img {
         width: 100%;
         height: 100%;
-    }
-}
-
-
-.result-know-more {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-
-    display: block;
-
-    width: 0;
-    height: 0;
-
-    border-bottom: 40px solid $primary-color;
-    border-left: 40px solid transparent;
-
-    span {
-        font-size: 1.5em;
-        font-weight: 300;
-
-        position: absolute;
-        top: 11px;
-        right: 6px;
-
-        cursor: pointer;
-        text-decoration: none;
-
-        color: white;
     }
 }

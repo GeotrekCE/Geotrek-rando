@@ -1,6 +1,6 @@
 <ul class="detail-content-meta pictos">
     <li class="detail-content-meta-item category-label" ng-if="result.properties.category.label.length > 0">
-        <div class="meta-item-title">
+        <div class="meta-item-title category-{{::result.properties.category.id}}-c">
             {{'CATEGORY' | translate}}
         </div>
         <ul class="meta-item-content">
@@ -11,7 +11,7 @@
     </li>
 
     <li class="detail-content-meta-item" ng-if="result.properties.type1.length > 0">
-        <div class="meta-item-title">
+        <div class="meta-item-title category-{{::result.properties.category.id}}-c">
             {{::result.properties.category.type1_label}}
         </div>
         <ul class="meta-item-content">
@@ -24,7 +24,7 @@
     </li>
 
     <li class="detail-content-meta-item" ng-if="result.properties.type2.length > 0">
-        <div class="meta-item-title">
+        <div class="meta-item-title category-{{::result.properties.category.id}}-c">
             {{::result.properties.category.type2_label}}
         </div>
         <ul class="meta-item-content">
@@ -37,7 +37,7 @@
     </li>
 
     <li class="detail-content-meta-item" ng-if="result.informations">
-        <div class="meta-item-title">
+        <div class="meta-item-title category-{{::result.properties.category.id}}-c">
             {{'INFORMATIONS' | translate}}
         </div>
 
@@ -80,7 +80,7 @@
     </li>
 
     <li class="detail-content-meta-item" ng-if="result.properties.themes.length > 0">
-        <div class="meta-item-title">
+        <div class="meta-item-title category-{{::result.properties.category.id}}-c">
             {{'THEMES' | translate}}
         </div>
         <ul class="meta-item-content">

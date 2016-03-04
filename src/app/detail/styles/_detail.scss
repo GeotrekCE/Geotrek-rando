@@ -21,27 +21,29 @@
     }
 }
 
-@each $category in $categories {
-    .category-#{nth($category, 1)} {
+@if $json-custom-style {
+    @each $category in $categories {
+        .category-#{nth($category, 1)} {
 
-        .detail-content-pane {
-            h3 {
+            .detail-content-pane {
+                h3 {
+                    color: nth($category, 2);
+                }
+            }
+
+            .meta-item-title {
                 color: nth($category, 2);
             }
-        }
 
-        .meta-item-title {
-            color: nth($category, 2);
-        }
-
-        .detail-content-title {
-            background: nth($category, 2);
-        }
-        .detail-content-from-to {
-            background: nth($category, 2);
-        }
-        .detail-content-teaser {
-            color: nth($category, 2);
+            .detail-content-title {
+                background: nth($category, 2);
+            }
+            .detail-content-from-to {
+                background: nth($category, 2);
+            }
+            .detail-content-teaser {
+                color: nth($category, 2);
+            }
         }
     }
 }

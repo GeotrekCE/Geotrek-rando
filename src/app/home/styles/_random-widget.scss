@@ -52,13 +52,16 @@
             fill: white;
         }
     }
-    @each $category in $categories {
-        &.category-#{nth($category, 1)} {
-            .content-category {
-                background-color: nth($category, 2);
-            }
-            .content-title {
-                color: nth($category, 2);
+
+    @if $json-custom-style {
+        @each $category in $categories {
+            &.category-#{nth($category, 1)} {
+                .content-category {
+                    background-color: nth($category, 2);
+                }
+                .content-title {
+                    color: nth($category, 2);
+                }
             }
         }
     }

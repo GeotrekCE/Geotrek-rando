@@ -22,10 +22,12 @@ html, body, .main-container {
 }
 
 a {
-    color: $primary-color;
     transition: color 0.2s ease-out;
-    &:hover, &:focus, &:active {
-        color: darken($primary-color, 5%);
+    @if $json-custom-style {
+        color: $primary-color;
+        &:hover, &:focus, &:active {
+            color: darken($primary-color, 5%);
+        }
     }
 }
 

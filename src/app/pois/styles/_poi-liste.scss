@@ -247,7 +247,10 @@
     font-size: 1.5rem;
 
     color: inherit;
-    &:hover {
-        color: $primary-color;
+
+    @if $json-custom-style {
+        &:hover {
+            color: $primary-color;
+        }
     }
 }

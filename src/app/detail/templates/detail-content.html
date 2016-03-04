@@ -1,6 +1,6 @@
 <div class="detailsview-pane detail-content-pane informations">
 
-    <div class="detail-content-title element-title">
+    <div class="detail-content-title element-title category-{{::result.properties.category.id}}-bg">
         <div class="cat-icon" tooltip-placement="bottom" tooltip="{{::result.properties.category.label}}">
             <img ng-if="result.properties.category.pictogram" ng-src="{{::result.properties.category.pictogram}}" ng-alt="{{::result.properties.category.label}}">
         </div>
@@ -24,7 +24,7 @@
         <img ng-src="{{::approved}}" ng-alt="{{::approvedLabel}}">
     </div>
 
-    <div class="detail-content-teaser"  ng-if="result.properties.description_teaser" ng-bind-html="result.properties.description_teaser | sanitizeData: true"></div>
+    <div class="detail-content-teaser category-{{::result.properties.category.id}}-c primary-c"  ng-if="result.properties.description_teaser" ng-bind-html="result.properties.description_teaser | sanitizeData: true"></div>
 
     <div class="detail-content-ambiance" ng-if="result.properties.ambiance"           ng-bind-html="result.properties.ambiance | sanitizeData: true"></div>
 
@@ -76,7 +76,7 @@
 
     <detail-content-desks></detail-content-desks>
 
-    <div class="detail-content-contact contact-card" ng-if="result.properties.contact || result.properties.email">
+    <div class="detail-content-contact contact-card primary-border-l" ng-if="result.properties.contact || result.properties.email">
         <h3>{{ 'CONTACT' | translate}}</h3>
         <ul>
             <li class="card">

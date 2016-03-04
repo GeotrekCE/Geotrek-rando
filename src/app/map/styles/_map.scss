@@ -38,7 +38,9 @@
             line-height: 1rem;
             text-align: center;
             vertical-align: middle;
-            color: $primary-color;
+            @if $json-custom-style {
+                color: $primary-color;
+            }
         }
     }
     input {
@@ -149,9 +151,12 @@
 
 .arrow-direction {
     font-size: 10px;
-    @each $category in $categories {
-        &.category-#{nth($category, 1)} {
-            fill: darken(nth($category, 2), 25%);
+
+    @if $json-custom-style {
+        @each $category in $categories {
+            &.category-#{nth($category, 1)} {
+                fill: darken(nth($category, 2), 25%);
+            }
         }
     }
 }

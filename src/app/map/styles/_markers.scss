@@ -19,14 +19,16 @@
     }
 }
 
-.leaflet-marker-icon {
-    @each $category in $categories {
-        &.category-#{nth($category, 1)} {
-            .marker svg .base {
-                fill: nth($category, 2);
-            }
-            &.popup .marker::before {
-                border-bottom-color: nth($category, 2);
+@if $json-custom-style {
+    .leaflet-marker-icon {
+        @each $category in $categories {
+            &.category-#{nth($category, 1)} {
+                .marker svg .base {
+                    fill: nth($category, 2);
+                }
+                &.popup .marker::before {
+                    border-bottom-color: nth($category, 2);
+                }
             }
         }
     }
@@ -258,11 +260,16 @@
     }
 }
 
-.leaflet-overlay-pane {
-    svg {
-        path {
-            stroke-opacity: 1;
-            @include geojson-coloring();
+.leaflet-overlay-pane svg path {
+    stroke-opacity: 1;
+}
+
+@if $json-custom-style {
+    .leaflet-overlay-pane {
+        svg {
+            path {
+                @include geojson-coloring();
+            }
         }
     }
 }

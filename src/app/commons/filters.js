@@ -46,6 +46,7 @@ function sanitizeData($filter, $sce) {
     };
 }
 
+
 module.exports = {
     removeTags: removeTags,
     decodeEntities: decodeEntities,

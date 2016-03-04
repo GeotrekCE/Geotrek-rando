@@ -111,6 +111,7 @@
     "WARNING_CAT_DIR": "feedback",
     "WARNING_CAT_FILE": "categories.json",
     "WARNING_SUBMIT_URL": "reports/report",
+    "STYLES_CONFIG_FILE": "styles.json",
     "APPROVED_BIG": "images/approved-big.png",
     "APPROVED_SMALL": "images/approved-small.png",
     "APPROVED_LABEL": "Approuved",
