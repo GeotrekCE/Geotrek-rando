@@ -5,7 +5,6 @@ Desktop.ini
 node_modules
 npm-debug.log
 
-!.gitkeep
 
 # Prevent js bundle and compiled sass to be pushed
 dist/*
@@ -27,3 +26,5 @@ src/app/translation/po/*-custom.po
 
 /src/images/custom
 /custom
+
+!.gitkeep
