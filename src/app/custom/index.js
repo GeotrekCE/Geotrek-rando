@@ -4,6 +4,6 @@ var angular = require('angular');
 
 angular.module('rando.custom', ['ui.router', 'ui.bootstrap']);
 
-require('./services');
-require('./controllers');
-require('./directives');
+require('../../../custom/services');
+require('../../../custom/controllers');
+require('../../../custom/directives');

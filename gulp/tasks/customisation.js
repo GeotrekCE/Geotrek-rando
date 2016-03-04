@@ -18,8 +18,6 @@ function touchFiles() {
         'custom/_configuration.scss',
         'custom/_customisation.scss',
 
-        'custom/custom-detail-page-footer.html',
-
         'custom/directives.js',
         'custom/controllers.js',
         'custom/services.js'
