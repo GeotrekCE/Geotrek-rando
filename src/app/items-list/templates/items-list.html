@@ -13,13 +13,13 @@
         </div>
         <div class="result-actions">
             <div>
-                <div class="result-action result-category-icon" tooltip-placement="top" tooltip="{{::result.properties.category.label}}">
+                <div class="result-action result-category-icon  category-{{::result.properties.category.id}}-bg" tooltip-placement="top" tooltip="{{::result.properties.category.label}}">
                     <img ng-if="!result.properties.stepNumber && result.properties.category.pictogram" data-src="{{::result.properties.category.pictogram}}" ng-alt="{{::category.label}}">
                     <span class="step-number" ng-if="result.properties.stepNumber">{{::result.properties.stepNumber}}</span>
                 </div>
             </div>
-            <a class="result-action result-map-focus" ng-click="mapFocusOn(result)" href="#"><img data-src="/images/icons/gps-symbol.svg"></a>
-            <a class="result-action result-view-details" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: result.properties.slug})">{{:: 'SHOW_MORE' | translate }}</a>
+            <a class="result-action result-map-focus category-{{::result.properties.category.id}}-bg-ld" ng-click="mapFocusOn(result)" href="#"><img data-src="/images/icons/gps-symbol.svg"></a>
+            <a class="result-action result-view-details  category-{{::result.properties.category.id}}-bg-ld" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: result.properties.slug})">{{:: 'SHOW_MORE' | translate }}</a>
         </div>
 
         <h1 class="result-title title">

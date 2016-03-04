@@ -66,13 +66,15 @@
                     fill: white;
                 }
             }
-            @each $category in $categories {
-                &.category-#{nth($category, 1)} {
-                    .category-icon {
-                        background-color: nth($category, 2);
-                    }
-                    &:hover .name {
-                        color: nth($category, 2);
+            @if $json-custom-style {
+                @each $category in $categories {
+                    &.category-#{nth($category, 1)} {
+                        .category-icon {
+                            background-color: nth($category, 2);
+                        }
+                        &:hover .name {
+                            color: nth($category, 2);
+                        }
                     }
                 }
             }

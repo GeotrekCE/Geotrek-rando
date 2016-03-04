@@ -1,6 +1,6 @@
 'use strict';
 
-function customStyle(configService) {
+function customStyle($rootScope, configService) {
     return {
         restrict: 'E',
         controller: function() {

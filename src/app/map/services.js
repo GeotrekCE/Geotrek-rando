@@ -1,6 +1,6 @@
 'use strict';
 
-function mapService($rootScope, $q, $state, $resource, $translate, $filter, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService, popupService, layersService, boundsLimitService) {
+function mapService($rootScope, $q, $state, $resource, $translate, $filter, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService, popupService, layersService, boundsLimitService, configService) {
 
     var self = this;
     var displayingResults = false;
@@ -253,7 +253,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
         var popupSources = {};
         if (type === "geojson" && element.geometry.type !== 'MultiPoint') {
             var geoStyle = {
-                className:  'layer-category-' + element.properties.category.id + '-' + element.id + ' category-' + element.properties.category.id
+                className:  'layer-category-' + element.properties.category.id + '-' + element.id + ' category-' + element.properties.category.id + '-stroke'
             };
 
             if (element.geometry.type === 'Polygon') {
@@ -1059,7 +1059,13 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                         self._clustersLayer.addLayer(currentLayer);
                         if (result.geometry.type !== "Point" && result.geometry.type !== "MultiPoint") {
                             if (globalSettings.SHOW_ARROWS_ON_ROUTE) {
-                                layer.setText('  >  ', {offset: 6, repeat: true, center: true, attributes: {class: 'arrow-direction category-' + result.properties.category.id}});
+                                var className;
+                                if (configService.isConfigAvailable()) {
+                                    className = 'arrow-direction category-' + result.properties.category.id + '-fill-darken';
+                                } else {
+                                    className = 'arrow-direction category-' + result.properties.category.id;
+                                }
+                                layer.setText('  >  ', {offset: 6, repeat: true, center: true, attributes: {class: className}});
                             }
                             if (globalSettings.ALWAYS_HIGHLIGHT_TREKS) {
                                 self.highlightPath(result, true, true);

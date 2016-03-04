@@ -11,7 +11,7 @@
             <ul ng-if="favorites && favorites.length > 0">
                 <li ng-repeat="favorite in favorites | orderBy : 'properties.name' track by favorite.uid" class="favorite category-{{::favorite.properties.category.id}}" id="fav-category-{{::favorite.uid}}">
                     <a ui-sref="layout.detail({catSlug: favorite.properties.category.slug, slug: favorite.properties.slug})">
-                        <div class="category-icon">
+                        <div class="category-icon category-{{favorite.properties.category.id}}-bg">
                             <ng-include ng-if="favorite.properties.category.pictogram | isSVG" src="favorite.properties.category.pictogram"></ng-include>
                             <img ng-if="favorite.properties.category.pictogram && !(favorite.properties.category.pictogram | isSVG)" ng-src="{{::favorite.properties.category.pictogram}}">
                         </div>

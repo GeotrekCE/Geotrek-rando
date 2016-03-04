@@ -4,11 +4,11 @@
             <img class="content-picture" ng-if="content.properties.pictures[0].url" ng-src="{{content.properties.pictures[0].url}}" alt="{{content.properties.pictures[0].title}}">
             <img ng-if="!content.properties.pictures[0].url" ng-src="{{::$root.placeHolderImage}}" alt="placeholder image">
             <div class="content-description">
-                <div class="content-category" tooltip-placement="right" tooltip="{{::content.properties.category.label}}">
+                <div class="content-category category-{{randomContent.properties.category.id}}-bg" tooltip-placement="right" tooltip="{{::content.properties.category.label}}">
                     <ng-include ng-if="content.properties.category.pictogram && (content.properties.category.pictogram | isSVG)"  src="content.properties.category.pictogram"></ng-include>
                     <img        ng-if="content.properties.category.pictogram && !(content.properties.category.pictogram | isSVG)" ng-src="{{::content.properties.category.pictogram}}" ng-alt="{{::content.properties.category.label}}">
                 </div>
-                <div class="content-title" ng-bind="content.properties.name"></div>
+                <div class="content-title category-{{randomContent.properties.category.id}}-c" ng-bind="content.properties.name"></div>
             </div>
         </a>
     </li>

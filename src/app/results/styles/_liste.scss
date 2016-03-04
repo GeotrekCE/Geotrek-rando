@@ -175,11 +175,13 @@
     transition: left 250ms ease;
     @include transitionfuse;
 
-    @each $category in $categories {
-        li.category-#{nth($category, 1)} & {
-            background-color: lighten(desaturate(nth($category, 2), 20), 20);
-            &:hover {
-                background-color: nth($category, 2);
+    @if $json-custom-style {
+        @each $category in $categories {
+            li.category-#{nth($category, 1)} & {
+                background-color: lighten(desaturate(nth($category, 2), 20), 20);
+                &:hover {
+                    background-color: nth($category, 2);
+                }
             }
         }
     }
@@ -263,9 +265,12 @@
 
 .result-category-icon {
     z-index: 1;
-    @each $category in $categories {
-        li.category-#{nth($category, 1)} & {
-            background-color: nth($category, 2);
+
+    @if $json-custom-style {
+        @each $category in $categories {
+            li.category-#{nth($category, 1)} & {
+                background-color: nth($category, 2);
+            }
         }
     }
 }

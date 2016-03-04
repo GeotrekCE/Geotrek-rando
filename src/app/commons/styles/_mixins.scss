@@ -9,23 +9,6 @@
     }
 }
 
-@mixin detail-near-elements-coloring() {
-    @each $category in $categories {
-        &.category-#{nth($category, 1)} {
-            border-left-color: nth($category, 2);
-            .cat-icon {
-                background: nth($category, 2);
-            }
-            .know-more {
-                border-bottom-color: nth($category, 2);
-            }
-            .fav-or-not.isFav i {
-                color: nth($category, 2);
-            }
-        }
-    }
-}
-
 @mixin textoutline($color: blue) {
     text-shadow:
         -1px -1px 0 $color,
