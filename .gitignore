@@ -12,11 +12,6 @@ dist/*
 # Prevent custom files to be pushed
 /custom/*
 
-# Custom Module Files
-src/app/custom/directives.js
-src/app/custom/controllers.js
-src/app/custom/services.js
-#
 # Custom po files
 src/app/translation/po/*-custom.po
 

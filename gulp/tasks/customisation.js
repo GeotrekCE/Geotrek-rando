@@ -20,9 +20,9 @@ function touchFiles() {
 
         'custom/custom-detail-page-footer.html',
 
-        'src/app/custom/directives.js',
-        'src/app/custom/controllers.js',
-        'src/app/custom/services.js'
+        'custom/directives.js',
+        'custom/controllers.js',
+        'custom/services.js'
     ].forEach(touch);
 
     [
