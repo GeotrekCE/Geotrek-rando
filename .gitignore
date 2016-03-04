@@ -12,12 +12,6 @@ dist/*
 # Prevent custom files to be pushed
 /custom/*
 
-# Prevent custom files to be pushed
-#
-# Config files
-src/app/config/settings.custom.json
-src/app/config/styles/_configuration.scss
-#
 # Custom Module Files
 src/app/custom/directives.js
 src/app/custom/controllers.js

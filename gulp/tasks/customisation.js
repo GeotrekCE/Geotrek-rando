@@ -15,7 +15,7 @@ function touchJSON (file) {
 
 function touchFiles() {
     [
-        'src/app/config/styles/_configuration.scss',
+        'custom/_configuration.scss',
         'src/app/custom/styles/_customisation.scss',
 
         'src/app/custom/templates/custom-detail-page-footer.html',
@@ -26,7 +26,7 @@ function touchFiles() {
     ].forEach(touch);
 
     [
-        'src/app/config/settings.custom.json'
+        'custom/settings.custom.json'
     ].forEach(touchJSON);
 }
 
