@@ -61,5 +61,5 @@ function bundle(watch) {
         })) // loads map from browserify file
         // Add transformation tasks to the pipeline here.
         .pipe(sourcemaps.write('.')) // writes .map file
-        .pipe(gulp.dest('dist/scripts'));
+        .pipe(gulp.dest('dist/public/scripts'));
 }

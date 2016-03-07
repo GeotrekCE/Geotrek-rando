@@ -12,7 +12,7 @@ gulp.task('rando3D', function () {
 
     var bundler    = browserify();
     var outputName = 'rando-3D.js';
-    var outputPath = 'dist/scripts';
+    var outputPath = 'dist/public/scripts';
 
     bundler.require('rando3D');
 
