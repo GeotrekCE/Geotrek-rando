@@ -14,6 +14,10 @@ function touchJSON (file) {
 }
 
 function touchFiles() {
+    if (!fs.existsSync('custom')) {
+        fs.mkdirSync('custom');
+    }
+
     [
         'custom/_configuration.scss',
         'custom/_customisation.scss',
