@@ -7,7 +7,7 @@
 > This file should remain a valid [JSON][] file.
 > Remember to check its validity each time you alter it.
 
-This file should be placed and edited in `src/app/config/`.
+This file should be placed and edited in `custom/`.
 
 ### Options
 
