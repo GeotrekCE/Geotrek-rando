@@ -7,7 +7,7 @@ npm-debug.log
 
 
 # Prevent js bundle and compiled sass to be pushed
-dist/*
+/dist/*
 
 # Prevent custom files to be pushed
 /custom/*
