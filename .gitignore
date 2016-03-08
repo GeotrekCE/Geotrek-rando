@@ -12,6 +12,4 @@ dist/*
 # Prevent custom files to be pushed
 /custom/*
 
-/src/images/custom
-
 !.gitkeep
