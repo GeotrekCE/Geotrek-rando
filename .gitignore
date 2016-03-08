@@ -10,6 +10,6 @@ npm-debug.log
 /dist/*
 
 # Prevent custom files to be pushed
-/custom/*
+/custom
 
 !.gitkeep
