@@ -252,8 +252,14 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
         var deferred = $q.defer();
         var popupSources = {};
         if (type === "geojson" && element.geometry.type !== 'MultiPoint') {
+            var className;
+            if (stylesConfigService.isConfigAvailable) {
+                className =  'layer-category-' + element.properties.category.id + '-' + element.id + ' category-' + element.properties.category.id + '-stroke';
+            } else {
+                className =  'layer-category-' + element.properties.category.id + '-' + element.id + ' category-' + element.properties.category.id;
+            }
             var geoStyle = {
-                className:  'layer-category-' + element.properties.category.id + '-' + element.id + ' category-' + element.properties.category.id + '-stroke'
+                className: className
             };
 
             if (element.geometry.type === 'Polygon') {
