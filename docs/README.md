@@ -27,7 +27,7 @@ _See main [history][] page for more informations._
 
 As Geotrek-rando works as a [SPA][], you only need an http server like [Nginx][] or [Apache][]. _(Cf. [http server][])_
 
-You'll also need to build the javascript main bundle which require [nodejs and npm][node]\* to be available on the building environment.
+You'll also need to build the javascript main bundle which require [nodejs and npm][node]\* to be available on the building environment. (Cf. [Installing NodeJS][])
 
 Building environment could be either the same as your http server, or a local machine from which you'll sync generated files to the main server instance
 
@@ -38,6 +38,36 @@ _\* In recent versions of Geotrek-rando, you'll find the recommended version of 
 Some npm packages used for tests may need a build environment for compiling platform specific binaries. On debian-like environments, `build-essential` should satisfy this requirements.
 
 _See [contribute][] section for more details about participating to Geotrek-rando development._
+
+## Install
+
+Download and extract latest release of Geotrek-Rando from [GitHub](https://github.com/makinacorpus/Geotrek-rando/releases/latest).
+
+_You may also download sources by cloning git repository._
+
+### Install build dependencies
+
+```
+cd Geotrek-rando-*
+npm install
+```
+
+### Launch build task
+
+```
+npm run dist
+```
+
+It will :
+* Create missing config files
+* Create the main JavaScript bundle as `dist/public/scripts/rando.js`
+* Compile sass files and bundle them in `dist/public/styles/rando.css` and `dist/public/styles/rando-vendors.css`
+
+For automaticly building bundles when editing files, use :
+
+```
+npm run watch
+```
 
 ## Settings & customization
 
@@ -65,6 +95,7 @@ If you're wondering what means _Libre_ in [FLOSS][], it essentially imply four f
 [Data source]: api_url.md
 [history]: history.md
 [http server]: hosting.md
+[Installing NodeJS]: install-node.md
 
 <!-- External links -->
 
