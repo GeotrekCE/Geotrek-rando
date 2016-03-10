@@ -1,22 +1,31 @@
 
+2.13.1 / 2016-03-10
+==================
+
+**Bug fixes**
+
+  * Fix `stylesConfigService` condition for trek color path
+  * Fix loading of `rando-3D.js` in HTML5 mode
+  * Fix `isConfigAvailable` condition
+
 2.13.0 / 2016-03-04
 ==================
 
 **New features**
 
- * Generate custom colors CSS in js to allow customisation with Geotrek Admin
- * Add `tinycolor` to customise color render in js
- * Add categories colors and primary color classes in templates for new styles
- * Set a condition for all css style with `$category` and `$primary-color` : only if `$json-custom-style` is true
- * Set `isConfigAvailable` to false to disable style generation (for retrocompatibility)
+  * Generate custom colors CSS in js to allow customisation with Geotrek Admin
+  * Add `tinycolor` to customise color render in js
+  * Add categories colors and primary color classes in templates for new styles
+  * Set a condition for all css style with `$category` and `$primary-color` : only if `$json-custom-style` is true
+  * Set `isConfigAvailable` to false to disable style generation (for retrocompatibility)
 
 2.12.1 / 2016-03-04
 ==================
 
 **Bug fixes**
 
- * Fix home filtering
- * Set favorite category icons width and height to 100%
+  * Fix home filtering
+  * Set favorite category icons width and height to 100%
 
 2.12.0 / 2016-03-03
 ==================
