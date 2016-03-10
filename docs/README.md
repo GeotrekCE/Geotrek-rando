@@ -8,7 +8,7 @@
 
 ## Overview
 
-![Geotrek](/src/images/logo-geotrek.png)
+![Geotrek](/public/images/logo-geotrek.png)
 
 Geotrek-rando is [FLOSS][] dedicated to display geographic and touristic contents.
 
