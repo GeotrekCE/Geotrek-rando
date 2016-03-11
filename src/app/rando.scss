@@ -3,7 +3,9 @@
 $root-images-path: "./images/";
 
 @import 'commons/styles/_mixins';
-@import 'config/styles/_configuration';
+
+@import '../../custom/_configuration';
+@import 'config/styles/_configuration.default';
 
 * {
     box-sizing: border-box;
@@ -117,4 +119,4 @@ a {
 @import "flat-pages/styles/_flat-pages";
 @import "3d/styles/_rando3d";
 
-@import "custom/styles/_customisation";
+@import "../../custom/_customisation";

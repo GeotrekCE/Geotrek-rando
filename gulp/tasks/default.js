@@ -2,4 +2,4 @@
 
 var gulp = require('gulp');
 
-gulp.task('default', ['vendors', 'rando3D', 'mainapp', 'sass']);
+gulp.task('default', ['rando3D', 'mainapp', 'sass']);

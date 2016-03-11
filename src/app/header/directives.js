@@ -1,12 +1,20 @@
 'use strict';
 
-function randoHeader() {
-    return {
+function randoHeader(globalSettings) {
+    var tpl       = globalSettings.HEADER_TEMPLATE_FILE;
+    var directive = {
         restrict: 'E',
         replace: true,
-        template: require('./templates/header-base.html'),
         controller: 'headerController'
     };
+
+    if (tpl && tpl.length) {
+        directive.templateUrl = '/custom/' + tpl;
+    } else {
+        directive.template = require('./templates/default-header.html');
+    }
+
+    return directive;
 }
 
 function closeCollapse() {

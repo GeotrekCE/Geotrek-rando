@@ -3,7 +3,7 @@ describe('rando.config', function () {
 
     require('angular-mocks');
 
-    require('../../app/config');
+    require('../../src/app/config');
 
     beforeEach(angular.mock.module('rando.config'));
 

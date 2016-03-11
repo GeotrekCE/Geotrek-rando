@@ -1,7 +1,7 @@
 'use strict'
 
 describe('categories menu ', function() {
-    var constants = require('../../../config/settings.constant.json');
+    var constants = require('../../../config/settings.default.json');
     var categoriesMenu, categoriesMenuWrapper;
     var EC = protractor.ExpectedConditions;
 

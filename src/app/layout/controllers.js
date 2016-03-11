@@ -5,7 +5,7 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
     $rootScope.showFooterOnApp = globalSettings.SHOW_FOOTER;
     $rootScope.elementsLoading = 0;
     $rootScope.mapIsShown = true;
-    $rootScope.placeHolderImage = globalSettings.PLACEHOLDER_IMAGE ? '/images/custom/' + globalSettings.PLACEHOLDER_IMAGE : '/images/placeholder.png';
+    $rootScope.placeHolderImage = globalSettings.PLACEHOLDER_IMAGE ? '/custom/images/' + globalSettings.PLACEHOLDER_IMAGE : '/images/placeholder.png';
     $rootScope.favoriteIcon = (globalSettings.FAVORITES_ICON ? globalSettings.FAVORITES_ICON : 'heart');
 
     var bowser          = require('bowser');
@@ -16,7 +16,7 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
     $rootScope.isWebkit = !!bowser.webkit;
 
     if (globalSettings.FAVICON) {
-        var base = '/images/custom/';
+        var base = '/custom/images/';
         $rootScope.favIcon = {
             png: base + globalSettings.FAVICON.png,
             ico: base + globalSettings.FAVICON.ico

@@ -1,9 +1,7 @@
 'use strict';
 
 var gulp         = require('gulp');
-var concat       = require('gulp-concat');
 var merge        = require('merge-stream');
-var path         = require('path');
 var gulpif       = require('gulp-if');
 
 var sass         = require('gulp-sass');
@@ -12,28 +10,42 @@ var sourcemaps   = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 
 var handleErrors = require('../util/handleErrors');
-var config       = require('../config').sass;
+
+var fs           = require('fs');
 
 var srcMap       = false;
 
-function concatSassFiles(src, fileName, dest) {
-    return gulp.src(src)
-        .pipe(concat(fileName + '.scss'))
-        .pipe(gulp.dest(dest));
+var sassSettings = {
+    outputStyle: 'compact',
+    imagePath: '/images'
+};
+
+function touch (file) {
+    fs.appendFileSync(file, '');
 }
 
 function compileSass() {
     var streams = [];
-    config.files.forEach(function (element) {
+
+    [
+        {
+            src: 'src/app/rando.scss',
+            dest: 'rando.css'
+        },
+        {
+            src: 'src/app/vendors/styles/vendors.{sass,scss}',
+            dest: 'rando-vendors.css'
+        }
+    ].forEach(function (element) {
 
         streams.push(gulp.src(element.src)
             .on('error', handleErrors)
             .pipe(gulpif(srcMap, sourcemaps.init()))
-            .pipe(sass(config.settings))
+            .pipe(sass(sassSettings))
             .pipe(autoprefixer({ browsers: ['last 2 version'] }))
             .pipe(gulpif(srcMap, sourcemaps.write()))
-            .pipe(rename(element.outputName)) // Setup the right filename
-            .pipe(gulp.dest(config.dest))    // Output in specified directory
+            .pipe(rename(element.dest)) // Setup the right filename
+            .pipe(gulp.dest('dist/public/styles'))    // Output in specified directory
         );
 
     });
@@ -41,23 +53,8 @@ function compileSass() {
     return merge(streams);
 }
 
-function sassConfig() {
-    var appConfig   = config.config;
-    var configPath  = appConfig.path;
-    return concatSassFiles(path.join(configPath, '!(' + appConfig.finalFileName + ').@(scss|sass|css)'), appConfig.finalFileName, configPath);
-}
-
-function sassCustomisation() {
-    var appConfig   = config.customisation;
-    var customisationPath  = appConfig.path;
-    return concatSassFiles(path.join(customisationPath, '!(' + appConfig.finalFileName + ').@(scss|sass|css)'), appConfig.finalFileName, customisationPath);
-}
-
-gulp.task('sass:config', sassConfig);
-gulp.task('sass:customisation', sassCustomisation);
-
-gulp.task('sass', ['sass:config', 'sass:customisation'], compileSass);
+gulp.task('sass', compileSass);
 
 gulp.task('watch:sass', function () {
-    gulp.watch(config.toWatch, ['sass']);
+    gulp.watch('src/app/**/!_customisation.scss', ['sass']);
 });

@@ -1,6 +1,6 @@
 'use strict';
 describe('Results list', function() {
-    var constants = require('../../../config/settings.constant.json');
+    var constants = require('../../../config/settings.default.json');
 
     beforeAll(function () {
         browser.get('/');

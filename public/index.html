@@ -10,20 +10,20 @@
   <meta ng-repeat="tag in $root.facebookTags" property="{{tag.property}}" content="{{tag.content}}">
   <link rel="icon" type="image/png" href="{{$root.favIcon.png}}" />
   <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="{{$root.favIcon.ico}}" /><![endif]-->
-  <link rel="stylesheet" href="/rando-vendors.css">
-  <link rel="stylesheet" href="/rando.css">
+  <link rel="stylesheet" href="/dist/styles/rando-vendors.css">
+  <link rel="stylesheet" href="/dist/styles/rando.css">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   <!--[if IE 9]>
     <script type="text/javascript" src="app/vendors/scripts/xhr-xdr-adapter.js"></script>
     <link rel="stylesheet" type="text/css" href="ie9-compatibility.css">
   <![endif]-->
-  <script src="/rando.js"></script>
+  <script src="/dist/scripts/rando.js"></script>
   <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 </head>
 <body>
   <div ui-view class="main-container"></div>
 </body>
-<script> 
+<script>
   var $buoop = {
     c:2,
     vs: {i:9,f:30,o:27,s:7},
@@ -31,7 +31,7 @@
     reminderClosed: 1,
     test: false,
     text_fr: "Votre navigateur ne permet pas l'affichage du site dans des conditions optimales. Dans un objectif de <b>performance</b>, de <b>sécurité</b> et de <b>qualité de visite</b>, <a>nous vous recommandons de mettre à jour votre navigateur</a>",
-  }; 
+  };
   function $buo_f(){
     var e = document.createElement("script");
     e.src = "//browser-update.org/update.min.js";

@@ -1,7 +1,7 @@
 'use strict'
 
 describe('map  ', function() {
-    var constants = require('../../../config/settings.constant.json');
+    var constants = require('../../../config/settings.default.json');
     var trekPath = element(by.css('.leaflet-map-pane .leaflet-overlay-pane svg.leaflet-zoom-animated g'));
 
     beforeAll(function() {

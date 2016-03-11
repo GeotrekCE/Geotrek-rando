@@ -2,8 +2,8 @@
 
 describe('Flat page ', function() {
     var pageContent;
-    var constants = require('../../../config/settings.constant.json');
-    
+    var constants = require('../../../config/settings.default.json');
+
     beforeAll(function() {
         browser.get('/');
         browser.executeScript(function (constants) {

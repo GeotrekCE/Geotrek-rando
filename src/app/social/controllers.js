@@ -25,7 +25,7 @@ function SocialController($scope, $filter, $rootScope, $location, $state, $state
             if (element.properties.pictures[0]) {
                 fbOptions.picture = element.properties.pictures[0].url;
             } else {
-                fbOptions.picture = globalSettings.API_URL + "/images/custom/" + globalSettings.DEFAULT_SHARE_IMG;
+                fbOptions.picture = globalSettings.API_URL + "/custom/images/" + globalSettings.DEFAULT_SHARE_IMG;
             }
 
             $scope.shareToFacebook = function() {
@@ -45,7 +45,7 @@ function SocialController($scope, $filter, $rootScope, $location, $state, $state
                 name: translatedContent.BANNER_TEXT,
                 caption: $location.absUrl(),
                 description: $filter('decodeEntities')(translatedContent.SHARING_DEFAULT_TEXT),
-                picture: globalSettings.API_URL + "/images/custom/" + globalSettings.DEFAULT_SHARE_IMG
+                picture: globalSettings.API_URL + "/custom/images/" + globalSettings.DEFAULT_SHARE_IMG
             };
 
             $scope.shareToFacebook = function() {
@@ -87,7 +87,7 @@ function SocialController($scope, $filter, $rootScope, $location, $state, $state
             },
             {
                 name: "twitter:image:src",
-                content: globalSettings.API_URL + "/images/custom/" + globalSettings.DEFAULT_SHARE_IMG
+                content: globalSettings.API_URL + "/custom/images/" + globalSettings.DEFAULT_SHARE_IMG
             }
 
         ];
@@ -107,7 +107,7 @@ function SocialController($scope, $filter, $rootScope, $location, $state, $state
             },
             {
                 property: "og:image",
-                content: globalSettings.API_URL + "/images/custom/home/head.jpg"
+                content: globalSettings.API_URL + "/custom/images/home/head.jpg"
             },
             {
                 property: "og:description",
@@ -183,7 +183,7 @@ function SocialController($scope, $filter, $rootScope, $location, $state, $state
             if (data.properties.pictures[0]) {
                 img = data.properties.pictures[0].url;
             } else {
-                img = globalSettings.API_URL + "/images/custom/" + globalSettings.DEFAULT_SHARE_IMG;
+                img = globalSettings.API_URL + "/custom/images/" + globalSettings.DEFAULT_SHARE_IMG;
             }
 
             var cardImg = {

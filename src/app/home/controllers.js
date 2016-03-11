@@ -1,18 +1,13 @@
 'use strict';
 
-function HomeController($scope, $rootScope, $state, translationService, categoriesService, $location, homeService, globalSettings, filtersService) {
+function HomeController($scope, $rootScope, $state, categoriesService, $location, homeService, globalSettings, filtersService) {
 
     function updateFiltersTags() {
         $rootScope.activeFiltersTags = filtersService.getTagFilters();
     }
 
     $scope.initHome = function initHome () {
-        var currentLang = translationService.getCurrentLang();
-        if (globalSettings.HOME_TEMPLATE_FILE[currentLang]) {
-            $scope.homeTemplate = 'app/custom/templates/' + globalSettings.HOME_TEMPLATE_FILE[currentLang];
-        } else {
-            $scope.homeTemplate = 'app/home/templates/home-default.html';
-        }
+
     };
 
     $scope.toggleHome = function toggleHome () {

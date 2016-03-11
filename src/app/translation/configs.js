@@ -1,7 +1,7 @@
 'use strict';
 
 function translationConfig($translateProvider, globalSettings) {
-    var langs = require('../translation/lang/lang.json');
+    var langs = require('../../../dist/translations/default.json');
 
     angular.forEach(langs, function (translation, langCode) {
         $translateProvider.translations(langCode, translation);
