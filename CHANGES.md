@@ -1,4 +1,50 @@
 
+2.14.0 / 2016-03-11
+==================
+
+**Major change**
+
+  * Create an empty `custom/` directory if none
+  * Only ignore `/dist/`(from root)
+  * No need to ignore anything from `src/` anymore
+  * Add `public/` directory level for dist & customs
+  * Add a symlink in webroot to public files from `custom/`directory
+  * Adjust http paths for custom templates
+  * Replace `*-custom.po` files by a `custom-po` symlink to `/custom/po`
+    * Custom `.po` files should not include `custom` in there filename anymore.
+  * Adjust `.gitignore`, all bundles are created into `dist/`
+  * Put `.gitignore` rule about `!.gitkeep` at the end of file
+  * Renames SCSS files `_config-custom` & `_config-default` to `_configuration` & `_configuration.default`
+  * Bundle home default template at build time
+  * Bundle footer default template at build time
+  * Bundle header default template at build time
+  * Rename `build.js` gulp task to `js-bundle.js`
+  * Use `public` as webroot directory instead of `src`
+  * Move `tests` directory one level up
+  * Create `public` directory and put static files in it
+  * Change target dir for bundles (scripts, styles, translations)
+  * Init `dist` directory
+  * Delete now useless `config.js`
+  * Don't concat scss files before compiling
+  * Merge `settings.custom` & `settings.default` at runtime
+
+**Enhancements**
+
+  * Update image path from docs
+  * Adapt `README.md` to forward user to new doc about settings
+  * Adjust documentation to match new directories structure
+  * Allow to use a symlink as custom files directory
+  * Change default path for custom images
+  * Remove unused `vendors` task
+  * Shrink gulp translate task
+  * Unfactorize config for tests task
+  * Unfactorize config for rando3D.js task
+  * Unfactorize config for sass task
+  * Remove unused gulp task & npm dependencies
+  * Remove useless code blocks & unused vars
+  * Simplify required conf files creation
+
+
 2.13.1 / 2016-03-10
 ==================
 
