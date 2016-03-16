@@ -18,7 +18,7 @@ function Rando3DController(result, $scope, $timeout, $modalInstance, globalSetti
             DEM_URL: settingsFactory.trekUrl.replace(/\$lang/, currentLang) + pk + '/' + globalSettings.DEM_FILE,
             PROFILE_URL: settingsFactory.trekUrl.replace(/\$lang/, currentLang) + pk + '/' + globalSettings.PROFILE_FILE,
             POI_URL: settingsFactory.trekUrl.replace(/\$lang/, currentLang) + pk + '/' + globalSettings.POI_FILE,
-            TILE_TEX_URL: globalSettings.ORTHOPHOTO_TILELAYERS,
+            TILE_TEX_URL: globalSettings.ORTHOPHOTO_TILELAYERS.LAYER_URL,
             SIDE_TEX_URL: "/images/3d/side.jpg",
             CAM_SPEED_F: 100,
             PICTO_PREFIX: globalSettings.API_URL,
