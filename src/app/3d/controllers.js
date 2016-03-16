@@ -18,7 +18,7 @@ function Rando3DController(result, $scope, $timeout, $modalInstance, globalSetti
             DEM_URL: settingsFactory.trekUrl.replace(/\$lang/, currentLang) + pk + '/' + globalSettings.DEM_FILE,
             PROFILE_URL: settingsFactory.trekUrl.replace(/\$lang/, currentLang) + pk + '/' + globalSettings.PROFILE_FILE,
             POI_URL: settingsFactory.trekUrl.replace(/\$lang/, currentLang) + pk + '/' + globalSettings.POI_FILE,
-            TILE_TEX_URL: "https://a.tiles.mapbox.com/v3/makina-corpus.i3p1001l/{z}/{x}/{y}.png",
+            TILE_TEX_URL: globalSettings.ORTHOPHOTO_TILELAYERS,
             SIDE_TEX_URL: "/images/3d/side.jpg",
             CAM_SPEED_F: 100,
             PICTO_PREFIX: globalSettings.API_URL,
