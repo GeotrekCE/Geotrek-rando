@@ -71,7 +71,7 @@ Having your own behavior available for your templates is possible through three 
 * `service.js`
 
 Those files have also to be in `custom/` directory.
-You may follow the `src/app/config/*.example` to use the right structure.
+You may follow the `src/app/custom/*.example` to use the right structure.
 
 #### Images, fonts and others things
 
