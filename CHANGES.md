@@ -1,4 +1,21 @@
 
+2.14.1 / 2016-03-16
+==================
+
+**Enhancements**
+
+  * Use `ORTHOPHOTO_TILELAYERS` as layer for rando-3d
+
+**Bug fixes**
+
+  * Fix test dataset (add limits to profile.json)
+  * Avoid crash when no services.geojson
+  * Avoid crash when dataset do not fills requirements
+  * Fix detail aside items opacity
+  * Fix custom path in documentation
+  * Fix rando3d image path
+  * Bundle template for rando-3d
+
 2.14.0 / 2016-03-11
 ==================
 
