@@ -130,7 +130,7 @@ function SidebarDetailController($scope, $rootScope, $modal, $stateParams, $loca
 
     $scope.show3d = function show3d () {
         var modal = $modal.open({
-            templateUrl: '/app/3d/templates/rando-3d.html',
+            template: require('../3d/templates/rando-3d.html'),
             controller: 'Rando3DController',
             resolve: {
                 result: function () {
