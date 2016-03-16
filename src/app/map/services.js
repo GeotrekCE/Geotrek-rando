@@ -805,30 +805,29 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                 var primaryColor = 'rgba(200, 200, 200, 1)';
                 var transparentizedColor = primaryColor.replace(/^(rgb)\((\d{1,3},\s*\d{1,3},\s*\d{1,3})\)$/gm, '$1a($2, 0.8)');
 
+                var sparklineOptions = {
+                    tooltipSuffix: ' m',
+                    tooltipContainer: '.detail-content-elevation-canvas',
+                    numberDigitGroupSep: '',
+                    width: '100%',
+                    height: 150,
+                    type: 'line',
+                    lineWidth: 3,
+                    spotColor: 'transparent',
+                    minSpotColor: 'transparent',
+                    maxSpotColor: 'transparent',
+                    fillColor: transparentizedColor,
+                    lineColor: primaryColor,
+                    highlightSpotColor: 'rgba(0, 0, 0, 0.5)',
+                    highlightLineColor: primaryColor
+                };
+                if (typeof data.limits !== 'undefined') {
+                    sparklineOptions.chartRangeMin = data.limits.floor;
+                    sparklineOptions.chartRangeMax = data.limits.ceil;
+                }
+
                 function updateSparkline() {
-                    jQuery('#elevation .detail-content-elevation-canvas').sparkline(data.profile,
-                        L.Util.extend(
-                            {
-                                tooltipSuffix: ' m',
-                                tooltipContainer: '.detail-content-elevation-canvas',
-                                numberDigitGroupSep: '',
-                                width: '100%',
-                                height: 150
-                            },
-                            {
-                                type: 'line',
-                                chartRangeMin: data.limits.floor,
-                                chartRangeMax: data.limits.ceil,
-                                lineWidth: 3,
-                                spotColor: 'transparent',
-                                minSpotColor: 'transparent',
-                                maxSpotColor: 'transparent',
-                                fillColor: transparentizedColor,
-                                lineColor: primaryColor,
-                                highlightSpotColor: 'rgba(0, 0, 0, 0.5)',
-                                highlightLineColor: primaryColor
-                            }
-                        ));
+                    jQuery('#elevation .detail-content-elevation-canvas').sparkline(data.profile, sparklineOptions);
                 }
 
                 updateSparkline();
