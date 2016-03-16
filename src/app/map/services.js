@@ -56,7 +56,8 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                                     }
                                 );
                         });
-                        if (services.features.length === 0 && !classServices.contains('hidden')) {
+
+                        if (typeof services.features === 'undefined' || services.features.length === 0 && !classServices.contains('hidden')) {
                             classServices.add('hidden');
                             deferred.resolve();
                         }
