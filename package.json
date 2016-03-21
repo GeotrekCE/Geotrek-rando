@@ -87,6 +87,7 @@
   },
   "devDependencies": {},
   "scripts": {
+    "postinstall": "gulp",
     "dist": "gulp",
     "test": "gulp && gulp tests",
     "watch": "gulp watch",
