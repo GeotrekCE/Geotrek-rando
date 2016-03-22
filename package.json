@@ -89,11 +89,13 @@
   },
   "scripts": {
     "postinstall": "gulp",
-    "dist": "gulp",
-    "test": "gulp && gulp tests",
+    "pretest": "gulp",
+    "test": "gulp tests",
+    "prewatch": "gulp",
     "watch": "gulp watch",
-    "start": "gulp && gulp watch",
-    "export": "tar -chzf export.tgz `git clean -xdn | cut -d' ' -f2 | grep -v -e node_modules -e 'src/rando' -e 'src/app/translation/lang' -e '_customisation.scss' -e '_configuration.scss' -e 'settings.constant.json'`",
+    "prestart": "gulp",
+    "start": "gulp watch",
+    "dist": "gulp",
     "upgrade": "git fetch origin && git checkout origin/latest && npm update && npm run dist"
   }
 }
