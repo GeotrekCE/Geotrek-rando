@@ -21,8 +21,6 @@ Everything is bound as a single javascript bundle using [Browserify][], managed 
 
 The first version (v1) was builded on top of Django framework, like Geotrek-admin. But maintaining such a backend application was a kind of lose of time with no added value. Since the second version, Geotrek-rando is now a [Rich Internet application][RIA] which has a very small hosting footprint.
 
-_See main [history][] page for more informations._
-
 ## Prerequisites
 
 As Geotrek-rando works as a [SPA][], you only need an http server like [Nginx][] or [Apache][]. _(Cf. [http server][])_
@@ -91,10 +89,8 @@ If you're wondering what means _Libre_ in [FLOSS][], it essentially imply four f
 
 [Contribute]: contribute.md
 [Settings]: settings.md
-[Customization]: customization.md
-[Data source]: api_url.md
-[history]: history.md
-[http server]: hosting.md
+[Customization]: settings.md#customization
+[http server]: http_server.md
 [Installing NodeJS]: install-node.md
 
 <!-- External links -->
