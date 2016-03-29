@@ -90,7 +90,7 @@ If you're wondering what means _Libre_ in [FLOSS][], it essentially imply four f
 [Contribute]: contribute.md
 [Settings]: settings.md
 [Customization]: settings.md#customization
-[http server]: http_server.md
+[http server]: http-server.md
 [Installing NodeJS]: install-node.md
 
 <!-- External links -->
