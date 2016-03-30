@@ -15,7 +15,7 @@ be carefull with trailing slashes. They are important and change the behaviour o
 server {
     listen 80;
     server_name <my_server_name>;
-    root <my_installation_directory>/src;
+    root <my_installation_directory>/public;
     if_modified_since before;
     expires 1h;
     gzip on;
