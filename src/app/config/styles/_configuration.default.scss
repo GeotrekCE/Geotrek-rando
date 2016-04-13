@@ -11,16 +11,20 @@ $header-height-mobile: 50px !default;
 $primary-color: #B4CC1B !default;
 $secondary-color: #444 !default;
 
-$categories: T #00B5D1, /* Itinéraire ID */
-            T4 darken($primary-color, 5%), /* Pédestre ID */
-            C8 #F9A41A, /* Musee ID */
-			C5 #ED5435, /* Restaurants ID */
-			E lighten($secondary-color, 20%), /* Evenements ID */
-			C3 #A05481, /* Sorties */
-			C1 #105BBC, /* Hébergements ID */
-			C7 #3d842e, /* Séjours 100% eco ID */
-			C6 #7ab51d !default; /* Produits du terroir ID */
-
+$categories: T  #61B22F, /* Itinéraire */
+             T1 #E25092, /* VTT */
+             T2 #5CC1D0, /* Vélo */
+             T3 #E7811D, /* Equestre */
+             T4 #61B22F, /* Pédestre */
+             C1 #4973B8, /* Hébergements */
+             C2 #5B5A5A, /* Activités de pleine nature */
+             C3 #8B6494, /* Sorties */
+             C4 #87AB27, /* Site recommandés */
+             C5 #ED5435, /* Restauration */
+             C6 #DBB310, /* Produits */
+             C7 #3d842e, /* Séjours */
+             C8 #00985F, /* Musées */
+             E  #A05481; /* Evenements */
 
 // COMMONS COLORS
 $dark-grey: #4d4d4d !default;
