@@ -94,7 +94,7 @@ Option     | Type      | Default   | Description
 --------|----------|-----------|------------
 PERMANENT_TILELAYERS_NAME | String | "Carte" | String used in layer selector for `PERMANENT_TILELAYERS` layer group.
 PERMANENT_TILELAYERS | Array of [Layers Objects Options](#layers-objects-options) | cf [Layers Objects default](#layers-objects-options) | Define the main leaflet tile layers used by the website.
-ORTHOPHOTO_TILELAYERS_NAME | String | "Ortho" | String used in layer selector for `SATELLITE_LEAFLET_BACKGROUND` layer.
+ORTHOPHOTO_TILELAYERS_NAME | String | "Ortho" | String used in layer selector for `ORTHOPHOTO_TILELAYERS` layer group.
 ORTHOPHOTO_TILELAYERS | [Layer Object](#layers-objects-options) | cf [Layers Objects default](#layers-objects-options) | Define the satellite leaflet tiles used by the website.
 OPTIONAL_TILELAYERS_NAME | String | "Optional" | Default name prefix for `OPTIONAL_TILELAYERS` layers in layer selector.
 OPTIONAL_TILELAYERS | Array of [Layers Objects Options](#layers-objects-options) | Empty Array | This array allows you to define other Leaflet tiles layers that will be available in layer selector.
