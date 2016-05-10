@@ -154,6 +154,8 @@ DEPARTURE_ARRIVAL_ICON | [Leaflet Icon Object](http://leafletjs.com/reference.ht
 
 ## Directories
 
+Option     | Default   | Description
+--------|-------|------------
 API_DIR | "api" | API dir file
 TREKS_DIR | "treks" | Treks dir file
 TREKS_FILE | "treks.geojson" | Treks file
