@@ -1,4 +1,12 @@
 
+2.14.2 / 2016-05-11
+==================
+
+**Enhancements**
+
+  * Sequential loading for markers pois and services types icons 
+
+
 2.14.1 / 2016-03-16
 ==================
 
