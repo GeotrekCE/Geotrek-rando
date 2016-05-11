@@ -5,6 +5,8 @@ function iconsService($q, $http, $filter, globalSettings, categoriesService, poi
     var self = this;
 
     self.categoriesIcons = {};
+    self.poisTypesIcons = {};
+    self.servicesTypesIcons = {};
 
     this.icons_liste = {
         default_icon: {},
@@ -178,149 +180,176 @@ function iconsService($q, $http, $filter, globalSettings, categoriesService, poi
         return deferred.promise;
     };
 
-    this.getPoiTypesIcons = function getPoiTypesIcons (forceRefresh) {
+    var getPoisIconsPending = false;
+    this.getPoiTypesIcons = function getPoiTypesIcons () {
+        /**
+         * If there is already a promise fetching icons, return it
+         */
+        if (getPoisIconsPending) {
+            return getPoisIconsPending;
+        }
+
+        /**
+         * If icons have already been fetched, return them
+         */
+        if (Object.keys(self.poisTypesIcons).length) {
+            return $q.when(self.poisTypesIcons);
+        }
+
+        /**
+         * If icons have never been fetched, fetch them
+         */
         var deferred = $q.defer();
 
-        if (self.poisTypesIcons && !forceRefresh) {
-            deferred.resolve(self.poisTypesIcons);
-        } else {
+        poisService.getPois()
+            .then(function (pois) {
 
-            poisService.getPois(forceRefresh)
-                .then(
-                    function (pois) {
-                        var counter = 0;
-                        _.forEach(pois.features, function (poi) {
-                            if (!self.poisTypesIcons) {
-                                self.poisTypesIcons = {};
-                            }
-                            counter++;
-                            var currentCounter = counter;
-                            if (!$filter('isSVG')(poi.properties.type.pictogram)) {
-                                self.poisTypesIcons[poi.properties.type.id] = {
-                                    markup: poi.properties.type.pictogram,
-                                    isSVG: false
-                                };
-                                if (currentCounter === _.size(pois.features)) {
-                                    deferred.resolve(self.poisTypesIcons);
-                                }
-                            } else {
-                                $http.get(poi.properties.type.pictogram)
-                                    .success(
-                                        function (icon) {
-                                            self.poisTypesIcons[poi.properties.type.id] = {
-                                                markup: icon.toString(),
-                                                isSVG: true
-                                            };
-                                            if (currentCounter === _.size(pois.features)) {
-                                                deferred.resolve(self.poisTypesIcons);
-                                            }
-                                        }
-                                    ).error(
-                                        function () {
-                                            self.poisTypesIcons[poi.properties.type.id] = {
-                                                markup: '',
-                                                isSVG: true
-                                            };
-                                            if (currentCounter === _.size(pois)) {
-                                                deferred.resolve(self.poisTypesIcons);
-                                            }
-                                        }
-                                    );
-                            }
+                var promisesArray = [];
+
+                _.forEach(pois.features, function (poi) {
+                    var localPromise;
+
+                    if ($filter('isSVG')(poi.properties.type.pictogram)) {
+                        localPromise = $http({url : poi.properties.type.pictogram}).then(function (response) {
+                            self.poisTypesIcons[poi.properties.type.id] = {
+                                markup: response.data,
+                                isSVG: true
+                            };
                         });
+                    } else {
+                        self.poisTypesIcons[poi.properties.type.id] = {
+                            markup: '<img src="' + poi.properties.type.pictogram + '" />',
+                            isSVG: false
+                        };
+                        localPromise = $q.when(self.poisTypesIcons[poi.properties.type.id]);
                     }
-                );
-        }
 
+                    promisesArray.push(localPromise);
+                });
+
+                $q.all(promisesArray).then(function () {
+                    deferred.resolve(self.poisTypesIcons);
+                    getPoisIconsPending = false;
+                });
+            });
+        getPoisIconsPending = deferred.promise;
         return deferred.promise;
     };
 
-    this.getAPoiTypeIcon = function getAPoiTypeIcon (poiTypeId, forceRefresh) {
-        var deferred = $q.defer();
-        if (self.poisTypesIcons && !forceRefresh) {
-            deferred.resolve(self.poisTypesIcons[poiTypeId]);
-        } else {
-            self.getPoiTypesIcons(forceRefresh)
-                .then(
-                    function (icons) {
-                        deferred.resolve(icons[poiTypeId]);
-                    }
-                );
+    var getPoiIconPending = {};
+    this.getAPoiTypeIcon = function getAPoiTypeIcon (poiTypeId) {
+        /**
+         * If there is already a promise, return it
+         */
+        if (getPoiIconPending[poiTypeId]) {
+            return getPoiIconPending[poiTypeId];
         }
 
+        /**
+         * If icon has already been fetched for current category, return it
+         */
+        if (self.poisTypesIcons && self.poisTypesIcons[poiTypeId]) {
+            return $q.when(self.poisTypesIcons[poiTypeId]);
+        }
+
+        /**
+         * If icon has never been fetched for current category, fetch it
+         */
+        var deferred = $q.defer();
+        self.getPoiTypesIcons()
+            .then(function (icons) {
+                deferred.resolve(icons[poiTypeId]);
+                getPoiIconPending[poiTypeId] = false;
+            });
+
+        getPoiIconPending[poiTypeId] = deferred.promise;
         return deferred.promise;
+
     };
 
-    this.getServiceTypesIcons = function getServiceTypesIcons (forceRefresh) {
+    var getServicesIconsPending = false;
+    this.getServiceTypesIcons = function getServiceTypesIcons () {
+        /**
+         * If there is already a promise fetching icons, return it
+         */
+        if (getServicesIconsPending) {
+            return getServicesIconsPending;
+        }
+
+        /**
+         * If icons have already been fetched, return them
+         */
+        if (Object.keys(self.servicesTypesIcons).length) {
+            return $q.when(self.servicesTypesIcons);
+        }
+
+        /**
+         * If icons have never been fetched, fetch them
+         */
         var deferred = $q.defer();
 
-        if (self.servicesTypesIcons && !forceRefresh) {
-            deferred.resolve(self.servicesTypesIcons);
-        } else {
+        servicesService.getServices()
+            .then(function (services) {
 
-            servicesService.getServices(forceRefresh)
-                .then(
-                    function (services) {
-                        var counter = 0;
-                        _.forEach(services.features, function (service) {
-                            if (!self.servicesTypesIcons) {
-                                self.servicesTypesIcons = {};
-                            }
-                            counter++;
-                            var currentCounter = counter;
-                            if (!$filter('isSVG')(service.properties.type.pictogram)) {
-                                self.servicesTypesIcons[service.properties.type.id] = {
-                                    markup: service.properties.type.pictogram,
-                                    isSVG: false
-                                };
-                                if (currentCounter === _.size(services.features)) {
-                                    deferred.resolve(self.servicesTypesIcons);
-                                }
-                            } else {
-                                $http.get(service.properties.type.pictogram)
-                                    .success(
-                                        function (icon) {
-                                            self.servicesTypesIcons[service.properties.type.id] = {
-                                                markup: icon.toString(),
-                                                isSVG: true
-                                            };
-                                            if (currentCounter === _.size(services.features)) {
-                                                deferred.resolve(self.servicesTypesIcons);
-                                            }
-                                        }
-                                    ).error(
-                                        function () {
-                                            self.servicesTypesIcons[service.properties.type.id] = {
-                                                markup: '',
-                                                isSVG: true
-                                            };
-                                            if (currentCounter === _.size(services)) {
-                                                deferred.resolve(self.servicesTypesIcons);
-                                            }
-                                        }
-                                    );
-                            }
+                var promisesArray = [];
+
+                _.forEach(services.features, function (service) {
+                    var localPromise;
+
+                    if ($filter('isSVG')(service.properties.type.pictogram)) {
+                        localPromise = $http({url : service.properties.type.pictogram}).then(function (response) {
+                            self.servicesTypesIcons[service.properties.type.id] = {
+                                markup: response.data,
+                                isSVG: true
+                            };
                         });
+                    } else {
+                        self.servicesTypesIcons[service.properties.type.id] = {
+                            markup: '<img src="' + service.properties.type.pictogram + '" />',
+                            isSVG: false
+                        };
+                        localPromise = $q.when(self.servicesTypesIcons[service.properties.type.id]);
                     }
-                );
-        }
 
+                    promisesArray.push(localPromise);
+                });
+
+                $q.all(promisesArray).then(function () {
+                    deferred.resolve(self.servicesTypesIcons);
+                    getServicesIconsPending = false;
+                });
+            });
+        getServicesIconsPending = deferred.promise;
         return deferred.promise;
     };
 
-    this.getAServiceTypeIcon = function getAServiceTypeIcon (serviceTypeId, forceRefresh) {
-        var deferred = $q.defer();
-        if (self.servicesTypesIcons && !forceRefresh) {
-            deferred.resolve(self.servicesTypesIcons[serviceTypeId]);
-        } else {
-            self.getServiceTypesIcons(forceRefresh)
-                .then(
-                    function (icons) {
-                        deferred.resolve(icons[serviceTypeId]);
-                    }
-                );
+    var getServiceIconPending = {};
+    this.getAServiceTypeIcon = function getAServiceTypeIcon (serviceTypeId) {
+        /**
+         * If there is already a promise, return it
+         */
+        if (getServiceIconPending[serviceTypeId]) {
+            return getServiceIconPending[serviceTypeId];
         }
 
+        /**
+         * If icon has already been fetched for current category, return it
+         */
+        if (self.servicesTypesIcons && self.servicesTypesIcons[serviceTypeId]) {
+            return $q.when(self.servicesTypesIcons[serviceTypeId]);
+        }
+
+        /**
+         * If icon has never been fetched for current category, fetch it
+         */
+        var deferred = $q.defer();
+        self.getServiceTypesIcons()
+            .then(function (icons) {
+                deferred.resolve(icons[serviceTypeId]);
+                getServiceIconPending[serviceTypeId] = false;
+            });
+
+        getServiceIconPending[serviceTypeId] = deferred.promise;
         return deferred.promise;
     };
 
@@ -522,11 +551,7 @@ function iconsService($q, $http, $filter, globalSettings, categoriesService, poi
             self.getAPoiTypeIcon(poi.properties.type.id)
                 .then(
                     function (icon) {
-                        if (icon.isSVG) {
-                            poiIcon = icon.markup;
-                        } else {
-                            poiIcon = '<img src="' + icon.markup + '" alt=""';
-                        }
+                        poiIcon = icon.markup;
                     }
                 )
         );
@@ -582,11 +607,7 @@ function iconsService($q, $http, $filter, globalSettings, categoriesService, poi
             self.getAServiceTypeIcon(service.properties.type.id, forceRefresh)
                 .then(
                     function (icon) {
-                        if (icon.isSVG) {
-                            serviceIcon = icon.markup;
-                        } else {
-                            serviceIcon = '<img src="' + icon.markup + '" alt=""';
-                        }
+                        serviceIcon = icon.markup;
                     }
                 )
         );
