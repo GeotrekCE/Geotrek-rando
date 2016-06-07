@@ -1,6 +1,6 @@
 'use strict';
 
-function LayoutController($rootScope, $scope, $state, $location, resultsService, globalSettings, homeService, $translate, $timeout, Analytics, mapService) {
+function LayoutController($rootScope, $scope, $state, $location, resultsService, filtersService, globalSettings, homeService, $translate, $timeout, Analytics, mapService) {
     $rootScope.currentState_name = $state.current.name;
     $rootScope.showFooterOnApp = globalSettings.SHOW_FOOTER;
     $rootScope.elementsLoading = 0;
@@ -15,14 +15,15 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
     $rootScope.isSafari = !!bowser.safari;
     $rootScope.isWebkit = !!bowser.webkit;
 
+    var base = '';
     if (globalSettings.FAVICON) {
-        var base = '/custom/images/';
+        base = '/custom/images/';
         $rootScope.favIcon = {
             png: base + globalSettings.FAVICON.png,
             ico: base + globalSettings.FAVICON.ico
         };
     } else {
-        var base = '/images/';
+        base = '/images/';
         $rootScope.favIcon = {
             png: base + 'favicon-geotrek.png',
             ico: base + 'favicon-geotrek.ico'
@@ -52,6 +53,22 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
         setTimeout(function () {
             mapService.invalidateSize();
         }, 350);
+    };
+
+    $scope.accessSpecificCategory = function accessSpecificCategory (currentCategory) {
+        $state.go('layout.root');
+        if (typeof currentCategory !== 'object') {
+            currentCategory = [currentCategory];
+        }
+        $rootScope.activeFilters.categories = currentCategory;
+        filtersService.updateActiveFilters($rootScope.activeFilters);
+        $rootScope.$broadcast('updateResultsList', true);
+
+        $rootScope.activeFiltersTags = filtersService.getTagFilters();
+
+        if ($rootScope.showHome) {
+            $rootScope.showHome = false;
+        }
     };
 
     iniDefaultMeta();

@@ -1,10 +1,6 @@
 'use strict';
 
-function HomeController($scope, $rootScope, $state, categoriesService, $location, homeService, globalSettings, filtersService) {
-
-    function updateFiltersTags() {
-        $rootScope.activeFiltersTags = filtersService.getTagFilters();
-    }
+function HomeController($scope, $rootScope, $state, categoriesService, $location, homeService, globalSettings) {
 
     $scope.initHome = function initHome () {
 
@@ -16,19 +12,6 @@ function HomeController($scope, $rootScope, $state, categoriesService, $location
 
     $scope.disableHomePage = function disableHomePage () {
         homeService.setChoice();
-        $scope.toggleHome();
-    };
-
-    $scope.accessSpecificCategory = function accessSpecificCategory (currentCategory) {
-        $state.go('layout.root');
-        if (typeof currentCategory !== 'object') {
-            currentCategory = [currentCategory];
-        }
-        $rootScope.activeFilters.categories = currentCategory;
-        filtersService.updateActiveFilters($rootScope.activeFilters);
-        $rootScope.$broadcast('updateResultsList', true);
-
-        updateFiltersTags();
         $scope.toggleHome();
     };
 
