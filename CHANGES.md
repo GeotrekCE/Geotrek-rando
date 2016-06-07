@@ -1,10 +1,19 @@
 
+2.14.3 / 2016-06-07
+==================
+
+**Bug fixes**
+
+  * Allow access to filtered results from any page
+  * Fix main content height on IOS
+
+
 2.14.2 / 2016-05-11
 ==================
 
 **Enhancements**
 
-  * Sequential loading for markers pois and services types icons 
+  * Sequential loading for markers pois and services types icons
 
 
 2.14.1 / 2016-03-16
