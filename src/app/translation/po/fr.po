@@ -47,7 +47,7 @@ msgid "ASCENT"
 msgstr "Dénivelé :"
 
 msgid "LENGTH"
-msgstr "Distance :"
+msgstr "Longueur :"
 
 msgid "DATE_FILTER"
 msgstr "Entre le ... et le ..."
@@ -70,7 +70,7 @@ msgid "I_DIFFICULTY"
 msgstr "Difficulté"
 
 msgid "I_LENGTH"
-msgstr "Distance"
+msgstr "Longueur"
 
 msgid "I_ROUTE"
 msgstr "Parcours"
@@ -193,7 +193,7 @@ msgid "MAX"
 msgstr "Max :"
 
 msgid "LENGTH_IN_M"
-msgstr "Distance (m)"
+msgstr "Longueur (m)"
 
 msgid "DATES"
 msgstr "Dates :"
