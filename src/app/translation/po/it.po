@@ -169,7 +169,7 @@ msgid "MAX"
 msgstr ""
 
 msgid "LENGTH_IN_M"
-msgstr "Distance (m)"
+msgstr "Lunghezza (m)"
 
 msgid "DATES"
 msgstr "Dates :"
