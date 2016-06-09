@@ -645,7 +645,7 @@ function iconsService($q, $http, $filter, globalSettings, categoriesService, poi
     this.getWarningIcon = function getWarningIcon () {
         var deferred = $q.defer();
 
-        self.getSVGIcon(self.icons_liste.poi_base.iconUrl, 'category_base')
+        self.getSVGIcon(self.icons_liste.category_base.iconUrl, 'category_base')
             .then(function (icon) {
                 var markup = '' +
                     '<div class="marker">' +
@@ -653,7 +653,7 @@ function iconsService($q, $http, $filter, globalSettings, categoriesService, poi
                     '</div>' +
                     '<div class="icon"><i class="fa fa-exclamation-circle"></i></div>';
 
-                var warningIcon = new L.DivIcon(_.merge({}, self.icons_liste.poi_base, {
+                var warningIcon = new L.DivIcon(_.merge({}, self.icons_liste.category_base, {
                     html: markup,
                     className: 'double-marker warning-marker'
                 }));
