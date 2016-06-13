@@ -1,7 +1,9 @@
 # GEOTREK RANDO V2 - Settings
 
-In order to extend the default configuration, you just need to add your customisation to the `src/app/config/settings.custom.json` main object.
+In order to extend the default configuration, you just need to add your customisation to the `custom/settings.custom.json` main object.
 **You don't need to set all the values, just the one you want to be different from the default configuration.**
+
+After editing this file, run ``npm run dist`` to apply changes.
 
 ## Global settings
 
