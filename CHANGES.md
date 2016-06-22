@@ -1,9 +1,12 @@
-2.14.6 / To be released
+
+2.14.6 / 2016-06-22
 ==================
 
 **Bug fixes**
 
   * Fix path to lightbox-gallery template
+  * Change length translation
+
 
 2.14.5 / 2016-06-09
 ==================
