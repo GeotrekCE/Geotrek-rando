@@ -1,3 +1,10 @@
+2.14.6 / To be released
+==================
+
+**Bug fixes**
+
+  * Fix path to lightbox-gallery template
+
 2.14.5 / 2016-06-09
 ==================
 
