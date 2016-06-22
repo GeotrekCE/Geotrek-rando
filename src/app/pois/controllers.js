@@ -38,7 +38,7 @@ function PoisListeController($scope, $rootScope, globalSettings, utilsFactory, $
 
     $scope.showLightbox = function showLightbox (images, slideIndex) {
         $modal.open({
-            templateUrl: '/app/gallery/templates/lightbox-gallery.html',
+            template: require('../gallery/templates/lightbox-gallery.html'),
             controller: 'GalleryController',
             windowClass: 'lightbox',
             resolve: {

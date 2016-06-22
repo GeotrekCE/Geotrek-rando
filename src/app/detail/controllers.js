@@ -52,7 +52,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
 
     $scope.showLightbox = function showLightbox (images, slideIndex) {
         $modal.open({
-            templateUrl: '/app/gallery/templates/lightbox-gallery.html',
+            template: require('../gallery/templates/lightbox-gallery.html'),
             controller: 'GalleryController',
             windowClass: 'lightbox',
             resolve: {
