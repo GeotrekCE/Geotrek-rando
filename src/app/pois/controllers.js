@@ -96,7 +96,7 @@ function PoisListeController($scope, $rootScope, globalSettings, utilsFactory, $
 
     $scope.openPlayer = function openPlayer (media) {
         $modal.open({
-            templateUrl: 'app/pois/templates/media-modal.html',
+            require('templates/media-modal.html'),
             controller: 'MediaController',
             resolve: {
                 media: function () {
