@@ -256,9 +256,9 @@ function SocialController($scope, $filter, $rootScope, $location, $state, $state
                 );
         }
 
-        // else {
-        //     initShareOnTranslate();
-        // }
+        else {
+            initShareOnTranslate();
+        }
     }
 
     initShare();
