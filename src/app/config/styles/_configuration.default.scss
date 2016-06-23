@@ -24,7 +24,7 @@ $categories: T  #61B22F, /* Itinéraire */
              C6 #DBB310, /* Produits */
              C7 #3d842e, /* Séjours */
              C8 #00985F, /* Musées */
-             E  #A05481; /* Evenements */
+             E  #A05481 !default; /* Evenements */
 
 // COMMONS COLORS
 $dark-grey: #4d4d4d !default;
