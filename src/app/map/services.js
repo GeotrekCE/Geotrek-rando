@@ -454,7 +454,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
     this.setViewPortFilteringControl = function setViewPortFilteringControl () {
         L.Control.ViewportFilter = L.Control.extend({
             options: {
-                position: 'bottomleft'
+                position: 'topleft'
             },
             onAdd: function () {
                 var controlContainer = L.DomUtil.create('div', 'leaflet-control-viewportfilter');
