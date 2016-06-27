@@ -1,4 +1,16 @@
 
+2.14.7 / 2016-06-27
+==================
+
+**Bug fixes**
+
+  * Uncomment line to execute initShareOnTranslate() on all pages
+  * Add !default to categories colors to allow configuration
+
+**Enhancements**
+
+  * Move filter by map button from bottom left to up left
+
 2.14.6 / 2016-06-22
 ==================
 
