@@ -67,6 +67,45 @@ For automaticly building bundles when editing files, use :
 npm run watch
 ```
 
+## Software update
+
+Download and extract the latest release of Geotrek-Rando from GitHub (https://github.com/makinacorpus/Geotrek-rando/releases).
+
+Before upgrading, READ CAREFULLY the release notes, either from the CHANGES files or online.
+
+```
+wget https://github.com/makinacorpus/Geotrek-rando/archive/X.Y.Z.zip
+unzip X.Y.Z.zip
+```
+
+In order to avoid editing NGINX configuration at each upgrade, you can rename the folders.
+
+```
+mv /path/to/application/ /path/to/application.old/
+mv /path/to/Geotrek-rando-X.Y.Z/ /path/to/application/
+```
+
+Make sure the NGINX virtualhost refers to the folder of this new version. 
+
+Install the new version of the application.
+
+```
+cd /path/to/application/
+npm install
+```
+
+Copy the custom folder of the previous version.
+
+```
+cp -aR ../previous-version/custom/ .
+```
+
+Launch build task
+
+```
+npm run dist
+```
+
 ## Settings & customization
 
 Most of the settings (mainly everything about contents) has to be done directly in [Geotrek-admin][], but some parameters regarding Geotrek-rando have to be set up in a specific file. _(Cf. [Settings][])_

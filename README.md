@@ -33,14 +33,33 @@ _See [Launch build task](docs/README.md#launch-build-task)_
 
 ## Main contributors
 
+**Version 2:**
+
 * [Simon Bats](https://github.com/SBats)
 * [Benjamin Marguin](https://github.com/mabhub)
 * [Alexandra Janin](https://github.com/lellex)
 * [Gaël Utard](https://github.com/gutard)
 
+**Version 1:**
 
-[<img src="http://depot.makina-corpus.org/public/logo.gif">](http://www.makina-corpus.com)
+* Mathieu Leplatre
+* Gaël Utard
+* Sylvain Beorchia
+* Adrien Denat
+* Yahya Mzoughi
+* Anaïs Peyrucq
+* Satya Azemar
+* Camille Monchicourt
+* Noël Martinon
 
 ## Licence
 
 * OpenSource - BSD
+* Development by Makina Corpus
+* Conception by Parc national des Écrins, Parc national du Mercantour, Parc national des Cevennes & Makina Corpus
+
+[<img src="http://depot.makina-corpus.org/public/logo.gif">](http://www.makina-corpus.com)
+
+[<img src="https://raw.githubusercontent.com/makinacorpus/Geotrek-website/master/public/assets/img/parc_ecrins.png">](http://www.ecrins-parcnational.fr)
+[<img src="https://raw.githubusercontent.com/makinacorpus/Geotrek-website/master/public/assets/img/parc_mercantour.png">](http://www.mercantour.eu)
+[<img src="https://raw.githubusercontent.com/makinacorpus/Geotrek-website/master/public/assets/img/logo-pn-cevennes.png">](https://www.cevennes-parcnational.fr)

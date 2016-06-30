@@ -43,7 +43,7 @@ Beyond settings, you also have ways to customize look & feel but also create new
 
 #### Templates
 
-By creating HTML files in `custom/public` and [enabling there use in settings](settings-custom-json.md#custom_templates), you have the possibility
+By creating HTML files in `custom/public` and [enabling there use in settings](settings-custom-json-options.md#main-options), you have the possibility
 to use your own markup for some elements of the interface. For example :
 
 * `custom-header.html`
@@ -52,6 +52,8 @@ to use your own markup for some elements of the interface. For example :
 The filename does not really matter as far as `custom/templates` will be used as root directory.
 
 _See [templates settings][] for a complete list of templates you can configure._
+
+_See [templates widgets][] for a partial list of widgets you can use in your templates._
 
 #### Styles
 
@@ -78,14 +80,51 @@ You may follow the `src/app/custom/*.example` to use the right structure.
 Everything from the `public/` directory is directy served by the web server.
 But you **sould not put anything** directly there.
 Also, `public/custom` is a symbolic link pointing directy to `custom/public`.
-So all elements that you want to be accessible through `http` should be placed in the `custom/public/` directory and would be accessed with the path: `/custom/`. For exemple: `custom/public/my_picture.png` would be accessed by the link `http://my-geotrek-domain.com/custom/my_picture.png`.
+So all elements that you want to be accessible through `http` should be placed in the `custom/public/` directory and would be accessed with the path: `/custom/`. For example: `custom/public/my_picture.png` would be accessed by the link `http://my-geotrek-domain.com/custom/my_picture.png`.
 
+You should use absolute links for these files rather than relative ones (particulary if you activate HTML5 mode). Example: ``<img src="/custom/my_picture.jpg">``
+
+#### Translations
+
+You can override default translation files available in `src/app/translation/po`. Don't edit these default files, use them to find which messages you want to override.
+
+Create a `custom/po/` folder. Then create the files for each language you are using (`en.po`, `fr.po` as an example).
+
+Override the translations that you want in these files. 
+
+Example of content for `custom/po/en.po`:
+
+```
+msgid ""
+msgstr ""
+"Project: Geotrek-rando\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"X-Generator: Poedit 1.7.4\n"
+
+msgid "BANNER_TEXT"
+msgstr "Rando in my park"
+
+msgid "DEFAULT_META_TITLE"
+msgstr "Rando my park"
+
+msgid "DEFAULT_META_DESCRIPTION"
+msgstr "Discover the treks in the national park!"
+```
 
 <!-- Internal links -->
 
 [JSON settings]: settings-custom-json.md
 [SCSS settings]: configuration-scss.md
 [templates settings]: custom-templates.md
+[templates widgets]: templates-widgets.md
 
 <!-- External links -->
 
