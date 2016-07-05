@@ -232,7 +232,7 @@ msgid "SUCCESS_WARNING"
 msgstr "Le message a bien été enregistré. Merci pour votre aide !"
 
 msgid "ERROR_WARNING"
-msgstr "Le message n'a pu être enregistré. Veuillez nous excuser pour ce désagrément. Nos équipe ont été prévenues et analysent le problème."
+msgstr "Le message n'a pu être enregistré. Veuillez nous excuser pour ce désagrément. Nos équipes ont été prévenues et analysent le problème."
 
 
 # FILTERS
