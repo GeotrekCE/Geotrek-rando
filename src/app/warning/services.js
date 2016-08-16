@@ -1,14 +1,14 @@
 'use strict';
 
 function WarningService(translationService, settingsFactory, $resource, $http, $q) {
-    var that = this;
+    var self = this;
 
-    that.getWarningCategories = function getWarningCategories (forceRefresh) {
+    this.getWarningCategories = function getWarningCategories (forceRefresh) {
         var deferred = $q.defer();
 
-        if (that._warningCategories && !forceRefresh) {
+        if (self._warningCategories && !forceRefresh) {
 
-            deferred.resolve(that._warningCategories);
+            deferred.resolve(self._warningCategories);
 
         } else {
             var currentLang = translationService.getCurrentLang();
@@ -24,7 +24,7 @@ function WarningService(translationService, settingsFactory, $resource, $http, $
             requests.query().$promise
                 .then(function (data) {
                     var categories = angular.fromJson(data);
-                    that._warningCategories = categories;
+                    self._warningCategories = categories;
                     deferred.resolve(categories);
                 });
 
@@ -33,7 +33,7 @@ function WarningService(translationService, settingsFactory, $resource, $http, $
         return deferred.promise;
     };
 
-    that.sendWarning = function sendWarning (formData) {
+    this.sendWarning = function sendWarning (formData) {
 
         var currentLang = translationService.getCurrentLang();
         var url = settingsFactory.warningSubmitUrl.replace(/\$lang/, currentLang);
@@ -60,27 +60,27 @@ function WarningService(translationService, settingsFactory, $resource, $http, $
     };
 }
 
-function WarningMapService(globalSettings, utilsFactory, iconsService, layersService) {
-    var that = this;
+function WarningMapService(globalSettings, utilsFactory, iconsService, layersService, mapService, stylesConfigService) {
+    var self = this;
 
 
     //  CALLBACKS
     //
 
-    that.addCallback = function addCallback (callbackFunction) {
-        if (!that.callbacksArray) {
-            that.callbacksArray = [];
+    this.addCallback = function addCallback (callbackFunction) {
+        if (!self.callbacksArray) {
+            self.callbacksArray = [];
         }
 
-        that.callbacksArray.push(callbackFunction);
+        self.callbacksArray.push(callbackFunction);
     };
 
-    that.removeCallback = function removeCallback (callbackIndex) {
-        that.callbacksArray.splice(callbackIndex, 1);
+    this.removeCallback = function removeCallback (callbackIndex) {
+        self.callbacksArray.splice(callbackIndex, 1);
     };
 
-    that.callCallbacks = function callCallbacks (newLocation) {
-        that.callbacksArray.forEach(function (callbackFunction) {
+    this.callCallbacks = function callCallbacks (newLocation) {
+        self.callbacksArray.forEach(function (callbackFunction) {
 +           callbackFunction(newLocation);
         });
     };
@@ -89,23 +89,23 @@ function WarningMapService(globalSettings, utilsFactory, iconsService, layersSer
     //  MARKERS
     //
 
-    that.setWarningLocation = function setWarningLocation (newLocation) {
-        that.warningMarker.setLatLng(newLocation);
-        that.callCallbacks(newLocation);
+    this.setWarningLocation = function setWarningLocation (newLocation) {
+        self.warningMarker.setLatLng(newLocation);
+        self.callCallbacks(newLocation);
     };
 
-    that.createWarningMarker = function createWarningMarker (markerLocation) {
+    this.createWarningMarker = function createWarningMarker (markerLocation) {
         var warningIcon = null;
 
         iconsService.getWarningIcon()
             .then(function (icon) {
                 warningIcon = icon;
 
-                that.warningMarker = L.marker(markerLocation, {
+                self.warningMarker = L.marker(markerLocation, {
                     icon: warningIcon
                 });
 
-                that.warningMarker.addTo(that.map);
+                self.warningMarker.addTo(self.map);
             });
     };
 
@@ -113,40 +113,42 @@ function WarningMapService(globalSettings, utilsFactory, iconsService, layersSer
     //  CONTROLS
     //
 
-    that.initMapControls = function initMapControls () {
-        that.setAttribution();
-        that.setZoomControlPosition();
+    this.initMapControls = function initMapControls () {
+        self.setAttribution();
+        self.setZoomControlPosition();
+        self.initCustomsMixins();
+        self.createLayerSwitch();
     };
 
-    that.setZoomControlPosition = function setZoomControlPosition () {
-        that.map.zoomControl.setPosition('topright');
+    this.setZoomControlPosition = function setZoomControlPosition () {
+        self.map.zoomControl.setPosition('topright');
     };
 
-    that.setAttribution = function setAttribution () {
-        that.map.attributionControl.setPrefix(globalSettings.LEAFLET_CONF.ATTRIBUTION);
+    this.setAttribution = function setAttribution () {
+        self.map.attributionControl.setPrefix(globalSettings.LEAFLET_CONF.ATTRIBUTION);
     };
 
 
     //  MAP
     //
 
-    that.getMap = function getMap (mapSelector, element) {
-        if (that.map) {
-            return that.map;
+    this.getMap = function getMap (mapSelector, element) {
+        if (self.map) {
+            return self.map;
         } else {
-            return that.createMap(mapSelector, element);
+            return self.createMap(mapSelector, element);
         }
     };
 
-    that.removeMap = function removeMap () {
-        if (that.map) {
-            that.map.remove();
-            that.map = null;
+    this.removeMap = function removeMap () {
+        if (self.map) {
+            self.map.remove();
+            self.map = null;
         }
     };
 
-    that.createMap = function createMap (mapSelector, element) {
-        that._baseLayers = {
+    this.createMap = function createMap (mapSelector, element) {
+        self._baseLayers = {
             main: layersService.getMainLayersGroup(),
             satellite: L.tileLayer(
                 globalSettings.ORTHOPHOTO_TILELAYERS.LAYER_URL,
@@ -162,17 +164,134 @@ function WarningMapService(globalSettings, utilsFactory, iconsService, layersSer
             minZoom: globalSettings.LEAFLET_CONF.DEFAULT_MIN_ZOOM,
             maxZoom: globalSettings.LEAFLET_CONF.DEFAULT_MAX_ZOOM,
             scrollWheelZoom: true,
-            layers: that._baseLayers.main
+            layers: self._baseLayers.main
         };
-        that.map = L.map(mapSelector, mapParameters);
-        that.initMapControls();
-        that.createWarningMarker(elementLocation);
+        self.map = L.map(mapSelector, mapParameters);
+        self.initMapControls();
+        self.createWarningMarker(elementLocation);
 
-        that.map.on('click', function(e) {
-            that.setWarningLocation(e.latlng);
+        self.map.on('click', function(e) {
+            self.setWarningLocation(e.latlng);
         });
 
-        return that.map;
+        if (globalSettings.ENABLE_TREKS) {
+            self._treksgeoJsonLayer = mapService.createGeoJSONLayer();
+        }
+
+        return self.map;
+    };
+
+    this.initCustomsMixins = function initCustomsMixins () {
+        this.addMapLayersMixin();
+    };
+
+    this.addMapLayersMixin = function addMapLayersMixin () {
+        var LayerSwitcherMixin = {
+
+            isShowingLayer: function (name) {
+                if (this.hasLayer(self._baseLayers[name])) {
+                    return true;
+                }
+                return false;
+            },
+
+            switchLayer: function (destLayer) {
+                var base;
+                for (base in self._baseLayers) {
+                    if (this.hasLayer(self._baseLayers[base]) && self._baseLayers[base] !== self._baseLayers[destLayer]) {
+                        this.removeLayer(self._baseLayers[base]);
+                    }
+                }
+                this.addLayer(self._baseLayers[destLayer]);
+            }
+        };
+
+        L.Map.include(LayerSwitcherMixin);
+    };
+
+    this.createLayerSwitch = function createLayerSwitch () {
+
+        var permanentTileLayersName   = globalSettings.PERMANENT_TILELAYERS_NAME  || 'Default';
+        var orthophotoTileLayersName  = globalSettings.ORTHOPHOTO_TILELAYERS_NAME || 'Satellite';
+        var permanentTileLayersParam  = {};
+
+        permanentTileLayersParam[permanentTileLayersName]  = this._baseLayers.main;
+        permanentTileLayersParam[orthophotoTileLayersName] = this._baseLayers.satellite;
+
+        var layersControl = L.control.switchBackgroundLayers(
+            permanentTileLayersParam,
+            { position: 'bottomleft' }
+        );
+
+        var optionalLayersControl = L.control.backgroundLayers(
+            this._optionalLayers,
+            { position: 'bottomleft' }
+        );
+
+        layersControl.addTo(this.map);
+        optionalLayersControl.addTo(this.map);
+        return true;
+    };
+
+
+
+
+    this.displayDetail = function displayDetail (result, forceRefresh) {
+        var type = '',
+            elementLocation,
+            currentLayer;
+
+        self.maxZoomFitting = globalSettings.DEFAULT_MAX_ZOOM;
+
+        // self.map.off('moveend', self.resultsVisibility);
+
+        // self.loadingMarkers = true;
+        if (result.geometry.type !== "Point" && result.geometry.type !== "MultiPoint") {
+            currentLayer = self._treksgeoJsonLayer;
+            type = 'geojson';
+            elementLocation = [];
+        }
+
+        mapService.createLayerFromElement(result, type, elementLocation, forceRefresh)
+            .then(
+                function (layer) {
+                    currentLayer.addLayer(layer);
+                    if (result.geometry.type !== "Point" && result.geometry.type !== "MultiPoint") {
+                        if (globalSettings.SHOW_ARROWS_ON_ROUTE) {
+                            var className;
+                            if (stylesConfigService.isConfigAvailable) {
+                                className = 'arrow-direction category-' + result.properties.category.id + '-fill-darken';
+                            } else {
+                                className = 'arrow-direction category-' + result.properties.category.id;
+                            }
+                            layer.setText('  >  ', {offset: 6, repeat: true, center: true, attributes: {class: className}});
+                        }
+                        if (globalSettings.ALWAYS_HIGHLIGHT_TREKS) {
+                            mapService.highlightPath(result, true, true);
+                        }
+
+                        var bounds;
+                        if (!(currentLayer instanceof Array)) {
+                            currentLayer = [currentLayer];
+                        }
+                        currentLayer.forEach(function (layer) {
+                            var currentBounds = layer.getBounds();
+                            if (bounds && bounds.extend) {
+                                bounds.extend(currentBounds);
+                            } else {
+                                bounds = currentBounds;
+                            }
+                        });
+                        var fitBoundsOptions = {
+                            padding: 0,
+                            maxZoom: self.maxZoomFitting,
+                            animate: false
+                        };
+                        self.map.fitBounds(bounds, fitBoundsOptions);
+                        self.map.addLayer(self._treksgeoJsonLayer);
+                    }
+                }
+            );
     };
 }
 

@@ -1,8 +1,35 @@
 'use strict';
 
-function WarningPanelController($scope, $rootScope, WarningService, WarningMapService, utilsFactory) {
+function WarningPanelController($scope, $rootScope, $q, resultsService, WarningService, WarningMapService, utilsFactory) {
 
     var onMap = false;
+
+    function updateMapWithDetails(forceRefresh) {
+        var deferred = $q.defer();
+
+        var promise;
+        if (!forceRefresh) {
+            promise = resultsService.getAResultBySlug($stateParams.slug, $stateParams.catSlug, forceRefresh);
+        } else {
+            promise = resultsService.getAResultByID($scope.result.id, $scope.result.properties.category.id, forceRefresh);
+        }
+
+        deferred.resolve(
+            promise
+                .then(
+                    function (data) {
+                        $scope.result = data;
+                        WarningMapService.displayDetail($scope.result, forceRefresh);
+                        $rootScope.elementsLoading --;
+                    }, function () {
+                        $rootScope.elementsLoading --;
+                    }
+                )
+        );
+
+        return deferred.promise;
+    }
+
 
     $scope.initWarningPanel = function initWarningPanel () {
         $scope.showWarningPanel = true;
@@ -52,6 +79,7 @@ function WarningPanelController($scope, $rootScope, WarningService, WarningMapSe
                     $scope.warning.category = categories[0].id.toString();
                     WarningMapService.getMap('warning-map', $scope.result);
                     WarningMapService.addCallback(updateLocation);
+                    updateMapWithDetails(true);
                 })
                 .catch(function (err) {
                     console.error(err);
