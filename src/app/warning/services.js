@@ -81,7 +81,7 @@ function WarningMapService(globalSettings, utilsFactory, iconsService, layersSer
 
     this.callCallbacks = function callCallbacks (newLocation) {
         self.callbacksArray.forEach(function (callbackFunction) {
-+           callbackFunction(newLocation);
+            callbackFunction(newLocation);
         });
     };
 
@@ -168,6 +168,7 @@ function WarningMapService(globalSettings, utilsFactory, iconsService, layersSer
         };
         self.map = L.map(mapSelector, mapParameters);
         self.initMapControls();
+        self._clustersLayer = mapService.createClusterLayer();
         self.createWarningMarker(elementLocation);
 
         self.map.on('click', function(e) {
@@ -175,8 +176,14 @@ function WarningMapService(globalSettings, utilsFactory, iconsService, layersSer
         });
 
         if (globalSettings.ENABLE_TREKS) {
+            self._treksMarkersLayer = mapService.createLayer();
             self._treksgeoJsonLayer = mapService.createGeoJSONLayer();
         }
+
+        if (globalSettings.ENABLE_TOURISTIC_CONTENT || globalSettings.ENABLE_TOURISTIC_EVENTS) {
+            self._touristicsMarkersLayer = mapService.createLayer();
+        }
+
 
         return self.map;
     };
@@ -234,7 +241,26 @@ function WarningMapService(globalSettings, utilsFactory, iconsService, layersSer
     };
 
 
-
+    this.updateBounds = function updateBounds(layers) {
+        var bounds;
+        if (!(layers instanceof Array)) {
+            layers = [layers];
+        }
+        layers.forEach(function (layer) {
+            var currentBounds = layer.getBounds();
+            if (bounds && bounds.extend) {
+                bounds.extend(currentBounds);
+            } else {
+                bounds = currentBounds;
+            }
+        });
+        var fitBoundsOptions = {
+            padding: 0,
+            maxZoom: self.maxZoomFitting,
+            animate: false
+        };
+        self.map.fitBounds(bounds, fitBoundsOptions);
+    };
 
     this.displayDetail = function displayDetail (result, forceRefresh) {
         var type = '',
@@ -243,13 +269,14 @@ function WarningMapService(globalSettings, utilsFactory, iconsService, layersSer
 
         self.maxZoomFitting = globalSettings.DEFAULT_MAX_ZOOM;
 
-        // self.map.off('moveend', self.resultsVisibility);
-
-        // self.loadingMarkers = true;
         if (result.geometry.type !== "Point" && result.geometry.type !== "MultiPoint") {
             currentLayer = self._treksgeoJsonLayer;
             type = 'geojson';
             elementLocation = [];
+        } else {
+            currentLayer = (result.properties.contentType === 'trek' ? self._treksMarkersLayer : self._touristicsMarkersLayer);
+            type = 'category';
+            elementLocation = utilsFactory.getStartPoint(result);
         }
 
         mapService.createLayerFromElement(result, type, elementLocation, forceRefresh)
@@ -269,27 +296,18 @@ function WarningMapService(globalSettings, utilsFactory, iconsService, layersSer
                         if (globalSettings.ALWAYS_HIGHLIGHT_TREKS) {
                             mapService.highlightPath(result, true, true);
                         }
-
-                        var bounds;
-                        if (!(currentLayer instanceof Array)) {
-                            currentLayer = [currentLayer];
-                        }
-                        currentLayer.forEach(function (layer) {
-                            var currentBounds = layer.getBounds();
-                            if (bounds && bounds.extend) {
-                                bounds.extend(currentBounds);
-                            } else {
-                                bounds = currentBounds;
-                            }
-                        });
-                        var fitBoundsOptions = {
-                            padding: 0,
-                            maxZoom: self.maxZoomFitting,
-                            animate: false
-                        };
-                        self.map.fitBounds(bounds, fitBoundsOptions);
                         self.map.addLayer(self._treksgeoJsonLayer);
+                        self.updateBounds(currentLayer);
+                    } else {
+                        self._clustersLayer.addLayer(self._treksMarkersLayer);
+                        self._clustersLayer.addLayer(self._touristicsMarkersLayer);
+                        self.map.addLayer(self._clustersLayer);
+
+                        self.updateBounds([self._clustersLayer]);
+                        var newLocation = {'lat': elementLocation.lat + 0.0001, 'lng': elementLocation.lng + 0.001};
+                        self.setWarningLocation(newLocation);
                     }
+
                 }
             );
     };
