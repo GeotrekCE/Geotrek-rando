@@ -36,14 +36,38 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                         pictogram: angular.copy(aTrek.properties.category.pictogram),
                         type1_label: angular.copy(aTrek.properties.category.type1_label),
                         type2_label: angular.copy(aTrek.properties.category.type2_label),
-                        type1: {type: 'checkbox', values: angular.copy(aTrek.properties.type1) || []},
-                        type2: {type: 'checkbox', values: angular.copy(aTrek.properties.type2) || []},
-                        route: {type: 'checkbox', values: [angular.copy(aTrek.properties.route)] || []},
-                        difficulty: {type: 'range', values: [angular.copy(aTrek.properties.difficulty)] || []},
-                        duration: {type: 'range', values: globalSettings.DURATION_FILTER || []},
-                        ascent: {type: 'range', values: globalSettings.ASCENT_FILTER || []},
-                        eLength: {type: 'range', values: globalSettings.LENGTH_FILTER || []},
-                        themes: {type: 'checkbox', values: angular.copy(aTrek.properties.themes) || []},
+                        type1: {
+                            type: 'checkbox',
+                            values: aTrek.properties.type1 ? angular.copy(aTrek.properties.type1) : []
+                        },
+                        type2: {
+                            type: 'checkbox',
+                            values: aTrek.properties.type2 ? angular.copy(aTrek.properties.type2) : []
+                        },
+                        route: {
+                            type: 'checkbox',
+                            values: aTrek.properties.route ? [angular.copy(aTrek.properties.route)] : []
+                        },
+                        difficulty: {
+                            type: 'range',
+                            values: aTrek.properties.difficulty ? [angular.copy(aTrek.properties.difficulty)] : []
+                        },
+                        duration: {
+                            type: 'range',
+                            values: globalSettings.DURATION_FILTER ? globalSettings.DURATION_FILTER : []
+                        },
+                        ascent: {
+                            type: 'range',
+                            values: globalSettings.ASCENT_FILTER ? globalSettings.ASCENT_FILTER : []
+                        },
+                        eLength: {
+                            type: 'range',
+                            values: globalSettings.LENGTH_FILTER ? globalSettings.LENGTH_FILTER : []
+                        },
+                        themes: {
+                            type: 'checkbox',
+                            values: aTrek.properties.themes ? angular.copy(aTrek.properties.themes) : []
+                        },
                         cat_class: 'category-' + aTrek.properties.category.id.toString()
                     };
 
@@ -185,9 +209,18 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                         pictogram: angular.copy(aContent.properties.category.pictogram),
                         type1_label: angular.copy(aContent.properties.category.type1_label),
                         type2_label: angular.copy(aContent.properties.category.type2_label),
-                        type1: {type: 'checkbox', values: angular.copy(aContent.properties.type1) || []},
-                        type2: {type: 'checkbox', values: angular.copy(aContent.properties.type2) || []},
-                        themes: {type: 'checkbox', values: angular.copy(aContent.properties.themes) || []},
+                        type1: {
+                            type: 'checkbox',
+                            values: aContent.properties.type1 ? angular.copy(aContent.properties.type1) : []
+                        },
+                        type2: {
+                            type: 'checkbox',
+                            values: aContent.properties.type2 ? angular.copy(aContent.properties.type2) : []
+                        },
+                        themes: {
+                            type: 'checkbox',
+                            values: aContent.properties.themes ? angular.copy(aContent.properties.themes) : []
+                        },
                         cat_class: 'category-' + aContent.properties.category.id.toString()
                     };
 
