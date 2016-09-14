@@ -1,4 +1,15 @@
 
+2.14.8 / 2016-09-14
+===================
+
+**Bug fixes**
+
+  * Prevent null value to be added to default category properties
+
+**Enhancements**
+
+  * Refactor warning map service and show trek
+
 2.14.7 / 2016-06-27
 ==================
 
