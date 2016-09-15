@@ -279,7 +279,7 @@ function WarningMapService(globalSettings, utilsFactory, iconsService, layersSer
             elementLocation = utilsFactory.getStartPoint(result);
         }
 
-        mapService.createLayerFromElement(result, type, elementLocation, forceRefresh)
+        mapService.createLayerFromElement(result, type, elementLocation, forceRefresh, false)
             .then(
                 function (layer) {
                     currentLayer.addLayer(layer);

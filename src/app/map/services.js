@@ -249,7 +249,8 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
         });
     };
 
-    this.createLayerFromElement = function createLayerFromElement (element, type, elementLocation, forceRefresh) {
+    this.createLayerFromElement = function createLayerFromElement (element, type, elementLocation, forceRefresh, clickable) {
+        clickable = clickable !== undefined ? clickable : true;
         var deferred = $q.defer();
         var popupSources = {};
         if (type === "geojson" && element.geometry.type !== 'MultiPoint') {
@@ -260,7 +261,8 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                 className =  'layer-category-' + element.properties.category.id + '-' + element.id + ' category-' + element.properties.category.id;
             }
             var geoStyle = {
-                className: className
+                className: className,
+                clickable: clickable
             };
 
             if (element.geometry.type === 'Polygon') {
