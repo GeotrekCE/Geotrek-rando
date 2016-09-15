@@ -346,7 +346,7 @@ msgid "FORM_COMMENT"
 msgstr "Commentaire"
 
 msgid "FORM_MAP"
-msgstr "Emplacement"
+msgstr "Emplacement (cliquez sur la carte pour positionner le marqueur)"
 
 msgid "FORM_SEND"
 msgstr "Signaler"

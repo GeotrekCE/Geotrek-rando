@@ -1,3 +1,10 @@
+2.14.9 / 2016-09-15
+===================
+
+**Bug fixes**
+
+  * Disable click on path on warning map
+  * Fix arrow position between main map an list
 
 2.14.8 / 2016-09-14
 ===================
