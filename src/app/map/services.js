@@ -25,7 +25,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
 
         var controlServices = L.control.backgroundLayers(
             self._servicesMarkersLayer,
-            { position: 'bottomleft', defaultIcon: 'images/icons/services.svg', groupLayers: true }
+            { position: 'bottomleft', defaultIcon: '/images/icons/services.svg', groupLayers: true }
         );
 
         controlServices.addTo(this.map);
