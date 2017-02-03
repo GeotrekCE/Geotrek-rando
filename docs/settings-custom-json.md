@@ -56,5 +56,5 @@ _See [additional settings][] for a complete list of options that can be edited._
 _See [Facebook settings][] to learn how to create an APP ID._
 
 [Additional settings]: settings-custom-json-all-options.md
-[Facebook settings]: https://github.com/makinacorpus/Geotrek-rando/issues/330#issuecomment-175538312
+[Facebook settings]: https://github.com/GeotrekCE/Geotrek-rando/issues/330#issuecomment-175538312
 [JSON]: http://www.json.org/
