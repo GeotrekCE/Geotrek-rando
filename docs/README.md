@@ -39,7 +39,7 @@ _See [contribute][] section for more details about participating to Geotrek-rand
 
 ## Install
 
-Download and extract latest release of Geotrek-Rando from [GitHub](https://github.com/makinacorpus/Geotrek-rando/releases/latest).
+Download and extract latest release of Geotrek-Rando from [GitHub](https://github.com/GeotrekCE/Geotrek-rando/releases/latest).
 
 _You may also download sources by cloning git repository._
 
@@ -69,7 +69,7 @@ npm run watch
 
 ## Software update
 
-Download and extract the latest release of Geotrek-Rando from GitHub (https://github.com/makinacorpus/Geotrek-rando/releases).
+Download and extract the latest release of Geotrek-Rando from GitHub (https://github.com/GeotrekCE/Geotrek-rando/releases).
 
 Before upgrading, READ CAREFULLY the release notes, either from the CHANGES files or online.
 
@@ -138,7 +138,7 @@ If you're wondering what means _Libre_ in [FLOSS][], it essentially imply four f
 [Apache]: https://httpd.apache.org/
 [Browserify]: http://browserify.org/
 [FLOSS]: https://en.wikipedia.org/wiki/Free_and_open-source_software "free/libre and open-source software"
-[Geotrek-admin]: https://github.com/makinacorpus/Geotrek
+[Geotrek-admin]: https://github.com/GeotrekCE/Geotrek-admin
 [Gulp]: http://gulpjs.com/
 [Leaflet]: http://leafletjs.com/
 [Nginx]: http://nginx.org/)
