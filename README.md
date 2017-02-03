@@ -1,6 +1,9 @@
 # GEOTREK RANDO V2 ![master](https://travis-ci.org/GeotrekCE/Geotrek-rando.svg)
 ### Public portal of Geotrek (http://geotrek.fr).
 
+![Portal example](http://geotrek.fr/assets/img/screen-2.png)
+
+Examples: [Grand tour des Ecrins](http://www.grand-tour-ecrins.fr), [Destination Mercantour](http://rando.mercantour.eu), [Vercors Rando](http://rando.parc-du-vercors.fr), [Chemin des Parcs](http://www.cheminsdesparcs.fr/).
 
 ## PREREQUISITES
 
