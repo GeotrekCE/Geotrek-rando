@@ -7,9 +7,11 @@
 > This file should remain a valid [JSON][] file.
 > Remember to check its validity each time you alter it.
 
+To apply changes after editing settings, launch bundling task again with running `npm run dist`
+
 This file should be placed and edited in `custom/`.
 
-### Options
+### Minimal options
 
 #### PLATFORM_ID
 
@@ -35,9 +37,24 @@ Absolute URL to the Geotrek-admin instance used to post data from reporting form
 
 Type: `boolean` Default: `false`
 
-Used to enable or disable AngularJS $location service html5Mode
+Used to enable or disable AngularJS $location service html5Mode.
 
 _See AngularJS documentation for more details about [using $location](https://docs.angularjs.org/guide/$location#hashbang-and-html5-modes)._
 
+#### CENTER_LATITUDE & CENTER_LONGITUDE
 
+Type: `float` Default: `44.83` & `6.34`
+
+Used to center the map on your area. 
+
+### Additional options
+
+_See [additional settings][] for a complete list of options that can be edited._
+
+### Facebook settings
+
+_See [Facebook settings][] to learn how to create an APP ID._
+
+[Additional settings]: settings-custom-json-all-options.md
+[Facebook settings]: https://github.com/makinacorpus/Geotrek-rando/issues/330#issuecomment-175538312
 [JSON]: http://www.json.org/
