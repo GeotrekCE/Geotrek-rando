@@ -65,4 +65,4 @@ _See [Launch build task](docs/README.md#launch-build-task)_
 
 [<img src="http://geotrek.fr/assets/img/parc_ecrins.png">](http://www.ecrins-parcnational.fr)
 [<img src="http://geotrek.fr/assets/img/parc_mercantour.png">](http://www.mercantour.eu)
-[<img src="http://geotrek.fr/assets/img/alpi_maritime.png">](https://www.cevennes-parcnational.fr)
+[<img src="http://geotrek.fr/assets/img/logo-pn-cevennes.png">](https://www.cevennes-parcnational.fr)
