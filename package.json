@@ -1,6 +1,6 @@
 {
   "name": "geotrekrando",
-  "version": "2.14.10",
+  "version": "2.14.11",
   "description": "Geotrek rando public portal of Geotrek",
   "author": "Makina Corpus",
   "main": "src/app/app.js",
