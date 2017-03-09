@@ -20,7 +20,7 @@ msgid "DEFAULT_META_TITLE"
 msgstr "Geotrek Rando"
 
 msgid "DEFAULT_META_DESCRIPTION"
-msgstr "Geotrek est une web app permettant de préparer à l'avance ses randonnées !"
+msgstr ""
 
 
 
@@ -57,6 +57,30 @@ msgstr "Tutto"
 
 msgid "CLOSE"
 msgstr "Vicino"
+
+
+# INFORMATIONS
+#
+#
+
+msgid "I_DURATION"
+msgstr ""
+
+msgid "I_DIFFICULTY"
+msgstr ""
+
+msgid "I_LENGTH"
+msgstr ""
+
+msgid "I_ROUTE"
+msgstr ""
+
+msgid "I_ASCENT"
+msgstr ""
+
+msgid "I_NETWORK"
+msgstr ""
+
 
 # RESULTS
 #
@@ -215,6 +239,21 @@ msgstr ""
 #
 #
 
+msgid "SHOW_ACTIVE_FILTERS"
+msgstr ""
+
+msgid "HIDE_ACTIVE_FILTERS"
+msgstr ""
+
+msgid "SIMPLE_SEARCH"
+msgstr ""
+
+msgid "ADVANCED_SEARCH"
+msgstr ""
+
+msgid "SHOW_MORE"
+msgstr ""
+
 msgid "THEMES"
 msgstr ""
 
@@ -251,7 +290,7 @@ msgstr ""
 #
 
 msgid "SHARING_DEFAULT_TEXT"
-msgstr "Geotrek est vraiment parfait pour préparer son voyage dans la nature !"
+msgstr ""
 
 
 # LAYOUT
@@ -262,7 +301,7 @@ msgid "TOGGLE_NAV"
 msgstr ""
 
 msgid "BANNER_TEXT"
-msgstr "Geotrek Rando"
+msgstr ""
 
 msgid "HOME"
 msgstr ""
@@ -278,6 +317,9 @@ msgstr ""
 
 msgid "PRINT"
 msgstr "Stampa"
+
+msgid "DOWNLOAD"
+msgstr ""
 
 msgid "ADD_FAVS"
 msgstr "Aggiungi ai preferiti"
@@ -316,7 +358,7 @@ msgid "GPX"
 msgstr "Scarica GPX"
 
 msgid "3D"
-msgstr "
+msgstr ""
 
 
 # MAP
@@ -330,6 +372,9 @@ msgid "ZOOM_OUT"
 msgstr ""
 
 msgid "FULL_SCREEN"
+msgstr ""
+
+msgid "EXIT_FULL_SCREEN"
 msgstr ""
 
 msgid "RECENTER_VIEW"

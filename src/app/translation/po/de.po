@@ -23,13 +23,6 @@ msgid "DEFAULT_META_DESCRIPTION"
 msgstr "Geotrek ist eine Web-App mit dem Sie Ihren Trekking- Reise vorzubereiten !"
 
 
-# HEADER
-#
-#
-
-msgid "LOGO_ALT"
-msgstr "Geotrek logo"
-
 
 # CATEGORIES
 #
@@ -39,7 +32,7 @@ msgid "CATEGORIES"
 msgstr "Kategorien"
 
 msgid "CLEAR"
-msgstr "Réinitialiser"
+msgstr ""
 
 msgid "ROUTES"
 msgstr "Routen"
@@ -53,6 +46,9 @@ msgstr "Dauer"
 msgid "ASCENT"
 msgstr "Anstieg"
 
+msgid "LENGTH"
+msgstr ""
+
 msgid "DATE_FILTER"
 msgstr "Datum"
 
@@ -61,6 +57,29 @@ msgstr "Alles"
 
 msgid "CLOSE"
 msgstr "Schließen"
+
+
+# INFORMATIONS
+#
+#
+
+msgid "I_DURATION"
+msgstr ""
+
+msgid "I_DIFFICULTY"
+msgstr ""
+
+msgid "I_LENGTH"
+msgstr ""
+
+msgid "I_ROUTE"
+msgstr ""
+
+msgid "I_ASCENT"
+msgstr ""
+
+msgid "I_NETWORK"
+msgstr ""
 
 
 # RESULTS
@@ -155,6 +174,12 @@ msgstr "Kulturerbe"
 msgid "NEAR"
 msgstr "In der Umgebung"
 
+msgid "CHILDREN"
+msgstr ""
+
+msgid "PARENT"
+msgstr ""
+
 msgid "PROFILE_ALTI"
 msgstr "Höhenmessungsprofil"
 
@@ -204,15 +229,30 @@ msgid "PRATICAL_INFOS"
 msgstr "praktische Informationen:"
 
 msgid "SUCCESS_WARNING"
-msgstr "Your message has been sent. Thank you for your help!"
+msgstr ""
 
 msgid "ERROR_WARNING"
-msgstr "Your message couldn't been sent. Please excuse us for the inconvenience. Our team is already on it!"
+msgstr ""
 
 
 # FILTERS
 #
 #
+
+msgid "SHOW_ACTIVE_FILTERS"
+msgstr ""
+
+msgid "HIDE_ACTIVE_FILTERS"
+msgstr ""
+
+msgid "SIMPLE_SEARCH"
+msgstr ""
+
+msgid "ADVANCED_SEARCH"
+msgstr ""
+
+msgid "SHOW_MORE"
+msgstr ""
 
 msgid "THEMES"
 msgstr "Themen"
@@ -278,6 +318,9 @@ msgstr "zurück zur Karte"
 msgid "PRINT"
 msgstr "Dokument drucken"
 
+msgid "DOWNLOAD"
+msgstr ""
+
 msgid "ADD_FAVS"
 msgstr "zu meinen Favoriten hinzufügen"
 
@@ -331,6 +374,9 @@ msgstr "entzoomen"
 msgid "FULL_SCREEN"
 msgstr "Vollbildschirm"
 
+msgid "EXIT_FULL_SCREEN"
+msgstr ""
+
 msgid "RECENTER_VIEW"
 msgstr "Karte zentrieren"
 
@@ -356,6 +402,14 @@ msgstr "diese Seite nicht mehr anzeigen"
 
 msgid "SUGGESTED"
 msgstr "unsere Vorlieben"
+
+
+# HEADER
+#
+#
+
+msgid "LOGO_ALT"
+msgstr "Geotrek logo"
 
 
 # FOOTER

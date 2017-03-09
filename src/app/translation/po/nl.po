@@ -32,7 +32,7 @@ msgid "CATEGORIES"
 msgstr "Categorieën"
 
 msgid "CLEAR"
-msgstr "Réinitialiser"
+msgstr ""
 
 msgid "ROUTES"
 msgstr "Route"
@@ -46,6 +46,9 @@ msgstr "Duur"
 msgid "ASCENT"
 msgstr "Hoogteverschil"
 
+msgid "LENGTH"
+msgstr ""
+
 msgid "DATE_FILTER"
 msgstr "Datum"
 
@@ -54,6 +57,29 @@ msgstr "Alle"
 
 msgid "CLOSE"
 msgstr "Close"
+
+
+# INFORMATIONS
+#
+#
+
+msgid "I_DURATION"
+msgstr ""
+
+msgid "I_DIFFICULTY"
+msgstr ""
+
+msgid "I_LENGTH"
+msgstr ""
+
+msgid "I_ROUTE"
+msgstr ""
+
+msgid "I_ASCENT"
+msgstr ""
+
+msgid "I_NETWORK"
+msgstr ""
 
 
 # RESULTS
@@ -148,6 +174,12 @@ msgstr "Erfgoed"
 msgid "NEAR"
 msgstr "In de omgeving"
 
+msgid "CHILDREN"
+msgstr ""
+
+msgid "PARENT"
+msgstr ""
+
 msgid "PROFILE_ALTI"
 msgstr "Hoogteprofiel"
 
@@ -206,6 +238,21 @@ msgstr "Your message couldn't been sent. Please excuse us for the inconvenience.
 # FILTERS
 #
 #
+
+msgid "SHOW_ACTIVE_FILTERS"
+msgstr ""
+
+msgid "HIDE_ACTIVE_FILTERS"
+msgstr ""
+
+msgid "SIMPLE_SEARCH"
+msgstr ""
+
+msgid "ADVANCED_SEARCH"
+msgstr ""
+
+msgid "SHOW_MORE"
+msgstr ""
 
 msgid "THEMES"
 msgstr "Thema's"
@@ -271,6 +318,9 @@ msgstr "Terug naar de kaart"
 msgid "PRINT"
 msgstr "De kaart printen"
 
+msgid "DOWNLOAD"
+msgstr ""
+
 msgid "ADD_FAVS"
 msgstr "Toevoegen aan mijn favorieten"
 
@@ -323,6 +373,9 @@ msgstr "Uitzoomen"
 
 msgid "FULL_SCREEN"
 msgstr "Volbeeld"
+
+msgid "EXIT_FULL_SCREEN"
+msgstr ""
 
 msgid "RECENTER_VIEW"
 msgstr "De kaart centreren"

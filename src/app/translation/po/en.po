@@ -236,7 +236,6 @@ msgid "ERROR_WARNING"
 msgstr "Your message couldn't been sent. Please excuse us for the inconvenience. Our team is already on it!"
 
 
-
 # FILTERS
 #
 #
@@ -265,6 +264,9 @@ msgstr "Districts"
 msgid "ALL_DISTRICTS"
 msgstr "All districts"
 
+msgid "SEARCH"
+msgstr "Search"
+
 msgid "CITIES"
 msgstr "Cities"
 
@@ -276,12 +278,6 @@ msgstr "Structures"
 
 msgid "ALL_STRUCTURES"
 msgstr "All structures"
-
-msgid "SEARCH"
-msgstr "Search"
-
-msgid "AREAS"
-msgstr "Areas"
 
 msgid "RESET"
 msgstr "Reset"
@@ -415,7 +411,6 @@ msgstr "The ones we love:"
 
 msgid "LOGO_ALT"
 msgstr "Geotrek logo"
-
 
 
 # FOOTER
