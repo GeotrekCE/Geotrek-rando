@@ -2,7 +2,7 @@
     <li
         class="result results-item category-{{::result.properties.category.id}}"
         id="result-category-{{::result.uid}}"
-        ng-repeat="result in elements | filter: filter | orderBy: ['properties.begin_date', 'properties.stepNumber', 'properties.name'] track by result.luid"
+        ng-repeat="result in elements | filter: filter | orderBy: ['randomize', 'properties.begin_date', 'properties.stepNumber', 'properties.name'] track by result.luid"
         ng-class="{'no-theme': result.properties.themes.length === 0, 'not-in-viewport': !result.isOnMap && (type !== 'aside')}">
 
         <div class="result-fav-control fav-or-not" ng-click="toggleFavorites(result)" ng-class="{isFav: isInFavorites(result)}">

@@ -443,6 +443,8 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
                 function () {
                     simpleEach($rootScope.allResults[lang], function (result) {
 
+                        result.randomize = globalSettings.RANDOMIZE_RESULTS ? (result.randomize || Math.random()) : false;
+
                         if (!result.prefiltering) { result.prefiltering = {}; }
 
                         if (result.prefiltering[filters.footprint] === true) {

@@ -37,6 +37,7 @@
     "DEFAULT_ACTIVE_CATEGORIES": ["T"],
     "LIST_EXCLUDE_CATEGORIES": [],
     "ENABLE_UNIQUE_CAT": false,
+    "RANDOMIZE_RESULTS": false,
     "FILTERS_DEFAULT_OPEN": false,
     "DEFAULT_INTEREST": "pois",
     "FACEBOOK_APP_ID": "",
