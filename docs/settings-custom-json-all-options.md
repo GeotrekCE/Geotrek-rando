@@ -1,9 +1,16 @@
-# GEOTREK RANDO V2 - Settings
+# Geotrek-rando documentation
+
+‹ Back to [Settings & customization](settings.md)
+
+## settings.custom.json
 
 In order to extend the default configuration, you just need to add your customisation to the `custom/settings.custom.json` main object.
 **You don't need to set all the values, just the one you want to be different from the default configuration.**
 
-After editing this file, run ``npm run dist`` to apply changes.
+> This file should remain a valid [JSON][] file.
+> Remember to check its validity each time you alter it.
+
+To apply changes after editing settings, launch bundling task again with running `npm run dist`
 
 ## Global settings
 
@@ -228,3 +235,5 @@ label | String | cf [Default filters objects](#default-filters-objects) | Text s
     { "id": 99999, "label": ">30km"}
 ]
 ```
+
+[JSON]: http://www.json.org/
