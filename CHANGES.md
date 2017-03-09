@@ -1,9 +1,9 @@
-2.14.12.dev0
-====================
+2.15.0 / 2017-03-09
+===================
 
-**Bug fixes**
+**Enhancements**
 
-*
+* Add a config option allowing to randomize results display
 
 2.14.11 / 2017-03-01
 ====================
