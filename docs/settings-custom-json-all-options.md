@@ -36,6 +36,7 @@ RULES_FLAT_PAGES_ID | string | `""` | Specify the rules flat-page id which will 
 FAVORITES_ICON | String ([font awesome icon](http://fortawesome.github.io/Font-Awesome/icons/)) | `"heart"` | Specify the icon used for the favorites on the website. It must be a valid font awesome icon.
 SHARE_ICON | String ([font awesome icon](http://fortawesome.github.io/Font-Awesome/icons/)) | `"share-alt"` | Specify the icon used for the favorites on the website. It must be a valid font awesome icon.
 PLACEHOLDER_IMAGE | string(file name) | `""` | Placeholder used for contents elements.
+RANDOMIZE_RESULTS | Boolean | `false` | If true, items are randomized in results list
 
 ### Favicon options
 All the options are required
