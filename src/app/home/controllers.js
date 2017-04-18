@@ -49,7 +49,7 @@ function HomeController($scope, $rootScope, $state, categoriesService, $location
 
     rootScopeEvents.push(
         $rootScope.$on('startSwitchGlobalLang', function () {
-            $scope.initHome();
+            window.location = window.location.origin;
         })
     );
 

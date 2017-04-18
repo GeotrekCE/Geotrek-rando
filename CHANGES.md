@@ -3,7 +3,7 @@
 
 **Bug fixes**
 
-*
+* Fix language switcher on home page (workaround with reloading)
 
 2.15.0 / 2017-03-09
 ===================
