@@ -29,10 +29,10 @@ msgstr ""
 #
 
 msgid "CATEGORIES"
-msgstr ""
+msgstr "Categorie"
 
 msgid "CLEAR"
-msgstr "Réinitialiser"
+msgstr "Resetta"
 
 msgid "ROUTES"
 msgstr "Percorso"
@@ -64,22 +64,22 @@ msgstr "Vicino"
 #
 
 msgid "I_DURATION"
-msgstr ""
+msgstr "Durata"
 
 msgid "I_DIFFICULTY"
-msgstr ""
+msgstr "Difficoltà"
 
 msgid "I_LENGTH"
-msgstr ""
+msgstr "Lunghezza"
 
 msgid "I_ROUTE"
-msgstr ""
+msgstr "Percorso"
 
 msgid "I_ASCENT"
-msgstr ""
+msgstr "Dislivello"
 
 msgid "I_NETWORK"
-msgstr ""
+msgstr "Rete"
 
 
 # RESULTS
@@ -112,55 +112,55 @@ msgstr "No preferiti"
 #
 
 msgid "CATEGORY"
-msgstr ""
+msgstr "Categoria"
 
 msgid "INFORMATIONS"
 msgstr "Informazioni"
 
 msgid "START"
-msgstr "Partenza condivisa :"
+msgstr "Punto di partenza"
 
 msgid "ARRIVAL"
-msgstr ""
+msgstr "Arrivo"
 
 msgid "LOOP"
-msgstr ""
+msgstr "Anello"
 
 msgid "TOWN_START"
-msgstr ""
+msgstr "Partenza da un paese"
 
 msgid "TOWN_CROSSED"
-msgstr ""
+msgstr "Traversata di paese"
 
 msgid "PARK_CENTERED"
 msgstr ""
 
 msgid "TRANSPORTS"
-msgstr ""
+msgstr "Trasporti"
 
 msgid "ACCESS"
 msgstr "Accesso"
 
 msgid "PARKING"
-msgstr "Stationnement :"
+msgstr "Parcheggio :"
 
 msgid "INFORMATION_DESKS"
 msgstr "Ufficio Informazioni"
 
 msgid "CONTACT"
-msgstr ""
+msgstr "Contatti"
 
 msgid "SOURCE"
-msgstr ""
+msgstr "Fonte"
 
 msgid "KNOW_MORE"
-msgstr ""
+msgstr "Saperne di più"
 
 msgid "RELATED_TREKS"
 msgstr "Itinerari collegati"
 
 msgid "HAS_COMMON_DEPARTURE"
-msgstr ""
+msgstr "Partenza comune"
 
 msgid "HAS_COMMON_EDGE"
 msgstr ""
@@ -169,16 +169,16 @@ msgid "IS_CIRCUIT_STEP"
 msgstr ""
 
 msgid "POI"
-msgstr "Patrimonio"
+msgstr "Punti d'interesse"
 
 msgid "NEAR"
-msgstr ""
+msgstr "Vicino"
 
 msgid "CHILDREN"
-msgstr ""
+msgstr "Bambino"
 
 msgid "PARENT"
-msgstr ""
+msgstr "Relativo"
 
 msgid "PROFILE_ALTI"
 msgstr "Profilo altimetrico"
@@ -187,10 +187,10 @@ msgid "ELEVATIION_IN_M"
 msgstr "Quota (m)"
 
 msgid "MIN"
-msgstr ""
+msgstr "Min"
 
 msgid "MAX"
-msgstr ""
+msgstr "max"
 
 msgid "LENGTH_IN_M"
 msgstr "Lunghezza (m)"
@@ -205,28 +205,28 @@ msgid "WEBSITE"
 msgstr "Sito web"
 
 msgid "EMAIL"
-msgstr ""
+msgstr "Email"
 
 msgid "MEETING_POINT"
-msgstr ""
+msgstr "Punto di ritrovo"
 
 msgid "MEETING_TIME"
-msgstr ""
+msgstr "Orario di ritrovo"
 
 msgid "SPEAKERS"
 msgstr ""
 
 msgid "BOOKING"
-msgstr ""
+msgstr "Prenotazione"
 
 msgid "ORGANIZERS"
-msgstr ""
+msgstr "Organizzatori"
 
 msgid "PARTICIPANTS_NUMBER"
-msgstr ""
+msgstr "Numero partecipanti"
 
 msgid "PRATICAL_INFOS"
-msgstr ""
+msgstr "Informazioni pratiche"
 
 msgid "SUCCESS_WARNING"
 msgstr ""
@@ -240,22 +240,22 @@ msgstr ""
 #
 
 msgid "SHOW_ACTIVE_FILTERS"
-msgstr ""
+msgstr "Visualizzare i filtri attivi"
 
 msgid "HIDE_ACTIVE_FILTERS"
-msgstr ""
+msgstr "Nascondi filtri attivi"
 
 msgid "SIMPLE_SEARCH"
-msgstr ""
+msgstr "Ricerca semplice"
 
 msgid "ADVANCED_SEARCH"
-msgstr ""
+msgstr "Ricerca avanzata"
 
 msgid "SHOW_MORE"
-msgstr ""
+msgstr "Scopri di più"
 
 msgid "THEMES"
-msgstr ""
+msgstr "Tema"
 
 msgid "DISTRICTS"
 msgstr ""
@@ -270,19 +270,19 @@ msgid "CITIES"
 msgstr "Comuni"
 
 msgid "ALL_CITIES"
-msgstr ""
+msgstr "Tutti i comuni"
 
 msgid "STRUCTURES"
-msgstr ""
+msgstr "Struttura"
 
 msgid "ALL_STRUCTURES"
-msgstr ""
+msgstr "Tutte le strutture"
 
 msgid "RESET"
-msgstr ""
+msgstr "Cancellare"
 
 msgid "SELECTED"
-msgstr ""
+msgstr "Selezionato"
 
 
 # SOCIAL
@@ -290,7 +290,7 @@ msgstr ""
 #
 
 msgid "SHARING_DEFAULT_TEXT"
-msgstr ""
+msgstr "Condividere il testo predefinito"
 
 
 # LAYOUT
@@ -304,22 +304,22 @@ msgid "BANNER_TEXT"
 msgstr ""
 
 msgid "HOME"
-msgstr ""
+msgstr "Homepage"
 
 msgid "SEARCH_LIST"
-msgstr ""
+msgstr "Lista di ricerca"
 
 msgid "ABOUT_US"
-msgstr ""
+msgstr "Su di noi"
 
 msgid "BACK"
-msgstr ""
+msgstr "Indietro"
 
 msgid "PRINT"
 msgstr "Stampa"
 
 msgid "DOWNLOAD"
-msgstr ""
+msgstr "Scaricare"
 
 msgid "ADD_FAVS"
 msgstr "Aggiungi ai preferiti"
@@ -328,10 +328,10 @@ msgid "REMOVE_FAVS"
 msgstr "Elimina dai preferiti"
 
 msgid "SHARE"
-msgstr "Spartire"
+msgstr "Condividere"
 
 msgid "WARNING"
-msgstr ""
+msgstr "Attento"
 
 msgid "FORM_NAME"
 msgstr ""
@@ -358,7 +358,7 @@ msgid "GPX"
 msgstr "Scarica GPX"
 
 msgid "3D"
-msgstr ""
+msgstr "3D"
 
 
 # MAP
@@ -366,16 +366,16 @@ msgstr ""
 #
 
 msgid "ZOOM_IN"
-msgstr ""
+msgstr "Ingrandire"
 
 msgid "ZOOM_OUT"
-msgstr ""
+msgstr "Ridurre"
 
 msgid "FULL_SCREEN"
-msgstr ""
+msgstr "Tutto schermo"
 
 msgid "EXIT_FULL_SCREEN"
-msgstr ""
+msgstr "Esci tutto schermo"
 
 msgid "RECENTER_VIEW"
 msgstr ""
@@ -395,13 +395,13 @@ msgstr ""
 #
 
 msgid "ACCESS_SITE"
-msgstr ""
+msgstr "Accedi al sito"
 
 msgid "DONT_SHOW_HOME"
 msgstr ""
 
 msgid "SUGGESTED"
-msgstr ""
+msgstr "Suggerimeti"
 
 
 # HEADER
@@ -417,10 +417,10 @@ msgstr "Logo Geotrek"
 #
 
 msgid "LEGALS"
-msgstr ""
+msgstr "Note legali"
 
 msgid "CREDITS"
-msgstr ""
+msgstr "Referenze"
 
 msgid "CONTACT"
-msgstr ""
+msgstr "Contatto"
