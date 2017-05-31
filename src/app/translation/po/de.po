@@ -154,7 +154,7 @@ msgid "SOURCE"
 msgstr "Source"
 
 msgid "KNOW_MORE"
-msgstr "weitere Informationen"
+msgstr "Weitere Informationen"
 
 msgid "RELATED_TREKS"
 msgstr "verwandte Wanderungen"
@@ -252,7 +252,7 @@ msgid "ADVANCED_SEARCH"
 msgstr ""
 
 msgid "SHOW_MORE"
-msgstr ""
+msgstr "Mehr"
 
 msgid "THEMES"
 msgstr "Themen"
