@@ -1,9 +1,10 @@
-2.15.1-dev
+2.15.1 / 2017-05-31
 ===================
 
 **Bug fixes**
 
 * Fix language switcher on home page (workaround with reloading)
+* Fix de translation
 
 2.15.0 / 2017-03-09
 ===================
