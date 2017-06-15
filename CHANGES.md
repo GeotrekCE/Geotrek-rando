@@ -3,7 +3,8 @@
 
 **Bug fixes**
 
-*
+* Fix URLs in README
+* Fix it translation
 
 2.16.0 / 2017-06-15
 ===================
