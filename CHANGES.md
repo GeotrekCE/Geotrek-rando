@@ -1,9 +1,9 @@
-2.15.2-dev0
+2.16.0 / 2017-06-15
 ===================
 
 **Enhancements**
 
-* Add a function to switch to specific category and routes
+* Add a function to switch to specific category and routes from home page
 
 2.15.1 / 2017-05-31
 ===================
