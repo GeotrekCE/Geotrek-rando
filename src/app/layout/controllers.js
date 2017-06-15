@@ -71,6 +71,26 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
         }
     };
 
+    $scope.accessSpecificCategoryAndRoute = function accessSpecificCategoryAndRoute (currentCategory, currentRoute) {
+        $state.go('layout.root');
+        if (typeof currentCategory !== 'object') {
+            currentCategory = [currentCategory];
+        }
+        if (typeof currentRoute !== 'object') {
+            currentRoute = [currentRoute];
+        }
+        $rootScope.activeFilters.categories = currentCategory;
+        $rootScope.activeFilters[currentCategory + "_route"] = currentRoute;
+        filtersService.updateActiveFilters($rootScope.activeFilters);
+        $rootScope.$broadcast('updateResultsList', true);
+
+        $rootScope.activeFiltersTags = filtersService.getTagFilters();
+
+        if ($rootScope.showHome) {
+            $rootScope.showHome = false;
+        }
+    };
+
     iniDefaultMeta();
 
     if ($state.current.name === 'layout.root') {

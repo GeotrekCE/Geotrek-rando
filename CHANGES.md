@@ -1,9 +1,9 @@
 2.15.2-dev0
 ===================
 
-**Bug fixes**
+**Enhancements**
 
-*
+* Add a function to switch to specific category and routes
 
 2.15.1 / 2017-05-31
 ===================
