@@ -1,9 +1,9 @@
-2.16.2-dev0
-===========
+2.16.2 / 2017-06-21
+===================
 
 **Bug fixes**
 
-*
+* Fix altimetric profile when going on a detail page again
 
 2.16.1 / 2017-06-15
 ===================

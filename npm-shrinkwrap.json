@@ -1,6 +1,6 @@
 {
   "name": "geotrekrando",
-  "version": "2.16.2-dev0",
+  "version": "2.16.2",
   "dependencies": {
     "angular": {
       "version": "1.4.9",
