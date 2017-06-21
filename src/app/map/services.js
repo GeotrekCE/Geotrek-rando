@@ -830,7 +830,9 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                 }
 
                 function updateSparkline() {
-                    jQuery('#elevation .detail-content-elevation-canvas').sparkline(data.profile, sparklineOptions);
+                    setTimeout(function() {
+                        jQuery('#elevation .detail-content-elevation-canvas').sparkline(data.profile, sparklineOptions);
+                    }, 200);
                 }
 
                 updateSparkline();
