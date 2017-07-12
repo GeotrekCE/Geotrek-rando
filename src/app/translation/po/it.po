@@ -411,32 +411,6 @@ msgstr "Suggerimeti"
 msgid "LOGO_ALT"
 msgstr "Logo Geotrek"
 
-msgid "HEADER_MENU_TREKKING"
-msgstr "Escursioni"
-
-msgid "HEADER_MENU_TREK1DAY"
-msgstr "Escursioni in giornata"
-
-msgid "HEADER_MENU_ITINERANCY"
-msgstr "Percorsi a tappe"
-
-msgid "HEADER_MENU_SERVICES"
-msgstr "Servizi"
-
-msgid "HEADER_MENU_SEJOURS"
-msgstr "Soggiorni"
-
-msgid "HEADER_MENU_HEBERGEMENT"
-msgstr "Struttura di accoglienza"
-
-msgid "HEADER_MENU_DISCOVERY"
-msgstr "Sorties e scoperte"
-
-msgid "HEADER_MENU_PRODUCTS"
-msgstr "Prodotti locali"
-
-msgid "HEADER_MENU_EVENTS"
-msgstr "Eventi"
 
 # FOOTER
 #
