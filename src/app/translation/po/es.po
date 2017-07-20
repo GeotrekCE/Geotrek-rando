@@ -1,0 +1,426 @@
+msgid ""
+msgstr ""
+"Project: Geotrek-rando\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+"X-Generator: Poedit 1.7.4\n"
+
+# META
+#
+#
+
+msgid "DEFAULT_META_TITLE"
+msgstr "Geotrek Rando"
+
+msgid "DEFAULT_META_DESCRIPTION"
+msgstr "Geotrek es una aplicación web para preparar con antelación sus senderismos !"
+
+
+
+# CATEGORIES
+#
+#
+
+msgid "CATEGORIES"
+msgstr "Categorías"
+
+msgid "CLEAR"
+msgstr "Reiniciar"
+
+msgid "ROUTES"
+msgstr "Caminos"
+
+msgid "DIFFICULTIES"
+msgstr "Dificultad :"
+
+msgid "DURATION"
+msgstr "Tiempo :"
+
+msgid "ASCENT"
+msgstr "Desnivel positivo :"
+
+msgid "LENGTH"
+msgstr "Distancia :"
+
+msgid "DATE_FILTER"
+msgstr "Entre el ... y el ..."
+
+msgid "ALL"
+msgstr "Todos"
+
+msgid "CLOSE"
+msgstr "Cerrar"
+
+
+# INFORMATIONS
+#
+#
+
+msgid "I_DURATION"
+msgstr "Tiempo"
+
+msgid "I_DIFFICULTY"
+msgstr "Dificultad"
+
+msgid "I_LENGTH"
+msgstr "Distancia"
+
+msgid "I_ROUTE"
+msgstr "Caminos"
+
+msgid "I_ASCENT"
+msgstr "Desnivel positivo"
+
+msgid "I_NETWORK"
+msgstr "Señalización"
+
+
+# RESULTS
+#
+#
+
+msgid "RESULT"
+msgstr "Resultado"
+
+msgid "RESULTS"
+msgstr "Resultados"
+
+msgid "NO_RESULTS"
+msgstr "No resultados correspondientes a la investigación"
+
+
+# FAVORITES
+#
+#
+
+msgid "FAVORITES"
+msgstr "Favoritos"
+
+msgid "NO_FAVORITES"
+msgstr "No favoritos !"
+
+
+# DETAILS
+#
+#
+
+msgid "CATEGORY"
+msgstr "Categorías"
+
+msgid "INFORMATIONS"
+msgstr "Información"
+
+msgid "START"
+msgstr "Salida :"
+
+msgid "ARRIVAL"
+msgstr "Llegada :"
+
+msgid "LOOP"
+msgstr "Salida / Llegada :"
+
+msgid "TOWN_START"
+msgstr "Municipio :"
+
+msgid "TOWN_CROSSED"
+msgstr "Municipio atravesado :"
+
+msgid "PARK_CENTERED"
+msgstr "Este itinerario está en el corazón del Parque nacional. Consultar el reglamento."
+
+msgid "TRANSPORTS"
+msgstr "Transportes públicos"
+
+msgid "ACCESS"
+msgstr "Acceso por carretera"
+
+msgid "PARKING"
+msgstr "Estacionamiento recomendado :"
+
+msgid "INFORMATION_DESKS"
+msgstr "Puntos de información"
+
+msgid "CONTACT"
+msgstr "Contactos"
+
+msgid "SOURCE"
+msgstr "Origen"
+
+msgid "KNOW_MORE"
+msgstr "Saber más"
+
+msgid "RELATED_TREKS"
+msgstr "Itinerarios relacionados"
+
+msgid "HAS_COMMON_DEPARTURE"
+msgstr "Misma salida :"
+
+msgid "HAS_COMMON_EDGE"
+msgstr "En el camino :"
+
+msgid "IS_CIRCUIT_STEP"
+msgstr "Etapas :"
+
+msgid "POI"
+msgstr "Patrimonio"
+
+msgid "NEAR"
+msgstr "En las proximidades"
+
+msgid "CHILDREN"
+msgstr "Etapas"
+
+msgid "PARENT"
+msgstr "Estancia"
+
+msgid "PROFILE_ALTI"
+msgstr "Perfil altimétrico"
+
+msgid "ELEVATIION_IN_M"
+msgstr "Altitud (m)"
+
+msgid "MIN"
+msgstr "Mínimo :"
+
+msgid "MAX"
+msgstr "Máximo :"
+
+msgid "LENGTH_IN_M"
+msgstr "Distancia (m)"
+
+msgid "DATES"
+msgstr "Fechas :"
+
+msgid "DATE"
+msgstr "Fecha :"
+
+msgid "WEBSITE"
+msgstr "Sitio web :"
+
+msgid "EMAIL"
+msgstr "Correo electrónico :"
+
+msgid "MEETING_POINT"
+msgstr "Lugar para cita :"
+
+msgid "MEETING_TIME"
+msgstr "Hora para cita :"
+
+msgid "SPEAKERS"
+msgstr "Oradores :"
+
+msgid "BOOKING"
+msgstr "Reservaciones :"
+
+msgid "ORGANIZERS"
+msgstr "Organizadores :"
+
+msgid "PARTICIPANTS_NUMBER"
+msgstr "Número de participantes :"
+
+msgid "PRATICAL_INFOS"
+msgstr "Información útil :"
+
+msgid "SUCCESS_WARNING"
+msgstr "Mensaje fue registrado. Gracias por su ayuda !"
+
+msgid "ERROR_WARNING"
+msgstr "Mensaje no fue registrado. Disculpen este inconveniente mientras nosotros avisamos a nuestros informáticos."
+
+
+# FILTERS
+#
+#
+
+msgid "SHOW_ACTIVE_FILTERS"
+msgstr "Ver los filtros activos"
+
+msgid "HIDE_ACTIVE_FILTERS"
+msgstr "Enmascarar los filtros activos"
+
+msgid "SIMPLE_SEARCH"
+msgstr "Menos criterios"
+
+msgid "ADVANCED_SEARCH"
+msgstr "Más criterios"
+
+msgid "SHOW_MORE"
+msgstr "Saber más"
+
+msgid "THEMES"
+msgstr "Temas"
+
+msgid "DISTRICTS"
+msgstr "Sectores geográficos"
+
+msgid "ALL_DISTRICTS"
+msgstr "Todos los sectores"
+
+msgid "SEARCH"
+msgstr "Buscar"
+
+msgid "CITIES"
+msgstr "Municipios"
+
+msgid "ALL_CITIES"
+msgstr "Todos los municipios"
+
+msgid "STRUCTURES"
+msgstr "Estructuras"
+
+msgid "ALL_STRUCTURES"
+msgstr "Todas las estructuras"
+
+msgid "RESET"
+msgstr "Reiniciar"
+
+msgid "SELECTED"
+msgstr "Selección"
+
+
+# SOCIAL
+#
+#
+
+msgid "SHARING_DEFAULT_TEXT"
+msgstr "Geotrek es realmente perfecto para preparar su visita en la naturaleza !"
+
+
+# LAYOUT
+#
+#
+
+msgid "TOGGLE_NAV"
+msgstr "Abrir el menú desplegable"
+
+msgid "BANNER_TEXT"
+msgstr "Geotrek Rando"
+
+msgid "HOME"
+msgstr "Ver la página principal"
+
+msgid "SEARCH_LIST"
+msgstr "Ver la página de investigación"
+
+msgid "ABOUT_US"
+msgstr "Saber más"
+
+msgid "BACK"
+msgstr "Ir a la mapa"
+
+msgid "PRINT"
+msgstr "Imprimir la ficha"
+
+msgid "DOWNLOAD"
+msgstr "Descargar"
+
+msgid "ADD_FAVS"
+msgstr "Agregar a mi favoritos"
+
+msgid "REMOVE_FAVS"
+msgstr "Retirar de mi favoritos"
+
+msgid "SHARE"
+msgstr "Compartir"
+
+msgid "WARNING"
+msgstr "Señalar un problema"
+
+msgid "FORM_NAME"
+msgstr "Nombre"
+
+msgid "FORM_EMAIL"
+msgstr "Correo electrónico"
+
+msgid "FORM_CATEGORY"
+msgstr "Categoría"
+
+msgid "FORM_COMMENT"
+msgstr "Comentario"
+
+msgid "FORM_MAP"
+msgstr "Paradero (hacer clic sobre la mapa para posicionar el cursor)"
+
+msgid "FORM_SEND"
+msgstr "Informar"
+
+msgid "KML"
+msgstr "Descargar fichero KML"
+
+msgid "GPX"
+msgstr "Descargar fichero GPX"
+
+msgid "3D"
+msgstr "Ver itinerario 3D"
+
+
+# MAP
+#
+#
+
+msgid "ZOOM_IN"
+msgstr "Hacer zoom (foco)"
+
+msgid "ZOOM_OUT"
+msgstr "Hacer zoom (alejado)"
+
+msgid "FULL_SCREEN"
+msgstr "Pleno monitor"
+
+msgid "EXIT_FULL_SCREEN"
+msgstr "Sacarte del pleno monitor"
+
+msgid "RECENTER_VIEW"
+msgstr "Centrarse la mapa"
+
+msgid "TILES_SWITCH"
+msgstr "Cambiar el fondo cartográfico"
+
+msgid "SERVICES_TOGGLE"
+msgstr "Activar / ocultar los servicios"
+
+msgid "VIEWPORT_FILTERING"
+msgstr "Utilizar la mapa para filtrar"
+
+
+# HOME PAGE
+#
+#
+
+msgid "ACCESS_SITE"
+msgstr "Acceder al sitio web"
+
+msgid "DONT_SHOW_HOME"
+msgstr "No exhibir más esta página"
+
+msgid "SUGGESTED"
+msgstr "Recomendaciones especiales :"
+
+
+# HEADER
+#
+#
+
+msgid "LOGO_ALT"
+msgstr "Logo Geotrek"
+
+
+# FOOTER
+#
+#
+
+msgid "LEGALS"
+msgstr "Avisos legales"
+
+msgid "CREDITS"
+msgstr "Concepción y créditos"
+
+msgid "CONTACT"
+msgstr "Contacto"
