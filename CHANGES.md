@@ -1,8 +1,9 @@
 2.16.3
 ===================
 
-**Bug fixes**
+**Enhancements**
 
+* Add spanish translation
 * Update italian translation
 
 2.16.2 / 2017-06-21
