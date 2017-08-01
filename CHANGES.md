@@ -3,7 +3,7 @@
 
 **Bug fixes**
 
-*
+* Update italian translation
 
 2.16.2 / 2017-06-21
 ===================

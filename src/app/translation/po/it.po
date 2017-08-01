@@ -175,7 +175,7 @@ msgid "NEAR"
 msgstr "Vicino"
 
 msgid "CHILDREN"
-msgstr "Bambino"
+msgstr "Tappe"
 
 msgid "PARENT"
 msgstr "Relativo"
