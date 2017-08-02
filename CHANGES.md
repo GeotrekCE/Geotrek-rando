@@ -6,6 +6,10 @@
 * Add spanish translation
 * Update italian translation
 
+**Bug fixes**
+
+* Replace Mapbox copyright by IGN
+
 2.16.2 / 2017-06-21
 ===================
 
