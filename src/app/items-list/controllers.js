@@ -1,7 +1,8 @@
 'use strict';
 
-function ItemsListController($scope, $filter, globalSettings, favoritesService, $rootScope, mapService) {
+function ItemsListController($scope, $filter, globalSettings, favoritesService, $rootScope, mapService, utilsFactory) {
 
+    $scope.parseLength = utilsFactory.parseLength;
     $scope.toggleFavorites = function (currentElement) {
         var currentAction = '';
         if (favoritesService.isInFavorites(currentElement)) {

@@ -46,6 +46,9 @@ msgstr "Duur"
 msgid "ASCENT"
 msgstr "Hoogteverschil"
 
+msgid "ASCENT_S"
+msgstr "D+"
+
 msgid "LENGTH"
 msgstr ""
 
