@@ -47,6 +47,9 @@ msgstr "Duration:"
 msgid "ASCENT"
 msgstr "Ascent:"
 
+msgid "ASCENT_S"
+msgstr "D+:"
+
 msgid "LENGTH"
 msgstr "Length:"
 

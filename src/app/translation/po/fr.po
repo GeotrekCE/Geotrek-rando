@@ -46,6 +46,9 @@ msgstr "Durée :"
 msgid "ASCENT"
 msgstr "Dénivelé :"
 
+msgid "ASCENT_S"
+msgstr "D+ :"
+
 msgid "LENGTH"
 msgstr "Longueur :"
 
