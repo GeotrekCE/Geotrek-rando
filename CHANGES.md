@@ -1,8 +1,10 @@
-2.16.3
+2.17.0 / 2017-09-25
 ===================
 
 **Enhancements**
 
+* Add an option allowing fiBounds when centering on marker
+* Add trek length in result list
 * Add spanish translation
 * Update italian translation
 
