@@ -90,6 +90,7 @@
     "DISPLAY_ASIDES_COUNTERS": false,
     "NEAR_ELEMENTS_CATEGORIES": false,
     "SHOW_ARROWS_ON_ROUTE": false,
+    "CENTERON_FITS_BOUNDS": false,
     "MARKER_BASE_ICON": "",
     "POI_BASE_ICON": {
         "iconUrl": null,

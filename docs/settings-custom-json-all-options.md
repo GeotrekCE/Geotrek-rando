@@ -44,6 +44,7 @@ FAVORITES_ICON | String ([font awesome icon](http://fortawesome.github.io/Font-A
 SHARE_ICON | String ([font awesome icon](http://fortawesome.github.io/Font-Awesome/icons/)) | `"share-alt"` | Specify the icon used for the favorites on the website. It must be a valid font awesome icon.
 PLACEHOLDER_IMAGE | string(file name) | `""` | Placeholder used for contents elements.
 RANDOMIZE_RESULTS | Boolean | `false` | If true, items are randomized in results list
+CENTERON_FITS_BOUNDS | Boolean | `false` | Fit map viewport on geometry instead of centering on first point
 
 ### Favicon options
 All the options are required

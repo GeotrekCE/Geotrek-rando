@@ -705,8 +705,16 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
     };
 
     this.centerOn = function centerOn (result) {
-        var coords = utilsFactory.getStartPoint(result);
-        self.setCenter(coords);
+        if (globalSettings.CENTERON_FITS_BOUNDS
+                && result.geometry
+                && result.geometry.type === 'LineString'
+                && result.geometry.coordinates
+                && result.geometry.coordinates.length) {
+            self.map.fitBounds(result.geometry.coordinates.map(function (cur) { return cur.slice().reverse(); }));
+        } else {
+            var coords = utilsFactory.getStartPoint(result);
+            self.setCenter(coords);
+        }
         return self.map;
     };
 
