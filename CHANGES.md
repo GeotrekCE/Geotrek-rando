@@ -3,7 +3,7 @@
 
 **Bug fixes**
 
-*
+* Show legend as link text for POI media other than images
 
 2.17.0 / 2017-09-25
 ===================
