@@ -1609,9 +1609,15 @@ function layersService ($http, globalSettings) {
 
                                 prop = layer.feature.properties;
 
-                                markup.push('<div class="info-point-title">' + (prop.name || '') + '</div>');
-                                markup.push('<div class="info-point-photo">' + (prop.photo_url ? '<img src="' + globalSettings.API_URL + prop.photo_url + '">' : '') + '</div>');
-                                markup.push('<div class="info-point-type">'  + ((prop.type && prop.type.label) || '') + '</div>');
+                                if (prop.species) {
+                                    markup.push('<div class="info-point-title">'  + ((prop.species.name) || '') + '</div>');
+                                    markup.push('<div class="info-point-description">' + (prop.name || prop.description || '') + '</div>');
+                                    markup.push('<div class="info-point-photo">' + (prop.photo_url ? '<img src="' + globalSettings.API_URL + prop.photo_url + '">' : '') + '</div>');
+                                } else {
+                                    markup.push('<div class="info-point-title">' + (prop.name || '') + '</div>');
+                                    markup.push('<div class="info-point-photo">' + (prop.photo_url ? '<img src="' + globalSettings.API_URL + prop.photo_url + '">' : '') + '</div>');
+                                    markup.push('<div class="info-point-type">'  + ((prop.type && prop.type.label) || '') + '</div>');
+                                }
                                 if (prop.website) {
                                     markup.push('<div class="info-point-link"><a target="_blank" href="' + prop.website + '">' + prop.website + '</a></div>');
                                 }
