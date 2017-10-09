@@ -338,3 +338,59 @@
     text-align: center;
     margin-top: 10px;
 }
+
+.info-point-email {
+    margin-top: .5em;
+}
+
+.info-point-practices {
+    font-weight: bold;
+}
+
+.info-point-practices,
+.info-point-months {
+    clear: both;
+    overflow: hidden;
+    text-align: center;
+    margin-top: .75em;
+    margin-left: -0.5em;
+    margin-right: -0.5em;
+}
+
+.info-point-months {
+    color: #b4b4b4;
+}
+
+.info-point-months .month {
+    font-size: 0.875em;
+    display: inline-block;
+    margin: 0 .15em;
+}
+
+.info-point-months .active {
+    color: #4d4d4d;
+    font-weight: bold;
+}
+
+.info-sensitive .info-point-photo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 5em;
+    margin: 13px 19px;
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.info-sensitive-content.picto {
+    float: right;
+    margin-left: 6em;
+    margin-bottom: 1em;
+
+    .info-point-title, .info-point-description {
+        text-align: left
+    }
+}

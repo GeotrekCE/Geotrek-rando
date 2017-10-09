@@ -1606,13 +1606,38 @@ function layersService ($http, globalSettings) {
                         onEachFeature: function (feature, layer) {
                             var markup = [], prop;
                             if (layer && layer.feature && layer.feature.properties) {
-
+                                
                                 prop = layer.feature.properties;
 
                                 if (prop.species) {
+                                    var monthsString = ['JAN', 'FEV', 'MAR', 'AVR', 'MAI', 'JUI', 'JUI', 'AOU', 'SEP', 'OCT', 'NOV', 'DEC']
+                                    var monthsMarkup = '';
+                                    var practiceMarkup = '';
+
+                                    for (var i = 0; i < 12; i++) {
+                                        if (prop.species.period[i]) {
+                                            monthsMarkup += '<span class="month active">' + monthsString[i] + '</span>';
+                                        } else {
+                                            monthsMarkup += '<span class="month">' + monthsString[i] + '</span>';
+                                        }
+                                    }
+
+                                    for (var i = 0; i < prop.species.practices.length; i++) {
+                                        practiceMarkup += prop.species.practices[i].name;
+                                    }
+
+                                    var withpicto = prop.species.pictogram ? ' picto' : ''
+
+                                    markup.push('<div class="info-sensitive">');
+                                    markup.push('<div class="info-sensitive-content '+ withpicto +'">');
                                     markup.push('<div class="info-point-title">'  + ((prop.species.name) || '') + '</div>');
                                     markup.push('<div class="info-point-description">' + (prop.name || prop.description || '') + '</div>');
-                                    markup.push('<div class="info-point-photo">' + (prop.photo_url ? '<img src="' + globalSettings.API_URL + prop.photo_url + '">' : '') + '</div>');
+                                    markup.push(prop.email ? '<div class="info-point-email"><a href="mailto:'+ prop.email +'">' + prop.email + '</a></div>' : '');
+                                    markup.push('</div>');
+                                    markup.push('<div class="info-point-photo">' + (prop.species.pictogram ? '<img src="' + globalSettings.API_URL + prop.species.pictogram + '">' : '') + '</div>');
+                                    markup.push('<div class="info-point-practices">' + practiceMarkup + '</div>');
+                                    markup.push('<div class="info-point-months">' + monthsMarkup + '</div>');
+                                    markup.push('</div>');
                                 } else {
                                     markup.push('<div class="info-point-title">' + (prop.name || '') + '</div>');
                                     markup.push('<div class="info-point-photo">' + (prop.photo_url ? '<img src="' + globalSettings.API_URL + prop.photo_url + '">' : '') + '</div>');
