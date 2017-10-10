@@ -1,7 +1,6 @@
 'use strict';
 
 function sensitiveService(globalSettings, settingsFactory, translationService, $http, $q) {
-    console.log('sensitiveService')
     var self = this;
     self._sensitiveList = {};
 
@@ -41,7 +40,6 @@ function sensitiveService(globalSettings, settingsFactory, translationService, $
 
     this.getSensitive = function getSensitive (trekId) {
         var lang = translationService.getCurrentLang();
-        console.log('getSensitive')
         /**
          * If there is already a promise fetching results, return it
          */
@@ -72,9 +70,7 @@ function sensitiveService(globalSettings, settingsFactory, translationService, $
                     self._sensitiveList[lang] = {}
                 }
 
-                console.log(angular.fromJson(response.data).features);
                 var sensitives = self.parseSensitives(angular.fromJson(response.data).features);
-                console.log(sensitives)
                 self._sensitiveList[lang][trekId] = sensitives;
                 deferred.resolve(self._sensitiveList[lang][trekId]);
             });
