@@ -1,6 +1,6 @@
 'use strict';
 
-function resultsService($rootScope, $q, $location, globalSettings, treksService, contentsService, eventsService, translationService) {
+function resultsService($rootScope, $q, $location, globalSettings, treksService, sensitiveService, contentsService, eventsService, translationService) {
 
     var getAllResultsPending = {};
     $rootScope.allResults = {};

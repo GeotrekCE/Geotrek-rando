@@ -162,6 +162,9 @@ msgstr "En savoir plus"
 msgid "RELATED_TREKS"
 msgstr "Itinéraires liés"
 
+msgid "SENSITIVE_ZONE"
+msgstr "Zone sensible"
+
 msgid "HAS_COMMON_DEPARTURE"
 msgstr "Au départ :"
 

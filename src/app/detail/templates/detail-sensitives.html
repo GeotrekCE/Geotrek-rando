@@ -1,0 +1,27 @@
+<div class="detail-sensitives">
+    <div ng-if="sensitives" class="detail-content-sensitive" class="sensitive">
+      <h3>{{'SENSITIVE_ZONE' | translate}}</h3>
+      
+      <div ng-repeat="sensitive in sensitives" class="sensitive">
+        <div class="sensitive-content picto">
+          <span ng-if="sensitive.species_picto" class="sensitive-picto">
+            <img src="{{sensitive.species_picto}}" alt="">
+          </span>
+          <p class="title">{{sensitive.species_name}}</p>
+          <p ng-if="sensitive.description">
+            {{sensitive.description}}
+          </p>
+          <p ng-if="sensitive.email" class="email">
+            <a href="mailt:{{sensitive.email}}">{{sensitive.email}}</a>
+          </p>
+          <div class="months">
+            <span class="month" ng-repeat="(month, value) in sensitive.period" ng-class="{'active': value}">
+              {{month}}
+            </span>
+          </div>
+        </div>
+
+      </div>
+  </div>
+</div>
+
