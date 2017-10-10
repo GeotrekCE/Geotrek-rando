@@ -13,14 +13,17 @@ function sensitiveService(globalSettings, settingsFactory, translationService, $
         var monthsMarkup = '';
         var practiceMarkup = '';
 
-        for (var i = 0; i < 12; i++) {
-        }
         
         features.map(function(feature, i) {
             var period = {}
+            var practices = []
 
             for (var i = 0; i < 12; i++) {
                 period[monthsString[i]] = feature.properties.species.period[i]
+            }
+
+            for (var i = 0; i < feature.properties.species.practices.length; i++) {
+                practices.push(feature.properties.species.practices[i].name);
             }
 
             sensitives.push({
@@ -31,7 +34,8 @@ function sensitiveService(globalSettings, settingsFactory, translationService, $
                 species_name: feature.properties.species.name,
                 species_url: feature.properties.species.url,
                 species_picto: globalSettings.API_URL + feature.properties.species.pictogram,
-                period: period
+                period: period,
+                species_practices: practices
             })
         });
 
