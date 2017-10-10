@@ -450,7 +450,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
 
         var sensitiveLayersControl = L.control.backgroundLayers(
             this._sensitiveLayers,
-            { position: 'bottomleft', defaultIcon: '/images/icons/lpo.svg' }
+            { position: 'bottomleft', defaultIcon: '/images/icons/sensitive.svg' }
         );
 
         layersControl.addTo(this.map);
