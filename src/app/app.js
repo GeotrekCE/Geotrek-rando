@@ -8,6 +8,7 @@ var dependencies = [
     'rando.translation',
     'rando.commons',
     'rando.treks',
+    'rando.sensitive',
     'rando.pois',
     'rando.services',
     'rando.items',
@@ -98,6 +99,7 @@ require('./footer');
 require('./layout');
 require('./loader');
 require('./treks');
+require('./sensitive');
 require('./pois');
 require('./services');
 require('./items-list');

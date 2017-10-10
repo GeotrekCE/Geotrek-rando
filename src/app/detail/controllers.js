@@ -1,6 +1,6 @@
 'use strict';
 
-function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $stateParams, globalSettings, utilsFactory, resultsService, poisService, mapService, translationService, detailService) {
+function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $stateParams, globalSettings, utilsFactory, resultsService, sensitiveService, poisService, mapService, translationService, detailService) {
 
     $scope.parseLength = utilsFactory.parseLength;
     $scope.removeDiacritics = utilsFactory.removeDiacritics;
@@ -348,6 +348,12 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         promise
             .then(
                 function (result) {
+                    sensitiveService.getSensitive(result.id)
+                        .then(function(sensitives) {
+                            console.log('sensitives: ', sensitives)
+                            $scope.sensitives = sensitives
+                        })
+
                     $state.transitionTo('layout.detail',
                         { catSlug: result.properties.category.slug, slug: result.properties.slug },
                         { location: true, inherit: true, relative: $state.$current, notify: false }

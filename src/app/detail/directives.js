@@ -81,6 +81,14 @@ function detailAside() {
     };
 }
 
+function detailSensitives() {
+    return {
+        restrict: 'E',
+        replace: true,
+        template: require('./templates/detail-sensitives.html')
+    };
+}
+
 module.exports = {
     detailDirective:         detailDirective,
     detailContent:           detailContent,
@@ -91,5 +99,6 @@ module.exports = {
     detailContentElevation:  detailContentElevation,
     detailContentDesks:      detailContentDesks,
     detailContentRelated:    detailContentRelated,
-    detailAside:             detailAside
+    detailAside:             detailAside,
+    detailSensitives:         detailSensitives
 };

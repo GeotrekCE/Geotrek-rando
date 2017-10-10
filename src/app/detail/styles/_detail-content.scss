@@ -84,6 +84,73 @@
     }
 }
 
+.detail-content-sensitive {
+    margin: 0;
+    padding: .6em 1.5em;
+
+    .sensitive {
+        position: relative;
+        clear: both;
+        overflow: hidden;
+        padding: 1em 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    }
+    
+    .title {
+        font-weight: bold;
+    }
+    
+    .practices {
+        font-weight: bold;
+    }
+    
+    .practices,
+    .months {
+        clear: both;
+        overflow: hidden;
+        margin-top: .75em;
+        margin-left: -0.5em;
+        margin-right: -0.5em;
+    }
+    
+    .months {
+        color: #b4b4b4;
+    }
+    
+    .months .month {
+        font-size: 0.875em;
+        display: inline-block;
+        margin: 0 .15em;
+    }
+    
+    .months .active {
+        color: #4d4d4d;
+        font-weight: bold;
+    }
+    
+    .sensitive-picto {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 5em;
+        margin: 1em 0;
+    
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+    
+    .sensitive-content.picto {
+        float: right;
+        margin-left: 6em;
+    
+        .title, .description {
+            text-align: left
+        }
+    }
+}
+
 .detail-content-meta {
     margin: 0;
     padding: .6em 1.5em;

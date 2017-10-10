@@ -163,6 +163,9 @@ msgstr "Know more"
 msgid "RELATED_TREKS"
 msgstr "Related treks"
 
+msgid "SENSITIVE_ZONE"
+msgstr "Sensitive aera"
+
 msgid "HAS_COMMON_DEPARTURE"
 msgstr "Common departure:"
 

@@ -18,7 +18,9 @@ function settingsFactory(globalSettings) {
         flatUrl =  globalSettings.API_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.FLAT_FILE,
         warningCategoriesUrl =  globalSettings.API_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.WARNING_CAT_DIR + '/' + globalSettings.WARNING_CAT_FILE,
         warningSubmitUrl =  globalSettings.BACKOFFICE_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.WARNING_SUBMIT_URL,
-        stylesConfigUrl = globalSettings.BACKOFFICE_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.STYLES_CONFIG_FILE;
+        stylesConfigUrl = globalSettings.BACKOFFICE_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.STYLES_CONFIG_FILE,
+        sensitiveUrl = globalSettings.API_URL + '/' + globalSettings.API_DIR + '/fr/' + globalSettings.SENSITIVE_FILE,
+        trekSensitiveUrl = globalSettings.API_URL + '/' + globalSettings.API_DIR + '/$lang/treks/';
 
 
     //PUBLIC METHODS
@@ -47,6 +49,8 @@ function settingsFactory(globalSettings) {
         warningCategoriesUrl: warningCategoriesUrl,
         warningSubmitUrl: warningSubmitUrl,
         stylesConfigUrl: stylesConfigUrl,
+        sensitiveUrl: sensitiveUrl,
+        trekSensitiveUrl: trekSensitiveUrl,
 
         //METHODS
         setLang: setLang,

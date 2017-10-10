@@ -448,8 +448,15 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
             { position: 'bottomleft' }
         );
 
+        var sensitiveLayersControl = L.control.backgroundLayers(
+            this._sensitiveLayers,
+            { position: 'bottomleft' }
+        );
+
         layersControl.addTo(this.map);
         optionalLayersControl.addTo(this.map);
+        sensitiveLayersControl.addTo(this.map);
+
         return true;
     };
 
@@ -1157,6 +1164,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
         };
 
         this._optionalLayers = layersService.getOptionalLayers();
+        this._sensitiveLayers = layersService.getSensitiveLayers();
 
         var mapParameters = {
             center: [
@@ -1515,7 +1523,7 @@ function popupService() {
     this.attachPopups = _attachPopups; // Publish method
 }
 
-function layersService ($http, globalSettings) {
+function layersService ($http, globalSettings, settingsFactory) {
 
     /**
      * Return PERMANENT_TILELAYERS
@@ -1543,6 +1551,23 @@ function layersService ($http, globalSettings) {
     var _getOptionalLayersConf = function _getOptionalLayersConf () {
         if (globalSettings.OPTIONAL_TILELAYERS) {
             return globalSettings.OPTIONAL_TILELAYERS;
+        }
+
+        return false;
+    };
+
+    var _getSensitiveLayersConf = function _getSensitiveLayersConf () {
+        if (globalSettings.SENSITIVE_TILELAYER) {
+            return [{
+                "LAYER_URL": settingsFactory.sensitiveUrl,
+                "LAYER_NAME": "Sensitive",
+                "OPTIONS": {
+                    "legend": "Zone sensible",
+                    "id": "sensitive",
+                    "attribution": "(c) MapBox Satellite",
+                    "active": true
+                }
+            }]
         }
 
         return false;
@@ -1577,7 +1602,6 @@ function layersService ($http, globalSettings) {
     var _getOptionalLayers = function _getOptionalLayers () {
         var layersConf  = _getOptionalLayersConf();
         var defaultName = globalSettings.OPTIONAL_TILELAYERS_NAME || 'Layer';
-
         if (!layersConf) { return false; }
 
         var layers = {};
@@ -1609,40 +1633,10 @@ function layersService ($http, globalSettings) {
                                 
                                 prop = layer.feature.properties;
 
-                                if (prop.species) {
-                                    var monthsString = ['JAN', 'FEV', 'MAR', 'AVR', 'MAI', 'JUI', 'JUI', 'AOU', 'SEP', 'OCT', 'NOV', 'DEC']
-                                    var monthsMarkup = '';
-                                    var practiceMarkup = '';
-
-                                    for (var i = 0; i < 12; i++) {
-                                        if (prop.species.period[i]) {
-                                            monthsMarkup += '<span class="month active">' + monthsString[i] + '</span>';
-                                        } else {
-                                            monthsMarkup += '<span class="month">' + monthsString[i] + '</span>';
-                                        }
-                                    }
-
-                                    for (var i = 0; i < prop.species.practices.length; i++) {
-                                        practiceMarkup += prop.species.practices[i].name;
-                                    }
-
-                                    var withpicto = prop.species.pictogram ? ' picto' : ''
-
-                                    markup.push('<div class="info-sensitive">');
-                                    markup.push('<div class="info-sensitive-content '+ withpicto +'">');
-                                    markup.push('<div class="info-point-title">'  + ((prop.species.name) || '') + '</div>');
-                                    markup.push('<div class="info-point-description">' + (prop.name || prop.description || '') + '</div>');
-                                    markup.push(prop.email ? '<div class="info-point-email"><a href="mailto:'+ prop.email +'">' + prop.email + '</a></div>' : '');
-                                    markup.push('</div>');
-                                    markup.push('<div class="info-point-photo">' + (prop.species.pictogram ? '<img src="' + globalSettings.API_URL + prop.species.pictogram + '">' : '') + '</div>');
-                                    markup.push('<div class="info-point-practices">' + practiceMarkup + '</div>');
-                                    markup.push('<div class="info-point-months">' + monthsMarkup + '</div>');
-                                    markup.push('</div>');
-                                } else {
-                                    markup.push('<div class="info-point-title">' + (prop.name || '') + '</div>');
-                                    markup.push('<div class="info-point-photo">' + (prop.photo_url ? '<img src="' + globalSettings.API_URL + prop.photo_url + '">' : '') + '</div>');
-                                    markup.push('<div class="info-point-type">'  + ((prop.type && prop.type.label) || '') + '</div>');
-                                }
+                                markup.push('<div class="info-point-title">' + (prop.name || '') + '</div>');
+                                markup.push('<div class="info-point-photo">' + (prop.photo_url ? '<img src="' + globalSettings.API_URL + prop.photo_url + '">' : '') + '</div>');
+                                markup.push('<div class="info-point-type">'  + ((prop.type && prop.type.label) || '') + '</div>');
+                                
                                 if (prop.website) {
                                     markup.push('<div class="info-point-link"><a target="_blank" href="' + prop.website + '">' + prop.website + '</a></div>');
                                 }
@@ -1684,8 +1678,110 @@ function layersService ($http, globalSettings) {
         return layers;
     };
 
+    var _getSensitiveLayers = function _getSensitiveLayers () {
+        var layersConf  = _getSensitiveLayersConf();
+        var defaultName = globalSettings.OPTIONAL_TILELAYERS_NAME || 'Layer';
+
+        if (!layersConf) { return false; }
+
+        var layers = {};
+
+        layersConf.forEach(function (layerConf, index) {
+            var layerName, layerOptions;
+            if (typeof layerConf === 'string') {
+                layers[[defaultName, index + 1].join(' ')] = L.tileLayer(layerConf);
+            } else if (layerConf.LAYER_URL) {
+                layerName = layerConf.LAYER_NAME || [defaultName, index + 1].join(' ');
+                if (layerConf.LAYER_URL.split('.').pop() === 'geojson' || layerConf.LAYER_URL.split('.').pop() === 'json') {
+                    /**
+                     * Manage geoJson layers
+                     */
+                    layerOptions = angular.extend({
+                        style: function (feature) {
+                            var styles = {};
+                            if (feature.properties.fill) {
+                                styles.fillColor = feature.properties.fill;
+                            }
+                            if (feature.properties.stroke) {
+                                styles.color = feature.properties.stroke;
+                            }
+                            return styles;
+                        },
+                        onEachFeature: function (feature, layer) {
+                            var markup = [], prop;
+                            if (layer && layer.feature && layer.feature.properties) {
+                                
+                                prop = layer.feature.properties;
+
+                                var monthsString = ['JAN', 'FEV', 'MAR', 'AVR', 'MAI', 'JUI', 'JUI', 'AOU', 'SEP', 'OCT', 'NOV', 'DEC']
+                                var monthsMarkup = '';
+                                var practiceMarkup = '';
+
+                                for (var i = 0; i < 12; i++) {
+                                    if (prop.species.period[i]) {
+                                        monthsMarkup += '<span class="month active">' + monthsString[i] + '</span>';
+                                    } else {
+                                        monthsMarkup += '<span class="month">' + monthsString[i] + '</span>';
+                                    }
+                                }
+
+                                for (var i = 0; i < prop.species.practices.length; i++) {
+                                    practiceMarkup += prop.species.practices[i].name;
+                                }
+
+                                var withpicto = prop.species.pictogram ? ' picto' : ''
+
+                                markup.push('<div class="info-sensitive">');
+                                markup.push('<div class="info-sensitive-content '+ withpicto +'">');
+                                markup.push('<div class="info-point-title">'  + ((prop.species.name) || '') + '</div>');
+                                markup.push('<div class="info-point-description">' + (prop.name || prop.description || '') + '</div>');
+                                markup.push(prop.email ? '<div class="info-point-email"><a href="mailto:'+ prop.email +'">' + prop.email + '</a></div>' : '');
+                                markup.push('</div>');
+                                markup.push('<div class="info-point-photo">' + (prop.species.pictogram ? '<img src="' + globalSettings.API_URL + prop.species.pictogram + '">' : '') + '</div>');
+                                markup.push('<div class="info-point-practices">' + practiceMarkup + '</div>');
+                                markup.push('<div class="info-point-months">' + monthsMarkup + '</div>');
+                                markup.push('</div>');
+
+                                if (layer.bindPopup) {
+                                    layer.bindPopup(markup.join('\n'));
+                                }
+                            }
+
+                            if (layer instanceof L.Marker) {
+                                layer.setZIndexOffset(-5000);
+                            }
+
+                            if (layerConf.DEFAULT_MARKER && layer instanceof L.Marker) {
+                                layer.setIcon(L.icon(layerConf.DEFAULT_MARKER));
+                            }
+                        }
+                    }, layerConf.OPTIONS);
+
+                    L.Icon.Default.imagePath = '/app/vendors/images/leaflet';
+
+                    layers[layerName] = L.geoJson.ajax(layerConf.LAYER_URL, layerOptions);
+                } else {
+                    /**
+                     * Manage tileLayers
+                     */
+                    layerOptions = layerConf.OPTIONS || {};
+
+                    if (layerConf.BOUNDS) {
+                        layerOptions.boundsLimit = {
+                            url: layerConf.BOUNDS
+                        };
+                    }
+
+                    layers[layerName] = L.tileLayer(layerConf.LAYER_URL, layerOptions);
+                }
+            }
+        });
+        return layers;
+    };
+
     this.getMainLayersGroup = _getMainLayersGroup;
     this.getOptionalLayers  = _getOptionalLayers;
+    this.getSensitiveLayers  = _getSensitiveLayers;
 }
 
 module.exports = {
