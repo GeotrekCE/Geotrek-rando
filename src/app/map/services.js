@@ -450,7 +450,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
 
         var sensitiveLayersControl = L.control.backgroundLayers(
             this._sensitiveLayers,
-            { position: 'bottomleft' }
+            { position: 'bottomleft', defaultIcon: '/images/icons/lpo.svg' }
         );
 
         layersControl.addTo(this.map);
@@ -1564,7 +1564,7 @@ function layersService ($http, globalSettings, settingsFactory) {
                 "OPTIONS": {
                     "legend": "Zone sensible",
                     "id": "sensitive",
-                    "attribution": "(c) MapBox Satellite",
+                    "attribution": "(c) LPO",
                     "active": true
                 }
             }]
