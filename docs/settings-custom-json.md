@@ -47,24 +47,12 @@ Type: `float` Default: `44.83` & `6.34`
 
 Used to center the map on your area. 
 
-#### OPTIONAL_TILELAYERS
+#### SENSITIVE_TILELAYER
 
-Add additionnal layers.
-
-To use [LPO](https://www.lpo.fr/) layer, here is available option :
+Show senstitive aeras with [LPO](https://www.lpo.fr/) layer :
 
 ```json
-"OPTIONAL_TILELAYERS": [
-      {
-        "LAYER_URL": "http://10.1.0.6/api/fr/sensitiveareas.geojson",
-        "LAYER_NAME": "Sensitive",
-        "OPTIONS": {
-            "legend": "Zone protégée",
-            "id": "sensitive",
-            "attribution": "LPO"
-        }
-    }
-  ]
+"SENSITIVE_TILELAYER": true
 ```
 
 ### Additional options
