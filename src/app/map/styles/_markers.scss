@@ -343,8 +343,13 @@
     margin-top: .5em;
 }
 
-.info-point-practices {
-    font-weight: bold;
+.info-point-practices .practice {
+    background: lightgray;
+    padding: .25em .75em;
+    font-size: 0.875em;
+    border-radius: 10em;
+    display: inline-block;
+    margin-right: .5em;
 }
 
 .info-point-practices,

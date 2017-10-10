@@ -100,21 +100,24 @@
         font-weight: bold;
     }
     
-    .practices {
-        font-weight: bold;
+    .practice {
+        background: lightgray;
+        padding: .25em .75em;
+        font-size: 0.875em;
+        border-radius: 10em;
+        display: inline-block;
+        margin-right: .5em;
     }
     
     .practices,
     .months {
         clear: both;
         overflow: hidden;
-        margin-top: .75em;
-        margin-left: -0.5em;
-        margin-right: -0.5em;
     }
     
     .months {
         color: #b4b4b4;
+        margin-top: .75em;
     }
     
     .months .month {

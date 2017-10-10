@@ -1726,7 +1726,7 @@ function layersService ($http, globalSettings, settingsFactory) {
                                 }
 
                                 for (var i = 0; i < prop.species.practices.length; i++) {
-                                    practiceMarkup += prop.species.practices[i].name;
+                                    practiceMarkup += '<span class="practice">' + prop.species.practices[i].name + '</span>';
                                 }
 
                                 var withpicto = prop.species.pictogram ? ' picto' : ''
