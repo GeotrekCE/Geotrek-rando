@@ -21,7 +21,7 @@
     "angular-translate": "^2.6.1",
     "angular-ui-router": "^0.2.18",
     "angularjs-slider": "^2.9.0",
-    "bootstrap-daterangepicker": "git+https://github.com/dangrossman/bootstrap-daterangepicker.git#2dc0523f351da6d467301b456e6d3ff6c5ec",
+    "bootstrap-daterangepicker": "git+https://github.com/dangrossman/bootstrap-daterangepicker.git#2dc0523f351da6d467301b456e6d3ff6c5ec58a1",
     "bootstrap-sass": "^3.3.6",
     "bowser": "^1.0.0",
     "browserify": "^13.0.0",
