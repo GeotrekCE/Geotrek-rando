@@ -90,6 +90,14 @@ FILTERS_DEFAULT_OPEN | Boolean | `false` | Disable filters by default.
 DEFAULT_INTEREST | String | `"pois"` | Chose which interest to open by default on detail page. Possible values: `"pois"`, `"near"`, `"children"`, `"parents"`, ""
 
 
+## BOOKING_DATASOURCE
+
+Option     | Type      | Default   | Description
+--------|----------|-----------|------------
+ENABLE_BOOKING | Boolean | `false` | Check for booking data in results
+BOOKING_DATASOURCE | String(json) | "" | Remote or local json file with additional booking informations
+
+
 ## Social networks
 
 Option     | Type      | Default   | Description
