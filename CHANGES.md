@@ -1,9 +1,17 @@
-2.17.2-dev0
+2.18.0-dev0
 ===================
 
-**Bug fixes**
+**WARNING!**
 
-*
+If you upgrade from a previous version, don't forget to upgrade nodejs (see
+.nvmrc file) before and remove node_modules directory before running npm
+install.
+
+**Enhancements**
+
+* Update recommanded nodejs version to 6.11.5 (LTS)
+* Do a bunch of modules upgrades to insure ensure forward
+  compatibility and improve build performance
 
 2.17.1 / 2017-09-28
 ===================
