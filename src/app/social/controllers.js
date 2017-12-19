@@ -12,21 +12,11 @@ function SocialController($scope, $filter, $rootScope, $location, $state, $state
 
         if (element) {
             fbOptions = {
-                method: 'feed',
-                link: $location.absUrl(),
+                method: 'share',
+                href: $location.absUrl(),
                 redirect_uri: $location.absUrl(),
                 display: 'popup',
-                name: element.properties.name,
-                caption: $filter('decodeEntities')(element.properties.ambiance),
-                description: $filter('decodeEntities')(element.properties.description_teaser)
             };
-
-
-            if (element.properties.pictures[0]) {
-                fbOptions.picture = element.properties.pictures[0].url;
-            } else {
-                fbOptions.picture = globalSettings.API_URL + "/custom/images/" + globalSettings.DEFAULT_SHARE_IMG;
-            }
 
             $scope.shareToFacebook = function() {
                 facebookService.share(fbOptions);
@@ -38,14 +28,10 @@ function SocialController($scope, $filter, $rootScope, $location, $state, $state
 
         } else {
             fbOptions = {
-                method: 'feed',
-                link: $location.absUrl(),
+                method: 'share',
+                href: $location.absUrl(),
                 redirect_uri: translatedContent.BANNER_TEXT,
-                display: 'popup',
-                name: translatedContent.BANNER_TEXT,
-                caption: $location.absUrl(),
-                description: $filter('decodeEntities')(translatedContent.SHARING_DEFAULT_TEXT),
-                picture: globalSettings.API_URL + "/custom/images/" + globalSettings.DEFAULT_SHARE_IMG
+                display: 'popup'
             };
 
             $scope.shareToFacebook = function() {
