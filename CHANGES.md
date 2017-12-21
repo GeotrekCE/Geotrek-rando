@@ -5,13 +5,16 @@
 
 If you upgrade from a previous version, don't forget to upgrade nodejs (see
 .nvmrc file) before and remove node_modules directory before running npm
-install.
+install. Please update your nginx configuration too if you want to share
+with Facebook.
 
 **Enhancements**
 
 * Update recommanded nodejs version to 6.11.5 (LTS)
 * Do a bunch of modules upgrades to insure ensure forward
   compatibility and improve build performance
+* Replace facebook feed method (deprecated) by share method
+  (requires Geotrek-admin 2.16.0+)
 
 2.17.1 / 2017-09-28
 ===================
