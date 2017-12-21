@@ -7,7 +7,7 @@
 Create the file `/etc/nginx/site-available/geotrek-rando` and symlink it to
 `/etc/nginx/site-enabled/geotrek-rando`. This example supposes you synchronized
 Geotrek-Admin data to `<my_data_directory>` and you configured Geotrek-Rando
-`API_URL` to your `http://<my_server_name>/data`.
+`API_URL` to your `''` (empty string).
 
 be carefull with trailing slashes. They are important and change the behaviour of nginx.
 
@@ -27,11 +27,17 @@ server {
         application/vnd.google-earth.kmz kmz;
         application/x-font-ttf ttf;
     }
-    location /data/ {
+    location ~ ^/(api|media|static|zip|meta)/ {
         root <my_data_directory>/;
     }
     location / {
-        try_files $uri $uri/ /index.html;
+        try_files $uri @angular;
+    }
+    location @angular {
+        if ($http_user_agent ~* "googlebot|yahoo|bingbot|baiduspider|yandex|yeti|yodaobot|gigabot|ia_archiver|facebookexternalhit|twitterbot|developers\.google\.com") {
+            rewrite .* /meta/fr$request_uri/index.html last;
+        }
+        try_files /index.html =404;
     }
 }
 ```
