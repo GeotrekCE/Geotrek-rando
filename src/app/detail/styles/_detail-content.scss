@@ -88,6 +88,10 @@
     margin: 0;
     padding: .6em 1.5em;
 
+    h3 {
+        margin-bottom: .5em;
+    }
+
     .sensitive {
         position: relative;
         clear: both;
@@ -108,8 +112,7 @@
         display: inline-block;
         margin-right: .5em;
     }
-    
-    .practices,
+
     .months {
         clear: both;
         overflow: hidden;
@@ -145,7 +148,6 @@
     }
     
     .sensitive-content.picto {
-        float: right;
         margin-left: 6em;
     
         .title, .description {

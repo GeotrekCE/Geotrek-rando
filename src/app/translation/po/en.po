@@ -164,7 +164,13 @@ msgid "RELATED_TREKS"
 msgstr "Related treks"
 
 msgid "SENSITIVE_ZONE"
-msgstr "Sensitive aera"
+msgstr "Sensitive areas"
+
+msgid "SENSITIVE_ZONE_TEXT"
+msgstr "Along your trek, you will go through sensitive areas related to the presence of a specific species or environment. In these areas, an appropriate behaviour allows to contribute to their preservation. For detailed information, specific forms are accessible for each area."
+
+msgid "SENSITIVE_PERIOD"
+msgstr "Sensitivity period:"
 
 msgid "HAS_COMMON_DEPARTURE"
 msgstr "Common departure:"

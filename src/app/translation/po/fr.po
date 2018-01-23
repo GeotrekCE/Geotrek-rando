@@ -163,7 +163,13 @@ msgid "RELATED_TREKS"
 msgstr "Itinéraires liés"
 
 msgid "SENSITIVE_ZONE"
-msgstr "Zone sensible"
+msgstr "Zones de sensibilité environnementale"
+
+msgid "SENSITIVE_ZONE_TEXT"
+msgstr "Le long de votre itinéraire, vous allez traverser des zones de sensibilité liées à la présence d’une espèce ou d’un milieu particulier. Dans ces zones, un comportement adapté permet de contribuer à leur préservation. Pour plus d’informations détaillées, des fiches spécifiques sont accessibles pour chaque zone."
+
+msgid "SENSITIVE_PERIOD"
+msgstr "Période de sensibilité :"
 
 msgid "HAS_COMMON_DEPARTURE"
 msgstr "Au départ :"

@@ -97,6 +97,14 @@ DEFAULT_SHARE_IMG | String(file name) | `""` | Name of your custom image used by
 GOOGLE_ANALYTICS_ID | String | `""` | ID of your Google Analytics account.
 
 
+## Sensitive areas
+
+Option     | Type      | Default   | Description
+--------|----------|-----------|------------
+SENSITIVE_TILELAYER | Boolean | `true` | Enable sensitive areas display
+SENSITIVE_DEFAULT_ICON | String(file name) | `""` | Name of your custom deafult icon used for sensitive areas
+
+
 ## Map
 
 ### Main options

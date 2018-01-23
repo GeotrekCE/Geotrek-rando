@@ -9,7 +9,7 @@ function sensitiveService(globalSettings, settingsFactory, translationService, $
     this.parseSensitives = function (features) {
         var sensitives = [];
 
-        var monthsString = ['JAN', 'FEV', 'MAR', 'AVR', 'MAI', 'JUI', 'JUI', 'AOU', 'SEP', 'OCT', 'NOV', 'DEC']
+        var monthsString = ['JAN', 'FEV', 'MAR', 'AVR', 'MAI', 'JUIN', 'JUIL', 'AOU', 'SEP', 'OCT', 'NOV', 'DEC']
         var monthsMarkup = '';
         var practiceMarkup = '';
 
@@ -19,7 +19,9 @@ function sensitiveService(globalSettings, settingsFactory, translationService, $
             var practices = []
 
             for (var i = 0; i < 12; i++) {
-                period[monthsString[i]] = feature.properties.species.period[i]
+                if (feature.properties.species.period[i]) {
+                    period[monthsString[i]] = true;
+                }
             }
 
             for (var i = 0; i < feature.properties.species.practices.length; i++) {
@@ -28,12 +30,12 @@ function sensitiveService(globalSettings, settingsFactory, translationService, $
 
             sensitives.push({
                 description: feature.properties.description,
-                email: feature.properties.email,
+                contact: feature.properties.contact,
                 publication_date: feature.properties.publication_date,
                 published: feature.properties.published,
                 species_name: feature.properties.species.name,
                 species_url: feature.properties.species.url,
-                species_picto: globalSettings.API_URL + feature.properties.species.pictogram,
+                species_picto: feature.properties.species.pictogram ? globalSettings.API_URL + feature.properties.species.pictogram : globalSettings.SENSITIVE_DEFAULT_ICON,
                 period: period,
                 species_practices: practices
             })
