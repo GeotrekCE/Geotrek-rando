@@ -1,4 +1,5 @@
 'use strict';
+'use strict';
 
 function mapService($rootScope, $q, $state, $resource, $translate, $filter, utilsFactory, globalSettings, translationService, settingsFactory, treksService, poisService, servicesService, iconsService, popupService, layersService, boundsLimitService, stylesConfigService) {
 
@@ -1678,7 +1679,7 @@ function layersService ($http, globalSettings, settingsFactory) {
         return layers;
     };
 
-    var _getSensitiveLayers = function _getSensitiveLayers () {
+    var _getSensitiveLayers = function _getSensitiveLayers (translations) {
         var layersConf  = _getSensitiveLayersConf();
         var defaultName = globalSettings.OPTIONAL_TILELAYERS_NAME || 'Layer';
 
@@ -1710,18 +1711,16 @@ function layersService ($http, globalSettings, settingsFactory) {
                         onEachFeature: function (feature, layer) {
                             var markup = [], prop;
                             if (layer && layer.feature && layer.feature.properties) {
-                                
+
                                 prop = layer.feature.properties;
 
-                                var monthsString = ['JAN', 'FEV', 'MAR', 'AVR', 'MAI', 'JUI', 'JUI', 'AOU', 'SEP', 'OCT', 'NOV', 'DEC']
-                                var monthsMarkup = '';
+                                var monthsString = ['JAN', 'FEV', 'MAR', 'AVR', 'MAI', 'JUIN', 'JUIL', 'AOU', 'SEP', 'OCT', 'NOV', 'DEC']
+                                var monthsMarkup = 'Période de sensibilité :';
                                 var practiceMarkup = '';
 
                                 for (var i = 0; i < 12; i++) {
                                     if (prop.species.period[i]) {
                                         monthsMarkup += '<span class="month active">' + monthsString[i] + '</span>';
-                                    } else {
-                                        monthsMarkup += '<span class="month">' + monthsString[i] + '</span>';
                                     }
                                 }
 
@@ -1729,17 +1728,17 @@ function layersService ($http, globalSettings, settingsFactory) {
                                     practiceMarkup += '<span class="practice">' + prop.species.practices[i].name + '</span>';
                                 }
 
-                                var withpicto = prop.species.pictogram ? ' picto' : ''
+                                var withpicto = prop.species.pictogram || globalSettings.SENSITIVE_DEFAULT_ICON ? ' picto' : ''
 
                                 markup.push('<div class="info-sensitive">');
                                 markup.push('<div class="info-sensitive-content '+ withpicto +'">');
                                 markup.push('<div class="info-point-title">'  + ((prop.species.name) || '') + '</div>');
-                                markup.push('<div class="info-point-description">' + (prop.name || prop.description || '') + '</div>');
-                                markup.push(prop.email ? '<div class="info-point-email"><a href="mailto:'+ prop.email +'">' + prop.email + '</a></div>' : '');
-                                markup.push('</div>');
-                                markup.push('<div class="info-point-photo">' + (prop.species.pictogram ? '<img src="' + globalSettings.API_URL + prop.species.pictogram + '">' : '') + '</div>');
-                                markup.push('<div class="info-point-practices">' + practiceMarkup + '</div>');
                                 markup.push('<div class="info-point-months">' + monthsMarkup + '</div>');
+                                markup.push(prop.contact ? '<div class="info-point-contact">Contact : '+ prop.contact + '</div>' : '');
+                                markup.push('<div class="info-point-description">' + (prop.description || '') + '</div>');
+                                markup.push(prop.species.url ? '<div class="info-point-url"><a href="' + prop.species.url + '" target="_blank">Plus d\'informations</a></div>' : '');
+                                markup.push('</div>');
+                                markup.push('<div class="info-point-photo">' + (prop.species.pictogram || globalSettings.SENSITIVE_DEFAULT_ICON ? '<img src="' + (prop.species.pictogram ? globalSettings.API_URL + prop.species.pictogram : globalSettings.SENSITIVE_DEFAULT_ICON) + '">' : '') + '</div>');
                                 markup.push('</div>');
 
                                 if (layer.bindPopup) {

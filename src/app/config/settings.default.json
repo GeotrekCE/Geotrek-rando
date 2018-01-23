@@ -69,6 +69,7 @@
     "OPTIONAL_TILELAYERS": [],
     "SENSITIVE_TILELAYER": false,
     "SENSITIVE_FILE": "sensitiveareas.geojson",
+    "SENSITIVE_DEFAULT_ICON": "",
     "LEAFLET_CONF": {
         "CENTER_LATITUDE": 44.83,
         "CENTER_LONGITUDE": 6.34,

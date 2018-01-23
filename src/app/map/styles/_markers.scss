@@ -339,27 +339,14 @@
     margin-top: 10px;
 }
 
-.info-point-email {
+.info-point-contact {
     margin-top: .5em;
 }
 
-.info-point-practices .practice {
-    background: lightgray;
-    padding: .25em .75em;
-    font-size: 0.875em;
-    border-radius: 10em;
-    display: inline-block;
-    margin-right: .5em;
-}
-
-.info-point-practices,
 .info-point-months {
     clear: both;
     overflow: hidden;
-    text-align: center;
     margin-top: .75em;
-    margin-left: -0.5em;
-    margin-right: -0.5em;
 }
 
 .info-point-months {
@@ -391,7 +378,6 @@
 }
 
 .info-sensitive-content.picto {
-    float: right;
     margin-left: 6em;
     margin-bottom: 1em;
 
