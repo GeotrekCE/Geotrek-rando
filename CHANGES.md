@@ -3,7 +3,7 @@
 
 **Bug fixes**
 
-*
+* Events finishing today should not be filtered out
 
 2.18.0 / 2017-12-21
 ===================
