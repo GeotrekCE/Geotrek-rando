@@ -105,7 +105,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                             if (elementData.properties.begin_date) {
                                 var currentDate = new Date().toISOString().substr(0, 10);
                                 var eventDate = elementData.properties.end_date || elementData.properties.begin_date;
-                                if (eventDate > currentDate) {
+                                if (eventDate >= currentDate) {
                                     $scope.nearElements.push(elementData);
                                 }
                             } else {
