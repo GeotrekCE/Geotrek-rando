@@ -1698,16 +1698,7 @@ function layersService ($http, globalSettings, settingsFactory) {
                      * Manage geoJson layers
                      */
                     layerOptions = angular.extend({
-                        style: function (feature) {
-                            var styles = {};
-                            if (feature.properties.fill) {
-                                styles.fillColor = feature.properties.fill;
-                            }
-                            if (feature.properties.stroke) {
-                                styles.color = feature.properties.stroke;
-                            }
-                            return styles;
-                        },
+                        style: globalSettings.SENSITIVE_LAYER_STYLE,
                         onEachFeature: function (feature, layer) {
                             var markup = [], prop;
                             if (layer && layer.feature && layer.feature.properties) {
