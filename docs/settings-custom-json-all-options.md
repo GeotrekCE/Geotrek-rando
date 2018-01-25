@@ -103,6 +103,7 @@ Option     | Type      | Default   | Description
 --------|----------|-----------|------------
 SENSITIVE_TILELAYER | Boolean | `true` | Enable sensitive areas display
 SENSITIVE_DEFAULT_ICON | String(file name) | `""` | Name of your custom deafult icon used for sensitive areas
+SENSITIVE_LAYER_STYLE | Object | `{}` | Leaflet style for sensitive area
 
 
 ## Map
