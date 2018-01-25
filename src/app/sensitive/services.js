@@ -4,7 +4,7 @@ function sensitiveService(globalSettings, settingsFactory, translationService, $
     var self = this;
     self._sensitiveList = {};
 
-    var getSensitivePending = false;
+    var getSensitivePending = {};
 
     this.parseSensitives = function (features) {
         var sensitives = [];
@@ -49,15 +49,15 @@ function sensitiveService(globalSettings, settingsFactory, translationService, $
         /**
          * If there is already a promise fetching results, return it
          */
-        if (getSensitivePending) {
-            return getSensitivePending;
+        if (getSensitivePending[lang] && getSensitivePending[lang][trekId]) {
+            return getSensitivePending[lang][trekId];
         }
 
         /**
          * If treks have already been fetched for current language, return them
          */
-        if (self._sensitiveList[lang]) {
-            return $q.when(self._sensitiveList[lang]);
+        if (self._sensitiveList[lang] && self._sensitiveList[lang][trekId]) {
+            return $q.when(self._sensitiveList[lang][trekId]);
         }
 
         /**
@@ -65,10 +65,6 @@ function sensitiveService(globalSettings, settingsFactory, translationService, $
          */
         var deferred = $q.defer();
         var url      = settingsFactory.trekSensitiveUrl.replace(/\$lang/, lang);
-
-        if (self._sensitiveList[lang] && self._sensitiveList[lang][trekId]) {
-            deferred.resolve(self._sensitiveList[lang][trekId]);
-        }
 
         $http({url: url + trekId + '/' + globalSettings.SENSITIVE_FILE})
             .then(function (response) {
@@ -82,7 +78,10 @@ function sensitiveService(globalSettings, settingsFactory, translationService, $
             });
 
 
-        getSensitivePending = deferred.promise;
+        if (!getSensitivePending[lang]) {
+            getSensitivePending[lang] = {}
+        }
+        getSensitivePending[lang][trekId] = deferred.promise;
         return deferred.promise;
     };
 
