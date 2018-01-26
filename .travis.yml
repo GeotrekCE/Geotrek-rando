@@ -1,12 +1,3 @@
-notifications:
-  irc:
-    template:
-      - "[%{repository_slug}] has been built: %{build_url} (%{result})"
-      - "%{repository_name}/%{branch} %{commit} %{author}: %{message} (#%{build_number})"
-    channels:
-      - "irc.freenode.net#makinacorpus-geotrek"
-    skip_join: true
-
 dist: precise
 
 language: node_js
