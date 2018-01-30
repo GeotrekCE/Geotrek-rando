@@ -1679,7 +1679,7 @@ function layersService ($http, globalSettings, settingsFactory) {
         return layers;
     };
 
-    var _getSensitiveLayers = function _getSensitiveLayers (translations) {
+    var _getSensitiveLayers = function _getSensitiveLayers () {
         var layersConf  = _getSensitiveLayersConf();
         var defaultName = globalSettings.OPTIONAL_TILELAYERS_NAME || 'Layer';
 
