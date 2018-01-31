@@ -47,14 +47,6 @@ Type: `float` Default: `44.83` & `6.34`
 
 Used to center the map on your area. 
 
-#### SENSITIVE_TILELAYER
-
-Show senstitive aeras with [LPO](https://www.lpo.fr/) layer :
-
-```json
-"SENSITIVE_TILELAYER": true
-```
-
 ### Additional options
 
 _See [additional settings][] for a complete list of options that can be edited._

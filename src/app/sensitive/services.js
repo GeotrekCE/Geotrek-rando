@@ -35,7 +35,7 @@ function sensitiveService(globalSettings, settingsFactory, translationService, $
                 published: feature.properties.published,
                 species_name: feature.properties.species.name,
                 species_url: feature.properties.species.url,
-                species_picto: feature.properties.species.pictogram ? globalSettings.API_URL + feature.properties.species.pictogram : globalSettings.SENSITIVE_DEFAULT_ICON,
+                species_picto: feature.properties.species.pictogram ? globalSettings.API_URL + feature.properties.species.pictogram : globalSettings.SENSITIVITY_DEFAULT_ICON,
                 period: period,
                 species_practices: practices
             })
@@ -66,7 +66,7 @@ function sensitiveService(globalSettings, settingsFactory, translationService, $
         var deferred = $q.defer();
         var url      = settingsFactory.trekSensitiveUrl.replace(/\$lang/, lang);
 
-        $http({url: url + trekId + '/' + globalSettings.SENSITIVE_FILE})
+        $http({url: url + trekId + '/' + globalSettings.SENSITIVITY_FILE})
             .then(function (response) {
                 if (!self._sensitiveList[lang]) {
                     self._sensitiveList[lang] = {}

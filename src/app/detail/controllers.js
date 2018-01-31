@@ -348,7 +348,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         promise
             .then(
                 function (result) {
-                    if (globalSettings.SENSITIVE_TILELAYER) {
+                    if (globalSettings.SENSITIVITY_ENABLED) {
                         sensitiveService.getSensitive(result.id)
                             .then(function(sensitives) {
                                 $scope.sensitives = sensitives

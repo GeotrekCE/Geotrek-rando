@@ -1558,7 +1558,7 @@ function layersService ($http, globalSettings, settingsFactory) {
     };
 
     var _getSensitiveLayersConf = function _getSensitiveLayersConf () {
-        if (globalSettings.SENSITIVE_TILELAYER) {
+        if (globalSettings.SENSITIVITY_ENABLED) {
             return [{
                 "LAYER_URL": settingsFactory.sensitiveUrl,
                 "LAYER_NAME": "Sensitive",
@@ -1698,7 +1698,7 @@ function layersService ($http, globalSettings, settingsFactory) {
                      * Manage geoJson layers
                      */
                     layerOptions = angular.extend({
-                        style: globalSettings.SENSITIVE_LAYER_STYLE,
+                        style: globalSettings.SENSITIVITY_LAYER_STYLE,
                         onEachFeature: function (feature, layer) {
                             var markup = [], prop;
                             if (layer && layer.feature && layer.feature.properties) {
@@ -1719,7 +1719,7 @@ function layersService ($http, globalSettings, settingsFactory) {
                                     practiceMarkup += '<span class="practice">' + prop.species.practices[i].name + '</span>';
                                 }
 
-                                var withpicto = prop.species.pictogram || globalSettings.SENSITIVE_DEFAULT_ICON ? ' picto' : ''
+                                var withpicto = prop.species.pictogram || globalSettings.SENSITIVITY_DEFAULT_ICON ? ' picto' : ''
 
                                 markup.push('<div class="info-sensitive">');
                                 markup.push('<div class="info-sensitive-content '+ withpicto +'">');
@@ -1729,7 +1729,7 @@ function layersService ($http, globalSettings, settingsFactory) {
                                 markup.push('<div class="info-point-description">' + (prop.description || '') + '</div>');
                                 markup.push(prop.species.url ? '<div class="info-point-url"><a href="' + prop.species.url + '" target="_blank">Plus d\'informations</a></div>' : '');
                                 markup.push('</div>');
-                                markup.push('<div class="info-point-photo">' + (prop.species.pictogram || globalSettings.SENSITIVE_DEFAULT_ICON ? '<img src="' + (prop.species.pictogram ? globalSettings.API_URL + prop.species.pictogram : globalSettings.SENSITIVE_DEFAULT_ICON) + '">' : '') + '</div>');
+                                markup.push('<div class="info-point-photo">' + (prop.species.pictogram || globalSettings.SENSITIVITY_DEFAULT_ICON ? '<img src="' + (prop.species.pictogram ? globalSettings.API_URL + prop.species.pictogram : globalSettings.SENSITIVITY_DEFAULT_ICON) + '">' : '') + '</div>');
                                 markup.push('</div>');
 
                                 if (layer.bindPopup) {
