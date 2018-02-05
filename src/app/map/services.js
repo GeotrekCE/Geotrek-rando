@@ -1229,6 +1229,9 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
         this.map.addLayer(this._childMarkersLayer);
         this.map.addLayer(this._infosMarkersLayer);
         this.map.addLayer(this._servicesMarkersLayer);
+        if (globalSettings.SENSITIVITY_SHOW_LAYER_BY_DEFAULT) {
+            this.map.addLayer(this._sensitiveLayers.Sensitive);
+        }
 
         popupService.setMap(this.map);
 
@@ -1557,23 +1560,6 @@ function layersService ($http, globalSettings, settingsFactory) {
         return false;
     };
 
-    var _getSensitiveLayersConf = function _getSensitiveLayersConf () {
-        if (globalSettings.SENSITIVITY_ENABLED) {
-            return [{
-                "LAYER_URL": settingsFactory.sensitiveUrl,
-                "LAYER_NAME": "Sensitive",
-                "OPTIONS": {
-                    "legend": "Zone sensible",
-                    "id": "sensitive",
-                    "attribution": "(c) LPO",
-                    "active": true
-                }
-            }]
-        }
-
-        return false;
-    };
-
     var _getMainLayersGroup = function _getMainLayersGroup (customOptions) {
         var layersConf = _getMainLayersConf();
 
@@ -1680,93 +1666,53 @@ function layersService ($http, globalSettings, settingsFactory) {
     };
 
     var _getSensitiveLayers = function _getSensitiveLayers () {
-        var layersConf  = _getSensitiveLayersConf();
-        var defaultName = globalSettings.OPTIONAL_TILELAYERS_NAME || 'Layer';
+        var layerOptions = {
+            legend: "Zones de sensibilité environnementale",
+            id: "sensitive",
+            attribution: "(c) LPO",
+            active: true,
+            style: globalSettings.SENSITIVITY_LAYER_STYLE,
+            onEachFeature: function (feature, layer) {
+                var markup = [], prop;
+                if (layer && layer.feature && layer.feature.properties) {
 
-        if (!layersConf) { return false; }
+                    prop = layer.feature.properties;
 
-        var layers = {};
+                    var monthsString = ['JAN', 'FEV', 'MAR', 'AVR', 'MAI', 'JUIN', 'JUIL', 'AOU', 'SEP', 'OCT', 'NOV', 'DEC']
+                    var monthsMarkup = 'Période de sensibilité :';
+                    var practiceMarkup = '';
 
-        layersConf.forEach(function (layerConf, index) {
-            var layerName, layerOptions;
-            if (typeof layerConf === 'string') {
-                layers[[defaultName, index + 1].join(' ')] = L.tileLayer(layerConf);
-            } else if (layerConf.LAYER_URL) {
-                layerName = layerConf.LAYER_NAME || [defaultName, index + 1].join(' ');
-                if (layerConf.LAYER_URL.split('.').pop() === 'geojson' || layerConf.LAYER_URL.split('.').pop() === 'json') {
-                    /**
-                     * Manage geoJson layers
-                     */
-                    layerOptions = angular.extend({
-                        style: globalSettings.SENSITIVITY_LAYER_STYLE,
-                        onEachFeature: function (feature, layer) {
-                            var markup = [], prop;
-                            if (layer && layer.feature && layer.feature.properties) {
-
-                                prop = layer.feature.properties;
-
-                                var monthsString = ['JAN', 'FEV', 'MAR', 'AVR', 'MAI', 'JUIN', 'JUIL', 'AOU', 'SEP', 'OCT', 'NOV', 'DEC']
-                                var monthsMarkup = 'Période de sensibilité :';
-                                var practiceMarkup = '';
-
-                                for (var i = 0; i < 12; i++) {
-                                    if (prop.species.period[i]) {
-                                        monthsMarkup += '<span class="month active">' + monthsString[i] + '</span>';
-                                    }
-                                }
-
-                                for (var i = 0; i < prop.species.practices.length; i++) {
-                                    practiceMarkup += '<span class="practice">' + prop.species.practices[i].name + '</span>';
-                                }
-
-                                var withpicto = prop.species.pictogram || globalSettings.SENSITIVITY_DEFAULT_ICON ? ' picto' : ''
-
-                                markup.push('<div class="info-sensitive">');
-                                markup.push('<div class="info-sensitive-content '+ withpicto +'">');
-                                markup.push('<div class="info-point-title">'  + ((prop.species.name) || '') + '</div>');
-                                markup.push('<div class="info-point-months">' + monthsMarkup + '</div>');
-                                markup.push(prop.contact ? '<div class="info-point-contact">Contact : '+ prop.contact + '</div>' : '');
-                                markup.push('<div class="info-point-description">' + (prop.description || '') + '</div>');
-                                markup.push(prop.species.url ? '<div class="info-point-url"><a href="' + prop.species.url + '" target="_blank">Plus d\'informations</a></div>' : '');
-                                markup.push('</div>');
-                                markup.push('<div class="info-point-photo">' + (prop.species.pictogram || globalSettings.SENSITIVITY_DEFAULT_ICON ? '<img src="' + (prop.species.pictogram ? globalSettings.API_URL + prop.species.pictogram : globalSettings.SENSITIVITY_DEFAULT_ICON) + '">' : '') + '</div>');
-                                markup.push('</div>');
-
-                                if (layer.bindPopup) {
-                                    layer.bindPopup(markup.join('\n'));
-                                }
-                            }
-
-                            if (layer instanceof L.Marker) {
-                                layer.setZIndexOffset(-5000);
-                            }
-
-                            if (layerConf.DEFAULT_MARKER && layer instanceof L.Marker) {
-                                layer.setIcon(L.icon(layerConf.DEFAULT_MARKER));
-                            }
+                    for (var i = 0; i < 12; i++) {
+                        if (prop.species.period[i]) {
+                            monthsMarkup += '<span class="month active">' + monthsString[i] + '</span>';
                         }
-                    }, layerConf.OPTIONS);
-
-                    L.Icon.Default.imagePath = '/app/vendors/images/leaflet';
-
-                    layers[layerName] = L.geoJson.ajax(layerConf.LAYER_URL, layerOptions);
-                } else {
-                    /**
-                     * Manage tileLayers
-                     */
-                    layerOptions = layerConf.OPTIONS || {};
-
-                    if (layerConf.BOUNDS) {
-                        layerOptions.boundsLimit = {
-                            url: layerConf.BOUNDS
-                        };
                     }
 
-                    layers[layerName] = L.tileLayer(layerConf.LAYER_URL, layerOptions);
+                    for (var i = 0; i < prop.species.practices.length; i++) {
+                        practiceMarkup += '<span class="practice">' + prop.species.practices[i].name + '</span>';
+                    }
+
+                    var withpicto = prop.species.pictogram || globalSettings.SENSITIVITY_DEFAULT_ICON ? ' picto' : ''
+
+                    markup.push('<div class="info-sensitive">');
+                    markup.push('<div class="info-sensitive-content '+ withpicto +'">');
+                    markup.push('<div class="info-point-title">'  + ((prop.species.name) || '') + '</div>');
+                    markup.push('<div class="info-point-months">' + monthsMarkup + '</div>');
+                    markup.push(prop.contact ? '<div class="info-point-contact">Contact : '+ prop.contact + '</div>' : '');
+                    markup.push('<div class="info-point-description">' + (prop.description || '') + '</div>');
+                    markup.push(prop.species.url ? '<div class="info-point-url"><a href="' + prop.species.url + '" target="_blank">Plus d\'informations</a></div>' : '');
+                    markup.push('</div>');
+                    markup.push('<div class="info-point-photo">' + (prop.species.pictogram || globalSettings.SENSITIVITY_DEFAULT_ICON ? '<img src="' + (prop.species.pictogram ? globalSettings.API_URL + prop.species.pictogram : globalSettings.SENSITIVITY_DEFAULT_ICON) + '">' : '') + '</div>');
+                    markup.push('</div>');
+
+                    if (layer.bindPopup) {
+                        layer.bindPopup(markup.join('\n'));
+                    }
                 }
             }
-        });
-        return layers;
+        };
+
+        return {"Sensitive": L.geoJson.ajax(settingsFactory.sensitiveUrl, layerOptions)};
     };
 
     this.getMainLayersGroup = _getMainLayersGroup;
