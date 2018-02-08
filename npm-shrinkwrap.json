@@ -322,8 +322,8 @@
       "resolved": "https://registry.npmjs.org/boom/-/boom-4.3.1.tgz"
     },
     "bootstrap-daterangepicker": {
-      "version": "2.1.17",
-      "resolved": "git+https://github.com/dangrossman/bootstrap-daterangepicker.git#2dc0523f351da6d467301b456e6d3ff6c5ec58a1"
+      "version": "2.1.30",
+      "resolved": "https://registry.npmjs.org/bootstrap-daterangepicker/-/bootstrap-daterangepicker-2.1.30.tgz"
     },
     "bootstrap-sass": {
       "version": "3.3.7",
@@ -4110,8 +4110,8 @@
       "resolved": "https://registry.npmjs.org/jasmine-core/-/jasmine-core-2.8.0.tgz"
     },
     "jquery": {
-      "version": "1.12.0",
-      "resolved": "https://registry.npmjs.org/jquery/-/jquery-1.12.0.tgz"
+      "version": "3.3.1",
+      "resolved": "https://registry.npmjs.org/jquery/-/jquery-3.3.1.tgz"
     },
     "js-base64": {
       "version": "2.3.2",
@@ -5175,6 +5175,10 @@
         "gsap": {
           "version": "1.16.1",
           "resolved": "https://registry.npmjs.org/gsap/-/gsap-1.16.1.tgz"
+        },
+        "jquery": {
+          "version": "1.12.4",
+          "resolved": "https://registry.npmjs.org/jquery/-/jquery-1.12.4.tgz"
         },
         "lodash": {
           "version": "3.10.1",
