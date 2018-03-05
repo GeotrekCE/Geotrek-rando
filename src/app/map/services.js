@@ -449,14 +449,8 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
             { position: 'bottomleft' }
         );
 
-        var sensitiveLayersControl = L.control.backgroundLayers(
-            this._sensitiveLayers,
-            { position: 'bottomleft', defaultIcon: '/images/icons/sensitive.svg' }
-        );
-
         layersControl.addTo(this.map);
         optionalLayersControl.addTo(this.map);
-        sensitiveLayersControl.addTo(this.map);
 
         return true;
     };
@@ -1165,7 +1159,9 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
         };
 
         this._optionalLayers = layersService.getOptionalLayers();
-        this._sensitiveLayers = layersService.getSensitiveLayers();
+        if (globalSettings.SENSITIVITY_ENABLED) {
+            Object.assign(this._optionalLayers, layersService.getSensitiveLayers());
+        }
 
         var mapParameters = {
             center: [
@@ -1229,7 +1225,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
         this.map.addLayer(this._childMarkersLayer);
         this.map.addLayer(this._infosMarkersLayer);
         this.map.addLayer(this._servicesMarkersLayer);
-        if (globalSettings.SENSITIVITY_SHOW_LAYER_BY_DEFAULT) {
+        if (globalSettings.SENSITIVITY_ENABLED && globalSettings.SENSITIVITY_SHOW_LAYER_BY_DEFAULT) {
             this.map.addLayer(this._sensitiveLayers.Sensitive);
         }
 
@@ -1666,12 +1662,16 @@ function layersService ($http, globalSettings, settingsFactory) {
     };
 
     var _getSensitiveLayers = function _getSensitiveLayers () {
+        if (!globalSettings.SENSITIVITY_ENABLED) {
+            return {};
+        }
         var layerOptions = {
             legend: "Zones de sensibilité environnementale",
             id: "sensitive",
             attribution: "(c) LPO",
             active: true,
             style: globalSettings.SENSITIVITY_LAYER_STYLE,
+            defaultIcon: "/images/icons/sensitive.svg",
             onEachFeature: function (feature, layer) {
                 var markup = [], prop;
                 if (layer && layer.feature && layer.feature.properties) {
