@@ -401,6 +401,14 @@ msgstr "Activer / Masquer les services"
 msgid "VIEWPORT_FILTERING"
 msgstr "Filtrer par la carte"
 
+msgid "SENSITIVE_TILELAYER"
+msgstr "Zone sensible"
+
+msgid "MONTHSMARKUP"
+msgstr "Période de sensibilité :"
+
+msgid "MONTHS"
+msgstr "JAN,FEV,MAR,AVR,MAI,JUIN,JUIL,AOU,SEP,OCT,NOV,DEC"
 
 # HOME PAGE
 #

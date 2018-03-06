@@ -1524,7 +1524,7 @@ function popupService() {
     this.attachPopups = _attachPopups; // Publish method
 }
 
-function layersService ($http, globalSettings, settingsFactory) {
+function layersService ($http, globalSettings, settingsFactory, $translate) {
 
     /**
      * Return PERMANENT_TILELAYERS
@@ -1563,14 +1563,13 @@ function layersService ($http, globalSettings, settingsFactory) {
                 "LAYER_URL": settingsFactory.sensitiveUrl,
                 "LAYER_NAME": "Sensitive",
                 "OPTIONS": {
-                    "legend": "Zone sensible",
+                    "legend": $translate.instant('SENSITIVE_TILELAYER'),
                     "id": "sensitive",
                     "attribution": "(c) LPO",
                     "active": true
                 }
-            }]
+            }] 
         }
-
         return false;
     };
 
@@ -1705,8 +1704,8 @@ function layersService ($http, globalSettings, settingsFactory) {
 
                                 prop = layer.feature.properties;
 
-                                var monthsString = ['JAN', 'FEV', 'MAR', 'AVR', 'MAI', 'JUIN', 'JUIL', 'AOU', 'SEP', 'OCT', 'NOV', 'DEC']
-                                var monthsMarkup = 'Période de sensibilité :';
+                                var monthsString = $translate.instant('MONTHS').split(",");
+                                var monthsMarkup = $translate.instant('MONTHSMARKUP');
                                 var practiceMarkup = '';
 
                                 for (var i = 0; i < 12; i++) {
