@@ -457,6 +457,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
         layersControl.addTo(this.map);
         optionalLayersControl.addTo(this.map);
         sensitiveLayersControl.addTo(this.map);
+        sensitiveLayersControl._setState(globalSettings.SHOW_SENSITIVE_TILELAYER_BY_DEFAULT);
 
         return true;
     };

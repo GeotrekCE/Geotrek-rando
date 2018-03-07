@@ -106,7 +106,8 @@ function leafletExtend() {
 
         initialize: function (baseLayers, options) {
             L.setOptions(this, options);
-
+            this.controlComponent = null;
+            this.currentLayers = null;
             this._layers = {};
             this._lastZIndex = 0;
 
@@ -157,17 +158,13 @@ function leafletExtend() {
             control.layerId = L.stamp(obj.layer);
 
             L.DomEvent.on(control, 'click', function() {
-                if (!this._map.hasLayer(obj.layer)) {
-                    this._map.addLayer(obj.layer);
-                } else if (this._map.hasLayer(obj.layer)) {
-                    this._map.removeLayer(obj.layer);
-                }
-                control.className = 'background ' + this._getState(obj.layer);
+               this._setState(!this._getState(obj.layer));
             }, this);
 
             control.className = 'background ' + this._getState(obj.layer);
             control.innerHTML = '<img src="' + icon + '" alt="" />';
-
+            this.controlComponent = control;
+            this.currentLayers = obj.layer;
             container.appendChild(control);
         },
 
@@ -180,7 +177,6 @@ function leafletExtend() {
         _getState: function (layer) {
             return this._map.hasLayer(layer) ? 'active' : '';
         },
-
         _addLayer: function (layer, name) {
             var id = L.stamp(layer);
 
@@ -193,6 +189,14 @@ function leafletExtend() {
                 this._lastZIndex++;
                 layer.setZIndex(this._lastZIndex);
             }
+        },
+        _setState: function(state) {
+            if (state) {
+                this._map.addLayer(this.currentLayers);
+            } else if (this._map.hasLayer(this.currentLayers)) {
+                this._map.removeLayer(this.currentLayers);
+            }
+            this.controlComponent.className = 'background ' + this._getState(this.currentLayers);
         }
     });
 
