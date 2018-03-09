@@ -118,7 +118,7 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
     initFiltersView();
 
     var rootScopeEvents = [
-        $rootScope.$on('switchGlobalLang', function () {
+        $rootScope.$on('startSwitchGlobalLang', function () {
             initFiltersView();
         })
     ];

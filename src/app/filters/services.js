@@ -64,9 +64,7 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
         var deferred = $q.defer(),
             promises = [];
 
-        if (!self.filters) {
-            self.filters = angular.copy(activeFiltersModel);
-        }
+        self.filters = angular.copy(activeFiltersModel);
 
         // filtersToolsService.clean(self.filters);
 
@@ -183,7 +181,6 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
         }
 
         // filtersToolsService.clean(self.filters);
-
         return self.filters;
 
     };
