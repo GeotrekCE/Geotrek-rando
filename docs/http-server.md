@@ -4,8 +4,8 @@
 
 ## Install and configure nginx
 
-Create the file `/etc/nginx/site-available/geotrek-rando` and symlink it to
-`/etc/nginx/site-enabled/geotrek-rando`. This example supposes you synchronized
+Create the file `/etc/nginx/sites-available/geotrek-rando` and symlink it to
+`/etc/nginx/sites-enabled/geotrek-rando`. This example supposes you synchronized
 Geotrek-Admin data to `<my_data_directory>` and you configured Geotrek-Rando
 `API_URL` to your `''` (empty string).
 
@@ -42,7 +42,7 @@ server {
 }
 ```
 
-Then run `service nginx restart`
+Then run `sudo service nginx restart`
 
 ### Redirect URLs from v1
 
