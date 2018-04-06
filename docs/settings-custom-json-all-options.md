@@ -61,7 +61,7 @@ Option     | Type      | Default   | Description
 --------|----------|-----------|------------
 DEFAULT_LANGUAGE | string (lang code) | `"en"` | Define default language of the app
 AVAILABLE_LANGUAGES | Object (lang) | cf [Available languages object](#available-languages-object)  | Available languages of the app
-ENABLED_LANGUAGES | array of strings (lang codes) | ` | "fr", "en", "de", "nl"]` | This is the list of the enabled languages in the header lang menu and the app.
+ENABLED_LANGUAGES | array of strings (lang codes) | `["fr", "en", "de", "it", "nl"]` | This is the list of the enabled languages in the header lang menu and the app.
 
 **Available languages object**
 ```
@@ -69,9 +69,8 @@ ENABLED_LANGUAGES | array of strings (lang codes) | ` | "fr", "en", "de", "nl"]`
     "fr": "Français",
     "en": "English",
     "de": "Deutsch",
-    "nl": "Nederlands",
-    "it": "Italian",
-    "es": "Spanish"
+    "it": "Italiano",
+    "nl": "Nederlands"
 }
 ```
 
