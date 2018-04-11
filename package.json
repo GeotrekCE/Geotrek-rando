@@ -70,7 +70,7 @@
     "partialify": "^3.1.6",
     "portfinder": "^1.0.13",
     "pretty-hrtime": "^1.0.3",
-    "rando3D": "git+https://github.com/makinacorpus/rando3D.git#ef72fc8c1728b08b10785a199f04329e210719be",
+    "rando3D": "git+https://github.com/makinacorpus/rando3D.git#970e257806a247f274ef80abfd5e07671e3c4db3",
     "require-dir": "^0.3.2",
     "sinon": "^4.1.1",
     "sinon-chai": "^2.14.0",

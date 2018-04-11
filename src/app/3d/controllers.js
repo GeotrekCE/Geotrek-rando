@@ -9,6 +9,9 @@ function Rando3DController(result, $scope, $timeout, $modalInstance, globalSetti
         });
     };
 
+    // Keep a reference to the scene so we can dispose of it when closing the modal.
+    var scene;
+
     function init3D () {
         $scope.isLoading = true;
         var pk = result.id;
@@ -33,7 +36,7 @@ function Rando3DController(result, $scope, $timeout, $modalInstance, globalSetti
         var cameraID = "examine";
 
         var app3D = new Rando3D();
-        var scene = app3D.init(customSettings, canvas, cameraID);
+        scene = app3D.init(customSettings, canvas, cameraID);
         scene.init(loadingCallback);
     }
 
@@ -44,6 +47,10 @@ function Rando3DController(result, $scope, $timeout, $modalInstance, globalSetti
 
     $scope.close = function () {
         $modalInstance.dismiss('close');
+
+        // Destroy the scene so resources and key bindings get freed.
+        scene.deinit();
+        scene = undefined;
     };
 
 }
