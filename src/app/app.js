@@ -82,6 +82,7 @@ require('leaflet.markercluster');
 require('leaflet-fullscreen');
 
 require('../../node_modules/leaflet-active-area/src/leaflet.activearea.js');
+require('leaflet.snogylop');
 
 //TEST LIBRARIES
 require('angular-mocks'); // that one will exclude if not angular.mock

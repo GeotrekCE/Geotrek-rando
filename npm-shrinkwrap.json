@@ -4346,6 +4346,10 @@
       "version": "0.4.0",
       "resolved": "https://registry.npmjs.org/leaflet.markercluster/-/leaflet.markercluster-0.4.0.tgz"
     },
+    "leaflet.snogylop": {
+      "version": "0.4.0",
+      "resolved": "git+https://github.com/ebrelsford/Leaflet.snogylop.git#f0e5846e5b8e2614b20beff84c0c7e9531294a9a"
+    },
     "levn": {
       "version": "0.3.0",
       "resolved": "https://registry.npmjs.org/levn/-/levn-0.3.0.tgz"
