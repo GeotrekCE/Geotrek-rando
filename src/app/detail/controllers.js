@@ -331,7 +331,12 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                             mapService.invalidateSize();
                         }, 500);
                     }
-                    $scope.toggleInterest(activeDefaultType);
+
+                    // If there are no POI listing currently open, expand
+                    // the default one.
+                    if (!$scope.currentInterest || $scope.currentInterest === 'none') {
+                        $scope.toggleInterest(activeDefaultType);
+                    }
                 }
             );
     }
