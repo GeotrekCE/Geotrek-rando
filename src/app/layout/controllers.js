@@ -149,39 +149,24 @@ function SidebarDetailController($scope, $rootScope, $modal, $stateParams, $loca
      * based on current state.
      *
      * @param {Boolean} forceRefresh
-     *   Whether source data should be refreshed before looking the result up.
+     *   Whether source data sould be refreshed before looking up for the result.
      */
     function getResultDetails (forceRefresh) {
-        // Private local function looking for a result based on current cat & name slugs
-        // from current URL.
-        function _getResultDetailsBasedOnSlugs() {
-            resultsService.getAResultBySlug($stateParams.slug, $stateParams.catSlug, forceRefresh)
-            .then(
-                function (data) {
-                    $scope.result = data;
-                }
-            );
-        }
-
-        // If the 'elementUID' parameter was provided in the URL, use it to target
-        // the result.
         if ($stateParams.elementUID) {
             resultsService.getAResultByUID($stateParams.elementUID)
                 .then(
-                    // Success: Load result that matched.
                     function (data) {
                         $scope.result = data;
-                    },
-                    // Failure: No result found with provided UID, fallback to using slugs.
-                    function (error) {
-                        _getResultDetailsBasedOnSlugs();
                     }
                 );
         }
-        // No 'elementUID' parameter was provided: try targetting the result based on
-        // cat & name slugs from current URL.
         else if ($stateParams.slug) {
-            _getResultDetailsBasedOnSlugs();
+            resultsService.getAResultBySlug($stateParams.slug, $stateParams.catSlug, forceRefresh)
+                .then(
+                    function (data) {
+                        $scope.result = data;
+                    }
+                );
         }
     }
 
