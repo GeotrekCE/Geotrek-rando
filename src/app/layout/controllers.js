@@ -144,23 +144,8 @@ function SidebarDetailController($scope, $rootScope, $modal, $stateParams, $loca
 
     $scope.webGLisEnable = webglService.isEnabled();
 
-    /**
-     * Populates the $scope.result property with the element to display,
-     * based on current state.
-     *
-     * @param {Boolean} forceRefresh
-     *   Whether source data sould be refreshed before looking up for the result.
-     */
-    function getResultDetails (forceRefresh) {
-        if ($stateParams.elementUID) {
-            resultsService.getAResultByUID($stateParams.elementUID)
-                .then(
-                    function (data) {
-                        $scope.result = data;
-                    }
-                );
-        }
-        else if ($stateParams.slug) {
+    function getResultDetails(forceRefresh) {
+        if ($stateParams.slug) {
             resultsService.getAResultBySlug($stateParams.slug, $stateParams.catSlug, forceRefresh)
                 .then(
                     function (data) {
