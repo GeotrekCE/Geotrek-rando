@@ -103,8 +103,8 @@ GOOGLE_ANALYTICS_ID | String | `""` | ID of your Google Analytics account.
 Option     | Type      | Default   | Description
 --------|----------|-----------|------------
 SENSITIVE_TILELAYER | Boolean | `true` | Enable sensitive areas display
-SENSITIVE_DEFAULT_ICON | String(file name) | `""` | Name of your custom deafult icon used for sensitive areas
-SENSITIVE_LAYER_STYLE | Object | `{}` | Leaflet style for sensitive area
+SENSITIVE_DEFAULT_ICON | String(file name) | `""` | Name of your custom default icon used for sensitive areas
+SENSITIVE_LAYER_STYLE | Object | `{}` | Leaflet style for sensitive area (see http://leafletjs.com/reference-0.7.7.html#path-options)
 
 
 ## Map
