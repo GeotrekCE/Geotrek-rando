@@ -403,13 +403,13 @@ msgid "VIEWPORT_FILTERING"
 msgstr "Filter with map"
 
 msgid "SENSITIVE_TILELAYER"
-msgstr "Sensible zone"
+msgstr "Sensitive area"
 
 msgid "MONTHSMARKUP"
-msgstr "Period of sensibility :"
+msgstr "Period of sensitivity:"
 
 msgid "MONTHS"
-msgstr "JAN,FEV,MAR,AVR,MAI,JUIN,JUIL,AOU,SEP,OCT,NOV,DEC"
+msgstr "JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC"
 
 # HOME PAGE
 #
