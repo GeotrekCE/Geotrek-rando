@@ -1,9 +1,19 @@
 2.18.1-dev0
 ===========
 
+**Enhancements**
+
+* Show sensitive areas
+* Upgrade jQuery and bootstrap-daterangepicker npm modules
+* Create an empty directive allowing to add custom code
+  through custom directive file
+
 **Bug fixes**
 
 * Events finishing today should not be filtered out
+* Improve documentation (npm version, nginx config dir, facebook config)
+* Deinit 3D module when leaving
+* Stop toggling POI panels whenever they get reloaded if one's already open (#584)
 
 2.18.0 / 2017-12-21
 ===================
