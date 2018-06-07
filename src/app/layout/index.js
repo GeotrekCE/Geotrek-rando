@@ -4,7 +4,7 @@ var controllers = require('./controllers');
 
 angular.module('rando.layout', ['ui.router', 'rando.treks', 'angular-google-analytics'])
     .controller('LayoutController',        controllers.LayoutController)
-    .controller('SidebarHomeController',   controllers.SidebarHomeController)
+    .controller('SubHeaderController',   controllers.SubHeaderController)
     .controller('SidebarFlatController',   controllers.SidebarFlatController)
     .controller('SidebarDetailController', controllers.SidebarDetailController)
     .config(require('./routes').layoutRoutes)

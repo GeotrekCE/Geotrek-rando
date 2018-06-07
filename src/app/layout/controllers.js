@@ -153,7 +153,7 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
 
 }
 
-function SidebarHomeController() {
+function SubHeaderController() {
 }
 
 function SidebarDetailController($scope, $rootScope, $modal, $stateParams, $location, globalSettings, resultsService, favoritesService, webglService) {
@@ -216,7 +216,7 @@ function FooterController() {
 
 module.exports = {
     LayoutController: LayoutController,
-    SidebarHomeController: SidebarHomeController,
+    SubHeaderController: SubHeaderController,
     SidebarDetailController: SidebarDetailController,
     SidebarFlatController: SidebarFlatController,
     FooterController: FooterController

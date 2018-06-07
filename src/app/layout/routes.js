@@ -21,9 +21,9 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
         .state('layout.root', {
             url: '',
             views: {
-                'sidebar' : {
-                    template: require('./templates/sidebar-home.html'),
-                    controller: 'SidebarHomeController'
+                'subheader' : {
+                    template: require('./templates/sub-header.html'),
+                    controller: 'SubHeaderController'
                 },
                 'content' : {
                     template: require('./templates/content-home.html')
