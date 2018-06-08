@@ -1,6 +1,6 @@
 'use strict';
 
-function filtersToolsService () {
+function filtersToolsService (globalSettings) {
 
     function _localeCompare (a, b) {
         return a.localeCompare ? a.localeCompare(b) : 0;
@@ -24,9 +24,11 @@ function filtersToolsService () {
         }
     }
 
-    function clean (object) {
+    // Cleans given filterModel object.
+    function cleanFilters(object) {
         delete object.footprint;
 
+        // Remove empty parameters.
         _.forEach(object, function (value, key) {
             if ((value instanceof Array) && (value.length === 0)) {
                 delete object[key];
@@ -35,6 +37,14 @@ function filtersToolsService () {
             }
         });
 
+        // If only one category can be active at a time, restrict it.
+        if (globalSettings.ENABLE_UNIQUE_CAT) {
+            if (object.categories !== undefined && object.categories.length > 1) {
+                var firstCategory = object.categories[0];
+                object.categories = [firstCategory];
+            }
+        }
+
         object = _sorter(object);
 
         object.footprint = JSON.stringify(object);
@@ -42,7 +52,7 @@ function filtersToolsService () {
         return object;
     }
 
-    this.clean = clean;
+    this.cleanFilters = cleanFilters;
 }
 
 function filtersService($rootScope, $q, $location, globalSettings, utilsFactory, resultsService, categoriesService, filtersToolsService, translationService) {
@@ -168,6 +178,13 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
                     defaultActiveCategories = [defaultActiveCategories];
                 }
 
+                // If only one category can be selected at a time, only take the first
+                // default active category into account.
+                if (globalSettings.ENABLE_UNIQUE_CAT && defaultActiveCategories.length) {
+                    var firstCategory = defaultActiveCategories[0];
+                    defaultActiveCategories = [firstCategory];
+                }
+
                 if (defaultActiveCategories.indexOf(category.id.toString()) > -1 && activeFiltersModel.categories.indexOf(category.id.toString()) === -1) {
                     activeFiltersModel.categories.push(category.id);
                 }
@@ -188,7 +205,6 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
             });
         }
 
-        // filtersToolsService.clean(self.filters);
         return self.filters;
 
     };
@@ -233,7 +249,7 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
             }
         }
 
-        filtersToolsService.clean(self.activeFilters);
+        filtersToolsService.cleanFilters(self.activeFilters);
     };
 
     self.resetActiveFilters = function () {
@@ -242,8 +258,8 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
     };
 
     self.filtersChanged = function filtersChanged (filters) {
-        filtersToolsService.clean(self.activeFilters);
-        filtersToolsService.clean(filters);
+        filtersToolsService.cleanFilters(self.activeFilters);
+        filtersToolsService.cleanFilters(filters);
 
         return !angular.equals(filters, self.activeFilters);
     };
@@ -252,7 +268,7 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
         if (activeFilters.search === '') {
             delete activeFilters.search;
         }
-        self.activeFilters = filtersToolsService.clean(activeFilters);
+        self.activeFilters = filtersToolsService.cleanFilters(activeFilters);
 
         $location.search(activeFilters);
     };
@@ -264,7 +280,7 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
             self.addFilterValueToActiveFilters(filterValues, filterName);
         });
 
-        filtersToolsService.clean(self.activeFilters);
+        filtersToolsService.cleanFilters(self.activeFilters);
 
         return self.activeFilters;
     };
@@ -289,11 +305,11 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
             });
         }
 
-        filtersToolsService.clean(self.activeFilters);
+        filtersToolsService.cleanFilters(self.activeFilters);
     };
 
     self.getActiveFilters = function getActiveFilters () {
-        return filtersToolsService.clean(self.activeFilters);
+        return filtersToolsService.cleanFilters(self.activeFilters);
     };
 
 
