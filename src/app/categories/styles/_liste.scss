@@ -228,10 +228,9 @@
     .category-title {
         cursor: pointer;
         opacity: .5;
-        width: 235px;
         overflow: hidden;
         line-height: 50px;
-        padding-left: 0.25rem;
+        padding: 0 0.5rem;
         white-space: nowrap;
     }
 
@@ -521,6 +520,12 @@
                 }
             }
         }
+    }
+}
+
+.categories.tabs {
+    li.category-tab {
+        display: inline-block;
     }
 }
 
