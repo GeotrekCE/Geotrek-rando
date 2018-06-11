@@ -226,6 +226,9 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
             categories.push(category.id.toString());
         }
 
+        // Toogle the filter toolbar for this category.
+        $scope.toggleCategoryFilters(category);
+
         $scope.propagateActiveFilters();
     };
 
@@ -269,6 +272,15 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         $scope.filtering = true;
         hideSiblings(category);
     };
+
+    $scope.toggleCategoryFilters = function toggleCategoryFilters (category) {
+        if (category.open) {
+            $scope.closeCategoryFilters(category);
+        }
+        else {
+            $scope.openCategoryFilters(category);
+        }
+    }
 
     $scope.propagateActiveFilters = function propagateActiveFilters () {
         filtersService.updateActiveFilters($rootScope.activeFilters);
