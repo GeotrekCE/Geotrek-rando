@@ -320,6 +320,7 @@
 
         .category-filter {
             // padding-left: 20px;
+            display: inline-block;
         }
 
         .more-or-less {
@@ -548,7 +549,6 @@
     }
     .selector {
         margin: 0;
-        width: 100%;
         position: relative;
         transition: all 0.1s ease-out;
         @include transitionfuse;
@@ -560,10 +560,6 @@
         & > span {
             display: block;
             padding: 1em;
-            cursor: pointer;
-        }
-        &:hover, &:focus {
-            // transition-delay: 0.4s;
         }
     }
 }

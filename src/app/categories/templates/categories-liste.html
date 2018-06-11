@@ -171,11 +171,11 @@
                     <!-- Theme selector: TODO -->
 
                     <!-- Custom filter 1 selector -->
-                    <div ng-if="category.type1 && category.type1.values.length > 0" class="category-filter selector type1" ng-class="{empty: category.type1.values.length === 0, opened: type1IsCollapsed}">
-                        <span ng-click="type1IsCollapsed = !type1IsCollapsed" class="filter-title">
+                    <div ng-if="category.type1 && category.type1.values.length > 0" class="category-filter selector type1" ng-class="{empty: category.type1.values.length === 0}">
+                        <span class="filter-title">
                             <span>{{category.type1_label}}</span>
                         </span>
-                        <div class="choices" collapse="!type1IsCollapsed">
+                        <div class="choices">
                             <div ng-repeat="type1 in category.type1.values | orderBy: 'name'" class="type1 form-group">
                                 <input type="checkbox" id="type1-{{::type1.id}}" ng-click="toogleCategoryFilter(category.id, 'type1', type1.id)" ng-checked="activeFilters[category.id + '_type1'].indexOf(type1.id.toString()) > -1"/>
                                 <label for="type1-{{::type1.id}}">
@@ -190,11 +190,11 @@
                     </div>
 
                     <!-- Custom filter 2 selector -->
-                    <div ng-if="category.type2 && category.type2.values.length > 0" class="category-filter selector type2" ng-class="{empty: category.type2.values.length === 0, opened: type2IsCollapsed}">
-                        <span ng-click="type2IsCollapsed = !type2IsCollapsed" class="filter-title">
+                    <div ng-if="category.type2 && category.type2.values.length > 0" class="category-filter selector type2" ng-class="{empty: category.type2.values.length === 0}">
+                        <span class="filter-title">
                             <span>{{category.type2_label}}</span>
                         </span>
-                        <div class="choices" collapse="!type2IsCollapsed">
+                        <div class="choices">
                             <div ng-repeat="type2 in category.type2.values" class="type2 form-group">
                                 <input type="checkbox" id="type2-{{::type2.id}}" ng-click="toogleCategoryFilter(category.id, 'type2', type2.id)" ng-checked="activeFilters[category.id + '_type2'].indexOf(type2.id.toString()) > -1"/>
                                 <label for="type2-{{type2.id}}">
