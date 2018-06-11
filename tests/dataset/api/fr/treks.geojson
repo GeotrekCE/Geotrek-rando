@@ -2160,9 +2160,9 @@
                     }
                 ],
                 "practice": {
-                    "id": 4,
-                    "pictogram": "/media/upload/practice-foot.png",
-                    "label": "P\u00e9destre"
+                    "id": 2,
+                    "pictogram": "/media/upload/practice-horse.png",
+                    "label": "Equestre"
                 },
                 "accessibilities": [],
                 "usages": [
