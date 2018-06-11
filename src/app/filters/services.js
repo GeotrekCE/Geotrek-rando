@@ -130,7 +130,8 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
                     label: category.label,
                     id: category.id,
                     type1: [],
-                    type2: []
+                    type2: [],
+                    practices: [],
                 };
 
                 if (category.type1 && category.type1.values.length > 0) {
@@ -152,6 +153,12 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
                     newCategory.duration = category.duration;
                     newCategory.ascent = category.ascent;
                     newCategory.eLength = category.eLength;
+
+                    // Register category practices.
+                    newCategory.practices = [];
+                    if (category.practices.values.length > 0) {
+                        newCategory.practices = category.practices;
+                    }
                 }
 
                 if (category.begin_date) {
