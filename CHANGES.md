@@ -1,6 +1,21 @@
 2.18.2-dev0
 ===================
 
+**Major changes**
+
+* The user interface has been revamped with tabs for filtering on categories.
+  This makes it *impossible* to filter on several categories at the same time anymore.
+  Following this change, the `DEFAULT_ACTIVE_CATEGORIES` setting (plural) has been replaced with
+  `DEFAULT_ACTIVE_CATEGORY` (singular).<br>
+  - If you had customized `DEFAULT_ACTIVE_CATEGORIES` with a unique default category, you
+    need to set `DEFAULT_ACTIVE_CATEGORY` to it.<br>
+    _For instance:_<br>
+    `"DEFAULT_ACTIVE_CATEGORIES": ["C3"]` becomes `"DEFAULT_ACTIVE_CATEGORY": "C3"`
+  - If you had customized `DEFAULT_ACTIVE_CATEGORIES` with several default categories, you
+    need to choose only one of them and set `DEFAULT_ACTIVE_CATEGORY` to it.<br>
+    _For instance:_<br>
+    `"DEFAULT_ACTIVE_CATEGORIES": ["T", "C3", "C5"]` becomes `"DEFAULT_ACTIVE_CATEGORY": "C5"`
+
 **Bug fixes**
 
 *
