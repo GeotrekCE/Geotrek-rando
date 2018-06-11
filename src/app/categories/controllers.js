@@ -200,48 +200,15 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         $scope.propagateActiveFilters();
     };
 
-    $scope.activateCategory = function activateCategory (category) {
-        var categories = $rootScope.activeFilters.categories,
-            indexOfCategory = categories.indexOf(category.id.toString());
-        if (indexOfCategory < 0) {
-            if (globalSettings.ENABLE_UNIQUE_CAT) {
-                $rootScope.activeFilters.categories = [];
-            }
-            $rootScope.activeFilters.categories.push(category.id.toString());
-        }
-        $scope.propagateActiveFilters();
-    };
-
-    $scope.deactivateCategory = function deactivateCategory (category) {
-        var categories = $rootScope.activeFilters.categories,
-            indexOfCategory = categories.indexOf(category.id.toString());
-        if (indexOfCategory > -1) {
-            categories.splice(indexOfCategory, 1);
-        }
-        $scope.propagateActiveFilters();
-    };
-
-    $scope.toggleAllCategories = function toggleAllCategories () {
-        var categories = $scope.categories;
-        if ($rootScope.activeFilters.categories && $rootScope.activeFilters.categories.length > 0) {
-            $rootScope.activeFilters.categories = [];
-        } else {
-            $rootScope.activeFilters.categories = [];
-            categories.forEach(function (category) {
-                $rootScope.activeFilters.categories.push(category.id.toString());
-            });
-        }
-        $scope.propagateActiveFilters();
-    };
-
     $scope.toggleCategory = function toggleCategory (category) {
         var categories = $rootScope.activeFilters.categories;
-        var indexOfCategory;
+        var indexOfCategory = -1;
 
         if (categories instanceof Array) {
             indexOfCategory = categories.indexOf(category.id.toString());
         } else {
             $rootScope.activeFilters.categories = [];
+            categories = $rootScope.activeFilters.categories;
         }
 
         if (indexOfCategory > -1) {
@@ -252,6 +219,13 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
             }
             $rootScope.activeFilters.categories.push(category.id.toString());
         }
+
+        // If the 'filter on at least one category' option is active, ensure that
+        // we always keep one category active.
+        if (globalSettings.FILTER_ON_AT_LEAST_ONE_CAT && categories.length == 0) {
+            categories.push(category.id.toString());
+        }
+
         $scope.propagateActiveFilters();
     };
 
