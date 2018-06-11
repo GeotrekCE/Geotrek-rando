@@ -68,18 +68,30 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                             type: 'checkbox',
                             values: aTrek.properties.themes ? angular.copy(aTrek.properties.themes) : []
                         },
-                        cat_class: 'category-' + aTrek.properties.category.id.toString()
+                        cat_class: 'category-' + aTrek.properties.category.id.toString(),
+                        practices: {
+                            type: 'checkbox',
+                            values: aTrek.properties.practice ? [angular.copy(aTrek.properties.practice)] : [],
+                        }
                     };
 
                     currentCategory.duration.values = _.map(_.sortBy(currentCategory.duration.values, 'id'));
                     currentCategory.ascent.values = _.map(_.sortBy(currentCategory.ascent.values, 'id'));
                     currentCategory.eLength.values = _.map(_.sortBy(currentCategory.eLength.values, 'id'));
+                    currentCategory.practices.values = _.map(_.sortBy(currentCategory.practices.values, 'id'));
 
                     treksCategories.push(currentCategory);
 
                 } else {
 
                     var catIndex = utilsFactory.findIndexOfId(treksCategories, aTrek.properties.category.id);
+
+                    // Build the full list of practice types.
+                    if (aTrek.properties.practice) {
+                        if (!(utilsFactory.idIsInArray(treksCategories[catIndex].practices.values, aTrek.properties.practice))) {
+                            treksCategories[catIndex].practices.values.push(aTrek.properties.practice);
+                        }
+                    }
 
                     _.forEach(aTrek.properties.type1, function (aType) {
 
