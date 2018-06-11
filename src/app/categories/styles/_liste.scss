@@ -13,7 +13,6 @@
     .categories-title {
         width: 90px;
         text-align: center;
-        cursor: pointer;
         @media (max-width: 540px) {
             width: 55px;
         }
@@ -85,11 +84,7 @@
 }
 
 .categories-wrapper {
-    height: 100%;
-    width: 100%;
     overflow: hidden;
-    box-shadow: -20px 0 30px 30px rgba(0, 0, 0, .5);
-    position: relative;
     transition: width 150ms ease;
     transition-delay: 150ms;
     @include transitionfuse;
@@ -170,7 +165,7 @@
     white-space: nowrap;
     overflow: hidden;
 
-    background-color: #3a3a3a;
+    background-color: white;
 
     .category-icon,
     .category-title,
@@ -356,7 +351,6 @@
         }
 
         .filter-title {
-            cursor: pointer;
             padding: .35em .1em .10em 1.75em;
             background-color: rgba(0, 0, 0, .15);
             margin-right: 10px;
@@ -530,21 +524,6 @@
 }
 
 .category-filters {
-    // opacity: 0;
-
-    color: white;
-    padding-top: 34px;
-    position: absolute;
-    top: 0;
-    right: -300px;
-    width: 278px;
-    @media (max-width: 540px) {
-        width: 265px;
-    }
-
-    height: 100%;
-    // overflow-y: auto;
-
     z-index: 12;
     transition: opacity 0.3s ease-out,
                 right 250ms ease-out;
@@ -586,8 +565,5 @@
         &:hover, &:focus {
             // transition-delay: 0.4s;
         }
-    }
-    .opened .more-or-less .bar:first-child {
-        transform: rotate(180deg);
     }
 }
