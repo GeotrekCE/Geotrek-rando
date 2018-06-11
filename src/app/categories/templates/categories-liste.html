@@ -1,5 +1,21 @@
 <div class="categories-wrapper" ng-class="{extend: extend, filtering: filtering}" click-anywhere-but-here="foldCategories()">
 
+    <ul class="categories tabs">
+        <li
+            ng-repeat="category in categories | orderBy: 'order' track by category.id"
+            class="category-tab {{::category.cat_class}}"
+            ng-class="{active : activeFilters.categories.indexOf(category.id) > -1}"
+            id="cat-tab-{{::category.id}}"
+        >
+
+            <!-- Category tab -->
+            <div class="category-title" ng-click="toggleCategory(category)">
+                <span class="category-title-text">{{category.label}}</span>
+            </div>
+
+        </li>
+    </ul>
+
     <ul class="categories">
         <li
             ng-repeat="category in categories | orderBy: 'order' track by category.id"
@@ -10,12 +26,8 @@
                 '{{::category.cat_class}}-bgo': extend && !filtering || extend && filtering && category.open
             }"
             id="cat-{{::category.id}}"
+            collapse="!category.open"
         >
-
-            <!-- Category tab -->
-            <div class="category-title" ng-click="toggleCategory(category)">
-                <span class="category-title-text">{{category.label}}</span>
-            </div>
 
             <!-- Category filters -->
             <div class="category-filters filters {{::category.cat_class}}-bg" ng-if="category.hasFilters">
