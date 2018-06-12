@@ -675,7 +675,7 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
             return false;
         }
         // Try to find the filter element as a direct child of our element, else test element itself
-        if (element[filterKey] !== undefined) {
+        if (typeof element[filterKey] !== 'undefined') {
             currentElement = element[filterKey];
         } else {
             currentElement = element;
