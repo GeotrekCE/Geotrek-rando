@@ -90,18 +90,6 @@
                     </div>
                 </div>
             </div>
-            <div class="global-filters-themes" ng-if="filters.themes.length > 0">
-                <span class="global-filters-themes-title">{{'THEMES' | translate}}</span>
-                <label ng-repeat="theme in filters.themes track by theme.id" class="global-filters-theme flex-order-{{theme.baseOrder}}" ng-class="{checked: (activeFilters.themes.indexOf(theme.id.toString()) > -1)}">
-                    <span class="global-filters-theme-icon">
-                        <ng-include ng-if="theme.pictogram | isSVG" src="theme.pictogram"></ng-include>
-                        <img ng-if="theme.pictogram && !(theme.pictogram | isSVG)" ng-src="{{theme.pictogram}}" ng-alt="{{theme.label}}">
-                    </span>
-                    <div class="checkbox"><i ng-if="activeFilters.themes.indexOf(theme.id.toString()) > -1" class="fa fa-check"></i></div>
-                    <span class="global-filters-theme-label">{{theme.label}}</span>
-                    <input type="checkbox" id="theme-{{theme.id}}" ng-click="toogleFilter('themes', theme.id)" ng-checked="activeFilters.themes.indexOf(theme.id.toString()) > -1"/>
-                </label>
-            </div>
         </div>
     </form>
 </div>

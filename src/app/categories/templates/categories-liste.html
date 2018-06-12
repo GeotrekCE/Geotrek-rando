@@ -36,6 +36,10 @@
                     <div ng-if="category.practice && category.practice.values.length > 0" class="category-filter selector practice">
                         <div class="choices">
                             <div ng-repeat="practice in category.practice.values" class="practice form-group">
+                                <span class="category-filters-practice-icon">
+                                    <ng-include ng-if="practice.pictogram | isSVG" src="practice.pictogram"></ng-include>
+                                    <img ng-if="practice.pictogram && !(practice.pictogram | isSVG)" ng-src="{{practice.pictogram}}" ng-alt="{{practice.label}}">
+                                </span>
                                 <input type="checkbox" id="practice-{{::practice.id}}" ng-click="toogleCategoryFilter(category.id, 'practice', practice.id)" ng-checked="activeFilters[category.id + '_practice'].indexOf(practice.id.toString()) > -1"/>
                                 <label for="practice-{{::practice.id}}">
                                     <div class="checkbox">
@@ -180,8 +184,6 @@
                         </div>
                     </div>
 
-                    <!-- Theme selector: TODO -->
-
                     <!-- Custom filter 1 selector -->
                     <div ng-if="category.type1 && category.type1.values.length > 0" class="category-filter selector type1" ng-class="{empty: category.type1.values.length === 0}">
                         <span class="filter-title">
@@ -215,6 +217,22 @@
                                     </div>
                                     <span ng-if="type2.name">{{type2.name}}</span>
                                     <span ng-if="type2.label">{{type2.label}}</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Theme filter selector -->
+                    <div ng-if="category.themes && category.themes.values.length > 0" class="category-filter selector themes" ng-class="{empty: category.themes.values.length === 0}">
+                        <div class="choices">
+                            <div ng-repeat="theme in category.themes.values" class="themes form-group">
+                                <input type="checkbox" id="theme-{{::theme.id}}" ng-click="toogleCategoryFilter(category.id, 'themes', theme.id)" ng-checked="activeFilters[category.id + '_themes'].indexOf(theme.id.toString()) > -1"/>
+                                <label for="theme-{{theme.id}}">
+                                    <div class="checkbox">
+                                        <i ng-if="activeFilters[category.id + '_themes'].indexOf(theme.id.toString()) > -1" class="fa fa-check"></i>
+                                    </div>
+                                    <span ng-if="theme.name">{{theme.name}}</span>
+                                    <span ng-if="theme.label">{{theme.label}}</span>
                                 </label>
                             </div>
                         </div>
