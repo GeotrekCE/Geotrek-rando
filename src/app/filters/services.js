@@ -139,7 +139,7 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
                     id: category.id,
                     type1: [],
                     type2: [],
-                    practices: [],
+                    practice: [],
                 };
 
                 if (category.type1 && category.type1.values.length > 0) {
@@ -163,9 +163,8 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
                     newCategory.eLength = category.eLength;
 
                     // Register category practices.
-                    newCategory.practices = [];
-                    if (category.practices.values.length > 0) {
-                        newCategory.practices = category.practices;
+                    if (category.practice.values.length > 0) {
+                        newCategory.practice = category.practice;
                     }
                 }
 
@@ -479,7 +478,7 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
                             result.isResult = true;
                         } else if (result.prefiltering[filters.footprint] === false) {
                             result.isResult = false;
-                        } else if (self.filterElement(result, filters)) {
+                        } else if (self.filterElement(result)) {
                             result.isResult = true;
                             result.prefiltering[filters.footprint] = true;
                         } else {
@@ -684,10 +683,15 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
             return false;
         }
         // Try to find the filter element as a direct child of our element, else test element itself
-        if (element[filterKey]) {
+        if (element[filterKey] !== undefined) {
             currentElement = element[filterKey];
         } else {
             currentElement = element;
+        }
+
+        // If property is null, abort.
+        if (currentElement === null) {
+            return false;
         }
 
         if ((currentElement.id && currentElement.id.toString() === filter.toString()) || (currentElement.code && currentElement.code.toString() === filter.toString())) {

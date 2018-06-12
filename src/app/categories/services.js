@@ -69,7 +69,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                             values: aTrek.properties.themes ? angular.copy(aTrek.properties.themes) : []
                         },
                         cat_class: 'category-' + aTrek.properties.category.id.toString(),
-                        practices: {
+                        practice: {
                             type: 'checkbox',
                             values: aTrek.properties.practice ? [angular.copy(aTrek.properties.practice)] : [],
                         }
@@ -78,7 +78,7 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                     currentCategory.duration.values = _.map(_.sortBy(currentCategory.duration.values, 'id'));
                     currentCategory.ascent.values = _.map(_.sortBy(currentCategory.ascent.values, 'id'));
                     currentCategory.eLength.values = _.map(_.sortBy(currentCategory.eLength.values, 'id'));
-                    currentCategory.practices.values = _.map(_.sortBy(currentCategory.practices.values, 'id'));
+                    currentCategory.practice.values = _.map(_.sortBy(currentCategory.practice.values, 'id'));
 
                     treksCategories.push(currentCategory);
 
@@ -88,8 +88,8 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
                     // Build the full list of practice types.
                     if (aTrek.properties.practice) {
-                        if (!(utilsFactory.idIsInArray(treksCategories[catIndex].practices.values, aTrek.properties.practice))) {
-                            treksCategories[catIndex].practices.values.push(aTrek.properties.practice);
+                        if (!(utilsFactory.idIsInArray(treksCategories[catIndex].practice.values, aTrek.properties.practice))) {
+                            treksCategories[catIndex].practice.values.push(aTrek.properties.practice);
                         }
                     }
 
