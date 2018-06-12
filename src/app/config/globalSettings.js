@@ -4,7 +4,7 @@ var globalSettings = _.assign(require('./settings.default.json'), require('../..
 
 // Technical option enforcing a category to be selected at all times (i.e. the filtering is applied on at
 // least one category).
-globalSettings.FILTER_ON_AT_LEAST_ONE_CAT= true;
+globalSettings.FILTER_ON_AT_LEAST_ONE_CAT = true;
 
 // Enforce 'ENABLE_UNIQUE_CAT' to true as the new user-interface cannot have several active categories at the same time.
 globalSettings.ENABLE_UNIQUE_CAT = true;
