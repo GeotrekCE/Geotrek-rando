@@ -179,6 +179,17 @@
         .category-icon,
         .category-title {
             opacity: 1;
+            color: #fff;
+        }
+
+        @if $json-custom-style {
+            @each $category in $categories {
+                &.category-#{nth($category, 1)} {
+                    .category-title {
+                        background-color: nth($category, 2);
+                    }
+                }
+            }
         }
     }
 
@@ -284,7 +295,6 @@
     .category {
         width: 100%;
         min-height: 0;
-        margin-bottom: 1px;
         flex-direction: column;
 
         transition: background-color 150ms ease;
@@ -524,6 +534,8 @@
 }
 
 .categories.tabs {
+    margin-bottom: 0;
+
     li.category-tab {
         display: inline-block;
     }
@@ -545,7 +557,6 @@
             content: "";
             display: block;
             background-color: rgba(0, 0, 0, .6);
-            height: 1px;
             position: absolute;
             top: 0;
             right: 10px;
