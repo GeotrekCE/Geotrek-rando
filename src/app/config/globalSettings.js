@@ -18,4 +18,10 @@ globalSettings.ENABLE_UNIQUE_CAT = true;
  */
 globalSettings.DEFAULT_ACTIVE_CATEGORIES = [globalSettings.DEFAULT_ACTIVE_CATEGORY];
 
+/**
+ * The new user interface aims at being simpler and more intuitive, making most
+ * filters more accessible. This filter drawer is not useful anymore.
+ */
+globalSettings.SHOW_FILTERS_ON_MAP = false;
+
 module.exports = globalSettings;
