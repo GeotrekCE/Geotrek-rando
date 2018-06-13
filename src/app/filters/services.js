@@ -255,6 +255,38 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
             }
         }
 
+        // By default, expand the active category's filter panel.
+        // If several categories are active, choose the first one.
+        categoriesService.getNonExcludedCategories()
+            .then(
+                function (categories) {
+                    // Get the first active category.
+                    var firstActiveCategoryId = null;
+                    if (typeof self.activeFilters.categories === 'object' && self.activeFilters.categories.length > 0) {
+                        firstActiveCategoryId = self.activeFilters.categories[0]
+                    }
+
+                    // If an active category was found, expand its filter panel.
+                    if (firstActiveCategoryId !== null) {
+                        for (var i = 0; i < categories.length; i++) {
+                            var currentCatObj = categories[i];
+
+                            // If sought category is found, flag it as opened, and
+                            // stop the loop here as we're done.
+                            if (currentCatObj.id === firstActiveCategoryId) {
+                                currentCatObj.open = true;
+                                break;
+                            }
+                        }
+                    }
+                },
+                function (err) {
+                    if (console) {
+                        console.error(err);
+                    }
+                }
+            );
+
         filtersToolsService.cleanFilters(self.activeFilters);
     };
 
