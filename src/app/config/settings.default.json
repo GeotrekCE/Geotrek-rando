@@ -88,7 +88,6 @@
     },
     "MINIMAP_OFFSET": -3,
     "ALWAYS_HIGHLIGHT_TREKS": false,
-    "SHOW_FILTERS_ON_MAP": true,
     "FILTER_BY_VIEWPORT_DEFAULT": false,
     "POI_EXPANDED": false,
     "DISPLAY_ASIDES_COUNTERS": false,
