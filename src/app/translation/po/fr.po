@@ -257,12 +257,6 @@ msgstr "Afficher les filtres actifs"
 msgid "HIDE_ACTIVE_FILTERS"
 msgstr "Masquer les filtres actifs"
 
-msgid "SIMPLE_SEARCH"
-msgstr "Moins de critères"
-
-msgid "ADVANCED_SEARCH"
-msgstr "Plus de critères"
-
 msgid "SHOW_MORE"
 msgstr "En savoir plus"
 

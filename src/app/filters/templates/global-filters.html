@@ -1,4 +1,4 @@
-<div id="global-filters" class="global-filters" ng-class="{ extend : extend }" click-anywhere-but-here="extend = false">
+<div id="global-filters" class="global-filters">
     <form>
         <div class="global-filters-top">
             <div class="global-filters-search search">
@@ -8,11 +8,6 @@
                         <i class="fa fa-search"></i>
                     </div>
                 </div>
-            </div>
-            <div class="global-filters-more" ng-click="toggleExtend()">
-                <span class="more" ng-if="!extend">{{ 'ADVANCED_SEARCH' | translate }}</span>
-                <span class="less" ng-if="extend">{{ 'SIMPLE_SEARCH' | translate }}</span>
-                <ng-include class="stripe" src="'/images/icons/stripe.svg'"></ng-include>
             </div>
         </div>
         <div class="global-filters-bottom">
