@@ -111,10 +111,6 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
         $rootScope.$broadcast('updateFilters');
     };
 
-    $scope.toggleExtend = function toggleExtend () {
-        $scope.extend = !$scope.extend;
-    }
-
     initFiltersView();
 
     var rootScopeEvents = [
