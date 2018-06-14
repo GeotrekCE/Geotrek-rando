@@ -1,1 +1,320 @@
-{"type": "FeatureCollection", "features": [{"id": 3, "type": "Feature", "geometry": {"type": "Point", "coordinates": [1.149679189547897, 42.963708862615356]}, "properties": {"description_teaser": "<span style=\"font-family: 'Arial'; font-size: 13px; font-weight: normal; color: #000000;\">Cette manifestation qui s&rsquo;inscrit dor&eacute;navant dans le patrimoine Ari&eacute;geois, mobilise 800 participants et attire chaque premier week end d&rsquo;Ao&ucirc;t&nbsp; 25 000 personnes venues de tout le Sud Ouest et de plus loin encore. </span>", "description": "<span style=\"font-family: 'Georgia'; font-size: 13px; font-weight: normal; color: #000000;\">Ainsi d&eacute;file dans les rues et sur les boulevards de la ville, la longue caravane constitu&eacute;e de plus d'une cinquantaine de vieux tracteurs, en parfait &eacute;tat de fonctionnement, mais &eacute;galement de vieilles machines agricoles , faucheuses, batteuses &laquo; qui dans la journ&eacute;e avaleront goul&ucirc;ment leurs gerbes de bl&eacute;s &raquo;. Tous ces mat&eacute;riels et engins, sans oublier les charrettes, chars et tombereaux, sont guid&eacute;s par des hommes, des femmes et des enfants en costumes d'autrefois : boeufs, chevaux, &acirc;nes et mules tirent les attelages charg&eacute;s de bois, de fourrage, de fumier...plus loin suivent d'autres animaux, moutons, dindons, oies et canards, chiens et derri&egrave;re le cort&egrave;ge des lavandi&egrave;res, des couturi&egrave;res, des gardeuses d'oies, le livreur de lait, le facteur, le r&eacute;mouleur, le marchand de pain, les porteurs d'eau, les marchandes des quatre saisons, la classe 1900, Monsieur le Cur&eacute; et tant d'autres..</span>", "themes": [], "begin_date": "2015-07-31", "end_date": "2900-08-02", "duration": "3", "meeting_point": "Centre ville de Saint Girons", "meeting_time": null, "contact": "<span style=\"font-family: 'Georgia'; font-size: 13px; font-weight: normal; color: #000000;\">Autrefois le Couserans</span><br /><span style=\"font-family: 'Georgia'; font-size: 13px; font-weight: normal; color: #000000;\">Place Alphonse Sentein<br /></span><span style=\"font-family: 'Georgia'; font-size: 13px; font-weight: normal; color: #000000;\">09200 Saint-Girons<br /></span><span style=\"font-family: 'Georgia'; font-size: 13px; font-weight: normal; color: #000000;\"><span style=\"font-family: 'Arial'; font-size: 13px; font-weight: normal; color: #000000;\">05 34 14 62 69<br /></span></span><span style=\"font-family: 'Georgia'; font-size: 13px; font-weight: normal; color: #000000;\"><span style=\"font-family: 'Arial'; font-size: 13px; font-weight: normal; color: #000000;\"><span style=\"font-family: 'Arial'; font-size: 13px; font-weight: normal; color: #000000;\">09 67 11 26 69</span></span><br /><br /></span>", "email": "contact@autrefois-le-couserans.com", "website": "http://www.autrefois-le-couserans.com/", "organizer": "", "speaker": "", "type": {"id": 6, "name": "Spectacle", "pictogram": null}, "accessibility": "", "participant_number": "", "booking": "", "target_audience": "", "practical_info": "", "touristic_contents": [], "touristic_events": [], "treks": [], "pois": [], "type1": [{"id": 6, "name": "Spectacle", "pictogram": null}], "category": {"type1_label": "Type", "pictogram": "/static/tourism/touristicevent.svg", "label": "\u00c9v\u00e8nement touristique", "id": "E", "order": null, "slug": "evenement-touristique"}, "source": [], "approved": false, "cities": [], "districts": [], "areas": [], "name": "Autrefois le Couserans", "slug": "autrefois-le-couserans", "map_image_url": "/image/touristicevent-3.png", "filelist_url": "/paperclip/get/tourism/touristicevent/3/", "printable": "/api/fr/touristicevents/3/autrefois-le-couserans.pdf", "published": true, "published_status": [{"lang": "en", "status": false, "language": "English"}, {"lang": "es", "status": false, "language": "Spanish"}, {"lang": "fr", "status": true, "language": "French"}], "publication_date": "2015-03-25", "thumbnail": null, "pictures": [], "videos": [], "files": []}}, {"id": 2, "type": "Feature", "geometry": {"type": "Point", "coordinates": [0.98107695579529, 42.739448058377334]}, "properties": {"description_teaser": "nbv,;:=", "description": "bv n,;:", "themes": [{"id": 5, "pictogram": "/media/upload/theme-architecture%402x.png", "label": "Architecture"}], "begin_date": "2015-02-04", "end_date": "2015-02-27", "duration": "3 poney", "meeting_point": "IOHJ", "meeting_time": "12:12:00", "contact": "FTYUGIHOJK", "email": "test@test.fr", "website": "http://test.fr/", "organizer": "Mr Test", "speaker": "Batman", "type": {"id": 2, "name": "Randonn\u00e9e", "pictogram": null}, "accessibility": "accessible aux handicap\u00e9s moteurs", "participant_number": "12", "booking": "YGUHJKML", "target_audience": "Adulte", "practical_info": "TYFUGIHOJPK&uml;L", "touristic_contents": [], "touristic_events": [], "treks": [], "pois": [], "type1": [{"id": 2, "name": "Randonn\u00e9e", "pictogram": null}], "category": {"type1_label": "Type", "pictogram": "/static/tourism/touristicevent.svg", "label": "\u00c9v\u00e8nement touristique", "id": "E", "order": null, "slug": "evenement-touristique"}, "source": [], "approved": false, "cities": [], "districts": [], "areas": [{"id": 1, "name": "test znieff1", "type": "Znieff1"}], "name": "test d'\u00e9venement 2", "slug": "test-devenement-2", "map_image_url": "/image/touristicevent-2.png", "filelist_url": "/paperclip/get/tourism/touristicevent/2/", "printable": "/api/fr/touristicevents/2/test-devenement-2.pdf", "published": true, "published_status": [{"lang": "en", "status": false, "language": "English"}, {"lang": "es", "status": false, "language": "Spanish"}, {"lang": "fr", "status": true, "language": "French"}], "publication_date": "2015-02-06", "thumbnail": null, "pictures": [], "videos": [], "files": []}}, {"id": 1, "type": "Feature", "geometry": {"type": "Point", "coordinates": [1.194623708724976, 42.766674552489]}, "properties": {"description_teaser": "Les evenements tourristiques sont supers", "description": "Ceci est un test evenement tourristique", "themes": [{"id": 5, "pictogram": "/media/upload/theme-architecture%402x.png", "label": "Architecture"}, {"id": 7, "pictogram": "/media/upload/theme-geology%402x.png", "label": "G\u00e9ologie"}, {"id": 4, "pictogram": "/media/upload/theme-panorama%402x.png", "label": "Point de vue"}, {"id": 10, "pictogram": "/media/upload/theme-refugee%402x.png", "label": "Refuge"}], "begin_date": "2015-01-16", "end_date": "2015-04-14", "duration": "premier semestre", "meeting_point": "Au bout du monde", "meeting_time": "15:45:00", "contact": "Contactez moi, ou elle, ou lui !<br />06 12 12 12 12 12", "email": "test@test.fr", "website": "http://test.fr/", "organizer": "Mr Test", "speaker": "Batman", "type": {"id": 6, "name": "Spectacle", "pictogram": null}, "accessibility": "accessible aux handicap\u00e9s moteurs", "participant_number": "12", "booking": "Pour les r&eacute;servations, voir l'encars contact", "target_audience": "Tout public", "practical_info": "Venez en bonne compagnie et avec le sourire !", "touristic_contents": [], "touristic_events": [], "treks": [], "pois": [], "type1": [{"id": 6, "name": "Spectacle", "pictogram": null}], "category": {"type1_label": "Type", "pictogram": "/static/tourism/touristicevent.svg", "label": "\u00c9v\u00e8nement touristique", "id": "E", "order": null, "slug": "evenement-touristique"}, "source": [], "approved": false, "cities": [{"code": "09100", "name": "Couflens"}], "districts": [], "areas": [{"id": 1, "name": "test znieff1", "type": "Znieff1"}], "name": "Festival du test", "slug": "festival-du-test", "map_image_url": "/image/touristicevent-1.png", "filelist_url": "/paperclip/get/tourism/touristicevent/1/", "printable": "/api/fr/touristicevents/1/festival-du-test.pdf", "published": true, "published_status": [{"lang": "en", "status": false, "language": "English"}, {"lang": "es", "status": false, "language": "Spanish"}, {"lang": "fr", "status": true, "language": "French"}], "publication_date": "2015-01-17", "thumbnail": "/media/paperclip/tourism_touristicevent/1/conference-en-plein-air-reserve-naturelle-geologique-de-haute-provence.jpg.120x120_q85_crop.jpg", "pictures": [{"url": "/media/paperclip/tourism_touristicevent/1/conference-en-plein-air-reserve-naturelle-geologique-de-haute-provence.jpg.800x800_q85.jpg", "title": "Conference-en-plein-air-Reserve-naturelle-geologique-de-Haute-Provence", "legend": "Conference-en-plein-air-Reserve-naturelle-geologique-de-Haute-Provence", "author": "simon.bats"}], "videos": [], "files": []}}]}
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "id": 3,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.149679189547897,
+                    42.963708862615356
+                ]
+            },
+            "properties": {
+                "description_teaser": "<span style=\"font-family: 'Arial'; font-size: 13px; font-weight: normal; color: #000000;\">Cette manifestation qui s&rsquo;inscrit dor&eacute;navant dans le patrimoine Ari&eacute;geois, mobilise 800 participants et attire chaque premier week end d&rsquo;Ao&ucirc;t&nbsp; 25 000 personnes venues de tout le Sud Ouest et de plus loin encore. </span>",
+                "description": "<span style=\"font-family: 'Georgia'; font-size: 13px; font-weight: normal; color: #000000;\">Ainsi d&eacute;file dans les rues et sur les boulevards de la ville, la longue caravane constitu&eacute;e de plus d'une cinquantaine de vieux tracteurs, en parfait &eacute;tat de fonctionnement, mais &eacute;galement de vieilles machines agricoles , faucheuses, batteuses &laquo; qui dans la journ&eacute;e avaleront goul&ucirc;ment leurs gerbes de bl&eacute;s &raquo;. Tous ces mat&eacute;riels et engins, sans oublier les charrettes, chars et tombereaux, sont guid&eacute;s par des hommes, des femmes et des enfants en costumes d'autrefois : boeufs, chevaux, &acirc;nes et mules tirent les attelages charg&eacute;s de bois, de fourrage, de fumier...plus loin suivent d'autres animaux, moutons, dindons, oies et canards, chiens et derri&egrave;re le cort&egrave;ge des lavandi&egrave;res, des couturi&egrave;res, des gardeuses d'oies, le livreur de lait, le facteur, le r&eacute;mouleur, le marchand de pain, les porteurs d'eau, les marchandes des quatre saisons, la classe 1900, Monsieur le Cur&eacute; et tant d'autres..</span>",
+                "themes": [],
+                "begin_date": "2015-07-31",
+                "end_date": "2900-08-02",
+                "duration": "3",
+                "meeting_point": "Centre ville de Saint Girons",
+                "meeting_time": null,
+                "contact": "<span style=\"font-family: 'Georgia'; font-size: 13px; font-weight: normal; color: #000000;\">Autrefois le Couserans</span><br /><span style=\"font-family: 'Georgia'; font-size: 13px; font-weight: normal; color: #000000;\">Place Alphonse Sentein<br /></span><span style=\"font-family: 'Georgia'; font-size: 13px; font-weight: normal; color: #000000;\">09200 Saint-Girons<br /></span><span style=\"font-family: 'Georgia'; font-size: 13px; font-weight: normal; color: #000000;\"><span style=\"font-family: 'Arial'; font-size: 13px; font-weight: normal; color: #000000;\">05 34 14 62 69<br /></span></span><span style=\"font-family: 'Georgia'; font-size: 13px; font-weight: normal; color: #000000;\"><span style=\"font-family: 'Arial'; font-size: 13px; font-weight: normal; color: #000000;\"><span style=\"font-family: 'Arial'; font-size: 13px; font-weight: normal; color: #000000;\">09 67 11 26 69</span></span><br /><br /></span>",
+                "email": "contact@autrefois-le-couserans.com",
+                "website": "http://www.autrefois-le-couserans.com/",
+                "organizer": "",
+                "speaker": "",
+                "type": {
+                    "id": 6,
+                    "name": "Spectacle",
+                    "pictogram": null
+                },
+                "accessibility": "",
+                "participant_number": "",
+                "booking": "",
+                "target_audience": "",
+                "practical_info": "",
+                "touristic_contents": [],
+                "touristic_events": [],
+                "treks": [],
+                "pois": [],
+                "type1": [
+                    {
+                        "id": 6,
+                        "name": "Spectacle",
+                        "pictogram": null
+                    }
+                ],
+                "category": {
+                    "type1_label": "Type",
+                    "pictogram": "/static/tourism/touristicevent.svg",
+                    "label": "\u00c9v\u00e8nement touristique",
+                    "id": "E",
+                    "order": null,
+                    "slug": "evenement-touristique"
+                },
+                "source": [],
+                "approved": false,
+                "cities": [],
+                "districts": [],
+                "areas": [],
+                "name": "Autrefois le Couserans",
+                "slug": "autrefois-le-couserans",
+                "map_image_url": "/image/touristicevent-3.png",
+                "filelist_url": "/paperclip/get/tourism/touristicevent/3/",
+                "printable": "/api/fr/touristicevents/3/autrefois-le-couserans.pdf",
+                "published": true,
+                "published_status": [
+                    {
+                        "lang": "en",
+                        "status": false,
+                        "language": "English"
+                    },
+                    {
+                        "lang": "es",
+                        "status": false,
+                        "language": "Spanish"
+                    },
+                    {
+                        "lang": "fr",
+                        "status": true,
+                        "language": "French"
+                    }
+                ],
+                "publication_date": "2015-03-25",
+                "thumbnail": null,
+                "pictures": [],
+                "videos": [],
+                "files": []
+            }
+        },
+        {
+            "id": 2,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0.98107695579529,
+                    42.739448058377334
+                ]
+            },
+            "properties": {
+                "description_teaser": "nbv,;:=",
+                "description": "bv n,;:",
+                "themes": [
+                    {
+                        "id": 5,
+                        "pictogram": "/media/upload/theme-architecture%402x.png",
+                        "label": "Architecture"
+                    }
+                ],
+                "begin_date": "2015-02-04",
+                "end_date": "2015-02-27",
+                "duration": "3 poney",
+                "meeting_point": "IOHJ",
+                "meeting_time": "12:12:00",
+                "contact": "FTYUGIHOJK",
+                "email": "test@test.fr",
+                "website": "http://test.fr/",
+                "organizer": "Mr Test",
+                "speaker": "Batman",
+                "type": {
+                    "id": 2,
+                    "name": "Randonn\u00e9e",
+                    "pictogram": null
+                },
+                "accessibility": "accessible aux handicap\u00e9s moteurs",
+                "participant_number": "12",
+                "booking": "YGUHJKML",
+                "target_audience": "Adulte",
+                "practical_info": "TYFUGIHOJPK&uml;L",
+                "touristic_contents": [],
+                "touristic_events": [],
+                "treks": [],
+                "pois": [],
+                "type1": [
+                    {
+                        "id": 2,
+                        "name": "Randonn\u00e9e",
+                        "pictogram": null
+                    }
+                ],
+                "category": {
+                    "type1_label": "Type",
+                    "pictogram": "/static/tourism/touristicevent.svg",
+                    "label": "\u00c9v\u00e8nement touristique",
+                    "id": "E",
+                    "order": null,
+                    "slug": "evenement-touristique"
+                },
+                "source": [],
+                "approved": false,
+                "cities": [],
+                "districts": [],
+                "areas": [
+                    {
+                        "id": 1,
+                        "name": "test znieff1",
+                        "type": "Znieff1"
+                    }
+                ],
+                "name": "test d'\u00e9venement 2",
+                "slug": "test-devenement-2",
+                "map_image_url": "/image/touristicevent-2.png",
+                "filelist_url": "/paperclip/get/tourism/touristicevent/2/",
+                "printable": "/api/fr/touristicevents/2/test-devenement-2.pdf",
+                "published": true,
+                "published_status": [
+                    {
+                        "lang": "en",
+                        "status": false,
+                        "language": "English"
+                    },
+                    {
+                        "lang": "es",
+                        "status": false,
+                        "language": "Spanish"
+                    },
+                    {
+                        "lang": "fr",
+                        "status": true,
+                        "language": "French"
+                    }
+                ],
+                "publication_date": "2015-02-06",
+                "thumbnail": null,
+                "pictures": [],
+                "videos": [],
+                "files": []
+            }
+        },
+        {
+            "id": 1,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.194623708724976,
+                    42.766674552489
+                ]
+            },
+            "properties": {
+                "description_teaser": "Les evenements tourristiques sont supers",
+                "description": "Ceci est un test evenement tourristique",
+                "themes": [
+                    {
+                        "id": 5,
+                        "pictogram": "/media/upload/theme-architecture%402x.png",
+                        "label": "Architecture"
+                    },
+                    {
+                        "id": 7,
+                        "pictogram": "/media/upload/theme-geology%402x.png",
+                        "label": "G\u00e9ologie"
+                    },
+                    {
+                        "id": 4,
+                        "pictogram": "/media/upload/theme-panorama%402x.png",
+                        "label": "Point de vue"
+                    },
+                    {
+                        "id": 10,
+                        "pictogram": "/media/upload/theme-refugee%402x.png",
+                        "label": "Refuge"
+                    }
+                ],
+                "begin_date": "2015-01-16",
+                "end_date": "2015-04-14",
+                "duration": "premier semestre",
+                "meeting_point": "Au bout du monde",
+                "meeting_time": "15:45:00",
+                "contact": "Contactez moi, ou elle, ou lui !<br />06 12 12 12 12 12",
+                "email": "test@test.fr",
+                "website": "http://test.fr/",
+                "organizer": "Mr Test",
+                "speaker": "Batman",
+                "type": {
+                    "id": 6,
+                    "name": "Spectacle",
+                    "pictogram": null
+                },
+                "accessibility": "accessible aux handicap\u00e9s moteurs",
+                "participant_number": "12",
+                "booking": "Pour les r&eacute;servations, voir l'encars contact",
+                "target_audience": "Tout public",
+                "practical_info": "Venez en bonne compagnie et avec le sourire !",
+                "touristic_contents": [],
+                "touristic_events": [],
+                "treks": [],
+                "pois": [],
+                "type1": [
+                    {
+                        "id": 6,
+                        "name": "Spectacle",
+                        "pictogram": null
+                    }
+                ],
+                "category": {
+                    "type1_label": "Type",
+                    "pictogram": "/static/tourism/touristicevent.svg",
+                    "label": "\u00c9v\u00e8nement touristique",
+                    "id": "E",
+                    "order": null,
+                    "slug": "evenement-touristique"
+                },
+                "source": [],
+                "approved": false,
+                "cities": [
+                    {
+                        "code": "09100",
+                        "name": "Couflens"
+                    }
+                ],
+                "districts": [],
+                "areas": [
+                    {
+                        "id": 1,
+                        "name": "test znieff1",
+                        "type": "Znieff1"
+                    }
+                ],
+                "name": "Festival du test",
+                "slug": "festival-du-test",
+                "map_image_url": "/image/touristicevent-1.png",
+                "filelist_url": "/paperclip/get/tourism/touristicevent/1/",
+                "printable": "/api/fr/touristicevents/1/festival-du-test.pdf",
+                "published": true,
+                "published_status": [
+                    {
+                        "lang": "en",
+                        "status": false,
+                        "language": "English"
+                    },
+                    {
+                        "lang": "es",
+                        "status": false,
+                        "language": "Spanish"
+                    },
+                    {
+                        "lang": "fr",
+                        "status": true,
+                        "language": "French"
+                    }
+                ],
+                "publication_date": "2015-01-17",
+                "thumbnail": "/media/paperclip/tourism_touristicevent/1/conference-en-plein-air-reserve-naturelle-geologique-de-haute-provence.jpg.120x120_q85_crop.jpg",
+                "pictures": [
+                    {
+                        "url": "/media/paperclip/tourism_touristicevent/1/conference-en-plein-air-reserve-naturelle-geologique-de-haute-provence.jpg.800x800_q85.jpg",
+                        "title": "Conference-en-plein-air-Reserve-naturelle-geologique-de-Haute-Provence",
+                        "legend": "Conference-en-plein-air-Reserve-naturelle-geologique-de-Haute-Provence",
+                        "author": "simon.bats"
+                    }
+                ],
+                "videos": [],
+                "files": []
+            }
+        }
+    ]
+}
