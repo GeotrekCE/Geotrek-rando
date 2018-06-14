@@ -1,1 +1,157 @@
-{"type": "FeatureCollection", "features": [{"id": 2944, "type": "Feature", "geometry": {"type": "Point", "coordinates": [1.350798010820543, 42.77587339485241]}, "properties": {"description": "Rivi&egrave;re", "type": {"id": 8, "pictogram": "/media/upload/poi-geology.png", "label": "G\u00e9ologie"}, "min_elevation": 949, "max_elevation": 949, "structure": {"id": 1, "name": "MC"}, "cities": [{"code": "09029", "name": "Aulus-les-Bains"}], "districts": [], "areas": [], "name": "Rivi\u00e8re", "slug": "riviere", "map_image_url": "/image/poi-2944.png", "filelist_url": "/paperclip/get/trekking/poi/2944/", "printable": "/api/es/pois/2944/riviere.pdf", "published": true, "published_status": [{"lang": "en", "status": true, "language": "English"}, {"lang": "es", "status": true, "language": "Spanish"}, {"lang": "fr", "status": true, "language": "French"}], "publication_date": "2014-09-15", "thumbnail": "/media/paperclip/trekking_poi/2944/le_vignemalejpg.jpg.120x120_q85_crop.jpg", "pictures": [{"url": "/media/paperclip/trekking_poi/2944/le_vignemalejpg.jpg.800x800_q85.jpg", "title": "Le_Vignemale.jpg", "legend": "La rivi\u00e8re", "author": "Philippemarin17"}, {"url": "/media/paperclip/trekking_poi/2944/logo_geotrek.png.800x800_q85.png", "title": "logo_geotrek", "legend": "", "author": "gutard"}], "videos": [], "files": [], "touristic_contents": [], "touristic_events": []}}, {"id": 2904, "type": "Feature", "geometry": {"type": "Point", "coordinates": [1.357951367957732, 42.762398410809446]}, "properties": {"description": "<p>Une des plus belles cascades du Haut-Couserans.</p>\r\n<p>La hauteur de la chute, divis&eacute;e en deux sauts dont le plus important rattrape un d&eacute;nivel&eacute; de 281 m, est si importante que l'eau se vaporise en un panache d'embruns. Le courant d'air de la cascade d&eacute;termine un micro-climat froid &agrave; son pied et entretient un n&eacute;v&eacute; avec un pont de neige (qui dispara&icirc;t peu &agrave; peu avec la hausse des temp&eacute;ratures). Le d&eacute;bit est tr&egrave;s variable, pouvant descendre &agrave; 6 m&sup3;/s en p&eacute;riode d'&eacute;tiage et atteindre 200 m&sup3;/s durant les crues.</p>", "type": {"id": 8, "pictogram": "/media/upload/poi-geology.png", "label": "G\u00e9ologie"}, "min_elevation": 1418, "max_elevation": 1418, "structure": {"id": 1, "name": "MC"}, "cities": [{"code": "09029", "name": "Aulus-les-Bains"}], "districts": [], "areas": [], "name": "Cascade", "slug": "cascade", "map_image_url": "/image/poi-2904.png", "filelist_url": "/paperclip/get/trekking/poi/2904/", "printable": "/api/es/pois/2904/cascade.pdf", "published": true, "published_status": [{"lang": "en", "status": true, "language": "English"}, {"lang": "es", "status": true, "language": "Spanish"}, {"lang": "fr", "status": true, "language": "French"}], "publication_date": "2014-09-15", "thumbnail": "/media/paperclip/trekking_poi/2904/le_pont_despagnejpg.JPG.120x120_q85_crop.jpg", "pictures": [{"url": "/media/paperclip/trekking_poi/2904/le_pont_despagnejpg.JPG.800x800_q85.jpg", "title": "Le_pont_d'Espagne.JPG", "legend": "Le pont d'Espagne", "author": "Philippemarin17"}, {"url": "/media/paperclip/trekking_poi/2904/cirque_et_cascade_de_gavarniejpg.JPG.800x800_q85.jpg", "title": "Cirque_et_cascade_de_Gavarnie.JPG", "legend": "Cirque De Gavarnie", "author": "Jens Buurgaard Nielsen"}], "videos": [], "files": [], "touristic_contents": [], "touristic_events": []}}]}
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "id": 2944,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.350798010820543,
+                    42.77587339485241
+                ]
+            },
+            "properties": {
+                "description": "Rivi&egrave;re",
+                "type": {
+                    "id": 8,
+                    "pictogram": "/media/upload/poi-geology.png",
+                    "label": "G\u00e9ologie"
+                },
+                "min_elevation": 949,
+                "max_elevation": 949,
+                "structure": {
+                    "id": 1,
+                    "name": "MC"
+                },
+                "cities": [
+                    {
+                        "code": "09029",
+                        "name": "Aulus-les-Bains"
+                    }
+                ],
+                "districts": [],
+                "areas": [],
+                "name": "Rivi\u00e8re",
+                "slug": "riviere",
+                "map_image_url": "/image/poi-2944.png",
+                "filelist_url": "/paperclip/get/trekking/poi/2944/",
+                "printable": "/api/es/pois/2944/riviere.pdf",
+                "published": true,
+                "published_status": [
+                    {
+                        "lang": "en",
+                        "status": true,
+                        "language": "English"
+                    },
+                    {
+                        "lang": "es",
+                        "status": true,
+                        "language": "Spanish"
+                    },
+                    {
+                        "lang": "fr",
+                        "status": true,
+                        "language": "French"
+                    }
+                ],
+                "publication_date": "2014-09-15",
+                "thumbnail": "/media/paperclip/trekking_poi/2944/le_vignemalejpg.jpg.120x120_q85_crop.jpg",
+                "pictures": [
+                    {
+                        "url": "/media/paperclip/trekking_poi/2944/le_vignemalejpg.jpg.800x800_q85.jpg",
+                        "title": "Le_Vignemale.jpg",
+                        "legend": "La rivi\u00e8re",
+                        "author": "Philippemarin17"
+                    },
+                    {
+                        "url": "/media/paperclip/trekking_poi/2944/logo_geotrek.png.800x800_q85.png",
+                        "title": "logo_geotrek",
+                        "legend": "",
+                        "author": "gutard"
+                    }
+                ],
+                "videos": [],
+                "files": [],
+                "touristic_contents": [],
+                "touristic_events": []
+            }
+        },
+        {
+            "id": 2904,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.357951367957732,
+                    42.762398410809446
+                ]
+            },
+            "properties": {
+                "description": "<p>Une des plus belles cascades du Haut-Couserans.</p>\r\n<p>La hauteur de la chute, divis&eacute;e en deux sauts dont le plus important rattrape un d&eacute;nivel&eacute; de 281 m, est si importante que l'eau se vaporise en un panache d'embruns. Le courant d'air de la cascade d&eacute;termine un micro-climat froid &agrave; son pied et entretient un n&eacute;v&eacute; avec un pont de neige (qui dispara&icirc;t peu &agrave; peu avec la hausse des temp&eacute;ratures). Le d&eacute;bit est tr&egrave;s variable, pouvant descendre &agrave; 6 m&sup3;/s en p&eacute;riode d'&eacute;tiage et atteindre 200 m&sup3;/s durant les crues.</p>",
+                "type": {
+                    "id": 8,
+                    "pictogram": "/media/upload/poi-geology.png",
+                    "label": "G\u00e9ologie"
+                },
+                "min_elevation": 1418,
+                "max_elevation": 1418,
+                "structure": {
+                    "id": 1,
+                    "name": "MC"
+                },
+                "cities": [
+                    {
+                        "code": "09029",
+                        "name": "Aulus-les-Bains"
+                    }
+                ],
+                "districts": [],
+                "areas": [],
+                "name": "Cascade",
+                "slug": "cascade",
+                "map_image_url": "/image/poi-2904.png",
+                "filelist_url": "/paperclip/get/trekking/poi/2904/",
+                "printable": "/api/es/pois/2904/cascade.pdf",
+                "published": true,
+                "published_status": [
+                    {
+                        "lang": "en",
+                        "status": true,
+                        "language": "English"
+                    },
+                    {
+                        "lang": "es",
+                        "status": true,
+                        "language": "Spanish"
+                    },
+                    {
+                        "lang": "fr",
+                        "status": true,
+                        "language": "French"
+                    }
+                ],
+                "publication_date": "2014-09-15",
+                "thumbnail": "/media/paperclip/trekking_poi/2904/le_pont_despagnejpg.JPG.120x120_q85_crop.jpg",
+                "pictures": [
+                    {
+                        "url": "/media/paperclip/trekking_poi/2904/le_pont_despagnejpg.JPG.800x800_q85.jpg",
+                        "title": "Le_pont_d'Espagne.JPG",
+                        "legend": "Le pont d'Espagne",
+                        "author": "Philippemarin17"
+                    },
+                    {
+                        "url": "/media/paperclip/trekking_poi/2904/cirque_et_cascade_de_gavarniejpg.JPG.800x800_q85.jpg",
+                        "title": "Cirque_et_cascade_de_Gavarnie.JPG",
+                        "legend": "Cirque De Gavarnie",
+                        "author": "Jens Buurgaard Nielsen"
+                    }
+                ],
+                "videos": [],
+                "files": [],
+                "touristic_contents": [],
+                "touristic_events": []
+            }
+        }
+    ]
+}

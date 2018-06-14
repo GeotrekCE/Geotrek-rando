@@ -1,1 +1,31 @@
-[{"id": 1, "title": "Test", "external_url": "", "content": "Test", "target": "all", "last_modified": "2015-01-07T10:49:45.683Z", "slug": "test", "media": [], "published": true, "published_status": [{"lang": "en", "status": true, "language": "English"}, {"lang": "es", "status": false, "language": "Spanish"}, {"lang": "fr", "status": true, "language": "French"}], "publication_date": "2015-01-07"}]
+[
+    {
+        "id": 1,
+        "title": "Test",
+        "external_url": "",
+        "content": "Test",
+        "target": "all",
+        "last_modified": "2015-01-07T10:49:45.683Z",
+        "slug": "test",
+        "media": [],
+        "published": true,
+        "published_status": [
+            {
+                "lang": "en",
+                "status": true,
+                "language": "English"
+            },
+            {
+                "lang": "es",
+                "status": false,
+                "language": "Spanish"
+            },
+            {
+                "lang": "fr",
+                "status": true,
+                "language": "French"
+            }
+        ],
+        "publication_date": "2015-01-07"
+    }
+]
