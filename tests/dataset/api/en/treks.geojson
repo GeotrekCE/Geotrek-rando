@@ -1326,7 +1326,7 @@
                 "themes": [
                     {
                         "id": 7,
-                        "pictogram": "/media/upload/theme-geology%402x.png",
+                        "pictogram": "/media/upload/theme-geology.png",
                         "label": "Geology"
                     }
                 ],
@@ -2122,12 +2122,12 @@
                 "themes": [
                     {
                         "id": 4,
-                        "pictogram": "/media/upload/theme-panorama%402x.png",
+                        "pictogram": "/media/upload/theme-panorama.png",
                         "label": "Viewing point"
                     },
                     {
                         "id": 8,
-                        "pictogram": "/media/upload/theme-lake%402x.png",
+                        "pictogram": "/media/upload/theme-lake.png",
                         "label": "Lake and glacier"
                     }
                 ],
