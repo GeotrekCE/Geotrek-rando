@@ -206,4 +206,10 @@
             overflow-y: auto;
         }
     }
+
+    /* TODO: Fix this correctly / For debug purpose only */
+    .big-menu .dropdown-menu {
+        width: 80vw;
+        height: 80vh;
+    }
 }

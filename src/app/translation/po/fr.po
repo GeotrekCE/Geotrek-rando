@@ -278,6 +278,9 @@ msgstr "Tous les massifs"
 msgid "SEARCH"
 msgstr "Rechercher"
 
+msgid "SEARCH_FOR_CONTENT"
+msgstr "Rechercher un contenu"
+
 msgid "CITIES"
 msgstr "Communes"
 
