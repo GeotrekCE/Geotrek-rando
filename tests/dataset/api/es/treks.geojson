@@ -1738,7 +1738,7 @@
                 ],
                 "practice": {
                     "id": 4,
-                    "pictogram": "/media/upload/practice-foot.png",
+                    "pictogram": "/media/upload/practice-foot.svg",
                     "label": "P\u00e9destre"
                 },
                 "accessibilities": [
@@ -1751,7 +1751,7 @@
                 "usages": [
                     {
                         "id": 4,
-                        "pictogram": "/media/upload/practice-foot.png",
+                        "pictogram": "/media/upload/practice-foot.svg",
                         "label": "P\u00e9destre"
                     }
                 ],
@@ -1812,7 +1812,7 @@
                 "type1": [
                     {
                         "id": 4,
-                        "pictogram": "/media/upload/practice-foot.png",
+                        "pictogram": "/media/upload/practice-foot.svg",
                         "name": "P\u00e9destre"
                     }
                 ],
