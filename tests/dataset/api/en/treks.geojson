@@ -1319,27 +1319,27 @@
                 "ambiance": "<p>Une des plus belles cascades des Pyr&eacute;n&eacute;es pour toute la famille ! C'est une cascade naturelle des Pyr&eacute;n&eacute;es situ&eacute;e dans le Couserans en Ari&egrave;ge, &agrave; 1 380 m d'altitude. C'est une des plus belles et imposantes des Pyr&eacute;n&eacute;es. Le comte Henry Russell, c&eacute;l&egrave;bre pyr&eacute;n&eacute;istes du XIXe si&egrave;cle, la pla&ccedil;ait en t&ecirc;te de toutes ses rivales.</p>",
                 "difficulty": {
                     "id": 1,
-                    "pictogram": "/media/upload/difficulty-easy_2.svg",
+                    "pictogram": "/media/upload/difficulty-2.svg",
                     "label": "Easy"
                 },
                 "information_desks": [],
                 "themes": [
                     {
                         "id": 7,
-                        "pictogram": "/media/upload/theme-geology%402x.png",
+                        "pictogram": "/media/upload/theme-geology.png",
                         "label": "G\u00e9ologie"
                     }
                 ],
                 "practice": {
                     "id": 4,
-                    "pictogram": "/media/upload/practice-foot.png",
+                    "pictogram": "/media/upload/practice-foot.svg",
                     "label": "P\u00e9destre"
                 },
                 "accessibilities": [],
                 "usages": [
                     {
                         "id": 4,
-                        "pictogram": "/media/upload/practice-foot.png",
+                        "pictogram": "/media/upload/practice-foot.svg",
                         "label": "P\u00e9destre"
                     }
                 ],
@@ -1395,7 +1395,7 @@
                 "type1": [
                     {
                         "id": 4,
-                        "pictogram": "/media/upload/practice-foot.png",
+                        "pictogram": "/media/upload/practice-foot.svg",
                         "name": "P\u00e9destre"
                     }
                 ],
@@ -2096,7 +2096,7 @@
                 "ambiance": "Ambiance en",
                 "difficulty": {
                     "id": 1,
-                    "pictogram": "/media/upload/difficulty-easy_2.svg",
+                    "pictogram": "/media/upload/difficulty-2.svg",
                     "label": "Easy"
                 },
                 "information_desks": [
@@ -2122,18 +2122,18 @@
                 "themes": [
                     {
                         "id": 4,
-                        "pictogram": "/media/upload/theme-panorama%402x.png",
+                        "pictogram": "/media/upload/theme-panorama.png",
                         "label": "Point de vue"
                     },
                     {
                         "id": 8,
-                        "pictogram": "/media/upload/theme-lake%402x.png",
+                        "pictogram": "/media/upload/theme-lake.png",
                         "label": "Lac et glacier"
                     }
                 ],
                 "practice": {
                     "id": 4,
-                    "pictogram": "/media/upload/practice-foot.png",
+                    "pictogram": "/media/upload/practice-foot.svg",
                     "label": "P\u00e9destre"
                 },
                 "accessibilities": [
@@ -2146,7 +2146,7 @@
                 "usages": [
                     {
                         "id": 4,
-                        "pictogram": "/media/upload/practice-foot.png",
+                        "pictogram": "/media/upload/practice-foot.svg",
                         "label": "P\u00e9destre"
                     }
                 ],
@@ -2207,7 +2207,7 @@
                 "type1": [
                     {
                         "id": 4,
-                        "pictogram": "/media/upload/practice-foot.png",
+                        "pictogram": "/media/upload/practice-foot.svg",
                         "name": "P\u00e9destre"
                     }
                 ],
