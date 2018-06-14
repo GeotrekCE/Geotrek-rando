@@ -26,12 +26,12 @@
                 "themes": [
                     {
                         "id": 1,
-                        "pictogram": "/media/upload/theme-fauna%402x.png",
+                        "pictogram": "/media/upload/theme-fauna.png",
                         "label": "Faune"
                     },
                     {
                         "id": 2,
-                        "pictogram": "/media/upload/theme-flora%402x.png",
+                        "pictogram": "/media/upload/theme-flora.png",
                         "label": "Flore"
                     }
                 ],
@@ -124,12 +124,12 @@
                 "themes": [
                     {
                         "id": 6,
-                        "pictogram": "/media/upload/theme-pastoral%402x.png",
+                        "pictogram": "/media/upload/theme-pastoral.png",
                         "label": "Pastoralisme"
                     },
                     {
                         "id": 10,
-                        "pictogram": "/media/upload/theme-refugee%402x.png",
+                        "pictogram": "/media/upload/theme-refugee.png",
                         "label": "Refuge"
                     }
                 ],
@@ -216,17 +216,17 @@
                 "themes": [
                     {
                         "id": 11,
-                        "pictogram": "/media/upload/theme-history%402x.png",
+                        "pictogram": "/media/upload/theme-history.png",
                         "label": "Arch\u00e9ologie et histoire"
                     },
                     {
                         "id": 7,
-                        "pictogram": "/media/upload/theme-geology%402x.png",
+                        "pictogram": "/media/upload/theme-geology.png",
                         "label": "G\u00e9ologie"
                     },
                     {
                         "id": 6,
-                        "pictogram": "/media/upload/theme-pastoral%402x.png",
+                        "pictogram": "/media/upload/theme-pastoral.png",
                         "label": "Pastoralisme"
                     }
                 ],
@@ -319,12 +319,12 @@
                 "themes": [
                     {
                         "id": 1,
-                        "pictogram": "/media/upload/theme-fauna%402x.png",
+                        "pictogram": "/media/upload/theme-fauna.png",
                         "label": "Faune"
                     },
                     {
                         "id": 4,
-                        "pictogram": "/media/upload/theme-panorama%402x.png",
+                        "pictogram": "/media/upload/theme-panorama.png",
                         "label": "Point de vue"
                     }
                 ],

@@ -105,7 +105,7 @@
                 "themes": [
                     {
                         "id": 5,
-                        "pictogram": "/media/upload/theme-architecture%402x.png",
+                        "pictogram": "/media/upload/theme-architecture.png",
                         "label": "Architecture"
                     }
                 ],
@@ -205,22 +205,22 @@
                 "themes": [
                     {
                         "id": 5,
-                        "pictogram": "/media/upload/theme-architecture%402x.png",
+                        "pictogram": "/media/upload/theme-architecture.png",
                         "label": "Architecture"
                     },
                     {
                         "id": 7,
-                        "pictogram": "/media/upload/theme-geology%402x.png",
+                        "pictogram": "/media/upload/theme-geology.png",
                         "label": "G\u00e9ologie"
                     },
                     {
                         "id": 4,
-                        "pictogram": "/media/upload/theme-panorama%402x.png",
+                        "pictogram": "/media/upload/theme-panorama.png",
                         "label": "Point de vue"
                     },
                     {
                         "id": 10,
-                        "pictogram": "/media/upload/theme-refugee%402x.png",
+                        "pictogram": "/media/upload/theme-refugee.png",
                         "label": "Refuge"
                     }
                 ],
