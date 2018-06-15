@@ -1,6 +1,6 @@
 <ul class="toolbar-actions detail-actions category-{{::result.properties.category.id}}">
     <li class="toolbar-action back-to-home">
-        <a class="toolbar-action-link" href  ng-click="back()" tooltip-placement="right" tooltip="{{'BACK_TO_THE_MAP' | translate}}">
+        <a class="toolbar-action-link" href ng-click="backToMap()" tooltip-placement="right" tooltip="{{'BACK_TO_THE_MAP' | translate}}">
             <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
             <span class="toolbar-action-label">{{'BACK_TO_THE_MAP' | translate}}</span>
         </a>
