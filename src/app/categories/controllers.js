@@ -318,7 +318,46 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         });
     }
 
+    function customSort (array) {
+        if (!(array instanceof Array)) throw "TypeError: parameter 1 is not of type 'Array'";
+
+        var input  = [[], array];
+        var output = [];
+        var length = input[1].length;
+
+        input[0]   = input[1].splice(0, Math.ceil(length/2));
+
+        for (var i = 0 ; i < length ; i++) {
+            output.push(input[i%2].shift());
+        }
+
+        return output;
+    }
+
+    function initFiltersView() {
+        filtersService.initFilters()
+            .then(
+                function (filters) {
+                    filters.themes = _.sortBy(filters.themes, 'label');
+
+                    filters.themes.forEach(function (theme, index) {
+                        theme.baseOrder = index;
+                    });
+
+                    filters.themes = customSort(filters.themes);
+
+                    $scope.filters = filters;
+                    $rootScope.activeFilters = filtersService.getActiveFilters();
+                    if (globalSettings.SHOW_FILTERS_ON_MAP) {
+                        updateFiltersTags();
+                    }
+                    $rootScope.$broadcast('updateFilters');
+                }
+            );
+    }
+
     loadCategories();
+    initFiltersView();
 
     var rootScopeEvents = [
         $rootScope.$on('updateFilters', function(name, forceRefresh) {

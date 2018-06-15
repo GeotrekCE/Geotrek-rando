@@ -113,13 +113,12 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
             }
         })
     ];
-    //back button function called from back button's ng-click="back()"
-    $rootScope.back = function back () {
-        if (!$rootScope.previousState_name || $rootScope.previousState_name !== 'layout.root') {
-            $state.go('layout.root');
-        } else {
-            window.history.back();
-        }
+
+    /**
+     * Action when clicking the "back to map" button.
+     */
+    $rootScope.backToMap = function backToMap () {
+        $state.go('layout.root');
     };
 
     rootScopeEvents.push(
