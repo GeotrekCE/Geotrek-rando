@@ -303,9 +303,6 @@ msgstr "Geotrek Rando"
 msgid "HOME"
 msgstr "Terug naar homepage"
 
-msgid "SEARCH_LIST"
-msgstr "Terug naar zoekpagina"
-
 msgid "ABOUT_US"
 msgstr "Meer informatie"
 

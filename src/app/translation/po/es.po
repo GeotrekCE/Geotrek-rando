@@ -300,9 +300,6 @@ msgstr "Geotrek Rando"
 msgid "HOME"
 msgstr "Ver la página principal"
 
-msgid "SEARCH_LIST"
-msgstr "Ver la página de investigación"
-
 msgid "ABOUT_US"
 msgstr "Saber más"
 
