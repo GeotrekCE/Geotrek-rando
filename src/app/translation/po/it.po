@@ -303,9 +303,6 @@ msgstr ""
 msgid "HOME"
 msgstr "Homepage"
 
-msgid "SEARCH_LIST"
-msgstr "Lista di ricerca"
-
 msgid "ABOUT_US"
 msgstr "Su di noi"
 

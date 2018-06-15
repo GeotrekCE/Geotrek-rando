@@ -316,9 +316,6 @@ msgstr "Geotrek Rando"
 msgid "HOME"
 msgstr "Display home page"
 
-msgid "SEARCH_LIST"
-msgstr "Display search page"
-
 msgid "ABOUT_US"
 msgstr "About us"
 
