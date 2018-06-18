@@ -130,6 +130,22 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
         })
     ];
 
+    // At initialization, switch display mode to the default one.
+    $scope.displayMode = 'map-list';
+    if (globalSettings.DEFAULT_VIEW_MODE) {
+        var authorized_view_modes = [
+            'map-list',
+            'map',
+            'list',
+            'thumbnails',
+        ];
+
+        // Set view mode to the one from settings, if it's a valid one.
+        if (authorized_view_modes.indexOf(globalSettings.DEFAULT_VIEW_MODE) !== -1) {
+            $scope.displayMode = globalSettings.DEFAULT_VIEW_MODE;
+        }
+    }
+
     /**
      * Action when clicking the "back to map" button.
      */
@@ -219,7 +235,7 @@ function SidebarRootController($scope, $rootScope) {
      * Switches to a different display mode.
      * @param {String} mode
      *   One of:
-     *   - "map_list"
+     *   - "map-list"
      *   - "map"
      *   - "list"
      *   - "thumbnails"
@@ -227,9 +243,6 @@ function SidebarRootController($scope, $rootScope) {
     $scope.switchDisplayModeTo = function switchDisplayModeTo (mode) {
         $rootScope.$broadcast('switchDisplayModeTo', mode);
     };
-
-    // At initialization, switch display mode to map & list.
-    $scope.switchDisplayModeTo('map_list');
 }
 
 function FooterController() {

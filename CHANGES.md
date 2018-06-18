@@ -33,6 +33,8 @@ to adjust your customizations:
 * The header has been reworked to include an expandable big-menu including static pages and a search area.
   The search area at the top of the map was removed (as it's now in the new header menu).
 * The filter drawing at the bottom of the map has been removed.
+* New option: `DEFAULT_VIEW_MODE` to select what view mode should be displayed by
+  default. See documentation for further details.
 
 2.19.3 / 2018-08-31
 ===================
