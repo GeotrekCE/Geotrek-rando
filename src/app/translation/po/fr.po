@@ -369,6 +369,18 @@ msgstr "Télécharger la fiche GPX"
 msgid "3D"
 msgstr "Voir l'itinéraire en 3D"
 
+msgid "DISPLAY_MODE_MAP_LIST"
+msgstr "Carte et liste"
+
+msgid "DISPLAY_MODE_MAP"
+msgstr "Carte"
+
+msgid "DISPLAY_MODE_LIST"
+msgstr "Liste"
+
+msgid "DISPLAY_MODE_THUMBNAILS"
+msgstr "Miniatures"
+
 
 # MAP
 #

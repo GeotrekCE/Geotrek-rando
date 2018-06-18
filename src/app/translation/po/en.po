@@ -370,6 +370,18 @@ msgstr "Download the GPX file"
 msgid "3D"
 msgstr "3D visualization"
 
+msgid "DISPLAY_MODE_MAP_LIST"
+msgstr "Map and list"
+
+msgid "DISPLAY_MODE_MAP"
+msgstr "Map"
+
+msgid "DISPLAY_MODE_LIST"
+msgstr "List"
+
+msgid "DISPLAY_MODE_THUMBNAILS"
+msgstr "Thumbnails"
+
 
 # MAP
 #
