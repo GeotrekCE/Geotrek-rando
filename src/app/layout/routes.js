@@ -21,6 +21,10 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
         .state('layout.root', {
             url: '',
             views: {
+                'sidebar' : {
+                    template: require('./templates/sidebar-root.html'),
+                    controller: 'SidebarRootController'
+                },
                 'subheader' : {
                     template: require('./templates/sub-header.html'),
                     controller: 'SubHeaderController'
