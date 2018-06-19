@@ -7,4 +7,6 @@ angular.module('rando.map', [])
     .service('popupService', require('./services').popupService)
     .service('layersService', require('./services').layersService)
     .controller('MapController', require('./controllers').MapController)
-    .directive('geotrekMap', require('./directives').mapDirective);
+    .controller('ViewportFilterController', require('./controllers').ViewportFilterController)
+    .directive('geotrekMap', require('./directives').mapDirective)
+    .directive('viewportFilter', require('./directives').viewportFilter);

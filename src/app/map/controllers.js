@@ -93,11 +93,6 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
                 isTitle: true,
                 translationID: 'SERVICES_TOGGLE'
             },
-            {
-                selector: '.leaflet-control-viewportfilter-caption',
-                isTitle: false,
-                translationID: 'VIEWPORT_FILTERING'
-            }
         ];
 
         var promises = [];
@@ -230,6 +225,17 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
     $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
 }
 
+function ViewportFilterController($scope, mapService) {
+    /**
+     * Viewport filtering model and ng-change callback.
+     */
+    $scope.viewportFilterCheckbox = mapService.filterByViewport;
+    $scope.onViewportFilterChange = function onViewportFilterChange () {
+        mapService.setViewPortFilterState($scope.viewportFilterCheckbox);
+    };
+}
+
 module.exports = {
-    MapController : MapController
+    MapController : MapController,
+    ViewportFilterController: ViewportFilterController,
 };

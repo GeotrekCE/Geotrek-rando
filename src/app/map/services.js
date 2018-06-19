@@ -356,7 +356,6 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
     //
 
     this.initMapControls = function initMapControls () {
-        this.setViewPortFilteringControl();
         this.setAttribution();
         this.setZoomControlPosition();
         this.setFullScreenControl();
@@ -456,7 +455,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
 
         layersControl.addTo(this.map);
         optionalLayersControl.addTo(this.map);
-        
+
         if (globalSettings.SENSITIVE_TILELAYER) {
             sensitiveLayersControl.addTo(this.map);
             sensitiveLayersControl._setState(globalSettings.SHOW_SENSITIVE_TILELAYER_BY_DEFAULT);
@@ -465,30 +464,16 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
         return true;
     };
 
-    this.setViewPortFilteringControl = function setViewPortFilteringControl () {
-        L.Control.ViewportFilter = L.Control.extend({
-            options: {
-                position: 'topleft'
-            },
-            onAdd: function () {
-                var controlContainer = L.DomUtil.create('div', 'leaflet-control-viewportfilter');
-                var controlInput = L.DomUtil.create('input', 'leaflet-control-viewportfilter-button', controlContainer);
-                controlInput.type = 'checkbox';
-                controlInput.value = 'viewport-filtering';
-                controlInput.checked = globalSettings.FILTER_BY_VIEWPORT_DEFAULT;
-                L.DomUtil.create('span', 'leaflet-control-viewportfilter-caption primary-before-c', controlContainer);
-
-                L.DomEvent.on(controlInput, 'change', function () {
-                    self.filterByViewport = this._container.firstChild.checked;
-                    self.resultsVisibility();
-                    $rootScope.$digest();
-                }, this);
-                return controlContainer;
-            }
-        });
-
-        this.ViewportFilterControl = new L.Control.ViewportFilter();
-        this.map.addControl(this.ViewportFilterControl);
+    /**
+     * Sets the viewport filtering to ON or OFF.
+     *
+     * @param {Boolean} viewportFilterState
+     *   Set to true to enable viewport filtering.
+     *   Set it to false to disable it.
+     */
+    this.setViewPortFilterState = function setViewPortFilterState (viewportFilterState) {
+        self.filterByViewport = viewportFilterState;
+        self.resultsVisibility();
     };
 
     this.setMinimap = function setMinimap () {
@@ -1572,7 +1557,7 @@ function layersService ($http, globalSettings, settingsFactory, $translate) {
                     "attribution": "(c) LPO",
                     "active": true
                 }
-            }] 
+            }]
         }
         return false;
     };
@@ -1634,13 +1619,13 @@ function layersService ($http, globalSettings, settingsFactory, $translate) {
                         onEachFeature: function (feature, layer) {
                             var markup = [], prop;
                             if (layer && layer.feature && layer.feature.properties) {
-                                
+
                                 prop = layer.feature.properties;
 
                                 markup.push('<div class="info-point-title">' + (prop.name || '') + '</div>');
                                 markup.push('<div class="info-point-photo">' + (prop.photo_url ? '<img src="' + globalSettings.API_URL + prop.photo_url + '">' : '') + '</div>');
                                 markup.push('<div class="info-point-type">'  + ((prop.type && prop.type.label) || '') + '</div>');
-                                
+
                                 if (prop.website) {
                                     markup.push('<div class="info-point-link"><a target="_blank" href="' + prop.website + '">' + prop.website + '</a></div>');
                                 }
