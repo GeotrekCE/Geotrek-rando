@@ -114,6 +114,22 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
         })
     ];
 
+    // At initialization, switch display mode to the default one.
+    $scope.displayMode = 'map-list';
+    if (globalSettings.DEFAULT_VIEW_MODE) {
+        var authorized_view_modes = [
+            'map-list',
+            'map',
+            'list',
+            'thumbnails',
+        ];
+
+        // Set view mode to the one from settings, if it's a valid one.
+        if (authorized_view_modes.indexOf(globalSettings.DEFAULT_VIEW_MODE) !== -1) {
+            $scope.displayMode = globalSettings.DEFAULT_VIEW_MODE;
+        }
+    }
+
     /**
      * Action when clicking the "back to map" button.
      */
@@ -129,6 +145,11 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
                         $rootScope.$emit('switchGlobalLang');
                     }
                 );
+        }),
+        // Whenever the display mode changes, reflect this so the template
+        // can apply changes.
+        $rootScope.$on('switchDisplayModeTo', function (e, displayMode) {
+            $scope.displayMode = displayMode;
         })
     );
 
@@ -193,6 +214,21 @@ function SidebarFlatController() {
 
 }
 
+function SidebarRootController($scope, $rootScope) {
+    /**
+     * Switches to a different display mode.
+     * @param {String} mode
+     *   One of:
+     *   - "map-list"
+     *   - "map"
+     *   - "list"
+     *   - "thumbnails"
+     */
+    $scope.switchDisplayModeTo = function switchDisplayModeTo (mode) {
+        $rootScope.$broadcast('switchDisplayModeTo', mode);
+    };
+}
+
 function FooterController() {
 }
 
@@ -202,5 +238,6 @@ module.exports = {
     SubHeaderController: SubHeaderController,
     SidebarDetailController: SidebarDetailController,
     SidebarFlatController: SidebarFlatController,
-    FooterController: FooterController
+    SidebarRootController: SidebarRootController,
+    FooterController: FooterController,
 };

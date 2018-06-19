@@ -10,6 +10,16 @@ function mapDirective() {
     };
 }
 
+function viewportFilter() {
+    return {
+        restrict: 'E',
+        replace: true,
+        template: require('./templates/viewport-filter.html'),
+        controller: 'ViewportFilterController',
+    };
+}
+
 module.exports = {
-    mapDirective: mapDirective
+    mapDirective: mapDirective,
+    viewportFilter: viewportFilter,
 };
