@@ -206,4 +206,14 @@
             overflow-y: auto;
         }
     }
+
+    .big-menu .dropdown-menu {
+        /* TODO: Fix width/height correctly / Here for debug purpose only */
+        width: 80vw;
+        height: 80vh;
+
+        a {
+            padding: 5px;
+        }
+    }
 }

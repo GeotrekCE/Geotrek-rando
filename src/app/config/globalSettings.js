@@ -16,7 +16,7 @@ globalSettings.FILTER_ON_AT_LEAST_ONE_CAT = true;
  * - Because we should never have more than one active category, force the
  *   `ENABLE_UNIQUE_CAT` option to true.
  * TODO: We may consider refactoring code/files related to this change if it proves to
- * be good solution on the long term.
+ * be a good solution on the long term.
  */
 globalSettings.DEFAULT_ACTIVE_CATEGORIES = [globalSettings.DEFAULT_ACTIVE_CATEGORY];
 globalSettings.ENABLE_UNIQUE_CAT = true;

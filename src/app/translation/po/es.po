@@ -245,12 +245,6 @@ msgstr "Ver los filtros activos"
 msgid "HIDE_ACTIVE_FILTERS"
 msgstr "Enmascarar los filtros activos"
 
-msgid "SIMPLE_SEARCH"
-msgstr "Menos criterios"
-
-msgid "ADVANCED_SEARCH"
-msgstr "Más criterios"
-
 msgid "SHOW_MORE"
 msgstr "Saber más"
 
@@ -305,9 +299,6 @@ msgstr "Geotrek Rando"
 
 msgid "HOME"
 msgstr "Ver la página principal"
-
-msgid "SEARCH_LIST"
-msgstr "Ver la página de investigación"
 
 msgid "ABOUT_US"
 msgstr "Saber más"

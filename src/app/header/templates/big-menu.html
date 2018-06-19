@@ -1,0 +1,24 @@
+<li class="big-menu dropdown">
+    <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="expandOnHover">
+        <span><span class="caret"></span></span>
+    </a>
+
+    <div class="dropdown-menu" role="menu">
+        <div class="left">
+            <flat-menu></flat-menu>
+        </div>
+
+        <div class="right">
+            <global-filters></global-filters>
+            <div class="validate">
+                <!--
+                    Search criterions from the global-filter directive above are applied in real time.
+                    This link does nothing but closing the big-menu, for an better UX
+                -->
+                <a href>{{'SEARCH' | translate}}</a>
+            </div>
+        </div>
+
+        <a href>{{'CLOSE' | translate}}</a>
+    </div>
+</li>

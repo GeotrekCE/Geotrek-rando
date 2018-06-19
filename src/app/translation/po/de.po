@@ -248,12 +248,6 @@ msgstr ""
 msgid "HIDE_ACTIVE_FILTERS"
 msgstr ""
 
-msgid "SIMPLE_SEARCH"
-msgstr ""
-
-msgid "ADVANCED_SEARCH"
-msgstr ""
-
 msgid "SHOW_MORE"
 msgstr "Mehr"
 
@@ -308,9 +302,6 @@ msgstr "Geotrek Rando"
 
 msgid "HOME"
 msgstr "Startseite öffnen"
-
-msgid "SEARCH_LIST"
-msgstr "Suchseite"
 
 msgid "ABOUT_US"
 msgstr "weitere Informationen"

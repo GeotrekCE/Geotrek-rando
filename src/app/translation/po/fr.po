@@ -257,12 +257,6 @@ msgstr "Afficher les filtres actifs"
 msgid "HIDE_ACTIVE_FILTERS"
 msgstr "Masquer les filtres actifs"
 
-msgid "SIMPLE_SEARCH"
-msgstr "Moins de critères"
-
-msgid "ADVANCED_SEARCH"
-msgstr "Plus de critères"
-
 msgid "SHOW_MORE"
 msgstr "En savoir plus"
 
@@ -277,6 +271,9 @@ msgstr "Tous les massifs"
 
 msgid "SEARCH"
 msgstr "Rechercher"
+
+msgid "SEARCH_FOR_CONTENT"
+msgstr "Rechercher un contenu"
 
 msgid "CITIES"
 msgstr "Communes"
@@ -317,9 +314,6 @@ msgstr "Geotrek Rando"
 
 msgid "HOME"
 msgstr "Afficher la page d'accueil"
-
-msgid "SEARCH_LIST"
-msgstr "Afficher la page de recherche"
 
 msgid "ABOUT_US"
 msgstr "En savoir plus"

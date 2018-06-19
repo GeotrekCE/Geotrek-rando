@@ -258,12 +258,6 @@ msgstr "Show active filters"
 msgid "HIDE_ACTIVE_FILTERS"
 msgstr "Hide active filters"
 
-msgid "SIMPLE_SEARCH"
-msgstr "Simple search"
-
-msgid "ADVANCED_SEARCH"
-msgstr "Advanced search"
-
 msgid "SHOW_MORE"
 msgstr "Show more"
 
@@ -278,6 +272,9 @@ msgstr "All districts"
 
 msgid "SEARCH"
 msgstr "Search"
+
+msgid "SEARCH_FOR_CONTENT"
+msgstr "Search for content"
 
 msgid "CITIES"
 msgstr "Cities"
@@ -318,9 +315,6 @@ msgstr "Geotrek Rando"
 
 msgid "HOME"
 msgstr "Display home page"
-
-msgid "SEARCH_LIST"
-msgstr "Display search page"
 
 msgid "ABOUT_US"
 msgstr "About us"

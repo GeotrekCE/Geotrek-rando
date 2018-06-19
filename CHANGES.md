@@ -3,6 +3,9 @@
 
 **Major changes**
 
+Some structural changes were carried out in this new version. Some of them may need you
+to adjust your customizations:
+
 * The user interface has been revamped with tabs for filtering on categories.
   This makes it *impossible* to filter on several categories at the same time anymore.
   Following this change, the `DEFAULT_ACTIVE_CATEGORIES` setting (plural) has been replaced with
@@ -15,10 +18,17 @@
     need to choose only one of them and set `DEFAULT_ACTIVE_CATEGORY` to it.<br>
     _For instance:_<br>
     `"DEFAULT_ACTIVE_CATEGORIES": ["T", "C3", "C5"]` becomes `"DEFAULT_ACTIVE_CATEGORY": "C5"`
+* A new translation string was added: `SEARCH_FOR_CONTENT`. It is displayed above the search
+  area in the new big-menu.
+  <br>
+  Its string value has been set for English and French.
+  If you use other languages, you will need to add corresponding translations.
 
-**Bug fixes**
+**Other changes**
 
-*
+* The header has been reworked to include an expandable big-menu including static pages and a search area.
+  The search area at the top of the map was removed (as it's now in the new header menu).
+* The filter drawing at the bottom of the map has been removed.
 
 2.18.1 / 2018-05-02
 ===================

@@ -12,10 +12,8 @@ describe('Geotrek app ', function() {
 
 
     it('should redirect to default categories after loading', function () {
-        var location = '?';
-        for (var i = constants.DEFAULT_ACTIVE_CATEGORIES.length - 1; i >= 0; i--) {
-            location += 'categories=' + constants.DEFAULT_ACTIVE_CATEGORIES[i];
-        }
+        var location = '?categories=' + constants.DEFAULT_ACTIVE_CATEGORY;
+
         expect(browser.getLocationAbsUrl()).toMatch("/" + location);
     });
 
