@@ -18,11 +18,24 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         $rootScope.activeFiltersTags = filtersService.getTagFilters();
     }
 
-    function loadCategories(forceRefresh) {
+    /**
+     * Loads the list of categories for current context (API and current language).
+     *
+     * @param {Boolean} forceRefresh
+     *   Whether the list of categories should be refreshed.
+     * @param {Callable} callback
+     *   Function to be called when loading categories finished.
+     *   Optional. Gets called with no parameter.
+     */
+    function loadCategories(forceRefresh, callback) {
         categoriesService.getNonExcludedCategories(forceRefresh)
             .then(
                 function (categories) {
                     $scope.categories = categories;
+
+                    if (typeof callback === 'function') {
+                        callback();
+                    }
                 }
             );
     }
@@ -366,8 +379,10 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
             }
         }),
         $rootScope.$on('switchGlobalLang', function () {
-            loadCategories(true);
-            $scope.foldCategories();
+            loadCategories(true, function() {
+                initFiltersView();
+                $scope.foldCategories();
+            });
         })
     ];
 
