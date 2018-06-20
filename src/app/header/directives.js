@@ -30,16 +30,7 @@ function closeCollapse() {
     };
 }
 
-function bigMenu() {
-    return {
-        restrict: 'E',
-        replace: true,
-        template: require('./templates/big-menu.html'),
-    };
-}
-
 module.exports = {
     randoHeader: randoHeader,
     closeCollapse: closeCollapse,
-    bigMenu: bigMenu,
 };
