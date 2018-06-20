@@ -322,6 +322,28 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         $scope.closeCategoryFilters();
     };
 
+    /**
+     * Detects if at least one category filter bar is currently deployed.
+     */
+    $scope.isACategoryFilterBarOpen = function isACategoryFilterBarOpen () {
+        // if the list of categories does not exist yet, abort.
+        if (!($scope.categories instanceof Array)) {
+            return false;
+        }
+
+        for (var i = 0; i < $scope.categories.length; i++) {
+            var currentCategory = $scope.categories[i];
+
+            // If a category is expanded, stop here and return true.
+            if (currentCategory.open) {
+                return true;
+            }
+        }
+
+        // No open filter bar found. Return false.
+        return false;
+    }
+
     function initCatFilters() {
         initDatePickers();
         initRangeFilters();
