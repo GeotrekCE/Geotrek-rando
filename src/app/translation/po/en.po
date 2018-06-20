@@ -273,9 +273,6 @@ msgstr "All districts"
 msgid "SEARCH"
 msgstr "Search"
 
-msgid "SEARCH_FOR_CONTENT"
-msgstr "Search for content"
-
 msgid "CITIES"
 msgstr "Cities"
 
