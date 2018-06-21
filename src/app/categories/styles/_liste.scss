@@ -327,11 +327,6 @@
             }
         }
 
-        .category-filter {
-            // padding-left: 20px;
-            display: inline-block;
-        }
-
         .more-or-less {
             height: 20px;
             width: 20px;
@@ -438,6 +433,7 @@
             overflow: hidden;
             padding: .35em 0 .75em;
             z-index: 11;
+            display: flex;
             .form-group {
                 margin: 0;
                 position: relative;
@@ -563,6 +559,14 @@
             left: 10px;
         }
     }
+    .filters-group {
+        display: flex;
+        align-items: center;
+        padding: 5px 0;
+        .slider {
+            flex: 1 1 auto;
+        }
+    }
     .selector {
         margin: 0;
         position: relative;
@@ -577,5 +581,6 @@
             display: block;
             padding: 1em;
         }
+
     }
 }
