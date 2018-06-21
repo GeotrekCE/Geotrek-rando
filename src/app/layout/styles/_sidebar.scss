@@ -17,6 +17,23 @@
     }
 }
 
+ul.toolbar-display-modes {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    li {
+        margin: 10px 0;
+        & > a {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            padding: 5px;
+            border: 1px solid #B4CC1B;
+            border-radius: 5px;
+        }
+    }
+}
+
 .toolbar-actions {
     line-height: 50px;
 
