@@ -84,7 +84,6 @@
 }
 
 .categories-wrapper {
-    overflow: hidden;
     transition: width 150ms ease;
     transition-delay: 150ms;
     @include transitionfuse;
@@ -163,7 +162,7 @@
     // position: relative;
 
     white-space: nowrap;
-    overflow: hidden;
+    margin-bottom: 0;
 
     background-color: white;
 
