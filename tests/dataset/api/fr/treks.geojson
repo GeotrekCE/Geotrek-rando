@@ -782,7 +782,12 @@
                         "name": "Suc-et-Sentenac"
                     }
                 ],
-                "districts": [],
+                "districts": [
+                    {
+                        "id": 1,
+                        "name": "District A"
+                    }
+                ],
                 "areas": [],
                 "name": "Boucle du Pic des Trois Seigneurs",
                 "slug": "boucle-du-pic-des-trois-seigneurs",
@@ -2262,7 +2267,12 @@
                         "name": "Aulus-les-Bains"
                     }
                 ],
-                "districts": [],
+                "districts": [
+                    {
+                        "id": 2,
+                        "name": "District B"
+                    }
+                ],
                 "areas": [],
                 "name": "D\u00e9couverte de la Cascade d'Ars",
                 "slug": "decouverte-de-la-cascade-dars",
@@ -3334,7 +3344,12 @@
                         "name": "Lercoul"
                     }
                 ],
-                "districts": [],
+                "districts": [
+                    {
+                        "id": 3,
+                        "name": "District C"
+                    }
+                ],
                 "areas": [],
                 "name": "Pic du Sarrrasi et Pic d'Endron",
                 "slug": "pic-du-sarrrasi-et-pic-dendron",
