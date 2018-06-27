@@ -1,7 +1,7 @@
 #header {
     display: block;
     width: 100%;
-    height: $header-height-desktop;
+    height: auto;
     -webkit-backface-visibility: hidden;
     -webkit-transform-style: preserve-3d;
     @media (max-width: 767px) {
@@ -166,10 +166,12 @@
     }
     .header-link {
         line-height: normal;
+        float: none;
+        text-align: center;
 
         > a {
-            padding-top: 35px;
-            padding-bottom: 35px;
+            padding-top: 10px;
+            padding-bottom: 10px;
             @media (max-width: 767px) {
                 padding: 1em 2em;
             }
