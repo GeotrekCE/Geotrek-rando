@@ -1,9 +1,9 @@
-2.18.2-dev0
+2.19.0 / 2018-06-28
 ===================
 
-**Bug fixes**
+**Enhancements**
 
-*
+* Allow to link a district from the home page
 
 2.18.1 / 2018-05-02
 ===================
