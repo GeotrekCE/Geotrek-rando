@@ -71,6 +71,22 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
         }
     };
 
+    $scope.accessSpecificDistrict = function accessSpecificDistrict (currentDistrict) {
+        $state.go('layout.root');
+        if (typeof currentDistrict !== 'object') {
+            currentDistrict = [currentDistrict];
+        }
+        $rootScope.activeFilters.districts = currentDistrict;
+        filtersService.updateActiveFilters($rootScope.activeFilters);
+        $rootScope.$broadcast('updateResultsList', true);
+
+        $rootScope.activeFiltersTags = filtersService.getTagFilters();
+
+        if ($rootScope.showHome) {
+            $rootScope.showHome = false;
+        }
+    };
+
     $scope.accessSpecificCategoryAndRoute = function accessSpecificCategoryAndRoute (currentCategory, currentRoute) {
         $state.go('layout.root');
         if (typeof currentCategory !== 'object') {
