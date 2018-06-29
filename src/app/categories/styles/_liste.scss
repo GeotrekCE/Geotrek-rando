@@ -361,8 +361,8 @@
         .filter-title {
             padding: .3em 1.25em;
             background-color: rgba(0, 0, 0, .15);
-            margin-right: 10px;
-            margin-left: 10px;
+            margin-right: 15px;
+            margin-left: 15px;
             text-align: center;
             position: relative;
             > span:first-child {
@@ -372,7 +372,8 @@
 
         .slider {
             .slider-container {
-                padding: .5em 2em 1.75em;
+                padding: .5em 1em 1.75em;
+                margin: 0 15px;
             }
             label {
                 margin-top: 0.4em;
@@ -436,10 +437,12 @@
             width: 100%;
             overflow: hidden;
             padding: .35em 0;
+            margin: 0 15px;
             z-index: 11;
             display: flex;
             .form-group {
-                margin: 0;
+                margin-bottom: 0;
+                margin-right: 20px;
                 position: relative;
                 input[type="checkbox"], input[type="radio"] {
                     display: block;
@@ -461,8 +464,8 @@
                     }
                 }
                 label {
-                    margin: 0 1em 0 0;
-                    padding: .35em 10px;
+                    margin: 0;
+                    padding: 0;
                     font-size: 0.85rem;
                     line-height: 0.85rem;
                     font-weight: normal;
