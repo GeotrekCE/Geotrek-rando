@@ -73,6 +73,8 @@
 .header-title-link {
     height: 100%;
     display: flex;
+    padding-left: 15px;
+    padding-right: 15px;
 
     line-height: $header-height-desktop;
     @media (max-width: 767px) {
