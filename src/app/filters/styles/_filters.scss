@@ -5,7 +5,7 @@
 
     padding: 10px 20px;
 
-    background-color: rgba(#fff, .8);
+    background-color: rgba(#333, 1);
     transition: all 300ms ease;
     @include transitionfuse;
 
@@ -40,6 +40,7 @@
 .global-filters-search {
     max-width: 50%;
     padding: 0.4rem;
+    margin: 0 5px;
 
     .input-group {
         box-shadow: 0 1px 1px 0px lighten($dark-grey, 50%);
