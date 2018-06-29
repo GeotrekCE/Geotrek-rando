@@ -130,6 +130,7 @@
 .header-links {
     height: 100%;
     line-height: $header-height-desktop;
+    background-color: $dark-grey;
     &.navbar-right {
         margin-right: 0;
     }
@@ -147,7 +148,7 @@
     }
 
     a {
-        color: $dark-grey;
+        color: #e9e9e9;
         @media (max-width: 992px) {
             padding-left: 10px;
             padding-right: 10px;
@@ -170,8 +171,8 @@
         text-align: center;
 
         > a {
-            padding-top: 10px;
-            padding-bottom: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
             @media (max-width: 767px) {
                 padding: 1em 2em;
             }
