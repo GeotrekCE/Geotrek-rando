@@ -1,10 +1,9 @@
-<li class="languages dropdown" ng-if="languages.length > 1">
+<li class="languages dropdown" ng-if="languages.length > 1" click-anywhere-but-here="foldTranslationMenu()">
     <a role="button" ng-click="toggleTranslationMenu(category)" href="#"
     aria-expanded="false" aria-controls="translation-menu" class="current-lang">
         {{$root.lang}} <span class="caret"></span>
     </a>
-    <ul class="translation-menu nav" id="translation-menu" role="menu" 
-        click-anywhere-but-here="foldTranslationMenu()"
+    <ul class="translation-menu nav" id="translation-menu" role="menu"
         ng-class="{ 'show-translation-menu': showTranslationMenu }">
         <li ng-repeat="lang in languages" class="lang {{::lang.code}}" ng-class="{active: $root.lang === lang.code}">
             <a href ng-click="toggleLang(lang.code)">
