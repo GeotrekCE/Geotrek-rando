@@ -24,6 +24,9 @@ function TranslationController($scope, $rootScope, $translate, globalSettings, t
     $scope.toggleTranslationMenu = function toggleTranslationMenu() {
         $scope.showTranslationMenu = !$scope.showTranslationMenu;
     };
+    $scope.foldTranslationMenu = function foldTranslationMenu() {
+        $scope.showTranslationMenu = false;
+    }
 
 
     initTranslation();
