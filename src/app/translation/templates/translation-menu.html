@@ -4,6 +4,7 @@
         {{$root.lang}} <span class="caret"></span>
     </a>
     <ul class="translation-menu nav" id="translation-menu" role="menu" 
+        click-anywhere-but-here="foldTranslationMenu()"
         ng-class="{ 'show-translation-menu': showTranslationMenu }">
         <li ng-repeat="lang in languages" class="lang {{::lang.code}}" ng-class="{active: $root.lang === lang.code}">
             <a href ng-click="toggleLang(lang.code)">

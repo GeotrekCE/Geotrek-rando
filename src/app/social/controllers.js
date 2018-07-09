@@ -250,6 +250,9 @@ function SocialController($scope, $filter, $rootScope, $location, $state, $state
     $scope.toggleSocialMenu = function toggleSocialMenu() {
         $scope.showSocialMenu = !$scope.showSocialMenu;
     };
+    $scope.foldSocialMenu = function foldSocialMenu() {
+        $scope.showSocialMenu = false;
+    }
 
     initShare();
 
