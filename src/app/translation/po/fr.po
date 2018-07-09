@@ -38,19 +38,19 @@ msgid "ROUTES"
 msgstr "Parcours"
 
 msgid "DIFFICULTIES"
-msgstr "Difficulté :"
+msgstr "Difficulté"
 
 msgid "DURATION"
-msgstr "Durée :"
+msgstr "Durée"
 
 msgid "ASCENT"
-msgstr "Dénivelé :"
+msgstr "Dénivelé"
 
 msgid "ASCENT_S"
 msgstr "D+ :"
 
 msgid "LENGTH"
-msgstr "Longueur :"
+msgstr "Longueur"
 
 msgid "DATE_FILTER"
 msgstr "Entre le ... et le ..."
