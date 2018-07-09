@@ -1,7 +1,7 @@
 #header {
     display: block;
     width: 100%;
-    height: auto;
+    height: $header-height-desktop;
     -webkit-backface-visibility: hidden;
     -webkit-transform-style: preserve-3d;
     @media (max-width: 767px) {
@@ -19,9 +19,6 @@
         height: 100%;
         width: 100%;
     }
-}
-
-.header-mainbar {
 }
 
 .header-burger {
