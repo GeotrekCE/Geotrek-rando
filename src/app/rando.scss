@@ -17,12 +17,6 @@ html, body {
 	color: #333;
 }
 
-html, body, .main-container {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-}
-
 a {
     transition: color 0.2s ease-out;
     @if $json-custom-style {

@@ -10,20 +10,19 @@
 
     width: 100%;
 
-    /* Temporary fix: TODO: Fix map's height */
-    height: 80%;
-
     @media (min-width: 768px) {
         &.footer-active {
-            height: 90%;
+            height: calc(100vh - #{$header-height-desktop} - 100px);
         }
     }
 
     &.layout-root {
         display: flex;
+        height: calc(100vh - #{$header-height-desktop} - 50px);
 
         @media (max-width: 767px) {
-            top: -$header-height-mobile;
+            height: calc(100vh - #{$header-height-mobile} - 50px);
+            top: - $header-height-mobile;
             padding-top: $header-height-mobile;
         }
     }
@@ -62,6 +61,10 @@
     height: 100%;
 
     transition: left .3s ease, padding .3s ease, margin .3s ease;
+    .viewportfilter {
+        padding: 5px 2em;
+        height: 30px;
+    }
 }
 
 .map-pane {
