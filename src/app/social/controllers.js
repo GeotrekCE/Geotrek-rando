@@ -246,6 +246,11 @@ function SocialController($scope, $filter, $rootScope, $location, $state, $state
         }
     }
 
+    $scope.showSocialMenu = false;
+    $scope.toggleSocialMenu = function toggleSocialMenu() {
+        $scope.showSocialMenu = !$scope.showSocialMenu;
+    };
+
     initShare();
 
     var rootScopeEvents = [
