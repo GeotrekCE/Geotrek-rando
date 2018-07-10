@@ -27,7 +27,7 @@ describe('map  ', function() {
     it('should have a visible path on trek detail page after switch language', function () {
         browser.get('/#/itineraire/boucle-du-pic-des-trois-seigneurs/');
 
-        element(by.css('.languages .dropdown-toggle')).click();
+        element(by.css('.languages .current-lang')).click();
         element(by.css('.languages .en a')).click();
         browser.driver.sleep(1);
         browser.waitForAngular();
