@@ -17,12 +17,6 @@ html, body {
 	color: #333;
 }
 
-html, body, .main-container {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-}
-
 a {
     transition: color 0.2s ease-out;
     @if $json-custom-style {
@@ -89,7 +83,7 @@ a {
     text-align: center;
     vertical-align: middle;
     margin: 0;
-    margin-right: 0.25rem;
+    margin-right: 0.75rem;
     border-radius: 8%;
     i {
         vertical-align: top;
@@ -116,7 +110,9 @@ a {
 @import "gallery/styles/_lightbox-gallery";
 @import "home/styles/_home";
 @import "home/styles/_random-widget";
+@import "translation/styles/_translation";
 @import "flat-pages/styles/_flat-pages";
+@import "flat-pages/styles/_flat-menu";
 @import "3d/styles/_rando3d";
 
 @import "../../custom/_customisation";

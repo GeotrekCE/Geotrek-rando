@@ -84,7 +84,6 @@
 }
 
 .categories-wrapper {
-    overflow: hidden;
     transition: width 150ms ease;
     transition-delay: 150ms;
     @include transitionfuse;
@@ -163,9 +162,9 @@
     // position: relative;
 
     white-space: nowrap;
-    overflow: hidden;
+    margin-bottom: 0;
 
-    background-color: white;
+    background-color: #EFEFEF;
 
     .category-icon,
     .category-title,
@@ -327,11 +326,6 @@
             }
         }
 
-        .category-filter {
-            // padding-left: 20px;
-            display: inline-block;
-        }
-
         .more-or-less {
             height: 20px;
             width: 20px;
@@ -360,11 +354,16 @@
             }
         }
 
+        .category-filters {
+            color: #FFF;
+        }
+
         .filter-title {
-            padding: .35em .1em .10em 1.75em;
+            padding: .3em 1.25em;
             background-color: rgba(0, 0, 0, .15);
-            margin-right: 10px;
-            margin-left: 10px;
+            margin-right: 15px;
+            margin-left: 15px;
+            text-align: center;
             position: relative;
             > span:first-child {
                 font-weight: bolder;
@@ -373,11 +372,12 @@
 
         .slider {
             .slider-container {
-                padding: .5em 2em 1.75em;
+                padding: .5em 1em 1.75em;
+                margin: 0 15px;
             }
             label {
                 margin-top: 0.4em;
-                font-size: 0.8em;
+                font-size: 0.85em;
                 font-weight: 300;
             }
             .min-label {
@@ -390,24 +390,24 @@
 
         rzslider {
             margin: 15px 0 15px 0;
-            span.rz-bar {
-                background: transparentize(white, 0.5);
+            .rz-bar {
+                background: transparentize(white, 0.7);
                 height: 5px;
-                .rz-selection {
+                &.rz-selection {
                     background: white;
                 }
             }
 
             span.rz-pointer {
-                background-color: rgba(255, 255, 255, .3);
+                background-color: rgba(255, 255, 255, .7);
                 &:focus {
                     outline: none;
                 }
                 &:after {
-                    background-color: rgba(0, 0, 0, .85);
+                    background-color: #666;
                 }
                 &.rz-active {
-                    background-color: rgba(255, 255, 255, .7);
+                    background-color: rgba(255, 255, 255, 1);
                     &:after {
                         background-color: black;
                     }
@@ -436,10 +436,13 @@
         .choices {
             width: 100%;
             overflow: hidden;
-            padding: .35em 0 .75em;
+            padding: .35em 0;
+            margin: 0 15px;
             z-index: 11;
+            display: flex;
             .form-group {
-                margin: 0;
+                margin-bottom: 0;
+                margin-right: 30px;
                 position: relative;
                 input[type="checkbox"], input[type="radio"] {
                     display: block;
@@ -462,14 +465,33 @@
                 }
                 label {
                     margin: 0;
-                    width: 100%;
-                    padding: .35em 1em .35em 2em;
-                    font-size: 0.8rem;
-                    line-height: 0.8rem;
+                    padding: 0;
+                    font-size: 0.85rem;
+                    line-height: 0.85rem;
                     font-weight: normal;
                     span {
                         vertical-align: middle;
                     }
+                }
+                .category-filters-practice-icon,
+                .category-filters-theme-icon {
+                    display: inline-block;
+                    vertical-align: middle;
+                    border-radius: 50%;
+                    background-color: rgba(255, 255, 255, 0.4);
+                    width: 36px;
+                    height: 36px;
+                    padding: 5px;
+                    img {
+                        max-width: 100%;
+                    }
+                    svg {
+                        max-width: 100%;
+                        max-height: 100%;
+                    }
+                }
+                input:checked + label .category-filters-theme-icon {
+                    background-color: rgba(255, 255, 255, 1);
                 }
                 &.date-picker {
                     box-shadow: none;
@@ -563,6 +585,21 @@
             left: 10px;
         }
     }
+    .filters-group {
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, .5);
+        @media (min-width: 564px) {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .slider {
+            flex: 1 1 auto;
+        }
+    }
+    .checkbox {
+        color: #FFF;
+    }
     .selector {
         margin: 0;
         position: relative;
@@ -577,5 +614,6 @@
             display: block;
             padding: 1em;
         }
+
     }
 }

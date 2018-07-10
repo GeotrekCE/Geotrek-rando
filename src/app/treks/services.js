@@ -91,6 +91,9 @@ function treksService(globalSettings, settingsFactory, translationService, $http
             if (trek.properties.altimetric_profile) {
                 trek.properties.altimetric_profile = globalSettings.API_URL + trek.properties.altimetric_profile;
             }
+            if (trek.properties.practice && trek.properties.practice.pictogram) {
+                trek.properties.practice.pictogram = globalSettings.API_URL + trek.properties.practice.pictogram;
+            }
 
             /**
              * Rename property to avoid confusion with Array native property

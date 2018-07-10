@@ -4,7 +4,6 @@ function SocialController($scope, $filter, $rootScope, $location, $state, $state
 
     $scope.shareIcon = (globalSettings.SHARE_ICON ? globalSettings.SHARE_ICON : 'share-alt');
 
-
     function initShareButtons(translatedContent, element) {
         var fbOptions;
 
@@ -245,6 +244,14 @@ function SocialController($scope, $filter, $rootScope, $location, $state, $state
         else {
             initShareOnTranslate();
         }
+    }
+
+    $scope.showSocialMenu = false;
+    $scope.toggleSocialMenu = function toggleSocialMenu() {
+        $scope.showSocialMenu = !$scope.showSocialMenu;
+    };
+    $scope.foldSocialMenu = function foldSocialMenu() {
+        $scope.showSocialMenu = false;
     }
 
     initShare();

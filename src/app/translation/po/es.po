@@ -38,16 +38,16 @@ msgid "ROUTES"
 msgstr "Caminos"
 
 msgid "DIFFICULTIES"
-msgstr "Dificultad :"
+msgstr "Dificultad"
 
 msgid "DURATION"
-msgstr "Tiempo :"
+msgstr "Tiempo"
 
 msgid "ASCENT"
-msgstr "Desnivel positivo :"
+msgstr "Desnivel positivo"
 
 msgid "LENGTH"
-msgstr "Distancia :"
+msgstr "Distancia"
 
 msgid "DATE_FILTER"
 msgstr "Entre el ... y el ..."

@@ -39,19 +39,19 @@ msgid "ROUTES"
 msgstr "routes"
 
 msgid "DIFFICULTIES"
-msgstr "Difficulties:"
+msgstr "Difficulties"
 
 msgid "DURATION"
-msgstr "Duration:"
+msgstr "Duration"
 
 msgid "ASCENT"
-msgstr "Ascent:"
+msgstr "Ascent"
 
 msgid "ASCENT_S"
 msgstr "D+:"
 
 msgid "LENGTH"
-msgstr "Length:"
+msgstr "Length"
 
 msgid "DATE_FILTER"
 msgstr "From ... To ..."

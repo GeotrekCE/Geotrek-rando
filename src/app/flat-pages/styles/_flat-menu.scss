@@ -1,4 +1,4 @@
-.share-menu {
+.flat-menu {
     position: relative;
     right: 0;
     top: 0;
@@ -8,13 +8,11 @@
     height: 0;
     text-align: center;
     transition: all .2s ease;
-
-    &.show-social-menu {
+    &.show-flat-menu {
         display: block;
         width: auto;
         height: auto;
     }
-
     @media (min-width: 760px) {
         position: absolute;
         right: 55px;
