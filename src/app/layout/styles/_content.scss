@@ -64,6 +64,10 @@
     .viewportfilter {
         padding: 5px 2em;
         height: 30px;
+        position: relative;
+        z-index: 2;
+        background: white;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, .2);
     }
 }
 
