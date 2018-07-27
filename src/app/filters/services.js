@@ -64,9 +64,9 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
         var deferred = $q.defer(),
             promises = [];
 
-        self.filters = angular.copy(activeFiltersModel);
-
-        // filtersToolsService.clean(self.filters);
+        if (!self.filters) {
+            self.filters = angular.copy(activeFiltersModel);
+        }
 
         promises.push(
             categoriesService.getNonExcludedCategories()
