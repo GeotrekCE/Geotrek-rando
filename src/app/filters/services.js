@@ -47,26 +47,34 @@ function filtersToolsService () {
 
 function filtersService($rootScope, $q, $location, globalSettings, utilsFactory, resultsService, categoriesService, filtersToolsService, translationService) {
 
-    var self = this,
-        activeFiltersModel = {
-            categories:     [],
-            themes:         [],
-            districts:      [],
-            cities:         [],
-            structure:      [],
-            search:         null
-        };
+    var self = this;
+
+    var emptyFiltersModel = {
+        categories:     [],
+        themes:         [],
+        districts:      [],
+        cities:         [],
+        structure:      [],
+        search:         null
+    };
+
+    var activeFiltersModel = angular.copy(emptyFiltersModel);
 
     // Define all type of filters that needs an interval check instead of an id one
     var filtersByInterval = ['difficulty', 'duration', 'ascent', 'eLength'];
+
+    /**
+     * Resets current filters to the empty state.
+     */
+    self.resetFilters = function () {
+        self.filters = angular.copy(emptyFiltersModel);
+    }
 
     self.initFilters = function () {
         var deferred = $q.defer(),
             promises = [];
 
-        if (!self.filters) {
-            self.filters = angular.copy(activeFiltersModel);
-        }
+        self.resetFilters();
 
         promises.push(
             categoriesService.getNonExcludedCategories()
@@ -211,7 +219,7 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
 
 
 
-    // Active FIlters
+    // Active Filters
     //
 
     self.initActiveFilter = function initActiveFilter (forceRefresh) {
