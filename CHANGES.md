@@ -1,10 +1,9 @@
-2.19.2.dev0
+2.19.2 / 2018-08-22
 ===================
 
 **Bug fixes**
 
-* 
-
+* Fix themes translation when switching language
 
 2.19.1 / 2018-07-27
 ===================
