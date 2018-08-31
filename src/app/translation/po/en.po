@@ -326,6 +326,9 @@ msgid "ABOUT_US"
 msgstr "About us"
 
 msgid "BACK"
+msgstr "Back"
+
+msgid "BACK_TO_THE_MAP"
 msgstr "Back to the map"
 
 msgid "PRINT"

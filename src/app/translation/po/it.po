@@ -59,7 +59,7 @@ msgid "ALL"
 msgstr "Tutto"
 
 msgid "CLOSE"
-msgstr "Vicino"
+msgstr "Chiudi"
 
 
 # INFORMATIONS
@@ -316,6 +316,9 @@ msgid "ABOUT_US"
 msgstr "Su di noi"
 
 msgid "BACK"
+msgstr "Indietro"
+
+msgid "BACK_TO_THE_MAP"
 msgstr "Indietro"
 
 msgid "PRINT"

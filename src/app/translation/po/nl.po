@@ -316,6 +316,9 @@ msgid "ABOUT_US"
 msgstr "Meer informatie"
 
 msgid "BACK"
+msgstr "Terug"
+
+msgid "BACK_TO_THE_MAP"
 msgstr "Terug naar de kaart"
 
 msgid "PRINT"
