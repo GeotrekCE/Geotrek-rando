@@ -5,33 +5,33 @@
         </div>
         <ul class="meta-item-content">
             <li class="meta-item-content-item">
-                <span>{{::result.properties.category.label}}</span>
+                <span>{{result.properties.category.label}}</span>
             </li>
         </ul>
     </li>
 
     <li class="detail-content-meta-item" ng-if="result.properties.type1.length > 0">
         <div class="meta-item-title category-{{::result.properties.category.id}}-c">
-            {{::result.properties.category.type1_label}}
+            {{result.properties.category.type1_label}}
         </div>
         <ul class="meta-item-content">
             <li class="meta-item-content-item" ng-repeat="currentType in result.properties.type1 track by currentType.id">
                 <ng-include ng-if="currentType.pictogram && (currentType.pictogram | isSVG)" src="currentType.pictogram"></ng-include>
-                <img ng-if="currentType.pictogram && !(currentType.pictogram | isSVG)" ng-src="{{::currentType.pictogram}}" ng-alt="{{::currentType.name}}">
-                <span>{{::currentType.name}}</span>
+                <img ng-if="currentType.pictogram && !(currentType.pictogram | isSVG)" ng-src="{{::currentType.pictogram}}" ng-alt="{{currentType.name}}">
+                <span>{{currentType.name}}</span>
             </li>
         </ul>
     </li>
 
     <li class="detail-content-meta-item" ng-if="result.properties.type2.length > 0">
         <div class="meta-item-title category-{{::result.properties.category.id}}-c">
-            {{::result.properties.category.type2_label}}
+            {{result.properties.category.type2_label}}
         </div>
         <ul class="meta-item-content">
             <li class="meta-item-content-item" ng-repeat="currentType2 in result.properties.type2 track by currentType2.id">
                 <ng-include ng-if="currentType2.pictogram && (currentType2.pictogram | isSVG)" src="currentType2.pictogram"></ng-include>
-                <img ng-if="currentType2.pictogram && !(currentType2.pictogram | isSVG)" ng-src="{{::currentType2.pictogram}}" ng-alt="{{::currentType2.name}}">
-                <span>{{::currentType2.name}}</span>
+                <img ng-if="currentType2.pictogram && !(currentType2.pictogram | isSVG)" ng-src="{{::currentType2.pictogram}}" ng-alt="{{currentType2.name}}">
+                <span>{{currentType2.name}}</span>
             </li>
         </ul>
     </li>
@@ -44,7 +44,7 @@
         <ul class="meta-item-content">
             <li class="meta-item-content-item" ng-if="result.properties.duration_pretty">
                 <ng-include src="'/images/icons/duration.svg'" tooltip-placement="top" tooltip="{{'I_DURATION' | translate}}"></ng-include>
-                <span>{{::result.properties.duration_pretty}}</span>
+                <span>{{result.properties.duration_pretty}}</span>
             </li>
             <li class="meta-item-content-item" ng-if="!result.properties.duration_pretty && result.properties.duration" tooltip-placement="top" tooltip="{{'I_DURATION' | translate}}">
                 <ng-include src="'/images/icons/duration.svg'"></ng-include>
@@ -52,13 +52,13 @@
             </li>
             <li class="meta-item-content-item" ng-if="result.properties.difficulty.label">
                 <ng-include ng-if="result.properties.difficulty.pictogram && (result.properties.difficulty.pictogram | isSVG)" src="result.properties.difficulty.pictogram" tooltip-placement="top" tooltip="{{'I_DIFFICULTY' | translate}}"></ng-include>
-                <img ng-if="result.properties.difficulty.pictogram && !(result.properties.difficulty.pictogram | isSVG)" ng-src="{{::result.properties.difficulty.pictogram}}" ng-alt="{{::result.properties.difficulty.label}}" tooltip-placement="top" tooltip="{{'I_DIFFICULTY' | translate}}">
-                <span>{{::result.properties.difficulty.label}}</span>
+                <img ng-if="result.properties.difficulty.pictogram && !(result.properties.difficulty.pictogram | isSVG)" ng-src="{{::result.properties.difficulty.pictogram}}" ng-alt="{{result.properties.difficulty.label}}" tooltip-placement="top" tooltip="{{'I_DIFFICULTY' | translate}}">
+                <span>{{result.properties.difficulty.label}}</span>
             </li>
             <li class="meta-item-content-item" ng-if="result.properties.route">
                 <ng-include ng-if="result.properties.route.pictogram && (result.properties.route.pictogram | isSVG)" src="result.properties.route.pictogram" tooltip-placement="top" tooltip="{{'I_ROUTE' | translate}}"></ng-include>
-                <img ng-if="result.properties.route.pictogram && !(result.properties.route.pictogram | isSVG)" ng-src="{{::result.properties.route.pictogram}}" ng-alt="{{::result.properties.route.label}}" tooltip-placement="top" tooltip="{{'I_ROUTE' | translate}}">
-                <span>{{::result.properties.route.label}}</span>
+                <img ng-if="result.properties.route.pictogram && !(result.properties.route.pictogram | isSVG)" ng-src="{{::result.properties.route.pictogram}}" ng-alt="{{result.properties.route.label}}" tooltip-placement="top" tooltip="{{'I_ROUTE' | translate}}">
+                <span>{{result.properties.route.label}}</span>
             </li>
             <li class="meta-item-content-item" ng-if="result.properties.length">
                 <ng-include src="'/images/icons/length.svg'" tooltip-placement="top" tooltip="{{'I_LENGTH' | translate}}"></ng-include>
@@ -71,10 +71,10 @@
             <li class="meta-item-content-item" ng-if="result.properties.networks" ng-repeat="network in result.properties.networks">
                 <ng-include ng-if="network.pictogram && (network.pictogram | isSVG)" src="network.pictogram" tooltip-placement="top" tooltip="{{'I_NETWORK' | translate}}"></ng-include>
                 <img ng-if="network.pictogram && !(network.pictogram | isSVG)" ng-src="{{::network.pictogram}}" alt="network.name" tooltip-placement="top" tooltip="{{'I_NETWORK' | translate}}">
-                <span>{{::network.name}}</span>
+                <span>{{network.name}}</span>
             </li>
             <li class="meta-item-content-item" ng-if="result.properties.target_audience">
-                <span>{{::result.properties.target_audience}}</span>
+                <span>{{result.properties.target_audience}}</span>
             </li>
         </ul>
     </li>
@@ -86,7 +86,7 @@
         <ul class="meta-item-content">
             <li class="meta-item-content-item" ng-repeat="theme in result.properties.themes">
                 <ng-include ng-if="theme.pictogram && (theme.pictogram | isSVG)" src="theme.pictogram"></ng-include>
-                <img ng-if="theme.pictogram && !(theme.pictogram | isSVG)" ng-src="{{::theme.pictogram}}" ng-alt="{{::theme.label}}">
+                <img ng-if="theme.pictogram && !(theme.pictogram | isSVG)" ng-src="{{::theme.pictogram}}" ng-alt="{{theme.label}}">
                 <span>{{theme.label}}</span>
             </li>
         </ul>

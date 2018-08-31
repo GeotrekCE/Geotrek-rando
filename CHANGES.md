@@ -3,7 +3,7 @@
 
 **Bug fixes**
 
-*
+* Fix some translations
 
 2.19.2 / 2018-08-22
 ===================

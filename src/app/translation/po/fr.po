@@ -325,6 +325,9 @@ msgid "ABOUT_US"
 msgstr "En savoir plus"
 
 msgid "BACK"
+msgstr "Retour"
+
+msgid "BACK_TO_THE_MAP"
 msgstr "Retour à la carte"
 
 msgid "PRINT"
