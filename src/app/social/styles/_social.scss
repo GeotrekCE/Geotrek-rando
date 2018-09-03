@@ -1,14 +1,5 @@
-.share-menu {
-    position: absolute;
-    right: 55px;
-    top: 0;
-    background-color: $dark-grey;
-    display: none;
-    width: 0;
-    text-align: center;
-    transition: all .2s ease;
-    &.show-social-menu {
-        display: block;
-        width: auto;
+.share {
+    .dropdown-menu {
+        text-align: center;
     }
 }
