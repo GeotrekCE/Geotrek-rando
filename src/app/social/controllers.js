@@ -4,6 +4,7 @@ function SocialController($scope, $filter, $rootScope, $location, $state, $state
 
     $scope.shareIcon = (globalSettings.SHARE_ICON ? globalSettings.SHARE_ICON : 'share-alt');
 
+
     function initShareButtons(translatedContent, element) {
         var fbOptions;
 
