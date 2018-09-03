@@ -174,11 +174,28 @@
         height: 50px;
     }
 
+    .category-title::after {
+        content: " ";
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border: 2px solid #333;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+        margin: 0 .7em;
+    }
+
     .active {
         .category-icon,
         .category-title {
             opacity: 1;
             color: #fff;
+        }
+
+        .category-title::after {
+            transform: rotate(-135deg);
+            border-color: #fff;
+            vertical-align: -4.2px;
         }
 
         @if $json-custom-style {
@@ -359,8 +376,7 @@
         }
 
         .filter-title {
-            padding: .3em 1.25em;
-            background-color: rgba(0, 0, 0, .15);
+            padding: 0 1.25em;
             margin-right: 15px;
             margin-left: 15px;
             text-align: center;
@@ -372,7 +388,7 @@
 
         .slider {
             .slider-container {
-                padding: .5em 1em 1.75em;
+                padding: 0 1em 1.75em;
                 margin: 0 15px;
             }
             label {
@@ -399,7 +415,7 @@
             }
 
             span.rz-pointer {
-                background-color: rgba(255, 255, 255, .7);
+                background-color: rgba(255, 255, 255, .5);
                 &:focus {
                     outline: none;
                 }
