@@ -1,6 +1,6 @@
 <div id="global-filters" class="global-filters">
     <form>
-        <div class="global-filters-top">
+        <div class="global-filters-container">
             <div class="global-filters-search search">
                 <div class="input-group">
                     <input type="text" ng-model="activeFilters.search" ng-change="changeSearchFilter()" placeholder="{{'SEARCH' | translate}}..."/>
@@ -9,8 +9,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="global-filters-bottom">
             <div class="global-filters-geo-filters geo-filters" ng-class="{hidden: !enabCities && !enabDistricts && !enabStructures, fullsize: enabCities && enabDistricts && enabStructures}">
                 <div ng-if="enabCities" class="selector cities" ng-class="{empty: filters.cities.length === 0, opened: selectMenus.cities.opened}" ng-mouseenter="openSelectMenu('cities')" ng-mouseleave="closeSelectMenu('cities')">
                     <span ng-if="filterLength.cities > 0">{{filterLength.cities}} {{'CITIES' | translate}} {{'SELECTED' | translate}} <span class="caret"></span></span>
