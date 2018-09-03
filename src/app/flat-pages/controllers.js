@@ -49,14 +49,6 @@ function FlatMenuController(flatService, $scope, $rootScope) {
 
     initFlatMenu();
 
-    $scope.showFlatMenu = false;
-    $scope.toggleFlatMenu = function toggleFlatMenu() {
-        $scope.showFlatMenu = !$scope.showFlatMenu;
-    };
-    $scope.foldFlatMenu = function foldFlatMenu() {
-        $scope.showFlatMenu = false;
-    }
-
     var rootScopeEvents = [
         $rootScope.$on('startSwitchGlobalLang', function () {
             initFlatMenu(true);
