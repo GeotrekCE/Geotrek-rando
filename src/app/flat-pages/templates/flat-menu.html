@@ -1,10 +1,10 @@
-<li class="static-pages dropdown" click-anywhere-but-here="foldFlatMenu()">
-    <a ng-click="toggleFlatMenu()" href="#" ng-if="flatpages.length"
+<li class="static-pages dropdown">
+    <a href class="dropdown-toggle" data-toggle="dropdown" role="button" 
+    aria-expanded="expandOnHover" ng-if="flatpages.length"
     title="{{'ABOUT_US' | translate}}">
         <span class="fa fa-{{::aboutIcon}}"></span>
     </a>
-    <ul class="flat-menu nav" role="menu" 
-    ng-class="{ 'show-flat-menu': showFlatMenu }">
+    <ul class="dropdown-menu scroll" role="menu">
         <li ng-repeat="flat in flatpages track by flat.slug" ng-if="flat.target === 'all' || flat.target === 'web' ">
             <a ng-if="flat.external_url === ''" ui-sref="layout.flat({flatID: flat.slug})" close-collapse>{{::flat.title}}</a>
             <a ng-if="flat.external_url !== ''" href="{{flat.external_url}}" target="_blank" close-collapse>{{::flat.title}}</a>
