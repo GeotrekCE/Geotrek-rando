@@ -146,6 +146,9 @@
                         </div>
 
                     </div>
+
+
+
                     <div class="filters-group filters-selectors">
                         <!-- Date selector -->
                         <div ng-if="category.begin_date !== undefined" class="category-filter selector date">
@@ -217,8 +220,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="filters-group filters-themes">
                         <!-- Theme filter selector -->
                         <div ng-if="category.themes && category.themes.values.length > 0" class="category-filter selector themes" ng-class="{empty: category.themes.values.length === 0}">
                             <div class="choices">
