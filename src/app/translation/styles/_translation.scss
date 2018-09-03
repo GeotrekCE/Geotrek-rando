@@ -1,6 +1,6 @@
 .translation-menu {
-    position: relative;
-    right: 0;
+    position: absolute;
+    right: 55px;
     top: 0;
     background-color: $dark-grey;
     display: none;
@@ -10,10 +10,4 @@
         display: block;
         width: auto;
     }
-
-    @media (min-width: 760px) {
-        position: absolute;
-        right: 55px;
-    }
-
 }
