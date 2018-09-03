@@ -31,6 +31,7 @@
     &.layout-flat {
         top: calc(-#{$header-height-desktop} - 50px);
         padding-top: calc(#{$header-height-desktop} + 50px);
+        height: calc(100vh - #{$header-height-desktop} + 50px);
 
         @media (max-width: 767px) {
             top: calc(-#{$header-height-mobile} - 30px);
