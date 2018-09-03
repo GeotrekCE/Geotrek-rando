@@ -1,9 +1,6 @@
 'use strict';
 
-function TranslationController($scope, $rootScope, $translate, globalSettings, translationService) {
-
-    $scope.aboutIcon = (globalSettings.ABOUT_ICON ? globalSettings.ABOUT_ICON : 'bars');
-
+function TranslationController($scope, $rootScope, $translate, translationService) {
     function initTranslation() {
         $scope.languages = translationService.getAllLang();
         $rootScope.lang = translationService.getCurrentLang();
@@ -19,12 +16,6 @@ function TranslationController($scope, $rootScope, $translate, globalSettings, t
         $translate.use(lang);
         $rootScope.$emit('startSwitchGlobalLang');
     };
-
-    $scope.showTranslationMenu = false;
-    $scope.toggleTranslationMenu = function toggleTranslationMenu() {
-        $scope.showTranslationMenu = !$scope.showTranslationMenu;
-    };
-
 
     initTranslation();
 }
