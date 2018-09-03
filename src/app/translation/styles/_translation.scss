@@ -3,11 +3,19 @@
     right: 55px;
     top: 0;
     background-color: $dark-grey;
+
+    &.nav > li {
+        display: inline-block;
+        > a {
+            display: inline-block;
+        }
+    }
+
     display: none;
     width: 0;
     transition: all .2s ease;
     &.show-translation-menu {
         display: block;
-        width: auto;
+        width: 520px;
     }
 }

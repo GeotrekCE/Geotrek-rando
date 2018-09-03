@@ -3,7 +3,7 @@
     ng-click="toggleSocialMenu()" href="#">
         <span class="fa fa-{{::shareIcon}}"></span>
     </a>
-    <ul class="share-menu nav" id="social-menu" role="menu" 
+    <ul class="social-menu nav" id="social-menu" role="menu" 
         ng-class="{ 'show-social-menu': showSocialMenu }">
         <li ng-if="twitterShareLink" class="twitter">
             <a href="{{twitterShareLink}}" target="_blank" tooltip-placement="right" tooltip="Twitter">
