@@ -165,12 +165,10 @@
     }
     .header-link {
         line-height: normal;
-        float: none;
-        text-align: center;
 
         > a {
-            padding-top: 10px;
-            padding-bottom: 10px;
+            padding-top: 35px;
+            padding-bottom: 35px;
             @media (max-width: 767px) {
                 padding: 1em 2em;
             }
