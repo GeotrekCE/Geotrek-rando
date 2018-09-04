@@ -9,7 +9,7 @@
     }
     background-color: #e9e9e9;
     position: relative;
-    z-index: 3;
+    z-index: 2;
 
     .navbar, .container-fluid {
         border: none;
@@ -129,7 +129,6 @@
 .header-links {
     height: 100%;
     line-height: $header-height-desktop;
-    background-color: $dark-grey;
     &.navbar-right {
         margin-right: 0;
     }
@@ -147,7 +146,7 @@
     }
 
     a {
-        color: #e9e9e9;
+        color: $dark-grey;
         @media (max-width: 992px) {
             padding-left: 10px;
             padding-right: 10px;
@@ -166,12 +165,10 @@
     }
     .header-link {
         line-height: normal;
-        float: none;
-        text-align: center;
 
         > a {
-            padding-top: 5px;
-            padding-bottom: 5px;
+            padding-top: 35px;
+            padding-bottom: 35px;
             @media (max-width: 767px) {
                 padding: 1em 2em;
             }
