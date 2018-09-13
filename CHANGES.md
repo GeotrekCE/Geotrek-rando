@@ -26,11 +26,17 @@ to adjust your customizations:
   - `DISPLAY_MODE_MAP`: Label for the 'Map' view mode button.
   - `DISPLAY_MODE_LIST`: Label for the 'List' view mode button.
   - `DISPLAY_MODE_THUMBNAILS`: Label for the 'Thumbnails' view mode button.
+  - `BACK_TO_THE_MAP`: Label of the link for getting back to the map, when on a POI's page.
+
+**Important update note**
+
+The version of `angularjs-slider` has been upgraded to a recent version.
+<br>
+You should run `npm install` to ensure it gets updated to the correct version.
 
 **Other changes**
 
 * The search area at the top of the map was removed (as it's now below category filters).
-* The filter drawing at the bottom of the map has been removed.
 * New option: `DEFAULT_VIEW_MODE` to select what view mode should be displayed by
   default. See documentation for further details.
 
