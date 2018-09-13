@@ -41,7 +41,7 @@
             <!-- Category filters -->
             <div class="category-filters filters {{::category.cat_class}}-bg" ng-if="category.hasFilters">
                 <form>
-                    <div class="filters-group filters-sliders" 
+                    <div class="filters-group filters-sliders"
                         ng-if="category.practice || category.difficulty || category.duration || category.ascent || category.eLength">
                         <!-- Practice selector -->
                         <div ng-if="category.practice && category.practice.values.length > 0" class="category-filter selector practice">
@@ -71,8 +71,6 @@
                                 <rzslider rz-slider-model="activeRangeValues[category.id + '_difficulty'].min" rz-slider-high="activeRangeValues[category.id + '_difficulty'].max"
                                     rz-slider-options="activeRangeValues[category.id + '_difficulty'].options">
                                 </rzslider>
-                                <label class="min-label">{{category.difficulty.values[0].label}}</label>
-                                <label class="max-label">{{category.difficulty.values[category.difficulty.values.length - 1].label}}</label>
                             </div>
                         </div>
 
@@ -97,8 +95,6 @@
                                 <rzslider rz-slider-model="activeRangeValues[category.id + '_duration'].min" rz-slider-high="activeRangeValues[category.id + '_duration'].max"
                                     rz-slider-options="activeRangeValues[category.id + '_duration'].options">
                                 </rzslider>
-                                <label class="min-label">{{category.duration.values[0].label}}</label>
-                                <label class="max-label">{{category.duration.values[category.duration.values.length - 1].label}}</label>
                             </div>
                         </div>
 
@@ -123,8 +119,6 @@
                                 <rzslider rz-slider-model="activeRangeValues[category.id + '_ascent'].min" rz-slider-high="activeRangeValues[category.id + '_ascent'].max"
                                     rz-slider-options="activeRangeValues[category.id + '_ascent'].options">
                                 </rzslider>
-                                <label class="min-label">{{category.ascent.values[0].label}}</label>
-                                <label class="max-label">{{category.ascent.values[category.ascent.values.length - 1].label}}</label>
                             </div>
                         </div>
 
@@ -149,8 +143,6 @@
                                 <rzslider rz-slider-model="activeRangeValues[category.id + '_eLength'].min" rz-slider-high="activeRangeValues[category.id + '_eLength'].max"
                                     rz-slider-options="activeRangeValues[category.id + '_eLength'].options">
                                 </rzslider>
-                                <label class="min-label">{{category.eLength.values[0].label}}</label>
-                                <label class="max-label">{{category.eLength.values[category.eLength.values.length - 1].label}}</label>
                             </div>
                         </div>
 
