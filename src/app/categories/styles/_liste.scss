@@ -398,6 +398,7 @@
             .slider-container {
                 padding: 0 1em 1.75em;
                 margin: 0 15px;
+                min-width: 240px;
             }
             label {
                 margin-top: 0.4em;
@@ -406,48 +407,25 @@
             }
         }
 
-        rzslider {
-            margin: 15px 0 15px 0;
-            .rz-bar {
+        .rzslider {
+            .rz-bar,
+            .rz-tick {
                 background: transparentize(white, 0.7);
-                height: 5px;
-                &.rz-selection {
-                    background: white;
-                }
             }
-
-            span.rz-pointer {
-                background-color: rgba(255, 255, 255, .5);
-                &:focus {
-                    outline: none;
-                }
-                &:after {
-                    background-color: #666;
-                }
-                &.rz-active {
-                    background-color: rgba(255, 255, 255, 1);
-                    &:after {
-                        background-color: black;
-                    }
-                }
+            .rz-selection {
+                background: white;
             }
-
-            span.rz-bubble {
-                display: none;
+            .rz-pointer {
+                background: white;
             }
-
-            .rz-ticks {
-                top: -1px;
+            .rz-pointer::after {
+                background-color: #666;
             }
-
-            .rz-ticks .tick {
-                background-color: rgba(255,255,255,.3);
-                width: 7px;
-                height: 7px;
+            .rz-tick.rz-selected {
+                background: white;
             }
-
-            .rz-ticks .tick.selected {
-                background-color: white;
+            .rz-bubble {
+                color: white;
             }
         }
 
@@ -610,9 +588,10 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
+            justify-content: flex-start;
         }
         .slider {
-            flex: 1 1 auto;
+            // flex: 1 1 auto;
         }
     }
     .checkbox {
