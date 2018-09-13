@@ -21,12 +21,4 @@ globalSettings.FILTER_ON_AT_LEAST_ONE_CAT = true;
 globalSettings.DEFAULT_ACTIVE_CATEGORIES = [globalSettings.DEFAULT_ACTIVE_CATEGORY];
 globalSettings.ENABLE_UNIQUE_CAT = true;
 
-/**
- * The new user interface aims at being simpler and more intuitive, making most
- * filters more accessible. This filter drawer is not useful anymore.
- * TODO: We may consider removing all code/files related to this feature if it proves to
- * be definitely useless in the future.
- */
-globalSettings.SHOW_FILTERS_ON_MAP = false;
-
 module.exports = globalSettings;
