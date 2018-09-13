@@ -434,6 +434,15 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
             $scope.opened = true;
         });
     };
+
+    /**
+     * Called when user clicks the "Reset filters" link, on the right hand side of
+     * category tabs.
+     */
+    $scope.resetFilters = function resetFilters () {
+        $scope.closeCategoryFilters();
+        $rootScope.$broadcast('resetFilters');
+    };
 }
 
 module.exports = {

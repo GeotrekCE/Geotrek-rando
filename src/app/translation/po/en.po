@@ -288,6 +288,9 @@ msgstr "All structures"
 msgid "RESET"
 msgstr "Reset"
 
+msgid "RESET_ALL_FILTERS"
+msgstr "Reset filters"
+
 msgid "SELECTED"
 msgstr "selected"
 
