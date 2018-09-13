@@ -185,19 +185,20 @@
         margin-left: .7em;
     }
 
+    .open .category-title::after {
+        transform: rotate(-135deg);
+        vertical-align: -4.2px;
+    }
+
     .active {
         .category-icon,
         .category-title {
             opacity: 1;
             color: #fff;
         }
-
         .category-title::after {
-            transform: rotate(-135deg);
             border-color: #fff;
-            vertical-align: -4.2px;
         }
-
         @if $json-custom-style {
             @each $category in $categories {
                 &.category-#{nth($category, 1)} {

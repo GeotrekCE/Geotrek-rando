@@ -4,7 +4,10 @@
         <li
             ng-repeat="category in categories | orderBy: 'order' track by category.id"
             class="category-tab {{::category.cat_class}}"
-            ng-class="{active : activeFilters.categories.indexOf(category.id) > -1}"
+            ng-class="{
+                active : activeFilters.categories.indexOf(category.id) > -1,
+                open: category.open,
+            }"
             id="cat-tab-{{::category.id}}"
         >
 
