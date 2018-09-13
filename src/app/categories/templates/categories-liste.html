@@ -115,6 +115,7 @@
 
 
                     <div class="filters-group filters-selectors">
+
                         <!-- Date selector -->
                         <div ng-if="category.begin_date !== undefined" class="category-filter selector date">
                             <span class="filter-title">
@@ -126,6 +127,25 @@
                                     <button class="filter-button" ng-click="clearDateFilter(category.id)" ng-class="{'{{::category.cat_class}}-c': extend && filtering && category.open}">
                                         <ng-include class="cross" src="'/images/icons/cross.svg'"></ng-include>
                                     </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Theme filter selector -->
+                        <div ng-if="category.themes && category.themes.values.length > 0" class="category-filter selector themes" ng-class="{empty: category.themes.values.length === 0}">
+                            <div class="choices">
+                                <div ng-repeat="theme in category.themes.values" class="themes form-group" tooltip-placement="right" tooltip="{{theme.label}}">
+                                    <input type="checkbox" id="theme-{{::theme.id}}" ng-click="toogleCategoryFilter(category.id, 'themes', theme.id)"
+                                        ng-checked="activeFilters[category.id + '_themes'].indexOf(theme.id.toString()) > -1" />
+                                    <label for="theme-{{theme.id}}">
+                                        <div class="checkbox">
+                                            <i ng-if="activeFilters[category.id + '_themes'].indexOf(theme.id.toString()) > -1" class="fa fa-check"></i>
+                                        </div>
+                                        <span class="category-filters-theme-icon">
+                                            <ng-include ng-if="theme.pictogram | isSVG" src="theme.pictogram"></ng-include>
+                                            <img ng-if="theme.pictogram && !(theme.pictogram | isSVG)" ng-src="{{theme.pictogram}}" ng-alt="{{theme.label}}">
+                                        </span>
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -185,23 +205,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Theme filter selector -->
-                        <div ng-if="category.themes && category.themes.values.length > 0" class="category-filter selector themes" ng-class="{empty: category.themes.values.length === 0}">
-                            <div class="choices">
-                                <div ng-repeat="theme in category.themes.values" class="themes form-group" tooltip-placement="right" tooltip="{{theme.label}}">
-                                    <input type="checkbox" id="theme-{{::theme.id}}" ng-click="toogleCategoryFilter(category.id, 'themes', theme.id)" ng-checked="activeFilters[category.id + '_themes'].indexOf(theme.id.toString()) > -1"/>
-                                    <label for="theme-{{theme.id}}">
-                                        <div class="checkbox">
-                                            <i ng-if="activeFilters[category.id + '_themes'].indexOf(theme.id.toString()) > -1" class="fa fa-check"></i>
-                                        </div>
-                                        <span class="category-filters-theme-icon">
-                                            <ng-include ng-if="theme.pictogram | isSVG" src="theme.pictogram"></ng-include>
-                                            <img ng-if="theme.pictogram && !(theme.pictogram | isSVG)" ng-src="{{theme.pictogram}}" ng-alt="{{theme.label}}">
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </form>
             </div>
