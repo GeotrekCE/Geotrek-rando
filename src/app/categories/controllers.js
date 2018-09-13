@@ -50,13 +50,31 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         var activeFilters = filtersService.getActiveFilters();
         var valuesLength = filter.values.length;
 
+        // Compute labels for RZ Slider.
+        var rzStepLabels = [];
+        if (filter.values instanceof Array) {
+            for (var i = 0; i < filter.values.length; i++) {
+                var currentValue = filter.values[i];
+
+                rzStepLabels.push({
+                    value: i,
+                    legend: currentValue.label,
+                });
+            }
+        }
+
         $scope.activeRangeValues[uid] = {
             values: filter.values,
             options: {
                 floor: 0,
                 ceil: valuesLength - 1,
                 showTicks: true,
-                step: 1
+                step: 1,
+                // Translate is used to display a custom value above cursors.
+                // As we do not want values to be displayed, simply return an empty string.
+                translate: function(value) {
+                    return rzStepLabels[value].legend;
+                }
             }
         };
         if (activeFilters && activeFilters[uid]) {
