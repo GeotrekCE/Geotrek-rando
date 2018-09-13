@@ -1,6 +1,12 @@
 <div class="categories-wrapper" ng-class="{extend: extend, filtering: filtering}" click-anywhere-but-here="foldCategories()">
 
     <ul class="categories tabs">
+        <li class="category-filters-raz">
+            <a ng-click="" href="#">
+                <i class="fa fa-remove"></i>
+                Réinitialiser les filtres
+            </a>
+        </li>
         <li
             ng-repeat="category in categories | orderBy: 'order' track by category.id"
             class="category-tab {{::category.cat_class}}"

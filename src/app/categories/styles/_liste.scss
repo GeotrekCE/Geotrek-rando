@@ -142,6 +142,12 @@
 .categories {
     list-style: none;
     padding: 0;
+    height: 100%;
+
+    white-space: nowrap;
+    margin-bottom: 0;
+
+    background-color: #EFEFEF;
 
     & > ul {
         list-style: none;
@@ -156,16 +162,17 @@
         }
     }
 
-
-    height: 100%;
-    // width: 100%;
-    // position: relative;
-
-    white-space: nowrap;
-    margin-bottom: 0;
-
-    background-color: #EFEFEF;
-
+    .category-filters-raz {
+        float: right;
+        margin-right: 15px;
+        a {
+            display: inline-block;
+            height: 50px;
+            line-height: 50px;
+            font-weight: bold;
+            color: $info-color;
+        }
+    }
     .category-icon,
     .category-title,
     .category-filters-link {
