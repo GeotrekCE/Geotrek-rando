@@ -98,6 +98,11 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
 
 function FiltersTagsController($rootScope, $scope, globalSettings, filtersService) {
 
+    // React to event "resetFilters".
+    $rootScope.$on("resetFilters", function(){
+        $scope.resetFilters();
+     });
+
     function updateFiltersTags() {
         $rootScope.activeFiltersTags = filtersService.getTagFilters();
     }
