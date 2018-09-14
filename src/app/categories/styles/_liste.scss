@@ -540,9 +540,15 @@
                 }
             }
         }
+        .choice-tick {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            color: #555555;
+            font-size: 14px;
+        }
 
-        .category-filters-practice-icon,
-        .category-filters-theme-icon {
+        .choice-icon {
             display: inline-block;
             vertical-align: middle;
             border-radius: 50%;
@@ -561,66 +567,66 @@
             }
         }
 
-        input:checked+label .category-filters-theme-icon {
+        input:checked+label .choice-icon {
             background-color: rgba(255, 255, 255, 1);
-        }
-
-        .date-picker {
-            box-shadow: none;
-            margin-right: 10px;
-            margin-left: 10px;
-            position: relative;
-
-            input {
-                width: 100%;
-                border: 1px solid rgba(255, 255, 255, 0.3);
-                border-radius: 0;
-                background: transparent;
-                -webkit-appearance: none;
-                color: white;
-                background-color: rgba(0, 0, 0, 0.1);
-                vertical-align: middle;
-                padding-right: 15%;
-
-                &:focus,
-                &:active {
-                    background-color: rgba(0, 0, 0, 0.2);
-                    box-shadow: none;
-                }
-            }
-
-            button.filter-button {
-                position: absolute;
-                top: 0;
-                right: 0;
-                width: 15%;
-                height: 34px;
-                padding: 12px;
-                margin: 0;
-                background: none;
-            }
-
-            .cross {
-                height: 100%;
-                width: 100%;
-                display: block;
-                opacity: 0.7;
-                transition: opacity 0.2s ease-out;
-
-                svg {
-                    height: 100%;
-                    width: 100%;
-                    fill: white;
-                    display: block;
-                }
-            }
-
-            .filter-button:hover .cross {
-                opacity: 1;
+            svg * {
+                fill: #555555 !important;
             }
         }
     }
-    .checkbox-tick {
-        position: absolute;
+
+    .date-picker {
+        box-shadow: none;
+        margin-right: 10px;
+        margin-left: 10px;
+        position: relative;
+
+        input {
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 0;
+            background: transparent;
+            -webkit-appearance: none;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.1);
+            vertical-align: middle;
+            padding-right: 15%;
+
+            &:focus,
+            &:active {
+                background-color: rgba(0, 0, 0, 0.2);
+                box-shadow: none;
+            }
+        }
+
+        button.filter-button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 15%;
+            height: 34px;
+            padding: 12px;
+            margin: 0;
+            background: none;
+        }
+
+        .cross {
+            height: 100%;
+            width: 100%;
+            display: block;
+            opacity: 0.7;
+            transition: opacity 0.2s ease-out;
+
+            svg {
+                height: 100%;
+                width: 100%;
+                fill: white;
+                display: block;
+            }
+        }
+
+        .filter-button:hover .cross {
+            opacity: 1;
+        }
     }
 }
