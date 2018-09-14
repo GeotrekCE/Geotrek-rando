@@ -132,6 +132,9 @@
 
                         <!-- Theme filter selector -->
                         <div ng-if="category.themes && category.themes.values.length > 0" class="category-filter selector themes" ng-class="{empty: category.themes.values.length === 0}">
+                            <span class="filter-title">
+                                <span>{{'THEMES' | translate}}</span>
+                            </span>
                             <div class="choices">
                                 <div ng-repeat="theme in category.themes.values" class="themes form-group" tooltip-placement="right" tooltip="{{theme.label}}">
                                     <input type="checkbox" id="theme-{{::theme.id}}" ng-click="toogleCategoryFilter(category.id, 'themes', theme.id)"

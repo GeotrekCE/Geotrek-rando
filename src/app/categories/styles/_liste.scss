@@ -424,7 +424,6 @@
         }
     }
     .filters-group {
-        padding: 8px 0;
         border-bottom: 1px solid rgba(255, 255, 255, .5);
         @media (min-width: 564px) {
             display: flex;
@@ -542,7 +541,7 @@
         }
         .choice-tick {
             position: absolute;
-            top: -2px;
+            bottom: -2px;
             right: -2px;
             color: #555555;
             font-size: 14px;
