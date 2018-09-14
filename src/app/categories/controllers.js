@@ -70,6 +70,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
                 ceil: valuesLength - 1,
                 showTicks: true,
                 step: 1,
+                mergeRangeLabelsIfSame: true,
                 // Translate is used to display a custom value above cursors.
                 // As we do not want values to be displayed, simply return an empty string.
                 translate: function(value) {
