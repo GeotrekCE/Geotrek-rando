@@ -379,165 +379,6 @@
             }
         }
 
-        .category-filters {
-            color: #FFF;
-        }
-
-        .filter-title {
-            padding: 0 1.25em;
-            margin-right: 15px;
-            margin-left: 15px;
-            text-align: center;
-            position: relative;
-            > span:first-child {
-                font-weight: bolder;
-            }
-        }
-
-        .slider {
-            .slider-container {
-                padding: 0 1em 1.75em;
-                margin: 0 15px;
-                min-width: 240px;
-            }
-            label {
-                margin-top: 0.4em;
-                font-size: 0.85em;
-                font-weight: 300;
-            }
-        }
-
-        .rzslider {
-            .rz-bar,
-            .rz-tick {
-                background: transparentize(white, 0.7);
-            }
-            .rz-selection {
-                background: white;
-            }
-            .rz-pointer {
-                background: transparentize(white, 0.4);
-            }
-            .rz-pointer::after {
-                background-color: #666;
-            }
-            .rz-tick.rz-selected {
-                background: white;
-            }
-            .rz-bubble {
-                color: white;
-            }
-        }
-
-        .choices {
-            width: 100%;
-            overflow: hidden;
-            padding: .35em 0;
-            margin: 0 15px;
-            z-index: 11;
-            display: flex;
-            .form-group {
-                margin-bottom: 0;
-                margin-right: 30px;
-                position: relative;
-                input[type="checkbox"], input[type="radio"] {
-                    display: block;
-                    position: absolute;
-                    cursor: pointer;
-                    color: white;
-                    opacity: 0;
-                    top: 0;
-                    left: 0;
-                    height: 100%;
-                    width: 100%;
-                    margin: 0;
-                    z-index: 11;
-                    &:focus {
-                        outline: none;
-                        outline-color: transparent;
-                        outline-style: none;
-                        box-shadow: 0px 1px 2px 0px $dark-grey;
-                    }
-                }
-                label {
-                    margin: 0;
-                    padding: 0;
-                    font-size: 0.85rem;
-                    line-height: 0.85rem;
-                    font-weight: normal;
-                    span {
-                        vertical-align: middle;
-                    }
-                }
-                .category-filters-practice-icon,
-                .category-filters-theme-icon {
-                    display: inline-block;
-                    vertical-align: middle;
-                    border-radius: 50%;
-                    background-color: rgba(255, 255, 255, 0.4);
-                    width: 36px;
-                    height: 36px;
-                    padding: 5px;
-                    img {
-                        max-width: 100%;
-                    }
-                    svg {
-                        max-width: 100%;
-                        max-height: 100%;
-                    }
-                }
-                input:checked + label .category-filters-theme-icon {
-                    background-color: rgba(255, 255, 255, 1);
-                }
-                &.date-picker {
-                    box-shadow: none;
-                    margin-right: 10px;
-                    margin-left: 10px;
-                    position: relative;
-                    input {
-                        width: 100%;
-                        border: 1px solid rgba(255, 255, 255, 0.3);
-                        border-radius: 0;
-                        background: transparent;
-                        -webkit-appearance: none;
-                        color: white;
-                        background-color: rgba(0, 0, 0, 0.1);
-                        vertical-align: middle;
-                        padding-right: 15%;
-                        &:focus, &:active {
-                            background-color: rgba(0, 0, 0, 0.2);
-                            box-shadow: none;
-                        }
-                    }
-                    button.filter-button {
-                        position: absolute;
-                        top: 0;
-                        right: 0;
-                        width: 15%;
-                        height: 34px;
-                        padding: 12px;
-                        margin: 0;
-                        background: none;
-                    }
-                    .cross {
-                        height: 100%;
-                        width: 100%;
-                        display: block;
-                        opacity: 0.7;
-                        transition: opacity 0.2s ease-out;
-                        svg {
-                            height: 100%;
-                            width: 100%;
-                            fill: white;
-                            display: block;
-                        }
-                    }
-                    .filter-button:hover .cross {
-                        opacity: 1;
-                    }
-                }
-            }
-        }
     }
 
     @if $json-custom-style {
@@ -560,6 +401,7 @@
 }
 
 .category-filters {
+    color: #FFF;
     z-index: 12;
     transition: opacity 0.3s ease-out,
                 right 250ms ease-out;
@@ -590,27 +432,195 @@
             align-items: center;
             justify-content: flex-start;
         }
-        .slider {
-            // flex: 1 1 auto;
+        @media screen and (min-width: 1340px) {
+            .slider {
+                flex: 1 1 auto;
+            }
         }
     }
-    .checkbox {
-        color: #FFF;
+
+    .filter-title {
+        padding: 0 1.25em;
+        margin-right: 15px;
+        margin-left: 15px;
+        text-align: center;
+        position: relative;
+
+        >span:first-child {
+            font-weight: bolder;
+        }
     }
-    .selector {
-        margin: 0;
-        position: relative;
-        transition: all 0.1s ease-out;
-        @include transitionfuse;
 
-        position: relative;
-        &.empty {
-            display: none;
-        }
-        & > span {
-            display: block;
-            padding: 1em;
+    .slider {
+        .slider-container {
+            padding: 0 1em 1.75em;
+            margin: 0 15px;
+            min-width: 240px;
         }
 
+        label {
+            margin-top: 0.4em;
+            font-size: 0.85em;
+            font-weight: 300;
+        }
+    }
+
+    .rzslider {
+
+        .rz-bar,
+        .rz-tick {
+            background: transparentize(white, 0.7);
+        }
+
+        .rz-selection {
+            background: white;
+        }
+
+        .rz-pointer {
+            background: transparentize(white, 0.4);
+        }
+
+        .rz-pointer::after {
+            background-color: #666;
+        }
+
+        .rz-tick.rz-selected {
+            background: white;
+        }
+
+        .rz-bubble {
+            color: white;
+        }
+    }
+
+    .choices {
+        width: 100%;
+        overflow: hidden;
+        padding: .35em 0;
+        margin: 0 15px;
+        z-index: 11;
+        display: flex;
+
+        .form-group {
+            margin-bottom: 0;
+            margin-right: 30px;
+            position: relative;
+
+            input[type="checkbox"],
+            input[type="radio"] {
+                display: block;
+                position: absolute;
+                cursor: pointer;
+                color: white;
+                opacity: 0;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                margin: 0;
+                z-index: 11;
+
+                &:focus {
+                    outline: none;
+                    outline-color: transparent;
+                    outline-style: none;
+                    box-shadow: 0px 1px 2px 0px $dark-grey;
+                }
+            }
+
+            label {
+                margin: 0;
+                padding: 0;
+                font-size: 0.85rem;
+                line-height: 0.85rem;
+                font-weight: normal;
+
+                span {
+                    vertical-align: middle;
+                }
+            }
+        }
+
+        .category-filters-practice-icon,
+        .category-filters-theme-icon {
+            display: inline-block;
+            vertical-align: middle;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.4);
+            width: 36px;
+            height: 36px;
+            padding: 5px;
+
+            img {
+                max-width: 100%;
+            }
+
+            svg {
+                max-width: 100%;
+                max-height: 100%;
+            }
+        }
+
+        input:checked+label .category-filters-theme-icon {
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        .date-picker {
+            box-shadow: none;
+            margin-right: 10px;
+            margin-left: 10px;
+            position: relative;
+
+            input {
+                width: 100%;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                border-radius: 0;
+                background: transparent;
+                -webkit-appearance: none;
+                color: white;
+                background-color: rgba(0, 0, 0, 0.1);
+                vertical-align: middle;
+                padding-right: 15%;
+
+                &:focus,
+                &:active {
+                    background-color: rgba(0, 0, 0, 0.2);
+                    box-shadow: none;
+                }
+            }
+
+            button.filter-button {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 15%;
+                height: 34px;
+                padding: 12px;
+                margin: 0;
+                background: none;
+            }
+
+            .cross {
+                height: 100%;
+                width: 100%;
+                display: block;
+                opacity: 0.7;
+                transition: opacity 0.2s ease-out;
+
+                svg {
+                    height: 100%;
+                    width: 100%;
+                    fill: white;
+                    display: block;
+                }
+            }
+
+            .filter-button:hover .cross {
+                opacity: 1;
+            }
+        }
+    }
+    .checkbox-tick {
+        position: absolute;
     }
 }
