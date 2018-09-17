@@ -29,6 +29,7 @@
 
 .global-filters-search {
     padding: 0.4rem;
+    min-width: 280px;
 
     .input-group {
         box-shadow: 0 1px 1px 0px lighten($dark-grey, 50%);
