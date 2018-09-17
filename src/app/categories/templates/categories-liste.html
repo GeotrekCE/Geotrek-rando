@@ -119,9 +119,9 @@
 
                         <!-- Date selector -->
                         <div ng-if="category.begin_date !== undefined" class="category-filter selector date">
-                            <span class="filter-title">
+                            <div class="filter-title">
                                 <span>{{ 'DATE_FILTER' | translate }}</span>
-                            </span>
+                            </div>
                             <div class="choices">
                                 <div class="date-picker form-group">
                                     <input date-range-picker clearable="true" options="{autoApply: true, eventHandlers: {'apply.daterangepicker': changeDates }}" class="form-control" type="text" ng-model="activeDateFilters[category.id]" />
@@ -134,9 +134,9 @@
 
                         <!-- Theme filter selector -->
                         <div ng-if="category.themes && category.themes.values.length > 0" class="category-filter selector themes" ng-class="{empty: category.themes.values.length === 0}">
-                            <span class="filter-title">
+                            <div class="filter-title">
                                 <span>{{'THEMES' | translate}}</span>
-                            </span>
+                            </div>
                             <div class="choices">
                                 <div ng-repeat="theme in category.themes.values" class="themes form-group" tooltip-placement="right" tooltip="{{theme.label}}">
                                     <input type="checkbox" id="theme-{{::theme.id}}" ng-click="toogleCategoryFilter(category.id, 'themes', theme.id)"
@@ -158,9 +158,9 @@
 
                         <!-- Route selector -->
                         <div ng-if="category.route && category.route.values.length > 0" class="category-filter selector routes">
-                            <span class="filter-title">
+                            <div class="filter-title">
                                 <span>{{'ROUTES' | translate}}</span>
-                            </span>
+                            </div>
                             <div class="choices">
                                 <div ng-repeat="route in category.route.values" class="route form-group" tooltip-placement="right" tooltip="{{route.label}}">
                                     <input type="checkbox" id="route-{{::route.id}}" ng-click="toogleCategoryFilter(category.id, 'route', route.id)"
@@ -182,9 +182,9 @@
 
                         <!-- Custom filter 1 selector -->
                         <div ng-if="category.type1 && category.type1.values.length > 0" class="category-filter selector type1" ng-class="{empty: category.type1.values.length === 0}">
-                            <span class="filter-title">
+                            <div class="filter-title">
                                 <span>{{category.type1_label}}</span>
-                            </span>
+                            </div>
                             <div class="choices">
                                 <div ng-repeat="type1 in category.type1.values | orderBy: 'name'" class="type1 form-group" 
                                     tooltip-placement="right" tooltip="{{type1.label}}">
@@ -208,9 +208,9 @@
 
                         <!-- Custom filter 2 selector -->
                         <div ng-if="category.type2 && category.type2.values.length > 0" class="category-filter selector type2" ng-class="{empty: category.type2.values.length === 0}">
-                            <span class="filter-title">
+                            <div class="filter-title">
                                 <span>{{category.type2_label}}</span>
-                            </span>
+                            </div>
                             <div class="choices">
                                 <div ng-repeat="type2 in category.type2.values" class="type2 form-group"
                                     tooltip-placement="right" tooltip="{{type2.label}}">
