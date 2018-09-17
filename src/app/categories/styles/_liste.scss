@@ -438,11 +438,12 @@
             flex-wrap: wrap;
             align-items: center;
             justify-content: flex-start;
-            &.filters-selectors {
-                border-top: 1px solid rgba(255, 255, 255, .5);
-                .category-filter {
-                    border-right: rgba(255, 255, 255, .5) solid 1px;
-                }
+
+            &.filters-sliders {
+                border-bottom: 1px solid rgba(255, 255, 255, .5);
+            }
+            &.filters-selectors .category-filter {
+                border-right: rgba(255, 255, 255, .5) solid 1px;
             }
         }
         @media screen and (min-width: 1340px) {
