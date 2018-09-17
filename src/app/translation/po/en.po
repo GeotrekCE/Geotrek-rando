@@ -35,6 +35,9 @@ msgstr "Categories"
 msgid "CLEAR"
 msgstr "Clear"
 
+msgid "PRACTICE"
+msgstr "practice"
+
 msgid "ROUTES"
 msgstr "routes"
 

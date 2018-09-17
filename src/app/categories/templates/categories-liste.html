@@ -45,6 +45,9 @@
                         ng-if="category.practice || category.difficulty || category.duration || category.ascent || category.eLength">
                         <!-- Practice selector -->
                         <div ng-if="category.practice && category.practice.values.length > 0" class="category-filter selector practice">
+                            <div class="filter-title">
+                                <span>{{'PRACTICE' | translate}}</span>
+                            </div>
                             <div class="choices">
                                 <div ng-repeat="practice in category.practice.values" class="practice form-group" 
                                 tooltip-placement="right" tooltip="{{practice.label}}">
