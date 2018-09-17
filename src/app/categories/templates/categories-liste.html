@@ -46,7 +46,8 @@
                         <!-- Practice selector -->
                         <div ng-if="category.practice && category.practice.values.length > 0" class="category-filter selector practice">
                             <div class="choices">
-                                <div ng-repeat="practice in category.practice.values" class="practice form-group" tooltip-placement="right" tooltip="{{practice.label}}">
+                                <div ng-repeat="practice in category.practice.values" class="practice form-group" 
+                                tooltip-placement="right" tooltip="{{practice.label}}">
                                     <input type="checkbox" id="practice-{{::practice.id}}" ng-click="toogleCategoryFilter(category.id, 'practice', practice.id)"
                                     ng-checked="activeFilters[category.id + '_practice'].indexOf(practice.id.toString()) > -1" />
                                     <label for="practice-{{::practice.id}}">
