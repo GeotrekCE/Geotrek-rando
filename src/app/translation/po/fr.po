@@ -34,6 +34,9 @@ msgstr "Catégories"
 msgid "CLEAR"
 msgstr "Réinitialiser"
 
+msgid "PRACTICE"
+msgstr "Pratique"
+
 msgid "ROUTES"
 msgstr "Parcours"
 
