@@ -21,14 +21,14 @@
     }
 }
 
-.global-filters-container {
-    display: flex;
+@media (min-width: 768px) {
+    .global-filters-container {
+        display: flex;
+    }
 }
 
 .global-filters-search {
-    max-width: 50%;
     padding: 0.4rem;
-    margin: 0 5px;
 
     .input-group {
         box-shadow: 0 1px 1px 0px lighten($dark-grey, 50%);
@@ -41,10 +41,8 @@
         .input-group-addon {
             background: white;
             border: none;
+            border-radius: 0;
         }
-    }
-    @media (max-width: 560px) {
-        max-width: 87%;
     }
 }
 
