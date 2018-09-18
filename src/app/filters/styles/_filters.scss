@@ -24,6 +24,20 @@
 @media (min-width: 768px) {
     .global-filters-container {
         display: flex;
+        align-items: center;
+    }
+
+    .global-filters-search {
+        flex-grow: 1;
+        flex-basis: 25%;
+    }
+    .global-filters-geo-filters {
+        flex-grow: 3;
+    }
+    .raz-filters {
+        flex-grow: 1;
+        flex-shrink: 0;
+        flex-basis: 25%;
     }
 }
 
@@ -78,15 +92,14 @@
 }
 
 .global-filters-geo-filters {
-    flex: 1 1 100%;
 
-    padding: 0.4rem 5px;
+    padding: 0.4rem 0;
     &.fullsize {
         flex: 1 1 100%;
         max-width: 100%;
     }
     .selector {
-        margin: 5px 0;
+        margin: 5px 0.4rem;
         position: relative;
         box-shadow: 0 1px 1px 0px lighten($dark-grey, 50%);
         background: white;
@@ -152,9 +165,6 @@
                     width: 100%;
                     margin: 0;
                     z-index: 11;
-                    /*&:checked + label:before {
-                        background: $dark-grey;
-                    }*/
                     &:checked + label {
                         padding-left: 0.6em;
                         border-width: 0.4em;
@@ -172,20 +182,8 @@
                     font-weight: normal;
                     font-size: 0.9em;
                     padding-left: 1em;
-                    //padding-left: 2em;
                     opacity: 1;
                     border-left: 0 solid $dark-grey;
-                    /*&:before {
-                        content: '';
-                        position: absolute;
-                        background: transparent;
-                        border: 1px solid $dark-grey;
-                        height: 0.6em;
-                        width: 0.6em;
-                        border-radius: 50%;
-                        left: 0.5em;
-                        top: 0.6em;
-                    }*/
                 }
             }
         }
@@ -194,9 +192,6 @@
                 max-height: 300px;
             }
         }
-    }
-    @media (min-width: 1200px) {
-        // max-width: 50%;
     }
     @media (min-width: 560px) {
         display: flex;
@@ -270,5 +265,12 @@
 @for $i from 1 through 15 {
     .flex-order-#{$i} {
         order: $i;
+    }
+}
+
+.raz-filters {
+    text-align: right;
+    a {
+        color: white;
     }
 }
