@@ -14,6 +14,11 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
     $scope.type2IsCollapsed      = globalSettings.FILTERS_DEFAULT_OPEN;
     $scope.routeIsCollapsed      = globalSettings.FILTERS_DEFAULT_OPEN;
 
+    // React to event "resetFilters".
+    $rootScope.$on("resetFilters", function(){
+        $scope.resetFilters();
+     });
+
     function updateFiltersTags() {
         $rootScope.activeFiltersTags = filtersService.getTagFilters();
     }
@@ -442,7 +447,6 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
      */
     $scope.resetFilters = function resetFilters () {
         $scope.closeCategoryFilters();
-        $rootScope.$broadcast('resetFilters');
     };
 }
 

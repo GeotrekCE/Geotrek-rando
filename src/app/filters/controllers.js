@@ -94,6 +94,13 @@ function GlobalFiltersController($rootScope, $scope, $location, globalSettings, 
     $scope.openSelectMenu  = openSelectMenu;
     $scope.closeSelectMenu = closeSelectMenu;
 
+    /**
+     * Called when user clicks the "Reset filters" link, on the right hand side of
+     * global filters.
+     */
+    $scope.resetFilters = function resetFilters () {
+        $rootScope.$broadcast('resetFilters');
+    };
 }
 
 function FiltersTagsController($rootScope, $scope, globalSettings, filtersService) {
