@@ -160,7 +160,7 @@ msgid "KNOW_MORE"
 msgstr "Weitere Informationen"
 
 msgid "RELATED_TREKS"
-msgstr "verwandte Wanderungen"
+msgstr "verbundene Wanderungen"
 
 msgid "HAS_COMMON_DEPARTURE"
 msgstr "gemeinsame Abfahrt :"
