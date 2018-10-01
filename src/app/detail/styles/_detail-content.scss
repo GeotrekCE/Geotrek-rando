@@ -76,11 +76,12 @@
     ol.detail-content-steps-list {
         display: flex;
         flex-grow: 1;
+        flex-wrap: wrap;
         align-items: center;
         align-content: center;
         list-style: none;
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-left: 30px;
+        padding-right: 30px;
         margin: 0;
         li {
             margin: 5px;
@@ -197,39 +198,39 @@
     }
 }
 
-    .meta-item-title {
-        font-weight: bold;
+.meta-item-title {
+    font-weight: bold;
 
-        flex: 0 0 25%;
+    flex: 0 0 25%;
+}
+
+.meta-item-content {
+    margin: 0;
+    padding: 0;
+
+    list-style-type: none;
+
+    flex: 1 1 75%;
+}
+
+.meta-item-content-item {
+    display: inline-block;
+
+    margin-right: .5em;
+    img,
+    svg {
+        width: 1.6em;
+        height: 1.6em;
+
+        vertical-align: middle;
+        opacity: .8;
+
+        fill: currentColor;
     }
-
-    .meta-item-content {
-        margin: 0;
-        padding: 0;
-
-        list-style-type: none;
-
-        flex: 1 1 75%;
+    span {
+        vertical-align: middle;
     }
-
-        .meta-item-content-item {
-            display: inline-block;
-
-            margin-right: .5em;
-            img,
-            svg {
-                width: 1.6em;
-                height: 1.6em;
-
-                vertical-align: middle;
-                opacity: .8;
-
-                fill: currentColor;
-            }
-            span {
-                vertical-align: middle;
-            }
-        }
+}
 
 .detail-content-picture {
     position: relative;
