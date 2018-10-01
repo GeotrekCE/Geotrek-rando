@@ -58,7 +58,7 @@
 
 .detail-content-steps {
     display: flex;
-    align-items: stretch;
+    align-items: center;
     background-color: $dark-grey;
     color: white;
     a {
@@ -80,20 +80,20 @@
         align-items: center;
         align-content: center;
         list-style: none;
-        padding-left: 30px;
-        padding-right: 30px;
+        padding-left: 60px;
+        padding-right: 60px;
         margin: 0;
         li {
-            margin: 5px;
+            margin: 8px;
             a {
                 display: inline-block;
                 background: #606060;
                 color: #fff;
-                border-radius: 12px;
+                border-radius: 16px;
                 text-align: center;
-                line-height: 24px;
-                width: 24px;
-                height: 24px;
+                line-height: 32px;
+                width: 32px;
+                height: 32px;
             }
             &.active a {
                 background: $neutral-grey;
