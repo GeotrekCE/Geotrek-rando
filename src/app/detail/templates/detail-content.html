@@ -9,10 +9,22 @@
 
     <div class="detail-content-steps" ng-if="result.properties.stepNumber">
         <a class="detail-content-steps-previous" ng-if="previousStep" href="#" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: previousStep.slug})">
-            <i class="fa fa-angle-left"></i><span>{{result.properties.stepNumber - 1}} - {{previousStep.name}}</span>
+            <i class="fa fa-angle-left"></i>
         </a>
+
+        <ol class="detail-content-steps">
+            <li ng-repeat="step in trekSteps" class="detail-content-step-{{step.properties.stepNumber}}" ng-class="{'active': step.properties.stepNumber === result.properties.stepNumber}">
+                <a href="#"
+                    ui-sref="layout.detail({catSlug: step.properties.category.slug, slug: step.properties.slug})"
+                    tooltip-placement="bottom"
+                    tooltip="{{step.properties.name}}">
+                    <span class="sr-only">{{step.properties.name}}</span>
+                </a>
+            </li>
+        </ol>
+
         <a class="detail-content-steps-next" ng-if="nextStep" href="#" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: nextStep.slug})">
-            <span>{{result.properties.stepNumber + 1}} - {{nextStep.name}}</span><i class="fa fa-angle-right"></i>
+            <i class="fa fa-angle-right"></i>
         </a>
     </div>
 
