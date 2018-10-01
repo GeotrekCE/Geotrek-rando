@@ -133,7 +133,7 @@ msgid "TOWN_START"
 msgstr "Stadt:"
 
 msgid "TOWN_CROSSED"
-msgstr "querte Stadt:"
+msgstr "Durchquerte Ortschaften:"
 
 msgid "PARK_CENTERED"
 msgstr "Diese Route liegt im Herzen des Nationalparks. Folgen Sie bitten den Vorschriften."
