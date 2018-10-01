@@ -5,6 +5,10 @@
             <img ng-if="result.properties.category.pictogram" ng-src="{{::result.properties.category.pictogram}}" ng-alt="{{::result.properties.category.label}}">
         </div>
         <h1 class="detail-content-title-text"><span ng-if="result.properties.stepNumber">{{result.properties.stepNumber}} - </span>{{result.properties.name}}</h1>
+
+        <a ng-if="elementChildren.length" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: elementChildren[0].properties.slug})">
+            {{ 'SEE_TREK_STEPS' | translate }}
+        </a>
     </div>
 
     <div class="detail-content-steps" ng-if="result.properties.stepNumber">
