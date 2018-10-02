@@ -47,13 +47,22 @@
         display: inline-block;
         vertical-align: middle;
     }
+
+    a.see-steps-link {
+        margin-right: 10px;
+        padding: 6px 8px;
+        color: #FFF;
+        border: 1px solid #FFF;
+        border-radius: 5px;
+    }
 }
 
 .detail-content-title-text {
     font-size: 1.7em;
     font-weight: bold;
-
+    flex-grow: 1;
     margin: 5px 0 0 0;
+    padding-right: .5em;
 }
 
 .detail-content-steps {
