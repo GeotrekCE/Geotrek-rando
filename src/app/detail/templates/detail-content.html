@@ -13,9 +13,11 @@
     </div>
 
     <div class="detail-content-steps" ng-if="result.properties.stepNumber">
-        <a class="detail-content-steps-previous" ng-if="previousStep" href="#" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: previousStep.slug})">
-            <i class="fa fa-angle-left"></i>
-        </a>
+        <div class="detail-content-steps-previous">
+            <a ng-if="previousStep" href="#" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: previousStep.slug})">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        </div>
 
         <ol class="detail-content-steps-list">
             <li ng-repeat="step in trekSteps" class="detail-content-step-{{step.properties.stepNumber}}"
@@ -30,9 +32,11 @@
             </li>
         </ol>
 
-        <a class="detail-content-steps-next" ng-if="nextStep" href="#" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: nextStep.slug})">
-            <i class="fa fa-angle-right"></i>
-        </a>
+        <div class="detail-content-steps-next">
+            <a ng-if="nextStep" href="#" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: nextStep.slug})">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        </div>
     </div>
 
     <detail-content-meta></detail-content-meta>
