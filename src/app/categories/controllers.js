@@ -83,6 +83,11 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
                 }
             }
         };
+
+        if (uid === "T_ascent") {
+            console.log(uid);
+            console.log($scope.activeRangeValues[uid]['options']);
+        }
         if (activeFilters && activeFilters[uid]) {
             var minValue = activeFilters[uid][0].split('-')[0],
                 maxValue = activeFilters[uid][0].split('-')[1],
