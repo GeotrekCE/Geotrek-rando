@@ -4,6 +4,7 @@
 **Bug fixes**
 
 * Search children in all treks, not only in the category of the parent
+* Fix some German translations
 
 2.19.3 / 2018-08-31
 ===================
