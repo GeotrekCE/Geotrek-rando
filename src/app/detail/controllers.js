@@ -388,7 +388,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                         var currentParentId = detailService.getCurrentParent();
 
                         // Fetch parent trek.
-                        resultsService.getAResultByID(currentParentId, result.properties.category.id).then(
+                        resultsService.getATrekByID(currentParentId).then(
                             function(parentResult) {
                                 _getChildren(parentResult).then(function(children) {
                                     // Handle "previous" and "next" links.
@@ -403,7 +403,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                             var previousID = result.properties.previous[currentParentId];
                             if (previousID !== null && previousID !== undefined) {
                                 $scope.previousStep = true;
-                                resultsService.getAResultByID(previousID, result.properties.category.id).then(function(res) {
+                                resultsService.getATrekByID(previousID).then(function(res) {
                                     $scope.previousStep = res.properties;
                                 }), function(err) {
                                     console.log(err);
@@ -417,7 +417,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                             var nextID = result.properties.next[currentParentId];
                             if (nextID !== null && nextID !== undefined) {
                                 $scope.nextStep = true;
-                                resultsService.getAResultByID(nextID, result.properties.category.id).then(function(res) {
+                                resultsService.getATrekByID(nextID).then(function(res) {
                                     $scope.nextStep = res.properties;
                                 }), function(err) {
                                     console.log(err);
