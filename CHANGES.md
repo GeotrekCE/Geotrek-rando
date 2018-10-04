@@ -1,4 +1,4 @@
-2.19.4-dev0
+2.20.0-dev0
 ===================
 
 **Major changes**
@@ -41,6 +41,14 @@ You should run `npm install` to ensure it gets updated to the correct version.
 * The search area at the top of the map was removed (as it's now below category filters).
 * New option: `DEFAULT_VIEW_MODE` to select what view mode should be displayed by
   default. See documentation for further details.
+
+2.19.4 / 2018-09-04
+===================
+
+**Bug fixes**
+
+* Search children in all treks, not only in the category of the parent
+* Fix some German translations
 
 2.19.3 / 2018-08-31
 ===================

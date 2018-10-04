@@ -136,7 +136,7 @@ msgid "TOWN_START"
 msgstr "Stadt:"
 
 msgid "TOWN_CROSSED"
-msgstr "querte Stadt:"
+msgstr "Durchquerte Ortschaften:"
 
 msgid "PARK_CENTERED"
 msgstr "Diese Route liegt im Herzen des Nationalparks. Folgen Sie bitten den Vorschriften."
@@ -163,7 +163,7 @@ msgid "KNOW_MORE"
 msgstr "Weitere Informationen"
 
 msgid "RELATED_TREKS"
-msgstr "verwandte Wanderungen"
+msgstr "verbundene Wanderungen"
 
 msgid "HAS_COMMON_DEPARTURE"
 msgstr "gemeinsame Abfahrt :"

@@ -158,7 +158,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
 
         _.forEach(elementChildren, function (element) {
             promises.push(
-                resultsService.getAResultByID(element.id, element.category_id)
+                resultsService.getATrekByID(element.id)
                     .then(
                         function (elementData) {
                             elementData.properties.stepNumber = element.stepNumber + 1;
