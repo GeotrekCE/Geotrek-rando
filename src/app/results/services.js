@@ -219,6 +219,24 @@ function resultsService($rootScope, $q, $location, globalSettings, treksService,
         return deferred.promise;
     };
 
+    this.getATrekByID = function getATrekByID (elementID, forceRefresh) {
+        var deferred = $q.defer();
+
+        treksService.getTreks(forceRefresh)
+            .then(
+                function (treks) {
+                    _.forEach(treks.features, function (trek) {
+                        if (trek.id === elementID) {
+                            deferred.resolve(trek);
+                        }
+                    });
+                    deferred.reject('No matching element found');
+                }
+            );
+
+        return deferred.promise;
+    };
+
     this.getRandomContentsByCategory = function getRandomContentsByCategory (category, quantity) {
         var deferred = $q.defer();
         var parsedResults = [];
