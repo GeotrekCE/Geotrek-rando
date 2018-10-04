@@ -118,6 +118,9 @@ msgstr "You don't have any favorites yet !"
 #
 #
 
+msgid "SEE_TREK_STEPS"
+msgstr "See steps"
+
 msgid "CATEGORY"
 msgstr "Category"
 

@@ -5,15 +5,38 @@
             <img ng-if="result.properties.category.pictogram" ng-src="{{::result.properties.category.pictogram}}" ng-alt="{{::result.properties.category.label}}">
         </div>
         <h1 class="detail-content-title-text"><span ng-if="result.properties.stepNumber">{{result.properties.stepNumber}} - </span>{{result.properties.name}}</h1>
+
+        <a ng-if="elementChildren.length" class="see-steps-link"
+            ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: elementChildren[0].properties.slug})">
+            {{ 'SEE_TREK_STEPS' | translate }}
+        </a>
     </div>
 
     <div class="detail-content-steps" ng-if="result.properties.stepNumber">
-        <a class="detail-content-steps-previous" ng-if="previousStep" href="#" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: previousStep.slug})">
-            <i class="fa fa-angle-left"></i><span>{{result.properties.stepNumber - 1}} - {{previousStep.name}}</span>
-        </a>
-        <a class="detail-content-steps-next" ng-if="nextStep" href="#" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: nextStep.slug})">
-            <span>{{result.properties.stepNumber + 1}} - {{nextStep.name}}</span><i class="fa fa-angle-right"></i>
-        </a>
+        <div class="detail-content-steps-previous">
+            <a ng-if="previousStep" href="#" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: previousStep.slug})">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        </div>
+
+        <ol class="detail-content-steps-list">
+            <li ng-repeat="step in trekSteps" class="detail-content-step-{{step.properties.stepNumber}}"
+                ng-class="{'active': step.properties.stepNumber === result.properties.stepNumber}">
+                <a href="#"
+                    ui-sref="layout.detail({catSlug: step.properties.category.slug, slug: step.properties.slug})"
+                    tooltip-placement="bottom"
+                    tooltip="{{step.properties.name}}">
+                    <span class="sr-hidden step-number">{{step.properties.stepNumber}}</span>
+                    <span class="sr-only">{{step.properties.name}}</span>
+                </a>
+            </li>
+        </ol>
+
+        <div class="detail-content-steps-next">
+            <a ng-if="nextStep" href="#" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: nextStep.slug})">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        </div>
     </div>
 
     <detail-content-meta></detail-content-meta>

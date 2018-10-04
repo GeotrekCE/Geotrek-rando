@@ -141,28 +141,32 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         return deferred.promise;
     }
 
-    function getChildren(result) {
+    /**
+     * Gets all children steps of given parent trek.
+     *
+     * @param {Obj} parentTrek
+     *   The parent trek.
+     * @return {Promise}
+     *   Result promise, with the list of children passed as parameter.
+     */
+    function _getChildren(parentTrek) {
         var deferred = $q.defer(),
             promises = [],
-            elementChildren = [];
+            children = [];
 
-        _.each(result.properties.children, function(child, stepNumber) {
-            elementChildren.push({
-                category_id: result.properties.category.id,
-                id: child,
+        _.each(parentTrek.properties.children, function(childId, stepNumber) {
+            var childIds = {
+                category_id: parentTrek.properties.category.id,
+                id: childId,
                 stepNumber: stepNumber
-            });
-        });
+            };
 
-        $scope.elementChildren = [];
-
-        _.forEach(elementChildren, function (element) {
             promises.push(
-                resultsService.getATrekByID(element.id)
+                resultsService.getATrekByID(childIds.id)
                     .then(
-                        function (elementData) {
-                            elementData.properties.stepNumber = element.stepNumber + 1;
-                            $scope.elementChildren.push(elementData);
+                        function (childData) {
+                            childData.properties.stepNumber = childIds.stepNumber + 1;
+                            children.push(childData);
                         },
                         function (err) {
                             if (console) {
@@ -174,12 +178,27 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         });
 
         $q.all(promises)
-            .then(
-                function () {
-                    mapService.createElementsMarkers($scope.elementChildren, 'children');
-                    deferred.resolve($scope.elementChildren);
-                }
-            );
+            .then(function () {
+                deferred.resolve(children);
+            });
+
+        return deferred.promise;
+    }
+
+    /**
+     * Populates the sidebar with all the children steps of given trek.
+     *
+     * @param {Obj} parentTrek
+     *   The parent trek.
+     */
+    function populateUIWithChildren(parentTrek) {
+        var deferred = $q.defer();
+
+        _getChildren(parentTrek).then(function(children) {
+            $scope.elementChildren = children;
+
+            deferred.resolve(children);
+        });
 
         return deferred.promise;
     }
@@ -286,7 +305,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         if (result.properties.children && result.properties.children.length > 0) {
             detailService.setCurrentParent(result.id);
             promises.push(
-                getChildren(result)
+                populateUIWithChildren(result)
                     .then(
                         function (children) {
                             if (children.length > 0) {
@@ -367,6 +386,18 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
 
                     if (result.properties.parents) {
                         var currentParentId = detailService.getCurrentParent();
+
+                        // Fetch parent trek.
+                        resultsService.getAResultByID(currentParentId, result.properties.category.id).then(
+                            function(parentResult) {
+                                _getChildren(parentResult).then(function(children) {
+                                    // Handle "previous" and "next" links.
+                                    $scope.trekSteps = children;
+                                });
+                            }
+                        );
+
+                        // Handle "Previous" link state.
                         if (result.properties.previous !== undefined) {
                             // Get previous step
                             var previousID = result.properties.previous[currentParentId];
@@ -380,6 +411,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                             }
                         }
 
+                        // Handle "Next" link state.
                         if (result.properties.next !== undefined) {
                             // Get next step
                             var nextID = result.properties.next[currentParentId];

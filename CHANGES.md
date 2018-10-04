@@ -28,7 +28,8 @@ to adjust your customizations:
   - `DISPLAY_MODE_THUMBNAILS`: Label for the 'Thumbnails' view mode button.
   - `BACK_TO_THE_MAP`: Label of the link for getting back to the map, when on a POI's page.
   - `RESET_ALL_FILTERS`: Label of the link for resetting filters to default setting, displayed
-    on the right hand side of the list of category list.
+    at the bottom of category filters (at the right hand side of the global search bar).
+  - `SEE_TREK_STEPS`: Label of the link for accessing a trek's steps, when on this trek's detail page.
 
 **Important update notes**
 
