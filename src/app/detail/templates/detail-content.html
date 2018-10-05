@@ -7,7 +7,7 @@
         <h1 class="detail-content-title-text"><span ng-if="result.properties.stepNumber">{{result.properties.stepNumber}} - </span>{{result.properties.name}}</h1>
 
         <a ng-if="elementChildren.length" class="see-steps-link"
-            ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: elementChildren[0].properties.slug})">
+            ui-sref="layout.detail({catSlug: elementChildren[0].properties.category.slug, slug: elementChildren[0].properties.slug})">
             {{ 'SEE_TREK_STEPS' | translate }}
         </a>
     </div>
