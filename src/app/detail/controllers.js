@@ -219,7 +219,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
 
         _.forEach(parentsElement, function (element) {
             promises.push(
-                resultsService.getAResultByID(element.id, element.category_id)
+                resultsService.getATrekByID(element.id)
                     .then(
                         function (elementData) {
                             if (elementData.id === currentParentId) {
