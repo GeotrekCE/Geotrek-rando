@@ -46,6 +46,9 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
                 step: 1
             }
         };
+        if (filterName !== 'difficulty') {
+            $scope.activeRangeValues[uid].options.minRange = 1;
+        };
         if (activeFilters && activeFilters[uid]) {
             var minValue = activeFilters[uid][0].split('-')[0],
                 maxValue = activeFilters[uid][0].split('-')[1],

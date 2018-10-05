@@ -124,23 +124,24 @@
     "APPROVED_SMALL": "images/approved-small.png",
     "APPROVED_LABEL": "Approuved",
     "DURATION_FILTER": [
-        { "id": 0, "label": "<1/2 J"},
-        { "id": 10, "label": "1/2 J"},
-        { "id": 24, "label": "1 J"},
-        { "id": 999, "label": "> 1 J"}
+        { "id": 0, "label": "0"},
+        { "id": 4, "label": "4h"},
+        { "id": 24, "label": "24h"},
+        { "id": 48, "label": "48h"},
+        { "id": 999, "label": "+"}
     ],
     "ASCENT_FILTER":  [
-        { "id": 0, "label": "<300m"},
+        { "id": 0, "label": "0"},
         { "id": 300, "label": "300m"},
         { "id": 600, "label": "600m"},
         { "id": 1000, "label": "1000m"},
-        { "id": 9999, "label": ">1000m"}
+        { "id": 9999, "label": "+"}
     ],
     "LENGTH_FILTER":  [
-        { "id": 0, "label": "<10km"},
+        { "id": 0, "label": "0"},
+        { "id": 5000, "label": "5km"},
         { "id": 10000, "label": "10km"},
         { "id": 20000, "label": "20km"},
-        { "id": 30000, "label": "30km"},
-        { "id": 99999, "label": ">30km"}
+        { "id": 99999, "label": "+"}
     ]
 }
