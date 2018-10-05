@@ -83,6 +83,10 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
                 }
             }
         };
+        // Prevent min = max in which case no trek is selected by filter.
+        if (filterName === 'distance' || filterName === 'ascent') {
+            $scope.activeRangeValues[uid].options.minRange = 1;
+        };
         if (activeFilters && activeFilters[uid]) {
             var minValue = activeFilters[uid][0].split('-')[0],
                 maxValue = activeFilters[uid][0].split('-')[1],
