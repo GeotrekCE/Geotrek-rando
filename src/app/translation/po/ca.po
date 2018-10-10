@@ -362,7 +362,7 @@ msgid "MONTHSMARKUP"
 msgstr "Període de sensibilitat :"
 
 msgid "MONTHS"
-msgstr "JAN, febrer, dm, abril, maig, juny, juliol, agost, setembre, octubre, novembre, DEC"
+msgstr "GEN, FEB, MAR, ABR, MAI, JUN, JUL, AGO, SET, OCT, NOV, DES"
 
 msgid "ACCESS_SITE"
 msgstr "Aneu al lloc"
