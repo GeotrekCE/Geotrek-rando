@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: ca\n"
 
-msgid "﻿DEFAULT_META_TITLE"
+msgid "DEFAULT_META_TITLE"
 msgstr "Geotrek Rando"
 
 msgid "DEFAULT_META_DESCRIPTION"
