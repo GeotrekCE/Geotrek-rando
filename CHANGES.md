@@ -1,9 +1,9 @@
 2.19.5-dev0
 ===================
 
-**Bug fixes**
+**Enhancements**
 
-*
+* Add catalan translation
 
 2.19.4 / 2018-09-04
 ===================
