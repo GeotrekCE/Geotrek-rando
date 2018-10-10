@@ -1,0 +1,386 @@
+msgid ""
+msgstr ""
+"Project: Geotrek-rando\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ca\n"
+
+msgid "﻿DEFAULT_META_TITLE"
+msgstr "Geotrek Rando"
+
+msgid "DEFAULT_META_DESCRIPTION"
+msgstr "Geotrek és un app de webs on podreu preparar amb antelació el seu excursions !"
+
+msgid "CATEGORIES"
+msgstr "Categories"
+
+msgid "CLEAR"
+msgstr "Restablir"
+
+msgid "ROUTES"
+msgstr "Curs"
+
+msgid "DIFFICULTIES"
+msgstr "Destret :"
+
+msgid "DURATION"
+msgstr "Durada :"
+
+msgid "ASCENT"
+msgstr "Vertical :"
+
+msgid "ASCENT_S"
+msgstr "D + :"
+
+msgid "LENGTH"
+msgstr "Longitud :"
+
+msgid "DATE_FILTER"
+msgstr "Entre la... i el..."
+
+msgid "ALL"
+msgstr "Totes"
+
+msgid "CLOSE"
+msgstr "Tancar"
+
+msgid "I_DURATION"
+msgstr "Durada"
+
+msgid "I_DIFFICULTY"
+msgstr "Destret"
+
+msgid "I_LENGTH"
+msgstr "Llargada"
+
+msgid "I_ROUTE"
+msgstr "Curs"
+
+msgid "I_ASCENT"
+msgstr "desnivell"
+
+msgid "I_NETWORK"
+msgstr "Xarxa"
+
+msgid "RESULT"
+msgstr "Resultat"
+
+msgid "RESULTS"
+msgstr "Resultats"
+
+msgid "NO_RESULTS"
+msgstr "No hi ha resultats que coincideixen amb la cerca"
+
+msgid "FAVORITES"
+msgstr "Favorits"
+
+msgid "NO_FAVORITES"
+msgstr "Encara no té algun favorit!"
+
+msgid "CATEGORY"
+msgstr "Categoria"
+
+msgid "INFORMATIONS"
+msgstr "Informació"
+
+msgid "START"
+msgstr "Inici :"
+
+msgid "ARRIVAL"
+msgstr "Arribada :"
+
+msgid "LOOP"
+msgstr "Sortida/arribada :"
+
+msgid "TOWN_START"
+msgstr "Municipis /poble"
+
+msgid "TOWN_CROSSED"
+msgstr "Municipis creuats :"
+
+msgid "PARK_CENTERED"
+msgstr "Aquest itinerari  es troba al cor del parc nacional, es pot consultar la normativa."
+
+msgid "TRANSPORTS"
+msgstr "Transport"
+
+msgid "ACCESS"
+msgstr "Carretera d'accés"
+
+msgid "PARKING"
+msgstr "Aparcament :"
+
+msgid "INFORMATION_DESKS"
+msgstr "Punts d'informació"
+
+msgid "CONTACT"
+msgstr "Contacte"
+
+msgid "SOURCE"
+msgstr "Font"
+
+msgid "KNOW_MORE"
+msgstr "Més informació sobre la"
+
+msgid "RELATED_TREKS"
+msgstr "Itineraris relacionats"
+
+msgid "SENSITIVE_ZONE"
+msgstr "Zones de sensibilitat ambiental"
+
+msgid "SENSITIVE_ZONE_TEXT"
+msgstr "Al llarg del seu recorregut, es creuen zones de sensibilitat lligada a la presència d'una espècie en particular o el medi ambient. En aquestes àrees, un comportament adequat   ajuda a contribuir  a llur conservatio. Per obtenir informació més detallada, fulls específics estan disponibles per a cada lloc."
+
+msgid "SENSITIVE_PERIOD"
+msgstr "Període de sensibilitat :"
+
+msgid "HAS_COMMON_DEPARTURE"
+msgstr "Al principi :"
+
+msgid "HAS_COMMON_EDGE"
+msgstr "En el camí :"
+
+msgid "IS_CIRCUIT_STEP"
+msgstr "Passos :"
+
+msgid "POI"
+msgstr "Patrimoni"
+
+msgid "NEAR"
+msgstr "Properes"
+
+msgid "CHILDREN"
+msgstr "Passos"
+
+msgid "PARENT"
+msgstr "Estades"
+
+msgid "PROFILE_ALTI"
+msgstr "Perfil d'elevació"
+
+msgid "ELEVATIION_IN_M"
+msgstr "Altitud (M)"
+
+msgid "MIN"
+msgstr "Min :"
+
+msgid "MAX"
+msgstr "Max :"
+
+msgid "LENGTH_IN_M"
+msgstr "Longitud (m)"
+
+msgid "DATES"
+msgstr "Dates :"
+
+msgid "DATE"
+msgstr "Data :"
+
+msgid "WEBSITE"
+msgstr "Lloc web :"
+
+msgid "EMAIL"
+msgstr "Correu electrònic :"
+
+msgid "MEETING_POINT"
+msgstr "Lloc de celebració :"
+
+msgid "MEETING_TIME"
+msgstr "Hora de la cita :"
+
+msgid "SPEAKERS"
+msgstr "Actors :"
+
+msgid "BOOKING"
+msgstr "Reserves :"
+
+msgid "ORGANIZERS"
+msgstr "Organitzadors :"
+
+msgid "PARTICIPANTS_NUMBER"
+msgstr "Nombre de participants :"
+
+msgid "PRATICAL_INFOS"
+msgstr "Informació pràctica :"
+
+msgid "SUCCESS_WARNING"
+msgstr "El missatge s'ha registrat. Gràcies per la vostra ajuda !"
+
+msgid "ERROR_WARNING"
+msgstr "No s'ha pogut desar el missatge. Si us plau Excusi'ns per aquest inconvenient. Els nostres equips han estat  advertit i analitzen el problema."
+
+msgid "SHOW_ACTIVE_FILTERS"
+msgstr " Mostra els Filtres actius Mostra"
+
+msgid "HIDE_ACTIVE_FILTERS"
+msgstr "Amagar filtres actius"
+
+msgid "SIMPLE_SEARCH"
+msgstr "Criteris menys"
+
+msgid "ADVANCED_SEARCH"
+msgstr "Criteris més"
+
+msgid "SHOW_MORE"
+msgstr "Més informació sobre la"
+
+msgid "THEMES"
+msgstr "Temes"
+
+msgid "DISTRICTS"
+msgstr "cadene de muntanya"
+
+msgid "ALL_DISTRICTS"
+msgstr "Tots cadenes de muntanya"
+
+msgid "SEARCH"
+msgstr "Cerca"
+
+msgid "CITIES"
+msgstr "municipis / pobles"
+
+msgid "ALL_CITIES"
+msgstr "Tots els municipis"
+
+msgid "STRUCTURES"
+msgstr "Estructures"
+
+msgid "ALL_STRUCTURES"
+msgstr "Totes les estructures"
+
+msgid "RESET"
+msgstr "Restablir"
+
+msgid "SELECTED"
+msgstr "Seleccionats"
+
+msgid "SHARING_DEFAULT_TEXT"
+msgstr "Geotrek és realment perfecte per preparar el seu viatge dins la naturalesa !"
+
+msgid "TOGGLE_NAV"
+msgstr "Obrir el menú"
+
+msgid "BANNER_TEXT"
+msgstr "Geotrek Rando"
+
+msgid "HOME"
+msgstr "Mostra la pàgina d'inici"
+
+msgid "SEARCH_LIST"
+msgstr "Mostra la pàgina de cerca"
+
+msgid "ABOUT_US"
+msgstr "Més informació sobre la"
+
+msgid "BACK"
+msgstr "retorn"
+
+msgid "BACK_TO_THE_MAP"
+msgstr "retorn Al mapa"
+
+msgid "PRINT"
+msgstr "Imprimeix la targeta"
+
+msgid "DOWNLOAD"
+msgstr "Descarregar"
+
+msgid "ADD_FAVS"
+msgstr "Afegir als meus favorits"
+
+msgid "REMOVE_FAVS"
+msgstr "Retirar els meus favorits"
+
+msgid "SHARE"
+msgstr "Compartir"
+
+msgid "WARNING"
+msgstr "Notificar un error o un problema"
+
+msgid "FORM_NAME"
+msgstr "Nom"
+
+msgid "FORM_EMAIL"
+msgstr "Correu electrònic"
+
+msgid "FORM_CATEGORY"
+msgstr "Categoria"
+
+msgid "FORM_COMMENT"
+msgstr "Comentari"
+
+msgid "FORM_MAP"
+msgstr "Situació (feu clic sobre el mapa per situar el marcador)"
+
+msgid "FORM_SEND"
+msgstr "Informe"
+
+msgid "KML"
+msgstr "Descarregar l'arxiu KML"
+
+msgid "GPX"
+msgstr "Descarregar l'arxiu GPX"
+
+msgid "3D"
+msgstr "Veure l'itinerari en 3d"
+
+msgid "ZOOM_IN"
+msgstr "Amplia-ho"
+
+msgid "ZOOM_OUT"
+msgstr "Allunyar"
+
+msgid "FULL_SCREEN"
+msgstr "Pantalla sencera"
+
+msgid "EXIT_FULL_SCREEN"
+msgstr "Sortir de plena pantalla"
+
+msgid "RECENTER_VIEW"
+msgstr "Recenter el mapa"
+
+msgid "TILES_SWITCH"
+msgstr "cambiar de Fons de mapa "
+
+msgid "SERVICES_TOGGLE"
+msgstr "Permetre o amaga serveis"
+
+msgid "VIEWPORT_FILTERING"
+msgstr "Filtrar per mapa"
+
+msgid "SENSITIVE_TILELAYER"
+msgstr "Zona sensible"
+
+msgid "MONTHSMARKUP"
+msgstr "Període de sensibilitat :"
+
+msgid "MONTHS"
+msgstr "JAN, febrer, dm, abril, maig, juny, juliol, agost, setembre, octubre, novembre, DEC"
+
+msgid "ACCESS_SITE"
+msgstr "Aneu al lloc"
+
+msgid "DONT_SHOW_HOME"
+msgstr "Deixa de mostrar aquesta pàgina"
+
+msgid "SUGGESTED"
+msgstr "Els nostres favorits :"
+
+msgid "LOGO_ALT"
+msgstr "Logotip Geotrek"
+
+msgid "LEGALS"
+msgstr "Legal"
+
+msgid "CREDITS"
+msgstr "Disseny i crèdits"
+
+msgid "CONTACT"
+msgstr "Contacte"
