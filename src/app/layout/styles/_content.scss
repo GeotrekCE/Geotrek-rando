@@ -7,8 +7,8 @@
 .main-content {
     position: relative;
     z-index: 1;
-
     width: 100%;
+    height: calc(100vh - #{$header-height-mobile} + 300px); /* add 300px to include filter navigation */
 
     @media (min-width: 768px) {
         &.footer-active {
@@ -18,24 +18,16 @@
 
     &.layout-root {
         display: flex;
-        height: calc(100vh - #{$header-height-desktop} - 50px);
-
-        @media (max-width: 767px) {
-            height: calc(100vh - #{$header-height-mobile} - 50px);
-            top: - $header-height-mobile;
-            padding-top: $header-height-mobile;
+        @media (min-width: 768px) {
+            height: calc(100vh - #{$header-height-desktop} - 50px);
         }
     }
 
     &.layout-detail,
     &.layout-flat {
-        top: calc(-#{$header-height-desktop} - 50px);
-        padding-top: calc(#{$header-height-desktop} + 50px);
-        height: calc(100vh - #{$header-height-desktop} + 50px);
-
-        @media (max-width: 767px) {
-            top: calc(-#{$header-height-mobile} - 30px);
-            padding-top: calc(#{$header-height-mobile} + 30px);
+        height: calc(100vh - #{$header-height-mobile} - 30px); /* 30px pour la toolbar-actions */
+        @media (min-width: 768px) {
+            height: calc(100vh - #{$header-height-desktop} - 50px);
         }
     }
 
@@ -143,6 +135,9 @@
         padding-left: 1em;
 
         color: rgba(#000, .5);
+    }
+    @media (max-width: 767px) {
+        display: none;
     }
 }
 
