@@ -456,7 +456,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
 
         layersControl.addTo(this.map);
         optionalLayersControl.addTo(this.map);
-        
+
         if (globalSettings.SENSITIVE_TILELAYER) {
             sensitiveLayersControl.addTo(this.map);
             sensitiveLayersControl._setState(globalSettings.SHOW_SENSITIVE_TILELAYER_BY_DEFAULT);
@@ -878,12 +878,14 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                             return element;
                         }
                     });
-                    self.currentElevationPoint.setLatLng([currentPoint[0][2][1], currentPoint[0][2][0]]);
-                    //value = region.y;
-                    var distance = (region.x < 10000) ? Math.round(region.x) + " m" : Math.round(region.x/100)/10 + " km";
-                    jQuery('#mouseoverprofil').text(distance);
-                    // Trigger global event
-                    jQuery('#elevation').trigger('hover:distance', region.x);
+
+                    if (Array.isArray(currentPoint) && currentPoint.length > 0) {
+                        self.currentElevationPoint.setLatLng([currentPoint[0][2][1], currentPoint[0][2][0]]);
+                        var distance = (region.x < 10000) ? Math.round(region.x) + " m" : Math.round(region.x/100)/10 + " km";
+                        jQuery('#mouseoverprofil').text(distance);
+                        // Trigger global event
+                        jQuery('#elevation').trigger('hover:distance', region.x);
+                    }
                 }).on('mouseover', function () {
                     jQuery('.elevationMarker').addClass('active');
                 }).on('mouseleave', function () {
@@ -1572,7 +1574,7 @@ function layersService ($http, globalSettings, settingsFactory, $translate) {
                     "attribution": "(c) LPO",
                     "active": true
                 }
-            }] 
+            }]
         }
         return false;
     };
@@ -1634,13 +1636,13 @@ function layersService ($http, globalSettings, settingsFactory, $translate) {
                         onEachFeature: function (feature, layer) {
                             var markup = [], prop;
                             if (layer && layer.feature && layer.feature.properties) {
-                                
+
                                 prop = layer.feature.properties;
 
                                 markup.push('<div class="info-point-title">' + (prop.name || '') + '</div>');
                                 markup.push('<div class="info-point-photo">' + (prop.photo_url ? '<img src="' + globalSettings.API_URL + prop.photo_url + '">' : '') + '</div>');
                                 markup.push('<div class="info-point-type">'  + ((prop.type && prop.type.label) || '') + '</div>');
-                                
+
                                 if (prop.website) {
                                     markup.push('<div class="info-point-link"><a target="_blank" href="' + prop.website + '">' + prop.website + '</a></div>');
                                 }
