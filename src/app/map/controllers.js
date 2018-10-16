@@ -217,9 +217,15 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
         $rootScope.$on('detailUpdated', function (name, forceRefresh) {
             if ($state.current.name === 'layout.detail' && !forceRefresh) {
                 $rootScope.elementsLoading = 1;
-                updateMapWithDetails(forceRefresh).then(function() {
-                    $rootScope.elementsLoading --;
-                });
+
+                // Update details on next tick, so DOM is up to date.
+                setTimeout(function() {
+                    updateMapWithDetails(forceRefresh).then(function() {
+                        $rootScope.elementsLoading --;
+                    });
+                },
+                0);
+
             }
         }),
         $rootScope.$on('switchGlobalLang', function () {
