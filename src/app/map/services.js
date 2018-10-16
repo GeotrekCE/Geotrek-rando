@@ -1102,13 +1102,16 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                             if (globalSettings.ALWAYS_HIGHLIGHT_TREKS) {
                                 self.highlightPath(result, true, true);
                             }
-                            if (fitBounds !== false) {
-                                self.updateBounds(currentLayer);
-                            }
-                        } else {
-                            if (fitBounds !== false) {
-                                self.updateBounds(self._clustersLayer);
-                            }
+                        }
+
+                        if (fitBounds !== false) {
+                            // Let some time before centering the map so it's ready.
+                            setTimeout(function()
+                                {
+                                    self.updateBounds(self._clustersLayer);
+                                },
+                                200
+                            );
                         }
                     }
                 );
