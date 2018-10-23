@@ -1,9 +1,11 @@
-2.19.6-dev0
+2.19.6 / 2018-10-23
 ===================
 
 **Bug fixes**
 
-*
+* Altimetric profile
+* Trekking length display bug
+* Map centering
 
 2.19.5 / 2018-10-10
 ===================
