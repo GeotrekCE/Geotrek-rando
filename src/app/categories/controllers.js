@@ -84,7 +84,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
             }
         };
         // Prevent min = max in which case no trek is selected by filter.
-        if (filterName === 'eLength' || filterName === 'ascent') {
+        if (filterName !== 'difficulty') {
             $scope.activeRangeValues[uid].options.minRange = 1;
         };
         if (activeFilters && activeFilters[uid]) {

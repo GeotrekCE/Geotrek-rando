@@ -125,20 +125,20 @@
     "APPROVED_SMALL": "images/approved-small.png",
     "APPROVED_LABEL": "Approuved",
     "DURATION_FILTER": [
-        { "id": 0, "label": "<1/2 J"},
-        { "id": 10, "label": "1/2 J"},
-        { "id": 24, "label": "1 J"},
-        { "id": 999, "label": "> 1 J"}
+        { "id": 0, "label": "0h"},
+        { "id": 4, "label": "4h"},
+        { "id": 8, "label": "8h"},
+        { "id": 999, "label": ">1j"}
     ],
     "ASCENT_FILTER":  [
-        { "id": 0, "label": "<300m"},
+        { "id": 0, "label": "0m"},
         { "id": 300, "label": "300m"},
         { "id": 600, "label": "600m"},
         { "id": 1000, "label": "1000m"},
         { "id": 9999, "label": ">1000m"}
     ],
     "LENGTH_FILTER":  [
-        { "id": 0, "label": "<10km"},
+        { "id": 0, "label": "0km"},
         { "id": 10000, "label": "10km"},
         { "id": 20000, "label": "20km"},
         { "id": 30000, "label": "30km"},
