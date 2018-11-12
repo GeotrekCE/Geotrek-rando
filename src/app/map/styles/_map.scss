@@ -66,14 +66,7 @@
     display: none;
 }
 
-.general-map .leaflet-top {
-    top: 68px;
-}
-
 .fullscreen {
-    .general-map .leaflet-top {
-        top: 0;
-    }
     .fold-aside.detail-map.map-pane {
         width: 96% !important;
     }
