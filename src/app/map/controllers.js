@@ -222,9 +222,12 @@ function MapController($q, $scope, globalSettings, $translate, $rootScope, $stat
                 });
             }
         }),
+        $rootScope.$on('translationReady', function () {
+          initCtrlsTranslation();
+        }),
         $rootScope.$on('switchGlobalLang', function () {
             initCtrlsTranslation();
-        })
+        }),
     ];
 
     $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
