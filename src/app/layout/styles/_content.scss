@@ -54,14 +54,6 @@
     height: 100%;
 
     transition: left .3s ease, padding .3s ease, margin .3s ease;
-    .viewportfilter {
-        padding: 5px 2em;
-        height: 30px;
-        position: relative;
-        z-index: 2;
-        background: white;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, .2);
-    }
 }
 
 .map-pane {
