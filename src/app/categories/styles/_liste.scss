@@ -139,6 +139,11 @@
     }
 }
 
+.filters-wrapper {
+    position: absolute;
+    width: 100%;
+}
+
 .categories {
     list-style: none;
     padding: 0;
@@ -402,8 +407,9 @@
 
 .categories.tabs {
     margin-bottom: 0;
-    li.category-tab {
-        @media (min-width: 768px) {
+    @media (min-width: 768px) {
+        box-shadow: 0 0px 10px 0 rgba(0, 0, 0, .2);
+        li.category-tab {
             display: inline-block;
         }
     }
