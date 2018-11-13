@@ -19,15 +19,15 @@
     &.layout-root {
         display: flex;
         @media (min-width: 768px) {
-            height: calc(100vh - #{$header-height-desktop} - 50px) -2px; /* 2px don't know why but needed */
+            height: calc(100vh - #{$header-height-desktop} - 50px - 2px); /* 2px don't know why but needed */
         }
     }
 
     &.layout-detail,
     &.layout-flat {
-        height: calc(100vh - #{$header-height-mobile} - 30px) -2px; /* 30px pour la toolbar-actions */
+        height: calc(100vh - #{$header-height-mobile} - 30px - 2px); /* 30px pour la toolbar-actions */
         @media (min-width: 768px) {
-            height: calc(100vh - #{$header-height-desktop} - 50px) -2px;
+            height: calc(100vh - #{$header-height-desktop} - 50px - 2px);
         }
     }
 
