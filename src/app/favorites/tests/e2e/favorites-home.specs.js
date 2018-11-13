@@ -29,7 +29,7 @@ describe('Favorites on home ', function() {
     it('should contain 1 favorite if we click on the heart of one of them ', function () {
         var favs = element.all(by.css('.isFav'));
 
-        favs.first().click();
+        favs.last().click();
 
         expect(favs.count()).toEqual(1);
     });
