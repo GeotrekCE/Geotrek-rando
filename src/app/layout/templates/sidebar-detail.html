@@ -44,7 +44,7 @@
     </li>
     <social-menu class="toolbar-action"></social-menu>
     <li class="toolbar-action favorites">
-        <a class="toolbar-action-link active" class="isFav" ng-if="isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="bottom" tooltip="{{'REMOVE_FAVS' | translate}}">
+        <a class="toolbar-action-link active isFav" ng-if="isInFavorites(result)" ng-click="toggleFavorites(result)" tooltip-placement="bottom" tooltip="{{'REMOVE_FAVS' | translate}}">
             <ng-include class="favorite-icon svg-icon" src="'/images/icons/favorite.svg'"></ng-include>
             <span class="toolbar-action-label">{{'REMOVE_FAVS' | translate}}</span>
         </a>
