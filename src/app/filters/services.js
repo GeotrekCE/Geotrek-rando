@@ -194,6 +194,11 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
                 if (defaultActiveCategories.indexOf(category.id.toString()) > -1 && activeFiltersModel.categories.indexOf(category.id.toString()) === -1) {
                     activeFiltersModel.categories.push(category.id);
                 }
+
+                // Handle themes.
+                if (category.themes.values.length > 0) {
+                    newCategory.themes = category.themes;
+                }
             }
         });
 
