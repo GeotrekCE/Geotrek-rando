@@ -9,6 +9,8 @@
     "HOME_TEMPLATE_FILE": {
         "fr": "",
         "en": "",
+        "es": "",
+        "ca": "",
         "de": "",
         "it": "",
         "nl": ""
@@ -28,11 +30,13 @@
     "AVAILABLE_LANGUAGES": {
         "fr": "Français",
         "en": "English",
+        "es": "Español",
+        "ca": "Català",
         "de": "Deutsch",
         "it": "Italiano",
         "nl": "Nederlands"
     },
-    "ENABLED_LANGUAGES": ["fr", "en", "de", "it", "nl"],
+    "ENABLED_LANGUAGES": ["fr", "en", "es", "ca", "de", "it", "nl"],
     "ENABLE_TREKS": true,
     "ENABLE_TOURISTIC_CONTENT": true,
     "ENABLE_TOURISTIC_EVENTS": true,

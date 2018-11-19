@@ -1,5 +1,5 @@
-2.19.5-dev0
-===================
+2.19.6-dev0
+===========
 
 **Major changes**
 
@@ -42,6 +42,22 @@ You should run `npm install` to ensure it gets updated to the correct version.
 * The search area at the top of the map was removed (as it's now below category filters).
 * New option: `DEFAULT_VIEW_MODE` to select what view mode should be displayed by
   default. See documentation for further details.
+
+2.19.6 / 2018-10-23
+===================
+
+**Bug fixes**
+
+* Altimetric profile
+* Trekking length display bug
+* Map centering
+
+2.19.5 / 2018-10-10
+===================
+
+**Enhancements**
+
+* Add catalan translation
 
 2.19.4 / 2018-09-04
 ===================
