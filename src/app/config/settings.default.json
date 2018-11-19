@@ -41,7 +41,6 @@
     "LIST_EXCLUDE_CATEGORIES": [],
     "ENABLE_UNIQUE_CAT": true,
     "RANDOMIZE_RESULTS": false,
-    "FILTERS_DEFAULT_OPEN": false,
     "DEFAULT_INTEREST": "pois",
     "FACEBOOK_APP_ID": "",
     "TWITTER_ID": "",

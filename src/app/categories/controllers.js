@@ -4,16 +4,6 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
     $scope.extend = false;
     $scope.filtering = false;
 
-    $scope.difficultyIsCollapsed = globalSettings.FILTERS_DEFAULT_OPEN;
-    $scope.durationIsCollapsed   = globalSettings.FILTERS_DEFAULT_OPEN;
-    $scope.ascentIsCollapsed     = globalSettings.FILTERS_DEFAULT_OPEN;
-    $scope.lengthIsCollapsed     = globalSettings.FILTERS_DEFAULT_OPEN;
-    $scope.startDateIsCollapsed  = globalSettings.FILTERS_DEFAULT_OPEN;
-    $scope.endDateIsCollapsed    = globalSettings.FILTERS_DEFAULT_OPEN;
-    $scope.type1IsCollapsed      = globalSettings.FILTERS_DEFAULT_OPEN;
-    $scope.type2IsCollapsed      = globalSettings.FILTERS_DEFAULT_OPEN;
-    $scope.routeIsCollapsed      = globalSettings.FILTERS_DEFAULT_OPEN;
-
     // React to event "resetFilters".
     $rootScope.$on("resetFilters", function(){
         $scope.resetFilters();
