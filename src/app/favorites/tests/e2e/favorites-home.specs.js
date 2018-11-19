@@ -28,8 +28,6 @@ describe('Favorites on home ', function() {
 
     it('should contain 1 favorite if we click on the heart of one of them ', function () {
         var favs = element.all(by.css('.isFav'));
-        var current_category = element.all(by.css('#cat-tab-T .category-title'));
-        current_category.click();
         favs.first().click();
         expect(favs.count()).toEqual(1);
     });
