@@ -55,12 +55,14 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
         }, 350);
     };
 
-    $scope.accessSpecificCategory = function accessSpecificCategory (currentCategory) {
+    $scope.accessSpecificCategory = function accessSpecificCategory (categoryId) {
         $state.go('layout.root');
-        if (typeof currentCategory !== 'object') {
-            currentCategory = [currentCategory];
+
+        if (Array.isArray(categoryId)) {
+            categoryId = categoryId[0];
         }
-        $rootScope.activeFilters.categories = currentCategory;
+        $rootScope.$broadcast('toggleCategoryId', categoryId);
+
         filtersService.updateActiveFilters($rootScope.activeFilters);
         $rootScope.$broadcast('updateResultsList', true);
 
@@ -87,16 +89,19 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
         }
     };
 
-    $scope.accessSpecificCategoryAndRoute = function accessSpecificCategoryAndRoute (currentCategory, currentRoute) {
+    $scope.accessSpecificCategoryAndRoute = function accessSpecificCategoryAndRoute (categoryId, currentRoute) {
         $state.go('layout.root');
-        if (typeof currentCategory !== 'object') {
-            currentCategory = [currentCategory];
-        }
+
         if (typeof currentRoute !== 'object') {
             currentRoute = [currentRoute];
         }
-        $rootScope.activeFilters.categories = currentCategory;
-        $rootScope.activeFilters[currentCategory + "_route"] = currentRoute;
+        $rootScope.activeFilters[categoryId + "_route"] = currentRoute;
+
+        if (Array.isArray(categoryId)) {
+            categoryId = categoryId[0];
+        }
+        $rootScope.$broadcast('toggleCategoryId', categoryId);
+
         filtersService.updateActiveFilters($rootScope.activeFilters);
         $rootScope.$broadcast('updateResultsList', true);
 
