@@ -232,18 +232,18 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
     };
 
     $scope.toggleCategory = function toggleCategory (category) {
-        var categories = $rootScope.activeFilters.categories;
+        var activeCategoryIds = $rootScope.activeFilters.categories;
         var indexOfCategory = -1;
 
-        if (categories instanceof Array) {
-            indexOfCategory = categories.indexOf(category.id.toString());
+        if (activeCategoryIds instanceof Array) {
+            indexOfCategory = activeCategoryIds.indexOf(category.id.toString());
         } else {
             $rootScope.activeFilters.categories = [];
-            categories = $rootScope.activeFilters.categories;
+            activeCategoryIds = $rootScope.activeFilters.categories;
         }
 
         if (indexOfCategory > -1) {
-            categories.splice(indexOfCategory, 1);
+            activeCategoryIds.splice(indexOfCategory, 1);
         } else {
             if (globalSettings.ENABLE_UNIQUE_CAT) {
                 $rootScope.activeFilters.categories = [];
@@ -253,8 +253,8 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
 
         // If the 'filter on at least one category' option is active, ensure that
         // we always keep one category active.
-        if (globalSettings.FILTER_ON_AT_LEAST_ONE_CAT && categories.length == 0) {
-            categories.push(category.id.toString());
+        if (globalSettings.FILTER_ON_AT_LEAST_ONE_CAT && activeCategoryIds.length == 0) {
+            activeCategoryIds.push(category.id.toString());
         }
 
         // Toogle the filter toolbar for this category.
@@ -262,6 +262,16 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
 
         $scope.propagateActiveFilters();
     };
+
+    // If another service wants to toggle a category, it should emit an event.
+    $scope.$on('toggleCategoryId', function(event, categoryId) {
+        // Look for category based on given categoryId.
+        var category = $scope.categories.find(function (element) {
+            return element.id == categoryId;
+        });
+
+        $scope.toggleCategory(category);
+    });
 
     $scope.toogleCategoryFilter = function toogleCategoryFilter (categoryId, filterType, filterId) {
         var categoryFilter = $rootScope.activeFilters[categoryId + '_' + filterType];
@@ -279,17 +289,6 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         $scope.propagateActiveFilters();
     };
 
-    $scope.closeCategoryFilters = function closeCategoryFilters (category) {
-        $scope.filtering = false;
-        if (category) {
-            category.open = false;
-        } else {
-            _.forEach($scope.categories, function (category) {
-                category.open = false;
-            });
-        }
-    };
-
     var hideSiblings = function hideSiblings (mainCategory) {
         _.forEach($scope.categories, function (category) {
             if (category.id !== mainCategory.id) {
@@ -302,6 +301,17 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         category.open    = true;
         $scope.filtering = true;
         hideSiblings(category);
+    };
+
+    $scope.closeCategoryFilters = function closeCategoryFilters (category) {
+        $scope.filtering = false;
+        if (category) {
+            category.open = false;
+        } else {
+            _.forEach($scope.categories, function (category) {
+                category.open = false;
+            });
+        }
     };
 
     $scope.toggleCategoryFilters = function toggleCategoryFilters (category) {
