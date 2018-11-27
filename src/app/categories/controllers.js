@@ -260,6 +260,12 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         // Toogle the filter toolbar for this category.
         $scope.toggleCategoryFilters(category);
 
+        // Broadcast an event for rendering sliders as they do not that properly on their own
+        // when they get initialized in a collapsed (e.g. hidden) DOM element.
+        $timeout(function () {
+            $scope.$broadcast('rzSliderForceRender');
+        });
+
         $scope.propagateActiveFilters();
     };
 
