@@ -1110,7 +1110,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                                 {
                                     self.updateBounds(self._clustersLayer);
                                 },
-                                200
+                                500
                             );
                         }
                     }
