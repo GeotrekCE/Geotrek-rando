@@ -1,3 +1,12 @@
+2.19.6-ux2 (2018-11-27)
+=======================
+
+**Bug fixes**
+
+* Fix map centering
+* Fix sliders initialization
+* Fix filters update when changing category
+
 2.19.6-ux (2018-11-19)
 ======================
 
