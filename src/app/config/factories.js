@@ -19,7 +19,9 @@ function settingsFactory(globalSettings) {
         warningCategoriesUrl =  globalSettings.API_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.WARNING_CAT_DIR + '/' + globalSettings.WARNING_CAT_FILE,
         warningSubmitUrl =  globalSettings.BACKOFFICE_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.WARNING_SUBMIT_URL,
         stylesConfigUrl = globalSettings.BACKOFFICE_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.STYLES_CONFIG_FILE,
-        sensitiveUrl = globalSettings.API_URL + '/' + globalSettings.API_DIR + '/fr/' + globalSettings.SENSITIVE_FILE,
+        sensitiveUrl = globalSettings.API_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.SENSITIVE_FILE,
+        infrastructuresUrl = globalSettings.API_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.INFRASTRUCTURES_FILE,
+        signagesUrl = globalSettings.API_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.SIGNAGES_FILE,
         trekSensitiveUrl = globalSettings.API_URL + '/' + globalSettings.API_DIR + '/$lang/treks/';
 
 
@@ -50,6 +52,8 @@ function settingsFactory(globalSettings) {
         warningSubmitUrl: warningSubmitUrl,
         stylesConfigUrl: stylesConfigUrl,
         sensitiveUrl: sensitiveUrl,
+        infrastructuresUrl: infrastructuresUrl,
+        signagesUrl: signagesUrl,
         trekSensitiveUrl: trekSensitiveUrl,
 
         //METHODS

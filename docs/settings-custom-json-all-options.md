@@ -102,10 +102,25 @@ GOOGLE_ANALYTICS_ID | String | `""` | ID of your Google Analytics account.
 
 Option     | Type      | Default   | Description
 --------|----------|-----------|------------
-SENSITIVE_TILELAYER | Boolean | `true` | Enable sensitive areas display
-SENSITIVE_DEFAULT_ICON | String(file name) | `""` | Name of your custom default icon used for sensitive areas
-SENSITIVE_LAYER_STYLE | Object | `{}` | Leaflet style for sensitive area (see http://leafletjs.com/reference-0.7.7.html#path-options)
+SENSITIVE_TILELAYER | Boolean | `false` | Set to `true` to enable the "Sensitive areas" layer
+SENSITIVE_DEFAULT_ICON | String(file name) | `""` | Filename of the custom default icon to use for the button
+SENSITIVE_LAYER_STYLE | Object | `{}` | Leaflet style (see http://leafletjs.com/reference-0.7.7.html#path-options)
 
+## Infrastrucures
+
+Option     | Type      | Default   | Description
+--------|----------|-----------|------------
+INFRASTRUCTURES_TILELAYER | Boolean | `false` | Set to `true` to enable the "Infrastructures" layer
+INFRASTRUCTURES_DEFAULT_ICON | String(file name) | `""` | Filename of the custom default icon to use for the button
+INFRASTRUCTURES_LAYER_STYLE | Object | `{}` | Leaflet style (see http://leafletjs.com/reference-0.7.7.html#path-options)
+
+## Signages
+
+Option     | Type      | Default   | Description
+--------|----------|-----------|------------
+SIGNAGES_TILELAYER | Boolean | `false` | Set to `true` to enable the "Signages" layer
+SIGNAGES_DEFAULT_ICON | String(file name) | `""` | Filename of the custom default icon to use for the button
+SIGNAGES_LAYER_STYLE | Object | `{}` | Leaflet style (see http://leafletjs.com/reference-0.7.7.html#path-options)
 
 ## Map
 
