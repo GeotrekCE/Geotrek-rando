@@ -1602,7 +1602,7 @@ function layersService ($http, globalSettings, settingsFactory, translationServi
     };
 
     var _getInfrastructuresLayersConf = function _getInfrastructuresLayersConf () {
-        if (globalSettings.SENSITIVE_TILELAYER) {
+        if (globalSettings.INFRASTRUCTURES_TILELAYER) {
             return [{
                 "LAYER_URL": settingsFactory.infrastructuresUrl.replace(/\$lang/, lang),
                 "LAYER_NAME": "Infrastructures",
@@ -1610,14 +1610,33 @@ function layersService ($http, globalSettings, settingsFactory, translationServi
                     "legend": $translate.instant('INFRASTRUCTURES_TILELAYER'),
                     "id": "infrastructures",
                     "attribution": "",
-                    "active": true
+                    "active": true,
+                    "pointToLayer": function (feature, latlng) {
+                        var markerOptions = {};
+                        if (feature.properties.type && feature.properties.type.pictogram) {
+                            var pictoUrl = globalSettings.API_URL + feature.properties.type.pictogram;
+
+                            var icon = new L.Icon({
+                                iconUrl: pictoUrl,
+                                iconSize:    [40, 40],
+                                iconAnchor:  [20, 42],
+                                popupAnchor: [0, -42],
+                            });
+
+                            markerOptions.icon = icon;
+                        }
+
+                        var marker = L.marker(latlng, markerOptions);
+
+                        return marker;
+                    },
                 }
             }];
         }
     };
 
     var _getSignagesLayersConf = function _getSignagesLayersConf () {
-        if (globalSettings.SENSITIVE_TILELAYER) {
+        if (globalSettings.SIGNAGES_TILELAYER) {
             return [{
                 "LAYER_URL": settingsFactory.signagesUrl.replace(/\$lang/, lang),
                 "LAYER_NAME": "Signages",
@@ -1634,8 +1653,8 @@ function layersService ($http, globalSettings, settingsFactory, translationServi
                             var icon = new L.Icon({
                                 iconUrl: pictoUrl,
                                 iconSize:    [40, 40],
-                                iconAnchor:  [20, 40],
-                                popupAnchor: [1, -40],
+                                iconAnchor:  [20, 42],
+                                popupAnchor: [0, -42],
                             });
 
                             markerOptions.icon = icon;
