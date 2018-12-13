@@ -1259,8 +1259,9 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
 
         popupService.setMap(this.map);
 
-        return this.map;
+        L.Icon.Default.imagePath = '/images/map';
 
+        return this.map;
     };
 
 }
@@ -1632,22 +1633,20 @@ function layersService ($http, globalSettings, settingsFactory, translationServi
 
                             var icon = new L.Icon({
                                 iconUrl: pictoUrl,
-                                iconSize:    [25, 41],
-                                iconAnchor:  [12, 41],
-                                popupAnchor: [1, -34],
+                                iconSize:    [40, 40],
+                                iconAnchor:  [20, 40],
+                                popupAnchor: [1, -40],
                             });
 
                             markerOptions.icon = icon;
                         }
 
                         var marker = L.marker(latlng, markerOptions);
-                        /*
-                        // TODO: Fix this.
-                        marker.bindLabel(
+
+                        marker = marker.bindLabel(
                             feature.properties.name,
-                            { noHide: true }
+                            { noHide: true, direction: 'auto' }
                         );
-                        */
 
                         return marker;
                     },
@@ -1739,8 +1738,6 @@ function layersService ($http, globalSettings, settingsFactory, translationServi
                         }
                     }, layerConf.OPTIONS);
 
-                    L.Icon.Default.imagePath = '/app/vendors/images/leaflet';
-
                     layers[layerName] = L.geoJson.ajax(layerConf.LAYER_URL, layerOptions);
                 } else {
                     /**
@@ -1789,6 +1786,7 @@ function layersService ($http, globalSettings, settingsFactory, translationServi
 
                                 var monthsString = $translate.instant('MONTHS').split(",");
                                 var monthsMarkup = $translate.instant('MONTHSMARKUP');
+                                var practiceMarkup = '';
 
                                 for (var i = 0; i < 12; i++) {
                                     if (prop.species.period[i]) {
@@ -1827,8 +1825,6 @@ function layersService ($http, globalSettings, settingsFactory, translationServi
                             }
                         }
                     }, layerConf.OPTIONS);
-
-                    L.Icon.Default.imagePath = '/app/vendors/images/leaflet';
 
                     layers[layerName] = L.geoJson.ajax(layerConf.LAYER_URL, layerOptions);
                 } else {
@@ -1880,8 +1876,6 @@ function layersService ($http, globalSettings, settingsFactory, translationServi
                             }
                         }
                     }, layerConf.OPTIONS);
-
-                    L.Icon.Default.imagePath = '/app/vendors/images/leaflet';
 
                     layers[layerName] = L.geoJson.ajax(layerConf.LAYER_URL, layerOptions);
                 } else {
@@ -1949,8 +1943,6 @@ function layersService ($http, globalSettings, settingsFactory, translationServi
                             }
                         }
                     }, layerConf.OPTIONS);
-
-                    L.Icon.Default.imagePath = '/app/vendors/images/leaflet';
 
                     layers[layerName] = L.geoJson.ajax(layerConf.LAYER_URL, layerOptions);
                 } else {
