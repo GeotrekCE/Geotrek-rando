@@ -1938,21 +1938,6 @@ function layersService ($http, globalSettings, settingsFactory, translationServi
                     layerOptions = angular.extend({
                         style: globalSettings.SIGNAGES_LAYER_STYLE,
                         onEachFeature: function (feature, layer) {
-                            var markup = [];
-                            var prop;
-
-                            if (layer && layer.feature && layer.feature.properties) {
-                                prop = layer.feature.properties;
-
-                                markup.push('<div class="info-additional-layer">');
-                                markup.push('<div class="info-point-title">'  + ((prop.name) || '') + '</div>');
-                                markup.push('</div>');
-
-                                if (layer.bindPopup) {
-                                    layer.bindPopup(markup.join('\n'));
-                                }
-                            }
-
                             if (layer instanceof L.Marker) {
                                 layer.setZIndexOffset(-5000);
                             }
