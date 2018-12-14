@@ -449,17 +449,33 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
             { position: 'bottomleft' }
         );
 
+        // Prepare optional layers.
         var sensitiveLayersControl = L.control.backgroundLayers(
             this._sensitiveLayers,
             { position: 'bottomleft', defaultIcon: '/images/icons/sensitive.svg' }
+        );
+        var infrastructuresLayersControl = L.control.backgroundLayers(
+            this._infrastructuresLayers,
+            { position: 'bottomleft', defaultIcon: '/images/icons/infrastructures.png' }
+        );
+        var signagesLayersControl = L.control.backgroundLayers(
+            this._signagesLayers,
+            { position: 'bottomleft', defaultIcon: '/images/icons/signages.png' }
         );
 
         layersControl.addTo(this.map);
         optionalLayersControl.addTo(this.map);
 
+        // Add enabled optional layers.
         if (globalSettings.SENSITIVE_TILELAYER) {
             sensitiveLayersControl.addTo(this.map);
             sensitiveLayersControl._setState(globalSettings.SHOW_SENSITIVE_TILELAYER_BY_DEFAULT);
+        }
+        if (globalSettings.INFRASTRUCTURES_TILELAYER) {
+            infrastructuresLayersControl.addTo(this.map);
+        }
+        if (globalSettings.SIGNAGES_TILELAYER) {
+            signagesLayersControl.addTo(this.map);
         }
 
         return true;
@@ -1175,6 +1191,8 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
 
         this._optionalLayers = layersService.getOptionalLayers();
         this._sensitiveLayers = layersService.getSensitiveLayers();
+        this._infrastructuresLayers = layersService.getInfrastructuresLayers();
+        this._signagesLayers = layersService.getSignagesLayers();
 
         var mapParameters = {
             center: [
@@ -1241,8 +1259,9 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
 
         popupService.setMap(this.map);
 
-        return this.map;
+        L.Icon.Default.imagePath = '/images/map';
 
+        return this.map;
     };
 
 }
@@ -1533,7 +1552,8 @@ function popupService() {
     this.attachPopups = _attachPopups; // Publish method
 }
 
-function layersService ($http, globalSettings, settingsFactory, $translate) {
+function layersService ($http, globalSettings, settingsFactory, translationService, $translate) {
+    var lang = translationService.getCurrentLang();
 
     /**
      * Return PERMANENT_TILELAYERS
@@ -1569,7 +1589,7 @@ function layersService ($http, globalSettings, settingsFactory, $translate) {
     var _getSensitiveLayersConf = function _getSensitiveLayersConf () {
         if (globalSettings.SENSITIVE_TILELAYER) {
             return [{
-                "LAYER_URL": settingsFactory.sensitiveUrl,
+                "LAYER_URL": settingsFactory.sensitiveUrl.replace(/\$lang/, lang),
                 "LAYER_NAME": "Sensitive",
                 "OPTIONS": {
                     "legend": $translate.instant('SENSITIVE_TILELAYER'),
@@ -1577,9 +1597,81 @@ function layersService ($http, globalSettings, settingsFactory, $translate) {
                     "attribution": "(c) LPO",
                     "active": true
                 }
-            }]
+            }];
         }
-        return false;
+    };
+
+    var _getInfrastructuresLayersConf = function _getInfrastructuresLayersConf () {
+        if (globalSettings.INFRASTRUCTURES_TILELAYER) {
+            return [{
+                "LAYER_URL": settingsFactory.infrastructuresUrl.replace(/\$lang/, lang),
+                "LAYER_NAME": "Infrastructures",
+                "OPTIONS": {
+                    "legend": $translate.instant('INFRASTRUCTURES_TILELAYER'),
+                    "id": "infrastructures",
+                    "attribution": "",
+                    "active": true,
+                    "pointToLayer": function (feature, latlng) {
+                        var markerOptions = {};
+                        if (feature.properties.type && feature.properties.type.pictogram) {
+                            var pictoUrl = globalSettings.API_URL + feature.properties.type.pictogram;
+
+                            var icon = new L.Icon({
+                                iconUrl: pictoUrl,
+                                iconSize:    [40, 40],
+                                iconAnchor:  [20, 42],
+                                popupAnchor: [0, -42],
+                            });
+
+                            markerOptions.icon = icon;
+                        }
+
+                        var marker = L.marker(latlng, markerOptions);
+
+                        return marker;
+                    },
+                }
+            }];
+        }
+    };
+
+    var _getSignagesLayersConf = function _getSignagesLayersConf () {
+        if (globalSettings.SIGNAGES_TILELAYER) {
+            return [{
+                "LAYER_URL": settingsFactory.signagesUrl.replace(/\$lang/, lang),
+                "LAYER_NAME": "Signages",
+                "OPTIONS": {
+                    "legend": $translate.instant('SIGNAGES_TILELAYER'),
+                    "id": "signages",
+                    "attribution": "",
+                    "active": true,
+                    "pointToLayer": function (feature, latlng) {
+                        var markerOptions = {};
+                        if (feature.properties.type && feature.properties.type.pictogram) {
+                            var pictoUrl = globalSettings.API_URL + feature.properties.type.pictogram;
+
+                            var icon = new L.Icon({
+                                iconUrl: pictoUrl,
+                                iconSize:    [40, 40],
+                                iconAnchor:  [20, 42],
+                                popupAnchor: [0, -42],
+                            });
+
+                            markerOptions.icon = icon;
+                        }
+
+                        var marker = L.marker(latlng, markerOptions);
+
+                        marker = marker.bindLabel(
+                            feature.properties.name,
+                            { noHide: true, direction: 'auto' }
+                        );
+
+                        return marker;
+                    },
+                },
+            }];
+        }
     };
 
     var _getMainLayersGroup = function _getMainLayersGroup (customOptions) {
@@ -1664,8 +1756,6 @@ function layersService ($http, globalSettings, settingsFactory, $translate) {
                             }
                         }
                     }, layerConf.OPTIONS);
-
-                    L.Icon.Default.imagePath = '/app/vendors/images/leaflet';
 
                     layers[layerName] = L.geoJson.ajax(layerConf.LAYER_URL, layerOptions);
                 } else {
@@ -1755,8 +1845,6 @@ function layersService ($http, globalSettings, settingsFactory, $translate) {
                         }
                     }, layerConf.OPTIONS);
 
-                    L.Icon.Default.imagePath = '/app/vendors/images/leaflet';
-
                     layers[layerName] = L.geoJson.ajax(layerConf.LAYER_URL, layerOptions);
                 } else {
                     /**
@@ -1777,9 +1865,115 @@ function layersService ($http, globalSettings, settingsFactory, $translate) {
         return layers;
     };
 
+    var _getInfrastructuresLayers = function _getInfrastructuresLayers () {
+        var layersConf  = _getInfrastructuresLayersConf();
+        var defaultName = globalSettings.OPTIONAL_TILELAYERS_NAME || 'Layer';
+
+        if (!layersConf) { return false; }
+
+        var layers = {};
+
+        layersConf.forEach(function (layerConf, index) {
+            var layerName, layerOptions;
+            if (typeof layerConf === 'string') {
+                layers[[defaultName, index + 1].join(' ')] = L.tileLayer(layerConf);
+            } else if (layerConf.LAYER_URL) {
+                layerName = layerConf.LAYER_NAME || [defaultName, index + 1].join(' ');
+                if (layerConf.LAYER_URL.split('.').pop() === 'geojson' || layerConf.LAYER_URL.split('.').pop() === 'json') {
+                    /**
+                     * Manage geoJson layers
+                     */
+                    layerOptions = angular.extend({
+                        style: globalSettings.INFRASTRUCTURES_LAYER_STYLE,
+                        onEachFeature: function (feature, layer) {
+                            if (layer instanceof L.Marker) {
+                                layer.setZIndexOffset(-5000);
+                            }
+
+                            if (layerConf.DEFAULT_MARKER && layer instanceof L.Marker) {
+                                layer.setIcon(L.icon(layerConf.DEFAULT_MARKER));
+                            }
+                        }
+                    }, layerConf.OPTIONS);
+
+                    layers[layerName] = L.geoJson.ajax(layerConf.LAYER_URL, layerOptions);
+                } else {
+                    /**
+                     * Manage tileLayers
+                     */
+                    layerOptions = layerConf.OPTIONS || {};
+
+                    if (layerConf.BOUNDS) {
+                        layerOptions.boundsLimit = {
+                            url: layerConf.BOUNDS
+                        };
+                    }
+
+                    layers[layerName] = L.tileLayer(layerConf.LAYER_URL, layerOptions);
+                }
+            }
+        });
+
+        return layers;
+    };
+
+    var _getSignagesLayers = function _getSignagesLayers () {
+        var layersConf  = _getSignagesLayersConf();
+        var defaultName = globalSettings.OPTIONAL_TILELAYERS_NAME || 'Layer';
+
+        if (!layersConf) { return false; }
+
+        var layers = {};
+
+        layersConf.forEach(function (layerConf, index) {
+            var layerName, layerOptions;
+            if (typeof layerConf === 'string') {
+                layers[[defaultName, index + 1].join(' ')] = L.tileLayer(layerConf);
+            } else if (layerConf.LAYER_URL) {
+                layerName = layerConf.LAYER_NAME || [defaultName, index + 1].join(' ');
+                if (layerConf.LAYER_URL.split('.').pop() === 'geojson' || layerConf.LAYER_URL.split('.').pop() === 'json') {
+                    /**
+                     * Manage geoJson layers
+                     */
+                    layerOptions = angular.extend({
+                        style: globalSettings.SIGNAGES_LAYER_STYLE,
+                        onEachFeature: function (feature, layer) {
+                            if (layer instanceof L.Marker) {
+                                layer.setZIndexOffset(-5000);
+                            }
+
+                            if (layerConf.DEFAULT_MARKER && layer instanceof L.Marker) {
+                                layer.setIcon(L.icon(layerConf.DEFAULT_MARKER));
+                            }
+                        }
+                    }, layerConf.OPTIONS);
+
+                    layers[layerName] = L.geoJson.ajax(layerConf.LAYER_URL, layerOptions);
+                } else {
+                    /**
+                     * Manage tileLayers
+                     */
+                    layerOptions = layerConf.OPTIONS || {};
+
+                    if (layerConf.BOUNDS) {
+                        layerOptions.boundsLimit = {
+                            url: layerConf.BOUNDS
+                        };
+                    }
+
+                    layers[layerName] = L.tileLayer(layerConf.LAYER_URL, layerOptions);
+                }
+            }
+        });
+
+        return layers;
+    };
+
     this.getMainLayersGroup = _getMainLayersGroup;
     this.getOptionalLayers  = _getOptionalLayers;
     this.getSensitiveLayers  = _getSensitiveLayers;
+    this.getInfrastructuresLayers  = _getInfrastructuresLayers;
+    this.getSignagesLayers  = _getSignagesLayers;
 }
 
 module.exports = {

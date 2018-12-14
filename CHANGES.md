@@ -1,9 +1,9 @@
-2.19.6-ux3dev
-=======================
+2.20.0-ux / 2018-12-14
+======================
 
-**Bug fixes**
+**Enhancements**
 
-*
+* Show signages and infrastructures layers on map
 
 2.19.6-ux2 (2018-11-27)
 =======================

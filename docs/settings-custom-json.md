@@ -45,15 +45,7 @@ _See AngularJS documentation for more details about [using $location](https://do
 
 Type: `float` Default: `44.83` & `6.34`
 
-Used to center the map on your area. 
-
-#### SENSITIVE_TILELAYER
-
-Show senstitive aeras with [LPO](https://www.lpo.fr/) layer :
-
-```json
-"SENSITIVE_TILELAYER": true
-```
+Used to center the map on your area.
 
 ### Additional options
 

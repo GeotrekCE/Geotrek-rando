@@ -372,11 +372,12 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         promise
             .then(
                 function (result) {
+                    // Retrieve the "Sensitive areas" info if enabled.
                     if (globalSettings.SENSITIVE_TILELAYER) {
                         sensitiveService.getSensitive(result.id)
                             .then(function(sensitives) {
-                                $scope.sensitives = sensitives
-                            })
+                                $scope.sensitives = sensitives;
+                            });
                     }
 
                     $state.transitionTo('layout.detail',

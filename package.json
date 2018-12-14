@@ -1,6 +1,6 @@
 {
   "name": "geotrekrando",
-  "version": "2.19.6-ux3dev",
+  "version": "2.20.0-ux",
   "description": "Geotrek rando public portal of Geotrek",
   "author": "Makina Corpus",
   "main": "src/app/app.js",
@@ -61,6 +61,7 @@
     "leaflet-minimap": "git+https://github.com/Norkart/Leaflet-MiniMap.git#a2d92d04d9930ae8b480cd489333533b1c08612b",
     "leaflet-pip": "^1.1.0",
     "leaflet-textpath": "git+https://github.com/makinacorpus/Leaflet.TextPath.git#c45041b4687c8c46b9bb39b8f93623c933108d19",
+    "leaflet.label": "github:leaflet/Leaflet.label#0.2.1",
     "leaflet.markercluster": "^0.4.0",
     "lodash": "^4.17.4",
     "merge-stream": "^1.0.1",
