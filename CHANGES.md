@@ -1,9 +1,9 @@
-2.19.7-dev0
+2.20.0 / 2018-12-14
 ===================
 
-**Bug fixes**
+**Enhancements**
 
-* 
+* Show signages and infrastructures layers on map
 
 2.19.6 / 2018-10-23
 ===================
