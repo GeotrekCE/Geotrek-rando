@@ -71,10 +71,22 @@
     },
     "OPTIONAL_TILELAYERS_NAME": "Optional",
     "OPTIONAL_TILELAYERS": [],
+
     "SENSITIVE_TILELAYER": false,
     "SENSITIVE_FILE": "sensitiveareas.geojson",
     "SENSITIVE_DEFAULT_ICON": "",
     "SENSITIVE_LAYER_STYLE": {},
+
+    "INFRASTRUCTURES_TILELAYER": false,
+    "INFRASTRUCTURES_FILE": "infrastructures.geojson",
+    "INFRASTRUCTURES_DEFAULT_ICON": "",
+    "INFRASTRUCTURES_LAYER_STYLE": {},
+
+    "SIGNAGES_TILELAYER": false,
+    "SIGNAGES_FILE": "signages.geojson",
+    "SIGNAGES_DEFAULT_ICON": "",
+    "SIGNAGES_LAYER_STYLE": {},
+
     "LEAFLET_CONF": {
         "CENTER_LATITUDE": 44.83,
         "CENTER_LONGITUDE": 6.34,

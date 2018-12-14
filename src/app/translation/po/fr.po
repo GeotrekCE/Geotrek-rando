@@ -407,6 +407,12 @@ msgstr "Filtrer par la carte"
 msgid "SENSITIVE_TILELAYER"
 msgstr "Zone sensible"
 
+msgid "INFRASTRUCTURES_TILELAYER"
+msgstr "Infrastructures"
+
+msgid "SIGNAGES_TILELAYER"
+msgstr "Signalétiques"
+
 msgid "MONTHSMARKUP"
 msgstr "Période de sensibilité :"
 

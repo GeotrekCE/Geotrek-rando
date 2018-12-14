@@ -10,10 +10,7 @@ function sensitiveService(globalSettings, settingsFactory, translationService, $
         var sensitives = [];
 
         var monthsString = ['JAN', 'FEV', 'MAR', 'AVR', 'MAI', 'JUIN', 'JUIL', 'AOU', 'SEP', 'OCT', 'NOV', 'DEC']
-        var monthsMarkup = '';
-        var practiceMarkup = '';
 
-        
         features.map(function(feature, i) {
             var period = {}
             var practices = []
@@ -41,7 +38,7 @@ function sensitiveService(globalSettings, settingsFactory, translationService, $
             })
         });
 
-        return sensitives 
+        return sensitives;
     };
 
     this.getSensitive = function getSensitive (trekId) {

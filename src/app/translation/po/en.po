@@ -408,6 +408,12 @@ msgstr "Filter with map"
 msgid "SENSITIVE_TILELAYER"
 msgstr "Sensitive area"
 
+msgid "INFRASTRUCTURES_TILELAYER"
+msgstr "Infrastructures"
+
+msgid "SIGNAGES_TILELAYER"
+msgstr "Signages"
+
 msgid "MONTHSMARKUP"
 msgstr "Period of sensitivity:"
 

@@ -78,6 +78,7 @@ require('leaflet-ajax');
 require('leaflet-textpath');
 require('leaflet-minimap');
 require('leaflet.markercluster');
+require('leaflet.label');
 // require('leaflet.fullscreen');
 require('leaflet-fullscreen');
 
