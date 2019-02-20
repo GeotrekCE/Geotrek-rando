@@ -1,9 +1,9 @@
-2.20.0-ux2dev
-=============
+2.20.0-ux2 / 2019-02-20
+=======================
 
 **Bug fixes**
 
-*
+* Fix map display when no touristic content is enabled
 
 2.20.0-ux / 2018-12-14
 ======================
