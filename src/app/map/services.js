@@ -369,7 +369,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
     };
 
     this.setScale = function setScale () {
-        L.control.scale({imperial: false, position: 'bottomright'}).addTo(this.map);
+        L.control.scale({imperial: globalSettings.IMPERIAL_SCALE, position: 'bottomright'}).addTo(this.map);
     };
 
     this.setZoomControlPosition = function setZoomControlPosition () {

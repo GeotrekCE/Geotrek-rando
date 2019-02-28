@@ -103,6 +103,7 @@
         "MAX": 12
     },
     "MINIMAP_OFFSET": -3,
+    "IMPERIAL_SCALE": false,
     "ALWAYS_HIGHLIGHT_TREKS": false,
     "SHOW_FILTERS_ON_MAP": true,
     "FILTER_BY_VIEWPORT_DEFAULT": false,
