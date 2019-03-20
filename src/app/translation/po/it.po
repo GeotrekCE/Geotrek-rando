@@ -117,6 +117,9 @@ msgstr "No preferiti"
 #
 #
 
+msgid "SEE_TREK_STEPS"
+msgstr "Vedi le tappe"
+
 msgid "CATEGORY"
 msgstr "Categoria"
 
