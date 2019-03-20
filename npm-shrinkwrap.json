@@ -1,6 +1,6 @@
 {
   "name": "geotrekrando",
-  "version": "2.20.0-ux3",
+  "version": "2.20.0-ux4dev",
   "dependencies": {
     "@gulp-sourcemaps/identity-map": {
       "version": "https://registry.npmjs.org/@gulp-sourcemaps/identity-map/-/identity-map-1.0.1.tgz",
