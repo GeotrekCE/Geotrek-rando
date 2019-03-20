@@ -1,9 +1,9 @@
-2.20.0-ux3dev
-=============
+2.20.0-ux3dev / 2019-03-20
+==========================
 
 **Bug fixes**
 
-*
+* Translate SEE_TREK_STEPS to german and italian
 
 2.20.0-ux2 / 2019-02-20
 =======================
