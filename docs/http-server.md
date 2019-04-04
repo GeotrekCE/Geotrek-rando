@@ -24,9 +24,13 @@ server {
     types {
         application/json geojson;
         application/gpx+xml gpx;
-        application/vnd.google-earth.kmz kmz;
         application/x-font-ttf ttf;
     }
+    # Uncomment below for mobile v3 API
+    # location ~ ^/mobile/(.*)$ {
+    #     root <my_mobile_directory>/;
+    #     try_files /$http_accept_language/$1 /nolang/$1 =404;
+    # }
     location ~ ^/(api|media|static|zip|meta)/ {
         root <my_data_directory>/;
     }
