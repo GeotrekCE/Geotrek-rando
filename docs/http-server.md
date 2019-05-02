@@ -19,7 +19,7 @@ server {
     if_modified_since before;
     expires 1h;
     gzip on;
-    gzip_types text/text text/html text/plain text/xml text/css application/x-javascript application/javascript application/json;
+    gzip_types text/text text/plain text/xml text/css application/x-javascript application/javascript application/json;
     include mime.types;
     types {
         application/json geojson;
