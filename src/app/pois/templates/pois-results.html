@@ -23,12 +23,12 @@
         <div
             class="poi-picture poi-picture-empty"
             ng-if="!poi.properties.pictures[0]"
-            style="background-image: url({{::$root.placeHolderImage}});">
+            style="background-image: url('{{::$root.placeHolderImage}}');">
         </div>
         <div
             class="poi-picture"
             ng-if="poi.properties.pictures[0]"
-            style="background-image: url({{::poi.properties.pictures[0].url}});"
+            style="background-image: url('{{::poi.properties.pictures[0].url}}');"
             ng-click="showLightbox(poi.properties.pictures, 0)">
             <div ng-if="poi.properties.pictures[0]" class="poi-picture-credits">{{::poi.properties.pictures[0].author}}</div>
 
