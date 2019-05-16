@@ -26,7 +26,7 @@
     "FAVORITES_ICON": "heart",
     "SHARE_ICON": "share-alt",
     "PLACEHOLDER_IMAGE": "",
-    "DISPLAY_CREDITS_IMAGE": true,
+    "DISPLAY_CREDITS_ON_IMAGE": true,
     "DEFAULT_LANGUAGE": "en",
     "AVAILABLE_LANGUAGES": {
         "fr": "Français",
