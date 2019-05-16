@@ -43,6 +43,7 @@ RULES_FLAT_PAGES_ID | string | `""` | Specify the rules flat-page id which will 
 FAVORITES_ICON | String ([font awesome icon](http://fortawesome.github.io/Font-Awesome/icons/)) | `"heart"` | Specify the icon used for the favorites on the website. It must be a valid font awesome icon.
 SHARE_ICON | String ([font awesome icon](http://fortawesome.github.io/Font-Awesome/icons/)) | `"share-alt"` | Specify the icon used for the favorites on the website. It must be a valid font awesome icon.
 PLACEHOLDER_IMAGE | string(file name) | `""` | Placeholder used for contents elements.
+DISPLAY_CREDITS_IMAGE | Boolean | `true` | Add credits on pictures in detail view. From Geotrek-admin version 2.23.2 credits are added directly to pictures, so this setting should be set `false` to avoid double.
 RANDOMIZE_RESULTS | Boolean | `false` | If true, items are randomized in results list
 CENTERON_FITS_BOUNDS | Boolean | `false` | Fit map viewport on geometry instead of centering on first point
 
