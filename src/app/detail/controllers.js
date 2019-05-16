@@ -6,6 +6,8 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
     $scope.removeDiacritics = utilsFactory.removeDiacritics;
     $scope.nearElementsByCategories = globalSettings.NEAR_ELEMENTS_CATEGORIES;
     $scope.displayAsidesCounter = globalSettings.DISPLAY_ASIDES_COUNTERS;
+    $scope.displayCredits = globalSettings.DISPLAY_CREDITS_IMAGE;
+
     if (globalSettings.RULES_FLAT_PAGES_ID) {
         $scope.rulesId = globalSettings.RULES_FLAT_PAGES_ID;
     } else {
