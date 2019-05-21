@@ -28,6 +28,8 @@ server {
     }
     # Uncomment below for mobile v3 API
     # location ~ ^/mobile/(.*)$ {
+    #     add_header Access-Control-Allow-Origin "*";
+    #     add_header Access-Control-Allow-Methods "GET, OPTIONS";
     #     root <my_mobile_directory>/;
     #     try_files /$http_accept_language/$1 /nolang/$1 =404;
     # }
