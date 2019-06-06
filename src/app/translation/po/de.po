@@ -178,10 +178,10 @@ msgid "NEAR"
 msgstr "In der Umgebung"
 
 msgid "CHILDREN"
-msgstr ""
+msgstr "Etappen"
 
 msgid "PARENT"
-msgstr ""
+msgstr "Mehrtageswanderungen"
 
 msgid "PROFILE_ALTI"
 msgstr "Höhenmessungsprofil"
