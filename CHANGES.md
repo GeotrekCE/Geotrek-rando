@@ -1,6 +1,10 @@
 2.20.1-dev0
 ===================
 
+**Enhancements**
+
+* Add setting `DISPLAY_CREDITS_ON_IMAGE` to display credits or not on picture
+
 **Bug fixes**
 
 *
