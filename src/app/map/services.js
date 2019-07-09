@@ -1095,8 +1095,6 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
 
             self.loadingMarkers = true;
 
-            this.clearAllLayers();
-
             if (result.geometry.type !== "Point" && result.geometry.type !== "MultiPoint") {
                 this.createElevation(result);
                 currentLayer = self._treksgeoJsonLayer;
