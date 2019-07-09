@@ -94,6 +94,7 @@
     "prestart": "gulp",
     "start": "gulp watch",
     "dist": "gulp",
+    "serve": "gulp server",
     "upgrade": "git fetch origin && git checkout origin/latest && npm update && npm run dist"
   }
 }
