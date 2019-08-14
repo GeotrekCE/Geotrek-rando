@@ -691,6 +691,9 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
             self._touristicsMarkersLayer.clearLayers();
         }
 
+        if (globalSettings.ENABLE_DIVES) {
+            self._divesMarkersLayer.clearLayers();
+        }
     };
 
     /**
@@ -1244,6 +1247,10 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
 
         if (globalSettings.ENABLE_TOURISTIC_CONTENT || globalSettings.ENABLE_TOURISTIC_EVENTS) {
             this._touristicsMarkersLayer = self.createLayer();
+        }
+
+        if (globalSettings.ENABLE_DIVES) {
+            this._divesMarkersLayer = self.createLayer();
         }
 
         this._poisMarkersLayer = self.createPOIsLayer();

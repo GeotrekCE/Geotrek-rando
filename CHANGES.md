@@ -1,6 +1,10 @@
 2.20.1-dev0
 ===================
 
+**Enhancements**
+
+* Diving
+
 **Bug fixes**
 
 * Always use DEFAULT_MAX_ZOOM to fit bounds

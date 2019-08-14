@@ -184,6 +184,9 @@ function WarningMapService(globalSettings, utilsFactory, iconsService, layersSer
             self._touristicsMarkersLayer = mapService.createLayer();
         }
 
+        if (globalSettings.ENABLE_DIVES) {
+            self._divesMarkersLayer = mapService.createLayer();
+        }
 
         return self.map;
     };

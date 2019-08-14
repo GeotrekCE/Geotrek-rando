@@ -55,6 +55,11 @@
                 <img ng-if="result.properties.difficulty.pictogram && !(result.properties.difficulty.pictogram | isSVG)" ng-src="{{::result.properties.difficulty.pictogram}}" ng-alt="{{result.properties.difficulty.label}}" tooltip-placement="top" tooltip="{{'I_DIFFICULTY' | translate}}">
                 <span>{{result.properties.difficulty.label}}</span>
             </li>
+            <li class="meta-item-content-item" ng-if="result.properties.levels" ng-repeat="level in result.properties.levels">
+                <ng-include ng-if="level.pictogram && (level.pictogram | isSVG)" src="level.pictogram" tooltip-placement="top" tooltip="{{'I_LEVEL' | translate}}"></ng-include>
+                <img ng-if="level.pictogram && !(level.pictogram | isSVG)" ng-src="{{::level.pictogram}}" alt="level.name" tooltip-placement="top" tooltip="{{'I_LEVEL' | translate}}">
+                <span>{{level.name}}</span>
+            </li>
             <li class="meta-item-content-item" ng-if="result.properties.route">
                 <ng-include ng-if="result.properties.route.pictogram && (result.properties.route.pictogram | isSVG)" src="result.properties.route.pictogram" tooltip-placement="top" tooltip="{{'I_ROUTE' | translate}}"></ng-include>
                 <img ng-if="result.properties.route.pictogram && !(result.properties.route.pictogram | isSVG)" ng-src="{{::result.properties.route.pictogram}}" ng-alt="{{result.properties.route.label}}" tooltip-placement="top" tooltip="{{'I_ROUTE' | translate}}">
@@ -67,6 +72,10 @@
             <li class="meta-item-content-item" ng-if="result.properties.ascent">
                 <ng-include src="'/images/icons/ascent.svg'" tooltip-placement="top" tooltip="{{'I_ASCENT' | translate}}"></ng-include>
                 <span>{{::result.properties.ascent}}&nbsp;m</span>
+            </li>
+            <li class="meta-item-content-item" ng-if="result.properties.depth">
+                <ng-include src="'/images/icons/depth.svg'" tooltip-placement="top" tooltip="{{'I_DEPTH' | translate}}"></ng-include>
+                <span>{{::result.properties.depth}}&nbsp;m</span>
             </li>
             <li class="meta-item-content-item" ng-if="result.properties.networks" ng-repeat="network in result.properties.networks">
                 <ng-include ng-if="network.pictogram && (network.pictogram | isSVG)" src="network.pictogram" tooltip-placement="top" tooltip="{{'I_NETWORK' | translate}}"></ng-include>
