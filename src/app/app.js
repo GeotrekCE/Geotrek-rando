@@ -21,6 +21,7 @@ var dependencies = [
     'rando.map',
     'rando.filters',
     'rando.touristics',
+    'rando.dives',
     'rando.categories',
     'rando.results',
     'rando.detail',
@@ -105,6 +106,7 @@ require('./pois');
 require('./services');
 require('./items-list');
 require('./touristics');
+require('./dives');
 require('./results');
 require('./categories');
 require('./filters');

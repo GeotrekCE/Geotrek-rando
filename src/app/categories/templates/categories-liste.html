@@ -80,6 +80,35 @@
                         </div>
                     </div>
 
+                    <div ng-if="category.levels && category.levels.values.length > 1" class="category-filter slider difficulties" ng-class="{opened: levelsIsCollapsed}">
+                        <div class="filter-title" ng-click="levelsIsCollapsed = !levelsIsCollapsed">
+                            <span>{{'LEVELS' | translate}}</span>
+                            <span ng-if="activeRangeValues[category.id + '_levels'].min === 0 && activeRangeValues[category.id + '_levels'].max === activeRangeValues[category.id + '_levels'].ceil">
+                                {{'ALL' | translate}}
+                            </span>
+                            <span ng-if="(activeRangeValues[category.id + '_levels'].min !== 0 || activeRangeValues[category.id + '_levels'].max !== activeRangeValues[category.id + '_levels'].ceil) && activeRangeValues[category.id + '_levels'].min !== activeRangeValues[category.id + '_levels'].max">
+                                {{category.levels.values[activeRangeValues[category.id + '_levels'].min].label}} -> {{category.levels.values[activeRangeValues[category.id + '_levels'].max].label}}
+                            </span>
+                            <span ng-if="activeRangeValues[category.id + '_levels'].min === activeRangeValues[category.id + '_levels'].max">
+                                {{category.levels.values[activeRangeValues[category.id + '_levels'].min].label}}
+                            </span>
+                            <span class="more-or-less">
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                            </span>
+                        </div>
+
+                        <div class="slider-container" collapse="!levelsIsCollapsed">
+                            <rzslider
+                                rz-slider-model="activeRangeValues[category.id + '_levels'].min"
+                                rz-slider-high="activeRangeValues[category.id + '_levels'].max"
+                                rz-slider-options="activeRangeValues[category.id + '_levels'].options">
+                            </rzslider>
+                            <label class="min-label">{{category.levels.values[0].label}}</label>
+                            <label class="max-label">{{category.levels.values[category.levels.values.length - 1].label}}</label>
+                        </div>
+                    </div>
+
                     <div ng-if="category.duration && category.duration.values.length > 1" class="category-filter slider duration" ng-class="{opened: durationIsCollapsed}">
                         <div class="filter-title" ng-click="durationIsCollapsed = !durationIsCollapsed">
                             <span>{{'DURATION' | translate}}</span>
@@ -133,6 +162,34 @@
                             </rzslider>
                             <label class="min-label">{{category.ascent.values[0].label}}</label>
                             <label class="max-label">{{category.ascent.values[category.ascent.values.length - 1].label}}</label>
+                        </div>
+                    </div>
+
+                    <div ng-if="category.depth && category.depth.values.length > 1" class="category-filter slider depth" ng-class="{opened: depthIsCollapsed}">
+                        <div class="filter-title" ng-click="depthIsCollapsed = !depthIsCollapsed">
+                            <span>{{'DEPTH' | translate}}</span>
+                            <span ng-if="activeRangeValues[category.id + '_depth'].min === 0 && activeRangeValues[category.id + '_depth'].max === activeRangeValues[category.id + '_depth'].ceil">
+                                {{'ALL' | translate}}
+                            </span>
+                            <span ng-if="(activeRangeValues[category.id + '_depth'].min !== 0 || activeRangeValues[category.id + '_depth'].max !== activeRangeValues[category.id + '_depth'].ceil) && activeRangeValues[category.id + '_depth'].min !== activeRangeValues[category.id + '_depth'].max">
+                                {{category.depth.values[activeRangeValues[category.id + '_depth'].min].label}} -> {{category.depth.values[activeRangeValues[category.id + '_depth'].max].label}}
+                            </span>
+                            <span ng-if="activeRangeValues[category.id + '_depth'].min === activeRangeValues[category.id + '_depth'].max">
+                                {{category.depth.values[activeRangeValues[category.id + '_depth'].min].label}}
+                            </span>
+                            <span class="more-or-less">
+                                <div class="bar"></div>
+                                <div class="bar"></div>
+                            </span>
+                        </div>
+                        <div class="slider-container" collapse="!depthIsCollapsed">
+                            <rzslider
+                                rz-slider-model="activeRangeValues[category.id + '_depth'].min"
+                                rz-slider-high="activeRangeValues[category.id + '_depth'].max"
+                                rz-slider-options="activeRangeValues[category.id + '_depth'].options">
+                            </rzslider>
+                            <label class="min-label">{{category.depth.values[0].label}}</label>
+                            <label class="max-label">{{category.depth.values[category.depth.values.length - 1].label}}</label>
                         </div>
                     </div>
 
