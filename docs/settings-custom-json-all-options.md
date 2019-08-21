@@ -45,7 +45,7 @@ SHARE_ICON | String ([font awesome icon](http://fortawesome.github.io/Font-Aweso
 PLACEHOLDER_IMAGE | string(file name) | `""` | Placeholder used for contents elements.
 RANDOMIZE_RESULTS | Boolean | `false` | If true, items are randomized in results list
 CENTERON_FITS_BOUNDS | Boolean | `false` | Fit map viewport on geometry instead of centering on first point
-DEFAULT_ACTIVE_CATEGORY | String | `map_list` | The default view mode to display by default. Possible values: `map_list` (Map & list), `map` (Map only), `list` (List only), `thumbnails` (Thumbnail grid).
+DEFAULT_VIEW_MODE | String | `map_list` | The default view mode to display by default. **Not implemented yet** *(possible anticipated values: `map_list` (Map & list), `map` (Map only), `list` (List only), `thumbnails` (Thumbnail grid))*.
 
 ### Favicon options
 All the options are required
