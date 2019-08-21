@@ -26,6 +26,7 @@
     "FAVORITES_ICON": "heart",
     "SHARE_ICON": "share-alt",
     "PLACEHOLDER_IMAGE": "",
+    "DISPLAY_CREDITS_ON_IMAGE": true,
     "DEFAULT_LANGUAGE": "en",
     "AVAILABLE_LANGUAGES": {
         "fr": "Français",
@@ -40,6 +41,7 @@
     "ENABLE_TREKS": true,
     "ENABLE_TOURISTIC_CONTENT": true,
     "ENABLE_TOURISTIC_EVENTS": true,
+    "ENABLE_DIVES": false,
     "DEFAULT_ACTIVE_CATEGORIES": ["T"],
     "LIST_EXCLUDE_CATEGORIES": [],
     "ENABLE_UNIQUE_CAT": false,
@@ -131,6 +133,7 @@
     "TOURISTIC_EVENTS_FILE": "touristicevents.geojson",
     "TOURISTIC_CONTENTS_DIR": "touristiccontents",
     "TOURISTIC_CONTENTS_FILE": "touristiccontents.geojson",
+    "DIVES_FILE": "dives.geojson",
     "DEM_FILE": "dem.json",
     "PROFILE_FILE": "profile.json",
     "WARNING_CAT_DIR": "feedback",
@@ -159,5 +162,12 @@
         { "id": 20000, "label": "20km"},
         { "id": 30000, "label": "30km"},
         { "id": 99999, "label": ">30km"}
-    ]
+    ],
+    "DEPTH_FILTER": [
+        { "id": 0, "label": "<12m"},
+        { "id": 12, "label": "12m"},
+        { "id": 20, "label": "20m"},
+        { "id": 40, "label": "40m"},
+        { "id": 999, "label": ">40m"}
+    ]    
 }

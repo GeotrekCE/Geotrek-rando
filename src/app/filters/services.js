@@ -61,7 +61,7 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
     var activeFiltersModel = angular.copy(emptyFiltersModel);
 
     // Define all type of filters that needs an interval check instead of an id one
-    var filtersByInterval = ['difficulty', 'duration', 'ascent', 'eLength'];
+    var filtersByInterval = ['difficulty', 'levels', 'duration', 'ascent', 'depth', 'eLength'];
 
     /**
      * Resets current filters to the empty state.
@@ -150,6 +150,18 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
                     newCategory.duration = category.duration;
                     newCategory.ascent = category.ascent;
                     newCategory.eLength = category.eLength;
+                }
+
+                if (category.type === 'dives') {
+                    newCategory.difficulty = [];
+                    if (category.difficulty.values.length > 0) {
+                        newCategory.difficulty = category.difficulty;
+                    }
+                    newCategory.levels = [];
+                    if (category.levels && category.levels.values.length > 0) {
+                        newCategory.levels = category.levels;
+                    }
+                    newCategory.depth = category.depth;
                 }
 
                 if (category.begin_date) {
@@ -601,9 +613,15 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
         if (element[name]) {
             var min = filters.toString().split('-')[0],
                 max = filters.toString().split('-')[1],
-                elementId = element[name].id || element[name];
+                elementMin, elementMax;
+            if (Array.isArray(element[name])) {
+                elementMin = parseFloat(Math.min(...element[name].map(x => x.id || x)), 10);
+                elementMax = parseFloat(Math.max(...element[name].map(x => x.id || x)), 10);
+            } else {
+                elementMin = elementMax = parseFloat(element[name].id || element[name], 10);
+            }
 
-            if (parseFloat(min, 10) <= parseFloat(elementId, 10) && parseFloat(elementId, 10) <= parseFloat(max, 10)) {
+            if (min <= elementMax && elementMin <= max) {
                 return true;
             }
         }

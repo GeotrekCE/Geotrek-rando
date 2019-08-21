@@ -1,9 +1,14 @@
 2.20.1-dev0
 ===================
 
+**Enhancements**
+
+* Diving
+* Add setting `DISPLAY_CREDITS_ON_IMAGE` to display credits or not on picture
+
 **Bug fixes**
 
-*
+* Always use DEFAULT_MAX_ZOOM to fit bounds
 
 2.20.0 / 2018-12-14
 ===================

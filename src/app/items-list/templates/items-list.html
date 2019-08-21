@@ -33,7 +33,9 @@
             <span class="duration"   ng-if="::result.properties.duration_pretty">{{::result.properties.duration_pretty}}</span>
             <span class="length"     ng-if="::result.properties.length">{{::parseLength(result.properties.length)}}</span>
             <span class="ascent"     ng-if="::result.properties.ascent">{{::'ASCENT_S' | translate}} {{result.properties.ascent}}&nbsp;m</span>
+            <span class="depth"      ng-if="::result.properties.depth">{{::'DEPTH_S' | translate}} {{result.properties.depth}}&nbsp;m</span>
             <span class="difficulty" ng-if="::result.properties.difficulty">{{::result.properties.difficulty.label}}</span>
+            <span class="levels"     ng-if="::result.properties.levels" ng-repeat="level in ::result.properties.levels">{{::level.label}}</span>
             <span class="type1"      ng-if="::result.properties.type1[0] && result.properties.contentType !== 'trek'">{{::result.properties.type1[0].name}}</span>
             <span class="type2"      ng-if="::result.properties.type2[0] && result.properties.contentType !== 'trek'">{{::result.properties.type2[0].name}}</span>
             <span class="target"     ng-if="::result.properties.target_audience">{{::result.properties.target_audience}}</span>

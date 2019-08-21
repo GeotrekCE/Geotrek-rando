@@ -1,6 +1,6 @@
 'use strict';
 
-function resultsService($rootScope, $q, $location, globalSettings, treksService, contentsService, eventsService, translationService) {
+function resultsService($rootScope, $q, $location, globalSettings, treksService, contentsService, eventsService, divesService, translationService) {
 
     var getAllResultsPending = {};
     $rootScope.allResults = {};
@@ -77,6 +77,20 @@ function resultsService($rootScope, $q, $location, globalSettings, treksService,
             );
         }
 
+        if (globalSettings.ENABLE_DIVES) {
+            promises.push(
+                divesService.getDives()
+                    .then(
+                        function (dives) {
+                            _.forEach(dives.features, function (dive) {
+                                if (dive.properties.published) {
+                                    results.push(dive);
+                                }
+                            });
+                        }
+                    )
+            );
+        }
         $q.all(promises)
             .then(
                 /**
@@ -103,7 +117,7 @@ function resultsService($rootScope, $q, $location, globalSettings, treksService,
 
     this.getAResultBySlug = function getAResultBySlug (elementSlug, categorySlug, forceRefresh) {
         var deferred = $q.defer();
-        var findTrek = true, findContent = true, findEvent = true;
+        var findTrek = true, findContent = true, findEvent = true, findDive = true;
         if (globalSettings.ENABLE_TREKS) {
             treksService.getTreks(forceRefresh)
                 .then(
@@ -114,7 +128,7 @@ function resultsService($rootScope, $q, $location, globalSettings, treksService,
                             }
                         });
                         findTrek = null;
-                        if (findTrek === null && findContent === null && findEvent === null) {
+                        if (findTrek === null && findContent === null && findEvent === null && findDive === null) {
                             deferred.reject('No matching element found');
                         }
                     }
@@ -132,7 +146,7 @@ function resultsService($rootScope, $q, $location, globalSettings, treksService,
                             }
                         });
                         findContent = null;
-                        if (findTrek === null && findContent === null && findEvent === null) {
+                        if (findTrek === null && findContent === null && findEvent === null && findDive === null) {
                             deferred.reject('No matching element found');
                         }
                     }
@@ -149,7 +163,7 @@ function resultsService($rootScope, $q, $location, globalSettings, treksService,
                             }
                         });
                         findEvent = null;
-                        if (findTrek === null && findContent === null && findEvent === null) {
+                        if (findTrek === null && findContent === null && findEvent === null && findDive === null) {
                             deferred.reject('No matching element found');
                         }
                     }
@@ -157,12 +171,29 @@ function resultsService($rootScope, $q, $location, globalSettings, treksService,
 
         }
 
+        if (globalSettings.ENABLE_DIVES) {
+            divesService.getDives(forceRefresh)
+                .then(
+                    function (dives) {
+                        _.forEach(dives.features, function (dive) {
+                            if (dive.properties.slug === elementSlug && dive.properties.category.slug === categorySlug) {
+                                deferred.resolve(dive);
+                            }
+                        });
+                        findDive = null;
+                        if (findTrek === null && findContent === null && findEvent === null && findDive === null) {
+                            deferred.reject('No matching element found');
+                        }
+                    }
+                );
+        }
+
         return deferred.promise;
     };
 
     this.getAResultByID = function getAResultByID (elementID, categoryID, forceRefresh) {
         var deferred = $q.defer();
-        var findTrek = true, findContent = true, findEvent = true;
+        var findTrek = true, findContent = true, findEvent = true, findDive = true;
 
         if (globalSettings.ENABLE_TREKS) {
             treksService.getTreks(forceRefresh)
@@ -174,7 +205,7 @@ function resultsService($rootScope, $q, $location, globalSettings, treksService,
                             }
                         });
                         findTrek = null;
-                        if (findTrek === null && findContent === null && findEvent === null) {
+                        if (findTrek === null && findContent === null && findEvent === null && findDive === null) {
                             deferred.reject('No matching element found');
                         }
                     }
@@ -191,7 +222,7 @@ function resultsService($rootScope, $q, $location, globalSettings, treksService,
                             }
                         });
                         findContent = null;
-                        if (findTrek === null && findContent === null && findEvent === null) {
+                        if (findTrek === null && findContent === null && findEvent === null && findDive === null) {
                             deferred.reject('No matching element found');
                         }
                     }
@@ -208,10 +239,27 @@ function resultsService($rootScope, $q, $location, globalSettings, treksService,
                             }
                         });
                         findEvent = null;
-                        if (findTrek === null && findContent === null && findEvent === null) {
+                        if (findTrek === null && findContent === null && findEvent === null && findDive === null) {
                             deferred.reject('No matching element found');
                         }
 
+                    }
+                );
+        }
+
+        if (globalSettings.ENABLE_DIVES) {
+            divesService.getDives(forceRefresh)
+                .then(
+                    function (dives) {
+                        _.forEach(dives.features, function (dive) {
+                            if (dive.id === elementID && dive.properties.category.id === categoryID) {
+                                deferred.resolve(dive);
+                            }
+                        });
+                        findDive = null;
+                        if (findTrek === null && findContent === null && findEvent === null && findDive === null) {
+                            deferred.reject('No matching element found');
+                        }
                     }
                 );
         }

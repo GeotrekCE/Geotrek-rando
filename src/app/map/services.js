@@ -691,6 +691,9 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
             self._touristicsMarkersLayer.clearLayers();
         }
 
+        if (globalSettings.ENABLE_DIVES) {
+            self._divesMarkersLayer.clearLayers();
+        }
     };
 
     /**
@@ -921,7 +924,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
 
         var deferred = $q.defer();
 
-        this.maxZoomFitting = globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL - 1;
+        this.maxZoomFitting = globalSettings.DEFAULT_MAX_ZOOM;
 
         if (!self.loadingMarkers) {
             self.loadingMarkers = true;
@@ -1210,7 +1213,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
             mapParameters.maxBounds = new L.latLngBounds(globalSettings.MAP_BOUNDS_CONSTRAINTS);
         }
 
-        this.maxZoomFitting = globalSettings.TREKS_TO_GEOJSON_ZOOM_LEVEL - 1;
+        this.maxZoomFitting = globalSettings.DEFAULT_MAX_ZOOM;
 
         //Mixins for map
         this.initCustomsMixins();
@@ -1244,6 +1247,10 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
 
         if (globalSettings.ENABLE_TOURISTIC_CONTENT || globalSettings.ENABLE_TOURISTIC_EVENTS) {
             this._touristicsMarkersLayer = self.createLayer();
+        }
+
+        if (globalSettings.ENABLE_DIVES) {
+            this._divesMarkersLayer = self.createLayer();
         }
 
         this._poisMarkersLayer = self.createPOIsLayer();

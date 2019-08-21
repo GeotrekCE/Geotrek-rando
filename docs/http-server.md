@@ -50,6 +50,19 @@ server {
 
 Then run `sudo service nginx restart`
 
+### Force PDF download for Firefox
+
+Firefox PDF viewer does not display images nor maps, to avoid this download PDF can be forced in nginx configuration.
+
+```
+location ~ /api/.*([^/]+\.pdf)$ {
+    root <my_data_directory>/;
+    if ($http_user_agent ~* firefox) {
+        add_header Content-Disposition 'attachment; filename="$1"';
+    }
+}
+```
+
 ### Redirect URLs from v1
 
 In nginx configuration file inside `server {...}` section, add:
