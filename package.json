@@ -28,13 +28,11 @@
     "chai": "^4.1.2",
     "classlist-polyfill": "^1.2.0",
     "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^4.0.0",
     "gulp-changed": "^3.1.1",
     "gulp-concat": "^2.6.1",
     "gulp-connect": "^5.0.0",
     "gulp-filesize": "0.0.6",
     "gulp-gzip": "^1.4.0",
-    "gulp-if": "^2.0.2",
     "gulp-istanbul": "^1.1.2",
     "gulp-jsoncombine": "^1.0.3",
     "gulp-minify-css": "^1.2.4",
@@ -42,9 +40,7 @@
     "gulp-po2json": "^0.4.0",
     "gulp-protractor": "^2.1.0",
     "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0",
     "gulp-sort": "^2.0.0",
-    "gulp-sourcemaps": "^2.6.1",
     "gulp-tar": "^2.0.0",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
@@ -68,6 +64,8 @@
     "mkdirp": "^0.5.1",
     "moment": "^2.19.1",
     "node-notifier": "^5.1.2",
+    "node-sass": "https://registry.npmjs.org/node-sass/-/node-sass-4.5.3.tgz",
+    "npm-run-all": "https://registry.npmjs.org/npm-run-all/-/npm-run-all-4.1.1.tgz",
     "partialify": "^3.1.6",
     "portfinder": "^1.0.13",
     "pretty-hrtime": "^1.0.3",
@@ -77,7 +75,6 @@
     "sinon-chai": "^2.14.0",
     "tinycolor2": "^1.4.1",
     "uglifyify": "^4.0.4",
-    "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.9.0"
   },
@@ -86,14 +83,35 @@
     "phantomjs-prebuilt": "^2.1.4"
   },
   "scripts": {
-    "postinstall": "gulp",
-    "pretest": "gulp",
+    "postinstall": "npm run build",
+    "pretest": "npm run build",
     "test": "gulp tests",
-    "prewatch": "gulp",
-    "watch": "gulp watch",
-    "prestart": "gulp",
+    "prewatch": "npm run build",
+    "prestart": "npm run build",
     "start": "gulp watch",
-    "dist": "gulp",
-    "upgrade": "git fetch origin && git checkout origin/latest && npm update && npm run dist"
+    "dist": "npm run build",
+    "upgrade": "git fetch origin && git checkout origin/latest && npm update && npm run dist",
+
+
+
+    "build": "run-s files styles scripts",
+
+    "files": "run-p files:*",
+    "files:dirs": "mkdirp dist/public/styles dist/public/scripts",
+    "files:defaults": "gulp customisation",
+
+    "styles": "run-p styles:*",
+    "styles:main": "node-sass src/app/vendors/styles/vendors.scss --output-style compact > dist/public/styles/rando-vendors.css",
+    "styles:vendors": "node-sass src/app/rando.scss               --output-style compact > dist/public/styles/rando.css",
+
+    "scripts": "run-p scripts:p scripts:s",
+
+    "scripts:p": "run-p scripts:rando3d",
+    "scripts:rando3d": "gulp rando3D",
+
+    "scripts:s": "run-s scripts:translations scripts:main",
+    "scripts:translations": "gulp translate",
+    "scripts:main": "browserify -r ./node_modules/rando3D/src/app.js:rando3D src/app/app.js -t [ partialify ] -o dist/public/scripts/rando.js"
+
   }
 }
