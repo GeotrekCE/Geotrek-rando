@@ -82,6 +82,7 @@ Option     | Type      | Default   | Description
 ENABLE_TREKS | Boolean | `true` | Enable treks service and fetching from the API
 ENABLE_TOURISTIC_CONTENT | Boolean | `true` | Enable touristic contents service and fetching from the API
 ENABLE_TOURISTIC_EVENTS | Boolean | `true` | Enable touristic events service and fetching from the API
+ENABLE_DIVES | Boolean | `false` | Enable dives service and fetching from the API
 DEFAULT_ACTIVE_CATEGORIES | Array of strings (categories id) | `["T"]` | List of default active categories.
 LIST_EXCLUDE_CATEGORIES | Array of strings (categories id) | |  `[]` | List of categories excluded from the filters on results page.
 ENABLE_UNIQUE_CAT | Boolean | `false` | If true, only one category can be activated at the same time in the result page filters.
@@ -204,6 +205,7 @@ TOURISTIC_EVENTS_DIR | "touristicevents" | Touristic events dir file
 TOURISTIC_EVENTS_FILE | "touristicevents.geojson" | Touristic event file
 TOURISTIC_CONTENTS_DIR | "touristiccontents" | Touristic content dir file
 TOURISTIC_CONTENTS_FILE | "touristiccontents.geojson" | Touristic content file
+DIVES_FILE | "dives.geojson" | Dives file
 DEM_FILE | "dem.json" | DEM file
 PROFILE_FILE | "profile.json" | Profile file
 WARNING_CAT_DIR | "feedback" | Warning catefories dir file
@@ -220,8 +222,9 @@ APPROVED_SMALL | "images/approved-small.png" | Default small image for approved 
 Option     | Type      | Default   | Description
 --------|----------|-----------|------------
 DURATION_FILTER | array of [Filters values Objects](#filters-value-options) (id in hours) | cf [Default filters objects](#default-filters-objects) | Values of the filter for a trek duration
-ASCENT_FILTER | array of [Filters values Objects](#filters-value-options) (id in metters) | cf [Default filters objects](#default-filters-objects) | Values of the filter for a trek ascent
-LENGTH_FILTER | array of [Filters values Objects](#filters-value-options) (id in metters) | cf [Default filters objects](#default-filters-objects) | Values of the filter for a trek length
+ASCENT_FILTER | array of [Filters values Objects](#filters-value-options) (id in meters) | cf [Default filters objects](#default-filters-objects) | Values of the filter for a trek ascent
+LENGTH_FILTER | array of [Filters values Objects](#filters-value-options) (id in meters) | cf [Default filters objects](#default-filters-objects) | Values of the filter for a trek length
+DEPTH_FILTER | array of [Filters values Objects](#filters-value-options) (id in meters) | cf [Default filters objects](#default-filters-objects) | Values of the filter for a dive depth
 
 ### Filters value options
 
@@ -261,6 +264,17 @@ label | String | cf [Default filters objects](#default-filters-objects) | Text s
     { "id": 20000, "label": "20km"},
     { "id": 30000, "label": "30km"},
     { "id": 99999, "label": ">30km"}
+]
+```
+
+**Depth**
+```
+[
+    { "id": 0, "label": "<12m"},
+    { "id": 12, "label": "12m"},
+    { "id": 20, "label": "20m"},
+    { "id": 40, "label": "40m"},
+    { "id": 999, "label": ">40m"}
 ]
 ```
 
