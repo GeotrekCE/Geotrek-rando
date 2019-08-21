@@ -4,6 +4,7 @@
 **Enhancements**
 
 * Diving
+* Add setting `DISPLAY_CREDITS_ON_IMAGE` to display credits or not on picture
 
 **Bug fixes**
 
