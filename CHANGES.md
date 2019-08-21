@@ -1,7 +1,19 @@
-2.20.0-ux4dev
-=============
+2.21.0-ux / 2019-08-21
+======================
+
+**Enhancements**
+
+* Diving
+* Add setting `DISPLAY_CREDITS_ON_IMAGE` to display credits or not on picture
+* Imperial scale
+* Document configuration for mobile v3
+* Document configuration to force PDF download
 
 **Bug fixes**
+
+* Always use DEFAULT_MAX_ZOOM to fit bounds
+* Fix nginx configuration warnings
+* Add a default color for unconfigured categories
 
 2.20.0-ux3 / 2019-03-20
 =======================

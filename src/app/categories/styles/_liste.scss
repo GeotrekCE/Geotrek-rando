@@ -247,7 +247,7 @@
                 line-height: 38px;
             }
             border-radius: 50%;
-            // background-color: currentColor;
+            background-color: $default-category-color;
             position: relative;
 
             img, svg {
@@ -256,6 +256,10 @@
             }
 
         }
+    }
+
+    .category-filters {
+        background-color: $default-category-color;
     }
 
     @if $json-custom-style {
@@ -300,6 +304,7 @@
         margin: 0;
         padding: 0;
         width: 40px;
+        background-color: $default-category-color;
         @media (max-width: 540px) {
             width: 30px;
         }

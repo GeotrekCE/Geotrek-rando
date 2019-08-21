@@ -43,6 +43,7 @@ RULES_FLAT_PAGES_ID | string | `""` | Specify the rules flat-page id which will 
 FAVORITES_ICON | String ([font awesome icon](http://fortawesome.github.io/Font-Awesome/icons/)) | `"heart"` | Specify the icon used for the favorites on the website. It must be a valid font awesome icon.
 SHARE_ICON | String ([font awesome icon](http://fortawesome.github.io/Font-Awesome/icons/)) | `"share-alt"` | Specify the icon used for the favorites on the website. It must be a valid font awesome icon.
 PLACEHOLDER_IMAGE | string(file name) | `""` | Placeholder used for contents elements.
+DISPLAY_CREDITS_ON_IMAGE | Boolean | `true` | Add credits on pictures in detail view. From Geotrek-admin version 2.23.2 credits are added directly to pictures, so this setting should be set `false` to avoid double mark.
 RANDOMIZE_RESULTS | Boolean | `false` | If true, items are randomized in results list
 CENTERON_FITS_BOUNDS | Boolean | `false` | Fit map viewport on geometry instead of centering on first point
 DEFAULT_VIEW_MODE | String | `map_list` | The default view mode to display by default. **Not implemented yet** *(possible anticipated values: `map_list` (Map & list), `map` (Map only), `list` (List only), `thumbnails` (Thumbnail grid))*.
@@ -82,6 +83,7 @@ Option     | Type      | Default   | Description
 ENABLE_TREKS | Boolean | `true` | Enable treks service and fetching from the API
 ENABLE_TOURISTIC_CONTENT | Boolean | `true` | Enable touristic contents service and fetching from the API
 ENABLE_TOURISTIC_EVENTS | Boolean | `true` | Enable touristic events service and fetching from the API
+ENABLE_DIVES | Boolean | `false` | Enable dives service and fetching from the API
 DEFAULT_ACTIVE_CATEGORY | String (category id) | `"T"` | The default active category.
 LIST_EXCLUDE_CATEGORIES | Array of strings (categories id) | |  `[]` | List of categories excluded from the filters on results page.
 ENABLE_UNIQUE_CAT | Boolean | `true` | ~~If true, only one category can be activated at the same time in the result page filters.~~<br>**Inactive option**: Current user interface does not make it possible to have multiple categories selected at the same time anymore. This option is now enforced to `true`.
@@ -141,6 +143,7 @@ UPDATE_MAP_ON_FILTER | Boolean | `false` | If true, update map viewport each tim
 ACTIVE_MINIMAP | Boolean | `true` | If true, show minimap.
 MINIMAP_ZOOM | [Zoom conf Object](#layers-objects-options) | cf [Zoom conf default](#layers-objects-options) | Define max an min zoom levels for the mini-map
 MINIMAP_OFFSET | Int | `-3` | Value of the difference between the map zoom and the mini-map zoom.
+IMPERIAL_SCALE | Boolean | `false` | Show the imperial scale line (mi/ft) in addition of the metric scale line.
 ALWAYS_HIGHLIGHT_TREKS | Boolean | `false` | If true, always display a border around the linear versions of treks.
 SHOW_FILTERS_ON_MAP | boolean | `true` | If true, shows a drawer at the bottom of the map, displaying the list of all active filters.
 FILTER_BY_VIEWPORT_DEFAULT | boolean | `false` | If true, "Filter with map" is checked by default
@@ -202,6 +205,7 @@ TOURISTIC_EVENTS_DIR | "touristicevents" | Touristic events dir file
 TOURISTIC_EVENTS_FILE | "touristicevents.geojson" | Touristic event file
 TOURISTIC_CONTENTS_DIR | "touristiccontents" | Touristic content dir file
 TOURISTIC_CONTENTS_FILE | "touristiccontents.geojson" | Touristic content file
+DIVES_FILE | "dives.geojson" | Dives file
 DEM_FILE | "dem.json" | DEM file
 PROFILE_FILE | "profile.json" | Profile file
 WARNING_CAT_DIR | "feedback" | Warning catefories dir file
@@ -218,8 +222,9 @@ APPROVED_SMALL | "images/approved-small.png" | Default small image for approved 
 Option     | Type      | Default   | Description
 --------|----------|-----------|------------
 DURATION_FILTER | array of [Filters values Objects](#filters-value-options) (id in hours) | cf [Default filters objects](#default-filters-objects) | Values of the filter for a trek duration
-ASCENT_FILTER | array of [Filters values Objects](#filters-value-options) (id in metters) | cf [Default filters objects](#default-filters-objects) | Values of the filter for a trek ascent
-LENGTH_FILTER | array of [Filters values Objects](#filters-value-options) (id in metters) | cf [Default filters objects](#default-filters-objects) | Values of the filter for a trek length
+ASCENT_FILTER | array of [Filters values Objects](#filters-value-options) (id in meters) | cf [Default filters objects](#default-filters-objects) | Values of the filter for a trek ascent
+LENGTH_FILTER | array of [Filters values Objects](#filters-value-options) (id in meters) | cf [Default filters objects](#default-filters-objects) | Values of the filter for a trek length
+DEPTH_FILTER | array of [Filters values Objects](#filters-value-options) (id in meters) | cf [Default filters objects](#default-filters-objects) | Values of the filter for a dive depth
 
 ### Filters value options
 
@@ -259,6 +264,17 @@ label | String | cf [Default filters objects](#default-filters-objects) | Text s
     { "id": 20000, "label": "20km"},
     { "id": 30000, "label": "30km"},
     { "id": 99999, "label": ">30km"}
+]
+```
+
+**Depth**
+```
+[
+    { "id": 0, "label": "<12m"},
+    { "id": 12, "label": "12m"},
+    { "id": 20, "label": "20m"},
+    { "id": 40, "label": "40m"},
+    { "id": 999, "label": ">40m"}
 ]
 ```
 

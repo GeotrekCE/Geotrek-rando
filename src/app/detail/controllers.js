@@ -6,6 +6,8 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
     $scope.removeDiacritics = utilsFactory.removeDiacritics;
     $scope.nearElementsByCategories = globalSettings.NEAR_ELEMENTS_CATEGORIES;
     $scope.displayAsidesCounter = globalSettings.DISPLAY_ASIDES_COUNTERS;
+    $scope.displayCredits = globalSettings.DISPLAY_CREDITS_ON_IMAGE;
+
     if (globalSettings.RULES_FLAT_PAGES_ID) {
         $scope.rulesId = globalSettings.RULES_FLAT_PAGES_ID;
     } else {
@@ -434,7 +436,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                     $rootScope.elementsLoading --;
                     getInterests(result, forceRefresh);
                     $rootScope.$emit('initGallery', result.properties.pictures);
-                    $scope.result.informations = detailService.hasInfos(result.properties, 'duration_pretty', 'duration', 'difficulty.label', 'route', 'ascent', 'networks', 'target_audience');
+                    $scope.result.informations = detailService.hasInfos(result.properties, 'duration_pretty', 'duration', 'difficulty.label', 'levels', 'route', 'ascent', 'depth', 'networks', 'target_audience');
                     $rootScope.$emit('detailUpdated', forceRefresh);
                 },
                 function () {

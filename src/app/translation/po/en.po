@@ -44,6 +44,9 @@ msgstr "routes"
 msgid "DIFFICULTIES"
 msgstr "Difficulties"
 
+msgid "LEVELS"
+msgstr "Levels:"
+
 msgid "DURATION"
 msgstr "Duration"
 
@@ -52,6 +55,12 @@ msgstr "Ascent"
 
 msgid "ASCENT_S"
 msgstr "D+:"
+
+msgid "DEPTH"
+msgstr "Depth:"
+
+msgid "DEPTH_S"
+msgstr "Depth:"
 
 msgid "LENGTH"
 msgstr "Length"

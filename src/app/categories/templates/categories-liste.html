@@ -81,6 +81,18 @@
                                 </div>
                             </div>
 
+                            <!-- Level slider -->
+                            <div ng-if="category.levels && category.levels.values.length > 1" class="category-filter slider levels">
+                                <div class="filter-title">
+                                    <span>{{'LEVEL' | translate}}</span>
+                                </div>
+                                <div class="slider-container">
+                                    <rzslider rz-slider-model="activeRangeValues[category.id + '_levels'].min" rz-slider-high="activeRangeValues[category.id + '_levels'].max"
+                                        rz-slider-options="activeRangeValues[category.id + '_levels'].options">
+                                    </rzslider>
+                                </div>
+                            </div>
+
                             <!-- Duration slider -->
                             <div ng-if="category.duration && category.duration.values.length > 1" class="category-filter slider duration">
                                 <div class="filter-title">

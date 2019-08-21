@@ -19,14 +19,20 @@ server {
     if_modified_since before;
     expires 1h;
     gzip on;
-    gzip_types text/text text/html text/plain text/xml text/css application/x-javascript application/javascript application/json;
+    gzip_types text/text text/plain text/xml text/css application/x-javascript application/javascript application/json;
     include mime.types;
     types {
         application/json geojson;
         application/gpx+xml gpx;
-        application/vnd.google-earth.kmz kmz;
         application/x-font-ttf ttf;
     }
+    # Uncomment below for mobile v3 API
+    # location ~ ^/mobile/(.*)$ {
+    #     add_header Access-Control-Allow-Origin "*";
+    #     add_header Access-Control-Allow-Methods "GET, OPTIONS";
+    #     root <my_mobile_directory>/;
+    #     try_files /$http_accept_language/$1 /nolang/$1 =404;
+    # }
     location ~ ^/(api|media|static|zip|meta)/ {
         root <my_data_directory>/;
     }
@@ -43,6 +49,19 @@ server {
 ```
 
 Then run `sudo service nginx restart`
+
+### Force PDF download for Firefox
+
+Firefox PDF viewer does not display images nor maps, to avoid this download PDF can be forced in nginx configuration.
+
+```
+location ~ /api/.*([^/]+\.pdf)$ {
+    root <my_data_directory>/;
+    if ($http_user_agent ~* firefox) {
+        add_header Content-Disposition 'attachment; filename="$1"';
+    }
+}
+```
 
 ### Redirect URLs from v1
 

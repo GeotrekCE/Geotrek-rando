@@ -1,6 +1,6 @@
 'use strict';
 
-function categoriesService(globalSettings, $q, treksService, contentsService, eventsService, utilsFactory, translationService) {
+function categoriesService(globalSettings, $q, treksService, contentsService, eventsService, divesService, utilsFactory, translationService) {
     var self = this;
 
     self._categoriesList = {};
@@ -229,6 +229,10 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                             type: 'checkbox',
                             values: aContent.properties.type2 ? angular.copy(aContent.properties.type2) : []
                         },
+                        duration: {
+                            type: 'range',
+                            values: globalSettings.DURATION_FILTER ? globalSettings.DURATION_FILTER : []
+                        },
                         themes: {
                             type: 'checkbox',
                             values: aContent.properties.themes ? angular.copy(aContent.properties.themes) : []
@@ -280,6 +284,96 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
         });
 
         return contentsCategories;
+
+    };
+
+    this.getDivesCategories = function getDivesCategories (dives) {
+
+        var divesCategories = [];
+
+        _.forEach(dives.features, function (aDive) {
+
+            if (aDive.properties.published) {
+
+                if (!(utilsFactory.idIsInArray(divesCategories, aDive.properties.category))) {
+
+                    var currentCategory = {
+                        id: angular.copy(aDive.properties.category.id),
+                        type: 'dives',
+                        label: angular.copy(aDive.properties.category.label),
+                        order: angular.copy(aDive.properties.category.order),
+                        pictogram: angular.copy(aDive.properties.category.pictogram),
+                        type1_label: angular.copy(aDive.properties.category.type1_label),
+                        type2_label: angular.copy(aDive.properties.category.type2_label),
+                        type1: {
+                            type: 'checkbox',
+                            values: aDive.properties.type1 ? angular.copy(aDive.properties.type1) : []
+                        },
+                        type2: {
+                            type: 'checkbox',
+                            values: aDive.properties.type2 ? angular.copy(aDive.properties.type2) : []
+                        },
+                        difficulty: {
+                            type: 'range',
+                            values: aDive.properties.difficulty ? [angular.copy(aDive.properties.difficulty)] : []
+                        },
+                        levels: {
+                            type: 'range',
+                            values: aDive.properties.levels ? angular.copy(aDive.properties.levels) : []
+                        },
+                        depth: {
+                            type: 'range',
+                            values: globalSettings.DEPTH_FILTER ? globalSettings.DEPTH_FILTER : []
+                        },
+                        themes: {
+                            type: 'checkbox',
+                            values: aDive.properties.themes ? angular.copy(aDive.properties.themes) : []
+                        },
+                        cat_class: 'category-' + aDive.properties.category.id.toString()
+                    };
+
+                    currentCategory.depth.values = _.map(_.sortBy(currentCategory.depth.values, 'id'));
+
+                    divesCategories.push(currentCategory);
+
+                } else {
+
+                    var catIndex = utilsFactory.findIndexOfId(divesCategories, aDive.properties.category.id);
+
+                    if (aDive.properties.difficulty) {
+                        if (!(utilsFactory.idIsInArray(divesCategories[catIndex].difficulty.values, aDive.properties.difficulty))) {
+                            divesCategories[catIndex].difficulty.values.push(aDive.properties.difficulty);
+                        }
+                        divesCategories[catIndex].difficulty.values = _.map(_.sortBy(divesCategories[catIndex].difficulty.values, 'id'));
+                    }
+
+                    _.forEach(aDive.properties.levels, function (aLevel) {
+
+                        if (!(utilsFactory.idIsInArray(divesCategories[catIndex].levels.values, aLevel))) {
+
+                            divesCategories[catIndex].levels.values.push(aLevel);
+
+                        }
+
+                    });
+
+                    if (aDive.properties.themes && aDive.properties.themes.length > 0) {
+                        _.forEach(aDive.properties.themes, function (theme) {
+
+                            if (!(utilsFactory.idIsInArray(divesCategories[catIndex].themes.values, theme)) && theme !== undefined) {
+                                divesCategories[catIndex].themes.values.push(theme);
+                            }
+
+                        });
+                    }
+
+                }
+
+            }
+
+        });
+
+        return divesCategories;
 
     };
 
@@ -342,7 +436,8 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
         var deferred = $q.defer(),
             trekCats = null,
             contentCats = null,
-            eventCat = null;
+            eventCat = null,
+            diveCats = null;
 
         var promises = [];
 
@@ -386,6 +481,20 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
             );
         }
 
+        if (globalSettings.ENABLE_DIVES) {
+            promises.push(
+                divesService.getDives()
+                    .then(
+                        function (dive) {
+                            if (dive.features.length > 0) {
+                                diveCats = self.getDivesCategories(dive);
+                            }
+                        }
+                    )
+
+            );
+        }
+
         $q.all(promises)
             .then(
                 function () {
@@ -402,6 +511,11 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                     }
                     if (globalSettings.ENABLE_TOURISTIC_EVENTS && eventCat) {
                         self._categoriesList[lang].push(eventCat);
+                    }
+                    if (globalSettings.ENABLE_DIVES && diveCats) {
+                        for (var j = diveCats.length - 1; j >= 0; j--) {
+                            self._categoriesList[lang].push(diveCats[j]);
+                        }
                     }
 
                     self.preprocessCategories();

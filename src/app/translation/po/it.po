@@ -43,6 +43,9 @@ msgstr "Percorso"
 msgid "DIFFICULTIES"
 msgstr "Difficoltà"
 
+msgid "LEVELS"
+msgstr "Levels:"
+
 msgid "DURATION"
 msgstr "Durata"
 
@@ -51,6 +54,12 @@ msgstr "Dislivello"
 
 msgid "ASCENT_S"
 msgstr "D+"
+
+msgid "DEPTH"
+msgstr "Depth:"
+
+msgid "DEPTH_S"
+msgstr "Depth:"
 
 msgid "LENGTH"
 msgstr "Lunghezza"

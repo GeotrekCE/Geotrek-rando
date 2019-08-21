@@ -43,6 +43,9 @@ msgstr "Route"
 msgid "DIFFICULTIES"
 msgstr "Moeilijkheidsgraad"
 
+msgid "LEVELS"
+msgstr "Levels:"
+
 msgid "DURATION"
 msgstr "Duur"
 
@@ -51,6 +54,12 @@ msgstr "Hoogteverschil"
 
 msgid "ASCENT_S"
 msgstr "D+"
+
+msgid "DEPTH"
+msgstr "Depth:"
+
+msgid "DEPTH_S"
+msgstr "Depth:"
 
 msgid "LENGTH"
 msgstr ""

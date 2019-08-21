@@ -43,6 +43,9 @@ msgstr "Routen"
 msgid "DIFFICULTIES"
 msgstr "Schwierigkeit"
 
+msgid "LEVELS"
+msgstr "Levels:"
+
 msgid "DURATION"
 msgstr "Dauer"
 
@@ -51,6 +54,12 @@ msgstr "Anstieg"
 
 msgid "ASCENT_S"
 msgstr "D+"
+
+msgid "DEPTH"
+msgstr "Depth:"
+
+msgid "DEPTH_S"
+msgstr "Depth:"
 
 msgid "LENGTH"
 msgstr ""
@@ -184,10 +193,10 @@ msgid "NEAR"
 msgstr "In der Umgebung"
 
 msgid "CHILDREN"
-msgstr ""
+msgstr "Etappen"
 
 msgid "PARENT"
-msgstr ""
+msgstr "Mehrtageswanderungen"
 
 msgid "PROFILE_ALTI"
 msgstr "Höhenmessungsprofil"
