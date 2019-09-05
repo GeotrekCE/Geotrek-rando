@@ -143,28 +143,32 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         return deferred.promise;
     }
 
-    function getChildren(result) {
+    /**
+     * Gets all children steps of given parent trek.
+     *
+     * @param {Obj} parentTrek
+     *   The parent trek.
+     * @return {Promise}
+     *   Result promise, with the list of children passed as parameter.
+     */
+    function _getChildren(parentTrek) {
         var deferred = $q.defer(),
             promises = [],
-            elementChildren = [];
+            children = [];
 
-        _.each(result.properties.children, function(child, stepNumber) {
-            elementChildren.push({
-                category_id: result.properties.category.id,
-                id: child,
+        _.each(parentTrek.properties.children, function(childId, stepNumber) {
+            var childIds = {
+                category_id: parentTrek.properties.category.id,
+                id: childId,
                 stepNumber: stepNumber
-            });
-        });
+            };
 
-        $scope.elementChildren = [];
-
-        _.forEach(elementChildren, function (element) {
             promises.push(
-                resultsService.getATrekByID(element.id)
+                resultsService.getATrekByID(childIds.id)
                     .then(
-                        function (elementData) {
-                            elementData.properties.stepNumber = element.stepNumber + 1;
-                            $scope.elementChildren.push(elementData);
+                        function (childData) {
+                            childData.properties.stepNumber = childIds.stepNumber + 1;
+                            children.push(childData);
                         },
                         function (err) {
                             if (console) {
@@ -176,12 +180,28 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         });
 
         $q.all(promises)
-            .then(
-                function () {
-                    mapService.createElementsMarkers($scope.elementChildren, 'children');
-                    deferred.resolve($scope.elementChildren);
-                }
-            );
+            .then(function () {
+                deferred.resolve(children);
+            });
+
+        return deferred.promise;
+    }
+
+    /**
+     * Populates the sidebar with all the children steps of given trek.
+     *
+     * @param {Obj} parentTrek
+     *   The parent trek.
+     */
+    function populateUIWithChildren(parentTrek) {
+        var deferred = $q.defer();
+
+        _getChildren(parentTrek).then(function(children) {
+            $scope.elementChildren = children;
+            mapService.createElementsMarkers(children, 'children');
+
+            deferred.resolve(children);
+        });
 
         return deferred.promise;
     }
@@ -202,7 +222,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
 
         _.forEach(parentsElement, function (element) {
             promises.push(
-                resultsService.getAResultByID(element.id, element.category_id)
+                resultsService.getATrekByID(element.id)
                     .then(
                         function (elementData) {
                             if (elementData.id === currentParentId) {
@@ -288,7 +308,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         if (result.properties.children && result.properties.children.length > 0) {
             detailService.setCurrentParent(result.id);
             promises.push(
-                getChildren(result)
+                populateUIWithChildren(result)
                     .then(
                         function (children) {
                             if (children.length > 0) {
@@ -370,12 +390,24 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
 
                     if (result.properties.parents) {
                         var currentParentId = detailService.getCurrentParent();
+
+                        // Fetch parent trek.
+                        resultsService.getATrekByID(currentParentId).then(
+                            function(parentResult) {
+                                _getChildren(parentResult).then(function(children) {
+                                    // Handle "previous" and "next" links.
+                                    $scope.trekSteps = children;
+                                });
+                            }
+                        );
+
+                        // Handle "Previous" link state.
                         if (result.properties.previous !== undefined) {
                             // Get previous step
                             var previousID = result.properties.previous[currentParentId];
                             if (previousID !== null && previousID !== undefined) {
                                 $scope.previousStep = true;
-                                resultsService.getAResultByID(previousID, result.properties.category.id).then(function(res) {
+                                resultsService.getATrekByID(previousID).then(function(res) {
                                     $scope.previousStep = res.properties;
                                 }), function(err) {
                                     console.log(err);
@@ -383,12 +415,13 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                             }
                         }
 
+                        // Handle "Next" link state.
                         if (result.properties.next !== undefined) {
                             // Get next step
                             var nextID = result.properties.next[currentParentId];
                             if (nextID !== null && nextID !== undefined) {
                                 $scope.nextStep = true;
-                                resultsService.getAResultByID(nextID, result.properties.category.id).then(function(res) {
+                                resultsService.getATrekByID(nextID).then(function(res) {
                                     $scope.nextStep = res.properties;
                                 }), function(err) {
                                     console.log(err);
@@ -402,6 +435,11 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                     $rootScope.metaDescription = result.properties.description_teaser;
                     $scope.result = result;
                     $rootScope.elementsLoading --;
+
+                    // Clear all POIS and other markers before recreating interest points and
+                    // the result being displayed iteself.
+                    mapService.clearAllLayers();
+
                     getInterests(result, forceRefresh);
                     $rootScope.$emit('initGallery', result.properties.pictures);
                     $scope.result.informations = detailService.hasInfos(result.properties, 'duration_pretty', 'duration', 'difficulty.label', 'levels', 'route', 'ascent', 'depth', 'networks', 'target_audience');
