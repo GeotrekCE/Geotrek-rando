@@ -198,6 +198,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
 
         _getChildren(parentTrek).then(function(children) {
             $scope.elementChildren = children;
+            mapService.createElementsMarkers(children, 'children');
 
             deferred.resolve(children);
         });
