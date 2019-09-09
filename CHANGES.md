@@ -1,3 +1,11 @@
+2.21.0-ux / 2019-09-xx
+======================
+
+**Bug fixes**
+
+* Fix POIs and Steps not displayed on sidebar detail page
+
+
 2.21.0-ux / 2019-08-21
 ======================
 
