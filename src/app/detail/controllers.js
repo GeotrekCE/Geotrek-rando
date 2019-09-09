@@ -436,10 +436,6 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                     $scope.result = result;
                     $rootScope.elementsLoading --;
 
-                    // Clear all POIS and other markers before recreating interest points and
-                    // the result being displayed iteself.
-                    mapService.clearAllLayers();
-
                     getInterests(result, forceRefresh);
                     $rootScope.$emit('initGallery', result.properties.pictures);
                     $scope.result.informations = detailService.hasInfos(result.properties, 'duration_pretty', 'duration', 'difficulty.label', 'levels', 'route', 'ascent', 'depth', 'networks', 'target_audience');
