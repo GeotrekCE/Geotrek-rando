@@ -198,6 +198,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
 
         _getChildren(parentTrek).then(function(children) {
             $scope.elementChildren = children;
+            mapService.createElementsMarkers(children, 'children');
 
             deferred.resolve(children);
         });
@@ -434,6 +435,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                     $rootScope.metaDescription = result.properties.description_teaser;
                     $scope.result = result;
                     $rootScope.elementsLoading --;
+
                     getInterests(result, forceRefresh);
                     $rootScope.$emit('initGallery', result.properties.pictures);
                     $scope.result.informations = detailService.hasInfos(result.properties, 'duration_pretty', 'duration', 'difficulty.label', 'levels', 'route', 'ascent', 'depth', 'networks', 'target_audience');

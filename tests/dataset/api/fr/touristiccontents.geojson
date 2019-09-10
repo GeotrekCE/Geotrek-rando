@@ -393,6 +393,103 @@
                 "videos": [],
                 "files": []
             }
+        },
+        {
+            "id": 12,
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [1.3345609232783322, 42.79087764885956]
+            },
+            "properties": {
+                "description": "<p>Au coeur d'une nature vivifiante, le village d'Aulus les Bains se situe &agrave; 750 m d'altitude et offre la plupart des services et commerces.</p>",
+                "description_teaser": "<p>Aulus les Bains est une des rares stations thermales fran&ccedil;aises &agrave; avoir b&eacute;n&eacute;fici&eacute; d'une &eacute;tude scientifique qui a permis d'&eacute;valuer les effets de la cure sur le taux de cholest&eacute;rol, de triglyc&eacute;rides et de glucose.</p>",
+                "category": {
+                    "id": "C7",
+                    "label": "S\u00e9jours",
+                    "type1_label": "Th\u00e9matique",
+                    "type2_label": "",
+                    "pictogram": "/media/upload/touristiccontent-destination.svg",
+                    "order": null,
+                    "slug": "contenu-touristique"
+                },
+                "themes": [{
+                    "id": 5,
+                    "pictogram": "/media/upload/theme-architecture.png",
+                    "label": "Architecture"
+                }, {
+                    "id": 2,
+                    "pictogram": "/media/upload/theme-flora.png",
+                    "label": "Flore"
+                }],
+                "contact": "",
+                "email": "",
+                "website": "http://www.ariege.com/thermes-aulus/",
+                "practical_info": "<p>La saison thermale se d&eacute;roulera du 13 avril au 31 octobre 2015.&nbsp;</p>\r\n<p>Informations et r&eacute;servations au 05 61 66 36 80</p>",
+                "type1": [{
+                    "id": 49,
+                    "name": "Bien \u00eatre",
+                    "pictogram": null,
+                    "in_list": 1
+                }, {
+                    "id": 50,
+                    "name": "Nature",
+                    "pictogram": null,
+                    "in_list": 1
+                }],
+                "type2": [],
+                "touristic_contents": [],
+                "touristic_events": [],
+                "treks": [{
+                    "id": 2849,
+                    "category_id": "T"
+                }],
+                "pois": [],
+                "source": [],
+                "portal": [],
+                "approved": false,
+                "reservation_id": "",
+                "reservation_system": "",
+                "cities": [{
+                    "code": "09029",
+                    "name": "Aulus-les-Bains"
+                }],
+                "districts": [],
+                "areas": [],
+                "name": "Station thermale d'Aulus-Les-Bains",
+                "slug": "station-thermale-daulus-les-bains",
+                "map_image_url": "/image/touristiccontent-12.png",
+                "filelist_url": "/paperclip/get/tourism/touristiccontent/12/",
+                "printable": "/api/fr/touristiccontents/12/station-thermale-daulus-les-bains.pdf",
+                "published": true,
+                "published_status": [{
+                    "lang": "en",
+                    "status": false,
+                    "language": "English"
+                }, {
+                    "lang": "es",
+                    "status": false,
+                    "language": "Spanish"
+                }, {
+                    "lang": "fr",
+                    "status": true,
+                    "language": "French"
+                }, {
+                    "lang": "it",
+                    "status": false,
+                    "language": "Italian"
+                }],
+                "publication_date": "2015-12-30",
+                "thumbnail": "/media/paperclip/tourism_touristiccontent/12/aulus_02.JPG.120x120_q85_crop.jpg",
+                "pictures": [{
+                    "url": "/media/paperclip/tourism_touristiccontent/12/aulus_02.JPG.800x800_q85.jpg",
+                    "title": "AuLus_02",
+                    "legend": "Aulus-Les-Bains",
+                    "author": "Wikimedia Commons"
+                }],
+                "videos": [],
+                "files": []
+            }
         }
     ]
 }
