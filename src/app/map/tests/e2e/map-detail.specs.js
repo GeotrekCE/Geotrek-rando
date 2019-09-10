@@ -20,6 +20,20 @@ describe('map  ', function() {
         });
     });
 
+    it('should have nearby elements on map', function () {
+        browser.get('/#/itineraire/decouverte-de-la-cascade-dars/');
+
+        element(by.css('.near-elements .detail-aside-group-title')).click();
+        expect(nearMarkers.isPresent()).toBe(true);
+    });
+
+    it('should have POI elements on map', function () {
+        browser.get('/#/itineraire/decouverte-de-la-cascade-dars/');
+
+        element(by.css('.poi .detail-aside-group-title')).click();
+        expect(POIMarkers.isPresent()).toBe(true);
+    });
+
     it('should have a visible path on trek detail page', function () {
         browser.get('/#/itineraire/boucle-du-pic-des-trois-seigneurs/');
 
@@ -37,17 +51,4 @@ describe('map  ', function() {
         expect(trekPath.isPresent()).toBe(true);
     });
 
-    it('should have nearby elements on map', function () {
-        browser.get('/#/itineraire/decouverte-de-la-cascade-dars/');
-
-        element(by.css('.near-elements .detail-aside-group-title')).click();
-        expect(nearMarkers.isPresent()).toBe(true);
-    });
-
-    it('should have POI elements on map', function () {
-        browser.get('/#/itineraire/decouverte-de-la-cascade-dars/');
-
-        element(by.css('.poi .detail-aside-group-title')).click();
-        expect(POIMarkers.isPresent()).toBe(true);
-    });
 });
