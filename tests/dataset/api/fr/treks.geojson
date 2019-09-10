@@ -2309,7 +2309,10 @@
                 ],
                 "videos": [],
                 "files": [],
-                "touristic_contents": [],
+                "touristic_contents": [{
+                    "id": 12,
+                    "category_id": "C7"
+                }],
                 "touristic_events": []
             }
         },
