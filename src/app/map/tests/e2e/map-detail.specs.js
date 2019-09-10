@@ -30,7 +30,7 @@ describe('map  ', function() {
     it('should have POI elements on map', function () {
         browser.get('/#/itineraire/decouverte-de-la-cascade-dars/');
 
-        element(by.css('.poi .detail-aside-group-title')).click();
+        element(by.css('.pois .detail-aside-group-title')).click();
         expect(POIMarkers.isPresent()).toBe(true);
     });
 
