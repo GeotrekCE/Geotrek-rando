@@ -3,6 +3,8 @@
 describe('map  ', function() {
     var constants = require('../../../config/settings.default.json');
     var trekPath = element(by.css('.leaflet-map-pane .leaflet-overlay-pane svg.leaflet-zoom-animated g'));
+    var nearMarkers = element(by.css('.leaflet-marker-pane .leaflet-marker-icon.near-marker'));
+    var POIMarkers = element(by.css('.leaflet-marker-pane .leaflet-marker-icon.poi'));
 
     beforeAll(function() {
         browser.get('/');
@@ -33,5 +35,19 @@ describe('map  ', function() {
         browser.waitForAngular();
 
         expect(trekPath.isPresent()).toBe(true);
+    });
+
+    it('should have nearby elements on map', function () {
+        browser.get('/#/itineraire/decouverte-de-la-cascade-dars/');
+
+        element(by.css('.near-elements .detail-aside-group-title')).click();
+        expect(nearMarkers.isPresent()).toBe(true);
+    });
+
+    it('should have POI elements on map', function () {
+        browser.get('/#/itineraire/decouverte-de-la-cascade-dars/');
+
+        element(by.css('.poi .detail-aside-group-title')).click();
+        expect(POIMarkers.isPresent()).toBe(true);
     });
 });
