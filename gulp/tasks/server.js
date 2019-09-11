@@ -11,6 +11,7 @@ gulp.task('server', function(cb) {
         connect.server({
             root: 'public',
             port: port,
+            fallback: 'public/index.html',
         });
     });
 });

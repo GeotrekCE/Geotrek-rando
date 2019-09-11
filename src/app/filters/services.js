@@ -684,6 +684,7 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
 
         simpleEach(element, function (property) {
             if (!result) {
+                // Do the search only if the query string is smaller or equal than the tested property.
                 if (typeof property === 'string' && qLength <= property.length) {
                     if (property.match(regex) !== null) {
                         result = true;

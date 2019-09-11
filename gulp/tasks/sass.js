@@ -56,5 +56,5 @@ function compileSass() {
 gulp.task('sass', compileSass);
 
 gulp.task('watch:sass', function () {
-    gulp.watch('src/app/**/*.scss', ['sass']);
+    gulp.watch(['src/app/**/*.scss', 'custom/**/*.scss'], ['sass']);
 });
