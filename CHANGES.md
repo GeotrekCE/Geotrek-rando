@@ -1,9 +1,13 @@
-2.21.1-dev0
+2.21.1 / 2019-09-11
 ===================
+
+**Enhancements**
+
+* Change length shown, constancy with admin and pdfs
 
 **Bug fixes**
 
-*
+* Fix query smaller than the tested properties
 
 2.21.0 / 2019-08-21
 ===================
