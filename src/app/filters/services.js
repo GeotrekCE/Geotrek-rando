@@ -684,7 +684,7 @@ function filtersService($rootScope, $q, $location, globalSettings, utilsFactory,
 
         simpleEach(element, function (property) {
             if (!result) {
-                if (typeof property === 'string' && property.length > qLength) {
+                if (typeof property === 'string' && qLength <= property.length) {
                     if (property.match(regex) !== null) {
                         result = true;
                     }
