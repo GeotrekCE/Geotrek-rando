@@ -117,7 +117,7 @@ function utilsFactory () {
         var intLength = parseInt(length),
             parsedLength= '';
         if (intLength >= 1000) {
-            parsedLength = Math.round(intLength/1000) + ' km';
+            parsedLength = Math.round(intLength/100)/10 + ' km';
         } else {
             parsedLength = intLength + ' m';
         }
