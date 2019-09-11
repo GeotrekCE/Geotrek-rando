@@ -1,8 +1,13 @@
-2.21.0-ux / 2019-09-xx
+2.21.1-ux / 2019-09-11
 ======================
+
+**Enhancements**
+
+* Change length shown, constancy with admin and pdfs
 
 **Bug fixes**
 
+* Fix query smaller than the tested properties
 * Fix POIs and Steps not displayed on sidebar detail page
 
 
