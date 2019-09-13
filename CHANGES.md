@@ -4,6 +4,7 @@
 **Bug fixes**
 
 * Show POIs on dive detail page
+* Fix POIs and Steps not displayed on sidebar detail page
 
 2.21.1 / 2019-09-11
 ===================

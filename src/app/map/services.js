@@ -1051,8 +1051,13 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
             });
 
             $q.all(promiseArray).finally(function () {
-                self._clustersLayer.addLayer(self._treksMarkersLayer);
-                self._clustersLayer.addLayer(self._touristicsMarkersLayer);
+                if (self._treksMarkersLayer !== null && typeof self._treksMarkersLayer !== 'undefined') {
+                    self._clustersLayer.addLayer(self._treksMarkersLayer);
+                }
+
+                if (self._touristicsMarkersLayer !== null && typeof self._touristicsMarkersLayer !== 'undefined') {
+                    self._clustersLayer.addLayer(self._touristicsMarkersLayer);
+                }
 
                 self.map.invalidateSize();
 
@@ -1089,8 +1094,6 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
             self.map.off('moveend', self.resultsVisibility);
 
             self.loadingMarkers = true;
-
-            this.clearAllLayers();
 
             if (result.geometry.type !== "Point" && result.geometry.type !== "MultiPoint") {
                 this.createElevation(result);
@@ -1129,7 +1132,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                                 {
                                     self.updateBounds(self._clustersLayer);
                                 },
-                                200
+                                500
                             );
                         }
                     }
