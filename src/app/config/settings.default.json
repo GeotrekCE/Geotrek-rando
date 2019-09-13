@@ -125,6 +125,7 @@
     "DEPARTURE_ARRIVAL_ICON": "",
     "API_DIR": "api",
     "TREKS_DIR": "treks",
+    "DIVES_DIR": "dives",
     "TREKS_FILE": "treks.geojson",
     "POI_FILE": "pois.geojson",
     "SERVICES_FILE": "services.geojson",

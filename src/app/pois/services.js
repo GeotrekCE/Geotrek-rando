@@ -68,11 +68,15 @@ function poisService($resource, $q, globalSettings, settingsFactory, translation
 
     };
 
-    this.getPoisFromElement = function getPoisFromElement (elementId) {
-
+    this.getPoisFromElement = function getPoisFromElement (element) {
         var deferred = $q.defer();
         var currentLang = translationService.getCurrentLang();
-        var url = settingsFactory.trekUrl.replace(/\$lang/, currentLang) + elementId + '/' + globalSettings.POI_FILE;
+        if (element.properties.contentType === 'trek') {
+            var url = settingsFactory.trekUrl.replace(/\$lang/, currentLang) + element.id + '/' + globalSettings.POI_FILE;
+        }
+        if (element.properties.contentType === 'dive') {
+            var url = settingsFactory.diveUrl.replace(/\$lang/, currentLang) + element.id + '/' + globalSettings.POI_FILE;
+        }
 
         var requests = $resource(url, {}, {
             query: {

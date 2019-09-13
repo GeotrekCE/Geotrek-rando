@@ -3,7 +3,7 @@
 
 **Bug fixes**
 
-*
+* Show POIs on dive detail page
 
 2.21.1 / 2019-09-11
 ===================

@@ -47,7 +47,7 @@
         </div>
 
     </div>
-    <div class="detail-aside-group pois" ng-if="pois.length && result.properties.contentType === 'trek'" ng-class="{active: currentInterest === 'pois'}">
+    <div class="detail-aside-group pois" ng-if="pois.length && (result.properties.contentType === 'trek' || result.properties.contentType === 'dive')" ng-class="{active: currentInterest === 'pois'}">
         <div class="detail-aside-group-title" ng-click="toggleInterest('pois')">
             <span>{{ 'POI' | translate }}</span>
             <span class="detail-aside-group-counter" ng-if="displayAsidesCounter" ng-bind="pois.length"></span>

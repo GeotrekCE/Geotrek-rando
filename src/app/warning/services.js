@@ -277,7 +277,7 @@ function WarningMapService(globalSettings, utilsFactory, iconsService, layersSer
             type = 'geojson';
             elementLocation = [];
         } else {
-            currentLayer = (result.properties.contentType === 'trek' ? self._treksMarkersLayer : self._touristicsMarkersLayer);
+            currentLayer = (result.properties.contentType === 'trek' || result.properties.contentType === 'dive' ? self._treksMarkersLayer : self._touristicsMarkersLayer);
             type = 'category';
             elementLocation = utilsFactory.getStartPoint(result);
         }
