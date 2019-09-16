@@ -253,7 +253,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
     function getPoisOfResult(result, forceRefresh) {
         var deferred = $q.defer();
 
-        poisService.getPoisFromElement(result.id, forceRefresh)
+        poisService.getPoisFromElement(result, forceRefresh)
             .then(
                 function (elementPois) {
                     $scope.pois = elementPois.features;
@@ -268,8 +268,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
     function getInterests(result, forceRefresh) {
         var promises = [],
             activeDefaultType = null;
-
-        if (result.properties.contentType === 'trek') {
+        if (result.properties.contentType === 'trek' || result.properties.contentType === 'dive') {
             promises.push(
                 getPoisOfResult(result, forceRefresh)
                     .then(

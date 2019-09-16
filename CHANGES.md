@@ -1,9 +1,10 @@
-2.21.2-ux.dev0
+2.21.2-ux / 2019-09-16
 ===================
 
 **Bug fixes**
 
-*
+* Show POIs on dive detail page
+* Fix POIs and Steps not displayed on sidebar detail page
 
 2.21.1-ux / 2019-09-11
 ===================

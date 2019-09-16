@@ -14,7 +14,7 @@ function divesService(globalSettings, settingsFactory, translationService, $q, $
             /**
              * Dives Type
              */
-            dive.properties.diveType = 'dive';
+            dive.properties.contentType = 'dive';
 
             /**
              * Dives IDs

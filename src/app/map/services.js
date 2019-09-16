@@ -32,7 +32,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
         controlServices.addTo(this.map);
         var classServices = controlServices.getContainer().classList;
 
-        if (element.properties.contentType === 'trek') {
+        if (element.properties.contentType === 'trek' || element.properties.contentType === 'dive') {
             servicesService.getServicesFromElement(element.id)
                 .then(
                     function (services) {
@@ -162,7 +162,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
             }
 
             promises.push(
-                poisService.getPoisFromElement(element.id, true)
+                poisService.getPoisFromElement(element, true)
                     .then(
                         function (pois) {
                             var counter = 0;
