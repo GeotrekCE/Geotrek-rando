@@ -33,7 +33,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
         var classServices = controlServices.getContainer().classList;
 
         if (element.properties.contentType === 'trek' || element.properties.contentType === 'dive') {
-            servicesService.getServicesFromElement(element.id)
+            servicesService.getServicesFromElement(element)
                 .then(
                     function (services) {
                         var counter = 0;
@@ -160,7 +160,8 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                     );
                 }
             }
-
+        }
+        if ((element.geometry.type === 'LineString' || element.geometry.type === 'MultiLineString') || element.properties.contentType === 'dive'){
             promises.push(
                 poisService.getPoisFromElement(element, true)
                     .then(
