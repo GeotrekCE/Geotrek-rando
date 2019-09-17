@@ -1060,6 +1060,10 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                     self._clustersLayer.addLayer(self._touristicsMarkersLayer);
                 }
 
+                if (self._divesMarkersLayer !== null && typeof self._divesMarkersLayer !== 'undefined') {
+                    self._clustersLayer.addLayer(self._touristicsMarkersLayer);
+                }
+
                 self.map.invalidateSize();
 
                 if (fitBounds === true) {
