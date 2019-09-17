@@ -1149,9 +1149,10 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                     function () {
                         self.map.invalidateSize();
                         //self.updateBounds(self._poisMarkersLayer, 0.5);
-                        self.loadingMarkers = false;
                     }
                 );
+
+            self.loadingMarkers = false;
         }
 
     };
