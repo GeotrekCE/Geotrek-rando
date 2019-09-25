@@ -1101,7 +1101,13 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                 type = 'geojson';
                 elementLocation = [];
             } else {
-                currentLayer = (result.properties.contentType === 'trek' ? self._treksMarkersLayer : self._touristicsMarkersLayer);
+                if (result.properties.contentType === 'trek') {
+                    currentLayer = self._treksMarkersLayer;
+                } else if (result.properties.contentType === 'dive') {
+                    currentLayer = self._divesMarkersLayer;
+                } else {
+                    currentLayer = self._touristicsMarkersLayer;
+                }
                 type = 'category';
                 elementLocation = utilsFactory.getStartPoint(result);
             }
@@ -1143,9 +1149,10 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                     function () {
                         self.map.invalidateSize();
                         //self.updateBounds(self._poisMarkersLayer, 0.5);
-                        self.loadingMarkers = false;
                     }
                 );
+
+            self.loadingMarkers = false;
         }
 
     };
