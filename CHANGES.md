@@ -1,5 +1,17 @@
+2.21.3-ux / 2019-09-25
+======================
+
+**Enhancements**
+
+* Add default colors for dives
+
+**Bug fixes**
+
+* Fix Near and POIs not displayed on sidebar detail dive page
+* Fix Markers disappear after visiting a point dive
+
 2.21.2-ux / 2019-09-16
-===================
+======================
 
 **Bug fixes**
 
@@ -7,7 +19,7 @@
 * Fix POIs and Steps not displayed on sidebar detail page
 
 2.21.1-ux / 2019-09-11
-===================
+======================
 
 **Enhancements**
 
@@ -17,7 +29,6 @@
 
 * Fix query smaller than the tested properties
 * Fix POIs and Steps not displayed on sidebar detail page
-
 
 2.21.0-ux / 2019-08-21
 ======================

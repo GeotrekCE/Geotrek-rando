@@ -90,9 +90,10 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
             });
         });
 
-        var nearElements = _.union(result.properties.treks, result.properties.touristic_contents, result.properties.touristic_events);
+        var nearElements = _.union(result.properties.dives, result.properties.treks, result.properties.touristic_contents, result.properties.touristic_events);
 
         _.each(nearElements, function (element) {
+
             if (!utilsFactory.elementIsInArray(elementChildren, element)) {
                 tempNear.push(element);
             }
@@ -376,7 +377,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                 function (result) {
                     // Retrieve the "Sensitive areas" info if enabled.
                     if (globalSettings.SENSITIVE_TILELAYER) {
-                        sensitiveService.getSensitive(result.id)
+                        sensitiveService.getSensitive(result)
                             .then(function(sensitives) {
                                 $scope.sensitives = sensitives;
                             });

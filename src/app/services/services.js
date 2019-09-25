@@ -49,11 +49,16 @@ function servicesService($resource, $q, globalSettings, settingsFactory, transla
 
     };
 
-    this.getServicesFromElement = function getServicesFromElement (elementId) {
+    this.getServicesFromElement = function getServicesFromElement (element) {
 
         var deferred = $q.defer();
         var currentLang = translationService.getCurrentLang();
-        var url = settingsFactory.trekUrl.replace(/\$lang/, currentLang) + elementId + '/' + globalSettings.SERVICES_FILE;
+        if (element.properties.contentType === 'trek') {
+            var url = settingsFactory.trekUrl.replace(/\$lang/, currentLang) + element.id + '/' + globalSettings.POI_FILE;
+        }
+        if (element.properties.contentType === 'dive') {
+            var url = settingsFactory.diveUrl.replace(/\$lang/, currentLang) + element.id + '/' + globalSettings.POI_FILE;
+        }
         var requests = $resource(url, {}, {
             query: {
                 method: 'GET',
