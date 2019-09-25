@@ -24,7 +24,8 @@ function settingsFactory(globalSettings) {
         sensitiveUrl = globalSettings.API_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.SENSITIVE_FILE,
         infrastructuresUrl = globalSettings.API_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.INFRASTRUCTURES_FILE,
         signagesUrl = globalSettings.API_URL + '/' + globalSettings.API_DIR + '/$lang/' + globalSettings.SIGNAGES_FILE,
-        trekSensitiveUrl = globalSettings.API_URL + '/' + globalSettings.API_DIR + '/$lang/treks/';
+        trekSensitiveUrl = globalSettings.API_URL + '/' + globalSettings.API_DIR + '/$lang/treks/',
+        diveSensitiveUrl = globalSettings.API_URL + '/' + globalSettings.API_DIR + '/$lang/dives/';
 
 
     //PUBLIC METHODS
@@ -59,6 +60,7 @@ function settingsFactory(globalSettings) {
         infrastructuresUrl: infrastructuresUrl,
         signagesUrl: signagesUrl,
         trekSensitiveUrl: trekSensitiveUrl,
+        diveSensitiveUrl: diveSensitiveUrl,
 
         //METHODS
         setLang: setLang,

@@ -1,9 +1,14 @@
-2.21.3.dev0
+2.21.3 / 2019-09-25
 ===================
+
+**Enhancements**
+
+* Add default colors for dives
 
 **Bug fixes**
 
-*
+* Fix Near and POIs not displayed on sidebar detail dive page
+* Fix Markers disappear after visiting a point dive
 
 2.21.2 / 2019-09-16
 ===================

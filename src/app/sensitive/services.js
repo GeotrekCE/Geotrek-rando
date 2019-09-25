@@ -41,44 +41,51 @@ function sensitiveService(globalSettings, settingsFactory, translationService, $
         return sensitives;
     };
 
-    this.getSensitive = function getSensitive (trekId) {
+    this.getSensitive = function getSensitive (element) {
+        var elementId = element.id;
         var lang = translationService.getCurrentLang();
         /**
          * If there is already a promise fetching results, return it
          */
-        if (getSensitivePending[lang] && getSensitivePending[lang][trekId]) {
-            return getSensitivePending[lang][trekId];
+        if (getSensitivePending[lang] && getSensitivePending[lang][elementId]) {
+            return getSensitivePending[lang][elementId];
         }
 
         /**
          * If treks have already been fetched for current language, return them
          */
-        if (self._sensitiveList[lang] && self._sensitiveList[lang][trekId]) {
-            return $q.when(self._sensitiveList[lang][trekId]);
+        if (self._sensitiveList[lang] && self._sensitiveList[lang][elementId]) {
+            return $q.when(self._sensitiveList[lang][elementId]);
         }
 
         /**
          * If treks have never been fetched for current language, fetch them
          */
         var deferred = $q.defer();
-        var url      = settingsFactory.trekSensitiveUrl.replace(/\$lang/, lang);
+        if (element.properties.contentType === 'trek') {
+            var url  = settingsFactory.trekSensitiveUrl.replace(/\$lang/, lang);
+        }
+        if (element.properties.contentType === 'dive') {
+            var url  = settingsFactory.diveSensitiveUrl.replace(/\$lang/, lang);
+        }
 
-        $http({url: url + trekId + '/' + globalSettings.SENSITIVE_FILE})
+
+        $http({url: url + elementId + '/' + globalSettings.SENSITIVE_FILE})
             .then(function (response) {
                 if (!self._sensitiveList[lang]) {
                     self._sensitiveList[lang] = {}
                 }
 
                 var sensitives = self.parseSensitives(angular.fromJson(response.data).features);
-                self._sensitiveList[lang][trekId] = sensitives;
-                deferred.resolve(self._sensitiveList[lang][trekId]);
+                self._sensitiveList[lang][elementId] = sensitives;
+                deferred.resolve(self._sensitiveList[lang][elementId]);
             });
 
 
         if (!getSensitivePending[lang]) {
             getSensitivePending[lang] = {}
         }
-        getSensitivePending[lang][trekId] = deferred.promise;
+        getSensitivePending[lang][elementId] = deferred.promise;
         return deferred.promise;
     };
 
