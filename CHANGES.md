@@ -3,7 +3,7 @@
 
 **Bug fixes**
 
-*
+* Fix services not displayed properly
 
 2.21.3 / 2019-09-25
 ===================
