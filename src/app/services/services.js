@@ -54,10 +54,10 @@ function servicesService($resource, $q, globalSettings, settingsFactory, transla
         var deferred = $q.defer();
         var currentLang = translationService.getCurrentLang();
         if (element.properties.contentType === 'trek') {
-            var url = settingsFactory.trekUrl.replace(/\$lang/, currentLang) + element.id + '/' + globalSettings.POI_FILE;
+            var url = settingsFactory.trekUrl.replace(/\$lang/, currentLang) + element.id + '/' + globalSettings.SERVICES_FILE;
         }
         if (element.properties.contentType === 'dive') {
-            var url = settingsFactory.diveUrl.replace(/\$lang/, currentLang) + element.id + '/' + globalSettings.POI_FILE;
+            var url = settingsFactory.diveUrl.replace(/\$lang/, currentLang) + element.id + '/' + globalSettings.SERVICES_FILE;
         }
         var requests = $resource(url, {}, {
             query: {
