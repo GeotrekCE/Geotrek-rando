@@ -15,12 +15,10 @@
               {{month}}
             </span>
           </div>
-          <p ng-if="sensitive.contact" class="contact">
-            {{'CONTACT' | translate}} : {{sensitive.contact}}
+          <p class="contact" ng-if="sensitive.contact">{{'CONTACT' | translate}} :
+            <span class="contact" ng-if="sensitive.contact" ng-bind-html="sensitive.contact | sanitizeData: true"></span>
           </p>
-          <p ng-if="sensitive.description">
-            {{sensitive.description}}
-          </p>
+          <p ng-if="sensitive.description" ng-bind-html="sensitive.description | sanitizeData: true"></p>
           <p ng-if="sensitive.species_url">
             <a href="{{sensitive.species_url}}" target="_blank">{{'SHOW_MORE' | translate}}</a>
           </p>
