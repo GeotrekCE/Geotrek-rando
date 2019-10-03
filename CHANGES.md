@@ -4,6 +4,7 @@
 **Bug fixes**
 
 * Fix services not displayed properly
+* Fix sensitivity html tags
 
 2.21.3-ux / 2019-09-25
 ======================
