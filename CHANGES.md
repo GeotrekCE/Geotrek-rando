@@ -1,9 +1,17 @@
-2.21.4-dev0
+2.21.5-dev0
+===================
+
+**Bug fixes**
+
+*
+
+2.21.4 / 2019-10-03
 ===================
 
 **Bug fixes**
 
 * Fix services not displayed properly
+* Fix sensitivity html tags
 
 2.21.3 / 2019-09-25
 ===================
