@@ -3,7 +3,7 @@
 
 **Bug fixes**
 
-*
+* Fix duration showed on touristic contents
 
 2.21.4 / 2019-10-03
 ===================
