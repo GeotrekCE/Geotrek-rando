@@ -1,3 +1,10 @@
+2.21.5-ux / 2019-11-13
+======================
+
+**Bug fixes**
+
+* Fix duration showed on touristic contents
+
 2.21.4-ux / 2019-10-03
 ======================
 

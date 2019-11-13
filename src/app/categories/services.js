@@ -229,10 +229,6 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                             type: 'checkbox',
                             values: aContent.properties.type2 ? angular.copy(aContent.properties.type2) : []
                         },
-                        duration: {
-                            type: 'range',
-                            values: globalSettings.DURATION_FILTER ? globalSettings.DURATION_FILTER : []
-                        },
                         themes: {
                             type: 'checkbox',
                             values: aContent.properties.themes ? angular.copy(aContent.properties.themes) : []

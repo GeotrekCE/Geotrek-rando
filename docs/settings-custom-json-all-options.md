@@ -85,7 +85,7 @@ ENABLE_TOURISTIC_CONTENT | Boolean | `true` | Enable touristic contents service 
 ENABLE_TOURISTIC_EVENTS | Boolean | `true` | Enable touristic events service and fetching from the API
 ENABLE_DIVES | Boolean | `false` | Enable dives service and fetching from the API
 DEFAULT_ACTIVE_CATEGORY | String (category id) | `"T"` | The default active category.
-LIST_EXCLUDE_CATEGORIES | Array of strings (categories id) | |  `[]` | List of categories excluded from the filters on results page.
+LIST_EXCLUDE_CATEGORIES | Array of strings (categories id) | `[]` | List of categories excluded from the filters on results page.
 ENABLE_UNIQUE_CAT | Boolean | `true` | ~~If true, only one category can be activated at the same time in the result page filters.~~<br>**Inactive option**: Current user interface does not make it possible to have multiple categories selected at the same time anymore. This option is now enforced to `true`.
 DEFAULT_INTEREST | String | `"pois"` | Choose which interest to open by default on detail page. Possible values: `"pois"`, `"near"`, `"children"`, `"parents"`, `""`.
 
