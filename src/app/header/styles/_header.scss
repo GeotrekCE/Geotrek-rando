@@ -4,14 +4,21 @@
     height: $header-height-desktop;
     -webkit-backface-visibility: hidden;
     -webkit-transform-style: preserve-3d;
+
     @media (max-width: 767px) {
         height: $header-height-mobile;
     }
+
+    @media (min-width: 768px) and (max-width: 991px) {
+        height: $header-height-tablet;
+    }
+
     background-color: #e9e9e9;
     position: relative;
     z-index: 2;
 
-    .navbar, .container-fluid {
+    .navbar,
+    .container-fluid {
         border: none;
         border-radius: 0;
         margin: 0;
@@ -21,29 +28,31 @@
     }
 }
 
-.header-mainbar {
-}
-
 .header-burger {
     padding: 1em;
     margin: 4px;
+
     .icon-bar {
         @if $json-custom-style {
             background: $primary-color;
         }
+
         transition: all 0.2s ease;
         @include transitionfuse;
 
         &:nth-child(2) {
             transform: translateY(6px) rotate(45deg);
         }
+
         &:nth-child(3) {
             transform: rotate(-45deg);
         }
+
         &:last-child {
             opacity: 0;
         }
     }
+
     &.collapsed .icon-bar {
         transform: none;
         opacity: 1;
@@ -56,13 +65,17 @@
     width: 3em;
     padding: 0.7em;
     margin: 4px;
+
     @if $json-custom-style {
         fill: $primary-color;
     }
+
     @media (min-width: 768px) {
         display: none;
     }
-    img, svg {
+
+    img,
+    svg {
         max-height: 100%;
         width: auto;
     }
@@ -75,9 +88,14 @@
     display: flex;
 
     line-height: $header-height-desktop;
+
     @media (max-width: 767px) {
         line-height: $header-height-mobile;
         right: 120px;
+    }
+
+    @media (min-width: 768px) and (max-width: 991px) {
+        line-height: $header-height-tablet;
     }
 }
 
@@ -88,7 +106,7 @@
     color: $dark-grey;
     margin: 0;
 
-    > h1 {
+    >h1 {
         margin: 0;
         display: inline-block;
         vertical-align: middle;
@@ -103,8 +121,13 @@
     height: $header-height-desktop;
     float: left;
     vertical-align: middle;
+
     @media (max-width: 767px) {
         height: $header-height-mobile;
+    }
+
+    @media (min-width: 768px) and (max-width: 991px) {
+        height: $header-height-tablet;
     }
 }
 
@@ -118,8 +141,9 @@
         padding: 0;
         width: 100%;
         position: absolute;
-        .container-fluid > & {
-             margin: 0;
+
+        .container-fluid>& {
+            margin: 0;
         }
 
         top: $header-height-mobile;
@@ -130,12 +154,18 @@
 .header-links {
     height: 100%;
     line-height: $header-height-desktop;
+
     &.navbar-right {
         margin-right: 0;
     }
+
     @media (max-width: 767px) {
         margin: 0;
         line-height: $header-height-mobile;
+    }
+
+    @media (min-width: 768px) and (max-width: 991px) {
+        line-height: $header-height-tablet;
     }
 
     .glyphicon,
@@ -148,40 +178,47 @@
 
     a {
         color: $dark-grey;
+
         @media (max-width: 992px) {
             padding-left: 10px;
             padding-right: 10px;
         }
 
         @if $json-custom-style {
+
             &:hover,
             &:focus {
                 color: $primary-color;
-                > .glyphicon,
-                > .fa  {
+
+                >.glyphicon,
+                >.fa {
                     color: $primary-color;
                 }
             }
         }
     }
+
     .header-link {
         line-height: normal;
 
-        > a {
+        >a {
             padding-top: 35px;
             padding-bottom: 35px;
+
             @media (max-width: 767px) {
                 padding: 1em 2em;
             }
         }
+
         &:hover,
         &:focus {
             background-color: $light-grey;
 
             @if $json-custom-style {
-                > a,
-                > .glyphicon,
-                > .fa  {
+
+                >a,
+                >.glyphicon,
+                >.fa {
                     color: $primary-color;
                 }
             }
@@ -191,16 +228,24 @@
     .dropdown-menu {
         padding: 0;
         max-height: calc(100vh - #{$header-height-desktop});
+
         @media (max-width: 767px) {
             max-height: calc(100vh - #{$header-height-mobile});
         }
+
+        @media (min-width: 768px) and (max-width: 991px) {
+            max-height: calc(100vh - #{$header-height-tablet});
+        }
+
         a {
             padding-top: 15px;
             padding-bottom: 15px;
         }
-        > .active > a {
+
+        >.active>a {
             background-color: $dark-grey;
         }
+
         &.scroll {
             overflow-x: hidden;
             overflow-y: auto;

@@ -25,6 +25,10 @@
             top: -$header-height-mobile;
             padding-top: $header-height-mobile;
         }
+        @media (min-width: 768px) and (max-width: 991px) {
+			top: -$header-height-tablet;
+            padding-top: $header-height-tablet;
+        }
     }
 
     &.layout-detail,
@@ -36,6 +40,10 @@
             top: calc(-#{$header-height-mobile} - 30px);
             padding-top: calc(#{$header-height-mobile} + 30px);
         }
+        @media (min-width: 768px) and (max-width: 991px) {
+			top: calc(-#{$header-height-tablet} - 50px);
+			padding-top: calc(#{$header-height-tablet} + 50px);
+		}
     }
 
 
