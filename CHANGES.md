@@ -3,7 +3,8 @@
 
 **Enhancements**
 
-* Add currant lang in classes for translation menu
+* Add current lang in classes for translation menu
+* Add header height for tablet
 
 **Bug fixes**
 
