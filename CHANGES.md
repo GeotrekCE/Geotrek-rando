@@ -1,4 +1,4 @@
-2.21.6-dev0
+2.22.0 / 2020-02-06
 ===================
 
 **Enhancements**
@@ -9,6 +9,7 @@
 **Bug fixes**
 
 * Fix class in translation menu
+* Fix touchscreen interactions on map
 
 2.21.5 / 2019-10-30
 ===================
