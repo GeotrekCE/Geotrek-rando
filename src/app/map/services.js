@@ -1684,9 +1684,9 @@ function layersService ($http, globalSettings, settingsFactory, translationServi
 
                         var marker = L.marker(latlng, markerOptions);
 
-                        marker = marker.bindLabel(
+                        marker = marker.bindTooltip(
                             feature.properties.name,
-                            { noHide: true, direction: 'auto' }
+                            { permanent: true }
                         );
 
                         return marker;
