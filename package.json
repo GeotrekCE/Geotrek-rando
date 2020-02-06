@@ -56,7 +56,7 @@
     "leaflet": "^1.3.4",
     "leaflet-active-area": "^1.1.1",
     "leaflet-ajax": "^2.1.0",
-    "leaflet-fullscreen": "git+https://github.com/Leaflet/Leaflet.fullscreen.git#f5e76270ad40bb573bd11595f9069c3f15f8f286",
+    "leaflet-fullscreen": "^1.0.2",
     "leaflet-geometryutil": "git+https://github.com/makinacorpus/Leaflet.GeometryUtil.git#4097170a0e0b0f15c2029416dd589e0d6431e304",
     "leaflet-minimap": "git+https://github.com/Norkart/Leaflet-MiniMap.git#a2d92d04d9930ae8b480cd489333533b1c08612b",
     "leaflet-pip": "^1.1.0",

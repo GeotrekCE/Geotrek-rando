@@ -5246,9 +5246,9 @@
       "resolved": "https://registry.npmjs.org/leaflet-ajax/-/leaflet-ajax-2.1.0.tgz"
     },
     "leaflet-fullscreen": {
-      "version": "1.0.1",
-      "from": "leaflet-fullscreen@git+https://github.com/Leaflet/Leaflet.fullscreen.git#f5e76270ad40bb573bd11595f9069c3f15f8f286",
-      "resolved": "git+https://github.com/Leaflet/Leaflet.fullscreen.git#f5e76270ad40bb573bd11595f9069c3f15f8f286"
+      "version": "1.0.2",
+      "from": "leaflet-fullscreen@>=1.0.2 <2.0.0",
+      "resolved": "https://registry.npmjs.org/leaflet-fullscreen/-/leaflet-fullscreen-1.0.2.tgz"
     },
     "leaflet-geometryutil": {
       "version": "0.4.0",
