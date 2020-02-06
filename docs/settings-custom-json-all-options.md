@@ -106,7 +106,7 @@ Option     | Type      | Default   | Description
 --------|----------|-----------|------------
 SENSITIVE_TILELAYER | Boolean | `false` | Set to `true` to enable the "Sensitive areas" layer
 SENSITIVE_DEFAULT_ICON | String(file name) | `""` | Filename of the custom default icon to use for the button
-SENSITIVE_LAYER_STYLE | Object | `{}` | Leaflet style (see http://leafletjs.com/reference-0.7.7.html#path-options)
+SENSITIVE_LAYER_STYLE | Object | `{}` | Leaflet style (see https://leafletjs.com/reference-1.3.4.html#path)
 
 ## Infrastrucures
 
@@ -114,7 +114,7 @@ Option     | Type      | Default   | Description
 --------|----------|-----------|------------
 INFRASTRUCTURES_TILELAYER | Boolean | `false` | Set to `true` to enable the "Infrastructures" layer
 INFRASTRUCTURES_DEFAULT_ICON | String(file name) | `""` | Filename of the custom default icon to use for the button
-INFRASTRUCTURES_LAYER_STYLE | Object | `{}` | Leaflet style (see http://leafletjs.com/reference-0.7.7.html#path-options)
+INFRASTRUCTURES_LAYER_STYLE | Object | `{}` | Leaflet style (see https://leafletjs.com/reference-1.3.4.html#path)
 
 ## Signages
 
@@ -122,7 +122,7 @@ Option     | Type      | Default   | Description
 --------|----------|-----------|------------
 SIGNAGES_TILELAYER | Boolean | `false` | Set to `true` to enable the "Signages" layer
 SIGNAGES_DEFAULT_ICON | String(file name) | `""` | Filename of the custom default icon to use for the button
-SIGNAGES_LAYER_STYLE | Object | `{}` | Leaflet style (see http://leafletjs.com/reference-0.7.7.html#path-options)
+SIGNAGES_LAYER_STYLE | Object | `{}` | Leaflet style (see https://leafletjs.com/reference-1.3.4.html#path)
 
 ## Map
 

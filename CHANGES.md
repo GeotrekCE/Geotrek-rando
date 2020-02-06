@@ -1,3 +1,16 @@
+2.22.0-ux / 2020-02-06
+======================
+
+**Enhancements**
+
+* Add current lang in classes for translation menu
+* Add header height for tablet
+
+**Bug fixes**
+
+* Fix class in translation menu
+* Fix touchscreen interactions on map
+
 2.21.5-ux / 2019-11-13
 ======================
 

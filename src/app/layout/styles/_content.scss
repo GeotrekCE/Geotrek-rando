@@ -21,6 +21,10 @@
         @media (min-width: 768px) {
             height: calc(100vh - #{$header-height-desktop} - 50px - 2px); /* 2px don't know why but needed */
         }
+        @media (min-width: 768px) and (max-width: 991px) {
+			top: -$header-height-tablet;
+            padding-top: $header-height-tablet;
+        }
     }
 
     &.layout-detail,
@@ -29,6 +33,10 @@
         @media (min-width: 768px) {
             height: calc(100vh - #{$header-height-desktop} - 50px - 2px);
         }
+        @media (min-width: 768px) and (max-width: 991px) {
+			top: calc(-#{$header-height-tablet} - 50px);
+			padding-top: calc(#{$header-height-tablet} + 50px);
+		}
     }
 
 
