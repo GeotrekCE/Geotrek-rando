@@ -1,9 +1,13 @@
 2.21.6-dev0
 ===================
 
+**Enhancements**
+
+* Add currant lang in classes for translation menu
+
 **Bug fixes**
 
-*
+* Fix class in translation menu
 
 2.21.5 / 2019-10-30
 ===================
