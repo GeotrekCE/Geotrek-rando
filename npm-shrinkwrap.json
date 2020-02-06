@@ -5256,9 +5256,9 @@
       "resolved": "https://registry.npmjs.org/leaflet-geometryutil/-/leaflet-geometryutil-0.9.2.tgz"
     },
     "leaflet-minimap": {
-      "version": "3.0.0",
-      "from": "leaflet-minimap@git+https://github.com/Norkart/Leaflet-MiniMap.git#a2d92d04d9930ae8b480cd489333533b1c08612b",
-      "resolved": "git+https://github.com/Norkart/Leaflet-MiniMap.git#a2d92d04d9930ae8b480cd489333533b1c08612b"
+      "version": "3.6.1",
+      "from": "leaflet-minimap@>=3.6.1 <4.0.0",
+      "resolved": "https://registry.npmjs.org/leaflet-minimap/-/leaflet-minimap-3.6.1.tgz"
     },
     "leaflet-pip": {
       "version": "1.1.0",
