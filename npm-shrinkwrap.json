@@ -5251,16 +5251,9 @@
       "resolved": "https://registry.npmjs.org/leaflet-fullscreen/-/leaflet-fullscreen-1.0.2.tgz"
     },
     "leaflet-geometryutil": {
-      "version": "0.4.0",
-      "from": "leaflet-geometryutil@git+https://github.com/makinacorpus/Leaflet.GeometryUtil.git#4097170a0e0b0f15c2029416dd589e0d6431e304",
-      "resolved": "git+https://github.com/makinacorpus/Leaflet.GeometryUtil.git#4097170a0e0b0f15c2029416dd589e0d6431e304",
-      "dependencies": {
-        "leaflet": {
-          "version": "0.7.7",
-          "from": "leaflet@>=0.7.0 <0.8.0",
-          "resolved": "https://registry.npmjs.org/leaflet/-/leaflet-0.7.7.tgz"
-        }
-      }
+      "version": "0.9.2",
+      "from": "leaflet-geometryutil@>=0.9.2 <0.10.0",
+      "resolved": "https://registry.npmjs.org/leaflet-geometryutil/-/leaflet-geometryutil-0.9.2.tgz"
     },
     "leaflet-minimap": {
       "version": "3.0.0",
