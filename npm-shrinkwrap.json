@@ -5308,16 +5308,9 @@
       "resolved": "https://registry.npmjs.org/leaflet-textpath/-/leaflet-textpath-1.2.0.tgz"
     },
     "leaflet.markercluster": {
-      "version": "0.4.0",
-      "from": "leaflet.markercluster@https://registry.npmjs.org/leaflet.markercluster/-/leaflet.markercluster-0.4.0.tgz",
-      "resolved": "https://registry.npmjs.org/leaflet.markercluster/-/leaflet.markercluster-0.4.0.tgz",
-      "dependencies": {
-        "leaflet": {
-          "version": "0.7.7",
-          "from": "leaflet@~0.7.1",
-          "resolved": "https://registry.npmjs.org/leaflet/-/leaflet-0.7.7.tgz"
-        }
-      }
+      "version": "1.4.1",
+      "from": "leaflet.markercluster@>=1.4.1 <2.0.0",
+      "resolved": "https://registry.npmjs.org/leaflet.markercluster/-/leaflet.markercluster-1.4.1.tgz"
     },
     "levn": {
       "version": "0.3.0",

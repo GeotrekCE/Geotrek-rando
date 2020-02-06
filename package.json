@@ -61,7 +61,7 @@
     "leaflet-minimap": "^3.6.1",
     "leaflet-pip": "^1.1.0",
     "leaflet-textpath": "^1.2.0",
-    "leaflet.markercluster": "^0.4.0",
+    "leaflet.markercluster": "^1.4.1",
     "lodash": "^4.17.4",
     "merge-stream": "^1.0.1",
     "mkdirp": "^0.5.1",
