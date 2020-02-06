@@ -60,7 +60,7 @@
     "leaflet-geometryutil": "^0.9.2",
     "leaflet-minimap": "^3.6.1",
     "leaflet-pip": "^1.1.0",
-    "leaflet-textpath": "git+https://github.com/makinacorpus/Leaflet.TextPath.git#c45041b4687c8c46b9bb39b8f93623c933108d19",
+    "leaflet-textpath": "^1.2.0",
     "leaflet.markercluster": "^0.4.0",
     "lodash": "^4.17.4",
     "merge-stream": "^1.0.1",

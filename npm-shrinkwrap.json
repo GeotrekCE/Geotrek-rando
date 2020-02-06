@@ -5303,9 +5303,9 @@
       }
     },
     "leaflet-textpath": {
-      "version": "0.2.2",
-      "from": "leaflet-textpath@git+https://github.com/makinacorpus/Leaflet.TextPath.git#c45041b4687c8c46b9bb39b8f93623c933108d19",
-      "resolved": "git+https://github.com/makinacorpus/Leaflet.TextPath.git#c45041b4687c8c46b9bb39b8f93623c933108d19"
+      "version": "1.2.0",
+      "from": "leaflet-textpath@>=1.2.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/leaflet-textpath/-/leaflet-textpath-1.2.0.tgz"
     },
     "leaflet.markercluster": {
       "version": "0.4.0",
