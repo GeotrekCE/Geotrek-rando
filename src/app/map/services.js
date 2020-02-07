@@ -251,8 +251,8 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
         });
     };
 
-    this.createLayerFromElement = function createLayerFromElement (element, type, elementLocation, forceRefresh, clickable) {
-        clickable = clickable !== undefined ? clickable : true;
+    this.createLayerFromElement = function createLayerFromElement (element, type, elementLocation, forceRefresh, interactive) {
+        interactive = interactive !== undefined ? interactive : true;
         var deferred = $q.defer();
         var popupSources = {};
         if (type === "geojson" && element.geometry.type !== 'MultiPoint') {
@@ -264,7 +264,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
             }
             var geoStyle = {
                 className: className,
-                clickable: clickable
+                interactive: interactive
             };
 
             if (element.geometry.type === 'Polygon') {

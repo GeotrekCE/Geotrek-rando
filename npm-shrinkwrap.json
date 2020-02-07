@@ -1,6 +1,6 @@
 {
   "name": "geotrekrando",
-  "version": "2.22.0",
+  "version": "2.22.1-ux",
   "dependencies": {
     "@gulp-sourcemaps/identity-map": {
       "version": "1.0.1",
@@ -5303,9 +5303,9 @@
       }
     },
     "leaflet-textpath": {
-      "version": "1.2.0",
-      "from": "leaflet-textpath@>=1.2.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/leaflet-textpath/-/leaflet-textpath-1.2.0.tgz"
+      "version": "1.2.3",
+      "from": "leaflet-textpath@>=1.2.3 <2.0.0",
+      "resolved": "https://registry.npmjs.org/leaflet-textpath/-/leaflet-textpath-1.2.3.tgz"
     },
     "leaflet.markercluster": {
       "version": "1.4.1",
