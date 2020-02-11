@@ -1,4 +1,10 @@
 <ul class="toolbar-actions detail-actions category-{{::result.properties.category.id}}">
+    <li class="toolbar-action previous">
+        <a class="toolbar-action-link" href  ng-click="back2()" tooltip-placement="right" tooltip="{{'BACK_TO_PREVIOUS' | translate}}">
+            <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
+            <span class="toolbar-action-label sr-only">{{'BACK_TO_PREVIOUS' | translate}}</span>
+        </a>
+    </li>
     <li class="toolbar-action back-to-home">
         <a class="toolbar-action-link" href  ng-click="back()" tooltip-placement="right" tooltip="{{'BACK_TO_THE_MAP' | translate}}">
             <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
