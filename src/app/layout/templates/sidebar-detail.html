@@ -5,12 +5,6 @@
             <span class="toolbar-action-label">{{'BACK' | translate}}</span>
         </a>
     </li>
-    <li class="toolbar-action back-to-home">
-        <a class="toolbar-action-link" href  ng-click="back()" tooltip-placement="right" tooltip="{{'BACK_TO_THE_MAP' | translate}}">
-            <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe-double.svg'"></ng-include>
-            <span class="toolbar-action-label">{{'BACK_TO_THE_MAP' | translate}}</span>
-        </a>
-    </li>
     <li class="toolbar-action rep-3d" ng-if="result.properties.contentType === 'trek' && webGLisEnable">
         <a class="toolbar-action-link" href tooltip-placement="bottom" tooltip="{{'3D' | translate}}" ng-click="show3d()">
             <ng-include class="3d-icon svg-icon" src="'/images/icons/3d.svg'"></ng-include>
