@@ -8,6 +8,10 @@
 2.22.1 / 2020-02-07
 ===================
 
+**Enhancements**
+
+* Change back to map to previous page button in detail page
+
 **Bug fixes**
 
 * Fix some bugs after upgrade to Leaflet 1.x
