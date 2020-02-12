@@ -1,8 +1,8 @@
 <ul class="toolbar-actions detail-actions category-{{::result.properties.category.id}}">
     <li class="toolbar-action previous">
-        <a class="toolbar-action-link" href  ng-click="back2()" tooltip-placement="right" tooltip="{{'BACK_TO_PREVIOUS' | translate}}">
+        <a class="toolbar-action-link" href  ng-click="previous()" tooltip-placement="right" tooltip="{{'BACK' | translate}}">
             <ng-include class="stripe-icon svg-icon" src="'/images/icons/stripe.svg'"></ng-include>
-            <span class="toolbar-action-label sr-only">{{'BACK_TO_PREVIOUS' | translate}}</span>
+            <span class="toolbar-action-label">{{'BACK' | translate}}</span>
         </a>
     </li>
     <li class="toolbar-action back-to-home">

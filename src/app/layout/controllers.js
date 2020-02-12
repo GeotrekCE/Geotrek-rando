@@ -139,7 +139,7 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
     };
 
     //back button function called from back button's ng-click="back()"
-    $rootScope.back2 = function back2 () {
+    $rootScope.previous = function previous () {
         window.history.back();
     };
 
