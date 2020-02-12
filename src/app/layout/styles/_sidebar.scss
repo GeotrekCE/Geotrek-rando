@@ -114,6 +114,7 @@
 
 .toolbar-action-label {
     display: none;
+    .previous &,
     .back-to-home & {
         font-weight: bold;
 
