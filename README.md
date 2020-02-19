@@ -12,7 +12,7 @@ _See [Prerequisites](docs/README.md#Prerequisites)._
 - Geotrek-Rando v2 can synchronize only with Geotrek-Admin v2
 - Ubuntu 14.04
 
-### Syncronization
+### Synchronization
 
 _See [Synchronize data](docs/data-sync.md)._
 
