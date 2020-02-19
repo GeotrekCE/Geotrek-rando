@@ -20,6 +20,24 @@
 
     <detail-content-pictures></detail-content-pictures>
 
+<div class="medias detail-medias">
+    <ul class="medias-liste">
+        <li ng-repeat="media in result.properties.videos track by $index"
+            class="poi-media media"
+            ng-class="{video: media.backend === 'Youtube' || media.backend === 'Vimeo', audio: media.backend === 'SoundCloud'}">
+            <a href class="poi-media-link primary-hover-c" ng-click="openPlayer(media)" title="{{::media.legend}}">
+                <i ng-if="media.backend === 'Youtube' || media.backend === 'Vimeo'" class="fa fa-file-video-o"></i>
+                <i ng-if="media.backend === 'SoundCloud'" class="fa fa-file-audio-o"></i>
+            </a>
+        </li>
+        <li ng-repeat="file in result.properties.files track by $index" class="poi-media media file">
+            <a href="{{::file.url}}" title="{{::file.legend}}" class="poi-media-link primary-hover-c">
+                <i class="fa fa-file-o"></i> {{::file.legend}}
+            </a>
+        </li>
+    </ul>
+</div>
+
     <div class="detail-content-approved" ng-if="result.properties.approved">
         <img ng-src="{{::approved}}" ng-alt="{{::approvedLabel}}">
     </div>
