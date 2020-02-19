@@ -9,6 +9,7 @@ var dependencies = [
     'rando.commons',
     'rando.treks',
     'rando.sensitive',
+    'rando.media',
     'rando.pois',
     'rando.services',
     'rando.items',
@@ -101,6 +102,7 @@ require('./layout');
 require('./loader');
 require('./treks');
 require('./sensitive');
+require('./media');
 require('./pois');
 require('./services');
 require('./items-list');

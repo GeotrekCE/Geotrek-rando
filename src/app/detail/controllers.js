@@ -70,7 +70,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
 
     $scope.openPlayer = function openPlayer (media) {
         $modal.open({
-            template: require('./templates/media-modal.html'),
+            template: require('../media/templates/media-modal.html'),
             controller: 'MediaController',
             resolve: {
                 media: function () {
@@ -452,28 +452,6 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
 }
 
 
-function MediaController(media, $scope, $timeout, $modalInstance) {
-    function initPlayer() {
-        var player = document.createElement('iframe');
-        player.width = '100%';
-        player.height = '100%';
-        player.frameborder = '0';
-        player.setAttribute('allowfullscreen', '');
-        player.setAttribute('webkitallowfullscreen', '');
-        player.setAttribute('mozallowfullscreen', '');
-        player.src = media.url;
-        document.querySelector('#media-player').appendChild(player);
-
-    }
-
-    $scope.close = function close () {
-        $modalInstance.dismiss('close');
-    };
-
-    $timeout(initPlayer, 500);
-}
-
 module.exports = {
-    DetailController: DetailController,
-    MediaController: MediaController
+    DetailController: DetailController
 };

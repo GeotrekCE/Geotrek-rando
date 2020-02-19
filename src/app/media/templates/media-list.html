@@ -1,0 +1,16 @@
+
+<div class="medias poi-medias">
+    <ul class="medias-liste poi-media-list">
+        <li ng-repeat="media in poi.properties.videos track by $index" class="poi-media media" ng-class="{video: media.backend === 'Youtube' || media.backend === 'Vimeo', audio: media.backend === 'SoundCloud'}">
+            <a href class="poi-media-link primary-hover-c" ng-click="openPlayer(media)" title="{{::media.legend}}">
+                <i ng-if="media.backend === 'Youtube' || media.backend === 'Vimeo'" class="fa fa-file-video-o"></i>
+                <i ng-if="media.backend === 'SoundCloud'" class="fa fa-file-audio-o"></i>
+            </a>
+        </li>
+        <li ng-repeat="file in poi.properties.files track by $index" class="poi-media media file">
+            <a href="{{::file.url}}" title="{{::file.legend}}" class="poi-media-link primary-hover-c">
+                <i class="fa fa-file-o"></i> {{::file.legend}}
+            </a>
+        </li>
+    </ul>
+</div>
