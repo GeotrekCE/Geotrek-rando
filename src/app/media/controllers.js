@@ -24,6 +24,5 @@ function MediaController(media, $scope, $timeout, $modalInstance) {
 }
 
 module.exports = {
-    // MediaListController: MediaListController,
     MediaController: MediaController
 };

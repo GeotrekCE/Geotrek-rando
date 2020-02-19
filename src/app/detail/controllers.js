@@ -416,6 +416,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                     $rootScope.elementsLoading --;
                     getInterests(result, forceRefresh);
                     $rootScope.$emit('initGallery', result.properties.pictures);
+                    $rootScope.$emit('initMedia', result.properties.videos);
                     $scope.result.informations = detailService.hasInfos(result.properties, 'duration_pretty', 'duration', 'difficulty.label', 'levels', 'route', 'ascent', 'depth', 'networks', 'target_audience');
                     $rootScope.$emit('detailUpdated', forceRefresh);
                 },
