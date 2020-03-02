@@ -33,6 +33,14 @@ function detailContentPictures() {
     };
 }
 
+function detailContentMedia() {
+    return {
+        restrict: 'E',
+        replace: true,
+        template: require('./templates/detail-content-media.html')
+    };
+}
+
 function detailContentElevation() {
     return {
         restrict: 'E',
@@ -94,6 +102,7 @@ module.exports = {
     detailContent:           detailContent,
     detailContentMeta:       detailContentMeta,
     detailContentPictures:   detailContentPictures,
+    detailContentMedia:      detailContentMedia,
     detailContentFromTo:     detailContentFromTo,
     detailContentEventsInfo: detailContentEventsInfo,
     detailContentElevation:  detailContentElevation,

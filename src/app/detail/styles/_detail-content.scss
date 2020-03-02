@@ -416,6 +416,16 @@
     }
 }
 
+.detail-content-medias {
+    margin: 1.5em 2rem 0 2rem;
+    h3 {
+        margin-bottom: .5em;
+    }
+    a {
+        color: $secondary-color;
+    }
+}
+
 .detail-content-elevation {
 
     margin: 1.5em 2rem 0 2rem;
