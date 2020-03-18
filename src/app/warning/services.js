@@ -50,6 +50,7 @@ function WarningService(translationService, settingsFactory, $resource, $http, $
                 return str.join("&");
             },
             data: {
+                name: "Anonym",
                 email: formData.email,
                 category: formData.category,
                 comment: formData.comment,
