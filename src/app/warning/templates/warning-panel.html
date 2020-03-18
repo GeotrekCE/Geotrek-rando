@@ -5,12 +5,12 @@
     </div>
     <form name="warningForm" ng-show="!warningStatus">
 
+        <p class="help-block">
+            {{'HELP_EMAIL_GPDR' | translate}}
+        </p>
         <div class="form-group">
             <label for="warning-email">{{'FORM_EMAIL' | translate}}</label>
             <input id="warning-email" class="form-control" type="email" ng-model="warning.email" required="">
-            <p class="help-block">
-                {{'HELP_EMAIL_GPDR' | translate}}
-            </p>
         </div>
         <div class="form-group">
             <label for="warning-category">{{'FORM_CATEGORY' | translate}}</label>
