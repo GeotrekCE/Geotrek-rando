@@ -316,7 +316,7 @@ msgstr "Notificar un error o un problema"
 msgid "FORM_NAME"
 msgstr "Nom"
 
-msgid "HELP_EMAIL_GPDR"
+msgid "REPORT_GPDR_DISCLAIMER"
 msgstr ""
 
 msgid "FORM_EMAIL"

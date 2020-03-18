@@ -351,7 +351,7 @@ msgstr "Attento"
 msgid "FORM_NAME"
 msgstr ""
 
-msgid "HELP_EMAIL_GPDR"
+msgid "REPORT_GPDR_DISCLAIMER"
 msgstr ""
 
 msgid "FORM_EMAIL"

@@ -5,7 +5,7 @@
 
 * Change warning form to be BPDR compliant
     - remove name field
-    - send to API default name "Anonym"
+    - send to API default name "Anonymous"
     - add a text about personal data
 
 

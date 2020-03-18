@@ -129,10 +129,11 @@ Work in progress
 
 ### Warning form
 
-Only email is required to submit reports, and an information should be displayed
+Only email is required to submit reports, and a disclaimer should be displayed
 for users sending a report.
 
-This text can be overriden in translations (see [Translations section](#translations)).
+This text can be changed by override `REPORT_GPDR_DISCLAIMER`
+in translations (see [Translations section](#translations)).
 
 
 <!-- Internal links -->
