@@ -362,7 +362,7 @@ msgid "FORM_NAME"
 msgstr "Name"
 
 msgid "REPORT_GPDR_DISCLAIMER"
-msgstr "These information will be used by the organisation, "
+msgstr "These information will be used by {{ organisation }}, "
 "which commit to not sell your personnal data to thir party. "
 "You have the right to read, modify, fix or delete your personal "
 "data (art. 34 de la loi \"Informatique et Libertés\"). "

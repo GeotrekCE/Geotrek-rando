@@ -123,16 +123,12 @@ msgstr "Discover the treks in the national park!"
 
 Two sections are involved in GPDR Compliance: Google analytics and report form.
 
-### Google analytics
-
-Work in progress
-
 ### Warning form
 
 Only email is required to submit reports, and a disclaimer should be displayed
 for users sending a report.
 
-This text can be changed by override `REPORT_GPDR_DISCLAIMER`
+This text can be changed by overriding `REPORT_GPDR_DISCLAIMER`
 in translations (see [Translations section](#translations)).
 
 
