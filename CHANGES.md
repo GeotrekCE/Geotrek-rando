@@ -1,6 +1,14 @@
 2.23.1-dev0
 ===================
 
+**Enhancements**
+
+* Change warning form to be BPDR compliant
+    - remove name field
+    - send to API default name "Anonym"
+    - add a text about personal data
+
+
 **Bug fixes**
 
 *
