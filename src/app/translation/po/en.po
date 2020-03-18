@@ -361,6 +361,12 @@ msgstr "Signal a mistake or an issue"
 msgid "FORM_NAME"
 msgstr "Name"
 
+msgid "HELP_EMAIL_GPDR"
+msgstr "Your email will only be used for this warning by the responsible, "
+"in order to contact you if more details are needed. "
+"It will not be conserved more than 1 year, and the responsible "
+"commit to not sell your personnal data to thir party."
+
 msgid "FORM_EMAIL"
 msgstr "Email"
 
