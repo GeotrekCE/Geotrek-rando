@@ -1,6 +1,13 @@
 2.23.1-dev0
 ===================
 
+**Enhancements**
+
+* Change warning form to be GPDR compliant
+    - remove name field
+    - send to API default name "Anonymous"
+    - add a text about personal data
+
 **Bug fixes**
 
 *

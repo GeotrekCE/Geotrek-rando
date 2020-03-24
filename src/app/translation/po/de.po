@@ -351,6 +351,9 @@ msgstr "Problem oder Fehler signalisieren"
 msgid "FORM_NAME"
 msgstr "Name"
 
+msgid "REPORT_GPDR_DISCLAIMER"
+msgstr ""
+
 msgid "FORM_EMAIL"
 msgstr "Email"
 

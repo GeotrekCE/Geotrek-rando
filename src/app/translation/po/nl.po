@@ -351,6 +351,9 @@ msgstr "Een probleem of fout waarnemen"
 msgid "FORM_NAME"
 msgstr "Naam"
 
+msgid "REPORT_GPDR_DISCLAIMER"
+msgstr ""
+
 msgid "FORM_EMAIL"
 msgstr "E-mail"
 

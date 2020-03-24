@@ -339,6 +339,9 @@ msgstr "Señalar un problema"
 msgid "FORM_NAME"
 msgstr "Nombre"
 
+msgid "REPORT_GPDR_DISCLAIMER"
+msgstr ""
+
 msgid "FORM_EMAIL"
 msgstr "Correo electrónico"
 

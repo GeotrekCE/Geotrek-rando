@@ -4,10 +4,7 @@
         <span>x</span>
     </div>
     <form name="warningForm" ng-show="!warningStatus">
-        <div class="form-group">
-            <label for="warning-name">{{'FORM_NAME' | translate}}</label>
-            <input id="warning-name" class="form-control" type="text" ng-model="warning.name" required="">
-        </div>
+
         <div class="form-group">
             <label for="warning-email">{{'FORM_EMAIL' | translate}}</label>
             <input id="warning-email" class="form-control" type="email" ng-model="warning.email" required="">
@@ -28,6 +25,10 @@
             <input id="warning-location" type="hidden" ng-model="warning.location" required="">
         </div>
         <input type="submit" class="btn btn-default" value="{{'FORM_SEND' | translate}}" ng-click="sendWarning()">
+
+        <p class="help-block rgpd-disclaimer">
+            {{'REPORT_GPDR_DISCLAIMER' | translate}}
+        </p>
     </form>
     <div class="alert alert-success" role="alert" ng-show="warningStatus === 'success'">
         <div class="icon">

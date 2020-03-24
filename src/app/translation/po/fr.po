@@ -360,6 +360,14 @@ msgstr "Signaler un problème ou une erreur"
 msgid "FORM_NAME"
 msgstr "Nom"
 
+msgid "REPORT_GPDR_DISCLAIMER"
+msgstr "Ces informations sont destinées à {{ organisme }}, "
+"qui s'engage à ne pas les communiquer à des tiers. "
+"Vous disposez d'un droit d'accès, de modification, "
+"de rectification et de suppression des données qui "
+"vous concernent (art. 34 de la loi \"Informatique et Libertés\"). "
+"Pour l'exercer, adressez-vous à {{ adresse }}"
+
 msgid "FORM_EMAIL"
 msgstr "Email"
 
