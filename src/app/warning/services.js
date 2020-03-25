@@ -1,6 +1,6 @@
 'use strict';
 
-function WarningService(translationService, settingsFactory, $resource, $http, $q) {
+function WarningService(translationService, settingsFactory, globalSettings, $resource, $http, $q) {
     var self = this;
 
     this.getWarningCategories = function getWarningCategories (forceRefresh) {
@@ -13,6 +13,9 @@ function WarningService(translationService, settingsFactory, $resource, $http, $
         } else {
             var currentLang = translationService.getCurrentLang();
             var url = settingsFactory.warningCategoriesUrl.replace(/\$lang/, currentLang);
+            if (globalSettings.WARNING_ENABLE_SURICATE) {
+                var url = settingsFactory.warningOptionsUrl.replace(/\$lang/, currentLang);
+            }
             var requests = $resource(url, {}, {
                 query: {
                     method: 'GET',
@@ -27,7 +30,6 @@ function WarningService(translationService, settingsFactory, $resource, $http, $
                     self._warningCategories = categories;
                     deferred.resolve(categories);
                 });
-
         }
 
         return deferred.promise;
@@ -52,7 +54,9 @@ function WarningService(translationService, settingsFactory, $resource, $http, $
             data: {
                 name: "Anonymous", // keep compatibility with Geotrek-admin <= 2.32.11, with name field required
                 email: formData.email,
+                activity: globalSettings.WARNING_ENABLE_SURICATE && formData.activity || '',
                 category: formData.category,
+                magnitudeProblem: globalSettings.WARNING_ENABLE_SURICATE && formData.magnitudeProblem || '',
                 comment: formData.comment,
                 geom: '{"type": "Point", "coordinates": [' + formData.location.lng + ',' + formData.location.lat + ']}'
             }
