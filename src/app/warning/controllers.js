@@ -76,13 +76,16 @@ function WarningPanelController($scope, $rootScope, $q, resultsService, WarningS
                     $scope.warningStatus = null;
                     $scope.warning = {};
                     $scope.warning.location = utilsFactory.getStartPoint($scope.result);
-                    $scope.warningCategories = categories;
-                    $scope.warning.category = categories[0].id.toString();
                     if (globalSettings.WARNING_ENABLE_SURICATE) {
-                        $scope.warningActivities = categories;
-                        $scope.warning.activity = categories[0].id.toString();
-                        $scope.warningMagnitudeProblems = categories;
-                        $scope.warning.magnitudeProblem = categories[0].id.toString();
+                        $scope.warningCategories = categories[0].categories;
+                        $scope.warning.category = categories[0].categories[0].id.toString();
+                        $scope.warningActivities = categories[0].activities;
+                        $scope.warning.activity = categories[0].activities[0].id.toString();
+                        $scope.warningMagnitudeProblems = categories[0].magnitudeProblems;
+                        $scope.warning.magnitudeProblem = categories[0].magnitudeProblems[0].id.toString();
+                    } else {
+                        $scope.warningCategories = categories;
+                        $scope.warning.category = categories[0].id.toString();
                     }
                     WarningMapService.getMap('warning-map', $scope.result);
                     WarningMapService.addCallback(updateLocation);
