@@ -1,0 +1,7 @@
+[
+    {
+        "categories": [{"id": 1, "label": "Test 1"}, {"id": 2, "label": "Test 2"}],
+        "activities": [{"id": 1, "label": "Kayak"}, {"id": 2, "label": "VTT"}],
+        "magnitudeProblem": [{"id": 1, "label": "Utilisation possible"}, {"id": 2, "label": "Utilisation difficile"}, {"id": 3, "label": "Utilisation impossible"}]
+    }
+]

@@ -1,8 +1,9 @@
 'use strict';
 
-function WarningPanelController($scope, $rootScope, $q, resultsService, WarningService, WarningMapService, utilsFactory) {
+function WarningPanelController($scope, $rootScope, $q, resultsService, WarningService, WarningMapService, utilsFactory, globalSettings) {
 
     var onMap = false;
+    $scope.warningEnableSuricate = globalSettings.WARNING_ENABLE_SURICATE;
 
     function updateMapWithDetails(forceRefresh) {
         var deferred = $q.defer();
@@ -77,6 +78,12 @@ function WarningPanelController($scope, $rootScope, $q, resultsService, WarningS
                     $scope.warning.location = utilsFactory.getStartPoint($scope.result);
                     $scope.warningCategories = categories;
                     $scope.warning.category = categories[0].id.toString();
+                    if (globalSettings.WARNING_ENABLE_SURICATE) {
+                        $scope.warningActivities = categories;
+                        $scope.warning.activity = categories[0].id.toString();
+                        $scope.warningMagnitudeProblems = categories;
+                        $scope.warning.magnitudeProblem = categories[0].id.toString();
+                    }
                     WarningMapService.getMap('warning-map', $scope.result);
                     WarningMapService.addCallback(updateLocation);
                     updateMapWithDetails(true);
