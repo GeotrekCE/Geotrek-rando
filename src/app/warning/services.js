@@ -12,17 +12,25 @@ function WarningService(translationService, settingsFactory, globalSettings, $re
 
         } else {
             var currentLang = translationService.getCurrentLang();
-            var url = settingsFactory.warningCategoriesUrl.replace(/\$lang/, currentLang);
             if (globalSettings.WARNING_ENABLE_SURICATE) {
                 var url = settingsFactory.warningOptionsUrl.replace(/\$lang/, currentLang);
+                var requests = $resource(url, {}, {
+                    query: {
+                        method: 'GET',
+                        isObject: true,
+                        cache: true
+                    }
+                }, {stripTrailingSlashes: false});
+            } else {
+                var url = settingsFactory.warningCategoriesUrl.replace(/\$lang/, currentLang);
+                var requests = $resource(url, {}, {
+                    query: {
+                        method: 'GET',
+                        isArray: true,
+                        cache: true
+                    }
+                }, {stripTrailingSlashes: false});
             }
-            var requests = $resource(url, {}, {
-                query: {
-                    method: 'GET',
-                    isArray: true,
-                    cache: true
-                }
-            }, {stripTrailingSlashes: false});
 
             requests.query().$promise
                 .then(function (data) {

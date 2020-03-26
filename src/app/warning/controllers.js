@@ -77,12 +77,12 @@ function WarningPanelController($scope, $rootScope, $q, resultsService, WarningS
                     $scope.warning = {};
                     $scope.warning.location = utilsFactory.getStartPoint($scope.result);
                     if (globalSettings.WARNING_ENABLE_SURICATE) {
-                        $scope.warningCategories = categories[0].categories;
-                        $scope.warning.category = categories[0].categories[0].id.toString();
-                        $scope.warningActivities = categories[0].activities;
-                        $scope.warning.activity = categories[0].activities[0].id.toString();
-                        $scope.warningMagnitudeProblems = categories[0].magnitudeProblems;
-                        $scope.warning.magnitudeProblem = categories[0].magnitudeProblems[0].id.toString();
+                        $scope.warningCategories = categories.categories;
+                        $scope.warning.category = categories.categories[0].id.toString();
+                        $scope.warningActivities = categories.activities;
+                        $scope.warning.activity = categories.activities[0].id.toString();
+                        $scope.warningMagnitudeProblems = categories.magnitudeProblems;
+                        $scope.warning.magnitudeProblem = categories.magnitudeProblems[0].id.toString();
                     } else {
                         $scope.warningCategories = categories;
                         $scope.warning.category = categories[0].id.toString();
