@@ -124,6 +124,12 @@ SIGNAGES_TILELAYER | Boolean | `false` | Set to `true` to enable the "Signages" 
 SIGNAGES_DEFAULT_ICON | String(file name) | `""` | Filename of the custom default icon to use for the button
 SIGNAGES_LAYER_STYLE | Object | `{}` | Leaflet style (see https://leafletjs.com/reference-1.3.4.html#path)
 
+## Warnings / feedback
+
+Option     | Type      | Default   | Description
+--------|----------|-----------|------------
+WARNING_ENABLE_SURICATE | Boolean | `false` | Set to `true` to enable the "Suricate" options form (only available for Geotrek-admin >= 2.32.12)
+
 ## Map
 
 ### Main options
@@ -210,6 +216,7 @@ DEM_FILE | "dem.json" | DEM file
 PROFILE_FILE | "profile.json" | Profile file
 WARNING_CAT_DIR | "feedback" | Warning catefories dir file
 WARNING_CAT_FILE | "categories.json" | Warning categories file
+WARNING_OPT_FILE | "options.json" | Warning options file (for Suricate support)
 WARNING_SUBMIT_URL | "reports/report" | Warning submit URL
 STYLES_CONFIG_FILE | "styles.json" | Custom styles variables
 APPROVED_BIG | "images/approved-big.png" | Default big image for approved label (for detail page)
