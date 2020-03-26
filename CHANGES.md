@@ -18,6 +18,12 @@
 * Add translation file for portugese
 * Fix some translation error
 
+* Add support for Suricate options in warning form
+    - add setting `WARNING_ENABLE_SURICATE` to activate it (default: `false`)
+    - add activity and magnitude problem fields, displayed only if suricate is enabled
+    - get options list from endpoint if suricate is enabled
+    **Warning:** this feature is only available for Geotrek-admin >= 2.32.12
+
 **Bug fixes**
 
 * Fix open PDF from POI and detail page
