@@ -357,8 +357,14 @@ msgstr ""
 msgid "FORM_EMAIL"
 msgstr "Email"
 
+msgid "FORM_ACTIVITY"
+msgstr "Activité"
+
 msgid "FORM_CATEGORY"
 msgstr "Catégorie"
+
+msgid "FORM_MAGNITUDE_PROBLEM"
+msgstr "Ampleur du problème"
 
 msgid "FORM_COMMENT"
 msgstr "Commentaire"
