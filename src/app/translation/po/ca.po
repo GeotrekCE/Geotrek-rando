@@ -322,8 +322,14 @@ msgstr ""
 msgid "FORM_EMAIL"
 msgstr "Correu electrònic"
 
+msgid "FORM_ACTIVITY"
+msgstr "Activitia"
+
 msgid "FORM_CATEGORY"
 msgstr "Categoria"
+
+msgid "FORM_MAGNITUDE_PROBLEM"
+msgstr ""
 
 msgid "FORM_COMMENT"
 msgstr "Comentari"

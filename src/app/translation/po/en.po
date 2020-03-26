@@ -371,8 +371,14 @@ msgstr "These information will be used by {{ organisation }}, "
 msgid "FORM_EMAIL"
 msgstr "Email"
 
+msgid "FORM_ACTIVITY"
+msgstr "Activity"
+
 msgid "FORM_CATEGORY"
 msgstr "Category"
+
+msgid "FORM_MAGNITUDE_PROBLEM"
+msgstr "Magnitude of the problem"
 
 msgid "FORM_COMMENT"
 msgstr "Comment"
