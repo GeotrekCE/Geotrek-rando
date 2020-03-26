@@ -124,6 +124,12 @@ SIGNAGES_TILELAYER | Boolean | `false` | Set to `true` to enable the "Signages" 
 SIGNAGES_DEFAULT_ICON | String(file name) | `""` | Filename of the custom default icon to use for the button
 SIGNAGES_LAYER_STYLE | Object | `{}` | Leaflet style (see https://leafletjs.com/reference-1.3.4.html#path)
 
+## Warnings / feedback
+
+Option     | Type      | Default   | Description
+--------|----------|-----------|------------
+WARNING_ENABLE_SURICATE | Boolean | `false` | Set to `true` to enable the "Suricate" options form (only available for Geotrek-admin >= 2.32.12)
+
 ## Map
 
 ### Main options
