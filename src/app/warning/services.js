@@ -64,7 +64,7 @@ function WarningService(translationService, settingsFactory, globalSettings, $re
                 email: formData.email,
                 activity: globalSettings.WARNING_ENABLE_SURICATE && formData.activity || '',
                 category: formData.category,
-                magnitudeProblem: globalSettings.WARNING_ENABLE_SURICATE && formData.magnitudeProblem || '',
+                problem_magnitude: globalSettings.WARNING_ENABLE_SURICATE && formData.magnitudeProblem || '',
                 comment: formData.comment,
                 geom: '{"type": "Point", "coordinates": [' + formData.location.lng + ',' + formData.location.lat + ']}'
             }
