@@ -80,9 +80,13 @@ function WarningPanelController($scope, $rootScope, $q, resultsService, WarningS
                         $scope.warningCategories = categories.categories;
                         $scope.warning.category = categories.categories[0].id.toString();
                         $scope.warningActivities = categories.activities;
-                        $scope.warning.activity = categories.activities[0].id.toString();
+                        if (categories.activities.length !== 0) {
+                            $scope.warning.activity = categories.activities[0].id.toString();
+                        }
                         $scope.warningMagnitudeProblems = categories.magnitudeProblems;
-                        $scope.warning.magnitudeProblem = categories.magnitudeProblems[0].id.toString();
+                        if (categories.magnitudeProblems.length !== 0) {
+                            $scope.warning.magnitudeProblem = categories.magnitudeProblems[0].id.toString();
+                        }
                     } else {
                         $scope.warningCategories = categories;
                         $scope.warning.category = categories[0].id.toString();

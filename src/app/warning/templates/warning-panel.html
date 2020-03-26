@@ -5,9 +5,9 @@
     </div>
     <form name="warningForm" ng-show="!warningStatus">
 
-        <div class="form-group" ng-if="warningEnableSuricate">
+        <div class="form-group" ng-if="warningEnableSuricate && warningActivities.length !== 0">
             <label for="warning-activity">{{'FORM_ACTIVITY' | translate}}</label>
-            <select id="warning-activity" class="form-control" ng-model="warning.activity" required="">
+            <select id="warning-activity" class="form-control" ng-model="warning.activity">
                 <option ng-repeat="activity in warningActivities" value="{{activity.id}}">{{activity.label}}</option>
             </select>
         </div>
@@ -17,7 +17,7 @@
                 <option ng-repeat="category in warningCategories" value="{{category.id}}">{{category.label}}</option>
             </select>
         </div>
-        <div class="form-group" ng-if="warningEnableSuricate">
+        <div class="form-group" ng-if="warningEnableSuricate && warningMagnitudeProblems.length !== 0">
             <label for="warning-magnitudeProblem">{{'FORM_MAGNITUDE_PROBLEM' | translate}}</label><br>
             <label ng-repeat="magnitudeProblem in warningMagnitudeProblems" class="radio-inline">
                 <input type="radio" name="magnitudeProblem" value="{{magnitudeProblem.id}}"
