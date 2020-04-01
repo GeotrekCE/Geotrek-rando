@@ -1,9 +1,9 @@
 'use strict';
 
 describe('Warning panel ', function() {
-    var panel, openButton, closeButton, form, email, category, comment, location, submit;
+    var panel, openButton, closeButton, form, email, category, comment, location, submit, activity, magnitudeProblem;
     var constants = require('../../../config/settings.default.json');
-    var activity, magnitudeProblem;
+    var hasAllOptions = true;
     beforeAll(function () {
         browser.get('/');
         browser.executeScript(function (constants) {
@@ -23,7 +23,6 @@ describe('Warning panel ', function() {
         comment      = element(by.css('.warning-panel form #warning-comment'));
         location     = element(by.css('.warning-panel form #warning-location'));
         submit       = element(by.css('.warning-panel form input[type="submit"]'));
-        hasAllOptions = true;
     });
 
     it('should have the its button on page sidebar', function() {
