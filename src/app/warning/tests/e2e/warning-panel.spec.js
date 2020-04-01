@@ -3,7 +3,6 @@
 describe('Warning panel ', function() {
     var panel, openButton, closeButton, form, email, category, comment, location, submit, activity, magnitudeProblem;
     var constants = require('../../../config/settings.default.json');
-    var hasAllOptions = true;
     beforeAll(function () {
         browser.get('/');
         browser.executeScript(function (constants) {
@@ -60,7 +59,7 @@ describe('Warning panel ', function() {
     });
 
     it('should not display activity field', function() {
-        expect(activity.isPresent()).toBe(true);
+        expect(activity.isPresent()).toBe(false);
         activity.sendKeys(1);
     });
 
@@ -70,7 +69,7 @@ describe('Warning panel ', function() {
     });
 
     it('should not display magnitude problem field', function() {
-        expect(magnitudeProblem.isPresent()).toBe(true);
+        expect(magnitudeProblem.isPresent()).toBe(false);
         activity.sendKeys(1);
     });
 
