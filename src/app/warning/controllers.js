@@ -3,7 +3,6 @@
 function WarningPanelController($scope, $rootScope, $q, resultsService, WarningService, WarningMapService, utilsFactory, globalSettings) {
 
     var onMap = false;
-    $scope.warningEnableSuricate = globalSettings.WARNING_ENABLE_SURICATE;
 
     function updateMapWithDetails(forceRefresh) {
         var deferred = $q.defer();
