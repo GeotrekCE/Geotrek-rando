@@ -61,7 +61,6 @@ describe('Warning panel ', function() {
 
     it('should not display activity field', function() {
         expect(activity.isPresent()).toBe(true);
-        expect(activity.getElementsByTagName('option').length).toBe(2);
         activity.sendKeys(1);
     });
 
@@ -72,7 +71,6 @@ describe('Warning panel ', function() {
 
     it('should not display magnitude problem field', function() {
         expect(magnitudeProblem.isPresent()).toBe(true);
-        expect(magnitudeProblem.getElementsByTagName('option').length).toBe(3);
         activity.sendKeys(1);
     });
 
