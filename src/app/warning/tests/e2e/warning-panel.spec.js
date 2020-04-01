@@ -60,7 +60,7 @@ describe('Warning panel ', function() {
     });
 
     it('should not display activity field', function() {
-        expect(activity.toBeFalsy())
+        expect(activity).toBeFalsy()
     });
 
     it('should already have a value for category field', function() {
@@ -69,7 +69,7 @@ describe('Warning panel ', function() {
     });
 
     it('should not display magnitude problem field', function() {
-        expect(activity.toBeFalsy())
+        expect(magnitudeProblem).toBeFalsy()
     });
 
     it('should validate comment field if not empty', function() {
