@@ -21,7 +21,8 @@
             <label for="warning-magnitudeProblem">{{'FORM_MAGNITUDE_PROBLEM' | translate}}</label><br>
             <label ng-repeat="magnitudeProblem in warningMagnitudeProblems" class="radio-inline">
                 <input type="radio" name="magnitudeProblem" value="{{magnitudeProblem.id}}"
-                    id="{{magnitudeProblem.id}}">
+                    ng-model="warning.magnitudeProblem"
+                    id="warning-magnitudeProblem-{{magnitudeProblem.id}}">
                     {{magnitudeProblem.label}}
             </label>
             </select>

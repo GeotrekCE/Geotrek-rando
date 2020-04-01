@@ -68,9 +68,9 @@ function WarningService(translationService, settingsFactory, globalSettings, $re
             data: {
                 name: "Anonymous", // keep compatibility with Geotrek-admin <= 2.32.11, with name field required
                 email: formData.email,
-                activity: globalSettings.WARNING_ENABLE_SURICATE && formData.activity || '',
+                activity: formData.activity || '',
                 category: formData.category,
-                problem_magnitude: globalSettings.WARNING_ENABLE_SURICATE && formData.magnitudeProblem || '',
+                problem_magnitude: formData.magnitudeProblem || '',
                 comment: formData.comment,
                 geom: '{"type": "Point", "coordinates": [' + formData.location.lng + ',' + formData.location.lat + ']}'
             }
