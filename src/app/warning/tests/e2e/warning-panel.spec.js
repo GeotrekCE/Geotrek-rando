@@ -3,6 +3,7 @@
 describe('Warning panel ', function() {
     var panel, openButton, closeButton, form, email, category, comment, location, submit;
     var constants = require('../../../config/settings.default.json');
+    var activity, magnitudeProblem;
     beforeAll(function () {
         browser.get('/');
         browser.executeScript(function (constants) {
@@ -16,7 +17,9 @@ describe('Warning panel ', function() {
         panel        = element(by.css('.warning-panel'));
         form         = element(by.css('.warning-panel form'));
         email        = element(by.css('.warning-panel form #warning-email'));
+        // activity     = element(by.css('.warning-panel form #warning-activity'));
         category     = element(by.css('.warning-panel form #warning-category'));
+        // magnitudeProblem     = element(by.css('.warning-panel form #warning-magnitudeProblem'));
         comment      = element(by.css('.warning-panel form #warning-comment'));
         location     = element(by.css('.warning-panel form #warning-location'));
         submit       = element(by.css('.warning-panel form input[type="submit"]'));
@@ -56,9 +59,17 @@ describe('Warning panel ', function() {
         expect(email.getAttribute('class')).toMatch('ng-valid');
     });
 
+    it('should not display activity field', function() {
+        expect(activity.toBeFalsy())
+    });
+
     it('should already have a value for category field', function() {
         expect(category.getAttribute('class')).toMatch('untouched');
         expect(category.getAttribute('class')).toMatch('ng-valid');
+    });
+
+    it('should not display magnitude problem field', function() {
+        expect(activity.toBeFalsy())
     });
 
     it('should validate comment field if not empty', function() {
