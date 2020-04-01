@@ -23,6 +23,7 @@ describe('Warning panel ', function() {
         comment      = element(by.css('.warning-panel form #warning-comment'));
         location     = element(by.css('.warning-panel form #warning-location'));
         submit       = element(by.css('.warning-panel form input[type="submit"]'));
+        hasAllOptions = true;
     });
 
     it('should have the its button on page sidebar', function() {
