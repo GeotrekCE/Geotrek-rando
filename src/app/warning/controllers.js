@@ -71,12 +71,13 @@ function WarningPanelController($scope, $rootScope, $q, resultsService, WarningS
     rootScopeEvents.push(
         $rootScope.$on('showWarningPanel', function (event, args) {
             $scope.result = args.result;
+            $scope.warningStatus = null;
+            $scope.warning = {};
+            $scope.warning.location = utilsFactory.getStartPoint($scope.result);
             WarningService.getWarningCategories()
                 .then(function (categories) {
-                    $scope.warningStatus = null;
-                    $scope.warning = {};
-                    $scope.warning.location = utilsFactory.getStartPoint($scope.result);
-                    if (globalSettings.WARNING_ENABLE_SURICATE) {
+                    $scope.hasAllOptions = categories.hasOwnProperty('activities')
+                    if ($scope.hasAllOptions) {
                         $scope.warningCategories = categories.categories;
                         $scope.warning.category = categories.categories[0].id.toString();
                         $scope.warningActivities = categories.activities;

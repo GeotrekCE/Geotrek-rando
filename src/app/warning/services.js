@@ -12,32 +12,38 @@ function WarningService(translationService, settingsFactory, globalSettings, $re
 
         } else {
             var currentLang = translationService.getCurrentLang();
-            if (globalSettings.WARNING_ENABLE_SURICATE) {
-                var url = settingsFactory.warningOptionsUrl.replace(/\$lang/, currentLang);
-                var requests = $resource(url, {}, {
-                    query: {
-                        method: 'GET',
-                        isObject: true,
-                        cache: true
-                    }
-                }, {stripTrailingSlashes: false});
-            } else {
-                var url = settingsFactory.warningCategoriesUrl.replace(/\$lang/, currentLang);
-                var requests = $resource(url, {}, {
-                    query: {
-                        method: 'GET',
-                        isArray: true,
-                        cache: true
-                    }
-                }, {stripTrailingSlashes: false});
-            }
+            var urlOptions = settingsFactory.warningOptionsUrl.replace(/\$lang/, currentLang);
+            var urlCategories = settingsFactory.warningCategoriesUrl.replace(/\$lang/, currentLang);
+            var requests = $resource(urlOptions, {}, {
+                query: {
+                    method: 'GET',
+                    isArray: false,
+                    cache: true
+                }
+            }, {stripTrailingSlashes: false});
 
             requests.query().$promise
                 .then(function (data) {
                     var categories = angular.fromJson(data);
                     self._warningCategories = categories;
                     deferred.resolve(categories);
+                }, function() {
+                    var requests = $resource(urlCategories, {}, {
+                        query: {
+                            method: 'GET',
+                            isArray: true,
+                            cache: true
+                        }
+                    }, {stripTrailingSlashes: false});
+
+                    requests.query().$promise
+                        .then(function (data) {
+                            var categories = angular.fromJson(data);
+                            self._warningCategories = categories;
+                            deferred.resolve(categories);
+                        });
                 });
+
         }
 
         return deferred.promise;
