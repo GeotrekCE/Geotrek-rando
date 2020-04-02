@@ -56,8 +56,8 @@ function WarningService(translationService, settingsFactory, globalSettings, $re
 
         return $http({
             method: 'POST',
-            url: url,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            url: 'http://0.0.0.0:8000/api/fr/reports/reportp/',
+            headers: {'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'},
             transformRequest: function(obj) {
                 var str = [];
                 for(var p in obj) {
@@ -73,6 +73,9 @@ function WarningService(translationService, settingsFactory, globalSettings, $re
                 problem_magnitude: formData.magnitudeProblem || '',
                 comment: formData.comment,
                 geom: '{"type": "Point", "coordinates": [' + formData.location.lng + ',' + formData.location.lat + ']}'
+            },
+            files: {
+                '1': formData.file
             }
         });
     };
