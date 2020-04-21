@@ -56,7 +56,7 @@ function WarningService(translationService, settingsFactory, globalSettings, $re
 
         return $http({
             method: 'POST',
-            url: 'http://0.0.0.0:8000/api/fr/reports/reportp/',
+            url: 'http://0.0.0.0:8000/api/fr/reports/report/',
             headers: {'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'},
             transformRequest: function(obj) {
                 var str = [];
@@ -76,6 +76,28 @@ function WarningService(translationService, settingsFactory, globalSettings, $re
             },
             files: {
                 '1': formData.file
+            }
+        });
+    };
+
+    this.sendWarningPictures = function sendWarningPictures (formData) {
+
+        var currentLang = translationService.getCurrentLang();
+        var url = settingsFactory.warningFilesSubmitUrl.replace(/\$lang/, currentLang);
+
+        return $http({
+            method: 'PUT',
+            url: 'http://0.0.0.0:8000/api/fr/reports/report/updload',
+            headers: {'Content-Type': '*/*'},
+            transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj) {
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                }
+                return str.join("&");
+            },
+            data: {
+                'file': formData.file
             }
         });
     };

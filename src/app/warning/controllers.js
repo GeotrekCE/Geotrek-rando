@@ -65,6 +65,18 @@ function WarningPanelController($scope, $rootScope, $q, resultsService, WarningS
                 });
         }
     };
+
+    $scope.sendWarningPictures = function sendWarningPictures () {
+        if ($scope.warningForm.$valid) {
+            WarningService.sendWarningPictures($scope.warning)
+                .then(function (answer) {
+                    $scope.warningStatus = 'success';
+                })
+                .catch(function (err) {
+                    $scope.warningStatus = 'error';
+                });
+        }
+    };
     var rootScopeEvents = [];
 
     rootScopeEvents.push(
