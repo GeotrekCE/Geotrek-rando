@@ -1,2 +1,26 @@
 msgid ""
-msgstr "X-Generator: Weblate\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit"
+msgstr ""
+"PO-Revision-Date: 2020-04-22 14:05+0000\n"
+"Last-Translator: Numahell <numahell+test@numajules.net>\n"
+"Language-Team: Portuguese <https://weblate.makina-corpus.net/projects/"
+"geotrek-rando/geotrek-rando/pt/>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.0.1\n"
+
+# CATEGORIES
+#
+#
+#, fuzzy
+msgid "CATEGORIES"
+msgstr "categorias"
+
+# META
+#
+#
+#, fuzzy
+msgid "DEFAULT_META_TITLE"
+msgstr "Geotrek Rando"
