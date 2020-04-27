@@ -10,7 +10,7 @@ Examples: [Grand tour des Ecrins](http://www.grand-tour-ecrins.fr), [Destination
 _See [Prerequisites](docs/README.md#Prerequisites)._
 
 - Geotrek-Rando v2 can synchronize only with Geotrek-Admin v2
-- Ubuntu 14.04
+- You can deploy with any OS and web serveur but this documentation works only with Ubuntu Linux. We recommand to use the latest LTS Ubuntu distribution.
 
 ### Synchronization
 
