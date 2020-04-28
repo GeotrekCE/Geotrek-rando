@@ -11,7 +11,7 @@
             </a>
         </li>
         <li ng-repeat="file in result.properties.files track by $index" class="detail-media media file">
-            <a href="{{::file.url}}" title="{{::file.legend}}" class="detail-media-link primary-hover-c">
+            <a href="{{::file.url}}" target="_blank" title="{{::file.legend}}" class="detail-media-link primary-hover-c">
                 <i class="fa fa-file-o"></i> {{::file.legend}}
             </a>
         </li>

@@ -1,41 +1,36 @@
 msgid ""
 msgstr ""
-"Project: Geotrek-rando\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2020-04-06 14:26+0000\n"
+"Last-Translator: Emmanuelle Helly <emmanuelle.helly@makina-corpus.com>\n"
+"Language-Team: French <https://weblate.makina-corpus.net/projects/"
+"geotrek-rando/geotrek-rando/fr/>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
-"X-Generator: Poedit 1.7.4\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.11.3\n"
+"Project: Geotrek-rando\n"
 
 # META
 #
 #
-
 msgid "DEFAULT_META_TITLE"
 msgstr "Geotrek Rando"
 
 msgid "DEFAULT_META_DESCRIPTION"
 msgstr "Geotrek est une web app permettant de préparer à l'avance ses randonnées !"
 
-
-
 # CATEGORIES
 #
 #
-
 msgid "CATEGORIES"
 msgstr "Catégories"
 
 msgid "CLEAR"
 msgstr "Réinitialiser"
-
-msgid "PRACTICE"
-msgstr "Pratique"
 
 msgid "ROUTES"
 msgstr "Parcours"
@@ -73,11 +68,9 @@ msgstr "Toutes"
 msgid "CLOSE"
 msgstr "Fermer"
 
-
 # INFORMATIONS
 #
 #
-
 msgid "I_DURATION"
 msgstr "Durée"
 
@@ -96,11 +89,9 @@ msgstr "Dénivelé"
 msgid "I_NETWORK"
 msgstr "Réseau"
 
-
 # RESULTS
 #
 #
-
 msgid "RESULT"
 msgstr "résultat"
 
@@ -110,17 +101,14 @@ msgstr "résultats"
 msgid "NO_RESULTS"
 msgstr "Aucun résultat correspondant à votre recherche"
 
-
 # FAVORITES
 #
 #
-
 msgid "FAVORITES"
 msgstr "Favoris"
 
 msgid "NO_FAVORITES"
 msgstr "Vous n'avez pas encore de favoris !"
-
 
 # DETAILS
 #
@@ -259,18 +247,24 @@ msgid "SUCCESS_WARNING"
 msgstr "Le message a bien été enregistré. Merci pour votre aide !"
 
 msgid "ERROR_WARNING"
-msgstr "Le message n'a pu être enregistré. Veuillez nous excuser pour ce désagrément. Nos équipes ont été prévenues et analysent le problème."
-
+msgstr ""
+"Le message n'a pu être enregistré. Veuillez nous excuser pour ce "
+"désagrément. Nos équipes ont été prévenues et analysent le problème !"
 
 # FILTERS
 #
 #
-
 msgid "SHOW_ACTIVE_FILTERS"
 msgstr "Afficher les filtres actifs"
 
 msgid "HIDE_ACTIVE_FILTERS"
 msgstr "Masquer les filtres actifs"
+
+msgid "SIMPLE_SEARCH"
+msgstr "Moins de critères"
+
+msgid "ADVANCED_SEARCH"
+msgstr "Plus de critères"
 
 msgid "SHOW_MORE"
 msgstr "En savoir plus"
@@ -308,19 +302,15 @@ msgstr "Réinitialiser les filtres"
 msgid "SELECTED"
 msgstr "sélectionnées"
 
-
 # SOCIAL
 #
 #
-
 msgid "SHARING_DEFAULT_TEXT"
 msgstr "Geotrek est vraiment parfait pour préparer son voyage dans la nature !"
-
 
 # LAYOUT
 #
 #
-
 msgid "TOGGLE_NAV"
 msgstr "Ouvrir le menu"
 
@@ -329,6 +319,9 @@ msgstr "Geotrek Rando"
 
 msgid "HOME"
 msgstr "Afficher la page d'accueil"
+
+msgid "SEARCH_LIST"
+msgstr "Afficher la page de recherche"
 
 msgid "ABOUT_US"
 msgstr "En savoir plus"
@@ -359,6 +352,14 @@ msgstr "Signaler un problème ou une erreur"
 
 msgid "FORM_NAME"
 msgstr "Nom"
+
+msgid "REPORT_GPDR_DISCLAIMER"
+msgstr ""
+"Ces informations sont destinées à {{ organisme }}, qui s'engage à ne pas les "
+"communiquer à des tiers. Vous disposez d'un droit d'accès, de modification, "
+"de rectification et de suppression des données qui vous concernent (art. 34 "
+"de la loi \"Informatique et Libertés\"). Pour l'exercer, adressez-vous à {{ "
+"adresse }}."
 
 msgid "FORM_EMAIL"
 msgstr "Email"
@@ -400,7 +401,6 @@ msgstr "Miniatures"
 # MAP
 #
 #
-
 msgid "ZOOM_IN"
 msgstr "Zoomer"
 
@@ -443,7 +443,6 @@ msgstr "JAN,FEV,MAR,AVR,MAI,JUIN,JUIL,AOU,SEP,OCT,NOV,DEC"
 # HOME PAGE
 #
 #
-
 msgid "ACCESS_SITE"
 msgstr "Accéder au site"
 
@@ -453,19 +452,15 @@ msgstr "Ne plus montrer cette page"
 msgid "SUGGESTED"
 msgstr "Nos coups de cœur :"
 
-
 # HEADER
 #
 #
-
 msgid "LOGO_ALT"
 msgstr "Logo Geotrek"
-
 
 # FOOTER
 #
 #
-
 msgid "LEGALS"
 msgstr "Mentions légales"
 

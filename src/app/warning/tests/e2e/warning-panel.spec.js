@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Warning panel ', function() {
-    var panel, openButton, closeButton, form, name, email, category, comment, location, submit;
+    var panel, openButton, closeButton, form, email, category, comment, location, submit;
     var constants = require('../../../config/settings.default.json');
     beforeAll(function () {
         browser.get('/');
@@ -15,7 +15,6 @@ describe('Warning panel ', function() {
         closeButton = element(by.css('.warning-panel .close'));
         panel        = element(by.css('.warning-panel'));
         form         = element(by.css('.warning-panel form'));
-        name         = element(by.css('.warning-panel form #warning-name'));
         email        = element(by.css('.warning-panel form #warning-email'));
         category     = element(by.css('.warning-panel form #warning-category'));
         comment      = element(by.css('.warning-panel form #warning-comment'));
@@ -39,13 +38,6 @@ describe('Warning panel ', function() {
 
     it('should not validate if no fields are filled', function() {
         expect(form.getAttribute('class')).toMatch('ng-invalid');
-    });
-
-    it('should validate name field if not empty', function() {
-        expect(name.getAttribute('class')).toMatch('untouched');
-        expect(name.getAttribute('class')).toMatch('ng-invalid');
-        name.sendKeys('test');
-        expect(name.getAttribute('class')).toMatch('ng-valid');
     });
 
     it('should still not validate form', function() {

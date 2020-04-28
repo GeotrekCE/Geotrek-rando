@@ -50,7 +50,7 @@ function WarningService(translationService, settingsFactory, $resource, $http, $
                 return str.join("&");
             },
             data: {
-                name: formData.name,
+                name: "Anonymous", // keep compatibility with Geotrek-admin <= 2.32.11, with name field required
                 email: formData.email,
                 category: formData.category,
                 comment: formData.comment,

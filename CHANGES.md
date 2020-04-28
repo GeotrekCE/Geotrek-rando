@@ -1,3 +1,20 @@
+2.24.0 / 2020-04-28
+===================
+
+**Enhancements**
+
+* Change warning form to be GPDR compliant
+    - remove name field
+    - send to API default name "Anonymous"
+    - add a text about personal data
+* Add translation file for portugese
+* Fix some translation error
+
+**Bug fixes**
+
+* Fix open PDF from POI and detail page
+* Fix travis tests
+
 2.23.0-ux / 2020-03-05
 ======================
 

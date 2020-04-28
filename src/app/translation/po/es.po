@@ -1,33 +1,31 @@
 msgid ""
 msgstr ""
-"Project: Geotrek-rando\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2020-04-28 12:35+0000\n"
+"Last-Translator: numahell <numahell+weblate@numajules.net>\n"
+"Language-Team: Spanish <https://weblate.makina-corpus.net/projects/"
+"geotrek-rando/geotrek-rando/es/>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
-"X-Generator: Poedit 1.7.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.0.1\n"
+"Project: Geotrek-rando\n"
 
 # META
 #
 #
-
 msgid "DEFAULT_META_TITLE"
 msgstr "Geotrek Rando"
 
 msgid "DEFAULT_META_DESCRIPTION"
 msgstr "Geotrek es una aplicación web para preparar con antelación sus senderismos !"
 
-
-
 # CATEGORIES
 #
 #
-
 msgid "CATEGORIES"
 msgstr "Categorías"
 
@@ -49,6 +47,9 @@ msgstr "Tiempo"
 msgid "ASCENT"
 msgstr "Desnivel positivo"
 
+msgid "ASCENT_S"
+msgstr "D+:"
+
 msgid "LENGTH"
 msgstr "Distancia"
 
@@ -61,11 +62,9 @@ msgstr "Todos"
 msgid "CLOSE"
 msgstr "Cerrar"
 
-
 # INFORMATIONS
 #
 #
-
 msgid "I_DURATION"
 msgstr "Tiempo"
 
@@ -84,11 +83,9 @@ msgstr "Desnivel positivo"
 msgid "I_NETWORK"
 msgstr "Señalización"
 
-
 # RESULTS
 #
 #
-
 msgid "RESULT"
 msgstr "Resultado"
 
@@ -98,22 +95,18 @@ msgstr "Resultados"
 msgid "NO_RESULTS"
 msgstr "No resultados correspondientes a la investigación"
 
-
 # FAVORITES
 #
 #
-
 msgid "FAVORITES"
 msgstr "Favoritos"
 
 msgid "NO_FAVORITES"
 msgstr "No favoritos !"
 
-
 # DETAILS
 #
 #
-
 msgid "CATEGORY"
 msgstr "Categorías"
 
@@ -237,11 +230,9 @@ msgstr "Mensaje fue registrado. Gracias por su ayuda !"
 msgid "ERROR_WARNING"
 msgstr "Mensaje no fue registrado. Disculpen este inconveniente mientras nosotros avisamos a nuestros informáticos."
 
-
 # FILTERS
 #
 #
-
 msgid "SHOW_ACTIVE_FILTERS"
 msgstr "Ver los filtros activos"
 
@@ -281,19 +272,15 @@ msgstr "Reiniciar"
 msgid "SELECTED"
 msgstr "Selección"
 
-
 # SOCIAL
 #
 #
-
 msgid "SHARING_DEFAULT_TEXT"
 msgstr "Geotrek es realmente perfecto para preparar su visita en la naturaleza !"
-
 
 # LAYOUT
 #
 #
-
 msgid "TOGGLE_NAV"
 msgstr "Abrir el menú desplegable"
 
@@ -333,6 +320,9 @@ msgstr "Señalar un problema"
 msgid "FORM_NAME"
 msgstr "Nombre"
 
+msgid "REPORT_GPDR_DISCLAIMER"
+msgstr ""
+
 msgid "FORM_EMAIL"
 msgstr "Correo electrónico"
 
@@ -357,11 +347,9 @@ msgstr "Descargar fichero GPX"
 msgid "3D"
 msgstr "Ver itinerario 3D"
 
-
 # MAP
 #
 #
-
 msgid "ZOOM_IN"
 msgstr "Hacer zoom (foco)"
 
@@ -386,11 +374,9 @@ msgstr "Activar / ocultar los servicios"
 msgid "VIEWPORT_FILTERING"
 msgstr "Utilizar la mapa para filtrar"
 
-
 # HOME PAGE
 #
 #
-
 msgid "ACCESS_SITE"
 msgstr "Acceder al sitio web"
 
@@ -400,19 +386,15 @@ msgstr "No exhibir más esta página"
 msgid "SUGGESTED"
 msgstr "Recomendaciones especiales :"
 
-
 # HEADER
 #
 #
-
 msgid "LOGO_ALT"
 msgstr "Logo Geotrek"
-
 
 # FOOTER
 #
 #
-
 msgid "LEGALS"
 msgstr "Avisos legales"
 
@@ -421,3 +403,6 @@ msgstr "Concepción y créditos"
 
 msgid "CONTACT"
 msgstr "Contacto"
+
+msgid "LEVELS"
+msgstr "Nivel:"

@@ -90,7 +90,7 @@ You can override default translation files available in `src/app/translation/po`
 
 Create a `custom/po/` folder. Then create the files for each language you are using (`en.po`, `fr.po` as an example).
 
-Override the translations that you want in these files. 
+Override the translations that you want in these files.
 
 Example of content for `custom/po/en.po`:
 
@@ -118,6 +118,19 @@ msgstr "Rando my park"
 msgid "DEFAULT_META_DESCRIPTION"
 msgstr "Discover the treks in the national park!"
 ```
+
+## GPDR compliance
+
+Two sections are involved in GPDR Compliance: Google analytics and report form.
+
+### Warning form
+
+Only email is required to submit reports, and a disclaimer should be displayed
+for users sending a report.
+
+This text can be changed by overriding `REPORT_GPDR_DISCLAIMER`
+in translations (see [Translations section](#translations)).
+
 
 <!-- Internal links -->
 

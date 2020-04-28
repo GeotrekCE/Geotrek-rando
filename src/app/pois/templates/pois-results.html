@@ -61,7 +61,8 @@
                             </a>
                         </li>
                         <li ng-repeat="file in poi.properties.files track by $index" class="poi-media media file">
-                            <a href="{{::file.url}}" title="{{::file.legend}}" class="poi-media-link primary-hover-c">
+                            <a href="{{::file.url}}" target="_blank"
+                                title="{{::file.legend}}" class="poi-media-link primary-hover-c">
                                 <i class="fa fa-file-o"></i> {{::file.legend}}
                             </a>
                         </li>
