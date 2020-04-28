@@ -14,13 +14,11 @@ msgstr ""
 # CATEGORIES
 #
 #
-#, fuzzy
 msgid "CATEGORIES"
 msgstr "categorias"
 
 # META
 #
 #
-#, fuzzy
 msgid "DEFAULT_META_TITLE"
 msgstr "Geotrek Rando"
