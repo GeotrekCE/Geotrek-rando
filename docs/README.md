@@ -31,7 +31,7 @@ Building environment could be either the same as your http server, or a local ma
 
 _\* In recent versions of Geotrek-rando, you'll find the recommended version of Node JS into the `.nvmrc` file in the root directory of the project._
 
-### For developpers
+### For developpers
 
 Some npm packages used for tests may need a build environment for compiling platform specific binaries. On debian-like environments, `build-essential` should satisfy this requirements.
 
