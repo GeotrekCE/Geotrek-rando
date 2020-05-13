@@ -1,10 +1,17 @@
 2.24.1dev0
-===================
+==========
 
 **Enhancements**
 
+* Add support for Suricate options in warning form
+    - add activity and magnitude problem fields
+    - get options list from endpoint
+    - display activity and magnitude only if options list is available from API
+    **Warning:** this feature is only available for Geotrek-admin >= 2.32.12
+
 **Bug fixes**
 
+* 
 
 2.24.0 / 2020-04-28
 ===================
@@ -17,12 +24,6 @@
     - add a text about personal data
 * Add translation file for portugese
 * Fix some translation error
-
-* Add support for Suricate options in warning form
-    - add activity and magnitude problem fields
-    - get options list from endpoint
-    - display activity and magnitude only if options list is available from API
-    **Warning:** this feature is only available for Geotrek-admin >= 2.32.12
 
 **Bug fixes**
 
