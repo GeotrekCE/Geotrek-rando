@@ -42,7 +42,7 @@
         </div>
         <div class="form-group">
             <label for="warning-picture">{{'FORM_PICTURES' | translate}}</label>
-            <input id="warning-picture" class="form-control" type="file" ng-model="warning.file">
+            <input id="warning-picture" class="form-control" type="file" fileRead="warning.file">
         </div>
         <input type="submit" class="btn btn-default" value="{{'FORM_SEND' | translate}}" ng-click="sendWarning()">
 

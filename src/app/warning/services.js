@@ -53,53 +53,22 @@ function WarningService(translationService, settingsFactory, globalSettings, $re
 
         var currentLang = translationService.getCurrentLang();
         var url = settingsFactory.warningSubmitUrl.replace(/\$lang/, currentLang);
+        var data = new FormData();
+        console.log(formData)
+        data.append("file", formData.file);
+        data.append("name", "Anonymous");
+        data.append("email", formData.email)
+        data.append("problem_magnitude", formData.magnitudeProblem || '');
+        data.append("activity", formData.activity || '');
+        data.append("category", formData.category);
+        data.append("comment", formData.comment);
+        data.append("geom", '{"type": "Point", "coordinates": [' + formData.location.lng + ',' + formData.location.lat + ']}');
 
-        return $http({
-            method: 'POST',
-            url: 'http://0.0.0.0:8000/api/fr/reports/report/',
-            headers: {'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'},
-            transformRequest: function(obj) {
-                var str = [];
-                for(var p in obj) {
-                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                }
-                return str.join("&");
-            },
-            data: {
-                name: "Anonymous", // keep compatibility with Geotrek-admin <= 2.32.11, with name field required
-                email: formData.email,
-                activity: formData.activity || '',
-                category: formData.category,
-                problem_magnitude: formData.magnitudeProblem || '',
-                comment: formData.comment,
-                geom: '{"type": "Point", "coordinates": [' + formData.location.lng + ',' + formData.location.lat + ']}'
-            },
-            files: {
-                '1': formData.file
-            }
+        return $http.post('http://0.0.0.0:8000/api/fr/reports/report', data, {
+        transformRequest: angular.identity,
+        headers: { "Content-Type": undefined }
         });
-    };
 
-    this.sendWarningPictures = function sendWarningPictures (formData) {
-
-        var currentLang = translationService.getCurrentLang();
-        var url = settingsFactory.warningFilesSubmitUrl.replace(/\$lang/, currentLang);
-
-        return $http({
-            method: 'PUT',
-            url: 'http://0.0.0.0:8000/api/fr/reports/report/updload',
-            headers: {'Content-Type': '*/*'},
-            transformRequest: function(obj) {
-                var str = [];
-                for(var p in obj) {
-                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                }
-                return str.join("&");
-            },
-            data: {
-                'file': formData.file
-            }
-        });
     };
 }
 
