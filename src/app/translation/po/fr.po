@@ -375,6 +375,9 @@ msgstr "Emplacement (cliquez sur la carte pour positionner le marqueur)"
 msgid "FORM_SEND"
 msgstr "Signaler"
 
+msgid "FORM_PICTURES"
+msgstr "Photographies"
+
 msgid "KML"
 msgstr "Télécharger la fiche KML"
 

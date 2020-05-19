@@ -55,7 +55,9 @@ function WarningService(translationService, settingsFactory, globalSettings, $re
         var url = settingsFactory.warningSubmitUrl.replace(/\$lang/, currentLang);
         var data = new FormData();
         console.log(formData)
-        data.append("file", formData.file);
+        data.append("file1", formData.file1);
+        data.append("file2", formData.file2);
+        data.append("file3", formData.file3);
         data.append("name", "Anonymous");
         data.append("email", formData.email)
         data.append("problem_magnitude", formData.magnitudeProblem || '');

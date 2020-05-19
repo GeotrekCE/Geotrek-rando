@@ -350,6 +350,9 @@ msgstr "Paradero (hacer clic sobre la mapa para posicionar el cursor)"
 msgid "FORM_SEND"
 msgstr "Informar"
 
+msgid "FORM_PICTURES"
+msgstr "Fotografía"
+
 msgid "KML"
 msgstr "Descargar fichero KML"
 

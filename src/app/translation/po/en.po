@@ -389,6 +389,9 @@ msgstr "Location (clic on map to place the mark)"
 msgid "FORM_SEND"
 msgstr "Send"
 
+msgid "FORM_PICTURES"
+msgstr "Photography"
+
 msgid "KML"
 msgstr "Download the KML file"
 

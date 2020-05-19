@@ -41,8 +41,10 @@
             <input id="warning-location" type="hidden" ng-model="warning.location" required="">
         </div>
         <div class="form-group">
-            <label for="warning-picture">{{'FORM_PICTURES' | translate}}</label>
-            <input id="warning-picture" class="form-control" type="file" fileRead="warning.file">
+            <label for="warning-picture-1">{{'FORM_PICTURES' | translate}}</label>
+            <input id="warning-picture-1" class="form-control" type="file" fileRead="warning.file1">
+            <input id="warning-picture-2" class="form-control" type="file" fileRead="warning.file2">
+            <input id="warning-picture-3" class="form-control" type="file" fileRead="warning.file3">
         </div>
         <input type="submit" class="btn btn-default" value="{{'FORM_SEND' | translate}}" ng-click="sendWarning()">
 

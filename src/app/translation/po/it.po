@@ -357,6 +357,9 @@ msgstr ""
 msgid "FORM_EMAIL"
 msgstr ""
 
+msgid "FORM_PICTURES"
+msgstr "Fotografia"
+
 msgid "FORM_ACTIVITY"
 msgstr "Attività"
 
