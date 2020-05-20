@@ -17,7 +17,7 @@ function WarningService(translationService, settingsFactory, globalSettings, $re
             var requests = $resource(urlOptions, {}, {
                 query: {
                     method: 'GET',
-                    isArray: true,
+                    isArray: false,
                     cache: true
                 }
             }, {stripTrailingSlashes: false});

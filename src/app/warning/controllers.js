@@ -88,9 +88,9 @@ function WarningPanelController($scope, $rootScope, $q, resultsService, WarningS
             $scope.warning.location = utilsFactory.getStartPoint($scope.result);
             WarningService.getWarningCategories()
                 .then(function (categories) {
-                    $scope.hasAllOptions = categories[0].hasOwnProperty('activities')
+                    $scope.hasAllOptions = categories.hasOwnProperty('activities')
                     if ($scope.hasAllOptions) {
-                        options = categories[0];
+                        options = categories;
                         $scope.warningCategories = options.categories;
                         $scope.warning.category = options.categories[0].id.toString();
                         $scope.warningActivities = options.activities;
