@@ -81,23 +81,25 @@ function WarningPanelController($scope, $rootScope, $q, resultsService, WarningS
 
     rootScopeEvents.push(
         $rootScope.$on('showWarningPanel', function (event, args) {
+            var options = {};
             $scope.result = args.result;
             $scope.warningStatus = null;
             $scope.warning = {};
             $scope.warning.location = utilsFactory.getStartPoint($scope.result);
             WarningService.getWarningCategories()
                 .then(function (categories) {
-                    $scope.hasAllOptions = categories.hasOwnProperty('activities')
+                    $scope.hasAllOptions = categories[0].hasOwnProperty('activities')
                     if ($scope.hasAllOptions) {
-                        $scope.warningCategories = categories.categories;
-                        $scope.warning.category = categories.categories[0].id.toString();
-                        $scope.warningActivities = categories.activities;
-                        if (categories.activities.length !== 0) {
-                            $scope.warning.activity = categories.activities[0].id.toString();
+                        options = categories[0];
+                        $scope.warningCategories = options.categories;
+                        $scope.warning.category = options.categories[0].id.toString();
+                        $scope.warningActivities = options.activities;
+                        if (options.activities.length !== 0) {
+                            $scope.warning.activity = options.activities[0].id.toString();
                         }
-                        $scope.warningMagnitudeProblems = categories.magnitudeProblems;
-                        if (categories.magnitudeProblems.length !== 0) {
-                            $scope.warning.magnitudeProblem = categories.magnitudeProblems[0].id.toString();
+                        $scope.warningMagnitudeProblems = options.magnitudeProblems;
+                        if (options.magnitudeProblems.length !== 0) {
+                            $scope.warning.magnitudeProblem = options.magnitudeProblems[0].id.toString();
                         }
                     } else {
                         $scope.warningCategories = categories;
