@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Warning panel ', function() {
-    var panel, openButton, closeButton, form, email, category, comment, location, submit;
+    var panel, openButton, closeButton, form, email, category, comment, location, submit, activity, magnitudeProblem;
     var constants = require('../../../config/settings.default.json');
     beforeAll(function () {
         browser.get('/');
