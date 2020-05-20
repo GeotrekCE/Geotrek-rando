@@ -18,7 +18,7 @@ describe('Warning panel ', function() {
         email        = element(by.css('.warning-panel form #warning-email'));
         activity     = element(by.css('.warning-panel form #warning-activity'));
         category     = element(by.css('.warning-panel form #warning-category'));
-        magnitudeProblem     = element(by.css('.warning-panel form #warning-magnitudeProblem'));
+        magnitudeProblem     = element(by.css('.warning-panel form input[name=magnitudeProblem]'));
         comment      = element(by.css('.warning-panel form #warning-comment'));
         location     = element(by.css('.warning-panel form #warning-location'));
         submit       = element(by.css('.warning-panel form input[type="submit"]'));
