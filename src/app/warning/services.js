@@ -66,7 +66,7 @@ function WarningService(translationService, settingsFactory, globalSettings, $re
         data.append("comment", formData.comment);
         data.append("geom", '{"type": "Point", "coordinates": [' + formData.location.lng + ',' + formData.location.lat + ']}');
 
-        return $http.post('http://0.0.0.0:8000/api/fr/reports/report', data, {
+        return $http.post(url, data, {
         transformRequest: angular.identity,
         headers: { "Content-Type": undefined }
         });
