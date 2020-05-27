@@ -54,7 +54,6 @@ function WarningService(translationService, settingsFactory, globalSettings, $re
         var currentLang = translationService.getCurrentLang();
         var url = settingsFactory.warningSubmitUrl.replace(/\$lang/, currentLang);
         var data = new FormData();
-        console.log(formData)
         data.append("file1", formData.file1);
         data.append("file2", formData.file2);
         data.append("file3", formData.file3);

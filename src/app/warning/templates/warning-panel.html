@@ -40,7 +40,7 @@
             <div id="warning-map"></div>
             <input id="warning-location" type="hidden" ng-model="warning.location" required="">
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-if="hasAllOptions">
             <label for="warning-picture-1">{{'FORM_PICTURES' | translate}}</label>
             <input id="warning-picture-1" class="form-control" type="file" fileRead="warning.file1">
             <input id="warning-picture-2" class="form-control" type="file" fileRead="warning.file2">
