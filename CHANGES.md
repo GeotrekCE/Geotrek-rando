@@ -1,5 +1,5 @@
-2.24.1dev0
-==========
+2.24.1 / 2020-07-01
+===================
 
 **Enhancements**
 
@@ -7,10 +7,6 @@
 * Add activity and magnitude problem fields in warning form
 * Get options list (magnitude problem, activities, categories) from endpoint
 **Warning:** these features are only available for Geotrek-admin >= 2.32.12
-
-**Bug fixes**
-
-* 
 
 2.24.0 / 2020-04-28
 ===================
