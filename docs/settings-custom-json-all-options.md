@@ -210,6 +210,7 @@ DEM_FILE | "dem.json" | DEM file
 PROFILE_FILE | "profile.json" | Profile file
 WARNING_CAT_DIR | "feedback" | Warning catefories dir file
 WARNING_CAT_FILE | "categories.json" | Warning categories file
+WARNING_OPT_FILE | "options.json" | Warning options file (for Suricate support)
 WARNING_SUBMIT_URL | "reports/report" | Warning submit URL
 STYLES_CONFIG_FILE | "styles.json" | Custom styles variables
 APPROVED_BIG | "images/approved-big.png" | Default big image for approved label (for detail page)

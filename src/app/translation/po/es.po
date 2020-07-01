@@ -326,8 +326,14 @@ msgstr ""
 msgid "FORM_EMAIL"
 msgstr "Correo electrónico"
 
+msgid "FORM_ACTIVITY"
+msgstr "Actividad"
+
 msgid "FORM_CATEGORY"
 msgstr "Categoría"
+
+msgid "FORM_MAGNITUDE_PROBLEM"
+msgstr "Magnitud del problema"
 
 msgid "FORM_COMMENT"
 msgstr "Comentario"
@@ -337,6 +343,9 @@ msgstr "Paradero (hacer clic sobre la mapa para posicionar el cursor)"
 
 msgid "FORM_SEND"
 msgstr "Informar"
+
+msgid "FORM_PICTURES"
+msgstr "Fotografía"
 
 msgid "KML"
 msgstr "Descargar fichero KML"
