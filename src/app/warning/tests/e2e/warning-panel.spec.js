@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Warning panel ', function() {
-    var panel, openButton, closeButton, form, email, category, comment, location, submit;
+    var panel, openButton, closeButton, form, email, category, comment, location, submit, activity, magnitudeProblem;
     var constants = require('../../../config/settings.default.json');
     beforeAll(function () {
         browser.get('/');
@@ -16,7 +16,9 @@ describe('Warning panel ', function() {
         panel        = element(by.css('.warning-panel'));
         form         = element(by.css('.warning-panel form'));
         email        = element(by.css('.warning-panel form #warning-email'));
+        activity     = element(by.css('.warning-panel form #warning-activity'));
         category     = element(by.css('.warning-panel form #warning-category'));
+        magnitudeProblem     = element(by.css('.warning-panel form input[name=magnitudeProblem]'));
         comment      = element(by.css('.warning-panel form #warning-comment'));
         location     = element(by.css('.warning-panel form #warning-location'));
         submit       = element(by.css('.warning-panel form input[type="submit"]'));
@@ -56,9 +58,19 @@ describe('Warning panel ', function() {
         expect(email.getAttribute('class')).toMatch('ng-valid');
     });
 
+    it('should already have a value for activity field', function() {
+        expect(activity.getAttribute('class')).toMatch('untouched');
+        expect(activity.getAttribute('class')).toMatch('ng-valid');
+    });
+
     it('should already have a value for category field', function() {
         expect(category.getAttribute('class')).toMatch('untouched');
         expect(category.getAttribute('class')).toMatch('ng-valid');
+    });
+
+    it('should already have a value for magnitude problem field', function() {
+        expect(magnitudeProblem.getAttribute('class')).toMatch('untouched');
+        expect(magnitudeProblem.getAttribute('class')).toMatch('ng-valid');
     });
 
     it('should validate comment field if not empty', function() {

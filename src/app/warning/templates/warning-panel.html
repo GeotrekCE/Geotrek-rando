@@ -5,9 +5,11 @@
     </div>
     <form name="warningForm" ng-show="!warningStatus">
 
-        <div class="form-group">
-            <label for="warning-email">{{'FORM_EMAIL' | translate}}</label>
-            <input id="warning-email" class="form-control" type="email" ng-model="warning.email" required="">
+        <div class="form-group" ng-if="hasAllOptions">
+            <label for="warning-activity">{{'FORM_ACTIVITY' | translate}}</label>
+            <select id="warning-activity" class="form-control" ng-model="warning.activity">
+                <option ng-repeat="activity in warningActivities" value="{{activity.id}}">{{activity.label}}</option>
+            </select>
         </div>
         <div class="form-group">
             <label for="warning-category">{{'FORM_CATEGORY' | translate}}</label>
@@ -15,14 +17,34 @@
                 <option ng-repeat="category in warningCategories" value="{{category.id}}">{{category.label}}</option>
             </select>
         </div>
+        <div class="form-group" ng-if="hasAllOptions">
+            <label for="warning-magnitudeProblem">{{'FORM_MAGNITUDE_PROBLEM' | translate}}</label><br>
+            <label ng-repeat="magnitudeProblem in warningMagnitudeProblems" class="radio-inline">
+                <input type="radio" name="magnitudeProblem" value="{{magnitudeProblem.id}}"
+                    ng-model="warning.magnitudeProblem"
+                    id="warning-magnitudeProblem-{{magnitudeProblem.id}}">
+                    {{magnitudeProblem.label}}
+            </label>
+            </select>
+        </div>
         <div class="form-group">
             <label for="warning-comment">{{'FORM_COMMENT' | translate}}</label>
             <textarea id="warning-comment" class="form-control" ng-model="warning.comment" required=""></textarea>
         </div>
         <div class="form-group">
+            <label for="warning-email">{{'FORM_EMAIL' | translate}}</label>
+            <input id="warning-email" class="form-control" type="email" ng-model="warning.email" required="">
+        </div>
+        <div class="form-group">
             <label>{{'FORM_MAP' | translate}}</label>
             <div id="warning-map"></div>
             <input id="warning-location" type="hidden" ng-model="warning.location" required="">
+        </div>
+        <div class="form-group" ng-if="hasAllOptions">
+            <label for="warning-picture-1">{{'FORM_PICTURES' | translate}}</label>
+            <input id="warning-picture-1" class="form-control" type="file" fileRead="warning.file1">
+            <input id="warning-picture-2" class="form-control" type="file" fileRead="warning.file2">
+            <input id="warning-picture-3" class="form-control" type="file" fileRead="warning.file3">
         </div>
         <input type="submit" class="btn btn-default" value="{{'FORM_SEND' | translate}}" ng-click="sendWarning()">
 

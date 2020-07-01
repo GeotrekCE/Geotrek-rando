@@ -139,6 +139,7 @@
     "PROFILE_FILE": "profile.json",
     "WARNING_CAT_DIR": "feedback",
     "WARNING_CAT_FILE": "categories.json",
+    "WARNING_OPT_FILE": "options.json",
     "WARNING_SUBMIT_URL": "reports/report",
     "STYLES_CONFIG_FILE": "styles.json",
     "APPROVED_BIG": "images/approved-big.png",

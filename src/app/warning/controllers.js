@@ -1,6 +1,6 @@
 'use strict';
 
-function WarningPanelController($scope, $rootScope, $q, resultsService, WarningService, WarningMapService, utilsFactory) {
+function WarningPanelController($scope, $rootScope, $q, resultsService, WarningService, WarningMapService, utilsFactory, globalSettings) {
 
     var onMap = false;
 
@@ -65,18 +65,46 @@ function WarningPanelController($scope, $rootScope, $q, resultsService, WarningS
                 });
         }
     };
+
+    $scope.sendWarningPictures = function sendWarningPictures () {
+        if ($scope.warningForm.$valid) {
+            WarningService.sendWarningPictures($scope.warning)
+                .then(function (answer) {
+                    $scope.warningStatus = 'success';
+                })
+                .catch(function (err) {
+                    $scope.warningStatus = 'error';
+                });
+        }
+    };
     var rootScopeEvents = [];
 
     rootScopeEvents.push(
         $rootScope.$on('showWarningPanel', function (event, args) {
+            var options = {};
             $scope.result = args.result;
+            $scope.warningStatus = null;
+            $scope.warning = {};
+            $scope.warning.location = utilsFactory.getStartPoint($scope.result);
             WarningService.getWarningCategories()
                 .then(function (categories) {
-                    $scope.warningStatus = null;
-                    $scope.warning = {};
-                    $scope.warning.location = utilsFactory.getStartPoint($scope.result);
-                    $scope.warningCategories = categories;
-                    $scope.warning.category = categories[0].id.toString();
+                    $scope.hasAllOptions = categories.hasOwnProperty('activities')
+                    if ($scope.hasAllOptions) {
+                        options = categories;
+                        $scope.warningCategories = options.categories;
+                        $scope.warning.category = options.categories[0].id.toString();
+                        $scope.warningActivities = options.activities;
+                        if (options.activities.length !== 0) {
+                            $scope.warning.activity = options.activities[0].id.toString();
+                        }
+                        $scope.warningMagnitudeProblems = options.magnitudeProblems;
+                        if (options.magnitudeProblems.length !== 0) {
+                            $scope.warning.magnitudeProblem = options.magnitudeProblems[0].id.toString();
+                        }
+                    } else {
+                        $scope.warningCategories = categories;
+                        $scope.warning.category = categories[0].id.toString();
+                    }
                     WarningMapService.getMap('warning-map', $scope.result);
                     WarningMapService.addCallback(updateLocation);
                     updateMapWithDetails(true);

@@ -1,6 +1,6 @@
 'use strict';
 
-function WarningService(translationService, settingsFactory, $resource, $http, $q) {
+function WarningService(translationService, settingsFactory, globalSettings, $resource, $http, $q) {
     var self = this;
 
     this.getWarningCategories = function getWarningCategories (forceRefresh) {
@@ -12,11 +12,12 @@ function WarningService(translationService, settingsFactory, $resource, $http, $
 
         } else {
             var currentLang = translationService.getCurrentLang();
-            var url = settingsFactory.warningCategoriesUrl.replace(/\$lang/, currentLang);
-            var requests = $resource(url, {}, {
+            var urlOptions = settingsFactory.warningOptionsUrl.replace(/\$lang/, currentLang);
+            var urlCategories = settingsFactory.warningCategoriesUrl.replace(/\$lang/, currentLang);
+            var requests = $resource(urlOptions, {}, {
                 query: {
                     method: 'GET',
-                    isArray: true,
+                    isArray: false,
                     cache: true
                 }
             }, {stripTrailingSlashes: false});
@@ -26,6 +27,21 @@ function WarningService(translationService, settingsFactory, $resource, $http, $
                     var categories = angular.fromJson(data);
                     self._warningCategories = categories;
                     deferred.resolve(categories);
+                }, function() {
+                    var requests = $resource(urlCategories, {}, {
+                        query: {
+                            method: 'GET',
+                            isArray: true,
+                            cache: true
+                        }
+                    }, {stripTrailingSlashes: false});
+
+                    requests.query().$promise
+                        .then(function (data) {
+                            var categories = angular.fromJson(data);
+                            self._warningCategories = categories;
+                            deferred.resolve(categories);
+                        });
                 });
 
         }
@@ -37,26 +53,23 @@ function WarningService(translationService, settingsFactory, $resource, $http, $
 
         var currentLang = translationService.getCurrentLang();
         var url = settingsFactory.warningSubmitUrl.replace(/\$lang/, currentLang);
+        var data = new FormData();
+        data.append("file1", formData.file1);
+        data.append("file2", formData.file2);
+        data.append("file3", formData.file3);
+        data.append("name", "Anonymous");
+        data.append("email", formData.email)
+        data.append("problem_magnitude", formData.magnitudeProblem || '');
+        data.append("activity", formData.activity || '');
+        data.append("category", formData.category);
+        data.append("comment", formData.comment);
+        data.append("geom", '{"type": "Point", "coordinates": [' + formData.location.lng + ',' + formData.location.lat + ']}');
 
-        return $http({
-            method: 'POST',
-            url: url,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            transformRequest: function(obj) {
-                var str = [];
-                for(var p in obj) {
-                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                }
-                return str.join("&");
-            },
-            data: {
-                name: "Anonymous", // keep compatibility with Geotrek-admin <= 2.32.11, with name field required
-                email: formData.email,
-                category: formData.category,
-                comment: formData.comment,
-                geom: '{"type": "Point", "coordinates": [' + formData.location.lng + ',' + formData.location.lat + ']}'
-            }
+        return $http.post(url, data, {
+        transformRequest: angular.identity,
+        headers: { "Content-Type": undefined }
         });
+
     };
 }
 
