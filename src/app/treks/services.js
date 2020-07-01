@@ -4,6 +4,7 @@ function treksService(globalSettings, settingsFactory, translationService, $http
 
     var self = this;
     self._trekList = {};
+    self._bookingData = {};
 
     this.refactorTrek = function refactorTrek () {
         var lang = translationService.getCurrentLang();
@@ -125,9 +126,53 @@ function treksService(globalSettings, settingsFactory, translationService, $http
 
                 trek.properties.relationships = relatedElements;
             }
+
+            /**
+             * Booking data
+             */
+            if (self._bookingData && self._bookingData[lang] && self._bookingData[lang][trek.id]) {
+                _.assign(trek.properties, { bookingMeta : self._bookingData[lang][trek.id] });
+            }
         });
 
         return self._trekList[lang];
+    };
+
+    var getBookingDataPending = false;
+    this.getBookingData = function getBookingData () {
+        var lang = translationService.getCurrentLang();
+
+        /**
+         * If there is already a promise fetching booking data, return it
+         */
+        if (getBookingDataPending) {
+            return getBookingDataPending;
+        }
+
+
+        /**
+         * If booking data have already been fetched for current language, return them
+         */
+        if (self._bookingData[lang]) {
+            return $q.when(self._bookingData[lang]);
+        }
+
+        /**
+         * If booking data have never been fetched for current language, fetch them
+         */
+        var deferred = $q.defer();
+
+        $http({ url: globalSettings.BOOKING_DATASOURCE })
+            .then(function (response) {
+                self._bookingData[lang] = response.data && response.data.booking || {};
+
+                deferred.resolve(self._bookingData[lang]);
+                getBookingDataPending = false;
+            });
+
+
+        getBookingDataPending = deferred.promise;
+        return deferred.promise;
     };
 
     var getTreksPending = false;
@@ -157,10 +202,18 @@ function treksService(globalSettings, settingsFactory, translationService, $http
         $http({url: url})
             .then(function (response) {
                 self._trekList[lang] = angular.fromJson(response.data);
-                self.refactorTrek();
+                if (globalSettings.ENABLE_BOOKING && globalSettings.BOOKING_DATASOURCE) {
+                    self.getBookingData().then(() => {
+                      self.refactorTrek();
+                      deferred.resolve(self._trekList[lang]);
+                      getTreksPending = false;
+                    });
+                  } else {
+                    self.refactorTrek();
+                    deferred.resolve(self._trekList[lang]);
+                    getTreksPending = false;
+                }
 
-                deferred.resolve(self._trekList[lang]);
-                getTreksPending = false;
             });
 
 

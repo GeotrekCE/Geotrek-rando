@@ -18,6 +18,13 @@
 
     <detail-content-meta></detail-content-meta>
 
+    <button
+      class="default-book-button"
+      ng-if="::enabBooking && result.properties.bookingMeta"
+      ui-sref="layout.detail({catSlug: result.properties.category.slug, slug:result.properties.slug, action: 'book'})"
+    >book</button>
+    <div custom-book-button></div>
+
     <detail-content-pictures></detail-content-pictures>
 
     <div class="detail-content-approved" ng-if="result.properties.approved">
