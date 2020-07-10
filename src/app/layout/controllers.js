@@ -156,7 +156,7 @@ function LayoutController($rootScope, $scope, $state, $location, resultsService,
 function SidebarHomeController() {
 }
 
-function SidebarDetailController($scope, $rootScope, $modal, $stateParams, $location, globalSettings, resultsService, favoritesService, webglService) {
+function SidebarDetailController($scope, $window, $rootScope, $modal, $stateParams, $location, globalSettings, resultsService, favoritesService, webglService, Analytics) {
 
     $scope.webGLisEnable = webglService.isEnabled();
 
@@ -201,6 +201,27 @@ function SidebarDetailController($scope, $rootScope, $modal, $stateParams, $loca
     $scope.isInFavorites = favoritesService.isInFavorites;
 
     $scope.back = $rootScope.back;
+
+    $scope.gaDownloadGPX = function(item) {
+        if (globalSettings.GOOGLE_ANALYTICS_ID) {
+            Analytics.send('event', 'GPX', 'download', item.properties.slug);
+        }
+        $window.open(item.properties.gpx, "_self")
+    };
+
+    $scope.gaDownloadKML = function(item) {
+        if (globalSettings.GOOGLE_ANALYTICS_ID) {
+            Analytics.send('event', 'KML', 'download', item.properties.slug);
+        }
+        $window.open(item.properties.kml, "_self")
+    };
+
+    $scope.gaDownloadPDF = function(item) {
+        if (globalSettings.GOOGLE_ANALYTICS_ID) {
+            Analytics.send('event', 'PDF', 'download', item.properties.slug);
+        }
+        $window.open(item.properties.printable, "_blank")
+    };
 
     getResultDetails(false);
 
