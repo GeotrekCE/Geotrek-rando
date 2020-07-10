@@ -24,6 +24,7 @@ function ItemsListController($scope, $filter, globalSettings, favoritesService, 
     $scope.isInFavorites = favoritesService.isInFavorites;
     $scope.approved = globalSettings.APPROVED_SMALL;
     $scope.approvedLabel = globalSettings.APPROVED_LABEL;
+    $scope.enabBooking = globalSettings.ENABLE_BOOKING;
 }
 
 module.exports = {
