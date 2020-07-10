@@ -45,6 +45,10 @@ function layoutRoutes($locationProvider, $stateProvider, $urlRouterProvider, glo
         })
         .state('layout.detail', {
             url: ':catSlug/:slug/',
+            resolve: { action: function ($stateParams) {
+              return $stateParams.action;
+            } },
+            params:  { action: null },
             views: {
                 'sidebar' : {
                     template: require('./templates/sidebar-detail.html'),

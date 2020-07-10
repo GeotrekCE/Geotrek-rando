@@ -447,6 +447,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
 
     $scope.approved = globalSettings.APPROVED_BIG;
     $scope.approvedLabel = globalSettings.APPROVED_LABEL;
+    $scope.enabBooking = globalSettings.ENABLE_BOOKING;
 
     $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
 

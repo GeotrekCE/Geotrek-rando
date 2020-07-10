@@ -246,6 +246,9 @@ msgstr ""
 msgid "ERROR_WARNING"
 msgstr ""
 
+msgid "BOOK_BUTTON"
+msgstr "Book"
+
 
 # FILTERS
 #

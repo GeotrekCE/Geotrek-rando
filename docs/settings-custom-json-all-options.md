@@ -92,6 +92,13 @@ ASIDE_PANEL_FOLDED_BY_DEFAULT | Boolean | `false` | If true, the aside panel on 
 
 
 
+## Booking
+
+Option     | Type      | Default   | Description
+--------|----------|-----------|------------
+ENABLE_BOOKING | Boolean | `false` | Check for booking data in results
+
+
 ## Social networks
 
 Option     | Type      | Default   | Description
