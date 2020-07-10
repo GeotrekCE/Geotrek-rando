@@ -230,6 +230,9 @@ msgstr "Mensaje fue registrado. Gracias por su ayuda !"
 msgid "ERROR_WARNING"
 msgstr "Mensaje no fue registrado. Disculpen este inconveniente mientras nosotros avisamos a nuestros informáticos."
 
+msgid "BOOK_BUTTON"
+msgstr "Book"
+
 # FILTERS
 #
 #

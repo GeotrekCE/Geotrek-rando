@@ -4,6 +4,9 @@
             <ng-include class="stripe" src="'/images/icons/stripe.svg'"></ng-include>
         </button>
     </div>
+
+    <custom-detail-aside></custom-detail-aside>
+
     <div class="detail-aside-group children" ng-if="elementChildren.length" ng-class="{active: currentInterest === 'children'}">
         <div class="detail-aside-group-title" ng-click="toggleInterest('children')">
             <span>{{ 'CHILDREN' | translate }}</span>

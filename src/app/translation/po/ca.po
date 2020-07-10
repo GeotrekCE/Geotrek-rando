@@ -403,3 +403,6 @@ msgstr "Disseny i crèdits"
 
 msgid "CONTACT"
 msgstr "Contacte"
+
+msgid "BOOK_BUTTON"
+msgstr "Book"

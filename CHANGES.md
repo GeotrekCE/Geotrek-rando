@@ -1,3 +1,14 @@
+2.25.0 / 2020-07-10
+===================
+
+**Enhancements**
+
+* Add an option to enable booking
+
+**Bug fixes**
+
+* Fix right panel
+
 2.24.1 / 2020-07-01
 ===================
 

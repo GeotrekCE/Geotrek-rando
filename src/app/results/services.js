@@ -117,7 +117,16 @@ function resultsService($rootScope, $q, $location, globalSettings, treksService,
 
     this.getAResultBySlug = function getAResultBySlug (elementSlug, categorySlug, forceRefresh) {
         var deferred = $q.defer();
-        var findTrek = true, findContent = true, findEvent = true, findDive = true;
+        var findTrek = globalSettings.ENABLE_TREKS ? true : null,
+            findContent = globalSettings.ENABLE_TOURISTIC_CONTENT ? true : null,
+            findEvent = globalSettings.ENABLE_TOURISTIC_EVENTS ? true : null,
+            findDive = globalSettings.ENABLE_DIVES ? true : null;
+
+        // If no category is enabled, reject the promise.
+        if (findTrek === null && findContent === null && findEvent === null && findDive === null) {
+            deferred.reject('No category enabled.');
+        }
+
         if (globalSettings.ENABLE_TREKS) {
             treksService.getTreks(forceRefresh)
                 .then(
@@ -193,7 +202,15 @@ function resultsService($rootScope, $q, $location, globalSettings, treksService,
 
     this.getAResultByID = function getAResultByID (elementID, categoryID, forceRefresh) {
         var deferred = $q.defer();
-        var findTrek = true, findContent = true, findEvent = true, findDive = true;
+        var findTrek = globalSettings.ENABLE_TREKS ? true : null,
+            findContent = globalSettings.ENABLE_TOURISTIC_CONTENT ? true : null,
+            findEvent = globalSettings.ENABLE_TOURISTIC_EVENTS ? true : null,
+            findDive = globalSettings.ENABLE_DIVES ? true : null;
+
+        // If no category is enabled, reject the promise.
+        if (findTrek === null && findContent === null && findEvent === null && findDive === null) {
+            deferred.reject('No category enabled.');
+        }
 
         if (globalSettings.ENABLE_TREKS) {
             treksService.getTreks(forceRefresh)

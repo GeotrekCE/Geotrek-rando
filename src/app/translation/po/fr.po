@@ -251,6 +251,9 @@ msgstr ""
 "Le message n'a pu être enregistré. Veuillez nous excuser pour ce "
 "désagrément. Nos équipes ont été prévenues et analysent le problème !"
 
+msgid "BOOK_BUTTON"
+msgstr "Réserver les hébergements en ligne"
+
 # FILTERS
 #
 #

@@ -7,6 +7,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
     $scope.nearElementsByCategories = globalSettings.NEAR_ELEMENTS_CATEGORIES;
     $scope.displayAsidesCounter = globalSettings.DISPLAY_ASIDES_COUNTERS;
     $scope.displayCredits = globalSettings.DISPLAY_CREDITS_ON_IMAGE;
+    $scope.foldAside = globalSettings.ASIDE_PANEL_FOLDED_BY_DEFAULT || false;
 
     if (globalSettings.RULES_FLAT_PAGES_ID) {
         $scope.rulesId = globalSettings.RULES_FLAT_PAGES_ID;
@@ -44,7 +45,6 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
         }
     };
 
-    $scope.foldAside = false;
     $scope.asidePaneToggle = function asidePaneToggle () {
         $scope.foldAside = !$scope.foldAside;
         setTimeout(function () {
@@ -481,6 +481,7 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
 
     $scope.approved = globalSettings.APPROVED_BIG;
     $scope.approvedLabel = globalSettings.APPROVED_LABEL;
+    $scope.enabBooking = globalSettings.ENABLE_BOOKING;
 
     $scope.$on('$destroy', function () { rootScopeEvents.forEach(function (dereg) { dereg(); }); });
 
