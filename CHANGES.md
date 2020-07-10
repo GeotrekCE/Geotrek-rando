@@ -1,5 +1,5 @@
-2.25.0 / 2020-07-10
-===================
+2.25.0-ux / 2020-07-10
+======================
 
 **Enhancements**
 
@@ -9,8 +9,8 @@
 
 * Fix right panel
 
-2.24.1 / 2020-07-01
-===================
+2.24.1-ux / 2020-07-01
+======================
 
 **Enhancements**
 
@@ -19,8 +19,8 @@
 * Get options list (magnitude problem, activities, categories) from endpoint
 **Warning:** these features are only available for Geotrek-admin >= 2.32.12
 
-2.24.0 / 2020-04-28
-===================
+2.24.0-ux / 2020-04-28
+======================
 
 **Enhancements**
 
