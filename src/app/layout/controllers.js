@@ -216,6 +216,13 @@ function SidebarDetailController($scope, $window, $rootScope, $modal, $statePara
         $window.open(item.properties.kml, "_self")
     };
 
+    $scope.gaDownloadPDF = function(item) {
+        if (globalSettings.GOOGLE_ANALYTICS_ID) {
+            Analytics.send('event', 'PDF', 'download', item.properties.slug);
+        }
+        $window.open(item.properties.printable, "_blank")
+    };
+
     getResultDetails(false);
 
 }
