@@ -1,6 +1,6 @@
 {
   "name": "geotrekrando",
-  "version": "2.26.0",
+  "version": "2.26.1-dev0",
   "dependencies": {
     "@gulp-sourcemaps/identity-map": {
       "version": "1.0.1",
