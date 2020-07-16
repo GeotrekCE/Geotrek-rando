@@ -1,7 +1,9 @@
-2.25.1-dev0
-===========
+2.26.0 / 2020-07-16
+===================
 
-**Bug fixes**
+**Enhancements**
+
+* Add google analytic for downloaded pdf, gpx, kml
 
 2.25.0 / 2020-07-10
 ===================
