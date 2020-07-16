@@ -12,7 +12,7 @@
         </a>
     </li>
     <li class="toolbar-action print" ng-if="result.properties.printable">
-        <a class="toolbar-action-link" href="{{::result.properties.printable}}" target="_blank" tooltip-placement="bottom" tooltip="{{'PRINT' | translate}}">
+        <a class="toolbar-action-link" href ng-click="gaDownloadPDF(result)" tooltip-placement="bottom" tooltip="{{'PRINT' | translate}}">
             <ng-include class="print-icon svg-icon" src="'/images/icons/print.svg'"></ng-include>
             <span class="toolbar-action-label">{{'PRINT' | translate}}</span>
         </a>
@@ -23,13 +23,13 @@
         </a>
         <ul class="dropdown-menu" role="menu">
             <li class="toolbar-action kml" ng-if="result.properties.kml">
-                <a class="toolbar-action-link" href="{{::result.properties.kml}}" target="_self" tooltip-placement="bottom" tooltip="{{'KML' | translate}}">
+                <a class="toolbar-action-link" href ng-click="gaDownloadKML(result)" tooltip-placement="bottom" tooltip="{{'KML' | translate}}">
                     <span class="txt-icon">KML</span>
                     <span class="toolbar-action-label">{{'KML' | translate}}</span>
                 </a>
             </li>
             <li class="toolbar-action gpx" ng-if="result.properties.gpx">
-                <a class="toolbar-action-link" href="{{::result.properties.gpx}}" target="_self" tooltip-placement="bottom" tooltip="{{'GPX' | translate}}">
+                <a class="toolbar-action-link" href ng-click="gaDownloadGPX(result)" tooltip-placement="bottom" tooltip="{{'GPX' | translate}}">
                     <span class="txt-icon">GPX</span>
                     <span class="toolbar-action-label">{{'GPX' | translate}}</span>
                 </a>

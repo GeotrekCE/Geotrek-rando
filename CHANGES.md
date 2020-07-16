@@ -1,3 +1,10 @@
+2.26.0-ux / 2020-07-16
+===================
+
+**Enhancements**
+
+* Add google analytic for downloaded pdf, gpx, kml
+
 2.25.0-ux / 2020-07-10
 ======================
 
