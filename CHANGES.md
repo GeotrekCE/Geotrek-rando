@@ -4,7 +4,9 @@
 **Bug fixes**
 
 * Fix map infinite move (was due to a bug on leaflet-minimap)  
-  Run `npm update leaflet-minimap` to update it
+  Run `npm update leaflet-minimap` to update it. Leaflet-minimap
+  package is temporarly pinned to a fork, waiting this PR to be merged
+  https://github.com/Norkart/Leaflet-MiniMap/pull/155
 
 2.26.0 / 2020-07-16
 ===================
