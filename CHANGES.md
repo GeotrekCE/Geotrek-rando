@@ -1,7 +1,9 @@
 2.26.1-dev0
 ===========
 
-**Enhancements**
+**Bug fixes**
+
+* Fix map infinite move (was due to a bug on leaflet-minimap)
 
 2.26.0 / 2020-07-16
 ===================
