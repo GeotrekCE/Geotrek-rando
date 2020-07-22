@@ -3,7 +3,8 @@
 
 **Bug fixes**
 
-* Fix map infinite move (was due to a bug on leaflet-minimap)
+* Fix map infinite move (was due to a bug on leaflet-minimap)  
+  Run `npm update leaflet-minimap` to update it
 
 2.26.0 / 2020-07-16
 ===================
