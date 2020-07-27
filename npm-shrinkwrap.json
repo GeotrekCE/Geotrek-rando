@@ -95,9 +95,9 @@
       "resolved": "https://registry.npmjs.org/angular-ui-router/-/angular-ui-router-0.4.3.tgz"
     },
     "angularjs-slider": {
-      "version": "2.9.0",
-      "from": "angularjs-slider@https://registry.npmjs.org/angularjs-slider/-/angularjs-slider-2.9.0.tgz",
-      "resolved": "https://registry.npmjs.org/angularjs-slider/-/angularjs-slider-2.9.0.tgz"
+      "version": "6.7.0",
+      "from": "angularjs-slider@>=6.6.0 <7.0.0",
+      "resolved": "https://registry.npmjs.org/angularjs-slider/-/angularjs-slider-6.7.0.tgz"
     },
     "ansi-regex": {
       "version": "2.1.1",
