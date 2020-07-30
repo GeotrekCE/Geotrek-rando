@@ -46,8 +46,10 @@ PLACEHOLDER_IMAGE | string(file name) | `""` | Placeholder used for contents ele
 DISPLAY_CREDITS_ON_IMAGE | Boolean | `true` | Add credits on pictures in detail view. From Geotrek-admin version 2.23.2 credits are added directly to pictures, so this setting should be set `false` to avoid double mark.
 RANDOMIZE_RESULTS | Boolean | `false` | If true, items are randomized in results list
 CENTERON_FITS_BOUNDS | Boolean | `false` | Fit map viewport on geometry instead of centering on first point
+PDF_LINK_IN_DOWNLOAD | Boolean | `false` | Display PDF link below download button (with KML and GPX), instead of displaying print button
 
 ### Favicon options
+
 All the options are required
 
 Option     | Type      | Default   | Description
