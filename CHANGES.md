@@ -1,6 +1,11 @@
 2.26.2-dev
 ==========
 
+**Enhancements**
+
+* Add `PDF_LINK_IN_DOWNLOAD` parameter to display PDF button
+ below download button, instead of using print button (in detail view)
+
 **Bug fixes**
 
 * 
