@@ -1,14 +1,10 @@
-2.26.2-dev
-==========
+2.27.0 / 2020-08-17
+===================
 
 **Enhancements**
 
 * Add `PDF_LINK_IN_DOWNLOAD` parameter to display PDF button
  below download button, instead of using print button (in detail view)
-
-**Bug fixes**
-
-* 
 
 2.26.1 / 2020-07-27
 ===================
