@@ -381,6 +381,9 @@ msgstr ""
 msgid "FORM_SEND"
 msgstr ""
 
+msgid "PDF"
+msgstr "Scarica PDF"
+
 msgid "KML"
 msgstr "Scarica KML"
 

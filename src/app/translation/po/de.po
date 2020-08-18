@@ -378,6 +378,9 @@ msgstr "Lage"
 msgid "FORM_SEND"
 msgstr "Senden"
 
+msgid "PDF"
+msgstr "PDF Dokument herunterladen"
+
 msgid "KML"
 msgstr "KML Dokument herunterladen"
 

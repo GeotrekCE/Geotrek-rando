@@ -378,6 +378,9 @@ msgstr "Plaats"
 msgid "FORM_SEND"
 msgstr "Sturen"
 
+msgid "PDF"
+msgstr "De PDF kaart downloaden"
+
 msgid "KML"
 msgstr "De KML kaart downloaden"
 
