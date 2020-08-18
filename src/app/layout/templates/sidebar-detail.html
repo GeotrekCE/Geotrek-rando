@@ -11,17 +11,24 @@
             <span class="toolbar-action-label">{{'3D' | translate}}</span>
         </a>
     </li>
-    <li class="toolbar-action print" ng-if="result.properties.printable">
+    <li class="toolbar-action print" ng-if="!(pdfLinkInDownload) && result.properties.printable">
         <a class="toolbar-action-link" href ng-click="gaDownloadPDF(result)" tooltip-placement="bottom" tooltip="{{'PRINT' | translate}}">
             <ng-include class="print-icon svg-icon" src="'/images/icons/print.svg'"></ng-include>
             <span class="toolbar-action-label">{{'PRINT' | translate}}</span>
         </a>
     </li>
-    <li class="toolbar-action kml" ng-if="result.properties.kml || result.properties.gpx">
+    <li class="toolbar-action kml"
+        ng-if="result.properties.kml || result.properties.gpx || (pdfLinkInDownload && result.properties.printable)">
         <a class="toolbar-action-link" href tooltip-placement="bottom" tooltip="{{'DOWNLOAD' | translate}}" class="dropdown-toggle" data-toggle="dropdown" role="button">
             <ng-include class="download-icon svg-icon" src="'/images/icons/download.svg'"></ng-include>
         </a>
         <ul class="dropdown-menu" role="menu">
+            <li class="toolbar-action pdf" ng-if="pdfLinkInDownload && result.properties.printable">
+                <a class="toolbar-action-link" href ng-click="gaDownloadPDF(result)" tooltip-placement="bottom" tooltip="{{'PDF' | translate}}">
+                    <span class="txt-icon">PDF</span>
+                    <span class="toolbar-action-label">{{'PDF' | translate}}</span>
+                </a>
+            </li>
             <li class="toolbar-action kml" ng-if="result.properties.kml">
                 <a class="toolbar-action-link" href ng-click="gaDownloadKML(result)" tooltip-placement="bottom" tooltip="{{'KML' | translate}}">
                     <span class="txt-icon">KML</span>

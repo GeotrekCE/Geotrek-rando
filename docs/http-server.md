@@ -33,6 +33,12 @@ server {
     #     root <my_mobile_directory>/;
     #     try_files /$http_accept_language/$1 /nolang/$1 =404;
     # }
+    #
+    # Uncomment below if you want to force PDF download instead of opening in browser
+    # location ~ /api/.*([^/]+\.pdf)$ {
+    #     root <my_data_directory>/;
+    #     add_header Content-Disposition 'attachment; filename="$1"';
+    # }
     location ~ ^/(api|media|static|zip|meta)/ {
         root <my_data_directory>/;
     }
