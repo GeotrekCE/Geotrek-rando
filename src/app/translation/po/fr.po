@@ -388,6 +388,9 @@ msgstr "Signaler"
 msgid "FORM_PICTURES"
 msgstr "Photographies"
 
+msgid "PDF"
+msgstr "Télécharger la fiche PDF"
+
 msgid "KML"
 msgstr "Télécharger la fiche KML"
 

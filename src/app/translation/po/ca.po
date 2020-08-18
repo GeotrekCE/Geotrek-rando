@@ -341,6 +341,9 @@ msgstr "Situació (feu clic sobre el mapa per situar el marcador)"
 msgid "FORM_SEND"
 msgstr "Informe"
 
+msgid "PDF"
+msgstr "Descarregar l'arxiu PDF"
+
 msgid "KML"
 msgstr "Descarregar l'arxiu KML"
 

@@ -395,6 +395,9 @@ msgstr "Send"
 msgid "FORM_PICTURES"
 msgstr "Photography"
 
+msgid "PDF"
+msgstr "Download the PDF file"
+
 msgid "KML"
 msgstr "Download the KML file"
 

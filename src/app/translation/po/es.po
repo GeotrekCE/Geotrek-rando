@@ -350,6 +350,9 @@ msgstr "Informar"
 msgid "FORM_PICTURES"
 msgstr "Fotografía"
 
+msgid "PDF"
+msgstr "Descargar fichero PDF"
+
 msgid "KML"
 msgstr "Descargar fichero KML"
 
