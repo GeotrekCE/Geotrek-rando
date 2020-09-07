@@ -47,7 +47,7 @@
     "ENABLE_UNIQUE_CAT": false,
     "RANDOMIZE_RESULTS": false,
     "PDF_LINK_IN_DOWNLOAD": false,
-    "FILTERS_DEFAULT_OPEN": false,
+    "FILTERS_DEFAULT_OPEN": true,
     "DEFAULT_INTEREST": "pois",
     "FACEBOOK_APP_ID": "",
     "TWITTER_ID": "",
