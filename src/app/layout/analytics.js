@@ -4,7 +4,7 @@ function AnalyticsConfig(AnalyticsProvider, globalSettings) {
 
     if (globalSettings.GOOGLE_ANALYTICS_ID) {
         AnalyticsProvider.useAnalytics(true);
-        AnalyticsProvider.setAccount(globalSettings.GOOGLE_ANALYTICS_ID);
+        AnalyticsProvider.setAccount({tracker: globalSettings.GOOGLE_ANALYTICS_ID, set: {anonymizeIp: true}});
 
         // track all routes (or not)
         AnalyticsProvider.trackPages(true);
