@@ -1,9 +1,9 @@
-2.27.1-dev0
+2.28.0 / 2020-09-17
 ===================
 
-**Bug fixes**
+**Enhancements**
 
-*
+* Anonymize ip for google analytic
 
 2.27.0 / 2020-08-17
 ===================
