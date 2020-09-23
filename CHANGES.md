@@ -1,5 +1,12 @@
+2.28.1-ux / 2020-09-23
+======================
+
+**Bug fixes**
+
+* Fix elements in the wrong near category
+
 2.28.0-ux / 2020-09-17
-===================
+======================
 
 **Enhancements**
 
