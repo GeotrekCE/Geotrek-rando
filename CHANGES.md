@@ -3,7 +3,7 @@
 
 **Bug fixes**
 
-*
+* Fix elements in the wrong near category
 
 2.28.0 / 2020-09-17
 ===================
