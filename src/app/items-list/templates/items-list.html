@@ -23,7 +23,7 @@
               class="result-action result-book category-{{::result.properties.category.id}}-bg-ld"
               ng-if="::enabBooking && result.properties.reservation_system && result.properties.reservation_id"
               ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: result.properties.slug, action: 'book'})"
-            >&#x1F6D2;</a>
+            ><img data-src="/images/icons/shopping-cart.svg"></a>
             <a class="result-action result-view-details  category-{{::result.properties.category.id}}-bg-ld" ui-sref="layout.detail({catSlug: result.properties.category.slug, slug: result.properties.slug})">{{:: 'SHOW_MORE' | translate }}</a>
         </div>
 
