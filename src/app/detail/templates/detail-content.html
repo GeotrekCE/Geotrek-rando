@@ -18,13 +18,17 @@
 
     <detail-content-meta></detail-content-meta>
 
-    <div class="detail-content-booking">
-        <a
-        class="default-book-button"
+    <div
+        class="detail-content-booking"
         ng-if="::enabBooking && result.properties.reservation_system && result.properties.reservation_id"
-        ui-sref="layout.detail({catSlug: result.properties.category.slug, slug:result.properties.slug, action: 'book'})"
-        >{{ 'BOOK_BUTTON' | translate}}</a>
-        <div custom-book-button></div>
+    >
+        <h3>
+            <a
+                class="default-book-button"
+                ui-sref="layout.detail({catSlug: result.properties.category.slug, slug:result.properties.slug, action: 'book'})"
+            >{{ 'BOOK_BUTTON' | translate}}</a>
+            <div custom-book-button></div>
+        </h3>
     </div>
 
     <detail-content-pictures></detail-content-pictures>
