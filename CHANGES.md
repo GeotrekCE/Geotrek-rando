@@ -3,7 +3,12 @@
 
 **Bug fixes**
 
-*
+* Fix files not displayed if there is no video
+
+**Enhancements**
+
+* Display title if there is no legend on files and videos
+
 
 2.28.1 / 2020-09-23
 ===================
