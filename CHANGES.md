@@ -1,9 +1,28 @@
-2.27.1-dev0
+2.28.2-dev
 ===================
 
 **Bug fixes**
 
-*
+* Fix files not displayed if there is no video
+
+**Enhancements**
+
+* Display title if there is no legend on files and videos
+
+
+2.28.1 / 2020-09-23
+===================
+
+**Bug fixes**
+
+* Fix elements in the wrong near category
+
+2.28.0 / 2020-09-17
+===================
+
+**Enhancements**
+
+* Anonymize ip for google analytic
 
 2.27.0 / 2020-08-17
 ===================

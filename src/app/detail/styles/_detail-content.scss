@@ -259,10 +259,16 @@
 }
 
 .detail-content-booking {
-    margin: .5em 2rem 0 2rem;
-	font-size: 1.2em;
-    font-weight: bold;
+    margin: .5em 1.5em;
+    padding-bottom: 1em;
     text-align: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+
+    .default-book-button {
+      text-decoration: underline;
+      color: inherit;
+    }
 }
 
 .detail-content-teaser {

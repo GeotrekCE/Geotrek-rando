@@ -1,4 +1,4 @@
-<div class="medias detail-content-medias" ng-if="result.properties.videos[0]">
+<div class="medias detail-content-medias" ng-if="result.properties.videos[0] || result.properties.files[0]">
     <h3>Media</h3>
     <ul class="medias-liste">
         <li ng-repeat="media in result.properties.videos track by $index"
@@ -7,12 +7,15 @@
             <a href class="detail-media-link primary-hover-c" ng-click="openPlayer(media)" title="{{::media.legend}}">
                 <i ng-if="media.backend === 'Youtube' || media.backend === 'Vimeo'" class="fa fa-file-video-o"></i>
                 <i ng-if="media.backend === 'SoundCloud'" class="fa fa-file-audio-o"></i>
-                <span>{{::media.legend}}</span>
+                <span ng-if="media.legend">{{::media.legend}}</span>
+                <span ng-if="!media.legend && media.title">{{::media.title}}</span>
             </a>
         </li>
         <li ng-repeat="file in result.properties.files track by $index" class="detail-media media file">
             <a href="{{::file.url}}" target="_blank" title="{{::file.legend}}" class="detail-media-link primary-hover-c">
-                <i class="fa fa-file-o"></i> {{::file.legend}}
+                <i class="fa fa-file-o"></i>
+                <span ng-if="file.legend">{{::file.legend}}</span>
+                <span ng-if="!file.legend && file.title">{{::file.title}}</span>
             </a>
         </li>
     </ul>
