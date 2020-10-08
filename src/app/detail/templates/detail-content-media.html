@@ -1,4 +1,4 @@
-<div class="medias detail-content-medias" ng-if="result.properties.videos[0]">
+<div class="medias detail-content-medias" ng-if="result.properties.videos[0] || result.properties.files[0]">
     <h3>Media</h3>
     <ul class="medias-liste">
         <li ng-repeat="media in result.properties.videos track by $index"
