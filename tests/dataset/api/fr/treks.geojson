@@ -707,7 +707,23 @@
                         "url": "http://makina-corpus.com/"
                     }
                 ],
-                "is_park_centered": true,
+                "labels": [
+                    {
+                        "id": 1,
+                        "pictogram": "/media/upload/nationalpark.svg",
+                        "label": "En coeur de parc",
+                        "description": "Cet itinéraire est dans le cœur du Parc national",
+                        "advice": "Le Parc national est un territoire naturel, ouvert à tous, mais soumis à une réglementation qu’il est utile de connaître pour préparer son séjour",
+                        "filter_rando": false
+                    },
+                    {
+                        "id": 2, "pictogram": "/media/upload/dog.svg",
+                        "label": "Chien en laisse",
+                        "description": "Ceci est une autre etiquette",
+                        "advice": "Tenir le chien en laisse",
+                        "filter_rando": true
+                    }
+                ],
                 "disabled_infrastructure": "",
                 "parking_location": [
                     1.412816047668457,
@@ -2186,7 +2202,14 @@
                 "public_transport": "",
                 "advised_parking": "Dans le bas du village",
                 "web_links": [],
-                "is_park_centered": false,
+                "labels": [
+                    {
+                        "id": 1, "pictogram": "/media/upload/weblink-book.png",
+                        "description": "Cet itinéraire est dans le cœur du Parc national",
+                        "advice": "Le Parc national est un territoire naturel, ouvert à tous, mais soumis à une réglementation qu’il est utile de connaître pour préparer son séjour",
+                        "filter_rando": true
+                    }
+                ],
                 "disabled_infrastructure": "Aucune infrastructure sp&eacute;cifique",
                 "parking_location": [
                     1.3386154174804688,
@@ -3297,7 +3320,7 @@
                 "public_transport": "",
                 "advised_parking": "Parking Goulier Neige",
                 "web_links": [],
-                "is_park_centered": false,
+                "labels": [],
                 "disabled_infrastructure": "",
                 "parking_location": [
                     1.514310836791993,

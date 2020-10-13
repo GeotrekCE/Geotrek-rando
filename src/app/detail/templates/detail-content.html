@@ -76,6 +76,13 @@
         <a ng-if="rulesId" ui-sref="layout.flat({flatID: rulesId})">{{ 'PARK_CENTERED' | translate}}</a>
     </div>
 
+    <div ng-repeat="label in result.properties.labels"
+         class="detail-content-notice labels" ng-if="label">
+        <i class="notice-symbol fa fa-info-circle"></i>
+        <p ng-if="!rulesId">{{label.advice | translate}}</p>
+        <a ng-if="rulesId" ui-sref="layout.flat({flatID: rulesId})">{{ label.advice | translate}}</a>
+    </div>
+
     <div class="detail-content-notice event-notice-custom" ng-if="result.properties.category.id === 'E'">
         <i class="notice-symbol fa fa-info-circle"></i>
         <p>{{ 'EVENT_CUSTOM_1' | translate }}</p>

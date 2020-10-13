@@ -72,7 +72,11 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                         practice: {
                             type: 'checkbox',
                             values: aTrek.properties.practice ? [angular.copy(aTrek.properties.practice)] : [],
-                        }
+                        },
+                        labels: {
+                            type: 'checkbox',
+                            values: aTrek.properties.labels ? angular.copy(aTrek.properties.labels) : []
+                        },
                     };
 
                     currentCategory.duration.values = _.map(_.sortBy(currentCategory.duration.values, 'id'));
@@ -131,6 +135,24 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
 
                             if (!(utilsFactory.idIsInArray(treksCategories[catIndex].themes.values, theme)) && theme !== undefined) {
                                 treksCategories[catIndex].themes.values.push(theme);
+                            }
+
+                        });
+                    }
+                    _.forEach(aTrek.properties.type1, function (aType) {
+
+                        if (!(utilsFactory.idIsInArray(treksCategories[catIndex].type1.values, aType))) {
+
+                            treksCategories[catIndex].type1.values.push(aType);
+
+                        }
+
+                    });
+                    if (aTrek.properties.labels && aTrek.properties.labels.length > 0) {
+                        _.forEach(aTrek.properties.labels, function (label) {
+
+                            if (!(utilsFactory.idIsInArray(treksCategories[catIndex].labels.values, label)) && label !== undefined) {
+                                treksCategories[catIndex].labels.values.push(label);
                             }
 
                         });
