@@ -58,6 +58,11 @@ function treksService(globalSettings, settingsFactory, translationService, $http
                     theme.pictogram = globalSettings.API_URL + theme.pictogram;
                 }
             });
+            _.forEach(trek.properties.labels, function (label) {
+                if (label.pictogram) {
+                    label.pictogram = globalSettings.API_URL + label.pictogram;
+                }
+            });
             _.forEach(trek.properties.networks, function (network) {
                 if (network.pictogram) {
                     network.pictogram = globalSettings.API_URL + network.pictogram;
