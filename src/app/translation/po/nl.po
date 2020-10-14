@@ -269,6 +269,9 @@ msgstr ""
 msgid "THEMES"
 msgstr "Thema's"
 
+msgid "Autres"
+msgstr "Andere"
+
 msgid "DISTRICTS"
 msgstr "Gebergtes"
 
