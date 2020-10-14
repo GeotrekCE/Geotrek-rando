@@ -2183,7 +2183,7 @@
                 "labels": [
                     {
                         "id": 1, "pictogram": "/media/upload/nationalpark.svg",
-                        "label": "Is in the midst of the park",
+                        "name": "Is in the midst of the park",
                         "description": "This hike is in the core of the national park",
                         "advice": "The national park is an unrestricted natural area but subjected to regulations which must be known by all visitors.",
                         "filter_rando": true
