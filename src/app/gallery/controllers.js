@@ -1,6 +1,6 @@
 'use strict';
 
-function GalleryController(images, slideIndex, $q, $scope, $modalInstance) {
+function GalleryController(images, slideIndex, captionOrder, $q, $scope, $modalInstance) {
 /*
     var gallery = document.querySelector('.lightbox-gallery'),
         slides = [];
@@ -232,6 +232,18 @@ function GalleryController(images, slideIndex, $q, $scope, $modalInstance) {
         return deferred.promise;
     }
 
+    function computeCaption(image) {
+        var index;
+        var caption = "";
+        for(index in captionOrder) {
+            caption += image[captionOrder[index]];
+            if(index != captionOrder.length - 1) {
+                caption += " - ";
+            }
+        }
+        return caption
+    }
+
     function initGallery() {
         $scope.slides = [];
         $scope.myInterval = 0;
@@ -242,7 +254,7 @@ function GalleryController(images, slideIndex, $q, $scope, $modalInstance) {
                     function (currentMargin) {
                         $scope.slides.push({
                             url: image.url,
-                            text: image.legend + ' - ' + image.author,
+                            text: computeCaption(image),
                             marginTop: currentMargin + 'px'
                         });
 
