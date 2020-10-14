@@ -14,15 +14,15 @@ describe('rando.config', function () {
             gs = _globalSettings_;
         }));
 
-        it('ENABLE_HTML_MODE shoudl be bool', function () {
+        it('ENABLE_HTML_MODE should be bool', function () {
             expect(typeof gs.ENABLE_HTML_MODE).toBe('boolean');
         });
 
-        it('SHOW_HOME shoudl be bool', function () {
+        it('SHOW_HOME should be bool', function () {
             expect(typeof gs.SHOW_HOME).toBe('boolean');
         });
 
-        it('SHOW_FOOTER shoudl be bool', function () {
+        it('SHOW_FOOTER should be bool', function () {
             expect(typeof gs.SHOW_FOOTER).toBe('boolean');
         });
 
