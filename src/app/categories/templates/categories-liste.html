@@ -311,10 +311,10 @@
                             </div>
                             <!-- Filter label trek -->
 
-                             <!-- Other filter selector -->
+                            <!-- Other filter selector -->
                             <div ng-if="category.labels && category.labels.values.length > 0" class="category-filter selector labels" ng-class="{empty: category.labels.values.length === 0}">
                                 <div class="filter-title">
-                                    <span>{{'OTHER' | translate}}</span>
+                                    <span>{{'OTHERS' | translate}}</span>
                                 </div>
                                 <div class="choices">
                                     <div ng-repeat="label in category.labels.values" ng-if="label.filter_rando" class="themes form-group" tooltip-placement="right" tooltip="{{label.name}}">
