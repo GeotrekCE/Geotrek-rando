@@ -35,6 +35,10 @@ HOME_TEMPLATE_FILE | Object | `{}` | For each lang you can specify a different h
 SHOW_FOOTER | Boolean | `false` | Display footer on all pages
 FOOTER_TEMPLATE_FILE | String (file name) | `""` | Name of a custom template for the footer of the app
 HEADER_TEMPLATE_FILE | String(file name) | `""` | Name of a custom template for the header of the app
+PICTURE_TREK_SLIDES_CAPTION_ORDER | Array of strings (name of fields to display) | `["title", "author", "legend"]` | List of fields to display under the picture in the caption when displaying the slideshow of trek pictures
+PICTURE_TREK_CAPTION_ORDER | Array of strings (name of fields to display) | `["title", "author", "legend"]` | List of fields to display on the picture to be the caption when displaying the picture of a trek
+PICTURE_POI_SLIDES_CAPTION_ORDER | Array of strings (name of fields to display) | `["title", "author", "legend"]` | List of fields to display under the picture in the caption when displaying the slideshow of POIs pictures
+PICTURE_POI_CAPTION_ORDER | Array of strings (name of fields to display) | `["title", "author", "legend"]` | List of fields to display on the picture to be the caption when displaying the picture of a POI
 ENABLE_DISTRICTS_FILTERING | Boolean | `true` | Show districts filtering on results page
 ENABLE_CITIES_FILTERING | Boolean | `true` | Show cities filtering on results page
 ENABLE_STRUCTURE_FILTERING | Boolean | `true` | Show structure filtering on results page

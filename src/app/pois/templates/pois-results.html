@@ -30,7 +30,9 @@
             ng-if="poi.properties.pictures[0]"
             style="background-image: url('{{::poi.properties.pictures[0].url}}');"
             ng-click="showLightbox(poi.properties.pictures, 0)">
-            <div ng-if="poi.properties.pictures[0]" class="poi-picture-credits">{{::poi.properties.pictures[0].author}}</div>
+            <div ng-if="poi.properties.pictures[0]" class="poi-picture-credits">
+                {{::displayCaptionPicture(poi.properties.pictures[0])}}
+            </div>
 
             <div class="poi-picture-how-many" ng-if="poi.properties.pictures.length > 1">
                 {{ poi.properties.pictures.length }}

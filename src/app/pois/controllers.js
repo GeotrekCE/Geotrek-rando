@@ -47,9 +47,25 @@ function PoisListeController($scope, $rootScope, globalSettings, utilsFactory, $
                 },
                 slideIndex: function () {
                     return slideIndex;
+                },
+                captionOrder: function () {
+                    return globalSettings.PICTURE_POI_SLIDES_CAPTION_ORDER;
                 }
             }
         });
+    };
+
+    $scope.displayCaptionPicture = function displayCaptionPicture (image) {
+        var index;
+        var captionOrder = globalSettings.PICTURE_POI_CAPTION_ORDER;
+        var caption = "";
+        for(index in captionOrder) {
+            caption += image[captionOrder[index]];
+            if(index != captionOrder.length - 1) {
+                caption += " - ";
+            }
+        }
+        return caption;
     };
 
     function initPois() {
