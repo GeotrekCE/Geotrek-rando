@@ -56,7 +56,7 @@ function WarningPanelController($scope, $rootScope, $q, resultsService, WarningS
 
     $scope.sendWarning = function sendWarning () {
         if ($scope.warningForm.$valid) {
-            WarningService.sendWarning($scope.warning)
+            WarningService.sendWarning($scope.warning, $scope.result)
                 .then(function (answer) {
                     $scope.warningStatus = 'success';
                 })
