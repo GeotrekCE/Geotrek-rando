@@ -49,7 +49,7 @@ function WarningService(translationService, settingsFactory, globalSettings, $re
         return deferred.promise;
     };
 
-    this.sendWarning = function sendWarning (formData) {
+    this.sendWarning = function sendWarning (formData, relatedTrek) {
 
         var currentLang = translationService.getCurrentLang();
         var url = settingsFactory.warningSubmitUrl.replace(/\$lang/, currentLang);
@@ -64,7 +64,7 @@ function WarningService(translationService, settingsFactory, globalSettings, $re
         data.append("category", formData.category);
         data.append("comment", formData.comment);
         data.append("geom", '{"type": "Point", "coordinates": [' + formData.location.lng + ',' + formData.location.lat + ']}');
-
+        data.append("related_trek", relatedTrek.id)
         return $http.post(url, data, {
         transformRequest: angular.identity,
         headers: { "Content-Type": undefined }
