@@ -63,9 +63,25 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
                 },
                 slideIndex: function () {
                     return slideIndex;
+                },
+                captionOrder: function () {
+                    return globalSettings.PICTURE_TREK_SLIDES_CAPTION_ORDER;
                 }
             }
         });
+    };
+
+    $scope.displayCaptionPicture = function displayCaptionPicture (image) {
+        var index;
+        var captionOrder = globalSettings.PICTURE_TREK_CAPTION_ORDER;
+        var caption = "";
+        for(index in captionOrder) {
+            caption += image[captionOrder[index]];
+            if(index != captionOrder.length - 1) {
+                caption += " - ";
+            }
+        }
+        return caption;
     };
 
     $scope.openPlayer = function openPlayer (media) {

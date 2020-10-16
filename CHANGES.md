@@ -1,5 +1,20 @@
+=======
+2.28.2-ux / 2020-10-16
+===================
+
+**Bug fixes**
+
+* Fix files not displayed if there is no video
+
+**Enhancements**
+
+* Display title if there is no legend on files and videos
+* Add parameters to configure the way captions are displayed under pictures : for the caption on a trek picture (PICTURE_TREK_CAPTION_ORDER) / for the caption on a trek slideshow (PICTURE_TREK_SLIDES_CAPTION_ORDER) / for the caption on a POI picture (PICTURE_POI_CAPTION_ORDER) / for the caption on a POI slideshow (PICTURE_POI_SLIDES_CAPTION_ORDER)
+* Send related trek information when a user make a report
+
+
 2.28.1-ux / 2020-09-23
-======================
+===================
 
 **Bug fixes**
 
