@@ -273,10 +273,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Filter label trek -->
-
                             <!-- Other filter selector -->
-                            <div ng-if="category.labels && category.labels.values.length > 0" class="category-filter selector labels" ng-class="{empty: category.labels.values.length === 0}">
+                            <div ng-if="category.labels && category.labels.values.length > 0 && !category.labels.values.every(checkFilterRando)" class="category-filter selector labels" ng-class="{empty: category.labels.values.length === 0}">
                                 <div class="filter-title">
                                     <span>{{'OTHERS' | translate}}</span>
                                 </div>
