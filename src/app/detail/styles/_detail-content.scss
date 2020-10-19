@@ -376,21 +376,26 @@
 .detail-content-notice {
     margin: 1em 2rem 0 2rem;
     padding: 1.3em 1em 1em;
+    display: flex;
 
     color: $dark-grey;
     p {
         margin: 0;
+    }
+    h3 {
+        margin: .2em 0 .6em;
     }
 
     .notice-symbol {
         vertical-align: baseline;
         float: left;
         font-size: 1.5em;
-        margin-top: -.30em;
-        margin-right: .35em;
+        margin-right: .5em;
+        max-width: 21px;
+        max-height: 21px;
         img, svg {
-            max-width: 48px;
-            max-height: 48px;
+            width: 100%;
+            height: 100%;
         }
     }
 
