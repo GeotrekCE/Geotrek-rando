@@ -64,7 +64,7 @@
         </span>
 
         <div class="notice-text">
-            <h3>{{label.name | translate}}</h3>
+            <p><strong>{{label.name | translate}}</strong></p>
             <p ng-if="!rulesId">{{label.advice | translate}}</p>
             <a ng-if="rulesId" ui-sref="layout.flat({flatID: rulesId})">{{ label.advice | translate}}</a>
         </div>
