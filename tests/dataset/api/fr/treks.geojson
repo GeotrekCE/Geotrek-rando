@@ -712,14 +712,12 @@
                         "id": 1,
                         "pictogram": "/media/upload/nationalpark.svg",
                         "name": "En coeur de parc",
-                        "description": "Cet itinéraire est dans le cœur du Parc national",
                         "advice": "Le Parc national est un territoire naturel, ouvert à tous, mais soumis à une réglementation qu’il est utile de connaître pour préparer son séjour",
                         "filter_rando": false
                     },
                     {
                         "id": 2, "pictogram": "/media/upload/dog.svg",
                         "name": "Chien en laisse",
-                        "description": "Ceci est une autre etiquette",
                         "advice": "Tenir le chien en laisse",
                         "filter_rando": true
                     }
@@ -2207,7 +2205,6 @@
                         "id": 1,
                         "pictogram": "/media/upload/weblink-book.png",
                         "name": "En coeur de parc",
-                        "description": "Cet itinéraire est dans le cœur du Parc national",
                         "advice": "Le Parc national est un territoire naturel, ouvert à tous, mais soumis à une réglementation qu’il est utile de connaître pour préparer son séjour",
                         "filter_rando": true
                     }
