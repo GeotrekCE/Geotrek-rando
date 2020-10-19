@@ -1789,7 +1789,6 @@
                     {
                         "id": 1, "pictogram": "/media/upload/nationalpark.svg",
                         "name": "Corazón del Parque nacional",
-                        "description": "Este itinerario está en el corazón del Parque nacional",
                         "advice": "El parque nacional es un área natural sin restricciones pero sometido a regulaciones que deben ser conocidas por todos los visitantes.",
                         "filter_rando": true
                     }
