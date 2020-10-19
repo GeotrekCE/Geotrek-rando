@@ -406,6 +406,12 @@
             color: inherit;
         }
     }
+    &.labels {
+        background: $warning-color;
+        a {
+            color: inherit;
+        }
+    }
     &.advice {
         background: rgba(230, 230, 230, 1);
     }
