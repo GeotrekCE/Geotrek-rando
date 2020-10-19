@@ -426,6 +426,10 @@
         font-size: 1.5em;
         margin-top: -.30em;
         margin-right: .35em;
+        img, svg {
+            max-width: 48px;
+            max-height: 48px;
+        }
     }
 
     &.event-notice-custom {

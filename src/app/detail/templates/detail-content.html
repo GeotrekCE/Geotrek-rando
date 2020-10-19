@@ -78,7 +78,12 @@
 
     <div ng-repeat="label in result.properties.labels"
          class="detail-content-notice labels" ng-if="label">
-        <i class="notice-symbol fa fa-info-circle"></i>
+        <span class="notice-symbol">
+            <ng-include ng-if="label.pictogram | isSVG" src="label.pictogram"></ng-include>
+            <img ng-if="!(label.pictogram | isSVG)" ng-src="{{label.pictogram}}" ng-alt="{{label.name}}">{{label.name | translate}}
+        </span>
+        <i class="notice-symbol fa fa-info-circle">&nbsp;{{label.name | translate}}</i>
+
         <p ng-if="!rulesId">{{label.advice | translate}}</p>
         <a ng-if="rulesId" ui-sref="layout.flat({flatID: rulesId})">{{ label.advice | translate}}</a>
     </div>
