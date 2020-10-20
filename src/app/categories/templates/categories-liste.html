@@ -274,7 +274,7 @@
                                 </div>
                             </div>
                             <!-- Other filter selector -->
-                            <div ng-if="category.labels && category.labels.values.length > 0 && !category.labels.values.every(checkFilterRando)" class="category-filter selector labels" ng-class="{empty: category.labels.values.length === 0}">
+                            <div ng-if="category.labels && category.labels.values.length > 0 && !category.labels.values.every(checkFilterRando) && !category.labels.values.every(checkPictogram)" class="category-filter selector labels" ng-class="{empty: category.labels.values.length === 0}">
                                 <div class="filter-title">
                                     <span>{{'OTHERS' | translate}}</span>
                                 </div>
@@ -292,12 +292,6 @@
                                                     <ng-include ng-if="label.pictogram | isSVG" src="label.pictogram"></ng-include>
                                                     <img ng-if="!(label.pictogram | isSVG)" ng-src="{{label.pictogram}}" ng-alt="{{label.name}}">
                                                 </span>
-                                            </span>
-                                            <span ng-if="!(label.pictogram)">
-                                                <div class="checkbox">
-                                                    <i ng-if="activeFilters[category.id + '_label'].indexOf(label.id.toString()) > -1" class="fa fa-check"></i>
-                                                </div>
-                                                {{label.name}}
                                             </span>
                                         </label>
                                     </div>
