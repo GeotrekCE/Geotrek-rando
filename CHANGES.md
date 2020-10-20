@@ -19,8 +19,9 @@
 
 **Enhancements**
 
-* Add trek's label categories filtering
+* Add trek's label categories filtering (is park centered)
 * Use trek's label warning
+**Warning:** these features are only available for Geotrek-admin >= 2.38.5
 
 
 2.28.2 / 2020-10-16
