@@ -272,6 +272,9 @@ msgstr "Scopri di più"
 msgid "THEMES"
 msgstr "Tema"
 
+msgid "OTHERS"
+msgstr "Altri"
+
 msgid "DISTRICTS"
 msgstr ""
 

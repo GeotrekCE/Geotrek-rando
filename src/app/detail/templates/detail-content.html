@@ -72,23 +72,40 @@
 
     <div class="detail-content-notice is-park-centered" ng-if="result.properties.is_park_centered">
         <i class="notice-symbol fa fa-info-circle"></i>
-        <p ng-if="!rulesId">{{ 'PARK_CENTERED' | translate}}</p>
-        <a ng-if="rulesId" ui-sref="layout.flat({flatID: rulesId})">{{ 'PARK_CENTERED' | translate}}</a>
+        <div class="notice-text">
+            <p ng-if="!rulesId">{{ 'PARK_CENTERED' | translate}}</p>
+            <a ng-if="rulesId" ui-sref="layout.flat({flatID: rulesId})">{{ 'PARK_CENTERED' | translate}}</a>
+        </div>
+    </div>
+
+    <div ng-repeat="label in result.properties.labels"
+         class="detail-content-notice labels" ng-if="label">
+        <span class="notice-symbol">
+            <ng-include ng-if="label.pictogram | isSVG" src="label.pictogram"></ng-include>
+            <img ng-if="!(label.pictogram | isSVG)" ng-src="{{label.pictogram}}" ng-alt="{{label.name}}">
+            <i ng-if="!label.pictogram" class="notice-symbol fa fa-info-circle"></i>
+        </span>
+
+        <div class="notice-text">
+            <p><strong>{{label.name | translate}}</strong></p>
+            <p ng-if="!rulesId">{{label.advice | translate}}</p>
+            <a ng-if="rulesId" ui-sref="layout.flat({flatID: rulesId})">{{ label.advice | translate}}</a>
+        </div>
     </div>
 
     <div class="detail-content-notice event-notice-custom" ng-if="result.properties.category.id === 'E'">
         <i class="notice-symbol fa fa-info-circle"></i>
-        <p>{{ 'EVENT_CUSTOM_1' | translate }}</p>
+        <p class="notice-text">{{ 'EVENT_CUSTOM_1' | translate }}</p>
     </div>
 
     <div class="detail-content-notice advice" ng-if="result.properties.advice">
         <i class="notice-symbol fa fa-exclamation-triangle"></i>
-        <div ng-bind-html="result.properties.advice | sanitizeData: true"></div>
+        <div class="notice-text" ng-bind-html="result.properties.advice | sanitizeData: true"></div>
     </div>
 
     <div class="detail-content-notice disabled-infrastructure" ng-if="result.properties.disabled_infrastructure">
         <i class="notice-symbol fa fa-wheelchair"></i>
-        <div ng-bind-html="result.properties.disabled_infrastructure | sanitizeData: true"></div>
+        <div class="notice-text" ng-bind-html="result.properties.disabled_infrastructure | sanitizeData: true"></div>
     </div>
 
     <detail-sensitives></detail-sensitives>

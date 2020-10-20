@@ -378,6 +378,10 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         return false;
     }
 
+    $scope.checkFilterRando = function checkFilterRando (el) {
+        return !el.filter_rando
+    };
+
     function initCatFilters() {
         initDatePickers();
         initRangeFilters();

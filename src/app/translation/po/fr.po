@@ -275,6 +275,9 @@ msgstr "En savoir plus"
 msgid "THEMES"
 msgstr "Thèmes"
 
+msgid "OTHERS"
+msgstr "Autres"
+
 msgid "DISTRICTS"
 msgstr "Massifs"
 

@@ -414,6 +414,7 @@
 .detail-content-notice {
     margin: 1em 2rem 0 2rem;
     padding: 1.3em 1em 1em;
+    display: flex;
 
     color: $dark-grey;
     p {
@@ -424,8 +425,13 @@
         vertical-align: baseline;
         float: left;
         font-size: 1.5em;
-        margin-top: -.30em;
-        margin-right: .35em;
+        margin-right: .5em;
+        max-width: 21px;
+        max-height: 21px;
+        img, svg {
+            width: 100%;
+            height: 100%;
+        }
     }
 
     &.event-notice-custom {
@@ -433,6 +439,12 @@
     }
 
     &.is-park-centered {
+        background: $warning-color;
+        a {
+            color: inherit;
+        }
+    }
+    &.labels {
         background: $warning-color;
         a {
             color: inherit;

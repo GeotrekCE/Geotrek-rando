@@ -245,6 +245,10 @@ msgstr "Més informació sobre la"
 msgid "THEMES"
 msgstr "Temes"
 
+msgid "OTHERS"
+msgstr "Altres"
+
+
 msgid "DISTRICTS"
 msgstr "cadene de muntanya"
 
