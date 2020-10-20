@@ -1,10 +1,19 @@
+2.29.1-ux / 2020-10-20
+===================
+
+**Bug fixes**
+
+* Fix no pictogram trek's label should keep old icon
+
+
 2.29.0-ux / 2020-10-20
 ======================
 
 **Enhancements**
 
-* Add trek's label categories filtering
+* Add trek's label categories filtering (is park centered)
 * Use trek's label warning
+**Warning:** these features are only available for Geotrek-admin >= 2.38.5
 
 
 2.28.2-ux / 2020-10-16

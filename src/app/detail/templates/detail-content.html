@@ -81,8 +81,8 @@
     <div ng-repeat="label in result.properties.labels"
          class="detail-content-notice labels" ng-if="label">
         <span class="notice-symbol">
-            <ng-include ng-if="label.pictogram | isSVG" src="label.pictogram"></ng-include>
-            <img ng-if="!(label.pictogram | isSVG)" ng-src="{{label.pictogram}}" ng-alt="{{label.name}}">
+            <ng-include ng-if="label.pictogram && label.pictogram | isSVG" src="label.pictogram"></ng-include>
+            <img ng-if="label.pictogram && !(label.pictogram | isSVG)" ng-src="{{label.pictogram}}" ng-alt="{{label.name}}">
             <i ng-if="!label.pictogram" class="notice-symbol fa fa-info-circle"></i>
         </span>
 
