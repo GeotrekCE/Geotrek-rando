@@ -68,11 +68,11 @@ function categoriesService(globalSettings, $q, treksService, contentsService, ev
                             type: 'checkbox',
                             values: aTrek.properties.themes ? angular.copy(aTrek.properties.themes) : []
                         },
-                        cat_class: 'category-' + aTrek.properties.category.id.toString()
                         labels: {
                             type: 'checkbox',
                             values: aTrek.properties.labels ? angular.copy(aTrek.properties.labels) : []
                         },
+                        cat_class: 'category-' + aTrek.properties.category.id.toString()
                     };
 
                     currentCategory.duration.values = _.map(_.sortBy(currentCategory.duration.values, 'id'));
