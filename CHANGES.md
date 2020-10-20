@@ -1,3 +1,11 @@
+2.29.1 / 2020-10-20
+===================
+
+**Bug fixes**
+
+* Fix no pictogram trek's label should keep old icon
+
+
 2.29.0 / 2020-10-20
 ===================
 
