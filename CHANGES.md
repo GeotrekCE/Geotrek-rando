@@ -1,9 +1,10 @@
-2.28.3-dev
+2.29.0 / 2020-10-20
 ===================
 
-**Bug fixes**
+**Enhancements**
 
-*
+* Add trek's label categories filtering
+* Use trek's label warning
 
 
 2.28.2 / 2020-10-16
