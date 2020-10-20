@@ -302,6 +302,27 @@
                                 </label>
                             </div>
                         </div>
+                        <!-- Filter label trek -->
+                        <div ng-if="category.labels && category.labels.values.length > 0 && !category.labels.values.every(checkFilterRando)" class="category-filter selector labels" ng-class="{empty: category.labels.values.length === 0, opened: labelsIsCollapsed}">
+                            <span ng-click="labelsIsCollapsed = !labelsIsCollapsed" class="filter-title">
+                                <span>{{'OTHERS' | translate}}</span>
+                                <span class="more-or-less">
+                                    <div class="bar"></div>
+                                    <div class="bar"></div>
+                                </span>
+                            </span>
+                            <div class="choices" collapse="!labelsIsCollapsed">
+                                <div ng-repeat="label in category.labels.values" ng-if="label.filter_rando" class="route form-group">
+                                    <input type="checkbox" id="label-{{::label.id}}" ng-click="toogleCategoryFilter(category.id, 'labels', label.id)" ng-checked="activeFilters[category.id + '_labels'].indexOf(label.id.toString()) > -1"/>
+                                    <label for="label-{{::label.id}}">
+                                        <div class="checkbox">
+                                            <i ng-if="activeFilters[category.id + '_labels'].indexOf(label.id.toString()) > -1" class="fa fa-check"></i>
+                                        </div>
+                                        <span>{{label.name}}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

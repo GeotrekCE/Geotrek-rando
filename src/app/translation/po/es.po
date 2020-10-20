@@ -251,6 +251,9 @@ msgstr "Saber más"
 msgid "THEMES"
 msgstr "Temas"
 
+msgid "OTHERS"
+msgstr "Otros"
+
 msgid "DISTRICTS"
 msgstr "Sectores geográficos"
 
