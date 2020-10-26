@@ -1,3 +1,11 @@
+2.29.1-ux3 / 2020-10-20
+===================
+
+**Enhancements**
+
+* No pictogram trek's label, add default pictogram
+
+
 2.29.1-ux2 / 2020-10-20
 ===================
 
