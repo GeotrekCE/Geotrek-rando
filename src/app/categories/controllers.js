@@ -382,10 +382,6 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         return !el.filter_rando
     };
 
-    $scope.checkPictogram = function checkPictogram (el) {
-        return !el.pictogram
-    };
-
     function initCatFilters() {
         initDatePickers();
         initRangeFilters();

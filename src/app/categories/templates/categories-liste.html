@@ -274,7 +274,7 @@
                                 </div>
                             </div>
                             <!-- Other filter selector -->
-                            <div ng-if="category.labels && category.labels.values.length > 0 && !category.labels.values.every(checkFilterRando) && !category.labels.values.every(checkPictogram)" class="category-filter selector labels" ng-class="{empty: category.labels.values.length === 0}">
+                            <div ng-if="category.labels && category.labels.values.length > 0 && !category.labels.values.every(checkFilterRando)" class="category-filter selector labels" ng-class="{empty: category.labels.values.length === 0}">
                                 <div class="filter-title">
                                     <span>{{'OTHERS' | translate}}</span>
                                 </div>
@@ -283,14 +283,15 @@
                                         <input type="checkbox" id="label-{{::label.id}}" ng-click="toogleCategoryFilter(category.id, 'labels', label.id)"
                                             ng-checked="activeFilters[category.id + '_labels'].indexOf(label.id.toString()) > -1" />
                                         <label for="label-{{label.id}}">
-                                            <span ng-if="label.pictogram">
+                                            <span>
                                                 <div class="choice-tick">
                                                     <img ng-if="activeFilters[category.id + '_labels'].indexOf(label.id.toString()) > -1"
                                                         src="/images/icons/filter-check.svg" />
                                                 </div>
                                                 <span class="category-filters-theme-icon choice-icon">
-                                                    <ng-include ng-if="label.pictogram | isSVG" src="label.pictogram"></ng-include>
-                                                    <img ng-if="!(label.pictogram | isSVG)" ng-src="{{label.pictogram}}" ng-alt="{{label.name}}">
+                                                    <ng-include ng-if="label.pictogram && label.pictogram | isSVG" src="label.pictogram"></ng-include>
+                                                    <img ng-if="label.pictogram && !(label.pictogram | isSVG)" ng-src="{{label.pictogram}}" ng-alt="{{label.name}}">
+                                                    <ng-include ng-if="!label.pictogram" src="'/images/icons/warning.svg'"></ng-include>
                                                 </span>
                                             </span>
                                         </label>
