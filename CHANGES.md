@@ -1,9 +1,9 @@
-2.29.2-dev
+2.29.2 / 2020-10-28
 ===================
 
 **Bug fixes**
 
-*
+* Do not show empty square without properties on extra layers
 
 
 2.29.1 / 2020-10-20
