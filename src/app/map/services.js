@@ -1752,7 +1752,7 @@ function layersService ($http, globalSettings, settingsFactory, translationServi
                         },
                         onEachFeature: function (feature, layer) {
                             var markup = [], prop;
-                            if (layer && layer.feature && layer.feature.properties) {
+                            if (layer && layer.feature && layer.feature.properties && (layer.feature.properties.name || layer.feature.properties.photo_url || layer.feature.properties.type || layer.feature.properties.website)) {
 
                                 prop = layer.feature.properties;
 

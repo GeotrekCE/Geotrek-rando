@@ -14,6 +14,7 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
     $scope.type1IsCollapsed      = globalSettings.FILTERS_DEFAULT_OPEN;
     $scope.type2IsCollapsed      = globalSettings.FILTERS_DEFAULT_OPEN;
     $scope.routeIsCollapsed      = globalSettings.FILTERS_DEFAULT_OPEN;
+    $scope.labelsIsCollapsed      = globalSettings.FILTERS_DEFAULT_OPEN;
 
     function updateFiltersTags() {
         $rootScope.activeFiltersTags = filtersService.getTagFilters();
@@ -322,6 +323,10 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
     $scope.foldCategories = function foldCategories () {
         $scope.extend = false;
         $scope.closeCategoryFilters();
+    };
+
+    $scope.checkFilterRando = function checkFilterRando (el) {
+        return !el.filter_rando
     };
 
     function initCatFilters() {
