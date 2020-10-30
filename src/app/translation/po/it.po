@@ -175,10 +175,10 @@ msgid "HAS_COMMON_DEPARTURE"
 msgstr "Partenza comune"
 
 msgid "HAS_COMMON_EDGE"
-msgstr ""
+msgstr "Sulla strada"
 
 msgid "IS_CIRCUIT_STEP"
-msgstr ""
+msgstr "Passi :"
 
 msgid "POI"
 msgstr "Punti d'interesse"
@@ -226,7 +226,7 @@ msgid "MEETING_TIME"
 msgstr "Orario di ritrovo"
 
 msgid "SPEAKERS"
-msgstr ""
+msgstr "Altoparlanti :"
 
 msgid "BOOKING"
 msgstr "Prenotazione"
@@ -241,10 +241,12 @@ msgid "PRATICAL_INFOS"
 msgstr "Informazioni pratiche"
 
 msgid "SUCCESS_WARNING"
-msgstr ""
+msgstr "Il messaggio è stato salvato. Grazie per l'aiuto !"
 
 msgid "ERROR_WARNING"
 msgstr ""
+"Impossibile salvare il messaggio. Ci scusiamo per il disagio. "
+"I nostri team sono stati informati e stanno analizzando il problema!"
 
 msgid "BOOK_BUTTON"
 msgstr "Book"
@@ -276,10 +278,10 @@ msgid "OTHERS"
 msgstr "Altri"
 
 msgid "DISTRICTS"
-msgstr ""
+msgstr "Zona"
 
 msgid "ALL_DISTRICTS"
-msgstr ""
+msgstr "Tutti i zona"
 
 msgid "SEARCH"
 msgstr "Cerca"
@@ -316,10 +318,10 @@ msgstr "Condividere il testo predefinito"
 #
 
 msgid "TOGGLE_NAV"
-msgstr ""
+msgstr "Apri il menu"
 
 msgid "BANNER_TEXT"
-msgstr ""
+msgstr "Geotrek Rando"
 
 msgid "HOME"
 msgstr "Homepage"
@@ -355,13 +357,17 @@ msgid "WARNING"
 msgstr "Attento"
 
 msgid "FORM_NAME"
-msgstr ""
+msgstr "Nome"
 
 msgid "REPORT_GPDR_DISCLAIMER"
 msgstr ""
+"Queste informazioni sono destinate a {{organizzazione}}, che si impegna a non farlo "
+"comunicare a terzi. Hai il diritto di accedere, modificare, "
+"rettifica e cancellazione dei dati che La riguardano (art. 34 "
+"del Data Protection Act). Per esercitare questo diritto, contattare {{ indirizzo }}."
 
 msgid "FORM_EMAIL"
-msgstr ""
+msgstr "Email"
 
 msgid "FORM_PICTURES"
 msgstr "Fotografia"
@@ -376,13 +382,13 @@ msgid "FORM_MAGNITUDE_PROBLEM"
 msgstr "Entità del problema"
 
 msgid "FORM_COMMENT"
-msgstr ""
+msgstr "Commento"
 
 msgid "FORM_MAP"
-msgstr ""
+msgstr "Posizione (fare clic sulla mappa per posizionare il marker)"
 
 msgid "FORM_SEND"
-msgstr ""
+msgstr "Rapporto"
 
 msgid "PDF"
 msgstr "Scarica PDF"
@@ -414,16 +420,16 @@ msgid "EXIT_FULL_SCREEN"
 msgstr "Esci tutto schermo"
 
 msgid "RECENTER_VIEW"
-msgstr ""
+msgstr "Rimettere a fuoco la mappa"
 
 msgid "TILES_SWITCH"
-msgstr ""
+msgstr "Cambia mappa di base"
 
 msgid "SERVICES_TOGGLE"
-msgstr ""
+msgstr "Attiva / Nascondi servizi"
 
 msgid "VIEWPORT_FILTERING"
-msgstr ""
+msgstr "Filtra per mappa"
 
 
 # HOME PAGE
@@ -434,7 +440,7 @@ msgid "ACCESS_SITE"
 msgstr "Accedi al sito"
 
 msgid "DONT_SHOW_HOME"
-msgstr ""
+msgstr "Non mostrare più questa pagina"
 
 msgid "SUGGESTED"
 msgstr "Suggerimeti"
