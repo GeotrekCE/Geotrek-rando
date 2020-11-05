@@ -32,7 +32,7 @@ msgid "CATEGORIES"
 msgstr "Kategorien"
 
 msgid "CLEAR"
-msgstr ""
+msgstr "Zurücksetzen"
 
 msgid "ROUTES"
 msgstr "Routen"
@@ -59,7 +59,7 @@ msgid "DEPTH_S"
 msgstr "Depth:"
 
 msgid "LENGTH"
-msgstr ""
+msgstr "Länge"
 
 msgid "DATE_FILTER"
 msgstr "Datum"
@@ -76,19 +76,19 @@ msgstr "Schließen"
 #
 
 msgid "I_DURATION"
-msgstr ""
+msgstr "Dauer"
 
 msgid "I_DIFFICULTY"
-msgstr ""
+msgstr "Schwierigkeit"
 
 msgid "I_LENGTH"
-msgstr ""
+msgstr "Länge"
 
 msgid "I_ROUTE"
-msgstr ""
+msgstr "Weg"
 
 msgid "I_ASCENT"
-msgstr ""
+msgstr "Aufstieg"
 
 msgid "I_NETWORK"
 msgstr ""
@@ -241,10 +241,12 @@ msgid "PRATICAL_INFOS"
 msgstr "praktische Informationen:"
 
 msgid "SUCCESS_WARNING"
-msgstr ""
+msgstr "Die Nachricht wurde gespeichert. Danke für Ihre Hilfe !"
 
 msgid "ERROR_WARNING"
 msgstr ""
+"Die Nachricht konnte nicht gespeichert werden. Wir entschuldigen uns für die "
+"Unannehmlichkeiten. Unsere Teams wurden benachrichtigt und analysieren das Problem!"
 
 msgid "BOOK_BUTTON"
 msgstr "Book"
@@ -255,16 +257,16 @@ msgstr "Book"
 #
 
 msgid "SHOW_ACTIVE_FILTERS"
-msgstr ""
+msgstr "Aktive Filter anzeigen"
 
 msgid "HIDE_ACTIVE_FILTERS"
-msgstr ""
+msgstr "Aktive Filter unterdrücken"
 
 msgid "SIMPLE_SEARCH"
-msgstr ""
+msgstr "Weniger Kriterien"
 
 msgid "ADVANCED_SEARCH"
-msgstr ""
+msgstr "Mehr Kriterien"
 
 msgid "SHOW_MORE"
 msgstr "Mehr"
@@ -340,7 +342,7 @@ msgid "PRINT"
 msgstr "Dokument drucken"
 
 msgid "DOWNLOAD"
-msgstr ""
+msgstr "Herunterladen"
 
 msgid "ADD_FAVS"
 msgstr "zu meinen Favoriten hinzufügen"
@@ -408,7 +410,7 @@ msgid "FULL_SCREEN"
 msgstr "Vollbildschirm"
 
 msgid "EXIT_FULL_SCREEN"
-msgstr ""
+msgstr "Vollbild verlassen"
 
 msgid "RECENTER_VIEW"
 msgstr "Karte zentrieren"
