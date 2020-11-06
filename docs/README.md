@@ -96,12 +96,12 @@ cd /path/to/application/
 npm install
 ```
 
-Copy the custom and the data folders of the previous version.
+Copy the custom folder of the previous version.
 
 ```
 cp -aR ../previous-version/custom/ .
-cp -aR ../previous-version/data/ .
 ```
+If your data folder is in your previous-version folder, move it too. If you change its level in the directory tree, don't forget to change the "API_URL" parameter in custom/settings.custom.json
 
 Launch build task
 
