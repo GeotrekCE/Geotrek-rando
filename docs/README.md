@@ -78,7 +78,9 @@ wget https://github.com/makinacorpus/Geotrek-rando/archive/X.Y.Z.zip
 unzip X.Y.Z.zip
 ```
 
-In order to avoid editing NGINX configuration at each upgrade, you can rename the folders.
+If you want to minimize the duration of website interruption, you can start installing the new version and then edit the NGINX virtualhost file, which is usually located at /etc/nginx/sites-available/geotrek-rando. 
+
+But if you prefer to avoid editing NGINX configuration at each upgrade, you can rename the folders.
 
 ```
 mv /path/to/application/ /path/to/application.old/
@@ -94,10 +96,11 @@ cd /path/to/application/
 npm install
 ```
 
-Copy the custom folder of the previous version.
+Copy the custom and the data folders of the previous version.
 
 ```
 cp -aR ../previous-version/custom/ .
+cp -aR ../previous-version/data/ .
 ```
 
 Launch build task
