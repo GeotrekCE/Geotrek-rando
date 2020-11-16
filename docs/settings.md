@@ -62,7 +62,7 @@ The file named `custom/_customisation.scss` allows you to write as many [SCSS]()
 If you want to split your styles in multiple files, you have to use the
 SCSS `@import 'filename'` rule to include other `.scss` files.
 
-_Note: `customisation.scss` must remain directly in `custom/` directory but the files you `@import` in it may be wherever you want._
+_See [SCSS settings][] for more details and tips._
 
 #### Behaviors
 
