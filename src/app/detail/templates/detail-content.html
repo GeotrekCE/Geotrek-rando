@@ -47,14 +47,6 @@
 
     <detail-content-events-info></detail-content-events-info>
 
-    <div class="detail-content-notice is-park-centered" ng-if="result.properties.is_park_centered">
-        <i class="notice-symbol fa fa-info-circle"></i>
-        <div class="notice-text">
-            <p ng-if="!rulesId">{{ 'PARK_CENTERED' | translate}}</p>
-            <a ng-if="rulesId" ui-sref="layout.flat({flatID: rulesId})">{{ 'PARK_CENTERED' | translate}}</a>
-        </div>
-    </div>
-
     <div ng-repeat="label in result.properties.labels"
          class="detail-content-notice labels" ng-if="label">
         <span class="notice-symbol">
@@ -65,9 +57,8 @@
 
         <div class="notice-text">
             <p><strong>{{label.name | translate}}</strong></p>
-            <p ng-if="!rulesId">{{label.advice | translate}}</p>
-            <a ng-if="rulesId" ui-sref="layout.flat({flatID: rulesId})">{{ label.advice | translate}}</a>
-        </div>
+            <p ng-bind-html="label.advice | sanitizeData: true"></p>
+	</div>
     </div>
 
     <div class="detail-content-notice event-notice-custom" ng-if="result.properties.category.id === 'E'">

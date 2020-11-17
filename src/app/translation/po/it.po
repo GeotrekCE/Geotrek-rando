@@ -144,9 +144,6 @@ msgstr "Partenza da un paese"
 msgid "TOWN_CROSSED"
 msgstr "Traversata di paese"
 
-msgid "PARK_CENTERED"
-msgstr ""
-
 msgid "TRANSPORTS"
 msgstr "Trasporti"
 

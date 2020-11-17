@@ -134,9 +134,6 @@ msgstr "Commune :"
 msgid "TOWN_CROSSED"
 msgstr "Communes traversées :"
 
-msgid "PARK_CENTERED"
-msgstr "Cet itinéraire est dans le cœur du Parc national, veuillez consulter la réglementation."
-
 msgid "TRANSPORTS"
 msgstr "Transports"
 

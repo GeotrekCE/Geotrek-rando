@@ -125,9 +125,6 @@ msgstr "Municipio :"
 msgid "TOWN_CROSSED"
 msgstr "Municipio atravesado :"
 
-msgid "PARK_CENTERED"
-msgstr "Este itinerario está en el corazón del Parque nacional. Consultar el reglamento."
-
 msgid "TRANSPORTS"
 msgstr "Transportes públicos"
 

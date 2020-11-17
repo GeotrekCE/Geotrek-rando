@@ -26,7 +26,6 @@
     "ENABLE_CITIES_FILTERING": true,
     "ENABLE_STRUCTURE_FILTERING": true,
     "GEO_FILTERS_AUTO_CLOSE": false,
-    "RULES_FLAT_PAGES_ID": "",
     "FAVORITES_ICON": "heart",
     "SHARE_ICON": "share-alt",
     "PLACEHOLDER_IMAGE": "",
