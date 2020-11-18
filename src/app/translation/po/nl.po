@@ -144,6 +144,9 @@ msgstr "Stad:"
 msgid "TOWN_CROSSED"
 msgstr "Gekruist stad:"
 
+msgid "PARK_CENTERED"
+msgstr "Deze route gaat door het hart van een nationaal park, houdt u zich alstublieft aan de regels"
+
 msgid "TRANSPORTS"
 msgstr "Transport"
 

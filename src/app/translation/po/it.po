@@ -144,6 +144,9 @@ msgstr "Partenza da un paese"
 msgid "TOWN_CROSSED"
 msgstr "Traversata di paese"
 
+msgid "PARK_CENTERED"
+msgstr "Questo percorso si trova nel cuore del Parco Nazionale, consultare il regolamento"
+
 msgid "TRANSPORTS"
 msgstr "Trasporti"
 

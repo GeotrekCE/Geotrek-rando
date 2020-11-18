@@ -145,6 +145,9 @@ msgstr "Town:"
 msgid "TOWN_CROSSED"
 msgstr "Crossed towns:"
 
+msgid "PARK_CENTERED"
+msgstr "Park centered"
+
 msgid "TRANSPORTS"
 msgstr "Transports"
 

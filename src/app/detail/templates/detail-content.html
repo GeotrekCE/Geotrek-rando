@@ -47,6 +47,13 @@
 
     <detail-content-events-info></detail-content-events-info>
 
+    <div class="detail-content-notice is-park-centered" ng-if="result.properties.is_park_centered">
+        <i class="notice-symbol fa fa-info-circle"></i>
+        <div class="notice-text">
+            <p>{{ 'PARK_CENTERED' | translate}}</p>
+        </div>
+    </div>  
+    
     <div ng-repeat="label in result.properties.labels"
          class="detail-content-notice labels" ng-if="label">
         <span class="notice-symbol">

@@ -144,6 +144,9 @@ msgstr "Stadt:"
 msgid "TOWN_CROSSED"
 msgstr "Durchquerte Ortschaften:"
 
+msgid "PARK_CENTERED"
+msgstr "Diese Route liegt im Herzen des Nationalparks. Folgen Sie bitten den Vorschriften."
+
 msgid "TRANSPORTS"
 msgstr "Transport"
 

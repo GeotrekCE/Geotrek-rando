@@ -116,6 +116,9 @@ msgstr "Municipis /poble"
 msgid "TOWN_CROSSED"
 msgstr "Municipis creuats :"
 
+msgid "PARK_CENTERED"
+msgstr "Aquest itinerari  es troba al cor del parc nacional, es pot consultar la normativa."
+
 msgid "TRANSPORTS"
 msgstr "Transport"
 
