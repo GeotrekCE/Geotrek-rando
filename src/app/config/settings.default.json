@@ -112,6 +112,7 @@
     "MINIMAP_OFFSET": -3,
     "IMPERIAL_SCALE": false,
     "ALWAYS_HIGHLIGHT_TREKS": false,
+    "ALWAYS_HIGHLIGHT_TREK_DETAIL": false,
     "SHOW_FILTERS_ON_MAP": true,
     "FILTER_BY_VIEWPORT_DEFAULT": false,
     "POI_EXPANDED": false,
