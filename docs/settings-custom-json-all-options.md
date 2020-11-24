@@ -159,7 +159,8 @@ ACTIVE_MINIMAP | Boolean | `true` | If true, show minimap.
 MINIMAP_ZOOM | [Zoom conf Object](#layers-objects-options) | cf [Zoom conf default](#layers-objects-options) | Define max an min zoom levels for the mini-map
 MINIMAP_OFFSET | Int | `-3` | Value of the difference between the map zoom and the mini-map zoom.
 IMPERIAL_SCALE | Boolean | `false` | Show the imperial scale line (mi/ft) in addition of the metric scale line.
-ALWAYS_HIGHLIGHT_TREKS | Boolean | `false` | If true, always display a border around the linear versions of treks.
+ALWAYS_HIGHLIGHT_TREKS | Boolean | `false` | If true, always display a border around the linear versions of treks on result page.
+ALWAYS_HIGHLIGHT_TREK_DETAIL | Boolean | `false` | If true, always display a border around the linear versions of treks on detail page.
 SHOW_FILTERS_ON_MAP | boolean | `true` | If false, hide the tags filters on the top of the map.
 FILTER_BY_VIEWPORT_DEFAULT | boolean | `false` | If true, "Filter with map" is checked by default
 

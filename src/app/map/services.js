@@ -1132,7 +1132,7 @@ function mapService($rootScope, $q, $state, $resource, $translate, $filter, util
                                 }
                                 layer.setText('  >  ', {offset: 6, repeat: true, center: true, attributes: {class: className}});
                             }
-                            if (globalSettings.ALWAYS_HIGHLIGHT_TREKS) {
+                            if (globalSettings.ALWAYS_HIGHLIGHT_TREK_DETAIL) {
                                 self.highlightPath(result, true, true);
                             }
                         }
