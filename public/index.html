@@ -8,8 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta ng-repeat="tag in $root.twitterTags" name="{{tag.name}}" content="{{tag.content}}">
   <meta ng-repeat="tag in $root.facebookTags" property="{{tag.property}}" content="{{tag.content}}">
-  <link rel="icon" type="image/png" href="{{$root.favIcon.png}}" />
-  <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="{{$root.favIcon.ico}}" /><![endif]-->
+  <link rel="icon" ng-href="{{$root.favIcon.ico}}" />
+  <link rel="icon" type="image/png" ng-href="{{$root.favIcon.png}}" />
   <link rel="stylesheet" href="/dist/styles/rando-vendors.css">
   <link rel="stylesheet" href="/dist/styles/rando.css">
   <link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>

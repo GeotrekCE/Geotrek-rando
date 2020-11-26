@@ -9,12 +9,6 @@ function DetailController($scope, $rootScope, $state, $q, $modal, $timeout, $sta
     $scope.displayCredits = globalSettings.DISPLAY_CREDITS_ON_IMAGE;
     $scope.foldAside = globalSettings.ASIDE_PANEL_FOLDED_BY_DEFAULT || false;
 
-    if (globalSettings.RULES_FLAT_PAGES_ID) {
-        $scope.rulesId = globalSettings.RULES_FLAT_PAGES_ID;
-    } else {
-        $scope.rulesId = null;
-    }
-
     $scope.getUrlImg = function getUrlImg (path) {
         return globalSettings.API_URL + path;
     };

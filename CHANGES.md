@@ -1,3 +1,19 @@
+2.30.0-ux / 2020-11-26
+======================
+
+**Enhancements**
+
+* Trek label description can contain HTML markup
+* Improve documentation
+* Update Italian and German translations
+* Fix favicon in browser bookmarks
+* Add ALWAYS_HIGHLIGHT_TREK_DETAIL setting
+
+**Breaking change**
+
+* The settings RULES_FLAT_PAGES_ID is removed
+
+
 2.29.2-ux / 2020-10-28
 ======================
 
