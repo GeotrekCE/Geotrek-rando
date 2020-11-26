@@ -1,9 +1,14 @@
 2.29.3-dev
 ===================
 
-**Bug fixes**
+**Enhancements**
 
-*
+* Trek label description can contain HTML markup
+
+**Breaking change**
+
+* The settings RULES_FLAT_PAGES_ID is removed
+
 
 2.29.2 / 2020-10-28
 ===================
