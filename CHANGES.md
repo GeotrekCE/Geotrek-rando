@@ -1,9 +1,13 @@
-2.29.3-dev
+2.30.0 / 2020-11-26
 ===================
 
 **Enhancements**
 
 * Trek label description can contain HTML markup
+* Improve documentation
+* Update Italian and German translations
+* Fix favicon in browser bookmarks
+* Add ALWAYS_HIGHLIGHT_TREK_DETAIL setting
 
 **Breaking change**
 
