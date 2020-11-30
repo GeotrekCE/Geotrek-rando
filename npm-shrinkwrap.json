@@ -60,9 +60,9 @@
       "resolved": "https://registry.npmjs.org/amdefine/-/amdefine-1.0.1.tgz"
     },
     "angular": {
-      "version": "1.4.9",
-      "from": "angular@1.4.9",
-      "resolved": "https://registry.npmjs.org/angular/-/angular-1.4.9.tgz"
+      "version": "1.8.1",
+      "from": "angular@1.8.1",
+      "resolved": "https://registry.npmjs.org/angular/-/angular-1.8.1.tgz"
     },
     "angular-bootstrap": {
       "version": "0.12.2",
@@ -85,9 +85,9 @@
       "resolved": "https://registry.npmjs.org/angular-resource/-/angular-resource-1.5.0.tgz"
     },
     "angular-translate": {
-      "version": "2.16.0",
-      "from": "angular-translate@https://registry.npmjs.org/angular-translate/-/angular-translate-2.16.0.tgz",
-      "resolved": "https://registry.npmjs.org/angular-translate/-/angular-translate-2.16.0.tgz"
+      "version": "2.18.3",
+      "from": "angular-translate@>=2.18.3 <3.0.0",
+      "resolved": "https://registry.npmjs.org/angular-translate/-/angular-translate-2.18.3.tgz"
     },
     "angular-ui-router": {
       "version": "0.4.3",
