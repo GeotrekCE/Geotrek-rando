@@ -58,7 +58,7 @@
     "leaflet-ajax": "^2.1.0",
     "leaflet-fullscreen": "^1.0.2",
     "leaflet-geometryutil": "^0.9.2",
-    "leaflet-minimap": "git+https://github.com/bastyen/Leaflet-MiniMap.git#fe3ba7d1ffcc9b6ad6924c760629a9af4e412b4d",
+    "leaflet-minimap": "git+https://github.com/makinacorpus/Leaflet-MiniMap.git#fe3ba7d1ffcc9b6ad6924c760629a9af4e412b4d",
     "leaflet-pip": "^1.1.0",
     "leaflet-textpath": "^1.2.3",
     "leaflet.markercluster": "^1.4.1",

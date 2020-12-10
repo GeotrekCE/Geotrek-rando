@@ -5046,9 +5046,9 @@
       "resolved": "https://registry.npmjs.org/jasmine-core/-/jasmine-core-2.8.0.tgz"
     },
     "jquery": {
-      "version": "3.3.1",
-      "from": "jquery@https://registry.npmjs.org/jquery/-/jquery-3.3.1.tgz",
-      "resolved": "https://registry.npmjs.org/jquery/-/jquery-3.3.1.tgz"
+      "version": "3.5.1",
+      "from": "jquery@>=3.5.0 <3.6.0",
+      "resolved": "https://registry.npmjs.org/jquery/-/jquery-3.5.1.tgz"
     },
     "js-base64": {
       "version": "2.3.2",
@@ -5283,8 +5283,8 @@
     },
     "leaflet-minimap": {
       "version": "3.6.1",
-      "from": "git+https://github.com/bastyen/Leaflet-MiniMap.git#fe3ba7d1ffcc9b6ad6924c760629a9af4e412b4d",
-      "resolved": "git+https://github.com/bastyen/Leaflet-MiniMap.git#fe3ba7d1ffcc9b6ad6924c760629a9af4e412b4d"
+      "from": "git+https://github.com/makinacorpus/Leaflet-MiniMap.git#fe3ba7d1ffcc9b6ad6924c760629a9af4e412b4d",
+      "resolved": "git+https://github.com/makinacorpus/Leaflet-MiniMap.git#fe3ba7d1ffcc9b6ad6924c760629a9af4e412b4d"
     },
     "leaflet-pip": {
       "version": "1.1.0",
