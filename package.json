@@ -13,7 +13,7 @@
   },
   "license": "BSD-2-Clause",
   "dependencies": {
-    "angular": "1.8.1",
+    "angular": "1.8.2",
     "angular-bootstrap": "^0.12.2",
     "angular-google-analytics": "^1.1.8",
     "angular-mocks": "^1.5.0",
@@ -82,6 +82,7 @@
   },
   "devDependencies": {
     "karma-phantomjs-launcher": "^1.0.0",
+    "node-sass": "^4.14.1",
     "phantomjs-prebuilt": "^2.1.4"
   },
   "scripts": {
