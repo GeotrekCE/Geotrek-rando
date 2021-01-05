@@ -60,9 +60,9 @@
       "resolved": "https://registry.npmjs.org/amdefine/-/amdefine-1.0.1.tgz"
     },
     "angular": {
-      "version": "1.4.9",
-      "from": "angular@1.4.9",
-      "resolved": "https://registry.npmjs.org/angular/-/angular-1.4.9.tgz"
+      "version": "1.6.10",
+      "from": "angular@1.6.10",
+      "resolved": "https://registry.npmjs.org/angular/-/angular-1.6.10.tgz"
     },
     "angular-bootstrap": {
       "version": "0.12.2",
