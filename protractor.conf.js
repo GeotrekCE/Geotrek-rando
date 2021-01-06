@@ -2,6 +2,7 @@ var ScreenshotReporter = require('./tests/lib/screenshot-reporter.js');
 
 exports.config = {
     framework: 'jasmine2',
+    directConnect: true,
     jasmineNodeOpts: {
         showColors: true,
         defaultTimeoutInterval: 30000
