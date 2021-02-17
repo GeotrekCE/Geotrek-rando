@@ -37,74 +37,9 @@ Some npm packages used for tests may need a build environment for compiling plat
 
 _See [contribute][] section for more details about participating to Geotrek-rando development._
 
-## Install
+## Install and update
 
-Download and extract latest release of Geotrek-Rando from [GitHub](https://github.com/GeotrekCE/Geotrek-rando/releases/latest).
-
-_You may also download sources by cloning git repository._
-
-### Install build dependencies
-
-```
-cd Geotrek-rando-*
-npm install
-```
-
-### Launch build task
-
-```
-npm run dist
-```
-
-It will :
-* Create missing config files
-* Create the main JavaScript bundle as `dist/public/scripts/rando.js`
-* Compile sass files and bundle them in `dist/public/styles/rando.css` and `dist/public/styles/rando-vendors.css`
-
-For automaticly building bundles when editing files, use :
-
-```
-npm run watch
-```
-
-## Software update
-
-Download and extract the latest release of Geotrek-Rando from GitHub (https://github.com/GeotrekCE/Geotrek-rando/releases).
-
-Before upgrading, READ CAREFULLY the release notes, either from the CHANGES files or online.
-
-```
-wget https://github.com/makinacorpus/Geotrek-rando/archive/X.Y.Z.zip
-unzip X.Y.Z.zip
-```
-
-In order to avoid editing NGINX configuration at each upgrade, you can rename the folders.
-
-```
-mv /path/to/application/ /path/to/application.old/
-mv /path/to/Geotrek-rando-X.Y.Z/ /path/to/application/
-```
-
-Make sure the NGINX virtualhost refers to the folder of this new version. 
-
-Install the new version of the application.
-
-```
-cd /path/to/application/
-npm install
-```
-
-Copy the custom folder of the previous version.
-
-```
-cp -aR ../previous-version/custom/ .
-```
-
-Launch build task
-
-```
-npm run dist
-```
+See [install & update][] for details.
 
 ## Settings & customization
 
@@ -126,6 +61,7 @@ If you're wondering what means _Libre_ in [FLOSS][], it essentially imply four f
 
 <!-- Internal links -->
 
+[install & update]: install.md
 [Contribute]: contribute.md
 [Settings]: settings.md
 [Customization]: settings.md#customization
