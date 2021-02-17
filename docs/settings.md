@@ -80,7 +80,10 @@ You may follow the `src/app/custom/*.example` to use the right structure.
 Everything from the `public/` directory is directy served by the web server.
 But you **sould not put anything** directly there.
 Also, `public/custom` is a symbolic link pointing directy to `custom/public`.
-So all elements that you want to be accessible through `http` should be placed in the `custom/public/` directory and would be accessed with the path: `/custom/`. For example: `custom/public/my_picture.png` would be accessed by the link `http://my-geotrek-domain.com/custom/my_picture.png`.
+
+So all elements that you want to be accessible through `http` should be placed in the `custom/public/` directory and would be accessed with the path: `/custom/`.
+
+For example: `custom/public/my_picture.png` would be accessed by the link `http://my-geotrek-domain.com/custom/my_picture.png`.
 
 You should use absolute links for these files rather than relative ones (particulary if you activate HTML5 mode). Example: ``<img src="/custom/my_picture.jpg">``
 

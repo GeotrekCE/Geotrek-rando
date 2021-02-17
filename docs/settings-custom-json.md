@@ -51,6 +51,12 @@ Used to center the map on your area.
 
 _See [additional settings][] for a complete list of options that can be edited._
 
+#### Display certification label for approved contents
+
+You can display your certification label or touristic contents which are setted "Approved" in your Geotrek-admin.
+
+To do so, use settings `APPROVED_BIG` and `APPROVED_SMALL` with path to your picto.
+
 ### Facebook settings
 
 _See [Facebook settings][] to learn how to create an APP ID._
