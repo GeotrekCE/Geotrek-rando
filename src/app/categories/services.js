@@ -1,6 +1,6 @@
 'use strict';
 
-function categoriesService(globalSettings, $q, treksService, contentsService, eventsService, divesService, utilsFactory, translationService) {
+function categoriesService(globalSettings, $q, $rootScope, treksService, contentsService, eventsService, divesService, utilsFactory, translationService) {
     var self = this;
 
     self._categoriesList = {};

@@ -13,6 +13,13 @@ function headerController($scope, $rootScope, globalSettings) {
         }
     };
 
+    $scope.filtersCollapsed = true;
+
+    $scope.toggleFilters = function toggleFilters() {
+        $rootScope.filtersCollapsed = !$rootScope.filtersCollapsed;
+        console.log($rootScope.filtersCollapsed)
+    };
+
     $scope.switchMap = function switchMap () {
         $rootScope.mapIsShown = !$rootScope.mapIsShown;
         $rootScope.showWarningPanel = false;

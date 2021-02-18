@@ -81,7 +81,16 @@
     }
 }
 
-
+.header-filter-switch {
+    padding: calc(22px / 2 - .5em);
+    margin-right: 0;
+    color: black;
+    background-color: white;
+    &.collapsed {
+        color: white;
+        background-color: black;
+    }
+}
 
 .header-title-link {
     height: 100%;
