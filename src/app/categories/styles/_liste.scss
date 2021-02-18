@@ -296,7 +296,10 @@
         text-transform: uppercase;
         line-height: 1.2;
         white-space: normal;
-        max-width: 200px;
+
+        @media (min-width: 768px) {
+            max-width: 200px;
+        }
     }
 
     .category-filters-link {
