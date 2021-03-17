@@ -378,6 +378,8 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         return false;
     }
 
+    console.log($rootScope.filtersShown);
+
     $scope.checkFilterRando = function checkFilterRando (el) {
         return !el.filter_rando
     };

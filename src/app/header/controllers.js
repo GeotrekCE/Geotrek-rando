@@ -13,11 +13,11 @@ function headerController($scope, $rootScope, globalSettings) {
         }
     };
 
-    $scope.filtersCollapsed = true;
+    $rootScope.categoriesShown = true;
 
-    $scope.toggleFilters = function toggleFilters() {
-        $rootScope.filtersCollapsed = !$rootScope.filtersCollapsed;
-        console.log($rootScope.filtersCollapsed)
+    $scope.switchCategories = function switchCategories() {
+        $rootScope.categoriesShown = !$rootScope.categoriesShown;
+        console.log($rootScope.categoriesShown)
     };
 
     $scope.switchMap = function switchMap () {

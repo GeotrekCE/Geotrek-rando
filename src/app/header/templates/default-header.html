@@ -10,8 +10,8 @@
                 <img ng-if="!$root.mapIsShown" ng-src="{{switchIcons.map}}" alt="switch to map mode icon">
                 <img ng-if="$root.mapIsShown" ng-src="{{switchIcons.textual}}" alt="switch to text mode icon">
             </button>
-            <button data-target="#filterCollapse" type="button" class="header-filter-switch navbar-toggle"
-                    ng-class="{collapsed: filtersCollapsed}" ng-click="toggleFilters()">
+            <button type="button" class="header-filter-switch"
+                    ng-class="{collapsed: filtersCollapsed}" ng-click="switchCategories()">
                 <span class="sr-only">{{'TOGGLE_FILTER' | translate}}</span> <span class="fa fa-filter"> </span>
             </button>
             <a class="header-title-link" ui-sref="layout.root" ng-click="displayHomePage()" title="{{'DEFAULT_META_TITLE' | translate}}">
