@@ -15,11 +15,6 @@ function headerController($scope, $rootScope, globalSettings) {
 
     $rootScope.categoriesShown = true;
 
-    $scope.switchCategories = function switchCategories() {
-        $rootScope.categoriesShown = !$rootScope.categoriesShown;
-        console.log($rootScope.categoriesShown)
-    };
-
     $scope.switchMap = function switchMap () {
         $rootScope.mapIsShown = !$rootScope.mapIsShown;
         $rootScope.showWarningPanel = false;

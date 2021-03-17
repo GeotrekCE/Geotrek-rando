@@ -1,5 +1,12 @@
-<div class="categories-wrapper" ng-class="{extend: extend, filtering: filtering}">
+<div class="categories-wrapper" ng-class="{
+    extend: extend, filtering: filtering,
+    collapsed: categoriesShown
+  }">
 
+    <button type="button" class="categories-collapse"
+            ng-class="{collapsed: categoriesShown}" ng-click="collapseCategories()">
+        <span class="sr-only">{{'TOGGLE_FILTER' | translate}}</span> <span class="fa fa-filter"> </span>
+    </button>
     <ul class="categories tabs">
         <li
             ng-repeat="category in categories | orderBy: 'order' track by category.id"
@@ -7,6 +14,7 @@
             ng-class="{
                 active : activeFilters.categories.indexOf(category.id) > -1,
                 open: category.open,
+                collapsed: categoriesShown,
             }"
             id="cat-tab-{{::category.id}}"
         >

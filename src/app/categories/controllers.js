@@ -231,6 +231,11 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         $scope.propagateActiveFilters();
     };
 
+    $scope.collapseCategories = function collapseCategories() {
+        $rootScope.categoriesShown = !$rootScope.categoriesShown;
+        console.log($rootScope.categoriesShown)
+    };
+
     $scope.toggleCategory = function toggleCategory (category) {
         var activeCategoryIds = $rootScope.activeFilters.categories;
         var indexOfCategory = -1;
@@ -377,8 +382,6 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         // No open filter bar found. Return false.
         return false;
     }
-
-    console.log($rootScope.filtersShown);
 
     $scope.checkFilterRando = function checkFilterRando (el) {
         return !el.filter_rando
