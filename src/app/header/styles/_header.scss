@@ -60,24 +60,21 @@
 }
 
 .header-categories-collapse,
-.header-map-switch,
-.header-filter-switch {
+.header-map-switch {
     float: right;
     height: 2.5em;
     width: 2.5em;
     margin: 4px;
+    padding: 0;
     @media (min-width: 768px) {
         display: none;
     }
 }
 .header-map-switch {
-    padding: 0.7em;
-    color: $primary-color;
 
     @if $json-custom-style {
         fill: $primary-color;
     }
-
 
     img,
     svg {
@@ -86,12 +83,16 @@
     }
 }
 
-.header-filter-switch {
-    color: white;
+.header-categories-collapse {
+    border: 1px solid $primary-color;
+    border-radius: 5px;
     background-color: $primary-color;
+    text-align: center;
+    padding: 6px;
+
     &.collapsed {
-        color: $primary-color;
         background-color: white;
+        border-color: white;
     }
 }
 

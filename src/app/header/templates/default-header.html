@@ -3,17 +3,21 @@
 
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="header-mainbar navbar-header">
-            <button data-target="#menuCollapse" type="button" class="header-burger navbar-toggle" ng-class="{collapsed: mobileCollapsed}" ng-click="toggleMobileMenu()">
+            <div data-target="#menuCollapse" type="button"
+                    class="header-burger navbar-toggle"
+                    ng-class="{collapsed: mobileCollapsed}" ng-click="toggleMobileMenu()">
                 <span class="sr-only">{{'TOGGLE_NAV' | translate}}</span><!-- Burger --><span class="icon-bar primary-bg"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-            </button>
-            <button type="button" class="header-map-switch switch-vue primary-fill" ng-click="switchMap()">
+            </div>
+            <div type="button" class="header-map-switch switch-vue primary-fill"
+                    ng-click="switchMap()">
                 <img ng-if="!$root.mapIsShown" ng-src="{{switchIcons.map}}" alt="switch to map mode icon">
                 <img ng-if="$root.mapIsShown" ng-src="{{switchIcons.textual}}" alt="switch to text mode icon">
-            </button>
-            <button type="button" class="header-categories-collapse"
+            </div>
+            <div type="button" class="header-categories-collapse"
                     ng-class="{collapsed: categoriesShown}" ng-click="collapseCategories()">
-                <span class="sr-only">{{'TOGGLE_FILTER' | translate}}</span> <span class="fa fa-filter"> </span>
-            </button>
+                <span class="sr-only">{{'TOGGLE_FILTER' | translate}}</span>
+                <img src="/images/icons/funnel.svg" alt="switch to map mode icon">
+            </div>
             <a class="header-title-link" ui-sref="layout.root" ng-click="displayHomePage()" title="{{'DEFAULT_META_TITLE' | translate}}">
                 <img class="header-logo" ng-if="logo" ng-src="/custom/images/{{logo}}" alt="{{'LOGO_ALT' | translate}}">
                 <div class="header-title">
