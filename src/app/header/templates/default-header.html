@@ -1,4 +1,4 @@
-<div id="header">
+<div id="header" class="{{ currentState_name.split('.')[1] }}">
 <nav class="navbar" role="navigation">
 
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -13,7 +13,7 @@
                 <img ng-if="!$root.mapIsShown" ng-src="{{switchIcons.map}}" alt="switch to map mode icon">
                 <img ng-if="$root.mapIsShown" ng-src="{{switchIcons.textual}}" alt="switch to text mode icon">
             </div>
-            <div type="button" class="header-categories-collapse"
+            <div type="button" class="header-categories-collapse" ng-if="currentState_name.split('.')[1] === 'root'"
                     ng-class="{collapsed: categoriesShown}" ng-click="collapseCategories()">
                 <span class="sr-only">{{'TOGGLE_FILTER' | translate}}</span>
                 <img src="/images/icons/funnel.svg" alt="switch to map mode icon">
