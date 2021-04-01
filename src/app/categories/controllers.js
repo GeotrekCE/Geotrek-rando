@@ -231,11 +231,6 @@ function CategoriesListeController($scope, $rootScope, $location, $timeout, util
         $scope.propagateActiveFilters();
     };
 
-    $scope.collapseCategories = function collapseCategories() {
-        $rootScope.categoriesShown = !$rootScope.categoriesShown;
-        console.log($rootScope.categoriesShown)
-    };
-
     $scope.toggleCategory = function toggleCategory (category) {
         var activeCategoryIds = $rootScope.activeFilters.categories;
         var indexOfCategory = -1;
