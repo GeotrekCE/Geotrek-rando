@@ -46,7 +46,7 @@ server {
         try_files $uri @angular;
     }
     location @angular {
-        if ($http_user_agent ~* "googlebot|yahoo|bingbot|baiduspider|yandex|yeti|yodaobot|gigabot|ia_archiver|facebookexternalhit|twitterbot|developers\.google\.com") {
+        if ($http_user_agent ~* "googlebot|yahoo|bingbot|baiduspider|yandex|yeti|yodaobot|gigabot|ia_archiver|facebookexternalhit|twitterbot|developers\.google\.com|duckduckgo|qwantify") {
             rewrite .* /meta/fr$uri/index.html last;
         }
         try_files /index.html =404;
