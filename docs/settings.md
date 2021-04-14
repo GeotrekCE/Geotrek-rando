@@ -8,7 +8,7 @@ All files you could create or edit have to be put in `custom/` directory at the 
 
 The build process will also create empty files if they don't already exists.
 
-### Settings
+### Settings
 
 There are two files in Geotrek-rando managing client side settings:
 

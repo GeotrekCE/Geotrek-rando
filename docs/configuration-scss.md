@@ -6,9 +6,9 @@
 
 This file allows you to set colors for trek practices and touristic content categories.
 
-You can also add as many variable you need for theming.
+See [_configuration.default.scss](/src/app/config/styles/_configuration.default.scss) default file to list available vars.
 
-See [/src/app/config/styles/_configuration-scss.md](/src/app/config/styles/_configuration.default.scss) for details.
+You can also add as many variable you need for theming.
 
 ## Add styles
 
