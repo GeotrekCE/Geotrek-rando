@@ -1,4 +1,7 @@
-<div class="categories-wrapper" ng-class="{extend: extend, filtering: filtering}">
+<div class="categories-wrapper" ng-class="{
+    extend: extend, filtering: filtering,
+    collapsed: categoriesShown
+  }">
 
     <ul class="categories tabs">
         <li
@@ -7,6 +10,7 @@
             ng-class="{
                 active : activeFilters.categories.indexOf(category.id) > -1,
                 open: category.open,
+                collapsed: categoriesShown,
             }"
             id="cat-tab-{{::category.id}}"
         >

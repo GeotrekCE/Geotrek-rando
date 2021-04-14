@@ -1,14 +1,22 @@
-<div id="header">
+<div id="header" class="{{ currentState_name.split('.')[1] }}">
 <nav class="navbar" role="navigation">
 
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="header-mainbar navbar-header">
-            <div type="button" class="header-burger navbar-toggle" ng-class="{collapsed: mobileCollapsed}" ng-click="toggleMobileMenu()">
+            <div data-target="#menuCollapse" type="button"
+                    class="header-burger navbar-toggle"
+                    ng-class="{collapsed: mobileCollapsed}" ng-click="toggleMobileMenu()">
                 <span class="sr-only">{{'TOGGLE_NAV' | translate}}</span><!-- Burger --><span class="icon-bar primary-bg"></span><span class="icon-bar"></span><span class="icon-bar"></span>
             </div>
-            <div type="button" class="header-map-switch switch-vue primary-fill" ng-click="switchMap()">
+            <div type="button" class="header-map-switch switch-vue primary-fill"
+                    ng-click="switchMap()">
                 <img ng-if="!$root.mapIsShown" ng-src="{{switchIcons.map}}" alt="switch to map mode icon">
                 <img ng-if="$root.mapIsShown" ng-src="{{switchIcons.textual}}" alt="switch to text mode icon">
+            </div>
+            <div type="button" class="header-categories-collapse" ng-if="currentState_name.split('.')[1] === 'root'"
+                    ng-class="{collapsed: categoriesShown}" ng-click="collapseCategories()">
+                <span class="sr-only">{{'TOGGLE_FILTER' | translate}}</span>
+                <img src="/images/icons/funnel.svg" alt="switch to map mode icon">
             </div>
             <a class="header-title-link" ui-sref="layout.root" ng-click="displayHomePage()" title="{{'DEFAULT_META_TITLE' | translate}}">
                 <img class="header-logo" ng-if="logo" ng-src="/custom/images/{{logo}}" alt="{{'LOGO_ALT' | translate}}">

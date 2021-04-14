@@ -8,7 +8,7 @@
     position: relative;
     z-index: 1;
     width: 100%;
-    height: calc(100vh - #{$header-height-mobile} + 300px); /* add 300px to include filter navigation */
+    height: calc(100vh - #{$header-height-mobile});
 
     @media (min-width: 768px) {
         &.footer-active {

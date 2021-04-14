@@ -13,6 +13,13 @@ function headerController($scope, $rootScope, globalSettings) {
         }
     };
 
+    $rootScope.categoriesShown = true;
+
+    $scope.collapseCategories = function collapseCategories() {
+        $rootScope.categoriesShown = !$rootScope.categoriesShown;
+        console.log($rootScope.categoriesShown)
+    };
+
     $scope.switchMap = function switchMap () {
         $rootScope.mapIsShown = !$rootScope.mapIsShown;
         $rootScope.showWarningPanel = false;

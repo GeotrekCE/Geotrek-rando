@@ -88,6 +88,22 @@
     transition-delay: 150ms;
     @include transitionfuse;
 
+    .categories-collapse {
+        display: none;
+    }
+    @media (max-width: 767px) {
+        &.collapsed {
+            .filters-wrapper,
+            .categories {
+                display: none;
+            }
+        }
+        .categories-collapse {
+            display: inline-block;
+            float: right;
+        }
+    }
+
     &.extend {
         width: 365px;
         @media (max-width: 540px) {
@@ -166,6 +182,7 @@
             margin-right: -18px;
         }
     }
+
 
     .category-filters-raz {
         margin-left: 15px;
@@ -296,7 +313,10 @@
         text-transform: uppercase;
         line-height: 1.2;
         white-space: normal;
-        max-width: 200px;
+
+        @media (min-width: 768px) {
+            max-width: 200px;
+        }
     }
 
     .category-filters-link {
