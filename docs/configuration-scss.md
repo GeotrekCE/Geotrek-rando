@@ -8,6 +8,8 @@ This file allows you to set colors for trek practices and touristic content cate
 
 You can also add as many variable you need for theming.
 
+See [/src/app/config/styles/_configuration-scss.md](/src/app/config/styles/_configuration.default.scss) for details.
+
 ## Add styles
 
 The file named `custom/_customisation.scss` allows you to write as many [SCSS](https://sass-lang.com/) files as you need.
