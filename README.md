@@ -18,7 +18,7 @@ _See [Synchronize data](docs/data-sync.md)._
 
 ## Install
 
-_See [Install](docs/README.md#Install)._
+_See [Install](docs/install.md)._
 
 ## Configuration & customisation
 

@@ -1,3 +1,17 @@
+2.30.1-ux / 2021-04-14
+======================
+
+**Bug fixes**
+
+* Fix footer height and add `footer-height-desktop` var in SCSS configuration
+* Fix documentation broken links
+* Fix responsive problems with filters
+
+**Enhancements**
+
+* Add DuckDuckGo and Qwantify to the list of crawlers
+* Add SCSS documentation section
+
 2.30.0-ux / 2020-11-26
 ======================
 
