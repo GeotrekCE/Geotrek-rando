@@ -467,3 +467,6 @@ msgstr "Conception et crédits"
 
 msgid "CONTACT"
 msgstr "Contact"
+
+msgid "EVENT_CUSTOM_1"
+msgstr "Recommandation"
