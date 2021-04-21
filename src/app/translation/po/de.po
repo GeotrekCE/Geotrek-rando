@@ -459,6 +459,3 @@ msgstr "Konzeption und Quellennachweis/Bildnachweis"
 
 msgid "CONTACT"
 msgstr "Kontakt"
-
-msgid "EVENT_CUSTOM_1"
-msgstr "Empfehlung"

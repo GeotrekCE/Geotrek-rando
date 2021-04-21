@@ -22,6 +22,3 @@ msgstr "categorias"
 #
 msgid "DEFAULT_META_TITLE"
 msgstr "Geotrek Rando"
-
-msgid "EVENT_CUSTOM_1"
-msgstr "Recomendação"

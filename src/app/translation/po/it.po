@@ -466,6 +466,3 @@ msgstr "Referenze"
 
 msgid "CONTACT"
 msgstr "Contatto"
-
-msgid "EVENT_CUSTOM_1"
-msgstr "Raccomandazione"

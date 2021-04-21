@@ -413,6 +413,3 @@ msgstr "Contacte"
 
 msgid "BOOK_BUTTON"
 msgstr "Book"
-
-msgid "EVENT_CUSTOM_1"
-msgstr "Recomanació"

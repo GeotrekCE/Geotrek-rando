@@ -430,6 +430,3 @@ msgstr "Contacto"
 
 msgid "LEVELS"
 msgstr "Nivel:"
-
-msgid "EVENT_CUSTOM_1"
-msgstr "Recomendación"

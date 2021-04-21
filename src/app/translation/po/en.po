@@ -488,7 +488,3 @@ msgstr "Credits"
 
 msgid "CONTACT"
 msgstr "Contact"
-
-msgid "EVENT_CUSTOM_1"
-msgstr "Recommendation"
-
