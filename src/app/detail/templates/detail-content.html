@@ -68,11 +68,6 @@
 	</div>
     </div>
 
-    <div class="detail-content-notice event-notice-custom" ng-if="result.properties.category.id === 'E'">
-        <i class="notice-symbol fa fa-info-circle"></i>
-        <p class="notice-text">{{ 'EVENT_CUSTOM_1' | translate }}</p>
-    </div>
-
     <div class="detail-content-notice advice" ng-if="result.properties.advice">
         <i class="notice-symbol fa fa-exclamation-triangle"></i>
         <div class="notice-text" ng-bind-html="result.properties.advice | sanitizeData: true"></div>
