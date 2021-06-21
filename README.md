@@ -61,7 +61,7 @@ _See [Launch build task](docs/README.md#launch-build-task)_
 * Development by Makina Corpus
 * Conception by Parc national des Écrins, Parc national du Mercantour, Parc national des Cevennes & Makina Corpus
 
-[<img src="https://makina-corpus.com/++theme++plonetheme.makinacorpuscom/images/logo.png">](http://www.makina-corpus.com)
+[<img src="https://geotrek.fr/assets/img/logo_makina.svg">](http://www.makina-corpus.com)
 
 [<img src="http://geotrek.fr/assets/img/parc_ecrins.png">](http://www.ecrins-parcnational.fr)
 [<img src="http://geotrek.fr/assets/img/parc_mercantour.png">](http://www.mercantour.eu)
