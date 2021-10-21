@@ -1,9 +1,12 @@
 # GEOTREK RANDO V2 ![master](https://travis-ci.org/GeotrekCE/Geotrek-rando.svg)
+
 ### Public portal of Geotrek (http://geotrek.fr).
 
-![Portal example](http://geotrek.fr/assets/img/screen-2.png)
+![Portal example](https://geotrek.fr/assets/img/screen-2.jpg)
 
 Examples: [Grand tour des Ecrins](http://www.grand-tour-ecrins.fr), [Destination Mercantour](http://rando.mercantour.eu), [Vercors Rando](http://rando.parc-du-vercors.fr), [Chemin des Parcs](http://www.cheminsdesparcs.fr/).
+
+This repository hosts versions 1 and 2 of Geotrek-rando. Since 2021, a **version 3** has been releases in a [dedicated repository](https://github.com/GeotrekCE/Geotrek-rando-v3).
 
 ## PREREQUISITES
 
