@@ -10,4 +10,7 @@ angular.module('rando.layout', ['ui.router', 'rando.treks', 'angular-google-anal
     .config(require('./routes').layoutRoutes)
     .config(require('./analytics').AnalyticsConfig)
     .run(['Analytics', function (Analytics) {}]) // !!! Analytics needs to be injected once in order to be active !!!
-    .run(require('./services').RunApp);
+    .run(require('./services').RunApp)
+    .run(function($rootScope) {
+        window.angular.$rootScope = $rootScope;
+    });
