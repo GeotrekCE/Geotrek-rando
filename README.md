@@ -1,5 +1,7 @@
 # GEOTREK RANDO V2 ![master](https://travis-ci.org/GeotrekCE/Geotrek-rando.svg)
 
+ **❗ :warning: This version of Geotrek-Rando is outdated, please check the last version : [Geotrek-Rando-V3](https://github.com/GeotrekCE/Geotrek-rando-v3) :warning: ❗**
+
 ### Public portal of Geotrek (http://geotrek.fr).
 
 ![Portal example](https://geotrek.fr/assets/img/screen-2.jpg)
